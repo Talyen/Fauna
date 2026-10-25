@@ -20,6 +20,7 @@ import {
 } from "./state";
 
 import { reaction, type Resolution } from "./operations";
+import { clearHarmfulStatus } from "./status-state";
 
 export function* restoreHealth(
   unit: Combatant,
@@ -29,11 +30,10 @@ export function* restoreHealth(
   state?: GameState,
   cardHealing = false,
   source?: Combatant,
-  shareOverflow = true,
+  options: { shareOverflow?: boolean; adjusted?: boolean; bounce?: boolean } = {},
 ): Resolution<void> {
   const baseAmount = amount;
-  // Shared overflow already includes Healing modifiers and cannot create another overflow share.
-  if (shareOverflow) amount = healingValue(state, unit, amount);
+  if (!options.adjusted) amount = healingValue(state, unit, amount);
   if (unit.health === 0 && !revive) return;
   const { gain, excess } = restoration(unit, amount);
   unit.health += gain;
@@ -53,7 +53,33 @@ export function* restoreHealth(
     if (gain > 0 && state?.phase === "battle" && !isEnemy(unit) && state.boons.includes("groves-favor"))
       yield* reaction("grantStatus", unit, "thorns", boonRule("groves-favor").thorns, events, state);
   }
-  if (gain > 0 && source && state?.phase === "battle")
+  if (gain > 0 && state?.phase === "battle" && !isEnemy(unit)) {
+    const stats = ensureCombat(unit);
+    if (state.boons.includes("thaw-spoon") && stats.freeze > 0) {
+      const removed = Math.min(gain, stats.freeze);
+      stats.freeze -= removed;
+      if (!stats.freeze) clearHarmfulStatus(stats, "freeze");
+      events.push({
+        kind: "status",
+        targetId: unit.id,
+        status: "freeze",
+        outcome: "remove",
+        amount: removed,
+        text: `${unitName(unit)} loses ${removed} Freeze buildup`,
+      });
+    }
+    if (
+      source &&
+      !isEnemy(source) &&
+      source.id !== unit.id &&
+      source.health > 0 &&
+      state.boons.includes("lovers-knot")
+    )
+      yield* reaction("restoreHealth", source, gain, events, false, state, false, undefined, {
+        adjusted: true,
+      });
+  }
+  if (gain > 0 && source && options.bounce !== false && state?.phase === "battle")
     yield* reaction("bounce", state, source, unit, {
       effect: "heal",
       amount: baseAmount,
@@ -61,7 +87,7 @@ export function* restoreHealth(
       cardHealing,
     });
   if (
-    shareOverflow &&
+    options.shareOverflow !== false &&
     excess > 0 &&
     state?.phase === "battle" &&
     !isEnemy(unit) &&
@@ -77,14 +103,17 @@ export function* restoreHealth(
       recipients.splice(recipients.indexOf(recipient), 1);
       const amount = Math.min(remaining, maximumHealth(recipient) - recipient.health);
       remaining -= amount;
-      yield* reaction("restoreHealth", recipient, amount, events, false, state, false, undefined, false);
+      yield* reaction("restoreHealth", recipient, amount, events, false, state, false, undefined, {
+        adjusted: true,
+        shareOverflow: false,
+      });
     }
   }
 }
 export function* shareProtection(
   state: GameState,
   source: Combatant,
-  effect: "block" | "thorns" | "waterThorns",
+  effect: "block" | "thorns" | "waterThorns" | "fireThorns",
   amount: number,
   events: GameEvent[],
 ): Resolution<void> {
@@ -131,7 +160,10 @@ export function* grantBlock(
           maximumHealth(recipient) - recipient.health,
         );
         gained -= converted;
-        if (converted > 0) yield* reaction("restoreHealth", recipient, converted, events, false, state);
+        if (converted > 0)
+          yield* reaction("restoreHealth", recipient, converted, events, false, state, false, unit, {
+            bounce: false,
+          });
       }
     }
   }

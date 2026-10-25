@@ -35,6 +35,7 @@ const combatStateSchema = z
     armor: natural,
     thorns: natural,
     waterThorns: natural,
+    fireThorns: natural,
     dodge: z.number().int().min(0).max(70),
     temporaryDodge: z.number().int().min(0).max(70),
     blind: z.boolean(),
@@ -78,6 +79,7 @@ const minion = z.object({
   minion: z.object({ ownerId: id, side: z.enum(["player", "enemy"]) }),
 });
 const battle = z.object({
+  encoreProgress: z.number().int().min(0).max(2),
   repeatNext: z.object({ player: z.boolean(), enemy: z.boolean() }).strict(),
   minions: z.array(minion).max(12).optional(),
   copySerial: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),

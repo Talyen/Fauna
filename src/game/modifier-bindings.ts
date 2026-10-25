@@ -1,7 +1,14 @@
 import { freeze } from "immer";
 import type { TalentId, BoonId } from "./content";
 import type { PassiveKind } from "./content/types";
-import type { cardCost, manaCapacity, passiveCardBonus, physicalBonus, retainedBlock } from "./ability-rules";
+import type {
+  cardCost,
+  manaCapacity,
+  encoreProgressLimit,
+  passiveCardBonus,
+  physicalBonus,
+  retainedBlock,
+} from "./ability-rules";
 import type { drawHasAnotherCard, expressDelivery, receiveDraw } from "./card-zones";
 import type { loseHealth, openingCriticalBonus, ownDodgeChance, sharedDodgeChance } from "./combat/state";
 
@@ -12,6 +19,7 @@ type Modules = {
   "./ability-rules": {
     cardCost: typeof cardCost;
     manaCapacity: typeof manaCapacity;
+    encoreProgressLimit: typeof encoreProgressLimit;
     passiveCardBonus: typeof passiveCardBonus;
     physicalBonus: typeof physicalBonus;
     retainedBlock: typeof retainedBlock;
@@ -55,6 +63,7 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  encoreProgressLimit: bind("./ability-rules", "encoreProgressLimit"),
   wellProvisioned: bind("./combat/food", "wellProvisioned"),
   gentlePassage: bind("./team", "gentlePassage"),
   mountainGuide: bind("./team", "mountainGuide"),
@@ -67,6 +76,7 @@ const owners = {
   consumeCardGrants: bind("./combat/card-modifiers", "consumeCardGrants"),
   applyHarmfulStatus: bind("./combat/statuses", "applyHarmfulStatus"),
   armorApplies: bind("./combat/damage-values", "armorApplies"),
+  blockEfficiency: bind("./combat/damage-values", "blockEfficiency"),
   attackProcs: bind("./combat/damage-reactions", "attackProcs"),
   battleMana: bind("./combat/battle-modifiers", "battleMana"),
   beforeAbility: bind("./combat/ability-modifiers", "beforeAbility"),
@@ -77,6 +87,7 @@ const owners = {
   cleanseRewards: bind("./combat/statuses", "cleanseRewards"),
   controlRewards: bind("./combat/statuses", "controlRewards"),
   courtRemembers: bind("./combat/legendary", "courtRemembers"),
+  passingFlame: bind("./combat/damage-reactions", "passingFlame"),
   damageRewards: bind("./combat/damage-reactions", "damageRewards"),
   decayBlock: bind("./combat/turns", "decayBlock"),
   dodgeResponse: bind("./combat/damage-reactions", "dodgeResponse"),
@@ -152,7 +163,7 @@ export const modifierImplementations = freeze(
       "bleed.bloodrush": [owners.attackProcs],
       "block.second-wind": [owners.blockDepletionRewards],
       "block.grounding": [owners.applyHarmfulStatus],
-      "block.reinforce": [owners.resolveHit],
+      "block.reinforce": [owners.blockEfficiency],
       "block.sacred-shield": [owners.modifiedDamage],
       "block.impact-guard": [owners.modifiedDamage],
       "block.weighted-guard": [owners.modifiedDamage],
@@ -267,6 +278,16 @@ export const modifierImplementations = freeze(
       "water.riptide": [owners.waterFollowups],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "briar-racquet": [owners.dodgeResponse],
+      "lovers-knot": [owners.restoreHealth],
+      "thaw-spoon": [owners.restoreHealth],
+      "cinder-fan": [owners.tickStatuses],
+      "moss-oven-mitt": [owners.blockEfficiency],
+      "encore-baton": [owners.afterPlayerCard, owners.encoreProgressLimit],
+      "pruning-crescent": [owners.removeEffects],
+      "knot-comb": [owners.tickStatuses],
+      "rain-cape": [owners.resolveHit],
+      "tuning-fork-charm": [owners.armorApplies],
       rainkeeper: [owners.manaCapacity],
       "dream-yo-yo": [owners.returnDodgedCard],
       "basalt-glass-bookmark": [owners.removeEffects],
@@ -297,8 +318,10 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      sunthaw: [owners.cleanseRewards],
       wellProvisioned: [owners.wellProvisioned],
       gentlePassage: [owners.gentlePassage],
+      passingFlame: [owners.passingFlame],
       mountainGuide: [owners.mountainGuide],
       petalwake: [owners.dodgeResponse],
       expressDelivery: [owners.expressDelivery],
@@ -347,6 +370,7 @@ export const modifierQueries = freeze(
       "stun.free-follow-up": [owners.cardCost],
     } satisfies Partial<Record<TalentId, Binding>>,
     boons: {
+      "tuning-fork-charm": [owners.armorApplies],
       "sundering-charm": [owners.ordinaryAttackFacts],
       rainkeeper: [owners.manaCapacity],
     } satisfies Partial<Record<BoonId, Binding>>,

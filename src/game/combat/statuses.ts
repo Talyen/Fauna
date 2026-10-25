@@ -71,7 +71,7 @@ export function* returnCleansedEffect(
 
 export function* grantStatus(
   unit: Combatant,
-  status: "armor" | "thorns" | "waterThorns" | "dodge",
+  status: "armor" | "thorns" | "waterThorns" | "fireThorns" | "dodge",
   amount: number,
   events: GameEvent[],
   state?: GameState,
@@ -89,9 +89,9 @@ export function* grantStatus(
       amount: gain,
       status,
       outcome: "gain",
-      text: `${unitName(unit)} gains ${gain} ${status === "waterThorns" ? "Water Thorns" : status}.`,
+      text: `${unitName(unit)} gains ${gain} ${status === "waterThorns" ? "Water Thorns" : status === "fireThorns" ? "Fire Thorns" : status}.`,
     });
-  if ((status === "thorns" || status === "waterThorns") && state && sharing)
+  if ((status === "thorns" || status === "waterThorns" || status === "fireThorns") && state && sharing)
     yield* reaction("shareProtection", state, unit, status, gain, events);
 }
 export function* triggerArmorBreak(
@@ -140,7 +140,7 @@ export function* removeControlBuildup(
     amount,
     text: `${unitName(unit)}: Cleanse ${status === "freeze" ? "Freeze" : "Stun"} build-up`,
   });
-  yield* reaction("cleanseRewards", state, unit, 1, events);
+  yield* reaction("cleanseRewards", state, unit, 1, events, status === "freeze");
   yield* returnCleansedEffect(state, unit, status, amount, sourceId, events);
 }
 export function* removeEffects(
@@ -149,11 +149,14 @@ export function* removeEffects(
   count: number,
   events: GameEvent[],
   state?: GameState,
-  onlyStatus?: (typeof harmfulStatuses)[number] | "thorns" | "waterThorns",
+  onlyStatus?: (typeof harmfulStatuses)[number] | "thorns" | "waterThorns" | "fireThorns",
+  source?: Combatant,
 ): Resolution<number> {
   const stats = ensureCombat(unit);
+  const thornsBefore = stats.thorns;
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
+  const hadFreezeBuildup = stats.freeze > 0;
   const removedStatuses: NonNullable<import("../types").StatusEvent["affectedStatus"]>[] = [];
   const returned: {
     status: (typeof harmfulStatuses)[number];
@@ -172,6 +175,7 @@ export function* removeEffects(
     "armor",
     "thorns",
     "waterThorns",
+    "fireThorns",
     "dodge",
     "reflect",
     "reflectBurn",
@@ -222,7 +226,13 @@ export function* removeEffects(
       )
         stats[status] = false;
       else if (status === "armor") depletion = removeArmor(unit, stats.armor).depletion;
-      else if (status === "thorns" || status === "waterThorns" || status === "dodge") stats[status] = 0;
+      else if (
+        status === "thorns" ||
+        status === "waterThorns" ||
+        status === "fireThorns" ||
+        status === "dodge"
+      )
+        stats[status] = 0;
       else clearHarmfulStatus(stats, status);
       if (kind === "cleanse") {
         cleansed++;
@@ -240,7 +250,7 @@ export function* removeEffects(
       status: kind,
       outcome: "remove",
       affectedStatus,
-      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus === "waterThorns" ? "Water Thorns" : affectedStatus}.`,
+      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus === "waterThorns" ? "Water Thorns" : affectedStatus === "fireThorns" ? "Fire Thorns" : affectedStatus}.`,
     });
   if (removedStatuses.length === 0)
     events.push({
@@ -251,7 +261,26 @@ export function* removeEffects(
       amount: 0,
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} removes no effects.`,
     });
-  if (cleansed > 0 && state) yield* reaction("cleanseRewards", state, unit, cleansed, events);
+  if (cleansed > 0 && state)
+    yield* reaction(
+      "cleanseRewards",
+      state,
+      unit,
+      cleansed,
+      events,
+      hadFreezeBuildup && stats.freeze === 0 && removedStatuses.includes("freeze"),
+    );
+  if (
+    kind === "purge" &&
+    state &&
+    isEnemy(unit) &&
+    source &&
+    !isEnemy(source) &&
+    source.health > 0 &&
+    thornsBefore > stats.thorns &&
+    state.boons.includes("pruning-crescent")
+  )
+    yield* reaction("grantStatus", source, "thorns", thornsBefore - stats.thorns, events, state);
   if (state)
     for (const effect of returned)
       yield* returnCleansedEffect(
@@ -273,8 +302,27 @@ export function* cleanseRewards(
   unit: Combatant,
   cleansed: number,
   events: GameEvent[],
+  freezeBuildupRemoved = false,
 ): Resolution<void> {
   const stats = ensureCombat(unit);
+  if (freezeBuildupRemoved && unit.health > 0) {
+    const allied = !isEnemy(unit);
+    const row = battlefield(state, allied ? "player" : "enemy");
+    const healing = row.some((ally) => ally.id === unit.id)
+      ? row.reduce(
+          (total, ally) =>
+            total +
+            (ally.health > 0
+              ? creaturePassive(allied ? state : undefined, ally.species).effects.reduce(
+                  (sum, effect) => sum + (effect.kind === "sunthaw" ? effect.amount : 0),
+                  0,
+                )
+              : 0),
+          0,
+        )
+      : 0;
+    if (healing) yield* reaction("restoreHealth", unit, healing, events, false, state);
+  }
   if (!isEnemy(unit)) {
     if (hasTalent(state, "light.divine-favor")) stats[talentRule("light.divine-favor").state] = true;
     const healing =

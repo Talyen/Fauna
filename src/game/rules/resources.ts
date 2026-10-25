@@ -70,8 +70,8 @@ export const resourcesRules = {
     enemy: "unsupported",
     adaptation: "extras",
     keywords: ["mana"],
-    describe(_card, { value }) {
-      return `Gain ${value} Mana`;
+    describe(card, { value }) {
+      return `${card.restore ? "Restore" : "Gain"} ${value} Mana`;
     },
   },
   draw: {

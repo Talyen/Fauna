@@ -5,6 +5,7 @@ import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { KEYWORDS } from "../../../src/game/progression";
 import { BOONS, TALENTS, definition, species, type SpeciesId } from "../../../src/game/content";
+import { NEW_BOON_EFFECTS } from "../../support/boons";
 import { rankedBattleChoices } from "../../../src/application/battle-policy";
 import { cardTargeting, cardText, enemyCard, enemyCanUse } from "../../../src/game/card-rules";
 import { cardKeywords } from "../../../src/game/progression";
@@ -61,7 +62,8 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
   let state = produce(teamRun(seed, team), (draft) => {
     draft.talents = TALENTS.map((talent) => talent.id);
     draft.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 1_000_000]));
-    draft.boons = BOONS.map((boon) => boon.id);
+    // Preserve the original combined oracle; new Boons have direct regressions.
+    draft.boons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id)).map((boon) => boon.id);
     for (const unit of draft.team) {
       unit.health = Math.max(2, Math.round(unit.health / 2));
       unit.block = 3;
@@ -106,6 +108,7 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
       digest: createHash("sha256")
         .update(
           JSON.stringify(baselineResult, (key, value: unknown) => {
+            if (key === "encoreProgress" && value === 0) return undefined;
             if (
               key === "repeatNext" &&
               value &&
@@ -116,6 +119,7 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
               value.enemy === false
             )
               return undefined;
+            if (key === "fireThorns" && value === 0) return undefined;
             return key === "negate" && value === false ? undefined : value;
           }),
         )

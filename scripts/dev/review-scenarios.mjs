@@ -4,9 +4,18 @@ export const SCENARIOS = [
   "aerostat-battle",
   "aerostat-collection",
   "aerostat-rank-five",
+  "parhelion-battle",
+  "parhelion-collection",
+  "parhelion-rank-five",
+  "parhelion-targeting",
   "dulcera-battle",
   "dulcera-collection",
   "dulcera-rank-five",
+  "pyrella-battle",
+  "pyrella-collection",
+  "pyrella-rank-five",
+  "pyrella-decoy",
+  "pyrella-spread",
   "skybex-battle",
   "skybex-collection",
   "skybex-rank-five",
@@ -102,6 +111,38 @@ export async function reviewScenario(server, name) {
     game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
     game = accept(game, { type: "visitCampfire" });
   }
+  if (name.startsWith("pyrella-")) {
+    const { pyrellaBattle } = await server.ssrLoadModule("/tests/support/pyrella.ts");
+    game = pyrellaBattle();
+    if (name === "pyrella-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, pyrella: 6 } },
+      };
+    if (name === "pyrella-decoy") {
+      const card = game.cards.find((card) => card.definitionId === "pyrella-spark-decoy");
+      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
+    }
+    if (name === "pyrella-spread") {
+      game = {
+        ...game,
+        battle: {
+          ...game.battle,
+          enemies: game.battle.enemies.map((enemy, index) =>
+            index
+              ? enemy
+              : {
+                  ...enemy,
+                  health: 1,
+                  combat: { ...enemy.combat, burn: 20, controlled: "stun", controlTurns: 1 },
+                },
+          ),
+        },
+      };
+      const card = game.cards.find((card) => card.definitionId === "pyrella-festival-burst");
+      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
+    }
+  }
   if (name.startsWith("aerostat-")) {
     const { aerostatBattle } = await server.ssrLoadModule("/tests/support/aerostat.ts");
     game = aerostatBattle(name === "aerostat-rank-five" ? 5 : 0);
@@ -131,6 +172,15 @@ export async function reviewScenario(server, name) {
       const card = game.cards.find((card) => card.definitionId === "arabesca-dancing-double");
       game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
     }
+  }
+  if (name.startsWith("parhelion-")) {
+    const { parhelionBattle } = await server.ssrLoadModule("/tests/support/parhelion.ts");
+    game = parhelionBattle();
+    if (name === "parhelion-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, parhelion: 6 } },
+      };
   }
   if (name.startsWith("oathara-")) {
     const { oatharaBattle } = await server.ssrLoadModule("/tests/support/oathara.ts");
@@ -175,17 +225,21 @@ export async function reviewScenario(server, name) {
     seed: name.startsWith("merchant") ? 7 : 42,
     fixture: name.startsWith("aerostat-")
       ? "tests/support/aerostat.ts"
-      : name.startsWith("dulcera-")
-        ? "tests/support/dulcera.ts"
-        : name.startsWith("skybex-")
-          ? "tests/support/skybex.ts"
-          : name.startsWith("arabesca-")
-            ? "tests/support/arabesca.ts"
-            : name.startsWith("orifable-")
-              ? "tests/support/orifable.ts"
-              : name.startsWith("almanelle-")
-                ? "tests/support/almanelle.ts"
-                : "tests/support/game.ts",
+      : name.startsWith("parhelion-")
+        ? "tests/support/parhelion.ts"
+        : name.startsWith("dulcera-")
+          ? "tests/support/dulcera.ts"
+          : name.startsWith("pyrella-")
+            ? "tests/support/pyrella.ts"
+            : name.startsWith("skybex-")
+              ? "tests/support/skybex.ts"
+              : name.startsWith("arabesca-")
+                ? "tests/support/arabesca.ts"
+                : name.startsWith("orifable-")
+                  ? "tests/support/orifable.ts"
+                  : name.startsWith("almanelle-")
+                    ? "tests/support/almanelle.ts"
+                    : "tests/support/game.ts",
   };
 }
 
@@ -212,6 +266,18 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
       await next.click();
     await opener.click();
+  } else if (["pyrella-collection", "pyrella-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    const next = page.getByRole("button", { name: "Next page", exact: true });
+    while (
+      !(await page.getByRole("button", { name: "Inspect Pyrella", exact: true }).count()) &&
+      (await next.isVisible())
+    )
+      await next.click();
+    await button("Inspect Pyrella").click();
+  } else if (["parhelion-collection", "parhelion-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    await button("Inspect Parhelion").click();
   } else if (["dulcera-collection", "dulcera-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     const opener = button("Inspect Dulcera");
@@ -252,6 +318,8 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button("Continue").click();
     if (scenario.name === "pause") await button("Open menu").click();
   }
+  if (scenario.name === "parhelion-targeting")
+    await page.locator('.hand [data-card-id="ally-0:parhelion-whiteout-waltz"]').click();
   if (scenario.name === "orifable-targeting") {
     await page.locator('.hand [aria-label^="Apple,"]').click();
   }

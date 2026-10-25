@@ -32,6 +32,7 @@ export function freshCombat(): CombatState {
     armor: 0,
     thorns: 0,
     waterThorns: 0,
+    fireThorns: 0,
     dodge: 0,
     temporaryDodge: 0,
     blind: false,
@@ -56,6 +57,13 @@ export const maximumHealth = (unit: Combatant) =>
   "maxHealth" in unit ? unit.maxHealth : species(unit.species).health;
 export const unitName = (unit: Combatant) => ("name" in unit ? unit.name : species(unit.species).name);
 export const controlled = (unit: Combatant) => !!unit.combat?.controlled || !!unit.combat?.skipped;
+/** Current Health, not maximum Health or Health fraction; ties retain battlefield order. */
+export function highestHealth<T extends Combatant>(units: readonly T[]): T | undefined {
+  return units.reduce<T | undefined>(
+    (target, unit) => (unit.health > 0 && (!target || unit.health > target.health) ? unit : target),
+    undefined,
+  );
+}
 /** Ties retain battlefield order; reserves and knockouts are never recipients. */
 export function mostInjured<T extends Combatant>(units: readonly T[]): T | undefined {
   let target: T | undefined;

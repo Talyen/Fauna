@@ -30,12 +30,14 @@ import { battleChoices } from "../../../src/application/battle-policy";
 import type { BattleState, GameEvent } from "../../../src/game/types";
 
 // Keep the pre-existing gameplay oracle anchored to its format-57 envelope.
-// A dormant team repeat is neutral; active grants remain part of the oracle.
+// Dormant repeat and Fire Thorns fields are neutral; active grants remain in the oracle.
 const digest = (value: unknown) =>
   createHash("sha256")
     .update(
       JSON.stringify(value, (key, entry) => {
         if (key === "version") return 57;
+        if (key === "fireThorns" && entry === 0) return undefined;
+        if (key === "encoreProgress" && entry === 0) return undefined;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
       }),
@@ -58,9 +60,9 @@ function recordedEnemy(card: (typeof CARDS)[number]) {
 // Recorded before moving ability policies or handlers. Never regenerate these to accept a refactor.
 it("preserves authored text, targeting, scaling, keywords and enemy adaptations", () => {
   expect(
-    // New kit authoring is asserted directly below; preserve every older card's recorded contract.
+    // New kits have direct contracts below or in creatures/*.test.ts; preserve the older oracle.
     [
-      ...CARDS.filter((card) => !["arabesca", "skybex", "dulcera"].includes(card.species ?? "")),
+      ...CARDS.filter((card) => !["arabesca", "skybex", "dulcera", "pyrella"].includes(card.species ?? "")),
       PEARL,
       ...FOOD_CARDS,
     ].map((card) => ({
@@ -476,11 +478,11 @@ describe("Arabesca's selected ability contracts", () => {
 
   it("validates repeat flags and rejects the obsolete development save", () => {
     const raw = JSON.parse(encodeSave(arabescaBattle()));
-    expect(raw.version).toBe(58);
+    expect(raw.version).toBe(59);
     raw.battle.repeatNext.player = "true";
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
     raw.battle.repeatNext.player = false;
-    raw.version = 57;
+    raw.version = 58;
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
   });
 });

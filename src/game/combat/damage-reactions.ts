@@ -43,6 +43,11 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
   if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
     yield* reaction("restoreHealth", target, talentRule("dodge.catch-breath").amount, events, false, state);
   if (alliedTarget) {
+    if (state.boons.includes("briar-racquet") && stats.thorns > 0 && target.health > 0) {
+      const damage = Math.round(stats.thorns / boonRule("briar-racquet").divisor);
+      stats.thorns--;
+      yield* reaction("hit", state, target, source, damage, "nature", events, { origin: "retaliation" });
+    }
     stats[talentRule("dodge.finding-rhythm").state] = 0;
     if (hasTalent(state, "dodge.thornstep"))
       yield* reaction("grantStatus", target, "thorns", talentRule("dodge.thornstep").amount, events, state);
@@ -140,11 +145,33 @@ export function publishHit(
   if (target.health === 0)
     events.push({ kind: "knockout", targetId: target.id, text: `${unitName(target)} is knocked out.` });
 }
+export function* passingFlame({ state, source, target, events }: HitContext): Resolution<void> {
+  if (target.health > 0 || source.health <= 0 || isEnemy(source) === isEnemy(target)) return;
+  const allied = !isEnemy(source);
+  if (!battlefield(state, allied ? "player" : "enemy").some((unit) => unit.id === source.id)) return;
+  const percent = creaturePassive(allied ? state : undefined, source.species).effects.reduce(
+    (sum, effect) => sum + (effect.kind === "passingFlame" ? effect.amount : 0),
+    0,
+  );
+  const total = Math.round((ensureCombat(target).burn * percent) / 100);
+  if (total <= 0) return;
+  const recipients = battlefield(state, allied ? "enemy" : "player").filter((unit) => unit.health > 0);
+  if (!recipients.length) return;
+  const share = Math.floor(total / recipients.length);
+  const remainder = total % recipients.length;
+  // Preserve the rounded total; ties for indivisible stacks retain battlefield order.
+  for (const [index, recipient] of recipients.entries()) {
+    const amount = share + Number(index < remainder);
+    if (amount > 0) yield* reaction("applyHarmfulStatus", state, source, recipient, amount, "burn", events);
+  }
+}
+
 export function* damageRewards(
   { state, source, target, type, events }: HitContext,
   { damage, lost, dealt }: HitPayment,
   policy: ReturnType<typeof packetPolicy>,
 ): Resolution<void> {
+  yield* passingFlame({ state, source, target, type, events });
   const { attack } = policy;
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target),
@@ -345,12 +372,15 @@ export function* thornRetaliation({
   for (const [status, type] of [
     ["thorns", "nature"],
     ["waterThorns", "water"],
+    ["fireThorns", "burn"],
   ] as const) {
     if (source.health <= 0) break;
     const reflected = stats[status];
     if (reflected <= 0) continue;
     stats[status]--;
-    yield* reaction("hit", state, target, source, reflected, type, events, { origin: "retaliation" });
+    yield* reaction("hit", state, target, source, reflected, type, events, {
+      origin: status === "fireThorns" ? "statusRetaliation" : "retaliation",
+    });
   }
 }
 export function* passiveRetaliation(

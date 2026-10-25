@@ -75,7 +75,8 @@ export function cardText(
       (card.effect === "teamClearBlind" ||
       card.effect === "swapLowest" ||
       (card.effect === "swap" && card.backupOnly) ||
-      (card.effect === "heal" && card.target === "self" && effect.kind === "mana")
+      (card.effect === "heal" && card.target === "self" && effect.kind === "mana") ||
+      (card.effect === "mana" && card.restore)
         ? " / "
         : "; ") + supplementalRule(effect.kind).describe(effect, card, keywordLabel);
   }

@@ -32,6 +32,8 @@ Thorns retaliate for their current stack count as Nature damage when an opposing
 
 Water Thorns persist through turns, swaps and resume, use ordinary stack caps and protection sharing, and remain a separate Purge category after Nature Thorns.
 
+Fire Thorns retaliate with Burn damage and equal Burn buildup using their current stacks, then lose one stack. They share the ordinary Thorns trigger, including Negate and hits absorbed by Block or Armor, and cannot trigger retaliation chains. They persist through turns, swaps and current-format resume, follow protection sharing and stack caps, and form a separate Purge category after Water Thorns. Fire Thorns grants Burn XP on the accepted card play, without creating another progression category.
+
 ### Blind
 
 Blind gives the next attack a 50% miss chance and expires on that attack, hit or miss; one seeded roll covers all its targets and damage packets. A miss uses the recipient's ordinary Dodge outcome, rewards and icon, even if control prevents normal Dodge. Support actions, periodic damage and retaliation do not consume Blind. Blind is non-stacking, Cleanseable and reflectable.
@@ -46,7 +48,7 @@ Leech restores half damage dealt, including damage absorbed by Block, capped by 
 
 ### Cleanse and Purge
 
-Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, Water Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward, Negate and Attack Reflection, each as a separate beneficial category. Both remove up to the card's stated number of categories.
+Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, Water Thorns, Fire Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward, Negate and Attack Reflection, each as a separate beneficial category. Both remove up to the card's stated number of categories.
 
 ### Reflection
 

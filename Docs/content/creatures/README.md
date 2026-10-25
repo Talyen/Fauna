@@ -49,4 +49,6 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 
 - [Dulcera](dulcera.md) · [implementation](../../../src/game/content/creatures/dulcera.ts) — Gentle Passage and restorative swaps
 
+- [Parhelion](parhelion.md) · [implementation](../../../src/game/content/creatures/parhelion.ts) — Sunthaw and the light upon the snow
+- [Pyrella](pyrella.md): Passing Flame, Festival Burst, Ember Harvest and Spark Decoy
 - [Aerostat](aerostat.md) · [implementation](../../../src/game/content/creatures/aerostat.ts) — Well Provisioned and shared Food

@@ -12,7 +12,7 @@ Well Provisioned shuffles 1/2/3/4/5/6 shared Food into the starting deck for eve
 - Covered all six starting counts, duplicates, inactive providers, deterministic openings, opening-hand eligibility, no replay on turns/swaps/resume, abilities, preview parity, upgrades, capacity/overflow, rejection, neutral ownership, repeat-before-Consume, absence after save/resume, and replenishment next battle
 - `npm run assets:prepare`: 216 selections verified; 212 cached, four new images prepared
 - Baseline rendered inspection: primary checkout `reports/review/aerostat-before-eed0cda6-7346-4e99-8cf4-a2b2d848a799/`; Dulcera’s existing Collection inspection at 1280×720 with 125% text and 1920×1080 with default text
-- Lightweight changed-file formatting, syntax/source contracts and documentation checks passed; the final protected integration gate remains required
+- Lightweight changed-file formatting, syntax/source contracts and documentation checks passed; protected integration uses `npm run finish`
 
 ## Rendered review
 
@@ -26,7 +26,17 @@ The selected images retain their native composition and a consistent blue/gold t
 
 `reports/aerostat-interactions/initial-evidence.json` records successful live plays of all three abilities, Food targeting/cancellation with focus return, consumed Food staying absent after reload/Continue, and nested Collection inspection with opener focus return. That initial harness then timed out because Playwright correctly refused to click an aria-disabled card. `reports/aerostat-interactions/unavailable.json` records the focused correction: keyboard activation of the unaffordable Parcel Drop left the committed revision unchanged. This was a harness correction, with no gameplay patch. Owned previews and browser contexts were closed.
 
-Current-main reconciliation and its verification are recorded below after completion.
+## Current-main reconciliation
+
+The branch incorporated local main `154acc5c`, retaining Parhelion, Pyrella, the new Boons and combat rules. Additive creature catalogs, encounter packs, references and preview scenarios preserve main’s existing order, with Aerostat appended. The combined prepared lookup was regenerated through the asset pipeline: 234 selections verified, all cache hits.
+
+Fresh combined-state captures were inspected under the same conditions:
+
+- `reports/review/aerostat-collection-combined-63e8930c-1bb6-402c-af15-2979e87be568/`
+- `reports/review/aerostat-battle-combined-6634ffae-0c3b-417f-94ff-c220cc9115e4/`
+- `reports/review/aerostat-rank-five-combined-987aa876-9292-40bf-9092-d8d895c89bed/`
+
+`reports/aerostat-combined/evidence.json` records a complete browser review: all three ability plays, targeting/cancellation and focus, Consume through reload/Continue, nested inspection and unavailable keyboard activation passed with no uncaught browser errors. Capture records retain the combined input fingerprint and validated checkpoints. The 15-test focused run preceded the main merge; these browser interactions and fresh captures used the combined state. No second local suite or compiler was run. Owned previews and contexts closed before protected integration.
 
 ## Verification boundaries
 

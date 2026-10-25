@@ -1,5 +1,5 @@
 {
-  "version": 56,
+  "version": 60,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -58,6 +58,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -106,6 +107,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -152,6 +154,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -198,6 +201,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -244,6 +248,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -363,6 +368,7 @@
           "armor": 0,
           "thorns": 0,
           "waterThorns": 0,
+          "fireThorns": 0,
           "dodge": 0,
           "temporaryDodge": 0,
           "blind": false,
@@ -419,6 +425,7 @@
           "armor": 0,
           "thorns": 0,
           "waterThorns": 0,
+          "fireThorns": 0,
           "dodge": 0,
           "temporaryDodge": 0,
           "blind": false,
@@ -493,6 +500,7 @@
           "armor": 0,
           "thorns": 0,
           "waterThorns": 0,
+          "fireThorns": 0,
           "dodge": 0,
           "temporaryDodge": 0,
           "blind": true,
@@ -527,7 +535,12 @@
           "pearls": 0
         }
       }
-    ]
+    ],
+    "encoreProgress": 0,
+    "repeatNext": {
+      "player": false,
+      "enemy": false
+    }
   },
   "reward": null,
   "journey": {

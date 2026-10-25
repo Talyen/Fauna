@@ -38,9 +38,9 @@ import {
 import type { AbilityKind } from "../rules/ability-types";
 import type { Combatant } from "./state";
 
-function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[]) {
-  for (const status of ["thorns", "waterThorns"] as const)
-    if (ensureCombat(unit)[status] > 0) removeEffects(unit, "purge", 1, events, state, status);
+function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
+  for (const status of ["thorns", "waterThorns", "fireThorns"] as const)
+    if (ensureCombat(unit)[status] > 0) removeEffects(unit, "purge", 1, events, state, status, source);
 }
 
 function recoverDiscard(state: GameState, events: GameEvent[]) {
@@ -153,7 +153,7 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
       negated.add(recipient.id);
       if (negateAttack(state, recipient, actor, events)) continue;
       if (def.purgeThorns) {
-        purgeAttackThorns(state, actor, events);
+        purgeAttackThorns(state, actor, events, recipient);
       }
       hit(
         state,
@@ -175,7 +175,7 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
       continue;
     }
     if (def.purgeThorns) {
-      purgeAttackThorns(state, recipient, events);
+      purgeAttackThorns(state, recipient, events, actor);
     }
     hit(
       state,
@@ -257,6 +257,20 @@ const dreamDoubleAbility: PrimaryHandler<"dreamDouble"> = (context) => {
     status: "negate",
     outcome: "apply",
     text: `${name} negates the next attack against them`,
+  });
+};
+
+const sparkDecoyAbility: PrimaryHandler<"sparkDecoy"> = (context) => {
+  const { state, actor, value, events, name } = context;
+  grantStatus(actor, "fireThorns", value, events, state);
+  ensureCombat(actor).negate = true;
+  events.push({
+    kind: "status",
+    actorId: actor.id,
+    targetId: actor.id,
+    status: "negate",
+    outcome: "apply",
+    text: `${name} gains Negate`,
   });
 };
 
@@ -366,7 +380,7 @@ const teamPurgeAbility: PrimaryHandler<"teamPurge"> = (context) => {
   const { state, action, actor, events } = context;
   for (const unit of alive(opposingRow(state, action))) {
     if (actor.health <= 0) break;
-    removeEffects(unit, "purge", Number.MAX_SAFE_INTEGER, events, state);
+    removeEffects(unit, "purge", Number.MAX_SAFE_INTEGER, events, state, undefined, actor);
   }
 };
 
@@ -418,6 +432,7 @@ const handlers: PrimaryHandlers = {
   reflectAttack: reflectAttackAbility,
   resurrect: resurrectAbility,
   dreamDouble: dreamDoubleAbility,
+  sparkDecoy: sparkDecoyAbility,
   nightmareHarvest: nightmareHarvestAbility,
   waterThorns: waterThornsAbility,
   draw: drawAbility,
