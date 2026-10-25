@@ -148,6 +148,28 @@ describe("keyword foundation", () => {
     expect(Object.isFrozen(KEYWORD_DEFINITIONS.health.aliases)).toBe(true);
   });
 
+  it("colors keyword inflections in Boon prose without changing the wording", () => {
+    const text =
+      "Your Light hits Blind Burning enemies; Cards dodged by enemies return to your hand; Your allies cannot be Purged bare; Cleansed afflictions return to their sender; Water Thorns guard Armor and Block";
+    const html = renderToStaticMarkup(<KeywordText text={text} />);
+    const colored = Array.from(
+      html.matchAll(/<span\b[^>]*\bdata-keyword="([^"]+)"[^>]*>([^<]+)<\/span>/g),
+      ([, id, word]) => [word, id],
+    );
+    expect(colored).toEqual([
+      ["Light", "light"],
+      ["Blind", "blind"],
+      ["Burning", "burn"],
+      ["dodged", "dodge"],
+      ["Purged", "purge"],
+      ["Cleansed", "cleanse"],
+      ["Water Thorns", "waterThorns"],
+      ["Armor", "armor"],
+      ["Block", "block"],
+    ]);
+    expect(html.replace(/<[^>]+>/g, "")).toBe(text);
+  });
+
   it("renders the same keyword identity on card rules and prose without changing accessible text", () => {
     const attack = CARDS.find((card) => card.id === "emberback-furnace-breath")!;
     const html = renderToStaticMarkup(<CardRules card={attack} value={13} />);
