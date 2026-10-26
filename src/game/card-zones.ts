@@ -168,9 +168,11 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
 
 /** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
 export function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
-  hiddenDecision(state);
   const battle = state.battle!;
   let index = lastEligibleIndex(battle.draw, eligible);
+  // An empty eligible pool is a visible no-op, not an unknown hidden draw.
+  if (index < 0 && !battle.discard.some(eligible)) return false;
+  hiddenDecision(state);
   if (index < 0) {
     recycleEligibleDiscard(state, eligible);
     index = lastEligibleIndex(battle.draw, eligible);
@@ -186,7 +188,7 @@ export function drawEligibleCard(state: GameState, eligible: (id: string) => boo
 }
 
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
-  if (count > 0) hiddenDecision(state);
+  if (count <= 0) return 0;
   fillHand(state);
   // Ordinary draws reshuffle the whole empty pile first; keyword draws only recycle matches.
   recycleDiscard(state);

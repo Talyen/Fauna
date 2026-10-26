@@ -76,6 +76,7 @@ export function createSession(
         }
       } finally {
         notifying = false;
+        if (disposed) listeners.clear();
       }
     } finally {
       end();
@@ -140,14 +141,18 @@ export function createSession(
         publish({ cloud: view });
       }
     },
-    async (data) => {
-      if (disposed || store.getState().closing) throw new Error("Session is closing.");
+    async (data, owns = () => true) => {
+      if (disposed || store.getState().closing || !owns()) throw new Error("Session is closing.");
       const game = decodeSave(data);
       const installation = writes
-        .then(() => writeLocal(data))
         .then(() => {
+          if (disposed || store.getState().closing || !owns()) throw new Error("Cloud installation expired.");
+          return writeLocal(data);
+        })
+        .then(() => {
+          if (!owns()) return;
           saveFailures = 0;
-          if (!disposed)
+          if (!disposed && !store.getState().closing)
             publish({
               game,
               loadFailed: false,
@@ -290,6 +295,7 @@ export function createSession(
       getState: store.getState,
       getInitialState: store.getInitialState,
       subscribe(listener: Listener) {
+        if (disposed) return () => {};
         const subscription: Listener = (view, previous) => listener(view, previous);
         listeners.add(subscription);
         return () => {

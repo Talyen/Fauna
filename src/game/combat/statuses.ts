@@ -468,6 +468,7 @@ export function* applyHarmfulStatus(
     type !== "blind"
   )
     return { depletions: [], appliedControl: false, suppressed: false };
+  if (damage <= 0 || source.health <= 0) return { depletions: [], appliedControl: false, suppressed: false };
   const stats = ensureCombat(target);
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);

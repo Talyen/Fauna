@@ -44,6 +44,7 @@ export function encodeSave(state: GameState) {
 
 function validateCollection(state: GameState) {
   invalid(!unique(state.discovery.encountered) || !unique(state.boons));
+  invalid(state.phase === "draft" && state.boons.length > 0);
   invalid(
     SPECIES.some(
       ({ id }) => state.discovery.recruited[id] !== undefined && !state.discovery.encountered.includes(id),
@@ -124,6 +125,11 @@ function validateRoster(state: GameState) {
     !unique([...state.team, ...state.reserves].map((c) => c.id)) || !unique(state.cards.map((c) => c.id)),
   );
   invalid(state.team.length + state.reserves.length > 5);
+  invalid(
+    state.phase !== "draft" &&
+      !(state.phase === "defeat" && state.journey.outcome === "defeat") &&
+      ![...state.team, ...state.reserves].some((unit) => unit.health > 0),
+  );
   // Reserve battle-generated identities before a destination can create those combatants.
   invalid([...state.team, ...state.reserves].some((unit) => /^(?:enemy-|echo-)/.test(unit.id)));
   invalid(!unique([...state.team, ...state.reserves].map((creature) => creature.species)));
@@ -348,6 +354,7 @@ function validateCombatants(state: GameState) {
           unfinishedJourneyLimit("maxHealth" in unit ? undefined : state, unit),
       );
       invalid((stats.controlled === null) !== (stats.controlTurns === 0));
+      invalid(stats.controlled !== null && stats[stats.controlled] !== 0);
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
       invalid(
         Object.values(stats.statusSources).some((id) => !allCombatants.some((unit) => unit.id === id)) ||

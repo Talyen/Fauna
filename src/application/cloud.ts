@@ -38,7 +38,7 @@ async function bounded(operation: Promise<void>, timeout: number, expired: () =>
 export function createCloud(
   port: CloudPort | undefined,
   publish: (view: CloudView) => void,
-  install: (data: string) => Promise<void>,
+  install: (data: string, owns?: () => boolean) => Promise<void>,
 ) {
   let view = initialCloudView,
     identity: CloudIdentity | undefined,
@@ -52,7 +52,6 @@ export function createCloud(
   let pending: CloudSnapshot | null = null,
     running: Promise<void> | null = null;
   let localData: string | null = null;
-  let replacing = false;
   let acknowledged: string | null = null;
   let durable: string | null = null;
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
@@ -105,7 +104,7 @@ export function createCloud(
         await port.acknowledge?.(item.id);
         if (!alive() || !remoteReady) return;
         acknowledged = item.id;
-        if (current?.id === item.id) update({ status: "Synced" });
+        if (current?.id === item.id && localData === item.payload) update({ status: "Synced" });
       } catch (error) {
         if (!alive() || !remoteReady) return;
         if (!pending) pending = item;
@@ -130,6 +129,8 @@ export function createCloud(
       if (localCommit) {
         generation++;
         localData = data;
+        if (identity?.available && identity.enabled !== false && current?.payload !== data)
+          update({ status: "Syncing" });
         if (lifecycle !== "ready") {
           if (port && identity?.available !== false) update({ status: "Pending" });
           return;
@@ -216,12 +217,7 @@ export function createCloud(
         if (!owns(token)) return;
       }
       if (plan.install !== null) {
-        replacing = true;
-        try {
-          await install(plan.install);
-        } finally {
-          replacing = false;
-        }
+        await install(plan.install, () => owns(token));
         if (!owns(token)) return;
         localData = plan.install;
       }
@@ -240,7 +236,6 @@ export function createCloud(
   }
   const offline = () => {
     if (!alive()) return false;
-    if (replacing) return false;
     generation++;
     remoteReady = false;
     update({ blocking: false, status: "Pending" });
@@ -264,7 +259,34 @@ export function createCloud(
       }
       if (!cloudIdentifier.test(identity.device) || !cloudIdentifier.test(identity.profile))
         throw new Error("Cloud profile identity is invalid.");
-      if (!background && identity.importAvailable) {
+      const raw = await port.readLocal();
+      if (!owns(starting)) return;
+      if (raw) {
+        let saved: CloudSnapshot | undefined;
+        try {
+          saved = await parseSnapshot(raw, identity.profile);
+        } catch {
+          /* Unknown ancestry stays a conflict, never a fabricated descendant. */
+        }
+        if (!owns(starting)) return;
+        if (saved) {
+          sequence = saved.device === identity.device ? saved.sequence : 0;
+          durable = saved.id;
+          if (saved.payload === data) current = saved;
+          else {
+            await port.preserve([JSON.stringify(saved)]);
+            if (!owns(starting)) return;
+            if (data === null) {
+              await install(saved.payload, () => owns(starting));
+              if (!owns(starting)) return;
+              data = saved.payload;
+              localData = data;
+              current = saved;
+            }
+          }
+        }
+      }
+      if (!background && data === null && identity.importAvailable) {
         const candidates = await port.importStandalone(true);
         if (!owns(starting)) return;
         for (const candidate of candidates) {
@@ -273,27 +295,10 @@ export function createCloud(
           } catch {
             continue;
           }
-          replacing = true;
-          try {
-            await install(data);
-          } finally {
-            replacing = false;
-          }
+          await install(data, () => owns(starting));
           if (!owns(starting)) return;
           localData = data;
           break;
-        }
-      }
-      const raw = await port.readLocal();
-      if (!owns(starting)) return;
-      if (raw) {
-        try {
-          const saved = await parseSnapshot(raw, identity.profile);
-          sequence = saved.device === identity.device ? saved.sequence : 0;
-          durable = saved.id;
-          if (saved.payload === data) current = saved;
-        } catch {
-          /* Unknown ancestry stays a conflict, never a fabricated descendant. */
         }
       }
       lifecycle = "ready";
@@ -327,7 +332,11 @@ export function createCloud(
       return (startup ??= Promise.resolve().then(() => bounded(initialize(data), 5000, offline)));
     },
     commit,
-    retry: reconcile,
+    retry() {
+      if (!alive()) return Promise.resolve();
+      const operation = lifecycle === "ready" ? reconcile() : initialize(localData);
+      return bounded(operation, 5000, offline);
+    },
     offline,
     async flush(timeout = 2000) {
       await bounded(
