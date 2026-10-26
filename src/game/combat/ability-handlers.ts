@@ -97,52 +97,34 @@ export function executePrimary(context: PrimaryContext) {
           negated.add(recipient.id);
           continue;
         }
-        if (!blindMiss && (negation === "reflected" || takeAttackReflection(actor, recipient, events))) {
+        const reflected =
+          !blindMiss && (negation === "reflected" || takeAttackReflection(actor, recipient, events));
+        if (reflected) {
           negated.add(recipient.id);
           if (negateAttack(state, recipient, actor, events, false, damageType)) continue;
-          if (def.purgeThorns) {
-            purgeAttackThorns(state, actor, events, recipient);
-          }
-          hit(
-            state,
-            recipient,
-            actor,
-            value * (def.doubleAgainstHealthier && actor.health > recipient.health ? 2 : 1),
-            damageType,
-            events,
-            {
-              origin: "ability",
-              delivery: "reflection",
-              interceptionChecked: true,
-              blindMiss: false,
-              criticalBonus,
-              leech: def.leech,
-              cardLeech: keywords.includes("leech"),
-            },
-          );
-          reflectExtras(state, action, recipient, events, power);
-          continue;
         }
-        if (def.purgeThorns) {
-          purgeAttackThorns(state, recipient, events, actor);
-        }
+        const source = reflected ? recipient : actor;
+        const victim = reflected ? actor : recipient;
+        if (def.purgeThorns) purgeAttackThorns(state, victim, events, source);
         hit(
           state,
-          actor,
-          recipient,
-          value * (def.doubleAgainstHealthier && recipient.health > actor.health ? 2 : 1),
+          source,
+          victim,
+          value * (def.doubleAgainstHealthier && victim.health > source.health ? 2 : 1),
           damageType,
           events,
           {
             origin: "ability",
+            delivery: reflected ? "reflection" : undefined,
             interceptionChecked: true,
-            blindMiss,
+            blindMiss: reflected ? false : blindMiss,
             criticalBonus,
             leech: def.leech,
             cardLeech: keywords.includes("leech"),
-            sharedNegate,
+            sharedNegate: reflected ? undefined : sharedNegate,
           },
         );
+        if (reflected) reflectExtras(state, action, recipient, events, power);
       }
       if (action.side === "player") action.actor.attacked = true;
       context.attackTarget = attackTarget;
