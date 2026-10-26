@@ -337,6 +337,18 @@ export function* removeEffects(
   )
     yield* reaction("grantBlock", state, unit, purgedArmor, events);
   if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
+  if (
+    kind === "purge" &&
+    state &&
+    isEnemy(unit) &&
+    source &&
+    !isEnemy(source) &&
+    source.health > 0 &&
+    unit.health > 0 &&
+    purgedArmor > 0 &&
+    state.boons.includes("prism-chisel")
+  )
+    yield* reaction("hit", state, source, unit, purgedArmor, "light", events, { origin: "derived" });
   // Typed wards share feedback labels but spend separate Purge categories;
   // Cleanse still coalesces active control with buildup of the same status
   return kind === "purge" ? removedStatuses.length : new Set(removedStatuses).size;
@@ -468,17 +480,19 @@ export function* applyHarmfulStatus(
     type !== "blind"
   )
     return { depletions: [], appliedControl: false, suppressed: false };
+  if (damage <= 0 || source.health <= 0) return { depletions: [], appliedControl: false, suppressed: false };
   const stats = ensureCombat(target);
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
   let appliedControl = false;
   let applied = false;
   const depletions: ArmorDepletion[] = [];
+  const storesControl = alliedSource && !alliedTarget && state.boons.includes("sleepers-urn");
   const immune =
     (type === "stun" || type === "freeze") &&
     (stats.controlled ||
       stats.skipped ||
-      stats.cooldown > 0 ||
+      (stats.cooldown > 0 && !storesControl) ||
       (type === "stun" &&
         alliedTarget &&
         (target.block > 0 || options.blocked) &&
@@ -607,6 +621,7 @@ export function* applyHarmfulStatus(
             100
         : 0.5);
     let reachesThreshold = stats[type] >= threshold;
+    let controlTotal = stats[type];
     if (alliedSource && !alliedTarget && state.boons.includes("undertow-castanets")) {
       const other = type === "stun" ? "freeze" : "stun";
       const otherThreshold =
@@ -619,8 +634,10 @@ export function* applyHarmfulStatus(
               : 0) /
             100);
       reachesThreshold = stats[type] / threshold + stats[other] / otherThreshold >= 1;
+      controlTotal += (stats[other] * threshold) / otherThreshold;
     }
-    if (reachesThreshold) {
+    if (reachesThreshold && stats.cooldown === 0) {
+      const excess = Math.max(0, Math.floor(controlTotal - threshold));
       const turns =
         type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")
           ? 1 + talentRule("stun.extended-stun").amount
@@ -660,6 +677,38 @@ export function* applyHarmfulStatus(
         outcome: "apply",
         text: `${unitName(target)} is ${type === "stun" ? "Stunned" : "Frozen"}.`,
       });
+      if (
+        excess > 0 &&
+        alliedSource &&
+        !alliedTarget &&
+        source.health > 0 &&
+        state.boons.includes("wonder-ball-maze")
+      ) {
+        // Successful control spends this pool; each new control removes another recipient from the route.
+        const recipient = battlefield(state, "enemy").find(
+          (unit) =>
+            unit.id !== target.id &&
+            unit.health > 0 &&
+            !ensureCombat(unit).controlled &&
+            !ensureCombat(unit).skipped &&
+            (ensureCombat(unit).cooldown === 0 || state.boons.includes("sleepers-urn")),
+        );
+        if (recipient) {
+          const result = yield* reaction(
+            "applyHarmfulStatus",
+            state,
+            source,
+            recipient,
+            excess,
+            type,
+            events,
+          );
+          if (result.appliedControl)
+            yield* reaction("controlRewards", state, source, recipient, type, events);
+          for (const depletion of result.depletions)
+            yield* reaction("triggerArmorBreak", state, depletion, events);
+        }
+      }
     }
   }
   if (applied) yield* puzzleEffect(state, source, target, type, events);

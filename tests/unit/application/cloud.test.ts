@@ -220,7 +220,7 @@ it("uploads only after durable local metadata, keeping devices in distinct slots
     release();
     await starting;
     await f.manager.flush();
-    expect(f.install).toHaveBeenCalledWith(initial);
+    expect(f.install).toHaveBeenCalledWith(initial, expect.any(Function));
     expect(f.files.get(cloudName(remote))).toBe(JSON.stringify(remote));
     const local = await parseSnapshot(f.local.data!, identity.profile);
     expect(local.payload).toBe(initial);
@@ -319,7 +319,7 @@ it("falls back to a valid remote recovery slot and pauses uploads if another slo
   f.files.set(cloudName(remote), JSON.stringify(remote));
   f.files.set(cloudName({ device: other.device, sequence: 2 }), "corrupt");
   await f.manager.start(null);
-  expect(f.install).toHaveBeenCalledWith(progress);
+  expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
   expect(f.manager.view.status).toBe("Pending");
   expect(f.files.size).toBe(2);
   f.manager.dispose();
@@ -343,7 +343,7 @@ it("automatically installs a proven descendant and retains its ancestry", async 
   f.files.set(cloudName(remote), JSON.stringify(remote));
   await f.manager.start(initial);
   await f.manager.flush();
-  expect(f.install).toHaveBeenCalledWith(progress);
+  expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
   expect(f.manager.view.status).toBe("Synced");
   const resolved = await parseSnapshot(f.local.data!, identity.profile);
   expect(resolved.payload).toBe(progress);
@@ -360,7 +360,7 @@ it("continues locally when automatic installation fails and retries safely", asy
   expect(f.manager.view.status).toBe("Pending");
   expect(f.manager.view.blocking).toBe(false);
   await f.manager.retry();
-  expect(f.install).toHaveBeenLastCalledWith(progress);
+  expect(f.install).toHaveBeenLastCalledWith(progress, expect.any(Function));
   expect(f.manager.view.blocking).toBe(false);
   await f.manager.flush();
   f.manager.dispose();
@@ -426,7 +426,7 @@ it("automatically adopts a valid standalone backup without changing the original
   ];
   f.port.importStandalone = vi.fn(async () => original);
   await f.manager.start(null);
-  expect(f.install).toHaveBeenCalledWith(progress);
+  expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
   expect(original[0]!.data).toBe("broken");
   expect(f.manager.view.blocking).toBe(false);
   await f.manager.flush();
@@ -691,7 +691,7 @@ it("recovers a valid remote backup when another slot rejects its read", async ()
   };
   try {
     await f.manager.start(null);
-    expect(f.install).toHaveBeenCalledWith(progress);
+    expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
     expect(f.manager.view.status).toBe("Pending");
     expect(f.files.size).toBe(2);
     expect(f.files.get(unreadable)).toBe("unreadable");
@@ -715,6 +715,7 @@ it("preserves divergent snapshots in both slots of the same device", async () =>
     expect(resolved.ancestors).toEqual(expect.arrayContaining([first.id, second.id]));
     expect(f.install).toHaveBeenCalledWith(
       [first, second].sort((a, b) => a.id.localeCompare(b.id))[0]!.payload,
+      expect.any(Function),
     );
   } finally {
     await f.manager.dispose();
@@ -855,7 +856,7 @@ it("durably restores metadata when recovering this device's remote checkpoint", 
   try {
     await f.manager.start(null);
     await f.manager.flush();
-    expect(f.install).toHaveBeenCalledWith(progress);
+    expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
     expect(f.local.data).not.toBeNull();
     const restored = await parseSnapshot(f.local.data!, identity.profile);
     expect(restored.payload).toBe(progress);

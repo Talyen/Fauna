@@ -3008,6 +3008,116 @@
       "aspect": [3, 4],
       "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1jVVUbQXXkuYjqY5B3bxwFQJiVFKoYO-7/view; original PNG preserved unchanged",
       "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.geode-anvil",
+      "origin": "repository",
+      "source": "public/art/boons/geode-anvil.png",
+      "output": "art/boons/geode-anvil.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/12lWfHP5RSOefOxeH7Se71VkuTUNH3g0u/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.journey-loom",
+      "origin": "repository",
+      "source": "public/art/boons/journey-loom.png",
+      "output": "art/boons/journey-loom.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/16pq2-2RwU9wMNatYxYvip3CXq-5HoYbA/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.devotion-clasp",
+      "origin": "repository",
+      "source": "public/art/boons/devotion-clasp.png",
+      "output": "art/boons/devotion-clasp.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1ndXfO3eb8DhlX_Nkoj1AJk2lsGuwWFva/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.prism-chisel",
+      "origin": "repository",
+      "source": "public/art/boons/prism-chisel.png",
+      "output": "art/boons/prism-chisel.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1h4W_hPvRduIaDqeochre6Ggo5Ffv_LOG/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.eclipse-protractor",
+      "origin": "repository",
+      "source": "public/art/boons/eclipse-protractor.png",
+      "output": "art/boons/eclipse-protractor.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1TgSooNMq4g6RHekwMVMnwrUzgdmpnsCH/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.wonder-ball-maze",
+      "origin": "repository",
+      "source": "public/art/boons/wonder-ball-maze.png",
+      "output": "art/boons/wonder-ball-maze.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1d9R5lfzkz3TnlZHbV6qVMSy9re3Z5wW6/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.sleepers-urn",
+      "origin": "repository",
+      "source": "public/art/boons/sleepers-urn.png",
+      "output": "art/boons/sleepers-urn.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1Zt-PNNez9qSp-PRVJC3MEM6UIDSpg6og/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.facet-abacus",
+      "origin": "repository",
+      "source": "public/art/boons/facet-abacus.png",
+      "output": "art/boons/facet-abacus.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1qwYAxutK7II79uOdUbTEpVAWyyHqDnLm/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.thornheart-ring",
+      "origin": "repository",
+      "source": "public/art/boons/thornheart-ring.png",
+      "output": "art/boons/thornheart-ring.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/17CZy844b8EPoXtt4DjBEX5GUd7FWIzP1/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.moonboat-toy",
+      "origin": "repository",
+      "source": "public/art/boons/moonboat-toy.png",
+      "output": "art/boons/moonboat-toy.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1kPW3XICZZ4YQQzNZwPFCm6dod67Kn1HR/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
     }
   ]
 }

@@ -114,8 +114,15 @@ export function executeAbility(
       blindMiss,
       criticalBonus,
       negated,
+      sharedNegate: undefined as import("./policy").SharedNegate | undefined,
     };
     executePrimary(context);
-    applyExtras(state, action, events, { target: context.attackTarget, blindMiss, criticalBonus, negated });
+    applyExtras(state, action, events, {
+      target: context.attackTarget,
+      blindMiss,
+      criticalBonus,
+      negated,
+      sharedNegate: context.sharedNegate,
+    });
   }
 }

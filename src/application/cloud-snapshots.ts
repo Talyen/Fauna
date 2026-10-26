@@ -33,6 +33,10 @@ export async function snapshot(
   sequence: number,
   parents: readonly CloudSnapshot[] = [],
 ): Promise<CloudSnapshot> {
+  if (parents.some((parent) => parent.profile !== identity.profile))
+    throw new Error("Cloud ancestry belongs to another profile.");
+  if (new Set(parents.map((parent) => parent.id)).size > MAX_ANCESTORS)
+    throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
   const record: Omit<CloudSnapshot, "id"> = {
     version: 1,
@@ -48,7 +52,7 @@ export async function snapshot(
     ),
   };
   Object.freeze(record.ancestors);
-  return Object.freeze({ ...record, id: await sha(body(record)) });
+  return snapshotSchema.parse({ ...record, id: await sha(body(record)) });
 }
 export async function parseSnapshot(raw: string, profile: string): Promise<CloudSnapshot> {
   if (new TextEncoder().encode(raw).length > MAX_SNAPSHOT_BYTES)

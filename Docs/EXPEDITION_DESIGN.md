@@ -120,7 +120,7 @@ Starting a new journey resets its totals, roster and Boons while preserving perm
 
 ## Turn and combat foundation
 
-Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns. End turn promotes waiting cards before normal draws, and accepted plays fill open slots from overflow without RNG. Draw/Discard inspection never reveals draw order or changes gameplay.
+Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand normally holds six cards, or seven with Facet Abacus; FIFO overflow persists across turns. End turn promotes waiting cards before normal draws, and accepted plays fill open slots from overflow without RNG. Draw/Discard inspection never reveals draw order or changes gameplay.
 
 [Keywords](KEYWORDS.md) defines packets, defenses, statuses and crowd control, including halving Block and the absence of elemental reactions. Effects tick and expire in backup; swaps cannot refresh them. Ordinary enemies rank supported species abilities; Legendaries rank their current hand under the same [decision rules](#enemy-decisions). Neither reveals the next ability.
 

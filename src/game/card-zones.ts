@@ -9,6 +9,10 @@ import { shuffle, hiddenDecision, roll } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
 
 export const MAX_HAND_SIZE = 6;
+export const MAX_SUPPORTED_HAND_SIZE = MAX_HAND_SIZE + boonRule("facet-abacus").slots;
+export function handCapacity(state: Pick<GameState, "boons">) {
+  return MAX_HAND_SIZE + (state.boons.includes("facet-abacus") ? boonRule("facet-abacus").slots : 0);
+}
 // Bound generated cards and their overflow within the supported save size.
 export const MAX_BATTLE_CARDS = 256;
 
@@ -17,8 +21,9 @@ export function filterCardZones(battle: BattleState["battle"], keep: (id: string
   for (const zone of ["draw", "hand", "buffer", "discard"] as const) battle[zone] = battle[zone].filter(keep);
 }
 
-function queueCard(battle: BattleState["battle"], id: string) {
-  (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
+function queueCard(state: GameState, id: string) {
+  const battle = state.battle!;
+  (battle.hand.length < handCapacity(state) ? battle.hand : battle.buffer).push(id);
 }
 
 export function recycleDiscard(
@@ -29,7 +34,7 @@ export function recycleDiscard(
 }
 export function receiveCard(state: GameState, id: string) {
   fillHand(state);
-  queueCard(state.battle!, id);
+  queueCard(state, id);
 }
 
 /** Return an existing owner slot; returns do not draw, copy, or award draw reactions */
@@ -52,6 +57,7 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
     ]!;
   state.battle.discard.splice(state.battle.discard.indexOf(id), 1);
   receiveCard(state, id);
+  journeyReturn(state, ownerId, events);
   events.push({
     kind: "action",
     actionType: "support",
@@ -59,9 +65,21 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
     text: `${definition(state.cards.find((card) => card.id === id)!.definitionId).name} returns to hand`,
   });
 }
+/** Recovery and returns weave in another living deployed owner's ordinary draw. */
+export function journeyReturn(state: GameState, ownerId: string | null, events: GameEvent[]) {
+  if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
+  const owners = new Set(
+    state.team.filter((unit) => unit.health > 0 && unit.id !== ownerId).map((unit) => unit.id),
+  );
+  const eligible = new Set(
+    state.cards.filter((card) => card.ownerId && owners.has(card.ownerId)).map((card) => card.id),
+  );
+  fillHand(state);
+  drawEligibleCard(state, (id) => eligible.has(id), events);
+}
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const battle = state.battle!;
-  queueCard(battle, id);
+  queueCard(state, id);
   const owner = state.team.find(
     (unit) => unit.id === state.cards.find((card) => card.id === id)?.ownerId && unit.health > 0,
   );
@@ -84,7 +102,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
     original ??= state.cards.find((entry) => entry.id === id)!;
     const copy = { ...original, id: `copy-${battle.copySerial++}`, temporary: true as const };
     state.cards.push(copy);
-    queueCard(battle, copy.id);
+    queueCard(state, copy.id);
     events.push({
       kind: "action",
       actionType: "support",
@@ -142,12 +160,13 @@ export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?
     text: `${definition(card.definitionId).name} is drawn from Discard`,
   });
   lostAndFound(state, card, events);
+  journeyReturn(state, card.ownerId, events);
   return card;
 }
 
 export function fillHand(state: GameState) {
   const battle = state.battle!;
-  const count = Math.min(MAX_HAND_SIZE - battle.hand.length, battle.buffer.length);
+  const count = Math.min(handCapacity(state) - battle.hand.length, battle.buffer.length);
   if (count > 0) battle.hand.push(...battle.buffer.splice(0, count));
 }
 
@@ -168,9 +187,11 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
 
 /** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
 export function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
-  hiddenDecision(state);
   const battle = state.battle!;
   let index = lastEligibleIndex(battle.draw, eligible);
+  // An empty eligible pool is a visible no-op, not an unknown hidden draw.
+  if (index < 0 && !battle.discard.some(eligible)) return false;
+  hiddenDecision(state);
   if (index < 0) {
     recycleEligibleDiscard(state, eligible);
     index = lastEligibleIndex(battle.draw, eligible);
@@ -186,7 +207,7 @@ export function drawEligibleCard(state: GameState, eligible: (id: string) => boo
 }
 
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
-  if (count > 0) hiddenDecision(state);
+  if (count <= 0) return 0;
   fillHand(state);
   // Ordinary draws reshuffle the whole empty pile first; keyword draws only recycle matches.
   recycleDiscard(state);

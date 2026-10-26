@@ -48,6 +48,10 @@
   z-index: 4;
 }
 .hand-section {
+  --hand-fitted-available: min(
+    var(--battle-hand-available),
+    calc(var(--battle-hand-width) * 6 - var(--hand-overlap) * 5)
+  );
   position: relative;
   flex: 0 1 auto;
   width: calc(var(--battle-hand-available) + var(--hand-side-clearance) * 2);
@@ -102,7 +106,7 @@
   margin-left: min(
     calc(-1 * var(--hand-overlap)),
     calc(
-      (var(--battle-hand-available) - var(--battle-hand-width) * var(--hand-count)) /
+      (var(--hand-fitted-available) - var(--battle-hand-width) * var(--hand-count)) /
         max(1, var(--hand-count) - 1)
     )
   );

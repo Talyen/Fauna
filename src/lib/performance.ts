@@ -2,20 +2,21 @@ export type SpanDetails = Readonly<Record<string, string | number | boolean>>;
 export type SpanEnd = (outcome?: "complete" | "interrupted" | "failed") => void;
 export type PerformanceRecorder = (name: string, details?: SpanDetails) => SpanEnd | undefined;
 const noop: SpanEnd = () => {};
-let active: { recorder: PerformanceRecorder } | undefined;
+const installations: { recorder: PerformanceRecorder }[] = [];
 
 export function installPerformanceRecorder(recorder: PerformanceRecorder) {
   const installation = { recorder };
-  active = installation;
+  installations.push(installation);
   return () => {
-    if (active === installation) active = undefined;
+    const index = installations.indexOf(installation);
+    if (index >= 0) installations.splice(index, 1);
   };
 }
 /** Recording is optional and cannot replace an application's result or exception. */
 export function startPerformanceSpan(
   name: string,
   details?: SpanDetails,
-  recorder = active?.recorder,
+  recorder = installations.at(-1)?.recorder,
 ): SpanEnd {
   if (!recorder) return noop;
   try {

@@ -15,7 +15,7 @@ import type { BattleState, GameEvent, Card } from "../types";
 import { definition } from "../content";
 import { battlefield, healingAllies } from "../battlefield";
 import { creaturePassive } from "../progression";
-import { receiveCard, draw } from "../card-zones";
+import { receiveCard, draw, journeyReturn } from "../card-zones";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
 export function returnDodgedCard(state: BattleState, card: Card, events: GameEvent[], start: number) {
@@ -38,6 +38,7 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
   if (index < 0) return;
   state.battle.discard.splice(index, 1);
   receiveCard(state, card.id);
+  journeyReturn(state, card.ownerId, events);
   events.push({
     kind: "action",
     actionType: "support",

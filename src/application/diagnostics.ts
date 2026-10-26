@@ -53,7 +53,7 @@ function readEntries(raw: string | null | undefined): Diagnostic[] {
         message: sanitize(message),
         count: Math.min(count, MAX_COUNT),
         ...(revision !== undefined && phase !== undefined
-          ? { revision, phase: phase.slice(0, MAX_PHASE_LENGTH) }
+          ? { revision, phase: sanitize(phase).slice(0, MAX_PHASE_LENGTH) }
           : {}),
       },
     ];
@@ -88,9 +88,11 @@ export function createDiagnostics(port?: DiagnosticPort) {
   }
   return {
     subscribe(listener: () => void) {
-      listeners.add(listener);
+      if (disposed) return () => {};
+      const subscription = () => listener();
+      listeners.add(subscription);
       return () => {
-        listeners.delete(listener);
+        listeners.delete(subscription);
       };
     },
     snapshot: () => entries,
@@ -103,6 +105,17 @@ export function createDiagnostics(port?: DiagnosticPort) {
         const message = sanitize(errorMessage(error));
         // Error getters can dispose the owner while the message is being inspected.
         if (disposed) return;
+        let location: Pick<Diagnostic, "revision" | "phase"> = {};
+        try {
+          if (context) {
+            const revision = context.revision;
+            const phase = sanitize(context.phase).slice(0, MAX_PHASE_LENGTH);
+            if (Number.isSafeInteger(revision) && revision >= 0) location = { revision, phase };
+          }
+        } catch {
+          // Optional diagnostic context cannot suppress the original failure.
+        }
+        if (disposed) return;
         const match = entries.find((entry) => entry.source === source && entry.message === message);
         entries = retain(
           [
@@ -111,18 +124,19 @@ export function createDiagnostics(port?: DiagnosticPort) {
               source,
               message,
               count: Math.min((match?.count ?? 0) + 1, MAX_COUNT),
-              ...(context
-                ? { revision: context.revision, phase: context.phase.slice(0, MAX_PHASE_LENGTH) }
-                : {}),
+              ...location,
             },
           ].slice(-MAX_ENTRIES),
         );
+        // Capture delivery ownership before persistence or listeners can register new viewers.
+        const notification = [...listeners];
         try {
           port?.write(JSON.stringify(entries));
         } catch {
           /* Preserve in-memory evidence. */
         }
-        for (const listener of listeners) {
+        for (const listener of notification) {
+          if (!listeners.has(listener)) continue;
           try {
             listener();
           } catch {
