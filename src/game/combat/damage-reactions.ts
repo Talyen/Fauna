@@ -40,6 +40,8 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
     outcome: "dodge",
     text: `${unitName(target)} Dodges.`,
   });
+  // The Dodge is committed even if its first follow-up causes a knockout.
+  if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
   if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
     yield* reaction("restoreHealth", target, talentRule("dodge.catch-breath").amount, events, false, state);
   if (alliedTarget) {
@@ -59,6 +61,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
         undefined,
         target,
       );
+    if (target.health <= 0) return;
     if (state.boons.includes("briar-racquet") && stats.thorns > 0 && target.health > 0) {
       const damage = Math.round(stats.thorns / boonRule("briar-racquet").divisor);
       if (!(source.combat?.bleed && state.boons.includes("thornheart-ring"))) stats.thorns--;
@@ -67,6 +70,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
         thorns: true,
       });
     }
+    if (target.health <= 0) return;
     stats[talentRule("dodge.finding-rhythm").state] = 0;
     if (hasTalent(state, "dodge.thornstep"))
       yield* reaction("grantStatus", target, "thorns", talentRule("dodge.thornstep").amount, events, state);
@@ -77,11 +81,14 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
     if (hasTalent(state, "dodge.open-flank")) stats.nextPhysical = talentRule("dodge.open-flank").amount;
     if (hasTalent(state, "dodge.unburdened")) {
       yield* reaction("removeControlBuildup", state, target, "stun", events);
+      if (target.health <= 0) return;
       yield* reaction("removeControlBuildup", state, target, "freeze", events);
     }
+    if (target.health <= 0) return;
     if (hasTalent(state, "dodge.tailwind")) draw(state, 1, events);
     if (hasTalent(state, "dodge.perfect-timing") && stats.armor === 0)
       yield* reaction("grantArmor", state, target, talentRule("dodge.perfect-timing").amount, events);
+    if (target.health <= 0) return;
     if (hasTalent(state, "block.footwork"))
       yield* reaction("grantBlock", state, target, talentRule("block.footwork").amount, events);
     if (hasTalent(state, "bleed.parting-cut")) stats[talentRule("bleed.parting-cut").state] = true;
@@ -107,7 +114,6 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
     yield* reaction("hit", state, target, source, cinderstep, "burn", events, {
       origin: "statusRetaliation",
     });
-  if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
 }
 export function* blockDepletionRewards(
   { state, source, target, events }: HitContext,

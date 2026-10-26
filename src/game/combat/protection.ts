@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { manaCapacity } from "../ability-rules";
-import { healingValue, restoration, overflowBlock } from "./healing-values";
+import { healingValue, restoration, overflowBlock, overflowRecipients } from "./healing-values";
 import { chance as succeeds, talentChance } from "../chance";
 import { isEnemy, battlefield, healingAllies } from "../battlefield";
 import { drawKeyword } from "../card-zones";
@@ -100,9 +100,7 @@ export function* restoreHealth(
     state.boons.includes("last-threshold")
   ) {
     let remaining = excess;
-    const recipients = healingAllies(state).filter(
-      (ally) => ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally),
-    );
+    const recipients = overflowRecipients(state, unit);
     while (remaining > 0) {
       const recipient = mostInjured(recipients);
       if (!recipient) break;

@@ -47,7 +47,7 @@ export function createPearls(
       deck.pearls++;
       (deck.hand.length < MAX_HAND_SIZE ? deck.hand : deck.buffer).push(PEARL.id);
     } else {
-      if (battleCardCapacity(state) === 0 || state.battle.copySerial >= Number.MAX_SAFE_INTEGER) break;
+      if (battleCardCapacity(state) === 0) break;
       const card = {
         id: `copy-${state.battle.copySerial++}`,
         definitionId: PEARL.id,

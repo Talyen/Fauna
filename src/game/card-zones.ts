@@ -88,12 +88,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   let original: GameState["cards"][number] | undefined;
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
-    if (
-      reader.health <= 0 ||
-      state.cards.length >= MAX_BATTLE_CARDS ||
-      battle.copySerial >= Number.MAX_SAFE_INTEGER
-    )
-      continue;
+    if (reader.health <= 0 || battleCardCapacity(state) === 0) continue;
     const chance = passiveAmount(state, reader.species, "wellRead");
     if (!succeeds(state, chance / 100, false, events)) continue;
     original ??= state.cards.find((entry) => entry.id === id)!;
@@ -272,8 +267,14 @@ export function redrawHand(state: GameState, events: GameEvent[]) {
 }
 
 /** Shared capacity query for generated cards and visible policy assessment. */
-export function battleCardCapacity(state: Pick<GameState, "cards">): number {
-  return Math.max(0, MAX_BATTLE_CARDS - state.cards.length);
+export function battleCardCapacity(state: Pick<GameState, "cards" | "battle">): number {
+  return Math.max(
+    0,
+    Math.min(
+      MAX_BATTLE_CARDS - state.cards.length,
+      Number.MAX_SAFE_INTEGER - (state.battle?.copySerial ?? 0),
+    ),
+  );
 }
 /** Called while the played card is still in hand; hidden draw order is irrelevant.
  * Buffered cards fill the hand before keyword filtering; consumed cards cannot be copied on redraw. */

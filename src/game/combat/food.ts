@@ -18,11 +18,7 @@ export function createFood(
   destination: "hand" | "deck" = "hand",
 ) {
   let created = 0;
-  while (
-    created < count &&
-    battleCardCapacity(state) > 0 &&
-    state.battle.copySerial < Number.MAX_SAFE_INTEGER
-  ) {
+  while (created < count && battleCardCapacity(state) > 0) {
     const def =
       FOOD_CARDS[Math.floor(roll(state, { kind: "index", size: FOOD_CARDS.length }) * FOOD_CARDS.length)]!;
     const card = {

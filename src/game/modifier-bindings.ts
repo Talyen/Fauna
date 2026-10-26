@@ -339,6 +339,7 @@ export const modifierQueries = freeze(
       "stun.free-follow-up": ["./ability-rules#cardCost"],
     } satisfies Partial<Record<TalentId, Binding>>,
     boons: {
+      "last-threshold": ["./ability-facts#healingBenefit"],
       "crater-punch": ["./ability-facts#ordinaryAttackFacts"],
       "tuning-fork-charm": ["./combat/damage-values#armorApplies"],
       "sundering-charm": ["./ability-facts#ordinaryAttackFacts"],
