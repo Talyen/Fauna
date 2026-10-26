@@ -12,12 +12,11 @@ export interface JourneyDecision {
   command: Command;
   reason: string;
 }
-/** Rough usefulness, never a power or win-rate estimate; absent triggers score zero. */
-export function boonValue(
+/** Prepare roster facts once when comparing multiple Boons. */
+function boonScorer(
   state: GameState,
-  boon: BoonId,
   kinds = [...state.team, ...state.reserves].filter((unit) => unit.health > 0).map((unit) => unit.species),
-): number {
+) {
   const has = capabilities(state, kinds);
   const healing =
     has.has("health") ||
@@ -34,199 +33,199 @@ export function boonValue(
     effect("teamProtection") ||
     state.boons.includes("ironwood-buckler") ||
     cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
-  switch (boon) {
-    case "aether-gramophone":
-    case "dream-tangram":
-    case "eclipse-protractor":
-    case "crescent-sextant":
-      return has.has("attack") ? 50 : 0;
-    case "herbarium-press":
-      return has.has("poison") && has.has("freeze") ? 50 : 0;
-    case "honey-press":
-    case "pattern-reel":
-    case "winnowing-sieve":
-    case "pearl-sieve":
-    case "prism-chisel":
-      return has.has("purge") ? 60 : 0;
-    case "rook-of-mercy":
-    case "prayer-sailboat":
-    case "accordioned-bridge":
-    case "tide-anklet":
-      return swapping ? 60 : 0;
-    case "tidecrest-hairpin":
-      return effect("waterThorns") ? 60 : 0;
-    case "stardust-whetstone":
-      return has.has("physical") ? 60 : 0;
-    case "ashfall-pendant":
-    case "last-candle":
-    case "molten-paperweight":
-      return has.has("burn") ? 60 : 0;
-    case "wishing-building-block":
-      return has.has("armor") && kinds.length > 1 ? 60 : 0;
-    case "sovereign-toast-rack":
-    case "pumpkin-tureen":
-    case "field-lunch-basket":
-    case "blossom-cake-stand":
-      return effect("createFood") || kinds.includes("aerostat") ? 60 : 0;
-    case "hoard-lockplate":
-    case "geode-anvil":
-      return has.has("armor") && has.has("block") ? 60 : 0;
-    case "rootvault-pole":
-    case "hearth-coal":
-    case "vigil-lantern":
-    case "gemmed-scabbard":
-      return 40;
-    case "star-hoop":
-      return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 50 : 0;
-    case "blooming-still":
-    case "miracle-megaphone":
-      return has.has("cleanse") || state.boons.includes("knot-comb") ? 50 : 0;
-    case "yarrow-salve-tin":
-      return healing ? 60 : 0;
-    case "comb-uncapping-fork":
-    case "resonance-kalimba":
-    case "thornheart-ring":
-      return thorns ? 60 : 0;
-    case "fern-fencing-foil":
-      return has.has("dodge") ? 60 : 0;
-    case "reef-casket":
-    case "coronation-cloche":
-      return effect("nullify") ? 50 : 0;
-    case "obsidian-pitcher":
-      return has.has("leech") ? 60 : 0;
-    case "grain-flail":
-      return has.has("attack") ? 60 : 0;
-    case "comet-crucible":
-      return has.has("armor") ? 40 : 0;
-    case "journey-loom":
-      return effect("recover") && kinds.length > 1 ? 60 : 0;
-    case "devotion-clasp":
-      return kinds.length > 1 && (effect("dreamDouble") || effect("sparkDecoy")) ? 50 : 0;
-    case "wonder-ball-maze":
-    case "sleepers-urn":
-      return has.has("stun") || has.has("freeze") ? 60 : 0;
-    case "facet-abacus":
-      return 60;
-    case "moonboat-toy":
-      return has.has("water") ? 60 : 0;
-    case "grafting-needle":
-      return healing && has.has("armor") ? 60 : 0;
-    case "lovers-knot":
-    case "last-threshold":
-      return healing ? 60 : 0;
-    case "camp-hammock":
-      return healing && state.reserves.some((unit) => unit.health > 0) ? 60 : 0;
-    case "thaw-spoon":
-      return healing ? 40 : 0;
-    case "coral-net-weight":
-    case "crater-punch":
-    case "dream-yo-yo":
-    case "wonder-domino":
-      return has.has("attack") ? 50 : 0;
-    case "moonveil-mask":
-    case "apiary-smoker":
-      return effect("teamBlind") ||
-        cards.some((card) => card.effects?.some((extra) => extra.kind === "blind"))
-        ? 50
-        : 0;
-    case "mercury-metronome":
-      return kinds.length > 1 ? 60 : 0;
-    case "raincatcher-bowl":
-      return has.has("water") ? 80 : 0;
-    case "thunder-conch":
-    case "tuning-fork-charm":
-      return has.has("stun") ? 60 : 0;
-    case "thistle-sieve":
-    case "calendula-soap":
-    case "orbit-armillary":
-      return has.has("cleanse") || state.boons.includes("knot-comb") ? 50 : 0;
-    case "cloud-cup-and-ball":
-    case "fallingstar-anvil":
-    case "pleated-pagoda":
-    case "moss-oven-mitt":
-    case "rain-cape":
-      return has.has("block") ? 60 : 0;
-    case "echo-lens":
-      return effect("dreamDouble") || effect("sparkDecoy") ? 50 : 0;
-    case "brookskip-disc":
-      return has.has("water") ? 60 : 0;
-    case "nectar-dipper":
-      return effect("createFood") || kinds.some((kind) => kind === "aerostat") ? 60 : 0;
-    case "saddle-pouch":
-      return swapping && state.reserves.some((unit) => unit.health > 0) ? 60 : 0;
-    case "dune-shuttle":
-    case "encore-baton":
-    case "mineral-bookend":
-      return 60;
-    case "story-puzzle-cube":
-      return ["burn", "poison", "bleed", "stun", "freeze"].filter((keyword) => has.has(keyword)).length +
-        Number(
-          effect("teamBlind") || cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")),
-        ) >=
-        3
-        ? 60
-        : 0;
-    case "briar-racquet":
-      return thorns ? 50 : 0;
-    case "cinder-fan":
-      return has.has("burn") ? 60 : 0;
-    case "pruning-crescent":
-      return has.has("purge") || cards.some((card) => card.effect === "attack" && card.purgeThorns) ? 50 : 0;
-    case "knot-comb":
-    case "basalt-glass-bookmark":
-      return 40;
-    case "honeycomb-frame":
-      return has.has("armor") ? 50 : 0;
-    case "rainkeeper":
-      return has.has("mana") || state.boons.includes("resonant-chimes") ? 60 : 0;
-    case "furnace-prism":
-      return has.has("light") && has.has("burn") ? 60 : 0;
-    case "undertow-castanets":
-      return has.has("stun") && has.has("freeze") ? 60 : 0;
-    case "resonant-chimes":
-      return 90;
-    case "tattered-pages":
-      return 80;
-    case "bone-charm":
-      return 70;
-    case "ironwood-buckler":
-      return has.has("block") ? 70 : 0;
-    case "icy-heart":
-      return has.has("freeze") ? 70 : 0;
-    case "meteorite":
-      return has.has("burn") ? 80 : 0;
-    case "sin-eaters-lantern":
-      return has.has("cleanse") ||
-        state.talents.some((id) => ["health.last-resort", "health.clean-slate"].includes(id))
-        ? 70
-        : 0;
-    case "thunderstone":
-      return has.has("stun") ? 70 : 0;
-    case "groves-favor":
-      return healing ? 60 : 0;
-    case "brass-censer":
-      return has.has("light") ? 60 : 0;
-    case "parasitic-bloom":
-      return has.has("poison") ? 60 : 0;
-    case "cutpurse-knife":
-      return has.has("bleed") ? 40 : 0;
-    case "merchants-favor":
-      return state.encounter < 6 ? 25 : 0;
-    case "plague-doctors-mask":
-      return 30;
-    case "sundering-charm":
-      return has.has("physical") || has.has("stun") ? 75 : 0;
-    case "smugglers-map":
-      return 20;
-    case "frozen-pocketwatch":
-      return has.has("freeze") ? 60 : 0;
-    case "lucky-clover":
-      return has.has("nature") ? 40 : 0;
-    default: {
-      const unhandled: never = boon;
-      throw new Error(`Unhandled Boon: ${unhandled}`);
+  return (boon: BoonId): number => {
+    switch (boon) {
+      case "aether-gramophone":
+      case "dream-tangram":
+      case "eclipse-protractor":
+      case "crescent-sextant":
+      case "coral-net-weight":
+      case "crater-punch":
+      case "dream-yo-yo":
+      case "wonder-domino":
+        return has.has("attack") ? 50 : 0;
+      case "herbarium-press":
+        return has.has("poison") && has.has("freeze") ? 50 : 0;
+      case "honey-press":
+      case "pattern-reel":
+      case "winnowing-sieve":
+      case "pearl-sieve":
+      case "prism-chisel":
+        return has.has("purge") ? 60 : 0;
+      case "rook-of-mercy":
+      case "prayer-sailboat":
+      case "accordioned-bridge":
+      case "tide-anklet":
+        return swapping ? 60 : 0;
+      case "tidecrest-hairpin":
+        return effect("waterThorns") ? 60 : 0;
+      case "stardust-whetstone":
+        return has.has("physical") ? 60 : 0;
+      case "ashfall-pendant":
+      case "last-candle":
+      case "molten-paperweight":
+      case "cinder-fan":
+        return has.has("burn") ? 60 : 0;
+      case "wishing-building-block":
+        return has.has("armor") && kinds.length > 1 ? 60 : 0;
+      case "sovereign-toast-rack":
+      case "pumpkin-tureen":
+      case "field-lunch-basket":
+      case "blossom-cake-stand":
+      case "nectar-dipper":
+        return effect("createFood") || kinds.includes("aerostat") ? 60 : 0;
+      case "hoard-lockplate":
+      case "geode-anvil":
+        return has.has("armor") && has.has("block") ? 60 : 0;
+      case "rootvault-pole":
+      case "hearth-coal":
+      case "vigil-lantern":
+      case "gemmed-scabbard":
+      case "knot-comb":
+      case "basalt-glass-bookmark":
+        return 40;
+      case "star-hoop":
+        return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 50 : 0;
+      case "blooming-still":
+      case "miracle-megaphone":
+      case "thistle-sieve":
+      case "calendula-soap":
+      case "orbit-armillary":
+        return has.has("cleanse") || state.boons.includes("knot-comb") ? 50 : 0;
+      case "yarrow-salve-tin":
+      case "lovers-knot":
+      case "last-threshold":
+      case "groves-favor":
+        return healing ? 60 : 0;
+      case "comb-uncapping-fork":
+      case "resonance-kalimba":
+      case "thornheart-ring":
+        return thorns ? 60 : 0;
+      case "fern-fencing-foil":
+        return has.has("dodge") ? 60 : 0;
+      case "reef-casket":
+      case "coronation-cloche":
+        return effect("nullify") ? 50 : 0;
+      case "obsidian-pitcher":
+        return has.has("leech") ? 60 : 0;
+      case "grain-flail":
+        return has.has("attack") ? 60 : 0;
+      case "comet-crucible":
+        return has.has("armor") ? 40 : 0;
+      case "journey-loom":
+        return effect("recover") && kinds.length > 1 ? 60 : 0;
+      case "devotion-clasp":
+        return kinds.length > 1 && (effect("dreamDouble") || effect("sparkDecoy")) ? 50 : 0;
+      case "wonder-ball-maze":
+      case "sleepers-urn":
+        return has.has("stun") || has.has("freeze") ? 60 : 0;
+      case "facet-abacus":
+      case "dune-shuttle":
+      case "encore-baton":
+      case "mineral-bookend":
+        return 60;
+      case "moonboat-toy":
+      case "brookskip-disc":
+        return has.has("water") ? 60 : 0;
+      case "grafting-needle":
+        return healing && has.has("armor") ? 60 : 0;
+      case "camp-hammock":
+        return healing && state.reserves.some((unit) => unit.health > 0) ? 60 : 0;
+      case "thaw-spoon":
+        return healing ? 40 : 0;
+      case "moonveil-mask":
+      case "apiary-smoker":
+        return effect("teamBlind") ||
+          cards.some((card) => card.effects?.some((extra) => extra.kind === "blind"))
+          ? 50
+          : 0;
+      case "mercury-metronome":
+        return kinds.length > 1 ? 60 : 0;
+      case "raincatcher-bowl":
+        return has.has("water") ? 80 : 0;
+      case "thunder-conch":
+      case "tuning-fork-charm":
+        return has.has("stun") ? 60 : 0;
+      case "cloud-cup-and-ball":
+      case "fallingstar-anvil":
+      case "pleated-pagoda":
+      case "moss-oven-mitt":
+      case "rain-cape":
+        return has.has("block") ? 60 : 0;
+      case "echo-lens":
+        return effect("dreamDouble") || effect("sparkDecoy") ? 50 : 0;
+      case "saddle-pouch":
+        return swapping && state.reserves.some((unit) => unit.health > 0) ? 60 : 0;
+      case "story-puzzle-cube":
+        return ["burn", "poison", "bleed", "stun", "freeze"].filter((keyword) => has.has(keyword)).length +
+          Number(
+            effect("teamBlind") ||
+              cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")),
+          ) >=
+          3
+          ? 60
+          : 0;
+      case "briar-racquet":
+        return thorns ? 50 : 0;
+      case "pruning-crescent":
+        return has.has("purge") || cards.some((card) => card.effect === "attack" && card.purgeThorns)
+          ? 50
+          : 0;
+      case "honeycomb-frame":
+        return has.has("armor") ? 50 : 0;
+      case "rainkeeper":
+        return has.has("mana") || state.boons.includes("resonant-chimes") ? 60 : 0;
+      case "furnace-prism":
+        return has.has("light") && has.has("burn") ? 60 : 0;
+      case "undertow-castanets":
+        return has.has("stun") && has.has("freeze") ? 60 : 0;
+      case "resonant-chimes":
+        return 90;
+      case "tattered-pages":
+        return 80;
+      case "bone-charm":
+        return 70;
+      case "ironwood-buckler":
+        return has.has("block") ? 70 : 0;
+      case "icy-heart":
+        return has.has("freeze") ? 70 : 0;
+      case "meteorite":
+        return has.has("burn") ? 80 : 0;
+      case "sin-eaters-lantern":
+        return has.has("cleanse") ||
+          state.talents.some((id) => ["health.last-resort", "health.clean-slate"].includes(id))
+          ? 70
+          : 0;
+      case "thunderstone":
+        return has.has("stun") ? 70 : 0;
+      case "brass-censer":
+        return has.has("light") ? 60 : 0;
+      case "parasitic-bloom":
+        return has.has("poison") ? 60 : 0;
+      case "cutpurse-knife":
+        return has.has("bleed") ? 40 : 0;
+      case "merchants-favor":
+        return state.encounter < 6 ? 25 : 0;
+      case "plague-doctors-mask":
+        return 30;
+      case "sundering-charm":
+        return has.has("physical") || has.has("stun") ? 75 : 0;
+      case "smugglers-map":
+        return 20;
+      case "frozen-pocketwatch":
+        return has.has("freeze") ? 60 : 0;
+      case "lucky-clover":
+        return has.has("nature") ? 40 : 0;
+      default: {
+        const unhandled: never = boon;
+        throw new Error(`Unhandled Boon: ${unhandled}`);
+      }
     }
-  }
+  };
+}
+/** Rough usefulness, never a power or win-rate estimate; absent triggers score zero. */
+export function boonValue(state: GameState, boon: BoonId, kinds?: GameState["team"][number]["species"][]) {
+  return boonScorer(state, kinds)(boon);
 }
 function recruitDecision(state: GameState): JourneyDecision {
   const selected = state.phase === "recruit" ? state.reward.selectedRecruit : undefined;
@@ -237,28 +236,22 @@ function recruitDecision(state: GameState): JourneyDecision {
     state,
     living(roster).map((unit) => unit.species),
   );
-  const score = (next: typeof roster, active: typeof roster) =>
-    coverageScore(
-      state,
-      living(next).map((unit) => unit.species),
-    ) +
-    coverageScore(
-      state,
-      living(active).map((unit) => unit.species),
-    ) *
-      2 +
-    living(active).reduce((sum, unit) => sum + offenseValue(state, unit.species) * 300 + 200, 0) +
-    next.reduce((sum, unit) => sum + unit.health / species(unit.species).health, 0) * 20 +
-    state.boons.reduce(
-      (sum, boon) =>
-        sum +
-        boonValue(
-          state,
-          boon,
-          living(next).map((unit) => unit.species),
-        ),
-      0,
+  const score = (next: typeof roster, active: typeof roster) => {
+    const nextKinds = living(next).map((unit) => unit.species);
+    const activeUnits = living(active);
+    const scoreBoon = state.boons.length ? boonScorer(state, nextKinds) : undefined;
+    return (
+      coverageScore(state, nextKinds) +
+      coverageScore(
+        state,
+        activeUnits.map((unit) => unit.species),
+      ) *
+        2 +
+      activeUnits.reduce((sum, unit) => sum + offenseValue(state, unit.species) * 300 + 200, 0) +
+      next.reduce((sum, unit) => sum + unit.health / species(unit.species).health, 0) * 20 +
+      state.boons.reduce((sum, boon) => sum + scoreBoon!(boon), 0)
     );
+  };
   const keep = score(roster, state.team);
   const options = offers.flatMap((kind) =>
     (roster.length === 5 ? roster : [undefined]).map((released) => {
@@ -347,14 +340,16 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
         if (visit.resolved)
           return decision({ type: "leaveSupport", visit: visit.id }, "Leave after the committed purchase");
         const affordable = visit.stock.filter((slot) => slot.price <= state.currency);
+        let scorer: ReturnType<typeof boonScorer> | undefined;
+        const scoreBoon = (boon: BoonId) => (scorer ??= boonScorer(state))(boon);
         const slot =
           config.policy === "random"
             ? affordable[0]
             : affordable
-                .filter((slot) => boonValue(state, slot.boon) > 0)
+                .filter((slot) => scoreBoon(slot.boon) > 0)
                 .sort(
                   (a, b) =>
-                    boonValue(state, b.boon) / b.price - boonValue(state, a.boon) / a.price ||
+                    scoreBoon(b.boon) / b.price - scoreBoon(a.boon) / a.price ||
                     a.price - b.price ||
                     a.slot.localeCompare(b.slot),
                 )[0];
@@ -401,14 +396,16 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
               );
       case "boon": {
         const offers = state.reward!.boons;
+        let scorer: ReturnType<typeof boonScorer> | undefined;
+        const scoreBoon = (boon: BoonId) => (scorer ??= boonScorer(state))(boon);
         const boon =
           config.policy === "random"
             ? offers.length
               ? pick(offers)
               : undefined
             : [...offers]
-                .filter((boon) => boonValue(state, boon) > 0)
-                .sort((a, b) => boonValue(state, b) - boonValue(state, a) || a.localeCompare(b))[0];
+                .filter((boon) => scoreBoon(boon) > 0)
+                .sort((a, b) => scoreBoon(b) - scoreBoon(a) || a.localeCompare(b))[0];
         return boon
           ? decision(
               { type: "chooseBoon", boon },

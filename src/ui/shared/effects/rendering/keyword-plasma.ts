@@ -1,6 +1,5 @@
 import { attachWebGLContextLifecycle } from "./webgl-lifecycle";
-import type { PlasmaRendererOptions } from "./keyword-plasma-types";
-import { startWebGLKeywordPlasma } from "./keyword-plasma-webgl";
+import { startWebGLKeywordPlasma, type PlasmaRendererOptions } from "./keyword-plasma-webgl";
 
 export function startKeywordPlasma(options: PlasmaRendererOptions): () => void {
   return attachWebGLContextLifecycle({
@@ -10,4 +9,4 @@ export function startKeywordPlasma(options: PlasmaRendererOptions): () => void {
   });
 }
 
-export type { PlasmaColorState, PlasmaRendererOptions } from "./keyword-plasma-types";
+export type { PlasmaColorState, PlasmaRendererOptions } from "./keyword-plasma-webgl";

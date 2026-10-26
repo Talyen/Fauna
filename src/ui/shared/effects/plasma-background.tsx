@@ -10,15 +10,11 @@ const GLOW_BRIGHTNESS = 0.8;
 
 export function KeywordPlasmaBackground({
   colorPair: explicitColorPair,
-  focalYOffset = 0,
-  active = true,
   black,
   motionAllowed,
   intensity = 100,
 }: {
   colorPair?: PlasmaColorPair | null | undefined;
-  focalYOffset?: number | undefined;
-  active?: boolean | undefined;
   black: string;
   motionAllowed: boolean;
   intensity?: number | undefined;
@@ -45,7 +41,7 @@ export function KeywordPlasmaBackground({
   useEffect(() => {
     const currentTarget = { primary: targetPrimary, secondary: targetSecondary };
 
-    if (!motionAllowed || !visible || !active || !webglAvailable) {
+    if (!motionAllowed || !visible || !webglAvailable) {
       velocityRef.current.primary.fill(0);
       velocityRef.current.secondary.fill(0);
       colorsRef.current = currentTarget;
@@ -127,7 +123,7 @@ export function KeywordPlasmaBackground({
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
       if (idleTimerRef.current !== null) window.clearTimeout(idleTimerRef.current);
     };
-  }, [hasColorPair, targetPrimary, targetSecondary, motionAllowed, visible, active, webglAvailable]);
+  }, [hasColorPair, targetPrimary, targetSecondary, motionAllowed, visible, webglAvailable]);
 
   useEffect(() => {
     if (!motionAllowed || !visible) return;
@@ -142,15 +138,14 @@ export function KeywordPlasmaBackground({
       canvas,
       onAvailabilityChange: setWebglAvailable,
       colorsRef,
-      focalYOffset,
-      active: () => active && activeRef.current,
+      active: () => activeRef.current,
       onWakeReady: (wake) => {
         wakeRef.current = wake;
       },
     });
 
     return () => stop();
-  }, [focalYOffset, active, motionAllowed, visible]);
+  }, [motionAllowed, visible]);
 
   if (intensity <= 0 || !motionAllowed) return null;
 
@@ -168,12 +163,12 @@ export function KeywordPlasmaBackground({
         className="effect-fill"
         style={{ visibility: webglAvailable ? "visible" : "hidden" }}
       />
-      {!webglAvailable && motionAllowed && active && colorPair !== null ? (
+      {!webglAvailable && motionAllowed && colorPair !== null ? (
         <div
           data-testid="static-plasma-background"
           className="effect-fill"
           style={{
-            background: `radial-gradient(ellipse at 50% calc(50% - ${focalYOffset}px), color-mix(in srgb, ${targetPrimary} 13%, transparent), color-mix(in srgb, ${targetSecondary} 7%, transparent) 35%, transparent 75%)`,
+            background: `radial-gradient(ellipse at 50% calc(50% - 0px), color-mix(in srgb, ${targetPrimary} 13%, transparent), color-mix(in srgb, ${targetSecondary} 7%, transparent) 35%, transparent 75%)`,
           }}
         />
       ) : null}
