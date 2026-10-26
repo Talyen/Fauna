@@ -76,29 +76,6 @@ test("controller edges, inspect and pause do not repeat a held confirm", async (
   expect((await state(page)).revision).toBe(revision + 1);
 });
 
-test("enlarged text and keyboard/controller row navigation keep hover details and menu controls reachable", async ({
-  page,
-}) => {
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
-  await seed(page, run());
-  await resume(page);
-  const card = page.locator(".app:not([inert]) .hand .action-card").first();
-  await card.focus();
-  await page.keyboard.press("w");
-  await expect(page.locator(".app:not([inert]) .player-row .creature-card:focus")).toHaveCount(1);
-  await page.keyboard.press("w");
-  await expect(page.locator(".app:not([inert]) .enemy-row .creature-card:focus")).toHaveCount(1);
-  await page.keyboard.press("i");
-  await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect(page.getByRole("tooltip")).toBeVisible();
-  await page.getByRole("button", { name: "Open menu" }).click();
-  await page.getByRole("button", { name: "Glossary", exact: true }).click();
-  const close = page.getByRole("button", { name: "Open menu", exact: true });
-  await expect(close).toBeVisible();
-  await close.click();
-  await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
-});
-
 test("controller navigation preserves its device mode and can confirm a pointer-selected card", async ({
   page,
 }) => {

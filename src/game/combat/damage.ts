@@ -3,7 +3,7 @@ import { boonRule } from "../rules/boons";
 import { takeAttackReflection, publishAttackReflection } from "./attack-reflection";
 import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield, healingAllies } from "../battlefield";
+import { isEnemy, battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
 import { hasTalent, creaturePassive, passiveAmount } from "../progression";
@@ -118,18 +118,17 @@ export function* bounce(
   if (!state.battle) return;
   const { effect } = action;
   const allied = !isEnemy(source);
-  let pool: Combatant[] | undefined;
   let visited: Set<string> | undefined;
   for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
     if (entry.kind !== "bounce" || entry.effect !== effect) continue;
-    // Ordinary hits and heals need no bounce snapshot or visited-target tracking.
-    pool ??=
-      effect === "heal"
-        ? healingAllies(state, allied ? "player" : "enemy")
-        : battlefield(state, allied ? "enemy" : "player");
     visited ??= new Set([first.id]);
     const visitedTargets = visited;
     for (let i = 0; i < entry.amount; i++) {
+      // A previous bounce can remove a summoner and all of its Echoes.
+      const pool =
+        effect === "heal"
+          ? healingAllies(state, allied ? "player" : "enemy")
+          : battlefield(state, allied ? "enemy" : "player");
       const eligible = pool.filter(
         (unit) =>
           unit.health > 0 &&
@@ -172,6 +171,7 @@ export function* hit(
   events: GameEvent[],
   options: DamagePacket = { origin: "ability" },
 ): Resolution<number | undefined> {
+  if (isDepartedMinion(state, target)) return undefined;
   if (
     value > 0 &&
     source.health > 0 &&
@@ -275,7 +275,12 @@ export function* resolveHit(
   options: DamagePacket = { origin: "ability" },
 ): Resolution<HitResult> {
   const policy = packetPolicy(options);
-  if ((source.health <= 0 && !policy.deadSource) || target.health <= 0 || value <= 0)
+  if (
+    (source.health <= 0 && !policy.deadSource) ||
+    target.health <= 0 ||
+    value <= 0 ||
+    isDepartedMinion(state, target)
+  )
     return { outcome: "ignored" };
   const { attack, direct } = policy;
   const context = { state, source, target, type, events };
@@ -389,7 +394,13 @@ export function* resolveHit(
   const ordinaryDamage = damage;
   if (critical) damage *= 2;
   const blockRatio = blockEfficiency(state, target, type);
-  const payment = blockPayment(damage, target.block, blockRatio);
+  const bypassBlock =
+    alliedSource &&
+    !alliedTarget &&
+    "thorns" in options &&
+    options.thorns &&
+    state.boons.includes("comb-uncapping-fork");
+  const payment = blockPayment(damage, bypassBlock ? 0 : target.block, blockRatio);
   const blocked = payment.absorbed,
     blockSpent = payment.spent;
   target.block -= blockSpent;
@@ -419,6 +430,8 @@ export function* resolveHit(
     : 0;
   if (direct && alliedSource && !alliedTarget && critical && state.boons.includes("crater-punch"))
     damage += Math.round(blocked / boonRule("crater-punch").divisor);
+  if (alliedTarget && type === "burn" && state.boons.includes("hearth-coal"))
+    damage = Math.min(damage, Math.max(0, target.health - boonRule("hearth-coal").minimum));
   const lost = loseHealth(state, target, damage, events);
   const dealt = Math.min(effectDamage, blocked + lost);
   if (effectDamage > 0) {
@@ -444,6 +457,20 @@ export function* resolveHit(
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
   yield* damageRewards(context, facts, policy);
+  if (
+    effectDamage > 0 &&
+    alliedSource &&
+    !alliedTarget &&
+    "thorns" in options &&
+    options.thorns &&
+    source.health > 0 &&
+    target.health > 0 &&
+    state.boons.includes("resonance-kalimba")
+  ) {
+    const result = yield* reaction("applyHarmfulStatus", state, source, target, effectDamage, "stun", events);
+    if (result.appliedControl) yield* reaction("controlRewards", state, source, target, "stun", events);
+    depletions.push(...result.depletions);
+  }
   if (nextPhysical > 0 && source.health > 0)
     yield* reaction("hit", state, source, target, nextPhysical, "physical", events, { origin: "proc" });
   if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {

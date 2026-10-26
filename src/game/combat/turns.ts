@@ -1,7 +1,7 @@
 import { MAX_BATTLE_TURN } from "../state-limits";
 import { boonRule } from "../rules/boons";
 import { battleMana, renewalManaBonus } from "./battle-modifiers";
-import { unfinishedJourneyLimit } from "../card-actors";
+import { cardActor, unfinishedJourneyLimit } from "../card-actors";
 import { battlefield, isEnemy, healingAllies } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, courtRemembers, removeDepartedMinions } from "./legendary";
@@ -205,6 +205,10 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       // Food may be drawn next and stays playable even when every creature must skip
       draft.cards.some((card) => card.ownerId === null) ||
       living(draft).some((c) => !controlled(c, draft)) ||
+      draft.cards.some((card) => {
+        const actor = cardActor(draft, card);
+        return actor && actor.health > 0 && !controlled(actor, draft, definition(card.definitionId));
+      }) ||
       draft.reserves.some((c) => c.health > 0 && !controlled(c, draft))
     )
       break;

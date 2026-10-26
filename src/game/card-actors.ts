@@ -1,5 +1,6 @@
 import { controlled } from "./combat/state";
 import { passiveAmount } from "./progression";
+import { definition } from "./content";
 import type { Card, Creature, GameState } from "./types";
 
 export function unfinishedJourneyLimit(state: GameState | undefined, unit: Pick<Creature, "species">) {
@@ -7,7 +8,10 @@ export function unfinishedJourneyLimit(state: GameState | undefined, unit: Pick<
 }
 
 /** Availability never changes card ownership or its position in the ordinary piles. */
-export function cardActor(state: GameState, card: Pick<Card, "ownerId">): Creature | undefined {
+export function cardActor(
+  state: GameState,
+  card: Pick<Card, "ownerId"> & Partial<Pick<Card, "definitionId">>,
+): Creature | undefined {
   // Shared items need a living presenter; their resolver does not inherit creature ability modifiers.
   if (card.ownerId === null) return state.team.find((unit) => unit.health > 0);
   const owner = state.team.find((unit) => unit.id === card.ownerId);
@@ -16,7 +20,7 @@ export function cardActor(state: GameState, card: Pick<Card, "ownerId">): Creatu
   return (
     guides.find(
       (unit) =>
-        !controlled(unit, state) &&
+        !controlled(unit, state, card.definitionId ? definition(card.definitionId) : undefined) &&
         (unit.combat?.fallenCardsPlayedThisTurn ?? 0) < unfinishedJourneyLimit(state, unit),
     ) ?? guides[0]
   );

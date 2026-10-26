@@ -1,9 +1,13 @@
 import { setBattleCards } from "../../support/cards";
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
+import { EventEmitter } from "node:events";
+import { readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
+import vm from "node:vm";
 import { produce } from "immer";
 import { createDiagnostics } from "../../../src/application/diagnostics";
 import { definition } from "../../../src/game/content";
-import { dispatch } from "../../../src/game/engine";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { enemyCardValue } from "../../../src/game/combat/enemy-policy";
 import { freshCombat, hit } from "../../../src/game/combat/index";
@@ -13,9 +17,9 @@ import { observeDecisions } from "../../../src/game/random";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { ownedCards, swapFromCard } from "../../../src/game/team";
 import { createSession } from "../../../src/application/session";
-import { accept, prepareDestination, requireBattle, run, teamRun } from "../../support/game";
+import { accept, authoredPack, prepareDestination, requireBattle, run, teamRun } from "../../support/game";
 
-it("Lost Procession heals the surviving Echo while replacing a fallen Echo", () => {
+it("Lost Procession replaces a fallen Echo without healing the survivor while a space is open", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["memento"])));
   const actor = state.team[0]!;
   summonEcho(state, actor, "player", 6, []);
@@ -24,7 +28,7 @@ it("Lost Procession heals the surviving Echo while replacing a fallen Echo", () 
   survivor!.health = 1;
   fallen!.health = 0;
   summonEcho(state, actor, "player", 6, []);
-  expect(state.battle.minions!.map((unit) => unit.health)).toEqual([6, 6]);
+  expect(state.battle.minions!.map((unit) => unit.health)).toEqual([1, 6]);
 });
 
 it("Bleed retains the paid tick's obligations when reactions partially remove the wound", () => {
@@ -218,3 +222,149 @@ it("keeps escape-heavy diagnostic history readable after restarting", () => {
   expect(diagnostics.snapshot().length).toBeGreaterThan(0);
   expect(createDiagnostics(port).snapshot()).toEqual(diagnostics.snapshot());
 });
+
+it.each([12, 20, 25])(
+  "reflected Valiant Challenge compares its new recipient against the reflector (%i Health)",
+  (health) => {
+    const before = produce(requireBattle(teamRun(42, ["tournelle"])), (draft) => {
+      const card = draft.cards.find((entry) => entry.definitionId === "tournelle-attack")!;
+      draft.battle.hand = [card.id];
+      draft.battle.buffer = [];
+      draft.battle.discard = [];
+      draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+      draft.team[0]!.health = 20;
+      draft.team[0]!.block = 0;
+      draft.team[0]!.combat = freshCombat();
+      const target = draft.battle.enemies[0]!;
+      target.health = health;
+      target.block = 0;
+      target.combat = { ...freshCombat(), attackReflection: true };
+      draft.rng = 42;
+    });
+    expect(decodeSave(encodeSave(before))).toEqual(before);
+    const cardId = before.battle.hand[0]!;
+    const targetId = before.battle.enemies[0]!.id;
+    const result = dispatch(before, { type: "play", cardId, targetId, autoEndTurn: false });
+    expect(result.accepted).toBe(true);
+    expect(result.state.team[0]!.health).toBe(20 - (20 > health ? 8 : 4));
+    expect(previewCard(before, cardId, targetId)).toEqual(result);
+    expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+  },
+);
+
+it("retains Water's Moonboat protection when a reflected attack meets Negate", () => {
+  const destination = produce(teamRun(42, ["oathara"]), (draft) => {
+    prepareDestination(draft);
+    draft.expedition.pack = ["almanelle", "pollenmoth", "mossguard"];
+  });
+  const state = structuredClone(requireBattle(accept(destination, { type: "beginBattle" })));
+  state.boons = ["moonboat-toy"];
+  const ally = state.team[0]!;
+  const enemy = state.battle.enemies[0]!;
+  ally.combat = { ...freshCombat(), attackReflection: true };
+  enemy.combat = { ...freshCombat(), negate: true, thorns: 6, waterThorns: 4, fireThorns: 2 };
+  const health = ally.health;
+  const events: import("../../../src/game/types").GameEvent[] = [];
+  observeDecisions(state, () => 0.99);
+  executeAbility(
+    state,
+    { side: "enemy", actor: enemy, def: definition("almanelle-spring-current"), value: 4, targetId: ally.id },
+    events,
+    { swap: swapFromCard },
+  );
+  expect(ally.health).toBe(health);
+  expect(ally.combat.burn).toBe(0);
+  expect(enemy.combat).toMatchObject({ negate: false, thorns: 5, waterThorns: 3, fireThorns: 1 });
+  expect(events.filter((event) => event.kind === "damage")).toEqual([]);
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+});
+
+it.each(["area", "bounce"] as const)(
+  "%s delivery stops targeting Echoes when their summoner falls",
+  (delivery) => {
+    const destination = produce(teamRun(42, [delivery === "area" ? "captoad" : "pollenmoth"]), (draft) => {
+      prepareDestination(draft);
+      draft.encounter = 3;
+      draft.journey!.victories = 3;
+      draft.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+      if (delivery === "bounce") draft.discovery.recruited.pollenmoth = 3;
+    });
+    const state = structuredClone(requireBattle(accept(destination, { type: "beginBattle" })));
+    const actor = state.team[0]!;
+    const boss = state.battle.enemies[0]!;
+    boss.health = 1;
+    boss.block = 0;
+    boss.combat = freshCombat();
+    summonEcho(state, boss, "enemy", 6, []);
+    summonEcho(state, boss, "enemy", 6, []);
+    const [first, later] = state.battle.minions!;
+    later!.combat.waterThorns = 10;
+    later!.combat.negate = true;
+    later!.combat.attackReflection = true;
+    const health = actor.health;
+    const events: import("../../../src/game/types").GameEvent[] = [];
+    expect(decodeSave(encodeSave(state))).toEqual(state);
+    observeDecisions(state, (decision) => (decision?.kind === "index" ? 0 : 0.99));
+    if (delivery === "bounce") hit(state, actor, first!, 2, "light", events);
+    else
+      executeAbility(state, { side: "player", actor, def: definition("captoad-attack"), value: 2 }, events, {
+        swap: swapFromCard,
+      });
+    expect(boss.health).toBe(0);
+    expect(later!.health).toBe(6);
+    expect(later!.combat).toMatchObject({ negate: true, attackReflection: true, waterThorns: 10 });
+    expect(actor.health).toBe(health);
+    expect(events.some((event) => event.kind === "damage" && event.targetId === later!.id)).toBe(false);
+  },
+);
+
+it.each([false, true])(
+  "drains admitted saves when renderer close notification fails (send failure: %s)",
+  async (sendFails) => {
+    let release!: () => void;
+    const pending = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const storage = { drain: vi.fn(() => pending) };
+    const app = Object.assign(new EventEmitter(), {
+      setName() {},
+      requestSingleInstanceLock: () => true,
+      whenReady: () => new Promise(() => {}),
+      quit: vi.fn(),
+    });
+    const send = vi.fn(() => {
+      if (sendFails) throw new Error("Renderer disappeared");
+    });
+    const nativeRequire = createRequire(import.meta.url);
+    const context = vm.createContext({
+      require: (name: string) =>
+        name === "electron"
+          ? { app, protocol: { registerSchemesAsPrivileged() {} } }
+          : name.startsWith("./")
+            ? {}
+            : nativeRequire(name),
+      process: { env: { FAUNA_DISABLE_STEAM: "1" } },
+      __dirname: "/fauna/desktop",
+      resources: { storage, window: { isDestroyed: () => false, webContents: { send } } },
+    });
+    try {
+      vm.runInContext(await readFile(new URL("../../../desktop/main.cjs", import.meta.url), "utf8"), context);
+      expect(() =>
+        vm.runInContext(
+          "storage = resources.storage; window = resources.window; requestClose(); requestClose();",
+          context,
+        ),
+      ).not.toThrow();
+      if (!sendFails) vm.runInContext("finishClose();", context);
+      await new Promise((resolve) => setImmediate(resolve));
+      expect(send).toHaveBeenCalledOnce();
+      expect(storage.drain).toHaveBeenCalledOnce();
+      expect(app.quit).not.toHaveBeenCalled();
+      release();
+      await new Promise((resolve) => setImmediate(resolve));
+      expect(app.quit).toHaveBeenCalledOnce();
+    } finally {
+      release();
+    }
+  },
+);

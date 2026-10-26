@@ -2,7 +2,7 @@ import { afterPlayerCard, consumeCardGrants, lastWarmth, returnDodgedCard } from
 import { observeDecisions } from "./random";
 import { useFood } from "./combat/food";
 import { cardActor } from "./card-actors";
-import { inspectCardPlay, playTargetError } from "./play-queries";
+import { availablePlays, inspectCardPlay, playTargetError } from "./play-queries";
 import { commandPhases } from "./command-phases";
 import { MAX_BATTLE_TURN, MAX_REVISION } from "./state-limits";
 import { executeAbility } from "./combat/abilities";
@@ -421,7 +421,8 @@ function resolve(
       draft.phase === "battle" &&
       draft.battle.mana === 0 &&
       draft.battle.turn < MAX_BATTLE_TURN &&
-      !pendingReplacement(draft)
+      !pendingReplacement(draft) &&
+      !availablePlays(draft).some((play) => play.commands.length > 0)
     )
       finishTurn(draft, events);
   });

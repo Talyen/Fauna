@@ -1,6 +1,16 @@
 import { boonRule } from "../rules/boons";
 import { freeze } from "immer";
 export const BOONS = [
+  { id: "comb-uncapping-fork", name: "Comb Uncapping Fork", text: boonRule("comb-uncapping-fork").text },
+  { id: "fern-fencing-foil", name: "Fern Fencing Foil", text: boonRule("fern-fencing-foil").text },
+  { id: "resonance-kalimba", name: "Resonance Kalimba", text: boonRule("resonance-kalimba").text },
+  { id: "miracle-megaphone", name: "Miracle Megaphone", text: boonRule("miracle-megaphone").text },
+  { id: "blossom-cake-stand", name: "Blossom Cake Stand", text: boonRule("blossom-cake-stand").text },
+  { id: "accordioned-bridge", name: "Accordioned Bridge", text: boonRule("accordioned-bridge").text },
+  { id: "last-candle", name: "Last Candle", text: boonRule("last-candle").text },
+  { id: "hearth-coal", name: "Hearth Coal", text: boonRule("hearth-coal").text },
+  { id: "crescent-sextant", name: "Crescent Sextant", text: boonRule("crescent-sextant").text },
+  { id: "reef-casket", name: "Reef Casket", text: boonRule("reef-casket").text },
   { id: "tattered-pages", name: "Tattered Pages", text: boonRule("tattered-pages").text },
   { id: "bone-charm", name: "Bone Charm", text: boonRule("bone-charm").text },
   { id: "ironwood-buckler", name: "Ironwood Buckler", text: boonRule("ironwood-buckler").text },

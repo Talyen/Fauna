@@ -3118,6 +3118,116 @@
       "aspect": [3, 4],
       "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1kPW3XICZZ4YQQzNZwPFCm6dod67Kn1HR/view; original PNG preserved unchanged",
       "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.comb-uncapping-fork",
+      "origin": "repository",
+      "source": "public/art/boons/comb-uncapping-fork.png",
+      "output": "art/boons/comb-uncapping-fork.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1GAa1HmT5aJIH6hm2fuPVRs8RCOe7PsvK/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.fern-fencing-foil",
+      "origin": "repository",
+      "source": "public/art/boons/fern-fencing-foil.png",
+      "output": "art/boons/fern-fencing-foil.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1oa7kmNatHj8xjjd1IOsPIcUP0WzUJJpz/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.resonance-kalimba",
+      "origin": "repository",
+      "source": "public/art/boons/resonance-kalimba.png",
+      "output": "art/boons/resonance-kalimba.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1IhMmZF19yos0xy0Nl077idAoldoiI7sn/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.miracle-megaphone",
+      "origin": "repository",
+      "source": "public/art/boons/miracle-megaphone.png",
+      "output": "art/boons/miracle-megaphone.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1bYGRRYZa6bnIdNalsh3ESI5VPskhfPvC/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.blossom-cake-stand",
+      "origin": "repository",
+      "source": "public/art/boons/blossom-cake-stand.png",
+      "output": "art/boons/blossom-cake-stand.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1JAMB_bRuh1QjInW1J2sIlqQxceN1zARA/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.accordioned-bridge",
+      "origin": "repository",
+      "source": "public/art/boons/accordioned-bridge.png",
+      "output": "art/boons/accordioned-bridge.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1EJ8EWQdBw1OJLgeK2DO1b6skBuLb32yX/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.last-candle",
+      "origin": "repository",
+      "source": "public/art/boons/last-candle.png",
+      "output": "art/boons/last-candle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1fw23zJjh1Y6fSOOjKjpZ651dCt-LiFQ5/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.hearth-coal",
+      "origin": "repository",
+      "source": "public/art/boons/hearth-coal.png",
+      "output": "art/boons/hearth-coal.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1HcIWtFOlUZduAYFqs6KglaNyTd3TNqNj/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.crescent-sextant",
+      "origin": "repository",
+      "source": "public/art/boons/crescent-sextant.png",
+      "output": "art/boons/crescent-sextant.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1SY3Q5UJWmdHIuzmqSPKMUEUfYTH2ZQSc/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.reef-casket",
+      "origin": "repository",
+      "source": "public/art/boons/reef-casket.png",
+      "output": "art/boons/reef-casket.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1rtIuKb2Jb1bBvW4tzFhgEfsS3_uekERv/view?usp=drivesdk; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
     }
   ]
 }

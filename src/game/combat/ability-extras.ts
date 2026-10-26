@@ -112,7 +112,17 @@ export function applyExtras(
           ? battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0)
           : [effect.target === "recipient" && target ? target : actor]) {
           if (actor.health <= 0) break;
-          removeEffects(recipient, "cleanse", effect.amount, events, state);
+          removeEffects(
+            recipient,
+            "cleanse",
+            effect.amount,
+            events,
+            state,
+            undefined,
+            actor,
+            effect.target !== "allAllies" &&
+              !(effect.target === "recipient" && def.effect === "heal" && def.target === "allAllies"),
+          );
         }
         break;
       case "purge":

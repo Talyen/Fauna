@@ -126,7 +126,7 @@ Each turn normally restores four shared Mana and draws four cards, with explicit
 
 ## Combat assistance
 
-Auto-end turn is enabled by default and advances only when Mana reaches zero. Its Settings switch persists separately from progression; disabling it leaves End turn under player control. Victory and defeat settle immediately in either mode.
+Auto-end turn is enabled by default and advances at zero Mana once no legal free plays remain. Its Settings switch persists separately from progression; disabling it leaves End turn under player control. Victory and defeat settle immediately in either mode.
 
 Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation and shutdown; save retries remain independent of combat assistance.
 
@@ -156,7 +156,7 @@ Legendaries appear as enemies only in Boss encounters and remain ordinary recrui
 
 Each deployed Legendary supplies two copies of each of its three abilities. Formation changes preserve existing spent zone positions, remove surplus slots, and shuffle additional slots into Draw without granting cards to hand. Creature-owned generated cards disappear when their owner leaves the field. Shared [Food](CONTENT.md#shared-food-cards) has no creature owner and survives creator departure; adding a permanent kit at the 256-card battle limit may retire the newest temporary cards to make room.
 
-Minions belong only to the active battle, have Health and combat effects, and can be attacked or affected by group abilities. They have no roster slots, backup, cards, autonomous turns or Death's Door. They disappear when their summoner falls or leaves the field. Defeating an enemy Legendary wins even if its Minions remain.
+Minions belong only to the active battle, have Health and combat effects, and can be attacked or affected by group abilities. They have no roster slots, backup, cards, autonomous turns or Death's Door. They disappear when their summoner falls or leaves the field, including between recipients of an area attack or successive bounces; departed Minions cannot spend defenses or retaliate. Defeating an enemy Legendary wins even if its Minions remain.
 
 Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. Automatic enemy decisions are bounded to 256 plays per turn.
 

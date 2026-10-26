@@ -62,7 +62,8 @@ export function inspectCardPlay(
     return { allowed: false, reason: "That card is not in your hand." };
   const actor = cardActor(state, card);
   if (!actor || actor.health <= 0) return { allowed: false, reason: "That creature is knocked out." };
-  if (card.ownerId !== null && controlled(actor, state))
+  const def = definition(card.definitionId);
+  if (card.ownerId !== null && controlled(actor, state, def))
     return {
       allowed: false,
       reason: `${species(actor.species).name} cannot act ${actor.combat?.controlled ? `while ${actor.combat.controlled === "freeze" ? "Frozen" : "Stunned"}` : "this turn"}.`,
@@ -73,7 +74,6 @@ export function inspectCardPlay(
     (actor.combat?.fallenCardsPlayedThisTurn ?? 0) >= unfinishedJourneyLimit(state, actor)
   )
     return { allowed: false, reason: "Unfinished Journey’s limit is spent this turn." };
-  const def = definition(card.definitionId);
   if (def.effect === "recover" && def.allyOnly && !discardDrawCards(state, actor.id).length)
     return { allowed: false, reason: "There are no eligible ally cards in Discard." };
   if (def.effect === "resurrect" && !chosenRecipients(state, def).length)
