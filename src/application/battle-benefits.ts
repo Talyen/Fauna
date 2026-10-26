@@ -416,11 +416,15 @@ export function battleBenefits(
             unit.id,
           ),
         );
-    case "sparkDecoy":
     case "dreamDouble": {
-      const status = def.effect === "sparkDecoy" ? "fireThorns" : "thorns";
-      const thorns = Math.min(value, STACK_LIMIT - (actor.combat?.[status] ?? 0));
+      const thorns = Math.min(value, STACK_LIMIT - (actor.combat?.thorns ?? 0));
       return support(!actor.combat?.negate ? "resource" : thorns > 0 ? "protection" : "none", thorns);
+    }
+    case "sparkDecoy": {
+      const useful = facts
+        .livingEnemies()
+        .filter((enemy) => enemy.health > 0 && enemy.combat.burn < STACK_LIMIT).length;
+      return support(!actor.combat?.negate || useful > 0 ? "utility" : "none", useful * value);
     }
     case "nightmareHarvest": {
       const useful = battlefield(state, "player").filter(
@@ -461,8 +465,10 @@ export function battleBenefits(
           }, 0) ?? 0;
         return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
           const useful = Math.min(value, STACK_LIMIT - ally.block);
+          const cleanse =
+            def.effects?.some((effect) => effect.kind === "cleanse" && hasHarmfulEffects(actor)) ?? false;
           return support(
-            healing > 0 ? "healing" : useful + protection > 0 ? "protection" : "none",
+            healing > 0 ? "healing" : useful + protection > 0 || cleanse ? "protection" : "none",
             healing > 0 ? healing : useful + protection,
             def.target === "self" ? undefined : ally.id,
           );
@@ -480,10 +486,6 @@ export function battleBenefits(
     case "nullify": {
       const useful = allies.filter((unit) => !unit.combat?.nullify).length;
       return support(useful > 0 ? "utility" : "none", useful);
-    }
-    case "waterThorns": {
-      const useful = Math.min(value, STACK_LIMIT - (actor.combat?.waterThorns ?? 0));
-      return support(useful > 0 ? "protection" : "none", useful);
     }
     case "swapDodge":
       return support(

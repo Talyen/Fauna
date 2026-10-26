@@ -96,7 +96,7 @@ export function* returnCleansedEffect(
 
 export function* grantStatus(
   unit: Combatant,
-  status: "armor" | "thorns" | "waterThorns" | "fireThorns" | "dodge",
+  status: "armor" | "thorns" | "dodge",
   amount: number,
   events: GameEvent[],
   state?: GameState,
@@ -104,13 +104,7 @@ export function* grantStatus(
 ): Resolution<void> {
   if (unit.health <= 0) return;
   const stats = ensureCombat(unit);
-  if (
-    (status === "thorns" || status === "waterThorns" || status === "fireThorns") &&
-    isEnemy(unit) &&
-    stats.blind &&
-    state &&
-    state.boons.includes("apiary-smoker")
-  )
+  if (status === "thorns" && isEnemy(unit) && stats.blind && state && state.boons.includes("apiary-smoker"))
     return;
   const before = stats[status];
   stats[status] = Math.min(status === "dodge" ? 70 : STACK_LIMIT, before + amount);
@@ -122,7 +116,7 @@ export function* grantStatus(
       amount: gain,
       status,
       outcome: "gain",
-      text: `${unitName(unit)} gains ${gain} ${status === "waterThorns" ? "Water Thorns" : status === "fireThorns" ? "Fire Thorns" : status}.`,
+      text: `${unitName(unit)} gains ${gain} ${status}.`,
     });
   if (
     gain > 0 &&
@@ -137,7 +131,7 @@ export function* grantStatus(
         if (ally.id !== unit.id && ally.health > 0 && ensureCombat(ally).armor > 0)
           yield* reaction("grantBlock", state, ally, boonRule("wishing-building-block").block, events);
   }
-  if ((status === "thorns" || status === "waterThorns" || status === "fireThorns") && state && sharing)
+  if (status === "thorns" && state && sharing)
     yield* reaction("shareProtection", state, unit, status, gain, events);
 }
 export function* triggerArmorBreak(
@@ -154,6 +148,10 @@ export function* triggerArmorBreak(
     yield* reaction("grantBlock", state, unit, talentRule("armor.reactive-guard").amount, events);
   const row = battlefield(state, allied ? "player" : "enemy");
   if (!row.some((deployed) => deployed.id === unit.id)) return;
+  if (allied && state.boons.includes("eclipse-rivet"))
+    for (const other of row)
+      if (other.id !== unit.id && other.health > 0)
+        yield* reaction("grantArmor", state, other, boonRule("eclipse-rivet").armor, events);
   const amount = passiveAmount(allied ? state : undefined, unit.species, "armorBreak");
   if (!amount) return;
   const targets = battlefield(state, allied ? "enemy" : "player");
@@ -360,13 +358,7 @@ export function* removeEffects(
         const removal = removeArmor(unit, stats.armor);
         depletion = removal.depletion;
         purgedArmor = removal.removed;
-      } else if (
-        status === "thorns" ||
-        status === "waterThorns" ||
-        status === "fireThorns" ||
-        status === "dodge"
-      )
-        stats[status] = 0;
+      } else if (status === "thorns" || status === "dodge") stats[status] = 0;
       else clearHarmfulStatus(stats, status);
       if (kind === "cleanse") {
         cleansed++;
@@ -385,7 +377,7 @@ export function* removeEffects(
       status: kind,
       outcome: "remove",
       affectedStatus,
-      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus === "waterThorns" ? "Water Thorns" : affectedStatus === "fireThorns" ? "Fire Thorns" : affectedStatus}.`,
+      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus}.`,
     });
   if (removedStatuses.length === 0)
     events.push({
@@ -696,6 +688,13 @@ export function* applyHarmfulStatus(
       outcome: retained ? "immune" : "remove",
       text: `${unitName(target)} nullifies ${type}`,
     });
+    if (!isEnemy(target) && state.boons.includes("peace-knot")) {
+      const allies = battlefield(state, "player");
+      if (allies.some((ally) => ally.id === target.id))
+        for (const ally of allies)
+          if (ally.id !== target.id && ally.health > 0)
+            yield* reaction("grantBlock", state, ally, boonRule("peace-knot").block, events);
+    }
     return { depletions: [], appliedControl: false, suppressed: true };
   }
   if (

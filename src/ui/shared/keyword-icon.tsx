@@ -24,8 +24,6 @@ const icons = {
   poison: FlaskConical,
   nature: Leaf,
   water: Droplets,
-  waterThorns: Droplets,
-  fireThorns: Flame,
   light: Sun,
   health: Heart,
   mana: Gem,

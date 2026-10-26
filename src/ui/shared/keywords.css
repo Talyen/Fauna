@@ -21,16 +21,6 @@
 [data-keyword="water"] {
   color: var(--keyword-water);
 }
-[data-keyword="fireThorns"],
-[data-combat-tone="fireThorns"] {
-  color: var(--keyword-fireThorns);
-}
-[data-keyword="waterThorns"],
-[data-combat-tone="waterThorns"] {
-  color: var(--keyword-waterThorns);
-}
-[data-damage-type="nature"],
-[data-combat-tone="nature"],
 [data-keyword="nature"] {
   color: var(--keyword-nature);
 }

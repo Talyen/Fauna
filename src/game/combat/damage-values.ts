@@ -84,6 +84,12 @@ export function modifiedDamage(
   }
   if (alliedTarget) {
     if (
+      stats.nullify &&
+      state.boons.includes("paper-lotus") &&
+      (type === "burn" || type === "poison" || type === "bleed")
+    )
+      damage /= boonRule("paper-lotus").divisor;
+    if (
       (type === "burn" && hasTalent(state, "burn.fire-resistance")) ||
       (type === "poison" && hasTalent(state, "poison.toxin-resistance")) ||
       (type === "bleed" && hasTalent(state, "bleed.wound-care")) ||

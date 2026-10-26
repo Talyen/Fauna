@@ -17,7 +17,6 @@ export type AbilityKind =
   | "reflectAttack"
   | "resurrect"
   | "teamProtection"
-  | "waterThorns"
   | "teamCleanse"
   | "dreamDouble"
   | "sparkDecoy"

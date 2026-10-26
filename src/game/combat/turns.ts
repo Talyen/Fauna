@@ -45,6 +45,8 @@ export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[
     allied && state.boons.includes("geode-anvil")
       ? Math.max(retained, Math.min(before, ensureCombat(unit).armor))
       : retained;
+  if (allied && ensureCombat(unit).armor > 0 && state.boons.includes("wax-foundation-mold"))
+    unit.block = Math.max(unit.block, Math.round((before * boonRule("wax-foundation-mold").percent) / 100));
   const lost = before - unit.block;
   if (lost <= 0 || unit.health <= 0) return;
   const percent = passiveAmount(allied ? state : undefined, unit.species, "fallenLeaves");

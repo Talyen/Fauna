@@ -6,9 +6,9 @@ Neradora is available through ordinary encounters, recruitment and later three-c
 
 **Tidal Regeneration** restores Neradora's own Health every other turn, scaling through 1, 2, 3, 4, 5 and 6 Health at zero through five stars. It triggers at the start of its owner's second, fourth and subsequent even-numbered battle turns, after periodic damage and before resolving control skips. It works while Stunned or Frozen, but only while alive and deployed. Backup misses its scheduled healing without banking it; swaps and current-format resume retain the battle's cadence. Each battle begins again on turn one. Its healing follows the shared [passive-healing rules](../../KEYWORDS.md#repeats-and-derived-effects); enemies receive no additional automatic regeneration.
 
-Undertow Knot uses shared [Water Thorns](../../KEYWORDS.md#thorns-and-water-thorns), retaining their Water identity through protection sharing. It grants Water XP, Bloom Shelter Health XP and Tide Cup Mana XP once per accepted play.
+Undertow Knot grants its user 4 Block and Cleanses one harmful effect, using ordinary Block sharing and Cleanse rules. Its Block scales with ability level; the Cleanse remains one effect. It grants Block and Health XP once per accepted play.
 
-Bloom Shelter heals every living deployed ally, including Neradora, without reviving knockouts or reaching backup. Tide Cup draws before restoring Mana, follows ordinary hand and Mana caps and refunds before automatic end turn. Enemies omit Tide Cup and rank Undertow Knot and Bloom Shelter through the shared [decision policy](../../EXPEDITION_DESIGN.md#enemy-decisions), using authored values and explicit room power. The current save format persists Water Thorns.
+Bloom Shelter heals every living deployed ally, including Neradora, without reviving knockouts or reaching backup. Tide Cup draws before restoring Mana, follows ordinary hand and Mana caps and refunds before automatic end turn. Enemies omit Tide Cup and rank Undertow Knot and Bloom Shelter through the shared [decision policy](../../EXPEDITION_DESIGN.md#enemy-decisions), using authored values and explicit room power. The current save format persists ordinary Block and combat effects.
 
 ## Artwork provenance and validation record
 

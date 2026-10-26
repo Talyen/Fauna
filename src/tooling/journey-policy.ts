@@ -28,8 +28,6 @@ function boonScorer(
   const swapping = effect("swap") || effect("swapChosen") || effect("swapDodge") || effect("swapLowest");
   const thorns =
     effect("dreamDouble") ||
-    effect("waterThorns") ||
-    effect("sparkDecoy") ||
     effect("teamProtection") ||
     state.boons.includes("ironwood-buckler") ||
     cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
@@ -58,10 +56,11 @@ function boonScorer(
       case "tide-anklet":
         return swapping ? 60 : 0;
       case "tidecrest-hairpin":
-        return effect("waterThorns") ? 60 : 0;
+        return thorns ? 60 : 0;
       case "stardust-whetstone":
         return has.has("physical") ? 60 : 0;
       case "ashfall-pendant":
+      case "lava-cameo":
       case "last-candle":
       case "molten-paperweight":
       case "cinder-fan":
@@ -73,9 +72,12 @@ function boonScorer(
       case "field-lunch-basket":
       case "blossom-cake-stand":
       case "nectar-dipper":
+      case "velvet-whisk":
         return effect("createFood") || kinds.includes("aerostat") ? 60 : 0;
       case "hoard-lockplate":
       case "geode-anvil":
+      case "origami-staircase":
+      case "wax-foundation-mold":
         return has.has("armor") && has.has("block") ? 60 : 0;
       case "rootvault-pole":
       case "hearth-coal":
@@ -105,7 +107,21 @@ function boonScorer(
         return has.has("dodge") ? 60 : 0;
       case "reef-casket":
       case "coronation-cloche":
+      case "paper-lotus":
         return effect("nullify") ? 50 : 0;
+      case "peace-knot":
+        return kinds.length > 1 && (effect("nullify") || state.boons.includes("calendula-soap")) ? 50 : 0;
+      case "eclipse-rivet":
+        return kinds.length > 1 && has.has("armor") ? 50 : 0;
+      case "poppy-seed-grinder":
+        return has.has("poison") ? 60 : 0;
+      case "reef-incense-tile":
+        return has.has("water") &&
+          (effect("teamBlind") || cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")))
+          ? 60
+          : 0;
+      case "coral-music-box":
+        return has.has("block") && has.has("water") ? 60 : 0;
       case "obsidian-pitcher":
         return has.has("leech") ? 60 : 0;
       case "grain-flail":

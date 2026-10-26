@@ -194,8 +194,6 @@ it.each([
   "block",
   "armor",
   "thorns",
-  "waterThorns",
-  "fireThorns",
   "dodge",
   "temporaryDodge",
   "reflect",
@@ -269,8 +267,6 @@ it("Purge retains its removal order and removes both kinds of Dodge together", (
     Object.assign(enemy.combat, {
       armor: 1,
       thorns: 1,
-      waterThorns: 1,
-      fireThorns: 1,
       dodge: 1,
       temporaryDodge: 1,
       reflect: true,
@@ -280,7 +276,7 @@ it("Purge retains its removal order and removes both kinds of Dodge together", (
       negate: true,
       attackReflection: true,
     });
-    for (let index = 0; index < 12; index++) {
+    for (let index = 0; index < 10; index++) {
       const events: Parameters<typeof removeEffects>[3] = [];
       expect(removeEffects(enemy, "purge", 1, events, game)).toBe(1);
       removed.push(
@@ -290,15 +286,13 @@ it("Purge retains its removal order and removes both kinds of Dodge together", (
             : [],
         ),
       );
-      if (index === 5) expect([enemy.combat.dodge, enemy.combat.temporaryDodge]).toEqual([0, 0]);
+      if (index === 3) expect([enemy.combat.dodge, enemy.combat.temporaryDodge]).toEqual([0, 0]);
     }
   });
   expect(removed).toEqual([
     "block",
     "armor",
     "thorns",
-    "waterThorns",
-    "fireThorns",
     "dodge",
     "reflect",
     "reflect",
@@ -414,19 +408,19 @@ it("Auto-play prioritizes Bloom Cradle's healing over an ordinary attack", () =>
   });
 });
 
-it("Auto-play preserves Mana when Undertow Knot cannot add Water Thorns", () => {
+it("Auto-play preserves Mana when Undertow Knot cannot add Block or Cleanse", () => {
   const state = produce(teamRun(42, ["neradora"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === "neradora-undertow-knot")!;
     setBattleCards(game, [card.id]);
-    game.team[0]!.combat!.waterThorns = 1_000_000;
+    game.team[0]!.block = 1_000_000;
   });
   expect(chooseBattleCommand(state, false)).toEqual({ type: "endTurn" });
   const useful = produce(state, (game) => {
-    game.team[0]!.combat!.waterThorns--;
+    game.team[0]!.block--;
   });
   const command = chooseBattleCommand(useful, false);
   expect(command).toMatchObject({ type: "play", cardId: useful.battle!.hand[0] });
-  expect(dispatch(useful, command).state.team[0]!.combat!.waterThorns).toBe(1_000_000);
+  expect(dispatch(useful, command).state.team[0]!.block).toBe(1_000_000);
 });
 
 it.each(["reedstag", "chimecricket"] as const)(

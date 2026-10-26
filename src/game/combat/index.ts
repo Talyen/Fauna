@@ -28,6 +28,8 @@ export const removeControlBuildup = (...args: CombatArguments<"removeControlBuil
 export const removeEffects = (...args: CombatArguments<"removeEffects">) =>
   resolveCombat("removeEffects", ...args);
 export const applyBlind = (...args: CombatArguments<"applyBlind">) => resolveCombat("applyBlind", ...args);
+export const applyHarmfulStatus = (...args: CombatArguments<"applyHarmfulStatus">) =>
+  resolveCombat("applyHarmfulStatus", ...args);
 export const negateAttack = (...args: CombatArguments<"negateAttack">) =>
   resolveCombat("negateAttack", ...args);
 export const hit = (...args: CombatArguments<"hit">) => resolveCombat("hit", ...args);

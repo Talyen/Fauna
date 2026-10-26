@@ -36,19 +36,15 @@ Block protects Health without suppressing hit effects, status buildup, Leech or 
 
 Hoard Lockplate is the explicit allied exception: applicable Armor reduces damage before Block is spent, without applying Armor twice, and wears when it reduces that damage. The default order remains Block, Armor, then Health loss.
 
-### Thorns and Water Thorns
+### Thorns
 
-Thorns retaliate for their current stack count as Nature damage when an opposing attack hits, including attacks fully absorbed by Block or Armor, then lose one stack; retaliation cannot trigger another retaliation. Water Thorns follow the same trigger and decay but deal Water damage from a separate stack pool; both can retaliate from one qualifying attack while the defender survives. Neither triggers from Dodge, periodic/derived damage or retaliation. Negate retains its explicit Thorns retaliation rule.
+Thorns retaliate for their current stack count as Nature damage when an opposing attack hits, including attacks fully absorbed by Block or Armor, then lose one stack; retaliation cannot trigger another retaliation. Thorns also retaliate when an attack is Negated. Dodge, periodic/derived damage and retaliation do not trigger Thorns. Stacks persist through turns, swaps and resume, use ordinary stack caps and protection sharing, and form one Purge category. Tidecrest Hairpin preserves the last allied stack during retaliation
 
-Water Thorns persist through turns, swaps and resume, use ordinary stack caps and protection sharing, and remain a separate Purge category after Nature Thorns. Tidecrest Hairpin preserves the last allied stack during retaliation.
-
-Fire Thorns retaliate with Burn damage and equal Burn buildup using their current stacks, then lose one stack. They share the ordinary Thorns trigger, including Negate and hits absorbed by Block or Armor, and cannot trigger retaliation chains. They persist through turns, swaps and current-format resume, follow protection sharing and stack caps, and form a separate Purge category after Water Thorns. Fire Thorns grants Burn XP on the accepted card play, without creating another progression category.
+Rootvault Pole allows allied Dodge against Thorns; control and the ordinary chance cap remain. Dodge rewards resolve without starting another retaliation chain
 
 ### Blind
 
 Blind gives the next attack a 50% miss chance and expires on that attack, hit or miss; one seeded roll covers all its targets and damage packets. A miss uses the recipient's ordinary Dodge outcome, rewards and icon, even if control prevents normal Dodge. Support actions, periodic damage and retaliation do not consume Blind. Blind is non-stacking, Cleanseable and reflectable. [Moonveil Mask](content/boons.md#execution-contracts) lets enemy Blind persist when its own roll causes the miss.
-
-Rootvault Pole allows allied Dodge against Thorns, including Fire Thorns buildup prevention; control and the ordinary chance cap remain. Dodge rewards resolve without starting another retaliation chain.
 
 ### Temporary Dodge
 
@@ -60,7 +56,7 @@ Leech restores half damage dealt, including damage absorbed by Block, capped by 
 
 ### Cleanse and Purge
 
-Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, Water Thorns, Fire Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward, Negate and Attack Reflection, each as a separate beneficial category. Both remove up to the card's stated number of categories.
+Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward, Negate and Attack Reflection, each as a separate beneficial category. Both remove up to the card's stated number of categories.
 
 ### Reflection
 
@@ -76,7 +72,7 @@ Star Hoop extends allied unrestricted Reflect and innate status reflection to in
 
 ### Negate
 
-**Negate** cancels the next incoming ability attack against its recipient after interception and before Dodge, preserving Block and Armor and preventing that attack's harmful follow-ups on that recipient. Nature, Water and Fire Thorns still retaliate once with their normal decay. A Blind miss leaves protection intact; other recipients of an area attack and a subsequent repeat resolve independently. Periodic, proc and retaliation packets do not consume it. Protection does not stack, lasts until consumed or Purged and persists through swaps and resume. Dream Double grants it to its actor. Negate awards no separate keyword XP. [Echo Lens](content/boons.md#execution-contracts) can return that same Negated enemy attack through the existing attack-reflection rules
+**Negate** cancels the next incoming ability attack against its recipient after interception and before Dodge, preserving Block and Armor and preventing that attack's harmful follow-ups on that recipient. Thorns still retaliate once with their normal decay. A Blind miss leaves protection intact; other recipients of an area attack and a subsequent repeat resolve independently. Periodic, proc and retaliation packets do not consume it. Protection does not stack, lasts until consumed or Purged and persists through swaps and resume. Dream Double grants it to its actor. Negate awards no separate keyword XP. [Echo Lens](content/boons.md#execution-contracts) can return that same Negated enemy attack through the existing attack-reflection rules
 
 ### Attack Reflection
 
@@ -108,7 +104,7 @@ Each allied creature has Death's Door once per battle: fatal damage leaves one H
 
 ### Keyword XP
 
-Card XP comes from structured primary and supplemental effects and Leech metadata, once per distinct eligible keyword on an accepted play. Descriptions derive from those same effects. Progression has fifteen categories: Physical, Burn, Freeze, Stun, Poison, Nature, Water, Light, Bleed, Block, Health, Armor, Dodge, Leech and Mana. Thorns awards Nature, Water Thorns awards Water, Cleanse awards Health, and Purge awards Light. Combat damage and status identities retain their ordinary rules. Forge is removed entirely.
+Card XP comes from structured primary and supplemental effects and Leech metadata, once per distinct eligible keyword on an accepted play. Descriptions derive from those same effects. Progression has fifteen categories: Physical, Burn, Freeze, Stun, Poison, Nature, Water, Light, Bleed, Block, Health, Armor, Dodge, Leech and Mana. Thorns awards Nature, Cleanse awards Health, and Purge awards Light. Combat damage and status identities retain their ordinary rules. Forge is removed entirely.
 
 ### Talent rows
 

@@ -8,14 +8,16 @@ import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
 import { battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
-import { species } from "../content";
 import { scalePower } from "./ability-values";
+import { species } from "../content";
 import {
   ensureCombat,
   grantBlock,
   grantStatus,
   restoreHealth,
   applyBlind,
+  applyHarmfulStatus,
+  triggerArmorBreak,
   removeEffects,
   gainMana,
   hit,
@@ -32,8 +34,7 @@ import { actorPower, friendlyRow, opposingRow, alive, type PrimaryContext } from
 import type { Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
-  for (const status of ["thorns", "waterThorns", "fireThorns"] as const)
-    if (ensureCombat(unit)[status] > 0) removeEffects(unit, "purge", 1, events, state, status, source);
+  if (ensureCombat(unit).thorns > 0) removeEffects(unit, "purge", 1, events, state, "thorns", source);
 }
 
 export function executePrimary(context: PrimaryContext) {
@@ -176,7 +177,14 @@ export function executePrimary(context: PrimaryContext) {
     }
     case "dreamDouble":
     case "sparkDecoy":
-      grantStatus(actor, def.effect === "dreamDouble" ? "thorns" : "fireThorns", value, events, state);
+      if (def.effect === "dreamDouble") grantStatus(actor, "thorns", value, events, state);
+      else
+        for (const recipient of alive(opposingRow(state, action))) {
+          if (actor.health <= 0) break;
+          const result = applyHarmfulStatus(state, actor, recipient, value, "burn", events);
+          for (const depletion of result.depletions) triggerArmorBreak(state, depletion, events);
+        }
+      if (actor.health <= 0) return;
       ensureCombat(actor).negate = true;
       events.push({
         kind: "status",
@@ -211,9 +219,6 @@ export function executePrimary(context: PrimaryContext) {
         action.actor.deck.mana = Math.min(TURN_MANA, action.actor.deck.mana + removed * value);
       return;
     }
-    case "waterThorns":
-      grantStatus(actor, "waterThorns", value, events, state);
-      return;
     case "draw":
       if (action.side === "enemy" && action.actor.deck) drawBossCards(state, action.actor.deck, value);
       else if (!enemy) draw(state, value, events);

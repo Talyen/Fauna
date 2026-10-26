@@ -1,18 +1,7 @@
 import type { CombatState } from "../../../game/types";
 import { KEYWORD_DEFINITIONS } from "../../../game/keywords";
 
-const stats = [
-  "armor",
-  "thorns",
-  "waterThorns",
-  "fireThorns",
-  "dodge",
-  "burn",
-  "poison",
-  "bleed",
-  "stun",
-  "freeze",
-] as const;
+const stats = ["armor", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"] as const;
 export const statusOrder: readonly string[] = [
   ...stats,
   "controlled",

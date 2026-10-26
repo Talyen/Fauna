@@ -17,8 +17,6 @@ const evaluation = new Immer({ autoFreeze: false });
 const benefits = [
   "armor",
   "thorns",
-  "waterThorns",
-  "fireThorns",
   "dodge",
   "temporaryDodge",
   "nextPhysical",
