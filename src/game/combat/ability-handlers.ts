@@ -5,7 +5,7 @@ import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
 import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
-import { battlefield, healingAllies } from "../battlefield";
+import { battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { species } from "../content";
 import { scalePower } from "./ability-values";
@@ -87,6 +87,7 @@ export function executePrimary(context: PrimaryContext) {
       context.sharedNegate = sharedNegate;
       for (const intended of targets) {
         if (actor.health <= 0) break;
+        if (isDepartedMinion(state, intended)) continue;
         const recipient = blindMiss ? intended : interceptAttack(state, actor, intended, events);
         if (def.target !== "allEnemies") attackTarget = recipient;
         const negation =
@@ -97,7 +98,7 @@ export function executePrimary(context: PrimaryContext) {
         }
         if (!blindMiss && (negation === "reflected" || takeAttackReflection(actor, recipient, events))) {
           negated.add(recipient.id);
-          if (negateAttack(state, recipient, actor, events, false)) continue;
+          if (negateAttack(state, recipient, actor, events, false, damageType)) continue;
           if (def.purgeThorns) {
             purgeAttackThorns(state, actor, events, recipient);
           }
@@ -105,7 +106,7 @@ export function executePrimary(context: PrimaryContext) {
             state,
             recipient,
             actor,
-            value * (def.doubleAgainstHealthier && recipient.health > actor.health ? 2 : 1),
+            value * (def.doubleAgainstHealthier && actor.health > recipient.health ? 2 : 1),
             damageType,
             events,
             {
@@ -212,7 +213,16 @@ export function executePrimary(context: PrimaryContext) {
       let removed = 0;
       for (const recipient of alive(friendlyRow(state, action))) {
         if (action.actor.health <= 0) break;
-        removed += removeEffects(recipient, "cleanse", Number.MAX_SAFE_INTEGER, events, state);
+        removed += removeEffects(
+          recipient,
+          "cleanse",
+          Number.MAX_SAFE_INTEGER,
+          events,
+          state,
+          undefined,
+          undefined,
+          false,
+        );
       }
       if (action.actor.health <= 0) return;
       if (!enemy) gainMana(state, removed * value, events);
@@ -275,7 +285,8 @@ export function executePrimary(context: PrimaryContext) {
       }
       for (const unit of alive(friendlyRow(state, action))) {
         if (action.actor.health <= 0) break;
-        if (ensureCombat(unit).blind) removeEffects(unit, "cleanse", 1, events, state, "blind");
+        if (ensureCombat(unit).blind)
+          removeEffects(unit, "cleanse", 1, events, state, "blind", undefined, false);
       }
       return;
     case "swapLowest": {
@@ -300,7 +311,7 @@ export function executePrimary(context: PrimaryContext) {
     case "teamCleanse":
       for (const unit of alive(friendlyRow(state, action))) {
         if (action.actor.health <= 0) break;
-        removeEffects(unit, "cleanse", value, events, state);
+        removeEffects(unit, "cleanse", value, events, state, undefined, undefined, false);
       }
       return;
     case "nullify":
@@ -341,7 +352,7 @@ export function executePrimary(context: PrimaryContext) {
     case "teamThaw":
       for (const unit of alive(friendlyRow(state, action))) {
         if (action.actor.health <= 0) break;
-        removeControlBuildup(state, unit, "freeze", events);
+        removeControlBuildup(state, unit, "freeze", events, false);
       }
       if (def.effect === "springbound") grantTemporaryDodge(actor, value, events);
       return;

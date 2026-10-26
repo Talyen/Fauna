@@ -1,6 +1,6 @@
 import { boonRule } from "../rules/boons";
 import { talentChance } from "../chance";
-import { isEnemy, battlefield, combatantById } from "../battlefield";
+import { isEnemy, battlefield, combatantById, cleanseTargets } from "../battlefield";
 import { draw } from "../card-zones";
 import { roll } from "../random";
 import { hasTalent, passiveAmount } from "../progression";
@@ -33,37 +33,42 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (effect) yield* reaction("removeEffects", unit, "cleanse", 1, events, state, effect);
   }
   if (!isEnemy(unit) && unit.health > 0 && stats.poison > 0 && state.boons.includes("plague-doctors-mask")) {
-    const sourceId = stats.statusSources.poison;
-    const removed = reducePeriodicStacks(stats, "poison", boonRule("plague-doctors-mask").removed);
-    events.push({
-      kind: "status",
-      targetId: unit.id,
-      amount: -removed,
-      status: "cleanse",
-      affectedStatus: "poison",
-      outcome: "remove",
-      text: `${unitName(unit)} Cleanses ${removed} Poison.`,
-    });
-    if (stats.poison === 0) {
-      yield* reaction("cleanseRewards", state, unit, 1, events);
+    for (const recipient of cleanseTargets(state, unit)) {
+      if (unit.health <= 0) break;
+      const stats = ensureCombat(recipient);
+      if (recipient.health <= 0 || stats.poison <= 0) continue;
+      const sourceId = stats.statusSources.poison;
+      const removed = reducePeriodicStacks(stats, "poison", boonRule("plague-doctors-mask").removed);
+      events.push({
+        kind: "status",
+        targetId: recipient.id,
+        amount: -removed,
+        status: "cleanse",
+        affectedStatus: "poison",
+        outcome: "remove",
+        text: `${unitName(recipient)} Cleanses ${removed} Poison.`,
+      });
+      if (stats.poison === 0) {
+        yield* reaction("cleanseRewards", state, recipient, 1, events);
+      }
+      yield* reaction("cleanseThorns", state, recipient, removed, events);
+      yield* reaction("returnCleansedEffect", state, recipient, "poison", removed, sourceId, events);
+      const target = state.battle!.enemies.find((enemy) => enemy.health > 0);
+      if (target)
+        yield* reaction(
+          "hit",
+          state,
+          recipient,
+          target,
+          Math.round(removed / boonRule("plague-doctors-mask").divisor),
+          "poison",
+          events,
+          {
+            origin: "proc",
+          },
+        );
+      if (state.battle!.enemies.every((enemy) => enemy.health <= 0)) return;
     }
-    yield* reaction("cleanseThorns", state, unit, removed, events);
-    yield* reaction("returnCleansedEffect", state, unit, "poison", removed, sourceId, events);
-    const target = state.battle!.enemies.find((enemy) => enemy.health > 0);
-    if (target)
-      yield* reaction(
-        "hit",
-        state,
-        unit,
-        target,
-        Math.round(removed / boonRule("plague-doctors-mask").divisor),
-        "poison",
-        events,
-        {
-          origin: "proc",
-        },
-      );
-    if (state.battle!.enemies.every((enemy) => enemy.health <= 0)) return;
   }
   for (const status of ["burn", "poison", "bleed"] as const) {
     if (unit.health <= 0) break;
@@ -100,6 +105,8 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
         if (talentChance(state, "poison.virulent", events)) next = Math.min(STACK_LIMIT, amount + 1);
       }
     }
+    if (status === "burn" && isEnemy(unit) && state.boons.includes("last-candle"))
+      next = Math.max(boonRule("last-candle").minimum, next);
     setPeriodicStacks(stats, status, next);
     if (
       status === "burn" &&

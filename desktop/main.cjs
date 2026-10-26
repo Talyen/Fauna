@@ -49,10 +49,16 @@ let closing = false;
 let closeRequested = false;
 let rendererGone = false;
 function requestClose() {
-  if (closeRequested || quitting) return;
+  if (closeRequested || closing || quitting) return;
   closeRequested = true;
-  if (window && !window.isDestroyed() && !rendererGone) window.webContents.send("fauna:prepare-close");
-  else finishClose();
+  if (window && !window.isDestroyed() && !rendererGone) {
+    try {
+      window.webContents.send("fauna:prepare-close");
+    } catch {
+      // The renderer can disappear before its exit notification arrives.
+      finishClose();
+    }
+  } else finishClose();
 }
 function finishClose() {
   if (closing) return;

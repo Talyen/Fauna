@@ -43,10 +43,29 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
   if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
     yield* reaction("restoreHealth", target, talentRule("dodge.catch-breath").amount, events, false, state);
   if (alliedTarget) {
+    if (
+      target.health > 0 &&
+      source.health > 0 &&
+      isEnemy(source) &&
+      state.boons.includes("fern-fencing-foil")
+    )
+      yield* reaction(
+        "removeEffects",
+        source,
+        "purge",
+        boonRule("fern-fencing-foil").purge,
+        events,
+        state,
+        undefined,
+        target,
+      );
     if (state.boons.includes("briar-racquet") && stats.thorns > 0 && target.health > 0) {
       const damage = Math.round(stats.thorns / boonRule("briar-racquet").divisor);
       if (!(source.combat?.bleed && state.boons.includes("thornheart-ring"))) stats.thorns--;
-      yield* reaction("hit", state, target, source, damage, "nature", events, { origin: "retaliation" });
+      yield* reaction("hit", state, target, source, damage, "nature", events, {
+        origin: "retaliation",
+        thorns: true,
+      });
     }
     stats[talentRule("dodge.finding-rhythm").state] = 0;
     if (hasTalent(state, "dodge.thornstep"))

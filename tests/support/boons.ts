@@ -1,5 +1,15 @@
-/** Approved October 25 additions; direct behavior regressions live in boons.test.ts. */
+/** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "comb-uncapping-fork": "Thorns damage ignores enemy Block",
+  "fern-fencing-foil": "Dodging an attack Purges its attacker",
+  "resonance-kalimba": "Thorns damage adds equal Stun buildup",
+  "miracle-megaphone": "Cleanse affects all allies",
+  "blossom-cake-stand": "Food cards cost no Mana",
+  "accordioned-bridge": "Swap cards can be played through Stun and Freeze",
+  "last-candle": "Burn on enemies cannot decay below 1",
+  "hearth-coal": "Burn cannot reduce allies below 1 Health",
+  "crescent-sextant": "Enemy Stun and Freeze thresholds use current Health",
+  "reef-casket": "Nullify is not consumed while you have Block",
   "geode-anvil": "Block cannot decay below Armor",
   "journey-loom": "Returning an ally’s card to your hand draws another ally’s card",
   "devotion-clasp": "Negate also protects another ally from the same attack",
