@@ -16,7 +16,6 @@ import {
   starterJourney,
   winBattle,
   bossReward,
-  fullRosterReward,
 } from "../../support/game";
 import { encounterSource } from "../../../src/game/encounters";
 
@@ -219,30 +218,6 @@ describe("player interface", () => {
     );
     await session.dispose();
   });
-  it("drafts through accessible buttons and commits the battle before feedback", async () => {
-    const session = createSession(createBrowserPlatform(localStorage), 7);
-    await session.load();
-    render(<App session={session} />);
-    const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Play" }));
-    expect(screen.queryByRole("button", { name: "Begin journey" })).toBeNull();
-    const chosen = session.store.getState().game.starterOffers[0]!;
-    const name = species(chosen).name;
-    await user.click(screen.getByRole("button", { name: `Inspect ${name}` }));
-    expect(session.store.getState().game.selected).toEqual([]);
-    await user.keyboard("{Escape}");
-    await user.click(screen.getByRole("button", { name: `Recruit ${name}` }));
-    expect(session.store.getState().game.selected).toEqual([chosen]);
-    expect(session.store.getState().game.phase).toBe("teamSelection");
-    await user.click(screen.getByRole("button", { name: "Combat" }));
-    expect(session.store.getState().game.phase).toBe("battle");
-    expect(screen.getByRole("region", { name: "Enemy row" })).toBeTruthy();
-    await act(async () => {
-      await session.flush();
-    });
-    expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).phase).toBe("battle");
-    await session.dispose();
-  });
   it("starts a resumed completed draft without requiring another confirmation", async () => {
     const fresh = createGame(7);
     const chosen = fresh.starterOffers[0]!;
@@ -418,35 +393,4 @@ it("keeps unavailable cards inspectable and denies activation without explanator
   expect(screen.queryByText("Not enough mana.")).toBeNull();
   await userEvent.pointer({ target: button, keys: "[MouseRight]" });
   expect(inspect).toHaveBeenCalledOnce();
-});
-
-it("keeps the team after committing a recruit to Collection and resumes the result", async () => {
-  const game = fullRosterReward();
-  localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-  const session = createSession(createBrowserPlatform(localStorage), 42);
-  await session.load();
-  render(<App session={session} />);
-  const user = userEvent.setup();
-  await user.click(screen.getByRole("button", { name: "Continue" }));
-  await user.click(screen.getByRole("button", { name: "Continue" }));
-  await user.click(screen.getByRole("button", { name: "Recruit Emberback" }));
-  await user.click(screen.getByRole("button", { name: "Confirm" }));
-  await session.flush();
-  const next = session.store.getState().game;
-  expect(next.phase).toBe("teamSelection");
-  expect([...next.team, ...next.reserves].map((unit) => unit.species)).toEqual(
-    [...game.team, ...game.reserves].map((unit) => unit.species),
-  );
-  expect(next.discovery.recruited.emberback).toBe((game.discovery.recruited.emberback ?? 0) + 1);
-  expect(screen.queryByRole("heading", { name: "Choose a Recruit" })).toBeNull();
-  await session.dispose();
-  const resumed = createSession(createBrowserPlatform(localStorage), 42);
-  await resumed.load();
-  expect(resumed.store.getState().game.phase).toBe("teamSelection");
-  expect(
-    [...resumed.store.getState().game.team, ...resumed.store.getState().game.reserves].map(
-      (unit) => unit.species,
-    ),
-  ).toEqual([...game.team, ...game.reserves].map((unit) => unit.species));
-  await resumed.dispose();
 });

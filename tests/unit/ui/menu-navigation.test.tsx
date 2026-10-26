@@ -44,6 +44,11 @@ it.each(["home", "pause"] as const)(
             await user.click(screen.getByRole("button", { name: "Physical talents" }));
             expect(screen.getByRole("heading", { name: "Physical" })).toBeTruthy();
           }
+          if (page === "Talents" && back === "Back") {
+            await user.click(screen.getByRole("button", { name: "Physical talents" }));
+            await user.click(screen.getByRole("button", { name: "Back" }));
+            expect(screen.getByRole("heading", { name: "Talents" })).toBeTruthy();
+          }
           if (back === "Escape") await user.keyboard("{Escape}");
           else await user.click(screen.getByRole("button", { name: back }));
           await waitFor(() =>
@@ -65,24 +70,6 @@ it.each(["home", "pause"] as const)(
     }
   },
 );
-
-it("returns from a talent tree to its overview before returning to the menu", async () => {
-  const session = createSession(createBrowserPlatform(localStorage), 7);
-  await session.load();
-  const user = userEvent.setup();
-  render(<App session={session} />);
-  try {
-    await user.click(screen.getByRole("button", { name: "Talents" }));
-    await user.click(screen.getByRole("button", { name: "Physical talents" }));
-    await user.click(screen.getByRole("button", { name: "Back" }));
-    expect(screen.getByRole("heading", { name: "Talents" })).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "Back" }));
-    expect(screen.getByRole("navigation", { name: "Main menu" })).toBeTruthy();
-  } finally {
-    cleanup();
-    await session.dispose();
-  }
-});
 
 it("returns from starter selection without changing offers or committed choices", async () => {
   const session = createSession(createBrowserPlatform(localStorage), 7);

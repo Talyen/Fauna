@@ -92,6 +92,11 @@ describe("artwork-first inspection", () => {
       expect(session.store.getState().game.selected).toEqual([kind]);
       expect(screen.queryByRole("dialog")).toBeNull();
       expect(session.store.getState().game.phase).toBe("teamSelection");
+      await user.click(screen.getByRole("button", { name: "Combat" }));
+      expect(session.store.getState().game.phase).toBe("battle");
+      expect(screen.getByRole("region", { name: "Enemy row" })).toBeTruthy();
+      await session.flush();
+      expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).phase).toBe("battle");
     } finally {
       cleanup();
       await session.dispose();
