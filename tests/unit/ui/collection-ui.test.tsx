@@ -6,6 +6,7 @@ import { produce } from "immer";
 import { Collection } from "../../../src/ui/collection/collection";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { createGame } from "../../../src/game/engine";
+import { assetUrl } from "../../../src/ui/shared/assets";
 import { SPECIES } from "../../../src/game/content";
 
 afterEach(() => {
@@ -104,6 +105,26 @@ it("keeps encountered and eligible creatures out of the collected filter until r
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(1);
   expect(screen.getByRole("button", { name: "Inspect Mossguard" })).toBeTruthy();
   expect(screen.queryByRole("button", { name: "Inspect Prismram" })).toBeNull();
+  await user.click(screen.getByRole("tab", { name: "Uncollected" }));
+  const seen: string[] = [];
+  for (;;) {
+    expect(screen.queryByRole("button", { name: /^Inspect / })).toBeNull();
+    seen.push(
+      ...screen
+        .getAllByRole("img", { name: "Locked species" })
+        .map((card) => card.querySelector("img")!.getAttribute("src")!),
+    );
+    const next = screen.queryByRole("button", { name: "Next page" }) as HTMLButtonElement | null;
+    if (!next || next.disabled) break;
+    expect(seen.length).toBeLessThan(SPECIES.length);
+    await user.click(next);
+  }
+  expect(seen).toEqual(
+    SPECIES.filter((creature) => creature.id !== "mossguard").map((creature) =>
+      assetUrl(`creature.${creature.id}`),
+    ),
+  );
+  expect(inspect).not.toHaveBeenCalled();
 });
 
 it("remembers each filter's page and retains its first visible creature when capacity changes", async () => {

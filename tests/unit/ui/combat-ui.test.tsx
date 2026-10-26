@@ -114,7 +114,7 @@ it("inspects draw and discard piles without changing state or exposing draw orde
     await act(() => session.dispose());
   }
 }, 15_000);
-it("shows exact Campfire recovery and commits one persisted Rest without currency or XP rewards", async () => {
+it("rests once, shows committed recovery and enters the next battle without granting rewards", async () => {
   const { session, user } = await open(
     produce(run(), (s) => {
       prepareDestination(s);
@@ -122,6 +122,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
       s.journey!.victories = s.encounter;
       s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
       s.team[0]!.health = 0;
+      s.team[1]!.health = 10;
     }),
   );
   try {
@@ -134,11 +135,21 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
     await user.click(screen.getByRole("button", { name: "Rest" }));
     await session.flush();
     const after = session.store.getState().game;
-    expect(after.team[0]!.health).toBe(10);
+    expect(after.phase).toBe("teamSelection");
+    expect(after.team.map((creature) => creature.health)).toEqual([10, 19, 30]);
+    const recovery = screen.getByRole("status", { name: "Rest recovery" });
+    expect(recovery.textContent).toContain("10 → 19 Health · +9");
+    expect(
+      within(recovery).getByRole("progressbar", { name: "Emberback Health" }).getAttribute("aria-valuenow"),
+    ).toBe("19");
+    expect(after.rng).toBe(before.rng);
     expect(after.keywordXP).toEqual(before.keywordXP);
     expect(after.currency).toBe(before.currency);
     expect(screen.queryByRole("button", { name: "Visit Campfire" })).toBeNull();
-    expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).team[0].health).toBe(10);
+    expect(JSON.parse(localStorage.getItem("fauna.save.v1")!)).toEqual(after);
+    await user.click(screen.getByRole("button", { name: /^Boss: / }));
+    expect(session.store.getState().game.phase).toBe("battle");
+    expect(screen.queryByRole("status", { name: "Rest recovery" })).toBeNull();
   } finally {
     await act(() => session.dispose());
   }

@@ -28,6 +28,15 @@ it("replaces the shelf with the purchased Boon reward, restores it on reload and
   game = accept(game, { type: "enterSupport", visit: game.support!.id });
   const send = vi.fn(() => true);
   const { rerender } = render(<SupportScreen game={requireMerchant(game)} send={send} />);
+  expect(
+    within(screen.getByRole("heading", { name: "Boon Merchant" }).closest("header")!).getByText(
+      `${game.currency} Gold`,
+    ),
+  ).toBeTruthy();
+  expect(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })).toHaveLength(3);
+  expect(screen.getByText("Limit 1 per customer - No Refunds!")).toBeTruthy();
+  expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
   fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })[0]!);
   expect(send).toHaveBeenCalledExactlyOnceWith({
     type: "buyBoon",
@@ -55,20 +64,6 @@ it.each([-1, 0])("shows Merchant at the lowest committed price plus %s Gold", (o
   });
   render(<SupportOffer game={game} send={() => true} />);
   expect(!!screen.queryByRole("button", { name: "Visit Boon Merchant" })).toBe(offset >= 0);
-});
-it("labels the wallet and prices as Gold", () => {
-  const s = merchant();
-  const game = accept(s, { type: "enterSupport", visit: s.support!.id });
-  render(<SupportScreen game={requireMerchant(game)} send={() => true} />);
-  expect(
-    within(screen.getByRole("heading", { name: "Boon Merchant" }).closest("header")!).getByText(
-      `${game.currency} Gold`,
-    ),
-  ).toBeTruthy();
-  expect(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })).toHaveLength(3);
-  expect(screen.getByText("Limit 1 per customer - No Refunds!")).toBeTruthy();
-  expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
 });
 
 it("keeps unavailable offers inspectable and rejects purchases with their specific reason", () => {

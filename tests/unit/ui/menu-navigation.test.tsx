@@ -7,7 +7,8 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { produce } from "immer";
 import { encodeSave } from "../../../src/game/save";
-import { run } from "../../support/game";
+import { accept, run, winBattle, merchantDestination } from "../../support/game";
+import { createGame } from "../../../src/game/engine";
 import { App } from "../../../src/ui/App";
 
 screenTestEnvironment();
@@ -178,3 +179,43 @@ it.each(["home", "pause"])(
     }
   },
 );
+
+it("makes Deck available in drafting, rewards and Merchant without committing inspection", async () => {
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  const started = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+    type: "start",
+  });
+  const reward = winBattle(accept(started, { type: "beginBattle" }));
+  const destination = merchantDestination();
+  const merchant = accept(destination, { type: "enterSupport", visit: destination.support!.id });
+  for (const game of [
+    accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }),
+    reward,
+    merchant,
+  ]) {
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage));
+    await session.load();
+    const view = render(<App session={session} />);
+    const user = userEvent.setup();
+    try {
+      await user.click(screen.getByRole("button", { name: "Continue" }));
+      const before = session.store.getState().game;
+      await user.click(screen.getByRole("button", { name: "Deck" }));
+      const deck = screen.getByRole("dialog", { name: "Deck" });
+      expect(deck.querySelectorAll(".action-card")).toHaveLength(3);
+      expect(session.store.getState().game).toBe(before);
+      await user.click(deck.querySelector<HTMLButtonElement>(".action-card")!);
+      expect(screen.getByRole("dialog", { name: / details$/ })).not.toBe(deck);
+      expect(session.store.getState().game).toBe(before);
+      await user.keyboard("{Escape}");
+      expect(screen.getByRole("dialog", { name: "Deck" })).toBe(deck);
+      await user.keyboard("{Escape}");
+      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Deck" }));
+    } finally {
+      view.unmount();
+      await session.dispose();
+      localStorage.clear();
+    }
+  }
+});

@@ -83,6 +83,7 @@ describe("player interface", () => {
     await session.dispose();
   });
   it("shows earnings before recruitment without committing or granting rewards again", async () => {
+    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     const started = starterJourney(7, "emberback");
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.keywordXP.physical = 23;
@@ -115,7 +116,18 @@ describe("player interface", () => {
     expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
     expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
-    await user.click(screen.getByRole("button", { name: /^Recruit / }));
+    const incoming = game.reward!.recruits[0]!;
+    const offer = screen.getByRole("button", { name: `Recruit ${species(incoming).name}` });
+    await waitFor(() => expect(document.activeElement).toBe(offer));
+    await user.click(screen.getByRole("button", { name: `Inspect ${species(incoming).name}` }));
+    expect(screen.getByRole("dialog", { name: species(incoming).name })).toBeTruthy();
+    expect(session.store.getState().game).toBe(committed);
+    await user.keyboard("{Escape}");
+    await waitFor(() => expect(document.activeElement).toBe(offer));
+    await user.click(offer);
+    expect(session.store.getState().game.discovery.recruited[incoming]).toBe(
+      (game.discovery.recruited[incoming] ?? 0) + 1,
+    );
     expect(session.store.getState().game.phase).toBe("teamSelection");
     expect(screen.queryByRole("heading", { name: "Choose a Boon" })).toBeNull();
     await session.dispose();

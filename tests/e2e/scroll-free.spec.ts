@@ -2,7 +2,7 @@ import { expectTalentOverview } from "./support/layout";
 import { KEYWORDS, keywordLabel } from "../../src/game/progression";
 import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
-import { definition } from "../../src/game/content";
+import { CARDS, definition } from "../../src/game/content";
 import { run, teamRun } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { encodeSave } from "../../src/game/save";
@@ -149,6 +149,27 @@ for (const [width, height, scale] of LAYOUT_CASES) {
               Promise.all(images.map((image) => (image as HTMLImageElement).decode())),
             );
           await expectScrollFree(page);
+          const abilities = details.locator(".action-card");
+          const portraits = await abilities.evaluateAll((cards) =>
+            cards.map((card) => {
+              const box = card.getBoundingClientRect();
+              return { ratio: box.width / box.height, text: card.textContent };
+            }),
+          );
+          for (const portrait of portraits) {
+            expect(portrait.ratio).toBeCloseTo(3 / 4, 2);
+            expect(portrait.text).toBe("");
+          }
+          if (kind === SPECIES[0]!.id && (exhaustive || width === 1920)) {
+            await expect(details.getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
+            for (const action of CARDS.filter((card) => card.species === kind)) {
+              await details.getByRole("button", { name: new RegExp(`^${action.name},`) }).hover();
+              await expect(page.getByRole("tooltip")).toContainText(action.name);
+              await expect(page.getByRole("tooltip").locator(".action-effect")).not.toBeEmpty();
+            }
+            await page.mouse.move(0, 0);
+            await settleScreen(page);
+          }
           // Every kit retains rendered checks; representative frames avoid a PNG per catalog entry.
           if (kind === SPECIES[0]!.id || kind === SPECIES.at(-1)!.id)
             await captureFrame(page, {

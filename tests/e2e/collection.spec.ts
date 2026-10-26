@@ -27,6 +27,8 @@ test("Collection hides uncollected tooltips and opens shared creature inspection
   await expect(locked).toBeVisible();
   const artwork = locked.locator("img");
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
+  await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
+  await expect(page.getByRole("button", { name: /^Inspect / })).toHaveCount(0);
   await locked.hover();
   await expect(page.getByRole("tooltip")).toHaveCount(0);
   await expect(artwork).toHaveCSS("filter", "none");
@@ -47,6 +49,7 @@ test("Collection hides uncollected tooltips and opens shared creature inspection
   await page.getByRole("heading", { name: "Collection", exact: true }).hover();
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
   await expect(locked).toHaveCSS("scale", "none");
+  await page.getByRole("tab", { name: "All", exact: true }).click();
   await page.getByRole("button", { name: "Inspect Mossguard", exact: true }).click();
   await expect(page.locator(".creature-inspection")).toBeVisible();
   await expect(page.getByRole("dialog")).toHaveCount(1);
@@ -72,6 +75,11 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
         else await page.keyboard.press("Enter");
       }
     };
+    if (input === "mouse") {
+      await page.locator(".player-row .creature-card").first().hover();
+      await expect(page.getByRole("tooltip")).toContainText("Retain 10% more Block between turns");
+      await expect(page.getByRole("tooltip")).not.toContainText("Rooted Stomp");
+    }
     const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
     await enemy.focus();
     if (press) await press(2);
@@ -106,49 +114,6 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await activate(page.getByRole("button", { name: "Continue", exact: true }));
     await expect(page.getByRole("main", { name: "Battlefield", exact: true })).toBeVisible();
     expect(await state(page)).toEqual(fixture);
-  });
-
-for (const [width, height] of [
-  [1280, 720],
-  [1920, 1080],
-] as const)
-  test(`Collection inspection preserves artwork ratios and hover rules at ${width}×${height}`, async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width, height });
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    if (width === 1280) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
-    await seed(page, run(7));
-    await resume(page);
-    await page.locator(".app:not([inert]) .player-row .creature-card").first().hover();
-    await expect(page.getByRole("tooltip")).toContainText("Retain 10% more Block between turns");
-    await expect(page.getByRole("tooltip")).not.toContainText("Rooted Stomp");
-    await page.getByRole("button", { name: "Open menu", exact: true }).click();
-    await page.getByRole("button", { name: "Collection", exact: true }).click();
-    await page.getByRole("button", { name: "Inspect Mossguard", exact: true }).click();
-    const details = page.locator(".creature-inspection");
-    await details
-      .locator("img")
-      .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
-    await page.mouse.move(0, 0);
-    await expect(details.locator(".creature-card")).toHaveCount(0);
-    await expect(details.getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
-    await expect(details.locator(".action-card")).toHaveCount(3);
-    for (const artwork of await details.locator(".action-card").all()) {
-      const bounds = (await artwork.boundingBox())!;
-      expect(Math.abs(bounds.width / bounds.height - 3 / 4)).toBeLessThan(0.01);
-      expect(await artwork.textContent()).toBe("");
-    }
-    for (const card of CARDS.filter((c) => c.species === "mossguard")) {
-      const ability = details.getByRole("button", { name: new RegExp(`^${card.name},`) });
-      await ability.hover();
-      await expect(page.getByRole("tooltip")).toContainText(card.name);
-      await expect(page.getByRole("tooltip").locator(".action-effect")).not.toBeEmpty();
-    }
-    await page.mouse.move(0, 0);
-    await captureScreen(page, { path: `reports/collection/kit-${width}.png` });
-    await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: "Inspect Mossguard", exact: true })).toBeFocused();
   });
 
 test("Collection keeps a later-page creature and focus through live resize and filter changes", async ({

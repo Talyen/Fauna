@@ -3,38 +3,6 @@ import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
 import { captureScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { openHome, reloadHome, test, seed, state } from "./support/session";
-import { SPECIES } from "../../src/game/content";
-test("Collection filtering, audio preferences, and settings remain menu-driven", async ({ page }) => {
-  await openHome(page);
-  await page.getByRole("button", { name: "Collection", exact: true }).click();
-  await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
-  const firstPage = await page.getByRole("img", { name: "Locked species" }).count();
-  expect(firstPage).toBeGreaterThan(0);
-  for (let offset = firstPage; offset < SPECIES.length; offset += firstPage) {
-    await page.getByRole("button", { name: "Next page" }).click();
-    await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(
-      Math.min(firstPage, SPECIES.length - offset),
-    );
-  }
-  await expect(page.getByRole("button", { name: "Next page" })).toBeDisabled();
-  await page.getByRole("button", { name: "Open menu", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.getByRole("tab", { name: "Sound", exact: true }).click();
-  await page.getByRole("slider", { name: "Master volume", exact: true }).focus();
-  await page.keyboard.press("ArrowLeft");
-  await expect(page.getByLabel("Master volume value", { exact: true })).toHaveText("40%");
-  await page.getByRole("switch", { name: "Mute in background", exact: true }).click();
-  await expect(page.getByRole("tab", { name: "Diagnostics", exact: true })).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "Copy diagnostics", exact: true })).toHaveCount(0);
-  await captureScreen(page, { path: "reports/adoption-settings.png", fullPage: true });
-  await reloadHome(page);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.getByRole("tab", { name: "Sound", exact: true }).click();
-  await expect(page.getByLabel("Master volume value", { exact: true })).toHaveText("40%");
-  await expect(page.getByRole("switch", { name: "Mute in background", exact: true })).not.toBeChecked();
-});
-
 for (const [width, height] of REVIEW_VIEWPORTS)
   test(`illustrated Boons and independent tooltip sizing at ${width}×${height}`, async ({ page }) => {
     const { run } = await import("../support/game");

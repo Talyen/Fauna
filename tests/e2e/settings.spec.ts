@@ -63,6 +63,15 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   const sound = page.getByRole("switch", { name: "Sound", exact: true });
+  const master = page.getByRole("slider", { name: "Master volume", exact: true });
+  await master.focus();
+  await page.keyboard.press("ArrowLeft");
+  await expect(master).toHaveAttribute("aria-valuetext", "40%");
+  const backgroundMute = page.getByRole("switch", { name: "Mute in background", exact: true });
+  await backgroundMute.click();
+  await expect(backgroundMute).not.toBeChecked();
+  await expect(page.getByRole("tab", { name: "Diagnostics", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Copy diagnostics", exact: true })).toHaveCount(0);
   await sound.focus();
   // Native keyboard activation owns the switch's reversible state and rendered thumb geometry
   for (const checked of [false, true, false]) {
@@ -102,4 +111,6 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await expect(sound).not.toBeChecked();
+  await expect(master).toHaveAttribute("aria-valuetext", "40%");
+  await expect(backgroundMute).not.toBeChecked();
 });

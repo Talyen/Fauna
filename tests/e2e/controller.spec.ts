@@ -1,4 +1,4 @@
-import { settleScreen } from "./support/rendered-evidence";
+import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
@@ -7,20 +7,19 @@ import { gamepad } from "./support/gamepad";
 
 test("manual controller prompts persist and disconnection pauses without changing progress", async ({
   page,
-}, testInfo) => {
+}) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   const press = await gamepad(page);
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await seed(page, run());
-  await page.evaluate(() => localStorage.setItem("fauna.text-scale", "1.25"));
-  await page.reload();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Battle", exact: true }).click();
   await page.getByRole("radio", { name: "PlayStation" }).click();
-  await page.reload();
+  await reloadHome(page);
   await resume(page);
   await press(13);
   await expect(page.getByRole("button", { name: "End turn · Triangle", exact: true })).toBeVisible();
-  await page.screenshot({ path: testInfo.outputPath("playstation-battle.png") });
+  await captureScreen(page, { path: "playstation-battle.png" });
   await page.getByRole("button", { name: "Auto-play", exact: true }).click();
   await press(13);
   const before = await state(page);
@@ -43,7 +42,7 @@ test("manual controller prompts persist and disconnection pauses without changin
   );
   await press(13);
   await expect(page.getByText(/Cross selects; Circle goes back; Triangle ends the turn/)).toBeVisible();
-  await page.screenshot({ path: testInfo.outputPath("playstation-controls.png") });
+  await captureScreen(page, { path: "playstation-controls.png" });
 });
 
 test("controller edges, inspect and pause do not repeat a held confirm", async ({ page }) => {
@@ -79,9 +78,8 @@ test("controller edges, inspect and pause do not repeat a held confirm", async (
 test("enlarged text and keyboard/controller row navigation keep hover details and menu controls reachable", async ({
   page,
 }) => {
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await seed(page, run());
-  await page.evaluate(() => localStorage.setItem("fauna.text-scale", "1.25"));
-  await reloadHome(page);
   await resume(page);
   const card = page.locator(".app:not([inert]) .hand .action-card").first();
   await card.focus();
