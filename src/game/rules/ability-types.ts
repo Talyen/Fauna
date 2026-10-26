@@ -43,7 +43,10 @@ export type SupplementalEffect =
   | { kind: "reflect"; amount: number; status?: "burn" }
   | { kind: "heal"; amount: number; target?: "recipient" }
   | { kind: "draw"; amount: number }
-  | { kind: "mana" | "purge" | "blind" | "meltArmor"; amount: number };
+  | { kind: "mana"; amount: number }
+  | { kind: "purge"; amount: number }
+  | { kind: "blind"; amount: number }
+  | { kind: "meltArmor"; amount: number };
 
 export type SupplementalKind = SupplementalEffect["kind"];
 

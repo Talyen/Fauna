@@ -2,8 +2,6 @@ import { battlefield } from "../battlefield";
 import type { CardDefinition } from "../content/types";
 import type { Creature, Enemy, GameState, GameEvent, BattleState, CombatState } from "../types";
 import type { Combatant } from "./state";
-import type { AbilityKind } from "../rules/ability-types";
-import type { AbilityCard } from "../rules/contracts";
 
 export type AbilityAction = {
   def: CardDefinition;
@@ -28,11 +26,11 @@ export const opposingRow = (state: GameState, action: AbilityAction): Combatant[
   battlefield(state, action.side === "player" ? "enemy" : "player");
 export const alive = (row: Combatant[]) => row.filter((unit) => unit.health > 0);
 
-export interface PrimaryContext<K extends AbilityKind = AbilityKind> {
+export interface PrimaryContext {
   state: BattleState;
   action: AbilityAction;
   actor: Combatant;
-  def: AbilityCard<K>;
+  def: CardDefinition;
   value: number;
   events: GameEvent[];
   operations: AbilityOperations;
@@ -48,4 +46,3 @@ export interface PrimaryContext<K extends AbilityKind = AbilityKind> {
   negated: Set<string>;
   sharedNegate?: import("./policy").SharedNegate;
 }
-export type PrimaryHandlers = { [K in AbilityKind]: (context: PrimaryContext<K>) => void };
