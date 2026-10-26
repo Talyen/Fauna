@@ -259,8 +259,11 @@ const sparkDecoyAbility: PrimaryHandler<"sparkDecoy"> = (context) => {
 const nightmareHarvestAbility: PrimaryHandler<"nightmareHarvest"> = (context) => {
   const { state, action, value, events, enemy } = context;
   let removed = 0;
-  for (const recipient of alive(friendlyRow(state, action)))
+  for (const recipient of alive(friendlyRow(state, action))) {
+    if (action.actor.health <= 0) break;
     removed += removeEffects(recipient, "cleanse", Number.MAX_SAFE_INTEGER, events, state);
+  }
+  if (action.actor.health <= 0) return;
   if (!enemy) gainMana(state, removed * value, events);
   else if (action.side === "enemy" && action.actor.deck)
     action.actor.deck.mana = Math.min(4, action.actor.deck.mana + removed * value);
@@ -333,8 +336,10 @@ const teamClearBlindAbility: PrimaryHandler<"teamClearBlind"> = (context) => {
     if (action.side === "player") draw(state, value, events);
     else if (action.actor.deck) drawBossCards(state, action.actor.deck, value);
   }
-  for (const unit of alive(friendlyRow(state, action)))
+  for (const unit of alive(friendlyRow(state, action))) {
+    if (action.actor.health <= 0) break;
     if (ensureCombat(unit).blind) removeEffects(unit, "cleanse", 1, events, state, "blind");
+  }
 };
 
 const swapLowestAbility: PrimaryHandler<"swapLowest"> = (context) => {
@@ -355,7 +360,10 @@ const teamThawAbility: PrimaryHandler<"teamThaw"> = thawAllies;
 
 const teamBlindAbility: PrimaryHandler<"teamBlind"> = (context) => {
   const { state, action, actor, events } = context;
-  for (const unit of alive(opposingRow(state, action))) applyBlind(state, actor, unit, events);
+  for (const unit of alive(opposingRow(state, action))) {
+    if (actor.health <= 0) break;
+    applyBlind(state, actor, unit, events);
+  }
 };
 
 const teamPurgeAbility: PrimaryHandler<"teamPurge"> = (context) => {
@@ -368,7 +376,10 @@ const teamPurgeAbility: PrimaryHandler<"teamPurge"> = (context) => {
 
 const teamCleanseAbility: PrimaryHandler<"teamCleanse"> = (context) => {
   const { state, action, value, events } = context;
-  for (const unit of alive(friendlyRow(state, action))) removeEffects(unit, "cleanse", value, events, state);
+  for (const unit of alive(friendlyRow(state, action))) {
+    if (action.actor.health <= 0) break;
+    removeEffects(unit, "cleanse", value, events, state);
+  }
 };
 
 const nullifyAbility: PrimaryHandler<"nullify"> = (context) => {

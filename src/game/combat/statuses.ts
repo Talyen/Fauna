@@ -672,6 +672,7 @@ export function* controlRewards(
   type: DamageType,
   events: GameEvent[],
 ): Resolution<void> {
+  if (source.health <= 0) return;
   if (!isEnemy(source) && isEnemy(target)) {
     if (type === "stun" && source.health > 0 && state.boons.includes("thunder-conch"))
       for (const enemy of battlefield(state, "enemy")) {
@@ -679,6 +680,7 @@ export function* controlRewards(
         if (enemy.id !== target.id && enemy.health > 0)
           yield* reaction("applyBlind", state, source, enemy, events);
       }
+    if (source.health <= 0) return;
     if (type === "freeze" && state.boons.includes("icy-heart"))
       yield* reaction("hit", state, source, target, boonRule("icy-heart").damage, "physical", events, {
         origin: "derived",

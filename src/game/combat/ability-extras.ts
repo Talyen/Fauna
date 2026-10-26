@@ -96,9 +96,11 @@ const meltArmorExtra: ExtraHandler<"meltArmor"> = (context) => {
 
 const blindExtra: ExtraHandler<"blind"> = (context) => {
   const { state, actor, enemy, events, options } = context;
-  for (const recipient of battlefield(state, enemy ? "player" : "enemy"))
+  for (const recipient of battlefield(state, enemy ? "player" : "enemy")) {
+    if (actor.health <= 0) break;
     if (recipient.health > 0 && !options.negated?.has(recipient.id))
       applyBlind(state, actor, recipient, events);
+  }
 };
 
 const nullifyFreezeExtra: ExtraHandler<"nullifyFreeze"> = (context) => {
@@ -130,8 +132,10 @@ const cleanseExtra: ExtraHandler<"cleanse"> = (context) => {
   const { state, actor, enemy, target, events, effect } = context;
   for (const recipient of effect.target === "allAllies"
     ? battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0)
-    : [effect.target === "recipient" && target ? target : actor])
+    : [effect.target === "recipient" && target ? target : actor]) {
+    if (actor.health <= 0) break;
     removeEffects(recipient, "cleanse", effect.amount, events, state);
+  }
 };
 
 const purgeExtra: ExtraHandler<"purge"> = (context) => {
