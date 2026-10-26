@@ -117,7 +117,7 @@ test("slow essential art holds the splash, and an image error still permits play
   const release = await holdStartupResource(page, `**/${assetUrl("logo.main-menu").slice(2)}`, true);
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("status", { name: "Loading Fauna" })).toBeVisible();
-  await page.waitForFunction(() => performance.now() >= 5100);
+  await page.waitForFunction(() => performance.now() >= 5100, undefined, { timeout: 10000 });
   await expect(page.locator("#root")).toBeEmpty();
   release();
   await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 20000 });

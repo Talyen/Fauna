@@ -127,11 +127,11 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await expect(page.getByRole("dialog")).toHaveCount(1);
   await captureScreen(page, { path: `reports/menu-collection-kit-${width}.png` });
   await pad.press(0);
-  await expect(page.getByRole("dialog", { name: "Rooted Stomp details", exact: true })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Boulder Brace details", exact: true })).toBeVisible();
   await pad.press(15);
-  await expect(page.getByRole("dialog", { name: "Moss Renewal details", exact: true })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Rooted Stomp details", exact: true })).toBeVisible();
   await pad.press(1);
-  await expect(page.getByRole("button", { name: /^Moss Renewal,/ })).toBeFocused();
+  await expect(page.getByRole("button", { name: /^Rooted Stomp,/ })).toBeFocused();
   await pad.press(1);
   await expect(page.getByRole("button", { name: opener!, exact: true })).toBeFocused();
   await pad.press(1);

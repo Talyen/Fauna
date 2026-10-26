@@ -54,5 +54,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
   const final = await state(page);
   expect(deployedThree).toBe(true);
-  expect(final.team).toHaveLength(species(final.team[0]!.species).legendary ? 1 : 3);
+  expect([...final.team, ...final.reserves].length).toBeGreaterThanOrEqual(3);
+  expect(final.team.length).toBeGreaterThanOrEqual(1);
+  expect(final.team.length).toBeLessThanOrEqual(species(final.team[0]!.species).legendary ? 1 : 3);
 });

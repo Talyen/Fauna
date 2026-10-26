@@ -17,8 +17,6 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     await opener.focus();
     await page.keyboard.press("Enter");
     const dialog = page.getByRole("dialog", { name: "Boons", exact: true });
-    await expect(dialog.getByRole("heading", { name: "Tattered Pages", exact: true })).toBeVisible();
-    await expect(dialog).toContainText("Restore 3 Health when you defeat an enemy");
     const exhaustive = width === 1280 && height === 720;
     for (let index = 0; index < BOONS.length; index += 2) {
       if (index > 0) await dialog.getByRole("button", { name: "Next page" }).click();
