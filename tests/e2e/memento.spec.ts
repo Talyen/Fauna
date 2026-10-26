@@ -24,9 +24,8 @@ function legendaryTeam() {
       { ...legendary, id: "backup-pollenmoth", species: "pollenmoth", health: 23, combat: freshCombat() },
     ];
 
-    draft.discovery.encountered.push("memento");
+    draft.discovery.encountered = [...new Set([...draft.discovery.encountered, "memento", "pollenmoth"])];
     draft.discovery.recruited.memento = 1;
-    draft.discovery.encountered.push("pollenmoth");
     draft.discovery.recruited.pollenmoth = 1;
     draft.cards = ownedCards(legendary.id, legendary.species);
     draft.battle!.hand = draft.cards.slice(0, 4).map((card) => card.id);

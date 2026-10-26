@@ -153,7 +153,8 @@ jobs:
       - name: Discover complete unit and exhaustive coverage
         run: npx vitest list --json=reports/ci/unit-discovery.json --staticParse=false
       - name: Unit and DOM suites
-        run: npm run test:full -- --exclude='tests/exhaustive/**' --reporter=default --reporter=json --outputFile.json=reports/vitest.json
+        # Bound parallel simulations and CLI subprocesses to the hosted runner's CPU budget.
+        run: npm run test:full -- --maxWorkers=2 --exclude='tests/exhaustive/**' --reporter=default --reporter=json --outputFile.json=reports/vitest.json
       - name: Summarize unit results
         if: always()
         run: node scripts/ci/ci-summarize.mjs vitest reports/vitest.json
