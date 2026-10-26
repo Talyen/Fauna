@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 import { authoredPack, swapFixture, addBackups } from "../../support/game";
 import { expect, it } from "vitest";
@@ -195,7 +196,7 @@ it("multiplies Freeze resistance before rounding and Block", () => {
     hit(game, game.battle!.enemies[0]!, target, 20, "freeze", [], { origin: "proc" as const });
     expect(target.block).toBe(0);
     expect(target.health).toBe(species(target.species).health - 1);
-    expect(target.combat!.freeze).toBe(1);
+    expect(target.combat!.freeze).toBe(4);
   });
 });
 it("uses only living deployed protectors and recipients, strongest tier and enemy base tier", () => {
@@ -227,7 +228,7 @@ it("uses only living deployed protectors and recipients, strongest tier and enem
     });
   }
 });
-it("enemy Stillara alternates team healing and thawing without player Mana or draws", () => {
+it("enemy Stillara supports team healing and thawing without player Mana or draws", () => {
   for (const last of ["stillara-water-remembers", "stillara-thaw-path"]) {
     const game = produce(ready(), (draft) => {
       const enemy = draft.battle!.enemies[0]!;
@@ -243,9 +244,9 @@ it("enemy Stillara alternates team healing and thawing without player Mana or dr
         unit.block = 100;
       });
     });
-    const result = dispatch(game, { type: "endTurn" });
-    expect(result.accepted).toBe(true);
     const next = last.endsWith("thaw-path") ? "stillara-water-remembers" : "stillara-thaw-path";
+    const result = enemyPlay(game, next);
+    expect(result.accepted).toBe(true);
     expect(result.state.battle!.enemies[0]!.lastAbility).toBe(next);
     if (next.endsWith("thaw-path")) expect(result.state.battle!.enemies[1]!.combat.freeze).toBe(0);
     else

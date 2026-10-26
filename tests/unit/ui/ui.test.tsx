@@ -252,7 +252,7 @@ describe("player interface", () => {
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).phase).toBe("teamSelection");
     await session.dispose();
   });
-  it("requires all three collection recruits before beginning a later journey", async () => {
+  it("begins a later journey after selecting every available unique starter", async () => {
     const fresh = createGame(7);
     const starter = fresh.starterOffers[0]!;
     const started = accept(accept(fresh, { type: "draft", species: starter }), { type: "start" });
@@ -264,15 +264,10 @@ describe("player interface", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Play" }));
     expect(screen.queryByRole("button", { name: "Begin journey" })).toBeNull();
-    for (let round = 0; round < 3; round++) {
-      expect(session.store.getState().game.phase).toBe("draft");
-      expect(screen.getByRole("heading", { name: "Choose your starter" })).toBeTruthy();
-      await user.click(screen.getAllByRole("button", { name: `Recruit ${species(starter).name}` })[0]!);
-      expect(session.store.getState().game.selected).toHaveLength(round + 1);
-      expect(screen.queryByRole("dialog")).toBeNull();
-    }
+    expect(session.store.getState().game.phase).toBe("draft");
+    await user.click(screen.getByRole("button", { name: `Recruit ${species(starter).name}` }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
-    expect(session.store.getState().game.team).toHaveLength(3);
+    expect(session.store.getState().game.team.map((unit) => unit.species)).toEqual([starter]);
     await session.dispose();
   });
   it.each(["hover", "keyboard"])(

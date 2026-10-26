@@ -6,7 +6,7 @@ import { accept, run, teamRun, prepareDestination } from "../../../support/game"
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { createPearls } from "../../../../src/game/combat/legendary";
 import { ownedCards } from "../../../../src/game/team";
-import { definition } from "../../../../src/game/content";
+import { definition, species } from "../../../../src/game/content";
 import { draw } from "../../../../src/game/card-zones";
 import { freshCombat } from "../../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
@@ -322,13 +322,13 @@ describe("Memento and Legendary formations", () => {
     expect(result.state.battle!.minions![0]!.health).toBe(0);
     expect(result.state.battle!.minions![0]!.combat.deathDoorUsed).toBe(false);
   });
-  it("accepts five Legendaries in the roster while deploying exactly one", () => {
-    const initial = produce(teamRun(42, ["memento"]), (draft) => {
-      for (let i = 0; i < 4; i++) {
+  it("supports distinct Legendaries in a full roster while deploying exactly one", () => {
+    const initial = produce(teamRun(42, ["tournelle"]), (draft) => {
+      for (const [i, kind] of (["euphera", "mossguard", "emberback", "memento"] as const).entries()) {
         addBackups(draft, {
           id: `reserve-${i}`,
-          species: "memento",
-          health: 60,
+          species: kind,
+          health: species(kind).health,
           block: 0,
           attacked: false,
           combat: freshCombat(),

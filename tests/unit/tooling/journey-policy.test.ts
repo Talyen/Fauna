@@ -206,12 +206,7 @@ it("keeps the team after recruitment when the full healthy roster and passive ra
   expect(command).toEqual({ type: "recruit", species: "cadenza" });
   const result = dispatch(state, command);
   expect(result.accepted).toBe(true);
-  const confirmation = actor()(result.state);
-  expect(confirmation.command).toEqual({ type: "confirmRecruit" });
-  const confirmed = dispatch(result.state, confirmation.command);
-  expect(confirmed.accepted).toBe(true);
-  expect([...confirmed.state.team, ...confirmed.state.reserves].map((unit) => unit.species)).toEqual(
-    [...state.team, ...state.reserves].map((unit) => unit.species),
-  );
-  expect(confirmed.state.team.map((unit) => unit.id)).toEqual(state.team.map((unit) => unit.id));
+  expect(result.state.phase).toBe("teamSelection");
+  expect(result.state.team).toEqual(state.team);
+  expect(result.state.reserves).toEqual(state.reserves);
 });

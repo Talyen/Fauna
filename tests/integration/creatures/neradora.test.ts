@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../support/game";
 import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -140,7 +141,7 @@ it("allows Nature and Water Thorns to retaliate separately on the same hit", () 
 });
 
 it.each(["dodge", "block", "periodic", "derived", "retaliation", "knockout"] as const)(
-  "does not trigger Water Thorns on %s",
+  "applies Water Thorns hit rules for %s",
   (kind) => {
     const events: GameEvent[] = [];
     produce(play(ready(), "undertow-knot").state, (game) => {
@@ -162,8 +163,10 @@ it.each(["dodge", "block", "periodic", "derived", "retaliation", "knockout"] as 
           ? { origin: kind }
           : { origin: "ability", blindMiss: kind === "dodge" },
       );
-      expect(unit.combat!.waterThorns).toBe(3);
-      expect(events.some((event) => event.kind === "damage" && event.actorId === unit.id)).toBe(false);
+      expect(unit.combat!.waterThorns).toBe(kind === "block" ? 2 : 3);
+      expect(events.some((event) => event.kind === "damage" && event.actorId === unit.id)).toBe(
+        kind === "block",
+      );
     });
   },
 );
@@ -271,7 +274,7 @@ it("runs enemy support on its own side and uses base regeneration independently 
     enemy.health = 3;
     enemy.lastAbility = "neradora-bloom-shelter";
   });
-  game = accept(game, { type: "endTurn" });
+  game = enemyPlay(game, "neradora-undertow-knot").state;
   expect(game.battle!.enemies[0]!.lastAbility).toBe("neradora-undertow-knot");
   expect(game.battle!.enemies[0]!.combat.waterThorns).toBeGreaterThan(0);
   expect(game.team.every((unit) => unit.combat!.waterThorns === 0)).toBe(true);
@@ -283,7 +286,7 @@ it("runs enemy support on its own side and uses base regeneration independently 
     expect(enemy.health).toBe(before + 1);
     expect(events).toContainEqual(expect.objectContaining({ kind: "heal", targetId: enemy.id, amount: 1 }));
   });
-  const second = dispatch(game, { type: "endTurn" });
+  const second = enemyPlay(game, "neradora-bloom-shelter");
   expect(second.state.battle!.enemies[0]!.lastAbility).toBe("neradora-bloom-shelter");
   expect(
     second.events.filter(

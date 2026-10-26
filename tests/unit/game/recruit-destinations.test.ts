@@ -8,12 +8,12 @@ import { accept, starterJourney, winBattle, completeRecruitment } from "../../su
 
 function offer(size = 1) {
   let game = starterJourney(7, "mossguard");
-  while (game.team.length + game.reserves.length < size) {
+  for (const kind of (["emberback", "prismram", "pollenmoth", "captoad"] as const).slice(0, size - 1)) {
     game = produce(game, (draft) => {
-      draft.expedition!.recruit = "emberback";
+      draft.expedition!.recruit = kind;
       draft.expedition!.lastRoom = "combat";
     });
-    game = accept(game, { type: "recruitDestination", species: "emberback" });
+    game = accept(game, { type: "recruitDestination", species: kind });
   }
   return produce(game, (draft) => {
     draft.expedition!.recruit = size < 5 ? "cadenza" : null;

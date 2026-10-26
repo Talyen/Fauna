@@ -1,3 +1,5 @@
+import { enemyPlay } from "../../support/game";
+import { addBackups } from "../../support/game";
 import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -147,8 +149,14 @@ it("does not count teammate plays or rejected commands and retains the count acr
     const card = draft.cards.find((card) => card.definitionId === "mossguard-guard")!;
     draft.battle!.draw = draft.battle!.draw.filter((id) => id !== card.id);
     draft.battle!.hand.push(card.id);
-    const backup = { ...draft.team[1]!, id: "backup", combat: freshCombat() };
-    draft.reserves.push(backup);
+    const backup = {
+      ...draft.team[1]!,
+      id: "backup",
+      species: "captoad" as const,
+      health: 30,
+      combat: freshCombat(),
+    };
+    addBackups(draft, backup);
   });
   game = play(game, "mossguard-guard").state;
   expect(repeats(play(game, "wickwaltz-guard").events)).toHaveLength(0);
@@ -262,7 +270,7 @@ it("gives enemy Wickwaltz its supported attack and ward without drawing or grant
     enemy.lastAbility = "wickwaltz-attack";
     for (const other of draft.battle!.enemies.slice(1)) other.health = 0;
   });
-  const result = dispatch(game, { type: "endTurn" });
+  const result = enemyPlay(game, "wickwaltz-guard");
   expect(result.accepted).toBe(true);
   expect(result.state.battle!.enemies[0]!.combat.nullifyFreeze).toBe(true);
   expect(result.state.battle!.enemies[0]!.lastAbility).toBe("wickwaltz-guard");

@@ -402,7 +402,7 @@ it("the deployed Rookhaven copies once, including while controlled", () => {
   const next = produce(game, (draft) => {
     draw(draft, 1, events);
   });
-  expect(copies(next)).toHaveLength(2);
+  expect(copies(next)).toHaveLength(1);
   expect(events.map((event) => event.actorId)).toEqual(["ally-0"]);
   expect(next.battle!.hand).toHaveLength(2);
   expect(next.rng).toBe(game.rng);

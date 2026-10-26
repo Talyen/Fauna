@@ -1,3 +1,24 @@
+import type {
+  attackProcs,
+  blockDepletionRewards,
+  damageRewards,
+  dodgeResponse,
+  passingFlame,
+  passiveRetaliation,
+  waterFollowups,
+} from "./combat/damage-reactions";
+import type {
+  applyHarmfulStatus,
+  cleanseRewards,
+  cleanseThorns,
+  controlRewards,
+  grantStatus,
+  puzzleEffect,
+  removeEffects,
+  returnCleansedEffect,
+  triggerArmorBreak,
+} from "./combat/statuses";
+import type { gentlePassage, mountainGuide, swapBackup } from "./team";
 import { freeze } from "immer";
 import type { TalentId, BoonId } from "./content";
 import type { PassiveKind } from "./content/types";
@@ -9,11 +30,21 @@ import type {
   physicalBonus,
   retainedBlock,
 } from "./ability-rules";
-import type { drawHasAnotherCard, expressDelivery, receiveDraw } from "./card-zones";
+import type {
+  drawHasAnotherCard,
+  expressDelivery,
+  receiveDraw,
+  lostAndFound,
+  drawEligibleCard,
+} from "./card-zones";
 import type { loseHealth, openingCriticalBonus, ownDodgeChance, sharedDodgeChance } from "./combat/state";
 
 type Modules = {
-  "./team": typeof import("./team");
+  "./team": {
+    gentlePassage: typeof gentlePassage;
+    mountainGuide: typeof mountainGuide;
+    swapBackup: typeof swapBackup;
+  };
   "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
   "./ability-rules": {
@@ -30,11 +61,11 @@ type Modules = {
   "./card-actors": typeof import("./card-actors");
   "./card-zones": {
     recoverBrokenGuard: typeof import("./card-zones").recoverBrokenGuard;
-    lostAndFound: typeof import("./card-zones").lostAndFound;
+    lostAndFound: typeof lostAndFound;
     drawHasAnotherCard: typeof drawHasAnotherCard;
     expressDelivery: typeof expressDelivery;
     receiveDraw: typeof receiveDraw;
-    drawEligibleCard: typeof import("./card-zones").drawEligibleCard;
+    drawEligibleCard: typeof drawEligibleCard;
   };
   "./chance": typeof import("./chance");
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
@@ -42,7 +73,15 @@ type Modules = {
   "./combat/card-modifiers": typeof import("./combat/card-modifiers");
   "./combat/food": typeof import("./combat/food");
   "./combat/damage": typeof import("./combat/damage");
-  "./combat/damage-reactions": typeof import("./combat/damage-reactions");
+  "./combat/damage-reactions": {
+    attackProcs: typeof attackProcs;
+    blockDepletionRewards: typeof blockDepletionRewards;
+    damageRewards: typeof damageRewards;
+    dodgeResponse: typeof dodgeResponse;
+    passingFlame: typeof passingFlame;
+    passiveRetaliation: typeof passiveRetaliation;
+    waterFollowups: typeof waterFollowups;
+  };
   "./combat/damage-values": typeof import("./combat/damage-values");
   "./combat/healing-values": typeof import("./combat/healing-values");
   "./combat/interception": typeof import("./combat/interception");
@@ -56,7 +95,17 @@ type Modules = {
     ownDodgeChance: typeof ownDodgeChance;
     sharedDodgeChance: typeof sharedDodgeChance;
   };
-  "./combat/statuses": typeof import("./combat/statuses");
+  "./combat/statuses": {
+    applyHarmfulStatus: typeof applyHarmfulStatus;
+    cleanseRewards: typeof cleanseRewards;
+    cleanseThorns: typeof cleanseThorns;
+    controlRewards: typeof controlRewards;
+    grantStatus: typeof grantStatus;
+    puzzleEffect: typeof puzzleEffect;
+    removeEffects: typeof removeEffects;
+    returnCleansedEffect: typeof returnCleansedEffect;
+    triggerArmorBreak: typeof triggerArmorBreak;
+  };
   "./combat/turns": typeof import("./combat/turns");
   "./destinations": typeof import("./destinations");
 };

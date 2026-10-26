@@ -96,7 +96,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
 }
 
 /** Direct Discard draws heal the original owner; recycling, copies and promotion do not. */
-function lostAndFound(state: GameState, card: Card, events: GameEvent[]) {
+export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) {
   const owner = state.team.find((unit) => unit.id === card.ownerId && unit.health > 0);
   if (!owner) return;
   for (const keeper of state.team) {
@@ -167,7 +167,7 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
 }
 
 /** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
-function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
+export function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
   hiddenDecision(state);
   const battle = state.battle!;
   let index = lastEligibleIndex(battle.draw, eligible);

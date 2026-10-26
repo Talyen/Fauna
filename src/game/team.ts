@@ -9,7 +9,7 @@ import { speciesCards, species } from "./content";
 import type { Card, GameEvent, GameState } from "./types";
 
 /** Both sides of the exchange provide passage, including Dulcera's own departure or arrival. */
-function gentlePassage(state: GameState, previous: GameState["team"], events: GameEvent[]) {
+export function gentlePassage(state: GameState, previous: GameState["team"], events: GameEvent[]) {
   if (state.phase !== "battle") return;
   const providers = new Map([...previous, ...state.team].map((unit) => [unit.id, unit]));
   const entering = state.team.filter((unit) => !previous.some((old) => old.id === unit.id));
@@ -177,7 +177,7 @@ export function pendingReplacement(state: GameState) {
     : undefined;
 }
 /** The guide can lead the arrival or accompany it; inactive backups supply no protection. */
-function mountainGuide(
+export function mountainGuide(
   state: GameState,
   incoming: Combatant,
   previous: readonly Combatant[],

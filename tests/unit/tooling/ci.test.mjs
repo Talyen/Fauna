@@ -379,14 +379,14 @@ async function gateFixture(workers = 1) {
     ],
   });
   const unitDiscovery = [{ file: "/runner/tests/unit/example.test.ts", name: "contract" }];
-  for (let shard = 1; shard <= 4; shard++) {
+  for (let shard = 1; shard <= LINEUP_SHARDS; shard++) {
     const file = "/runner/tests/exhaustive/roster-combinations.test.ts";
     const title = `lineup ${shard}`;
     const report = JSON.parse(readFileSync(path.join(root, "reports/vitest.json"), "utf8"));
     report.testResults[0].name = file;
     report.testResults[0].assertionResults[0].title = title;
     put(`reports/lineups/lineup-results-${shard}/vitest.json`, report);
-    put(`reports/lineups/lineup-results-${shard}/ci/lineup.json`, { ...ids, shard, total: 4 });
+    put(`reports/lineups/lineup-results-${shard}/ci/lineup.json`, { ...ids, shard, total: LINEUP_SHARDS });
     unitDiscovery.push({ file, name: title });
   }
   put("reports/ci/unit-discovery.json", unitDiscovery);
@@ -412,7 +412,12 @@ it("accepts mixed successful attempts of the same run and records their build ev
   expect(run(jobs, "2").status).toBe(0);
   // A failed consumer reruns against the unchanged build while other successful jobs are reused.
   put("reports/ci/unit.json", { ...ids, attempt: "2" });
-  put("reports/lineups/lineup-results-1/ci/lineup.json", { ...ids, attempt: "2", shard: 1, total: 4 });
+  put("reports/lineups/lineup-results-1/ci/lineup.json", {
+    ...ids,
+    attempt: "2",
+    shard: 1,
+    total: LINEUP_SHARDS,
+  });
   put("reports/interactions/ci/evidence.json", { ...ids, attempt: "2", build });
   put(shardPath, {
     ...ids,
@@ -496,10 +501,10 @@ it("rejects stale lineup evidence, swapped shards and duplicate lineup results",
   const { root, ids, put, run } = await gateFixture();
   const metadata = "reports/lineups/lineup-results-1/ci/lineup.json";
   for (const change of [{ sha: "other" }, { run: "other" }, { attempt: "2" }, { shard: 2 }, { total: 3 }]) {
-    put(metadata, { ...ids, shard: 1, total: 4, ...change });
+    put(metadata, { ...ids, shard: 1, total: LINEUP_SHARDS, ...change });
     expect(run().status).not.toBe(0);
   }
-  put(metadata, { ...ids, shard: 1, total: 4 });
+  put(metadata, { ...ids, shard: 1, total: LINEUP_SHARDS });
   const report = JSON.parse(
     readFileSync(path.join(root, "reports/lineups/lineup-results-1/vitest.json"), "utf8"),
   );

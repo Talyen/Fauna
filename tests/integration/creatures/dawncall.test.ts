@@ -1,3 +1,5 @@
+import { enemyPlay } from "../../support/game";
+import { addBackups } from "../../support/game";
 import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -164,7 +166,13 @@ it("Morning Bloom heals all living deployed allies by two without reviving or he
 
 it("retains the opening receipt through swaps and resume, resets in backup and at a new battle", () => {
   let game = produce(play(ready()).state, (draft) => {
-    draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
+    addBackups(draft, {
+      ...draft.team[1]!,
+      id: "backup",
+      species: "captoad" as const,
+      health: 30,
+      combat: freshCombat(),
+    });
   });
   game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
   game = decodeSave(encodeSave(game));
@@ -236,7 +244,14 @@ it.each([
       Object.assign(other.combat, { controlled: "freeze", controlTurns: 2, blind: true, burn: 2 });
     }
   });
-  const result = dispatch(game, { type: "endTurn" });
+  const result = enemyPlay(
+    game,
+    name === "Dawn Cry"
+      ? "dawncall-teamCleanse"
+      : name === "Sunwing Sweep"
+        ? "dawncall-attack"
+        : "dawncall-heal",
+  );
   expect(
     result.events.some((event) => event.actorId === "enemy-0" && event.text.includes(`uses ${name}`)),
   ).toBe(true);

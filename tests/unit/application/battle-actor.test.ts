@@ -57,6 +57,17 @@ it("keeps playing productive Memento cards without an attacks-per-turn cap", () 
   expect(damagingPlays).toBeGreaterThan(3);
 });
 
+it("keeps a self-replacing card productive while it advances Encore Baton", () => {
+  let state = produce(decodeSave(JSON.stringify(reedstag)), (draft) => {
+    draft.boons.push("encore-baton");
+  });
+  const actor = createBattleActor();
+  const first = actor.choose(state, false);
+  state = accept(state, first.command);
+  expect(state.battle!.encoreProgress).toBe(1);
+  expect(actor.choose(state, false).command).toEqual(first.command);
+});
+
 it("resets cycle history for a new turn and explicit manual takeover", () => {
   let state = decodeSave(JSON.stringify(reedstag));
   const actor = createBattleActor();

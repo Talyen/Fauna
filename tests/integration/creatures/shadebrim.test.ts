@@ -99,7 +99,7 @@ it("combines Burn resistance with talents before rounding and spending Block", (
     hit(game, game.battle!.enemies[0]!, target, 20, "burn", [], { origin: "proc" as const });
     expect(target.block).toBe(0);
     expect(target.health).toBe(species(target.species).health - 1);
-    expect(target.combat!.burn).toBe(1);
+    expect(target.combat!.burn).toBe(4);
   });
 });
 
@@ -139,12 +139,12 @@ it("reflects only the next applicable Burn, retaining other reflection and preve
   produce(resumed, (game) => {
     const target = game.team[0]!,
       attacker = game.battle!.enemies[0]!;
-    // Non-Burn statuses and fully absorbed hits leave Noonward's charge intact
+    // Non-Burn statuses leave Noonward's charge intact even when blocked
     hit(game, attacker, target, 2, "poison", [], { origin: "proc" as const });
     expect(target.combat!.reflectBurn).toBe(true);
-    expect(target.combat!.poison).toBe(0);
-    hit(game, attacker, target, 4, "poison", [], { origin: "proc" as const });
     expect(target.combat!.poison).toBe(2);
+    hit(game, attacker, target, 4, "poison", [], { origin: "proc" as const });
+    expect(target.combat!.poison).toBe(6);
     expect(target.combat!.reflectBurn).toBe(true);
     target.combat!.poison = 0;
     target.combat!.reflect = true;
@@ -165,7 +165,7 @@ it("reflects only the next applicable Burn, retaining other reflection and preve
   });
 });
 
-it("does not spend Burn reflection on Dodge, full absorption, ticks, Nullify or capped buildup; Purge removes it", () => {
+it("spends Burn reflection on blocked buildup but preserves it through Dodge, ticks, Nullify and capped buildup", () => {
   for (const mode of ["dodge", "block", "periodic", "nullify", "capped", "purge"] as const) {
     produce(ready(), (game) => {
       const target = game.team[0]!,
@@ -189,7 +189,7 @@ it("does not spend Burn reflection on Dodge, full absorption, ticks, Nullify or 
               ? { origin: "periodic" as const }
               : { origin: "proc" as const },
         );
-      expect(target.combat!.reflectBurn).toBe(mode !== "purge");
+      expect(target.combat!.reflectBurn).toBe(mode !== "purge" && mode !== "block");
     });
   }
 });

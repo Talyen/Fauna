@@ -151,6 +151,9 @@ describe("journey earnings and results", () => {
     let s = accept(startedJourney(), { type: "beginBattle" });
     s = produce(s, (d) => {
       d.team[0]!.health = 1;
+      d.team[0]!.combat!.deathDoorUsed = true;
+      d.battle!.enemies[0]!.species = "prismram";
+      d.battle!.enemies[0]!.power = 100;
       d.battleXP = { block: 2 };
     });
     for (let turn = 0; turn < 20 && s.phase === "battle"; turn++) s = accept(s, { type: "endTurn" });

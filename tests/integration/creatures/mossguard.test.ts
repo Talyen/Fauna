@@ -9,7 +9,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
 import { KEYWORD_DEFINITIONS } from "../../../src/game/keywords";
 import { GLOSSARY } from "../../../src/game/glossary";
-import { teamRun } from "../../support/game";
+import { teamRun, addBackups } from "../../support/game";
 
 function ready(id: string) {
   return produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (game) => {
@@ -75,7 +75,7 @@ it("renews the living deployed team including self, caps healing and leaves knoc
     draft.team[0]!.health -= 5;
     draft.team[1]!.health -= 1;
     draft.team[2]!.health = 0;
-    draft.reserves.push({ ...draft.team[0]!, id: "reserve", health: 10 });
+    addBackups(draft, { ...draft.team[0]!, id: "reserve", species: "reedstag", health: 10 });
   });
   const cardId = game.battle!.hand[0]!;
   const command = { type: "play", cardId, autoEndTurn: false } as const;
@@ -103,7 +103,7 @@ it.each([1, 2, 3, 4, 5, 6])("retains Overgrowth Block at copy count %i across tu
     draft.team.forEach((ally) => {
       ally.block = 100;
     });
-    draft.reserves.push({ ...draft.team[0]!, id: "reserve", block: 100 });
+    addBackups(draft, { ...draft.team[0]!, id: "reserve", species: "reedstag", health: 30, block: 100 });
     draft.battle!.enemies.forEach((enemy) => {
       enemy.combat.controlled = "stun";
       enemy.combat.controlTurns = 1;
@@ -113,7 +113,7 @@ it.each([1, 2, 3, 4, 5, 6])("retains Overgrowth Block at copy count %i across tu
   const result = dispatch(resumed, { type: "endTurn" });
   expect(result.accepted).toBe(true);
   expect(result.state.team.map((ally) => ally.block)).toEqual([50 + copies * 5, 50, 50]);
-  expect(result.state.reserves[0]!.block).toBe(50 + copies * 5);
+  expect(result.state.reserves[0]!.block).toBe(50);
   expect(retainedBlock(game.team[0]!)).toBe(55); // Enemy species use the base tier
   expect(retainedBlock({ species: "mossguard", block: 7 }, game)).toBe(
     Math.round((7 * (100 + copies * 10)) / 200),

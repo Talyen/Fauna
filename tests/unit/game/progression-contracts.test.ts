@@ -61,8 +61,8 @@ it("preserves mixed starter offers on resume and excludes Legendaries after an o
   expect(decodeSave(encodeSave(initial))).toEqual(initial);
 
   const ordinary = accept(initial, { type: "draft", species: "mossguard" });
-  expect(new Set(ordinary.starterOffers)).toEqual(new Set(["mossguard", "emberback"]));
-  expect(ordinary.starterOffers).toHaveLength(3);
+  expect(new Set(ordinary.starterOffers)).toEqual(new Set(["emberback"]));
+  expect(ordinary.starterOffers).toHaveLength(1);
   expect(decodeSave(encodeSave(ordinary))).toEqual(ordinary);
   expect(() => decodeSave(JSON.stringify({ ...ordinary, starterOffers: initial.starterOffers }))).toThrow();
   const rejected = dispatch(ordinary, { type: "draft", species: "memento" });

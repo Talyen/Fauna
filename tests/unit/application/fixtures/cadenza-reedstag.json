@@ -23,7 +23,8 @@
       "bloomquail": 1,
       "captoad": 1,
       "memento": 1,
-      "prismram": 3
+      "prismram": 3,
+      "mossguard": 1
     }
   },
   "revision": 5000,
@@ -130,7 +131,7 @@
     },
     {
       "id": "recruit-415",
-      "species": "prismram",
+      "species": "mossguard",
       "health": 0,
       "block": 0,
       "attacked": false,

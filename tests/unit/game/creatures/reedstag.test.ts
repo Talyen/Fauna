@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species } from "../../../../src/game/content";
@@ -9,7 +10,7 @@ import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { authoredPack, accept, teamRun, winBattle } from "../../../support/game";
 
 function ready(id = "reedstag-guard") {
-  return produce(teamRun(1, ["reedstag", "mossguard", "reedstag"]), (game) => {
+  return produce(teamRun(1, ["reedstag", "mossguard", "emberback"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === id)!;
     game.battle!.hand = [card.id];
     game.battle!.buffer = [];
@@ -210,13 +211,7 @@ it("enemy Mending Spring Cleanses its healed ally rather than its attack target"
     game.battle!.enemies[2]!.health = 0;
     game.rng = 1;
   });
-  const result = dispatch(
-    produce(setup, (game) => {
-      game.rng = 1000;
-    }),
-    { type: "endTurn" },
-  );
-  expect(result.accepted).toBe(true);
+  const result = enemyPlay(setup, "reedstag-heal");
   expect(result.events.some((event) => event.text.includes("uses Mending Spring"))).toBe(true);
   expect(result.state.battle!.enemies[1]!.combat.blind).toBe(false);
   expect(result.state.battle!.enemies[1]!.combat.controlled).toBeNull();

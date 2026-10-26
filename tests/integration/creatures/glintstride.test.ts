@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species } from "../../../src/game/content";
@@ -201,7 +202,7 @@ it("uses False Horizon and Mirage Run on the enemy side without player draw or d
       for (const other of draft.battle!.enemies.slice(1)) other.health = 0;
       draft.rng = seed;
     });
-    const result = dispatch(game, { type: "endTurn" });
+    const result = enemyPlay(game, seed === 1 ? "glintstride-dodge" : "glintstride-teamBlind");
     expect(result.accepted).toBe(true);
     const enemy = result.state.battle!.enemies[0]!;
     expect(enemy.lastAbility).toBe(seed === 1 ? "glintstride-dodge" : "glintstride-teamBlind");

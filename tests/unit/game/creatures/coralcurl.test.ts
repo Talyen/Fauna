@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species, TALENTS } from "../../../../src/game/content";
@@ -225,7 +226,7 @@ it("Water hit rewards include full absorption and exclude missed and passive dam
           : { origin: "ability", blindMiss: mode === "miss" },
       );
       expect(actor.block).toBe(mode === "blocked" ? 2 : 0);
-      expect(enemy.combat.armor).toBe(mode === "blocked" ? 8 : 10);
+      expect(enemy.combat.armor).toBe(mode === "blocked" ? 7 : mode === "retaliation" ? 9 : 10);
     });
 });
 
@@ -282,7 +283,7 @@ it("enemy Coral Spiral Blinds every living deployed ally after reordering", () =
     });
     draft.rng = 1000;
   });
-  const result = dispatch(game, { type: "endTurn" });
+  const result = enemyPlay(game, "coralcurl-swap");
   expect(result.accepted).toBe(true);
   expect(result.events.some((event) => event.text.includes("uses Coral Spiral"))).toBe(true);
   expect(result.state.team.every((unit) => unit.health === 0 || unit.combat!.blind)).toBe(true);

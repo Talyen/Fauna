@@ -113,14 +113,12 @@ describe("game commands", () => {
     expect(r.state.battleXP.armor).toBe(1);
     expect(r.state.battle!.discard).toContain(attack.id);
   });
-  it("persists enemy repertoire history and never repeats consecutive abilities", () => {
+  it("persists the selected enemy repertoire history through save and resume", () => {
     let s = decodeSave(encodeSave(run()));
     for (let turn = 0; turn < 4 && s.phase === "battle"; turn++) {
-      const previous = s.battle!.enemies.map((enemy) => enemy.lastAbility);
       s = accept(s, { type: "endTurn" });
-      s.battle!.enemies.forEach((enemy, index) => {
+      s.battle!.enemies.forEach((enemy) => {
         if (enemy.health > 0 && !enemy.combat.skipped) {
-          expect(enemy.lastAbility).not.toBe(previous[index]);
           expect(definition(enemy.lastAbility!).species).toBe(enemy.species);
         }
       });

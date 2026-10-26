@@ -12,7 +12,7 @@ import { prepareDestination, accept, teamRun, winBattle } from "../../support/ga
 import type { GameEvent } from "../../../src/game/types";
 
 function ready(id = "prismram-guard") {
-  return produce(teamRun(1, ["prismram", "mossguard", "prismram"]), (game) => {
+  return produce(teamRun(1, ["prismram", "mossguard", "reedstag"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === id)!;
     game.battle!.hand = [card.id];
     game.battle!.buffer = [];
@@ -109,13 +109,14 @@ it.each([
   ]);
 });
 
-it("preserves a Ward through blocked hits, control immunity and periodic damage, then consumes it once", () => {
+it("spends a Ward on blocked buildup but preserves a refreshed Ward through control immunity and periodic damage", () => {
   const result = produce(ready(), (game) => {
     const ram = game.team[0]!;
     ram.combat!.reflect = true;
     ram.block = 5;
     hit(game, game.battle!.enemies[0]!, ram, 4, "burn", [], { origin: "proc" as const });
-    expect(ram.combat!.reflect).toBe(true);
+    expect(ram.combat!.reflect).toBe(false);
+    ram.combat!.reflect = true;
     ram.block = 0;
     ram.combat!.cooldown = 3;
     hit(game, game.battle!.enemies[0]!, ram, 1, "stun", [], { origin: "proc" as const });
@@ -221,7 +222,7 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
     addBackups(draft, {
       ...draft.team[1]!,
       id: "reserve",
-      species: "emberback",
+      species: "captoad",
       health: 24,
       combat: freshCombat(),
     });
@@ -234,7 +235,7 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
     addBackups(draft, {
       ...draft.team[1]!,
       id: "reserve",
-      species: "emberback",
+      species: "captoad",
       health: 24,
       combat: freshCombat(),
     });

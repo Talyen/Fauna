@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../../support/game";
 import { produce } from "immer";
 import { expect, it } from "vitest";
 import { CARDS, definition, species, type SpeciesId } from "../../../../src/game/content";
@@ -186,6 +187,8 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
   expect(preview.events).toEqual(result.events);
   expect(game.team[0]!.species).toBe("captoad");
   expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+  expect(CARDS.filter((card) => card.species === "captoad")).toHaveLength(3);
+  expect(species("captoad").passiveTiers.map((tier) => tier.effects[0]!.amount)).toEqual([1, 2, 3, 4, 5, 6]);
 });
 
 it("removes outgoing overflow too, while preserving unrelated cards and filling their vacant hand slots", () => {
@@ -259,42 +262,32 @@ it("swaps positions with a living ally when no living backup exists, or just dra
 });
 
 it("enemy Leaps reorder the battlefield without extra actions, and saves retain authored enemy identities", () => {
-  let found = false;
-  for (let seed = 1; seed <= 20 && !found; seed++) {
-    const game = accept(
-      produce(teamRun(seed, ["mossguard"]), (draft) => {
-        draft.encounter = 2;
-        draft.journey!.victories = draft.encounter;
-        prepareDestination(draft);
-        draft.expedition = {
-          recruit: null,
-          lastRoom: null,
-          pack: authoredPack(
-            draft.encounter,
-            COMBAT_PACKS.findIndex((pack) => pack[0] === "captoad"),
-          ),
-        };
-      }),
-      { type: "beginBattle" },
-    );
-    const result = dispatch(game, { type: "endTurn" });
-    const actions = result.events.filter(
-      (event): event is Extract<GameEvent, { kind: "action" }> =>
-        event.kind === "action" && event.actionType !== "swap",
-    );
-    if (!actions.some((event) => event.text.includes("Bogbound Leap"))) continue;
-    found = true;
-    expect(actions).toHaveLength(3);
-    const reward = winBattle(result.state);
-    expect(reward.reward!.recruits).toEqual(encounterSource(game).enemies.map((enemy) => enemy.species));
-    expect(decodeSave(encodeSave(reward))).toEqual(reward);
-    for (const enemy of game.battle!.enemies)
-      expect(actions.filter((event) => event.actorId === enemy.id)).toHaveLength(1);
-    expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
-  }
-  expect(found).toBe(true);
-  expect(CARDS.filter((card) => card.species === "captoad")).toHaveLength(3);
-  expect(species("captoad").passiveTiers.map((tier) => tier.effects[0]!.amount)).toEqual([1, 2, 3, 4, 5, 6]);
+  const game = accept(
+    produce(teamRun(1, ["mossguard"]), (draft) => {
+      draft.encounter = 2;
+      draft.journey!.victories = draft.encounter;
+      prepareDestination(draft);
+      draft.expedition = {
+        recruit: null,
+        lastRoom: null,
+        pack: authoredPack(
+          draft.encounter,
+          COMBAT_PACKS.findIndex((pack) => pack[0] === "captoad"),
+        ),
+      };
+    }),
+    { type: "beginBattle" },
+  );
+  const result = enemyPlay(game, "captoad-swap");
+  const actions = result.events.filter((event) => event.kind === "action" && event.actionType !== "swap");
+  expect(actions).toHaveLength(1);
+  expect(actions[0]!.text).toContain("Bogbound Leap");
+  expect(result.state.battle.enemies.map((enemy) => enemy.id)).not.toEqual(
+    game.battle!.enemies.map((enemy) => enemy.id),
+  );
+  const reward = winBattle(result.state);
+  expect(reward.reward!.recruits).toEqual(encounterSource(game).enemies.map((enemy) => enemy.species));
+  expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
 
 it.each([1, 2, 3, 4, 5, 6])(

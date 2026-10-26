@@ -226,6 +226,8 @@ it.each([0, 2])(
       enemies.forEach((enemy) => {
         enemy.power = 0;
       });
+      enemies[1]!.species = "prismram";
+      enemies[1]!.power = 1;
     });
     for (let turn = 0; turn < 2; turn++) {
       const result = dispatch(game, { type: "endTurn" });

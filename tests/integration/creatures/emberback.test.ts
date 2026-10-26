@@ -1,3 +1,4 @@
+import { addBackups } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -169,7 +170,13 @@ it("uses an enemy area ability against deployed allies while leaving reserves un
           COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
         ),
       };
-      draft.reserves.push({ ...draft.team[0]!, id: "reserve", combat: freshCombat() });
+      addBackups(draft, {
+        ...draft.team[0]!,
+        id: "reserve",
+        species: "captoad",
+        health: 30,
+        combat: freshCombat(),
+      });
     }),
     { type: "beginBattle" },
   );
@@ -212,6 +219,6 @@ it("checks Dodge and defenses separately for every area recipient", () => {
   expect(
     result.state.battle!.enemies.map((enemy, index) => game.battle!.enemies[index]!.health - enemy.health),
   ).toEqual([0, 1, 2]);
-  expect(result.state.battle!.enemies.map((enemy) => enemy.combat.burn)).toEqual([0, 1, 2]);
+  expect(result.state.battle!.enemies.map((enemy) => enemy.combat.burn)).toEqual([0, 2, 2]);
   expect(result.state.battle!.enemies[1]!.block).toBe(0);
 });

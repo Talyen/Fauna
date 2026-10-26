@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -277,7 +278,7 @@ it("encounters discover and recruit Dunefox; enemy Mirage Step and auras use the
       { type: "beginBattle" },
     );
     expect(game.discovery.encountered).toContain("dunefox");
-    const result = dispatch(game, { type: "endTurn" });
+    const result = enemyPlay(game, seed === 1 ? "dunefox-dodge" : "dunefox-teamBlind");
     if (result.events.some((event) => event.text.includes("uses Mirage Step"))) {
       sawStep = true;
       expect(result.state.battle!.enemies[0]!.combat.temporaryDodge).toBe(30);

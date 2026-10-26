@@ -291,7 +291,7 @@ describe("Oathara", () => {
       draft.team[1]!.health = 10;
       addBackups(draft, {
         id: "fallen-backup",
-        species: "mossguard",
+        species: "coralcurl",
         health: 0,
         block: 0,
         attacked: false,
@@ -395,6 +395,7 @@ describe("Oathara", () => {
       enemy.species = "oathara";
       enemy.name = "Oathara";
       enemy.health = enemy.maxHealth = 30;
+      enemy.power = 10;
       enemy.lastAbility = ward;
       draft.battle.enemies[1]!.health = 0;
       draft.battle.enemies[2]!.health = 0;

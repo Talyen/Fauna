@@ -18,7 +18,7 @@ it("partitions every ordinary lineup once without changing seeds, order or scena
   expect(
     Math.max(...shards.map((shard) => shard.length)) - Math.min(...shards.map((shard) => shard.length)),
   ).toBeLessThanOrEqual(1);
-  for (const shard of ["", "0", "5", "1.5", "01", "wrong"])
+  for (const shard of ["", "0", String(LINEUP_SHARDS + 1), "1.5", "01", "wrong"])
     expect(() => lineupShard(scenarios, shard)).toThrow("Invalid lineup shard");
 });
 
@@ -56,6 +56,7 @@ it("collects every generated lineup in the full suite without executing the simu
       {
         cwd: root,
         encoding: "utf8",
+        maxBuffer: 16 * 1024 * 1024,
         timeout: 30_000,
         env: { ...process.env, NODE_OPTIONS: "--max-old-space-size=1024" },
       },

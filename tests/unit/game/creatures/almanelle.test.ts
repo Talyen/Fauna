@@ -105,7 +105,7 @@ describe("Almanelle", () => {
     });
     const ended = dispatch(ready, { type: "endTurn" });
     expect(ended.accepted).toBe(true);
-    expect(ended.state.team[0]!).toMatchObject({ health: 19, block: 10, combat: { thorns: 5 } });
+    expect(ended.state.team[0]!).toMatchObject({ health: 22, block: 9, combat: { thorns: 4 } });
     const burnIndex = ended.events.findIndex(
       (event) => event.kind === "damage" && event.targetId === "ally-0",
     );
@@ -136,7 +136,7 @@ describe("Almanelle", () => {
       draft.team[0]!.combat!.thorns = STACK_LIMIT - 2;
       addBackups(draft, {
         id: "backup",
-        species: "almanelle",
+        species: "reedstag",
         health: 28,
         block: 20,
         attacked: false,
@@ -146,7 +146,7 @@ describe("Almanelle", () => {
       decayBlock(draft, draft.reserves[0]!, []);
     });
     expect(game.team[0]!.combat!.thorns).toBe(STACK_LIMIT);
-    expect(game.reserves[0]!.combat!.thorns).toBe(5);
+    expect(game.reserves[0]!.combat!.thorns).toBe(0);
     expect(game.team[1]!.combat!.thorns).toBe(0);
     expect(decodeSave(encodeSave(game))).toEqual(game);
   });
@@ -221,7 +221,7 @@ describe("Almanelle", () => {
     expect(result.state.cards).toEqual(game.cards);
     expect(result.state.battle!.hand).toHaveLength(game.battle.hand.length);
     const recoveryIndex = result.events.findIndex(
-      (event) => event.kind === "action" && event.text.includes("returns to your hand"),
+      (event) => event.kind === "action" && event.text.includes("is drawn from Discard"),
     );
     const healIndex = result.events.findIndex((event) => event.kind === "heal");
     expect(recoveryIndex).toBeGreaterThan(-1);

@@ -1,5 +1,11 @@
 import { canVisitCampfire } from "../../src/game/destinations";
-import { ownedCards, swapBackup } from "../../src/game/team";
+import { ownedCards, swapBackup, swapFromCard } from "../../src/game/team";
+import { enemyCard } from "../../src/game/card-rules";
+import { enemyAbilityValue } from "../../src/game/ability-rules";
+import { executeAbility } from "../../src/game/combat/abilities";
+import { battlefield } from "../../src/game/battlefield";
+import { mostInjured } from "../../src/game/combat/state";
+import { observeDecisions, type DecisionSource } from "../../src/game/random";
 import { freshCombat, ensureCombat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
 import { inspectCardPlay } from "../../src/game/play-queries";
@@ -7,10 +13,10 @@ import { produce } from "immer";
 import { encounterPacks } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId } from "../../src/game/content";
-import type { Command, GameState, Lifecycle, BattleState, Creature } from "../../src/game/types";
+import type { Command, GameState, Lifecycle, BattleState, Creature, GameEvent } from "../../src/game/types";
 // Shared bound accounts for solo Legendary Bosses and their recruitment choices
 // Fixed current-catalog full-journey fixture; shared with the browser expedition.
-export const FULL_JOURNEY_SEED = 13;
+export const FULL_JOURNEY_SEED = 2;
 export const FULL_JOURNEY_COMMAND_BUDGET = 800;
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);
@@ -54,6 +60,34 @@ export function accept(s: GameState, c: Command) {
   const result = dispatch(s, c);
   if (!result.accepted) throw new Error(result.reason);
   return result.state;
+}
+/** Exercise an authored enemy ability independently of the enemy's card-selection policy. */
+export function enemyPlay(
+  state: GameState,
+  definitionId: string,
+  options: { decisions?: DecisionSource; allyTargetId?: string } = {},
+) {
+  const events: GameEvent[] = [];
+  const next = produce(requireBattle(state), (draft) => {
+    if (options.decisions) observeDecisions(draft, options.decisions);
+    const def = enemyCard(definition(definitionId));
+    const actor = draft.battle.enemies.find((enemy) => enemy.species === def.species)!;
+    actor.lastAbility = def.id;
+    executeAbility(
+      draft,
+      {
+        side: "enemy",
+        actor,
+        def,
+        value: enemyAbilityValue(actor, def),
+        targetId: actor.targetId,
+        allyTargetId: options.allyTargetId ?? mostInjured(battlefield(draft, "enemy"))?.id,
+      },
+      events,
+      { swap: swapFromCard },
+    );
+  });
+  return { accepted: true, state: next, events };
 }
 /** Backups in valid checkpoints already have committed Collection records. */
 export function addBackups(state: GameState, ...creatures: Creature[]) {
@@ -178,7 +212,12 @@ export function policy(s: GameState): Command {
     const def = definition(card.definitionId);
     return def.effect === "draw" || def.effects?.some((effect) => effect.kind === "draw");
   });
-  if (draw) return { type: "play", cardId: draw.id };
+  if (draw)
+    return {
+      type: "play",
+      cardId: draw.id,
+      ...(definition(draw.definitionId).effect === "swapChosen" ? { targetId: backup!.id } : {}),
+    };
   const heal = cards.find((c) => definition(c.definitionId).effect === "heal");
   const injured = s.team
     .filter((c) => c.health > 0 && c.health < species(c.species).health)

@@ -1,3 +1,5 @@
+import { enemyPlay } from "../../support/game";
+import { addBackups } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 import { authoredPack, swapFixture } from "../../support/game";
 import { cardText } from "../../../src/game/card-rules";
@@ -142,7 +144,13 @@ it("spends Encore on the first accepted ability only, preserves rejection and re
 it("refreshes one Nullify on living deployed allies and exposes visible status feedback", () => {
   const game = produce(ready("chimecricket-nullify", 1972), (draft) => {
     draft.team[2]!.health = 0;
-    draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
+    addBackups(draft, {
+      ...draft.team[1]!,
+      id: "backup",
+      species: "captoad" as const,
+      health: 30,
+      combat: freshCombat(),
+    });
     draft.reserves[0]!.health = 0;
   });
   const result = play(game);
@@ -186,13 +194,15 @@ it.each(["burn", "poison", "bleed", "stun", "freeze", "blind"] as const)(
   },
 );
 
-it("retains Nullify through turns, blocked damage, immunity, periodic ticks and existing Blind; allows Purge", () => {
+it("spends Nullify on blocked buildup but preserves it through immunity, periodic ticks and existing Blind", () => {
   produce(ready(), (game) => {
     const target = game.team[0]!,
       source = game.battle!.enemies[0]!;
     target.combat!.nullify = true;
     target.block = 5;
     hit(game, source, target, 2, "poison", [], { origin: "proc" as const });
+    expect(target.combat!.nullify).toBe(false);
+    target.combat!.nullify = true;
     target.block = 0;
     target.combat!.cooldown = 3;
     hit(game, source, target, 2, "stun", [], { origin: "proc" as const });
@@ -222,8 +232,14 @@ it("stops a reflected harmful status with Nullify", () => {
 
 it("retains Nullify and spent Encore through swapping and resume, and resets them next battle", () => {
   let game = produce(ready("chimecricket-nullify"), (draft) => {
-    const backup = { ...draft.team[1]!, id: "backup", combat: freshCombat() };
-    draft.reserves.push(backup);
+    const backup = {
+      ...draft.team[1]!,
+      id: "backup",
+      species: "captoad" as const,
+      health: 30,
+      combat: freshCombat(),
+    };
+    addBackups(draft, backup);
   });
   game = play(game).state;
   game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
@@ -321,7 +337,13 @@ it.each([
       enemies[1]!.combat.controlTurns = 1;
       enemies[2]!.health = 0;
     });
-    const result = dispatch(game, { type: "endTurn" });
+    const id =
+      name === "Resonant Leap"
+        ? "chimecricket-attack"
+        : name === "Hush Dome"
+          ? "chimecricket-nullify"
+          : "chimecricket-heal";
+    const result = enemyPlay(game, id, { decisions: () => (repeats ? 0.05 : 0.15) });
     expect(result.accepted).toBe(true);
     expect(
       result.events.some((event) => event.actorId === "enemy-0" && event.text.includes(`uses ${name}`)),

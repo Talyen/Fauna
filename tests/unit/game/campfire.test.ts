@@ -36,7 +36,9 @@ it("counts reserves and restores knocked-out reserves without overfilling health
   const s = produce(run(), (d) => {
     prepareDestination(d);
     d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
-    d.reserves.push({ id: "reserve", species: "emberback", health: 0, block: 0, attacked: false });
+    d.discovery.encountered.push("captoad");
+    d.discovery.recruited.captoad = 1;
+    d.reserves.push({ id: "reserve", species: "captoad", health: 0, block: 0, attacked: false });
   });
   expect(canVisitCampfire(s)).toBe(true);
   let next = accept(s, { type: "visitCampfire" });

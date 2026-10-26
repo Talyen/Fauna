@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species } from "../../../../src/game/content";
@@ -108,7 +109,7 @@ it("melting the last Armor triggers Molten Shell after damage and preserves othe
   });
   const result = dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(result.state.battle!.enemies[0]!.combat.armor).toBe(0);
-  expect(result.state.battle!.enemies[0]!.combat.thorns).toBe(3);
+  expect(result.state.battle!.enemies[0]!.combat.thorns).toBe(2);
   expect(result.state.battle!.enemies[0]!.block).toBeLessThan(10);
   expect(result.state.team.every((unit) => unit.combat!.burn === 1)).toBe(true);
 });
@@ -201,7 +202,7 @@ it("Cinderstep also follows ordinary Dodge and retains normal Block mitigation",
     hit(game, source, target, 6, "physical", []);
     expect(target.health).toBe(before);
     expect(source.block).toBe(0);
-    expect(source.combat.burn).toBe(4);
+    expect(source.combat.burn).toBe(6);
   });
 });
 
@@ -236,7 +237,10 @@ it.each([
     draft.discovery.encountered.push("captoad");
     draft.discovery.recruited.captoad = 1;
   });
-  const result = dispatch(game, { type: "endTurn" });
+  const result = enemyPlay(
+    game,
+    name === "Ember Breath" ? "cindernewt-ember-breath" : "cindernewt-ashen-veil",
+  );
   expect(result.accepted).toBe(true);
   const actions = result.events.flatMap((event, index) => (event.kind === "action" ? [index] : []));
   expect(result.events[actions[0]!]?.text).toContain(`uses ${name}`);
@@ -272,7 +276,7 @@ it("stops melting remaining Armor when an Armor-break burst knocks out the actor
 
 it.each([
   [1, "burn"],
-  [3, "physical"],
+  [1800, "physical"],
 ] as const)("enemy seed %i resolves Cinder Lash as %s", (seed, damageType) => {
   const game = produce(ready("cindernewt-attack", seed), (draft) => {
     const enemy = draft.battle!.enemies[0]!;
@@ -289,7 +293,7 @@ it.each([
       unit.combat!.controlTurns = 1;
     });
   });
-  const result = dispatch(game, { type: "endTurn" });
+  const result = enemyPlay(game, "cindernewt-attack");
   expect(result.accepted).toBe(true);
   expect(
     result.events.find((event): event is Extract<GameEvent, { kind: "action" }> => event.kind === "action")

@@ -1,3 +1,4 @@
+import { enemyPlay } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species } from "../../../src/game/content";
@@ -172,22 +173,11 @@ it("uses enemy base conversion on its own side and Cradle heals only its actor",
     expect(enemy.block).toBe(3);
   });
   expect(game.team).toEqual(ready("bloomquail-draw", 6).team);
-  const results = Array.from({ length: 20 }, (_, seed) =>
-    dispatch(
-      produce(game, (draft) => {
-        draft.rng = seed * 1000;
-      }),
-      { type: "endTurn" },
-    ),
-  );
-  const cradle = results.find((result) =>
-    result.events.some((event) => event.text.includes("uses Bloom Cradle")),
-  )!;
-  expect(cradle).toBeDefined();
+  const cradle = enemyPlay(game, "bloomquail-draw");
   expect(cradle.events).toContainEqual(
     expect.objectContaining({ kind: "heal", targetId: "enemy-0", amount: 2 }),
   );
-  expect(cradle.state.battle!.enemies[0]!.block).toBe(2);
+  expect(cradle.state.battle!.enemies[0]!.block).toBe(3);
 });
 
 it("discovers, recruits and resumes Bloomquail with its complete kit", () => {

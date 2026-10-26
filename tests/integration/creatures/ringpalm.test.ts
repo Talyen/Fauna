@@ -1,3 +1,5 @@
+import { enemyPlay } from "../../support/game";
+import { addBackups } from "../../support/game";
 import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -185,7 +187,7 @@ it("applies Armor separately to the repeated base packet and allows its Stun to 
 });
 
 it.each(["miss", "block", "armor", "kill", "actorKnockout", "derived", "periodic", "retaliation"] as const)(
-  "does not roll Resonance for %s",
+  "applies Resonance packet eligibility for %s",
   (mode) => {
     const seed = seedFor(([roll]) => roll! > 0.05 && roll! < 0.1);
     const events: GameEvent[] = [];
@@ -214,9 +216,9 @@ it.each(["miss", "block", "armor", "kill", "actorKnockout", "derived", "periodic
             ? { origin: "proc" as const }
             : { origin: "ability", blindMiss: mode === "miss" },
       );
-      expect(events.some((event) => event.text.includes("with Resonance"))).toBe(false);
+      expect(events.some((event) => event.text.includes("with Resonance"))).toBe(mode === "block");
       if (mode === "actorKnockout") expect(source.health).toBe(0);
-      if (proc) expect(game.rng).toBe(seed);
+      if (proc && mode !== "block") expect(game.rng).toBe(seed);
     });
   },
 );
@@ -244,14 +246,20 @@ it.each([true, false])(
     const seed = seedFor(([roll]) => roll! < 0.5 === block);
     const game = produce(ready("ringpalm-teamProtection", seed), (draft) => {
       draft.team[2]!.health = 0;
-      draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
+      addBackups(draft, {
+        ...draft.team[1]!,
+        id: "backup",
+        species: "captoad" as const,
+        health: 30,
+        combat: freshCombat(),
+      });
       if (!block) for (const unit of draft.team) unit.block = 10;
       draft.reserves[0]!.health = 0;
     });
     const result = play(game);
     const withLivingBackup = produce(game, (draft) => {
       draft.team[2]!.health = 1;
-      draft.reserves[0]!.health = 32;
+      draft.reserves[0]!.health = 30;
     });
     expect(play(withLivingBackup).state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
     expect(result.state.team.map((unit) => (block ? unit.block : unit.combat!.thorns))).toEqual([2, 2, 0]);
@@ -282,7 +290,13 @@ it("rejects invalid or unaffordable plays without spending RNG and retains the s
   });
   expect(play(empty, "enemy-0").state).toBe(empty);
   let swapped = produce(game, (draft) => {
-    draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
+    addBackups(draft, {
+      ...draft.team[1]!,
+      id: "backup",
+      species: "captoad" as const,
+      health: 30,
+      combat: freshCombat(),
+    });
   });
   swapped = swapFixture(swapped, { type: "swap", activeId: "ally-0", reserve: "backup" });
   swapped = decodeSave(encodeSave(swapped));
@@ -334,7 +348,15 @@ it.each(["Ringclap", "Harmonic Set", "Seedling Circle"])(
         other.combat.controlTurns = 1;
       }
     });
-    const result = dispatch(game, { type: "endTurn" });
+    const result = enemyPlay(
+      game,
+      name === "Ringclap"
+        ? "ringpalm-attack"
+        : name === "Harmonic Set"
+          ? "ringpalm-harmonic-set"
+          : "ringpalm-teamProtection",
+      { decisions: () => 0.15 },
+    );
     expect(
       result.events.some((event) => event.actorId === "enemy-0" && event.text.includes(`uses ${name}`)),
     ).toBe(true);
