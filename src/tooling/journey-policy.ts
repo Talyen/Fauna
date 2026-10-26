@@ -91,7 +91,7 @@ export function boonValue(
       return has.has("dodge") ? 60 : 0;
     case "reef-casket":
     case "coronation-cloche":
-      return cards.some((card) => card.effect === "hushDome") ? 50 : 0;
+      return effect("nullify") ? 50 : 0;
     case "obsidian-pitcher":
       return has.has("leech") ? 60 : 0;
     case "grain-flail":

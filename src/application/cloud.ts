@@ -163,7 +163,7 @@ export function createCloud(
     metadataWrites = writing.catch(() => {});
     return writing;
   }
-  async function reconcile(background = false, initialization?: number) {
+  async function reconcile(background = false, initialization?: number, recoverEmpty = false) {
     if (!alive() || !port || !identity?.available || identity.enabled === false) return;
     // Startup retains its lease through reconciliation so its deadline covers remote reads too.
     const token = initialization ?? ++generation;
@@ -208,7 +208,7 @@ export function createCloud(
         current,
         remote,
         localData,
-        mode: background ? "background" : "startup",
+        mode: background && !recoverEmpty ? "background" : "startup",
       });
       if (plan.deferred) {
         update({ status: "Pending", blocking: false });
@@ -310,7 +310,9 @@ export function createCloud(
         update({ ...initialCloudView });
         return;
       }
-      await reconcile(background, starting);
+      // An automatic retry may recover a remote save when no local game exists,
+      // while still keeping local metadata recovery non-blocking and non-installing.
+      await reconcile(background, starting, background && data === null);
     } catch (error) {
       if (owns(starting))
         update({
@@ -337,7 +339,10 @@ export function createCloud(
       .then(() => {
         const background = forceBackground || localData !== null;
         const token = generation + 1;
-        const operation = lifecycle === "ready" ? reconcile(background) : initialize(localData, background);
+        const operation =
+          lifecycle === "ready"
+            ? reconcile(background, undefined, background && localData === null)
+            : initialize(localData, background);
         return bounded(operation, 5000, () => {
           if (owns(token)) offline();
         });

@@ -19,4 +19,11 @@ cloud, saved-state, and modifier tests remain separate from these hashes.
 
 The Linux and Windows bundle observations and the revised allowance are
 recorded in the [bundle history](../archive/BUNDLE_SIZE_HISTORY.md#combined-boons-and-combat-changes).
+The hosted snapshot capture for `4d97a57b` retains the current combined combat
+and journey traces. Armor, Auto-play decisions and the expanded Boon offer pool
+change later commands and RNG, so these are new feature baselines rather than
+proof of parity with the prior rules. The Aerostat ranking drops a no-op draw;
+its grouped Food targets follow Pumpkin Tureen. The earlier snapshots remain in
+Git history, and direct command, save/resume and combat assertions remain active.
+
 All completion and platform claims depend on the repaired commit's hosted CI.

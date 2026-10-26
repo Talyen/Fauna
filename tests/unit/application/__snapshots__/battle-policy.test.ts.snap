@@ -6,7 +6,6 @@ exports[`preserves visible rankings and legal choices for aerostat 1`] = `
     "ordinary",
     [
       "{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:aerostat-true-bearing","autoEndTurn":false},"score":202,"reason":"Use True Bearing for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}",
       "{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":106,"reason":"Use Trail Bread for its visible benefit"}",
     ],
@@ -15,7 +14,6 @@ exports[`preserves visible rankings and legal choices for aerostat 1`] = `
     "injured",
     [
       "{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:aerostat-true-bearing","autoEndTurn":false},"score":202,"reason":"Use True Bearing for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}",
       "{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":106,"reason":"Use Trail Bread for its visible benefit"}",
     ],
@@ -24,7 +22,6 @@ exports[`preserves visible rankings and legal choices for aerostat 1`] = `
     "defended",
     [
       "{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:aerostat-true-bearing","autoEndTurn":false},"score":202,"reason":"Use True Bearing for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}",
       "{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":106,"reason":"Use Trail Bread for its visible benefit"}",
     ],
@@ -34,7 +31,7 @@ exports[`preserves visible rankings and legal choices for aerostat 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:aerostat-true-bearing","autoEndTurn":false},"score":202,"reason":"Use True Bearing for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":112,"reason":"Use Trail Bread for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":112,"reason":"Use Trail Bread for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}",
     ],
   ],
