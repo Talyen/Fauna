@@ -3,11 +3,11 @@ import { expectScrollFree, LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layo
 import { captureFrame, captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { reloadHome, test, seed, state } from "./support/session";
-import { run } from "../support/game";
+import { merchantDestination, run } from "../support/game";
+import { BOONS } from "../../src/game/content";
 for (const [width, height] of REVIEW_VIEWPORTS)
   test(`illustrated Boons remain readable and return focus at ${width}×${height}`, async ({ page }) => {
     const fixture = structuredClone(run(7));
-    const { BOONS } = await import("../../src/game/content");
     fixture.boons = BOONS.map((boon) => boon.id);
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
@@ -44,15 +44,17 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     expect(await state(page)).toEqual(fixture);
   });
 
-for (const [width, height, scale] of LAYOUT_CASES)
-  test(`Boon Merchant shelf and purchase resume at ${width}×${height}, text ${scale}`, async ({ page }) => {
-    const { merchantDestination } = await import("../support/game");
+// Split the layouts into two journeys so CI can distribute them without repeating every purchase.
+for (const [group, layouts] of [
+  ["compact", LAYOUT_CASES.slice(0, 3)],
+  ["wide", LAYOUT_CASES.slice(3)],
+] as const)
+  test(`Boon Merchant shelf and purchase across ${group} layouts`, async ({ page }) => {
     const fixture = merchantDestination();
     const visit = fixture.support!.id;
     const slot = fixture.support!.stock[0]!;
-    await page.setViewportSize({ width, height });
+    const boon = BOONS.find((entry) => entry.id === slot.boon)!;
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", String(scale)), scale);
     await seed(page, fixture);
     await expectControlColors(
       page.getByRole("button", { name: "Continue", exact: true }),
@@ -61,35 +63,55 @@ for (const [width, height, scale] of LAYOUT_CASES)
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
     await expect(page.getByRole("heading", { name: "Boon Merchant", exact: true })).toBeVisible();
-    const row = await page.locator(".merchant-heading .screen-heading").boundingBox();
-    const wallet = await page.locator(".merchant-wallet").boundingBox();
-    expect(wallet!.y).toBeGreaterThanOrEqual(row!.y);
-    expect(wallet!.y + wallet!.height).toBeLessThanOrEqual(row!.y + row!.height);
     await expect(page.getByRole("button", { name: /^Buy .+ for \d+ Gold$/ })).toHaveCount(3);
     await expect(page.locator(".merchant-offer h2, .merchant-offer > p:not(.merchant-status)")).toHaveCount(
       0,
     );
-    for (const control of await page.getByRole("button", { name: /^Buy / }).all()) {
-      await expectControlColors(control, "--foreground");
-    }
-    await captureScreen(page, { path: `reports/boon-merchant-shelf-${width}.png`, fullPage: true });
-    await page
-      .getByRole("button", { name: /^Buy .+ for \d+ Gold$/ })
-      .first()
-      .click();
+    const inspectLayouts = async (name: string, check?: () => Promise<void>) => {
+      for (const [width, height, scale] of layouts) {
+        await page.setViewportSize({ width, height });
+        await page
+          .locator("html")
+          .evaluate((el, value) => el.style.setProperty("--text-scale", String(value)), scale);
+        await settleScreen(page);
+        await check?.();
+        await captureScreen(page, {
+          path: `reports/${name}-${width}-${height}-${scale}.png`,
+          fullPage: true,
+        });
+      }
+    };
+    await inspectLayouts("boon-merchant-shelf", async () => {
+      for (const control of await page.getByRole("button", { name: /^Buy / }).all())
+        await expectControlColors(control, "--foreground");
+      const row = await page.locator(".merchant-heading .screen-heading").boundingBox();
+      const wallet = await page.locator(".merchant-wallet").boundingBox();
+      expect(wallet!.y).toBeGreaterThanOrEqual(row!.y);
+      expect(wallet!.y + wallet!.height).toBeLessThanOrEqual(row!.y + row!.height);
+    });
+    await page.getByRole("button", { name: `Buy ${boon.name} for ${slot.price} Gold`, exact: true }).click();
     await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
+    await expect(
+      page
+        .getByRole("region", { name: "Purchased Boon" })
+        .getByRole("heading", { name: boon.name, exact: true }),
+    ).toBeVisible();
     await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
     const purchased = await state(page);
     expect(purchased.currency).toBe(fixture.currency - slot.price);
     expect(purchased.boons).toEqual([...fixture.boons, slot.boon]);
     expect(purchased.support).toMatchObject({ id: visit, resolved: true });
-    await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
-    if (width === 1280 && height === 720 && scale === 1.25) {
-      // Save/resume is viewport independent; keep it once alongside all shelf/receipt layouts.
+    await inspectLayouts("merchant");
+    expect(await state(page)).toEqual(purchased);
+    if (group === "compact") {
+      // Save/resume is viewport independent; retain it once across all receipt layouts.
       await reloadHome(page);
       await page.getByRole("button", { name: "Continue", exact: true }).click();
-      await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
-      await expect(page.getByRole("region", { name: "Purchased Boon" })).toBeVisible();
+      await expect(
+        page
+          .getByRole("region", { name: "Purchased Boon" })
+          .getByRole("heading", { name: boon.name, exact: true }),
+      ).toBeVisible();
       await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
       expect(await state(page)).toEqual(purchased);
     }
