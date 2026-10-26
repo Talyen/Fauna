@@ -1,9 +1,8 @@
-import { openHome, reloadHome, test } from "./support/session";
+import { seed, state, resume, reloadHome, test } from "./support/session";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { species } from "../../src/game/content";
 import { creaturePassive } from "../../src/game/progression";
-import { decodeSave, encodeSave } from "../../src/game/save";
 import { accept, merchantDestination } from "../support/game";
 import { expectScrollFree } from "./support/layout-contract";
 import { captureScreen } from "./support/rendered-evidence";
@@ -15,16 +14,13 @@ test("Recruit details and four destination options fit enlarged text and recruit
     draft.expedition!.recruit = "cadenza";
     draft.team[0]!.health = 0;
   });
-  const fixture = encodeSave(game);
-  expect(decodeSave(fixture)).toEqual(game);
   await page.setViewportSize({ width: 1280, height: 720 });
-  await page.addInitScript((save) => {
-    if (!localStorage.getItem("fauna.save.v1")) localStorage.setItem("fauna.save.v1", save);
+  await page.addInitScript(() => {
     localStorage.setItem("fauna.text-scale", "1.25");
     localStorage.setItem("fauna.tooltip-scale", "1.25");
-  }, fixture);
-  await openHome(page);
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  });
+  await seed(page, game);
+  await resume(page);
   await expect(page.locator(".destination-option")).toHaveCount(4);
   const recruit = page.getByRole("button", { name: "Recruit Cadenza", exact: true });
   await recruit.hover();
@@ -38,11 +34,11 @@ test("Recruit details and four destination options fit enlarged text and recruit
   await recruit.focus();
   await page.keyboard.press("Enter");
   await expect(recruit).toHaveCount(0);
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
   const expected = accept(game, { type: "recruitDestination", species: "cadenza" });
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(expected);
+  expect(await state(page)).toEqual(expected);
   await reloadHome(page);
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await resume(page);
   await expect(page.getByRole("button", { name: "Recruit Cadenza", exact: true })).toHaveCount(0);
+  expect(await state(page)).toEqual(expected);
   await expectScrollFree(page);
 });

@@ -149,5 +149,9 @@
   "scripts/checks/modifier-contracts.mjs": {
     "reason": "Complete modifier implementation/query bindings, including aliased pure parameter consumers",
     "suites": ["tests/unit/tooling/modifier-contracts.test.mjs", "tests/unit/tooling/verification.test.mjs"]
+  },
+  "src/ui/talents/": {
+    "reason": "Talent requirements, category reset and menu cues stay in sync with committed purchases",
+    "suites": ["tests/unit/ui/menu-navigation.test.tsx", "tests/unit/ui/combat-ui.test.tsx"]
   }
 }

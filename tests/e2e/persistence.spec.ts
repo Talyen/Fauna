@@ -53,15 +53,16 @@ test("Boon choice resumes without repeating the reward or earnings", async ({ pa
 });
 
 test("corrupt saves recover backups and all-invalid saves continue silently", async ({ page }) => {
-  await openHome(page);
-  await page.evaluate(
+  await page.addInitScript(
     ({ key, game }) => {
+      if (sessionStorage.getItem("fauna.test.corrupted")) return;
+      sessionStorage.setItem("fauna.test.corrupted", "1");
       localStorage.setItem(key, "broken");
       localStorage.setItem(`${key}.backup1`, game);
     },
     { key, game: JSON.stringify(run()) },
   );
-  await reloadHome(page);
+  await openHome(page);
   await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
   await resume(page);
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();

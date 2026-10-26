@@ -2,7 +2,7 @@ import userEvent from "@testing-library/user-event";
 import { screenTestEnvironment } from "../../support/ui";
 // @vitest-environment jsdom
 import { expect, it, vi } from "vitest";
-import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
+import { act, cleanup, render, screen, waitFor, within } from "@testing-library/react";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { produce } from "immer";
@@ -122,50 +122,91 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
   }
 });
 
-it.each(["home", "pause"])(
-  "shows spendable talent points in the %s menu and clears the cue after purchase",
-  async (origin) => {
-    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-    localStorage.setItem(
-      "fauna.save.v1",
-      encodeSave(
-        produce(run(7), (game) => {
-          game.keywordXP.physical = 10;
-        }),
-      ),
-    );
-    const session = createSession(createBrowserPlatform(localStorage), 7);
-    await session.load();
-    const user = userEvent.setup();
-    render(<App session={session} />);
-    try {
+it("keeps both menus' talent cues in sync with purchases, rejection and category reset", async () => {
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  const game = produce(run(7), (draft) => {
+    draft.keywordXP.physical = 10;
+    draft.keywordXP.block = 10;
+    draft.talents = ["block.second-wind"];
+  });
+  localStorage.setItem("fauna.save.v1", encodeSave(game));
+  const session = createSession(createBrowserPlatform(localStorage), 7);
+  await session.load();
+  const user = userEvent.setup();
+  render(<App session={session} />);
+  const cue = (available: boolean) => {
+    const button = screen.getByRole("button", { name: "Talents" });
+    expect(button.hasAttribute("aria-describedby")).toBe(available);
+    if (available) {
+      const description = document.getElementById(button.getAttribute("aria-describedby")!);
+      expect(description?.getAttribute("aria-label")).toBe("1 talent point available");
+      expect(description?.textContent).toBe("1");
+    } else expect(screen.queryByLabelText("1 talent point available")).toBeNull();
+  };
+  try {
+    for (const origin of ["home", "pause"]) {
       if (origin === "pause") {
         await user.click(screen.getByRole("button", { name: "Continue" }));
         await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
-      const talents = screen.getByRole("button", { name: "Talents" });
-      const description = talents.getAttribute("aria-describedby");
-      expect(description).toBeTruthy();
-      expect(document.getElementById(description!)?.getAttribute("aria-label")).toBe(
-        "1 talent point available",
+      cue(true);
+      await user.click(screen.getByRole("button", { name: "Talents" }));
+      const physical = screen.getByRole("button", { name: "Physical talents" });
+      expect(document.getElementById(physical.getAttribute("aria-describedby")!)?.textContent).toBe(
+        "1 point available",
       );
-      expect(screen.getByLabelText("1 talent point available").textContent).toBe("1");
-      await user.click(talents);
+      expect(screen.getByRole("button", { name: "Block talents" }).hasAttribute("aria-describedby")).toBe(
+        false,
+      );
       await user.click(screen.getByRole("button", { name: "Back" }));
       await waitFor(() =>
         expect(document.activeElement).toBe(screen.getByRole("button", { name: "Talents" })),
       );
-      act(() => {
-        expect(session.command({ type: "buyTalent", talentId: "physical.shield-slam" })).toBe(true);
-      });
-      expect(screen.queryByLabelText("1 talent point available")).toBeNull();
-      expect(screen.getByRole("button", { name: "Talents" }).hasAttribute("aria-describedby")).toBe(false);
-    } finally {
-      cleanup();
-      await session.dispose();
+      expect(session.store.getState().game).toEqual(game);
     }
-  },
-);
+    await user.click(screen.getByRole("button", { name: "Talents" }));
+    await user.click(screen.getByRole("button", { name: "Physical talents" }));
+    expect(screen.getByRole("button", { name: "Reset Physical talents" }).hasAttribute("disabled")).toBe(
+      true,
+    );
+    const slam = screen.getByRole("button", { name: "Shield Slam" });
+    expect(slam.textContent).toContain("Add half your Block to Physical damage");
+    expect(within(slam).getByText("Unlock · 1 point")).toBeTruthy();
+    await user.click(slam);
+    expect(screen.getByRole("button", { name: "Shield Slam, unlocked" })).toBeTruthy();
+    const fists = screen.getByRole("button", { name: "Armored Fists" });
+    expect(within(fists).getByText("Requires 1 point")).toBeTruthy();
+    const bought = session.store.getState().game;
+    await user.click(fists);
+    expect(session.store.getState().game).toBe(bought);
+    await user.keyboard("{Escape}{Escape}");
+    cue(false);
+    await user.click(screen.getByRole("button", { name: "Main menu" }));
+    cue(false);
+    await user.click(screen.getByRole("button", { name: "Talents" }));
+    await user.click(screen.getByRole("button", { name: "Physical talents" }));
+    await user.click(screen.getByRole("button", { name: "Reset Physical talents" }));
+    expect(session.store.getState().game.talents).toEqual(["block.second-wind"]);
+    expect(session.store.getState().game.keywordXP).toEqual(game.keywordXP);
+    expect(screen.getByRole("button", { name: "Reset Physical talents" }).hasAttribute("disabled")).toBe(
+      true,
+    );
+    expect(
+      within(screen.getByRole("button", { name: "Armored Fists" })).getByText("Unlock · 1 point"),
+    ).toBeTruthy();
+    expect(document.activeElement).toBe(screen.getByRole("button", { name: "Shield Slam" }));
+    await user.keyboard("{Escape}");
+    expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();
+    await user.keyboard("{Escape}");
+    cue(true);
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+    cue(true);
+  } finally {
+    cleanup();
+    await session.dispose();
+  }
+});
 
 it("makes Deck available in drafting, rewards and Merchant without committing inspection", async () => {
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
