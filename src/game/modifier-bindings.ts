@@ -260,7 +260,7 @@ export const modifierImplementations = freeze(
       "encore-baton": ["./combat/card-modifiers#afterPlayerCard", "./ability-rules#encoreProgressLimit"],
       "pruning-crescent": ["./combat/statuses#removeEffects"],
       "knot-comb": ["./combat/lifecycle#tickStatuses"],
-      "rain-cape": ["./combat/damage#resolveHit"],
+      "rain-cape": ["./combat/damage-values#blockEfficiency"],
       "tuning-fork-charm": ["./combat/damage-values#armorApplies"],
       rainkeeper: ["./ability-rules#manaCapacity"],
       "dream-yo-yo": ["./combat/card-modifiers#returnDodgedCard"],

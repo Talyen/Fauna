@@ -339,25 +339,19 @@ it("Knot Comb chooses one harmful category with seeded randomness and works in b
   expect(state.rng).toBe(1083814273);
 });
 
-it("Rain Cape preserves allied Armor against Water through Block but leaves other wear intact", () => {
+it("Rain Cape makes allied Block more effective against Water", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["rain-cape"];
   source.combat = { ...freshCombat(), armor: 3 };
   source.block = 10;
-  hit(state, target, source, 3, "water", events, { origin: "proc" });
-  expect(source.combat.armor).toBe(3);
-  expect(source.block).toBe(7);
-  source.block = 0;
-  const health = source.health;
-  hit(state, target, source, 4, "physical", events, { origin: "proc" });
-  expect(source.health).toBe(health - 1);
-  expect(source.combat.armor).toBe(2);
-  target.combat.armor = 3;
-  hit(state, source, target, 3, "water", events, { origin: "proc" });
-  expect(target.combat.armor).toBe(2);
+  hit(state, target, source, 5, "water", events, { origin: "proc" });
+  expect([source.block, source.combat.armor]).toEqual([7, 3]);
+  target.block = 10;
+  hit(state, source, target, 5, "water", events, { origin: "proc" });
+  expect(target.block).toBe(5);
 });
 
-it("Tuning Fork Charm shares Armor bypass with visible attack facts and preserves ordinary Armor wear", () => {
+it("Tuning Fork Charm shares Armor bypass with visible attack facts and preserves bypassed Armor", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["tuning-fork-charm"];
   target.combat = { ...freshCombat(), armor: 5, stun: 2 };
@@ -366,7 +360,7 @@ it("Tuning Fork Charm shares Armor bypass with visible attack facts and preserve
   expect(ordinaryAttackFacts(requireBattle(state), source, def, 4, target)[0]!.lost).toBe(4);
   hit(state, source, target, 4, "physical", events, { origin: "proc" });
   expect(target.health).toBe(96);
-  expect(target.combat.armor).toBe(4);
+  expect(target.combat.armor).toBe(5);
   target.combat.stun = 0;
   hit(state, source, target, 4, "physical", events, { origin: "proc" });
   expect(target.health).toBe(96);

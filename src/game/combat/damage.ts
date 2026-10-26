@@ -399,7 +399,12 @@ export function* resolveHit(
     alliedTarget &&
     state.boons.includes("hoard-lockplate") &&
     armorApplies(state, target, type, source, options);
-  if (armorFirst) damage = armoredDamage(damage, stats.armor);
+  let armorReducedDamage = false;
+  if (armorFirst) {
+    const reduced = armoredDamage(damage, stats.armor);
+    armorReducedDamage = reduced < damage;
+    damage = reduced;
+  }
   const blockRatio = blockEfficiency(state, target, type);
   const bypassBlock =
     alliedSource &&
@@ -426,8 +431,11 @@ export function* resolveHit(
     !armorFirst && armorApplies(state, target, type, source, options)
       ? armoredDamage(damage + blocked, stats.armor)
       : damage + blocked;
-  if (!armorFirst && armorApplies(state, target, type, source, options))
-    damage = armoredDamage(damage, stats.armor);
+  if (!armorFirst && armorApplies(state, target, type, source, options)) {
+    const reduced = armoredDamage(damage, stats.armor);
+    armorReducedDamage = reduced < damage;
+    damage = reduced;
+  }
   const criticalBonusDamage = critical
     ? Math.max(
         0,
@@ -443,8 +451,8 @@ export function* resolveHit(
     damage = Math.min(damage, Math.max(0, target.health - boonRule("hearth-coal").minimum));
   const lost = loseHealth(state, target, damage, events);
   const dealt = Math.min(effectDamage, blocked + lost);
+  if (armorReducedDamage) erode(1);
   if (effectDamage > 0) {
-    if (!(alliedTarget && type === "water" && state.boons.includes("rain-cape"))) erode(1);
     if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(effectDamage);
     if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point")) erode(effectDamage);
   }

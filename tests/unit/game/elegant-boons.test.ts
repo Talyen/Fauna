@@ -295,7 +295,7 @@ it("Gemmed Scabbard does not grant Armor protection against unrelated retaliatio
   hit(state, target, source, 3, "water", events, { origin: "retaliation" });
   hit(state, target, source, 3, "nature", events, { origin: "statusRetaliation" });
   expect(source.health).toBe(before - 6);
-  expect(source.combat!.armor).toBe(6);
+  expect(source.combat!.armor).toBe(8);
 });
 
 it("Dream Tangram moves only the existing repeat and sends its harmful extras to the new enemy", () => {

@@ -284,7 +284,7 @@ describe("Tournelle", () => {
       expect(result.state.battle!.enemies[1]!.health).toBe(
         game.battle!.enemies[1]!.health - (kind === "tournelle" ? 8 : 4),
       );
-      expect(result.state.battle!.enemies[1]!.combat.armor).toBe(kind === "tournelle" ? 1 : 0);
+      expect(result.state.battle!.enemies[1]!.combat.armor).toBe(kind === "tournelle" ? 2 : 1);
       expect(result.state).toEqual(previewCard(game, game.battle!.hand[0]!, "enemy-0").state);
       expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
     },

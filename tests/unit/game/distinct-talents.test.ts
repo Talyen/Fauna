@@ -38,9 +38,9 @@ describe("distinct talent and Boon outcomes", () => {
     state.talents = ["burn.melting-point"];
     target.combat.armor = 20;
     hit(state, source, target, 5, "burn", events);
-    expect(target.combat.armor).toBe(14);
+    expect(target.combat.armor).toBe(15);
     tickStatuses(state, target, events);
-    expect(target.combat.armor).toBe(8);
+    expect(target.combat.armor).toBe(10);
     expect(target.combat.burn).toBe(3);
   });
   it("lowers Freeze thresholds, grants Block, and triggers Icy Heart once", () => {

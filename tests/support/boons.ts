@@ -61,7 +61,7 @@ export const NEW_BOON_EFFECTS = {
   "encore-baton": "Draw a card after playing three",
   "pruning-crescent": "Purging enemy Thorns steals them for yourself",
   "knot-comb": "Cleanse a random harmful effect each turn",
-  "rain-cape": "Water damage does not remove allied Armor",
+  "rain-cape": "Block is twice as effective against Water",
   "tuning-fork-charm": "Physical hits ignore Armor on enemies with Stun buildup",
   "apiary-smoker": "Blinded enemies cannot gain Thorns",
   "brookskip-disc": "Water damage against enemy Block chains to a second enemy",

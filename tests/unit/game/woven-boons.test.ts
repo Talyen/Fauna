@@ -66,7 +66,7 @@ it.each(["physical", "stun"] as const)(
       hit(state, enemy, ally, 8, type, events, { origin: "proc" });
       expect(ally.block).toBe(owned ? 7 : 2);
       expect(ally.health).toBe(species(ally.species).health);
-      expect(ally.combat!.armor).toBe(4);
+      expect(ally.combat!.armor).toBe(owned ? 4 : 5);
       if (type === "stun") expect(ally.combat!.stun).toBe(3);
       enemy.block = 10;
       enemy.combat.armor = 5;

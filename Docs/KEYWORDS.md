@@ -30,11 +30,11 @@ Attacks have a base 5% Dodge chance before defenses and attacks on both sides ha
 
 ### Block and Armor
 
-Block absorbs damage before Health and halves at the owner's next turn, rounded normally. Armor reduces Physical and Stun damage after Block when calculating Health loss. Armor loses one stack when the hit has positive damage after applicable Armor mitigation, including damage absorbed by Block.
+Block absorbs damage before Health and halves at the owner's next turn, rounded normally. Armor reduces Physical and Stun damage after Block when calculating Health loss. Armor loses one stack when it reduces damage, including when it absorbs the remaining damage entirely. A hit fully absorbed by Block does not wear Armor.
 
 Block protects Health without suppressing hit effects, status buildup, Leech or damage-based reactions. Those mechanics use damage before Block, with applicable Armor mitigation. Leech includes absorbed damage and actual Health lost, capped by that mitigated hit so neither Armor nor overkill can inflate it. Rules explicitly based on Health lost continue to use actual Health loss. Grounding, Blood Ward and Venom Ward retain their explicit Block-dependent rules. Dodge and Negate remain separate from Block.
 
-Hoard Lockplate is the explicit allied exception: applicable Armor reduces damage before Block is spent, without applying Armor twice. The default order remains Block, Armor, then Health loss.
+Hoard Lockplate is the explicit allied exception: applicable Armor reduces damage before Block is spent, without applying Armor twice, and wears when it reduces that damage. The default order remains Block, Armor, then Health loss.
 
 ### Thorns and Water Thorns
 

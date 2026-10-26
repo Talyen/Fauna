@@ -45,7 +45,7 @@ export const GLOSSARY = [
   {
     term: "Damage",
     definition:
-      "Attacks can Dodge or critically hit; Block absorbs damage first; Armor then reduces Physical and Stun damage; Positive damage removes 1 Armor; Burn, Poison, Bleed, Stun, and Freeze hits add their matching buildup; There are no elemental reactions",
+      "Attacks can Dodge or critically hit; Block absorbs damage first; Armor then reduces Physical and Stun damage; Reducing damage removes 1 Armor; Burn, Poison, Bleed, Stun, and Freeze hits add their matching buildup; There are no elemental reactions",
   },
   {
     term: "Hit",

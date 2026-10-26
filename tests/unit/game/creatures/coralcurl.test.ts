@@ -167,7 +167,7 @@ it("Water bypasses Armor reduction, obeys Block and leaves no damage status", ()
     hit(game, game.team[0]!, enemy, 6, "water", []);
     expect(enemy.health).toBe(enemy.maxHealth - 4);
     expect(enemy.block).toBe(0);
-    expect(enemy.combat.armor).toBe(19);
+    expect(enemy.combat.armor).toBe(20);
     expect([enemy.combat.burn, enemy.combat.poison, enemy.combat.bleed, enemy.combat.freeze]).toEqual([
       0, 0, 0, 0,
     ]);
@@ -198,7 +198,7 @@ it("gates all three Water talent rows and applies Pressure, High Tide, Seafoam a
     hit(game, actor, enemy, 6, "water", []);
     expect(enemy.health).toBe(enemy.maxHealth - 9);
     expect(actor.block).toBe(5);
-    expect(enemy.combat.armor).toBe(7);
+    expect(enemy.combat.armor).toBe(8);
   });
 });
 
@@ -223,7 +223,7 @@ it("Water hit rewards include full absorption and exclude missed and passive dam
           : { origin: "ability", blindMiss: mode === "miss" },
       );
       expect(actor.block).toBe(mode === "blocked" ? 2 : 0);
-      expect(enemy.combat.armor).toBe(mode === "blocked" ? 7 : mode === "retaliation" ? 9 : 10);
+      expect(enemy.combat.armor).toBe(mode === "blocked" ? 8 : 10);
     });
 });
 

@@ -107,7 +107,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Armor",
       "status",
       "active",
-      "Reduce incoming Physical and Stun damage; lose a stack when damaged",
+      "Reduce incoming Physical and Stun damage after Block; lose 1 stack when Armor reduces damage",
       ["Armored"],
     ),
     burn: entry("Burn", "damage", "active", "Deal damage each turn, then halve the stacks", [

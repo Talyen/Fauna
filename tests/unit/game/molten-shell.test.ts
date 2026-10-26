@@ -74,6 +74,7 @@ it("requires an actual break, can trigger again after gaining new Armor, and nev
     ensureCombat(unit).controlled = "freeze";
     ensureCombat(unit).controlTurns = 1;
     ensureCombat(unit).armor = 2;
+    unit.block = 2;
     hit(draft, enemy, unit, 2, "physical", events);
     expect(ensureCombat(unit).armor).toBe(2);
     hit(draft, enemy, unit, 3, "physical", events);
@@ -143,11 +144,12 @@ it("does not activate Molten Shell when periodic damage breaks Armor after swapp
     });
     ensureCombat(draft.team[0]!).armor = 1;
     ensureCombat(draft.team[0]!).burn = 1;
+    draft.talents.push("armor.fireward");
   });
   const swapped = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup-moss" });
   const events: GameEvent[] = [];
   const next = produce(swapped, (draft) => tickStatuses(draft, draft.reserves[0]!, events));
-  expect(next.reserves[0]!.health).toBe(swapped.reserves[0]!.health - 1);
+  expect(next.reserves[0]!.health).toBe(swapped.reserves[0]!.health);
   expect(next.reserves[0]!.combat!.armor).toBe(0);
   expect(next.battle!.enemies).toEqual(swapped.battle!.enemies);
   expect(decodeSave(encodeSave(next))).toEqual(next);
@@ -157,6 +159,7 @@ it("resolves opposing Molten Shells once each without a retaliation loop", () =>
   const events: GameEvent[] = [];
   const next = produce(battle(), (draft) => {
     ensureCombat(draft.team[0]!).armor = 1;
+    draft.talents.push("armor.fireward");
     const enemy = draft.battle!.enemies[0]!;
     enemy.combat.armor = 1;
     enemy.combat.controlled = "freeze";
@@ -180,7 +183,7 @@ it.each(["physical", "poison", "freeze", "stun"] as const)(
     produce(battle(), (draft) => {
       const enemy = draft.battle!.enemies[0]!;
       enemy.health = type === "freeze" || type === "stun" ? enemy.maxHealth : 18;
-      enemy.combat.armor = type === "physical" || type === "poison" ? 2 : 4;
+      enemy.combat.armor = type === "poison" ? 1 : type === "physical" ? 2 : 4;
       draft.rng = 1;
       if (type === "physical") draft.boons.push("sundering-charm");
       if (type === "poison") draft.talents.push("poison.caustic");

@@ -559,9 +559,9 @@ it("Armor Siphon steals before card damage and Caustic strips credited Poison Ar
   const f = fixture(["poison.caustic"]);
   f.target.combat.armor = 20;
   hit(f.state, f.source, f.target, 5, "poison", f.events);
-  expect(f.target.combat.armor).toBe(14);
+  expect(f.target.combat.armor).toBe(15);
   tickStatuses(f.state, f.target, f.events);
-  expect(f.target.combat.armor).toBe(8);
+  expect(f.target.combat.armor).toBe(10);
 });
 
 it("Rupture detonates Bleed once and pays its original Leech owner", () => {

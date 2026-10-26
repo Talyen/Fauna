@@ -41,7 +41,7 @@ function packet(
   return { next, events };
 }
 describe("Alchemy combat foundations", () => {
-  it("spends Block before Physical Armor and decays Armor only on damage", () => {
+  it("spends Block before Physical Armor and wears Armor when it reduces damage", () => {
     const { next, events } = packet("physical", 10, (s) => {
       s.battle!.enemies[0]!.block = 4;
       s.battle!.enemies[0]!.combat.armor = 2;
@@ -56,7 +56,7 @@ describe("Alchemy combat foundations", () => {
     const blocked = packet("physical", 2, (s) => {
       s.battle!.enemies[0]!.combat.armor = 3;
     });
-    expect(blocked.next.battle!.enemies[0]!.combat.armor).toBe(3);
+    expect(blocked.next.battle!.enemies[0]!.combat.armor).toBe(2);
   });
   it("resolves typed damage and buildup without elemental reactions", () => {
     for (const type of ["nature", "light"] as const) {

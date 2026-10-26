@@ -123,6 +123,7 @@ export function blockEfficiency(state: GameState, target: Combatant, type: Damag
   if (!isEnemy(target)) {
     if (type === "burn" && state.boons.includes("moss-oven-mitt"))
       return boonRule("moss-oven-mitt").multiplier;
+    if (type === "water" && state.boons.includes("rain-cape")) return boonRule("rain-cape").multiplier;
     if (type === "physical" && hasTalent(state, "block.reinforce"))
       return 1 + talentRule("block.reinforce").percent / 100;
   }

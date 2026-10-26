@@ -73,7 +73,7 @@ it.each([0, 4, 20])("Block independence: Leech and Armor mitigation agree with %
   hit(state, source, target, 10, "physical", events, { origin: "ability", leech: true });
   expect(source.health).toBe(14);
   expect(target.health).toBe(100 - Math.max(0, 10 - block - 2));
-  expect(target.combat.armor).toBe(1);
+  expect(target.combat.armor).toBe(block >= 10 ? 2 : 1);
 });
 
 it("Block independence: Leech counts absorbed damage without claiming overkill", () => {

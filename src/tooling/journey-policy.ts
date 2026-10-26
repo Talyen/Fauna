@@ -70,6 +70,7 @@ export function boonValue(
     case "fallingstar-anvil":
     case "pleated-pagoda":
     case "moss-oven-mitt":
+    case "rain-cape":
       return has.has("block") ? 60 : 0;
     case "echo-lens":
       return effect("dreamDouble") || effect("sparkDecoy") ? 50 : 0;
@@ -100,7 +101,6 @@ export function boonValue(
     case "knot-comb":
     case "basalt-glass-bookmark":
       return 40;
-    case "rain-cape":
     case "honeycomb-frame":
       return has.has("armor") ? 50 : 0;
     case "rainkeeper":
