@@ -67,7 +67,7 @@ Armor depletion records a once-delivered receipt at each positive-to-zero transi
 
 Enemy targeting is policy over the shared executor. The pure [battle policy](../src/application/battle-policy.ts) is shared by player Auto-play and headless heuristics; it reads only visible state, uses stable identity tie breaks and consumes no gameplay RNG. Its [benefit assessment](../src/application/battle-benefits.ts) consumes [legal play candidates](../src/game/play-queries.ts) and retains explicit ordinary-hit approximations; ranking weights and tie breaks remain in the policy. Rankings expose reasons for automation journals rather than claiming complete forecasts. Ordinary enemies rank supported abilities through the shared [enemy evaluator](../src/game/combat/enemy-policy.ts), preferring a different ability only when values tie; adaptation omits player-only hand/Mana extras and unsupported resource-only abilities, retaining healing in draw-plus-heal cards. Legendary enemies own their deck/Mana rules. Enemy selection occurs at the action window, never inspection. Scaling and player-only exceptions belong to [journey rules](EXPEDITION_DESIGN.md#encounters) and [Keywords](KEYWORDS.md).
 
-The [modifier ownership assessment](MODIFIER_RULES_PLAN.md) retains the original proposal. The [implementation evidence](task-evidence/2026-10-23-modifier-contracts.md) records the local implementation, unchanged behavior comparisons, protected integration and pending hosted checks.
+The [modifier ownership assessment](archive/MODIFIER_RULES_PLAN.md) retains the original proposal. The [implementation evidence](task-evidence/2026-10-23-modifier-contracts.md) records the local implementation, unchanged behavior comparisons, protected integration and pending hosted checks.
 
 The [follow-through record](task-evidence/2026-10-23-modifier-followthrough.md) records the reconciled Talent parameters, deferred-effect bindings and their verification scope.
 
@@ -178,8 +178,8 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 
 ## Plans and history
 
-The [startup simplification](STARTUP_SIMPLIFICATION_PLAN.md) records the completed removal of repeated bundled-content validation, terminal splash behavior and verification evidence.
+The [startup simplification](task-evidence/2026-10-23-startup-simplification.md) records the completed removal of repeated bundled-content validation, terminal splash behavior and verification evidence.
 
-The [combat and interaction implementation](COMPLEXITY_REDUCTION_PLAN.md) records the completed damage, status, targeting and Auto-play simplification and links its assessment and evidence.
+The [combat and interaction implementation](task-evidence/2026-10-23-complexity-reduction.md) records the completed damage, status, targeting and Auto-play simplification and links its assessment and evidence.
 
 The [simplification implementation record](archive/SIMPLIFICATION_IMPLEMENTATION.md) documents the six changes and links the approved assessment, verification boundaries and retained evidence. Historical records retain [lifecycle](archive/GAME_STATE_PLAN.md), [ability resolution](archive/COMBAT_RESOLUTION_PLAN.md) and [reaction ordering](archive/COMBAT_REACTIONS_PLAN.md) decisions and their original verification scope.

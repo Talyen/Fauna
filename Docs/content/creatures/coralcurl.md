@@ -1,12 +1,8 @@
 # Coralcurl and Water
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/coralcurl.ts) · [Authoring contracts](../../CONTENT.md)
 
-Coralcurl has 28 Health and is available through ordinary encounters, recruitment and starter drafts. Its abilities:
-
-- **Bubble Ward:** Gain 6 Block
-- **Reef Jet:** Deal 6 Water damage
-- **Coral Spiral:** Swap out for a random backup; Blind all enemies
+Coralcurl is available through ordinary encounters, recruitment and starter drafts.
 
 **Bubbleburst** reads "Deal 1 Water damage when your Block breaks" at zero stars and scales to 2, 3, 4, 5 and 6. When a direct attack spends the last Block, a surviving Coralcurl damages the living attacker, including an exactly absorbed attack. The captured break still triggers if another reward restores Block. Purge, expiry, periodic damage and retaliation do not trigger it; Bubbleburst cannot chain retaliation.
 

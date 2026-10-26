@@ -1,6 +1,10 @@
 # Creature references
 
-[Content](../../CONTENT.md) defines shared costs, six complete passive tiers and media preparation. [Keywords](../../KEYWORDS.md#combat-rules) defines defenses, statuses, reflection and removal; its [execution rules](../../KEYWORDS.md#classification-and-progression) cover repeats, modifiers and attribution; [Journey](../../EXPEDITION_DESIGN.md) defines scaling, formation and recruitment. Individual references summarize kits and document distinctive timing, stacking and ownership. References describe intrinsic kits; shared rules and explicit Talent/Boon modifiers still apply, including Camp Hammock’s automatic backup healing. Kit-specific exceptions do not disable those modifiers. Player passives use permanent rank, enemies the base tier. The roster permits one individual per species; duplicate-provider interactions in older references describe behavior outside valid current rosters, not team-building options. Keep common mechanics in these guides and link from the kit.
+[Content](../../CONTENT.md) defines shared costs, six complete passive tiers and media preparation. [Keywords](../../KEYWORDS.md#combat-rules) defines defenses, statuses, reflection and removal; its [execution rules](../../KEYWORDS.md#classification-and-progression) cover repeats, modifiers and attribution; [Journey](../../EXPEDITION_DESIGN.md) defines scaling, formation and recruitment. Individual references document identity and distinctive timing, stacking and ownership. References describe intrinsic kits; shared rules and explicit Talent/Boon modifiers still apply, including Camp Hammock’s automatic backup healing. Kit-specific exceptions do not disable those modifiers. Player passives use permanent rank, enemies the base tier. The roster permits one individual per species; duplicate-provider interactions in older references describe behavior outside valid current rosters, not team-building options. Keep common mechanics in these guides and link from the kit.
+
+## Reference scope
+
+Each reference links its authored kit as the authority for current Health, ability values, exact descriptions and six passive tiers. Keep these references focused on identity, design rationale and distinctive timing, stacking or ownership. Dated user selections and worked examples retain their recorded values; they are historical observations rather than another catalog to update. Use source links for ordinary kit inventories and link [task evidence](../../archive/README.md#creatures) for implementation checks.
 
 ## Shared artwork and evidence scope
 
@@ -34,24 +38,15 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Memento](memento.md) · [implementation](../../../src/game/content/creatures/memento.ts) — Legendary; Echoes and Pearls
 - [Euphera](euphera.md) · [implementation](../../../src/game/content/creatures/euphera.ts)
 - [Tournelle](tournelle.md) · [implementation](../../../src/game/content/creatures/tournelle.ts)
-
 - [Reverie](reverie.md) · [implementation](../../../src/game/content/creatures/reverie.ts)
-
 - [Oathara](oathara.md) · [implementation](../../../src/game/content/creatures/oathara.ts)
-
 - [Almanelle](almanelle.md) · [implementation](../../../src/game/content/creatures/almanelle.ts)
-
 - [Orifable and Food](orifable.md) · [implementation](../../../src/game/content/creatures/orifable.ts) — shared consumables and Express Delivery
-
 - [Arabesca](arabesca.md): Petalwake, Springbound and the shared next-card repeat
-
 - [Skybex](skybex.md): Mountain Guide, Cloudstep and protection for incoming allies
-
 - [Dulcera](dulcera.md) · [implementation](../../../src/game/content/creatures/dulcera.ts) — Gentle Passage and restorative swaps
-
 - [Parhelion](parhelion.md) · [implementation](../../../src/game/content/creatures/parhelion.ts) — Sunthaw and the light upon the snow
 - [Pyrella](pyrella.md): Passing Flame, Festival Burst, Ember Harvest and Spark Decoy
 - [Aerostat](aerostat.md) · [implementation](../../../src/game/content/creatures/aerostat.ts) — Well Provisioned and shared Food
 - [Alpenglen](alpenglen.md) · [implementation](../../../src/game/content/creatures/alpenglen.ts) — Last Warmth, attack reflection and a last-card Critical Hit
-
 - [Wisterelle](wisterelle.md) · [implementation](../../../src/game/content/creatures/wisterelle.ts) — Lost and Found and the flowering station

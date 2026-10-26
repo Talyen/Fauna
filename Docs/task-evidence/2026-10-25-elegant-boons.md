@@ -1,6 +1,6 @@
 # Ten elegant artifact Boons
 
-Implemented the owner's approved concise October 25 effects for Pearl Sieve, Tide Anklet, Obsidian Pitcher, Molten Paperweight, Coronation Cloche, Vigil Lantern, Grain Flail, Gemmed Scabbard, Dream Tangram and Comet Crucible. The [Boon rules](../../src/game/rules/boons.ts) own exact copy and tuning; [content contracts](../CONTENT.md#elegant-artifact-boons) own resolution details. All ten use the existing reward and Merchant pools, owned inspection and combat feedback, without additional controls or saved counters.
+Implemented the owner's approved concise October 25 effects for Pearl Sieve, Tide Anklet, Obsidian Pitcher, Molten Paperweight, Coronation Cloche, Vigil Lantern, Grain Flail, Gemmed Scabbard, Dream Tangram and Comet Crucible. The [Boon rules](../../src/game/rules/boons.ts) own exact copy and tuning; [content contracts](../content/boons.md#execution-contracts) own resolution details. All ten use the existing reward and Merchant pools, owned inspection and combat feedback, without additional controls or saved counters.
 
 The [Boon design skill](../../.agents/skills/fauna-boon-design/SKILL.md) now emphasizes creativity through simple rule changes, simplifying the underlying mechanic before shortening copy, distinguishing real design revisions from equivalent wording, and presenting compact refinement tables. Its examples illustrate decisions rather than claiming catalog membership. The skill-creator validator passed.
 

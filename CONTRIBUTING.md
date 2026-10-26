@@ -10,7 +10,26 @@
 
 Integration incorporates current main, verifies the combined result under the shared lock and advances clean main only after success. This is the required gate; earlier checks are optional and passing results are never cached. Integration retains the checkout, branch and evidence, updates the recorded base and clears completed extra-test selections. `finish` then archives ignored evidence and removes only the calling completed checkout, retaining its branch; use `-- --keep-worktree` while follow-up work still needs it.
 
-A busy lock waits up to 30 seconds; retry without disturbing its owner. Dirty main, unfinished Git operations, failed checks and ambiguous conflicts preserve task work. Resolve understood conflicts in the task checkout and retry. Unrelated unfinished tasks do not block completion. Routine commands reuse matching installed dependencies and stop if they are missing or stale; `npm run deps` prepares them separately. See [worktree operations](scripts/README.md#worktree-operations) for dependency sharing, lock diagnostics and optional cleanup.
+A busy lock waits up to 30 seconds; retry without disturbing its owner. Dirty main, unfinished Git operations, failed checks and ambiguous conflicts preserve task work. Resolve understood conflicts in the task checkout and retry. Unrelated unfinished tasks do not block completion. Routine commands reuse matching installed dependencies and stop if they are missing or stale; `npm run deps` prepares them separately. See [dependencies and source assets](#dependencies-and-source-assets), [cleanup](#cleanup) and [lock diagnostics](scripts/README.md#worktree-operations).
+
+### Dependencies and source assets
+
+Task creation uses `.worktrees/<task-name>` on `task/<task-name>` from committed local main. Matching checkouts are reused without resets; conflicting directories or branches are preserved and rejected. Dependencies are shared only when manifests, install settings and lifecycle scripts match. When dependencies are missing or change, run `npm run deps` in the task: it reuses a matching shared link or detaches only that link before `npm ci`, using the pinned npm. Never run `npm ci` through a shared dependency link. Ordinary task-command edits do not invalidate an install.
+
+New tasks use code-only checkouts when the target revision supports committed prepared media and output-only checks. They omit `public/art/`, `public/ui/` and `assets/source/`, retaining prepared media, manifests, code and tests; older/incomplete revisions keep full assets. For source-asset work use `npm run worktree -- <task-name> --full-assets`, or run `git sparse-checkout disable` in an existing task before preparation, source checks or art review. Missing-source preparation preserves published outputs and prints this instruction. [Storage internals](scripts/README.md#worktree-operations) explain cloning and dependency checks.
+
+### Cleanup
+
+Close owned previews before retiring a task. Integration itself performs no sweep.
+
+For optional repository maintenance from clean main:
+
+```sh
+npm run worktree:cleanup
+npm run worktree:cleanup -- --apply
+```
+
+The first command audits; `--apply` removes only eligible merged local `task/` or `codex/` branches/checkouts under the integration lock. Confirm inactivity first: clean/merged status or age alone does not establish it. Dirty, unmerged, locked and unfinished work is preserved. Cleanup never merges work, deletes remote branches, forces removal or stops processes. Preserved tasks do not fail the sweep; operational failures do. Ignored evidence is archived before removal; [archive details](scripts/README.md#worktree-operations) locate retained copies and manifests.
 
 ## Verification
 
@@ -23,7 +42,7 @@ A busy lock waits up to 30 seconds; retry without disturbing its owner. Dirty ma
 | `npm run test:full`                    | Complete unit/DOM/exhaustive discovery; CI-owned, blocked locally by default                                                            |
 | `npm run verify:full`                  | Full static, docs, content, unit, build and browser coverage; CI-owned, blocked locally by default                                      |
 
-Use `npm run verify:changed -- --plan` to inspect coverage and `--test <suite>` to record a regression in the plan. Changed tests, filename matches and declared [boundary contracts](scripts/checks/test-owners.json) identify coverage; missing required suites still block verification. These suites and owning compilers are deferred to hosted CI, including remembered selections during integration. The gate never launches automatic smoke or test suites. Run one specific regression separately when useful; append `-t <test-name>` to narrow that suite further; do not loop over the plan's suites locally. [Test maintenance](tests/README.md#test-organization) explains the exhaustive lineup matrix.
+Use `npm run verify:changed -- --plan` to inspect coverage and `--test <suite>` to record a regression in the plan. `npm run finish -- --test <suite>` also records extra coverage for its integration plan. Changed tests, filename matches and declared [boundary contracts](scripts/checks/test-owners.json) identify coverage; missing required suites still block verification. These suites and owning compilers are deferred to hosted CI, including remembered selections during integration. The gate never launches automatic smoke or test suites. Run one specific regression separately when useful; append `-t <test-name>` to narrow that suite further; do not loop over the plan's suites locally. [Test maintenance](tests/README.md#test-organization) explains the exhaustive lineup matrix.
 
 Local completion requires final diff review, required rendered evidence, task-owned commits and protected integration with its passing gate. If integration is blocked, leave reviewed work committed on its branch. Report CI pending unless exact-commit results are available; CI pending does not block local completion. Pushes and publication follow [AGENTS.md](AGENTS.md#worktrees-and-integration).
 

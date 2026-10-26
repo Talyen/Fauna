@@ -1,12 +1,8 @@
 # Bloomquail
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/bloomquail.ts) · [Authoring contracts](../../CONTENT.md)
 
-Bloomquail is a 26 Health support creature available through ordinary encounters, recruitment and later three-creature starter drafts. Its abilities:
-
-- **Petal Rampart:** Gain 6 Block
-- **Bloom Cradle:** Draw 2 cards; Restore 2 Health
-- **Petal Veil:** Restore 2 Health to all allies; Blind all enemies
+Bloomquail is a support creature available through ordinary encounters, recruitment and later three-creature starter drafts.
 
 **Full Bloom** reads "Convert 50% of your Block into Health for the most injured ally" at zero stars, increasing to 60%, 70%, 80% and 90%. Its five-star text is "Convert your Block into Health for the most injured ally". Conversion happens immediately whenever deployed Bloomquail gains Block from a card, talent or shared grant. Only the newly gained, stack-capped amount participates; existing Block is untouched. Round the converted amount normally and cap it by the recipient's missing Health, retaining the remainder as Block. Full-Health teams keep all gained Block. Select the living deployed ally with the lowest remaining Health percentage, including Bloomquail; battlefield order breaks ties. Backups and knockouts neither convert nor receive healing. Use the shared [passive-healing rules](../../KEYWORDS.md#repeats-and-derived-effects).
 

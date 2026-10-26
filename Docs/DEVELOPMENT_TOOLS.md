@@ -154,7 +154,7 @@ At least five samples are needed for review-level statistical findings. Extreme 
 
 ## Reproducible performance captures
 
-The [hitch attribution implementation record](PERFORMANCE_ATTRIBUTION_PLAN.md) records scope, delivery and verification boundaries.
+The [hitch attribution implementation record](archive/PERFORMANCE_ATTRIBUTION_PLAN.md) records scope, delivery and verification boundaries.
 
 The [October 22 frame pacing investigation](task-evidence/2026-10-22-frame-pacing.md) records
 shared layout and animation optimizations, visual parity evidence and remaining device qualification.
@@ -197,19 +197,25 @@ The [session-owned collector](ARCHITECTURE.md#discovery-and-diagnostics) records
 
 Verification, context and review share the base recorded in worktree-local Git metadata, surviving commits and branch renames. Unregistered non-main branches and detached checkouts use their common ancestor with local main; main defaults to HEAD. Empty selections explicitly run no checks or review.
 
-| Option                  | Behavior                                                                                                                |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Explicit paths          | Narrow the selection                                                                                                    |
-| `--base <commit>`       | Override the base                                                                                                       |
-| `--working-tree`        | Select only uncommitted changes                                                                                         |
-| Review `--layers`       | Show committed, staged and unstaged patches, including reverted edits; default review shows the net task change         |
-| `--test <suite>`        | Record extra coverage for the integration plan, including failed attempts; execution is deferred to CI by default       |
-| `--forget-test <suite>` | Remove an obsolete extra selection                                                                                      |
-| `--plan`                | Preview selection without changing remembered intent                                                                    |
-| `--plan --related`      | Suggest import-related tests for coverage investigation; suggestions never displace required or explicit suites         |
-| `--diagnostic <mode>`   | Run a [bounded investigation](../scripts/README.md#task-check-implementation), subject to the local/CI execution policy |
+| Option                  | Behavior                                                                                                          |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Explicit paths          | Narrow the selection                                                                                              |
+| `--base <commit>`       | Override the base                                                                                                 |
+| `--working-tree`        | Select only uncommitted changes                                                                                   |
+| Review `--layers`       | Show committed, staged and unstaged patches, including reverted edits; default review shows the net task change   |
+| `--test <suite>`        | Record extra coverage for the integration plan, including failed attempts; execution is deferred to CI by default |
+| `--forget-test <suite>` | Remove an obsolete extra selection                                                                                |
+| `--plan`                | Preview selection without changing remembered intent                                                              |
+| `--plan --related`      | Suggest import-related tests for coverage investigation; suggestions never displace required or explicit suites   |
+| `--diagnostic <mode>`   | Run a [bounded investigation](#bounded-diagnostics), subject to the local/CI execution policy                     |
 
 Only the base and extra suite paths are stored, never passing results. Test and static commands have the same scope on every branch; [Contributing](../CONTRIBUTING.md#verification) owns required coverage and suite maintenance.
+
+### Bounded diagnostics
+
+The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`, `browser <route>` and `performance <scenario>`. All modes follow the [CI-first execution policy](../CONTRIBUTING.md#execution-and-evidence), including `unit` with exact paths; omit paths to select the full unit/DOM/exhaustive set. Use `npm test -- <suite>` for one bounded local regression. Browser routes are battle, settings, collection, progression and persistence; performance scenarios are battle, swap and menus. Build first for production browser/performance diagnostics.
+
+The coverage plan prints batches, compiler environments, documentation coverage and required-suite rationale. Import suggestions and unresolved imports appear only with `--related`; timing history never changes coverage. Empty selections run no checks. [Script owners](../scripts/README.md#task-check-implementation) locate batching, validation and cancellation implementations.
 
 ## Review and owner lookup
 

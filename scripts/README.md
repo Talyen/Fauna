@@ -7,7 +7,7 @@ Implementation folders follow workflows: `agent/`, `assets/`, `balance/`, `check
 | Command or concern                                                               | Implementation owner                                                                                                                                                                                                   |
 | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run worktree -- <task-name> [base-ref]`                                     | [worktree.mjs](worktree.mjs): creates/reuses isolated tasks, records their base and links matching dependencies                                                                                                        |
-| `npm run finish` / `npm run integrate -- <task-branch>`                          | [integrate.mjs](integrate.mjs), [Git helpers](lib/git.mjs), [shared lock](lib/integration-lock.mjs), [npm launcher](lib/npm-command.mjs)                                                                               |
+| `npm run finish` / `npm run integrate -- <task-branch>`                          | [finish.mjs](finish.mjs), [integrate.mjs](integrate.mjs), [Git helpers](lib/git.mjs), [shared lock](lib/integration-lock.mjs), [npm launcher](lib/npm-command.mjs)                                                     |
 | `npm run deps`                                                                   | [dependencies.mjs](dependencies.mjs): reuses matching shared dependencies or detaches only the task link before a local install                                                                                        |
 | `npm run worktree:cleanup -- [--apply]`                                          | [worktree-cleanup.mjs](worktree-cleanup.mjs): audits or removes clean merged tasks under the shared lock and archives ignored artifacts                                                                                |
 | `npm run verify:changed` (`verify` compatibility alias)                          | [check.mjs](checks/check.mjs): batched formatting/syntax lint/contracts and `--plan` coverage preview; compiler environments and owner suites are planned for CI                                                       |
@@ -76,9 +76,7 @@ Dependency audit policy lives in [CI](../Docs/CI.md); release inventory, package
 | Extra suites       | [task-intent.mjs](lib/task-intent.mjs) retains explicit selectors through failed checks for integration; plan mode is read-only                                                                       |
 | Test execution     | Deferred to CI by default, including remembered selections; explicit heavy-local opt-in retains one-worker, fail-fast execution and ignored results in `reports/task-tests.json`                      |
 
-The plan prints batches, compiler environments, documentation coverage and required-suite rationale. Import suggestions and unresolved imports appear only with `--related`; timing history never changes coverage. Empty selections run no checks.
-
-The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`, `browser <route>` and `performance <scenario>`. All modes are CI-owned and blocked locally without explicit heavy-local authorization, including `unit` with exact paths; omitting paths selects the full unit/DOM/exhaustive set. Use `npm test -- <suite>` for one bounded local regression. Browser routes are battle, settings, collection, progression and persistence; performance scenarios are battle, swap and menus. Names are validated before launch; build first for production browser/performance diagnostics. The launcher owns cancellation under the [shared resource policy](../CONTRIBUTING.md#execution-and-evidence).
+[The diagnostic launcher](agent/investigate.mjs) validates modes and names before launch and owns cancellation. Its [modes and options](../Docs/DEVELOPMENT_TOOLS.md#bounded-diagnostics) belong to the tool reference.
 
 ## Worktree operations
 
@@ -86,15 +84,7 @@ The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`
 
 The [shared launcher](local.mjs) enforces [execution budgets](../CONTRIBUTING.md#execution-and-evidence) and checks dependency readiness without installing during routine verification. CSS guards use [PostCSS](https://github.com/postcss/postcss); primitive provenance lives in the registry.
 
-The command creates `.worktrees/<task-name>` on `task/<task-name>` from committed local main by default. An existing matching checkout is reused without resetting files. Existing branches without that checkout and conflicting directories are preserved and rejected. Dependencies are linked from main only when dependency manifests, install settings and lifecycle scripts match. Run `npm run deps` in the task checkout when dependencies are missing or change: it reuses a matching shared link or detaches only that link and runs `npm ci` locally, using the project-pinned npm without changing the global install. Never run `npm ci` through a shared dependency link. Changing ordinary npm task commands alone does not invalidate dependencies.
-
-New tasks default to code-only checkouts when the target revision declares
-output-only dev/build checks and includes committed prepared media. This omits
-`public/art/`, `public/ui/` and `assets/source/`; `public/prepared/`, manifests,
-runtime code and tests remain present. Older/incomplete revisions keep full assets.
-Use `npm run worktree -- <task-name> --full-assets` for source-asset work, or run
-`git sparse-checkout disable` in the task before preparation, source checks or art
-review. Missing-source preparation preserves published outputs and prints this command.
+[Task setup and dependencies](../CONTRIBUTING.md#dependencies-and-source-assets) owns reuse, installation and source-asset checkout instructions. Implementation-specific storage behavior follows.
 
 Large retained tracked assets (at least 256 KiB) automatically use per-file APFS
 copy-on-write from clean same-commit files in main. An optional Python standard-library
@@ -108,18 +98,10 @@ not measured physical savings. Existing task checkouts retain their configuratio
 [Contributing](../CONTRIBUTING.md#worktrees-and-integration) owns the review/commit/finish procedure. Implementation details for integration:
 
 - The repository-wide OS file lock releases on process exit; a separate owner record contains PID, checkout, branch and start time. The development-only `fs-native-extensions` dependency supplies cross-platform locking
-- Both worktrees are rechecked before main advances. Dirty checkouts and unfinished Git operations block integration; checks cannot be narrowed. Extra regressions recorded by `--test` appear in the coverage plan and remain deferred to CI; finish accepts additional `--test <suite>` selections
-- Failed checks preserve committed task work. Success returns `integrated: true`, the commit and retained checkout path; `finish` retires only the calling completed task after evidence preservation; `integrate` retains it
+- Both worktrees are rechecked before main advances; checks cannot be narrowed. The recorded task intent supplies additional coverage selections
+- Success returns `integrated: true`, the commit and retained checkout path; `finish` calls cleanup only for its own integrated task
 - During the socket-protocol upgrade, bounded older waiters remain protected and a persistent lock file makes older tools refuse integration. Legacy directory locks also remain protected. Never delete a persistent lock file to unlock integration
 
-Optional repository maintenance, independent of completing an implementation task: audit accumulated local task branches and worktrees from clean main:
+[Cleanup](../CONTRIBUTING.md#cleanup) owns eligibility, the audit/apply commands and inactivity checks. [The cleanup implementation](worktree-cleanup.mjs) preserves ignored evidence as follows.
 
-```sh
-npm run worktree:cleanup
-# Remove eligible merged tasks:
-npm run worktree:cleanup -- --apply
-```
-
-Only local branches under `task/` or `codex/` whose commits are already in main are eligible. The sweep uses the integration lock and preserves dirty, unmerged, locked and unfinished checkouts. It never merges unreviewed work, forces removal, deletes remote branches or terminates preview processes. Preserved tasks are expected and reported without failing the sweep; they do not block another task. Operational failures such as an unavailable lock still fail. Integration performs no sweep. `npm run finish` removes only its calling completed task and retains its branch and archived evidence; `-- --keep-worktree` retains a task still needed for review.
-
-Before removal, ignored artifacts (reports, screenshots, logs and other ignored files) are copied to `fauna-worktree-archives/` inside the shared Git directory, with a manifest identifying the original checkout, branch and commit. Root `node_modules` and `dist` are rebuildable and are not archived. Copies request independent filesystem clones where supported, falling back to ordinary copies; later source changes cannot mutate retained evidence. Archives remain local; review their manifests before permanently deleting historical records or unique assets. Find them with `git rev-parse --git-common-dir`. Tracked and untracked changes always block removal. Close owned preview processes before retiring a checkout; cleanup does not stop processes or establish that another chat has finished. Integration itself retains the checkout.
+Before removal, ignored artifacts (reports, screenshots, logs and other ignored files) are copied to `fauna-worktree-archives/` inside the shared Git directory, with a manifest identifying the original checkout, branch and commit. Root `node_modules` and `dist` are rebuildable and are not archived. Copies request independent filesystem clones where supported, falling back to ordinary copies; later source changes cannot mutate retained evidence. Archives remain local; review their manifests before permanently deleting historical records or unique assets. Find them with `git rev-parse --git-common-dir`. Tracked and untracked changes always block removal; cleanup never terminates processes.

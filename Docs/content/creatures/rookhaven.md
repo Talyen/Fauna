@@ -1,12 +1,8 @@
 # Rookhaven
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/rookhaven.ts) · [Authoring contracts](../../CONTENT.md)
 
-Rookhaven is the keeper of forgotten stories, with 26 Health. It joins ordinary encounter packs, recruitment and the starter pool. Its abilities:
-
-- **Borrowed Brilliance:** Deal 1 Light damage to all enemies; Blind all enemies
-- **Unwritten Ending:** Purge all enemies
-- **Margin of Possibility:** Draw 2 cards
+Rookhaven is the keeper of forgotten stories. It joins ordinary encounter packs, recruitment and the starter pool.
 
 **Well Read** gives every card draw a 20%, 35%, 50%, 70%, 85% or 100% chance to create a copy at ranks zero through five. The final tier reads “Drawing a card copies it”. Only living, deployed Rookhavens supply the passive; each supplies its own independent chance, including while controlled. Opening hands, turn draws, ability draws, keyword draws and direct Discard recovery all count under the shared [draw rules](../../KEYWORDS.md#draws-and-returns). Empty draws, card returns from Dream Yo-Yo or Cloud Cup-and-Ball, knockout replacements, creating copies and promoting overflow are not draws. Ordinary enemies, including enemy Rookhaven, have no draw pile or hand and receive no alternate passive benefit.
 

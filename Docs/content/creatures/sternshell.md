@@ -1,12 +1,8 @@
 # Sternshell
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/sternshell.ts) · [Authoring contracts](../../CONTENT.md)
 
-Sternshell has 32 Health and is available through starter drafts, ordinary encounters and recruitment. Its abilities:
-
-- **Surge Ram:** Deal 3 Physical damage; Doubled if you have Armor
-- **Siphon Vault:** Swap out for a random backup; Draw 1 card
-- **Spiral Return:** Deal 1 Water damage to all enemies; Gain 1 Mana
+Sternshell is available through starter drafts, ordinary encounters and recruitment.
 
 **Shelter** grants Sternshell 2, 3, 4, 5, 6 or 7 Armor at combat start, from zero through five stars. Use the shared [opening-effect rules](../../KEYWORDS.md#modifier-timing); Sternshell starting in backup receives no opening Armor.
 

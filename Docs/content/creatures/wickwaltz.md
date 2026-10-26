@@ -1,12 +1,8 @@
 # Wickwaltz
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/wickwaltz.ts) · [Authoring contracts](../../CONTENT.md)
 
-Wickwaltz has 28 Health and is available through starter drafts, ordinary encounters and recruitment. Its abilities:
-
-- **Ember Pirouette:** Deal 2 Burn damage to all enemies
-- **Saffron Screen:** Gain 3 Block; Nullify the next Freeze damage
-- **Thermal Rise:** Draw 2 cards; Gain 1 Mana
+Wickwaltz is available through starter drafts, ordinary encounters and recruitment.
 
 **Kindling Flourish** gives Wickwaltz’s second accepted card each turn a 20%, 36%, 52%, 68%, 84% or 100% chance to repeat at zero through five stars. The last tier reads “Wickwaltz’s second card each turn repeats”. Each creature counts only its own accepted plays, including free plays; repeats and rejected commands do not count. The counter survives saves and swaps, resets at the next turn even in backup, and starts empty each battle. Repeating resolves the complete ability once more, including draws and Mana, for no extra cost or card XP. Other repeat sources share the existing two-resolution cap. Attacks stop if their actor falls or no living recipients remain. Enemies use the base tier and normally play only one card per turn.
 

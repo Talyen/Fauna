@@ -1,5 +1,7 @@
 # Oathara
 
+[Current kit](../../../src/game/content/creatures/oathara.ts)
+
 Oathara is a 30-Health ordinary support creature, “The keeper of unfinished journeys”
 The user selected its kit on October 23, 2026
 

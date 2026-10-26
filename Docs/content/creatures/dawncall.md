@@ -1,12 +1,8 @@
 # Dawncall
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/dawncall.ts) · [Authoring contracts](../../CONTENT.md)
 
-Dawncall is a 24 Health support creature available through starter drafts, ordinary encounters and recruitment. Its abilities:
-
-- **Dawn Cry:** Cleanse 1 harmful effect from all allies; Draw 1 card
-- **Sunwing Sweep:** Deal 2 Light damage to all enemies
-- **Morning Bloom:** Restore 2 Health to all allies
+Dawncall is a support creature available through starter drafts, ordinary encounters and recruitment.
 
 **Early Bird** grants the first attack each turn 20%, 35%, 50%, 65% or 80% additional Critical hit chance at zero through four stars. At five stars, the first attack each turn is a guaranteed Critical Hit against every enemy it hits. Bonuses add to the ordinary allied 5% Critical hit chance; each landed target rolls independently below the guaranteed tier. Dodge still prevents damage. The first attack consumes the opening opportunity even if it misses; support abilities, periodic damage, retaliation and derived packets do not consume it. Repeats are subsequent attacks. The opportunity persists through swaps and current-format resume, refreshes at the owner's next turn even in backup or control, and resets for each battle. Enemy Dawncall uses the base 20% bonus plus the ordinary 5% Critical hit chance, independently for each landed target.
 

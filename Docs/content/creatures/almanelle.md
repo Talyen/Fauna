@@ -1,5 +1,7 @@
 # Almanelle
 
+[Current kit](../../../src/game/content/creatures/almanelle.ts)
+
 Almanelle is a 28-Health ordinary support creature, “The orchard through the seasons”
 The user selected Fallen Leaves, Rooted Year and Autumn Insight on October 23, 2026
 

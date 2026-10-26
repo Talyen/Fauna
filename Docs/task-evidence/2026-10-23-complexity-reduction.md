@@ -1,6 +1,6 @@
 # Combat and battle interaction simplification
 
-The [approved plan](../archive/COMPLEXITY_REDUCTION_PLAN.md) was implemented in the retained `task/complexity-plan-oct23` worktree. [Architecture](../ARCHITECTURE.md) owns the resulting boundaries; [the implementation summary](../COMPLEXITY_REDUCTION_PLAN.md) locates each stage.
+The [approved plan](../archive/COMPLEXITY_REDUCTION_PLAN.md) was implemented in the retained `task/complexity-plan-oct23` worktree. [Architecture](../ARCHITECTURE.md) owns the resulting boundaries; the implementation review below locates each stage.
 
 ## Implementation and review
 
@@ -10,6 +10,8 @@ The [approved plan](../archive/COMPLEXITY_REDUCTION_PLAN.md) was implemented in 
 - Target classification and read-only admission queries serve commands, execution, presentation and legal Auto-play candidates. Random selection, interception and group rereads remain execution work
 - Battle selection uses one reducer and DOM adapter; geometry has its own hook. One preview projection supplies affected IDs, status changes and event readouts without mutating authoritative results
 - Auto-play uses exhaustive benefit handling and one ranking owner, retaining numeric priorities, ordinary-hit assumptions, stable ties and the existing cycle guard. Its policy version follows main at 29
+
+All six stages were implemented after capturing combat/journey traces and representative creature Auto-play rankings. Narrow identity queries and transition ownership made additional persisted representations unnecessary.
 
 Review covered captured versus live values, reaction ordering, RNG consumption, control recovery, earned Bleed obligations, query/command equivalence, hidden-information boundaries, focus restoration, effect cleanup and superseded code removal. Combat traces remain stable after main's inactive-Negate normalization. Lifecycle and ranking baselines changed only after independent equality with updated main was established, retaining that content baseline rather than hiding a refactor difference. Main's concurrent authored-kit caches, allocation reductions, temporary-card cleanup and boundary fixes, Reverie and Steam/input changes were retained during reconciliation.
 

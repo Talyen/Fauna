@@ -1,12 +1,8 @@
 # Reedstag
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/reedstag.ts) · [Authoring contracts](../../CONTENT.md)
 
-Reedstag is a 30 Health marsh guardian available through starter drafts, ordinary encounters and recruitment. Its abilities:
-
-- **Reed Rush:** Deal 6 Nature damage
-- **Reed Shelter:** Gain 3 Block and 3 Thorns
-- **Mending Spring:** Restore 4 Health and Cleanse the most injured ally
+Reedstag is a marsh guardian available through starter drafts, ordinary encounters and recruitment.
 
 Mending Spring selects the living deployed ally with the lowest remaining Health percentage, including Reedstag; battlefield order breaks ties. Healing and removal of all harmful effects apply to that same recipient, selected before healing. Full-Health allies remain eligible for Cleanse. Backup and knocked-out creatures are excluded. Enemy healing and cleansing select from living enemies and retain authored healing and explicit room power.
 

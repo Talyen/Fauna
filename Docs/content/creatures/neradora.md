@@ -1,12 +1,8 @@
 # Neradora
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/neradora.ts) · [Authoring contracts](../../CONTENT.md)
 
-Neradora has 28 Health and is available through ordinary encounters, recruitment and later three-creature drafts. Its support kit excludes it from the first solo starter pool. Its abilities:
-
-- **Undertow Knot:** Gain 3 Water Thorns
-- **Bloom Shelter:** Restore 2 Health to all allies
-- **Tide Cup:** Draw 2 cards; Gain 1 Mana
+Neradora is available through ordinary encounters, recruitment and later three-creature drafts. Its support kit excludes it from the first solo starter pool.
 
 **Tidal Regeneration** restores Neradora's own Health every other turn, scaling through 1, 2, 3, 4, 5 and 6 Health at zero through five stars. It triggers at the start of its owner's second, fourth and subsequent even-numbered battle turns, after periodic damage and before resolving control skips. It works while Stunned or Frozen, but only while alive and deployed. Backup misses its scheduled healing without banking it; swaps and current-format resume retain the battle's cadence. Each battle begins again on turn one. Its healing follows the shared [passive-healing rules](../../KEYWORDS.md#repeats-and-derived-effects); enemies receive no additional automatic regeneration.
 

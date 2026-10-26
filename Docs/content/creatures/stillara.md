@@ -1,12 +1,8 @@
 # Stillara
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/stillara.ts) · [Authoring contracts](../../CONTENT.md)
 
-Stillara has 26 Health and is available through ordinary encounters, recruitment and later starter drafts. Its support-only kit excludes it from the first solo starter pool. Its abilities:
-
-- **Reed Reservoir:** Gain 2 Mana
-- **Thaw Path:** Cleanse all Freeze build-up from allies; Draw 1 card
-- **Water Remembers:** Restore 1 Health to all allies; Draw 1 card
+Stillara is available through ordinary encounters, recruitment and later starter drafts. Its support-only kit excludes it from the first solo starter pool.
 
 **First Thaw** reduces Freeze damage taken by living deployed allies, including Stillara, by 10%, 20%, 30%, 40%, 50% or 60% at zero through five stars. It applies before rounding and Block, and multiplies with other resistances. Multiple Stillara use the strongest active tier. Backups and knockouts neither supply nor receive protection; enemies protect their own side.
 

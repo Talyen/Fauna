@@ -1,12 +1,16 @@
 # Startup simplification implementation evidence
 
-The [approved proposal](../archive/STARTUP_SIMPLIFICATION_PLAN.md) was implemented in the retained `.worktrees/simplify-startup-plan` checkout on `task/simplify-startup-plan`. The [implementation record](../STARTUP_SIMPLIFICATION_PLAN.md) locates the current contracts.
+The [approved proposal](../archive/STARTUP_SIMPLIFICATION_PLAN.md) was implemented in the retained `.worktrees/simplify-startup-plan` checkout on `task/simplify-startup-plan`.
+
+[Architecture](../ARCHITECTURE.md#loading-and-writes), [recovery policy](../UI.md#recovery-and-persistent-failures) and the [startup screen contract](../ui/screens.md#startup-loading) own current behavior.
 
 ## Source and behavior
 
 Runtime changes start from main `5bedc267c1b0c83864c50e53cee8f79a12a3357d`. The proposal commit is `ce867df133ee25f1635921c088918a0d53eea4af`. Preparation now validates once inside its existing resources sequence. Fatal rejection records one diagnostic, aborts owned preparation and leaves the existing splash with accessible failure text. Shared splash cleanup stops phrase rotation, the minimum timer and motion listeners; failure also removes decorative animation. Mount lifetime guards suppress late success and failure callbacks.
 
 Review covered validation before save access, handled promise rejection, diagnostic attribution, cancellation during loading, page closure, repeated cleanup, normal minimum timing and separation from rendering recovery. No gameplay, save schema, balance, dependency manifest or lockfile changed.
+
+The change removed the validation retry timer, recursive attempt function and manually settled validation promise. Successful startup timing, artwork batches and timeouts, saved-screen preparation, background warmup, save/Cloud recovery and React rendering recovery retained their existing owners.
 
 ## Local checks
 

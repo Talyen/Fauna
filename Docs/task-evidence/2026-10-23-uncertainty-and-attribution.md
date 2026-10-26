@@ -2,7 +2,7 @@
 
 ## Scope
 
-Implemented the [performance attribution plan](../PERFORMANCE_ATTRIBUTION_PLAN.md) and bounded correlated card forecasts through the existing combat resolver. No save-format change, live RNG change, gameplay balance change or measured performance improvement is claimed.
+Implemented the [performance attribution plan](../archive/PERFORMANCE_ATTRIBUTION_PLAN.md) and bounded correlated card forecasts through the existing combat resolver. No save-format change, live RNG change, gameplay balance change or measured performance improvement is claimed.
 
 ## Verification boundaries
 

@@ -1,6 +1,6 @@
 # Simplify startup content validation
 
-Historical proposal approved October 23, 2026; see the [implementation record](../STARTUP_SIMPLIFICATION_PLAN.md). Assessed against local main `5bedc267c1b0c83864c50e53cee8f79a12a3357d`, October 23, 2026
+Historical proposal approved October 23, 2026; see the [implementation record](../task-evidence/2026-10-23-startup-simplification.md). Assessed against local main `5bedc267c1b0c83864c50e53cee8f79a12a3357d`, October 23, 2026
 
 Validate bundled content once per startup and handle failure explicitly. The current startup retries the same validation every five seconds, although waiting cannot change its inputs. Removing that recovery loop makes startup easier to follow and gives a failed installation a settled outcome instead of an indefinitely animated splash.
 

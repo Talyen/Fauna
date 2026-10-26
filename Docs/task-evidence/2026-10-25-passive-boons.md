@@ -1,6 +1,6 @@
 # Passive Boon implementation
 
-Implemented Rainkeeper, Dream Yo-Yo, Basalt Glass Bookmark, Wonder Domino, Furnace Prism, Last Threshold, Camp Hammock, Honeycomb Frame, Undertow Castanets and Orbit Armillary. The [content contracts](../CONTENT.md#passive-rule-changes) record exact execution details; the [Boon rules](../../src/game/rules/boons.ts) own displayed copy. Last Threshold uses the approved wording “Overflow Healing is shared with allies at Death's Door”. The Boon design skill retains this wording and the glossary and passive-design principles.
+Implemented Rainkeeper, Dream Yo-Yo, Basalt Glass Bookmark, Wonder Domino, Furnace Prism, Last Threshold, Camp Hammock, Honeycomb Frame, Undertow Castanets and Orbit Armillary. The [content contracts](../content/boons.md#execution-contracts) record exact execution details; the [Boon rules](../../src/game/rules/boons.ts) own displayed copy. Last Threshold uses the approved wording “Overflow Healing is shared with allies at Death's Door”. The Boon design skill retains this wording and the glossary and passive-design principles.
 
 Block now preserves hit mechanics by default, including both Thorns pools, Leech and buildup. Health-loss conditions still use Health actually lost. Overflow Healing is allocated once without applying Healing bonuses twice. Automatic Healing can include living backups without making them selectable or activating their passives. Rainkeeper reuses the existing Mana crystals, including a second row for seven or eight Mana; no battle controls were added.
 

@@ -1,12 +1,8 @@
 # Euphera
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/euphera.ts) · [Authoring contracts](../../CONTENT.md)
 
-Euphera has 26 Health and joins starter drafts, ordinary encounters and recruitment. Its abilities:
-
-- **Twilight Lance:** Purge enemy Thorns; Deal 5 Light damage
-- **Wish Exchange:** Redistribute allied Block evenly; Allies gain 1 Block
-- **Possible Path:** Shuffle your hand into your deck; Draw that many cards
+Euphera joins starter drafts, ordinary encounters and recruitment.
 
 **Good Fortune** gives failed allied chance effects a 10%, 20%, 30%, 40%, 50% or 60% chance to reroll once at ranks zero through five. A successful gate retries the original probability once; neither the gate nor the retry can trigger another retry. Successful initial rolls, impossible effects and guaranteed effects consume no additional RNG. Only living, deployed providers supply the passive, including while controlled; the strongest provider applies when several are present. Swaps and knockouts change availability immediately. Enemy Euphera supplies its own side with the base 10% tier.
 

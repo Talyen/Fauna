@@ -1,12 +1,8 @@
 # Shadebrim
 
-[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+[Creature index](README.md) · [Current kit](../../../src/game/content/creatures/shadebrim.ts) · [Authoring contracts](../../CONTENT.md)
 
-Shadebrim has 28 Health and is available through starter drafts, ordinary encounters and recruitment. Its abilities:
-
-- **Noonward:** Gain 4 Block; Reflect the next Burn
-- **Coolfront:** Deal 1 Freeze damage to all enemies; Cleanse all allies
-- **Noon Bloom:** Draw 2 cards; Gain 1 Mana
+Shadebrim is available through starter drafts, ordinary encounters and recruitment.
 
 **Cool Refuge** reduces Burn damage taken by living deployed allies, including Shadebrim, by 10%, 20%, 30%, 40%, 50% or 60% at zero through five stars. Direct hits, derived damage and periodic Burn ticks use the same reduction before rounding and Block. Other resistance modifiers multiply with it. Multiple Shadebrim use the strongest active tier rather than stacking. Backup and knocked-out creatures neither supply nor receive the protection. Enemies use the 10% base tier on their own side. Swaps and knockouts change protection immediately.
 

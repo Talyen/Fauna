@@ -26,3 +26,13 @@ The implementation changes optional preparation work and tooling, preserving ess
 Hosted CI must run the final compiler/unit/browser/Windows package gates. The performance workflow now records native startup/battle observations and three repeated Collection/inspection/paging/Talents cycles. Build maximum RSS and package size inventories are retained separately. No measured runtime RAM reduction, packaged-size reduction beyond selected media, native FPS gain, Windows startup result, physical controller result, Steam client result or Steam Deck result is claimed here.
 
 Task-owned ignored reports under `reports/resources/` retain pruning records, exact historical duplicate groups and retained-copy mappings, source review identity, preview frames and the corrected focused driver. Revalidate identities and retained copies before any separately approved historical deletion. Do not retire other worktrees or alter their dependencies without confirming inactivity.
+
+## Inventory history
+
+The following snapshots were recorded through October 25, 2026; they describe their own content selections and do not update the October 24 task's verification scope. Current totals come from the [inventory command](../RESOURCE_EFFICIENCY.md#inventory-and-budgets).
+
+In the October 24 resource pass, 190 IDs shared 185 files totaling 129.68 MiB. Aliased sounds and artwork already shared files before this change; an earlier 3.06 MiB duplicate estimate counted those IDs twice. Excluding the unused Marsh selection removes 4.89 MiB from the 134.57 MiB shipping baseline. Its recording remains in `assets/source/audio/music/`.
+
+Later recorded snapshots reached 200 IDs / 195 unique files / 136.79 MiB after ten Boon portraits added 7.11 MiB, then 222 IDs / 217 unique files / 154.40 MiB after ten further portraits added 7.06 MiB alongside Arabesca, Skybex and Dulcera.
+
+The [October 25 Boon record](2026-10-25-elegant-boons.md#artwork-and-rendering) retains the measured active-media allowance increase from 192 MiB to 200 MiB and its source scope.

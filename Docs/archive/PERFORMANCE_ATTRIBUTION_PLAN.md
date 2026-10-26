@@ -8,16 +8,16 @@ Turn an observation such as “the battle had three frame gaps over 50 ms” int
 
 Extend the existing harness rather than introducing another runner. Preserve gameplay, seeded outcomes, command/save ordering, audio, animation timing and visual quality. Keep `npm run perf`, `perf:replay` and `perf:compare` as the entrypoints. The accompanying change implements uncertainty-aware previews through the authoritative resolver; this instrumentation does not claim an optimization or a measured baseline.
 
-[Development tools](DEVELOPMENT_TOOLS.md#reproducible-performance-captures) owns current capture behavior and [Contributing](../CONTRIBUTING.md#execution-and-evidence) owns execution permissions. `Alchemy: Docs/PERFORMANCE.md` is a sibling reference for phase correlation and trace analysis, not a runtime dependency.
+[Development tools](../DEVELOPMENT_TOOLS.md#reproducible-performance-captures) owns current capture behavior and [Contributing](../../CONTRIBUTING.md#execution-and-evidence) owns execution permissions. `Alchemy: Docs/PERFORMANCE.md` is a sibling reference for phase correlation and trace analysis, not a runtime dependency.
 
 ## Pre-implementation baseline and gaps
 
-- [The capture driver](../scripts/performance/run-performance.mjs) runs a validated checkpoint through normal controls, waits for its expected save, and samples a further 1,200 ms of presentation time
+- [The capture driver](../../scripts/performance/run-performance.mjs) runs a validated checkpoint through normal controls, waits for its expected save, and samples a further 1,200 ms of presentation time
 - It performs one warm-up and one measured run, supports Chromium and isolated Electron, and retains source/build identities, checkpoints and actions
 - The sampler retains frame durations, long-task timestamps and input timings; unsupported observer types are null; shutdown drains pending observer records
 - Action segments retain names, durations and frame counts, but discard their start/end timestamps; individual frames also lack timestamps
-- [Metrics](../scripts/performance/metrics.mjs) report percentiles and gap counts over 20, 33.3, 50 and 100 ms and reject incomplete or incompatible comparisons
-- [Fixtures](../src/tooling/performance.ts) cover battle, replacement and menus, with optional reachable early/late battles; [the weekly workflow](../.github/workflows/performance.yml) compares ordinary and React Compiler builds
+- [Metrics](../../scripts/performance/metrics.mjs) report percentiles and gap counts over 20, 33.3, 50 and 100 ms and reject incomplete or incompatible comparisons
+- [Fixtures](../../src/tooling/performance.ts) cover battle, replacement and menus, with optional reachable early/late battles; [the weekly workflow](../../.github/workflows/performance.yml) compares ordinary and React Compiler builds
 
 At the assessment baseline, the harness could detect bad cadence but could not reliably join a particular gap to recorded input, command resolution, save encoding, hand motion or browser work. A segment combined automation delivery, checkpoint waiting and presentation. Startup latency was measured separately, but the frame sampler started after readiness and initial image decoding; it did not establish startup frame pacing. Normal battle scenarios also omitted selection/hover-only preview workloads.
 
@@ -39,16 +39,16 @@ Use a small optional recording capability supplied by renderer startup. Its defa
 
 Start with these boundaries, adding nested detail only when evidence calls for it:
 
-| Span or interval              | Owner and meaning                                                                                                                                                                   |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Input/action                  | Driver action window plus actual DOM input timestamp; distinguish delivery, processing and checkpoint acknowledgement                                                               |
-| Command resolution            | [Session](../src/application/session.ts) around authoritative dispatch, labeled by command type and revision                                                                        |
-| Save encoding and publication | Session around synchronous encoding/publication; nested spans must not be added together as independent CPU totals                                                                  |
-| Save wait                     | Session queue admission, write start and acknowledgement as separate asynchronous intervals; waiting is not renderer CPU time                                                       |
-| Target preview                | [Battle screen](../src/ui/battle/battle-screen.tsx) around preview computation and presentation-model calculation, labeled with current revision and stable action/target IDs       |
-| Hand motion                   | [Hand motion](../src/ui/battle/hand-motion.tsx) geometry work and transition lifetime, with completion/interruption distinguished                                                   |
-| Combat feedback               | [Feedback owner](../src/ui/battle/combat-feedback.tsx) adaptation/presentation work and scheduled sequence lifetime, retaining its existing interruption rules                      |
-| Navigation                    | [Shell navigation](../src/ui/shell/navigation.ts) transition intent correlated with the committed destination surface; do not time a pure reducer as the entire rendered transition |
+| Span or interval              | Owner and meaning                                                                                                                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input/action                  | Driver action window plus actual DOM input timestamp; distinguish delivery, processing and checkpoint acknowledgement                                                                  |
+| Command resolution            | [Session](../../src/application/session.ts) around authoritative dispatch, labeled by command type and revision                                                                        |
+| Save encoding and publication | Session around synchronous encoding/publication; nested spans must not be added together as independent CPU totals                                                                     |
+| Save wait                     | Session queue admission, write start and acknowledgement as separate asynchronous intervals; waiting is not renderer CPU time                                                          |
+| Target preview                | [Battle screen](../../src/ui/battle/battle-screen.tsx) around preview computation and presentation-model calculation, labeled with current revision and stable action/target IDs       |
+| Hand motion                   | [Hand motion](../../src/ui/battle/hand-motion.tsx) geometry work and transition lifetime, with completion/interruption distinguished                                                   |
+| Combat feedback               | [Feedback owner](../../src/ui/battle/combat-feedback.tsx) adaptation/presentation work and scheduled sequence lifetime, retaining its existing interruption rules                      |
+| Navigation                    | [Shell navigation](../../src/ui/shell/navigation.ts) transition intent correlated with the committed destination surface; do not time a pure reducer as the entire rendered transition |
 
 Wrap production callbacks at their existing invocation sites; do not add subscriptions that reorder publication or make command acceptance wait for an animation. React rendering and commit costs remain browser-trace observations unless a dedicated diagnostic profiling build is explicitly introduced and identified. A hook/render invocation is not itself a committed React update.
 
@@ -94,8 +94,8 @@ Acceptance: replay preserves every state/checkpoint invariant while retaining in
 
 ## 6. Validate and roll out through hosted CI
 
-1. Add deterministic timeline/metric/trace fixtures near [the existing tooling checks](../tests/unit/tooling/adoption-tools.test.mjs); test missing data, nested work, cross-boundary gaps, truncation and incompatible modes
-2. Extend [performance fixture coverage](../tests/unit/simulation/performance-cases.test.ts) for newly recorded actions and checkpoint invariants; keep heavy reachable journeys in hosted CI
+1. Add deterministic timeline/metric/trace fixtures near [the existing tooling checks](../../tests/unit/tooling/adoption-tools.test.mjs); test missing data, nested work, cross-boundary gaps, truncation and incompatible modes
+2. Extend [performance fixture coverage](../../tests/unit/simulation/performance-cases.test.ts) for newly recorded actions and checkpoint invariants; keep heavy reachable journeys in hosted CI
 3. Add a capture-only synthetic stall scenario with a distinct identity, excluded from ordinary performance reports; prove the browser pipeline retains and locates a deliberate stall without depending on an exact duration or FPS
 4. Verify the inactive/active recorder against command/save ordering and teardown contracts; conduct focused rendered review for any instrumentation touching motion lifetimes, including interruption and reduced motion
 5. Extend the weekly/manual workflow to upload summaries, raw timelines and optional trace evidence even on failure; keep expensive tracing manual initially and preserve the existing compiler comparison
@@ -117,6 +117,6 @@ All six delivery areas have source implementations: format-3 frame/segment timel
 
 The preview change explores at most 128 replays, 64 pending/completed alternatives, 64 branching decisions per replay and 4,096 combat scheduler steps. It retains complete correlated worlds only while projecting, caches twelve presentation models per immutable snapshot, and does not change saved state, format or live RNG ordering. Hidden draws, unclassified random sampling and exhausted budgets retain authored rules with an unresolved readout.
 
-Local focused regression coverage lives in [uncertain-preview-attribution.test.tsx](../tests/unit/ui/uncertain-preview-attribution.test.tsx). It covers seed-independent projection, Dodge/retaliation correlation, conditional knockouts, hidden/bounded fallback, recorder failure isolation, reentrant save ordering, fixture replay, timestamp correlation, incompatible comparisons and exclusive trace accounting.
+Local focused regression coverage lives in [uncertain-preview-attribution.test.tsx](../../tests/unit/ui/uncertain-preview-attribution.test.tsx). It covers seed-independent projection, Dodge/retaliation correlation, conditional knockouts, hidden/bounded fallback, recorder failure isolation, reentrant save ordering, fixture replay, timestamp correlation, incompatible comparisons and exclusive trace accounting.
 
-Focused rendered evidence and interaction checks are retained under task-owned ignored reports; the [task evidence](task-evidence/2026-10-23-uncertainty-and-attribution.md) records paths and conditions. Broader unit/type/build validation, real performance/overhead measurements, CDP runtime captures and native/device qualification remain separate pending gates; synthetic unit traces do not establish native trace support or frame pacing.
+Focused rendered evidence and interaction checks are retained under task-owned ignored reports; the [task evidence](../task-evidence/2026-10-23-uncertainty-and-attribution.md) records paths and conditions. Broader unit/type/build validation, real performance/overhead measurements, CDP runtime captures and native/device qualification remain separate pending gates; synthetic unit traces do not establish native trace support or frame pacing.

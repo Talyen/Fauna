@@ -1,5 +1,7 @@
 # Reverie
 
+[Current kit](../../../src/game/content/creatures/reverie.ts)
+
 Reverie is a 28-Health ordinary support creature, titled “The sanctuary of dreams”
 The user selected this kit on October 23, 2026
 
