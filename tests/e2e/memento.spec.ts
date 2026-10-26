@@ -19,10 +19,15 @@ function legendaryTeam() {
       combat: freshCombat(),
     };
     draft.team = [legendary];
-    draft.reserves = [...previous, { ...legendary, id: "second-legend", combat: freshCombat() }];
+    draft.reserves = [
+      ...previous,
+      { ...legendary, id: "backup-pollenmoth", species: "pollenmoth", health: 23, combat: freshCombat() },
+    ];
 
     draft.discovery.encountered.push("memento");
     draft.discovery.recruited.memento = 1;
+    draft.discovery.encountered.push("pollenmoth");
+    draft.discovery.recruited.pollenmoth = 1;
     draft.cards = ownedCards(legendary.id, legendary.species);
     draft.battle!.hand = draft.cards.slice(0, 4).map((card) => card.id);
     draft.battle!.draw = draft.cards.slice(4).map((card) => card.id);

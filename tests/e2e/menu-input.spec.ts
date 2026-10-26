@@ -134,7 +134,7 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   const collection = {
     ...createGame(7),
     discovery: { encountered: ["mossguard"], recruited: { mossguard: 1 } },
-    starterOffers: ["mossguard", "mossguard", "mossguard"],
+    starterOffers: ["mossguard"],
   };
   await page.addInitScript((save) => localStorage.setItem("fauna.save.v1", save), JSON.stringify(collection));
   if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));

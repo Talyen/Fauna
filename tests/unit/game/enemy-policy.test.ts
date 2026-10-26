@@ -227,6 +227,9 @@ describe("enemy targeting and card values", () => {
       {
         ...structuredClone(enemy),
         id: "player-echo",
+        name: "Echo",
+        species: "memento",
+        lastAbility: null,
         health: 25,
         maxHealth: 25,
         minion: { ownerId: state.team[0]!.id, side: "player" },

@@ -75,7 +75,10 @@ try {
     for (const [kind, health, effects] of [
       ["emberback", 30, ["attack", "furnace-breath", "magma-stomp"]],
       ["prismram", 30, ["attack", "guard", "spectrum-lance"]],
+      ["mossguard", 32, ["guard", "attack", "heal"]],
     ]) {
+      if (state.team.length >= 3) break;
+      if (state.team.some((creature) => creature.species === kind)) continue;
       const id = `ally-${state.team.length}`;
       state.team.push({
         id,
@@ -92,14 +95,17 @@ try {
         state.battle.draw.push(card.id);
       }
     }
-    state.reserves = ["pollenmoth", "emberback"].map((kind) => ({
-      id: `recruit-${kind}`,
-      species: kind,
-      health: 20,
-      combat: structuredClone(state.team[0].combat),
-      block: 0,
-      attacked: false,
-    }));
+    state.reserves = ["pollenmoth", "captoad", "coralcurl"]
+      .filter((kind) => !state.team.some((creature) => creature.species === kind))
+      .slice(0, 2)
+      .map((kind) => ({
+        id: `recruit-${kind}`,
+        species: kind,
+        health: 20,
+        combat: structuredClone(state.team[0].combat),
+        block: 0,
+        attacked: false,
+      }));
     // A grown formation must have committed Collection records in current saves.
     for (const creature of [...state.team, ...state.reserves]) {
       if (!state.discovery.encountered.includes(creature.species))

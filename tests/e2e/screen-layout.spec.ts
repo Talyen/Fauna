@@ -15,7 +15,7 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
 
     addBackups(
       d,
-      ...(["pollenmoth", "emberback"] as const).map((kind) => ({
+      ...(["pollenmoth", "captoad"] as const).map((kind) => ({
         id: `recruit-${kind}`,
         species: kind,
         health: 20,

@@ -54,7 +54,10 @@ for (const [width, height, enlarged] of [
           [...(await state(page)).team, ...(await state(page)).reserves]
             .map((unit) => unit.species)
             .filter((kind) => kind === "emberback"),
-        ).toHaveLength(2);
+        ).toHaveLength(1);
+        expect((await state(page)).discovery.recruited.emberback).toBe(
+          fixture.discovery.recruited.emberback! + 1,
+        );
       } else await page.getByRole("button", { name: "Skip", exact: true }).click();
       await captureScreen(page, { path: `reports/rewards/team-after-${fixture.phase}-${width}.png` });
     }

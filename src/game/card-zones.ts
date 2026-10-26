@@ -1,7 +1,7 @@
 import { boonRule } from "./rules/boons";
 import { gainMana, grantBlock, restoreHealth } from "./combat/index";
 import type { SupplementalEffect } from "./rules/ability-types";
-import { drawableOwnerIds } from "./card-actors";
+import { cardActor, drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
 import type { BattleState, Card, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
@@ -96,7 +96,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
 }
 
 /** Direct Discard draws heal the original owner; recycling, copies and promotion do not. */
-export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) {
+function lostAndFound(state: GameState, card: Card, events: GameEvent[]) {
   const owner = state.team.find((unit) => unit.id === card.ownerId && unit.health > 0);
   if (!owner) return;
   for (const keeper of state.team) {
@@ -138,7 +138,7 @@ export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?
   events.push({
     kind: "action",
     actionType: "support",
-    actorId: card.ownerId ?? undefined,
+    actorId: card.ownerId ?? cardActor(state, card)!.id,
     text: `${definition(card.definitionId).name} is drawn from Discard`,
   });
   lostAndFound(state, card, events);
@@ -167,7 +167,7 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
 }
 
 /** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
-export function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
+function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
   hiddenDecision(state);
   const battle = state.battle!;
   let index = lastEligibleIndex(battle.draw, eligible);

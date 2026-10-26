@@ -19,11 +19,12 @@ import { receiveCard, draw } from "../card-zones";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
 export function returnDodgedCard(state: BattleState, card: Card, events: GameEvent[], start: number) {
+  const owner = state.team.find((ally) => ally.id === card.ownerId && ally.health > 0);
   if (
     !state.boons.includes("dream-yo-yo") ||
     definition(card.definitionId).consume ||
     !state.cards.some((entry) => entry.id === card.id) ||
-    !state.team.some((ally) => ally.id === card.ownerId && ally.health > 0)
+    !owner
   )
     return;
   const enemies = new Set(battlefield(state, "enemy").map((enemy) => enemy.id));
@@ -40,7 +41,7 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
   events.push({
     kind: "action",
     actionType: "support",
-    actorId: card.ownerId ?? undefined,
+    actorId: owner.id,
     text: `${definition(card.definitionId).name} returns to hand`,
   });
 }

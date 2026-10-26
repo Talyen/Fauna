@@ -388,7 +388,7 @@ export function* cleanseRewards(
     if (healing) yield* reaction("restoreHealth", unit, healing * cleansed, events, false, state);
   }
 }
-export function* puzzleEffect(
+function* puzzleEffect(
   state: GameState,
   source: Combatant,
   target: Combatant,

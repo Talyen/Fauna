@@ -84,11 +84,11 @@ test("several knockouts resume as successive choices without a free swap or line
   let dialog = page.getByRole("dialog", { name: "Choose a replacement" });
   await dialog.getByRole("button", { name: "Pollenmoth, backup", exact: true }).click();
   dialog = page.getByRole("dialog", { name: "Choose a replacement" });
-  await expect(dialog.getByRole("button", { name: "Emberback, backup", exact: true })).toBeFocused();
+  await expect(dialog.getByRole("button", { name: "Captoad, backup", exact: true })).toBeFocused();
   await reloadHome(page);
   await resume(page);
   await expect(dialog).toBeVisible();
-  await dialog.getByRole("button", { name: "Emberback, backup", exact: true }).click();
+  await dialog.getByRole("button", { name: "Captoad, backup", exact: true }).click();
   await expect(dialog).not.toBeVisible();
   const next = await state(page);
   expect(next.team.filter((c) => c.health > 0)).toHaveLength(2);

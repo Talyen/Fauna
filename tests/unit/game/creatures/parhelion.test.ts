@@ -101,7 +101,7 @@ describe("Parhelion", () => {
       ally.combat!.controlTurns = 1;
       removeControlBuildup(draft, ally, "freeze", events);
       expect(ally.combat!.controlled).toBe("freeze");
-      startAction(draft, ally, events);
+      startAction(ally, events, draft);
       expect(ally.health).toBe(20);
       removeEffects(ally, "cleanse", 6, events, draft);
     });

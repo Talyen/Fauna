@@ -53,10 +53,12 @@ export async function step(
     await activate(page.locator(`.app:not([inert]) .hand [data-card-id="${c.cardId}"]`));
     if (c.targetId) {
       await activate(
-        s.battle!.enemies.some((unit) => unit.id === c.targetId) ||
-          (s.battle!.minions ?? []).some((unit) => unit.id === c.targetId && unit.minion.side === "enemy")
-          ? page.locator(`.app:not([inert]) .enemy-row [data-enemy-id="${c.targetId}"]`)
-          : page.locator(`.app:not([inert]) .player-row [data-actor-id="${c.targetId}"] .creature-card`),
+        s.reserves.some((unit) => unit.id === c.targetId)
+          ? page.locator(`.app:not([inert]) [data-backup-target="${c.targetId}"]`)
+          : s.battle!.enemies.some((unit) => unit.id === c.targetId) ||
+              (s.battle!.minions ?? []).some((unit) => unit.id === c.targetId && unit.minion.side === "enemy")
+            ? page.locator(`.app:not([inert]) .enemy-row [data-enemy-id="${c.targetId}"]`)
+            : page.locator(`.app:not([inert]) .player-row [data-actor-id="${c.targetId}"] .creature-card`),
       );
     }
   } else await activate(page.getByRole("button", { name: /^End turn/ }));

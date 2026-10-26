@@ -59,7 +59,7 @@ function positionValue(state: BattleState) {
   return rowValue("enemy") - rowValue("player") + resources + Number(state.battle.repeatNext.enemy);
 }
 
-export interface EnemyChoice {
+interface EnemyChoice {
   def: CardDefinition;
   targetId?: string;
   allyTargetId?: string;

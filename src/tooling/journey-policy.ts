@@ -1,7 +1,7 @@
 import { canBuyTalent, starterCount, MAX_CREATURE_STARS } from "../game/progression";
 import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/destinations";
 import { rankedBattleChoices } from "../application/battle-policy";
-import { TALENTS, BOONS, species, type BoonId } from "../game/content";
+import { TALENTS, BOONS, species, speciesCards, type BoonId } from "../game/content";
 import { capabilities, coverageScore, offenseValue } from "../application/team-policy";
 import { recruitLineup } from "../game/team";
 import { createBattleActor } from "../application/battle-actor";
@@ -24,7 +24,91 @@ export function boonValue(
     has.has("leech") ||
     state.boons.includes("bone-charm") ||
     state.boons.includes("sin-eaters-lantern");
+  const cards = kinds.flatMap(speciesCards);
+  const effect = (kind: (typeof cards)[number]["effect"]) => cards.some((card) => card.effect === kind);
+  const swapping = effect("swap") || effect("swapChosen") || effect("swapDodge") || effect("swapLowest");
+  const thorns =
+    effect("dreamDouble") ||
+    effect("waterThorns") ||
+    effect("sparkDecoy") ||
+    effect("teamProtection") ||
+    state.boons.includes("ironwood-buckler") ||
+    cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
   switch (boon) {
+    case "grafting-needle":
+      return healing && has.has("armor") ? 60 : 0;
+    case "lovers-knot":
+    case "last-threshold":
+      return healing ? 60 : 0;
+    case "camp-hammock":
+      return healing && state.reserves.some((unit) => unit.health > 0) ? 60 : 0;
+    case "thaw-spoon":
+      return healing ? 40 : 0;
+    case "coral-net-weight":
+    case "crater-punch":
+    case "dream-yo-yo":
+    case "wonder-domino":
+      return has.has("attack") ? 50 : 0;
+    case "moonveil-mask":
+    case "apiary-smoker":
+      return effect("teamBlind") ||
+        cards.some((card) => card.effects?.some((extra) => extra.kind === "blind"))
+        ? 50
+        : 0;
+    case "mercury-metronome":
+      return kinds.length > 1 ? 60 : 0;
+    case "raincatcher-bowl":
+      return has.has("water") ? 80 : 0;
+    case "thunder-conch":
+    case "tuning-fork-charm":
+      return has.has("stun") ? 60 : 0;
+    case "thistle-sieve":
+    case "calendula-soap":
+    case "orbit-armillary":
+      return has.has("cleanse") || state.boons.includes("knot-comb") ? 50 : 0;
+    case "cloud-cup-and-ball":
+    case "fallingstar-anvil":
+    case "pleated-pagoda":
+    case "moss-oven-mitt":
+      return has.has("block") ? 60 : 0;
+    case "echo-lens":
+      return effect("dreamDouble") || effect("sparkDecoy") ? 50 : 0;
+    case "brookskip-disc":
+      return has.has("water") ? 60 : 0;
+    case "nectar-dipper":
+      return effect("createFood") || kinds.some((kind) => kind === "aerostat") ? 60 : 0;
+    case "saddle-pouch":
+      return swapping && state.reserves.some((unit) => unit.health > 0) ? 60 : 0;
+    case "dune-shuttle":
+    case "encore-baton":
+    case "mineral-bookend":
+      return 60;
+    case "story-puzzle-cube":
+      return ["burn", "poison", "bleed", "stun", "freeze"].filter((keyword) => has.has(keyword)).length +
+        Number(
+          effect("teamBlind") || cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")),
+        ) >=
+        3
+        ? 60
+        : 0;
+    case "briar-racquet":
+      return thorns ? 50 : 0;
+    case "cinder-fan":
+      return has.has("burn") ? 60 : 0;
+    case "pruning-crescent":
+      return has.has("purge") || cards.some((card) => card.effect === "attack" && card.purgeThorns) ? 50 : 0;
+    case "knot-comb":
+    case "basalt-glass-bookmark":
+      return 40;
+    case "rain-cape":
+    case "honeycomb-frame":
+      return has.has("armor") ? 50 : 0;
+    case "rainkeeper":
+      return has.has("mana") || state.boons.includes("resonant-chimes") ? 60 : 0;
+    case "furnace-prism":
+      return has.has("light") && has.has("burn") ? 60 : 0;
+    case "undertow-castanets":
+      return has.has("stun") && has.has("freeze") ? 60 : 0;
     case "resonant-chimes":
       return 90;
     case "tattered-pages":

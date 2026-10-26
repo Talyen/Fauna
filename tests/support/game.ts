@@ -2,6 +2,7 @@ import { canVisitCampfire } from "../../src/game/destinations";
 import { ownedCards, swapBackup } from "../../src/game/team";
 import { freshCombat, ensureCombat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
+import { inspectCardPlay } from "../../src/game/play-queries";
 import { produce } from "immer";
 import { encounterPacks } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
@@ -157,6 +158,7 @@ export function policy(s: GameState): Command {
     .filter(
       (c) =>
         definition(c.definitionId).cost <= b.mana &&
+        (s.phase !== "battle" || inspectCardPlay(s, c.id).allowed) &&
         s.team.some((unit) => unit.id === c.ownerId && unit.health > 0 && !controlled(unit)),
     );
   const attacks = cards.filter((c) => definition(c.definitionId).effect === "attack");
@@ -186,7 +188,7 @@ export function policy(s: GameState): Command {
     return {
       type: "play",
       cardId: heal.id,
-      ...(def.effect === "heal" && !def.target ? { targetId: injured.id } : {}),
+      ...(def.effect === "heal" && (!def.target || def.target === "injured") ? { targetId: injured.id } : {}),
     };
   }
   const groupProtection = cards.find((c) => {

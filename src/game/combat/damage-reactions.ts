@@ -146,7 +146,7 @@ export function publishHit(
   if (target.health === 0)
     events.push({ kind: "knockout", targetId: target.id, text: `${unitName(target)} is knocked out.` });
 }
-export function* passingFlame({ state, source, target, events }: HitContext): Resolution<void> {
+function* passingFlame({ state, source, target, events }: HitContext): Resolution<void> {
   if (target.health > 0 || source.health <= 0 || isEnemy(source) === isEnemy(target)) return;
   const allied = !isEnemy(source);
   if (!battlefield(state, allied ? "player" : "enemy").some((unit) => unit.id === source.id)) return;

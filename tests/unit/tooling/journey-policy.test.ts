@@ -5,8 +5,16 @@ import { createBattleProgress } from "../../../src/tooling/battle-progress";
 import { ownedCards } from "../../../src/game/team";
 import { dispatch } from "../../../src/game/engine";
 import { teamRun, winBattle } from "../../support/game";
-import { species, type BoonId, type SpeciesId } from "../../../src/game/content";
+import { BOONS, species, type BoonId, type SpeciesId } from "../../../src/game/content";
 const actor = () => createJourneyActor({ seed: 42, starter: "mossguard", policy: "heuristic" });
+
+it.each(BOONS)("can evaluate $name without changing the journey", ({ id }) => {
+  const state = teamRun(42, ["mossguard", "emberback", "prismram"]);
+  const before = JSON.stringify(state);
+  expect(boonValue(state, id)).toBeGreaterThanOrEqual(0);
+  expect(Number.isFinite(boonValue(state, id))).toBe(true);
+  expect(JSON.stringify(state)).toBe(before);
+});
 
 function shelf(boons: BoonId[], prices = boons.map(() => 20)) {
   return produce(winBattle(teamRun(42, ["mossguard"])), (game) => {

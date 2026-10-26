@@ -48,7 +48,7 @@ export type SupplementalEffect =
 export type SupplementalKind = SupplementalEffect["kind"];
 
 interface AbilityParameters {
-  teamClearBlind: { draw?: true };
+  teamClearBlind: { target?: never; draw?: true };
   swap: { backupOnly?: true; target?: never };
   mana: { target?: never; restore?: true };
   attack: {
