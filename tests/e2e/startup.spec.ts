@@ -1,4 +1,4 @@
-import { expect, type Page } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 import { assetUrl } from "../../src/ui/shared/assets";
 import { run } from "../support/game";
 import { test, resume } from "./support/session";
@@ -19,100 +19,99 @@ async function holdStartupResource(page: Page, url: string | RegExp, abort = fal
   return release;
 }
 
-for (const [width, height, scale] of [
-  [1280, 720, 1.25],
-  [1920, 1080, 1],
-] as const) {
-  test(`one splash survives delayed React, then reveals a ready menu at ${width}`, async ({ page }) => {
-    await page.setViewportSize({ width, height });
-    await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", String(scale)), scale);
-    const errors: string[] = [];
-    page.on("response", (response) => {
-      if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`);
-    });
-    const allowReact = await holdStartupResource(
-      page,
-      /\/(?:src\/main\.tsx|assets\/main-[^/]+\.js)(?:\?.*)?$/,
-    );
-    await page.goto("/", { waitUntil: "domcontentloaded" });
-    const splash = page.getByRole("status", { name: "Loading Fauna" });
-    await expect(splash).toBeVisible();
-    await page.evaluate(() => document.fonts.ready);
-    const before = await splash.evaluate((element) => {
-      (element as HTMLElement).dataset.testIdentity = "original";
-      const title = element.querySelector(".startup-title")!;
-      const bounds = title.getBoundingClientRect();
-      return {
-        x: bounds.x,
-        y: bounds.y,
-        width: bounds.width,
-        height: bounds.height,
-        time: element.querySelector(".startup-logo-fill")!.getAnimations()[0]!.currentTime as number,
-      };
-    });
-    await expect(page.locator("#root")).toBeEmpty();
-    await expect(page.locator(".startup-leaf")).toHaveCount(5);
-    expect(
-      await page.evaluate(() =>
-        getComputedStyle(document.documentElement).getPropertyValue("--text-scale").trim(),
-      ),
-    ).toBe(String(scale));
-    await captureFrame(page, { path: "pre-react.png" });
-    await expect(page.locator("#startup-splash-phrase")).not.toHaveText("Adventure awaits…");
-    allowReact();
-    // Main CSS has arrived; the same title must keep its geometry and animation clock.
-    await expect
-      .poll(() =>
-        page.evaluate(() =>
-          [...document.styleSheets].some(
-            (sheet) =>
-              sheet.href?.includes("main-") || sheet.ownerNode?.textContent?.includes(".app > .screen-stage"),
-          ),
-        ),
-      )
-      .toBe(true);
-    const after = await splash.evaluate((element) => {
-      const bounds = element.querySelector(".startup-title")!.getBoundingClientRect();
-      return {
-        id: (element as HTMLElement).dataset.testIdentity,
-        x: bounds.x,
-        y: bounds.y,
-        width: bounds.width,
-        height: bounds.height,
-        time: element.querySelector(".startup-logo-fill")!.getAnimations()[0]!.currentTime as number,
-      };
-    });
-    expect(after.id).toBe("original");
-    expect(after.time).toBeGreaterThan(before.time);
-    expect([after.x, after.y, after.width, after.height]).toEqual([
-      before.x,
-      before.y,
-      before.width,
-      before.height,
-    ]);
-    await captureFrame(page, { path: "react-loading.png" });
-    await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
-    expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
-    await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-    await page.locator(".menu-logo img").evaluate((image: HTMLImageElement) => image.decode());
-    await fits(page);
-    await captureFrame(page, { path: "menu.png" });
-    await page.keyboard.press("Tab");
-    expect(await page.evaluate(() => document.activeElement?.tagName)).toBe("BUTTON");
-    await page.getByRole("button", { name: "Play", exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Choose your starter", exact: true })).toBeVisible();
-    await page
-      .locator(".draft-grid img")
-      .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
-    expect(errors).toEqual([]);
-    // Warm-cache timing is viewport independent; keep it once alongside both cold-start layouts.
-    if (width === 1280) {
-      await page.reload();
-      await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
-      expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
-    }
+async function splashSnapshot(splash: Locator) {
+  return splash.evaluate((element) => {
+    const { x, y, width, height } = element.querySelector(".startup-title")!.getBoundingClientRect();
+    return {
+      id: (element as HTMLElement).dataset.testIdentity,
+      bounds: [x, y, width, height],
+      time: element.querySelector(".startup-logo-fill")!.getAnimations()[0]!.currentTime as number,
+    };
   });
 }
+
+const startupLayouts = [
+  [1280, 720, 1.25],
+  [1920, 1080, 1],
+] as const;
+
+test("one splash survives delayed React and reveals a ready menu at both sizes", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  const errors: string[] = [];
+  page.on("response", (response) => {
+    if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`);
+  });
+  const allowReact = await holdStartupResource(page, /\/(?:src\/main\.tsx|assets\/main-[^/]+\.js)(?:\?.*)?$/);
+  const allowArt = await holdStartupResource(page, `**/${assetUrl("logo.main-menu").slice(2)}`);
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  const splash = page.getByRole("status", { name: "Loading Fauna" });
+  await expect(splash).toBeVisible();
+  await page.evaluate(() => document.fonts.ready);
+  await splash.evaluate((element) => ((element as HTMLElement).dataset.testIdentity = "original"));
+  const before = await splashSnapshot(splash);
+  await expect(page.locator("#root")).toBeEmpty();
+  await expect(page.locator(".startup-leaf")).toHaveCount(5);
+  expect(
+    await page.evaluate(() =>
+      getComputedStyle(document.documentElement).getPropertyValue("--text-scale").trim(),
+    ),
+  ).toBe("1.25");
+  await captureFrame(page, { path: "pre-react-1280.png" });
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1"));
+  const wideBefore = await splashSnapshot(splash);
+  await captureFrame(page, { path: "pre-react-1920.png" });
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.25"));
+  await expect(page.locator("#startup-splash-phrase")).not.toHaveText("Adventure awaits…");
+  allowReact();
+  // Main CSS has arrived; the same title must keep its geometry and animation clock.
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        [...document.styleSheets].some(
+          (sheet) =>
+            sheet.href?.includes("main-") || sheet.ownerNode?.textContent?.includes(".app > .screen-stage"),
+        ),
+      ),
+    )
+    .toBe(true);
+  const after = await splashSnapshot(splash);
+  expect(after.id).toBe("original");
+  expect(after.time).toBeGreaterThan(before.time);
+  expect(after.bounds).toEqual(before.bounds);
+  await captureFrame(page, { path: "react-loading-1280.png" });
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1"));
+  expect((await splashSnapshot(splash)).bounds).toEqual(wideBefore.bounds);
+  await captureFrame(page, { path: "react-loading-1920.png" });
+  allowArt();
+  await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
+  expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
+  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await page.locator(".menu-logo img").evaluate((image: HTMLImageElement) => image.decode());
+  for (const [width, height, scale] of startupLayouts) {
+    await page.setViewportSize({ width, height });
+    await page
+      .locator("html")
+      .evaluate((el, value) => el.style.setProperty("--text-scale", String(value)), scale);
+    await fits(page);
+    await captureFrame(page, { path: `menu-${width}.png` });
+  }
+  await page.keyboard.press("Tab");
+  expect(await page.evaluate(() => document.activeElement?.tagName)).toBe("BUTTON");
+  await page.getByRole("button", { name: "Play", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Choose your starter", exact: true })).toBeVisible();
+  await page
+    .locator(".draft-grid img")
+    .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
+  expect(errors).toEqual([]);
+  // Warm-cache timing is viewport independent.
+  await page.reload();
+  await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
+  expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
+});
 
 test("slow essential art holds the splash, and an image error still permits play", async ({ page }) => {
   const release = await holdStartupResource(page, `**/${assetUrl("logo.main-menu").slice(2)}`, true);

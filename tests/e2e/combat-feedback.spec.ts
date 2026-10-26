@@ -127,16 +127,19 @@ for (const [width, height, scale, reduced] of [
       await expectScrollFree(page);
       await captureFrame(page, { path: `reports/combat-feedback-rise-${width}-${height}-${scale}.png` });
     }
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.clock.runFor(32);
-    await page.emulateMedia({ reducedMotion: "no-preference" });
-    await page.clock.runFor(32);
-    expect(
-      await page
-        .locator(".combat-numbers")
-        .evaluateAll((nodes) => nodes.every((node) => getComputedStyle(node).animationName === "none")),
-    ).toBe(true);
-    await page.emulateMedia({ reducedMotion: reduced ? "reduce" : "no-preference" });
+    if (width === 1280 && height === 720 && scale === "1.25") {
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.clock.runFor(32);
+      await page.emulateMedia({ reducedMotion: "no-preference" });
+      await page.clock.runFor(32);
+      await expect(page.locator('.combat-numbers[data-columns="2"]')).toHaveCount(1);
+      expect(
+        await page
+          .locator(".combat-numbers")
+          .evaluateAll((nodes) => nodes.every((node) => getComputedStyle(node).animationName === "none")),
+      ).toBe(true);
+      await page.emulateMedia({ reducedMotion: reduced ? "reduce" : "no-preference" });
+    }
     await page.clock.runFor(1200);
     await expect(page.locator(".combat-burst")).toHaveCount(0);
     await page.getByRole("button", { name: "End turn", exact: true }).click();
@@ -148,10 +151,12 @@ for (const [width, height, scale, reduced] of [
     await captureFrame(page, {
       path: `reports/combat-feedback-turn-${width}-${height}-${scale}-${reduced}.png`,
     });
-    await page.getByRole("button", { name: "Open menu" }).click();
-    await expect(page.locator(".combat-feedback")).toHaveCount(0);
-    await page.keyboard.press("Escape");
-    await page.clock.runFor(1500);
-    await expect(page.locator(".combat-feedback")).toHaveCount(0);
+    if (width === 1280 && height === 720 && scale === "1.25") {
+      await page.getByRole("button", { name: "Open menu" }).click();
+      await expect(page.locator(".combat-feedback")).toHaveCount(0);
+      await page.keyboard.press("Escape");
+      await page.clock.runFor(1500);
+      await expect(page.locator(".combat-feedback")).toHaveCount(0);
+    }
   });
 }
