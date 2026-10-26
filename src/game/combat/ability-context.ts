@@ -17,6 +17,7 @@ export interface AbilityOperations {
     actor: Combatant,
     events: GameEvent[],
     backupOnly?: boolean,
+    backupId?: string,
   ) => Combatant | undefined;
 }
 export const actorPower = (action: AbilityAction) => (action.side === "enemy" ? action.actor.power : 1);

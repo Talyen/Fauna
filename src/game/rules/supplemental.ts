@@ -73,7 +73,7 @@ const rules: SupplementalRules = freeze(
       keyword: null,
       delivery: () => "global",
       describe: (effect, card) =>
-        card.effect === "swapLowest" && effect.amount === 1
+        (card.effect === "swapLowest" || card.effect === "swapChosen") && effect.amount === 1
           ? "Draw a Card"
           : `Draw ${effect.amount} card${effect.amount === 1 ? "" : "s"}`,
     },

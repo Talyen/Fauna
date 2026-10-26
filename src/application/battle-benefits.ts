@@ -1,8 +1,7 @@
 import { boonRule } from "../game/rules/boons";
 import { healingBenefit, ordinaryAttackFacts, type OrdinaryHit } from "../game/ability-facts";
 export type { OrdinaryHit } from "../game/ability-facts";
-import { battleCardCapacity, drawHasAnotherCard } from "../game/card-zones";
-import { drawableOwnerIds } from "../game/card-actors";
+import { battleCardCapacity, drawHasAnotherCard, discardDrawCards } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { battlefield, healingAllies, isRosterCreature } from "../game/battlefield";
 import { creaturePassive, hasTalent } from "../game/progression";
@@ -204,13 +203,13 @@ export function battleBenefits(
           ? [actor]
           : def.target === "mostInjured"
             ? [mostInjured(automaticRecipients)!]
-            : allies;
+            : allies.filter((ally) => def.target !== "injured" || ally.health < maximumHealth(ally));
       return recipients.flatMap((ally) => {
         const { restored, utility } = healingBenefit(state, ally, value, play.def.effects);
         return support(
           restored > 0 ? "healing" : utility > 0 ? "utility" : "none",
           restored > 0 ? restored : utility,
-          def.target ? undefined : ally.id,
+          def.target && def.target !== "injured" ? undefined : ally.id,
         );
       });
     }
@@ -241,10 +240,7 @@ export function battleBenefits(
     case "teamThaw":
       return controlRemoval(allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
     case "recover": {
-      const useful = state.battle.discard.some((id) => {
-        const card = state.cards.find((entry) => entry.id === id)!;
-        return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
-      });
+      const useful = discardDrawCards(state, def.allyOnly ? actor.id : undefined).length > 0;
       if (def.target === "ally") {
         const healing =
           def.effects?.reduce(
@@ -408,6 +404,13 @@ export function battleBenefits(
             : "none",
         );
       return support("utility");
+    case "swapChosen":
+      return play.commands.map((command) => ({
+        kind: "support" as const,
+        priority: "utility" as const,
+        amount: 0,
+        targetId: command.targetId,
+      }));
     case "swapLowest":
       return support("utility");
     default: {

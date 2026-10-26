@@ -1,6 +1,7 @@
 import type { DamageType } from "../keywords";
 
 export type AbilityKind =
+  | "swapChosen"
   | "swapDodge"
   | "springbound"
   | "repeatNextCard"
@@ -60,8 +61,8 @@ interface AbilityParameters {
   };
   guard: { target?: "self" | "allAllies" };
   dodge: { target?: "self" | "allAllies" };
-  heal: { target?: "allAllies" | "mostInjured" | "self" };
-  recover: { target?: "ally" };
+  heal: { target?: "allAllies" | "mostInjured" | "self" | "injured" };
+  recover: { target?: "ally"; allyOnly?: true };
 }
 export type AbilityDefinition = {
   [K in AbilityKind]: { effect: K } & (K extends keyof AbilityParameters

@@ -14,7 +14,11 @@ export function cardTargeting(card: CardDefinition): "enemy" | "ally" | "self" |
       return card.target ? "automatic" : "enemy";
     case "guard":
     case "heal":
-      return card.target === "self" ? "self" : card.target ? "automatic" : "ally";
+      return card.target === "self"
+        ? "self"
+        : card.target && card.target !== "injured"
+          ? "automatic"
+          : "ally";
     case "recover":
       return card.target === "ally" ? "ally" : "automatic";
     case "self":
@@ -75,7 +79,11 @@ export function cardText(
       (card.effect === "teamClearBlind" ||
       card.effect === "swapLowest" ||
       (card.effect === "swap" && card.backupOnly) ||
-      (card.effect === "heal" && card.target === "self" && effect.kind === "mana") ||
+      card.effect === "swapChosen" ||
+      (card.effect === "recover" && card.allyOnly) ||
+      (card.effect === "heal" &&
+        (card.target === "self" || card.target === "injured") &&
+        effect.kind === "mana") ||
       (card.effect === "mana" && card.restore)
         ? " / "
         : "; ") + supplementalRule(effect.kind).describe(effect, card, keywordLabel);

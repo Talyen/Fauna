@@ -1,6 +1,16 @@
 import type { AbilityRuleCatalog } from "./contracts";
 
 export const utilityRules = {
+  swapChosen: {
+    targeting: "ally",
+    scaling: "authored",
+    enemy: "unsupported",
+    adaptation: "extras",
+    keywords: [],
+    describe() {
+      return "Swap out for a chosen backup";
+    },
+  },
   swapDodge: {
     targeting: "automatic",
     scaling: "level",
@@ -51,4 +61,7 @@ export const utilityRules = {
       return "Swap out for a random backup";
     },
   },
-} satisfies Pick<AbilityRuleCatalog, "teamBlind" | "teamPurge" | "swap" | "swapLowest" | "swapDodge">;
+} satisfies Pick<
+  AbilityRuleCatalog,
+  "swapChosen" | "teamBlind" | "teamPurge" | "swap" | "swapLowest" | "swapDodge"
+>;

@@ -2700,6 +2700,50 @@
       "aspect": [3, 4],
       "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1CdujgAfMg_EpCgFAlmmvRc0Fm82JzUSj/view; original PNG preserved unchanged",
       "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "creature.wisterelle",
+      "origin": "repository",
+      "source": "public/art/creatures/wisterelle/portrait.png",
+      "output": "art/wisterelle/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Wisterelle artwork from Google Drive: https://drive.google.com/file/d/1l7GRNYZ0RwvuaKrz_PsHXYE2BAUHmPgV/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wisterelle.forgotten-junction",
+      "origin": "repository",
+      "source": "public/art/creatures/wisterelle/forgotten-junction.png",
+      "output": "art/wisterelle/forgotten-junction.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Wisterelle artwork from Google Drive: https://drive.google.com/file/d/1uVvfTF4-KD5zuvBsc6AB-L6di7q_eLGI/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wisterelle.lantern-fare",
+      "origin": "repository",
+      "source": "public/art/creatures/wisterelle/lantern-fare.png",
+      "output": "art/wisterelle/lantern-fare.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Wisterelle artwork from Google Drive: https://drive.google.com/file/d/1Nbhaq-OdT2_x0OKS34K7C0JAbfCGUGmg/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wisterelle.left-luggage",
+      "origin": "repository",
+      "source": "public/art/creatures/wisterelle/left-luggage.png",
+      "output": "art/wisterelle/left-luggage.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Wisterelle artwork from Google Drive: https://drive.google.com/file/d/1m0M4A5Fg3wWbXX4nV6u8lgdOmqxA8-LV/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

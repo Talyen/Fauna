@@ -97,10 +97,14 @@ export function winBattle(s = run()) {
   });
 }
 /** A full roster at the recruitment boundary, including distinct backup individuals. */
-export function fullRosterReward(state = winBattle()) {
+export function fullRosterReward(state = winBattle(teamRun(42, ["mossguard", "reedstag", "prismram"]))) {
   if (state.phase !== "recruit") throw new Error("Expected a Recruit reward");
   return produce(state, (draft) => {
-    const kinds = ["pollenmoth", "prismram"] as const;
+    const kinds = (["pollenmoth", "captoad", "dunefox", "reedstag", "coralcurl"] as const).filter(
+      (kind) =>
+        ![...draft.team, ...draft.reserves].some((unit) => unit.species === kind) &&
+        kind !== draft.reward!.recruits[0],
+    );
     for (let index = 0; draft.team.length + draft.reserves.length < 5; index++) {
       const kind = kinds[index % kinds.length]!;
       draft.reserves.push({

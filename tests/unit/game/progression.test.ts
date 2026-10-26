@@ -135,30 +135,32 @@ describe("keyword progression and rewards", () => {
   it("recruits only offered species and preserves active choices across battles", () => {
     let s = winBattle();
     expect(dispatch(s, { type: "recruit", species: "prismram" }).accepted).toBe(false);
-    s = accept(s, { type: "recruit", species: "emberback" });
-    expect([...s.team, ...s.reserves].map((unit) => unit.species)).toContain("emberback");
+    s = accept(s, { type: "recruit", species: "pollenmoth" });
+    expect([...s.team, ...s.reserves].map((unit) => unit.species)).toContain("pollenmoth");
     expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberback", "prismram"]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     s = swapFixture(s, {
       type: "swap",
       activeId: "ally-0",
-      reserve: s.reserves.find((c) => c.species === "emberback")!.id,
+      reserve: s.reserves.find((c) => c.species === "pollenmoth")!.id,
     });
     expect(
-      s.cards.filter((c) => c.ownerId === s.team[0]!.id).every((c) => c.definitionId.startsWith("emberback")),
+      s.cards
+        .filter((c) => c.ownerId === s.team[0]!.id)
+        .every((c) => c.definitionId.startsWith("pollenmoth")),
     ).toBe(true);
     expect(dispatch(s, { type: "swap", activeId: "ally-0", reserve: "ally-1" }).accepted).toBe(false);
     s = accept(s, { type: "beginBattle" });
     expect(dispatch(s, { type: "swap", activeId: "ally-0", reserve: "ally-0" }).accepted).toBe(false);
   });
   it("confirms either deployed or reserved replacements after committing recruitment", () => {
-    for (const replace of ["ally-0", "recruit-pollenmoth"] as const) {
+    for (const replace of ["ally-0", "recruit-dunefox"] as const) {
       let s = produce(winBattle(), (d) => {
         addBackups(
           d,
-          ...["pollenmoth", "prismram"].map((kind) => ({
+          ...["dunefox", "captoad"].map((kind) => ({
             id: `recruit-${kind}`,
-            species: kind as "pollenmoth" | "prismram",
+            species: kind as "dunefox" | "captoad",
             health: 20,
             block: 0,
             combat: freshCombat(),
@@ -168,7 +170,7 @@ describe("keyword progression and rewards", () => {
         d.wins = 1;
       });
       expect(dispatch(s, { type: "confirmRecruit" }).accepted).toBe(false);
-      s = accept(s, { type: "recruit", species: "emberback" });
+      s = accept(s, { type: "recruit", species: "pollenmoth" });
       expect(dispatch(s, { type: "confirmRecruit", replace: "emberback" }).accepted).toBe(false);
       const released = [...s.team, ...s.reserves].find((c) => c.id === replace)!.species;
       s = accept(s, { type: "confirmRecruit", replace });

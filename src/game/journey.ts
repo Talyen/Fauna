@@ -28,8 +28,8 @@ export function offerStarters(state: GameState) {
   }
   const shuffled = shuffle(state, [...pool]);
   state.starterOffers = Array.from(
-    { length: STARTER_OFFER_COUNT },
-    (_, index) => shuffled[index % shuffled.length]!,
+    { length: Math.min(STARTER_OFFER_COUNT, shuffled.length) },
+    (_, index) => shuffled[index]!,
   );
 }
 function prepareEncounter(state: GameState) {

@@ -36,7 +36,14 @@ import {
   leaveCampfire,
   returnHome,
 } from "./journey";
-import { ownedCards, addRecruit, swapBackup, swapFromCard, pendingReplacement } from "./team";
+import {
+  ownedCards,
+  addRecruit,
+  swapBackup,
+  swapFromCard,
+  pendingReplacement,
+  rosterHasSpecies,
+} from "./team";
 import { finishTurn } from "./combat/turns";
 
 export function createGame(seed = 1): GameState {
@@ -104,10 +111,15 @@ function resolve(
     return reject(state, "Choose a valid journey seed.");
   if (
     command.type === "draft" &&
-    (!state.starterOffers.includes(command.species) || state.selected.length === starterCount(state))
+    (!state.starterOffers.includes(command.species) ||
+      state.selected.includes(command.species) ||
+      state.selected.length === starterCount(state))
   )
     return reject(state, "Choose an offered starter.");
-  if (command.type === "start" && state.selected.length !== starterCount(state))
+  if (
+    command.type === "start" &&
+    (state.selected.length !== starterCount(state) || new Set(state.selected).size !== state.selected.length)
+  )
     return reject(state, "Complete your starter choices first.");
   if (command.type === "play") {
     if (state.phase !== "battle") throw new Error("Invalid battle admission.");
@@ -140,6 +152,7 @@ function resolve(
     command.type === "confirmRecruit" &&
     (state.phase !== "recruit" ||
       state.reward.selectedRecruit === undefined ||
+      rosterHasSpecies(state, state.reward.selectedRecruit) ||
       state.team.length + state.reserves.length !== 5 ||
       (command.replace !== undefined &&
         ![...state.team, ...state.reserves].some((creature) => creature.id === command.replace)))
@@ -333,7 +346,12 @@ function resolve(
           MAX_CREATURE_STARS + 1,
           (draft.discovery.recruited[command.species] ?? 0) + 1,
         );
-        if (command.type === "recruit" && draft.team.length + draft.reserves.length === 5) {
+        const alreadyOnRoster = rosterHasSpecies(draft, command.species);
+        if (
+          command.type === "recruit" &&
+          !alreadyOnRoster &&
+          draft.team.length + draft.reserves.length === 5
+        ) {
           if (draft.phase !== "recruit") throw new Error("Invalid Recruit choice.");
           draft.reward.selectedRecruit = command.species;
           break;
@@ -343,7 +361,12 @@ function resolve(
           draft.expedition.recruit = null;
           draft.expedition.pack = generateEncounterPack(draft, draft.expedition.pack!);
           draft.expedition.lastRoom = "recruit";
-          events.push({ kind: "reward", text: `${species(command.species).name} joined your roster.` });
+          events.push({
+            kind: "reward",
+            text: alreadyOnRoster
+              ? `${species(command.species).name} was discovered again; your roster is unchanged.`
+              : `${species(command.species).name} joined your roster.`,
+          });
         } else {
           if (draft.phase !== "recruit") throw new Error("Invalid Recruit choice.");
           afterRewards(draft);

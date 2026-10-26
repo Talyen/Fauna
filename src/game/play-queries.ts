@@ -2,19 +2,27 @@ import { cardActor, unfinishedJourneyLimit } from "./card-actors";
 import { cardTargeting } from "./card-rules";
 import { definition, species, type CardDefinition } from "./content";
 import { cardCost } from "./ability-rules";
-import { controlled } from "./combat/state";
+import { controlled, maximumHealth } from "./combat/state";
 import { battlefield } from "./battlefield";
 import { pendingReplacement } from "./team";
+import { discardDrawCards } from "./card-zones";
 import type { BattleState, Card, Creature, Command } from "./types";
 
 /** Explicit recipients only; random/group delivery remains live execution work. */
 export function chosenRecipients(state: BattleState, def: CardDefinition) {
   const mode = cardTargeting(def);
+  if (def.effect === "swapChosen") {
+    return state.reserves.filter((unit) => unit.health > 0);
+  }
   return mode === "enemy" || mode === "ally"
     ? (def.effect === "resurrect"
         ? [...state.team, ...state.reserves]
         : battlefield(state, mode === "enemy" ? "enemy" : "player")
-      ).filter((unit) => (def.effect === "resurrect" ? unit.health === 0 : unit.health > 0))
+      ).filter(
+        (unit) =>
+          (def.effect === "resurrect" ? unit.health === 0 : unit.health > 0) &&
+          (def.effect !== "heal" || def.target !== "injured" || unit.health < maximumHealth(unit)),
+      )
     : [];
 }
 
@@ -24,11 +32,15 @@ export function playTargetError(state: BattleState, def: CardDefinition, actorId
     (mode === "enemy" || mode === "ally") &&
     !chosenRecipients(state, def).some((unit) => unit.id === targetId)
   )
-    return def.effect === "resurrect"
-      ? "Choose a knocked-out ally."
-      : mode === "enemy"
-        ? "Choose a living enemy."
-        : "Choose a living ally.";
+    return def.effect === "swapChosen"
+      ? "Choose a living backup."
+      : def.effect === "heal" && def.target === "injured"
+        ? "Choose an injured ally."
+        : def.effect === "resurrect"
+          ? "Choose a knocked-out ally."
+          : mode === "enemy"
+            ? "Choose a living enemy."
+            : "Choose a living ally.";
   if (mode === "self" && targetId !== undefined && targetId !== actorId)
     return "This ability targets its acting creature.";
   return null;
@@ -62,8 +74,14 @@ export function inspectCardPlay(
   )
     return { allowed: false, reason: "Unfinished Journey’s limit is spent this turn." };
   const def = definition(card.definitionId);
+  if (def.effect === "recover" && def.allyOnly && !discardDrawCards(state, actor.id).length)
+    return { allowed: false, reason: "There are no eligible ally cards in Discard." };
   if (def.effect === "resurrect" && !chosenRecipients(state, def).length)
     return { allowed: false, reason: "There are no knocked-out allies." };
+  if (def.effect === "swapChosen" && !chosenRecipients(state, def).length)
+    return { allowed: false, reason: "There are no living backups." };
+  if (def.effect === "heal" && def.target === "injured" && !chosenRecipients(state, def).length)
+    return { allowed: false, reason: "There are no injured allies." };
   if (state.battle.mana < cardCost(card, state)) return { allowed: false, reason: "Not enough Mana." };
   return { allowed: true, card, actor, def };
 }

@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "e7ac213fe7d54fe4fc5d022601cbaa5282a7eaa6c15266e8fa9ea5cdd8fee851",
-  "generation": "313ad1e190bb9e7794b77b40e000bc20ca6dc16b9964eb7cf4482b085c834737",
+  "manifestHash": "971e0f07fe87f57e2f05e121ae587f8c5477419c11ec170929b2320ebd66cdd7",
+  "generation": "6955abf92a47824603fe7664c519fe6379f7f8e202ad92f61e22b75aa54d7402",
   "records": {
     "keyword.block": {
       "url": "./prepared/objects/735558c0801082a6bfbeabec58de75ff3b1ad59643b686fac19e7a169691902e/asset.webp",
@@ -3099,6 +3099,58 @@
       "outputHash": "df7496a13cd62eec23e64117d3e4b8ec7b8ebfb4e0e828ecd562a0b32ebdc09c",
       "sourceBytes": 2262263,
       "outputBytes": 797344,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.wisterelle": {
+      "url": "./prepared/objects/bb720eebabfeb8e4d21b864149d6a8d08d05f7c3a16ec0d0c8b19279662d8ba3/asset.webp",
+      "sourceHash": "0c5718e06e9796ff2a7f99716c9d8484d12b6a3cecd633c7eb5c4d3decc7fcde",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "6147536c2540197fdcaca76eae375a84a5fb3b2f5dc083ee99f58a8760390079",
+      "sourceBytes": 2548078,
+      "outputBytes": 1004762,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.wisterelle.forgotten-junction": {
+      "url": "./prepared/objects/fa950a608d2d38a77f571e35f9f7aa986b4becab7a24e34bb1ba0abdde210fc9/asset.webp",
+      "sourceHash": "f032c18a0789d88b1832ab361bfdae69beb6486871978d5f1a2b3e216659f9bb",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "9872e05e482c3fe89c70ec7aef61aade89e33296a9eb30f8145bcd680f8617a9",
+      "sourceBytes": 2629580,
+      "outputBytes": 1081214,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.wisterelle.lantern-fare": {
+      "url": "./prepared/objects/01e01be7d8b51220d4c092a81e3e9ddc4681d03b8d93f0958087b4f1378e4123/asset.webp",
+      "sourceHash": "53c8c3eacbafc80bb192067f4411ccc53cdcb3516cf46d3fa8e1bc58267fc6b2",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "6816ee175357250b45d34eb8c0db5bf96cc76a414a04b561c164de898f503a22",
+      "sourceBytes": 2486839,
+      "outputBytes": 1025618,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.wisterelle.left-luggage": {
+      "url": "./prepared/objects/39d388f32f979a2315a05800096424c3fee2583aa7268217d079234aef083796/asset.webp",
+      "sourceHash": "610bd45bd7f2e6cbcc6f71baea45150f1ad567024911da4ad96be92e57b2fceb",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "9b58606492a2a6cfa46cf04e928ca185d25f53bde4dde327da670b75c7e71a18",
+      "sourceBytes": 2518423,
+      "outputBytes": 1031958,
       "width": 720,
       "height": 960,
       "alpha": false

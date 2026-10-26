@@ -11,7 +11,7 @@ import { shuffle } from "../../../src/game/random";
 import type { GameEvent } from "../../../src/game/types";
 
 it("keeps draw eligibility and seeded recycling stable while Well Read grows a large deck", () => {
-  const initial = produce(teamRun(42, ["rookhaven", "reedstag", "reedstag"]), (state) => {
+  const initial = produce(teamRun(42, ["rookhaven", "reedstag", "almanelle"]), (state) => {
     state.discovery.recruited.rookhaven = 6;
     state.team[1]!.health = 0;
     state.team[2]!.health = 0;
@@ -80,15 +80,17 @@ it.each([false, true])("preserves seeded draw recycling with all owners knocked 
 });
 
 it("keyword draws prefer the last eligible slot and recycle only living owners' matching cards", () => {
-  const initial = produce(teamRun(42, ["reedstag", "reedstag", "reedstag"]), (state) => {
+  const initial = produce(teamRun(42, ["reedstag", "captoad", "almanelle"]), (state) => {
     state.team[1]!.health = 0;
-    const [first, inert, recycled] = state.cards.filter((card) => card.definitionId === "reedstag-attack");
+    const first = state.cards.find((card) => card.definitionId === "reedstag-attack")!;
+    const inert = state.cards.find((card) => card.definitionId === "captoad-attack")!;
+    const recycled = state.cards.find((card) => card.definitionId === "almanelle-rooted-year")!;
     const second = state.cards.find((card) => card.definitionId === "reedstag-guard")!;
     const unrelated = state.cards.find((card) => card.definitionId === "reedstag-heal")!;
     const retained = state.cards.filter(
       (card) =>
-        (card.ownerId === state.team[1]!.id && card.definitionId === "reedstag-guard") ||
-        (card.ownerId === state.team[2]!.id && card.definitionId === "reedstag-heal"),
+        (card.ownerId === state.team[1]!.id && card.definitionId !== "captoad-attack") ||
+        (card.ownerId === state.team[2]!.id && card.definitionId !== "almanelle-rooted-year"),
     );
     state.battle!.hand = [];
     state.battle!.buffer = [];
@@ -113,7 +115,7 @@ it("keyword draws prefer the last eligible slot and recycle only living owners' 
 });
 
 it("keyword draws leave fallen owners' matching cards in place when no owner can draw", () => {
-  const initial = produce(teamRun(42, ["reedstag", "reedstag", "reedstag"]), (state) => {
+  const initial = produce(teamRun(42, ["reedstag", "captoad", "almanelle"]), (state) => {
     state.team.forEach((unit) => {
       unit.health = 0;
     });
@@ -128,7 +130,7 @@ it("keyword draws leave fallen owners' matching cards in place when no owner can
 });
 
 it.each([false, true])("preserves empty-pile reshuffle rules for keyword draw: %s", (keyword) => {
-  const initial = produce(teamRun(42, ["reedstag", "reedstag", "reedstag"]), (state) => {
+  const initial = produce(teamRun(42, ["reedstag", "captoad", "almanelle"]), (state) => {
     state.team[1]!.health = 0;
     state.battle!.hand = [];
     state.battle!.buffer = [];
@@ -137,7 +139,11 @@ it.each([false, true])("preserves empty-pile reshuffle rules for keyword draw: %
     state.rng = 17;
   });
   const matching = initial.cards
-    .filter((card) => card.ownerId !== initial.team[1]!.id && card.definitionId !== "reedstag-heal")
+    .filter(
+      (card) =>
+        card.ownerId !== initial.team[1]!.id &&
+        ["reedstag-attack", "reedstag-guard", "almanelle-rooted-year"].includes(card.definitionId),
+    )
     .map((card) => card.id);
   const drawable = initial.cards
     .filter((card) => card.ownerId !== initial.team[1]!.id)
@@ -159,7 +165,7 @@ it.each([false, true])("preserves empty-pile reshuffle rules for keyword draw: %
 });
 
 it("queues a keyword draw and its Well Read copy behind existing overflow without copying queued cards", () => {
-  const initial = produce(teamRun(42, ["rookhaven", "reedstag", "reedstag"]), (state) => {
+  const initial = produce(teamRun(42, ["rookhaven", "reedstag", "almanelle"]), (state) => {
     state.discovery.recruited.rookhaven = 6;
     state.cards = state.cards.filter((card) => !card.temporary);
     const ids = state.cards.map((card) => card.id);
@@ -170,11 +176,11 @@ it("queues a keyword draw and its Well Read copy behind existing overflow withou
   });
   const events: GameEvent[] = [];
   const result = produce(initial, (state) => drawKeyword(state, "nature", events));
-  const drawn = initial.battle!.draw[0]!;
+  const drawn = initial.battle!.draw.at(-1)!;
   const copyId = `copy-${initial.battle!.copySerial}`;
   expect(result.battle!.hand).toEqual(initial.battle!.hand);
   expect(result.battle!.buffer).toEqual([...initial.battle!.buffer, drawn, copyId]);
-  expect(result.battle!.draw).toEqual(initial.battle!.draw.slice(1));
+  expect(result.battle!.draw).toEqual(initial.battle!.draw.filter((id) => id !== drawn));
   expect(result.cards.at(-1)).toEqual({
     ...initial.cards.find((card) => card.id === drawn),
     id: copyId,
@@ -197,7 +203,7 @@ function buffered() {
 
 describe("hidden hand overflow", () => {
   it("receives a generated card behind queued cards without triggering Well Read", () => {
-    const initial = produce(teamRun(42, ["rookhaven", "reedstag", "reedstag"]), (state) => {
+    const initial = produce(teamRun(42, ["rookhaven", "reedstag", "almanelle"]), (state) => {
       state.discovery.recruited.rookhaven = 6;
       state.cards = state.cards.filter((card) => !card.temporary);
       const ids = state.cards.map((card) => card.id);

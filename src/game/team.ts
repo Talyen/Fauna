@@ -28,6 +28,12 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
 export function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
 }
+export function rosterHasSpecies(
+  state: Pick<GameState, "team" | "reserves">,
+  kind: import("./content").SpeciesId,
+) {
+  return [...state.team, ...state.reserves].some((unit) => unit.species === kind);
+}
 export function ownedCards(id: string, kind: GameState["team"][number]["species"]): Card[] {
   const copies = species(kind).legendary ? 2 : 1;
   return speciesCards(kind).flatMap((c) =>
@@ -58,6 +64,8 @@ export function recruitLineup(
 }
 /** Joining a roster changes individuals and deployment; Collection progress is granted separately. */
 export function addRecruit(state: GameState, kind: import("./content").SpeciesId, replacement?: string) {
+  // Repeat discoveries improve Collection rank without replacing or refreshing an individual.
+  if (rosterHasSpecies(state, kind)) return;
   const all = [...state.team, ...state.reserves];
   let id = `recruit-${state.revision}`;
   for (let suffix = 1; all.some((creature) => creature.id === id); suffix++)
@@ -269,6 +277,7 @@ export function swapFromCard(
   actor: import("./combat/index").Combatant,
   events: GameEvent[],
   backupOnly = false,
+  backupId?: string,
 ) {
   const allied = isRosterCreature(actor);
   const row = allied ? state.team : state.battle!.enemies;
@@ -276,7 +285,11 @@ export function swapFromCard(
   if (!row.some((unit) => unit.id === actor.id)) return;
   const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
   if (backup.length) {
-    const incoming = backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)]!;
+    const incoming =
+      backupId !== undefined
+        ? backup.find((unit) => unit.id === backupId)
+        : backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)];
+    if (!incoming) return;
     swapBackup(state, actor.id, incoming.id, events, true);
     return incoming;
   }

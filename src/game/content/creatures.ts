@@ -1,3 +1,4 @@
+import { wisterelle } from "./creatures/wisterelle";
 import { parhelion } from "./creatures/parhelion";
 import { aerostat } from "./creatures/aerostat";
 import { dulcera } from "./creatures/dulcera";
@@ -70,6 +71,7 @@ const kits = [
   parhelion,
   pyrella,
   aerostat,
+  wisterelle,
 ];
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
@@ -108,6 +110,7 @@ export const CARDS: readonly CardDefinition[] = [
   parhelion,
   pyrella,
   aerostat,
+  wisterelle,
 ].flatMap((kit) => kit.cards);
 const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));
 const cardsBySpecies = new Map<SpeciesId, CardDefinition[]>();

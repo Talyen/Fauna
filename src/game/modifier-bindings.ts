@@ -28,6 +28,7 @@ type Modules = {
   };
   "./card-actors": typeof import("./card-actors");
   "./card-zones": {
+    lostAndFound: typeof import("./card-zones").lostAndFound;
     drawHasAnotherCard: typeof drawHasAnotherCard;
     expressDelivery: typeof expressDelivery;
     receiveDraw: typeof receiveDraw;
@@ -66,6 +67,7 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  lostAndFound: bind("./card-zones", "lostAndFound"),
   puzzleProgressLimit: bind("./ability-rules", "puzzleProgressLimit"),
   actionValue: bind("./ability-rules", "actionValue"),
   grantStatus: bind("./combat/statuses", "grantStatus"),
@@ -337,6 +339,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      lostAndFound: [owners.lostAndFound],
       sunthaw: [owners.cleanseRewards],
       wellProvisioned: [owners.wellProvisioned],
       gentlePassage: [owners.gentlePassage],

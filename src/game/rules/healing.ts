@@ -20,7 +20,7 @@ export const healingRules = {
     describe(card, { value }) {
       return card.target === "self"
         ? `Restore ${value} Health`
-        : `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
+        : `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : card.target === "injured" ? "an injured ally" : "a living ally"}`;
     },
   },
   resurrect: {

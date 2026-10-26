@@ -8,13 +8,13 @@ This guide owns journey rules and progression. [Screen specifications](ui/screen
 
 The first journey starts with one creature chosen from three seeded offers in `FIRST_RUN_STARTERS` in `src/game/content.ts`. Recruit commits the choice, adds it to Collection and starts the journey. Team-oriented kits outside this solo pool remain available through encounters, recruitment and later drafts. The [first balance pass](archive/JOURNEY_BALANCE.md) records the opening-matchup evidence.
 
-Later journeys draft from collected species: choose one of three offers, three times. A Legendary first pick completes the draft alone; later rounds offer only ordinary creatures. Species may repeat between rounds. Pools smaller than three repeat species within an offer; pools of at least three offer three distinct species, so an early loss cannot prevent another journey.
+Later journeys draft up to three distinct collected ordinary species. Each round offers up to three species not already chosen. When fewer than three ordinary species are collected, draft only that many; offers never repeat a species to fill space. A Legendary first pick completes the draft alone; later rounds offer only ordinary creatures. An early loss cannot prevent another journey.
 
 Each choice commits immediately and saves the next offer. Browsing, inspection, cancellation and reload preserve offers and earlier picks. The final required Recruit starts the journey automatically, including when resuming a completed draft. [Starter presentation](ui/screens.md#starter-draft) separates inspection from recruitment.
 
 ### Formation
 
-A roster holds five individuals, including duplicate species. Deploy up to three ordinary creatures or one Legendary with up to four backup. The draft supplies the remembered starting lineup; on the first journey, recruits fill slots two and three before joining backup.
+A roster holds up to five individuals, with at most one of each species across deployed creatures and backup. Repeat recruitment improves permanent Collection rank without adding, replacing, reviving or refreshing the existing individual, including at a full roster. Deploy up to three ordinary creatures or one Legendary with up to four backup. The draft supplies the remembered starting lineup; on the first journey, recruits fill slots two and three before joining backup.
 
 Only living deployed creatures act and provide passives. Formation changes through knockout replacement, abilities and explicit mechanics; there is no free Swap or lineup editor. The resulting formation persists between battles. Health, Block, first-attack state and effects belong to each individual; normal turn expiration applies in backup. Swapping never heals, cleanses or repeats opening bonuses. Victory preserves Health and knockouts while combat effects reset for the next battle.
 
@@ -83,13 +83,13 @@ Actual recruitment permanently collects a species. Its first copy gives zero sta
 
 Offer one uniformly selected ordinary species, including uncollected and already-owned species, only while the roster has fewer than five individuals. Legendaries are excluded. [Support visits](#optional-support-visits) defines destination rolls.
 
-Activating Recruit consumes the saved offer and recruits at full Health directly, without confirmation or release. Fill ordinary deployment up to three, then backup; a deployed Legendary keeps recruits in backup. The command grants Collection progress without advancing the battle, spending Gold or consuming RNG. Starting battle forfeits the unclaimed offer. This is independent of victory recruitment. [Optional Recruit presentation](ui/screens.md#optional-recruit-destination) owns full-kit disclosure.
+Activating Recruit consumes the saved offer and adds a new species at full Health directly, without confirmation or release. Recruiting a species already on the roster only improves Collection rank and preserves the existing individual. Fill ordinary deployment up to three, then backup; a deployed Legendary keeps recruits in backup. The command grants Collection progress without advancing the battle, spending Gold or consuming RNG. Starting battle forfeits the unclaimed offer. This is independent of victory recruitment. [Optional Recruit presentation](ui/screens.md#optional-recruit-destination) owns full-kit disclosure.
 
 ### Victory recruitment
 
-Victories require recruiting one defeated creature, following the [outcome flow](#screen-flow-and-journey-results). Offers preserve defeated entries in battle order, including repeated species and species already owned. Each recruit is a new individual with independent identity and battle state.
+Victories require recruiting one defeated creature, following the [outcome flow](#screen-flow-and-journey-results). Offers preserve defeated entries in battle order, including repeated species and species already owned. A species absent from the roster joins as a new individual with independent identity and battle state; an already rostered species improves Collection rank without adding another individual.
 
-With roster space, add the recruit immediately. At five creatures, bank Collection progress and open a local preview of the original team. Only Confirm changes the roster; keeping the original team is valid, and replacing a deployed member updates the saved formation. Previews never save, consume RNG or grant progress. Reload restores the original-team preview around the saved recruit without collecting twice. Recruitment cannot be canceled after committing it. [Team confirmation](ui/screens.md#choose-your-team) owns exchange controls and motion.
+With roster space, add a new species immediately. A repeat species completes recruitment immediately, even at five creatures, preserving the original roster. For a new species at five creatures, bank Collection progress and open a local preview of the original team. Only Confirm changes the roster; keeping the original team is valid, and replacing a deployed member updates the saved formation. Previews never save, consume RNG or grant progress. Reload restores the original-team preview around the saved recruit without collecting twice. Recruitment cannot be canceled after committing it. [Team confirmation](ui/screens.md#choose-your-team) owns exchange controls and motion.
 
 ## Currency and items
 

@@ -278,13 +278,15 @@ describe("player interface", () => {
   it.each(["hover", "keyboard"])(
     "keeps creature details focused on identity and rules while live Block stays on the battlefield using %s",
     async (input) => {
-      const game = produce(teamRun(7, ["mossguard", "mossguard", "prismram"]), (d) => {
+      const game = produce(teamRun(7, ["mossguard", "emberback", "prismram"]), (d) => {
         d.team[0]!.health = 7;
         d.team[1]!.health = 19;
         d.team[1]!.block = 4;
+        d.discovery.encountered.push("reedstag");
+        d.discovery.recruited.reedstag = 1;
         d.reserves.push({
           id: "reserve-copy",
-          species: "mossguard",
+          species: "reedstag",
           health: 11,
           block: 2,
           combat: freshCombat(),
@@ -325,7 +327,7 @@ describe("player interface", () => {
       render(<App session={session} />);
       await user.click(screen.getByRole("button", { name: "Continue" }));
       expect(screen.queryByRole("button", { name: "Swap" })).toBeNull();
-      const reserve = screen.getByRole("button", { name: "Mossguard, backup" });
+      const reserve = screen.getByRole("button", { name: "Reedstag, backup" });
       if (input === "hover") await user.hover(reserve);
       else {
         await user.tab();

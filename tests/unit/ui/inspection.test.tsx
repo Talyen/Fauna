@@ -194,7 +194,7 @@ describe("artwork-first inspection", () => {
   });
 
   it("keeps modified hand rules and only the enemy passive on hover without battle inspection", async () => {
-    const fixture = produce(teamRun(7, ["emberback", "emberback", "prismram"]), (game) => {
+    const fixture = produce(teamRun(7, ["emberback", "reedstag", "prismram"]), (game) => {
       game.cards[0]!.level = 1;
       game.keywordXP.physical = 20;
       game.talents = ["physical.shield-slam"];

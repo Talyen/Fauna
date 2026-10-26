@@ -239,7 +239,13 @@ export function BattleScreen({
                   : acting
                     ? species(acting.species).name
                     : species(def.species).name}{" "}
-                · {recipient ?? (enemyTarget ? "Choose an enemy" : "Choose an ally")}
+                ·{" "}
+                {recipient ??
+                  (enemyTarget
+                    ? "Choose an enemy"
+                    : def.effect === "swapChosen"
+                      ? "Choose a backup"
+                      : "Choose an ally")}
               </p>
               <ActionDetails
                 compact
@@ -254,21 +260,23 @@ export function BattleScreen({
                 actor={acting}
                 modifiers={game}
               />
-              {def.effect === "resurrect"
+              {def.effect === "resurrect" || def.effect === "swapChosen"
                 ? game.reserves
                     .filter((unit) => legalTargets.has(unit.id))
                     .map((unit) => (
                       <Button
                         key={unit.id}
                         variant="outline"
-                        data-resurrection-target={unit.id}
-                        aria-label={`Resurrect ${species(unit.species).name} from backup`}
+                        data-backup-target={unit.id}
+                        data-resurrection-target={def.effect === "resurrect" ? unit.id : undefined}
+                        aria-label={`${def.effect === "swapChosen" ? "Swap in" : "Resurrect"} ${species(unit.species).name} from backup`}
                         onFocus={() => setTarget(unit.id)}
                         onMouseEnter={() => setTarget(unit.id)}
                         onMouseLeave={() => leaveTarget(unit.id)}
                         onClick={() => play({ type: "play", cardId: card.id, targetId: unit.id })}
                       >
-                        {species(unit.species).name} (backup)
+                        {species(unit.species).name}
+                        {def.effect === "resurrect" ? " (backup)" : ""}
                       </Button>
                     ))
                 : null}

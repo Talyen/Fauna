@@ -1,6 +1,10 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "wisterelle-battle",
+  "wisterelle-collection",
+  "wisterelle-rank-five",
+  "wisterelle-targeting",
   "aerostat-battle",
   "aerostat-collection",
   "aerostat-rank-five",
@@ -78,7 +82,7 @@ export async function reviewScenario(server, name) {
       : run();
   if (["recruit-replacement", "recruit-team-preview"].includes(name)) {
     const { species } = await server.ssrLoadModule("/src/game/content.ts");
-    const reserves = ["pollenmoth", "prismram"].map((kind, index) => ({
+    const reserves = ["dunefox", "captoad"].map((kind, index) => ({
       id: `review-reserve-${index}`,
       species: kind,
       health: species(kind).health,
@@ -142,6 +146,15 @@ export async function reviewScenario(server, name) {
       const card = game.cards.find((card) => card.definitionId === "pyrella-festival-burst");
       game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
     }
+  }
+  if (name.startsWith("wisterelle-")) {
+    const { wisterelleBattle } = await server.ssrLoadModule("/tests/support/wisterelle.ts");
+    game = wisterelleBattle();
+    if (name === "wisterelle-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, wisterelle: 6 } },
+      };
   }
   if (name.startsWith("aerostat-")) {
     const { aerostatBattle } = await server.ssrLoadModule("/tests/support/aerostat.ts");
@@ -223,23 +236,25 @@ export async function reviewScenario(server, name) {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("aerostat-")
-      ? "tests/support/aerostat.ts"
-      : name.startsWith("parhelion-")
-        ? "tests/support/parhelion.ts"
-        : name.startsWith("dulcera-")
-          ? "tests/support/dulcera.ts"
-          : name.startsWith("pyrella-")
-            ? "tests/support/pyrella.ts"
-            : name.startsWith("skybex-")
-              ? "tests/support/skybex.ts"
-              : name.startsWith("arabesca-")
-                ? "tests/support/arabesca.ts"
-                : name.startsWith("orifable-")
-                  ? "tests/support/orifable.ts"
-                  : name.startsWith("almanelle-")
-                    ? "tests/support/almanelle.ts"
-                    : "tests/support/game.ts",
+    fixture: name.startsWith("wisterelle-")
+      ? "tests/support/wisterelle.ts"
+      : name.startsWith("aerostat-")
+        ? "tests/support/aerostat.ts"
+        : name.startsWith("parhelion-")
+          ? "tests/support/parhelion.ts"
+          : name.startsWith("dulcera-")
+            ? "tests/support/dulcera.ts"
+            : name.startsWith("pyrella-")
+              ? "tests/support/pyrella.ts"
+              : name.startsWith("skybex-")
+                ? "tests/support/skybex.ts"
+                : name.startsWith("arabesca-")
+                  ? "tests/support/arabesca.ts"
+                  : name.startsWith("orifable-")
+                    ? "tests/support/orifable.ts"
+                    : name.startsWith("almanelle-")
+                      ? "tests/support/almanelle.ts"
+                      : "tests/support/game.ts",
   };
 }
 
@@ -259,7 +274,14 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["aerostat-collection", "aerostat-rank-five"].includes(scenario.name)) {
+  if (["wisterelle-collection", "wisterelle-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    const opener = button("Inspect Wisterelle");
+    const next = button("Next page");
+    for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
+      await next.click();
+    await opener.click();
+  } else if (["aerostat-collection", "aerostat-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     const opener = button("Inspect Aerostat");
     const next = button("Next page");
@@ -333,6 +355,9 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   }
   if (scenario.name === "almanelle-targeting")
     await page.locator('.hand [data-card-id="ally-0:almanelle-autumn-insight"]').click();
+  if (scenario.name === "wisterelle-targeting") {
+    await page.locator('.hand [data-card-id$="wisterelle-forgotten-junction"]').click();
+  }
   if (scenario.name === "collection-creature") {
     await button("Inspect Mossguard").click();
     await expect(page.getByRole("heading", { name: "Mossguard", exact: true })).toBeVisible();
@@ -354,7 +379,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
       .click();
     await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
     if (["recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
-      await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
+      await page.getByRole("button", { name: "Recruit Pollenmoth", exact: true }).click();
       await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
       if (scenario.name === "recruit-team-preview")
         await page.locator(".recruit-team-roster .creature-card").first().click();

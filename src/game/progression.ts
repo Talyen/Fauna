@@ -96,11 +96,13 @@ export function starterSpecies(state: Pick<GameState, "discovery">): readonly Sp
   return collected.length ? collected : FIRST_RUN_STARTERS;
 }
 export function starterOfferPool(state: Pick<GameState, "discovery" | "selected">): SpeciesId[] {
-  return starterSpecies(state).filter((kind) => !state.selected.length || !species(kind).legendary);
+  return starterSpecies(state).filter(
+    (kind) => !state.selected.includes(kind) && (!state.selected.length || !species(kind).legendary),
+  );
 }
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {
   return collectedSpecies(state).length === 0 || state.selected?.some((kind) => species(kind).legendary)
     ? 1
-    : 3;
+    : Math.max(1, Math.min(3, collectedSpecies(state).filter((kind) => !species(kind).legendary).length));
 }

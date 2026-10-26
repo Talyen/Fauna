@@ -14,7 +14,7 @@ import { dispatch } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 
-describe("recruiting creature copies", () => {
+describe("recruiting unique creatures", () => {
   it("offers exactly the three defeated enemies, including repeated species and roster members", () => {
     for (const pack of COMBAT_PACKS) expect(pack).toHaveLength(3);
     const started = teamRun(7, ["prismram"]);
@@ -48,13 +48,14 @@ describe("recruiting creature copies", () => {
       ),
     ).toThrow();
     const next = accept(reward, { type: "recruit", species: "prismram" });
-    expect([...next.team, ...next.reserves].map((unit) => unit.species)).toEqual(["prismram", "prismram"]);
-    expect(new Set(next.team.map((c) => c.id)).size).toBe(2);
+    expect([...next.team, ...next.reserves].map((unit) => unit.species)).toEqual(["prismram"]);
+    expect(new Set(next.team.map((c) => c.id)).size).toBe(1);
+    expect(next.discovery.recruited.prismram).toBe(2);
     expect(decodeSave(encodeSave(next))).toEqual(next);
   });
 
-  it("swaps and remembers the chosen copy without merging card ownership, health or identity", () => {
-    let s = accept(winBattle(run()), { type: "recruit", species: "emberback" });
+  it("swaps and remembers distinct creatures without merging card ownership, health or identity", () => {
+    let s = accept(winBattle(run()), { type: "recruit", species: "pollenmoth" });
     const copy = s.reserves[0]!;
     expect(copy.id).not.toBe("ally-1");
     s = swapFixture(s, { type: "swap", activeId: "ally-1", reserve: copy.id });
@@ -78,37 +79,15 @@ describe("recruiting creature copies", () => {
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
 
-  it("releases only the chosen copy at five and updates its lineup entry", () => {
-    const replayBattle = (state: ReturnType<typeof run>) =>
-      accept(
-        produce(state, (draft) => {
-          draft.encounter = 2;
-          prepareDestination(draft);
-          draft.expedition = {
-            pack: ["emberback", "pollenmoth", "mossguard"],
-            recruit: null,
-            lastRoom: null,
-          };
-        }),
-        { type: "beginBattle" },
-      );
-    let s = accept(winBattle(), { type: "recruit", species: "emberback" });
-    s = accept(winBattle(replayBattle(s)), { type: "recruit", species: "mossguard" });
-    const copies = s.reserves.map((c) => c.id);
-    s = winBattle(replayBattle(s));
-    expect(s.discovery.recruited.emberback).toBe(2);
-    s = accept(s, { type: "recruit", species: "emberback" });
-    s = accept(s, { type: "confirmRecruit", replace: "ally-1" });
-    expect(s.discovery.recruited.emberback).toBe(3);
-    expect(s.discovery.recruited.mossguard).toBe(2);
-    const all = [...s.team, ...s.reserves];
-    expect(all.some((c) => c.id === "ally-1")).toBe(false);
-    expect(copies.every((id) => all.some((c) => c.id === id))).toBe(true);
-    expect(all.filter((c) => c.species === "emberback")).toHaveLength(2);
-    expect(s.team[1]!.id).not.toBe("ally-1");
-    expect(s.team[1]!.species).toBe("emberback");
-    expect(new Set(all.map((c) => c.id)).size).toBe(5);
-    expect(decodeSave(encodeSave(s))).toEqual(s);
+  it("recruiting an existing species keeps its identity, Health, cards and roster slots", () => {
+    const reward = winBattle(run());
+    const next = accept(reward, { type: "recruit", species: "emberback" });
+    expect(next.team).toEqual(reward.team);
+    expect(next.reserves).toEqual(reward.reserves);
+    expect(next.cards).toEqual(reward.cards);
+    expect(next.discovery.recruited.emberback).toBe(2);
+    expect(next.phase).toBe("teamSelection");
+    expect(decodeSave(encodeSave(next))).toEqual(next);
   });
 });
 

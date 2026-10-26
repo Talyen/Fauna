@@ -59,6 +59,7 @@ export const resourcesRules = {
     adaptation: "healingExtra",
     keywords: [],
     describe(card) {
+      if (card.allyOnly) return "Draw an ally’s card from your Discard pile";
       return card.target === "ally"
         ? "Return a random discarded card to your hand"
         : "Return a random discarded card from a living ally to your hand";

@@ -55,10 +55,11 @@ function validateCollection(state: GameState) {
   invalid(
     new Set(state.starterOffers).size !== (drafting ? Math.min(STARTER_OFFER_COUNT, offerPool.length) : 0) ||
       state.starterOffers.some((kind) => !offerPool.includes(kind)) ||
-      state.starterOffers.length !== (drafting ? STARTER_OFFER_COUNT : 0),
+      state.starterOffers.length !== (drafting ? Math.min(STARTER_OFFER_COUNT, offerPool.length) : 0),
   );
   invalid(
-    state.selected.some((kind) => !starterPool.includes(kind)) ||
+    !unique(state.selected) ||
+      state.selected.some((kind) => !starterPool.includes(kind)) ||
       (state.phase === "draft" && state.selected.length > starterCount(state)) ||
       (state.phase !== "draft" && !collectedSpecies(state).length),
   );
@@ -123,6 +124,7 @@ function validateRoster(state: GameState) {
     !unique([...state.team, ...state.reserves].map((c) => c.id)) || !unique(state.cards.map((c) => c.id)),
   );
   invalid(state.team.length + state.reserves.length > 5);
+  invalid(!unique([...state.team, ...state.reserves].map((creature) => creature.species)));
   invalid([...state.team, ...state.reserves].some((creature) => !collected.includes(creature.species)));
   invalid([...state.team, ...state.reserves].some((c) => c.health > species(c.species).health));
   invalid(
@@ -226,6 +228,7 @@ function validateRewards(state: GameState) {
         invalid(
           state.team.length + state.reserves.length !== 5 ||
             !reward.recruits.includes(selected) ||
+            [...state.team, ...state.reserves].some((unit) => unit.species === selected) ||
             state.discovery.recruited[selected] === undefined,
         );
     }

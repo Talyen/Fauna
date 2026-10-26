@@ -1,11 +1,11 @@
 import { boonRule } from "./rules/boons";
-import { gainMana, grantBlock } from "./combat/index";
+import { gainMana, grantBlock, restoreHealth } from "./combat/index";
 import type { SupplementalEffect } from "./rules/ability-types";
 import { drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
 import type { BattleState, Card, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
-import { shuffle, hiddenDecision } from "./random";
+import { shuffle, hiddenDecision, roll } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
 
 export const MAX_HAND_SIZE = 6;
@@ -65,6 +65,56 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
       text: `${species(reader.species).name} copies ${definition(original.definitionId).name} with Well Read`,
     });
   }
+}
+
+/** Direct Discard draws heal the original owner; recycling, copies and promotion do not. */
+export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) {
+  const owner = state.team.find((unit) => unit.id === card.ownerId && unit.health > 0);
+  if (!owner) return;
+  for (const keeper of state.team) {
+    if (keeper.health <= 0) continue;
+    const amount = creaturePassive(state, keeper.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "lostAndFound" ? effect.amount : 0),
+      0,
+    );
+    if (amount > 0) restoreHealth(owner, amount, events, false, state, false, keeper);
+  }
+}
+
+export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[] {
+  const owners = drawableOwnerIds(state);
+  return state.battle!.discard.flatMap((id) => {
+    const card = state.cards.find((entry) => entry.id === id)!;
+    return (
+      otherOwnerId === undefined
+        ? card.ownerId === null || owners.has(card.ownerId)
+        : card.ownerId !== null &&
+          card.ownerId !== otherOwnerId &&
+          state.team.some((unit) => unit.id === card.ownerId && unit.health > 0)
+    )
+      ? [card]
+      : [];
+  });
+}
+
+export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?: string): Card | undefined {
+  const battle = state.battle!;
+  const available = discardDrawCards(state, otherOwnerId);
+  if (!available.length) return;
+  const card =
+    available[Math.floor(roll(state, { kind: "index", size: available.length }) * available.length)]!;
+  const id = card.id;
+  battle.discard.splice(battle.discard.indexOf(id), 1);
+  fillHand(state);
+  receiveDraw(state, id, events);
+  events.push({
+    kind: "action",
+    actionType: "support",
+    actorId: card.ownerId ?? undefined,
+    text: `${definition(card.definitionId).name} is drawn from Discard`,
+  });
+  lostAndFound(state, card, events);
+  return card;
 }
 
 export function fillHand(state: GameState) {

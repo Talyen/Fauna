@@ -78,11 +78,21 @@ async function everyPage(root: Locator, check: (page: number) => Promise<void>) 
 }
 
 function layoutGame(targetedHand = false) {
-  const game = produce(targetedHand ? teamRun(7, ["prismram", "prismram", "prismram"]) : run(7), (draft) => {
+  const game = produce(targetedHand ? teamRun(7, ["prismram", "emberback", "reedstag"]) : run(7), (draft) => {
     draft.keywordXP.burn = 100;
     draft.discovery.encountered = SPECIES.map((entry) => entry.id);
     draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
-    if (targetedHand) draft.discovery.recruited.prismram = 3;
+    if (targetedHand) {
+      draft.discovery.recruited.prismram = 3;
+      const attacks = draft.cards.filter(
+        (card) => definition(card.definitionId).effect === "attack" && !definition(card.definitionId).target,
+      );
+      while (attacks.length < 6) {
+        const copy = { ...attacks[0]!, id: `copy-${draft.battle!.copySerial++}`, temporary: true as const };
+        draft.cards.push(copy);
+        attacks.push(copy);
+      }
+    }
     const cards = targetedHand
       ? draft.cards.filter((card) => {
           const def = definition(card.definitionId);

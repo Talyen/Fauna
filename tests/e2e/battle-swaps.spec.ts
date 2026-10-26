@@ -9,7 +9,7 @@ import { fits } from "./support/layout";
 
 function fixture(fallen = true) {
   return produce(run(7), (d) => {
-    for (const kind of ["pollenmoth", "emberback"] as const) {
+    for (const kind of ["pollenmoth", "captoad"] as const) {
       addBackups(d, {
         id: `recruit-${kind}`,
         species: kind,

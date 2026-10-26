@@ -186,11 +186,11 @@ describe("game commands", () => {
   it("recruits a defeated species into reserves and swaps its kit before the next battle", () => {
     let s = winBattle();
     expect(dispatch(s, { type: "recruit", species: "prismram" }).accepted).toBe(false);
-    s = accept(s, { type: "recruit", species: "emberback" });
+    s = accept(s, { type: "recruit", species: "pollenmoth" });
     expect([...s.team, ...s.reserves].map((unit) => unit.species)).toHaveLength(4);
     expect(s.team[0]!.species).toBe("mossguard");
     s = swapFixture(s, { type: "swap", activeId: "ally-0", reserve: s.reserves[0]!.id });
-    expect(s.team[0]!.species).toBe("emberback");
+    expect(s.team[0]!.species).toBe("pollenmoth");
     expect(s.cards.some((c) => c.definitionId.startsWith("mossguard"))).toBe(false);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });

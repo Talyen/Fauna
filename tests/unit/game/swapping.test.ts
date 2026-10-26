@@ -10,7 +10,7 @@ import { addBackups, completeRecruitment, accept, run, winBattle, swapFixture } 
 
 function withReserves() {
   return produce(run(), (d) => {
-    for (const kind of ["pollenmoth", "emberback"] as const) {
+    for (const kind of ["pollenmoth", "captoad"] as const) {
       addBackups(d, {
         id: `recruit-${kind}`,
         species: kind,
@@ -86,7 +86,7 @@ describe("knockout replacements", () => {
       { type: "play", cardId: restored.battle!.hand[0] },
       { type: "endTurn" },
       { type: "swap", activeId: "ally-1", reserve: "recruit-pollenmoth" },
-      { type: "swap", activeId: "ally-0", reserve: "recruit-emberback" },
+      { type: "swap", activeId: "ally-0", reserve: "recruit-captoad" },
     ])
       expect(dispatch(restored, command as never).state).toBe(restored);
     const next = accept(restored, { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
@@ -135,7 +135,7 @@ describe("knockout replacements", () => {
   });
   it("keeps repeated replacement choices pending until the available backups are deployed", () => {
     let game = produce(withReserves(), (d) => d.team.forEach((c) => (c.health = 0)));
-    for (const reserve of ["recruit-pollenmoth", "recruit-emberback"]) {
+    for (const reserve of ["recruit-pollenmoth", "recruit-captoad"]) {
       game = accept(game, { type: "swap", activeId: pendingReplacement(game)!.id, reserve });
       expect(decodeSave(encodeSave(game))).toEqual(game);
     }

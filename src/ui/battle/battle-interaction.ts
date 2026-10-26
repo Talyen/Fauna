@@ -104,9 +104,11 @@ export function useBattleInteraction({
     allyTarget = mode === "ally";
   const row = enemyTarget
     ? enemyRow
-    : def?.effect === "resurrect"
-      ? [...playerRow, ...game.reserves]
-      : playerRow;
+    : def?.effect === "swapChosen"
+      ? game.reserves
+      : def?.effect === "resurrect"
+        ? [...playerRow, ...game.reserves]
+        : playerRow;
   // Visual order belongs to the UI; filter legal recipients after ordering the complete row.
   const ordered =
     row.length > 1 &&
@@ -172,7 +174,7 @@ export function useBattleInteraction({
       setTarget(next);
       board.current
         ?.querySelector<HTMLElement>(
-          `[data-actor-id="${next}"] .creature-card, [data-resurrection-target="${next}"]`,
+          `[data-actor-id="${next}"] .creature-card, [data-backup-target="${next}"]`,
         )
         ?.focus();
       return true;
@@ -189,7 +191,7 @@ export function useBattleInteraction({
     if (selected && target && navigateFocus)
       board.current
         ?.querySelector<HTMLElement>(
-          `[data-actor-id="${target}"] .creature-card, [data-resurrection-target="${target}"]`,
+          `[data-actor-id="${target}"] .creature-card, [data-backup-target="${target}"]`,
         )
         ?.focus();
   }, [selected, target, navigateFocus, board]);

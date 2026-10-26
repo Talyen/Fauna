@@ -1,4 +1,3 @@
-import { cardActor, drawableOwnerIds } from "../card-actors";
 import { grantCardRepeat } from "./card-repeat";
 import { createFood } from "./food";
 import { takeAttackReflection } from "./attack-reflection";
@@ -7,7 +6,7 @@ import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
 import { battlefield, healingAllies } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
-import { definition, species } from "../content";
+import { species } from "../content";
 import { scalePower } from "./ability-values";
 import {
   ensureCombat,
@@ -24,7 +23,7 @@ import {
   removeControlBuildup,
 } from "./index";
 import { roll } from "../random";
-import { receiveCard, draw, redrawHand } from "../card-zones";
+import { drawDiscard, draw, redrawHand } from "../card-zones";
 import type { GameState, GameEvent } from "../types";
 import { applyExtras, reflectExtras } from "./ability-extras";
 import {
@@ -43,25 +42,6 @@ function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[
     if (ensureCombat(unit)[status] > 0) removeEffects(unit, "purge", 1, events, state, status, source);
 }
 
-function recoverDiscard(state: GameState, events: GameEvent[]) {
-  const battle = state.battle!;
-  const available = battle.discard.filter((id) => {
-    const card = state.cards.find((entry) => entry.id === id)!;
-    return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
-  });
-  if (!available.length) return;
-  const id =
-    available[Math.floor(roll(state, { kind: "index", size: available.length }) * available.length)]!;
-  battle.discard.splice(battle.discard.indexOf(id), 1);
-  receiveCard(state, id);
-  const card = state.cards.find((entry) => entry.id === id)!;
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: card.ownerId ?? cardActor(state, card)!.id,
-    text: `${definition(card.definitionId).name} returns to your hand`,
-  });
-}
 function hushDome(state: GameState, enemy: boolean, events: GameEvent[]) {
   for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
     if (unit.health <= 0) continue;
@@ -326,8 +306,8 @@ const redrawAbility: PrimaryHandler<"redraw"> = (context) => {
 };
 
 const recoverAbility: PrimaryHandler<"recover"> = (context) => {
-  const { state, action, events, enemy } = context;
-  if (!enemy) recoverDiscard(state, events);
+  const { state, action, actor, def, events, enemy } = context;
+  if (!enemy) drawDiscard(state, events, def.allyOnly ? actor.id : undefined);
   applyExtras(state, action, events, {
     target: friendlyRow(state, action).find((unit) => unit.id === action.allyTargetId && unit.health > 0),
     recipientOnly: true,
@@ -404,6 +384,11 @@ const swapAbility: PrimaryHandler<"swap"> = (context) => {
   operations.swap(state, actor, events, def.backupOnly);
 };
 
+const swapChosenAbility: PrimaryHandler<"swapChosen"> = ({ state, action, actor, events, operations }) => {
+  if (action.side === "player" && action.allyTargetId)
+    operations.swap(state, actor, events, true, action.allyTargetId);
+};
+
 const swapDodgeAbility: PrimaryHandler<"swapDodge"> = ({ state, actor, value, events, operations }) => {
   const incoming = operations.swap(state, actor, events);
   if (incoming) grantTemporaryDodge(incoming, value, events);
@@ -419,6 +404,7 @@ const repeatNextCardAbility: PrimaryHandler<"repeatNextCard"> = ({ state, action
 };
 
 const handlers: PrimaryHandlers = {
+  swapChosen: swapChosenAbility,
   swapDodge: swapDodgeAbility,
   springbound: springboundAbility,
   repeatNextCard: repeatNextCardAbility,
