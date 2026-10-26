@@ -1,4 +1,5 @@
 import { modifierImplementations } from "./modifier-bindings";
+import { freeze } from "immer";
 import { isAbilityKind } from "./rules/abilities";
 import { isSupplementalKind } from "./rules/supplemental";
 import { FOOD_CARDS, CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS } from "./content";
@@ -6,14 +7,39 @@ import { cardText } from "./card-rules";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { DAMAGE_TYPES, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 
-export const contentCatalog = {
-  cards: [...CARDS, ...FOOD_CARDS],
-  species: SPECIES,
-  bosses: BOSSES,
-  combatPacks: COMBAT_PACKS,
-  boons: BOONS,
-  talents: TALENTS,
+export const contentCatalog = freeze(
+  {
+    cards: [...CARDS, ...FOOD_CARDS],
+    species: SPECIES,
+    bosses: BOSSES,
+    combatPacks: COMBAT_PACKS,
+    boons: BOONS,
+    talents: TALENTS,
+  },
+  true,
+);
+
+const primaryTargets: Readonly<
+  Partial<Record<import("./rules/ability-types").AbilityKind, readonly string[]>>
+> = {
+  attack: ["allEnemies", "randomEnemy"],
+  guard: ["self", "allAllies"],
+  dodge: ["self", "allAllies"],
+  heal: ["allAllies", "mostInjured", "self", "injured"],
+  recover: ["ally"],
 };
+const chancePassives = new Set([
+  "expressDelivery",
+  "wellRead",
+  "goodFortune",
+  "gallantry",
+  "kindlingFlourish",
+  "resonance",
+  "encore",
+  "earlyBird",
+  "statusReflection",
+  "shareProtection",
+]);
 export interface ContentIssue {
   severity: "error" | "warning";
   id: string;
@@ -77,14 +103,17 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
           error(entry.id, "passiveTiers", "Passive effect needs an implementation binding");
         if ((effect.kind === "fallenLeaves" || effect.kind === "passingFlame") && effect.amount > 100)
           error(entry.id, "passiveTiers", "Passive conversion cannot exceed 100 percent");
-        if (
-          (effect.kind === "expressDelivery" ||
-            effect.kind === "wellRead" ||
-            effect.kind === "goodFortune" ||
-            effect.kind === "gallantry") &&
-          effect.amount > 100
-        )
+        if (chancePassives.has(effect.kind) && effect.amount > 100)
           error(entry.id, "passiveTiers", "Passive chance cannot exceed 100 percent");
+        if (effect.kind === "blockConversion" && effect.amount > 100)
+          error(entry.id, "passiveTiers", "Block conversion cannot exceed the granted Block");
+        if (effect.kind === "battleStart" && !["block", "thorns", "armor"].includes(effect.effect))
+          error(entry.id, "passiveTiers", "Unknown battle-start grant");
+        if (
+          effect.kind === "cardBonus" &&
+          !["firstAttack", "stunAttack", "heal", "guard"].includes(effect.trigger)
+        )
+          error(entry.id, "passiveTiers", "Unknown card-bonus trigger");
         if (
           effect.kind === "bounce" &&
           (effect.amount > 2 ||
@@ -98,8 +127,20 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(entry.id, "cards", "Species must contribute exactly three cards.");
   }
   for (const card of catalog.cards) {
-    if (isAbilityKind(card.effect) && cardText(card).includes("."))
-      error(card.id, "description", "Effect descriptions must omit periods");
+    if (!card.name.trim()) error(card.id, "name", "Card name required");
+    if (card.target !== undefined && !primaryTargets[card.effect]?.includes(card.target))
+      error(card.id, "target", "Unsupported primary target");
+    if (
+      card.species === null &&
+      (!["heal", "guard", "mana"].includes(card.effect) ||
+        card.effects?.length ||
+        card.repeatChance !== undefined ||
+        card.target !== undefined ||
+        card.leech)
+    )
+      error(card.id, "species", "Shared Food must use the supported neutral consumable rules");
+    if (card.species !== null && card.consume)
+      error(card.id, "consume", "Permanent creature kits cannot consume their required slots");
     if (card.species === null ? !card.consume : !species.has(card.species))
       error(card.id, "species", "Unknown owner.");
     if (card.cost !== 1) error(card.id, "cost", "Every ability must cost exactly 1 Mana.");
@@ -130,6 +171,14 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         error(card.id, "effects", "Unknown granted status.");
       if (effect.kind === "heal" && effect.target !== undefined && effect.target !== "recipient")
         error(card.id, "effects", "Unknown healing recipient.");
+      if (
+        effect.kind === "cleanse" &&
+        effect.target !== undefined &&
+        !["recipient", "allAllies"].includes(effect.target)
+      )
+        error(card.id, "effects", "Unknown Cleanse recipient");
+      if (effect.kind === "reflect" && effect.status !== undefined && effect.status !== "burn")
+        error(card.id, "effects", "Unknown Reflect scope");
     }
     if (!isAbilityKind(card.effect)) error(card.id, "effect", "Unknown effect.");
     else if (card.effect === "attack" && !DAMAGE_TYPES.includes(card.damageType))
@@ -137,6 +186,14 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     else {
       if (!definitionKeywords(card).every((keyword) => PROGRESSION_KEYWORDS.includes(keyword)))
         error(card.id, "keywords", "Invalid progression classification.");
+    }
+    if (isAbilityKind(card.effect)) {
+      try {
+        if (cardText(card).includes("."))
+          error(card.id, "description", "Effect descriptions must omit periods");
+      } catch {
+        error(card.id, "description", "Card rules cannot be described");
+      }
     }
   }
   if (!catalog.combatPacks.length) error("combat", "packs", "No combat packs.");

@@ -25,7 +25,8 @@ function invalid(condition: boolean) {
 }
 
 export function decodeSave(raw: string): GameState {
-  if (raw.length > 100_000) throw new Error("Save exceeds the supported size.");
+  if (raw.length > 100_000 || new TextEncoder().encode(raw).length > 100_000)
+    throw new Error("Save exceeds the supported size.");
   const state = gameStateSchema.parse(JSON.parse(raw));
   validateCollection(state);
   validateJourney(state);

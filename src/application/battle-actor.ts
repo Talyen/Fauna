@@ -1,4 +1,5 @@
 import { rankedBattleChoices, type BattleChoice } from "./battle-policy";
+import { freeze } from "immer";
 import type { Card, Command, GameState } from "../game/types";
 
 /** Public combat state only; hidden draw order, RNG, XP and copy serials are not progress. */
@@ -51,11 +52,13 @@ export function createBattleActor() {
   let scope = "",
     revision = -1;
   let previous: BattleChoice | undefined;
+  let previousState: GameState | undefined;
   const reset = () => {
     attempted.clear();
     scope = "";
     revision = -1;
     previous = undefined;
+    previousState = undefined;
   };
   return {
     reset,
@@ -68,7 +71,8 @@ export function createBattleActor() {
         !currentScope ||
         currentScope !== scope ||
         state.revision < revision ||
-        state.revision > revision + 1
+        state.revision > revision + 1 ||
+        (state.revision === revision && state !== previousState)
       )
         reset();
       // Reading a decision twice does not count as attempting it twice.
@@ -82,18 +86,22 @@ export function createBattleActor() {
       const tried = attempted.get(visible) ?? new Set<string>();
       const choices = rankedBattleChoices(state, autoEndTurn);
       const selected = choices.find((choice) => !tried.has(actionKey(state, choice.command)));
-      previous = selected ?? {
-        command: { type: "endTurn" },
-        score: 0,
-        reason: choices.length
-          ? "End the turn after useful alternatives repeat an unchanged combat state"
-          : "No affordable playable card has a scored visible benefit",
-      };
+      previous = freeze(
+        selected ?? {
+          command: { type: "endTurn" },
+          score: 0,
+          reason: choices.length
+            ? "End the turn after useful alternatives repeat an unchanged combat state"
+            : "No affordable playable card has a scored visible benefit",
+        },
+        true,
+      );
       tried.add(actionKey(state, previous.command));
       attempted.set(visible, tried);
       // Bound long productive turns without restricting their actions.
       if (attempted.size > 256) attempted.delete(attempted.keys().next().value!);
       revision = state.revision;
+      previousState = state;
       return previous;
     },
   };

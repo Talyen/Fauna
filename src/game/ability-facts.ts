@@ -46,10 +46,11 @@ export function ordinaryAttackFacts(
 ): OrdinaryHit[] {
   return [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
-    const damage =
-      (value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
-        (type === "physical" ? physicalBonus(actor, state) : 0)) *
-      (def.criticalWhenLastCard && state.battle.hand.length === 1 ? 2 : 1);
+    const baseDamage = Math.round(
+      value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
+        (type === "physical" ? physicalBonus(actor, state) : 0),
+    );
+    const damage = baseDamage * (def.criticalWhenLastCard && state.battle.hand.length === 1 ? 2 : 1);
     const armored = armorApplies(state, enemy, type, actor);
     const armor = armored
       ? Math.max(
@@ -60,7 +61,10 @@ export function ordinaryAttackFacts(
       : 0;
     const payment = blockPayment(damage, enemy.block);
     const piercing =
-      def.criticalWhenLastCard && state.battle.hand.length === 1 && state.boons.includes("crater-punch")
+      type === "physical" &&
+      def.criticalWhenLastCard &&
+      state.battle.hand.length === 1 &&
+      state.boons.includes("crater-punch")
         ? Math.round(payment.absorbed / boonRule("crater-punch").divisor)
         : 0;
     const lost =
@@ -79,7 +83,12 @@ export function ordinaryAttackFacts(
     return {
       negated: enemy.combat.negate || enemy.combat.attackReflection,
       lost,
-      blocked: enemy.combat.negate || enemy.combat.attackReflection ? 0 : payment.absorbed,
+      blocked:
+        enemy.combat.negate ||
+        enemy.combat.attackReflection ||
+        (type === "freeze" && enemy.combat.nullifyFreeze)
+          ? 0
+          : payment.absorbed,
       eroded,
       health: enemy.health,
       main: !enemy.minion,
