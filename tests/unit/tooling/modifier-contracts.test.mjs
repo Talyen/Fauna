@@ -49,6 +49,18 @@ it("rejects a new authored modifier without an implementation binding", () => {
     expect.stringContaining("Missing talents implementation: water.future"),
   );
 });
+it("checks built Talent identities through imported aliases without treating copy as an identity", () => {
+  const sources = fixture();
+  sources["src/game/content/talents/water.ts"] = `
+    import {talent as define} from "../talent-builder";
+    export const talents = [define("water.pressure", "Pressure", 0, "water.copy")];
+  `;
+  expect(modifierContractViolations(sources)).toEqual([]);
+  sources["src/game/content/talents/water.ts"] += 'define("water.future", "Future", 1, "Future rule");';
+  expect(modifierContractViolations(sources)).toContainEqual(
+    expect.stringContaining("Missing talents implementation: water.future"),
+  );
+});
 it("rejects a binding to an existing function that does not implement the modifier", () => {
   const sources = fixture();
   sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"].replace(
