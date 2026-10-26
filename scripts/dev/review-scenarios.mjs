@@ -71,6 +71,20 @@ export const SCENARIOS = [
   "discard-pile",
 ];
 
+const creatureFixtures = [
+  "wisterelle",
+  "alpenglen",
+  "aerostat",
+  "parhelion",
+  "dulcera",
+  "pyrella",
+  "skybex",
+  "arabesca",
+  "orifable",
+  "almanelle",
+  "oathara",
+];
+
 /** Reuse the same current-format gameplay fixtures as browser regressions. */
 export async function reviewScenario(server, name) {
   if (!SCENARIOS.includes(name))
@@ -118,19 +132,24 @@ export async function reviewScenario(server, name) {
     game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
     game = accept(game, { type: "visitCampfire" });
   }
-  if (name.startsWith("pyrella-")) {
-    const { pyrellaBattle } = await server.ssrLoadModule("/tests/support/pyrella.ts");
-    game = pyrellaBattle();
-    if (name === "pyrella-rank-five")
+  const creature = name.split("-")[0];
+  if (creatureFixtures.includes(creature)) {
+    const fixture = await server.ssrLoadModule(`/tests/support/${creature}.ts`);
+    const rankFive = name === `${creature}-rank-five`;
+    const argument = ["alpenglen", "aerostat"].includes(creature)
+      ? rankFive
+        ? 5
+        : 0
+      : creature === "orifable"
+        ? ["orifable-food", "orifable-targeting"].includes(name)
+        : undefined;
+    game = argument === undefined ? fixture[`${creature}Battle`]() : fixture[`${creature}Battle`](argument);
+    if (rankFive && !["alpenglen", "aerostat"].includes(creature))
       game = {
         ...game,
-        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, pyrella: 6 } },
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, [creature]: 6 } },
       };
-    if (name === "pyrella-decoy") {
-      const card = game.cards.find((card) => card.definitionId === "pyrella-spark-decoy");
-      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
-    }
-    if (name === "pyrella-spread") {
+    if (name === "pyrella-spread")
       game = {
         ...game,
         battle: {
@@ -146,96 +165,20 @@ export async function reviewScenario(server, name) {
           ),
         },
       };
-      const card = game.cards.find((card) => card.definitionId === "pyrella-festival-burst");
+    const playedCard = {
+      "pyrella-decoy": "pyrella-spark-decoy",
+      "pyrella-spread": "pyrella-festival-burst",
+      "skybex-incoming": "skybex-cloudstep",
+      "arabesca-double": "arabesca-dancing-double",
+    }[name];
+    if (playedCard) {
+      const card = game.cards.find((card) => card.definitionId === playedCard);
       game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
     }
-  }
-  if (name.startsWith("alpenglen-")) {
-    const { alpenglenBattle } = await server.ssrLoadModule("/tests/support/alpenglen.ts");
-    game = alpenglenBattle(name === "alpenglen-rank-five" ? 5 : 0);
-  }
-  if (name.startsWith("wisterelle-")) {
-    const { wisterelleBattle } = await server.ssrLoadModule("/tests/support/wisterelle.ts");
-    game = wisterelleBattle();
-    if (name === "wisterelle-rank-five")
-      game = {
-        ...game,
-        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, wisterelle: 6 } },
-      };
-  }
-  if (name.startsWith("aerostat-")) {
-    const { aerostatBattle } = await server.ssrLoadModule("/tests/support/aerostat.ts");
-    game = aerostatBattle(name === "aerostat-rank-five" ? 5 : 0);
-  }
-  if (name.startsWith("skybex-")) {
-    const { skybexBattle } = await server.ssrLoadModule("/tests/support/skybex.ts");
-    game = skybexBattle();
-    if (name === "skybex-rank-five")
-      game = {
-        ...game,
-        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, skybex: 6 } },
-      };
-    if (name === "skybex-incoming") {
-      const card = game.cards.find((card) => card.definitionId === "skybex-cloudstep");
-      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
-    }
-  }
-  if (name.startsWith("arabesca-")) {
-    const { arabescaBattle } = await server.ssrLoadModule("/tests/support/arabesca.ts");
-    game = arabescaBattle();
-    if (name === "arabesca-rank-five")
-      game = {
-        ...game,
-        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, arabesca: 6 } },
-      };
-    if (name === "arabesca-double") {
-      const card = game.cards.find((card) => card.definitionId === "arabesca-dancing-double");
-      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
-    }
-  }
-  if (name.startsWith("parhelion-")) {
-    const { parhelionBattle } = await server.ssrLoadModule("/tests/support/parhelion.ts");
-    game = parhelionBattle();
-    if (name === "parhelion-rank-five")
-      game = {
-        ...game,
-        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, parhelion: 6 } },
-      };
-  }
-  if (name.startsWith("oathara-")) {
-    const { oatharaBattle } = await server.ssrLoadModule("/tests/support/oathara.ts");
-    game = oatharaBattle();
-  }
-  if (name.startsWith("almanelle-")) {
-    const { almanelleBattle } = await server.ssrLoadModule("/tests/support/almanelle.ts");
-    game = almanelleBattle();
-    if (name === "almanelle-rank-five")
-      game = {
-        ...game,
-        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, almanelle: 6 } },
-      };
-  }
-  if (name.startsWith("orifable-")) {
-    const { orifableBattle } = await server.ssrLoadModule("/tests/support/orifable.ts");
-    game = orifableBattle(["orifable-food", "orifable-targeting"].includes(name));
-    if (name === "orifable-rank-five")
-      game = {
-        ...game,
-        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, orifable: 6 } },
-      };
   }
   if (["uncertain-targeting", "unknown-targeting"].includes(name)) {
     const { uncertainBattle } = await server.ssrLoadModule("/tests/support/uncertainty.ts");
     game = uncertainBattle(name === "unknown-targeting");
-  }
-  if (name.startsWith("dulcera-")) {
-    const { dulceraBattle } = await server.ssrLoadModule("/tests/support/dulcera.ts");
-    game = dulceraBattle();
-    if (name === "dulcera-rank-five")
-      game = {
-        ...game,
-        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, dulcera: 6 } },
-      };
   }
   const save = encodeSave(game);
   decodeSave(save);
@@ -243,27 +186,11 @@ export async function reviewScenario(server, name) {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("wisterelle-")
-      ? "tests/support/wisterelle.ts"
-      : name.startsWith("alpenglen-")
-        ? "tests/support/alpenglen.ts"
-        : name.startsWith("aerostat-")
-          ? "tests/support/aerostat.ts"
-          : name.startsWith("parhelion-")
-            ? "tests/support/parhelion.ts"
-            : name.startsWith("dulcera-")
-              ? "tests/support/dulcera.ts"
-              : name.startsWith("pyrella-")
-                ? "tests/support/pyrella.ts"
-                : name.startsWith("skybex-")
-                  ? "tests/support/skybex.ts"
-                  : name.startsWith("arabesca-")
-                    ? "tests/support/arabesca.ts"
-                    : name.startsWith("orifable-")
-                      ? "tests/support/orifable.ts"
-                      : name.startsWith("almanelle-")
-                        ? "tests/support/almanelle.ts"
-                        : "tests/support/game.ts",
+    fixture: creatureFixtures.includes(creature)
+      ? `tests/support/${creature}.ts`
+      : ["uncertain-targeting", "unknown-targeting"].includes(name)
+        ? "tests/support/uncertainty.ts"
+        : "tests/support/game.ts",
   };
 }
 
@@ -283,73 +210,14 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["wisterelle-collection", "wisterelle-rank-five"].includes(scenario.name)) {
+  const [creature, view] = scenario.name.split(/-(.+)/);
+  if (creatureFixtures.includes(creature) && (view === "collection" || view === "rank-five")) {
     await button("Collection").click();
-    const opener = button("Inspect Wisterelle");
+    const opener = button(`Inspect ${creature[0].toUpperCase() + creature.slice(1)}`);
     const next = button("Next page");
     for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
       await next.click();
     await opener.click();
-  } else if (["alpenglen-collection", "alpenglen-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    const opener = button("Inspect Alpenglen");
-    const next = button("Next page");
-    for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
-      await next.click();
-    await opener.click();
-  } else if (["aerostat-collection", "aerostat-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    const opener = button("Inspect Aerostat");
-    const next = button("Next page");
-    for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
-      await next.click();
-    await opener.click();
-  } else if (["pyrella-collection", "pyrella-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    const next = page.getByRole("button", { name: "Next page", exact: true });
-    while (
-      !(await page.getByRole("button", { name: "Inspect Pyrella", exact: true }).count()) &&
-      (await next.isVisible())
-    )
-      await next.click();
-    await button("Inspect Pyrella").click();
-  } else if (["parhelion-collection", "parhelion-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    await button("Inspect Parhelion").click();
-  } else if (["dulcera-collection", "dulcera-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    const opener = button("Inspect Dulcera");
-    const next = button("Next page");
-    for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
-      await next.click();
-    await opener.click();
-  } else if (["skybex-collection", "skybex-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    const next = page.getByRole("button", { name: "Next page", exact: true });
-    while (
-      !(await page.getByRole("button", { name: "Inspect Skybex", exact: true }).count()) &&
-      (await next.isVisible())
-    )
-      await next.click();
-    await button("Inspect Skybex").click();
-  } else if (["arabesca-collection", "arabesca-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    const next = page.getByRole("button", { name: "Next page", exact: true });
-    while (
-      !(await page.getByRole("button", { name: "Inspect Arabesca", exact: true }).count()) &&
-      (await next.isVisible())
-    )
-      await next.click();
-    await button("Inspect Arabesca").click();
-  } else if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    await button("Inspect Orifable").click();
-  } else if (["almanelle-collection", "almanelle-rank-five"].includes(scenario.name)) {
-    await button("Collection").click();
-    await button("Inspect Almanelle").click();
-  } else if (scenario.name === "oathara-collection") {
-    await button("Collection").click();
-    await button("Inspect Oathara").click();
   } else if (["settings", "collection", "talents", "glossary"].includes(menu)) {
     await button(menu[0].toUpperCase() + menu.slice(1)).click();
   } else if (scenario.name !== "home") {
