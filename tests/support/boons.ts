@@ -1,5 +1,16 @@
 /** Approved October 25 additions; direct behavior regressions live in boons.test.ts. */
 export const NEW_BOON_EFFECTS = {
+  "geode-anvil": "Block cannot decay below Armor",
+  "journey-loom": "Returning an ally’s card to your hand draws another ally’s card",
+  "devotion-clasp": "Negate also protects another ally from the same attack",
+  "prism-chisel": "Purging enemy Armor deals equal Light damage to that enemy",
+  "eclipse-protractor": "Critical Hits add Freeze build-up equal to the bonus damage",
+  "wonder-ball-maze": "Excess Stun and Freeze build-up spreads to other enemies",
+  "sleepers-urn": "Stun and Freeze build-up can accumulate during enemy immunity",
+  "facet-abacus": "Gain an additional hand card slot",
+  "thornheart-ring": "Thorns does not decay when retaliating against Bleeding enemies",
+  "moonboat-toy": "Water attacks do not trigger Thorns damage",
+
   "pearl-sieve": "Purge removes an extra effect from enemies with Block",
   "tide-anklet": "Swapping allies both keep the higher Block total",
   "obsidian-pitcher": "Overflow Leech applies half as much Burn to the enemy",

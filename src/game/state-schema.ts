@@ -1,7 +1,7 @@
 import { PLAYER_CARD_TRIGGER_LIMIT } from "./rules/boons";
 import { z } from "zod";
 import saveFormat from "./save-format.json" with { type: "json" };
-import { MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "./card-zones";
+import { MAX_BATTLE_CARDS, MAX_HAND_SIZE, MAX_SUPPORTED_HAND_SIZE } from "./card-zones";
 import { MAX_CREATURE_STARS, KEYWORDS } from "./progression";
 import { SPECIES, BOONS, TALENTS } from "./content";
 import { JOURNEY_LENGTH } from "./encounters";
@@ -93,7 +93,7 @@ const battle = z.object({
   mana: z.number().int().min(0).max(9),
   maxMana: z.number().int().min(4).max(7),
   draw: z.array(id).max(MAX_BATTLE_CARDS),
-  hand: z.array(id).max(MAX_HAND_SIZE),
+  hand: z.array(id).max(MAX_SUPPORTED_HAND_SIZE),
   buffer: z.array(id).max(MAX_BATTLE_CARDS),
   discard: z.array(id).max(MAX_BATTLE_CARDS),
   enemies: z

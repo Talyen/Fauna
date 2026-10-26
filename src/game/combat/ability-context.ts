@@ -46,6 +46,7 @@ export interface PrimaryContext<K extends AbilityKind = AbilityKind> {
   blindMiss: boolean;
   criticalBonus: number;
   negated: Set<string>;
+  sharedNegate?: import("./policy").SharedNegate;
 }
 export type PrimaryHandler<K extends AbilityKind> = (context: PrimaryContext<K>) => void;
 export type PrimaryHandlers = { [K in AbilityKind]: PrimaryHandler<K> };

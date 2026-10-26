@@ -1,3 +1,4 @@
+import { shareNegate } from "./damage";
 import { grantCardRepeat } from "./card-repeat";
 import { createFood } from "./food";
 import { takeAttackReflection } from "./attack-reflection";
@@ -121,11 +122,14 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
       : target && target.health > 0
         ? [target]
         : [];
+  const sharedNegate = shareNegate(state, actor, targets, blindMiss);
+  context.sharedNegate = sharedNegate;
   for (const intended of targets) {
     if (actor.health <= 0) break;
     const recipient = blindMiss ? intended : interceptAttack(state, actor, intended, events);
     if (def.target !== "allEnemies") attackTarget = recipient;
-    const negation = !blindMiss && negateAttack(state, actor, recipient, events);
+    const negation =
+      !blindMiss && negateAttack(state, actor, recipient, events, true, damageType, sharedNegate);
     if (negation === "negated") {
       negated.add(recipient.id);
       continue;
@@ -173,6 +177,7 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
         criticalBonus,
         leech: def.leech,
         cardLeech: keywords.includes("leech"),
+        sharedNegate,
       },
     );
   }

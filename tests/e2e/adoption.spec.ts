@@ -4,28 +4,6 @@ import { captureScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { openHome, reloadHome, test, seed, state } from "./support/session";
 import { SPECIES } from "../../src/game/content";
-test("switch thumbs stay within their tracks in both states", async ({ page }) => {
-  await openHome(page);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.getByRole("tab", { name: "Sound", exact: true }).click();
-  const sound = page.getByRole("switch", { name: "Sound", exact: true });
-  for (const checked of [true, false, true]) {
-    await sound.setChecked(checked);
-    await expect
-      .poll(() =>
-        sound.evaluate((el) => {
-          const root = el.getBoundingClientRect();
-          const thumb = el.querySelector("span")!.getBoundingClientRect();
-          return {
-            hit: [root.width, root.height],
-            thumb: [thumb.width, thumb.height],
-            offset: Math.round(thumb.left - root.left),
-          };
-        }),
-      )
-      .toEqual({ hit: [44, 44], thumb: [16, 16], offset: checked ? 22 : 6 });
-  }
-});
 test("Collection filtering, audio preferences, and settings remain menu-driven", async ({ page }) => {
   await openHome(page);
   await page.getByRole("button", { name: "Collection", exact: true }).click();

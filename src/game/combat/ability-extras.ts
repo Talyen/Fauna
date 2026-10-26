@@ -26,6 +26,7 @@ interface ExtraOptions {
   criticalBonus?: number;
   recipientOnly?: boolean;
   negated?: ReadonlySet<string>;
+  sharedNegate?: import("./policy").SharedNegate;
 }
 interface ExtraContext<K extends SupplementalKind> {
   state: GameState;
@@ -64,6 +65,7 @@ const damageExtra: ExtraHandler<"damage"> = (context) => {
       criticalBonus,
       leech: effect.leech,
       cardLeech: def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech),
+      sharedNegate: options.sharedNegate,
     });
 };
 

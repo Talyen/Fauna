@@ -55,7 +55,7 @@ export const GLOSSARY = [
   {
     term: "Turn",
     definition:
-      "Play cards using shared mana; Spending your last mana automatically resolves the enemy turn; You can also press End turn at any time without confirmation; Discard remaining hand cards; restore 4 Mana and draw 4 cards for the next turn; The hand holds 6; overflow waits in order and survives turn changes",
+      "Play cards using shared mana; Spending your last mana automatically resolves the enemy turn; You can also press End turn at any time without confirmation; Discard remaining hand cards; restore 4 Mana and draw 4 cards for the next turn; The hand normally holds 6, or 7 with Facet Abacus; overflow waits in order and survives turn changes",
   },
   {
     term: "Death's Door",
