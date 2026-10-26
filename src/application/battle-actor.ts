@@ -1,8 +1,9 @@
+import { battleCardCapacity } from "../game/card-zones";
 import { rankedBattleChoices, type BattleChoice } from "./battle-policy";
 import { freeze } from "immer";
 import type { Card, Command, GameState } from "../game/types";
 
-/** Public combat state only; hidden draw order, RNG, XP and copy serials are not progress. */
+/** Public combat state only; hidden draw order, RNG, XP and raw copy serials are not progress. */
 function tacticalState(state: GameState): string {
   if (state.phase !== "battle") return state.phase;
   const battle = state.battle;
@@ -25,7 +26,8 @@ function tacticalState(state: GameState): string {
     battle.draw.length,
     // Recovery choices depend on visible discard composition, even at an unchanged pile size.
     battle.discard.map((id) => JSON.stringify(card(state.cards.find((entry) => entry.id === id)!))).sort(),
-    battle.buffer.length,
+    battle.buffer.map((id) => card(state.cards.find((entry) => entry.id === id)!)),
+    battleCardCapacity(state),
     battle.mana,
     battle.maxMana,
     battle.cardsPlayedThisTurn,

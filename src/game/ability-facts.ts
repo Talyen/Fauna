@@ -2,10 +2,11 @@ import { boonRule } from "./rules/boons";
 import { supplementalRule } from "./rules/supplemental";
 import type { CardDefinition } from "./content/types";
 import type { BattleState, Creature, Enemy } from "./types";
+import { isEnemy } from "./battlefield";
 import { hasTalent } from "./progression";
-import { hasHarmfulEffects, STACK_LIMIT, type Combatant } from "./combat/state";
+import { hasHarmfulEffects, maximumHealth, STACK_LIMIT, type Combatant } from "./combat/state";
 import { armoredDamage, blockPayment, armorApplies, modifiedDamage } from "./combat/damage-values";
-import { healingValue, restoration, overflowBlock } from "./combat/healing-values";
+import { healingValue, restoration, overflowBlock, overflowRecipients } from "./combat/healing-values";
 
 export interface OrdinaryHit {
   readonly negated: boolean;
@@ -31,7 +32,14 @@ export function healingBenefit(
     hasHarmfulEffects(ally) &&
     ((excess > 0 && hasTalent(state, "health.clean-slate")) ||
       !!effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient"));
-  return { restored: gain, utility: overflow + Number(cleanses) };
+  const shared =
+    excess > 0 && !isEnemy(ally) && state.boons.includes("last-threshold")
+      ? Math.min(
+          excess,
+          overflowRecipients(state, ally).reduce((sum, unit) => sum + maximumHealth(unit) - unit.health, 0),
+        )
+      : 0;
+  return { restored: gain + shared, utility: overflow + Number(cleanses) };
 }
 
 /** Ordinary primary-hit approximation only: excludes chance effects, extras and most talent reactions.

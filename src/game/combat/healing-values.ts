@@ -1,5 +1,5 @@
 import { talentRule } from "../rules/talents";
-import { isEnemy } from "../battlefield";
+import { healingAllies, isEnemy } from "../battlefield";
 import { hasTalent } from "../progression";
 import type { GameState } from "../types";
 import { maximumHealth, type Combatant } from "./state";
@@ -23,3 +23,10 @@ export function restoration(unit: Combatant, amount: number) {
 
 export const overflowBlock = (excess: number) =>
   Math.round(excess * (talentRule("health.overflow").percent / 100));
+
+/** Overflow can reach only other living allies still at Death's Door. */
+export function overflowRecipients(state: GameState, unit: Combatant) {
+  return healingAllies(state).filter(
+    (ally) => ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally),
+  );
+}

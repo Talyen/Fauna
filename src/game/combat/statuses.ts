@@ -158,8 +158,10 @@ export function* removeControlBuildup(
   if (spread) {
     const targets = cleanseTargets(state, unit);
     if (targets.length > 1) {
-      for (const target of targets)
+      for (const target of targets) {
+        if (unit.health <= 0) break;
         yield* reaction("removeControlBuildup", state, target, status, events, false);
+      }
       return;
     }
   }
@@ -194,7 +196,9 @@ export function* removeEffects(
     const targets = cleanseTargets(state, unit);
     if (targets.length > 1) {
       let removed = 0;
-      for (const target of targets)
+      const actor = source ?? unit;
+      for (const target of targets) {
+        if (actor.health <= 0) break;
         removed += yield* reaction(
           "removeEffects",
           target,
@@ -206,6 +210,7 @@ export function* removeEffects(
           source,
           false,
         );
+      }
       return removed;
     }
   }
