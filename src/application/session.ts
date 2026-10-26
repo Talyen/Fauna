@@ -232,6 +232,7 @@ export function createSession(
     const token = ++generation;
     publish({ ready: false, error: "", loadFailed: false });
     const startCloud = async (data: string | null) => {
+      if (disposed || store.getState().closing || token !== generation) return;
       await cloud.start(data);
       if (!disposed && !store.getState().closing && token === generation) publish({ ready: true });
     };

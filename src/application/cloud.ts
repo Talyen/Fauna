@@ -64,10 +64,10 @@ export function createCloud(
     retryTimer = setTimeout(() => {
       retryTimer = undefined;
       retrying = true;
+      const token = generation + 1;
       const operation = lifecycle === "ready" ? reconcile(true) : initialize(localData, true);
-      const token = generation;
       void bounded(operation, 5000, () => {
-        if (token === generation) offline();
+        if (owns(token)) offline();
       }).finally(() => {
         retrying = false;
         if (view.status === "Pending") scheduleRetry();
@@ -145,7 +145,7 @@ export function createCloud(
         ancestry.length === 1 &&
         ancestry[0]?.id === current.id
       ) {
-        upload(current);
+        if (!localCommit || acknowledged !== current.id) upload(current);
         return;
       }
       if (sequence >= Number.MAX_SAFE_INTEGER) throw new Error("Cloud snapshot sequence exhausted.");
@@ -162,9 +162,10 @@ export function createCloud(
     metadataWrites = writing.catch(() => {});
     return writing;
   }
-  async function reconcile(background = false) {
+  async function reconcile(background = false, initialization?: number) {
     if (!alive() || !port || !identity?.available || identity.enabled === false) return;
-    const token = ++generation;
+    // Startup retains its lease through reconciliation so its deadline covers remote reads too.
+    const token = initialization ?? ++generation;
     remoteReady = false;
     update({
       blocking: !background,
@@ -238,7 +239,7 @@ export function createCloud(
     if (!alive()) return false;
     generation++;
     remoteReady = false;
-    update({ blocking: false, status: "Pending" });
+    update({ blocking: false, status: identity?.enabled === false ? "Unavailable" : "Pending" });
     return true;
   };
   async function initialize(data: string | null, background = false) {
@@ -308,18 +309,24 @@ export function createCloud(
         update({ ...initialCloudView });
         return;
       }
-      await reconcile(background);
+      await reconcile(background, starting);
     } catch (error) {
-      if (owns(starting)) update({ status: "Pending", blocking: false, error: errorText(error) });
+      if (owns(starting))
+        update({
+          status: identity?.enabled === false ? "Unavailable" : "Pending",
+          blocking: false,
+          error: errorText(error),
+        });
     }
   }
   async function commit(data: string) {
     try {
-      await persist(data, undefined, true);
-      if (!remoteReady && identity?.available && identity.enabled !== false) update({ status: "Pending" });
+      await persist(encodeSave(decodeSave(data)), undefined, true);
+      if (identity?.enabled === false) update({ ...initialCloudView });
+      else if (!remoteReady && identity?.available) update({ status: "Pending" });
     } catch (error) {
       remoteReady = false;
-      update({ status: "Pending", error: errorText(error) });
+      update({ status: identity?.enabled === false ? "Unavailable" : "Pending", error: errorText(error) });
     }
   }
   return {
@@ -329,13 +336,23 @@ export function createCloud(
     start(data: string | null) {
       if (!alive()) return Promise.resolve();
       // Own startup before publishing to subscribers; retries use the latest localData.
-      return (startup ??= Promise.resolve().then(() => bounded(initialize(data), 5000, offline)));
+      return (startup ??= Promise.resolve().then(() => {
+        const token = generation + 1;
+        return bounded(initialize(data), 5000, () => {
+          if (owns(token)) offline();
+        });
+      }));
     },
     commit,
     retry() {
       if (!alive()) return Promise.resolve();
-      const operation = lifecycle === "ready" ? reconcile() : initialize(localData);
-      return bounded(operation, 5000, offline);
+      // Once local play exists, retries can reconcile ancestry but cannot install another journey.
+      const background = localData !== null;
+      const token = generation + 1;
+      const operation = lifecycle === "ready" ? reconcile(background) : initialize(localData, background);
+      return bounded(operation, 5000, () => {
+        if (owns(token)) offline();
+      });
     },
     offline,
     async flush(timeout = 2000) {
