@@ -10,7 +10,7 @@ import { dispatch, previewCard } from "../../../../src/game/engine";
 import { definitionKeywords, keywordText } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { swapBackup, swapFromCard } from "../../../../src/game/team";
-import { combatStatuses } from "../../../../src/ui/shared/combat/combat-status";
+import { combatStatuses } from "../../../../src/ui/shared/combat/combat-status-model";
 import { pyrellaBattle } from "../../../support/pyrella";
 
 const play = (state: ReturnType<typeof pyrellaBattle>, id: string) => ({

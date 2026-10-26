@@ -7,106 +7,12 @@ import { motionValue } from "../motion-values";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import { Hourglass, Skull, Timer } from "lucide-react";
 import type { CombatState } from "../../../game/types";
-import { isKeywordId, KEYWORD_DEFINITIONS } from "../../../game/keywords";
+import { isKeywordId } from "../../../game/keywords";
+import { combatStatuses, statusOrder, type Status } from "./combat-status-model";
 import { KeywordIcon } from "../keyword-icon";
 
 import { Tooltip, TooltipTrigger, TooltipContent } from "../../../components/ui/tooltip";
-const stats = [
-  "armor",
-  "thorns",
-  "waterThorns",
-  "fireThorns",
-  "dodge",
-  "burn",
-  "poison",
-  "bleed",
-  "stun",
-  "freeze",
-] as const;
-const statusOrder: readonly string[] = [
-  ...stats,
-  "controlled",
-  "cooldown",
-  "grace",
-  "rhythm",
-  "nextPhysical",
-  "partingCut",
-  "riposte",
-  "freeNature",
-  "freeLight",
-  "freeCard",
-  "reflect",
-  "reflectBurn",
-  "nullify",
-  "nullifyFreeze",
-  "negate",
-  "attackReflection",
-  "blind",
-];
-type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
-export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] {
-  const dodge = Number(((combat?.dodge ?? 0) + (combat?.temporaryDodge ?? 0) + sharedDodge).toFixed(2));
-  const entries: Status[] = combat
-    ? stats
-        .filter((id) => (id === "dodge" ? dodge : combat[id]) > 0)
-        .map((id) => ({
-          id,
-          count: id === "dodge" ? dodge : combat[id],
-          text: `${KEYWORD_DEFINITIONS[id].label} ${id === "dodge" ? dodge : combat[id]}${id === "dodge" ? "% bonus" : ""}; ${KEYWORD_DEFINITIONS[id].description}${id === "dodge" && combat.temporaryDodge ? `; ${combat.temporaryDodge}% expires at your next turn` : ""}${id === "dodge" && sharedDodge ? `; ${Number(sharedDodge.toFixed(2))}% from Shifting Sands` : ""}`,
-        }))
-    : [];
-  if (combat?.controlled || combat?.skipped)
-    entries.push({
-      id: "controlled",
-      count: combat.controlTurns || 1,
-      text: combat.controlled
-        ? `${combat.controlled === "freeze" ? "Frozen" : "Stunned"}: ${combat.controlTurns || 1} turn${combat.controlTurns > 1 ? "s" : ""}`
-        : "Turn skipped",
-    });
-  if (combat?.cooldown)
-    entries.push({ id: "cooldown", count: combat.cooldown, text: `Control immunity ${combat.cooldown}` });
-  if (combat?.grace) entries.push({ id: "grace", count: combat.grace, text: `Death's Door ${combat.grace}` });
-  if (combat) {
-    const pending = [
-      ["rhythm", combat.rhythm, `Finding Rhythm: +${combat.rhythm}% Dodge chance`],
-      [
-        "nextPhysical",
-        combat.nextPhysical,
-        `Open Flank: next attack deals ${combat.nextPhysical} additional Physical damage`,
-      ],
-      [
-        "partingCut",
-        Number(combat.partingCut),
-        "Parting Cut: next Physical hit deals half its damage as additional Bleed damage",
-      ],
-      ["riposte", Number(combat.riposte), "Riposte: next Physical attack is a guaranteed Critical Hit"],
-      ["freeNature", Number(combat.freeNature), "Windstep: next Nature card is free"],
-      ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
-      ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
-      ["blind", Number(combat.blind), `Blind: ${KEYWORD_DEFINITIONS.blind.description}`],
-      [
-        "nullifyFreeze",
-        Number(combat.nullifyFreeze),
-        "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
-      ],
-      [
-        "attackReflection",
-        Number(combat.attackReflection),
-        `Attack Reflection: ${KEYWORD_DEFINITIONS.attackReflection.description}`,
-      ],
-      ["negate", Number(combat.negate), `Negate: ${KEYWORD_DEFINITIONS.negate.description}`],
-      ["nullify", Number(combat.nullify), `Nullify: ${KEYWORD_DEFINITIONS.nullify.description}`],
-      [
-        "reflectBurn",
-        Number(combat.reflectBurn),
-        "Reflect the next Burn; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
-      ],
-      ["reflect", Number(combat.reflect), `Reflect: ${KEYWORD_DEFINITIONS.reflect.description}`],
-    ] as const;
-    for (const [id, count, text] of pending) if (count) entries.push({ id, count, text });
-  }
-  return entries;
-}
+type AnimatedStatus = Status & { exit?: boolean; changed?: boolean };
 export function CombatStatus({
   combat,
   sharedDodge = 0,
@@ -119,7 +25,7 @@ export function CombatStatus({
   const entries = combatStatuses(combat, sharedDodge);
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
-  const [shown, setShown] = useState(entries);
+  const [shown, setShown] = useState<AnimatedStatus[]>(entries);
   useLayoutEffect(() => {
     const next = JSON.parse(signature) as Status[];
     const focused = document.activeElement as HTMLElement | null;
@@ -175,7 +81,7 @@ export function CombatStatus({
       </div>
     );
   if (!shown.length) return null;
-  const tile = (s: Status) => {
+  const tile = (s: AnimatedStatus) => {
     const Icon = s.id === "grace" ? Skull : s.id === "cooldown" ? Timer : Hourglass;
     return (
       <Tooltip key={s.id}>
