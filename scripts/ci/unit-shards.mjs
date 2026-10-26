@@ -1,4 +1,4 @@
-export const LINEUP_SHARDS = 8;
+export const LINEUP_SHARDS = 16;
 
 /** Partition registered cases, preserving each scenario's seed and assertions. */
 export function lineupShard(scenarios, shard) {
