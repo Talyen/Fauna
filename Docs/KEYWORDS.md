@@ -40,7 +40,7 @@ Hoard Lockplate is the explicit allied exception: applicable Armor reduces damag
 
 Thorns retaliate for their current stack count as Nature damage when an opposing attack hits, including attacks fully absorbed by Block or Armor, then lose one stack; retaliation cannot trigger another retaliation. Water Thorns follow the same trigger and decay but deal Water damage from a separate stack pool; both can retaliate from one qualifying attack while the defender survives. Neither triggers from Dodge, periodic/derived damage or retaliation. Negate retains its explicit Thorns retaliation rule.
 
-Water Thorns persist through turns, swaps and resume, use ordinary stack caps and protection sharing, and remain a separate Purge category after Nature Thorns.
+Water Thorns persist through turns, swaps and resume, use ordinary stack caps and protection sharing, and remain a separate Purge category after Nature Thorns. Tidecrest Hairpin preserves the last allied stack during retaliation.
 
 Fire Thorns retaliate with Burn damage and equal Burn buildup using their current stacks, then lose one stack. They share the ordinary Thorns trigger, including Negate and hits absorbed by Block or Armor, and cannot trigger retaliation chains. They persist through turns, swaps and current-format resume, follow protection sharing and stack caps, and form a separate Purge category after Water Thorns. Fire Thorns grants Burn XP on the accepted card play, without creating another progression category.
 

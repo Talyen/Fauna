@@ -411,7 +411,15 @@ export function* thornRetaliation({
     if (source.health <= 0) break;
     const reflected = stats[status];
     if (reflected <= 0) continue;
-    if (!(source.combat?.bleed && !isEnemy(target) && state.boons.includes("thornheart-ring")))
+    if (
+      !(source.combat?.bleed && !isEnemy(target) && state.boons.includes("thornheart-ring")) &&
+      !(
+        status === "waterThorns" &&
+        !isEnemy(target) &&
+        state.boons.includes("tidecrest-hairpin") &&
+        reflected <= boonRule("tidecrest-hairpin").minimum
+      )
+    )
       stats[status]--;
     if (!isEnemy(source) && isEnemy(target) && attackType === "water" && state.boons.includes("moonboat-toy"))
       continue;

@@ -8,7 +8,7 @@ import { species, type CardDefinition } from "../content";
 import { receiveCard } from "../card-zones";
 import { roll } from "../random";
 import { passiveAmount } from "../progression";
-import { gainMana, grantBlock, restoreHealth } from "./index";
+import { gainMana, grantArmor, grantBlock, restoreHealth } from "./index";
 import { battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import type { BattleState, Creature, GameEvent } from "../types";
 
@@ -97,5 +97,8 @@ export function useFood(
       }
     }
   }
+  if (state.boons.includes("sovereign-toast-rack"))
+    for (const ally of battlefield(state, "player"))
+      if (ally.health > 0) grantArmor(state, ally, boonRule("sovereign-toast-rack").armor, events);
   if (state.boons.includes("field-lunch-basket")) draw(state, boonRule("field-lunch-basket").draw, events);
 }

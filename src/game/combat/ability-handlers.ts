@@ -37,8 +37,19 @@ function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[
 }
 
 export function executePrimary(context: PrimaryContext) {
-  const { state, action, events, target, keywords, blindMiss, criticalBonus, name, stats, operations } =
-    context;
+  const {
+    state,
+    action,
+    events,
+    target,
+    keywords,
+    blindMiss,
+    cannotDodge,
+    criticalBonus,
+    name,
+    stats,
+    operations,
+  } = context;
   const { actor, def, value } = action;
   const enemy = action.side === "enemy";
   const power = actorPower(action);
@@ -105,6 +116,7 @@ export function executePrimary(context: PrimaryContext) {
             delivery: reflected ? "reflection" : undefined,
             interceptionChecked: true,
             blindMiss: reflected ? false : blindMiss,
+            cannotDodge: !reflected && cannotDodge,
             criticalBonus,
             leech: def.leech,
             cardLeech: keywords.includes("leech"),

@@ -2,7 +2,8 @@ import { permanentCardCopies } from "./card-kit";
 import { isRosterCreature } from "./battlefield";
 import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
-import { grantBlock, restoreHealth, removeEffects } from "./combat/index";
+import { grantArmor, grantBlock, restoreHealth, removeEffects } from "./combat/index";
+import { boonRule } from "./rules/boons";
 import { unitName, type Combatant } from "./combat/state";
 import { passiveAmount } from "./progression";
 import { shuffle, roll } from "./random";
@@ -34,6 +35,11 @@ export function cleanseDeparture(state: GameState, outgoing: Combatant, events: 
       (outgoing.combat?.controlled === status || (outgoing.combat?.[status] ?? 0) > 0)
     )
       removeEffects(outgoing, "cleanse", 1, events, state, status);
+}
+export function rookOfMercy(state: GameState, incoming: readonly Combatant[], events: GameEvent[]) {
+  if (!state.boons.includes("rook-of-mercy")) return;
+  for (const ally of incoming)
+    if (ally.health > 0) grantArmor(state, ally, boonRule("rook-of-mercy").armor, events);
 }
 /** Match existing protection without spending it or amplifying fresh Block grants. */
 export function matchSwapBlock(state: GameState, first: Combatant, second: Combatant, events: GameEvent[]) {
@@ -294,6 +300,11 @@ export function swapBackup(
   if (fromCard && outgoing) {
     cleanseDeparture(state, outgoing, events);
     matchSwapBlock(state, outgoing, incoming, events);
+    rookOfMercy(
+      state,
+      state.team.filter((ally) => !previous.some((old) => old.id === ally.id)),
+      events,
+    );
   }
   mountainGuide(state, incoming, previous, events);
   gentlePassage(state, previous, events);
@@ -330,6 +341,7 @@ export function swapFromCard(
   if (allied) {
     cleanseDeparture(state, actor, events);
     matchSwapBlock(state, actor, other, events);
+    rookOfMercy(state, [actor, other], events);
   }
   events.push({
     kind: "action",

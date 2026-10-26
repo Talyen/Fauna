@@ -22,6 +22,7 @@ import {
 interface ExtraOptions {
   target?: Combatant;
   blindMiss?: boolean;
+  cannotDodge?: boolean;
   criticalBonus?: number;
   recipientOnly?: boolean;
   negated?: ReadonlySet<string>;
@@ -47,6 +48,7 @@ export function applyExtras(
             origin: "ability",
             interceptionChecked: true,
             blindMiss,
+            cannotDodge: options.cannotDodge,
             criticalBonus,
             leech: effect.leech,
             cardLeech: def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech),

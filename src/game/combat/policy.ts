@@ -14,6 +14,7 @@ export type DamagePacket =
       origin: "ability";
       delivery?: "bounce" | "reflection";
       blindMiss?: boolean;
+      cannotDodge?: boolean;
       interceptionChecked?: true;
       criticalBonus?: number;
     })

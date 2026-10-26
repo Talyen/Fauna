@@ -6,6 +6,24 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "aether-gramophone": boon({}, () => "Repeated attacks cannot be Dodged"),
+    "herbarium-press": boon({}, () => "Poison cannot be Cleansed from Frozen enemies"),
+    "honey-press": boon(
+      { divisor: 2 },
+      () => "Purging enemy Block restores half as much Health to the most injured ally",
+    ),
+    "rook-of-mercy": boon({ armor: 2 }, (p) => `Allies swapping in gain ${p.armor} Armor`),
+    "tidecrest-hairpin": boon({ minimum: 1 }, () => "Water Thorns cannot decay below 1"),
+    "stardust-whetstone": boon(
+      { bleed: 1 },
+      (p) => `Physical hits apply ${p.bleed} Bleed to enemies with Armor`,
+    ),
+    "ashfall-pendant": boon({}, () => "Burn lost through decay also removes that much enemy Block"),
+    "wishing-building-block": boon(
+      { block: 1 },
+      (p) => `Gaining Armor grants ${p.block} Block to other allies with Armor`,
+    ),
+    "sovereign-toast-rack": boon({ armor: 2 }, (p) => `Playing Food grants ${p.armor} Armor to all allies`),
     "hoard-lockplate": boon({}, () => "Armor reduces damage before Block"),
     "rootvault-pole": boon({}, () => "Allies can Dodge Thorns damage"),
     "star-hoop": boon({}, () => "Reflect also returns enemy Purge"),

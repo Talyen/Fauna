@@ -1,5 +1,14 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "aether-gramophone": "Repeated attacks cannot be Dodged",
+  "herbarium-press": "Poison cannot be Cleansed from Frozen enemies",
+  "honey-press": "Purging enemy Block restores half as much Health to the most injured ally",
+  "rook-of-mercy": "Allies swapping in gain 2 Armor",
+  "tidecrest-hairpin": "Water Thorns cannot decay below 1",
+  "stardust-whetstone": "Physical hits apply 1 Bleed to enemies with Armor",
+  "ashfall-pendant": "Burn lost through decay also removes that much enemy Block",
+  "wishing-building-block": "Gaining Armor grants 1 Block to other allies with Armor",
+  "sovereign-toast-rack": "Playing Food grants 2 Armor to all allies",
   "hoard-lockplate": "Armor reduces damage before Block",
   "rootvault-pole": "Allies can Dodge Thorns damage",
   "star-hoop": "Reflect also returns enemy Purge",

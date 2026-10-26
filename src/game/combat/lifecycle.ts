@@ -112,6 +112,24 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (
       status === "burn" &&
       isEnemy(unit) &&
+      unit.health > 0 &&
+      amount > next &&
+      state.boons.includes("ashfall-pendant")
+    ) {
+      const removed = Math.min(unit.block, amount - next);
+      unit.block -= removed;
+      if (removed > 0)
+        events.push({
+          kind: "block",
+          actorId: source.id,
+          targetId: unit.id,
+          amount: -removed,
+          text: `${unitName(unit)} loses ${removed} Block to Ashfall Pendant`,
+        });
+    }
+    if (
+      status === "burn" &&
+      isEnemy(unit) &&
       !isEnemy(source) &&
       state.boons.includes("cinder-fan") &&
       amount > next

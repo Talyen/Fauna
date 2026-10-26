@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield, cleanseTargets, isDepartedMinion } from "../battlefield";
+import { isEnemy, battlefield, healingAllies, cleanseTargets, isDepartedMinion } from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
@@ -11,6 +11,7 @@ import type { GameEvent, GameState } from "../types";
 import {
   ensureCombat,
   maximumHealth,
+  mostInjured,
   unitName,
   harmfulStatuses,
   beneficialStatuses,
@@ -123,6 +124,19 @@ export function* grantStatus(
       outcome: "gain",
       text: `${unitName(unit)} gains ${gain} ${status === "waterThorns" ? "Water Thorns" : status === "fireThorns" ? "Fire Thorns" : status}.`,
     });
+  if (
+    gain > 0 &&
+    status === "armor" &&
+    state?.phase === "battle" &&
+    !isEnemy(unit) &&
+    state.boons.includes("wishing-building-block")
+  ) {
+    const allies = battlefield(state, "player");
+    if (allies.some((ally) => ally.id === unit.id))
+      for (const ally of allies)
+        if (ally.id !== unit.id && ally.health > 0 && ensureCombat(ally).armor > 0)
+          yield* reaction("grantBlock", state, ally, boonRule("wishing-building-block").block, events);
+  }
   if ((status === "thorns" || status === "waterThorns" || status === "fireThorns") && state && sharing)
     yield* reaction("shareProtection", state, unit, status, gain, events);
 }
@@ -218,10 +232,12 @@ export function* removeEffects(
     }
   }
   const stats = ensureCombat(unit);
+  const frozenBefore = stats.controlled === "freeze";
   const thornsBefore = stats.thorns;
   const pearlSieve = state && state.boons.includes("pearl-sieve");
   const moltenPaperweight = state && state.boons.includes("molten-paperweight");
   let purgedArmor = 0;
+  let purgedBlock = 0;
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
   const hadFreezeBuildup = stats.freeze > 0;
@@ -295,6 +311,7 @@ export function* removeEffects(
     return 0;
   }
   if (kind === "purge" && (!onlyStatus || onlyStatus === "block") && unit.block > 0 && count > 0) {
+    purgedBlock = unit.block;
     unit.block = 0;
     removedStatuses.push("block");
     purgedKinds.push("block");
@@ -316,6 +333,14 @@ export function* removeEffects(
     if (
       count > 0 &&
       !(kind === "cleanse" && status === "burn" && isEnemy(unit) && unit.block > 0 && moltenPaperweight) &&
+      !(
+        kind === "cleanse" &&
+        status === "poison" &&
+        isEnemy(unit) &&
+        frozenBefore &&
+        state &&
+        state.boons.includes("herbarium-press")
+      ) &&
       (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))
     ) {
       if (kind === "cleanse" && harmfulStatuses.includes(status as (typeof harmfulStatuses)[number]))
@@ -425,6 +450,26 @@ export function* removeEffects(
   )
     yield* reaction("grantBlock", state, unit, purgedArmor, events);
   if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
+  if (
+    state &&
+    isEnemy(unit) &&
+    source &&
+    !isEnemy(source) &&
+    source.health > 0 &&
+    purgedBlock > 0 &&
+    state.boons.includes("honey-press")
+  ) {
+    const recipient = mostInjured(healingAllies(state));
+    if (recipient)
+      yield* reaction(
+        "restoreHealth",
+        recipient,
+        Math.round(purgedBlock / boonRule("honey-press").divisor),
+        events,
+        false,
+        state,
+      );
+  }
   if (
     kind === "purge" &&
     state &&

@@ -2,6 +2,105 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.aether-gramophone",
+      "origin": "repository",
+      "source": "public/art/boons/aether-gramophone.png",
+      "output": "art/boons/aether-gramophone.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Aether Gramophone.png; https://drive.google.com/file/d/1zBJsvtNqAU2navSyw3gy7ssqMuDLwk4B/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.herbarium-press",
+      "origin": "repository",
+      "source": "public/art/boons/herbarium-press.png",
+      "output": "art/boons/herbarium-press.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Herbarium Press.png; https://drive.google.com/file/d/1b_A81U36VLI6MHRF0l4Tlo6Gx9RWeour/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.honey-press",
+      "origin": "repository",
+      "source": "public/art/boons/honey-press.png",
+      "output": "art/boons/honey-press.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Honey Press.png; https://drive.google.com/file/d/17CDc7GuVjj4t5uWgaiHdy-UJ1Ozh_PIZ/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.rook-of-mercy",
+      "origin": "repository",
+      "source": "public/art/boons/rook-of-mercy.png",
+      "output": "art/boons/rook-of-mercy.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Rook of Mercy.png; https://drive.google.com/file/d/1kIxw8wpA0f1mYqOmm4W3I4C5rvc2IG9A/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.tidecrest-hairpin",
+      "origin": "repository",
+      "source": "public/art/boons/tidecrest-hairpin.png",
+      "output": "art/boons/tidecrest-hairpin.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Tidecrest Hairpin.png; https://drive.google.com/file/d/1AYaXL-NNtlRHpXIUD95cBvI3hOP4530W/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.stardust-whetstone",
+      "origin": "repository",
+      "source": "public/art/boons/stardust-whetstone.png",
+      "output": "art/boons/stardust-whetstone.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Stardust Whetstone.png; https://drive.google.com/file/d/1MSPy01pEAcP-XWMA0RrVFW5J2w9PzELl/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.ashfall-pendant",
+      "origin": "repository",
+      "source": "public/art/boons/ashfall-pendant.png",
+      "output": "art/boons/ashfall-pendant.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Ashfall Pendant.png; https://drive.google.com/file/d/1-F4IMuFZ8-WE61FPDwU67iqHYb4dpOuo/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.wishing-building-block",
+      "origin": "repository",
+      "source": "public/art/boons/wishing-building-block.png",
+      "output": "art/boons/wishing-building-block.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Wishing Building Block.png; https://drive.google.com/file/d/1F6--VC4SK1Ldoc8saRC_R1HiR6HQc9kU/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.sovereign-toast-rack",
+      "origin": "repository",
+      "source": "public/art/boons/sovereign-toast-rack.png",
+      "output": "art/boons/sovereign-toast-rack.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Sovereign Toast Rack.png; https://drive.google.com/file/d/1pNTc6EhuUNpFmCDOQPI0G1E9CdahXKxM/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.hoard-lockplate",
       "origin": "repository",
       "source": "public/art/boons/hoard-lockplate.png",

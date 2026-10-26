@@ -87,7 +87,8 @@ export function executeAbility(
             def.criticalWhenLastCard && action.lastCardInHand ? 100 : 0,
           )
         : 0;
-    const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) : false;
+    const cannotDodge = play > 0 && !enemy && state.boons.includes("aether-gramophone");
+    const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) && !cannotDodge : false;
     const primary = executePrimary({
       state,
       action,
@@ -98,11 +99,13 @@ export function executeAbility(
       stats,
       keywords,
       blindMiss,
+      cannotDodge,
       criticalBonus,
     });
     applyExtras(state, action, events, {
       target: primary ? primary.attackTarget : target,
       blindMiss,
+      cannotDodge,
       criticalBonus,
       negated: primary?.negated,
       sharedNegate: primary?.sharedNegate,

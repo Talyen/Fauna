@@ -209,6 +209,7 @@ export function* hit(
       delivery: "reflection",
       interceptionChecked: true,
       blindMiss: false,
+      cannotDodge: false,
     });
   }
   const policy = packetPolicy(options);
@@ -289,6 +290,7 @@ export function* resolveHit(
     alliedTarget = !isEnemy(target);
   const stats = ensureCombat(target),
     before = target.health;
+  const hadArmor = stats.armor > 0;
   const depletions: ArmorDepletion[] = [];
   const erode = (amount: number) => {
     const { depletion } = removeArmor(target, amount);
@@ -307,7 +309,8 @@ export function* resolveHit(
   if (
     (direct || thornDodge) &&
     (blindMiss ||
-      (dodgeChance(state, target) > 0 &&
+      (!("cannotDodge" in options && options.cannotDodge) &&
+        dodgeChance(state, target) > 0 &&
         succeeds(state, dodgeChance(state, target) / 100, !alliedTarget, events)))
   ) {
     if (alliedSource && !alliedTarget && state.boons.includes("coral-net-weight") && target.block > 0) {
@@ -474,6 +477,27 @@ export function* resolveHit(
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
   yield* damageRewards(context, facts, policy);
+  if (
+    attack &&
+    alliedSource &&
+    !alliedTarget &&
+    type === "physical" &&
+    hadArmor &&
+    source.health > 0 &&
+    target.health > 0 &&
+    state.boons.includes("stardust-whetstone")
+  ) {
+    const result = yield* reaction(
+      "applyHarmfulStatus",
+      state,
+      source,
+      target,
+      boonRule("stardust-whetstone").bleed,
+      "bleed",
+      events,
+    );
+    depletions.push(...result.depletions);
+  }
   if (
     effectDamage > 0 &&
     alliedSource &&

@@ -36,5 +36,6 @@ export interface PrimaryContext {
   stats: CombatState;
   keywords: readonly string[];
   blindMiss: boolean;
+  cannotDodge: boolean;
   criticalBonus: number;
 }
