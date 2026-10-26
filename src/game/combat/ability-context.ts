@@ -29,20 +29,12 @@ export const alive = (row: Combatant[]) => row.filter((unit) => unit.health > 0)
 export interface PrimaryContext {
   state: BattleState;
   action: AbilityAction;
-  actor: Combatant;
-  def: CardDefinition;
-  value: number;
   events: GameEvent[];
   operations: AbilityOperations;
-  enemy: boolean;
-  power: number;
   target: Combatant | undefined;
-  attackTarget: Combatant | undefined;
   name: string;
   stats: CombatState;
   keywords: readonly string[];
   blindMiss: boolean;
   criticalBonus: number;
-  negated: Set<string>;
-  sharedNegate?: import("./policy").SharedNegate;
 }

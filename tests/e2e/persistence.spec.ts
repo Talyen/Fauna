@@ -15,7 +15,13 @@ test("last mana saves the full turn before immediate close and does not replay o
     d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
     d.battle!.discard = [];
   });
+  await seed(page, run(8));
+  await page.evaluate(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await seed(page, fixture);
+  expect(await page.evaluate(() => localStorage.getItem("fauna.text-scale"))).toBe("1.25");
+  await reloadHome(page);
+  expect(await state(page)).toEqual(fixture);
+  expect(await page.evaluate(() => localStorage.getItem("fauna.text-scale"))).toBe("1.25");
   await resume(page);
   await page.locator(".app:not([inert]) .hand .action-card").click();
   await saved(page);
@@ -78,21 +84,6 @@ test("corrupt saves recover backups and all-invalid saves continue silently", as
   }, key);
   await reloadHome(page);
   await expect(page.getByRole("alert")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "Play", exact: true })).toBeVisible();
-});
-
-test("fresh fixture seeding preserves init preferences and never resets a later save on reload", async ({
-  page,
-}) => {
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
-  await seed(page, run(7));
-  expect(await page.evaluate(() => localStorage.getItem("fauna.text-scale"))).toBe("1.25");
-  await seed(page, run(8));
-  await reloadHome(page);
-  expect(await state(page)).toEqual(run(8));
-  expect(await page.evaluate(() => localStorage.getItem("fauna.text-scale"))).toBe("1.25");
-  await page.evaluate(() => localStorage.clear());
-  await reloadHome(page);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Continue", exact: true })).toHaveCount(0);
 });

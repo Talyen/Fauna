@@ -1,5 +1,5 @@
 {
-  "[] › accessibility.spec.ts › home, settings, battle, pause and rewards meet automated accessibility checks": 9000,
+  "[] › accessibility.spec.ts › home, settings, battle, pause and rewards meet automated accessibility checks": 13000,
   "[] › adoption.spec.ts › Boon Merchant shelf and purchase across compact layouts": 5653,
   "[] › adoption.spec.ts › Boon Merchant shelf and purchase across wide layouts": 5792,
   "[] › adoption.spec.ts › illustrated Boons remain readable and return focus at 1280×720": 6170,
@@ -51,8 +51,7 @@
   "[] › menu-input.spec.ts › pointer focus stays hidden through menus and held Escape, then follows keyboard input": 10333,
   "[] › onboarding.spec.ts › onboarding inspection and commitment across both layouts": 6462,
   "[] › persistence.spec.ts › corrupt saves recover backups and all-invalid saves continue silently": 5516,
-  "[] › persistence.spec.ts › fresh fixture seeding preserves init preferences and never resets a later save on reload": 4296,
-  "[] › persistence.spec.ts › last mana saves the full turn before immediate close and does not replay on resume": 4304,
+  "[] › persistence.spec.ts › last mana saves the full turn before immediate close and does not replay on resume": 8600,
   "[] › recruit-destinations.spec.ts › Recruit details and four destination options fit enlarged text and recruitment survives reload": 2883,
   "[] › recruitment.spec.ts › full-roster recruitment banks Collection progress and confirms only the displayed team": 5730,
   "[] › recruitment.spec.ts › recruitment adds a backup without exposing free lineup changes": 4854,

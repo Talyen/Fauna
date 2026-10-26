@@ -1,7 +1,8 @@
-import { captureScreen, settleScreen } from "./support/rendered-evidence";
+import { captureFrame, settleScreen } from "./support/rendered-evidence";
 import { expect, type Page } from "@playwright/test";
 import { accept, winBattle, bossReward } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
+import { expectScrollFree } from "./support/layout-contract";
 
 async function layouts(page: Page, name: string, check?: () => Promise<void>) {
   for (const [width, height, scale] of [
@@ -12,7 +13,8 @@ async function layouts(page: Page, name: string, check?: () => Promise<void>) {
     await page.locator("html").evaluate((el, scale) => el.style.setProperty("--text-scale", scale), scale);
     await settleScreen(page);
     await check?.();
-    await captureScreen(page, { path: `reports/rewards/${name}-${width}.png` });
+    await expectScrollFree(page);
+    await captureFrame(page, { path: `reports/rewards/${name}-${width}.png` });
   }
 }
 
