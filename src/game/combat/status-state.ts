@@ -96,7 +96,7 @@ export function periodicTick(stats: CombatState, status: PeriodicStatus) {
   return {
     amount: stats[status],
     sourceId: stats.statusSources[status],
-    payouts: status === "bleed" ? stats.bleedLeech : [],
+    payouts: status === "bleed" ? stats.bleedLeech.map((payout) => ({ ...payout })) : [],
   };
 }
 

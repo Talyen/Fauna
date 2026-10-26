@@ -40,6 +40,7 @@ const harms = [
 ] as const satisfies readonly (keyof CombatState)[];
 
 function unitValue(unit: Combatant) {
+  if (unit.health <= 0) return 0;
   const stats = unit.combat;
   return (
     unit.health +
