@@ -568,7 +568,7 @@ it.each([false, true])(
     vi.useFakeTimers();
     try {
       const loading = s.load();
-      await entered;
+      await writing;
       await vi.advanceTimersByTimeAsync(5000);
       await loading;
       if (play) expect(s.command({ type: "endTurn" })).toBe(true);
