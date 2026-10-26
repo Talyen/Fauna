@@ -4,7 +4,7 @@ import { useFood } from "./combat/food";
 import { cardActor } from "./card-actors";
 import { inspectCardPlay, playTargetError } from "./play-queries";
 import { commandPhases } from "./command-phases";
-import { MAX_REVISION } from "./state-limits";
+import { MAX_BATTLE_TURN, MAX_REVISION } from "./state-limits";
 import { executeAbility } from "./combat/abilities";
 import { canVisitCampfire, campfireRecovery, canVisitMerchant, canRecruitDestination } from "./destinations";
 import saveFormat from "./save-format.json" with { type: "json" };
@@ -104,6 +104,8 @@ function resolve(
   const phases: readonly GameState["phase"][] = commandPhases[command.type];
   if (!phases.includes(state.phase)) return reject(state, "That action is unavailable here.");
   if (state.revision >= MAX_REVISION) return reject(state, "This save has reached its command limit.");
+  if (command.type === "endTurn" && state.phase === "battle" && state.battle.turn >= MAX_BATTLE_TURN)
+    return reject(state, "This battle has reached its turn limit.");
   if (
     command.type === "newRun" &&
     (!Number.isSafeInteger(command.seed) || command.seed < 0 || command.seed > 0xffffffff)
@@ -314,6 +316,7 @@ function resolve(
           command.autoEndTurn !== false &&
           draft.phase === "battle" &&
           battle.mana === 0 &&
+          battle.turn < MAX_BATTLE_TURN &&
           !pendingReplacement(draft)
         )
           finishTurn(draft, events);
@@ -336,6 +339,7 @@ function resolve(
           draft.phase === "battle" &&
           command.autoEndTurn !== false &&
           draft.battle.mana === 0 &&
+          draft.battle.turn < MAX_BATTLE_TURN &&
           !pendingReplacement(draft)
         )
           finishTurn(draft, events);

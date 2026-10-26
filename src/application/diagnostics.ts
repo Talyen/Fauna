@@ -32,7 +32,7 @@ const storedDiagnostic = z.object({
 });
 const sanitize = (value: string) =>
   value
-    .replace(/(?:\/[\w .-]+){2,}\/|[A-Z]:\\(?:[^\\\n]+\\)+/g, "[path]/")
+    .replace(/(?:\/[\w .-]+){2,}\/|[A-Za-z]:\\(?:[^\\\n]+\\)+/g, "[path]/")
     .replace(
       /(?:token|password|secret|authorization)["']?\s*[:=]\s*(?:(?:Bearer|Basic)\s+)?(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\S+)/gi,
       "[redacted]",
@@ -71,7 +71,12 @@ function errorMessage(error: unknown): string {
 }
 
 export function createDiagnostics(port?: DiagnosticPort) {
-  const retain = (values: Diagnostic[]) => Object.freeze(values.map((entry) => Object.freeze(entry)));
+  const retain = (values: Diagnostic[]) => {
+    // JSON escaping can cost six characters per message character. Bound the stored form too.
+    const bounded = values.slice(-MAX_ENTRIES);
+    while (JSON.stringify(bounded).length >= MAX_STORED_LENGTH) bounded.shift();
+    return Object.freeze(bounded.map((entry) => Object.freeze(entry)));
+  };
   let entries = retain([]);
   let disposed = false,
     writing = false;

@@ -203,6 +203,7 @@ const healAbility: PrimaryHandler<"heal"> = (context) => {
           ? [mostInjured(allies)!]
           : friendlyRow(state, action).filter((unit) => unit.id === action.allyTargetId && unit.health > 0);
   for (const recipient of targets) {
+    if (actor.health <= 0) break;
     restoreHealth(recipient, value, events, false, state, true, actor);
     applyExtras(state, action, events, { target: recipient, recipientOnly: true });
   }
