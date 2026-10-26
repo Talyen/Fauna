@@ -34,36 +34,6 @@ async function expectCenteredMenu(choices: Locator) {
   }
 }
 
-test("pointer menu transitions never display focus indicators", async ({ page }) => {
-  await openHome(page);
-  await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Open menu" }).click();
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.keyboard.down("Escape");
-  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
-  await page.keyboard.down("Escape");
-  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
-  await page.keyboard.up("Escape");
-  const settings = page.getByRole("button", { name: "Settings", exact: true });
-  await expect(settings).toBeFocused();
-  await expect(settings).toHaveCSS("outline-style", "none");
-  await expect(settings).toHaveCSS("box-shadow", "none");
-  await page.keyboard.press("s");
-  const end = page.getByRole("button", { name: "End journey", exact: true });
-  await expect(end).toBeFocused();
-  await expect(end).toHaveCSS("outline-style", "solid");
-  await page.mouse.move(20, 20);
-  await expect(end).toHaveCSS("outline-style", "none");
-  await captureScreen(page, { path: "reports/menu-pointer.png" });
-  const menu = page.getByRole("dialog", { name: "Pause menu" });
-  await expect(menu.getByRole("button", { name: "Close menu" })).toHaveCount(0);
-  await page.mouse.click(20, 20);
-  await expect(menu).toHaveCount(0);
-  await page.getByRole("button", { name: "Open menu" }).click();
-  await menu.getByRole("button", { name: "Continue", exact: true }).click();
-  await expect(menu).toHaveCount(0);
-});
-
 test("minimum-size enlarged menus fit every action without scrolling", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   // Include both optional entries so the tallest browser menu must fit.
@@ -323,7 +293,9 @@ test("controller can dismiss Pause or end the journey immediately", async ({ pag
     .toBe("defeat");
 });
 
-test("pointer use has no native or shadcn focus decoration in settings, tabs or pause", async ({ page }) => {
+test("pointer focus stays hidden through menus and held Escape, then follows keyboard input", async ({
+  page,
+}) => {
   await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
   await openHome(page);
   const noDecoration = async () => {
@@ -357,4 +329,29 @@ test("pointer use has no native or shadcn focus decoration in settings, tabs or 
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
   await noDecoration();
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.keyboard.down("Escape");
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  await page.keyboard.down("Escape");
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  await page.keyboard.up("Escape");
+  const settings = page.getByRole("button", { name: "Settings", exact: true });
+  await expect(settings).toBeFocused();
+  await expect(settings).toHaveCSS("outline-style", "none");
+  await expect(settings).toHaveCSS("box-shadow", "none");
+  await page.keyboard.press("s");
+  const end = page.getByRole("button", { name: "End journey", exact: true });
+  await expect(end).toBeFocused();
+  await expect(end).toHaveCSS("outline-style", "solid");
+  await page.mouse.move(20, 20);
+  await expect(end).toHaveCSS("outline-style", "none");
+  await captureScreen(page, { path: "reports/menu-pointer.png" });
+  const menu = page.getByRole("dialog", { name: "Pause menu" });
+  await expect(menu.getByRole("button", { name: "Close menu" })).toHaveCount(0);
+  await page.mouse.click(20, 20);
+  await expect(menu).toHaveCount(0);
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await menu.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(menu).toHaveCount(0);
 });
