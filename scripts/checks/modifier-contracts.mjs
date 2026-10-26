@@ -62,8 +62,9 @@ function declaredObject(ast, name) {
   });
   return result;
 }
-function catalogIds(ast) {
+function catalogIds(ast, file) {
   const ids = [];
+  const moduleImports = imports(ast, file);
   walk(ast, (entry) => {
     if (
       entry.type === "KeyValueProperty" &&
@@ -71,6 +72,16 @@ function catalogIds(ast) {
       entry.value.type === "StringLiteral"
     )
       ids.push(entry.value.value);
+    if (entry.type === "CallExpression" && entry.callee.type === "Identifier") {
+      const target = moduleImports.get(entry.callee.value);
+      const id = entry.arguments[0]?.expression;
+      if (
+        target?.file === "src/game/content/talent-builder.ts" &&
+        target.name === "talent" &&
+        id?.type === "StringLiteral"
+      )
+        ids.push(id.value);
+    }
   });
   return ids;
 }
@@ -86,8 +97,8 @@ export function modifierContractViolations(sources) {
   );
   const required = { talents: [], boons: [], passives: [] };
   for (const [file, ast] of Object.entries(parsed)) {
-    if (file.startsWith("src/game/content/talents/")) required.talents.push(...catalogIds(ast));
-    if (file === "src/game/content/boons.ts") required.boons.push(...catalogIds(ast));
+    if (file.startsWith("src/game/content/talents/")) required.talents.push(...catalogIds(ast, file));
+    if (file === "src/game/content/boons.ts") required.boons.push(...catalogIds(ast, file));
   }
   // Passive fields such as effect/trigger are not passive kinds.
   if (parsed["src/game/content/types.ts"]) {

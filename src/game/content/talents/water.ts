@@ -1,51 +1,24 @@
-import { talentRule } from "../../rules/talents";
+import { talent } from "../talent-builder";
 export const WATER_TALENTS = [
-  {
-    id: "water.pressure",
-    keyword: "water",
-    effect: "pressure",
-    name: "Pressure",
-    text: `Water attacks deal ${talentRule("water.pressure").amount} more damage`,
-    row: 0,
-  },
-  {
-    id: "water.seafoam",
-    keyword: "water",
-    effect: "seafoam",
-    name: "Seafoam",
-    text: `Water hits grant ${talentRule("water.seafoam").amount} Block`,
-    row: 0,
-  },
-  {
-    id: "water.high-tide",
-    keyword: "water",
-    effect: "high-tide",
-    name: "High Tide",
-    text: `Water attacks deal ${talentRule("water.high-tide").percent}% more damage while you have Block`,
-    row: 1,
-  },
-  {
-    id: "water.erosion",
-    keyword: "water",
-    effect: "erosion",
-    name: "Erosion",
-    text: `Water hits remove ${talentRule("water.erosion").amount} Armor`,
-    row: 1,
-  },
-  {
-    id: "water.cleansing-current",
-    keyword: "water",
-    effect: "cleansing-current",
-    name: "Cleansing Current",
-    text: `Water hits have a ${talentRule("water.cleansing-current").percent}% chance to Cleanse ${talentRule("water.cleansing-current").amount} harmful effect from you`,
-    row: 2,
-  },
-  {
-    id: "water.riptide",
-    keyword: "water",
-    effect: "riptide",
-    name: "Riptide",
-    text: `Water hits have a ${talentRule("water.riptide").percent}% chance to draw a Water card`,
-    row: 2,
-  },
+  talent("water.pressure", "Pressure", 0, (rule) => `Water attacks deal ${rule.amount} more damage`),
+  talent("water.seafoam", "Seafoam", 0, (rule) => `Water hits grant ${rule.amount} Block`),
+  talent(
+    "water.high-tide",
+    "High Tide",
+    1,
+    (rule) => `Water attacks deal ${rule.percent}% more damage while you have Block`,
+  ),
+  talent("water.erosion", "Erosion", 1, (rule) => `Water hits remove ${rule.amount} Armor`),
+  talent(
+    "water.cleansing-current",
+    "Cleansing Current",
+    2,
+    (rule) => `Water hits have a ${rule.percent}% chance to Cleanse ${rule.amount} harmful effect from you`,
+  ),
+  talent(
+    "water.riptide",
+    "Riptide",
+    2,
+    (rule) => `Water hits have a ${rule.percent}% chance to draw a Water card`,
+  ),
 ] as const;
