@@ -3,9 +3,8 @@ import { supplementalRule } from "./rules/supplemental";
 import type { CardDefinition } from "./content/types";
 import type { BattleState, Creature, Enemy } from "./types";
 import { hasTalent } from "./progression";
-import { hasHarmfulEffects, STACK_LIMIT } from "./combat/state";
-import { physicalBonus } from "./ability-rules";
-import { armoredDamage, blockPayment, armorApplies } from "./combat/damage-values";
+import { hasHarmfulEffects, STACK_LIMIT, type Combatant } from "./combat/state";
+import { armoredDamage, blockPayment, armorApplies, modifiedDamage } from "./combat/damage-values";
 import { healingValue, restoration, overflowBlock } from "./combat/healing-values";
 
 export interface OrdinaryHit {
@@ -20,7 +19,7 @@ export interface OrdinaryHit {
 }
 export function healingBenefit(
   state: BattleState,
-  ally: Creature,
+  ally: Combatant,
   value: number,
   effects: CardDefinition["effects"],
 ) {
@@ -46,9 +45,17 @@ export function ordinaryAttackFacts(
 ): OrdinaryHit[] {
   return [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
-    const baseDamage = Math.round(
-      value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
-        (type === "physical" ? physicalBonus(actor, state) : 0),
+    const baseDamage = modifiedDamage(
+      state,
+      actor,
+      enemy,
+      value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1),
+      type,
+      {
+        origin: "ability",
+        cardLeech: def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech),
+      },
+      true,
     );
     const damage = baseDamage * (def.criticalWhenLastCard && state.battle.hand.length === 1 ? 2 : 1);
     const armored = armorApplies(state, enemy, type, actor);

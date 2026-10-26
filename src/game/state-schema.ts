@@ -5,7 +5,7 @@ import { MAX_BATTLE_CARDS, MAX_HAND_SIZE, MAX_SUPPORTED_HAND_SIZE } from "./card
 import { MAX_CREATURE_STARS, KEYWORDS } from "./progression";
 import { SPECIES, BOONS, TALENTS } from "./content";
 import { JOURNEY_LENGTH } from "./encounters";
-import { MAX_BATTLE_TURN, MAX_REVISION } from "./state-limits";
+import { MAX_BATTLE_TURN, MAX_REVISION, MAX_FALLEN_CARDS_PER_TURN } from "./state-limits";
 const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
 const speciesId = z.enum(SPECIES.map((entry) => entry.id));
@@ -27,7 +27,7 @@ const combatStateSchema = z
     nullifyFreeze: z.boolean(),
     negate: z.boolean(),
     attackReflection: z.boolean(),
-    fallenCardsPlayedThisTurn: z.number().int().min(0).max(6),
+    fallenCardsPlayedThisTurn: z.number().int().min(0).max(MAX_FALLEN_CARDS_PER_TURN),
     cardsPlayedThisTurn: z.number().int().min(0).max(2),
     encoreUsed: z.boolean(),
     firstAttackUsed: z.boolean(),

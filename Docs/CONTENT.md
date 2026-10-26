@@ -12,6 +12,8 @@ Reuse an existing kind when its behavior already fits. A new primary kind belong
 
 Supplemental effects have their own complete [rule catalog](../src/game/rules/supplemental.ts) and [execution catalog](../src/game/combat/ability-extras.ts). Declare whether they follow the primary recipient or the global delivery window, and whether reflection returns them or leaves them with the actor. Keep authored order. Update the application's explicit benefit assessment when a new mechanic affects Auto-play; gameplay owns reusable visible facts, while application owns priorities and deliberate approximations.
 
+Recipient-only Healing and Cleanse require a Healing primary or an ally-targeted Recover primary. Supplemental damage and target Purge require an individual opposing attack recipient; group attacks do not supply that recipient. Validation rejects combinations that execution cannot deliver.
+
 Add focused player-behavior regressions for new mechanics. Refactors must preserve the pre-extraction [ability baselines](../tests/unit/game/ability-contracts.test.ts), ordered events and RNG consumption; do not regenerate expectations merely to accept changed results.
 
 ## Adding gameplay modifiers
@@ -104,6 +106,8 @@ Use the [Boon design skill](../.agents/skills/fauna-boon-design/SKILL.md) for ar
 `public/art/encounters/` preserves blank landscape SVGs registered as `encounter.combat` and `encounter.boss`; location assets remain available for support art. [Encounter presentation](ui/screens.md#encounter-and-required-replacement) uses blank Combat art and species art for Bosses. The music ID `music.fernwood` identifies a recording, not a biome or progression rule.
 
 ## Creature passive tiers
+
+Within each tier, combined Block retention bonuses cannot exceed 100%, so decay never creates Block. Combined Unfinished Journey allowances cannot exceed the saved counter limit in [state-limits.ts](../src/game/state-limits.ts); content validation and the save schema share that limit.
 
 Each species defines six complete `passiveTiers`, indexed by zero through five stars. Every tier must differ in gameplay effects from every other tier: amounts, chances or mechanics may change; wording, property order and effect order alone do not qualify. Each tier replaces the entire previous passive, so retain all intended effects explicitly. Types require six entries and catalog validation rejects duplicate effect sets.
 

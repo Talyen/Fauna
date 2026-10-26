@@ -3,9 +3,9 @@ import { healingBenefit, ordinaryAttackFacts, type OrdinaryHit } from "../game/a
 export type { OrdinaryHit } from "../game/ability-facts";
 import { battleCardCapacity, drawHasAnotherCard, discardDrawCards } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
-import { battlefield, healingAllies, isRosterCreature } from "../game/battlefield";
+import { battlefield, healingAllies } from "../game/battlefield";
 import { creaturePassive, hasTalent } from "../game/progression";
-import { hasHarmfulEffects, mostInjured, maximumHealth, STACK_LIMIT } from "../game/combat/state";
+import { controlled, hasHarmfulEffects, mostInjured, maximumHealth, STACK_LIMIT } from "../game/combat/state";
 import { actionValue, cardCost, manaCapacity } from "../game/ability-rules";
 import { healingValue, restoration } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
@@ -72,8 +72,36 @@ export function battleBenefits(
   facts: ReturnType<typeof battleBenefitFacts>,
 ): BattleBenefit[] {
   return primaryBattleBenefits(state, play, facts).map<BattleBenefit>((benefit) => {
-    if (benefit.kind !== "support" || benefit.priority !== "none") return benefit;
+    if (benefit.kind === "attack") {
+      const cleanse = play.def.effects?.some(
+        (effect) =>
+          effect.kind === "cleanse" &&
+          (effect.target === "allAllies" ? battlefield(state, "player") : [play.actor]).some(
+            (unit) => unit.health > 0 && hasHarmfulEffects(unit),
+          ),
+      );
+      return cleanse
+        ? {
+            ...benefit,
+            groups: benefit.groups.map((group) => group.map((hit) => ({ ...hit, usefulExtras: true }))),
+          }
+        : benefit;
+    }
+    if (benefit.priority !== "none") return benefit;
     if (facts.healingOnPlay) return { ...benefit, priority: "healing" };
+    for (const effect of play.def.effects ?? []) {
+      if (effect.kind !== "heal" || effect.target === "recipient") continue;
+      const { restored, utility } = healingBenefit(state, play.actor, effect.amount, undefined);
+      if (restored > 0) return { ...benefit, priority: "healing", amount: restored };
+      if (utility > 0) return { ...benefit, priority: "utility", amount: utility };
+    }
+    if (
+      facts.injuredAllies &&
+      hasTalent(state, "mana.arcane-mending") &&
+      play.def.effects?.some((effect) => effect.kind === "mana" && effect.amount > 0) &&
+      state.battle.mana - cardCost(play.card, state) < manaCapacity(state)
+    )
+      return { ...benefit, priority: "healing" };
     const usefulDraw = play.def.effects?.some(
       (effect) =>
         (effect.kind === "draw" || effect.kind === "drawKeyword") &&
@@ -108,7 +136,7 @@ function primaryBattleBenefits(
     targetId?: string,
     reason?: string,
   ): BattleBenefit[] => [{ kind: "support", priority, amount, targetId, reason }];
-  const allies = state.team.filter((unit) => unit.health > 0);
+  const allies = battlefield(state, "player").filter((unit) => unit.health > 0);
   // Drawing only this card back cannot justify a spent protection or Cleanse.
   const usefulDraw = () =>
     !!def.effects?.some(
@@ -207,7 +235,7 @@ function primaryBattleBenefits(
       });
     }
     case "heal": {
-      const automaticRecipients = healingAllies(state).filter(isRosterCreature);
+      const automaticRecipients = healingAllies(state);
       if (def.target === "allAllies") {
         const benefits = automaticRecipients.map((ally) =>
           healingBenefit(state, ally, value, play.def.effects),
@@ -221,9 +249,8 @@ function primaryBattleBenefits(
           facts.livingEnemies().some((enemy) => !enemy.combat.blind)
         )
           return support("utility");
-        return support(def.effects?.some((effect) => effect.kind === "draw") ? "standardUtility" : "none");
+        return support(usefulDraw() ? "standardUtility" : "none");
       }
-      // Auto-play keeps its existing roster-recipient preference; manual play also permits summons.
       const recipients =
         def.target === "self"
           ? [actor]
@@ -297,11 +324,21 @@ function primaryBattleBenefits(
     case "redraw":
       return support(state.battle.hand.length > 1 ? "redraw" : "none");
     case "draw":
-      return support(healing > 0 ? "healing" : "standardUtility", healing > 0 ? healing : value);
+      return support(
+        healing > 0
+          ? "healing"
+          : drawHasAnotherCard(state, card, { kind: "draw", amount: value }) ||
+              state.boons.includes("mineral-bookend") ||
+              state.boons.includes("dune-shuttle") ||
+              state.battle.minions?.some(
+                (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
+              )
+            ? "standardUtility"
+            : "none",
+        healing > 0 ? healing : value,
+      );
     case "teamBlind": {
-      const useful = facts
-        .livingEnemies()
-        .filter((enemy) => enemy.health > 0 && !enemy.combat.blind && !enemy.combat.nullify).length;
+      const useful = facts.livingEnemies().filter((enemy) => enemy.health > 0 && !enemy.combat.blind).length;
       return support(useful > 0 ? "utility" : "none", useful);
     }
     case "teamPurge": {

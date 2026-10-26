@@ -1,12 +1,198 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { chooseBattleCommand, rankedBattleChoices } from "../../../src/application/battle-policy";
-import { dispatch } from "../../../src/game/engine";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { accept, authoredPack, prepareDestination, requireBattle, teamRun } from "../../support/game";
 import { summonEcho } from "../../../src/game/combat/legendary";
-import { species, SPECIES, TALENTS, BOONS } from "../../../src/game/content";
+import { species, SPECIES, TALENTS, BOONS, definition } from "../../../src/game/content";
 import { KEYWORDS } from "../../../src/game/progression";
 import { encodeSave, decodeSave } from "../../../src/game/save";
+import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
+import { actionValue } from "../../../src/game/ability-rules";
+import { freshCombat } from "../../../src/game/combat/index";
+import type { GameState } from "../../../src/game/types";
+
+function onlyHand(state: GameState, definitionId: string) {
+  return produce(requireBattle(state), (game) => {
+    const card = game.cards.find((entry) => entry.definitionId === definitionId)!;
+    game.battle.hand = [card.id];
+    game.battle.buffer = [];
+    game.battle.discard = [];
+    game.battle.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+  });
+}
+
+it("Auto-play uses False Horizon to spend enemy Nullify wards", () => {
+  const state = produce(onlyHand(teamRun(42, ["glintstride"]), "glintstride-teamBlind"), (game) => {
+    for (const enemy of game.battle.enemies) {
+      enemy.block = 0;
+      enemy.combat = { ...freshCombat(), nullify: true };
+    }
+  });
+  const command = chooseBattleCommand(state, false);
+  expect(command.type).toBe("play");
+  expect(
+    dispatch(state, command).state.battle!.enemies.every(
+      (enemy) => !enemy.combat.nullify && !enemy.combat.blind,
+    ),
+  ).toBe(true);
+});
+
+it.each(["food-apple", "food-trail-bread"])("Auto-play can give %s to an Echo", (definitionId) => {
+  const state = produce(requireBattle(teamRun(42, ["memento"])), (game) => {
+    // Shared Food survives the earlier formation's swap to solo Memento.
+    const food = { id: "copy-0", definitionId, ownerId: null, level: 0, temporary: true as const };
+    game.cards.push(food);
+    game.battle.copySerial = 1;
+    game.battle.hand = [food.id];
+    game.battle.buffer = [];
+    game.battle.discard = [];
+    game.battle.draw = game.cards.filter((card) => card.id !== food.id).map((card) => card.id);
+    game.team[0]!.block = 1_000_000;
+    summonEcho(game, game.team[0]!, "player", 6, []);
+    game.battle.minions![0]!.health = 1;
+  });
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const command = chooseBattleCommand(state, false);
+  expect(command).toMatchObject({ type: "play", targetId: state.battle.minions![0]!.id });
+  const result = dispatch(state, command);
+  expect(result.accepted).toBe(true);
+  const echo = result.state.battle!.minions![0]!;
+  expect(definitionId === "food-apple" ? echo.health : echo.block).toBe(6);
+});
+
+it("Auto-play uses Coolfront's Cleanse even when Freeze wards absorb its damage", () => {
+  const state = produce(onlyHand(teamRun(42, ["shadebrim"]), "shadebrim-attack"), (game) => {
+    game.team[0]!.combat!.poison = 8;
+    for (const enemy of game.battle.enemies) enemy.combat.nullifyFreeze = true;
+  });
+  const command = chooseBattleCommand(state, false);
+  expect(command.type).toBe("play");
+  const result = dispatch(state, command);
+  expect(result.state.team[0]!.combat!.poison).toBe(0);
+  expect(result.state.battle!.enemies.map((enemy) => enemy.health)).toEqual(
+    state.battle.enemies.map((enemy) => enemy.health),
+  );
+});
+
+it.each([
+  ["bloomquail", "bloomquail-draw"],
+  ["stillara", "stillara-water-remembers"],
+] as const)("Auto-play does not spend Mana to draw only %s's already-played card", (kind, definitionId) => {
+  const state = produce(requireBattle(teamRun(42, [kind])), (game) => {
+    game.battle.hand = game.cards.map((card) => card.id);
+    game.battle.buffer = [];
+    game.battle.discard = [];
+    game.battle.draw = [];
+  });
+  const card = state.cards.find((entry) => entry.definitionId === definitionId)!;
+  expect(
+    rankedBattleChoices(state, false).some(
+      (choice) => choice.command.type === "play" && choice.command.cardId === card.id,
+    ),
+  ).toBe(false);
+});
+
+it("Auto-play recognizes Clean Slate on Mushroom Guard's supplemental Healing", () => {
+  const state = produce(onlyHand(teamRun(42, ["captoad"]), "captoad-guard"), (game) => {
+    game.keywordXP.health = 1_000_000;
+    game.talents = TALENTS.filter(
+      (talent) =>
+        talent.keyword === "health" &&
+        talent.row <= TALENTS.find((entry) => entry.id === "health.clean-slate")!.row,
+    ).map((talent) => talent.id);
+    game.team[0]!.block = 1_000_000;
+    game.team[0]!.combat!.poison = 8;
+  });
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const command = chooseBattleCommand(state, false);
+  expect(command.type).toBe("play");
+  expect(dispatch(state, command).state.team[0]!.combat!.poison).toBe(0);
+});
+
+it("a self-only draw retains useful Mana healing and draw Boons", () => {
+  const state = produce(requireBattle(teamRun(42, ["cadenza"])), (game) => {
+    game.battle.hand = game.cards.map((card) => card.id);
+    game.battle.buffer = [];
+    game.battle.discard = [];
+    game.battle.draw = [];
+    game.talents = ["mana.arcane-mending"];
+    game.team[0]!.health--;
+  });
+  const card = state.cards.find((entry) => entry.definitionId === "cadenza-resonant-well")!;
+  const choice = rankedBattleChoices(state, false).find(
+    (entry) => entry.command.type === "play" && entry.command.cardId === card.id,
+  )!;
+  expect(choice).toBeDefined();
+  expect(dispatch(state, choice.command).state.team[0]!.health).toBe(species("cadenza").health);
+  for (const boon of ["mineral-bookend", "dune-shuttle"] as const) {
+    const drawing = produce(state, (game) => {
+      game.talents = [];
+      game.boons = [boon];
+    });
+    expect(
+      rankedBattleChoices(drawing, false).some(
+        (entry) => entry.command.type === "play" && entry.command.cardId === card.id,
+      ),
+    ).toBe(true);
+  }
+});
+
+it("a self-only draw still lets Memento's deployed Echo answer the card", () => {
+  const state = produce(requireBattle(teamRun(42, ["memento"])), (game) => {
+    game.battle.hand = game.cards.map((card) => card.id);
+    game.battle.buffer = [];
+    game.battle.discard = [];
+    game.battle.draw = [];
+    summonEcho(game, game.team[0]!, "player", 6, []);
+    game.rng = 42;
+  });
+  const card = state.cards.find((entry) => entry.definitionId === "memento-drowned-revelation")!;
+  const choice = rankedBattleChoices(state, false).find(
+    (entry) => entry.command.type === "play" && entry.command.cardId === card.id,
+  )!;
+  expect(choice).toBeDefined();
+  const result = dispatch(state, choice.command);
+  expect(
+    result.events.some((event) => event.kind === "damage" && event.actorId === state.battle.minions![0]!.id),
+  ).toBe(true);
+});
+
+it("ordinary attack assessments retain deterministic enemy resistance", () => {
+  const destination = produce(teamRun(42, ["emberback"]), (game) => {
+    prepareDestination(game);
+    game.expedition.pack = ["shadebrim", "mossguard", "pollenmoth"];
+  });
+  const state = produce(
+    onlyHand(accept(destination, { type: "beginBattle" }), "emberback-furnace-breath"),
+    (game) => {
+      game.cards.find((card) => card.id === game.battle.hand[0])!.level = 3;
+      game.battle.enemies[0]!.health = 8;
+      for (const enemy of game.battle.enemies) {
+        enemy.block = 0;
+        enemy.combat = freshCombat();
+      }
+      for (const enemy of game.battle.enemies.slice(1)) enemy.health = 0;
+    },
+  );
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const card = state.cards.find((entry) => entry.id === state.battle.hand[0])!;
+  const def = definition(card.definitionId);
+  if (def.effect !== "attack") throw new Error("Expected attack");
+  const target = state.battle.enemies[0]!;
+  const [facts] = ordinaryAttackFacts(
+    state,
+    state.team[0]!,
+    def,
+    actionValue(card, state.team[0]!, state),
+    target,
+  );
+  const result = previewCard(state, card.id, undefined, () => 0.99);
+  const damage = result.events.find((event) => event.kind === "damage" && event.targetId === target.id);
+  expect(damage).toMatchObject({ amount: 7, critical: false });
+  expect(facts).toMatchObject({ lost: 7, lethal: false });
+  expect(rankedBattleChoices(state, false)[0]!.score).toBeLessThan(1_000_000_000);
+});
 
 it.each(SPECIES)("preserves visible rankings and legal choices for $id", ({ id }) => {
   const rankings = ["ordinary", "injured", "defended", "talented"].map((condition) => {

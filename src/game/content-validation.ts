@@ -6,6 +6,7 @@ import { FOOD_CARDS, CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS } from "
 import { cardText } from "./card-rules";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { DAMAGE_TYPES, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
+import { MAX_FALLEN_CARDS_PER_TURN } from "./state-limits";
 
 export const contentCatalog = freeze(
   {
@@ -72,6 +73,12 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     const passiveEffects = new Set<string>();
     for (const tier of entry.passiveTiers) {
       if (!tier) continue;
+      const total = (kind: import("./content/types").PassiveKind) =>
+        tier.effects.reduce((sum, effect) => sum + (effect.kind === kind ? effect.amount : 0), 0);
+      if (total("blockRetention") > 100)
+        error(entry.id, "passiveTiers", "Block retention cannot create Block during decay");
+      if (total("unfinishedJourney") > MAX_FALLEN_CARDS_PER_TURN)
+        error(entry.id, "passiveTiers", "Borrowed-card allowance exceeds the supported saved counter");
       // Rules copy and object/effect order cannot disguise unchanged gameplay.
       const effectKey = JSON.stringify(
         tier.effects
@@ -160,6 +167,18 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     )
       error(card.id, "repeatChance", "Repeat chance must be a whole percentage from 1 to 100.");
     for (const effect of card.effects ?? []) {
+      // Only these primary handlers deliver a separate pass to friendly recipients.
+      if (
+        (effect.kind === "heal" || effect.kind === "cleanse") &&
+        effect.target === "recipient" &&
+        !(card.effect === "heal" || (card.effect === "recover" && card.target === "ally"))
+      )
+        error(card.id, "effects", "Primary effect cannot deliver recipient-only effects");
+      if (
+        (effect.kind === "damage" || effect.kind === "purge") &&
+        !(card.effect === "attack" && card.target !== "allEnemies")
+      )
+        error(card.id, "effects", "Supplemental attack needs an individual opposing recipient");
       if (!Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 100)
         error(card.id, "effects", "Unsupported supplemental amount.");
       if (!isSupplementalKind(effect.kind)) error(card.id, "effects", "Unknown supplemental effect.");
