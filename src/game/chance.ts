@@ -1,5 +1,6 @@
+import { talentRule, type TalentRuleId } from "./rules/talents";
 import { battlefield } from "./battlefield";
-import { creaturePassive } from "./progression";
+import { hasTalent, passiveAmount } from "./progression";
 import { roll } from "./random";
 import type { GameEvent, GameState } from "./types";
 
@@ -24,10 +25,7 @@ export function chance(
   let percent = 0;
   for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
     if (unit.health <= 0) continue;
-    const amount = creaturePassive(enemy ? undefined : state, unit.species).effects.reduce(
-      (total, effect) => total + (effect.kind === "goodFortune" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(enemy ? undefined : state, unit.species, "goodFortune");
     if (amount > percent) {
       percent = amount;
       provider = unit;
@@ -42,4 +40,13 @@ export function chance(
     text: "Good Fortune turns the odds",
   });
   return true;
+}
+
+type PercentTalentId = {
+  [Id in TalentRuleId]: ReturnType<typeof talentRule<Id>> extends { percent: number } ? Id : never;
+}[TalentRuleId];
+
+/** Unowned Talents never consume RNG; the caller retains its effect and liveness guards. */
+export function talentChance(state: GameState, id: PercentTalentId, events: GameEvent[]): boolean {
+  return hasTalent(state, id) && chance(state, talentRule(id).percent / 100, false, events);
 }

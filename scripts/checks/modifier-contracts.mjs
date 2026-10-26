@@ -117,7 +117,6 @@ export function modifierContractViolations(sources) {
   const errors = [];
   const fail = (message) => errors.push(`${bindingFile}: ${message}`);
   const ast = parsed[bindingFile];
-  const bindings = declaredObject(ast, "owners");
   const owners = new Map();
   const functions = new Map();
   const selectors = new Map();
@@ -158,7 +157,8 @@ export function modifierContractViolations(sources) {
       const target = moduleImports.get(entry.callee.value);
       if (
         (target?.file === "src/game/progression.ts" && target.name === "hasTalent") ||
-        (target?.file === "src/game/rules/talents.ts" && target.name === "talentRule")
+        (target?.file === "src/game/rules/talents.ts" && target.name === "talentRule") ||
+        (target?.file === "src/game/chance.ts" && target.name === "talentChance")
       )
         talentSelectors.add(owner);
     });
@@ -207,6 +207,13 @@ export function modifierContractViolations(sources) {
             )
           ) &&
           !(
+            parent?.type === "CallExpression" &&
+            parent.callee.type === "Identifier" &&
+            moduleImports.get(parent.callee.value)?.file === "src/game/progression.ts" &&
+            moduleImports.get(parent.callee.value)?.name === "passiveAmount" &&
+            parent.arguments[2]?.expression === entry
+          ) &&
+          !(
             parent?.type === "ConditionalExpression" &&
             required.passives.includes(parent.consequent?.value) &&
             required.passives.includes(parent.alternate?.value)
@@ -238,24 +245,15 @@ export function modifierContractViolations(sources) {
         }
         for (const element of handlers.elements) {
           const handler = element?.expression;
-          const descriptor =
-            handler?.type === "MemberExpression" && handler.object.value === "owners"
-              ? property(bindings, handler.property.value)
-              : undefined;
-          const module = descriptor?.arguments?.[0]?.expression;
-          const name = descriptor?.arguments?.[1]?.expression;
-          if (
-            descriptor?.type !== "CallExpression" ||
-            descriptor.callee.value !== "bind" ||
-            module?.type !== "StringLiteral" ||
-            name?.type !== "StringLiteral"
-          ) {
+          const reference = handler?.type === "StringLiteral" && handler.value.match(/^(\.\/[^#]+)#([^#]+)$/);
+          if (!reference) {
             fail(`${key} must bind typed module/export references.`);
             continue;
           }
+          const [, module, name] = reference;
           const target = identity(
-            path.posix.normalize(path.posix.join(path.posix.dirname(bindingFile), module.value)) + ".ts",
-            name.value,
+            path.posix.normalize(path.posix.join(path.posix.dirname(bindingFile), module)) + ".ts",
+            name,
           );
           const selectorKey = `${group}:${key}`;
           if (!functions.has(target)) fail(`${key} binds a missing implementation: ${target}.`);

@@ -1,3 +1,4 @@
+import type { PassiveKind } from "./content/types";
 import {
   TALENTS,
   type TalentId,
@@ -22,6 +23,17 @@ export function creaturePassive(state: Pick<GameState, "discovery"> | undefined,
   const tiers = species(kind).passiveTiers;
   const rank = state ? creatureStars(state, kind) : 0;
   return { rank, ...tiers[rank]! };
+}
+/** Sum matching effects in authored order at the current rank; undefined state uses the enemy tier. */
+export function passiveAmount(
+  state: Pick<GameState, "discovery"> | undefined,
+  species: SpeciesId,
+  kind: PassiveKind,
+): number {
+  return creaturePassive(state, species).effects.reduce(
+    (sum, effect) => sum + (effect.kind === kind ? effect.amount : 0),
+    0,
+  );
 }
 export const KEYWORDS = PROGRESSION_KEYWORDS;
 export type Keyword = ProgressionKeyword;

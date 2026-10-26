@@ -33,11 +33,15 @@ export async function snapshot(
   sequence: number,
   parents: readonly CloudSnapshot[] = [],
 ): Promise<CloudSnapshot> {
-  // Own membership before hashing yields; callers may still own the input array.
-  parents = [...parents];
-  if (parents.some((parent) => parent.profile !== identity.profile))
+  // Own parent facts before hashing yields; readonly inputs can alias caller-owned data.
+  const parentsAtAdmission = parents.map((parent) => ({
+    id: parent.id,
+    profile: parent.profile,
+    ancestors: [...parent.ancestors],
+  }));
+  if (parentsAtAdmission.some((parent) => parent.profile !== identity.profile))
     throw new Error("Cloud ancestry belongs to another profile.");
-  if (new Set(parents.map((parent) => parent.id)).size > MAX_ANCESTORS)
+  if (new Set(parentsAtAdmission.map((parent) => parent.id)).size > MAX_ANCESTORS)
     throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
   const record: Omit<CloudSnapshot, "id"> = {
@@ -48,10 +52,9 @@ export async function snapshot(
     payload,
     hash: await sha(payload),
     // Retain every direct head before spending the bounded history on older ancestry.
-    ancestors: [...new Set([...parents.map((p) => p.id), ...parents.flatMap((p) => p.ancestors)])].slice(
-      0,
-      MAX_ANCESTORS,
-    ),
+    ancestors: [
+      ...new Set([...parentsAtAdmission.map((p) => p.id), ...parentsAtAdmission.flatMap((p) => p.ancestors)]),
+    ].slice(0, MAX_ANCESTORS),
   };
   Object.freeze(record.ancestors);
   return snapshotSchema.parse({ ...record, id: await sha(body(record)) });

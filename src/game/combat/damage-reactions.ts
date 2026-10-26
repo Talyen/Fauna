@@ -1,10 +1,10 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
-import { chance as succeeds } from "../chance";
+import { chance as succeeds, talentChance } from "../chance";
 import { battlefield, healingAllies, isEnemy, combatantById } from "../battlefield";
 import { roll } from "../random";
 import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
-import { hasTalent, creaturePassive } from "../progression";
+import { hasTalent, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import { ensureCombat, unitName, STACK_LIMIT, gainGold, removeArmor, type Combatant } from "./state";
@@ -92,10 +92,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
         origin: "proc",
       });
   }
-  const petals = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
-    (sum, effect) => sum + (effect.kind === "petalwake" ? effect.amount : 0),
-    0,
-  );
+  const petals = passiveAmount(alliedTarget ? state : undefined, target.species, "petalwake");
   if (petals > 0 && target.health > 0) {
     const side = alliedTarget ? "player" : "enemy";
     if (battlefield(state, side).some((unit) => unit.id === target.id))
@@ -105,10 +102,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
           yield* reaction("restoreHealth", ally, petals, events, false, state, false, target);
       }
   }
-  const cinderstep = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
-    (sum, effect) => sum + (effect.kind === "dodgeBurn" ? effect.amount : 0),
-    0,
-  );
+  const cinderstep = passiveAmount(alliedTarget ? state : undefined, target.species, "dodgeBurn");
   if (cinderstep)
     yield* reaction("hit", state, target, source, cinderstep, "burn", events, {
       origin: "statusRetaliation",
@@ -183,10 +177,7 @@ export function* passingFlame({ state, source, target, events }: HitContext): Re
   if (target.health > 0 || source.health <= 0 || isEnemy(source) === isEnemy(target)) return;
   const allied = !isEnemy(source);
   if (!battlefield(state, allied ? "player" : "enemy").some((unit) => unit.id === source.id)) return;
-  const percent = creaturePassive(allied ? state : undefined, source.species).effects.reduce(
-    (sum, effect) => sum + (effect.kind === "passingFlame" ? effect.amount : 0),
-    0,
-  );
+  const percent = passiveAmount(allied ? state : undefined, source.species, "passingFlame");
   const total = Math.round((ensureCombat(target).burn * percent) / 100);
   if (total <= 0) return;
   const recipients = battlefield(state, allied ? "enemy" : "player").filter((unit) => unit.health > 0);
@@ -248,8 +239,7 @@ export function* damageRewards(
       policy.leechRewards &&
       source.health > 0 &&
       type === "poison" &&
-      hasTalent(state, "leech.virulent-leech") &&
-      succeeds(state, talentRule("leech.virulent-leech").percent / 100, false, events)
+      talentChance(state, "leech.virulent-leech", events)
     )
       yield* reaction("leechHealth", state, source, dealt, events, true, target);
     if (
@@ -293,10 +283,7 @@ export function* waterFollowups(
   if (hasTalent(state, "water.erosion")) {
     erode(talentRule("water.erosion").amount);
   }
-  if (
-    hasTalent(state, "water.cleansing-current") &&
-    succeeds(state, talentRule("water.cleansing-current").percent / 100, false, events)
-  )
+  if (talentChance(state, "water.cleansing-current", events))
     yield* reaction(
       "removeEffects",
       source,
@@ -305,11 +292,7 @@ export function* waterFollowups(
       events,
       state,
     );
-  if (
-    hasTalent(state, "water.riptide") &&
-    succeeds(state, talentRule("water.riptide").percent / 100, false, events)
-  )
-    drawKeyword(state, "water", events);
+  if (talentChance(state, "water.riptide", events)) drawKeyword(state, "water", events);
 }
 export function* attackProcs(
   { state, source, target, type, events }: HitContext,
@@ -331,31 +314,21 @@ export function* attackProcs(
 ): Resolution<void> {
   const stats = ensureCombat(target);
   if (source.health > 0) {
-    if (
-      type === "nature" &&
-      hasTalent(state, "nature.bramblegrowth") &&
-      succeeds(state, talentRule("nature.bramblegrowth").percent / 100, false, events)
-    )
+    if (type === "nature" && talentChance(state, "nature.bramblegrowth", events))
       yield* reaction("grantStatus", source, "thorns", damage, events, state);
-    if (
-      type === "light" &&
-      lost > 0 &&
-      hasTalent(state, "light.faith-barrier") &&
-      succeeds(state, talentRule("light.faith-barrier").percent / 100, false, events)
-    )
+    if (type === "light" && lost > 0 && talentChance(state, "light.faith-barrier", events))
       yield* reaction("grantBlock", state, source, lost, events);
   }
   if (source.health > 0) {
-    const proc = (id: import("../content").TalentId, chance: number) =>
-      source.health > 0 && hasTalent(state, id) && succeeds(state, chance, false, events);
+    const proc = (id: Parameters<typeof talentChance>[1]) =>
+      source.health > 0 && talentChance(state, id, events);
 
     if (type === "physical") {
-      if (proc("physical.heavy-blows", talentRule("physical.heavy-blows").percent / 100))
+      if (proc("physical.heavy-blows"))
         yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
-      if (proc("physical.lacerate", talentRule("physical.lacerate").percent / 100))
+      if (proc("physical.lacerate"))
         yield* reaction("hit", state, source, target, damage, "bleed", events, { origin: "proc" });
-      if (proc("armor.iron-guard", talentRule("armor.iron-guard").percent / 100))
-        yield* reaction("grantArmor", state, source, damage, events);
+      if (proc("armor.iron-guard")) yield* reaction("grantArmor", state, source, damage, events);
       if (partingCut && source.health > 0)
         yield* reaction("hit", state, source, target, Math.round(damage / 2), "bleed", events, {
           origin: "proc",
@@ -364,44 +337,41 @@ export function* attackProcs(
         yield* detonateBleed(state, source, target, events);
     }
     if (type === "nature") {
-      if (proc("nature.thornskin", talentRule("nature.thornskin").percent / 100))
-        yield* reaction("grantArmor", state, source, damage, events);
-      if (proc("nature.photosynthesis", talentRule("nature.photosynthesis").percent / 100))
+      if (proc("nature.thornskin")) yield* reaction("grantArmor", state, source, damage, events);
+      if (proc("nature.photosynthesis"))
         yield* reaction("restoreHealth", source, damage, events, false, state);
-      if (proc("nature.briar-patch", talentRule("nature.briar-patch").percent / 100))
+      if (proc("nature.briar-patch"))
         yield* reaction("hit", state, source, target, damage, "bleed", events, { origin: "proc" });
-      if (proc("nature.toxic-pollen", talentRule("nature.toxic-pollen").percent / 100))
+      if (proc("nature.toxic-pollen"))
         yield* reaction("hit", state, source, target, damage, "poison", events, { origin: "proc" });
-      if (proc("nature.entangle", talentRule("nature.entangle").percent / 100))
+      if (proc("nature.entangle"))
         yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
     }
-    if (type === "burn" && proc("burn.heat-exhaustion", talentRule("burn.heat-exhaustion").percent / 100))
+    if (type === "burn" && proc("burn.heat-exhaustion"))
       yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
     if (type === "poison") {
-      if (proc("poison.hemotoxin", talentRule("poison.hemotoxin").percent / 100))
+      if (proc("poison.hemotoxin"))
         yield* reaction("hit", state, source, target, damage, "bleed", events, { origin: "proc" });
-      if (proc("poison.paralytic-venom", talentRule("poison.paralytic-venom").percent / 100))
+      if (proc("poison.paralytic-venom"))
         yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
     }
     if (type === "bleed") {
-      if (proc("bleed.flay", talentRule("bleed.flay").percent / 100))
-        erode(stats.armor - Math.round(stats.armor / 2));
-      if (proc("bleed.tainted-wound", talentRule("bleed.tainted-wound").percent / 100))
+      if (proc("bleed.flay")) erode(stats.armor - Math.round(stats.armor / 2));
+      if (proc("bleed.tainted-wound"))
         yield* reaction("hit", state, source, target, Math.round(damage / 2), "poison", events, {
           origin: "proc",
         });
-      if (proc("bleed.bloodrush", talentRule("bleed.bloodrush").percent / 100)) draw(state, 1, events);
+      if (proc("bleed.bloodrush")) draw(state, 1, events);
     }
     if (type === "light") {
-      if (proc("light.scorching-light", talentRule("light.scorching-light").percent / 100))
+      if (proc("light.scorching-light"))
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
-      if (lost > 0 && proc("light.tithe", talentRule("light.tithe").percent / 100))
-        gainGold(state, lost, events);
+      if (lost > 0 && proc("light.tithe")) gainGold(state, lost, events);
     }
     const chanceLeech =
-      (type === "bleed" && proc("bleed.sanguine", talentRule("bleed.sanguine").percent / 100)) ||
-      (type === "poison" && proc("leech.virulent-leech", talentRule("leech.virulent-leech").percent / 100)) ||
-      (type === "nature" && proc("nature.verdant-cycle", talentRule("nature.verdant-cycle").percent / 100));
+      (type === "bleed" && proc("bleed.sanguine")) ||
+      (type === "poison" && proc("leech.virulent-leech")) ||
+      (type === "nature" && proc("nature.verdant-cycle"));
     if (chanceLeech && type === "bleed" && !leech) {
       if (!suppressed) deferLeech(stats, source.id, Math.max(0, stats.bleed - bleedBefore));
     } else if (chanceLeech && !leech && !blessedLeech)
@@ -448,10 +418,7 @@ export function* passiveRetaliation(
 ): Resolution<void> {
   const alliedTarget = !isEnemy(target);
   if (target.health > 0 && source.health > 0) {
-    const amount = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "poisonRetaliation" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(alliedTarget ? state : undefined, target.species, "poisonRetaliation");
     if (amount > 0)
       yield* reaction("hit", state, target, source, amount, "poison", events, {
         origin: "statusRetaliation",
@@ -459,10 +426,7 @@ export function* passiveRetaliation(
   }
   // Only direct attacks burst the bubble; derived damage cannot start retaliation chains
   if (depletedBlock && target.health > 0 && source.health > 0) {
-    const amount = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "blockBreak" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(alliedTarget ? state : undefined, target.species, "blockBreak");
     if (amount > 0)
       yield* reaction("hit", state, target, source, amount, "water", events, { origin: "retaliation" });
   }

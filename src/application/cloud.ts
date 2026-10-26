@@ -56,6 +56,7 @@ export function createCloud(
   let durable: string | null = null;
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
   let retrying = false;
+  let retryOperation: Promise<void> | undefined;
   let startup: Promise<void> | undefined;
   let metadataWrites = Promise.resolve();
   const scheduleRetry = () => {
@@ -64,11 +65,7 @@ export function createCloud(
     retryTimer = setTimeout(() => {
       retryTimer = undefined;
       retrying = true;
-      const token = generation + 1;
-      const operation = lifecycle === "ready" ? reconcile(true) : initialize(localData, true);
-      void bounded(operation, 5000, () => {
-        if (owns(token)) offline();
-      }).finally(() => {
+      void retry().finally(() => {
         retrying = false;
         if (view.status === "Pending") scheduleRetry();
       });
@@ -77,7 +74,11 @@ export function createCloud(
   const update = (patch: Partial<CloudView>) => {
     if (alive()) {
       view = Object.freeze({ ...view, ...patch });
-      publish(view);
+      try {
+        publish(view);
+      } catch {
+        // Observers cannot cancel persistence, transport or retry scheduling.
+      }
       if (view.status === "Pending") scheduleRetry();
       else {
         clearTimeout(retryTimer);
@@ -329,6 +330,22 @@ export function createCloud(
       update({ status: identity?.enabled === false ? "Unavailable" : "Pending", error: errorText(error) });
     }
   }
+  function retry() {
+    if (!alive()) return Promise.resolve();
+    // Own retry before status publication can synchronously request it again.
+    return (retryOperation ??= Promise.resolve()
+      .then(() => {
+        const background = localData !== null;
+        const token = generation + 1;
+        const operation = lifecycle === "ready" ? reconcile(background) : initialize(localData, background);
+        return bounded(operation, 5000, () => {
+          if (owns(token)) offline();
+        });
+      })
+      .finally(() => {
+        retryOperation = undefined;
+      }));
+  }
   return {
     get view() {
       return view;
@@ -344,16 +361,7 @@ export function createCloud(
       }));
     },
     commit,
-    retry() {
-      if (!alive()) return Promise.resolve();
-      // Once local play exists, retries can reconcile ancestry but cannot install another journey.
-      const background = localData !== null;
-      const token = generation + 1;
-      const operation = lifecycle === "ready" ? reconcile(background) : initialize(localData, background);
-      return bounded(operation, 5000, () => {
-        if (owns(token)) offline();
-      });
-    },
+    retry,
     offline,
     async flush(timeout = 2000) {
       await bounded(

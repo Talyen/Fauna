@@ -32,7 +32,7 @@ const storedDiagnostic = z.object({
 });
 const sanitize = (value: string) =>
   value
-    .replace(/(?:\/[\w .-]+){2,}\/|[A-Za-z]:\\(?:[^\\\n]+\\)+/g, "[path]/")
+    .replace(/(?:\/[^/\r\n]+){2,}\/|[A-Za-z]:\\(?:[^\\\n]+\\)+/g, "[path]/")
     .replace(
       /(?:token|password|secret|authorization)["']?\s*[:=]\s*(?:(?:Bearer|Basic)\s+)?(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\S+)/gi,
       "[redacted]",
