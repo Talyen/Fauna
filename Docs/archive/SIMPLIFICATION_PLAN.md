@@ -1,6 +1,6 @@
 # Codebase simplification plan
 
-Historical proposal; the [implementation record](SIMPLIFICATION_IMPLEMENTATION.md) records completion of all six changes. The assessment below retains its original baseline, recommendations and acceptance criteria.
+Historical proposal; the [implementation record](SIMPLIFICATION_IMPLEMENTATION.md) records completion of all six changes. The assessment below retains its original baseline, recommendations and acceptance criteria. Links to removed source files point to that baseline commit.
 
 Assessment date: October 23, 2026. Source baseline: `f7f319eed8399671608f6207c67af7f6898afa45`.
 
@@ -26,7 +26,7 @@ Orders 1–3 offer the clearest removal of concepts. Order 6 has substantial rel
 ### Evidence and cost
 
 - [Encounter rules](../../src/game/encounters.ts), lines 90–130, implement two meanings of an encounter: saved expedition packs, or `ENCOUNTERS` when `expedition` is null. Final victory is encounter eight in one mode and encounter three in the other; Boss detection also changes by mode
-- [Legacy encounter content](../../src/game/content/encounters.ts), lines 3–35, explicitly describes itself as a stable legacy route
+- [Legacy encounter content](https://github.com/Talyen/Fauna/blob/f7f319eed8399671608f6207c67af7f6898afa45/src/game/content/encounters.ts), lines 3–35, explicitly describes itself as a stable legacy route
 - [Journey transitions](../../src/game/journey.ts), lines 267–305, conditionally prepare destinations depending on this mode
 - [State schemas](../../src/game/state-schema.ts), lines 171–193 and 222–241, admit nullable expedition state in most phases; [save validation](../../src/game/save.ts), lines 56–68, specifically allows its short route
 - [Destination presentation](../../src/ui/expedition/team-selection.tsx), line 35, displays either eight or three encounters
@@ -67,7 +67,7 @@ Use the existing [encounter](../../tests/unit/game/encounters.test.ts), [journey
 - [Game creation](../../src/game/engine.ts), line 45, installs all authored species in `unlocked`; `newRun` copies that list at line 390
 - [State schemas](../../src/game/state-schema.ts), line 135, require that array to have the full catalog length; [save validation](../../src/game/save.ts), lines 69–74, requires every catalog species and uniqueness
 - The journey schema at [line 206](../../src/game/state-schema.ts) allows zero entries in `journey.unlocks`
-- Nevertheless, [unlock observation](../../src/ui/expedition/unlock-reveals.ts) subscribes to state changes and computes new unlocks. [The shell](../../src/ui/shell/game-shell.tsx), lines 84–89, 122–127 and 347–357, owns pending reveals, an active reveal queue and a special route. [The reveal screen](../../src/ui/expedition/unlock-screen.tsx) remains mounted conditionally
+- Nevertheless, [unlock observation](https://github.com/Talyen/Fauna/blob/f7f319eed8399671608f6207c67af7f6898afa45/src/ui/expedition/unlock-reveals.ts) subscribes to state changes and computes new unlocks. [The shell](../../src/ui/shell/game-shell.tsx), lines 84–89, 122–127 and 347–357, owns pending reveals, an active reveal queue and a special route. [The reveal screen](https://github.com/Talyen/Fauna/blob/f7f319eed8399671608f6207c67af7f6898afa45/src/ui/expedition/unlock-screen.tsx) remains mounted conditionally
 
 A validated current-format session cannot produce a fresh reveal through these rules. The pipeline contributes live subscription and navigation code without a reachable current gameplay outcome. Static unused-code tools cannot catch this because the components and functions still reference one another.
 

@@ -4,6 +4,8 @@
 
 ## Combat rules
 
+These are the shared rules. Explicit creature, Talent and [Boon contracts](CONTENT.md#boon-selections) can modify them; the linked owners define those exceptions.
+
 ### Damage identities
 
 Fauna adapts Alchemy's combat foundations to individual creatures. Physical, Nature, Water and Light are direct damage types. Water has a distinct blue identity, applies no status, is absorbed by Block and bypasses Armor reduction. Light retains Holy as a presentation alias. Burn, Freeze and Stun are the canonical damage identities; Fire, Ice and Lightning are not separate keywords or damage types. Health covers both remaining life and restoration; Healing is not a separate keyword.
@@ -36,7 +38,7 @@ Fire Thorns retaliate with Burn damage and equal Burn buildup using their curren
 
 ### Blind
 
-Blind gives the next attack a 50% miss chance and expires on that attack, hit or miss; one seeded roll covers all its targets and damage packets. A miss uses the recipient's ordinary Dodge outcome, rewards and icon, even if control prevents normal Dodge. Support actions, periodic damage and retaliation do not consume Blind. Blind is non-stacking, Cleanseable and reflectable.
+Blind gives the next attack a 50% miss chance and expires on that attack, hit or miss; one seeded roll covers all its targets and damage packets. A miss uses the recipient's ordinary Dodge outcome, rewards and icon, even if control prevents normal Dodge. Support actions, periodic damage and retaliation do not consume Blind. Blind is non-stacking, Cleanseable and reflectable. [Moonveil Mask](CONTENT.md#resonant-artifact-boons) lets enemy Blind persist when its own roll causes the miss.
 
 ### Temporary Dodge
 
@@ -62,7 +64,7 @@ A pending Reflect charge guarantees the next eligible reflection before passive 
 
 ### Negate
 
-**Negate** cancels the next incoming ability attack against its recipient after interception and before Dodge, preserving Block and Armor and preventing that attack's harmful follow-ups on that recipient. Thorns and Water Thorns still retaliate once with their normal decay. A Blind miss leaves protection intact; other recipients of an area attack and a subsequent repeat resolve independently. Periodic, proc and retaliation packets do not consume it. Protection does not stack, lasts until consumed or Purged and persists through swaps and resume. Dream Double grants it to its actor. Negate awards no separate keyword XP
+**Negate** cancels the next incoming ability attack against its recipient after interception and before Dodge, preserving Block and Armor and preventing that attack's harmful follow-ups on that recipient. Nature, Water and Fire Thorns still retaliate once with their normal decay. A Blind miss leaves protection intact; other recipients of an area attack and a subsequent repeat resolve independently. Periodic, proc and retaliation packets do not consume it. Protection does not stack, lasts until consumed or Purged and persists through swaps and resume. Dream Double grants it to its actor. Negate awards no separate keyword XP. [Echo Lens](CONTENT.md#resonant-artifact-boons) can return that same Negated enemy attack through the existing attack-reflection rules
 
 ### Attack Reflection
 
@@ -77,6 +79,10 @@ Resurrect returns a knocked-out roster ally with 20% of maximum Health, rounded 
 ### Food
 
 Food cards are shared consumables without a creature owner. They cost 1 Mana and have Consume. Apple and Trail Bread target a living ally; Mana Berries add shared Mana. They survive creator departure and recycle when unplayed. [The Food owner](../src/game/content/food.ts) defines the pool; [Orifable](content/creatures/orifable.md#shared-food) records full ownership and targeting rules. Food is card vocabulary and awards no separate keyword XP.
+
+### Draws and returns
+
+Ordinary, keyword and owner-specific draws use the shared [card-zone owner](../src/game/card-zones.ts). Direct Discard recovery, including Cadenza, Almanelle and Wisterelle, also counts as a draw: it retains the existing card’s identity and can trigger Well Read, draw Boons and Wisterelle’s Lost and Found. Copies and overflow promotion do not create additional draws. Dream Yo-Yo and Cloud Cup-and-Ball return cards without drawing; recycling Discard into Draw does not itself trigger Lost and Found.
 
 ### Consume
 
@@ -106,7 +112,7 @@ A Mana Crystal is one point of maximum Mana; Raincatcher Bowl adds one while the
 
 ### Repeats and derived effects
 
-Creature-owned Dodge follow-ups, free-card charges and once-per-battle defenses persist through swaps and resume. Repeated cards resolve their full effects at most twice and stop if their actor or attack target falls. Ability and damage repeats spend no extra Mana and grant no extra XP or accepted-play count. Dancing Double prepares the side’s next card, including shared Food, to resolve twice; the pending grant survives turns, swaps and resume and never stacks with other repeats beyond two resolutions. Supplemental talent damage can build statuses and control but cannot Dodge, critically hit, retaliate or trigger another chance-damage chain.
+Creature-owned Dodge follow-ups, free-card charges and once-per-battle defenses persist through swaps and resume. Repeated cards resolve their full effects at most twice and stop if their actor falls. A fallen individual attack target normally ends the repeat; [Dream Tangram](CONTENT.md#elegant-artifact-boons) redirects an already-granted repeat to the first living opponent without adding another resolution. Ability and damage repeats spend no extra Mana and grant no extra XP or accepted-play count. Dancing Double prepares the side’s next card, including shared Food, to resolve twice; the pending grant survives turns, swaps and resume and never stacks with other repeats beyond two resolutions. Supplemental talent damage can build statuses and control but cannot Dodge, critically hit, retaliate or trigger another chance-damage chain.
 
 Card-only overhealing can grant Block or Cleanse; ordinary healing and Leech cannot. Passive healing uses ordinary healing modifiers and healing-triggered Boons, without card-only overhealing rewards or ability-only healing bounces.
 

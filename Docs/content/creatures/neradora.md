@@ -12,7 +12,7 @@ Neradora has 28 Health and is available through ordinary encounters, recruitment
 
 Undertow Knot uses shared [Water Thorns](../../KEYWORDS.md#thorns-and-water-thorns), retaining their Water identity through protection sharing. It grants Water XP, Bloom Shelter Health XP and Tide Cup Mana XP once per accepted play.
 
-Bloom Shelter heals every living deployed ally, including Neradora, without reviving knockouts or reaching backup. Tide Cup draws before restoring Mana, follows ordinary hand and Mana caps and refunds before automatic end turn. Enemies omit Tide Cup and alternate Undertow Knot and Bloom Shelter using authored ability values and explicit room power. The current save format persists Water Thorns.
+Bloom Shelter heals every living deployed ally, including Neradora, without reviving knockouts or reaching backup. Tide Cup draws before restoring Mana, follows ordinary hand and Mana caps and refunds before automatic end turn. Enemies omit Tide Cup and rank Undertow Knot and Bloom Shelter through the shared [decision policy](../../EXPEDITION_DESIGN.md#enemy-decisions), using authored values and explicit room power. The current save format persists Water Thorns.
 
 ## Artwork provenance and validation record
 
