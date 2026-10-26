@@ -16,20 +16,8 @@ export const arabesca: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("arabesca", "Ribbon Snare", 6, "stun"),
-      id: "arabesca-ribbon-snare",
-      artwork: "action.arabesca.ribbon-snare",
-    },
-    {
-      ...card("arabesca", "Springbound", "springbound", 30),
-      id: "arabesca-springbound",
-      artwork: "action.arabesca.springbound",
-    },
-    {
-      ...card("arabesca", "Dancing Double", "repeatNextCard", 1),
-      id: "arabesca-dancing-double",
-      artwork: "action.arabesca.dancing-double",
-    },
+    attack("arabesca-ribbon-snare", "Ribbon Snare", 6, "stun"),
+    card("arabesca-springbound", "Springbound", "springbound", 30),
+    card("arabesca-dancing-double", "Dancing Double", "repeatNextCard", 1),
   ],
 };

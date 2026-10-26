@@ -16,20 +16,10 @@ export const tournelle: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("tournelle", "Kindled Courage", "teamClearBlind", 1),
+    card("tournelle-teamClearBlind", "Kindled Courage", "teamClearBlind", 1, {
       effects: [{ kind: "drawKeyword", keyword: "light", amount: 1 }],
-      artwork: "action.tournelle.kindled-courage",
-    },
-    {
-      ...attack("tournelle", "Valiant Challenge", 4, "light"),
-      doubleAgainstHealthier: true,
-      artwork: "action.tournelle.valiant-challenge",
-    },
-    {
-      ...card("tournelle", "Safe Passage", "swapLowest", 1),
-      effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.tournelle.safe-passage",
-    },
+    }),
+    attack("tournelle-attack", "Valiant Challenge", 4, "light", { doubleAgainstHealthier: true }),
+    card("tournelle-swapLowest", "Safe Passage", "swapLowest", 1, { effects: [{ kind: "draw", amount: 1 }] }),
   ],
 };

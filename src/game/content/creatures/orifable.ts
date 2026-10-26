@@ -17,16 +17,8 @@ export const orifable: CreatureKit = {
     })),
   },
   cards: [
-    { ...card("orifable", "Care Package", "createFood", 2), artwork: "action.orifable.care-package" },
-    {
-      ...card("orifable", "Good Tidings", "heal", 6),
-      target: "mostInjured",
-      artwork: "action.orifable.good-tidings",
-    },
-    {
-      ...attack("orifable", "Postal Swarm", 2, "physical"),
-      target: "allEnemies",
-      artwork: "action.orifable.postal-swarm",
-    },
+    card("orifable-createFood", "Care Package", "createFood", 2),
+    card("orifable-heal", "Good Tidings", "heal", 6, { target: "mostInjured" }),
+    attack("orifable-attack", "Postal Swarm", 2, "physical", { target: "allEnemies" }),
   ],
 };

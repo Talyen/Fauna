@@ -15,22 +15,8 @@ export const neradora: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("neradora", "Undertow Knot", "waterThorns", 3),
-      id: "neradora-undertow-knot",
-      artwork: "action.neradora.undertow-knot",
-    },
-    {
-      ...card("neradora", "Bloom Shelter", "heal", 2),
-      id: "neradora-bloom-shelter",
-      target: "allAllies",
-      artwork: "action.neradora.bloom-shelter",
-    },
-    {
-      ...card("neradora", "Tide Cup", "draw", 2),
-      id: "neradora-tide-cup",
-      effects: [{ kind: "mana", amount: 1 }],
-      artwork: "action.neradora.tide-cup",
-    },
+    card("neradora-undertow-knot", "Undertow Knot", "waterThorns", 3),
+    card("neradora-bloom-shelter", "Bloom Shelter", "heal", 2, { target: "allAllies" }),
+    card("neradora-tide-cup", "Tide Cup", "draw", 2, { effects: [{ kind: "mana", amount: 1 }] }),
   ],
 };

@@ -15,24 +15,14 @@ export const cindernewt: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("cindernewt", "Cinder Lash", 6, "physical"),
-      alternateDamageType: "burn",
-      artwork: "action.cindernewt.cinder-lash",
-    },
-    {
-      ...attack("cindernewt", "Ember Breath", 1, "burn"),
-      id: "cindernewt-ember-breath",
+    attack("cindernewt-attack", "Cinder Lash", 6, "physical", { alternateDamageType: "burn" }),
+    attack("cindernewt-ember-breath", "Ember Breath", 1, "burn", {
       target: "allEnemies",
       effects: [{ kind: "meltArmor", amount: 50 }],
-      artwork: "action.cindernewt.ember-breath",
-    },
-    {
-      ...attack("cindernewt", "Ashen Veil", 1, "burn"),
-      id: "cindernewt-ashen-veil",
+    }),
+    attack("cindernewt-ashen-veil", "Ashen Veil", 1, "burn", {
       target: "allEnemies",
       effects: [{ kind: "blind", amount: 1 }],
-      artwork: "action.cindernewt.ashen-veil",
-    },
+    }),
   ],
 };

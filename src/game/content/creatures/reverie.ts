@@ -16,20 +16,8 @@ export const reverie: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("reverie", "Waking Wonder", "draw", 2),
-      id: "reverie-waking-wonder",
-      artwork: "action.reverie.waking-wonder",
-    },
-    {
-      ...card("reverie", "Dream Double", "dreamDouble", 3),
-      id: "reverie-dream-double",
-      artwork: "action.reverie.dream-double",
-    },
-    {
-      ...card("reverie", "Nightmare Harvest", "nightmareHarvest", 1),
-      id: "reverie-nightmare-harvest",
-      artwork: "action.reverie.nightmare-harvest",
-    },
+    card("reverie-waking-wonder", "Waking Wonder", "draw", 2),
+    card("reverie-dream-double", "Dream Double", "dreamDouble", 3),
+    card("reverie-nightmare-harvest", "Nightmare Harvest", "nightmareHarvest", 1),
   ],
 };

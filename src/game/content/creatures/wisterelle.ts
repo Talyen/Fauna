@@ -16,25 +16,16 @@ export const wisterelle: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("wisterelle", "Forgotten Junction", "swapChosen", 1),
-      id: "wisterelle-forgotten-junction",
+    card("wisterelle-forgotten-junction", "Forgotten Junction", "swapChosen", 1, {
       effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.wisterelle.forgotten-junction",
-    },
-    {
-      ...card("wisterelle", "Lantern Fare", "heal", 3),
-      id: "wisterelle-lantern-fare",
+    }),
+    card("wisterelle-lantern-fare", "Lantern Fare", "heal", 3, {
       target: "injured",
       effects: [{ kind: "mana", amount: 1 }],
-      artwork: "action.wisterelle.lantern-fare",
-    },
-    {
-      ...card("wisterelle", "Left Luggage", "recover", 1),
-      id: "wisterelle-left-luggage",
+    }),
+    card("wisterelle-left-luggage", "Left Luggage", "recover", 1, {
       allyOnly: true,
       effects: [{ kind: "mana", amount: 1 }],
-      artwork: "action.wisterelle.left-luggage",
-    },
+    }),
   ],
 };

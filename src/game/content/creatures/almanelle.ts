@@ -17,25 +17,16 @@ export const almanelle: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("almanelle", "Spring Current", 4, "water"),
-      id: "almanelle-spring-current",
+    attack("almanelle-spring-current", "Spring Current", 4, "water", {
       effects: [{ kind: "cleanse", amount: 1 }],
-      artwork: "action.almanelle.spring-current",
-    },
-    {
-      ...card("almanelle", "Autumn Insight", "recover", 1),
-      id: "almanelle-autumn-insight",
+    }),
+    card("almanelle-autumn-insight", "Autumn Insight", "recover", 1, {
       target: "ally",
       effects: [{ kind: "heal", amount: 3, target: "recipient" }],
-      artwork: "action.almanelle.autumn-insight",
-    },
-    {
-      ...card("almanelle", "Rooted Year", "guard", 3),
+    }),
+    card("almanelle-rooted-year", "Rooted Year", "guard", 3, {
       target: "self",
       effects: [{ kind: "status", status: "thorns", amount: 3 }],
-      id: "almanelle-rooted-year",
-      artwork: "action.almanelle.rooted-year",
-    },
+    }),
   ],
 };

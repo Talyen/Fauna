@@ -15,20 +15,11 @@ export const chimecricket: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("chimecricket", "Resonant Leap", 4, "stun"),
-      effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.chimecricket.resonant-leap",
-    },
-    {
-      ...card("chimecricket", "Hush Dome", "nullify", 1),
-      artwork: "action.chimecricket.hush-dome",
-    },
-    {
-      ...card("chimecricket", "Lullaby Drift", "heal", 4),
+    attack("chimecricket-attack", "Resonant Leap", 4, "stun", { effects: [{ kind: "draw", amount: 1 }] }),
+    card("chimecricket-nullify", "Hush Dome", "nullify", 1),
+    card("chimecricket-heal", "Lullaby Drift", "heal", 4, {
       target: "mostInjured",
       effects: [{ kind: "cleanse", amount: 6, target: "recipient" }],
-      artwork: "action.chimecricket.lullaby-drift",
-    },
+    }),
   ],
 };

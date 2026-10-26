@@ -16,22 +16,11 @@ export const aerostat: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("aerostat", "Voyager’s Rest", "guard", 6),
-      id: "aerostat-voyagers-rest",
+    card("aerostat-voyagers-rest", "Voyager’s Rest", "guard", 6, {
       target: "self",
       artwork: "action.aerostat.voyagers-rest",
-    },
-    {
-      ...card("aerostat", "True Bearing", "teamClearBlind", 2),
-      id: "aerostat-true-bearing",
-      draw: true,
-      artwork: "action.aerostat.true-bearing",
-    },
-    {
-      ...card("aerostat", "Parcel Drop", "createFood", 2),
-      id: "aerostat-parcel-drop",
-      artwork: "action.aerostat.parcel-drop",
-    },
+    }),
+    card("aerostat-true-bearing", "True Bearing", "teamClearBlind", 2, { draw: true }),
+    card("aerostat-parcel-drop", "Parcel Drop", "createFood", 2),
   ],
 };

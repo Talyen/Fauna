@@ -15,22 +15,14 @@ export const shadebrim: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("shadebrim", "Noonward", "guard", 4),
+    card("shadebrim-guard", "Noonward", "guard", 4, {
       target: "self",
       effects: [{ kind: "reflect", amount: 1, status: "burn" }],
-      artwork: "action.shadebrim.noonward",
-    },
-    {
-      ...attack("shadebrim", "Coolfront", 1, "freeze"),
+    }),
+    attack("shadebrim-attack", "Coolfront", 1, "freeze", {
       target: "allEnemies",
       effects: [{ kind: "cleanse", amount: 7, target: "allAllies" }],
-      artwork: "action.shadebrim.coolfront",
-    },
-    {
-      ...card("shadebrim", "Noon Bloom", "draw", 2),
-      effects: [{ kind: "mana", amount: 1 }],
-      artwork: "action.shadebrim.noon-bloom",
-    },
+    }),
+    card("shadebrim-draw", "Noon Bloom", "draw", 2, { effects: [{ kind: "mana", amount: 1 }] }),
   ],
 };

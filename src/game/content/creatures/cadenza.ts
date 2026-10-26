@@ -15,23 +15,11 @@ export const cadenza: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("cadenza", "Resonant Well", "draw", 2),
-      id: "cadenza-resonant-well",
-      effects: [{ kind: "mana", amount: 1 }],
-      artwork: "action.cadenza.resonant-well",
-    },
-    {
-      ...card("cadenza", "Echoes Remember", "recover", 1),
-      id: "cadenza-echoes-remember",
-      artwork: "action.cadenza.echoes-remember",
-    },
-    {
-      ...card("cadenza", "Rousing Refrain", "dodge", 20),
+    card("cadenza-resonant-well", "Resonant Well", "draw", 2, { effects: [{ kind: "mana", amount: 1 }] }),
+    card("cadenza-echoes-remember", "Echoes Remember", "recover", 1),
+    card("cadenza-rousing-refrain", "Rousing Refrain", "dodge", 20, {
       target: "allAllies",
-      id: "cadenza-rousing-refrain",
       effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.cadenza.rousing-refrain",
-    },
+    }),
   ],
 };

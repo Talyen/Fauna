@@ -15,21 +15,8 @@ export const euphera: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("euphera", "Twilight Lance", 5, "light"),
-      id: "euphera-twilight-lance",
-      purgeThorns: true,
-      artwork: "action.euphera.twilight-lance",
-    },
-    {
-      ...card("euphera", "Wish Exchange", "redistributeBlock", 1),
-      id: "euphera-wish-exchange",
-      artwork: "action.euphera.wish-exchange",
-    },
-    {
-      ...card("euphera", "Possible Path", "redraw", 1),
-      id: "euphera-possible-path",
-      artwork: "action.euphera.possible-path",
-    },
+    attack("euphera-twilight-lance", "Twilight Lance", 5, "light", { purgeThorns: true }),
+    card("euphera-wish-exchange", "Wish Exchange", "redistributeBlock", 1),
+    card("euphera-possible-path", "Possible Path", "redraw", 1),
   ],
 };

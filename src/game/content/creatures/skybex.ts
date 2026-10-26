@@ -16,17 +16,8 @@ export const skybex: CreatureKit = {
     })),
   },
   cards: [
-    { ...card("skybex", "Far Horizon", "draw", 2), artwork: "action.skybex.far-horizon" },
-    {
-      ...card("skybex", "Cloudstep", "swapDodge", 20),
-      id: "skybex-cloudstep",
-      artwork: "action.skybex.cloudstep",
-    },
-    {
-      ...attack("skybex", "Sky Shepherd", 2, "nature"),
-      id: "skybex-sky-shepherd",
-      target: "allEnemies",
-      artwork: "action.skybex.sky-shepherd",
-    },
+    card("skybex-draw", "Far Horizon", "draw", 2),
+    card("skybex-cloudstep", "Cloudstep", "swapDodge", 20),
+    attack("skybex-sky-shepherd", "Sky Shepherd", 2, "nature", { target: "allEnemies" }),
   ],
 };

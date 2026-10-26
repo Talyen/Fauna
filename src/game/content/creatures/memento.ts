@@ -1,4 +1,5 @@
 import { sixPassiveTiers } from "../passive-tiers";
+import { card } from "../card-builders";
 import type { CreatureKit, CardDefinition } from "../types";
 export const memento: CreatureKit = {
   species: {
@@ -15,42 +16,9 @@ export const memento: CreatureKit = {
     })),
   },
   cards: [
-    {
-      id: "memento-lost-procession",
-      species: "memento",
-      name: "Lost Procession",
-      effect: "procession",
-      value: 6,
-      cost: 1,
-      artwork: "action.memento.lost-procession",
-    },
-    {
-      id: "memento-treasury-echo",
-      species: "memento",
-      name: "Treasury Echo",
-      effect: "createPearls",
-      value: 2,
-      cost: 1,
-      artwork: "action.memento.treasury-echo",
-    },
-    {
-      id: "memento-drowned-revelation",
-      species: "memento",
-      name: "Drowned Revelation",
-      effect: "draw",
-      value: 2,
-      cost: 1,
-      artwork: "action.memento.drowned-revelation",
-    },
+    card("memento-lost-procession", "Lost Procession", "procession", 6),
+    card("memento-treasury-echo", "Treasury Echo", "createPearls", 2),
+    card("memento-drowned-revelation", "Drowned Revelation", "draw", 2),
   ],
 };
-export const PEARL: CardDefinition = {
-  id: "memento-pearl",
-  species: "memento",
-  name: "Pearl",
-  effect: "pearl",
-  consume: true,
-  value: 2,
-  cost: 1,
-  artwork: "action.memento.pearl",
-};
+export const PEARL: CardDefinition = card("memento-pearl", "Pearl", "pearl", 2, { consume: true });

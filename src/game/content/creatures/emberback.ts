@@ -15,22 +15,10 @@ export const emberback: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("emberback", "Ember Charge", 4, "physical"),
-      artwork: "action.emberback.ember-charge",
+    attack("emberback-attack", "Ember Charge", 4, "physical", {
       effects: [{ kind: "status", status: "armor", amount: 2 }],
-    },
-    {
-      ...attack("emberback", "Furnace Breath", 2, "burn"),
-      id: "emberback-furnace-breath",
-      artwork: "action.emberback.furnace-breath",
-      target: "allEnemies",
-    },
-    {
-      ...attack("emberback", "Magma Stomp", 2, "stun"),
-      id: "emberback-magma-stomp",
-      artwork: "action.emberback.magma-stomp",
-      target: "allEnemies",
-    },
+    }),
+    attack("emberback-furnace-breath", "Furnace Breath", 2, "burn", { target: "allEnemies" }),
+    attack("emberback-magma-stomp", "Magma Stomp", 2, "stun", { target: "allEnemies" }),
   ],
 };

@@ -15,21 +15,11 @@ export const dunefox: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("dunefox", "Sandburst Pounce", 6, "physical"),
-      artwork: "action.dunefox.sandburst-pounce",
-    },
-    {
-      ...attack("dunefox", "Dune Whirl", 1, "physical"),
-      id: "dunefox-dune-whirl",
+    attack("dunefox-attack", "Sandburst Pounce", 6, "physical"),
+    attack("dunefox-dune-whirl", "Dune Whirl", 1, "physical", {
       target: "allEnemies",
       effects: [{ kind: "blind", amount: 1 }],
-      artwork: "action.dunefox.dune-whirl",
-    },
-    {
-      ...card("dunefox", "Mirage Step", "dodge", 30),
-      effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.dunefox.mirage-step",
-    },
+    }),
+    card("dunefox-dodge", "Mirage Step", "dodge", 30, { effects: [{ kind: "draw", amount: 1 }] }),
   ],
 };

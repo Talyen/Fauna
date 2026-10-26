@@ -15,21 +15,13 @@ export const prismram: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("prismram", "Prism Charge", 6, "physical"),
-      artwork: "action.prismram.prism-charge",
-    },
-    {
-      ...card("prismram", "Faceted Ward", "guard", 3),
+    attack("prismram-attack", "Prism Charge", 6, "physical"),
+    card("prismram-guard", "Faceted Ward", "guard", 3, {
       target: "self",
-      artwork: "action.prismram.faceted-ward",
       effects: [{ kind: "reflect", amount: 1 }],
-    },
-    {
-      ...attack("prismram", "Spectrum Lance", 4, "light"),
-      id: "prismram-spectrum-lance",
-      artwork: "action.prismram.spectrum-lance",
+    }),
+    attack("prismram-spectrum-lance", "Spectrum Lance", 4, "light", {
       effects: [{ kind: "purge", amount: 1 }],
-    },
+    }),
   ],
 };

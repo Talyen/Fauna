@@ -15,20 +15,8 @@ export const mossguard: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("mossguard", "Boulder Brace", "guard", 6),
-      target: "self",
-      artwork: "action.mossguard.boulder-brace",
-    },
-    {
-      ...attack("mossguard", "Rooted Stomp", 2, "stun"),
-      target: "allEnemies",
-      artwork: "action.mossguard.rooted-stomp",
-    },
-    {
-      ...card("mossguard", "Moss Renewal", "heal", 2),
-      target: "allAllies",
-      artwork: "action.mossguard.moss-renewal",
-    },
+    card("mossguard-guard", "Boulder Brace", "guard", 6, { target: "self" }),
+    attack("mossguard-attack", "Rooted Stomp", 2, "stun", { target: "allEnemies" }),
+    card("mossguard-heal", "Moss Renewal", "heal", 2, { target: "allAllies" }),
   ],
 };
