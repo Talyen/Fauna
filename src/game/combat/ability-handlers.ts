@@ -148,6 +148,7 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
           delivery: "reflection",
           interceptionChecked: true,
           blindMiss: false,
+          criticalBonus,
           leech: def.leech,
           cardLeech: keywords.includes("leech"),
         },

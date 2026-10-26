@@ -26,13 +26,13 @@ export function createBrowserPlatform(storage?: Storage): Platform {
       async write(data, isRecoverable = () => false) {
         const source = storage ?? window.localStorage;
         // Only application-approved checkpoints may displace recovery slots.
-        const readable = new Set<string>();
+        const readable = new Map<string, string | null>();
         const intact: string[] = [];
         for (const key of [KEY, `${KEY}.backup1`, `${KEY}.backup2`]) {
           let previous: string | null;
           try {
             previous = source.getItem(key);
-            readable.add(key);
+            readable.set(key, previous);
           } catch (error) {
             // Never replace an unknown primary or overwrite an inaccessible backup.
             if (key === KEY) throw error;
@@ -46,15 +46,22 @@ export function createBrowserPlatform(storage?: Storage): Platform {
           }
         }
         const backups = [`${KEY}.backup1`, `${KEY}.backup2`].filter((key) => readable.has(key));
-        for (let index = backups.length - 1; index >= 0; index--)
-          if (intact[index] !== undefined) {
+        // Choose against successful writes, so a failed rotation cannot duplicate
+        // the remaining recovery slot or displace its only distinct checkpoint.
+        for (const key of backups) {
+          const checkpoint = intact.find(
+            (data) => !backups.some((other) => other !== key && readable.get(other) === data),
+          );
+          if (checkpoint !== undefined && checkpoint !== readable.get(key)) {
             try {
-              source.setItem(backups[index]!, intact[index]!);
+              source.setItem(key, checkpoint);
+              readable.set(key, checkpoint);
             } catch {
               // Backup growth may exceed quota while replacing the primary still fits.
               // A failed setItem leaves the existing recovery slot intact.
             }
           }
+        }
         source.setItem(KEY, data);
       },
     },

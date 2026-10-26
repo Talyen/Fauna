@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
-import { battlefield, healingAllies, isEnemy } from "../battlefield";
+import { battlefield, healingAllies, isEnemy, combatantById } from "../battlefield";
 import { roll } from "../random";
 import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
@@ -456,7 +456,7 @@ export function* detonateBleed(
     origin: "periodic",
   });
   for (const payout of bleedPayments(payouts, payment.outcome === "landed" ? payment.dealt : 0)) {
-    const owner = [...state.team, ...state.reserves].find((unit) => unit.id === payout.sourceId);
+    const owner = combatantById(state, payout.sourceId);
     if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true, target);
   }
 }

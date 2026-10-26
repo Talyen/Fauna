@@ -1,13 +1,86 @@
 import { expect, it } from "vitest";
-import { freshCombat, hit, gainMana } from "../../../src/game/combat/index";
+import { freshCombat, hit, gainMana, tickStatuses } from "../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { species } from "../../../src/game/content";
 import type { BattleState, GameEvent } from "../../../src/game/types";
-import { dispatch } from "../../../src/game/engine";
-import { pendingReplacement } from "../../../src/game/team";
-import { accept, authoredPack, prepareDestination, requireBattle, run, teamRun } from "../../support/game";
+import { dispatch, previewCard } from "../../../src/game/engine";
+import { pendingReplacement, swapBackup } from "../../../src/game/team";
+import {
+  accept,
+  addBackups,
+  authoredPack,
+  prepareDestination,
+  requireBattle,
+  run,
+  teamRun,
+} from "../../support/game";
 import { produce } from "immer";
+
+it("retains a departed Echo's status attribution and periodic Gold rewards after resume", () => {
+  const state = structuredClone(requireBattle(teamRun(42, ["memento"])));
+  const owner = state.team[0]!;
+  summonEcho(state, owner, "player", 6, []);
+  const echo = state.battle.minions![0]!;
+  const target = state.battle.enemies[0]!;
+  target.block = 0;
+  target.combat = freshCombat();
+  state.boons = ["cutpurse-knife", "knot-comb", "orbit-armillary"];
+  hit(state, target, echo, 2, "bleed", [], { origin: "proc" });
+  // Knot Comb returns the Echo's wound through Orbit Armillary before it departs.
+  tickStatuses(state, echo, []);
+  expect(target.combat.statusSources.bleed).toBe(echo.id);
+  addBackups(state, {
+    id: "backup",
+    species: "mossguard",
+    health: species("mossguard").health,
+    block: 0,
+    attacked: false,
+    combat: freshCombat(),
+  });
+  swapBackup(state, owner.id, "backup", []);
+  const resumed = decodeSave(encodeSave(state));
+  const events: GameEvent[] = [];
+
+  const result = produce(resumed, (draft) => {
+    tickStatuses(draft, draft.battle!.enemies[0]!, events);
+  });
+
+  expect(events.find((event) => event.kind === "damage" && event.periodic)).toMatchObject({
+    actorId: echo.id,
+    targetId: target.id,
+    damageType: "bleed",
+  });
+  expect(result.currency).toBe(resumed.currency + 1);
+  expect(decodeSave(encodeSave(result))).toEqual(result);
+});
+
+it("retains Last Light Charge's guaranteed critical hit when reflected", () => {
+  const state = produce(requireBattle(teamRun(42, ["alpenglen"])), (draft) => {
+    const card = draft.cards.find((entry) => entry.definitionId === "alpenglen-last-light-charge")!;
+    draft.battle.hand = [card.id];
+    draft.battle.buffer = [];
+    draft.battle.discard = [];
+    draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    draft.team[0]!.combat = freshCombat();
+    draft.battle.enemies[0]!.combat = { ...freshCombat(), attackReflection: true };
+    draft.rng = 42;
+  });
+  const cardId = state.battle.hand[0]!;
+  const targetId = state.battle.enemies[0]!.id;
+
+  const result = dispatch(state, { type: "play", cardId, targetId, autoEndTurn: false });
+
+  expect(result.accepted).toBe(true);
+  expect(result.events.find((event) => event.kind === "damage")).toMatchObject({
+    actorId: targetId,
+    targetId: state.team[0]!.id,
+    damageType: "light",
+    amount: 8,
+    critical: true,
+  });
+  expect(previewCard(state, cardId, targetId)).toEqual(result);
+});
 
 function bossBattle() {
   const destination = produce(teamRun(42, ["pollenmoth"]), (state) => {

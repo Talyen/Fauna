@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield } from "../battlefield";
+import { isEnemy, battlefield, combatantById } from "../battlefield";
 import { draw } from "../card-zones";
 import { roll } from "../random";
 import { hasTalent, creaturePassive } from "../progression";
@@ -71,10 +71,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (stats[status] <= 0) continue;
     const { amount, sourceId, payouts } = periodicTick(stats, status);
     // Ticks use ordinary Block absorption without reapplying their own buildup.
-    const source =
-      [...battlefield(state, "player"), ...state.reserves, ...battlefield(state, "enemy")].find(
-        (candidate) => candidate.id === sourceId,
-      ) ?? unit;
+    const source = combatantById(state, sourceId) ?? unit;
     // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
     // Periodic packets have no attack delivery; retain the payment for deferred Leech.
     const payment = yield* reaction("resolveHit", state, source, unit, amount, status, events, {
@@ -83,11 +80,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (status === "bleed") {
       finishBleedTick(stats);
       for (const payout of bleedPayments(payouts, payment.outcome === "landed" ? payment.dealt : 0)) {
-        const owner = [
-          ...battlefield(state, "player"),
-          ...state.reserves,
-          ...battlefield(state, "enemy"),
-        ].find((candidate) => candidate.id === payout.sourceId);
+        const owner = combatantById(state, payout.sourceId);
         if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true, unit);
       }
     }

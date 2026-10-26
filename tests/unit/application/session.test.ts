@@ -57,6 +57,37 @@ it.each([false, true])("captures development permission at session creation (%s)
   }
 });
 
+it.each([
+  ["backup1", false],
+  ["backup2", false],
+  ["backup1", true],
+  ["backup2", true],
+] as const)(
+  "retains distinct browser recovery checkpoints when %s rejects rotation (primary already backed up: %s)",
+  async (failed, alreadyBackedUp) => {
+    const memory = new MemoryStorage();
+    const primary = JSON.stringify({ ...run(), revision: 13 });
+    const first = JSON.stringify({ ...run(), revision: 12 });
+    const second = alreadyBackedUp ? primary : JSON.stringify({ ...run(), revision: 11 });
+    const next = JSON.stringify({ ...run(), revision: 14 });
+    memory.setItem("fauna.save.v1", primary);
+    memory.setItem("fauna.save.v1.backup1", first);
+    memory.setItem("fauna.save.v1.backup2", second);
+    const set = memory.setItem.bind(memory);
+    memory.setItem = (key, data) => {
+      if (key === `fauna.save.v1.${failed}`) throw new Error("slot unavailable");
+      set(key, data);
+    };
+
+    await createBrowserPlatform(memory).saves.write(next, (data) => [primary, first, second].includes(data));
+
+    const backups = [memory.getItem("fauna.save.v1.backup1"), memory.getItem("fauna.save.v1.backup2")];
+    expect(new Set(backups).size).toBe(2);
+    expect(backups).toContain(primary);
+    expect(memory.getItem("fauna.save.v1")).toBe(next);
+  },
+);
+
 it("saves the latest browser checkpoint when backup growth exceeds the storage quota", async () => {
   const memory = new MemoryStorage();
   const saved = JSON.stringify(run());
