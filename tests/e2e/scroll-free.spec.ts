@@ -97,11 +97,11 @@ function layoutGame(targetedHand = false) {
         })
       : draft.cards;
     draft.battle!.hand = cards.slice(0, 6).map((card) => card.id);
-    draft.battle!.buffer = draft.cards
+    draft.battle!.draw = draft.cards
       .filter((card) => !draft.battle!.hand.includes(card.id))
       .map((card) => card.id);
-    draft.battle!.draw = [];
-    draft.battle!.discard = [];
+    draft.battle!.buffer = [];
+    draft.battle!.discard = [draft.battle!.draw.pop()!];
   });
   return game;
 }
@@ -267,8 +267,27 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       }
       await page.mouse.move(0, 0);
       await captureScreen(page, { path: `reports/scroll-free/battle-${width}-${height}-${scale}.png` });
-      await page.getByRole("button", { name: "Inspect Draw Pile" }).click();
-      await expectScrollFree(page);
+      const opener = page.getByRole("button", { name: "Inspect Draw Pile" });
+      await opener.click();
+      const pile = page.getByRole("dialog", { name: "Draw Pile", exact: true });
+      const card = pile.locator(".action-card").first();
+      await expect(card).toBeVisible();
+      if (width === 1280 && height === 720 && scale === 1.25) {
+        await card.click();
+        await card.hover();
+        await expect(page.getByRole("tooltip")).toBeVisible();
+        await card.focus();
+        await page.keyboard.press("i");
+        await expect(page.getByRole("dialog")).toHaveCount(1);
+      }
+      await everyPage(pile, () => expectScrollFree(page));
+      await page.getByRole("button", { name: "Close draw pile" }).click();
+      await expect(opener).toBeFocused();
+      await page.getByRole("button", { name: "Inspect Discard Pile" }).click();
+      await expect(page.getByRole("dialog", { name: "Discard Pile" }).locator(".action-card")).toHaveCount(1);
+      if ((width === 1280 && height === 720 && scale === 1.25) || width === 1920)
+        await captureScreen(page, { path: `reports/scroll-free/discard-${width}-${height}-${scale}.png` });
+      else await expectScrollFree(page);
       expect(await state(page)).toEqual(before);
     });
   });

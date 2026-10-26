@@ -5,8 +5,20 @@ import { dispatch } from "../../../src/game/engine";
 import type { Command } from "../../../src/game/types";
 
 it("retains replayable current-format performance checkpoints", () => {
-  expect(performanceCases(17)[0]!.initial).not.toBe(performanceCases(42)[0]!.initial);
-  for (const scenario of performanceCases()) {
+  const cases = performanceCases();
+  expect(performanceCases(17)[0]!.initial).not.toBe(cases[0]!.initial);
+  expect(cases.map((entry) => entry.id)).toEqual(
+    expect.arrayContaining(["preview", "area-reactions", "draw-repeat", "battle", "swap", "menus"]),
+  );
+  expect(cases.some((entry) => entry.id === "diagnostic-stall")).toBe(false);
+  expect(cases.some((entry) => entry.id === "resource-menus")).toBe(false);
+  expect(performanceCases(42, true).map((entry) => entry.id)).toEqual(["diagnostic-stall"]);
+  const preview = cases.find((row) => row.id === "preview")!;
+  expect(preview.actions.find((action) => action.kind === "target")).toMatchObject({
+    targetId: expect.any(String),
+    checkpoint: preview.initial,
+  });
+  for (const scenario of cases) {
     let state = decodeSave(scenario.initial);
     for (const action of scenario.actions) {
       if ("command" in action) {
@@ -25,12 +37,6 @@ it("repeats artwork navigation without changing gameplay checkpoints or broadeni
   expect(scenario.id).toBe("resource-menus");
   expect(scenario.actions).toHaveLength(24);
   expect(scenario.actions.every((action) => action.checkpoint === scenario.initial)).toBe(true);
-  expect(performanceCases().some((row) => row.id === "resource-menus")).toBe(false);
-});
-it("previews an ability with an explicit target instead of immediately playing an area attack", () => {
-  const scenario = performanceCases().find((row) => row.id === "preview")!;
-  const target = scenario.actions.find((action) => action.kind === "target");
-  expect(target).toMatchObject({ targetId: expect.any(String), checkpoint: scenario.initial });
 });
 // Constructing and replaying three full journeys can exceed the default deadline on hosted CPUs
 it("derives reachable early and late inventories from replay evidence without fixture grants", async () => {

@@ -3,7 +3,6 @@ import { afterEach, expect, it, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { produce } from "immer";
 import { uncertainBattle as ready } from "../../support/uncertainty";
-import type { Command } from "../../../src/game/types";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { projectPlay } from "../../../src/game/preview";
 import { encodeSave } from "../../../src/game/save";
@@ -15,8 +14,6 @@ import { installPerformanceRecorder, measurePerformance } from "../../../src/lib
 import { summarizeSample, comparePerformance } from "../../../scripts/performance/metrics.mjs";
 import { attributeTrace } from "../../../scripts/performance/trace.mjs";
 import { compareRecorderOverhead } from "../../../scripts/performance/metrics.mjs";
-import { performanceCases } from "../../../src/tooling/performance";
-import { decodeSave } from "../../../src/game/save";
 import * as engine from "../../../src/game/engine";
 import { installSampler } from "../../../scripts/performance/sampler.mjs";
 
@@ -130,26 +127,6 @@ it("drops incomplete outcome sets when finite branching exceeds the preview budg
     return { accepted: true, state, events: [] };
   });
   expect(projectPlay(ready(), "card", "enemy-0")).toMatchObject({ kind: "unknown", reason: "budget" });
-});
-
-it("validates expanded performance fixtures, preview-only checkpoints and isolated diagnostic stalls", () => {
-  const cases = performanceCases();
-  expect(cases.map((entry) => entry.id)).toEqual(
-    expect.arrayContaining(["preview", "area-reactions", "draw-repeat", "battle", "swap", "menus"]),
-  );
-  expect(cases.some((entry) => entry.id === "diagnostic-stall")).toBe(false);
-  expect(performanceCases(42, true).map((entry) => entry.id)).toEqual(["diagnostic-stall"]);
-  for (const scenario of cases) {
-    let state = decodeSave(scenario.initial);
-    for (const action of scenario.actions) {
-      if ("command" in action) {
-        const result = dispatch(state, action.command as Command);
-        expect(result.accepted).toBe(true);
-        state = result.state;
-      }
-      expect(encodeSave(state)).toBe(action.checkpoint);
-    }
-  }
 });
 
 it("a broken performance sink cannot change application results, save ordering or reentrant commands", async () => {
