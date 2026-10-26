@@ -212,7 +212,16 @@ export function executePrimary(context: PrimaryContext) {
       let removed = 0;
       for (const recipient of alive(friendlyRow(state, action))) {
         if (action.actor.health <= 0) break;
-        removed += removeEffects(recipient, "cleanse", Number.MAX_SAFE_INTEGER, events, state);
+        removed += removeEffects(
+          recipient,
+          "cleanse",
+          Number.MAX_SAFE_INTEGER,
+          events,
+          state,
+          undefined,
+          undefined,
+          false,
+        );
       }
       if (action.actor.health <= 0) return;
       if (!enemy) gainMana(state, removed * value, events);
@@ -275,7 +284,8 @@ export function executePrimary(context: PrimaryContext) {
       }
       for (const unit of alive(friendlyRow(state, action))) {
         if (action.actor.health <= 0) break;
-        if (ensureCombat(unit).blind) removeEffects(unit, "cleanse", 1, events, state, "blind");
+        if (ensureCombat(unit).blind)
+          removeEffects(unit, "cleanse", 1, events, state, "blind", undefined, false);
       }
       return;
     case "swapLowest": {
@@ -300,7 +310,7 @@ export function executePrimary(context: PrimaryContext) {
     case "teamCleanse":
       for (const unit of alive(friendlyRow(state, action))) {
         if (action.actor.health <= 0) break;
-        removeEffects(unit, "cleanse", value, events, state);
+        removeEffects(unit, "cleanse", value, events, state, undefined, undefined, false);
       }
       return;
     case "nullify":
@@ -341,7 +351,7 @@ export function executePrimary(context: PrimaryContext) {
     case "teamThaw":
       for (const unit of alive(friendlyRow(state, action))) {
         if (action.actor.health <= 0) break;
-        removeControlBuildup(state, unit, "freeze", events);
+        removeControlBuildup(state, unit, "freeze", events, false);
       }
       if (def.effect === "springbound") grantTemporaryDodge(actor, value, events);
       return;

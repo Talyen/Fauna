@@ -73,9 +73,9 @@ export function cardCost(
   card: Pick<Card, "definitionId"> & Partial<Pick<Card, "ownerId">>,
   state: GameState,
 ) {
-  const actor = card.ownerId === undefined ? undefined : cardActor(state, { ownerId: card.ownerId });
+  const actor = card.ownerId === undefined ? undefined : cardActor(state, { ...card, ownerId: card.ownerId });
   const def = definition(card.definitionId);
-  if (def.species === null) return def.cost;
+  if (def.species === null) return state.boons.includes("blossom-cake-stand") ? 0 : def.cost;
   if (actor?.combat?.[talentRule("stun.free-follow-up").state]) return 0;
   const freeNature = actor?.combat?.[talentRule("nature.windstep").state];
   const freeLight = actor?.combat?.[talentRule("light.divine-favor").state];

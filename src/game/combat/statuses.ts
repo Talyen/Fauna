@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield } from "../battlefield";
+import { isEnemy, battlefield, cleanseTargets } from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
@@ -35,6 +35,26 @@ interface StatusResult {
   suppressed: boolean;
 }
 
+export function controlThreshold(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  type: "stun" | "freeze",
+  withTalentReduction = true,
+) {
+  const health =
+    isEnemy(target) && state.boons.includes("crescent-sextant") ? target.health : maximumHealth(target);
+  const reduction =
+    withTalentReduction && !isEnemy(source)
+      ? type === "stun" && hasTalent(state, "stun.concussive-force")
+        ? talentRule("stun.concussive-force").percent
+        : type === "freeze" && hasTalent(state, "freeze.bitter-cold")
+          ? talentRule("freeze.bitter-cold").percent
+          : 0
+      : 0;
+  return health * (0.5 - reduction / 100);
+}
+
 /** Returned effects use ordinary protection and immunity, with no second reflection. */
 export function* returnCleansedEffect(
   state: GameState,
@@ -60,7 +80,9 @@ export function* returnCleansedEffect(
     state,
     unit,
     target,
-    turns ? Math.ceil(maximumHealth(target) / 2) : amount,
+    turns && (status === "stun" || status === "freeze")
+      ? Math.ceil(controlThreshold(state, unit, target, status, false))
+      : amount,
     status,
     events,
     { reflected: true, controlTurns: turns },
@@ -134,7 +156,16 @@ export function* removeControlBuildup(
   unit: Combatant,
   status: "stun" | "freeze",
   events: GameEvent[],
+  spread = true,
 ): Resolution<void> {
+  if (spread) {
+    const targets = cleanseTargets(state, unit);
+    if (targets.length > 1) {
+      for (const target of targets)
+        yield* reaction("removeControlBuildup", state, target, status, events, false);
+      return;
+    }
+  }
   const stats = ensureCombat(unit);
   if (stats[status] <= 0) return;
   const amount = stats[status];
@@ -160,7 +191,27 @@ export function* removeEffects(
   state?: GameState,
   onlyStatus?: (typeof harmfulStatuses)[number] | "thorns" | "waterThorns" | "fireThorns",
   source?: Combatant,
+  spread = true,
 ): Resolution<number> {
+  if (kind === "cleanse" && spread) {
+    const targets = cleanseTargets(state, unit);
+    if (targets.length > 1) {
+      let removed = 0;
+      for (const target of targets)
+        removed += yield* reaction(
+          "removeEffects",
+          target,
+          kind,
+          count,
+          events,
+          state,
+          onlyStatus,
+          source,
+          false,
+        );
+      return removed;
+    }
+  }
   const stats = ensureCombat(unit);
   const thornsBefore = stats.thorns;
   const pearlSieve = state && state.boons.includes("pearl-sieve");
@@ -491,13 +542,14 @@ export function* applyHarmfulStatus(
     stats.nullify &&
     Number(stats[type]) < (type === "blind" ? 1 : STACK_LIMIT)
   ) {
-    stats.nullify = false;
+    const retained = !isEnemy(target) && target.block > 0 && state.boons.includes("reef-casket");
+    stats.nullify = retained;
     events.push({
       kind: "status",
       targetId: target.id,
       status: "nullify",
       affectedStatus: type,
-      outcome: "remove",
+      outcome: retained ? "immune" : "remove",
       text: `${unitName(target)} nullifies ${type}`,
     });
     return { depletions: [], appliedControl: false, suppressed: true };
@@ -597,30 +649,12 @@ export function* applyHarmfulStatus(
       amount: stats[type] - beforeStacks,
       text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type} buildup.`,
     });
-    const threshold =
-      maximumHealth(target) *
-      (alliedSource &&
-      ((type === "freeze" && hasTalent(state, "freeze.bitter-cold")) ||
-        (type === "stun" && hasTalent(state, "stun.concussive-force")))
-        ? 0.5 -
-          (type === "freeze"
-            ? talentRule("freeze.bitter-cold").percent
-            : talentRule("stun.concussive-force").percent) /
-            100
-        : 0.5);
+    const threshold = controlThreshold(state, source, target, type);
     let reachesThreshold = stats[type] >= threshold;
     let controlTotal = stats[type];
     if (alliedSource && !alliedTarget && state.boons.includes("undertow-castanets")) {
       const other = type === "stun" ? "freeze" : "stun";
-      const otherThreshold =
-        maximumHealth(target) *
-        (0.5 -
-          (other === "freeze" && hasTalent(state, "freeze.bitter-cold")
-            ? talentRule("freeze.bitter-cold").percent
-            : other === "stun" && hasTalent(state, "stun.concussive-force")
-              ? talentRule("stun.concussive-force").percent
-              : 0) /
-            100);
+      const otherThreshold = controlThreshold(state, source, target, other);
       reachesThreshold = stats[type] / threshold + stats[other] / otherThreshold >= 1;
       controlTotal += (stats[other] * threshold) / otherThreshold;
     }

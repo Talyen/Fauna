@@ -395,7 +395,13 @@ export function* resolveHit(
   const ordinaryDamage = damage;
   if (critical) damage *= 2;
   const blockRatio = blockEfficiency(state, target, type);
-  const payment = blockPayment(damage, target.block, blockRatio);
+  const bypassBlock =
+    alliedSource &&
+    !alliedTarget &&
+    "thorns" in options &&
+    options.thorns &&
+    state.boons.includes("comb-uncapping-fork");
+  const payment = blockPayment(damage, bypassBlock ? 0 : target.block, blockRatio);
   const blocked = payment.absorbed,
     blockSpent = payment.spent;
   target.block -= blockSpent;
@@ -425,6 +431,8 @@ export function* resolveHit(
     : 0;
   if (direct && alliedSource && !alliedTarget && critical && state.boons.includes("crater-punch"))
     damage += Math.round(blocked / boonRule("crater-punch").divisor);
+  if (alliedTarget && type === "burn" && state.boons.includes("hearth-coal"))
+    damage = Math.min(damage, Math.max(0, target.health - boonRule("hearth-coal").minimum));
   const lost = loseHealth(state, target, damage, events);
   const dealt = Math.min(effectDamage, blocked + lost);
   if (effectDamage > 0) {
@@ -450,6 +458,20 @@ export function* resolveHit(
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
   yield* damageRewards(context, facts, policy);
+  if (
+    effectDamage > 0 &&
+    alliedSource &&
+    !alliedTarget &&
+    "thorns" in options &&
+    options.thorns &&
+    source.health > 0 &&
+    target.health > 0 &&
+    state.boons.includes("resonance-kalimba")
+  ) {
+    const result = yield* reaction("applyHarmfulStatus", state, source, target, effectDamage, "stun", events);
+    if (result.appliedControl) yield* reaction("controlRewards", state, source, target, "stun", events);
+    depletions.push(...result.depletions);
+  }
   if (nextPhysical > 0 && source.health > 0)
     yield* reaction("hit", state, source, target, nextPhysical, "physical", events, { origin: "proc" });
   if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {

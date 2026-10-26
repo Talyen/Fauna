@@ -126,7 +126,7 @@ Each turn normally restores four shared Mana and draws four cards, with explicit
 
 ## Combat assistance
 
-Auto-end turn is enabled by default and advances only when Mana reaches zero. Its Settings switch persists separately from progression; disabling it leaves End turn under player control. Victory and defeat settle immediately in either mode.
+Auto-end turn is enabled by default and advances at zero Mana once no legal free plays remain. Its Settings switch persists separately from progression; disabling it leaves End turn under player control. Victory and defeat settle immediately in either mode.
 
 Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation and shutdown; save retries remain independent of combat assistance.
 

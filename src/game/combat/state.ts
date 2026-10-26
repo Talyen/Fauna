@@ -2,7 +2,7 @@ import { talentRule } from "../rules/talents";
 import { chance as succeeds } from "../chance";
 import { isEnemy, isRosterCreature, battlefield } from "../battlefield";
 import { hasTalent, creaturePassive } from "../progression";
-import { species } from "../content";
+import { species, type CardDefinition } from "../content";
 import type { CombatState, Creature, Enemy, GameEvent, GameState } from "../types";
 export const TURN_MANA = 4;
 export const TURN_DRAW = 4;
@@ -57,14 +57,19 @@ export const maximumHealth = (unit: Combatant) =>
   "maxHealth" in unit ? unit.maxHealth : species(unit.species).health;
 export const unitName = (unit: Combatant) => ("name" in unit ? unit.name : species(unit.species).name);
 /** Action availability; control itself still suppresses Dodge and expires normally. */
-export function controlled(unit: Combatant, state?: GameState) {
+export function controlled(unit: Combatant, state?: GameState, card?: CardDefinition) {
   return (
     (!!unit.combat?.controlled || !!unit.combat?.skipped) &&
     !(
       state?.phase === "battle" &&
       !isEnemy(unit) &&
-      (unit.combat?.grace ?? 0) > 0 &&
-      state.boons.includes("vigil-lantern")
+      (((unit.combat?.grace ?? 0) > 0 && state.boons.includes("vigil-lantern")) ||
+        (card &&
+          state.boons.includes("accordioned-bridge") &&
+          (card.effect === "swap" ||
+            card.effect === "swapChosen" ||
+            card.effect === "swapDodge" ||
+            card.effect === "swapLowest")))
     )
   );
 }

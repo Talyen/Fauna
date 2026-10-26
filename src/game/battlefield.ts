@@ -35,3 +35,10 @@ export function healingAllies(state: GameState, side: "player" | "enemy" = "play
     row.push(...state.reserves);
   return row.filter((unit) => unit.health > 0);
 }
+
+/** Expand one Cleanse application once; already-grouped abilities retain their removal count. */
+export function cleanseTargets(state: GameState | undefined, unit: Creature | Enemy) {
+  return state && !isEnemy(unit) && state.boons.includes("miracle-megaphone")
+    ? [unit, ...battlefield(state, "player").filter((ally) => ally.id !== unit.id && ally.health > 0)]
+    : [unit];
+}

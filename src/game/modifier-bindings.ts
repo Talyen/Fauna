@@ -38,6 +38,8 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  cleanseTargets: bind("./battlefield", "cleanseTargets"),
+  controlThreshold: bind("./combat/statuses", "controlThreshold"),
   handCapacity: bind("./card-zones", "handCapacity"),
   journeyReturn: bind("./card-zones", "journeyReturn"),
   shareNegate: bind("./combat/damage", "shareNegate"),
@@ -182,7 +184,7 @@ export const modifierImplementations = freeze(
       "dodge.tailwind": [owners.dodgeResponse],
       "dodge.finding-rhythm": [owners.resolveHit, owners.dodgeResponse],
       "dodge.perfect-timing": [owners.dodgeResponse],
-      "freeze.bitter-cold": [owners.applyHarmfulStatus],
+      "freeze.bitter-cold": [owners.controlThreshold],
       "freeze.glacial-barrier": [owners.applyHarmfulStatus],
       "freeze.brittle-ice": [owners.modifiedDamage],
       "freeze.winter-s-grasp": [owners.talentRepeat],
@@ -262,7 +264,7 @@ export const modifierImplementations = freeze(
       "stun.extended-stun": [owners.applyHarmfulStatus],
       "stun.jarring-blow": [owners.talentRepeat],
       "stun.free-follow-up": [owners.applyHarmfulStatus, owners.consumeCardGrants],
-      "stun.concussive-force": [owners.applyHarmfulStatus],
+      "stun.concussive-force": [owners.controlThreshold],
       "stun.stun-insight": [owners.applyHarmfulStatus],
       "stun.stun-surge": [owners.applyHarmfulStatus],
       "water.pressure": [owners.modifiedDamage],
@@ -273,6 +275,16 @@ export const modifierImplementations = freeze(
       "water.riptide": [owners.waterFollowups],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "comb-uncapping-fork": [owners.resolveHit],
+      "fern-fencing-foil": [owners.dodgeResponse],
+      "resonance-kalimba": [owners.resolveHit],
+      "miracle-megaphone": [owners.cleanseTargets],
+      "blossom-cake-stand": [owners.cardCost],
+      "accordioned-bridge": [owners.controlled],
+      "last-candle": [owners.tickStatuses],
+      "hearth-coal": [owners.resolveHit],
+      "crescent-sextant": [owners.controlThreshold],
+      "reef-casket": [owners.applyHarmfulStatus],
       "geode-anvil": [owners.decayBlock],
       "journey-loom": [owners.journeyReturn],
       "devotion-clasp": [owners.shareNegate],
