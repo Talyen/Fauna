@@ -118,11 +118,12 @@ describe("player interface", () => {
     const incoming = game.reward!.recruits[0]!;
     const offer = screen.getByRole("button", { name: `Recruit ${species(incoming).name}` });
     await waitFor(() => expect(document.activeElement).toBe(offer));
-    await user.click(screen.getByRole("button", { name: `Inspect ${species(incoming).name}` }));
+    const artwork = screen.getByRole("button", { name: `Inspect ${species(incoming).name}` });
+    await user.click(artwork);
     expect(screen.getByRole("dialog", { name: species(incoming).name })).toBeTruthy();
     expect(session.store.getState().game).toBe(committed);
     await user.keyboard("{Escape}");
-    await waitFor(() => expect(document.activeElement).toBe(offer));
+    await waitFor(() => expect(document.activeElement).toBe(artwork));
     await user.click(offer);
     expect(session.store.getState().game.discovery.recruited[incoming]).toBe(
       (game.discovery.recruited[incoming] ?? 0) + 1,
@@ -256,72 +257,73 @@ describe("player interface", () => {
     expect(session.store.getState().game.team.map((unit) => unit.species)).toEqual([starter]);
     await session.dispose();
   });
-  it.each(["hover", "keyboard"])(
-    "keeps creature details focused on identity and rules while live Block stays on the battlefield using %s",
-    async (input) => {
-      const game = produce(teamRun(7, ["mossguard", "emberback", "prismram"]), (d) => {
-        d.team[0]!.health = 7;
-        d.team[1]!.health = 19;
-        d.team[1]!.block = 4;
-        d.discovery.encountered.push("reedstag");
-        d.discovery.recruited.reedstag = 1;
-        d.reserves.push({
-          id: "reserve-copy",
-          species: "reedstag",
-          health: 11,
-          block: 2,
-          combat: freshCombat(),
-          attacked: false,
-        });
+  it("keeps creature details focused on identity and rules through pointer, keyboard and replacement inspection", async () => {
+    const game = produce(teamRun(7, ["mossguard", "emberback", "prismram"]), (d) => {
+      d.team[0]!.health = 7;
+      d.team[1]!.health = 19;
+      d.team[1]!.block = 4;
+      d.discovery.encountered.push("reedstag");
+      d.discovery.recruited.reedstag = 1;
+      d.reserves.push({
+        id: "reserve-copy",
+        species: "reedstag",
+        health: 11,
+        block: 2,
+        combat: freshCombat(),
+        attacked: false,
       });
-      localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-      let session = createSession(createBrowserPlatform(localStorage), 7);
-      await session.load();
-      render(<App session={session} />);
-      const user = userEvent.setup();
-      await user.click(screen.getByRole("button", { name: "Continue" }));
-      if (input === "keyboard") await user.tab();
-      for (const [id, block] of [
-        ["ally-0", 0],
-        ["ally-1", 4],
-      ] as const) {
-        const creature = document.querySelector<HTMLButtonElement>(
-          `.player-row [data-actor-id="${id}"] button`,
-        )!;
+    });
+    const user = userEvent.setup();
+    const inspect = async (creature: HTMLElement, name: string) => {
+      for (const input of ["hover", "keyboard"]) {
         if (input === "hover") await user.hover(creature);
-        else act(() => creature.focus());
-        const tooltip = (await screen.findByRole("tooltip")).textContent!;
-        expect(tooltip).not.toMatch(/\d+\/\d+ health/i);
-        expect(tooltip).not.toMatch(/\d+ block/);
-        const frame = document.querySelector<HTMLElement>(`.player-row [data-actor-id="${id}"]`)!;
-        if (block) expect(frame.querySelector(`[aria-label="Block ${block}"]`)).toBeTruthy();
-        if (input === "hover") await user.unhover(creature);
+        else {
+          await user.tab();
+          act(() => creature.focus());
+        }
+        await waitFor(() => expect(screen.getByRole("tooltip").textContent).toContain(name));
+        expect(screen.getByRole("tooltip").textContent).not.toMatch(/\d+\/\d+ health|\d+ block/i);
+        if (input === "hover")
+          await user.hover(
+            creature.closest('[role="dialog"]') ?? screen.getByRole("main", { name: "Battlefield" }),
+          );
       }
-      const fallen = produce(game, (draft) => {
+    };
+    for (const fixture of [
+      game,
+      produce(game, (draft) => {
         draft.team[2]!.health = 0;
-      });
-      cleanup();
-      await session.dispose();
-      localStorage.setItem("fauna.save.v1", JSON.stringify(fallen));
-      session = createSession(createBrowserPlatform(localStorage), 7);
+      }),
+    ]) {
+      localStorage.setItem("fauna.save.v1", JSON.stringify(fixture));
+      const session = createSession(createBrowserPlatform(localStorage), 7);
       await session.load();
-      render(<App session={session} />);
-      await user.click(screen.getByRole("button", { name: "Continue" }));
-      expect(screen.queryByRole("button", { name: "Swap" })).toBeNull();
-      const reserve = screen.getByRole("button", { name: "Reedstag, backup" });
-      if (input === "hover") await user.hover(reserve);
-      else {
-        await user.tab();
-        act(() => reserve.focus());
+      const view = render(<App session={session} />);
+      try {
+        await user.click(screen.getByRole("button", { name: "Continue" }));
+        if (fixture.team[2]!.health > 0) {
+          for (const [id, name, block] of [
+            ["ally-0", "Mossguard", 0],
+            ["ally-1", "Emberback", 4],
+          ] as const) {
+            const frame = document.querySelector<HTMLElement>(`.player-row [data-actor-id="${id}"]`)!;
+            await inspect(frame.querySelector<HTMLButtonElement>("button")!, name);
+            if (block) expect(frame.querySelector(`[aria-label="Block ${block}"]`)).toBeTruthy();
+          }
+        } else {
+          expect(screen.queryByRole("button", { name: "Swap" })).toBeNull();
+          await inspect(screen.getByRole("button", { name: "Reedstag, backup" }), "Reedstag");
+          expect(
+            document.querySelector('[data-actor-id="reserve-copy"] [aria-label="Block 2"]'),
+          ).toBeTruthy();
+        }
+        expect(session.store.getState().game).toEqual(fixture);
+      } finally {
+        view.unmount();
+        await session.dispose();
       }
-      const reserveTooltip = (await screen.findByRole("tooltip")).textContent!;
-      expect(reserveTooltip).not.toMatch(/\d+ block/);
-      expect(document.querySelector('[data-actor-id="reserve-copy"] [aria-label="Block 2"]')).toBeTruthy();
-      expect(reserveTooltip).not.toMatch(/\d+\/\d+ health/i);
-      expect(session.store.getState().game).toEqual(fallen);
-      await session.dispose();
-    },
-  );
+    }
+  });
 });
 it("allows play and explains unavailable saving when browser storage access is denied", async () => {
   const original = Object.getOwnPropertyDescriptor(window, "localStorage")!;

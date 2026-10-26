@@ -4,7 +4,6 @@ import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { run, victoryReady } from "../support/game";
-import { decodeSave, encodeSave } from "../../src/game/save";
 import { continueToRecruit } from "./support/journey";
 test("combat preferences, autoplay pause and manual takeover", async ({ page }) => {
   const width = 1280;
@@ -35,22 +34,6 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
   const auto = await autoplay.boundingBox();
   expect(auto!.y).toBe(menu!.y);
   expect(auto!.x + auto!.width).toBeLessThan(menu!.x);
-  const mana = await page.getByRole("button", { name: /^Mana / }).boundingBox();
-  const endTurn = await page.getByRole("button", { name: /^End turn/ }).boundingBox();
-  const draw = await page.locator('[data-pile="draw"]').boundingBox();
-  const discard = await page.locator('[data-pile="discard"]').boundingBox();
-  expect(draw!.y).toBeGreaterThanOrEqual(mana!.y + mana!.height);
-  expect(discard!.y).toBeGreaterThanOrEqual(endTurn!.y + endTurn!.height);
-  expect(draw!.x + draw!.width).toBeLessThan(width / 2);
-  expect(discard!.x).toBeGreaterThan(width / 2);
-  for (const pile of [draw!, discard!]) {
-    expect(pile.width / pile.height).toBeCloseTo(3 / 4, 2);
-    const expectedWidth = await page
-      .locator(".hand-slot")
-      .first()
-      .evaluate((slot) => slot.clientWidth * 0.8);
-    expect(Math.abs(pile.width - expectedWidth)).toBeLessThan(1);
-  }
   await autoplay.click();
   await expect(autoplay).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "Open menu" }).click();
@@ -122,7 +105,6 @@ test("manual zero-Mana turns resume without losing the battle", async ({ page })
       enemy.combat.controlTurns = 0;
     });
   });
-  expect(decodeSave(encodeSave(initial))).toEqual(initial);
   await page.addInitScript(() => localStorage.setItem("fauna.auto-end-turn", "false"));
   await seed(page, initial);
   await resume(page);

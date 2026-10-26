@@ -1,39 +1,33 @@
-import { execFileSync, spawnSync } from "node:child_process";
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, realpathSync } from "node:fs";
+import { git, readFixture, repository, writeFixture } from "../../support/tooling.mjs";
+import { spawnSync } from "node:child_process";
+import { mkdirSync, rmSync, realpathSync } from "node:fs";
 import path from "node:path";
-import os from "node:os";
 import { expect, it } from "vitest";
 import { checkDocumentation } from "../../../scripts/checks/check-docs.mjs";
 import { finishTask } from "../../../scripts/finish.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 it("creates and reuses a task checkout from committed main while preserving dirty files", () => {
-  const directory = mkdtempSync(path.join(os.tmpdir(), "fauna-worktrees-"));
-  try {
-    const main = path.join(directory, "main");
-    mkdirSync(main);
-    const git = (...args) => execFileSync("git", args, { cwd: main, encoding: "utf8" });
-    git("init", "-b", "main");
-    writeFileSync(path.join(main, ".gitignore"), "node_modules\n.worktrees/\n");
-    writeFileSync(path.join(main, "package-lock.json"), "{}");
-    writeFileSync(path.join(main, "package.json"), "{}");
-    writeFileSync(path.join(main, "keep"), "committed");
-    git("add", ".");
-    git("-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid", "commit", "-m", "fixture");
-    mkdirSync(path.join(main, "node_modules"));
-    writeFileSync(path.join(main, "keep"), "unrelated dirty work");
-    const create = () => createWorktree(main, "example");
-    const task = create();
-    expect(readFileSync(path.join(main, "keep"), "utf8")).toBe("unrelated dirty work");
-    expect(readFileSync(path.join(task.path, "keep"), "utf8")).toBe("committed");
-    expect(realpathSync(path.join(task.path, "node_modules"))).toBe(
-      realpathSync(path.join(main, "node_modules")),
-    );
-    writeFileSync(path.join(task.path, "keep"), "task edits");
-    expect(create().path).toBe(task.path);
-    expect(readFileSync(path.join(task.path, "keep"), "utf8")).toBe("task edits");
-  } finally {
-    rmSync(directory, { recursive: true, force: true });
-  }
+  const main = repository(
+    {
+      ".gitignore": "node_modules\n.worktrees/\n",
+      "package-lock.json": "{}",
+      "package.json": "{}",
+      keep: "committed",
+    },
+    "fauna-worktrees-",
+  );
+  mkdirSync(path.join(main, "node_modules"));
+  writeFixture(main, "keep", "unrelated dirty work");
+  const create = () => createWorktree(main, "example");
+  const task = create();
+  expect(readFixture(main, "keep")).toBe("unrelated dirty work");
+  expect(readFixture(task.path, "keep")).toBe("committed");
+  expect(realpathSync(path.join(task.path, "node_modules"))).toBe(
+    realpathSync(path.join(main, "node_modules")),
+  );
+  writeFixture(task.path, "keep", "task edits");
+  expect(create().path).toBe(task.path);
+  expect(readFixture(task.path, "keep")).toBe("task edits");
 });
 
 // Several real Git/Node processes exercise safety, not application latency; the task gate still caps the suite at 60 seconds.
@@ -41,41 +35,36 @@ it(
   "completes cleanup while preserving unrelated unfinished work, but reports artifact archival failures",
   { timeout: 45_000 },
   () => {
-    const directory = mkdtempSync(path.join(os.tmpdir(), "fauna-cleanup-"));
+    const directory = repository(
+      {
+        ".gitignore": ".worktrees/\nreports/\n",
+        keep: "main",
+      },
+      "fauna-cleanup-",
+    );
     const script = path.resolve(import.meta.dirname, "../../../scripts/worktree-cleanup.mjs");
-    const git = (...args) => execFileSync("git", args, { cwd: directory, encoding: "utf8", stdio: "pipe" });
     const cleanup = () =>
       spawnSync(process.execPath, [script, "--apply"], { cwd: directory, encoding: "utf8" });
-    try {
-      git("init", "-b", "main");
-      git("config", "user.name", "Fixture");
-      git("config", "user.email", "fixture@example.invalid");
-      writeFileSync(path.join(directory, ".gitignore"), ".worktrees/\nreports/\n");
-      writeFileSync(path.join(directory, "keep"), "main");
-      git("add", ".");
-      git("commit", "-m", "fixture");
-      git("branch", "task/merged");
-      const unfinished = createWorktree(directory, "unfinished");
-      writeFileSync(path.join(unfinished.path, "keep"), "unfinished work");
-      const result = cleanup();
-      expect(result.status, result.stderr).toBe(0);
-      expect(result.stdout).toContain("Preserved task/unfinished");
-      expect(git("branch", "--list", "task/merged").trim()).toBe("");
-      expect(readFileSync(path.join(unfinished.path, "keep"), "utf8")).toBe("unfinished work");
-      const archived = createWorktree(directory, "archive");
-      mkdirSync(path.join(archived.path, "reports"));
-      writeFileSync(path.join(archived.path, "reports/evidence.json"), "{}");
-      writeFileSync(path.join(directory, ".git/fauna-worktree-archives"), "block archive directory");
-      const failure = cleanup();
-      expect(failure.status).not.toBe(0);
-      expect(failure.stdout).toContain("Cleanup failed for task/archive");
-      expect(readFileSync(path.join(archived.path, "reports/evidence.json"), "utf8")).toBe("{}");
-      rmSync(path.join(directory, ".git/fauna-integration.lock"));
-      mkdirSync(path.join(directory, ".git/fauna-integration.lock"));
-      expect(cleanup().status).not.toBe(0);
-    } finally {
-      rmSync(directory, { recursive: true, force: true });
-    }
+    const runGit = (...args) => git(directory, ...args);
+    runGit("branch", "task/merged");
+    const unfinished = createWorktree(directory, "unfinished");
+    writeFixture(unfinished.path, "keep", "unfinished work");
+    const result = cleanup();
+    expect(result.status, result.stderr).toBe(0);
+    expect(result.stdout).toContain("Preserved task/unfinished");
+    expect(runGit("branch", "--list", "task/merged").trim()).toBe("");
+    expect(readFixture(unfinished.path, "keep")).toBe("unfinished work");
+    const archived = createWorktree(directory, "archive");
+    mkdirSync(path.join(archived.path, "reports"));
+    writeFixture(archived.path, "reports/evidence.json", "{}");
+    writeFixture(directory, ".git/fauna-worktree-archives", "block archive directory");
+    const failure = cleanup();
+    expect(failure.status).not.toBe(0);
+    expect(failure.stdout).toContain("Cleanup failed for task/archive");
+    expect(readFixture(archived.path, "reports/evidence.json")).toBe("{}");
+    rmSync(path.join(directory, ".git/fauna-integration.lock"));
+    mkdirSync(path.join(directory, ".git/fauna-integration.lock"));
+    expect(cleanup().status).not.toBe(0);
   },
 );
 
@@ -92,62 +81,39 @@ it("verifies automatic storage defaults and independent tracked clones", { timeo
 });
 
 it("validates sparse documentation references without hiding deleted files or broken anchors", () => {
-  const root = mkdtempSync(path.join(os.tmpdir(), "fauna-sparse-docs-"));
-  const git = (...args) =>
-    execFileSync("git", ["-c", "commit.gpgsign=false", ...args], { cwd: root, encoding: "utf8" });
-  try {
-    git("init", "-q", "-b", "main");
-    git("config", "user.name", "Fixture");
-    git("config", "user.email", "fixture@example.invalid");
-    mkdirSync(path.join(root, "public/art"), { recursive: true });
-    writeFileSync(path.join(root, "package.json"), "{}");
-    writeFileSync(path.join(root, "public/art/master.png"), "source");
-    writeFileSync(path.join(root, "public/art/guide.md"), "# Source master\n");
-    writeFileSync(
-      path.join(root, "README.md"),
-      "[Art](public/art/master.png) [Guide](public/art/guide.md#source-master)\n`public/art/`\n",
-    );
-    git("add", ".");
-    git("commit", "-qm", "fixture");
-    git("sparse-checkout", "set", "--no-cone", "/*", "!/public/art/");
-    expect(checkDocumentation(root)).toEqual([]);
-    writeFileSync(path.join(root, "README.md"), "[Guide](public/art/guide.md#absent)\n");
-    expect(checkDocumentation(root)).toEqual(["README.md: missing heading public/art/guide.md#absent"]);
-    git("sparse-checkout", "disable");
-    writeFileSync(path.join(root, "README.md"), "[Art](public/art/master.png)\n");
-    rmSync(path.join(root, "public/art/master.png"));
-    expect(checkDocumentation(root)).toEqual(["README.md: missing link public/art/master.png"]);
-  } finally {
-    rmSync(root, { recursive: true, force: true });
-  }
+  const root = repository(
+    {
+      "package.json": "{}",
+      "public/art/master.png": "source",
+      "public/art/guide.md": "# Source master\n",
+      "README.md": "[Art](public/art/master.png) [Guide](public/art/guide.md#source-master)\n`public/art/`\n",
+    },
+    "fauna-sparse-docs-",
+  );
+  git(root, "sparse-checkout", "set", "--no-cone", "/*", "!/public/art/");
+  expect(checkDocumentation(root)).toEqual([]);
+  writeFixture(root, "README.md", "[Guide](public/art/guide.md#absent)\n");
+  expect(checkDocumentation(root)).toEqual(["README.md: missing heading public/art/guide.md#absent"]);
+  git(root, "sparse-checkout", "disable");
+  writeFixture(root, "README.md", "[Art](public/art/master.png)\n");
+  rmSync(path.join(root, "public/art/master.png"));
+  expect(checkDocumentation(root)).toEqual(["README.md: missing link public/art/master.png"]);
 });
 
 it("finishes only its completed task while retaining its branch and ignored evidence", async () => {
   const previous = process.cwd();
-  const root = realpathSync(mkdtempSync(path.join(os.tmpdir(), "fauna-finish-")));
-  const git = (cwd, ...args) =>
-    execFileSync("git", ["-c", "commit.gpgsign=false", ...args], { cwd, encoding: "utf8", stdio: "pipe" });
+  const root = repository({ ".gitignore": ".worktrees/\nreports/\n", done: "base" }, "fauna-finish-");
   try {
-    git(root, "init", "-q", "-b", "main");
-    git(root, "config", "user.name", "Fixture");
-    git(root, "config", "user.email", "fixture@example.invalid");
-    writeFileSync(path.join(root, ".gitignore"), ".worktrees/\nreports/\n");
-    writeFileSync(path.join(root, "done"), "base");
-    git(root, "add", ".");
-    git(root, "commit", "-qm", "base");
     const task = createWorktree(root, "finished");
     mkdirSync(path.join(task.path, "reports"));
-    writeFileSync(path.join(task.path, "reports/unique.trace"), "keep original evidence");
+    writeFixture(task.path, "reports/unique.trace", "keep original evidence");
     const integrateTask = async () => ({ integrated: true, worktree: task.path });
     await finishTask(task.path, { keepWorktree: true, integrateTask });
-    expect(readFileSync(path.join(task.path, "reports/unique.trace"), "utf8")).toBe("keep original evidence");
+    expect(readFixture(task.path, "reports/unique.trace")).toBe("keep original evidence");
     const result = await finishTask(task.path, { integrateTask });
-    expect(readFileSync(path.join(result.retired.archive, "files/reports/unique.trace"), "utf8")).toBe(
-      "keep original evidence",
-    );
+    expect(readFixture(result.retired.archive, "files/reports/unique.trace")).toBe("keep original evidence");
     expect(git(root, "branch", "--list", task.branch).trim()).toContain(task.branch);
   } finally {
     process.chdir(previous);
-    rmSync(root, { recursive: true, force: true });
   }
 });

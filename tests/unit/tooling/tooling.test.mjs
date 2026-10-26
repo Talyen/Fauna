@@ -1,16 +1,8 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
-import {
-  mkdtempSync,
-  mkdirSync,
-  writeFileSync,
-  readFileSync,
-  rmSync,
-  realpathSync,
-  existsSync,
-} from "node:fs";
-import { tmpdir } from "node:os";
+import { git, put, readFixture, repository } from "../../support/tooling.mjs";
+import { describe, expect, it, vi } from "vitest";
+import { mkdirSync, readFileSync, rmSync, existsSync } from "node:fs";
 import path from "node:path";
-import { execFileSync, spawn } from "node:child_process";
+import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { pathToFileURL } from "node:url";
 import { checkDocumentation } from "../../../scripts/checks/check-docs.mjs";
@@ -21,37 +13,17 @@ import { cleanupWorktrees } from "../../../scripts/worktree-cleanup.mjs";
 import { integrate } from "../../../scripts/integrate.mjs";
 import { acquireIntegrationLock } from "../../../scripts/lib/integration-lock.mjs";
 
-const roots = [];
-function put(root, file, contents) {
-  mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
-  writeFileSync(path.join(root, file), contents);
-}
-function git(root, ...args) {
-  return execFileSync("git", ["-c", "commit.gpgsign=false", ...args], {
-    cwd: root,
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
-  }).trim();
-}
-function repo() {
-  const root = realpathSync(mkdtempSync(path.join(tmpdir(), "fauna tooling-")));
-  roots.push(root);
-  git(root, "init", "-q", "-b", "main");
-  git(root, "config", "user.name", "Tooling fixture");
-  git(root, "config", "user.email", "fixture@example.invalid");
-  git(root, "config", "core.hooksPath", path.join(root, "no-hooks"));
-  put(root, "package.json", JSON.stringify({ scripts: { check: "check", "docs:check": "docs" } }));
-  put(root, "package-lock.json", "{}\n");
-  put(root, ".gitignore", ".worktrees/\nnode_modules\n");
-  put(root, "README.md", "# Fauna\n\n[Workflow](Docs/workflow.md#commands)\n");
-  put(root, "Docs/workflow.md", "# Workflow\n\n## Commands\n\nnpm run check\n");
-  git(root, "add", ".");
-  git(root, "commit", "-qm", "fixture");
-  return root;
-}
-afterEach(() => {
-  for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
-});
+const repo = () =>
+  repository(
+    {
+      "package.json": JSON.stringify({ scripts: { check: "check", "docs:check": "docs" } }),
+      "package-lock.json": "{}\n",
+      ".gitignore": ".worktrees/\nnode_modules\n",
+      "README.md": "# Fauna\n\n[Workflow](Docs/workflow.md#commands)\n",
+      "Docs/workflow.md": "# Workflow\n\n## Commands\n\nnpm run check\n",
+    },
+    "fauna tooling-",
+  );
 
 describe("documentation contracts", () => {
   it("keeps archives and task evidence historical while validating maintained links into them", () => {
@@ -210,11 +182,11 @@ describe("isolated worktrees and protected integration", { timeout: 30_000 }, ()
     const task = createWorktree(root, "tooling");
     expect(task.linked).toBe(true);
     expect(git(task.path, "branch", "--show-current")).toBe("task/tooling");
-    expect(readFileSync(path.join(task.path, "README.md"), "utf8")).toContain("# Fauna");
+    expect(readFixture(task.path, "README.md")).toContain("# Fauna");
     put(task.path, "experiment.txt", "unfinished task experiment");
     expect(createWorktree(root, "tooling").reused).toBe(true);
-    expect(readFileSync(path.join(task.path, "experiment.txt"), "utf8")).toContain("unfinished");
-    expect(readFileSync(path.join(root, "README.md"), "utf8")).toContain("Uncommitted");
+    expect(readFixture(task.path, "experiment.txt")).toContain("unfinished");
+    expect(readFixture(root, "README.md")).toContain("Uncommitted");
   });
 
   it("does not share mismatched dependencies or replace preexisting branches and directories", () => {
@@ -282,7 +254,7 @@ describe("isolated worktrees and protected integration", { timeout: 30_000 }, ()
     expect(runner.mock.calls.map((call) => call[1].slice(1))).toEqual([
       ["run", "verify:changed", "--", "--base", original],
     ]);
-    expect(readFileSync(path.join(root, "main-only.txt"), "utf8")).toContain("concurrent");
+    expect(readFixture(root, "main-only.txt")).toContain("concurrent");
     expect(git(root, "show", "HEAD:Docs/workflow.md")).toContain("Task change");
     expect(existsSync(task.path)).toBe(true);
     expect(git(root, "branch", "--list", task.branch)).toContain(task.branch);
@@ -312,9 +284,7 @@ describe("isolated worktrees and protected integration", { timeout: 30_000 }, ()
     const result = await cleanupWorktrees(root, { apply: true, log: () => {} });
     const removed = result.find((entry) => entry.branch === clean.branch);
     expect(removed.status).toBe("removed");
-    expect(readFileSync(path.join(removed.archive, "files/reports/evidence.txt"), "utf8")).toBe(
-      "keep this evidence",
-    );
+    expect(readFixture(removed.archive, "files/reports/evidence.txt")).toBe("keep this evidence");
     expect(existsSync(clean.path)).toBe(false);
     expect(git(root, "branch", "--list", clean.branch)).toBe("");
     expect(git(root, "branch", "--list", "codex/merged-without-checkout")).toBe("");
@@ -324,7 +294,7 @@ describe("isolated worktrees and protected integration", { timeout: 30_000 }, ()
       expect(existsSync(task.path)).toBe(true);
       expect(git(root, "branch", "--list", task.branch)).toContain(task.branch);
     }
-    expect(readFileSync(path.join(dirty.path, "unfinished.txt"), "utf8")).toBe("unfinished");
+    expect(readFixture(dirty.path, "unfinished.txt")).toBe("unfinished");
     expect(git(unmerged.path, "show", "HEAD:feature.txt")).toBe("unique work");
   });
 
@@ -365,7 +335,7 @@ describe("isolated worktrees and protected integration", { timeout: 30_000 }, ()
       }),
     ).rejects.toThrow("unfinished work");
     expect(git(root, "rev-parse", "HEAD")).toBe(original);
-    expect(readFileSync(path.join(task.path, "late.txt"), "utf8")).toContain("unfinished");
+    expect(readFixture(task.path, "late.txt")).toContain("unfinished");
   });
 
   it("preserves a clean worktree with a multi-commit cherry-pick still in progress", async () => {
