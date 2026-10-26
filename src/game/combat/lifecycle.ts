@@ -9,6 +9,7 @@ import type { GameEvent, GameState } from "../types";
 import { ensureCombat, unitName, STACK_LIMIT, harmfulStatuses, controlled, type Combatant } from "./state";
 
 import { reaction, type Resolution } from "./operations";
+import { settleBleedLeech } from "./damage-reactions";
 import {
   beginControlTurn,
   consumeControlTurn,
@@ -16,7 +17,6 @@ import {
   reducePeriodicStacks,
   periodicTick,
   finishBleedTick,
-  bleedPayments,
   setPeriodicStacks,
 } from "./status-state";
 
@@ -84,10 +84,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     });
     if (status === "bleed") {
       finishBleedTick(stats);
-      for (const payout of bleedPayments(payouts, payment.outcome === "landed" ? payment.dealt : 0)) {
-        const owner = combatantById(state, payout.sourceId);
-        if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true, unit);
-      }
+      yield* settleBleedLeech(state, unit, payouts, payment.outcome === "landed" ? payment.dealt : 0, events);
     }
     // Threshold reactions can Cleanse the ticking status; decay must not restore it.
     if (stats[status] === 0) continue;

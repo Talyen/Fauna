@@ -22,6 +22,7 @@ import {
   type Combatant,
 } from "./state";
 import { reaction, type Resolution } from "./operations";
+import { applyResolvedStatus } from "./status-reactions";
 import { modifiedDamage, blockPayment, blockEfficiency, armoredDamage, armorApplies } from "./damage-values";
 import {
   dodgeResponse,
@@ -569,17 +570,7 @@ export function* resolveHit(
     target.health > 0 &&
     state.boons.includes("eclipse-protractor")
   ) {
-    const result = yield* reaction(
-      "applyHarmfulStatus",
-      state,
-      source,
-      target,
-      criticalBonusDamage,
-      "freeze",
-      events,
-    );
-    if (result.appliedControl) yield* reaction("controlRewards", state, source, target, "freeze", events);
-    for (const depletion of result.depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
+    yield* applyResolvedStatus(state, source, target, criticalBonusDamage, "freeze", events);
   }
   // Absorbed critical hits still land; only damage-based procs require positive damage.
   if (
@@ -629,8 +620,7 @@ export function* resolveHit(
     source.health > 0 &&
     state.boons.includes("fallingstar-anvil")
   ) {
-    const result = yield* reaction(
-      "applyHarmfulStatus",
+    yield* applyResolvedStatus(
       state,
       target,
       source,
@@ -638,8 +628,6 @@ export function* resolveHit(
       "stun",
       events,
     );
-    if (result.appliedControl) yield* reaction("controlRewards", state, target, source, "stun", events);
-    for (const depletion of result.depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
   }
   return { outcome: "landed", lost, dealt };
 }

@@ -23,6 +23,7 @@ import {
 } from "./state";
 
 import { reaction, type Resolution } from "./operations";
+import { applyResolvedStatus } from "./status-reactions";
 import {
   enterControl,
   cleanseControl,
@@ -77,8 +78,7 @@ export function* returnCleansedEffect(
     return;
   const target = battlefield(state, "enemy").find((enemy) => enemy.id === sourceId && enemy.health > 0);
   if (!target) return;
-  const result = yield* reaction(
-    "applyHarmfulStatus",
+  yield* applyResolvedStatus(
     state,
     unit,
     target,
@@ -89,9 +89,6 @@ export function* returnCleansedEffect(
     events,
     { reflected: true, controlTurns: turns },
   );
-  if (result.appliedControl && status !== "blind")
-    yield* reaction("controlRewards", state, unit, target, status, events);
-  for (const depletion of result.depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
 }
 
 export function* grantStatus(
@@ -724,22 +721,9 @@ export function* applyHarmfulStatus(
         outcome: "apply",
         text: `${unitName(target)} reflects ${type} to ${unitName(recipient)}`,
       });
-      const reflected = yield* reaction(
-        "applyHarmfulStatus",
-        state,
-        target,
-        recipient,
-        damage,
-        type,
-        events,
-        {
-          reflected: true,
-        },
-      );
-      if (reflected.appliedControl && type !== "blind")
-        yield* reaction("controlRewards", state, target, recipient, type, events);
-      for (const depletion of reflected.depletions)
-        yield* reaction("triggerArmorBreak", state, depletion, events);
+      yield* applyResolvedStatus(state, target, recipient, damage, type, events, {
+        reflected: true,
+      });
       return { depletions: [], appliedControl: false, suppressed: true };
     }
   }
@@ -857,19 +841,7 @@ export function* applyHarmfulStatus(
             (ensureCombat(unit).cooldown === 0 || state.boons.includes("sleepers-urn")),
         );
         if (recipient) {
-          const result = yield* reaction(
-            "applyHarmfulStatus",
-            state,
-            source,
-            recipient,
-            excess,
-            type,
-            events,
-          );
-          if (result.appliedControl)
-            yield* reaction("controlRewards", state, source, recipient, type, events);
-          for (const depletion of result.depletions)
-            yield* reaction("triggerArmorBreak", state, depletion, events);
+          yield* applyResolvedStatus(state, source, recipient, excess, type, events);
         }
       }
     }

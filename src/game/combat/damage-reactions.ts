@@ -460,7 +460,18 @@ export function* detonateBleed(
   const payment = yield* reaction("resolveHit", state, source, target, amount, "bleed", events, {
     origin: "periodic",
   });
-  for (const payout of bleedPayments(payouts, payment.outcome === "landed" ? payment.dealt : 0)) {
+  yield* settleBleedLeech(state, target, payouts, payment.outcome === "landed" ? payment.dealt : 0, events);
+}
+
+/** Both ticks and detonations pay captured obligations in order, even after Cleanse. */
+export function* settleBleedLeech(
+  state: GameState,
+  target: Combatant,
+  payouts: Parameters<typeof bleedPayments>[0],
+  dealt: number,
+  events: GameEvent[],
+): Resolution<void> {
+  for (const payout of bleedPayments(payouts, dealt)) {
     const owner = combatantById(state, payout.sourceId);
     if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true, target);
   }
