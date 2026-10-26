@@ -31,6 +31,7 @@ it("keeps expiry effective after a generated report is archived with a retired w
     const original = await bundle(root, "passed", true, now - 2 * day);
     const archived = path.join(root, ".git/fauna-worktree-archives/task/files/reports/balance/passed");
     await cp(original, archived, { recursive: true, preserveTimestamps: true });
+    await bundle(root, "latest", true, now);
     const result = await pruneBalanceReports(root, { now, includeArchives: true });
     await expect(access(original)).rejects.toThrow();
     await expect(access(archived)).rejects.toThrow();
@@ -53,6 +54,7 @@ it("quarantines old records without losing unique failure evidence", async () =>
     const passed = await bundle(root, "passed", true, now - 2 * day);
     const recentFailure = await bundle(root, "failure", false, now - 2 * day);
     const oldFailure = await bundle(root, "old-failure", false, now - 4 * day);
+    await bundle(root, "latest", true, now);
     const result = await pruneBalanceReports(root, { now });
     await expect(access(passed)).rejects.toThrow();
     await expect(access(oldFailure)).rejects.toThrow();
@@ -67,7 +69,7 @@ it("quarantines old records without losing unique failure evidence", async () =>
       });
     }
     await expect(pruneBalanceReports(root, { now, budget: 1 })).rejects.toThrow("budget");
-    expect((await recoveries(result.quarantine)).length).toBe(3);
+    expect((await recoveries(result.quarantine)).length).toBe(2);
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -99,6 +101,22 @@ it("refuses another capture when fresh diagnostics fill the budget", async () =>
     const fresh = await bundle(root, "fresh", false, now);
     await expect(pruneBalanceReports(root, { now, budget: 1 })).rejects.toThrow("budget");
     await expect(access(fresh)).resolves.toBeUndefined();
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+it("dry-runs age and size selection while retaining latest success, latest failure and pins", async () => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "fauna-retention-dry-"));
+  const now = Date.now();
+  try {
+    const old = await bundle(root, "old", true, now - 3 * day);
+    const pass = await bundle(root, "latest-pass", true, now - 2 * day);
+    const fail = await bundle(root, "latest-fail", false, now - 4 * day);
+    const result = await pruneBalanceReports(root, { now, dryRun: true, budget: 1 });
+    expect(result.moved.map((item) => item.path)).toEqual([old]);
+    expect(result.reclaimedBytes).toBe(0);
+    for (const directory of [old, pass, fail]) await expect(access(directory)).resolves.toBeUndefined();
   } finally {
     await rm(root, { recursive: true, force: true });
   }

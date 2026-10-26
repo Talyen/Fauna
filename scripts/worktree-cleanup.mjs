@@ -8,7 +8,7 @@ const taskBranch = /^(?:task|codex)\//;
 const rebuildable = new Set(["node_modules", "dist"]);
 
 // The caller holds the integration lock. Git still independently refuses dirty/locked removal.
-export function removeMergedTask(root, branch) {
+export function removeMergedTask(root, branch, { keepBranch = false } = {}) {
   assertClean(root, "main");
   if (!taskBranch.test(branch)) throw new Error(`Not a task branch: ${branch}`);
   const head = git(root, ["rev-parse", "--verify", `refs/heads/${branch}`]).trim();
@@ -54,6 +54,7 @@ export function removeMergedTask(root, branch) {
       throw new Error("Task advanced during cleanup; preserved checkout.");
     git(root, ["worktree", "remove", task.path]);
   }
+  if (keepBranch) return { branch, path: task?.path, archive };
   // Ordinary deletion refuses a branch that acquired unmerged commits in the meantime.
   git(root, [
     "-c",

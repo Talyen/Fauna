@@ -68,7 +68,7 @@
     "check:format": "node scripts/local.mjs check:format",
     "check:boundaries": "node scripts/local.mjs check:boundaries",
     "generate:release-inventory": "node scripts/release/dependency-inventory.mjs",
-    "finish": "node scripts/local.mjs integrate"
+    "finish": "node scripts/finish.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

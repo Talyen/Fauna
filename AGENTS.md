@@ -18,7 +18,7 @@ Work independently. Do not discover or message other chats for routine coordinat
 
 Task-scoped branch/worktree creation, commits, local integration and hosted CI execution are authorized unless the task restricts them. Pushes, PRs, releases, deployments, destructive cleanup and changes outside this game require an explicit user request. This file is the repository's authority for Git authorization; other workflow documents link here instead of defining separate permissions.
 
-Follow [Contributing](CONTRIBUTING.md#worktrees-and-integration) for review, commits and the protected integration gate. Integration must preserve dirty main, other lock owners and ambiguous conflicts; retain the task checkout, branch and evidence. Optional retirement requires separate cleanup authorization.
+Follow [Contributing](CONTRIBUTING.md#worktrees-and-integration) for review, commits and the protected integration gate. Integration must preserve dirty main, other lock owners and ambiguous conflicts; retain the task checkout, branch and evidence. `npm run finish` retires only this completed task after preserving ignored evidence and retaining its branch. Use `npm run integrate` or `finish -- --keep-worktree` while reviews/previews still need it; never retire another active task automatically.
 
 ## Find the owner
 

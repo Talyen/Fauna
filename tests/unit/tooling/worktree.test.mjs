@@ -4,6 +4,7 @@ import path from "node:path";
 import os from "node:os";
 import { expect, it } from "vitest";
 import { checkDocumentation } from "../../../scripts/checks/check-docs.mjs";
+import { finishTask } from "../../../scripts/finish.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 it("creates and reuses a task checkout from committed main while preserving dirty files", () => {
   const directory = mkdtempSync(path.join(os.tmpdir(), "fauna-worktrees-"));
@@ -117,6 +118,36 @@ it("validates sparse documentation references without hiding deleted files or br
     rmSync(path.join(root, "public/art/master.png"));
     expect(checkDocumentation(root)).toEqual(["README.md: missing link public/art/master.png"]);
   } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+it("finishes only its completed task while retaining its branch and ignored evidence", async () => {
+  const previous = process.cwd();
+  const root = realpathSync(mkdtempSync(path.join(os.tmpdir(), "fauna-finish-")));
+  const git = (cwd, ...args) =>
+    execFileSync("git", ["-c", "commit.gpgsign=false", ...args], { cwd, encoding: "utf8", stdio: "pipe" });
+  try {
+    git(root, "init", "-q", "-b", "main");
+    git(root, "config", "user.name", "Fixture");
+    git(root, "config", "user.email", "fixture@example.invalid");
+    writeFileSync(path.join(root, ".gitignore"), ".worktrees/\nreports/\n");
+    writeFileSync(path.join(root, "done"), "base");
+    git(root, "add", ".");
+    git(root, "commit", "-qm", "base");
+    const task = createWorktree(root, "finished");
+    mkdirSync(path.join(task.path, "reports"));
+    writeFileSync(path.join(task.path, "reports/unique.trace"), "keep original evidence");
+    const integrateTask = async () => ({ integrated: true, worktree: task.path });
+    await finishTask(task.path, { keepWorktree: true, integrateTask });
+    expect(readFileSync(path.join(task.path, "reports/unique.trace"), "utf8")).toBe("keep original evidence");
+    const result = await finishTask(task.path, { integrateTask });
+    expect(readFileSync(path.join(result.retired.archive, "files/reports/unique.trace"), "utf8")).toBe(
+      "keep original evidence",
+    );
+    expect(git(root, "branch", "--list", task.branch).trim()).toContain(task.branch);
+  } finally {
+    process.chdir(previous);
     rmSync(root, { recursive: true, force: true });
   }
 });

@@ -53,7 +53,7 @@ export async function sealBalanceReport(directory, complete, { root, now = Date.
 
 export async function pruneBalanceReports(
   root,
-  { now = Date.now(), budget = 1024 ** 3, includeArchives = false } = {},
+  { now = Date.now(), budget = 1024 ** 3, includeArchives = false, dryRun = false } = {},
 ) {
   const roots = [root];
   let quarantine = path.join(root, "reports/balance-quarantine");
@@ -155,7 +155,17 @@ export async function pruneBalanceReports(
   }
   const retained = bundles.reduce((sum, item) => sum + item.bytes, 0) + (await quarantineBytes(quarantine));
   const moved = [];
+  const latest = new Set(
+    [true, false]
+      .map(
+        (complete) =>
+          bundles.filter((bundle) => bundle.complete === complete).sort((a, b) => b.finished - a.finished)[0]
+            ?.directory,
+      )
+      .filter(Boolean),
+  );
   for (const bundle of bundles.sort((a, b) => a.finished - b.finished)) {
+    if (latest.has(bundle.directory)) continue;
     const age = now - bundle.finished;
     const expired = age >= (bundle.complete ? day : 3 * day);
     if (!expired && !(retained > budget && age >= day)) continue;
@@ -186,6 +196,14 @@ export async function pruneBalanceReports(
       }),
     );
     if (checks.some((matches) => !matches)) continue;
+    if (dryRun) {
+      moved.push({
+        path: bundle.directory,
+        bytes: bundle.bytes,
+        recovery: "Review only; no bytes moved or deleted",
+      });
+      continue;
+    }
     await mkdir(quarantine, { recursive: true });
     const destination = await lstat(quarantine);
     if (!destination.isDirectory() || destination.isSymbolicLink())
@@ -208,9 +226,9 @@ export async function pruneBalanceReports(
     await rename(bundle.directory, path.join(entry, "bundle"));
     moved.push(entry);
   }
-  if (retained >= budget)
+  if (!dryRun && retained >= budget)
     throw new Error(
       "Retained and quarantined balance evidence fills the 1 GiB budget. Review an exact deletion batch before another capture; no diagnostics were permanently removed.",
     );
-  return { quarantine, moved, retainedBytes: retained };
+  return { quarantine, moved, retainedBytes: retained, dryRun, reclaimedBytes: 0 };
 }
