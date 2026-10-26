@@ -1,0 +1,35 @@
+name: Review snapshot evidence
+on:
+  push:
+    branches: [task/outstanding-review-1026]
+permissions:
+  contents: read
+jobs:
+  snapshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund
+      - name: Capture current reviewed snapshots
+        run: |
+          npm test -- tests/unit/application/battle-policy.test.ts -t 'preserves visible rankings and legal choices for aerostat' -u
+          npm test -- tests/unit/game/combat-resolution.test.ts -t 'preserves committed command traces' -u
+          npm test -- tests/unit/game/journey-lifecycle.test.ts -t 'preserves seeded commands and outputs' -u
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: review-snapshot-evidence
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            tests/unit/application/__snapshots__/battle-policy.test.ts.snap
+            tests/unit/game/__snapshots__/combat-resolution.test.ts.snap
+            tests/unit/game/__snapshots__/journey-lifecycle.test.ts.snap
