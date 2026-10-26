@@ -254,6 +254,7 @@ export function ActionCard({
             : 0),
       ),
     enemyPower,
+    modifiers,
   );
   useEffectBaseline(selected ? effectPalette(visualKeywords(effectText)) : null, 1);
   const artwork = (

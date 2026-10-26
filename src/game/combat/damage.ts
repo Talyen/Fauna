@@ -302,8 +302,10 @@ export function* resolveHit(
   const blindMiss =
     direct &&
     ((options.origin === "ability" ? options.blindMiss : undefined) ?? beginAttack(state, source, events));
+  const thornDodge =
+    alliedTarget && "thorns" in options && options.thorns && state.boons.includes("rootvault-pole");
   if (
-    direct &&
+    (direct || thornDodge) &&
     (blindMiss ||
       (dodgeChance(state, target) > 0 &&
         succeeds(state, dodgeChance(state, target) / 100, !alliedTarget, events)))
@@ -338,7 +340,7 @@ export function* resolveHit(
         );
       }
     }
-    yield* dodgeResponse(context);
+    yield* dodgeResponse(context, !thornDodge);
     return { outcome: "miss" };
   }
   if (type === "freeze" && stats.nullifyFreeze) {
@@ -393,6 +395,11 @@ export function* resolveHit(
   if (partingCut) ensureCombat(source)[talentRule("bleed.parting-cut").state] = false;
   const ordinaryDamage = damage;
   if (critical) damage *= 2;
+  const armorFirst =
+    alliedTarget &&
+    state.boons.includes("hoard-lockplate") &&
+    armorApplies(state, target, type, source, options);
+  if (armorFirst) damage = armoredDamage(damage, stats.armor);
   const blockRatio = blockEfficiency(state, target, type);
   const bypassBlock =
     alliedSource &&
@@ -415,10 +422,12 @@ export function* resolveHit(
   )
     erode(boonRule("sundering-charm").armor);
   // Other mechanics use the hit before Block; Armor still mitigates their damage.
-  const effectDamage = armorApplies(state, target, type, source, options)
-    ? armoredDamage(damage + blocked, stats.armor)
-    : damage + blocked;
-  if (armorApplies(state, target, type, source, options)) damage = armoredDamage(damage, stats.armor);
+  const effectDamage =
+    !armorFirst && armorApplies(state, target, type, source, options)
+      ? armoredDamage(damage + blocked, stats.armor)
+      : damage + blocked;
+  if (!armorFirst && armorApplies(state, target, type, source, options))
+    damage = armoredDamage(damage, stats.armor);
   const criticalBonusDamage = critical
     ? Math.max(
         0,

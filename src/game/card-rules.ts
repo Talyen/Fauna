@@ -3,11 +3,24 @@ import { supplementalRule } from "./rules/supplemental";
 import { abilityExtras, primaryAbilityValue } from "./combat/ability-values";
 import { DAMAGE_TYPES, keywordLabel } from "./keywords";
 import type { CardDefinition, DamageType } from "./content/types";
+import type { GameState } from "./types";
+export function foodForAllies(card: CardDefinition, state?: Pick<GameState, "boons">) {
+  return (
+    card.species === null &&
+    (card.effect === "heal" || card.effect === "guard") &&
+    !!state &&
+    state.boons.includes("pumpkin-tureen")
+  );
+}
 export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, keywordLabel(id)])) as Record<
   DamageType,
   string
 >;
-export function cardTargeting(card: CardDefinition): "enemy" | "ally" | "self" | "automatic" {
+export function cardTargeting(
+  card: CardDefinition,
+  state?: Pick<GameState, "boons">,
+): "enemy" | "ally" | "self" | "automatic" {
+  if (foodForAllies(card, state)) return "automatic";
   const policy = abilityRule(card.effect).targeting;
   switch (policy) {
     case "attack":
@@ -71,6 +84,7 @@ export function cardText(
   level = 0,
   value: number | undefined = undefined,
   power = 1,
+  state?: Pick<GameState, "boons">,
 ): string {
   value ??= primaryAbilityValue(card, card.value + level * 2, power);
   let text = abilityRule(card.effect).describe(card, { value, level, power, label: keywordLabel });
@@ -93,6 +107,9 @@ export function cardText(
   if (card.species === null) {
     if (card.effect === "heal") text = `Restore ${value} Health`;
     if (card.effect === "guard") text = `Gain ${value} Block`;
+    if (foodForAllies(card, state))
+      text =
+        card.effect === "heal" ? `Restore ${value} Health to all allies` : `Give all allies ${value} Block`;
     if (card.consume) text += "; Consume";
   } else if (card.consume) text = `Consume; ${text}`;
   return text;

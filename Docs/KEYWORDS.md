@@ -34,6 +34,8 @@ Block absorbs damage before Health and halves at the owner's next turn, rounded 
 
 Block protects Health without suppressing hit effects, status buildup, Leech or damage-based reactions. Those mechanics use damage before Block, with applicable Armor mitigation. Leech includes absorbed damage and actual Health lost, capped by that mitigated hit so neither Armor nor overkill can inflate it. Rules explicitly based on Health lost continue to use actual Health loss. Grounding, Blood Ward and Venom Ward retain their explicit Block-dependent rules. Dodge and Negate remain separate from Block.
 
+Hoard Lockplate is the explicit allied exception: applicable Armor reduces damage before Block is spent, without applying Armor twice. The default order remains Block, Armor, then Health loss.
+
 ### Thorns and Water Thorns
 
 Thorns retaliate for their current stack count as Nature damage when an opposing attack hits, including attacks fully absorbed by Block or Armor, then lose one stack; retaliation cannot trigger another retaliation. Water Thorns follow the same trigger and decay but deal Water damage from a separate stack pool; both can retaliate from one qualifying attack while the defender survives. Neither triggers from Dodge, periodic/derived damage or retaliation. Negate retains its explicit Thorns retaliation rule.
@@ -45,6 +47,8 @@ Fire Thorns retaliate with Burn damage and equal Burn buildup using their curren
 ### Blind
 
 Blind gives the next attack a 50% miss chance and expires on that attack, hit or miss; one seeded roll covers all its targets and damage packets. A miss uses the recipient's ordinary Dodge outcome, rewards and icon, even if control prevents normal Dodge. Support actions, periodic damage and retaliation do not consume Blind. Blind is non-stacking, Cleanseable and reflectable. [Moonveil Mask](content/boons.md#execution-contracts) lets enemy Blind persist when its own roll causes the miss.
+
+Rootvault Pole allows allied Dodge against Thorns, including Fire Thorns buildup prevention; control and the ordinary chance cap remain. Dodge rewards resolve without starting another retaliation chain.
 
 ### Temporary Dodge
 
@@ -63,6 +67,8 @@ Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind o
 Reflect follows the scope stated by its granting effect. [Attack Reflection](#attack-reflection) returns the attack, including its damage and harmful follow-ups. Status-only reflection redirects Burn, Poison, Bleed, Stun, Freeze or Blind to a random living deployed opponent, including the attacker. Buildup retains its original post-mitigation strength; direct damage still lands on the original target. The recipient uses ordinary control thresholds and immunity. The reflecting creature owns the reflected status, which cannot reflect again.
 
 A pending Reflect charge guarantees the next eligible reflection before passive chance is considered. Repeated grants refresh one charge; it survives turns, swaps and resume, resets each battle and can be Purged. Only a new eligible application spends protection or rolls passive reflection: immune/capped statuses and already present Blind do neither. Damage without status buildup, including Dodges, periodic ticks and ordinary retaliation, cannot trigger reflection; independently applied Blind remains eligible. Block does not suppress buildup or reflection. [Nullify](#nullify) is checked first. Burn-only Reflect is spent before unrestricted Reflect.
+
+Star Hoop extends allied unrestricted Reflect and innate status reflection to incoming enemy Purge. The complete application returns to its attacker, retains ordinary Purge reactions and cannot reflect again. Burn-only Reflect does not qualify.
 
 ### Nullify
 

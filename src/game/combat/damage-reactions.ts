@@ -30,7 +30,10 @@ export interface HitPayment {
   readonly depletedBlock: boolean;
   readonly critical: boolean;
 }
-export function* dodgeResponse({ state, source, target, events }: HitContext): Resolution<void> {
+export function* dodgeResponse(
+  { state, source, target, events }: HitContext,
+  retaliate = true,
+): Resolution<void> {
   const stats = ensureCombat(target),
     alliedTarget = !isEnemy(target);
   events.push({
@@ -62,7 +65,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
         target,
       );
     if (target.health <= 0) return;
-    if (state.boons.includes("briar-racquet") && stats.thorns > 0 && target.health > 0) {
+    if (retaliate && state.boons.includes("briar-racquet") && stats.thorns > 0 && target.health > 0) {
       const damage = Math.round(stats.thorns / boonRule("briar-racquet").divisor);
       if (!(source.combat?.bleed && state.boons.includes("thornheart-ring"))) stats.thorns--;
       yield* reaction("hit", state, target, source, damage, "nature", events, {
@@ -94,7 +97,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
     if (hasTalent(state, "bleed.parting-cut")) stats[talentRule("bleed.parting-cut").state] = true;
     if (hasTalent(state, "physical.riposte")) stats[talentRule("physical.riposte").state] = true;
     if (hasTalent(state, "nature.windstep")) stats[talentRule("nature.windstep").state] = true;
-    if (hasTalent(state, "burn.smoke-screen") && ensureCombat(source).burn > 0)
+    if (retaliate && hasTalent(state, "burn.smoke-screen") && ensureCombat(source).burn > 0)
       yield* reaction("hit", state, target, source, talentRule("burn.smoke-screen").amount, "burn", events, {
         origin: "proc",
       });
@@ -110,7 +113,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
       }
   }
   const cinderstep = passiveAmount(alliedTarget ? state : undefined, target.species, "dodgeBurn");
-  if (cinderstep)
+  if (retaliate && cinderstep)
     yield* reaction("hit", state, target, source, cinderstep, "burn", events, {
       origin: "statusRetaliation",
     });

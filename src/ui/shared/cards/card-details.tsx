@@ -46,6 +46,7 @@ export function ActionDetails({
       {card.temporary && !def.consume ? <p>Copy · Lasts for this battle</p> : null}
       <CardRules
         card={def}
+        modifiers={modifiers}
         power={enemyPower}
         level={card.level}
         value={

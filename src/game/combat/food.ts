@@ -1,13 +1,15 @@
 import { actionValue } from "../ability-rules";
 import { takeCardRepeat } from "./card-repeat";
-import { battleCardCapacity, createTemporaryCard } from "../card-zones";
+import { battleCardCapacity, createTemporaryCard, draw } from "../card-zones";
+import { boonRule } from "../rules/boons";
+import { foodForAllies } from "../card-rules";
 import { FOOD_CARDS } from "../content/food";
 import { species, type CardDefinition } from "../content";
 import { receiveCard } from "../card-zones";
 import { roll } from "../random";
 import { passiveAmount } from "../progression";
 import { gainMana, grantBlock, restoreHealth } from "./index";
-import { battlefield } from "../battlefield";
+import { battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import type { BattleState, Creature, GameEvent } from "../types";
 
 export function createFood(
@@ -80,7 +82,20 @@ export function useFood(
         text: `${def.name} repeats`,
       });
     if (def.effect === "mana") gainMana(state, value, events);
-    else if (recipient && def.effect === "heal") restoreHealth(recipient, value, events, false, state, true);
-    else if (recipient && def.effect === "guard") grantBlock(state, recipient, value, events);
+    else {
+      const recipients = foodForAllies(def, state)
+        ? def.effect === "heal"
+          ? healingAllies(state)
+          : battlefield(state, "player").filter((unit) => unit.health > 0)
+        : recipient
+          ? [recipient]
+          : [];
+      for (const target of recipients) {
+        if (target.health <= 0 || isDepartedMinion(state, target)) continue;
+        if (def.effect === "heal") restoreHealth(target, value, events, false, state, true);
+        else if (def.effect === "guard") grantBlock(state, target, value, events);
+      }
+    }
   }
+  if (state.boons.includes("field-lunch-basket")) draw(state, boonRule("field-lunch-basket").draw, events);
 }

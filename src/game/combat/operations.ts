@@ -16,6 +16,7 @@ import type {
   returnCleansedEffect,
   cleanseRewards,
   cleanseThorns,
+  poisonCleanseMana,
   applyHarmfulStatus,
   controlRewards,
   applyBlind,
@@ -41,6 +42,7 @@ export type Operations = {
   returnCleansedEffect: typeof returnCleansedEffect;
   cleanseRewards: typeof cleanseRewards;
   cleanseThorns: typeof cleanseThorns;
+  poisonCleanseMana: typeof poisonCleanseMana;
   applyHarmfulStatus: typeof applyHarmfulStatus;
   controlRewards: typeof controlRewards;
   applyBlind: typeof applyBlind;

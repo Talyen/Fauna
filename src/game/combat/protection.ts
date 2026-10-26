@@ -55,6 +55,8 @@ export function* restoreHealth(
   }
   if (gain > 0 && state?.phase === "battle" && !isEnemy(unit)) {
     const stats = ensureCombat(unit);
+    if (stats.bleed > 0 && state.boons.includes("yarrow-salve-tin"))
+      yield* reaction("removeEffects", unit, "cleanse", 1, events, state, "bleed", source);
     if (source && !isEnemy(source) && source.health > 0 && state.boons.includes("grafting-needle")) {
       // A floor copies resilience without compounding Armor-gain multipliers or healing reactions
       const floor = Math.round(ensureCombat(source).armor / boonRule("grafting-needle").divisor);

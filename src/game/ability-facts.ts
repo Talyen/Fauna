@@ -30,7 +30,8 @@ export function healingBenefit(
     : 0;
   const cleanses =
     hasHarmfulEffects(ally) &&
-    ((excess > 0 && hasTalent(state, "health.clean-slate")) ||
+    ((gain > 0 && (ally.combat?.bleed ?? 0) > 0 && state.boons.includes("yarrow-salve-tin")) ||
+      (excess > 0 && hasTalent(state, "health.clean-slate")) ||
       !!effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient"));
   const shared =
     excess > 0 && !isEnemy(ally) && state.boons.includes("last-threshold")

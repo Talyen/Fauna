@@ -2,7 +2,7 @@ import { permanentCardCopies } from "./card-kit";
 import { isRosterCreature } from "./battlefield";
 import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
-import { grantBlock, restoreHealth } from "./combat/index";
+import { grantBlock, restoreHealth, removeEffects } from "./combat/index";
 import { unitName, type Combatant } from "./combat/state";
 import { passiveAmount } from "./progression";
 import { shuffle, roll } from "./random";
@@ -25,6 +25,15 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
 
 export function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
+}
+export function cleanseDeparture(state: GameState, outgoing: Combatant, events: GameEvent[]) {
+  if (state.phase !== "battle" || outgoing.health <= 0 || !state.boons.includes("prayer-sailboat")) return;
+  for (const status of ["stun", "freeze"] as const)
+    if (
+      outgoing.health > 0 &&
+      (outgoing.combat?.controlled === status || (outgoing.combat?.[status] ?? 0) > 0)
+    )
+      removeEffects(outgoing, "cleanse", 1, events, state, status);
 }
 /** Match existing protection without spending it or amplifying fresh Block grants. */
 export function matchSwapBlock(state: GameState, first: Combatant, second: Combatant, events: GameEvent[]) {
@@ -144,6 +153,8 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   const all = [...state.team, ...state.reserves];
   const previous = state.cards;
   const departing = new Set(state.team.filter((unit) => !ids.includes(unit.id)).map((unit) => unit.id));
+  if (fromCard)
+    for (const unit of state.team) if (departing.has(unit.id)) cleanseDeparture(state, unit, events);
   state.team = ids.map((id) => all.find((unit) => unit.id === id)!);
   state.reserves = all.filter((unit) => !ids.includes(unit.id));
   const retained = previous.filter((card) => card.ownerId === null || ids.includes(card.ownerId));
@@ -280,7 +291,10 @@ export function swapBackup(
       text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
     });
   }
-  if (fromCard && outgoing) matchSwapBlock(state, outgoing, incoming, events);
+  if (fromCard && outgoing) {
+    cleanseDeparture(state, outgoing, events);
+    matchSwapBlock(state, outgoing, incoming, events);
+  }
   mountainGuide(state, incoming, previous, events);
   gentlePassage(state, previous, events);
   if (fromCard && state.boons.includes("saddle-pouch")) drawOwner(state, incoming.id, events);
@@ -313,7 +327,10 @@ export function swapFromCard(
   const from = row.findIndex((unit) => unit.id === actor.id);
   const to = row.findIndex((unit) => unit.id === other.id);
   [row[from], row[to]] = [row[to]!, row[from]!];
-  if (allied) matchSwapBlock(state, actor, other, events);
+  if (allied) {
+    cleanseDeparture(state, actor, events);
+    matchSwapBlock(state, actor, other, events);
+  }
   events.push({
     kind: "action",
     actionType: "swap",

@@ -1,5 +1,15 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "hoard-lockplate": "Armor reduces damage before Block",
+  "rootvault-pole": "Allies can Dodge Thorns damage",
+  "star-hoop": "Reflect also returns enemy Purge",
+  "pattern-reel": "Purging an effect removes it from every enemy",
+  "prayer-sailboat": "Swapping out Cleanses Stun and Freeze",
+  "pumpkin-tureen": "Food grants Health and Block to all allies",
+  "field-lunch-basket": "Playing Food draws a card",
+  "winnowing-sieve": "Unused Purge spreads to other enemies",
+  "blooming-still": "Cleansing Poison restores 1 Mana",
+  "yarrow-salve-tin": "Healing an ally also Cleanses their Bleed",
   "comb-uncapping-fork": "Thorns damage ignores enemy Block",
   "fern-fencing-foil": "Dodging an attack Purges its attacker",
   "resonance-kalimba": "Thorns damage adds equal Stun buildup",

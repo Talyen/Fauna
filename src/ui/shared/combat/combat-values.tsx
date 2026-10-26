@@ -1,3 +1,4 @@
+import type { GameState } from "../../../game/types";
 import { KeywordText } from "../keyword-text";
 import { Droplet, Flame, FlaskConical, Leaf, Snowflake, Sun, Swords, Zap } from "lucide-react";
 import { type CardDefinition, type DamageType } from "../../../game/content";
@@ -42,15 +43,17 @@ export function CardRules({
   level = 0,
   value,
   power = 1,
+  modifiers,
 }: {
   card: CardDefinition;
   level?: number;
   value?: number;
   power?: number;
+  modifiers?: GameState;
 }) {
   return (
     <span className="action-effect">
-      <KeywordText text={cardText(card, level, value, power)} />
+      <KeywordText text={cardText(card, level, value, power, modifiers)} />
     </span>
   );
 }

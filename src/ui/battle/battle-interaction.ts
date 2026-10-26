@@ -99,7 +99,7 @@ export function useBattleInteraction({
   });
   const card = game.cards.find((entry) => entry.id === selected);
   const def = card ? definition(card.definitionId) : null;
-  const mode = def ? cardTargeting(def) : "automatic";
+  const mode = def ? cardTargeting(def, game) : "automatic";
   const enemyTarget = mode === "enemy",
     allyTarget = mode === "ally";
   const row = enemyTarget
@@ -198,7 +198,7 @@ export function useBattleInteraction({
 
   const chooseCard = (cardId: string) => {
     const chosen = game.cards.find((entry) => entry.id === cardId)!;
-    const mode = cardTargeting(definition(chosen.definitionId));
+    const mode = cardTargeting(definition(chosen.definitionId), game);
     if (mode === "enemy" || mode === "ally") update({ type: "choose", id: cardId });
     else {
       update({ type: "prepare" });

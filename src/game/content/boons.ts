@@ -1,6 +1,16 @@
 import { boonRule } from "../rules/boons";
 import { freeze } from "immer";
 export const BOONS = [
+  { id: "hoard-lockplate", name: "Hoard Lockplate", text: boonRule("hoard-lockplate").text },
+  { id: "rootvault-pole", name: "Rootvault Pole", text: boonRule("rootvault-pole").text },
+  { id: "star-hoop", name: "Star Hoop", text: boonRule("star-hoop").text },
+  { id: "pattern-reel", name: "Pattern Reel", text: boonRule("pattern-reel").text },
+  { id: "prayer-sailboat", name: "Prayer Sailboat", text: boonRule("prayer-sailboat").text },
+  { id: "pumpkin-tureen", name: "Pumpkin Tureen", text: boonRule("pumpkin-tureen").text },
+  { id: "field-lunch-basket", name: "Field Lunch Basket", text: boonRule("field-lunch-basket").text },
+  { id: "winnowing-sieve", name: "Winnowing Sieve", text: boonRule("winnowing-sieve").text },
+  { id: "blooming-still", name: "Blooming Still", text: boonRule("blooming-still").text },
+  { id: "yarrow-salve-tin", name: "Yarrow Salve Tin", text: boonRule("yarrow-salve-tin").text },
   { id: "comb-uncapping-fork", name: "Comb Uncapping Fork", text: boonRule("comb-uncapping-fork").text },
   { id: "fern-fencing-foil", name: "Fern Fencing Foil", text: boonRule("fern-fencing-foil").text },
   { id: "resonance-kalimba", name: "Resonance Kalimba", text: boonRule("resonance-kalimba").text },

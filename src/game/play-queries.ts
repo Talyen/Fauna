@@ -10,7 +10,7 @@ import type { BattleState, Card, Creature, Command } from "./types";
 
 /** Explicit recipients only; random/group delivery remains live execution work. */
 export function chosenRecipients(state: BattleState, def: CardDefinition) {
-  const mode = cardTargeting(def);
+  const mode = cardTargeting(def, state);
   if (def.effect === "swapChosen") {
     return state.reserves.filter((unit) => unit.health > 0);
   }
@@ -27,7 +27,7 @@ export function chosenRecipients(state: BattleState, def: CardDefinition) {
 }
 
 export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
-  const mode = cardTargeting(def);
+  const mode = cardTargeting(def, state);
   if (
     (mode === "enemy" || mode === "ally") &&
     !chosenRecipients(state, def).some((unit) => unit.id === targetId)
@@ -96,7 +96,7 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
   return state.battle.hand.flatMap((cardId) => {
     const play = inspectCardPlay(state, cardId);
     if (!play.allowed) return [];
-    const mode = cardTargeting(play.def);
+    const mode = cardTargeting(play.def, state);
     const ids =
       mode === "enemy" || mode === "ally"
         ? chosenRecipients(state, play.def).map((unit) => unit.id)

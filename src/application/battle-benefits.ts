@@ -1,3 +1,4 @@
+import { foodForAllies } from "../game/card-rules";
 import { boonRule } from "../game/rules/boons";
 import { healingBenefit, ordinaryAttackFacts, type OrdinaryHit } from "../game/ability-facts";
 import { battleCardCapacity, drawHasAnotherCard, discardDrawCards } from "../game/card-zones";
@@ -250,7 +251,7 @@ export function battleBenefits(
     }
     case "heal": {
       const automaticRecipients = healingAllies(state);
-      if (def.target === "allAllies") {
+      if (def.target === "allAllies" || foodForAllies(def, state)) {
         const benefits = automaticRecipients.map((ally) =>
           healingBenefit(state, ally, value, play.def.effects),
         );
@@ -403,7 +404,7 @@ export function battleBenefits(
     case "guard":
     case "redistributeBlock":
     case "teamProtection": {
-      if (def.effect === "guard" && def.target !== "allAllies") {
+      if (def.effect === "guard" && def.target !== "allAllies" && !foodForAllies(def, state)) {
         const protection =
           def.effects?.reduce((sum, effect) => {
             if (effect.kind === "reflect")

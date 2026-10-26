@@ -6,6 +6,16 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "hoard-lockplate": boon({}, () => "Armor reduces damage before Block"),
+    "rootvault-pole": boon({}, () => "Allies can Dodge Thorns damage"),
+    "star-hoop": boon({}, () => "Reflect also returns enemy Purge"),
+    "pattern-reel": boon({}, () => "Purging an effect removes it from every enemy"),
+    "prayer-sailboat": boon({}, () => "Swapping out Cleanses Stun and Freeze"),
+    "pumpkin-tureen": boon({}, () => "Food grants Health and Block to all allies"),
+    "field-lunch-basket": boon({ draw: 1 }, () => "Playing Food draws a card"),
+    "winnowing-sieve": boon({}, () => "Unused Purge spreads to other enemies"),
+    "blooming-still": boon({ mana: 1 }, (p) => `Cleansing Poison restores ${p.mana} Mana`),
+    "yarrow-salve-tin": boon({}, () => "Healing an ally also Cleanses their Bleed"),
     "comb-uncapping-fork": boon({}, () => "Thorns damage ignores enemy Block"),
     "fern-fencing-foil": boon({ purge: 1 }, () => "Dodging an attack Purges its attacker"),
     "resonance-kalimba": boon({}, () => "Thorns damage adds equal Stun buildup"),

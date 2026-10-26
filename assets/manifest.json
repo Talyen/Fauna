@@ -2,6 +2,116 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.hoard-lockplate",
+      "origin": "repository",
+      "source": "public/art/boons/hoard-lockplate.png",
+      "output": "art/boons/hoard-lockplate.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Hoard Lockplate.png; https://drive.google.com/file/d/1nfgtZyw9htDv7CMTo5dSa5OzpWvbL9dF/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.rootvault-pole",
+      "origin": "repository",
+      "source": "public/art/boons/rootvault-pole.png",
+      "output": "art/boons/rootvault-pole.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Rootvault Pole.png; https://drive.google.com/file/d/1t7tcBrRCCFiTFOq7Gs_BgOhgEb16hfA6/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.star-hoop",
+      "origin": "repository",
+      "source": "public/art/boons/star-hoop.png",
+      "output": "art/boons/star-hoop.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Star Hoop.png; https://drive.google.com/file/d/1HJtZCRAJFhvQscv8ndkYand3mIhz8udL/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.pattern-reel",
+      "origin": "repository",
+      "source": "public/art/boons/pattern-reel.png",
+      "output": "art/boons/pattern-reel.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Pattern Reel.png; https://drive.google.com/file/d/1GnpdNMJGKgk6OlB8lS0LCHr4SNuljHC-/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.prayer-sailboat",
+      "origin": "repository",
+      "source": "public/art/boons/prayer-sailboat.png",
+      "output": "art/boons/prayer-sailboat.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Prayer Sailboat.png; https://drive.google.com/file/d/1VoT9ZQ2tJue6ATC9-4XTOGUOkysht4qp/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.pumpkin-tureen",
+      "origin": "repository",
+      "source": "public/art/boons/pumpkin-tureen.png",
+      "output": "art/boons/pumpkin-tureen.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Pumpkin Tureen.png; https://drive.google.com/file/d/1v71wLsBHPFaEV3z6n3thnvm3ZnSVMpJA/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.field-lunch-basket",
+      "origin": "repository",
+      "source": "public/art/boons/field-lunch-basket.png",
+      "output": "art/boons/field-lunch-basket.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Field Lunch Basket.png; https://drive.google.com/file/d/1FHwDQgUPys0wvX8JlkNrZf5MOz1vq4TU/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.winnowing-sieve",
+      "origin": "repository",
+      "source": "public/art/boons/winnowing-sieve.png",
+      "output": "art/boons/winnowing-sieve.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Winnowing Sieve.png; https://drive.google.com/file/d/1ilddlzeosXFrAWpiaxKt5JFSUUTefLpY/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.blooming-still",
+      "origin": "repository",
+      "source": "public/art/boons/blooming-still.png",
+      "output": "art/boons/blooming-still.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Blooming Still.png; https://drive.google.com/file/d/1w5ToK9HhYn_HqL1l4M222PuO0CPZpZPX/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.yarrow-salve-tin",
+      "origin": "repository",
+      "source": "public/art/boons/yarrow-salve-tin.png",
+      "output": "art/boons/yarrow-salve-tin.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Yarrow Salve Tin.png; https://drive.google.com/file/d/1tuKxuFqTwEFq2NXMVaZe-sFFiscogv9f/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "keyword.block",
       "origin": "repository",
       "source": "public/art/keywords/block.webp",

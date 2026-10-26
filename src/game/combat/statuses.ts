@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield, cleanseTargets } from "../battlefield";
+import { isEnemy, battlefield, cleanseTargets, isDepartedMinion } from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
@@ -16,6 +16,7 @@ import {
   beneficialStatuses,
   STACK_LIMIT,
   removeArmor,
+  hasBeneficialEffects,
   type ArmorDepletion,
   type Combatant,
 } from "./state";
@@ -188,10 +189,12 @@ export function* removeEffects(
   count: number,
   events: GameEvent[],
   state?: GameState,
-  onlyStatus?: (typeof harmfulStatuses)[number] | "thorns" | "waterThorns" | "fireThorns",
+  onlyStatus?: (typeof harmfulStatuses)[number] | (typeof beneficialStatuses)[number] | "block",
   source?: Combatant,
   spread = true,
+  linked = false,
 ): Resolution<number> {
+  if (state && isDepartedMinion(state, unit)) return 0;
   if (kind === "cleanse" && spread) {
     const targets = cleanseTargets(state, unit);
     if (targets.length > 1) {
@@ -223,6 +226,7 @@ export function* removeEffects(
   let cleansed = 0;
   const hadFreezeBuildup = stats.freeze > 0;
   const removedStatuses: NonNullable<import("../types").StatusEvent["affectedStatus"]>[] = [];
+  const purgedKinds: ((typeof beneficialStatuses)[number] | "block")[] = [];
   const returned: {
     status: (typeof harmfulStatuses)[number];
     amount: number;
@@ -236,7 +240,14 @@ export function* removeEffects(
       sourceId: stats.statusSources[status],
       turns,
     });
-  const statuses = onlyStatus ? [onlyStatus] : kind === "cleanse" ? harmfulStatuses : beneficialStatuses;
+  const statuses =
+    onlyStatus === "block"
+      ? []
+      : onlyStatus
+        ? [onlyStatus]
+        : kind === "cleanse"
+          ? harmfulStatuses
+          : beneficialStatuses;
   if (
     kind === "purge" &&
     state &&
@@ -253,9 +264,40 @@ export function* removeEffects(
       ).length;
     count = Math.min(count, Math.max(0, remaining - 1));
   }
-  if (kind === "purge" && !onlyStatus && unit.block > 0 && count > 0) {
+  if (
+    kind === "purge" &&
+    count > 0 &&
+    state &&
+    !isEnemy(unit) &&
+    source &&
+    isEnemy(source) &&
+    source.health > 0 &&
+    unit.health > 0 &&
+    state.boons.includes("star-hoop") &&
+    (onlyStatus === "block"
+      ? unit.block > 0
+      : onlyStatus
+        ? Number(stats[onlyStatus]) > 0 || (onlyStatus === "dodge" && stats.temporaryDodge > 0)
+        : hasBeneficialEffects(unit)) &&
+    (stats.reflect ||
+      succeeds(state, passiveAmount(state, unit.species, "statusReflection") / 100, false, events))
+  ) {
+    stats.reflect = false;
+    events.push({
+      kind: "status",
+      status: "reflect",
+      outcome: "apply",
+      actorId: unit.id,
+      targetId: source.id,
+      text: `${unitName(unit)} reflects Purge to ${unitName(source)}`,
+    });
+    yield* reaction("removeEffects", source, "purge", count, events, state, onlyStatus, unit);
+    return 0;
+  }
+  if (kind === "purge" && (!onlyStatus || onlyStatus === "block") && unit.block > 0 && count > 0) {
     unit.block = 0;
     removedStatuses.push("block");
+    purgedKinds.push("block");
     if (!pearlSieve || !isEnemy(unit) || (source && isEnemy(source))) count--;
   }
   if (
@@ -306,6 +348,7 @@ export function* removeEffects(
         delete stats.statusSources[status as (typeof harmfulStatuses)[number]];
       }
       count--;
+      if (kind === "purge") purgedKinds.push(status as (typeof beneficialStatuses)[number]);
       removedStatuses.push(
         status === "reflectBurn" ? "reflect" : status === "nullifyFreeze" ? "nullify" : status,
       );
@@ -369,6 +412,10 @@ export function* removeEffects(
         events,
         effect.turns,
       );
+  if (state)
+    for (const effect of returned)
+      if (effect.status === "poison")
+        yield* reaction("poisonCleanseMana", state, unit, effect.amount, events);
   if (
     kind === "purge" &&
     state &&
@@ -390,9 +437,64 @@ export function* removeEffects(
     state.boons.includes("prism-chisel")
   )
     yield* reaction("hit", state, source, unit, purgedArmor, "light", events, { origin: "derived" });
+  if (
+    kind === "purge" &&
+    state &&
+    isEnemy(unit) &&
+    source &&
+    !isEnemy(source) &&
+    source.health > 0 &&
+    !linked
+  ) {
+    // Linked removals retain ordinary reactions, but cannot fan out again.
+    if (state.boons.includes("pattern-reel"))
+      for (const status of purgedKinds)
+        for (const other of battlefield(state, "enemy")) {
+          if (source.health <= 0) break;
+          if (other.id !== unit.id && other.health > 0)
+            yield* reaction("removeEffects", other, "purge", 1, events, state, status, source, false, true);
+        }
+    if (spread && count > 0 && state.boons.includes("winnowing-sieve"))
+      for (const other of battlefield(state, "enemy")) {
+        if (count <= 0 || source.health <= 0) break;
+        if (other.id === unit.id || other.health <= 0) continue;
+        const blockBefore = other.block;
+        const removed = yield* reaction(
+          "removeEffects",
+          other,
+          "purge",
+          count,
+          events,
+          state,
+          onlyStatus,
+          source,
+          false,
+        );
+        const freeBlock =
+          pearlSieve && blockBefore > 0 && other.block === 0 && (!onlyStatus || onlyStatus === "block")
+            ? 1
+            : 0;
+        count = Math.max(0, count - Math.max(0, removed - freeBlock));
+      }
+  }
   // Typed wards share feedback labels but spend separate Purge categories;
   // Cleanse still coalesces active control with buildup of the same status
   return kind === "purge" ? removedStatuses.length : new Set(removedStatuses).size;
+}
+export function* poisonCleanseMana(
+  state: GameState,
+  unit: Combatant,
+  removed: number,
+  events: GameEvent[],
+): Resolution<void> {
+  if (
+    state.phase === "battle" &&
+    unit.health > 0 &&
+    !isEnemy(unit) &&
+    removed > 0 &&
+    state.boons.includes("blooming-still")
+  )
+    yield* reaction("gainMana", state, boonRule("blooming-still").mana, events);
 }
 export function* cleanseThorns(
   state: GameState,
