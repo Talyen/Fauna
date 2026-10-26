@@ -10,6 +10,8 @@
 
 Integration incorporates current main, verifies the combined result under the shared lock and advances clean main only after success. This is the required gate; earlier checks are optional and passing results are never cached. Integration retains the checkout, branch and evidence, updates the recorded base and clears completed extra-test selections. `finish` then archives ignored evidence and removes only the calling completed checkout, retaining its branch; use `-- --keep-worktree` while follow-up work still needs it.
 
+If integration succeeds but retirement fails, the checkout and branch remain. Resolve the reported issue, close owned previews, then run `npm run finish -- --retry-cleanup` from that task checkout. This retries only retirement, without reintegration; it rechecks that the task is clean, unlocked and merged. Do not use it while the checkout is still needed.
+
 A busy lock waits up to 30 seconds; retry without disturbing its owner. Dirty main, unfinished Git operations, failed checks and ambiguous conflicts preserve task work. Resolve understood conflicts in the task checkout and retry. Unrelated unfinished tasks do not block completion. Routine commands reuse matching installed dependencies and stop if they are missing or stale; `npm run deps` prepares them separately. See [dependencies and source assets](#dependencies-and-source-assets), [cleanup](#cleanup) and [lock diagnostics](scripts/README.md#worktree-operations).
 
 ### Dependencies and source assets

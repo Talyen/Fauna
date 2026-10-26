@@ -1,10 +1,11 @@
-import { git, readFixture, repository, writeFixture } from "../../support/tooling.mjs";
+import { git, put, readFixture, repository, writeFixture } from "../../support/tooling.mjs";
 import { spawnSync } from "node:child_process";
-import { mkdirSync, rmSync, realpathSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, rmSync, realpathSync, symlinkSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { expect, it } from "vitest";
 import { checkDocumentation } from "../../../scripts/checks/check-docs.mjs";
 import { finishTask } from "../../../scripts/finish.mjs";
+import { removeMergedTask, verifyEvidence } from "../../../scripts/worktree-cleanup.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 it("creates and reuses a task checkout from committed main while preserving dirty files", () => {
   const main = repository(
@@ -113,6 +114,65 @@ it("finishes only its completed task while retaining its branch and ignored evid
     const result = await finishTask(task.path, { integrateTask });
     expect(readFixture(result.retired.archive, "files/reports/unique.trace")).toBe("keep original evidence");
     expect(git(root, "branch", "--list", task.branch).trim()).toContain(task.branch);
+  } finally {
+    process.chdir(previous);
+  }
+});
+
+it("preserves a checkout when copied nested evidence differs", () => {
+  const root = repository({ ".gitignore": ".worktrees/\nreports/\n", done: "base" }, "fauna-evidence-");
+  const task = createWorktree(root, "evidence");
+  put(task.path, "reports/nested/frame.txt", "original frame");
+  expect(() =>
+    removeMergedTask(root, task.branch, {
+      keepBranch: true,
+      copyEvidence(source, target, options) {
+        cpSync(source, target, options);
+        writeFileSync(path.join(target, "nested/frame.txt"), "damaged frame!");
+      },
+    }),
+  ).toThrow("Evidence verification failed");
+  expect(readFixture(task.path, "reports/nested/frame.txt")).toBe("original frame");
+  expect(existsSync(task.path)).toBe(true);
+  const result = removeMergedTask(root, task.branch, { keepBranch: true });
+  expect(readFixture(result.archive, "files/reports/nested/frame.txt")).toBe("original frame");
+  expect(git(root, "branch", "--list", task.branch)).toContain(task.branch);
+});
+
+it.skipIf(process.platform === "win32")("compares symlinks without following them", () => {
+  const root = repository({ keep: "base" }, "fauna-evidence-links-");
+  symlinkSync("missing-original", path.join(root, "original"));
+  symlinkSync("missing-copy", path.join(root, "copy"));
+  expect(() => verifyEvidence(path.join(root, "original"), path.join(root, "copy"))).toThrow(
+    "Evidence verification failed",
+  );
+});
+
+it("reports a safe cleanup retry after integration and retries without reintegration", async () => {
+  const previous = process.cwd();
+  const root = repository({ ".gitignore": ".worktrees/\nreports/\n", done: "base" }, "fauna-finish-retry-");
+  try {
+    const task = createWorktree(root, "retry");
+    put(task.path, "reports/evidence.txt", "retain this");
+    const blocker = path.join(root, ".git/fauna-worktree-archives");
+    writeFileSync(blocker, "blocked");
+    await expect(
+      finishTask(task.path, { integrateTask: async () => ({ integrated: true, worktree: task.path }) }),
+    ).rejects.toThrow(/Integration completed, but cleanup failed:[\s\S]*npm run finish -- --retry-cleanup/);
+    expect(readFixture(task.path, "reports/evidence.txt")).toBe("retain this");
+    rmSync(blocker);
+    put(task.path, "unfinished.txt", "still needed");
+    await expect(finishTask(task.path, { retryCleanup: true })).rejects.toThrow(/unfinished work/);
+    expect(readFixture(task.path, "unfinished.txt")).toBe("still needed");
+    rmSync(path.join(task.path, "unfinished.txt"));
+    const result = await finishTask(task.path, {
+      retryCleanup: true,
+      integrateTask: () => {
+        throw new Error("must not reintegrate");
+      },
+    });
+    expect(readFixture(result.retired.archive, "files/reports/evidence.txt")).toBe("retain this");
+    expect(existsSync(task.path)).toBe(false);
   } finally {
     process.chdir(previous);
   }
