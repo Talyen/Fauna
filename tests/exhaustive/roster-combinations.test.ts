@@ -8,5 +8,5 @@ describe("all ordinary creature combinations", () => {
     // Each case retains up to 500 commands and a validated save after every step.
     it(`supports ${scenario.name} without engine failures or invalid saves`, () => {
       expectSupportedLineup(scenario);
-    }, 10_000);
+    }, 20_000);
 });

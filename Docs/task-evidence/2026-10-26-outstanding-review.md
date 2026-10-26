@@ -27,3 +27,8 @@ its grouped Food targets follow Pumpkin Tureen. The earlier snapshots remain in
 Git history, and direct command, save/resume and combat assertions remain active.
 
 All completion and platform claims depend on the repaired commit's hosted CI.
+
+The exhaustive Oathara, Pyrella and Wisterelle case passed in 9.78 seconds on
+the earlier hosted run and exceeded its 10-second case deadline on the next.
+The case retains its 500-command and save-validation bounds; its CI deadline is
+20 seconds to accommodate runner variation.
