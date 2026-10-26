@@ -222,7 +222,7 @@ it("requires actual implementation bindings for authored modifiers, including fu
   );
 });
 it("keeps implementation bindings and shared Boon parameters immutable", () => {
-  type BindingGroup = Readonly<Record<string, readonly { module: string; name: string }[]>>;
+  type BindingGroup = Readonly<Record<string, readonly string[]>>;
   const catalogs: readonly Readonly<Record<string, BindingGroup>>[] = [
     modifierImplementations,
     modifierQueries,
@@ -234,14 +234,7 @@ it("keeps implementation bindings and shared Boon parameters immutable", () => {
       expect(Object.isFrozen(group)).toBe(true);
       for (const binding of Object.values(group)) {
         expect(Object.isFrozen(binding)).toBe(true);
-        expect(
-          binding.every(
-            (handler: { module: string; name: string }) =>
-              typeof handler.module === "string" &&
-              typeof handler.name === "string" &&
-              Object.isFrozen(handler),
-          ),
-        ).toBe(true);
+        expect(binding.every((handler) => /^\.\/[^#]+#[^#]+$/.test(handler))).toBe(true);
       }
     }
   }

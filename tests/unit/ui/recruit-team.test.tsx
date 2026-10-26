@@ -93,9 +93,9 @@ it("keeps confirmation available while battle-style visual copies are in flight"
 it("resumes the banked recruit directly at team selection, without saving previews or repeating Collection progress", async () => {
   const game = selected();
   localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-  const session = createSession(createBrowserPlatform(localStorage));
+  let session = createSession(createBrowserPlatform(localStorage));
   await session.load();
-  const view = render(<App session={session} />);
+  let view = render(<App session={session} />);
   const user = userEvent.setup();
   try {
     await user.click(screen.getByRole("button", { name: "Continue" }));
@@ -105,9 +105,15 @@ it("resumes the banked recruit directly at team selection, without saving previe
     await user.click(document.querySelector<HTMLButtonElement>(".recruit-team-roster .creature-card")!);
     expect(session.store.getState().game).toBe(committed);
     await session.flush();
+    expect(JSON.parse(localStorage.getItem("fauna.save.v1")!)).toEqual(committed);
     view.unmount();
-    render(<App session={session} />);
+    await session.dispose();
+    session = createSession(createBrowserPlatform(localStorage));
+    await session.load();
+    view = render(<App session={session} />);
     await user.click(screen.getByRole("button", { name: "Continue" }));
+    expect(screen.getByRole("heading", { name: "Choose your team" })).toBeTruthy();
+    expect(session.store.getState().game).toEqual(committed);
     expect(document.querySelector('.recruit-team-roster .creature-card[aria-pressed="true"]')).toBeNull();
     await user.click(screen.getByRole("button", { name: "Confirm" }));
     expect(
@@ -116,7 +122,16 @@ it("resumes the banked recruit directly at team selection, without saving previe
       ),
     ).toEqual([...game.team, ...game.reserves].map((unit) => unit.species));
     expect(session.store.getState().game.discovery).toEqual(game.discovery);
+    expect(session.store.getState().game.phase).toBe("teamSelection");
+    await session.flush();
+    const confirmed = session.store.getState().game;
+    view.unmount();
+    await session.dispose();
+    session = createSession(createBrowserPlatform(localStorage));
+    await session.load();
+    expect(session.store.getState().game).toEqual(confirmed);
   } finally {
+    view.unmount();
     await session.dispose();
   }
 });

@@ -117,7 +117,6 @@ export function modifierContractViolations(sources) {
   const errors = [];
   const fail = (message) => errors.push(`${bindingFile}: ${message}`);
   const ast = parsed[bindingFile];
-  const bindings = declaredObject(ast, "owners");
   const owners = new Map();
   const functions = new Map();
   const selectors = new Map();
@@ -246,24 +245,15 @@ export function modifierContractViolations(sources) {
         }
         for (const element of handlers.elements) {
           const handler = element?.expression;
-          const descriptor =
-            handler?.type === "MemberExpression" && handler.object.value === "owners"
-              ? property(bindings, handler.property.value)
-              : undefined;
-          const module = descriptor?.arguments?.[0]?.expression;
-          const name = descriptor?.arguments?.[1]?.expression;
-          if (
-            descriptor?.type !== "CallExpression" ||
-            descriptor.callee.value !== "bind" ||
-            module?.type !== "StringLiteral" ||
-            name?.type !== "StringLiteral"
-          ) {
+          const reference = handler?.type === "StringLiteral" && handler.value.match(/^(\.\/[^#]+)#([^#]+)$/);
+          if (!reference) {
             fail(`${key} must bind typed module/export references.`);
             continue;
           }
+          const [, module, name] = reference;
           const target = identity(
-            path.posix.normalize(path.posix.join(path.posix.dirname(bindingFile), module.value)) + ".ts",
-            name.value,
+            path.posix.normalize(path.posix.join(path.posix.dirname(bindingFile), module)) + ".ts",
+            name,
           );
           const selectorKey = `${group}:${key}`;
           if (!functions.has(target)) fail(`${key} binds a missing implementation: ${target}.`);

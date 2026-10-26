@@ -1,12 +1,16 @@
 import { captureScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
-import { winBattle, fullRosterReward } from "../support/game";
+import { accept, winBattle, fullRosterReward } from "../support/game";
 import { reloadHome, test, seed, state, resume } from "./support/session";
 import { continueToRecruit } from "./support/journey";
 
 test("recruitment adds a backup without exposing free lineup changes", async ({ page }) => {
-  await seed(page, winBattle());
+  const fixture = winBattle();
+  await seed(page, fixture);
   await resume(page);
+  await reloadHome(page);
+  await resume(page);
+  expect(await state(page)).toEqual(fixture);
   await continueToRecruit(page);
   const beforeInspection = await state(page);
   const artwork = page.getByRole("button", { name: "Inspect Pollenmoth", exact: true });
@@ -18,6 +22,7 @@ test("recruitment adds a backup without exposing free lineup changes", async ({ 
   expect(await state(page)).toEqual(beforeInspection);
   await page.getByRole("button", { name: "Recruit Pollenmoth", exact: true }).click();
   const recruited = await state(page);
+  expect(recruited).toEqual(accept(fixture, { type: "recruit", species: "pollenmoth" }));
   expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).toHaveLength(4);
   expect(recruited.reserves[0]!.species).toBe("pollenmoth");
   expect(recruited.team[0]!.species).toBe("mossguard");
@@ -64,9 +69,7 @@ test("full-roster recruitment banks Collection progress and confirms only the di
   const recruited = await state(page);
   expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).toHaveLength(5);
   expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).not.toContain("mossguard");
-  expect(recruited.team.find((c) => c.id === recruited.team.map((unit) => unit.id)[0])!.species).toBe(
-    "emberback",
-  );
+  expect(recruited.team[0]!.species).toBe("emberback");
   expect(recruited.discovery).toEqual(banked.discovery);
   expect(recruited.phase).toBe("teamSelection");
   await reloadHome(page);

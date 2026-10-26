@@ -14,9 +14,8 @@ const fixture = () => ({
   "src/game/entry.ts":
     'import {hit as applyHit, copy} from "./owner"; export function command(state) { applyHit(state); copy(state.effect); }',
   "src/game/modifier-bindings.ts": `
-    const owners = {hit: bind("./owner", "hit"), copy: bind("./owner", "copy")};
     export const modifierImplementations = freeze({
-      talents: {"water.pressure": [owners.hit]}, boons: {"icy-heart": [owners.hit]}, passives: {wellRead: [owners.copy]}
+      talents: {"water.pressure": ["./owner#hit"]}, boons: {"icy-heart": ["./owner#hit"]}, passives: {wellRead: ["./owner#copy"]}
     }, true);
     export const modifierQueries = freeze({talents: {}, boons: {}, passives: {}}, true);
   `,
@@ -24,6 +23,26 @@ const fixture = () => ({
 
 it("accepts actual named implementations with aliased runtime callers", () => {
   expect(modifierContractViolations(fixture())).toEqual([]);
+});
+
+it.each([
+  '"./owner"',
+  '"./owner#"',
+  '"#hit"',
+  '"owner#hit"',
+  '"./owner#hit#extra"',
+  '{module: "./owner", name: "hit"}',
+  'reference("./owner", "hit")',
+  "...references",
+])("rejects a nonliteral or malformed implementation reference: %s", (reference) => {
+  const sources = fixture();
+  sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"].replace(
+    '["./owner#hit"]',
+    `[${reference}]`,
+  );
+  expect(modifierContractViolations(sources)).toContainEqual(
+    expect.stringContaining("water.pressure must bind typed module/export references"),
+  );
 });
 
 it("follows aliased pure parameter consumers through their declared query bindings", () => {
@@ -34,12 +53,10 @@ it("follows aliased pure parameter consumers through their declared query bindin
   expect(modifierContractViolations(sources)).toContainEqual(
     expect.stringContaining("has an undeclared owner: src/game/extra.ts#estimate"),
   );
-  sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"]
-    .replace("const owners = {", 'const owners = {estimate:bind("./extra","estimate"),')
-    .replace(
-      "talents: {}, boons: {}, passives: {}",
-      'talents: {"water.pressure":[owners.estimate]}, boons: {}, passives: {}',
-    );
+  sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"].replace(
+    "talents: {}, boons: {}, passives: {}",
+    'talents: {"water.pressure":["./extra#estimate"]}, boons: {}, passives: {}',
+  );
   expect(modifierContractViolations(sources)).toEqual([]);
 });
 it("rejects a new authored modifier without an implementation binding", () => {
@@ -64,8 +81,8 @@ it("checks built Talent identities through imported aliases without treating cop
 it("rejects a binding to an existing function that does not implement the modifier", () => {
   const sources = fixture();
   sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"].replace(
-    '"water.pressure": [owners.hit]',
-    '"water.pressure": [owners.copy]',
+    '"water.pressure": ["./owner#hit"]',
+    '"water.pressure": ["./owner#copy"]',
   );
   expect(modifierContractViolations(sources)).toContainEqual(
     expect.stringContaining("water.pressure is not implemented/read by src/game/owner.ts#copy"),
@@ -95,12 +112,10 @@ it("requires read-only interpretations to be declared separately", () => {
   sources["src/game/extra.ts"] =
     'import {hasTalent} from "./progression"; export function estimate(state) { return hasTalent(state, "water.pressure"); }';
   sources["src/game/entry.ts"] += 'import {estimate} from "./extra"; estimate({});';
-  sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"]
-    .replace("const owners = {", 'const owners = {estimate: bind("./extra", "estimate"),')
-    .replace(
-      "talents: {}, boons: {}, passives: {}",
-      'talents: {"water.pressure": [owners.estimate]}, boons: {}, passives: {}',
-    );
+  sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"].replace(
+    "talents: {}, boons: {}, passives: {}",
+    'talents: {"water.pressure": ["./extra#estimate"]}, boons: {}, passives: {}',
+  );
   expect(modifierContractViolations(sources)).toEqual([]);
 });
 it("recognizes the existing scheduler dispatch without accepting a registration-only reference", () => {
@@ -113,13 +128,13 @@ it("recognizes the existing scheduler dispatch without accepting a registration-
 });
 it("rejects unknown, duplicate and empty bindings", () => {
   for (const replacement of [
-    '"water.future": [owners.hit]',
+    '"water.future": ["./owner#hit"]',
     '"water.pressure": []',
-    '"water.pressure": [owners.hit], "water.pressure": [owners.hit]',
+    '"water.pressure": ["./owner#hit"], "water.pressure": ["./owner#hit"]',
   ]) {
     const sources = fixture();
     sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"].replace(
-      '"water.pressure": [owners.hit]',
+      '"water.pressure": ["./owner#hit"]',
       replacement,
     );
     expect(modifierContractViolations(sources).length).toBeGreaterThan(0);
