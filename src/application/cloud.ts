@@ -57,6 +57,7 @@ export function createCloud(
   let durable: string | null = null;
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
   let retrying = false;
+  let startup: Promise<void> | undefined;
   let metadataWrites = Promise.resolve();
   const scheduleRetry = () => {
     if (!alive() || retryTimer || retrying || identity?.available === false || identity?.enabled === false)
@@ -79,6 +80,10 @@ export function createCloud(
       view = Object.freeze({ ...view, ...patch });
       publish(view);
       if (view.status === "Pending") scheduleRetry();
+      else {
+        clearTimeout(retryTimer);
+        retryTimer = undefined;
+      }
     }
   };
   const errorText = (error: unknown) => (error instanceof Error ? error.message : "Cloud sync failed.");
@@ -316,8 +321,10 @@ export function createCloud(
     get view() {
       return view;
     },
-    async start(data: string | null) {
-      if (alive()) await bounded(initialize(data), 5000, offline);
+    start(data: string | null) {
+      if (!alive()) return Promise.resolve();
+      // Own startup before publishing to subscribers; retries use the latest localData.
+      return (startup ??= Promise.resolve().then(() => bounded(initialize(data), 5000, offline)));
     },
     commit,
     retry: reconcile,
