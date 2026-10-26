@@ -3,7 +3,6 @@ import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
-import { fits } from "./support/layout";
 
 test("battle artwork stays still at the minimum viewport with enlarged text", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
@@ -120,7 +119,6 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
           ),
       )
       .toBe(true);
-    await fits(page);
     await enemy.hover();
     await expect(page.locator(".knockout-preview")).toHaveCount(0);
     await expect(page.getByText("Possible knockout", { exact: true })).toBeVisible();

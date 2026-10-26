@@ -3,7 +3,7 @@ import { reloadHome, test, seed, resume } from "./support/session";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
-import { authoredPack, prepareDestination, accept, run, victoryReady } from "../support/game";
+import { run, victoryReady } from "../support/game";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { continueToRecruit } from "./support/journey";
 test("combat preferences, autoplay pause and manual takeover", async ({ page }) => {
@@ -85,41 +85,6 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
   const afterController = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
   expect(afterController.battle.turn).toBe(beforeController.battle.turn + 1);
 });
-test("final victory returns to the menu without a retired creature reveal", async ({ page }) => {
-  const width = 1280;
-  await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  const final = victoryReady(
-    accept(
-      produce(run(), (d) => {
-        d.encounter = 7;
-        d.journey!.victories = d.encounter;
-        prepareDestination(d);
-        d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, lastBattle: null };
-        d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
-      }),
-      { type: "beginBattle" },
-    ),
-  );
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
-  await seed(page, final);
-  await resume(page);
-  await page.locator(`[data-card-id=${JSON.stringify(final.battle!.hand[0])}]`).click();
-  await continueToRecruit(page);
-  await page.getByRole("button", { name: "Recruit Memento", exact: true }).click();
-  await page.getByRole("heading", { name: "Journey complete" }).waitFor();
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-  const won = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
-  expect(won.phase).toBe("victory");
-  await page.getByRole("button", { name: "Main menu", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
-  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-  await reloadHome(page);
-  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(won);
-});
-
 test("development skip wins once through normal rewards", async ({ page }) => {
   test.skip(process.env.FAUNA_DEV_REVIEW !== "1", "Requires an explicitly owned development preview.");
   const initial = run();

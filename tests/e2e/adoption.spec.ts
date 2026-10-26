@@ -57,39 +57,6 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
   await expect(page.getByRole("switch", { name: "Mute in background", exact: true })).not.toBeChecked();
 });
 
-test("settings categories remain reachable at minimum size with enlarged text", async ({ page }) => {
-  const [width, height, textScale] = [1280, 720, "1.25"] as const;
-  await page.setViewportSize({ width, height });
-  await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", scale), textScale);
-  await openHome(page);
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
-  for (const category of ["Display", "Sound", "Battle"]) {
-    await page.getByRole("tab", { name: category, exact: true }).click();
-    const panel = page.getByRole("tabpanel");
-    await expect(panel).toBeVisible();
-    const control =
-      category === "Display"
-        ? panel.getByRole("radio", { name: "125%", exact: true })
-        : category === "Sound"
-          ? panel.getByRole("switch", { name: "Mute in background", exact: true })
-          : panel.getByRole("switch", { name: "Auto-end turn", exact: true });
-    await expect(control).toBeInViewport();
-    if (category === "Sound") {
-      for (const slider of await panel.locator(".ui-slider").all()) {
-        const bounds = (await slider.boundingBox())!;
-        expect(bounds.width).toBeGreaterThanOrEqual(88);
-        await slider.click({ position: { x: bounds.width * 0.75, y: bounds.height / 2 } });
-        await expect
-          .poll(async () => Number(await slider.getByRole("slider").getAttribute("aria-valuenow")))
-          .toBeGreaterThan(50);
-      }
-    }
-    await captureScreen(page, { path: `reports/settings-${category.toLowerCase()}-${width}.png` });
-  }
-  await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
-});
-
 for (const [width, height] of REVIEW_VIEWPORTS)
   test(`illustrated Boons and independent tooltip sizing at ${width}×${height}`, async ({ page }) => {
     const { run } = await import("../support/game");

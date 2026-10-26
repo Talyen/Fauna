@@ -172,9 +172,11 @@ describe("player input ownership", () => {
       buttons: Array.from({ length: 16 }, (_, i) => ({ pressed: buttons.includes(i) }) as GamepadButton),
       axes,
     });
+    expect(gamepadActions(pad([0, 2, 3, 12], [0.8, 0]))).toEqual(["confirm", "inspect", "endTurn", "up"]);
     expect(gamepadActions(pad([], [0.7, 0.9]))).toEqual(["down"]);
     expect(gamepadActions(pad([14], [1, 0]))).toEqual(["left"]);
     expect(gamepadActions(pad([], [0.2, -0.2]))).toEqual([]);
+    expect(gamepadActions({ buttons: [], axes: [0.1, -0.1] })).toEqual([]);
   });
 });
 

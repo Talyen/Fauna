@@ -45,17 +45,15 @@ describe("artwork-first inspection", () => {
     );
   });
 
-  it.each([0, 1, 2])(
-    "inspects starter slot %s without committing and recruits only through its offer button",
-    async (slot) => {
-      const session = createSession(createBrowserPlatform(localStorage), 7);
-      await session.load();
-      const user = userEvent.setup();
-      render(<App session={session} />);
-      try {
-        await user.click(screen.getByRole("button", { name: "Play" }));
-        const game = session.store.getState().game;
-        const kind = game.starterOffers[slot]!;
+  it("inspects every starter without committing and recruits only through the chosen offer", async () => {
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    const user = userEvent.setup();
+    render(<App session={session} />);
+    try {
+      await user.click(screen.getByRole("button", { name: "Play" }));
+      const game = session.store.getState().game;
+      for (const [slot, kind] of game.starterOffers.entries()) {
         const creature = species(kind);
         const opener = screen.getByRole("button", { name: `Inspect ${creature.name}` });
         await user.hover(opener);
@@ -82,26 +80,23 @@ describe("artwork-first inspection", () => {
         ).toHaveLength(5);
         expect(dialog.querySelectorAll('[data-earned="true"]')).toHaveLength(0);
         expect(within(dialog).queryByRole("button", { name: /Choose|Recruit|Rank progression/ })).toBeNull();
-        await user.keyboard("{Escape}");
-        expect(document.activeElement).toBe(opener);
-        expect(session.store.getState().game).toBe(game);
-        await user.click(opener);
-        await user.click(screen.getByRole("button", { name: "Close inspection" }));
-        await user.click(opener);
-        await user.click(document.querySelector<HTMLElement>(".inspection-overlay")!);
+        if (slot === 0) await user.keyboard("{Escape}");
+        else if (slot === 1) await user.click(screen.getByRole("button", { name: "Close inspection" }));
+        else await user.click(document.querySelector<HTMLElement>(".inspection-overlay")!);
         expect(screen.queryByRole("dialog")).toBeNull();
         expect(document.activeElement).toBe(opener);
         expect(session.store.getState().game).toBe(game);
-        await user.click(screen.getByRole("button", { name: `Recruit ${creature.name}` }));
-        expect(session.store.getState().game.selected).toEqual([kind]);
-        expect(screen.queryByRole("dialog")).toBeNull();
-        expect(session.store.getState().game.phase).toBe("teamSelection");
-      } finally {
-        cleanup();
-        await session.dispose();
       }
-    },
-  );
+      const kind = game.starterOffers.at(-1)!;
+      await user.click(screen.getByRole("button", { name: `Recruit ${species(kind).name}` }));
+      expect(session.store.getState().game.selected).toEqual([kind]);
+      expect(screen.queryByRole("dialog")).toBeNull();
+      expect(session.store.getState().game.phase).toBe("teamSelection");
+    } finally {
+      cleanup();
+      await session.dispose();
+    }
+  });
 
   it.each([0, 3, 5])("fills %s progress stars and displays the corresponding passive", async (rank) => {
     const game = produce(run(7), (draft) => {

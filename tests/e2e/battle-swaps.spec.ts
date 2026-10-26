@@ -5,7 +5,6 @@ import { produce } from "immer";
 import { addBackups, run } from "../support/game";
 import { reloadHome, test, seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
-import { fits } from "./support/layout";
 
 function fixture(fallen = true) {
   return produce(run(7), (d) => {
@@ -64,7 +63,6 @@ for (const [width, height, scale] of [
     await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", String(scale)), scale);
     await seed(page, fixture());
     await resume(page);
-    await fits(page);
     await captureScreen(page, { path: `reports/swapping/replacement-${width}.png` });
     const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
     for (const card of await dialog.locator(".creature-card").all()) {

@@ -105,10 +105,12 @@ for (const [width, height, scale] of [
       .locator(".draft-grid img")
       .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
     expect(errors).toEqual([]);
-    // A warm-cache navigation still gets the intentional minimum, without a production skip flag.
-    await page.reload();
-    await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
-    expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
+    // Warm-cache timing is viewport independent; keep it once alongside both cold-start layouts.
+    if (width === 1280) {
+      await page.reload();
+      await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
+      expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
+    }
   });
 }
 

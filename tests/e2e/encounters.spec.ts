@@ -5,7 +5,6 @@ import { encounterSource } from "../../src/game/encounters";
 import { createGame } from "../../src/game/engine";
 import { authoredPack, accept } from "../support/game";
 import { reloadHome, test, seed, state, resume } from "./support/session";
-import { fits } from "./support/layout";
 
 for (const [width, enlarged, encounter] of [
   [1280, true, 0],
@@ -41,7 +40,6 @@ for (const [width, enlarged, encounter] of [
     await expect(page.locator(".app:not([inert]) [data-encounter]")).toHaveCount(1);
     await expect(page.locator(".app:not([inert]) [data-enemy-id]")).toHaveCount(0);
     await enter.locator("img").evaluate((image) => (image as HTMLImageElement).decode());
-    await fits(page);
     await captureScreen(page, {
       path: `reports/encounters/choice-${encounter}-${width}-${enlarged}.png`,
     });

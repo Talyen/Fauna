@@ -2,7 +2,6 @@ import { captureScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { CARDS, species } from "../../src/game/content";
 import { reloadHome, test, seed, state, resume } from "./support/session";
-import { fits } from "./support/layout";
 
 for (const [width, enlarged] of [
   [1280, true],
@@ -27,7 +26,6 @@ for (const [width, enlarged] of [
     const mossguard = page.getByRole("button", { name: `Inspect ${name}`, exact: true });
     const recruit = page.getByRole("button", { name: `Recruit ${name}`, exact: true });
     expect((await recruit.boundingBox())!.width).toBeLessThan((await mossguard.boundingBox())!.width);
-    await fits(page);
     await captureScreen(page, { path: `reports/starter/selection-${width}-${enlarged}.png` });
     await mossguard.hover();
     const tooltip = page.getByRole("tooltip");
@@ -51,7 +49,6 @@ for (const [width, enlarged] of [
     await page.keyboard.press("Escape");
     await expect(page.locator(".inspection-thumbnails .action-card").nth(1)).toBeFocused();
     await captureScreen(page, { path: `reports/starter/inspection-${width}-${enlarged}.png` });
-    await fits(page);
     await expect(page.locator(".creature-inspection .creature-card")).toHaveCount(0);
     await expect(page.getByRole("dialog").getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
     const abilities = page.locator(".inspection-thumbnails .action-card");

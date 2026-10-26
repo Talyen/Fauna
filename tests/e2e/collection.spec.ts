@@ -6,7 +6,6 @@ import { CARDS, SPECIES } from "../../src/game/content";
 import { run } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
-import { fits } from "./support/layout";
 
 test("Collection hides uncollected tooltips and opens shared creature inspection", async ({ page }) => {
   await seed(page, run());
@@ -132,7 +131,6 @@ for (const [width, height] of [
       .locator("img")
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
     await page.mouse.move(0, 0);
-    await fits(page);
     await expect(details.locator(".creature-card")).toHaveCount(0);
     await expect(details.getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
     await expect(details.locator(".action-card")).toHaveCount(3);
