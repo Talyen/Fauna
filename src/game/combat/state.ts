@@ -118,6 +118,27 @@ export function loseHealth(state: GameState, unit: Combatant, amount: number, ev
   return lost;
 }
 export const harmfulStatuses = ["burn", "poison", "bleed", "stun", "freeze", "blind"] as const;
+/** Purge consumes these in order, after Block; temporary Dodge shares the Dodge slot. */
+export const beneficialStatuses = [
+  "armor",
+  "thorns",
+  "waterThorns",
+  "fireThorns",
+  "dodge",
+  "reflect",
+  "reflectBurn",
+  "nullify",
+  "nullifyFreeze",
+  "negate",
+  "attackReflection",
+] as const;
+export function hasBeneficialEffects(unit: Combatant): boolean {
+  const stats = unit.combat;
+  return (
+    unit.block > 0 ||
+    (!!stats && (stats.temporaryDodge > 0 || beneficialStatuses.some((status) => Number(stats[status]) > 0)))
+  );
+}
 export function hasHarmfulEffects(unit: Combatant): boolean {
   const stats = unit.combat;
   return !!stats && (!!stats.controlled || harmfulStatuses.some((status) => Number(stats[status]) > 0));

@@ -5,7 +5,13 @@ import { battleCardCapacity, drawHasAnotherCard, discardDrawCards } from "../gam
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { battlefield, healingAllies, isRosterCreature } from "../game/battlefield";
 import { creaturePassive, hasTalent } from "../game/progression";
-import { hasHarmfulEffects, mostInjured, maximumHealth, STACK_LIMIT } from "../game/combat/state";
+import {
+  hasHarmfulEffects,
+  hasBeneficialEffects,
+  mostInjured,
+  maximumHealth,
+  STACK_LIMIT,
+} from "../game/combat/state";
 import { actionValue, cardCost, manaCapacity } from "../game/ability-rules";
 import { healingValue, restoration } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
@@ -74,14 +80,18 @@ export function battleBenefits(
   return primaryBattleBenefits(state, play, facts).map<BattleBenefit>((benefit) => {
     if (benefit.kind !== "support" || benefit.priority !== "none") return benefit;
     if (facts.healingOnPlay) return { ...benefit, priority: "healing" };
-    const usefulDraw = play.def.effects?.some(
-      (effect) =>
-        (effect.kind === "draw" || effect.kind === "drawKeyword") &&
-        effect.amount > 0 &&
-        drawHasAnotherCard(state, play.card, effect),
-    );
-    return usefulDraw ? { ...benefit, priority: "standardUtility" } : benefit;
+    return usefulDraw(state, play) ? { ...benefit, priority: "standardUtility" } : benefit;
   });
+}
+
+/** Drawing only this card back cannot justify a spent protection or Cleanse. */
+function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
+  return !!play.def.effects?.some(
+    (effect) =>
+      (effect.kind === "draw" || effect.kind === "drawKeyword") &&
+      effect.amount > 0 &&
+      drawHasAnotherCard(state, play.card, effect),
+  );
 }
 
 function primaryBattleBenefits(
@@ -109,30 +119,8 @@ function primaryBattleBenefits(
     reason?: string,
   ): BattleBenefit[] => [{ kind: "support", priority, amount, targetId, reason }];
   const allies = state.team.filter((unit) => unit.health > 0);
-  // Drawing only this card back cannot justify a spent protection or Cleanse.
-  const usefulDraw = () =>
-    !!def.effects?.some(
-      (effect) =>
-        (effect.kind === "draw" || effect.kind === "drawKeyword") &&
-        effect.amount > 0 &&
-        drawHasAnotherCard(state, card, effect),
-    );
-  const controlRemoval = (amount: number) =>
-    support(
-      amount > 0
-        ? "controlRemoval"
-        : facts.healingOnPlay
-          ? "healing"
-          : usefulDraw()
-            ? "standardUtility"
-            : "none",
-      amount,
-    );
-  const dodgeSupport = (useful: number) =>
-    support(
-      useful > 0 ? "utility" : facts.healingOnPlay ? "healing" : usefulDraw() ? "standardUtility" : "none",
-      useful > 0 ? useful : 0,
-    );
+  const controlRemoval = (amount: number) => support(amount > 0 ? "controlRemoval" : "none", amount);
+  const dodgeSupport = (useful: number) => support(useful > 0 ? "utility" : "none", useful > 0 ? useful : 0);
   switch (def.effect) {
     case "procession": {
       const echoes = (state.battle.minions ?? []).filter(
@@ -167,26 +155,19 @@ function primaryBattleBenefits(
           : def.target === "randomEnemy"
             ? attacks.every((attack) => !attack.enemy.minion && lethal(attack)) && remaining.length === 1
             : false);
-      if (def.target === "allEnemies")
+      if (def.target === "allEnemies" || def.target === "randomEnemy")
         return [
           {
             kind: "attack",
             groups: attacks.map((attack) => attack.outcomes),
-            aggregate: "sum",
+            aggregate: def.target === "allEnemies" ? "sum" : "mean",
             finish: winning,
-            reason: winning
-              ? "Attempt to finish every remaining enemy on ordinary hits"
-              : "Damage enemies; give roster creatures priority over Minions",
-          },
-        ];
-      if (def.target === "randomEnemy")
-        return [
-          {
-            kind: "attack",
-            groups: attacks.map((attack) => attack.outcomes),
-            aggregate: "mean",
-            finish: winning,
-            reason: "Use the average visible benefit across random targets",
+            reason:
+              def.target === "randomEnemy"
+                ? "Use the average visible benefit across random targets"
+                : winning
+                  ? "Attempt to finish every remaining enemy on ordinary hits"
+                  : "Damage enemies; give roster creatures priority over Minions",
           },
         ];
       return attacks.map((attack) => {
@@ -306,26 +287,8 @@ function primaryBattleBenefits(
     }
     case "teamPurge": {
       const enemies = facts.livingEnemies();
-      const useful = enemies.filter(
-        (enemy) =>
-          enemy.health > 0 &&
-          (enemy.block > 0 ||
-            enemy.combat.armor > 0 ||
-            enemy.combat.thorns > 0 ||
-            enemy.combat.waterThorns > 0 ||
-            enemy.combat.fireThorns > 0 ||
-            enemy.combat.dodge > 0 ||
-            enemy.combat.temporaryDodge > 0 ||
-            enemy.combat.reflect ||
-            enemy.combat.reflectBurn ||
-            enemy.combat.nullify ||
-            enemy.combat.nullifyFreeze ||
-            enemy.combat.negate ||
-            enemy.combat.attackReflection),
-      ).length;
-      const defense = enemies.some(
-        (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
-      );
+      const useful = enemies.filter(hasBeneficialEffects).length;
+      const defense = enemies.some((enemy) => enemy.block > 0 || enemy.combat.armor > 0);
       return support(
         useful > 0 ? (defense ? "defensePurge" : "purge") : "none",
         useful,
@@ -334,10 +297,7 @@ function primaryBattleBenefits(
       );
     }
     case "reflectAttack":
-      return support(
-        actor.combat?.attackReflection ? (facts.healingOnPlay ? "healing" : "none") : "protection",
-        1,
-      );
+      return support(actor.combat?.attackReflection ? "none" : "protection", 1);
     case "resurrect":
       return [...state.team, ...state.reserves]
         .filter((unit) => unit.health === 0)
@@ -366,7 +326,7 @@ function primaryBattleBenefits(
           ? "utility"
           : facts.healingOnPlay
             ? "healing"
-            : usefulDraw()
+            : usefulDraw(state, play)
               ? "utility"
               : "none",
       );
