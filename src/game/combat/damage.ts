@@ -86,7 +86,7 @@ export function* negateAttack(
     text:
       pair && target.id !== bearer.id
         ? `${unitName(bearer)} protects ${unitName(target)} with Devotion Clasp`
-        : `${unitName(target)} negates the attack; Thorns still retaliate`,
+        : `${unitName(target)} negates the attack`,
   });
   yield* thornRetaliation({ state, source, target, events, type: attackType });
   if (

@@ -384,4 +384,5 @@ it("Moonboat Toy still wears down Thorns when an enemy Negates the Water attack"
   expect(source.health).toBe(before);
   expect(target.health).toBe(100);
   expect(target.combat).toMatchObject({ negate: false, thorns: 3, waterThorns: 2, fireThorns: 1 });
+  expect(events.some((event) => event.text.includes("Thorns still retaliate"))).toBe(false);
 });
