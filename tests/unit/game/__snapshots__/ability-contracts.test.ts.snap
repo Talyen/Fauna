@@ -327,7 +327,7 @@ exports[`preserves authored text, targeting, scaling, keywords and enemy adaptat
     "id": "almanelle-rooted-year",
   },
   {
-    "digest": "151576a89dffb9a984cd4133b4e0a8f697996fd4d14d723d7b742a44d2c5161f",
+    "digest": "322b069f3f2f863b5d9a28a47ed7e8b247aea5870707e5a51ff9e0102b44be6b",
     "id": "orifable-createFood",
   },
   {
@@ -337,6 +337,42 @@ exports[`preserves authored text, targeting, scaling, keywords and enemy adaptat
   {
     "digest": "de8dd654b34c4e550dc169fd5eba263f3c94cf9fd43b689fa5307ae8ed693270",
     "id": "orifable-attack",
+  },
+  {
+    "digest": "993728293dd907a5be7b5f78483bc0fb2685c5bcc983a74b0928eb2cb29006ab",
+    "id": "parhelion-polar-reprieve",
+  },
+  {
+    "digest": "c8af0bab760b884b4aadba4ce932ddbc09be8d140432d3bf10185cd9dc2f9195",
+    "id": "parhelion-sundog-reservoir",
+  },
+  {
+    "digest": "7a988a5e4708527212db9875e90eced2936894cdf120833f1df8553a8e2cac5d",
+    "id": "parhelion-whiteout-waltz",
+  },
+  {
+    "digest": "3ee64fb128c5e805a571ec926d295fe2b6145bb66752eb3c519d473521e18bda",
+    "id": "aerostat-voyagers-rest",
+  },
+  {
+    "digest": "70b6119e7172c9b123cc2e7f3bf006bd5d1371b5ec56918cc7db7c44a3a13e01",
+    "id": "aerostat-true-bearing",
+  },
+  {
+    "digest": "5e35d679e6402bebc1e97c5eca4e841342d49eda7b6bd3ef92d1b0adea1557e7",
+    "id": "aerostat-parcel-drop",
+  },
+  {
+    "digest": "b6fd710a3d3514af658bc4b8e625aec24e14f483bc7d0439cad3cb27d9571032",
+    "id": "wisterelle-forgotten-junction",
+  },
+  {
+    "digest": "5efd601863ba77958b430aa02cc4549417347e4e56bc69cabe67b377f8c83ac4",
+    "id": "wisterelle-lantern-fare",
+  },
+  {
+    "digest": "d1550fe1f827658bc27776365e627c7eac8b6b1ebac954faaf689d0b644bfc6e",
+    "id": "wisterelle-left-luggage",
   },
   {
     "digest": "4658c8f25b4e362c48000c851d2bb86c36579d8dcb6f3ca56bf15bb3a9f9e993",
@@ -365,9 +401,9 @@ exports[`preserves commands, previews, save/resume and rankings: attack reflecti
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "14ae16b68d6c2b82104693b9fbea4bedba9b63569d9f8b5212651b01614e1da0",
-  "enemyTurn": "cbccc81c58fd23682e2d9f9a2b09a7a12ce8244d9e8849467ea58e0ad56043da",
-  "preview": "14ae16b68d6c2b82104693b9fbea4bedba9b63569d9f8b5212651b01614e1da0",
+  "committed": "65c51d2dc039e22d9b4de7de951e6a65ea9369925851f17179ce52815edb7037",
+  "enemyTurn": "71623f8c7c550f16aa47e19269050eb5317cb77bf8fe0ee1f1425e3dc66ec023",
+  "preview": "65c51d2dc039e22d9b4de7de951e6a65ea9369925851f17179ce52815edb7037",
   "rankings": [
     {
       "command": {
@@ -391,9 +427,9 @@ exports[`preserves commands, previews, save/resume and rankings: generated Food 
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "2f7e0e7110af7576ec27dd98a847db9b88910b31b7f11810861b58df00610078",
-  "enemyTurn": "8f1ca4845a2b1aa1c448569a91cff3a81820f4386419ae5fdfd838349b094f45",
-  "preview": "2f7e0e7110af7576ec27dd98a847db9b88910b31b7f11810861b58df00610078",
+  "committed": "c114ffe529174ea0118385def59f8689d146b44840c457f2f666d108e24e7f27",
+  "enemyTurn": "4ce7b3f0e8344fa4f189df885bff9f278f25b3acb05e957364373781be4b99eb",
+  "preview": "c114ffe529174ea0118385def59f8689d146b44840c457f2f666d108e24e7f27",
   "rankings": [
     {
       "command": {
@@ -417,9 +453,9 @@ exports[`preserves commands, previews, save/resume and rankings: generated Pearl
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "de630e2662cefcf956a45bfd7bb1f2ba1dea320f4f53f170e4fb381dd229e91b",
-  "enemyTurn": "4833734becbb0cc5302194e2ec9a8803246bf73d07c37b4bc8aeade09f527c2f",
-  "preview": "de630e2662cefcf956a45bfd7bb1f2ba1dea320f4f53f170e4fb381dd229e91b",
+  "committed": "e26a5a172bb3a05adce19da5e5b3e113fa75374e946a2f7d31b186de73555658",
+  "enemyTurn": "4c1aa38a3caad9f1ad27366ba48a5148ac4129d21642cd02f4c7bf43750dfb93",
+  "preview": "e26a5a172bb3a05adce19da5e5b3e113fa75374e946a2f7d31b186de73555658",
   "rankings": [
     {
       "command": {
@@ -443,9 +479,9 @@ exports[`preserves commands, previews, save/resume and rankings: group protectio
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "411a6cb3d6810aad0f85cb7acd109e7cc9b7ff288635b725052d2042729190d7",
-  "enemyTurn": "2086525daa8c7bc20a607081845e0b072c6d8812ab89a5cc2be134c4d9d48718",
-  "preview": "411a6cb3d6810aad0f85cb7acd109e7cc9b7ff288635b725052d2042729190d7",
+  "committed": "93e668d7c888f37dc57ea9532c4ee5deee3573cf400ca9e374ba4f5d0dac4e65",
+  "enemyTurn": "e56ab3a6f326ada668d404423dc2f99f3ea23defdb16ceee12ee69a2f1688f35",
+  "preview": "93e668d7c888f37dc57ea9532c4ee5deee3573cf400ca9e374ba4f5d0dac4e65",
   "rankings": [
     {
       "command": {
@@ -469,9 +505,9 @@ exports[`preserves commands, previews, save/resume and rankings: random attack 1
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "1f02a58b742c3712934f747633f5eb0db89dcb653a2e50b7729574c32448edf4",
-  "enemyTurn": "c25d25b0b2c24e9b2d88b28960fc87ad0223a25d2ec2fa9a541437094ee1e33f",
-  "preview": "1f02a58b742c3712934f747633f5eb0db89dcb653a2e50b7729574c32448edf4",
+  "committed": "cce11ecb589e2ba1d364a15aee42d871e1348bf1bc47637e55df51ea0b072ec0",
+  "enemyTurn": "9697303d3d4a3612a654df20bedefa499b461252f491630a5f13f56ea0a5a313",
+  "preview": "cce11ecb589e2ba1d364a15aee42d871e1348bf1bc47637e55df51ea0b072ec0",
   "rankings": [
     {
       "command": {
@@ -495,9 +531,9 @@ exports[`preserves commands, previews, save/resume and rankings: recipient heali
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "cfcfe8e5e7eb5ee458841ef9dc5e5b57b33af1d41cbb5975d0da657daad8bab6",
-  "enemyTurn": "bac9870a719b75e5385d2fa591e37040de8c55a470ae20623d2f9fa75794b3cd",
-  "preview": "cfcfe8e5e7eb5ee458841ef9dc5e5b57b33af1d41cbb5975d0da657daad8bab6",
+  "committed": "ba2f382ec2d9f11c89c2370987eeb27c18977a1cc69ee26183eb0a53c03a0665",
+  "enemyTurn": "e9faa126365cc5e71c8ba9f3c5914fd9e0f2696e51387166bc721e60668ffc9e",
+  "preview": "ba2f382ec2d9f11c89c2370987eeb27c18977a1cc69ee26183eb0a53c03a0665",
   "rankings": [
     {
       "command": {
@@ -521,9 +557,9 @@ exports[`preserves commands, previews, save/resume and rankings: recovery and re
     "targetId": "ally-0",
     "type": "play",
   },
-  "committed": "7467bc6e8599b12e19f3b85aad4dc5274b763081fe492ffdfad46579091cd200",
-  "enemyTurn": "6be1b28fabbe280238cfa14c05cd7a63509d66cde54ec5b38663c3c7c6412b97",
-  "preview": "7467bc6e8599b12e19f3b85aad4dc5274b763081fe492ffdfad46579091cd200",
+  "committed": "6677585e1ff774e4fe06f88bc7937b2c59fcc981a2b5701229642ceee269a0a8",
+  "enemyTurn": "0e3292204a25a314dffadfe39af3ef62d6e45d2351ececa7e2538830b70a63f5",
+  "preview": "6677585e1ff774e4fe06f88bc7937b2c59fcc981a2b5701229642ceee269a0a8",
   "rankings": [
     {
       "command": {
@@ -547,9 +583,9 @@ exports[`preserves commands, previews, save/resume and rankings: reflected attac
     "targetId": "enemy-0",
     "type": "play",
   },
-  "committed": "d08eeb718dfa8e06b6d3e1af61124754f1d03d1ea6390b48419e7f7919c2419a",
-  "enemyTurn": "c20a0aacdeb3d34032ecc4477a2e66ea094e532369d7fa668299cfe741a7cdc0",
-  "preview": "d08eeb718dfa8e06b6d3e1af61124754f1d03d1ea6390b48419e7f7919c2419a",
+  "committed": "4cebdd12a54f88edfbe3883ee484ac466468016b746fd468c0d5c6ce45eb72ec",
+  "enemyTurn": "3e005e38df3f02f014948fb97dab79371f1a29f5655fc565fe90c383d9de863b",
+  "preview": "4cebdd12a54f88edfbe3883ee484ac466468016b746fd468c0d5c6ce45eb72ec",
   "rankings": [
     {
       "command": {

@@ -280,6 +280,7 @@ it("runs enemy support on its own side and uses base regeneration independently 
   expect(game.team.every((unit) => unit.combat!.waterThorns === 0)).toBe(true);
   const events: GameEvent[] = [];
   produce(game, (draft) => {
+    draft.battle!.turn = 2;
     const enemy = draft.battle!.enemies[0]!;
     const before = enemy.health;
     startAction(enemy, events, draft);

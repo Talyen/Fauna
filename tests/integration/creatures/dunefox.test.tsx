@@ -278,7 +278,7 @@ it("encounters discover and recruit Dunefox; enemy Mirage Step and auras use the
       { type: "beginBattle" },
     );
     expect(game.discovery.encountered).toContain("dunefox");
-    const result = enemyPlay(game, seed === 1 ? "dunefox-dodge" : "dunefox-teamBlind");
+    const result = enemyPlay(game, seed === 1 ? "dunefox-dodge" : "dunefox-dune-whirl");
     if (result.events.some((event) => event.text.includes("uses Mirage Step"))) {
       sawStep = true;
       expect(result.state.battle!.enemies[0]!.combat.temporaryDodge).toBe(30);

@@ -77,9 +77,15 @@ it("partitions lineup scenarios without omissions or duplication and rejects inv
   );
   expect(new Set(groups.flat())).toEqual(new Set(scenarios));
   expect(groups.flat()).toHaveLength(scenarios.length);
-  expect(groups.map((group) => group.length)).toEqual([3, 3, 3, 2]);
+  expect(groups.map((group) => group.length)).toEqual(
+    Array.from(
+      { length: LINEUP_SHARDS },
+      (_, index) =>
+        Math.floor(scenarios.length / LINEUP_SHARDS) + Number(index < scenarios.length % LINEUP_SHARDS),
+    ),
+  );
   expect(lineupShard(scenarios, undefined)).toBe(scenarios);
-  for (const selector of ["", "0", "5", "01", "1.5", "wrong"])
+  for (const selector of ["", "0", String(LINEUP_SHARDS + 1), "01", "1.5", "wrong"])
     expect(() => lineupShard(scenarios, selector)).toThrow("Invalid lineup shard");
 });
 
@@ -436,9 +442,11 @@ it("accepts mixed successful attempts of the same run and records their build ev
   const record = JSON.parse(readFileSync(path.join(root, "reports/ci/evidence.json"), "utf8"));
   expect(record.build.attempt).toBe("1");
   expect(record.interaction.attempt).toBe("2");
-  expect(record.lineups.map((shard) => shard.attempt)).toEqual(["2", "1", "1", "1"]);
+  expect(record.lineups.map((shard) => shard.attempt)).toEqual(
+    Array.from({ length: LINEUP_SHARDS }, (_, index) => (index === 0 ? "2" : "1")),
+  );
   expect(JSON.parse(readFileSync(path.join(root, "reports/vitest-merged.json"), "utf8")).numPassedTests).toBe(
-    5,
+    LINEUP_SHARDS + 1,
   );
   expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("Lineup spread: 0.0s");
   expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("All required jobs succeeded");
