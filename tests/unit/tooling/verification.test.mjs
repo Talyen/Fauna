@@ -1,6 +1,6 @@
+import { git, readFixture, repository, writeFixture } from "../../support/tooling.mjs";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { mkdirSync, rmSync } from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import {
@@ -21,30 +21,16 @@ import { investigationArgs } from "../../../scripts/agent/investigate.mjs";
 const runCheck = (args, options = {}) =>
   runDefaultCheck(args, { ...options, env: { FAUNA_LOCAL_HEAVY: "1" } });
 
-const roots = [];
 const repo = path.resolve(import.meta.dirname, "../../..");
-function git(root, ...args) {
-  return execFileSync(
-    "git",
-    ["-c", "commit.gpgsign=false", "-c", `core.hooksPath=${path.join(root, "no-hooks")}`, ...args],
-    { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
-  ).trim();
-}
-function fixture() {
-  const root = mkdtempSync(path.join(tmpdir(), "fauna-verification-"));
-  roots.push(root);
-  mkdirSync(path.join(root, "src"));
-  writeFileSync(path.join(root, "README.md"), "# Fauna\n");
-  writeFileSync(path.join(root, "src/game.ts"), "export const creature = 1;\n");
-  git(root, "init", "-q", "-b", "main");
-  git(root, "config", "user.name", "Verification fixture");
-  git(root, "config", "user.email", "fixture@example.invalid");
-  git(root, "add", ".");
-  git(root, "commit", "-qm", "fixture");
-  return root;
-}
+const fixture = () =>
+  repository(
+    {
+      "README.md": "# Fauna\n",
+      "src/game.ts": "export const creature = 1;\n",
+    },
+    "fauna-verification-",
+  );
 afterEach(() => {
-  for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
   vi.restoreAllMocks();
 });
 
@@ -55,10 +41,9 @@ describe("lightweight local verification", () => {
       const root = fixture();
       const suite = "tests/unit/game/engine.test.ts";
       mkdirSync(path.dirname(path.join(root, suite)), { recursive: true });
-      for (const required of owners["src/game/"].suites)
-        writeFileSync(path.join(root, required), "export {};\n");
+      for (const required of owners["src/game/"].suites) writeFixture(root, required, "export {};\n");
       mkdirSync(path.join(root, "src/game"));
-      writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;\n");
+      writeFixture(root, "src/game/value.ts", "export const value = 1;\n");
       const runner = vi.fn(() => ({ status: 0 }));
       const messages = [];
       expect(
@@ -84,9 +69,7 @@ describe("lightweight local verification", () => {
     const plan = checkPlan(repo, ["tests/exhaustive/roster-combinations.test.ts"]);
     expect(plan.tests).toEqual(["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"]);
     expect(plan.configs).toContain("tsconfig.test.json");
-    expect(readFileSync(path.join(repo, "vitest.config.ts"), "utf8")).toContain(
-      "unit,integration,exhaustive",
-    );
+    expect(readFixture(repo, "vitest.config.ts")).toContain("unit,integration,exhaustive");
   });
 
   it("rejects unknown options and ambiguous or incomplete selections", () => {
@@ -107,11 +90,11 @@ describe("lightweight local verification", () => {
   it("checks committed integration changes, staged edits, deletions and untracked files", () => {
     const root = fixture();
     const base = git(root, "rev-parse", "HEAD");
-    writeFileSync(path.join(root, "src/game.ts"), "export const creature = 2;\n");
+    writeFixture(root, "src/game.ts", "export const creature = 2;\n");
     git(root, "add", ".");
     git(root, "commit", "-qm", "task change");
-    writeFileSync(path.join(root, "src/new.ts"), "export const starter = 1;\n");
-    writeFileSync(path.join(root, "src/staged.ts"), "export const roster = 1;\n");
+    writeFixture(root, "src/new.ts", "export const starter = 1;\n");
+    writeFixture(root, "src/staged.ts", "export const roster = 1;\n");
     git(root, "add", "src/staged.ts");
     rmSync(path.join(root, "README.md"));
     expect(selectedPaths(root, { paths: [], base }).sort()).toEqual([
@@ -124,8 +107,8 @@ describe("lightweight local verification", () => {
 
   it("treats named paths literally and fails closed on missing paths, external paths or bad Git refs", () => {
     const root = fixture();
-    writeFileSync(path.join(root, "src/creature[1].ts"), "export {};\n");
-    writeFileSync(path.join(root, "src/creature1.ts"), "export {};\n");
+    writeFixture(root, "src/creature[1].ts", "export {};\n");
+    writeFixture(root, "src/creature1.ts", "export {};\n");
     expect(selectedPaths(root, { paths: ["src/creature[1].ts"], base: "HEAD" })).toEqual([
       "src/creature[1].ts",
     ]);
@@ -184,14 +167,14 @@ describe("lightweight local verification", () => {
   it("batches every file by count, source size and argument bytes without dropping coverage", () => {
     const root = fixture();
     const files = Array.from({ length: 51 }, (_, i) => `src/file-${i}.ts`);
-    for (const file of files) writeFileSync(path.join(root, file), "export {};\n");
+    for (const file of files) writeFixture(root, file, "export {};\n");
     expect(formatSelection(root, files.slice(0, 50)).batches).toHaveLength(1);
     expect(formatSelection(root, files).batches.map((batch) => batch.length)).toEqual([50, 1]);
     expect(formatSelection(root, files).batches.flat()).toEqual(files);
-    writeFileSync(path.join(root, "src/large.ts"), " ".repeat(256_001));
+    writeFixture(root, "src/large.ts", " ".repeat(256_001));
     expect(formatSelection(root, ["src/large.ts"]).batches).toEqual([["src/large.ts"]]);
     const long = Array.from({ length: 36 }, (_, i) => `src/${"x".repeat(220)}-${i}.ts`);
-    for (const file of long) writeFileSync(path.join(root, file), "export {};\n");
+    for (const file of long) writeFixture(root, file, "export {};\n");
     expect(formatSelection(root, long).batches.length).toBeGreaterThan(1);
     expect(formatSelection(root, long).batches.flat()).toEqual(long);
     expect(formatSelection(root, ["missing.ts"]).files).toEqual([]);
@@ -201,7 +184,7 @@ describe("lightweight local verification", () => {
     const root = fixture(),
       runner = vi.fn(() => ({ status: 0 })),
       messages = [];
-    writeFileSync(path.join(root, "src/large.ts"), " ".repeat(256_001));
+    writeFixture(root, "src/large.ts", " ".repeat(256_001));
     expect(runCheck(["src/large.ts"], { root, runner, log: (message) => messages.push(message) })).toBe(0);
     expect(runner.mock.calls.map((call) => path.basename(call[1][0]))).toEqual([
       "prettier.cjs",
@@ -220,8 +203,8 @@ describe("lightweight local verification", () => {
     expect(runCheck(["--plan", "src"], { root, runner, log: (message) => messages.push(message) })).toBe(0);
     expect(runner).not.toHaveBeenCalled();
     expect(messages.join(" ")).toContain("Plan only; no checks ran");
-    for (let i = 0; i < 51; i++) writeFileSync(path.join(root, `src/file-${i}.ts`), "export {};\n");
-    writeFileSync(path.join(root, "src/zzz.ts"), 'import * as Dialog from "@radix-ui/react-dialog";');
+    for (let i = 0; i < 51; i++) writeFixture(root, `src/file-${i}.ts`, "export {};\n");
+    writeFixture(root, "src/zzz.ts", 'import * as Dialog from "@radix-ui/react-dialog";');
     expect(runCheck(["src"], { root, runner, log: () => {} })).toBe(1);
     expect(runner.mock.calls.filter((call) => call[1][0].endsWith("prettier.cjs"))).toHaveLength(2);
   });
@@ -230,22 +213,26 @@ describe("lightweight local verification", () => {
     const root = fixture();
     for (const dir of ["src/game", "src/application", "tests/integration"])
       mkdirSync(path.join(root, dir), { recursive: true });
-    writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;");
-    writeFileSync(path.join(root, "src/game/index.ts"), 'export { value } from "./value.js";');
-    writeFileSync(
-      path.join(root, "src/application/commands.ts"),
+    writeFixture(root, "src/game/value.ts", "export const value = 1;");
+    writeFixture(root, "src/game/index.ts", 'export { value } from "./value.js";');
+    writeFixture(
+      root,
+      "src/application/commands.ts",
       'import { value } from "@/game/index"; export { value };',
     );
-    writeFileSync(
-      path.join(root, "tests/integration/renamed.test.ts"),
+    writeFixture(
+      root,
+      "tests/integration/renamed.test.ts",
       'import { value } from "../../src/application/commands";',
     );
-    writeFileSync(
-      path.join(root, "tests/integration/lazy.test.mjs"),
+    writeFixture(
+      root,
+      "tests/integration/lazy.test.mjs",
       'await import("../../src/application/commands.ts");',
     );
-    writeFileSync(
-      path.join(root, "tests/integration/required.test.mjs"),
+    writeFixture(
+      root,
+      "tests/integration/required.test.mjs",
       'require("../../src/application/commands.ts");',
     );
     const regressions = [
@@ -262,7 +249,7 @@ describe("lightweight local verification", () => {
     const root = fixture();
     mkdirSync(path.join(root, "tests/integration"), { recursive: true });
     for (let i = 0; i < 14; i++)
-      writeFileSync(path.join(root, `tests/integration/case-${i}.test.ts`), 'import "../../src/game";');
+      writeFixture(root, `tests/integration/case-${i}.test.ts`, 'import "../../src/game";');
     expect(checkPlan(root, ["src/game.ts"]).relatedTests).toEqual([]);
     const plan = checkPlan(root, ["src/game.ts"], [], { related: true });
     expect(plan.tests).toEqual([]);
@@ -281,7 +268,7 @@ describe("lightweight local verification", () => {
       "tests/unit/extra.test.ts",
     ]) {
       mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
-      writeFileSync(path.join(root, file), "export {};");
+      writeFixture(root, file, "export {};");
     }
     expect(
       checkPlan(root, ["src/ui/shared/navigation/pagination.tsx"], ["tests/unit/extra.test.ts"]).tests,
@@ -293,18 +280,16 @@ describe("lightweight local verification", () => {
     ]);
     // A moved or deleted contract must be repaired in the checked-in owner map.
     for (const { suites } of Object.values(owners))
-      for (const file of suites)
-        expect(readFileSync(path.join(repo, file), "utf8").length).toBeGreaterThan(0);
+      for (const file of suites) expect(readFixture(repo, file).length).toBeGreaterThan(0);
   });
 
   it("blocks verification when a required owner suite is deleted or replaced by a directory", () => {
     const root = fixture();
     const suite = "tests/unit/game/engine.test.ts";
     mkdirSync(path.join(root, "src/game"), { recursive: true });
-    writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;\n");
+    writeFixture(root, "src/game/value.ts", "export const value = 1;\n");
     mkdirSync(path.dirname(path.join(root, suite)), { recursive: true });
-    for (const required of owners["src/game/"].suites)
-      writeFileSync(path.join(root, required), "export {};\n");
+    for (const required of owners["src/game/"].suites) writeFixture(root, required, "export {};\n");
     expect(checkPlan(root, ["src/game/value.ts"]).missingContracts).toEqual([]);
     rmSync(path.join(root, suite));
     for (const directory of [false, true]) {
@@ -326,7 +311,7 @@ describe("lightweight local verification", () => {
     const local = ["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"];
     for (const file of [extended, ...local]) {
       mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
-      writeFileSync(path.join(root, file), "export {};\n");
+      writeFixture(root, file, "export {};\n");
     }
     const plan = checkPlan(root, [extended, "src/game/engine.ts"]);
     expect(plan.tests).toEqual(local);
@@ -363,7 +348,7 @@ describe("lightweight local verification", () => {
       expect(owner.suites.length).toBeGreaterThan(0);
       for (const local of owner.suites) expect(owners[local]?.tier).not.toBe("ci");
       expect(checkPlan(repo, [file]).tests).toEqual(expect.arrayContaining(owner.suites));
-      expect(readFileSync(path.join(repo, file), "utf8").length).toBeGreaterThan(0);
+      expect(readFixture(repo, file).length).toBeGreaterThan(0);
     }
     const discovered = JSON.parse(
       execFileSync(
@@ -391,7 +376,7 @@ describe("lightweight local verification", () => {
   it("runs named regressions alongside the changed selection and dispatches bounded diagnostics", async () => {
     const root = fixture();
     mkdirSync(path.join(root, "tests/unit"), { recursive: true });
-    writeFileSync(path.join(root, "tests/unit/named.test.mjs"), "");
+    writeFixture(root, "tests/unit/named.test.mjs", "");
     const runner = vi.fn(() => ({ status: 0 }));
     expect(
       runCheck(["--test", "tests/unit/named.test.mjs", "src/game.ts"], { root, runner, log: () => {} }),
@@ -407,22 +392,23 @@ describe("lightweight local verification", () => {
   it("keeps required coverage and related suggestions independent of timing history", () => {
     const root = fixture();
     mkdirSync(path.join(root, "tests/integration"), { recursive: true });
-    writeFileSync(path.join(root, "src/indirect.ts"), 'import "./game";');
+    writeFixture(root, "src/indirect.ts", 'import "./game";');
     const indirect = Array.from({ length: 13 }, (_, i) => `tests/integration/a-${i}.test.ts`);
-    for (const file of indirect) writeFileSync(path.join(root, file), 'import "../../src/indirect";');
+    for (const file of indirect) writeFixture(root, file, 'import "../../src/indirect";');
     const direct = "tests/integration/z-direct.test.ts";
-    writeFileSync(path.join(root, direct), 'import "../../src/game";');
+    writeFixture(root, direct, 'import "../../src/game";');
     expect(checkPlan(root, ["src/game.ts"], [], { related: true }).relatedTests[0]).toBe(direct);
     const before = checkPlan(root, ["src/game.ts"], [], { related: true });
     mkdirSync(path.join(root, "reports"));
-    writeFileSync(
-      path.join(root, "reports/task-tests.json"),
+    writeFixture(
+      root,
+      "reports/task-tests.json",
       JSON.stringify({ testResults: [{ name: path.join(root, direct), startTime: 1, endTime: 59001 }] }),
     );
     const plan = checkPlan(root, ["src/game.ts"], [], { related: true });
     expect(plan).toEqual(before);
     expect(plan.relatedTests).toHaveLength(14);
-    writeFileSync(path.join(root, "reports/task-tests.json"), JSON.stringify({ testResults: {} }));
+    writeFixture(root, "reports/task-tests.json", JSON.stringify({ testResults: {} }));
     expect(checkPlan(root, ["src/game.ts"], [], { related: true })).toEqual(before);
   });
 
@@ -438,7 +424,7 @@ describe("lightweight local verification", () => {
   it("selects existing owner suites, changed regressions and compiler environments for deleted sources", () => {
     const root = fixture();
     mkdirSync(path.join(root, "tests/unit/game"), { recursive: true });
-    writeFileSync(path.join(root, "tests/unit/game/engine.test.ts"), "");
+    writeFixture(root, "tests/unit/game/engine.test.ts", "");
     const plan = checkPlan(root, [
       "src/game/engine.ts",
       "src/platform/ports.ts",
@@ -463,10 +449,10 @@ describe("lightweight local verification", () => {
       expect(runCheck(["src/game.ts"], { root, runner, log: () => {} })).toBe(7);
       expect(runner.mock.calls.some((call) => call[1][0].endsWith("run-local-tests.mjs"))).toBe(false);
     }
-    writeFileSync(path.join(root, "src/game.ts"), 'import * as Dialog from "@radix-ui/react-dialog";');
+    writeFixture(root, "src/game.ts", 'import * as Dialog from "@radix-ui/react-dialog";');
     expect(runCheck(["src/game.ts"], { root, runner: vi.fn(() => ({ status: 0 })), log: () => {} })).toBe(1);
     mkdirSync(path.join(root, "src/ui"));
-    writeFileSync(path.join(root, "src/ui/screen.css"), ".panel { color: #ffffff; }");
+    writeFixture(root, "src/ui/screen.css", ".panel { color: #ffffff; }");
     expect(
       runCheck(["src/ui/screen.css"], { root, runner: vi.fn(() => ({ status: 0 })), log: () => {} }),
     ).toBe(1);
@@ -482,7 +468,7 @@ describe("lightweight local verification", () => {
   it("batches selected regressions with one worker and a bounded deadline, propagating failure", () => {
     const root = fixture();
     mkdirSync(path.join(root, "tests/unit"), { recursive: true });
-    for (const name of ["first", "second"]) writeFileSync(path.join(root, `tests/unit/${name}.test.mjs`), "");
+    for (const name of ["first", "second"]) writeFixture(root, `tests/unit/${name}.test.mjs`, "");
     const suites = ["tests/unit/first.test.mjs", "tests/unit/second.test.mjs"];
     const runner = vi.fn(() => ({ status: 0 }));
     expect(runCheck(suites, { root, runner, log: () => {} })).toBe(0);
@@ -514,13 +500,11 @@ describe("lightweight local verification", () => {
     });
     expect(localConfig.test.include).toHaveLength(3);
     for (const file of localConfig.test.include)
-      expect(readFileSync(path.join(repo, file), "utf8")).not.toMatch(
-        /^\/\/\s*@vitest-environment\s+(?:jsdom|happy-dom)\b/m,
-      );
+      expect(readFixture(repo, file)).not.toMatch(/^\/\/\s*@vitest-environment\s+(?:jsdom|happy-dom)\b/m);
   });
 
   it("retains the public verification commands and keeps packaging nonpublishing", () => {
-    const { scripts } = JSON.parse(readFileSync(path.join(repo, "package.json"), "utf8"));
+    const { scripts } = JSON.parse(readFixture(repo, "package.json"));
     for (const name of [
       "check",
       "check:full",
@@ -537,7 +521,7 @@ describe("lightweight local verification", () => {
   });
 
   it("preserves verification coverage when npm commands are regrouped or workflow formatting changes", () => {
-    const { scripts } = JSON.parse(readFileSync(path.join(repo, "package.json"), "utf8"));
+    const { scripts } = JSON.parse(readFixture(repo, "package.json"));
     const references = (source, found = new Set()) => {
       for (const [, name] of source.matchAll(/\bnpm\s+(?:--silent\s+)?run\s+([\w:-]+)/g)) {
         if (found.has(name)) continue;
@@ -565,7 +549,7 @@ describe("lightweight local verification", () => {
         "test:e2e",
       ]),
     );
-    const workflow = readFileSync(path.join(repo, ".github/workflows/ci.yml"), "utf8");
+    const workflow = readFixture(repo, ".github/workflows/ci.yml");
     expect(references(workflow)).toEqual(
       expect.arrayContaining([
         "check:types",
@@ -587,7 +571,7 @@ describe("lightweight local verification", () => {
 });
 
 it("keeps Steam provenance independent of paid signing and untrusted build permissions", () => {
-  const workflow = readFileSync(path.join(repo, ".github/workflows/ci.yml"), "utf8");
+  const workflow = readFixture(repo, ".github/workflows/ci.yml");
   const windows = workflow.slice(workflow.indexOf("  windows:"), workflow.indexOf("  verify:"));
   const provenance = workflow.slice(workflow.indexOf("  provenance:"));
   expect(windows).not.toContain("attestations: write");

@@ -1,5 +1,6 @@
+import { readFixture } from "../../support/tooling.mjs";
 import { execFileSync } from "node:child_process";
-import { readFileSync, rmSync, mkdirSync, writeFileSync } from "node:fs";
+import { rmSync, mkdirSync, writeFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { afterEach, expect, it, vi } from "vitest";
@@ -86,14 +87,14 @@ it("writes a durable journal and replays the CLI's recorded production career", 
       });
     // Policy changes can stall a particular career; this fixture owns successful CLI replay.
     invoke(["--seed", "15", "--starter", "captoad", "--runs", "1", "--out", directory]);
-    const summary = JSON.parse(readFileSync(path.join(directory, "summary.json"), "utf8"));
-    const bundle = JSON.parse(readFileSync(path.join(directory, "journey.json"), "utf8"));
+    const summary = JSON.parse(readFixture(directory, "summary.json"));
+    const bundle = JSON.parse(readFixture(directory, "journey.json"));
     expect(summary.complete).toBe(true);
     expect(bundle.identity).toBe(await identity());
     expect(bundle.steps.every((step) => typeof step.decision === "string" && step.decision.length > 0)).toBe(
       true,
     );
-    const journal = readFileSync(path.join(directory, summary.journal), "utf8")
+    const journal = readFixture(directory, summary.journal)
       .trim()
       .split("\n")
       .map((line) => JSON.parse(line));
@@ -105,10 +106,8 @@ it("writes a durable journal and replays the CLI's recorded production career", 
       expect(journal[index * 2 + 2]).toEqual({ type: "completed", index, ...step });
     }
     invoke(["--replay", path.join(directory, "journey.json"), "--out", replayDirectory]);
-    expect(JSON.parse(readFileSync(path.join(replayDirectory, "journey.json"), "utf8")).steps).toEqual(
-      bundle.steps,
-    );
-    const replaySummary = JSON.parse(readFileSync(path.join(replayDirectory, "summary.json"), "utf8"));
+    expect(JSON.parse(readFixture(replayDirectory, "journey.json")).steps).toEqual(bundle.steps);
+    const replaySummary = JSON.parse(readFixture(replayDirectory, "summary.json"));
     for (const { profile } of [summary, replaySummary]) {
       expect(profile.journalRecords).toBe(1 + 2 * bundle.steps.length);
       expect(Object.keys(profile.stages)).toEqual([

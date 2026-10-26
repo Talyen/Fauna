@@ -1,22 +1,20 @@
+import { readFixture, temporaryDirectory } from "../../support/tooling.mjs";
 import { afterEach, expect, it, vi } from "vitest";
 import { EventEmitter } from "node:events";
-import { mkdtempSync, mkdirSync, symlinkSync, existsSync, rmSync, readFileSync } from "node:fs";
-import os from "node:os";
+import { mkdirSync, symlinkSync, existsSync, rmSync } from "node:fs";
 import path from "node:path";
 import { ROOT, reportDirectory } from "../../../scripts/lib/tool-runtime.mjs";
 import { main, runWorker } from "../../../scripts/balance/balance-compare.mjs";
 
-const roots = [];
 afterEach(() => {
   vi.useRealTimers();
   vi.restoreAllMocks();
-  for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
 });
 
 it("creates report directories but rejects traversal and symlinks before creating external children", async () => {
-  const root = mkdtempSync(path.join(os.tmpdir(), "fauna-report-root-"));
-  const outside = mkdtempSync(path.join(os.tmpdir(), "fauna-report-outside-"));
-  roots.push(root, outside);
+  const root = temporaryDirectory("fauna-report-root-");
+  const outside = temporaryDirectory("fauna-report-outside-");
+
   const create = (input) => reportDirectory(input, "reports/default", { root });
   expect(await create()).toBe(path.join(root, "reports/default"));
   await expect(create("reports/../../outside")).rejects.toThrow("remain under reports");
@@ -62,8 +60,8 @@ it.each(["SIGINT", "SIGTERM"])(
   async (signal) => {
     const parent = path.join(ROOT, "reports");
     mkdirSync(parent, { recursive: true });
-    const out = mkdtempSync(path.join(parent, "cancel-regression-"));
-    roots.push(out);
+    const out = temporaryDirectory("cancel-regression-", parent);
+
     const exitCode = process.exitCode;
     const listeners = process.listenerCount(signal);
     vi.spyOn(console, "log").mockImplementation(() => {});
@@ -75,7 +73,7 @@ it.each(["SIGINT", "SIGTERM"])(
       await main(["run", "--starters", "mossguard", "--seeds", "0,1", "--out", out], { runCase });
       expect(runCase).toHaveBeenCalledTimes(1);
       expect(process.exitCode).toBe(1);
-      const report = JSON.parse(readFileSync(path.join(out, "report.json"), "utf8"));
+      const report = JSON.parse(readFixture(out, "report.json"));
       expect(report.complete).toBe(false);
       expect(report.failures).toHaveLength(1);
       expect(existsSync(path.join(out, "case-1-config.json"))).toBe(false);

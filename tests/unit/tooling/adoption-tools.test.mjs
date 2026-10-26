@@ -1,5 +1,6 @@
+import { temporaryDirectory, writeFixture } from "../../support/tooling.mjs";
 import { it, expect } from "vitest";
-import { mkdtempSync, writeFileSync, mkdirSync, readFileSync, rmSync } from "node:fs";
+import { mkdirSync, readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import os from "node:os";
 import path from "node:path";
@@ -60,7 +61,7 @@ it("locates shared layout and recovery owners without adding unrelated task topi
 });
 
 it("identifies the complete performance artifact, including desktop code, save format and media", async () => {
-  const root = mkdtempSync(path.join(os.tmpdir(), "fauna-performance-build-"));
+  const root = temporaryDirectory("fauna-performance-build-");
   const files = {
     "dist/index.html": '<script src="./assets/index.js"></script>',
     "dist/assets/index.js": "renderer",
@@ -70,23 +71,20 @@ it("identifies the complete performance artifact, including desktop code, save f
     "package.json": '{"version":"1.0.0"}',
     "src/game/save-format.json": '{"version":1}',
   };
-  try {
-    for (const [name, bytes] of Object.entries(files)) {
-      mkdirSync(path.dirname(path.join(root, name)), { recursive: true });
-      writeFileSync(path.join(root, name), bytes);
-    }
-    const baseline = await performanceBuildIdentity(root);
-    for (const [name, bytes] of Object.entries(files)) {
-      writeFileSync(path.join(root, name), `${bytes}changed`);
-      expect(await performanceBuildIdentity(root), name).not.toBe(baseline);
-      writeFileSync(path.join(root, name), bytes);
-    }
-    expect(await performanceBuildIdentity(root)).toBe(baseline);
-    writeFileSync(path.join(root, "dist/index.html"), "");
-    await expect(performanceBuildIdentity(root)).rejects.toThrow("production renderer");
-  } finally {
-    rmSync(root, { recursive: true, force: true });
+
+  for (const [name, bytes] of Object.entries(files)) {
+    mkdirSync(path.dirname(path.join(root, name)), { recursive: true });
+    writeFixture(root, name, bytes);
   }
+  const baseline = await performanceBuildIdentity(root);
+  for (const [name, bytes] of Object.entries(files)) {
+    writeFixture(root, name, `${bytes}changed`);
+    expect(await performanceBuildIdentity(root), name).not.toBe(baseline);
+    writeFixture(root, name, bytes);
+  }
+  expect(await performanceBuildIdentity(root)).toBe(baseline);
+  writeFixture(root, "dist/index.html", "");
+  await expect(performanceBuildIdentity(root)).rejects.toThrow("production renderer");
 });
 
 it("launches desktop verification against its own profile and built renderer despite inherited preview settings", () => {
@@ -241,40 +239,37 @@ it("rejects broken Windows headers, escaping resources and corrupt packaged medi
   expect(() => verifyArchive(read, options)).toThrow();
 });
 it("keeps complete patch evidence for unusual filenames without staging or losing staged changes", () => {
-  const root = mkdtempSync(path.join(os.tmpdir(), "fauna-review-"));
+  const root = temporaryDirectory("fauna-review-");
   const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" });
-  try {
-    git("init", "-qb", "main");
-    git("config", "user.email", "test@example.com");
-    git("config", "user.name", "Test");
-    writeFileSync(path.join(root, "tracked"), "base\n");
-    git("add", "tracked");
-    git("commit", "-qm", "baseline");
-    writeFileSync(path.join(root, "tracked"), "staged\n");
-    git("add", "tracked");
-    writeFileSync(path.join(root, "tracked"), "unstaged\n");
-    const unusual = "odd ' $() [file]\n.txt";
-    writeFileSync(path.join(root, unusual), "new content\n");
-    writeFileSync(path.join(root, "invalid-utf8.bin"), Buffer.from([255, 254, 253]));
-    const indexBefore = git("diff", "--cached");
-    const result = review(root, [], { budget: 30, layers: true });
-    expect(result.omittedCharacters).toBeGreaterThan(0);
-    const full = readFileSync(result.patches, "utf8");
-    expect(full).toContain("+staged");
-    expect(full).toContain("+unstaged");
-    expect(full).toContain("new content");
-    expect(full).toContain("Binary file: 3 bytes");
-    const lines = full.split("\n");
-    for (const entry of result.selected) expect(lines[entry.start - 1]).toContain(JSON.stringify(entry.file));
-    expect(git("diff", "--cached")).toBe(indexBefore);
-    expect(result.inventory.some((entry) => entry.file === unusual)).toBe(true);
-    mkdirSync(path.join(root, "Docs"));
-    writeFileSync(path.join(root, "Docs/ARCHITECTURE.md"), "# Architecture\n\n## Commands\ntext\n");
-    expect(context(root, ["unknown"]).topics).toEqual(["architecture"]);
-    expect(sections(root, "Docs/ARCHITECTURE.md")[1]).toMatchObject({ start: 3, end: 5 });
-  } finally {
-    rmSync(root, { recursive: true, force: true });
-  }
+
+  git("init", "-qb", "main");
+  git("config", "user.email", "test@example.com");
+  git("config", "user.name", "Test");
+  writeFixture(root, "tracked", "base\n");
+  git("add", "tracked");
+  git("commit", "-qm", "baseline");
+  writeFixture(root, "tracked", "staged\n");
+  git("add", "tracked");
+  writeFixture(root, "tracked", "unstaged\n");
+  const unusual = "odd ' $() [file]\n.txt";
+  writeFixture(root, unusual, "new content\n");
+  writeFixture(root, "invalid-utf8.bin", Buffer.from([255, 254, 253]));
+  const indexBefore = git("diff", "--cached");
+  const result = review(root, [], { budget: 30, layers: true });
+  expect(result.omittedCharacters).toBeGreaterThan(0);
+  const full = readFileSync(result.patches, "utf8");
+  expect(full).toContain("+staged");
+  expect(full).toContain("+unstaged");
+  expect(full).toContain("new content");
+  expect(full).toContain("Binary file: 3 bytes");
+  const lines = full.split("\n");
+  for (const entry of result.selected) expect(lines[entry.start - 1]).toContain(JSON.stringify(entry.file));
+  expect(git("diff", "--cached")).toBe(indexBefore);
+  expect(result.inventory.some((entry) => entry.file === unusual)).toBe(true);
+  mkdirSync(path.join(root, "Docs"));
+  writeFixture(root, "Docs/ARCHITECTURE.md", "# Architecture\n\n## Commands\ntext\n");
+  expect(context(root, ["unknown"]).topics).toEqual(["architecture"]);
+  expect(sections(root, "Docs/ARCHITECTURE.md")[1]).toMatchObject({ start: 3, end: 5 });
 });
 
 it("does not let the internal worker bypass report-directory confinement", async () => {

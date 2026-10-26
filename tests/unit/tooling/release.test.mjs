@@ -1,7 +1,7 @@
+import { temporaryDirectory, writeFixture } from "../../support/tooling.mjs";
 import { it, expect } from "vitest";
-import { mkdtempSync, writeFileSync, mkdirSync, rmSync, readFileSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import os from "node:os";
 import { execFileSync } from "node:child_process";
 import { playerNote, generatePatchNotes, notesArgs } from "../../../scripts/release/generate-patch-notes.mjs";
 import {
@@ -69,34 +69,33 @@ it("requires the exact commit's successful final CI gate, excluding suppressed d
   expect(() => requireVerifiedCI("branch", { repository: "owner/fauna" })).toThrow("full release commit");
 });
 async function repository(test) {
-  const root = mkdtempSync(path.join(os.tmpdir(), "fauna-release-"));
+  const root = temporaryDirectory("fauna-release-");
   const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" });
-  try {
-    git("init", "-q");
-    git("config", "user.email", "test@example.com");
-    git("config", "user.name", "Test");
-    writeFileSync(
-      path.join(root, "package.json"),
-      JSON.stringify({
-        name: "fauna",
-        version: "1.0.0",
-        build: { appId: "com.fauna.game", productName: "Fauna" },
-      }),
-    );
-    writeFileSync(
-      path.join(root, "package-lock.json"),
-      JSON.stringify({
-        name: "fauna",
-        version: "1.0.0",
-        packages: { "": { name: "fauna", version: "1.0.0" } },
-      }),
-    );
-    git("add", ".");
-    git("commit", "-qm", "chore: initialize");
-    return await test(root, git);
-  } finally {
-    rmSync(root, { recursive: true, force: true });
-  }
+
+  git("init", "-q");
+  git("config", "user.email", "test@example.com");
+  git("config", "user.name", "Test");
+  writeFixture(
+    root,
+    "package.json",
+    JSON.stringify({
+      name: "fauna",
+      version: "1.0.0",
+      build: { appId: "com.fauna.game", productName: "Fauna" },
+    }),
+  );
+  writeFixture(
+    root,
+    "package-lock.json",
+    JSON.stringify({
+      name: "fauna",
+      version: "1.0.0",
+      packages: { "": { name: "fauna", version: "1.0.0" } },
+    }),
+  );
+  git("add", ".");
+  git("commit", "-qm", "chore: initialize");
+  return await test(root, git);
 }
 it("filters infrastructure notes and honors explicit player wording and visibility", () => {
   expect(playerNote("feat: add tools", ["scripts/tool.mjs"])).toBeNull();
@@ -120,7 +119,7 @@ it("uses reachable release ancestry and leaves Git unchanged when generating not
   repository((root, git) => {
     git("tag", "v0.9.0");
     mkdirSync(path.join(root, "src/game"), { recursive: true });
-    writeFileSync(path.join(root, "src/game/card.ts"), "new boon");
+    writeFixture(root, "src/game/card.ts", "new boon");
     git("add", ".");
     git("commit", "-qm", "feat(boons): add Meteorite\n\nPlayer-Note: Meteorite doubles your first Burn hit.");
     git("tag", "v1.0.0");
@@ -134,7 +133,7 @@ it("uses reachable release ancestry and leaves Git unchanged when generating not
     git("branch", "v0.9.0", "HEAD");
     expect(generatePatchNotes(root, { tag: "v1.0.0" }).markdown).toBe(result.markdown);
     git("checkout", "-qb", "unrelated", "refs/tags/v0.9.0");
-    writeFileSync(path.join(root, "unrelated"), "other branch");
+    writeFixture(root, "unrelated", "other branch");
     git("add", ".");
     git("commit", "-qm", "feat: unrelated");
     git("tag", "v9.0.0");
@@ -157,7 +156,7 @@ it("rejects version, tag, source and dirty-build mismatches and records build ra
       expect(() => verifyBuildIdentity(record, expected)).toThrow("stale");
     const plugin = releaseIdentityPlugin(root);
     plugin.buildStart();
-    writeFileSync(path.join(root, "new-source"), "changed during build");
+    writeFixture(root, "new-source", "changed during build");
     let asset;
     plugin.generateBundle.call({
       emitFile(value) {
@@ -169,19 +168,16 @@ it("rejects version, tag, source and dirty-build mismatches and records build ra
     expect(() => releaseArgs([], {})).toThrow("requires");
     const lock = JSON.parse(readFileSync(path.join(root, "package-lock.json")));
     lock.packages[""].version = "2.0.0";
-    writeFileSync(path.join(root, "package-lock.json"), JSON.stringify(lock));
+    writeFixture(root, "package-lock.json", JSON.stringify(lock));
     expect(() => releaseVersion(root)).toThrow("lock");
   }));
 it("fails release verification before package access when the tagged renderer is stale", () =>
   repository(async (root, git) => {
     mkdirSync(path.join(root, "dist"));
-    writeFileSync(path.join(root, ".gitignore"), "dist/\n");
+    writeFixture(root, ".gitignore", "dist/\n");
     git("add", ".gitignore");
     git("commit", "-qm", "chore: ignore build");
     git("tag", "v1.0.0");
-    writeFileSync(
-      path.join(root, "dist/release.json"),
-      JSON.stringify({ ...buildIdentity(root), commit: "old" }),
-    );
+    writeFixture(root, "dist/release.json", JSON.stringify({ ...buildIdentity(root), commit: "old" }));
     await expect(verifyRelease(root, { tag: "v1.0.0" })).rejects.toThrow("stale");
   }));

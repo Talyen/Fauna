@@ -1,11 +1,11 @@
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { readFixture, temporaryDirectory, writeFixture } from "../../support/tooling.mjs";
+import { mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { identity } from "../../../scripts/lib/tool-runtime.mjs";
 import { summarizeReport } from "../../../scripts/ci/ci-summarize.mjs";
 import { LINEUP_SHARDS, lineupShard } from "../../../scripts/ci/unit-shards.mjs";
-import { afterEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   validateBrowserCoverage,
   validateJobs,
@@ -272,18 +272,14 @@ describe("workflow timing measurements", () => {
   });
 });
 
-const gateRoots = [];
-afterEach(() => {
-  for (const root of gateRoots.splice(0)) rmSync(root, { recursive: true, force: true });
-});
-
 it("defaults browser consumers to the version-matched container while retaining install comparison", () => {
-  const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-prepare-"));
-  gateRoots.push(root);
+  const root = temporaryDirectory("fauna-ci-prepare-");
+
   const event = path.join(root, "event.json");
   const output = path.join(root, "output.txt");
-  writeFileSync(
-    path.join(root, "package-lock.json"),
+  writeFixture(
+    root,
+    "package-lock.json",
     JSON.stringify({ packages: { "node_modules/@playwright/test": { version: "1.64.1" } } }),
   );
   const run = (inputs) => {
@@ -321,8 +317,8 @@ it("defaults browser consumers to the version-matched container while retaining 
 });
 
 async function gateFixture(workers = 1) {
-  const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-gate-"));
-  gateRoots.push(root);
+  const root = temporaryDirectory("fauna-ci-gate-");
+
   const script = path.resolve(import.meta.dirname, "../../../scripts/ci/ci.mjs");
   const ids = { sha: "commit", run: "123", attempt: "1" };
   const manifest = { ...ids, files: { "dist/index.js": "a".repeat(64) } };
@@ -335,7 +331,7 @@ async function gateFixture(workers = 1) {
   );
   const put = (file, value) => {
     mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
-    writeFileSync(path.join(root, file), JSON.stringify(value));
+    writeFixture(root, file, JSON.stringify(value));
   };
   const run = (needs = jobs, attempt = ids.attempt) =>
     spawnSync(process.execPath, [script, "gate"], {
@@ -388,7 +384,7 @@ async function gateFixture(workers = 1) {
   for (let shard = 1; shard <= LINEUP_SHARDS; shard++) {
     const file = "/runner/tests/exhaustive/roster-combinations.test.ts";
     const title = `lineup ${shard}`;
-    const report = JSON.parse(readFileSync(path.join(root, "reports/vitest.json"), "utf8"));
+    const report = JSON.parse(readFixture(root, "reports/vitest.json"));
     report.testResults[0].name = file;
     report.testResults[0].assertionResults[0].title = title;
     put(`reports/lineups/lineup-results-${shard}/vitest.json`, report);
@@ -439,17 +435,15 @@ it("accepts mixed successful attempts of the same run and records their build ev
     interactions: { result: "success", outputs: { attempt: "2" } },
   };
   expect(run(mixed, "2").status).toBe(0);
-  const record = JSON.parse(readFileSync(path.join(root, "reports/ci/evidence.json"), "utf8"));
+  const record = JSON.parse(readFixture(root, "reports/ci/evidence.json"));
   expect(record.build.attempt).toBe("1");
   expect(record.interaction.attempt).toBe("2");
   expect(record.lineups.map((shard) => shard.attempt)).toEqual(
     Array.from({ length: LINEUP_SHARDS }, (_, index) => (index === 0 ? "2" : "1")),
   );
-  expect(JSON.parse(readFileSync(path.join(root, "reports/vitest-merged.json"), "utf8")).numPassedTests).toBe(
-    LINEUP_SHARDS + 1,
-  );
-  expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("Lineup spread: 0.0s");
-  expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("All required jobs succeeded");
+  expect(JSON.parse(readFixture(root, "reports/vitest-merged.json")).numPassedTests).toBe(LINEUP_SHARDS + 1);
+  expect(readFixture(root, "summary.md")).toContain("Lineup spread: 0.0s");
+  expect(readFixture(root, "summary.md")).toContain("All required jobs succeeded");
 });
 
 it("rejects unrelated, future and mismatched executable gate evidence", async () => {
@@ -478,9 +472,7 @@ it("accepts and records a complete two-worker browser benchmark", async () => {
   const result = run();
   expect(result.stderr).toBe("");
   expect(result.status).toBe(0);
-  expect(
-    JSON.parse(readFileSync(path.join(root, "reports/ci/browser-timings.json"), "utf8")).workersPerJob,
-  ).toBe(2);
+  expect(JSON.parse(readFixture(root, "reports/ci/browser-timings.json")).workersPerJob).toBe(2);
 });
 
 it("fails the executable gate for upstream failures and missing reports", async () => {
@@ -498,10 +490,10 @@ it("fails the executable gate for upstream failures and missing reports", async 
     "reports/shards/browser-shard-1/reports/ci/shard.json",
     "reports/playwright.json",
   ]) {
-    const original = readFileSync(path.join(root, file), "utf8");
+    const original = readFixture(root, file);
     rmSync(path.join(root, file));
     expect(run().status).not.toBe(0);
-    writeFileSync(path.join(root, file), original);
+    writeFixture(root, file, original);
   }
 });
 
@@ -513,9 +505,7 @@ it("rejects stale lineup evidence, swapped shards and duplicate lineup results",
     expect(run().status).not.toBe(0);
   }
   put(metadata, { ...ids, shard: 1, total: LINEUP_SHARDS });
-  const report = JSON.parse(
-    readFileSync(path.join(root, "reports/lineups/lineup-results-1/vitest.json"), "utf8"),
-  );
+  const report = JSON.parse(readFixture(root, "reports/lineups/lineup-results-1/vitest.json"));
   put("reports/lineups/lineup-results-2/vitest.json", report);
   expect(run().stderr).toContain("duplicate unit case");
 });
@@ -539,51 +529,46 @@ it("rejects interrupted executable shards and invalid attempt identities", async
 });
 
 it("ships portable merged JSON attachments and rejects missing resources", () => {
-  const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-evidence-"));
+  const root = temporaryDirectory("fauna-ci-evidence-");
   const script = path.resolve(import.meta.dirname, "../../../scripts/ci/ci.mjs");
-  try {
-    mkdirSync(path.join(root, "reports"));
-    mkdirSync(path.join(root, "all-blob-reports/resources"), { recursive: true });
-    mkdirSync(path.join(root, "reports/browser-html/data"), { recursive: true });
-    const image = path.join(root, "all-blob-reports/resources/frame.png");
-    writeFileSync(image, "image bytes");
-    writeFileSync(path.join(root, "reports/browser-html/data/content-hash.png"), "image bytes");
-    const report = test("screen", {
-      results: [
-        {
-          status: "passed",
-          retry: 0,
-          attachments: [{ path: image, name: "screen", contentType: "image/png" }],
-        },
-      ],
-    });
-    writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify(report));
-    const run = () => spawnSync(process.execPath, [script, "portable"], { cwd: root, encoding: "utf8" });
-    const result = run();
-    expect(result.stderr).toBe("");
-    expect(result.status).toBe(0);
-    const portable = JSON.parse(readFileSync(path.join(root, "reports/playwright.json"), "utf8"));
-    expect(portable.suites[0].specs[0].tests[0].results[0].attachments[0].path).toBe(
-      "browser-html/data/content-hash.png",
-    );
-    expect(readFileSync(path.join(root, "reports/browser-html/data/content-hash.png"), "utf8")).toBe(
-      "image bytes",
-    );
-    writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify(report));
-    rmSync(path.join(root, "reports/browser-html/data/content-hash.png"));
-    expect(run().status).not.toBe(0);
-    writeFileSync(path.join(root, "reports/browser-html/data/content-hash.png"), "different bytes");
-    expect(run().status).not.toBe(0);
-    writeFileSync(path.join(root, "reports/browser-html/data/content-hash.png"), "image bytes");
-    rmSync(image);
-    expect(run().status).not.toBe(0);
-  } finally {
-    rmSync(root, { recursive: true, force: true });
-  }
+
+  mkdirSync(path.join(root, "reports"));
+  mkdirSync(path.join(root, "all-blob-reports/resources"), { recursive: true });
+  mkdirSync(path.join(root, "reports/browser-html/data"), { recursive: true });
+  const image = path.join(root, "all-blob-reports/resources/frame.png");
+  writeFileSync(image, "image bytes");
+  writeFixture(root, "reports/browser-html/data/content-hash.png", "image bytes");
+  const report = test("screen", {
+    results: [
+      {
+        status: "passed",
+        retry: 0,
+        attachments: [{ path: image, name: "screen", contentType: "image/png" }],
+      },
+    ],
+  });
+  writeFixture(root, "reports/playwright.json", JSON.stringify(report));
+  const run = () => spawnSync(process.execPath, [script, "portable"], { cwd: root, encoding: "utf8" });
+  const result = run();
+  expect(result.stderr).toBe("");
+  expect(result.status).toBe(0);
+  const portable = JSON.parse(readFixture(root, "reports/playwright.json"));
+  expect(portable.suites[0].specs[0].tests[0].results[0].attachments[0].path).toBe(
+    "browser-html/data/content-hash.png",
+  );
+  expect(readFixture(root, "reports/browser-html/data/content-hash.png")).toBe("image bytes");
+  writeFixture(root, "reports/playwright.json", JSON.stringify(report));
+  rmSync(path.join(root, "reports/browser-html/data/content-hash.png"));
+  expect(run().status).not.toBe(0);
+  writeFixture(root, "reports/browser-html/data/content-hash.png", "different bytes");
+  expect(run().status).not.toBe(0);
+  writeFixture(root, "reports/browser-html/data/content-hash.png", "image bytes");
+  rmSync(image);
+  expect(run().status).not.toBe(0);
 });
 
 it("rejects modified or stale downloaded builds before starting browser consumers", () => {
-  const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-build-"));
+  const root = temporaryDirectory("fauna-ci-build-");
   const script = path.resolve(import.meta.dirname, "../../../scripts/ci/ci.mjs");
   const env = { ...process.env, GITHUB_SHA: "commit", GITHUB_RUN_ID: "123", GITHUB_RUN_ATTEMPT: "1" };
   const run = (command, overrides = {}) =>
@@ -592,39 +577,36 @@ it("rejects modified or stale downloaded builds before starting browser consumer
       encoding: "utf8",
       env: { ...env, ...overrides },
     });
-  try {
-    mkdirSync(path.join(root, "dist/assets"), { recursive: true });
-    const entry = path.join(root, "dist/assets/index.js");
-    writeFileSync(entry, "original build");
-    expect(run("build").status).toBe(0);
-    expect(run("verify-build").status).toBe(0);
-    writeFileSync(entry, "modified build");
-    expect(run("verify-build").status).not.toBe(0);
-    writeFileSync(entry, "original build");
-    writeFileSync(path.join(root, "dist/extra.js"), "unexpected file");
-    expect(run("verify-build").status).not.toBe(0);
-    rmSync(path.join(root, "dist/extra.js"));
-    expect(run("unit").status).toBe(0);
-    expect(JSON.parse(readFileSync(path.join(root, "reports/ci/unit.json"), "utf8")).attempt).toBe("1");
-    expect(run("interaction", { GITHUB_RUN_ATTEMPT: "2" }).status).toBe(0);
-    expect(
-      JSON.parse(readFileSync(path.join(root, "reports/interactions/ci/evidence.json"), "utf8")).build,
-    ).toBe(buildFingerprint(JSON.parse(readFileSync(path.join(root, "reports/ci/build.json"), "utf8"))));
-    writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify({ config: { workers: 2 } }));
-    expect(run("shard", { GITHUB_RUN_ATTEMPT: "2", CI_SHARD: "1", CI_SHARDS: "8" }).status).toBe(0);
-    expect(JSON.parse(readFileSync(path.join(root, "reports/ci/shard.json"), "utf8"))).toMatchObject({
-      attempt: "2",
-      shard: 1,
-      total: 8,
-      workers: 2,
-    });
-    expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "2" }).status).toBe(0);
-    expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "0" }).status).not.toBe(0);
-    expect(run("verify-build", { GITHUB_RUN_ID: "other" }).status).not.toBe(0);
-    expect(run("verify-build", { GITHUB_SHA: "another commit" }).status).not.toBe(0);
-  } finally {
-    rmSync(root, { recursive: true, force: true });
-  }
+
+  mkdirSync(path.join(root, "dist/assets"), { recursive: true });
+  const entry = path.join(root, "dist/assets/index.js");
+  writeFileSync(entry, "original build");
+  expect(run("build").status).toBe(0);
+  expect(run("verify-build").status).toBe(0);
+  writeFileSync(entry, "modified build");
+  expect(run("verify-build").status).not.toBe(0);
+  writeFileSync(entry, "original build");
+  writeFixture(root, "dist/extra.js", "unexpected file");
+  expect(run("verify-build").status).not.toBe(0);
+  rmSync(path.join(root, "dist/extra.js"));
+  expect(run("unit").status).toBe(0);
+  expect(JSON.parse(readFixture(root, "reports/ci/unit.json")).attempt).toBe("1");
+  expect(run("interaction", { GITHUB_RUN_ATTEMPT: "2" }).status).toBe(0);
+  expect(JSON.parse(readFixture(root, "reports/interactions/ci/evidence.json")).build).toBe(
+    buildFingerprint(JSON.parse(readFixture(root, "reports/ci/build.json"))),
+  );
+  writeFixture(root, "reports/playwright.json", JSON.stringify({ config: { workers: 2 } }));
+  expect(run("shard", { GITHUB_RUN_ATTEMPT: "2", CI_SHARD: "1", CI_SHARDS: "8" }).status).toBe(0);
+  expect(JSON.parse(readFixture(root, "reports/ci/shard.json"))).toMatchObject({
+    attempt: "2",
+    shard: 1,
+    total: 8,
+    workers: 2,
+  });
+  expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "2" }).status).toBe(0);
+  expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "0" }).status).not.toBe(0);
+  expect(run("verify-build", { GITHUB_RUN_ID: "other" }).status).not.toBe(0);
+  expect(run("verify-build", { GITHUB_SHA: "another commit" }).status).not.toBe(0);
 });
 
 describe("duration-balanced browser planning", () => {

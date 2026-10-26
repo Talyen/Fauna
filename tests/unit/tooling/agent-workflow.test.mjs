@@ -1,6 +1,6 @@
+import { git, put, readFixture, repository } from "../../support/tooling.mjs";
 import { afterEach, expect, it, vi } from "vitest";
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { readFileSync, rmSync, symlinkSync } from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -19,32 +19,15 @@ import { integrate } from "../../../scripts/integrate.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 import { reviewOptions } from "../../../scripts/dev/review-options.mjs";
 
-const roots = [];
-const git = (root, ...args) =>
-  execFileSync("git", ["-c", "commit.gpgsign=false", ...args], {
-    cwd: root,
-    encoding: "utf8",
-    stdio: "pipe",
-  }).trim();
-function put(root, file, value) {
-  mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
-  writeFileSync(path.join(root, file), value);
-}
-function fixture() {
-  const root = mkdtempSync(path.join(tmpdir(), "fauna-agent-workflow-"));
-  roots.push(root);
-  git(root, "init", "-qb", "main");
-  git(root, "config", "user.name", "Workflow fixture");
-  git(root, "config", "user.email", "fixture@example.invalid");
-  git(root, "config", "core.hooksPath", path.join(root, "no-hooks"));
-  put(root, ".gitignore", "reports/\nnode_modules/\n.worktrees/\n");
-  put(root, "README.md", "# Baseline\n");
-  git(root, "add", ".");
-  git(root, "commit", "-qm", "base");
-  return root;
-}
+const fixture = () =>
+  repository(
+    {
+      ".gitignore": "reports/\nnode_modules/\n.worktrees/\n",
+      "README.md": "# Baseline\n",
+    },
+    "fauna-agent-workflow-",
+  );
 afterEach(() => {
-  for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
   vi.restoreAllMocks();
   vi.unstubAllEnvs();
 });
@@ -396,7 +379,7 @@ it("retains the integrated checkout, branch and evidence for follow-up work", as
   expect(result).toMatchObject({ integrated: true, worktree: task.path });
   expect(git(root, "show", "HEAD:README.md")).toBe("# Integrated");
   expect(git(root, "branch", "--list", task.branch)).toContain(task.branch);
-  expect(readFileSync(path.join(task.path, "reports/frame.png"), "utf8")).toBe("evidence");
+  expect(readFixture(task.path, "reports/frame.png")).toBe("evidence");
   put(task.path, "follow-up.md", "ready for the next request");
   expect(git(task.path, "status", "--porcelain")).toContain("follow-up.md");
 });
@@ -650,7 +633,7 @@ it("migrates the old socket lock once and then ignores unrelated services on its
   const releasing = release();
   try {
     expect(clock.delay).toHaveBeenCalledWith(30_000);
-    expect(readFileSync(path.join(common, "fauna-integration.lock"), "utf8")).toBe("");
+    expect(readFixture(common, "fauna-integration.lock")).toBe("");
     await expect(acquireIntegrationLock(root)).rejects.toThrow("Integration lock is occupied");
     const waiter = net.createServer();
     const error = await new Promise((resolve) => {
@@ -664,7 +647,7 @@ it("migrates the old socket lock once and then ignores unrelated services on its
     await releasing;
   }
   expect(now).toBe(31_000);
-  expect(readFileSync(path.join(common, "fauna-integration.lock"), "utf8")).toBe("1");
+  expect(readFixture(common, "fauna-integration.lock")).toBe("1");
   await listen();
   try {
     const finish = await acquireIntegrationLock(root);
