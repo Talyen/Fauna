@@ -1,21 +1,14 @@
 # Orifable and Food
 
-[Kit](../../../src/game/content/creatures/orifable.ts) · [Shared Food definitions](../../../src/game/content/food.ts) · [Food execution](../../../src/game/combat/food.ts) · [Focused regressions](../../../tests/unit/game/creatures/orifable.test.ts)
+[Shared Food definitions](../../../src/game/content/food.ts) · [Food execution](../../../src/game/combat/food.ts) · [Focused regressions](../../../tests/unit/game/creatures/orifable.test.ts)
 
-Orifable is a 26-Health support creature, the bearer of good tidings. The owner selected its kit and all three Food cards on October 23, 2026. It appears in ordinary encounter packs and recruitment; it is excluded from the first-run starter pool. Once collected, it follows ordinary starter selection rules.
+Use the [authored kit](../../../src/game/content/creatures/orifable.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#orifable) preserve historical tuning.
+
+Orifable is a support creature, the bearer of good tidings. The owner selected its kit and all three Food cards on October 23, 2026. It appears in ordinary encounter packs and recruitment; it is excluded from the first-run starter pool. Once collected, it follows ordinary starter selection rules.
 
 ## Express Delivery
 
-At the start of each player turn, including the opening turn, each living deployed Orifable gets one chance to draw an additional existing card after ordinary draws. The six complete passive tiers are:
-
-| Stars | Complete passive rule                      |
-| ----- | ------------------------------------------ |
-| 0     | 50% chance to draw an extra card each turn |
-| 1     | 60% chance to draw an extra card each turn |
-| 2     | 70% chance to draw an extra card each turn |
-| 3     | 80% chance to draw an extra card each turn |
-| 4     | 90% chance to draw an extra card each turn |
-| 5     | Draw an extra card each turn               |
+At the start of each player turn, including the opening turn, each living deployed Orifable gets one chance to draw an additional existing card after ordinary draws. Its chance scales with permanent rank.
 
 The final tier requires no chance roll. Ordinary draws and Food creation do not retrigger delivery. Fallen and backup Orifables do not deliver; controlled deployed Orifables still provide their passive. Duplicate providers each get one delivery. Existing hand and overflow rules apply, and there is no extra delivery on resume or swapping in mid-turn.
 
@@ -23,15 +16,7 @@ Rookhaven copies a card when it is drawn; Express Delivery draws an existing car
 
 ## Abilities and progression
 
-Every authored ability costs 1 Mana.
-
-| Ability      | Base rule                                 |
-| ------------ | ----------------------------------------- |
-| Care Package | Add 2 Food to your hand                   |
-| Good Tidings | Restore 6 Health to the most injured ally |
-| Postal Swarm | Deal 2 Physical damage to all enemies     |
-
-Care Package independently selects each Food from the three-entry pool with equal probability; duplicates are possible. Creation is not a draw. Generated cards enter the hand or persistent overflow, use the shared 256-card battle limit and receive unique temporary IDs. At capacity, no Food is created and no selection roll is spent. Orifable's ability upgrades use the existing +2 primary-value rule: Care Package creates 2/4/6/8 Food, Good Tidings restores 6/8/10/12 Health and Postal Swarm deals 2/4/6/8 Physical damage per enemy. Food itself stays at level zero.
+Care Package independently selects each Food from the three-entry pool with equal probability; duplicates are possible. Creation is not a draw. Generated cards enter the hand or persistent overflow, use the shared 256-card battle limit and receive unique temporary IDs. At capacity, no Food is created and no selection roll is spent. Ordinary primary-value upgrades increase Food count, healing and damage. Food itself stays at level zero.
 
 Good Tidings starts at the six-point single-target healing guideline; injured means the lowest remaining Health proportion, with board-order ties, under the shared target owner. Postal Swarm starts near six total damage against three enemies and uses normal Dodge, Armor and critical-hit rules. Care Package supplies access and choice, then requires Mana to use its provisions. These are budget observations, not measured balance results.
 

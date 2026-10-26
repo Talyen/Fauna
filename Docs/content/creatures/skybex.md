@@ -1,29 +1,14 @@
 # Skybex
 
-[Creature index](README.md) · [Implementation](../../../src/game/content/creatures/skybex.ts) · [Content contracts](../../CONTENT.md)
+[Creature index](README.md) · [Content contracts](../../CONTENT.md)
 
-Skybex has 26 Health. Its mountain paths, cloud stepping stones and sweeping horns support movement, protection and Nature damage. It joins ordinary encounters, recruitment and collected starter drafts. It is excluded from the first-run solo pool because Cloudstep and Mountain Guide need another creature.
+Use the [authored kit](../../../src/game/content/creatures/skybex.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#skybex) preserve historical tuning.
 
-## Selected kit
+Skybex’s mountain paths, cloud stepping stones and sweeping horns support movement, protection and Nature damage. It joins ordinary encounters, recruitment and collected starter drafts. It is excluded from the first-run solo pool because Cloudstep and Mountain Guide need another creature.
 
-Every ability costs 1 Mana:
+## Ability scaling
 
-- **Far Horizon:** Draw 2 cards
-- **Cloudstep:** Swap out for a random ally / Incoming ally gains 20% Dodge until next turn
-- **Sky Shepherd:** Deal 2 Nature damage to all enemies
-
-**Mountain Guide:** Allies gain X Block when they swap in
-
-| Stars | Block |
-| ----- | ----- |
-| 0     | 1     |
-| 1     | 2     |
-| 2     | 3     |
-| 3     | 4     |
-| 4     | 5     |
-| 5     | 6     |
-
-Each row replaces the previous passive. Ability upgrades remain separate: Far Horizon's draw count, Cloudstep's Dodge percentage and Sky Shepherd's damage gain the ordinary two points per level. Enemy room power affects Nature damage, not Dodge or passive tiers. Ordinary enemies use Cloudstep and Sky Shepherd; Far Horizon remains unavailable because they do not have a player draw pile.
+Ability upgrades remain separate: Far Horizon's draw count, Cloudstep's Dodge percentage and Sky Shepherd's damage gain the ordinary two points per level. Enemy room power affects Nature damage, not Dodge or passive tiers. Ordinary enemies use Cloudstep and Sky Shepherd; Far Horizon remains unavailable because they do not have a player draw pile.
 
 ## Swap ownership
 

@@ -95,7 +95,7 @@ it("defaults check and review to committed task work without importing concurren
 
 it("uses the same task scope for context, review and verification after commits and concurrent main work", () => {
   const root = fixture();
-  for (const file of ["ARCHITECTURE", "UI", "MENU_DESIGN", "EXPEDITION_DESIGN", "RELEASE"])
+  for (const file of ["ARCHITECTURE", "UI", "ui/screens", "EXPEDITION_DESIGN", "RELEASE"])
     put(root, `Docs/${file}.md`, `# ${file}\n`);
   git(root, "add", ".");
   git(root, "commit", "-qm", "owner docs");

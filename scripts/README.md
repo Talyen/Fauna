@@ -74,7 +74,7 @@ Dependency audit policy lives in [CI](../Docs/CI.md); release inventory, package
 | Required suites    | Changed suites, filename matches and the longest matching prefix in [test-owners.json](checks/test-owners.json); missing required suites block verification                                           |
 | CI-owned suites    | Exact suite entries with `tier: "ci"` in the owner registry report deferred automatic execution and select local contracts; full Vitest discovery retains them                                        |
 | Extra suites       | [task-intent.mjs](lib/task-intent.mjs) retains explicit selectors through failed checks for integration; plan mode is read-only                                                                       |
-| Test execution     | Deferred to CI by default, including remembered selections; explicit heavy-local opt-in retains one-worker, fail-fast execution and ignored results in `reports/task-tests.json`                      |
+| Test execution     | [Execution policy](../CONTRIBUTING.md#execution-and-evidence) applies to remembered selections and explicit diagnostics; results use ignored `reports/task-tests.json`                                |
 
 [The diagnostic launcher](agent/investigate.mjs) validates modes and names before launch and owns cancellation. Its [modes and options](../Docs/DEVELOPMENT_TOOLS.md#bounded-diagnostics) belong to the tool reference.
 

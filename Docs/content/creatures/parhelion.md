@@ -1,26 +1,13 @@
 # Parhelion
 
-Parhelion is a 26-Health ordinary support creature, “The sun upon the snow”
-The user selected Sunthaw and the three abilities below on October 25, 2026
+Use the [authored kit](../../../src/game/content/creatures/parhelion.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#parhelion) preserve historical tuning.
 
-| Ability          | Base rules                                           | Target                                                    |
-| ---------------- | ---------------------------------------------------- | --------------------------------------------------------- |
-| Polar Reprieve   | Cleanse all Freeze build-up from allies; Draw 1 card | Living deployed allies                                    |
-| Sundog Reservoir | Gain 2 Mana                                          | Shared player Mana                                        |
-| Whiteout Waltz   | Deal 1 Freeze damage; Blind all enemies              | One chosen enemy for damage; all living enemies for Blind |
+Parhelion is an ordinary support creature, “The sun upon the snow”
+The user selected Sunthaw, Polar Reprieve, Sundog Reservoir and Whiteout Waltz on October 25, 2026
 
 All abilities cost 1 Mana. [The kit](../../../src/game/content/creatures/parhelion.ts) uses the existing thaw, Mana and attack owners. This selection replaces earlier Light/Freeze damage and escape proposals; Threefold Escape and Polar Noon are not used
 
 ## Sunthaw
-
-| Stars | Complete passive rule                       |
-| ----- | ------------------------------------------- |
-| 0     | Cleansing Freeze build-up restores 1 Health |
-| 1     | Cleansing Freeze build-up restores 2 Health |
-| 2     | Cleansing Freeze build-up restores 3 Health |
-| 3     | Cleansing Freeze build-up restores 4 Health |
-| 4     | Cleansing Freeze build-up restores 5 Health |
-| 5     | Cleansing Freeze build-up restores 6 Health |
 
 The creature whose buildup is cleansed receives the healing. Each living deployed Parhelion contributes its current tier to a friendly deployed recipient, including itself. Duplicate providers add their amounts; reserves and knocked-out providers contribute nothing. Enemy providers use their base tier, independently of the player's Collection rank
 

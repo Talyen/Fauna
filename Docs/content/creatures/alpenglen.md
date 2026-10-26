@@ -1,29 +1,14 @@
 # Alpenglen
 
-[Creature index](README.md) · [Implementation](../../../src/game/content/creatures/alpenglen.ts) · [Content contracts](../../CONTENT.md)
+[Creature index](README.md) · [Content contracts](../../CONTENT.md)
 
-Alpenglen has 30 Health. Its resting alpine ibex portrait and warm sunlight against cold mountains suggest the last warmth remaining after sunset. It joins ordinary encounters, recruitment and collected starter drafts. It stays outside the curated first-run pool pending measured solo balance: reflection and repeat setup leave only Last Light Charge as immediate damage.
+Use the [authored kit](../../../src/game/content/creatures/alpenglen.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#alpenglen) preserve historical tuning.
 
-## Selected kit
+Alpenglen’s resting alpine ibex portrait and warm sunlight against cold mountains suggest the last warmth remaining after sunset. It joins ordinary encounters, recruitment and collected starter drafts. It stays outside the curated first-run pool pending measured solo balance: reflection and repeat setup leave only Last Light Charge as immediate damage.
 
-Every ability costs 1 Mana:
+## Ability scaling
 
-- **Sunset Reversal:** Reflect the next attack against you
-- **Ember of Evening:** Your next card is played twice
-- **Last Light Charge:** Deal 4 Light damage / If this is the last card in your hand, it Critically Hits
-
-**Last Warmth:** Playing the last card in your hand restores X Health to the most injured ally
-
-| Stars | Health restored |
-| ----- | --------------- |
-| 0     | 2               |
-| 1     | 3               |
-| 2     | 4               |
-| 3     | 5               |
-| 4     | 6               |
-| 5     | 7               |
-
-Each row replaces the previous passive. Charge gains the ordinary two damage per ability level; the two setup abilities retain their single protection or repeat grant. Ordinary enemies use room-scaled damage and the base passive tier.
+Charge gains the ordinary two damage per ability level; the two setup abilities retain their single protection or repeat grant. Ordinary enemies use room-scaled damage and the base passive tier.
 
 ## Last-card ownership
 

@@ -1,12 +1,51 @@
 # Screen specifications
 
-[UI contracts](../UI.md) own shared controls, layout, accessibility and rendered review. [Menu design](../MENU_DESIGN.md) owns navigation and Back; [journey design](../EXPEDITION_DESIGN.md) owns progression. Read only the affected screen below; shared [focus/availability](../UI.md#interaction-states-and-accessibility), [scrolling](../UI.md#layout-artwork-size-and-spacing) and [presentation lifetime](../UI.md#presentation-lifetime) rules apply throughout.
+[UI contracts](../UI.md) own shared controls, layout, accessibility and rendered review; [journey design](../EXPEDITION_DESIGN.md) owns progression. This guide owns screen composition, navigation and focus return. Read the affected screen and the shared [focus/availability](../UI.md#interaction-states-and-accessibility), [scrolling](../UI.md#layout-artwork-size-and-spacing) and [presentation lifetime](../UI.md#presentation-lifetime) rules.
+
+## Navigation and menus
+
+Navigation never changes game revision or undoes committed gameplay.
+
+### Menu actions
+
+Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
+
+Menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Glossary and Settings. Pause also offers Main menu and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
+
+Collection, Talents, Settings and Glossary open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
+
+[Journey rules](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own End journey outcomes and reward settlement. Results have one Main menu action and no menu entry for reopening them.
+
+### Back and focus return
+
+| Surface                                           | Back / Escape / controller B                                                                                       |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Pause                                             | Dismiss to its opener                                                                                              |
+| Collection, Settings, Glossary, Talents overview  | Restore the originating menu and its corresponding choice                                                          |
+| Talent tree                                       | Return to the overview; the hamburger still opens the originating menu directly                                    |
+| Creature-parent action inspection                 | Return to the creature and focus the current thumbnail; a second Escape/controller B closes to the original opener |
+| Direct hand/deck action inspection                | Close to its opener, without creating a creature parent                                                            |
+| Boon Merchant shelf or purchased reward           | Complete the room and prepare fresh destinations                                                                   |
+| Campfire                                          | Leave without Rest, preserving the encounter                                                                       |
+| Unchosen recruitment                              | Return home without changing saved offers                                                                          |
+| Team confirmation / required knockout replacement | No Back/Cancel bypass; complete the required choice                                                                |
+| Other journey screens                             | Return home without reversing committed gameplay                                                                   |
+
+Inspection has no visible Back button; X/outside click closes the entire Dialog overlay. Nested surfaces own their focus and restore a connected, enabled opener; otherwise use the current-screen fallback. Inspection returns Collection to the same filter, page and creature. Opening child menu dialogs replaces Pause so only one trap owns focus. The mandatory replacement Dialog ignores Escape/outside click.
+
+Journey headings offer read-only Deck inspection; closing restores the Deck opener. During drafting, Deck reflects already chosen starters. [Screen headings](#screen-headings) own geometry and control placement.
+
+### Battle and external pause
+
+Battle has no pinned inspection: right-click, I and controller X do not open it. Hover/focus details remain available. Escape/controller B cancels targeting first, then opens Pause. Manual card selection stops Auto-play; its per-battle control starts off. Development alone exposes Skip combat beside Auto-play, through the explicit session capability.
+
+Steam overlay activation revokes commands, preserves higher-priority inspection, clears targeting, stops Auto-play and opens Pause. Closing the overlay does not resume automatically. Held confirmation must be released before acting again. [Input rules](../UI.md#interaction-states-and-accessibility) own modality/reconnect behavior; [Architecture](../ARCHITECTURE.md#cloud-reconciliation-and-device-preferences) owns native admission.
 
 ## Screen headings
 
 Apply the [copy and layout rule](../UI.md#copy-and-layout) throughout these screens; headings and action placement must make the flow clear without taglines, helper text or secondary labels.
 
-Use a balanced header frame up to 640px wide: Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](../MENU_DESIGN.md#back-and-focus-return), previewing chosen starters during drafting.
+Use a balanced header frame up to 640px wide: Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](#back-and-focus-return), previewing chosen starters during drafting.
 
 Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.
 
@@ -16,7 +55,7 @@ Main menu places a gold default Continue/Play Button above a two-column grid of 
 
 Pause is a 240px-wide shadcn Popover, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 4px gaps. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
-Both menus show spendable talent points beside Talents with an accessible description; the count disappears when spent. End journey uses a red label and LogOut icon in Pause only. [Menu design](../MENU_DESIGN.md#menu-actions) owns action availability and order.
+Both menus show spendable talent points beside Talents with an accessible description; the count disappears when spent. End journey uses a red label and LogOut icon in Pause only. [Menu design](#menu-actions) owns action availability and order.
 
 ## Starter draft
 
@@ -32,7 +71,7 @@ Outside battle, use one centered shadcn Dialog panel over the shared dimmed back
 
 Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection has no Recruit/Choose action.
 
-Creature/action inspection has no Back button. The accessible Close inspection X and outside click dismiss the whole overlay; Escape/controller B returns one level, restoring the selected ability or original opener. [Menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting and dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full species kits belong in Collection.
+[Back and focus return](#back-and-focus-return) owns inspection nesting and dismissal; the accessible X is named Close inspection. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full species kits belong in Collection.
 
 ## Collection
 
@@ -101,11 +140,11 @@ Cloud and diagnostics have no Settings surface, status or Retry control. [Recove
 
 ## Glossary
 
-Use the shared secondary-scrolling recipe, keeping menus and Back outside the reading region and its final rule reachable. Definitions come from the [gameplay glossary](../GLOSSARY.md).
+Use the shared secondary-scrolling recipe, keeping menus and Back outside the reading region and its final rule reachable. Definitions come from the [gameplay glossary](../KEYWORDS.md#glossary-and-terminology).
 
 ## Deck, piles and owned Boons
 
-Deck and owned Boons use the existing modal owner and bounded pages. Draw/Discard Piles use shared portrait ArtCards beside the hand and open Deck-style viewers with accessible inspection names and empty states. Sort cards by definition/instance identity, never draw order; browsing follows the [read-only inspection contract](../MENU_DESIGN.md#back-and-focus-return). Battle viewers use hover/focus details without nested action inspection.
+Deck and owned Boons use the existing modal owner and bounded pages. Draw/Discard Piles use shared portrait ArtCards beside the hand and open Deck-style viewers with accessible inspection names and empty states. Sort cards by definition/instance identity, never draw order; browsing follows the [read-only inspection contract](#back-and-focus-return). Battle viewers use hover/focus details without nested action inspection.
 
 ## Campfire
 

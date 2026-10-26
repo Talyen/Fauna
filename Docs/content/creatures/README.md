@@ -4,7 +4,7 @@
 
 ## Reference scope
 
-Each reference links its authored kit as the authority for current Health, ability values, exact descriptions and six passive tiers. Keep these references focused on identity, design rationale and distinctive timing, stacking or ownership. Dated user selections and worked examples retain their recorded values; they are historical observations rather than another catalog to update. Use source links for ordinary kit inventories and link [task evidence](../../archive/README.md#creatures) for implementation checks.
+Each reference links its authored kit as the authority for current Health, ability values, exact descriptions and six passive tiers. Keep these references focused on identity, design rationale and distinctive timing, stacking or ownership. Dated user selections and worked examples retain their recorded values; they are historical observations rather than another catalog to update. The [recorded kit selections](../../archive/CREATURE_KIT_SELECTIONS.md) preserve catalog excerpts moved out of maintained references. Use source links for ordinary kit inventories and link [task evidence](../../archive/README.md#creatures) for implementation checks.
 
 ## Shared artwork and evidence scope
 
