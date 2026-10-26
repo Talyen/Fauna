@@ -10,6 +10,7 @@ export type AbilityAction = {
   value: number;
   targetId?: string;
   allyTargetId?: string;
+  lastCardInHand?: boolean;
 } & ({ side: "player"; actor: Creature } | { side: "enemy"; actor: Enemy });
 export interface AbilityOperations {
   swap: (

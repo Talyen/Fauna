@@ -1,3 +1,4 @@
+import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createHash } from "node:crypto";
 import { produce } from "immer";
 import { describe, expect, it } from "vitest";
@@ -37,6 +38,7 @@ const digest = (value: unknown) =>
       JSON.stringify(value, (key, entry) => {
         if (key === "version") return 57;
         if (key === "fireThorns" && entry === 0) return undefined;
+        if (key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) return undefined;
         if (key === "encoreProgress" && entry === 0) return undefined;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
@@ -62,7 +64,9 @@ it("preserves authored text, targeting, scaling, keywords and enemy adaptations"
   expect(
     // New kits have direct contracts below or in creatures/*.test.ts; preserve the older oracle.
     [
-      ...CARDS.filter((card) => !["arabesca", "skybex", "dulcera", "pyrella"].includes(card.species ?? "")),
+      ...CARDS.filter(
+        (card) => !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen"].includes(card.species ?? ""),
+      ),
       PEARL,
       ...FOOD_CARDS,
     ].map((card) => ({
@@ -478,11 +482,11 @@ describe("Arabesca's selected ability contracts", () => {
 
   it("validates repeat flags and rejects the obsolete development save", () => {
     const raw = JSON.parse(encodeSave(arabescaBattle()));
-    expect(raw.version).toBe(59);
+    expect(raw.version).toBe(saveFormat.version);
     raw.battle.repeatNext.player = "true";
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
     raw.battle.repeatNext.player = false;
-    raw.version = 58;
+    raw.version = saveFormat.version - 1;
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
   });
 });

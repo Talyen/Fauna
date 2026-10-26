@@ -47,8 +47,9 @@ export function ordinaryAttackFacts(
   return [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
     const damage =
-      value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
-      (type === "physical" ? physicalBonus(actor, state) : 0);
+      (value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
+        (type === "physical" ? physicalBonus(actor, state) : 0)) *
+      (def.criticalWhenLastCard && state.battle.hand.length === 1 ? 2 : 1);
     const armored = armorApplies(state, enemy, type, actor);
     const armor = armored
       ? Math.max(

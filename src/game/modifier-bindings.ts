@@ -17,6 +17,8 @@ type Modules = {
   "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
   "./ability-rules": {
+    actionValue: typeof import("./ability-rules").actionValue;
+    puzzleProgressLimit: typeof import("./ability-rules").puzzleProgressLimit;
     cardCost: typeof cardCost;
     manaCapacity: typeof manaCapacity;
     encoreProgressLimit: typeof encoreProgressLimit;
@@ -29,6 +31,7 @@ type Modules = {
     drawHasAnotherCard: typeof drawHasAnotherCard;
     expressDelivery: typeof expressDelivery;
     receiveDraw: typeof receiveDraw;
+    drawEligibleCard: typeof import("./card-zones").drawEligibleCard;
   };
   "./chance": typeof import("./chance");
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
@@ -63,11 +66,18 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  puzzleProgressLimit: bind("./ability-rules", "puzzleProgressLimit"),
+  actionValue: bind("./ability-rules", "actionValue"),
+  grantStatus: bind("./combat/statuses", "grantStatus"),
+  puzzleEffect: bind("./combat/statuses", "puzzleEffect"),
+  drawEligibleCard: bind("./card-zones", "drawEligibleCard"),
+  swapBackup: bind("./team", "swapBackup"),
   encoreProgressLimit: bind("./ability-rules", "encoreProgressLimit"),
   wellProvisioned: bind("./combat/food", "wellProvisioned"),
   gentlePassage: bind("./team", "gentlePassage"),
   mountainGuide: bind("./team", "mountainGuide"),
   afterPlayerCard: bind("./combat/card-modifiers", "afterPlayerCard"),
+  lastWarmth: bind("./combat/card-modifiers", "lastWarmth"),
   returnDodgedCard: bind("./combat/card-modifiers", "returnDodgedCard"),
   manaCapacity: bind("./ability-rules", "manaCapacity"),
   healingAllies: bind("./battlefield", "healingAllies"),
@@ -278,6 +288,16 @@ export const modifierImplementations = freeze(
       "water.riptide": [owners.waterFollowups],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "apiary-smoker": [owners.grantStatus],
+      "brookskip-disc": [owners.resolveHit],
+      "fallingstar-anvil": [owners.resolveHit],
+      "pleated-pagoda": [owners.decayBlock],
+      "calendula-soap": [owners.cleanseRewards],
+      "nectar-dipper": [owners.actionValue],
+      "saddle-pouch": [owners.swapBackup],
+      "dune-shuttle": [owners.receiveDraw],
+      "story-puzzle-cube": [owners.puzzleEffect, owners.puzzleProgressLimit],
+      "mineral-bookend": [owners.drawEligibleCard],
       "briar-racquet": [owners.dodgeResponse],
       "lovers-knot": [owners.restoreHealth],
       "thaw-spoon": [owners.restoreHealth],
@@ -318,6 +338,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      lastWarmth: [owners.lastWarmth],
       sunthaw: [owners.cleanseRewards],
       wellProvisioned: [owners.wellProvisioned],
       gentlePassage: [owners.gentlePassage],

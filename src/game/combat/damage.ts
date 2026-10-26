@@ -279,7 +279,9 @@ export function* resolveHit(
     state.battle.meteoriteUsed = true;
     damage *= boonRule("meteorite").multiplier;
   }
-  damage = modifiedDamage(state, source, target, damage, type, options, attack);
+  // Chain strength is the original absorbed amount, not a second application of attack bonuses
+  if (options.origin !== "chain")
+    damage = modifiedDamage(state, source, target, damage, type, options, attack);
   const riposte =
     direct &&
     alliedSource &&
@@ -302,7 +304,7 @@ export function* resolveHit(
   if (partingCut) ensureCombat(source)[talentRule("bleed.parting-cut").state] = false;
   if (critical) damage *= 2;
   const blockRatio = blockEfficiency(state, target, type);
-  const payment = blockPayment(damage, target.block, blockRatio, policy.bypassBlock);
+  const payment = blockPayment(damage, target.block, blockRatio);
   const blocked = payment.absorbed,
     blockSpent = payment.spent;
   target.block -= blockSpent;
@@ -413,6 +415,39 @@ export function* resolveHit(
     const recipient = battlefield(state, "enemy").find((enemy) => enemy.health > 0);
     if (recipient)
       yield* reaction("hit", state, source, recipient, damage - before, type, events, { origin: "overkill" });
+  }
+  if (
+    blocked > 0 &&
+    type === "water" &&
+    alliedSource &&
+    !alliedTarget &&
+    options.origin !== "chain" &&
+    state.boons.includes("brookskip-disc")
+  ) {
+    const recipient = battlefield(state, "enemy").find((enemy) => enemy.id !== target.id && enemy.health > 0);
+    if (recipient)
+      yield* reaction("hit", state, source, recipient, blocked, "water", events, { origin: "chain" });
+  }
+  if (
+    blockSpent > 0 &&
+    direct &&
+    !alliedSource &&
+    alliedTarget &&
+    target.health > 0 &&
+    source.health > 0 &&
+    state.boons.includes("fallingstar-anvil")
+  ) {
+    const result = yield* reaction(
+      "applyHarmfulStatus",
+      state,
+      target,
+      source,
+      Math.round(blockSpent / boonRule("fallingstar-anvil").divisor),
+      "stun",
+      events,
+    );
+    if (result.appliedControl) yield* reaction("controlRewards", state, target, source, "stun", events);
+    for (const depletion of result.depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
   }
   return { outcome: "landed", lost, dealt };
 }

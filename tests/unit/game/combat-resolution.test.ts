@@ -108,6 +108,7 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
       digest: createHash("sha256")
         .update(
           JSON.stringify(baselineResult, (key, value: unknown) => {
+            if (key === "puzzleProgress" && Array.isArray(value) && value.length === 0) return undefined;
             if (key === "encoreProgress" && value === 0) return undefined;
             if (
               key === "repeatNext" &&

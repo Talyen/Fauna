@@ -110,9 +110,9 @@ export function detonateBleedStacks(stats: CombatState) {
   return captured;
 }
 
-/** Allocate Health actually removed, including unpaid entries whose owner has departed. */
-export function bleedPayments(payouts: readonly BleedPayout[], lost: number) {
-  let remaining = lost;
+/** Allocate mitigated damage, including Block absorption and departed sources' unpaid entries. */
+export function bleedPayments(payouts: readonly BleedPayout[], dealt: number) {
+  let remaining = dealt;
   return payouts.map(({ sourceId, amount }) => {
     const paid = Math.min(remaining, amount);
     remaining -= paid;

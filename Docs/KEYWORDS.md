@@ -10,7 +10,7 @@ Fauna adapts Alchemy's combat foundations to individual creatures. Physical, Nat
 
 ### Periodic damage
 
-Burn, Poison and Bleed hits deal immediate damage and add damage before Block as stacks, with applicable Armor mitigation. At the owner's turn window, Burn deals its stacks and halves (one clears); Poison deals its stacks and loses 20%, rounded normally with a minimum decay of one; Bleed deals its stacks once and clears. Ticks bypass Block, cannot Dodge or crit, do not add stacks, and stop on knockout. Different statuses do not trigger elemental reactions.
+Burn, Poison and Bleed hits deal immediate damage and add damage before Block as stacks, with applicable Armor mitigation. At the owner's turn window, Burn deals its stacks and halves (one clears); Poison deals its stacks and loses 20%, rounded normally with a minimum decay of one; Bleed deals its stacks once and clears. Block absorbs ticks normally; ticks cannot Dodge or crit, do not add stacks, and stop on knockout. Different statuses do not trigger elemental reactions.
 
 ### Stun and Freeze
 

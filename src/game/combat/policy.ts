@@ -12,13 +12,12 @@ export type DamagePacket =
       criticalBonus?: number;
     })
   | (AttackValues & { origin: "proc" | "resonance"; delivery?: "bounce" })
-  | { origin: "periodic" | "retaliation" | "statusRetaliation" | "derived" | "overkill" };
+  | { origin: "periodic" | "retaliation" | "statusRetaliation" | "derived" | "overkill" | "chain" };
 
 const inactive = {
   attack: false,
   direct: false,
   buildup: false,
-  bypassBlock: false,
   deadSource: false,
   wrongFoot: false,
   resonance: false,
@@ -43,15 +42,16 @@ export function packetPolicy(packet: DamagePacket) {
         bounce: packet.delivery !== "bounce",
       };
     case "periodic":
-      return { ...inactive, bypassBlock: true, deadSource: true };
+      return { ...inactive, deadSource: true };
     case "retaliation":
     case "statusRetaliation":
     case "derived":
     case "overkill":
+    case "chain":
       return {
         ...inactive,
         buildup: packet.origin === "statusRetaliation",
-        deadSource: packet.origin === "derived" || packet.origin === "overkill",
+        deadSource: packet.origin === "derived" || packet.origin === "overkill" || packet.origin === "chain",
       };
     default: {
       const unhandled: never = packet;

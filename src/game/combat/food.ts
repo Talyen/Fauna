@@ -1,3 +1,4 @@
+import { actionValue } from "../ability-rules";
 import { takeCardRepeat } from "./card-repeat";
 import { battleCardCapacity } from "../card-zones";
 import { FOOD_CARDS } from "../content/food";
@@ -74,6 +75,11 @@ export function useFood(
     targetId: recipient?.id,
     text: `Use ${def.name}`,
   });
+  const value = actionValue(
+    { definitionId: def.id, level: 0, ownerId: null, id: def.id },
+    { species: null, attacked: false },
+    state,
+  );
   const repeat = takeCardRepeat(state, "player");
   for (let play = 0; play < (repeat ? 2 : 1); play++) {
     if (play === 1)
@@ -83,9 +89,8 @@ export function useFood(
         actorId: presenter.id,
         text: `${def.name} repeats`,
       });
-    if (def.effect === "mana") gainMana(state, def.value, events);
-    else if (recipient && def.effect === "heal")
-      restoreHealth(recipient, def.value, events, false, state, true);
-    else if (recipient && def.effect === "guard") grantBlock(state, recipient, def.value, events);
+    if (def.effect === "mana") gainMana(state, value, events);
+    else if (recipient && def.effect === "heal") restoreHealth(recipient, value, events, false, state, true);
+    else if (recipient && def.effect === "guard") grantBlock(state, recipient, value, events);
   }
 }
