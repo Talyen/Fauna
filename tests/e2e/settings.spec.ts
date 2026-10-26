@@ -64,8 +64,24 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   const sound = page.getByRole("switch", { name: "Sound", exact: true });
   await sound.focus();
-  await page.keyboard.press("Space");
-  await expect(sound).not.toBeChecked();
+  // Native keyboard activation owns the switch's reversible state and rendered thumb geometry
+  for (const checked of [false, true, false]) {
+    await page.keyboard.press("Space");
+    await expect(sound).toBeChecked({ checked });
+    await expect
+      .poll(() =>
+        sound.evaluate((el) => {
+          const root = el.getBoundingClientRect();
+          const thumb = el.querySelector("span")!.getBoundingClientRect();
+          return {
+            hit: [root.width, root.height],
+            thumb: [thumb.width, thumb.height],
+            offset: Math.round(thumb.left - root.left),
+          };
+        }),
+      )
+      .toEqual({ hit: [44, 44], thumb: [16, 16], offset: checked ? 22 : 6 });
+  }
   await page.getByRole("tab", { name: "Display", exact: true }).click();
   const small = page.getByRole("radio", { name: "100%", exact: true });
   await small.focus();

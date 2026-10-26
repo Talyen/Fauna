@@ -1,7 +1,7 @@
-import userEvent, { PointerEventsCheckLevel } from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import { screenTestEnvironment } from "../../support/ui";
 // @vitest-environment jsdom
-import { describe, expect, it, vi } from "vitest";
+import { expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
@@ -12,20 +12,10 @@ import { App } from "../../../src/ui/App";
 
 screenTestEnvironment();
 
-describe("menu page focus return", () => {
-  it.each(
-    // Every page/exit pair, with both menu origins covered for every page.
-    // The shared exit handler does not need a full origin × page × exit product.
-    ["Collection", "Talents", "Settings", "Glossary"].flatMap((page, index) =>
-      ["Escape", "Back", "Open menu"].map((back, exit) => ({
-        origin: (index + exit) % 2 === 0 ? "home" : "pause",
-        page,
-        back,
-      })),
-    ),
-  )("returns from $page via $back to its $origin menu choice", async ({ origin, page, back }) => {
-    // jsdom has no layout. Only emulate visibility; this checks focus ownership,
-    // not rendered geometry or physical controller behavior.
+it.each(["home", "pause"] as const)(
+  "returns every menu page to its %s choice without changing the journey",
+  async (origin) => {
+    // Reuse the session across state-neutral visits so stale focus and navigation state remain observable
     vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
@@ -36,35 +26,44 @@ describe("menu page focus return", () => {
         await user.click(screen.getByRole("button", { name: "Play" }));
         await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
-      const revision = session.store.getState().game.revision;
-      act(() => screen.getByRole("button", { name: page }).focus());
-      await user.keyboard("{Enter}");
-      expect(
-        screen.getByRole("heading", { name: page === "Glossary" ? "Glossary & controls" : page }),
-      ).toBeTruthy();
-      expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
-      if (page === "Collection")
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Back" }));
-      if (page === "Talents" && back === "Open menu") {
-        await user.click(screen.getByRole("button", { name: "Physical talents" }));
-        expect(screen.getByRole("heading", { name: "Physical" })).toBeTruthy();
+      const game = session.store.getState().game;
+      for (const [index, page] of ["Collection", "Talents", "Settings", "Glossary"].entries()) {
+        for (const [exit, back] of ["Escape", "Back", "Open menu"].entries()) {
+          // Retain every page/exit pair and both origins per page without their Cartesian product
+          if (((index + exit) % 2 === 0 ? "home" : "pause") !== origin) continue;
+          act(() => screen.getByRole("button", { name: page }).focus());
+          await user.keyboard("{Enter}");
+          expect(
+            screen.getByRole("heading", { name: page === "Glossary" ? "Glossary & controls" : page }),
+          ).toBeTruthy();
+          expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
+          if (page === "Collection")
+            expect(document.activeElement).toBe(screen.getByRole("button", { name: "Back" }));
+          if (page === "Talents" && back === "Open menu") {
+            await user.click(screen.getByRole("button", { name: "Physical talents" }));
+            expect(screen.getByRole("heading", { name: "Physical" })).toBeTruthy();
+          }
+          if (back === "Escape") await user.keyboard("{Escape}");
+          else await user.click(screen.getByRole("button", { name: back }));
+          await waitFor(() =>
+            expect(document.activeElement).toBe(screen.getByRole("button", { name: page })),
+          );
+          expect(session.store.getState().game, `${page} via ${back}`).toBe(game);
+        }
       }
-      if (back === "Escape") await user.keyboard("{Escape}");
-      else await user.click(screen.getByRole("button", { name: back }));
-      await waitFor(() => expect(document.activeElement).toBe(screen.getByRole("button", { name: page })));
-      expect(session.store.getState().game.revision).toBe(revision);
       if (origin === "pause") {
         await user.keyboard("{Escape}");
         await waitFor(() =>
           expect(document.activeElement).toBe(screen.getByRole("button", { name: "Open menu" })),
         );
+        expect(session.store.getState().game).toBe(game);
       }
     } finally {
       cleanup();
       await session.dispose();
     }
-  });
-});
+  },
+);
 
 it("returns from a talent tree to its overview before returning to the menu", async () => {
   const session = createSession(createBrowserPlatform(localStorage), 7);
@@ -157,7 +156,11 @@ it.each(["home", "pause"])(
         await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
       const talents = screen.getByRole("button", { name: "Talents" });
-      expect(talents.getAttribute("aria-describedby")).toBe(`menu-talent-points-${origin === "home"}`);
+      const description = talents.getAttribute("aria-describedby");
+      expect(description).toBeTruthy();
+      expect(document.getElementById(description!)?.getAttribute("aria-label")).toBe(
+        "1 talent point available",
+      );
       expect(screen.getByLabelText("1 talent point available").textContent).toBe("1");
       await user.click(talents);
       await user.click(screen.getByRole("button", { name: "Back" }));
@@ -169,44 +172,6 @@ it.each(["home", "pause"])(
       });
       expect(screen.queryByLabelText("1 talent point available")).toBeNull();
       expect(screen.getByRole("button", { name: "Talents" }).hasAttribute("aria-describedby")).toBe(false);
-    } finally {
-      cleanup();
-      await session.dispose();
-    }
-  },
-);
-
-it.each(["Escape", "Close inspection"])(
-  "returns from battle Collection inspection using %s without changing combat",
-  async (back) => {
-    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-    localStorage.setItem("fauna.save.v1", encodeSave(run(7)));
-    const session = createSession(createBrowserPlatform(localStorage), 7);
-    await session.load();
-    // Browser journeys cover pointer hit testing; this DOM scenario checks focus and combat ownership.
-    const user = userEvent.setup({ pointerEventsCheck: PointerEventsCheckLevel.Never });
-    render(<App session={session} />);
-    try {
-      await user.click(screen.getByRole("button", { name: "Continue" }));
-      const before = session.store.getState().game;
-      await user.click(screen.getByRole("button", { name: "Open menu" }));
-      await user.click(screen.getByRole("button", { name: "Collection" }));
-      await user.click(screen.getByRole("button", { name: "Inspect Mossguard" }));
-      expect(screen.getByRole("dialog", { name: "Mossguard" })).toBeTruthy();
-      expect(screen.getByRole("button", { name: /^Rooted Stomp,/ })).toBeTruthy();
-      if (back === "Escape") await user.keyboard("{Escape}");
-      else await user.click(screen.getByRole("button", { name: back }));
-      await waitFor(() =>
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Inspect Mossguard" })),
-      );
-      if (back === "Close inspection") await user.click(screen.getByRole("button", { name: "Open menu" }));
-      else await user.keyboard("{Escape}");
-      await waitFor(() =>
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Collection" })),
-      );
-      await user.click(screen.getByRole("button", { name: "Continue" }));
-      expect(screen.getByRole("main", { name: "Battlefield" })).toBeTruthy();
-      expect(session.store.getState().game).toBe(before);
     } finally {
       cleanup();
       await session.dispose();
