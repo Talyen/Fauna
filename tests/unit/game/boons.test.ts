@@ -443,6 +443,48 @@ it("Wonder Domino conserves overkill across remaining enemies without new attack
   expect(events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([2, 3, 5]);
 });
 
+it("Wonder Domino transfers the captured remainder without repeating damage bonuses", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["wonder-domino"];
+  state.talents = ["poison.corrosive", "stun.exploit-weakness"];
+  state.battle!.enemies.forEach((enemy, index) => {
+    enemy.health = index === 0 ? 2 : index === 1 ? 3 : 30;
+    enemy.block = 0;
+    enemy.combat = {
+      ...freshCombat(),
+      poison: 1,
+      controlled: index === 1 ? "stun" : "freeze",
+      controlTurns: 1,
+    };
+  });
+  observeDecisions(state, () => 0.5);
+  hit(state, source, state.battle!.enemies[0]!, 10, "water", events);
+  expect(state.battle!.enemies.map((enemy) => enemy.health)).toEqual([0, 0, 24]);
+  expect(events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([2, 3, 6]);
+});
+
+it.each(["parasitic-bloom", "leech.virulent-leech"] as const)(
+  "Wonder Domino spill cannot earn a second Poison Leech reward from %s",
+  (reward) => {
+    const { state, source, events } = fixture();
+    state.boons = reward === "parasitic-bloom" ? ["wonder-domino", reward] : ["wonder-domino"];
+    state.talents = reward === "leech.virulent-leech" ? [reward] : [];
+    source.health = 1;
+    state.battle!.enemies.forEach((enemy, index) => {
+      enemy.health = index === 0 ? 2 : 30;
+      enemy.block = 0;
+      enemy.combat = { ...freshCombat(), controlled: "freeze", controlTurns: 1 };
+    });
+    observeDecisions(state, (decision) =>
+      decision?.kind === "chance" && decision.threshold === 0.1 ? 0 : 0.5,
+    );
+    hit(state, source, state.battle!.enemies[0]!, 10, "poison", events);
+    expect(state.battle!.enemies.map((enemy) => enemy.health)).toEqual([0, 22, 30]);
+    expect(source.health).toBe(2);
+    expect(events.filter((event) => event.kind === "heal")).toHaveLength(1);
+  },
+);
+
 it("Furnace Prism Blinds Burning enemies through ordinary status protection", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["furnace-prism"];

@@ -70,6 +70,7 @@ export function modifiedDamage(
   if (
     alliedSource &&
     !alliedTarget &&
+    options.origin !== "overkill" &&
     options.origin !== "retaliation" &&
     options.origin !== "statusRetaliation"
   ) {

@@ -22,6 +22,7 @@ const inactive = {
   wrongFoot: false,
   resonance: false,
   bounce: false,
+  leechRewards: true,
 };
 const attacking = { ...inactive, attack: true, buildup: true };
 export function packetPolicy(packet: DamagePacket) {
@@ -51,6 +52,7 @@ export function packetPolicy(packet: DamagePacket) {
       return {
         ...inactive,
         buildup: packet.origin === "statusRetaliation",
+        leechRewards: packet.origin !== "overkill",
         deadSource: packet.origin === "derived" || packet.origin === "overkill" || packet.origin === "chain",
       };
     default: {

@@ -203,6 +203,7 @@ export function* damageRewards(
       gainGold(state, boonRule("cutpurse-knife").gold, events);
     if (
       type === "poison" &&
+      policy.leechRewards &&
       state.boons.includes("parasitic-bloom") &&
       succeeds(state, boonRule("parasitic-bloom").chance, false, events)
     )
@@ -210,6 +211,7 @@ export function* damageRewards(
     // Poison ticks and triggered damage carry the same Leech talent as direct Poison hits.
     if (
       !policy.direct &&
+      policy.leechRewards &&
       source.health > 0 &&
       type === "poison" &&
       hasTalent(state, "leech.virulent-leech") &&
