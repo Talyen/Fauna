@@ -67,6 +67,36 @@ function merge(a: FeedbackEntry, b: FeedbackEntry): FeedbackEntry {
         periodic: a.periodic === true && b.periodic === true,
       };
 }
+
+/** Try the newest eligible burst first, without mutating the published bursts. */
+function combineBursts(bursts: readonly Burst[], targetId: string, entries: FeedbackEntry[], now: number) {
+  const next = [...bursts];
+  const unmatched: FeedbackEntry[] = [];
+  for (const entry of entries) {
+    let found = false;
+    for (let i = next.length - 1; i >= 0 && !found; i--) {
+      const burst = next[i]!;
+      if (burst.targetId !== targetId || now < burst.started || now - burst.started >= 250) continue;
+      const index = burst.entries.findIndex(
+        (e) =>
+          matches(e, entry) &&
+          (isFeedbackNotice(e) ||
+            (e.additive !== false &&
+              entry.additive !== false &&
+              !!e.periodic === !!entry.periodic &&
+              String(Math.abs((e.amount ?? 0) + (entry.amount ?? 0))).length <= (e.reservedDigits ?? 0))),
+      );
+      if (index < 0) continue;
+      const updated = [...burst.entries];
+      updated[index] = merge(updated[index]!, entry);
+      next[i] = { ...burst, entries: updated };
+      found = true;
+    }
+    if (!found) unmatched.push(entry);
+  }
+  return { next, unmatched };
+}
+
 /** Display totals never mutate committed events or drive audio/impact strength. */
 export function appendFeedback(
   previous: readonly Burst[],
@@ -103,39 +133,12 @@ export function appendFeedback(
       .map((e) =>
         isFeedbackNotice(e) ? e : { ...e, reservedDigits: String(Math.abs(e.amount ?? 0)).length + 1 },
       );
-    const combine = (survivors: Burst[]) => {
-      const next = [...survivors];
-      const unmatched: FeedbackEntry[] = [];
-      for (const entry of entries) {
-        let found = false;
-        for (let i = next.length - 1; i >= 0 && !found; i--) {
-          const burst = next[i]!;
-          if (burst.targetId !== targetId || now < burst.started || now - burst.started >= 250) continue;
-          const index = burst.entries.findIndex(
-            (e) =>
-              matches(e, entry) &&
-              (isFeedbackNotice(e) ||
-                (e.additive !== false &&
-                  entry.additive !== false &&
-                  !!e.periodic === !!entry.periodic &&
-                  String(Math.abs((e.amount ?? 0) + (entry.amount ?? 0))).length <= (e.reservedDigits ?? 0))),
-          );
-          if (index < 0) continue;
-          const updated = [...burst.entries];
-          updated[index] = merge(updated[index]!, entry);
-          next[i] = { ...burst, entries: updated };
-          found = true;
-        }
-        if (!found) unmatched.push(entry);
-      }
-      return { next, unmatched };
-    };
-    let result = combine(bursts);
+    let result = combineBursts(bursts, targetId, entries, now);
     if (result.unmatched.length && bursts.filter((b) => b.targetId === targetId).length >= 3) {
       // Retry from untouched survivors so eviction cannot erase a newly merged result.
       const oldest = bursts.findIndex((b) => b.targetId === targetId);
       bursts = bursts.filter((_, i) => i !== oldest);
-      result = combine(bursts);
+      result = combineBursts(bursts, targetId, entries, now);
     }
     bursts = result.next;
     if (result.unmatched.length)

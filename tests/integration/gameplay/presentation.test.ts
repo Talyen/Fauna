@@ -127,6 +127,14 @@ it("evicts before merging so a fresh result cannot disappear with the oldest bur
   expect(next.at(-1)!.entries.map((e) => e.amount)).toEqual([5, 6]);
   expect(next.some((b) => b.id === bursts[0]!.id)).toBe(false);
 });
+it("retries all incoming effects against the surviving bursts without counting a merge twice", () => {
+  let bursts = appendFeedback([], [damage(2)], 1, 0);
+  bursts = appendFeedback(bursts, [damage(3, "freeze")], 2, 50);
+  bursts = appendFeedback(bursts, [damage(4, "nature")], 3, 100);
+  const next = appendFeedback(bursts, [damage(5), damage(6, "freeze"), damage(7, "light")], 4, 150);
+  expect(next.map((burst) => burst.entries.map((entry) => entry.amount))).toEqual([[9], [4], [5, 7]]);
+  expect(bursts.map((burst) => burst.entries[0]!.amount)).toEqual([2, 3, 4]);
+});
 it("orders notices, losses and gains, suppresses redundant zeros and keeps ineffective feedback", () => {
   const events: GameEvent[] = [
     { kind: "heal", targetId: "enemy-0", amount: 3, text: "heal" },
