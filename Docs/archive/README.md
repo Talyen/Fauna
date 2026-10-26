@@ -44,6 +44,8 @@ These records retain dated source identities, observations and limitations. A la
 
 ### Boons
 
+- [October 26 revised artifact Boons](../task-evidence/2026-10-26-revised-artifact-boons.md)
+
 - [Passive rule changes and intentional baseline updates](../task-evidence/2026-10-25-passive-boons.md)
 - [Thorns, healing, draw and cross-turn Boons](../task-evidence/2026-10-25-ten-boons.md)
 - [Food, status, draw and swap artifacts](../task-evidence/2026-10-25-artifact-boons.md)
