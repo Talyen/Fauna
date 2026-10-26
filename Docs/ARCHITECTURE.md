@@ -87,7 +87,7 @@ Storage rotates two distinct application-validated recovery checkpoints. Adapter
 
 ### Shutdown and crash recovery
 
-Desktop close/quit first requests renderer flush. The session pauses commands, drains its queue and retries the latest failed save once. Main then revokes IPC admission, drains native writes and quits. Persistent failure is recorded but does not prevent closing. Force-kill, renderer crashes and power loss cannot guarantee that handshake.
+Desktop close/quit first requests renderer flush. The session pauses commands, drains its queue and retries the latest failed save once. Main then revokes IPC admission, drains native writes and quits. If notifying an exiting renderer throws, main still enters that same native drain. Persistent failure is recorded but does not prevent closing. Force-kill, renderer crashes and power loss cannot guarantee that handshake.
 
 Renderer crash recovery drains admitted native writes before ordinary validated reload, allows at most two reloads per app process and never restarts after close begins. Platform facts and crash dumps remain local without uploads.
 

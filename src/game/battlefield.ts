@@ -28,6 +28,15 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
   return result;
 }
 
+/** Stored summon receipts become inert immediately when their owner leaves or falls. */
+export function isDepartedMinion(state: GameState, unit: Creature | Enemy): boolean {
+  return !!(
+    "minion" in unit &&
+    unit.minion &&
+    !battlefield(state, unit.minion.side).some((current) => current.id === unit.id)
+  );
+}
+
 /** Automatic healing can include backups; selectable targets remain the battlefield. */
 export function healingAllies(state: GameState, side: "player" | "enemy" = "player"): (Creature | Enemy)[] {
   const row = battlefield(state, side);

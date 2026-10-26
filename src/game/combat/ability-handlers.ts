@@ -5,7 +5,7 @@ import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
 import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
-import { battlefield, healingAllies } from "../battlefield";
+import { battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { species } from "../content";
 import { scalePower } from "./ability-values";
@@ -87,6 +87,7 @@ export function executePrimary(context: PrimaryContext) {
       context.sharedNegate = sharedNegate;
       for (const intended of targets) {
         if (actor.health <= 0) break;
+        if (isDepartedMinion(state, intended)) continue;
         const recipient = blindMiss ? intended : interceptAttack(state, actor, intended, events);
         if (def.target !== "allEnemies") attackTarget = recipient;
         const negation =
@@ -97,7 +98,7 @@ export function executePrimary(context: PrimaryContext) {
         }
         if (!blindMiss && (negation === "reflected" || takeAttackReflection(actor, recipient, events))) {
           negated.add(recipient.id);
-          if (negateAttack(state, recipient, actor, events, false)) continue;
+          if (negateAttack(state, recipient, actor, events, false, damageType)) continue;
           if (def.purgeThorns) {
             purgeAttackThorns(state, actor, events, recipient);
           }
@@ -105,7 +106,7 @@ export function executePrimary(context: PrimaryContext) {
             state,
             recipient,
             actor,
-            value * (def.doubleAgainstHealthier && recipient.health > actor.health ? 2 : 1),
+            value * (def.doubleAgainstHealthier && actor.health > recipient.health ? 2 : 1),
             damageType,
             events,
             {

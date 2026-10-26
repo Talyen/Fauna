@@ -156,7 +156,7 @@ Legendaries appear as enemies only in Boss encounters and remain ordinary recrui
 
 Each deployed Legendary supplies two copies of each of its three abilities. Formation changes preserve existing spent zone positions, remove surplus slots, and shuffle additional slots into Draw without granting cards to hand. Creature-owned generated cards disappear when their owner leaves the field. Shared [Food](CONTENT.md#shared-food-cards) has no creature owner and survives creator departure; adding a permanent kit at the 256-card battle limit may retire the newest temporary cards to make room.
 
-Minions belong only to the active battle, have Health and combat effects, and can be attacked or affected by group abilities. They have no roster slots, backup, cards, autonomous turns or Death's Door. They disappear when their summoner falls or leaves the field. Defeating an enemy Legendary wins even if its Minions remain.
+Minions belong only to the active battle, have Health and combat effects, and can be attacked or affected by group abilities. They have no roster slots, backup, cards, autonomous turns or Death's Door. They disappear when their summoner falls or leaves the field, including between recipients of an area attack or successive bounces; departed Minions cannot spend defenses or retaliate. Defeating an enemy Legendary wins even if its Minions remain.
 
 Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. Automatic enemy decisions are bounded to 256 plays per turn.
 
