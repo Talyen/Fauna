@@ -95,15 +95,15 @@ export function createSession(
       if (!disposed && !store.getState().closing) save(store.getState().game);
     }, 5000);
   };
-  const readCandidates = async (retry = false) => {
+  const readCandidates = async (retry = false, owns = () => true) => {
     let active = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
     try {
       return await Promise.race([
         Promise.resolve()
-          .then(() => platform.saves.readCandidates())
+          .then(() => (owns() ? platform.saves.readCandidates() : []))
           .catch((error) => {
-            if (retry && active && !disposed && !store.getState().closing)
+            if (retry && active && !disposed && !store.getState().closing && owns())
               return platform.saves.readCandidates();
             throw error;
           }),
@@ -236,7 +236,10 @@ export function createSession(
       if (!disposed && !store.getState().closing && token === generation) publish({ ready: true });
     };
     try {
-      const candidates = await readCandidates(true);
+      const candidates = await readCandidates(
+        true,
+        () => !disposed && !store.getState().closing && token === generation,
+      );
       if (disposed || store.getState().closing || token !== generation) return;
       for (const candidate of candidates) {
         try {

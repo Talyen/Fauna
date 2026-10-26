@@ -82,6 +82,7 @@ async function createSteam({
             resolve(parseReply(operation, value));
           } catch (error) {
             reject(error);
+            stopTransport(error instanceof Error ? error : new Error("Invalid Steam response."));
           }
         },
         reject,
