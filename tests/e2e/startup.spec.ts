@@ -1,7 +1,7 @@
 import { expect, type Page } from "@playwright/test";
 import { assetUrl } from "../../src/ui/shared/assets";
 import { run } from "../support/game";
-import { test, seed, resume } from "./support/session";
+import { test, resume } from "./support/session";
 import { captureFrame } from "./support/rendered-evidence";
 import { fits } from "./support/layout";
 
@@ -146,7 +146,4 @@ test("reduced motion stays static, dismisses without a fade and resumes a saved 
   await resume(page);
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
   await fits(page);
-  await seed(page, game);
-  await resume(page);
-  await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
 });

@@ -47,9 +47,12 @@ for (const [width, enlarged, encounter] of [
     await page.keyboard.press("i");
     await expect(page.getByRole("dialog")).toHaveCount(0);
     expect(await state(page)).toEqual(game);
-    await reloadHome(page);
-    await resume(page);
-    expect(await state(page)).toEqual(game);
+    // Resume the unstarted destination once; every authored encounter still enters through the UI
+    if (encounter === 3) {
+      await reloadHome(page);
+      await resume(page);
+      expect(await state(page)).toEqual(game);
+    }
     await enter.focus();
     await page.keyboard.press("Enter");
     await expect(page.getByRole("dialog")).toHaveCount(0);

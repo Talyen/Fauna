@@ -58,7 +58,9 @@ it("keeps preferences usable when optional storage is unavailable", () => {
   expect(hook.result.current[0].glow).toBe(0);
 });
 
-it("applies slider and switch changes live, persists preferences, and preserves gameplay", async () => {
+it("applies independent preferences live, normalizes malformed storage and persists without changing gameplay", async () => {
+  localStorage.setItem("fauna.background-glow", "malformed");
+  localStorage.setItem("fauna.background-particles", "101");
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   const session = createSession(createBrowserPlatform(localStorage), 7);
   await session.load();
@@ -69,6 +71,21 @@ it("applies slider and switch changes live, persists preferences, and preserves 
   try {
     await user.click(screen.getByRole("button", { name: "Settings" }));
     expect(screen.queryByRole("slider", { name: "Master volume" })).toBeNull();
+    const glow = screen.getByRole("slider", { name: "Background Glow" });
+    const particles = screen.getByRole("slider", { name: "Background Particles" });
+    expect(glow.getAttribute("aria-valuenow")).toBe("100");
+    expect(particles.getAttribute("aria-valuenow")).toBe("100");
+    act(() => glow.focus());
+    await user.keyboard("{Home}");
+    act(() => moveFocus("right"));
+    expect(glow.getAttribute("aria-valuenow")).toBe("1");
+    expect(particles.getAttribute("aria-valuenow")).toBe("100");
+    act(() => particles.focus());
+    await user.keyboard("{Home}");
+    expect(particles.getAttribute("aria-valuenow")).toBe("0");
+    expect(glow.getAttribute("aria-valuenow")).toBe("1");
+    expect(localStorage.getItem("fauna.background-glow")).toBe("1");
+    expect(localStorage.getItem("fauna.background-particles")).toBe("0");
     await user.click(screen.getByRole("radio", { name: "75%" }));
     expect(document.documentElement.style.getPropertyValue("--tooltip-scale")).toBe("1");
     await user.click(screen.getByRole("radio", { name: "Tooltip 125%" }));
@@ -103,6 +120,11 @@ it("applies slider and switch changes live, persists preferences, and preserves 
     view.unmount();
     render(<App session={session} />);
     await user.click(screen.getByRole("button", { name: "Settings" }));
+    expect(screen.getByRole("slider", { name: "Background Glow" }).getAttribute("aria-valuenow")).toBe("1");
+    expect(screen.getByRole("slider", { name: "Background Particles" }).getAttribute("aria-valuenow")).toBe(
+      "0",
+    );
+    expect(session.store.getState().game).toBe(game);
     expect(screen.getByRole("radio", { name: "75%" }).getAttribute("aria-checked")).toBe("true");
     expect(screen.getByRole("radio", { name: "Tooltip 125%" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("tab", { name: "Battle" }));
@@ -118,47 +140,6 @@ it("applies slider and switch changes live, persists preferences, and preserves 
     await waitFor(() =>
       expect(document.activeElement).toBe(screen.getByRole("button", { name: "Settings" })),
     );
-  } finally {
-    await session.dispose();
-  }
-});
-
-it("normalizes and independently persists background controls without changing gameplay", async () => {
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-  localStorage.setItem("fauna.background-glow", "malformed");
-  localStorage.setItem("fauna.background-particles", "101");
-  const session = createSession(createBrowserPlatform(localStorage), 7);
-  await session.load();
-  // Layout and pointer hit testing run in the browser; this DOM suite checks state and persistence.
-  const user = userEvent.setup({ pointerEventsCheck: PointerEventsCheckLevel.Never });
-  const view = render(<App session={session} />);
-  const game = session.store.getState().game;
-  try {
-    await user.click(screen.getByRole("button", { name: "Settings" }));
-    const glow = screen.getByRole("slider", { name: "Background Glow" });
-    const particles = screen.getByRole("slider", { name: "Background Particles" });
-    expect(glow.getAttribute("aria-valuenow")).toBe("100");
-    expect(particles.getAttribute("aria-valuenow")).toBe("100");
-    act(() => glow.focus());
-    await user.keyboard("{Home}");
-    act(() => moveFocus("right"));
-    expect(glow.getAttribute("aria-valuenow")).toBe("1");
-    expect(particles.getAttribute("aria-valuenow")).toBe("100");
-    act(() => particles.focus());
-    await user.keyboard("{Home}");
-    expect(particles.getAttribute("aria-valuenow")).toBe("0");
-    expect(glow.getAttribute("aria-valuenow")).toBe("1");
-    expect(localStorage.getItem("fauna.background-glow")).toBe("1");
-    expect(localStorage.getItem("fauna.background-particles")).toBe("0");
-    expect(session.store.getState().game).toBe(game);
-    view.unmount();
-    render(<App session={session} />);
-    await user.click(screen.getByRole("button", { name: "Settings" }));
-    expect(screen.getByRole("slider", { name: "Background Glow" }).getAttribute("aria-valuenow")).toBe("1");
-    expect(screen.getByRole("slider", { name: "Background Particles" }).getAttribute("aria-valuenow")).toBe(
-      "0",
-    );
-    expect(session.store.getState().game).toBe(game);
   } finally {
     await session.dispose();
   }

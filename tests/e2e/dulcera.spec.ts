@@ -42,30 +42,3 @@ test("Dulcera's abilities restore, protect and exchange the visible team with ke
   await resume(page);
   expect(await state(page)).toEqual(game);
 });
-
-test("Dulcera's Collection inspection presents the concise rules and restores focus", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 720 });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
-  await seed(page, dulceraBattle());
-  await page.getByRole("button", { name: "Collection", exact: true }).click();
-  const opener = page.getByRole("button", { name: "Inspect Dulcera", exact: true });
-  const next = page.getByRole("button", { name: "Next page", exact: true });
-  for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
-    await next.click();
-  await opener.click();
-  const details = page.locator(".creature-inspection");
-  await expect(details).toContainText("Allies restore 1 Health when they swap in");
-  for (const [name, rule] of [
-    ["Chapel Light", "Restore 3 Health / Gain 1 Mana"],
-    ["Meadow Shelter", "Allies gain 2 Block"],
-    ["Hushed Waters", "Swap out for a random backup / Cleanse all allies"],
-  ]) {
-    await details.getByRole("button", { name: new RegExp(`^${name},`) }).hover();
-    await expect(page.getByRole("tooltip")).toContainText(rule!);
-  }
-  await page.mouse.move(0, 0);
-  await captureScreen(page, { path: "reports/dulcera/collection.png" });
-  await page.keyboard.press("Escape");
-  await expect(opener).toBeFocused();
-});

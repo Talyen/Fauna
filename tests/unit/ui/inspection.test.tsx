@@ -150,6 +150,12 @@ describe("artwork-first inspection", () => {
     try {
       await user.click(screen.getByRole("button", { name: "Collection" }));
       const opener = screen.getByRole("button", { name: "Inspect Mossguard" });
+      expect(opener.textContent).toBe("");
+      await user.hover(opener);
+      const tooltip = await screen.findByRole("tooltip");
+      expect(tooltip.textContent).toContain("Mossguard");
+      expect(tooltip.textContent).toContain("Retain 40% more Block between turns");
+      expect(screen.queryByRole("dialog")).toBeNull();
       await user.click(opener);
       const dialog = screen.getByRole("dialog", { name: "Mossguard" });
       expect(within(dialog).getByRole("heading", { name: "Mossguard" })).toBeTruthy();
