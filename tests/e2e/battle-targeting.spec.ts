@@ -15,29 +15,6 @@ function targetingBattle() {
   });
 }
 
-test("battle artwork stays still at the minimum viewport with enlarged text", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 720 });
-  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
-  await seed(page, run(7));
-  await resume(page);
-  await page.mouse.move(0, 0);
-  await settleScreen(page);
-  const widths = await page.locator(".battle-screen").evaluate(
-    (board) =>
-      new Promise<string[]>((resolve) => {
-        const samples: string[] = [];
-        const sample = () => {
-          samples.push((board as HTMLElement).style.getPropertyValue("--battle-fitted-width"));
-          if (samples.length < 30) requestAnimationFrame(sample);
-          else resolve(samples);
-        };
-        requestAnimationFrame(sample);
-      }),
-  );
-  expect(widths[0]).not.toBe("");
-  expect(new Set(widths).size).toBe(1);
-});
-
 test("battle targeting uses remembered targets, forecasts bars, and has no targeted Play button", async ({
   page,
 }) => {

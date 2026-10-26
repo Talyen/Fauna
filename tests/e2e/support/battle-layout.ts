@@ -20,6 +20,7 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
       cards: [...board.querySelectorAll(".hand .action-card")].map((card) => ({
         ...size(card),
         imageWidth: card.querySelector("img")!.getAttribute("width"),
+        imageFit: getComputedStyle(card.querySelector("img")!).objectFit,
       })),
       gem: rect(".mana-gem").width,
       mana: rect(".mana"),
@@ -51,7 +52,9 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
       : height <= 900
         ? { width: 180, height: 240 }
         : { width: 200, height: 267 };
-  expect(layout.cards).toEqual(Array.from({ length: 6 }, () => ({ ...cardSize, imageWidth: "600" })));
+  expect(layout.cards).toEqual(
+    Array.from({ length: 6 }, () => ({ ...cardSize, imageWidth: "600", imageFit: "contain" })),
+  );
   expect(layout.gem).toBe(18);
   await expect(page.getByRole("button", { name: "Swap", exact: true })).toHaveCount(0);
   const { mana, end, draw, discard, fan, dock } = layout;

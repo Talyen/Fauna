@@ -247,6 +247,25 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await page.mouse.move(0, 0);
       await expectScrollFree(page);
       await expectBattleGeometry(page, width, height);
+      if (width === 1280 && height === 720 && scale === 1.25) {
+        const widths = await page
+          .locator(".player-row .creature-card")
+          .first()
+          .evaluate(
+            (card) =>
+              new Promise<number[]>((resolve) => {
+                const samples: number[] = [];
+                const sample = () => {
+                  samples.push(card.getBoundingClientRect().width);
+                  if (samples.length < 30) requestAnimationFrame(sample);
+                  else resolve(samples);
+                };
+                requestAnimationFrame(sample);
+              }),
+          );
+        expect(new Set(widths).size, "Creature artwork must not oscillate after layout settles").toBe(1);
+      }
+
       await page.mouse.wheel(500, 500);
       await page.keyboard.press("Tab");
       await expectScrollFree(page);
