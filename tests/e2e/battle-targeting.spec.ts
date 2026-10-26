@@ -42,10 +42,19 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   page,
 }) => {
   const fixture = targetingBattle();
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await seed(page, fixture);
   await resume(page);
   const before = await state(page);
   const cards = page.locator(".app:not([inert]) .hand .action-card");
+  await cards.first().focus();
+  await page.keyboard.press("w");
+  await expect(page.locator(".app:not([inert]) .player-row .creature-card:focus")).toHaveCount(1);
+  await page.keyboard.press("w");
+  await expect(page.locator(".app:not([inert]) .enemy-row .creature-card:focus")).toHaveCount(1);
+  await page.keyboard.press("i");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("tooltip")).toBeVisible();
   await cards.first().focus();
   await page.keyboard.press("Enter");
   await page.keyboard.press("d");

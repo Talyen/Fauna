@@ -1,14 +1,19 @@
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
-import { expect, type Locator } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { expectScrollFree } from "./support/layout-contract";
 import { CARDS, SPECIES } from "../../src/game/content";
 import { run } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
-import { gamepad } from "./support/gamepad";
 
-test("Collection hides uncollected tooltips and opens shared creature inspection", async ({ page }) => {
-  await seed(page, run());
+test("Collection inspection returns through nested details to the unchanged battle", async ({ page }) => {
+  const fixture = run(7);
+  await seed(page, fixture);
+  await resume(page);
+  await page.locator(".player-row .creature-card").first().hover();
+  await expect(page.getByRole("tooltip")).toContainText("Retain 10% more Block between turns");
+  await expect(page.getByRole("tooltip")).not.toContainText("Rooted Stomp");
+  await page.getByRole("button", { name: "Open menu", exact: true }).click();
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await expect(page.getByRole("navigation", { name: "Collection pages" })).toHaveCount(1);
   await settleScreen(page);
@@ -50,71 +55,29 @@ test("Collection hides uncollected tooltips and opens shared creature inspection
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
   await expect(locked).toHaveCSS("scale", "none");
   await page.getByRole("tab", { name: "All", exact: true }).click();
-  await page.getByRole("button", { name: "Inspect Mossguard", exact: true }).click();
-  await expect(page.locator(".creature-inspection")).toBeVisible();
+  await page.getByRole("button", { name: "Inspect Emberback", exact: true }).click();
+  const details = page.locator(".creature-inspection");
+  await expect(details.getByRole("region", { name: "Trait", exact: true })).toContainText("Molten Shell");
+  for (const card of CARDS.filter((c) => c.species === "emberback"))
+    await expect(details.getByRole("button", { name: new RegExp(`^${card.name},`) })).toHaveAttribute(
+      "aria-label",
+      new RegExp(`${card.cost} mana`),
+    );
+  const charge = details.getByRole("button", { name: /^Ember Charge,/ });
+  await expect(charge).toHaveAttribute("aria-label", /Deal 4 Physical damage/);
+  await charge.click();
+  await expect(page.getByRole("dialog", { name: "Ember Charge details", exact: true })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(charge).toBeFocused();
   await expect(page.getByRole("dialog")).toHaveCount(1);
+  await details.getByRole("button", { name: "Close inspection", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Inspect Emberback", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", { name: "Inspect Mossguard", exact: true })).toBeFocused();
-  await page.keyboard.press("Escape");
-  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(page.getByRole("main", { name: "Battlefield", exact: true })).toBeVisible();
+  expect(await state(page)).toEqual(fixture);
 });
-
-for (const input of ["mouse", "keyboard", "controller"] as const)
-  test(`Collection from battle shows the shared inspector and returns without changing combat with ${input}`, async ({
-    page,
-  }) => {
-    const press = input === "controller" ? await gamepad(page) : null;
-    const fixture = run(7);
-    await seed(page, fixture);
-    await resume(page);
-    const activate = async (el: Locator) => {
-      if (input === "mouse") await el.click();
-      else {
-        await el.focus();
-        if (press) await press(0);
-        else await page.keyboard.press("Enter");
-      }
-    };
-    if (input === "mouse") {
-      await page.locator(".player-row .creature-card").first().hover();
-      await expect(page.getByRole("tooltip")).toContainText("Retain 10% more Block between turns");
-      await expect(page.getByRole("tooltip")).not.toContainText("Rooted Stomp");
-    }
-    const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
-    await enemy.focus();
-    if (press) await press(2);
-    else await page.keyboard.press("i");
-    await expect(page.getByRole("dialog")).toHaveCount(0);
-    await activate(page.getByRole("button", { name: "Open menu", exact: true }));
-    await activate(page.getByRole("button", { name: "Collection", exact: true }));
-    await activate(page.getByRole("button", { name: "Inspect Emberback", exact: true }));
-    const details = page.locator(".creature-inspection");
-    await expect(details.getByRole("region", { name: "Trait", exact: true })).toContainText("Molten Shell");
-    for (const card of CARDS.filter((c) => c.species === "emberback"))
-      await expect(details.getByRole("button", { name: new RegExp(`^${card.name},`) })).toHaveAttribute(
-        "aria-label",
-        new RegExp(`${card.cost} mana`),
-      );
-    const charge = details.getByRole("button", { name: /^Ember Charge,/ });
-    await expect(charge).toHaveAttribute("aria-label", /Deal 4 Physical damage/);
-    await activate(charge);
-    await expect(page.getByRole("dialog", { name: "Ember Charge details", exact: true })).toBeVisible();
-    if (press) await press(1);
-    else await page.keyboard.press("Escape");
-    await expect(charge).toBeFocused();
-    await expect(page.getByRole("dialog")).toHaveCount(1);
-    if (input === "mouse")
-      await details.getByRole("button", { name: "Close inspection", exact: true }).click();
-    else if (press) await press(1);
-    else await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: "Inspect Emberback", exact: true })).toBeFocused();
-    if (press) await press(1);
-    else await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
-    await activate(page.getByRole("button", { name: "Continue", exact: true }));
-    await expect(page.getByRole("main", { name: "Battlefield", exact: true })).toBeVisible();
-    expect(await state(page)).toEqual(fixture);
-  });
 
 test("Collection keeps a later-page creature and focus through live resize and filter changes", async ({
   page,

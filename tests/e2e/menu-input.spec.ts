@@ -39,7 +39,11 @@ test("pointer menu transitions never display focus indicators", async ({ page })
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.keyboard.press("Escape");
+  await page.keyboard.down("Escape");
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  await page.keyboard.down("Escape");
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  await page.keyboard.up("Escape");
   const settings = page.getByRole("button", { name: "Settings", exact: true });
   await expect(settings).toBeFocused();
   await expect(settings).toHaveCSS("outline-style", "none");
@@ -58,18 +62,6 @@ test("pointer menu transitions never display focus indicators", async ({ page })
   await page.getByRole("button", { name: "Open menu" }).click();
   await menu.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(menu).toHaveCount(0);
-});
-
-test("held Escape closes only the current menu level", async ({ page }) => {
-  await openHome(page);
-  await page.getByRole("button", { name: "Play", exact: true }).click();
-  await page.getByRole("button", { name: "Open menu" }).click();
-  await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.keyboard.down("Escape");
-  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
-  await page.keyboard.down("Escape");
-  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
-  await page.keyboard.up("Escape");
 });
 
 test("minimum-size enlarged menus fit every action without scrolling", async ({ page }) => {
@@ -164,6 +156,12 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   );
   await expect(page.getByRole("dialog")).toHaveCount(1);
   await captureScreen(page, { path: `reports/menu-collection-kit-${width}.png` });
+  await pad.press(0);
+  await expect(page.getByRole("dialog", { name: "Rooted Stomp details", exact: true })).toBeVisible();
+  await pad.press(15);
+  await expect(page.getByRole("dialog", { name: "Moss Renewal details", exact: true })).toBeVisible();
+  await pad.press(1);
+  await expect(page.getByRole("button", { name: /^Moss Renewal,/ })).toBeFocused();
   await pad.press(1);
   await expect(page.getByRole("button", { name: opener!, exact: true })).toBeFocused();
   await pad.press(1);

@@ -1,12 +1,12 @@
 import userEvent from "@testing-library/user-event";
 import { screenTestEnvironment } from "../../support/ui";
 // @vitest-environment jsdom
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { createStore } from "zustand/vanilla";
 import { act, cleanup, render, screen, within } from "@testing-library/react";
 import { produce } from "immer";
 import { CARDS, definition, species } from "../../../src/game/content";
 import { encodeSave } from "../../../src/game/save";
-import { createGame } from "../../../src/game/engine";
 import { enemyInspectionValue } from "../../../src/game/ability-rules";
 import { freshCombat } from "../../../src/game/combat/index";
 import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
@@ -20,23 +20,6 @@ import { run, teamRun } from "../../support/game";
 screenTestEnvironment({ visible: true });
 
 describe("artwork-first inspection", () => {
-  it.each([0, 3, 5])("shows only the name and shining current passive at rank %s", (rank) => {
-    const game = produce(createGame(7), (draft) => {
-      draft.discovery.recruited.mossguard = rank + 1;
-    });
-    const { container } = render(<CreatureDetails progression={game} kind="mossguard" name="Guardian" />);
-    expect(container.textContent).toBe(
-      `GuardianOvergrowth${species("mossguard").passiveTiers[rank]!.description}`,
-    );
-    expect(container.querySelector(".effect-shine-icon")).toBeTruthy();
-    expect(
-      container.querySelector(".creature-trait-name .effect-shine-text")?.getAttribute("style"),
-    ).toContain("--keyword-block");
-    expect(container.querySelector(".effect-shine-icon-fill")?.getAttribute("style")).toContain(
-      "--keyword-block",
-    );
-  });
-
   it("keeps named Legendary tooltips to the name and passive without rarity or kit labels", () => {
     const creature = species("oathara");
     const { container } = render(<CreatureDetails kind="oathara" name="The Wanderer" />);
@@ -103,31 +86,48 @@ describe("artwork-first inspection", () => {
     }
   });
 
-  it.each([0, 3, 5])("fills %s progress stars and displays the corresponding passive", async (rank) => {
-    const game = produce(run(7), (draft) => {
-      draft.discovery.recruited.mossguard = rank + 1;
-    });
-    localStorage.setItem("fauna.save.v1", encodeSave(game));
+  it("updates passive rules and stars together without stale ranks or gameplay commands", async () => {
+    const initial = run(7);
+    localStorage.setItem("fauna.save.v1", encodeSave(initial));
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
+    const store = createStore(() => session.store.getState());
+    const command = vi.spyOn(session, "command");
     try {
       render(
         <TooltipProvider>
           <Inspector
             item={{ species: "mossguard" }}
-            session={session}
+            session={{ ...session, store }}
             controls={{ current: null }}
             onClose={() => {}}
           />
         </TooltipProvider>,
       );
-      const stars = screen.getByRole("img", { name: `${rank} of 5 stars` });
-      expect(stars.querySelectorAll("svg")).toHaveLength(5);
-      expect(stars.querySelectorAll('[data-earned="true"]')).toHaveLength(rank);
-      expect(screen.getByRole("region", { name: "Trait" }).textContent).toContain(
-        species("mossguard").passiveTiers[rank]!.description,
-      );
-      expect(session.store.getState().game).toEqual(game);
+      const details = render(<CreatureDetails progression={initial} kind="mossguard" name="Guardian" />);
+      // Reuse mounted consumers and return to rank zero to expose stale progression and accumulated stars.
+      for (const rank of [0, 3, 5, 0]) {
+        const game = produce(initial, (draft) => {
+          draft.discovery.recruited.mossguard = rank + 1;
+        });
+        act(() => store.setState({ game }));
+        details.rerender(<CreatureDetails progression={game} kind="mossguard" name="Guardian" />);
+        const stars = screen.getByRole("img", { name: `${rank} of 5 stars` });
+        expect(stars.querySelectorAll("svg")).toHaveLength(5);
+        expect(stars.querySelectorAll('[data-earned="true"]')).toHaveLength(rank);
+        const rules = species("mossguard").passiveTiers[rank]!.description;
+        expect(screen.getByRole("region", { name: "Trait" }).textContent).toContain(rules);
+        expect(details.container.textContent).toBe(`GuardianOvergrowth${rules}`);
+        expect(details.container.querySelector(".effect-shine-icon")).toBeTruthy();
+        for (const selector of [".creature-trait-name .effect-shine-text", ".effect-shine-icon-fill"])
+          expect(details.container.querySelector(selector)?.getAttribute("style")).toContain(
+            "--keyword-block",
+          );
+        expect(store.getState().game).toBe(game);
+      }
+      expect(command).not.toHaveBeenCalled();
+      await session.flush();
+      expect(localStorage.getItem("fauna.save.v1")).toBe(encodeSave(initial));
     } finally {
       cleanup();
       await session.dispose();
