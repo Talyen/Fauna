@@ -1,12 +1,9 @@
 import { controlled } from "./combat/state";
-import { creaturePassive } from "./progression";
+import { passiveAmount } from "./progression";
 import type { Card, Creature, GameState } from "./types";
 
 export function unfinishedJourneyLimit(state: GameState | undefined, unit: Pick<Creature, "species">) {
-  return creaturePassive(state, unit.species).effects.reduce(
-    (sum, effect) => sum + (effect.kind === "unfinishedJourney" ? effect.amount : 0),
-    0,
-  );
+  return passiveAmount(state, unit.species, "unfinishedJourney");
 }
 
 /** Availability never changes card ownership or its position in the ordinary piles. */

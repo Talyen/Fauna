@@ -5,7 +5,7 @@ import { FOOD_CARDS } from "../content/food";
 import { species, type CardDefinition } from "../content";
 import { receiveCard } from "../card-zones";
 import { roll } from "../random";
-import { creaturePassive } from "../progression";
+import { passiveAmount } from "../progression";
 import { gainMana, grantBlock, restoreHealth } from "./index";
 import { battlefield } from "../battlefield";
 import type { BattleState, Creature, GameEvent } from "../types";
@@ -51,10 +51,7 @@ export function createFood(
 export function wellProvisioned(state: BattleState, events: GameEvent[]) {
   for (const provider of state.team) {
     if (provider.health <= 0) continue;
-    const amount = creaturePassive(state, provider.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "wellProvisioned" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(state, provider.species, "wellProvisioned");
     if (amount > 0) createFood(state, provider, amount, events, "deck");
   }
 }

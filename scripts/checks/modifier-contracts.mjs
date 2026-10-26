@@ -158,7 +158,8 @@ export function modifierContractViolations(sources) {
       const target = moduleImports.get(entry.callee.value);
       if (
         (target?.file === "src/game/progression.ts" && target.name === "hasTalent") ||
-        (target?.file === "src/game/rules/talents.ts" && target.name === "talentRule")
+        (target?.file === "src/game/rules/talents.ts" && target.name === "talentRule") ||
+        (target?.file === "src/game/chance.ts" && target.name === "talentChance")
       )
         talentSelectors.add(owner);
     });
@@ -205,6 +206,13 @@ export function modifierContractViolations(sources) {
             [parent.left, parent.right].some(
               (side) => side?.type === "MemberExpression" && side.property.value === "kind",
             )
+          ) &&
+          !(
+            parent?.type === "CallExpression" &&
+            parent.callee.type === "Identifier" &&
+            moduleImports.get(parent.callee.value)?.file === "src/game/progression.ts" &&
+            moduleImports.get(parent.callee.value)?.name === "passiveAmount" &&
+            parent.arguments[2]?.expression === entry
           ) &&
           !(
             parent?.type === "ConditionalExpression" &&

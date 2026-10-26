@@ -1,10 +1,9 @@
-import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
-import { chance as succeeds } from "../chance";
+import { talentChance } from "../chance";
 import { isEnemy, battlefield, combatantById } from "../battlefield";
 import { draw } from "../card-zones";
 import { roll } from "../random";
-import { hasTalent, creaturePassive } from "../progression";
+import { hasTalent, passiveAmount } from "../progression";
 
 import type { GameEvent, GameState } from "../types";
 import { ensureCombat, unitName, STACK_LIMIT, harmfulStatuses, controlled, type Combatant } from "./state";
@@ -95,19 +94,10 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
             : Math.round(amount / 2)
           : Math.max(0, amount - Math.max(1, Math.round(amount * 0.2)));
     if (isEnemy(unit) && !isEnemy(source)) {
-      if (
-        status === "burn" &&
-        hasTalent(state, "burn.smoldering") &&
-        succeeds(state, talentRule("burn.smoldering").percent / 100, false, events)
-      )
-        next = amount;
+      if (status === "burn" && talentChance(state, "burn.smoldering", events)) next = amount;
       if (status === "poison") {
         if (stats.controlled === "freeze" && hasTalent(state, "freeze.cryo-preservation")) next = amount;
-        if (
-          hasTalent(state, "poison.virulent") &&
-          succeeds(state, talentRule("poison.virulent").percent / 100, false, events)
-        )
-          next = Math.min(STACK_LIMIT, amount + 1);
+        if (talentChance(state, "poison.virulent", events)) next = Math.min(STACK_LIMIT, amount + 1);
       }
     }
     setPeriodicStacks(stats, status, next);
@@ -148,10 +138,7 @@ export function* startAction(
     // The allied turn number advances after startAction; enemies act on the current number
     const turn = state.battle.turn + Number(!enemy);
     if (turn % 2 === 0 && row.some((deployed) => deployed.id === unit.id)) {
-      const amount = creaturePassive(enemy ? undefined : state, unit.species).effects.reduce(
-        (sum, effect) => sum + (effect.kind === "tidalRegeneration" ? effect.amount : 0),
-        0,
-      );
+      const amount = passiveAmount(enemy ? undefined : state, unit.species, "tidalRegeneration");
       if (amount > 0) yield* reaction("restoreHealth", unit, amount, events, false, state);
     }
   }

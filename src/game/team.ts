@@ -3,7 +3,7 @@ import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS 
 import { removeDepartedMinions } from "./combat/legendary";
 import { grantBlock, restoreHealth } from "./combat/index";
 import { unitName, type Combatant } from "./combat/state";
-import { creaturePassive } from "./progression";
+import { passiveAmount } from "./progression";
 import { shuffle, roll } from "./random";
 import { speciesCards, species } from "./content";
 import type { Card, GameEvent, GameState } from "./types";
@@ -15,10 +15,7 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
   const entering = state.team.filter((unit) => !previous.some((old) => old.id === unit.id));
   for (const provider of providers.values()) {
     if (provider.health <= 0) continue;
-    const amount = creaturePassive(state, provider.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "gentlePassage" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(state, provider.species, "gentlePassage");
     if (amount <= 0) continue;
     for (const unit of entering)
       restoreHealth(unit, amount, events, false, state, false, provider, { bounce: false });
@@ -211,10 +208,7 @@ export function mountainGuide(
   const guides = [...row, ...previous.filter((unit) => !row.some((current) => current.id === unit.id))];
   for (const guide of guides) {
     if (guide.health <= 0) continue;
-    const amount = creaturePassive(allied ? state : undefined, guide.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "mountainGuide" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(allied ? state : undefined, guide.species, "mountainGuide");
     if (!amount) continue;
     events.push({
       kind: "action",

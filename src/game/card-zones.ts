@@ -6,7 +6,7 @@ import { definition, species } from "./content";
 import type { BattleState, Card, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
 import { shuffle, hiddenDecision, roll } from "./random";
-import { cardKeywords, creaturePassive } from "./progression";
+import { cardKeywords, creaturePassive, passiveAmount } from "./progression";
 
 export const MAX_HAND_SIZE = 6;
 export const MAX_SUPPORTED_HAND_SIZE = MAX_HAND_SIZE + boonRule("facet-abacus").slots;
@@ -94,10 +94,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
       battle.copySerial >= Number.MAX_SAFE_INTEGER
     )
       continue;
-    const chance = creaturePassive(state, reader.species).effects.reduce(
-      (amount, effect) => amount + (effect.kind === "wellRead" ? effect.amount : 0),
-      0,
-    );
+    const chance = passiveAmount(state, reader.species, "wellRead");
     if (!succeeds(state, chance / 100, false, events)) continue;
     original ??= state.cards.find((entry) => entry.id === id)!;
     const copy = { ...original, id: `copy-${battle.copySerial++}`, temporary: true as const };
@@ -119,10 +116,7 @@ export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) 
   if (!owner) return;
   for (const keeper of state.team) {
     if (keeper.health <= 0) continue;
-    const amount = creaturePassive(state, keeper.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "lostAndFound" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(state, keeper.species, "lostAndFound");
     if (amount > 0) restoreHealth(owner, amount, events, false, state, false, keeper);
   }
 }
@@ -232,10 +226,7 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
 export function expressDelivery(state: GameState, events: GameEvent[]) {
   for (const courier of state.team) {
     if (courier.health <= 0) continue;
-    const chance = creaturePassive(state, courier.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "expressDelivery" ? effect.amount : 0),
-      0,
-    );
+    const chance = passiveAmount(state, courier.species, "expressDelivery");
     if (succeeds(state, chance / 100, false, events) && draw(state, 1, events))
       events.push({
         kind: "action",

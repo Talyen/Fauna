@@ -14,7 +14,7 @@ import { livingChorus } from "./turns";
 import type { BattleState, GameEvent, Card } from "../types";
 import { definition } from "../content";
 import { battlefield, healingAllies } from "../battlefield";
-import { creaturePassive } from "../progression";
+import { passiveAmount } from "../progression";
 import { receiveCard, draw, journeyReturn } from "../card-zones";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
@@ -59,10 +59,7 @@ export function lastWarmth(state: BattleState, enemy: boolean, events: GameEvent
   const side = enemy ? "enemy" : "player";
   for (const source of battlefield(state, side)) {
     if (source.health <= 0) continue;
-    const amount = creaturePassive(enemy ? undefined : state, source.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "lastWarmth" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(enemy ? undefined : state, source.species, "lastWarmth");
     const recipient = amount > 0 ? mostInjured(healingAllies(state, side)) : undefined;
     if (recipient) restoreHealth(recipient, amount, events, false, state, false, source);
   }

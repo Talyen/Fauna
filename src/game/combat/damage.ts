@@ -6,7 +6,7 @@ import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield, healingAllies } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
-import { hasTalent, creaturePassive } from "../progression";
+import { hasTalent, creaturePassive, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import {
@@ -214,10 +214,7 @@ export function* hit(
   const policy = packetPolicy(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot
-      ? creaturePassive(isEnemy(source) ? undefined : state, source.species).effects.reduce(
-          (total, effect) => total + (effect.kind === "wrongFoot" ? effect.amount : 0),
-          0,
-        )
+      ? passiveAmount(isEnemy(source) ? undefined : state, source.species, "wrongFoot")
       : 0;
   const result = yield* reaction("resolveHit", state, source, target, value, type, events, options);
   const lost = result.outcome === "landed" ? result.lost : undefined;
@@ -237,10 +234,7 @@ export function* hit(
         : !isEnemy(source) && state.boons.includes("dream-tangram")
           ? battlefield(state, "enemy").find((enemy) => enemy.health > 0)
           : undefined;
-    const chance = creaturePassive(isEnemy(source) ? undefined : state, source.species).effects.reduce(
-      (total, effect) => total + (effect.kind === "resonance" ? effect.amount : 0),
-      0,
-    );
+    const chance = passiveAmount(isEnemy(source) ? undefined : state, source.species, "resonance");
     if (recipient && succeeds(state, chance / 100, isEnemy(source), events)) {
       events.push({
         kind: "action",

@@ -4,7 +4,7 @@ import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
-import { hasTalent, creaturePassive } from "../progression";
+import { hasTalent, passiveAmount } from "../progression";
 
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
@@ -117,10 +117,7 @@ export function* triggerArmorBreak(
     yield* reaction("grantBlock", state, unit, talentRule("armor.reactive-guard").amount, events);
   const row = battlefield(state, allied ? "player" : "enemy");
   if (!row.some((deployed) => deployed.id === unit.id)) return;
-  const amount = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
-    (total, effect) => total + (effect.kind === "armorBreak" ? effect.amount : 0),
-    0,
-  );
+  const amount = passiveAmount(allied ? state : undefined, unit.species, "armorBreak");
   if (!amount) return;
   const targets = battlefield(state, allied ? "enemy" : "player");
   for (const target of targets) {
@@ -395,12 +392,7 @@ export function* cleanseRewards(
       ? row.reduce(
           (total, ally) =>
             total +
-            (ally.health > 0
-              ? creaturePassive(allied ? state : undefined, ally.species).effects.reduce(
-                  (sum, effect) => sum + (effect.kind === "sunthaw" ? effect.amount : 0),
-                  0,
-                )
-              : 0),
+            (ally.health > 0 ? passiveAmount(allied ? state : undefined, ally.species, "sunthaw") : 0),
           0,
         )
       : 0;
@@ -509,10 +501,7 @@ export function* applyHarmfulStatus(
     Number(stats[type]) < (type === "blind" ? 1 : STACK_LIMIT)
   ) {
     const enemies = battlefield(state, alliedTarget ? "enemy" : "player").filter((unit) => unit.health > 0);
-    const chance = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "statusReflection" ? effect.amount : 0),
-      0,
-    );
+    const chance = passiveAmount(alliedTarget ? state : undefined, target.species, "statusReflection");
     const burnReflection = type === "burn" && stats.reflectBurn;
     if (
       enemies.length &&
