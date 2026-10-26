@@ -1303,7 +1303,8 @@ it("Raincatcher Bowl adds one maximum Mana for a Water card in any deck zone wit
     const def = definition(card.definitionId);
     return def.effect === "attack" && def.damageType === "water";
   })!;
-  state.battle!.draw = state.battle!.draw.filter((id) => id !== water.id);
+  for (const zone of ["draw", "hand", "buffer", "discard"] as const)
+    state.battle![zone] = state.battle![zone].filter((id) => id !== water.id);
   state.battle!.discard.push(water.id);
   expect(battleMana(state)).toBe(5);
   state.talents = ["mana.leyline-attunement"];
@@ -1403,6 +1404,7 @@ it.each([true, false])(
           ...definition("prismram-attack"),
           effect: "attack",
           damageType: "water",
+          target: undefined,
           effects: [
             { kind: "damage", damageType: "burn", amount: 2 },
             { kind: "blind", amount: 1 },
