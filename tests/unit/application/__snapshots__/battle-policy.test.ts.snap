@@ -245,7 +245,6 @@ exports[`preserves visible rankings and legal choices for captoad 1`] = `
     "ordinary",
     [
       "{"command":{"type":"play","cardId":"ally-0:captoad-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}",
-      "{"command":{"type":"play","cardId":"ally-0:captoad-swap","autoEndTurn":false},"score":150,"reason":"Use Bogbound Leap for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:captoad-guard","autoEndTurn":false},"score":103,"reason":"Use Mushroom Guard for its visible benefit"}",
     ],
   ],
@@ -254,14 +253,12 @@ exports[`preserves visible rankings and legal choices for captoad 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:captoad-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:captoad-guard","autoEndTurn":false},"score":3003,"reason":"Use Mushroom Guard for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:captoad-swap","autoEndTurn":false},"score":150,"reason":"Use Bogbound Leap for its visible benefit"}",
     ],
   ],
   [
     "defended",
     [
       "{"command":{"type":"play","cardId":"ally-0:captoad-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}",
-      "{"command":{"type":"play","cardId":"ally-0:captoad-swap","autoEndTurn":false},"score":150,"reason":"Use Bogbound Leap for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:captoad-guard","autoEndTurn":false},"score":103,"reason":"Use Mushroom Guard for its visible benefit"}",
     ],
   ],
@@ -270,7 +267,7 @@ exports[`preserves visible rankings and legal choices for captoad 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:captoad-guard","autoEndTurn":false},"score":3003,"reason":"Use Mushroom Guard for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:captoad-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}",
-      "{"command":{"type":"play","cardId":"ally-0:captoad-swap","autoEndTurn":false},"score":150,"reason":"Use Bogbound Leap for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:captoad-swap","autoEndTurn":false},"score":200,"reason":"Use Bogbound Leap for its visible benefit"}",
     ],
   ],
 ]
@@ -866,6 +863,7 @@ exports[`preserves visible rankings and legal choices for parhelion 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-1","autoEndTurn":false},"score":502,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-2","autoEndTurn":false},"score":502,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:parhelion-sundog-reservoir","autoEndTurn":false},"score":401,"reason":"Use Sundog Reservoir for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:parhelion-polar-reprieve","autoEndTurn":false},"score":200,"reason":"Use Polar Reprieve for its visible benefit"}",
     ],
   ],
 ]
@@ -1227,7 +1225,6 @@ exports[`preserves visible rankings and legal choices for sternshell 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:sternshell-swap","autoEndTurn":false},"score":150,"reason":"Use Siphon Vault for its visible benefit"}",
     ],
   ],
   [
@@ -1237,7 +1234,6 @@ exports[`preserves visible rankings and legal choices for sternshell 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:sternshell-swap","autoEndTurn":false},"score":150,"reason":"Use Siphon Vault for its visible benefit"}",
     ],
   ],
   [
@@ -1247,7 +1243,6 @@ exports[`preserves visible rankings and legal choices for sternshell 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:sternshell-swap","autoEndTurn":false},"score":150,"reason":"Use Siphon Vault for its visible benefit"}",
     ],
   ],
   [
@@ -1257,7 +1252,7 @@ exports[`preserves visible rankings and legal choices for sternshell 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-0","autoEndTurn":false},"score":1002,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-1","autoEndTurn":false},"score":1002,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-2","autoEndTurn":false},"score":1002,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:sternshell-swap","autoEndTurn":false},"score":150,"reason":"Use Siphon Vault for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:sternshell-swap","autoEndTurn":false},"score":200,"reason":"Use Siphon Vault for its visible benefit"}",
     ],
   ],
 ]
@@ -1284,6 +1279,7 @@ exports[`preserves visible rankings and legal choices for stillara 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":3001,"reason":"Use Water Remembers for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-reed-reservoir","autoEndTurn":false},"score":401,"reason":"Use Reed Reservoir for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
     ],
   ],
 ]
@@ -1297,7 +1293,6 @@ exports[`preserves visible rankings and legal choices for tournelle 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":150,"reason":"Use Safe Passage for its visible benefit"}",
     ],
   ],
   [
@@ -1306,7 +1301,6 @@ exports[`preserves visible rankings and legal choices for tournelle 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":150,"reason":"Use Safe Passage for its visible benefit"}",
     ],
   ],
   [
@@ -1315,7 +1309,6 @@ exports[`preserves visible rankings and legal choices for tournelle 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":150,"reason":"Use Safe Passage for its visible benefit"}",
     ],
   ],
   [
@@ -1324,7 +1317,7 @@ exports[`preserves visible rankings and legal choices for tournelle 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":150,"reason":"Use Safe Passage for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":200,"reason":"Use Safe Passage for its visible benefit"}",
     ],
   ],
 ]

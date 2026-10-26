@@ -71,7 +71,7 @@ export function ordinaryAttackFacts(
     const armor = armored ? Math.max(0, enemy.combat.armor - erosion) : 0;
     const payment = blockPayment(damage, enemy.block);
     const piercing =
-      type === "physical" && lastCardCritical && state.boons.includes("crater-punch")
+      lastCardCritical && state.boons.includes("crater-punch")
         ? Math.round(payment.absorbed / boonRule("crater-punch").divisor)
         : 0;
     const prevented = negated || (type === "freeze" && enemy.combat.nullifyFreeze);

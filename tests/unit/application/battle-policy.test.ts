@@ -340,7 +340,7 @@ it.each(["none", "nullifyFreeze", "negate", "attackReflection"] as const)(
     const negated = protection === "negate" || protection === "attackReflection";
     expect(hits.map(({ lost, blocked, eroded, negated }) => ({ lost, blocked, eroded, negated }))).toEqual([
       { lost: negated ? 0 : 8, blocked: negated ? 0 : 2, eroded: negated ? 0 : 2, negated },
-      { lost: protection === "none" ? 10 : 0, blocked: protection === "none" ? 2 : 0, eroded: 0, negated },
+      { lost: protection === "none" ? 11 : 0, blocked: protection === "none" ? 2 : 0, eroded: 0, negated },
     ]);
     expect(encodeSave(state)).toBe(before);
   },

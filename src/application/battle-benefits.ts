@@ -4,7 +4,7 @@ export type { OrdinaryHit } from "../game/ability-facts";
 import { battleCardCapacity, drawHasAnotherCard, discardDrawCards } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { battlefield, healingAllies } from "../game/battlefield";
-import { creaturePassive, hasTalent } from "../game/progression";
+import { cardKeywords, creaturePassive, hasTalent } from "../game/progression";
 import {
   controlled,
   hasHarmfulEffects,
@@ -96,6 +96,11 @@ export function battleBenefits(
     }
     if (benefit.priority !== "none") return benefit;
     if (facts.healingOnPlay) return { ...benefit, priority: "healing" };
+    if (
+      play.def.effects?.some((effect) => effect.kind === "blind") &&
+      facts.livingEnemies().some((enemy) => !enemy.combat.blind)
+    )
+      return { ...benefit, priority: "utility" };
     for (const effect of play.def.effects ?? []) {
       if (effect.kind !== "heal" || effect.target === "recipient") continue;
       const { restored, utility } = healingBenefit(state, play.actor, effect.amount, undefined);
@@ -113,13 +118,18 @@ export function battleBenefits(
   });
 }
 
-/** Drawing only this card back cannot justify a spent protection or Cleanse. */
+/** A self-only draw still needs a draw reward to justify spending the card. */
 function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
   return !!play.def.effects?.some(
     (effect) =>
       (effect.kind === "draw" || effect.kind === "drawKeyword") &&
       effect.amount > 0 &&
-      drawHasAnotherCard(state, play.card, effect),
+      (drawHasAnotherCard(state, play.card, effect) ||
+        (!play.def.consume &&
+          (effect.kind === "draw" || cardKeywords(play.card).includes(effect.keyword)) &&
+          (state.boons.includes("mineral-bookend") ||
+            (state.boons.includes("dune-shuttle") &&
+              state.team.some((unit) => unit.id === play.card.ownerId && unit.health > 0))))),
   );
 }
 
@@ -160,7 +170,9 @@ function primaryBattleBenefits(
           ? "summon"
           : echoes.some((unit) => unit.health < unit.maxHealth)
             ? "summonRecovery"
-            : "protection",
+            : echoes.some((unit) => !controlled(unit))
+              ? "protection"
+              : "none",
       );
     }
     case "createFood":
@@ -422,7 +434,10 @@ function primaryBattleBenefits(
           : "none",
       );
     case "swap":
-      if (def.backupOnly && !state.reserves.some((unit) => unit.health > 0))
+      if (
+        !state.reserves.some((unit) => unit.health > 0) &&
+        (def.backupOnly || !state.team.some((unit) => unit.id !== actor.id && unit.health > 0))
+      )
         return support(
           def.effects?.some((effect) => effect.kind === "cleanse" && effect.target === "allAllies") &&
             battlefield(state, "player").some((unit) => unit.health > 0 && hasHarmfulEffects(unit))
@@ -438,7 +453,7 @@ function primaryBattleBenefits(
         targetId: command.targetId,
       }));
     case "swapLowest":
-      return support("utility");
+      return support(state.reserves.some((unit) => unit.health > 0) ? "utility" : "none");
     default: {
       const unhandled: never = def;
       throw new Error(`Unhandled battle benefit: ${unhandled}`);

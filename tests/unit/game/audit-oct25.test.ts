@@ -37,7 +37,7 @@ it("01: ordinary-hit rankings round fractional Physical bonuses before critical 
   expect(fact?.lethal).toBe(true);
 });
 
-it("02: Crater Punch cannot invent piercing damage for a Light critical", () => {
+it("02: Crater Punch includes blocked Light critical damage in its Health estimate", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["alpenglen"])));
   const def = attack("alpenglen-last-light-charge");
   handOnly(state, def.id);
@@ -45,7 +45,7 @@ it("02: Crater Punch cannot invent piercing damage for a Light critical", () => 
   const enemy = state.battle.enemies[0]!;
   enemy.block = 100;
   const [fact] = ordinaryAttackFacts(state, state.team[0]!, def, 4, enemy);
-  expect(fact?.lost).toBe(0);
+  expect(fact?.lost).toBe(4);
   expect(fact?.lethal).toBe(false);
 });
 
