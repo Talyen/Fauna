@@ -18,6 +18,7 @@ import { captureFrame } from "../../../scripts/dev/capture.mjs";
 import { integrate } from "../../../scripts/integrate.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 import { reviewOptions } from "../../../scripts/dev/review-options.mjs";
+import { reviewScenario } from "../../../scripts/dev/review-scenarios.mjs";
 
 const fixture = () =>
   repository(
@@ -30,6 +31,48 @@ const fixture = () =>
 afterEach(() => {
   vi.restoreAllMocks();
   vi.unstubAllEnvs();
+});
+
+it("prepares creature artwork reviews with their rank, fixture arguments and played card", async () => {
+  const modules = {
+    "/tests/support/game.ts": {
+      run: () => ({}),
+      accept: (game, command) => ({ ...game, command }),
+    },
+    "/src/game/save.ts": { encodeSave: JSON.stringify, decodeSave: JSON.parse },
+    "/tests/support/uncertainty.ts": { uncertainBattle: () => ({}) },
+  };
+  const calls = [];
+  for (const creature of ["alpenglen", "aerostat", "wisterelle", "orifable", "pyrella", "oathara"]) {
+    modules[`/tests/support/${creature}.ts`] = {
+      [`${creature}Battle`]: (...args) => {
+        calls.push([creature, args]);
+        return {
+          discovery: { recruited: {} },
+          cards: [{ id: "decoy", definitionId: "pyrella-spark-decoy" }],
+        };
+      },
+    };
+  }
+  const server = { ssrLoadModule: async (path) => modules[path] };
+  for (const creature of ["alpenglen", "aerostat", "wisterelle"]) {
+    const scenario = await reviewScenario(server, `${creature}-rank-five`);
+    expect(scenario.fixture).toBe(`tests/support/${creature}.ts`);
+    if (creature === "wisterelle") expect(JSON.parse(scenario.save).discovery.recruited.wisterelle).toBe(6);
+  }
+  await reviewScenario(server, "orifable-food");
+  const decoy = await reviewScenario(server, "pyrella-decoy");
+  expect((await reviewScenario(server, "oathara-battle")).fixture).toBe("tests/support/oathara.ts");
+  expect((await reviewScenario(server, "unknown-targeting")).fixture).toBe("tests/support/uncertainty.ts");
+  expect(calls).toEqual([
+    ["alpenglen", [5]],
+    ["aerostat", [5]],
+    ["wisterelle", []],
+    ["orifable", [true]],
+    ["pyrella", []],
+    ["oathara", []],
+  ]);
+  expect(JSON.parse(decoy.save).command).toEqual({ type: "play", cardId: "decoy", autoEndTurn: false });
 });
 
 it.skipIf(process.platform === "win32")(
