@@ -97,6 +97,16 @@ export const BOONS = [
   { id: "gemmed-scabbard", name: "Gemmed Scabbard", text: boonRule("gemmed-scabbard").text },
   { id: "dream-tangram", name: "Dream Tangram", text: boonRule("dream-tangram").text },
   { id: "comet-crucible", name: "Comet Crucible", text: boonRule("comet-crucible").text },
+  { id: "geode-anvil", name: "Geode Anvil", text: boonRule("geode-anvil").text },
+  { id: "journey-loom", name: "Journey Loom", text: boonRule("journey-loom").text },
+  { id: "devotion-clasp", name: "Devotion Clasp", text: boonRule("devotion-clasp").text },
+  { id: "prism-chisel", name: "Prism Chisel", text: boonRule("prism-chisel").text },
+  { id: "eclipse-protractor", name: "Eclipse Protractor", text: boonRule("eclipse-protractor").text },
+  { id: "wonder-ball-maze", name: "Wonder Ball Maze", text: boonRule("wonder-ball-maze").text },
+  { id: "sleepers-urn", name: "Sleepers Urn", text: boonRule("sleepers-urn").text },
+  { id: "facet-abacus", name: "Facet Abacus", text: boonRule("facet-abacus").text },
+  { id: "thornheart-ring", name: "Thornheart Ring", text: boonRule("thornheart-ring").text },
+  { id: "moonboat-toy", name: "Moonboat Toy", text: boonRule("moonboat-toy").text },
 ] as const;
 export type BoonId = (typeof BOONS)[number]["id"];
 

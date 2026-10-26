@@ -1,5 +1,11 @@
 /** Packet provenance determines reactions; ancestry only narrows an attack's delivery. */
+export interface SharedNegate {
+  bearer: import("./state").Combatant;
+  recipientId: string;
+  spent: boolean;
+}
 interface AttackValues {
+  sharedNegate?: SharedNegate;
   leech?: boolean;
   cardLeech?: boolean;
 }

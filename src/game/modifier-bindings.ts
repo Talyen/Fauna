@@ -61,6 +61,8 @@ type Modules = {
   };
   "./card-actors": typeof import("./card-actors");
   "./card-zones": {
+    handCapacity: typeof import("./card-zones").handCapacity;
+    journeyReturn: typeof import("./card-zones").journeyReturn;
     recoverBrokenGuard: typeof import("./card-zones").recoverBrokenGuard;
     lostAndFound: typeof lostAndFound;
     drawHasAnotherCard: typeof drawHasAnotherCard;
@@ -83,6 +85,7 @@ type Modules = {
     passingFlame: typeof passingFlame;
     passiveRetaliation: typeof passiveRetaliation;
     waterFollowups: typeof waterFollowups;
+    thornRetaliation: typeof import("./combat/damage-reactions").thornRetaliation;
   };
   "./combat/damage-values": typeof import("./combat/damage-values");
   "./combat/healing-values": typeof import("./combat/healing-values");
@@ -122,6 +125,10 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  handCapacity: bind("./card-zones", "handCapacity"),
+  journeyReturn: bind("./card-zones", "journeyReturn"),
+  shareNegate: bind("./combat/damage", "shareNegate"),
+  thornRetaliation: bind("./combat/damage-reactions", "thornRetaliation"),
   matchSwapBlock: bind("./team", "matchSwapBlock"),
   controlled: bind("./combat/state", "controlled"),
   executeAbility: bind("./combat/abilities", "executeAbility"),
@@ -353,6 +360,16 @@ export const modifierImplementations = freeze(
       "water.riptide": [owners.waterFollowups],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "geode-anvil": [owners.decayBlock],
+      "journey-loom": [owners.journeyReturn],
+      "devotion-clasp": [owners.shareNegate],
+      "prism-chisel": [owners.removeEffects],
+      "eclipse-protractor": [owners.resolveHit],
+      "wonder-ball-maze": [owners.applyHarmfulStatus],
+      "sleepers-urn": [owners.applyHarmfulStatus],
+      "facet-abacus": [owners.handCapacity],
+      "thornheart-ring": [owners.thornRetaliation, owners.dodgeResponse],
+      "moonboat-toy": [owners.thornRetaliation],
       "pearl-sieve": [owners.removeEffects],
       "tide-anklet": [owners.matchSwapBlock],
       "obsidian-pitcher": [owners.leechHealth],

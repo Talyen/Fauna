@@ -39,7 +39,11 @@ const enemyAbilities = new Map(
 export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[]) {
   const before = unit.block;
   const allied = !isEnemy(unit);
-  unit.block = retainedBlock(unit, allied ? state : undefined);
+  const retained = retainedBlock(unit, allied ? state : undefined);
+  unit.block =
+    allied && state.boons.includes("geode-anvil")
+      ? Math.max(retained, Math.min(before, ensureCombat(unit).armor))
+      : retained;
   const lost = before - unit.block;
   if (lost <= 0 || unit.health <= 0) return;
   const percent = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(

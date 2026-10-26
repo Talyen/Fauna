@@ -4,6 +4,7 @@ import { sharedDodgeChance } from "../../game/combat/index";
 import { Screen } from "../shared/navigation/screen";
 import { HandMotion } from "./hand-motion";
 import { ActionDetails } from "../shared/cards/card-details";
+import { MAX_HAND_SIZE } from "../../game/card-zones";
 import { cardCost } from "../../game/ability-rules";
 import { cardActor } from "../../game/card-actors";
 import { inspectCardPlay } from "../../game/play-queries";
@@ -61,7 +62,8 @@ function cachedPreview(game: BattleState, cardId: string, targetId: string) {
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
-    const offset = index - (count - 1) / 2;
+    const span = Math.max(MAX_HAND_SIZE - 1, count - 1);
+    const offset = ((index - (count - 1) / 2) * (MAX_HAND_SIZE - 1)) / span;
     const style = ref.current!.style;
     style.setProperty("--fan-offset", String(offset));
     style.setProperty("--fan-order", String(index));

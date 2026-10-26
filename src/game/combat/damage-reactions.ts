@@ -45,7 +45,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
   if (alliedTarget) {
     if (state.boons.includes("briar-racquet") && stats.thorns > 0 && target.health > 0) {
       const damage = Math.round(stats.thorns / boonRule("briar-racquet").divisor);
-      stats.thorns--;
+      if (!(source.combat?.bleed && state.boons.includes("thornheart-ring"))) stats.thorns--;
       yield* reaction("hit", state, target, source, damage, "nature", events, { origin: "retaliation" });
     }
     stats[talentRule("dodge.finding-rhythm").state] = 0;
@@ -401,7 +401,8 @@ export function* thornRetaliation({
   source,
   target,
   events,
-}: Pick<HitContext, "state" | "source" | "target" | "events">): Resolution<void> {
+  type: attackType,
+}: Pick<HitContext, "state" | "source" | "target" | "events"> & { type?: DamageType }): Resolution<void> {
   const stats = ensureCombat(target);
   for (const [status, type] of [
     ["thorns", "nature"],
@@ -411,7 +412,10 @@ export function* thornRetaliation({
     if (source.health <= 0) break;
     const reflected = stats[status];
     if (reflected <= 0) continue;
-    stats[status]--;
+    if (!(source.combat?.bleed && !isEnemy(target) && state.boons.includes("thornheart-ring")))
+      stats[status]--;
+    if (!isEnemy(source) && isEnemy(target) && attackType === "water" && state.boons.includes("moonboat-toy"))
+      continue;
     yield* reaction("hit", state, target, source, reflected, type, events, {
       origin: status === "fireThorns" ? "statusRetaliation" : "retaliation",
       thorns: true,

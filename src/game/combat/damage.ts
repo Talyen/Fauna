@@ -4,7 +4,7 @@ import { takeAttackReflection, publishAttackReflection } from "./attack-reflecti
 import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield, healingAllies } from "../battlefield";
-import { packetPolicy, type DamagePacket, type AttackPacket } from "./policy";
+import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
 import { hasTalent, creaturePassive } from "../progression";
 import type { DamageType } from "../content";
@@ -36,6 +36,22 @@ import {
   type HitPayment,
 } from "./damage-reactions";
 
+/** A transient pair belongs to this attack only, independent of recipient delivery order. */
+export function shareNegate(
+  state: GameState,
+  source: Combatant,
+  targets: Combatant[],
+  blindMiss: boolean,
+): SharedNegate | undefined {
+  if (blindMiss || !isEnemy(source) || !state.boons.includes("devotion-clasp")) return;
+  const bearer = targets.find((unit) => unit.health > 0 && !isEnemy(unit) && ensureCombat(unit).negate);
+  if (!bearer) return;
+  const others = targets.filter((unit) => unit.id !== bearer.id && unit.health > 0 && !isEnemy(unit));
+  const unprotected = others.filter((unit) => !ensureCombat(unit).negate);
+  const recipient = mostInjured(unprotected.length ? unprotected : others);
+  if (recipient) return { bearer, recipientId: recipient.id, spent: false };
+}
+
 /** Consumed once per incoming attack, before its target's defenses or harmful follow-ups. */
 export function* negateAttack(
   state: GameState,
@@ -43,19 +59,38 @@ export function* negateAttack(
   target: Combatant,
   events: GameEvent[],
   allowReflection = true,
+  attackType?: DamageType,
+  shared?: SharedNegate,
 ): Resolution<false | "negated" | "reflected"> {
-  if (source.health <= 0 || target.health <= 0 || !ensureCombat(target).negate) return false;
-  ensureCombat(target).negate = false;
+  if (source.health <= 0 || target.health <= 0) return false;
+  const pair =
+    shared &&
+    isEnemy(source) &&
+    !isEnemy(target) &&
+    shared.bearer.health > 0 &&
+    (target.id === shared.bearer.id || target.id === shared.recipientId) &&
+    (shared.spent || ensureCombat(shared.bearer).negate)
+      ? shared
+      : undefined;
+  const bearer = pair?.bearer ?? target;
+  if (!pair?.spent && !ensureCombat(bearer).negate) return false;
+  const consumed = !pair?.spent;
+  ensureCombat(bearer).negate = false;
+  if (pair) pair.spent = true;
   events.push({
     kind: "status",
     actorId: source.id,
     targetId: target.id,
     status: "negate",
     outcome: "immune",
-    text: `${unitName(target)} negates the attack; Thorns still retaliate`,
+    text:
+      pair && target.id !== bearer.id
+        ? `${unitName(bearer)} protects ${unitName(target)} with Devotion Clasp`
+        : `${unitName(target)} negates the attack; Thorns still retaliate`,
   });
-  yield* thornRetaliation({ state, source, target, events });
+  yield* thornRetaliation({ state, source, target, events, type: attackType });
   if (
+    consumed &&
     allowReflection &&
     source.health > 0 &&
     target.health > 0 &&
@@ -150,7 +185,16 @@ export function* hit(
   }
   const negation =
     value > 0 && options.origin === "ability" && !options.blindMiss
-      ? yield* reaction("negateAttack", state, source, target, events, options.delivery !== "reflection")
+      ? yield* reaction(
+          "negateAttack",
+          state,
+          source,
+          target,
+          events,
+          options.delivery !== "reflection",
+          type,
+          options.sharedNegate,
+        )
       : false;
   if (negation === "negated") return undefined;
   if (
@@ -348,6 +392,7 @@ export function* resolveHit(
     type === "physical" &&
     ensureCombat(source)[talentRule("bleed.parting-cut").state];
   if (partingCut) ensureCombat(source)[talentRule("bleed.parting-cut").state] = false;
+  const ordinaryDamage = damage;
   if (critical) damage *= 2;
   const blockRatio = blockEfficiency(state, target, type);
   const payment = blockPayment(damage, target.block, blockRatio);
@@ -369,6 +414,15 @@ export function* resolveHit(
     ? armoredDamage(damage + blocked, stats.armor)
     : damage + blocked;
   if (armorApplies(state, target, type, source, options)) damage = armoredDamage(damage, stats.armor);
+  const criticalBonusDamage = critical
+    ? Math.max(
+        0,
+        effectDamage -
+          (armorApplies(state, target, type, source, options)
+            ? armoredDamage(ordinaryDamage, stats.armor)
+            : ordinaryDamage),
+      )
+    : 0;
   if (direct && alliedSource && !alliedTarget && critical && state.boons.includes("crater-punch"))
     damage += Math.round(blocked / boonRule("crater-punch").divisor);
   const lost = loseHealth(state, target, damage, events);
@@ -444,6 +498,26 @@ export function* resolveHit(
       );
     if (statusResult.appliedControl && source.health > 0)
       yield* reaction("controlRewards", state, source, target, type, events);
+  }
+  if (
+    criticalBonusDamage > 0 &&
+    alliedSource &&
+    !alliedTarget &&
+    source.health > 0 &&
+    target.health > 0 &&
+    state.boons.includes("eclipse-protractor")
+  ) {
+    const result = yield* reaction(
+      "applyHarmfulStatus",
+      state,
+      source,
+      target,
+      criticalBonusDamage,
+      "freeze",
+      events,
+    );
+    if (result.appliedControl) yield* reaction("controlRewards", state, source, target, "freeze", events);
+    for (const depletion of result.depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
   }
   // Absorbed critical hits still land; only damage-based procs require positive damage.
   if (

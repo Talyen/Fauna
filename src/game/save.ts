@@ -5,7 +5,7 @@ import { PEARL } from "./content/creatures/memento";
 import { battlefield } from "./battlefield";
 import { needsCampfire, merchantPriceRange } from "./destinations";
 import { freeze } from "immer";
-import { MAX_HAND_SIZE } from "./card-zones";
+import { MAX_HAND_SIZE, handCapacity } from "./card-zones";
 import {
   starterCount,
   starterSpecies,
@@ -279,7 +279,8 @@ function validateBattle(state: BattleState) {
   invalid(
     ![...state.team, ...state.reserves].some((c) => c.health > 0) ||
       !battle.enemies.some((e) => e.health > 0) ||
-      (battle.buffer.length > 0 && battle.hand.length < MAX_HAND_SIZE) ||
+      battle.hand.length > handCapacity(state) ||
+      (battle.buffer.length > 0 && battle.hand.length < handCapacity(state)) ||
       zones.length !== state.cards.length ||
       state.cards.some((c) => !zones.includes(c.id)),
   );

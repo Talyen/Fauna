@@ -6,6 +6,16 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "geode-anvil": boon({}, () => "Block cannot decay below Armor"),
+    "journey-loom": boon({}, () => "Returning an ally’s card to your hand draws another ally’s card"),
+    "devotion-clasp": boon({}, () => "Negate also protects another ally from the same attack"),
+    "prism-chisel": boon({}, () => "Purging enemy Armor deals equal Light damage to that enemy"),
+    "eclipse-protractor": boon({}, () => "Critical Hits add Freeze build-up equal to the bonus damage"),
+    "wonder-ball-maze": boon({}, () => "Excess Stun and Freeze build-up spreads to other enemies"),
+    "sleepers-urn": boon({}, () => "Stun and Freeze build-up can accumulate during enemy immunity"),
+    "facet-abacus": boon({ slots: 1 }, () => "Gain an additional hand card slot"),
+    "thornheart-ring": boon({}, () => "Thorns does not decay when retaliating against Bleeding enemies"),
+    "moonboat-toy": boon({}, () => "Water attacks do not trigger Thorns damage"),
     "pearl-sieve": boon({}, () => "Purge removes an extra effect from enemies with Block"),
     "tide-anklet": boon({}, () => "Swapping allies both keep the higher Block total"),
     "obsidian-pitcher": boon({ divisor: 2 }, () => "Overflow Leech applies half as much Burn to the enemy"),
