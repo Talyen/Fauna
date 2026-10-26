@@ -42,7 +42,12 @@ export function ordinaryAttackFacts(
   def: Extract<CardDefinition, { effect: "attack" }>,
   value: number,
   enemy: Enemy,
+  manaCost: number = def.cost,
 ): OrdinaryHit[] {
+  // The engine pays before damage modifiers read Mana; free grants retain the full pool.
+  const paid = manaCost
+    ? { ...state, battle: { ...state.battle, mana: state.battle.mana - manaCost } }
+    : state;
   const negated = enemy.combat.negate || enemy.combat.attackReflection;
   const lastCardCritical = def.criticalWhenLastCard && state.battle.hand.length === 1;
   const erosion = state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0;
@@ -50,7 +55,7 @@ export function ordinaryAttackFacts(
   return [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
     const baseDamage = modifiedDamage(
-      state,
+      paid,
       actor,
       enemy,
       value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1),

@@ -33,6 +33,8 @@ export async function snapshot(
   sequence: number,
   parents: readonly CloudSnapshot[] = [],
 ): Promise<CloudSnapshot> {
+  // Own membership before hashing yields; callers may still own the input array.
+  parents = [...parents];
   if (parents.some((parent) => parent.profile !== identity.profile))
     throw new Error("Cloud ancestry belongs to another profile.");
   if (new Set(parents.map((parent) => parent.id)).size > MAX_ANCESTORS)
