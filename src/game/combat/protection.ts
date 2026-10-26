@@ -279,7 +279,8 @@ export function* healthThresholds(
 ): Resolution<void> {
   const stats = ensureCombat(unit);
   if (!isEnemy(unit) && unit.health > 0) {
-    if (before >= maximumHealth(unit) / 2 && unit.health < maximumHealth(unit) / 2) {
+    const after = unit.health;
+    if (before >= maximumHealth(unit) / 2 && after < maximumHealth(unit) / 2) {
       if (hasTalent(state, "armor.steadfast"))
         yield* reaction("grantArmor", state, unit, talentRule("armor.steadfast").amount, events);
       if (hasTalent(state, "health.desperate-guard") && !stats.desperateGuardUsed) {
@@ -289,7 +290,8 @@ export function* healthThresholds(
     }
     if (
       before >= maximumHealth(unit) / (100 / talentRule("health.last-resort").percent) &&
-      unit.health < maximumHealth(unit) / (100 / talentRule("health.last-resort").percent) &&
+      after < maximumHealth(unit) / (100 / talentRule("health.last-resort").percent) &&
+      unit.health > 0 &&
       hasTalent(state, "health.last-resort")
     )
       yield* reaction("removeEffects", unit, "cleanse", harmfulStatuses.length + 1, events, state);
