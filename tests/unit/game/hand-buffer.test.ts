@@ -2,8 +2,7 @@ import { addReserve, swapFixture, prepareDestination, accept, run, teamRun } fro
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { dispatch } from "../../../src/game/engine";
-import { previewPlay } from "../../../src/game/preview";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { draw, drawKeyword, receiveCard } from "../../../src/game/card-zones";
 import { shuffle } from "../../../src/game/random";
@@ -246,7 +245,7 @@ describe("hidden hand overflow", () => {
     expect(rejected.accepted).toBe(false);
     expect(rejected.state).toBe(s);
     const before = encodeSave(s);
-    const preview = previewPlay(s, s.battle!.hand[0]!);
+    const preview = previewCard(s, s.battle!.hand[0]!);
     expect(preview.state.battle!.hand.at(-1)).toBe(first);
     expect(encodeSave(s)).toBe(before);
     s = accept(s, { type: "play", cardId: s.battle!.hand[0]! });

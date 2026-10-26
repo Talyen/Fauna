@@ -78,6 +78,31 @@ it("retains Dodge and its retaliation together in the same alternative", () => {
   expect(dodges).toBeGreaterThan(0);
 });
 
+it("keeps unchanged recipients as possible outcomes when another branch affects them", () => {
+  const game = ready();
+  const changed = produce(game, (state) => {
+    state.team[0]!.health -= 1;
+  });
+  const model = playPreviewModel(
+    game,
+    {
+      kind: "complete",
+      replays: 2,
+      outcomes: [
+        { accepted: true, state: game, events: [] },
+        { accepted: true, state: changed, events: [] },
+      ],
+    },
+    "enemy-0",
+  );
+  expect(model.affected.has("ally-0")).toBe(true);
+  const alternatives = model.units.get("ally-0")?.alternatives;
+  expect(alternatives?.map((outcome) => outcome.health)).toEqual([
+    game.team[0]!.health,
+    changed.team[0]!.health,
+  ]);
+});
+
 it("keeps conditional knockouts conditional and gives every visible branch an accessible explanation", () => {
   const game = ready();
   const forecast = playPreviewModel(

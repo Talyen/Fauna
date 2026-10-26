@@ -13,11 +13,10 @@ import {
 import { drawKeyword } from "../../../src/game/card-zones";
 import * as content from "../../../src/game/content";
 import { definition, species, TALENTS } from "../../../src/game/content";
-import { dispatch } from "../../../src/game/engine";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { beginBattle } from "../../../src/game/journey";
 import { canBuyTalent } from "../../../src/game/progression";
 import { cardCost } from "../../../src/game/ability-rules";
-import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent, GameState } from "../../../src/game/types";
 import { prepareDestination, accept, run, teamRun } from "../../support/game";
@@ -473,7 +472,7 @@ it.each([
       // Keep the native encounter and save contract, but make its defenses durable for both plays.
       target.block = 1000;
       const command = { type: "play" as const, cardId: card.id, targetId: target.id, autoEndTurn: false };
-      const preview = previewPlay(state, card.id, target.id);
+      const preview = previewCard(state, card.id, target.id);
       const result = dispatch(state, command);
       expect(result.accepted).toBe(true);
       if (
@@ -534,7 +533,7 @@ it("talent Gold survives defeat and resume, is reported once, and previews canno
   target.health = 1;
   target.combat.poison = 1;
   const before = encodeSave(state);
-  const preview = previewPlay(state, card.id, target.id);
+  const preview = previewCard(state, card.id, target.id);
   expect(preview.state.currency).toBeGreaterThanOrEqual(3);
   expect(encodeSave(state)).toBe(before);
   const won = accept(state, { type: "play", cardId: card.id, targetId: target.id, autoEndTurn: false });

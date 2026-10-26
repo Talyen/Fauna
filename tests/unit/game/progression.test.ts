@@ -12,7 +12,7 @@ import {
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, it, expect } from "vitest";
 import { produce } from "immer";
-import { createGame, dispatch } from "../../../src/game/engine";
+import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import {
   availablePoints,
@@ -24,7 +24,6 @@ import {
 } from "../../../src/game/progression";
 import { TALENTS } from "../../../src/game/content";
 import { cardCost } from "../../../src/game/ability-rules";
-import { previewPlay } from "../../../src/game/preview";
 
 it("caps each talent tree's budget and requires every earlier row after purchases or resets", () => {
   for (const keyword of KEYWORDS) {
@@ -65,10 +64,10 @@ describe("keyword progression and rewards", () => {
         ? "enemy-0"
         : "ally-0";
     const before = encodeSave(s);
-    const preview = previewPlay(s, card.id, def);
+    const preview = previewCard(s, card.id, def);
     expect(preview.accepted).toBe(true);
     expect(preview.state.keywordXP).toEqual({});
-    expect(previewPlay(s, card.id, def)).toEqual(preview);
+    expect(previewCard(s, card.id, def)).toEqual(preview);
     expect(encodeSave(s)).toBe(before);
     const result = dispatch(s, { type: "play", cardId: card.id, targetId: def });
     expect(result.accepted).toBe(true);
