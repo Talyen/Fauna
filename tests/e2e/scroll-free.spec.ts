@@ -12,57 +12,58 @@ import { expectBattleGeometry } from "./support/battle-layout";
 import { captureFrame, captureScreen, settleScreen } from "./support/rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud-snapshots";
 
-for (const [width, height] of [
-  [1280, 720],
-  [1920, 1080],
-] as const)
-  test(`automatic cloud recovery and desktop Settings fit ${width}×${height} with enlarged text`, async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width, height });
-    const identity = {
-      available: true,
-      device: "a".repeat(32),
-      profile: "b".repeat(32),
-      importAvailable: false,
-    };
-    const remote = await Promise.all(
-      [8, 9].map((seed) =>
-        snapshot(encodeSave(run(seed)), { ...identity, device: String(seed).repeat(32) }, 1),
-      ),
-    );
-    const files = Object.fromEntries(remote.map((entry) => [cloudName(entry), JSON.stringify(entry)]));
-    await page.addInitScript(
-      ({ identity, files, save }) => {
-        localStorage.setItem("fauna.text-scale", "1.25");
-        window.faunaDesktop = {
-          readCandidates: async () => [{ source: "local", data: save }],
-          writeSave: async () => {},
-          quit: async () => {},
-          onCloseRequested: () => () => {},
-          cloud: {
-            identity: async () => identity,
-            readLocal: async () => null,
-            writeLocal: async () => {},
-            preserve: async () => {},
-            importStandalone: async () => [],
-            list: async () => Object.keys(files),
-            read: async (name) => files[name] ?? null,
-            write: async (name, data) => {
-              files[name] = data;
-            },
+test("automatic cloud recovery and desktop Settings fit both sizes with enlarged text", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  const identity = {
+    available: true,
+    device: "a".repeat(32),
+    profile: "b".repeat(32),
+    importAvailable: false,
+  };
+  const remote = await Promise.all(
+    [8, 9].map((seed) =>
+      snapshot(encodeSave(run(seed)), { ...identity, device: String(seed).repeat(32) }, 1),
+    ),
+  );
+  const files = Object.fromEntries(remote.map((entry) => [cloudName(entry), JSON.stringify(entry)]));
+  await page.addInitScript(
+    ({ identity, files, save }) => {
+      localStorage.setItem("fauna.text-scale", "1.25");
+      window.faunaDesktop = {
+        readCandidates: async () => [{ source: "local", data: save }],
+        writeSave: async () => {},
+        quit: async () => {},
+        onCloseRequested: () => () => {},
+        cloud: {
+          identity: async () => identity,
+          readLocal: async () => null,
+          writeLocal: async () => {},
+          preserve: async () => {},
+          importStandalone: async () => [],
+          list: async () => Object.keys(files),
+          read: async (name) => files[name] ?? null,
+          write: async (name, data) => {
+            files[name] = data;
           },
-        };
-      },
-      { identity, files, save: encodeSave(run(7)) },
-    );
-    await openHome(page);
-    await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
-    await expect(page.getByRole("alert")).toHaveCount(0);
+        },
+      };
+    },
+    { identity, files, save: encodeSave(run(7)) },
+  );
+  await openHome(page);
+  await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  for (const width of [1280, 1920]) {
+    await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
     await captureScreen(page, { path: `reports/scroll-free/cloud-${width}.png` });
-    await page.getByRole("button", { name: "Settings", exact: true }).click();
+  }
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  for (const width of [1280, 1920]) {
+    await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
     await captureScreen(page, { path: `reports/scroll-free/cloud-settings-${width}.png` });
-  });
+  }
+});
 
 async function everyPage(root: Locator, check: (page: number) => Promise<void>) {
   for (let count = 0; count < 100; count++) {
@@ -284,8 +285,8 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         await expectScrollFree(page);
         await page.keyboard.press("Escape");
         await expect(card).toHaveAttribute("aria-pressed", "false");
-        expect(await state(page)).toEqual(before);
       }
+      expect(await state(page)).toEqual(before);
       await page.mouse.move(0, 0);
       await captureScreen(page, { path: `reports/scroll-free/battle-${width}-${height}-${scale}.png` });
       const opener = page.getByRole("button", { name: "Inspect Draw Pile" });

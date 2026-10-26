@@ -169,22 +169,6 @@ it("forecasts Block absorption, Health damage and Stun buildup from the authorit
   expect(before.battle!.enemies[0]!.block).toBe(1);
 });
 
-it("shows the acting creature's secondary effects separately from the chosen ally", async () => {
-  const { container, card, send } = open();
-  await userEvent.click(card("guard"));
-  await userEvent.hover(
-    container.querySelector<HTMLButtonElement>('[data-actor-id="ally-1"] .creature-card')!,
-  );
-  const actor = container.querySelector('[data-actor-id="ally-0"]')!;
-  const recipient = container.querySelector('[data-actor-id="ally-1"]')!;
-  expect(actor.querySelector(".target-preview")?.textContent).toContain("Dodge 0 → 10");
-  expect(recipient.querySelector(".target-preview")?.textContent).toContain("0 → 6");
-  expect(actor.hasAttribute("data-acting")).toBe(true);
-  expect(actor.hasAttribute("data-active-target")).toBe(false);
-  expect(recipient.hasAttribute("data-active-target")).toBe(true);
-  expect(send).not.toHaveBeenCalled();
-});
-
 it("moves between battle rows and reaches hand-side controls with directional input", () => {
   const { container, card } = open(
     produce(fixture(), (game) => {
@@ -263,13 +247,21 @@ it("keeps automatic cards unavailable when Mana is insufficient", async () => {
   expect(screen.getByText("Not enough Mana.")).toBeTruthy();
 });
 
-it("commits a chosen ally only when that ally is activated", async () => {
+it("previews actor and ally effects separately, then commits only the activated ally", async () => {
   const { container, card, send } = open();
   await userEvent.click(card("guard"));
-  expect(send).not.toHaveBeenCalled();
-  await userEvent.click(
+  await userEvent.hover(
     container.querySelector<HTMLButtonElement>('[data-actor-id="ally-1"] .creature-card')!,
   );
+  const actor = container.querySelector('[data-actor-id="ally-0"]')!;
+  const recipient = container.querySelector('[data-actor-id="ally-1"]')!;
+  expect(actor.querySelector(".target-preview")?.textContent).toContain("Dodge 0 → 10");
+  expect(recipient.querySelector(".target-preview")?.textContent).toContain("0 → 6");
+  expect(actor.hasAttribute("data-acting")).toBe(true);
+  expect(actor.hasAttribute("data-active-target")).toBe(false);
+  expect(recipient.hasAttribute("data-active-target")).toBe(true);
+  expect(send).not.toHaveBeenCalled();
+  await userEvent.click(recipient.querySelector<HTMLButtonElement>(".creature-card")!);
   expect(send).toHaveBeenCalledExactlyOnceWith({
     type: "play",
     cardId: card("guard").dataset.cardId,

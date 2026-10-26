@@ -1,44 +1,45 @@
-import { reloadHome, test, seed, resume } from "./support/session";
+import { reloadHome, test, seed, state, resume } from "./support/session";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { authoredPack, prepareDestination, run } from "../support/game";
 import type { GameState } from "../../src/game/types";
-for (const width of [1280, 1920]) {
-  test(`Campfire ${width === 1280 ? "heals once, resumes and enters the boss" : "layout fits"} at ${width}`, async ({
-    page,
-  }) => {
-    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
-    const game = produce(run(), (s) => {
-      prepareDestination(s);
-      s.encounter = 3;
-      s.journey!.victories = s.encounter;
-      s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
-      s.team[0]!.health = 0;
-      s.team[1]!.health = 7;
-    });
-    await seed(page, game);
-    await resume(page);
-    await page.getByRole("button", { name: "Visit Campfire", exact: true }).click();
-    await expect(page.locator(".campfire-screen")).toBeVisible();
-    await captureScreen(page, { path: `reports/combat-campfire-${width}.png` });
-    if (width !== 1280) return;
-    await page.getByRole("button", { name: "Rest", exact: true }).click();
-    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-    await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(0);
-    const rested = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
-    expect(rested.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
-    await reloadHome(page);
-    await page.getByRole("button", { name: "Continue", exact: true }).click();
-    await expect(page.getByRole("button", { name: /^Boss: / })).toBeVisible();
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(rested);
-    await page.getByRole("button", { name: /^Boss: / }).click();
-    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-    const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
-    expect(saved.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
-    expect(saved.expedition?.pack).toEqual(game.expedition!.pack);
+test("Campfire fits both sizes, heals once, resumes and enters the boss", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  const game = produce(run(), (s) => {
+    prepareDestination(s);
+    s.encounter = 3;
+    s.journey!.victories = s.encounter;
+    s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
+    s.team[0]!.health = 0;
+    s.team[1]!.health = 7;
   });
-}
+  await seed(page, game);
+  await resume(page);
+  await page.getByRole("button", { name: "Visit Campfire", exact: true }).click();
+  const beforeRest = await state(page);
+  await expect(page.locator(".campfire-screen")).toBeVisible();
+  for (const width of [1280, 1920]) {
+    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+    await captureScreen(page, { path: `reports/combat-campfire-${width}.png` });
+    expect(await state(page)).toEqual(beforeRest);
+  }
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.getByRole("button", { name: "Rest", exact: true }).click();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+  await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(0);
+  const rested = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
+  expect(rested.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
+  await reloadHome(page);
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(page.getByRole("button", { name: /^Boss: / })).toBeVisible();
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(rested);
+  await page.getByRole("button", { name: /^Boss: / }).click();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
+  expect(saved.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
+  expect(saved.expedition?.pack).toEqual(game.expedition!.pack);
+});
 
 test("mouse targeting previews without committing and stays stable across live resize", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
