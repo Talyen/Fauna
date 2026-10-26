@@ -48,11 +48,43 @@ ownership and documentation checks. Full compilation, broader tests, balance,
 hosted CI, native desktop, Windows packaging, physical controllers, Steam client
 and Steam Deck remain unrun.
 
-Rendered review is pending. The task-owned driver is
-`reports/woven-boons-review.mjs`; it covers baseline comparisons, all portraits
-and rules at 1280 by 720 with 125% text and 1920 by 1080 with default text, keyboard
-paging and focus return, group Food against the production dispatcher, ordinary
-targeting cancellation, reward selection and reload. Its host admission returned
-busy with both shared slots occupied; no preview or browser process started.
-The branch and checkout are retained. Integration requires inspected rendered
-evidence under the [UI review procedure](../UI.md#required-review).
+## Completed rendered review
+
+The completed task-owned Vite browser review is retained under
+`reports/woven-boons-rendered/`, driven by `reports/woven-boons-review.mjs` and
+`reports/woven-boons-denial-review.mjs`. Its render-input identity is
+`6fa8dbbbf71e5bdb4757089314b6dedac7a52f942be782b87aa73668aa4187ad`.
+The primary record contains 28 whole-screen frames and eight interaction records;
+the additional record captures unavailable Food and computed keyword colors.
+No page errors or layout violations occurred. All owned browser and preview
+processes closed before integration.
+
+Conditions were 1280 by 720 with 125% text and 1920 by 1080 with default text,
+using reduced motion. The unchanged battle baseline is pixel-identical at both
+sizes. Inspected all ten portraits and rules for framing, reading order, wrapping,
+contrast and consistent visual weight. Keyboard paging, return to the Pause
+opener and then battle, read-only navigation, group Food effects and draws,
+ordinary Food targeting cancellation, keyboard reward selection and reload
+matched their production contracts. Health and Block feedback appears on every
+recipient, and attempted Food at zero Mana remains unavailable without committing
+state. No player-facing defect required a production change in this review.
+
+The shared keyword palette intentionally retains Alchemy's darker Poison and
+Bleed colors, as required by the UI contract. Their measured dialog contrast is
+3.81:1 and 3.96:1 respectively; the other inspected keyword colors exceed 4.5:1.
+This records the existing palette decision rather than claiming universal 4.5:1
+contrast. The illustrations and layout were reviewed by the agent; the user's
+approval remains scoped to the selected artifacts and effects.
+
+Earlier attempts are retained separately. The primary driver was corrected to
+expect Boons inspection to return to Pause before battle and to identify the
+reward fixture as a Boon screen. The additional driver was aligned with the
+existing documented exceptions for canonical darker keyword colors. These were
+review-driver assumptions, not changes to gameplay or visual styling.
+
+Current main's catalog helper and inferred combat-operation types were preserved
+when merging into the task branch. All 34 focused regressions passed again on
+that combined result in 4.13 seconds. The protected local completion gate owns
+final integration; full CI and the unrun platform boundaries above remain
+separate evidence. The completion tool preserves ignored reports before retiring
+this task checkout.
