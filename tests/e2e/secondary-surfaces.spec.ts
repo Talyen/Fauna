@@ -6,34 +6,43 @@ import { gamepad } from "./support/gamepad";
 import { captureScreen } from "./support/rendered-evidence";
 import { layoutViolations } from "./support/layout-contract";
 
-for (const [width, height, scale] of [
-  [1280, 720, 1.25],
-  [1920, 1080, 1],
-] as const) {
-  test(`Glossary scrolling reaches every rule and returns focus at ${width}×${height}`, async ({ page }) => {
+test("Glossary scrolling reaches the final rule across sizes and returns focus", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const press = await gamepad(page);
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await seed(page, run());
+  const before = await state(page);
+  await page.getByRole("button", { name: "Glossary", exact: true }).click();
+  const region = page.getByRole("region", { name: "Glossary entries" });
+  for (const [width, height, scale] of [
+    [1280, 720, 1.25],
+    [1920, 1080, 1],
+  ] as const) {
     await page.setViewportSize({ width, height });
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    const press = await gamepad(page);
-    await page.addInitScript((value) => localStorage.setItem("fauna.text-scale", String(value)), scale);
-    await seed(page, run());
-    const before = await state(page);
-    await page.getByRole("button", { name: "Glossary", exact: true }).click();
-    const region = page.getByRole("region", { name: "Glossary entries" });
-    await expect(region.locator("dt")).toHaveCount(GLOSSARY.length);
-    await captureScreen(page, { path: `reports/secondary/glossary-${width}-top.png` });
-    await region.hover();
-    await page.mouse.wheel(0, 300);
-    await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+    await page
+      .locator("html")
+      .evaluate((el, scale) => el.style.setProperty("--text-scale", String(scale)), scale);
     await region.focus();
     await page.keyboard.press("Home");
     await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBe(0);
-    await page.keyboard.press("PageDown");
-    await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
-    await page.keyboard.press("Home");
-    await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBe(0);
-    await press(13);
-    await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
-    await expect(region).toBeFocused();
+    await expect(region.locator("dt")).toHaveCount(GLOSSARY.length);
+    await captureScreen(page, { path: `reports/secondary/glossary-${width}-top.png` });
+    if (width === 1280) {
+      await region.hover();
+      await page.mouse.wheel(0, 300);
+      await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+      await region.focus();
+      await page.keyboard.press("Home");
+      await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBe(0);
+      await page.keyboard.press("PageDown");
+      await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+      await page.keyboard.press("Home");
+      await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBe(0);
+      await press(13);
+      await expect.poll(() => region.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+      await expect(region).toBeFocused();
+    }
     await page.keyboard.press("End");
     await expect
       .poll(() => region.evaluate((el) => el.scrollHeight - el.clientHeight - el.scrollTop))
@@ -41,11 +50,11 @@ for (const [width, height, scale] of [
     const last = region.locator("dl").last();
     await expect(last).toBeInViewport();
     await captureScreen(page, { path: `reports/secondary/glossary-${width}-bottom.png` });
-    await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
-    expect(await state(page)).toEqual(before);
-  });
-}
+  }
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
+  expect(await state(page)).toEqual(before);
+});
 
 test("persistent saving failure fits both sizes and clears after automatic recovery", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });

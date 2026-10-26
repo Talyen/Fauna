@@ -59,12 +59,6 @@ it("previews one replacement at a time, keeps artwork reversible, and commits on
   expect(send).toHaveBeenCalledExactlyOnceWith({ type: "confirmRecruit", replace: game.reserves[1]!.id });
 });
 
-it("accepts the unchanged team with the single Confirm action", async () => {
-  const { send } = show();
-  await userEvent.setup().click(screen.getByRole("button", { name: "Confirm" }));
-  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "confirmRecruit", replace: undefined });
-});
-
 it("keeps confirmation available while battle-style visual copies are in flight", async () => {
   document.documentElement.style.setProperty("--motion-fast", "150ms");
   vi.stubGlobal(

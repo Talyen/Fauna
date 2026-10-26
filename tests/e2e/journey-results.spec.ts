@@ -66,8 +66,26 @@ for (const [width, enlarged, outcome] of [
     } else if (ending.type === "endTurn") {
       await page.getByRole("button", { name: "End turn", exact: true }).click();
     } else {
+      await expect(page.getByRole("button", { name: "End journey", exact: true })).toHaveCount(0);
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      await page.getByRole("button", { name: "End journey", exact: true }).click();
+      const end = page.getByRole("button", { name: "End journey", exact: true });
+      const destructive = await end.evaluate((element) => {
+        const probe = document.createElement("span");
+        probe.style.color = "var(--destructive-text)";
+        element.append(probe);
+        const color = getComputedStyle(probe).color;
+        probe.remove();
+        return color;
+      });
+      await expect(end).toHaveCSS("color", destructive);
+      await expect(end.locator("svg")).toHaveCSS("stroke", destructive);
+      await end.hover();
+      await expect(end).toHaveCSS("color", destructive);
+      await expect(end.locator("svg")).toHaveCSS("stroke", destructive);
+      expect(await state(page)).toEqual(game);
+      await end.click();
+      await expect(page.getByRole("alertdialog")).toHaveCount(0);
+      await expect(page.getByRole("button", { name: "Play", exact: true })).toHaveCount(0);
     }
     game = accept(game, ending);
     if (outcome === "victory") {
@@ -147,7 +165,6 @@ for (const input of ["keyboard", "controller"] as const)
     await page.getByRole("button", { name: "Main menu", exact: true }).click();
     await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
     expect(await state(page)).toEqual(won);
     await page.getByRole("button", { name: "Collection", exact: true }).click();
     await expect(page.getByRole("button", { name: "Inspect Prismram" })).toHaveCount(1);
