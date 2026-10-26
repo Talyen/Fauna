@@ -17,30 +17,35 @@ type SupplementalRule<K extends SupplementalKind> = {
 };
 type SupplementalRules = { [K in SupplementalKind]: SupplementalRule<K> };
 
+// Extras are fixed, global effects unless their authored kind overrides a policy.
+const global = {
+  scaling: "fixed",
+  enemy: true,
+  ordinaryAttackUtility: false,
+  keyword: null,
+  delivery: () => "global",
+} as const satisfies Omit<SupplementalRule<SupplementalKind>, "describe">;
+
 const rules: SupplementalRules = freeze(
   {
     damage: {
+      ...global,
       ordinaryAttackUtility: true,
       scaling: "power",
-      enemy: true,
       keyword: "damageType",
-      delivery: () => "global",
       describe: (effect, _card, label) =>
         `Deal ${effect.amount} ${label(effect.damageType)} damage${effect.leech ? " with Leech" : ""}`,
     },
     heal: {
-      ordinaryAttackUtility: false,
+      ...global,
       scaling: "power",
-      enemy: true,
       keyword: "health",
       delivery: (effect) => (effect.target === "recipient" ? "recipient" : "global"),
       describe: (effect) =>
         `Restore ${effect.amount} Health${effect.target === "recipient" ? " to an injured ally" : ""}`,
     },
     cleanse: {
-      ordinaryAttackUtility: false,
-      scaling: "fixed",
-      enemy: true,
+      ...global,
       keyword: "cleanse",
       delivery: (effect) => (effect.target === "recipient" ? "recipient" : "global"),
       describe: (effect) =>
@@ -51,79 +56,56 @@ const rules: SupplementalRules = freeze(
             : `Cleanse acting creature: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`,
     },
     status: {
+      ...global,
       ordinaryAttackUtility: true,
-      scaling: "fixed",
-      enemy: true,
       keyword: "status",
-      delivery: () => "global",
       describe: (effect, _card, label) => `Gain ${effect.amount} ${label(effect.status)}`,
     },
     drawKeyword: {
-      ordinaryAttackUtility: false,
-      scaling: "fixed",
+      ...global,
       enemy: false,
-      keyword: null,
-      delivery: () => "global",
       describe: (effect, _card, label) => `Draw a ${label(effect.keyword)} card`,
     },
     draw: {
+      ...global,
       ordinaryAttackUtility: true,
-      scaling: "fixed",
       enemy: false,
-      keyword: null,
-      delivery: () => "global",
       describe: (effect, card) =>
         (card.effect === "swapLowest" || card.effect === "swapChosen") && effect.amount === 1
           ? "Draw a Card"
           : `Draw ${effect.amount} card${effect.amount === 1 ? "" : "s"}`,
     },
     mana: {
+      ...global,
       ordinaryAttackUtility: true,
-      scaling: "fixed",
       enemy: false,
       keyword: "mana",
-      delivery: () => "global",
       describe: (effect) => `Gain ${effect.amount} Mana`,
     },
     nullifyFreeze: {
-      ordinaryAttackUtility: false,
-      scaling: "fixed",
-      enemy: true,
-      keyword: null,
-      delivery: () => "global",
+      ...global,
       describe: () => "Nullify the next Freeze damage",
     },
     blind: {
+      ...global,
       ordinaryAttackUtility: true,
-      scaling: "fixed",
-      enemy: true,
-      keyword: null,
-      delivery: () => "global",
       describe: () => "Blind all enemies",
     },
     meltArmor: {
+      ...global,
       ordinaryAttackUtility: true,
-      scaling: "fixed",
-      enemy: true,
       keyword: "purge",
-      delivery: () => "global",
       describe: (effect) => `Remove ${effect.amount}% of all enemies’ Armor, rounded up`,
     },
     reflect: {
-      ordinaryAttackUtility: false,
-      scaling: "fixed",
-      enemy: true,
-      keyword: null,
-      delivery: () => "global",
+      ...global,
       describe: (effect) =>
         effect.status === "burn" ? "Reflect the next Burn" : "Reflect the next harmful status effect",
     },
     purge: {
+      ...global,
       ordinaryAttackUtility: true,
-      scaling: "fixed",
-      enemy: true,
       keyword: "purge",
-      delivery: () => "global",
       describe: (effect) => `Purge target: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`,
     },
   },
