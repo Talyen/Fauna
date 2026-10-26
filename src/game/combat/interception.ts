@@ -1,5 +1,5 @@
 import { battlefield, isEnemy } from "../battlefield";
-import { creaturePassive } from "../progression";
+import { passiveAmount } from "../progression";
 import { chance } from "../chance";
 import { maximumHealth, unitName, type Combatant } from "./state";
 import type { GameEvent, GameState } from "../types";
@@ -21,10 +21,7 @@ export function interceptAttack(
       target.health / maximumHealth(target) >= protector.health / maximumHealth(protector)
     )
       continue;
-    const percent = creaturePassive(enemy ? undefined : state, protector.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "gallantry" ? effect.amount : 0),
-      0,
-    );
+    const percent = passiveAmount(enemy ? undefined : state, protector.species, "gallantry");
     if (!chance(state, percent / 100, enemy, events)) continue;
     events.push({
       kind: "action",

@@ -4,7 +4,7 @@ import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
 import { enemyCard } from "./card-rules";
-import { creaturePassive, cardKeywords, hasTalent } from "./progression";
+import { creaturePassive, cardKeywords, hasTalent, passiveAmount } from "./progression";
 import type { BattleState, Card, Creature, GameState } from "./types";
 
 export function metronomeActorValid(state: BattleState): boolean {
@@ -116,9 +116,6 @@ export function retainedBlock(
   unit: Pick<Creature, "species" | "block">,
   state?: Pick<GameState, "discovery">,
 ): number {
-  const bonus = creaturePassive(state, unit.species).effects.reduce(
-    (sum, effect) => sum + (effect.kind === "blockRetention" ? effect.amount : 0),
-    0,
-  );
+  const bonus = passiveAmount(state, unit.species, "blockRetention");
   return Math.round((unit.block * (100 + bonus)) / 200);
 }

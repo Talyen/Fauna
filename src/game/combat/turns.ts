@@ -9,7 +9,7 @@ import { chooseEnemyCard } from "./enemy-policy";
 import { lastWarmth } from "./card-modifiers";
 import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { executeAbility } from "./abilities";
-import { creaturePassive } from "../progression";
+import { passiveAmount } from "../progression";
 import {
   ensureCombat,
   gainMana,
@@ -47,10 +47,7 @@ export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[
       : retained;
   const lost = before - unit.block;
   if (lost <= 0 || unit.health <= 0) return;
-  const percent = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
-    (sum, effect) => sum + (effect.kind === "fallenLeaves" ? effect.amount : 0),
-    0,
-  );
+  const percent = passiveAmount(allied ? state : undefined, unit.species, "fallenLeaves");
   if (percent > 0) grantStatus(unit, "thorns", Math.round((lost * percent) / 100), events, state);
   if (allied && state.boons.includes("pleated-pagoda"))
     grantArmor(state, unit, Math.round(lost / boonRule("pleated-pagoda").divisor), events);
@@ -60,10 +57,7 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
   const row = enemy ? state.battle!.enemies : state.team;
   for (const singer of row) {
     if (singer.health <= 0) continue;
-    const amount = creaturePassive(enemy ? undefined : state, singer.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "livingChorus" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(enemy ? undefined : state, singer.species, "livingChorus");
     const recipient =
       amount > 0
         ? mostInjured<import("../combat/index").Combatant>(healingAllies(state, enemy ? "enemy" : "player"))
@@ -74,10 +68,7 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
 export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[]) {
   const row = battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0);
   for (const dreamer of row) {
-    const amount = creaturePassive(enemy ? undefined : state, dreamer.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "unhurried" ? effect.amount : 0),
-      0,
-    );
+    const amount = passiveAmount(enemy ? undefined : state, dreamer.species, "unhurried");
     if (amount <= 0) continue;
     for (const recipient of healingAllies(state, enemy ? "enemy" : "player"))
       if (ensureCombat(recipient).cardsPlayedThisTurn === 0)

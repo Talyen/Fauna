@@ -151,3 +151,24 @@ it("does not mistake another content discriminant for a supported passive kind",
   sources["src/game/content/types.ts"] += 'type Unrelated = {kind: "unrelated"};';
   expect(modifierContractViolations(sources)).toEqual([]);
 });
+
+it("tracks aliased Talent chance and passive queries at their calling owners", () => {
+  const sources = fixture();
+  sources["src/game/owner.ts"] = `
+    import {talentChance as proc} from "./chance";
+    import {passiveAmount as amount} from "./progression";
+    export function hit(state) {
+      if (proc(state, "water.pressure", [])) state.damage++;
+      if (state.boons.includes("icy-heart")) state.damage += 6;
+    }
+    export function copy(state) { return amount(state, "mossguard", "wellRead"); }
+  `;
+  expect(modifierContractViolations(sources)).toEqual([]);
+  sources["src/game/owner.ts"] = sources["src/game/owner.ts"].replace(
+    'amount(state, "mossguard", "wellRead")',
+    'amount(state, "wellRead", "other")',
+  );
+  expect(modifierContractViolations(sources)).toContainEqual(
+    expect.stringContaining("wellRead is not implemented/read by"),
+  );
+});

@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { chance as succeeds } from "../chance";
 import { isEnemy, isRosterCreature, battlefield } from "../battlefield";
-import { hasTalent, creaturePassive } from "../progression";
+import { hasTalent, passiveAmount } from "../progression";
 import { species } from "../content";
 import type { CombatState, Creature, Enemy, GameEvent, GameState } from "../types";
 export const TURN_MANA = 4;
@@ -170,10 +170,7 @@ export function sharedDodgeChance(state: GameState, target: Combatant): number {
   let total = 0;
   for (const unit of row) {
     if (unit.id === target.id || unit.health <= 0) continue;
-    const share = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "shareDodge" ? effect.amount : 0),
-      0,
-    );
+    const share = passiveAmount(allied ? state : undefined, unit.species, "shareDodge");
     total += (ownDodgeChance(state, unit) * share) / 100;
   }
   return total;
@@ -217,10 +214,7 @@ export function openingCriticalBonus(state: GameState, source: Combatant): numbe
   const stats = ensureCombat(source);
   if (stats.firstAttackUsed) return 0;
   stats.firstAttackUsed = true;
-  return creaturePassive(isEnemy(source) ? undefined : state, source.species).effects.reduce(
-    (total, effect) => total + (effect.kind === "earlyBird" ? effect.amount : 0),
-    0,
-  );
+  return passiveAmount(isEnemy(source) ? undefined : state, source.species, "earlyBird");
 }
 
 /** A transient receipt for one positive-to-zero transition; never part of the saved aggregate. */

@@ -1,7 +1,7 @@
 import { battleCardCapacity } from "../card-zones";
 import { speciesCards, species } from "../content";
 import { PEARL } from "../content/creatures/memento";
-import { creaturePassive } from "../progression";
+import { passiveAmount } from "../progression";
 import { roll, shuffle } from "../random";
 import { recycleDiscard, receiveCard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { battlefield, isEnemy } from "../battlefield";
@@ -111,10 +111,7 @@ export function summonEcho(
 /** Exactly once per accepted card, after its effects; summons can answer their own creation. */
 export function courtRemembers(state: BattleState, actor: Combatant, events: GameEvent[]) {
   if (actor.health <= 0) return;
-  const amount = creaturePassive(isEnemy(actor) ? undefined : state, actor.species).effects.reduce(
-    (sum, effect) => sum + (effect.kind === "courtRemembers" ? effect.amount : 0),
-    0,
-  );
+  const amount = passiveAmount(isEnemy(actor) ? undefined : state, actor.species, "courtRemembers");
   if (!amount) return;
   const echoes = (state.battle.minions ?? []).filter(
     (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
