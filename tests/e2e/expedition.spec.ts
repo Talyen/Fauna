@@ -1,36 +1,9 @@
 import { createBattleActor } from "../../src/application/battle-actor";
 import { expect, type Locator } from "@playwright/test";
-import { definition, species } from "../../src/game/content";
+import { species } from "../../src/game/content";
 import { policy, FULL_JOURNEY_SEED, FULL_JOURNEY_COMMAND_BUDGET } from "../support/game";
 import { test, seed, state } from "./support/session";
 import { continueToRecruit, step } from "./support/journey";
-
-test("main menu, draft and pre-battle deck lead into the first battle", async ({ page }) => {
-  await seed(page);
-  await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
-  await page.getByRole("button", { name: "Play", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Begin journey" })).toHaveCount(0);
-  const chosen = (await state(page)).starterOffers[0]!;
-  const name = species(chosen).name;
-  await page.getByRole("button", { name: `Recruit ${name}`, exact: true }).click();
-  expect((await state(page)).phase).toBe("teamSelection");
-  const destination = page.locator(".app:not([inert]) [data-encounter]").first();
-  const deckCards = (await state(page)).cards;
-  await page.getByRole("button", { name: "Deck", exact: true }).click();
-  await expect(page.getByRole("dialog").locator(".action-card")).toHaveCount(3);
-  const inspectedCard = page.getByRole("dialog").locator(".action-card").first();
-  const inspectedId = await inspectedCard.getAttribute("data-card-id");
-  await inspectedCard.click({ button: "right" });
-  await expect(page.locator(".inspection.single-card")).toBeVisible();
-  await page.locator(".inspection.single-card .action-card").hover();
-  await expect(page.getByRole("tooltip")).toContainText(
-    definition(deckCards.find((card) => card.id === inspectedId)!.definitionId).name,
-  );
-  await page.keyboard.press("Escape");
-  await page.keyboard.press("Escape");
-  await destination.click();
-  await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
-});
 
 test("one starter grows a lineup through a full expedition", async ({ page }) => {
   test.setTimeout(120_000);

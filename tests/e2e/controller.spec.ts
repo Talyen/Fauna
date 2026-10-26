@@ -28,7 +28,7 @@ test("manual controller prompts persist and disconnection pauses without changin
   );
   await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await expect(page.locator(".app:not([inert]) .autoplay-control")).toHaveAttribute("aria-pressed", "false");
-  await page.waitForTimeout(800);
+  await page.clock.fastForward(2000);
   expect(await state(page)).toEqual(before);
   await page.getByRole("button", { name: "Glossary", exact: true }).click();
   await page.evaluate(() =>
@@ -66,7 +66,8 @@ test("controller edges, inspect and pause do not repeat a held confirm", async (
       ((window as unknown as { testPad: { buttons: { pressed: boolean }[] } }).testPad.buttons[0]!.pressed =
         true),
   );
-  await page.waitForTimeout(500);
+  await page.clock.runFor(32);
+  await page.clock.fastForward(1000);
   await page.evaluate(
     () =>
       ((window as unknown as { testPad: { buttons: { pressed: boolean }[] } }).testPad.buttons[0]!.pressed =

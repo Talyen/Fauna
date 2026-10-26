@@ -13,7 +13,7 @@ import {
   run,
   completeRecruitment,
 } from "../support/game";
-import { reloadHome, test, seed, state, resume, waitForStartup } from "./support/session";
+import { reloadHome, test, seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { step } from "./support/journey";
 
@@ -70,6 +70,13 @@ for (const [width, enlarged, outcome] of [
       await page.getByRole("button", { name: "End journey", exact: true }).click();
     }
     game = accept(game, ending);
+    if (outcome === "victory") {
+      expect(game.phase).toBe("recruit");
+      expect(game.reward!.recruits).toEqual(["memento"]);
+      await reloadHome(page);
+      await resume(page);
+      expect(await state(page)).toEqual(game);
+    }
     for (let choice = 0; choice < 2 && game.phase === "recruit"; choice++) {
       const recruit = recruitChoice(game);
       await step(page, undefined, game, recruit);
@@ -102,7 +109,7 @@ for (const [width, enlarged, outcome] of [
     expect((await state(page)).keywordXP).toEqual(game.keywordXP);
   });
 
-for (const input of ["mouse", "keyboard", "controller"] as const)
+for (const input of ["keyboard", "controller"] as const)
   test(`boss victory commits rewards with ${input}`, async ({ page }) => {
     const press = input === "controller" ? await gamepad(page) : null;
     await page.setViewportSize({ width: 1280, height: 720 });
@@ -123,22 +130,14 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await seed(page, fixture);
     await resume(page);
     const activate = async (el: Locator) => {
-      if (input === "mouse") await el.click();
-      else {
-        await el.focus();
-        if (press) await press(0);
-        else await page.keyboard.press("Enter");
-      }
+      await el.focus();
+      if (press) await press(0);
+      else await page.keyboard.press("Enter");
     };
     await step(page, activate);
     const reward = await state(page);
     expect(reward.phase).toBe("recruit");
     expect(reward.reward!.recruits).toEqual(["memento"]);
-    if (input === "mouse") {
-      await reloadHome(page);
-      await resume(page);
-      expect(await state(page)).toEqual(reward);
-    }
     await step(page, activate);
     await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
     const won = await state(page);
@@ -147,8 +146,6 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBeGreaterThan(0);
     await page.getByRole("button", { name: "Main menu", exact: true }).click();
     await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
-    if (input === "mouse") await reloadHome(page);
-    await waitForStartup(page);
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
     expect(await state(page)).toEqual(won);

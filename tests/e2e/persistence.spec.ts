@@ -1,9 +1,8 @@
 import { expect } from "@playwright/test";
 import { produce } from "immer";
-import { species, BOONS } from "../../src/game/content";
-import { accept, winBattle, run, bossReward } from "../support/game";
+import { BOONS } from "../../src/game/content";
+import { accept, run, bossReward } from "../support/game";
 import { openHome, reloadHome, test, key, seed, saved, state, resume } from "./support/session";
-import { continueToRecruit } from "./support/journey";
 
 test("last mana saves the full turn before immediate close and does not replay on resume", async ({
   page,
@@ -30,23 +29,7 @@ test("last mana saves the full turn before immediate close and does not replay o
   await expect(reopened.locator(".combat-number")).toHaveCount(0);
 });
 
-test("rewards resume without duplicate XP, currency, recruitment or boons", async ({ page }) => {
-  const recruitReward = winBattle();
-  await seed(page, recruitReward);
-  await resume(page);
-  await reloadHome(page);
-  await resume(page);
-  expect(await state(page)).toEqual(recruitReward);
-  await continueToRecruit(page);
-  expect(await state(page)).toEqual(recruitReward);
-  const recruit = recruitReward.reward!.recruits[0]!;
-  await page.getByRole("button", { name: `Recruit ${species(recruit).name}`, exact: true }).click();
-  const recruited = accept(recruitReward, { type: "recruit", species: recruit });
-  expect(await state(page)).toEqual(recruited);
-  await reloadHome(page);
-  await resume(page);
-  expect(await state(page)).toEqual(recruited);
-
+test("Boon choice resumes without repeating the reward or earnings", async ({ page }) => {
   const fixture = bossReward();
   await seed(page, fixture);
   await resume(page);

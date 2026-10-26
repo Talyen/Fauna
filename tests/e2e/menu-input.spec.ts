@@ -285,7 +285,8 @@ test("mouse use cancels held-stick navigation until release", async ({ page }) =
   await expect(page.getByRole("button", { name: "Play", exact: true })).not.toBeFocused();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "controller");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
-  await page.waitForTimeout(500);
+  await page.clock.fastForward(1000);
+  await pad.frames();
   await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
   await page.evaluate(() => {

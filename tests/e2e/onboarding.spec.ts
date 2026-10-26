@@ -1,6 +1,6 @@
 import { captureScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
-import { CARDS, species } from "../../src/game/content";
+import { CARDS, definition, species } from "../../src/game/content";
 import { reloadHome, test, seed, state, resume } from "./support/session";
 
 for (const [width, enlarged] of [
@@ -13,6 +13,7 @@ for (const [width, enlarged] of [
     await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await seed(page);
+    await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
     if (enlarged) {
       await page.getByRole("button", { name: "Settings", exact: true }).click();
       await page.getByRole("radio", { name: "125%", exact: true }).click();
@@ -70,4 +71,25 @@ for (const [width, enlarged] of [
     const started = await state(page);
     expect([...started.team, ...started.reserves].map((unit) => unit.species)).toEqual([chosen]);
     expect(started.cards).toHaveLength(3);
+    if (enlarged) {
+      const opener = page.getByRole("button", { name: "Deck", exact: true });
+      await opener.click();
+      const deck = page.getByRole("dialog", { name: "Deck", exact: true });
+      await expect(deck.locator(".action-card")).toHaveCount(3);
+      const card = deck.locator(".action-card").first();
+      const id = await card.getAttribute("data-card-id");
+      await card.click({ button: "right" });
+      await expect(page.locator(".inspection.single-card")).toBeVisible();
+      await page.locator(".inspection.single-card .action-card").hover();
+      await expect(page.getByRole("tooltip")).toContainText(
+        definition(started.cards.find((entry) => entry.id === id)!.definitionId).name,
+      );
+      await page.keyboard.press("Escape");
+      await expect(card).toBeFocused();
+      await page.keyboard.press("Escape");
+      await expect(opener).toBeFocused();
+      expect(await state(page)).toEqual(started);
+    }
+    await page.getByRole("button", { name: "Combat", exact: true }).click();
+    await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
   });

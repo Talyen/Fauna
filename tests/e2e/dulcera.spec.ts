@@ -12,33 +12,32 @@ test("Dulcera's abilities restore, protect and exchange the visible team with ke
   await seed(page, dulceraBattle());
   await resume(page);
 
+  const allies = page.getByRole("region", { name: "Player row" });
+  const health = (id: string) =>
+    allies.locator(`[data-actor-id="${id}"]`).getByRole("progressbar", { name: "Health", exact: true });
   const ability = (id: string) => page.locator(`.hand [data-card-id="ally-0:dulcera-${id}"]`);
   await ability("chapel-light").focus();
   await page.keyboard.press("Enter");
-  let game = await state(page);
-  expect(game.team[0]!.health).toBe(23);
-  expect(game.battle!.mana).toBe(4);
+  await expect(health("ally-0")).toHaveAttribute("aria-valuenow", "23");
+  await expect(page.getByRole("button", { name: "Mana 4 of 4", exact: true })).toBeVisible();
 
   await ability("meadow-shelter").focus();
   await page.keyboard.press("Enter");
-  game = await state(page);
-  expect(game.team.map((unit) => unit.block)).toEqual([2, 2, 2]);
-  expect(game.battle!.mana).toBe(3);
+  await expect(allies.getByLabel("Block 2", { exact: true })).toHaveCount(3);
+  await expect(page.getByRole("button", { name: "Mana 3 of 4", exact: true })).toBeVisible();
 
   await ability("hushed-waters").focus();
   await page.keyboard.press("Enter");
-  game = await state(page);
-  expect(game.team[0]!).toMatchObject({
-    id: "backup-coralcurl",
-    health: 13,
-    combat: { poison: 0, freeze: 0, blind: false },
-  });
-  expect(game.team[1]!.combat!.poison).toBe(0);
-  expect(game.reserves[0]!).toMatchObject({ species: "dulcera", combat: { burn: 3 } });
-  expect(game.battle!.mana).toBe(2);
+  await expect(allies.getByRole("button", { name: "Coralcurl", exact: true })).toBeVisible();
+  await expect(allies.getByRole("button", { name: "Dulcera", exact: true })).toHaveCount(0);
+  await expect(health("backup-coralcurl")).toHaveAttribute("aria-valuenow", "13");
+  await expect(allies.getByRole("button", { name: /^(Poison|Freeze|Blind)/ })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Mana 2 of 4", exact: true })).toBeVisible();
   await captureScreen(page, { path: "reports/dulcera/after-abilities.png" });
 
+  const game = await state(page);
   await reloadHome(page);
   await resume(page);
   expect(await state(page)).toEqual(game);
+  await expect(health("backup-coralcurl")).toHaveAttribute("aria-valuenow", "13");
 });

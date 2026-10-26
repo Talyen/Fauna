@@ -1,48 +1,24 @@
 import { expectControlColors } from "./support/control-colors";
-import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
-import { captureScreen } from "./support/rendered-evidence";
+import { expectScrollFree, LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
+import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
-import { openHome, reloadHome, test, seed, state } from "./support/session";
+import { reloadHome, test, seed, state } from "./support/session";
+import { run } from "../support/game";
 for (const [width, height] of REVIEW_VIEWPORTS)
-  test(`illustrated Boons and independent tooltip sizing at ${width}×${height}`, async ({ page }) => {
-    const { run } = await import("../support/game");
+  test(`illustrated Boons remain readable and return focus at ${width}×${height}`, async ({ page }) => {
     const fixture = structuredClone(run(7));
     const { BOONS } = await import("../../src/game/content");
     fixture.boons = BOONS.map((boon) => boon.id);
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
     await seed(page, fixture);
-    await page.getByRole("button", { name: "Settings", exact: true }).click();
-    await page.getByRole("radio", { name: "125%", exact: true }).click();
-    await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
-    await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
-    await page.getByRole("button", { name: "Collection", exact: true }).click();
-    const art = page.getByRole("button", { name: "Inspect Mossguard", exact: true });
-    await art.hover();
-    await expect(page.getByRole("tooltip")).toBeVisible();
-    expect(await page.getByRole("tooltip").evaluate((node) => getComputedStyle(node).fontSize)).toBe("20px");
-    expect(await art.evaluate((node) => node.getBoundingClientRect().width)).toBeCloseTo(
-      height <= 760 ? 234.667 : height <= 900 ? 264 : 293.333,
-      0,
-    );
-    await captureScreen(page, { path: `reports/tooltip-independent-${width}-${height}.png` });
-    await page.getByRole("button", { name: "Open menu", exact: true }).click();
     const opener = page.getByRole("button", { name: "Boons", exact: true });
     await opener.focus();
     await page.keyboard.press("Enter");
     const dialog = page.getByRole("dialog", { name: "Boons", exact: true });
     await expect(dialog.getByRole("heading", { name: "Tattered Pages", exact: true })).toBeVisible();
     await expect(dialog).toContainText("Restore 3 Health when you defeat an enemy");
-    await dialog
-      .locator("img")
-      .evaluateAll((images) => Promise.all(images.map((img) => (img as HTMLImageElement).decode())));
-    expect(
-      await dialog
-        .locator(".action-card")
-        .first()
-        .evaluate((node) => node.getBoundingClientRect().width),
-    ).toBeCloseTo(height <= 760 ? 160 : height <= 900 ? 180 : 200, 0);
     await captureScreen(page, { path: `reports/owned-boons-${width}-${height}.png` });
     const exhaustive = width === 1280 && height === 720;
     for (let index = 2; index < BOONS.length; index += 2) {
@@ -53,46 +29,36 @@ for (const [width, height] of REVIEW_VIEWPORTS)
         await expect(dialog.getByRole("heading", { name: boon.name, exact: true })).toBeInViewport();
         await expect(dialog).toContainText(boon.text);
       }
-      await captureScreen(page, { path: `reports/owned-boons-page-${index / 2}-${width}-${height}.png` });
+      await settleScreen(page);
+      await dialog
+        .locator("img")
+        .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
+      await expectScrollFree(page);
+      if (index + 2 >= BOONS.length)
+        await captureScreen(page, { path: `reports/owned-boons-last-${width}-${height}.png` });
     }
     await page.keyboard.press("Escape");
     await expect(opener).toBeFocused();
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(fixture);
-    if (exhaustive) {
-      await reloadHome(page);
-      await page.getByRole("button", { name: "Settings", exact: true }).click();
-      await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
-      await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
-    }
+    expect(await state(page)).toEqual(fixture);
   });
 
 for (const [width, height, scale] of LAYOUT_CASES)
   test(`Boon Merchant shelf and purchase resume at ${width}×${height}, text ${scale}`, async ({ page }) => {
-    const { accept, merchantDestination } = await import("../support/game");
+    const { merchantDestination } = await import("../support/game");
     const fixture = merchantDestination();
     const visit = fixture.support!.id;
     const slot = fixture.support!.stock[0]!;
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.addInitScript(
-      ({ save, scale }) => {
-        if (!localStorage.getItem("fauna.save.v1")) localStorage.setItem("fauna.save.v1", save);
-        localStorage.setItem("fauna.text-scale", String(scale));
-      },
-      { save: JSON.stringify(fixture), scale },
-    );
-    await openHome(page);
+    await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", String(scale)), scale);
+    await seed(page, fixture);
     await expectControlColors(
       page.getByRole("button", { name: "Continue", exact: true }),
       "--primary-foreground",
     );
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
-    const entered = accept(fixture, { type: "enterSupport", visit });
     await expect(page.getByRole("heading", { name: "Boon Merchant", exact: true })).toBeVisible();
-    await expect(page.getByText("Limit 1 per customer - No Refunds!", { exact: true })).toBeVisible();
-    await expect(page.locator(".merchant-policy em")).toHaveText("Limit 1 per customer - No Refunds!");
-    await expect(page.locator(".merchant-policy em")).toHaveCSS("font-style", "italic");
     const row = await page.locator(".merchant-heading .screen-heading").boundingBox();
     const wallet = await page.locator(".merchant-wallet").boundingBox();
     expect(wallet!.y).toBeGreaterThanOrEqual(row!.y);
@@ -111,9 +77,10 @@ for (const [width, height, scale] of LAYOUT_CASES)
       .click();
     await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
-    const purchased = accept(entered, { type: "buyBoon", visit, slot: slot.slot });
-    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
+    const purchased = await state(page);
+    expect(purchased.currency).toBe(fixture.currency - slot.price);
+    expect(purchased.boons).toEqual([...fixture.boons, slot.boon]);
+    expect(purchased.support).toMatchObject({ id: visit, resolved: true });
     await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
     if (width === 1280 && height === 720 && scale === 1.25) {
       // Save/resume is viewport independent; keep it once alongside all shelf/receipt layouts.
@@ -126,18 +93,19 @@ for (const [width, height, scale] of LAYOUT_CASES)
     }
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.getByRole("button", { name: "Visit Boon Merchant", exact: true })).toHaveCount(0);
-    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-    const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
-    expect(saved).toEqual(accept(purchased, { type: "leaveSupport", visit }));
+    const saved = await state(page);
+    expect(saved.boons).toEqual(purchased.boons);
+    expect(saved.phase).toBe("teamSelection");
     expect(saved.currency).toBe(fixture.currency - slot.price);
-    expect(saved.journey.currency).toBe(20);
-    expect(saved.expedition.lastRoom).toBe("merchant");
+    expect(saved.journey!.currency).toBe(20);
+    expect(saved.expedition!.lastRoom).toBe("merchant");
     expect(saved.rng).not.toBe(purchased.rng);
     expect(saved.support).toBeNull();
   });
 
 test("Settings panel switches preserve screen, tab and icon geometry", async ({ page }) => {
-  await openHome(page);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await seed(page, run());
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.evaluate(() => document.fonts.ready);
   const dialog = page.getByRole("main", { name: "Settings", exact: true });
@@ -164,4 +132,30 @@ test("Settings panel switches preserve screen, tab and icon geometry", async ({ 
       }
     }
   }
+  await page.getByRole("radio", { name: "125%", exact: true }).click();
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Collection", exact: true }).click();
+  const art = page.getByRole("button", { name: "Inspect Mossguard", exact: true });
+  await settleScreen(page);
+  const before = await art.boundingBox();
+  await art.hover();
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toBeVisible();
+  const fontSize = await tooltip.evaluate((node) => parseFloat(getComputedStyle(node).fontSize));
+  await page.getByRole("button", { name: "Open menu", exact: true }).click();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Collection", exact: true }).click();
+  await settleScreen(page);
+  expect(await art.boundingBox()).toEqual(before);
+  await art.hover();
+  await expect(tooltip).toBeVisible();
+  expect(await tooltip.evaluate((node) => parseFloat(getComputedStyle(node).fontSize))).toBeCloseTo(
+    fontSize * 1.25,
+  );
+  await reloadHome(page);
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
+  await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
 });

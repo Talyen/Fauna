@@ -20,7 +20,9 @@ test("Food uses shared targeting, consumes only after a play and resumes without
   await page.getByRole("button", { name: "Target Emberback", exact: true }).click();
   await settleScreen(page);
   const after = await state(page);
-  expect(after.team[1]!.health).toBe(game.team[1]!.health + 6);
+  await expect(
+    page.locator('[data-actor-id="ally-1"]').getByRole("progressbar", { name: "Health", exact: true }),
+  ).toHaveAttribute("aria-valuenow", String(game.team[1]!.health + 6));
   expect(after.cards.some((card) => card.definitionId === "food-apple")).toBe(false);
   expect(after.cards.filter((card) => card.ownerId === null)).toHaveLength(2);
   await reloadHome(page);
@@ -36,10 +38,8 @@ test("Care Package visibly creates two random neutral consumables", async ({ pag
   await resume(page);
   const before = await state(page);
   await page.locator('.app:not([inert]) .hand [aria-label^="Care Package,"]').click();
-  await expect
-    .poll(async () => (await state(page)).cards.filter((card) => card.ownerId === null).length)
-    .toBe(2);
+  await expect(page.locator('.app:not([inert]) .hand [aria-label*=", Food,"]')).toHaveCount(2);
   const after = await state(page);
   expect(after.battle!.mana).toBe(before.battle!.mana - 1);
-  await expect(page.locator('.app:not([inert]) .hand [aria-label*=", Food,"]')).toHaveCount(2);
+  expect(after.cards.filter((card) => card.ownerId === null)).toHaveLength(2);
 });
