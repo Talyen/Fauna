@@ -71,6 +71,24 @@ export function battleBenefits(
   play: AvailablePlay,
   facts: ReturnType<typeof battleBenefitFacts>,
 ): BattleBenefit[] {
+  return primaryBattleBenefits(state, play, facts).map<BattleBenefit>((benefit) => {
+    if (benefit.kind !== "support" || benefit.priority !== "none") return benefit;
+    if (facts.healingOnPlay) return { ...benefit, priority: "healing" };
+    const usefulDraw = play.def.effects?.some(
+      (effect) =>
+        (effect.kind === "draw" || effect.kind === "drawKeyword") &&
+        effect.amount > 0 &&
+        drawHasAnotherCard(state, play.card, effect),
+    );
+    return usefulDraw ? { ...benefit, priority: "standardUtility" } : benefit;
+  });
+}
+
+function primaryBattleBenefits(
+  state: BattleState,
+  play: AvailablePlay,
+  facts: ReturnType<typeof battleBenefitFacts>,
+): BattleBenefit[] {
   const { card, actor, def } = play;
   const value = actionValue(card, actor, state);
   const healing = restoration(
