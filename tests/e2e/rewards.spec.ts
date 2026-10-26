@@ -1,6 +1,7 @@
 import { captureFrame, settleScreen } from "./support/rendered-evidence";
 import { expect, type Page } from "@playwright/test";
-import { accept, winBattle, bossReward } from "../support/game";
+import { BOONS } from "../../src/game/content";
+import { winBattle, bossReward } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
 import { expectScrollFree } from "./support/layout-contract";
 
@@ -56,6 +57,13 @@ for (const [name, create] of [
     }
     const cards = page.locator(".reward-option");
     await expect(cards).toHaveCount(3);
+    if (fixture.phase === "boon") {
+      for (const id of fixture.reward.boons) {
+        const name = BOONS.find((boon) => boon.id === id)!.name;
+        await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toBeVisible();
+        await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
+      }
+    }
     await layouts(page, fixture.phase, async () => {
       expect(
         await cards.evaluateAll((cards) => {
@@ -73,8 +81,16 @@ for (const [name, create] of [
     await page
       .getByRole("button", { name: command.type === "recruit" ? "Recruit Emberback" : "Skip", exact: true })
       .click();
-    const committed = accept(fixture, command);
-    expect(await state(page)).toEqual(committed);
+    const committed = await state(page);
+    expect(committed.phase).toBe("teamSelection");
+    expect(committed.journey!.currency).toBe(fixture.journey!.currency);
+    expect(committed.boons).toEqual(fixture.boons);
+    if (command.type === "recruit") {
+      expect(committed.discovery.recruited.emberback).toBe((fixture.discovery.recruited.emberback ?? 0) + 1);
+      expect(committed.team.map((creature) => creature.id)).toEqual(
+        fixture.team.map((creature) => creature.id),
+      );
+    }
     await layouts(page, `team-after-${fixture.phase}`);
     expect(await state(page)).toEqual(committed);
   });

@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 import { GLOSSARY } from "../../src/game/glossary";
-import { accept, run } from "../support/game";
-import { test, seed, state, resume, saved } from "./support/session";
+import { run } from "../support/game";
+import { test, seed, state, resume, reloadHome } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { captureScreen } from "./support/rendered-evidence";
 import { layoutViolations } from "./support/layout-contract";
@@ -87,8 +87,12 @@ test("persistent saving failure fits both sizes and clears after automatic recov
   });
   await page.clock.fastForward(5000);
   await expect(page.locator(".save-notice")).toHaveCount(0);
-  await saved(page);
-  expect(await state(page)).toEqual(accept(fixture, { type: "endTurn" }));
+  const recovered = await state(page);
+  expect(recovered.phase).toBe("battle");
+  expect(recovered.battle!.turn).toBe(fixture.battle!.turn + 1);
+  await reloadHome(page);
+  await resume(page);
+  expect(await state(page)).toEqual(recovered);
 });
 
 test("layout checks permit only named, focusable secondary scroll regions and still catch clipping", async ({

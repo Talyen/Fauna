@@ -335,7 +335,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
   });
 }
 
-test("layout enforcement detects nested scrolling, hidden clipping, and obscured controls", async ({
+test("layout enforcement detects scrolling, clipping, obscured controls and misalignment", async ({
   page,
 }) => {
   await page.setContent(
@@ -352,18 +352,10 @@ test("layout enforcement detects nested scrolling, hidden clipping, and obscured
     '<main class="app"><button style="height:44px">Play</button><div style="position:fixed;inset:0"></div></main>',
   );
   expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("obscured"))).toBe(true);
-});
-
-test("layout enforcement rejects controls with an obscured edge even when their center is clear", async ({
-  page,
-}) => {
   await page.setContent(
     '<main class="app"><button style="width:160px;height:44px">Discard Pile</button><div style="position:fixed;left:148px;top:8px;width:20px;height:44px"></div></main>',
   );
   expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("obscured"))).toBe(true);
-});
-
-test("layout enforcement checks the content center inside a full-height screen", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.setContent(
     '<div class="app"><div class="screen-stage" style="height:600px;display:flex;align-items:center"><main style="width:100%;height:100%"><h1 style="margin:0;height:40px">Settings</h1></main></div></div>',
