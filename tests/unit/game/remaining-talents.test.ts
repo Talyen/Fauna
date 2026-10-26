@@ -103,8 +103,8 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     const f = fixture([talent]);
     f.source.block = 2;
     hit(f.state, f.target, f.source, 8, type, f.events, { origin: "periodic" as const });
-    expect(f.source.health).toBe(6);
-    expect(f.source.block).toBe(2);
+    expect(f.source.health).toBe(8);
+    expect(f.source.block).toBe(0);
   });
   it.each([
     ["block.weighted-guard", "physical", 11],
@@ -252,7 +252,8 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     hit(f.state, f.target, f.source, maximumHealth(f.source) - 4, "light", f.events, {
       origin: "periodic" as const,
     });
-    expect(f.source.block).toBe(6);
+    expect(f.source.block).toBe(0);
+    expect(f.source.combat!.desperateGuardUsed).toBe(true);
     hit(f.state, f.target, f.source, 100, "light", f.events, { origin: "periodic" as const });
     expect(f.source.combat!.grace).toBe(3);
   });

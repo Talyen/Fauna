@@ -1,4 +1,4 @@
-import { authoredPack, swapFixture } from "../../support/game";
+import { addBackups, authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { ensureCombat, freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
@@ -127,7 +127,13 @@ it("keeps enemy Molten Shell at its base tier and excludes reserves", () => {
 
 it("does not activate Molten Shell when periodic damage breaks Armor after swapping into backup", () => {
   const game = produce(battle(6), (draft) => {
-    draft.reserves.push({ ...draft.team[1]!, id: "backup-moss", combat: freshCombat() });
+    addBackups(draft, {
+      ...draft.team[1]!,
+      id: "backup-moss",
+      species: "captoad",
+      health: 20,
+      combat: freshCombat(),
+    });
     ensureCombat(draft.team[0]!).armor = 1;
     ensureCombat(draft.team[0]!).burn = 1;
   });

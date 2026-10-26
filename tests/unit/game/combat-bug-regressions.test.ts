@@ -129,10 +129,11 @@ it.each(["block", "armor"] as const)(
       critical: true,
     });
     expect(events.find((event) => event.kind === "damage" && event.damageType === "bleed")).toMatchObject({
-      amount: 6,
+      amount: defense === "block" ? 0 : 6,
       periodic: true,
     });
-    expect(target.health).toBe(94);
+    expect(target.health).toBe(defense === "block" ? 100 : 94);
+    if (defense === "block") expect(target.block).toBeLessThan(94);
     expect(target.combat.bleed).toBe(0);
     expect(target.combat.statusSources.bleed).toBeUndefined();
     expect(target.combat.bleedLeech).toEqual([]);

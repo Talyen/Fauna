@@ -74,7 +74,7 @@ it("collects only accepted recruits, caps stars at five, and retains ranks acros
     state = decodeSave(encodeSave(accept(state, { type: "abandon" })));
     const retained = state.discovery;
     state = accept(state, { type: "newRun", seed: 42 });
-    for (let pick = 0; pick < 3; pick++) {
+    while (state.starterOffers.length) {
       state = accept(state, { type: "draft", species: state.starterOffers[0]! });
     }
     state = accept(state, { type: "start" });

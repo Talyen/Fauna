@@ -16,6 +16,16 @@ import { addBackups, requireBattle, teamRun } from "../../support/game";
 it.each(SPECIES)("shares explicit target admission with commands for $id", ({ id }) => {
   const game = requireBattle(
     produce(teamRun(42, [id]), (state) => {
+      state.team[0]!.health--;
+      if (id === "wisterelle")
+        addBackups(state, {
+          id: "living-backup",
+          species: "coralcurl",
+          health: species("coralcurl").health,
+          block: 0,
+          attacked: false,
+          combat: freshCombat(),
+        });
       state.battle!.hand = state.cards.map((card) => card.id);
       state.battle!.draw = [];
       state.battle!.discard = [];
@@ -41,6 +51,7 @@ it.each(SPECIES)("shares explicit target admission with commands for $id", ({ id
       "missing",
       ...battlefield(game, "player").map((unit) => unit.id),
       ...battlefield(game, "enemy").map((unit) => unit.id),
+      ...game.reserves.map((unit) => unit.id),
     ]) {
       const error = playTargetError(game, play.def, play.actor.id, targetId);
       const result = dispatch(game, { type: "play", cardId: play.card.id, targetId, autoEndTurn: false });
@@ -327,7 +338,7 @@ it("applies room power once to primary Block and supplemental damage/healing bef
   expect(
     events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
   ).toEqual([expect.objectContaining({ amount: 3, damageType: "burn" })]);
-  expect(next.team[0]!.combat!.burn).toBe(3);
+  expect(next.team[0]!.combat!.burn).toBe(5);
   expect(next.battle!.hand).toEqual(initial.battle!.hand);
   expect(next.battle!.mana).toBe(initial.battle!.mana);
 });

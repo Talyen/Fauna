@@ -34,11 +34,12 @@ describe("collected starter drafts", () => {
       const collected = accept(won, { type: "recruit", species: kind });
       expect(collected.discovery.recruited[kind]).toBe(1);
       let later = accept(accept(collected, { type: "abandon" }), { type: "newRun", seed: 42 });
-      for (let pick = 0; pick < 3; pick++) {
-        later = accept(decodeSave(encodeSave(later)), { type: "draft", species: kind });
-      }
+      later = accept(decodeSave(encodeSave(later)), { type: "draft", species: kind });
+      while (later.selected.length < starterCount(later))
+        later = accept(later, { type: "draft", species: later.starterOffers[0]! });
       later = accept(later, { type: "start" });
-      expect(later.team.map((creature) => creature.species)).toEqual([kind, kind, kind]);
+      expect(later.team.map((creature) => creature.species)).toContain(kind);
+      expect(new Set(later.team.map((creature) => creature.species)).size).toBe(later.team.length);
       expect(decodeSave(encodeSave(later))).toEqual(later);
     },
   );
@@ -57,8 +58,8 @@ describe("collected starter drafts", () => {
       draft.discovery = { encountered: ["bloomquail"], recruited: { bloomquail: 1 } };
     });
     const later = accept(collected, { type: "newRun", seed: 42 });
-    expect(starterCount(later)).toBe(3);
-    expect(later.starterOffers).toEqual(["bloomquail", "bloomquail", "bloomquail"]);
+    expect(starterCount(later)).toBe(1);
+    expect(later.starterOffers).toEqual(["bloomquail"]);
     expect(dispatch(later, { type: "draft", species: "bloomquail" }).accepted).toBe(true);
   });
   it("onboards with one of three eligible creatures and collects only the committed starter", () => {
@@ -107,15 +108,21 @@ describe("collected starter drafts", () => {
     const initial = s;
     for (let round = 0; round < 3; round++) {
       expect(s.selected).toHaveLength(round);
-      expect(s.starterOffers).toHaveLength(3);
-      expect(new Set(s.starterOffers)).toEqual(new Set(Object.keys(s.discovery.recruited)));
+      expect(s.starterOffers).toHaveLength(3 - round);
+      expect(new Set(s.starterOffers)).toEqual(
+        new Set(
+          Object.keys(s.discovery.recruited).filter(
+            (kind) => !s.selected.includes(kind as (typeof s.selected)[number]),
+          ),
+        ),
+      );
       expect(dispatch(s, { type: "draft", species: "pollenmoth" }).state).toBe(s);
       expect(dispatch(s, { type: "start" }).state).toBe(s);
       s = decodeSave(encodeSave(s));
-      s = accept(s, { type: "draft", species: "mossguard" });
+      s = accept(s, { type: "draft", species: s.starterOffers[0]! });
     }
     expect(s.starterOffers).toEqual([]);
-    expect(s.selected).toEqual(["mossguard", "mossguard", "mossguard"]);
+    expect(new Set(s.selected)).toEqual(new Set(["mossguard", "emberback", "prismram"]));
     expect(initial.selected).toEqual([]);
     s = accept(s, { type: "start" });
     expect(s.team).toHaveLength(3);
@@ -130,11 +137,10 @@ describe("collected starter drafts", () => {
     let s = firstJourney();
     const collected = s.team[0]!.species;
     s = accept(accept(s, { type: "abandon" }), { type: "newRun", seed: 9 });
-    for (let round = 0; round < 3; round++) {
-      expect(s.starterOffers).toEqual([collected, collected, collected]);
-      s = accept(decodeSave(encodeSave(s)), { type: "draft", species: collected });
-    }
-    expect(accept(s, { type: "start" }).team).toHaveLength(3);
+    expect(s.starterOffers).toEqual([collected]);
+    s = accept(decodeSave(encodeSave(s)), { type: "draft", species: collected });
+    expect(dispatch(s, { type: "draft", species: collected }).accepted).toBe(false);
+    expect(accept(s, { type: "start" }).team).toHaveLength(1);
   });
 
   it("includes both collected species when a later draft pool has fewer than three", () => {

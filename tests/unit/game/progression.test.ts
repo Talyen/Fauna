@@ -281,14 +281,14 @@ it("final victory banks rewards once before recruitment and offers no run-only B
   expect(decodeSave(encodeSave(s))).toEqual(s);
 });
 it("swapping one creature preserves unchanged teammates' legacy cards", () => {
-  let s = accept(winBattle(), { type: "recruit", species: "emberback" });
+  let s = accept(winBattle(), { type: "recruit", species: "pollenmoth" });
   s = produce(s, (d) => {
     d.cards.find((c) => c.definitionId === "emberback-furnace-breath")!.level = 2;
   });
   s = swapFixture(s, {
     type: "swap",
     activeId: "ally-0",
-    reserve: s.reserves.find((c) => c.species === "emberback")!.id,
+    reserve: s.reserves.find((c) => c.species === "pollenmoth")!.id,
   });
   expect(
     s.cards.find((c) => c.definitionId === "emberback-furnace-breath" && c.ownerId === "ally-1")!.level,
