@@ -1,4 +1,5 @@
-import { enemyPlay } from "../../../support/game";
+import { setBattleCards } from "../../../support/cards";
+import { enemyPlay, authoredPack, accept, teamRun, winBattle } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species } from "../../../../src/game/content";
@@ -8,16 +9,12 @@ import { createGame, dispatch, previewCard } from "../../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { cardKeywords } from "../../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { authoredPack, accept, teamRun, winBattle } from "../../../support/game";
 import type { GameEvent } from "../../../../src/game/types";
 
 function ready(id = "cindernewt-attack", seed = 1) {
   return produce(teamRun(1, ["cindernewt", "mossguard", "dunefox"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     game.battle!.enemies.forEach((enemy) => {
       enemy.block = 0;
       enemy.combat = freshCombat();

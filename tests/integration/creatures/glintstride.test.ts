@@ -1,4 +1,5 @@
-import { enemyPlay } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
+import { enemyPlay, authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species } from "../../../src/game/content";
@@ -9,16 +10,12 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent } from "../../../src/game/types";
-import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "glintstride-attack", copies = 1) {
   return produce(teamRun(1, ["glintstride", "mossguard", "prismram"]), (game) => {
     game.discovery.recruited.glintstride = copies;
     const card = game.cards.find((entry) => entry.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     for (const enemy of game.battle!.enemies) {
       enemy.block = 0;
       enemy.combat = freshCombat();

@@ -1,7 +1,8 @@
+import { addReserve, prepareDestination, requireBattle, teamRun } from "../../../support/game";
+import { playCard as play } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { orifableBattle } from "../../../support/orifable";
-import { addBackups, prepareDestination, requireBattle, teamRun } from "../../../support/game";
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import {
   definition,
@@ -20,11 +21,6 @@ import { freshCombat } from "../../../../src/game/combat/index";
 import { swapBackup } from "../../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import type { BattleState, GameEvent } from "../../../../src/game/types";
-
-function play(game: BattleState, definitionId: string, targetId?: string) {
-  const card = game.cards.find((entry) => entry.definitionId === definitionId)!;
-  return dispatch(game, { type: "play", cardId: card.id, targetId, autoEndTurn: false });
-}
 
 describe("Orifable and shared Food", () => {
   it("authors the selected kit, six delivery tiers and three neutral consumables", () => {
@@ -95,14 +91,7 @@ describe("Orifable and shared Food", () => {
     const game = produce(before, (draft) => {
       draft.discovery.recruited.orifable = 6;
       draft.team[0]!.health = 0;
-      addBackups(draft, {
-        id: "backup",
-        species: "orifable",
-        health: 26,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "orifable", 26, freshCombat());
       expressDelivery(draft, []);
     });
     expect(game.battle.hand).toEqual(before.battle.hand);
@@ -180,14 +169,13 @@ describe("Orifable and shared Food", () => {
     for (const legendary of [false, true]) {
       const game = produce(orifableBattle(true), (draft) => {
         draft.team[0]!.health = 0;
-        addBackups(draft, {
-          id: "backup",
-          species: legendary ? "memento" : "prismram",
-          health: species(legendary ? "memento" : "prismram").health,
-          block: 0,
-          attacked: false,
-          combat: freshCombat(),
-        });
+        addReserve(
+          draft,
+          "backup",
+          legendary ? "memento" : "prismram",
+          species(legendary ? "memento" : "prismram").health,
+          freshCombat(),
+        );
         swapBackup(draft, draft.team[0]!.id, "backup", []);
       });
       expect(game.cards.filter((card) => card.ownerId === null)).toHaveLength(3);

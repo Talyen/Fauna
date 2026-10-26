@@ -1,4 +1,14 @@
-import { enemyPlay } from "../../../support/game";
+import {
+  addReserve,
+  enemyPlay,
+  addBackups,
+  authoredPack,
+  prepareDestination,
+  accept,
+  teamRun,
+  winBattle,
+} from "../../../support/game";
+import { setBattleCards } from "../../../support/cards";
 import { produce } from "immer";
 import { expect, it } from "vitest";
 import { CARDS, definition, species, type SpeciesId } from "../../../../src/game/content";
@@ -9,22 +19,11 @@ import { COMBAT_PACKS, encounterSource } from "../../../../src/game/encounters";
 import { definitionKeywords } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import type { GameEvent } from "../../../../src/game/types";
-import {
-  addBackups,
-  authoredPack,
-  prepareDestination,
-  accept,
-  teamRun,
-  winBattle,
-} from "../../../support/game";
 
 function ready(kinds: SpeciesId[] = ["captoad"], cardId = "captoad-swap") {
   return produce(teamRun(1, kinds), (game) => {
     const card = game.cards.find((card) => card.definitionId === cardId)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     game.rng = 1;
   });
 }
@@ -75,10 +74,7 @@ it("Puffs Poison onto every living enemy, excluding knockouts", () => {
   });
   const started = produce(accept(game, { type: "beginBattle" }), (draft) => {
     const card = draft.cards.find((card) => card.definitionId === "captoad-attack")!;
-    draft.battle!.hand = [card.id];
-    draft.battle!.draw = draft.cards.filter((other) => other.id !== card.id).map((other) => other.id);
-    draft.battle!.discard = [];
-    draft.battle!.buffer = [];
+    setBattleCards(draft, [card.id]);
     draft.battle!.enemies.forEach((enemy, index) => {
       enemy.combat.controlled = "stun";
       if (index === 2) enemy.health = 0;
@@ -193,14 +189,7 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
 
 it("removes outgoing overflow too, while preserving unrelated cards and filling their vacant hand slots", () => {
   const game = produce(ready(["captoad", "emberback", "prismram"]), (draft) => {
-    addBackups(draft, {
-      id: "backup",
-      species: "mossguard",
-      health: 32,
-      block: 0,
-      attacked: false,
-      combat: freshCombat(),
-    });
+    addReserve(draft, "backup", "mossguard", 32, freshCombat());
     const others = draft.cards.filter((card) => card.ownerId !== "ally-0").map((card) => card.id);
     const captoad = draft.cards.filter((card) => card.ownerId === "ally-0").map((card) => card.id);
     draft.battle!.hand = [

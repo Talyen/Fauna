@@ -1,16 +1,17 @@
-import { describe, expect, it } from "vitest";
-import { produce } from "immer";
-import { aerostatBattle } from "../../../support/aerostat";
 import {
+  addReserve,
   accept,
-  addBackups,
   completeRecruitment,
   prepareDestination,
   requireBattle,
   teamRun,
   winBattle,
 } from "../../../support/game";
-import { dispatch, previewCard } from "../../../../src/game/engine";
+import { playCard as play } from "../../../support/cards";
+import { describe, expect, it } from "vitest";
+import { produce } from "immer";
+import { aerostatBattle } from "../../../support/aerostat";
+import { previewCard } from "../../../../src/game/engine";
 import { definition, species, speciesCards, FIRST_RUN_STARTERS } from "../../../../src/game/content";
 import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { validateCatalog } from "../../../../src/game/content-validation";
@@ -39,15 +40,6 @@ function ready(amount = 1, copies = 1) {
       draft.discovery.recruited.aerostat = amount;
     },
   );
-}
-
-function play(game: BattleState, id: string, targetId?: string) {
-  return dispatch(game, {
-    type: "play",
-    cardId: game.cards.find((card) => card.definitionId === id)!.id,
-    targetId,
-    autoEndTurn: false,
-  });
 }
 
 describe("Aerostat and battle provisions", () => {
@@ -90,7 +82,7 @@ describe("Aerostat and battle provisions", () => {
     expect(food(accept(ready(4, 2), { type: "beginBattle" }))).toHaveLength(8);
     const destination = produce(ready(), (draft) => {
       draft.team[0]!.health = 0;
-      addBackups(draft, { id: "backup", species: "aerostat", health: 30, block: 0, attacked: false });
+      addReserve(draft, "backup", "aerostat", 30);
     });
     expect(food(accept(destination, { type: "beginBattle" }))).toHaveLength(0);
   });
@@ -101,14 +93,7 @@ describe("Aerostat and battle provisions", () => {
         unit.combat.controlled = "freeze";
         unit.combat.controlTurns = 1;
       });
-      addBackups(draft, {
-        id: "backup",
-        species: "prismram",
-        health: 30,
-        block: 0,
-        combat: freshCombat(),
-        attacked: false,
-      });
+      addReserve(draft, "backup", "prismram", 30, freshCombat());
     });
     const next = produce(
       requireBattle(accept(decodeSave(encodeSave(game)), { type: "endTurn" })),
@@ -126,14 +111,7 @@ describe("Aerostat and battle provisions", () => {
     const game = produce(aerostatBattle(), (draft) => {
       draft.team[1]!.combat!.poison = 3;
       draft.team[2]!.combat!.burn = 2;
-      addBackups(draft, {
-        id: "backup",
-        species: "prismram",
-        health: 30,
-        block: 0,
-        combat: { ...freshCombat(), blind: true },
-        attacked: false,
-      });
+      addReserve(draft, "backup", "prismram", 30, { ...freshCombat(), blind: true });
     });
     const guarded = play(game, rest);
     expect(guarded.accepted).toBe(true);

@@ -1,13 +1,5 @@
-import { observeDecisions } from "../../../src/game/random";
-import { battleMana } from "../../../src/game/combat/battle-modifiers";
-import { cardKeywords } from "../../../src/game/progression";
-import { cardCost } from "../../../src/game/ability-rules";
-import { actionValue } from "../../../src/game/ability-rules";
-import { draw, receiveCard, fillHand } from "../../../src/game/card-zones";
-import { swapBackup } from "../../../src/game/team";
-import { decayBlock } from "../../../src/game/combat/turns";
-import { resolveCombat } from "../../../src/game/combat/resolution";
 import {
+  addReserve,
   swapFixture,
   completeRecruitment,
   accept,
@@ -17,6 +9,16 @@ import {
   addBackups,
   teamRun,
 } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
+import { observeDecisions } from "../../../src/game/random";
+import { battleMana } from "../../../src/game/combat/battle-modifiers";
+import { cardKeywords } from "../../../src/game/progression";
+import { cardCost } from "../../../src/game/ability-rules";
+import { actionValue } from "../../../src/game/ability-rules";
+import { draw, receiveCard, fillHand } from "../../../src/game/card-zones";
+import { swapBackup } from "../../../src/game/team";
+import { decayBlock } from "../../../src/game/combat/turns";
+import { resolveCombat } from "../../../src/game/combat/resolution";
 import { expect, it } from "vitest";
 import {
   freshCombat,
@@ -255,10 +257,7 @@ it("combines the complete Boon catalog without mutating previews or duplicating 
   state.battle.encoreProgress = 2;
   state.battle.cardsPlayedThisTurn = 2;
   const card = state.cards.find((entry) => entry.definitionId === "mossguard-heal")!;
-  state.battle.hand = [card.id];
-  state.battle.buffer = [];
-  state.battle.discard = [];
-  state.battle.draw = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+  setBattleCards(state, [card.id]);
   for (const ally of state.team) {
     ally.health -= 4;
     ally.combat!.freeze = 5;
@@ -391,10 +390,7 @@ it("Dream Yo-Yo returns a Dodged card once without copies, free Mana or extra XP
   const card = state.cards.find((card) => definition(card.definitionId).name === "Prism Charge")!;
   state.team.find((ally) => ally.id === card.ownerId)!.combat!.blind = true;
   state.rng = 1972;
-  state.battle.hand = [card.id];
-  state.battle.buffer = [];
-  state.battle.discard = [];
-  state.battle.draw = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+  setBattleCards(state, [card.id]);
   const mana = state.battle.mana;
   const xp = state.battleXP.physical ?? 0;
   const preview = previewCard(state, card.id, "enemy-0");
@@ -691,10 +687,7 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
     const def = definition(card.definitionId);
     return def.effect === "attack" && def.damageType === "burn";
   })!;
-  saved.battle!.hand = [burn.id];
-  saved.battle!.draw = saved.cards.filter((card) => card.id !== burn.id).map((card) => card.id);
-  saved.battle!.buffer = [];
-  saved.battle!.discard = [];
+  setBattleCards(saved, [burn.id]);
   saved.battle!.enemies[0]!.combat.controlled = "freeze";
   saved.battle!.enemies[0]!.combat.controlTurns = 1;
   const preview = previewCard(saved, burn.id, "enemy-0");
@@ -885,10 +878,7 @@ it("counts accepted cards once across previews and resume, refunds before auto-e
   state.boons = ["resonant-chimes"];
   state.battle!.cardsPlayedThisTurn = 2;
   const card = state.cards.find((c) => definition(c.definitionId).effect === "guard")!;
-  state.battle!.hand = [card.id];
-  state.battle!.draw = state.cards.filter((c) => c.id !== card.id).map((c) => c.id);
-  state.battle!.buffer = [];
-  state.battle!.discard = [];
+  setBattleCards(state, [card.id]);
   state.battle!.mana = definition(card.definitionId).cost;
   const targetId = card.ownerId!;
   const preview = previewCard(state, card.id, targetId);
@@ -899,10 +889,7 @@ it("counts accepted cards once across previews and resume, refunds before auto-e
   expect(played.battle!.mana).toBe(1);
   expect(decodeSave(encodeSave(played)).battle!.cardsPlayedThisTurn).toBe(3);
   const fourth = structuredClone(played);
-  fourth.battle!.hand = [card.id];
-  fourth.battle!.draw = fourth.cards.filter((c) => c.id !== card.id).map((c) => c.id);
-  fourth.battle!.buffer = [];
-  fourth.battle!.discard = [];
+  setBattleCards(fourth, [card.id]);
   fourth.battle!.mana = definition(card.definitionId).cost;
   const fourthPlayed = accept(fourth, { type: "play", cardId: card.id, targetId, autoEndTurn: false });
   expect(fourthPlayed.battle!.mana).toBe(0);
@@ -1133,7 +1120,7 @@ it("Dune Shuttle grants Block on actual draws, not copies, Food, returns or over
 
 it("Saddle Pouch draws the incoming kit only on ability swaps and invokes draw rewards", () => {
   const state = structuredClone(run());
-  addBackups(state, { id: "pouch-backup", species: "coralcurl", health: 28, block: 0, attacked: false });
+  addReserve(state, "pouch-backup", "coralcurl", 28);
   state.boons = ["saddle-pouch", "dune-shuttle"];
   const outgoing = state.team[0]!;
   const incoming = state.reserves[0]!;
@@ -1144,7 +1131,7 @@ it("Saddle Pouch draws the incoming kit only on ability swaps and invokes draw r
   ).toBe(true);
   expect(incoming.block).toBe(before + 1);
   const control = structuredClone(run());
-  addBackups(control, { id: "pouch-control", species: "coralcurl", health: 28, block: 0, attacked: false });
+  addReserve(control, "pouch-control", "coralcurl", 28);
   control.boons = ["saddle-pouch"];
   const count = control.battle!.hand.length;
   swapBackup(control, control.team[0]!.id, control.reserves[0]!.id, [], false);

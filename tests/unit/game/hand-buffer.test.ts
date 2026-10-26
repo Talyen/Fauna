@@ -1,11 +1,10 @@
-import { addBackups, swapFixture } from "../../support/game";
+import { addReserve, swapFixture, prepareDestination, accept, run, teamRun } from "../../support/game";
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { prepareDestination, accept, run, teamRun } from "../../support/game";
 import { draw, drawKeyword, receiveCard } from "../../../src/game/card-zones";
 import { shuffle } from "../../../src/game/random";
 import type { GameEvent } from "../../../src/game/types";
@@ -285,14 +284,7 @@ describe("hidden hand overflow", () => {
 
   it("preserves buffered card slots and switches their owner during a reserve swap", () => {
     const s = produce(run(), (d) => {
-      addBackups(d, {
-        id: "recruit-pollenmoth",
-        species: "pollenmoth",
-        health: 23,
-        block: 0,
-        combat: freshCombat(),
-        attacked: false,
-      });
+      addReserve(d, "recruit-pollenmoth", "pollenmoth", 23, freshCombat());
       const owned = d.cards.filter((card) => card.ownerId === "ally-1");
       d.battle!.buffer = [owned[0]!.id];
       d.battle!.hand = d.cards

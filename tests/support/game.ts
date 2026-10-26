@@ -1,3 +1,4 @@
+import { setBattleCards } from "./cards";
 import { canVisitCampfire } from "../../src/game/destinations";
 import { ownedCards, swapBackup, swapFromCard } from "../../src/game/team";
 import { enemyCard } from "../../src/game/card-rules";
@@ -13,7 +14,15 @@ import { produce } from "immer";
 import { encounterPacks } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId } from "../../src/game/content";
-import type { Command, GameState, Lifecycle, BattleState, Creature, GameEvent } from "../../src/game/types";
+import type {
+  Command,
+  GameState,
+  Lifecycle,
+  BattleState,
+  CombatState,
+  Creature,
+  GameEvent,
+} from "../../src/game/types";
 // Shared bound accounts for solo Legendary Bosses and their recruitment choices
 // Fixed current-catalog full-journey fixture; shared with the browser expedition.
 export const FULL_JOURNEY_SEED = 2;
@@ -98,6 +107,17 @@ export function addBackups(state: GameState, ...creatures: Creature[]) {
   }
   state.reserves.push(...creatures);
 }
+/** Register a fixture reserve with explicit Health and optional combat lifetime data. */
+export function addReserve(
+  state: GameState,
+  id: string,
+  kind: SpeciesId,
+  health: number,
+  combat?: CombatState,
+) {
+  addBackups(state, { id, species: kind, health, block: 0, attacked: false, ...(combat ? { combat } : {}) });
+}
+
 /** Set up formation/lifetime scenarios without admitting a free player command. */
 export function swapFixture(s: GameState, command: Extract<Command, { type: "swap" }>) {
   return produce(s, (draft) => swapBackup(draft, command.activeId, command.reserve, []));
@@ -115,10 +135,7 @@ export function victoryReady(s = run()) {
     });
     const attack = d.cards.find((c) => definition(c.definitionId).effect === "attack")!;
     ensureCombat(d.team.find((creature) => creature.id === attack.ownerId)!).blind = false;
-    d.battle!.hand = [attack.id];
-    d.battle!.buffer = [];
-    d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
-    d.battle!.discard = [];
+    setBattleCards(d, [attack.id]);
     d.battle!.mana = 3;
   });
 }
@@ -282,10 +299,7 @@ export function feedbackBattle() {
   return produce(battle, (game) => {
     game.rng = 1;
     const attack = game.cards.find((card) => card.definitionId === "emberback-attack")!;
-    game.battle!.hand = [attack.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
+    setBattleCards(game, [attack.id]);
     const actor = game.team.find((creature) => creature.id === attack.ownerId)!;
     actor.health -= 5;
     ensureCombat(actor).riposte = true;

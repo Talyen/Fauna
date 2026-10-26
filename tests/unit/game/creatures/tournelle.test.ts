@@ -1,3 +1,12 @@
+import {
+  addReserve,
+  addBackups,
+  authoredPack,
+  accept,
+  prepareDestination,
+  teamRun,
+} from "../../../support/game";
+import { setBattleCards } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch, previewCard } from "../../../../src/game/engine";
@@ -6,17 +15,13 @@ import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { cardKeywords } from "../../../../src/game/progression";
 import { freshCombat, hit } from "../../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { addBackups, authoredPack, accept, prepareDestination, teamRun } from "../../../support/game";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import type { GameEvent } from "../../../../src/game/types";
 
 function fixture(ability = "tournelle-teamClearBlind") {
   return produce(teamRun(42, ["tournelle", "emberback", "prismram"]), (d) => {
     const card = d.cards.find((c) => c.definitionId === ability)!;
-    d.battle!.hand = [card.id];
-    d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
-    d.battle!.buffer = [];
-    d.battle!.discard = [];
+    setBattleCards(d, [card.id]);
     d.battle!.enemies.forEach((enemy) => {
       enemy.health = enemy.maxHealth;
       enemy.block = 0;
@@ -135,14 +140,7 @@ describe("Tournelle", () => {
   it("can swap Tournelle itself and still complete the draw", () => {
     const game = produce(fixture("tournelle-swapLowest"), (d) => {
       d.team[0]!.health = 1;
-      addBackups(d, {
-        id: "backup",
-        species: "mossguard",
-        health: 20,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(d, "backup", "mossguard", 20, freshCombat());
     });
     const result = play(game);
     expect(result.state.team[0]!.id).toBe("backup");
@@ -267,10 +265,7 @@ describe("Tournelle", () => {
       const game = produce(accept(destination, { type: "beginBattle" }), (draft) => {
         const id = kind === "tournelle" ? "tournelle-attack" : "prismram-spectrum-lance";
         const card = draft.cards.find((entry) => entry.definitionId === id)!;
-        draft.battle!.hand = [card.id];
-        draft.battle!.buffer = [];
-        draft.battle!.discard = [];
-        draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+        setBattleCards(draft, [card.id]);
         draft.battle!.enemies[0]!.health = 10;
         draft.battle!.enemies[0]!.block = 9;
         draft.battle!.enemies[1]!.block = 0;

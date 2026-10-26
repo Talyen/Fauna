@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -13,10 +14,7 @@ import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "..
 function ready(id = "shadebrim-guard") {
   return produce(teamRun(1, ["shadebrim", "mossguard", "prismram"]), (game) => {
     const card = game.cards.find((entry) => entry.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     game.rng = 1;
   });
 }

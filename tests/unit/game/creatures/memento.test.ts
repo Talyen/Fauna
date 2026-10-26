@@ -1,8 +1,16 @@
+import {
+  addReserve,
+  authoredPack,
+  swapFixture,
+  accept,
+  run,
+  teamRun,
+  prepareDestination,
+} from "../../../support/game";
+import { setBattleCards } from "../../../support/cards";
 import type { GameEvent } from "../../../../src/game/types";
-import { addBackups, authoredPack, swapFixture } from "../../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { accept, run, teamRun, prepareDestination } from "../../../support/game";
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { createPearls } from "../../../../src/game/combat/legendary";
 import { ownedCards } from "../../../../src/game/team";
@@ -137,14 +145,7 @@ describe("Memento and Legendary formations", () => {
   });
   it("deploys a Legendary alone, clears summons on departure and preserves spent slots", () => {
     const initial = produce(run(), (draft) => {
-      addBackups(draft, {
-        id: "legend",
-        species: "memento",
-        health: 60,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "legend", "memento", 60, freshCombat());
       const cards = draft.cards.map((card) => card.id);
       draft.battle!.hand = cards.slice(0, 2);
       draft.battle!.draw = cards.slice(2, 5);
@@ -175,14 +176,7 @@ describe("Memento and Legendary formations", () => {
   });
   it("promotes retained overflow when a Legendary replaces a hand of temporary copies", () => {
     const initial = produce(run(), (draft) => {
-      addBackups(draft, {
-        id: "legend",
-        species: "memento",
-        health: 60,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "legend", "memento", 60, freshCombat());
       const cards = draft.cards.map((card) => card.id);
       for (let i = 0; i < 6; i++) draft.cards.push({ ...draft.cards[0]!, id: `copy-${i}`, temporary: true });
       draft.battle!.copySerial = 6;
@@ -307,10 +301,7 @@ describe("Memento and Legendary formations", () => {
       const card = draft.cards.find(
         (card) => definition(card.definitionId).effect === "attack" && !definition(card.definitionId).target,
       )!;
-      draft.battle!.hand = [card.id];
-      draft.battle!.buffer = [];
-      draft.battle!.discard = [];
-      draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+      setBattleCards(draft, [card.id]);
     });
     const result = dispatch(state, {
       type: "play",
@@ -325,14 +316,7 @@ describe("Memento and Legendary formations", () => {
   it("supports distinct Legendaries in a full roster while deploying exactly one", () => {
     const initial = produce(teamRun(42, ["tournelle"]), (draft) => {
       for (const [i, kind] of (["euphera", "mossguard", "emberback", "memento"] as const).entries()) {
-        addBackups(draft, {
-          id: `reserve-${i}`,
-          species: kind,
-          health: species(kind).health,
-          block: 0,
-          attacked: false,
-          combat: freshCombat(),
-        });
+        addReserve(draft, `reserve-${i}`, kind, species(kind).health, freshCombat());
       }
     });
     const next = swapFixture(initial, { type: "swap", activeId: initial.team[0]!.id, reserve: "reserve-3" });

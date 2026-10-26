@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species } from "../../../src/game/content";
@@ -16,10 +17,7 @@ function ready(id: string, copies = 1) {
   return produce(teamRun(1, ["pollenmoth", "mossguard", "prismram"]), (game) => {
     game.discovery.recruited.pollenmoth = copies;
     const card = game.cards.find((card) => card.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     game.battle!.enemies.forEach((enemy) => {
       enemy.health = enemy.maxHealth;
       enemy.block = 0;

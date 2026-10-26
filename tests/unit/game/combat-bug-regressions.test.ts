@@ -1,3 +1,13 @@
+import {
+  addReserve,
+  accept,
+  authoredPack,
+  prepareDestination,
+  requireBattle,
+  run,
+  teamRun,
+} from "../../support/game";
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { freshCombat, hit, gainMana, tickStatuses } from "../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../src/game/save";
@@ -6,15 +16,6 @@ import { species } from "../../../src/game/content";
 import type { BattleState, GameEvent } from "../../../src/game/types";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { pendingReplacement, swapBackup } from "../../../src/game/team";
-import {
-  accept,
-  addBackups,
-  authoredPack,
-  prepareDestination,
-  requireBattle,
-  run,
-  teamRun,
-} from "../../support/game";
 import { produce } from "immer";
 
 it("retains a departed Echo's status attribution and periodic Gold rewards after resume", () => {
@@ -30,14 +31,7 @@ it("retains a departed Echo's status attribution and periodic Gold rewards after
   // Knot Comb returns the Echo's wound through Orbit Armillary before it departs.
   tickStatuses(state, echo, []);
   expect(target.combat.statusSources.bleed).toBe(echo.id);
-  addBackups(state, {
-    id: "backup",
-    species: "mossguard",
-    health: species("mossguard").health,
-    block: 0,
-    attacked: false,
-    combat: freshCombat(),
-  });
+  addReserve(state, "backup", "mossguard", species("mossguard").health, freshCombat());
   swapBackup(state, owner.id, "backup", []);
   const resumed = decodeSave(encodeSave(state));
   const events: GameEvent[] = [];
@@ -58,10 +52,7 @@ it("retains a departed Echo's status attribution and periodic Gold rewards after
 it("retains Last Light Charge's guaranteed critical hit when reflected", () => {
   const state = produce(requireBattle(teamRun(42, ["alpenglen"])), (draft) => {
     const card = draft.cards.find((entry) => entry.definitionId === "alpenglen-last-light-charge")!;
-    draft.battle.hand = [card.id];
-    draft.battle.buffer = [];
-    draft.battle.discard = [];
-    draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(draft, [card.id]);
     draft.team[0]!.combat = freshCombat();
     draft.battle.enemies[0]!.combat = { ...freshCombat(), attackReflection: true };
     draft.rng = 42;

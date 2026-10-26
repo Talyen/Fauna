@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { describe, expect, it, vi } from "vitest";
 import {
   freshCombat,
@@ -42,10 +43,7 @@ function anyProc(talents: string[], effect: (f: ReturnType<typeof fixture>) => b
 }
 function playable(state: GameState, definitionId: string) {
   const card = state.cards.find((c) => c.definitionId === definitionId)!;
-  state.battle!.hand = [card.id];
-  state.battle!.draw = state.cards.filter((c) => c.id !== card.id).map((c) => c.id);
-  state.battle!.buffer = [];
-  state.battle!.discard = [];
+  setBattleCards(state, [card.id]);
   return card;
 }
 function fund(state: GameState, keyword: string) {

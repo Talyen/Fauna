@@ -1,3 +1,5 @@
+import { addReserve, teamRun } from "../../../support/game";
+import { setBattleCards } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch, previewCard } from "../../../../src/game/engine";
@@ -10,7 +12,6 @@ import { executeAbility } from "../../../../src/game/combat/abilities";
 import { unhurried } from "../../../../src/game/combat/turns";
 import { swapFromCard } from "../../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { addBackups, teamRun } from "../../../support/game";
 import type { BattleState, GameEvent } from "../../../../src/game/types";
 
 const waking = "reverie-waking-wonder";
@@ -21,10 +22,7 @@ function fixture(ability = double) {
   if (game.phase !== "battle") throw new Error("Expected battle");
   return produce(game, (draft) => {
     const card = draft.cards.find((c) => c.definitionId === ability)!;
-    draft.battle.hand = [card.id];
-    draft.battle.draw = draft.cards.filter((c) => c.id !== card.id).map((c) => c.id);
-    draft.battle.buffer = [];
-    draft.battle.discard = [];
+    setBattleCards(draft, [card.id]);
     draft.battle.enemies.forEach((enemy) => {
       enemy.combat = freshCombat();
       enemy.block = 0;
@@ -129,14 +127,7 @@ describe("Reverie", () => {
       d.team.forEach((unit) => {
         unit.health -= 5;
       });
-      addBackups(d, {
-        id: "backup",
-        species: "mossguard",
-        health: 10,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(d, "backup", "mossguard", 10, freshCombat());
     });
     const action = play(game);
     expect(action.accepted).toBe(true);
@@ -266,14 +257,7 @@ describe("Reverie", () => {
       d.battle.hand = [card.id];
       d.battle.discard = [];
       d.battle.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
-      addBackups(d, {
-        id: "backup",
-        species: "mossguard",
-        health: 32,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(d, "backup", "mossguard", 32, freshCombat());
     });
     const twice = play(result).state;
     expect(twice.team[0]!.combat).toMatchObject({ negate: true, thorns: 6 });
@@ -297,14 +281,7 @@ describe("Reverie", () => {
       d.team[2]!.combat!.controlled = "freeze";
       d.team[2]!.combat!.controlTurns = 1;
       d.team[2]!.combat!.freeze = 10;
-      addBackups(d, {
-        id: "backup",
-        species: "mossguard",
-        health: 20,
-        block: 0,
-        attacked: false,
-        combat: { ...freshCombat(), burn: 5 },
-      });
+      addReserve(d, "backup", "mossguard", 20, { ...freshCombat(), burn: 5 });
     });
     const result = play(game);
     expect(result.state.battle!.mana).toBe(4);

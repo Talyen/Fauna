@@ -1,10 +1,20 @@
+import {
+  addReserve,
+  accept,
+  authoredPack,
+  prepareDestination,
+  requireBattle,
+  teamRun,
+  winBattle,
+} from "../../../support/game";
+import { playCard as play } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { definition, FIRST_RUN_STARTERS, species, speciesCards } from "../../../../src/game/content";
 import { cardText, enemyCanUse, enemyCard } from "../../../../src/game/card-rules";
 import { actionValue, enemyAbilityValue } from "../../../../src/game/ability-rules";
 import { cardKeywords } from "../../../../src/game/progression";
-import { dispatch, previewCard } from "../../../../src/game/engine";
+import { previewCard } from "../../../../src/game/engine";
 import {
   removeControlBuildup,
   removeEffects,
@@ -17,24 +27,11 @@ import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { validateCatalog } from "../../../../src/game/content-validation";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { parhelionBattle } from "../../../support/parhelion";
-import {
-  accept,
-  addBackups,
-  authoredPack,
-  prepareDestination,
-  requireBattle,
-  teamRun,
-  winBattle,
-} from "../../../support/game";
-import type { BattleState, GameEvent } from "../../../../src/game/types";
+import type { GameEvent } from "../../../../src/game/types";
 
 const reprieve = "parhelion-polar-reprieve";
 const reservoir = "parhelion-sundog-reservoir";
 const waltz = "parhelion-whiteout-waltz";
-function play(game: BattleState, id: string, targetId?: string) {
-  const card = game.cards.find((entry) => entry.definitionId === id)!;
-  return dispatch(game, { type: "play", cardId: card.id, targetId, autoEndTurn: false });
-}
 
 describe("Parhelion", () => {
   it("authors the selected one-Mana kit, six Sunthaw tiers and normal encounter integration", () => {
@@ -139,14 +136,7 @@ describe("Parhelion", () => {
       ally.combat!.freeze = 4;
       removeControlBuildup(draft, ally, "freeze", []);
       expect(ally.health).toBe(26);
-      addBackups(draft, {
-        id: "backup",
-        species: "mossguard",
-        health: 32,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "mossguard", 32, freshCombat());
       swapBackup(draft, draft.team[0]!.id, "backup", []);
       ally.combat!.freeze = 4;
       removeControlBuildup(draft, ally, "freeze", []);
@@ -158,14 +148,7 @@ describe("Parhelion", () => {
   it("cleanses only deployed living allies and cannot heal the same buildup again on a repeat", () => {
     const events: GameEvent[] = [];
     const game = produce(parhelionBattle(), (draft) => {
-      addBackups(draft, {
-        id: "backup",
-        species: "stillara",
-        health: 12,
-        block: 0,
-        attacked: false,
-        combat: { ...freshCombat(), freeze: 4 },
-      });
+      addReserve(draft, "backup", "stillara", 12, { ...freshCombat(), freeze: 4 });
       const def = { ...definition(reprieve), repeatChance: 100 };
       executeAbility(draft, { side: "player", actor: draft.team[0]!, def, value: 1 }, events, {
         swap: swapFromCard,

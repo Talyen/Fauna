@@ -1,7 +1,8 @@
+import { addReserve, requireBattle, teamRun, prepareDestination } from "../../../support/game";
+import { setBattleCards, setHand } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { oatharaBattle } from "../../../support/oathara";
-import { addBackups, requireBattle, teamRun, prepareDestination } from "../../../support/game";
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { definition, species, speciesCards, FIRST_RUN_STARTERS } from "../../../../src/game/content";
 import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
@@ -24,12 +25,7 @@ function play(game: BattleState, id: string, targetId?: string) {
 }
 function onlyHand(game: BattleState, definitions: string[]) {
   return produce(game, (draft) => {
-    draft.battle.hand = definitions.map((id) => draft.cards.find((card) => card.definitionId === id)!.id);
-    draft.battle.draw = draft.cards
-      .filter((card) => !draft.battle.hand.includes(card.id))
-      .map((card) => card.id);
-    draft.battle.discard = [];
-    draft.battle.buffer = [];
+    setHand(draft, definitions);
   });
 }
 function enemyAttack(game: BattleState, events: GameEvent[], area = false, repeated = false) {
@@ -185,14 +181,7 @@ describe("Oathara", () => {
     });
     expect(repeated.team[0]!.combat!.fallenCardsPlayedThisTurn).toBe(1);
     const swapped = produce(game, (draft) => {
-      addBackups(draft, {
-        id: "backup",
-        species: "prismram",
-        health: 30,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "prismram", 30, freshCombat());
       swapFromCard(draft, draft.team[0]!, [], true);
     });
     expect(swapped.reserves[0]!.combat!.fallenCardsPlayedThisTurn).toBe(1);
@@ -204,10 +193,7 @@ describe("Oathara", () => {
       draft.team[2]!.health = 0;
       draft.team[0]!.combat!.fallenCardsPlayedThisTurn = 1;
       const card = draft.cards.find((card) => card.definitionId === "emberback-attack")!;
-      draft.battle.hand = [card.id];
-      draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
-      draft.battle.discard = [];
-      draft.battle.buffer = [];
+      setBattleCards(draft, [card.id]);
     });
     expect(
       cardActor(
@@ -289,14 +275,7 @@ describe("Oathara", () => {
   it("targets knocked-out backups, rejects living allies and exposes legal resurrection to Auto-play", () => {
     const game = produce(oatharaBattle(), (draft) => {
       draft.team[1]!.health = 10;
-      addBackups(draft, {
-        id: "fallen-backup",
-        species: "coralcurl",
-        health: 0,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "fallen-backup", "coralcurl", 0, freshCombat());
     });
     expect(play(game, vow, game.team[1]!.id).state).toBe(game);
     const choice = battleChoices(game).find(

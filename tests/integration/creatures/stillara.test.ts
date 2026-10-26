@@ -1,6 +1,15 @@
-import { enemyPlay } from "../../support/game";
+import {
+  addReserve,
+  enemyPlay,
+  authoredPack,
+  swapFixture,
+  prepareDestination,
+  accept,
+  teamRun,
+  winBattle,
+} from "../../support/game";
+import { setBattleCards } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
-import { authoredPack, swapFixture, addBackups } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, species } from "../../../src/game/content";
@@ -12,15 +21,11 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { definitionKeywords } from "../../../src/game/keywords";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameState } from "../../../src/game/types";
-import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(ability = "reed-reservoir") {
   return produce(teamRun(1, ["stillara", "mossguard", "prismram"]), (game) => {
     const card = game.cards.find((entry) => entry.definitionId === `stillara-${ability}`)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     game.rng = 1;
   });
 }
@@ -28,14 +33,7 @@ function play(game: GameState, autoEndTurn = false) {
   return dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn });
 }
 function addBackup(game: GameState) {
-  addBackups(game, {
-    id: "backup",
-    species: "coralcurl",
-    health: 20,
-    block: 0,
-    combat: freshCombat(),
-    attacked: false,
-  });
+  addReserve(game, "backup", "coralcurl", 20, freshCombat());
 }
 it("registers the support kit, recruitment, preview parity and current saves", () => {
   const kit = CARDS.filter((card) => card.species === "stillara");

@@ -1,3 +1,4 @@
+import { addReserve } from "../../../support/game";
 import { produce } from "immer";
 import { describe, expect, it } from "vitest";
 import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
@@ -9,7 +10,6 @@ import { definitionKeywords } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { swapBackup, swapFromCard } from "../../../../src/game/team";
 import { rankedBattleChoices } from "../../../../src/application/battle-policy";
-import { addBackups } from "../../../support/game";
 import { skybexBattle } from "../../../support/skybex";
 
 const cloudstep = (state: ReturnType<typeof skybexBattle>) => ({
@@ -148,14 +148,7 @@ describe("Skybex", () => {
     });
     expect(restoredGuide.team[0]!.block).toBe(1);
     const inactive = produce(restoredGuide, (draft) => {
-      addBackups(draft, {
-        id: "inactive-guide-backup",
-        species: "pollenmoth",
-        health: 23,
-        block: 0,
-        combat: freshCombat(),
-        attacked: false,
-      });
+      addReserve(draft, "inactive-guide-backup", "pollenmoth", 23, freshCombat());
       swapBackup(draft, "ally-2", "inactive-guide-backup", []);
     });
     expect(inactive.team[2]!.block).toBe(0);
@@ -173,14 +166,7 @@ describe("Skybex", () => {
     });
     expect(state.team[2]!.block).toBe(2);
     const legendary = produce(skybexBattle(), (draft) => {
-      addBackups(draft, {
-        id: "legendary-backup",
-        species: "memento",
-        health: 60,
-        block: 0,
-        combat: freshCombat(),
-        attacked: false,
-      });
+      addReserve(draft, "legendary-backup", "memento", 60, freshCombat());
       swapBackup(draft, "ally-0", "legendary-backup", []);
     });
     expect(legendary.team.map((unit) => unit.id)).toEqual(["legendary-backup"]);

@@ -1,7 +1,15 @@
-import { enemyPlay } from "../../support/game";
-import { addBackups } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
+import {
+  enemyPlay,
+  addBackups,
+  authoredPack,
+  swapFixture,
+  prepareDestination,
+  accept,
+  teamRun,
+  winBattle,
+} from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
-import { authoredPack, swapFixture } from "../../support/game";
 import { cardText } from "../../../src/game/card-rules";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -19,15 +27,11 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
-import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "chimecricket-attack", seed = 1) {
   return produce(teamRun(1, ["chimecricket", "mossguard", "emberback"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     game.battle!.enemies.forEach((enemy) => {
       enemy.block = 0;
       enemy.combat = freshCombat();

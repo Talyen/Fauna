@@ -1,3 +1,5 @@
+import { addReserve, policy, requireBattle, teamRun, victoryReady } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
 import { createHash } from "node:crypto";
 import { produce } from "immer";
 import { expect, it } from "vitest";
@@ -23,7 +25,6 @@ import {
   removeEffects,
 } from "../../../src/game/combat/index";
 import { observeDecisions } from "../../../src/game/random";
-import { addBackups, policy, requireBattle, teamRun, victoryReady } from "../../support/game";
 
 const cases: { name: string; seed: number; team: SpeciesId[] }[] = [
   { name: "Armor bursts and status thresholds", seed: 42, team: ["emberback", "mossguard", "prismram"] },
@@ -159,19 +160,9 @@ it.each([
   (id, kind, text, effect, amount, score) => {
     const game = requireBattle(
       produce(teamRun(42, [kind, "emberback"]), (draft) => {
-        addBackups(draft, {
-          id: "backup",
-          species: "mossguard",
-          health: species("mossguard").health,
-          block: 0,
-          attacked: false,
-          combat: freshCombat(),
-        });
+        addReserve(draft, "backup", "mossguard", species("mossguard").health, freshCombat());
         const card = draft.cards.find((card) => card.definitionId === id)!;
-        draft.battle!.hand = [card.id];
-        draft.battle!.buffer = [];
-        draft.battle!.discard = [];
-        draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+        setBattleCards(draft, [card.id]);
       }),
     );
     const def = definition(id);

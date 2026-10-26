@@ -1,4 +1,14 @@
-import { authoredPack, swapFixture, addBackups } from "../../support/game";
+import {
+  addReserve,
+  authoredPack,
+  swapFixture,
+  prepareDestination,
+  requireBattle,
+  accept,
+  teamRun,
+  winBattle,
+} from "../../support/game";
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, definition, species } from "../../../src/game/content";
@@ -15,7 +25,6 @@ import { settle } from "../../../src/game/journey";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameState, GameEvent } from "../../../src/game/types";
-import { prepareDestination, requireBattle, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(ability = "margin-of-possibility", copies = 6) {
   return produce(teamRun(1, ["rookhaven", "mossguard", "prismram"]), (game) => {
@@ -23,10 +32,7 @@ function ready(ability = "margin-of-possibility", copies = 6) {
     game.battle!.copySerial = 0;
     game.discovery.recruited.rookhaven = copies;
     const card = game.cards.find((entry) => entry.definitionId === `rookhaven-${ability}`)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     game.rng = 1;
   });
 }
@@ -269,14 +275,7 @@ it.each(["knocked out", "backup"])("a %s Rookhaven supplies no copies", (mode) =
   const game = produce(ready(), (draft) => {
     if (mode === "knocked out") draft.team[0]!.health = 0;
     else {
-      addBackups(draft, {
-        id: "backup",
-        species: "emberback",
-        health: species("emberback").health,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "emberback", species("emberback").health, freshCombat());
       swapBackup(draft, draft.team[0]!.id, "backup", []);
     }
   });
@@ -322,14 +321,7 @@ it.each([false, true])(
           Number(draft.cards.find((card) => card.id === b)!.ownerId === "ally-0"),
       );
       draw(draft, 1);
-      addBackups(draft, {
-        id: "backup",
-        species: "sternshell",
-        health: 32,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "sternshell", 32, freshCombat());
     });
     const copied = copies(game)[0]!;
     const next = produce(game, (draft) => {
@@ -426,14 +418,7 @@ it("defeat clears copies before publishing the saved result", () => {
 
 it("keeps the battle card limit and a saveable hand when deploying into a copy-filled formation", () => {
   const game = produce(teamRun(1, ["rookhaven", "mossguard"]), (draft) => {
-    addBackups(draft, {
-      id: "backup",
-      species: "prismram",
-      health: species("prismram").health,
-      block: 0,
-      attacked: false,
-      combat: freshCombat(),
-    });
+    addReserve(draft, "backup", "prismram", species("prismram").health, freshCombat());
     const original = draft.cards[0]!;
     while (draft.cards.length < MAX_BATTLE_CARDS) {
       draft.cards.push({ ...original, id: `copy-${draft.battle!.copySerial++}`, temporary: true });

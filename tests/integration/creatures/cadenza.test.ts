@@ -1,5 +1,13 @@
+import { setBattleCards } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
-import { authoredPack, swapFixture } from "../../support/game";
+import {
+  authoredPack,
+  swapFixture,
+  prepareDestination,
+  accept,
+  teamRun,
+  winBattle,
+} from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS } from "../../../src/game/content";
@@ -10,15 +18,11 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameState } from "../../../src/game/types";
-import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(ability = "resonant-well") {
   return produce(teamRun(1, ["cadenza", "mossguard", "prismram"]), (game) => {
     const card = game.cards.find((entry) => entry.definitionId === `cadenza-${ability}`)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     game.rng = 1;
   });
 }
@@ -283,10 +287,7 @@ it("Living Chorus does not count repeated resolutions as additional cards", () =
       draft.team[2]!.health = 5;
       draft.battle!.cardsPlayedThisTurn = 1;
       const card = draft.cards.find((entry) => entry.definitionId === "chimecricket-nullify")!;
-      draft.battle!.hand = [card.id];
-      draft.battle!.buffer = [];
-      draft.battle!.discard = [];
-      draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+      setBattleCards(draft, [card.id]);
     });
     const result = play(game);
     repeated = result.events.some((event) => event.text.includes("repeats"));

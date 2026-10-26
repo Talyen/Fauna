@@ -1,4 +1,5 @@
-import { enemyPlay } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
+import { enemyPlay, authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -22,16 +23,12 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
 import { appendFeedback, CombatFeedback } from "../../../src/ui/battle/combat-feedback";
-import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 
 function ready(id = "dunefox-dodge") {
   return produce(teamRun(1, ["dunefox", "mossguard", "captoad"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     game.battle!.enemies.forEach((enemy) => {
       enemy.block = 0;
       enemy.combat = freshCombat();

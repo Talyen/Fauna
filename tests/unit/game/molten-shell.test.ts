@@ -1,4 +1,12 @@
-import { addBackups, authoredPack, swapFixture } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
+import {
+  addBackups,
+  authoredPack,
+  swapFixture,
+  prepareDestination,
+  accept,
+  teamRun,
+} from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { ensureCombat, freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
@@ -7,7 +15,6 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { creaturePassive } from "../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
-import { prepareDestination, accept, teamRun } from "../../support/game";
 
 function battle(copies = 1) {
   return accept(
@@ -218,10 +225,7 @@ it("previews Armor theft and commits the same passive burst without mutating the
   );
   const ready = produce(withLeech, (draft) => {
     const card = draft.cards.find((card) => card.definitionId === "emberback-attack")!;
-    draft.battle!.hand = [card.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(draft, [card.id]);
     draft.battle!.enemies[0]!.combat.armor = 1;
   });
   const original = encodeSave(ready);

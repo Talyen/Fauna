@@ -1,3 +1,14 @@
+import {
+  addReserve,
+  addBackups,
+  completeRecruitment,
+  accept,
+  run,
+  teamRun,
+  winBattle,
+  swapFixture,
+} from "../../support/game";
+import { setBattleCards } from "../../support/cards";
 import { freshCombat, ensureCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
@@ -8,27 +19,11 @@ import { MAX_BATTLE_TURN } from "../../../src/game/state-limits";
 import type { GameEvent } from "../../../src/game/types";
 import { pendingReplacement, swapBackup } from "../../../src/game/team";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
-import {
-  addBackups,
-  completeRecruitment,
-  accept,
-  run,
-  teamRun,
-  winBattle,
-  swapFixture,
-} from "../../support/game";
 
 function withReserves() {
   return produce(run(), (d) => {
     for (const kind of ["pollenmoth", "captoad"] as const) {
-      addBackups(d, {
-        id: `recruit-${kind}`,
-        species: kind,
-        health: species(kind).health,
-        block: 0,
-        combat: freshCombat(),
-        attacked: false,
-      });
+      addReserve(d, `recruit-${kind}`, kind, species(kind).health, freshCombat());
     }
   });
 }
@@ -37,14 +32,7 @@ it.each(["coralcurl", "memento"] as const)(
   "delivers swap protection, arrival passives and the Saddle Pouch draw once in order for %s",
   (kind) => {
     const state = produce(teamRun(42, ["skybex", "dulcera", "emberback"]), (draft) => {
-      addBackups(draft, {
-        id: "incoming",
-        species: kind,
-        health: 10,
-        block: 0,
-        combat: freshCombat(),
-        attacked: false,
-      });
+      addReserve(draft, "incoming", kind, 10, freshCombat());
       draft.team[0]!.block = 7;
       draft.boons = ["tide-anklet", "saddle-pouch", "dune-shuttle"];
     });
@@ -70,10 +58,7 @@ it.each(["coralcurl", "memento"] as const)(
 it("ends a zero-Mana play only after commitment, retaining previews, opt-out and the turn ceiling", () => {
   const state = produce(run(), (draft) => {
     const card = draft.cards.find((entry) => definition(entry.definitionId).effect === "guard")!;
-    draft.battle!.hand = [card.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(draft, [card.id]);
     draft.battle!.mana = 1;
   });
   const command = { type: "play" as const, cardId: state.battle!.hand[0]! };

@@ -1,3 +1,5 @@
+import { addReserve, accept, prepareDestination, requireBattle, teamRun } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createHash } from "node:crypto";
 import { produce } from "immer";
@@ -19,7 +21,6 @@ import { availablePlays } from "../../../src/game/play-queries";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { encodeSave, decodeSave } from "../../../src/game/save";
 import { rankedBattleChoices } from "../../../src/application/battle-policy";
-import { addBackups, accept, prepareDestination, requireBattle, teamRun } from "../../support/game";
 
 import { arabescaBattle } from "../../support/arabesca";
 import { freshCombat, hit, grantTemporaryDodge, startAction } from "../../../src/game/combat/index";
@@ -106,10 +107,7 @@ it.each(scenarios)("preserves commands, previews, save/resume and rankings: $nam
     produce(teamRun(42, [scenario.species]), (draft) => {
       const card = draft.cards.find((entry) => definition(entry.definitionId).effect === scenario.effect)!;
       expect(card).toBeDefined();
-      draft.battle!.hand = [card.id];
-      draft.battle!.buffer = [];
-      draft.battle!.discard = [];
-      draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+      setBattleCards(draft, [card.id]);
       draft.team[0]!.health = 5;
       draft.team[0]!.combat!.poison = 2;
       if (scenario.reflection) {
@@ -205,14 +203,7 @@ describe("Arabesca's selected ability contracts", () => {
 
   it("does not heal on hits, another creature's Dodge or periodic damage; excludes backups and knockouts", () => {
     const game = produce(arabescaBattle(), (draft) => {
-      addBackups(draft, {
-        id: "backup",
-        species: "arabesca",
-        health: 5,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "arabesca", 5, freshCombat());
       draft.team[2]!.health = 0;
       hit(draft, draft.battle.enemies[0]!, draft.team[1]!, 6, "physical", [], {
         origin: "ability",
@@ -233,14 +224,7 @@ describe("Arabesca's selected ability contracts", () => {
   it("uses Camp Hammock's shared healing recipients for Petalwake", () => {
     const game = produce(arabescaBattle(), (draft) => {
       draft.boons = ["camp-hammock"];
-      addBackups(draft, {
-        id: "backup",
-        species: "prismram",
-        health: 5,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "prismram", 5, freshCombat());
       hit(draft, draft.battle.enemies[0]!, draft.team[0]!, 6, "physical", [], {
         origin: "ability",
         blindMiss: true,
@@ -414,14 +398,7 @@ describe("Arabesca's selected ability contracts", () => {
         unit.combat.controlled = "freeze";
         unit.combat.controlTurns = 1;
       });
-      addBackups(draft, {
-        id: "backup",
-        species: "prismram",
-        health: 30,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "prismram", 30, freshCombat());
     });
     const rejected = playArabesca(game, snare, "missing");
     expect(rejected.accepted).toBe(false);
@@ -435,10 +412,7 @@ describe("Arabesca's selected ability contracts", () => {
     expect(resumed).toEqual(swapped);
     const playable = produce(resumed, (draft) => {
       const card = draft.cards.find((card) => card.definitionId === "emberback-attack")!;
-      draft.battle.hand = [card.id];
-      draft.battle.buffer = [];
-      draft.battle.discard = [];
-      draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+      setBattleCards(draft, [card.id]);
     });
     const result = playArabesca(playable, "emberback-attack", playable.battle.enemies[0]!.id);
     expect(result.accepted).toBe(true);

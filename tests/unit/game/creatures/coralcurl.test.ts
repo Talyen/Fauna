@@ -1,4 +1,5 @@
-import { enemyPlay } from "../../../support/game";
+import { setBattleCards } from "../../../support/cards";
+import { enemyPlay, teamRun } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species, TALENTS } from "../../../../src/game/content";
@@ -7,15 +8,11 @@ import { freshCombat, hit, removeEffects, tickStatuses } from "../../../../src/g
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { canBuyTalent } from "../../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { teamRun } from "../../../support/game";
 
 function ready(id = "coralcurl-attack") {
   return produce(teamRun(1, ["coralcurl", "mossguard", "prismram"]), (game) => {
     const card = game.cards.find((entry) => entry.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     game.battle!.enemies.forEach((enemy) => {
       enemy.health = enemy.maxHealth;
       enemy.block = 0;

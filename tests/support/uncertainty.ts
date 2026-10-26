@@ -1,3 +1,4 @@
+import { setBattleCards } from "./cards";
 import { produce } from "immer";
 import { teamRun } from "./game";
 
@@ -7,10 +8,7 @@ export function uncertainBattle(draw = false) {
     const card = state.cards.find(
       (entry) => entry.definitionId === (draw ? "chimecricket-attack" : "cindernewt-attack"),
     )!;
-    state.battle!.hand = [card.id];
-    state.battle!.buffer = [];
-    state.battle!.discard = [];
-    state.battle!.draw = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(state, [card.id]);
     state.battle!.enemies[0]!.combat.dodge = 25;
     state.battle!.enemies[0]!.health = 4;
     state.battle!.enemies[0]!.block = 0;

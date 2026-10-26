@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
 import { swapFixture, completeRecruitment, accept, run, teamRun, winBattle } from "../../support/game";
 import { describe, expect, it } from "vitest";
@@ -68,10 +69,7 @@ describe("game commands", () => {
   it("rejects wrong targets, absent cards, and insufficient mana before consuming RNG", () => {
     const s = produce(run(), (game) => {
       const attack = game.cards.find((card) => card.definitionId === "emberback-attack")!;
-      game.battle!.hand = [attack.id];
-      game.battle!.buffer = [];
-      game.battle!.discard = [];
-      game.battle!.draw = game.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
+      setBattleCards(game, [attack.id]);
     });
     const attack = s.cards.find((card) => card.definitionId === "emberback-attack")!;
     for (const cmd of [

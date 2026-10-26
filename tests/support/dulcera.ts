@@ -1,6 +1,7 @@
+import { addReserve, requireBattle, teamRun } from "./game";
+import { setHand } from "./cards";
 import { produce } from "immer";
 import { freshCombat } from "../../src/game/combat/index";
-import { addBackups, requireBattle, teamRun } from "./game";
 import type { BattleState } from "../../src/game/types";
 
 export function dulceraBattle(withBackup = true): BattleState {
@@ -11,25 +12,17 @@ export function dulceraBattle(withBackup = true): BattleState {
     draft.team[1]!.combat!.poison = 4;
     draft.team[2]!.health = 12;
     if (withBackup)
-      addBackups(draft, {
-        id: "backup-coralcurl",
-        species: "coralcurl",
-        health: 12,
-        block: 0,
-        combat: { ...freshCombat(), poison: 4, freeze: 3, blind: true },
-        attacked: false,
+      addReserve(draft, "backup-coralcurl", "coralcurl", 12, {
+        ...freshCombat(),
+        poison: 4,
+        freeze: 3,
+        blind: true,
       });
-    const definitions = [
+    setHand(draft, [
       "dulcera-chapel-light",
       "dulcera-meadow-shelter",
       "dulcera-hushed-waters",
       "emberback-attack",
-    ];
-    draft.battle.hand = definitions.map((id) => draft.cards.find((card) => card.definitionId === id)!.id);
-    draft.battle.draw = draft.cards
-      .filter((card) => !draft.battle.hand.includes(card.id))
-      .map((card) => card.id);
-    draft.battle.discard = [];
-    draft.battle.buffer = [];
+    ]);
   });
 }

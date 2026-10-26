@@ -1,3 +1,4 @@
+import { addReserve, requireBattle, teamRun } from "../../support/game";
 import { expect, it, vi } from "vitest";
 import { produce } from "immer";
 import { executeAbility } from "../../../src/game/combat/abilities";
@@ -11,34 +12,19 @@ import { actionValue, enemyAbilityValue } from "../../../src/game/ability-rules"
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
-import { addBackups, requireBattle, teamRun } from "../../support/game";
 
 it.each(SPECIES)("shares explicit target admission with commands for $id", ({ id }) => {
   const game = requireBattle(
     produce(teamRun(42, [id]), (state) => {
       state.team[0]!.health--;
       if (id === "wisterelle")
-        addBackups(state, {
-          id: "living-backup",
-          species: "coralcurl",
-          health: species("coralcurl").health,
-          block: 0,
-          attacked: false,
-          combat: freshCombat(),
-        });
+        addReserve(state, "living-backup", "coralcurl", species("coralcurl").health, freshCombat());
       state.battle!.hand = state.cards.map((card) => card.id);
       state.battle!.draw = [];
       state.battle!.discard = [];
       state.battle!.buffer = [];
       if (state.cards.some((card) => definition(card.definitionId).effect === "resurrect"))
-        addBackups(state, {
-          id: "fallen-backup",
-          species: "mossguard",
-          health: 0,
-          block: 0,
-          attacked: false,
-          combat: freshCombat(),
-        });
+        addReserve(state, "fallen-backup", "mossguard", 0, freshCombat());
     }),
   );
   const saved = encodeSave(game);

@@ -1,4 +1,5 @@
-import { addBackups } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
+import { addBackups, authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -10,16 +11,12 @@ import { freshCombat } from "../../../src/game/combat/index";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
-import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(definitionId: string) {
   return produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (game) => {
     game.rng = 1;
     const card = game.cards.find((card) => card.definitionId === definitionId)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     game.battle!.enemies.forEach((enemy) => {
       enemy.health = enemy.maxHealth;
       enemy.block = 0;

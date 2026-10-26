@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { produce } from "immer";
 import { expect, it } from "vitest";
 import { definition, type SpeciesId } from "../../../src/game/content";
@@ -11,10 +12,7 @@ function reactionBattle(kind: SpeciesId, effect: string, deathDoorUsed = true) {
     actor.health = 1;
     actor.combat!.deathDoorUsed = deathDoorUsed;
     const card = draft.cards.find((entry) => definition(entry.definitionId).effect === effect)!;
-    draft.battle.hand = [card.id];
-    draft.battle.buffer = [];
-    draft.battle.discard = [];
-    draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(draft, [card.id]);
     draft.boons = ["story-puzzle-cube"];
     draft.battle.enemies[0]!.combat.armor = 1;
     draft.rng = 42;

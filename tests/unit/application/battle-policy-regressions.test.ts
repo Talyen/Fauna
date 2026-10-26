@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { produce } from "immer";
 import { expect, it } from "vitest";
 import { chooseBattleCommand, rankedBattleChoices } from "../../../src/application/battle-policy";
@@ -12,12 +13,10 @@ import { accept, authoredPack, prepareDestination, requireBattle, teamRun } from
 
 function withHand(state: GameState, definitions: string[]) {
   return produce(state, (game) => {
-    game.battle!.hand = definitions.map((id) => game.cards.find((card) => card.definitionId === id)!.id);
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards
-      .filter((card) => !game.battle!.hand.includes(card.id))
-      .map((card) => card.id);
+    setBattleCards(
+      game,
+      definitions.map((id) => game.cards.find((card) => card.definitionId === id)!.id),
+    );
   });
 }
 

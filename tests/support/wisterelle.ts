@@ -1,29 +1,12 @@
+import { addReserve, requireBattle, teamRun } from "./game";
 import { produce } from "immer";
 import { freshCombat } from "../../src/game/combat/index";
-import { addBackups, requireBattle, teamRun } from "./game";
 
 export function wisterelleBattle() {
   return produce(requireBattle(teamRun(42, ["wisterelle", "emberback", "prismram"])), (draft) => {
     draft.team.forEach((unit) => (unit.health = 12));
-    addBackups(
-      draft,
-      {
-        id: "backup-mossguard",
-        species: "mossguard",
-        health: 20,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      },
-      {
-        id: "backup-coralcurl",
-        species: "coralcurl",
-        health: 15,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      },
-    );
+    addReserve(draft, "backup-mossguard", "mossguard", 20, freshCombat());
+    addReserve(draft, "backup-coralcurl", "coralcurl", 15, freshCombat());
     const definitions = [
       "wisterelle-forgotten-junction",
       "wisterelle-lantern-fare",

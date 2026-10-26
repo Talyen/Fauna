@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { createDiagnostics } from "../../../src/application/diagnostics";
@@ -121,10 +122,7 @@ it("spending the last Mana at the turn limit preserves a resumable player window
     draft.battle!.turn = 1_000_000;
     draft.battle!.mana = 1;
     const card = draft.cards.find((entry) => definition(entry.definitionId).effect === "guard")!;
-    draft.battle!.hand = [card.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(draft, [card.id]);
   });
   const next = accept(before, { type: "play", cardId: before.battle!.hand[0]! });
   expect(next.battle!.turn).toBe(1_000_000);

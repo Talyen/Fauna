@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, SPECIES, definition, BOONS, TALENTS } from "../../../src/game/content";
@@ -15,10 +16,7 @@ function ready(id: string) {
   return produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (game) => {
     game.rng = 1;
     const card = game.cards.find((card) => card.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     for (const enemy of game.battle!.enemies) {
       enemy.block = 0;
       enemy.combat = freshCombat();

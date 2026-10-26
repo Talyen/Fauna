@@ -1,3 +1,13 @@
+import {
+  addReserve,
+  accept,
+  authoredPack,
+  prepareDestination,
+  requireBattle,
+  teamRun,
+  winBattle,
+} from "../../../support/game";
+import { playCard as play, setBattleCards } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { definition, FIRST_RUN_STARTERS, species, speciesCards } from "../../../../src/game/content";
@@ -12,45 +22,19 @@ import { swapBackup, swapFromCard } from "../../../../src/game/team";
 import { battleChoices } from "../../../../src/application/battle-policy";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { dulceraBattle } from "../../../support/dulcera";
-import {
-  accept,
-  addBackups,
-  authoredPack,
-  prepareDestination,
-  requireBattle,
-  teamRun,
-  winBattle,
-} from "../../../support/game";
-import type { BattleState, GameEvent } from "../../../../src/game/types";
+import type { GameEvent } from "../../../../src/game/types";
 
 const chapel = "dulcera-chapel-light";
 const meadow = "dulcera-meadow-shelter";
 const hush = "dulcera-hushed-waters";
-function play(game: BattleState, id: string) {
-  return dispatch(game, {
-    type: "play",
-    cardId: game.cards.find((card) => card.definitionId === id)!.id,
-    autoEndTurn: false,
-  });
-}
 
 describe("Dulcera", () => {
   it("combines passage with Mountain Guide and repeats Cleanse without exchanging the departed actor again", () => {
     const game = produce(requireBattle(teamRun(42, ["dulcera", "skybex", "mossguard"])), (draft) => {
-      addBackups(draft, {
-        id: "backup",
-        species: "coralcurl",
-        health: 12,
-        block: 0,
-        attacked: false,
-        combat: { ...freshCombat(), poison: 4 },
-      });
+      addReserve(draft, "backup", "coralcurl", 12, { ...freshCombat(), poison: 4 });
       draft.battle.repeatNext.player = true;
       const card = draft.cards.find((entry) => entry.definitionId === hush)!;
-      draft.battle.hand = [card.id];
-      draft.battle.buffer = [];
-      draft.battle.discard = [];
-      draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+      setBattleCards(draft, [card.id]);
     });
     const result = play(game, hush);
     expect(result.accepted).toBe(true);
@@ -146,14 +130,7 @@ describe("Dulcera", () => {
     const events: GameEvent[] = [];
     const game = produce(requireBattle(teamRun(42, ["dulcera", "dulcera", "mossguard"])), (draft) => {
       draft.discovery.recruited.dulcera = 3;
-      addBackups(draft, {
-        id: "backup",
-        species: "coralcurl",
-        health: 10,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "coralcurl", 10, freshCombat());
       swapFromCard(draft, draft.team[2]!, events);
     });
     expect(game.team[2]!.health).toBe(16);
@@ -182,14 +159,7 @@ describe("Dulcera", () => {
       draft.reserves[0]!.health = 10;
       swapBackup(draft, "backup-coralcurl", "ally-0", []);
       expect(draft.team[0]!.health).toBe(11);
-      addBackups(draft, {
-        id: "legendary",
-        species: "memento",
-        health: 10,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "legendary", "memento", 10, freshCombat());
       swapBackup(draft, "ally-0", "legendary", []);
     });
     expect(game.team).toHaveLength(1);
@@ -205,14 +175,7 @@ describe("Dulcera", () => {
     expect(inactive.team[1]!.health).toBe(12);
     const resting = produce(dulceraBattle(), (draft) => {
       swapBackup(draft, "ally-0", "backup-coralcurl", []);
-      addBackups(draft, {
-        id: "backup",
-        species: "dunefox",
-        health: 10,
-        block: 0,
-        attacked: false,
-        combat: freshCombat(),
-      });
+      addReserve(draft, "backup", "dunefox", 10, freshCombat());
       swapBackup(draft, "ally-1", "backup", []);
     });
     expect(resting.team[1]!.health).toBe(10);

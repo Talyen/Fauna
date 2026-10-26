@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { createBattleActor } from "../../../src/application/battle-actor";
 import { rankedBattleChoices } from "../../../src/application/battle-policy";
@@ -16,10 +17,7 @@ function attack(id = "mossguard-attack") {
 }
 function handOnly(state: ReturnType<typeof requireBattle>, definitionId: string) {
   const card = state.cards.find((entry) => entry.definitionId === definitionId)!;
-  state.battle.hand = [card.id];
-  state.battle.buffer = [];
-  state.battle.discard = [];
-  state.battle.draw = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+  setBattleCards(state, [card.id]);
   return card;
 }
 

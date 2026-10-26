@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, definition, species } from "../../../src/game/content";
@@ -20,10 +21,7 @@ function ready(ability = "wish-exchange") {
   return produce(teamRun(1, ["euphera", "mossguard", "prismram"]), (draft) => {
     draft.discovery.recruited.euphera = 6;
     const card = draft.cards.find((card) => card.definitionId === `euphera-${ability}`)!;
-    draft.battle!.hand = [card.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(draft, [card.id]);
     draft.battle!.enemies.forEach((enemy) => {
       enemy.block = 0;
       enemy.combat = freshCombat();
@@ -174,10 +172,7 @@ it("does not treat moved Block as a fresh gain or include knocked-out allies", (
     draft.team[2]!.health = 0;
     draft.team[2]!.block = 99;
     const card = draft.cards.find((card) => card.definitionId === "euphera-wish-exchange")!;
-    draft.battle!.hand = [card.id];
-    draft.battle!.buffer = [];
-    draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
-    draft.battle!.discard = [];
+    setBattleCards(draft, [card.id]);
   });
   const result = play(game);
   expect(result.state.team.map((unit) => unit.block)).toEqual([6, 5, 99]);

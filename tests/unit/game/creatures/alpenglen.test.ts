@@ -1,7 +1,8 @@
+import { addReserve, requireBattle, teamRun } from "../../../support/game";
+import { playCard as play, setHand } from "../../../support/cards";
 import { produce } from "immer";
 import { describe, expect, it } from "vitest";
 import { alpenglenBattle } from "../../../support/alpenglen";
-import { addBackups, requireBattle, teamRun } from "../../../support/game";
 import { definition, species, speciesCards, FIRST_RUN_STARTERS } from "../../../../src/game/content";
 import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { validateCatalog } from "../../../../src/game/content-validation";
@@ -23,17 +24,8 @@ const charge = "alpenglen-last-light-charge";
 
 function hand(game: BattleState, definitions: string[]) {
   return produce(game, (draft) => {
-    draft.battle.hand = definitions.map((id) => draft.cards.find((card) => card.definitionId === id)!.id);
-    draft.battle.draw = draft.cards
-      .filter((card) => !draft.battle.hand.includes(card.id))
-      .map((card) => card.id);
-    draft.battle.discard = [];
-    draft.battle.buffer = [];
+    setHand(draft, definitions);
   });
-}
-function play(game: BattleState, id: string, targetId?: string) {
-  const card = game.cards.find((card) => card.definitionId === id)!;
-  return dispatch(game, { type: "play", cardId: card.id, targetId, autoEndTurn: false });
 }
 const damage = (events: GameEvent[]) => events.filter((event) => event.kind === "damage");
 const healthEvents = (events: GameEvent[]) => events.filter((event) => event.kind === "heal");
@@ -135,7 +127,7 @@ describe("Alpenglen and Last Warmth", () => {
       const game = produce(base, (draft) => {
         if (mode === "fallen") draft.team[0]!.health = 0;
         else {
-          addBackups(draft, { id: "backup", species: "prismram", health: 30, block: 0, attacked: false });
+          addReserve(draft, "backup", "prismram", 30);
           swapBackup(draft, "ally-0", "backup", []);
         }
       });
@@ -175,7 +167,7 @@ describe("Alpenglen and Last Warmth", () => {
       draft.battle.hand = [food.id];
       draft.battle.buffer = [];
       draft.battle.draw = draft.cards.filter((card) => card.id !== food.id).map((card) => card.id);
-      addBackups(draft, { id: "backup", species: "prismram", health: 1, block: 0, attacked: false });
+      addReserve(draft, "backup", "prismram", 1);
     });
     expect(play(game, "food-trail-bread", "ally-0").state.team[1]!.health).toBe(14);
     expect(play(game, "food-trail-bread", "ally-0").state.reserves[0]!.health).toBe(1);

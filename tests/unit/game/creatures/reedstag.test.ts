@@ -1,4 +1,5 @@
-import { enemyPlay } from "../../../support/game";
+import { setBattleCards } from "../../../support/cards";
+import { enemyPlay, authoredPack, accept, teamRun, winBattle } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species } from "../../../../src/game/content";
@@ -7,15 +8,11 @@ import { freshCombat, grantBlock, grantStatus, restoreHealth } from "../../../..
 import { createGame, dispatch, previewCard } from "../../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { authoredPack, accept, teamRun, winBattle } from "../../../support/game";
 
 function ready(id = "reedstag-guard") {
   return produce(teamRun(1, ["reedstag", "mossguard", "emberback"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     game.battle!.enemies.forEach((enemy) => {
       enemy.block = 0;
       enemy.combat = freshCombat();

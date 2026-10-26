@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { chooseBattleCommand, rankedBattleChoices } from "../../../src/application/battle-policy";
@@ -16,10 +17,7 @@ import type { GameState } from "../../../src/game/types";
 function onlyHand(state: GameState, definitionId: string) {
   return produce(requireBattle(state), (game) => {
     const card = game.cards.find((entry) => entry.definitionId === definitionId)!;
-    game.battle.hand = [card.id];
-    game.battle.buffer = [];
-    game.battle.discard = [];
-    game.battle.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
   });
 }
 
@@ -45,10 +43,7 @@ it.each(["food-apple", "food-trail-bread"])("Auto-play can give %s to an Echo", 
     const food = { id: "copy-0", definitionId, ownerId: null, level: 0, temporary: true as const };
     game.cards.push(food);
     game.battle.copySerial = 1;
-    game.battle.hand = [food.id];
-    game.battle.buffer = [];
-    game.battle.discard = [];
-    game.battle.draw = game.cards.filter((card) => card.id !== food.id).map((card) => card.id);
+    setBattleCards(game, [food.id]);
     game.team[0]!.block = 1_000_000;
     summonEcho(game, game.team[0]!, "player", 6, []);
     game.battle.minions![0]!.health = 1;
@@ -212,10 +207,7 @@ it.each([
 ] as const)("Auto-play values Purge for an enemy's %s alone", (status) => {
   const state = produce(teamRun(42, ["rookhaven"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === "rookhaven-unwritten-ending")!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     for (const enemy of game.battle!.enemies) {
       enemy.block = 0;
       enemy.combat = freshCombat();
@@ -403,12 +395,7 @@ it("Auto-play prioritizes Bloom Cradle's healing over an ordinary attack", () =>
   const state = produce(teamRun(42, ["bloomquail", "emberback"]), (game) => {
     const heal = game.cards.find((card) => card.definitionId === "bloomquail-draw")!;
     const attack = game.cards.find((card) => card.definitionId === "emberback-attack")!;
-    game.battle!.hand = [heal.id, attack.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards
-      .filter((card) => !game.battle!.hand.includes(card.id))
-      .map((card) => card.id);
+    setBattleCards(game, [heal.id, attack.id]);
     game.team[0]!.health = 1;
     game.battle!.enemies.forEach((enemy) => {
       enemy.health = enemy.maxHealth;
@@ -431,10 +418,7 @@ it("Auto-play prioritizes Bloom Cradle's healing over an ordinary attack", () =>
 it("Auto-play preserves Mana when Undertow Knot cannot add Water Thorns", () => {
   const state = produce(teamRun(42, ["neradora"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === "neradora-undertow-knot")!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((card) => card.id);
+    setBattleCards(game, [card.id]);
     game.team[0]!.combat!.waterThorns = 1_000_000;
   });
   expect(chooseBattleCommand(state, false)).toEqual({ type: "endTurn" });
@@ -451,10 +435,7 @@ it.each(["reedstag", "chimecricket"] as const)(
   (kind) => {
     const state = produce(teamRun(42, [kind]), (game) => {
       const card = game.cards.find((card) => card.definitionId === `${kind}-heal`)!;
-      game.battle!.hand = [card.id];
-      game.battle!.buffer = [];
-      game.battle!.discard = [];
-      game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((card) => card.id);
+      setBattleCards(game, [card.id]);
       game.team[0]!.combat!.poison = 8;
     });
     const command = chooseBattleCommand(state, false);
@@ -475,10 +456,7 @@ it.each(["mossguard-guard", "pollenmoth-teamGuard", "ringpalm-teamProtection"])(
   (definitionId) => {
     const state = produce(teamRun(42, ["mossguard", "pollenmoth", "ringpalm"]), (game) => {
       const card = game.cards.find((card) => card.definitionId === definitionId)!;
-      game.battle!.hand = [card.id];
-      game.battle!.buffer = [];
-      game.battle!.discard = [];
-      game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((card) => card.id);
+      setBattleCards(game, [card.id]);
       for (const ally of game.team) {
         ally.block = 10;
         ally.combat!.thorns = 10;
@@ -506,10 +484,7 @@ it.each(["mossguard-guard", "pollenmoth-teamGuard", "ringpalm-teamProtection"])(
 it("Auto-play avoids recovering Echoes Remember itself or a knocked-out owner's card", () => {
   const state = produce(teamRun(42, ["cadenza", "mossguard"]), (game) => {
     const recover = game.cards.find((card) => card.definitionId === "cadenza-echoes-remember")!;
-    game.battle!.hand = [recover.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((card) => card.id !== recover.id).map((card) => card.id);
+    setBattleCards(game, [recover.id]);
   });
   expect(chooseBattleCommand(state, false)).toEqual({ type: "endTurn" });
   const useful = produce(state, (game) => {
@@ -550,10 +525,7 @@ it.each([
   (kind, talent) => {
     const state = produce(teamRun(42, [kind]), (game) => {
       const heal = game.cards.find((card) => card.definitionId === `${kind}-heal`)!;
-      game.battle!.hand = [heal.id];
-      game.battle!.buffer = [];
-      game.battle!.discard = [];
-      game.battle!.draw = game.cards.filter((card) => card.id !== heal.id).map((card) => card.id);
+      setBattleCards(game, [heal.id]);
       game.talents = [talent];
       for (const enemy of game.battle!.enemies) enemy.combat.blind = true;
       if (talent === "health.clean-slate") {
@@ -580,12 +552,7 @@ it("finishes the last enemy before healing or killing a Minion, without sampling
   const state = produce(teamRun(42, ["prismram", "mossguard"]), (game) => {
     const attack = game.cards.find((card) => card.definitionId === "prismram-attack")!;
     const heal = game.cards.find((card) => card.definitionId === "mossguard-heal")!;
-    game.battle!.hand = [heal.id, attack.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards
-      .filter((card) => !game.battle!.hand.includes(card.id))
-      .map((card) => card.id);
+    setBattleCards(game, [heal.id, attack.id]);
     game.team.forEach((unit) => {
       unit.health = 5;
     });
@@ -700,10 +667,7 @@ it("Auto-play Blinds new Echoes even when their summoner is already Blind", () =
   });
   const state = produce(requireBattle(accept(destination, { type: "beginBattle" })), (game) => {
     const card = game.cards.find((card) => card.definitionId === "glintstride-teamBlind")!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     const boss = game.battle!.enemies[0]!;
     boss.combat.blind = true;
     summonEcho(game, boss, "enemy", 6, []);
@@ -718,10 +682,7 @@ it("Auto-play Blinds new Echoes even when their summoner is already Blind", () =
 it("Auto-play uses Mushroom Guard's healing at the Block cap and stops at full Health", () => {
   const state = produce(teamRun(42, ["captoad"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === "captoad-guard")!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    setBattleCards(game, [card.id]);
     game.team[0]!.block = 1_000_000;
     game.team[0]!.health -= 5;
   });
@@ -739,14 +700,12 @@ it("Auto-play uses Mushroom Guard's healing at the Block cap and stops at full H
 
 it("Auto-play values Mushroom Guard's healing ahead of ordinary group protection", () => {
   const state = produce(teamRun(42, ["captoad", "pollenmoth"]), (game) => {
-    game.battle!.hand = game.cards
-      .filter((card) => ["captoad-guard", "pollenmoth-teamGuard"].includes(card.definitionId))
-      .map((card) => card.id);
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards
-      .filter((card) => !game.battle!.hand.includes(card.id))
-      .map((card) => card.id);
+    setBattleCards(
+      game,
+      game.cards
+        .filter((card) => ["captoad-guard", "pollenmoth-teamGuard"].includes(card.definitionId))
+        .map((card) => card.id),
+    );
     game.team[0]!.health = 1;
   });
   expect(chooseBattleCommand(state, false)).toMatchObject({
@@ -758,10 +717,7 @@ it("Auto-play values Mushroom Guard's healing ahead of ordinary group protection
 it("Auto-play uses Nightmare Harvest for actual afflictions and preserves Mana when none remain", () => {
   const healthy = produce(teamRun(42, ["reverie", "emberback"]), (game) => {
     const card = game.cards.find((c) => c.definitionId === "reverie-nightmare-harvest")!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((c) => c.id !== card.id).map((c) => c.id);
+    setBattleCards(game, [card.id]);
   });
   expect(chooseBattleCommand(healthy, false)).toEqual({ type: "endTurn" });
   const afflicted = produce(healthy, (game) => {
@@ -776,10 +732,7 @@ it("Auto-play uses Nightmare Harvest for actual afflictions and preserves Mana w
 it("Auto-play spends an attack to consume Negate without predicting a blocked final blow", () => {
   const game = produce(teamRun(42, ["glintstride"]), (d) => {
     const card = d.cards.find((c) => c.definitionId === "glintstride-attack")!;
-    d.battle!.hand = [card.id];
-    d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
-    d.battle!.buffer = [];
-    d.battle!.discard = [];
+    setBattleCards(d, [card.id]);
     d.battle!.enemies.forEach((enemy, index) => {
       enemy.health = index === 0 ? 1 : 0;
       enemy.block = 0;

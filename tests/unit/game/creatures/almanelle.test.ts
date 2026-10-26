@@ -1,3 +1,4 @@
+import { playCard as play } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { definition, FIRST_RUN_STARTERS, species, speciesCards } from "../../../../src/game/content";
@@ -27,14 +28,6 @@ import type { BattleState, GameEvent } from "../../../../src/game/types";
 const current = "almanelle-spring-current";
 const insight = "almanelle-autumn-insight";
 const rooted = "almanelle-rooted-year";
-function play(game: BattleState, id: string, targetId?: string) {
-  return dispatch(game, {
-    type: "play",
-    cardId: game.cards.find((card) => card.definitionId === id)!.id,
-    targetId,
-    autoEndTurn: false,
-  });
-}
 function execute(game: BattleState, id: string, events: GameEvent[] = [], repeat = false) {
   const def = definition(id);
   executeAbility(

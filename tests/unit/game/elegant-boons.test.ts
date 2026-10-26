@@ -1,3 +1,4 @@
+import { setBattleCards } from "../../support/cards";
 import { expect, it } from "vitest";
 import { run, requireBattle, addBackups, accept } from "../../support/game";
 import { BOONS, definition, species } from "../../../src/game/content";
@@ -209,10 +210,7 @@ it("Vigil Lantern shares command admission with previews and survives resume wit
   source.health = 1;
   source.combat = { ...freshCombat(), controlled: "freeze", controlTurns: 2, deathDoorUsed: true, grace: 2 };
   const card = state.cards.find((entry) => entry.definitionId === "emberback-attack")!;
-  state.battle.hand = [card.id];
-  state.battle.draw = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
-  state.battle.discard = [];
-  state.battle.buffer = [];
+  setBattleCards(state, [card.id]);
   expect(inspectCardPlay(state, card.id).allowed).toBe(false);
   state.boons = ["vigil-lantern"];
   const resumed = requireBattle(decodeSave(encodeSave(state)));

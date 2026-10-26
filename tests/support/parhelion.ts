@@ -1,3 +1,4 @@
+import { setHand } from "./cards";
 import { produce } from "immer";
 import { requireBattle, teamRun } from "./game";
 import type { BattleState } from "../../src/game/types";
@@ -10,17 +11,11 @@ export function parhelionBattle(): BattleState {
     draft.team[1]!.combat!.freeze = 6;
     draft.team[1]!.combat!.burn = 2;
     draft.team[2]!.health = 23;
-    const definitions = [
+    setHand(draft, [
       "parhelion-polar-reprieve",
       "parhelion-sundog-reservoir",
       "parhelion-whiteout-waltz",
       "emberback-attack",
-    ];
-    draft.battle.hand = definitions.map((id) => draft.cards.find((card) => card.definitionId === id)!.id);
-    draft.battle.draw = draft.cards
-      .filter((card) => !draft.battle.hand.includes(card.id))
-      .map((card) => card.id);
-    draft.battle.discard = [];
-    draft.battle.buffer = [];
+    ]);
   });
 }

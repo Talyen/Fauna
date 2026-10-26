@@ -1,4 +1,5 @@
-import { enemyPlay } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
+import { enemyPlay, authoredPack, accept, teamRun, winBattle } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species } from "../../../src/game/content";
@@ -9,16 +10,12 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent } from "../../../src/game/types";
-import { authoredPack, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "bloomquail-guard", copies = 1) {
   return produce(teamRun(1, ["bloomquail", "mossguard", "prismram"]), (game) => {
     game.discovery.recruited.bloomquail = copies;
     const card = game.cards.find((card) => card.definitionId === id)!;
-    game.battle!.hand = [card.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((other) => other.id);
+    setBattleCards(game, [card.id]);
     game.rng = 1;
   });
 }
