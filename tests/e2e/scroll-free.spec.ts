@@ -198,7 +198,8 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await expect(
         page.getByRole("button", { name: "Burn talents", exact: true }),
       ).toHaveAccessibleDescription("3 points available");
-      await captureScreen(page, { path: `reports/scroll-free/talents-${width}-${height}-${scale}.png` });
+      await expectScrollFree(page);
+      await captureFrame(page, { path: `reports/scroll-free/talents-${width}-${height}-${scale}.png` });
       for (const keyword of exhaustive ? KEYWORDS : [KEYWORDS[0]!, KEYWORDS.at(-1)!]) {
         await page.getByRole("button", { name: `${keywordLabel(keyword)} talents`, exact: true }).click();
         if (keyword === KEYWORDS[0])

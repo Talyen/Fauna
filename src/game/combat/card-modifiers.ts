@@ -19,7 +19,7 @@ import { receiveCard, draw, journeyReturn } from "../card-zones";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
 export function returnDodgedCard(state: BattleState, card: Card, events: GameEvent[], start: number) {
-  const owner = state.team.find((ally) => ally.id === card.ownerId && ally.health > 0);
+  const owner = state.team.find((ally) => ally.id === card.ownerId);
   if (
     !state.boons.includes("dream-yo-yo") ||
     definition(card.definitionId).consume ||
@@ -27,7 +27,12 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
     !owner
   )
     return;
-  const enemies = new Set(battlefield(state, "enemy").map((enemy) => enemy.id));
+  // A summoner may fall after its Echo Dodges during the same card. The retained
+  // Echo receipt still identifies that opponent after it leaves the battlefield.
+  const enemies = new Set([
+    ...state.battle.enemies.map((enemy) => enemy.id),
+    ...(state.battle.minions ?? []).filter((unit) => unit.minion.side === "enemy").map((unit) => unit.id),
+  ]);
   if (
     !events
       .slice(start)
