@@ -10,6 +10,7 @@ import type { GameEvent, GameState } from "../types";
 import { ensureCombat, unitName, STACK_LIMIT, gainGold, removeArmor, type Combatant } from "./state";
 import type { packetPolicy, DamagePacket } from "./policy";
 import { reaction, type Resolution } from "./operations";
+import { applyResolvedStatus } from "./status-reactions";
 import { reducePeriodicStacks, deferLeech, detonateBleedStacks, bleedPayments } from "./status-state";
 
 export interface HitContext {
@@ -325,9 +326,7 @@ export function* poisonStun(
     return;
   const amount = Math.round(damage / boonRule("poppy-seed-grinder").divisor);
   if (amount <= 0) return;
-  const result = yield* reaction("applyHarmfulStatus", state, source, target, amount, "stun", events);
-  if (result.appliedControl) yield* reaction("controlRewards", state, source, target, "stun", events);
-  for (const depletion of result.depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
+  yield* applyResolvedStatus(state, source, target, amount, "stun", events);
 }
 export function* waterFollowups(
   { state, source, events }: HitContext,
