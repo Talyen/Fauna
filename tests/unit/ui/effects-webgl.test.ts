@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { expect, it, vi } from "vitest";
 import { startWebGLKeywordPlasma } from "../../../src/ui/shared/effects/rendering/keyword-plasma-webgl";
-import type { PlasmaColorState } from "../../../src/ui/shared/effects/rendering/keyword-plasma-types";
+import type { PlasmaColorState } from "../../../src/ui/shared/effects/rendering/keyword-plasma-webgl";
 import { animationHarness } from "../../support/animation-harness";
 
 function createGl() {
@@ -48,7 +48,7 @@ function setup(width = 640, height = 480) {
   const gl = createGl();
   vi.mocked(h.canvas.getContext).mockReturnValue(gl as unknown as WebGLRenderingContext);
   const colorsRef: { current: PlasmaColorState } = { current: { primary: "#ffffff", secondary: "#000000" } };
-  const options = { canvas: h.canvas, colorsRef, focalYOffset: 32, active: () => true };
+  const options = { canvas: h.canvas, colorsRef, active: () => true };
   return { h, gl, colorsRef, options };
 }
 
@@ -60,11 +60,7 @@ it("uploads sized uniforms and changing colors while preserving the bounded 30fp
   expect(h.canvas.width * h.canvas.height).toBeLessThanOrEqual(1_500_000);
   expect(gl.viewport).toHaveBeenCalledExactlyOnceWith(0, 0, h.canvas.width, h.canvas.height);
   expect(gl.uniform2f).toHaveBeenCalledWith("uSize", h.canvas.width, h.canvas.height);
-  expect(gl.uniform2f).toHaveBeenLastCalledWith(
-    "uFocalCenter",
-    h.canvas.width / 2,
-    h.canvas.height / 2 - (32 * h.canvas.height) / 2160,
-  );
+  expect(gl.uniform2f).toHaveBeenLastCalledWith("uFocalCenter", h.canvas.width / 2, h.canvas.height / 2);
   h.frame(100);
   h.frame(110);
   h.frame(140);
@@ -74,11 +70,7 @@ it("uploads sized uniforms and changing colors while preserving the bounded 30fp
   expect(gl.uniform3f).toHaveBeenCalledWith("uPrimary", 1, 1, 1);
   expect(gl.uniform3f).toHaveBeenCalledWith("uSecondary", 0, 0, 0);
   h.resize(800, 600);
-  expect(gl.uniform2f).toHaveBeenLastCalledWith(
-    "uFocalCenter",
-    h.canvas.width / 2,
-    h.canvas.height / 2 - (32 * h.canvas.height) / 600,
-  );
+  expect(gl.uniform2f).toHaveBeenLastCalledWith("uFocalCenter", h.canvas.width / 2, h.canvas.height / 2);
   const primary: [number, number, number] = [0.1, 0.2, 0.3];
   colorsRef.current.primary = primary;
   h.frame(180);

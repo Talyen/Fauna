@@ -17,7 +17,6 @@ describe("plasma availability", () => {
     const cleanup = startKeywordPlasma({
       canvas,
       colorsRef: { current: { primary: "#ff0000", secondary: "#0000ff" } },
-      focalYOffset: 0,
       active: () => true,
       onAvailabilityChange: available,
     });

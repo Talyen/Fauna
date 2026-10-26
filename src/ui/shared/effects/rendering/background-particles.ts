@@ -14,50 +14,34 @@ interface BackgroundParticle {
   color: string;
 }
 
-interface BackgroundParticleConfig {
-  particleCount: number;
-  minSize: number;
-  maxSize: number;
-  minAlpha: number;
-  maxAlpha: number;
-  minSpeed: number;
-  maxSpeed: number;
-  colors: readonly string[];
-  spawnBottomWeight?: number;
-}
-
-const EMBERS: BackgroundParticleConfig = {
-  particleCount: 40,
-  minSize: 1.5,
-  maxSize: 3,
-  minAlpha: 0.08,
-  maxAlpha: 0.3,
-  minSpeed: 3,
-  maxSpeed: 8,
-  colors: [],
-};
-
+const PARTICLE_SIZE = [1.5, 3] as const;
+const PARTICLE_ALPHA = [0.08, 0.3] as const;
+const PARTICLE_SPEED = [3, 8] as const;
+const DEFAULT_PARTICLE_COUNT = 40;
 const MAX_PARTICLE_BACKING_SCALE = 1.5;
 const MAX_PARTICLE_BACKING_PIXELS = 3_000_000;
 const MIN_PARTICLE_BACKING_SCALE = 0.25;
 
-function spawnParticle(width: number, height: number, config: BackgroundParticleConfig): BackgroundParticle {
-  const alpha = lerp(config.minAlpha, config.maxAlpha, Math.random());
-  const rawColor = config.colors[Math.floor(Math.random() * config.colors.length)];
-  const y = config.spawnBottomWeight
-    ? height - Math.random() * height * (1 - config.spawnBottomWeight)
-    : Math.random() * height;
+function spawnParticle(
+  width: number,
+  height: number,
+  colors: readonly string[],
+  intensity: number,
+): BackgroundParticle {
+  const alpha = lerp(PARTICLE_ALPHA[0] * intensity, PARTICLE_ALPHA[1] * intensity, Math.random());
+  const rawColor = colors[Math.floor(Math.random() * colors.length)];
+  const y = Math.random() * height;
   return {
     x: Math.random() * width,
     y,
-    size: lerp(config.minSize, config.maxSize, Math.random()),
+    size: lerp(PARTICLE_SIZE[0], PARTICLE_SIZE[1], Math.random()),
     alpha: 0,
     baseAlpha: alpha,
-    speed: lerp(config.minSpeed, config.maxSpeed, Math.random()),
+    speed: lerp(PARTICLE_SPEED[0], PARTICLE_SPEED[1], Math.random()),
     swayAmplitude: 10 + Math.random() * 30,
     swaySpeed: 0.2 + Math.random() * 0.4,
     swayOffset: Math.random() * Math.PI * 2,
-    color: rawColor ?? config.colors[0]!,
+    color: rawColor ?? colors[0]!,
   };
 }
 
@@ -101,22 +85,11 @@ export function startBackgroundParticles(
   const ctx = canvas.getContext("2d");
   if (!ctx) return () => {};
 
-  const parent = canvas.parentElement;
-  if (!parent) return () => {};
+  if (!canvas.parentElement) return () => {};
 
   let particles: BackgroundParticle[] = [];
   let logicalWidth = 0;
   let logicalHeight = 0;
-  const config = EMBERS;
-  const resolvedColors = colors;
-  const mult = alphaMultiplier ?? 1;
-  const patchedConfig = {
-    ...config,
-    colors: resolvedColors,
-    minAlpha: config.minAlpha * mult,
-    maxAlpha: config.maxAlpha * mult,
-    particleCount: particleCount ?? config.particleCount,
-  };
 
   const lifecycle = createCanvasLifecycle({
     canvas,
@@ -134,8 +107,8 @@ export function startBackgroundParticles(
       }
       ctx.setTransform(canvas.width / w, 0, 0, canvas.height / h, 0, 0);
       if (particles.length === 0 || logicalWidth <= 0 || logicalHeight <= 0) {
-        particles = Array.from({ length: patchedConfig.particleCount }, () =>
-          spawnParticle(w, h, patchedConfig),
+        particles = Array.from({ length: particleCount ?? DEFAULT_PARTICLE_COUNT }, () =>
+          spawnParticle(w, h, colors, alphaMultiplier ?? 1),
         );
       } else if (w !== logicalWidth || h !== logicalHeight) {
         const scaleX = w / logicalWidth;

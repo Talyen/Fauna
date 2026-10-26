@@ -1,5 +1,4 @@
 import { clamp } from "./math";
-import { shouldReduceMotion } from "./animation-prefs";
 
 export interface CanvasBackingScaleOptions {
   scaleMultiplier?: number;
@@ -27,8 +26,6 @@ export interface CanvasLifecycleOptions {
   active?: () => boolean;
   backingScale?: CanvasBackingScaleOptions;
   fpsLimit?: number;
-  pauseOnBlur?: boolean;
-  immediate?: boolean;
   onResize?: (width: number, height: number, backingScale: number) => void;
   onFrame: (now: number, dt: number, width: number, height: number) => void;
 }
@@ -45,8 +42,6 @@ export function createCanvasLifecycle({
   active = () => true,
   backingScale: backingScaleOptions,
   fpsLimit,
-  pauseOnBlur = true,
-  immediate = false,
   onResize,
   onFrame,
 }: CanvasLifecycleOptions): CanvasLifecycle {
@@ -123,9 +118,9 @@ export function createCanvasLifecycle({
     return (
       lifetime.signal.aborted ||
       !active() ||
-      shouldReduceMotion() ||
+      (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false) ||
       document?.hidden ||
-      (pauseOnBlur && document && !document.hasFocus()) ||
+      (document && !document.hasFocus()) ||
       (ro !== null && (lifecycle.logicalWidth === 0 || lifecycle.logicalHeight === 0))
     );
   }
@@ -224,16 +219,8 @@ export function createCanvasLifecycle({
     document?.addEventListener("visibilitychange", resume, listenerOptions);
     window?.addEventListener("focus", resume, listenerOptions);
     window?.addEventListener("storage", resume, listenerOptions);
-    if (pauseOnBlur) window?.addEventListener("blur", cancelFrame, listenerOptions);
-
-    if (immediate && !isPaused()) {
-      // resize() above may have already queued a frame; drop it before running
-      // the synchronous first frame so dispose() tracks the only pending id.
-      cancelFrame();
-      frame(lastTime);
-    } else {
-      scheduleFrame();
-    }
+    window?.addEventListener("blur", cancelFrame, listenerOptions);
+    scheduleFrame();
   } catch (error) {
     dispose();
     throw error;

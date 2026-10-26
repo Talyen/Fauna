@@ -1,7 +1,28 @@
 import { createWebGLProgram } from "./webgl-program";
 import { parsePlasmaHexColor, type RgbTuple } from "./plasma-colors";
 import { createCanvasLifecycle, type CanvasLifecycle } from "./canvas-lifecycle";
-import { PLASMA_BACKING_OPTIONS, type PlasmaRendererOptions } from "./keyword-plasma-types";
+
+type PlasmaColorValue = string | RgbTuple;
+
+export interface PlasmaColorState {
+  primary: PlasmaColorValue;
+  secondary: PlasmaColorValue;
+}
+
+export interface PlasmaRendererOptions {
+  canvas: HTMLCanvasElement;
+  colorsRef: { current: PlasmaColorState };
+  active: () => boolean;
+  onAvailabilityChange?: ((available: boolean) => void) | undefined;
+  onWakeReady?: ((wake: () => void) => void) | undefined;
+}
+
+const PLASMA_BACKING_OPTIONS = {
+  maxPixels: 1_500_000,
+  scaleMultiplier: 0.45,
+  minScale: 0.25,
+  maxScale: 0.75,
+};
 
 const VERTEX_SHADER = `
 attribute vec2 aPosition;
@@ -76,7 +97,7 @@ function tryGetWebGLContext(canvas: HTMLCanvasElement): WebGLRenderingContext | 
 }
 
 export function startWebGLKeywordPlasma(options: PlasmaRendererOptions): (() => void) | null {
-  const { canvas, colorsRef, focalYOffset, active, onWakeReady } = options;
+  const { canvas, colorsRef, active, onWakeReady } = options;
   const gl = tryGetWebGLContext(canvas);
   if (!gl) return null;
 
@@ -156,13 +177,12 @@ export function startWebGLKeywordPlasma(options: PlasmaRendererOptions): (() => 
       active,
       fpsLimit: 30,
       backingScale: PLASMA_BACKING_OPTIONS,
-      onResize: (_width, height) => {
+      onResize: () => {
         // These inputs depend only on the canvas size; WebGL retains them
         // between draws. Context restoration creates a fresh renderer.
         gl.viewport(0, 0, canvas.width, canvas.height);
-        const backingScale = height > 0 ? canvas.height / height : 1;
         gl.uniform2f(sizeLoc, canvas.width, canvas.height);
-        gl.uniform2f(focalLoc, canvas.width / 2, canvas.height / 2 - focalYOffset * backingScale);
+        gl.uniform2f(focalLoc, canvas.width / 2, canvas.height / 2);
       },
       onFrame: (now, _dt, width, height) => {
         if (width <= 0 || height <= 0) return;
