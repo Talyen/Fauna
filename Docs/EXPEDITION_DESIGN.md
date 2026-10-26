@@ -1,6 +1,6 @@
 # Journey rules
 
-This guide owns journey rules and progression. [Screen specifications](ui/screens.md) own presentation; [Menu design](MENU_DESIGN.md) owns navigation and [Keywords](KEYWORDS.md) owns combat packets/statuses.
+This guide owns journey rules and progression. [Screen specifications](ui/screens.md) own presentation; [Menu design](ui/screens.md#navigation-and-menus) owns navigation and [Keywords](KEYWORDS.md) owns combat packets/statuses.
 
 ## Roster and battles
 
@@ -116,7 +116,7 @@ Victory Continue is presentation-only; it leaves committed earnings and offers u
 
 Settlement and voluntary return bank actual retained earnings atomically, respecting progression caps. Browsing earnings/results never grants rewards or saves. Journey totals include all settled battles and XP banked on return home; they are never inferred from lifetime XP or currency. No material or item rewards are authored.
 
-Starting a new journey resets its totals, roster and Boons while preserving permanent progress. Results appear only when ending a journey; returning home or loading a completed journey does not reopen them. [Results presentation](ui/screens.md#journey-results) owns visible gains and controls; [Menu design](MENU_DESIGN.md) owns navigation.
+Starting a new journey resets its totals, roster and Boons while preserving permanent progress. Results appear only when ending a journey; returning home or loading a completed journey does not reopen them. [Results presentation](ui/screens.md#journey-results) owns visible gains and controls; [Menu design](ui/screens.md#navigation-and-menus) owns navigation.
 
 ## Turn and combat foundation
 

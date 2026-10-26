@@ -53,19 +53,29 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
     expect(s.reward?.outcome).not.toBe("defeat");
     if (s.phase === "recruit" && s.team.length + s.reserves.length < 5) {
       await continueToRecruit(page, activate);
+      const roster = [...s.team, ...s.reserves];
+      const incoming =
+        s.reward!.recruits.find((kind) => !roster.some((unit) => unit.species === kind)) ??
+        s.reward!.recruits[0]!;
       await activate(
         page
           .getByRole("button", {
-            name: `Recruit ${species(s.reward!.recruits.find((kind) => ![...s.team, ...s.reserves].map((unit) => unit.species).includes(kind)) ?? s.reward!.recruits[0]!).name}`,
+            name: `Recruit ${species(incoming).name}`,
             exact: true,
           })
           .first(),
       );
       const recruited = await state(page);
-      expect(recruited.team.map((unit) => unit.id)).toEqual(recruited.team.map((creature) => creature.id));
-      expect(recruited.reserves).toHaveLength(
-        Math.max(0, recruited.team.length + recruited.reserves.length - 3),
+      const nextRoster = [...recruited.team, ...recruited.reserves];
+      const repeated = roster.some((unit) => unit.species === incoming);
+      expect(nextRoster).toHaveLength(roster.length + (repeated ? 0 : 1));
+      expect(nextRoster.map((unit) => unit.id)).toEqual(
+        expect.arrayContaining(roster.map((unit) => unit.id)),
       );
+      expect(nextRoster.filter((unit) => !roster.some((old) => old.id === unit.id))).toMatchObject(
+        repeated ? [] : [{ species: incoming }],
+      );
+      expect(recruited.discovery.recruited[incoming]).toBe((s.discovery.recruited[incoming] ?? 0) + 1);
     } else await step(page, activate, s, s.phase === "battle" ? actor.choose(s).command : policy(s));
   }
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();

@@ -1,19 +1,12 @@
 # Dulcera
 
-[Kit](../../../src/game/content/creatures/dulcera.ts) · [Swap owner](../../../src/game/team.ts) · [Focused regressions](../../../tests/unit/game/creatures/dulcera.test.ts)
+[Swap owner](../../../src/game/team.ts) · [Focused regressions](../../../tests/unit/game/creatures/dulcera.test.ts)
 
-Dulcera is a 30-Health support creature, the gentle sanctuary. The owner selected Gentle Passage, Chapel Light, Meadow Shelter and Hushed Waters on October 25, 2026. Her rounded sea-cow silhouette, submerged chapel, warm sunlight and protective seagrass connect restoration with safe passage. She appears in ordinary encounter packs and recruitment. Her kit has no direct damage, so she is excluded from the first-run starter pool; collected copies follow ordinary starter selection.
+Use the [authored kit](../../../src/game/content/creatures/dulcera.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#dulcera) preserve historical tuning.
+
+Dulcera is a support creature, the gentle sanctuary. The owner selected Gentle Passage, Chapel Light, Meadow Shelter and Hushed Waters on October 25, 2026. Her rounded sea-cow silhouette, submerged chapel, warm sunlight and protective seagrass connect restoration with safe passage. She appears in ordinary encounter packs and recruitment. Her kit has no direct damage, so she is excluded from the first-run starter pool; collected copies follow ordinary starter selection.
 
 ## Gentle Passage
-
-| Stars | Complete passive rule                     |
-| ----- | ----------------------------------------- |
-| 0     | Allies restore 1 Health when they swap in |
-| 1     | Allies restore 2 Health when they swap in |
-| 2     | Allies restore 3 Health when they swap in |
-| 3     | Allies restore 4 Health when they swap in |
-| 4     | Allies restore 5 Health when they swap in |
-| 5     | Allies restore 6 Health when they swap in |
 
 The shared swap owner restores Health after the new formation is committed. Living Dulceras involved in the exchange provide passage: those deployed before or after the swap, including a departing Dulcera and an arriving Dulcera herself. A provider present in both formations contributes once; duplicate providers contribute independently. Fallen and unrelated backup Dulceras provide nothing. Only newly deployed creatures receive restoration. Rearranging existing positions, opening a battle, recruitment outside battle and resuming a save do not trigger passage. Legendary formation changes and knockout replacements use the same boundary.
 
@@ -25,17 +18,9 @@ Skybex's Mountain Guide grants incoming protection at the same swap boundary. Th
 
 ## Abilities
 
-All three abilities cost 1 Mana.
+Chapel Light restores Dulcera herself and refunds its Mana cost. Healing follows ordinary ability upgrades; the supplemental Mana refund stays fixed. It provides modest recovery without spending net Mana, similar to existing resource-support abilities, with no draw attached.
 
-| Ability        | Base rule                                         |
-| -------------- | ------------------------------------------------- |
-| Chapel Light   | Restore 3 Health / Gain 1 Mana                    |
-| Meadow Shelter | Allies gain 2 Block                               |
-| Hushed Waters  | Swap out for a random backup / Cleanse all allies |
-
-Chapel Light restores Dulcera herself and refunds its Mana cost. Healing increases to 3/5/7/9 with ordinary ability upgrades; the supplemental 1 Mana stays fixed. It provides modest recovery without spending net Mana, similar to existing resource-support abilities, with no draw attached.
-
-Meadow Shelter uses the existing group Block rule, including living allied Minions. Its 2/4/6/8 Block per recipient starts near the six-point group guideline with three allies. Its straightforward overlap with Pollenmoth's protection is intentional: the illustration depicts a protective seagrass arch, and the passive supplies Dulcera's distinct strategy.
+Meadow Shelter uses the existing group Block rule, including living allied Minions. Its initial group value follows the six-point guideline with three allies; ordinary upgrades increase the primary Block value. Its straightforward overlap with Pollenmoth's protection is intentional: the illustration depicts a protective seagrass arch, and the passive supplies Dulcera's distinct strategy.
 
 Hushed Waters randomly chooses a living backup using seeded selection. The exchange resolves first, including Gentle Passage, then the incoming and remaining living deployed allies are fully Cleansed. The departing Dulcera retains her own effects in backup. With no living backup, the lineup and RNG remain unchanged and the Cleanse still resolves. Auto-play skips the card when neither exchange nor Cleanse offers a benefit. Upgrades do not add swaps or improve complete removal. It combines existing extraction and team-removal utility; its value depends on available backups and harmful effects rather than printed damage.
 

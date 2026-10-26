@@ -52,6 +52,9 @@ These records retain dated source identities, observations and limitations. A la
 
 ### Creatures
 
+- [Recorded kit selections](CREATURE_KIT_SELECTIONS.md): historical catalog excerpts; authored kits own current values
+- [Wisterelle](../task-evidence/wisterelle.md)
+
 - [Aerostat](../task-evidence/aerostat.md)
 - [Almanelle](../task-evidence/almanelle.md)
 - [Alpenglen](../task-evidence/alpenglen.md)

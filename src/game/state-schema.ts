@@ -5,7 +5,7 @@ import { MAX_BATTLE_CARDS, MAX_HAND_SIZE, MAX_SUPPORTED_HAND_SIZE } from "./card
 import { MAX_CREATURE_STARS, KEYWORDS } from "./progression";
 import { SPECIES, BOONS, TALENTS } from "./content";
 import { JOURNEY_LENGTH } from "./encounters";
-import { MAX_REVISION } from "./state-limits";
+import { MAX_BATTLE_TURN, MAX_REVISION } from "./state-limits";
 const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
 const speciesId = z.enum(SPECIES.map((entry) => entry.id));
@@ -89,7 +89,7 @@ const battle = z.object({
   freeBurnUsed: z.boolean(),
   meteoriteUsed: z.boolean(),
   cardsPlayedThisTurn: z.number().int().min(0).max(PLAYER_CARD_TRIGGER_LIMIT),
-  turn: z.number().int().min(1).max(1_000_000),
+  turn: z.number().int().min(1).max(MAX_BATTLE_TURN),
   mana: z.number().int().min(0).max(9),
   maxMana: z.number().int().min(4).max(7),
   draw: z.array(id).max(MAX_BATTLE_CARDS),

@@ -9,11 +9,8 @@ import { encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./support/layout-contract";
 import { openHome, test, seed, state } from "./support/session";
 import { expectBattleGeometry } from "./support/battle-layout";
-import { captureScreen, settleScreen } from "./support/rendered-evidence";
+import { captureFrame, captureScreen, settleScreen } from "./support/rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud-snapshots";
-
-// Each action is local and immediate; do not spend a full journey timeout on a missing control.
-test.use({ actionTimeout: 5000 });
 
 for (const [width, height] of [
   [1280, 720],
@@ -145,9 +142,18 @@ for (const [width, height, scale] of LAYOUT_CASES) {
           await card.click();
           const details = page.locator(".creature-inspection");
           await expect(details.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
-          await captureScreen(page, {
-            path: `reports/scroll-free/kit-${kind}-${width}-${height}-${scale}.png`,
-          });
+          await settleScreen(page);
+          await details
+            .locator("img")
+            .evaluateAll((images) =>
+              Promise.all(images.map((image) => (image as HTMLImageElement).decode())),
+            );
+          await expectScrollFree(page);
+          // Every kit retains rendered checks; representative frames avoid a PNG per catalog entry.
+          if (kind === SPECIES[0]!.id || kind === SPECIES.at(-1)!.id)
+            await captureFrame(page, {
+              path: `reports/scroll-free/kit-${kind}-${width}-${height}-${scale}.png`,
+            });
           await expect(details.locator(".creature-card")).toHaveCount(0);
           await expect(details.getByRole("region", { name: "Trait", exact: true })).toBeVisible();
           await page.keyboard.press("Escape");
@@ -157,9 +163,6 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       expect([...seen]).toEqual(
         (exhaustive ? SPECIES : [SPECIES[0]!, SPECIES.at(-1)!]).map((entry) => entry.id),
       );
-      await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      await page.getByRole("button", { name: "Talents", exact: true }).click();
-      await expect(page.locator(".talents-screen")).toBeVisible();
     });
 
     test("Talents, Glossary and Settings", async ({ page }) => {
@@ -191,11 +194,24 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await page.getByRole("button", { name: "Settings", exact: true }).click();
       for (const name of ["Display", "Sound", "Battle"]) {
         await page.getByRole("tab", { name, exact: true }).click();
+        const panel = page.getByRole("tabpanel");
+        await expect(panel).toBeVisible();
+        if (exhaustive && name === "Sound") {
+          for (const slider of await panel.locator(".ui-slider").all()) {
+            const bounds = (await slider.boundingBox())!;
+            expect(bounds.width).toBeGreaterThanOrEqual(88);
+            await slider.click({ position: { x: bounds.width * 0.75, y: bounds.height / 2 } });
+            await expect
+              .poll(async () => Number(await slider.getByRole("slider").getAttribute("aria-valuenow")))
+              .toBeGreaterThan(50);
+          }
+        }
         await captureScreen(page, {
           path: `reports/scroll-free/settings-${name}-${width}-${height}-${scale}.png`,
         });
       }
       await page.keyboard.press("Escape");
+      await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
       expect(await state(page)).toEqual(before);
       await page.getByRole("button", { name: "Continue", exact: true }).click();
       await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();

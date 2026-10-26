@@ -1,3 +1,4 @@
+import { MAX_BATTLE_TURN } from "../state-limits";
 import { boonRule } from "../rules/boons";
 import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { unfinishedJourneyLimit } from "../card-actors";
@@ -208,6 +209,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     battle.cardsPlayedThisTurn = 0;
     intents(draft);
     if (
+      battle.turn >= MAX_BATTLE_TURN ||
       pendingReplacement(draft) ||
       // Food may be drawn next and stays playable even when every creature must skip
       draft.cards.some((card) => card.ownerId === null) ||

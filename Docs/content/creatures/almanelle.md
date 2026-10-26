@@ -1,28 +1,13 @@
 # Almanelle
 
-[Current kit](../../../src/game/content/creatures/almanelle.ts)
+Use the [authored kit](../../../src/game/content/creatures/almanelle.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#almanelle) preserve historical tuning.
 
-Almanelle is a 28-Health ordinary support creature, “The orchard through the seasons”
+Almanelle is an ordinary support creature, “The orchard through the seasons”
 The user selected Fallen Leaves, Rooted Year and Autumn Insight on October 23, 2026
-
-| Ability        | Rules                                                                            | Target    |
-| -------------- | -------------------------------------------------------------------------------- | --------- |
-| Spring Current | Deal 4 Water damage; Cleanse acting creature: remove 1 effect                    | One enemy |
-| Autumn Insight | Return a random discarded card to your hand; Restore 3 Health to an injured ally | One ally  |
-| Rooted Year    | Gain 3 Block; Gain 3 Thorns                                                      | Self      |
 
 All three cost 1 Mana. Autumn Insight uses the ordinary player-chosen ally targeting flow; recovery resolves before healing. A full-Health recipient can still receive the card's recovery utility, with healing capped normally
 
 ## Fallen Leaves
-
-| Stars | Complete passive rule                |
-| ----- | ------------------------------------ |
-| 0     | 50% of decaying Block becomes Thorns |
-| 1     | 60% of decaying Block becomes Thorns |
-| 2     | 70% of decaying Block becomes Thorns |
-| 3     | 80% of decaying Block becomes Thorns |
-| 4     | 90% of decaying Block becomes Thorns |
-| 5     | Decaying Block becomes Thorns        |
 
 Almanelle keeps the normal retained half of its own Block, rounded normally. Fallen Leaves converts the Block actually lost during that turn decay into Thorns, also rounded normally. For example, 20 Block becomes 10 Block and grants 5, 6, 7, 8, 9 or 10 Thorns at the six tiers. Three Block becomes two Block and grants one Thorns at base rank; a single Block rounds back to one and loses nothing
 

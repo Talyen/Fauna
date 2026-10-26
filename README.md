@@ -30,8 +30,8 @@ Accepted commands save automatically. Desktop close drains queued saves; abrupt 
 - [Contributing](CONTRIBUTING.md): setup, worktrees, verification and integration; [AGENTS.md](AGENTS.md): authorization and invariants
 - [Architecture](Docs/ARCHITECTURE.md): runtime boundaries, commands and saving
 - [Content](Docs/CONTENT.md), [creature design](Docs/CREATURE_DESIGN.md) and [Boon contracts](Docs/content/boons.md): authoring, artwork and mechanics
-- [Keywords](Docs/KEYWORDS.md), [Glossary](Docs/GLOSSARY.md) and [Journey design](Docs/EXPEDITION_DESIGN.md): gameplay rules
-- [UI](Docs/UI.md): shared appearance, accessibility and review; [menus](Docs/MENU_DESIGN.md), [screens](Docs/ui/screens.md) and [battle](Docs/ui/battle.md): affected flows
+- [Keywords and Glossary](Docs/KEYWORDS.md) and [Journey design](Docs/EXPEDITION_DESIGN.md): gameplay rules
+- [UI](Docs/UI.md): shared appearance, accessibility and review; [screens and navigation](Docs/ui/screens.md) and [battle](Docs/ui/battle.md): affected flows
 - [Development tools](Docs/DEVELOPMENT_TOOLS.md): previews, replay, balance and performance; [script map](scripts/README.md): implementations
 - [Release](Docs/RELEASE.md): shipping gates and platform qualification
 - [History](Docs/archive/README.md) and [design references](design/README.md): implementation records, measurements and scoped user choices

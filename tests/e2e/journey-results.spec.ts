@@ -105,6 +105,8 @@ for (const [width, enlarged, outcome] of [
 for (const input of ["mouse", "keyboard", "controller"] as const)
   test(`boss victory commits rewards with ${input}`, async ({ page }) => {
     const press = input === "controller" ? await gamepad(page) : null;
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
     const fixture = victoryReady(
       accept(
         produce(run(7), (draft) => {
@@ -143,10 +145,12 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(won.wins).toBe(1);
     expect(won.currency).toBe(fixture.currency + 40);
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBeGreaterThan(0);
+    await page.getByRole("button", { name: "Main menu", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
     if (input === "mouse") await reloadHome(page);
-    else await page.getByRole("button", { name: "Main menu", exact: true }).click();
     await waitForStartup(page);
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
     expect(await state(page)).toEqual(won);
     await page.getByRole("button", { name: "Collection", exact: true }).click();
     await expect(page.getByRole("button", { name: "Inspect Prismram" })).toHaveCount(1);

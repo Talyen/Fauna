@@ -209,20 +209,11 @@ it("moves between battle rows and reaches hand-side controls with directional in
   for (const control of controls) expect(reached.has(control)).toBe(true);
 });
 
+// Authored targeting lives in ability-contracts; the screen needs self, team and enemy-area activation.
 it.each([
   ["ringpalm", "ringpalm-teamProtection"],
   ["emberback", "emberback-furnace-breath"],
-  ["emberback", "emberback-magma-stomp"],
-  ["mossguard", "mossguard-attack"],
   ["mossguard", "mossguard-guard"],
-  ["mossguard", "mossguard-heal"],
-  ["pollenmoth", "pollenmoth-attack"],
-  ["pollenmoth", "pollenmoth-heal"],
-  ["captoad", "captoad-swap"],
-  ["dunefox", "dunefox-dodge"],
-  ["bloomquail", "bloomquail-draw"],
-  ["neradora", "neradora-undertow-knot"],
-  ["rookhaven", "rookhaven-unwritten-ending"],
 ] as const)("plays %s's %s immediately without selecting or confirming a recipient", async (kind, id) => {
   const game = produce(teamRun(7, [kind, "prismram"]), (draft) => {
     const chosen = draft.cards.find((card) => card.definitionId === id)!;

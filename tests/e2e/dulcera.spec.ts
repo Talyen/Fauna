@@ -1,7 +1,6 @@
 import { expect } from "@playwright/test";
 import { dulceraBattle } from "../support/dulcera";
 import { test, seed, resume, state, reloadHome } from "./support/session";
-import { fits } from "./support/layout";
 import { captureScreen } from "./support/rendered-evidence";
 
 test("Dulcera's abilities restore, protect and exchange the visible team with keyboard input", async ({
@@ -37,7 +36,6 @@ test("Dulcera's abilities restore, protect and exchange the visible team with ke
   expect(game.team[1]!.combat!.poison).toBe(0);
   expect(game.reserves[0]!).toMatchObject({ species: "dulcera", combat: { burn: 3 } });
   expect(game.battle!.mana).toBe(2);
-  await fits(page);
   await captureScreen(page, { path: "reports/dulcera/after-abilities.png" });
 
   await reloadHome(page);

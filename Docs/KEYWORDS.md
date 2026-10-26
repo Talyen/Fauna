@@ -2,6 +2,12 @@
 
 `src/game/keywords.ts` owns stable keyword IDs, labels, descriptions, aliases, damage types and effect classification. `src/ui/tokens.css` owns their semantic foregrounds. Color always accompanies readable labels. `KeywordText` highlights whole words while preserving text; it never assigns effects or XP.
 
+## Glossary and terminology
+
+[src/game/glossary.ts](../src/game/glossary.ts) assembles the complete in-game **Menu → Glossary**. Keep card text and feedback consistent with those owners.
+
+Use Boon for passive journey items, Gold for permanent currency and Journey for a run. Current labels supersede historical relic, Holy and expedition wording in design records; internal identifiers need not change.
+
 ## Combat rules
 
 These are the shared rules. Explicit creature, Talent and [Boon contracts](CONTENT.md#boon-selections) can modify them; the linked owners define those exceptions.

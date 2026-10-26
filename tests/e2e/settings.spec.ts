@@ -6,6 +6,7 @@ test("settings and glossary return to the pause menu; End journey immediately sh
   page,
 }) => {
   await seed(page, run());
+  await expect(page.getByRole("button", { name: "End journey", exact: true })).toHaveCount(0);
   await resume(page);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -16,7 +17,27 @@ test("settings and glossary return to the pause menu; End journey immediately sh
   await page.getByRole("button", { name: "Glossary", exact: true }).click();
   await expect(page.getByRole("main", { name: "Glossary & controls" })).toBeVisible();
   await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: "End journey", exact: true }).click();
+  const end = page
+    .getByRole("dialog", { name: "Pause menu" })
+    .getByRole("button", { name: "End journey", exact: true });
+  const red = await page
+    .locator(":root")
+    .evaluate((element) => getComputedStyle(element).getPropertyValue("--destructive-text").trim());
+  const resolvedRed = await end.evaluate((element, color) => {
+    const probe = document.createElement("span");
+    probe.style.color = color;
+    element.append(probe);
+    const resolved = getComputedStyle(probe).color;
+    probe.remove();
+    return resolved;
+  }, red);
+  await expect(end).toHaveCSS("color", resolvedRed);
+  await expect(end.locator("svg.lucide-log-out")).toHaveCSS("stroke", resolvedRed);
+  await end.hover();
+  await expect(end).toHaveCSS("color", resolvedRed);
+  await expect(end.locator("svg")).toHaveCSS("stroke", resolvedRed);
+  expect((await state(page)).phase).toBe("battle");
+  await end.click();
   await expect(page.getByRole("alertdialog")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Main menu", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Play", exact: true })).toHaveCount(0);
@@ -65,33 +86,4 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await expect(sound).not.toBeChecked();
-});
-
-test("End journey is exclusive to the hamburger menu with a red label and icon", async ({ page }) => {
-  await seed(page, run());
-  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "End journey", exact: true })).toHaveCount(0);
-  await resume(page);
-  await page.getByRole("button", { name: "Open menu" }).click();
-  const end = page
-    .getByRole("dialog", { name: "Pause menu" })
-    .getByRole("button", { name: "End journey", exact: true });
-  const red = await page
-    .locator(":root")
-    .evaluate((element) => getComputedStyle(element).getPropertyValue("--destructive-text").trim());
-  const resolvedRed = await end.evaluate((element, color) => {
-    const probe = document.createElement("span");
-    probe.style.color = color;
-    element.append(probe);
-    const resolved = getComputedStyle(probe).color;
-    probe.remove();
-    return resolved;
-  }, red);
-  await expect(end).toHaveCSS("color", resolvedRed);
-  await expect(end.locator("svg.lucide-log-out")).toHaveCSS("stroke", resolvedRed);
-  await end.hover();
-  await expect(end).toHaveCSS("color", resolvedRed);
-  await expect(end.locator("svg")).toHaveCSS("stroke", resolvedRed);
-  await page.keyboard.press("Escape");
-  expect((await state(page)).phase).toBe("battle");
 });

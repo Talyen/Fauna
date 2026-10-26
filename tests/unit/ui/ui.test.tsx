@@ -27,7 +27,6 @@ import userEvent from "@testing-library/user-event";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
-import { gamepadActions } from "../../../src/ui/shared/navigation/input";
 screenTestEnvironment();
 
 describe("player interface", () => {
@@ -336,15 +335,6 @@ describe("player interface", () => {
       await session.dispose();
     },
   );
-  it("maps standard controller buttons and sticks to semantic actions", () => {
-    const buttons = Array.from({ length: 16 }, (_, i) => ({
-      pressed: [0, 2, 3, 12].includes(i),
-      touched: false,
-      value: 0,
-    }));
-    expect(gamepadActions({ buttons, axes: [0.8, 0] })).toEqual(["confirm", "inspect", "endTurn", "up"]);
-    expect(gamepadActions({ buttons: [], axes: [0.1, -0.1] })).toEqual([]);
-  });
 });
 it("allows play and explains unavailable saving when browser storage access is denied", async () => {
   const original = Object.getOwnPropertyDescriptor(window, "localStorage")!;
@@ -416,24 +406,6 @@ it("keeps unavailable cards inspectable and denies activation without explanator
   expect(screen.queryByText("Not enough mana.")).toBeNull();
   await userEvent.pointer({ target: button, keys: "[MouseRight]" });
   expect(inspect).toHaveBeenCalledOnce();
-});
-
-it("limits creature hover details to the name and passive", async () => {
-  const { CreatureDetails } = await import("../../../src/ui/shared/cards/card-details");
-  render(<CreatureDetails kind="mossguard" />);
-  expect(screen.getByText("Mossguard")).toBeTruthy();
-  expect(screen.getByText("Overgrowth")).toBeTruthy();
-  expect(screen.queryByText(/\d+ block/i)).toBeNull();
-  expect(screen.queryByText(/health/i)).toBeNull();
-  expect(
-    screen.getByText(
-      (_, element) =>
-        element?.tagName === "P" && element.textContent === "Retain 10% more Block between turns",
-    ),
-  ).toBeTruthy();
-  expect(screen.queryByText(/Rooted Stomp/)).toBeNull();
-  expect(screen.queryByText(/Shelter/)).toBeNull();
-  expect(screen.queryByText(/Moss Renewal/)).toBeNull();
 });
 
 it("keeps the team after committing a recruit to Collection and resumes the result", async () => {

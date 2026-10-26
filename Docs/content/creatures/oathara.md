@@ -1,17 +1,11 @@
 # Oathara
 
-[Current kit](../../../src/game/content/creatures/oathara.ts)
+Use the [authored kit](../../../src/game/content/creatures/oathara.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#oathara) preserve historical tuning.
 
-Oathara is a 30-Health ordinary support creature, “The keeper of unfinished journeys”
+Oathara is an ordinary support creature, “The keeper of unfinished journeys”
 The user selected its kit on October 23, 2026
 
-| Ability         | Rules                                                   |
-| --------------- | ------------------------------------------------------- |
-| Never Lost      | Shuffle your hand into your deck / Draw that many cards |
-| Traveler’s Ward | Reflect the next attack                                 |
-| Vow of Return   | Resurrect an ally                                       |
-
-All three cost 1 Mana. Unfinished Journey lets Oathara play 1, 2, 3, 4, 5 or 6 fallen ally cards per turn at zero through five stars. It grants access, not free plays, generated cards, a second passive or another progression system
+All three cost 1 Mana. Unfinished Journey supplies a rank-dependent allowance of fallen ally card plays each turn. It grants access, not free plays, generated cards, a second passive or another progression system
 
 ## Identity and ownership
 

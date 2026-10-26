@@ -11,6 +11,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: 0,
   use: {
+    actionTimeout: 5000,
     baseURL: process.env.FAUNA_TEST_URL ?? "http://127.0.0.1:48210",
     viewport: { width: 1280, height: 800 },
     trace: { mode: "retain-on-failure", screenshots: false },
