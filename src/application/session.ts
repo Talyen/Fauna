@@ -47,11 +47,36 @@ export function createSession(
       true,
     ),
   );
+  type Listener = Parameters<typeof store.subscribe>[0];
+  const listeners = new Set<Listener>();
+  const notifications: { view: SessionView; previous: SessionView; listeners: Listener[] }[] = [];
+  let notifying = false;
   const publish = (patch: Partial<SessionView>) => {
     const end = span("state-publication", patch.game?.revision ?? store.getState().game.revision);
     // Replace the complete view so Zustand does not merge into a mutable snapshot.
     try {
-      store.setState(freeze({ ...store.getState(), ...patch }, true), true);
+      const previous = store.getState();
+      const view = freeze({ ...previous, ...patch }, true);
+      store.setState(view, true);
+      notifications.push({ view, previous, listeners: [...listeners] });
+      // Commit immediately, but finish delivering each snapshot before reentrant updates.
+      if (notifying) return;
+      notifying = true;
+      try {
+        while (notifications.length) {
+          const notification = notifications.shift()!;
+          for (const listener of notification.listeners) {
+            if (!listeners.has(listener)) continue;
+            try {
+              listener(notification.view, notification.previous);
+            } catch (error) {
+              diagnostics.record("render", error, notification.view.game);
+            }
+          }
+        }
+      } finally {
+        notifying = false;
+      }
     } finally {
       end();
     }
@@ -264,14 +289,12 @@ export function createSession(
     store: {
       getState: store.getState,
       getInitialState: store.getInitialState,
-      subscribe(listener: Parameters<typeof store.subscribe>[0]) {
-        return store.subscribe((view, previous) => {
-          try {
-            listener(view, previous);
-          } catch (error) {
-            diagnostics.record("render", error, view.game);
-          }
-        });
+      subscribe(listener: Listener) {
+        const subscription: Listener = (view, previous) => listener(view, previous);
+        listeners.add(subscription);
+        return () => {
+          listeners.delete(subscription);
+        };
       },
     },
     diagnostics,
