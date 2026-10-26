@@ -128,12 +128,14 @@ export function createDiagnostics(port?: DiagnosticPort) {
             },
           ].slice(-MAX_ENTRIES),
         );
+        // Capture delivery ownership before persistence or listeners can register new viewers.
+        const notification = [...listeners];
         try {
           port?.write(JSON.stringify(entries));
         } catch {
           /* Preserve in-memory evidence. */
         }
-        for (const listener of [...listeners]) {
+        for (const listener of notification) {
           if (!listeners.has(listener)) continue;
           try {
             listener();
