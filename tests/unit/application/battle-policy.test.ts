@@ -5,11 +5,12 @@ import { dispatch, previewCard } from "../../../src/game/engine";
 import { accept, authoredPack, prepareDestination, requireBattle, teamRun } from "../../support/game";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { species, SPECIES, TALENTS, BOONS, definition } from "../../../src/game/content";
+import { attack } from "../../../src/game/content/card-builders";
 import { KEYWORDS } from "../../../src/game/progression";
 import { encodeSave, decodeSave } from "../../../src/game/save";
 import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
 import { actionValue } from "../../../src/game/ability-rules";
-import { freshCombat } from "../../../src/game/combat/index";
+import { freshCombat, removeEffects } from "../../../src/game/combat/index";
 import type { GameState } from "../../../src/game/types";
 
 function onlyHand(state: GameState, definitionId: string) {
@@ -193,6 +194,157 @@ it("ordinary attack assessments retain deterministic enemy resistance", () => {
   expect(facts).toMatchObject({ lost: 7, lethal: false });
   expect(rankedBattleChoices(state, false)[0]!.score).toBeLessThan(1_000_000_000);
 });
+
+it.each([
+  "block",
+  "armor",
+  "thorns",
+  "waterThorns",
+  "fireThorns",
+  "dodge",
+  "temporaryDodge",
+  "reflect",
+  "reflectBurn",
+  "nullify",
+  "nullifyFreeze",
+  "negate",
+  "attackReflection",
+] as const)("Auto-play values Purge for an enemy's %s alone", (status) => {
+  const state = produce(teamRun(42, ["rookhaven"]), (game) => {
+    const card = game.cards.find((card) => card.definitionId === "rookhaven-unwritten-ending")!;
+    game.battle!.hand = [card.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    for (const enemy of game.battle!.enemies) {
+      enemy.block = 0;
+      enemy.combat = freshCombat();
+    }
+    const enemy = game.battle!.enemies[0]!;
+    if (status === "block") enemy.block = 2;
+    else Object.assign(enemy.combat, { [status]: typeof enemy.combat[status] === "boolean" ? true : 2 });
+  });
+  const [choice] = rankedBattleChoices(state, false);
+  expect(choice!.score).toBe(status === "block" || status === "armor" ? 1701 : 161);
+  const result = dispatch(state, choice!.command);
+  expect(result.accepted).toBe(true);
+  const enemy = result.state.battle!.enemies[0]!;
+  expect(Number(status === "block" ? enemy.block : enemy.combat[status])).toBe(0);
+});
+
+it.each([
+  ["cadenza", "cadenza-rousing-refrain"],
+  ["stillara", "stillara-thaw-path"],
+  ["tournelle", "tournelle-teamClearBlind"],
+] as const)("Auto-play keeps healing ahead of useful draw for %s's spent support", (kind, definitionId) => {
+  const base = teamRun(42, kind === "cadenza" ? [kind] : [kind, "cadenza"]);
+  for (const [healing, drawing, score] of [
+    [false, false, undefined],
+    [false, true, 200],
+    [true, false, 3000],
+    [true, true, 3000],
+  ] as const) {
+    const state = produce(base, (game) => {
+      game.battle!.hand = game.cards.map((card) => card.id);
+      game.battle!.draw = [];
+      game.battle!.discard = [];
+      game.battle!.buffer = [];
+      for (const ally of game.team) ally.combat!.temporaryDodge = 70;
+      if (healing) {
+        game.team[0]!.health--;
+        game.battle!.cardsPlayedThisTurn = 1;
+      }
+      if (drawing) {
+        const drawn = game.cards.find((card) => card.definitionId === "tournelle-attack") ?? game.cards[0]!;
+        game.battle!.hand = game.battle!.hand.filter((id) => id !== drawn.id);
+        game.battle!.draw = [drawn.id];
+      }
+    });
+    const card = state.cards.find((card) => card.definitionId === definitionId)!;
+    const choice = rankedBattleChoices(state, false).find(
+      (choice) => choice.command.type === "play" && choice.command.cardId === card.id,
+    );
+    expect(choice?.score).toBe(score);
+    if (choice) expect(dispatch(state, choice.command).accepted).toBe(true);
+  }
+});
+
+it("Purge retains its removal order and removes both kinds of Dodge together", () => {
+  const removed: string[] = [];
+  produce(teamRun(42, ["rookhaven"]), (game) => {
+    const enemy = game.battle!.enemies[0]!;
+    enemy.block = 1;
+    Object.assign(enemy.combat, {
+      armor: 1,
+      thorns: 1,
+      waterThorns: 1,
+      fireThorns: 1,
+      dodge: 1,
+      temporaryDodge: 1,
+      reflect: true,
+      reflectBurn: true,
+      nullify: true,
+      nullifyFreeze: true,
+      negate: true,
+      attackReflection: true,
+    });
+    for (let index = 0; index < 12; index++) {
+      const events: Parameters<typeof removeEffects>[3] = [];
+      expect(removeEffects(enemy, "purge", 1, events, game)).toBe(1);
+      removed.push(
+        ...events.flatMap((event) =>
+          event.kind === "status" && event.status === "purge" && event.affectedStatus
+            ? [event.affectedStatus]
+            : [],
+        ),
+      );
+      if (index === 5) expect([enemy.combat.dodge, enemy.combat.temporaryDodge]).toEqual([0, 0]);
+    }
+  });
+  expect(removed).toEqual([
+    "block",
+    "armor",
+    "thorns",
+    "waterThorns",
+    "fireThorns",
+    "dodge",
+    "reflect",
+    "reflect",
+    "nullify",
+    "nullify",
+    "negate",
+    "attackReflection",
+  ]);
+});
+
+it.each(["none", "nullifyFreeze", "negate", "attackReflection"] as const)(
+  "ordinary attack assessment preserves packet defenses with %s",
+  (protection) => {
+    const state = requireBattle(
+      produce(teamRun(42, ["prismram"]), (game) => {
+        game.battle!.hand = [game.cards[0]!.id];
+        game.boons = ["sundering-charm", "crater-punch"];
+        const enemy = game.battle!.enemies[0]!;
+        enemy.block = 2;
+        enemy.combat = { ...freshCombat(), armor: 5 };
+        if (protection !== "none") enemy.combat[protection] = true;
+      }),
+    );
+    const def = {
+      ...attack("prismram", "Assessment", 6, "physical"),
+      criticalWhenLastCard: true,
+      alternateDamageType: "freeze" as const,
+    };
+    const before = encodeSave(state);
+    const hits = ordinaryAttackFacts(state, state.team[0]!, def, 6, state.battle.enemies[0]!);
+    const negated = protection === "negate" || protection === "attackReflection";
+    expect(hits.map(({ lost, blocked, eroded, negated }) => ({ lost, blocked, eroded, negated }))).toEqual([
+      { lost: negated ? 0 : 8, blocked: negated ? 0 : 2, eroded: negated ? 0 : 2, negated },
+      { lost: protection === "none" ? 10 : 0, blocked: protection === "none" ? 2 : 0, eroded: 0, negated },
+    ]);
+    expect(encodeSave(state)).toBe(before);
+  },
+);
 
 it.each(SPECIES)("preserves visible rankings and legal choices for $id", ({ id }) => {
   const rankings = ["ordinary", "injured", "defended", "talented"].map((condition) => {

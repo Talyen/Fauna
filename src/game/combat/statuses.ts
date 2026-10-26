@@ -13,6 +13,7 @@ import {
   maximumHealth,
   unitName,
   harmfulStatuses,
+  beneficialStatuses,
   STACK_LIMIT,
   removeArmor,
   type ArmorDepletion,
@@ -182,20 +183,7 @@ export function* removeEffects(
       sourceId: stats.statusSources[status],
       turns,
     });
-  const beneficial = [
-    "armor",
-    "thorns",
-    "waterThorns",
-    "fireThorns",
-    "dodge",
-    "reflect",
-    "reflectBurn",
-    "nullify",
-    "nullifyFreeze",
-    "negate",
-    "attackReflection",
-  ] as const;
-  const statuses = onlyStatus ? [onlyStatus] : kind === "cleanse" ? harmfulStatuses : beneficial;
+  const statuses = onlyStatus ? [onlyStatus] : kind === "cleanse" ? harmfulStatuses : beneficialStatuses;
   if (
     kind === "purge" &&
     state &&
@@ -207,7 +195,7 @@ export function* removeEffects(
   if (kind === "purge" && state && !isEnemy(unit) && state.boons.includes("basalt-glass-bookmark")) {
     const remaining =
       Number(unit.block > 0) +
-      beneficial.filter(
+      beneficialStatuses.filter(
         (status) => Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0),
       ).length;
     count = Math.min(count, Math.max(0, remaining - 1));
