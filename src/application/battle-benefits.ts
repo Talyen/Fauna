@@ -172,7 +172,7 @@ function primaryBattleBenefits(
       const enemies = facts.livingEnemies();
       const attacks = enemies.map((enemy) => ({
         enemy,
-        outcomes: ordinaryAttackFacts(state, actor, def, value, enemy),
+        outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cardCost(card, state)),
       }));
       const remaining = attacks.filter(({ enemy }) => !enemy.minion);
       const lethal = (attack: (typeof attacks)[number]) => attack.outcomes.every((outcome) => outcome.lethal);
