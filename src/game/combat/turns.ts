@@ -4,11 +4,11 @@ import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { cardActor, unfinishedJourneyLimit } from "../card-actors";
 import { battlefield, isEnemy, healingAllies } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
-import { drawBossCards, courtRemembers, removeDepartedMinions } from "./legendary";
+import { drawBossCards, removeDepartedMinions } from "./legendary";
 import { chooseEnemyCard } from "./enemy-policy";
 import { lastWarmth } from "./card-modifiers";
 import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
-import { executeAbility } from "./abilities";
+import { playEnemyAbility } from "./enemy-action";
 import { passiveAmount } from "../progression";
 import {
   ensureCombat,
@@ -25,10 +25,10 @@ import {
   type Combatant,
 } from "./index";
 import { draw, expressDelivery } from "../card-zones";
-import { retainedBlock, enemyAbilityValue } from "../ability-rules";
+import { retainedBlock } from "../ability-rules";
 import { enemyCard, enemyCanUse } from "../card-rules";
 import type { GameEvent, GameState, BattleState } from "../types";
-import { living, pendingReplacement, swapFromCard } from "../team";
+import { living, pendingReplacement } from "../team";
 import { settle, intents } from "../journey";
 
 // Adapt immutable authored kits once for both value estimation and execution.
@@ -120,27 +120,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           const choice = chooseEnemyCard(draft, enemy, deck.hand.map(definition));
           if (!choice) break;
           const { def, targetId, allyTargetId } = choice;
-          const id = def.id;
           enemy.targetId = targetId ?? enemy.targetId;
-          const lastCardInHand = deck.hand.length === 1;
-          deck.hand.splice(deck.hand.indexOf(id), 1);
-          if (!def.consume) deck.discard.push(id);
-          deck.mana -= def.cost;
-          executeAbility(
-            draft,
-            {
-              side: "enemy",
-              actor: enemy,
-              def,
-              value: enemyAbilityValue(enemy, def),
-              targetId,
-              allyTargetId,
-              lastCardInHand,
-            },
-            events,
-            { swap: swapFromCard },
-          );
-          courtRemembers(draft, enemy, events);
+          const lastCardInHand = playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events);
           if (def.consume) deck.pearls--;
           removeDepartedMinions(draft);
           recycleDiscard(draft, deck);
@@ -165,19 +146,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       enemy.targetId = targetId ?? enemy.targetId;
       enemy.lastAbility = def.id;
       if (inherited.includes(def)) ensureCombat(enemy).fallenCardsPlayedThisTurn++;
-      executeAbility(
-        draft,
-        {
-          side: "enemy",
-          actor: enemy,
-          def,
-          value: enemyAbilityValue(enemy, def),
-          targetId,
-          allyTargetId,
-        },
-        events,
-        { swap: swapFromCard },
-      );
+      playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events);
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       if (settle(draft, events)) return;
     }
