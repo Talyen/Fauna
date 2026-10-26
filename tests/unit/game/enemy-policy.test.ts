@@ -209,6 +209,31 @@ describe("enemy targeting and card values", () => {
     expect(chooseEnemyCard(state, enemy, [definition("memento-drowned-revelation")])).toBeUndefined();
   });
 
+  it("values and executes a Legendary summon and its immediate Echo attack", () => {
+    const { state, enemy, target } = fixture();
+    enemy.species = "memento";
+    enemy.deck = {
+      hand: ["memento-lost-procession"],
+      draw: [],
+      discard: [],
+      buffer: [],
+      mana: 4,
+      pearls: 0,
+    };
+    const before = structuredClone(state);
+    expect(enemyCardValue(state, enemy, definition("memento-lost-procession"), target.id)).toBe(9);
+    expect(state).toEqual(before);
+
+    // The turn discards and redraws the hand before choosing its first card.
+    const events: GameEvent[] = [];
+    finishTurn(state, events);
+    expect(events.filter((event) => event.text === "Memento summons an Echo")).toHaveLength(1);
+    expect(events.filter((event) => event.text === "The Court Remembers")).toHaveLength(1);
+    expect(state.battle.minions?.[0]?.health).toBe(6);
+    expect(state.team.reduce((sum, unit) => sum + unit.health, 0)).toBe(57);
+    expect(enemy.deck.mana).toBe(3);
+  });
+
   it("retargets after each play and includes living player Minions", () => {
     const { state, enemy } = fixture();
     state.team[0]!.health = 22;

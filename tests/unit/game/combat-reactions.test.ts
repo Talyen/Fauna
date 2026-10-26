@@ -375,6 +375,64 @@ it("pays Bleed Leech for damage already dealt even when Last Resort Cleanses the
   expect(source.health).toBe(before + 2);
 });
 
+it.each(["tick", "detonation"] as const)(
+  "pays captured Bleed sources in order for a %s, including a departed source's share",
+  (method) => {
+    const state = structuredClone(run());
+    state.talents = method === "detonation" ? ["physical.rupture"] : [];
+    state.boons = [];
+    const [first, second] = state.team;
+    first!.health = second!.health = 10;
+    first!.combat = { ...freshCombat(), riposte: true };
+    second!.combat = freshCombat();
+    const target = state.battle!.enemies[0]!;
+    target.species = "mossguard";
+    target.health = 3;
+    target.maxHealth = 100;
+    target.block = method === "detonation" ? 3 : 1;
+    target.combat = { ...freshCombat(), bleed: 6, controlled: "stun", controlTurns: 1 };
+    target.combat.bleedLeech = [
+      { sourceId: "departed", amount: 2 },
+      { sourceId: first!.id, amount: 2 },
+      { sourceId: second!.id, amount: 2 },
+    ];
+    const events: GameEvent[] = [];
+
+    if (method === "tick") tickStatuses(state, target, events);
+    else hit(state, first!, target, 1, "physical", events);
+
+    expect([target.health, target.block, target.combat.bleed]).toEqual([0, 0, 0]);
+    expect(target.combat.bleedLeech).toEqual([]);
+    expect([first!.health, second!.health]).toEqual([11, 10]);
+  },
+);
+
+it("resolves returned control rewards before the target's Armor-break reaction", () => {
+  const state = structuredClone(run());
+  state.boons = ["orbit-armillary", "thunderstone"];
+  state.talents = ["stun.shatter-guard"];
+  const ally = state.team[0]!;
+  const enemy = state.battle!.enemies[0]!;
+  ally.combat = { ...freshCombat(), controlled: "stun", controlTurns: 1 };
+  ally.combat.statusSources.stun = enemy.id;
+  enemy.species = "emberback";
+  enemy.health = enemy.maxHealth = 100;
+  enemy.block = 0;
+  enemy.combat = { ...freshCombat(), armor: 2 };
+  const events: GameEvent[] = [];
+
+  removeEffects(ally, "cleanse", 1, events, state);
+
+  expect(enemy.combat.controlled).toBe("stun");
+  expect(enemy.combat.armor).toBe(0);
+  expect(events.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
+    "nature",
+    "burn",
+    "burn",
+    "burn",
+  ]);
+});
+
 it("cancels Thunderstone after Thorns knocks out the acting creature, retaining the landed Stun", () => {
   const state = structuredClone(run());
   state.boons = ["thunderstone"];

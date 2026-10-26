@@ -1,14 +1,11 @@
 import { Immer } from "immer";
 import { battlefield } from "../battlefield";
-import { enemyAbilityValue } from "../ability-rules";
 import { cardTargeting } from "../card-rules";
 import type { CardDefinition } from "../content/types";
 import { observeDecisions } from "../random";
-import { swapFromCard } from "../team";
 import type { BattleState, CombatState, Enemy } from "../types";
-import { executeAbility } from "./abilities";
 import { lastWarmth } from "./card-modifiers";
-import { courtRemembers } from "./legendary";
+import { playEnemyAbility } from "./enemy-action";
 import { highestHealth, type Combatant } from "./state";
 
 // Evaluation also accepts live mutable turn drafts; shared branches must never be frozen.
@@ -84,29 +81,7 @@ export function enemyCardValue(
       let decision = 0;
       observeDecisions(draft, () => ((probe + 0.5) / 8 + decision++ * 0.618033988749895) % 1);
       const actor = draft.battle.enemies.find((unit) => unit.id === enemy.id)!;
-      const lastCardInHand = spentCard > 0 && actor.deck?.hand.length === 1;
-      if (actor.deck) {
-        actor.deck.mana -= def.cost;
-        if (spentCard) {
-          actor.deck.hand.splice(actor.deck.hand.indexOf(def.id), 1);
-          if (!def.consume) actor.deck.discard.push(def.id);
-        }
-      }
-      executeAbility(
-        draft,
-        {
-          side: "enemy",
-          actor,
-          def,
-          value: enemyAbilityValue(actor, def),
-          targetId,
-          allyTargetId,
-          lastCardInHand,
-        },
-        [],
-        { swap: swapFromCard },
-      );
-      if (actor.deck) courtRemembers(draft, actor, []);
+      const lastCardInHand = playEnemyAbility(draft, actor, def, targetId, allyTargetId, []);
       if (lastCardInHand) lastWarmth(draft, true, []);
     });
     // Rank effect value, with Mana paid before restoration so resource caps are accurate.

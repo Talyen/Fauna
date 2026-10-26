@@ -6,10 +6,11 @@ import { useState, type ComponentProps, type ReactNode } from "react";
 import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
+import { actionDisplay } from "./action-display";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
-import { actionValue, cardCost, physicalBonus } from "../../../game/ability-rules";
-import { definition, species } from "../../../game/content";
-import { cardText, enemyCard } from "../../../game/card-rules";
+import { cardCost } from "../../../game/ability-rules";
+import { species } from "../../../game/content";
+import { cardText } from "../../../game/card-rules";
 import type { SpeciesId } from "../../../game/content";
 import type { Card, Creature, Enemy, GameState } from "../../../game/types";
 type CreatureProps = {
@@ -242,20 +243,8 @@ export function ActionCard({
   onDenied?: (element: HTMLElement) => void;
 }) {
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
-  const def = enemy ? enemyCard(definition(card.definitionId)) : definition(card.definitionId);
-  const effectText = cardText(
-    def,
-    card.level,
-    enemyValue ??
-      Math.round(
-        actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers) +
-          (modifiers && actor && def.effect === "attack" && def.damageType === "physical"
-            ? physicalBonus(actor, modifiers)
-            : 0),
-      ),
-    enemyPower,
-    modifiers,
-  );
+  const { def, value } = actionDisplay(card, actor, modifiers, enemy, enemyValue);
+  const effectText = cardText(def, card.level, value, enemyPower, modifiers);
   useEffectBaseline(selected ? effectPalette(visualKeywords(effectText)) : null, 1);
   const artwork = (
     <ArtCard

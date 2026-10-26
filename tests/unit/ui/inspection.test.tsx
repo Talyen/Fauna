@@ -222,6 +222,7 @@ describe("artwork-first inspection", () => {
       const card = screen.getByRole("button", { name: /^Ember Charge \+1,/ });
       await user.hover(card);
       expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 8 Physical damage");
+      expect(card.getAttribute("aria-label")).toContain("Deal 8 Physical damage");
       act(() => card.focus());
       await user.keyboard("i");
       await user.pointer({ target: card, keys: "[MouseRight]" });
