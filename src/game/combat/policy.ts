@@ -12,7 +12,10 @@ export type DamagePacket =
       criticalBonus?: number;
     })
   | (AttackValues & { origin: "proc" | "resonance"; delivery?: "bounce" })
-  | { origin: "periodic" | "retaliation" | "statusRetaliation" | "derived" | "overkill" | "chain" };
+  | {
+      origin: "periodic" | "retaliation" | "statusRetaliation" | "derived" | "overkill" | "chain";
+      thorns?: true;
+    };
 
 const inactive = {
   attack: false,

@@ -1,5 +1,16 @@
 /** Approved October 25 additions; direct behavior regressions live in boons.test.ts. */
 export const NEW_BOON_EFFECTS = {
+  "pearl-sieve": "Purge removes an extra effect from enemies with Block",
+  "tide-anklet": "Swapping allies both keep the higher Block total",
+  "obsidian-pitcher": "Overflow Leech applies half as much Burn to the enemy",
+  "molten-paperweight": "Burn cannot be Cleansed from enemies with Block",
+  "coronation-cloche": "Nullify protects allied effects from Purge",
+  "vigil-lantern": "Allies at Death’s Door can act through Stun and Freeze",
+  "grain-flail": "Breaking enemy Block also removes their Armor",
+  "gemmed-scabbard": "Armor also reduces Thorns damage",
+  "dream-tangram": "Repeated attacks move on when their target falls",
+  "comet-crucible": "Armor Purged from allies becomes Block",
+
   "grafting-needle": "Healing an ally raises their Armor to half of yours",
   "coral-net-weight": "Dodged attacks still damage enemy Block",
   "moonveil-mask": "Enemies keep Blind when it causes their attacks to miss",

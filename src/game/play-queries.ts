@@ -62,7 +62,7 @@ export function inspectCardPlay(
     return { allowed: false, reason: "That card is not in your hand." };
   const actor = cardActor(state, card);
   if (!actor || actor.health <= 0) return { allowed: false, reason: "That creature is knocked out." };
-  if (card.ownerId !== null && controlled(actor))
+  if (card.ownerId !== null && controlled(actor, state))
     return {
       allowed: false,
       reason: `${species(actor.species).name} cannot act ${actor.combat?.controlled ? `while ${actor.combat.controlled === "freeze" ? "Frozen" : "Stunned"}` : "this turn"}.`,

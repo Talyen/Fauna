@@ -71,7 +71,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
   if (state.phase !== "battle") return [];
   const outgoing = pendingReplacement(state);
   if (outgoing) {
-    const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit));
+    const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit, state));
     const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
     const all = [...state.team, ...state.reserves];
     const active = state.team.map((unit) => unit.id);
@@ -87,7 +87,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         const damage = needsDamage ? offenseValue(state, unit.species) : 0;
         const score =
           (damage > 0 ? 1_000_000 : 0) +
-          (!controlled(unit) ? 100_000 : 0) +
+          (!controlled(unit, state) ? 100_000 : 0) +
           coverageScore(state, kinds) +
           damage * 100 +
           (unit.health / species(unit.species).health) * 100;

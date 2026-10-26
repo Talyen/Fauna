@@ -41,6 +41,7 @@ import type { loseHealth, openingCriticalBonus, ownDodgeChance, sharedDodgeChanc
 
 type Modules = {
   "./team": {
+    matchSwapBlock: typeof import("./team").matchSwapBlock;
     gentlePassage: typeof gentlePassage;
     mountainGuide: typeof mountainGuide;
     swapBackup: typeof swapBackup;
@@ -69,6 +70,7 @@ type Modules = {
   };
   "./chance": typeof import("./chance");
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
+  "./combat/abilities": typeof import("./combat/abilities");
   "./combat/battle-modifiers": typeof import("./combat/battle-modifiers");
   "./combat/card-modifiers": typeof import("./combat/card-modifiers");
   "./combat/food": typeof import("./combat/food");
@@ -89,6 +91,7 @@ type Modules = {
   "./combat/lifecycle": typeof import("./combat/lifecycle");
   "./combat/protection": typeof import("./combat/protection");
   "./combat/state": {
+    controlled: typeof import("./combat/state").controlled;
     beginAttack: typeof import("./combat/state").beginAttack;
     loseHealth: typeof loseHealth;
     openingCriticalBonus: typeof openingCriticalBonus;
@@ -119,6 +122,9 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  matchSwapBlock: bind("./team", "matchSwapBlock"),
+  controlled: bind("./combat/state", "controlled"),
+  executeAbility: bind("./combat/abilities", "executeAbility"),
   lostAndFound: bind("./card-zones", "lostAndFound"),
   puzzleProgressLimit: bind("./ability-rules", "puzzleProgressLimit"),
   actionValue: bind("./ability-rules", "actionValue"),
@@ -347,6 +353,16 @@ export const modifierImplementations = freeze(
       "water.riptide": [owners.waterFollowups],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "pearl-sieve": [owners.removeEffects],
+      "tide-anklet": [owners.matchSwapBlock],
+      "obsidian-pitcher": [owners.leechHealth],
+      "molten-paperweight": [owners.removeEffects],
+      "coronation-cloche": [owners.removeEffects],
+      "vigil-lantern": [owners.controlled],
+      "grain-flail": [owners.blockDepletionRewards],
+      "gemmed-scabbard": [owners.armorApplies],
+      "dream-tangram": [owners.executeAbility, owners.hit],
+      "comet-crucible": [owners.removeEffects],
       "grafting-needle": [owners.restoreHealth],
       "coral-net-weight": [owners.resolveHit],
       "moonveil-mask": [owners.beginAttack],

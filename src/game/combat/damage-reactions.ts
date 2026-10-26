@@ -7,7 +7,7 @@ import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
-import { ensureCombat, unitName, STACK_LIMIT, gainGold, type Combatant } from "./state";
+import { ensureCombat, unitName, STACK_LIMIT, gainGold, removeArmor, type Combatant } from "./state";
 import type { packetPolicy, DamagePacket } from "./policy";
 import { reaction, type Resolution } from "./operations";
 import { reducePeriodicStacks, deferLeech, detonateBleedStacks, bleedPayments } from "./status-state";
@@ -103,6 +103,20 @@ export function* blockDepletionRewards(
 ): Resolution<void> {
   const alliedTarget = !isEnemy(target);
   if (alliedTarget && depletedBlock) recoverBrokenGuard(state, target.id, events);
+  if (!alliedTarget && !isEnemy(source) && depletedBlock && state.boons.includes("grain-flail")) {
+    const { removed, depletion } = removeArmor(target, ensureCombat(target).armor);
+    if (removed > 0)
+      events.push({
+        kind: "status",
+        actorId: source.id,
+        targetId: target.id,
+        status: "armor",
+        outcome: "remove",
+        amount: removed,
+        text: `${unitName(target)} loses ${removed} Armor to Grain Flail`,
+      });
+    yield* reaction("triggerArmorBreak", state, depletion, events);
+  }
   if (alliedTarget && depletedBlock && attack && hasTalent(state, "block.sun-struck-shield"))
     yield* reaction(
       "hit",
@@ -207,7 +221,7 @@ export function* damageRewards(
       state.boons.includes("parasitic-bloom") &&
       succeeds(state, boonRule("parasitic-bloom").chance, false, events)
     )
-      yield* reaction("leechHealth", state, source, dealt, events, true);
+      yield* reaction("leechHealth", state, source, dealt, events, true, target);
     // Poison ticks and triggered damage carry the same Leech talent as direct Poison hits.
     if (
       !policy.direct &&
@@ -217,7 +231,7 @@ export function* damageRewards(
       hasTalent(state, "leech.virulent-leech") &&
       succeeds(state, talentRule("leech.virulent-leech").percent / 100, false, events)
     )
-      yield* reaction("leechHealth", state, source, dealt, events, true);
+      yield* reaction("leechHealth", state, source, dealt, events, true, target);
     if (
       attack &&
       type === "nature" &&
@@ -237,7 +251,16 @@ export function* damageRewards(
         boonRule("brass-censer").burnChance
       )
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
-      else yield* reaction("leechHealth", state, source, dealt, events, stats.poison > 0 || stats.bleed > 0);
+      else
+        yield* reaction(
+          "leechHealth",
+          state,
+          source,
+          dealt,
+          events,
+          stats.poison > 0 || stats.bleed > 0,
+          target,
+        );
     }
   }
 }
@@ -362,7 +385,15 @@ export function* attackProcs(
     if (chanceLeech && type === "bleed" && !leech) {
       if (!suppressed) deferLeech(stats, source.id, Math.max(0, stats.bleed - bleedBefore));
     } else if (chanceLeech && !leech && !blessedLeech)
-      yield* reaction("leechHealth", state, source, dealt, events, stats.poison > 0 || stats.bleed > 0);
+      yield* reaction(
+        "leechHealth",
+        state,
+        source,
+        dealt,
+        events,
+        stats.poison > 0 || stats.bleed > 0,
+        target,
+      );
   }
 }
 export function* thornRetaliation({
@@ -383,6 +414,7 @@ export function* thornRetaliation({
     stats[status]--;
     yield* reaction("hit", state, target, source, reflected, type, events, {
       origin: status === "fireThorns" ? "statusRetaliation" : "retaliation",
+      thorns: true,
     });
   }
 }
@@ -425,6 +457,6 @@ export function* detonateBleed(
   });
   for (const payout of bleedPayments(payouts, payment.outcome === "landed" ? payment.dealt : 0)) {
     const owner = [...state.team, ...state.reserves].find((unit) => unit.id === payout.sourceId);
-    if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true);
+    if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true, target);
   }
 }

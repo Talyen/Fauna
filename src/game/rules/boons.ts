@@ -6,6 +6,16 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "pearl-sieve": boon({}, () => "Purge removes an extra effect from enemies with Block"),
+    "tide-anklet": boon({}, () => "Swapping allies both keep the higher Block total"),
+    "obsidian-pitcher": boon({ divisor: 2 }, () => "Overflow Leech applies half as much Burn to the enemy"),
+    "molten-paperweight": boon({}, () => "Burn cannot be Cleansed from enemies with Block"),
+    "coronation-cloche": boon({}, () => "Nullify protects allied effects from Purge"),
+    "vigil-lantern": boon({}, () => "Allies at Death’s Door can act through Stun and Freeze"),
+    "grain-flail": boon({}, () => "Breaking enemy Block also removes their Armor"),
+    "gemmed-scabbard": boon({}, () => "Armor also reduces Thorns damage"),
+    "dream-tangram": boon({}, () => "Repeated attacks move on when their target falls"),
+    "comet-crucible": boon({}, () => "Armor Purged from allies becomes Block"),
     "grafting-needle": boon({ divisor: 2 }, () => "Healing an ally raises their Armor to half of yours"),
     "coral-net-weight": boon({}, () => "Dodged attacks still damage enemy Block"),
     "moonveil-mask": boon({}, () => "Enemies keep Blind when it causes their attacks to miss"),

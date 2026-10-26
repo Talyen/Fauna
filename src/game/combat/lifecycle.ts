@@ -7,7 +7,7 @@ import { roll } from "../random";
 import { hasTalent, creaturePassive } from "../progression";
 
 import type { GameEvent, GameState } from "../types";
-import { ensureCombat, unitName, STACK_LIMIT, harmfulStatuses, type Combatant } from "./state";
+import { ensureCombat, unitName, STACK_LIMIT, harmfulStatuses, controlled, type Combatant } from "./state";
 
 import { reaction, type Resolution } from "./operations";
 import {
@@ -88,7 +88,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
           ...state.reserves,
           ...battlefield(state, "enemy"),
         ].find((candidate) => candidate.id === payout.sourceId);
-        if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true);
+        if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true, unit);
       }
     }
     // Threshold reactions can Cleanse the ticking status; decay must not restore it.
@@ -163,16 +163,17 @@ export function* startAction(
     }
   }
   if (stats.controlled) {
-    events.push({
-      kind: "status",
-      targetId: unit.id,
-      status: stats.controlled,
-      outcome: "skip",
-      text: `${unitName(unit)} skips its ${stats.controlled === "freeze" ? "Frozen" : "Stunned"} turn.`,
-    });
+    if (controlled(unit, state))
+      events.push({
+        kind: "status",
+        targetId: unit.id,
+        status: stats.controlled,
+        outcome: "skip",
+        text: `${unitName(unit)} skips its ${stats.controlled === "freeze" ? "Frozen" : "Stunned"} turn.`,
+      });
     const recovered = consumeControlTurn(stats);
     if (recovered === "freeze" && isEnemy(unit) && state && hasTalent(state, "freeze.thaw-dividend"))
       draw(state, 1, events);
   } else advanceControlImmunity(stats);
-  return !stats.skipped;
+  return !controlled(unit, state);
 }

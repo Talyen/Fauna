@@ -162,6 +162,9 @@ export function* removeEffects(
 ): Resolution<number> {
   const stats = ensureCombat(unit);
   const thornsBefore = stats.thorns;
+  const pearlSieve = state && state.boons.includes("pearl-sieve");
+  const moltenPaperweight = state && state.boons.includes("molten-paperweight");
+  let purgedArmor = 0;
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
   const hadFreezeBuildup = stats.freeze > 0;
@@ -193,6 +196,14 @@ export function* removeEffects(
     "attackReflection",
   ] as const;
   const statuses = onlyStatus ? [onlyStatus] : kind === "cleanse" ? harmfulStatuses : beneficial;
+  if (
+    kind === "purge" &&
+    state &&
+    !isEnemy(unit) &&
+    stats.nullify &&
+    state.boons.includes("coronation-cloche")
+  )
+    count = 0;
   if (kind === "purge" && state && !isEnemy(unit) && state.boons.includes("basalt-glass-bookmark")) {
     const remaining =
       Number(unit.block > 0) +
@@ -204,7 +215,7 @@ export function* removeEffects(
   if (kind === "purge" && !onlyStatus && unit.block > 0 && count > 0) {
     unit.block = 0;
     removedStatuses.push("block");
-    count--;
+    if (!pearlSieve || !isEnemy(unit) || (source && isEnemy(source))) count--;
   }
   if (
     kind === "cleanse" &&
@@ -219,7 +230,11 @@ export function* removeEffects(
     count--;
   }
   for (const status of statuses)
-    if (count > 0 && (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))) {
+    if (
+      count > 0 &&
+      !(kind === "cleanse" && status === "burn" && isEnemy(unit) && unit.block > 0 && moltenPaperweight) &&
+      (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))
+    ) {
       if (kind === "cleanse" && harmfulStatuses.includes(status as (typeof harmfulStatuses)[number]))
         remember(status as (typeof harmfulStatuses)[number]);
       if (status === "dodge") stats.temporaryDodge = 0;
@@ -233,8 +248,11 @@ export function* removeEffects(
         status === "nullifyFreeze"
       )
         stats[status] = false;
-      else if (status === "armor") depletion = removeArmor(unit, stats.armor).depletion;
-      else if (
+      else if (status === "armor") {
+        const removal = removeArmor(unit, stats.armor);
+        depletion = removal.depletion;
+        purgedArmor = removal.removed;
+      } else if (
         status === "thorns" ||
         status === "waterThorns" ||
         status === "fireThorns" ||
@@ -310,6 +328,14 @@ export function* removeEffects(
         events,
         effect.turns,
       );
+  if (
+    kind === "purge" &&
+    state &&
+    !isEnemy(unit) &&
+    purgedArmor > 0 &&
+    state.boons.includes("comet-crucible")
+  )
+    yield* reaction("grantBlock", state, unit, purgedArmor, events);
   if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
   // Typed wards share feedback labels but spend separate Purge categories;
   // Cleanse still coalesces active control with buildup of the same status

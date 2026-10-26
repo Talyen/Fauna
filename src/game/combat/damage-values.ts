@@ -128,7 +128,21 @@ export function blockEfficiency(state: GameState, target: Combatant, type: Damag
   }
   return 1;
 }
-export function armorApplies(state: GameState, target: Combatant, type: DamageType, source?: Combatant) {
+export function armorApplies(
+  state: GameState,
+  target: Combatant,
+  type: DamageType,
+  source?: Combatant,
+  packet?: DamagePacket,
+) {
+  if (
+    !isEnemy(target) &&
+    packet &&
+    "thorns" in packet &&
+    packet.thorns &&
+    state.boons.includes("gemmed-scabbard")
+  )
+    return true;
   if (
     type === "physical" &&
     source &&

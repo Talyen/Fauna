@@ -19,7 +19,7 @@ export function cardActor(state: GameState, card: Pick<Card, "ownerId">): Creatu
   return (
     guides.find(
       (unit) =>
-        !controlled(unit) &&
+        !controlled(unit, state) &&
         (unit.combat?.fallenCardsPlayedThisTurn ?? 0) < unfinishedJourneyLimit(state, unit),
     ) ?? guides[0]
   );

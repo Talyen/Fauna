@@ -28,8 +28,8 @@ export function executeAbility(
   const enemy = action.side === "enemy";
   const power = actorPower(action);
   const opponents = alive(opposingRow(state, action));
-  // Select once for the whole ability, including repeats. Group targets are read again per resolution.
-  const target =
+  // Keep the selected target across repeats unless Tangram must continue after a defeat.
+  let target =
     def.effect === "attack" && def.target === "randomEnemy"
       ? opponents[Math.floor(roll(state, { kind: "index", size: opponents.length }) * opponents.length)]
       : def.effect === "attack" && def.target === "allEnemies"
@@ -63,6 +63,15 @@ export function executeAbility(
     play < (grantedRepeat || repeat || encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1);
     play++
   ) {
+    if (
+      play > 0 &&
+      !enemy &&
+      def.effect === "attack" &&
+      target &&
+      target.health <= 0 &&
+      state.boons.includes("dream-tangram")
+    )
+      target = alive(opposingRow(state, action))[0];
     if (
       actor.health <= 0 ||
       (def.effect === "attack" &&

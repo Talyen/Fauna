@@ -185,23 +185,28 @@ export function* hit(
     result.dealt > 0 &&
     type === "stun" &&
     source.health > 0 &&
-    target.health > 0 &&
     policy.resonance
   ) {
+    const recipient =
+      target.health > 0
+        ? target
+        : !isEnemy(source) && state.boons.includes("dream-tangram")
+          ? battlefield(state, "enemy").find((enemy) => enemy.health > 0)
+          : undefined;
     const chance = creaturePassive(isEnemy(source) ? undefined : state, source.species).effects.reduce(
       (total, effect) => total + (effect.kind === "resonance" ? effect.amount : 0),
       0,
     );
-    if (succeeds(state, chance / 100, isEnemy(source), events)) {
+    if (recipient && succeeds(state, chance / 100, isEnemy(source), events)) {
       events.push({
         kind: "action",
         actionType: "support",
         actorId: source.id,
-        targetId: target.id,
+        targetId: recipient.id,
         text: `${unitName(source)} repeats Stun damage with Resonance`,
       });
       // Repeat the packet once, retaining Stun buildup but suppressing attack proc chains.
-      yield* reaction("hit", state, source, target, value, type, events, {
+      yield* reaction("hit", state, source, recipient, value, type, events, {
         ...options,
         origin: "resonance",
         delivery: "delivery" in options && options.delivery === "bounce" ? "bounce" : undefined,
@@ -360,10 +365,10 @@ export function* resolveHit(
   )
     erode(boonRule("sundering-charm").armor);
   // Other mechanics use the hit before Block; Armor still mitigates their damage.
-  const effectDamage = armorApplies(state, target, type, source)
+  const effectDamage = armorApplies(state, target, type, source, options)
     ? armoredDamage(damage + blocked, stats.armor)
     : damage + blocked;
-  if (armorApplies(state, target, type, source)) damage = armoredDamage(damage, stats.armor);
+  if (armorApplies(state, target, type, source, options)) damage = armoredDamage(damage, stats.armor);
   if (direct && alliedSource && !alliedTarget && critical && state.boons.includes("crater-punch"))
     damage += Math.round(blocked / boonRule("crater-punch").divisor);
   const lost = loseHealth(state, target, damage, events);
@@ -428,7 +433,15 @@ export function* resolveHit(
     // Captured damage remains valid even if retaliation later removes the attacker.
     if (direct && target.health > 0) yield* thornRetaliation(context);
     if ((leech || blessedLeech) && type !== "bleed" && source.health > 0)
-      yield* reaction("leechHealth", state, source, dealt, events, stats.poison > 0 || stats.bleed > 0);
+      yield* reaction(
+        "leechHealth",
+        state,
+        source,
+        dealt,
+        events,
+        stats.poison > 0 || stats.bleed > 0,
+        target,
+      );
     if (statusResult.appliedControl && source.health > 0)
       yield* reaction("controlRewards", state, source, target, type, events);
   }

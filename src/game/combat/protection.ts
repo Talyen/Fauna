@@ -251,6 +251,7 @@ export function* leechHealth(
   dealt: number,
   events: GameEvent[],
   afflicted = false,
+  target?: Combatant,
 ): Resolution<void> {
   if (dealt <= 0) return;
   let amount = dealt / 2;
@@ -261,6 +262,7 @@ export function* leechHealth(
     if (hasTalent(state, "leech.desperate-siphon") && unit.health < maximumHealth(unit) / 2) amount *= 2;
   }
   const before = unit.health;
+  const excess = restoration(unit, healingValue(state, unit, amount)).excess;
   yield* reaction("restoreHealth", unit, amount, events, false, state);
   const restored = unit.health - before;
   if (!isEnemy(unit) && restored > 0) {
@@ -285,6 +287,19 @@ export function* leechHealth(
       succeeds(state, talentRule("leech.mana-siphon").percent / 100, false, events)
     )
       yield* reaction("gainMana", state, talentRule("leech.mana-siphon").amount, events);
+  }
+  if (
+    state.phase === "battle" &&
+    unit.health > 0 &&
+    !isEnemy(unit) &&
+    target &&
+    isEnemy(target) &&
+    target.health > 0 &&
+    excess > 0 &&
+    state.boons.includes("obsidian-pitcher")
+  ) {
+    const burn = Math.round(excess / boonRule("obsidian-pitcher").divisor);
+    if (burn > 0) yield* reaction("applyHarmfulStatus", state, unit, target, burn, "burn", events);
   }
 }
 export function* healthThresholds(

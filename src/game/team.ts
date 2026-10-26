@@ -28,6 +28,28 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
 export function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
 }
+/** Match existing protection without spending it or amplifying fresh Block grants. */
+export function matchSwapBlock(state: GameState, first: Combatant, second: Combatant, events: GameEvent[]) {
+  if (
+    state.phase !== "battle" ||
+    first.health <= 0 ||
+    second.health <= 0 ||
+    !state.boons.includes("tide-anklet")
+  )
+    return;
+  const higher = Math.max(first.block, second.block);
+  for (const unit of [first, second]) {
+    const gained = higher - unit.block;
+    if (gained <= 0) continue;
+    unit.block = higher;
+    events.push({
+      kind: "block",
+      targetId: unit.id,
+      amount: gained,
+      text: `${unitName(unit)} keeps ${higher} Block with Tide Anklet`,
+    });
+  }
+}
 export function rosterHasSpecies(
   state: Pick<GameState, "team" | "reserves">,
   kind: import("./content").SpeciesId,
@@ -229,6 +251,7 @@ export function swapBackup(
       events,
       fromCard,
     );
+    if (fromCard && outgoing && incoming) matchSwapBlock(state, outgoing, incoming, events);
     mountainGuide(state, incoming, previous, events);
     gentlePassage(state, previous, events);
     if (fromCard && state.boons.includes("saddle-pouch")) drawOwner(state, incoming.id, events);
@@ -268,6 +291,7 @@ export function swapBackup(
     actorId: incoming.id,
     text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
   });
+  if (fromCard) matchSwapBlock(state, outgoing, incoming, events);
   mountainGuide(state, incoming, previous, events);
   gentlePassage(state, previous, events);
   if (fromCard && state.boons.includes("saddle-pouch")) drawOwner(state, incoming.id, events);
@@ -300,6 +324,7 @@ export function swapFromCard(
   const from = row.findIndex((unit) => unit.id === actor.id);
   const to = row.findIndex((unit) => unit.id === other.id);
   [row[from], row[to]] = [row[to]!, row[from]!];
+  if (allied) matchSwapBlock(state, actor, other, events);
   events.push({
     kind: "action",
     actionType: "swap",

@@ -56,7 +56,18 @@ export function ensureCombat(unit: Combatant): CombatState {
 export const maximumHealth = (unit: Combatant) =>
   "maxHealth" in unit ? unit.maxHealth : species(unit.species).health;
 export const unitName = (unit: Combatant) => ("name" in unit ? unit.name : species(unit.species).name);
-export const controlled = (unit: Combatant) => !!unit.combat?.controlled || !!unit.combat?.skipped;
+/** Action availability; control itself still suppresses Dodge and expires normally. */
+export function controlled(unit: Combatant, state?: GameState) {
+  return (
+    (!!unit.combat?.controlled || !!unit.combat?.skipped) &&
+    !(
+      state?.phase === "battle" &&
+      !isEnemy(unit) &&
+      (unit.combat?.grace ?? 0) > 0 &&
+      state.boons.includes("vigil-lantern")
+    )
+  );
+}
 /** Current Health, not maximum Health or Health fraction; ties retain battlefield order. */
 export function highestHealth<T extends Combatant>(units: readonly T[]): T | undefined {
   return units.reduce<T | undefined>(
