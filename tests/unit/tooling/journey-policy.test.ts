@@ -55,6 +55,16 @@ it("saves Gold when every affordable slot lacks a roster trigger", () => {
   expect(boonValue(poor, "brass-censer")).toBe(0);
   expect(boonValue(poor, "ironwood-buckler")).toBeGreaterThan(0);
 });
+it("recomputes Merchant compatibility when the same actor sees a different roster", () => {
+  const choose = actor();
+  const guardian = shelf(["ironwood-buckler"]);
+  const attacker = produce(guardian, (game) => {
+    game.team[0]!.species = "emberback";
+  });
+  expect(choose(guardian).command).toEqual({ type: "buyBoon", visit: "merchant", slot: "slot-0" });
+  expect(choose(attacker).command).toEqual({ type: "leaveSupport", visit: "merchant" });
+  expect(choose(guardian).command).toEqual({ type: "buyBoon", visit: "merchant", slot: "slot-0" });
+});
 it("uses the same compatibility checks for free Boon rewards", () => {
   const state = produce(shelf(["brass-censer"]), (game) => {
     Object.assign(game, {
