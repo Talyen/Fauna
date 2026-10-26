@@ -1,6 +1,6 @@
 import { expectControlColors } from "./support/control-colors";
 import { expectScrollFree, LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
-import { captureFrame, captureScreen, settleScreen } from "./support/rendered-evidence";
+import { captureFrame, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { reloadHome, test, seed, state } from "./support/session";
 import { merchantDestination, run } from "../support/game";
@@ -75,7 +75,8 @@ for (const [group, layouts] of [
           .evaluate((el, value) => el.style.setProperty("--text-scale", String(value)), scale);
         await settleScreen(page);
         await check?.();
-        await captureScreen(page, {
+        await expectScrollFree(page);
+        await captureFrame(page, {
           path: `reports/${name}-${width}-${height}-${scale}.png`,
           fullPage: true,
         });

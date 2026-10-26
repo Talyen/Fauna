@@ -1,7 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 import { produce } from "immer";
 import { run, winBattle } from "../support/game";
-import { decodeSave } from "../../src/game/save";
 import { ensureCombat } from "../../src/game/combat/index";
 import { reloadHome, test, seed, resume, state } from "./support/session";
 import { captureScreen } from "./support/rendered-evidence";
@@ -26,7 +25,6 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
     ensureCombat(draft.team[0]!).deathDoorUsed = true;
     draft.team[0]!.health = 1;
   });
-  decodeSave(JSON.stringify(game));
   await seed(page, game);
   await page.bringToFront();
   await resume(page);
