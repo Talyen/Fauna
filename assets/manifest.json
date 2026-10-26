@@ -2788,6 +2788,116 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Wisterelle artwork from Google Drive: https://drive.google.com/file/d/1m0M4A5Fg3wWbXX4nV6u8lgdOmqxA8-LV/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "boon.grafting-needle",
+      "origin": "repository",
+      "source": "public/art/boons/grafting-needle.png",
+      "output": "art/boons/grafting-needle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1HwmhvoHYdGDXNKbRdtZc3XwRnRlpbzp0/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.coral-net-weight",
+      "origin": "repository",
+      "source": "public/art/boons/coral-net-weight.png",
+      "output": "art/boons/coral-net-weight.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1ywGyALu4kbVP3o0lFYLGlUeuP_kqRKsC/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.moonveil-mask",
+      "origin": "repository",
+      "source": "public/art/boons/moonveil-mask.png",
+      "output": "art/boons/moonveil-mask.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1vV6rQxPTiy8w7aSNTUnsLUCReiqaRfAb/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.mercury-metronome",
+      "origin": "repository",
+      "source": "public/art/boons/mercury-metronome.png",
+      "output": "art/boons/mercury-metronome.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1WNL-IBXH8VrhvXsZR-8G-A6nm8MZMoaY/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.raincatcher-bowl",
+      "origin": "repository",
+      "source": "public/art/boons/raincatcher-bowl.png",
+      "output": "art/boons/raincatcher-bowl.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1w_c0QBM-S_CFHffNpOehmoseUwZinYF9/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.thunder-conch",
+      "origin": "repository",
+      "source": "public/art/boons/thunder-conch.png",
+      "output": "art/boons/thunder-conch.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1XCCIiBd-Qu_0dY7PGN1HRxuNaaI2FTwO/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.thistle-sieve",
+      "origin": "repository",
+      "source": "public/art/boons/thistle-sieve.png",
+      "output": "art/boons/thistle-sieve.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1p3wRL-QfGOkC537weEwvjPckSfdLyIoH/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.crater-punch",
+      "origin": "repository",
+      "source": "public/art/boons/crater-punch.png",
+      "output": "art/boons/crater-punch.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1jn9KaG0SWXzQcspH-McwmigJeetTrPkC/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.cloud-cup-and-ball",
+      "origin": "repository",
+      "source": "public/art/boons/cloud-cup-and-ball.png",
+      "output": "art/boons/cloud-cup-and-ball.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1P9ZkMr_495tXMSNfWDSb9qHDZn6P3l2W/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
+    },
+    {
+      "id": "boon.echo-lens",
+      "origin": "repository",
+      "source": "public/art/boons/echo-lens.png",
+      "output": "art/boons/echo-lens.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1XRc5bW1wddbE5cPzLSVdhkDkF28sB1cD/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; original retained in Google Drive"
     }
   ]
 }

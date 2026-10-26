@@ -1,3 +1,7 @@
+import { observeDecisions } from "../../../src/game/random";
+import { battleMana } from "../../../src/game/combat/battle-modifiers";
+import { cardKeywords } from "../../../src/game/progression";
+import { cardCost } from "../../../src/game/ability-rules";
 import { actionValue } from "../../../src/game/ability-rules";
 import { draw, receiveCard, fillHand } from "../../../src/game/card-zones";
 import { swapBackup } from "../../../src/game/team";
@@ -486,6 +490,7 @@ it("Camp Hammock includes living backups in automatic Healing while keeping them
   const backup = {
     ...structuredClone(state.team[0]!),
     id: "hammock-backup",
+    species: "coralcurl" as const,
     health: 1,
     combat: freshCombat(),
   };
@@ -1182,3 +1187,243 @@ it("Story Puzzle Cube ignores prevented effects and rejected commands preserve p
   expect(dispatch(state, { type: "play", cardId: "missing", autoEndTurn: false }).accepted).toBe(false);
   expect(state).toEqual(before);
 });
+
+it("Grafting Needle raises an Armor floor only for actual attributed allied Healing", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["grafting-needle"];
+  state.talents = ["armor.reinforced", "armor.last-stand"];
+  source.combat = { ...freshCombat(), armor: 10 };
+  const ally = state.team[0]!;
+  ally.combat = { ...freshCombat(), armor: 1 };
+  ally.health = 1;
+  const rng = state.rng;
+  restoreHealth(ally, 2, events, false, state, true, source);
+  expect(ally.combat.armor).toBe(5);
+  expect(source.combat.armor).toBe(10);
+  expect(state.rng).toBe(rng);
+  restoreHealth(ally, 1, events, false, state, true, source);
+  expect(ally.combat.armor).toBe(5);
+  ally.combat.armor = 8;
+  restoreHealth(ally, 1, events, false, state, true, source);
+  expect(ally.combat.armor).toBe(8);
+  ally.combat.armor = 0;
+  ally.health = species(ally.species).health;
+  restoreHealth(ally, 2, events, false, state, true, source);
+  expect(ally.combat.armor).toBe(0);
+  ally.health = 1;
+  restoreHealth(ally, 2, events, false, state);
+  expect(ally.combat.armor).toBe(0);
+});
+
+it("Coral Net Weight spends Block on a miss without Health loss, buildup, Leech, or Thorns", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["coral-net-weight", "dream-yo-yo"];
+  target.block = 4;
+  target.combat.thorns = 20;
+  source.health = 1;
+  hit(state, source, target, 6, "poison", events, { origin: "ability", blindMiss: true, leech: true });
+  expect(target.block).toBe(0);
+  expect(target.health).toBe(100);
+  expect(target.combat.poison).toBe(0);
+  expect(target.combat.thorns).toBe(20);
+  expect(source.health).toBe(1);
+  expect(events.filter((event) => event.kind === "damage")).toHaveLength(0);
+  source.block = 10;
+  hit(state, target, source, 6, "water", events, { origin: "ability", blindMiss: true });
+  expect(source.block).toBe(10);
+});
+
+it("Moonveil Mask preserves only enemy Blind that actually causes a miss", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["moonveil-mask"];
+  target.combat.blind = true;
+  target.combat.statusSources.blind = source.id;
+  observeDecisions(state, () => 0.1);
+  expect(beginAttack(state, target, events)).toBe(true);
+  expect(target.combat.blind).toBe(true);
+  expect(target.combat.statusSources.blind).toBe(source.id);
+  observeDecisions(state, () => 0.9);
+  expect(beginAttack(state, target, events)).toBe(false);
+  expect(target.combat.blind).toBe(false);
+  source.combat!.blind = true;
+  observeDecisions(state, () => 0.1);
+  expect(beginAttack(state, source, events)).toBe(true);
+  expect(source.combat!.blind).toBe(false);
+});
+
+it("Mercury Metronome counts accepted acting allies across turns and reload, ignoring repeats, Food and rejections", () => {
+  let state = structuredClone(run());
+  state.boons = ["mercury-metronome"];
+  const [a] = state.team;
+  const events: GameEvent[] = [];
+  afterPlayerCard(requireBattle(state), events, a!);
+  afterPlayerCard(requireBattle(state), events, a!);
+  expect(state.battle!.enemies.map((e) => e.combat.stun)).toEqual([0, 0, 0]);
+  afterPlayerCard(requireBattle(state), events);
+  expect(state.battle!.metronomeActor).toBe(a!.id);
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  state = structuredClone(decodeSave(encodeSave(state)));
+  state.battle!.turn++;
+  afterPlayerCard(requireBattle(state), events, state.team[1]!);
+  expect(state.battle!.enemies.map((e) => e.combat.stun)).toEqual([1, 1, 1]);
+  const before = encodeSave(state);
+  const rejected = dispatch(state, { type: "play", cardId: "missing", autoEndTurn: false });
+  expect(rejected.accepted).toBe(false);
+  expect(encodeSave(rejected.state)).toBe(before);
+  afterPlayerCard(requireBattle(state), events, state.team[0]!);
+  expect(state.battle!.enemies.map((e) => e.combat.stun)).toEqual([2, 2, 2]);
+  const invalid = structuredClone(state);
+  invalid.boons = [];
+  expect(() => decodeSave(encodeSave(invalid))).toThrow();
+  invalid.boons = ["mercury-metronome"];
+  invalid.battle!.metronomeActor = "unknown-ally";
+  expect(() => decodeSave(encodeSave(invalid))).toThrow();
+});
+
+it("Mercury Metronome uses ordinary control immunity and can Stun without dealing damage", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["mercury-metronome", "thunder-conch"];
+  target.combat = freshCombat();
+  target.combat.stun = 49;
+  const other = state.battle!.enemies[1]!;
+  other.combat.cooldown = 2;
+  state.battle!.metronomeActor = state.team[0]!.id;
+  afterPlayerCard(requireBattle(state), events, source);
+  expect(target.health).toBe(100);
+  expect(target.combat.controlled).toBe("stun");
+  expect(other.combat.stun).toBe(0);
+  expect(other.combat.blind).toBe(true);
+});
+
+it("Raincatcher Bowl adds one maximum Mana for a Water card in any deck zone without stacking", () => {
+  const state = structuredClone(teamRun(42, ["coralcurl", "mossguard", "emberback"]));
+  state.boons = ["raincatcher-bowl"];
+  expect(battleMana(state)).toBe(5);
+  const water = state.cards.find((card) => {
+    const def = definition(card.definitionId);
+    return def.effect === "attack" && def.damageType === "water";
+  })!;
+  state.battle!.draw = state.battle!.draw.filter((id) => id !== water.id);
+  state.battle!.discard.push(water.id);
+  expect(battleMana(state)).toBe(5);
+  state.talents = ["mana.leyline-attunement"];
+  expect(battleMana(state)).toBe(6);
+  state.cards = state.cards.filter((card) => !cardKeywords(card).includes("water"));
+  expect(battleMana(state)).toBe(5);
+  const dry = structuredClone(teamRun(42, ["mossguard", "emberback", "pollenmoth"]));
+  dry.boons = ["raincatcher-bowl"];
+  expect(battleMana(dry)).toBe(4);
+});
+
+it("Thunder Conch Blinds the other living enemies only after a successful allied Stun", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["thunder-conch"];
+  target.combat = freshCombat();
+  resolveCombat("applyHarmfulStatus", state, source, target, 49, "stun", events);
+  expect(state.battle!.enemies[1]!.combat.blind).toBe(false);
+  const result = resolveCombat("applyHarmfulStatus", state, source, target, 1, "stun", events);
+  if (result.appliedControl) resolveCombat("controlRewards", state, source, target, "stun", events);
+  expect(target.combat.blind).toBe(false);
+  expect(state.battle!.enemies.slice(1).every((e) => e.combat.blind)).toBe(true);
+  expect(state.team.every((a) => !a.combat?.blind)).toBe(true);
+});
+
+it("Thistle Sieve turns actual cleansed stacks into Thorns without rewarding decay or empty Cleanse", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["thistle-sieve"];
+  source.combat = { ...freshCombat(), poison: 8, bleed: 4, burn: 6 };
+  removeEffects(source, "cleanse", 3, events, state);
+  expect(source.combat.thorns).toBe(6);
+  removeEffects(source, "cleanse", 3, events, state);
+  expect(source.combat.thorns).toBe(6);
+  source.combat.poison = 8;
+  tickStatuses(state, source, events);
+  expect(source.combat.thorns).toBe(6);
+  source.combat.poison = 8;
+  state.boons.push("plague-doctors-mask");
+  tickStatuses(state, source, events);
+  expect(source.combat.thorns).toBe(7);
+});
+
+it("Crater Punch adds half absorbed critical damage directly to Health without adding another hit or buildup", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["crater-punch"];
+  target.block = 20;
+  target.combat.armor = 50;
+  hit(state, source, target, 6, "burn", events, { origin: "ability", criticalBonus: 100 });
+  expect(target.block).toBe(8);
+  expect(target.health).toBe(94);
+  expect(target.combat.burn).toBe(12);
+  expect(events.filter((e) => e.kind === "damage")).toHaveLength(1);
+  target.block = 20;
+  observeDecisions(state, () => 0.9);
+  hit(state, source, target, 6, "burn", events);
+  expect(target.health).toBe(94);
+});
+
+it("Cloud Cup-and-Ball returns only a living ally's existing discarded card, without drawing or copying", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["cloud-cup-and-ball", "dune-shuttle"];
+  const card = state.cards.find((c) => c.ownerId === source.id)!;
+  for (const zone of ["draw", "hand", "buffer", "discard"] as const)
+    state.battle![zone] = state.battle![zone].filter((id) => id !== card.id);
+  state.battle!.discard.push(card.id);
+  source.block = 2;
+  const count = state.cards.length;
+  const rng = state.rng;
+  observeDecisions(state, () => 0.9);
+  hit(state, target, source, 2, "water", events);
+  expect(source.block).toBe(0);
+  expect([...state.battle!.hand, ...state.battle!.buffer]).toContain(card.id);
+  expect(state.battle!.discard).not.toContain(card.id);
+  expect(state.cards.length).toBe(count);
+  expect(state.rng).toBe(rng);
+  expect(cardCost(card, state)).toBe(1);
+});
+
+it.each([true, false])(
+  "Echo Lens's same-attack reflection succeeds=%s and carries its damage, Burn and Blind",
+  (reflects) => {
+    const { state, source, target, events } = fixture();
+    state.boons = ["echo-lens"];
+    target.combat = freshCombat();
+    target.block = 0;
+    source.combat = { ...freshCombat(), negate: true };
+    source.block = 10;
+    const health = source.health;
+    observeDecisions(state, (decision) =>
+      decision?.kind === "chance" && decision.threshold === 0.1 ? (reflects ? 0.05 : 0.9) : 0.9,
+    );
+    executeAbility(
+      requireBattle(state),
+      {
+        side: "enemy",
+        actor: target,
+        def: {
+          ...definition("prismram-attack"),
+          effect: "attack",
+          damageType: "water",
+          effects: [
+            { kind: "damage", damageType: "burn", amount: 2 },
+            { kind: "blind", amount: 1 },
+          ],
+        },
+        value: 4,
+        targetId: source.id,
+      },
+      events,
+      { swap: () => undefined },
+    );
+    expect(source.health).toBe(health);
+    expect(source.block).toBe(10);
+    expect(source.combat.negate).toBe(false);
+    expect(source.combat.burn).toBe(0);
+    expect(source.combat.blind).toBe(false);
+    expect(target.health).toBe(reflects ? 94 : 100);
+    expect(target.combat.burn).toBe(reflects ? 2 : 0);
+    expect(target.combat.blind).toBe(reflects);
+    expect(events.filter((e) => e.kind === "status" && e.status === "attackReflection")).toHaveLength(
+      reflects ? 1 : 0,
+    );
+  },
+);

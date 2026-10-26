@@ -3,7 +3,7 @@ import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import { battlefield, healingAllies, isEnemy } from "../battlefield";
 import { roll } from "../random";
-import { draw, drawKeyword } from "../card-zones";
+import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
@@ -102,6 +102,7 @@ export function* blockDepletionRewards(
   attack: boolean,
 ): Resolution<void> {
   const alliedTarget = !isEnemy(target);
+  if (alliedTarget && depletedBlock) recoverBrokenGuard(state, target.id, events);
   if (alliedTarget && depletedBlock && attack && hasTalent(state, "block.sun-struck-shield"))
     yield* reaction(
       "hit",

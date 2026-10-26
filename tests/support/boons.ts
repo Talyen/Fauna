@@ -1,5 +1,16 @@
 /** Approved October 25 additions; direct behavior regressions live in boons.test.ts. */
 export const NEW_BOON_EFFECTS = {
+  "grafting-needle": "Healing an ally raises their Armor to half of yours",
+  "coral-net-weight": "Dodged attacks still damage enemy Block",
+  "moonveil-mask": "Enemies keep Blind when it causes their attacks to miss",
+  "mercury-metronome": "Playing cards from different allies in succession adds 1 Stun buildup to all enemies",
+  "raincatcher-bowl": "Gain 1 Mana Crystal if you have a Water card in your deck",
+  "thunder-conch": "Stunning an enemy Blinds the other enemies",
+  "thistle-sieve": "Half the Poison and Bleed Cleansed from allies becomes Thorns",
+  "crater-punch": "Critical Hits also deal half their blocked damage to Health",
+  "cloud-cup-and-ball": "When an ally’s Block breaks, return one of their discarded cards to hand",
+  "echo-lens": "Negate has a 10% chance to also Reflect",
+
   "briar-racquet": "Thorns retaliates at half strength when you Dodge",
   "lovers-knot": "Healing an ally also heals yourself",
   "thaw-spoon": "Healing removes an equal amount of Freeze buildup",

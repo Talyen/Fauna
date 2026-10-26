@@ -1,5 +1,5 @@
 import { isFood } from "./content/food";
-import { manaCapacity, encoreProgressLimit, puzzleProgressLimit } from "./ability-rules";
+import { manaCapacity, encoreProgressLimit, puzzleProgressLimit, metronomeActorValid } from "./ability-rules";
 import { unfinishedJourneyLimit } from "./card-actors";
 import { PEARL } from "./content/creatures/memento";
 import { battlefield } from "./battlefield";
@@ -239,6 +239,7 @@ function validateRewards(state: GameState) {
 function validateBattle(state: BattleState) {
   const battle = state.battle,
     source = encounterSource(state);
+  invalid(!metronomeActorValid(state));
   invalid(battle.encoreProgress > encoreProgressLimit(state));
   invalid(!unique(battle.puzzleProgress) || battle.puzzleProgress.length > puzzleProgressLimit(state));
   invalid(battle.enemies.length !== source.enemies.length || !unique(battle.enemies.map((e) => e.id)));

@@ -1,5 +1,5 @@
 {
-  "version": 61,
+  "version": 63,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -536,6 +536,7 @@
         }
       }
     ],
+    "metronomeActor": null,
     "encoreProgress": 0,
     "repeatNext": {
       "player": false,

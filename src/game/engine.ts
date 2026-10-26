@@ -306,7 +306,7 @@ function resolve(
         removeDepartedMinions(draft);
         recycleDiscard(draft);
         if (lastCardInHand) lastWarmth(draft, false, events);
-        afterPlayerCard(draft, events);
+        afterPlayerCard(draft, events, def.species === null ? undefined : actor);
         fillHand(draft);
         if (!preview) settle(draft, events);
         if (

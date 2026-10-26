@@ -4,6 +4,11 @@ import type { GameEvent } from "../types";
 export function takeAttackReflection(source: Combatant, target: Combatant, events: GameEvent[]) {
   if (source.health <= 0 || target.health <= 0 || !ensureCombat(target).attackReflection) return false;
   ensureCombat(target).attackReflection = false;
+  publishAttackReflection(source, target, events);
+  return true;
+}
+
+export function publishAttackReflection(source: Combatant, target: Combatant, events: GameEvent[]) {
   events.push({
     kind: "status",
     status: "attackReflection",
@@ -12,5 +17,4 @@ export function takeAttackReflection(source: Combatant, target: Combatant, event
     targetId: source.id,
     text: `${unitName(target)} reflects the attack back at ${unitName(source)}`,
   });
-  return true;
 }

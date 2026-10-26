@@ -52,7 +52,7 @@ Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind o
 
 ### Reflection
 
-Reflection redirects Burn, Poison, Bleed, Stun, Freeze or Blind to a random living deployed opponent, including the attacker. Buildup retains its original post-mitigation strength; direct damage still lands on the original target. The recipient uses ordinary control thresholds and immunity. The reflecting creature owns the reflected status, which cannot reflect again.
+Reflect follows the scope stated by its granting effect. [Attack Reflection](#attack-reflection) returns the attack, including its damage and harmful follow-ups. Status-only reflection redirects Burn, Poison, Bleed, Stun, Freeze or Blind to a random living deployed opponent, including the attacker. Buildup retains its original post-mitigation strength; direct damage still lands on the original target. The recipient uses ordinary control thresholds and immunity. The reflecting creature owns the reflected status, which cannot reflect again.
 
 A pending Reflect charge guarantees the next eligible reflection before passive chance is considered. Repeated grants refresh one charge; it survives turns, swaps and resume, resets each battle and can be Purged. Only a new eligible application spends protection or rolls passive reflection: immune/capped statuses and already present Blind do neither. Damage without status buildup, including Dodges, periodic ticks and ordinary retaliation, cannot trigger reflection; independently applied Blind remains eligible. Block does not suppress buildup or reflection. [Nullify](#nullify) is checked first. Burn-only Reflect is spent before unrestricted Reflect.
 
@@ -102,7 +102,7 @@ Positive healing and effect values round to the nearest integer; received-healin
 
 Opening effects apply only at battle start to deployed creatures, never on purchases, resets, swaps or resume. Flashpoint is consumed by the first accepted Burn play whether or not it is currently purchased.
 
-Leyline Attunement raises base Mana from four to five each battle; Wellspring and Dark Recovery can add one more for the next turn, up to six. Resetting preserves the current turn's granted Mana; the next turn uses the current talents. Arcane Mending heals each living deployed creature for actual shared Mana gained, including turn restoration.
+A Mana Crystal is one point of maximum Mana; Raincatcher Bowl adds one while the battle deck includes a Water card. Leyline Attunement raises base Mana from four to five each battle; Wellspring and Dark Recovery can add one more for the next turn, up to seven with Raincatcher Bowl. Resetting preserves the current turn's granted Mana; the next turn uses the current talents. Arcane Mending heals each living deployed creature for actual shared Mana gained, including turn restoration.
 
 ### Repeats and derived effects
 

@@ -1,6 +1,6 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
-import { takeAttackReflection } from "./attack-reflection";
+import { takeAttackReflection, publishAttackReflection } from "./attack-reflection";
 import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield, healingAllies } from "../battlefield";
@@ -42,7 +42,8 @@ export function* negateAttack(
   source: Combatant,
   target: Combatant,
   events: GameEvent[],
-): Resolution<boolean> {
+  allowReflection = true,
+): Resolution<false | "negated" | "reflected"> {
   if (source.health <= 0 || target.health <= 0 || !ensureCombat(target).negate) return false;
   ensureCombat(target).negate = false;
   events.push({
@@ -54,7 +55,19 @@ export function* negateAttack(
     text: `${unitName(target)} negates the attack; Thorns still retaliate`,
   });
   yield* thornRetaliation({ state, source, target, events });
-  return true;
+  if (
+    allowReflection &&
+    source.health > 0 &&
+    target.health > 0 &&
+    isEnemy(source) &&
+    !isEnemy(target) &&
+    state.boons.includes("echo-lens") &&
+    succeeds(state, boonRule("echo-lens").chance, false, events)
+  ) {
+    publishAttackReflection(source, target, events);
+    return "reflected";
+  }
+  return "negated";
 }
 
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number; dealt: number };
@@ -135,19 +148,17 @@ export function* hit(
     if (!options.interceptionChecked && !options.blindMiss)
       target = interceptAttack(state, source, target, events);
   }
-  if (
-    value > 0 &&
-    options.origin === "ability" &&
-    !options.blindMiss &&
-    (yield* reaction("negateAttack", state, source, target, events))
-  )
-    return undefined;
+  const negation =
+    value > 0 && options.origin === "ability" && !options.blindMiss
+      ? yield* reaction("negateAttack", state, source, target, events, options.delivery !== "reflection")
+      : false;
+  if (negation === "negated") return undefined;
   if (
     value > 0 &&
     options.origin === "ability" &&
     !options.blindMiss &&
     options.delivery !== "reflection" &&
-    takeAttackReflection(source, target, events)
+    (negation === "reflected" || takeAttackReflection(source, target, events))
   ) {
     return yield* reaction("hit", state, target, source, value, type, events, {
       ...options,
@@ -249,6 +260,36 @@ export function* resolveHit(
       (dodgeChance(state, target) > 0 &&
         succeeds(state, dodgeChance(state, target) / 100, !alliedTarget, events)))
   ) {
+    if (alliedSource && !alliedTarget && state.boons.includes("coral-net-weight") && target.block > 0) {
+      const payment = blockPayment(
+        modifiedDamage(state, source, target, value, type, options, attack),
+        target.block,
+        blockEfficiency(state, target, type),
+      );
+      target.block -= payment.spent;
+      if (payment.spent > 0) {
+        events.push({
+          kind: "block",
+          actorId: source.id,
+          targetId: target.id,
+          amount: -payment.absorbed,
+          text: `${unitName(target)} loses ${payment.spent} Block to Coral Net Weight`,
+        });
+        yield* blockDepletionRewards(
+          context,
+          {
+            damage: 0,
+            lost: 0,
+            dealt: 0,
+            blocked: payment.absorbed,
+            blockSpent: payment.spent,
+            depletedBlock: target.block === 0,
+            critical: false,
+          },
+          false,
+        );
+      }
+    }
     yield* dodgeResponse(context);
     return { outcome: "miss" };
   }
@@ -323,6 +364,8 @@ export function* resolveHit(
     ? armoredDamage(damage + blocked, stats.armor)
     : damage + blocked;
   if (armorApplies(state, target, type, source)) damage = armoredDamage(damage, stats.armor);
+  if (direct && alliedSource && !alliedTarget && critical && state.boons.includes("crater-punch"))
+    damage += Math.round(blocked / boonRule("crater-punch").divisor);
   const lost = loseHealth(state, target, damage, events);
   const dealt = Math.min(effectDamage, blocked + lost);
   if (effectDamage > 0) {

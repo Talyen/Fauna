@@ -90,6 +90,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     c.attacked = false;
   }
   const battle = {
+    metronomeActor: null,
     encoreProgress: 0,
     puzzleProgress: [],
     repeatNext: { player: false, enemy: false },

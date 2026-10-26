@@ -17,6 +17,7 @@ type Modules = {
   "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
   "./ability-rules": {
+    metronomeActorValid: typeof import("./ability-rules").metronomeActorValid;
     actionValue: typeof import("./ability-rules").actionValue;
     puzzleProgressLimit: typeof import("./ability-rules").puzzleProgressLimit;
     cardCost: typeof cardCost;
@@ -28,6 +29,7 @@ type Modules = {
   };
   "./card-actors": typeof import("./card-actors");
   "./card-zones": {
+    recoverBrokenGuard: typeof import("./card-zones").recoverBrokenGuard;
     lostAndFound: typeof import("./card-zones").lostAndFound;
     drawHasAnotherCard: typeof drawHasAnotherCard;
     expressDelivery: typeof expressDelivery;
@@ -48,6 +50,7 @@ type Modules = {
   "./combat/lifecycle": typeof import("./combat/lifecycle");
   "./combat/protection": typeof import("./combat/protection");
   "./combat/state": {
+    beginAttack: typeof import("./combat/state").beginAttack;
     loseHealth: typeof loseHealth;
     openingCriticalBonus: typeof openingCriticalBonus;
     ownDodgeChance: typeof ownDodgeChance;
@@ -90,6 +93,11 @@ const owners = {
   armorApplies: bind("./combat/damage-values", "armorApplies"),
   blockEfficiency: bind("./combat/damage-values", "blockEfficiency"),
   attackProcs: bind("./combat/damage-reactions", "attackProcs"),
+  metronomeActorValid: bind("./ability-rules", "metronomeActorValid"),
+  beginAttack: bind("./combat/state", "beginAttack"),
+  recoverBrokenGuard: bind("./card-zones", "recoverBrokenGuard"),
+  cleanseThorns: bind("./combat/statuses", "cleanseThorns"),
+  negateAttack: bind("./combat/damage", "negateAttack"),
   battleMana: bind("./combat/battle-modifiers", "battleMana"),
   beforeAbility: bind("./combat/ability-modifiers", "beforeAbility"),
   blockDepletionRewards: bind("./combat/damage-reactions", "blockDepletionRewards"),
@@ -290,6 +298,16 @@ export const modifierImplementations = freeze(
       "water.riptide": [owners.waterFollowups],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "grafting-needle": [owners.restoreHealth],
+      "coral-net-weight": [owners.resolveHit],
+      "moonveil-mask": [owners.beginAttack],
+      "mercury-metronome": [owners.afterPlayerCard, owners.metronomeActorValid],
+      "raincatcher-bowl": [owners.battleMana],
+      "thunder-conch": [owners.controlRewards],
+      "thistle-sieve": [owners.cleanseThorns],
+      "crater-punch": [owners.resolveHit],
+      "cloud-cup-and-ball": [owners.recoverBrokenGuard],
+      "echo-lens": [owners.negateAttack],
       "apiary-smoker": [owners.grantStatus],
       "brookskip-disc": [owners.resolveHit],
       "fallingstar-anvil": [owners.resolveHit],
@@ -394,6 +412,7 @@ export const modifierQueries = freeze(
       "stun.free-follow-up": [owners.cardCost],
     } satisfies Partial<Record<TalentId, Binding>>,
     boons: {
+      "crater-punch": [owners.ordinaryAttackFacts],
       "tuning-fork-charm": [owners.armorApplies],
       "sundering-charm": [owners.ordinaryAttackFacts],
       rainkeeper: [owners.manaCapacity],

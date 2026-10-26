@@ -31,6 +31,34 @@ export function receiveCard(state: GameState, id: string) {
   fillHand(state);
   queueCard(state.battle!, id);
 }
+
+/** Return an existing owner slot; returns do not draw, copy, or award draw reactions */
+export function recoverBrokenGuard(state: GameState, ownerId: string, events: GameEvent[]) {
+  if (
+    !state.battle ||
+    !state.boons.includes("cloud-cup-and-ball") ||
+    !state.team.some((unit) => unit.id === ownerId && unit.health > 0)
+  )
+    return;
+  const available = state.battle.discard.filter((id) =>
+    state.cards.some((card) => card.id === id && card.ownerId === ownerId),
+  );
+  if (!available.length) return;
+  const id =
+    available[
+      available.length === 1
+        ? 0
+        : Math.floor(roll(state, { kind: "index", size: available.length }) * available.length)
+    ]!;
+  state.battle.discard.splice(state.battle.discard.indexOf(id), 1);
+  receiveCard(state, id);
+  events.push({
+    kind: "action",
+    actionType: "support",
+    actorId: ownerId,
+    text: `${definition(state.cards.find((card) => card.id === id)!.definitionId).name} returns to hand`,
+  });
+}
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const battle = state.battle!;
   queueCard(battle, id);

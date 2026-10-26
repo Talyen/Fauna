@@ -125,13 +125,14 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
     if (actor.health <= 0) break;
     const recipient = blindMiss ? intended : interceptAttack(state, actor, intended, events);
     if (def.target !== "allEnemies") attackTarget = recipient;
-    if (!blindMiss && negateAttack(state, actor, recipient, events)) {
+    const negation = !blindMiss && negateAttack(state, actor, recipient, events);
+    if (negation === "negated") {
       negated.add(recipient.id);
       continue;
     }
-    if (!blindMiss && takeAttackReflection(actor, recipient, events)) {
+    if (!blindMiss && (negation === "reflected" || takeAttackReflection(actor, recipient, events))) {
       negated.add(recipient.id);
-      if (negateAttack(state, recipient, actor, events)) continue;
+      if (negateAttack(state, recipient, actor, events, false)) continue;
       if (def.purgeThorns) {
         purgeAttackThorns(state, actor, events, recipient);
       }

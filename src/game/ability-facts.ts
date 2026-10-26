@@ -59,12 +59,16 @@ export function ordinaryAttackFacts(
         )
       : 0;
     const payment = blockPayment(damage, enemy.block);
+    const piercing =
+      def.criticalWhenLastCard && state.battle.hand.length === 1 && state.boons.includes("crater-punch")
+        ? Math.round(payment.absorbed / boonRule("crater-punch").divisor)
+        : 0;
     const lost =
       enemy.combat.negate ||
       enemy.combat.attackReflection ||
       (type === "freeze" && enemy.combat.nullifyFreeze)
         ? 0
-        : armoredDamage(payment.remaining, armor);
+        : armoredDamage(payment.remaining, armor) + piercing;
     const eroded =
       !enemy.combat.negate &&
       !enemy.combat.attackReflection &&

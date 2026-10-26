@@ -290,6 +290,16 @@ export function* removeEffects(
   )
     yield* reaction("grantStatus", source, "thorns", thornsBefore - stats.thorns, events, state);
   if (state)
+    yield* cleanseThorns(
+      state,
+      unit,
+      returned.reduce(
+        (sum, effect) => sum + (effect.status === "poison" || effect.status === "bleed" ? effect.amount : 0),
+        0,
+      ),
+      events,
+    );
+  if (state)
     for (const effect of returned)
       yield* returnCleansedEffect(
         state,
@@ -304,6 +314,28 @@ export function* removeEffects(
   // Typed wards share feedback labels but spend separate Purge categories;
   // Cleanse still coalesces active control with buildup of the same status
   return kind === "purge" ? removedStatuses.length : new Set(removedStatuses).size;
+}
+export function* cleanseThorns(
+  state: GameState,
+  unit: Combatant,
+  removed: number,
+  events: GameEvent[],
+): Resolution<void> {
+  if (
+    state.phase === "battle" &&
+    !isEnemy(unit) &&
+    unit.health > 0 &&
+    removed > 0 &&
+    state.boons.includes("thistle-sieve")
+  )
+    yield* reaction(
+      "grantStatus",
+      unit,
+      "thorns",
+      Math.round(removed / boonRule("thistle-sieve").divisor),
+      events,
+      state,
+    );
 }
 export function* cleanseRewards(
   state: GameState,
@@ -615,6 +647,12 @@ export function* controlRewards(
   events: GameEvent[],
 ): Resolution<void> {
   if (!isEnemy(source) && isEnemy(target)) {
+    if (type === "stun" && source.health > 0 && state.boons.includes("thunder-conch"))
+      for (const enemy of battlefield(state, "enemy")) {
+        if (source.health <= 0) break;
+        if (enemy.id !== target.id && enemy.health > 0)
+          yield* reaction("applyBlind", state, source, enemy, events);
+      }
     if (type === "freeze" && state.boons.includes("icy-heart"))
       yield* reaction("hit", state, source, target, boonRule("icy-heart").damage, "physical", events, {
         origin: "derived",

@@ -55,6 +55,12 @@ export function* restoreHealth(
   }
   if (gain > 0 && state?.phase === "battle" && !isEnemy(unit)) {
     const stats = ensureCombat(unit);
+    if (source && !isEnemy(source) && source.health > 0 && state.boons.includes("grafting-needle")) {
+      // A floor copies resilience without compounding Armor-gain multipliers or healing reactions
+      const floor = Math.round(ensureCombat(source).armor / boonRule("grafting-needle").divisor);
+      if (floor > stats.armor)
+        yield* reaction("grantStatus", unit, "armor", floor - stats.armor, events, state);
+    }
     if (state.boons.includes("thaw-spoon") && stats.freeze > 0) {
       const removed = Math.min(gain, stats.freeze);
       stats.freeze -= removed;

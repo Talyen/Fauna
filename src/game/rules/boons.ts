@@ -6,6 +6,25 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "grafting-needle": boon({ divisor: 2 }, () => "Healing an ally raises their Armor to half of yours"),
+    "coral-net-weight": boon({}, () => "Dodged attacks still damage enemy Block"),
+    "moonveil-mask": boon({}, () => "Enemies keep Blind when it causes their attacks to miss"),
+    "mercury-metronome": boon(
+      { buildup: 1 },
+      () => "Playing cards from different allies in succession adds 1 Stun buildup to all enemies",
+    ),
+    "raincatcher-bowl": boon({ mana: 1 }, () => "Gain 1 Mana Crystal if you have a Water card in your deck"),
+    "thunder-conch": boon({}, () => "Stunning an enemy Blinds the other enemies"),
+    "thistle-sieve": boon(
+      { divisor: 2 },
+      () => "Half the Poison and Bleed Cleansed from allies becomes Thorns",
+    ),
+    "crater-punch": boon({ divisor: 2 }, () => "Critical Hits also deal half their blocked damage to Health"),
+    "cloud-cup-and-ball": boon(
+      {},
+      () => "When an ally’s Block breaks, return one of their discarded cards to hand",
+    ),
+    "echo-lens": boon({ chance: 0.1 }, () => "Negate has a 10% chance to also Reflect"),
     "apiary-smoker": boon({}, () => "Blinded enemies cannot gain Thorns"),
     "brookskip-disc": boon({}, () => "Water damage against enemy Block chains to a second enemy"),
     "fallingstar-anvil": boon(

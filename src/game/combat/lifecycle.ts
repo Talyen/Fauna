@@ -48,6 +48,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (stats.poison === 0) {
       yield* reaction("cleanseRewards", state, unit, 1, events);
     }
+    yield* reaction("cleanseThorns", state, unit, removed, events);
     yield* reaction("returnCleansedEffect", state, unit, "poison", removed, sourceId, events);
     const target = state.battle!.enemies.find((enemy) => enemy.health > 0);
     if (target)

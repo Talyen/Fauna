@@ -1,6 +1,14 @@
 import { boonRule, PLAYER_CARD_TRIGGER_LIMIT } from "../rules/boons";
 import { talentRule } from "../rules/talents";
-import { gainMana, ensureCombat, restoreHealth, mostInjured, type Combatant } from "./index";
+import {
+  gainMana,
+  ensureCombat,
+  restoreHealth,
+  mostInjured,
+  triggerArmorBreak,
+  type Combatant,
+} from "./index";
+import { resolveCombat } from "./resolution";
 import type { ProgressionKeyword } from "../keywords";
 import { livingChorus } from "./turns";
 import type { BattleState, GameEvent, Card } from "../types";
@@ -59,8 +67,29 @@ export function lastWarmth(state: BattleState, enemy: boolean, events: GameEvent
 }
 
 /** One accepted player card owns this counter, before refill and settlement. */
-export function afterPlayerCard(state: BattleState, events: GameEvent[]) {
+export function afterPlayerCard(state: BattleState, events: GameEvent[], actor?: Combatant) {
   const battle = state.battle;
+  if (actor && state.boons.includes("mercury-metronome")) {
+    const previous = battle.metronomeActor;
+    battle.metronomeActor = actor.id;
+    if (previous !== null && previous !== actor.id && actor.health > 0) {
+      for (const enemy of battlefield(state, "enemy")) {
+        if (actor.health <= 0) break;
+        if (enemy.health <= 0) continue;
+        const result = resolveCombat(
+          "applyHarmfulStatus",
+          state,
+          actor,
+          enemy,
+          boonRule("mercury-metronome").buildup,
+          "stun",
+          events,
+        );
+        if (result.appliedControl) resolveCombat("controlRewards", state, actor, enemy, "stun", events);
+        for (const depletion of result.depletions) triggerArmorBreak(state, depletion, events);
+      }
+    }
+  }
   if (state.boons.includes("encore-baton")) {
     battle.encoreProgress++;
     if (battle.encoreProgress === boonRule("encore-baton").cards) {

@@ -60,7 +60,8 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Mana",
       "resource",
       "active",
-      "The shared resource spent to play action cards; Your team starts each turn with 4 Mana; Mana is shared; each turn draws 4 cards, with up to 6 in hand",
+      "The shared resource spent to play action cards; Each Mana Crystal adds 1 maximum Mana; Your team starts each turn with 4 Mana; Mana is shared; each turn draws 4 cards, with up to 6 in hand",
+      ["Mana Crystal", "Mana Crystals", "Maximum Mana"],
     ),
     block: entry(
       "Block",
@@ -173,7 +174,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Reflect",
       "status",
       "active",
-      "Redirect the next harmful status effect to a random living enemy at its original strength; Direct damage still lands; Reflected effects cannot be reflected again; Does not stack",
+      "Return the specified attack or harmful status effect; Attack reflection returns damage and harmful follow-ups to the attacker; Status-only reflection redirects the effect to a random living enemy while direct damage still lands; Reflected attacks and statuses cannot reflect again; Charges do not stack",
       ["Reflection", "Reflected", "Reflecting"],
     ),
     purge: entry("Purge", "effect", "active", "Remove beneficial effects from an enemy", [

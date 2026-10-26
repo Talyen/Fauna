@@ -5,8 +5,15 @@ import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
 import { enemyCard } from "./card-rules";
 import { creaturePassive, cardKeywords, hasTalent } from "./progression";
-import type { Card, Creature, GameState } from "./types";
+import type { BattleState, Card, Creature, GameState } from "./types";
 
+export function metronomeActorValid(state: BattleState): boolean {
+  return (
+    state.battle.metronomeActor === null ||
+    (state.boons.includes("mercury-metronome") &&
+      [...state.team, ...state.reserves].some((unit) => unit.id === state.battle.metronomeActor))
+  );
+}
 export function manaCapacity(state: GameState): number {
   if (!state.battle) return 0;
   return state.battle.maxMana + (state.boons.includes("rainkeeper") ? boonRule("rainkeeper").overflow : 0);

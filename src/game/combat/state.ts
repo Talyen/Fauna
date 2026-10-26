@@ -170,9 +170,15 @@ export function grantTemporaryDodge(unit: Combatant, amount: number, events: Gam
 export function beginAttack(state: GameState, source: Combatant, events: GameEvent[] = []): boolean {
   const stats = ensureCombat(source);
   if (!stats.blind) return false;
+  const sourceId = stats.statusSources.blind;
   stats.blind = false;
   delete stats.statusSources.blind;
-  return !succeeds(state, 0.5, isEnemy(source), events, true);
+  const miss = !succeeds(state, 0.5, isEnemy(source), events, true);
+  if (miss && isEnemy(source) && state.boons.includes("moonveil-mask")) {
+    stats.blind = true;
+    if (sourceId !== undefined) stats.statusSources.blind = sourceId;
+  }
+  return miss;
 }
 /** Capture once per attack so every area target receives the same opening bonus. */
 export function openingCriticalBonus(state: GameState, source: Combatant): number {
