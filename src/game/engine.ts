@@ -1,4 +1,4 @@
-import { afterPlayerCard, consumeCardGrants, returnDodgedCard } from "./combat/card-modifiers";
+import { afterPlayerCard, consumeCardGrants, lastWarmth, returnDodgedCard } from "./combat/card-modifiers";
 import { observeDecisions } from "./random";
 import { useFood } from "./combat/food";
 import { cardActor } from "./card-actors";
@@ -280,6 +280,7 @@ function resolve(
           consumeCardGrants(actor, keywords);
           if (keywords.includes("burn")) battle.freeBurnUsed = true;
         }
+        const lastCardInHand = battle.hand.length === 1;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         if (!def.consume) battle.discard.push(card.id);
         const abilityEvents = events.length;
@@ -294,6 +295,7 @@ function resolve(
               value,
               targetId: command.targetId,
               allyTargetId: command.targetId,
+              lastCardInHand,
             },
             events,
             { swap: swapFromCard },
@@ -303,6 +305,7 @@ function resolve(
         if (def.consume) draft.cards = draft.cards.filter((entry) => entry.id !== card.id);
         removeDepartedMinions(draft);
         recycleDiscard(draft);
+        if (lastCardInHand) lastWarmth(draft, false, events);
         afterPlayerCard(draft, events);
         fillHand(draft);
         if (!preview) settle(draft, events);

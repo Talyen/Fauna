@@ -5,6 +5,7 @@ import { battlefield, isEnemy, healingAllies } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, courtRemembers, removeDepartedMinions } from "./legendary";
 import { chooseEnemyCard } from "./enemy-policy";
+import { lastWarmth } from "./card-modifiers";
 import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { executeAbility } from "./abilities";
 import { creaturePassive } from "../progression";
@@ -124,6 +125,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           const { def, targetId, allyTargetId } = choice;
           const id = def.id;
           enemy.targetId = targetId ?? enemy.targetId;
+          const lastCardInHand = deck.hand.length === 1;
           deck.hand.splice(deck.hand.indexOf(id), 1);
           if (!def.consume) deck.discard.push(id);
           deck.mana -= def.cost;
@@ -136,6 +138,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
               value: enemyAbilityValue(enemy, def),
               targetId,
               allyTargetId,
+              lastCardInHand,
             },
             events,
             { swap: swapFromCard },
@@ -144,6 +147,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           if (def.consume) deck.pearls--;
           removeDepartedMinions(draft);
           recycleDiscard(draft, deck);
+          if (lastCardInHand) lastWarmth(draft, true, events);
           while (deck.hand.length < MAX_HAND_SIZE && deck.buffer.length) deck.hand.push(deck.buffer.shift()!);
           if (settle(draft, events)) return;
         }

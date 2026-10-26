@@ -2702,6 +2702,50 @@
       "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
     },
     {
+      "id": "creature.alpenglen",
+      "origin": "repository",
+      "source": "public/art/creatures/alpenglen/portrait.png",
+      "output": "art/alpenglen/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Alpenglen artwork from Google Drive: https://drive.google.com/file/d/1PmfLCOYSqJp8_emzV2nnDCj_AJQH4mHK/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.alpenglen.sunset-reversal",
+      "origin": "repository",
+      "source": "public/art/creatures/alpenglen/sunset-reversal.png",
+      "output": "art/alpenglen/sunset-reversal.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Alpenglen artwork from Google Drive: https://drive.google.com/file/d/12-P0bObaUvYTWCYLtGupQHOLgVycvJ2H/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.alpenglen.ember-of-evening",
+      "origin": "repository",
+      "source": "public/art/creatures/alpenglen/ember-of-evening.png",
+      "output": "art/alpenglen/ember-of-evening.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Alpenglen artwork from Google Drive: https://drive.google.com/file/d/1l_dj41eH_oxzs0mHtOjWtGbynXLeZrb4/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.alpenglen.last-light-charge",
+      "origin": "repository",
+      "source": "public/art/creatures/alpenglen/last-light-charge.png",
+      "output": "art/alpenglen/last-light-charge.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Alpenglen artwork from Google Drive: https://drive.google.com/file/d/1lRSth6jP4kQw8gXBrwoX5W1BwtWNKZ-8/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
       "id": "creature.wisterelle",
       "origin": "repository",
       "source": "public/art/creatures/wisterelle/portrait.png",

@@ -17,6 +17,7 @@ export const attackRules = {
       if (card.purgeThorns) text = `Purge enemy Thorns; ${text}`;
       if (card.doubleAgainstHealthier) text += " / Doubled against enemies with more Health than you";
       if (card.doubleWithArmor) text += "; Doubled if you have Armor";
+      if (card.criticalWhenLastCard) text += " / If this is the last card in your hand, it Critically Hits";
       return text;
     },
   },

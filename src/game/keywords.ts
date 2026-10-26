@@ -30,6 +30,7 @@ export const KEYWORD_DEFINITIONS = freeze(
     ),
     criticalHit: entry("Critical Hit", "effect", "active", "An attack that deals double damage", [
       "Critical Hits",
+      "Critically Hits",
       "Critical",
     ]),
     poison: entry(
@@ -65,7 +66,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Block",
       "status",
       "active",
-      "Absorbs incoming damage before Health; Does not prevent hit effects, buildup or Leech unless specified; Remaining Block normally halves at the start of your next turn, rounded normally",
+      "Absorbs incoming damage, including Burn, Poison and Bleed ticks, before Health; Does not prevent hit effects, buildup or Leech unless specified; Remaining Block normally halves at the start of your next turn, rounded normally",
       ["Blocks", "Blocked", "Blocking"],
     ),
     fireThorns: entry(

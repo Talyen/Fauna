@@ -20,7 +20,7 @@ Both menus show spendable talent points beside Talents with an accessible descri
 
 ## Starter draft
 
-Show three offers at shared artwork sizes, with content-width Recruit buttons beneath. Artwork opens inspection; Recruit commits the choice. Omit a Begin journey button: [starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own automatic start, saved choices, pools and Legendary eligibility.
+Show up to three distinct offers at shared artwork sizes, with content-width Recruit buttons beneath. Artwork opens inspection; Recruit commits the choice. Omit a Begin journey button: [starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own automatic start, saved choices, pools and Legendary eligibility.
 
 All creature hover/focus tooltips show only the creature name as the header, the passive trait name with a sparkle icon, and the current passive rules. Trait names and icons share the short-label shine palette from keywords in the passive rules; rules retain solid keyword colors. Omit rarity labels, Block, status effects, kit labels and ability lists. Echo minions have no passive and show only their name.
 

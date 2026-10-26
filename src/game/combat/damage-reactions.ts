@@ -417,9 +417,10 @@ export function* detonateBleed(
   const stats = ensureCombat(target);
   if (stats.bleed <= 0) return;
   const { amount, payouts } = detonateBleedStacks(stats);
-  const lost =
-    (yield* reaction("hit", state, source, target, amount, "bleed", events, { origin: "periodic" })) ?? 0;
-  for (const payout of bleedPayments(payouts, lost)) {
+  const payment = yield* reaction("resolveHit", state, source, target, amount, "bleed", events, {
+    origin: "periodic",
+  });
+  for (const payout of bleedPayments(payouts, payment.outcome === "landed" ? payment.dealt : 0)) {
     const owner = [...state.team, ...state.reserves].find((unit) => unit.id === payout.sourceId);
     if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true);
   }

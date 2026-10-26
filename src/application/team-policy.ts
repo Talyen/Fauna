@@ -47,6 +47,7 @@ export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
       if (
         effect.kind === "unhurried" ||
         effect.kind === "livingChorus" ||
+        effect.kind === "lastWarmth" ||
         effect.kind === "tidalRegeneration" ||
         effect.kind === "petalwake"
       )

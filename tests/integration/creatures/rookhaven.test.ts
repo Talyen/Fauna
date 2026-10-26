@@ -387,8 +387,8 @@ it("bounds extreme copy growth without dropping drawn cards or accepting corrupt
     expect(() => decodeSave(encodeSave(corrupt))).toThrow();
 });
 
-it("each living Rookhaven copies independently, including while controlled", () => {
-  const game = produce(teamRun(1, ["rookhaven", "rookhaven", "mossguard"]), (draft) => {
+it("the deployed Rookhaven copies once, including while controlled", () => {
+  const game = produce(teamRun(1, ["rookhaven", "reedstag", "mossguard"]), (draft) => {
     draft.cards = draft.cards.filter((card) => !card.temporary);
     draft.battle!.copySerial = 0;
     draft.battle!.hand = [];
@@ -403,8 +403,8 @@ it("each living Rookhaven copies independently, including while controlled", () 
     draw(draft, 1, events);
   });
   expect(copies(next)).toHaveLength(2);
-  expect(events.map((event) => event.actorId)).toEqual(["ally-0", "ally-1"]);
-  expect(next.battle!.hand).toHaveLength(3);
+  expect(events.map((event) => event.actorId)).toEqual(["ally-0"]);
+  expect(next.battle!.hand).toHaveLength(2);
   expect(next.rng).toBe(game.rng);
   roundTrip(next);
 });

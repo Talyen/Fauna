@@ -38,14 +38,22 @@ export function battleBenefitFacts(state: BattleState) {
   );
   const healingOnPlay =
     injuredAllies &&
-    ((state.battle.cardsPlayedThisTurn === 1 &&
+    ((state.battle.hand.length === 1 &&
       state.team.some(
         (unit) =>
           unit.health > 0 &&
           creaturePassive(state, unit.species).effects.some(
-            (effect) => effect.kind === "livingChorus" && effect.amount > 0,
+            (effect) => effect.kind === "lastWarmth" && effect.amount > 0,
           ),
       )) ||
+      (state.battle.cardsPlayedThisTurn === 1 &&
+        state.team.some(
+          (unit) =>
+            unit.health > 0 &&
+            creaturePassive(state, unit.species).effects.some(
+              (effect) => effect.kind === "livingChorus" && effect.amount > 0,
+            ),
+        )) ||
       (state.battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards - 1 &&
         state.boons.includes("resonant-chimes") &&
         hasTalent(state, "mana.arcane-mending")));

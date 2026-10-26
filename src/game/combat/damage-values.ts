@@ -113,8 +113,8 @@ export function modifiedDamage(
   return damage;
 }
 
-export function blockPayment(damage: number, block: number, ratio = 1, bypass = false) {
-  const absorbed = bypass ? 0 : Math.min(Math.round(block * ratio), damage);
+export function blockPayment(damage: number, block: number, ratio = 1) {
+  const absorbed = Math.min(Math.round(block * ratio), damage);
   return { absorbed, spent: Math.min(block, Math.ceil(absorbed / ratio)), remaining: damage - absorbed };
 }
 export const armoredDamage = (damage: number, armor: number) => Math.max(0, damage - armor);

@@ -35,10 +35,12 @@ export type SpeciesId =
   | "parhelion"
   | "pyrella"
   | "aerostat"
+  | "alpenglen"
   | "wisterelle";
 export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "lostAndFound"; amount: number }
+  | { kind: "lastWarmth"; amount: number }
   | { kind: "wellProvisioned"; amount: number }
   | { kind: "passingFlame"; amount: number }
   | { kind: "sunthaw"; amount: number }

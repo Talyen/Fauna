@@ -232,7 +232,7 @@ describe("Wisterelle", () => {
   it("registers a recruitable support kit, exact rules and legal Auto-play targets", () => {
     const game = wisterelleBattle();
     expect(FIRST_RUN_STARTERS).not.toContain("wisterelle");
-    expect(COMBAT_PACKS.some((pack) => pack.includes("wisterelle" as never))).toBe(true);
+    expect(COMBAT_PACKS.some((pack) => pack.some((kind) => kind === "wisterelle"))).toBe(true);
     expect(speciesCards("wisterelle").map((card) => card.cost)).toEqual([1, 1, 1]);
     expect(cardText(definition(luggage))).toBe("Draw an ally’s card from your Discard pile / Gain 1 Mana");
     expect(cardText(definition(junction))).toBe("Swap out for a chosen backup / Draw a Card");

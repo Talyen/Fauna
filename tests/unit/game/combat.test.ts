@@ -74,7 +74,7 @@ describe("Alchemy combat foundations", () => {
       events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
     ).toHaveLength(1);
   });
-  it("ticks Burn then Poison then Bleed through Block, with matching decay and fatal cutoffs", () => {
+  it("ticks Burn then Poison then Bleed against Block, with matching decay and fatal cutoffs", () => {
     const events: Parameters<typeof hit>[5] = [];
     const next = produce(run(), (s) => {
       const enemy = s.battle!.enemies[0]!;
@@ -83,8 +83,8 @@ describe("Alchemy combat foundations", () => {
       Object.assign(enemy.combat, { burn: 5, poison: 5, bleed: 5 });
       tickStatuses(s, enemy, events);
     });
-    expect(next.battle!.enemies[0]!.health).toBe(3);
-    expect(next.battle!.enemies[0]!.block).toBe(20);
+    expect(next.battle!.enemies[0]!.health).toBe(18);
+    expect(next.battle!.enemies[0]!.block).toBe(5);
     expect(next.battle!.enemies[0]!.combat).toMatchObject({ burn: 3, poison: 4, bleed: 0 });
     expect(
       events
@@ -93,6 +93,8 @@ describe("Alchemy combat foundations", () => {
     ).toEqual(["burn", "poison", "bleed"]);
     const fatal: typeof events = [];
     produce(next, (s) => {
+      s.battle!.enemies[0]!.health = 3;
+      s.battle!.enemies[0]!.block = 0;
       tickStatuses(s, s.battle!.enemies[0]!, fatal);
     });
     expect(
