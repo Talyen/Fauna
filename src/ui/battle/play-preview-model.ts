@@ -3,7 +3,7 @@ import { sharedDodgeChance } from "../../game/combat/index";
 import { maximumHealth, unitName } from "../../game/combat/state";
 import { KEYWORD_DEFINITIONS } from "../../game/keywords";
 import type { CommandResult, GameEvent, GameState } from "../../game/types";
-import { combatStatuses } from "../shared/combat/combat-status";
+import { combatStatuses } from "../shared/combat/combat-status-model";
 import type { PlayProjection } from "../../game/preview";
 
 export interface TargetForecast {

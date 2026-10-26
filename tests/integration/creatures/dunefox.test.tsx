@@ -21,7 +21,7 @@ import { battleChoices } from "../../../src/application/battle-policy";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
+import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import { appendFeedback, CombatFeedback } from "../../../src/ui/battle/combat-feedback";
 import type { GameEvent } from "../../../src/game/types";
 

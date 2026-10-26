@@ -1,22 +1,13 @@
 import { screenTestEnvironment } from "../../support/ui";
 import { playPreviewModel } from "../../../src/ui/battle/play-preview-model";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
-import { species, BOONS } from "../../../src/game/content";
+import { species } from "../../../src/game/content";
 import { freshCombat, ensureCombat, hit } from "../../../src/game/combat/index";
-import { assetUrl } from "../../../src/ui/shared/assets";
 import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame } from "../../../src/game/engine";
-import {
-  authoredPack,
-  accept,
-  run,
-  teamRun,
-  starterJourney,
-  winBattle,
-  bossReward,
-} from "../../support/game";
+import { authoredPack, accept, run, teamRun, starterJourney, winBattle } from "../../support/game";
 import { encounterSource } from "../../../src/game/encounters";
 
 // @vitest-environment jsdom
@@ -51,34 +42,6 @@ describe("player interface", () => {
     await user.click(screen.getByRole("button", { name: "End turn" }));
     expect(session.store.getState().game.battle!.buffer).toEqual([]);
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(6);
-    await session.dispose();
-  });
-  it("offers illustrated portrait boon cards with external names and commits the chosen boon", async () => {
-    const game = bossReward();
-    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-    const session = createSession(createBrowserPlatform(localStorage), 7);
-    await session.load();
-    render(<App session={session} />);
-    const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(screen.getByRole("heading", { name: "Choose a Boon", level: 1 })).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
-    for (const id of game.reward!.boons) {
-      const boon = BOONS.find((entry) => entry.id === id)!;
-      const card = screen.getByRole("button", { name: `Choose ${boon.name}` });
-      const image = card.querySelector("img")!;
-      expect(image.getAttribute("src")).toBe(assetUrl(`boon.${id}`));
-      expect(image.getAttribute("width")).toBe("600");
-      expect(image.getAttribute("height")).toBe("800");
-      expect(card.textContent).toBe("");
-      expect(screen.getByRole("heading", { name: boon.name })).toBeTruthy();
-    }
-    const chosen = game.reward!.boons[0]!;
-    await user.click(
-      screen.getByRole("button", { name: `Choose ${BOONS.find((entry) => entry.id === chosen)!.name}` }),
-    );
-    expect(session.store.getState().game.boons).toEqual([chosen]);
-    expect(session.store.getState().game.phase).toBe("teamSelection");
     await session.dispose();
   });
   it("shows earnings before recruitment without committing or granting rewards again", async () => {

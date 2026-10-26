@@ -149,8 +149,27 @@ export function createSession(
           if (disposed || store.getState().closing || !owns()) throw new Error("Cloud installation expired.");
           return writeLocal(data);
         })
-        .then(() => {
-          if (!owns()) return;
+        .then(async () => {
+          if (!owns()) {
+            // The lease may expire while the platform is already writing. Restore
+            // the live journey in this same lane before later saves can run.
+            try {
+              await writeLocal(encodeSave(store.getState().game));
+            } catch (error) {
+              diagnostics.record("save-write", error, store.getState().game);
+              if (!disposed) {
+                saveFailures++;
+                publish({
+                  saveStatus: "error",
+                  saveUnavailable: store.getState().saveUnavailable || saveFailures >= 2,
+                  error: "",
+                });
+                scheduleSaveRetry();
+              }
+              throw error;
+            }
+            return;
+          }
           saveFailures = 0;
           if (!disposed && !store.getState().closing)
             publish({

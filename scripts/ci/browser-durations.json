@@ -58,9 +58,6 @@
   "[] › rewards.spec.ts › recruit choices fit both layouts and commit only the activated choice": 6300,
   "[] › rewards.spec.ts › boon choices fit both layouts and commit only the activated choice": 6300,
   "[] › scroll-free.spec.ts › automatic cloud recovery and desktop Settings fit both sizes with enlarged text": 5202,
-  "[] › scroll-free.spec.ts › layout enforcement checks the content center inside a full-height screen": 199,
-  "[] › scroll-free.spec.ts › layout enforcement detects nested scrolling, hidden clipping, and obscured controls": 199,
-  "[] › scroll-free.spec.ts › layout enforcement rejects controls with an obscured edge even when their center is clear": 185,
   "[] › scroll-free.spec.ts › scroll-free at 1280×720, text 1 › battle hand and draw pile": 11436,
   "[] › scroll-free.spec.ts › scroll-free at 1280×720, text 1 › Collection and rank pages": 6220,
   "[] › scroll-free.spec.ts › scroll-free at 1280×720, text 1 › Talents, Glossary and Settings": 7548,
@@ -88,5 +85,6 @@
   "[] › talents.spec.ts › talents purchase immediately, gate rows, reset a category, and return to the paused battle": 5644,
   "[] › visual-effects.spec.ts › inspection owns a dimmed backdrop and restores the underlying recruit palette": 3827,
   "[] › visual-effects.spec.ts › keyword effects follow battle hover, Death's Door, inspection, settings and live reduced motion": 6180,
-  "[] › visual-effects.spec.ts › plasma uses static fallback on unavailable/lost WebGL and restores without duplicate renderers": 3891
+  "[] › visual-effects.spec.ts › plasma uses static fallback on unavailable/lost WebGL and restores without duplicate renderers": 3891,
+  "[] › scroll-free.spec.ts › layout enforcement detects scrolling, clipping, obscured controls and misalignment": 583
 }
