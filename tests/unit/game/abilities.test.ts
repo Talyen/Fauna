@@ -43,7 +43,14 @@ it.each(SPECIES)("shares explicit target admission with commands for $id", ({ id
   );
   const saved = encodeSave(game);
   const candidates = availablePlays(game, false);
-  expect(candidates).toHaveLength(game.cards.length);
+  expect(candidates).toHaveLength(game.cards.length - Number(id === "wisterelle"));
+  if (id === "wisterelle") {
+    const recovery = game.cards.find((card) => definition(card.definitionId).effect === "recover")!;
+    expect(dispatch(game, { type: "play", cardId: recovery.id })).toMatchObject({
+      accepted: false,
+      reason: "There are no eligible ally cards in Discard.",
+    });
+  }
   for (const play of candidates) {
     for (const command of play.commands) expect(dispatch(game, command).accepted).toBe(true);
     for (const targetId of [

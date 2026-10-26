@@ -50,7 +50,7 @@ const digest = (value: unknown) =>
     )
     .digest("hex");
 
-// Baseline includes the approved Block rules, ten passive Boons and save format 57.
+// Baseline includes Block spending on periodic damage, unique rosters and utility-based enemy choices.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({
@@ -102,7 +102,14 @@ it.each(cases)(
   (scenario) => {
     const original = teamRun(
       42,
-      species(scenario.species).legendary ? [scenario.species] : [scenario.species, "reedstag", "cindernewt"],
+      species(scenario.species).legendary
+        ? [scenario.species]
+        : [
+            scenario.species,
+            ...(["reedstag", "cindernewt", "prismram"] as const)
+              .filter((kind) => kind !== scenario.species)
+              .slice(0, 2),
+          ],
     );
     const state = requireBattle(
       produce(original, (draft) => {
