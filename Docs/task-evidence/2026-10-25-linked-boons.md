@@ -1,6 +1,6 @@
 # Ten linked artifact Boons
 
-Implemented the October 25 approved designs for Geode Anvil, Journey Loom, Devotion Clasp, Prism Chisel, Eclipse Protractor, Wonder Ball Maze, Sleepers Urn, Facet Abacus, Thornheart Ring and Moonboat Toy. The [Boon rules](../../src/game/rules/boons.ts) own the exact descriptions; [content contracts](../CONTENT.md#linked-artifact-boons) own resolution. All ten join the ordinary unowned Boss reward and Merchant pools, existing inspection and combat feedback.
+Implemented the October 25 approved designs for Geode Anvil, Journey Loom, Devotion Clasp, Prism Chisel, Eclipse Protractor, Wonder Ball Maze, Sleepers Urn, Facet Abacus, Thornheart Ring and Moonboat Toy. The [Boon rules](../../src/game/rules/boons.ts) own the exact descriptions; [content contracts](../content/boons.md#linked-artifact-boons) own resolution. All ten join the ordinary unowned Boss reward and Merchant pools, existing inspection and combat feedback.
 
 The final user correction makes Facet Abacus exactly one extra hand slot, independent of Mana, with the description “Gain an additional hand card slot”. New Boon copy uses “build-up”, “to your hand” and “the bonus damage”. The shared hand-capacity owner governs ordinary draws, copies, generation, recovery and FIFO promotion. Development save format 64 rejects obsolete saves and validates ownership for the seventh card; the two retained application fixtures use the current version. Enemy hands remain six cards.
 
