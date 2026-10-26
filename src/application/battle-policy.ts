@@ -3,67 +3,14 @@ import { coverageScore, offenseValue } from "./team-policy";
 import { controlled } from "../game/combat/state";
 import { species } from "../game/content";
 import { availablePlays } from "../game/play-queries";
-import {
-  battleBenefits,
-  battleBenefitFacts,
-  type BattleBenefit,
-  type OrdinaryHit,
-  type SupportPriority,
-} from "./battle-benefits";
+import { battleBenefits, battleBenefitFacts, BATTLE_FINISH_PRIORITY } from "./battle-benefits";
 import type { Command, GameState } from "../game/types";
 
 export const BATTLE_POLICY_VERSION = 36;
-const BATTLE_FINISH_PRIORITY = 1_000_000_000;
-const priorities = {
-  none: 0,
-  summon: 1600,
-  summonRecovery: 1200,
-  protection: 100,
-  pearl: 500,
-  resource: 400,
-  healing: 3000,
-  utility: 150,
-  standardUtility: 200,
-  controlRemoval: 200,
-  redraw: 190,
-  defensePurge: 1700,
-  purge: 160,
-  statusHarvest: 2000,
-} satisfies Record<SupportPriority, number>;
 export interface BattleChoice {
   command: Command;
   score: number;
   reason: string;
-}
-
-function ordinaryHitScore(hit: OrdinaryHit) {
-  const damagePriority = hit.main ? 1000 : 250;
-  const defensePriority = hit.main ? 500 : 125;
-  const progress = hit.negated
-    ? hit.main
-      ? 400
-      : 100
-    : hit.lost > 0
-      ? damagePriority + (hit.lethal ? damagePriority : 0) + Math.min(hit.lost, hit.health)
-      : hit.blocked > 0
-        ? defensePriority + hit.blocked
-        : hit.eroded > 0
-          ? 300 + hit.eroded
-          : 0;
-  return Math.max(progress, hit.usefulExtras ? priorities.standardUtility : 0);
-}
-function benefitScore(benefit: BattleBenefit) {
-  if (benefit.kind === "support") {
-    if (benefit.priority === "none") return 0;
-    const unitValue = benefit.priority === "controlRemoval" ? 100 : 1;
-    return priorities[benefit.priority] + benefit.amount * unitValue;
-  }
-  const sum = benefit.groups.reduce(
-    (total, group) => total + group.reduce((sum, hit) => sum + ordinaryHitScore(hit), 0) / group.length,
-    0,
-  );
-  const progress = benefit.aggregate === "mean" && benefit.groups.length ? sum / benefit.groups.length : sum;
-  return (benefit.finish ? BATTLE_FINISH_PRIORITY : 0) + progress;
 }
 
 /** Legal candidates, visible benefits and deterministic ranking have distinct owners. */
@@ -113,7 +60,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
   return availablePlays(state, autoEndTurn)
     .flatMap((play) =>
       battleBenefits(state, play, facts).flatMap((benefit) => {
-        const score = benefitScore(benefit);
+        const { score } = benefit;
         const command = play.commands.find((command) => command.targetId === benefit.targetId);
         return score > 0 && command
           ? [

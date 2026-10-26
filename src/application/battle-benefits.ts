@@ -1,6 +1,5 @@
 import { boonRule } from "../game/rules/boons";
 import { healingBenefit, ordinaryAttackFacts, type OrdinaryHit } from "../game/ability-facts";
-export type { OrdinaryHit } from "../game/ability-facts";
 import { battleCardCapacity, drawHasAnotherCard, discardDrawCards } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { battlefield, healingAllies } from "../game/battlefield";
@@ -18,26 +17,45 @@ import { healingValue, restoration } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
 import type { BattleState, Enemy } from "../game/types";
 
-export type SupportPriority =
-  | "none"
-  | "summon"
-  | "summonRecovery"
-  | "protection"
-  | "pearl"
-  | "resource"
-  | "healing"
-  | "utility"
-  | "standardUtility"
-  | "controlRemoval"
-  | "redraw"
-  | "defensePurge"
-  | "purge"
-  | "statusHarvest";
-export type BattleBenefit = { targetId?: string; reason?: string } & (
-  | { kind: "attack"; groups: OrdinaryHit[][]; aggregate: "sum" | "mean"; finish: boolean }
-  | { kind: "support"; priority: SupportPriority; amount: number }
-);
+export const BATTLE_FINISH_PRIORITY = 1_000_000_000;
+const priorities = {
+  none: 0,
+  summon: 1600,
+  summonRecovery: 1200,
+  protection: 100,
+  pearl: 500,
+  resource: 400,
+  healing: 3000,
+  utility: 150,
+  standardUtility: 200,
+  controlRemoval: 200,
+  redraw: 190,
+  defensePurge: 1700,
+  purge: 160,
+  statusHarvest: 2000,
+};
+interface BattleBenefit {
+  targetId?: string;
+  reason?: string;
+  score: number;
+}
 
+function ordinaryHitScore(hit: OrdinaryHit) {
+  const damagePriority = hit.main ? 1000 : 250;
+  const defensePriority = hit.main ? 500 : 125;
+  const progress = hit.negated
+    ? hit.main
+      ? 400
+      : 100
+    : hit.lost > 0
+      ? damagePriority + (hit.lethal ? damagePriority : 0) + Math.min(hit.lost, hit.health)
+      : hit.blocked > 0
+        ? defensePriority + hit.blocked
+        : hit.eroded > 0
+          ? 300 + hit.eroded
+          : 0;
+  return Math.max(progress, hit.usefulExtras ? priorities.standardUtility : 0);
+}
 /** Share visible target discovery across the hand, without caching mutable state across commands. */
 export function battleBenefitFacts(state: BattleState) {
   const injuredAllies = healingAllies(state).some(
@@ -72,47 +90,6 @@ export function battleBenefitFacts(state: BattleState) {
   };
 }
 
-/** Visible facts and explicit approximations; ranking weights live with the application policy. */
-export function battleBenefits(
-  state: BattleState,
-  play: AvailablePlay,
-  facts: ReturnType<typeof battleBenefitFacts>,
-): BattleBenefit[] {
-  return primaryBattleBenefits(state, play, facts).map<BattleBenefit>((benefit) => {
-    if (benefit.kind === "attack") {
-      const cleanse = play.def.effects?.some(
-        (effect) =>
-          effect.kind === "cleanse" &&
-          (effect.target === "allAllies" ? battlefield(state, "player") : [play.actor]).some(
-            (unit) => unit.health > 0 && hasHarmfulEffects(unit),
-          ),
-      );
-      return cleanse
-        ? {
-            ...benefit,
-            groups: benefit.groups.map((group) => group.map((hit) => ({ ...hit, usefulExtras: true }))),
-          }
-        : benefit;
-    }
-    if (benefit.priority !== "none") return benefit;
-    if (facts.healingOnPlay) return { ...benefit, priority: "healing" };
-    for (const effect of play.def.effects ?? []) {
-      if (effect.kind !== "heal" || effect.target === "recipient") continue;
-      const { restored, utility } = healingBenefit(state, play.actor, effect.amount, undefined);
-      if (restored > 0) return { ...benefit, priority: "healing", amount: restored };
-      if (utility > 0) return { ...benefit, priority: "utility", amount: utility };
-    }
-    if (
-      facts.injuredAllies &&
-      hasTalent(state, "mana.arcane-mending") &&
-      play.def.effects?.some((effect) => effect.kind === "mana" && effect.amount > 0) &&
-      state.battle.mana - cardCost(play.card, state) < manaCapacity(state)
-    )
-      return { ...benefit, priority: "healing" };
-    return usefulDraw(state, play) ? { ...benefit, priority: "standardUtility" } : benefit;
-  });
-}
-
 /** Drawing only this card back cannot justify a spent protection or Cleanse. */
 function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
   return !!play.def.effects?.some(
@@ -123,7 +100,32 @@ function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
   );
 }
 
-function primaryBattleBenefits(
+/** A spent primary effect can still justify a play through healing or a useful draw. */
+function supplementalScore(
+  state: BattleState,
+  play: AvailablePlay,
+  facts: ReturnType<typeof battleBenefitFacts>,
+  amount: number,
+): number {
+  if (facts.healingOnPlay) return priorities.healing + amount;
+  for (const effect of play.def.effects ?? []) {
+    if (effect.kind !== "heal" || effect.target === "recipient") continue;
+    const { restored, utility } = healingBenefit(state, play.actor, effect.amount, undefined);
+    if (restored > 0) return priorities.healing + restored;
+    if (utility > 0) return priorities.utility + utility;
+  }
+  if (
+    facts.injuredAllies &&
+    hasTalent(state, "mana.arcane-mending") &&
+    play.def.effects?.some((effect) => effect.kind === "mana" && effect.amount > 0) &&
+    state.battle.mana - cardCost(play.card, state) < manaCapacity(state)
+  )
+    return priorities.healing + amount;
+  return usefulDraw(state, play) ? priorities.standardUtility + amount : 0;
+}
+
+/** Score visible benefits without sampling hidden outcomes or running combat. */
+export function battleBenefits(
   state: BattleState,
   play: AvailablePlay,
   facts: ReturnType<typeof battleBenefitFacts>,
@@ -142,11 +144,20 @@ function primaryBattleBenefits(
     ) ?? 0,
   ).gain;
   const support = (
-    priority: SupportPriority,
+    priority: keyof typeof priorities,
     amount = 0,
     targetId?: string,
     reason?: string,
-  ): BattleBenefit[] => [{ kind: "support", priority, amount, targetId, reason }];
+  ): BattleBenefit[] => [
+    {
+      score:
+        priority === "none"
+          ? supplementalScore(state, play, facts, amount)
+          : priorities[priority] + amount * (priority === "controlRemoval" ? 100 : 1),
+      targetId,
+      reason,
+    },
+  ];
   const allies = battlefield(state, "player").filter((unit) => unit.health > 0);
   const controlRemoval = (amount: number) => support(amount > 0 ? "controlRemoval" : "none", amount);
   const dodgeSupport = (useful: number) => support(useful > 0 ? "utility" : "none", useful > 0 ? useful : 0);
@@ -174,6 +185,18 @@ function primaryBattleBenefits(
         enemy,
         outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cardCost(card, state)),
       }));
+      const cleanse = def.effects?.some(
+        (effect) =>
+          effect.kind === "cleanse" &&
+          (effect.target === "allAllies" ? battlefield(state, "player") : [actor]).some(
+            (unit) => unit.health > 0 && hasHarmfulEffects(unit),
+          ),
+      );
+      const attackScore = (outcomes: OrdinaryHit[]) =>
+        outcomes.reduce(
+          (sum, hit) => sum + Math.max(ordinaryHitScore(hit), cleanse ? priorities.standardUtility : 0),
+          0,
+        ) / outcomes.length;
       const remaining = attacks.filter(({ enemy }) => !enemy.minion);
       const lethal = (attack: (typeof attacks)[number]) => attack.outcomes.every((outcome) => outcome.lethal);
       const winning =
@@ -187,10 +210,10 @@ function primaryBattleBenefits(
       if (def.target === "allEnemies" || def.target === "randomEnemy")
         return [
           {
-            kind: "attack",
-            groups: attacks.map((attack) => attack.outcomes),
-            aggregate: def.target === "allEnemies" ? "sum" : "mean",
-            finish: winning,
+            score:
+              (winning ? BATTLE_FINISH_PRIORITY : 0) +
+              attacks.reduce((sum, attack) => sum + attackScore(attack.outcomes), 0) /
+                (def.target === "randomEnemy" && attacks.length ? attacks.length : 1),
             reason:
               def.target === "randomEnemy"
                 ? "Use the average visible benefit across random targets"
@@ -203,10 +226,7 @@ function primaryBattleBenefits(
         const { enemy } = attack;
         const finish = !actor.combat?.blind && remaining.length === 1 && !enemy.minion && lethal(attack);
         return {
-          kind: "attack",
-          groups: [attack.outcomes],
-          aggregate: "sum",
-          finish,
+          score: (finish ? BATTLE_FINISH_PRIORITY : 0) + attackScore(attack.outcomes),
           targetId: enemy.id,
           reason: finish
             ? "Attempt to finish the last enemy before healing or attacking Minions"
@@ -431,12 +451,7 @@ function primaryBattleBenefits(
         );
       return support("utility");
     case "swapChosen":
-      return play.commands.map((command) => ({
-        kind: "support" as const,
-        priority: "utility" as const,
-        amount: 0,
-        targetId: command.targetId,
-      }));
+      return play.commands.flatMap((command) => support("utility", 0, command.targetId));
     case "swapLowest":
       return support("utility");
     default: {
