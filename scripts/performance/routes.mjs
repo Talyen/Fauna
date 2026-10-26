@@ -9,7 +9,7 @@ export const routes = {
       "tests/e2e/collection.spec.ts",
       "tests/e2e/settings.spec.ts",
       "tests/e2e/persistence.spec.ts",
-      "tests/e2e/screen-layout.spec.ts",
+      "tests/e2e/scroll-free.spec.ts",
       "tests/e2e/audio.spec.ts",
       "tests/e2e/battle-swaps.spec.ts",
       "tests/e2e/combat-controls.spec.ts",

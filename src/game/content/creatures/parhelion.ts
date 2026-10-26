@@ -16,22 +16,12 @@ export const parhelion: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("parhelion", "Polar Reprieve", "teamThaw", 1),
-      id: "parhelion-polar-reprieve",
+    card("parhelion-polar-reprieve", "Polar Reprieve", "teamThaw", 1, {
       effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.parhelion.polar-reprieve",
-    },
-    {
-      ...card("parhelion", "Sundog Reservoir", "mana", 2),
-      id: "parhelion-sundog-reservoir",
-      artwork: "action.parhelion.sundog-reservoir",
-    },
-    {
-      ...attack("parhelion", "Whiteout Waltz", 1, "freeze"),
-      id: "parhelion-whiteout-waltz",
+    }),
+    card("parhelion-sundog-reservoir", "Sundog Reservoir", "mana", 2),
+    attack("parhelion-whiteout-waltz", "Whiteout Waltz", 1, "freeze", {
       effects: [{ kind: "blind", amount: 1 }],
-      artwork: "action.parhelion.whiteout-waltz",
-    },
+    }),
   ],
 };

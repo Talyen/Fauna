@@ -19,23 +19,11 @@ export const pyrella: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("pyrella", "Festival Burst", 2, "burn"),
-      id: "pyrella-festival-burst",
-      target: "allEnemies",
-      artwork: "action.pyrella.festival-burst",
-    },
-    {
-      ...card("pyrella", "Ember Harvest", "mana", 1),
-      id: "pyrella-ember-harvest",
+    attack("pyrella-festival-burst", "Festival Burst", 2, "burn", { target: "allEnemies" }),
+    card("pyrella-ember-harvest", "Ember Harvest", "mana", 1, {
       restore: true,
       effects: [{ kind: "drawKeyword", keyword: "burn", amount: 1 }],
-      artwork: "action.pyrella.ember-harvest",
-    },
-    {
-      ...card("pyrella", "Spark Decoy", "sparkDecoy", 3),
-      id: "pyrella-spark-decoy",
-      artwork: "action.pyrella.spark-decoy",
-    },
+    }),
+    card("pyrella-spark-decoy", "Spark Decoy", "sparkDecoy", 3),
   ],
 };

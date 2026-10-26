@@ -15,23 +15,11 @@ export const stillara: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("stillara", "Reed Reservoir", "mana", 2),
-      id: "stillara-reed-reservoir",
-      artwork: "action.stillara.reed-reservoir",
-    },
-    {
-      ...card("stillara", "Thaw Path", "teamThaw", 1),
-      id: "stillara-thaw-path",
-      effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.stillara.thaw-path",
-    },
-    {
-      ...card("stillara", "Water Remembers", "heal", 1),
-      id: "stillara-water-remembers",
+    card("stillara-reed-reservoir", "Reed Reservoir", "mana", 2),
+    card("stillara-thaw-path", "Thaw Path", "teamThaw", 1, { effects: [{ kind: "draw", amount: 1 }] }),
+    card("stillara-water-remembers", "Water Remembers", "heal", 1, {
       target: "allAllies",
       effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.stillara.water-remembers",
-    },
+    }),
   ],
 };

@@ -1,28 +1,38 @@
 import type { Effect, SpeciesId, CardBase, CardDefinition, DamageType } from "./types";
-export const card = <T extends Exclude<Effect, "attack">>(
-  species: SpeciesId,
+
+type CardId = `${SpeciesId}-${string}`;
+type CardOptions<K extends Effect> = Omit<
+  Extract<CardDefinition, { effect: K }>,
+  "id" | "species" | "name" | "effect" | "value" | "cost"
+>;
+
+// Stable definition IDs own species identity; artwork follows the authored name.
+function baseCard(id: CardId, name: string, value: number): CardBase {
+  const species = id.slice(0, id.indexOf("-")) as SpeciesId;
+  const artworkName = name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  return { id, species, name, value, cost: 1, artwork: `action.${species}.${artworkName}` };
+}
+
+export const card = <K extends Exclude<Effect, "attack">>(
+  id: CardId,
   name: string,
-  effect: T,
+  effect: K,
   value: number,
-): CardBase & { effect: T } => ({
-  id: `${species}-${effect}`,
-  species,
-  name,
-  effect,
-  value,
-  cost: 1,
-});
+  options?: CardOptions<K>,
+): CardBase & { effect: K } => ({ ...baseCard(id, name, value), effect, ...options });
+
 export const attack = (
-  species: SpeciesId,
+  id: CardId,
   name: string,
   value: number,
   damageType: DamageType,
+  options?: Omit<CardOptions<"attack">, "damageType">,
 ): Extract<CardDefinition, { effect: "attack" }> => ({
-  id: `${species}-attack`,
-  species,
-  name,
+  ...baseCard(id, name, value),
   effect: "attack",
-  value,
-  cost: 1,
   damageType,
+  ...options,
 });

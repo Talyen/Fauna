@@ -1,6 +1,6 @@
 import { expectControlColors } from "./support/control-colors";
 import { expectScrollFree, LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
-import { captureScreen, settleScreen } from "./support/rendered-evidence";
+import { captureFrame, captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { reloadHome, test, seed, state } from "./support/session";
 import { run } from "../support/game";
@@ -19,12 +19,11 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     const dialog = page.getByRole("dialog", { name: "Boons", exact: true });
     await expect(dialog.getByRole("heading", { name: "Tattered Pages", exact: true })).toBeVisible();
     await expect(dialog).toContainText("Restore 3 Health when you defeat an enemy");
-    await captureScreen(page, { path: `reports/owned-boons-${width}-${height}.png` });
     const exhaustive = width === 1280 && height === 720;
-    for (let index = 2; index < BOONS.length; index += 2) {
-      await dialog.getByRole("button", { name: "Next page" }).click();
+    for (let index = 0; index < BOONS.length; index += 2) {
+      if (index > 0) await dialog.getByRole("button", { name: "Next page" }).click();
       // Every page is reachable; exhaustive content/geometry belongs to minimum size.
-      if (!exhaustive && index + 2 < BOONS.length) continue;
+      if (!exhaustive && index > 0 && index + 2 < BOONS.length) continue;
       for (const boon of BOONS.slice(index, index + 2)) {
         await expect(dialog.getByRole("heading", { name: boon.name, exact: true })).toBeInViewport();
         await expect(dialog).toContainText(boon.text);
@@ -34,9 +33,12 @@ for (const [width, height] of REVIEW_VIEWPORTS)
         .locator("img")
         .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
       await expectScrollFree(page);
-      if (index + 2 >= BOONS.length)
-        await captureScreen(page, { path: `reports/owned-boons-last-${width}-${height}.png` });
+      if (index === 0 || index + 2 >= BOONS.length)
+        await captureFrame(page, {
+          path: `reports/owned-boons${index === 0 ? "" : "-last"}-${width}-${height}.png`,
+        });
     }
+    await expect(dialog.getByRole("button", { name: "Next page" })).toBeDisabled();
     await page.keyboard.press("Escape");
     await expect(opener).toBeFocused();
     expect(await state(page)).toEqual(fixture);

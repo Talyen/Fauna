@@ -15,21 +15,11 @@ export const captoad: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("captoad", "Spore Puff", 2, "poison"),
-      target: "allEnemies",
-      artwork: "action.captoad.spore-puff",
-    },
-    {
-      ...card("captoad", "Mushroom Guard", "guard", 3),
+    attack("captoad-attack", "Spore Puff", 2, "poison", { target: "allEnemies" }),
+    card("captoad-guard", "Mushroom Guard", "guard", 3, {
       target: "self",
       effects: [{ kind: "heal", amount: 3 }],
-      artwork: "action.captoad.mushroom-guard",
-    },
-    {
-      ...card("captoad", "Bogbound Leap", "swap", 1),
-      effects: [{ kind: "draw", amount: 2 }],
-      artwork: "action.captoad.bogbound-leap",
-    },
+    }),
+    card("captoad-swap", "Bogbound Leap", "swap", 1, { effects: [{ kind: "draw", amount: 2 }] }),
   ],
 };

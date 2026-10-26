@@ -15,18 +15,8 @@ export const glintstride: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("glintstride", "Prism Shear", 6, "light"),
-      artwork: "action.glintstride.prism-shear",
-    },
-    {
-      ...card("glintstride", "Mirage Run", "dodge", 30),
-      effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.glintstride.mirage-run",
-    },
-    {
-      ...card("glintstride", "False Horizon", "teamBlind", 1),
-      artwork: "action.glintstride.false-horizon",
-    },
+    attack("glintstride-attack", "Prism Shear", 6, "light"),
+    card("glintstride-dodge", "Mirage Run", "dodge", 30, { effects: [{ kind: "draw", amount: 1 }] }),
+    card("glintstride-teamBlind", "False Horizon", "teamBlind", 1),
   ],
 };

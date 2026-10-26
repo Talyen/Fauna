@@ -6,6 +6,7 @@ import { produce } from "immer";
 import { describe, expect, it } from "vitest";
 import {
   CARDS,
+  SPECIES,
   FOOD_CARDS,
   definition,
   species,
@@ -30,6 +31,28 @@ import { createFood } from "../../../src/game/combat/food";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { BattleState, GameEvent } from "../../../src/game/types";
+
+// Captured before simplifying card authoring; preserve values and array order,
+// while allowing builders to assemble object properties in a different order.
+it("preserves every authored creature, passive tier, card and Pearl", () => {
+  const digest = (value: unknown) =>
+    createHash("sha256")
+      .update(
+        JSON.stringify(value, (_key, entry) =>
+          entry && typeof entry === "object" && !Array.isArray(entry)
+            ? Object.fromEntries(Object.entries(entry).sort(([a], [b]) => a.localeCompare(b)))
+            : entry,
+        ),
+      )
+      .digest("hex");
+  expect({ cards: digest(CARDS), species: digest(SPECIES), pearl: digest(PEARL) }).toMatchInlineSnapshot(`
+    {
+      "cards": "2bf4b8dbe9bc04a96e5b2eec839b0b3d775ad1209e5d19b18d250c0571063622",
+      "pearl": "1ae0c37e2fc0a8088a6fe7b827c5e7f23512457a723269b79b7e1fc78417ebda",
+      "species": "1350b8a3e22b5c16402c3b13723805a20e634ac4844a17498f3b810c215503cb",
+    }
+  `);
+});
 
 // Keep the pre-existing gameplay oracle anchored to its format-57 envelope.
 // Dormant repeat and Fire Thorns fields are neutral; active grants remain in the oracle.
@@ -61,33 +84,46 @@ function recordedEnemy(card: (typeof CARDS)[number]) {
   return { ...recorded, effect: card.id === "pollenmoth-teamGuard" ? "teamGuard" : "teamDodge" };
 }
 
-// Recorded before moving ability policies or handlers. Never regenerate these to accept a refactor.
+// Catalog hashes use sorted enemy properties captured from the unchanged catalog on 2026-10-26,
+// after the original oracle passed. Gameplay trace hashes below remain unchanged.
+// Never regenerate these to accept a refactor.
 it("preserves authored text, targeting, scaling, keywords and enemy adaptations", () => {
+  // The complete catalog digest above owns order; per-card expectations use stable IDs.
+  // New kits have direct contracts below or in creatures/*.test.ts; preserve the older oracle.
+  const cards = [
+    ...CARDS.filter(
+      (card) => !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen"].includes(card.species ?? ""),
+    ),
+    PEARL,
+    ...FOOD_CARDS,
+  ];
   expect(
-    // New kits have direct contracts below or in creatures/*.test.ts; preserve the older oracle.
-    [
-      ...CARDS.filter(
-        (card) => !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen"].includes(card.species ?? ""),
-      ),
-      PEARL,
-      ...FOOD_CARDS,
-    ].map((card) => ({
-      id: card.id,
-      digest: digest({
-        targeting: cardTargeting(card),
-        keywords: definitionKeywords(card),
-        enemy: recordedEnemy(card),
-        enemySupported: enemyCanUse(card),
-        variants: [1, 1.6].flatMap((power) =>
-          [0, 2].map((level) => ({
-            text: cardText(card, level, undefined, power),
-            resolvedText: cardText(card, level, 19, power),
-            value: primaryAbilityValue(card, card.value + level * 2, power),
-            extras: abilityExtras(card, power),
-          })),
-        ),
-      }),
-    })),
+    Object.fromEntries(
+      cards.map((card) => [
+        card.id,
+        digest({
+          targeting: cardTargeting(card),
+          keywords: definitionKeywords(card),
+          // Property order is not an authored rule; canonicalize only this catalog object.
+          enemy: JSON.parse(
+            JSON.stringify(recordedEnemy(card), (_key, entry) =>
+              entry && typeof entry === "object" && !Array.isArray(entry)
+                ? Object.fromEntries(Object.entries(entry).sort(([a], [b]) => a.localeCompare(b)))
+                : entry,
+            ),
+          ),
+          enemySupported: enemyCanUse(card),
+          variants: [1, 1.6].flatMap((power) =>
+            [0, 2].map((level) => ({
+              text: cardText(card, level, undefined, power),
+              resolvedText: cardText(card, level, 19, power),
+              value: primaryAbilityValue(card, card.value + level * 2, power),
+              extras: abilityExtras(card, power),
+            })),
+          ),
+        }),
+      ]),
+    ),
   ).toMatchSnapshot();
 });
 

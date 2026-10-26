@@ -1,6 +1,6 @@
 # Content and artwork
 
-Author creature stats, six passive tiers and three unique abilities together in `src/game/content/creatures/`. [Creature catalogs](../src/game/content/creatures.ts) retain separate, explicit species/card order; seeded offers consume it. Talent trees live in `src/game/content/talents/`, aggregated by [talents.ts](../src/game/content/talents.ts). Keep shared definition types/builders outside individual kits.
+Author creature stats, six passive tiers and three unique abilities together in `src/game/content/creatures/`. [Creature catalogs](../src/game/content/creatures.ts) retain separate, explicit species/card order; seeded offers consume it. Talent trees live in `src/game/content/talents/`, aggregated by [talents.ts](../src/game/content/talents.ts). Keep shared definition types/builders outside individual kits. Use the [card builders](../src/game/content/card-builders.ts) with each complete, stable definition ID and effect-specific options; they supply species, the fixed Mana cost and the artwork key derived from the name. Override `artwork` explicitly when its key differs from that name.
 
 Use the [Talent builder](../src/game/content/talent-builder.ts) to author each stable ID, name and explicit row. It derives keyword/effect identity from the ID and reads the description from the pure [Talent rules](../src/game/rules/talents.ts), where copy and executable parameters are authored together. Publication still freezes the complete plain definitions; keep tree and aggregate order explicit.
 

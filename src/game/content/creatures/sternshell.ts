@@ -15,22 +15,11 @@ export const sternshell: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("sternshell", "Surge Ram", 3, "physical"),
-      doubleWithArmor: true,
-      artwork: "action.sternshell.surge-ram",
-    },
-    {
-      ...card("sternshell", "Siphon Vault", "swap", 1),
-      effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.sternshell.siphon-vault",
-    },
-    {
-      ...attack("sternshell", "Spiral Return", 1, "water"),
-      id: "sternshell-spiral-return",
+    attack("sternshell-attack", "Surge Ram", 3, "physical", { doubleWithArmor: true }),
+    card("sternshell-swap", "Siphon Vault", "swap", 1, { effects: [{ kind: "draw", amount: 1 }] }),
+    attack("sternshell-spiral-return", "Spiral Return", 1, "water", {
       target: "allEnemies",
       effects: [{ kind: "mana", amount: 1 }],
-      artwork: "action.sternshell.spiral-return",
-    },
+    }),
   ],
 };

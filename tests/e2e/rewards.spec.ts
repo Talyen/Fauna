@@ -1,64 +1,78 @@
-import { captureScreen } from "./support/rendered-evidence";
-import { expect } from "@playwright/test";
-import { winBattle, bossReward } from "../support/game";
+import { captureScreen, settleScreen } from "./support/rendered-evidence";
+import { expect, type Page } from "@playwright/test";
+import { accept, winBattle, bossReward } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
 
-for (const [width, height, enlarged] of [
-  [1280, 720, true],
-  [1920, 1080, false],
-] as const)
-  test(`separate earnings and recruit choices at ${width}, enlarged ${enlarged}`, async ({ page }) => {
+async function layouts(page: Page, name: string, check?: () => Promise<void>) {
+  for (const [width, height, scale] of [
+    [1280, 720, "1.25"],
+    [1920, 1080, "1"],
+  ] as const) {
     await page.setViewportSize({ width, height });
+    await page.locator("html").evaluate((el, scale) => el.style.setProperty("--text-scale", scale), scale);
+    await settleScreen(page);
+    await check?.();
+    await captureScreen(page, { path: `reports/rewards/${name}-${width}.png` });
+  }
+}
+
+for (const [name, create] of [
+  ["recruit", winBattle],
+  ["boon", bossReward],
+] as const)
+  test(`${name} choices fit both layouts and commit only the activated choice`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
-    for (const fixture of [winBattle(), bossReward()]) {
-      await seed(page, fixture);
-      await resume(page);
-      if (enlarged) await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.25"));
-      if (fixture.phase === "recruit") {
-        await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
-        await expect(page.locator(".recruit-options")).toHaveCount(0);
-        const receipt = page.getByLabel("Last battle earnings");
-        const gold = receipt.locator(".battle-earnings");
-        const xp = receipt.locator(".keyword-progress-grid");
-        expect((await gold.boundingBox())!.y).toBeGreaterThan(
-          (await xp.boundingBox())!.y + (await xp.boundingBox())!.height,
-        );
-        for (const identity of await receipt.locator(".reward-keyword-identity").all()) {
-          const iconColor = await identity.locator("svg").evaluate((el) => getComputedStyle(el).color);
-          const labelColor = await identity
-            .locator("span[data-keyword]")
-            .evaluate((el) => getComputedStyle(el).color);
-          expect(iconColor).toBe(labelColor);
-        }
-        await captureScreen(page, { path: `reports/rewards/earnings-${width}.png` });
-        await page.getByRole("button", { name: "Continue", exact: true }).click();
-        expect(await state(page)).toEqual(fixture);
-        await expect(page.getByLabel("Last battle earnings")).toHaveCount(0);
-      }
-      await page
-        .locator(".reward-screen img")
-        .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
-      const cards = page.locator(".reward-option");
-      await expect(cards).toHaveCount(3);
-      await expect(page.locator(".reward-heading h2")).toHaveCount(0);
-      await expect(page.locator(".reward-choice-content > h2")).toHaveCount(0);
-      const first = (await cards.first().boundingBox())!,
-        last = (await cards.last().boundingBox())!;
-      expect(Math.abs(first.x + last.x + last.width - width)).toBeLessThan(1);
-      await captureScreen(page, { path: `reports/rewards/${fixture.phase}-${width}.png` });
-      if (fixture.phase === "recruit") {
-        await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
-        await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
-        await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
+    const fixture = create();
+    await seed(page, fixture);
+    await resume(page);
+    if (fixture.phase === "recruit") {
+      await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
+      await expect(page.locator(".recruit-options")).toHaveCount(0);
+      await layouts(page, "earnings", async () => {
         expect(
-          [...(await state(page)).team, ...(await state(page)).reserves]
-            .map((unit) => unit.species)
-            .filter((kind) => kind === "emberback"),
-        ).toHaveLength(1);
-        expect((await state(page)).discovery.recruited.emberback).toBe(
-          fixture.discovery.recruited.emberback! + 1,
-        );
-      } else await page.getByRole("button", { name: "Skip", exact: true }).click();
-      await captureScreen(page, { path: `reports/rewards/team-after-${fixture.phase}-${width}.png` });
+          await page.getByLabel("Last battle earnings").evaluate((receipt) => {
+            const gold = receipt.querySelector(".battle-earnings")!.getBoundingClientRect();
+            const xp = receipt.querySelector(".keyword-progress-grid")!.getBoundingClientRect();
+            const identities = [...receipt.querySelectorAll(".reward-keyword-identity")];
+            return {
+              earningsBelowXP: gold.top > xp.bottom,
+              matchingColors:
+                identities.length > 0 &&
+                identities.every(
+                  (identity) =>
+                    getComputedStyle(identity.querySelector("svg")!).color ===
+                    getComputedStyle(identity.querySelector("span[data-keyword]")!).color,
+                ),
+            };
+          }),
+        ).toEqual({ earningsBelowXP: true, matchingColors: true });
+      });
+      await page.getByRole("button", { name: "Continue", exact: true }).click();
+      await expect(page.getByLabel("Last battle earnings")).toHaveCount(0);
+      await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+      await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
     }
+    const cards = page.locator(".reward-option");
+    await expect(cards).toHaveCount(3);
+    await layouts(page, fixture.phase, async () => {
+      expect(
+        await cards.evaluateAll((cards) => {
+          const first = cards[0]!.getBoundingClientRect();
+          const last = cards.at(-1)!.getBoundingClientRect();
+          return Math.abs(first.left + last.right - innerWidth);
+        }),
+      ).toBeLessThan(1);
+    });
+    expect(await state(page)).toEqual(fixture);
+    const command =
+      fixture.phase === "recruit"
+        ? ({ type: "recruit", species: "emberback" } as const)
+        : ({ type: "skipBoon" } as const);
+    await page
+      .getByRole("button", { name: command.type === "recruit" ? "Recruit Emberback" : "Skip", exact: true })
+      .click();
+    const committed = accept(fixture, command);
+    expect(await state(page)).toEqual(committed);
+    await layouts(page, `team-after-${fixture.phase}`);
+    expect(await state(page)).toEqual(committed);
   });

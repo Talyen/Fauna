@@ -18,21 +18,11 @@ export const bloomquail: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("bloomquail", "Petal Rampart", "guard", 6),
-      target: "self",
-      artwork: "action.bloomquail.petal-rampart",
-    },
-    {
-      ...card("bloomquail", "Bloom Cradle", "draw", 2),
-      effects: [{ kind: "heal", amount: 2 }],
-      artwork: "action.bloomquail.bloom-cradle",
-    },
-    {
-      ...card("bloomquail", "Petal Veil", "heal", 2),
+    card("bloomquail-guard", "Petal Rampart", "guard", 6, { target: "self" }),
+    card("bloomquail-draw", "Bloom Cradle", "draw", 2, { effects: [{ kind: "heal", amount: 2 }] }),
+    card("bloomquail-heal", "Petal Veil", "heal", 2, {
       target: "allAllies",
       effects: [{ kind: "blind", amount: 1 }],
-      artwork: "action.bloomquail.petal-veil",
-    },
+    }),
   ],
 };

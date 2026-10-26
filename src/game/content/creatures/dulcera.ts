@@ -16,25 +16,14 @@ export const dulcera: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("dulcera", "Chapel Light", "heal", 3),
-      id: "dulcera-chapel-light",
+    card("dulcera-chapel-light", "Chapel Light", "heal", 3, {
       target: "self",
       effects: [{ kind: "mana", amount: 1 }],
-      artwork: "action.dulcera.chapel-light",
-    },
-    {
-      ...card("dulcera", "Meadow Shelter", "guard", 2),
-      id: "dulcera-meadow-shelter",
-      target: "allAllies",
-      artwork: "action.dulcera.meadow-shelter",
-    },
-    {
-      ...card("dulcera", "Hushed Waters", "swap", 1),
-      id: "dulcera-hushed-waters",
+    }),
+    card("dulcera-meadow-shelter", "Meadow Shelter", "guard", 2, { target: "allAllies" }),
+    card("dulcera-hushed-waters", "Hushed Waters", "swap", 1, {
       backupOnly: true,
       effects: [{ kind: "cleanse", amount: 7, target: "allAllies" }],
-      artwork: "action.dulcera.hushed-waters",
-    },
+    }),
   ],
 };

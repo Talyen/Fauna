@@ -15,16 +15,8 @@ export const coralcurl: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("coralcurl", "Bubble Ward", "guard", 6),
-      target: "self",
-      artwork: "action.coralcurl.bubble-ward",
-    },
-    { ...attack("coralcurl", "Reef Jet", 6, "water"), artwork: "action.coralcurl.reef-jet" },
-    {
-      ...card("coralcurl", "Coral Spiral", "swap", 1),
-      effects: [{ kind: "blind", amount: 1 }],
-      artwork: "action.coralcurl.coral-spiral",
-    },
+    card("coralcurl-guard", "Bubble Ward", "guard", 6, { target: "self" }),
+    attack("coralcurl-attack", "Reef Jet", 6, "water"),
+    card("coralcurl-swap", "Coral Spiral", "swap", 1, { effects: [{ kind: "blind", amount: 1 }] }),
   ],
 };

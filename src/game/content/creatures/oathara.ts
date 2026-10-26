@@ -16,20 +16,10 @@ export const oathara: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("oathara", "Never Lost", "redraw", 1),
-      id: "oathara-never-lost",
-      artwork: "action.oathara.never-lost",
-    },
-    {
-      ...card("oathara", "Traveler’s Ward", "reflectAttack", 1),
-      id: "oathara-travelers-ward",
+    card("oathara-never-lost", "Never Lost", "redraw", 1),
+    card("oathara-travelers-ward", "Traveler’s Ward", "reflectAttack", 1, {
       artwork: "action.oathara.travelers-ward",
-    },
-    {
-      ...card("oathara", "Vow of Return", "resurrect", 20),
-      id: "oathara-vow-of-return",
-      artwork: "action.oathara.vow-of-return",
-    },
+    }),
+    card("oathara-vow-of-return", "Vow of Return", "resurrect", 20),
   ],
 };

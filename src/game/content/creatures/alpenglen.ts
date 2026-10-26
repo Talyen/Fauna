@@ -16,21 +16,8 @@ export const alpenglen: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("alpenglen", "Sunset Reversal", "reflectAttack", 1),
-      id: "alpenglen-sunset-reversal",
-      artwork: "action.alpenglen.sunset-reversal",
-    },
-    {
-      ...card("alpenglen", "Ember of Evening", "repeatNextCard", 1),
-      id: "alpenglen-ember-of-evening",
-      artwork: "action.alpenglen.ember-of-evening",
-    },
-    {
-      ...attack("alpenglen", "Last Light Charge", 4, "light"),
-      id: "alpenglen-last-light-charge",
-      criticalWhenLastCard: true,
-      artwork: "action.alpenglen.last-light-charge",
-    },
+    card("alpenglen-sunset-reversal", "Sunset Reversal", "reflectAttack", 1),
+    card("alpenglen-ember-of-evening", "Ember of Evening", "repeatNextCard", 1),
+    attack("alpenglen-last-light-charge", "Last Light Charge", 4, "light", { criticalWhenLastCard: true }),
   ],
 };

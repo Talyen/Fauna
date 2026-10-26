@@ -15,21 +15,12 @@ export const ringpalm: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("ringpalm", "Ringclap", 6, "stun"),
-      artwork: "action.ringpalm.ringclap",
-    },
-    {
-      ...attack("ringpalm", "Harmonic Set", 1, "stun"),
-      id: "ringpalm-harmonic-set",
+    attack("ringpalm-attack", "Ringclap", 6, "stun"),
+    attack("ringpalm-harmonic-set", "Harmonic Set", 1, "stun", {
       target: "allEnemies",
       effects: [{ kind: "status", status: "armor", amount: 1 }],
       repeatChance: 20,
-      artwork: "action.ringpalm.harmonic-set",
-    },
-    {
-      ...card("ringpalm", "Seedling Circle", "teamProtection", 2),
-      artwork: "action.ringpalm.seedling-circle",
-    },
+    }),
+    card("ringpalm-teamProtection", "Seedling Circle", "teamProtection", 2),
   ],
 };

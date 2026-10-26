@@ -18,21 +18,11 @@ export const wickwaltz: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("wickwaltz", "Ember Pirouette", 2, "burn"),
-      target: "allEnemies",
-      artwork: "action.wickwaltz.ember-pirouette",
-    },
-    {
-      ...card("wickwaltz", "Saffron Screen", "guard", 3),
+    attack("wickwaltz-attack", "Ember Pirouette", 2, "burn", { target: "allEnemies" }),
+    card("wickwaltz-guard", "Saffron Screen", "guard", 3, {
       target: "self",
       effects: [{ kind: "nullifyFreeze", amount: 1 }],
-      artwork: "action.wickwaltz.saffron-screen",
-    },
-    {
-      ...card("wickwaltz", "Thermal Rise", "draw", 2),
-      effects: [{ kind: "mana", amount: 1 }],
-      artwork: "action.wickwaltz.thermal-rise",
-    },
+    }),
+    card("wickwaltz-draw", "Thermal Rise", "draw", 2, { effects: [{ kind: "mana", amount: 1 }] }),
   ],
 };

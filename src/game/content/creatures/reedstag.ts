@@ -18,21 +18,14 @@ export const reedstag: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("reedstag", "Reed Rush", 6, "nature"),
-      artwork: "action.reedstag.reed-rush",
-    },
-    {
-      ...card("reedstag", "Reed Shelter", "guard", 3),
+    attack("reedstag-attack", "Reed Rush", 6, "nature"),
+    card("reedstag-guard", "Reed Shelter", "guard", 3, {
       target: "self",
       effects: [{ kind: "status", status: "thorns", amount: 3 }],
-      artwork: "action.reedstag.reed-shelter",
-    },
-    {
-      ...card("reedstag", "Mending Spring", "heal", 4),
+    }),
+    card("reedstag-heal", "Mending Spring", "heal", 4, {
       target: "mostInjured",
       effects: [{ kind: "cleanse", amount: 7, target: "recipient" }],
-      artwork: "action.reedstag.mending-spring",
-    },
+    }),
   ],
 };

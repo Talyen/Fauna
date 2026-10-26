@@ -323,7 +323,7 @@ it.each(["none", "nullifyFreeze", "negate", "attackReflection"] as const)(
       }),
     );
     const def = {
-      ...attack("prismram", "Assessment", 6, "physical"),
+      ...attack("prismram-attack", "Assessment", 6, "physical"),
       criticalWhenLastCard: true,
       alternateDamageType: "freeze" as const,
     };

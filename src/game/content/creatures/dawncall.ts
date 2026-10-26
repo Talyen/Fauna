@@ -18,20 +18,8 @@ export const dawncall: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...card("dawncall", "Dawn Cry", "teamCleanse", 1),
-      effects: [{ kind: "draw", amount: 1 }],
-      artwork: "action.dawncall.dawn-cry",
-    },
-    {
-      ...attack("dawncall", "Sunwing Sweep", 2, "light"),
-      target: "allEnemies",
-      artwork: "action.dawncall.sunwing-sweep",
-    },
-    {
-      ...card("dawncall", "Morning Bloom", "heal", 2),
-      target: "allAllies",
-      artwork: "action.dawncall.morning-bloom",
-    },
+    card("dawncall-teamCleanse", "Dawn Cry", "teamCleanse", 1, { effects: [{ kind: "draw", amount: 1 }] }),
+    attack("dawncall-attack", "Sunwing Sweep", 2, "light", { target: "allEnemies" }),
+    card("dawncall-heal", "Morning Bloom", "heal", 2, { target: "allAllies" }),
   ],
 };

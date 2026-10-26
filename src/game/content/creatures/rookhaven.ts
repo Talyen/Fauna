@@ -18,22 +18,11 @@ export const rookhaven: CreatureKit = {
     })),
   },
   cards: [
-    {
-      ...attack("rookhaven", "Borrowed Brilliance", 1, "light"),
-      id: "rookhaven-borrowed-brilliance",
+    attack("rookhaven-borrowed-brilliance", "Borrowed Brilliance", 1, "light", {
       target: "allEnemies",
       effects: [{ kind: "blind", amount: 1 }],
-      artwork: "action.rookhaven.borrowed-brilliance",
-    },
-    {
-      ...card("rookhaven", "Unwritten Ending", "teamPurge", 1),
-      id: "rookhaven-unwritten-ending",
-      artwork: "action.rookhaven.unwritten-ending",
-    },
-    {
-      ...card("rookhaven", "Margin of Possibility", "draw", 2),
-      id: "rookhaven-margin-of-possibility",
-      artwork: "action.rookhaven.margin-of-possibility",
-    },
+    }),
+    card("rookhaven-unwritten-ending", "Unwritten Ending", "teamPurge", 1),
+    card("rookhaven-margin-of-possibility", "Margin of Possibility", "draw", 2),
   ],
 };
