@@ -1,12 +1,22 @@
 import { freshCombat, ensureCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { dispatch } from "../../../src/game/engine";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { CARDS, species } from "../../../src/game/content";
+import { CARDS, definition, species } from "../../../src/game/content";
+import { MAX_BATTLE_TURN } from "../../../src/game/state-limits";
+import type { GameEvent } from "../../../src/game/types";
 import { pendingReplacement, swapBackup } from "../../../src/game/team";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
-import { addBackups, completeRecruitment, accept, run, winBattle, swapFixture } from "../../support/game";
+import {
+  addBackups,
+  completeRecruitment,
+  accept,
+  run,
+  teamRun,
+  winBattle,
+  swapFixture,
+} from "../../support/game";
 
 function withReserves() {
   return produce(run(), (d) => {
@@ -22,6 +32,72 @@ function withReserves() {
     }
   });
 }
+
+it.each(["coralcurl", "memento"] as const)(
+  "delivers swap protection, arrival passives and the Saddle Pouch draw once in order for %s",
+  (kind) => {
+    const state = produce(teamRun(42, ["skybex", "dulcera", "emberback"]), (draft) => {
+      addBackups(draft, {
+        id: "incoming",
+        species: kind,
+        health: 10,
+        block: 0,
+        combat: freshCombat(),
+        attacked: false,
+      });
+      draft.team[0]!.block = 7;
+      draft.boons = ["tide-anklet", "saddle-pouch", "dune-shuttle"];
+    });
+    for (const fromCard of [false, true]) {
+      const events: GameEvent[] = [];
+      const next = produce(state, (draft) => swapBackup(draft, "ally-0", "incoming", events, fromCard));
+      const arrival = next.team.find((unit) => unit.id === "incoming")!;
+      expect(arrival.health).toBe(11);
+      expect(arrival.block).toBe(fromCard ? 9 : 1);
+      expect(events).toMatchObject([
+        { kind: "action", actionType: "swap", actorId: "incoming" },
+        ...(fromCard ? [{ kind: "block", targetId: "incoming", amount: 7 }] : []),
+        { kind: "action", actionType: "support", actorId: "ally-0", targetId: "incoming" },
+        { kind: "block", targetId: "incoming", amount: 1 },
+        { kind: "heal", targetId: "incoming", amount: 1 },
+        ...(fromCard ? [{ kind: "block", targetId: "incoming", amount: 1 }] : []),
+      ]);
+      expect(decodeSave(encodeSave(next))).toEqual(next);
+    }
+  },
+);
+
+it("ends a zero-Mana play only after commitment, retaining previews, opt-out and the turn ceiling", () => {
+  const state = produce(run(), (draft) => {
+    const card = draft.cards.find((entry) => definition(entry.definitionId).effect === "guard")!;
+    draft.battle!.hand = [card.id];
+    draft.battle!.buffer = [];
+    draft.battle!.discard = [];
+    draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    draft.battle!.mana = 1;
+  });
+  const command = { type: "play" as const, cardId: state.battle!.hand[0]! };
+  const preview = previewCard(state, command.cardId);
+  const manual = dispatch(state, { ...command, autoEndTurn: false });
+  expect(manual.accepted).toBe(true);
+  expect(preview.state).toEqual(manual.state);
+  expect(preview.events).toEqual(manual.events);
+  expect(manual.state.battle!.mana).toBe(0);
+  expect(manual.state.battle!.turn).toBe(state.battle!.turn);
+  const automatic = dispatch(state, command);
+  expect(automatic.accepted).toBe(true);
+  expect(automatic.state.battle!.turn).toBe(state.battle!.turn + 1);
+  expect(automatic.events.slice(0, manual.events.length)).toEqual(manual.events);
+  const ceiling = produce(state, (draft) => {
+    draft.battle!.turn = MAX_BATTLE_TURN;
+  });
+  const stopped = dispatch(ceiling, command);
+  expect(stopped.accepted).toBe(true);
+  expect(stopped.state.battle!.turn).toBe(MAX_BATTLE_TURN);
+  expect(stopped.state.battle!.mana).toBe(0);
+  expect(decodeSave(encodeSave(stopped.state))).toEqual(stopped.state);
+  expect(state.battle!.mana).toBe(1);
+});
 
 it.each([false, true])(
   "removes the outgoing creature's generated cards on a swap (ability: %s)",
@@ -122,13 +198,15 @@ describe("knockout replacements", () => {
       d.team.forEach((c) => (c.health = 0));
       d.reserves[0]!.combat!.controlled = "freeze";
       d.reserves[0]!.combat!.controlTurns = 1;
-      d.reserves[0]!.combat!.freeze = 10;
       d.reserves[1]!.health = 0;
     });
+    expect(decodeSave(encodeSave(game))).toEqual(game);
     const command = chooseBattleCommand(game);
     expect(command).toEqual({ type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
     const next = accept(game, command);
     expect(next.team[0]!.combat!.controlled).toBe("freeze");
+    expect(next.team[0]!.combat!.controlTurns).toBe(1);
+    expect(next.team[0]!.combat!.freeze).toBe(0);
     expect(next.team[0]!.block).toBe(0);
     expect(pendingReplacement(next)).toBeUndefined();
     expect(decodeSave(encodeSave(next))).toEqual(next);

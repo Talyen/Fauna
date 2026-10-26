@@ -251,47 +251,41 @@ export function swapBackup(
       events,
       fromCard,
     );
-    if (fromCard && outgoing && incoming) matchSwapBlock(state, outgoing, incoming, events);
-    mountainGuide(state, incoming, previous, events);
-    gentlePassage(state, previous, events);
-    if (fromCard && state.boons.includes("saddle-pouch")) drawOwner(state, incoming.id, events);
-    return;
-  }
-  state.team[index] = incoming;
-  state.reserves[backupIndex] = outgoing;
-  const removed = new Set(
-    state.cards.filter((card) => card.ownerId === outgoing.id && card.temporary).map((card) => card.id),
-  );
-  state.cards = state.cards.filter((card) => !removed.has(card.id));
-  const oldDefs = speciesCards(outgoing.species);
-  const newDefs = speciesCards(incoming.species);
-  const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
-  for (const card of replaced) {
-    card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
-    card.ownerId = incoming.id;
-    card.level = 0;
-  }
-  if (state.battle) {
-    filterCardZones(state.battle, (id) => !removed.has(id));
-    for (const enemy of state.battle.enemies)
-      if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
-    if (fromCard) {
-      const ids = new Set(replaced.map((card) => card.id));
-      filterCardZones(state.battle, (id) => !ids.has(id));
-      state.battle.draw = shuffle(state, [...state.battle.draw, ...ids]);
+  } else {
+    state.team[index] = incoming;
+    state.reserves[backupIndex] = outgoing;
+    const removed = new Set(
+      state.cards.filter((card) => card.ownerId === outgoing.id && card.temporary).map((card) => card.id),
+    );
+    state.cards = state.cards.filter((card) => !removed.has(card.id));
+    const oldDefs = speciesCards(outgoing.species);
+    const newDefs = speciesCards(incoming.species);
+    const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
+    for (const card of replaced) {
+      card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
+      card.ownerId = incoming.id;
+      card.level = 0;
     }
+    if (state.battle) {
+      filterCardZones(state.battle, (id) => !removed.has(id));
+      for (const enemy of state.battle.enemies)
+        if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
+      if (fromCard) {
+        const ids = new Set(replaced.map((card) => card.id));
+        filterCardZones(state.battle, (id) => !ids.has(id));
+        state.battle.draw = shuffle(state, [...state.battle.draw, ...ids]);
+      }
+      fillHand(state);
+      recycleDiscard(state);
+    }
+    events.push({
+      kind: "action",
+      actionType: "swap",
+      actorId: incoming.id,
+      text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
+    });
   }
-  if (state.battle) {
-    fillHand(state);
-    recycleDiscard(state);
-  }
-  events.push({
-    kind: "action",
-    actionType: "swap",
-    actorId: incoming.id,
-    text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
-  });
-  if (fromCard) matchSwapBlock(state, outgoing, incoming, events);
+  if (fromCard && outgoing) matchSwapBlock(state, outgoing, incoming, events);
   mountainGuide(state, incoming, previous, events);
   gentlePassage(state, previous, events);
   if (fromCard && state.boons.includes("saddle-pouch")) drawOwner(state, incoming.id, events);

@@ -311,15 +311,6 @@ function resolve(
         afterPlayerCard(draft, events, def.species === null ? undefined : actor);
         fillHand(draft);
         if (!preview) settle(draft, events);
-        if (
-          !preview &&
-          command.autoEndTurn !== false &&
-          draft.phase === "battle" &&
-          battle.mana === 0 &&
-          battle.turn < MAX_BATTLE_TURN &&
-          !pendingReplacement(draft)
-        )
-          finishTurn(draft, events);
         break;
       }
       case "devWinBattle": {
@@ -335,14 +326,6 @@ function resolve(
       }
       case "swap": {
         swapBackup(draft, command.activeId, command.reserve, events);
-        if (
-          draft.phase === "battle" &&
-          command.autoEndTurn !== false &&
-          draft.battle.mana === 0 &&
-          draft.battle.turn < MAX_BATTLE_TURN &&
-          !pendingReplacement(draft)
-        )
-          finishTurn(draft, events);
         break;
       }
       case "recruitDestination":
@@ -431,6 +414,16 @@ function resolve(
         events.push({ kind: "knockout", text: "You return from the wilds. Discoveries are kept." });
         break;
     }
+    if (
+      !preview &&
+      (command.type === "play" || command.type === "swap") &&
+      command.autoEndTurn !== false &&
+      draft.phase === "battle" &&
+      draft.battle.mana === 0 &&
+      draft.battle.turn < MAX_BATTLE_TURN &&
+      !pendingReplacement(draft)
+    )
+      finishTurn(draft, events);
   });
   return { accepted: true, state: next, events: freeze(events, true) };
 }
