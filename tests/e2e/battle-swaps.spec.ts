@@ -23,6 +23,12 @@ function fixture(fallen = true) {
 }
 for (const input of ["mouse", "keyboard", "controller"] as const)
   test(`knockout replacement is required and transfers focus with ${input}`, async ({ page }) => {
+    const width = input === "mouse" ? 1920 : 1280;
+    await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
+    await page.addInitScript(
+      (scale) => localStorage.setItem("fauna.text-scale", String(scale)),
+      width === 1280 ? 1.25 : 1,
+    );
     const press = input === "controller" ? await gamepad(page) : null;
     const initial = fixture();
     await seed(page, initial);
@@ -30,6 +36,13 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await expect(page.getByRole("button", { name: "Swap", exact: true })).toHaveCount(0);
     const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
     await expect(dialog).toBeVisible();
+    if (input !== "controller") {
+      await captureScreen(page, { path: `reports/swapping/replacement-${width}.png` });
+      for (const card of await dialog.locator(".creature-card").all()) {
+        const size = (await card.boundingBox())!;
+        expect(Math.abs(size.width / size.height - 4 / 3)).toBeLessThan(0.01);
+      }
+    }
     await page.keyboard.press("Escape");
     await expect(dialog).toBeVisible();
     const moth = dialog.getByRole("button", { name: "Pollenmoth, backup", exact: true });
@@ -51,23 +64,6 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
       await resume(page);
       expect(await state(page)).toEqual(next);
       await expect(page.getByRole("dialog", { name: "Choose a replacement" })).toHaveCount(0);
-    }
-  });
-
-for (const [width, height, scale] of [
-  [1280, 720, 1.25],
-  [1920, 1080, 1],
-] as const)
-  test(`replacement choice fits ${width}×${height}`, async ({ page }) => {
-    await page.setViewportSize({ width, height });
-    await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", String(scale)), scale);
-    await seed(page, fixture());
-    await resume(page);
-    await captureScreen(page, { path: `reports/swapping/replacement-${width}.png` });
-    const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
-    for (const card of await dialog.locator(".creature-card").all()) {
-      const size = (await card.boundingBox())!;
-      expect(Math.abs(size.width / size.height - 4 / 3)).toBeLessThan(0.01);
     }
   });
 

@@ -19,6 +19,7 @@ afterEach(() => {
   cleanup();
   delete document.documentElement.dataset.focus;
   vi.unstubAllGlobals();
+  vi.restoreAllMocks();
   vi.useRealTimers();
 });
 
@@ -72,28 +73,28 @@ describe("shared hover details", () => {
     expect(screen.queryByRole("tooltip")).toBeNull();
   });
 
-  it("dismisses when the window loses focus and only restores with fresh input", async () => {
+  it("dismisses on blur or hiding and restores only on fresh input after returning", async () => {
     render(<Details />);
     const user = userEvent.setup();
     const trigger = screen.getByRole("button");
     await user.hover(trigger);
     expect(await screen.findByRole("tooltip")).toBeTruthy();
-    fireEvent(window, new Event("blur"));
-    expect(screen.queryByRole("tooltip")).toBeNull();
-    fireEvent(window, new Event("focus"));
-    expect(screen.queryByRole("tooltip")).toBeNull();
-    await user.pointer({ target: trigger, coords: { x: 10, y: 10 } });
-    expect(await screen.findByRole("tooltip")).toBeTruthy();
-  });
-
-  it("dismisses details when the document becomes hidden", async () => {
-    render(<Details />);
-    const user = userEvent.setup();
-    await user.hover(screen.getByRole("button"));
-    expect(await screen.findByRole("tooltip")).toBeTruthy();
-    vi.spyOn(document, "hidden", "get").mockReturnValue(true);
-    fireEvent(document, new Event("visibilitychange"));
-    expect(screen.queryByRole("tooltip")).toBeNull();
+    for (const [index, boundary] of (["focus", "visibility"] as const).entries()) {
+      if (boundary === "focus") fireEvent(window, new Event("blur"));
+      else {
+        vi.spyOn(document, "hidden", "get").mockReturnValue(true);
+        fireEvent(document, new Event("visibilitychange"));
+      }
+      expect(screen.queryByRole("tooltip")).toBeNull();
+      if (boundary === "focus") fireEvent(window, new Event("focus"));
+      else {
+        vi.spyOn(document, "hidden", "get").mockReturnValue(false);
+        fireEvent(document, new Event("visibilitychange"));
+      }
+      expect(screen.queryByRole("tooltip")).toBeNull();
+      await user.pointer({ target: trigger, coords: { x: 10 + index, y: 10 } });
+      expect(await screen.findByRole("tooltip")).toBeTruthy();
+    }
   });
 
   it("shows focus details only during intentional keyboard or controller navigation", async () => {

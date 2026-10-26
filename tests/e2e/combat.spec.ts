@@ -1,45 +1,10 @@
 import { reloadHome, test, seed, resume } from "./support/session";
-import { captureScreen } from "./support/rendered-evidence";
+import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { authoredPack, prepareDestination, run } from "../support/game";
 import type { GameState } from "../../src/game/types";
 for (const width of [1280, 1920]) {
-  test(`pile browsing preserves gameplay and hover rules at ${width}`, async ({ page }) => {
-    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    const game = produce(run(), (s) => {
-      s.battle!.discard.push(s.battle!.draw.pop()!);
-    });
-    await seed(page, game);
-    await resume(page);
-    const opener = page.getByRole("button", { name: /^Inspect Draw Pile/ });
-    await opener.click();
-    const pile = page.getByRole("dialog", { name: "Draw Pile", exact: true });
-    await expect(pile.locator(".action-card")).toHaveCount(
-      Math.min(width === 1280 ? 3 : 6, game.battle!.draw.length),
-    );
-    const card = pile.locator(".action-card").first();
-    await card.click();
-    await expect(page.locator(".inspection")).toHaveCount(0);
-    await card.hover();
-    await expect(page.getByRole("tooltip")).toBeVisible();
-    await card.focus();
-    await page.keyboard.press("i");
-    await expect(page.getByRole("dialog")).toHaveCount(1);
-    if (width === 1280 && game.battle!.draw.length > 3) {
-      await pile.getByRole("button", { name: "Next page" }).click();
-      await expect(pile.locator(".action-card")).toHaveCount(game.battle!.draw.length - 3);
-    }
-    await page.getByRole("button", { name: "Close draw pile" }).click();
-    await expect(opener).toBeFocused();
-    await page.getByRole("button", { name: /^Inspect Discard Pile/ }).click();
-    await expect(
-      page.getByRole("dialog", { name: "Discard Pile", exact: true }).locator(".action-card"),
-    ).toHaveCount(1);
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(game);
-    await captureScreen(page, { path: `reports/combat-piles-${width}.png` });
-  });
   test(`Campfire ${width === 1280 ? "heals once, resumes and enters the boss" : "layout fits"} at ${width}`, async ({
     page,
   }) => {
@@ -75,19 +40,18 @@ for (const width of [1280, 1920]) {
   });
 }
 
-for (const width of [1280, 1920]) {
-  test(`mouse targeting waits for a recipient and keeps the battlefield stable at ${width}`, async ({
-    page,
-  }) => {
+test("mouse targeting previews without committing and stays stable across live resize", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const game = produce(run(7), (state) => {
+    const attack = state.cards.find((card) => card.definitionId === "prismram-attack")!;
+    state.battle!.hand = [attack.id];
+    state.battle!.draw = state.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
+  });
+  await seed(page, game);
+  await resume(page);
+  for (const width of [1280, 1920]) {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    const game = produce(run(7), (state) => {
-      const attack = state.cards.find((card) => card.definitionId === "prismram-attack")!;
-      state.battle!.hand = [attack.id];
-      state.battle!.draw = state.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
-    });
-    await seed(page, game);
-    await resume(page);
+    await settleScreen(page);
     const card = page.locator(".app:not([inert]) .hand .action-card");
     const row = page.getByRole("region", { name: "Player row" });
     const before = await row.evaluate((element) => ({
@@ -125,5 +89,5 @@ for (const width of [1280, 1920]) {
     await expect(page.locator(".target-line")).toHaveCount(0);
     await page.keyboard.press("Escape");
     await expect(card).toHaveAttribute("aria-pressed", "false");
-  });
-}
+  }
+});

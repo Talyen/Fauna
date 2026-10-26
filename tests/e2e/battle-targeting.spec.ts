@@ -4,6 +4,17 @@ import { produce } from "immer";
 import { run } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
 
+function targetingBattle() {
+  return produce(run(7), (d) => {
+    const cards = d.cards.filter((c) =>
+      ["emberback-attack", "prismram-attack", "prismram-spectrum-lance"].includes(c.definitionId),
+    );
+    d.battle!.hand = cards.map((c) => c.id);
+    d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
+    d.battle!.discard = [];
+  });
+}
+
 test("battle artwork stays still at the minimum viewport with enlarged text", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
@@ -30,14 +41,7 @@ test("battle artwork stays still at the minimum viewport with enlarged text", as
 test("battle targeting uses remembered targets, forecasts bars, and has no targeted Play button", async ({
   page,
 }) => {
-  const fixture = produce(run(7), (d) => {
-    const cards = d.cards.filter((c) =>
-      ["emberback-attack", "prismram-attack", "prismram-spectrum-lance"].includes(c.definitionId),
-    );
-    d.battle!.hand = cards.map((c) => c.id);
-    d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
-    d.battle!.discard = [];
-  });
+  const fixture = targetingBattle();
   await seed(page, fixture);
   await resume(page);
   const before = await state(page);
@@ -68,13 +72,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
       await el.evaluate((node) => getComputedStyle(node).getPropertyValue("corner-shape")),
     );
   };
-  const fixture = produce(run(7), (d) => {
-    const cards = d.cards.filter((c) =>
-      ["emberback-attack", "prismram-attack", "prismram-spectrum-lance"].includes(c.definitionId),
-    );
-    d.battle!.hand = cards.map((c) => c.id);
-    d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
-    d.battle!.discard = [];
+  const fixture = produce(targetingBattle(), (d) => {
     d.battle!.enemies[0]!.health = 1;
   });
   await seed(page, fixture);
@@ -155,14 +153,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
 test("navigation returns to the nearest remaining card; denial is visual and respects motion", async ({
   page,
 }) => {
-  const fixture = produce(run(7), (d) => {
-    const cards = d.cards.filter((c) =>
-      ["emberback-attack", "prismram-attack", "prismram-spectrum-lance"].includes(c.definitionId),
-    );
-    d.battle!.hand = cards.map((c) => c.id);
-    d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
-    d.battle!.discard = [];
-  });
+  const fixture = targetingBattle();
   await seed(page, fixture);
   await resume(page);
   const cards = page.locator(".app:not([inert]) .hand .action-card");
