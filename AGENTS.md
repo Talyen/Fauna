@@ -27,8 +27,8 @@ Follow [Contributing](CONTRIBUTING.md#worktrees-and-integration) for review, com
 - [Creature design](Docs/CREATURE_DESIGN.md): use the [creature design skill](.agents/skills/fauna-creature-design/SKILL.md) for individual abilities and passives, artwork-led kit options, implementation, and Boss/Legendary design. Follow its [elegant mechanics standard](Docs/CREATURE_DESIGN.md#elegant-abilities-and-passives) for rules understood at a glance.
 - [Boon design skill](.agents/skills/fauna-boon-design/SKILL.md): use for artwork-led Boon proposals, distinct thematic mechanics, balance reasoning and exact effect descriptions; [content contracts](Docs/CONTENT.md#boon-selections) own implementation.
 - [UI task procedure](Docs/UI.md#required-review): the single checklist for visual and interaction work. Use the repo [UI design](.agents/skills/fauna-ui-design/SKILL.md), [UI critique](.agents/skills/fauna-ui-critique/SKILL.md), or [art direction](.agents/skills/fauna-art-direction/SKILL.md) skill for the corresponding task; consult [references](design/visual-quality/README.md) for composition or art direction
-- [UI, interaction and accessibility](Docs/UI.md), [menus and inspection](Docs/MENU_DESIGN.md), [expedition and progression](Docs/EXPEDITION_DESIGN.md).
-- [Gameplay vocabulary](Docs/GLOSSARY.md): `src/game/glossary.ts`.
+- [UI, interaction and accessibility](Docs/UI.md), [menus and inspection](Docs/ui/screens.md#navigation-and-menus), [expedition and progression](Docs/EXPEDITION_DESIGN.md).
+- [Gameplay vocabulary](Docs/KEYWORDS.md#glossary-and-terminology): `src/game/glossary.ts`.
 - [Run and verification commands](CONTRIBUTING.md#verification), [release and platform verification boundaries](Docs/RELEASE.md).
 
 ## Development saves

@@ -1,31 +1,14 @@
 # Aerostat
 
-[Creature index](README.md) · [Kit](../../../src/game/content/creatures/aerostat.ts) · [Food execution](../../../src/game/combat/food.ts) · [Regressions](../../../tests/unit/game/creatures/aerostat.test.ts)
+[Creature index](README.md) · [Food execution](../../../src/game/combat/food.ts) · [Regressions](../../../tests/unit/game/creatures/aerostat.test.ts)
 
-Aerostat is a 30-Health traveling quartermaster. The owner selected its kit on October 25, 2026: travel packs and provisions establish its resource identity, with Voyager’s Rest providing a simple defensive option. Aerostat joins ordinary encounter packs, recruitment and collected starter drafts. Its support-only kit is excluded from the first-run starter pool.
+Use the [authored kit](../../../src/game/content/creatures/aerostat.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#aerostat) preserve historical tuning.
 
-## Selected kit
+Aerostat is a traveling quartermaster. The owner selected its kit on October 25, 2026: travel packs and provisions establish its resource identity, with Voyager’s Rest providing a simple defensive option. Aerostat joins ordinary encounter packs, recruitment and collected starter drafts. Its support-only kit is excluded from the first-run starter pool.
 
-Every ability costs 1 Mana:
+## Well Provisioned
 
-| Ability        | Base rule                                |
-| -------------- | ---------------------------------------- |
-| Voyager’s Rest | Gain 6 Block                             |
-| True Bearing   | Draw 2 cards / Cleanse Blind from allies |
-| Parcel Drop    | Add 2 Food to your hand                  |
-
-**Well Provisioned:** Start with X Food cards in your deck
-
-| Stars | Food |
-| ----- | ---- |
-| 0     | 1    |
-| 1     | 2    |
-| 2     | 3    |
-| 3     | 4    |
-| 4     | 5    |
-| 5     | 6    |
-
-Each tier replaces the previous tier. Each living, deployed Aerostat contributes its own tier at battle startup. Fallen or backup Aerostats contribute nothing. Supplies are independently chosen from Apple, Mana Berries and Trail Bread with equal probability; duplicates are possible. They enter the draw pile before its shuffle and ordinary opening draws, rather than being guaranteed in the opening hand. Startup uses the shared generation owner, deterministic RNG, neutral ownership, level-zero temporary cards and ordinary battle capacity. Supplies award no draw or creation XP and their creation does not trigger Well Read.
+Each living, deployed Aerostat contributes its own tier at battle startup. Fallen or backup Aerostats contribute nothing. Supplies are independently chosen from Apple, Mana Berries and Trail Bread with equal probability; duplicates are possible. They enter the draw pile before its shuffle and ordinary opening draws, rather than being guaranteed in the opening hand. Startup uses the shared generation owner, deterministic RNG, neutral ownership, level-zero temporary cards and ordinary battle capacity. Supplies award no draw or creation XP and their creation does not trigger Well Read.
 
 Well Provisioned supplies resources before any ability is drawn. This differs from Orifable’s extra turn-start draw and Rookhaven’s copies of actual draws. Resume, turns, swaps and recruitment during combat never replay the opening grant. Duplicate providers add their counts; existing supplies remain usable when a provider leaves or falls.
 

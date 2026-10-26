@@ -18,7 +18,7 @@ Apply these rules to every UI change, then read only the affected sections below
 | Composition or fit            | [Layout and artwork](#layout-artwork-size-and-spacing), [shared recipes](#shared-layout-recipes), affected screen                                                           |
 | Typography, colors or effects | [Tokens](#tokens), [combat vocabulary](#combat-vocabulary), [keyword effects](#keyword-visual-effects)                                                                      |
 | Failure behavior              | [Recovery policy and owners](#recovery-and-persistent-failures)                                                                                                             |
-| Navigation or progression     | [Menus](MENU_DESIGN.md), [Journey](EXPEDITION_DESIGN.md), [Keywords](KEYWORDS.md)                                                                                           |
+| Navigation or progression     | [Menus](ui/screens.md#navigation-and-menus), [Journey](EXPEDITION_DESIGN.md), [Keywords](KEYWORDS.md)                                                                       |
 | Implementation or checks      | [Design system](DESIGN_SYSTEM.md); [preview/capture tools](DEVELOPMENT_TOOLS.md#task-checkouts-and-previews)                                                                |
 
 These contracts remain applicable when a shared change affects several flows; selective reading does not exempt affected behavior.

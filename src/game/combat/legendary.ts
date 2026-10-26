@@ -79,10 +79,8 @@ export function summonEcho(
   const minions = state.battle.minions ?? (state.battle.minions = []);
   const owned = minions.filter((unit) => unit.minion.ownerId === actor.id);
   const alive = owned.filter((unit) => unit.health > 0);
-  if (alive.length >= MINION_LIMIT) {
-    for (const unit of alive) restoreHealth(unit, unit.maxHealth, events, false, state);
-    return;
-  }
+  for (const unit of alive) restoreHealth(unit, unit.maxHealth, events, false, state);
+  if (alive.length >= MINION_LIMIT) return;
   const old = owned.find((unit) => unit.health === 0);
   const id = old?.id ?? `echo-${actor.id}-${owned.length}`;
   const echo = {

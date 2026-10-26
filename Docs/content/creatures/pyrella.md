@@ -2,17 +2,15 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Pyrella has 26 Health and enters the ordinary encounter, recruitment and progressed draft pools. The first solo starter pool is unchanged. The selected kit was approved on 2026-10-25:
+Use the [authored kit](../../../src/game/content/creatures/pyrella.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#pyrella) preserve historical tuning.
 
-- **Festival Burst:** Deal 2 Burn damage to all enemies
-- **Ember Harvest:** Restore 1 Mana / Draw a Burn card
-- **Spark Decoy:** Gain 3 Fire Thorns / Gain Negate
+Pyrella enters the ordinary encounter, recruitment and progressed draft pools. The first solo starter pool is unchanged. The selected kit was approved on October 25, 2026.
 
 Every card costs 1 Mana. Festival Burst follows ordinary attack upgrades and room power. Ember Harvest refunds Mana before drawing and before automatic end turn; primary Mana upgrades add two per level while the Burn draw remains one. It follows hand/overflow, eligible living-owner, recycling and Mana caps. It grants Mana XP, while drawing a Burn card does not grant Burn XP. Enemies omit Ember Harvest and use their two supported cards. Spark Decoy adds two Fire Thorns per level, refreshes one non-stacking Negate and grants Burn XP. Negate and Fire Thorns use the shared [protection rules](../../KEYWORDS.md#thorns-and-water-thorns).
 
 ## Passing Flame
 
-The complete replacement tiers at zero through five stars spread **20%, 35%, 50%, 65%, 80% and 100%** of a defeated Burning opponent's remaining Burn. The final tier says “After defeating a Burning enemy, spread its remaining Burn to other enemies” without a percentage. The [authored kit](../../../src/game/content/creatures/pyrella.ts) owns the exact descriptions.
+Passing Flame spreads a rank-dependent portion of a defeated Burning opponent's remaining Burn.
 
 Only the Pyrella credited with the defeat triggers its passive, while alive and deployed. Direct damage, attributed periodic damage and Fire Thorns can qualify; a teammate's defeat does not. Enemy Pyrella uses the base tier. Death's Door must actually expire and Health reach zero before a roster creature counts as defeated. Multiple Pyrellas do not each trigger from another creature's kill.
 

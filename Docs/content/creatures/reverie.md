@@ -1,17 +1,11 @@
 # Reverie
 
-[Current kit](../../../src/game/content/creatures/reverie.ts)
+Use the [authored kit](../../../src/game/content/creatures/reverie.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#reverie) preserve historical tuning.
 
-Reverie is a 28-Health ordinary support creature, titled “The sanctuary of dreams”
+Reverie is an ordinary support creature, titled “The sanctuary of dreams”
 The user selected this kit on October 23, 2026
 
-| Ability           | Base rules                                          |
-| ----------------- | --------------------------------------------------- |
-| Waking Wonder     | Draw 2 cards                                        |
-| Dream Double      | Gain 3 Thorns / Negate the next attack against you  |
-| Nightmare Harvest | Cleanse all allies / Gain 1 Mana per effect removed |
-
-All three cost 1 Mana. Unhurried reads “At the end of your turn, each ally that played no cards restores X Health”, with X equal to 1, 2, 3, 4, 5 and 6 at zero through five stars
+All three cost 1 Mana. Unhurried restores rank-dependent Health at turn end to allies that played no cards
 
 ## Identity and resolution
 

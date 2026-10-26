@@ -1,16 +1,8 @@
 # Tournelle
 
-[Current kit](../../../src/game/content/creatures/tournelle.ts)
+Use the [authored kit](../../../src/game/content/creatures/tournelle.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#tournelle) preserve historical tuning.
 
-Tournelle is a 30-Health ordinary creature whose scarf, sunburst brooch and rescue imagery inform a protective Light kit. The user selected these rules on October 22, 2026
-
-| Ability           | Base rules                                                              |
-| ----------------- | ----------------------------------------------------------------------- |
-| Kindled Courage   | Cleanse allies Blind / Draw a Light card                                |
-| Valiant Challenge | Deal 4 Light damage / Doubled against enemies with more Health than you |
-| Safe Passage      | Swap out the lowest Health ally / Draw a Card                           |
-
-Every ability costs 1 Mana. Gallantry reads “10% chance to intercept attacks against a more injured ally”, increasing by 10 percentage points per rank through 60%
+Tournelle is an ordinary creature whose scarf, sunburst brooch and rescue imagery inform a protective Light kit. The user selected these rules on October 22, 2026
 
 ## Resolution
 

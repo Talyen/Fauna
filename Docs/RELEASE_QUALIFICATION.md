@@ -21,12 +21,10 @@ Retain the immutable Windows candidate, its matching dependency SBOM and third-p
 
 ## External setup
 
-- [ ] Configure Fauna's own Steam App ID in [Steam configuration](../desktop/steam-config.json); qualify its native binding against that client
-- [ ] Keep Dynamic Cloud Sync disabled until remote-file-change handling exists; publish Cloud settings after configuration
-- [ ] Complete the content survey and Store fields using [Store preparation](STEAM_STORE.md)
-- [ ] Configure application-managed Cloud quota for 32 device streams, two slots each, up to 1 MiB per slot; do not also Auto-Cloud those progression paths
-- Paid signing remains deferred; configure the optional [signed installer path](RELEASE.md#candidate-signing-and-qualification) only after an explicit distribution decision
-- [ ] Confirm the privacy/support policy for device-local diagnostics; sharing remains player initiated and no uploads are enabled
+- [ ] Complete the [Steam setup procedure](RELEASE.md#steam-setup) and retain configuration/publication evidence:
+- [ ] Record the completed content survey and Store review from [Store preparation](STEAM_STORE.md):
+- [ ] Record the confirmed privacy/support policy and consent process for local diagnostics:
+- Optional signed installer setup/evidence, only for the selected distribution path: [signing procedure](RELEASE.md#candidate-signing-and-qualification)
 
 ## Clean Windows and Steam acceptance
 

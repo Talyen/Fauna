@@ -124,6 +124,8 @@ function validateRoster(state: GameState) {
     !unique([...state.team, ...state.reserves].map((c) => c.id)) || !unique(state.cards.map((c) => c.id)),
   );
   invalid(state.team.length + state.reserves.length > 5);
+  // Reserve battle-generated identities before a destination can create those combatants.
+  invalid([...state.team, ...state.reserves].some((unit) => /^(?:enemy-|echo-)/.test(unit.id)));
   invalid(!unique([...state.team, ...state.reserves].map((creature) => creature.species)));
   invalid([...state.team, ...state.reserves].some((creature) => !collected.includes(creature.species)));
   invalid([...state.team, ...state.reserves].some((c) => c.health > species(c.species).health));
@@ -349,6 +351,8 @@ function validateCombatants(state: GameState) {
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
       invalid(
         Object.values(stats.statusSources).some((id) => !allCombatants.some((unit) => unit.id === id)) ||
+          !unique(stats.bleedLeech.map((row) => row.sourceId)) ||
+          stats.bleedLeech.some((row) => row.amount === 0) ||
           stats.bleedLeech.reduce((sum, row) => sum + row.amount, 0) > stats.bleed ||
           stats.bleedLeech.some((row) => !allCombatants.some((source) => source.id === row.sourceId)),
       );

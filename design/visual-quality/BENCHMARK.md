@@ -10,10 +10,6 @@ Use these three cases when changing the skills. Keep gameplay fixture, asset gen
 
 For each run, record concrete findings and fixes for composition, unnecessary copy, artwork cohesion and interaction. Count avoidable instructional/repeated phrases separately from essential gameplay rules. Do not optimize total word count by hiding useful information. Record fit and control reachability at 1280×720 with 125% text, plus the default-size comparison at 1920×1080. Present matching A/B frames for user preference; do not assign the agent's own aesthetic score.
 
-## Initial exercise
+## Recorded exercises
 
-The [Merchant pilot](PILOT.md) is the first before/after application and failed its aesthetic goal: the user rejected both and preferred A. B is reverted in production. The original benchmark favored easier comparison and restrained controls, which rewarded the very changes made in B. Those preferences were not supplied by the user. That circular success criterion is removed; information exposure and button de-emphasis are not aesthetic success measures. Functional and rendered observations are recorded separately from user preference.
-
-Settings and Battle were captured and visually inspected as transfer cases, without redesigning their production screens. Settings repeats the active Display category as a section legend; the design skill should recognize that repetition instead of adding help copy. Battle already prioritizes illustrations and End turn; the critique skill must inspect targeting before recommending another idle label. These observations exercise routing and restraint, not proof that the skills improve those two screens. Their implementation comparisons remain future benchmark runs, outside this one-screen pilot.
-
-The skills' frontmatter validation checks discoverability and structure only. The initial Merchant result is a failed aesthetic benchmark. A reviewable change and passing checks did not predict user preference; future runs must improve on that result without treating A as approved.
+The [Merchant pilot](PILOT.md) records the failed initial aesthetic benchmark, subsequent user direction and implementation evidence. Settings and Battle were captured as transfer cases without redesigning production; their implementation comparisons remain future benchmark runs. Skill frontmatter validation establishes structure/discoverability only. Use the pilot's recorded failures when assessing workflow changes; completed checks do not establish user preference.

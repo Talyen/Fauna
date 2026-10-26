@@ -6,7 +6,7 @@ Fauna targets Windows x64 on Steam and runs offline without Steam, servers or ac
 
 ## Shipping requirements
 
-1. **Prepare:** configure Fauna's own App/depot, Cloud quota and App ID in `desktop/steam-config.json`; never reuse Alchemy's identities or saves. Cloud/overlay adapters exist, but a null App ID disables Steam integration; the full release gate rejects missing, invalid and Spacewar IDs; version-only and ordinary development checks remain available; achievements are unimplemented
+1. **Prepare:** complete [Steam setup](#steam-setup) for Fauna's own application and depot
 2. **Build and identify:** use the final clean tagged commit, retain its successful full CI and run the [release identity gate](#release-verification-and-player-notes). Windows uses electron-builder and `com.fauna.game`; the unpacked x64 package contains only the renderer, desktop code and required runtime dependencies
 3. **Qualify:** complete the [candidate record](RELEASE_QUALIFICATION.md) on the actual Steam depot, resolving Windows launch blocks and recording physical-controller, Deck, display and live Cloud results. Finish artwork/audio, source-rights review, store material and privacy/support decisions
 
@@ -55,19 +55,18 @@ Content-hashed prepared artwork and audio use a one-year immutable browser cache
 
 The SPA fallback serves the application entry point for browser navigation. Saves remain in that browser's local storage; desktop Steam Cloud, native controls and packaged Windows behavior require their own qualification. A Vercel build establishes web build evidence, not the complete GitHub CI or native release gate. Release-tag Deploy Hook automation is not configured.
 
-## Steam qualification
+## Steam setup
 
-Configure application-managed Cloud in Fauna's versioned device-slot namespace: 32 streams, two slots each, at most 1 MiB per slot. Do not also Auto-Cloud those progression directories. [Architecture](ARCHITECTURE.md#cloud-reconciliation-and-device-preferences) owns ancestry, preservation, profile separation and offline behavior.
+Partner identity verification and application creation are pending; Fauna has no Store page or assigned App ID yet. After verification, complete this setup for the candidate:
 
-The main process receives `GameOverlayActivated_t` through Valve's flat manual-dispatch API, using Koffi and the already bundled Steam library. Cloud uses steamworks.js in its separate utility process, so ordinary and manual callback dispatch never share a process. Graphics switches are installed before Electron readiness. Native export/payload tests and packaged smoke load the real callback binding without initializing Steam; they do not prove live overlay behavior.
+1. Create Fauna's own application, Windows x64 depot and packages. Enter the assigned App ID in [steam-config.json](../desktop/steam-config.json); never reuse another game's identities or saves. A null ID disables Steam integration; full release verification rejects missing, invalid and Spacewar IDs, while ordinary development and version-only checks remain available
+2. Configure the depot to launch `Fauna.exe` from the verified unpacked game directory. Upload that immutable game artifact through the authorized delivery process; an NSIS installer belongs only to the optional direct-download path
+3. Configure and publish application-managed Cloud for at least 64 files and 64 MiB per user: 32 device streams, two slots each, up to 1 MiB per slot. Keep **Dynamic Cloud Sync disabled** because the adapter does not consume in-session remote-file-change callbacks. Do not also Auto-Cloud progression paths, device preferences, diagnostics or identity metadata
+4. Enable intended controller types through Steam Input and publish recommended configurations. Qualify actual hardware and prompts, including emulated Xbox identities
+5. Complete the Content Survey, regional ratings, support contact, system requirements, price and release checklist using [Store preparation](STEAM_STORE.md). Confirm the privacy/support policy for device-local diagnostics; sharing remains player initiated without uploads
+6. Record actual setup and acceptance evidence in the [candidate record](RELEASE_QUALIFICATION.md), including live overlay, two-device Cloud, physical controllers and Deck. Achievements remain unimplemented
 
-Keep **Dynamic Cloud Sync disabled** in Steamworks: the current adapter does not consume in-session remote-file-change callbacks. Ordinary session-start/session-exit Cloud remains the intended setup. Do not Auto-Cloud device preferences, diagnostics or identity metadata.
-
-Use the [live Steam/two-device checklist](RELEASE_QUALIFICATION.md#live-steam-and-two-device-cloud) and [physical controls/Deck checklist](RELEASE_QUALIFICATION.md#physical-controls-and-steam-deck). Fake events test lifecycle only; smoke, preview and performance profiles bypass real Steam.
-
-## Store setup and content disclosure
-
-Partner identity verification and creation of Fauna's application are pending; there is no Store page or assigned App ID yet. Configure the assigned ID in the existing Steam configuration once available. See [Store preparation](STEAM_STORE.md) for the owner-confirmed AI disclosure, feature claims and remaining external setup.
+[Architecture](ARCHITECTURE.md#cloud-reconciliation-and-device-preferences) owns Cloud reconciliation, profiles and offline behavior. The main process receives overlay events through Valve's flat manual-dispatch API using Koffi and the bundled Steam library; Cloud uses steamworks.js in a separate utility process. Graphics switches precede Electron readiness. Native export/payload tests and packaged smoke load the real callback binding without initializing Steam; fake events establish lifecycle behavior, while smoke, preview and performance profiles bypass live Steam.
 
 ## Display acceptance
 

@@ -11,7 +11,7 @@
 
 Reports remain under ignored `reports/`; retain their source/checkpoint identities and actual completion status. Failed/incomplete captures are diagnostics, never accepted evidence. Browser automation simulates input; [Release](RELEASE.md) owns native, package and hardware qualification. [UI review](UI.md#required-review) owns rendered acceptance.
 
-Command examples describe tool interfaces, not permission to run heavy work locally. Production builds, browser/desktop suites, balance simulations, performance captures and every diagnostic mode are CI-owned; local execution requires the explicit user request described in [Contributing](../CONTRIBUTING.md#execution-and-evidence). The launcher also guards read-only subcommands of those entrypoints, including route `--list`, `balance:compare -- compare` and `perf:compare`. Task-owned focused visual preview/capture remains authorized under UI review. For one exact local regression, use `npm test -- <suite>` rather than diagnostic mode; `balance:findings` can analyze an existing report without running simulations.
+All commands follow [Contributing's execution policy](../CONTRIBUTING.md#execution-and-evidence), including the focused visual-review exception. The launcher also guards read-only subcommands of expensive entrypoints: route `--list`, `balance:compare -- compare` and `perf:compare`. Use `npm test -- <suite>` for one exact regression rather than diagnostic mode; `balance:findings` analyzes existing reports without simulations.
 
 ## Task checkouts and previews
 
@@ -53,7 +53,7 @@ After building, `npm run test:interactions -- --seed 42 --steps 24 --family mixe
 
 `npm run content:audit` reports authored-content errors and warnings by stable ID and field, and writes `reports/content-audit.json`. The pure validator in `src/game/content-validation.ts` also supplies startup validation through the existing `validateContent` export. It checks IDs, owners, supported magnitudes/costs, effect and keyword registration, encounter packs, boss positions, stats, and talent rows/references. Missing player cards for a progression keyword are advisory warnings.
 
-Card descriptions derive from their structured effects. Handwritten traits, boons and talent prose still need focused gameplay tests and review; the validator does not prove arbitrary English describes a resolver correctly. Media checks validate manifest coverage, image geometry, preparation identities and output bytes. CI runs the content audit.
+Descriptions derive from structured effects or shared rule parameters where supported; [Content](CONTENT.md#adding-gameplay-modifiers) owns those bindings. Focused gameplay tests and review still establish whether displayed rules match execution; validation cannot prove arbitrary English correct. Media checks validate manifest coverage, image geometry, preparation identities and output bytes. CI runs the content audit.
 
 ## Prepared media and Sound desk
 
@@ -87,11 +87,11 @@ The opt-in runner uses production application commands, current save validation,
 | Replay          | Matching code/content identity and exact checkpoints required; any divergence fails                                                           |
 | Comparison      | Completed careers with matching initial checkpoints/settings; changed code identity is explicit; changed save formats require fresh baselines |
 
-Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests; larger sweeps need a deliberate hosted run or explicit heavy-local authorization. These are automated-policy observations, not human win rates or rendered acceptance.
+Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests. These are automated-policy observations, not human win rates or rendered acceptance.
 
 ## Paired balance reports
 
-Run identical suites from two code versions in hosted execution, then compare their reports. If heavy local execution is explicitly authorized, choose a bounded subset within its command budget:
+Run identical suites from two code versions, then compare their reports under the shared [execution policy](../CONTRIBUTING.md#execution-and-evidence):
 
 ```sh
 npm run balance:compare -- run --starters emberback --seeds 0,1 --evidence full --out reports/balance/smoke
@@ -159,7 +159,7 @@ The [hitch attribution implementation record](archive/PERFORMANCE_ATTRIBUTION_PL
 The [October 22 frame pacing investigation](task-evidence/2026-10-22-frame-pacing.md) records
 shared layout and animation optimizations, visual parity evidence and remaining device qualification.
 
-For a bounded battle investigation in hosted execution or explicitly authorized heavy local execution, build with `npm run verify:changed -- --diagnostic build`, then run `npm run verify:changed -- --diagnostic performance battle`. Diagnostic mode uses the same execution policy as the capture/replay commands below.
+For a bounded battle investigation, build with `npm run verify:changed -- --diagnostic build`, then run `npm run verify:changed -- --diagnostic performance battle`. Diagnostic mode uses the same execution policy as the capture/replay commands below.
 
 Build once with `npm run build`, then run `npm run perf -- --out reports/performance/baseline`. Fixed scenarios cover target preview/cancellation, area reactions, repeat/draw overflow, card play/enemy turns, required knockout replacements and Collection/menu transitions. Select `--scenario preview`, `area-reactions`, `draw-repeat`, `battle`, `swap` or `menus`. Named fixtures explicitly grant their roster, ranks and conditions; they are validated as current-format saves, not claimed to be earned progression. The driver uses normal controls in fresh browser contexts, an owned production preview on a free port, and muted speaker output.
 
@@ -213,7 +213,7 @@ Only the base and extra suite paths are stored, never passing results. Test and 
 
 ### Bounded diagnostics
 
-The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`, `browser <route>` and `performance <scenario>`. All modes follow the [CI-first execution policy](../CONTRIBUTING.md#execution-and-evidence), including `unit` with exact paths; omit paths to select the full unit/DOM/exhaustive set. Use `npm test -- <suite>` for one bounded local regression. Browser routes are battle, settings, collection, progression and persistence; performance scenarios are battle, swap and menus. Build first for production browser/performance diagnostics.
+The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`, `browser <route>` and `performance <scenario>`. All modes follow the linked execution policy, including `unit` with exact paths; omit paths to select the full unit/DOM/exhaustive set. Browser routes are battle, settings, collection, progression and persistence; performance scenarios are battle, swap and menus. Build first for production browser/performance diagnostics.
 
 The coverage plan prints batches, compiler environments, documentation coverage and required-suite rationale. Import suggestions and unresolved imports appear only with `--related`; timing history never changes coverage. Empty selections run no checks. [Script owners](../scripts/README.md#task-check-implementation) locate batching, validation and cancellation implementations.
 

@@ -1,39 +1,22 @@
 # Arabesca
 
-[Kit](../../../src/game/content/creatures/arabesca.ts) · [Ability and passive regressions](../../../tests/unit/game/ability-contracts.test.ts) · [Review fixture](../../../tests/support/arabesca.ts)
+[Ability and passive regressions](../../../tests/unit/game/ability-contracts.test.ts) · [Review fixture](../../../tests/support/arabesca.ts)
 
-Arabesca is a 26-Health spring dancer. The owner selected Ribbon Snare, Springbound, Dancing Double and allied Dodge healing on October 25, 2026. Allies include Arabesca herself. Her kit uses short, direct rules tied to the depicted action.
+Use the [authored kit](../../../src/game/content/creatures/arabesca.ts) for current values and complete tiers; [recorded selection values](../../archive/CREATURE_KIT_SELECTIONS.md#arabesca) preserve historical tuning.
+
+Arabesca is a spring dancer. The owner selected Ribbon Snare, Springbound, Dancing Double and allied Dodge healing on October 25, 2026. Allies include Arabesca herself. Her kit uses short, direct rules tied to the depicted action.
 
 ## Petalwake
 
-Restore X Health to allies when you Dodge
-
-| Stars | Health restored to each ally |
-| ----- | ---------------------------- |
-| 0     | 1                            |
-| 1     | 2                            |
-| 2     | 3                            |
-| 3     | 4                            |
-| 4     | 5                            |
-| 5     | 6                            |
-
-Each tier replaces the complete previous passive. Every Arabesca Dodge heals her living deployed side, including herself and allied Minions. Knocked-out creatures are excluded; the shared automatic-healing owner includes backups when Camp Hammock is owned. Another creature's Dodge does not activate her passive. Duplicate Arabescas each heal only when that individual Dodges. Enemy Arabescas use the base tier and heal their own side.
+Every Arabesca Dodge heals her living deployed side, including herself and allied Minions. Knocked-out creatures are excluded; the shared automatic-healing owner includes backups when Camp Hammock is owned. Another creature's Dodge does not activate her passive. Duplicate Arabescas each heal only when that individual Dodges. Enemy Arabescas use the base tier and heal their own side.
 
 Blind misses already resolve as Dodge and activate Petalwake. Negate, Block and periodic damage do not. Healing uses ordinary recipient modifiers, Health caps and healing-triggered Boons, without card-only overhealing rewards. Catch Breath restores Health to the Dodging creature; Petalwake also restores her companions. Cindernewt retaliates on Dodge instead of healing.
 
 ## Abilities
 
-All three cost 1 Mana.
+Ribbon Snare uses ordinary Stun damage and buildup, Armor, Block, Dodge and critical-hit rules. Damage follows ordinary ability upgrades before amplification. Its six-point starting value follows the ordinary attack budget.
 
-| Ability        | Base rule                                                                |
-| -------------- | ------------------------------------------------------------------------ |
-| Ribbon Snare   | Deal 6 Stun damage                                                       |
-| Springbound    | Cleanse all Freeze build-up from allies / Gain 30% Dodge until next turn |
-| Dancing Double | Your next card is played twice                                           |
-
-Ribbon Snare uses ordinary Stun damage and buildup, Armor, Block, Dodge and critical-hit rules. Upgrades deal 6/8/10/12 damage before amplification. Its six-point starting value follows the ordinary attack budget.
-
-Springbound removes Freeze buildup from living deployed allies, including Arabesca and Minions, then grants temporary Dodge to Arabesca alone. It reuses Thaw Path's buildup removal: active Freeze and unrelated harmful effects remain unchanged. Dodge expires with the owner's ordinary action window, including in backup or on a skipped turn. Upgrades grant 30/32/34/36 percentage points, subject to ordinary Dodge caps. The situational team cleanse supplements a self-protection card; its value depends on the opposition.
+Springbound removes Freeze buildup from living deployed allies, including Arabesca and Minions, then grants temporary Dodge to Arabesca alone. It reuses Thaw Path's buildup removal: active Freeze and unrelated harmful effects remain unchanged. Dodge expires with the owner's ordinary action window, including in backup or on a skipped turn. The Dodge bonus follows ordinary ability upgrades and caps. The situational team cleanse supplements a self-protection card; its value depends on the opposition.
 
 Dancing Double exchanges a card and Mana for one additional resolution of a later card. It can prepare an ally's powerful attack or utility, and its payoff depends on that card and available Mana. The effect is fixed across ability upgrades, like existing fixed protection and resurrection effects. These budget observations do not establish measured balance.
 
@@ -43,7 +26,7 @@ Dancing Double exchanges a card and Mana for one additional resolution of a late
 
 Dancing Double does not repeat itself when initially played. If an existing grant doubles it, its resolutions refresh one future grant rather than stacking charges or recursing. Shared Food can consume the grant, resolves twice and is Consumed once; creature-specific Food exclusions remain unchanged. The grant survives turns, creator departure, swaps and save/resume, and resets with a new battle. Rejected commands and detached previews cannot consume the live grant. The battle shows Next card ×2 while the player's grant is pending.
 
-Save format 58 records both side grants and rejects obsolete development saves without migrations. Existing ability snapshots retain their format-57 metadata envelope and omit dormant repeat flags for comparison; active grants and the new mechanics have direct regression assertions.
+[Implementation evidence](../../task-evidence/arabesca.md) records the original save-format and baseline changes.
 
 ## Play pattern and availability
 

@@ -8,7 +8,7 @@
 
 ## Merchant
 
-On 2026-10-22 the user rejected both Merchant designs and preferred A over B. A was restored after that feedback; the later [user-directed revision](references/merchant-current-1280.png) is now implemented with names in inspection, secondary purchase controls, Gold in the header and a centered italic “Limit 1 per customer - No Refunds!” line above the shelf. Prices now roll independently from 20–40 Gold and persist with the offers. Its aesthetic acceptance remains pending. Neither is an approved whole-screen reference. Never infer approval from integration, passing checks or silence. The older [battle A composition](../battle-layout/README.md) and [interaction decisions](../PHONE_DECISIONS.md) retain only their documented scope; current contracts supersede outdated details.
+On October 22, 2026, the user rejected both Merchant designs and preferred A over B. Neither is an approved whole-screen reference. The [pilot record](PILOT.md) owns the experiment, restoration, subsequent requested revisions and their attempt-specific checks; the current requested composition remains pending aesthetic acceptance. Current behavior belongs to the [Merchant specification](../../Docs/ui/screens.md#boon-merchant).
 
 View the [unbiased A/B sheet](comparison.html), [enlarged-text comparison A](references/merchant-before-1280-large.png), [enlarged-text comparison B](references/merchant-candidate-1280-large.png), and [pilot review](PILOT.md). At 1920×1080: [A](references/merchant-before-1920.png), [B](references/merchant-candidate-1920.png). Labels A/B identify options without a recommendation badge; the review record separately explains the implementation hypothesis.
 
