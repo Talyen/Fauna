@@ -1,10 +1,10 @@
 # Make passive, Talent and Boon execution explicit
 
-Implemented locally; hosted verification remains pending. The [implementation record](task-evidence/2026-10-23-modifier-contracts.md) owns the delivered changes and evidence scope. Current contracts remain in [Architecture](ARCHITECTURE.md#modifier-ownership).
+At the October 23, 2026 implementation handoff, source was integrated locally and hosted verification was pending. The [implementation record](task-evidence/2026-10-23-modifier-contracts.md) owns the delivered changes and evidence scope. Current contracts remain in [Architecture](ARCHITECTURE.md#modifier-ownership).
 
 The final design uses immutable, type-checked module/export references and verifies them against production selectors and callers. Existing timing owners invoke their named functions directly; the ownership map does not add a runtime dispatcher. Boon parameters are shared with descriptions and visible assessments. The exact focused suite passes its pre-refactor comparisons after protected integration.
 
-The [follow-through record](task-evidence/2026-10-23-modifier-followthrough.md) adds shared Talent parameters and explicit deferred-effect producer/query/consumer bindings, preserving this canonical design. Its combined-runtime validation remains a separate pending CI gate.
+The [follow-through record](task-evidence/2026-10-23-modifier-followthrough.md) adds shared Talent parameters and explicit deferred-effect producer/query/consumer bindings, preserving this canonical design. Its combined-runtime validation was deferred to CI at that handoff.
 
 The original source assessment and proposed delivery sequence below are retained as history. They were written October 23, 2026 against committed local main `36da356f5ce60e2978af2eef44292aaff36867da`.
 

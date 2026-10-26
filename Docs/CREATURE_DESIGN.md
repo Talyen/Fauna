@@ -33,7 +33,7 @@ Recommend one passive as part of the complete kit. Provide:
 - Its difference from existing passives, useful synergies and a weakness or counterplay
 - All six complete tiers and any new mechanic needed
 
-Prefer general gameplay interactions over bonuses to named abilities. The passive should matter at zero stars and work without one mandatory partner or rare Boon. Check duplicate-species stacking and avoid extra keywords or exceptions that add complexity without a better decision.
+Prefer general gameplay interactions over bonuses to named abilities. The passive should matter at zero stars and work without one mandatory partner or rare Boon. Check repeated triggers and Talent/Boon stacking within the one-individual-per-species roster, and avoid extra keywords or exceptions that add complexity without a better decision.
 
 All six tiers must have different gameplay effects; each replaces the complete previous tier. A shared rule plus six amounts/chances is enough for comparison. Fully specify the selected tiers before implementation, checking caps and rounding for ineffective upgrades. Enemies use the base tier; player rank and ability upgrades are separate progression axes.
 
@@ -67,7 +67,7 @@ For utility, use comparable current abilities to give a provisional valuation or
 
 Pay for utility by reducing other effects; a complete six-point effect does not get free draw or Mana. Confirm the payoff can occur: next-turn Mana may be erased by the reset or capped away by the normal refill. Check full-Health healing, status caps and counter resets similarly.
 
-Estimate the card alone, the complete kit at base and advanced progression, and strong talent/Boon/duplicate-creature combinations. Verify actual upgrade behavior: primary values commonly gain two per level, while fixed extras and effect counts may not. Point estimates guide tuning; they do not establish balanced win rates.
+Estimate the card alone, the complete kit at base and advanced progression, and strong talent/Boon combinations within valid rosters. Verify actual upgrade behavior: primary values commonly gain two per level, while fixed extras and effect counts may not. Point estimates guide tuning; they do not establish balanced win rates.
 
 ## Present the kit
 
@@ -96,7 +96,7 @@ Give the boss recognizable setup, pressure, payoff and an accessible response wi
 
 Preserve the core identity when recruited. Assess the full turn/cycle and justify budget exceptions as part of the solo kit; Legendary status does not make every card stronger by default. Treat phases, new resources or alternate victory rules as explicit proposals with presentation and implementation costs.
 
-Audit enemy support rather than assuming `legendary: true` enables a new engine: current [enemy card rules](../src/game/card-rules.ts) allow primary draw specifically for Memento, and [boss priorities](../src/game/combat/legendary.ts) know its Echo/Pearl loop. Define generation limits, ownership, cleanup and save/resume. Existing 256-card and enemy-decision bounds protect execution, not pacing.
+Audit enemy support rather than assuming `legendary: true` enables a new engine: current [enemy card rules](../src/game/card-rules.ts) allow primary draw specifically for Memento, and the shared [enemy evaluator](../src/game/combat/enemy-policy.ts) values immediate outcomes, including Memento’s post-card Echo attacks. [Legendary execution](../src/game/combat/legendary.ts) owns its deck, Pearls and Echoes. Define generation limits, ownership, cleanup and save/resume. Existing 256-card and enemy-decision bounds protect execution, not pacing.
 
 ## Implementation and validation
 

@@ -1,6 +1,6 @@
 # Performance hitch attribution plan
 
-Status: implemented; focused regressions and rendered preview evidence are recorded below; full CI and native/performance captures remain pending
+At the October 23, 2026 implementation handoff, source was implemented and the focused regressions and rendered preview evidence below were recorded; full CI and native/performance captures were pending
 
 ## Goal and scope
 
@@ -10,7 +10,7 @@ Extend the existing harness rather than introducing another runner. Preserve gam
 
 [Development tools](DEVELOPMENT_TOOLS.md#reproducible-performance-captures) owns current capture behavior and [Contributing](../CONTRIBUTING.md#execution-and-evidence) owns execution permissions. `Alchemy: Docs/PERFORMANCE.md` is a sibling reference for phase correlation and trace analysis, not a runtime dependency.
 
-## Current baseline and gaps
+## Pre-implementation baseline and gaps
 
 - [The capture driver](../scripts/performance/run-performance.mjs) runs a validated checkpoint through normal controls, waits for its expected save, and samples a further 1,200 ms of presentation time
 - It performs one warm-up and one measured run, supports Chromium and isolated Electron, and retains source/build identities, checkpoints and actions
@@ -19,7 +19,7 @@ Extend the existing harness rather than introducing another runner. Preserve gam
 - [Metrics](../scripts/performance/metrics.mjs) report percentiles and gap counts over 20, 33.3, 50 and 100 ms and reject incomplete or incompatible comparisons
 - [Fixtures](../src/tooling/performance.ts) cover battle, replacement and menus, with optional reachable early/late battles; [the weekly workflow](../.github/workflows/performance.yml) compares ordinary and React Compiler builds
 
-The harness can detect bad cadence but cannot reliably join a particular gap to recorded input, command resolution, save encoding, hand motion or browser work. A segment currently combines automation delivery, checkpoint waiting and presentation. Startup latency is measured separately, but the frame sampler starts after readiness and initial image decoding; it does not establish startup frame pacing. Normal battle scenarios also omit selection/hover-only preview workloads.
+At the assessment baseline, the harness could detect bad cadence but could not reliably join a particular gap to recorded input, command resolution, save encoding, hand motion or browser work. A segment combined automation delivery, checkpoint waiting and presentation. Startup latency was measured separately, but the frame sampler started after readiness and initial image decoding; it did not establish startup frame pacing. Normal battle scenarios also omitted selection/hover-only preview workloads.
 
 ## 1. Establish one bounded timeline
 

@@ -29,7 +29,7 @@ These apply to every stage; the acceptance lists below add boundary-specific req
 - Keep each slice working and independently reviewable, removing superseded code before completion. Split demonstrated gameplay fixes into separate changes with regressions; identify/version intentional ranking changes and assess them with paired balance runs
 - Stop when captured versus live values or deterministic differences cannot be explained. Add no dependencies, generic rule language, plugin/stage framework, ECS, universal registry or rewritten runner merely to shorten files
 - Preserve current-format semantic validation. A persisted-shape change updates schema, version and fixtures together and rejects obsolete development saves without migrations. Normalize only the explicitly changed representation/version in parity comparisons; test decoding separately
-- Follow [verification and protected integration](../../CONTRIBUTING.md#verification) and [rendered review](UI.md#required-review). Source inspection cannot establish performance or visual parity; retain task evidence and report actual CI/platform boundaries
+- Follow [verification and protected integration](../../CONTRIBUTING.md#verification) and [rendered review](../UI.md#required-review). Source inspection cannot establish performance or visual parity; retain task evidence and report actual CI/platform boundaries
 
 ## 1. Make damage resolution readable in execution order
 
@@ -137,7 +137,7 @@ The 474-line screen also owns selected and hovered cards/targets, remembered rec
 - Preview execution still uses the authoritative resolver and never publishes, saves, spends resources or advances live RNG
 - Before/after rendered captures match for normal and enlarged text, minimum and desktop viewports, mouse and keyboard/controller simulation, and reduced motion
 
-This stage requires rendered/input evidence under [required review](UI.md#required-review); DOM tests cannot establish geometry, composition or visible focus.
+This stage requires rendered/input evidence under [required review](../UI.md#required-review); DOM tests cannot establish geometry, composition or visible focus.
 
 ## 4. Stop Auto-play from maintaining parallel combat arithmetic
 

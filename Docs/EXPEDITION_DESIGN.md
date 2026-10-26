@@ -16,7 +16,7 @@ Each choice commits immediately and saves the next offer. Browsing, inspection, 
 
 A roster holds up to five individuals, with at most one of each species across deployed creatures and backup. Repeat recruitment improves permanent Collection rank without adding, replacing, reviving or refreshing the existing individual, including at a full roster. Deploy up to three ordinary creatures or one Legendary with up to four backup. The draft supplies the remembered starting lineup; on the first journey, recruits fill slots two and three before joining backup.
 
-Only living deployed creatures act and provide passives. Formation changes through knockout replacement, abilities and explicit mechanics; there is no free Swap or lineup editor. The resulting formation persists between battles. Health, Block, first-attack state and effects belong to each individual; normal turn expiration applies in backup. Swapping never heals, cleanses or repeats opening bonuses. Victory preserves Health and knockouts while combat effects reset for the next battle.
+Living deployed creatures act and provide passives; explicit swap mechanics also retain departing providers for the exchange. Formation changes through knockout replacement, abilities and explicit mechanics; there is no free Swap or lineup editor. The resulting formation persists between battles. Health, Block, first-attack state and effects belong to each individual; normal turn expiration applies in backup. Formation changes alone do not heal, cleanse or repeat opening bonuses; explicit swap abilities and passives such as [Gentle Passage](content/creatures/dulcera.md#gentle-passage) can grant recovery. Victory preserves Health and knockouts while combat effects reset for the next battle.
 
 ### Knockout replacement and ability swaps
 
@@ -122,7 +122,7 @@ Starting a new journey resets its totals, roster and Boons while preserving perm
 
 Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns. End turn promotes waiting cards before normal draws, and accepted plays fill open slots from overflow without RNG. Draw/Discard inspection never reveals draw order or changes gameplay.
 
-[Keywords](KEYWORDS.md) defines packets, defenses, statuses and crowd control, including halving Block and the absence of elemental reactions. Effects tick and expire in backup; swaps cannot refresh them. Ordinary enemies choose from species abilities without immediate repeats; Legendaries cycle their own cards. Neither reveals the next ability.
+[Keywords](KEYWORDS.md) defines packets, defenses, statuses and crowd control, including halving Block and the absence of elemental reactions. Effects tick and expire in backup; swaps cannot refresh them. Ordinary enemies rank supported species abilities; Legendaries rank their current hand under the same [decision rules](#enemy-decisions). Neither reveals the next ability.
 
 ## Combat assistance
 
