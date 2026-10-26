@@ -24,7 +24,8 @@ function legendaryTeam() {
       { ...legendary, id: "backup-pollenmoth", species: "pollenmoth", health: 23, combat: freshCombat() },
     ];
 
-    draft.discovery.encountered = [...new Set([...draft.discovery.encountered, "memento", "pollenmoth"])];
+    for (const kind of ["memento", "pollenmoth"] as const)
+      if (!draft.discovery.encountered.includes(kind)) draft.discovery.encountered.push(kind);
     draft.discovery.recruited.memento = 1;
     draft.discovery.recruited.pollenmoth = 1;
     draft.cards = ownedCards(legendary.id, legendary.species);
