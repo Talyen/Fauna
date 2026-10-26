@@ -13,7 +13,7 @@ function createStorage(directory) {
       for (const [index, file] of [primary, `${primary}.bak1`, `${primary}.bak2`].entries()) {
         try {
           const stat = await fs.stat(file);
-          if (stat.size > 100000) {
+          if (stat.size > saveFormat.maxBytes) {
             candidates.push({ source: index ? "backup" : "primary", data: "oversized" });
             continue;
           }
@@ -28,12 +28,14 @@ function createStorage(directory) {
     },
     /** @param {string} data @param {string[]} recoverable */
     write(data, recoverable = []) {
-      if (typeof data !== "string" || Buffer.byteLength(data) > 100000)
+      if (typeof data !== "string" || Buffer.byteLength(data) > saveFormat.maxBytes)
         return Promise.reject(new Error("Invalid save payload."));
       if (
         !Array.isArray(recoverable) ||
         recoverable.length > 3 ||
-        recoverable.some((value) => typeof value !== "string" || Buffer.byteLength(value) > 100000)
+        recoverable.some(
+          (value) => typeof value !== "string" || Buffer.byteLength(value) > saveFormat.maxBytes,
+        )
       )
         return Promise.reject(new Error("Invalid recovery checkpoints."));
       const approved = new Set(recoverable);
@@ -52,7 +54,7 @@ function createStorage(directory) {
         for (const file of [primary, ...backups]) {
           try {
             const stat = await fs.stat(file);
-            const previous = stat.size <= 100000 ? await fs.readFile(file, "utf8") : null;
+            const previous = stat.size <= saveFormat.maxBytes ? await fs.readFile(file, "utf8") : null;
             readable.add(file);
             if (previous !== null && approved.has(previous) && !intact.some((item) => item.data === previous))
               intact.push({ file, data: previous });

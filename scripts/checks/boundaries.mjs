@@ -166,7 +166,12 @@ export function boundaryViolations(file, source) {
         target.startsWith("desktop/"))
     )
       fail(`Application imports presentation: ${specifier}`);
-    if (platform && (within("ui") || within("components") || (within("game") && !declaration?.typeOnly)))
+    if (
+      platform &&
+      (within("ui") ||
+        within("components") ||
+        (within("game") && !declaration?.typeOnly && target !== "src/game/save-format.json"))
+    )
       fail(`Platform imports presentation or gameplay implementation: ${specifier}`);
     if (
       (game || app || platform || ui || tooling) &&

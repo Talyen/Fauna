@@ -78,7 +78,6 @@ export function journeyReturn(state: GameState, ownerId: string | null, events: 
   drawEligibleCard(state, (id) => eligible.has(id), events);
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
-  const battle = state.battle!;
   queueCard(state, id);
   const owner = state.team.find(
     (unit) => unit.id === state.cards.find((card) => card.id === id)?.ownerId && unit.health > 0,
@@ -92,8 +91,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
     const chance = passiveAmount(state, reader.species, "wellRead");
     if (!succeeds(state, chance / 100, false, events)) continue;
     original ??= state.cards.find((entry) => entry.id === id)!;
-    const copy = { ...original, id: `copy-${battle.copySerial++}`, temporary: true as const };
-    state.cards.push(copy);
+    const copy = createTemporaryCard(state, original)!;
     queueCard(state, copy.id);
     events.push({
       kind: "action",
@@ -275,6 +273,16 @@ export function battleCardCapacity(state: Pick<GameState, "cards" | "battle">): 
       Number.MAX_SAFE_INTEGER - (state.battle?.copySerial ?? 0),
     ),
   );
+}
+/** Own capacity, serial allocation and insertion together for every generated card. */
+export function createTemporaryCard(
+  state: Pick<GameState, "cards" | "battle">,
+  card: Omit<Card, "id" | "temporary">,
+): Card | undefined {
+  if (!state.battle || battleCardCapacity(state) === 0) return;
+  const copy: Card = { ...card, id: `copy-${state.battle.copySerial++}`, temporary: true };
+  state.cards.push(copy);
+  return copy;
 }
 /** Called while the played card is still in hand; hidden draw order is irrelevant.
  * Buffered cards fill the hand before keyword filtering; consumed cards cannot be copied on redraw. */

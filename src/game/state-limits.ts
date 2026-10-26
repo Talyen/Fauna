@@ -6,3 +6,6 @@ export const MAX_BATTLE_TURN = 1_000_000;
 
 /** The saved per-actor allowance must support every authored borrowing tier */
 export const MAX_FALLEN_CARDS_PER_TURN = 6;
+
+/** Base player turn pool and the fixed enemy deck Mana ceiling. */
+export const TURN_MANA = 4;

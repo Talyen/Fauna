@@ -1,3 +1,4 @@
+import { TURN_MANA } from "../state-limits";
 import { shareNegate } from "./damage";
 import { grantCardRepeat } from "./card-repeat";
 import { createFood } from "./food";
@@ -68,7 +69,7 @@ export function executePrimary(context: PrimaryContext) {
       if (roll(state, { kind: "chance", threshold: 0.5 }) < 0.5)
         grantBlock(state, actor, scalePower(value, power), events);
       else if (action.side === "enemy" && action.actor.deck)
-        action.actor.deck.mana = Math.min(4, action.actor.deck.mana + value);
+        action.actor.deck.mana = Math.min(TURN_MANA, action.actor.deck.mana + value);
       else gainMana(state, value, events);
       return;
     case "attack": {
@@ -227,7 +228,7 @@ export function executePrimary(context: PrimaryContext) {
       if (action.actor.health <= 0) return;
       if (!enemy) gainMana(state, removed * value, events);
       else if (action.side === "enemy" && action.actor.deck)
-        action.actor.deck.mana = Math.min(4, action.actor.deck.mana + removed * value);
+        action.actor.deck.mana = Math.min(TURN_MANA, action.actor.deck.mana + removed * value);
       return;
     }
     case "waterThorns":

@@ -298,7 +298,7 @@ export function* waterFollowups(
       events,
       state,
     );
-  if (talentChance(state, "water.riptide", events)) drawKeyword(state, "water", events);
+  if (source.health > 0 && talentChance(state, "water.riptide", events)) drawKeyword(state, "water", events);
 }
 export function* attackProcs(
   { state, source, target, type, events }: HitContext,

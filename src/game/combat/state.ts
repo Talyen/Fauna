@@ -4,7 +4,7 @@ import { isEnemy, isRosterCreature, battlefield } from "../battlefield";
 import { hasTalent, passiveAmount } from "../progression";
 import { species, type CardDefinition } from "../content";
 import type { CombatState, Creature, Enemy, GameEvent, GameState } from "../types";
-export const TURN_MANA = 4;
+export { TURN_MANA } from "../state-limits";
 export const TURN_DRAW = 4;
 export const STACK_LIMIT = 1_000_000;
 export type Combatant = Creature | Enemy;

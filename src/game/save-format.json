@@ -1,3 +1,4 @@
 {
-  "version": 64
+  "version": 64,
+  "maxBytes": 100000
 }

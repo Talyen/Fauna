@@ -1,4 +1,6 @@
-import { battleCardCapacity } from "../card-zones";
+import { battleCardCapacity, createTemporaryCard } from "../card-zones";
+import { permanentCardCopies, permanentKitSize } from "../card-kit";
+import { TURN_MANA } from "../state-limits";
 import { speciesCards, species } from "../content";
 import { PEARL } from "../content/creatures/memento";
 import { passiveAmount } from "../progression";
@@ -13,12 +15,14 @@ export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
   return {
     draw: shuffle(
       state,
-      speciesCards(enemy.species).flatMap((card) => [card.id, card.id]),
+      speciesCards(enemy.species).flatMap((card) =>
+        Array.from({ length: permanentCardCopies(enemy.species) }, () => card.id),
+      ),
     ),
     hand: [],
     buffer: [],
     discard: [],
-    mana: 4,
+    mana: TURN_MANA,
     pearls: 0,
   };
 }
@@ -43,19 +47,16 @@ export function createPearls(
   for (let i = 0; i < count; i++) {
     if (side === "enemy" && "deck" in actor && actor.deck) {
       const deck = actor.deck;
-      if (deck.pearls >= MAX_BATTLE_CARDS - 6) break;
+      if (deck.pearls >= MAX_BATTLE_CARDS - permanentKitSize(actor.species)) break;
       deck.pearls++;
       (deck.hand.length < MAX_HAND_SIZE ? deck.hand : deck.buffer).push(PEARL.id);
     } else {
       if (battleCardCapacity(state) === 0) break;
-      const card = {
-        id: `copy-${state.battle.copySerial++}`,
+      const card = createTemporaryCard(state, {
         definitionId: PEARL.id,
         ownerId: actor.id,
         level: 0,
-        temporary: true as const,
-      };
-      state.cards.push(card);
+      })!;
       receiveCard(state, card.id);
     }
     created++;

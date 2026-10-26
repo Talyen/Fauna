@@ -246,3 +246,15 @@ it("keeps the modifier catalog independent of mutation implementations", () => {
   ).toEqual([]);
   expect(boundaryViolations("src/game/modifier-bindings.ts", 'import {freeze} from "immer"')).toEqual([]);
 });
+
+it("allows platform save-format metadata while keeping gameplay implementation private", () => {
+  expect(
+    boundaryViolations("src/platform/browser.ts", 'import format from "../game/save-format.json"'),
+  ).toEqual([]);
+  expect(
+    boundaryViolations("src/platform/browser.ts", 'import {decodeSave} from "../game/save"'),
+  ).not.toEqual([]);
+  expect(
+    boundaryViolations("src/platform/browser.ts", 'import {createTemporaryCard} from "../game/card-zones"'),
+  ).not.toEqual([]);
+});

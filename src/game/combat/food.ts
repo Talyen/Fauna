@@ -1,6 +1,6 @@
 import { actionValue } from "../ability-rules";
 import { takeCardRepeat } from "./card-repeat";
-import { battleCardCapacity } from "../card-zones";
+import { battleCardCapacity, createTemporaryCard } from "../card-zones";
 import { FOOD_CARDS } from "../content/food";
 import { species, type CardDefinition } from "../content";
 import { receiveCard } from "../card-zones";
@@ -21,14 +21,11 @@ export function createFood(
   while (created < count && battleCardCapacity(state) > 0) {
     const def =
       FOOD_CARDS[Math.floor(roll(state, { kind: "index", size: FOOD_CARDS.length }) * FOOD_CARDS.length)]!;
-    const card = {
-      id: `copy-${state.battle.copySerial++}`,
+    const card = createTemporaryCard(state, {
       definitionId: def.id,
       ownerId: null,
       level: 0,
-      temporary: true as const,
-    };
-    state.cards.push(card);
+    })!;
     if (destination === "deck") state.battle.draw.push(card.id);
     else receiveCard(state, card.id);
     created++;

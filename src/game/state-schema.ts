@@ -5,7 +5,7 @@ import { MAX_BATTLE_CARDS, MAX_HAND_SIZE, MAX_SUPPORTED_HAND_SIZE } from "./card
 import { MAX_CREATURE_STARS, KEYWORDS } from "./progression";
 import { SPECIES, BOONS, TALENTS } from "./content";
 import { JOURNEY_LENGTH } from "./encounters";
-import { MAX_BATTLE_TURN, MAX_REVISION, MAX_FALLEN_CARDS_PER_TURN } from "./state-limits";
+import { MAX_BATTLE_TURN, MAX_REVISION, MAX_FALLEN_CARDS_PER_TURN, TURN_MANA } from "./state-limits";
 const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
 const speciesId = z.enum(SPECIES.map((entry) => entry.id));
@@ -58,12 +58,8 @@ const enemyDeck = z.object({
   hand: z.array(id).max(MAX_HAND_SIZE),
   buffer: z.array(id).max(MAX_BATTLE_CARDS),
   discard: z.array(id).max(MAX_BATTLE_CARDS),
-  mana: z.number().int().min(0).max(4),
-  pearls: z
-    .number()
-    .int()
-    .min(0)
-    .max(MAX_BATTLE_CARDS - 6),
+  mana: z.number().int().min(0).max(TURN_MANA),
+  pearls: z.number().int().min(0).max(MAX_BATTLE_CARDS),
 });
 const minion = z.object({
   id,
@@ -91,7 +87,7 @@ const battle = z.object({
   cardsPlayedThisTurn: z.number().int().min(0).max(PLAYER_CARD_TRIGGER_LIMIT),
   turn: z.number().int().min(1).max(MAX_BATTLE_TURN),
   mana: z.number().int().min(0).max(9),
-  maxMana: z.number().int().min(4).max(7),
+  maxMana: z.number().int().min(TURN_MANA).max(7),
   draw: z.array(id).max(MAX_BATTLE_CARDS),
   hand: z.array(id).max(MAX_SUPPORTED_HAND_SIZE),
   buffer: z.array(id).max(MAX_BATTLE_CARDS),

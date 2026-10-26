@@ -1,3 +1,4 @@
+import saveFormat from "../game/save-format.json" with { type: "json" };
 import { browserDiagnostics } from "./preferences";
 import type { Platform, SaveCandidate } from "./ports";
 const KEY = "fauna.save.v1";
@@ -24,6 +25,8 @@ export function createBrowserPlatform(storage?: Storage): Platform {
         return results;
       },
       async write(data, isRecoverable = () => false) {
+        if (new TextEncoder().encode(data).length > saveFormat.maxBytes)
+          throw new Error("Invalid save payload.");
         const source = storage ?? window.localStorage;
         // Only application-approved checkpoints may displace recovery slots.
         const readable = new Map<string, string | null>();

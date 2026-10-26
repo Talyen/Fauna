@@ -1,3 +1,5 @@
+import saveFormat from "./save-format.json" with { type: "json" };
+import { permanentCardCopies, permanentKitSize } from "./card-kit";
 import { isFood } from "./content/food";
 import { manaCapacity, encoreProgressLimit, puzzleProgressLimit, metronomeActorValid } from "./ability-rules";
 import { unfinishedJourneyLimit } from "./card-actors";
@@ -5,7 +7,7 @@ import { PEARL } from "./content/creatures/memento";
 import { battlefield } from "./battlefield";
 import { needsCampfire, merchantPriceRange } from "./destinations";
 import { freeze } from "immer";
-import { MAX_HAND_SIZE, handCapacity } from "./card-zones";
+import { MAX_BATTLE_CARDS, MAX_HAND_SIZE, handCapacity } from "./card-zones";
 import {
   starterCount,
   starterSpecies,
@@ -25,7 +27,7 @@ function invalid(condition: boolean) {
 }
 
 export function decodeSave(raw: string): GameState {
-  if (raw.length > 100_000 || new TextEncoder().encode(raw).length > 100_000)
+  if (raw.length > saveFormat.maxBytes || new TextEncoder().encode(raw).length > saveFormat.maxBytes)
     throw new Error("Save exceeds the supported size.");
   const state = gameStateSchema.parse(JSON.parse(raw));
   validateCollection(state);
@@ -162,7 +164,7 @@ function validateRoster(state: GameState) {
 
   let expectedPermanentCards = 0;
   for (const creature of state.team) {
-    const copies = species(creature.species).legendary ? 2 : 1;
+    const copies = permanentCardCopies(creature.species);
     for (const def of speciesCards(creature.species)) {
       expectedPermanentCards += copies;
       invalid(
@@ -305,11 +307,13 @@ function validateEnemyDecks(state: BattleState) {
       const zones = [...deck.draw, ...deck.hand, ...deck.buffer, ...deck.discard];
       const defs = speciesCards(enemy.species);
       invalid(
-        zones.length !== 6 + deck.pearls ||
+        zones.length > MAX_BATTLE_CARDS ||
+          zones.length !== permanentKitSize(enemy.species) + deck.pearls ||
           zones.filter((id) => id === PEARL.id).length !== deck.pearls ||
           (deck.buffer.length > 0 && deck.hand.length < MAX_HAND_SIZE),
       );
-      for (const def of defs) invalid(zones.filter((id) => id === def.id).length !== 2);
+      for (const def of defs)
+        invalid(zones.filter((id) => id === def.id).length !== permanentCardCopies(enemy.species));
       invalid(zones.some((id) => id !== PEARL.id && !defs.some((def) => def.id === id)));
     }
   }
