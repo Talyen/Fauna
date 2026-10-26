@@ -1,5 +1,6 @@
 import { expect, it } from "vitest";
-import { run, requireBattle } from "../../support/game";
+import { run, requireBattle, teamRun } from "../../support/game";
+import { setBattleCards } from "../../support/cards";
 import { BOONS, definition } from "../../../src/game/content";
 import { freshCombat, hit, removeEffects } from "../../../src/game/combat/index";
 import { resolveCombat } from "../../../src/game/combat/resolution";
@@ -83,6 +84,66 @@ it("Journey Loom follows Cloud Cup-and-Ball and Dream Yo-Yo returns without retu
   returnDodgedCard(state, returned, events, 0);
   expect(state.battle.hand).toHaveLength(3);
   expect(state.battle.hand.filter((id) => id === returned.id)).toHaveLength(1);
+});
+
+it("Dream Yo-Yo returns a fallen ally's attack played through Unfinished Journey", () => {
+  const state = structuredClone(teamRun(42, ["oathara", "prismram"]));
+  if (state.phase !== "battle") throw new Error("Expected a battle");
+  state.boons = ["dream-yo-yo"];
+  const owner = state.team[1]!;
+  owner.health = 0;
+  state.team[0]!.combat!.blind = true;
+  state.rng = 1972;
+  const card = state.cards.find(
+    (entry) => entry.ownerId === owner.id && definition(entry.definitionId).effect === "attack",
+  )!;
+  setBattleCards(state, [card.id]);
+  const result = dispatch(state, { type: "play", cardId: card.id, targetId: "enemy-0", autoEndTurn: false });
+  expect(result.accepted).toBe(true);
+  expect(result.events.some((event) => event.kind === "status" && event.outcome === "dodge")).toBe(true);
+  expect(result.state.battle!.hand).toContain(card.id);
+  expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+});
+
+it("Dream Yo-Yo recognizes a Dodge by an Echo whose owner has since fallen", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["dream-yo-yo"];
+  const card = state.cards.find((entry) => entry.ownerId === source.id)!;
+  state.battle.hand = [];
+  state.battle.discard = [card.id];
+  const summoner = state.battle.enemies[0]!;
+  summoner.health = 0;
+  state.battle.minions = [
+    {
+      ...summoner,
+      id: `echo-${summoner.id}-0`,
+      health: 0,
+      minion: { ownerId: summoner.id, side: "enemy" },
+    },
+  ];
+  events.push({
+    kind: "status",
+    targetId: state.battle.minions[0]!.id,
+    status: "dodge",
+    outcome: "dodge",
+    text: "Dodge",
+  });
+  returnDodgedCard(state, card, events, 0);
+  expect(state.battle.hand).toContain(card.id);
+});
+
+it("Last Resort still cleanses after Steadfast and Purification heal across its threshold", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["sin-eaters-lantern"];
+  state.talents = ["armor.steadfast", "armor.purification", "health.last-resort"];
+  source.combat!.burn = 2;
+  source.combat!.poison = 2;
+  source.health = 20;
+  observeDecisions(state, () => 0);
+  hit(state, target, source, 18, "water", events, { origin: "derived" });
+  expect(source.health).toBeGreaterThanOrEqual(6);
+  expect(source.combat!.burn).toBe(0);
+  expect(source.combat!.poison).toBe(0);
 });
 
 it("Journey Loom adds no card when another living deployed owner has none available", () => {
