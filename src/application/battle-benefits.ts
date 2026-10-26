@@ -295,7 +295,10 @@ export function battleBenefits(
       const blinded = allies.filter((unit) => unit.combat?.blind).length;
       return blinded > 0
         ? controlRemoval(blinded)
-        : def.draw
+        : def.draw &&
+            (drawHasAnotherCard(state, card, { kind: "draw", amount: value }) ||
+              state.boons.includes("mineral-bookend") ||
+              state.boons.includes("dune-shuttle"))
           ? support("standardUtility", value)
           : controlRemoval(0);
     }
@@ -327,7 +330,41 @@ export function battleBenefits(
           );
         });
       }
-      return support(useful ? "standardUtility" : "none");
+      // The played card enters Discard before recovery, so it can heal its own
+      // living owner through Lost and Found even when Discard was empty.
+      const selfRecovery =
+        !useful && !def.allyOnly && !def.consume && card.ownerId === actor.id
+          ? state.team.reduce(
+              (sum, unit) =>
+                sum +
+                (unit.health > 0
+                  ? creaturePassive(state, unit.species).effects.reduce(
+                      (total, effect) => total + (effect.kind === "lostAndFound" ? effect.amount : 0),
+                      0,
+                    )
+                  : 0),
+              0,
+            )
+          : 0;
+      const selfHealing = restoration(actor, healingValue(state, actor, selfRecovery)).gain;
+      const loomDraw =
+        !useful &&
+        !def.allyOnly &&
+        !def.consume &&
+        card.ownerId !== null &&
+        state.boons.includes("journey-loom") &&
+        [...state.battle.draw, ...state.battle.discard].some((id) => {
+          const candidate = state.cards.find((entry) => entry.id === id)!;
+          return (
+            candidate.ownerId !== null &&
+            candidate.ownerId !== card.ownerId &&
+            state.team.some((unit) => unit.id === candidate.ownerId && unit.health > 0)
+          );
+        });
+      return support(
+        selfHealing > 0 ? "healing" : useful || loomDraw ? "standardUtility" : "none",
+        selfHealing,
+      );
     }
     case "dodge":
       return dodgeSupport(

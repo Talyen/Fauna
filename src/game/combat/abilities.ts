@@ -2,13 +2,7 @@ import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability
 import { takeCardRepeat } from "./card-repeat";
 import { executePrimary } from "./ability-handlers";
 import { applyExtras } from "./ability-extras";
-import {
-  actorPower,
-  opposingRow,
-  alive,
-  type AbilityAction,
-  type AbilityOperations,
-} from "./ability-context";
+import { opposingRow, alive, type AbilityAction, type AbilityOperations } from "./ability-context";
 import { species } from "../content";
 import { definitionKeywords } from "../keywords";
 import { ensureCombat, beginAttack, openingCriticalBonus } from "./index";
@@ -23,10 +17,9 @@ export function executeAbility(
   events: GameEvent[],
   operations: AbilityOperations,
 ) {
-  const { actor, def, value } = action;
+  const { actor, def } = action;
   const grantedRepeat = takeCardRepeat(state, action.side);
   const enemy = action.side === "enemy";
-  const power = actorPower(action);
   const opponents = alive(opposingRow(state, action));
   // Keep the selected target across repeats unless Tangram must continue after a defeat.
   let target =
@@ -87,7 +80,6 @@ export function executeAbility(
         actorId: actor.id,
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
-    const negated = new Set<string>();
     const criticalBonus =
       def.effect === "attack"
         ? Math.max(
@@ -96,33 +88,24 @@ export function executeAbility(
           )
         : 0;
     const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) : false;
-    const context = {
+    const primary = executePrimary({
       state,
       action,
-      actor,
-      def,
-      value,
       events,
       operations,
-      enemy,
-      power,
       target,
-      attackTarget: target,
       name,
       stats,
       keywords,
       blindMiss,
       criticalBonus,
-      negated,
-      sharedNegate: undefined as import("./policy").SharedNegate | undefined,
-    };
-    executePrimary(context);
+    });
     applyExtras(state, action, events, {
-      target: context.attackTarget,
+      target: primary ? primary.attackTarget : target,
       blindMiss,
       criticalBonus,
-      negated,
-      sharedNegate: context.sharedNegate,
+      negated: primary?.negated,
+      sharedNegate: primary?.sharedNegate,
     });
   }
 }

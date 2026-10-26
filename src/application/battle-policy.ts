@@ -6,7 +6,7 @@ import { availablePlays } from "../game/play-queries";
 import { battleBenefits, battleBenefitFacts, BATTLE_FINISH_PRIORITY } from "./battle-benefits";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 38;
+export const BATTLE_POLICY_VERSION = 39;
 
 export interface BattleChoice {
   command: Command;

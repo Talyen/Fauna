@@ -73,18 +73,16 @@ function createStorage(directory) {
           await handle.close();
         }
         const targets = backups.filter((file) => readable.has(file));
-        for (let i = targets.length - 1; i >= 0; i--) {
-          const checkpoint = intact[i];
-          const backup = targets[i];
-          if (!checkpoint || !backup) continue;
-          const staged = `${backup}.tmp`;
-          try {
-            // A failed copy must never truncate an existing recovery checkpoint.
-            await fs.copyFile(checkpoint.file, staged);
-            await fs.rename(staged, backup);
-          } finally {
-            await fs.rm(staged, { force: true }).catch(() => {});
-          }
+        const rotations = targets.flatMap((backup, i) =>
+          intact[i] ? [{ checkpoint: intact[i], backup, staged: `${backup}.tmp` }] : [],
+        );
+        try {
+          // Finish every copy before replacing any checkpoint: a later copy
+          // failure must not leave both backup slots holding the same save.
+          for (const { checkpoint, staged } of rotations) await fs.copyFile(checkpoint.file, staged);
+          for (const { staged, backup } of rotations.reverse()) await fs.rename(staged, backup);
+        } finally {
+          for (const { staged } of rotations) await fs.rm(staged, { force: true }).catch(() => {});
         }
         await fs.rename(temp, primary);
       });

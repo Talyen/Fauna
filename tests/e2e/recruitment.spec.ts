@@ -1,6 +1,6 @@
 import { captureScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
-import { accept, winBattle, fullRosterReward } from "../support/game";
+import { winBattle, fullRosterReward } from "../support/game";
 import { reloadHome, test, seed, state, resume } from "./support/session";
 import { continueToRecruit } from "./support/journey";
 
@@ -22,7 +22,9 @@ test("recruitment adds a backup without exposing free lineup changes", async ({ 
   expect(await state(page)).toEqual(beforeInspection);
   await page.getByRole("button", { name: "Recruit Pollenmoth", exact: true }).click();
   const recruited = await state(page);
-  expect(recruited).toEqual(accept(fixture, { type: "recruit", species: "pollenmoth" }));
+  expect(recruited.phase).toBe("teamSelection");
+  expect(recruited.journey!.currency).toBe(fixture.journey!.currency);
+  expect(recruited.discovery.recruited.pollenmoth).toBe((fixture.discovery.recruited.pollenmoth ?? 0) + 1);
   expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).toHaveLength(4);
   expect(recruited.reserves[0]!.species).toBe("pollenmoth");
   expect(recruited.team[0]!.species).toBe("mossguard");

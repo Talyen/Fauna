@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page } from "@playwright/test";
-import { run, winBattle } from "../support/game";
+import { bossReward, run, winBattle } from "../support/game";
 import { test, seed, resume } from "./support/session";
 import { settleScreen } from "./support/rendered-evidence";
 import { continueToRecruit } from "./support/journey";
@@ -43,4 +43,8 @@ test("home, settings, battle, pause and rewards meet automated accessibility che
   await continueToRecruit(page);
   await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
   await scan(page, "recruit");
+  await seed(page, bossReward());
+  await resume(page);
+  await expect(page.getByRole("heading", { name: "Choose a Boon", exact: true })).toBeVisible();
+  await scan(page, "boon-choice");
 });

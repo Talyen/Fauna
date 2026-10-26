@@ -1,11 +1,6 @@
 import { previewCard } from "./engine";
-import type { GameState } from "./types";
+import type { CommandResult, GameState } from "./types";
 import type { RandomDecision } from "./random";
-import type { CommandResult } from "./types";
-/** Runs the authoritative pure command without publishing or saving its result. */
-export function previewPlay(state: GameState, cardId: string, targetId?: string) {
-  return previewCard(state, cardId, targetId);
-}
 
 export type PlayProjection =
   | { kind: "complete"; outcomes: readonly CommandResult[]; replays: number }

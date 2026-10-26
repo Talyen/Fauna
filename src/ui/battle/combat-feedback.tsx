@@ -29,22 +29,15 @@ export function useCombatFeedback(
     denial.current = (element) => {
       playSound("deny");
       if (!element.animate) return;
-      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
-        deniedAnimations.get(element)?.cancel();
-        const cue = element.animate(
-          [{ borderColor: "var(--destructive)" }, { borderColor: "var(--border)" }],
-          { duration: motionValue("--motion-deny") },
-        );
-        deniedAnimations.set(element, cue);
-        cue.onfinish = () => {
-          if (deniedAnimations.get(element) === cue) deniedAnimations.delete(element);
-        };
-        return;
-      }
+      const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
       deniedAnimations.get(element)?.cancel();
       const animation = element.animate(
-        [{ translate: "0 0" }, { translate: "-4px 0" }, { translate: "4px 0" }, { translate: "0 0" }],
-        { duration: motionValue("--motion-deny"), easing: "ease-out" },
+        reduced
+          ? [{ borderColor: "var(--destructive)" }, { borderColor: "var(--border)" }]
+          : [{ translate: "0 0" }, { translate: "-4px 0" }, { translate: "4px 0" }, { translate: "0 0" }],
+        reduced
+          ? { duration: motionValue("--motion-deny") }
+          : { duration: motionValue("--motion-deny"), easing: "ease-out" },
       );
       deniedAnimations.set(element, animation);
       animation.onfinish = () => {

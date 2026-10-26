@@ -285,20 +285,18 @@ export function createTemporaryCard(
   return copy;
 }
 /** Called while the played card is still in hand; hidden draw order is irrelevant.
- * Buffered cards fill the hand before keyword filtering; consumed cards cannot be copied on redraw. */
+ * Buffered cards are promoted independently of the draw; consumed cards cannot be copied on redraw. */
 export function drawHasAnotherCard(
   state: BattleState,
   played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
   return (
-    [...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
+    [...state.battle.draw, ...state.battle.discard].some((id) => {
       const drawn = state.cards.find((entry) => entry.id === id)!;
       return (
         (drawn.ownerId === null || drawableOwnerIds(state).has(drawn.ownerId)) &&
-        (state.battle.buffer.includes(id) ||
-          effect.kind === "draw" ||
-          cardKeywords(drawn).includes(effect.keyword))
+        (effect.kind === "draw" || cardKeywords(drawn).includes(effect.keyword))
       );
     }) ||
     (!definition(played.definitionId).consume &&

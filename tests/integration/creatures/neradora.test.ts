@@ -10,7 +10,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { definitionKeywords, keywordText } from "../../../src/game/keywords";
 import { battleChoices } from "../../../src/application/battle-policy";
-import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
+import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import type { GameEvent, GameState } from "../../../src/game/types";
 import { prepareDestination, accept, teamRun } from "../../support/game";
 

@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { createSession as createSeededSession } from "../../../src/application/session";
+import { cloudName, snapshot } from "../../../src/application/cloud-snapshots";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import type { Platform } from "../../../src/platform/ports";
 import { dispatch } from "../../../src/game/engine";
@@ -510,6 +511,75 @@ it.each(["saved", "empty", "invalid"])(
     await loading;
     expect(s.store.getState().ready).toBe(true);
     await s.dispose();
+  },
+);
+
+it.each([false, true])(
+  "restores the live journey after a timed-out cloud installation finishes (new command: %s)",
+  async (play) => {
+    const identity = {
+      available: true,
+      device: "a".repeat(32),
+      profile: "b".repeat(32),
+      importAvailable: false,
+    };
+    const initial = JSON.stringify(run());
+    const local = await snapshot(initial, identity, 1);
+    const remote = await snapshot(
+      JSON.stringify({ ...run(), revision: 10 }),
+      { ...identity, device: "c".repeat(32) },
+      1,
+      [local],
+    );
+    let saved = initial;
+    let release!: () => void;
+    let entered!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const writing = new Promise<void>((resolve) => {
+      entered = resolve;
+    });
+    let first = true;
+    const s = createSession({
+      ...platform(initial),
+      saves: {
+        readCandidates: async () => [{ source: "primary", data: saved }],
+        write: async (data) => {
+          if (first) {
+            first = false;
+            entered();
+            await gate;
+          }
+          saved = data;
+        },
+      },
+      cloud: {
+        identity: async () => identity,
+        readLocal: async () => JSON.stringify(local),
+        writeLocal: async () => {},
+        preserve: async () => {},
+        importStandalone: async () => [],
+        list: async () => [cloudName(remote)],
+        read: async () => JSON.stringify(remote),
+        write: async () => {},
+      },
+    });
+    vi.useFakeTimers();
+    try {
+      const loading = s.load();
+      await writing;
+      await vi.advanceTimersByTimeAsync(5000);
+      await loading;
+      if (play) expect(s.command({ type: "endTurn" })).toBe(true);
+      release();
+      expect(await s.flush()).toBe(true);
+      expect(JSON.parse(saved)).toEqual(s.store.getState().game);
+    } finally {
+      release();
+      await s.dispose();
+      vi.useRealTimers();
+    }
   },
 );
 

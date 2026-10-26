@@ -90,6 +90,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     for (const minion of battlefield(draft, "enemy").filter((unit) => unit.minion && unit.health > 0)) {
       tickStatuses(draft, minion, events);
       if (settle(draft, events)) return;
+      if (minion.health <= 0) continue;
       decayBlock(draft, minion, events);
       startAction(minion, events, draft);
     }

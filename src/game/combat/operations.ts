@@ -1,54 +1,29 @@
-import type { bounce, hit, resolveHit, negateAttack } from "./damage";
-import type {
-  restoreHealth,
-  shareProtection,
-  grantBlock,
-  gainMana,
-  grantArmor,
-  leechHealth,
-  healthThresholds,
-} from "./protection";
-import type {
-  grantStatus,
-  triggerArmorBreak,
-  removeControlBuildup,
-  removeEffects,
-  returnCleansedEffect,
-  cleanseRewards,
-  cleanseThorns,
-  poisonCleanseMana,
-  applyHarmfulStatus,
-  controlRewards,
-  applyBlind,
-} from "./statuses";
-import type { tickStatuses, startAction } from "./lifecycle";
-
-export type Operations = {
-  bounce: typeof bounce;
-  hit: typeof hit;
-  resolveHit: typeof resolveHit;
-  negateAttack: typeof negateAttack;
-  restoreHealth: typeof restoreHealth;
-  shareProtection: typeof shareProtection;
-  grantBlock: typeof grantBlock;
-  gainMana: typeof gainMana;
-  grantArmor: typeof grantArmor;
-  leechHealth: typeof leechHealth;
-  healthThresholds: typeof healthThresholds;
-  grantStatus: typeof grantStatus;
-  triggerArmorBreak: typeof triggerArmorBreak;
-  removeControlBuildup: typeof removeControlBuildup;
-  removeEffects: typeof removeEffects;
-  returnCleansedEffect: typeof returnCleansedEffect;
-  cleanseRewards: typeof cleanseRewards;
-  cleanseThorns: typeof cleanseThorns;
-  poisonCleanseMana: typeof poisonCleanseMana;
-  applyHarmfulStatus: typeof applyHarmfulStatus;
-  controlRewards: typeof controlRewards;
-  applyBlind: typeof applyBlind;
-  tickStatuses: typeof tickStatuses;
-  startAction: typeof startAction;
-};
+export type Operations = Pick<typeof import("./damage"), "bounce" | "hit" | "resolveHit" | "negateAttack"> &
+  Pick<
+    typeof import("./protection"),
+    | "restoreHealth"
+    | "shareProtection"
+    | "grantBlock"
+    | "gainMana"
+    | "grantArmor"
+    | "leechHealth"
+    | "healthThresholds"
+  > &
+  Pick<
+    typeof import("./statuses"),
+    | "grantStatus"
+    | "triggerArmorBreak"
+    | "removeControlBuildup"
+    | "removeEffects"
+    | "returnCleansedEffect"
+    | "cleanseRewards"
+    | "cleanseThorns"
+    | "poisonCleanseMana"
+    | "applyHarmfulStatus"
+    | "controlRewards"
+    | "applyBlind"
+  > &
+  Pick<typeof import("./lifecycle"), "tickStatuses" | "startAction">;
 export type OperationName = keyof Operations;
 export type CombatArguments<K extends OperationName> = Parameters<Operations[K]>;
 export type CombatResult<K extends OperationName> =

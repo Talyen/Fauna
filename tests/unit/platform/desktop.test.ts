@@ -175,3 +175,26 @@ it("preserves both recovery checkpoints when a backup copy fails partway through
     await rm(directory, { recursive: true });
   }
 });
+
+it("preserves distinct recovery checkpoints when the second backup copy fails", async () => {
+  const fs = createRequire(import.meta.url)("node:fs/promises") as typeof import("node:fs/promises");
+  const directory = await mkdtemp(path.join(tmpdir(), "fauna-storage-"));
+  const storage = createStorage(directory);
+  const values = [1, 2, 3, 4].map((revision) => encodeSave({ ...createGame(), revision }));
+  const originalCopy = fs.copyFile.bind(fs);
+  const copy = vi.spyOn(fs, "copyFile");
+  try {
+    for (const value of values.slice(0, 3)) await storage.write(value, values.slice(0, 3));
+    copy.mockImplementationOnce(async (from, to) => originalCopy(from, to));
+    copy.mockRejectedValueOnce(new Error("disk full during second backup copy"));
+    await expect(storage.write(values[3], values.slice(0, 3))).rejects.toThrow("disk full");
+    expect((await storage.readCandidates()).map((candidate: { data: string }) => candidate.data)).toEqual([
+      values[2],
+      values[1],
+      values[0],
+    ]);
+  } finally {
+    copy.mockRestore();
+    await rm(directory, { recursive: true });
+  }
+});
