@@ -322,7 +322,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     anyProc(["bleed.flay"], (f) => {
       f.target.combat.armor = 21;
       hit(f.state, f.source, f.target, 6, "bleed", f.events);
-      return f.target.combat.armor === 10;
+      return f.target.combat.armor === 11;
     });
     anyProc(["bleed.bloodrush"], (f) => {
       const n = f.state.battle!.hand.length;

@@ -292,11 +292,12 @@ it.each(["dunefox", "glintstride", "cadenza"] as const)(
       game.battle!.copySerial = 4;
     });
     expect(decodeSave(encodeSave(buffered))).toEqual(buffered);
-    const overflow = rankedBattleChoices(buffered, false).find(
-      (entry) => entry.command.type === "play" && entry.command.cardId === dodge.id,
-    )!;
-    expect(overflow).toBeDefined();
-    expect(dispatch(buffered, overflow.command).state.battle!.hand).toContain("copy-3");
+    // Promoting the buffered card after any play does not make this Dodge draw useful.
+    expect(
+      rankedBattleChoices(buffered, false).some(
+        (entry) => entry.command.type === "play" && entry.command.cardId === dodge.id,
+      ),
+    ).toBe(false);
   },
 );
 

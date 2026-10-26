@@ -1,14 +1,29 @@
 import { freeze } from "immer";
+import type { passiveCardBonus } from "./ability-rules";
+import type { receiveDraw, lostAndFound, drawEligibleCard } from "./card-zones";
+import type { passingFlame } from "./combat/damage-reactions";
+import type { puzzleEffect } from "./combat/statuses";
+import type { gentlePassage, cleanseDeparture, rookOfMercy, mountainGuide } from "./team";
 import type { TalentId, BoonId } from "./content";
 import type { PassiveKind } from "./content/types";
 
 type Modules = {
-  "./team": typeof import("./team");
+  "./team": typeof import("./team") & {
+    gentlePassage: typeof gentlePassage;
+    cleanseDeparture: typeof cleanseDeparture;
+    rookOfMercy: typeof rookOfMercy;
+    mountainGuide: typeof mountainGuide;
+  };
   "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
-  "./ability-rules": typeof import("./ability-rules");
+  "./ability-rules": typeof import("./ability-rules") & { passiveCardBonus: typeof passiveCardBonus };
   "./card-actors": typeof import("./card-actors");
-  "./card-zones": typeof import("./card-zones");
+  "./card-rules": typeof import("./card-rules");
+  "./card-zones": typeof import("./card-zones") & {
+    receiveDraw: typeof receiveDraw;
+    lostAndFound: typeof lostAndFound;
+    drawEligibleCard: typeof drawEligibleCard;
+  };
   "./chance": typeof import("./chance");
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
   "./combat/abilities": typeof import("./combat/abilities");
@@ -16,7 +31,9 @@ type Modules = {
   "./combat/card-modifiers": typeof import("./combat/card-modifiers");
   "./combat/food": typeof import("./combat/food");
   "./combat/damage": typeof import("./combat/damage");
-  "./combat/damage-reactions": typeof import("./combat/damage-reactions");
+  "./combat/damage-reactions": typeof import("./combat/damage-reactions") & {
+    passingFlame: typeof passingFlame;
+  };
   "./combat/damage-values": typeof import("./combat/damage-values");
   "./combat/healing-values": typeof import("./combat/healing-values");
   "./combat/interception": typeof import("./combat/interception");
@@ -24,7 +41,7 @@ type Modules = {
   "./combat/lifecycle": typeof import("./combat/lifecycle");
   "./combat/protection": typeof import("./combat/protection");
   "./combat/state": typeof import("./combat/state");
-  "./combat/statuses": typeof import("./combat/statuses");
+  "./combat/statuses": typeof import("./combat/statuses") & { puzzleEffect: typeof puzzleEffect };
   "./combat/turns": typeof import("./combat/turns");
   "./destinations": typeof import("./destinations");
 };

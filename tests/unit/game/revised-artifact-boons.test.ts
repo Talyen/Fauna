@@ -65,7 +65,7 @@ it("Comb Uncapping Fork bypasses Block for all three allied Thorns pools without
   hit(state, enemy, ally, 1, "water", events);
   expect(enemy.health).toBe(85);
   expect(enemy.block).toBe(30);
-  expect(enemy.combat.armor).toBe(0);
+  expect(enemy.combat.armor).toBe(3);
   expect(enemy.combat.burn).toBe(6);
   expect([ally.combat!.thorns, ally.combat!.waterThorns, ally.combat!.fireThorns]).toEqual([3, 4, 5]);
   expect(events.some((event) => event.kind === "block" && event.targetId === enemy.id)).toBe(false);

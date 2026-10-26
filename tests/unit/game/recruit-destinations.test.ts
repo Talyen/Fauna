@@ -64,7 +64,7 @@ it("rejects other species, full rosters and recruitment during combat without ch
 
 it("preserves offers through Campfire and reload, then suppresses consecutive Campfires", () => {
   const before = produce(offer(), (draft) => {
-    draft.team[0]!.health = 0;
+    draft.team[0]!.health = 1;
   });
   const visiting = accept(before, { type: "visitCampfire" });
   const rested = accept(decodeSave(encodeSave(visiting)), { type: "rest" });

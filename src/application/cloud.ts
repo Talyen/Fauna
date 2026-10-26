@@ -65,7 +65,7 @@ export function createCloud(
     retryTimer = setTimeout(() => {
       retryTimer = undefined;
       retrying = true;
-      void retry().finally(() => {
+      void retry(true).finally(() => {
         retrying = false;
         if (view.status === "Pending") scheduleRetry();
       });
@@ -330,12 +330,12 @@ export function createCloud(
       update({ status: identity?.enabled === false ? "Unavailable" : "Pending", error: errorText(error) });
     }
   }
-  function retry() {
+  function retry(forceBackground = false) {
     if (!alive()) return Promise.resolve();
     // Own retry before status publication can synchronously request it again.
     return (retryOperation ??= Promise.resolve()
       .then(() => {
-        const background = localData !== null;
+        const background = forceBackground || localData !== null;
         const token = generation + 1;
         const operation = lifecycle === "ready" ? reconcile(background) : initialize(localData, background);
         return bounded(operation, 5000, () => {
@@ -361,7 +361,7 @@ export function createCloud(
       }));
     },
     commit,
-    retry,
+    retry: () => retry(),
     offline,
     async flush(timeout = 2000) {
       await bounded(

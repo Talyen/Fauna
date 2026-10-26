@@ -35,6 +35,80 @@ export function boonValue(
     state.boons.includes("ironwood-buckler") ||
     cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
   switch (boon) {
+    case "aether-gramophone":
+    case "dream-tangram":
+    case "eclipse-protractor":
+    case "crescent-sextant":
+      return has.has("attack") ? 50 : 0;
+    case "herbarium-press":
+      return has.has("poison") && has.has("freeze") ? 50 : 0;
+    case "honey-press":
+    case "pattern-reel":
+    case "winnowing-sieve":
+    case "pearl-sieve":
+    case "prism-chisel":
+      return has.has("purge") ? 60 : 0;
+    case "rook-of-mercy":
+    case "prayer-sailboat":
+    case "accordioned-bridge":
+    case "tide-anklet":
+      return swapping ? 60 : 0;
+    case "tidecrest-hairpin":
+      return effect("waterThorns") ? 60 : 0;
+    case "stardust-whetstone":
+      return has.has("physical") ? 60 : 0;
+    case "ashfall-pendant":
+    case "last-candle":
+    case "molten-paperweight":
+      return has.has("burn") ? 60 : 0;
+    case "wishing-building-block":
+      return has.has("armor") && kinds.length > 1 ? 60 : 0;
+    case "sovereign-toast-rack":
+    case "pumpkin-tureen":
+    case "field-lunch-basket":
+    case "blossom-cake-stand":
+      return effect("createFood") || kinds.includes("aerostat") ? 60 : 0;
+    case "hoard-lockplate":
+    case "geode-anvil":
+      return has.has("armor") && has.has("block") ? 60 : 0;
+    case "rootvault-pole":
+    case "hearth-coal":
+    case "vigil-lantern":
+    case "gemmed-scabbard":
+      return 40;
+    case "star-hoop":
+      return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 50 : 0;
+    case "blooming-still":
+    case "miracle-megaphone":
+      return has.has("cleanse") || state.boons.includes("knot-comb") ? 50 : 0;
+    case "yarrow-salve-tin":
+      return healing ? 60 : 0;
+    case "comb-uncapping-fork":
+    case "resonance-kalimba":
+    case "thornheart-ring":
+      return thorns ? 60 : 0;
+    case "fern-fencing-foil":
+      return has.has("dodge") ? 60 : 0;
+    case "reef-casket":
+    case "coronation-cloche":
+      return cards.some((card) => card.effect === "hushDome") ? 50 : 0;
+    case "obsidian-pitcher":
+      return has.has("leech") ? 60 : 0;
+    case "grain-flail":
+      return has.has("attack") ? 60 : 0;
+    case "comet-crucible":
+      return has.has("armor") ? 40 : 0;
+    case "journey-loom":
+      return effect("recover") && kinds.length > 1 ? 60 : 0;
+    case "devotion-clasp":
+      return kinds.length > 1 && (effect("dreamDouble") || effect("sparkDecoy")) ? 50 : 0;
+    case "wonder-ball-maze":
+    case "sleepers-urn":
+      return has.has("stun") || has.has("freeze") ? 60 : 0;
+    case "facet-abacus":
+      return 60;
+    case "moonboat-toy":
+      return has.has("water") ? 60 : 0;
     case "grafting-needle":
       return healing && has.has("armor") ? 60 : 0;
     case "lovers-knot":

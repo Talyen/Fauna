@@ -83,9 +83,9 @@ it("protects only Poison on Frozen enemies from Cleanse", () => {
   removeEffects(enemy, "cleanse", 3, events, state, undefined, enemy);
   expect(enemy.combat.poison).toBe(5);
   expect(enemy.combat.burn).toBe(0);
-  ally.combat.poison = 4;
+  ally.combat!.poison = 4;
   removeEffects(ally, "cleanse", 1, events, state, "poison", ally);
-  expect(ally.combat.poison).toBe(0);
+  expect(ally.combat!.poison).toBe(0);
 });
 
 it("heals for actual enemy Block purged, including linked Purge", () => {

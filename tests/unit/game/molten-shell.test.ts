@@ -144,7 +144,14 @@ it("does not activate Molten Shell when periodic damage breaks Armor after swapp
     });
     ensureCombat(draft.team[0]!).armor = 1;
     ensureCombat(draft.team[0]!).burn = 1;
-    draft.talents.push("armor.fireward");
+    draft.keywordXP.armor = 100000;
+    draft.talents.push(
+      "armor.bulwark",
+      "armor.reactive-guard",
+      "armor.last-stand",
+      "armor.armored-surge",
+      "armor.fireward",
+    );
   });
   const swapped = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup-moss" });
   const events: GameEvent[] = [];

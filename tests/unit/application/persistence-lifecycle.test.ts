@@ -128,6 +128,12 @@ it.each(["startup", "retry"] as const)(
         .mockImplementation(async () => [...f.files.keys()]);
       first = stage === "startup" ? f.manager.start(initial) : f.manager.retry();
       await started;
+      if (stage === "retry") {
+        const coalesced = f.manager.retry();
+        expect(coalesced).toBe(first);
+        await vi.advanceTimersByTimeAsync(5000);
+        await first;
+      }
       await f.manager.retry();
       await f.manager.flush();
       expect(f.manager.view.status).toBe("Synced");

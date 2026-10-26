@@ -280,7 +280,13 @@ export function createTemporaryCard(
   card: Omit<Card, "id" | "temporary">,
 ): Card | undefined {
   if (!state.battle || battleCardCapacity(state) === 0) return;
-  const copy: Card = { ...card, id: `copy-${state.battle.copySerial++}`, temporary: true };
+  const copy: Card = {
+    id: `copy-${state.battle.copySerial++}`,
+    definitionId: card.definitionId,
+    ownerId: card.ownerId,
+    level: card.level,
+    temporary: true,
+  };
   state.cards.push(copy);
   return copy;
 }

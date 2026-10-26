@@ -129,6 +129,12 @@ it("10: save admission uses the same UTF-8 byte limit as native persistence", ()
   expect(raw.length).toBeLessThan(100_000);
   expect(new TextEncoder().encode(raw).length).toBeGreaterThan(100_000);
   expect(() => decodeSave(raw)).toThrow("supported size");
+  for (const text of ["😀", "\ud800"]) {
+    const large = `{"padding":"${text.repeat(34_000)}"}`;
+    expect(large.length).toBeLessThan(100_000);
+    expect(new TextEncoder().encode(large).length).toBeGreaterThan(100_000);
+    expect(() => decodeSave(large)).toThrow("supported size");
+  }
   expect(decodeSave(encodeSave(createGame(3)))).toEqual(createGame(3));
 });
 

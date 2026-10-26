@@ -113,17 +113,19 @@ it("Dream Yo-Yo recognizes a Dodge by an Echo whose owner has since fallen", () 
   state.battle.discard = [card.id];
   const summoner = state.battle.enemies[0]!;
   summoner.health = 0;
-  state.battle.minions = [
-    {
-      ...summoner,
-      id: `echo-${summoner.id}-0`,
-      health: 0,
-      minion: { ownerId: summoner.id, side: "enemy" },
-    },
-  ];
+  const echo: NonNullable<typeof state.battle.minions>[number] = {
+    ...summoner,
+    id: `echo-${summoner.id}-0`,
+    name: "Echo",
+    species: "memento",
+    health: 0,
+    lastAbility: null,
+    minion: { ownerId: summoner.id, side: "enemy" },
+  };
+  state.battle.minions = [echo];
   events.push({
     kind: "status",
-    targetId: state.battle.minions[0]!.id,
+    targetId: echo.id,
     status: "dodge",
     outcome: "dodge",
     text: "Dodge",

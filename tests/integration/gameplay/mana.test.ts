@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
-import { previewPlay } from "../../../src/game/preview";
+import { previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { selectCombatCue } from "../../../src/ui/audio/combat-audio";
 import { impactTargets } from "../../../src/ui/battle/combat-impact";
@@ -19,7 +19,7 @@ describe("mana turn settlement", () => {
   it("commits the last card and enemy turn atomically, while preview stays card-only", () => {
     const before = lastMana(),
       card = before.battle!.hand[0]!;
-    const preview = previewPlay(before, card, "enemy-0");
+    const preview = previewCard(before, card, "enemy-0");
     expect(preview.state.battle!.mana).toBe(0);
     expect(preview.state.battle!.turn).toBe(1);
     expect(preview.state.team.map((c) => c.health)).toEqual(before.team.map((creature) => creature.health));

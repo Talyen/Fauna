@@ -50,7 +50,7 @@ const digest = (value: unknown) =>
     )
     .digest("hex");
 
-// Baseline includes Block spending on periodic damage, unique rosters and utility-based enemy choices.
+// The reviewed October 26 baseline includes the Armor wear rule and current Auto-play scoring.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({

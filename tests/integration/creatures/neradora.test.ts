@@ -101,7 +101,7 @@ it("retaliates as Water through Block and Armor, spends one stack and cannot cha
     hit(game, attacker, defender, 1, "water", events);
     expect(attacker.health).toBe(health - 2);
     expect(attacker.block).toBe(0);
-    expect(attacker.combat.armor).toBe(19);
+    expect(attacker.combat.armor).toBe(20);
     expect(attacker.combat.waterThorns).toBe(8);
     expect(attacker.combat.thorns).toBe(8);
     expect(defender.combat!.waterThorns).toBe(2);

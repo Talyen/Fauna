@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { previewPlay } from "../../../src/game/preview";
+import { previewCard } from "../../../src/game/engine";
 import { ensureCombat, hit } from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { appendFeedback, feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
@@ -17,7 +17,7 @@ describe("uncommitted previews", () => {
     });
     const serialized = JSON.stringify(original),
       card = original.battle!.hand[0]!;
-    const preview = previewPlay(original, card, "enemy-0");
+    const preview = previewCard(original, card, "enemy-0");
     expect(preview.accepted).toBe(true);
     expect(preview.state.battle!.enemies[0]!.health).toBe(0);
     expect(
@@ -26,7 +26,7 @@ describe("uncommitted previews", () => {
     expect(preview.events.some((e) => e.kind === "knockout" && e.targetId === "enemy-0")).toBe(true);
     expect(JSON.stringify(original)).toBe(serialized);
     expect(dispatch(original, { type: "play", cardId: card, targetId: "enemy-0" })).toEqual(preview);
-    expect(previewPlay(original, card, "ally-0").accepted).toBe(false);
+    expect(previewCard(original, card, "ally-0").accepted).toBe(false);
   });
   it("reports absorbed block separately and caps damage at actual health lost", () => {
     const state = produce(run(), (d) => {

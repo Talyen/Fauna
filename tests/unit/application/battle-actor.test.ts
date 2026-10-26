@@ -72,7 +72,10 @@ it("resets cycle history for a new turn and explicit manual takeover", () => {
   let state = decodeSave(JSON.stringify(reedstag));
   const actor = createBattleActor();
   const first = actor.choose(state, false);
-  state = accept(state, first.command);
+  // A committed revision with unchanged visible combat state revisits the same decision.
+  state = produce(state, (game) => {
+    game.revision++;
+  });
   expect(actor.choose(state, false).command).not.toEqual(first.command);
   actor.reset();
   expect(actor.choose(state, false).command).toEqual(first.command);

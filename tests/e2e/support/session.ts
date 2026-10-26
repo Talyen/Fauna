@@ -47,7 +47,7 @@ export async function reloadHome(page: Page) {
 }
 
 export const key = "fauna.save.v1";
-export async function waitForStartup(page: Page) {
+async function waitForStartup(page: Page) {
   // Skip only the intentional splash delay; resources, fonts and the menu must still become ready
   if (clockPages.has(page) && (await page.locator("#startup-splash").count())) {
     await page.clock.fastForward(5500);

@@ -322,11 +322,10 @@ it.each(["none", "nullifyFreeze", "negate", "attackReflection"] as const)(
         if (protection !== "none") enemy.combat[protection] = true;
       }),
     );
-    const def = {
-      ...attack("prismram-attack", "Assessment", 6, "physical"),
+    const def = attack("prismram-attack", "Assessment", 6, "physical", {
       criticalWhenLastCard: true,
-      alternateDamageType: "freeze" as const,
-    };
+      alternateDamageType: "freeze",
+    });
     const before = encodeSave(state);
     const hits = ordinaryAttackFacts(state, state.team[0]!, def, 6, state.battle.enemies[0]!);
     const negated = protection === "negate" || protection === "attackReflection";

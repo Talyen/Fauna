@@ -26,8 +26,17 @@ function invalid(condition: boolean) {
   if (condition) throw new Error("Save contains inconsistent game data.");
 }
 
+function utf8Size(text: string) {
+  let bytes = 0;
+  for (const character of text) {
+    const point = character.codePointAt(0)!;
+    bytes += point <= 0x7f ? 1 : point <= 0x7ff ? 2 : point <= 0xffff ? 3 : 4;
+  }
+  return bytes;
+}
+
 export function decodeSave(raw: string): GameState {
-  if (raw.length > saveFormat.maxBytes || new TextEncoder().encode(raw).length > saveFormat.maxBytes)
+  if (raw.length > saveFormat.maxBytes || utf8Size(raw) > saveFormat.maxBytes)
     throw new Error("Save exceeds the supported size.");
   const state = gameStateSchema.parse(JSON.parse(raw));
   validateCollection(state);

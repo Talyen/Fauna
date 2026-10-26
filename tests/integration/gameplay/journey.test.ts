@@ -6,7 +6,7 @@ import { createGame, dispatch } from "../../../src/game/engine";
 import { SPECIES, species, speciesCards, BOONS } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { starterCount } from "../../../src/game/progression";
-import { previewPlay } from "../../../src/game/preview";
+import { previewCard } from "../../../src/game/engine";
 import {
   prepareDestination,
   completeRecruitment,
@@ -114,7 +114,7 @@ describe("journey earnings and results", () => {
       { type: "beginBattle" },
     );
     const ready = victoryReady(battle);
-    const preview = previewPlay(ready, ready.battle!.hand[0]!, "enemy-0");
+    const preview = previewCard(ready, ready.battle!.hand[0]!, "enemy-0");
     expect(preview.state.battle!.enemies[0]!.health).toBe(0);
     expect(preview.state.phase).toBe("battle");
     expect(preview.state.journey!.currency).toBe(0);

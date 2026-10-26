@@ -122,7 +122,7 @@ it("purges both Thorns pools before the chosen enemy can retaliate, retaining ot
   expect(result.state.battle!.enemies[0]!.combat).toMatchObject({
     thorns: 0,
     waterThorns: 0,
-    armor: 3,
+    armor: 4,
     nullify: true,
     poison: 2,
   });

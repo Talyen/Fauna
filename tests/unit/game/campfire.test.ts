@@ -7,7 +7,7 @@ import { authoredPack, prepareDestination, accept, run, starterJourney } from ".
 function destinations() {
   return starterJourney(3, "captoad");
 }
-it.each([22, 21, 20, 0])("uses the exact 30%% missing Health threshold at %s/30", (health) => {
+it.each([22, 21, 20, 1])("uses the exact 30%% missing Health threshold at %s/30", (health) => {
   const s = produce(destinations(), (d) => {
     d.team[0]!.health = health;
   });
