@@ -31,7 +31,7 @@ The same subscription review also made duplicate diagnostic subscriptions indepe
 
 - Source inspection established the original failure paths; the unmodified baseline suite was not executed
 - The first focused run passed 19 assertions and exposed two fixture comparisons using noncanonical save JSON ordering; fixtures were corrected to use the existing decode/encode contract
-- The next focused run passed all 23 regressions, one worker, within the repository's 30-second limit; this includes production-session timeout/offline-save ordering and preservation-failure coverage
+- Final focused run: 24 regressions passed in 492 ms after incorporating current main, using one worker; coverage includes production-session timeout/offline-save ordering, preservation failures and background recovery retaining the running session
 - No UI layout, artwork or interaction controls changed; no rendered inspection was performed
 - Full compilation, broad unit/DOM suites, browser journeys, desktop, Windows packaging, physical controllers, Steam client and Steam Deck remain unverified locally and require their respective CI or device gates
 - Pushes and publication were not requested; hosted CI cannot establish exact-commit results until the changes are uploaded through an authorized workflow

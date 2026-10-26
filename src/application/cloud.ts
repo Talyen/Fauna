@@ -276,7 +276,7 @@ export function createCloud(
           else {
             await port.preserve([JSON.stringify(saved)]);
             if (!owns(starting)) return;
-            if (data === null) {
+            if (data === null && !background) {
               await install(saved.payload, () => owns(starting));
               if (!owns(starting)) return;
               data = saved.payload;

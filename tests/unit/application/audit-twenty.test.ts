@@ -412,3 +412,21 @@ it("unmatched metadata is not overwritten when preserving its alternative fails"
     await f.manager.dispose();
   }
 });
+
+it("background identity recovery cannot install local metadata after startup continues offline", async () => {
+  vi.useFakeTimers();
+  const f = cloudFixture();
+  const retained = await snapshot(progress, identity, 9);
+  f.local.data = JSON.stringify(retained);
+  f.port.readLocal = vi.fn().mockRejectedValueOnce(new Error("busy")).mockResolvedValue(f.local.data);
+  try {
+    await f.manager.start(null);
+    expect(f.manager.view.blocking).toBe(false);
+    await vi.advanceTimersByTimeAsync(15000);
+    await vi.waitFor(() => expect(f.port.preserve).toHaveBeenCalled());
+    expect(f.install).not.toHaveBeenCalled();
+    expect(f.local.data).toBe(JSON.stringify(retained));
+  } finally {
+    await f.manager.dispose();
+  }
+});
