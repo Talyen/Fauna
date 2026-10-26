@@ -28,7 +28,7 @@ import { roll } from "../random";
 import { drawDiscard, draw, redrawHand } from "../card-zones";
 import type { GameState, GameEvent } from "../types";
 import { applyExtras, reflectExtras } from "./ability-extras";
-import { friendlyRow, opposingRow, alive, type PrimaryContext } from "./ability-context";
+import { actorPower, friendlyRow, opposingRow, alive, type PrimaryContext } from "./ability-context";
 import type { Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
@@ -37,24 +37,11 @@ function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[
 }
 
 export function executePrimary(context: PrimaryContext) {
-  const {
-    state,
-    action,
-    actor,
-    def,
-    value,
-    events,
-    power,
-    target,
-    keywords,
-    blindMiss,
-    criticalBonus,
-    negated,
-    name,
-    stats,
-    enemy,
-    operations,
-  } = context;
+  const { state, action, events, target, keywords, blindMiss, criticalBonus, name, stats, operations } =
+    context;
+  const { actor, def, value } = action;
+  const enemy = action.side === "enemy";
+  const power = actorPower(action);
   switch (def.effect) {
     case "procession":
       summonEcho(state, actor, action.side, value, events);
@@ -73,7 +60,8 @@ export function executePrimary(context: PrimaryContext) {
       else gainMana(state, value, events);
       return;
     case "attack": {
-      let { attackTarget } = context;
+      let attackTarget = target;
+      const negated = new Set<string>();
       const damageType =
         def.alternateDamageType && roll(state, { kind: "chance", threshold: 0.5 }) < 0.5
           ? def.alternateDamageType
@@ -85,7 +73,6 @@ export function executePrimary(context: PrimaryContext) {
             ? [target]
             : [];
       const sharedNegate = shareNegate(state, actor, targets, blindMiss);
-      context.sharedNegate = sharedNegate;
       for (const intended of targets) {
         if (actor.health <= 0) break;
         if (isDepartedMinion(state, intended)) continue;
@@ -127,8 +114,7 @@ export function executePrimary(context: PrimaryContext) {
         if (reflected) reflectExtras(state, action, recipient, events, power);
       }
       if (action.side === "player") action.actor.attacked = true;
-      context.attackTarget = attackTarget;
-      return;
+      return { attackTarget, negated, sharedNegate };
     }
     case "guard": {
       const targets =
