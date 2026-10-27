@@ -413,6 +413,12 @@
     "sourceHash": "bf3fe178f2945982b5e674768496f7675205c329c05aeab1a790bfd618e00a3d",
     "text": "Incensario de latón"
   },
+  "content.boon.brass-censer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to also <keyword1>Burn</keyword1> or <keyword2>Leech</keyword2>",
+    "sourceHash": "3c6f0fcd7e7940c77b7db4a3886c730807bbc93931c8f9074242a6cd41efb58d",
+    "text": "Los impactos de <keyword0>Luz</keyword0> tienen un {{value0}}% de probabilidad de causar también daño de <keyword1>Quemadura</keyword1> o activar <keyword2>Drenaje</keyword2>"
+  },
   "content.boon.briar-racquet.name": {
     "reviewed": true,
     "source": "Briar Racquet",
@@ -430,6 +436,12 @@
     "source": "Brookskip Disc",
     "sourceHash": "04321a4aea5268cbd1a8f5fa7958fa3617016c2cddb746ab2bc49c6a2bbdc274",
     "text": "Disco saltarín"
+  },
+  "content.boon.brookskip-disc.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage against enemy <keyword1>Block</keyword1> chains to a second enemy",
+    "sourceHash": "eb637d6b7db81d269955f918af5d45c8878d6ef410244a233cefee6ce6611d71",
+    "text": "El daño de <keyword0>Agua</keyword0> contra el <keyword1>Bloqueo</keyword1> enemigo salta a un segundo enemigo"
   },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
@@ -707,6 +719,12 @@
     "sourceHash": "9ca936bba3eb57870deefb98a3af9e2e1afa3047912ecadaccdde902e766c247",
     "text": "Prisma de horno"
   },
+  "content.boon.furnace-prism.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits <keyword1>Blind</keyword1> <keyword2>Burning</keyword2> enemies",
+    "sourceHash": "a57ce56f28dbe8de9f9c616fc0c6068af3cab03e30ccaab0188ae27a836e3ba9",
+    "text": "Los impactos de <keyword0>Luz</keyword0> <keyword1>ciegan</keyword1> a los enemigos con <keyword2>Quemadura</keyword2>"
+  },
   "content.boon.gemmed-scabbard.name": {
     "reviewed": true,
     "source": "Gemmed Scabbard",
@@ -923,6 +941,12 @@
     "sourceHash": "480b3c199cb880b57222f731c492b5d538d11315801647f7042a78f4d081f29d",
     "text": "Trébol de la suerte"
   },
+  "content.boon.lucky-clover.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "93807bf09a1c5491e3eba2debaf019b51f0c9002146e1f164ab37e3dacfa0c42",
+    "text": "Los impactos de <keyword0>Naturaleza</keyword0> tienen un {{value0}}% de probabilidad de otorgar oro igual a la <keyword1>Salud</keyword1> perdida por el enemigo"
+  },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
     "source": "Merchant's Favor",
@@ -1043,11 +1067,23 @@
     "sourceHash": "dc3cbefd475add02389f867889d88bf00bb3c3ff5e3a046ba72287211f140b9a",
     "text": "Jarra de obsidiana"
   },
+  "content.boon.obsidian-pitcher.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Leech</keyword0> applies half as much <keyword1>Burn</keyword1> to the enemy",
+    "sourceHash": "efb3c1409300ff2fb7c91999313f01f9ae5cc1793655f6b18f79aaf519008d60",
+    "text": "El <keyword0>Drenaje</keyword0> excedente aplica al enemigo la mitad de esa cantidad como <keyword1>Quemadura</keyword1>"
+  },
   "content.boon.orbit-armillary.name": {
     "reviewed": true,
     "source": "Orbit Armillary",
     "sourceHash": "57d18a4ff3b8175440030eee50957fed0dfde46091e9b3c62fc6fca069f2f64f",
     "text": "Esfera armilar orbital"
+  },
+  "content.boon.orbit-armillary.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansed</keyword0> effects return to their source",
+    "sourceHash": "f8c1757070f382e0bb79b7f03349ff55ae5d55c0e24bc7448488963f7b665b73",
+    "text": "Los efectos <keyword0>purificados</keyword0> vuelven a su origen"
   },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
@@ -1091,11 +1127,23 @@
     "sourceHash": "c2172372ba66274b4167759ffd920ddcceaa9d047958aca06f2c963bda169093",
     "text": "Bobina de patrones"
   },
+  "content.boon.pattern-reel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect removes it from every enemy",
+    "sourceHash": "9392dd8c07f6f2302c7c63d93257c1ffdb5cdf0cf6f689e6ab2abdb90ef69830",
+    "text": "<keyword0>Purgar</keyword0> un efecto lo elimina de todos los enemigos"
+  },
   "content.boon.peace-knot.name": {
     "reviewed": true,
     "source": "Peace Knot",
     "sourceHash": "67742d8b37d84a6d38e65fbe4464ba031144a7e223256cd97f9d47e189b0e8d0",
     "text": "Nudo de paz"
+  },
+  "content.boon.peace-knot.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Nullify</keyword0> prevents a harmful effect, other allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "5bee45cbd96d55a225181d287b847853411046849561e6f1eb68011879a0ef7e",
+    "text": "Cuando la <keyword0>Nulificación</keyword0> impide un efecto perjudicial, los demás aliados obtienen {{value0}} de <keyword1>Bloqueo</keyword1>"
   },
   "content.boon.pearl-sieve.name": {
     "reviewed": true,

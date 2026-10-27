@@ -413,6 +413,12 @@
     "sourceHash": "c064fc4cc4f723be380f1337f6cec221da0c405ec37e9a46c296fef4debbd42b",
     "text": "Латунное кадило"
   },
+  "content.boon.brass-censer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to also <keyword1>Burn</keyword1> or <keyword2>Leech</keyword2>",
+    "sourceHash": "50de42b55baa8a813af22df7d1acd289073cee5d43e2aefa318e7988ba5b402f",
+    "text": "Попадания <keyword0>светом</keyword0> с вероятностью {{value0}}% также наносят урон <keyword1>горением</keyword1> или вызывают <keyword2>вампиризм</keyword2>"
+  },
   "content.boon.briar-racquet.name": {
     "reviewed": true,
     "source": "Briar Racquet",
@@ -430,6 +436,12 @@
     "source": "Brookskip Disc",
     "sourceHash": "e4161cff0d0348725661891c63f0dd2c2461c19b2f5499aac4fac315db2244a4",
     "text": "Диск для речных скачков"
+  },
+  "content.boon.brookskip-disc.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage against enemy <keyword1>Block</keyword1> chains to a second enemy",
+    "sourceHash": "ec2f67f2d7d54b3cf49929262b18ee7b3cb7b114db6bd99659987d1bb25d0023",
+    "text": "Урон <keyword0>водой</keyword0> по вражескому <keyword1>блоку</keyword1> переходит на второго врага"
   },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
@@ -707,6 +719,12 @@
     "sourceHash": "8bf18f43b6b8997cf74e0ca9a6572167efa7add4e8e75fe9292c488ee64281a5",
     "text": "Призма горна"
   },
+  "content.boon.furnace-prism.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits <keyword1>Blind</keyword1> <keyword2>Burning</keyword2> enemies",
+    "sourceHash": "27ec4bdba405455215bd7530457ad2d829c3cf8170d16ab3d3d43db1adb79b5c",
+    "text": "Попадания <keyword0>светом</keyword0> <keyword1>ослепляют</keyword1> врагов с <keyword2>горением</keyword2>"
+  },
   "content.boon.gemmed-scabbard.name": {
     "reviewed": true,
     "source": "Gemmed Scabbard",
@@ -923,6 +941,12 @@
     "sourceHash": "c5692441990909fb1d67f29164b017865a833343fa5ba530a2bb0d973167003e",
     "text": "Счастливый клевер"
   },
+  "content.boon.lucky-clover.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "eea0f3787ecf6a98c07ee659563e1b9b681134338170c38102c3903059dc70e0",
+    "text": "Попадания <keyword0>природой</keyword0> с вероятностью {{value0}}% дают золото в размере потерянного врагом <keyword1>здоровья</keyword1>"
+  },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
     "source": "Merchant's Favor",
@@ -1043,11 +1067,23 @@
     "sourceHash": "dfdcb22522a8150397b5b254e9973d921c7b4997485d5f551cbe865944c15f4f",
     "text": "Обсидиановый кувшин"
   },
+  "content.boon.obsidian-pitcher.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Leech</keyword0> applies half as much <keyword1>Burn</keyword1> to the enemy",
+    "sourceHash": "645879a0916d61cfa2fb49db6d626f2156ca9793e7d8b134cd8485617c035b65",
+    "text": "Избыточный <keyword0>вампиризм</keyword0> накладывает на врага <keyword1>горение</keyword1> в размере половины избытка"
+  },
   "content.boon.orbit-armillary.name": {
     "reviewed": true,
     "source": "Orbit Armillary",
     "sourceHash": "e3d51ad14e4f0038d0e491d6fc3cbbe1eeedbe71158268f954d049d2fd27dab6",
     "text": "Орбитальная армиллярная сфера"
+  },
+  "content.boon.orbit-armillary.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansed</keyword0> effects return to their source",
+    "sourceHash": "f59ed8b3d6ac0b8fef03ab74497e16469cd60d7d0213958b29c69d1948e3312d",
+    "text": "<keyword0>Очищенные</keyword0> эффекты возвращаются к своему источнику"
   },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
@@ -1091,11 +1127,23 @@
     "sourceHash": "0d0e2f3daae7d5d59ec636c20b604ea06ebf1936ebd3f97436afc5dd93be4095",
     "text": "Катушка узоров"
   },
+  "content.boon.pattern-reel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect removes it from every enemy",
+    "sourceHash": "1f8b2f24ab5ceec0c675b0afc2b75a6749d324417095f8180f16b331d4914a0d",
+    "text": "<keyword0>Рассеивание</keyword0> эффекта снимает его со всех врагов"
+  },
   "content.boon.peace-knot.name": {
     "reviewed": true,
     "source": "Peace Knot",
     "sourceHash": "23f91a38dd6a7bfa09d0df875ae2dd4b217eae0f1e7d0df03c08261da2a52eed",
     "text": "Узел мира"
+  },
+  "content.boon.peace-knot.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Nullify</keyword0> prevents a harmful effect, other allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "1a975cba5bb8a8bc5000242a8642e199dc720996b2f076c6b93a648155fd9c65",
+    "text": "Когда <keyword0>аннулирование</keyword0> предотвращает вредный эффект, остальные союзники получают {{value0}} <keyword1>блока</keyword1>"
   },
   "content.boon.pearl-sieve.name": {
     "reviewed": true,

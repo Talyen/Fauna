@@ -413,6 +413,12 @@
     "sourceHash": "7378ce53146d8e518376135c30f1b0b89110c86d6b92894c37f0d6dfbbca379a",
     "text": "真鍮の香炉"
   },
+  "content.boon.brass-censer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to also <keyword1>Burn</keyword1> or <keyword2>Leech</keyword2>",
+    "sourceHash": "8d5bb15f2e95c9a088aedd1067ab966ff172bf196cd5360702b986ce6d491c98",
+    "text": "<keyword0>光</keyword0>のヒットは{{value0}}%の確率で<keyword1>炎上</keyword1>ダメージまたは<keyword2>吸血</keyword2>も発生"
+  },
   "content.boon.briar-racquet.name": {
     "reviewed": true,
     "source": "Briar Racquet",
@@ -430,6 +436,12 @@
     "source": "Brookskip Disc",
     "sourceHash": "b35f245d6c92250961bad24d70227bc053d5bf6e4f6795e6206b560668eab941",
     "text": "小川跳ねの円盤"
+  },
+  "content.boon.brookskip-disc.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage against enemy <keyword1>Block</keyword1> chains to a second enemy",
+    "sourceHash": "edb1e8dd98cf477a8633e966b58c1496172387021a890e7602e9b187c2d006c4",
+    "text": "敵の<keyword1>ブロック</keyword1>に与えた<keyword0>水</keyword0>ダメージは2体目の敵に連鎖"
   },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
@@ -707,6 +719,12 @@
     "sourceHash": "a9c72f8aa6b9eb0b4c087be8951381da3fb458e421c800d4408ddfbae41a6d2c",
     "text": "炉のプリズム"
   },
+  "content.boon.furnace-prism.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits <keyword1>Blind</keyword1> <keyword2>Burning</keyword2> enemies",
+    "sourceHash": "593f82a81b9dbe3a6c519adcefeee49f575e269cc26dee4e48cddd0753c26d93",
+    "text": "<keyword0>光</keyword0>のヒットは<keyword2>炎上</keyword2>中の敵を<keyword1>盲目</keyword1>にする"
+  },
   "content.boon.gemmed-scabbard.name": {
     "reviewed": true,
     "source": "Gemmed Scabbard",
@@ -923,6 +941,12 @@
     "sourceHash": "91f02cb0a3b1ee454cf818c364309cb91b1b810470b64d11f3ef73b29fca585a",
     "text": "幸運のクローバー"
   },
+  "content.boon.lucky-clover.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "95bf6f364ad1714d01528db0652619eda1cb359d18b244e6745055994630c1c2",
+    "text": "<keyword0>自然</keyword0>のヒットは{{value0}}%の確率で敵が失った<keyword1>体力</keyword1>と同量のゴールドを獲得"
+  },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
     "source": "Merchant's Favor",
@@ -1043,11 +1067,23 @@
     "sourceHash": "f3b335fea746f80d27e5265fdc3aa39132a675c03aab923ee6e7b87ee90c8ecc",
     "text": "黒曜石の水差し"
   },
+  "content.boon.obsidian-pitcher.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Leech</keyword0> applies half as much <keyword1>Burn</keyword1> to the enemy",
+    "sourceHash": "7770ef13af993bcef43d8a67d6f70128b94824aab7b84fb77b0498fd8b1bfd83",
+    "text": "超過した<keyword0>吸血</keyword0>は敵にその半分の<keyword1>炎上</keyword1>を付与"
+  },
   "content.boon.orbit-armillary.name": {
     "reviewed": true,
     "source": "Orbit Armillary",
     "sourceHash": "894184bac9768e85b07e546f84614bc6d3c48dd01782dce9be8d26f7f7d86e89",
     "text": "軌道の渾天儀"
+  },
+  "content.boon.orbit-armillary.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansed</keyword0> effects return to their source",
+    "sourceHash": "ff5d36346db3080bcf2658a4e99266ad0ec29f57c1b35440ed51bdbbde14d5a6",
+    "text": "<keyword0>浄化</keyword0>された効果は発生源に戻る"
   },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
@@ -1091,11 +1127,23 @@
     "sourceHash": "e5af1cb7d54d4ae5dfd40d55f8e787ab4c7564e985e9b3da7246fb087fdc3f08",
     "text": "模様の巻き筒"
   },
+  "content.boon.pattern-reel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect removes it from every enemy",
+    "sourceHash": "3019abf07771b6fb0691e7c034d522bf3a79301c4a4349baeea6402e69f94b7c",
+    "text": "効果を<keyword0>強化解除</keyword0>すると、その効果をすべての敵から取り除く"
+  },
   "content.boon.peace-knot.name": {
     "reviewed": true,
     "source": "Peace Knot",
     "sourceHash": "00108fdffa4f5652b041bb00b96de351a63d73fbee25192e0663faefab6b8832",
     "text": "平和の結び目"
+  },
+  "content.boon.peace-knot.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Nullify</keyword0> prevents a harmful effect, other allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "4d74a0d4e53d35a0de1c50c9b6e92fd8e1494dc0fc046c799e2f4382df3f7c47",
+    "text": "<keyword0>無効化</keyword0>が有害効果を防ぐと、他の味方は<keyword1>ブロック</keyword1>を{{value0}}獲得"
   },
   "content.boon.pearl-sieve.name": {
     "reviewed": true,
