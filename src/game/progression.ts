@@ -146,14 +146,15 @@ export function starterSpecies(state: Pick<GameState, "discovery">): readonly Sp
   return collected.length ? collected : FIRST_RUN_STARTERS;
 }
 export function starterOfferPool(state: Pick<GameState, "discovery" | "selected">): SpeciesId[] {
-  return starterSpecies(state).filter(
-    (kind) => !state.selected.length || (!state.selected.includes(kind) && !species(kind).legendary),
-  );
+  const pool = starterSpecies(state);
+  if (!state.selected.length) return [...pool];
+  return pool.filter((kind) => !state.selected.includes(kind) && !species(kind).legendary);
 }
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {
+  if (state.selected?.some((kind) => species(kind).legendary)) return 1;
   const collected = collectedSpecies(state);
-  if (collected.length === 0 || state.selected?.some((kind) => species(kind).legendary)) return 1;
+  if (collected.length === 0) return 1;
   let count = 0;
   for (const kind of collected) if (!species(kind).legendary && ++count === 3) return 3;
   return Math.max(1, count);

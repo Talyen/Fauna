@@ -32,11 +32,9 @@ export function offerStarters(state: GameState) {
 function prepareEncounter(state: GameState) {
   const route = state.expedition;
   route.pack = generateEncounterPack(state);
-  const prices = merchantPriceRange(state);
+  const prices = route.lastRoom !== "merchant" ? merchantPriceRange(state) : undefined;
   const kind =
-    route.lastRoom !== "merchant" && state.currency >= prices.min && roll(state) < OPTIONAL_DESTINATION_CHANCE
-      ? "merchant"
-      : null;
+    prices && state.currency >= prices.min && roll(state) < OPTIONAL_DESTINATION_CHANCE ? "merchant" : null;
   route.recruit =
     route.lastRoom !== "recruit" &&
     state.team.length + state.reserves.length < 5 &&
@@ -53,7 +51,7 @@ function prepareEncounter(state: GameState) {
           .map((b, i) => ({
             slot: `slot-${i}`,
             boon: b.id,
-            price: prices.min + Math.floor(roll(state) * (prices.max - prices.min + 1)),
+            price: prices!.min + Math.floor(roll(state) * (prices!.max - prices!.min + 1)),
           }))
       : [];
   state.support =

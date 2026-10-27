@@ -368,7 +368,8 @@ export function* removeEffects(
     removedStatuses.push("blind");
     cleansed++;
   }
-  for (const affectedStatus of new Set(removedStatuses))
+  const distinctRemovedStatuses = removedStatuses.length > 1 ? new Set(removedStatuses) : removedStatuses;
+  for (const affectedStatus of distinctRemovedStatuses)
     events.push({
       kind: "status",
       targetId: unit.id,
@@ -514,7 +515,9 @@ export function* removeEffects(
   }
   // Typed wards share feedback labels but spend separate Purge categories;
   // Cleanse still coalesces active control with buildup of the same status
-  return kind === "purge" ? removedStatuses.length : new Set(removedStatuses).size;
+  return kind === "purge" || Array.isArray(distinctRemovedStatuses)
+    ? removedStatuses.length
+    : distinctRemovedStatuses.size;
 }
 export function* poisonCleanseMana(
   state: GameState,

@@ -21,10 +21,15 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
   const result: (Creature | Enemy)[] = [...row];
   const minions = state.battle?.minions;
   if (!minions?.length) return result;
-  const owners = new Set<string>();
-  for (const unit of row) if (unit.health > 0) owners.add(unit.id);
-  for (const unit of minions)
-    if (unit.minion.side === side && owners.has(unit.minion.ownerId)) result.push(unit);
+  let owners: Set<string> | undefined;
+  for (const unit of minions) {
+    if (unit.minion.side !== side) continue;
+    if (!owners) {
+      owners = new Set<string>();
+      for (const owner of row) if (owner.health > 0) owners.add(owner.id);
+    }
+    if (owners.has(unit.minion.ownerId)) result.push(unit);
+  }
   return result;
 }
 

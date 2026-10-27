@@ -37,7 +37,8 @@ export function playTargetError(state: BattleState, def: CardDefinition, actorId
   const mode = cardTargeting(def, state);
   if (
     (mode === "enemy" || mode === "ally") &&
-    !recipientPool(state, def, mode).some((unit) => unit.id === targetId && recipientEligible(unit, def))
+    (targetId === undefined ||
+      !recipientPool(state, def, mode).some((unit) => unit.id === targetId && recipientEligible(unit, def)))
   )
     return def.effect === "swapChosen"
       ? "Choose a living backup."

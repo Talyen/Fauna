@@ -38,10 +38,19 @@ export function cardActor(
 
 /** A spent allowance does not remove fallen cards from drawing or presentation. */
 export function drawableOwnerIds(state: GameState): Set<string> {
-  const borrowing =
-    state.phase === "battle" &&
-    state.team.some((unit) => unit.health > 0 && unfinishedJourneyLimit(state, unit) > 0);
   const owners = new Set<string>();
-  for (const unit of state.team) if (unit.health > 0 || borrowing) owners.add(unit.id);
+  let fallen = false;
+  for (const unit of state.team) {
+    if (unit.health > 0) owners.add(unit.id);
+    else fallen = true;
+  }
+  if (
+    fallen &&
+    state.phase === "battle" &&
+    state.team.some((unit) => unit.health > 0 && unfinishedJourneyLimit(state, unit) > 0)
+  ) {
+    owners.clear();
+    for (const unit of state.team) owners.add(unit.id);
+  }
   return owners;
 }

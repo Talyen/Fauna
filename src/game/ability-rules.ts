@@ -87,15 +87,12 @@ export function cardCost(
   if (actor?.combat?.[talentRule("stun.free-follow-up").state]) return 0;
   const freeNature = actor?.combat?.[talentRule("nature.windstep").state];
   const freeLight = actor?.combat?.[talentRule("light.divine-favor").state];
-  const freeBurn = hasTalent(state, "burn.flashpoint") && !state.battle?.freeBurnUsed;
-  if (freeNature || freeLight || freeBurn) {
-    if (
-      (freeNature && cardHasKeyword(card, "nature")) ||
-      (freeLight && cardHasKeyword(card, "light")) ||
-      (freeBurn && cardHasKeyword(card, "burn"))
-    )
-      return 0;
-  }
+  if (
+    (freeNature && cardHasKeyword(card, "nature")) ||
+    (freeLight && cardHasKeyword(card, "light")) ||
+    (!state.battle?.freeBurnUsed && hasTalent(state, "burn.flashpoint") && cardHasKeyword(card, "burn"))
+  )
+    return 0;
   return def.cost;
 }
 export function physicalBonus(actor: Pick<Creature, "block" | "combat">, state: Pick<GameState, "talents">) {
