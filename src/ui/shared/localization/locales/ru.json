@@ -1241,6 +1241,108 @@
     "sourceHash": "b04377d52f4ffa20841ca850e99f7ceeab9882e639e444405a37f99592da74d8",
     "text": "Эффект «<keyword0>Горение</keyword0>» с шансом {{value0}}% не ослабевает"
   },
+  "content.talent.dodge.catch-breath.name": {
+    "reviewed": true,
+    "source": "Catch Breath",
+    "sourceHash": "4a953a331c9444adc793ec4c870948d6422543c49b1428ab938c42baf6b9281d",
+    "text": "Перевести дух"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "e25d0fe00606f4c9e024be9059a6e1b0d325f2c383a7cf8c8534cd93337d4df7",
+    "text": "Восстановите {{value0}} ед. <keyword0>здоровья</keyword0>, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "reviewed": true,
+    "source": "Clean Getaway",
+    "sourceHash": "348c45983a89261d8794c6694cd974c354c334731c628b5a4716db6749971d01",
+    "text": "Чистый побег"
+  },
+  "content.talent.dodge.clean-getaway.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "sourceHash": "1e4ab650e1662534a216b40ada0d4589ea022dcb741183b47d49174f56a977ca",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, снимите с себя по {{value0}} ед. <keyword1>горения</keyword1>, <keyword2>яда</keyword2> и <keyword3>кровотечения</keyword3>"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "reviewed": true,
+    "source": "Finding Rhythm",
+    "sourceHash": "f5b5b3e29290293567e49c2dc32cf16f8af3fce2894972f82015c293fd75da34",
+    "text": "Найти ритм"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "reviewed": true,
+    "source": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "22f06d78305f86608a8fef84e7af05d6ef9b5b146fd6f73766db1c3d279a90f0",
+    "text": "Получение урона увеличивает ваш шанс эффекта «<keyword0>Уклонение</keyword0>» на {{value0}}%; сбрасывается, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "reviewed": true,
+    "source": "Lightfoot",
+    "sourceHash": "25ca618c6a438005c2cd1f27cf477f427de4e1245db0a9068f73cf00ce11c3a7",
+    "text": "Лёгкий шаг"
+  },
+  "content.talent.dodge.lightfoot.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "b5ff86ef86a442cdc5696eafeafac65260a061c8397a547d2caed7c7e9052518",
+    "text": "Получите {{value0}}% к шансу эффекта «<keyword0>Уклонение</keyword0>»"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "reviewed": true,
+    "source": "Open Flank",
+    "sourceHash": "98b6cb1642cbe110c3da429464b5de85e2c3b2287425a95265f5678cc68128cd",
+    "text": "Открытый фланг"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "sourceHash": "a9b7b6c21d0ce741e9361d43c2c240b821ef0202f1eeae29a5d07b688fd4efdd",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, ваша следующая атака дополнительно наносит {{value0}} ед. <keyword1>физического</keyword1> урона"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "reviewed": true,
+    "source": "Perfect Timing",
+    "sourceHash": "90b4c3cf15867e00731add90e2ae5996c212ae75cb6fdb2fbf0c830cb2360ec5",
+    "text": "Идеальный момент"
+  },
+  "content.talent.dodge.perfect-timing.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "0000f83a25d012104bd159ea3257201e8c07b39380352d5aa688b3d6542e8754",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0> без <keyword1>брони</keyword1>, получите {{value0}} ед. <keyword2>брони</keyword2>"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "reviewed": true,
+    "source": "Tailwind",
+    "sourceHash": "d51eeb92cd661921b8b6c3425e792a0441b97c1d56dc1566a0235c44541a2386",
+    "text": "Попутный ветер"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "sourceHash": "5282010eefc5ab90de77e110221237b539237569dcc58bb589b7ec01b6d713cf",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, возьмите карту"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "reviewed": true,
+    "source": "Thornstep",
+    "sourceHash": "b1f3a45ab7d2f1e9ec77be666e5a516a9544d09d09ce86042e079633f05fe539",
+    "text": "Шаг по шипам"
+  },
+  "content.talent.dodge.thornstep.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "aa6f9dbff9a85260231acde2806c75dbd990f6d0e2612abe0fd25925b6382bda",
+    "text": "Получите {{value0}} ед. <keyword0>шипов</keyword0>, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "reviewed": true,
+    "source": "Unburdened",
+    "sourceHash": "90d588dacab566be20760f59b66f7a1a821d1dc9b92ef6f402da4be18fb3b964",
+    "text": "Без бремени"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

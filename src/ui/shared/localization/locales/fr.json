@@ -1289,6 +1289,108 @@
     "sourceHash": "69ae667e396a82c611219de13fc075f3a8d11de3628ddfeb6d5256c2ff9c1c9a",
     "text": "La <keyword0>Brûlure</keyword0> a {{value0}}% de chances de ne pas diminuer"
   },
+  "content.talent.dodge.catch-breath.name": {
+    "reviewed": true,
+    "source": "Catch Breath",
+    "sourceHash": "544de23b5ec9b3aa6919b687791f2315f69cb6e83890bcb5f2fd44e7f74d2d04",
+    "text": "Reprendre son souffle"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "4e3abd79e0e39eb422a895235506077bf37d9dbe62dc773b073bd0b76327f1e8",
+    "text": "Récupérez {{value0}} de <keyword0>Santé</keyword0> quand vous <keyword1>Esquivez</keyword1>"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "reviewed": true,
+    "source": "Clean Getaway",
+    "sourceHash": "84be348cd96fa78def38c9117042159720fe5b50b0276c515cedf33e0e65bf1f",
+    "text": "Fuite parfaite"
+  },
+  "content.talent.dodge.clean-getaway.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "sourceHash": "3a1f05fc87a5a9b63b45d1507dba38c029c61e496002c9669d7436422df229a6",
+    "text": "Quand vous <keyword0>Esquivez</keyword0>, réduisez de {{value0}} vos cumuls de <keyword1>Brûlure</keyword1>, de <keyword2>Poison</keyword2> et de <keyword3>Saignement</keyword3>"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "reviewed": true,
+    "source": "Finding Rhythm",
+    "sourceHash": "0df418bb615ac68ecce154cfdc50f5e662afc0ca9d0955f76bdc260339269be8",
+    "text": "Trouver le rythme"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "reviewed": true,
+    "source": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "31612cede265916171124bb999cfe42fe27214828c8e46c85ee669e667b91708",
+    "text": "Subir des dégâts augmente vos chances d'<keyword0>Esquive</keyword0> de {{value0}}%, réinitialisées lors d'une <keyword1>Esquive</keyword1>"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "reviewed": true,
+    "source": "Lightfoot",
+    "sourceHash": "199a866c9520525c5c809995955231d2f303455100057b0101d003ec4c2fb1e3",
+    "text": "Pas léger"
+  },
+  "content.talent.dodge.lightfoot.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "653e70e8cc8add28bac8b51383b1612454d63b037815857b52df38c28749fb05",
+    "text": "Gagnez {{value0}}% de chances d'<keyword0>Esquive</keyword0>"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "reviewed": true,
+    "source": "Open Flank",
+    "sourceHash": "038114986df9504e7f962cc1abb7e9e1926d871ed35fd25175a58a6f278cf7ab",
+    "text": "Flanc exposé"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "sourceHash": "a9a0dfc02c060139405c8d9aee464e0573ecc8a319ac717a56c5b187e958175a",
+    "text": "Quand vous <keyword0>Esquivez</keyword0>, votre prochaine attaque inflige {{value0}} dégâts <keyword1>Physiques</keyword1> supplémentaires"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "reviewed": true,
+    "source": "Perfect Timing",
+    "sourceHash": "3b85c35f71f1c8b8a36e83d28419ff4829ffd5cf4178016d6ade9dfc49271b08",
+    "text": "Timing parfait"
+  },
+  "content.talent.dodge.perfect-timing.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "e19cc01e7d80a1881c2fa5522344b062cc3a9d9312f4232706a74a9fb376d626",
+    "text": "Quand vous <keyword0>Esquivez</keyword0> sans <keyword1>Armure</keyword1>, gagnez {{value0}} d'<keyword2>Armure</keyword2>"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "reviewed": true,
+    "source": "Tailwind",
+    "sourceHash": "31e3454becc171efd49fd7f86dad5cabe88d44d178ac5a24b40217d38fe92469",
+    "text": "Vent arrière"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "sourceHash": "e861718bd319486626839bb0a834c2f5b561298150258e929a143cd84f503797",
+    "text": "Quand vous <keyword0>Esquivez</keyword0>, piochez une carte"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "reviewed": true,
+    "source": "Thornstep",
+    "sourceHash": "44faee041e6993eee913e9ed9b8f7faaff0d81d44a6e069fe1cd4f5ba6e58996",
+    "text": "Pas épineux"
+  },
+  "content.talent.dodge.thornstep.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "419c0c7a3fd86e545bc5f88c098038b3204720fd85a1d0971df5ae90312dd0d7",
+    "text": "Gagnez {{value0}} <keyword0>Épines</keyword0> quand vous <keyword1>Esquivez</keyword1>"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "reviewed": true,
+    "source": "Unburdened",
+    "sourceHash": "10403df1acd1fe156838062a5e8310c33450e8144144c2aaca2d1203e457461e",
+    "text": "Sans fardeau"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

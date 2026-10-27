@@ -1241,6 +1241,108 @@
     "sourceHash": "ffaf870fb4ddf5729b2d45ce7ab8a1b6dd73cddb47337c26acd19f8ed5b23611",
     "text": "<keyword0>灼烧</keyword0>有{{value0}}%几率不衰减"
   },
+  "content.talent.dodge.catch-breath.name": {
+    "reviewed": true,
+    "source": "Catch Breath",
+    "sourceHash": "9f9a02b43496e1204d4aec3f898c10b2ade8f488c2f21ff09e22c333911991ac",
+    "text": "喘口气"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "503cf91b9951359e75f2690730e6e2b393db20566f4ba4b964214894c18a27ad",
+    "text": "你<keyword1>闪避</keyword1>时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "reviewed": true,
+    "source": "Clean Getaway",
+    "sourceHash": "0c6d746f45b52338dd63ca0402941e16715cb8afb7ad166096bf5f2a2295c7b7",
+    "text": "全身而退"
+  },
+  "content.talent.dodge.clean-getaway.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "sourceHash": "822ef2e19759756cc8d8f250ca4399d829f6d71a8aa55e8f7333042ae42fdd63",
+    "text": "你<keyword0>闪避</keyword0>时，移除自身各{{value0}}层<keyword1>灼烧</keyword1>、<keyword2>中毒</keyword2>和<keyword3>流血</keyword3>"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "reviewed": true,
+    "source": "Finding Rhythm",
+    "sourceHash": "3b80149c23d65633e2325a8de0e4f8cb5b86384dc8781fd78486059eff5b2354",
+    "text": "找到节奏"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "reviewed": true,
+    "source": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "598d71a078d0cce7ae2d73128897ea909c51970633d7010a67c83fa71a632752",
+    "text": "受到伤害时，你的<keyword0>闪避</keyword0>几率增加{{value0}}%，你<keyword1>闪避</keyword1>时重置"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "reviewed": true,
+    "source": "Lightfoot",
+    "sourceHash": "48c72508fb6f78f38a53455baa625d8eb50ee9a8ef9160b68f0f0be629af4e31",
+    "text": "轻步"
+  },
+  "content.talent.dodge.lightfoot.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "14f4a9d7f581c8f1b14cb3d8f92140b354226a576b49b50cee6a1dcdec62cb01",
+    "text": "<keyword0>闪避</keyword0>几率增加{{value0}}%"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "reviewed": true,
+    "source": "Open Flank",
+    "sourceHash": "f605a220084edca9cd16964aceaae8a4c5b5defd71d0b93dd739174e9ac63570",
+    "text": "侧翼破绽"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "sourceHash": "8973a4e117a69ec774c6fa274a07a8aba163ea3e3edfb368f0933a4a50506ef8",
+    "text": "你<keyword0>闪避</keyword0>时，下一次攻击额外造成{{value0}}点<keyword1>物理</keyword1>伤害"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "reviewed": true,
+    "source": "Perfect Timing",
+    "sourceHash": "e4dd2ebafe15f176adfd7d96cd2fd1c027431af9603e6193ba81cec88d727371",
+    "text": "完美时机"
+  },
+  "content.talent.dodge.perfect-timing.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "33646fa880f17375439d120725040040f0111e2c7bf20caec0df61e7467a45c3",
+    "text": "你在没有<keyword1>护甲</keyword1>时<keyword0>闪避</keyword0>，获得{{value0}}点<keyword2>护甲</keyword2>"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "reviewed": true,
+    "source": "Tailwind",
+    "sourceHash": "1c2c956932712108e8266111a0a8373ce5e33cbd53c2cf2e5a7e97005b58bdae",
+    "text": "顺风"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "sourceHash": "0b05c8ec7841289e1b5d471debffb4f200d6fdd07fcacf1a05c3d9345159cf0d",
+    "text": "你<keyword0>闪避</keyword0>时抽一张牌"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "reviewed": true,
+    "source": "Thornstep",
+    "sourceHash": "d6e8baa2602b629217775fbf37cdfeceae1286712d48a266e49a5e838419e86d",
+    "text": "荆棘步"
+  },
+  "content.talent.dodge.thornstep.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "0aa0879327da0b1f77a39999c0d85e394c6beb2736ab16573a11edfc08f84aef",
+    "text": "你<keyword1>闪避</keyword1>时获得{{value0}}点<keyword0>荆棘</keyword0>"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "reviewed": true,
+    "source": "Unburdened",
+    "sourceHash": "82b1c9a300c1e0079080c8410490d740effa23009eaaaf719ab8bf6940b9ce6b",
+    "text": "卸下重担"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

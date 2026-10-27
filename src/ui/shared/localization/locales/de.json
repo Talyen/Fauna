@@ -1241,6 +1241,108 @@
     "sourceHash": "66997d05e2b01940cc393330f2536e844b63748d14095d1442e7c8766a8aeb72",
     "text": "<keyword0>Brand</keyword0> hat eine Chance von {{value0}}%, nicht abzunehmen"
   },
+  "content.talent.dodge.catch-breath.name": {
+    "reviewed": true,
+    "source": "Catch Breath",
+    "sourceHash": "6eea0994d8e4f974f629cc1ad2f64e73e43a54ebb05a7ccdf99beb157fc18250",
+    "text": "Atemholen"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "0131c6a3877eaee86e28aa6ff6ddffeff4969128c9247075bf5b5bee08d362ba",
+    "text": "Stelle beim <keyword1>Ausweichen</keyword1> {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "reviewed": true,
+    "source": "Clean Getaway",
+    "sourceHash": "12409cb92ed699caba3448bb46186eb3de20c1e860e31b9b6ad6e6a72fe0786a",
+    "text": "Saubere Flucht"
+  },
+  "content.talent.dodge.clean-getaway.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "sourceHash": "ef9191462b35cd43a09c62bda0a0436d335c6a79efb7be94ecfcdf51e0d2ef9b",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, entferne bei dir jeweils {{value0}} Stapel <keyword1>Brand</keyword1>, <keyword2>Gift</keyword2> und <keyword3>Blutung</keyword3>"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "reviewed": true,
+    "source": "Finding Rhythm",
+    "sourceHash": "aa1b43a1188ac2882a7f29d11d2acdee998aeab03c36cc6104e9b6e9e9a99741",
+    "text": "Rhythmus finden"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "reviewed": true,
+    "source": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "4f5f75daa84b21012600b7b2a7798d1456889d491ae2f36edaf8467de1dc98f9",
+    "text": "Erlittener Schaden erhöht deine <keyword0>Ausweichchance</keyword0> um {{value0}}%; wird beim <keyword1>Ausweichen</keyword1> zurückgesetzt"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "reviewed": true,
+    "source": "Lightfoot",
+    "sourceHash": "b8d0ffa7f1cb68cf51a9e91c7f4a9793d063a616e55c1b0c183970c17b3f5fa5",
+    "text": "Leichtfuß"
+  },
+  "content.talent.dodge.lightfoot.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "33c31ad6d3f7d22c9573289303306e3c4a02043bec6c16563060813774a3a72f",
+    "text": "Erhalte {{value0}}% <keyword0>Ausweichchance</keyword0>"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "reviewed": true,
+    "source": "Open Flank",
+    "sourceHash": "83a4e1d5c1fa20e4bf7527e397b81be7dbc07c42f27fc3646f5e11b146722cb7",
+    "text": "Offene Flanke"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "sourceHash": "70d528f48d649b0aaebfe0dd622cfef7d60488e437b81d52ba4f145478eb69fe",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, verursacht dein nächster Angriff zusätzlich {{value0}} Schaden vom Typ <keyword1>Physisch</keyword1>"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "reviewed": true,
+    "source": "Perfect Timing",
+    "sourceHash": "fcf8ddfa04298b9ce1a5cd7318d8c2bb9911e2bf277ebd329e9f818184354fae",
+    "text": "Perfektes Timing"
+  },
+  "content.talent.dodge.perfect-timing.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "0f5ae692621c47d942c1ec70ea92c12e8c516b993fd5e172f05d39310bf5ae80",
+    "text": "Wenn du ohne <keyword1>Rüstung</keyword1> <keyword0>ausweichst</keyword0>, erhalte {{value0}} <keyword2>Rüstung</keyword2>"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "reviewed": true,
+    "source": "Tailwind",
+    "sourceHash": "3a9307a7286fe02364c8b811a7af91f5b42d6b9661be5093b7a888d48c943dd4",
+    "text": "Rückenwind"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "sourceHash": "63991f7f7daeeaf5c0e278d4f1435cb23a779edfaf3d01e1d60e41836d1f587b",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, ziehe eine Karte"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "reviewed": true,
+    "source": "Thornstep",
+    "sourceHash": "09b479b9325f5c809f30c00fda6d6bcff832ea374fb92d8c5edfd9c5ceec1eda",
+    "text": "Dornenschritt"
+  },
+  "content.talent.dodge.thornstep.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "bd6fd37b162c4fd9e571de3aa1ff95f78f139ac2d21d50b7bb0f3e2e5ba5bc19",
+    "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "reviewed": true,
+    "source": "Unburdened",
+    "sourceHash": "1e9f02415fdfd1222896f4e6b6e9fadb1abc06b5ba0abb34e9833e71ff84d11c",
+    "text": "Unbeschwert"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
