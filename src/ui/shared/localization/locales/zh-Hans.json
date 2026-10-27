@@ -5393,6 +5393,12 @@
     "sourceHash": "b58382f6889cc30d8edf2d383b2d154fec1b8b56e610d57389750581ae554512",
     "text": "{{name}}受到{{status}}效果。"
   },
+  "log.createFood": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Food cards",
+    "sourceHash": "56f8dc521ca0a7769f3551368f1c8a13db3d2a8d78df183cd73563a72037c7bd",
+    "text": "{{actor}}创建的食物卡牌：{{count}}"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",

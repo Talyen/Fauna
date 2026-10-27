@@ -5393,6 +5393,12 @@
     "sourceHash": "1c0e3d89ce02a9217ff25a04a3c2f538bcd1c915e2687f87964c571083204b7a",
     "text": "{{name}}に{{status}}が付与された。"
   },
+  "log.createFood": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Food cards",
+    "sourceHash": "3c3977c51f5c1e1b68ec5f34b8ec7c14501e82ca95f558a90ba85f8963926e09",
+    "text": "{{actor}}が作成した食料カード：{{count}}"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",

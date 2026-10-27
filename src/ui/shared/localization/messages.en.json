@@ -287,6 +287,9 @@
   "log.controlApplied": {
     "text": "{{name}} is {{status}}."
   },
+  "log.createFood": {
+    "text": "{{actor}} creates {{count}} Food cards"
+  },
   "log.criticalDamage": {
     "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
   },
