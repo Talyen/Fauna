@@ -1595,6 +1595,42 @@
     "sourceHash": "189bf866fba0362ca385d156b14f806dee3120ced5d9b729779ea30defbe6b87",
     "text": "1ターンおきに<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.oathara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally card per turn",
+    "sourceHash": "6d06e259cedee4dbfe8af68a15eae8a02dbbf263e0c58ba6ab9ee4833ce9fb46",
+    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+  },
+  "content.species.oathara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "5f34d991b511a87e6a3c92e773d65779763dc619f37973bc9ca41aa24284a5eb",
+    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+  },
+  "content.species.oathara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "6ea3c0728a62ec471c443041b26ca4253e8f92d327eb26ae0fef4c5acfb15061",
+    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+  },
+  "content.species.oathara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "14193768809cc5500e4b413c8e661ef5c53ed400a3a3653785ba82c77400f2f0",
+    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+  },
+  "content.species.oathara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "af9d9268de6e9c9c6eca017baef7f385a6422343e0429e87e1c63dbf1c2654e5",
+    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+  },
+  "content.species.oathara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "e32637cb06edec34b017b668ff1e352268a1699fbce019daf93793c722f1bd9e",
+    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+  },
   "content.species.oathara.trait": {
     "reviewed": true,
     "source": "Unfinished Journey",
@@ -2104,6 +2140,42 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "a562e3dd064fae2919e1ec5e2bfda472348eebbab482da901d04e354d695902e",
     "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
+  },
+  "content.species.wickwaltz.passive.0.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "52678e78551d17563a919206351f23a120b7431ea0fc806e6140faa0b6920cbc",
+    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+  },
+  "content.species.wickwaltz.passive.1.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "02d82a9f4e24fdc0510fd677a72b9be9ac6d793d907a40a4c1cc3553d49f3872",
+    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+  },
+  "content.species.wickwaltz.passive.2.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "0f7f902c4a1c1b2330998fbde0a85488ebd3f0a56b4ebdd0b59db231fac067d9",
+    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+  },
+  "content.species.wickwaltz.passive.3.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "8e7bf4ef0ff21b967defe5133b54a11108ae37c39b89cd79a7ad351a743b326e",
+    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+  },
+  "content.species.wickwaltz.passive.4.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
+    "sourceHash": "7ba4eff17aa5b17a91c8e4e00e0b7da891e0c3cefb8b3dba7c7addd5b0d4f937",
+    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+  },
+  "content.species.wickwaltz.passive.5.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn repeats",
+    "sourceHash": "5f6598ddbeab00571cb8f3f968ded4dce027028caa6606e86e5f8c27ddf35a6b",
+    "text": "各ターンのWickwaltzの2枚目のカードが繰り返される"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

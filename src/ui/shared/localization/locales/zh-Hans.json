@@ -1595,6 +1595,42 @@
     "sourceHash": "ebd556352efcac5c386465ca6734cf40051bb154b6ab4fb0792fded9d3dba711",
     "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.oathara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally card per turn",
+    "sourceHash": "e19d2746655d2d0161ff70e5b8b6a0a6e7e6f99969ba46158c17f39db15fb6c9",
+    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+  },
+  "content.species.oathara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "9000b82e7bbbd094c34aa0f03dfa7f49b5d1e96247d2a41c001ca005c120c8c1",
+    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+  },
+  "content.species.oathara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "d9e147e2cb2b224ca42720ecbdc4e0716659e0e146c4453630219b38add5982e",
+    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+  },
+  "content.species.oathara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "9b3ba196c8cae9e0a8a8a1edfae9b68fbcfb7295b00189c16055e47bc5207356",
+    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+  },
+  "content.species.oathara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "65306bda5bde2b93275d6103d631a34dc3d76d06af0d5775356892777fbfb22a",
+    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+  },
+  "content.species.oathara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "8746a85871b3248d5e7d78c421137baf95513b8677519aaeff6c8753c2ecfc9c",
+    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+  },
   "content.species.oathara.trait": {
     "reviewed": true,
     "source": "Unfinished Journey",
@@ -2104,6 +2140,42 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "eabccdc4164e35bedccb693ad6f1d47932d1542f0fdd0e701113bb1194f5f9b2",
     "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
+  },
+  "content.species.wickwaltz.passive.0.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "46d7ab3b5264ccaf969e98744dc87a4de6068e22f913c4e056c98fbdcfb36fba",
+    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+  },
+  "content.species.wickwaltz.passive.1.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "394a20936c206aef124c3840f94d8d3f33ec81f197c76d3cdb187c242c9d6a3b",
+    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+  },
+  "content.species.wickwaltz.passive.2.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "4bfaaebd5cebc896aee975618769e07e6fe23b9ea7628959a9f6757954b0738e",
+    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+  },
+  "content.species.wickwaltz.passive.3.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "afc3fd92cfccc231f2d1cf130d88ad26237e74e33b9254b86e99abd163e25b04",
+    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+  },
+  "content.species.wickwaltz.passive.4.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
+    "sourceHash": "6c7ac70cc6cafc9e0068cac516b55d90d6c148da47e99507935dc882510c22f2",
+    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+  },
+  "content.species.wickwaltz.passive.5.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn repeats",
+    "sourceHash": "d2c643bee9fe9c37b7625ce3a64928cd60508b668a92abfefba307989e6839b0",
+    "text": "Wickwaltz每回合打出的第二张牌会重复"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

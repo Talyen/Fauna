@@ -1595,6 +1595,42 @@
     "sourceHash": "fc61f5df637b43ecff46933ed190b524c0cf239bf309ef2e769f9dc6d7b59e7b",
     "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
   },
+  "content.species.oathara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally card per turn",
+    "sourceHash": "0c698f1163ee6ec3f327a15f17342407ed5de1d59de364463e63e675aea82110",
+    "text": "Oathara может разыграть за ход {{value0}} карту павших союзников"
+  },
+  "content.species.oathara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "70a845d09ca0986daf802e61fd17e4df1bc36ac0634d6c0fbb7724d8a101aee2",
+    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+  },
+  "content.species.oathara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "56f784988629a120fdb8af49be61e84ceafd295ee8124a199ca156f005cf5d63",
+    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+  },
+  "content.species.oathara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "af117f633b2b57d8dd66767f5acdbd434958bb28fcd1d4945dd20814a4a6e1d2",
+    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+  },
+  "content.species.oathara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "b5a8c329992f1b2c71a9b86e0e1052b48ac90132be0a9a7dd1d100a97054c5c6",
+    "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
+  },
+  "content.species.oathara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "09cc4a55e1f776a448368a65366e52498cc234fdd9453b02e6987a80dce8ccf4",
+    "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
+  },
   "content.species.oathara.trait": {
     "reviewed": true,
     "source": "Unfinished Journey",
@@ -2104,6 +2140,42 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "03eb132ec403ee3528af08f3a9f0ac14616a0c55be476bba46a57b18e0e06dac",
     "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
+  },
+  "content.species.wickwaltz.passive.0.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "2af8e6a6b0f1c234db1b444e26db62417438affae22dfe0999031b3b008e72ed",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.1.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "612dcf289b95e112f8f1128ac51adbbe2a5c8f512ab3cc76ea3d3de06b69bfb4",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.2.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "eb3b120610fd4c5c0f0c30b7732ed28bd2edd2c1c8e88522fa9cfc145dd6fc0f",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.3.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "410a59a42e1808f5649bc5c6a429e57534c9165c2170fd5a58438e53aeca43ca",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.4.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
+    "sourceHash": "a1dc193bb449f00c08afee2e263b31009d6449f9f2314ddce269960c584ad81b",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.5.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn repeats",
+    "sourceHash": "ad7d1a8b462fdb80fedede8452ec7f6fa145a83b6e128f6b8b19b05d163d5d5d",
+    "text": "Вторая карта Wickwaltz за ход повторяется"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

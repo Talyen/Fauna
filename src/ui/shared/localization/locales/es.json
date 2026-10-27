@@ -1595,6 +1595,42 @@
     "sourceHash": "1e3751e4d9e7b2646145b29c786f52520dd16b1863431b67fc2259a24a002686",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> cada dos turnos"
   },
+  "content.species.oathara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally card per turn",
+    "sourceHash": "f4c8bf1333a779ee177fcb7c4162201bc8b40806c9323308a02c067834da2b26",
+    "text": "Oathara puede jugar {{value0}} carta de un aliado fuera de combate por turno"
+  },
+  "content.species.oathara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "b914f81fc7f3c782e40b7d436546352bb806b1398cea701ab223835a4c93d36e",
+    "text": "Oathara puede jugar {{value0}} cartas de aliados fuera de combate por turno"
+  },
+  "content.species.oathara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "24033cb4c75fd3f1e8cb7ac875c28d76d4b969b7021261d9b0b881c4bae8be43",
+    "text": "Oathara puede jugar {{value0}} cartas de aliados fuera de combate por turno"
+  },
+  "content.species.oathara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "16fd256cfab9ca52dfde0b3ddbc1c856696dc7bcb2f90cf10776d0a96ca12463",
+    "text": "Oathara puede jugar {{value0}} cartas de aliados fuera de combate por turno"
+  },
+  "content.species.oathara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "52eba955d266b96730f335cd8871b7f4349dd7e6a1c09e4fbe539afd45343f7b",
+    "text": "Oathara puede jugar {{value0}} cartas de aliados fuera de combate por turno"
+  },
+  "content.species.oathara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "fb765f107b8ac14980298dd83eaf2704d751eece0c169187b1b2c11ff8cdc5a2",
+    "text": "Oathara puede jugar {{value0}} cartas de aliados fuera de combate por turno"
+  },
   "content.species.oathara.trait": {
     "reviewed": true,
     "source": "Unfinished Journey",
@@ -2104,6 +2140,42 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "8db430e107688b8b4c52f311435f2c581ad0e51d37428248cd1cbc77e4062946",
     "text": "{{value0}}% de probabilidad de interceptar ataques contra un aliado más herido"
+  },
+  "content.species.wickwaltz.passive.0.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "e55a86b5d924c0b271dc527cf595f400646718d696ddc5b09900ad48e2e76bad",
+    "text": "La segunda carta de Wickwaltz de cada turno tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.wickwaltz.passive.1.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "35050ed094a0ab3ddd293bfd0ad392a195e81ea3c91c3e21ac6bc8c01715c7db",
+    "text": "La segunda carta de Wickwaltz de cada turno tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.wickwaltz.passive.2.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "b03a9a71a90c39371010863c2ff4f475ee815e2a98b98147066dfb34ecb99116",
+    "text": "La segunda carta de Wickwaltz de cada turno tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.wickwaltz.passive.3.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "e919e31041884d1120029339efe2722b6dba5b7a9102f13b81d5a63c684151a4",
+    "text": "La segunda carta de Wickwaltz de cada turno tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.wickwaltz.passive.4.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
+    "sourceHash": "2eb230c46f65fd0280056ca7f6319ab8a38bb46bb56bb1308712e40234093fd9",
+    "text": "La segunda carta de Wickwaltz de cada turno tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.wickwaltz.passive.5.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn repeats",
+    "sourceHash": "b4031598511765c7f2c099106af765a2004f9d5cc0b5ba70201464c795740924",
+    "text": "La segunda carta de Wickwaltz de cada turno se repite"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
