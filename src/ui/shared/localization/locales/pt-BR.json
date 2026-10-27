@@ -663,7 +663,7 @@
     "reviewed": true,
     "source": "Add <keyword0>Mana</keyword0> Berries to your deck; <keyword1>Mana</keyword1> Berries also restore {{value0}} <keyword2>Health</keyword2> to all allies",
     "sourceHash": "f70b76c35eba4884fbedb5c8535a7f8ed2f145e5e43f77d4b27925a10516c2e0",
-    "text": "Adicione Bagas de <keyword0>Mana</keyword0> ao seu baralho; Bagas de <keyword1>Mana</keyword1> também restauram {{value0}} de <keyword2>Vida</keyword2> a todos os aliados"
+    "text": "Adicione Bagas de <keyword0>Mana</keyword0> ao seu baralho; Bagas de <keyword1>Mana</keyword1> também restauram {{value0}} de <keyword2>Saúde</keyword2> a todos os aliados"
   },
   "content.boon.coronation-cloche.name": {
     "reviewed": true,
@@ -1455,7 +1455,7 @@
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> beyond an ally’s maximum <keyword1>Health</keyword1> restores half the excess to the most injured other ally",
     "sourceHash": "9aa822e574a4f51411b6ecc01211b734ee0d1627bc5991b5a281b229cd1c5c71",
-    "text": "A <keyword0>Cura</keyword0> além da <keyword1>Vida</keyword1> máxima de um aliado restaura metade do excesso ao outro aliado mais ferido"
+    "text": "A <keyword0>Cura</keyword0> além da <keyword1>Saúde</keyword1> máxima de um aliado restaura metade do excesso ao outro aliado mais ferido"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -2823,7 +2823,7 @@
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; Restore {{value1}} <keyword1>Health</keyword1> to all allies; <keyword2>Consume</keyword2>",
     "sourceHash": "a92900998a3e926666e202a1265983b39087171a75c04680c33e8fdd3652013b",
-    "text": "Ganhe {{value0}} de <keyword0>Mana</keyword0>; restaure {{value1}} de <keyword1>Vida</keyword1> a todos os aliados; <keyword2>Consumir</keyword2>"
+    "text": "Ganhe {{value0}} de <keyword0>Mana</keyword0>; restaure {{value1}} de <keyword1>Saúde</keyword1> a todos os aliados; <keyword2>Consumir</keyword2>"
   },
   "content.card.food-mana-berries.name": {
     "reviewed": true,

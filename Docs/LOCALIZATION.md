@@ -105,7 +105,7 @@ incorrect parameters and missing locale-specific plural categories.
 `npm run localization:translations:check` validates existing reviewed records;
 the local changed-file gate and CI run it as well.
 
-The language registry marks only English qualified. Its qualification check
+The language registry identifies qualified languages. Its qualification check
 requires complete reviewed catalogs for each enabled language, completed UI,
 content and rule migration, and a runtime connected to those catalogs. Japanese,
 Simplified Chinese and Russian also require bundled script fonts whose character
@@ -145,16 +145,15 @@ rendering before qualification; a subset alone does not enable a language.
 The device-local preference owner can resolve an available qualified catalog
 using a saved choice, Steam's game language, then system languages. Optional
 storage and Steam failures fall back without blocking play; stale Steam responses
-cannot override a manual choice. Only English is selectable. The Steam worker
+cannot override a manual choice. The Steam worker
 uses an isolated, bounded language request so an invalid or timed-out optional
 reply does not stop its Cloud transport. Startup and runtime catalog localization
-are implemented, but the runtime qualification flag remains false until the
-final production build and language-switch checks pass.
+use the same qualified languages. Production build and platform verification are
+reported separately from catalog and rendered-flow checks.
 
 The rule-message adapter retains numeric values and keyword identities so a
 translated rule can reorder them; invalid or unrecognized templates fall back to
 English. The card extractor checks runtime numeric branches against the forms it
 samples, so newly introduced branches need explicit coverage. The UI inventory is
 an additional aid and cannot by itself prove coverage of dynamic text. The
-language selector offers qualified languages; until another language is
-qualified, Fauna remains English-only.
+language selector offers the languages marked qualified in the registry.
