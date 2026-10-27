@@ -3845,6 +3845,12 @@
     "sourceHash": "d192f04ad7b20792f49b29331fb8f34563d041301755565492e5929601a3641b",
     "text": "Dornenwuchs"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "b64baf18a95d3418202202a3f8ab2e08ef0a29f7a34eb3f5f324c9a2c2a03053",
+    "text": "<keyword0>Natur</keyword0>-Treffer haben eine Chance von {{value0}}%, <keyword1>Dornen</keyword1> in Höhe des verursachten Schadens zu gewähren"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
@@ -3856,6 +3862,12 @@
     "source": "Ecosystem",
     "sourceHash": "155beb31e0d2d12226ecda9993acc159e93a2e1776158bfa9b8132fc492fed86",
     "text": "Ökosystem"
+  },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "030938ac3206eb7982e2d3d5e30a4db049509d88095aa3c5ef0afa3a83f4c411",
+    "text": "Ziehe zu Kampfbeginn eine <keyword0>Natur</keyword0>-Karte"
   },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
@@ -3910,6 +3922,12 @@
     "source": "Verdant Cycle",
     "sourceHash": "9ee954717c30841ca7de3bdf3af43e4f65938c5815fbf0826ad22fe7724e590a",
     "text": "Grüner Kreislauf"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "511e90f76699cfe52ace3812f4b17a9c1cb04ce63e5c6102aa282c50909db983",
+    "text": "<keyword0>Natur</keyword0>-Schaden hat eine Chance von {{value0}}% auf <keyword1>Lebensraub</keyword1>"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,

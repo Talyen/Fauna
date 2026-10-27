@@ -3845,6 +3845,12 @@
     "sourceHash": "6f482c42c0c7e4700dad40b29ae0a1a6cb4d81a4c7d3c394a1c262c10ff9b39a",
     "text": "Рост терновника"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "24da4e2522f6d4780f00c7bdad63d74a798ec933c2dfbff3726a4ff4a0d245e7",
+    "text": "Попадания <keyword0>природой</keyword0> с вероятностью {{value0}}% дают <keyword1>шипы</keyword1> в размере нанесённого урона"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
@@ -3856,6 +3862,12 @@
     "source": "Ecosystem",
     "sourceHash": "5c5caa834cb6c4f6e6feefeece67f06232ec5063913df9b9f4a21150d28c7761",
     "text": "Экосистема"
+  },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "a0db275540243dd614c6f71df67b013196dbe4d079bf7246548457a6283afa4e",
+    "text": "В начале боя возьмите карту <keyword0>природы</keyword0>"
   },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
@@ -3910,6 +3922,12 @@
     "source": "Verdant Cycle",
     "sourceHash": "58e337c2f290061280b59aa7015971916af2d17774271f953469f2971c582dd2",
     "text": "Зелёный цикл"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "e6ada0424fa07aa3b55cca01d1609201050b9dedb243da6f57bd3bbee4b7d81a",
+    "text": "Урон <keyword0>природой</keyword0> с вероятностью {{value0}}% вызывает <keyword1>вампиризм</keyword1>"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,

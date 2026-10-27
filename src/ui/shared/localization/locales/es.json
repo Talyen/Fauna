@@ -3845,6 +3845,12 @@
     "sourceHash": "49479dd710d297f8c237bd1b9256b190657c88772d410d2b2411700e7463ff98",
     "text": "Crecimiento de zarzas"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "62bda75af77ff648578328ddc535ddd12a13c99efa80685e85338ddd7397ccc2",
+    "text": "Los golpes de <keyword0>Naturaleza</keyword0> tienen un {{value0}}% de probabilidad de otorgar <keyword1>Espinas</keyword1> iguales al daño infligido"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
@@ -3856,6 +3862,12 @@
     "source": "Ecosystem",
     "sourceHash": "69bd2fcb061b79023a584f821919a00db0034ca1599cacc6b0700412bc73fffc",
     "text": "Ecosistema"
+  },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "a5e7a368eeabe5ac880bea003496a9122996b25ff759869bb82a37a6d7afac76",
+    "text": "Roba una carta de <keyword0>Naturaleza</keyword0> al comenzar el combate"
   },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
@@ -3910,6 +3922,12 @@
     "source": "Verdant Cycle",
     "sourceHash": "95dae2dab7b2a8ccea6eca39bf3067bd4b25115c157fe9d3b94b829074a8e98b",
     "text": "Ciclo verde"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "be27191958b0d1a4bb6ed1d61a5c127d38037b054169a99af00b794ed5e8b990",
+    "text": "El daño de <keyword0>Naturaleza</keyword0> tiene un {{value0}}% de probabilidad de activar <keyword1>Drenaje</keyword1>"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,

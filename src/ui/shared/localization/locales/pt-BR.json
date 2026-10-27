@@ -3845,6 +3845,12 @@
     "sourceHash": "eaa6f6c1e7ebfe9f2eef3e081b357ae54a39c583155f113ad2e5be66c881a384",
     "text": "Crescimento de sarças"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "1a00b719eba35dfd3ebac8fa3a273341b007ef95a23e54199649812ef75ac829",
+    "text": "Golpes de <keyword0>Natureza</keyword0> têm {{value0}}% de chance de conceder <keyword1>Espinhos</keyword1> iguais ao dano causado"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
@@ -3856,6 +3862,12 @@
     "source": "Ecosystem",
     "sourceHash": "9a2e02c707bb2797554d7288ed37e32426d3a5e2d8e0ff9b2a5cc074bec86ed1",
     "text": "Ecossistema"
+  },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "b419c87c66a97f1f4df327c68894e5dcf3a00558c420f958715f441d5eb3d456",
+    "text": "Compre uma carta de <keyword0>Natureza</keyword0> no início do combate"
   },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
@@ -3910,6 +3922,12 @@
     "source": "Verdant Cycle",
     "sourceHash": "7a9d2df130b13197c36bee77961f94ff09aba73380283f0bcdf51dd7aaae4d89",
     "text": "Ciclo verdejante"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "005b0502968ba03e971e1e394f29a833814be8038841af927767f41701ae7dfd",
+    "text": "Dano de <keyword0>Natureza</keyword0> tem {{value0}}% de chance de ativar <keyword1>Drenagem</keyword1>"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,

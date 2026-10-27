@@ -3893,6 +3893,12 @@
     "sourceHash": "9aa44207c2a5fa80e67dd3dd1a9e08b392ebe65297446a98e7a5d73c90f4427d",
     "text": "Croissance des ronces"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "825febc13f224f96af7ffc6424492909c11989cb2891beb9867308a47e563bb9",
+    "text": "Les coups de <keyword0>Nature</keyword0> ont {{value0}}% de chances de conférer autant d’<keyword1>Épines</keyword1> que de dégâts infligés"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
@@ -3904,6 +3910,12 @@
     "source": "Ecosystem",
     "sourceHash": "d8ba0bacfffac514e7040af1d8ad31c451f81c1ce6e0490b9279e331be141468",
     "text": "Écosystème"
+  },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "0e3bab256d81f87b3cbe9d90fa10323f65fd6fac5a53d230bee7eedea3651013",
+    "text": "Piochez une carte de <keyword0>Nature</keyword0> en début de combat"
   },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
@@ -3958,6 +3970,12 @@
     "source": "Verdant Cycle",
     "sourceHash": "bf71929d99713dc4800efaef23f4fa634f0f3513f350b967efa139ea588d29f9",
     "text": "Cycle verdoyant"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "3b06ff83952e7fbf79142fdb86d9f7f5c7acbcdbcac9cfbde47342359169c719",
+    "text": "Les dégâts de <keyword0>Nature</keyword0> ont {{value0}}% de chances de déclencher un <keyword1>Vol de vie</keyword1>"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,
