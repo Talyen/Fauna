@@ -19,9 +19,12 @@ export function likelyArtwork(game: GameState) {
     game.phase === "draft"
       ? (game.selected.length ? game.selected : game.starterOffers).flatMap(speciesCards)
       : game.cards.map((card) => definition(card.definitionId));
-  return [...new Set(definitions.map((card) => assetUrl(card.artwork ?? `action.${card.species}`)))]
-    .filter((url) => !visible.has(url))
-    .slice(0, 8);
+  const candidates = new Set<string>();
+  for (const card of definitions) {
+    const url = assetUrl(card.artwork ?? `action.${card.species}`);
+    if (!visible.has(url)) candidates.add(url);
+  }
+  return [...candidates].slice(0, 8);
 }
 
 /** Select the actual saved next screen without resolving commands or advancing RNG. */
@@ -33,7 +36,8 @@ export function immediateArtwork(game: GameState) {
       (game.selected.length ? game.selected : game.starterOffers).forEach(creature);
       break;
     case "battle":
-      [...game.team, ...game.reserves, ...game.battle.enemies].forEach((unit) => creature(unit.species));
+      for (const row of [game.team, game.reserves, game.battle.enemies])
+        for (const unit of row) creature(unit.species);
       if (game.battle.minions?.length) ids.add("minion.echo");
       for (const id of game.battle.hand) {
         const card = game.cards.find((card) => card.id === id)!;
@@ -45,7 +49,7 @@ export function immediateArtwork(game: GameState) {
       game.reward.recruits.forEach(creature);
       if (game.reward.selectedRecruit) {
         creature(game.reward.selectedRecruit);
-        [...game.team, ...game.reserves].forEach((unit) => creature(unit.species));
+        for (const row of [game.team, game.reserves]) for (const unit of row) creature(unit.species);
       }
       break;
     case "boon":
@@ -59,7 +63,7 @@ export function immediateArtwork(game: GameState) {
       else ids.add("encounter.combat");
       break;
     case "campfire":
-      [...game.team, ...game.reserves].forEach((unit) => creature(unit.species));
+      for (const row of [game.team, game.reserves]) for (const unit of row) creature(unit.species);
       break;
     case "support":
       if (game.support.purchased) ids.add(`boon.${game.support.purchased}`);

@@ -24,7 +24,8 @@ export const statusOrder: readonly string[] = [
 ];
 export type Status = { id: string; text: string; count: number };
 export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] {
-  const dodge = Number(((combat?.dodge ?? 0) + (combat?.temporaryDodge ?? 0) + sharedDodge).toFixed(2));
+  if (!combat) return [];
+  const dodge = Number(((combat.dodge ?? 0) + (combat.temporaryDodge ?? 0) + sharedDodge).toFixed(2));
   const entries: Status[] = combat
     ? stats
         .filter((id) => (id === "dodge" ? dodge : combat[id]) > 0)

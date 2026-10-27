@@ -48,13 +48,13 @@ function resolvedPreviewModel(
   if (targetId) affected.add(targetId);
   const units = new Map<string, TargetForecast>();
   if (!result?.accepted) return { affected, units, messages: [] };
-  const nextUnits = new Map(
-    [
-      ...battlefield(result.state, "player"),
-      ...battlefield(result.state, "enemy"),
-      ...result.state.reserves,
-    ].map((unit) => [unit.id, unit]),
-  );
+  const nextUnits = new Map<string, ReturnType<typeof battlefield>[number]>();
+  for (const row of [
+    battlefield(result.state, "player"),
+    battlefield(result.state, "enemy"),
+    result.state.reserves,
+  ])
+    for (const unit of row) nextUnits.set(unit.id, unit);
   const grouped = new Map<string, { events: GameEvent[]; absorbed: number }>();
   for (const event of result.events) {
     if (!event.targetId) continue;
@@ -73,19 +73,21 @@ function resolvedPreviewModel(
         return !other || status.id !== other.id || status.text !== other.text || status.count !== other.count;
       });
     if (old.health !== next.health || old.block !== next.block || statusesChanged) affected.add(old.id);
-    const changes = [...new Set([...previous, ...current].map((status) => status.id))].flatMap((id) => {
-      const prior = previous.find((status) => status.id === id),
-        now = current.find((status) => status.id === id);
-      if (prior?.text === now?.text) return [];
-      const keyword = Object.hasOwn(KEYWORD_DEFINITIONS, id)
-        ? KEYWORD_DEFINITIONS[id as keyof typeof KEYWORD_DEFINITIONS].label
-        : undefined;
-      return [
-        keyword
-          ? `${keyword} ${prior?.count ?? 0} → ${now?.count ?? 0}`
-          : (now?.text ?? `Remove ${prior!.text}`),
-      ];
-    });
+    const changes = !statusesChanged
+      ? []
+      : [...new Set([...previous, ...current].map((status) => status.id))].flatMap((id) => {
+          const prior = previous.find((status) => status.id === id),
+            now = current.find((status) => status.id === id);
+          if (prior?.text === now?.text) return [];
+          const keyword = Object.hasOwn(KEYWORD_DEFINITIONS, id)
+            ? KEYWORD_DEFINITIONS[id as keyof typeof KEYWORD_DEFINITIONS].label
+            : undefined;
+          return [
+            keyword
+              ? `${keyword} ${prior?.count ?? 0} → ${now?.count ?? 0}`
+              : (now?.text ?? `Remove ${prior!.text}`),
+          ];
+        });
     const group = grouped.get(old.id);
     units.set(old.id, {
       name,

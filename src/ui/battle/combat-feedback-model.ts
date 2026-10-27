@@ -122,7 +122,13 @@ export function appendFeedback(
     else entries.push(entry);
     targets.set(entry.targetId, entries);
   }
-  const hasMeaningful = [...targets.values()].some((entries) => entries.some((e) => e.amount !== 0));
+  let hasMeaningful = false;
+  for (const entries of targets.values()) {
+    if (entries.some((e) => e.amount !== 0)) {
+      hasMeaningful = true;
+      break;
+    }
+  }
   let fallbackShown = false;
   for (const [targetId, raw] of targets) {
     const meaningful = raw.filter((e) => e.amount !== 0);

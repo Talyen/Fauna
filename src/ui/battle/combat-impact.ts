@@ -2,13 +2,10 @@ import { motionValue } from "../shared/motion-values";
 import type { GameEvent, DamageEvent } from "../../game/types";
 /** Positive health loss recoils; absorbed and ineffective hits keep numbers/audio only. */
 export function impactTargets(events: readonly GameEvent[]): string[] {
-  return [
-    ...new Set(
-      events
-        .filter((e): e is DamageEvent => e.kind === "damage" && e.impact !== false && e.amount > 0)
-        .map((e) => e.targetId!),
-    ),
-  ];
+  const targets = new Set<string>();
+  for (const event of events)
+    if (event.kind === "damage" && event.impact !== false && event.amount > 0) targets.add(event.targetId!);
+  return [...targets];
 }
 export function createCombatImpacts(root: () => HTMLElement | null) {
   const active = new Map<string, Animation>(),

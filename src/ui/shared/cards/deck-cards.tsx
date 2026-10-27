@@ -41,8 +41,9 @@ export function DeckCards({
           })),
         )
       : game.cards;
+  const pileIds = pile ? new Set(game.battle?.[pile] ?? []) : undefined;
   const cards = deck
-    .filter((card) => !pile || game.battle?.[pile].includes(card.id))
+    .filter((card) => !pile || pileIds!.has(card.id))
     .sort((a, b) => a.definitionId.localeCompare(b.definitionId) || a.id.localeCompare(b.id));
   return (
     <>

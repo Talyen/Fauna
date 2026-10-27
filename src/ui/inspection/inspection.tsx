@@ -12,7 +12,7 @@ import { Star } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../components/ui/dialog";
 import { ActionCard } from "../shared/cards/cards";
-import { CARDS, definition, species } from "../../game/content";
+import { definition, species, speciesCards } from "../../game/content";
 import type { Card } from "../../game/types";
 import { isAvailableFocusTarget, returnFocus } from "../shared/navigation/focus";
 import type { Inspection } from "../shared/inspection-model";
@@ -34,7 +34,9 @@ export function Inspector({
   const kind = "card" in item ? definition(item.card.definitionId).species : item.species;
   const creature = kind === null ? null : species(kind);
   const creatureId = rootCard?.ownerId ?? ("creatureId" in item ? item.creatureId : undefined);
-  const ally = creatureId ? [...game.team, ...game.reserves].find((c) => c.id === creatureId) : undefined;
+  const ally = creatureId
+    ? (game.team.find((c) => c.id === creatureId) ?? game.reserves.find((c) => c.id === creatureId))
+    : undefined;
   const enemy = "enemyId" in item ? game.battle?.enemies.find((e) => e.id === item.enemyId) : undefined;
   const speciesKit = "speciesKit" in item && item.speciesKit;
   const actor = enemy || speciesKit ? undefined : rootCard ? (cardActor(game, rootCard) ?? ally) : ally;
@@ -44,17 +46,16 @@ export function Inspector({
   const cards: Card[] =
     kind === null && rootCard
       ? [rootCard]
-      : CARDS.filter((c) => c.species === kind).map((def) =>
+      : (kind ? speciesCards(kind) : []).map((def) =>
           rootCard?.definitionId === def.id
             ? rootCard
-            : (game.cards.find(
-                (card) => !enemy && card.ownerId === actor?.id && card.definitionId === def.id,
-              ) ?? {
+            : (!enemy &&
+                game.cards.find((card) => card.ownerId === actor?.id && card.definitionId === def.id)) || {
                 id: `inspect-${def.id}`,
                 definitionId: def.id,
                 ownerId: actor?.id ?? kind,
                 level: 0,
-              }),
+              },
         );
   const [selected, setSelected] = useState<number | null>(() =>
     rootCard ? cards.findIndex((c) => c.definitionId === rootCard.definitionId) : null,
