@@ -3659,6 +3659,12 @@
     "sourceHash": "087c9a3e1783c1a104cf021364f5d9d9f838605675aef114b1d8ccb81edebdd5",
     "text": "ミニオン"
   },
+  "content.glossary.pearl.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
+    "sourceHash": "34211e846ce4fc369ec9727dd6980eb1639aec3f81cfadbf6ae7ed3ee1309092",
+    "text": "戦闘中のみ手札に生成されるカード; コストは<keyword0>マナ</keyword0>{{value0}}; ランダムに<keyword1>ブロック</keyword1>{{value1}}または<keyword2>マナ</keyword2>{{value2}}を付与; 使用後は<keyword3>消費</keyword3>で取り除かれる; 未使用の真珠は通常通り引いたり捨てたりできる"
+  },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
     "source": "Pearl",
@@ -3682,6 +3688,12 @@
     "source": "Swap cards",
     "sourceHash": "dff6f8178a344474eaea7a472abf4eb06e75f8c99d597b9c29234cade44cb65b",
     "text": "交代カード"
+  },
+  "content.glossary.talents.definition.rule": {
+    "reviewed": true,
+    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
+    "sourceHash": "f25c29843dcaef88e09a17debd4e8fda1d66ba97522f2acd44d401672bc36770",
+    "text": "キーワード経験値でそのキーワードの才能ポイントを獲得; 最初のポイントには経験値{{value0}}、次はさらに{{value1}}、その次は{{value2}}必要; 各段を完成させると次の段が開く; 才能は該当するすべてのクリーチャーにすぐ適用; カテゴリーはいつでもリセットでき、経験値を維持したまま全ポイントが戻る"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,

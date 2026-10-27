@@ -3659,6 +3659,12 @@
     "sourceHash": "cfddfbd1e60848c823ba0ec15da2987762e8341422ec1d3c9f8fa847299fb0d4",
     "text": "召唤物"
   },
+  "content.glossary.pearl.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
+    "sourceHash": "477fc9b1bbc3b8b5bf3e7e7e5b7c4b10ac22b871133927ddc23339c3a570a2d2",
+    "text": "仅在战斗中生成到手牌的牌; 消耗{{value0}}点<keyword0>法力</keyword0>; 随机提供{{value1}}点<keyword1>格挡</keyword1>或{{value2}}点<keyword2>法力</keyword2>; <keyword3>消耗</keyword3>使其在打出后移除; 未打出的珍珠可以正常抽取和弃掉"
+  },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
     "source": "Pearl",
@@ -3682,6 +3688,12 @@
     "source": "Swap cards",
     "sourceHash": "5be0d3e95cde202ced91e9845bada75f54a1ba5974150329b60cd2cf9c142d29",
     "text": "换位牌"
+  },
+  "content.glossary.talents.definition.rule": {
+    "reviewed": true,
+    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
+    "sourceHash": "f02545d2fa7091a5f12bbf02a5813559d7ebd9ad0e2adf015ed935e13a47e539",
+    "text": "关键词经验可获得该关键词的天赋点; 第一点需要{{value0}}经验，第二点还需{{value1}}，第三点还需{{value2}}; 完成每一行以解锁下一行; 天赋立即作用于所有符合条件的生物; 随时重置类别可返还全部点数并保留经验"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,

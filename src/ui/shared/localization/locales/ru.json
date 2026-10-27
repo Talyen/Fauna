@@ -3659,6 +3659,12 @@
     "sourceHash": "f0eb9e4fe280d07139141e6e9afe57ae510b3455beac922230db7b56592d3ea3",
     "text": "Прислужник"
   },
+  "content.glossary.pearl.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
+    "sourceHash": "3ca5b76f75572290ce8fec66b73d0924736c371bddb0801d70d3fa7d04334a75",
+    "text": "Карта, создаваемая в руке только на время боя; Стоит {{value0}} <keyword0>маны</keyword0>; Случайно даёт {{value1}} <keyword1>блока</keyword1> или {{value2}} <keyword2>маны</keyword2>; <keyword3>Расходуется</keyword3> удаляет её после розыгрыша; Неиспользованные Жемчужины можно обычно брать и сбрасывать"
+  },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
     "source": "Pearl",
@@ -3682,6 +3688,12 @@
     "source": "Swap cards",
     "sourceHash": "d27bae2406c0bd1356843ec5d8412cba4d47c90863d80bc90ee107b5399d94ad",
     "text": "Карты замены"
+  },
+  "content.glossary.talents.definition.rule": {
+    "reviewed": true,
+    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
+    "sourceHash": "c0af141bdbe3fcbfd455a095522226e01e8345a37769129477fbd883f3c0e655",
+    "text": "Опыт ключевого слова даёт очки для его талантов; Первое очко требует {{value0}} опыта, затем ещё {{value1}}, затем {{value2}}; Завершите каждый ряд, чтобы открыть следующий; Таланты сразу действуют на всех подходящих существ; В любой момент сбросьте категорию, чтобы вернуть все её очки и сохранить опыт"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,

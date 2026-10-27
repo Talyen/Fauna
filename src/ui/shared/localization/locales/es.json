@@ -3659,6 +3659,12 @@
     "sourceHash": "1d5092e3a956d19c4c1e17a0a90c6b362fd10fdf0d1601656eb709ed9922f1fb",
     "text": "Esbirro"
   },
+  "content.glossary.pearl.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
+    "sourceHash": "e0e765e5d1170712fe10f0376039e912a81c2c6a71e58a1d97ceeb88f1dc26ac",
+    "text": "Una carta creada en tu mano solo para el combate; Cuesta {{value0}} de <keyword0>Maná</keyword0>; Otorga aleatoriamente {{value1}} de <keyword1>Bloqueo</keyword1> o {{value2}} de <keyword2>Maná</keyword2>; <keyword3>Consumir</keyword3> la elimina tras jugarla; Las Perlas no jugadas pueden robarse y descartarse normalmente"
+  },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
     "source": "Pearl",
@@ -3682,6 +3688,12 @@
     "source": "Swap cards",
     "sourceHash": "b38fc9e1f641c364fb711b383f5ec943bff703507229935c76b7734e7629c268",
     "text": "Cartas de intercambio"
+  },
+  "content.glossary.talents.definition.rule": {
+    "reviewed": true,
+    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
+    "sourceHash": "1577fb66137ff3fb45b0802bd90ebc47c84457cca7b9251427231b429832e424",
+    "text": "La EXP de una palabra clave otorga puntos para sus talentos; El primer punto requiere {{value0}} de EXP, el siguiente {{value1}} más y después {{value2}}; Completa cada fila para abrir la siguiente; Los talentos se aplican inmediatamente a todas las criaturas correspondientes; Reinicia una categoría cuando quieras para recuperar sus puntos sin perder EXP"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,

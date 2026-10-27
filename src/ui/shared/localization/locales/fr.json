@@ -3659,6 +3659,12 @@
     "sourceHash": "505752f89c78882e273eaae2cd2547a876a5263ad77414cbe2ac2f13bfab5475",
     "text": "Serviteur"
   },
+  "content.glossary.pearl.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
+    "sourceHash": "bf2fc85115141fa1671e5434eb45d9d89886784b9dc5422a395ba80d96fb8f54",
+    "text": "Une carte créée en main uniquement pour le combat; Coûte {{value0}} <keyword0>Mana</keyword0>; Confère aléatoirement {{value1}} <keyword1>Blocage</keyword1> ou {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consommer</keyword3> la retire après utilisation; Les Perles non jouées peuvent être piochées et défaussées normalement"
+  },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
     "source": "Pearl",
@@ -3682,6 +3688,12 @@
     "source": "Swap cards",
     "sourceHash": "cec66492a67aa2073cd8467541268f77b52435c2cc2d08197e8149b2cf74a7a2",
     "text": "Cartes d’échange"
+  },
+  "content.glossary.talents.definition.rule": {
+    "reviewed": true,
+    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
+    "sourceHash": "ac13490e3bdb47cdba9802e6a9c5cfc2927ff6540e218e3e10e7f2c7e121b687",
+    "text": "Les XP d’un mot-clé donnent des points pour ses talents; Le premier point demande {{value0}} XP, puis {{value1}} supplémentaires, puis {{value2}}; Complétez chaque rangée pour ouvrir la suivante; Les talents s’appliquent immédiatement à toutes les créatures correspondantes; Réinitialisez une catégorie à tout moment pour récupérer ses points sans perdre les XP"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,

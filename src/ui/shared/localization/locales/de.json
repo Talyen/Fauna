@@ -3659,6 +3659,12 @@
     "sourceHash": "6da3b7db3f0bb7ffd9a49ab07feb3dc28d277b1849ad11ef60ac7910eb0a4bb4",
     "text": "Diener"
   },
+  "content.glossary.pearl.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
+    "sourceHash": "7cc9ac9044e574c1a2811cb0055bc298c60462d81c1f72e9c0ad1bbbe0daf72b",
+    "text": "Eine nur im Kampf erzeugte Karte auf deiner Hand; Kostet {{value0}} <keyword0>Mana</keyword0>; Gewährt zufällig {{value1}} <keyword1>Block</keyword1> oder {{value2}} <keyword2>Mana</keyword2>; <keyword3>Verbrauchen</keyword3> entfernt sie nach dem Spielen; Ungespielte Perlen können normal gezogen und abgelegt werden"
+  },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
     "source": "Pearl",
@@ -3682,6 +3688,12 @@
     "source": "Swap cards",
     "sourceHash": "979f982a683fcca8672e76f0eaa0f173c24292312ec4c96d89b110b15ae8f175",
     "text": "Wechselkarten"
+  },
+  "content.glossary.talents.definition.rule": {
+    "reviewed": true,
+    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
+    "sourceHash": "aa89403358d76422271544a8ded0ad47026b0b30d3e08ee3f6baad5be8372eed",
+    "text": "Schlüsselwort-EP gewähren Punkte für die Talente dieses Schlüsselworts; Der erste Punkt kostet {{value0}} EP, der nächste weitere {{value1}}, dann {{value2}}; Schließe jede Reihe ab, um die nächste zu öffnen; Talente wirken sofort auf jede passende Kreatur; Setze eine Kategorie jederzeit zurück, um alle Punkte zurückzuerhalten und die EP zu behalten"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,
