@@ -1,5 +1,6 @@
 import { useEffectMetadata } from "./effects/effects";
-import { KEYWORD_DEFINITIONS, keywordText, type KeywordId } from "../../game/keywords";
+import { KEYWORD_DEFINITIONS, type KeywordId } from "../../game/keywords";
+import { useRuleText } from "./localization/rule-catalog";
 export function Keyword({ id }: { id: KeywordId }) {
   const metadata = useEffectMetadata([id]);
   return (
@@ -12,7 +13,7 @@ export function Keyword({ id }: { id: KeywordId }) {
 /** Labels stay readable without color; definitions remain in the menu Glossary. */
 export function KeywordText({ text }: { text: string }) {
   const metadata = useEffectMetadata();
-  return keywordText(text).map((part, index) =>
+  return useRuleText(text).map((part, index) =>
     part.keyword ? (
       <span
         key={index}

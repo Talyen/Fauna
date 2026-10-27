@@ -358,3 +358,24 @@ it("Prayer Sailboat works through controlled swap admission and preserves previe
   expect(result.accepted).toBe(true);
   expect(result.state.reserves.find((u) => u.id === "ally-0")?.combat!.controlled).toBeNull();
 });
+
+it.each(["dunefox", "memento"] as const)(
+  "Prayer Sailboat spreads Cleanse to the departing formation before %s arrives",
+  (kind) => {
+    const state = requireBattle(structuredClone(teamRun(42, ["captoad", "mossguard", "emberback"])));
+    state.boons = ["prayer-sailboat", "miracle-megaphone"];
+    const outgoing = state.team[0]!;
+    const ally = state.team[1]!;
+    addReserve(state, "incoming", kind, species(kind).health, freshCombat());
+    const incoming = state.reserves.find((unit) => unit.id === "incoming")!;
+    outgoing.combat!.freeze = 3;
+    ally.combat!.freeze = 4;
+    incoming.combat!.freeze = 5;
+
+    swapBackup(state, outgoing.id, incoming.id, [], true);
+
+    expect(outgoing.combat!.freeze).toBe(0);
+    expect(ally.combat!.freeze).toBe(0);
+    expect(incoming.combat!.freeze).toBe(5);
+  },
+);
