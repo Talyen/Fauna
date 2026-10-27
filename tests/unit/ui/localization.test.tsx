@@ -189,6 +189,38 @@ it("localizes Dodge and interception announcements without rewriting unrelated e
   expect(eventPresentation(game, intercept, createMessageReader("en", {}))).toBe(intercept.text);
 });
 
+it("localizes temporary Dodge and lost Freeze buildup with their exact amounts", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const targetName = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: targetName, text: "Créature traduite" },
+  });
+  const dodge = {
+    kind: "status" as const,
+    status: "dodge" as const,
+    outcome: "gain" as const,
+    targetId: target.id,
+    amount: 30,
+    text: `${targetName} gains 30% Dodge until its next turn`,
+  };
+  const freeze = {
+    kind: "status" as const,
+    status: "freeze" as const,
+    outcome: "remove" as const,
+    targetId: target.id,
+    amount: 2,
+    text: `${targetName} loses 2 Freeze buildup`,
+  };
+  expect(eventPresentation(game, dodge, reader)).toBe(
+    "Créature traduite gagne 30% d’Esquive jusqu’à son prochain tour",
+  );
+  expect(eventPresentation(game, freeze, reader)).toBe("Créature traduite perd 2 d’accumulation de Gel");
+  expect(eventPresentation(game, { ...freeze, amount: 3 }, reader)).toBe(freeze.text);
+  expect(eventPresentation(game, dodge, createMessageReader("en", {}))).toBe(dodge.text);
+});
+
 it("localizes an authored ability and Food announcement without guessing unknown cards", () => {
   const game = run();
   const actor = game.team[0]!;

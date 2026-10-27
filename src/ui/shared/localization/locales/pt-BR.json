@@ -3857,6 +3857,12 @@
     "sourceHash": "1dfc2c54c058f41cfc495b947e25d976988a9028a4410f31f2379dbb98e5b0ea",
     "text": "{{name}}: nocaute."
   },
+  "log.loseFreezeBuildup": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Freeze buildup",
+    "sourceHash": "4f1b28fb06ea2047c626e0e9ab6819052ea07f79cc1378a66744b7b86b926630",
+    "text": "{{name}} perde {{amount}} de acúmulo de Congelamento"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3880,6 +3886,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "46bd2d96d9c00ce3dc75ef9b1b7461d6ff8abdac87943dcb9590dfcf70f83bb5",
     "text": "Você retorna das terras selvagens. As descobertas são mantidas."
+  },
+  "log.temporaryDodge": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}}% Dodge until its next turn",
+    "sourceHash": "437c672b8b8ba6ca8aded66444758357ba289ef38b9a19a74a302ac8a91c41ba",
+    "text": "{{name}} recebe {{amount}}% de Esquiva até seu próximo turno"
   },
   "log.turnRestored": {
     "reviewed": true,

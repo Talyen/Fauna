@@ -3857,6 +3857,12 @@
     "sourceHash": "2d99c27a7bbea59a267ed125ad199d4952f3b0b81a7e740cd9baf2fcb17eadab",
     "text": "{{name}}は戦闘不能になった。"
   },
+  "log.loseFreezeBuildup": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Freeze buildup",
+    "sourceHash": "545add015fb4014eeade563dc1325a44d1e905c57677329b7a55fee202c784b9",
+    "text": "{{name}}の凍結の蓄積が{{amount}}減少"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3880,6 +3886,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "9e6ccf6977846cf547ea67733133d4f6a1340e7ae829875eddc9ec76fd92cbdb",
     "text": "野生の地から帰還しました。発見は保持されます。"
+  },
+  "log.temporaryDodge": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}}% Dodge until its next turn",
+    "sourceHash": "007b3b59c93f38adecb0c902ee547787afc68a191aa3ae7edd1d9fb21b42cdd9",
+    "text": "{{name}}は次のターンまで回避を{{amount}}%獲得"
   },
   "log.turnRestored": {
     "reviewed": true,

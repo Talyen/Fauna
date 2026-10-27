@@ -3857,6 +3857,12 @@
     "sourceHash": "45b2f3bbf8706f6c01317f4c08ebfd133c66f232b215d2a4a7f797695ec0294c",
     "text": "Нокаут: {{name}}."
   },
+  "log.loseFreezeBuildup": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Freeze buildup",
+    "sourceHash": "0b9507e3907d1eeee7fb457f957fca6ebbecc6a7c8f7bb5a7f16871233c3f42e",
+    "text": "У {{name}} накопление заморозки уменьшается на {{amount}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3880,6 +3886,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "48131a3ff6050c17666b35c185c9c980d969a053b0526afd5d2d398cf2039843",
     "text": "Вы возвращаетесь из диких земель. Открытия сохранены."
+  },
+  "log.temporaryDodge": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}}% Dodge until its next turn",
+    "sourceHash": "3afc1d26cd62293dae045e7cda6432829fdf36f9d97b8c6ee0697dabc0203b3d",
+    "text": "{{name}} получает {{amount}}% уклонения до своего следующего хода"
   },
   "log.turnRestored": {
     "reviewed": true,

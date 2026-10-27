@@ -3857,6 +3857,12 @@
     "sourceHash": "6b193d08fab442fae7f0e846b44d34e722ecc0031e3dd1033c820477b252c869",
     "text": "{{name}}被击倒。"
   },
+  "log.loseFreezeBuildup": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Freeze buildup",
+    "sourceHash": "7a9ebeb5c55006d03ebb285c14516a62d439274e46af4c0388501a8eff3ae549",
+    "text": "{{name}}减少{{amount}}点冻结积累"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3880,6 +3886,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "17478189a0951aaf75aaa662444195a9e35fe7fa6fdd21c9f2836ae94432b0e7",
     "text": "你从荒野归来。已保留发现成果。"
+  },
+  "log.temporaryDodge": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}}% Dodge until its next turn",
+    "sourceHash": "5ee11864437a714d0d3c5837a1a1ba9895d25e5f90b3bf8cc62fd337f206bf41",
+    "text": "{{name}}获得{{amount}}%闪避，直到其下个回合"
   },
   "log.turnRestored": {
     "reviewed": true,

@@ -3857,6 +3857,12 @@
     "sourceHash": "e1b4be8d36ce3b7bb12a18d9a9b233d07ecbebdcbf8d5accb0db8cf4f3d9b6e0",
     "text": "{{name}} ist K. o."
   },
+  "log.loseFreezeBuildup": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Freeze buildup",
+    "sourceHash": "8d134786f5457451271433eba54dd90c3ac91abe3521155c3b74145d8c288ff6",
+    "text": "{{name}} verliert {{amount}} Frost-Aufbau"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3880,6 +3886,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "2b6c4bc9095e4a541ce13d10831b7f7679deaa5f7d98ed237aa837dc802f5c52",
     "text": "Du kehrst aus der Wildnis zurück. Entdeckungen bleiben erhalten."
+  },
+  "log.temporaryDodge": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}}% Dodge until its next turn",
+    "sourceHash": "d2614bf41a4747c570d177cb6ecc65510578db4a1b9b9f94c62e36920efa09af",
+    "text": "{{name}} erhält bis zum nächsten eigenen Zug {{amount}}% Ausweichen"
   },
   "log.turnRestored": {
     "reviewed": true,
