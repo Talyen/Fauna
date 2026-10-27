@@ -86,7 +86,17 @@ export function createCloud(
       }
     }
   };
-  const errorText = (error: unknown) => (error instanceof Error ? error.message : "Cloud sync failed.");
+  const errorText = (error: unknown) => {
+    try {
+      if (error instanceof Error) {
+        const message: unknown = error.message;
+        if (typeof message === "string") return message;
+      }
+    } catch {
+      // A transport error can expose a throwing message getter.
+    }
+    return "Cloud sync failed.";
+  };
   async function drain() {
     while (alive() && remoteReady && pending && port) {
       const item = pending;
