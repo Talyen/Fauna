@@ -15,7 +15,8 @@ These are source-inventory figures, not a build or packaged-size measurement.
 ## Focused verification
 
 The exact `tests/unit/game/chromatic-ten-boons.test.ts` regression passed 19 tests
-with one worker under the 30-second limit after incorporating current main. It
+with one worker under the 30-second limit after incorporating current main, using
+Node 24.22.1 and npm 12.2.1. It
 covers all ten together, status protection and reflection, actual restoration,
 Dodge counters, control damage through Block, Bleed defeat and delayed Leech,
 Freeze-reward ordering, Ravelland's Block-break Armor, preview isolation and
@@ -27,14 +28,14 @@ main's content validator referenced an undefined species lookup. The fix arrived
 independently on main and is present in the combined checkout. An existing reward
 screen was then captured as a layout reference; it is not a pre-edit acceptance.
 
-The combined captures under `reports/review/combined-ten-boons-*` contain four
+The reconciled captures under `reports/ten-boons-reconciled-layout/` contain four
 reward configurations at 1280×720 with 125% text and 1920×1080 at default text,
 with reduced motion. All eight frames completed without layout failures or page
 errors. Their shared render-input identity is
-`53382d1dcb73c0b7ea0bd43e99efefa0437ab32c491dd74e7aa98908ee2e6459`.
+`60d67892da92b6e569aa8250c16c7401b885ab0e32b535227831e31ba1fa7a25`.
 The ten source portraits and whole-screen renderings were inspected together at
 player scale. The combined interaction pass under
-`reports/ten-boons-interactions-final/` inspected every tooltip, selected each
+`reports/ten-boons-reconciled-interaction/` inspected every tooltip, selected each
 Boon by keyboard and verified ownership after reload, with no page errors. An
 earlier combined pass stopped after two items at its bounded inspection lease;
 its incomplete evidence remains separate.
