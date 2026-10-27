@@ -16,8 +16,8 @@ These are source-inventory figures, not a build or packaged-size measurement.
 
 The exact `tests/unit/game/chromatic-ten-boons.test.ts` regression passed 19 tests
 with one worker under the 30-second limit after incorporating current main, using
-Node 24.22.1 and npm 12.2.1. It
-covers all ten together, status protection and reflection, actual restoration,
+Node 24.22.1 and npm 12.2.1. It covers all ten together, status protection and
+reflection, actual restoration,
 Dodge counters, control damage through Block, Bleed defeat and delayed Leech,
 Freeze-reward ordering, Ravelland's Block-break Armor, preview isolation and
 save/resume. The changed-file gate passes separately; it defers compilers and
@@ -28,17 +28,20 @@ main's content validator referenced an undefined species lookup. The fix arrived
 independently on main and is present in the combined checkout. An existing reward
 screen was then captured as a layout reference; it is not a pre-edit acceptance.
 
-The reconciled captures under `reports/ten-boons-reconciled-layout/` contain four
+The latest captures under `reports/ten-boons-latest-layout/` contain four
 reward configurations at 1280×720 with 125% text and 1920×1080 at default text,
 with reduced motion. All eight frames completed without layout failures or page
-errors. Their shared render-input identity is
-`60d67892da92b6e569aa8250c16c7401b885ab0e32b535227831e31ba1fa7a25`.
-The ten source portraits and whole-screen renderings were inspected together at
-player scale. The combined interaction pass under
+errors. Their render-input identity is
+`68d1bfbc375ba5827ea7cc00318d9d9f06b9b39dd094c87bd35df9abba093d47`.
+Bellows Heart was selected by keyboard and retained after reload on this version.
+The ten source portraits and whole-screen renderings were inspected at player
+scale. An earlier combined interaction pass under
 `reports/ten-boons-reconciled-interaction/` inspected every tooltip, selected each
-Boon by keyboard and verified ownership after reload, with no page errors. An
-earlier combined pass stopped after two items at its bounded inspection lease;
-its incomplete evidence remains separate.
+Boon by keyboard and verified ownership after reload, with no page errors. Its
+render-input identity was `60d67892da92b6e569aa8250c16c7401b885ab0e32b535227831e31ba1fa7a25`;
+the subsequently incorporated main changes concerned gameplay allocations, not
+reward UI or artwork. An earlier pass stopped after two items at its bounded
+inspection lease; its incomplete evidence remains separate.
 
 This is task-owned Vite browser and keyboard evidence. Compilation, broad unit and
 browser suites, hosted CI, balance sweeps, native desktop, Windows packaging,
