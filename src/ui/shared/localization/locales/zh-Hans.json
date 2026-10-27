@@ -905,11 +905,155 @@
     "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
     "text": "水"
   },
+  "content.species.chimecricket.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "dfe7280109f4b1de577c29d64cf617cc3efa82a78e8082b4f31be9cf7e0316ba",
+    "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
+  },
+  "content.species.chimecricket.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "f4228c6f42039ffc4ea8df28c48e2b3004337ecedb96ef2e35c5f20ac8e79436",
+    "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
+  },
+  "content.species.chimecricket.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "90af94b450487b2ab49f2d76478bbd34bf158e08450404347b9441755b9bd447",
+    "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
+  },
+  "content.species.chimecricket.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "8c10ac79cb415d90711564b97a458c14d7d7871f5cb345cb24681732142fd556",
+    "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
+  },
+  "content.species.chimecricket.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "1df5f9a6a32262df469175bd84efc06f346dd9acb9f9db5d6e0759180672e152",
+    "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
+  },
+  "content.species.chimecricket.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "6b8815f18775ce1ba89b46dafd387f4022773822d7de88866c68bdc365f6fbea",
+    "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "3211fa21dd8e7b67c5021ae45d1582d2b96a6fb64d9bf2f47cad4b00e5e3034c",
     "text": "流动沙丘"
+  },
+  "content.species.mossguard.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "373adf92bfd3e26f629722603815fe87b2ea16dc112c7b57aaf52eab0cfede74",
+    "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
+  },
+  "content.species.mossguard.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "8c207d79a5169d668520391be40811df4bda6cf44807ff5a68f707f312615550",
+    "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
+  },
+  "content.species.mossguard.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "63a8627f52dac8373d79f059edba01da2d0bb55f25a38cb239e4996906663eca",
+    "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
+  },
+  "content.species.mossguard.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "5e32044dd188cdcb2e17fe6c2739a4d49e35e1bd9b00f22b4f7946a9eab07026",
+    "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
+  },
+  "content.species.mossguard.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "a576089c632f61e9100202f3e5c07714146373a5a66cf6bd77b233d9e8a45c65",
+    "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
+  },
+  "content.species.mossguard.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "de7ddb1e167365779c0bfb0defa2980c4b94ea38ee34e7de0940f31423b69e3c",
+    "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
+  },
+  "content.species.shadebrim.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "1858d175787f4439bd953321b1c1c22b1a76376ccc6e5bdba786860fcdab06f6",
+    "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.shadebrim.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "7d138521352ee7066f66a41cbbd301660fe672e9eae64eaca8374afa9deecb43",
+    "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.shadebrim.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "21b50a1a7ff8914d26505e022cd174c8a216a67b1108a6571c380a5b69cacf8a",
+    "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.shadebrim.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "2e6b9a79f53bdbddbde8e2c13db21c50ea88bfc66b26c2cc521a478c0c2f9cdc",
+    "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.shadebrim.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "2fbebed38c15b4ee61b7693bfd32125e64d064500a719392477d9b4c95aad97c",
+    "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.shadebrim.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "a5007e4f18df5e35c3bef4f6001691b2475af1403bf76b05f54efcbba4223c60",
+    "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.stillara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "2724b7eaa86820726bdf9f8576915d3a80faa02ddd187e7aadf97fbdab02b994",
+    "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.stillara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "d9dff0f33274f0d4a1ddcf80ebc82e98568c794f559abfe4b26340b525990993",
+    "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.stillara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "444b47246024ae510ec57831a3106b862f0bac0c0d7cae36d88d7a0c91d9c558",
+    "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.stillara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "bbdeb0a95dbc6e0d792eef62db188e92704d0425314f02e21f6e647910b8ac75",
+    "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.stillara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "8557f5dd858c7415d02f1d1b66de7184a01def2d7e2903d02bd7390b5be40553",
+    "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.stillara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "97f7c568936227fd61aa93d1cc734bc67e3d11f0fd72f97db24d848a2646d828",
+    "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,

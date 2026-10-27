@@ -953,11 +953,155 @@
     "sourceHash": "58003e51ae85c37048a64ffc1a053a6f2736e83e005e119093edc05f72430227",
     "text": "Eau"
   },
+  "content.species.chimecricket.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "245a2b6db09c547c69719717b1b0e07f01169db89621f5a45698f7d3364e346b",
+    "text": "Votre première capacité à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.chimecricket.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "027e4483056c10af44e2721bbae19c54fef9d238dc1dbca0b6bb019d220fa751",
+    "text": "Votre première capacité à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.chimecricket.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "7ef73d1f9b8edb13e9c9a9cdec5aef65f8580a024b3e716cc26b7d98d506f8d7",
+    "text": "Votre première capacité à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.chimecricket.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "84551f31ee48bf8e27be0278eb83214c318b78bbe6d4f317c5c9718c6a03e5ca",
+    "text": "Votre première capacité à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.chimecricket.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "279e45cd274f4f3e364ebcf1f5932f94281f55cea25c8fa27b19ea25ab876c3f",
+    "text": "Votre première capacité à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.chimecricket.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "19e4191b1f015fbefb9dee52037020ea20a6ab5f80ce6aedf5fe4d83628279d4",
+    "text": "Votre première capacité à chaque tour a {{value0}}% de chances de se répéter"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "9ce7a7ea3d0bfc1d406027718df378b8585565bf6e9043591192a13cade68d85",
     "text": "Sables mouvants"
+  },
+  "content.species.mossguard.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "2387b9748726967359e20f98b7387b31f9b78fbeff15164c01f39fd944fa39d0",
+    "text": "Conserve {{value0}}% de <keyword0>Blocage</keyword0> en plus entre les tours"
+  },
+  "content.species.mossguard.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "694381f34a520d961ce57c95b093122a398a87de4075a9518ec7c26897d9b0e7",
+    "text": "Conserve {{value0}}% de <keyword0>Blocage</keyword0> en plus entre les tours"
+  },
+  "content.species.mossguard.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "d5bb86a1e88da52d74baf5bde08e0f61e6ea0b7c43360fdc4a641dc410e7dc2a",
+    "text": "Conserve {{value0}}% de <keyword0>Blocage</keyword0> en plus entre les tours"
+  },
+  "content.species.mossguard.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "29641e85d275b0c4218d0000c00c437ce80e26794ca3d83898c03cf616f15be9",
+    "text": "Conserve {{value0}}% de <keyword0>Blocage</keyword0> en plus entre les tours"
+  },
+  "content.species.mossguard.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "6547369b7e449da94fe1bd080e2a124a1b724f2c67107b017f7fab34da1b834f",
+    "text": "Conserve {{value0}}% de <keyword0>Blocage</keyword0> en plus entre les tours"
+  },
+  "content.species.mossguard.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "c67877125d19fae2e3e2746a0b6a7934c06d00657d6e69eb95ff80cf86a21195",
+    "text": "Conserve {{value0}}% de <keyword0>Blocage</keyword0> en plus entre les tours"
+  },
+  "content.species.shadebrim.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "a42806645fe453a90c205483be2653271a8ae08845dc5cfd711e433b635b39c5",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Brûlure</keyword0> en moins"
+  },
+  "content.species.shadebrim.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "2032756c7f833bec5c853e949ae31f5cd02b529262054da06cc066e902656315",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Brûlure</keyword0> en moins"
+  },
+  "content.species.shadebrim.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "377867301eb74221bbff7f39be7fb288093b8c072b511127f65015866a211c45",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Brûlure</keyword0> en moins"
+  },
+  "content.species.shadebrim.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "91d206c1a39721fc3a6c8abc324d5fbd49f6b308097dab830bd30902983a68e9",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Brûlure</keyword0> en moins"
+  },
+  "content.species.shadebrim.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "842f9a5f6dca6d922b868101de0f86a0095238562e63cbe31d67e622cb47e754",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Brûlure</keyword0> en moins"
+  },
+  "content.species.shadebrim.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "80b5ed17cc2a67a5fc72a75e40f141cf1560ce8b2e6f4e92f89860bfe483166d",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Brûlure</keyword0> en moins"
+  },
+  "content.species.stillara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "6927c4fb50e7d8b4e93e29080a44744682fd372e20b5bce2537f46f5251f2820",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Gel</keyword0> en moins"
+  },
+  "content.species.stillara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "0d2df5d1fc5d5e0f832dded2f97a5332b68706a8a6e60dcef446a4032f7e4424",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Gel</keyword0> en moins"
+  },
+  "content.species.stillara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "668fe3f1eb2f460964235e2d834d510eedfa7c6524b93d00408ffd6fd1f869e5",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Gel</keyword0> en moins"
+  },
+  "content.species.stillara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "a345c9f7209fdb77fea6614d4ba9f63506d8cb84d1489a339a9b3bbe28ed65ae",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Gel</keyword0> en moins"
+  },
+  "content.species.stillara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "e4990c866ae7f5d6000b02d53a8315621e8f89dddbc97e98b91a625e57e0d91c",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Gel</keyword0> en moins"
+  },
+  "content.species.stillara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "2d754ed43842a2e6f96f1a9f0f46010e1df5c13f9b02850886e6e15c2f312a15",
+    "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Gel</keyword0> en moins"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,

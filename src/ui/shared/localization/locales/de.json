@@ -905,11 +905,155 @@
     "sourceHash": "a5db157930d4196b9c2631088f33b4fa95b07fcd1157220dbed9bbb734ff10c8",
     "text": "Wasser"
   },
+  "content.species.chimecricket.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "d6db62a4ae13411a27b2836ce2aa415838b6cabf9f1742005918aca5c172515b",
+    "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.chimecricket.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "71e526d86686f4df421e88ddbd16b72c61310593691ef2723b72e6632ffaf798",
+    "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.chimecricket.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "d586ceed17b8e2e68d60a940c334033889d481c6241bf4a7f3252cd090331105",
+    "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.chimecricket.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "81dda507ca8fa5db48669dd3b91ead3edf4ac94c8015914e7ac35a07553ae362",
+    "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.chimecricket.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "93106731c56009c2225276f3418bf011fbf203df7aa86aa00fc5c8019d43702d",
+    "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.chimecricket.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "4b0631daf1a7f0f0f110e11f828588180ed401ec3ccf6425e597d86db38e915f",
+    "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "300921460f57a2a3444c2b9690f46436dda8e38166b1cceafbbd124fb66affaf",
     "text": "Wandernde Sande"
+  },
+  "content.species.mossguard.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "2f5aa275adb6aba8312a485dc54410822c6c6e0526014c33e2e74cdb529c2c06",
+    "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
+  },
+  "content.species.mossguard.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "76512bccc0258b00a5d98472188629c6d4a412c9592846035876778d61370e9e",
+    "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
+  },
+  "content.species.mossguard.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "c05c1ebaec7e2df01692790762d5e58667bd584bab7d09390f09305b5bf092e0",
+    "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
+  },
+  "content.species.mossguard.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "1643b20f644415311f9f637007c8019cd7fc50047ab0dc0c40e2a9159b60a359",
+    "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
+  },
+  "content.species.mossguard.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "4cca8be255603c0ac72327a6a90aa5209ae8fe438463c6ead819da2231318a97",
+    "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
+  },
+  "content.species.mossguard.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "0844c7be118e49763c4caeb9b3b9ca2cb2081ed08d168a7d515f03f16e614b91",
+    "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
+  },
+  "content.species.shadebrim.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "45f4e24b5121f6d399bccbd159a69a3f6815be34cf387fce5a56e39509f244e0",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.species.shadebrim.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "cc5ce03bbba6446331f91e4c90f8dc14470514d9022d54f1f2139c20385ca3a9",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.species.shadebrim.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "e0b2edebc204528ffc6f6bf58a84a150e18423acc4b27e144d9459f02d927159",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.species.shadebrim.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "8da74676ab65f450f253fe3f6814fc85e417d87d290034775bf316c5b5153d1a",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.species.shadebrim.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "88ea62b42015ee0556a03f05150cd327fed49cf732b7649af4eca757ab10a1b5",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.species.shadebrim.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "60f88cab68e6979256d9ed86a89fddfa42b610f62feddcebd61cab3644a93259",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.species.stillara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "8231054ebaa8018b23bbf9fd923602f1e1ea3bf22f869faddd671c9572ce0489",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
+  },
+  "content.species.stillara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "fffe643161aa09bcecc9d568cdeb05ed26b4a5b7ca477e503246333f7ea9234d",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
+  },
+  "content.species.stillara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "0408759cf874e9548f08cd970ce1c5a99f40a2569b41fe2fa6ef7611d52f6da4",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
+  },
+  "content.species.stillara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "3d2e8cb0288fe779e011dd1adf4a94ddc3dfca09b449f6cd5e7e0fff73563d7d",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
+  },
+  "content.species.stillara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "cdb5285a1595536b74893f9c8ab9e8fcc8d6b0053cf8a5accef2ece82b47447b",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
+  },
+  "content.species.stillara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "064f7b8ea4b15b361c21401b975cdea0e6f8109d23b6f67833abebf7b093de13",
+    "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,

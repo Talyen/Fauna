@@ -905,11 +905,155 @@
     "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
     "text": "Вода"
   },
+  "content.species.chimecricket.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "e1973a22e1eea4fd0f890b0eaf61369e695870fc283b6e68913ff34f3ce1489d",
+    "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.chimecricket.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "d14679a76b11356528041366c78b1af3d74b5adeeb7dbf94e0d6aa32339e6782",
+    "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.chimecricket.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "279895a3b74d834a4e649c1684ce11cfa05233a8378389441410ff076c89ee1a",
+    "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.chimecricket.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "b2d882910d629f76ddb3fd836b93f19bd93f945905cbe81c2b67d5cf0eada7f3",
+    "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.chimecricket.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "e0fc985b53a88f954b9bf2150ce9c5df71936c6c1b6f85b99c10988d699f00a1",
+    "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.chimecricket.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "4e01103dfd9d8bc2b6d55a9b252315c362a25c3d2e2afbf5d593876d5be05c67",
+    "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "433d676012016227c4203e3bdd730a8784091d66c04aa9a4a74cee4b6a02e572",
     "text": "Подвижные пески"
+  },
+  "content.species.mossguard.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "b3918cc59da83653d18e9324b45cd261fe94e4142d5cb96439ec5aae15b2ef7d",
+    "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
+  },
+  "content.species.mossguard.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "824d79ba1809f3e4c94abb281a5b41e11aad3fc9798fa19028af7fd74a401956",
+    "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
+  },
+  "content.species.mossguard.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "2e3fbdceaa4b321640541b4611c5f6851ef0db408e3e351be2891a90275cace6",
+    "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
+  },
+  "content.species.mossguard.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "4407ef9ee36c69b2e93192a7b52bc571c4ce3200aaaf9e497f1657ac0cf258f5",
+    "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
+  },
+  "content.species.mossguard.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "49460bb47ccf7166ffad99e244de7a5a1f36b90b32de240b581030dcf86798e3",
+    "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
+  },
+  "content.species.mossguard.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "91e795ee9f576f8ac285ed502f61614156bf3295e8430c3a5f0907dbf201338a",
+    "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
+  },
+  "content.species.shadebrim.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "e3c7af5861c202c5e4935fbaf8de85d84b3f914d9d12d8c643f9739f8fcfa6ab",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.species.shadebrim.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "f938cde800868c99f4256fe7d030dc68ae5eccb054a3ae30683c01617b8c7f69",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.species.shadebrim.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "2539a7917d8d1b5d36893a94c92990921c015f6267e0dd49ece81ebf310adb76",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.species.shadebrim.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "54e77889150550751acdec27880beb78937adcc3880848694785291d63e1af10",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.species.shadebrim.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "f801e419103a152d511dbd2af92e033ddbaaada5cc1dba954460e20c3e65dc31",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.species.shadebrim.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "6dbc929b5542c1fe33edcec2343eb68d16a26e778a445bd831102d712b796163",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.species.stillara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "4cde614f6bc0efa7a997edb8ccaa9d1375596df2c7b591da798f059f7885ba33",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
+  },
+  "content.species.stillara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "a9ecbe1a072bcbc11239c2fd562f4f54545804c816e493013aa774e6fc1081c5",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
+  },
+  "content.species.stillara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "4f48f487f297192287bd9422ed9a6bca848de8f899754fce82342e3e29d7acbf",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
+  },
+  "content.species.stillara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "e8e9dcf07140b3d6f0a6ed8c7beaa8e7498a531ae5501312c63dbbe7e095309b",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
+  },
+  "content.species.stillara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "4a5d0cb33884f87afd5639d2b95b9184a040d205cb93b981e8fd5c6a07743a23",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
+  },
+  "content.species.stillara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "8dfedb5f8fa6c3e7d7126865b0ef8264128d5e3e928ddcd0501563720de8dc25",
+    "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
