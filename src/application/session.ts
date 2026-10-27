@@ -18,6 +18,8 @@ export interface SessionView {
   saveStatus: "saved" | "saving" | "error";
   saveUnavailable: boolean;
   events: GameEvent[];
+  /** The committed events may refer to combatants removed by the resulting transition. */
+  eventPreviousGame: GameState | null;
   committedCommand: Command | null;
 }
 export function createSession(
@@ -42,6 +44,7 @@ export function createSession(
         saveStatus: "saved",
         saveUnavailable: false,
         events: [],
+        eventPreviousGame: null,
         committedCommand: null,
       },
       true,
@@ -178,6 +181,7 @@ export function createSession(
               saveStatus: "saved",
               saveUnavailable: false,
               events: [],
+              eventPreviousGame: null,
               committedCommand: null,
               error: "",
             });
@@ -352,6 +356,7 @@ export function createSession(
       save(result.state, {
         game: result.state,
         events: result.events,
+        eventPreviousGame: result.events.length ? view.game : null,
         committedCommand: Object.freeze({ ...command }),
         error: "",
       });

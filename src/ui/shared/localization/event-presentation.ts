@@ -23,9 +23,12 @@ export function eventPresentation(
   game: GameState,
   event: GameEvent,
   i18n: ReturnType<typeof createMessageReader>,
+  previousGame?: GameState | null,
 ) {
+  const combatant = (id: string | undefined) =>
+    combatantById(game, id) ?? (previousGame ? combatantById(previousGame, id) : undefined);
   if (event.kind === "action" && event.actionType !== "swap") {
-    const actor = combatantById(game, event.actorId);
+    const actor = combatant(event.actorId);
     if (actor) {
       const prefix = `${unitName(actor)} uses `;
       if (event.text.startsWith(prefix) && event.text.endsWith(".")) {
@@ -80,13 +83,13 @@ export function eventPresentation(
       amount: i18n.locale === "en" ? String(event.amount) : event.amount,
     });
   if (!("targetId" in event) || !event.targetId) return event.text;
-  const target = combatantById(game, event.targetId);
+  const target = combatant(event.targetId);
   if (!target) return event.text;
   const englishName = unitName(target);
   const name = localizedCombatantName(target, i18n);
   const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
   if (event.kind === "action" && event.actionType === "support") {
-    const actor = combatantById(game, event.actorId);
+    const actor = combatant(event.actorId);
     if (actor && event.text === `${unitName(actor)} intercepts the attack against ${englishName}`)
       return i18n.message("log.intercept", "{{actor}} intercepts the attack against {{target}}", {
         actor: localizedCombatantName(actor, i18n),
@@ -105,11 +108,60 @@ export function eventPresentation(
   if (event.kind === "status") {
     if (
       event.status === "nullify" &&
+      event.outcome === "gain" &&
+      event.text === `${englishName} gains Nullify`
+    )
+      return i18n.message("log.gainNullify", "{{name}} gains Nullify", { name });
+    if (event.status === "blind" && event.outcome === "apply" && event.text === `${englishName} is Blinded`)
+      return i18n.message("log.blinded", "{{name}} is Blinded", { name });
+    if (
+      event.status === "nullify" &&
       event.outcome === "immune" &&
       event.affectedStatus === "freeze" &&
       event.text === `${englishName} nullifies Freeze damage`
     )
       return i18n.message("log.nullifyFreezeDamage", "{{name}} nullifies Freeze damage", { name });
+    if (
+      event.status === "nullify" &&
+      (event.outcome === "immune" || event.outcome === "remove") &&
+      event.affectedStatus &&
+      isKeywordId(event.affectedStatus) &&
+      event.text === `${englishName} nullifies ${event.affectedStatus}`
+    ) {
+      const status = event.affectedStatus;
+      return i18n.message("log.nullifyEffect", "{{name}} nullifies {{status}}", {
+        name,
+        status:
+          i18n.locale === "en"
+            ? status
+            : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
+      });
+    }
+    if ((event.status === "freeze" || event.status === "stun") && event.outcome === "immune") {
+      const status = event.status;
+      if (event.text === `${englishName} is immune to ${status} buildup.`)
+        return i18n.message("log.immuneBuildup", "{{name}} is immune to {{status}} buildup.", {
+          name,
+          status:
+            i18n.locale === "en"
+              ? status
+              : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
+        });
+    }
+    if ((event.status === "freeze" || event.status === "stun") && event.outcome === "apply") {
+      const englishStatus = event.status === "freeze" ? "Frozen" : "Stunned";
+      if (event.text === `${englishName} is ${englishStatus}.`)
+        return i18n.message("log.controlApplied", "{{name}} is {{status}}.", {
+          name,
+          status:
+            i18n.locale === "en"
+              ? englishStatus
+              : i18n.content(
+                  `content.keyword.${event.status}.label`,
+                  KEYWORD_DEFINITIONS[event.status].label,
+                ),
+        });
+    }
     if ((event.status === "freeze" || event.status === "stun") && event.outcome === "skip") {
       const englishStatus = event.status === "freeze" ? "Frozen" : "Stunned";
       if (event.text === `${englishName} skips its ${englishStatus} turn.`)
@@ -200,7 +252,7 @@ export function eventPresentation(
     }
   }
   if (event.kind === "heal" && event.actorId) {
-    const actor = combatantById(game, event.actorId);
+    const actor = combatant(event.actorId);
     if (actor && event.text === `${unitName(actor)} Resurrects ${englishName} with ${event.amount} Health`)
       return i18n.message("log.resurrect", "{{actor}} Resurrects {{target}} with {{amount}} Health", {
         actor: localizedCombatantName(actor, i18n),

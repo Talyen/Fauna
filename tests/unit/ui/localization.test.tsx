@@ -78,7 +78,7 @@ import { Keyword } from "../../../src/ui/shared/keyword-text";
 import { CreatureCard } from "../../../src/ui/shared/cards/cards";
 import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
-import { addBackups, requireBattle, run, teamRun } from "../../support/game";
+import { addBackups, requireBattle, run, teamRun, victoryReady } from "../../support/game";
 import { BattleScreen } from "../../../src/ui/battle/battle-screen";
 import { ManaCrystals } from "../../../src/ui/battle/mana-crystals";
 import { MenuActions } from "../../../src/ui/menu/menu-actions";
@@ -222,6 +222,69 @@ it("localizes temporary Dodge and lost Freeze buildup with their exact amounts",
   expect(eventPresentation(game, dodge, createMessageReader("en", {}))).toBe(dodge.text);
 });
 
+it("localizes applied, prevented and immune combat status announcements", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const targetName = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: targetName, text: "Créature traduite" },
+  });
+  const base = { kind: "status" as const, targetId: target.id };
+  const gain = {
+    ...base,
+    status: "nullify" as const,
+    outcome: "gain" as const,
+    text: `${targetName} gains Nullify`,
+  };
+  const blinded = {
+    ...base,
+    status: "blind" as const,
+    outcome: "apply" as const,
+    text: `${targetName} is Blinded`,
+  };
+  const prevented = {
+    ...base,
+    status: "nullify" as const,
+    outcome: "remove" as const,
+    affectedStatus: "poison" as const,
+    text: `${targetName} nullifies poison`,
+  };
+  const immune = {
+    ...base,
+    status: "freeze" as const,
+    outcome: "immune" as const,
+    text: `${targetName} is immune to freeze buildup.`,
+  };
+  const frozen = {
+    ...base,
+    status: "freeze" as const,
+    outcome: "apply" as const,
+    text: `${targetName} is Frozen.`,
+  };
+  const stunned = {
+    ...base,
+    status: "stun" as const,
+    outcome: "apply" as const,
+    text: `${targetName} is Stunned.`,
+  };
+  expect(eventPresentation(game, gain, reader)).toBe("Créature traduite gagne Annulation");
+  expect(eventPresentation(game, blinded, reader)).toBe("Créature traduite : Aveuglement appliqué");
+  expect(eventPresentation(game, prevented, reader)).toBe("Créature traduite annule Poison");
+  expect(eventPresentation(game, immune, reader)).toBe(
+    "Créature traduite : immunité à l’accumulation (Gel).",
+  );
+  expect(eventPresentation(game, frozen, reader)).toBe("Créature traduite : effet appliqué (Gel).");
+  expect(eventPresentation(game, stunned, reader)).toBe(
+    "Créature traduite : effet appliqué (Étourdissement).",
+  );
+  expect(eventPresentation(game, { ...prevented, affectedStatus: "burn" as const }, reader)).toBe(
+    prevented.text,
+  );
+  for (const event of [gain, blinded, prevented, immune, frozen, stunned])
+    expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+});
+
 it("localizes prevented Freeze damage and skipped control turns", () => {
   const game = run();
   const target = game.team[0]!;
@@ -256,6 +319,44 @@ it("localizes prevented Freeze damage and skipped control turns", () => {
   ).toBe("Créature traduite : tour sauté (Étourdissement).");
   expect(eventPresentation(game, { ...skipped, status: "stun" as const }, reader)).toBe(skipped.text);
   expect(eventPresentation(game, skipped, createMessageReader("en", {}))).toBe(skipped.text);
+});
+
+it("localizes the final enemy hit after the battle state is retired", async () => {
+  const initial = victoryReady();
+  const enemy = initial.battle!.enemies.find((item) => item.health > 0)!;
+  const cardId = initial.battle!.hand[0]!;
+  let saved = "";
+  const session = createSession({
+    desktop: false,
+    steam: { available: false },
+    saves: {
+      readCandidates: async () => [{ source: "primary" as const, data: JSON.stringify(initial) }],
+      write: async (data) => {
+        saved = data;
+      },
+    },
+  });
+  try {
+    await session.load();
+    const previous = session.store.getState().game;
+    expect(session.command({ type: "play", cardId, targetId: enemy.id })).toBe(true);
+    const view = session.store.getState();
+    expect(view.game.battle).toBeNull();
+    expect(view.eventPreviousGame).toBe(previous);
+    expect(Object.isFrozen(view.eventPreviousGame)).toBe(true);
+    const event = view.events.find((item) => item.kind === "damage" && item.targetId === enemy.id)!;
+    expect(event).toBeDefined();
+    const reader = createMessageReader("fr", french);
+    expect(eventPresentation(view.game, event, reader)).toBe(event.text);
+    const translated = eventPresentation(view.game, event, reader, view.eventPreviousGame);
+    expect(translated).toContain(enemy.name);
+    expect(translated).toContain("subit");
+    expect(translated).not.toBe(event.text);
+    expect(await session.flush()).toBe(true);
+    expect(JSON.parse(saved)).not.toHaveProperty("eventPreviousGame");
+  } finally {
+    await session.dispose();
+  }
 });
 
 it("localizes a committed resurrection without changing its Health or participants", () => {
@@ -1766,6 +1867,97 @@ it("uses the same localized Food rule in tooltips and accessible card names", ()
     }),
   ).toBeTruthy();
   expect(view.container.textContent).toContain("Restaure 12 Santé à tous les alliés ; Consommer");
+  view.unmount();
+});
+
+it("presents reviewed draw and Mana variants with their actual values", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const card = definition("wickwaltz-draw");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={card} value={1} />
+        <CardRules card={card} value={2} />
+        <CardRules card={enemyCard(card)} value={1} />
+        <CardRules card={enemyCard(card)} value={2} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Piochez 1 carte ; Gagnez 1 Mana",
+    "Piochez 2 cartes ; Gagnez 1 Mana",
+    "Piochez 1 carte",
+    "Piochez 2 cartes",
+  ]);
+  expect(view.container.querySelectorAll('[data-keyword="mana"]')).toHaveLength(2);
+  view.unmount();
+  localStorage.removeItem("fauna.language.v1");
+  const russianView = render(
+    <LocalizationProvider catalogs={{ ru: russian }} qualified={["en", "ru"]} systemLanguages={["ru"]}>
+      <TooltipProvider>
+        <CardRules card={card} value={1} />
+        <CardRules card={card} value={2} />
+        <CardRules card={card} value={5} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...russianView.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Добор карт: 1; Получено маны: 1",
+    "Добор карт: 2; Получено маны: 1",
+    "Добор карт: 5; Получено маны: 1",
+  ]);
+  russianView.unmount();
+});
+
+it("presents shared Stun, area Burn and Mana rules with their keyword identities", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={enemyCard(definition("chimecricket-attack"))} value={4} />
+        <CardRules card={definition("wickwaltz-attack")} value={2} />
+        <CardRules card={enemyCard(definition("stillara-reed-reservoir"))} value={2} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Infligez 4 dégâts d’Étourdissement",
+    "Infligez 2 dégâts de Brûlure à tous les ennemis",
+    "Gagnez 2 Mana",
+  ]);
+  expect(view.container.querySelector('[data-keyword="stun"]')).toBeTruthy();
+  expect(view.container.querySelector('[data-keyword="burn"]')).toBeTruthy();
+  expect(view.container.querySelector('[data-keyword="mana"]')).toBeTruthy();
+  view.unmount();
+});
+
+it("presents shared Dodge and reflected attack card rules", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const dodge = definition("dunefox-dodge");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={dodge} value={30} />
+        <CardRules card={enemyCard(dodge)} value={30} />
+        <CardRules card={definition("oathara-travelers-ward")} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Gagnez 30% d’Esquive jusqu’à votre prochain tour ; Piochez 1 carte",
+    "Gagnez 30% d’Esquive jusqu’à votre prochain tour",
+    "Renvoyez la prochaine attaque",
+  ]);
+  expect(view.container.querySelectorAll('[data-keyword="dodge"]')).toHaveLength(2);
+  expect(view.container.querySelector('[data-keyword="attackReflection"]')).toBeTruthy();
   view.unmount();
 });
 

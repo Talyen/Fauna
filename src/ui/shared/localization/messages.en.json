@@ -278,8 +278,14 @@
   "log.absorb": {
     "text": "{{name}} blocks {{amount}} damage."
   },
+  "log.blinded": {
+    "text": "{{name}} is Blinded"
+  },
   "log.boonPurchased": {
     "text": "Boon purchased for this journey."
+  },
+  "log.controlApplied": {
+    "text": "{{name}} is {{status}}."
   },
   "log.criticalDamage": {
     "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
@@ -308,11 +314,17 @@
   "log.gainMana": {
     "text": "Gain {{amount}} Mana."
   },
+  "log.gainNullify": {
+    "text": "{{name}} gains Nullify"
+  },
   "log.gainStatus": {
     "text": "{{name}} gains {{amount}} {{status}}."
   },
   "log.heal": {
     "text": "{{name}} restores {{amount}} Health."
+  },
+  "log.immuneBuildup": {
+    "text": "{{name}} is immune to {{status}} buildup."
   },
   "log.intercept": {
     "text": "{{actor}} intercepts the attack against {{target}}"
@@ -325,6 +337,9 @@
   },
   "log.loseFreezeBuildup": {
     "text": "{{name}} loses {{amount}} Freeze buildup"
+  },
+  "log.nullifyEffect": {
+    "text": "{{name}} nullifies {{status}}"
   },
   "log.nullifyFreezeDamage": {
     "text": "{{name}} nullifies Freeze damage"
