@@ -413,6 +413,48 @@
     "sourceHash": "dc463ecee47bb2c8f9da819d6894e75cd86226dc7779ca5cc1a18f8a374b4a73",
     "text": "Piedra del trueno"
   },
+  "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "04a3cd6bb0a25b14aabdeec7207fd71bff5f39470c7b83827d43685ce4129c80",
+    "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
+  },
+  "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "6abc5736f5aa5fc473f502d5a50b5a1667f737673b55dd87711526e51d8cdd92",
+    "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
+  },
+  "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "2f7e969dcc98e28ef131af3837bdfc5fba398103c0d632dd86a888d02f59d6b1",
+    "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
+  },
+  "content.card.dawncall-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "0b4997179e17db2e851d4ce832c37055880057e712ec60fcd03ebc054bd70daa",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
+  },
+  "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "a4641ecd4946a8a0823c53dcffa89e37bf59f025da33a5be3d4640fc86474371",
+    "text": "Los aliados obtienen {{value0}} de <keyword0>Bloqueo</keyword0>"
+  },
+  "content.card.dunefox-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "9fcd3b091147634c577adc581d3dc8315aaade8d2e4ebd86e2ede0803bfa9f38",
+    "text": "Inflige {{value0}} de daño <keyword0>Físico</keyword0>"
+  },
+  "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "300d6cb6945b2e6820b56812498687859fc937421ccdc2f9d9f5204eb9059d2a",
+    "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0> a todos los enemigos"
+  },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
@@ -467,6 +509,18 @@
     "sourceHash": "27fb80c4545a3d19736346b32bf1cda5c28211a5dacc767b83e2a6bbd2c80310",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
+  "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "7d4903bde0383b23756e60c06042b7a7f87d3f0c906d12dfed098b9fc455eb46",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
+  },
+  "content.card.orifable-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "e86aeeb617d20b8fb8c137c250fe50b1b8fda8987f37ada1cbfc190ccb1e0377",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> al aliado más herido"
+  },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
@@ -502,6 +556,12 @@
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "4622f18c2489617f5d9aeaf0ff5ff11f98763b70e87ac525835ce6b1ca9d16bf",
     "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0>; <keyword1>Purga</keyword1> al objetivo: elimina {{value1}} efecto"
+  },
+  "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "ae708bdd576adb2e8246c6390944186a50166794915d15804b31e5b9ec1693f5",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

@@ -413,6 +413,48 @@
     "sourceHash": "ea8f2c71542762eb6644d3df9c6ff1646f844da29c4816e82317984ada005b49",
     "text": "Donnerstein"
   },
+  "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "675b8188f6a8c2315f1dcb19b385a9e533a649547a4623b77cd0aaf324001583",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "5d08a38a57e5bf3d331a5a49805c44287b61aff3448a4fe2896d8d691258680c",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "7742191ee8a8754570deb0513ec8a94bda4e3c13a1669442bea7c285cb6e3cd9",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.dawncall-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "f8c0bf3fb0a8d6aafa3c6d4f5bed6baf5d9c51dd4ed3b2654dee0f73c1451929",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "a0e373cbb07851bcf5244aaecb588f61d3db75a323d218a963955fc0bc3c9c08",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.dunefox-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "c7bdfdf1bed9dc39e9b14a2fa1a9c1f86eaf8b0c411980d0897005106490a6ad",
+    "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu"
+  },
+  "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "28c6d6d844821b1200c6c07fc890a1d2b59cfb16e71a2fa93d333c638cc21860",
+    "text": "Füge allen Gegnern {{value0}} <keyword0>Betäubungs</keyword0>schaden zu"
+  },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
@@ -467,6 +509,18 @@
     "sourceHash": "a1aa580c34cfd6a61483333802e59e1905f1727cb88bb80a3883322bbda6ecfd",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "e3498b036be89eb6f847bd0325e2da4a8f157210f0b60df049db5321a8581925",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.orifable-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "9d268ad910db7ae83817d8f806e884fccb6c51db4eaa6d0bd1bdd2d6b6e26a3d",
+    "text": "Stelle dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
@@ -502,6 +556,12 @@
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "f3976bbe0ac7c3f458f6b048660bdd70aec812269ac3182f4171097ca8a41a88",
     "text": "Füge {{value0}} <keyword0>Licht</keyword0>schaden zu; <keyword1>Entferne</keyword1> {{value1}} Effekt vom Ziel"
+  },
+  "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "b5caa068add01640c0bf807173baa0664a28348149e15bbe1aab9ab96b83e1ea",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

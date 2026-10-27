@@ -413,6 +413,48 @@
     "sourceHash": "2d33b89e873cfddc229e0448f75c3165f79fac6e33835018e64721946dd2d44f",
     "text": "雷霆石"
   },
+  "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "b60760700507d08a4d2c5aea6a5d5e7343a48b86e5f3808849867ad49d9ff685",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "9c2f636de458c0c9a9e221ab880a4c83b4b15dd8b77681c00d9568a02461fa51",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "8e1445e575b7b5e75b4932d063d5f0a20fcc21d43b6d79820e67a92a7f3f3143",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.dawncall-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "253b3cc8ed220bbb5c06c00df8752782a1097e03ff1c08f33c44d09048470627",
+    "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "08dfd8799f59888faa4df3c6a4c6c214de6306ec8ea93411a6c1e77430f25b31",
+    "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.dunefox-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "500b810665dd4830074b2add80830372ec9e6b70a957bcce934d94110f41e95f",
+    "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "685ecb7b6c9ca1b6693c8cc5a7867aebc1cd8fb47e34a2bbf24d4ed5b92e35ca",
+    "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
+  },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
@@ -467,6 +509,18 @@
     "sourceHash": "445cc9505d3bef54d53771422cbf9f5b8a1f178ee4eccbf5230b27c095c02d02",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
+  "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "2f5f0549d0f16ddf90742b2aab466595719d23c4f223574fc820bd905e061b91",
+    "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.orifable-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "1b347a9a5e5ecbedf0104a637f0a3fbc80703b3be5e5a6bb72a99683fb280e0e",
+    "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
@@ -502,6 +556,12 @@
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "9087d65f4358b070975dda0bdafcdcf8b6d0e9fd6debd9eb6e68dda9bd5e587c",
     "text": "造成 {{value0}} 点<keyword0>光</keyword0>伤害；<keyword1>驱散</keyword1>目标：移除 {{value1}} 个效果"
+  },
+  "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "80e4f7459a1145c0aceffab163413b05c054382c1af5aa17aca8b830d3a9c0a1",
+    "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
