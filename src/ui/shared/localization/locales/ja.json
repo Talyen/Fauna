@@ -353,6 +353,12 @@
     "sourceHash": "675c52706ebbb83ba990d2d3372a507185652ac644bf540ea4d80970cfc6a380",
     "text": "控えの味方も<keyword0>回復</keyword0>を受けられる"
   },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "9ae95c6477b28e74f34c67d89fbf22983d11f00081f7da32071d92cad38eea96",
+    "text": "<keyword0>回避</keyword0>された攻撃も敵の<keyword1>ブロック</keyword1>にダメージを与える"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
@@ -395,6 +401,12 @@
     "sourceHash": "086e912b446e51772cc545f7fcd8ccbe087c5f7a47bdfb100b59dbfdf961f366",
     "text": "<keyword0>装甲</keyword0>は<keyword1>棘</keyword1>ダメージも軽減する"
   },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "9d3dce683041ad6186a796069d359b0b99ac176c8b3efcfb0d7ebbe0a9f77154",
+    "text": "<keyword0>ブロック</keyword0>は減衰しても<keyword1>アーマー</keyword1>を下回らない"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -406,6 +418,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "sourceHash": "bf2df9c17e7e6ec3d9153fa40e4b9cd004659e02753974ec2515e20defad811e",
     "text": "戦闘中に<keyword1>体力</keyword1>を回復すると<keyword0>トゲ</keyword0>を{{value0}}獲得"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "8c96353dbdbc3acca7e6d72c82765c0f7bd15955600f93a83f860a0dfcd74c43",
+    "text": "<keyword2>凍結</keyword2>した敵から<keyword0>毒</keyword0>を<keyword1>浄化</keyword1>できない"
   },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
@@ -436,6 +454,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "7b9608600cb038d6c2a9088128cf64244ee405db912c9b4d9a0b3d33ce5d66d4",
     "text": "<keyword1>ブロック</keyword1>を獲得するたびに<keyword0>トゲ</keyword0>を{{value0}}獲得"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "85417a766b69a58a839ff8d1d7974aa256a95ad96bd321999026401e7766a6d3",
+    "text": "<keyword1>アーマー</keyword1>を持つ敵の<keyword0>火傷</keyword0>は減衰しない"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -491,6 +515,12 @@
     "sourceHash": "c95b35eede70fab9a189a1b9b2e1392af59036c37fe9ee4219fba128cfe4833e",
     "text": "紙の蓮"
   },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "ca66ddb90225fed2c71bb3826c110ab48ab6c2aec777db859a31b86aec6ddd8b",
+    "text": "<keyword0>無効化</keyword0>を持つ味方が受ける<keyword1>火傷</keyword1>、<keyword2>毒</keyword2>、<keyword3>出血</keyword3>ダメージが半分になる"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -532,6 +562,12 @@
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "88604a712fd0d1953c7d642d0ca4608942d9eeb74e7dcde565b1f817ee8d74fa",
     "text": "<keyword0>マナ</keyword0>は上限を超えて蓄えられる"
+  },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "9e7ad0e3e96988c5af4de96a8b5a312d8386cab69f4df06694724780d9bee13b",
+    "text": "<keyword1>ブロック</keyword1>を持つ間、<keyword0>無効化</keyword0>は消費されない"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,

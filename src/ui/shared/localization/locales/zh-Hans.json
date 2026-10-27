@@ -353,6 +353,12 @@
     "sourceHash": "9a795b7010c74e2fa62b9b1122b1b432ddfc33b1594237ee27a824e424fd8bee",
     "text": "后备盟友可以接受<keyword0>治疗</keyword0>"
   },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "040dd3043e25c42f9530d1e6c1fdc5f8cefac7439c2cbd1678a8d58fbc8a3f09",
+    "text": "被<keyword0>闪避</keyword0>的攻击仍会损伤敌人的<keyword1>格挡</keyword1>"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
@@ -395,6 +401,12 @@
     "sourceHash": "a4dd9e61d50a2fe8e7d3273933ee10afe1e301b0de37e1f4b0db64d47aaef36a",
     "text": "<keyword0>护甲</keyword0>也能减免<keyword1>荆棘</keyword1>伤害"
   },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "5e7f1f383da79474955bee837379dad9f994fa3947b2debac16bf3aab7582fde",
+    "text": "<keyword0>格挡</keyword0>衰减时不会低于<keyword1>护甲</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -406,6 +418,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "sourceHash": "32e9f283cb4f5ab34437b341646939f11a87af08b27ef3d33463dec5b50dd215",
     "text": "战斗中恢复<keyword1>生命</keyword1>时获得{{value0}}点<keyword0>荆棘</keyword0>"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "b5369432b975d15d9f16ca09a1a7c3b6a7e698c6c29ada762ac71428c7cc50b1",
+    "text": "无法从<keyword2>冻结</keyword2>的敌人身上<keyword1>净化</keyword1><keyword0>中毒</keyword0>"
   },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
@@ -436,6 +454,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "4aea213fa5940bce156fab2e3393150fdb67913ab87ffb843f29aa65ec0f38d2",
     "text": "每次获得<keyword1>格挡</keyword1>时，获得{{value0}}点<keyword0>荆棘</keyword0>"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "f4a47884779d48fd8bda2aaa5fed54529f98c382b500d0b8722a4d43355a4e82",
+    "text": "拥有<keyword1>护甲</keyword1>的敌人身上的<keyword0>灼烧</keyword0>不会衰减"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -491,6 +515,12 @@
     "sourceHash": "e232802ed1635e56b03f9410a13285c521bd9edfca9a1d31fa600b0b55a3102e",
     "text": "纸莲花"
   },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "e816a8cb0fae3a71c70d75104aaedcb1b878856eed61eee9cc64594bf2b22025",
+    "text": "拥有<keyword0>无效化</keyword0>的盟友受到的<keyword1>灼烧</keyword1>、<keyword2>中毒</keyword2>和<keyword3>流血</keyword3>伤害减半"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -532,6 +562,12 @@
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "59b40c7666e988f0123d57565ce84146d59f139843afc029cd7875fc0286c00d",
     "text": "<keyword0>法力</keyword0>可以超过上限"
+  },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "40b3de4118ea85e263d6e6d9846c3ee5d8ce5c9079b647c57fcf26e17d2b1c50",
+    "text": "拥有<keyword1>格挡</keyword1>时不会消耗<keyword0>无效化</keyword0>"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,

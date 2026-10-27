@@ -365,6 +365,12 @@
     "sourceHash": "95f4b83f612b70761c990f8c12196a8b2af33ffb37c701215322bdd87884d233",
     "text": "Les alliés en réserve peuvent recevoir des <keyword0>soins</keyword0>"
   },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "43a70f1d32c3fae603e694132892ad27c16d8621dd472dd4c64a65fdd73ae772",
+    "text": "Les attaques <keyword0>esquivées</keyword0> endommagent quand même le <keyword1>Blocage</keyword1> ennemi"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
@@ -406,6 +412,12 @@
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "9f49f83086fadf171608c3046ef04cac0e38e1b75c316e6cef42930d892d31f4",
     "text": "L’<keyword0>Armure</keyword0> réduit aussi les dégâts d’<keyword1>Épines</keyword1>"
+  },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "d45f3297c4f446a032232cf66a7a40283ba4f6e78f37a9ea00ea8f3b7e77d281",
+    "text": "Le <keyword0>Blocage</keyword0> ne peut pas décroître sous l’<keyword1>Armure</keyword1>"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -460,6 +472,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "a29315c7d5d27c0c066e62337230812c395caafd9460e1df348b87a993e1ef02",
     "text": "Gagnez {{value0}} <keyword0>Épines</keyword0> chaque fois que vous gagnez du <keyword1>Blocage</keyword1>"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "188edd00c58c21ac1112bcdd0f9327d54ab83356360ab3803df8c74a3ea10ad8",
+    "text": "La <keyword0>Brûlure</keyword0> ne décroît pas sur les ennemis avec de l’<keyword1>Armure</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -527,6 +545,12 @@
     "sourceHash": "2687d0e524b5fa42e740e1083c3fe76df54c34f502a71dbc43eae0d7ba9ceff4",
     "text": "Lotus de papier"
   },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "96b702e4d469512c196270152e7ac374e63084ca076db53efe25ec2da2d66cf0",
+    "text": "Les alliés avec <keyword0>Annulation</keyword0> subissent moitié moins de dégâts de <keyword1>Brûlure</keyword1>, de <keyword2>Poison</keyword2> et de <keyword3>Saignement</keyword3>"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -568,6 +592,12 @@
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "7f2fa176d43f5f75c343c73fbec980ae34d76d0f78ef76ac899349129623e02c",
     "text": "Le <keyword0>Mana</keyword0> peut dépasser son maximum"
+  },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "369e1cc80d3584027327eb3ea8f87440b2e9502efa3f417f4c9103b549f159ee",
+    "text": "<keyword0>Annulation</keyword0> n’est pas consommée tant que vous avez du <keyword1>Blocage</keyword1>"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,

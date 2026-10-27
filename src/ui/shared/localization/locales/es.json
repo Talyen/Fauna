@@ -353,6 +353,12 @@
     "sourceHash": "87e756cc71521f56c6af1f25508cabfe4a01edf6a5bb3ad7d6c71aab264925a5",
     "text": "Los aliados de reserva pueden recibir <keyword0>curación</keyword0>"
   },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "ae2e00b8407b455f8581688656c8e671f795ed6b42b1c68cd5626849b5963579",
+    "text": "Los ataques <keyword0>esquivados</keyword0> aún dañan el <keyword1>Bloqueo</keyword1> enemigo"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
@@ -395,6 +401,12 @@
     "sourceHash": "16f4f431e199475c2bc5e921d5407428186b3168c21a802e1768de2c30ac6929",
     "text": "La <keyword0>Armadura</keyword0> también reduce el daño de <keyword1>Espinas</keyword1>"
   },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "cb517aa1efc1993f20de068544f1211ed69803edb17ca9dfa54a63bfee146568",
+    "text": "El <keyword0>Bloqueo</keyword0> no puede disminuir por debajo de la <keyword1>Armadura</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -406,6 +418,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "sourceHash": "cdb644059f57036f1d04a2e2ec093098b931f693cface66d0ccf0e36f524eaf5",
     "text": "Obtienes {{value0}} de <keyword0>Espinas</keyword0> al restaurar <keyword1>Salud</keyword1> en combate"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "549b864eb869d0a8f0d906fdaaed03ea6d62146df609a78c405cd2dcff592a6f",
+    "text": "El <keyword0>Veneno</keyword0> no se puede <keyword1>purificar</keyword1> de los enemigos <keyword2>congelados</keyword2>"
   },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
@@ -436,6 +454,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "4c740045ce6388b1a495f2c60306c330d1a782a874376d7825f6f95e6fa14ee5",
     "text": "Obtienes {{value0}} de <keyword0>Espinas</keyword0> cada vez que obtienes <keyword1>Bloqueo</keyword1>"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "9c7f9dc6a34d7c6652febc68b4506a9418fc9eeb393ccc4f5e42c7d6859672ac",
+    "text": "La <keyword0>Quemadura</keyword0> no disminuye en enemigos con <keyword1>Armadura</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -491,6 +515,12 @@
     "sourceHash": "ac223d26a53afa6822ad5b6cc58b98ebfad57ba588b166a49a5395a3af1c7189",
     "text": "Loto de papel"
   },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "4f8dea40b52b0da21f70a2d94233cdca3db8c03ad2d9c5fd0ac3c0b878bb1290",
+    "text": "Los aliados con <keyword0>Nulificación</keyword0> reciben la mitad de daño de <keyword1>Quemadura</keyword1>, <keyword2>Veneno</keyword2> y <keyword3>Sangrado</keyword3>"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -532,6 +562,12 @@
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "5e3a9f81ddb24c9da2740591acce7ad2a14ddf8c0b5daad3b5102fed46589d08",
     "text": "El <keyword0>Maná</keyword0> puede superar su máximo"
+  },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "ff306303c25837c084913c40b98dc2cdfe002f0ca451378c2a4c847e15868842",
+    "text": "<keyword0>Nulificación</keyword0> no se consume mientras tengas <keyword1>Bloqueo</keyword1>"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,

@@ -353,6 +353,12 @@
     "sourceHash": "db0cdb33b5c6996905b3a02315b9055309bdce92c3e492181b4935f3d165bfed",
     "text": "Verbündete in Reserve können <keyword0>Heilung</keyword0> erhalten"
   },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "0d265a5a7be0bc9a0803787947af845450771fb0551851af2d90225b7027abf4",
+    "text": "<keyword0>Ausgewichene</keyword0> Angriffe beschädigen dennoch den <keyword1>Block</keyword1> des Gegners"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
@@ -395,6 +401,12 @@
     "sourceHash": "3d0bc7b0233b24855a65e3744c1705db868019fb3a5771de410f37876d207d0c",
     "text": "<keyword0>Rüstung</keyword0> reduziert auch <keyword1>Dornen</keyword1>schaden"
   },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "00a1bbd6231664cd4229344efcbc008d6dae50696f9a371b556e12f188e78426",
+    "text": "<keyword0>Block</keyword0> kann nicht unter <keyword1>Rüstung</keyword1> verfallen"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -406,6 +418,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "sourceHash": "7e0c450fbac5f5b1d24f51e0b25c6d267e7ba0abe65129371b196a06a513d56f",
     "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wenn du im Kampf <keyword1>Gesundheit</keyword1> wiederherstellst"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "0b43878c3209a618463d0513b11232caf8450208c8fbd5c88ca780463a4cd181",
+    "text": "<keyword0>Gift</keyword0> kann bei <keyword2>eingefrorenen</keyword2> Gegnern nicht <keyword1>gereinigt</keyword1> werden"
   },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
@@ -436,6 +454,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "ef1f9d50d4cf1c7cd0bcd530a8e5cd7c51b0b43f8cbe798929aa8df9ee2fc24f",
     "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wann immer du <keyword1>Block</keyword1> erhältst"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "56e06855d9832a5b680e576ff27101a865e8b9041d181a0dbef24d3c49918263",
+    "text": "<keyword0>Verbrennung</keyword0> verfällt nicht bei Gegnern mit <keyword1>Rüstung</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -491,6 +515,12 @@
     "sourceHash": "f916cc3ebacf5acaa515b2a0ac3587086d84772406971b41cf959d999396fcdc",
     "text": "Papierlotus"
   },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "d4f17fe0df5a52c9a1cac9c86c7b24eea246e87e227e4e00431d7ecad1a45e61",
+    "text": "Verbündete mit <keyword0>Aufheben</keyword0> erleiden nur halben Schaden durch <keyword1>Verbrennung</keyword1>, <keyword2>Gift</keyword2> und <keyword3>Blutung</keyword3>"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -532,6 +562,12 @@
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "1a0cf1e6bfa7787824cde93fb73cdc7814730d2fdb83668fa28a6c30512c19b8",
     "text": "<keyword0>Mana</keyword0> kann über das Maximum hinausgehen"
+  },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "32d0133f697820f110a8f5e52ff7eb7a9c7515a569914b4cb342c4b0d5ef2644",
+    "text": "<keyword0>Aufheben</keyword0> wird nicht verbraucht, solange du <keyword1>Block</keyword1> hast"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
