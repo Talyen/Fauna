@@ -2585,11 +2585,23 @@
     "sourceHash": "fdec5a2516b67ed1592872d7acc87c4b1e7254d7f6141f09dd23e74dd7bdeabb",
     "text": "Verringert eingehenden Schaden vom Typ <keyword0>Physisch</keyword0> und <keyword1>Betäubung</keyword1> nach <keyword2>Block</keyword2>; verliert {{value0}} Stapel, wenn <keyword3>Rüstung</keyword3> Schaden verringert"
   },
+  "content.glossary.keyword.attackReflection.definition.rule": {
+    "reviewed": true,
+    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "42bf8e034d8b5c22eed73a959e32b8f37fa94b80841da0cfdcaed7ea99df4cd0",
+    "text": "Wirft den nächsten Angriff gegen dich auf den Angreifer zurück; Verhindert dessen Schaden und schädliche Effekte auf dich; <keyword0>Reflektierte</keyword0> Angriffe können nicht erneut <keyword1>reflektiert</keyword1> werden; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
     "sourceHash": "ad222d14a49959006543cfa380b31e95f9c3509f1fd899d51c9bdfd895dd7f45",
     "text": "Wiederholt den Schaden im nächsten Zug und endet dann"
+  },
+  "content.glossary.keyword.blind.definition.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
+    "sourceHash": "dbaccb940332cd13ee78ec0716c7749595241800f367af102d0327003bd132ab",
+    "text": "{{value0}}% Chance, den nächsten Angriff zu verfehlen; Endet nach diesem Angriff, ob er trifft oder nicht; Ein Fehlschlag zählt für jedes Ziel als <keyword0>Ausweichen</keyword0>; Ist nicht stapelbar"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -2639,6 +2651,12 @@
     "sourceHash": "cb22830e3b7331707ac61525e51b141d94ad41bbb03ef8ac3d086e54c3997649",
     "text": "<keyword0>Natur</keyword0>schaden; weder Resistenz noch Statuseffekt sind damit verbunden"
   },
+  "content.glossary.keyword.negate.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "f0c5aaf066ded75df256ebf53a89b962ae3ce6a94ca19e1719d017c387e5626f",
+    "text": "Den nächsten Angriff gegen dich vor dem <keyword1>Ausweichen</keyword1> <keyword0>abwehren</keyword0> und seinen Schaden und seine schädlichen Effekte verhindern; <keyword2>Dornen</keyword2> schlagen dennoch zurück; Hält an, bis verbraucht oder <keyword3>gebannt</keyword3>; Ist nicht stapelbar"
+  },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
     "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
@@ -2656,6 +2674,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "8c9ba2938a831d23638bd7a7b6b20b5f084e680b41f7d817138eef2ca618bc2a",
     "text": "Entfernt vorteilhafte Effekte von einem Gegner"
+  },
+  "content.glossary.keyword.reflect.definition.rule": {
+    "reviewed": true,
+    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "7c2ef829ea2945dad65c8625e50a2aa19a2ecfed80db3e8e0b169ba76d5708f3",
+    "text": "Wirft den angegebenen Angriff oder schädlichen Statuseffekt zurück; <keyword0>Angriffsreflexion</keyword0> gibt Schaden und schädliche Folgeeffekte an den Angreifer zurück; Reine Status<keyword1>reflexion</keyword1> lenkt den Effekt auf einen zufälligen lebenden Gegner um, während direkter Schaden weiterhin trifft; <keyword2>Reflektierte</keyword2> Angriffe und Status können nicht erneut <keyword3>reflektiert</keyword3> werden; Ladungen sind nicht stapelbar"
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,

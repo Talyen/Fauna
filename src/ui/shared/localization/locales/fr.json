@@ -2597,11 +2597,23 @@
     "sourceHash": "67b4dde4475f0594eccc157a1d5c9076620d0400ce0ff30acca9ea0dec5b1404",
     "text": "Réduit les dégâts de type <keyword0>Physique</keyword0> et <keyword1>Étourdissement</keyword1> reçus après le <keyword2>Blocage</keyword2> ; perd {{value0}} cumul lorsque l’<keyword3>Armure</keyword3> réduit des dégâts"
   },
+  "content.glossary.keyword.attackReflection.definition.rule": {
+    "reviewed": true,
+    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "0ed62d056f196fb039d5f2d583f2308fc29d1955408348d020d87ad27fc138e6",
+    "text": "renvoie la prochaine attaque contre vous à son auteur; Empêche ses dégâts et effets néfastes sur vous; Les attaques <keyword0>renvoyées</keyword0> ne peuvent pas être <keyword1>renvoyées</keyword1> à nouveau; Dure jusqu’à consommation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
     "sourceHash": "3370891b002614aaedcbfbf6261352b7114c1dae390caf13d723a7d71ead7178",
     "text": "Répète les dégâts au prochain tour, puis se dissipe"
+  },
+  "content.glossary.keyword.blind.definition.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
+    "sourceHash": "d5a2de3648b928eb996a36d6f32c899ffbcd7d61065ab752d2d348fcfe696a93",
+    "text": "{{value0}}% de chances de rater votre prochaine attaque; Expire après cette attaque, qu’elle touche ou non; Un échec compte comme une <keyword0>Esquive</keyword0> pour chaque cible; Ne se cumule pas"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -2651,6 +2663,12 @@
     "sourceHash": "424eb843f6b0a5be6dfb51acd7aa4c1c30870e32d8ceaa69243c2514f24210a7",
     "text": "Dégâts de <keyword0>Nature</keyword0> ; aucune résistance ni aucun effet de statut n’est implicite"
   },
+  "content.glossary.keyword.negate.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "bfd553d0fd56abbbc5bb24ca1eb51140afeefc9901d2a3c0fda522e6ca2295eb",
+    "text": "<keyword0>annule</keyword0> la prochaine attaque contre vous avant l’<keyword1>Esquive</keyword1>, empêchant ses dégâts et effets néfastes; Les <keyword2>Épines</keyword2> ripostent quand même; Dure jusqu’à consommation ou <keyword3>dissipation</keyword3>; Ne se cumule pas"
+  },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
     "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
@@ -2668,6 +2686,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "c95c6590376097832448440b615a076e233cbc63ee76ee5627e99f5f6599d113",
     "text": "Retire les effets bénéfiques d’un ennemi"
+  },
+  "content.glossary.keyword.reflect.definition.rule": {
+    "reviewed": true,
+    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "ac71d7c08ee74bd9e1bef6f8b13f817ee8834a7067e55e5205c6050866e322ec",
+    "text": "renvoie l’attaque ou l’effet de statut néfaste indiqué; Le <keyword0>renvoi d’attaque</keyword0> retourne les dégâts et effets néfastes associés à l’attaquant; Le <keyword1>renvoi</keyword1> d’un statut seul redirige l’effet vers un ennemi vivant aléatoire, mais les dégâts directs touchent quand même; Les attaques et statuts <keyword2>renvoyés</keyword2> ne peuvent pas être <keyword3>renvoyés</keyword3> à nouveau; Les charges ne se cumulent pas"
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,

@@ -2585,11 +2585,23 @@
     "sourceHash": "c02e5c1a65f33ec26edade1ac9eaa56444789ee917c9fd52a3b69fd9c789cfeb",
     "text": "После <keyword2>Блока</keyword2> снижает входящий урон типов «<keyword0>Физический</keyword0>» и «<keyword1>Оглушение</keyword1>»; при снижении урона <keyword3>Бронёй</keyword3> теряется {{value0}} заряд"
   },
+  "content.glossary.keyword.attackReflection.definition.rule": {
+    "reviewed": true,
+    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "6e10ec5db5c04675763e3585cf6ff554a9957e3b18b22b993cdd70a8f128494a",
+    "text": "возвращает следующую атаку нападающему; Предотвращает её урон и вредные эффекты для вас; <keyword0>Отражённые</keyword0> атаки нельзя <keyword1>отразить</keyword1> повторно; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
     "sourceHash": "e17636fc6cf001a9265fe997db046d80fa7c7f816044ec55c0fe9c6378ce89d0",
     "text": "Повторяет урон на следующем ходу, затем снимается"
+  },
+  "content.glossary.keyword.blind.definition.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
+    "sourceHash": "d4003e5a111463c013c6c0fed3288c45a5731daf7c74b279f94f319e57bd0ccf",
+    "text": "вероятность промаха следующей атаки — {{value0}}%; Исчезает после этой атаки независимо от попадания; Промах считается <keyword0>уклонением</keyword0> каждой цели; Не суммируется"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -2639,6 +2651,12 @@
     "sourceHash": "5b129c11b9e6014d0d4dc814f45423d2c8d3cbbd1eb3ce98c3fdaffa193da692",
     "text": "Урон <keyword0>природой</keyword0>; сопротивление и эффект состояния не подразумеваются"
   },
+  "content.glossary.keyword.negate.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "b82ef8d129065ead8c32ba488fa4bf62fad8976c1402985a33f45419b8bb216a",
+    "text": "<keyword0>отводит</keyword0> следующую атаку до <keyword1>уклонения</keyword1>, предотвращая её урон и вредные эффекты; <keyword2>Шипы</keyword2> всё равно отвечают; Действует до расходования или <keyword3>рассеивания</keyword3>; Не суммируется"
+  },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
     "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
@@ -2656,6 +2674,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "06e1f7da09ee7ba1c60b29cc5c51aa6c0cdceb5c0469ade33654400ac986d58a",
     "text": "Снимает полезные эффекты с врага"
+  },
+  "content.glossary.keyword.reflect.definition.rule": {
+    "reviewed": true,
+    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "7e64930f9fccd46b46b37be13ac2e48b2a9b956f5997131bd65eb916b59c4da9",
+    "text": "возвращает указанную атаку или вредный статусный эффект; <keyword0>Отражение атаки</keyword0> возвращает нападающему урон и последующие вредные эффекты; <keyword1>Отражение</keyword1> только статуса направляет эффект случайному живому врагу, а прямой урон всё равно проходит; <keyword2>Отражённые</keyword2> атаки и статусы нельзя <keyword3>отразить</keyword3> повторно; Заряды не суммируются"
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,

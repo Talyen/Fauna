@@ -2585,11 +2585,23 @@
     "sourceHash": "a9dcdd315fb4f6efa32357f2a28c9ae247ce2502ce190a09cc4e5c576e0a9834",
     "text": "在<keyword2>格挡</keyword2>之后减少受到的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>伤害；<keyword3>护甲</keyword3>减少伤害时失去{{value0}}层"
   },
+  "content.glossary.keyword.attackReflection.definition.rule": {
+    "reviewed": true,
+    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "2be6527f93eb9ae13e4bd117e94e554f76dbf464a126e30d67edf8147b08fce2",
+    "text": "将下一次受到的攻击返还给攻击者; 防止该攻击对你造成的伤害和有害效果; 被<keyword0>反射</keyword0>的攻击不能再次<keyword1>反射</keyword1>; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
     "sourceHash": "87478d0d75707bae055802bc645c2117040132cacae63f88e4f7131599daa1c9",
     "text": "下一回合再次造成伤害，然后清除"
+  },
+  "content.glossary.keyword.blind.definition.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
+    "sourceHash": "a63a0ec0c228b0032bfced352d2d6b26d58a7db8003351e098ecdb8094b8636d",
+    "text": "下一次攻击有{{value0}}%的概率落空; 无论命中还是落空，该次攻击后效果消失; 落空视为每个目标都进行了<keyword0>闪避</keyword0>; 不叠加"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -2639,6 +2651,12 @@
     "sourceHash": "9cd309a2fd91b642fda01f2ee17d69b44df0e2d1f3d344301c7c41179fd94eaa",
     "text": "<keyword0>自然</keyword0>伤害；不隐含抗性或状态效果"
   },
+  "content.glossary.keyword.negate.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "1b81ee96f44cc7dc2c7d5be7e771a7a7b4c7036b4ea4c64f65994ac33d5a3641",
+    "text": "在<keyword1>闪避</keyword1>之前<keyword0>抵消</keyword0>下一次受到的攻击，防止其伤害和有害效果; <keyword2>荆棘</keyword2>仍会反击; 持续至消耗或被<keyword3>驱散</keyword3>; 不叠加"
+  },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
     "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
@@ -2656,6 +2674,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "72dfe6715b29ee5dab47e9e1d994106e3923d37b62a217f18b665e32d5bb3e4a",
     "text": "移除一名敌人的有益效果"
+  },
+  "content.glossary.keyword.reflect.definition.rule": {
+    "reviewed": true,
+    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "f2e7cbd378c4c049ce1ecb4db9408575984e35323e3b411af471a66e8b666035",
+    "text": "返还指定的攻击或有害状态效果; <keyword0>攻击反射</keyword0>将伤害和后续有害效果返还给攻击者; 仅状态<keyword1>反射</keyword1>会将效果转向一名随机存活的敌人，直接伤害仍会命中; 被<keyword2>反射</keyword2>的攻击和状态不能再次<keyword3>反射</keyword3>; 次数不叠加"
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,

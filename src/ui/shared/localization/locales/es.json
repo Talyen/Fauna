@@ -2585,11 +2585,23 @@
     "sourceHash": "acb9ff6226e8f7bbcb5204252fd0bbe4fe7d222d69c1b66ae6b2fd6ddf86b526",
     "text": "Reduce el daño recibido de tipo <keyword0>Físico</keyword0> y <keyword1>Aturdimiento</keyword1> después del <keyword2>Bloqueo</keyword2>; pierde {{value0}} acumulación cuando la <keyword3>Armadura</keyword3> reduce daño"
   },
+  "content.glossary.keyword.attackReflection.definition.rule": {
+    "reviewed": true,
+    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "28327587305eb12ff78465f61b4035d3dc13c67d8d6f49cf9c49a45635fe3837",
+    "text": "devuelve el próximo ataque contra ti a su atacante; Evita su daño y efectos perjudiciales sobre ti; Los ataques <keyword0>reflejados</keyword0> no pueden <keyword1>reflejarse</keyword1> de nuevo; Dura hasta consumirse o ser objeto de <keyword2>Purga</keyword2>; No se acumula"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
     "sourceHash": "f379b8dd321cd3898279c9bbd47dc7df5451ab5a3e90f92101d444b190ddbb98",
     "text": "Repite el daño en el siguiente turno y después se elimina"
+  },
+  "content.glossary.keyword.blind.definition.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
+    "sourceHash": "7bfeb83cc077e73076fa2827b2f66f4cb59713f572ffd8b6f07f832c3b63485a",
+    "text": "{{value0}}% de probabilidad de fallar el próximo ataque; Expira tras ese ataque, acierte o falle; Un fallo cuenta como <keyword0>Esquiva</keyword0> para cada objetivo; No se acumula"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -2639,6 +2651,12 @@
     "sourceHash": "58f5454eff98ffbb454028e0d8969c5f1218274902f98c653f1431a6a55a275e",
     "text": "Daño de <keyword0>Naturaleza</keyword0>; no implica resistencia ni efecto de estado"
   },
+  "content.glossary.keyword.negate.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "0d01559ab7a8c02cf0b649938ff9e981cc15e0b50a514b377cd4d6c79b1a1096",
+    "text": "<keyword0>anula</keyword0> el próximo ataque contra ti antes de la <keyword1>Esquiva</keyword1>, evitando su daño y efectos perjudiciales; Las <keyword2>Espinas</keyword2> aún contraatacan; Dura hasta consumirse o ser objeto de <keyword3>Purga</keyword3>; No se acumula"
+  },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
     "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
@@ -2656,6 +2674,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "fc41d0d24bd0ace61e166f05dd8ac207f872e37b62a0770e3b39e4aac907fc54",
     "text": "Elimina efectos beneficiosos de un enemigo"
+  },
+  "content.glossary.keyword.reflect.definition.rule": {
+    "reviewed": true,
+    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "9d51f9541c937081cb8f665c0df522bcf539f46fb08eb09663c1cf30c54c80ab",
+    "text": "devuelve el ataque o efecto de estado perjudicial indicado; El <keyword0>reflejo de ataque</keyword0> devuelve el daño y los efectos perjudiciales posteriores al atacante; El <keyword1>reflejo</keyword1> de solo estado redirige el efecto a un enemigo vivo aleatorio, pero el daño directo sigue impactando; Los ataques y estados <keyword2>reflejados</keyword2> no pueden <keyword3>reflejarse</keyword3> de nuevo; Las cargas no se acumulan"
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,

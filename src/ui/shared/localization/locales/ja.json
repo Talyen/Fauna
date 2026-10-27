@@ -2585,11 +2585,23 @@
     "sourceHash": "a47e6882afbc2114cb44f9fdaa7651d33a600b74e1d560ff1c46f0a78461b5cb",
     "text": "<keyword2>ブロック</keyword2>適用後、受ける<keyword0>物理</keyword0>と<keyword1>スタン</keyword1>のダメージを軽減; <keyword3>装甲</keyword3>でダメージを軽減すると{{value0}}スタック失う"
   },
+  "content.glossary.keyword.attackReflection.definition.rule": {
+    "reviewed": true,
+    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "9ef748cdaaee762323f07e50c3d2c87216a782c40fae05e1f723071eea58729f",
+    "text": "次に受ける攻撃を攻撃者へ返す; その攻撃のダメージと有害効果を防ぐ; <keyword0>反射</keyword0>された攻撃は再び<keyword1>反射</keyword1>できない; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
     "sourceHash": "6da3f15702a4ba027407d4a1cbae0826da5fdb8f3417329601540f8fd42edc2c",
     "text": "次のターンにダメージを繰り返し、その後消える"
+  },
+  "content.glossary.keyword.blind.definition.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
+    "sourceHash": "6a4e228c102f35034518ce6a4656b740de91cf0a41e4e414f11582da2d98629a",
+    "text": "次の攻撃が{{value0}}%の確率で外れる; 命中の有無にかかわらずその攻撃後に消える; 外れた攻撃は各対象の<keyword0>回避</keyword0>として扱う; 重複しない"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -2639,6 +2651,12 @@
     "sourceHash": "e5430c262b9b46377350f662643f0a1aaa0d22fb3ae50648281adea563b0c71e",
     "text": "<keyword0>自然</keyword0>ダメージ；耐性や状態効果は付随しない"
   },
+  "content.glossary.keyword.negate.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "f6ad9038d7e2bdf75d08cf1b0dbaf73391d01ac51aa9d68d053feff9a294c351",
+    "text": "次の攻撃を<keyword1>回避</keyword1>より先に<keyword0>防止</keyword0>し、そのダメージと有害効果を防ぐ; <keyword2>棘</keyword2>は反撃する; 消費されるか<keyword3>強化解除</keyword3>されるまで持続; 重複しない"
+  },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
     "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
@@ -2656,6 +2674,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "cc5594c95f4b5031c889d0524696dda1c4d9dc4bf67ce72739e325a2619beb1c",
     "text": "敵1体の有益な効果を取り除く"
+  },
+  "content.glossary.keyword.reflect.definition.rule": {
+    "reviewed": true,
+    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "c9c4f17eb2fe220ff224dba3b83732cde0ef85ff7d7ed9533f791d0c6ece5c26",
+    "text": "指定された攻撃または有害な状態効果を返す; <keyword0>攻撃反射</keyword0>はダメージとその後の有害効果を攻撃者へ返す; 状態効果のみの<keyword1>反射</keyword1>は効果をランダムな生存中の敵へ移し、直接ダメージは受ける; <keyword2>反射</keyword2>された攻撃や状態効果は再び<keyword3>反射</keyword3>できない; 回数は重複しない"
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
