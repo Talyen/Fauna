@@ -3333,7 +3333,7 @@
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "dfd2d45c5dfcc1ff80cb8de3c0756bd7e85abcb76954b4e25e2c758ddc8f74ca",
-    "text": "Füge {{value0}} <keyword0>Licht</keyword0>schaden zu; <keyword1>Entferne</keyword1> {{value1}} Effekt vom Ziel"
+    "text": "Füge {{value0}} <keyword0>Licht</keyword0>schaden zu; <keyword1>Banne</keyword1> {{value1}} Effekt vom Ziel"
   },
   "content.card.pyrella-ember-harvest.name": {
     "reviewed": true,

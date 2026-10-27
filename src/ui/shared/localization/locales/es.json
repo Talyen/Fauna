@@ -1107,7 +1107,7 @@
     "reviewed": true,
     "source": "Playing <keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> an effect from the most injured ally",
     "sourceHash": "599163341264341a0a0e80bd7ad104b0311c9b8b3621d1d6b0553ceefbf71b77",
-    "text": "Jugar <keyword0>Comida</keyword0> <keyword1>limpia</keyword1> un efecto del aliado más herido"
+    "text": "Jugar <keyword0>Comida</keyword0> <keyword1>purifica</keyword1> un efecto del aliado más herido"
   },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
