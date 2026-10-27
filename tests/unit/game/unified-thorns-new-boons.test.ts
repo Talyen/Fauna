@@ -15,6 +15,8 @@ import { observeDecisions } from "../../../src/game/random";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { requireBattle, teamRun } from "../../support/game";
 import { NEW_BOON_EFFECTS } from "../../support/boons";
+import { setBattleCards } from "../../support/cards";
+import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import prepared from "../../../src/assets/prepared.json";
 import type { GameEvent } from "../../../src/game/types";
 
@@ -94,6 +96,23 @@ it("Food grants temporary Dodge to its actual targets", () => {
   state.boons = ["velvet-whisk", "pumpkin-tureen"];
   useFood(state, definition("food-apple"), ally.id, events);
   expect(state.team.map((unit) => unit.combat!.temporaryDodge)).toEqual([20, 20, 20]);
+});
+
+it("Auto-play recognizes Dodge from Food even when its recipient is at full Health", () => {
+  const { state } = fixture();
+  state.boons = ["velvet-whisk"];
+  const food = {
+    id: "copy-0",
+    definitionId: "food-apple",
+    ownerId: null,
+    level: 0,
+    temporary: true as const,
+  };
+  state.cards.push(food);
+  state.battle.copySerial = 1;
+  setBattleCards(state, [food.id]);
+  const command = chooseBattleCommand(state, false);
+  expect(command).toMatchObject({ type: "play", cardId: food.id });
 });
 
 it("halves harmful damage while Nullify lasts", () => {

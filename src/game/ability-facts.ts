@@ -4,7 +4,14 @@ import type { CardDefinition } from "./content/types";
 import type { BattleState, Creature, Enemy } from "./types";
 import { isEnemy } from "./battlefield";
 import { hasTalent } from "./progression";
-import { hasHarmfulEffects, maximumHealth, STACK_LIMIT, type Combatant } from "./combat/state";
+import {
+  controlled,
+  dodgeChance,
+  hasHarmfulEffects,
+  maximumHealth,
+  STACK_LIMIT,
+  type Combatant,
+} from "./combat/state";
 import { armoredDamage, blockPayment, armorApplies, modifiedDamage } from "./combat/damage-values";
 import { healingValue, restoration, overflowBlock, overflowRecipients } from "./combat/healing-values";
 
@@ -17,6 +24,18 @@ export interface OrdinaryHit {
   readonly main: boolean;
   readonly lethal: boolean;
   readonly usefulExtras: boolean;
+}
+/** Estimate the temporary protection Food will actually add without advancing combat. */
+export function foodDodgeBenefit(state: BattleState, card: CardDefinition, ally: Combatant) {
+  if (card.species !== null || !state.boons.includes("velvet-whisk") || controlled(ally, state)) return 0;
+  return Math.max(
+    0,
+    Math.min(
+      boonRule("velvet-whisk").dodge,
+      70 - (ally.combat?.temporaryDodge ?? 0),
+      75 - dodgeChance(state, ally),
+    ),
+  );
 }
 export function healingBenefit(
   state: BattleState,

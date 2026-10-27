@@ -1,6 +1,11 @@
 import { foodForAllies } from "../game/card-rules";
 import { boonRule } from "../game/rules/boons";
-import { healingBenefit, ordinaryAttackFacts, type OrdinaryHit } from "../game/ability-facts";
+import {
+  foodDodgeBenefit,
+  healingBenefit,
+  ordinaryAttackFacts,
+  type OrdinaryHit,
+} from "../game/ability-facts";
 import { battleCardCapacity, drawHasAnotherCard, discardDrawCards } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { battlefield, healingAllies } from "../game/battlefield";
@@ -256,7 +261,9 @@ export function battleBenefits(
           healingBenefit(state, ally, value, play.def.effects),
         );
         const restored = benefits.reduce((sum, benefit) => sum + benefit.restored, 0);
-        const utility = benefits.reduce((sum, benefit) => sum + benefit.utility, 0);
+        const utility =
+          benefits.reduce((sum, benefit) => sum + benefit.utility, 0) +
+          automaticRecipients.reduce((sum, ally) => sum + foodDodgeBenefit(state, def, ally), 0);
         if (restored > 0) return support("healing", restored);
         if (utility > 0) return support("utility", utility);
         if (
@@ -273,7 +280,9 @@ export function battleBenefits(
             ? [mostInjured(automaticRecipients)!]
             : allies.filter((ally) => def.target !== "injured" || ally.health < maximumHealth(ally));
       return recipients.flatMap((ally) => {
-        const { restored, utility } = healingBenefit(state, ally, value, play.def.effects);
+        const benefit = healingBenefit(state, ally, value, play.def.effects);
+        const { restored } = benefit;
+        const utility = benefit.utility + foodDodgeBenefit(state, def, ally);
         return support(
           restored > 0 ? "healing" : utility > 0 ? "utility" : "none",
           restored > 0 ? restored : utility,
@@ -464,7 +473,7 @@ export function battleBenefits(
             return sum;
           }, 0) ?? 0;
         return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
-          const useful = Math.min(value, STACK_LIMIT - ally.block);
+          const useful = Math.min(value, STACK_LIMIT - ally.block) + foodDodgeBenefit(state, def, ally);
           const cleanse =
             def.effects?.some((effect) => effect.kind === "cleanse" && hasHarmfulEffects(actor)) ?? false;
           return support(
@@ -478,6 +487,7 @@ export function battleBenefits(
         (sum, ally) =>
           sum +
           Math.min(value, STACK_LIMIT - ally.block) +
+          foodDodgeBenefit(state, def, ally) +
           (def.effect === "teamProtection" ? Math.min(value, STACK_LIMIT - (ally.combat?.thorns ?? 0)) : 0),
         0,
       );
