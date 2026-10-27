@@ -2021,6 +2021,24 @@
     "sourceHash": "e7a6012ca68ac3541a7808d88db139263b5ba91596a4cfa3b8a4ebc7fc458ccb",
     "text": "Ваше путешествие начинается."
   },
+  "log.removeBuildup": {
+    "reviewed": true,
+    "source": "{{name}}: Cleanse {{status}} build-up",
+    "sourceHash": "4aa7502870343430c31a95874523fae4c3d03a89b609b2cc9ed983844246c6bc",
+    "text": "{{name}}: очищение накопления «{{status}}»"
+  },
+  "log.removeEffect": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} {{status}}.",
+    "sourceHash": "bf9f49026f3cad56e78a5141897e9362ea7512643dca90249af571b2dc1cc4d8",
+    "text": "{{name}}: {{action}} — {{status}}."
+  },
+  "log.removeNoEffects": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} removes no effects.",
+    "sourceHash": "40b0929fede0b5c6db86af6fe0e5d200eb249e00d717f1ba3a50e32d166e2dd4",
+    "text": "{{name}}: {{action}} — эффекты не сняты."
+  },
   "log.turnRestored": {
     "reviewed": true,
     "source": "Turn {{turn}}. {{amount}} Mana restored.",

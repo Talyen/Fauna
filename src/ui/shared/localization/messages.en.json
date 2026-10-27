@@ -269,6 +269,15 @@
   "log.journeyBegins": {
     "text": "Your journey begins."
   },
+  "log.removeBuildup": {
+    "text": "{{name}}: Cleanse {{status}} build-up"
+  },
+  "log.removeEffect": {
+    "text": "{{name}}: {{action}} {{status}}."
+  },
+  "log.removeNoEffects": {
+    "text": "{{name}}: {{action}} removes no effects."
+  },
   "log.turnRestored": {
     "text": "Turn {{turn}}. {{amount}} Mana restored."
   },

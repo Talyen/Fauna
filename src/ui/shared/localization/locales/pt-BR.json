@@ -2021,6 +2021,24 @@
     "sourceHash": "79c3d57a6bb5bcb5932735e932349a9386451aec513d4d8121f603913bcd305e",
     "text": "Sua jornada começa."
   },
+  "log.removeBuildup": {
+    "reviewed": true,
+    "source": "{{name}}: Cleanse {{status}} build-up",
+    "sourceHash": "8efbc79948b98815ebac8eaf12634895c85abc97225baf3ecb0e54e27f246907",
+    "text": "{{name}}: purificação do acúmulo ({{status}})"
+  },
+  "log.removeEffect": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} {{status}}.",
+    "sourceHash": "76ea040705e3e68c96343a29f07d24d8e7864dec70f509682fa6ef4ed08e576e",
+    "text": "{{name}}: {{action}} — {{status}}."
+  },
+  "log.removeNoEffects": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} removes no effects.",
+    "sourceHash": "5da25adfbf37b81255946712c968ceedcf5a4b3be41fccb40361986684e7ece7",
+    "text": "{{name}}: {{action}} — nenhum efeito removido."
+  },
   "log.turnRestored": {
     "reviewed": true,
     "source": "Turn {{turn}}. {{amount}} Mana restored.",

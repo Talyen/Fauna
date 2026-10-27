@@ -35,6 +35,43 @@ export function eventPresentation(
       ? i18n.content(`content.species.${target.species}.name`, speciesName)
       : englishName;
   const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
+  if (event.kind === "status" && event.outcome === "remove") {
+    const { status, affectedStatus } = event;
+    if (status === "cleanse" || status === "purge") {
+      const action = status === "cleanse" ? "Cleanse" : "Purge";
+      const localizedAction = i18n.content(`content.keyword.${status}.label`, action);
+      if (
+        event.amount === 0 &&
+        !affectedStatus &&
+        event.text === `${englishName}: ${action} removes no effects.`
+      )
+        return i18n.message("log.removeNoEffects", "{{name}}: {{action}} removes no effects.", {
+          name,
+          action: localizedAction,
+        });
+      if (affectedStatus && isKeywordId(affectedStatus)) {
+        const label = i18n.content(
+          `content.keyword.${affectedStatus}.label`,
+          KEYWORD_DEFINITIONS[affectedStatus].label,
+        );
+        if (event.text === `${englishName}: ${action} ${affectedStatus}.`)
+          return i18n.message("log.removeEffect", "{{name}}: {{action}} {{status}}.", {
+            name,
+            action: localizedAction,
+            status: i18n.locale === "en" ? affectedStatus : label,
+          });
+        if (
+          status === "cleanse" &&
+          (affectedStatus === "stun" || affectedStatus === "freeze") &&
+          event.text === `${englishName}: Cleanse ${KEYWORD_DEFINITIONS[affectedStatus].label} build-up`
+        )
+          return i18n.message("log.removeBuildup", "{{name}}: Cleanse {{status}} build-up", {
+            name,
+            status: label,
+          });
+      }
+    }
+  }
   if (event.kind === "status" && event.outcome === "gain" && event.amount !== undefined) {
     const status = event.status;
     if (isKeywordId(status)) {

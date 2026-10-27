@@ -2021,6 +2021,24 @@
     "sourceHash": "377879b40e232d9eff645bb53958b3dc567d96a95ed509ea7b3c9fa3b33e131f",
     "text": "Deine Reise beginnt."
   },
+  "log.removeBuildup": {
+    "reviewed": true,
+    "source": "{{name}}: Cleanse {{status}} build-up",
+    "sourceHash": "020a3d40673a104fd087e906a58c88bf2c8dd4c41f713afb9aa9fbe4c316aa3c",
+    "text": "{{name}}: Reinigung des Aufbaus ({{status}})"
+  },
+  "log.removeEffect": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} {{status}}.",
+    "sourceHash": "1d6bb7531b16dc6d2b9ce8ab00421a7ff5a5bd88986670594d4fc5fcbf9ce4f6",
+    "text": "{{name}}: {{action}} – {{status}}."
+  },
+  "log.removeNoEffects": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} removes no effects.",
+    "sourceHash": "7045c036abd55036084814f8fc5e1f8c311bdf6265b0b4a1c035da5b69d42c6a",
+    "text": "{{name}}: {{action}} – kein Effekt entfernt."
+  },
   "log.turnRestored": {
     "reviewed": true,
     "source": "Turn {{turn}}. {{amount}} Mana restored.",

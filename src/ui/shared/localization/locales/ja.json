@@ -2021,6 +2021,24 @@
     "sourceHash": "a6b3d9f14a1dcbc6c09967ad865576b4508eea27407b93c7c55ae28bbde81b21",
     "text": "旅が始まります。"
   },
+  "log.removeBuildup": {
+    "reviewed": true,
+    "source": "{{name}}: Cleanse {{status}} build-up",
+    "sourceHash": "a4cebcbd72b1fd3412fdaa5fa829522e2ec99cd15600bf288682c76f774c0acb",
+    "text": "{{name}}：蓄積を浄化（{{status}}）"
+  },
+  "log.removeEffect": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} {{status}}.",
+    "sourceHash": "46237976d321984f089a84ab289721cd14872824fb0665efe70fc57f07c946d9",
+    "text": "{{name}}：{{action}} — {{status}}。"
+  },
+  "log.removeNoEffects": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} removes no effects.",
+    "sourceHash": "e84c3f4bfc1324af913a24c419c5844bc6e97e64f0005168f2f4b6ce36d896c0",
+    "text": "{{name}}：{{action}} — 解除された効果はありません。"
+  },
   "log.turnRestored": {
     "reviewed": true,
     "source": "Turn {{turn}}. {{amount}} Mana restored.",

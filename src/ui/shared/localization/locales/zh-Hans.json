@@ -2021,6 +2021,24 @@
     "sourceHash": "107054dc236a3ea5f1859203b6f0c5c609e38c7f2ec72d0d144bcc2f1344591d",
     "text": "你的旅程开始了。"
   },
+  "log.removeBuildup": {
+    "reviewed": true,
+    "source": "{{name}}: Cleanse {{status}} build-up",
+    "sourceHash": "ce9f0241dbac07dac0565a5a1720b7a7c25cd4d9f4f07cc697b5ef797833938e",
+    "text": "{{name}}：净化积累（{{status}}）"
+  },
+  "log.removeEffect": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} {{status}}.",
+    "sourceHash": "6f6837bbe755251b0751637f50b322b5af5b1afecf28700759612d658049fecc",
+    "text": "{{name}}：{{action}} — {{status}}。"
+  },
+  "log.removeNoEffects": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} removes no effects.",
+    "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
+    "text": "{{name}}：{{action}} — 未移除任何效果。"
+  },
   "log.turnRestored": {
     "reviewed": true,
     "source": "Turn {{turn}}. {{amount}} Mana restored.",

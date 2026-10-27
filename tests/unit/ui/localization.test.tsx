@@ -210,6 +210,47 @@ it("distinguishes gained status stacks from Stun or Freeze buildup", () => {
   expect(eventPresentation(game, stun, createMessageReader("en", {}))).toBe(stun.text);
 });
 
+it("distinguishes removed effects, empty removals and cleansed buildup", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const name = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    "log.removeEffect": {
+      source: "{{name}}: {{action}} {{status}}.",
+      text: "{{name}} : {{action}} — {{status}}.",
+    },
+    "log.removeNoEffects": {
+      source: "{{name}}: {{action}} removes no effects.",
+      text: "{{name}} : {{action}} — aucun effet retiré.",
+    },
+    "log.removeBuildup": {
+      source: "{{name}}: Cleanse {{status}} build-up",
+      text: "{{name}} : purification du cumul ({{status}})",
+    },
+  });
+  const removed = {
+    kind: "status" as const,
+    targetId: target.id,
+    status: "cleanse" as const,
+    affectedStatus: "burn" as const,
+    outcome: "remove" as const,
+    text: `${name}: Cleanse burn.`,
+  };
+  const buildup = { ...removed, affectedStatus: "stun" as const, text: `${name}: Cleanse Stun build-up` };
+  const none = {
+    ...removed,
+    affectedStatus: undefined,
+    amount: 0,
+    text: `${name}: Cleanse removes no effects.`,
+  };
+  expect(eventPresentation(game, removed, reader)).toBe(`${name} : Purification — Brûlure.`);
+  expect(eventPresentation(game, buildup, reader)).toBe(`${name} : purification du cumul (Étourdissement)`);
+  expect(eventPresentation(game, none, reader)).toBe(`${name} : Purification — aucun effet retiré.`);
+  expect(eventPresentation(game, { ...removed, text: "Special cleanse" }, reader)).toBe("Special cleanse");
+  expect(eventPresentation(game, removed, createMessageReader("en", {}))).toBe(removed.text);
+});
+
 it("changes menu messages and accessible counts without replacing the focused action", () => {
   const actions = {
     home: true,
