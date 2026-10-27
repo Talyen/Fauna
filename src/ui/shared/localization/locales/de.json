@@ -1883,11 +1883,23 @@
     "sourceHash": "c00b4d99bbe62fb17bf287d50d3cf1ecbf9a601ad3d71d0b6021d7aa99f12d59",
     "text": "Erträge des letzten Kampfes"
   },
+  "glossary.controllerHelp": {
+    "reviewed": true,
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+    "sourceHash": "5cd9e39b2ddc27f48d4e2a2d71389b2b6b5ca345545b49f6af61067d5c33e096",
+    "text": "Mit Steuerkreuz oder linkem Stick navigieren; {{confirm}} wählt aus; {{back}} geht zurück; {{endTurn}} beendet den Zug · Kreaturenfähigkeiten in der Sammlung über das Menü ansehen"
+  },
   "glossary.entries": {
     "reviewed": true,
     "source": "Glossary entries",
     "sourceHash": "cf46b52b75b6fc5938cb1be64743b854677a82fafe8028b03be0bf4bd0e3c4ea",
     "text": "Glossareinträge"
+  },
+  "glossary.keyboardHelp": {
+    "reviewed": true,
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+    "sourceHash": "3cf9cfde53392761b09ae6a021d839ad8cba0c1af787f98b6d25e6fbe655f02e",
+    "text": "Mit W/A/S/D oder Tab navigieren; A/D wechselt das Ziel; Enter wählt aus; Escape geht zurück · Kreaturenfähigkeiten in der Sammlung über das Menü ansehen"
   },
   "glossary.title": {
     "reviewed": true,

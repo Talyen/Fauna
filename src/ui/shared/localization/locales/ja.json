@@ -1883,11 +1883,23 @@
     "sourceHash": "c3cc4539064d747d94fdbc24ed184d42f2751c1f95d0cef773901380302e74ea",
     "text": "前回の戦闘報酬"
   },
+  "glossary.controllerHelp": {
+    "reviewed": true,
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+    "sourceHash": "cbe7018247a5d7b1ef90b5e9238ff2a60b7e3f2c5264749dc2068b42a1b176ea",
+    "text": "十字キーまたは左スティックで移動; {{confirm}}で決定; {{back}}で戻る; {{endTurn}}でターン終了 · メニューのコレクションでクリーチャーの能力を確認"
+  },
   "glossary.entries": {
     "reviewed": true,
     "source": "Glossary entries",
     "sourceHash": "f22a188d08416e71c88731b0187884249e1f67da031c6197e398453ccfa05202",
     "text": "用語一覧"
+  },
+  "glossary.keyboardHelp": {
+    "reviewed": true,
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+    "sourceHash": "0ae311f7e5b781ad4ba3e7b5952722553d77811b7a4ea29b6b977a4f2b8db110",
+    "text": "W/A/S/DまたはTabで移動; A/Dで対象を切り替え; Enterで決定; Escapeで戻る · メニューのコレクションでクリーチャーの能力を確認"
   },
   "glossary.title": {
     "reviewed": true,

@@ -1883,11 +1883,23 @@
     "sourceHash": "0c7d92f4c4d00423b12f630ab67ca477079db086fc187b7447382ae74ec8a284",
     "text": "上场战斗的收益"
   },
+  "glossary.controllerHelp": {
+    "reviewed": true,
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+    "sourceHash": "d31a24dd081016fc5aa5fad220917c7639dfb330ee2755c209822704a59820b9",
+    "text": "使用方向键或左摇杆导航；{{confirm}}选择；{{back}}返回；{{endTurn}}结束回合 · 从菜单中的收藏查看生物能力"
+  },
   "glossary.entries": {
     "reviewed": true,
     "source": "Glossary entries",
     "sourceHash": "062ee016bb5ef45aca46790f7d8c5fdda4b514e5916abf47cfc623ddb3cbc2a4",
     "text": "词汇表条目"
+  },
+  "glossary.keyboardHelp": {
+    "reviewed": true,
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+    "sourceHash": "d827a2050aa7535dcb3c9199b63ac5901e26fdca991cf5e53a7190445df270a7",
+    "text": "使用W/A/S/D或Tab导航；A/D切换目标；Enter选择；Escape返回 · 从菜单中的收藏查看生物能力"
   },
   "glossary.title": {
     "reviewed": true,

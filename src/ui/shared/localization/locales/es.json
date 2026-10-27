@@ -1883,11 +1883,23 @@
     "sourceHash": "6c68ac74f5863ed979135a751055de215565901852ba9b67a2aed977a40bcae1",
     "text": "Ganancias del último combate"
   },
+  "glossary.controllerHelp": {
+    "reviewed": true,
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+    "sourceHash": "c6564a826af889aa6eff96ff532e6aaaa37be99f80be608629df680a62568f07",
+    "text": "Usa la cruceta o el joystick izquierdo para navegar; {{confirm}} selecciona; {{back}} vuelve atrás; {{endTurn}} termina el turno · Consulta las habilidades de las criaturas en Colección desde el menú"
+  },
   "glossary.entries": {
     "reviewed": true,
     "source": "Glossary entries",
     "sourceHash": "71fce53ce8c939f3cf31c5d357970cabdc4b4b49ca0f7b95364261505256c5bd",
     "text": "Entradas del glosario"
+  },
+  "glossary.keyboardHelp": {
+    "reviewed": true,
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+    "sourceHash": "40f2575586e10c3f247374e5daecf2fa734a11bd101a38a9c18c480941f225a2",
+    "text": "Usa W/A/S/D o Tab para navegar; A/D cambia de objetivo; Enter selecciona; Escape vuelve atrás · Consulta las habilidades de las criaturas en Colección desde el menú"
   },
   "glossary.title": {
     "reviewed": true,

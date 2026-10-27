@@ -1883,11 +1883,23 @@
     "sourceHash": "0853cdc18205f19aa815888675cb97a8f1cab1f4dd03d01a48d644165e03794f",
     "text": "Награды последнего боя"
   },
+  "glossary.controllerHelp": {
+    "reviewed": true,
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+    "sourceHash": "556ccdfef797a86d906a5c68b7cf728b9c745ea11f48c62c105ac830eb66ab33",
+    "text": "Перемещение: крестовина или левый стик; выбор: {{confirm}}; назад: {{back}}; завершить ход: {{endTurn}} · Способности существ можно посмотреть в Коллекции через меню"
+  },
   "glossary.entries": {
     "reviewed": true,
     "source": "Glossary entries",
     "sourceHash": "aa07487f2c816d366c99be725947feee1b0f8ca8092d103e23a04a0dda83f19c",
     "text": "Записи глоссария"
+  },
+  "glossary.keyboardHelp": {
+    "reviewed": true,
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+    "sourceHash": "909da96c1111f2ba60dad05abae071353113652e5cf6b31fbbd6262617e403f8",
+    "text": "Перемещение: W/A/S/D или Tab; смена цели: A/D; выбор: Enter; назад: Escape · Способности существ можно посмотреть в Коллекции через меню"
   },
   "glossary.title": {
     "reviewed": true,
