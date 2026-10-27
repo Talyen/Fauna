@@ -395,6 +395,18 @@
     "sourceHash": "66f3486121e8751f7247b0ddc532be9ffe4a0fe2a7664a7ed70a9e788f95fc80",
     "text": "La <keyword0>Quemadura</keyword0> perdida por disminución también elimina esa cantidad de <keyword1>Bloqueo</keyword1> enemigo"
   },
+  "content.boon.asteroid-hammer.name": {
+    "reviewed": true,
+    "source": "Asteroid Hammer",
+    "sourceHash": "5914e51e95b6e3ee5de16eadf1df66380ebda64964a40973c109e30602b673ed",
+    "text": "Martillo de asteroide"
+  },
+  "content.boon.asteroid-hammer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is twice as effective against enemy <keyword1>Block</keyword1>",
+    "sourceHash": "b88af19854f302016ae7aee7962bfbc9b30032d0afac7905e851eaa7332267ae",
+    "text": "El daño de <keyword0>Aturdimiento</keyword0> es el doble de eficaz contra el <keyword1>Bloqueo</keyword1> enemigo"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -406,6 +418,18 @@
     "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "sourceHash": "c09db91e00db8e5e61f5b7e4e3a4da49cb27b3f6f965a9e9ef5093e86c60d4d1",
     "text": "La <keyword0>Purga</keyword0> no puede eliminar el último efecto beneficioso de un aliado"
+  },
+  "content.boon.beeswax-crown.name": {
+    "reviewed": true,
+    "source": "Beeswax Crown",
+    "sourceHash": "ac34329e72349d6a69403350a311ac321a10a45f98bca5a46ae4cda802453751",
+    "text": "Corona de cera de abeja"
+  },
+  "content.boon.beeswax-crown.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, all allies gain {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "7aec0ab589cb465b7a85bcf1fd636fb63ffbb24f24567a93d2b7b09075db247b",
+    "text": "Cuando se rompe la <keyword0>Armadura</keyword0> de un aliado, todos los aliados obtienen {{value0}} de <keyword1>Espinas</keyword1>"
   },
   "content.boon.bellows-heart.name": {
     "reviewed": true,
@@ -694,6 +718,18 @@
     "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
     "sourceHash": "363feceb74e3fcc0a39bbd90853f072617531fa4f3f9b92e95b070045ffdc445",
     "text": "Los umbrales enemigos de <keyword0>Aturdimiento</keyword0> y <keyword1>Congelación</keyword1> usan la <keyword2>Salud</keyword2> actual"
+  },
+  "content.boon.crown-waffle-iron.name": {
+    "reviewed": true,
+    "source": "Crown Waffle Iron",
+    "sourceHash": "4141733342191f58f5fb0784c6c97c7d7d6ba998620d7cca127b6b604f140cb0",
+    "text": "Gofrera de corona"
+  },
+  "content.boon.crown-waffle-iron.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
+    "sourceHash": "1f3eaaa7cfc81dda0cbef76f5b623e3bd2e16ab80cfb9f38018224087a87931c",
+    "text": "La <keyword0>Comida</keyword0> también restaura <keyword1>Salud</keyword1> igual al <keyword2>Bloqueo</keyword2> de su objetivo"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1043,6 +1079,18 @@
     "sourceHash": "e4334d10f3bf27686bf541074360b278df3e9eb46fefa56fd2042a6dab08bc88",
     "text": "Cuando cae un enemigo, su <keyword0>Sangrado</keyword0> se extiende a otro enemigo"
   },
+  "content.boon.harvest-sickle.name": {
+    "reviewed": true,
+    "source": "Harvest Sickle",
+    "sourceHash": "764c5beacd67ba13ed3e4b605388aa06a67f92355337387dd0f81b8f605d80bd",
+    "text": "Hoz de cosecha"
+  },
+  "content.boon.harvest-sickle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "a113a1275f7626fae2a2dfadff1e7a129cb89c53ab9169f2ca1913864848e2c5",
+    "text": "El daño de <keyword0>Sangrado</keyword0> ignora el <keyword1>Bloqueo</keyword1> enemigo"
+  },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
     "source": "Hearth Coal",
@@ -1246,6 +1294,18 @@
     "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
     "sourceHash": "93807bf09a1c5491e3eba2debaf019b51f0c9002146e1f164ab37e3dacfa0c42",
     "text": "Los impactos de <keyword0>Naturaleza</keyword0> tienen un {{value0}}% de probabilidad de otorgar oro igual a la <keyword1>Salud</keyword1> perdida por el enemigo"
+  },
+  "content.boon.meadow-mortar.name": {
+    "reviewed": true,
+    "source": "Meadow Mortar",
+    "sourceHash": "a31ef26834da6ef1f400c6425c325f7dd795b8d5552e9f5cdce014323bc6fc3c",
+    "text": "Mortero del prado"
+  },
+  "content.boon.meadow-mortar.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from a Poisoned enemy makes their <keyword1>Poison</keyword1> deal damage",
+    "sourceHash": "26b35263b72e81af0318f25f4f00923573de564ce1e1e8601ac2f8346a514246",
+    "text": "<keyword0>Purgar</keyword0> un efecto de un enemigo envenenado hace que su <keyword1>Veneno</keyword1> inflija daño"
   },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
@@ -1727,6 +1787,18 @@
     "sourceHash": "c81a05c0358c916365337c4d4a70c6975388d2661918d721f851d1ab55f60c4a",
     "text": "Los ataques <keyword0>Reflejados</keyword0> por aliados golpean a todos los enemigos"
   },
+  "content.boon.rocking-chair-charm.name": {
+    "reviewed": true,
+    "source": "Rocking Chair Charm",
+    "sourceHash": "7b2d21ac59916fdeaff16f376d0f7bc63af7d294dd197ef756537c36a908a7f0",
+    "text": "Amuleto de mecedora"
+  },
+  "content.boon.rocking-chair-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> cannot damage allies in backup",
+    "sourceHash": "11e1f843e1f6957e8a5091eb443a4c54ee6256af97162a45a5761d9088adc341",
+    "text": "La <keyword0>Quemadura</keyword0>, el <keyword1>Veneno</keyword1> y el <keyword2>Sangrado</keyword2> no pueden dañar a los aliados de reserva"
+  },
   "content.boon.rook-of-mercy.name": {
     "reviewed": true,
     "source": "Rook of Mercy",
@@ -1762,6 +1834,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
     "sourceHash": "b8c1a06e5ba678c9608ff31802d8ee2774a9cbd91cd6f8e434aaf85a031879e7",
     "text": "Los aliados pueden <keyword0>esquivar</keyword0> el daño de <keyword1>Espinas</keyword1>"
+  },
+  "content.boon.rosewax-seal.name": {
+    "reviewed": true,
+    "source": "Rosewax Seal",
+    "sourceHash": "532d1df9213d57b86cf5253aea90a970dd9f04993de92bdd31f22dc26fd48ea1",
+    "text": "Sello de cera de rosa"
+  },
+  "content.boon.rosewax-seal.rule": {
+    "reviewed": true,
+    "source": "Allied <keyword0>Thorns</keyword0> apply {{value0}} <keyword1>Bleed</keyword1>",
+    "sourceHash": "7cb80d0f5beb2ce48d36b65bb985ec149a03ed39f6b1ad4b650f2ddfe1727b22",
+    "text": "Las <keyword0>Espinas</keyword0> aliadas aplican {{value0}} de <keyword1>Sangrado</keyword1>"
   },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
@@ -1834,6 +1918,30 @@
     "source": "Gain {{value0}} additional Gold for each battle won",
     "sourceHash": "4afa3df9129a04626a19d108ade3fc50ec5ea577ca010616347743d8788eb68e",
     "text": "Obtienes {{value0}} de Oro adicional por cada combate ganado"
+  },
+  "content.boon.snowbell.name": {
+    "reviewed": true,
+    "source": "Snowbell",
+    "sourceHash": "66cef19dabce47e1ad5d1c64148ccb05e3480c471c26b79f4aa595e99fa3505c",
+    "text": "Campana de nieve"
+  },
+  "content.boon.snowbell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies’ <keyword1>Thorns</keyword1> cannot retaliate",
+    "sourceHash": "ee64e0741c458fd891ddedde4eb5a5baf2289ffb45e0ab1c862cf1385035997d",
+    "text": "Las <keyword1>Espinas</keyword1> de los enemigos <keyword0>congelados</keyword0> no pueden contraatacar"
+  },
+  "content.boon.solstice-concertina.name": {
+    "reviewed": true,
+    "source": "Solstice Concertina",
+    "sourceHash": "7b98afe3a5a168f679f1a06c7c1401beaaa799337bb36b86bb95ac5744e7ad45",
+    "text": "Concertina del solsticio"
+  },
+  "content.boon.solstice-concertina.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burning</keyword0> enemies cannot <keyword1>Dodge</keyword1> <keyword2>Freeze</keyword2> attacks",
+    "sourceHash": "e127eb8aee2879612194c2a2eecf7df32721f2114b9dcf4e416348e255e05f56",
+    "text": "Los enemigos con <keyword0>Quemadura</keyword0> no pueden <keyword1>esquivar</keyword1> ataques de <keyword2>Congelación</keyword2>"
   },
   "content.boon.soot-brush.name": {
     "reviewed": true,
@@ -2038,6 +2146,18 @@
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "2cbcc737fa978451fa9794fce815393cd0d0474f3bee95bab1f73489a5d42622",
     "text": "Las acumulaciones de <keyword0>Aturdimiento</keyword0> y <keyword1>Congelación</keyword1> se combinan en los enemigos"
+  },
+  "content.boon.vanishing-hat.name": {
+    "reviewed": true,
+    "source": "Vanishing Hat",
+    "sourceHash": "24d4729b3bfdbfd9311b2480e61d566ca03ff595f4bed312c01dfcfc37004cb3",
+    "text": "Sombrero evanescente"
+  },
+  "content.boon.vanishing-hat.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "002e373d3266f267382322b6572ea7c94f7d304de5b033a2889c3e22302e14b0",
+    "text": "Los aliados pueden <keyword0>esquivar</keyword0> la <keyword1>Purga</keyword1> enemiga"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
@@ -8285,12 +8405,6 @@
     "sourceHash": "09dff029a543b67e7beef06e624d3042a58aae1c303957ed99cfa4009dbac398",
     "text": "Elige tu criatura inicial"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "8fad4cd3e3f66f560debd3c542d36af88b8a709160efcd233c518ea0efb373c6",
-    "text": "Seleccionada"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -8952,11 +9066,11 @@
     "sourceHash": "ee238ee9e2aef3f8cc5b3e9de158fdf7aaf503a81a4aafb89b338310d69e719f",
     "text": "No hay suficiente Oro"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "26021a3525b41ca76409cb89f3ea936277043f3e108ffc23ff293a8ba7b06df9",
-    "text": "Una unidad por cliente. ¡No se admiten devoluciones!"
+    "source": "One per visit",
+    "sourceHash": "a1a53a6079bc8c695bc8a838e98c3c46735d759cc9c9f1174864e0aa3dcbb852",
+    "text": "Uno por visita"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9234,47 +9348,35 @@
     "sourceHash": "d957ecd0a87c9074cc297e6efbf91dec309257905f43eb77b6605dbb09f56f59",
     "text": "No se puede guardar el progreso ahora; mantén Fauna abierto mientras se vuelve a intentar"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "70cc3df313dcfbf2694f3aaaebd5d491bf9649594724595e5a96e1d66cec7bed",
-    "text": "Elige tu equipo"
+    "source": "Incoming creature",
+    "sourceHash": "afd29be482c557f4eef30c52b06463ecd13baa3fa15b147f3b40c0a539590989",
+    "text": "Criatura reclutada"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "be50a62de5461d74705e2d72414eed5c1356a2eeb58155cf5433cf34ec1b5d89",
-    "text": "Confirmar"
+    "source": "Keep team",
+    "sourceHash": "51ecaa20f951f1b3f9159e8439d5c5f62c96c1c13bc68e628caece67fe1dc080",
+    "text": "Mantener equipo"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "c966363fb3e6c27145c530360a524b97406938e8849b00b6d9e71cb28f236509",
-    "text": "Intercambiar criatura"
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "ab8606e1a47cfdecd3fa083249cad1bf8c53701030fa7ed4cfcb283ff6ebebd9",
+    "text": "Sustituir a {{outgoing}} por {{incoming}}"
   },
-  "recruit.previewSlot": {
+  "recruit.replaceHeading": {
     "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "ac29343dcf3ced68c5bff81fcc120636add891632212d08839deb408d582b53c",
-    "text": "Previsualizar el reemplazo de {{name}} en el puesto {{slot}} del equipo"
+    "source": "Replace a creature",
+    "sourceHash": "3f26a9add3aaa3aff1f819ee8ff86c39cccb0e5c3a358d760fbe2f69dbf86e71",
+    "text": "Sustituir criatura"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "148418413d5ec58d525670021a1fbeff9443b809720a5a2ec5bdef25d918dff3",
     "text": "Equipo"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "ce6c51120788180c173b2282177880737f13dde4c797c5c5196b867f3e46ceda",
-    "text": "Deshacer el reemplazo de {{name}}"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "df79f2296cd65fe4534a70d7f85703eaffa640561a5d627ff346d3a1b9006171",
-    "text": "Deshacer {{name}} en el puesto {{slot}} del equipo"
   },
   "replacement.backup": {
     "reviewed": true,

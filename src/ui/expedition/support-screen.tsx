@@ -75,9 +75,6 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
         </section>
       ) : (
         <>
-          <p className="merchant-terms merchant-policy">
-            <em>{i18n.message("merchant.policy", "Limit 1 per customer - No Refunds!")}</em>
-          </p>
           <section
             className="boon-options merchant-stock"
             aria-label={i18n.message("merchant.stock", "Boon Merchant stock")}
@@ -109,6 +106,7 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                       </strong>
                       <BoonText boon={boon} />
                       <p>{i18n.message("merchant.forJourney", "For this journey")}</p>
+                      <p>{i18n.message("merchant.onePerVisit", "One per visit")}</p>
                       {reason ? <p>{reason}</p> : null}
                     </TooltipContent>
                   </Tooltip>

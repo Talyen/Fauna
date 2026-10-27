@@ -118,6 +118,15 @@ export function useFood(
         if (target.health <= 0 || isDepartedMinion(state, target)) continue;
         if (def.effect === "heal") restoreHealth(target, value, events, false, state, true);
         else if (def.effect === "guard") grantBlock(state, target, value, events);
+        if (state.boons.includes("crown-waffle-iron") && target.block > 0)
+          restoreHealth(
+            target,
+            target.block * (state.boons.includes("nectar-dipper") ? 2 : 1),
+            events,
+            false,
+            state,
+            true,
+          );
         if (state.boons.includes("velvet-whisk"))
           grantTemporaryDodge(target, boonRule("velvet-whisk").dodge, events);
       }

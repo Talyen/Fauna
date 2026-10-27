@@ -236,9 +236,6 @@
   "draft.choose": {
     "text": "Choose your starter"
   },
-  "draft.selected": {
-    "text": "Selected"
-  },
   "draft.team": {
     "text": "Your starter team"
   },
@@ -569,8 +566,8 @@
   "merchant.notEnough": {
     "text": "Not enough Gold"
   },
-  "merchant.policy": {
-    "text": "Limit 1 per customer - No Refunds!"
+  "merchant.onePerVisit": {
+    "text": "One per visit"
   },
   "merchant.purchaseUsed": {
     "text": "Purchase used"
@@ -710,26 +707,20 @@
   "recovery.save": {
     "text": "Progress cannot be saved right now; keep Fauna open while it retries"
   },
-  "recruit.chooseTeam": {
-    "text": "Choose your team"
+  "recruit.incoming": {
+    "text": "Incoming creature"
   },
-  "recruit.confirm": {
-    "text": "Confirm"
+  "recruit.keepTeam": {
+    "text": "Keep team"
   },
-  "recruit.exchange": {
-    "text": "Exchange creature"
+  "recruit.replace": {
+    "text": "Replace {{outgoing}} with {{incoming}}"
   },
-  "recruit.previewSlot": {
-    "text": "Preview replacing {{name}} in team slot {{slot}}"
+  "recruit.replaceHeading": {
+    "text": "Replace a creature"
   },
   "recruit.team": {
     "text": "Team"
-  },
-  "recruit.undoReplacement": {
-    "text": "Undo replacement of {{name}}"
-  },
-  "recruit.undoSlot": {
-    "text": "Undo {{name}} in team slot {{slot}}"
   },
   "replacement.backup": {
     "text": "Backup"

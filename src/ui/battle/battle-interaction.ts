@@ -201,8 +201,13 @@ export function useBattleInteraction({
 
   const chooseCard = (cardId: string) => {
     const chosen = cardsById.get(cardId)!;
-    const mode = cardTargeting(definition(chosen.definitionId), game);
-    if (mode === "enemy" || mode === "ally") update({ type: "choose", id: cardId });
+    const chosenDef = definition(chosen.definitionId);
+    const mode = cardTargeting(chosenDef, game);
+    const recipients = mode === "enemy" || mode === "ally" ? chosenRecipients(game, chosenDef) : [];
+    if (recipients.length === 1) {
+      update({ type: "prepare" });
+      play({ type: "play", cardId, targetId: recipients[0]!.id });
+    } else if (mode === "enemy" || mode === "ally") update({ type: "choose", id: cardId });
     else {
       update({ type: "prepare" });
       play({ type: "play", cardId });

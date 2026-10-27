@@ -85,9 +85,13 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     const source = combatantById(state, sourceId) ?? unit;
     // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
     // Periodic packets have no attack delivery; retain the payment for deferred Leech.
-    const payment = yield* reaction("resolveHit", state, source, unit, amount, status, events, {
-      origin: "periodic",
-    });
+    const sheltered =
+      !isEnemy(unit) &&
+      state.boons.includes("rocking-chair-charm") &&
+      state.reserves.some((ally) => ally.id === unit.id);
+    const payment = sheltered
+      ? { outcome: "ignored" as const }
+      : yield* reaction("resolveHit", state, source, unit, amount, status, events, { origin: "periodic" });
     if (status === "bleed") {
       if (periodicClearVersion(stats, status) === clearVersion) finishBleedTick(stats);
       yield* settleBleedLeech(state, unit, payouts, payment.outcome === "landed" ? payment.dealt : 0, events);

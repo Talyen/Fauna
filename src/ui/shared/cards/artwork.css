@@ -121,11 +121,6 @@
 .app[data-paused="true"] .control-crystal {
   animation-play-state: paused;
 }
-.selected {
-  box-shadow:
-    0 0 0 var(--selection-gap) var(--background),
-    0 0 0 calc(var(--selection-gap) + var(--selection-width)) var(--selected);
-}
 .knocked-out .creature-card {
   opacity: var(--unavailable-opacity);
   filter: grayscale(1);

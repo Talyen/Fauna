@@ -62,7 +62,6 @@ for (const [width, enlarged, outcome] of [
     await resume(page);
     if (ending.type === "play") {
       await page.locator(`.app:not([inert]) .hand [data-card-id="${ending.cardId}"]`).click();
-      await page.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
     } else if (ending.type === "endTurn") {
       await page.getByRole("button", { name: "End turn", exact: true }).click();
     } else {

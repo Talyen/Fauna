@@ -41,12 +41,26 @@
     "text": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
     "reference": "Burn lost through decay also removes that much enemy Block"
   },
+  "content.boon.asteroid-hammer.name": {
+    "text": "Asteroid Hammer"
+  },
+  "content.boon.asteroid-hammer.rule": {
+    "text": "<keyword0>Stun</keyword0> damage is twice as effective against enemy <keyword1>Block</keyword1>",
+    "reference": "Stun damage is twice as effective against enemy Block"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "text": "Basalt Glass Bookmark"
   },
   "content.boon.basalt-glass-bookmark.rule": {
     "text": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "reference": "Purge cannot remove an ally’s last beneficial effect"
+  },
+  "content.boon.beeswax-crown.name": {
+    "text": "Beeswax Crown"
+  },
+  "content.boon.beeswax-crown.rule": {
+    "text": "When an ally’s <keyword0>Armor</keyword0> breaks, all allies gain {{value0}} <keyword1>Thorns</keyword1>",
+    "reference": "When an ally’s Armor breaks, all allies gain 2 Thorns"
   },
   "content.boon.bellows-heart.name": {
     "text": "Bellows Heart"
@@ -215,6 +229,13 @@
   "content.boon.crescent-sextant.rule": {
     "text": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
     "reference": "Enemy Stun and Freeze thresholds use current Health"
+  },
+  "content.boon.crown-waffle-iron.name": {
+    "text": "Crown Waffle Iron"
+  },
+  "content.boon.crown-waffle-iron.rule": {
+    "text": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
+    "reference": "Food also restores Health equal to its target’s Block"
   },
   "content.boon.cutpurse-knife.name": {
     "text": "Cutpurse Knife"
@@ -419,6 +440,13 @@
     "text": "When an enemy falls, their <keyword0>Bleed</keyword0> spreads to another enemy",
     "reference": "When an enemy falls, their Bleed spreads to another enemy"
   },
+  "content.boon.harvest-sickle.name": {
+    "text": "Harvest Sickle"
+  },
+  "content.boon.harvest-sickle.rule": {
+    "text": "<keyword0>Bleed</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "reference": "Bleed damage ignores enemy Block"
+  },
   "content.boon.hearth-coal.name": {
     "text": "Hearth Coal"
   },
@@ -537,6 +565,13 @@
   "content.boon.lucky-clover.rule": {
     "text": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
     "reference": "Nature hits have a 10% chance to grant Gold equal to enemy Health lost"
+  },
+  "content.boon.meadow-mortar.name": {
+    "text": "Meadow Mortar"
+  },
+  "content.boon.meadow-mortar.rule": {
+    "text": "<keyword0>Purging</keyword0> an effect from a Poisoned enemy makes their <keyword1>Poison</keyword1> deal damage",
+    "reference": "Purging an effect from a Poisoned enemy makes their Poison deal damage"
   },
   "content.boon.merchants-favor.name": {
     "text": "Merchant's Favor"
@@ -818,6 +853,13 @@
     "text": "Attacks <keyword0>Reflected</keyword0> by allies hit all enemies",
     "reference": "Attacks Reflected by allies hit all enemies"
   },
+  "content.boon.rocking-chair-charm.name": {
+    "text": "Rocking Chair Charm"
+  },
+  "content.boon.rocking-chair-charm.rule": {
+    "text": "<keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> cannot damage allies in backup",
+    "reference": "Burn, Poison and Bleed cannot damage allies in backup"
+  },
   "content.boon.rook-of-mercy.name": {
     "text": "Rook of Mercy"
   },
@@ -838,6 +880,13 @@
   "content.boon.rootvault-pole.rule": {
     "text": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
     "reference": "Allies can Dodge Thorns damage"
+  },
+  "content.boon.rosewax-seal.name": {
+    "text": "Rosewax Seal"
+  },
+  "content.boon.rosewax-seal.rule": {
+    "text": "Allied <keyword0>Thorns</keyword0> apply {{value0}} <keyword1>Bleed</keyword1>",
+    "reference": "Allied Thorns apply 1 Bleed"
   },
   "content.boon.saddle-pouch.name": {
     "text": "Saddle Pouch"
@@ -880,6 +929,20 @@
   "content.boon.smugglers-map.rule": {
     "text": "Gain {{value0}} additional Gold for each battle won",
     "reference": "Gain 2 additional Gold for each battle won"
+  },
+  "content.boon.snowbell.name": {
+    "text": "Snowbell"
+  },
+  "content.boon.snowbell.rule": {
+    "text": "<keyword0>Frozen</keyword0> enemies’ <keyword1>Thorns</keyword1> cannot retaliate",
+    "reference": "Frozen enemies’ Thorns cannot retaliate"
+  },
+  "content.boon.solstice-concertina.name": {
+    "text": "Solstice Concertina"
+  },
+  "content.boon.solstice-concertina.rule": {
+    "text": "<keyword0>Burning</keyword0> enemies cannot <keyword1>Dodge</keyword1> <keyword2>Freeze</keyword2> attacks",
+    "reference": "Burning enemies cannot Dodge Freeze attacks"
   },
   "content.boon.soot-brush.name": {
     "text": "Soot Brush"
@@ -999,6 +1062,13 @@
   "content.boon.undertow-castanets.rule": {
     "text": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "reference": "Stun and Freeze buildup combines on enemies"
+  },
+  "content.boon.vanishing-hat.name": {
+    "text": "Vanishing Hat"
+  },
+  "content.boon.vanishing-hat.rule": {
+    "text": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
+    "reference": "Allies can Dodge enemy Purge"
   },
   "content.boon.velvet-whisk.name": {
     "text": "Velvet Whisk"

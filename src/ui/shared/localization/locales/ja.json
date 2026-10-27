@@ -395,6 +395,18 @@
     "sourceHash": "721af9956d6426ad7d8edab0518f1a87f2649d9f507f43a724b5b15f7896ba69",
     "text": "減衰で失われた<keyword0>炎上</keyword0>と同量の敵<keyword1>ブロック</keyword1>も取り除く"
   },
+  "content.boon.asteroid-hammer.name": {
+    "reviewed": true,
+    "source": "Asteroid Hammer",
+    "sourceHash": "31d97355f401a748347610676e889e9a9ee13098009fe6de70b39c461feea43e",
+    "text": "小惑星のハンマー"
+  },
+  "content.boon.asteroid-hammer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is twice as effective against enemy <keyword1>Block</keyword1>",
+    "sourceHash": "34c5a89ab924172c7ce9201772aa35fc4e9870dda5323a579986b61b66cc82fc",
+    "text": "<keyword0>スタン</keyword0>ダメージは敵の<keyword1>ブロック</keyword1>に対して2倍の効果を持つ"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -406,6 +418,18 @@
     "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "sourceHash": "777e208a05d8444651ad65962d98438b2d6a27ed3fe246ee86dba4db91ec8237",
     "text": "<keyword0>強化解除</keyword0>は味方の最後の有益な効果を取り除けない"
+  },
+  "content.boon.beeswax-crown.name": {
+    "reviewed": true,
+    "source": "Beeswax Crown",
+    "sourceHash": "1cc8e03f48741d70d4860cc878200eb6301eac4c86d27947338b740d81a1fd2f",
+    "text": "蜜蝋の冠"
+  },
+  "content.boon.beeswax-crown.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, all allies gain {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "b2d1a46b8c53530aa17097bae6d6b645662154dbf1270a597df71023abcb48ea",
+    "text": "味方の<keyword0>装甲</keyword0>が壊れると、味方全員が<keyword1>棘</keyword1>を{{value0}}獲得"
   },
   "content.boon.bellows-heart.name": {
     "reviewed": true,
@@ -694,6 +718,18 @@
     "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
     "sourceHash": "d248db013ed45dba37e381336508b82aae82b4aa6950db19ee80e3544d6e4df4",
     "text": "敵の<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>の閾値は現在の<keyword2>体力</keyword2>を使う"
+  },
+  "content.boon.crown-waffle-iron.name": {
+    "reviewed": true,
+    "source": "Crown Waffle Iron",
+    "sourceHash": "664c96bd57b59de19d16fb9b4f238928573b2b88a42d082c4278b9209cb791c9",
+    "text": "王冠ワッフル型"
+  },
+  "content.boon.crown-waffle-iron.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
+    "sourceHash": "299633d4196612b711a1f5fcf0a4f1daaee124d2673d86cffd92012be5dfcf23",
+    "text": "<keyword0>食料</keyword0>は対象の<keyword2>ブロック</keyword2>に等しい<keyword1>体力</keyword1>も回復する"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1043,6 +1079,18 @@
     "sourceHash": "b96061c98f57c6dc9cc1046c752c336f8b59d3bdfad1818ad534e6e02a911efc",
     "text": "敵が倒れると、その敵の<keyword0>出血</keyword0>が別の敵に広がる"
   },
+  "content.boon.harvest-sickle.name": {
+    "reviewed": true,
+    "source": "Harvest Sickle",
+    "sourceHash": "892ae53bc42715b21e6c9e8c1b67684c8d8b262b699f3961ba496f77b132f4b7",
+    "text": "収穫の鎌"
+  },
+  "content.boon.harvest-sickle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "2008d6b7b953e97d9521e5f889f7c4f0d3db95c3f431838c51b0328a368e1378",
+    "text": "<keyword0>出血</keyword0>ダメージは敵の<keyword1>ブロック</keyword1>を無視"
+  },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
     "source": "Hearth Coal",
@@ -1246,6 +1294,18 @@
     "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
     "sourceHash": "95bf6f364ad1714d01528db0652619eda1cb359d18b244e6745055994630c1c2",
     "text": "<keyword0>自然</keyword0>のヒットは{{value0}}%の確率で敵が失った<keyword1>体力</keyword1>と同量のゴールドを獲得"
+  },
+  "content.boon.meadow-mortar.name": {
+    "reviewed": true,
+    "source": "Meadow Mortar",
+    "sourceHash": "d3cba195cbf5d614be34f01f1763cc06ab6db59f35ba1adfc617eaeb2c33a547",
+    "text": "草原の乳鉢"
+  },
+  "content.boon.meadow-mortar.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from a Poisoned enemy makes their <keyword1>Poison</keyword1> deal damage",
+    "sourceHash": "5fe4696d3542a02aacc871d3338c750b755f54417c0bad3c43846f8bdfb8fa46",
+    "text": "毒状態の敵の効果を<keyword0>強化解除</keyword0>すると、その敵の<keyword1>毒</keyword1>がダメージを与える"
   },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
@@ -1727,6 +1787,18 @@
     "sourceHash": "13b730a4b000d823bb2dc2bbc0bf628569126720f4ecda96172deee44a729db4",
     "text": "味方が<keyword0>反射</keyword0>した攻撃は敵全員に当たる"
   },
+  "content.boon.rocking-chair-charm.name": {
+    "reviewed": true,
+    "source": "Rocking Chair Charm",
+    "sourceHash": "da1b40d6a3ca61c654c6244010afcda6eacf0c184797973b89ad8b9b9911efb0",
+    "text": "揺り椅子のお守り"
+  },
+  "content.boon.rocking-chair-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> cannot damage allies in backup",
+    "sourceHash": "ac08cfbb144419b5c7189474254e64d36942b0898416664923a663d300ee5185",
+    "text": "<keyword0>炎上</keyword0>、<keyword1>毒</keyword1>、<keyword2>出血</keyword2>は控えの味方にダメージを与えない"
+  },
   "content.boon.rook-of-mercy.name": {
     "reviewed": true,
     "source": "Rook of Mercy",
@@ -1762,6 +1834,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
     "sourceHash": "60c0e9023eb805c97af0943b605cff48ee1abaaad95460b36c7cd3663b9b57ea",
     "text": "味方は<keyword1>棘</keyword1>ダメージを<keyword0>回避</keyword0>できる"
+  },
+  "content.boon.rosewax-seal.name": {
+    "reviewed": true,
+    "source": "Rosewax Seal",
+    "sourceHash": "caab56b88852420b05a5c493c485783bfaad9be7bf62d3e825ba2e6d70f0068a",
+    "text": "薔薇蝋の封印"
+  },
+  "content.boon.rosewax-seal.rule": {
+    "reviewed": true,
+    "source": "Allied <keyword0>Thorns</keyword0> apply {{value0}} <keyword1>Bleed</keyword1>",
+    "sourceHash": "260c4fd8dd87024b87faf77caaa5156da7511aa2aaa0c2eae3936cf3663636dd",
+    "text": "味方の<keyword0>棘</keyword0>は<keyword1>出血</keyword1>を{{value0}}付与する"
   },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
@@ -1834,6 +1918,30 @@
     "source": "Gain {{value0}} additional Gold for each battle won",
     "sourceHash": "8e2195c2d5e087c23d12fd78b7bb1a808bc188dcb4b4acd26d064d80d0541869",
     "text": "戦闘に勝利するたびに追加のゴールドを{{value0}}獲得"
+  },
+  "content.boon.snowbell.name": {
+    "reviewed": true,
+    "source": "Snowbell",
+    "sourceHash": "f81830f8159301099119c2ca741c855f246293760cda7200ba59e53eeade93d5",
+    "text": "雪の鐘"
+  },
+  "content.boon.snowbell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies’ <keyword1>Thorns</keyword1> cannot retaliate",
+    "sourceHash": "17308d77aee7df80ccaa43e5c0740b57e4868a4454d9fee103c29dd7b5910222",
+    "text": "<keyword0>凍結</keyword0>中の敵の<keyword1>棘</keyword1>は反撃できない"
+  },
+  "content.boon.solstice-concertina.name": {
+    "reviewed": true,
+    "source": "Solstice Concertina",
+    "sourceHash": "b567565cc03387c5bb272e26882caa17869e5d585837e2b515364da7f42ac8ef",
+    "text": "至点の手風琴"
+  },
+  "content.boon.solstice-concertina.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burning</keyword0> enemies cannot <keyword1>Dodge</keyword1> <keyword2>Freeze</keyword2> attacks",
+    "sourceHash": "a8ac7a9745993f1abd681930a72dc941531ff22967df1486939ca69411be67a8",
+    "text": "<keyword0>炎上</keyword0>中の敵は<keyword2>凍結</keyword2>攻撃を<keyword1>回避</keyword1>できない"
   },
   "content.boon.soot-brush.name": {
     "reviewed": true,
@@ -2038,6 +2146,18 @@
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "1162fd09ed0a9369a2298b5462f1964a7fe9f6bb1ff4a9b7df736440567bfbdd",
     "text": "敵の<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>の蓄積が合算される"
+  },
+  "content.boon.vanishing-hat.name": {
+    "reviewed": true,
+    "source": "Vanishing Hat",
+    "sourceHash": "26d8a8197cca993a8cca5862fc0a0bb7b0997d1e2c398888d2f1587a4566b1e2",
+    "text": "消失の帽子"
+  },
+  "content.boon.vanishing-hat.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "e91ffbba6a6e671bbb367a5ead84abca698f1ffac375b73013e90af72ab7c7ba",
+    "text": "味方は敵の<keyword1>強化解除</keyword1>を<keyword0>回避</keyword0>できる"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
@@ -8285,12 +8405,6 @@
     "sourceHash": "63808663e5628b0023b10f13ea9b04cd4bc07b88a7373c64466abc51ebd461bc",
     "text": "最初の生き物を選ぶ"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "b83d8ad5a8edb8db6494a63160f34728cab51460223feabe5e1e3937e19e3584",
-    "text": "選択済み"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -8950,11 +9064,11 @@
     "sourceHash": "d04c87e73f7ac7b5abd6550e89fcae983d05b5024ddc973849a5d03f0d15872f",
     "text": "ゴールドが足りない"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "c80f8c08ec33f265303209701b104be01f3769e668650b467a6abfeb64fe3166",
-    "text": "お一人様一点限り・返品不可！"
+    "source": "One per visit",
+    "sourceHash": "60f6a35a9c960ec9ab702dcc6a881c45053b416722170c21970234fbef8931c3",
+    "text": "立ち寄るたび1つ"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9232,47 +9346,35 @@
     "sourceHash": "59c06015219f39f3e051ba153ee5dcd2bc6e5cc77675d1f4c328fd6c24f6563f",
     "text": "現在、進行状況を保存できません。再試行中はFaunaを開いたままにしてください"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "bd2e1dcef7552f59e97761e2bf6c783a1d5a9e70796f0a72a502ef29dcea59e1",
-    "text": "チームを選ぶ"
+    "source": "Incoming creature",
+    "sourceHash": "18f9b32c405344d045b602a085a0051c1a3b812f77c86cddb12de27d2ca5430a",
+    "text": "新しい生き物"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "b3f66e2b3d7b5f31979a90830b9ff76096925f669cd2c2827c79d6332d69c336",
-    "text": "決定"
+    "source": "Keep team",
+    "sourceHash": "374859216fb33db4f52036b64936d09e06b24deadf85749f64a27b974e93527b",
+    "text": "チームを維持"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "cee01d3f0e688f8b8436aa4c2420093d321992ba1548692e63d04c99c6bfd949",
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "05b6dfe8f93c7bd3526efc45eca12775b7a361ae835fed4c8b7ebb1fed172978",
+    "text": "{{outgoing}}を{{incoming}}に入れ替える"
+  },
+  "recruit.replaceHeading": {
+    "reviewed": true,
+    "source": "Replace a creature",
+    "sourceHash": "a86633bb177c864315258b93382cabac8f86d1f25bc3156750bfb8b07d6d9b32",
     "text": "生き物を入れ替える"
-  },
-  "recruit.previewSlot": {
-    "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "a714fd84822eaeeb82a213b57aeff2948372ca956cf8b183360a41d3b7b66cfd",
-    "text": "チーム枠{{slot}}の{{name}}の入れ替えを確認"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "26d3899d55d23fc82b0baa1c6e46fe88d69358b90607d4398c24511a08562ade",
     "text": "チーム"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "b3fbd2a3e3d57ef2c6155dba3e609434827a0467e1c98fbffb20f8f09202ceb6",
-    "text": "{{name}}の入れ替えを取り消す"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "e10054772192f2360d1b61d7b7bd872374a3dbc27eecfa11524a674e54722b08",
-    "text": "チーム枠{{slot}}の{{name}}を取り消す"
   },
   "replacement.backup": {
     "reviewed": true,

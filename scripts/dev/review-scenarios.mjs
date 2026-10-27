@@ -69,6 +69,10 @@ export const SCENARIOS = [
   "journey-boons-2",
   "journey-boons-3",
   "journey-boons-4",
+  "seal-boons-1",
+  "seal-boons-2",
+  "seal-boons-3",
+  "seal-boons-4",
   "journey-results",
   "death-door",
   "inspection",
@@ -115,7 +119,7 @@ const creatureFixtures = [
 export async function reviewScenario(server, name) {
   if (!SCENARIOS.includes(name))
     throw new Error(`Unknown scenario: ${name}. Choose ${SCENARIOS.join(", ")}.`);
-  const { run, winBattle, merchantDestination, accept, bossReward } =
+  const { run, winBattle, fullRosterReward, merchantDestination, accept, bossReward } =
     await server.ssrLoadModule("/tests/support/game.ts");
   const { encodeSave, decodeSave } = await server.ssrLoadModule("/src/game/save.ts");
   let game = name.startsWith("merchant")
@@ -124,23 +128,7 @@ export async function reviewScenario(server, name) {
       ? winBattle()
       : run();
   if (["recruit-replacement", "recruit-team-preview"].includes(name)) {
-    const { species } = await server.ssrLoadModule("/src/game/content.ts");
-    const reserves = ["dunefox", "captoad"].map((kind, index) => ({
-      id: `review-reserve-${index}`,
-      species: kind,
-      health: species(kind).health,
-      block: 0,
-      attacked: false,
-    }));
-    game = {
-      ...game,
-
-      reserves,
-      discovery: {
-        ...game.discovery,
-        recruited: { ...game.discovery.recruited, pollenmoth: 1 },
-      },
-    };
+    game = fullRosterReward();
   }
   if (name.startsWith("merchant")) game = accept(game, { type: "enterSupport", visit: game.support.id });
   if (name === "merchant-unavailable") game = { ...game, currency: 0 };
@@ -197,6 +185,16 @@ export async function reviewScenario(server, name) {
       ["rootspool", "winterseed", "moonpath-divider"],
       ["cornucopia", "suncrust-rolling-pin", "dandelion-poultice"],
       ["dew-pendulum"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
+  if (name.startsWith("seal-boons-")) {
+    const groups = [
+      ["vanishing-hat", "rocking-chair-charm", "asteroid-hammer"],
+      ["snowbell", "harvest-sickle", "meadow-mortar"],
+      ["rosewax-seal", "solstice-concertina", "crown-waffle-iron"],
+      ["beeswax-crown"],
     ];
     game = bossReward();
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
@@ -373,10 +371,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
       .click();
     await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
     if (["recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
-      await page.getByRole("button", { name: "Recruit Pollenmoth", exact: true }).click();
-      await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
+      await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
+      await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
       if (scenario.name === "recruit-team-preview")
-        await page.locator(".recruit-team-roster .creature-card").first().click();
+        await page.locator(".recruit-team-roster .creature-card").first().hover();
     }
   }
   if (scenario.name === "journey-results") {

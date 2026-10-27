@@ -37,7 +37,7 @@ it("replaces the shelf with the purchased Boon reward, restores it on reload and
     ),
   ).toBeTruthy();
   expect(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })).toHaveLength(3);
-  expect(screen.getByText("Limit 1 per customer - No Refunds!")).toBeTruthy();
+  expect(screen.queryByText("Limit 1 per customer - No Refunds!")).toBeNull();
   expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
   fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })[0]!);
@@ -79,6 +79,7 @@ it("shows the stocked Boon rules when its artwork receives keyboard focus", asyn
     fireEvent.focus(screen.getByRole("button", { name: `Inspect ${boon.name}` }));
     const tooltip = await screen.findByRole("tooltip");
     expect(tooltip.textContent).toContain(boon.text);
+    expect(tooltip.textContent).toContain("One per visit");
   } finally {
     delete document.documentElement.dataset.focus;
   }

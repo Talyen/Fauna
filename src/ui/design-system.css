@@ -111,8 +111,18 @@
 }
 :root[data-focus="visible"] .game-button:focus {
   outline: 2px solid var(--primary);
-  outline-offset: 3px;
+  outline-offset: -2px;
   box-shadow: none;
+}
+:root[data-focus="visible"] .game-button.compact-icon-control:focus {
+  outline: none;
+}
+:root[data-focus="visible"] .game-button.compact-icon-control:focus::before {
+  border: 2px solid var(--primary);
+}
+:root[data-focus="visible"]
+  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus {
+  outline: none;
 }
 .ui-tabs-list {
   display: flex;
@@ -156,9 +166,12 @@
 }
 :root[data-focus="visible"] .ui-tabs-list .ui-tab:focus {
   outline: 2px solid var(--primary);
-  outline-offset: 3px;
-  border-color: var(--border);
+  outline-offset: -2px;
+  border-color: transparent;
   box-shadow: none;
+}
+:root[data-focus="visible"] .ui-tabs-list .ui-tab[data-state="active"]:focus {
+  background: var(--control-hover);
 }
 .ui-tab-panel {
   animation: none;
@@ -209,9 +222,12 @@
   transform: translateX(16px);
 }
 :root[data-focus="visible"] .ui-switch:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 3px;
+  outline: none;
   box-shadow: none;
+}
+:root[data-focus="visible"] .ui-switch:focus::before {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
 }
 .ui-radio {
   width: 16px;
@@ -232,12 +248,12 @@ label:has(> .ui-radio) {
   border-radius: var(--radius);
 }
 :root[data-focus="visible"] label:has(> .ui-radio:focus) {
-  outline: 2px solid var(--primary);
-  outline-offset: 3px;
+  color: var(--foreground);
 }
 :root[data-focus="visible"] label > .ui-radio:focus {
   outline: none;
   box-shadow: none;
+  border: 2px solid var(--primary);
 }
 .ui-slider .ui-slider-track {
   height: var(--progress-height);
@@ -264,13 +280,14 @@ label:has(> .ui-radio) {
   border: 2px solid var(--primary);
 }
 :root[data-focus="visible"] .ui-slider:focus-within {
-  outline: 2px solid var(--primary);
-  outline-offset: 3px;
-  border-radius: var(--radius);
+  outline: none;
 }
 :root[data-focus="visible"] .ui-slider .ui-slider-thumb:focus {
   outline: none;
   box-shadow: none;
+}
+:root[data-focus="visible"] .ui-slider .ui-slider-thumb:focus::after {
+  border: 2px solid var(--primary);
 }
 .dialog-overlay[data-state="open"],
 .dialog-content[data-state="open"],
@@ -580,8 +597,16 @@ h3 {
   border-color: var(--border-art);
 }
 :root[data-focus="visible"]
-  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus::after {
+  .game-button:is(.creature-card, .action-card):has(> .effect-shine-border):not(:disabled):not(
+    [aria-disabled="true"]
+  ):focus::after {
   border-color: transparent;
+}
+:root[data-focus="visible"]
+  .game-button:is(.creature-card, .action-card):not(:has(> .effect-shine-border)):not(:disabled):not(
+    [aria-disabled="true"]
+  ):focus::after {
+  border-color: var(--primary);
 }
 .animated-number {
   display: inline-grid;

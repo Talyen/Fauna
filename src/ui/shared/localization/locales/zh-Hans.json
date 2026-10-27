@@ -395,6 +395,18 @@
     "sourceHash": "2c3a7d9112fbbcdaff2a0c4ba46264f7623d428ec33260d3c0f113de03e2c4db",
     "text": "衰减时失去的<keyword0>灼烧</keyword0>还会移除等量的敌方<keyword1>格挡</keyword1>"
   },
+  "content.boon.asteroid-hammer.name": {
+    "reviewed": true,
+    "source": "Asteroid Hammer",
+    "sourceHash": "750fae1592bf6108b30ecf8b4a93abfaa3c58088c517a249517dd8084f3b8365",
+    "text": "小行星锤"
+  },
+  "content.boon.asteroid-hammer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is twice as effective against enemy <keyword1>Block</keyword1>",
+    "sourceHash": "7fb435144920fe7dfc5b8bdac5add9eee84771bdcb1e13bd803c3c2401d083a3",
+    "text": "<keyword0>眩晕</keyword0>伤害对敌人<keyword1>格挡</keyword1>的效果翻倍"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -406,6 +418,18 @@
     "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "sourceHash": "f05973df46b38d5a1af91dde5b45891d9df139790400864d818b98410bb2c3ce",
     "text": "<keyword0>驱散</keyword0>无法移除盟友最后一个有益效果"
+  },
+  "content.boon.beeswax-crown.name": {
+    "reviewed": true,
+    "source": "Beeswax Crown",
+    "sourceHash": "e9e7f23a97fb6d478a3e1642a05f3710b263b29e53a9677dd840d8f7de25302d",
+    "text": "蜂蜡王冠"
+  },
+  "content.boon.beeswax-crown.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, all allies gain {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "581b6f4640d5de0b0187d2729a185c15e0aaf97d8a85e716058ada19a72d50b9",
+    "text": "盟友的<keyword0>护甲</keyword0>被击破时，所有盟友获得{{value0}}点<keyword1>荆棘</keyword1>"
   },
   "content.boon.bellows-heart.name": {
     "reviewed": true,
@@ -694,6 +718,18 @@
     "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
     "sourceHash": "5051ac5d98369260e3d056c65586a16624d76f38da0666b11c419edad0ea2ef6",
     "text": "敌人的<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>阈值使用当前<keyword2>生命</keyword2>"
+  },
+  "content.boon.crown-waffle-iron.name": {
+    "reviewed": true,
+    "source": "Crown Waffle Iron",
+    "sourceHash": "469ddf19c5ea75872673432a21c763950a0e67273e4cf0b8231355edd3e6dc01",
+    "text": "王冠华夫饼机"
+  },
+  "content.boon.crown-waffle-iron.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
+    "sourceHash": "03920048db9ff71d051734121c24a2c4825aceef7e188a8ecaf32346fe01971d",
+    "text": "<keyword0>食物</keyword0>还会恢复等同于目标<keyword2>格挡</keyword2>的<keyword1>生命</keyword1>"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1043,6 +1079,18 @@
     "sourceHash": "5f116bd50bdd27584a126e53c2a42694cbbe9d06090fe3070384fc82a4b5ee2b",
     "text": "敌人倒下时，其<keyword0>流血</keyword0>会扩散给另一名敌人"
   },
+  "content.boon.harvest-sickle.name": {
+    "reviewed": true,
+    "source": "Harvest Sickle",
+    "sourceHash": "b01cc8e1a4ed3a917d488bd9dfdb309cbe0909bf90c2ae450c7b666a47164f79",
+    "text": "丰收镰刀"
+  },
+  "content.boon.harvest-sickle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "ec0fadb0b6c56ba4b8140f126319fa4e7a025015cf98a24f87c2e343b3e1deec",
+    "text": "<keyword0>流血</keyword0>伤害无视敌人的<keyword1>格挡</keyword1>"
+  },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
     "source": "Hearth Coal",
@@ -1246,6 +1294,18 @@
     "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
     "sourceHash": "b3aca947ae7687b0a45ca5f0e9413e8b41c512e1c392185cc7ea7a486488e420",
     "text": "<keyword0>自然</keyword0>命中有{{value0}}%的概率获得等同于敌人损失<keyword1>生命</keyword1>的金币"
+  },
+  "content.boon.meadow-mortar.name": {
+    "reviewed": true,
+    "source": "Meadow Mortar",
+    "sourceHash": "bf5f0132b620313212faa104df32e30aa6f04b579a8a2d0bee8deabfa46b12f8",
+    "text": "草甸研钵"
+  },
+  "content.boon.meadow-mortar.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from a Poisoned enemy makes their <keyword1>Poison</keyword1> deal damage",
+    "sourceHash": "1fb8b92bbec368d7110ce36fc6cd7fb87ea49f4c0f2bde4da8d31d30c72bb05a",
+    "text": "<keyword0>驱散</keyword0>中毒敌人的一个效果时，其<keyword1>中毒</keyword1>造成伤害"
   },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
@@ -1727,6 +1787,18 @@
     "sourceHash": "a8090f023d4a447fbee7a80074bbcf4ce6bd3179f7a84c4ed77958f35cc7fb67",
     "text": "盟友<keyword0>反射</keyword0>的攻击会命中所有敌人"
   },
+  "content.boon.rocking-chair-charm.name": {
+    "reviewed": true,
+    "source": "Rocking Chair Charm",
+    "sourceHash": "078e0f82a41e161b2215c481a3c092d166aae22729f825c5d2f718f92f5e19cd",
+    "text": "摇椅护符"
+  },
+  "content.boon.rocking-chair-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> cannot damage allies in backup",
+    "sourceHash": "d3340a9f2270877971a9c6c08d8e2efc6bef7a4bc67482ee600bcb6e38584a53",
+    "text": "<keyword0>灼烧</keyword0>、<keyword1>中毒</keyword1>和<keyword2>流血</keyword2>不会伤害后备盟友"
+  },
   "content.boon.rook-of-mercy.name": {
     "reviewed": true,
     "source": "Rook of Mercy",
@@ -1762,6 +1834,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
     "sourceHash": "8f804a6461b253ba19da5a8b9549933f079e0242fa0492639e74c43a98f5fc71",
     "text": "盟友可以<keyword0>闪避</keyword0><keyword1>荆棘</keyword1>伤害"
+  },
+  "content.boon.rosewax-seal.name": {
+    "reviewed": true,
+    "source": "Rosewax Seal",
+    "sourceHash": "b3c03f32d34ee408f5aa574eceffd6d0abd78ec758a830248ec93526257e4e18",
+    "text": "玫瑰蜡封"
+  },
+  "content.boon.rosewax-seal.rule": {
+    "reviewed": true,
+    "source": "Allied <keyword0>Thorns</keyword0> apply {{value0}} <keyword1>Bleed</keyword1>",
+    "sourceHash": "ac692f08a26404a6eaccb91b27631d2f36cf704ce593324f9c03c4ff883d2856",
+    "text": "盟友的<keyword0>荆棘</keyword0>施加{{value0}}点<keyword1>流血</keyword1>"
   },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
@@ -1834,6 +1918,30 @@
     "source": "Gain {{value0}} additional Gold for each battle won",
     "sourceHash": "d4b81f0c97a8e2f1985ec7abd5f59b9b656d3d4d4989bc3d7a896b3a783a78d0",
     "text": "每赢得一场战斗额外获得{{value0}}金币"
+  },
+  "content.boon.snowbell.name": {
+    "reviewed": true,
+    "source": "Snowbell",
+    "sourceHash": "a61a4fd1e96ecb176e8ede6cc7cf883b96cb90b89cbd95227053c22eee23f9d5",
+    "text": "雪铃"
+  },
+  "content.boon.snowbell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies’ <keyword1>Thorns</keyword1> cannot retaliate",
+    "sourceHash": "b6498b79b8fa25b5def8ada9a997539d62f49071e64a66c5efebe9a018928827",
+    "text": "<keyword0>冻结</keyword0>敌人的<keyword1>荆棘</keyword1>无法反击"
+  },
+  "content.boon.solstice-concertina.name": {
+    "reviewed": true,
+    "source": "Solstice Concertina",
+    "sourceHash": "eb49a8b0f8a3ca9fc7d3a497daea7474c5798ddf41c01cfb1c175012749f759a",
+    "text": "至日手风琴"
+  },
+  "content.boon.solstice-concertina.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burning</keyword0> enemies cannot <keyword1>Dodge</keyword1> <keyword2>Freeze</keyword2> attacks",
+    "sourceHash": "62b05c8443fe186094774ab46fc84dacb46c5fcbd73688f7877581c7fdba6140",
+    "text": "处于<keyword0>灼烧</keyword0>状态的敌人无法<keyword1>闪避</keyword1><keyword2>冻结</keyword2>攻击"
   },
   "content.boon.soot-brush.name": {
     "reviewed": true,
@@ -2038,6 +2146,18 @@
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "3546bda1741b5aa68b38606deba987203f84cd2e1da1f00ac3549662056c0fd5",
     "text": "敌人的<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>积累会合并"
+  },
+  "content.boon.vanishing-hat.name": {
+    "reviewed": true,
+    "source": "Vanishing Hat",
+    "sourceHash": "0c816ebfb918f90ff8d74699cf8c425c458a4be6b66f97839c7a62a72152300e",
+    "text": "消失之帽"
+  },
+  "content.boon.vanishing-hat.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "5748145defc42d5e40f12eaf80f634fc976cfbf76d7de6e8dd653cd2607c04e2",
+    "text": "盟友可以<keyword0>闪避</keyword0>敌人的<keyword1>驱散</keyword1>"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
@@ -8285,12 +8405,6 @@
     "sourceHash": "a8fcdcf8a2c639e53d1059c0c058ee2b878d88d71e4364eda6ce6cbde6b408b4",
     "text": "选择初始生物"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "8eeb928d803a6b3bdf8fcbc878f15c3687b8528f99eb129a84be8fa913908bae",
-    "text": "已选择"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -8950,11 +9064,11 @@
     "sourceHash": "31be2475dd59abb7121f18a6245fa72801a699e7c21eeb899a19b0a55b88ed34",
     "text": "金币不足"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "8d96aeb7ee7bd102a8c49969df47fc7d9f2f8a3862fedfc4896605f116558495",
-    "text": "每位顾客限购一件，不予退款！"
+    "source": "One per visit",
+    "sourceHash": "4bd470543ec9db3f9516fddf3e50e9a4b64002d14eb71557524692b330d88b15",
+    "text": "每次到访限购一件"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9232,47 +9346,35 @@
     "sourceHash": "aaa6a491890a118184d9d92bfed6345adea7ac21744c8f8ac92bce4f5965a566",
     "text": "目前无法保存进度；请在重试期间保持Fauna运行"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "586665056d855cf43c7fab261f28c54238f4730c67403caa00e9f87feac85ce7",
-    "text": "选择你的队伍"
+    "source": "Incoming creature",
+    "sourceHash": "bd13ad00924b3acc1668930a229134098e2083ba45d8abed65eac58be362f526",
+    "text": "新加入的生物"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "dc8f3c45d0ac294549e8219daaa407f0b384ea9ea26f0b124be6469ce0959fe2",
-    "text": "确认"
+    "source": "Keep team",
+    "sourceHash": "10275f9965798a99a19e5b09673a2faf52ec1046a86303ea30dd907aa8dc7fa7",
+    "text": "保留队伍"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "e16d9b41c34fee4109496c56216f7853da5ff75c8f451ab6b265c8fabe2dcc0e",
-    "text": "交换生物"
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "cfae8394d7da44ddd95b9b7a0c7445a0d345a3fb2d992f8a3c89dda36b08dc2c",
+    "text": "将{{outgoing}}替换为{{incoming}}"
   },
-  "recruit.previewSlot": {
+  "recruit.replaceHeading": {
     "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "c13923d27115bde3553e8ea73d2b4c2ff04a79b8f3de4a63bbf3e62c90ba1f10",
-    "text": "预览替换队伍位置 {{slot}} 中的{{name}}"
+    "source": "Replace a creature",
+    "sourceHash": "10278688f763918dd4f8c1fa78fd9718608c375104d6a1e22a23e80ac9999a7c",
+    "text": "替换一只生物"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "8b1aebf3268cb393dbc784db5c0981530c694a7d6295c373e585ae16a9f7ad61",
     "text": "队伍"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "5b9395d69cc1450fab7bfbeadbd794bdad5b756f174f682adaeec53de84d656f",
-    "text": "撤销替换{{name}}"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "dac9a0b97a6233c1cf4d0657d5380031de8ab5a5ef4ff1eb26fb4214aa6f26bf",
-    "text": "撤销队伍位置 {{slot}} 中的{{name}}"
   },
   "replacement.backup": {
     "reviewed": true,

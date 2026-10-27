@@ -2,6 +2,116 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.vanishing-hat",
+      "origin": "repository",
+      "source": "public/art/boons/vanishing-hat.png",
+      "output": "art/boons/vanishing-hat.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Vanishing Hat.png; https://drive.google.com/file/d/1tUpHgfjCVmpPCe5Q5jCOwWk2D2H9_o-u/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.rocking-chair-charm",
+      "origin": "repository",
+      "source": "public/art/boons/rocking-chair-charm.png",
+      "output": "art/boons/rocking-chair-charm.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Rocking Chair Charm.png; https://drive.google.com/file/d/19_ywHucLpBB3SGTfIRxXaCue9JkhsLdE/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.asteroid-hammer",
+      "origin": "repository",
+      "source": "public/art/boons/asteroid-hammer.png",
+      "output": "art/boons/asteroid-hammer.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Asteroid Hammer.png; https://drive.google.com/file/d/10CbtGhSbMnQoG_JEalaINxsl0Kie6GaF/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.snowbell",
+      "origin": "repository",
+      "source": "public/art/boons/snowbell.png",
+      "output": "art/boons/snowbell.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Snowbell.png; https://drive.google.com/file/d/1qrFESSciyWowFo6dwI5Yk-8PD3sh3wET/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.harvest-sickle",
+      "origin": "repository",
+      "source": "public/art/boons/harvest-sickle.png",
+      "output": "art/boons/harvest-sickle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Harvest Sickle.png; https://drive.google.com/file/d/1hooNWajlKBR8UhsPOUdwy33PifwUblRi/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.meadow-mortar",
+      "origin": "repository",
+      "source": "public/art/boons/meadow-mortar.png",
+      "output": "art/boons/meadow-mortar.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Meadow Mortar.png; https://drive.google.com/file/d/1qnGPl6uNtNV8423J38i4ImrHb269sQ_N/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.rosewax-seal",
+      "origin": "repository",
+      "source": "public/art/boons/rosewax-seal.png",
+      "output": "art/boons/rosewax-seal.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Rosewax Seal.png; https://drive.google.com/file/d/1r-P1BOEELFo1xxh_e_0fElPsL_CVVcHK/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.solstice-concertina",
+      "origin": "repository",
+      "source": "public/art/boons/solstice-concertina.png",
+      "output": "art/boons/solstice-concertina.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Solstice Concertina.png; https://drive.google.com/file/d/1aSZuUyg-_HMOeYm-hR_1MB8huW-Y1jHk/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.crown-waffle-iron",
+      "origin": "repository",
+      "source": "public/art/boons/crown-waffle-iron.png",
+      "output": "art/boons/crown-waffle-iron.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Crown Waffle Iron.png; https://drive.google.com/file/d/1_S_h6i1k5QPRcfRL2Fioa5jOMHyU0mZH/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.beeswax-crown",
+      "origin": "repository",
+      "source": "public/art/boons/beeswax-crown.png",
+      "output": "art/boons/beeswax-crown.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Beeswax Crown.png; https://drive.google.com/file/d/1kz2wF1Vt2oId-SDMrM4A9HQ8TNbaDbwv/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.suncrust-rolling-pin",
       "origin": "repository",
       "source": "public/art/boons/suncrust-rolling-pin.png",
