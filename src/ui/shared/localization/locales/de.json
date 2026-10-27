@@ -1709,6 +1709,12 @@
     "sourceHash": "a0fc5ee98706973a43a95bf55ec213bdf575ba7044532f2ce2ca7db37429da91",
     "text": "Glutpeitsche"
   },
+  "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
+    "sourceHash": "b24a5bdefba7442ea99508b1f9a67497ca857fec2751122402de1f6626888c77",
+    "text": "Verursache zufällig {{value0}} <keyword0>physischen</keyword0> oder <keyword1>Brand</keyword1>-Schaden"
+  },
   "content.card.cindernewt-ember-breath.name": {
     "reviewed": true,
     "source": "Ember Breath",
@@ -1889,6 +1895,12 @@
     "sourceHash": "7f10818bc98d5c249df0da20980b98d7efc5c1d4a370a3ed4bf70a5c075dc271",
     "text": "Glutansturm"
   },
+  "content.card.emberback-attack.v49693240c378631b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "8c766469039048838cf67c1c9fdd139882e5cf6a1d1c013ce4ec456121f4a6ad",
+    "text": "Verursache {{value0}} <keyword0>physischen</keyword0> Schaden; Erhalte {{value1}} <keyword1>Rüstung</keyword1>"
+  },
   "content.card.emberback-furnace-breath.name": {
     "reviewed": true,
     "source": "Furnace Breath",
@@ -1930,6 +1942,12 @@
     "source": "Twilight Lance",
     "sourceHash": "7578897e06a99b969b926f23e931c73189c3d438b08f27f63a6c2aa896292400",
     "text": "Dämmerungslanze"
+  },
+  "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
+    "sourceHash": "6833a0386526ada9d461d6c7567745aa7487868a90a26736b3990d3418cb7624",
+    "text": "<keyword0>Banne</keyword0> gegnerische <keyword1>Dornen</keyword1>; Verursache {{value0}} <keyword2>Licht</keyword2>-Schaden"
   },
   "content.card.euphera-wish-exchange.name": {
     "reviewed": true,
@@ -2261,6 +2279,12 @@
     "sourceHash": "e08e303bf05292d5120155d9100ebaa09523c7ab8f7b5cad0d8b0963f273ecd7",
     "text": "Schneesturmwalzer"
   },
+  "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "2870065bec9f847e5e6131260f20ef86551579632c64ed25745cd34ee03a7fd4",
+    "text": "Verursache {{value0}} <keyword0>Einfrieren</keyword0>-Schaden; <keyword1>Blende</keyword1> alle Gegner"
+  },
   "content.card.pollenmoth-attack.name": {
     "reviewed": true,
     "source": "Dazzle Burst",
@@ -2537,6 +2561,12 @@
     "sourceHash": "9edc19acccb470d51ec6a26aeaf8e802d0035879993574ae46b8a6c9e7593f07",
     "text": "Mittagswacht"
   },
+  "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
+    "sourceHash": "68a0e3120c6dcfe18f2c2573bd44693f508a27cd3a67e964c07dc9858dbb0fbd",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflektiere</keyword1> den nächsten <keyword2>Brand</keyword2>"
+  },
   "content.card.skybex-cloudstep.name": {
     "reviewed": true,
     "source": "Cloudstep",
@@ -2579,6 +2609,12 @@
     "sourceHash": "aae3283a271006386d91ae9f0b1abf901d7d631452e7b14add64c3f3fd9fda00",
     "text": "Flutramme"
   },
+  "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
+    "sourceHash": "8068358217103bb695212177778d7403dfc74cb200cab2ffd65f45aa79229a0f",
+    "text": "Verursache {{value0}} <keyword0>physischen</keyword0> Schaden; Verdoppelt, wenn du <keyword1>Rüstung</keyword1> hast"
+  },
   "content.card.sternshell-spiral-return.name": {
     "reviewed": true,
     "source": "Spiral Return",
@@ -2590,6 +2626,12 @@
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
     "sourceHash": "9499d27b8c01465de9367422e052e701ba94d6d878ef7505cdd6b65d95f88dc4",
     "text": "Verursache {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> bei allen Gegnern"
+  },
+  "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "bc9e44a1315560c69d63767c6b4b7df5f2768072a8b9438e042384f2ba115f76",
+    "text": "Verursache {{value0}} <keyword0>Wasser</keyword0>-Schaden bei allen Gegnern; Erhalte {{value1}} <keyword1>Mana</keyword1>"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

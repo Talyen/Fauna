@@ -1709,6 +1709,12 @@
     "sourceHash": "3f80c199d5ecd14631f71906476f9cee4b29bf20902b864cad60727541080c55",
     "text": "Chicote de brasa"
   },
+  "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
+    "sourceHash": "441f65e8b41f061a8f92e823dfd29399bfa92a2d06b945190cc364db14609e1d",
+    "text": "Causa aleatoriamente {{value0}} de dano <keyword0>Físico</keyword0> ou de <keyword1>Queimadura</keyword1>"
+  },
   "content.card.cindernewt-ember-breath.name": {
     "reviewed": true,
     "source": "Ember Breath",
@@ -1889,6 +1895,12 @@
     "sourceHash": "3ac837fd175f9adf5f9caf75f4d71cd381cab90c2d43f238243d5c70217bf27f",
     "text": "Investida de brasa"
   },
+  "content.card.emberback-attack.v49693240c378631b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "e3defed377589f2330b68f88cd6f4c249e0f331615030f80e487ebaaf98ad239",
+    "text": "Causa {{value0}} de dano <keyword0>Físico</keyword0>; Recebe {{value1}} de <keyword1>Armadura</keyword1>"
+  },
   "content.card.emberback-furnace-breath.name": {
     "reviewed": true,
     "source": "Furnace Breath",
@@ -1930,6 +1942,12 @@
     "source": "Twilight Lance",
     "sourceHash": "018e6fde0515b60395ae6d31eb691deeca78c895989fe1ce5ac61be4ef16cc52",
     "text": "Lança crepuscular"
+  },
+  "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
+    "sourceHash": "e7b65a9d2b589e4c44f08617304261114c74ee9308666f76dc1b0954765f577f",
+    "text": "<keyword0>Expurga</keyword0> os <keyword1>Espinhos</keyword1> inimigos; Causa {{value0}} de dano de <keyword2>Luz</keyword2>"
   },
   "content.card.euphera-wish-exchange.name": {
     "reviewed": true,
@@ -2261,6 +2279,12 @@
     "sourceHash": "17e89edd468df59af35aa898714174019c44d0c8243dd18687c4cb344c2594fa",
     "text": "Valsa da nevasca"
   },
+  "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "ab2f2e4c85f8d76f890de5736228caced35bff4e4b067eb17e351d7b19def26a",
+    "text": "Causa {{value0}} de dano de <keyword0>Congelamento</keyword0>; <keyword1>Cega</keyword1> todos os inimigos"
+  },
   "content.card.pollenmoth-attack.name": {
     "reviewed": true,
     "source": "Dazzle Burst",
@@ -2537,6 +2561,12 @@
     "sourceHash": "34ad9840a1c64dabb6ceb9704f64b0c32b0d8190c9c46c118afb5274cbfd6a94",
     "text": "Guarda do meio-dia"
   },
+  "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
+    "sourceHash": "7187a7080c6612ebc4b6a6d873140e556091230c84cf4e15b32f2809ed11dabd",
+    "text": "Recebe {{value0}} de <keyword0>Bloqueio</keyword0>; <keyword1>Reflete</keyword1> a próxima <keyword2>Queimadura</keyword2>"
+  },
   "content.card.skybex-cloudstep.name": {
     "reviewed": true,
     "source": "Cloudstep",
@@ -2579,6 +2609,12 @@
     "sourceHash": "8f536195883b34dadade9fd4f7689065c8adc794269c30e77296c6368d263212",
     "text": "Investida da onda"
   },
+  "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
+    "sourceHash": "3573acb63b18d99c0a59de3243972e4e4d39d47885b05ea2ee340558cfab0e26",
+    "text": "Causa {{value0}} de dano <keyword0>Físico</keyword0>; Dobra se você tiver <keyword1>Armadura</keyword1>"
+  },
   "content.card.sternshell-spiral-return.name": {
     "reviewed": true,
     "source": "Spiral Return",
@@ -2590,6 +2626,12 @@
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
     "sourceHash": "5049806e8f7d46f2db7d31922488d4d743eeaad958025106af3479d6bbb340b7",
     "text": "Causa {{value0}} de dano do tipo <keyword0>Água</keyword0> a todos os inimigos"
+  },
+  "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "f50a6da912615a74637d2f339ec619b3362039f30b60442142899dc43b4dccff",
+    "text": "Causa {{value0}} de dano de <keyword0>Água</keyword0> a todos os inimigos; Recebe {{value1}} de <keyword1>Mana</keyword1>"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

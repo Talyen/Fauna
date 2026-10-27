@@ -1721,6 +1721,12 @@
     "sourceHash": "cd1dcfdec41be23b5df72ea4153af873e4096029b95221da990f17645314cd63",
     "text": "Fouet de braise"
   },
+  "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
+    "sourceHash": "83625c6eef8decb0986f24221fe08293e93a174854918daec00daf3d4be5b805",
+    "text": "Inflige au hasard {{value0}} dégâts <keyword0>Physiques</keyword0> ou de <keyword1>Brûlure</keyword1>"
+  },
   "content.card.cindernewt-ember-breath.name": {
     "reviewed": true,
     "source": "Ember Breath",
@@ -1901,6 +1907,12 @@
     "sourceHash": "05aeeeafb0f658ab89b6a279ad3399def7d96811b45d78903f6269e4a8b9958a",
     "text": "Charge de braise"
   },
+  "content.card.emberback-attack.v49693240c378631b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "b96e4fab987d34fe1f76406a973008543759e2d2ae8ffe1a099bd697c74e8822",
+    "text": "Inflige {{value0}} dégâts <keyword0>Physiques</keyword0>; Gagne {{value1}} <keyword1>Armure</keyword1>"
+  },
   "content.card.emberback-furnace-breath.name": {
     "reviewed": true,
     "source": "Furnace Breath",
@@ -1942,6 +1954,12 @@
     "source": "Twilight Lance",
     "sourceHash": "07c406eb4992e26761a442d90673c9f1f7de8e55c6f6000c18786cd5669d4155",
     "text": "Lance du crépuscule"
+  },
+  "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
+    "sourceHash": "ba27816fe50f035a826b924872edaa2902eff9d3325acd7068fe6b084efcf102",
+    "text": "<keyword0>Dissipe</keyword0> les <keyword1>Épines</keyword1> ennemies; Inflige {{value0}} dégâts de <keyword2>Lumière</keyword2>"
   },
   "content.card.euphera-wish-exchange.name": {
     "reviewed": true,
@@ -2273,6 +2291,12 @@
     "sourceHash": "8ee980110e8a69d5905c90836c58ea2c25faa72447afd16c228b40ae76b977b3",
     "text": "Valse du blizzard"
   },
+  "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "ce50220af88d58d0729050f33dfb57e2984eef396f2971e6d2ee3403495162d4",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Gel</keyword0>; <keyword1>Aveugle</keyword1> tous les ennemis"
+  },
   "content.card.pollenmoth-attack.name": {
     "reviewed": true,
     "source": "Dazzle Burst",
@@ -2549,6 +2573,12 @@
     "sourceHash": "a7c708ca547fdf63ff0c4865919c9811058afaf3fbd3bedcdfefb9dadadeea5e",
     "text": "Garde de midi"
   },
+  "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
+    "sourceHash": "67724e051b0deb40d958d8c64f585c9e47b58bf261dd1bd235815f186d918158",
+    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0>; <keyword1>Renvoie</keyword1> la prochaine <keyword2>Brûlure</keyword2>"
+  },
   "content.card.skybex-cloudstep.name": {
     "reviewed": true,
     "source": "Cloudstep",
@@ -2591,6 +2621,12 @@
     "sourceHash": "63758b1338b12ee89a582bd2771b1837b6be39fdd7ed4ed2acd926ff6644fe65",
     "text": "Charge des flots"
   },
+  "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
+    "sourceHash": "107be46373236348e0bb446056c35b030cd15f35f51f7d347548398107bd659c",
+    "text": "Inflige {{value0}} dégâts <keyword0>Physiques</keyword0>; Doublés si vous avez de l’<keyword1>Armure</keyword1>"
+  },
   "content.card.sternshell-spiral-return.name": {
     "reviewed": true,
     "source": "Spiral Return",
@@ -2602,6 +2638,12 @@
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
     "sourceHash": "1a4aacbf14751b3f140ac61c17c8676930daf13e2c6c933c726aea218a0631a7",
     "text": "Inflige {{value0}} dégâts de type <keyword0>Eau</keyword0> à tous les ennemis"
+  },
+  "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "048060d1e4bf9b8c9da0a5e186d4504b01355850f06bfbf5bdc5cfbfb233ddbe",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0> à tous les ennemis; Gagne {{value1}} <keyword1>Mana</keyword1>"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

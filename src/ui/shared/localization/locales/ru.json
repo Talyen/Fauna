@@ -1709,6 +1709,12 @@
     "sourceHash": "763a1c200e2db3017d937e0481649b147ad6421bd7df3f791a6d18520389bfb6",
     "text": "Плеть угольков"
   },
+  "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
+    "sourceHash": "5873c8f114aec7019000eae97e562a7d69c6f2ef8a39a5685ae78615d948ee7c",
+    "text": "Нанесите {{value0}} <keyword0>физического</keyword0> урона или урона <keyword1>горением</keyword1> случайным образом"
+  },
   "content.card.cindernewt-ember-breath.name": {
     "reviewed": true,
     "source": "Ember Breath",
@@ -1889,6 +1895,12 @@
     "sourceHash": "ee73437d74bf76174cba499d27ed5c7de7b6f97d75ff37e72dd3af48fa080797",
     "text": "Натиск углей"
   },
+  "content.card.emberback-attack.v49693240c378631b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "0717b76fff4cff581f2c41adf471e4d0007fafcbca487785f36862245be57e3c",
+    "text": "Нанесите {{value0}} <keyword0>физического</keyword0> урона; Получите {{value1}} <keyword1>брони</keyword1>"
+  },
   "content.card.emberback-furnace-breath.name": {
     "reviewed": true,
     "source": "Furnace Breath",
@@ -1930,6 +1942,12 @@
     "source": "Twilight Lance",
     "sourceHash": "1088ca66484ef076a55a8deade979ead5254cdfadeaa19146000741f4be1220d",
     "text": "Сумеречное копьё"
+  },
+  "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
+    "sourceHash": "6352376053dee7a0b26b6bc55d2f8834089d2cd28b46142b0d781307f98d1173",
+    "text": "<keyword0>Рассеяйте</keyword0> вражеские <keyword1>шипы</keyword1>; Нанесите {{value0}} урона <keyword2>светом</keyword2>"
   },
   "content.card.euphera-wish-exchange.name": {
     "reviewed": true,
@@ -2261,6 +2279,12 @@
     "sourceHash": "404465287f659e55ad304ce0d3d7a5de11c411bcef7e982b67bef4388e796255",
     "text": "Вальс снежной пелены"
   },
+  "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "76325592412977441ea3f3c2f9597e9d9bf3f547ac66a4a93e9bccf5098c839f",
+    "text": "Нанесите {{value0}} урона <keyword0>заморозкой</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
+  },
   "content.card.pollenmoth-attack.name": {
     "reviewed": true,
     "source": "Dazzle Burst",
@@ -2537,6 +2561,12 @@
     "sourceHash": "1d995d85e14e74ffda7da87aa9672dee2b0f920233dd521e93aeb9ad0e104f6c",
     "text": "Полуденная защита"
   },
+  "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
+    "sourceHash": "fd62a38773267146e295219aa35f1f091dc29240539268a1aa001c746cb43730",
+    "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Отразите</keyword1> следующее <keyword2>горение</keyword2>"
+  },
   "content.card.skybex-cloudstep.name": {
     "reviewed": true,
     "source": "Cloudstep",
@@ -2579,6 +2609,12 @@
     "sourceHash": "8b756895b5d4a28dee83b9b6550f5fd93b8daba3a9290c0708541d6c80b057ae",
     "text": "Натиск волны"
   },
+  "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
+    "sourceHash": "3cb6cd26acd3f68ccc4c1d074847f21e59213f39e074248e41117ae9ef2e10c4",
+    "text": "Нанесите {{value0}} <keyword0>физического</keyword0> урона; Урон удваивается при наличии <keyword1>брони</keyword1>"
+  },
   "content.card.sternshell-spiral-return.name": {
     "reviewed": true,
     "source": "Spiral Return",
@@ -2590,6 +2626,12 @@
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
     "sourceHash": "862cd192af14ded2b9a31f2eed7049d6b1a7068404bbbeb8ae6216b44955e0ad",
     "text": "Нанесите всем врагам {{value0}} урона <keyword0>водой</keyword0>"
+  },
+  "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "84f3bc6282daa6419d5dc9de8fdfd235cfc86462f6b19ecf92f72ea218b4dcc4",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>водой</keyword0>; Получите {{value1}} <keyword1>маны</keyword1>"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

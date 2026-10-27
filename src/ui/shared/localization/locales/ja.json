@@ -1709,6 +1709,12 @@
     "sourceHash": "18c2572ab81c805e9d9775f91b346be8ce80061892fd97f7660dc24ff4c53f65",
     "text": "熾火の鞭"
   },
+  "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
+    "sourceHash": "f06e18153d28458e5ab8ab1968dab252b1155a56ded956dac199bd3d63c35fe1",
+    "text": "{{value0}}の<keyword0>物理</keyword0>または<keyword1>炎上</keyword1>ダメージをランダムに与える"
+  },
   "content.card.cindernewt-ember-breath.name": {
     "reviewed": true,
     "source": "Ember Breath",
@@ -1889,6 +1895,12 @@
     "sourceHash": "eed3ca2e4f1e8917e1d6611ca7d39280e1f2179717df520500d0f8cedc7c406a",
     "text": "熾火の突進"
   },
+  "content.card.emberback-attack.v49693240c378631b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "b2dcea1c2f388052b2c42cb4dd82e233da837d7a4242f0bf15461bcbe97d4c7e",
+    "text": "{{value0}}の<keyword0>物理</keyword0>ダメージを与える; <keyword1>装甲</keyword1>を{{value1}}獲得"
+  },
   "content.card.emberback-furnace-breath.name": {
     "reviewed": true,
     "source": "Furnace Breath",
@@ -1930,6 +1942,12 @@
     "source": "Twilight Lance",
     "sourceHash": "a9b30a4bfe183f96616b77a186ba9de9e791facb8cfc488dda4049a655efe7f3",
     "text": "黄昏の槍"
+  },
+  "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
+    "sourceHash": "ea1ea0eaa4b8b7c2cb6485a1588946861c848c44b55e66a8de6cbf09c0b47ff2",
+    "text": "敵の<keyword1>棘</keyword1>を<keyword0>強化解除</keyword0>; {{value0}}の<keyword2>光</keyword2>ダメージを与える"
   },
   "content.card.euphera-wish-exchange.name": {
     "reviewed": true,
@@ -2261,6 +2279,12 @@
     "sourceHash": "4328c7cb17a31af4d7382358d0108ac26c600d59195435b424fac7ccdbeb4409",
     "text": "白嵐のワルツ"
   },
+  "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "3ecb26915575b44c57c9b814de0f51a902a52a71454aa5623793f5a7e29e8118",
+    "text": "{{value0}}の<keyword0>凍結</keyword0>ダメージを与える; すべての敵を<keyword1>盲目</keyword1>にする"
+  },
   "content.card.pollenmoth-attack.name": {
     "reviewed": true,
     "source": "Dazzle Burst",
@@ -2537,6 +2561,12 @@
     "sourceHash": "0ae7c55d96d97cd37a9972015c6595554a005a1296701df9fd0ded8ce28b7f1c",
     "text": "正午の守り"
   },
+  "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
+    "sourceHash": "5abe7b1b4ea0629bd54ce95ed20b6d182fc3112510ef1c682acdd3beef10a75f",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 次の<keyword2>炎上</keyword2>を<keyword1>反射</keyword1>"
+  },
   "content.card.skybex-cloudstep.name": {
     "reviewed": true,
     "source": "Cloudstep",
@@ -2579,6 +2609,12 @@
     "sourceHash": "9d4c67079a62df6ad6467f3693ae94af0284055ffd1fa7b12f2a0eb336f679cb",
     "text": "波の突進"
   },
+  "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
+    "sourceHash": "69b67c5981cc97d228ca4e984dd3598fc53840308e6ae712ae9a899d66e77efc",
+    "text": "{{value0}}の<keyword0>物理</keyword0>ダメージを与える; <keyword1>装甲</keyword1>があれば2倍"
+  },
   "content.card.sternshell-spiral-return.name": {
     "reviewed": true,
     "source": "Spiral Return",
@@ -2590,6 +2626,12 @@
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
     "sourceHash": "30bfc7c7251a554cd8c8e845142d1c5a98fa5f9c74599cda4dc7ac7668c55c34",
     "text": "すべての敵に{{value0}}の<keyword0>水</keyword0>ダメージを与える"
+  },
+  "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "b5f528b8ac8e1329c61e9c32ddf8ffbeb1f3b8ec60670d4be067f098def23ebf",
+    "text": "すべての敵に{{value0}}の<keyword0>水</keyword0>ダメージを与える; <keyword1>マナ</keyword1>を{{value1}}獲得"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

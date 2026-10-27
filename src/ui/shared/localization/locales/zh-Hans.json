@@ -1709,6 +1709,12 @@
     "sourceHash": "1b21a9a9392ab0174e7c6ccea040f1b55f9505c8942bebd1e5b0362d68446dd8",
     "text": "余烬鞭"
   },
+  "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
+    "sourceHash": "11cd8d48add9d0bfcf556f2a4ab473f34195d6bc198ea19715dd496cb2cfb48b",
+    "text": "随机造成{{value0}}点<keyword0>物理</keyword0>或<keyword1>灼烧</keyword1>伤害"
+  },
   "content.card.cindernewt-ember-breath.name": {
     "reviewed": true,
     "source": "Ember Breath",
@@ -1889,6 +1895,12 @@
     "sourceHash": "34ebad272e974ddb08232089794d23b209ca6a0ccd944cd28a69578f0bd80278",
     "text": "余烬冲锋"
   },
+  "content.card.emberback-attack.v49693240c378631b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "415eafcb072e0a3effff182c76f0686fdbe17e76df441415f05824f65ac3bdee",
+    "text": "造成{{value0}}点<keyword0>物理</keyword0>伤害; 获得{{value1}}点<keyword1>护甲</keyword1>"
+  },
   "content.card.emberback-furnace-breath.name": {
     "reviewed": true,
     "source": "Furnace Breath",
@@ -1930,6 +1942,12 @@
     "source": "Twilight Lance",
     "sourceHash": "e0390b73c45a6df7eb7e7ed3b36cbf420637a0b568de6cef436183fb68b0fbf1",
     "text": "暮光之枪"
+  },
+  "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
+    "sourceHash": "e1e53d40b82dad39b751440baf19283a3265994e83b6887159a1f3160cb2942b",
+    "text": "<keyword0>驱散</keyword0>敌人的<keyword1>荆棘</keyword1>; 造成{{value0}}点<keyword2>光</keyword2>伤害"
   },
   "content.card.euphera-wish-exchange.name": {
     "reviewed": true,
@@ -2261,6 +2279,12 @@
     "sourceHash": "0ebf6192f6c608970958fc7085bb4bacc6596f5bc0815a9168c15883ee7cad4e",
     "text": "白茫华尔兹"
   },
+  "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "d8775074769294632903edcc3d599b88bcb453372713f61e7807cc27896a1a3a",
+    "text": "造成{{value0}}点<keyword0>冻结</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.pollenmoth-attack.name": {
     "reviewed": true,
     "source": "Dazzle Burst",
@@ -2537,6 +2561,12 @@
     "sourceHash": "7a09821d17f5e0f65ec0ba6395dc0d6e1ffeb7aa0c58359a8812977c8d0e4ade",
     "text": "正午守护"
   },
+  "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
+    "sourceHash": "35a06caf84ac1d8d886a9264ef5aa73104418443afd28ebfaec3dea0640d2a4b",
+    "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>反射</keyword1>下一次<keyword2>灼烧</keyword2>"
+  },
   "content.card.skybex-cloudstep.name": {
     "reviewed": true,
     "source": "Cloudstep",
@@ -2579,6 +2609,12 @@
     "sourceHash": "d6088ab30dca9f2d9cbe394b04505ac332ab8fbe4ac8b5619735f96bd3607f04",
     "text": "浪涌冲撞"
   },
+  "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
+    "sourceHash": "115fb28d786bceebf3b020884f3cb2c68f54816b66cfe80e8b1996a47be56439",
+    "text": "造成{{value0}}点<keyword0>物理</keyword0>伤害; 拥有<keyword1>护甲</keyword1>时伤害翻倍"
+  },
   "content.card.sternshell-spiral-return.name": {
     "reviewed": true,
     "source": "Spiral Return",
@@ -2590,6 +2626,12 @@
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
     "sourceHash": "57ffb07997cde149b98bc1663b3bbe172d09b742d9606851c1d276c67723c546",
     "text": "对所有敌人造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "a8f8078e0c129557e6e227ab794e3c73b5d371f5005a00cc8e54635d9bf4ef1a",
+    "text": "对所有敌人造成{{value0}}点<keyword0>水</keyword0>伤害; 获得{{value1}}点<keyword1>法力</keyword1>"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,
