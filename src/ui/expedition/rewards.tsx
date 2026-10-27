@@ -9,7 +9,7 @@ import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { CreatureCard } from "../shared/cards/cards";
 import { returnFocus } from "../shared/navigation/focus";
-import { species, type SpeciesId, BOONS } from "../../game/content";
+import { species, type SpeciesId, findBoon } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import type { Command, RewardState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
@@ -137,7 +137,7 @@ export function Rewards({ game, send, inspect }: Props) {
             ) : (
               <div className="boon-options">
                 {reward.boons.map((id) => {
-                  const boon = BOONS.find((r) => r.id === id)!;
+                  const boon = findBoon(id)!;
                   return (
                     <div className="reward-option" key={id}>
                       <Tooltip>

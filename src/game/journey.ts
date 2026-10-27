@@ -41,11 +41,12 @@ function prepareEncounter(state: GameState) {
     roll(state) < OPTIONAL_DESTINATION_CHANCE
       ? recruitSpecies[Math.floor(roll(state) * recruitSpecies.length)]!.id
       : null;
+  const ownedBoons = kind === "merchant" ? new Set(state.boons) : undefined;
   const stock =
     kind === "merchant"
       ? shuffle(
           state,
-          BOONS.filter((b) => !state.boons.includes(b.id)),
+          BOONS.filter((b) => !ownedBoons!.has(b.id)),
         )
           .slice(0, 3)
           .map((b, i) => ({
@@ -168,8 +169,10 @@ function finishBattle(state: BattleState, defeated: boolean) {
     state.wins = Math.min(1_000_000, state.wins + 1);
   }
   const availableBoons: typeof state.boons = [];
-  if (!defeated && outcome !== "victory" && boss)
-    for (const boon of BOONS) if (!state.boons.includes(boon.id)) availableBoons.push(boon.id);
+  if (!defeated && outcome !== "victory" && boss) {
+    const owned = new Set(state.boons);
+    for (const boon of BOONS) if (!owned.has(boon.id)) availableBoons.push(boon.id);
+  }
   const boons = availableBoons.length ? shuffle(state, availableBoons).slice(0, 3) : [];
   const receipt = {
     xp,
@@ -205,11 +208,12 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
     return true;
   }
   if (state.battle.enemies.every((e) => e.health <= 0)) {
-    for (const creature of [...state.team, ...state.reserves]) {
-      victoryRecovery(state, creature, events);
-      creature.block = 0;
-      creature.combat = freshCombat();
-    }
+    for (const row of [state.team, state.reserves])
+      for (const creature of row) {
+        victoryRecovery(state, creature, events);
+        creature.block = 0;
+        creature.combat = freshCombat();
+      }
     for (const enemy of state.battle.enemies) {
       enemy.combat = freshCombat();
       enemy.block = 0;

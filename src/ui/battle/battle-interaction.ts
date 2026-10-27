@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useReducer, useRef, useState, type RefObject } from "react";
-import { battlefield } from "../../game/battlefield";
+import { battlefieldView } from "../../game/battlefield";
 import { drawableOwnerIds } from "../../game/card-actors";
 import { chosenRecipients } from "../../game/play-queries";
 import { cardTargeting } from "../../game/card-rules";
@@ -90,14 +90,16 @@ export function useBattleInteraction({
   }, [denial]);
 
   const focusAfterCommand = useRef<number | null>(null);
-  const enemyRow = battlefield(game, "enemy"),
-    playerRow = battlefield(game, "player");
+  const enemyRow = battlefieldView(game, "enemy"),
+    playerRow = battlefieldView(game, "player");
   const drawable = drawableOwnerIds(game);
+  const cardsById = new Map<string, (typeof game.cards)[number]>();
+  for (const entry of game.cards) if (!cardsById.has(entry.id)) cardsById.set(entry.id, entry);
   const visibleHand = game.battle.hand.filter((id) => {
-    const ownerId = game.cards.find((card) => card.id === id)!.ownerId;
+    const ownerId = cardsById.get(id)!.ownerId;
     return ownerId === null || drawable.has(ownerId);
   });
-  const card = game.cards.find((entry) => entry.id === selected);
+  const card = selected === null ? undefined : cardsById.get(selected);
   const def = card ? definition(card.definitionId) : null;
   const mode = def ? cardTargeting(def, game) : "automatic";
   const enemyTarget = mode === "enemy",
@@ -116,7 +118,8 @@ export function useBattleInteraction({
       ? [row[1]!, row[0]!, ...row.slice(2)]
       : row;
   const legal = new Set(def ? chosenRecipients(game, def).map((unit) => unit.id) : []);
-  const targets = ordered.filter((unit) => legal.has(unit.id)).map((unit) => unit.id);
+  const targets: string[] = [];
+  for (const unit of ordered) if (legal.has(unit.id)) targets.push(unit.id);
   const last = enemyTarget ? remembered.enemy : remembered.ally;
   const navigationTarget = targets.includes(last ?? "") ? last : targets[0];
   const target = navigateFocus ? navigationTarget : targets.includes(hovered ?? "") ? hovered! : undefined;
@@ -197,7 +200,7 @@ export function useBattleInteraction({
   }, [selected, target, navigateFocus, board]);
 
   const chooseCard = (cardId: string) => {
-    const chosen = game.cards.find((entry) => entry.id === cardId)!;
+    const chosen = cardsById.get(cardId)!;
     const mode = cardTargeting(definition(chosen.definitionId), game);
     if (mode === "enemy" || mode === "ally") update({ type: "choose", id: cardId });
     else {
@@ -216,6 +219,7 @@ export function useBattleInteraction({
     enemyRow,
     playerRow,
     visibleHand,
+    cardsById,
     legalTargets: legal,
     setTarget,
     leaveTarget: (id: string) => update({ type: "leave", id }),

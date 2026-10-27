@@ -97,6 +97,9 @@ function choicesForBattle(state: GameState, autoEndTurn: boolean, firstOnly: boo
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   return rankedBattleChoices(state, autoEndTurn).map((choice) => choice.command);
 }
+export function bestBattleChoice(state: GameState, autoEndTurn = true): BattleChoice | undefined {
+  return choicesForBattle(state, autoEndTurn, true)[0];
+}
 export function chooseBattleCommand(state: GameState, autoEndTurn = true): Command {
-  return choicesForBattle(state, autoEndTurn, true)[0]?.command ?? { type: "endTurn" };
+  return bestBattleChoice(state, autoEndTurn)?.command ?? { type: "endTurn" };
 }

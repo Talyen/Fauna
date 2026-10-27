@@ -153,3 +153,8 @@ export const BOONS = [
 export type BoonId = (typeof BOONS)[number]["id"];
 
 freeze(BOONS, true);
+const boonsById = new Map<string, (typeof BOONS)[number]>(BOONS.map((entry) => [entry.id, entry]));
+/** Look up the frozen authored entry without rescanning the catalog. */
+export function findBoon(id: string | null | undefined) {
+  return id == null ? undefined : boonsById.get(id);
+}

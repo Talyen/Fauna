@@ -33,5 +33,5 @@ export function definition(id: string): CardDefinition {
 
 freeze(FIRST_RUN_STARTERS, true);
 
-export { BOONS, type BoonId } from "./content/boons";
+export { BOONS, findBoon, type BoonId } from "./content/boons";
 export { TALENTS, type TalentId } from "./content/talents";

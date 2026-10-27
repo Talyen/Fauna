@@ -15,7 +15,9 @@ function matchesVariables(source: string, translation: string) {
   const expected = variables(source);
   const actual = variables(translation);
   const valid = !/\{\{|\}\}/.test(translation.replace(/\{\{[a-zA-Z][\w]*\}\}/g, ""));
-  return valid && expected.size === actual.size && [...expected].every((name) => actual.has(name));
+  if (!valid || expected.size !== actual.size) return false;
+  for (const name of expected) if (!actual.has(name)) return false;
+  return true;
 }
 function format(template: string, values: MessageValues, number: () => Intl.NumberFormat) {
   if (!template.includes("{{")) return template;
@@ -66,11 +68,9 @@ export function createMessageReader(locale: string, catalog: MessageCatalog) {
         matchesVariables(sourceForm, candidate)
           ? candidate
           : null;
-      return format(
-        translated ?? sourceForm,
-        { ...values, count },
-        translated === null ? englishFormatter : localFormatter,
-      );
+      const template = translated ?? sourceForm;
+      if (!template.includes("{{")) return template;
+      return format(template, { ...values, count }, translated === null ? englishFormatter : localFormatter);
     },
   };
 }

@@ -3,7 +3,7 @@ import { cardTargeting } from "./card-rules";
 import { definition, species, type CardDefinition } from "./content";
 import { cardCost } from "./ability-rules";
 import { controlled, maximumHealth } from "./combat/state";
-import { battlefield, findLivingBattlefield } from "./battlefield";
+import { battlefieldView, findLivingBattlefield } from "./battlefield";
 import { pendingReplacement } from "./team";
 import { hasDiscardDrawCard } from "./card-zones";
 import type { BattleState, Card, Creature, Enemy, Command } from "./types";
@@ -11,7 +11,7 @@ import type { BattleState, Card, Creature, Enemy, Command } from "./types";
 function recipientPool(state: BattleState, def: CardDefinition, mode = cardTargeting(def, state)) {
   if (def.effect === "swapChosen") return state.reserves;
   if (def.effect === "resurrect") return [...state.team, ...state.reserves];
-  return battlefield(state, mode === "enemy" ? "enemy" : "player");
+  return battlefieldView(state, mode === "enemy" ? "enemy" : "player");
 }
 function recipientEligible(unit: Creature | Enemy, def: CardDefinition) {
   return (

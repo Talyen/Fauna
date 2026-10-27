@@ -1,5 +1,5 @@
 import { battleCardCapacity } from "../game/card-zones";
-import { rankedBattleChoices, type BattleChoice } from "./battle-policy";
+import { bestBattleChoice, rankedBattleChoices, type BattleChoice } from "./battle-policy";
 import { freeze } from "immer";
 import type { Card, Command, GameState } from "../game/types";
 
@@ -96,15 +96,15 @@ export function createBattleActor() {
       scope = currentScope;
       const { key, cards } = tacticalState(state);
       const tried = attempted.get(key);
-      const choices = rankedBattleChoices(state, autoEndTurn);
-      const selected = tried
-        ? choices.find((choice) => !tried.has(actionKey(cards, choice.command)))
-        : choices[0];
+      const choices = tried ? rankedBattleChoices(state, autoEndTurn) : undefined;
+      const selected = choices
+        ? choices.find((choice) => !tried!.has(actionKey(cards, choice.command)))
+        : bestBattleChoice(state, autoEndTurn);
       previous = freeze(
         selected ?? {
           command: { type: "endTurn" },
           score: 0,
-          reason: choices.length
+          reason: choices?.length
             ? "End the turn after useful alternatives repeat an unchanged combat state"
             : "No affordable playable card has a scored visible benefit",
         },

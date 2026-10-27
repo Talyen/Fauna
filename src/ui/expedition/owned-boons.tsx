@@ -1,5 +1,5 @@
 import { useMessages } from "../shared/localization/message-context";
-import { BOONS, type BoonId } from "../../game/content";
+import { findBoon, type BoonId } from "../../game/content";
 import { PagedItems } from "../shared/navigation/pagination";
 import { BoonArt, BoonName, BoonText } from "./boon-presentation";
 export function OwnedBoons({ boons }: { boons: readonly BoonId[] }) {
@@ -12,7 +12,7 @@ export function OwnedBoons({ boons }: { boons: readonly BoonId[] }) {
       label={i18n.message("boons.pages", "Boon pages")}
     >
       {(id) => {
-        const boon = BOONS.find((entry) => entry.id === id)!;
+        const boon = findBoon(id)!;
         return (
           <section className="reward-option" key={id}>
             <BoonArt

@@ -15,16 +15,25 @@ export const startupBaseArtwork = [
 /** Owned abilities are useful prefetch candidates without inspecting hidden draws or resolving RNG. */
 export function likelyArtwork(game: GameState) {
   const visible = new Set(immediateArtwork(game));
-  const definitions =
-    game.phase === "draft"
-      ? (game.selected.length ? game.selected : game.starterOffers).flatMap(speciesCards)
-      : game.cards.map((card) => definition(card.definitionId));
   const candidates = new Set<string>();
-  for (const card of definitions) {
+  const add = (card: ReturnType<typeof definition>) => {
     const url = assetUrl(card.artwork ?? `action.${card.species}`);
     if (!visible.has(url)) candidates.add(url);
+  };
+  if (game.phase === "draft") {
+    for (const kind of game.selected.length ? game.selected : game.starterOffers) {
+      for (const card of speciesCards(kind)) {
+        add(card);
+        if (candidates.size === 8) return [...candidates];
+      }
+    }
+  } else {
+    for (const card of game.cards) {
+      add(definition(card.definitionId));
+      if (candidates.size === 8) return [...candidates];
+    }
   }
-  return [...candidates].slice(0, 8);
+  return [...candidates];
 }
 
 /** Select the actual saved next screen without resolving commands or advancing RNG. */
@@ -39,8 +48,11 @@ export function immediateArtwork(game: GameState) {
       for (const row of [game.team, game.reserves, game.battle.enemies])
         for (const unit of row) creature(unit.species);
       if (game.battle.minions?.length) ids.add("minion.echo");
+      const handCards =
+        game.battle.hand.length > 1 ? new Map<string, (typeof game.cards)[number]>() : undefined;
+      if (handCards) for (const card of game.cards) if (!handCards.has(card.id)) handCards.set(card.id, card);
       for (const id of game.battle.hand) {
-        const card = game.cards.find((card) => card.id === id)!;
+        const card = handCards ? handCards.get(id)! : game.cards.find((card) => card.id === id)!;
         const def = definition(card.definitionId);
         ids.add(def.artwork ?? `action.${def.species}`);
       }
