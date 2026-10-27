@@ -97,7 +97,7 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Build ordinary renderer
+      - name: Build compiler renderer
         run: npm run build
       - name: Observe background effects in battle and menus
         run: npx playwright test --config=playwright.performance.config.ts
@@ -111,12 +111,6 @@ jobs:
       - name: Capture requested deep trace
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.trace }}
         run: npm run perf -- --scenario preview --trace --out reports/performance/preview-trace
-      - name: Preserve ordinary renderer
-        run: cp -a dist "$RUNNER_TEMP/fauna-baseline-dist"
-      - name: Build compiler trial
-        run: npm run build
-        env:
-          FAUNA_REACT_COMPILER: "1"
       - name: Exercise compiler build in browser journeys
         run: >-
           npm run test:e2e -- tests/e2e/combat.spec.ts tests/e2e/persistence.spec.ts
@@ -126,6 +120,12 @@ jobs:
           PLAYWRIGHT_JSON_OUTPUT_FILE: reports/performance/compiler-browser.json
       - name: Preserve compiler renderer
         run: cp -a dist "$RUNNER_TEMP/fauna-compiler-dist"
+      - name: Build uncompiled comparison renderer
+        run: npm run build
+        env:
+          FAUNA_REACT_COMPILER: "0"
+      - name: Preserve uncompiled comparison renderer
+        run: cp -a dist "$RUNNER_TEMP/fauna-baseline-dist"
       - name: Capture counterbalanced compiler comparisons
         run: |
           set -euo pipefail
