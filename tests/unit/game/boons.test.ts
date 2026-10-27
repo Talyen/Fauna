@@ -71,14 +71,13 @@ it.each(Object.entries(NEW_BOON_EFFECTS))(
 it("Briar Racquet spends one Nature Thorns stack for a half-strength Dodge retaliation without a chain", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["briar-racquet"];
-  source.combat = { ...freshCombat(), thorns: 6, waterThorns: 5 };
+  source.combat = { ...freshCombat(), thorns: 6 };
   target.combat.thorns = 20;
   const rng = state.rng;
   hit(state, target, source, 10, "physical", events, { origin: "ability", blindMiss: true });
   expect(source.health).toBe(species(source.species).health);
   expect(target.health).toBe(97);
   expect(source.combat.thorns).toBe(5);
-  expect(source.combat.waterThorns).toBe(5);
   expect(target.combat.thorns).toBe(20);
   expect(state.rng).toBe(rng);
 });
@@ -283,7 +282,7 @@ it("Pruning Crescent steals full Nature Thorns through an authored pre-attack Pu
   const target = state.battle!.enemies[0]!;
   target.health = target.maxHealth = 100;
   target.block = 0;
-  target.combat = { ...freshCombat(), thorns: 8, waterThorns: 4, controlled: "freeze", controlTurns: 1 };
+  target.combat = { ...freshCombat(), thorns: 8, controlled: "freeze", controlTurns: 1 };
   const def = definition("euphera-twilight-lance");
   executeAbility(
     requireBattle(state),
@@ -292,9 +291,7 @@ it("Pruning Crescent steals full Nature Thorns through an authored pre-attack Pu
     { swap: () => undefined },
   );
   expect(actor.combat!.thorns).toBe(8);
-  expect(actor.combat!.waterThorns).toBe(0);
   expect(target.combat.thorns).toBe(0);
-  expect(target.combat.waterThorns).toBe(0);
 });
 
 it("Pruning Crescent collects team Purges but never steals from an allied victim", () => {
@@ -952,22 +949,21 @@ it("settles a Mask victory before remaining allied damage can knock out its wear
   expect(next.team[0]!.health).toBe(1);
 });
 
-it("Apiary Smoker prevents new enemy Thorns of every type while preserving existing retaliation", () => {
+it("Apiary Smoker prevents new enemy Thorns while preserving existing retaliation", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["apiary-smoker"];
   target.combat.blind = true;
   target.combat.thorns = 3;
-  for (const status of ["thorns", "waterThorns", "fireThorns"] as const)
-    grantStatus(target, status, 4, events, state);
-  expect([target.combat.thorns, target.combat.waterThorns, target.combat.fireThorns]).toEqual([3, 0, 0]);
+  grantStatus(target, "thorns", 4, events, state);
+  expect(target.combat.thorns).toBe(3);
   source.combat = { ...freshCombat(), blind: true };
   grantStatus(source, "thorns", 2, events, state);
   expect(source.combat.thorns).toBe(2);
   hit(state, source, target, 1, "water", events, { origin: "ability", blindMiss: false });
   expect(target.combat.thorns).toBe(2);
   target.combat.blind = false;
-  grantStatus(target, "waterThorns", 4, events, state);
-  expect(target.combat.waterThorns).toBe(4);
+  grantStatus(target, "thorns", 4, events, state);
+  expect(target.combat.thorns).toBe(6);
 });
 
 it("Brookskip Disc copies the absorbed Water amount once and retains both enemies' defenses", () => {

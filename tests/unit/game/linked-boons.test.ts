@@ -346,30 +346,27 @@ it("Facet Abacus grants exactly one FIFO hand slot independent of Mana and rejec
   expect(() => decodeSave(encodeSave(eighth))).toThrow();
 });
 
-it.each(["thorns", "waterThorns", "fireThorns"] as const)(
-  "Thornheart Ring preserves %s only against Bleeding attackers",
-  (status) => {
-    const { state, source, target, events } = fixture();
-    state.boons = ["thornheart-ring"];
-    source.combat![status] = 4;
-    target.combat.bleed = 2;
-    hit(state, target, source, 1, "physical", events);
-    expect(source.combat![status]).toBe(4);
-    target.combat.bleed = 0;
-    hit(state, target, source, 1, "physical", events);
-    expect(source.combat![status]).toBe(3);
-  },
-);
+it.each(["thorns"] as const)("Thornheart Ring preserves %s only against Bleeding attackers", (status) => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["thornheart-ring"];
+  source.combat![status] = 4;
+  target.combat.bleed = 2;
+  hit(state, target, source, 1, "physical", events);
+  expect(source.combat![status]).toBe(4);
+  target.combat.bleed = 0;
+  hit(state, target, source, 1, "physical", events);
+  expect(source.combat![status]).toBe(3);
+});
 
-it("Moonboat Toy prevents all three Thorns packets while preserving ordinary stack loss", () => {
+it("Moonboat Toy prevents Thorns retaliation while preserving ordinary stack loss", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["moonboat-toy"];
-  Object.assign(target.combat, { thorns: 2, waterThorns: 3, fireThorns: 4 });
+  Object.assign(target.combat, { thorns: 2 });
   const health = source.health;
   hit(state, source, target, 6, "water", events);
   expect(source.health).toBe(health);
   expect(source.combat!.burn).toBe(0);
-  expect(target.combat).toMatchObject({ thorns: 1, waterThorns: 2, fireThorns: 3 });
+  expect(target.combat).toMatchObject({ thorns: 1 });
   hit(state, source, target, 1, "physical", events);
   expect(source.health).toBeLessThan(health);
 });
@@ -441,11 +438,11 @@ it("Sleepers Urn persists stored build-up and immunity in a current-format save"
 it("Moonboat Toy still wears down Thorns when an enemy Negates the Water attack", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["moonboat-toy"];
-  Object.assign(target.combat, { negate: true, thorns: 4, waterThorns: 3, fireThorns: 2 });
+  Object.assign(target.combat, { negate: true, thorns: 4 });
   const before = source.health;
   hit(state, source, target, 6, "water", events);
   expect(source.health).toBe(before);
   expect(target.health).toBe(100);
-  expect(target.combat).toMatchObject({ negate: false, thorns: 3, waterThorns: 2, fireThorns: 1 });
+  expect(target.combat).toMatchObject({ negate: false, thorns: 3 });
   expect(events.some((event) => event.text.includes("Thorns still retaliate"))).toBe(false);
 });

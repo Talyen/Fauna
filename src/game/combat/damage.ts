@@ -29,6 +29,7 @@ import {
   blockDepletionRewards,
   publishHit,
   damageRewards,
+  poisonStun,
   waterFollowups,
   attackProcs,
   thornRetaliation,
@@ -534,6 +535,7 @@ export function* resolveHit(
       },
     );
     depletions.push(...statusResult.depletions);
+    yield* poisonStun(context, effectDamage);
     if (direct && alliedSource && !alliedTarget && source.health > 0)
       yield* attackProcs(
         context,
@@ -562,6 +564,7 @@ export function* resolveHit(
     if (statusResult.appliedControl && source.health > 0)
       yield* reaction("controlRewards", state, source, target, type, events);
   }
+  if (!policy.buildup && effectDamage > 0) yield* poisonStun(context, effectDamage);
   if (
     criticalBonusDamage > 0 &&
     alliedSource &&

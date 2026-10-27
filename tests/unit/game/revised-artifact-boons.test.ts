@@ -56,18 +56,18 @@ it.each(ids)("%s has its approved concise rule and survives current-format resum
   expect(decodeSave(encodeSave(state)).boons).toEqual([id]);
 });
 
-it("Comb Uncapping Fork bypasses Block for all three allied Thorns pools without spending it", () => {
+it("Comb Uncapping Fork bypasses Block for allied Thorns without spending it", () => {
   const { state, ally, enemy, events } = fixture();
   state.boons = ["comb-uncapping-fork", "grain-flail"];
-  Object.assign(ally.combat!, { thorns: 4, waterThorns: 5, fireThorns: 6 });
+  Object.assign(ally.combat!, { thorns: 4 });
   enemy.block = 30;
   enemy.combat.armor = 3;
   hit(state, enemy, ally, 1, "water", events);
-  expect(enemy.health).toBe(85);
+  expect(enemy.health).toBe(96);
   expect(enemy.block).toBe(30);
   expect(enemy.combat.armor).toBe(3);
-  expect(enemy.combat.burn).toBe(6);
-  expect([ally.combat!.thorns, ally.combat!.waterThorns, ally.combat!.fireThorns]).toEqual([3, 4, 5]);
+  expect(enemy.combat.burn).toBe(0);
+  expect(ally.combat!.thorns).toBe(3);
   expect(events.some((event) => event.kind === "block" && event.targetId === enemy.id)).toBe(false);
 });
 
@@ -112,10 +112,10 @@ it("Fern Fencing Foil Purges one category on a Dodge, including Blind misses, wi
 it("Resonance Kalimba adds buildup without extra damage, including Thorns absorbed by Block", () => {
   const { state, ally, enemy, events } = fixture();
   state.boons = ["resonance-kalimba"];
-  Object.assign(ally.combat!, { thorns: 3, waterThorns: 4, fireThorns: 5 });
+  Object.assign(ally.combat!, { thorns: 3 });
   enemy.block = 30;
   hit(state, enemy, ally, 1, "water", events);
-  expect([enemy.health, enemy.block, enemy.combat.stun]).toEqual([100, 18, 12]);
+  expect([enemy.health, enemy.block, enemy.combat.stun]).toEqual([100, 27, 3]);
   expect(events.filter((event) => event.kind === "damage" && event.damageType === "stun")).toHaveLength(0);
 });
 

@@ -1,0 +1,405 @@
+{
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "3f09db6e85e5469409c2f194b394ab90594bad15c191d9a60159ee321f668399",
+    "text": "Jeu automatique"
+  },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "af2d7a1c144898b56d0f8d3d19de6366479730ef02642dc034996f9a4d184b68",
+    "text": "Ouvrir le menu"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "105f1e622c5eeca2121146cad24611673a3544d4a27ee4164132f1604a46652b",
+    "text": "Passer le combat"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "14d1976fee66af68760296271300d340201b39cf26a481eeaeef86f578e2b1a8",
+    "text": "Chargement…"
+  },
+  "glossary.controllerHelp": {
+    "reviewed": true,
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+    "sourceHash": "433b39a18895c71c95d851129efb0d983b3b58fe0456ac9b98d271565a585cdb",
+    "text": "Utilisez la croix directionnelle ou le stick gauche pour naviguer ; {{confirm}} sélectionne ; {{back}} revient en arrière ; {{endTurn}} termine le tour · Consultez les capacités des créatures dans la Collection depuis le menu"
+  },
+  "glossary.entries": {
+    "reviewed": true,
+    "source": "Glossary entries",
+    "sourceHash": "8b483d10b8a7c8c4879974655ab22eb9fadb2b34cb4d6bce53db6621cb1e9bff",
+    "text": "Entrées du glossaire"
+  },
+  "glossary.keyboardHelp": {
+    "reviewed": true,
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+    "sourceHash": "58393947a51fc4e8b10421d0cd5174f1f45189d44eb028c6152093015d0b35e6",
+    "text": "Utilisez W/A/S/D ou Tab pour naviguer ; A/D change de cible ; Entrée sélectionne ; Échap revient en arrière · Consultez les capacités des créatures dans la Collection depuis le menu"
+  },
+  "glossary.title": {
+    "reviewed": true,
+    "source": "Glossary & controls",
+    "sourceHash": "ec464fedfab0f98779ec64f72ff7c0cdc6fe39c9577deeccb505b38f60b51659",
+    "text": "Glossaire et commandes"
+  },
+  "menu.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "0338fc327f3a60bec16e3baeacbe8ed91f77018017e90708c9c6c1d406c8dfd6",
+    "text": "Bénédictions"
+  },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "a282a672747dad3510e8fc6eb13234fd5ff821588b668e9023149c02b02815d5",
+    "text": "Collection"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "38f576c1f733514214d5234eaac6ed7fdffd6c30b2611f8107da54c6748ace23",
+    "text": "Continuer"
+  },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "345915173b3a12fd30789478f3980cc5e84636c887be6626a38a01a93b79384d",
+    "text": "Terminer le voyage"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "34b9dd0371dbb5a30bdd54c3991deaf83d193d6551e3d67f72ce910bd6db606c",
+    "text": "Glossaire"
+  },
+  "menu.logo": {
+    "reviewed": true,
+    "source": "Fauna logo",
+    "sourceHash": "b19a86da0cee09a7fef429d311bcc96ba2b6a68f31f37ef2a4ba9be00b34a69b",
+    "text": "Logo de Fauna"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "62033fa1cc24864c09b4a05e0f90819149a6ec2c4efa8f46a02e8ae40fcdf603",
+    "text": "Menu principal"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "6e83bf4a6179a88a657a56f82dc8d54d8b0358cfe73821aff5cef3aa01d8049b",
+    "text": "Jouer"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "367987759fc0c577f98affea72831917c7dacbe5e85a05ea49f1982ab4546e09",
+    "text": "Enregistrer et quitter"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "e5b27b6e4b1d13625c8c17918194e1b8dd186a178bd0a2c53aebed07bd316a4c",
+    "text": "Paramètres"
+  },
+  "menu.talentPoints": {
+    "forms": {
+      "many": "{{count}} points de talent disponibles",
+      "one": "{{count}} point de talent disponible",
+      "other": "{{count}} points de talent disponibles"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} talent point available",
+      "other": "{{count}} talent points available"
+    },
+    "sourceHash": "41eac4621c254fcfa67d0c795c70bdc3929dae65838f1f508804f89647486669"
+  },
+  "menu.talents": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "b9d1cd5c4270bfd09bb997f7fc6f8d97ba02c3b1bc12300d8475d40138e47d55",
+    "text": "Talents"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "3ac88fa0e20e8a5884a8c48b8eb94149b5edd188c6093a6781197ff3553c08c3",
+    "text": "Retour"
+  },
+  "overlay.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "0338fc327f3a60bec16e3baeacbe8ed91f77018017e90708c9c6c1d406c8dfd6",
+    "text": "Bénédictions"
+  },
+  "overlay.closeBoons": {
+    "reviewed": true,
+    "source": "Close Boons",
+    "sourceHash": "135cf23fb67834ae2490a8138c3866dc1a5e431be5a5b61928861c508159fbf4",
+    "text": "Fermer les bénédictions"
+  },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "9541e2b24f514f573c84744f1a45e486939fb528906c728a74990cb5d7c02d72",
+    "text": "Fermer le deck"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "9f46040f68d5baac7c6aa0a5bf1f1791c6c06e4cf983faa4e406172eee6967bc",
+    "text": "Fermer la défausse"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "c64748987e5d6b84c109f246538d4e43fe93ca53d087af190162580910768f16",
+    "text": "Fermer la pioche"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "3323bd6480b30ef3cf7056076c18e32092485ae5646b65a92052eb4368b98841",
+    "text": "Deck"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "5425f079601a0c2f7f12d093eda72390129196d6b4fbc97517f61cffed36f07d",
+    "text": "Défausse"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "e56402e969cb9f0e7a29514eae70142cbed324e2ffa17eaa8ece7121bee25303",
+    "text": "Pioche"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "0c09a4b961673dc075544bdf4a999e5a19f7b5c4a6bbfbfe2bb4b7cb1b3646ee",
+    "text": "Informations et commandes du jeu"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "08d15a23807b6b561e8a9c3b2209539c91f838d0173f4884db88b1e678f2c97d",
+    "text": "Choisir un remplacement"
+  },
+  "overlay.replacementHelp": {
+    "reviewed": true,
+    "source": "Choose a living backup for your knocked-out creature",
+    "sourceHash": "5c9d49bf2043b41f97c6a9208ae6b15a15bac5340d776895f117c17aa45ed3d2",
+    "text": "Choisissez une créature vivante en réserve pour remplacer votre créature K.-O."
+  },
+  "recovery.display": {
+    "reviewed": true,
+    "source": "Fauna could not display this screen; trying again…",
+    "sourceHash": "324b329092ae52473bfc86d7128c64e4b1b420178cee28034ab8aedb1e2e1d98",
+    "text": "Fauna ne peut pas afficher cet écran ; nouvelle tentative en cours…"
+  },
+  "recovery.save": {
+    "reviewed": true,
+    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
+    "sourceHash": "4ab91e1995d6c5e33eb6c104f801c1041897956af2c6709e080bf9a3686c01fa",
+    "text": "La progression ne peut pas être enregistrée pour le moment ; laissez Fauna ouvert pendant les nouvelles tentatives"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "2d1dcb6120f84b93847426d9f4e54396c4ecaadd7e329c353b216f230e2e82a4",
+    "text": "Réserve"
+  },
+  "replacement.backupCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, backup",
+    "sourceHash": "2532f401cc9d81f05390f0e97223bff2f7234113f3079639574a3417034865c7",
+    "text": "{{creature}}, en réserve"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "3bdbe031884caf1993c100ba48dcceab764e7571e7af287ae8f049abc99fcfed",
+    "text": "K.-O."
+  },
+  "replacement.knockedOutCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, knocked out",
+    "sourceHash": "5e7c0d32640b0623e5818b3399c97745154fc199f10529bf14b86017bab2cb56",
+    "text": "{{creature}}, K.-O."
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "6d69486000fb40a800dbb0b736c6ae256519b4168acf12c0557f6fd124713103",
+    "text": "Audio"
+  },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "4806217bf3dc5a454a2bdd468a9c11f5611d8a675779e4b76c957549e32c0d74",
+    "text": "Fin de tour automatique"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "75dbd95821cfebc29ae499f58de8f1a8932befe4c199dec5c4e9239274fa4c08",
+    "text": "Automatique"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "940b77c6e6c393c902cdade54bb971493b31189d3a7ec8a560e097a5aa5ca840",
+    "text": "Combat"
+  },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "fc905ebe2949711d235711b933dfa1e7167289a549497e4f07d10ce06b10bd69",
+    "text": "Catégories des paramètres"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "7aa561c8f629e678546d261d0c872b55707fb2deeedfa1e2668a72da2ed6e208",
+    "text": "Icônes de manette"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "7afba851b7f27e29bd363cddd9214cf54e3ba669da1ac123bdf51ca4841e2526",
+    "text": "Affichage"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "e8611a58fae26f14bf113c7cabd001d4ad3f5abafc60d0a556735bbc7610e8a9",
+    "text": "Mode d’affichage"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "4f3ea53678b24e5fcc6b81a14e171183485ce54d30b6f8db145a0eeb770cdb8b",
+    "text": "Effets sonores"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "1405427e950035416e0682b21fb56f00da323fb57792b7d9468656c32d66d51f",
+    "text": "Volume des effets sonores"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "a00e8a432f74e97a6f39719fa86d5250c32c5abfd3ef360b4bc4185a39febc97",
+    "text": "Valeur du volume des effets sonores"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "402205835ba3eedf937069ff55654869fc836e25ab4af909fb841ba82cd91d43",
+    "text": "Plein écran"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "f848b16ee32fcff3f7aa42e31a2abfe5126d6d0d9c279f0adbae710f4ffdaf28",
+    "text": "Lueur d’arrière-plan"
+  },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "e871d22633f909c71febf7e4c0f7918a73c2890d5d259e92a769d9b9cf9d2562",
+    "text": "Valeur de la lueur d’arrière-plan"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "6177f782e270c2b05dbea1a49180e11e0272be6493156cd194d70d0162e3d990",
+    "text": "Volume général"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "f3411bf4ac7b3c90f5d7492e1142de4f5a6f283bce5d636db23139bb2e5546a7",
+    "text": "Volume général"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "60ff3cdd4aea686e072ff1c11b309697f4d37eb8e7706785d1a5a9328ed18ebd",
+    "text": "Valeur du volume général"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "a4c4215781395343da17b9854830a3cacd42c218426b694982bf8a1bea4357cc",
+    "text": "Musique"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "aace8200d3684ae343051c690286ce48c9353bde0d59aed2eac0f4777872a6df",
+    "text": "Volume de la musique"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "510fa99ae6eb0a8921da311e8c960ea107e54af1c5885c9b77b8976d2f54671a",
+    "text": "Valeur du volume de la musique"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "7be5162da4946dd9ecd63cecdd4b4300b727ea3a342be713ffccf85fd4c4e614",
+    "text": "Couper le son en arrière-plan"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "3facd4337d2a077dcb78026574f17c78ac09b395bc7c4b75f7f8ca4a06220320",
+    "text": "Particules d’arrière-plan"
+  },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "a549b7142418c5176703dd5e250d1eaea49811c9994f10c93f384d9324726a71",
+    "text": "Valeur des particules d’arrière-plan"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "82a3a0dc196c1b9409f053052af8ca0e59a175f6da72dfa3cf81c3fcdacb1511",
+    "text": "Son"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "295b6ff90ca98ca19d695030daea9f24addc4ff10f89032eb345f869f244f6df",
+    "text": "Taille du texte"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "a0285bca3757714be4051faf6c8838000beb2b596ba0fa25dadab14ab797f287",
+    "text": "Infobulle {{value}} %"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "999b3b7b24ba52888d7fd74c7c4a308cbda969d131e01b86d1870cf366c6575c",
+    "text": "Taille des infobulles"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "b2dc9a2ec27113e4d4bdd52d776b650d3e322b228bcc9a78209910f781a70e45",
+    "text": "Fenêtré"
+  }
+}

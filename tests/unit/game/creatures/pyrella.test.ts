@@ -2,15 +2,13 @@ import { produce } from "immer";
 import { describe, expect, it } from "vitest";
 import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { definition, species, speciesCards } from "../../../../src/game/content";
-import { enemyCardValue } from "../../../../src/game/combat/enemy-policy";
 import { executeAbility } from "../../../../src/game/combat/abilities";
-import { grantStatus, hit, removeEffects, tickStatuses } from "../../../../src/game/combat/index";
+import { hit, tickStatuses } from "../../../../src/game/combat/index";
 import { STACK_LIMIT } from "../../../../src/game/combat/state";
 import { dispatch, previewCard } from "../../../../src/game/engine";
-import { definitionKeywords, keywordText } from "../../../../src/game/keywords";
+import { definitionKeywords } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { swapBackup, swapFromCard } from "../../../../src/game/team";
-import { combatStatuses } from "../../../../src/ui/shared/combat/combat-status-model";
 import { pyrellaBattle } from "../../../support/pyrella";
 
 const play = (state: ReturnType<typeof pyrellaBattle>, id: string) => ({
@@ -24,7 +22,7 @@ describe("Pyrella", () => {
     expect(speciesCards("pyrella").map((card) => [cardText(card), card.cost, enemyCanUse(card)])).toEqual([
       ["Deal 2 Burn damage to all enemies", 1, true],
       ["Restore 1 Mana / Draw a Burn card", 1, false],
-      ["Gain 3 Fire Thorns / Gain Negate", 1, true],
+      ["Apply 2 Burn to all enemies / Gain Negate", 1, true],
     ]);
     expect(species("pyrella").passiveTiers.map((tier) => tier.effects)).toEqual(
       [20, 35, 50, 65, 80, 100].map((amount) => [{ kind: "passingFlame", amount }]),
@@ -34,7 +32,7 @@ describe("Pyrella", () => {
     );
     expect(definitionKeywords(definition("pyrella-spark-decoy"))).toEqual(["burn"]);
     expect(definitionKeywords(definition("pyrella-ember-harvest"))).toEqual(["mana"]);
-    expect(cardText(definition("pyrella-spark-decoy"), 1)).toBe("Gain 5 Fire Thorns / Gain Negate");
+    expect(cardText(definition("pyrella-spark-decoy"), 1)).toBe("Apply 4 Burn to all enemies / Gain Negate");
   });
 
   it.each([0, 1, 2, 3, 4, 5])("conserves and evenly splits the rounded Burn pool at rank %s", (rank) => {
@@ -173,94 +171,32 @@ describe("Pyrella", () => {
     expect(rejected.state).toBe(blocked);
   });
 
-  it("retaliates through Negate with Burn buildup without starting a retaliation loop", () => {
-    const result = dispatch(pyrellaBattle(), play(pyrellaBattle(), "spark-decoy"));
+  it("Spark Decoy applies Burn without damage and grants Negate through preview and resume", () => {
+    const state = pyrellaBattle();
+    const command = play(state, "spark-decoy");
+    const preview = previewCard(state, command.cardId);
+    const result = dispatch(state, command);
     expect(result.accepted).toBe(true);
-    const next = produce(result.state, (draft) => {
-      const actor = draft.team[0]!;
-      const attacker = draft.battle!.enemies[0]!;
-      attacker.combat.fireThorns = 10;
-      const before = actor.health;
-      hit(draft, attacker, actor, 5, "poison", []);
-      expect(actor.health).toBe(before);
-      expect(actor.combat).toMatchObject({ fireThorns: 2, negate: false, poison: 0, burn: 0 });
-      expect(attacker.combat).toMatchObject({ burn: 3, fireThorns: 10 });
-      expect(attacker.health).toBe(result.state.battle!.enemies[0]!.health - 3);
-      hit(draft, attacker, actor, 1, "burn", [], { origin: "periodic" });
-      expect(actor.combat!.fireThorns).toBe(2);
-    });
-    expect(decodeSave(encodeSave(next))).toEqual(next);
-    expect(combatStatuses(next.team[0]!.combat)).toContainEqual(
-      expect.objectContaining({ id: "fireThorns", count: 2, text: expect.stringContaining("Burn damage") }),
+    expect(result.events).toEqual(preview!.events);
+    expect(result.state.team[0]!.combat!.negate).toBe(true);
+    expect(result.state.battle!.enemies.map((enemy) => enemy.combat.burn)).toEqual([2, 2, 2]);
+    expect(result.state.battle!.enemies.map((enemy) => enemy.health)).toEqual(
+      state.battle.enemies.map((enemy) => enemy.health),
     );
-    expect(keywordText("Gain 3 Fire Thorns")).toContainEqual({ text: "Fire Thorns", keyword: "fireThorns" });
+    expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
   });
 
-  it("retaliates on an ordinary hit absorbed by Block and keeps Fire Thorns separate", () => {
-    produce(pyrellaBattle(), (draft) => {
-      const actor = draft.team[0]!;
-      const attacker = draft.battle.enemies[0]!;
-      actor.block = 100;
-      actor.combat!.fireThorns = 3;
-      actor.combat!.waterThorns = 2;
-      actor.combat!.controlled = "stun";
-      actor.combat!.controlTurns = 1;
-      const before = actor.health;
-      hit(draft, attacker, actor, 5, "physical", []);
-      expect(actor.health).toBe(before);
-      expect(actor.combat).toMatchObject({ fireThorns: 2, waterThorns: 1 });
-      expect(attacker.combat.burn).toBe(3);
-    });
-  });
-
-  it("supports Fire Thorns kills, sharing, Purge, swaps and current-format resume", () => {
-    const state = produce(pyrellaBattle(), (draft) => {
-      draft.team[0]!.combat!.fireThorns = 3;
-      draft.team[0]!.combat!.negate = true;
-      const enemy = draft.battle.enemies[0]!;
-      enemy.health = 2;
-      enemy.combat.burn = 20;
-      hit(draft, enemy, draft.team[0]!, 5, "physical", []);
-      expect(draft.battle.enemies.slice(1).map((unit) => unit.combat.burn)).toEqual([2, 2]);
-      draft.discovery.recruited.reedstag = 6;
-      grantStatus(draft.team[2]!, "fireThorns", 3, [], draft);
-      expect(draft.team.map((unit) => unit.combat!.fireThorns)).toEqual([5, 3, 3]);
-      removeEffects(draft.team[1]!, "purge", 1, [], draft, "fireThorns");
-      expect(draft.team[1]!.combat!.fireThorns).toBe(0);
-      swapBackup(draft, "ally-0", "pyrella-backup", []);
-    });
-    expect(decodeSave(encodeSave(state))).toEqual(state);
-    expect(state.reserves.find((unit) => unit.id === "ally-0")!.combat!.fireThorns).toBe(5);
-    for (const fireThorns of [-1, 0.5, STACK_LIMIT + 1, null, undefined]) {
-      const invalid = JSON.parse(encodeSave(state));
-      invalid.reserves.find((unit: { id: string }) => unit.id === "ally-0").combat.fireThorns = fireThorns;
-      expect(() => decodeSave(JSON.stringify(invalid))).toThrow();
-    }
-  });
-
-  it("values Fire Thorns in the shared enemy policy without changing the live state", () => {
-    const state = produce(pyrellaBattle(), (draft) => {
-      draft.battle.enemies[0]!.species = "pyrella";
-      draft.battle.enemies[0]!.combat.negate = true;
-    });
-    const before = encodeSave(state);
-    expect(enemyCardValue(state, state.battle.enemies[0]!, definition("pyrella-spark-decoy"))).toBe(3);
-    expect(encodeSave(state)).toBe(before);
-  });
-
-  it("lets enemies use Spark Decoy and refreshes Negate without stacking protections", () => {
+  it("enemy Spark Decoy applies Burn to the opposing side and respects Nullify", () => {
     const state = produce(pyrellaBattle(), (draft) => {
       const actor = draft.battle.enemies[0]!;
       actor.species = "pyrella";
-      for (let i = 0; i < 2; i++)
-        executeAbility(
-          draft,
-          { side: "enemy", actor, def: definition("pyrella-spark-decoy"), value: 3 },
-          [],
-          { swap: swapFromCard },
-        );
+      draft.team[0]!.combat!.nullify = true;
+      executeAbility(draft, { side: "enemy", actor, def: definition("pyrella-spark-decoy"), value: 2 }, [], {
+        swap: swapFromCard,
+      });
     });
-    expect(state.battle.enemies[0]!.combat).toMatchObject({ fireThorns: 6, negate: true });
-    expect(state.team.every((unit) => unit.combat!.fireThorns === 0)).toBe(true);
+    expect(state.battle.enemies[0]!.combat.negate).toBe(true);
+    expect(state.team.map((unit) => unit.combat!.burn)).toEqual([0, 2, 2]);
+    expect(state.team[0]!.combat!.nullify).toBe(false);
   });
 });

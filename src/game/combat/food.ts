@@ -8,7 +8,7 @@ import { species, type CardDefinition } from "../content";
 import { receiveCard } from "../card-zones";
 import { roll } from "../random";
 import { passiveAmount } from "../progression";
-import { gainMana, grantArmor, grantBlock, restoreHealth } from "./index";
+import { gainMana, grantArmor, grantBlock, restoreHealth, grantTemporaryDodge } from "./index";
 import { battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import type { BattleState, Creature, GameEvent } from "../types";
 
@@ -94,6 +94,8 @@ export function useFood(
         if (target.health <= 0 || isDepartedMinion(state, target)) continue;
         if (def.effect === "heal") restoreHealth(target, value, events, false, state, true);
         else if (def.effect === "guard") grantBlock(state, target, value, events);
+        if (state.boons.includes("velvet-whisk"))
+          grantTemporaryDodge(target, boonRule("velvet-whisk").dodge, events);
       }
     }
   }

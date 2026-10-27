@@ -25,24 +25,23 @@ function blockedHitFixture(block = 20) {
 }
 
 it.each(["player", "enemy"] as const)(
-  "Block independence: both Thorns pools retaliate against a blocked %s attack and spend stacks",
+  "Block independence: Thorns retaliate against a blocked %s attack and spend stacks",
   (side) => {
     const { state, source: ally, target: enemy, events } = blockedHitFixture();
     const [source, target] = side === "player" ? [ally, enemy] : [enemy, ally];
     source.block = 0;
     target.block = 20;
-    target.combat = { ...freshCombat(), thorns: 2, waterThorns: 3 };
+    target.combat = { ...freshCombat(), thorns: 5 };
     const before = source.health;
     const health = target.health;
     hit(state, source, target, 4, "nature", events);
     expect(target.health).toBe(health);
     expect(target.block).toBe(16);
     expect(source.health).toBe(before - 5);
-    expect(target.combat).toMatchObject({ thorns: 1, waterThorns: 2 });
+    expect(target.combat).toMatchObject({ thorns: 4 });
     expect(events.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
       "nature",
       "nature",
-      "water",
     ]);
   },
 );
@@ -168,7 +167,7 @@ it("Clean Getaway trims the oldest Bleed obligation without granting a Cleanse r
   expect(ally.combat.statusSources.bleed).toBeUndefined();
 });
 
-it("preserves Water Thorns when Nature Thorns already knocked out the attacker", () => {
+it("stops after Thorns knock out the attacker", () => {
   const state = structuredClone(run());
   const source = state.team[0]!;
   const target = state.battle!.enemies[0]!;
@@ -176,13 +175,12 @@ it("preserves Water Thorns when Nature Thorns already knocked out the attacker",
   source.block = 0;
   source.combat = { ...freshCombat(), deathDoorUsed: true };
   target.block = 0;
-  target.combat = { ...freshCombat(), thorns: 2, waterThorns: 3, controlled: "stun", controlTurns: 1 };
+  target.combat = { ...freshCombat(), thorns: 2, controlled: "stun", controlTurns: 1 };
   state.rng = 42;
   const events: GameEvent[] = [];
   hit(state, source, target, 1, "water", events);
   expect(source.health).toBe(0);
   expect(target.combat.thorns).toBe(1);
-  expect(target.combat.waterThorns).toBe(3);
   expect(events.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
     "water",
     "nature",

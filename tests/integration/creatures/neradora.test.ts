@@ -4,13 +4,11 @@ import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, species } from "../../../src/game/content";
 import { cardText } from "../../../src/game/card-rules";
-import { freshCombat, grantStatus, hit, removeEffects, startAction } from "../../../src/game/combat/index";
+import { freshCombat, startAction } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
-import { definitionKeywords, keywordText } from "../../../src/game/keywords";
-import { battleChoices } from "../../../src/application/battle-policy";
-import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
+import { definitionKeywords } from "../../../src/game/keywords";
 import type { GameEvent, GameState } from "../../../src/game/types";
 import { prepareDestination, accept, teamRun } from "../../support/game";
 
@@ -37,11 +35,11 @@ function play(game: GameState, ability: "undertow-knot" | "bloom-shelter" | "tid
 it("registers the selected support kit, Water classification, encounters and resumable previews", () => {
   const kit = CARDS.filter((card) => card.species === "neradora");
   expect(kit.map((card) => [card.cost, cardText(card)])).toEqual([
-    [1, "Gain 3 Water Thorns"],
+    [1, "Gain 4 Block; Cleanse a harmful effect"],
     [1, "Restore 2 Health to all allies"],
     [1, "Draw 2 cards; Gain 1 Mana"],
   ]);
-  expect(kit.map(definitionKeywords)).toEqual([["water"], ["health"], ["mana"]]);
+  expect(kit.map(definitionKeywords)).toEqual([["block", "health"], ["health"], ["mana"]]);
   expect(FIRST_RUN_STARTERS).not.toContain("neradora");
   expect(COMBAT_PACKS.some((pack) => pack.some((kind) => kind === "neradora"))).toBe(true);
   for (const ability of ["undertow-knot", "bloom-shelter", "tide-cup"] as const) {
@@ -58,135 +56,17 @@ it("registers the selected support kit, Water classification, encounters and res
   expect(() => decodeSave(JSON.stringify({ ...ready(), version: 39 }))).toThrow();
 });
 
-it("grants visible Water Thorns to its actor, stacks independently and awards Water XP once", () => {
-  const result = play(ready(), "undertow-knot");
-  const actor = result.state.team[0]!;
-  expect(actor.combat!.waterThorns).toBe(3);
-  expect(actor.combat!.thorns).toBe(0);
-  expect(actor.block).toBe(0);
-  expect(result.state.team.slice(1).every((unit) => unit.combat!.waterThorns === 0)).toBe(true);
-  expect(result.state.battleXP.water).toBe(1);
-  expect(result.state.battleXP.nature ?? 0).toBe(0);
-  expect(result.state.battle!.mana).toBe(3);
-  expect(combatStatuses(actor.combat)).toContainEqual(
-    expect.objectContaining({ id: "waterThorns", count: 3, text: expect.stringContaining("Water damage") }),
-  );
-  expect(keywordText("Gain 3 Water Thorns")).toContainEqual({ text: "Water Thorns", keyword: "waterThorns" });
-  expect(battleChoices(ready())).toContainEqual(
-    expect.objectContaining({ type: "play", cardId: actor.id + ":neradora-undertow-knot" }),
-  );
-  produce(result.state, (game) => {
-    const unit = game.team[0]!;
-    grantStatus(unit, "thorns", 2, [], game);
-    grantStatus(unit, "waterThorns", 3, [], game);
-    expect(unit.combat!.thorns).toBe(2);
-    expect(unit.combat!.waterThorns).toBe(6);
-    unit.combat!.waterThorns = 999999;
-    grantStatus(unit, "waterThorns", 3, [], game);
-    expect(unit.combat!.waterThorns).toBe(1000000);
+it("Undertow Knot protects and Cleanses its user, including through a preview and save", () => {
+  const game = produce(ready(), (draft) => {
+    draft.team[0]!.combat!.burn = 4;
   });
-});
-
-it("retaliates as Water through Block and Armor, spends one stack and cannot chain retaliation", () => {
-  const events: GameEvent[] = [];
-  produce(play(ready(), "undertow-knot").state, (game) => {
-    const defender = game.team[0]!;
-    const attacker = game.battle!.enemies[0]!;
-    defender.combat!.controlled = "freeze";
-    attacker.combat.armor = 20;
-    attacker.combat.waterThorns = 8;
-    attacker.combat.thorns = 8;
-    attacker.block = 1;
-    const health = attacker.health;
-    hit(game, attacker, defender, 1, "water", events);
-    expect(attacker.health).toBe(health - 2);
-    expect(attacker.block).toBe(0);
-    expect(attacker.combat.armor).toBe(20);
-    expect(attacker.combat.waterThorns).toBe(8);
-    expect(attacker.combat.thorns).toBe(8);
-    expect(defender.combat!.waterThorns).toBe(2);
-    expect(
-      events.filter(
-        (event): event is Extract<GameEvent, { kind: "damage" }> =>
-          event.kind === "damage" && event.actorId === defender.id,
-      ),
-    ).toEqual([expect.objectContaining({ damageType: "water", amount: 2 })]);
-  });
-});
-
-it("allows Nature and Water Thorns to retaliate separately on the same hit", () => {
-  const events: GameEvent[] = [];
-  produce(play(ready(), "undertow-knot").state, (game) => {
-    const defender = game.team[0]!;
-    defender.combat!.controlled = "freeze";
-    defender.combat!.thorns = 2;
-    const attacker = game.battle!.enemies[0]!;
-    attacker.block = 0;
-    attacker.combat = freshCombat();
-    hit(game, attacker, defender, 1, "water", events);
-    expect(
-      events
-        .filter(
-          (event): event is Extract<GameEvent, { kind: "damage" }> =>
-            event.kind === "damage" && event.actorId === defender.id,
-        )
-        .map((event) => [event.damageType, event.amount]),
-    ).toEqual([
-      ["nature", 2],
-      ["water", 3],
-    ]);
-    expect(defender.combat!.thorns).toBe(1);
-    expect(defender.combat!.waterThorns).toBe(2);
-  });
-});
-
-it.each(["dodge", "block", "periodic", "derived", "retaliation", "knockout"] as const)(
-  "applies Water Thorns hit rules for %s",
-  (kind) => {
-    const events: GameEvent[] = [];
-    produce(play(ready(), "undertow-knot").state, (game) => {
-      const unit = game.team[0]!;
-      unit.combat!.controlled = "freeze";
-      if (kind === "block") unit.block = 10;
-      if (kind === "knockout") {
-        unit.health = 1;
-        unit.combat!.deathDoorUsed = true;
-      }
-      hit(
-        game,
-        game.battle!.enemies[0]!,
-        unit,
-        1,
-        "water",
-        events,
-        kind === "periodic" || kind === "derived" || kind === "retaliation"
-          ? { origin: kind }
-          : { origin: "ability", blindMiss: kind === "dodge" },
-      );
-      expect(unit.combat!.waterThorns).toBe(kind === "block" ? 2 : 3);
-      expect(events.some((event) => event.kind === "damage" && event.actorId === unit.id)).toBe(
-        kind === "block",
-      );
-    });
-  },
-);
-
-it("Purges Water Thorns as its own beneficial category and rejects invalid or missing saved stacks", () => {
-  const game = play(ready(), "undertow-knot").state;
-  produce(game, (draft) => {
-    const unit = draft.team[0]!;
-    unit.combat!.thorns = 2;
-    removeEffects(unit, "purge", 1, [], draft);
-    expect(unit.combat!.thorns).toBe(0);
-    expect(unit.combat!.waterThorns).toBe(3);
-    removeEffects(unit, "purge", 1, [], draft);
-    expect(unit.combat!.waterThorns).toBe(0);
-  });
-  for (const invalid of [-1, 0.5, 1000001, null, undefined]) {
-    const saved = JSON.parse(encodeSave(game));
-    saved.team[0].combat.waterThorns = invalid;
-    expect(() => decodeSave(JSON.stringify(saved))).toThrow();
-  }
+  const result = play(game, "undertow-knot");
+  expect(result.accepted).toBe(true);
+  expect(result.state.team[0]!.block).toBe(4);
+  expect(result.state.team[0]!.combat!.burn).toBe(0);
+  expect(result.state.battleXP.block).toBe(1);
+  expect(result.state.battleXP.health).toBe(1);
+  expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
 
 it("heals all living deployed allies, caps at maximum and excludes backup and knockouts", () => {
@@ -276,8 +156,7 @@ it("runs enemy support on its own side and uses base regeneration independently 
   });
   game = enemyPlay(game, "neradora-undertow-knot").state;
   expect(game.battle!.enemies[0]!.lastAbility).toBe("neradora-undertow-knot");
-  expect(game.battle!.enemies[0]!.combat.waterThorns).toBeGreaterThan(0);
-  expect(game.team.every((unit) => unit.combat!.waterThorns === 0)).toBe(true);
+  expect(game.battle!.enemies[0]!.block).toBeGreaterThan(0);
   const events: GameEvent[] = [];
   produce(game, (draft) => {
     draft.battle!.turn = 2;
@@ -297,7 +176,7 @@ it("runs enemy support on its own side and uses base regeneration independently 
   ).toBeGreaterThan(0);
 });
 
-it("retains Water Thorns through rejected commands and swaps without resetting turn cadence", () => {
+it("retains Block through rejected commands and swaps without resetting turn cadence", () => {
   const game = produce(play(ready(), "undertow-knot").state, (draft) => {
     draft.discovery.recruited.emberback = 1;
     if (!draft.discovery.encountered.includes("emberback")) draft.discovery.encountered.push("emberback");
@@ -316,9 +195,9 @@ it("retains Water Thorns through rejected commands and swaps without resetting t
   expect(rejected.state.rng).toBe(game.rng);
   let swapped = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
   swapped = decodeSave(encodeSave(swapped));
-  expect(swapped.reserves[0]!.combat!.waterThorns).toBe(3);
+  expect(swapped.reserves[0]!.block).toBe(4);
   swapped = swapFixture(swapped, { type: "swap", activeId: "backup", reserve: "ally-0" });
-  expect(swapped.team[0]!.combat!.waterThorns).toBe(3);
+  expect(swapped.team[0]!.block).toBe(4);
   expect(swapped.battle!.turn).toBe(1);
 });
 
@@ -332,11 +211,11 @@ it("caps passive healing without card-only overhealing rewards and resets on a n
     expect(actor.health).toBe(species("neradora").health);
     expect(actor.block).toBe(0);
     actor.health = 10;
-    actor.combat!.waterThorns = 8;
+    actor.combat!.thorns = 8;
     prepareDestination(draft);
   });
   const next = accept(game, { type: "beginBattle" });
   expect(next.battle!.turn).toBe(1);
   expect(next.team[0]!.health).toBe(10);
-  expect(next.team[0]!.combat!.waterThorns).toBe(0);
+  expect(next.team[0]!.combat!.thorns).toBe(0);
 });

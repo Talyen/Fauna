@@ -31,8 +31,6 @@ export function freshCombat(): CombatState {
     desperateGuardUsed: false,
     armor: 0,
     thorns: 0,
-    waterThorns: 0,
-    fireThorns: 0,
     dodge: 0,
     temporaryDodge: 0,
     blind: false,
@@ -127,8 +125,6 @@ export const harmfulStatuses = ["burn", "poison", "bleed", "stun", "freeze", "bl
 export const beneficialStatuses = [
   "armor",
   "thorns",
-  "waterThorns",
-  "fireThorns",
   "dodge",
   "reflect",
   "reflectBurn",

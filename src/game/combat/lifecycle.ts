@@ -107,6 +107,8 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
         if (talentChance(state, "poison.virulent", events)) next = Math.min(STACK_LIMIT, amount + 1);
       }
     }
+    if (status === "burn" && isEnemy(unit) && stats.armor > 0 && state.boons.includes("lava-cameo"))
+      next = amount;
     if (status === "burn" && isEnemy(unit) && state.boons.includes("last-candle"))
       next = Math.max(boonRule("last-candle").minimum, next);
     const fresh =

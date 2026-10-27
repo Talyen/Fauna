@@ -46,6 +46,10 @@ export const SCENARIOS = [
   "home",
   "campfire",
   "boon",
+  "new-boons-1",
+  "new-boons-2",
+  "new-boons-3",
+  "new-boons-4",
   "journey-results",
   "death-door",
   "inspection",
@@ -119,6 +123,16 @@ export async function reviewScenario(server, name) {
   if (name.startsWith("merchant")) game = accept(game, { type: "enterSupport", visit: game.support.id });
   if (name === "merchant-unavailable") game = { ...game, currency: 0 };
   if (name === "boon") game = bossReward();
+  if (name.startsWith("new-boons-")) {
+    const groups = [
+      ["reef-incense-tile", "lava-cameo", "velvet-whisk"],
+      ["paper-lotus", "origami-staircase", "wax-foundation-mold"],
+      ["eclipse-rivet", "poppy-seed-grinder", "peace-knot"],
+      ["coral-music-box", "tidecrest-hairpin", "moonboat-toy"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
   if (name === "inspection") game = winBattle();
   if (name === "death-door")
     game = {

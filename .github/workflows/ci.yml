@@ -117,6 +117,8 @@ jobs:
         run: npm run docs:check
       - name: Localization catalog freshness
         run: npm run localization:check
+      - name: Translation record freshness
+        run: npm run localization:translations:check
       - name: Content audit
         run: npm run content:audit
       - name: Upload player-notes

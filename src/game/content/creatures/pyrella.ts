@@ -24,6 +24,6 @@ export const pyrella: CreatureKit = {
       restore: true,
       effects: [{ kind: "drawKeyword", keyword: "burn", amount: 1 }],
     }),
-    card("pyrella-spark-decoy", "Spark Decoy", "sparkDecoy", 3),
+    card("pyrella-spark-decoy", "Spark Decoy", "sparkDecoy", 2),
   ],
 };

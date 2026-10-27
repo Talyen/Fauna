@@ -146,12 +146,7 @@ const rules: AbilityRuleCatalog = freeze(
       ...automatic,
       targeting: "self",
       keywords: ["burn"],
-      describe: (_card, { value }) => `Gain ${value} Fire Thorns / Gain Negate`,
-    },
-    waterThorns: {
-      ...automatic,
-      keywords: ["water"],
-      describe: (_card, { value }) => `Gain ${value} Water Thorns`,
+      describe: (_card, { value }) => `Apply ${value} Burn to all enemies / Gain Negate`,
     },
     dodge: {
       ...automatic,

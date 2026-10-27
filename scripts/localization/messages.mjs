@@ -63,16 +63,20 @@ export function extractMessages(files) {
   return Object.fromEntries([...messages].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const root = path.resolve(import.meta.dirname, "../..");
-  const destination = path.join(root, "src/ui/shared/localization/messages.en.json");
+export function extractProjectMessages(root) {
   const files = fs
     .readdirSync(path.join(root, "src/ui"), { recursive: true, withFileTypes: true })
     .filter((entry) => entry.isFile() && /\.tsx?$/.test(entry.name))
     .map((entry) => path.join(entry.parentPath, entry.name))
     .sort()
     .map((file) => ({ location: path.relative(root, file), source: fs.readFileSync(file, "utf8") }));
-  const messages = extractMessages(files);
+  return extractMessages(files);
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const root = path.resolve(import.meta.dirname, "../..");
+  const destination = path.join(root, "src/ui/shared/localization/messages.en.json");
+  const messages = extractProjectMessages(root);
   const output = JSON.stringify(messages, null, 2) + "\n";
   switch (process.argv[2]) {
     case "extract":
