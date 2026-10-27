@@ -240,9 +240,9 @@ describe("artwork-first inspection", () => {
       expect(tooltip.textContent).toContain(enemy.name);
       expect(tooltip.textContent).not.toContain("Thorns 2");
       expect(tooltip.textContent).toBe(
-        `${enemy.name}${species(enemy.species).trait}${species(enemy.species).passiveTiers[0].description}`,
+        `${enemy.name}${species(enemy.species).trait}${species(enemy.species).passiveTiers[0].description}Health ${enemy.health}/${enemy.maxHealth}`,
       );
-      expect(tooltip.textContent).not.toContain(`${enemy.health}/${enemy.maxHealth}`);
+      expect(tooltip.textContent).toContain(`Health ${enemy.health}/${enemy.maxHealth}`);
       expect(tooltip.textContent).not.toContain("Ember Charge");
       expect(session.store.getState().game).toBe(before);
     } finally {

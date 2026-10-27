@@ -12,9 +12,11 @@
   color: var(--keyword-physical);
 }
 [data-damage-type="poison"],
-[data-combat-tone="poison"],
-[data-keyword="poison"] {
+[data-combat-tone="poison"] {
   color: var(--keyword-poison);
+}
+[data-keyword="poison"] {
+  color: var(--keyword-poison-text);
 }
 [data-damage-type="water"],
 [data-combat-tone="water"],
@@ -73,9 +75,11 @@
   color: var(--keyword-freeze);
 }
 [data-damage-type="bleed"],
-[data-combat-tone="bleed"],
-[data-keyword="bleed"] {
+[data-combat-tone="bleed"] {
   color: var(--keyword-bleed);
+}
+[data-keyword="bleed"] {
+  color: var(--keyword-bleed-text);
 }
 [data-damage-type="stun"],
 [data-combat-tone="stun"],

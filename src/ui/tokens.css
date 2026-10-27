@@ -224,6 +224,7 @@
   --art-action-ratio: 3 / 4;
   --keyword-physical: #cbd5e1;
   --keyword-poison: #15803d;
+  --keyword-poison-text: #2f9e53;
   --keyword-nature: #059669;
   --keyword-light: #fde68a;
   --keyword-health: #f87171;
@@ -239,6 +240,7 @@
   --keyword-burn: #fb923c;
   --keyword-freeze: #67e8f9;
   --keyword-bleed: #dc2626;
+  --keyword-bleed-text: #ef4444;
   --keyword-stun: #fcd34d;
   --control-star-outline: #d97706;
   --control-crystal-outline: #06b6d4;

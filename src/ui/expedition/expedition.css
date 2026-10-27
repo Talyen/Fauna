@@ -218,6 +218,29 @@
   min-width: 0;
   text-align: center;
 }
+.reward-choice-content:has(.reward-option[data-committed="true"])
+  .reward-option:not([data-committed="true"]) {
+  opacity: 0.55;
+}
+.reward-option[data-committed="true"] :is(.creature-card, .boon-choice) {
+  animation: reward-commit 200ms ease-out both;
+}
+@keyframes reward-commit {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.22);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reward-option[data-committed="true"] :is(.creature-card, .boon-choice) {
+    animation: none;
+  }
+}
 .boon-options .reward-option {
   width: var(--art-landscape-width);
 }
@@ -391,6 +414,7 @@
 .merchant-wallet {
   display: flex;
   align-items: center;
+  white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 .merchant-wallet svg {

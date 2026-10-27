@@ -36,6 +36,8 @@
   color: var(--gold-pale);
   font-size: var(--text-body);
   font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: var(--screen-item-gap);
@@ -94,8 +96,6 @@
 /* Settings hierarchy: title, section, option, supporting text. */
 .settings-screen h1 {
   font-size: var(--text-title);
-  font-weight: 600;
-  color: var(--foreground);
 }
 
 .settings-panel[data-state="inactive"] {
