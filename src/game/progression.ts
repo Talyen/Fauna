@@ -150,7 +150,8 @@ export function starterOfferPool(
   pool: readonly SpeciesId[] = starterSpecies(state),
 ): SpeciesId[] {
   if (!state.selected.length) return [...pool];
-  return pool.filter((kind) => !state.selected.includes(kind) && !species(kind).legendary);
+  const selected = new Set(state.selected);
+  return pool.filter((kind) => !selected.has(kind) && !species(kind).legendary);
 }
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {

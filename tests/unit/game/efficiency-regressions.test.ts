@@ -22,7 +22,7 @@ import { battleBenefitFacts } from "../../../src/application/battle-benefits";
 import * as engine from "../../../src/game/engine";
 import { projectPlay } from "../../../src/game/preview";
 import { cardKeywords, passiveAmount } from "../../../src/game/progression";
-import { definition, SPECIES } from "../../../src/game/content";
+import { BOONS, definition, findBoon, speciesCards, SPECIES } from "../../../src/game/content";
 import { capabilities, offenseValue } from "../../../src/application/team-policy";
 import {
   availablePlays,
@@ -45,6 +45,9 @@ import { chance } from "../../../src/game/chance";
 import { newestHeads } from "../../../src/application/cloud-policy";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createMessageReader } from "../../../src/ui/shared/localization/messages";
+import { immediateArtwork, likelyArtwork } from "../../../src/ui/startup/artwork";
+import { assetUrl } from "../../../src/ui/shared/assets";
+import { playPreviewModel } from "../../../src/ui/battle/play-preview-model";
 
 it("keeps automatic turn completion aligned with legal card commands", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
@@ -798,4 +801,44 @@ it("rebuilds permanent cards in kit order while retaining the matching original"
   expect(state.cards.map((card) => card.id)).toEqual(expected);
   expect(state.cards[0]).toBe(retained);
   expect(state.cards[0]!.level).toBe(2);
+});
+
+it("keeps authored Boon lookup and artwork prefetch order", () => {
+  for (const entry of BOONS) expect(findBoon(entry.id)).toBe(entry);
+  expect(findBoon(null)).toBeUndefined();
+  expect(findBoon("missing")).toBeUndefined();
+  for (const state of [engine.createGame(42), requireBattle(teamRun(42, ["mossguard", "prismram"]))]) {
+    const visible = new Set(immediateArtwork(state));
+    const definitions =
+      state.phase === "draft"
+        ? (state.selected.length ? state.selected : state.starterOffers).flatMap(speciesCards)
+        : state.cards.map((card) => definition(card.definitionId));
+    const expected = [
+      ...new Set(definitions.map((card) => assetUrl(card.artwork ?? `action.${card.species}`))),
+    ]
+      .filter((url) => !visible.has(url))
+      .slice(0, 8);
+    expect(likelyArtwork(state)).toEqual(expected);
+  }
+});
+
+it("keeps single-world forecasts identical to repeated equivalent worlds", () => {
+  const state = requireBattle(teamRun(42, ["mossguard", "prismram"]));
+  const outcome = {
+    accepted: true as const,
+    state,
+    events: [{ kind: "status" as const, amount: 1, text: "Notice" }],
+  };
+  const single = playPreviewModel(
+    state,
+    { kind: "complete", outcomes: [outcome], replays: 1 },
+    state.team[0]!.id,
+  );
+  const repeated = playPreviewModel(
+    state,
+    { kind: "complete", outcomes: [outcome, outcome], replays: 2 },
+    state.team[0]!.id,
+  );
+  expect(single).toEqual(repeated);
+  expect(single.messages).toEqual(["Notice"]);
 });

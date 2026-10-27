@@ -125,6 +125,7 @@ export function BattleScreen({
     enemyRow,
     playerRow,
     visibleHand,
+    cardsById,
     legalTargets,
     setTarget,
     leaveTarget,
@@ -136,7 +137,10 @@ export function BattleScreen({
   const battle = game.battle;
   const preview = usePlayPreview(game, selected, target);
   const model = preview ?? emptyPreview;
-  const recipientUnit = [...enemyRow, ...playerRow, ...game.reserves].find((unit) => unit.id === target);
+  const recipientUnit =
+    enemyRow.find((unit) => unit.id === target) ??
+    playerRow.find((unit) => unit.id === target) ??
+    game.reserves.find((unit) => unit.id === target);
   const recipient = recipientUnit ? unitName(recipientUnit) : undefined;
   const acting = card ? cardActor(game, card) : undefined;
   const line = useTargetLine(board, acting?.id, selected, target, allyTarget);
@@ -347,7 +351,7 @@ export function BattleScreen({
           <section className="hand-section" aria-label={i18n.message("battle.actionHand", "Action hand")}>
             <div className="hand">
               {visibleHand.map((id, index, hand) => {
-                const card = game.cards.find((c) => c.id === id)!,
+                const card = cardsById.get(id)!,
                   owner = cardActor(game, card)!,
                   admission = inspectCardPlay(game, card.id);
                 return (

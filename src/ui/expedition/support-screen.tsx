@@ -4,7 +4,7 @@ import { useLayoutEffect, useRef } from "react";
 import { Coins } from "lucide-react";
 import type { Command, GameState, StateAt } from "../../game/types";
 import { canVisitMerchant } from "../../game/destinations";
-import { BOONS } from "../../game/content";
+import { findBoon } from "../../game/content";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";
@@ -29,7 +29,7 @@ export function SupportOffer({ game, send }: { game: GameState; send: (c: Comman
 
 export function SupportScreen({ game, send }: { game: StateAt<"support">; send: (c: Command) => boolean }) {
   const visit = game.support;
-  const purchased = BOONS.find((boon) => boon.id === visit.purchased);
+  const purchased = findBoon(visit.purchased);
   const leave = useRef<HTMLButtonElement>(null);
   useLayoutEffect(() => {
     if (visit.purchased && document.documentElement.dataset.input !== "pointer") leave.current?.focus();
@@ -68,7 +68,7 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
           </p>
           <section className="boon-options merchant-stock" aria-label="Boon Merchant stock" data-nav-row>
             {visit.stock.map((slot) => {
-              const boon = BOONS.find((b) => b.id === slot.boon)!;
+              const boon = findBoon(slot.boon)!;
               const unavailable = visit.resolved || game.currency < slot.price;
               const reason = visit.resolved
                 ? "Purchase used"
