@@ -1379,6 +1379,114 @@
     "sourceHash": "ebd556352efcac5c386465ca6734cf40051bb154b6ab4fb0792fded9d3dba711",
     "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.parhelion.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "6c1525245607428ed5d725c026293a55be714e8abd77835d76e2e06f109e52c9",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "6635b1e113ea12b5003ce3ec4535d5716475ae4398622a3ba555daa75671d81d",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "4d3e68178b829d439adb9b84831aa837ee94d216602d437402908e7f9cfb4a10",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "653b5379f036fd754af6dfd8f1c7e0ecf3a87a6894fe19491c0d8c7de18aca06",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "2d4bf6f8e7a0e970f61fe70471f722ada6a0649ccc298ed1ba6d0f6699bb55a4",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "cc324436cdb90c94a26d7afa89f573158c43977537979debf26b75b1a09bd9d3",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.prismram.passive.0.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "5f9790d8fbc44f2d22ee845a3ad614e7b5aabc3b6d712701782dca3727df4cfa",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.1.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "48550844df758d087e5ea47e2f86dbc10402c83e36c620bb8a72b44627dd352b",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.2.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "8242cad26a8dca668018783b4aaea726ae76c50a15d6168013ced0ba3d4262c8",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.3.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "13c5a39073c7a81d2e8066c67947f19d0a14250788d8353385f8e6643cf9d65c",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.4.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "2251c07a75ad4cc5debc1bea29a9ddd1d6097064099070cf061a324d330b577d",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.5.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "4a5e98e42fe4f641964c98de81f236e30f1cc7a92acc3a81b6c19ab3136b9b95",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.reverie.passive.0.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "ae6d5c299d8697ee8312729a5025e6a2efe563c1b979bfff7bcf1437149b0cc0",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.1.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "fa780cfacf3adc83b2cfa1002305c4d02f5f1e22aab78b9581aab76d5866cffe",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.2.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "80b0e46dc43db5df0e06eb6c3422aeeb754dfd294aa05226fa88e380f9853fd6",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.3.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "b5cf5e40ac3ec155d86291e08ac480827cf8950f7735cad9c3678be8270ea933",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.4.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "8216ca2fa2ef7fa0fadede16f0f77e625b561561ada1399a64e910e4eb15e907",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.5.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "975c56f9139e854228a93883368a3dd212979d3b4793c2b7cfdbbfc11f46fc7e",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1486,6 +1594,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "97f7c568936227fd61aa93d1cc734bc67e3d11f0fd72f97db24d848a2646d828",
     "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.wisterelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "262869f64f372e644f2b1f49e9b99186d05c6a41a638196e49230dd9a21df2bf",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "c38b09e2afb6fce918fb75d334b6399dfaa79081d0304ed0ab32b703e5f0ccfc",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "af7d88e9b07c937143fc397cc8d8ec386df07bc8346bf3c502f47d78f6e34ae8",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "618779bca43a48bd6a965c6c47453e011591e012b2de0df5f06e1a78277cb88a",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "b6b4261c1d1aee02904c563f0b4b11617e601ceca606a3a314ac2c1eda7a74dd",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "d89a29b452a31453585efd6b2dacf539daf80eccf319e6293e41454426fb88dd",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,

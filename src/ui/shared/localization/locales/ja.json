@@ -1379,6 +1379,114 @@
     "sourceHash": "189bf866fba0362ca385d156b14f806dee3120ced5d9b729779ea30defbe6b87",
     "text": "1ターンおきに<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.parhelion.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "4df857dbe189d9f365fe7cd8f75ad6d098a99975d3b0ecd5678a0fddbbb1aadf",
+    "text": "<keyword1>凍結</keyword1>の蓄積を<keyword0>浄化</keyword0>すると<keyword2>体力</keyword2>を{{value0}}回復"
+  },
+  "content.species.parhelion.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "c7298834766fa2caceb18422109c8ab86a7b6007a1e2b2c679eff09619984588",
+    "text": "<keyword1>凍結</keyword1>の蓄積を<keyword0>浄化</keyword0>すると<keyword2>体力</keyword2>を{{value0}}回復"
+  },
+  "content.species.parhelion.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "5870fc40b124315e1ecd62c11c0de21c4ecc1b694e50449ba7a526d7086b7ec8",
+    "text": "<keyword1>凍結</keyword1>の蓄積を<keyword0>浄化</keyword0>すると<keyword2>体力</keyword2>を{{value0}}回復"
+  },
+  "content.species.parhelion.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "a85afb32b976c3b03253b948f195ceefa4dc8efd980a4b1c0ea7245e520b76b8",
+    "text": "<keyword1>凍結</keyword1>の蓄積を<keyword0>浄化</keyword0>すると<keyword2>体力</keyword2>を{{value0}}回復"
+  },
+  "content.species.parhelion.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "20129816a38f575d363939899ee1c91c6d3a31e0b8cf7777443269f55afe57c4",
+    "text": "<keyword1>凍結</keyword1>の蓄積を<keyword0>浄化</keyword0>すると<keyword2>体力</keyword2>を{{value0}}回復"
+  },
+  "content.species.parhelion.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "b77e5fdacd9e3f1a2a043f672b1212510e1184939577e804d6bb0242f57dea5c",
+    "text": "<keyword1>凍結</keyword1>の蓄積を<keyword0>浄化</keyword0>すると<keyword2>体力</keyword2>を{{value0}}回復"
+  },
+  "content.species.prismram.passive.0.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "cd4cc2439f16ee442eda4c83e958fb116536347d1af7d8abd16632218bf1d023",
+    "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
+  },
+  "content.species.prismram.passive.1.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "bec0363c6fc6e00d8e6e6a54ccda98a283598e37d08ee3948498c09f6d1b3e53",
+    "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
+  },
+  "content.species.prismram.passive.2.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "a0bdad7d97a2d76f4e14c95d1d337f6d61f5101fbe2a0e34c8224a4ca90ae0a6",
+    "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
+  },
+  "content.species.prismram.passive.3.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "d87893d6e7b5bcb355ed02ff3a4c3bd23b4de1ff18e2702e48d55e32546eaa00",
+    "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
+  },
+  "content.species.prismram.passive.4.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "062234699a883c032178c204751efbd26869ea37c2adf68bbf73934c33b36ecd",
+    "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
+  },
+  "content.species.prismram.passive.5.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "d06c13021de0539af1c9d01af7d5126bf6fd6bc6bde8d9368624ce29e49ed9f0",
+    "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
+  },
+  "content.species.reverie.passive.0.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "336a5b234ebb5a1914b6284fbcca77e320477223da1104b2a9784523488803bc",
+    "text": "自分のターン終了時、カードを使わなかった味方はそれぞれ<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.reverie.passive.1.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "603c39a658d7c5aa4fd601518a9636d298fdc37bcc085758d66e1b1f11a26929",
+    "text": "自分のターン終了時、カードを使わなかった味方はそれぞれ<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.reverie.passive.2.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "c4f591defb703f91bd3f0e24b2872625779805a493a63886933e65db1e2ceb16",
+    "text": "自分のターン終了時、カードを使わなかった味方はそれぞれ<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.reverie.passive.3.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "6929bbb618db7303d3c3fc9a2ffe231faa0e03b4128dd87f4447265ba4b86d2b",
+    "text": "自分のターン終了時、カードを使わなかった味方はそれぞれ<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.reverie.passive.4.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "7d4f32d5cf8ca4656a73eaf7c34e15161138955aa19f564d5ce6243fc0143ec5",
+    "text": "自分のターン終了時、カードを使わなかった味方はそれぞれ<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.reverie.passive.5.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "1e5f5f3f359d50e17d6d146b6dc7b317ea47417b7d8cdd18e6e6b1304b0d5a8f",
+    "text": "自分のターン終了時、カードを使わなかった味方はそれぞれ<keyword0>体力</keyword0>を{{value0}}回復"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1486,6 +1594,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "6ced9ca59005c6dbd02630d9f95f702ae0abd317ad380b839fce2ab38ec04177",
     "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.wisterelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "445ba3c20c14b72671841dd4b1b0dcd5d0a6a4caa01d48d123ba6e1449e0b2d4",
+    "text": "捨て札からカードを引くと、その所有者の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.wisterelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "7ce29469316a3d365ee87d26513ccf4f8791ceebb1d76b583908a5d211c72ecd",
+    "text": "捨て札からカードを引くと、その所有者の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.wisterelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "e701b4e131fd01d83ae0c4d95ab3185349cf061825c861f4d0c461a3024cfdfe",
+    "text": "捨て札からカードを引くと、その所有者の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.wisterelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "50d8a42842716e39da618a4260a2c817feab75911fe3a5bc04eb85435100ebb6",
+    "text": "捨て札からカードを引くと、その所有者の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.wisterelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "c7e613b323cafbc2faa1a9466a221e3dfd23dbad678db89243d7d746a719db83",
+    "text": "捨て札からカードを引くと、その所有者の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.wisterelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "c7c587f79001eb1e61cd639c436439acd2d00968b738df9ff0654cf491547765",
+    "text": "捨て札からカードを引くと、その所有者の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,

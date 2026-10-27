@@ -1379,6 +1379,114 @@
     "sourceHash": "81dee4257325ac29b691f7a88efdffbe2578ae491d00a2521958ea4dc0f2228f",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a cada dois turnos"
   },
+  "content.species.parhelion.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "26a9b17896a9f3180426bd6bedf3891508f0498ee4e0371eadb561a486fae691",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "e48fe00767c47e83e7a8845a102b25f334ae70e43aabbe2f59453eedd7f8ecdc",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "685f0dfda97bec1ed59c802322ad7f91c1927ece1be99c22ae3605b35272ba94",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "df8298256b15a514bf63a67ea2c29fdf786f85dc173e8c907a5733455de79c29",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "08fce52422847f064b6b537eaafbc4176e72ee611ad1503ed0b76736a94f0777",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "475184902169d4665d1495a8a9e6cc6411dcbf8c943093de797ad7b40573abc8",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.prismram.passive.0.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "732bc4734c7e3bb9587f1f7e3400b5a9423fe602370309915761b059170f26c8",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.1.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "25c2b400e1a281742f67001c5371f2ef073362992c141cc26f3582927984f502",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.2.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "ddfa79fb2be0b56faac2bf71967d3b09fc8675473b394e505151aed1de8e015f",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.3.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "a7a58b17183cf0e878e7e4da8c3f3c7724b2b4912927ae9af75943d615b58263",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.4.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "79bf8aa4664a0f16dc63daa4d1f468748798f951e734f2044532e4a0123fa014",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.5.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "d47b177d2b06cc682b40e2079e70d2509b84c1c9cb914a6e0eb29cbc76e73737",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.reverie.passive.0.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "ebab7042a9455693aaf1881bbb41657591e579af96ffb24900b57d26c2bb5cf2",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.1.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "954fe234de0d296857f7b431db9ca0c8c2eb429c140a587762579537305769ca",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.2.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "376afbad25ba093f14de3ca527e88ab99503417709ff3043daf5e2112178bcc4",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.3.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "0c83ba5f7190010e89c6b1b1986dd7ad4158ec469d50e43865b132e8d16475d6",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.4.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "64e12ca795c37acb9d9759534c1c6058a849a29cbcb6c5629e05a59f650b044a",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.5.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "991afe5f1bd509951de263ce8f1180b6a687520ba2d1a545d367fd39f8e5301f",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1486,6 +1594,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "5f7d3ea23e9a3b179c3c82b989c56dca8fb59669130e9df0bf6f256626778b6d",
     "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.species.wisterelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "b11190dc749f6ad37d06bc126ff6a5e9f8d19057dca8fce780c571dd49989911",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "1cda005da6730cdc55b905ff1547ed423cb906aa4717eb3db60a863df9394778",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "69c3d73af6eb107e13b35d65b0be2ce622502ac4f5651802c80b9876a64259ed",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "dc14194f87fc8629849a300b4ce955c5a4dde3e120e18f84880006a14c86538f",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "1326a2ac0b93471320565a30ebe791f788df93c83a40c473b33426f5db264628",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "5f0fb8f15541368069c321b90a50e8007177a1b2e7b4ddf1e357bdc53f1f163c",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
