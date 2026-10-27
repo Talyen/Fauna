@@ -249,8 +249,8 @@ export function BattleScreen({
                     def.species === null
                       ? i18n.message("battle.food", "Food")
                       : acting
-                        ? species(acting.species).name
-                        : species(def.species).name,
+                        ? i18n.content(`content.species.${acting.species}.name`, species(acting.species).name)
+                        : i18n.content(`content.species.${def.species}.name`, species(def.species).name),
                   target:
                     recipient ??
                     (enemyTarget
@@ -267,8 +267,8 @@ export function BattleScreen({
                   def.species === null
                     ? i18n.message("battle.food", "Food")
                     : acting
-                      ? species(acting.species).name
-                      : species(def.species).name
+                      ? i18n.content(`content.species.${acting.species}.name`, species(acting.species).name)
+                      : i18n.content(`content.species.${def.species}.name`, species(def.species).name)
                 }
                 actor={acting}
                 modifiers={game}
@@ -359,7 +359,7 @@ export function BattleScreen({
                       ownerName={
                         card.ownerId === null
                           ? i18n.message("battle.food", "Food")
-                          : species(owner.species).name
+                          : i18n.content(`content.species.${owner.species}.name`, species(owner.species).name)
                       }
                       selected={selected === id}
                       disabled={!admission.allowed}

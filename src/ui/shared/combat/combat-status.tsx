@@ -1,8 +1,9 @@
+import { useMessages } from "../localization/message-context";
 import { EffectButton } from "../effects/treatments";
 import { visualKeywords } from "../effects/palettes";
 import { PagedItems } from "../navigation/pagination";
 import { returnFocus } from "../navigation/focus";
-import { KeywordText } from "../keyword-text";
+import { useStatusPresentation } from "./status-presentation";
 import { motionValue } from "../motion-values";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import { Hourglass, Skull, Timer } from "lucide-react";
@@ -22,6 +23,7 @@ export function CombatStatus({
   sharedDodge?: number;
   details?: boolean;
 }) {
+  const i18n = useMessages();
   const entries = combatStatuses(combat, sharedDodge);
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
@@ -73,70 +75,79 @@ export function CombatStatus({
   if (details)
     return (
       <div className="combat-status-details">
-        {entries.map((s) => (
-          <p key={s.id}>
-            <KeywordText text={s.text} />
-          </p>
+        {entries.map((status) => (
+          <StatusDetail key={status.id} status={status} />
         ))}
       </div>
     );
   if (!shown.length) return null;
-  const tile = (s: AnimatedStatus) => {
-    const Icon = s.id === "grace" ? Skull : s.id === "cooldown" ? Timer : Hourglass;
-    return (
-      <Tooltip key={s.id}>
-        <TooltipTrigger asChild>
-          <EffectButton
-            effectKeywords={
-              s.id === "controlled" && combat?.controlled
-                ? [combat.controlled]
-                : isKeywordId(s.id)
-                  ? [s.id]
-                  : visualKeywords(s.text)
-            }
-            effectTone={s.id === "grace" ? "death" : undefined}
-            variant="ghost"
-            size="icon"
-            className="status-icon"
-            data-status-id={s.id}
-            aria-label={s.text}
-            aria-hidden={s.exit || undefined}
-            disabled={s.exit}
-            data-exiting={s.exit || undefined}
-            data-keyword={s.id}
-          >
-            <span
-              data-keyword={s.id}
-              key={s.count}
-              className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
-            >
-              {s.id === "nullifyFreeze" ? (
-                <KeywordIcon id="nullify" />
-              ) : s.id === "reflectBurn" ? (
-                <KeywordIcon id="reflect" />
-              ) : isKeywordId(s.id) ? (
-                <KeywordIcon id={s.id} />
-              ) : (
-                <Icon aria-hidden="true" />
-              )}
-            </span>
-          </EffectButton>
-        </TooltipTrigger>
-        <TooltipContent>
-          <KeywordText text={s.text} />
-        </TooltipContent>
-      </Tooltip>
-    );
-  };
+  const tile = (status: AnimatedStatus) => <StatusTile key={status.id} status={status} combat={combat} />;
   return (
-    <div ref={root} className="combat-status" aria-label="Combat effects">
+    <div ref={root} className="combat-status" aria-label={i18n.message("battle.effects", "Combat effects")}>
       {shown.length > 3 ? (
-        <PagedItems items={shown} pageSize={1} className="combat-effect-page" label="Combat effect pages">
+        <PagedItems
+          items={shown}
+          pageSize={1}
+          className="combat-effect-page"
+          label={i18n.message("battle.effectPages", "Combat effect pages")}
+        >
           {tile}
         </PagedItems>
       ) : (
         shown.map(tile)
       )}
     </div>
+  );
+}
+
+function StatusDetail({ status }: { status: Status }) {
+  const presentation = useStatusPresentation(status);
+  return <p>{presentation.content}</p>;
+}
+
+function StatusTile({ status: s, combat }: { status: AnimatedStatus; combat?: CombatState }) {
+  const presentation = useStatusPresentation(s);
+  const Icon = s.id === "grace" ? Skull : s.id === "cooldown" ? Timer : Hourglass;
+  return (
+    <Tooltip key={s.id}>
+      <TooltipTrigger asChild>
+        <EffectButton
+          effectKeywords={
+            s.id === "controlled" && combat?.controlled
+              ? [combat.controlled]
+              : isKeywordId(s.id)
+                ? [s.id]
+                : visualKeywords(s.text)
+          }
+          effectTone={s.id === "grace" ? "death" : undefined}
+          variant="ghost"
+          size="icon"
+          className="status-icon"
+          data-status-id={s.id}
+          aria-label={presentation.text}
+          aria-hidden={s.exit || undefined}
+          disabled={s.exit}
+          data-exiting={s.exit || undefined}
+          data-keyword={s.id}
+        >
+          <span
+            data-keyword={s.id}
+            key={s.count}
+            className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
+          >
+            {s.id === "nullifyFreeze" ? (
+              <KeywordIcon id="nullify" />
+            ) : s.id === "reflectBurn" ? (
+              <KeywordIcon id="reflect" />
+            ) : isKeywordId(s.id) ? (
+              <KeywordIcon id={s.id} />
+            ) : (
+              <Icon aria-hidden="true" />
+            )}
+          </span>
+        </EffectButton>
+      </TooltipTrigger>
+      <TooltipContent>{presentation.content}</TooltipContent>
+    </Tooltip>
   );
 }

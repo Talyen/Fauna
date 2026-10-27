@@ -1,3 +1,6 @@
+import { cardRuleId } from "../localization/card-rule-id";
+import { useRuleText } from "../localization/rule-catalog";
+import { useMessages } from "../localization/message-context";
 import { useEffectBaseline } from "../effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../effects/palettes";
 import { CombatStatus } from "../combat/combat-status";
@@ -79,6 +82,7 @@ export function CreatureCard({
   combat,
   sharedDodge = 0,
 }: CreatureProps) {
+  const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const info = species(kind);
   useEffectBaseline(selected ? effectPalette(creatureKeywords(kind, progression)) : null, 1);
@@ -94,7 +98,7 @@ export function CreatureCard({
       className={[selected ? "selected" : "", invalidTarget ? "invalid-target" : ""].join(" ")}
       data-species={kind}
       data-enemy-id={enemyId}
-      aria-label={label ?? info.name}
+      aria-label={label ?? i18n.content(`content.species.${kind}.name`, info.name)}
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
       onClick={(event) => {
@@ -163,6 +167,7 @@ export function AllyCard({
   creature,
   ...props
 }: { creature: Creature | Enemy } & Omit<CreatureProps, "kind" | "health" | "block">) {
+  const i18n = useMessages();
   return (
     <CreatureCard
       actorId={creature.id}
@@ -172,7 +177,7 @@ export function AllyCard({
       tooltipContent={
         "minion" in creature && creature.minion ? (
           <div className="card-details">
-            <strong>Echo</strong>
+            <strong>{i18n.message("creature.echo", "Echo")}</strong>
           </div>
         ) : undefined
       }
@@ -188,6 +193,7 @@ export function EnemyCard({
   enemy,
   ...props
 }: { enemy: Enemy } & Omit<CreatureProps, "kind" | "health" | "maxHealth" | "name">) {
+  const i18n = useMessages();
   return (
     <CreatureCard
       kind={enemy.species}
@@ -195,7 +201,7 @@ export function EnemyCard({
       tooltipContent={
         enemy.minion ? (
           <div className="card-details">
-            <strong>Echo</strong>
+            <strong>{i18n.message("creature.echo", "Echo")}</strong>
           </div>
         ) : undefined
       }
@@ -242,9 +248,29 @@ export function ActionCard({
   tooltips?: boolean;
   onDenied?: (element: HTMLElement) => void;
 }) {
+  const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const { def, value } = actionDisplay(card, actor, modifiers, enemy, enemyValue);
   const effectText = cardText(def, card.level, value, enemyPower, modifiers);
+  const effectLabel = useRuleText(effectText, cardRuleId(def, modifiers, effectText))
+    .map((part) => part.text)
+    .join("");
+  const name = i18n.content(`content.card.${def.id}.name`, def.name);
+  const nameLabel = card.level
+    ? i18n.message("card.upgradedName", "{{name}} +{{level}}", { name, level: card.level })
+    : name;
+  const accessibleLabel = enemy
+    ? i18n.message("card.enemyActionLabel", "{{name}}, {{owner}}, {{effect}}", {
+        name: nameLabel,
+        owner: ownerName,
+        effect: effectLabel,
+      })
+    : i18n.message("card.actionLabel", "{{name}}, {{owner}}, {{mana}} mana, {{effect}}", {
+        name: nameLabel,
+        owner: ownerName,
+        mana: modifiers ? cardCost(card, modifiers) : def.cost,
+        effect: effectLabel,
+      });
   useEffectBaseline(selected ? effectPalette(visualKeywords(effectText)) : null, 1);
   const artwork = (
     <ArtCard
@@ -257,10 +283,7 @@ export function ActionCard({
       data-card-id={card.id}
       data-effect={def.effect}
       data-consume={def.consume || undefined}
-      aria-label={
-        label ??
-        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${modifiers ? cardCost(card, modifiers) : def.cost} mana, `}${effectText}`
-      }
+      aria-label={label ?? accessibleLabel}
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
       onFocus={(event) => {

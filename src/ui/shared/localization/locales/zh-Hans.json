@@ -1,0 +1,1544 @@
+{
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "bb12accce3043cbfe194a5fc7241276ec8400993f7f34ef80385d1b7d0d48daa",
+    "text": "行动手牌"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "c7bccf721337d3b7d6e46c9b9195c1f76e979459cb9c26fea4e3cfc5626e0f80",
+    "text": "自动战斗"
+  },
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "7e1e3455b886160ff38f5c0537858a96777fc3a46e3dbc5520e5f03492745a05",
+    "text": "{{name}}（替补）"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "9cffb958ef75385da25e8726c336669fca018270d6c1f87395afbbe0924a2e36",
+    "text": "战场"
+  },
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "021a5ce6d170d5532aacbd94314cff2bcb667f87afb7d3f9c6f8796fcaf5b2e0",
+    "text": "格挡 {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "3f5d95808b7877bc5c404e1b4f00a5b2c0436e993c5c2a120ddbbb8ebb3d87f0",
+    "text": "格挡从 {{previous}} 变为 {{current}}"
+  },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "145f188c25c630e72dfb32a2fe109835df487e5131403b50527488e524be7636",
+    "text": "战斗卡牌和控制"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "6740e80b12f1208b7bf7da53769bad16fa7e284b70c183192f85d0741671b7e6",
+    "text": "选择一名盟友"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "f161254b75aeac10a175137ef2fb0b724b6c063facb06f0cd7342e8f4c7b1b19",
+    "text": "选择一名替补"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "88e55a552c754ec9a7ea004e2b3f66df9ce7e9ed897905e1de0fd0afeda28799",
+    "text": "选择一名敌人"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "3f1cc622c5ff1d2f8cdaf4f6999e15c277d035763740443caca5c09114988437",
+    "text": "{{amount}} 点{{type}}伤害"
+  },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "de09d4225852b5f7701119057f3ee4fcf05c2996ce47d874d43a1fd8f0fc6984",
+    "text": "战斗效果页面"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "c46d82e1741df3f6d26c7185a9d2d6e267a96416dfdb2f679b2269de3fa0b4e5",
+    "text": "战斗效果"
+  },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "5b80f008f24350f2552a586709371139714bd44dc5ac50eb1690f70e3c07e605",
+    "text": "结束回合"
+  },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "da4856d0a18ebeab4b41dd9232b25dc31ff652f3aa55f9a3ed8b375601d975f5",
+    "text": "结束回合 · {{prompt}}"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "ad196ebc180a5ac888aef19ac9a159703f9ec876538be13f646af1d18b1b3d4e",
+    "text": "敌方队列"
+  },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "c6f25bba2a0d64cd12826f8915bbaf8f1baf6643cc0a8c96c817dfd79d17a9be",
+    "text": "食物"
+  },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "a34e84bb7c762f55fa073e0c4f1ed40ffb18a68020251dddce2669aeca5ea4e4",
+    "text": "查看弃牌堆"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "1929acf4a61eb3d759efb01878eda30b26ad3f7ac24cdf1e05ea4516e9e0cc5b",
+    "text": "查看抽牌堆"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "b92ded67ee66fc4663df36fc87d8142e7a2dd77bb18df1cc5f506306c725c174",
+    "text": "击倒"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "a2e4c022cb4cda5720503372eae452b6088616f62cac3096be473224c2f26697",
+    "text": "法力 {{mana}} / {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "6d2ce81528078c9bcf90106669e55754f3a3ac2f2301c7f76ec803c508cc71f6",
+    "text": "下一张卡牌 ×2"
+  },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "b8c0584f8adb00632c34b25222cfbde80f436eb48d9cc62a5d8662986329628b",
+    "text": "打开菜单"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "09dc1f933db9e0aa7e537deaf5c9fb7cdf785ab51a8dd9d87358f0b41625ea32",
+    "text": "我方队列"
+  },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "cfff368e015d7adcd8061fc6a935bcaa86be21cc61900a6673aeb8283cc42589",
+    "text": "复活替补{{name}}"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "642508755ae3b58298844bd8434be0e01088f32d4e90bb7186f0faced6d949f4",
+    "text": "跳过战斗"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "a3ef3ff9b70d9422d2aa02c5ccfe65c80f43c207481d268655bf10cfb500eca4",
+    "text": "将替补{{name}}换上场"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "4bcfc56b30abcbece0125381329c78fb1d62b26b6bf553e553825c01073b09a0",
+    "text": "选择{{name}}为目标"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "03be546630e2b6d259a79f728068c15f93e2c6de9e61304e9ffaf8d4fe05f721",
+    "text": "{{owner}} · {{target}}"
+  },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "bd7f3d6a7ec28fed532cfc0fca3aa5e74159fb21f738b0b7f7ab01c703e724b1",
+    "text": "{{name}}的生命"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "359eae4370469690076f229e0b642c5ae303f1b9e49047f30a7b061d4f5f19c6",
+    "text": "篝火"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "11538a483984a4c60d00ff24c9bd15000118c14a8625a774a6335c6b14a0762c",
+    "text": "休息恢复页面"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "046d8ce6bf38fef0cfe44ebc7f7e0596045246818550797ec81228b6d2cb180f",
+    "text": "休息恢复"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "16c8245211812fd4625b1908626da132f66f397ad687a0b2adacab3dc65767f4",
+    "text": "休息"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "2f4eba67deedc1b6516240c9516307228d3562dea8bf95d52b35a691f11b9197",
+    "text": "前往篝火"
+  },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "3e7f1cabf47a780c5c894e194f9d6fdeb2027c4218b697cbb06d764d3e8c5536",
+    "text": "{{name}}，{{owner}}，{{mana}} 点法力，{{effect}}"
+  },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "79b4b8572c542a3f26da1a5390090f376f27ab498e380eaea3da8f4f3fea598d",
+    "text": "复制品 · 本场战斗有效"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "40428e6ed8b278eaf740359f1c34923695c212d65fb8e14e176da95c1ceb0be2",
+    "text": "{{name}}，{{owner}}，{{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "ba814e3c469cc951d4875fbf25d5fc5d1f69d177b15cf0fa93484cf29d562d22",
+    "text": "{{name}} +{{level}}"
+  },
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "fa20407d8c2f40e7db9e834bc0c4b295d24e8c8ff6df5dd492b24223daf9398c",
+    "text": "全部"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "6bda57f283d2a73e2ae08d1a49280c8c48de1d70a236fc95d19561adcfd81897",
+    "text": "已收集"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "9f72b8b03dead1e499cc23961ed573098ee2d20fef7a0098d1b89387b3ebbdd2",
+    "text": "此视图中没有生物"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "1dcdd4fec608e53d3b44a24903bbfbe88cc706b6c30a7d42e66b07ab589b3dde",
+    "text": "收藏筛选"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
+    "text": "查看{{name}}"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "000d85fc98e6578a6cdeba4ad5d173cf38b82e2380d2c7a3a4d6fd052436d4fe",
+    "text": "未解锁的物种"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "64e9269ae29322779716c23ca7560fcb5312d2dd2c84c1fe4d3a4b561af0f9ed",
+    "text": "收藏页面"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "d225fb3a55baeb45db3accb482c5e3d31c0c8f12a3b1be2d6bd00c8d6834aa9f",
+    "text": "{{name}}：{{rank}} / {{maximum}} 星"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "08b7f2067ffe90d5e4dafdbff61184c588db331d404efa8638ece95592d4a8d2",
+    "text": "未收集"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "604f98d5003ba57802913ccf3818130cf31f74ece361d04e556883ced4dcb799",
+    "text": "取消"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "4b4fb2b8421ca2d9b5e9462797c23b087695fbbf0aba3a578edad3a9b1c30e59",
+    "text": "加载中…"
+  },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "a7fe733fbfc3e5d01e620a649ef9a19ecb5f8f2ecc6ee7890c3b38edbcd4a729",
+    "text": "白骨护符"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "492f12f8aa76b4a76af38235126a4e7349ad9ae684e6cfe0c4bff83e7277f316",
+    "text": "黄铜香炉"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "11cb573923027cdc4262e4a1db262b8143a508cf23cd25d40d992db3a1f529ac",
+    "text": "扒手小刀"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "be6bcb633f8c9ff572f4e1ed65130d1c66a3b1757629ee28832c0e2063847231",
+    "text": "林地的恩惠"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "2fc38d7865994f4656ff35661281e2999b351201eb5e0a78bff6232cefcba83c",
+    "text": "冰冷之心"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "11f14440f6a7888fd5d98c219eaf2c855561af803d66a8727e9713ab2f458044",
+    "text": "铁木圆盾"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "685118dfe6eb247126e2ad465c902a8625a581aa4abd0923f9e359152dea7026",
+    "text": "幸运三叶草"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "4323e0e6d9576ee1d8b1cef1fb25994e82b3eed7336dd3c80a711451cfc72597",
+    "text": "商人的恩惠"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "4aae5d837f0925ccef875cddf1ebcc301a9cc6f7a5615cc14fa0facfcd61ab36",
+    "text": "陨石"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "7892ed624e30bc6c414517013ef22ce2c01f83a4ab6b7296a626f2e53f84958c",
+    "text": "寄生之花"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "38ad6125abf904d87538aedf8e368f0c0b18e3243a580525b3efbd764ca33296",
+    "text": "瘟疫医生面具"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "cd8b9cebdd78583aeb659abe188ffbcb83264552350e62e983e869b3b34fd6b3",
+    "text": "共鸣风铃"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "bc3fb4d354edd090827fb8b2623df93d39fe405fb421b7b81dbccdf83a3ae3ff",
+    "text": "噬罪者灯笼"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "343a80e57e42db45935e797c9c04d2e299b37d75017071b365f424f94e55c2f4",
+    "text": "走私者地图"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "b46fe72f2695250349ae3452ce721da28e3595059b1655bca42fc219b7b0db59",
+    "text": "破旧书页"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "2d33b89e873cfddc229e0448f75c3165f79fac6e33835018e64721946dd2d44f",
+    "text": "雷霆石"
+  },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "d1c199ef5d6428f6868c83a1ed4068ae5fddd88bd49325960636d1582b40312b",
+    "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "d42f3575fd44a7df9d2e48570f725880d17760077b1f195274f2451545b52594",
+    "text": "苹果"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "e1cd03e701089ccf106d2878e2ac25f90e3b3d6c2c6a4c0068682c3ff21ad216",
+    "text": "恢复 {{value0}} 点<keyword0>生命</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "dcf6993a03ffa59807309a9aeef2804cd60bdd4e8b7d4a0c4a12b5cdc35f546b",
+    "text": "获得 {{value0}} 点<keyword0>法力</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "a000f7e03407eebbc6cddce4b4550bfaf1df400f096cf3a76eeb354154d09211",
+    "text": "使所有盟友获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "9052deaec2cf163dbd2fc23bfe817738f67cf9a9879c598bef3a916b8494c475",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "1020880b8d1c5f37b94b0cc8371b77e09eac9fc65b23b76f64d103d83e64f2a3",
+    "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "c9aa2458c912c4df5c87a6a9ae03527f3532c7f727ff499203a5cd4e91593cda",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "445cc9505d3bef54d53771422cbf9f5b8a1f178ee4eccbf5230b27c095c02d02",
+    "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "8548fb96ed0b67ce31ae6961a75b320d112c4cb5e0b4066a89e0b8be6dd811e8",
+    "text": "对随机敌人造成 {{value0}} 点<keyword0>光</keyword0>伤害"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "9f7c94478be8565e0c64cbb97f9a15761a5c8178e98966b74327fed40a07c9b4",
+    "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "e93ab51615fd5ed0e1fc1d9c47f2d2c6190fa8f48ee08b3258ba699a93bdd034",
+    "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "7f5ae0361fbdea797995360981449471a74fe8fbd7004950f34b6f209836b4c7",
+    "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "bbc907a154bdf97cee5f6544760533b228565bb186b861d902179e6ef591db4b",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>反射</keyword1>下一个有害状态效果"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "9087d65f4358b070975dda0bdafcdcf8b6d0e9fd6debd9eb6e68dda9bd5e587c",
+    "text": "造成 {{value0}} 点<keyword0>光</keyword0>伤害；<keyword1>驱散</keyword1>目标：移除 {{value1}} 个效果"
+  },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "69442cf84fcd7789699713d6e82083202db874d60733fc74b4202aabc4e737bb",
+    "text": "行动牌"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "333e5d544afb16b1c7a1dd69e3e9e3878f66b07e1b499395e7627551d29bb421",
+    "text": "攻击"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "3ea7b3a8e66cfd8a69e7c791c5b6788028842a7e6e22bd6d206d97d694ecdcb0",
+    "text": "替补"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "3d5fb15aec4261c015a53f2725b2711f38489e7b26c34a4ea08fe08a629b25fc",
+    "text": "战斗"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "148439d4a24f4e38d7855371d77cc1cc77542542228dcfe58803c6e91b0cea84",
+    "text": "祝福"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "f917656942ac7765ac4df9d16f8bfcbb079a6cd232a8e1a900adf997aeb1f87e",
+    "text": "复制品"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "3a07c3fae919e834d9330da0382db8b2c67ea7618016dd6b68d367fa5c20d40b",
+    "text": "伤害"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "ca5b12250ec4340a4567536b37e2555f9b1f2f8dd5cf2ca902e586e4e7440720",
+    "text": "濒死"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "9f40d39e1b26c040233fe2eac9d7e348f0d4e3f1661547c56380e3aaaf6acda2",
+    "text": "抽牌 / 弃牌"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "7b19b6962b092714e4740bbb91c140fa9fcd790736ceaf1589d218ba93dfd3be",
+    "text": "回响"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "28b093aa57ca84f4b5bf5599dfc1c3564eee39e7c9e38a9f54ff08daf557adcd",
+    "text": "金币"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "8860f843ac0b94d350bd126154974cbb5bed282e57cf2f0a407e8ff730d8e9b4",
+    "text": "命中"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "13cd1211886d48bb7b0c3d392909b923ee5a6891825ce2e9910e9d6d136127d8",
+    "text": "关键词经验"
+  },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "87478d0d75707bae055802bc645c2117040132cacae63f88e4f7131599daa1c9",
+    "text": "下一回合再次造成伤害，然后清除"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "40e6f7d85d2a04da743cbb1f81dd71c969311893ff0a4ad481a6709e044fae36",
+    "text": "每回合造成伤害，然后将层数减半"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "dc0dcbc79326ede174d0a91d6cd9b003f27ff4a722d870efecddf32ef1b44510",
+    "text": "移除一名盟友的有害效果"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "9cd309a2fd91b642fda01f2ee17d69b44df0e2d1f3d344301c7c41179fd94eaa",
+    "text": "<keyword0>自然</keyword0>伤害；不隐含抗性或状态效果"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "72dfe6715b29ee5dab47e9e1d994106e3923d37b62a217f18b665e32d5bb3e4a",
+    "text": "移除一名敌人的有益效果"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "e56931213832efc6339e2de15a66b6ac621dc3854748a4cd0596bf87816b1f39",
+    "text": "<keyword0>水</keyword0>伤害；<keyword1>格挡</keyword1>会吸收；<keyword2>护甲</keyword2>不会减伤；不施加状态效果"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "31a939b5ec9df4c7e61f866dec2a2ba7caa1a4ce146be930017be72920411e4f",
+    "text": "击倒"
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "99f528a21f579793bb24b73eaa55320bf6bc4cb730f813689b4d5f0f2551c17f",
+    "text": "传奇"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "cfddfbd1e60848c823ba0ec15da2987762e8341422ec1d3c9f8fa847299fb0d4",
+    "text": "召唤物"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "205c42b34b294faad32e156b0c9d0b28d52275fa7400628b6ab947b60c103fbc",
+    "text": "珍珠"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "436eafd98e21279d35d5b52e82c7ec215f55605dafbf51e1c5d82baa769fb809",
+    "text": "初始阵容"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "5be0d3e95cde202ced91e9845bada75f54a1ba5974150329b60cd2cf9c142d29",
+    "text": "换位牌"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "359b05f4983397590eddf1327a842ec5f5941bc7a962c5d1d3131f42b8f85d28",
+    "text": "天赋"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "e96b1c4856ae78d9fa6df8b3be4bf9476d448ae3a333c78091f4d97b0c7bab75",
+    "text": "回合"
+  },
+  "content.keyword.armor.label": {
+    "reviewed": true,
+    "source": "Armor",
+    "sourceHash": "91fa0baeed64353bd42f28e734e33049f1708f97053f265acabb5be5f3ff1cd8",
+    "text": "护甲"
+  },
+  "content.keyword.attackReflection.label": {
+    "reviewed": true,
+    "source": "Attack Reflection",
+    "sourceHash": "9aee8279dfd4e5a78d29767680f3dc7d656ced7b23b20b9b93a65e2ebf847005",
+    "text": "攻击反射"
+  },
+  "content.keyword.bleed.label": {
+    "reviewed": true,
+    "source": "Bleed",
+    "sourceHash": "50e0fe89c2c4c53c0d3dae5171f1c9d29bfe8eec42fe624ce72e4687ff273a65",
+    "text": "流血"
+  },
+  "content.keyword.blind.label": {
+    "reviewed": true,
+    "source": "Blind",
+    "sourceHash": "48b264157ce40431533645685cfe17db533437f692ecfb2186d78b9954aef0ba",
+    "text": "致盲"
+  },
+  "content.keyword.block.label": {
+    "reviewed": true,
+    "source": "Block",
+    "sourceHash": "16fa7836790ca00a2670e549d6158a47de260fa2d93f555c4d20cd50ad6f2fd0",
+    "text": "格挡"
+  },
+  "content.keyword.burn.label": {
+    "reviewed": true,
+    "source": "Burn",
+    "sourceHash": "dff59a7e2d1d9701cae7650eb3a51cc5eac8f5382e3f76fba652e88180ba03d2",
+    "text": "灼烧"
+  },
+  "content.keyword.cleanse.label": {
+    "reviewed": true,
+    "source": "Cleanse",
+    "sourceHash": "d429a04a44d816931fd1488f8acbf13ab1a183912e32487d4b605f71acf24d43",
+    "text": "净化"
+  },
+  "content.keyword.consume.label": {
+    "reviewed": true,
+    "source": "Consume",
+    "sourceHash": "1bab3e103e6cc5965377b837f81ec72ae551bb7fb67fd5fe4faa4b1dc63bed32",
+    "text": "消耗"
+  },
+  "content.keyword.criticalHit.label": {
+    "reviewed": true,
+    "source": "Critical Hit",
+    "sourceHash": "4b9a2ad2d98e9b12334c12e3b2baacd7743e5f3bae0e2b4bf9d6b78133284c65",
+    "text": "暴击"
+  },
+  "content.keyword.dodge.label": {
+    "reviewed": true,
+    "source": "Dodge",
+    "sourceHash": "83be33429ecbeb3d7ef0ee4692cbc347957a1eef12bea6f245ffceac7b34053a",
+    "text": "闪避"
+  },
+  "content.keyword.food.label": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "c6f25bba2a0d64cd12826f8915bbaf8f1baf6643cc0a8c96c817dfd79d17a9be",
+    "text": "食物"
+  },
+  "content.keyword.freeze.label": {
+    "reviewed": true,
+    "source": "Freeze",
+    "sourceHash": "7334984804d5d15285cbd6da61de16410e8d7ae524a1374521f60850f0c300af",
+    "text": "冻结"
+  },
+  "content.keyword.health.label": {
+    "reviewed": true,
+    "source": "Health",
+    "sourceHash": "415551ded116bbb17a8b4bd98dbda5211e19131aeccc80462be30b4af588fbae",
+    "text": "生命"
+  },
+  "content.keyword.leech.label": {
+    "reviewed": true,
+    "source": "Leech",
+    "sourceHash": "08397fd5f74b58f9b1b0debc46f6dd35e8f390b740be0ee08fa93552322cd432",
+    "text": "汲取"
+  },
+  "content.keyword.light.label": {
+    "reviewed": true,
+    "source": "Light",
+    "sourceHash": "afb248c6dad96d8a37e4b5f4bb7ed0b5880b7649ce3c395daf4c7bc8bf46df52",
+    "text": "光"
+  },
+  "content.keyword.mana.label": {
+    "reviewed": true,
+    "source": "Mana",
+    "sourceHash": "c302b750b3fe21977b6d713e17aab412879e79f669bdacbea270a23ab85ccb5c",
+    "text": "法力"
+  },
+  "content.keyword.nature.label": {
+    "reviewed": true,
+    "source": "Nature",
+    "sourceHash": "2c9c9a924d46b7d0c17af5917f70a1208411dcd9dfcb8839f15a7cdc210425a4",
+    "text": "自然"
+  },
+  "content.keyword.negate.label": {
+    "reviewed": true,
+    "source": "Negate",
+    "sourceHash": "d632962b64a7f1932e68bccbefa55afcba2d44b09518991288ab39a9693a73b8",
+    "text": "抵消"
+  },
+  "content.keyword.nullify.label": {
+    "reviewed": true,
+    "source": "Nullify",
+    "sourceHash": "60adc2902722f2b5bd83fbbc0cbf58e7831f329ece9043352f47cab90608e760",
+    "text": "无效化"
+  },
+  "content.keyword.physical.label": {
+    "reviewed": true,
+    "source": "Physical",
+    "sourceHash": "ea1b2d8d2baef17ac1fbbd83772cab61bcaa84804534d7f670758bfd9fa35785",
+    "text": "物理"
+  },
+  "content.keyword.poison.label": {
+    "reviewed": true,
+    "source": "Poison",
+    "sourceHash": "46a403453a58cae1f6a30dcca50d4415fb5f387d3ae22b0ee47a27a5e431b3ea",
+    "text": "中毒"
+  },
+  "content.keyword.purge.label": {
+    "reviewed": true,
+    "source": "Purge",
+    "sourceHash": "cd456b952d100cf9ab13d5361b596d16b4d7a7acf7d3ed576783129488da73a6",
+    "text": "驱散"
+  },
+  "content.keyword.reflect.label": {
+    "reviewed": true,
+    "source": "Reflect",
+    "sourceHash": "a9bedf8a285fbaa37fe1e60abffd7dc318bb5ab100ce56c62672b077b3f6a91b",
+    "text": "反射"
+  },
+  "content.keyword.resurrect.label": {
+    "reviewed": true,
+    "source": "Resurrect",
+    "sourceHash": "b5465b840af59c0313793973d245946b3e99da8b08e16e23e2f184f3f8f06656",
+    "text": "复活"
+  },
+  "content.keyword.stun.label": {
+    "reviewed": true,
+    "source": "Stun",
+    "sourceHash": "2da73cc471752ec51746ee242d13041ac282d5ffc7ba497bcc6e77cb970eca75",
+    "text": "眩晕"
+  },
+  "content.keyword.thorns.label": {
+    "reviewed": true,
+    "source": "Thorns",
+    "sourceHash": "d7b64b88679019a741009ff1ed31554599287e3047543924027067dc71a2db7c",
+    "text": "荆棘"
+  },
+  "content.keyword.water.label": {
+    "reviewed": true,
+    "source": "Water",
+    "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
+    "text": "水"
+  },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "3211fa21dd8e7b67c5021ae45d1582d2b96a6fb64d9bf2f47cad4b00e5e3034c",
+    "text": "流动沙丘"
+  },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "5372e761e49994669bf7882361d79a845bc7e5508575fb0108587801c49feb50",
+    "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "28aeddff8a4fd21e8c271c4e0dda6ea680ac89c5bbe76bfe2cb99f6ab93e085b",
+    "text": "跳过回合"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "72c156de50cc3733bd83c90dcb6992ec38d1c4ea97491d7a88be24fa15e96058",
+    "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "12a3536f5552c27dcd86419331284a7e1b7185ad51b9e75b8cf10d8d1d14956b",
+    "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "1e0652a803449aaf663855f6eeaceea7d30541ae349861410e8114f8105e5627",
+    "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
+  },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "3c36e40733abf9b6457c411093d43a8a5f015c90a73a334f5571076209505b7d",
+    "text": "回响"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
+    "text": "查看{{name}}"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "381d13a07b54b0a38b13ac39bc852ab5da2c875dcb2f3ff09eaf3c122a644763",
+    "text": "招募{{name}}"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "cd26922237a543d76b8ab88484730519b56182a53c2bdc0c5e02894120df1ddc",
+    "text": "招募"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "946d9c20c9157cec31467a314fefe9d8d25bcf94decd155d0df3ea1010a99ac4",
+    "text": "弃牌堆为空"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "a375360f6496e01863f252e6fea1b98009b53247b206d4a31b23d4b217cdc227",
+    "text": "抽牌堆为空"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "b4c6a16b7287767af9b69a15345f45dc241fd455ef239f6fc565d6ffafe57b99",
+    "text": "牌组为空"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "db5df1878664092c49053e9a590d3f7d098bba742c7bdef6d8bf121a7d70253c",
+    "text": "牌组页面"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "a8fcdcf8a2c639e53d1059c0c058ee2b878d88d71e4364eda6ce6cbde6b408b4",
+    "text": "选择初始生物"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "8eeb928d803a6b3bdf8fcbc878f15c3687b8528f99eb129a84be8fa913908bae",
+    "text": "已选择"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "c175ce08276fabba673466a5c4e0a9d2f01266e7c094fbf158ff5738f2e188f3",
+    "text": "你的初始队伍"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "e0a2888ce489d6e25a2ec03390ac6156bda2b593348a6c69d7ac3dc4d6a7b195",
+    "text": "+{{amount}} 金币"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "220313d9f85414e60f5dee1620a3e1739b8c1293a2090881461e2ba6cefc2ef6",
+    "text": "+{{amount}} 关键词经验"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "0c7d92f4c4d00423b12f630ab67ca477079db086fc187b7447382ae74ec8a284",
+    "text": "上场战斗的收益"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "1137b5fc4933c67c2bc3e25dd61859bbd8369f58100326b0004cb46a52d95164",
+    "text": "首领：{{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "59537c2d96f84af9419a9f9dd6dcaaecbbf4758d1913d1bd1655b0f4a8e434d8",
+    "text": "战斗"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "d955310d50be1e7f135767eafe1d4f8681bdd718dd797acee13f3b294f13428b",
+    "text": "遭遇 {{current}} / {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "7d9124c442e0737fe9de74917cd24e3ecbc1d2c1dabff69020d287c8fbfeae8b",
+    "text": "遭遇"
+  },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "931c04f16dba2abce8fa983d2aeb974eb4581701a2033e6f24d9ea7a203b1103",
+    "text": "收藏"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "0a68231ab6433cb984439f259f7e70b410e2d71c8b1a8e576bef6fb89a1e9721",
+    "text": "继续"
+  },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "18122ff0bba80be682e445146b5da59fc7e8e39e5e7e30808a0236c8ec511a96",
+    "text": "结束旅程"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "5dfde89af12293409fb335723116e5ec70abe48733a2fb3f5b845e57026c401b",
+    "text": "词汇表"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "10da117057e222690e1385497f09fea49e8e2c25a0e526dacca23ddd55a3bf73",
+    "text": "主菜单"
+  },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "3e2515f9708be84e6f5fc95a3e64b36fe44fec4b3a5b0ff60248597b50fda480",
+    "text": "暂停菜单"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "0881cb77235d342cc58f16666c67adb5f2f094c5466182037001953a2b5725e0",
+    "text": "开始"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "90e80d85f4a395a7c0c1ab89774164efc2be0984c1b7c7785ec3e1698cf7fa49",
+    "text": "保存并退出"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "262699dba3aa49fe023fba30ae4885b7b1c994d963b3c697c2afa9dc07392ad6",
+    "text": "设置"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "626fa599c9aadc2f0487946bb36735017a656d12267640c1c897b8a1d7645947",
+    "text": "返回"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "6f58057060e8c35f71b4a61a1367ab7aebf09373ef4419162a40c3e14deadf97",
+    "text": "牌组"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "8366e16fc01f6d87562c3a0914a9f610cc12be521e3b5d13782ad7d5f57e0469",
+    "text": "弃牌堆"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "46085f17a5d94081443d5f112e22fc5405760812c324ceaa9171cff7f64b0967",
+    "text": "抽牌堆"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "c5e23378cb851ee1e2e8ac9446dcd6bd28af540cfb711efa0b6fc03f3b0952fa",
+    "text": "下一页"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "341cf2f1fdedf5fc126749d51b9a5add67190afb39f79cef01e57c63c426ec0f",
+    "text": "页面"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "439181c6cdfa4bd2523053c3bc0530716a3847733afe3ee78f6a642cf74be0d3",
+    "text": "上一页"
+  },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "bc0469dba83e7dc29e1c3120f04ed0cd1129cdf254bda91a787fc5186099a0f6",
+    "text": "吸收 {{amount}}"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "3e1a924277c8d593e2406cb51b58ec3df3704e87e25fb9d8be7a80091f3934ab",
+    "text": "或{{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "1f2efd18b1e60b2318636da4464a9613334cee5f8f9e7534528984a225b69e78",
+    "text": "吸收 {{amount}} 点伤害"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "1cc89e207b13c55e916fcc807a44e06409b432aa4d81b4a0d4ab5313fe8d8b10",
+    "text": "{{name}}的目标预览：生命从 {{previousHealth}} 变为 {{health}}，格挡从 {{previousBlock}} 变为 {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "f382c2862711a488a2aa2f3190ed45ead3b7562f6b5a87a5ce4cca6d6be1dd6f",
+    "text": "结果取决于隐藏信息或其他随机效果"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "f6aa5c90d1c37206f8f0a568f05ebd7bf41b98f0dde047e3c5bb2f1abde76e06",
+    "text": "可能暴击"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "a499464b9f9bf0fc8e8d64413b1b3c589bd0483a437a44b05fdcde59c7b6c292",
+    "text": "可能被闪避"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "7b2c2412a66e5fb48e37888154f6b11d07ff619d2d88d0b16126ecae0bdbd4c9",
+    "text": "{{left}}或{{right}}"
+  },
+  "preview.outcomeBlock": {
+    "reviewed": true,
+    "source": "Block {{before}} → {{after}}",
+    "sourceHash": "5caef1619d5976460efca9164ab54acddc076d77fd649274a33615fe952ec2fb",
+    "text": "格挡 {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "reviewed": true,
+    "source": "Critical {{description}}",
+    "sourceHash": "f120ac684498aa8b18ab04143073a8c990ee4fd15a006b58db83adcca0e9a8c6",
+    "text": "暴击：{{description}}"
+  },
+  "preview.outcomeDamage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}}",
+    "sourceHash": "23f00c3cb056da43e7edfea10245159b55fbc73933602d6609a83bd3ba22d28a",
+    "text": "{{type}} {{amount}}"
+  },
+  "preview.outcomeHeal": {
+    "reviewed": true,
+    "source": "Heal {{amount}}",
+    "sourceHash": "6e94771af0f68578ffa12790b255e34abe941dd10464537393aefa5cd3b0c344",
+    "text": "治疗 {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "reviewed": true,
+    "source": "Lose {{amount}} Health",
+    "sourceHash": "5fe337b06b26ad7e04413477dbd9b7c766ca33c5c251e7936ce8497d70572f5f",
+    "text": "失去 {{amount}} 生命"
+  },
+  "preview.outcomeNoChange": {
+    "reviewed": true,
+    "source": "No change",
+    "sourceHash": "7571aafb7a287acf180e12a5c7b1cdac5cdcba5f4b4e61ebef8eb72f73b9a200",
+    "text": "无变化"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "2c761b69217201a1c72f970a0b740ff229e9d20e6e1ce951a7557c5abcc5ccbf",
+    "text": "可能：{{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "3a85e8909031748ff694d2bbaa30853d4aba418d7be9a1e3ab248469e7618cdb",
+    "text": "可能击倒"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "c2f36c0773d7466bed24db9b7c6b1582e3f87c00a82e4a3b20ed1e7e8252cb62",
+    "text": "{{name}}的可能结果：{{outcomes}}"
+  },
+  "preview.removeStatus": {
+    "reviewed": true,
+    "source": "Remove {{status}}",
+    "sourceHash": "8f4d887411db70d6b152c0ab4157f9e78b88898ad9cf6762b88d2ae2925463ca",
+    "text": "移除{{status}}"
+  },
+  "preview.statusChange": {
+    "reviewed": true,
+    "source": "{{keyword}} {{before}} → {{after}}",
+    "sourceHash": "4c485b767abeac55fd53f4bf80c83a27e90ae0fbf6d7cc5dd509a9133c53ca4a",
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "831b9ae634ead50cafb0576ce1f237c9c03b213721d58a1c004425adf52a2541",
+    "text": "结果不确定"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "d990598c98d5a55e83f9dfcfef2a61ebcde74eb19725c98425b1a81260a62b4d",
+    "text": "{{summary}}，{{details}}"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "586665056d855cf43c7fab261f28c54238f4730c67403caa00e9f87feac85ce7",
+    "text": "选择你的队伍"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "dc8f3c45d0ac294549e8219daaa407f0b384ea9ea26f0b124be6469ce0959fe2",
+    "text": "确认"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "e16d9b41c34fee4109496c56216f7853da5ff75c8f451ab6b265c8fabe2dcc0e",
+    "text": "交换生物"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "c13923d27115bde3553e8ea73d2b4c2ff04a79b8f3de4a63bbf3e62c90ba1f10",
+    "text": "预览替换队伍位置 {{slot}} 中的{{name}}"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "8b1aebf3268cb393dbc784db5c0981530c694a7d6295c373e585ae16a9f7ad61",
+    "text": "队伍"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "5b9395d69cc1450fab7bfbeadbd794bdad5b756f174f682adaeec53de84d656f",
+    "text": "撤销替换{{name}}"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "dac9a0b97a6233c1cf4d0657d5380031de8ab5a5ef4ff1eb26fb4214aa6f26bf",
+    "text": "撤销队伍位置 {{slot}} 中的{{name}}"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "89ca5b77b8457caa8dc6dac831139e7ded01df5fd192e6247ef81b31e821fc34",
+    "text": "旅程完成"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "e67a5a1bcceeb1fd3db00d7c5020883e98ef335c545289888f461b3d363a3153",
+    "text": "战败"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "372fa7fb4c85e45b2161dcb988f25e716d0deddfd3150795b737d4bda90a38ae",
+    "text": "未获得永久奖励"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "ef5a0362538e8b0a2ebef1715338e0dee0a8a261c2b2585275023d41061a6c63",
+    "text": "旅程结束"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "3717baadd1028e29126f907a9d11248e7df7800406659be1223d172ffb0f64df",
+    "text": "旅程收获"
+  },
+  "results.goldEarnedTotal": {
+    "reviewed": true,
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "78a1a65cb4f8af8f486d9d525b69599976f1a5bec4ae492543076ce8c4a188ac",
+    "text": "获得 {{amount}} 金币"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "10da117057e222690e1385497f09fea49e8e2c25a0e526dacca23ddd55a3bf73",
+    "text": "主菜单"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "04c4231281a20d6d7597aedef8abea83c02b0b198af27892b530d1d156c91acc",
+    "text": "已返回家园"
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "22d8a7bc17ac182e492678e2b2bfd6b3477dd65da97cd5c75a16afcf2dbd5a24",
+    "text": "选择一个祝福"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "fce61f8d57a19e0436d3b25ea1e0bae87000725aa482f142b8c78c76e18f6248",
+    "text": "选择一名新伙伴"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "5b6889c2af4ec0cea0e9ee161a91933b323234c40a7f640e63b9e5741395a890",
+    "text": "新！"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "c0b566da2f1815348ac50ce4b06b1193150e9fd2c84e3c8212fd89c223440a84",
+    "text": "{{name}}：新加入收藏，零星"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "46a90ba16847e5abe8ae9809dfda28f49c8a0834b9880c9a05e84bc7140cdc11",
+    "text": "{{name}}：从 {{rank}} 星升至 {{next}} 星，最高 {{maximum}} 星"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "dfec461a869d311a8ec8c78b1ecb838ba0ef44dc7d19b233184fa4d54727a98c",
+    "text": "招募页面"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "75abfbefd44b69bdae2ef692b77b5c669982fe44c094f1427290215da5375930",
+    "text": "跳过"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "6f14bf3366f8ef6025a7dbd056d65145ea17b6fb7b92e7ec95b2cd3745bbe212",
+    "text": "胜利"
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "cd5421517fa666bb02efa3da3feb5d5e61ec6482e9a50b4f8fb6eb5a285db45f",
+    "text": "音频"
+  },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "b39e41b58dfbae452bec9338ca65abd9c059bb56e516d2ef220b8b4d09e440c0",
+    "text": "自动结束回合"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "120ec371cd43c461a33481705fa64e1ed9801c352c6ff188054671d5aab21b96",
+    "text": "自动"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "25ee0a137b561bfcd921b2d804230029d24008f02714cb0cfabe95be451ab456",
+    "text": "战斗"
+  },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "2df6c38dc7709774840713115fee4611558d8defcebeeb0f52f5db6db34079c4",
+    "text": "设置分类"
+  },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "ffde8961b814d3affbd2f4d58c200b8848cd932bbde8831b35a17e3ea7b24ba3",
+    "text": "关闭语言选择"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "582689332beef408aee49f0a71cad41fc8eca7e2460089ddd7525f5fa43da538",
+    "text": "手柄提示"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "c3ff7070e888cc42add00e3b0c11fabf582d787a21f5e20006e01841ed9e66de",
+    "text": "显示"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "169331d2656f77e3055242019f45dd7cdc3a5eee41e9952b65836f876853bbeb",
+    "text": "显示模式"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "ee6c7d7bf560f1488f49c01b7d42eaf8536d1f1cb5b5dd1a60ac4046872b86a6",
+    "text": "音效"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "a501baa98d580bcb8486e77796bb367cad36779dd710469dedc1fbbf129858e4",
+    "text": "音效音量"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "5ccafc1c8708e829442aa6a6e5a23cbc25ae8c2447543e2ee56da5d83b1d0242",
+    "text": "音效音量数值"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "966a5239212887c0d7a8d8fffd6e7913252376a4b4a0355e3a8305eee6719f97",
+    "text": "全屏"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "448bdf57d26142e5ea4eac3fffaec38e112d24a225c98fc48e222b169ea7525e",
+    "text": "背景辉光"
+  },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "b14cb59f460c914ec50c878eaeeeb505dd16950a1c69394dedf23334edc7859b",
+    "text": "背景辉光数值"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "52b412e65e977efd2505c2e394b4688dae7066b3b6390f290fd502663758919a",
+    "text": "语言"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "85f07a5828e74a11060354ad2d9cbd09c683f6d5dd05eb640bde30e7fc16c5d7",
+    "text": "选择语言"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "81172c353253329a25e42a7e2b0d0ed84d5960cf2aead9dfe12cb1c5845b7841",
+    "text": "语言：{{language}}"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "43981d905361625e8fb290848e55a21848eff6c6fa65bc70a289ddb017ef9a98",
+    "text": "主音量"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "f63197c872f00e378d6c677695303fd961980453642cb1ec3b30200c8108ea81",
+    "text": "主音量"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "b9fe18dbe7c69dc759a85b0544dfe12878ed6538337f6e629a25ffcc2671b628",
+    "text": "主音量数值"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "95153eaac85aff16c92032ac89392ea2cc67e4117b8adedf2650cc3b0ea7a3aa",
+    "text": "音乐"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "9993fa21829721bcb6bf48340dfee9672d67de5ea12cce3645d17dd4a8b3c338",
+    "text": "音乐音量"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "e02af8e0dd85588f66a912b6ed755c8c9716e4f3208cf2fb494d673bc78c558c",
+    "text": "音乐音量数值"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "de0e92022b940f1a36c594f2bd9bc7ef7510548372dce7e547d23d324453e3c1",
+    "text": "后台静音"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "09e31ecc56bd99ea9f79947043195888785944bb8eab72f6469f877734b0ca50",
+    "text": "背景粒子"
+  },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "0b0e6e78efd5435c6ad1f9f25cc8b630ee5bc6a6dcb316577fcbdf9a63592dbc",
+    "text": "背景粒子数值"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "4bf9716880de75ea132500b7d6b091d074067931769358c4529f21f55137afcf",
+    "text": "声音"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "99d39dd931827da66396d376d4a0736bbb856146c52b877b19c2f21d5bd1c3fd",
+    "text": "文字大小"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "4ffbdb4a09e7e250511224bc05e26730ee95fb3fdcbee9e81eb48d86a7b43d19",
+    "text": "提示 {{value}}%"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "ea724338af628267e5e7ed6c6d05e1f97f59998872edc4edc5c9e700ad672b47",
+    "text": "提示大小"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "aeb17388b472c4ed3c0374412b81c128014426fffeafcebb0af89951d0347640",
+    "text": "窗口模式"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "3b02687b76ab2bd073877905cfe9af3beb07d41078a0937f1c7096e3674a0643",
+    "text": "{{description}}；{{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "b91a9c8a324c085e4a77852099c242b6b271d0169422394e496a9c7fb0027860",
+    "text": "{{keyword}}加成 {{count}}%；{{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "a03e9e168ebe7685291a1169d8a30b2246c13f7ffec5c55e22f4eb4d80e0be12",
+    "text": "{{count}}% 在你的下一回合到期"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "4e7c61688e9abf1a916faf2152e36f92367f15bd9aa1ee0fb73c13bbeed27e2c",
+    "text": "{{count}}% 来自{{trait}}"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "5ec2e3c4a7a9faaadbbd3256dd2e881980e101975ec96cecc3c290756378decf",
+    "text": "{{keyword}} {{count}}；{{description}}"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "c9ee651c6b855b04d0cf7e97074e506c33c2188f67c752ffef58196c7c5e7d70",
+    "text": "已解锁"
+  }
+}

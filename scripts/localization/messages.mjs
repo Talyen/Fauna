@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { extractProjectContent } from "./content.mjs";
 import { parseSync } from "@swc/core";
 
 function parameters(text, location) {
@@ -24,13 +25,13 @@ export function extractMessages(files) {
         callee?.type === "MemberExpression" &&
         callee.object?.type === "Identifier" &&
         callee.object.value === "i18n" &&
-        ["message", "plural"].includes(callee.property?.value)
+        ["message", "template", "plural"].includes(callee.property?.value)
       ) {
         const [id, source] = node.arguments.map((arg) => arg.expression);
         if (id?.type !== "StringLiteral" || !/^[a-z][\w]*(?:\.[a-zA-Z][\w]*)+$/.test(id.value))
           throw new Error(`${location}: localization requires a stable literal message ID`);
         let record;
-        if (callee.property.value === "message" && source?.type === "StringLiteral")
+        if (["message", "template"].includes(callee.property.value) && source?.type === "StringLiteral")
           record = { text: source.value };
         else if (callee.property.value === "plural" && source?.type === "ObjectExpression") {
           const forms = Object.fromEntries(
@@ -78,17 +79,28 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const destination = path.join(root, "src/ui/shared/localization/messages.en.json");
   const messages = extractProjectMessages(root);
   const output = JSON.stringify(messages, null, 2) + "\n";
+  const contentFile = path.join(root, "src/ui/shared/localization/content.en.json");
+  const content = extractProjectContent(root);
+  const contentOutput = JSON.stringify(content, null, 2) + "\n";
   switch (process.argv[2]) {
     case "extract":
       fs.writeFileSync(destination, output);
-      console.log(`Extracted ${Object.keys(messages).length} explicit UI messages`);
+      fs.writeFileSync(contentFile, contentOutput);
+      console.log(
+        `Extracted ${Object.keys(messages).length} explicit UI messages and ${Object.keys(content).length} authored entries`,
+      );
       break;
     case "check":
       if (!fs.existsSync(destination) || fs.readFileSync(destination, "utf8") !== output) {
         console.error("English localization catalog is stale; run npm run localization:extract");
         process.exitCode = 1;
+      } else if (!fs.existsSync(contentFile) || fs.readFileSync(contentFile, "utf8") !== contentOutput) {
+        console.error("English content catalog is stale; run npm run localization:extract");
+        process.exitCode = 1;
       } else
-        console.log(`English localization catalog is current (${Object.keys(messages).length} messages)`);
+        console.log(
+          `English localization catalogs are current (${Object.keys(messages).length} UI messages; ${Object.keys(content).length} authored entries)`,
+        );
       break;
     default:
       throw new Error("Use extract or check");

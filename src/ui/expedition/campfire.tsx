@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Progress } from "../shared/progress";
 import { motionValue } from "../shared/motion-values";
@@ -10,25 +11,35 @@ import { Button } from "../../components/ui/button";
 import { AllyCard } from "../shared/cards/cards";
 import { KeywordText } from "../shared/keyword-text";
 export function Campfire({ game, send }: { game: StateAt<"campfire">; send: (command: Command) => boolean }) {
+  const i18n = useMessages();
   const creatures = [...game.team, ...game.reserves];
   return (
     <Screen className="campfire-screen">
-      <ScreenHeading back={() => send({ type: "leaveCampfire" })}>Campfire</ScreenHeading>
+      <ScreenHeading back={() => send({ type: "leaveCampfire" })}>
+        {i18n.message("campfire.name", "Campfire")}
+      </ScreenHeading>
       <PagedItems
         items={creatures}
         pageSize={3}
         adaptive={{ columns: 5, rows: 1 }}
         className="campfire-roster"
-        label="Rest recovery pages"
+        label={i18n.message("campfire.pages", "Rest recovery pages")}
       >
         {(creature) => (
           <div key={creature.id}>
             <AllyCard creature={creature} presentation />
-            <h2>{species(creature.species).name}</h2>
+            <h2>
+              {i18n.content(`content.species.${creature.species}.name`, species(creature.species).name)}
+            </h2>
             <Progress
               value={creature.health}
               maximum={species(creature.species).health}
-              label={`${species(creature.species).name} Health`}
+              label={i18n.message("campfire.creatureHealth", "{{name}} Health", {
+                name: i18n.content(
+                  `content.species.${creature.species}.name`,
+                  species(creature.species).name,
+                ),
+              })}
               tone="health"
             />
             <p>
@@ -39,13 +50,14 @@ export function Campfire({ game, send }: { game: StateAt<"campfire">; send: (com
           </div>
         )}
       </PagedItems>
-      <Button onClick={() => send({ type: "rest" })}>Rest</Button>
+      <Button onClick={() => send({ type: "rest" })}>{i18n.message("campfire.rest", "Rest")}</Button>
     </Screen>
   );
 }
 
 /** Rest is already committed; these meters neither delay navigation nor issue commands. */
 export function RestRecovery({ game, events }: { game: GameState; events: GameEvent[] }) {
+  const i18n = useMessages();
   const [visible, setVisible] = useState(true);
   const root = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
@@ -86,7 +98,12 @@ export function RestRecovery({ game, events }: { game: GameState; events: GameEv
   }, []);
   if (!visible) return null;
   return (
-    <section ref={root} className="rest-recovery" aria-label="Rest recovery" role="status">
+    <section
+      ref={root}
+      className="rest-recovery"
+      aria-label={i18n.message("campfire.recovery", "Rest recovery")}
+      role="status"
+    >
       {[...game.team, ...game.reserves].map((creature) => {
         const amount = events
           .filter(
@@ -95,7 +112,7 @@ export function RestRecovery({ game, events }: { game: GameState; events: GameEv
           )
           .reduce((total, event) => total + (event.amount ?? 0), 0);
         if (!amount) return null;
-        const name = species(creature.species).name;
+        const name = i18n.content(`content.species.${creature.species}.name`, species(creature.species).name);
         const maximum = species(creature.species).health;
         return (
           <div
@@ -105,7 +122,12 @@ export function RestRecovery({ game, events }: { game: GameState; events: GameEv
             data-maximum={maximum}
           >
             <strong>{name}</strong>
-            <Progress value={creature.health} maximum={maximum} label={`${name} Health`} tone="health" />
+            <Progress
+              value={creature.health}
+              maximum={maximum}
+              label={i18n.message("campfire.creatureHealth", "{{name}} Health", { name })}
+              tone="health"
+            />
             <p>
               <KeywordText text={`${creature.health - amount} → ${creature.health} Health · +${amount}`} />
             </p>

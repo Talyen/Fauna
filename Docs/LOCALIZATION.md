@@ -41,15 +41,37 @@ Migrated components use `useMessages()` as `i18n`. Call `i18n.message` with a
 stable literal ID and English sentence, or `i18n.plural` with literal English
 `one` and `other` forms. Named `{{value}}` parameters let translations reorder
 values; use a complete message for accessible names as well as visible labels.
-Numbers are formatted for the selected language. Missing, stale or structurally
-invalid translations fall back to English.
+Numeric message parameters are formatted for the selected language. For rich
+values such as animated numbers, use `i18n.template` with `MessageParts` so
+the translation can move the value without remounting it. Authored names use
+`i18n.content` with the extracted content ID and the original English value;
+never derive gameplay identity from the translated name. Missing, stale or
+structurally invalid translations fall back to English.
 
 Run `npm run localization:extract` after changing these calls and commit the
-resulting English catalog. `npm run localization:check`, the local changed-file
-gate and CI check its freshness, duplicate IDs, English forms and parameter
-syntax. This only covers explicit calls in `src/ui`; it does not detect all
-unconverted player text, validate non-English catalogs or qualify a language.
-The inventory remains a separate migration aid.
+resulting English catalogs. Authored species names, titles and traits, card
+names, Talent names, Boon names, keyword labels, and Boon, Talent and creature
+passive rules, Food rules, and glossary terms and definitions are extracted by their stable
+identities. Glossary keyword terms reuse the shared keyword labels. Rules retain keyword tags
+and named values;
+translation records also retain the exact English rule for freshness checks.
+Authored creature card variants use stable IDs derived from the whole English
+template and preserve the production rule's ordering. The extractor samples the
+known singular and enemy-power branches; unrecognized runtime forms fall back to
+English, so sampling alone does not establish complete card-rule coverage.
+Translations must remain grammatical for every numeric value that can fill a
+template; add explicit plural handling when a count-neutral sentence is not enough.
+Measured combat statuses reuse the keyword label and glossary definition while
+keeping their committed English snapshot for animation. Transient status rules
+use IDs derived from their full templates and retain semantic keyword tags;
+unrecognized variants fall back to their English snapshots.
+Combat previews retain status identities for localized changes, including
+accessible summaries. Conditional outcome keyword styling requires further
+migration before qualification.
+`npm run localization:check`, the local changed-file gate and CI check freshness,
+duplicate IDs, English forms and parameter syntax. UI extraction only covers
+explicit calls in `src/ui`; content extraction does not yet cover all rule prose or generated descriptions. Neither establishes complete coverage or
+qualifies a language. The inventory remains a separate migration aid.
 
 ### Translation packets
 
@@ -73,9 +95,21 @@ the local changed-file gate and CI run it as well.
 
 The language registry marks only English qualified. Its qualification check
 requires complete reviewed catalogs for each enabled language, completed UI,
-content and rule migration, and a runtime connected to those catalogs. These structural checks do not establish font,
-rendered-flow, platform or linguistic quality; the remaining qualification
-steps below still apply.
+content and rule migration, and a runtime connected to those catalogs. Japanese,
+Simplified Chinese and Russian also require bundled script fonts whose character
+maps cover the translated catalog, native language name and compact numbers.
+The checks do not establish font wiring, rendered-flow, platform or linguistic
+quality; the remaining qualification steps below still apply.
+
+Font preparation is an explicit authoring step. `npm run localization:fonts`
+uses fontTools 4.60.1, fetches commit-pinned Noto sources, verifies their SHA-256
+digests, and subsets the current translations and native language names. Set
+`FAUNA_FONT_PYTHON` to the Python environment containing that version, or pass
+`-- --source-dir <directory>` to use verified original fonts offline. Replaced
+fonts are backed up under `reports/localization/backups`. The bundled OFL notices
+are in `Docs/NOTO-SANS-LICENSE.txt`, `Docs/NOTO-SANS-JP-LICENSE.txt`
+and `Docs/NOTO-SANS-SC-LICENSE.txt`. Regenerate after adding glyphs and inspect actual
+rendering before qualification; a subset alone does not enable a language.
 
 ## Implementation and qualification
 
@@ -106,5 +140,6 @@ still incomplete, so the runtime qualification flag remains false.
 The inventory, explicit UI messages and internal rule-message adapter are
 preparation steps. The adapter retains numeric values and keyword identities so a
 complete translated rule can reorder them; invalid templates fall back to the
-English rule. The English catalog covers only migrated UI calls. It does not yet
-cover every message, generated rules or non-English catalogs, and no player-facing language selector is available. Fauna remains English-only.
+English rule. The English catalogs cover only migrated UI calls and selected authored names. They
+do not yet cover every message or generated rule, and no player-facing language
+selector is available until another language is qualified. Fauna remains English-only.

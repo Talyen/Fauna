@@ -22,7 +22,13 @@ export const statusOrder: readonly string[] = [
   "attackReflection",
   "blind",
 ];
-export type Status = { id: string; text: string; count: number };
+export type Status = {
+  id: string;
+  text: string;
+  count: number;
+  temporaryDodge?: number;
+  sharedDodge?: number;
+};
 export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] {
   const dodge = Number(((combat?.dodge ?? 0) + (combat?.temporaryDodge ?? 0) + sharedDodge).toFixed(2));
   const entries: Status[] = combat
@@ -31,6 +37,7 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] 
         .map((id) => ({
           id,
           count: id === "dodge" ? dodge : combat[id],
+          ...(id === "dodge" ? { temporaryDodge: combat.temporaryDodge, sharedDodge } : {}),
           text: `${KEYWORD_DEFINITIONS[id].label} ${id === "dodge" ? dodge : combat[id]}${id === "dodge" ? "% bonus" : ""}; ${KEYWORD_DEFINITIONS[id].description}${id === "dodge" && combat.temporaryDodge ? `; ${combat.temporaryDodge}% expires at your next turn` : ""}${id === "dodge" && sharedDodge ? `; ${Number(sharedDodge.toFixed(2))}% from Shifting Sands` : ""}`,
         }))
     : [];

@@ -1,3 +1,4 @@
+import { useMessages } from "../localization/message-context";
 import { Sparkles } from "lucide-react";
 import { ShineIcon, ShineText } from "../effects/treatments";
 import { visualKeywords } from "../effects/palettes";
@@ -27,11 +28,12 @@ export function ActionDetails({
   actor?: Creature;
   modifiers?: GameState;
 }) {
+  const i18n = useMessages();
   const { def, value } = actionDisplay(card, actor, modifiers, enemy, enemyValue);
   return (
     <div className="card-details">
       <strong>
-        {def.name}
+        {i18n.content(`content.card.${def.id}.name`, def.name)}
         {card.level ? ` +${card.level}` : ""}
       </strong>
       {compact ? null : (
@@ -43,7 +45,9 @@ export function ActionDetails({
           />
         </p>
       )}
-      {card.temporary && !def.consume ? <p>Copy · Lasts for this battle</p> : null}
+      {card.temporary && !def.consume ? (
+        <p>{i18n.message("card.copy", "Copy · Lasts for this battle")}</p>
+      ) : null}
       <CardRules card={def} modifiers={modifiers} power={enemyPower} level={card.level} value={value} />
     </div>
   );
@@ -57,22 +61,27 @@ export function CreatureDetails({
   progression?: Pick<GameState, "discovery">;
   name?: string;
 }) {
+  const i18n = useMessages();
   const info = species(kind);
   const passive = creaturePassive(progression, kind);
   const keywords = visualKeywords(passive.description);
   return (
     <div className="card-details">
-      <strong>{name ?? info.name}</strong>
+      <strong>
+        {!name || name === info.name ? i18n.content(`content.species.${kind}.name`, info.name) : name}
+      </strong>
       <div className="creature-trait-name">
         <ShineIcon keywords={keywords}>
           <Sparkles />
         </ShineIcon>
         <strong>
-          <ShineText keywords={keywords}>{info.trait}</ShineText>
+          <ShineText keywords={keywords}>
+            {i18n.content(`content.species.${kind}.trait`, info.trait)}
+          </ShineText>
         </strong>
       </div>
       <p>
-        <KeywordText text={passive.description} />
+        <KeywordText text={passive.description} id={`content.species.${kind}.passive.${passive.rank}.rule`} />
       </p>
     </div>
   );

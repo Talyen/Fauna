@@ -1,0 +1,1544 @@
+{
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "dcd55ab14cb22b880b47a319d172fcf1c05a2a4373e58f21d36b49644dabf557",
+    "text": "アクションの手札"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "c1fff9f45602edf5ee943aa598829e8c63dde8d27e23d01871717c0d69b69068",
+    "text": "自動プレイ"
+  },
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "677fad732b5dc1bbb99e445af1896f95c81323f8db4eda39cbfabb48b3302691",
+    "text": "{{name}}（控え）"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "3c4b4d3baba253d45f30ece82f19e02614fbbb3637889574be3dc4b659cbbc64",
+    "text": "戦場"
+  },
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "c49fccc78c3e35c3ac1f0bfc6543f07558230940ee1dba18e3b992e9bbf3e957",
+    "text": "ブロック {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "1a7f351413536f918872848c814820d6b80c6fab3aaa0a37b66db8876d768be7",
+    "text": "ブロック {{previous}} から {{current}}"
+  },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "3e33eb5618aec39ba813ffbfbefc712df5cd172464c8df0f335ac55e4b4531f4",
+    "text": "戦闘カードと操作"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "91238dc6534c92f7ad67218e55ce8a07dd239472e12846bc8bb7b345e883645e",
+    "text": "味方を選択"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "8c20ff8e00ec0613cac5465b1fda7173924e8dd4f8d466d50b8996231607e207",
+    "text": "控えを選択"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "572f0027224df43358659122c02f18f04cd96c2c095dc34317b40a292724c782",
+    "text": "敵を選択"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "ed9bd984c55d6166a8e05fc1b014b97a77456418f337e63a04240fb64fe865c4",
+    "text": "{{type}}ダメージ {{amount}}"
+  },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "dd574aeaa510b0be20dd0227ddd0bbaa3783ee1b9b4e292134e23c38879d70c1",
+    "text": "戦闘効果のページ"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "97f79d4d6d313ce5f202278976899ea4890b90ee3971ad96251475041781ed82",
+    "text": "戦闘効果"
+  },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "72e55994cdac4efafcedd8fbe133cda873fd21007530aff1af9319f8a86174ba",
+    "text": "ターン終了"
+  },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "56d2614773276dfeb248163e948f5384210c50c90c01ece737e6eb989958e964",
+    "text": "ターン終了 · {{prompt}}"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "730b104319e29d19a5c4365571f6173d39df46601533b0a8eadf375c01fddc4a",
+    "text": "敵の列"
+  },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "948c2ccc4f083d05a0fb9b6407d967e2d2e763fdfe57bd3e438a5084e6062fa7",
+    "text": "食料"
+  },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "f7c6f233c57cdc20aec0610038a3067fad66e8cb2da558e95702a459035eca3e",
+    "text": "捨て札を確認"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "47fa4462bab213e80d8e19ec4fa18dbcaa565d7885ee669e5f90e05faa4c67da",
+    "text": "山札を確認"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "bce87ae77a03178d4d66ed60dc31c0baac00a71cc2a1f0156e9e2a0a53c8f9e7",
+    "text": "戦闘不能"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "f370915929a384b298db2b7c3df5e09548d48aaebb8797140ccfe9d5acdfe5a0",
+    "text": "マナ {{mana}} / {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "44c2e53e62d3af4dadafb1912f28640a9127d75cce8d985cace8bb572b828feb",
+    "text": "次のカード ×2"
+  },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "dd2c87698aee70c4e500f4c8ad78df0733d77924a2fdd9445305e2944cb0976e",
+    "text": "メニューを開く"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "43dd2a8cabc8955d84c2e46d4ca30d95248fa073e2271d8e4d26b3375bc59cf5",
+    "text": "味方の列"
+  },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "7b1f96f6b860e6d45fe1cd16f4e41a19739cba060e97d123e2fce8eb48439dd3",
+    "text": "控えの{{name}}を復活"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "afe22c950a3d3cdd09e0e3d4f7ac182356b7d4b1fed996c66dcdad00062d7a39",
+    "text": "戦闘をスキップ"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "4d468b9189454978a482f4a514b4ba700c012526ca29971815d8d81def1cadff",
+    "text": "控えの{{name}}を交代で出す"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "f067d3da275e2d29fef02423ee0a2f6b149acf4ced59863296911a3615256756",
+    "text": "{{name}}を対象にする"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "c81b6b3d0d35cd62725d20033edf85898a884fe82a321f8119d420107c9b710b",
+    "text": "{{owner}} · {{target}}"
+  },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "f3e9a3bfcb38a7a6d7be47c9dcc4321a540b9dd5593fe6e3bc9848039ee8d895",
+    "text": "{{name}}の体力"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "8019f1bd0af15dc3eeabc690fe0cd1dee308d88ca51bc65a3c157613da5b7115",
+    "text": "焚き火"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "f135355684e7cf6dff22d73fea945bcb2bc3029b5cb2e024f78769748cbf0c22",
+    "text": "休息回復のページ"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "254030e6a932038ece5275de0575b13e5f672dd2fcbb9581b3bfde62a511ba10",
+    "text": "休息による回復"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "c4e96f9edd216a6b5a164a20b8e7717abc693629ef1ae8c28b134e5642593cc9",
+    "text": "休む"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "bfe2ef6f7439571e92d2a65a44f30e8b8ca38fa7fc390c1878a7813fcf1dbf6f",
+    "text": "焚き火に向かう"
+  },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "d7128df44a180cd1065c18b5418d5990e3b9f737898567bc571ff4ac7c5c13ab",
+    "text": "{{name}}、{{owner}}、マナ{{mana}}、{{effect}}"
+  },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "f2b7ac5a272db7cec019acd3625967dd0d037e89f0bec0f1487a4d73c2a83869",
+    "text": "コピー · この戦闘中のみ有効"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "84e06474eba5e97c11460e229c54b506da5dd7162d6b01eeca1e2bf29a4b7c7d",
+    "text": "{{name}}、{{owner}}、{{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "c18c09b884f81cf2fcfef4aeecb58a9f15ad21c7f915276f36f957425db74444",
+    "text": "{{name}} +{{level}}"
+  },
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "c7ecdf521033d19bea087e4194e0bc846bc014a187d7657b3e68669a23aeb358",
+    "text": "すべて"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "4c69d9562726b2fc113907069ac1af80f442ea9468cbd4fb2682af9521ebd0af",
+    "text": "収集済み"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "dfe49aa3952794c492a2bae78f1f78a499ff6c6bc62d6ce061881083709c58f1",
+    "text": "この画面に生き物はいません"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "72e8d35b572dbf28477b51470f265dc4493f396ad6391d1f5b9c5bb717577e2f",
+    "text": "コレクションの絞り込み"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "854fedc6d662ce02f76b452b07949124d8aa8b0e33a65863ba293870fec89669",
+    "text": "{{name}}を調べる"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "644e5db23c0bb6c641fee5bb755ae7b017306c30aeb78d89b1e859eb6fe37c00",
+    "text": "未解放の種"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "a782ed3b62e3c529794b03d8029280d33fac4c0cb865f481c5d7ce0935d87977",
+    "text": "コレクションのページ"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "1538b8e9b46d87a6d42782c096bcb5867606767dd4d401717532293f43d04c53",
+    "text": "{{name}}：星{{rank}} / {{maximum}}"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "1eb47856d45185c76a953da5eb10289b7e84f19624c85f9efe71fc0341e045bb",
+    "text": "未収集"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "056d4c9242f835e8d5fd4e0795f64451621001a801cdae3de09bfaa66b8c1f82",
+    "text": "キャンセル"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "aade6585fa0ffaee68cd420c87aecd3748a1258288f93da8a4ff1a847e576e1e",
+    "text": "読み込み中…"
+  },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "4200aee3e6eb05b76c25c5741e632c8a43638d2a5e470e77ef2a90f9b43cd06d",
+    "text": "骨のお守り"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "7378ce53146d8e518376135c30f1b0b89110c86d6b92894c37f0d6dfbbca379a",
+    "text": "真鍮の香炉"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "ef709a86e967ff3fae2857e2ec495e58a195e323e61a6e54a26cf9e0000b0196",
+    "text": "掏摸のナイフ"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "6c601a1114b14e5324d89b0749b1422cde3d04bc2e084d03b8b0e4afc5aae29f",
+    "text": "木立の恩恵"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "3b3eca04d7b73a51b7be35f68f35e408da92fbd84c59692a7d3556280a1239db",
+    "text": "氷の心"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "b9d14ec72a6f7f63356118cd1aebdbe40562382fa74c9ddbb901e82a089658f0",
+    "text": "鉄木の小盾"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "91f02cb0a3b1ee454cf818c364309cb91b1b810470b64d11f3ef73b29fca585a",
+    "text": "幸運のクローバー"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "bc6a3861fd14f08f8b499947670ade1d1c956a9e161d500e4fca6250b53e0bb9",
+    "text": "商人の恩恵"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "b546cf6a759fb23f605977258da31082193b1ac3c3ffaa23965dcfa699dca67f",
+    "text": "隕石"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "e79002e6d8bb9bd7b67d59155cc7cf9070671fc110af915c051821aece984b41",
+    "text": "寄生花"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "5718d4987a110ec5ef5cf2d896c4c97961d24d7385497692a9405c92ca1c85c9",
+    "text": "疫病医師の仮面"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "167777a672697ab58080e985b7fff3bc4413a2c09282ae54abce29c9b3d6efd6",
+    "text": "共鳴する風鈴"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "bc38cadb21104104952917d4c5316676f53bc08dcb474edd5b5037896abc477a",
+    "text": "罪喰らいのランタン"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "8410068df61671cb7895453dcc230bac82921c7c638e2d7da1f2f2745cb174fa",
+    "text": "密輸人の地図"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "7283091b43ab45e65197aeede51db13a52c1f8ba7746a2b7b4a31ec15cb9eeb3",
+    "text": "破れたページ"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "daa6d2f6dcdc1c7a8493f5c50d90bb518bcce75778c53cc4d79acb0572f5cb55",
+    "text": "雷石"
+  },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "e3845088ebbef516ac2632a9a41d007d5dfa6c00b5222ffaba3bb708411f2b73",
+    "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復；<keyword1>消費</keyword1>"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "4d3727b54a8bcee156d0bcce24a2db63d98ef54c2f92f7b809a09f62c4d0380e",
+    "text": "リンゴ"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "38ca84d2884f1c96bb1bd3c2b7bb5c624d87b2749df7719c3564380a4565b06e",
+    "text": "<keyword0>体力</keyword0>を{{value0}}回復；<keyword1>消費</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "dce22ac52fe99659ff971c603cb09891ab7c2e0feed1653e320fded8bff367c2",
+    "text": "<keyword0>マナ</keyword0>を{{value0}}獲得；<keyword1>消費</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "5b33efd2d153be93f50985a12337eeac46e056e967411e21146c3a9635fbc6c8",
+    "text": "味方全員に<keyword0>ブロック</keyword0>を{{value0}}付与；<keyword1>消費</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "030720f4314043dc32b0f0e58acb79a354e69ee57257cfcd4315b1d60c36fea9",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；<keyword1>消費</keyword1>"
+  },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "f3fe52e6736ed42b25fa20062c112c92a027b82c980aac49aa2892b4e077ae7f",
+    "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "f0d71227cc30ffc55a28c2481b8906121cca63fa3a59b2aac2d9abd29b7002dc",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "0ab728abb65f93be6e4fb08204647909cf72261e142e134b31c2d84d783482e1",
+    "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "5d3fae2809498819470e25de20a0c82cb27dbbe5237469ed36f647f5e95230c9",
+    "text": "ランダムな敵に<keyword0>光</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "c0b1257bf9c8bc8840cf81fca96e552c38f3c4f0c5d52789f688318e325b56a4",
+    "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "7b628f1d69e8f24e4f9fa7dc9d304276bb9fc6f71a785f2eb596860f834b04c5",
+    "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "75e891abb6b39d9220faa888fcb982dd697491bfc4a4df9056234dde9a095570",
+    "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "4e5adb815870f401f4e3407fd41029b0db83c871b1704c81dcb5898d8d00186b",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；次の有害な状態効果を<keyword1>反射</keyword1>"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "dd90cd704804766f06ac76864c1800a512b442870777cc8b803222880ffbcf07",
+    "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象の<keyword1>強化解除</keyword1>：効果を{{value1}}個取り除く"
+  },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "2d6eed21c43cbc2e00187894410a7624f4b0e28047c82ec09dfb6ac248d57027",
+    "text": "アクションカード"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "fdb0cb37cd1ec5b30168ac2ed88ed29af551d91c5ab1a60b1182a547d6c8b122",
+    "text": "攻撃"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "1bdf747ec7ce04dbeeb267d251c2ec9d04deb1ac705b0ea0259efbddd11e29be",
+    "text": "控え"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "352eb6a83b22eca296f13648a003a6a3dc852d177c6256773ccdf2662a73b885",
+    "text": "戦闘"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "ccb812556e3fd22460b5cf98e62008d34c52cd1b73426fafc87c6546ccf506a0",
+    "text": "祝福"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "371b35e9a654363f7096ee30692aa6dc3bc6008c32c9fee79515571db3b8c6ec",
+    "text": "コピー"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "23f2c223761a6365519fe0cb1e3e92d57def21e9648cc6a0844313760c82a4da",
+    "text": "ダメージ"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "4d872e678a42a5ae844d691076e1197aa97b03af2c91741589289b30e0f5f28a",
+    "text": "死の淵"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "82e6c309927c88e95b17b1ad92d2a2f5285ba4dbcf86ec53612c82b1ebf79e98",
+    "text": "ドロー / 捨て札"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "2543aef2713fe0fc2fcc7639c3be4873a14b4d99662c41a19f079cdd1efbe201",
+    "text": "エコー"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "8aa234646e34429f2a0951a38b6914938c87058628b10c497ddd8e41026e5f46",
+    "text": "ゴールド"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "a94912b6413eb63fc1bb280904d6b14942541249b60b0e341fa166e2f2afd954",
+    "text": "命中"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "13444f48a5d8083588e83622f98126c8861e1afaf98bbb53765cf59fcef2553e",
+    "text": "キーワード経験値"
+  },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "6da3f15702a4ba027407d4a1cbae0826da5fdb8f3417329601540f8fd42edc2c",
+    "text": "次のターンにダメージを繰り返し、その後消える"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "fe0870a8e5a220d130a7c653b619168b2ef41aa63e384a6ba52656df60667c7c",
+    "text": "毎ターンダメージを与え、その後スタックを半減する"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "6d8e126df35884ca7b2ad31e5108faec39f214974ad177096aebde98f6f6041a",
+    "text": "味方1体の有害な効果を取り除く"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "e5430c262b9b46377350f662643f0a1aaa0d22fb3ae50648281adea563b0c71e",
+    "text": "<keyword0>自然</keyword0>ダメージ；耐性や状態効果は付随しない"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "cc5594c95f4b5031c889d0524696dda1c4d9dc4bf67ce72739e325a2619beb1c",
+    "text": "敵1体の有益な効果を取り除く"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "6470d41e0dcbbe68deba7a9732a481c7508b38a886ec31e8ae5a29e29ee1fa54",
+    "text": "<keyword0>水</keyword0>ダメージ；<keyword1>ブロック</keyword1>が吸収する；<keyword2>装甲</keyword2>では軽減されない；状態効果は付与されない"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "508cdd6d341755846a4c606017cc9a74f5254bc7b27fb39588b91919dbfb23b5",
+    "text": "戦闘不能"
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "743003abd109ee81332954f7da3ee23710d664154cb827e7536db5dba6a41b2d",
+    "text": "レジェンダリー"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "087c9a3e1783c1a104cf021364f5d9d9f838605675aef114b1d8ccb81edebdd5",
+    "text": "ミニオン"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "417c3036e350d66b7fc34fc386a3925af2db6a8859838acdad10e3c6fb8fc468",
+    "text": "真珠"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "f548258861a5573a059e631f4e3c3219d6faf9a579cd59350f995cf9f7a8e68f",
+    "text": "初期編成"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "dff6f8178a344474eaea7a472abf4eb06e75f8c99d597b9c29234cade44cb65b",
+    "text": "交代カード"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "3dbf6443e070712fbc6a295e5d03b756e1142980facae998ff11013700865824",
+    "text": "才能"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "60ba59531a92e5af2830e15a6f80c564cbc4db2821f97dec7e3bf39da5cb7623",
+    "text": "ターン"
+  },
+  "content.keyword.armor.label": {
+    "reviewed": true,
+    "source": "Armor",
+    "sourceHash": "8a01799740330e7ec8a6055ecaa50e994fec963f4994449878e6af7af9980f85",
+    "text": "装甲"
+  },
+  "content.keyword.attackReflection.label": {
+    "reviewed": true,
+    "source": "Attack Reflection",
+    "sourceHash": "1eaae6f18006a13c657c9ba3cd3209a364798c0f351381917cb3ed7e27441d9d",
+    "text": "攻撃反射"
+  },
+  "content.keyword.bleed.label": {
+    "reviewed": true,
+    "source": "Bleed",
+    "sourceHash": "706981386c14f1751c80a6c34f82d7d8eaf786123ad26973fcd6f27d5161369c",
+    "text": "出血"
+  },
+  "content.keyword.blind.label": {
+    "reviewed": true,
+    "source": "Blind",
+    "sourceHash": "1a0f547f8b75ad1cedbacb38f2d722321fd073ecd9d812703274a858fa62ca21",
+    "text": "盲目"
+  },
+  "content.keyword.block.label": {
+    "reviewed": true,
+    "source": "Block",
+    "sourceHash": "27cb83a9806f035bb8d1ff841d5fe633f38944c67abd83abf28c6b9a257384d8",
+    "text": "ブロック"
+  },
+  "content.keyword.burn.label": {
+    "reviewed": true,
+    "source": "Burn",
+    "sourceHash": "06e4e17313653b37c02f7386b3cdee357e18d978aafa037e1bcd82b1cec13da3",
+    "text": "炎上"
+  },
+  "content.keyword.cleanse.label": {
+    "reviewed": true,
+    "source": "Cleanse",
+    "sourceHash": "a14fc3c5f3e8c5925113101be0a5c1c76036b63655a7e16cc578f46d3ae281b8",
+    "text": "浄化"
+  },
+  "content.keyword.consume.label": {
+    "reviewed": true,
+    "source": "Consume",
+    "sourceHash": "091a3634001eab55278aff64365391fec4f3718b5b39b8a300478f6aaa5ad3a7",
+    "text": "消費"
+  },
+  "content.keyword.criticalHit.label": {
+    "reviewed": true,
+    "source": "Critical Hit",
+    "sourceHash": "97169e70e98470cda19473edca91c79a1352f9de6246ad5070d1d9456b9743f4",
+    "text": "クリティカル"
+  },
+  "content.keyword.dodge.label": {
+    "reviewed": true,
+    "source": "Dodge",
+    "sourceHash": "b036281db1e6c5129e058036061920bcb7a0d7f789291c59f4facfc5295ce0da",
+    "text": "回避"
+  },
+  "content.keyword.food.label": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "948c2ccc4f083d05a0fb9b6407d967e2d2e763fdfe57bd3e438a5084e6062fa7",
+    "text": "食料"
+  },
+  "content.keyword.freeze.label": {
+    "reviewed": true,
+    "source": "Freeze",
+    "sourceHash": "602cc790869a94773d5e3372ff4a8a3885c95287341d40590b9baed7324df291",
+    "text": "凍結"
+  },
+  "content.keyword.health.label": {
+    "reviewed": true,
+    "source": "Health",
+    "sourceHash": "24e4b9ed929167db227fc1a9891fa0b02d1c9ab025326be081dcac87890db5a2",
+    "text": "体力"
+  },
+  "content.keyword.leech.label": {
+    "reviewed": true,
+    "source": "Leech",
+    "sourceHash": "8b1cdf2c99a56825dfc560565222d802ca9415e6b83543451d2e3a1f2e6fd54e",
+    "text": "吸血"
+  },
+  "content.keyword.light.label": {
+    "reviewed": true,
+    "source": "Light",
+    "sourceHash": "88474a0fc754364656ae3523c35b6014cb79539ab59767d7fc1d41c661dc13a1",
+    "text": "光"
+  },
+  "content.keyword.mana.label": {
+    "reviewed": true,
+    "source": "Mana",
+    "sourceHash": "d94cf6e14e2514ef51427a5c9d3be12156cfe89e2cfbc05ca5e49fb41606661b",
+    "text": "マナ"
+  },
+  "content.keyword.nature.label": {
+    "reviewed": true,
+    "source": "Nature",
+    "sourceHash": "ec37903a6ab4e8d0662929951743dafa9c73c06ab2c4c401b6e7775aa28173b2",
+    "text": "自然"
+  },
+  "content.keyword.negate.label": {
+    "reviewed": true,
+    "source": "Negate",
+    "sourceHash": "80987ba8fb7af3c2b67f330d6c577d141b7f92652d9babd13a9e8c36a019db1a",
+    "text": "防止"
+  },
+  "content.keyword.nullify.label": {
+    "reviewed": true,
+    "source": "Nullify",
+    "sourceHash": "35df3307e074a023ddbdd63eba53c42cfd1c254472b09026a230d29961e57263",
+    "text": "無効化"
+  },
+  "content.keyword.physical.label": {
+    "reviewed": true,
+    "source": "Physical",
+    "sourceHash": "c722f9e1e2f776451c51e8af718e913372f433c38bf373b85fd11d1dd0fc6ff1",
+    "text": "物理"
+  },
+  "content.keyword.poison.label": {
+    "reviewed": true,
+    "source": "Poison",
+    "sourceHash": "7003fc04c1814360b3a46cded2983fdca2e5e3469e2829a8ebbce51d3854d1de",
+    "text": "毒"
+  },
+  "content.keyword.purge.label": {
+    "reviewed": true,
+    "source": "Purge",
+    "sourceHash": "12527b8be52dd05daa20cfa6a824cd4cd1c6a339337d750fa1d57a90790f5068",
+    "text": "強化解除"
+  },
+  "content.keyword.reflect.label": {
+    "reviewed": true,
+    "source": "Reflect",
+    "sourceHash": "75ebd42e9804ed3f15a8b8213716e01effcfd84657c11b62eaf10c33edc34918",
+    "text": "反射"
+  },
+  "content.keyword.resurrect.label": {
+    "reviewed": true,
+    "source": "Resurrect",
+    "sourceHash": "72e736502b567e693059dfd7fee343d249260dfc4f4414e7698a40ad837c1d8f",
+    "text": "復活"
+  },
+  "content.keyword.stun.label": {
+    "reviewed": true,
+    "source": "Stun",
+    "sourceHash": "78ecfb22562acd021ef346b5b2d71a5d6fa490467707393fb4e29509dc16b97c",
+    "text": "スタン"
+  },
+  "content.keyword.thorns.label": {
+    "reviewed": true,
+    "source": "Thorns",
+    "sourceHash": "9f4a461453a91978c3e1b8805f9a5a8fbac96edea870dd139c179f19dfc9a4ff",
+    "text": "棘"
+  },
+  "content.keyword.water.label": {
+    "reviewed": true,
+    "source": "Water",
+    "sourceHash": "c94de88083fe5ec567d91def86d6bbedcdf8224c311353a12d82511a723d263a",
+    "text": "水"
+  },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "ba32ca08ce42707b8f70ef91c688db3a68f5165d5efa12cc65f0ab0ec478ef3c",
+    "text": "移ろう砂"
+  },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "fc53c988e6164c7761bf18c6d68a0e52c2f365d2a2d321d8a6a16d1853e4e454",
+    "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "db4fdad727c76b7aab6bd321d0c0d37e2770589fce32a6958e22643489899adc",
+    "text": "ターンをスキップ"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "b34754c705544826a7a21b2655e66bf16fc471f5220f2365b9c4296a3b7a38e5",
+    "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "eb1a94e788d09c8bae86f6f838bfc1bfb2f513a5b4339008fb3359e6b81cad86",
+    "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "cea38a121bf3d16eb662a21e9598ef84564ba121af980bebcb450387c2c7a134",
+    "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
+  },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "d977daf5de481bbaebabcb1d5f90e1e0e55f77eda5b9118bfcb54e79888029f1",
+    "text": "エコー"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "854fedc6d662ce02f76b452b07949124d8aa8b0e33a65863ba293870fec89669",
+    "text": "{{name}}を調べる"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "4d25b31a3946bcf363f2e7f28c68d1478038a5080aa0e1bb3afe047e07eec7a8",
+    "text": "{{name}}を仲間にする"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "e32ee6fbef213e52d82dbe10a016dd4eca3951b52077212718bd0e6c32131207",
+    "text": "仲間にする"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "6ba26813303cb9a23e1dfe246da0a1b630917ef0c5723f054b970a6849a51410",
+    "text": "捨て札は空です"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "c6a65e7a0629c481ce014aa5399d751598e06b2ec4ce9f7a29ca173c6663e35c",
+    "text": "山札は空です"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "d10b9eb2ef7cc6e1b3706580dba596da39f3f69d61405572d37b700b707c2fc1",
+    "text": "デッキは空です"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "5b719238f89915ddbfbd8d29d7f3370a9b873714d9b2f4a7b7a72605d93b51cf",
+    "text": "デッキのページ"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "63808663e5628b0023b10f13ea9b04cd4bc07b88a7373c64466abc51ebd461bc",
+    "text": "最初の生き物を選ぶ"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "b83d8ad5a8edb8db6494a63160f34728cab51460223feabe5e1e3937e19e3584",
+    "text": "選択済み"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "60602fbabbb3b02e3daeaaf114fdb6e65eac24d667536a9b13e8baaec27e1bb6",
+    "text": "最初のチーム"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "3ba649b0f7a3a6359c1be1827d5789e3a9aaeeea67e380826c0488b58012b1c6",
+    "text": "ゴールド +{{amount}}"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "4959de8019f1b445d8b331d800cde3319d119bb8bcd9981ef3f0876a3591ce15",
+    "text": "キーワード経験値 +{{amount}}"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "c3cc4539064d747d94fdbc24ed184d42f2751c1f95d0cef773901380302e74ea",
+    "text": "前回の戦闘報酬"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "84c74beb67e6595e182fc15a00cfd100b2058340d92a113cd98ee2210218a75e",
+    "text": "ボス：{{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "4c8c28d044ba5cb0fbf2ddb102f7b543e0fb5ab8e80cab34cdc0e90545d56c58",
+    "text": "戦闘"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "9b9127183b81792627fcae6899181ad10c329a27da81a93447c19f7546b80741",
+    "text": "遭遇 {{current}} / {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "6efb73c1a958c170a294361e9450987de86df741758871408be5e802a50f1a0c",
+    "text": "遭遇"
+  },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "aa0df8808c3bef97bf741654d962bd1b8cf3c220139ca16d44ea23d911c64297",
+    "text": "コレクション"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "dd5493f5769beb1d5875a7c003d12415fabfbba53fb6f0bdf412ce0f506e8048",
+    "text": "続ける"
+  },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "c963abcb44670e530b94c63aec5760ef88f93de9d59a34b79eb7f93699feaab5",
+    "text": "旅を終える"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "7df1542c72aa12dcb7de30c23fe6e4c822da4ce74523943d83987f0d0106c3f9",
+    "text": "用語集"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "24bec8d437f9ca179deb8cea1e3025f2664e658f7c6604439a8a3850265d46ac",
+    "text": "メインメニュー"
+  },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "d9e7029f31f2ee8491418c746a618989f90806bacbb93372364c4eeb1ad727f2",
+    "text": "ポーズメニュー"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "0c97f1e1514b1c140bfd1b26ffdbe71ba2d0c0a8fad3399e313de39a018deca8",
+    "text": "プレイ"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "8fd7233856448a954cd1b94badcc269ee590889501d8e453c5222b2d1ba96983",
+    "text": "保存して終了"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "e47edbf7a62bc2a57d2bdcfe7f0008f8cb004efcb26dc1596bf460ed08d3c432",
+    "text": "設定"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "66d7bd82d62deb418bcb57a8faa95fc319fa61b52dbf3916fe4c8180a6f26fe8",
+    "text": "戻る"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "abc1febd96effd2b13cef02589943b179b1434dd5454f62260d890780fde102d",
+    "text": "デッキ"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "5dde70c6af800dcab35a751437affa27b6b68772eae18eed81218a29d6875a62",
+    "text": "捨て札"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "5fb976e02ba89acb51407a66a774c8e617f08d093908f89c380a37cc73dfe9de",
+    "text": "山札"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "e2d49cfc3c153ea8fa98ec67f3b263555df912264608966321c8dff65202755a",
+    "text": "次のページ"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "fc5b4cbe5433e8d2a97350af98353bf1f1130635b11f4dcb6e1f44cf4aaf0e02",
+    "text": "ページ"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "30f0a0c620f2db1f97b09be79567bda1cf045a1e709f4c9a8e9afab14184add0",
+    "text": "前のページ"
+  },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "799d5c13e0e75b846049089cf2672c1dc47fcca5c0e6d2ec8a90e846dd1bbe5f",
+    "text": "{{amount}}を吸収"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "b539fa38cc6b081b2c8b43392817ed9a24926b398d4b699b5d8dba4c5648e170",
+    "text": "または{{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "71de2e1ad2f5a13fb921925469ebc0dcadb464c87d2b8b8c10258da2e3d591f5",
+    "text": "ダメージ{{amount}}を吸収"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "527cac12df35ac26290e09a9b828c9e0d4a5d3f8ba45ab1ee7ef1976ac439757",
+    "text": "{{name}}の予測：体力 {{previousHealth}} → {{health}}、ブロック {{previousBlock}} → {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "75f5d4bf55b5befde3466c742a8523798eb4fef293b6aaf1c5651300ad559200",
+    "text": "結果は非公開の情報や他のランダム効果によって変わります"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "615276c646a70f973e6cedd2d6828aded2bbc910545e56fa469aaa9747d0a2bc",
+    "text": "クリティカルの可能性"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "151717bec0a1613a0c20fbc5241de2450a20dd9fc875e9b593840a6c29d352b1",
+    "text": "回避される可能性"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "c8bb45077b925ec6fbe4f7d26b4ac3ff53933633385a1e930fdd3401d10331a8",
+    "text": "{{left}}または{{right}}"
+  },
+  "preview.outcomeBlock": {
+    "reviewed": true,
+    "source": "Block {{before}} → {{after}}",
+    "sourceHash": "044d2f5f77733951195a8e9a43b1655abc3187730733536160bd4645f831fdba",
+    "text": "ブロック {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "reviewed": true,
+    "source": "Critical {{description}}",
+    "sourceHash": "6334ceb5c684dd0d8a11ca4351ddc084390d4ae5e9e955604412faf1bd5effd6",
+    "text": "クリティカル：{{description}}"
+  },
+  "preview.outcomeDamage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}}",
+    "sourceHash": "04480d4495d6e4d764de87989bbafccd7cf21e7c3f25e14e8fdda5e2c9bacbd7",
+    "text": "{{type}} {{amount}}"
+  },
+  "preview.outcomeHeal": {
+    "reviewed": true,
+    "source": "Heal {{amount}}",
+    "sourceHash": "a12810f80e304bca8fb86dcee47d5449a249403c25fa3996660b20830db1f3ec",
+    "text": "回復 {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "reviewed": true,
+    "source": "Lose {{amount}} Health",
+    "sourceHash": "99e967737e35d8e05871798bc28edf7c38528f834697929243aa7be0a4de6b4b",
+    "text": "体力を{{amount}}失う"
+  },
+  "preview.outcomeNoChange": {
+    "reviewed": true,
+    "source": "No change",
+    "sourceHash": "9b81872c75d5ca3f628f075a37833d4f26a1c3e1a9ea611ca465934816bf761e",
+    "text": "変化なし"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "7bf05f2d614f7e4b380e18ebe333eaf332e359f7adeff4aa1383b5edb867cd7d",
+    "text": "可能性：{{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "ec7a634d3360132e7d1a506c8a9252a5c763ae9bec3b25327b8884bb26678ef8",
+    "text": "戦闘不能の可能性"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "ba73d7ff9cc10e2de5897237968e370e105d520120a50998c5249dd883dae748",
+    "text": "{{name}}の予測される結果：{{outcomes}}"
+  },
+  "preview.removeStatus": {
+    "reviewed": true,
+    "source": "Remove {{status}}",
+    "sourceHash": "baa90f5bc76c80f78dcb589d0e2abd5f91f903569eb19f22b25d9380f53094c5",
+    "text": "{{status}}を解除"
+  },
+  "preview.statusChange": {
+    "reviewed": true,
+    "source": "{{keyword}} {{before}} → {{after}}",
+    "sourceHash": "c0ae6bdf9f336b250e2fb534f717fd569b29f4e86973b4ad42903034b30ee84b",
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "5d7653b1b4fd3057b110cb2d2503df2b2beb5dddc821b04e057a08f4b13b1498",
+    "text": "結果が変動"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "7406c65db573dad61f5e87a510d860406fbd85ffafb7d14cb8b0c50efb5f4ece",
+    "text": "{{summary}}、{{details}}"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "bd2e1dcef7552f59e97761e2bf6c783a1d5a9e70796f0a72a502ef29dcea59e1",
+    "text": "チームを選ぶ"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "b3f66e2b3d7b5f31979a90830b9ff76096925f669cd2c2827c79d6332d69c336",
+    "text": "決定"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "cee01d3f0e688f8b8436aa4c2420093d321992ba1548692e63d04c99c6bfd949",
+    "text": "生き物を入れ替える"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "a714fd84822eaeeb82a213b57aeff2948372ca956cf8b183360a41d3b7b66cfd",
+    "text": "チーム枠{{slot}}の{{name}}の入れ替えを確認"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "26d3899d55d23fc82b0baa1c6e46fe88d69358b90607d4398c24511a08562ade",
+    "text": "チーム"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "b3fbd2a3e3d57ef2c6155dba3e609434827a0467e1c98fbffb20f8f09202ceb6",
+    "text": "{{name}}の入れ替えを取り消す"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "e10054772192f2360d1b61d7b7bd872374a3dbc27eecfa11524a674e54722b08",
+    "text": "チーム枠{{slot}}の{{name}}を取り消す"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "838435dfc4d3601f9f32c4378063b99581c4a126d52684c1994313112421d669",
+    "text": "旅を完了"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "9375e3bf1115c60c109d5c0c1c17028abe87e49159c588efdf864d68e52d3e32",
+    "text": "敗北"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "efbcbed4d62207ef4e4f062e5730a5e41064e1473375aeb1c66229a3124505c8",
+    "text": "永続報酬はありません"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "b2e9cd5c98e2aa59b5e7bfa040214537e1a6ab0709f93b1116e159f9aeb7c06e",
+    "text": "旅が終了"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "4761c24a98c2b974104260d86bb8615a5283d8b31549e57854a6518da89df5c0",
+    "text": "旅の報酬"
+  },
+  "results.goldEarnedTotal": {
+    "reviewed": true,
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "03d0b63220cb5884f7991360d6b90b181e633ab758b8ff1b430abdb2b3d629df",
+    "text": "獲得ゴールド：{{amount}}"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "24bec8d437f9ca179deb8cea1e3025f2664e658f7c6604439a8a3850265d46ac",
+    "text": "メインメニュー"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "5ba8a12f61f4cc8abea42fa33dd42e2fad06afafde509097e953627deefb9259",
+    "text": "帰還"
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "d7228d6866c9fe3c2363c9dbb4bcfbb1ea1f0a42fb7fda2d59cba2211fc89d85",
+    "text": "祝福を選ぶ"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "cab1a741a359f02b8c5efb5c5c016aa9c2ed53487c632856dd566c2f2c1afff6",
+    "text": "仲間を選ぶ"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "e5cccb2d663d0f57ac6690c3f67961275cdf9c79e86d1b434b823a6cf50380cb",
+    "text": "新規！"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "07302f7f8619066f444cc229d94ef17380655f370d80070849ca485063637397",
+    "text": "{{name}}：コレクションに新規追加、星0"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "5eba6afd03f9bd5ac8b528c1c2f3742ff0f4bbc5f95c7ac6eab5635bf84f234b",
+    "text": "{{name}}：星{{rank}}から{{next}}へ（最大{{maximum}}）"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "ec5bd694a25ba1f404ad1edca8c84e95c8284277d0c0a3fd74fdb79a5af147a4",
+    "text": "仲間のページ"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "460af97e6c28d4364e446cc5a356eca91bc9ff42df0312bd46853d97bb89b7ef",
+    "text": "スキップ"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "30edc2983a1b6fa10e471093ed3c0bd94cc5a8d909327228f17c4de3b0293b9b",
+    "text": "勝利"
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "57c6ac3fd3e2c2616de01a8e579554eb4f854b5c2fab03af4c5f77d6e0d9d6f5",
+    "text": "音声"
+  },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "bfd4478b689c046d2d4dc7aabd6209c4ce97dec16472c40515f5481d534f365e",
+    "text": "ターンを自動終了"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "e65cccce078240e6b37ed499a504387bf34ac583d70eb85860d5d9525e629f0e",
+    "text": "自動"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "b49b81f30cef0f95d07c21d156c60c0b2e6f74b0c4107050a2de31f21e5d8ceb",
+    "text": "戦闘"
+  },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "18942ccc7684aaa981a644684b425821ea7d4d920a3157c37b7d8b1dbcd31f53",
+    "text": "設定カテゴリ"
+  },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "967155197934051356442b3043fa1de33768cd942a511e3b5fad46b0e6679b3c",
+    "text": "言語選択を閉じる"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "449890a8bf947bd8d05af1f779e516c7d0593e88afc52823b9c8fc7d014dcb5b",
+    "text": "コントローラーの表示"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "9bea1b16f5a1c2971bfcc5d2e621da259af776803f561dd5b1eea2b2f709c090",
+    "text": "表示"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "72090c6bbdf9a7fbb365aeb70807d84e73f48b1ee63fbd3e3656df4945c64c86",
+    "text": "表示モード"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "90b8f6b59a449fc1caa3d6e6109a65830b1dfe73be181abc26d9389cbf9da074",
+    "text": "効果音"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "032ccd5dbdeaf339e9d7cff55d53486ed2a1e668c681c3ec8f69acaddaeac0cf",
+    "text": "効果音の音量"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "342500a400447335e40253fdcfd1e28abefaa675e4b1ff020ba0b26d26936f22",
+    "text": "効果音量の値"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "6c5a63d32c447bac6ac6ec6ae26edf6cb5485f7f536af48e4c7ba70081d7664a",
+    "text": "全画面"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "e5d35a7360f1c07578c3bab6669d2c7f360bf3b109558154b4ea5df73fc7ea9f",
+    "text": "背景の光"
+  },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "b1cfa0c3ecd3e78bdc66a967f137e2abaa675cd1ad83f40a84749e25d65a2840",
+    "text": "背景の光の値"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "aa21bf9edb90febe45b6b96cf0440cb28bceed8400d43c9f8958762fa91bfffc",
+    "text": "言語"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "f352c70304334870065ff6370a58fbd82271a96ac8f6d004743ced3fc71ed576",
+    "text": "言語を選択"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "9b57beddd4c3e7a3107a37c369b1f4fbf3a3406e7dd636cb3fbbd9fb06fdb388",
+    "text": "言語：{{language}}"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "171387efeb09b72bb8ce7c60979dbfb3a6a1a52b1b299b955ca2c416ce9ab6ad",
+    "text": "全体"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "1b580f77ff2919a50f6e71aa7fdd0cd612692a1cfdc257b6c1da982b8e4521a8",
+    "text": "全体音量"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "c1966ae094b8329cb2fab1da35d1f4d0939edfb0fd16035dd8c741962f3027a7",
+    "text": "全体音量の値"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "0837277376e9790bb5c89ee7aac4e002a0a7830f9a4296020a31086aa82537a6",
+    "text": "音楽"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "dd370bf79239121772292e49f327ae386fc770e93a2ab6a348294fcfe1770eb4",
+    "text": "音楽の音量"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "6f381b2ca15f608ad1847c5caf2e9291124b2a365a62f40f9e97731a9659512b",
+    "text": "音楽音量の値"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "2cebd8fc8400ffc7418cfb04c269021356bf1a63e6fbef5612ab2b776621b3ce",
+    "text": "バックグラウンドで消音"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "bbc2687aa34f93df94ce9ec818b16ce8a779c7662bc929c30cf059e18e97b7f8",
+    "text": "背景の粒子"
+  },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "f401c468eb1ad969f50025ed51649e3c4890ace56484f96ee479435c8ea5b0cd",
+    "text": "背景の粒子の値"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "3baf8d8dd3dcde573d27d0ef4cf1d5fd38a15f2935bdc61f5b346f1ef1b61a64",
+    "text": "音声"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "085894484ebe210f9624e0fbcc6e578ba7fb822647ab1b949021ba5d22e64276",
+    "text": "文字サイズ"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "d3757860d4dad6c88695fc83c492be2194d198748bae205c5e1ff8de8ac04bed",
+    "text": "ツールチップ {{value}}%"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "5b1775ef7b77378e4c4619cbf9a641ff4b1697eb225646a51c47d9f271edfa39",
+    "text": "ツールチップサイズ"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "746ae9dc77bd40cb0eadc731954e7b6611ebb5af6d95373d9de5acba197f16b9",
+    "text": "ウィンドウ"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "720abd7018bf1fbe224aefe41862579331089edbe191897b86b0430192ab0eb5",
+    "text": "{{description}}；{{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "9c91f37c2666014bac453b4adeaaeef78152baf246788a19f5c887ef5b9b870b",
+    "text": "{{keyword}}ボーナス {{count}}%；{{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "aae3ed7746c07d290bfd1e2f5b65eb84ea1366d6a3f48b9a04966f8aba7d02fc",
+    "text": "{{count}}%は次の自分のターンに終了"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "81252b344233e351bcfaae3bdae786e729bd85179818154d08439a941ad5820a",
+    "text": "{{trait}}による{{count}}%"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "cc4099054fbc1ef2828eec14d18cf4c06039fee7928d9aa928ec499ac4000f14",
+    "text": "{{keyword}} {{count}}；{{description}}"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "28aec51b4050ac6106d05d55e3d3bc628e684eb134d17da95b8a75a9ce26330e",
+    "text": "解放済み"
+  }
+}

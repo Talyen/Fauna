@@ -1,0 +1,1544 @@
+{
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "618eff11dc2c58bd7efcec76d34467bb918c90e5ee5bdaf56ba326de434df826",
+    "text": "Aktionskarten auf der Hand"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "40c6cb20675355969aa4a4f863ea3ea84445654403155e87b479010781bbd2e6",
+    "text": "Automatisch spielen"
+  },
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "0ae3bcc15772d71b3fc05b40f8af710136e98303a3b43fdac6ce0ab72f44a5f6",
+    "text": "{{name}} (Reserve)"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "878e0d71dd8cf9143afa045a7d8018b48a07bbf30bad876f9bc82eb5b614c6c5",
+    "text": "Schlachtfeld"
+  },
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "f590f86eefe98446e7641f7cedbf802ad55f4aea40aaaec4507b009ac04af298",
+    "text": "Block {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "d9ee6bed1e36e68f1e9f0af1d1e71506ecff74fff021a7ef8eb29a42e513130a",
+    "text": "Block von {{previous}} auf {{current}}"
+  },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "72a37f5f5711b3d7f88378bc3e59c743d3ada0a8795074126a46ca118e8358a5",
+    "text": "Kampfkarten und Steuerung"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "b3cf2221ce0bfdf9ec432a0ead12c9b7432b5a8807d743e9397d2fb0a1a459b9",
+    "text": "Verbündeten wählen"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "fffc3d54834f5007a643f9d206f21fef87f0a66bf46327a538eb1790c7890a77",
+    "text": "Reserve wählen"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "840712869af8a3bbf16e1a536d62c84a2cf3bd1ed9a82173e64a065afdb74520",
+    "text": "Gegner wählen"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "f801d88f838042fa8c5b4dc1866221894454287eb298ae8b63f857712b31bff7",
+    "text": "{{amount}} {{type}}-Schaden"
+  },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "9e47b9d6f484d9f0fbbaf4f240014fb4c2b7eb1d6ea3600c3732b9ff45b896ec",
+    "text": "Kampfeffektseiten"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "9f86bad70996e8007c156c47411b8042cf92ded7bf7331e9dbea8f9582744a0c",
+    "text": "Kampfeffekte"
+  },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "4e43c4d2a5540e38d3838bf69dccfc6a0a22add460f4f1c7820101802951ac7d",
+    "text": "Zug beenden"
+  },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "5f5c01544ea69fc5df6decd89e47109a413deefb03361d621c9e48bf6829c085",
+    "text": "Zug beenden · {{prompt}}"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "8ec4099d1e6fbe06b28fe23234b560ac33707837c4dd91636718c193350f89b0",
+    "text": "Gegnerreihe"
+  },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "5d4ef0d166f2ced8d76688898a64700b286faf985e3c4736ccaf33fa227b6942",
+    "text": "Nahrung"
+  },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "c92c03431b361f6e769d941b77cf0a500a4c09d140bed3b19cd971245913b261",
+    "text": "Ablagestapel ansehen"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "5c3f5f2e59be73f905092d0dbbd7e20c9485321581be777e78d8f1eab32f31c8",
+    "text": "Nachziehstapel ansehen"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "787e34f6238264e1fe9387983993d1fc90619048294ca6ce7ae9f0727469fe57",
+    "text": "K. o."
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "3c7adb639d0ed9ce33a49679902ac78366b9333b17c93a65a3734ca4436aa3b6",
+    "text": "Mana {{mana}} von {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "eb0d3049b2d8c3486dd1499426a94d83c6c7cd6674250cba0100d266ded59abe",
+    "text": "Nächste Karte ×2"
+  },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "dc8500dd2d436804d5e835eeb18839c9f9186e91565f1f28d45fd23e59796046",
+    "text": "Menü öffnen"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "111f25359eb0585b08ac0b64283a7631822c0595b074fcaa84be6d897a48d6e4",
+    "text": "Verbündetenreihe"
+  },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "e328a9deb2b6e70c603f3bfcaee83d7ff4a77c232e242fdae4641936fd9cf26a",
+    "text": "{{name}} aus der Reserve wiederbeleben"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "dc2c13c84107560212bcdba7101e0291d87ea0ee3f999550f22f3a01514f9400",
+    "text": "Kampf überspringen"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "80ddbd26514e80c8fc6297d6493284c6b6ca33064f59bba4026c5cdedcc63f4d",
+    "text": "{{name}} aus der Reserve einwechseln"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "f8f85b9575ee8b90fa65bc9062b85ad60cbc0961b2600e629361350753b87c1c",
+    "text": "{{name}} als Ziel wählen"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "978f70d3a81c5832b12dfc3f0a904251c6589ff4f2d366dc732d1d5e2a26bd21",
+    "text": "{{owner}} · {{target}}"
+  },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "3fc5914010c05965b65659e18c422f39e105997917ede4f0ad3733306a037234",
+    "text": "Gesundheit von {{name}}"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "0feb5be59ff9db8dee98837dfd191bf629ecd5815976423bd29e1c739cdd123d",
+    "text": "Lagerfeuer"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "cf8323467a2a31c87b03485b30c37a5407aaaeead25d08e1f2574578d4b8c308",
+    "text": "Erholungsseiten"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "b71d7cd02807f60006456e89c4835062db87896056e36354b07b657c96b8a07b",
+    "text": "Erholung durch Rast"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "591bac614005b3ba729756100c8a5e00703a7aa2dbcc5fdc04bd2594e63139ea",
+    "text": "Rasten"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "4eb13fd1442f34d07a90c49eb854c108f4a0c04a606bba98845a1bf1a9235443",
+    "text": "Lagerfeuer besuchen"
+  },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "2b009571dd007c131484d7cec14fa495c704edd166862e7a1570ddc6b9fc0d60",
+    "text": "{{name}}, {{owner}}, {{mana}} Mana, {{effect}}"
+  },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "656aa5bc7213692a8ef4780d037bd8995ed6da4ac2f49423a5395266f6a62372",
+    "text": "Kopie · Bleibt für diesen Kampf"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "00d9c4a2d8ec9ecfeb4205f07bcea039fe046c77e1826888108b0f5570e15ccc",
+    "text": "{{name}}, {{owner}}, {{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "236713dc8d5d8e716cc50f7ae8e7e303c943628d791d64b99f4b86ba84b43341",
+    "text": "{{name}} +{{level}}"
+  },
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "6f1909f064dbc2aa7f48c5e57760dc10e9834091c79d7343ffae87027dc174e8",
+    "text": "Alle"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "88e02ed517c013fa1214a86261f0dcf354d11657c3da6f35de715775d57f8d93",
+    "text": "Gesammelt"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "96b173fd32cc21b3b1f2a556a3a6412195f9dd3802395b3e1f0c5a8bca90cf49",
+    "text": "Keine Kreaturen in dieser Ansicht"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "7f84ff163d9f29aa1f3a54492b4589178e8ab62669c69125b382bca5d36181ac",
+    "text": "Sammlungsfilter"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "44c9899915104e161cd406edccf70820be9d5e9f36d65dc0385b7b71083d86ab",
+    "text": "{{name}} ansehen"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "77d124a27fbe5d04b529ac3daecc6ff42129dd784fb1e6a04444c2439a930dc7",
+    "text": "Gesperrte Spezies"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "78de9189b2c98a3398d68acf999e6c8344a5e695db7303bd3f16045a3aec8668",
+    "text": "Sammlungsseiten"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "a693a1fd620d74c4bd12519ab4c86bdee83746bf3f0a858d3a01a4adbaba052e",
+    "text": "{{name}}: {{rank}} von {{maximum}} Sternen"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "231f13d8259652a847f0b406d1e1295ff67d4c43e13d4483f3fd67e3dcb918e7",
+    "text": "Nicht gesammelt"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "fd09ad73d233655e6f78a51e5806c5140c35e6047b504ee6cbe805f41de842a9",
+    "text": "Abbrechen"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "852ba2ea847e486cb28f3a870bf49be5d7e4858e4f4e23df1e5e3668417e01db",
+    "text": "Wird geladen…"
+  },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "86493f1d983c07bd271fa95e5bbe359ef315eff5b34c102d712c168982979f5f",
+    "text": "Knochenamulett"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "27b172b8743ca9ae484da58a07637eccdff8495b1479bb20b52162256c89e33d",
+    "text": "Messingrauchfass"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "5cf26d170aa98cdb4926be7bcedfa40cfb5fc539f0cb9c3807b76b2645ade535",
+    "text": "Beutelschneidermesser"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "306550399bba5f790e282e7f4aa0663c92715764c6d325bdb2c48ea4aee58abf",
+    "text": "Gunst des Hains"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "e3634a5ce932eded36128cc6ed8a0650c23e8435c548ed145d6330e9136ec36d",
+    "text": "Eisiges Herz"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "3db174f5b4acfb4750075bd173891f3787f963bf8ff7ef28bddf1cf245e27232",
+    "text": "Eisenholzfaustschild"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "ebb44ee6e8c131a1343b82a3a8e5a17c471b5807284a922721b2769ae1905025",
+    "text": "Glücksklee"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "2db9ad8d8ffc6721001ea16b16c1fe699ea61e9dd5534926bb101c7cab33403a",
+    "text": "Gunst des Händlers"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "3b95ee5e51821484b2aa8fec425eb9e6ad84080ddb534e0df027d04de5c4f874",
+    "text": "Meteorit"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "5b94434efee46920a756f5aef516ffd7993ef4c7ad16c58f1671636838e17735",
+    "text": "Parasitäre Blüte"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "f230babf765104b422f3594117d8c455f8422f6a72dcd0962cdf0a4da8f39bb0",
+    "text": "Pestdoktormaske"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "e1851be702888ab78a489ccfcf902804a56e96deb9904209ca071653d85c6071",
+    "text": "Resonanzglocken"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "390d4ebdaa3c17d81bfbd8c242cf982926760dc07e4ef77c4cc52eb7b9a34003",
+    "text": "Laterne des Sündenfressers"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "3207af59d62a297d1f6f5fa00dd924b0c8f1eb3cbde692e419c96ad0bb25f6a6",
+    "text": "Schmugglerkarte"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "6f8418837e98173a1718e72c8db57cfaa9b684a7129b9276ad63baf0822c49e3",
+    "text": "Zerrissene Seiten"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "ea8f2c71542762eb6644d3df9c6ff1646f844da29c4816e82317984ada005b49",
+    "text": "Donnerstein"
+  },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "b6a5f45d823f6d75736221410236d2946f5a9255b2f3ebbb0479747731655410",
+    "text": "Stellt bei allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "77ca6c755cbf37658939fa37108c278aa20e4388ccdd840a64971119b5598b69",
+    "text": "Apfel"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "6802c43071144aff57eb8da0ce8cb599eec1fb3e01aa0f4f1d958d1042b453b3",
+    "text": "Stellt {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "0a2d92d0328a5fc3dd75eb32b22dda82758436fbcdc20c32180e7b1dacfd203b",
+    "text": "Erhalte {{value0}} <keyword0>Mana</keyword0>; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "03a98fb54ea5abbd19eb6effe97a70e883981eebd732f09d9e888becbb7c9add",
+    "text": "Alle Verbündeten erhalten {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "d20756e6b139b74a383dadb7cdaf6ab99bed5a9085a9c34b85c797e677c026c2",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "b8b8d25309b6b718a631c0d7c1d6f240016f722cf165d70e36482412c02529df",
+    "text": "Füge allen Gegnern {{value0}} <keyword0>Betäubungs</keyword0>schaden zu"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "f14c47906c4513ed67f035d726d53625f3bb9b4ae078d22cd683f52b58859809",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "a1aa580c34cfd6a61483333802e59e1905f1727cb88bb80a3883322bbda6ecfd",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "f4493c8652673e85a987a50bf0e1a7cf9762f7297abe343f6fbdf3b4e1559e2f",
+    "text": "Füge einem zufälligen Gegner {{value0}} <keyword0>Licht</keyword0>schaden zu"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "00d259c23d45a4c04ac4a802d67134909ea6989d28429118aae384e03c4bfae0",
+    "text": "Stelle dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "9dff911c6edfe84f9c79e02a91ab347b789021ab804d0d357d9c3655518de8a9",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "7753bc0a1d6007a54e5c1e4186999b02ac76975b4bd65391d1c63e28df30da07",
+    "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "d13fe250bac8565f527598fc1d3b0616b9b90c7baeda01df91d223799d18587e",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflektiere</keyword1> den nächsten schädlichen Statuseffekt"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "f3976bbe0ac7c3f458f6b048660bdd70aec812269ac3182f4171097ca8a41a88",
+    "text": "Füge {{value0}} <keyword0>Licht</keyword0>schaden zu; <keyword1>Entferne</keyword1> {{value1}} Effekt vom Ziel"
+  },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "a418518747ed6b89f206302b119fa4ac53a26fef5afe099b50bfad7fbf633760",
+    "text": "Aktionskarte"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "7fb2eaea3361819dd5b3a8a087a72acda3438bfa37c973534364ec9599515567",
+    "text": "Angriff"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "9d32a3dc30d346601027568bc3a79984af8a3331a7e0d803051d00adafb4c14d",
+    "text": "Reserve"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "876c80c65806e27f6e9d7a98bcc336f648d675643c355ae15f557eb5ab7bd9a7",
+    "text": "Kampf"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "de4fddb4c3560b3105b64eace9de08c48fccdc92f555c0a357f6e73a5ab39011",
+    "text": "Segen"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "524372835a6d82304b684986925a3cc146e509d70260ac5bb56f16756ac70964",
+    "text": "Kopie"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "285844a7cb76af9b7754eb1cdacdf85e91f75cf3024f4e4442b36e3d46035e5f",
+    "text": "Schaden"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "3ac7bc7ce1e01afb2b4a212e6df6f738b1b8b1e4019be92bda487722caa392ee",
+    "text": "Nahtod"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "3400d55105771797d44c9d6807456fc113e4022c8a0df79ceca535f93ad6b68d",
+    "text": "Nachziehen / Ablegen"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "043126a51a018d9c4b6a62910adc3a3ca42968a3e4efb84d190ac6dfed280870",
+    "text": "Echo"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "67f4b727747e1faf6b4bf67074c819c0779c4c30e72419c33600aeaa3d9b9751",
+    "text": "Gold"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "7d39e3ecc65f85ca0d468934424165d242b52068ca066f4daea024cc613e2580",
+    "text": "Treffer"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "270a8876fb1ec2d1f226cbdd603cd20de6f6dd533b1cd2c15e5bacec008470fe",
+    "text": "Stichwort-EP"
+  },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "ad222d14a49959006543cfa380b31e95f9c3509f1fd899d51c9bdfd895dd7f45",
+    "text": "Wiederholt den Schaden im nächsten Zug und endet dann"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "8bebd36eee8dde5c2c61051e62c4a0acac02fff58839015616f01642a9a4c709",
+    "text": "Verursacht in jedem Zug Schaden und halbiert dann die Stapel"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "a5193e453c43cdee87b31b8a1d0ca636caeaa68cdeb19b808bd18269e4b94163",
+    "text": "Entfernt schädliche Effekte von einem Verbündeten"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "cb22830e3b7331707ac61525e51b141d94ad41bbb03ef8ac3d086e54c3997649",
+    "text": "<keyword0>Natur</keyword0>schaden; weder Resistenz noch Statuseffekt sind damit verbunden"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "8c9ba2938a831d23638bd7a7b6b20b5f084e680b41f7d817138eef2ca618bc2a",
+    "text": "Entfernt vorteilhafte Effekte von einem Gegner"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "59ae932221f1bc9723376b1463a3f99592fac638403a4d477ba7a10609997522",
+    "text": "<keyword0>Wasser</keyword0>schaden; <keyword1>Block</keyword1> absorbiert ihn; <keyword2>Rüstung</keyword2> reduziert ihn nicht; kein Statuseffekt wird angewendet"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "842b9ac328d40462daa40440e2886e2ebb1b3a78a26ebe9a7794019462268596",
+    "text": "K. o."
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "b9b170aaf69e0ebc04df96da35d5d5cebcce8481705533e435371eca7f94216b",
+    "text": "Legendär"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "6da3b7db3f0bb7ffd9a49ab07feb3dc28d277b1849ad11ef60ac7910eb0a4bb4",
+    "text": "Diener"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "8aa4ce2a21f12f160f60b96d4f5ddfb8aebaf1eb57c1f0acab2f7a5c98651718",
+    "text": "Perle"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "3361f043c84b71e0e0356d2b87097b83c4c4fb128ea7876e5dfe2c12f2c729bb",
+    "text": "Startaufstellung"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "979f982a683fcca8672e76f0eaa0f173c24292312ec4c96d89b110b15ae8f175",
+    "text": "Wechselkarten"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "0bfec134a8655c68c8930e96aad8889d40f49daa248f508b14885f63b6da1894",
+    "text": "Talente"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "81c2939f7e21edb703fc7fd207e0eae991c3dbc98a83f5b164698eb49f092966",
+    "text": "Zug"
+  },
+  "content.keyword.armor.label": {
+    "reviewed": true,
+    "source": "Armor",
+    "sourceHash": "2081ecc7ac92e2683297b7725d61e04f00e54de6954c0b95b909eb2657dc7819",
+    "text": "Rüstung"
+  },
+  "content.keyword.attackReflection.label": {
+    "reviewed": true,
+    "source": "Attack Reflection",
+    "sourceHash": "828554836d0dc09d6e7052f0911038a27adb596905c2e4047cf53d116de1c25b",
+    "text": "Angriffsreflexion"
+  },
+  "content.keyword.bleed.label": {
+    "reviewed": true,
+    "source": "Bleed",
+    "sourceHash": "89c04443ec3b61a08b612376c930fa7812036d4d7c903dba27da909d37f0ec1a",
+    "text": "Blutung"
+  },
+  "content.keyword.blind.label": {
+    "reviewed": true,
+    "source": "Blind",
+    "sourceHash": "7236976a6d31a37d6b72d9fafea77587e775cc4a3a501f37455e99d2a3c62963",
+    "text": "Blindheit"
+  },
+  "content.keyword.block.label": {
+    "reviewed": true,
+    "source": "Block",
+    "sourceHash": "0dadcd3578c64ff15f0359963f017db452b4b9271e6c5a4faf9255d98554de3e",
+    "text": "Block"
+  },
+  "content.keyword.burn.label": {
+    "reviewed": true,
+    "source": "Burn",
+    "sourceHash": "fd22cfd3392c1acd818540f3e034870277dad592565daceeea256e694faf8553",
+    "text": "Brand"
+  },
+  "content.keyword.cleanse.label": {
+    "reviewed": true,
+    "source": "Cleanse",
+    "sourceHash": "2a4b7914d8458392c368a2b22cc7a2f33e10bbd064a785d5c453c52caa50fb85",
+    "text": "Reinigung"
+  },
+  "content.keyword.consume.label": {
+    "reviewed": true,
+    "source": "Consume",
+    "sourceHash": "4f69dc9aee72e88472f0de240ecb5237d07c85f1419f350f91277eb2e49377e3",
+    "text": "Verbrauchen"
+  },
+  "content.keyword.criticalHit.label": {
+    "reviewed": true,
+    "source": "Critical Hit",
+    "sourceHash": "84e08079708a55b8516c065b3cf3dca74d40fe48023c87e0a324634f53ece771",
+    "text": "Kritischer Treffer"
+  },
+  "content.keyword.dodge.label": {
+    "reviewed": true,
+    "source": "Dodge",
+    "sourceHash": "e62c6c4ec00e3ec17592885e4ad27a8de6aa41eaf4d7cc51e981d003a6524644",
+    "text": "Ausweichen"
+  },
+  "content.keyword.food.label": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "5d4ef0d166f2ced8d76688898a64700b286faf985e3c4736ccaf33fa227b6942",
+    "text": "Nahrung"
+  },
+  "content.keyword.freeze.label": {
+    "reviewed": true,
+    "source": "Freeze",
+    "sourceHash": "c7fb6dc10bcb855797ab35addfbd6bbbe06217ee9c66c5a4d3366d3888f55f75",
+    "text": "Frost"
+  },
+  "content.keyword.health.label": {
+    "reviewed": true,
+    "source": "Health",
+    "sourceHash": "db06d5bd5125672fb1c10218808691f1e1b44165a4c5c637ea8a24e688b32c60",
+    "text": "Gesundheit"
+  },
+  "content.keyword.leech.label": {
+    "reviewed": true,
+    "source": "Leech",
+    "sourceHash": "ce2ea4a7054b827fecb33568d9b914274f96139882d43e5fe80cb2278e95f43b",
+    "text": "Lebensraub"
+  },
+  "content.keyword.light.label": {
+    "reviewed": true,
+    "source": "Light",
+    "sourceHash": "039decf09307d5f8851a26fae53780b6e5e3452c60bf2054be277653c4d01e18",
+    "text": "Licht"
+  },
+  "content.keyword.mana.label": {
+    "reviewed": true,
+    "source": "Mana",
+    "sourceHash": "b32f2451a73ed1fb33f115a41913ee167e2103bfc646c7f3c693796845a9afa8",
+    "text": "Mana"
+  },
+  "content.keyword.nature.label": {
+    "reviewed": true,
+    "source": "Nature",
+    "sourceHash": "b4ced21e4fbfb27c547cba4e683dc262969704fc1ab4cafefe0947f0a54b1053",
+    "text": "Natur"
+  },
+  "content.keyword.negate.label": {
+    "reviewed": true,
+    "source": "Negate",
+    "sourceHash": "2c290f0a2ba27446cdbdb046bb063431a4e04aa961b5fe7a6cc201ee019ccbdc",
+    "text": "Abwehren"
+  },
+  "content.keyword.nullify.label": {
+    "reviewed": true,
+    "source": "Nullify",
+    "sourceHash": "8841ee62678008aaf4e5cf90eb6a75667d455729197a5418dc4c77c5d12d7c3c",
+    "text": "Aufheben"
+  },
+  "content.keyword.physical.label": {
+    "reviewed": true,
+    "source": "Physical",
+    "sourceHash": "5a47d8bdce3825386b7a6b2b2947446cd36f3ea82caeb1bbbebc40f33ce082b2",
+    "text": "Physisch"
+  },
+  "content.keyword.poison.label": {
+    "reviewed": true,
+    "source": "Poison",
+    "sourceHash": "a0116a33d7c66b66223c2de2bce26f3350a5db1794e81a8a79c102ea1087f953",
+    "text": "Gift"
+  },
+  "content.keyword.purge.label": {
+    "reviewed": true,
+    "source": "Purge",
+    "sourceHash": "99519c03c3f340bc53a2320349289adf04e3b999610ec03587942fe0b1a06474",
+    "text": "Bannen"
+  },
+  "content.keyword.reflect.label": {
+    "reviewed": true,
+    "source": "Reflect",
+    "sourceHash": "9251c0858c183a0e77e92bca28b93ce5b98e8d8a79a4d87d34eb8fa3a1c53784",
+    "text": "Reflektieren"
+  },
+  "content.keyword.resurrect.label": {
+    "reviewed": true,
+    "source": "Resurrect",
+    "sourceHash": "e32c1386528a704b7c559353cf24a0d4e3c3e6c6b420b1148b5b752600a5f821",
+    "text": "Wiederbeleben"
+  },
+  "content.keyword.stun.label": {
+    "reviewed": true,
+    "source": "Stun",
+    "sourceHash": "14c3a4ae17b39953efb24ff5b9eae3d7d26bd201a4874c442125c07ebab19349",
+    "text": "Betäubung"
+  },
+  "content.keyword.thorns.label": {
+    "reviewed": true,
+    "source": "Thorns",
+    "sourceHash": "036836fcbf81f63dbea49e086dd3cddea6f8cc9e2a522f097d6e27ed3f7e9080",
+    "text": "Dornen"
+  },
+  "content.keyword.water.label": {
+    "reviewed": true,
+    "source": "Water",
+    "sourceHash": "a5db157930d4196b9c2631088f33b4fa95b07fcd1157220dbed9bbb734ff10c8",
+    "text": "Wasser"
+  },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "300921460f57a2a3444c2b9690f46436dda8e38166b1cceafbbd124fb66affaf",
+    "text": "Wandernde Sande"
+  },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "687c49dfaf7198fe99e3ab337273660a0abd472332005afcc383321881cad202",
+    "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runden"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "f2fe9f0909f853028dc5a12773b86355dabff0ed60388306d0f5a3af69d75fde",
+    "text": "Runde ausgesetzt"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "84b33f11ea59f3ec97b03fafa9d734d29452077cac9c5f7faa7b0c922e597b66",
+    "text": "<keyword0>Frost</keyword0>: {{value0}} Runde"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "2e3bc0f9b0975554e380484e328eaceb8665c0aed246044a486a555118061931",
+    "text": "<keyword0>Frost</keyword0>: {{value0}} Runden"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "3a5819607198808c30905188cd66bcb27b71d2f68ccb7b399bc16ff76b4f7b54",
+    "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runde"
+  },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "0854cc4ecb103017c0b407a6dddcfb53569734d40adcdb73c7728cb460db869b",
+    "text": "Echo"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "44c9899915104e161cd406edccf70820be9d5e9f36d65dc0385b7b71083d86ab",
+    "text": "{{name}} ansehen"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "c2ec72bd34bf13e2dc8d84eae358c4923c2ba6cff2622cd43e1a5601fd89452a",
+    "text": "{{name}} rekrutieren"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "036b11593374719c1a42a936f7e815726056a9011e376fe19d69e74460ab4955",
+    "text": "Rekrutieren"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "ccbd655b928ba3f9d59bc1147d885f8e42d3d0d7def505f139801f36122937d6",
+    "text": "Der Ablagestapel ist leer"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "86315ce2dc57aea896dc4375be06150296b825f6ac1f1823d7918b0eb9de4b83",
+    "text": "Der Nachziehstapel ist leer"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "82b95595f19326000c06796c6cf97c2db2723d1c63ff71926ab92bec6dd3449a",
+    "text": "Das Deck ist leer"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "2105a9d578c4a72449e6483f3ad3a39af9afa59e23cdd223f2790f624f1622eb",
+    "text": "Deckseiten"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "ef87885b8d1a9c2095b47f505b94c8b777f9a7da901726ae0fd189df21d7c836",
+    "text": "Wähle deine Startkreatur"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "2f42189be70f9877cb17976c56f5c9e70ce84bc1bbdbc5a62d1b106ef98bbfda",
+    "text": "Ausgewählt"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "eda5a6211ceda5533e23d5d19d02366c6b5b736920877917183b04325f086cc2",
+    "text": "Dein Startteam"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "0829fd36c19f72abcbcfc16e7059617230b9105d800af294916c9cba89024ad6",
+    "text": "+{{amount}} Gold"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "9dfc989a749dd4cec17c19c6eac8aca0ae16520937356e6d582211dacccea07f",
+    "text": "+{{amount}} Stichwort-EP"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "c00b4d99bbe62fb17bf287d50d3cf1ecbf9a601ad3d71d0b6021d7aa99f12d59",
+    "text": "Erträge des letzten Kampfes"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "c365e02d12991aea5883ed99404d3bbeb82fb8ea2fba856bb881de5c59ad5342",
+    "text": "Boss: {{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "dd72965bb9236071b03a64d40e5d0f2daee6cd167c9a1330ba40df2a01d12446",
+    "text": "Kampf"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "a44e158a84129ff854a92ee25eb719077747a03e8bcb2bfcdc32a2a359182714",
+    "text": "Begegnung {{current}} von {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "25d8cc8bb5e5ac2249327073ddad280d13c54fb6356488401922aa0a4436f724",
+    "text": "Begegnungen"
+  },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "609ece9fb4aa1982fafaf000f784907ea321ee6e73e8a36bde3c95993300dccc",
+    "text": "Sammlung"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "f207404f10e031ca0f3dc006b4d8b1cb40de5ab3fe269bc852bf89965cfa2636",
+    "text": "Weiter"
+  },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "ea59d24b687011d5f84a9d2fd4fddf723ad1e4ac05f0a968a9d3e609159cfd8a",
+    "text": "Reise beenden"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "584b0c9b1a8dee4b4564f0981998221a78d3e418ede360998b721a460bba0ec3",
+    "text": "Glossar"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "7e108822e7929a01d2aa6792234246fe437e2f34c10d618d19c40b6e2a3b015c",
+    "text": "Hauptmenü"
+  },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "b535ae4e1c43ffd32b399dd1672242c243b8714e48b25436ad9b0193a569155a",
+    "text": "Pausenmenü"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "6d9985e1ac0beb47eb3067288bf1a514c5a46d82fdfd06392074f30e95d4c6a8",
+    "text": "Spielen"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "50742b43bdba6e47b98b2de5e8b2b4edfc270b5d5c785ce4173bc4dbf7e881b3",
+    "text": "Speichern und beenden"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "76a8d3ab8aa74e0e80669139101dfc48eda2ae1648a5a32bb285938db20fa384",
+    "text": "Einstellungen"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "5c0520466de833ec4a8c9258cbef9f22984954f4c5b0e4231cdae73db86215ce",
+    "text": "Zurück"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "7db42e7bb490ee041458488c87b3495b1ba3e6515b158e0a477aec8d151b5055",
+    "text": "Deck"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "a730916f900c79b97f8f90f047923dc5bae4fcd4b4b2bbe7879a20e8e7685404",
+    "text": "Ablagestapel"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "d72dbb204cee7dc1901b0687a41e2b73b46d778a78d84f4165c59bb89e54c1c8",
+    "text": "Nachziehstapel"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "5795a9b8996bc625c48298eb7f09f2542e5c151495bc95f37aaef8700dc23821",
+    "text": "Nächste Seite"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "eba6bb3373e2d8c806bf4bb7a3d5520f773eea0cc61ee12fb9adc0d64e69959c",
+    "text": "Seiten"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "13a83e7e010edaa44c94ac6d5c9af3f3d9372e51274c5e99cfebbd00d7a5b23a",
+    "text": "Vorherige Seite"
+  },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "8c7a39a333cce37d6cca122b54a949ebe95e0fc22d0f2080d58668e084e9170a",
+    "text": "{{amount}} absorbiert"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "b93c3686bf4b78ff91d0679d0d55274ebadc0c05d5d657a5bbb62602ed60c1fb",
+    "text": "oder {{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "1bfb469a12f68f688d31c85dde2190ba447392f391e4e91184f5e0fdb0fe03d2",
+    "text": "{{amount}} Schaden absorbiert"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "5313737b43f83663dcc6d82dc1290779c18205fc08a36b51c97d84299284b9ec",
+    "text": "Zielvorschau für {{name}}: Gesundheit von {{previousHealth}} auf {{health}}, Block von {{previousBlock}} auf {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "37758d320707ac0644e4b6b09ba02a9e7e7b485bb4fcfdf13ea58a4a220ba760",
+    "text": "Das Ergebnis hängt von verborgenen Informationen oder weiteren Zufallseffekten ab"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "4ee663edabd0e6bec3dfc1ce04ab7cab084db341845c9059e351d3b4196a7d8f",
+    "text": "Kritischer Treffer möglich"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "97910116f91e0163245688f63c3a8cd13483437104d916e7186feaebca86ae1c",
+    "text": "Kann ausgewichen werden"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "65363df44718de9c3296d6b76ecd8780fd7d7a380ffefbc8cb3bc2cea1902144",
+    "text": "{{left}} oder {{right}}"
+  },
+  "preview.outcomeBlock": {
+    "reviewed": true,
+    "source": "Block {{before}} → {{after}}",
+    "sourceHash": "a97e2e031b3eea287fd169beb46a2fc889a224db6d11cec45730f9eaa95fd70e",
+    "text": "Block {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "reviewed": true,
+    "source": "Critical {{description}}",
+    "sourceHash": "a39c017a07ee7fdfa2b991f3b143a210c6efe073724f3f961a170fac7e1465b5",
+    "text": "Kritisch: {{description}}"
+  },
+  "preview.outcomeDamage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}}",
+    "sourceHash": "55288c61cc4355b612ef5ec9b4fdf85ed920dc4991fd4073b4429f3d1f2e613b",
+    "text": "{{amount}} {{type}}"
+  },
+  "preview.outcomeHeal": {
+    "reviewed": true,
+    "source": "Heal {{amount}}",
+    "sourceHash": "37e37e94a2d6758021970dbd660512d2cd77d320d99ffed2bdfcc990581f1fb6",
+    "text": "Heilung {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "reviewed": true,
+    "source": "Lose {{amount}} Health",
+    "sourceHash": "ada0257aaf89a956546ce3b48ea1857d4f9c6b06991727c888f668271589a58f",
+    "text": "{{amount}} Gesundheit verlieren"
+  },
+  "preview.outcomeNoChange": {
+    "reviewed": true,
+    "source": "No change",
+    "sourceHash": "bd40d615e75ef4d21a4c1aec9960b89ab0e78cb0724e09d6b7cc4892a9dd4573",
+    "text": "Keine Änderung"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "371bbd4d807a7cfba9ce1612f5ea62aaf2880080469e1aa323693f8110ff846e",
+    "text": "Möglich: {{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "24e1a56fe2821cc785c8e59bb9df1f497d9d6a5ad810596ffd8c720010e168d4",
+    "text": "K. o. möglich"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "9b3c1719231c8ccc34bb0ff08afbe10f44e9faac512b8565bcf0248da569b3fa",
+    "text": "Mögliche Ergebnisse für {{name}}: {{outcomes}}"
+  },
+  "preview.removeStatus": {
+    "reviewed": true,
+    "source": "Remove {{status}}",
+    "sourceHash": "422c04adcd49ba57d9b15d069cce169e33ea113e79337e11558c0d7c01997d7f",
+    "text": "{{status}} entfernen"
+  },
+  "preview.statusChange": {
+    "reviewed": true,
+    "source": "{{keyword}} {{before}} → {{after}}",
+    "sourceHash": "2bf19d85f92e18986939e63ef4bead0bac1ed4f96e7db2bb75e9e78a73a9157d",
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "987508985263eb140a0377c64cfc0e6eb8f024ad7879890335fed7629329b583",
+    "text": "Ergebnis variiert"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "6450a8e1378195fff0b4f50e683f9f6a45c2aa550cf1e46cf33004cdff94f7c7",
+    "text": "{{summary}}, {{details}}"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "a432932af824d04d227c8782c270ba0c187e10df6d9295e72f598e7b14c1864f",
+    "text": "Wähle dein Team"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "1247d4aeea9b2cc9b6e8ac16f525634920fc3911a3ebbaf586774ba4ef0af4d0",
+    "text": "Bestätigen"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "698030250dfdbb1ca230800b6417ff0b3b95790577eae79e5cae2eab9a3bb752",
+    "text": "Kreatur austauschen"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "3b87eb883e0fafe254e8c64e1a65e070c1a2f1233c5c74aaf5e105a64d3478e8",
+    "text": "Austausch von {{name}} auf Teamplatz {{slot}} ansehen"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "5bc5525652948e7b146835755117f0158bba89c55c386761246aea02c0cb0efe",
+    "text": "Team"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "5b4f381719f9711e82c4a97d0329a4fbcbbba74bb02a62c5854a2cc034ecdc1d",
+    "text": "Austausch von {{name}} rückgängig machen"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "22e0e6de9394a0d39cb847760da3aa3800a0f6e239ebccd79386afa6d631f409",
+    "text": "{{name}} auf Teamplatz {{slot}} rückgängig machen"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "81d581d8e6de69b0bbbddb3302d011c5db116bf3afda5402cabd9008d47fdda1",
+    "text": "Reise abgeschlossen"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "165c6b8d7d06042f9807777418b6012661de8be1e1458b55021cdc5384628d35",
+    "text": "Besiegt"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "577872729691c124b79cc8ec2128063b945ecb3e07823c52b094e32495ba4120",
+    "text": "Keine dauerhaften Belohnungen erhalten"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "2f8610c1d8ae1b841bcb113460850d497796bc845463853ffe207e5401653c22",
+    "text": "Reise beendet"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "56be1b15bf63db424afe39654bdd38fd3ebcb30ae6fa66922d3bff4c69d4f61e",
+    "text": "Reiseerträge"
+  },
+  "results.goldEarnedTotal": {
+    "reviewed": true,
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "b96e247151de2fc0ad6b1a2228b70819c1e0f9a6ef537eac20693f881679e9c9",
+    "text": "{{amount}} Gold erhalten"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "7e108822e7929a01d2aa6792234246fe437e2f34c10d618d19c40b6e2a3b015c",
+    "text": "Hauptmenü"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "3d7d3a8ba5d335cc7b5a6a9b5a341339226cf03bae50cf95f4fea59c4477d2ef",
+    "text": "Nach Hause zurückgekehrt"
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "4933841892a18081d5d5446cacd21dcf0534baa6849ff577759455fcdafd413d",
+    "text": "Wähle einen Segen"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "7ad719dc92a0e671f93f501fa5a4044dd3c57d22d069cd3480118d8c660bc050",
+    "text": "Wähle eine Rekrutierung"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "a2ffcc348d3e0f48cbf60472f529c5b34dbbce104edf8000432c779933c2917e",
+    "text": "Neu!"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "97db6589104b21195ca12f926a0e455d104d172a47207f64778b22fc18975915",
+    "text": "{{name}}: Neu in der Sammlung, null Sterne"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "3508417872e4b91bdceb460ea7c12871fb5b50004287ec95178dc44c6ff998c7",
+    "text": "{{name}}: {{rank}} bis {{next}} von {{maximum}} Sternen"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "ea3945c507e13d5dfa1cd4fe5fa13d61f6a872bd778fc85fee11f194cdeb0f51",
+    "text": "Rekrutierungsseiten"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "346a14c0e1cd7a13719ff99dbad69be8537484230fedfb634b2e41266dd736a2",
+    "text": "Überspringen"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "7ac67354f4a43f9e0256a1568982780e99724f8191c302a8ce17d8e3630361df",
+    "text": "Sieg"
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "afec5db001930bde72b60cc7cc1b021f7e309852143df43cec984941fd01f344",
+    "text": "Audio"
+  },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "1018596cfab9d63308d021eb6c5cd15a3e6ee68a747a73106595a965817497bc",
+    "text": "Zug automatisch beenden"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "d7f6a7caa665cbc2870cce5b52729ecbdbd96296aa890aa40b86c9781c4497ea",
+    "text": "Automatisch"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "8cd93d77cdbafca4cbe9da42bc2441f8c121cfe2d3e6eddff9afc6677123d1fd",
+    "text": "Kampf"
+  },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "03718fcc40e7b701de4715779ae5942635f2a986ae5a347c9ecae9879175885d",
+    "text": "Einstellungskategorien"
+  },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "d19abc847fe0162f051f008794691eb56e846c5d87bedb9095f9cb67b13b39d7",
+    "text": "Sprache schließen"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "084003895aae5c4f26309ed1f881d27afafc41ae5c7381bd882d62469c312365",
+    "text": "Controller-Hinweise"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "11eb8dacfbea02ca626eb60962e626495df3484bf691108eb356c7e098e511b4",
+    "text": "Anzeige"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "24dcfbcd1891b5ec686ff66208e5301d968ebb3e871ba262209822b1f53e0dd2",
+    "text": "Anzeigemodus"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "7299d97013fce28198377c698b78ff0990465960ff0afdefd84cfa4bf05d00ee",
+    "text": "Soundeffekte"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "0268a9c5d351d97df38434d0a9e6a4ddb64d7dec6695f5e9d14765b1874edc6a",
+    "text": "Effektlautstärke"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "08cd7331c824bff3bf8524f0dd8b154a5beed80cfe7127d5536fed4e7194ef35",
+    "text": "Wert der Effektlautstärke"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "85b5d18df97b5b56fe711471e73ac6e8e29cee83031b943480738159033ffd19",
+    "text": "Vollbild"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "176ba7f7fc76574d6013597d69b7c2478d583f4695d180ad0027ad1cce207911",
+    "text": "Hintergrundleuchten"
+  },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "731cd369801b6d35e01c75ce5085a648166163870ebea573148e1ffd66fb3657",
+    "text": "Wert des Hintergrundleuchtens"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "a61ee664842c1666d283ba34095f986f70c7076d04f1d3ca8bb986d42b92b41d",
+    "text": "Sprache"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "bf11bb8d4e50324100029202eb70865285f29203d4312e61a14034d217e57f53",
+    "text": "Sprache wählen"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "b79b424927885633f3f596b34885204ea272694ce7b0afd7c418d0f55c50da7e",
+    "text": "Sprache: {{language}}"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "f97556826690969e1efaa877696622c182af076781bb07f558e9b142bb9d469e",
+    "text": "Gesamt"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "bf38b18117aad3197b9c2c498e98bfc7df7b4a8dcf43fc18e06c75e6718afaec",
+    "text": "Gesamtlautstärke"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "d59df94776f3f9289aa45b08123023b8fbcf027e248f28695ea71d75518050d1",
+    "text": "Wert der Gesamtlautstärke"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "a3b42a6449ba19545c9916d8602872b81bdf6505511f78c8fd487f3ac4748d32",
+    "text": "Musik"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "0d57b230e0afc741e924372726496d52ec37457406138a9618dd638959effea2",
+    "text": "Musiklautstärke"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "489a4f5045947afc81a7456195e2d3a384c5f05319a5c7d672ef3f470b96650b",
+    "text": "Wert der Musiklautstärke"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "cf1188d0d34207fe692fd3fe0c7f4b269dae2d9b6d6c10c9c9fc2c21c7caf4fd",
+    "text": "Im Hintergrund stummschalten"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "00c408142da655f302ea0ccbefadcd7ff5b9a55dae548f524163984a26e44301",
+    "text": "Hintergrundpartikel"
+  },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "679cbed590af410def5c1f5e53720e03f3392619d28ff75ef486b4fc505f3bab",
+    "text": "Wert der Hintergrundpartikel"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "97aa3bc6b1e0bee3dc55cd66878fd60443533aaea86795e5ac998e03bf0fda76",
+    "text": "Ton"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "b8f07b1d646b6a3645584b46e534ec09e2ca2b164f072cbd3a0728d856c21c68",
+    "text": "Textgröße"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "f06b42639d83049e98416eac14cd32eb711f799e47fb38335261ad87b44956d1",
+    "text": "Tooltip {{value}} %"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "031e3b35e41e3255ce21eb68017776a426636a9a949c64fb08378d4d3508a536",
+    "text": "Tooltipgröße"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "b8fcfa9543285f6e991d33c5164c4246e8cf937ca208532bd6abf04fa8949e3a",
+    "text": "Fenstermodus"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "78a631db26e7f247a24281fed529f8cc705d1d4bdc82a6fbbcb23ca0d7321446",
+    "text": "{{description}}; {{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "635352342d01171cd66bf73ec0d7358cf9b8abab5505844029e403759e9a5315",
+    "text": "{{keyword}} {{count}} % Bonus; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "713f443d39137098c2d99a62b69505d5a946b9631303b5cf6f3d65a0e5b38d19",
+    "text": "{{count}} % verfallen zu Beginn deines nächsten Zuges"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "9ab843fe3eef5eba9ab1ca2d0af7e6f79e5b65e59bf7befcf0d01a089fecfb78",
+    "text": "{{count}} % durch {{trait}}"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "378aa09a183438643e12761f02012f807b517d38c6ef6e27f0648b44a86fe173",
+    "text": "{{keyword}} {{count}}; {{description}}"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "6dcb8bb72a58df270da73fd878b22f9f27d60f1184085f9c9f138a5c9cfb1484",
+    "text": "Freigeschaltet"
+  }
+}

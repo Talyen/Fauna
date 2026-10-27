@@ -1,0 +1,1544 @@
+{
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "fb5d7281552f16e52ef4dd5e8f201235d9c88a968c215293614459c1171e4a57",
+    "text": "Карты действий в руке"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "87d894fd187423d8e74b55c33c23a622f016f1335ead4b5a136a07a6cd1daab8",
+    "text": "Автобой"
+  },
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "cd330a5a570521dedba8c70931de23a765c2c8d58f2f2ce3af476249ae39286b",
+    "text": "{{name}} (запасной)"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "65d9c7ea48328530426bd8eec83b88b45b5ea1a9bb3a09aadf7e72be29cd4dcd",
+    "text": "Поле боя"
+  },
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "0ad7fef52cab330cdb61b75f49614bdf2a9e56c311936ebf2e4fde6295ac8a43",
+    "text": "Блок: {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "4f71b574f27cc82b863036f565115a04061e58b462200622d520b4634038801d",
+    "text": "Блок: от {{previous}} до {{current}}"
+  },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "f980dd867aa3140ef1a054bc2ae667a9161e9d3ce73a0a7c850acfe24dcf4bec",
+    "text": "Боевые карты и управление"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "061f5debac1f44030afe7d252d32b54462c38c8631e5acc9835e978f06d95046",
+    "text": "Выберите союзника"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "1ca431db5c1dcc2eecd1fb1c42c5c0a50de14c6dc0235c1eafb083eb8497fb2f",
+    "text": "Выберите запасного"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "50eb55a6b10d6de8a409cad098fc211252245cb5076dafcd5055df40c2983229",
+    "text": "Выберите врага"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "55c48e9f1a1b8e2ff74a05f14fafdc05edb0a927188956f13b5b4f2fdf23a194",
+    "text": "{{type}}: {{amount}} урона"
+  },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "7c0bba4830e902249d18a3c61cd311d013d18c57547157a13a73dca946f23657",
+    "text": "Страницы боевых эффектов"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "d44dccac704a0726ab8fbacab707eb40ec6e2721e5991784e0a18a9fbb5be7d3",
+    "text": "Боевые эффекты"
+  },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "59b29e54bee5481ca40637ad60ebcbb908cc93789503ce1ffc78e6d3ebdcff25",
+    "text": "Завершить ход"
+  },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "e6d611d3212a84a8bb66c982c5c51918e0fe29cf2024aa1f549b180ba4adf82d",
+    "text": "Завершить ход · {{prompt}}"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "07aa82e294cb50ee8d8f15abe013988c87ce4bfbec23cde26a6cff2c33e8d4fe",
+    "text": "Ряд врагов"
+  },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "a236537d0d1fade20ff06d6f7e354591c70054f268331f1b00fbf4d4ae8df884",
+    "text": "Еда"
+  },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "909aececc76bdc2e36b5e992dc783432e73e93898eddc362d6fd8da98c4bed8a",
+    "text": "Просмотреть стопку сброса"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "5fe5065e1222eebd6cdd5d96259431fd97680959486d0df3833325cf930b38be",
+    "text": "Просмотреть колоду добора"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "cd398b59ae17b96dd8da5b3a0df540da5084ad71a122d20f0790e29368822852",
+    "text": "Нокаут"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "dde2fea7a5db02c84fb29f59feac0cbdd66f6930f63a2f8c3b0713a4f818e0cf",
+    "text": "Мана: {{mana}} из {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "8ad993a0a1361ed05edea7e328890d7e1728d447b7d9a91721f10d0f44aca874",
+    "text": "Следующая карта ×2"
+  },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "9b48375b4707f4f1c106917358116f3909926079bda38d0718485e05bba0bfe8",
+    "text": "Открыть меню"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "805fa126f647e4cdb5627a95b246bbeb53dde3cb5d1e746fe3983f6ffa66be71",
+    "text": "Ряд союзников"
+  },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "41e5a0ef035cc58990e1efa7e91a749704f081176b1a5b47348ae10490bc0581",
+    "text": "Воскресить запасного: {{name}}"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "008ae97b9c1a59c7accf6951849fd6f34cb5c2f1b5c9dfdf3857ce8074e3a2f5",
+    "text": "Пропустить бой"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "642beb1777d9216d67b3bec2aae2d312de1457aca6f7f011f6d9fc09b1fd4cf2",
+    "text": "Выпустить запасного: {{name}}"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "02e171fbf87d39dd0b92852f58207d523b3b77c397373f0e3f7b7ca728e9c228",
+    "text": "Выбрать цель: {{name}}"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "9098aa5276c677b60b4a65f096a1ed69f6161a13ecf335375f94b13b669fa040",
+    "text": "{{owner}} · {{target}}"
+  },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "f6ec245c99459d264a63819dc02c26f8dfa3d2c31aae9a9b76b4f38b1178ff8c",
+    "text": "Здоровье: {{name}}"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "8ec0eb8468097e46dff82ed8a30b3196a686cade771987b784105cd3c7471d19",
+    "text": "Костёр"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "81453f21a2bf371fccce7da89d3a2e679bd5da133b8b4b3a3b1ddec63b84ce89",
+    "text": "Страницы восстановления"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "0a9ad38cddc084e29f276a966650fa67362f4e4fcf498cea55bb9680ea51946c",
+    "text": "Восстановление на отдыхе"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "82be3babc733a822b64cbc0028953d447f4441ce872147675b28e1694483f288",
+    "text": "Отдых"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "565bc8cdb0fb36fdeae87be13437efbef4071d52279c12c8f3c090d46a09158d",
+    "text": "Посетить костёр"
+  },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "cab1738cd30f3f21bce118e31c52168492a066d8fc669a8314456981f037da8e",
+    "text": "{{name}}, {{owner}}, мана: {{mana}}, {{effect}}"
+  },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "0df2865189cddd41c915b94e60a7e33734c75c42bc3b55b46cb5f5d1788c100f",
+    "text": "Копия · Действует до конца боя"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "d5d028a4c395f319e0c26b2254fa9fea838bfe7dd4d7175fe7c3d2075ee256c7",
+    "text": "{{name}}, {{owner}}, {{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "985679792d19a36b4692c2a21a1b7462a1c7a0baf6913b81fadf6ee60760d5f4",
+    "text": "{{name}} +{{level}}"
+  },
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "5b4361ccfb68340dbf44fda8e9bcacfae1d96c9bfa74fc5da542bf4cb8c26494",
+    "text": "Все"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "e4421d58ac9f105b3cb4f1a95096a617686a2bc83461877cca04335262632d80",
+    "text": "Собраны"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "f270792afdda00f34378991cb7f3dce7ab6766f03021fbc1ef66d5e10db93b98",
+    "text": "В этом разделе нет существ"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "2149bbef853397a92baf3dd252e31a9c75bb4c6095da9246610f42c42a2d5068",
+    "text": "Фильтр коллекции"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
+    "text": "Осмотреть: {{name}}"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "6a4cf465ea4c6484527330869b25557ce9bdb9e21ef522b5fbba532b42551a44",
+    "text": "Неоткрытый вид"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "4dd72ff441e3ec46f265fc446ddec96c8b7b2472f39cf77bee13beb54736a7b1",
+    "text": "Страницы коллекции"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "5af8ee83d84466d0d9d95245e89a0ac06e105819e94e2a54e54a73801b6483eb",
+    "text": "{{name}}: {{rank}} из {{maximum}} звёзд"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "adba27a0f1e9cbed76c38b3be0189fbce42ed018545f52f6402c4bbe19704bfc",
+    "text": "Не собраны"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "119e3a2c89e05b14e64af902b0d574a628e4b5db14a1a4175a9cbb1608a5513b",
+    "text": "Отмена"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "cfda79cf8f70f0029f142732530155f90b9f40050a2ad9dfce35e0144df37df0",
+    "text": "Загрузка…"
+  },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "83707414887d63cb04879b6f1d5148b973a47cead646245c5e1b2fe5bf5650dd",
+    "text": "Костяной оберег"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "c064fc4cc4f723be380f1337f6cec221da0c405ec37e9a46c296fef4debbd42b",
+    "text": "Латунное кадило"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "b246efade40a55a10c180028b6446de3b072a30b8dc85452fb24f299d5fd2dcb",
+    "text": "Нож карманника"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "6fbbecd932a54ee1214b395b4759bc9af23cf71b6cdf7a2506fb3142fd72d122",
+    "text": "Милость рощи"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "1c8af3db6b273e1657667e6d95559506d0afc85dd2191902acb86d1bdcba9a09",
+    "text": "Ледяное сердце"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "6f2a546351b90cd85671a35a015faaeaa780318f2134489b086761c76dd11fb4",
+    "text": "Баклер из железного дерева"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "c5692441990909fb1d67f29164b017865a833343fa5ba530a2bb0d973167003e",
+    "text": "Счастливый клевер"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "68a297b987aa3a296ea7e29d9605a2b7e1e1ba4dfaa60f01a3fdf20f31d4267c",
+    "text": "Милость торговца"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "e6ec02f602d1380079a33e5c971fd08b95e5942add499e98eb698a18bc313ad5",
+    "text": "Метеорит"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "1626ca5f547c46790084e5d7a7027d8db0b22f062170f1ca094283b3e7f0de97",
+    "text": "Паразитический цветок"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "8034ee88abdf800612354c2233fdcd68703078f0b22311f072d04b82753a4ac3",
+    "text": "Маска чумного доктора"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "bb6665f9f812972f4fa443083d933359568eb7ae57fa32b5542b12fe50060e6e",
+    "text": "Резонирующие колокольчики"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "5331bbd3a45c3f50a7b07b737a908edbe155eb8fcb8113defa1ba917e3b7f06e",
+    "text": "Фонарь пожирателя грехов"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "9266620094bd37be2aaf228115d8e28b13248945bad1fecffc71d708da7fcc43",
+    "text": "Карта контрабандиста"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "3d8b6099479a044623315627feb327fed905c4409f3d2bbb060fb065e473844c",
+    "text": "Ветхие страницы"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "b0890f6fdeaf37521864d749af5b59a14e7f308777f0cd337fdbfb0d92a9cfda",
+    "text": "Громовой камень"
+  },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "ff932e08b4ef52f8b47853ce289c0448493dacf3f24abf8357b89b86d5678ba5",
+    "text": "Восстановить всем союзникам {{value0}} ед. <keyword0>здоровья</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "8459bdb09e855f874fb499cafaae6f1937baf45b9a96a7f12cfed8bb00d73aa2",
+    "text": "Яблоко"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "b081c5a8b5ca44099da97c54136905709bab91c82a11fe70c9b04bd46bde7cd3",
+    "text": "Восстановить {{value0}} ед. <keyword0>здоровья</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "80e2f86b6c98e31e1da3a658881357bad040ac2ce24660c8923614c196a0b9f2",
+    "text": "Получить {{value0}} ед. <keyword0>маны</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "28cae0ae7fdb5c57b5a55bde5b2ce8f043c5892ca59a2e7427a0de2c3e7b6eb0",
+    "text": "Дать всем союзникам {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "c662c28932695c63cd5fabb5c35982eb6002df23b5a0ab6f1d2035c6b42af0f4",
+    "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "c4b849224664d323217669333cca6d758c9350dce76a30d74e1a9e0fbf80d681",
+    "text": "Нанести всем врагам {{value0}} ед. урона <keyword0>оглушением</keyword0>"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "b34e389db595affa373a250eee7e6cd5a6ad472f9ec76ae32ad806dabe48eadb",
+    "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "034bb2cf5f6278ff24b3b9748f8a32852da0b93c65b482a542ba3cf541256bfd",
+    "text": "Восстановить всем союзникам {{value0}} ед. <keyword0>здоровья</keyword0>"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "8042c47cd429044299f717d1d71d6ed18ba5b55fc6c0d946ac2fb337aef45938",
+    "text": "Нанести случайному врагу {{value0}} ед. урона <keyword0>светом</keyword0>"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "36180da72538867cabf6487a9964a96ca64347b00b56dc1a43ba27b755d7f452",
+    "text": "Восстановить наиболее раненому союзнику {{value0}} ед. <keyword0>здоровья</keyword0>"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "3e0b039dcc6960a82ac578329dbff73a49d63c9b22f57e22096d09e93b020078",
+    "text": "Союзники получают {{value0}} ед. <keyword0>блока</keyword0>"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "2755a03c43b3daeb970b811839969b05e5ecfa2555a5325c2ffe57d083203b05",
+    "text": "Нанести {{value0}} ед. <keyword0>физического</keyword0> урона"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "ae1f27e0369b556c456fa43cc81f19dc47ebb7c6b1dddddd13ed039cb2767209",
+    "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Отразить</keyword1> следующий вредный эффект"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "5b2ab1e6733b0d82f42554a8f0b067eb2112c1bbf836698b01a806bdcd69b8f8",
+    "text": "Нанести {{value0}} ед. урона <keyword0>светом</keyword0>; <keyword1>Рассеять</keyword1> цель: удалить эффектов: {{value1}}"
+  },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "51e6c7787b66a2774498b93f11a0d49b60e9cf6a8052bbe0188957455316bffc",
+    "text": "Карта действия"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "4d4a5332e1f1ac9a149a6cd5b8f1113351f562ede0efaa6ad0f477398450f1f5",
+    "text": "Атака"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "b8cb5c518bd1561b198b791cefdcf4593c154e2374bc64b2db055e7e1a3ea41d",
+    "text": "Запас"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "530bce49934e4f08735627199787dd1e03a1ea3b2f0ce8b33b225a6bb651df20",
+    "text": "Бой"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "ff257c3a9bc029fb4fb72d32f8a0c697e1d82e425ad59789ff8264286bf24eea",
+    "text": "Благословения"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "492c24aa964731c719f652564b5c4aa913d999d6e7fb9742e3293550ac0fd232",
+    "text": "Копия"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "9243fc7f599e3e38df0cdede4659420394e4ec551b0d00f30f0f33bae820d7fe",
+    "text": "Урон"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "570b8a30292b93321bab96b6d447d0f258992dfdcf740d6087382e1a3cbee369",
+    "text": "На пороге смерти"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "46cda6db57a1f5b565f108c5a07f0bc56e8df00151d26e3c61d2d569d159d90b",
+    "text": "Добор / сброс"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "0b254bb368b158652489742054f444bc34164da2277f35815a5cd7baf225f5be",
+    "text": "Эхо"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "cc523022c580e8bc76a6a40df16564bfe778d730f86d7b58fee8a378a741a27a",
+    "text": "Золото"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "e21f3fd2a41bfb5d12d60862ed3e87fe9c5bed601faf7a5cf7aa846255ee1fd2",
+    "text": "Попадание"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "62bc0e044f711b5fb425fbc9615657481a7a12c23d4633085c64aa2021a0fe02",
+    "text": "Опыт ключевых слов"
+  },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "e17636fc6cf001a9265fe997db046d80fa7c7f816044ec55c0fe9c6378ce89d0",
+    "text": "Повторяет урон на следующем ходу, затем снимается"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "5b8f407af47ca021a3cbedb9eecce6683abc1db146bdce8cb4c94ef7450b93a4",
+    "text": "Наносит урон каждый ход, затем уменьшает число зарядов вдвое"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "370089962e3f7086d8b6616c6c08dd1cfa7b1e013422ef8740df1f685bab042d",
+    "text": "Снимает вредные эффекты с союзника"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "5b129c11b9e6014d0d4dc814f45423d2c8d3cbbd1eb3ce98c3fdaffa193da692",
+    "text": "Урон <keyword0>природой</keyword0>; сопротивление и эффект состояния не подразумеваются"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "06e1f7da09ee7ba1c60b29cc5c51aa6c0cdceb5c0469ade33654400ac986d58a",
+    "text": "Снимает полезные эффекты с врага"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "c86471f2356111a9573021b0bf551346cf80985cd4cfe065801cfdac2c82b43a",
+    "text": "Урон <keyword0>водой</keyword0>; <keyword1>Блок</keyword1> поглощает его; <keyword2>Броня</keyword2> не уменьшает его; эффект состояния не накладывается"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "a7e8cbbbab304eb7e8a333343c9f79dbf8f4175ecb162c069c56d3d1cb52b0c3",
+    "text": "Нокаут"
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "2e04e1a4848fc84686d6c92b89d768ce90d9a2b65fe670d788cb0e9811d595f2",
+    "text": "Легендарное существо"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "f0eb9e4fe280d07139141e6e9afe57ae510b3455beac922230db7b56592d3ea3",
+    "text": "Прислужник"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "3bdff8c3f2955403126135737b8e5705053bfd105eaf28cd535c6e50b44866ff",
+    "text": "Жемчужина"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "797005a0a4b6fc3a30e46af95ed390af163944f900efa2274cc2b2f9cdb578af",
+    "text": "Начальный состав"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "d27bae2406c0bd1356843ec5d8412cba4d47c90863d80bc90ee107b5399d94ad",
+    "text": "Карты замены"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "6e01e476006db82a2e1e5ecb0541d9815e5065d3a3aee508626d1444ad112a68",
+    "text": "Таланты"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "ffd8d88c0bfa1872f5df31d917f025d724f2916efeabadadefac1b5daaab2a3d",
+    "text": "Ход"
+  },
+  "content.keyword.armor.label": {
+    "reviewed": true,
+    "source": "Armor",
+    "sourceHash": "455ce3ede03b1ed1946856efed306b40b250df7d18c689acbca4b544e53acf8a",
+    "text": "Броня"
+  },
+  "content.keyword.attackReflection.label": {
+    "reviewed": true,
+    "source": "Attack Reflection",
+    "sourceHash": "77ef339d15a0b811a2860b26ce5010efc5f2b17be4dbc1803651a6e891bf9a18",
+    "text": "Отражение атаки"
+  },
+  "content.keyword.bleed.label": {
+    "reviewed": true,
+    "source": "Bleed",
+    "sourceHash": "b5251792326dee31908e8db781667fb6d6d08200b4b4c12558519051e8aaceaa",
+    "text": "Кровотечение"
+  },
+  "content.keyword.blind.label": {
+    "reviewed": true,
+    "source": "Blind",
+    "sourceHash": "3d3464c6ebc105f5d5c371aa3fe09dfa233e17cd6dbfd9f5561d37addc6ae6f3",
+    "text": "Ослепление"
+  },
+  "content.keyword.block.label": {
+    "reviewed": true,
+    "source": "Block",
+    "sourceHash": "63f4783cdcde5f6a536c90a10f5715c4597b07d8a0b52183eff8870631635ea9",
+    "text": "Блок"
+  },
+  "content.keyword.burn.label": {
+    "reviewed": true,
+    "source": "Burn",
+    "sourceHash": "1c0fbcc03b7626e40e2cd6978a04c6a9c965cba10c03b3a1add07c65a90675f5",
+    "text": "Горение"
+  },
+  "content.keyword.cleanse.label": {
+    "reviewed": true,
+    "source": "Cleanse",
+    "sourceHash": "41c86b30c6494f1bb18934b00f751bb6a75e53d9baebf2394ad48ff60ae33a79",
+    "text": "Очищение"
+  },
+  "content.keyword.consume.label": {
+    "reviewed": true,
+    "source": "Consume",
+    "sourceHash": "7f89890e3d9089f759362ecd2f134b17708155300b15b52ab8b192b1cdcc9f06",
+    "text": "Расходуется"
+  },
+  "content.keyword.criticalHit.label": {
+    "reviewed": true,
+    "source": "Critical Hit",
+    "sourceHash": "8fca1305ae5fe1b85879d0615bddbbfec5da68b88e8a690cccaab072579a291d",
+    "text": "Критический удар"
+  },
+  "content.keyword.dodge.label": {
+    "reviewed": true,
+    "source": "Dodge",
+    "sourceHash": "28daa66bea256fa02f429b929b5663042960771704466c8c4b9ca8d9a38ce993",
+    "text": "Уклонение"
+  },
+  "content.keyword.food.label": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "a236537d0d1fade20ff06d6f7e354591c70054f268331f1b00fbf4d4ae8df884",
+    "text": "Еда"
+  },
+  "content.keyword.freeze.label": {
+    "reviewed": true,
+    "source": "Freeze",
+    "sourceHash": "62cddbeafee8edf6933da68ba9aa25387032e53a4ae15f21132ecfe4908e345a",
+    "text": "Заморозка"
+  },
+  "content.keyword.health.label": {
+    "reviewed": true,
+    "source": "Health",
+    "sourceHash": "e69a054e45d667185e9330c58ddc868cb31e2f4ae35c0746f1d32ed36f1a6b5a",
+    "text": "Здоровье"
+  },
+  "content.keyword.leech.label": {
+    "reviewed": true,
+    "source": "Leech",
+    "sourceHash": "af000487a372f7b9ff1f15f92dabf7f88b16c14a62fd13d1656003af394fb0a4",
+    "text": "Вампиризм"
+  },
+  "content.keyword.light.label": {
+    "reviewed": true,
+    "source": "Light",
+    "sourceHash": "f083c77b3e16de75d0162c4eab5b352b717ab279893b5734eb6dfa1005e27cd7",
+    "text": "Свет"
+  },
+  "content.keyword.mana.label": {
+    "reviewed": true,
+    "source": "Mana",
+    "sourceHash": "8fcf54e8aacc55ba1671dda45219977418640eeff01083cc804bc95d1e1c6ef7",
+    "text": "Мана"
+  },
+  "content.keyword.nature.label": {
+    "reviewed": true,
+    "source": "Nature",
+    "sourceHash": "e2f68a46516581af75d6429091c2375e14adfe482078ea6104a039a868af48bb",
+    "text": "Природа"
+  },
+  "content.keyword.negate.label": {
+    "reviewed": true,
+    "source": "Negate",
+    "sourceHash": "7e496b54cf4c9e808716e462e6705e72e87bbc55fb3e134a3f919f026b938922",
+    "text": "Отведение"
+  },
+  "content.keyword.nullify.label": {
+    "reviewed": true,
+    "source": "Nullify",
+    "sourceHash": "99a2eaabdc6ed5831e1f40df407b8fdccd391072d2d16d5c6be3bb9a86ff9bfe",
+    "text": "Аннулирование"
+  },
+  "content.keyword.physical.label": {
+    "reviewed": true,
+    "source": "Physical",
+    "sourceHash": "c9f8f0c55ac53ef2b1e50ddf6d35135a49d9c189e7b22c5062f0acb4f60f6717",
+    "text": "Физический"
+  },
+  "content.keyword.poison.label": {
+    "reviewed": true,
+    "source": "Poison",
+    "sourceHash": "0d48610e3d176e3f78a3d31319fd331d1233505a6757a3a4248ffa99dceadd39",
+    "text": "Яд"
+  },
+  "content.keyword.purge.label": {
+    "reviewed": true,
+    "source": "Purge",
+    "sourceHash": "7ef0c84b754dbe3adf9e449160c57d4adb9a849d759644bf462c5016044d0db1",
+    "text": "Рассеивание"
+  },
+  "content.keyword.reflect.label": {
+    "reviewed": true,
+    "source": "Reflect",
+    "sourceHash": "c447cc473c1290eca57e515ed30020d250e66cf49433c5115a3b8b695f3fd362",
+    "text": "Отражение"
+  },
+  "content.keyword.resurrect.label": {
+    "reviewed": true,
+    "source": "Resurrect",
+    "sourceHash": "bd52b0b0ab387449f18a2d75d74da1b5ac9d56bfd495682eb98874919bc95b01",
+    "text": "Воскрешение"
+  },
+  "content.keyword.stun.label": {
+    "reviewed": true,
+    "source": "Stun",
+    "sourceHash": "2a1a2d22766892fbf38d76773adb3893d3072a70a3712442dcfd34deb862995d",
+    "text": "Оглушение"
+  },
+  "content.keyword.thorns.label": {
+    "reviewed": true,
+    "source": "Thorns",
+    "sourceHash": "7ae567557addefb56af41d4aec6cd321645b0c0d2cd47fe27e407630dc9d0718",
+    "text": "Шипы"
+  },
+  "content.keyword.water.label": {
+    "reviewed": true,
+    "source": "Water",
+    "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
+    "text": "Вода"
+  },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "433d676012016227c4203e3bdd730a8784091d66c04aa9a4a74cee4b6a02e572",
+    "text": "Подвижные пески"
+  },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "faa4c3fde3d071af58c5366bbf4aca9796807be2d4976e5a427e932cfd3bdc1e",
+    "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "f9d929ce42db5970678ac608a13b777426a69c70968d65230c4bac7aab823573",
+    "text": "Ход пропущен"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "8ecc369163afdbd929f22274b44882e164227b260cb73f24f439489b43e04928",
+    "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "0e5f7545acca207e785fbb5af65b73ca5b30070ad6aec523c9e832bb729d5dd0",
+    "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "02a14098de145f01ec9cc17334afdad1cfb0619bc32dbd8e4ced186feb47cfeb",
+    "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
+  },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "2720241a7c0ae161461475b03c70b9bf3e6ed49a03730041cc745f31fe5c9f92",
+    "text": "Эхо"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
+    "text": "Осмотреть: {{name}}"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "4bbc71441ff352ca8820ce2c4b2f30ac5eaa6b049a28ea07dc7bce82c49fc206",
+    "text": "Призвать: {{name}}"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "e30321c9335b247e0c869475df74992e1061af69ccf1435dab62d53402ffb510",
+    "text": "Призвать"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "a80b38a758fb3c765f54c9791bec08428ea349e7c556cca18cc2b62223e388ca",
+    "text": "Сброс пуст"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "569464b0008b425930d3c0a101b497260c97bfa77f8eb691b5e063889443d89c",
+    "text": "Колода добора пуста"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "127e6f2ef47c86b7ea9f7d9cfd1b0ac55f6fcc16db232de6ddcf1c0f44705a92",
+    "text": "Колода пуста"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "25cf7bfd96f89479bf4d0e3a40a62a2b4f0a3ef5f218230bd6158fefe66855a1",
+    "text": "Страницы колоды"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "2eac3f4d62e5c53a7f5df11e6fbbf56a415314b0bf24087fb10adeb5560836e5",
+    "text": "Выберите первое существо"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "7ea453fa3a2be68085d8da4cc46a4d0dd02a68214149b5221e07bfc27dfc69fe",
+    "text": "Выбрано"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "fae9b7eda36947cf609c1cea558671cf3c26b88309a7cf9fbc5ef62daa80ef26",
+    "text": "Ваша стартовая команда"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "a895e349fd9505d98739e1ec5162f10e8a22aa4c6bc4ca72b3614ac551b7a825",
+    "text": "+{{amount}} золота"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "b42e92aa04aa34ff6c0f9fb1fa1ac8755313e9b687b74c76ab60825a30271671",
+    "text": "+{{amount}} опыта ключевых слов"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "0853cdc18205f19aa815888675cb97a8f1cab1f4dd03d01a48d644165e03794f",
+    "text": "Награды последнего боя"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "1d3cf1220651a0dec79803d89517188c11132f378e19b00200d59c4370cbc63c",
+    "text": "Босс: {{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "398964b01545bf36267b58a83ec79acee81941320b960eb3d40d144418cc9398",
+    "text": "Бой"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "26ffe89bcdcabbc0fcbb3b8817dbcc61a38cfe775fccb87c5c02cc43cd940e3b",
+    "text": "Встреча {{current}} из {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "459b7fb38c5a7aede5fa3d62573dc1f6f95f2f38ff54785d80b5eff8928f104e",
+    "text": "Встречи"
+  },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "157b1b543b7407d33b8260adaffb0baa13fdc4197477f0319bb46c0a3f12750d",
+    "text": "Коллекция"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "b55998e086ab77556f80015f46195b8db045eb64f62b7749ca6cdc0b10b44966",
+    "text": "Продолжить"
+  },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "bbf4f80624b627bbdb969ed93dbdacb390e83082cc5fe6e7faa2e48cce2eb1cf",
+    "text": "Завершить путешествие"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "1af26747d9db05deb8d4fbe5e3a321a8cd3243db84c4119750a0f72af51795db",
+    "text": "Справочник"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "2b4bc5a303f37714a70234f66163c5b5b5471e32eb32f3318f9fa311c02bfb9a",
+    "text": "Главное меню"
+  },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "e67f4b82d649ea57e711106f3beb5070bbf360eeb91d6ff480715732e9a24570",
+    "text": "Меню паузы"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "f9fb63cff13337d939cb9dfbb1617d729340a75fe028655f94edcab21b6df589",
+    "text": "Играть"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "6a9787f36ae111a2dba230a8db3c98e75aff0a14ddc71c92515349f7ccf48fd1",
+    "text": "Сохранить и выйти"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "c67f0d8192b23371e580c0809e1ee273d3806c2ce34a9b4b323da247f4bf64c6",
+    "text": "Настройки"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "153aa33b1a24a8992740a70f39f2e8e5d1fe5c6248c071ff6ea78bbab92e6dca",
+    "text": "Назад"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "dd79ff022758d822c74c352405d4de56cbc220a70accd361741bdfffa70102d4",
+    "text": "Колода"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "572667450b2cfa64618e01fd3f0facdbf7b61eda05d8b253934a509434761c0d",
+    "text": "Стопка сброса"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "31eb6576ce3d27e35abbc10d6763aa871acdda5abf881e2828f93d353625168c",
+    "text": "Колода добора"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "86a47fc2011be1036eb6b3e87b28bb97079deb80d31ca223f521cffe151b21e8",
+    "text": "Следующая страница"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "ea1b988bd895d9465a369ee208ae9405c3885d51d116821556ffebbe54915a39",
+    "text": "Страницы"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "d6993d2cb204595a936ffe93f39b592fd1c90728529418d57ac2bac3e44e7323",
+    "text": "Предыдущая страница"
+  },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "e1beb87aea1a8886800f5f03db35796d93a92b444c16d544eb88e97acc692582",
+    "text": "Поглощено: {{amount}}"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "446f7d10892e65733042622f1146d41e659c638ccd29e02587eb6fa9365b62c1",
+    "text": "или {{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "035ee3141a1f586203046cc0741bb032b29feb43f9c8a772d027a0eaccb91069",
+    "text": "Поглощено урона: {{amount}}"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "148095229f2aa2dc94b344fa4db381c58de02a625118f4a9bb3e9079b2332be8",
+    "text": "Прогноз для {{name}}: здоровье с {{previousHealth}} до {{health}}, блок с {{previousBlock}} до {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "3fd4489f076ab9a38cee640e47c25ef58b6ce2c0ffdcf90f093de3fe49e805c4",
+    "text": "Результат зависит от скрытой информации или других случайных эффектов"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "df9351420863921fa5caa5c73ffa10b537c18268f2c14b28b2918ea47ffc4bc2",
+    "text": "Возможен критический удар"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "425902da0186b0d3b3790f3412f12dee239cc30beaae5ce1131bd4dbe384d03a",
+    "text": "Возможно уклонение"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "b782f2879a9d725aa53a7435143d94a74cd9c2e5f459029479c3b99e1e5a308e",
+    "text": "{{left}} или {{right}}"
+  },
+  "preview.outcomeBlock": {
+    "reviewed": true,
+    "source": "Block {{before}} → {{after}}",
+    "sourceHash": "0c5c49e6a1afddc6505ec81959b5928fb8faa41d9a1747c6a7cbbff00c80fa08",
+    "text": "Блок {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "reviewed": true,
+    "source": "Critical {{description}}",
+    "sourceHash": "bdca03c41438beda8354209b63cefd1e2c8811a0853f9ac399d1d6362cba5e9f",
+    "text": "Критический удар: {{description}}"
+  },
+  "preview.outcomeDamage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}}",
+    "sourceHash": "cfb9fb712df4eebfe000a00f13d581df9d82ae69bba2c66b3464a8aaad7ac42c",
+    "text": "{{type}}: {{amount}}"
+  },
+  "preview.outcomeHeal": {
+    "reviewed": true,
+    "source": "Heal {{amount}}",
+    "sourceHash": "e573e2e9925c8a01a990d35e81976495f84019edfe613cedc1c12433d6c147e0",
+    "text": "Лечение: {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "reviewed": true,
+    "source": "Lose {{amount}} Health",
+    "sourceHash": "e09228d755c4a6e6650c23d5dfb7b542a2e98535e1b0d575c4fec1a50f145167",
+    "text": "Потеря здоровья: {{amount}}"
+  },
+  "preview.outcomeNoChange": {
+    "reviewed": true,
+    "source": "No change",
+    "sourceHash": "bea4786e4791950e9411a70f7d40a7d80f0d50bd10eac905f4332311233f26df",
+    "text": "Без изменений"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "a5fa76f8cdd7cc56e5b20f12f99af344a817a864f3957d17da33684060d97c00",
+    "text": "Возможно: {{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "cdc954e2cadd8f8a72065a9c8fb744445abd3afeac21916ef4bd59749a3b1539",
+    "text": "Возможен нокаут"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "28e31a4f5cb7935e6777441fd36bead876a32d1674bb3e0146e190fa341808a0",
+    "text": "Возможные исходы для {{name}}: {{outcomes}}"
+  },
+  "preview.removeStatus": {
+    "reviewed": true,
+    "source": "Remove {{status}}",
+    "sourceHash": "b09de723ec9eb6fc1105ed0bbac1078eedf0f20e6d76216e98ec1468ca93a4b4",
+    "text": "Удалить: {{status}}"
+  },
+  "preview.statusChange": {
+    "reviewed": true,
+    "source": "{{keyword}} {{before}} → {{after}}",
+    "sourceHash": "8bbb16e2e125ec4c75e40a2b39cdfd64ea9865e4c30c9964e3ada00215573926",
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "4af2acb150264456f7a75413c4e95ae76b6188c93f19678cac756dd93631d990",
+    "text": "Результат меняется"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "2c72d6158462849533c72905b6b7d57401e53cccc2df9884bc61a43a0dde14d1",
+    "text": "{{summary}}, {{details}}"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "bdc19a51a1799a155ab58eef2fc5bcde2e3b3511cce3c7c69634e1e8a30f7a07",
+    "text": "Выберите команду"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "5c4dd1109de5b5bab8db0b5e2ed3d4086948252818f06f5bcdbeb9e26c887862",
+    "text": "Подтвердить"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "cd488a8a9afa02d8c4e8ad3369fb766eaf7f1e61798f48f5301af64e4d7d0eb5",
+    "text": "Обменять существо"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "899b582b940d7858f62b6b72192d75fb5bdc576bc8f2dcb85a4613c86649a30a",
+    "text": "Предпросмотр замены {{name}} в ячейке команды {{slot}}"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "ddcfd50306cd1e8afbd65f4fcd2963fe87e11cc57355e4a97c2020fd8d63fcd7",
+    "text": "Команда"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "5e4452ef579e88bd7421af0af8ae974460c0c350801635219177abcdf8b52aca",
+    "text": "Отменить замену: {{name}}"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "b73bd6fd85f5994834c8f12bc2da6df78b279c8c9e438bab78acc501437985a4",
+    "text": "Отменить замену на {{name}} в ячейке команды {{slot}}"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "0fd31ab01142ad1c6085f175a821b6b38adda26bf6653c489fd30364c3180ab1",
+    "text": "Путешествие завершено"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "da31db4c9979db3b3a8ba676a7be4bc152c81c6dfe0a988eb63b185c461b8fe3",
+    "text": "Поражение"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "f123e8be6a672cd533e2b1fc10378cc5330de8bc9e819fb756dd0cd6b0265adf",
+    "text": "Постоянные награды не получены"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "8f90f1c2557fb4240dd77bab59ef011a3a9b7b801e329977108f0ed812ba41b1",
+    "text": "Путешествие окончено"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "52867d2076ed5d569f5a7473ec0df91a44ea8fd9f865c2d2aa2942434c4084f3",
+    "text": "Награды путешествия"
+  },
+  "results.goldEarnedTotal": {
+    "reviewed": true,
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "6628b249c8368c931f4cb28e169d432b1ef7ef940cfcfc81f373f0bb1e934598",
+    "text": "Получено золота: {{amount}}"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "2b4bc5a303f37714a70234f66163c5b5b5471e32eb32f3318f9fa311c02bfb9a",
+    "text": "Главное меню"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "73fdf569e55ed58f1d5ecd954da7a92e028f3b36b76c1431048921ac58528889",
+    "text": "Возвращение домой"
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "2b4c282d41e60812d45afe89dc2c63e12ecf7d6d660f15504ef215abed9d1e3b",
+    "text": "Выберите благословение"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "ac5be7863b2253b758900c6cdd535451bcf69b1004ae85fc4d0303532deef850",
+    "text": "Выберите существо"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "95d987fe228db9ec6612aac88789b4b9c2d83865a649f16db51d4584da0fcd41",
+    "text": "Новое!"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "7350e6697019620b0611d7fe6e242d2584f46ea066e8608832db4540fac72a53",
+    "text": "{{name}}: новое в коллекции, ноль звёзд"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "737575256fb34390e0644b3228b7b8dfc5b4d1f921f5f508e59c7d908618975a",
+    "text": "{{name}}: с {{rank}} до {{next}} из {{maximum}} звёзд"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "8c3b270aeef73886a742a0e58e50168d21d97f294f41e390a46df493e3227b38",
+    "text": "Страницы существ"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "b5de5806b02f7d1c06603fcce9ef31bdf5f685b1969099c11922d336824c2465",
+    "text": "Пропустить"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "c9b719a5f44e7be100ce5f116bb39c5a1edfc6a590123855c7a84856d3a63205",
+    "text": "Победа"
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "c8500568a299988f6fa8d4982c5a4557a6711302e19607d6fa90602a64a1172d",
+    "text": "Аудио"
+  },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "4ad9ed350822ccb6de45cc1072923037a46049a5ebc0f3291ebf569112b47811",
+    "text": "Автоматически завершать ход"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "676f552ff81da4bce38e23168a1b62a55719634bcb3c17f8521f3ca6abda9dbf",
+    "text": "Автоматически"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "ca6edf4934f3e3c2e561cad7dd6efcf37d991d206bade5e25eb0a8b1a25fdfef",
+    "text": "Бой"
+  },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "61ac7ecdff55f8a20839396b79807e1284abd88321ca5cff289b08374372ab4b",
+    "text": "Категории настроек"
+  },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "cb42385506e2c097746f356b2ad6e691b5f101e799e996c9383f7c9055cbbf83",
+    "text": "Закрыть выбор языка"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "f07d65fe4d67ad5dbdecaf3e7776d70ac6b26859a73b014de29896163db97f3a",
+    "text": "Подсказки контроллера"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "7787ea5e1ffb8b78aeb34c0e94a4022e6285be62dc376ad7087a2315e78c9b5f",
+    "text": "Изображение"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "102d47cc93b1521490539cbcbb69da9e97dd7851a66c4b115b5a0a071fe0f2fe",
+    "text": "Режим отображения"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "5ce386f38096d6036e8b7d45192971de48cad9c6ab4563cd6e7739545bc556cb",
+    "text": "Звуковые эффекты"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "f0a99b9d45075fe4f0f8b790e0f870ff84833d1035d13891786bd86fbd7ac3ca",
+    "text": "Громкость эффектов"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "035df2f6f1a07ad3adb5b34659c10f4c09c352dc030942d95144bf1bb20adc36",
+    "text": "Значение громкости эффектов"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "f768fd55499b029ddb6c383185b39243262a76101c8cc2f35fff60483b8fb36f",
+    "text": "Полный экран"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "e19f2852dbdd847e292eb7df78a57a00f009fbb1d7a1a3f998da60f9d2d07db6",
+    "text": "Свечение фона"
+  },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "56cd3e40f2665551d48ffaa90e267e988a5c654e7161a989e32b8bac6ef4d9d0",
+    "text": "Значение свечения фона"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "98fb856edb68a6afdbbd1e1f805135a0eaee6f6a0f52bc8698959d4860995ad0",
+    "text": "Язык"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "6029fe85256831cc5a53d0401f85382cab36485d5c58eb204652cd6763b03fa6",
+    "text": "Выберите язык"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "dfc1558c22750d6518cb6ebce6222fbc898753d9ea00d36022286ab934b6b317",
+    "text": "Язык: {{language}}"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "ae561f69fefbed8f2fbf5c949dedbd9511683b23ba68f6cc675fe38723f1c0e4",
+    "text": "Общая"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "ffa16eb548be7455085110c3b12b0a9a942179b7a52f606edc1b352c7676282c",
+    "text": "Общая громкость"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "856f5ed0ab6874c5cfe6512eab8b955948fa5f58728bd8636325d57c46c24f1d",
+    "text": "Значение общей громкости"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "c39a5d4d63581d870be06a2486d781e5cdaa2b0329864941aa2aab4546fbb1ed",
+    "text": "Музыка"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "4f85e58a65c16990fa479d841dc30e49eae8d7b310339131fb04a34830b96bb2",
+    "text": "Громкость музыки"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "308f78b1f6545245477942d0f34eb762367b08db133a32f30a611b1bec997240",
+    "text": "Значение громкости музыки"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "04eb540b5262e5bcb36fa3b09f98e2988ccd806ef5af25cf085f9d9f08bd0f8f",
+    "text": "Выключать звук в фоне"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "11180432ca411ba4d80aac56de5ac37cc4737cecdfe0d5dca62c8bad571df06a",
+    "text": "Частицы фона"
+  },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "2c5d17339ee15fdf65af18f920bbbf15f50efbad96e6ac62edce1ae5d4e6edad",
+    "text": "Значение частиц фона"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "60901ba6412d7223cd23b06652134bef5d25adc5abc3ff8897284a07f9b90874",
+    "text": "Звук"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "161b78c3600d0a7357ee9908c564c3b1fcda3f6ed93cb6db083f5efd462b1312",
+    "text": "Размер текста"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "73423c7cf773ecc344e82fe006187c6265868d556b576465e632b96269962063",
+    "text": "Подсказка {{value}}%"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "4f41737c7c229069a4af79fb6daf5985b9b58257aad308273364caa607a210fd",
+    "text": "Размер подсказок"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "02cf45b6a54ac390243ce36ca965ab9fdb1d44eeced83f80ecd73b38204f3c62",
+    "text": "Оконный режим"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "0feaba2913fef0ec152fd76adc52f3721cb3b91d788619c9704970ab8d775cb3",
+    "text": "{{description}}; {{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "8a438868db009b03e0948e3a1f626484a4dc09cbe8133494b1fb659083a51c76",
+    "text": "{{keyword}}: бонус {{count}}%; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "7ef87cc86a27fd05674d194ce950024acf7fb34e2fb0b5f5100c744f7fcef532",
+    "text": "{{count}}% исчезает в начале вашего следующего хода"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "b403e710125956433dff2e8eef9d92a4c66fe5382e5e274f680266ba4f4b35ff",
+    "text": "{{count}}% от «{{trait}}»"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "fcd419a91d9472f513ba9d27f609f223165eb8b0f2c2ce581b3d6e9305f2d6c3",
+    "text": "{{keyword}}: {{count}}; {{description}}"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "6b41dfe8a88e10bf683ce4f2c5ae603a78227d800b90b18135026cba974dd3a2",
+    "text": "Открыто"
+  }
+}

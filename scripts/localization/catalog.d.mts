@@ -27,3 +27,4 @@ export function qualificationIssues(
   catalogs: Record<string, Record<string, unknown>>,
   glossaries: Record<string, unknown>,
 ): string[];
+export function mergeSources(...catalogs: Record<string, unknown>[]): Record<string, unknown>;

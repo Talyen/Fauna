@@ -1,7 +1,8 @@
 import { useMessages } from "../shared/localization/message-context";
+import { isKeywordId } from "../../game/keywords";
 import { GLOSSARY } from "../../game/glossary";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
-import { KeywordText } from "../shared/keyword-text";
+import { Keyword, KeywordText } from "../shared/keyword-text";
 export function GlossaryScreen({
   back,
   controller = false,
@@ -39,16 +40,25 @@ export function GlossaryScreen({
         aria-label={i18n.message("glossary.entries", "Glossary entries")}
         tabIndex={0}
       >
-        {GLOSSARY.map((entry) => (
-          <dl key={entry.term}>
-            <dt>
-              <KeywordText text={entry.term} />
-            </dt>
-            <dd>
-              <KeywordText text={entry.definition} />
-            </dd>
-          </dl>
-        ))}
+        {GLOSSARY.map((entry) => {
+          const keyword = entry.id.startsWith("keyword.") ? entry.id.slice("keyword.".length) : "";
+          return (
+            <dl key={entry.id}>
+              <dt>
+                {isKeywordId(keyword) ? (
+                  <span className="rule-keyword">
+                    <Keyword id={keyword} />
+                  </span>
+                ) : (
+                  <KeywordText text={entry.term} id={`content.glossary.${entry.id}.term.rule`} />
+                )}
+              </dt>
+              <dd>
+                <KeywordText text={entry.definition} id={`content.glossary.${entry.id}.definition.rule`} />
+              </dd>
+            </dl>
+          );
+        })}
       </div>
       {/* eslint-enable jsx-a11y/no-noninteractive-tabindex */}
     </Screen>

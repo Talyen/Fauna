@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import type { BOONS } from "../../game/content";
 import { ArtCard } from "../shared/cards/art-card";
@@ -24,13 +25,18 @@ export const BoonArt = forwardRef<HTMLButtonElement, BoonArtProps>(function Boon
 });
 
 export function BoonName({ boon }: { boon: Boon }) {
-  return <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>;
+  const i18n = useMessages();
+  return (
+    <ShineText keywords={visualKeywords(boon.text)}>
+      {i18n.content(`content.boon.${boon.id}.name`, boon.name)}
+    </ShineText>
+  );
 }
 
 export function BoonText({ boon }: { boon: Boon }) {
   return (
     <p>
-      <KeywordText text={boon.text} />
+      <KeywordText text={boon.text} id={`content.boon.${boon.id}.rule`} />
     </p>
   );
 }
