@@ -25,7 +25,13 @@ export function inventorySource(source, filename) {
     const leading = node.type === "JSXText" ? node.value.match(/^\s*/)[0] : "";
     const before = bytes.subarray(0, node.span.start - 1).toString() + leading;
     const lines = before.split("\n");
-    entries.push({ file: filename, line: lines.length, column: [...lines.at(-1)].length + 1, kind, text });
+    entries.push({
+      file: filename,
+      line: lines.length,
+      column: Array.from(lines.at(-1)).length + 1,
+      kind,
+      text,
+    });
   };
   function expression(node, kind) {
     if (node.type === "StringLiteral") add(node, kind, node.value);
