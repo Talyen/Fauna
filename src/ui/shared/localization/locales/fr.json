@@ -2807,6 +2807,12 @@
     "sourceHash": "a02479973b01ee55fc05c59d9914bcea299001eed3eceaeba5abb9ee4edd0c44",
     "text": "Rempart"
   },
+  "content.talent.armor.bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each battle with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "783d5691b34844c14b136d22a51551a42d08a899809dd5b0433bb613fe8a4238",
+    "text": "Commencez chaque combat avec {{value0}} <keyword0>Armure</keyword0>"
+  },
   "content.talent.armor.fireward.name": {
     "reviewed": true,
     "source": "Fireward",
@@ -2849,11 +2855,23 @@
     "sourceHash": "3b43e1da54655687ee51bf91e83dda0dab48eb2f29b230a83df7093a6af73b27",
     "text": "Purification"
   },
+  "content.talent.armor.purification.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> has a {{value0}}% chance to <keyword1>Cleanse</keyword1> a harmful status effect",
+    "sourceHash": "384f01a51bd14b78c8f747a3eb603697e5260de0b67845cae821519593a44162",
+    "text": "Gagner de l’<keyword0>Armure</keyword0> donne {{value0}}% de chances de <keyword1>purifier</keyword1> un effet de statut néfaste"
+  },
   "content.talent.armor.reactive-guard.name": {
     "reviewed": true,
     "source": "Reactive Guard",
     "sourceHash": "269b24e14fa588ffd7d606dd0042590c6120aa6fd333139a9a8219dea80b6b15",
     "text": "Garde réactive"
+  },
+  "content.talent.armor.reactive-guard.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when your <keyword1>Armor</keyword1> breaks",
+    "sourceHash": "00921a6b629ba95d3cb08e74bba719c53a36c591dca0d3e044345f7a61ecc219",
+    "text": "Gagnez {{value0}} <keyword0>Blocage</keyword0> lorsque votre <keyword1>Armure</keyword1> se brise"
   },
   "content.talent.armor.reinforced.name": {
     "reviewed": true,
@@ -3029,6 +3047,12 @@
     "sourceHash": "db7c22ff03ea558f0fdd0d098142ca10e40fd7d617424ce4b8778f2c542ec639",
     "text": "Mise à la terre"
   },
+  "content.talent.block.grounding.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> prevents <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "c1d81e3f2f056ab47c68185b7fabd6766e677f2e6dbdf287e04b8be12ad41d1c",
+    "text": "Le <keyword0>Blocage</keyword0> empêche l’accumulation d’<keyword1>Étourdissement</keyword1>"
+  },
   "content.talent.block.impact-guard.name": {
     "reviewed": true,
     "source": "Impact Guard",
@@ -3059,11 +3083,23 @@
     "sourceHash": "3f843cf37c91f8d2721d0b1ff5e0816e394fee9701cf8b8de66a64a5c238c845",
     "text": "Bouclier sacré"
   },
+  "content.talent.block.sacred-shield.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "689d562313e24c284433ff7043ab23fb16781dce6eca377019e9684feb2844dc",
+    "text": "Les dégâts de <keyword0>Lumière</keyword0> augmentent de {{value0}}% de votre <keyword1>Blocage</keyword1>"
+  },
   "content.talent.block.second-wind.name": {
     "reviewed": true,
     "source": "Second Wind",
     "sourceHash": "6dcc1006356cfa4d168675019d86688b434ea24f8c00f68a4c98989843e4a94b",
     "text": "Second souffle"
+  },
+  "content.talent.block.second-wind.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when your <keyword1>Block</keyword1> is depleted",
+    "sourceHash": "7c8b27cd0c22db1e9c878ce9fb9862eeeeed200905eb8e07d1c1ba58ca5fb5fc",
+    "text": "Restaurez {{value0}} <keyword0>Santé</keyword0> lorsque votre <keyword1>Blocage</keyword1> est épuisé"
   },
   "content.talent.block.sun-struck-shield.name": {
     "reviewed": true,

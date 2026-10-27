@@ -2759,6 +2759,12 @@
     "sourceHash": "f56b5138b3b510e6f42eb4ac9326e2eb49eb5fc7dd6e78d3a85819738b56c20a",
     "text": "Бастион"
   },
+  "content.talent.armor.bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each battle with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "6d80fd67158869baa70b2a4d73e298368a2ab2cdc59d82bb8107122aae1fb0c3",
+    "text": "Начинайте каждый бой с <keyword0>бронёй</keyword0>: {{value0}}"
+  },
   "content.talent.armor.fireward.name": {
     "reviewed": true,
     "source": "Fireward",
@@ -2801,11 +2807,23 @@
     "sourceHash": "f0837d52922a37597451652d5f65f455bd321135bc769d59777f3559b4e67954",
     "text": "Очищение"
   },
+  "content.talent.armor.purification.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> has a {{value0}}% chance to <keyword1>Cleanse</keyword1> a harmful status effect",
+    "sourceHash": "af68087a3b2b040c6b71750c81a63b918acb4c98a343cc76a5eb1a66a2d2d962",
+    "text": "Получение <keyword0>брони</keyword0> с вероятностью {{value0}}% позволяет <keyword1>очистить</keyword1> вредный эффект состояния"
+  },
   "content.talent.armor.reactive-guard.name": {
     "reviewed": true,
     "source": "Reactive Guard",
     "sourceHash": "4a9155bb7508fd6fd8b88a58b35966b09f7bd0cdcac6d2036ac555bd1dd5b223",
     "text": "Ответная защита"
+  },
+  "content.talent.armor.reactive-guard.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when your <keyword1>Armor</keyword1> breaks",
+    "sourceHash": "630412e78fdb83733417260c31bb3889bb5954b0a5c506afa0544a2f8d09ffca",
+    "text": "Получите {{value0}} <keyword0>блока</keyword0>, когда ваша <keyword1>броня</keyword1> ломается"
   },
   "content.talent.armor.reinforced.name": {
     "reviewed": true,
@@ -2981,6 +2999,12 @@
     "sourceHash": "e6e19a7f7ffa4136185f848fe2509eb2258656a66a0ac1268752fe6e58bad241",
     "text": "Заземление"
   },
+  "content.talent.block.grounding.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> prevents <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "299fa0b5463630d7adc808ef84889b1778b0f0c6ca6e85aa9d2909288d6c1521",
+    "text": "<keyword0>Блок</keyword0> предотвращает накопление <keyword1>оглушения</keyword1>"
+  },
   "content.talent.block.impact-guard.name": {
     "reviewed": true,
     "source": "Impact Guard",
@@ -3011,11 +3035,23 @@
     "sourceHash": "bbf1bc1ffcd47bb394653be415f8e92d6dc1e2b6c81f3c19ac40a9409c6e68e2",
     "text": "Священный щит"
   },
+  "content.talent.block.sacred-shield.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "6597c6bae3da530a764da1b73dbfa9cbe7660584a67664539a893dff81f4507b",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» увеличивается на {{value0}}% вашего <keyword1>блока</keyword1>"
+  },
   "content.talent.block.second-wind.name": {
     "reviewed": true,
     "source": "Second Wind",
     "sourceHash": "5f51c8d9bcdf62b67166b0b3bc6ac8cc651e2c3cf35b873cf277d9b952a9cddd",
     "text": "Второе дыхание"
+  },
+  "content.talent.block.second-wind.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when your <keyword1>Block</keyword1> is depleted",
+    "sourceHash": "23e1781ca863f6d679cf7c55420d29544cd5afb3d9560e430f70f6553065be03",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0>, когда ваш <keyword1>блок</keyword1> исчерпан"
   },
   "content.talent.block.sun-struck-shield.name": {
     "reviewed": true,

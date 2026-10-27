@@ -2759,6 +2759,12 @@
     "sourceHash": "13af12669a8d4986674eb3c317e05960e50117ecd4a0e76be61ee85c4410bd02",
     "text": "城壁"
   },
+  "content.talent.armor.bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each battle with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "557250a18b0df9bf0af1273fa22c6fbedbbfda21e42c767b2dd0605d55230168",
+    "text": "各戦闘を<keyword0>装甲</keyword0>{{value0}}で開始する"
+  },
   "content.talent.armor.fireward.name": {
     "reviewed": true,
     "source": "Fireward",
@@ -2801,11 +2807,23 @@
     "sourceHash": "40e823f2f15664ed0cad5448feb4edba8ddc858556fdf3ddadbbe8df8167eb17",
     "text": "清め"
   },
+  "content.talent.armor.purification.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> has a {{value0}}% chance to <keyword1>Cleanse</keyword1> a harmful status effect",
+    "sourceHash": "eebf0b06735b845a3cb4d626f20f86442bda85494ffbf931b8c8e0965b00c56c",
+    "text": "<keyword0>装甲</keyword0>獲得時に{{value0}}%の確率で有害な状態効果を1つ<keyword1>浄化</keyword1>する"
+  },
   "content.talent.armor.reactive-guard.name": {
     "reviewed": true,
     "source": "Reactive Guard",
     "sourceHash": "acf9dbc4c1c77e252001dbd3f11f4464db301bd0888dedae309e334050f82b35",
     "text": "反応する守り"
+  },
+  "content.talent.armor.reactive-guard.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when your <keyword1>Armor</keyword1> breaks",
+    "sourceHash": "3a47e6cde563f96cf5a93bac6f9bf8a3e23dea67526edbcb8bf2d2ff3a586048",
+    "text": "自身の<keyword1>装甲</keyword1>が壊れると<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.talent.armor.reinforced.name": {
     "reviewed": true,
@@ -2981,6 +2999,12 @@
     "sourceHash": "0291b8562f78a0ad029a8571384fd1d919389dd0433e310e171d4423882f8540",
     "text": "接地"
   },
+  "content.talent.block.grounding.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> prevents <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "78f42dd2f15123b19b8f3ead2ce027abc87bdab59192f2c5195d4d94463d7c90",
+    "text": "<keyword0>ブロック</keyword0>は<keyword1>スタン</keyword1>の蓄積を防ぐ"
+  },
   "content.talent.block.impact-guard.name": {
     "reviewed": true,
     "source": "Impact Guard",
@@ -3011,11 +3035,23 @@
     "sourceHash": "002a9132025f31c9e4ce617ab13a89090fc422d214e1d952d7800dc57cd7e5a4",
     "text": "聖なる盾"
   },
+  "content.talent.block.sacred-shield.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "fb69d1e445cb3989b106a3bb579600b2e53477935c10675fb8fab04fcf5b02d2",
+    "text": "<keyword0>光</keyword0>ダメージが自身の<keyword1>ブロック</keyword1>の{{value0}}%分増加"
+  },
   "content.talent.block.second-wind.name": {
     "reviewed": true,
     "source": "Second Wind",
     "sourceHash": "82b3634788d050b81ec9fe959aed800674ff8163628091d6b894e7cb82a1c61a",
     "text": "再起"
+  },
+  "content.talent.block.second-wind.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when your <keyword1>Block</keyword1> is depleted",
+    "sourceHash": "0162c236aef33ff403d0889c39319d29887d3399590173cdbd110b2f132cf5aa",
+    "text": "自身の<keyword1>ブロック</keyword1>が尽きると<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.talent.block.sun-struck-shield.name": {
     "reviewed": true,

@@ -2759,6 +2759,12 @@
     "sourceHash": "023533e18a4d94ec23ba6c325be994a8dddf0cddd97c6b7257677dce6df70991",
     "text": "壁垒"
   },
+  "content.talent.armor.bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each battle with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "201a63d627b8980214f781ccd84c921e332e0491b4090265ffcb7215ccae964d",
+    "text": "每场战斗开始时获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
   "content.talent.armor.fireward.name": {
     "reviewed": true,
     "source": "Fireward",
@@ -2801,11 +2807,23 @@
     "sourceHash": "4f308551073c10dbe98e7488ad90995a289fc039a54f6a7f74883f47d4a74c62",
     "text": "净化仪式"
   },
+  "content.talent.armor.purification.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> has a {{value0}}% chance to <keyword1>Cleanse</keyword1> a harmful status effect",
+    "sourceHash": "d55dff24f99fccc7de4f418ecca8bffa9330356a6fcb432d4358950489e8ffe6",
+    "text": "获得<keyword0>护甲</keyword0>时有{{value0}}%的概率<keyword1>净化</keyword1>一个有害状态效果"
+  },
   "content.talent.armor.reactive-guard.name": {
     "reviewed": true,
     "source": "Reactive Guard",
     "sourceHash": "bc03ff573593e76323154b602097c1415c79ee8c960dd9ff2f7d3009dd302d43",
     "text": "应激守卫"
+  },
+  "content.talent.armor.reactive-guard.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when your <keyword1>Armor</keyword1> breaks",
+    "sourceHash": "12d3e5e7ecaa1285557623d47789e08d3a65ed36008ff0af59b277b010019d32",
+    "text": "自身<keyword1>护甲</keyword1>破裂时获得{{value0}}点<keyword0>格挡</keyword0>"
   },
   "content.talent.armor.reinforced.name": {
     "reviewed": true,
@@ -2981,6 +2999,12 @@
     "sourceHash": "8012dbcb79efc8ba082f0a94dc462ca6f45f550748df89cc2c7c764afe3490a9",
     "text": "接地"
   },
+  "content.talent.block.grounding.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> prevents <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "64080eca10888f15c6fe2b5db32db3a1df37cb9d0ea452e1e12684f69515ca36",
+    "text": "<keyword0>格挡</keyword0>防止<keyword1>眩晕</keyword1>积累"
+  },
   "content.talent.block.impact-guard.name": {
     "reviewed": true,
     "source": "Impact Guard",
@@ -3011,11 +3035,23 @@
     "sourceHash": "f7895ddd137c50b2950e880df01bebaff468f50fd138d7de806041082b2002e3",
     "text": "神圣之盾"
   },
+  "content.talent.block.sacred-shield.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "0ba1fdce9c4a15f6d50f2bd9350b5bee48cddcd1711bbc1edb66b6bd6a233e14",
+    "text": "<keyword0>光</keyword0>伤害提高自身<keyword1>格挡</keyword1>的{{value0}}%"
+  },
   "content.talent.block.second-wind.name": {
     "reviewed": true,
     "source": "Second Wind",
     "sourceHash": "b4ac9131d1d2d0ccd12a1207f849344afee2495f3e5f5193e72b920ae20a4655",
     "text": "重振旗鼓"
+  },
+  "content.talent.block.second-wind.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when your <keyword1>Block</keyword1> is depleted",
+    "sourceHash": "c7960e7f19835756f3c6246845059a9e14e87e3ab9641e638f0f18910834c556",
+    "text": "自身<keyword1>格挡</keyword1>耗尽时恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.talent.block.sun-struck-shield.name": {
     "reviewed": true,

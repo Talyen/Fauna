@@ -2759,6 +2759,12 @@
     "sourceHash": "5beed43b16624a21d433cf79bd4d12836729f1a17358500b0b0a556c86e4cb55",
     "text": "Bollwerk"
   },
+  "content.talent.armor.bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each battle with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "efa28abc6c6a398009115001f52e11173a4228a76d02ac2c4b3f7d88db540b25",
+    "text": "Beginne jeden Kampf mit {{value0}} <keyword0>Rüstung</keyword0>"
+  },
   "content.talent.armor.fireward.name": {
     "reviewed": true,
     "source": "Fireward",
@@ -2801,11 +2807,23 @@
     "sourceHash": "a657c119a83044a2ba9e40e8c53f8ab3faa8ff60ca64af84285dd867d7c089c7",
     "text": "Läuterung"
   },
+  "content.talent.armor.purification.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> has a {{value0}}% chance to <keyword1>Cleanse</keyword1> a harmful status effect",
+    "sourceHash": "faa4062b0db8ac1c794bd7dc77d127603e4e00cb60cb9641b7cfdff302cad5c9",
+    "text": "Beim Erhalt von <keyword0>Rüstung</keyword0> besteht eine Chance von {{value0}}%, einen schädlichen Statuseffekt zu <keyword1>reinigen</keyword1>"
+  },
   "content.talent.armor.reactive-guard.name": {
     "reviewed": true,
     "source": "Reactive Guard",
     "sourceHash": "1274ae716f0999b2c79f8c30affa2d80d3162b6525e98e5637594afd9e2abbe1",
     "text": "Reaktiver Schutz"
+  },
+  "content.talent.armor.reactive-guard.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when your <keyword1>Armor</keyword1> breaks",
+    "sourceHash": "28d546afe11d4967ac245fe70727a853c539ff8d6544feb9a362706fc7115cb5",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>, wenn deine <keyword1>Rüstung</keyword1> bricht"
   },
   "content.talent.armor.reinforced.name": {
     "reviewed": true,
@@ -2981,6 +2999,12 @@
     "sourceHash": "141b70c170717bfcddbeafa6e1314e3802aa5cab21ccdaff32e8fcbdf81a8006",
     "text": "Erdung"
   },
+  "content.talent.block.grounding.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> prevents <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "da5800cdd46ec8741d721bfbc529d51954442320cf940addc970ec504db521c9",
+    "text": "<keyword0>Block</keyword0> verhindert den Aufbau von <keyword1>Betäubung</keyword1>"
+  },
   "content.talent.block.impact-guard.name": {
     "reviewed": true,
     "source": "Impact Guard",
@@ -3011,11 +3035,23 @@
     "sourceHash": "24e847f3b74c7d60e549239d6d439cef5ca34303206312b092f66cc1eacc1b10",
     "text": "Heiliger Schild"
   },
+  "content.talent.block.sacred-shield.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "a9c9deedb750fe5ee09c2c2eb07907d70c1662740368160c6eb08f1507b372f4",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> steigt um {{value0}}% deines <keyword1>Blocks</keyword1>"
+  },
   "content.talent.block.second-wind.name": {
     "reviewed": true,
     "source": "Second Wind",
     "sourceHash": "92062728924ebcc40c2e30259847e800fb959fc83d16dee0165957e0842e220c",
     "text": "Neue Kraft"
+  },
+  "content.talent.block.second-wind.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when your <keyword1>Block</keyword1> is depleted",
+    "sourceHash": "38ad70d8edde008ee5773d58b89fdd2dfe9636fd7cd6bdc65964e0863cd5612b",
+    "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn dein <keyword1>Block</keyword1> aufgebraucht wird"
   },
   "content.talent.block.sun-struck-shield.name": {
     "reviewed": true,
