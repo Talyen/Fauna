@@ -3005,6 +3005,66 @@
     "sourceHash": "1a1334ce4d7d12e04fabe519ebcc7d08ef8500ec7c53b242eab1ba2ccae1ec6e",
     "text": "源泉"
   },
+  "content.talent.nature.bramblegrowth.name": {
+    "reviewed": true,
+    "source": "Bramblegrowth",
+    "sourceHash": "e29caa8daf3f12ae7800248c9f1f3f3deb4118547e59c6bee1a293e050b4852f",
+    "text": "荆棘生长"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "reviewed": true,
+    "source": "Briar Patch",
+    "sourceHash": "56c72797d2c5640622ed8c52d26ddf6021ddbd56e78f4bef358053ea093c0964",
+    "text": "荆棘丛"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "reviewed": true,
+    "source": "Ecosystem",
+    "sourceHash": "01e8ba8e568bfa27b78404a51ac768af92200fe5810eccfa3db0ed66a4039d46",
+    "text": "生态系统"
+  },
+  "content.talent.nature.entangle.name": {
+    "reviewed": true,
+    "source": "Entangle",
+    "sourceHash": "4c76d54ea1a3549a6455b82f63f0bc91a5ac4db096d70205d5d679336555a5b5",
+    "text": "纠缠"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "0886c0fae0bafff88dbcbcbdc052365e95b94ec0b8daa1f1e54474b1aa287dd0",
+    "text": "蔓生"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "reviewed": true,
+    "source": "Photosynthesis",
+    "sourceHash": "b2b86525f562410a3567c362740dcb510a289aa849d77f62131f4fbca92704f3",
+    "text": "光合作用"
+  },
+  "content.talent.nature.thornskin.name": {
+    "reviewed": true,
+    "source": "Thornskin",
+    "sourceHash": "4d48ef868e2152749e06453e8436e4efffb12c82c03c29aa2a1e55e5c9476884",
+    "text": "荆棘肌肤"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "reviewed": true,
+    "source": "Toxic Pollen",
+    "sourceHash": "509b6dd71d789cc9f2ff64d33c2a3221db4246a041602e7656db3279667c9a39",
+    "text": "毒性花粉"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "reviewed": true,
+    "source": "Verdant Cycle",
+    "sourceHash": "363b1b4894e06b44926838aa72b2ca993a22220b8ac9ec7679def10128a33ef8",
+    "text": "苍翠循环"
+  },
+  "content.talent.nature.windstep.name": {
+    "reviewed": true,
+    "source": "Windstep",
+    "sourceHash": "38d68f00834bae0c76b9a12a307de1d0d1330f5722336d53a13dd0796e7b5d4c",
+    "text": "风步"
+  },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
     "source": "Caustic",

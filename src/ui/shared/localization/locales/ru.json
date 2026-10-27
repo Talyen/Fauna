@@ -3005,6 +3005,66 @@
     "sourceHash": "25d77f7fd816539896c9a46118d0e8ecc24910e68dae27112e5448b1d52e0efa",
     "text": "Родник"
   },
+  "content.talent.nature.bramblegrowth.name": {
+    "reviewed": true,
+    "source": "Bramblegrowth",
+    "sourceHash": "6f482c42c0c7e4700dad40b29ae0a1a6cb4d81a4c7d3c394a1c262c10ff9b39a",
+    "text": "Рост терновника"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "reviewed": true,
+    "source": "Briar Patch",
+    "sourceHash": "072999e16f90f73713766f0d32edf699188382023f88ac63740393707a4c4527",
+    "text": "Терновые заросли"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "reviewed": true,
+    "source": "Ecosystem",
+    "sourceHash": "5c5caa834cb6c4f6e6feefeece67f06232ec5063913df9b9f4a21150d28c7761",
+    "text": "Экосистема"
+  },
+  "content.talent.nature.entangle.name": {
+    "reviewed": true,
+    "source": "Entangle",
+    "sourceHash": "f7c57e5dbf2405aa11ab5315d724ffe6f88ff5baedd3abe010daf36e2083f1c4",
+    "text": "Опутывание"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "caa36e91df0cc3002a1e9f5a91a9645dbbb5cf898667f2c4a10d946a66105ad9",
+    "text": "Буйная поросль"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "reviewed": true,
+    "source": "Photosynthesis",
+    "sourceHash": "b666982823537055eb5e1d6509cb2e365640344d4e5e2231e884386900c8c2f4",
+    "text": "Фотосинтез"
+  },
+  "content.talent.nature.thornskin.name": {
+    "reviewed": true,
+    "source": "Thornskin",
+    "sourceHash": "25c0492abdfa65bc40e451f7629f04679862a21a97e4a07e8321293ad7563ef7",
+    "text": "Шипастая кожа"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "reviewed": true,
+    "source": "Toxic Pollen",
+    "sourceHash": "c22136e145858f8938a7e85babf6b0cc1cbb37ca8bc36e654e95b26f6e299cff",
+    "text": "Ядовитая пыльца"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "reviewed": true,
+    "source": "Verdant Cycle",
+    "sourceHash": "58e337c2f290061280b59aa7015971916af2d17774271f953469f2971c582dd2",
+    "text": "Зелёный цикл"
+  },
+  "content.talent.nature.windstep.name": {
+    "reviewed": true,
+    "source": "Windstep",
+    "sourceHash": "eda003bc7aad6a45870e3817e4f3696624bd2fb2d834a2a288b478745c3a030d",
+    "text": "Шаг ветра"
+  },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
     "source": "Caustic",

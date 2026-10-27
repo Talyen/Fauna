@@ -3053,6 +3053,66 @@
     "sourceHash": "07ad5bf1595b76e32ae4b705056ff69d286261307b05c70d0bf72438aab62532",
     "text": "Source vive"
   },
+  "content.talent.nature.bramblegrowth.name": {
+    "reviewed": true,
+    "source": "Bramblegrowth",
+    "sourceHash": "9aa44207c2a5fa80e67dd3dd1a9e08b392ebe65297446a98e7a5d73c90f4427d",
+    "text": "Croissance des ronces"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "reviewed": true,
+    "source": "Briar Patch",
+    "sourceHash": "07ba84a7a7811ce554ccee57b4ef7a86b5f363439fb87287646283efef1dbacc",
+    "text": "Fourré de ronces"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "reviewed": true,
+    "source": "Ecosystem",
+    "sourceHash": "d8ba0bacfffac514e7040af1d8ad31c451f81c1ce6e0490b9279e331be141468",
+    "text": "Écosystème"
+  },
+  "content.talent.nature.entangle.name": {
+    "reviewed": true,
+    "source": "Entangle",
+    "sourceHash": "9106156ab38f3cdfd29fa67e950432a00d307bf24c0dfa0042ca0bb1cdf94e9d",
+    "text": "Enchevêtrement"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "f0832e9e0c1ba59f6417dafed54ac925abb6682476df262dd3b576592f76cdc9",
+    "text": "Prolifération"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "reviewed": true,
+    "source": "Photosynthesis",
+    "sourceHash": "7d8856279b55cd65c83731542382839b9bfc944de4675e0bdae1f04b4580815a",
+    "text": "Photosynthèse"
+  },
+  "content.talent.nature.thornskin.name": {
+    "reviewed": true,
+    "source": "Thornskin",
+    "sourceHash": "4d31b118fdcb206c2b6b94a2f43ddf9b20276d29b8bc41d516376f67c53395df",
+    "text": "Peau d’épines"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "reviewed": true,
+    "source": "Toxic Pollen",
+    "sourceHash": "354ad3f28b2e5e41004d78af968e3c998588c06578115e528069eb388fde6ad8",
+    "text": "Pollen toxique"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "reviewed": true,
+    "source": "Verdant Cycle",
+    "sourceHash": "bf71929d99713dc4800efaef23f4fa634f0f3513f350b967efa139ea588d29f9",
+    "text": "Cycle verdoyant"
+  },
+  "content.talent.nature.windstep.name": {
+    "reviewed": true,
+    "source": "Windstep",
+    "sourceHash": "272b18d7063faca2bd02ec7abcdf98e664fa763692049daa251679b33a82082e",
+    "text": "Pas du vent"
+  },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
     "source": "Caustic",

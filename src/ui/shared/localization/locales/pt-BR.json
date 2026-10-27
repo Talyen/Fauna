@@ -3005,6 +3005,66 @@
     "sourceHash": "09d371078d81c6e5b24b5b7c7c34b0917bf2aa448f9ad563731d45db9060d227",
     "text": "Nascente"
   },
+  "content.talent.nature.bramblegrowth.name": {
+    "reviewed": true,
+    "source": "Bramblegrowth",
+    "sourceHash": "eaa6f6c1e7ebfe9f2eef3e081b357ae54a39c583155f113ad2e5be66c881a384",
+    "text": "Crescimento de sarças"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "reviewed": true,
+    "source": "Briar Patch",
+    "sourceHash": "34964958a02002fae0add5f6de00cddfc8a2cb3497024d34e5ff068d27263724",
+    "text": "Moita de espinheiros"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "reviewed": true,
+    "source": "Ecosystem",
+    "sourceHash": "9a2e02c707bb2797554d7288ed37e32426d3a5e2d8e0ff9b2a5cc074bec86ed1",
+    "text": "Ecossistema"
+  },
+  "content.talent.nature.entangle.name": {
+    "reviewed": true,
+    "source": "Entangle",
+    "sourceHash": "454510ee92bab383d4f9e734fed4d346aedfec0060ff37ca39705df9636ae0cb",
+    "text": "Enredar"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "1f3b79c42c8860c21afb9ed7d7e1cf6e977553f390a13daa475a70145932e952",
+    "text": "Crescimento exuberante"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "reviewed": true,
+    "source": "Photosynthesis",
+    "sourceHash": "13bd148fe90ebbf21fffbc1b206ccd07db992c99fe963abd36d6c0271fa84636",
+    "text": "Fotossíntese"
+  },
+  "content.talent.nature.thornskin.name": {
+    "reviewed": true,
+    "source": "Thornskin",
+    "sourceHash": "3ba400f5a08c687d65bb4db8450181129b9fedaa14fe8e1614d8e68c1a327f32",
+    "text": "Pele espinhosa"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "reviewed": true,
+    "source": "Toxic Pollen",
+    "sourceHash": "a5c31bb49f0943fce9fe3afc1a0b4a41c0d958497987f0276bf350ac4cd76329",
+    "text": "Pólen tóxico"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "reviewed": true,
+    "source": "Verdant Cycle",
+    "sourceHash": "7a9d2df130b13197c36bee77961f94ff09aba73380283f0bcdf51dd7aaae4d89",
+    "text": "Ciclo verdejante"
+  },
+  "content.talent.nature.windstep.name": {
+    "reviewed": true,
+    "source": "Windstep",
+    "sourceHash": "48fca71ee10b702712241f3d0cd9383dcb93586673773a16b1acd6d20406ae1d",
+    "text": "Passo do vento"
+  },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
     "source": "Caustic",

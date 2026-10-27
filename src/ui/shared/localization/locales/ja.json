@@ -3005,6 +3005,66 @@
     "sourceHash": "31dfdd9e74052f8a2c1f5539f9a7dfa382744d032ccc0db2ebc370d4adbee385",
     "text": "源泉"
   },
+  "content.talent.nature.bramblegrowth.name": {
+    "reviewed": true,
+    "source": "Bramblegrowth",
+    "sourceHash": "73e31e34301b651806c127dd66599676101d5929ccd79e3bdb5baf1f9f77c43a",
+    "text": "茨の成長"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "reviewed": true,
+    "source": "Briar Patch",
+    "sourceHash": "65fb181c8c33e0ee84c8b18af8d9b4d1470bf3a49b3bbf8f769442655f07a54f",
+    "text": "茨の茂み"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "reviewed": true,
+    "source": "Ecosystem",
+    "sourceHash": "a345c31db0bf36799e1732691bd8b2bb5ca55525c85dc55844fd363a5a497e74",
+    "text": "生態系"
+  },
+  "content.talent.nature.entangle.name": {
+    "reviewed": true,
+    "source": "Entangle",
+    "sourceHash": "421a272c6bdeecc1909ce96d9c415bda5dc9c96c201a39a4caa35de6ecc44509",
+    "text": "絡みつき"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "d588291b9d22c1121262c7c3296ddd17ae4345d8e48a2ecf91c20b392aec4a7c",
+    "text": "繁茂"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "reviewed": true,
+    "source": "Photosynthesis",
+    "sourceHash": "8966ab1747f5f6bd6f29ee22c99127760d7059381cbdec4ac56252b790cfdd0e",
+    "text": "光合成"
+  },
+  "content.talent.nature.thornskin.name": {
+    "reviewed": true,
+    "source": "Thornskin",
+    "sourceHash": "abcc3b7a9c2f432bbeed84de54af3924b53ab659ba92aa9c440fa3ccdfa31406",
+    "text": "棘の肌"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "reviewed": true,
+    "source": "Toxic Pollen",
+    "sourceHash": "eecd95f9115170fb84dba2d054cf804fb9d30f46f790ac9a831dd0c24ac0ad02",
+    "text": "有毒な花粉"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "reviewed": true,
+    "source": "Verdant Cycle",
+    "sourceHash": "71893f89b32586763e36e238af2d3ca1ca1f64365a5a7cabca25c5bb04b67687",
+    "text": "緑の循環"
+  },
+  "content.talent.nature.windstep.name": {
+    "reviewed": true,
+    "source": "Windstep",
+    "sourceHash": "b3cebde57933d42e1e01c96aee22e8adbb159d3093577e9b36f057f8d1bc7100",
+    "text": "風の歩み"
+  },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
     "source": "Caustic",
