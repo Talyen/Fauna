@@ -1343,11 +1343,29 @@
     "sourceHash": "ac83e96624b6724419105335b3ab8ccc2dba227f33acc66aa1d00bbf95423b91",
     "text": "蓍草药膏盒"
   },
+  "content.card.aerostat-parcel-drop.name": {
+    "reviewed": true,
+    "source": "Parcel Drop",
+    "sourceHash": "0a6190849964ffcbbe171e5a35e402836d051b7151cd6f471680032996d926c6",
+    "text": "投递包裹"
+  },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "b30475c5ea8d11729a68b311e0938eeadc32591cd405b61f029471f0491bd074",
     "text": "将{{value0}}张<keyword0>食物</keyword0>加入手牌"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "reviewed": true,
+    "source": "True Bearing",
+    "sourceHash": "dbd9b0095db45ddbdf7f4f3d1a197e09ab1848a43665a0d6f8a1abd856baee24",
+    "text": "准确航向"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "reviewed": true,
+    "source": "Voyager’s Rest",
+    "sourceHash": "46277d1d4fe73aeb11c3fc3eaf6f099180d2439768878c036b9a63eae1c6402b",
+    "text": "旅人歇息"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -1355,11 +1373,35 @@
     "sourceHash": "b60760700507d08a4d2c5aea6a5d5e7343a48b86e5f3808849867ad49d9ff685",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
+  "content.card.almanelle-autumn-insight.name": {
+    "reviewed": true,
+    "source": "Autumn Insight",
+    "sourceHash": "3ecf97689ac320155571131fbc81317418537de88f5680de69a72cf1ece0e446",
+    "text": "秋日洞见"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "reviewed": true,
+    "source": "Rooted Year",
+    "sourceHash": "3695695b0f266a79d2d943e983e6ce360e9b82fbcaee918fb88cb50fdebb3229",
+    "text": "扎根之年"
+  },
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "65503f6956ea31502c41de3edb38b539fc08535f34f719782bb71245c615bdc4",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>；获得{{value1}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "reviewed": true,
+    "source": "Spring Current",
+    "sourceHash": "2388cbfb329af26fe831bf9c4ed2e432761643a6b40d2240837135e202185bf1",
+    "text": "春日流转"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "reviewed": true,
+    "source": "Ember of Evening",
+    "sourceHash": "c4a1f5a12e3d3bd549b5a5ae65c0d38ab58e0c88409b0238e1b07e3aa8a7c2ee",
+    "text": "暮色余烬"
   },
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1367,11 +1409,29 @@
     "sourceHash": "d28738aabaf86dd306fff01dd1153d29466ff4940e105c6f7c87dcc21b86e269",
     "text": "下一张牌打出两次"
   },
+  "content.card.alpenglen-last-light-charge.name": {
+    "reviewed": true,
+    "source": "Last Light Charge",
+    "sourceHash": "9a476a46e20d744ed99113ddb10c2fc499731dfcb849e0de4f0d349432b8ff4d",
+    "text": "余光冲锋"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "reviewed": true,
+    "source": "Sunset Reversal",
+    "sourceHash": "f7ad40ff7aab7fe381270483589627e89501570b367544216f18467536281bee",
+    "text": "日落逆转"
+  },
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "771fd496c101e8f7dc05b851306f6589ae5b815700d29c624f2121c214ee706d",
     "text": "<keyword0>反射下一次攻击</keyword0>"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "reviewed": true,
+    "source": "Dancing Double",
+    "sourceHash": "19f901e25a0cb0f5eca7a6c98672dbe3aee486e9d98dc1aa23db8d167d3d49a9",
+    "text": "起舞分身"
   },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1379,11 +1439,29 @@
     "sourceHash": "d6efe4e941ff86e9a68eb80cd344e0318ea8cd7787d2d77310c4e72d00727e16",
     "text": "下一张牌打出两次"
   },
+  "content.card.arabesca-ribbon-snare.name": {
+    "reviewed": true,
+    "source": "Ribbon Snare",
+    "sourceHash": "626d24e0da78f825d8d057109b83faa86c8de4115c610cfa1ea1a943ecf8482e",
+    "text": "缎带陷阱"
+  },
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "29aa69875bac255bd64235c4c438021c570793de6d8e74ba48a9d79b12374ba4",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
+  },
+  "content.card.arabesca-springbound.name": {
+    "reviewed": true,
+    "source": "Springbound",
+    "sourceHash": "c4f37ecba981948e79e8bfc0507eb43b69df58471d965e1150bd540acda4d72f",
+    "text": "春之跃"
+  },
+  "content.card.bloomquail-draw.name": {
+    "reviewed": true,
+    "source": "Bloom Cradle",
+    "sourceHash": "defa35de9f4840bd5238ba210a8b70359ef63b263ed2fd444d8a9a0c9dac4116",
+    "text": "花之摇篮"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1391,11 +1469,35 @@
     "sourceHash": "b598a8f9c82d1b052ec83903a29102214089e86770b8a28e715800713a7603e5",
     "text": "恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.card.bloomquail-guard.name": {
+    "reviewed": true,
+    "source": "Petal Rampart",
+    "sourceHash": "8fc2cffa503dab92d1b496ab34aa618a731a12f063e447adfac5075edad64db5",
+    "text": "花瓣壁垒"
+  },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "9c2f636de458c0c9a9e221ab880a4c83b4b15dd8b77681c00d9568a02461fa51",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.bloomquail-heal.name": {
+    "reviewed": true,
+    "source": "Petal Veil",
+    "sourceHash": "c9b777a36d1ca50c86950ca11af8c45b97b387a707a7bc31f38a1790e6aa8b12",
+    "text": "花瓣帷幕"
+  },
+  "content.card.cadenza-echoes-remember.name": {
+    "reviewed": true,
+    "source": "Echoes Remember",
+    "sourceHash": "506c68c86633d1c223ad974c01e254d92f5810202ba9b9bb13e9299d2a972aaf",
+    "text": "回声铭记"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "reviewed": true,
+    "source": "Resonant Well",
+    "sourceHash": "7758343e1e45fee3e4e132d43126ef87e224bff7eb656ec03632aa7d92dca224",
+    "text": "共鸣之泉"
   },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1421,6 +1523,30 @@
     "sourceHash": "07356005106008f44a4972c648ea4c61871369abe6fce9cd2eba755a5446c02a",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
+  "content.card.cadenza-rousing-refrain.name": {
+    "reviewed": true,
+    "source": "Rousing Refrain",
+    "sourceHash": "45b0b6867a72153e045e004000de2b30d50e7ad9da797e3ca062565a83e58699",
+    "text": "振奋叠句"
+  },
+  "content.card.captoad-attack.name": {
+    "reviewed": true,
+    "source": "Spore Puff",
+    "sourceHash": "466d458141bd4a55e48b50b587f9a384d6037793c0a0bd09bb516866f437eafd",
+    "text": "孢子轻喷"
+  },
+  "content.card.captoad-guard.name": {
+    "reviewed": true,
+    "source": "Mushroom Guard",
+    "sourceHash": "14b3c4d8d74b82a5c5fd1a64391dcb0b0032d0177b921bdd9a468cf7144bcc7e",
+    "text": "蘑菇守护"
+  },
+  "content.card.captoad-swap.name": {
+    "reviewed": true,
+    "source": "Bogbound Leap",
+    "sourceHash": "60cdb0da7f0ae967b5367acdb6b54820f80f4b73115adedc13db3d26221820cf",
+    "text": "沼泽之跃"
+  },
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
@@ -1432,6 +1558,12 @@
     "source": "Swap out for a random backup; Draw {{value0}} cards",
     "sourceHash": "78f8ce48477685b6809430847c486ab289f597e07177787c4737af69c99a0122",
     "text": "与随机后备盟友交换；抽{{value0}}张牌"
+  },
+  "content.card.chimecricket-attack.name": {
+    "reviewed": true,
+    "source": "Resonant Leap",
+    "sourceHash": "35361f7caaed147f626bb6752a2aaa142bbf25fe350aa129fa7d959865a548ee",
+    "text": "共鸣之跃"
   },
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
@@ -1445,11 +1577,71 @@
     "sourceHash": "b1ba43987724d1c2e6131022c052eab607a8502c0fa0c5b7cbf21f6b3caaa70f",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
   },
+  "content.card.chimecricket-heal.name": {
+    "reviewed": true,
+    "source": "Lullaby Drift",
+    "sourceHash": "210bd199abdf77090d11135fad92e9f0b6e213ec9590000cea407f078f56b8e8",
+    "text": "摇篮曲漂流"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "reviewed": true,
+    "source": "Hush Dome",
+    "sourceHash": "8eb3775e35708caa9e644f1d6fda395d60586af6188785bad16e6241a5c2264b",
+    "text": "静谧穹顶"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "reviewed": true,
+    "source": "Ashen Veil",
+    "sourceHash": "aefbd0a56aff642fac490df432813ad0014cca17ebe6b16654acf8d46b52e4fe",
+    "text": "灰烬帷幕"
+  },
+  "content.card.cindernewt-attack.name": {
+    "reviewed": true,
+    "source": "Cinder Lash",
+    "sourceHash": "1b21a9a9392ab0174e7c6ccea040f1b55f9505c8942bebd1e5b0362d68446dd8",
+    "text": "余烬鞭"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "reviewed": true,
+    "source": "Ember Breath",
+    "sourceHash": "11875e3db4b861bae29bd7555d97bc0fdd3f0536aa13683de2e53ee18b31d081",
+    "text": "余烬吐息"
+  },
+  "content.card.coralcurl-attack.name": {
+    "reviewed": true,
+    "source": "Reef Jet",
+    "sourceHash": "4be5774136237d02b271cc3eabeadccdde33a7698d6f7fde973ad5c801ae13bc",
+    "text": "礁石喷流"
+  },
+  "content.card.coralcurl-guard.name": {
+    "reviewed": true,
+    "source": "Bubble Ward",
+    "sourceHash": "5518a12c6fc12552019b73775cfff5cc0d5993f0125b83685d577812c66adb6d",
+    "text": "泡泡护盾"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "8e1445e575b7b5e75b4932d063d5f0a20fcc21d43b6d79820e67a92a7f3f3143",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.coralcurl-swap.name": {
+    "reviewed": true,
+    "source": "Coral Spiral",
+    "sourceHash": "14110428b0fe2175c568646b751e4edecadd896bc3cf8ca2e9a2187af7c96634",
+    "text": "珊瑚旋舞"
+  },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "d830650fdc7b93151d3399bb71c9a3e5f8df371a084ea6366ef4ee5705ce46b6",
+    "text": "日翼横扫"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "52d2fb04cf228d78648e05a3859d0ca3e4ccd3dbf38e839696bef2b4af739307",
+    "text": "晨间绽放"
   },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1457,11 +1649,35 @@
     "sourceHash": "253b3cc8ed220bbb5c06c00df8752782a1097e03ff1c08f33c44d09048470627",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "41427c50c017d2339e1a339afa54977df1d0f8f84979e52903051ee27ab0d139",
+    "text": "黎明之鸣"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "47e749126a215f3e7c0344940ae345da2b58a0427e5e0e216a8b5aabd5ff875d",
+    "text": "礼拜堂之光"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "b402938bbb966fac58f9e8c3718e05a66e0ea98852792c1e855d79bc0fabdaef",
     "text": "恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "42b8f49f656f8947ff791425e06d6028983f58bbbdc16cff2949a2a80e520468",
+    "text": "静谧之水"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "127ee5bab8e0aa0b128381515a58964d2aff9830628d038161d14134b58329a9",
+    "text": "草地庇护"
   },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -1469,11 +1685,23 @@
     "sourceHash": "08dfd8799f59888faa4df3c6a4c6c214de6306ec8ea93411a6c1e77430f25b31",
     "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "d1ed9167e67487b386e956958142c5ad3f0c0fa407a967c7b3a527470dc92d1c",
+    "text": "沙爆猛扑"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "500b810665dd4830074b2add80830372ec9e6b70a957bcce934d94110f41e95f",
     "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "4d205f7e355773ebc6a66e0a0fa340e2d4e7262566551bcdf2afc987e1602935",
+    "text": "幻影步"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1487,11 +1715,35 @@
     "sourceHash": "04925025d1dd9a594cd2d1f23a3844fdba22fba28c837d0e2abbb802001a683c",
     "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合；抽{{value1}}张牌"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "09e260e369024b34850be92984e34c32997af1164aafcd03805d82ed14589b62",
+    "text": "沙丘旋风"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "34ebad272e974ddb08232089794d23b209ca6a0ccd944cd28a69578f0bd80278",
+    "text": "余烬冲锋"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "0de5bf8b2629891dacfb73d623b65f3a55bd6f9030fcb7162e32d4625974843d",
+    "text": "熔炉吐息"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "568d702538832516ca2bbd1234278656889fa0ccb5a846e4dad00fbe28406f8c",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "98aaddae09aec70247e0768a0056d737f9327549d6d68810cfe6bd1c95b0e0c4",
+    "text": "熔岩踏击"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1499,11 +1751,29 @@
     "sourceHash": "685ecb7b6c9ca1b6693c8cc5a7867aebc1cd8fb47e34a2bbf24d4ed5b92e35ca",
     "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "6e5c66871c8b0fd15aaeea167ebee468e5c4fbb9f5fd48f1bd6beac380f1ea1f",
+    "text": "可能之路"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "2f70bb41979358c5b64a62ef161156af8404d082306149031e9c139b0fa79113",
     "text": "将手牌洗入牌组；抽取相同数量的牌"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "e0390b73c45a6df7eb7e7ed3b36cbf420637a0b568de6cef436183fb68b0fbf1",
+    "text": "暮光之枪"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "1ccbde05de4f1bd0209f31d0bac2ae7788445d2fcf1bc831823619fdff0f2984",
+    "text": "心愿交换"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -1523,6 +1793,12 @@
     "sourceHash": "e1cd03e701089ccf106d2878e2ac25f90e3b3d6c2c6a4c0068682c3ff21ad216",
     "text": "恢复 {{value0}} 点<keyword0>生命</keyword0>；<keyword1>消耗</keyword1>"
   },
+  "content.card.food-mana-berries.name": {
+    "reviewed": true,
+    "source": "Mana Berries",
+    "sourceHash": "7fefd35e906fbdca1ae3ac00ac8ebb42ad1f49dbdce0142235bf91f1e3e13218",
+    "text": "法力浆果"
+  },
   "content.card.food-mana-berries.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
@@ -1535,11 +1811,29 @@
     "sourceHash": "a000f7e03407eebbc6cddce4b4550bfaf1df400f096cf3a76eeb354154d09211",
     "text": "使所有盟友获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
   },
+  "content.card.food-trail-bread.name": {
+    "reviewed": true,
+    "source": "Trail Bread",
+    "sourceHash": "41227c360d6ae0bc649cd8e1ba129cdbea8fed2c498ba87f54f944b9a5080169",
+    "text": "旅途面包"
+  },
   "content.card.food-trail-bread.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "9052deaec2cf163dbd2fc23bfe817738f67cf9a9879c598bef3a916b8494c475",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.glintstride-attack.name": {
+    "reviewed": true,
+    "source": "Prism Shear",
+    "sourceHash": "b1b31ce629b43461bd7e2f1cb06dc044ca9eaa3542411ef57712afdee96e78ac",
+    "text": "棱镜斩"
+  },
+  "content.card.glintstride-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Run",
+    "sourceHash": "56b426a56da52d9be99db003be59adfbee248499ad5a1aee957abf0cd63fc2f2",
+    "text": "幻影奔行"
   },
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1553,6 +1847,18 @@
     "sourceHash": "2b306c2da9aeca3c7f8b691bb1b817c1ac3b6555f2ae85c8e8f46111bd53534b",
     "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合；抽{{value1}}张牌"
   },
+  "content.card.glintstride-teamBlind.name": {
+    "reviewed": true,
+    "source": "False Horizon",
+    "sourceHash": "c6645afa138899f711e0d5b588f40c292b39b8a485a0f06aa4075150a84d75a6",
+    "text": "虚假地平线"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "reviewed": true,
+    "source": "Drowned Revelation",
+    "sourceHash": "e4b15eeb5daa28bb0dd858f49c3a3c76e9fe19634ab495e7137bbe54ce06d5e1",
+    "text": "沉没的启示"
+  },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1565,11 +1871,29 @@
     "sourceHash": "ca9a67617384e38f31db764e7729082f7a5be4b5cdf9f7bb9061c0aa92f9dde2",
     "text": "抽{{value0}}张牌"
   },
+  "content.card.memento-lost-procession.name": {
+    "reviewed": true,
+    "source": "Lost Procession",
+    "sourceHash": "36016743b9b3f0deccb45ffb9e364339528fc35bbd67e07c91dba2c3e11907cf",
+    "text": "迷失的队列"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "68e88774b5263e7346f26741e49700eadd732424c87b1fa38a727f86e6a0a048",
     "text": "珍珠"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "reviewed": true,
+    "source": "Treasury Echo",
+    "sourceHash": "a68636b4a2614611b4a06765b994f5c2a693dd8445a7234413fa7e01fb2a1f3d",
+    "text": "宝库回响"
+  },
+  "content.card.mossguard-attack.name": {
+    "reviewed": true,
+    "source": "Rooted Stomp",
+    "sourceHash": "dd506e97de11850b7075988af079acfd7e74433b2859986dae1098a0a4c54cfb",
+    "text": "扎根踏击"
   },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1577,11 +1901,23 @@
     "sourceHash": "1020880b8d1c5f37b94b0cc8371b77e09eac9fc65b23b76f64d103d83e64f2a3",
     "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
   },
+  "content.card.mossguard-guard.name": {
+    "reviewed": true,
+    "source": "Boulder Brace",
+    "sourceHash": "8f72dda04798a5406617386fd602ed307d23a8964e98b8b4f41ff9d9bccb3380",
+    "text": "巨岩支撑"
+  },
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "c9aa2458c912c4df5c87a6a9ae03527f3532c7f727ff499203a5cd4e91593cda",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.mossguard-heal.name": {
+    "reviewed": true,
+    "source": "Moss Renewal",
+    "sourceHash": "41f8edc67ba52a1637769052e4d87548f1f56ce4febfb8d1b3567def3579c43b",
+    "text": "苔藓新生"
   },
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1589,11 +1925,23 @@
     "sourceHash": "445cc9505d3bef54d53771422cbf9f5b8a1f178ee4eccbf5230b27c095c02d02",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
+  "content.card.neradora-bloom-shelter.name": {
+    "reviewed": true,
+    "source": "Bloom Shelter",
+    "sourceHash": "5c79fa5fe6ac97a3579f2688f784a0e1761706dcecf104c284c7ef22473527bd",
+    "text": "花之庇护"
+  },
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "2f5f0549d0f16ddf90742b2aab466595719d23c4f223574fc820bd905e061b91",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "reviewed": true,
+    "source": "Tide Cup",
+    "sourceHash": "4065d725d226aebdaa1362b9e6dd504c048ec94d48f15f559633df12eac45a54",
+    "text": "潮汐杯"
   },
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1619,11 +1967,29 @@
     "sourceHash": "529d329dcb9119f8ff24af8d6a516e276184ae6bac6eef29b625391cd58a7fb7",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
+  "content.card.neradora-undertow-knot.name": {
+    "reviewed": true,
+    "source": "Undertow Knot",
+    "sourceHash": "1bd6af1ba9065ac9da0d9d062b2e0d130ae052b71eda7249f381200680bad224",
+    "text": "暗流结"
+  },
+  "content.card.oathara-never-lost.name": {
+    "reviewed": true,
+    "source": "Never Lost",
+    "sourceHash": "fb0932bc8819f94a32d596d09792b8597aff0bb71cfe0062489c0a1cbabe31ad",
+    "text": "永不迷失"
+  },
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "a0bffae07f701f972012f71d0865f66b072d623c18363382a710d58f625e6ef1",
     "text": "将手牌洗入牌组；抽取相同数量的牌"
+  },
+  "content.card.oathara-travelers-ward.name": {
+    "reviewed": true,
+    "source": "Traveler’s Ward",
+    "sourceHash": "d058ba783555018484de1cd1ac4f216e2a03bf8e0ae45485768ee30c688ab0fa",
+    "text": "旅人守护"
   },
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
@@ -1631,17 +1997,47 @@
     "sourceHash": "5d8294c2d460d5fd247e75550c6252a592bbe4fe3bd5219569415e289a9db369",
     "text": "<keyword0>反射下一次攻击</keyword0>"
   },
+  "content.card.oathara-vow-of-return.name": {
+    "reviewed": true,
+    "source": "Vow of Return",
+    "sourceHash": "7939231754aee0fda3ee345e258d00f2a0b7ecc211ffbc72d1fd9a5ed50a7f27",
+    "text": "归途誓言"
+  },
+  "content.card.orifable-attack.name": {
+    "reviewed": true,
+    "source": "Postal Swarm",
+    "sourceHash": "ec6f42dbbcbc1183241e6ed189807e7f14afd2deb9df436fc0d6d5935f41e5c8",
+    "text": "邮递群舞"
+  },
+  "content.card.orifable-createFood.name": {
+    "reviewed": true,
+    "source": "Care Package",
+    "sourceHash": "fbac38b16a61813d5c5d06fc7d79e7bcb47b8fa053bcac49b8348ab8a41130a9",
+    "text": "关怀包裹"
+  },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "a4baf8fa996db7388818ebf626289ae77d0c15cd09d10bb4f16dcf588d2423c8",
     "text": "将{{value0}}张<keyword0>食物</keyword0>加入手牌"
   },
+  "content.card.orifable-heal.name": {
+    "reviewed": true,
+    "source": "Good Tidings",
+    "sourceHash": "bd40f61d5007dbd92f958fa42cdb25d53e6d1226d34d946646fd86789f1aced8",
+    "text": "佳音"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "1b347a9a5e5ecbedf0104a637f0a3fbc80703b3be5e5a6bb72a99683fb280e0e",
     "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "reviewed": true,
+    "source": "Polar Reprieve",
+    "sourceHash": "534a84f53314e8800c43e2eccda1052d02fdf9918990d35f6a397a61ae2186e7",
+    "text": "极地喘息"
   },
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -1655,11 +2051,29 @@
     "sourceHash": "225858c2197f617de9ae2d76a0778e46830ef0a9e4922f115baf6706abb32659",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累"
   },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "reviewed": true,
+    "source": "Sundog Reservoir",
+    "sourceHash": "10627658b2e95c6af15861868bc1733b187f5381fd64b1a6ce19a0dc4eb67dbd",
+    "text": "幻日蓄池"
+  },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "0596469155dcd03878b156db82d2704510e31764c7c90065ca9d2b60926eca86",
     "text": "获得{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "reviewed": true,
+    "source": "Whiteout Waltz",
+    "sourceHash": "0ebf6192f6c608970958fc7085bb4bacc6596f5bc0815a9168c15883ee7cad4e",
+    "text": "白茫华尔兹"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "reviewed": true,
+    "source": "Dazzle Burst",
+    "sourceHash": "a467063088dd08ab42d38bd8cd7f2bbcdc7e6c4b5b21ab70357008bd6b2503bb",
+    "text": "耀目爆发"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -1667,11 +2081,23 @@
     "sourceHash": "8548fb96ed0b67ce31ae6961a75b320d112c4cb5e0b4066a89e0b8be6dd811e8",
     "text": "对随机敌人造成 {{value0}} 点<keyword0>光</keyword0>伤害"
   },
+  "content.card.pollenmoth-heal.name": {
+    "reviewed": true,
+    "source": "Bloomwake",
+    "sourceHash": "1bf9b9aaa6f3d66bac7e58dfd8e6786c30cd397a51d0eaaa97592704ca5ee507",
+    "text": "繁花余迹"
+  },
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "9f7c94478be8565e0c64cbb97f9a15761a5c8178e98966b74327fed40a07c9b4",
     "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "reviewed": true,
+    "source": "Petal Shelter",
+    "sourceHash": "c40144fc56d4b8091cc0c48ccc9359b28e5a997f6072ba137642c8e05a0f1b02",
+    "text": "花瓣庇护"
   },
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -1679,11 +2105,23 @@
     "sourceHash": "e93ab51615fd5ed0e1fc1d9c47f2d2c6190fa8f48ee08b3258ba699a93bdd034",
     "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
+  "content.card.prismram-attack.name": {
+    "reviewed": true,
+    "source": "Prism Charge",
+    "sourceHash": "68d95dbebf9f00f9f909d9ec7b3aa61f09c0966c618f3e40d4bd84b26d6e7d6c",
+    "text": "棱镜冲锋"
+  },
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "7f5ae0361fbdea797995360981449471a74fe8fbd7004950f34b6f209836b4c7",
     "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.prismram-guard.name": {
+    "reviewed": true,
+    "source": "Faceted Ward",
+    "sourceHash": "3da9d6eb08c1b9d333d03888d05b1df486acdb7f3feeb74f0d7c3031aced531c",
+    "text": "多面守护"
   },
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
@@ -1691,11 +2129,29 @@
     "sourceHash": "bbc907a154bdf97cee5f6544760533b228565bb186b861d902179e6ef591db4b",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>反射</keyword1>下一个有害状态效果"
   },
+  "content.card.prismram-spectrum-lance.name": {
+    "reviewed": true,
+    "source": "Spectrum Lance",
+    "sourceHash": "85dc001487640b9b5d26e20d4280b1a99c0237769caf7ce535f6122e4fe6657a",
+    "text": "光谱之枪"
+  },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "9087d65f4358b070975dda0bdafcdcf8b6d0e9fd6debd9eb6e68dda9bd5e587c",
     "text": "造成 {{value0}} 点<keyword0>光</keyword0>伤害；<keyword1>驱散</keyword1>目标：移除 {{value1}} 个效果"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "reviewed": true,
+    "source": "Ember Harvest",
+    "sourceHash": "19baae80a6583ad86901ad705bb368a9d73ee3c91f83ec15015693b317b59d4d",
+    "text": "余烬收获"
+  },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "d5bb3a7baf7625967e09496e79354d482d71791d0a8d90714efc8dca8e75df66",
+    "text": "庆典爆发"
   },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
@@ -1703,11 +2159,53 @@
     "sourceHash": "a30e3d5978bbe93cd64d0e96e1ef32e527ca5e98074b49f6189df6a58991a00e",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "5ecf266f7d1c3d94b19a940896fafeb529f2583e936cc2031ece36b76c52afaa",
+    "text": "火花诱饵"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "00d78a28337f8a954f512fe86076e1cefaa1fbd242eddabcf036dbdc26605f59",
+    "text": "芦苇冲刺"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "0ba4329157798f934273a428d7d8c56c6d3f911ffc7c9a173caee12a42ee05f9",
+    "text": "芦苇庇护"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "bf0ca4ae0bd0fcbebed269b4d9ba6a7bdb4a277305206b744ad16c4e24df62b0",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>；获得{{value1}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "856498399db8a630ff482899c90b4fec6fcb8e3f23229fecad545ddb503bb7e4",
+    "text": "修复之泉"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "360a5b224c2ecf511642bec7f1d0ca504e1371040a4138cc271f1798f7482963",
+    "text": "梦之分身"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "6a98f474b628d97a7c24bc6e19ed09e9c639bf8583265b19d6704d1681019883",
+    "text": "噩梦收获"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "9b47671097d589568facbb20e31e29a7c79e1b68102927c68050e928d8256b1c",
+    "text": "醒时奇想"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1721,11 +2219,41 @@
     "sourceHash": "e1ad593458278ff4337c134735ac3782e9bad17157e1f2590c11ed73938827e4",
     "text": "抽{{value0}}张牌"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "61586d526bd2516eb9b6718e8aaad8aa37324c1a51579973c646bce243bb3415",
+    "text": "环掌"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "ffef18da307c53f4bf3000b52eb2b9dfd7dccbe977d5389ff7e33880d664faf6",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "d5c41a5d9b213d4b3687e5a27ae0606fd68a28cede459a9d0cf0da2ed238c158",
+    "text": "谐和组合"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "e7e83d13709293068abadcc0980fffb07ab0a3b06b4a220b014a0100e5920ab9",
+    "text": "幼苗之环"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "a00e71abae40a96ff7ac92171a3c722bf2afbbf7277ff8c36d3ff280b9be6265",
+    "text": "借来的光辉"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "13c5ab80ffb8a2c2f3d3ef2e6f5287271051cc3343562b9591870753da57e799",
+    "text": "可能的余白"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1738,6 +2266,24 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "79e1622b37d610dba2902ddbcd30c0913f13d70cc5fce950ab2df2a3ffde0a2a",
     "text": "抽{{value0}}张牌"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "4e84091a4848dad1d818940fe32c1eb1b542ca8c79f3328f3322ff48202f56ac",
+    "text": "未写的结局"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "cf5b979c69dcc42f4b127e8257538e8f202bc3dbafbab0d57c7876147e2e1307",
+    "text": "清凉锋"
+  },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "8e229252d1b3e1023fd66698e42539f2cab5d1bfe819c814e51f7aef725ca4d8",
+    "text": "正午绽放"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1763,6 +2309,24 @@
     "sourceHash": "3438d4d7671f830d93c90941682b3b330069a09e2fa1757c979e08902d994473",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "7a09821d17f5e0f65ec0ba6395dc0d6e1ffeb7aa0c58359a8812977c8d0e4ade",
+    "text": "正午守护"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "d911a8145e9f272af005576e6ba67d65214448ea89cd746107c623ca6deb00bc",
+    "text": "云步"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "e21689c87a0a0a9beaee61923255c7cd0c4f42bd06f94f36e56d783f4aae15a5",
+    "text": "遥远地平线"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1774,6 +2338,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "b1dbe4106465559e3d1b0bd7fefd2ac240da5c6d7158c746ced516a22e89a020",
     "text": "抽{{value0}}张牌"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "abe53912d8f9e51512ae37b52c149c65bf3aac1724698babe7fc569ff57e4ad0",
+    "text": "天空牧者"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "d6088ab30dca9f2d9cbe394b04505ac332ab8fbe4ac8b5619735f96bd3607f04",
+    "text": "浪涌冲撞"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "4694a0aa4ef1f65711ee9333fbf10895c8d375e8a6b190f21df6932dd1a6d2d3",
+    "text": "螺旋归返"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "9988a22b4b269ac61e1d595a22e354b133570044806449a269aea989003c90cc",
+    "text": "汲取跃迁"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -1787,11 +2375,23 @@
     "sourceHash": "9aea09b910bf285aadcb4cb868a8e986d4ddb687b659a464f097e92b919768a1",
     "text": "与随机后备盟友交换；抽{{value0}}张牌"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "e3d8861af77e784a4e2c71edaece9d96001d6bccdd0d66b54f78e03380fdb910",
+    "text": "芦苇蓄池"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "9dc86cd4234883c5b48f0e33d88465ed57cfd2a59a43e9650ee463e1a340b705",
     "text": "获得{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "14d5f3d930b656a5d1bdcdef7d2e191f54db5c4544e2ae6a6a6a21d41acd99d7",
+    "text": "消融之路"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -1805,17 +2405,53 @@
     "sourceHash": "d8cd0a6dee1748b397b5d9b9b9f2e7b540e8e9a6f009c34ee086d6656d598918",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累"
   },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "0bb979e1d6428a5a1f24a560d656d79380df6b7abfc1da7bd736fc599efe51fa",
+    "text": "水的记忆"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "80e4f7459a1145c0aceffab163413b05c054382c1af5aa17aca8b830d3a9c0a1",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
+  "content.card.tournelle-attack.name": {
+    "reviewed": true,
+    "source": "Valiant Challenge",
+    "sourceHash": "cd514c4b1646bddcdd0a52b61db3751177fad46d29d1ba005587fb98d80c61c5",
+    "text": "英勇挑战"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "reviewed": true,
+    "source": "Safe Passage",
+    "sourceHash": "17a78b5a6087523eee8844e8e6e00f472c8f59117401a66da43b4d8698639099",
+    "text": "安全通行"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "reviewed": true,
+    "source": "Kindled Courage",
+    "sourceHash": "429116a6d69a81454dca40800bfe3186a5193f7f92bf6bef7f14a77814cec869",
+    "text": "燃起勇气"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "reviewed": true,
+    "source": "Ember Pirouette",
+    "sourceHash": "4c442dfac054e4f0481ced97f748fbd4ab799558c12ecbf06598defe0ed76f65",
+    "text": "余烬旋舞"
+  },
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "fa88aaa877f09ae25634bbeb88a44cb286fd4f5f5b1398cb3b6fa1f2ef54edc0",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "reviewed": true,
+    "source": "Thermal Rise",
+    "sourceHash": "7c554fc9d3fb6481af538ca12278e1b6e7f57ecf8516ad08d71d9b833d792507",
+    "text": "热流上升"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1840,6 +2476,30 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "96abcf90bd50f0475f2b2ab0c5765fdc1de9f0e432ecd12617768157dbc22ef7",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "reviewed": true,
+    "source": "Saffron Screen",
+    "sourceHash": "49053290140083ac4844045b1d956e43d116dd5035379cd88569cd3af4ecbb6c",
+    "text": "藏红屏障"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "reviewed": true,
+    "source": "Forgotten Junction",
+    "sourceHash": "963e4d64f413740e8ba5e2e76e2305b65ececcfedcca6956ac8125566dc54410",
+    "text": "遗忘的岔口"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "reviewed": true,
+    "source": "Lantern Fare",
+    "sourceHash": "cfc51b57c9b2f51b58b7fc7a2376e580b434b5336ce0c8c5c3b660fe11661988",
+    "text": "灯笼车票"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "reviewed": true,
+    "source": "Left Luggage",
+    "sourceHash": "862bfce6cd84d8d66fde34d23b2681acb44b2589d8707cff8d3aa047cc535b34",
+    "text": "寄存行李"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -2225,6 +2885,12 @@
     "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
     "text": "水"
   },
+  "content.species.aerostat.name": {
+    "reviewed": true,
+    "source": "Aerostat",
+    "sourceHash": "04e620bb6797309ab55be0a0d48a421fcc8fc290e66f126e664f92d281e97764",
+    "text": "艾罗斯塔"
+  },
   "content.species.aerostat.passive.0.rule": {
     "reviewed": true,
     "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
@@ -2272,6 +2938,12 @@
     "source": "Well Provisioned",
     "sourceHash": "b1cc8a0cc584e7fd445b522af4e2a6725b3ba8411d034e553f2a9c672176cc16",
     "text": "补给充足"
+  },
+  "content.species.almanelle.name": {
+    "reviewed": true,
+    "source": "Almanelle",
+    "sourceHash": "6874fbf89e1288755170f873e6397b35a5feb1ab8d65f0a992fdc9e1bcbe3ee5",
+    "text": "阿尔曼妮尔"
   },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
@@ -2321,6 +2993,12 @@
     "sourceHash": "41ab7c68ffb8ac6ce2b0145e1d054c48a7a5f56e679897749e5256cf38adb9ea",
     "text": "落叶"
   },
+  "content.species.alpenglen.name": {
+    "reviewed": true,
+    "source": "Alpenglen",
+    "sourceHash": "9c3392398a8f48634ec4e10eba0f35c08333ea713680b43effd31b033bb644f7",
+    "text": "阿尔彭格伦"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -2368,6 +3046,12 @@
     "source": "Last Warmth",
     "sourceHash": "8719c6a25fb98a3e20d24ce806fc4c87f1ca86337c5cd71896a9feca8bd8adbc",
     "text": "最后的温暖"
+  },
+  "content.species.arabesca.name": {
+    "reviewed": true,
+    "source": "Arabesca",
+    "sourceHash": "fc2c5e1542e5854740aa3abf04af024003406cfca45265c62bcb99f3052a6d17",
+    "text": "阿拉贝斯卡"
   },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
@@ -2417,6 +3101,12 @@
     "sourceHash": "3be9b592fe0cb107e122369b774e9e450fc63c073fef3417b0e4dfcb54018c9b",
     "text": "花瓣余迹"
   },
+  "content.species.bloomquail.name": {
+    "reviewed": true,
+    "source": "Bloomquail",
+    "sourceHash": "d2fb05f07b17a4aa39cd66cd9d17f42fd7709bac70d7a9141f929beb27ea072d",
+    "text": "布鲁姆奎尔"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2464,6 +3154,12 @@
     "source": "Full Bloom",
     "sourceHash": "ac96a309fe3d0fd18fe143bb10a796429cd5e8b4e1caae068d1036d4b6d088ab",
     "text": "盛放"
+  },
+  "content.species.cadenza.name": {
+    "reviewed": true,
+    "source": "Cadenza",
+    "sourceHash": "53ec30876bf0e7e8ed29f8334ef22872a0368cc587680d41865f6195c91c38a8",
+    "text": "卡登扎"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
@@ -2513,6 +3209,12 @@
     "sourceHash": "0e062ae126e13ab639da8b26c2e6dce50edc8e68cc4fb65aca5bd0f6cc308049",
     "text": "生生合唱"
   },
+  "content.species.captoad.name": {
+    "reviewed": true,
+    "source": "Captoad",
+    "sourceHash": "dfe5e071d4a7ed7424015466abc8a580f007b7c5555fc8014148caecc904f53d",
+    "text": "卡普托德"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2560,6 +3262,12 @@
     "source": "Sporecoat",
     "sourceHash": "b10772ce2de53e1e34f8cf09ae23e8f6f63c54943234ae0453357860e9b3ffd0",
     "text": "孢子外衣"
+  },
+  "content.species.chimecricket.name": {
+    "reviewed": true,
+    "source": "Chimecricket",
+    "sourceHash": "058f224084742ae1480d3ac0082552abc099538784bddbe0e29a0d15ae187792",
+    "text": "奇姆克里克特"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2609,6 +3317,12 @@
     "sourceHash": "35ce9f7f77e6a7d9d9358f4d8bf7a893577c18e01dddad8664ef22c4dada6a58",
     "text": "再来一曲"
   },
+  "content.species.cindernewt.name": {
+    "reviewed": true,
+    "source": "Cindernewt",
+    "sourceHash": "7473620049a8964d76d2d490032f1ee06973fdd18da7a4324b7e3ce63658f42c",
+    "text": "辛德纽特"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2656,6 +3370,12 @@
     "source": "Cinderstep",
     "sourceHash": "a25e8911280edfe5e3ee24c83a0b0691fc6d23a1073c203b865aa7c71ab67018",
     "text": "余烬步"
+  },
+  "content.species.coralcurl.name": {
+    "reviewed": true,
+    "source": "Coralcurl",
+    "sourceHash": "9f543379e299c5db5570ab03d6a09a6271adb744a1e006bf4dc84a0a4cc1aefa",
+    "text": "科拉尔卷"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2705,6 +3425,12 @@
     "sourceHash": "3aab49d67aa157aacb892b44b0616e2bc58a9d711de449f3aac2ff2d79074786",
     "text": "泡沫迸裂"
   },
+  "content.species.dawncall.name": {
+    "reviewed": true,
+    "source": "Dawncall",
+    "sourceHash": "6eed1e3bbd04a1d3ce6428e60f0e231813ab7400c12d3532ba0370f8182b1327",
+    "text": "多恩科尔"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2753,6 +3479,12 @@
     "sourceHash": "e661c833fbc647b63b3ce67fdcd0d511e1f90331871039dcfb72508804f98bb0",
     "text": "早起鸟"
   },
+  "content.species.dulcera.name": {
+    "reviewed": true,
+    "source": "Dulcera",
+    "sourceHash": "b07ce1319930ab41b779c245ef8395c371846a9fbec7252e0eb055083a367d56",
+    "text": "杜尔塞拉"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -2788,6 +3520,24 @@
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
     "sourceHash": "046784892aec5129365c4c3b654a1e13645f3a7f8d89dbbf706f5c35c5b43371",
     "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "a5d685f446ed5bc26c6e8e526f056a887aa776879a2fd70d6e56998ce1027227",
+    "text": "温柔的庇护所"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "1dc6266cd0a5997ef411bbb8bc41c50d0d91f091069bf6772d919df9ba93d67d",
+    "text": "温柔通行"
+  },
+  "content.species.dunefox.name": {
+    "reviewed": true,
+    "source": "Dunefox",
+    "sourceHash": "0ec80e5d1ff98860b72938d5d073c8c582a6fff820da50acc68ffa21c34527ca",
+    "text": "沙丘狐"
   },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
@@ -2825,11 +3575,23 @@
     "sourceHash": "e15e57c37af34e82e517db1ab73cec80dc08e2ec956fad61d8177642c478668e",
     "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
   },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "15a4de55a75fe0e0d619c39e812debd1bba8bfcd0993f53522765681dc6ff6a8",
+    "text": "变幻的海市蜃楼"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "3211fa21dd8e7b67c5021ae45d1582d2b96a6fb64d9bf2f47cad4b00e5e3034c",
     "text": "流动沙丘"
+  },
+  "content.species.emberback.name": {
+    "reviewed": true,
+    "source": "Emberback",
+    "sourceHash": "2a28228658dfaf3fbced7a9a79d6c30cf89b10f5e1dcad284a62d39d4570f507",
+    "text": "恩伯巴克"
   },
   "content.species.emberback.passive.0.rule": {
     "reviewed": true,
@@ -2867,6 +3629,24 @@
     "sourceHash": "f3a23100489c0fecf8ea4f34ef7891ed5c30f425d89bd8143c9d0492cfc99fa3",
     "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "26a86f89586aee5ea235187a68e1518158f2e609143ea697e46c585b7575a1b6",
+    "text": "焖燃的炉火"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "e034dda4c56be010b5fccd03acda7d865268182f4d31913a655db0777a97eec0",
+    "text": "熔融外壳"
+  },
+  "content.species.euphera.name": {
+    "reviewed": true,
+    "source": "Euphera",
+    "sourceHash": "5d22d0be312841d455313156f123fe7b1c15d77502012643422cb633e0986401",
+    "text": "优菲拉"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,41 +3683,77 @@
     "sourceHash": "bb1c684f9c5a8cc3031e23c78d5116593df23889750a1db6e8329e08ceb9cace",
     "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "2d89c1b68066a80834bfe5b7f44ece2033d2001e0696893c924f5e9a1b15bdc0",
+    "text": "展翅的心愿"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "34e1e5b4bebf608b607052d7ccc39c5285a63ae05ac5ae6d1528ba2e86577a21",
+    "text": "好运"
+  },
+  "content.species.glintstride.name": {
+    "reviewed": true,
+    "source": "Glintstride",
+    "sourceHash": "4b48b1f410de5f9e3c00d215e524e8e689495aaa407d02998cf6ce8c1971565b",
+    "text": "格林特斯特莱德"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "7ad78db095af11ab0346f2e4be835de2b93e61699411ebd7160c24fa3c297fcc",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.1.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "5858c7356d958d16d802ea0034e778ba1e526b076475b38124d29b9a3e11ac6d",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.2.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "113fa733d6c73f5ae203048e1309404e4baf06e5139203a1ceac31be3394d60f",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.3.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "a2cdd0d679c084f1bf776e2c210ca6af18b7539f6905770318f93a9c93ac4665",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.4.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "d514432fb71c31f6fd00be528f86f1e34bd47c514f30152b7a44ac753133c28d",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.5.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "ea2a12b1b1f9f204f8c498b4ad9f34fe30b963a5f3214191c20dd10032048f3c",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "4928d235610350ec818f41f629f431de39c993d74d9c33715459b810acb90c85",
+    "text": "踏出微光之外"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "5864fd3c70b85f6190ba1c1e0f8cea76ef2bf273e629f0a1083253234ea1dc6f",
+    "text": "措手不及"
+  },
+  "content.species.memento.name": {
+    "reviewed": true,
+    "source": "Memento",
+    "sourceHash": "ad1d0e0fb710f81eff826b01cd5104f24381afb34a03e94ad9d8e158edb596dd",
+    "text": "梅门托"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
@@ -2975,6 +3791,24 @@
     "sourceHash": "ab40016a2cba4414a63d2679df6531422908fdec8a825042e24e583b79e96f08",
     "text": "每次打出一张牌时，一个回响发动攻击，造成{{value0}}点<keyword0>水</keyword0>伤害"
   },
+  "content.species.memento.title": {
+    "reviewed": true,
+    "source": "The palace that remembers",
+    "sourceHash": "990d2dfe0265a04177c285b9cc88aa0414c7da3ccd1800fa0c4bf6ec4907c372",
+    "text": "铭记往昔的宫殿"
+  },
+  "content.species.memento.trait": {
+    "reviewed": true,
+    "source": "The Court Remembers",
+    "sourceHash": "98f2d258a38452e80cdbf7576c845b7d672139d6c702bbae0fb1a0de9a8c9ec1",
+    "text": "宫廷铭记"
+  },
+  "content.species.mossguard.name": {
+    "reviewed": true,
+    "source": "Mossguard",
+    "sourceHash": "6bdccc676d5124a0d0c4b533e8fa4570df093d67d066696f3de4a545bb666902",
+    "text": "莫斯加德"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3011,11 +3845,23 @@
     "sourceHash": "de7ddb1e167365779c0bfb0defa2980c4b94ea38ee34e7de0940f31423b69e3c",
     "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
   },
+  "content.species.mossguard.title": {
+    "reviewed": true,
+    "source": "The gentle guardian",
+    "sourceHash": "fb71172453b12ac56bce6ac381770048407f6cd28c2730fbb274b4124e00eab4",
+    "text": "温柔的守护者"
+  },
   "content.species.mossguard.trait": {
     "reviewed": true,
     "source": "Overgrowth",
     "sourceHash": "0886c0fae0bafff88dbcbcbdc052365e95b94ec0b8daa1f1e54474b1aa287dd0",
     "text": "蔓生"
+  },
+  "content.species.neradora.name": {
+    "reviewed": true,
+    "source": "Neradora",
+    "sourceHash": "5addafbb754babbc73f8f62391dee375a6234232ffe01fd02031bff438c55596",
+    "text": "涅拉多拉"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
@@ -3053,47 +3899,77 @@
     "sourceHash": "ebd556352efcac5c386465ca6734cf40051bb154b6ab4fb0792fded9d3dba711",
     "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.neradora.title": {
+    "reviewed": true,
+    "source": "The living tide flower",
+    "sourceHash": "88090f0eb3c5cfe12669bb850673ee9f857c60a5aa62bf1ec58695c0e069cd14",
+    "text": "活着的潮汐之花"
+  },
+  "content.species.neradora.trait": {
+    "reviewed": true,
+    "source": "Tidal Regeneration",
+    "sourceHash": "88385f6b544220f3a9883398820f1042635c5c4d6283ccb0a6310ac07cdb2db7",
+    "text": "潮汐再生"
+  },
+  "content.species.oathara.name": {
+    "reviewed": true,
+    "source": "Oathara",
+    "sourceHash": "c6b8d1dada2f184da416c323b96eefcf371a4b3ba01e6a8ec3f34f49103fe5b2",
+    "text": "奥萨拉"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
     "sourceHash": "e19d2746655d2d0161ff70e5b8b6a0a6e7e6f99969ba46158c17f39db15fb6c9",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.1.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "9000b82e7bbbd094c34aa0f03dfa7f49b5d1e96247d2a41c001ca005c120c8c1",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.2.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "d9e147e2cb2b224ca42720ecbdc4e0716659e0e146c4453630219b38add5982e",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.3.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "9b3ba196c8cae9e0a8a8a1edfae9b68fbcfb7295b00189c16055e47bc5207356",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.4.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "65306bda5bde2b93275d6103d631a34dc3d76d06af0d5775356892777fbfb22a",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.5.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "8746a85871b3248d5e7d78c421137baf95513b8677519aaeff6c8753c2ecfc9c",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
+  },
+  "content.species.oathara.title": {
+    "reviewed": true,
+    "source": "The keeper of unfinished journeys",
+    "sourceHash": "0b92ecb4709043eddfb58ee7b94249c0c3c50faac2f27381017cfe65e98bcd35",
+    "text": "未竟旅程的守护者"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
     "source": "Unfinished Journey",
     "sourceHash": "bffd48a0289da874309a9d999042f5a8176f4df8c2d83f6e9e4dbbac57de73a7",
     "text": "未竟之旅"
+  },
+  "content.species.orifable.name": {
+    "reviewed": true,
+    "source": "Orifable",
+    "sourceHash": "05333ce82df9861fa2b1a38ced4564b2b6e1112db844fad7680d8bc93c80631d",
+    "text": "奥里法布尔"
   },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
@@ -3131,6 +4007,24 @@
     "sourceHash": "201cb82c8320c725652b53245c9504e839cf3d58e5504ade0227bfb7a5f44aec",
     "text": "每回合额外抽一张牌"
   },
+  "content.species.orifable.title": {
+    "reviewed": true,
+    "source": "The bearer of good tidings",
+    "sourceHash": "759cf731614a19c240beadadf0720e49bbc235c78ee7bfec32060b3db9bd1da6",
+    "text": "佳音传递者"
+  },
+  "content.species.orifable.trait": {
+    "reviewed": true,
+    "source": "Express Delivery",
+    "sourceHash": "ac205a1c22dd317899687bfb14ce3f9875a1f4857a1ebe691aff1f213b6f2408",
+    "text": "特快递送"
+  },
+  "content.species.parhelion.name": {
+    "reviewed": true,
+    "source": "Parhelion",
+    "sourceHash": "bd5fd464ae24c9ca7107abb5cbf177845d67a2a2e770b38210c3c0362bf60799",
+    "text": "帕赫利昂"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3166,6 +4060,24 @@
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
     "sourceHash": "cc324436cdb90c94a26d7afa89f573158c43977537979debf26b75b1a09bd9d3",
     "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.title": {
+    "reviewed": true,
+    "source": "The sun upon the snow",
+    "sourceHash": "b7a3ffae630351d4b45162054bd8ddb9775931687d83d6b8189681e19a1b9100",
+    "text": "雪上的阳光"
+  },
+  "content.species.parhelion.trait": {
+    "reviewed": true,
+    "source": "Sunthaw",
+    "sourceHash": "f70065841d95f3822ccf117edba130018811d351e9767ef892a91aeaff1fade3",
+    "text": "日暖消融"
+  },
+  "content.species.pollenmoth.name": {
+    "reviewed": true,
+    "source": "Pollenmoth",
+    "sourceHash": "1f7b523079e364111b3eff9d845ceaaa8e768fd945eea2eddb3f68c074da29a3",
+    "text": "波伦莫斯"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
@@ -3203,6 +4115,24 @@
     "sourceHash": "9fd0d5367e63c8414ffd92d2d4300f8418029ec131dc33b7a03ceabc82a4122c",
     "text": "<keyword0>光</keyword0>伤害和<keyword1>生命</keyword1>恢复弹跳两次"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "03afce836387e4f78724a3b1457b78b8b74d6df490c3fd623406b2fc588b3900",
+    "text": "金色花踪"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "7ebd48bfd7c7c1bb3e88af69840efdd4ed23f5756ded0e517062433aa426413d",
+    "text": "异花授粉"
+  },
+  "content.species.prismram.name": {
+    "reviewed": true,
+    "source": "Prismram",
+    "sourceHash": "f55f3b978ff6a9d185e414b891effbeaa79d5b5ecce38a23a89129f21e2a9add",
+    "text": "普里兹姆拉姆"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3238,6 +4168,24 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "4a5e98e42fe4f641964c98de81f236e30f1cc7a92acc3a81b6c19ab3136b9b95",
     "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "1c872a5b28e8a5abf013770c27065bca62096fbb65996bf6b4804f2490a14f0e",
+    "text": "水晶哨兵"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "327e8a2f068a1cf8ac1de699d3aff3bdb415bed0fa543e3bbb3cb4675e49af27",
+    "text": "折射"
+  },
+  "content.species.pyrella.name": {
+    "reviewed": true,
+    "source": "Pyrella",
+    "sourceHash": "dcb145f6649f292b233a3da66489e71a7815b4ff0bcbb2c5a2e9b988e5673156",
+    "text": "派蕾拉"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3275,6 +4223,24 @@
     "sourceHash": "565e0ac30bf1812a995ea67d99d3321917890f9fd712cbbbd3ccf11fa8a28641",
     "text": "击败<keyword0>灼烧</keyword0>中的敌人后，将其剩余<keyword1>灼烧</keyword1>扩散给其他敌人"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "e58faf46203190e2a941068f1310ae15dcf1a6e004ade2da500879454701f03c",
+    "text": "节庆火花"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "882af31494b5d2116a23d6c4ccd2b13c4b0611b3539c5301b62c8b5ed92ebaae",
+    "text": "流转之焰"
+  },
+  "content.species.reedstag.name": {
+    "reviewed": true,
+    "source": "Reedstag",
+    "sourceHash": "38d95b5217eba579bcc66404ae347fa0d04a0351bb8794fa7d341465f2ed137c",
+    "text": "里德斯塔格"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3310,6 +4276,24 @@
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
     "sourceHash": "e9cb2238db9f42c8e382f693d1cc9b7f190686a61d88110d6d3bf013b9f7fd3e",
     "text": "<keyword0>格挡</keyword0>和<keyword1>荆棘</keyword1>与盟友共享"
+  },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "431186218ded88d38e09fb84a897bc22c836d2320cef5e10152a62bd9b532ee8",
+    "text": "活着的芦苇荡"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "7c7e514d1223c87c89a6347bd4fa89545cbac708fe5899a5f8452d47cf9692b0",
+    "text": "芦苇守护"
+  },
+  "content.species.reverie.name": {
+    "reviewed": true,
+    "source": "Reverie",
+    "sourceHash": "627c6a1e372fd78cb35d92c7ff636a66019c5440878070d7f62985e74d8ef17a",
+    "text": "蕾芙丽"
   },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
@@ -3347,41 +4331,77 @@
     "sourceHash": "975c56f9139e854228a93883368a3dd212979d3b4793c2b7cfdbbfc11f46fc7e",
     "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "71fa2f2e1187dedac04330ada40ad1321ee2b6f3421414fce7d3865b940cb5a6",
+    "text": "梦之庇护所"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "3bb8586de03af4f14042d0d97c0b9b96190f66023960621028e04e3fc2bbdbaa",
+    "text": "从容"
+  },
+  "content.species.ringpalm.name": {
+    "reviewed": true,
+    "source": "Ringpalm",
+    "sourceHash": "33bf13fc796bdc145b9ceb16af7f21bd7b32c332b5fb4350d60f3519c0f38d1f",
+    "text": "林帕姆"
+  },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "485aa028199a9f8be5385afa0447b70214f2f86002c88a2ec2a34ccaf7d0112e",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.1.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "a60f5cad2b1087597ef8485e95e7b5445d1db139b0dd34d6b4ad10d352adf9b1",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.2.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "dec44e4654911dc3636825bdf32820c8e13133ad5c47d20fa461328ba485c9bc",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.3.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "2a7c8a021f3590b17dcf6abf5b2252a5f8a165507d84c0ed87be7a9fa8cfde9e",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.4.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "ca651f47cef1b01514065e352658df85cc61cff6758c161c9eb57490a57be798",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.5.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "06e723ddc731fb6a064fa90828b9e419466397b1c5ecce06ad7b1a75cd664aa3",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+  },
+  "content.species.ringpalm.title": {
+    "reviewed": true,
+    "source": "The stone-circle guardian",
+    "sourceHash": "930fe41ec6963e1ac65d87370cf412b146991b6244fd8a8e337b19852d7b3656",
+    "text": "石环守护者"
+  },
+  "content.species.ringpalm.trait": {
+    "reviewed": true,
+    "source": "Resonance",
+    "sourceHash": "25b47385c72b7f07cbae82d13e7943119c448bc3c0bf3fafbd4d46fdfee9a484",
+    "text": "共鸣"
+  },
+  "content.species.rookhaven.name": {
+    "reviewed": true,
+    "source": "Rookhaven",
+    "sourceHash": "6cd0a8fc9748b83686262d9188c181ab0f58d8b2ef0be3e1675269c008debd7a",
+    "text": "鲁克黑文"
   },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
@@ -3419,6 +4439,24 @@
     "sourceHash": "6fe7b060f1113786d349eab525d329f5418889832bdd2180cf15e1ebed429e32",
     "text": "抽牌时复制该牌"
   },
+  "content.species.rookhaven.title": {
+    "reviewed": true,
+    "source": "The keeper of forgotten stories",
+    "sourceHash": "15df52278b9c78fed17a27ec89478aa09dfb5efc96278e3a4d9b2dc76067f33b",
+    "text": "遗忘故事的守护者"
+  },
+  "content.species.rookhaven.trait": {
+    "reviewed": true,
+    "source": "Well Read",
+    "sourceHash": "8a16cda6b3188d6d8d92f73fa0ac81d744160eee72640af706ee73319f47724d",
+    "text": "博览群书"
+  },
+  "content.species.shadebrim.name": {
+    "reviewed": true,
+    "source": "Shadebrim",
+    "sourceHash": "9a3541455cd7ba6acb568a44651955625978b394ad213902291948f36033b200",
+    "text": "谢德布里姆"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -3454,6 +4492,24 @@
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
     "sourceHash": "a5007e4f18df5e35c3bef4f6001691b2475af1403bf76b05f54efcbba4223c60",
     "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.shadebrim.title": {
+    "reviewed": true,
+    "source": "The cool refuge",
+    "sourceHash": "5d995decde6320d14432a9dbb5c83243d6cda71d67f38c2ffea05c2ba76297b9",
+    "text": "清凉的避所"
+  },
+  "content.species.shadebrim.trait": {
+    "reviewed": true,
+    "source": "Cool Refuge",
+    "sourceHash": "b8655c14588f0c87aa6daede1db24bcd80642c6f1aa0d0fed8d59846194a6133",
+    "text": "清凉避所"
+  },
+  "content.species.skybex.name": {
+    "reviewed": true,
+    "source": "Skybex",
+    "sourceHash": "ef6ddd3f90e03cb5af95fb0ac69b89c3ccc35c63495f0c8621c1a29d4c692141",
+    "text": "斯凯贝克斯"
   },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
@@ -3491,41 +4547,77 @@
     "sourceHash": "d28369e5164e2363fe00eb9703c6e39102fe335998056c75416a9e579e8772f1",
     "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
   },
+  "content.species.skybex.title": {
+    "reviewed": true,
+    "source": "The mountain guide",
+    "sourceHash": "08640146a2241ea716095084651f48759f4b75a30823cd3b345b27a02442029d",
+    "text": "山间向导"
+  },
+  "content.species.skybex.trait": {
+    "reviewed": true,
+    "source": "Mountain Guide",
+    "sourceHash": "573133ed11d5239f6eb4c1be17a307a25bf8111bf60b35e32782bdf165207843",
+    "text": "山间向导"
+  },
+  "content.species.sternshell.name": {
+    "reviewed": true,
+    "source": "Sternshell",
+    "sourceHash": "620d3c1bf2463b68bf330948d30c42df643d9ecad1a8acbc6c80085ac03cf4a7",
+    "text": "斯特恩谢尔"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "74362ecce6480f32107e2c18cde3e1841cb22f2536f826aae7c1f496db963568",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.1.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "f8ebe3869ef29fc48509c091d1e14bb943ed4ed0b14f0a53a0ca0b7c24c6a0d1",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.2.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "e3844e43f43c2fe07304f0d0661b10265a643724da1d479a19a20eb737865094",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.3.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "05ec4fe467b1d62dd4ccebc65ef3132283d9ee423d14d18a83292b91c8bca163",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.4.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "68eb2d492a6abf8569f5678fa3336afbf5ccee67e46e34f5269db5560c9d9112",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.5.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "70dff5c385a9a75d9e28f17bf47b7548d97c685b9a55b30203b44b2525e2c299",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+  },
+  "content.species.sternshell.title": {
+    "reviewed": true,
+    "source": "The steadfast voyager",
+    "sourceHash": "36b7b6da0e71977a99efd825cda26230eaa58edf4d5cdbcdee96c45ad16521ff",
+    "text": "坚定的旅者"
+  },
+  "content.species.sternshell.trait": {
+    "reviewed": true,
+    "source": "Shelter",
+    "sourceHash": "e90bd11f6b22eb7f7b968077386bf7bd62ac532af158e4b969ee8980576bdb24",
+    "text": "庇护"
+  },
+  "content.species.stillara.name": {
+    "reviewed": true,
+    "source": "Stillara",
+    "sourceHash": "55470a31c8e6b4d85e80aecb713f3a9a3f91812d859da99cbe99df0137d5eef4",
+    "text": "斯蒂拉拉"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
@@ -3563,6 +4655,24 @@
     "sourceHash": "97f7c568936227fd61aa93d1cc734bc67e3d11f0fd72f97db24d848a2646d828",
     "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
   },
+  "content.species.stillara.title": {
+    "reviewed": true,
+    "source": "The keeper of summer",
+    "sourceHash": "b3aec54ab59dbd2f6ca54d9579e2fc487e9c78fa2e19c110d83fc9ef8aa1aecf",
+    "text": "夏日守护者"
+  },
+  "content.species.stillara.trait": {
+    "reviewed": true,
+    "source": "First Thaw",
+    "sourceHash": "6ac2aa988c9284d08fec5557b6aa9522601ef152667fae163be162c751b6fea8",
+    "text": "初融"
+  },
+  "content.species.tournelle.name": {
+    "reviewed": true,
+    "source": "Tournelle",
+    "sourceHash": "7b0b3bc50c5160cf7810dc8f8ca352528c64343ca40a650ed0c1263a788564a8",
+    "text": "图尔内尔"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3599,41 +4709,77 @@
     "sourceHash": "eabccdc4164e35bedccb693ad6f1d47932d1542f0fdd0e701113bb1194f5f9b2",
     "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
   },
+  "content.species.tournelle.title": {
+    "reviewed": true,
+    "source": "The little gallant",
+    "sourceHash": "21e0468b73e73982e2c3618b98ceb6dbbe898cf4331597a82c31ad5107f5abf1",
+    "text": "小小侠士"
+  },
+  "content.species.tournelle.trait": {
+    "reviewed": true,
+    "source": "Gallantry",
+    "sourceHash": "8b0845581e2720e2fab240d0459185bd8a790e016167a50f0798b4c66346917a",
+    "text": "侠义"
+  },
+  "content.species.wickwaltz.name": {
+    "reviewed": true,
+    "source": "Wickwaltz",
+    "sourceHash": "6aa040ae53d56933cd041106c39865c180eef25bfbb6b2102fc58ae1fd005d1a",
+    "text": "维克华尔兹"
+  },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "46d7ab3b5264ccaf969e98744dc87a4de6068e22f913c4e056c98fbdcfb36fba",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.1.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "394a20936c206aef124c3840f94d8d3f33ec81f197c76d3cdb187c242c9d6a3b",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.2.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "4bfaaebd5cebc896aee975618769e07e6fe23b9ea7628959a9f6757954b0738e",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.3.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "afc3fd92cfccc231f2d1cf130d88ad26237e74e33b9254b86e99abd163e25b04",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.4.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
     "sourceHash": "6c7ac70cc6cafc9e0068cac516b55d90d6c148da47e99507935dc882510c22f2",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.5.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn repeats",
     "sourceHash": "d2c643bee9fe9c37b7625ce3a64928cd60508b668a92abfefba307989e6839b0",
-    "text": "Wickwaltz每回合打出的第二张牌会重复"
+    "text": "维克华尔兹每回合打出的第二张牌会重复"
+  },
+  "content.species.wickwaltz.title": {
+    "reviewed": true,
+    "source": "The kindling dancer",
+    "sourceHash": "7e2587240498dc16b919a43ffd516e1abff0ee7f4c739460a0471b37d32549bd",
+    "text": "引火舞者"
+  },
+  "content.species.wickwaltz.trait": {
+    "reviewed": true,
+    "source": "Kindling Flourish",
+    "sourceHash": "8df776346e928609096ea0a8f47761daa144aaea507506135bddacb859f57f5c",
+    "text": "引火回旋"
+  },
+  "content.species.wisterelle.name": {
+    "reviewed": true,
+    "source": "Wisterelle",
+    "sourceHash": "518eaf9e638607c0ae790e0fab95d75a57b95f3908bf9c062966ee0295d8b623",
+    "text": "薇丝特蕾尔"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
@@ -3671,6 +4817,18 @@
     "sourceHash": "d89a29b452a31453585efd6b2dacf539daf80eccf319e6293e41454426fb88dd",
     "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.wisterelle.title": {
+    "reviewed": true,
+    "source": "The keeper of the flowering station",
+    "sourceHash": "b12819eb0360fc28e4d60444e356a303f3cd77bf90fde1807cb312c30efe620c",
+    "text": "繁花车站的守护者"
+  },
+  "content.species.wisterelle.trait": {
+    "reviewed": true,
+    "source": "Lost and Found",
+    "sourceHash": "f73059ce757f93b80158d244059f01ebbdb7acd64d00651082c4eb6ed39b184d",
+    "text": "失物招领"
+  },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
@@ -3707,11 +4865,53 @@
     "sourceHash": "9733a94625e8269395326ec072b80a14565d26007740c1992a9ad8a0b78798db",
     "text": "控制免疫 {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "a590290157c9ac17dd19194f032c9778d17e8f9a045aece62632aeae098af80a",
+    "text": "免费追击：下一张卡牌免费"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "17e0836054def28a7fb5a76880845a167d8403ae4e1f1b076611bd440b8ecff0",
+    "text": "神恩：下一张<keyword0>光</keyword0>卡牌免费"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "287d7db70a047f0d2eece85bb494e6a23de4fccc80338c12609cfa088f921957",
+    "text": "风步：下一张<keyword0>自然</keyword0>卡牌免费"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "7685dca5f6d2bd8f42a604a47fea8a15a2240dcba43ac121bbbae88a276b3332",
     "text": "濒死 {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "3ae4500d2e5f7004f91fd8a213edfc2c70c34be38f071f08abb90327fdbca087",
+    "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "d2764819aed025a0fa54e7fc6466963953507544caa6749600b41e499fd32e75",
+    "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "8e0f520be902a581612fd84275ce552ba72fe33a8e24112df9e1275c9404b1ad",
+    "text": "找到节奏：<keyword0>闪避</keyword0>概率+{{value0}}%"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "e68af47540037972606cc8e667d70952f65932ce145426b702d047dd4d8b6adb",
+    "text": "还击：下一次<keyword0>物理</keyword0>攻击必定<keyword1>暴击</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

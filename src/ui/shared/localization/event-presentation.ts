@@ -28,6 +28,8 @@ export function eventPresentation(
   const combatant = (id: string | undefined) =>
     combatantById(game, id) ?? (previousGame ? combatantById(previousGame, id) : undefined);
   if (event.kind === "action" && event.actionType !== "swap") {
+    if (event.actionType === "attack" && event.text === "The Court Remembers")
+      return i18n.content("content.species.memento.trait", "The Court Remembers");
     if (event.actionType === "support" && event.text === "Your next card is played twice")
       return i18n.message("log.repeatNextPlayerCard", "Your next card is played twice");
     if (event.actionType === "support" && event.text === "The enemy's next card is played twice")

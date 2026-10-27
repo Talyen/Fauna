@@ -1343,11 +1343,29 @@
     "sourceHash": "18feda5102939a6fb2a9a98cab101bf1e60098a7b6edf1db04b9e512724ca3d2",
     "text": "Жестянка мази тысячелистника"
   },
+  "content.card.aerostat-parcel-drop.name": {
+    "reviewed": true,
+    "source": "Parcel Drop",
+    "sourceHash": "a459f85c4b69b03ba8ec15f834a43d3e7d596ef8893ad868be73deb67fc53473",
+    "text": "Доставка посылки"
+  },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "2ce3bdbdd354a475678eaeeab9f867df0f67202e0fd1c9c900c98e3e985e38d8",
     "text": "Добавьте в руку <keyword0>еду</keyword0>: {{value0}}"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "reviewed": true,
+    "source": "True Bearing",
+    "sourceHash": "6b4e7806f28a7b612a830db9bf239ee6aaaf156e48b38645e9c7dd13bfbb39bf",
+    "text": "Верный курс"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "reviewed": true,
+    "source": "Voyager’s Rest",
+    "sourceHash": "ef9e5300641ba2c96705382db514136f6dd240d4731c9fa963fe1e1d01cfceec",
+    "text": "Отдых странника"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -1355,11 +1373,35 @@
     "sourceHash": "715d4764a073b4ea83ced23858ae42652ec5feaa2a44d9b2ab05e4ad42a48fb1",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
+  "content.card.almanelle-autumn-insight.name": {
+    "reviewed": true,
+    "source": "Autumn Insight",
+    "sourceHash": "e22d969f4ff5f7f9664188284e121d7511f6e885592419b099e0156908b1233c",
+    "text": "Осеннее озарение"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "reviewed": true,
+    "source": "Rooted Year",
+    "sourceHash": "81e2bbdad500aaaa49fcca39ccf7821632f25fb4ebbb947326f06bbd09b45aa5",
+    "text": "Год корней"
+  },
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "752d212920f44a90f4fc745809efb2178e2afe2fbad8d7a85bac4363a442f402",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Получите {{value1}} <keyword1>шипов</keyword1>"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "reviewed": true,
+    "source": "Spring Current",
+    "sourceHash": "6ada2d565169ce23100a3ff425922922f72d50524e2e46962b1b6aced4d4d97a",
+    "text": "Весеннее течение"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "reviewed": true,
+    "source": "Ember of Evening",
+    "sourceHash": "0e4cb805b19174c0c7e562274a9c67922f0a41e8495f1bc503438ec30ef8101c",
+    "text": "Вечерний уголёк"
   },
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1367,11 +1409,29 @@
     "sourceHash": "7a3a295d78aa9a34f6dbc67ac219b0a4cd840eb5b7ef37fb617a34abb23b7ef0",
     "text": "Ваша следующая карта разыгрывается дважды"
   },
+  "content.card.alpenglen-last-light-charge.name": {
+    "reviewed": true,
+    "source": "Last Light Charge",
+    "sourceHash": "7e35ed9137baffd63d5ca90d32bb392ca76d1e54f1bfc83885cecfcaef7f8259",
+    "text": "Натиск последнего света"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "reviewed": true,
+    "source": "Sunset Reversal",
+    "sourceHash": "6a5b83f8db4fe59d3ab5d4eb4c2d7ef3ca947d622826da4d773e032e95482f04",
+    "text": "Закатный разворот"
+  },
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "56f6e4ee5634015ac0715fbc37cbd9f8740883862461811a0df5d0869980a8e8",
     "text": "<keyword0>Отразите следующую атаку</keyword0>"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "reviewed": true,
+    "source": "Dancing Double",
+    "sourceHash": "9ccabd262e9ccbcd9a2696b0ab08cd369bf1a125e3c86d0943c1973726163ac4",
+    "text": "Танцующий двойник"
   },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1379,11 +1439,29 @@
     "sourceHash": "4fd6a852274541d60c51ce29679e49f299cc98c4acf577de8094545ff0b29597",
     "text": "Ваша следующая карта разыгрывается дважды"
   },
+  "content.card.arabesca-ribbon-snare.name": {
+    "reviewed": true,
+    "source": "Ribbon Snare",
+    "sourceHash": "0b1a496da6f6c3a34d90a7f406fc550a6d71d8bc3d1fea524cd3ca87b888f5ad",
+    "text": "Ловушка из лент"
+  },
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "a75153fb670fca60612e7ba03fc7e5c6dc562f58f8ec43fefe687644db13fec4",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
+  },
+  "content.card.arabesca-springbound.name": {
+    "reviewed": true,
+    "source": "Springbound",
+    "sourceHash": "1edafb9e616feb4a0810ad94ad5520818c9c7fd02fe27dba07f4f20cf377c9b4",
+    "text": "Весенний прыжок"
+  },
+  "content.card.bloomquail-draw.name": {
+    "reviewed": true,
+    "source": "Bloom Cradle",
+    "sourceHash": "f6d4d57d287b42661f4838a26177b80d575d490f5a60bfd63076a926647b0795",
+    "text": "Цветочная колыбель"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1391,11 +1469,35 @@
     "sourceHash": "ea3f7bd80c8e61f04b084084b45c83d7c928a2e6b84f99d3bcade586a6c37710",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.card.bloomquail-guard.name": {
+    "reviewed": true,
+    "source": "Petal Rampart",
+    "sourceHash": "7aed4017bbca46a43af69deea57efc9416f64dd7caba99d6efdbcb13e3de5d1f",
+    "text": "Лепестковый бастион"
+  },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "0075cb813d9a142987118957672f314a213659096d164ab3793e775c2dda83c3",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
+  },
+  "content.card.bloomquail-heal.name": {
+    "reviewed": true,
+    "source": "Petal Veil",
+    "sourceHash": "d9ad82913a9428a17b793811ef5775ae1fb92e697bbf4fb2b201e8156fa67084",
+    "text": "Лепестковая вуаль"
+  },
+  "content.card.cadenza-echoes-remember.name": {
+    "reviewed": true,
+    "source": "Echoes Remember",
+    "sourceHash": "0307b0f5f0e8437769ab05f7406c14ae3b15e42dbeb6c4dcb032825f0c412d69",
+    "text": "Эхо помнит"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "reviewed": true,
+    "source": "Resonant Well",
+    "sourceHash": "04262654db93c324382f0d81744cbb48c8f14a78ee4c2c42ff45696502d6e805",
+    "text": "Звучащий источник"
   },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1421,6 +1523,30 @@
     "sourceHash": "a9c8bed2689d8683e02cdeab321ec5ced26db75888ad955be78401f21c3905d6",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
+  "content.card.cadenza-rousing-refrain.name": {
+    "reviewed": true,
+    "source": "Rousing Refrain",
+    "sourceHash": "558773bebaf67bf32b6c09de40deafe7ad9286fd050bdd12eae92e423453ef39",
+    "text": "Бодрящий припев"
+  },
+  "content.card.captoad-attack.name": {
+    "reviewed": true,
+    "source": "Spore Puff",
+    "sourceHash": "5711a982d86b106f966fe8e5be451d17ed5ee10c9e98ff5286af02ab1dd3150d",
+    "text": "Облако спор"
+  },
+  "content.card.captoad-guard.name": {
+    "reviewed": true,
+    "source": "Mushroom Guard",
+    "sourceHash": "21a40797a55ceeaf000e78cd0199ccc3b86da181d452d8cc03ef2d456ad17e43",
+    "text": "Грибной щит"
+  },
+  "content.card.captoad-swap.name": {
+    "reviewed": true,
+    "source": "Bogbound Leap",
+    "sourceHash": "ab7e3151a562c80129fad74eaf023197b64a24f2dcf50c1cb35721f7dd7db3f7",
+    "text": "Прыжок в топь"
+  },
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
@@ -1432,6 +1558,12 @@
     "source": "Swap out for a random backup; Draw {{value0}} cards",
     "sourceHash": "c5e9c365fbe99bf82c68ebd4277a8cbd49b877c64b7620b2e6c6daa12eafc14e",
     "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
+  },
+  "content.card.chimecricket-attack.name": {
+    "reviewed": true,
+    "source": "Resonant Leap",
+    "sourceHash": "dfb18cc6ec3334f6ed44807a6a504202c2b397daae5dc6d6f2a8711eaaa9fbd5",
+    "text": "Звучный прыжок"
   },
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
@@ -1445,11 +1577,71 @@
     "sourceHash": "a68cbe16509edf15a3edb09e029e550f5da70b2cef3a93d55e239cd4b172caa6",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
   },
+  "content.card.chimecricket-heal.name": {
+    "reviewed": true,
+    "source": "Lullaby Drift",
+    "sourceHash": "62eda776fba8f3755eb08979b1d7d816bc6f8a0460671592b98f6ce26aed4f7c",
+    "text": "Дрёма под колыбельную"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "reviewed": true,
+    "source": "Hush Dome",
+    "sourceHash": "c8cd884a4e926b96cd41528893e379b0139ec3833ec85c919789cb6f9abde8b4",
+    "text": "Купол тишины"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "reviewed": true,
+    "source": "Ashen Veil",
+    "sourceHash": "bc0739aacd57cb335f48910d77a1bff6f4bcc03ddaca3b1b68cf8e624a2a100c",
+    "text": "Пепельная вуаль"
+  },
+  "content.card.cindernewt-attack.name": {
+    "reviewed": true,
+    "source": "Cinder Lash",
+    "sourceHash": "763a1c200e2db3017d937e0481649b147ad6421bd7df3f791a6d18520389bfb6",
+    "text": "Плеть угольков"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "reviewed": true,
+    "source": "Ember Breath",
+    "sourceHash": "eafb3ea52f350549d889c4bf274910830f1b909360915ea6da347bccdc862d19",
+    "text": "Дыхание углей"
+  },
+  "content.card.coralcurl-attack.name": {
+    "reviewed": true,
+    "source": "Reef Jet",
+    "sourceHash": "5e846f218a076293590d80f42d76d1042d32627a097cb90bbbbda3e13f92e979",
+    "text": "Струя рифа"
+  },
+  "content.card.coralcurl-guard.name": {
+    "reviewed": true,
+    "source": "Bubble Ward",
+    "sourceHash": "3e5e04a74ecf89f965dbd1ec34c53784c281da753c9f6f71aa0affee850a8dbc",
+    "text": "Пузырьковый щит"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "9d1a3364c1d65db2e141c518f69b6c22de14eb2472ab1038931870e7a48d2d97",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
+  },
+  "content.card.coralcurl-swap.name": {
+    "reviewed": true,
+    "source": "Coral Spiral",
+    "sourceHash": "2731afd974db53e15cceb26febaac9626e0f45508417560387617b6b3b4d3d9b",
+    "text": "Коралловая спираль"
+  },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "d20db00b4e7258873646ab72a0297cc07b8c77e0bf71740da7eebbf372765baf",
+    "text": "Взмах солнечных крыльев"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "8f593dcc034b55d2e61c7acad32ef1aa4554d95550cb3a7ba01820bca9bf8a28",
+    "text": "Утреннее цветение"
   },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1457,11 +1649,35 @@
     "sourceHash": "e5d4ea1a634479231001ba7b4699d8670ff46399bf9b189c5198076f1335c272",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "31c80d39160f5a67524cf4f524671fb7740e422a582f5757064ebe6f465c5f2a",
+    "text": "Клич рассвета"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "8b45c44b563902a2ae631d0979586df880aed625069792ee6905d3a70ec1cf1c",
+    "text": "Свет часовни"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "7d76bb28404f5f05b27d6e5da0c700e2b5afac1b4478a651516efcdaf3903894",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "c3e4bc38e7742b6cd00b25764ed8707853849b5b6caf6064a8f822a549c478ee",
+    "text": "Тихие воды"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "905dee49f3f84bcd52e5f81d9b9952a8ce99ab6af93b63f4f5e16949e0338971",
+    "text": "Луговое убежище"
   },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -1469,11 +1685,23 @@
     "sourceHash": "af555c3a7a3f02767c3422fe3826672639abf389028b58334718ca9feb810af0",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "bc699b7cecd7d6ca69665563e1191829c29154b091896cb642a07dd4c4245ea5",
+    "text": "Прыжок песчаной бури"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "734383629daa5e86768cd0747f8f88a060ec2e4db563f550cdbb427a6404054d",
     "text": "Нанести {{value0}} <keyword0>физического</keyword0> урона"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "3fcbb129d29d9e34d27238d1f5a8cbad68a288e0112a18c2948efbfa47d8a9e4",
+    "text": "Шаг миража"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1487,11 +1715,35 @@
     "sourceHash": "e154193493a9a493cd96aea74639c9c82456d85b0f88177e1ff465ad723f8092",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Добор карт: {{value1}}"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "a8ee908374582b8498c897b444b794e791d721904c9d535aa93987abac49de99",
+    "text": "Вихрь дюн"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "ee73437d74bf76174cba499d27ed5c7de7b6f97d75ff37e72dd3af48fa080797",
+    "text": "Натиск углей"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "c2ea5981e5b019bb407068ff3d9fe7699abafa3158f49a80a40ef3d6b37a07c6",
+    "text": "Дыхание горна"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "e78fd49b3fbc21add9ca6b1f1b8a25f9aee01c208bf0bf42b7ac001c0ccecc91",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "8f8db46d0dd1289443a86e9c483a40e59e5b2632967248c3be00f1f260528a40",
+    "text": "Удар магмы"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1499,11 +1751,29 @@
     "sourceHash": "6a41e1274fc1bd2fbb1f20fcc4382d5ba39edba40d07c0e25bf7c0944f31ac1a",
     "text": "Нанести всем врагам {{value0}} урона типа «<keyword0>Оглушение</keyword0>»"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "9b4aa72dad80af07bd7115851068a1a7de90b444bb86a50e8381e1a1067520ee",
+    "text": "Возможный путь"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "cfa2ea2b5834357e08b27c260763479e504642d5ed9bbe3163d3009360d63f98",
     "text": "Замешайте руку в колоду; Возьмите столько же карт"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "1088ca66484ef076a55a8deade979ead5254cdfadeaa19146000741f4be1220d",
+    "text": "Сумеречное копьё"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "bd0b83d114a8f1539d2035a4f9cc5fe3eed75acbb5c80e822011ff1844a3a91f",
+    "text": "Обмен желаниями"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -1523,6 +1793,12 @@
     "sourceHash": "b081c5a8b5ca44099da97c54136905709bab91c82a11fe70c9b04bd46bde7cd3",
     "text": "Восстановить {{value0}} ед. <keyword0>здоровья</keyword0>; <keyword1>Расходуется</keyword1>"
   },
+  "content.card.food-mana-berries.name": {
+    "reviewed": true,
+    "source": "Mana Berries",
+    "sourceHash": "8e38ff0ce12f25b2090dca09701244f5ccc13935c0fcd94c741e87a3e94b3ed0",
+    "text": "Ягоды маны"
+  },
   "content.card.food-mana-berries.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
@@ -1535,11 +1811,29 @@
     "sourceHash": "28cae0ae7fdb5c57b5a55bde5b2ce8f043c5892ca59a2e7427a0de2c3e7b6eb0",
     "text": "Дать всем союзникам {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
   },
+  "content.card.food-trail-bread.name": {
+    "reviewed": true,
+    "source": "Trail Bread",
+    "sourceHash": "eaaf164bf5b3c2f82ecd22289f459787285713277c8e7254c29b16015db229f3",
+    "text": "Дорожный хлеб"
+  },
   "content.card.food-trail-bread.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "c662c28932695c63cd5fabb5c35982eb6002df23b5a0ab6f1d2035c6b42af0f4",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.glintstride-attack.name": {
+    "reviewed": true,
+    "source": "Prism Shear",
+    "sourceHash": "69425086da10a35ce20be8b0bbe2aacbfe47b81f7476f7562d7c3027be4df3e4",
+    "text": "Призматический разрез"
+  },
+  "content.card.glintstride-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Run",
+    "sourceHash": "88891f67ac5f28e65483d7024c2be69c46ad7d7ac0f4a583787152924764c04e",
+    "text": "Бег миража"
   },
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1553,6 +1847,18 @@
     "sourceHash": "e9542973bdc020f5faf5dfe571a845916c04716d3eb7f9a28e4bfd165c738daf",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Добор карт: {{value1}}"
   },
+  "content.card.glintstride-teamBlind.name": {
+    "reviewed": true,
+    "source": "False Horizon",
+    "sourceHash": "856cab8359d077beeece5a454cad489f4cb68a6af96d2ff51f6d9d677806acd0",
+    "text": "Ложный горизонт"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "reviewed": true,
+    "source": "Drowned Revelation",
+    "sourceHash": "0599fc6231a5e3f79b8641c47397c096a9810ec83ae2c44271aa8d10999dfa2c",
+    "text": "Затонувшее откровение"
+  },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1565,11 +1871,29 @@
     "sourceHash": "0e3bc788ae3e344c9133c2c0a53850affaf54635cdc1993b833d5126236ecd8f",
     "text": "Добор карт: {{value0}}"
   },
+  "content.card.memento-lost-procession.name": {
+    "reviewed": true,
+    "source": "Lost Procession",
+    "sourceHash": "59b4f66aead365579f09931451e2863dbaa463d7864c2e671bac54fa47a43d7d",
+    "text": "Потерянная процессия"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "31c96d8085588861c0e99a0ce4e9c9315550a19d91cf65d85bade1a61b155169",
     "text": "Жемчужина"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "reviewed": true,
+    "source": "Treasury Echo",
+    "sourceHash": "7a10d3627a75757ca7d9f5220a7defbb3206ae056cd1a99a1d431c8e8142c76a",
+    "text": "Эхо сокровищницы"
+  },
+  "content.card.mossguard-attack.name": {
+    "reviewed": true,
+    "source": "Rooted Stomp",
+    "sourceHash": "58a71c6afe1fbffdb6fbb5cc1189678eab4760159b4297d60728a357181ca80c",
+    "text": "Укоренённый удар"
   },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1577,11 +1901,23 @@
     "sourceHash": "c4b849224664d323217669333cca6d758c9350dce76a30d74e1a9e0fbf80d681",
     "text": "Нанести всем врагам {{value0}} урона типа «<keyword0>Оглушение</keyword0>»"
   },
+  "content.card.mossguard-guard.name": {
+    "reviewed": true,
+    "source": "Boulder Brace",
+    "sourceHash": "1a775acd3f23f0331669ded0a93e55851c40d1995bf120991fd7fc856e4d78d2",
+    "text": "Каменный упор"
+  },
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "b34e389db595affa373a250eee7e6cd5a6ad472f9ec76ae32ad806dabe48eadb",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
+  },
+  "content.card.mossguard-heal.name": {
+    "reviewed": true,
+    "source": "Moss Renewal",
+    "sourceHash": "c6e11969a3f219514db194000e5fbc73449d891bd42dbc7d452487abd7de0599",
+    "text": "Обновление мха"
   },
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1589,11 +1925,23 @@
     "sourceHash": "034bb2cf5f6278ff24b3b9748f8a32852da0b93c65b482a542ba3cf541256bfd",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.card.neradora-bloom-shelter.name": {
+    "reviewed": true,
+    "source": "Bloom Shelter",
+    "sourceHash": "4077b6fd3f56eadb7d13db9b1746581fe69b895788b85b0a0467df5e296d5633",
+    "text": "Цветочное укрытие"
+  },
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "09a768e01ac9f08c2bd0dc3bc96988515f221e07d3f79c051326873c478ab00a",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "reviewed": true,
+    "source": "Tide Cup",
+    "sourceHash": "4dc70b47a804a4eceec48e2bee29d8048fbf422db59ab0f677012f5fd8a3bf94",
+    "text": "Чаша прилива"
   },
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1619,11 +1967,29 @@
     "sourceHash": "295f0b47d5252e9e1954b71e2f6c80dae537709a39280913498cc7b62e7425d5",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
+  "content.card.neradora-undertow-knot.name": {
+    "reviewed": true,
+    "source": "Undertow Knot",
+    "sourceHash": "768b9b379ec07d71005a3c358f140b052a3e0d20dfce8055c7e68efd33308cb2",
+    "text": "Узел отлива"
+  },
+  "content.card.oathara-never-lost.name": {
+    "reviewed": true,
+    "source": "Never Lost",
+    "sourceHash": "e10b49117211dbdfb44c321b0e5d8f83120431fa10f531479f0c5a3dcef8425d",
+    "text": "Никогда не теряется"
+  },
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "b435114236e5cdc01818c5ace2aa1facd8f06c8295a719beccb1a70c607468ad",
     "text": "Замешайте руку в колоду; Возьмите столько же карт"
+  },
+  "content.card.oathara-travelers-ward.name": {
+    "reviewed": true,
+    "source": "Traveler’s Ward",
+    "sourceHash": "951383f234eacad58d1387bceb345860fd55c602562a4ede9180c8c5880ef36a",
+    "text": "Защита странника"
   },
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
@@ -1631,17 +1997,47 @@
     "sourceHash": "de88359d71608607ccf036abd98ab480cef847557d9cea6c7077327d1c584a4c",
     "text": "<keyword0>Отразите следующую атаку</keyword0>"
   },
+  "content.card.oathara-vow-of-return.name": {
+    "reviewed": true,
+    "source": "Vow of Return",
+    "sourceHash": "55d7b041ff24fb40f973316d4d25216caf2d6798387e47fe4ff6f3924a45af32",
+    "text": "Клятва возвращения"
+  },
+  "content.card.orifable-attack.name": {
+    "reviewed": true,
+    "source": "Postal Swarm",
+    "sourceHash": "59024cf9a52fad25b2b30137e9e9aae0e97b453154e31cf7b3dd0be73746baa4",
+    "text": "Почтовый рой"
+  },
+  "content.card.orifable-createFood.name": {
+    "reviewed": true,
+    "source": "Care Package",
+    "sourceHash": "b77e79eb17d7012e099756490d530a68487d51f473e383f555508f3e7f1696cd",
+    "text": "Посылка заботы"
+  },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "12a123c9b50780a85d0ddf77fc195a8aebde99a0fe39957ebe6f53a385808246",
     "text": "Добавьте в руку <keyword0>еду</keyword0>: {{value0}}"
   },
+  "content.card.orifable-heal.name": {
+    "reviewed": true,
+    "source": "Good Tidings",
+    "sourceHash": "816657492bb0dc581deda72a5f16151a200658941a3f460432725fb73d6b493c",
+    "text": "Добрые вести"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "ce57696583c748249e66d57dea6f55a608dddf1067f30f086192d20e54f7d8f8",
     "text": "Восстановить наиболее раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "reviewed": true,
+    "source": "Polar Reprieve",
+    "sourceHash": "54ada74edf3345a35daac68ae11776a8b5891538df6690b4db9c7cfccf2cf181",
+    "text": "Полярная передышка"
   },
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -1655,11 +2051,29 @@
     "sourceHash": "9ad1f1e6a43ad0c3d85b22d57d3e7e29340f5064c4a8055077ac558becbbcdec",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников"
   },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "reviewed": true,
+    "source": "Sundog Reservoir",
+    "sourceHash": "0f8abcbe77cb243dbc855f6094a6bc49173a273f0cd25557372d1f71c10af69b",
+    "text": "Водоём паргелия"
+  },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "1f84adbbbe596fb0dec0d923122f8feab444b09e9da7639b4749731b12e6ac8e",
     "text": "Получите {{value0}} <keyword0>маны</keyword0>"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "reviewed": true,
+    "source": "Whiteout Waltz",
+    "sourceHash": "404465287f659e55ad304ce0d3d7a5de11c411bcef7e982b67bef4388e796255",
+    "text": "Вальс снежной пелены"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "reviewed": true,
+    "source": "Dazzle Burst",
+    "sourceHash": "58fac44e147d66059c08e276ea93fcd8d2b5ce37cc7c2fcf51ff493a3e776898",
+    "text": "Ослепительная вспышка"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -1667,11 +2081,23 @@
     "sourceHash": "8042c47cd429044299f717d1d71d6ed18ba5b55fc6c0d946ac2fb337aef45938",
     "text": "Нанести случайному врагу {{value0}} ед. урона <keyword0>светом</keyword0>"
   },
+  "content.card.pollenmoth-heal.name": {
+    "reviewed": true,
+    "source": "Bloomwake",
+    "sourceHash": "15b6b26afd1a06283eade4a77d78dea5401b0d4723e1ae2a0fc815363dcf0642",
+    "text": "Цветочный след"
+  },
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "36180da72538867cabf6487a9964a96ca64347b00b56dc1a43ba27b755d7f452",
     "text": "Восстановить наиболее раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "reviewed": true,
+    "source": "Petal Shelter",
+    "sourceHash": "548b87c9e8447b67c44a2b97fb9f3cd4dc21d1e5c8413684d0bc05db1d7358f6",
+    "text": "Лепестковое укрытие"
   },
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -1679,11 +2105,23 @@
     "sourceHash": "3e0b039dcc6960a82ac578329dbff73a49d63c9b22f57e22096d09e93b020078",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
+  "content.card.prismram-attack.name": {
+    "reviewed": true,
+    "source": "Prism Charge",
+    "sourceHash": "c46cef71ebe9858da234218ec11cb7eac3267226810009d631cd3dce7c49912d",
+    "text": "Призматический натиск"
+  },
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "2755a03c43b3daeb970b811839969b05e5ecfa2555a5325c2ffe57d083203b05",
     "text": "Нанести {{value0}} <keyword0>физического</keyword0> урона"
+  },
+  "content.card.prismram-guard.name": {
+    "reviewed": true,
+    "source": "Faceted Ward",
+    "sourceHash": "abf6459955f4f6bb3e478e128a9587da7f9ba82015031990b2733832bc6b63a4",
+    "text": "Гранёная защита"
   },
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
@@ -1691,11 +2129,29 @@
     "sourceHash": "ae1f27e0369b556c456fa43cc81f19dc47ebb7c6b1dddddd13ed039cb2767209",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Отразить</keyword1> следующий вредный эффект"
   },
+  "content.card.prismram-spectrum-lance.name": {
+    "reviewed": true,
+    "source": "Spectrum Lance",
+    "sourceHash": "766941de9b26e69c3c6e75662b1d8d429ad17cc809ce152422069cfb0f4babe5",
+    "text": "Копьё спектра"
+  },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "5b2ab1e6733b0d82f42554a8f0b067eb2112c1bbf836698b01a806bdcd69b8f8",
     "text": "Нанести {{value0}} ед. урона <keyword0>светом</keyword0>; <keyword1>Рассеять</keyword1> цель: удалить эффектов: {{value1}}"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "reviewed": true,
+    "source": "Ember Harvest",
+    "sourceHash": "45880f0438e251efd83461dd3d7ee1e5e07e3d7646643e5d4ee4952b0d89c518",
+    "text": "Сбор углей"
+  },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "e564c2d8fc65092eea985e9d7dd896903be43bab659cdd24fb1a39459926d459",
+    "text": "Праздничная вспышка"
   },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
@@ -1703,11 +2159,53 @@
     "sourceHash": "d9c81e6d00c072b443fc447fd7b3d756ef2c6595c116e589eaa0adbcf7c1869a",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "0b65a601e199d2e957f97b8475c84ba75572e8d74e6d3242f5f23bcfe7a950ae",
+    "text": "Искристая приманка"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "8608ec1987589bfb38356ee29ab292ad5384ba2c786fc6ab325256e68bb846e1",
+    "text": "Тростниковый рывок"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "482be64930b03a3b4def4e64e017668e96d05c34e21dff739bc6dd6b4eee218b",
+    "text": "Тростниковое укрытие"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "0789b67fad96ad7a4e9b5787df43287fbbd78e21b1f21ce517e5ad633bf7a377",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Получите {{value1}} <keyword1>шипов</keyword1>"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "ada03305d04582911caac0b51b644595ed3683d80d24fcdc805100fe4a0d3ca1",
+    "text": "Целебный родник"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "0be87cdd5824fe34ba6f4a0530c50bd97c4ea8f2f5c19a55307bfd21fdfe2e5e",
+    "text": "Двойник сна"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "c066db5c2890f4df94763e5068209e07910f5f94892b6a350e40c0a122f39f62",
+    "text": "Урожай кошмаров"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "6804bdf2b650d512fe567cf328a4cc076fa5f21654e949ae7379459da29306b1",
+    "text": "Чудо пробуждения"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1721,11 +2219,41 @@
     "sourceHash": "08c9f7ea9b387ef817629ee751f9b3ebd8e930570d18c48c73c5601068e914b5",
     "text": "Добор карт: {{value0}}"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "13ea5cbb571bb218a26f580c5c063115b2b6b2d56fddac015fb937addd483913",
+    "text": "Круговой хлопок"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "cb1951251add3015af912ab640ce4c4591bf042684d664d29de46b7e3c5ec90f",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "c2799657fc4ebb19c1b7278b6600d04c663b9259fdcc805010e1f26f6e7e0a32",
+    "text": "Гармоничный набор"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "678c707e433db5b4d3de636b855041e2a848d533fdcf700d3d1040c160dcc384",
+    "text": "Круг ростков"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "ce2eaf05dcc29a857bb67f22372357ac1d144dcbe6cdcc1d7c830fc7621642cf",
+    "text": "Заимствованное сияние"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "7c4050d581bb932c4959be43ae636e3231f8fd5b92a36b3bb0b7b0884fa08961",
+    "text": "Поле возможностей"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1738,6 +2266,24 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "06459513e7d38bc676719cbb18850affa996f127f414799ad15c8c25e7d6b213",
     "text": "Добор карт: {{value0}}"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "f2133f3ffb93f484579d503f7ac56491ed70620a3e7f476ccc15bfdc681e72b1",
+    "text": "Ненаписанный финал"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "50c8a192eb1c59d2b212ab2aabc23cf26df02f1815a3308b24f08f17ed18412d",
+    "text": "Прохладный фронт"
+  },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "596ed7f6bdd060b09bf73ef5a69402987a0fff9b5f000071212114077d41a50c",
+    "text": "Полуденное цветение"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1763,6 +2309,24 @@
     "sourceHash": "15cb705eef8ebf391a133fd1214326f13539ed1e32b7b787e0667bc46f21c5cf",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "1d995d85e14e74ffda7da87aa9672dee2b0f920233dd521e93aeb9ad0e104f6c",
+    "text": "Полуденная защита"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "8e220a851ac61376179887cd983a96af4b4c9744cadb508f72aac3bf5135c8ad",
+    "text": "Облачный шаг"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "08f55ae662898a6bb4183caf01bf10508253ea6cd823f524c55353fe8a886194",
+    "text": "Дальний горизонт"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1774,6 +2338,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "bb3533084605512d00537891d097e2280971d2066644d477737574dae21290c4",
     "text": "Добор карт: {{value0}}"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "b70ac6766a274daf53f9bcf09ece8f0eb91d4dec0baad38cae502be6e2d3f92b",
+    "text": "Небесный пастух"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "8b756895b5d4a28dee83b9b6550f5fd93b8daba3a9290c0708541d6c80b057ae",
+    "text": "Натиск волны"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "b385dba3369d81f19006f3a2bf1987d3928151aecba05694b7b4054eed2c9cdb",
+    "text": "Спиральное возвращение"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "aa884e57e434b5b6c81dac329b3f095546ffea4d63d92c47c9284149d6bd6a23",
+    "text": "Прыжок с отводом"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -1787,11 +2375,23 @@
     "sourceHash": "d396b0a837fc80721c39b58b4f2d5bb150f5f2207a9a90e6d8fcc371ea55b9f4",
     "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "9e44bef201f2fbd3bbac144f2f5b87670a9917798f3be4cb1a1a1c40b10e79c8",
+    "text": "Тростниковый водоём"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "fd629f218c894b05142310fcceffdd806a2de45589edb93a7be7f0c9d0ed141d",
     "text": "Получите {{value0}} <keyword0>маны</keyword0>"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "e9fff6634949ecc14c9f99caf370b50c281997014bcc8f8c8e06cf7acc23deed",
+    "text": "Путь оттепели"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -1805,17 +2405,53 @@
     "sourceHash": "3186b54ecbd94c04178297a3e329003097070b9e902916b803dc6321fc29a178",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников"
   },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "befbdcf333a7b6eae9fe6ce75163094f375a55b9244f2b47cd83e9032a5eeccd",
+    "text": "Вода помнит"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "ae397fb38f658e5a4e5133bcbdae0988a1259addf4b000a00e2b7411030bac17",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.card.tournelle-attack.name": {
+    "reviewed": true,
+    "source": "Valiant Challenge",
+    "sourceHash": "a494a2b1d084e058f661934dcec18cb7878152e940ab23d02e9f6e361b1c7749",
+    "text": "Доблестный вызов"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "reviewed": true,
+    "source": "Safe Passage",
+    "sourceHash": "7f2a0ebc10b570a39a1b62aec71157a6ba0f59eb3159bd925040be09cd2ba389",
+    "text": "Безопасный проход"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "reviewed": true,
+    "source": "Kindled Courage",
+    "sourceHash": "d812526b5289166d85deff476cf1e19c047ffdd7f5bbc53c3390e1a237611b58",
+    "text": "Разожжённая смелость"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "reviewed": true,
+    "source": "Ember Pirouette",
+    "sourceHash": "f051184ac24406b78481331666264d6b7d2610341b84e989a3a347e6b5ccfd8f",
+    "text": "Пируэт уголька"
+  },
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "4fff7e4426718b5eb9a1a7edf59304e6cf4491ee4de3159ed397b2bc90d517f5",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "reviewed": true,
+    "source": "Thermal Rise",
+    "sourceHash": "2d15f3435d91b78fdab40fe28a124b0e734b5eba8e89c121001e070139824d7c",
+    "text": "Восходящий поток"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1840,6 +2476,30 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "59cf8bbab7841de4f6f87b361421530108123d9bbc9728a06a356a467765867c",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "reviewed": true,
+    "source": "Saffron Screen",
+    "sourceHash": "1efb2705a5955558aedb12043866a35fc98326fad2a58fafa51613cc3e84eb6c",
+    "text": "Шафрановая завеса"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "reviewed": true,
+    "source": "Forgotten Junction",
+    "sourceHash": "42a341dc36f57885684369a7e97e9be463bfd7286b806d8c9c9c62be61b5bfbe",
+    "text": "Забытый перекрёсток"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "reviewed": true,
+    "source": "Lantern Fare",
+    "sourceHash": "008afeb333af4ee505fc7ccbe3addb4f18ece43d1da5b01899ce1b562c4d173c",
+    "text": "Фонарный билет"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "reviewed": true,
+    "source": "Left Luggage",
+    "sourceHash": "2d0ad9e30b2407c435a1f3f8f6d9086998ec6cdeab4cf4b776ce1d315042f77f",
+    "text": "Оставленный багаж"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -2225,6 +2885,12 @@
     "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
     "text": "Вода"
   },
+  "content.species.aerostat.name": {
+    "reviewed": true,
+    "source": "Aerostat",
+    "sourceHash": "ccd99abd10acfb66cbb7c4b47e2f82714553791b27407ccdb0e64d1338e4a894",
+    "text": "Аэростат"
+  },
   "content.species.aerostat.passive.0.rule": {
     "reviewed": true,
     "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
@@ -2272,6 +2938,12 @@
     "source": "Well Provisioned",
     "sourceHash": "aecf840e058401eda11413470172108135851b72a36325b3f96d0d37803d2922",
     "text": "Хороший запас"
+  },
+  "content.species.almanelle.name": {
+    "reviewed": true,
+    "source": "Almanelle",
+    "sourceHash": "ad4dca348ce051d178ee5944e1c01e029e8bcfa12a8d8d91892dd70e304615a0",
+    "text": "Альманель"
   },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
@@ -2321,6 +2993,12 @@
     "sourceHash": "164e84ffe11d9ddea8bbe52afad54a643554db3c3f40cade025cfa97fccf84bc",
     "text": "Опавшие листья"
   },
+  "content.species.alpenglen.name": {
+    "reviewed": true,
+    "source": "Alpenglen",
+    "sourceHash": "1d2e30b0e63995268e573a0eaf28b160fd5308c5c3a823326baa8a4041cda32c",
+    "text": "Альпенглен"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -2368,6 +3046,12 @@
     "source": "Last Warmth",
     "sourceHash": "9fc30fda82b2a47df29002fd97d6aef3b0cf7787172ac63d3cdb77efc93c6d4e",
     "text": "Последнее тепло"
+  },
+  "content.species.arabesca.name": {
+    "reviewed": true,
+    "source": "Arabesca",
+    "sourceHash": "e6db5166c4a7000cfb4214830c1055d46f7f9d7a406a54d001515a9d59291684",
+    "text": "Арабеска"
   },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
@@ -2417,6 +3101,12 @@
     "sourceHash": "22710faa362b1ff4021f9dd5db30bf9c24d4a614c9b19c22513f88aaa25a9b2e",
     "text": "След лепестков"
   },
+  "content.species.bloomquail.name": {
+    "reviewed": true,
+    "source": "Bloomquail",
+    "sourceHash": "5e9a84479dbd2f2c95c5b065471bb08278c89a9a25faa8d9da969dd398fcedf3",
+    "text": "Блумквейл"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2464,6 +3154,12 @@
     "source": "Full Bloom",
     "sourceHash": "3b0bbddc4c9332f801b9f3b62c32465a7153fd9f7fdd7b153faaf9c1e5c7177e",
     "text": "Полный цвет"
+  },
+  "content.species.cadenza.name": {
+    "reviewed": true,
+    "source": "Cadenza",
+    "sourceHash": "96b0d30ac9c9d94e9d768588136210d0241bb76a26899770b17e78ea71d0f9ad",
+    "text": "Каденца"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
@@ -2513,6 +3209,12 @@
     "sourceHash": "9aee6d9814d1f77135eab9baf41a4f9834ffe360ad251a9c67456535d6aa0959",
     "text": "Живой хор"
   },
+  "content.species.captoad.name": {
+    "reviewed": true,
+    "source": "Captoad",
+    "sourceHash": "c50dd023322f78ef2e798de8ff6469be13ad4e75cb373bae1c7974a312d1ebf4",
+    "text": "Кэптоуд"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2560,6 +3262,12 @@
     "source": "Sporecoat",
     "sourceHash": "77de3fc6400c01cd35ae99f690b2500f11c9dd159c0d3919ad3b92798605d18a",
     "text": "Покров спор"
+  },
+  "content.species.chimecricket.name": {
+    "reviewed": true,
+    "source": "Chimecricket",
+    "sourceHash": "3b3673e2ce4e097bc9687367857be5f0d95cd00db3912b4c0db902f8cdc34ce6",
+    "text": "Чаймкрикет"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2609,6 +3317,12 @@
     "sourceHash": "19dee03a4480acb1b1031183e2a345b34540913289dd4aa7e9e19ddd54b35045",
     "text": "На бис"
   },
+  "content.species.cindernewt.name": {
+    "reviewed": true,
+    "source": "Cindernewt",
+    "sourceHash": "392d233a79116c4136dfdbced2929c73aecb5ecc159702b5fa643a27b11eeff4",
+    "text": "Синдерньюит"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2656,6 +3370,12 @@
     "source": "Cinderstep",
     "sourceHash": "0e59bc2c70ddf03ab8facdc1b20bb915d2c8c3ea727f03a8e2e8bf1f6e649800",
     "text": "Шаг уголька"
+  },
+  "content.species.coralcurl.name": {
+    "reviewed": true,
+    "source": "Coralcurl",
+    "sourceHash": "4eac3ff3527fd7adbdc0ef4cbb2ff548efaab7f94ae6af543120939da7c2b30b",
+    "text": "Коралкёрл"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2705,6 +3425,12 @@
     "sourceHash": "b33c48f8f4e5cfa7dac2e4525d59496117169edbbf2249020291233b0721cae3",
     "text": "Всплеск пузырей"
   },
+  "content.species.dawncall.name": {
+    "reviewed": true,
+    "source": "Dawncall",
+    "sourceHash": "4e84210d620a4948f0e38a7a4dbb91ac099ffdf1c633d6f53ad2b70c1c1ae443",
+    "text": "Донколл"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2753,6 +3479,12 @@
     "sourceHash": "c2a622177302d126228005d56a0600ed694d549f484931930e62094e676726de",
     "text": "Ранняя пташка"
   },
+  "content.species.dulcera.name": {
+    "reviewed": true,
+    "source": "Dulcera",
+    "sourceHash": "9661f5d9521c31b3ccf245e733e7822bf77bfd6e28f0eab768bf8d7c4a70fbcb",
+    "text": "Дульцера"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -2788,6 +3520,24 @@
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
     "sourceHash": "629256f38f72be17c309c460e36b60dda6b551b20b073aaf81ec2cded16b1b28",
     "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "6a2122fe1ed185c6570a6adc7aec64711df8bf31fd7583aa6f2441d1d7707d93",
+    "text": "Тихое убежище"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "f658f0e12d4fdc4c32ce2ed57069c49742137bd16057d7ac10eec3208d55fccd",
+    "text": "Бережный проход"
+  },
+  "content.species.dunefox.name": {
+    "reviewed": true,
+    "source": "Dunefox",
+    "sourceHash": "ff3c5ee10b316683f73df61f92521c9b7962d9ab603398b84e3891b986c109e1",
+    "text": "Дюнфокс"
   },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
@@ -2825,11 +3575,23 @@
     "sourceHash": "ab78aafe285efa73ee58c7a160c3611daa836f6a263002b4bb8aa257a60a2015",
     "text": "Союзники получают {{value0}}% от вашего шанса <keyword0>уклонения</keyword0>"
   },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "ab643e3f879e5c540a76569d012e170fd271ef57fa54c8300ba3b3229330b4ec",
+    "text": "Меняющийся мираж"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "433d676012016227c4203e3bdd730a8784091d66c04aa9a4a74cee4b6a02e572",
     "text": "Подвижные пески"
+  },
+  "content.species.emberback.name": {
+    "reviewed": true,
+    "source": "Emberback",
+    "sourceHash": "7ff1caaecb720418ec9df5a1dca2677a06966e3e6cc537e8336c5417e868c4f1",
+    "text": "Эмбербэк"
   },
   "content.species.emberback.passive.0.rule": {
     "reviewed": true,
@@ -2867,6 +3629,24 @@
     "sourceHash": "ee3cf2f3222425924769220e1265b13dbc052d3b8fe76252910f71b1d6715b4c",
     "text": "Когда ваша <keyword0>броня</keyword0> ломается, нанесите всем врагам {{value0}} урона типа «<keyword1>Горение</keyword1>»"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "e8a16cd73f0e4908d5b8abce2baedb0fcf9699ed2c1c1cfdc9470921c530a0cf",
+    "text": "Тлеющая печь"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "149bebe830f49d6a848811c87e6f50bed5c9ddbfc577aa1b430ba503fd0bbb8a",
+    "text": "Расплавленный панцирь"
+  },
+  "content.species.euphera.name": {
+    "reviewed": true,
+    "source": "Euphera",
+    "sourceHash": "6b8fb5950fd1b1c36444cb31351117fa274fd19f6d848de2ff6b3e1861a4b7a9",
+    "text": "Юфера"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,41 +3683,77 @@
     "sourceHash": "1a7aa2b14d78fadf52ad82db474f12a00e02077c7dc0679c1979b2bbe9894ee8",
     "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "ff398cd662f73e0dbd1cdb29def859e13e0de38eec0d5a37a6ab17d7aa4c6664",
+    "text": "Желание в полёте"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "08e105f5221b42d8df606d5ad4ba677de972111ff68f1b78557ede787d49e5f2",
+    "text": "Удача"
+  },
+  "content.species.glintstride.name": {
+    "reviewed": true,
+    "source": "Glintstride",
+    "sourceHash": "d50d27521468ed98b629a69006a948dee326fff832132cf2853337f1ad0ba2aa",
+    "text": "Глинтстрайд"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "6ae00fda9511b494f2a5241d4128aa54f1f12922984dce68fa4f34fb54a30002",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.1.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "b0129b30904cbe3fcd64af2bd56d0d0d6144feb503fa44727406aa184ecb0b8f",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.2.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "c82d2e6f0ad21adfe2bed5025e2ed1e57148851c5fbc2387f75dc0b2c566a627",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.3.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "3d15ca758a7c5f3d0bdbf3850a746e5c74ec61444c598b06bcf20c104752d769",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.4.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "0e78379b77a945b6f25e45529189fdc3e6e8a0ccd5010c1c7f4fda949a2a94e4",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.5.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "654d0f55e907914e7b6cbcc511bd537e1cb12836bbaa9b516dd2aae02cc9ac17",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "83209fecf7cc414000aa1ea25fb947d5960097435af6dfdb08e3710ce861e8c1",
+    "text": "Шаг за пределы сияния"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "8e35f791f36277dcad6032db02267a146b0e9b2e438482087d6bcfa2f53a4a23",
+    "text": "Не с той ноги"
+  },
+  "content.species.memento.name": {
+    "reviewed": true,
+    "source": "Memento",
+    "sourceHash": "125ad0d789b03de28c7f1fecda14c71b8aa8be1b98914a41aafced059bba91b0",
+    "text": "Мементо"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
@@ -2975,6 +3791,24 @@
     "sourceHash": "0188a7c81a74519b6e155f1610c970a4d92ae451ccbd0ee52062a8ad29f5793f",
     "text": "Каждый раз, когда вы разыгрываете карту, одно Эхо атакует и наносит {{value0}} урона типа «<keyword0>Вода</keyword0>»"
   },
+  "content.species.memento.title": {
+    "reviewed": true,
+    "source": "The palace that remembers",
+    "sourceHash": "308c0a2b7bbdde6cce18fdfb419e6a106bf192b49ea7c52e93489521bd660a78",
+    "text": "Дворец, который помнит"
+  },
+  "content.species.memento.trait": {
+    "reviewed": true,
+    "source": "The Court Remembers",
+    "sourceHash": "cd93ed2e063cf06de300e7ac743f8ba8e414a222889ffe9e2db368582ab09ada",
+    "text": "Двор помнит"
+  },
+  "content.species.mossguard.name": {
+    "reviewed": true,
+    "source": "Mossguard",
+    "sourceHash": "126e4eccd02637c69f12918f91dd00ff1306ebecc916bffc704ffa5985199ff8",
+    "text": "Моссгард"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3011,11 +3845,23 @@
     "sourceHash": "91e795ee9f576f8ac285ed502f61614156bf3295e8430c3a5f0907dbf201338a",
     "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
   },
+  "content.species.mossguard.title": {
+    "reviewed": true,
+    "source": "The gentle guardian",
+    "sourceHash": "8ca6fc589922a56f3580d7c7e0733fc48deffb84b9a5d74cf17dae4446f1913c",
+    "text": "Бережный страж"
+  },
   "content.species.mossguard.trait": {
     "reviewed": true,
     "source": "Overgrowth",
     "sourceHash": "caa36e91df0cc3002a1e9f5a91a9645dbbb5cf898667f2c4a10d946a66105ad9",
     "text": "Буйная поросль"
+  },
+  "content.species.neradora.name": {
+    "reviewed": true,
+    "source": "Neradora",
+    "sourceHash": "389e08ddf51112e81d5473b69b841a9d40f9af2f274840114f12f6a79fa970bc",
+    "text": "Нерадора"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
@@ -3053,47 +3899,77 @@
     "sourceHash": "fc61f5df637b43ecff46933ed190b524c0cf239bf309ef2e769f9dc6d7b59e7b",
     "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
   },
+  "content.species.neradora.title": {
+    "reviewed": true,
+    "source": "The living tide flower",
+    "sourceHash": "4c5175daa86be2856c7f1504ad9fbacba2e145d5a67d619f3e78c9b354b8c2f4",
+    "text": "Живой цветок прилива"
+  },
+  "content.species.neradora.trait": {
+    "reviewed": true,
+    "source": "Tidal Regeneration",
+    "sourceHash": "1b6cba425b7af8b582fefb8cd2fd8606210284c00775f00e9a399b84d8a432cd",
+    "text": "Приливное восстановление"
+  },
+  "content.species.oathara.name": {
+    "reviewed": true,
+    "source": "Oathara",
+    "sourceHash": "55e9ddc94f5e7e42c158bb62c41407377d55c2b94379c5d1e0f524d96bdd90d5",
+    "text": "Оатара"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
     "sourceHash": "0c698f1163ee6ec3f327a15f17342407ed5de1d59de364463e63e675aea82110",
-    "text": "Oathara может разыграть за ход {{value0}} карту павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карту павших союзников"
   },
   "content.species.oathara.passive.1.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "70a845d09ca0986daf802e61fd17e4df1bc36ac0634d6c0fbb7724d8a101aee2",
-    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карты павших союзников"
   },
   "content.species.oathara.passive.2.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "56f784988629a120fdb8af49be61e84ceafd295ee8124a199ca156f005cf5d63",
-    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карты павших союзников"
   },
   "content.species.oathara.passive.3.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "af117f633b2b57d8dd66767f5acdbd434958bb28fcd1d4945dd20814a4a6e1d2",
-    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карты павших союзников"
   },
   "content.species.oathara.passive.4.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "b5a8c329992f1b2c71a9b86e0e1052b48ac90132be0a9a7dd1d100a97054c5c6",
-    "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карт павших союзников"
   },
   "content.species.oathara.passive.5.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "09cc4a55e1f776a448368a65366e52498cc234fdd9453b02e6987a80dce8ccf4",
-    "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карт павших союзников"
+  },
+  "content.species.oathara.title": {
+    "reviewed": true,
+    "source": "The keeper of unfinished journeys",
+    "sourceHash": "ef71e2f3cba47dd60243151e63e2cdafcbb1dff479cebee161b51ac2f7b42e6a",
+    "text": "Хранитель незавершённых странствий"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
     "source": "Unfinished Journey",
     "sourceHash": "ab11349a3d7ebe1611e7679ac8f019df9cce6b6a97d41ccf98ba697974db2ecd",
     "text": "Незавершённое путешествие"
+  },
+  "content.species.orifable.name": {
+    "reviewed": true,
+    "source": "Orifable",
+    "sourceHash": "f48cdc51ec4473239961ad6d25c686bfc623b1ba4ca987a919f2602067d75b7b",
+    "text": "Орифейбл"
   },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
@@ -3131,6 +4007,24 @@
     "sourceHash": "074968e167b9b8e56e87c8e6c8a4f5f79a1796f902d29c1ebbd4fd35c3fad68f",
     "text": "Берите дополнительную карту каждый ход"
   },
+  "content.species.orifable.title": {
+    "reviewed": true,
+    "source": "The bearer of good tidings",
+    "sourceHash": "84e396bf8a8208532c40d704b6a3fb072a953299123766ef8687f38fdf926d36",
+    "text": "Вестник добрых вестей"
+  },
+  "content.species.orifable.trait": {
+    "reviewed": true,
+    "source": "Express Delivery",
+    "sourceHash": "17ce38f8f81306e94d10feedd7c85109f576c7b7ee0547a98476ebf6de05eb07",
+    "text": "Срочная доставка"
+  },
+  "content.species.parhelion.name": {
+    "reviewed": true,
+    "source": "Parhelion",
+    "sourceHash": "68dcb7b3a71121023cf72fc8bcb4e61558483eecc9adb7dd5ea3d3524b4caec3",
+    "text": "Паргелий"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3166,6 +4060,24 @@
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
     "sourceHash": "6fdcd22e9ff7ab3ca93cdb8b08de0010fad3c251537f7df90fb350a979c75b5e",
     "text": "<keyword0>Очищение</keyword0> накопления <keyword1>заморозки</keyword1> восстанавливает {{value0}} <keyword2>здоровья</keyword2>"
+  },
+  "content.species.parhelion.title": {
+    "reviewed": true,
+    "source": "The sun upon the snow",
+    "sourceHash": "f6134513b00740454712d3ce42840dfa8b36a85b5a2b1eb352dde0c33568b3a0",
+    "text": "Солнце на снегу"
+  },
+  "content.species.parhelion.trait": {
+    "reviewed": true,
+    "source": "Sunthaw",
+    "sourceHash": "6ec68b0fe95680de3021d740864976cb4f8774757bc1a7745a6ba6978bdf9ad7",
+    "text": "Солнечная оттепель"
+  },
+  "content.species.pollenmoth.name": {
+    "reviewed": true,
+    "source": "Pollenmoth",
+    "sourceHash": "b43cf12593f55fa25b79f7e35f3487a6df8a865cfd23c7edb21887a532bc8d13",
+    "text": "Полленмот"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
@@ -3203,6 +4115,24 @@
     "sourceHash": "d772df48e3adc77a82d55651d80b01db469f75b8a9dfb017a8c88396598e83d5",
     "text": "Урон типа «<keyword0>Свет</keyword0>» и восстановление <keyword1>здоровья</keyword1> перескакивают дважды"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "8c7be11d1e463c2e588c4c2aa348b2c3ab4a46ae18d830621dd638d1caf87c4d",
+    "text": "Золотой след цветов"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "439b253d36b95453ac69eef550a76ecb7c34712bd367e4617c78f1344e932f75",
+    "text": "Перекрёстное опыление"
+  },
+  "content.species.prismram.name": {
+    "reviewed": true,
+    "source": "Prismram",
+    "sourceHash": "913f5f52efb3b1a72046a4f4f9854a23a142dd716e142c2eb1bd76b146890106",
+    "text": "Призмрэм"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3238,6 +4168,24 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "7e4a58e135bb61a0403bb0b29ade2fd1569e85ec46208eebcf462aa35b3313fd",
     "text": "Вредные эффекты состояния, которые вы получаете, с вероятностью {{value0}}% перенаправляются случайному врагу"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "fa47e98f27ef60cbc685fa78da9d351c416425cf074e5b891933c5e949f6e506",
+    "text": "Хрустальный страж"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "3ce44dcf0300d9d4f2e4ea0decddbcbbeae6f7bcac5bf5799b5f80e7c7bff7dd",
+    "text": "Преломление"
+  },
+  "content.species.pyrella.name": {
+    "reviewed": true,
+    "source": "Pyrella",
+    "sourceHash": "7fed8f622100ed658853ed3985c4357168c4a47e9e0f0074e18fa9ae0fe4a2af",
+    "text": "Пирелла"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3275,6 +4223,24 @@
     "sourceHash": "202ee0ec29a8d51aeabef3ad7e013d3b80db09542d0aa61ec9f72d4168a32a2b",
     "text": "После победы над <keyword0>горящим</keyword0> врагом перенесите его оставшееся <keyword1>горение</keyword1> на других врагов"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "a9383a093f14d688502604953615edee46d6bc6c0dc9ce502eda01b0e66517b7",
+    "text": "Искра праздника"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "94d8908a2591a329938c9c0dcc15a209f1d14437b027e42c51e625ca1919f114",
+    "text": "Переданное пламя"
+  },
+  "content.species.reedstag.name": {
+    "reviewed": true,
+    "source": "Reedstag",
+    "sourceHash": "596f3161eecbf978c58fd94c70f39d3557700400065d75627344bbc2d949f689",
+    "text": "Ридстаг"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3310,6 +4276,24 @@
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
     "sourceHash": "abf2ab04b9663530d9b3cc5e6696d093566bb1cacf0a8533b877870f1b11ed05",
     "text": "<keyword0>Блок</keyword0> и <keyword1>Шипы</keyword1> передаются союзникам"
+  },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "420af098a4439c315c15412d6b8065f8e468e94ef9fd7ec12e2aea6e3f90b803",
+    "text": "Живые заросли тростника"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "137fbe7ae77264562ba78a06361008fdd2773624a28d3deff4a0aa4932521fa6",
+    "text": "Тростниковый страж"
+  },
+  "content.species.reverie.name": {
+    "reviewed": true,
+    "source": "Reverie",
+    "sourceHash": "b685619da84d34c3c74eafa04c8e953228b711f500b67c0663bc59eef4c31ccc",
+    "text": "Ревери"
   },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
@@ -3347,41 +4331,77 @@
     "sourceHash": "5c05e6d99344c9ebf030da1ad4ee8b8691e470b52962cb987557cbfed5266665",
     "text": "В конце вашего хода каждый союзник, не сыгравший ни одной карты, восстанавливает {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "9830902a918ce90ca63c463a3d03ec0d5681c8e8ffcaa3b601ec6ec5e33e15a0",
+    "text": "Убежище грёз"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "ecee8eaf5188b4bc48d02c39c570f1e030fdec62dbe6bd0876310ef012f7239a",
+    "text": "Без спешки"
+  },
+  "content.species.ringpalm.name": {
+    "reviewed": true,
+    "source": "Ringpalm",
+    "sourceHash": "1c231c311f5079e017a1b506a66db276807ef16828c41c3c1ad96db5f34b8344",
+    "text": "Рингпальм"
+  },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "294ba2b279b795e3b81a92ef47c410b74072bc0a7a7ba8ddf426a854f2040b18",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.1.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "45a1b0eef369aaa5c95ce95ec60f70660d34d69f64b53e6fd157df0b6d59d322",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.2.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "f92d4a9e85129146f001f39b93eff76c9bc4fe5a7700a10fb267f56d7af1e9fb",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.3.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "1b7a715d5d74b30ed4d54379e634b805f966e1691d062d55344a60c82f05a6c7",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.4.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "fe0f0f9ef8fce6240eb59e6c7497371a4ee776a91949c1116b7ae1839c8f72dc",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.5.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "6bb61a3b8424b453a292f85ad20787b73a3e4675ef53632a0fbc15db3cbf31e6",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.ringpalm.title": {
+    "reviewed": true,
+    "source": "The stone-circle guardian",
+    "sourceHash": "ac084e4a07b7dfaebb9253516d9a6760fb5ab96e56d8dbc7dc20e239fd9f9c02",
+    "text": "Страж каменного круга"
+  },
+  "content.species.ringpalm.trait": {
+    "reviewed": true,
+    "source": "Resonance",
+    "sourceHash": "c97dc812e1cec784da9825a5bd021588d5e3493817470286a1be86835bf415b4",
+    "text": "Резонанс"
+  },
+  "content.species.rookhaven.name": {
+    "reviewed": true,
+    "source": "Rookhaven",
+    "sourceHash": "bdeb597d1e1909b48dbe520e7fa6d58fb7b3e19e6f7c349be58f3ec13cb5ac05",
+    "text": "Рукхейвен"
   },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
@@ -3419,6 +4439,24 @@
     "sourceHash": "886f105c2090b43847d9a74e6b937c64ab0b954143546e0543234bafb43c3760",
     "text": "При доборе карты создаётся её копия"
   },
+  "content.species.rookhaven.title": {
+    "reviewed": true,
+    "source": "The keeper of forgotten stories",
+    "sourceHash": "70976d67206d6ee3ed34656d64407a2591d366884b4fe6460e1fcc5ab82643fc",
+    "text": "Хранитель забытых историй"
+  },
+  "content.species.rookhaven.trait": {
+    "reviewed": true,
+    "source": "Well Read",
+    "sourceHash": "0b8be9d20deee3c1a54b6d712e402c2350896275ae8328d5d6eda8a9dd3a3f2a",
+    "text": "Начитанность"
+  },
+  "content.species.shadebrim.name": {
+    "reviewed": true,
+    "source": "Shadebrim",
+    "sourceHash": "89211cbabb0bfc78ce4032a70b1904543a7f84d642382f8ee1e9bb66ab44258c",
+    "text": "Шейдбрим"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -3454,6 +4492,24 @@
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
     "sourceHash": "6dbc929b5542c1fe33edcec2343eb68d16a26e778a445bd831102d712b796163",
     "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.species.shadebrim.title": {
+    "reviewed": true,
+    "source": "The cool refuge",
+    "sourceHash": "31c0eb89e6084fe2403e68721c8a6528bee6acd219e23cd3fe8b9a23fd9e46d9",
+    "text": "Прохладное убежище"
+  },
+  "content.species.shadebrim.trait": {
+    "reviewed": true,
+    "source": "Cool Refuge",
+    "sourceHash": "2f62eb3e281a57d4d3e5b1ef87a70a14fa1df306ee0df73063ef83be6bf8ff08",
+    "text": "Прохладное убежище"
+  },
+  "content.species.skybex.name": {
+    "reviewed": true,
+    "source": "Skybex",
+    "sourceHash": "3c19530a9322f09e1b4ac35141046f4e65c7a7fe4b6556c4e4737d86569e5a10",
+    "text": "Скайбекс"
   },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
@@ -3491,41 +4547,77 @@
     "sourceHash": "dabfcefae1240d7f46138366ff9127045eba8a8ee879e41ebb9c87cccb41e800",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
   },
+  "content.species.skybex.title": {
+    "reviewed": true,
+    "source": "The mountain guide",
+    "sourceHash": "05e660f80d1c6c5d2302cc683086a8e1a2ef0aaa421a3be19c48d2d7f9f80dcb",
+    "text": "Горный проводник"
+  },
+  "content.species.skybex.trait": {
+    "reviewed": true,
+    "source": "Mountain Guide",
+    "sourceHash": "b2696914411979fa8d05b9d8d878fdd35ce4b311a7f8f99e4a10d962cdc53ffb",
+    "text": "Горный проводник"
+  },
+  "content.species.sternshell.name": {
+    "reviewed": true,
+    "source": "Sternshell",
+    "sourceHash": "ffa03c4d11eac251d648115319286932b832c5dfc6d50cc2f71cb26f94e4bdfb",
+    "text": "Стерншелл"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "54c99f5f3b885f912ee5d29cf972cc5c6b9709ee7d2480713dadcc03b30168f1",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.1.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "2965729d0af59eb4679eaf5b00bc836d7fa473d66876fb1991f7e36cd7119253",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.2.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "0e88ffaf29d8d93e32d3605c22a71b7d77ecf7609d7fc533fef1971b3366d9a9",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.3.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "9d7b91b3c25b52bbcb00ae5a2ea9fc35fa6b040769da526e068ad2bdbecc4c69",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.4.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "e2a7aedc17b70f96772bb351ebe543a465860fd6b83dceaf8d19a82e23bcaf17",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.5.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "4fa782f5ce6861fc3c5b5a1cb41f3a3c66a34cf33578c5161082e4f0b10fee76",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+  },
+  "content.species.sternshell.title": {
+    "reviewed": true,
+    "source": "The steadfast voyager",
+    "sourceHash": "f45957bf73c3ab66537cc432416dbc1f9c8703cfe12de70d7e787bceb9194619",
+    "text": "Стойкий странник"
+  },
+  "content.species.sternshell.trait": {
+    "reviewed": true,
+    "source": "Shelter",
+    "sourceHash": "d08ac02fbdd24f21896f136be1cf315eceb78f09f642cf4cead0b89ce3383a3c",
+    "text": "Укрытие"
+  },
+  "content.species.stillara.name": {
+    "reviewed": true,
+    "source": "Stillara",
+    "sourceHash": "4948612da12dc15c251599510d0a8f334f22f1a2f083a138450a51768add8db4",
+    "text": "Стиллара"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
@@ -3563,6 +4655,24 @@
     "sourceHash": "8dfedb5f8fa6c3e7d7126865b0ef8264128d5e3e928ddcd0501563720de8dc25",
     "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
   },
+  "content.species.stillara.title": {
+    "reviewed": true,
+    "source": "The keeper of summer",
+    "sourceHash": "d7cca650272acaba4550b6dd3a81d07cf526926d3fc05608a7c353433e58f358",
+    "text": "Хранитель лета"
+  },
+  "content.species.stillara.trait": {
+    "reviewed": true,
+    "source": "First Thaw",
+    "sourceHash": "ecc5cfffe63b3ddb1a44c5a58a450c8bb04f8db4d935c85e2eac50256ea6c478",
+    "text": "Первая оттепель"
+  },
+  "content.species.tournelle.name": {
+    "reviewed": true,
+    "source": "Tournelle",
+    "sourceHash": "5a553b8361b13a9a1f19b25224a34279f7d9d79c9e1e5b4df42b4acc72eba3a5",
+    "text": "Турнель"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3599,41 +4709,77 @@
     "sourceHash": "03eb132ec403ee3528af08f3a9f0ac14616a0c55be476bba46a57b18e0e06dac",
     "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
   },
+  "content.species.tournelle.title": {
+    "reviewed": true,
+    "source": "The little gallant",
+    "sourceHash": "98c211cfa6bba884cac892ccbe6e17f0c1ff64011f758fcc8ddfd897a7a1a3f0",
+    "text": "Маленький галант"
+  },
+  "content.species.tournelle.trait": {
+    "reviewed": true,
+    "source": "Gallantry",
+    "sourceHash": "d88c5d532239642f746a7fc371682cca79ffc4ed27e472e0b1b26a342e493ecd",
+    "text": "Галантность"
+  },
+  "content.species.wickwaltz.name": {
+    "reviewed": true,
+    "source": "Wickwaltz",
+    "sourceHash": "7b2ea395835229f6509adf23002b8be144c77349dda1552b3db0ff9cd4f40225",
+    "text": "Виквальц"
+  },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "2af8e6a6b0f1c234db1b444e26db62417438affae22dfe0999031b3b008e72ed",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.1.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "612dcf289b95e112f8f1128ac51adbbe2a5c8f512ab3cc76ea3d3de06b69bfb4",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.2.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "eb3b120610fd4c5c0f0c30b7732ed28bd2edd2c1c8e88522fa9cfc145dd6fc0f",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.3.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "410a59a42e1808f5649bc5c6a429e57534c9165c2170fd5a58438e53aeca43ca",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.4.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
     "sourceHash": "a1dc193bb449f00c08afee2e263b31009d6449f9f2314ddce269960c584ad81b",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.5.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn repeats",
     "sourceHash": "ad7d1a8b462fdb80fedede8452ec7f6fa145a83b6e128f6b8b19b05d163d5d5d",
-    "text": "Вторая карта Wickwaltz за ход повторяется"
+    "text": "Вторая карта Виквальца за ход повторяется"
+  },
+  "content.species.wickwaltz.title": {
+    "reviewed": true,
+    "source": "The kindling dancer",
+    "sourceHash": "7fcf8b37eb7a43dcc8e9c52b00d562491ffef89a0226223c10d0741b23865cc0",
+    "text": "Танцор растопки"
+  },
+  "content.species.wickwaltz.trait": {
+    "reviewed": true,
+    "source": "Kindling Flourish",
+    "sourceHash": "d00b35b8230104dfa609b10f789ae484dc5d8a698c4bc7ffea5271e88fa96328",
+    "text": "Росчерк растопки"
+  },
+  "content.species.wisterelle.name": {
+    "reviewed": true,
+    "source": "Wisterelle",
+    "sourceHash": "819b7e8cba9a1074c94e008341b98aba252405a3d810242579114cd3fa6ba424",
+    "text": "Вистерель"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
@@ -3671,6 +4817,18 @@
     "sourceHash": "ea8633163ed9ac1d15998745113b4547c4226968fbdc43dc837f9b3851856544",
     "text": "Взяв карту из сброса, восстановите её владельцу {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.species.wisterelle.title": {
+    "reviewed": true,
+    "source": "The keeper of the flowering station",
+    "sourceHash": "6003ec37432ca29890c15b021b039edaed5e120a572802d7daf386c10dac8f4c",
+    "text": "Хранитель цветущей станции"
+  },
+  "content.species.wisterelle.trait": {
+    "reviewed": true,
+    "source": "Lost and Found",
+    "sourceHash": "c4c0b5338378a889e238d7c8559a3768ee357dc6a71ed957cc2db834d5e64dea",
+    "text": "Бюро находок"
+  },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
@@ -3707,11 +4865,53 @@
     "sourceHash": "3a0250adcbcea11c91b016b0fbfb7627c3d80846f416fca52c364ec5f784cb37",
     "text": "Иммунитет к контролю {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "74a7b4127987e9b49e62d668c2f2ab25c7f14e35eca0df609a8513567bf2d367",
+    "text": "Бесплатное продолжение: следующая карта бесплатна"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "2d4c9136abad339618f4103879f98f5696af1cda697231ac28b445fcea6e607f",
+    "text": "Божественная милость: следующая карта <keyword0>света</keyword0> бесплатна"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "13748ee0221b944cfe70f3b01968885d800578a3eb23de5aa87971d05ec9aa77",
+    "text": "Шаг ветра: следующая карта <keyword0>природы</keyword0> бесплатна"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "c029e40cb666cfbee45bf58c4750f431059c13f92a3ea8f5ea5f5a0da59a97bf",
     "text": "На пороге смерти {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "f00b41a0598c4c6af5f6bfd59165a7346d1d8bd31c4f94e97ce7de4f780bfc5a",
+    "text": "Открытый фланг: следующая атака наносит дополнительно {{value0}} <keyword0>физического</keyword0> урона"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "82a990886eb99969016295f1f2c070ffb8b9c63cb8e352fb9b31e0d7e3f12ad4",
+    "text": "Прощальный порез: следующее <keyword0>физическое</keyword0> попадание дополнительно наносит половину своего урона <keyword1>кровотечением</keyword1>"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "a84185dd2097810d9e810af442bb01a76329bc9f1b1ff427bf0e1ceb2b3f5de3",
+    "text": "Найти ритм: +{{value0}}% к шансу <keyword0>уклонения</keyword0>"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "dcd4881e28b67218975b907353638203032f2ec22184a7e9b63d5bcdd33bef6e",
+    "text": "Рипост: следующая <keyword0>физическая</keyword0> атака гарантированно наносит <keyword1>критический удар</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

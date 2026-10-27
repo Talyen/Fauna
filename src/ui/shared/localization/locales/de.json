@@ -1343,11 +1343,29 @@
     "sourceHash": "9bbac1f8cbe8a71421e1c524590f54fb335c4a84f943f741cbbdd3eab931ca1d",
     "text": "Schafgarbensalben-Dose"
   },
+  "content.card.aerostat-parcel-drop.name": {
+    "reviewed": true,
+    "source": "Parcel Drop",
+    "sourceHash": "b003de653b7834bbec8e35c64ea384faaad1d5565d77b1287fdc3bf8c6007429",
+    "text": "Paketabwurf"
+  },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "86db0cfccb87eaa151d4b69d29be8488123de15884dbc23eefb42fbfd2f16665",
     "text": "Füge deiner Hand {{value0}} <keyword0>Nahrung</keyword0> hinzu"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "reviewed": true,
+    "source": "True Bearing",
+    "sourceHash": "081b54acbfaa1232bc2f38721b594469d9fe184d2119359f319cf65ddfad5296",
+    "text": "Wahrer Kurs"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "reviewed": true,
+    "source": "Voyager’s Rest",
+    "sourceHash": "5d16a21734e7d52cac371b22d78feb953fe18601be02a9520215f5101d4f03bf",
+    "text": "Reisendenrast"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -1355,11 +1373,35 @@
     "sourceHash": "675b8188f6a8c2315f1dcb19b385a9e533a649547a4623b77cd0aaf324001583",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
   },
+  "content.card.almanelle-autumn-insight.name": {
+    "reviewed": true,
+    "source": "Autumn Insight",
+    "sourceHash": "e8be47c7dc8c4a14deb284340adda37c2957d8815c2219fa36a93290c8a47855",
+    "text": "Herbsterkenntnis"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "reviewed": true,
+    "source": "Rooted Year",
+    "sourceHash": "e69e7a391b3c76295093d2c56354f9a92150c790d8fd0c2348c38037b140c4a4",
+    "text": "Verwurzeltes Jahr"
+  },
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "25789891a8941a639e1ad3706164d54312ef2b53f32a32113d60b418d1ea274f",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; Erhalte {{value1}} <keyword1>Dornen</keyword1>"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "reviewed": true,
+    "source": "Spring Current",
+    "sourceHash": "f0cc591630578e9451b5a0a2e8ab2ef19d33bbeb063959a6be420fb0615083d1",
+    "text": "Frühlingsstrom"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "reviewed": true,
+    "source": "Ember of Evening",
+    "sourceHash": "10041da4d1e20c900b4394f5050ae9ccb4bca0eb9e21242d54b0adb150a581cf",
+    "text": "Abendglut"
   },
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1367,11 +1409,29 @@
     "sourceHash": "a239081e9e4cbcb14a436f69810818ee4afae5a6b46bd89ed9f340cb202fca1b",
     "text": "Deine nächste Karte wird zweimal gespielt"
   },
+  "content.card.alpenglen-last-light-charge.name": {
+    "reviewed": true,
+    "source": "Last Light Charge",
+    "sourceHash": "1b275e16090def9565ef9ccc28c09bdd5c616c303045a31aedfbceb8ab82b4a1",
+    "text": "Ansturm des letzten Lichts"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "reviewed": true,
+    "source": "Sunset Reversal",
+    "sourceHash": "b0058d47cc8f6e06ee625611bb8bf6b0fe92bc783b0c623480fecd9eee2d134f",
+    "text": "Wende bei Sonnenuntergang"
+  },
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "fc9a601701a35113a5c3690d2ee3c54ab5685e415691aed2a454925b39645b71",
     "text": "<keyword0>Reflektiere den nächsten Angriff</keyword0>"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "reviewed": true,
+    "source": "Dancing Double",
+    "sourceHash": "b3526db10d7e712f81b5f0ddccbc1aab51ec4f973bb554255307e1f8ae279d4f",
+    "text": "Tanzendes Doppel"
   },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1379,11 +1439,29 @@
     "sourceHash": "5bcbf7a6a6bfd06d47b7b5710c221a6e55c1db88b35d71a76f6cea141ab600fa",
     "text": "Deine nächste Karte wird zweimal gespielt"
   },
+  "content.card.arabesca-ribbon-snare.name": {
+    "reviewed": true,
+    "source": "Ribbon Snare",
+    "sourceHash": "47864ebdcf51c3f0e5626ae15bde388a3774251a72f4538d56831fe0721df10b",
+    "text": "Bandschlinge"
+  },
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "1b5edf248192572f784f0eb21eeca75239727f542342451dc238499d5d9b2d9f",
     "text": "Verursache {{value0}} <keyword0>Betäubung</keyword0>sschaden"
+  },
+  "content.card.arabesca-springbound.name": {
+    "reviewed": true,
+    "source": "Springbound",
+    "sourceHash": "92f05e25724f5397b6ac79e649770a4d1ecfade6dd32d354a0815310949c5527",
+    "text": "Frühlingssprung"
+  },
+  "content.card.bloomquail-draw.name": {
+    "reviewed": true,
+    "source": "Bloom Cradle",
+    "sourceHash": "a2571271c903a50293081ba3c79cdae83eaea20a71b17a5330a4113f0d3afee8",
+    "text": "Blütenwiege"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1391,11 +1469,35 @@
     "sourceHash": "cee50dd710257243b7c25531e88b2757dd8377982c8d256d9b4fd72724de2674",
     "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.card.bloomquail-guard.name": {
+    "reviewed": true,
+    "source": "Petal Rampart",
+    "sourceHash": "3c2518f6f776d74106a5921dfd5d7f2b1b2b755cdf91d49570a1e0838b5efdf0",
+    "text": "Blütenwall"
+  },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "5d08a38a57e5bf3d331a5a49805c44287b61aff3448a4fe2896d8d691258680c",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.bloomquail-heal.name": {
+    "reviewed": true,
+    "source": "Petal Veil",
+    "sourceHash": "cdfd3e2fd9eab0483f5d730fc90902d53f6d5a2cb617f852821b9af982efd11d",
+    "text": "Blütenschleier"
+  },
+  "content.card.cadenza-echoes-remember.name": {
+    "reviewed": true,
+    "source": "Echoes Remember",
+    "sourceHash": "2701b7460444bcaac29a6040af40eea232c40dd57fa1512515d26b68cbb27333",
+    "text": "Echos erinnern sich"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "reviewed": true,
+    "source": "Resonant Well",
+    "sourceHash": "ba5cb508382096b53f551b2030fee51d2133ba63be088c82da3a625f90166856",
+    "text": "Resonanzquelle"
   },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1421,6 +1523,30 @@
     "sourceHash": "024126437235e52b3a99691a8d14e3630b7a08367f5be25fc9e14daff7c0affd",
     "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
   },
+  "content.card.cadenza-rousing-refrain.name": {
+    "reviewed": true,
+    "source": "Rousing Refrain",
+    "sourceHash": "7197b2673492e00b58b2b003c983aee447b61fd810629420649270c4e709a401",
+    "text": "Mitreißender Refrain"
+  },
+  "content.card.captoad-attack.name": {
+    "reviewed": true,
+    "source": "Spore Puff",
+    "sourceHash": "adbcd248940ee6f216d0409c8d1d7f5c95098bb7982c71d139d830afbed30f22",
+    "text": "Sporenwolke"
+  },
+  "content.card.captoad-guard.name": {
+    "reviewed": true,
+    "source": "Mushroom Guard",
+    "sourceHash": "5335006e14cf6bc219bba3d18064a235c84a857df0d2376bd257fb5381241133",
+    "text": "Pilzschutz"
+  },
+  "content.card.captoad-swap.name": {
+    "reviewed": true,
+    "source": "Bogbound Leap",
+    "sourceHash": "86cfe511a051aa3cd116631854d62e8ca5b8aaea3dbf07e23f1a878680c4c234",
+    "text": "Moorsprung"
+  },
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
@@ -1432,6 +1558,12 @@
     "source": "Swap out for a random backup; Draw {{value0}} cards",
     "sourceHash": "cd7c0ed185f49c21197f195e414a49619bbb996ac71036d77f6e0ca19b36c0c9",
     "text": "Tausche gegen ein zufälliges Reservemitglied aus; Ziehe {{value0}} Karten"
+  },
+  "content.card.chimecricket-attack.name": {
+    "reviewed": true,
+    "source": "Resonant Leap",
+    "sourceHash": "6429db13a803d1e502727633a3b89f014823f065035690888ff38735479a4bc5",
+    "text": "Resonanzsprung"
   },
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
@@ -1445,11 +1577,71 @@
     "sourceHash": "7ebcf982d1aa3b09d1415b97a41de14e5db828eab771251f6dc9dc4e4ab47118",
     "text": "Verursache {{value0}} <keyword0>Betäubung</keyword0>sschaden"
   },
+  "content.card.chimecricket-heal.name": {
+    "reviewed": true,
+    "source": "Lullaby Drift",
+    "sourceHash": "b350efb7e9aa218c42af9629180ce76ff56e11bf1a732aa8281bc54ae8f3e412",
+    "text": "Wiegenliedschweben"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "reviewed": true,
+    "source": "Hush Dome",
+    "sourceHash": "45981411b411655859963518d9f2f499fd852a287e4195c077676f752df38253",
+    "text": "Stillekuppel"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "reviewed": true,
+    "source": "Ashen Veil",
+    "sourceHash": "44994188f8994ef8ef1d4719a9532dab6b6cabd6b00d99fa5dff50dc62fd312a",
+    "text": "Aschenschleier"
+  },
+  "content.card.cindernewt-attack.name": {
+    "reviewed": true,
+    "source": "Cinder Lash",
+    "sourceHash": "a0fc5ee98706973a43a95bf55ec213bdf575ba7044532f2ce2ca7db37429da91",
+    "text": "Glutpeitsche"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "reviewed": true,
+    "source": "Ember Breath",
+    "sourceHash": "c0d1b9dc47ad8b32d5bb60ee34e50881d7ec67d3ba6639dbf883f07ab96dc12a",
+    "text": "Glutatem"
+  },
+  "content.card.coralcurl-attack.name": {
+    "reviewed": true,
+    "source": "Reef Jet",
+    "sourceHash": "07933ee332d2c7a58709a76a81d3cd3c003bd797b1eede61b29c6d56a3309b8d",
+    "text": "Riffstrahl"
+  },
+  "content.card.coralcurl-guard.name": {
+    "reviewed": true,
+    "source": "Bubble Ward",
+    "sourceHash": "cd2de444a0c6a74175c3cd8b2af1522755228195ad5768b3269600fa98cb36ac",
+    "text": "Blasenschutz"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "7742191ee8a8754570deb0513ec8a94bda4e3c13a1669442bea7c285cb6e3cd9",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.coralcurl-swap.name": {
+    "reviewed": true,
+    "source": "Coral Spiral",
+    "sourceHash": "2178cfabd598d35cc0217ea545e9845eef77be6d8c65f6ae60d695dbaf90c8b0",
+    "text": "Korallenspirale"
+  },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "99fc16f688341d28abaf4ea5cc44a16a2fe9a23373cdcb22a1b139c8c91447bb",
+    "text": "Sonnenflügelschlag"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "c31a3507572eff145381dd04c7bc25d53d7bfe2fd0ee38ae7c98d15a1ecb0677",
+    "text": "Morgenblüte"
   },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1457,11 +1649,35 @@
     "sourceHash": "f8c0bf3fb0a8d6aafa3c6d4f5bed6baf5d9c51dd4ed3b2654dee0f73c1451929",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "6d46e839b13b53be17fe5f80e416ce632e9caa33df9910823946f79319269c83",
+    "text": "Morgenruf"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "a6850382dcf7e6c04fd4291258aac7e7c7621d3311f5ca7b64bfc047ef795d21",
+    "text": "Kapellenlicht"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "21577858f459ef910446ca8a05e6186a6e27755a6d457c263c9f6644a351e80d",
     "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "1a9cdbc7a7943efe2c8a053759873394c06c7a7088b79fb66b862d113f0142c2",
+    "text": "Stille Wasser"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "d26c19c1fa127138e42d9e9ddf17142f97c95f6ac2cf5049833e7c00652c3798",
+    "text": "Wiesenzuflucht"
   },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -1469,11 +1685,23 @@
     "sourceHash": "a0e373cbb07851bcf5244aaecb588f61d3db75a323d218a963955fc0bc3c9c08",
     "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "ef8b136a0c9b16914007f1f1ccdb4c1ec3a6ae652de64ec2d4ec30e8396d61e7",
+    "text": "Sandsprungsatz"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "c7bdfdf1bed9dc39e9b14a2fa1a9c1f86eaf8b0c411980d0897005106490a6ad",
     "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "a7e954fa60588c599d355c25b3f50a0d49e1acbfa1295866453a989e2d34d40f",
+    "text": "Trugbildschritt"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1487,11 +1715,35 @@
     "sourceHash": "49c3280da5e8912d8ae755f9df91ee4ed1393c6a09187949a3e3698b378cc274",
     "text": "Erhalte {{value0}}% <keyword0>Ausweichen</keyword0> bis zu deinem nächsten Zug; Ziehe {{value1}} Karte"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "9c10656f191aad34aa33bec16f332ee943093d910314219a4df02bd81a55d5a0",
+    "text": "Dünenwirbel"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "7f10818bc98d5c249df0da20980b98d7efc5c1d4a370a3ed4bf70a5c075dc271",
+    "text": "Glutansturm"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "c9dbddbaa88888436f94057c90b1ae34d709b3a84a00c37b23414df0a6d7e260",
+    "text": "Ofenatem"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "7ff8d93905625c4fd691ab0a89c0a91fb6bf4f64825856f56ef1d8cb4f220d5c",
     "text": "Verursache {{value0}} <keyword0>Brand</keyword0>schaden bei allen Gegnern"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "f826a3995cda3d8dfba72b8d3645664f4f221796d82ee4815899eea19044dae4",
+    "text": "Magmatritt"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1499,11 +1751,29 @@
     "sourceHash": "28c6d6d844821b1200c6c07fc890a1d2b59cfb16e71a2fa93d333c638cc21860",
     "text": "Füge allen Gegnern {{value0}} <keyword0>Betäubungs</keyword0>schaden zu"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "72633df94206688e7a62ef726f961395f9e0bed385211994b16b03a61941a30d",
+    "text": "Möglicher Pfad"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "8ca38c738f10220900c0c2c8ca04fb8ae9a1faaee3e6adb96e52b78430d91b8d",
     "text": "Mische deine Hand in dein Deck; Ziehe ebenso viele Karten"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "7578897e06a99b969b926f23e931c73189c3d438b08f27f63a6c2aa896292400",
+    "text": "Dämmerungslanze"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "8704ddcc179b7e593990c7ed32da6fbd4d6d8f7ec40c3e59bbc6f9672804018d",
+    "text": "Wunschtausch"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -1523,6 +1793,12 @@
     "sourceHash": "6802c43071144aff57eb8da0ce8cb599eec1fb3e01aa0f4f1d958d1042b453b3",
     "text": "Stellt {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Verbrauchen</keyword1>"
   },
+  "content.card.food-mana-berries.name": {
+    "reviewed": true,
+    "source": "Mana Berries",
+    "sourceHash": "2b1f1946bb115e32887b1d86529611f66a9abf24dc099f60b95f89a2134ea1aa",
+    "text": "Manabeeren"
+  },
   "content.card.food-mana-berries.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
@@ -1535,11 +1811,29 @@
     "sourceHash": "03a98fb54ea5abbd19eb6effe97a70e883981eebd732f09d9e888becbb7c9add",
     "text": "Alle Verbündeten erhalten {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
   },
+  "content.card.food-trail-bread.name": {
+    "reviewed": true,
+    "source": "Trail Bread",
+    "sourceHash": "24a712325f0f0c12a20303b4dd2c55034db19a236f1d332f7c30c754da88ec4a",
+    "text": "Wanderbrot"
+  },
   "content.card.food-trail-bread.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "d20756e6b139b74a383dadb7cdaf6ab99bed5a9085a9c34b85c797e677c026c2",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.glintstride-attack.name": {
+    "reviewed": true,
+    "source": "Prism Shear",
+    "sourceHash": "f3797402552c7640fcfc941c0f06b0b486c628605674327fed85a49c9ee94dd5",
+    "text": "Prismenschnitt"
+  },
+  "content.card.glintstride-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Run",
+    "sourceHash": "86871695952dc02c8766736cfcf14efa4b2edead2be23123a8d471bd23e2a32f",
+    "text": "Trugbildlauf"
   },
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1553,6 +1847,18 @@
     "sourceHash": "d6d0b93eea30826a00c1a57b07d83593e5dfd0b99cb0244ec20fc90441a87b62",
     "text": "Erhalte {{value0}}% <keyword0>Ausweichen</keyword0> bis zu deinem nächsten Zug; Ziehe {{value1}} Karte"
   },
+  "content.card.glintstride-teamBlind.name": {
+    "reviewed": true,
+    "source": "False Horizon",
+    "sourceHash": "87d1eb5b603a6e403bf32d8fc4ceab7e59dda587681a1a1ba70373356465b26f",
+    "text": "Falscher Horizont"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "reviewed": true,
+    "source": "Drowned Revelation",
+    "sourceHash": "469340250bf43a5389a081cdf3aed5c06d38ab5e25459a48e94ec7927cba110f",
+    "text": "Versunkene Offenbarung"
+  },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1565,11 +1871,29 @@
     "sourceHash": "7170aa5d0fd2a377b950155acd702539b838cb64c1e81593a7e77b322268df39",
     "text": "Ziehe {{value0}} Karte"
   },
+  "content.card.memento-lost-procession.name": {
+    "reviewed": true,
+    "source": "Lost Procession",
+    "sourceHash": "de4f5126b035b93f2cdd019457a3f6fd5c4727a3d4e36779bb12d47aa9c5136b",
+    "text": "Verlorene Prozession"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "49ca4d6a6acdfbc34b1b0de1e9a91b241880ea45191c4c0b65f3c3353d21d3d6",
     "text": "Perle"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "reviewed": true,
+    "source": "Treasury Echo",
+    "sourceHash": "4849e0bf595ca0175b9b448f293ece308ef95772832b5dc90700cbb1e3ee3c0d",
+    "text": "Schatzkammer-Echo"
+  },
+  "content.card.mossguard-attack.name": {
+    "reviewed": true,
+    "source": "Rooted Stomp",
+    "sourceHash": "ea4a14c6dcdaea849ee4a4eff649481b105e6f1b7436f1136299f2eafd088df5",
+    "text": "Verwurzelter Stampfer"
   },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1577,11 +1901,23 @@
     "sourceHash": "b8b8d25309b6b718a631c0d7c1d6f240016f722cf165d70e36482412c02529df",
     "text": "Füge allen Gegnern {{value0}} <keyword0>Betäubungs</keyword0>schaden zu"
   },
+  "content.card.mossguard-guard.name": {
+    "reviewed": true,
+    "source": "Boulder Brace",
+    "sourceHash": "1e7837436203d435d5e83718e34b5170e8f599b5701fd3d9835da6d04da83bac",
+    "text": "Felsstütze"
+  },
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "f14c47906c4513ed67f035d726d53625f3bb9b4ae078d22cd683f52b58859809",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.mossguard-heal.name": {
+    "reviewed": true,
+    "source": "Moss Renewal",
+    "sourceHash": "55faf33962191ec7eb9c3f55a20693424823aa235a24598b95226903c15fd22d",
+    "text": "Mooserneuerung"
   },
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1589,11 +1925,23 @@
     "sourceHash": "a1aa580c34cfd6a61483333802e59e1905f1727cb88bb80a3883322bbda6ecfd",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.card.neradora-bloom-shelter.name": {
+    "reviewed": true,
+    "source": "Bloom Shelter",
+    "sourceHash": "826a85a6239ab42cf99badfcfd2200bdc463b6bb1f9e4394d8dca08f02e3e97d",
+    "text": "Blütenzuflucht"
+  },
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "e3498b036be89eb6f847bd0325e2da4a8f157210f0b60df049db5321a8581925",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "reviewed": true,
+    "source": "Tide Cup",
+    "sourceHash": "04fcfd1b7b4bf2ee756857c0aefc91e9891b1a29b0aee72ef8c2d1bc1f6ca540",
+    "text": "Gezeitenkelch"
   },
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1619,11 +1967,29 @@
     "sourceHash": "5487536b4b0c1f976dacf0aca81ecca9e4e11243f5335b95b771b0d355adccfb",
     "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
   },
+  "content.card.neradora-undertow-knot.name": {
+    "reviewed": true,
+    "source": "Undertow Knot",
+    "sourceHash": "9552672eb2651cefd22aa3c50c51797db7285917e875b027f4a58fb5014cc68e",
+    "text": "Unterströmungsknoten"
+  },
+  "content.card.oathara-never-lost.name": {
+    "reviewed": true,
+    "source": "Never Lost",
+    "sourceHash": "66e4e0681c082221db68ba1d846fc4ab9990e867b6ad501812d9521055f89b2d",
+    "text": "Nie verloren"
+  },
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "cb32a87e7bdafdc6f7599d765a8feb06154b6ba7875563acaaf7731f9c7f5c51",
     "text": "Mische deine Hand in dein Deck; Ziehe ebenso viele Karten"
+  },
+  "content.card.oathara-travelers-ward.name": {
+    "reviewed": true,
+    "source": "Traveler’s Ward",
+    "sourceHash": "34047b8877b2f2b1c48c543ed6f9e396a5b7aeb8fea7ce078a47d2906e0d9f91",
+    "text": "Schutz des Reisenden"
   },
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
@@ -1631,17 +1997,47 @@
     "sourceHash": "60644642fadffe5a5981fec143b6a7324700ec937e42e5bebaa1de2c9644a2b5",
     "text": "<keyword0>Reflektiere den nächsten Angriff</keyword0>"
   },
+  "content.card.oathara-vow-of-return.name": {
+    "reviewed": true,
+    "source": "Vow of Return",
+    "sourceHash": "c910f75f0efbafc614fc524fe1db6cb4b817217eb4ca7f46b331cb2085dc8160",
+    "text": "Gelübde der Rückkehr"
+  },
+  "content.card.orifable-attack.name": {
+    "reviewed": true,
+    "source": "Postal Swarm",
+    "sourceHash": "cd28d0f3d5c13ff112067f9ff083d4ffc6605b2d6bbc8418c415a95ced3720f5",
+    "text": "Postschwarm"
+  },
+  "content.card.orifable-createFood.name": {
+    "reviewed": true,
+    "source": "Care Package",
+    "sourceHash": "b0daea3ca51b475e38f1ce827e9590456c47f9a3899bb2ba16cb87db23a28cfe",
+    "text": "Fürsorgepaket"
+  },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "951052c005aa75e82c60f0148fade4c55ea4daba6fa19aab33f297bc3a0e0dda",
     "text": "Füge deiner Hand {{value0}} <keyword0>Nahrung</keyword0> hinzu"
   },
+  "content.card.orifable-heal.name": {
+    "reviewed": true,
+    "source": "Good Tidings",
+    "sourceHash": "a6fe9bf3d3f778ee5188f26aa57690959decf27a99bf129b7585800d063687b8",
+    "text": "Gute Nachrichten"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "9d268ad910db7ae83817d8f806e884fccb6c51db4eaa6d0bd1bdd2d6b6e26a3d",
     "text": "Stelle dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "reviewed": true,
+    "source": "Polar Reprieve",
+    "sourceHash": "bc16e47c05783357ab59931319f59beb8ff2cd9130df9483a35e60ae5e6804e2",
+    "text": "Polare Atempause"
   },
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -1655,11 +2051,29 @@
     "sourceHash": "ee7c1b8b4b91e6a58d43413869bd5ea8a5ac5d8b7fd1c9024cc7b9116ab3668a",
     "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Frost</keyword1>-Aufbau von Verbündeten"
   },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "reviewed": true,
+    "source": "Sundog Reservoir",
+    "sourceHash": "f81d56dcd59490a8110976212d2034830620cc3508eb9027f2eb57c072a1bcc4",
+    "text": "Nebensonnenreservoir"
+  },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "4a5e45c193492cda0a1adc17fa3b38e3a334386c18ea650a70f702afcd1eb1b7",
     "text": "Erhalte {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "reviewed": true,
+    "source": "Whiteout Waltz",
+    "sourceHash": "e08e303bf05292d5120155d9100ebaa09523c7ab8f7b5cad0d8b0963f273ecd7",
+    "text": "Schneesturmwalzer"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "reviewed": true,
+    "source": "Dazzle Burst",
+    "sourceHash": "7232e7a4447e35ee1c6d5b083079c3ee396d98972ef9bf3803014e27325ee51c",
+    "text": "Blendexplosion"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -1667,11 +2081,23 @@
     "sourceHash": "f4493c8652673e85a987a50bf0e1a7cf9762f7297abe343f6fbdf3b4e1559e2f",
     "text": "Füge einem zufälligen Gegner {{value0}} <keyword0>Licht</keyword0>schaden zu"
   },
+  "content.card.pollenmoth-heal.name": {
+    "reviewed": true,
+    "source": "Bloomwake",
+    "sourceHash": "67a1e94846288133e895c2abb81969f60e68bcbf406b5ae459f7d61b98008146",
+    "text": "Blütenspur"
+  },
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "00d259c23d45a4c04ac4a802d67134909ea6989d28429118aae384e03c4bfae0",
     "text": "Stelle dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "reviewed": true,
+    "source": "Petal Shelter",
+    "sourceHash": "4652e2eaad255da6c4ed03ee30626fb36b8d6c2da178ae2077f1a266db6d77e7",
+    "text": "Blütenzuflucht"
   },
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -1679,11 +2105,23 @@
     "sourceHash": "9dff911c6edfe84f9c79e02a91ab347b789021ab804d0d357d9c3655518de8a9",
     "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
   },
+  "content.card.prismram-attack.name": {
+    "reviewed": true,
+    "source": "Prism Charge",
+    "sourceHash": "6c7891b250a99ebd115b3e9eeb2efe2d0eabdfe7489394e7ddc6791d97c0e14a",
+    "text": "Prismenansturm"
+  },
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "7753bc0a1d6007a54e5c1e4186999b02ac76975b4bd65391d1c63e28df30da07",
     "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu"
+  },
+  "content.card.prismram-guard.name": {
+    "reviewed": true,
+    "source": "Faceted Ward",
+    "sourceHash": "5e5175dc7c96b95b992547dc2869a0516356195f36e3261930b3a82c1f4e6f27",
+    "text": "Facettenschutz"
   },
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
@@ -1691,11 +2129,29 @@
     "sourceHash": "d13fe250bac8565f527598fc1d3b0616b9b90c7baeda01df91d223799d18587e",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflektiere</keyword1> den nächsten schädlichen Statuseffekt"
   },
+  "content.card.prismram-spectrum-lance.name": {
+    "reviewed": true,
+    "source": "Spectrum Lance",
+    "sourceHash": "2306b35c2f45430eef2e22d65372d0932b332e3716823101276bc750cd712a2f",
+    "text": "Spektrumlanze"
+  },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "f3976bbe0ac7c3f458f6b048660bdd70aec812269ac3182f4171097ca8a41a88",
     "text": "Füge {{value0}} <keyword0>Licht</keyword0>schaden zu; <keyword1>Entferne</keyword1> {{value1}} Effekt vom Ziel"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "reviewed": true,
+    "source": "Ember Harvest",
+    "sourceHash": "27e2543fbd0a7bcf70deb1d2473e98a4412cd4ee7e58eeba1186da765e418b90",
+    "text": "Gluternte"
+  },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "22c61176b002275c2f82230dcea7c8135309d5db3ad5e14e096e173acc35d2ad",
+    "text": "Festexplosion"
   },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
@@ -1703,11 +2159,53 @@
     "sourceHash": "2111454a4539b380e72d509c5a9a2b2a752014adceb20620ad2a5a8d5ca5a9b0",
     "text": "Verursache {{value0}} <keyword0>Brand</keyword0>schaden bei allen Gegnern"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "76469d06574dfa888e71f505d60f15ef34397ccbeb39c44062bead1f156bc7ca",
+    "text": "Funkenköder"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "9d83848a9596e611dcd25f266b9e110aa19a7e55b474da211397d721fafd7807",
+    "text": "Schilfansturm"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "374dcb3b9359b2adc54d9c4e8a69080d3a9c91eb63382bbcc6dfe4e541ce2c47",
+    "text": "Schilfzuflucht"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "eff03f569069b21a2f1a3e9e5979e27551a2086d6959e64432bd2e5369599e8c",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; Erhalte {{value1}} <keyword1>Dornen</keyword1>"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "ee5ceb0db8122cd57462d3f5f4bac1c69d30701d9f62c847bd225c3d2cb84310",
+    "text": "Heilquelle"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "083dda61ac83c388648dddd21e149e08c4be016a4f44257da05e885b8ede03a1",
+    "text": "Traumdoppel"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "288dbcde69e4e6be005c2fa6ca52528e239f98863fa4f2ad6b99c7a87888a111",
+    "text": "Albtraumernte"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "bcd63498a3d861b90dc8940882b4cc993a3ef2c515a65df9df176f70b5100097",
+    "text": "Waches Wunder"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1721,11 +2219,41 @@
     "sourceHash": "cbef235e68b9e21b81b1f96178443b281da359f731d02566bc629859f5fbfe32",
     "text": "Ziehe {{value0}} Karte"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "93f556f049dc265b0b2d2bff3bd911cea4e982dc381cda4f4da14fc3c25eef44",
+    "text": "Ringklatschen"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "0a3a679d93ce582d3529768ca5f5d24458cfab406fa40e187bde1d45a4736692",
     "text": "Verursache {{value0}} <keyword0>Betäubung</keyword0>sschaden"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "da4ad48212b35782a183952c4927d79e608542a40a236ccc643ab9dc77d18aaa",
+    "text": "Harmonischer Satz"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "84be2df6db0e435940059523b3dbce7ebb1d544061e64d6c82390c82f56d0ae8",
+    "text": "Setzlingskreis"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "6fc9080a38170e69ea81eb7378af88baf64ab303d7af56c90a4d124419e02852",
+    "text": "Geliehener Glanz"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "5d535567496d1590a699ba5a531ccffc1fc6ae398fbc4b0c2599fea3e604af01",
+    "text": "Spielraum der Möglichkeiten"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1738,6 +2266,24 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "06a3eb42e449d752493b96188f808af4f42bccdeb5ca555cb5b44225ae13578e",
     "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "94f236b0a556935c5a0a310f72ec272265928064b2ed3e420883d7e6a0be8f91",
+    "text": "Ungeschriebenes Ende"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "9bc5558972215cab37dcfacc9e962820dbd35e0a090b8cbc994000714390bb57",
+    "text": "Kühlefront"
+  },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "6816043833ad3173150b63152ae252c7397c87c4a7962535ab410e94401bbe66",
+    "text": "Mittagsblüte"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1763,6 +2309,24 @@
     "sourceHash": "02f07033c252f2388acf6f696f219a43044ed4ac471bac50562ac2cc1744413b",
     "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "9edc19acccb470d51ec6a26aeaf8e802d0035879993574ae46b8a6c9e7593f07",
+    "text": "Mittagswacht"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "852faeec0adb8868ca7a78eb1b70f1aa457f0cd2b5849e600a263f507caf9108",
+    "text": "Wolkenschritt"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "223c31c8bfbf1a23b4300b91e40fb737d07aa0343dc3803a6271986a7aa0f17e",
+    "text": "Ferner Horizont"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1774,6 +2338,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "56391f8e54733b552d827ccdc357884ea7b0b294c865a694c673de93b3432b99",
     "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "ebc24f13aa771e29d510850b970aaf7802a89b9e1c76f8857e43c6f331ff60e0",
+    "text": "Himmelshirte"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "aae3283a271006386d91ae9f0b1abf901d7d631452e7b14add64c3f3fd9fda00",
+    "text": "Flutramme"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "24da3cb30752408c9eb1f3d56cbecc0ac8249d1d97dd5d99de063e73e1a95c28",
+    "text": "Spiralrückkehr"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "0187e22e03a0454fc0ac766ebe53a8df559ccdae1d501ca58184905c7541afb4",
+    "text": "Siphonsprung"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -1787,11 +2375,23 @@
     "sourceHash": "61c429aa7f733e9511251c52040ee944c9dbd93cdacd1e714df4c64539e2f413",
     "text": "Tausche gegen ein zufälliges Reservemitglied aus; Ziehe {{value0}} Karte"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "d91995cc4caaaf64a0ebd52171c5f97caddfae64ae8612eb6156d94b675624aa",
+    "text": "Schilfreservoir"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "31360abb54198a9131d51c692dd2b3f1295bede6da9a9d285ac13dfb8ade559e",
     "text": "Erhalte {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "90ccc4655db3384f2bd001cb2d4bd4035587b33338ad883cdb0762f39a439654",
+    "text": "Taupfad"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -1805,17 +2405,53 @@
     "sourceHash": "6852e323a692b9e5996a6874ba23193670e70ecb6626b599c74394908392859b",
     "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Frost</keyword1>-Aufbau von Verbündeten"
   },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "844421f9e578518e065a89956e87ed6a8934ba45c2bf9da5ec1ea270826ef5ee",
+    "text": "Wasser erinnert sich"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "b5caa068add01640c0bf807173baa0664a28348149e15bbe1aab9ab96b83e1ea",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.card.tournelle-attack.name": {
+    "reviewed": true,
+    "source": "Valiant Challenge",
+    "sourceHash": "36e09fc91809391fc6f9f262e9b48411977688be4585b5194c605a4ce707759a",
+    "text": "Tapfere Herausforderung"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "reviewed": true,
+    "source": "Safe Passage",
+    "sourceHash": "bafbe040117458cf58d14bda0b5d91f9a6f255145677e93113f68719441c683c",
+    "text": "Sicherer Durchgang"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "reviewed": true,
+    "source": "Kindled Courage",
+    "sourceHash": "94d8c99e15257c0336e51de8b8f5fd8cc7516b11833b45c045b7b7e96473b8c7",
+    "text": "Entfachter Mut"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "reviewed": true,
+    "source": "Ember Pirouette",
+    "sourceHash": "5dd3febd2fe146172e8a09e15d14ff34f3710ebea32c6d9ac7dca7e158f8ff98",
+    "text": "Glutpirouette"
+  },
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "9edb4455cbe9063d6abf2c3cbfa9788e8122ae82ea273a8c4e4fa6c204f5b4c5",
     "text": "Verursache {{value0}} <keyword0>Brand</keyword0>schaden bei allen Gegnern"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "reviewed": true,
+    "source": "Thermal Rise",
+    "sourceHash": "c1f94fe7a13374b4cdeb17a1e9784edb0df520c82b8d0242bcb400a04b3c72a5",
+    "text": "Wärmeaufstieg"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1840,6 +2476,30 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "2c755737f441d49d87c32b30c11aba45b76cca607aa3b8355d7b80eb01d73435",
     "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "reviewed": true,
+    "source": "Saffron Screen",
+    "sourceHash": "eeec865b4968f4c27a4d611a30a3217b4fa8385b63fea20845c82cb0565cc0c4",
+    "text": "Safranschirm"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "reviewed": true,
+    "source": "Forgotten Junction",
+    "sourceHash": "fb981d3a7dc529478b21206a93a65538d842be0ee3bf1aed3b171d815f6ea4c4",
+    "text": "Vergessener Knotenpunkt"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "reviewed": true,
+    "source": "Lantern Fare",
+    "sourceHash": "bd4d8e638f40d46a90abe39cbb4717eefd036886e892485d56489c23cf7f9f09",
+    "text": "Laternenfahrpreis"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "reviewed": true,
+    "source": "Left Luggage",
+    "sourceHash": "9a8e8887cce2408b04fb8b98349d82b7b6ff738bef859df81e2056fdb32612dd",
+    "text": "Aufbewahrtes Gepäck"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -2225,6 +2885,12 @@
     "sourceHash": "a5db157930d4196b9c2631088f33b4fa95b07fcd1157220dbed9bbb734ff10c8",
     "text": "Wasser"
   },
+  "content.species.aerostat.name": {
+    "reviewed": true,
+    "source": "Aerostat",
+    "sourceHash": "5a65008603e31528dbb663f8dcfb8ea7f78d0b59aafcb6de1033cea5fd290d02",
+    "text": "Aerostat"
+  },
   "content.species.aerostat.passive.0.rule": {
     "reviewed": true,
     "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
@@ -2272,6 +2938,12 @@
     "source": "Well Provisioned",
     "sourceHash": "6571b95200b72bbb6faaa42e8eadfed0cb0adf3212abd433b6ac29de6614ac02",
     "text": "Gut ausgerüstet"
+  },
+  "content.species.almanelle.name": {
+    "reviewed": true,
+    "source": "Almanelle",
+    "sourceHash": "87137eca4bec5ef7a8a604aa81ebd5eddc77d6f242b2a2430217912adb5030bb",
+    "text": "Almanelle"
   },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
@@ -2321,6 +2993,12 @@
     "sourceHash": "4d1e0e094464299d7b5c9944b536c6b3c50c35f32497e1921a2cceabb167f529",
     "text": "Gefallenes Laub"
   },
+  "content.species.alpenglen.name": {
+    "reviewed": true,
+    "source": "Alpenglen",
+    "sourceHash": "3eeda588d5cc38ee6f285b183ddf047e40673f8c18897c91820c94c2bad1c40f",
+    "text": "Alpenglen"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -2368,6 +3046,12 @@
     "source": "Last Warmth",
     "sourceHash": "7c91458a1f187d4c304cd39b99a232bf8ecd6aa60f151b76f0d0d38811a9c78e",
     "text": "Letzte Wärme"
+  },
+  "content.species.arabesca.name": {
+    "reviewed": true,
+    "source": "Arabesca",
+    "sourceHash": "3a801b6855fca48ddb46edc3439bdb582e5a52b53b18629a9cae060be9f721bf",
+    "text": "Arabesca"
   },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
@@ -2417,6 +3101,12 @@
     "sourceHash": "af6dc135f9bfe2a7fb8c2f5080385c8119139716548adbedc6cba71f1aa89178",
     "text": "Blütenspur"
   },
+  "content.species.bloomquail.name": {
+    "reviewed": true,
+    "source": "Bloomquail",
+    "sourceHash": "d4dff19ee5321120de2c8af42c0ab660ee05280b4bb95538227190ffc1443ae9",
+    "text": "Bloomquail"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2464,6 +3154,12 @@
     "source": "Full Bloom",
     "sourceHash": "2643e2240c8b4c6dd8f052971c5a484b09e846b9aaf2dae02585d703418391ca",
     "text": "Volle Blüte"
+  },
+  "content.species.cadenza.name": {
+    "reviewed": true,
+    "source": "Cadenza",
+    "sourceHash": "408c4f89da6db666906735f206b2e49a10c557e2166a8f3bc414ad6dcc27a2a6",
+    "text": "Cadenza"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
@@ -2513,6 +3209,12 @@
     "sourceHash": "990f5d6e608a8b3c9b3e84a257ff0e91060f4a81c3b0ab65672d1c5b343fa8de",
     "text": "Lebendiger Chor"
   },
+  "content.species.captoad.name": {
+    "reviewed": true,
+    "source": "Captoad",
+    "sourceHash": "2ef9bd887df940bf66a155c163fe9ff5b1f9c759b9ca216359a9898d74bc9979",
+    "text": "Captoad"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2560,6 +3262,12 @@
     "source": "Sporecoat",
     "sourceHash": "0f8b8f34a8b127faa858ea6969253be828e4d49c9101b9f98ea5a39a27bf8dd4",
     "text": "Sporenmantel"
+  },
+  "content.species.chimecricket.name": {
+    "reviewed": true,
+    "source": "Chimecricket",
+    "sourceHash": "77b5720e1f223554976b1d4604df21d8344296f6f7adfceeee74ff63655dfc5a",
+    "text": "Chimecricket"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2609,6 +3317,12 @@
     "sourceHash": "8d4a358c4b50f134e0b43d2dc1c67c18df65729d52701ac99ca5cb900545f870",
     "text": "Zugabe"
   },
+  "content.species.cindernewt.name": {
+    "reviewed": true,
+    "source": "Cindernewt",
+    "sourceHash": "3382fe94ffdf4acc90263b93ff001ea98c5ba31dcb249895c15c047894f2c57f",
+    "text": "Cindernewt"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2656,6 +3370,12 @@
     "source": "Cinderstep",
     "sourceHash": "fe40fa226f88256fef4b358e34c80d3fd57f92b8b0926584b7036424f1e87ced",
     "text": "Glutschritt"
+  },
+  "content.species.coralcurl.name": {
+    "reviewed": true,
+    "source": "Coralcurl",
+    "sourceHash": "92e9bc5fc24724956759f8b5288cc16d33e689f141109fc301a7e02f09c09956",
+    "text": "Coralcurl"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2705,6 +3425,12 @@
     "sourceHash": "7b4c1c78128bb500f931f654a716c26e3aec73bd5b7261872b19b6462abd9fdc",
     "text": "Blasenplatzer"
   },
+  "content.species.dawncall.name": {
+    "reviewed": true,
+    "source": "Dawncall",
+    "sourceHash": "0f0646e5585a85b0d9f0f033c170e4aeeca63dbe7cda255fbdba4abafbffff12",
+    "text": "Dawncall"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2753,6 +3479,12 @@
     "sourceHash": "1b717339a94fdfcf125b0ff391a8cc41a12ae4f088da811ae66f10697ab76633",
     "text": "Früher Vogel"
   },
+  "content.species.dulcera.name": {
+    "reviewed": true,
+    "source": "Dulcera",
+    "sourceHash": "f524cf31a8a98dd34551e31b27302aa2435bdc8bd9d0e20b0ad6b6437e9208ae",
+    "text": "Dulcera"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -2788,6 +3520,24 @@
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
     "sourceHash": "a54d79b16e5ffc27a3dd861c3df04a2c8d41223d8733378bd1dd7bab0b2dd950",
     "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "37610e78f18443200dce169373fad0cc669f58e8ae44df9de909998f909a776e",
+    "text": "Das sanfte Heiligtum"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "1e73d2396cfb0104c676cbed00dda251d4e68080766821585babe81cd0bc092f",
+    "text": "Sanfter Übergang"
+  },
+  "content.species.dunefox.name": {
+    "reviewed": true,
+    "source": "Dunefox",
+    "sourceHash": "6eb58f1ca9ff2cf8e7cfb37457d2963de2649bdd8cb9e3a45475e6d44b9a47a7",
+    "text": "Dunefox"
   },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
@@ -2825,11 +3575,23 @@
     "sourceHash": "7534f32d1875c05ab189d065e53cdd7df9e9121965cee879755bd4ed22ed9f6b",
     "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
   },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "ac5ec855de4484bd449df964692573925620e07eb0a95c24b25317c40b746377",
+    "text": "Die wandelnde Fata Morgana"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "300921460f57a2a3444c2b9690f46436dda8e38166b1cceafbbd124fb66affaf",
     "text": "Wandernde Sande"
+  },
+  "content.species.emberback.name": {
+    "reviewed": true,
+    "source": "Emberback",
+    "sourceHash": "b4af53de70559ca0df7b49f771b8a240a661cba503659770a4a8159121322e79",
+    "text": "Emberback"
   },
   "content.species.emberback.passive.0.rule": {
     "reviewed": true,
@@ -2867,6 +3629,24 @@
     "sourceHash": "d442d9412116ac1e92a0d9b7e8b08611ca2ad1d17a8369885f97f4ca36e2583d",
     "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "190aa8f949be58bf19ec122a631e4b23c3979f9af62b9c2087a55de14af18312",
+    "text": "Der gedämpfte Ofen"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "cae331ae9a820f23ad5880988356714d574ee3f7bdd1ffb6ff684399fe12272b",
+    "text": "Geschmolzener Panzer"
+  },
+  "content.species.euphera.name": {
+    "reviewed": true,
+    "source": "Euphera",
+    "sourceHash": "df87bb20ac96b1e9c41d1c37bc42a9ed107171a4e792ad649acddb8c229b19ff",
+    "text": "Euphera"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2902,6 +3682,24 @@
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
     "sourceHash": "46d85ad83d4d7e17ba17c52e45253e76b2cc9a32c48ee64a21fa893940121805",
     "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "91f5a679813ee233c84a1d389b68a9bd0c6b1370849c380e3862ec1de148d2c8",
+    "text": "Ein Wunsch hebt ab"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "5b3f470603c2e2e1cf43e8abf1e059f3b551dae70adb4411075774e8850d30d5",
+    "text": "Gutes Glück"
+  },
+  "content.species.glintstride.name": {
+    "reviewed": true,
+    "source": "Glintstride",
+    "sourceHash": "f9f7c75553c0061953a654647eb2b7986bb7d90b46abf996dd83e3c28e7a00a0",
+    "text": "Glintstride"
   },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
@@ -2939,6 +3737,24 @@
     "sourceHash": "851e55955538880560f6827f7ac87631a1cff9f168dc5fff8bf5a0ac0aa494b2",
     "text": "Glintstrides Angriffe verursachen bei <keyword1>geblendeten</keyword1> Gegnern zusätzlich {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
   },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "d5c6ca10bb9d67e8ed960c883b80b4f865e934a47341834294502dfeb770c189",
+    "text": "Ein Schritt jenseits des Schimmers"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "da29f0d686584d03764cdf787b04670a7ef6a46cfce1d9e5eba90625199458d9",
+    "text": "Auf dem falschen Fuß"
+  },
+  "content.species.memento.name": {
+    "reviewed": true,
+    "source": "Memento",
+    "sourceHash": "d257bce3c5ffe0bc68f207f9bdc89763d581f09ada8c87ee7644dcc83379b873",
+    "text": "Memento"
+  },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
     "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
@@ -2974,6 +3790,24 @@
     "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
     "sourceHash": "e1c068b535d8d7d1200cfb2442acbf2e2a3b61e4ef07f8c70689e41126041189",
     "text": "Jedes Mal, wenn du eine Karte spielst, greift ein Echo für {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> an"
+  },
+  "content.species.memento.title": {
+    "reviewed": true,
+    "source": "The palace that remembers",
+    "sourceHash": "da8eebbda8fdce9dc92af18cbae34d1f17034d91e16028f577ab49c2f6247a3c",
+    "text": "Der Palast, der sich erinnert"
+  },
+  "content.species.memento.trait": {
+    "reviewed": true,
+    "source": "The Court Remembers",
+    "sourceHash": "ec2f58335662d696cf9205444072aa11bb98330631e75394334819019bbd8572",
+    "text": "Der Hof erinnert sich"
+  },
+  "content.species.mossguard.name": {
+    "reviewed": true,
+    "source": "Mossguard",
+    "sourceHash": "71071de1c429c801c536d0c0c7aa9fd13384cd43fc427111e18154d31d67b4aa",
+    "text": "Mossguard"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
@@ -3011,11 +3845,23 @@
     "sourceHash": "0844c7be118e49763c4caeb9b3b9ca2cb2081ed08d168a7d515f03f16e614b91",
     "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
   },
+  "content.species.mossguard.title": {
+    "reviewed": true,
+    "source": "The gentle guardian",
+    "sourceHash": "f94e3c0cc01d4b6daafffef2b7ddb0291ba991e1dc427f440049712bca7fc076",
+    "text": "Der sanfte Wächter"
+  },
   "content.species.mossguard.trait": {
     "reviewed": true,
     "source": "Overgrowth",
     "sourceHash": "83693b32d99ead35306a50fa4cf9c0102172d450340e7cedc70d113243890ba6",
     "text": "Wildwuchs"
+  },
+  "content.species.neradora.name": {
+    "reviewed": true,
+    "source": "Neradora",
+    "sourceHash": "7420a11776bf6230b26243887aa900dbc3e2ccba63cc3e84ad3ac42240374121",
+    "text": "Neradora"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
@@ -3053,6 +3899,24 @@
     "sourceHash": "9d0e3708cc87d94088b36a0d0b9d34349ac1cec9995895109583820597a44371",
     "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.species.neradora.title": {
+    "reviewed": true,
+    "source": "The living tide flower",
+    "sourceHash": "586fda0c9d564751d3c78b7c2e5d088d7874c5f56ed5d64dfe97b06b0ac1d79c",
+    "text": "Die lebendige Gezeitenblume"
+  },
+  "content.species.neradora.trait": {
+    "reviewed": true,
+    "source": "Tidal Regeneration",
+    "sourceHash": "cda1943ef4fcf68a3c7bb391c9e8926d91516bd859640b3198f01c04cbc4f91b",
+    "text": "Gezeitenregeneration"
+  },
+  "content.species.oathara.name": {
+    "reviewed": true,
+    "source": "Oathara",
+    "sourceHash": "7e87794c6b626954b3683c16ae9b6b0ef56ff2f9e611ebccaf8a7f2a168dfc9e",
+    "text": "Oathara"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
@@ -3089,11 +3953,23 @@
     "sourceHash": "9104cf77c8ab43e47d3b6207195001ac1de788961ef87163a1f42dc157d140f5",
     "text": "Oathara kann pro Zug {{value0}} Karten kampfunfähiger Verbündeter spielen"
   },
+  "content.species.oathara.title": {
+    "reviewed": true,
+    "source": "The keeper of unfinished journeys",
+    "sourceHash": "f38c5380b498a8fb94705b5d2dee565e44f8167de270e97d57f56c8c297223c9",
+    "text": "Der Hüter unvollendeter Reisen"
+  },
   "content.species.oathara.trait": {
     "reviewed": true,
     "source": "Unfinished Journey",
     "sourceHash": "37392bd985abd09715272ff2ced4b21e33c6465fa261a4a63be1e41761fa4a3c",
     "text": "Unvollendete Reise"
+  },
+  "content.species.orifable.name": {
+    "reviewed": true,
+    "source": "Orifable",
+    "sourceHash": "a168fe8228188718bc429f04f08fa7151f4f0b30c2a9e91855f15e725f557e9a",
+    "text": "Orifable"
   },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
@@ -3131,6 +4007,24 @@
     "sourceHash": "26266407137cd73769c643e834b4d2aa1142c0d3a947624830303d8882b57f4f",
     "text": "Ziehe pro Zug eine zusätzliche Karte"
   },
+  "content.species.orifable.title": {
+    "reviewed": true,
+    "source": "The bearer of good tidings",
+    "sourceHash": "d1ef843237e59db5efb7560814a460c17794e95cf57a1722c8dd39d85354f0b2",
+    "text": "Der Überbringer guter Nachrichten"
+  },
+  "content.species.orifable.trait": {
+    "reviewed": true,
+    "source": "Express Delivery",
+    "sourceHash": "c47ff9cd84452ae6415c17c9a36c1d1351b91461c15c87e3c0d795153c7dd250",
+    "text": "Expresslieferung"
+  },
+  "content.species.parhelion.name": {
+    "reviewed": true,
+    "source": "Parhelion",
+    "sourceHash": "4b956bc561c3ff26101acc331ff70c9012c3afe27c303ced689f33edd80f0704",
+    "text": "Parhelion"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3166,6 +4060,24 @@
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
     "sourceHash": "2793ec042454921678923c01aa4ddd8568855bf9a4d69117bccd5d59f9eb9c97",
     "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Frost</keyword1>-Aufbau stellt {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
+  },
+  "content.species.parhelion.title": {
+    "reviewed": true,
+    "source": "The sun upon the snow",
+    "sourceHash": "03aa064a15fa685285a9bf50c505a2cdd9b13e96a75bc07547b64ed86ca97ca4",
+    "text": "Die Sonne auf dem Schnee"
+  },
+  "content.species.parhelion.trait": {
+    "reviewed": true,
+    "source": "Sunthaw",
+    "sourceHash": "7003c6895742451fa65a93a803c9a662dafd58e08fc69bd9ead84549a159b006",
+    "text": "Sonnentau"
+  },
+  "content.species.pollenmoth.name": {
+    "reviewed": true,
+    "source": "Pollenmoth",
+    "sourceHash": "fe5ebc6acc76e6f29832f0bd84c610163fcec477618106c72f5d50de64f6a0db",
+    "text": "Pollenmoth"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
@@ -3203,6 +4115,24 @@
     "sourceHash": "509f1d6be1565a324f23da290ad827031a0ea0994e380459fef8bf6d160ec20c",
     "text": "Schaden vom Typ <keyword0>Licht</keyword0> und Wiederherstellung von <keyword1>Gesundheit</keyword1> springen zweimal weiter"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "901d7a8845ed177131bcfc783ad49357983c0f168ddac8c26ef796e464749235",
+    "text": "Eine goldene Spur aus Blumen"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "1b5790c1cabb8ffbfca04ae32acae08b8f4b45382b4612a9574f940d9bcb3cac",
+    "text": "Fremdbestäubung"
+  },
+  "content.species.prismram.name": {
+    "reviewed": true,
+    "source": "Prismram",
+    "sourceHash": "08fc92d12bfb1af8d919ec05e8279c0a554927a45cf1858dc40cb2ae9211b4b7",
+    "text": "Prismram"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3238,6 +4168,24 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "4d18e7ce1df62e313bb45e71a6480d8f7743d03fcbbac222351842c78635b435",
     "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "98d8e87157b078125f0ab4440aaf3c322ddd2a0ca2715ddd10d76757e52e8410",
+    "text": "Der Kristallwächter"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "b7442d984f1b5dfb2327cbfcdf80e943b0f4b118c8061370f6f5d218412b09db",
+    "text": "Lichtbrechung"
+  },
+  "content.species.pyrella.name": {
+    "reviewed": true,
+    "source": "Pyrella",
+    "sourceHash": "12a003cefe2beaf393724e3f11369e35d305da0817ce537f4d51132e87618082",
+    "text": "Pyrella"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3275,6 +4223,24 @@
     "sourceHash": "4e681f7db31067faf2fc230927750c42535ed2828cac17fbdd66256e5957920c",
     "text": "Nach dem Besiegen eines <keyword0>brennenden</keyword0> Gegners verteile seinen verbleibenden <keyword1>Brand</keyword1> auf andere Gegner"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "7ed05115cbadfc5ac36820f26d19cc41fd88d502ac039a3b9ff5827f4a9ac92d",
+    "text": "Der Funke des Festes"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "90677f1a1f48b553ce9e0ac0b96da89b3c22dd1f09566cd92a972fd306455b4f",
+    "text": "Weitergegebene Flamme"
+  },
+  "content.species.reedstag.name": {
+    "reviewed": true,
+    "source": "Reedstag",
+    "sourceHash": "58102986940ad109a70812b25536aea369e01c389aca4b009c7024b7744181ea",
+    "text": "Reedstag"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3310,6 +4276,24 @@
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
     "sourceHash": "7bcf3a91eac81633c4df7ee4aa38ba61e08dbc430d0e3655357c99a09a8b86a7",
     "text": "<keyword0>Block</keyword0> und <keyword1>Dornen</keyword1> werden mit Verbündeten geteilt"
+  },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "9e5656dfea55568e0a62532c8badd8102c8593d95de4b965f628e782cca0a509",
+    "text": "Das lebendige Schilfbett"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "d5aa84ad9151763789a2c6915785a6847e08446bfd8a76b765a14437999b4ca2",
+    "text": "Schilfwacht"
+  },
+  "content.species.reverie.name": {
+    "reviewed": true,
+    "source": "Reverie",
+    "sourceHash": "1d42aec7b907b9641dbba8161009d374bfa768d526d286dc90514b85a773c28d",
+    "text": "Reverie"
   },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
@@ -3347,6 +4331,24 @@
     "sourceHash": "be5cefcbb0084277233398b2b99c41816c3af9838a8135a3e1da44de915c4def",
     "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "0b01a22ef4c1d55af280e255e3920ef84dbbc1b8d1013545b6a38d77c71e6bc7",
+    "text": "Das Heiligtum der Träume"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "7c02c5a4ac3b705e2bdb75b4dae5bcd25abf1e0f76027ca1b9be12bac10498e4",
+    "text": "Ohne Eile"
+  },
+  "content.species.ringpalm.name": {
+    "reviewed": true,
+    "source": "Ringpalm",
+    "sourceHash": "c5c698b5479c7c1a457ea9d26313e4b48531a9af9bcd88ec6aea611f615d753c",
+    "text": "Ringpalm"
+  },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
@@ -3382,6 +4384,24 @@
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "37174bd770bff62eb65af45b2fe79d9084023a63f215e32831e8af9e70299684",
     "text": "Ringpalms <keyword0>Betäubungs</keyword0>schaden hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.ringpalm.title": {
+    "reviewed": true,
+    "source": "The stone-circle guardian",
+    "sourceHash": "8bb10dd3720f1d2a2f9a81fe8be4f7239356de812d4dccdbfe6fb608a05cb1ba",
+    "text": "Der Wächter des Steinkreises"
+  },
+  "content.species.ringpalm.trait": {
+    "reviewed": true,
+    "source": "Resonance",
+    "sourceHash": "80d1d52c60e6163aaf31ca52bc6f8f3391ca62c590bbae5e213f02bda6c9f60e",
+    "text": "Resonanz"
+  },
+  "content.species.rookhaven.name": {
+    "reviewed": true,
+    "source": "Rookhaven",
+    "sourceHash": "c236fb587fe891a0b6c2add260a3f499adc055b78b8c35e030a266e9dd588f76",
+    "text": "Rookhaven"
   },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
@@ -3419,6 +4439,24 @@
     "sourceHash": "bf7097617dbab0e4da6911950665ea10512b8a12434bb245f1998d7310512746",
     "text": "Das Ziehen einer Karte kopiert sie"
   },
+  "content.species.rookhaven.title": {
+    "reviewed": true,
+    "source": "The keeper of forgotten stories",
+    "sourceHash": "b70acd9258c0e76ad975dc9cd40dd8febc0c70d3f3e714351be3a1afd0b9c361",
+    "text": "Der Hüter vergessener Geschichten"
+  },
+  "content.species.rookhaven.trait": {
+    "reviewed": true,
+    "source": "Well Read",
+    "sourceHash": "ad5e4a0ac8d69c091cfac2e148ee8c227f6bce3d40fe8019a84340946eb66955",
+    "text": "Belesen"
+  },
+  "content.species.shadebrim.name": {
+    "reviewed": true,
+    "source": "Shadebrim",
+    "sourceHash": "e565d2124519b49e1060d1721d920e6e3bb3ab3b74b830fa51a83cad13dd1a09",
+    "text": "Shadebrim"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -3454,6 +4492,24 @@
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
     "sourceHash": "60f88cab68e6979256d9ed86a89fddfa42b610f62feddcebd61cab3644a93259",
     "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.species.shadebrim.title": {
+    "reviewed": true,
+    "source": "The cool refuge",
+    "sourceHash": "45ae400a6e08249c4dc2e67178139feede49a8e872497591998b26dafe6696cb",
+    "text": "Die kühle Zuflucht"
+  },
+  "content.species.shadebrim.trait": {
+    "reviewed": true,
+    "source": "Cool Refuge",
+    "sourceHash": "d14d92ffdd405f3e24b30f322d09db93c880146b8738b9596ab322687240e13d",
+    "text": "Kühle Zuflucht"
+  },
+  "content.species.skybex.name": {
+    "reviewed": true,
+    "source": "Skybex",
+    "sourceHash": "1610128c1ce9bee5f928525d0b5b0233448daeb5f2d598dd87643140888de74a",
+    "text": "Skybex"
   },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
@@ -3491,6 +4547,24 @@
     "sourceHash": "8f5e630e22c23361ad739f1a4c47f1544bfa873c9fd18eadcff6ed600de703db",
     "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
   },
+  "content.species.skybex.title": {
+    "reviewed": true,
+    "source": "The mountain guide",
+    "sourceHash": "16538611fd1a6189b6b05b8a23d731adc9a9c81a6cd8d20787ff388ff0929c25",
+    "text": "Der Bergführer"
+  },
+  "content.species.skybex.trait": {
+    "reviewed": true,
+    "source": "Mountain Guide",
+    "sourceHash": "5df9c4766b0e4d4b1afde5f1ddde0b24312a8bf8a816b38dfe7ccd8353cc4cad",
+    "text": "Bergführer"
+  },
+  "content.species.sternshell.name": {
+    "reviewed": true,
+    "source": "Sternshell",
+    "sourceHash": "6eb5f48e63d4b8fe5d097b958ef9bdb0782998c2efb12eeeb743825ffa10d904",
+    "text": "Sternshell"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
@@ -3526,6 +4600,24 @@
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "71e9f7b8624c238eab1a6d0dfb8bc657fdbc1fbf63ec1f806723fb10fbd69d44",
     "text": "Sternshell beginnt den Kampf mit {{value0}} <keyword0>Rüstung</keyword0>"
+  },
+  "content.species.sternshell.title": {
+    "reviewed": true,
+    "source": "The steadfast voyager",
+    "sourceHash": "2e80f10aaa5ccbc58703b54a8ee0a5dbd5dba0a6f93274d47d3242c0d10d5826",
+    "text": "Der standhafte Reisende"
+  },
+  "content.species.sternshell.trait": {
+    "reviewed": true,
+    "source": "Shelter",
+    "sourceHash": "8d2062e072a0dc9005fc5bb6ce3ccf895cc264afd903ac60c86e55cb00b662e4",
+    "text": "Schutz"
+  },
+  "content.species.stillara.name": {
+    "reviewed": true,
+    "source": "Stillara",
+    "sourceHash": "74e005bfae189ba0d01dc0bba594cac5506d2018c5a8a644b7a132b7ff0def53",
+    "text": "Stillara"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
@@ -3563,6 +4655,24 @@
     "sourceHash": "064f7b8ea4b15b361c21401b975cdea0e6f8109d23b6f67833abebf7b093de13",
     "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
   },
+  "content.species.stillara.title": {
+    "reviewed": true,
+    "source": "The keeper of summer",
+    "sourceHash": "e3a1b4c79e9819a895b953e1555c6bcb8f7dbfc107b7cca69378cd059032a390",
+    "text": "Die Hüterin des Sommers"
+  },
+  "content.species.stillara.trait": {
+    "reviewed": true,
+    "source": "First Thaw",
+    "sourceHash": "9e5ce9a136cada3fe6108ad935cd75bc70d38da5e779e4631b2c96fa8b8273a3",
+    "text": "Erstes Tauwetter"
+  },
+  "content.species.tournelle.name": {
+    "reviewed": true,
+    "source": "Tournelle",
+    "sourceHash": "fee684594c3a783b78d2077acbea6fe671528f5ab691cd2bc74b08957be3db00",
+    "text": "Tournelle"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3598,6 +4708,24 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "3acc7086bc04796566fd217d782ef72b2818d5d6beeb081054bb48a94391569d",
     "text": "{{value0}}% Chance, Angriffe gegen einen stärker verletzten Verbündeten abzufangen"
+  },
+  "content.species.tournelle.title": {
+    "reviewed": true,
+    "source": "The little gallant",
+    "sourceHash": "f27ac6c8dfe662881743400180e19d201c74714e431b28bdef450d2b9480565d",
+    "text": "Der kleine Galante"
+  },
+  "content.species.tournelle.trait": {
+    "reviewed": true,
+    "source": "Gallantry",
+    "sourceHash": "75a394ce451f0bc2603ef720ceddb4af34ab90abafbb45feb2bd66aa4a3f1676",
+    "text": "Galante Geste"
+  },
+  "content.species.wickwaltz.name": {
+    "reviewed": true,
+    "source": "Wickwaltz",
+    "sourceHash": "3bca2d0221db807180f8e327c6be0b49b43039f279c9690f881015de2a4bdade",
+    "text": "Wickwaltz"
   },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
@@ -3635,6 +4763,24 @@
     "sourceHash": "eac44ce679fbe407a935068950f936118c47701c8f947cf9a8b3d84fc61a41d0",
     "text": "Wickwaltz’ zweite Karte pro Zug wird wiederholt"
   },
+  "content.species.wickwaltz.title": {
+    "reviewed": true,
+    "source": "The kindling dancer",
+    "sourceHash": "be4301ff25ddf147cb86e1cda717287b929174b8a2e8c97aa068a503151619c4",
+    "text": "Der Zundertänzer"
+  },
+  "content.species.wickwaltz.trait": {
+    "reviewed": true,
+    "source": "Kindling Flourish",
+    "sourceHash": "926bab6c0b76ea6ef7ad911583776b1afd192d8ad0b5dbc09dbfd3de5fa9e10c",
+    "text": "Zunderschwung"
+  },
+  "content.species.wisterelle.name": {
+    "reviewed": true,
+    "source": "Wisterelle",
+    "sourceHash": "92d8bd5e3a1f7b4008b3827ac42eb2c7909a4d30276b540305bfee085063e389",
+    "text": "Wisterelle"
+  },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
@@ -3670,6 +4816,18 @@
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
     "sourceHash": "ba1457041801864750c991340e8d8592cb56998c947d754b9fb0dde927a408e2",
     "text": "Ziehst du eine Karte aus deinem Ablagestapel, stellt ihr Besitzer {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.wisterelle.title": {
+    "reviewed": true,
+    "source": "The keeper of the flowering station",
+    "sourceHash": "32a55b4ed262929b528461738cfed41b2e74bc27c13abf09a78d6831c0351cef",
+    "text": "Die Hüterin des blühenden Bahnhofs"
+  },
+  "content.species.wisterelle.trait": {
+    "reviewed": true,
+    "source": "Lost and Found",
+    "sourceHash": "52496e00b81a85bb638b16eaabb5228160b74c1fc63a8bf4730fdeb7a448a354",
+    "text": "Fundbüro"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
@@ -3707,11 +4865,53 @@
     "sourceHash": "a0ecd0d14c3576d514a5d68edc2ff6cbac03fb78d12198b1968e64f25de82e53",
     "text": "Kontrollimmunität {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "2f9f612cb006bad809a6bb03c3242bfe3c262433873ec2d3925e1547a82d5031",
+    "text": "Kostenloses Nachsetzen: nächste Karte ist kostenlos"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "7d994f7c0213d213de73dd601f83b9218ec5c5c453a148e7f0dcc4fddf2bb965",
+    "text": "Göttliche Gunst: nächste <keyword0>Licht</keyword0>-Karte ist kostenlos"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "9f3dc9ed75eb0d738b233b797f64015864dab3c526d2cd83eb686b9e82851832",
+    "text": "Windschritt: nächste <keyword0>Natur</keyword0>-Karte ist kostenlos"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "b816db65dd8c10a139ab322f9bc6a424aed709de3b75926f1efbafeb50979068",
     "text": "Nahtod {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "994013ba096b3d2fabbc6b4053949eb718d6a00eddb3fe184e0d9d5bdc2f8ea0",
+    "text": "Offene Flanke: nächster Angriff verursacht {{value0}} zusätzlichen <keyword0>physischen</keyword0> Schaden"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "73fec601986e1e61864f27f0565d8d695241c316449fb6c0308869fa1f2620a1",
+    "text": "Abschiedsschnitt: nächster <keyword0>physischer</keyword0> Treffer verursacht die Hälfte seines Schadens zusätzlich als <keyword1>Blutungsschaden</keyword1>"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "4a33858c5f34092b73b8d57d1aa5e33b1d7452cfdb9cfd7c30eda9c19432815e",
+    "text": "Rhythmus finden: +{{value0}}% Chance auf <keyword0>Ausweichen</keyword0>"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "b0d238615b8c28f2100a2b43e3fec65b9c7e48a73265e87468e9efefabe55aa4",
+    "text": "Riposte: nächster <keyword0>physischer</keyword0> Angriff ist garantiert ein <keyword1>kritischer Treffer</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

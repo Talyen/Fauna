@@ -1343,11 +1343,29 @@
     "sourceHash": "32b3c43f1c374145fd5a859c9b761effe558e731ff7d768b48ac7ea05d376d40",
     "text": "ノコギリソウの軟膏缶"
   },
+  "content.card.aerostat-parcel-drop.name": {
+    "reviewed": true,
+    "source": "Parcel Drop",
+    "sourceHash": "7ddb33b134803b8f936bfc77ee823d8dc18ea1139eed41d288f3a56349867683",
+    "text": "小包投下"
+  },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "21bcb6338b7064003fdedb2749ff8e5b535c06156e0f9e50268b85cd19dd72e0",
     "text": "手札に<keyword0>食料</keyword0>を{{value0}}枚加える"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "reviewed": true,
+    "source": "True Bearing",
+    "sourceHash": "c82a76c7f0c0ca2e40b28191184c681c70148ff929e488b3d40cdde648364adc",
+    "text": "正しい方角"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "reviewed": true,
+    "source": "Voyager’s Rest",
+    "sourceHash": "c4f284ebbe56897197385d49f868a242e105e567c26a66a9dd9f16721a77bd61",
+    "text": "旅人の休息"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -1355,11 +1373,35 @@
     "sourceHash": "a162cc787f9f47c761e86ae740b8911c54f862ce4231d54876f486ea3cc71702",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.card.almanelle-autumn-insight.name": {
+    "reviewed": true,
+    "source": "Autumn Insight",
+    "sourceHash": "1b669538da0a84d805f2f80312570c933583eb606900c17c42006fe51a9d7a3a",
+    "text": "秋のひらめき"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "reviewed": true,
+    "source": "Rooted Year",
+    "sourceHash": "1d73dee7acdb617db619fe7d4775a3a117c1ed204266e6fe696579bdfcec6330",
+    "text": "根付く一年"
+  },
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "266a6e934486a913e849a7d763817351b75d9cb3d727991c9749a44310742fb9",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "reviewed": true,
+    "source": "Spring Current",
+    "sourceHash": "e54ad278c9fe19873976d0776914f5537f7f80003a6162d950ed7ae5034b9795",
+    "text": "春の流れ"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "reviewed": true,
+    "source": "Ember of Evening",
+    "sourceHash": "ca13cd305e81eceed9b5cdeaa8debe4e4af2d8b56514bbe6bcae7cb9dd55f9d2",
+    "text": "夕暮れの熾火"
   },
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1367,11 +1409,29 @@
     "sourceHash": "a1f9df1acd9956de30a03ab65f0a4522b2e487bf95d589aeee06351d6d290054",
     "text": "次のカードを2回使用する"
   },
+  "content.card.alpenglen-last-light-charge.name": {
+    "reviewed": true,
+    "source": "Last Light Charge",
+    "sourceHash": "9ab4508776fc78d3c7aec05d741226bf914658ca6573eafec9dba63e782e1858",
+    "text": "残光の突進"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "reviewed": true,
+    "source": "Sunset Reversal",
+    "sourceHash": "0e86df44362b24f34f5b30f0d1c237815783db2984923e0e6759e9913b235cec",
+    "text": "夕暮れの逆転"
+  },
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "056407dae02dddda99cc33bd00884a643234fccc630bf1522e3d75136823e3c5",
     "text": "<keyword0>次の攻撃を反射</keyword0>"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "reviewed": true,
+    "source": "Dancing Double",
+    "sourceHash": "77dfd0d516e0b10a658affed0f6664d6e492d5a3c9f98d44d0513fd2fac2e5a3",
+    "text": "踊る分身"
   },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1379,11 +1439,29 @@
     "sourceHash": "5a873ad9b0a55aee2fe25bf1d162793334638b5155fb82deab83987ebf507c33",
     "text": "次のカードを2回使用する"
   },
+  "content.card.arabesca-ribbon-snare.name": {
+    "reviewed": true,
+    "source": "Ribbon Snare",
+    "sourceHash": "3c9dbf9be403397d1853747edb3614b44940efb6acf751d6a68b4d3047e24969",
+    "text": "リボンの罠"
+  },
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "5d3c672c9ca72780a49951bac2f9d6af9a749ea89f1d79efa6455a942597b77b",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.arabesca-springbound.name": {
+    "reviewed": true,
+    "source": "Springbound",
+    "sourceHash": "80d9eec5125bf492a99245722ce2fce520f5824a70dda357cf0cfb406840103d",
+    "text": "春の跳躍"
+  },
+  "content.card.bloomquail-draw.name": {
+    "reviewed": true,
+    "source": "Bloom Cradle",
+    "sourceHash": "8abe31c5618863ace04a6d29c8c63f56aff8c418ab448a150b88ad6b9314a94e",
+    "text": "花のゆりかご"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1391,11 +1469,35 @@
     "sourceHash": "bbfe47271549480217f8e77b934a17d6a88e0af80d2682b92350cc9340a5e536",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.bloomquail-guard.name": {
+    "reviewed": true,
+    "source": "Petal Rampart",
+    "sourceHash": "5546d227901d0961a613c9de3338317846549632858641046bc49c0f4dfd4d60",
+    "text": "花びらの城壁"
+  },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "61f0295fc178d27cfc6fd80020f3375571aee701bec1e374514034ce8eee4cbd",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.bloomquail-heal.name": {
+    "reviewed": true,
+    "source": "Petal Veil",
+    "sourceHash": "194f6e9252e4da58d5e79866c7993001fa8f24d605afd6b43a17b6405ed9926c",
+    "text": "花びらの帳"
+  },
+  "content.card.cadenza-echoes-remember.name": {
+    "reviewed": true,
+    "source": "Echoes Remember",
+    "sourceHash": "3dca4f58293c448c3d5f48608e6b7298a34a1df8b683b0329cbea27b5c9b076f",
+    "text": "こだまの記憶"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "reviewed": true,
+    "source": "Resonant Well",
+    "sourceHash": "5206ce4659ead4a471d14204785a8de0ec1ee37a14a19284c72dabd6f8c4086a",
+    "text": "共鳴の泉"
   },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1421,6 +1523,30 @@
     "sourceHash": "90df205ebfa58aa7e3ee24c7d4d6f9bd457c5c44931425e7573a9181d56bd73b",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
+  "content.card.cadenza-rousing-refrain.name": {
+    "reviewed": true,
+    "source": "Rousing Refrain",
+    "sourceHash": "e9464877a3e4c91fac7a3fca37055c1bb0a7aaaf64b35cb037b9f70ea6aaac38",
+    "text": "奮い立つリフレイン"
+  },
+  "content.card.captoad-attack.name": {
+    "reviewed": true,
+    "source": "Spore Puff",
+    "sourceHash": "c6227299d54f2e689710806abe821c06d31a63972e821103372ac14c666e467d",
+    "text": "胞子の一吹き"
+  },
+  "content.card.captoad-guard.name": {
+    "reviewed": true,
+    "source": "Mushroom Guard",
+    "sourceHash": "e7c17782398e1e23dfcd37e54baf72e995a6b31abb4ff30309dd8ecf8edb5762",
+    "text": "キノコの守り"
+  },
+  "content.card.captoad-swap.name": {
+    "reviewed": true,
+    "source": "Bogbound Leap",
+    "sourceHash": "eb658e83ef7ef5780239a17972248a44d1070738fddc32fd4483ac97e0f44d2e",
+    "text": "沼地への跳躍"
+  },
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
@@ -1432,6 +1558,12 @@
     "source": "Swap out for a random backup; Draw {{value0}} cards",
     "sourceHash": "17f60b570f9ef0134cbea3609fba180044309d57547c528314d26f5a5609dc3b",
     "text": "控えの味方1体とランダムに交代; カードを{{value0}}枚引く"
+  },
+  "content.card.chimecricket-attack.name": {
+    "reviewed": true,
+    "source": "Resonant Leap",
+    "sourceHash": "d931a031e18c249c6e70e45f8d80de9333d6ac8b8ae79e2e2ea0c054bf27d1a7",
+    "text": "響きの跳躍"
   },
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
@@ -1445,11 +1577,71 @@
     "sourceHash": "a2cdd64746b31d58b93bdded98d431555f65fa8191eb58865f9c396c72384f69",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.chimecricket-heal.name": {
+    "reviewed": true,
+    "source": "Lullaby Drift",
+    "sourceHash": "178534e62224f38377e7a674d1265feb86fb9d94f9ca3f5aa7a9669e4b0846d2",
+    "text": "子守唄の漂い"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "reviewed": true,
+    "source": "Hush Dome",
+    "sourceHash": "43207416035c83f73e97101b71bae5b622b80fded73df67d41079fae0f09151a",
+    "text": "静寂のドーム"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "reviewed": true,
+    "source": "Ashen Veil",
+    "sourceHash": "33a1775f83b13f043b0bd03b302fbf46e4518eee16cc852a66e748d33a5c3ead",
+    "text": "灰の帳"
+  },
+  "content.card.cindernewt-attack.name": {
+    "reviewed": true,
+    "source": "Cinder Lash",
+    "sourceHash": "18c2572ab81c805e9d9775f91b346be8ce80061892fd97f7660dc24ff4c53f65",
+    "text": "熾火の鞭"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "reviewed": true,
+    "source": "Ember Breath",
+    "sourceHash": "db2974c1059b6335663d518fb6561df7c0e26cf43d05d2492cbdae1cb8a2fbfd",
+    "text": "熾火の息吹"
+  },
+  "content.card.coralcurl-attack.name": {
+    "reviewed": true,
+    "source": "Reef Jet",
+    "sourceHash": "b27d93aa443f4c12567789c6613e5797f005b83196bceef217f9e8a0b4a7bc16",
+    "text": "珊瑚礁の噴流"
+  },
+  "content.card.coralcurl-guard.name": {
+    "reviewed": true,
+    "source": "Bubble Ward",
+    "sourceHash": "14f1ab4360f6d9e7d864382ef3c14889822aad4854bc9ea11c4d555ebf0c9a16",
+    "text": "泡の守り"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "3e0d5e2005e2b4de8d20f5231d9abfecfd1703657bfb6d3b97ff24c2193199d7",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.coralcurl-swap.name": {
+    "reviewed": true,
+    "source": "Coral Spiral",
+    "sourceHash": "eaa72438b21c37c702efc5a523aa756dc782949b59e7c0256a71caea05e5b621",
+    "text": "珊瑚の螺旋"
+  },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "d1752aa2ca92f9a0869f114e0af36f04850a1bd8c1f22ef3ea38ae56cc9a1ab1",
+    "text": "太陽の翼の一掃"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "75ed55352a578f389ada300e7a9a8df97564dd0dc250ccae32be9f4626bb0606",
+    "text": "朝の開花"
   },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1457,11 +1649,35 @@
     "sourceHash": "5e6b8be03a1dae23b916db3b9829c286ecf6cd43dd0b4187015974f6a24a227d",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "80f76f889615fb3aeaa92cb9384f3f003c4f039387638499a6604972bee71017",
+    "text": "夜明けの声"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "227f54217780a29614351da14b9603bb979485c3ef1dc0217b41cc7007c29509",
+    "text": "礼拝堂の光"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "4fd1f7afd18f36b379ab07cf575aaf0eef8f9b36292f3900bfcdaba798c61681",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "de9de09bf5ea657c1be01e17552a92ac39b47b43304b44af37ac580dcc7f34e2",
+    "text": "静かな水"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "f74c84706e5815a875fc665e0c0be6fdca2e0f326ae46276244e2cc068f15df9",
+    "text": "草原の避難所"
   },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -1469,11 +1685,23 @@
     "sourceHash": "f7d88ea1a8ed34c9a01607a2d34383100fe067f4c6739635d824a02401e48bbc",
     "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "725e3b31e81c0b42f7a381f0833e406206b749153f0fe565233da637ee5a3e88",
+    "text": "砂煙の飛びかかり"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "cf1ce6404c4c1b7c20f00dc207ae16f69a05623b4fdc8aa4d33a987d8d0c9464",
     "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "9848c621bbd0517f0e8795b8b75e7cae989d495e3ee10990def396e7938cea10",
+    "text": "蜃気楼の足取り"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1487,11 +1715,35 @@
     "sourceHash": "2549bc3673c01dc80f2013cfe70be05f3daefca16eda37b2d56cbc334dbf5413",
     "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%獲得; カードを{{value1}}枚引く"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "4247b7d67e4e0ff5bd86759c4d02767bcd4a01d62c5f44153a5e4f4af32b32db",
+    "text": "砂丘の渦"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "eed3ca2e4f1e8917e1d6611ca7d39280e1f2179717df520500d0f8cedc7c406a",
+    "text": "熾火の突進"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "17d7fcc747b67596c65c72ea492da48e47da3410e7f83f6064041ce925d54218",
+    "text": "炉の息吹"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "1ec8a1f97e871021b38e2ce9f2e94849186cf08c366eab3c3273ecb7e6bebaa0",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "677a7ae95bf81db916544e5c82fba9f131f830aff48e1f0ff0e9da0d30a1f740",
+    "text": "溶岩踏み"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1499,11 +1751,29 @@
     "sourceHash": "5ef2173e0eb88b1b772d9aaf670d205a4af4cd7ce1daca7419beb27188f376aa",
     "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "bd2f6e3e3dbdf63e0556b951a230dba385f4ab7a161e543eba0dd23c5117d735",
+    "text": "ありうる道"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "30ebdc5ddbb707c16c11ab046bf20679c6218f059b47738c3916f21237ba88bf",
     "text": "手札をデッキに戻してシャッフル; 同じ枚数のカードを引く"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "a9b30a4bfe183f96616b77a186ba9de9e791facb8cfc488dda4049a655efe7f3",
+    "text": "黄昏の槍"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "3f5d95bef35446fc3cf5e3097208eab08edd2ab654d4d166756e6b09a32d2c02",
+    "text": "願いの交換"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -1523,6 +1793,12 @@
     "sourceHash": "38ca84d2884f1c96bb1bd3c2b7bb5c624d87b2749df7719c3564380a4565b06e",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復；<keyword1>消費</keyword1>"
   },
+  "content.card.food-mana-berries.name": {
+    "reviewed": true,
+    "source": "Mana Berries",
+    "sourceHash": "a8f918343c1924432d18801daedaaa6cf4d1fd210a9dbdd2375261f7d54628f6",
+    "text": "マナの木の実"
+  },
   "content.card.food-mana-berries.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
@@ -1535,11 +1811,29 @@
     "sourceHash": "5b33efd2d153be93f50985a12337eeac46e056e967411e21146c3a9635fbc6c8",
     "text": "味方全員に<keyword0>ブロック</keyword0>を{{value0}}付与；<keyword1>消費</keyword1>"
   },
+  "content.card.food-trail-bread.name": {
+    "reviewed": true,
+    "source": "Trail Bread",
+    "sourceHash": "745411bc050f598ece40f5ec3321389db91eefd78c633a2d1b94d2da0e56772a",
+    "text": "旅のパン"
+  },
   "content.card.food-trail-bread.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "030720f4314043dc32b0f0e58acb79a354e69ee57257cfcd4315b1d60c36fea9",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；<keyword1>消費</keyword1>"
+  },
+  "content.card.glintstride-attack.name": {
+    "reviewed": true,
+    "source": "Prism Shear",
+    "sourceHash": "0ec89213fa6a30a9162145ed1396d76155fd609229af6662be3e054e06e1bb81",
+    "text": "プリズムの斬撃"
+  },
+  "content.card.glintstride-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Run",
+    "sourceHash": "a5fed0df9a3c09f35edd12d3b8525be500b30e79f02dea19a017da533a68b06f",
+    "text": "蜃気楼の走り"
   },
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1553,6 +1847,18 @@
     "sourceHash": "8db9ef45bc36f7232b7e03585223667c948c4153a1cbe27130360703943c95d9",
     "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%獲得; カードを{{value1}}枚引く"
   },
+  "content.card.glintstride-teamBlind.name": {
+    "reviewed": true,
+    "source": "False Horizon",
+    "sourceHash": "efa83897763e94c850082d75e39bab9dd1239862a4819bff3531bf654137a264",
+    "text": "偽りの地平線"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "reviewed": true,
+    "source": "Drowned Revelation",
+    "sourceHash": "aca12b56828d2ae6e684d84100e6cc3dee488c9eea70ec2b1b8ce37979045e1f",
+    "text": "沈んだ啓示"
+  },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1565,11 +1871,29 @@
     "sourceHash": "44ccb7c32cb99ed76494480881ffdd5276f0b9701ac8f5e4f06cea1e0f50ce43",
     "text": "カードを{{value0}}枚引く"
   },
+  "content.card.memento-lost-procession.name": {
+    "reviewed": true,
+    "source": "Lost Procession",
+    "sourceHash": "1c41840400b9d478d5bd43a28427dae3ad7608df2e4b6113f4ecf5f2036ef4af",
+    "text": "失われた行列"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "019e5829c808a7ca1ebea6419a1bb13150be52c291d363bbfc3527e9cebc49db",
     "text": "真珠"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "reviewed": true,
+    "source": "Treasury Echo",
+    "sourceHash": "fcf71ee14fefb8bff124f6bc619b455b80b5ef25dd2e94f0fbe0eee54cfedf81",
+    "text": "宝物庫のエコー"
+  },
+  "content.card.mossguard-attack.name": {
+    "reviewed": true,
+    "source": "Rooted Stomp",
+    "sourceHash": "b4608fbdfb3a8dc2045566a167c89656c449da435cb7fb7dd6a767b71a9e8825",
+    "text": "根を張る踏撃"
   },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1577,11 +1901,23 @@
     "sourceHash": "f3fe52e6736ed42b25fa20062c112c92a027b82c980aac49aa2892b4e077ae7f",
     "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.mossguard-guard.name": {
+    "reviewed": true,
+    "source": "Boulder Brace",
+    "sourceHash": "a295a2ee24e2be40072f5c3710d2e7de22919ed03b80581646eaf573fc25829e",
+    "text": "大岩の構え"
+  },
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "f0d71227cc30ffc55a28c2481b8906121cca63fa3a59b2aac2d9abd29b7002dc",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.mossguard-heal.name": {
+    "reviewed": true,
+    "source": "Moss Renewal",
+    "sourceHash": "e8a438e662e6410c88c4464faa4c866ec65dca70dcb9e856e8eaa1764e198927",
+    "text": "苔の再生"
   },
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1589,11 +1925,23 @@
     "sourceHash": "0ab728abb65f93be6e4fb08204647909cf72261e142e134b31c2d84d783482e1",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.neradora-bloom-shelter.name": {
+    "reviewed": true,
+    "source": "Bloom Shelter",
+    "sourceHash": "f6c72a10a3c73378b78bdb8d81038fe617d029e40db8b3a45cb9ffb9d51c2885",
+    "text": "花の避難所"
+  },
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "53ea86f603adde373da0c8bfdd33ea041eca6cdd2971c22455306e93b4252232",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "reviewed": true,
+    "source": "Tide Cup",
+    "sourceHash": "47b7831a2baf34cdb0cf15669ae162334ce8ee85011dd86c304a111c5eb6e5eb",
+    "text": "潮の杯"
   },
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1619,11 +1967,29 @@
     "sourceHash": "cd2f758e08031abaa6db15161a0da8c20b48fce2d465504336b0842a87373739",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
+  "content.card.neradora-undertow-knot.name": {
+    "reviewed": true,
+    "source": "Undertow Knot",
+    "sourceHash": "b54c5191edb6e24ecb14c3d54da4970683cd6d815c2515e37ce375f6306587d1",
+    "text": "引き波の結び目"
+  },
+  "content.card.oathara-never-lost.name": {
+    "reviewed": true,
+    "source": "Never Lost",
+    "sourceHash": "1838b977e0fb051e88b0ff1ad8754dc947533f46672f04fa02d68e4b6f77cff6",
+    "text": "道を失わず"
+  },
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "588dc4cf12368651ec08cd3edcc1bb2a12ea9de23e84caa7e0270c1d63d58409",
     "text": "手札をデッキに戻してシャッフル; 同じ枚数のカードを引く"
+  },
+  "content.card.oathara-travelers-ward.name": {
+    "reviewed": true,
+    "source": "Traveler’s Ward",
+    "sourceHash": "3dfec54ba6f51734fc5a0291060aabd5a797b37f058e1718940d7d0a894217d6",
+    "text": "旅人の守り"
   },
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
@@ -1631,17 +1997,47 @@
     "sourceHash": "21378d0172012b3f580e9fd1641f001b7f545eafdc5d099e8a414b4641778392",
     "text": "<keyword0>次の攻撃を反射</keyword0>"
   },
+  "content.card.oathara-vow-of-return.name": {
+    "reviewed": true,
+    "source": "Vow of Return",
+    "sourceHash": "cf588bec88e14a590538bb24bc5b1e33833b0804c51172ffcf7a855d85b613a1",
+    "text": "帰還の誓い"
+  },
+  "content.card.orifable-attack.name": {
+    "reviewed": true,
+    "source": "Postal Swarm",
+    "sourceHash": "3f1d541887b2abb9cbb1b0248190d734cd9e241a61b943268c92613954c0f5f7",
+    "text": "郵便の群れ"
+  },
+  "content.card.orifable-createFood.name": {
+    "reviewed": true,
+    "source": "Care Package",
+    "sourceHash": "816905d241a1234cf9e00886c7f716334a6b1194c990de29254b9954d6d89ac1",
+    "text": "いたわりの小包"
+  },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "e7899402960d32defabadb213dac5971b5cd6b2a9b8a071f7d7587a2786b3887",
     "text": "手札に<keyword0>食料</keyword0>を{{value0}}枚加える"
   },
+  "content.card.orifable-heal.name": {
+    "reviewed": true,
+    "source": "Good Tidings",
+    "sourceHash": "3ee2afc6f57177b21cb107a00f3b52b63dd919d9d4ca4b86351226f274fc59e2",
+    "text": "良い知らせ"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "a1ff2c8f0f0afb90cd262257ebe1bb8f0c213bf2d99f778619556a1c8a0a9eb1",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "reviewed": true,
+    "source": "Polar Reprieve",
+    "sourceHash": "a16bfbe34e6b34a04165af985a8eb12bcc66fedc607bd9a6c3046de60a5c8fdd",
+    "text": "極地のひと休み"
   },
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -1655,11 +2051,29 @@
     "sourceHash": "ec54567f2180204ef95e7ee544e6f41279cd1d86ff0674890afa56e280d56954",
     "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0>"
   },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "reviewed": true,
+    "source": "Sundog Reservoir",
+    "sourceHash": "4db43dd4915fbc689c06e1ef781d6d0137715febd1e367d901bca24086dce35c",
+    "text": "幻日の貯水池"
+  },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "aac0e26b72d6c892fdd7ee928e83a2d990b2d6b8a0e9e1f26a5397306437b8f6",
     "text": "<keyword0>マナ</keyword0>を{{value0}}獲得"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "reviewed": true,
+    "source": "Whiteout Waltz",
+    "sourceHash": "4328c7cb17a31af4d7382358d0108ac26c600d59195435b424fac7ccdbeb4409",
+    "text": "白嵐のワルツ"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "reviewed": true,
+    "source": "Dazzle Burst",
+    "sourceHash": "889f61cbdf74a757de15373818477616635b1bcb2ff770262a030d165489bd6e",
+    "text": "まばゆい閃光"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -1667,11 +2081,23 @@
     "sourceHash": "5d3fae2809498819470e25de20a0c82cb27dbbe5237469ed36f647f5e95230c9",
     "text": "ランダムな敵に<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.pollenmoth-heal.name": {
+    "reviewed": true,
+    "source": "Bloomwake",
+    "sourceHash": "ece7adeca78227901bc07e5e573fa721fc1907ebb74c09b8974b1b3c377319b6",
+    "text": "花の軌跡"
+  },
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "c0b1257bf9c8bc8840cf81fca96e552c38f3c4f0c5d52789f688318e325b56a4",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "reviewed": true,
+    "source": "Petal Shelter",
+    "sourceHash": "06016302db7b3352c9ea697620cf7c99662bb298211d907723dc97c64ec7e811",
+    "text": "花びらの避難所"
   },
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -1679,11 +2105,23 @@
     "sourceHash": "7b628f1d69e8f24e4f9fa7dc9d304276bb9fc6f71a785f2eb596860f834b04c5",
     "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.card.prismram-attack.name": {
+    "reviewed": true,
+    "source": "Prism Charge",
+    "sourceHash": "61b4aa2549ce664c4456cbf9d92895e0a7f1e3d36b69e88fca049c869d4ffb79",
+    "text": "プリズムの突進"
+  },
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "75e891abb6b39d9220faa888fcb982dd697491bfc4a4df9056234dde9a095570",
     "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.prismram-guard.name": {
+    "reviewed": true,
+    "source": "Faceted Ward",
+    "sourceHash": "ca233b5813ca3fed30f23c3479cd4244904ea95c7e4d8e1ca25ec999f51ddf26",
+    "text": "多面の守り"
   },
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
@@ -1691,11 +2129,29 @@
     "sourceHash": "4e5adb815870f401f4e3407fd41029b0db83c871b1704c81dcb5898d8d00186b",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；次の有害な状態効果を<keyword1>反射</keyword1>"
   },
+  "content.card.prismram-spectrum-lance.name": {
+    "reviewed": true,
+    "source": "Spectrum Lance",
+    "sourceHash": "cf9eda86e28dbfa937ccbf77690791d6f1342ae0bec3a4bcf2bac07dc90bde2f",
+    "text": "スペクトルの槍"
+  },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "dd90cd704804766f06ac76864c1800a512b442870777cc8b803222880ffbcf07",
     "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象の<keyword1>強化解除</keyword1>：効果を{{value1}}個取り除く"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "reviewed": true,
+    "source": "Ember Harvest",
+    "sourceHash": "3be60043e6ddf45fe4089219030cdba63247ca4d24546a7e511c09ce8d02c0a4",
+    "text": "熾火の収穫"
+  },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "8fa33e235c15c447b6727726f4aba96f24dfbd2948ebe3b7239d07a5642fcfcc",
+    "text": "祭りの炸裂"
   },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
@@ -1703,11 +2159,53 @@
     "sourceHash": "c39cd03a377badad1519d17c3a568db62c16404f3eeadab5ab7013e9a8a1fd68",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "286135e9a0a6d3cc0a32c5d51e9c5e711548b02d73502914c7ecb613ade5d3a2",
+    "text": "火花のおとり"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "56947c7af5af00e88d94d9cd05b863dead0daab06d8d9cfa4b54200548da0499",
+    "text": "葦の突進"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "a898a9dde18a05added5625dccae5bc9238971884de8eb3d43f1c6705da2ca5e",
+    "text": "葦の避難所"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "a5f4f886c903810e24b17d9ab660f074f3c4924be96ab0ebf9adacb92e4cc18c",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "8bc7abcda170e7c5801e92515fa71e00498b271539fdb07e6ad3b7bb68dd49c4",
+    "text": "癒やしの泉"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "6b95483ef6d57e43df26f4ec4299bf8380b981268eb68ebd10509130f12215ec",
+    "text": "夢の分身"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "202501e722b2ab885e67f42d3bed9aed929214a6cb9f8b8917d45682acdcab66",
+    "text": "悪夢の収穫"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "0e988dca40e86ae9b1631aab479d13e3cffdf3a360857a4817e3b21fc8ebeed0",
+    "text": "目覚めの不思議"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1721,11 +2219,41 @@
     "sourceHash": "b621a56a1cbfbb42532f4d8a9ff1ba3e73a1d0fc5d5ddfb30e8539a05dd9734d",
     "text": "カードを{{value0}}枚引く"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "2a6ac8521eff65023ac4af73c6397810f786ce920c6caad55b1bb1d847220708",
+    "text": "輪の手拍子"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "ff7665c06bf58d17e56878520a7ca96b4a37d0440f7d08c4dfa52b0609e2030d",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "c4738661e8b5312d8dd9821dbcab073d3506b915643f9b1f9959d476e7c8d5bf",
+    "text": "調和の組み手"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "2a869f517d35ad3748c5e755cff7a7ad90f23eed7cc215b4f2cee0854376b7fd",
+    "text": "若芽の輪"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "850b9e6b551c46a0f4eeeac48c19f818b1e59ac97cc6ab7b0ca0ba60a41b93f4",
+    "text": "借りた輝き"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "d989cd5d60121875aeaa28b181ff32ba2e5ac54c40937840d379e73bcdde783b",
+    "text": "可能性の余白"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1738,6 +2266,24 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "5e3aba9c5f05369c44f0a26e5b00d574fa27ddb725f991f78c75e1fa90f46699",
     "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "28efa64e91dd1ce74aa3c8ea8a3ca7ca3a348992a9cb87c04d26b3e4d4ba6e26",
+    "text": "書かれぬ結末"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "81f3bab5538a97d21fe54dbd0b0b1a089e4377f510d09bcef34916372b3f7986",
+    "text": "涼風前線"
+  },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "7323ef0410ff29a8ab4a5ff1ef176805a51d4ec6af23e308ee604d9332f3450e",
+    "text": "正午の開花"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1763,6 +2309,24 @@
     "sourceHash": "f8fe9e5250761b781b5edd4cfb0e4867b122f1e72368b4835f5117f258ad07ee",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "0ae7c55d96d97cd37a9972015c6595554a005a1296701df9fd0ded8ce28b7f1c",
+    "text": "正午の守り"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "f3e6735b8440ec7c35171cee2521e07d0d6386d29aa4d8dc4915945d6cd7d797",
+    "text": "雲の足取り"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "1347e727a8f3eb5af34a097b98b8a646d93de3488360fe0b6192552750de4246",
+    "text": "遠い地平線"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1774,6 +2338,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "207a3f1bc0938509a0b9d125d77d3c3aa97c68d063640ee9a53ff34c478e817e",
     "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "3deb7d9f9fd11085a068c82e7328cf9be139642a0d405a7190454835e053f4d6",
+    "text": "空の羊飼い"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "9d4c67079a62df6ad6467f3693ae94af0284055ffd1fa7b12f2a0eb336f679cb",
+    "text": "波の突進"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "5226f0ab4c6547036535695f07fd6ceea4ce8401e110d83ba0ffe82b31e12163",
+    "text": "螺旋の帰還"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "44be01d9593f29c9cc549717d2d054207fa0913ee2d7c87eaf2071ebdcb0f5c6",
+    "text": "吸い上げの跳躍"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -1787,11 +2375,23 @@
     "sourceHash": "3ab1d4652eed0726dec956b44b6b2267a986765f9e8844dce6173008819f9295",
     "text": "控えの味方1体とランダムに交代; カードを{{value0}}枚引く"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "e9bc3bb758722fa93f43f695e032a73be6e2cc4835cf78765320e416c54340ed",
+    "text": "葦の貯水池"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "401ebcc869a38fd88b186d1f1e3c14a40cc5d0ac3774b478b21044dd77cdcbc2",
     "text": "<keyword0>マナ</keyword0>を{{value0}}獲得"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "d23b29e69f889e23efe3b755cd43f7fa60685ab39397508fe30818320a0322cc",
+    "text": "雪解けの道"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -1805,17 +2405,53 @@
     "sourceHash": "09b9e4c75964b86b5123bfcab316541f261913b99bed325bc539a9741c180f90",
     "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0>"
   },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "f19d1152e2eee9aa939e24f93f9219bd03a6f7d4cc02dc67d1fde654ae8163c7",
+    "text": "水は覚えている"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "67ce9d6a43ccd096543f1304f3076ac576af54d13078ffda67086275837eafea",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.tournelle-attack.name": {
+    "reviewed": true,
+    "source": "Valiant Challenge",
+    "sourceHash": "84e7fa844d9077f2cf53a3dd0bf8c75557caf3876feb1db514fa277aa4311d3e",
+    "text": "勇敢な挑戦"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "reviewed": true,
+    "source": "Safe Passage",
+    "sourceHash": "bd5abb22aa62525d1a4d023af75444ad9991b6cc8110ff623943e8b1e8374ebc",
+    "text": "安全な道"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "reviewed": true,
+    "source": "Kindled Courage",
+    "sourceHash": "5d08450e51c9f5c7d70b23a1dcb63cec3178c9b92cfb721159c760bf1a1f6ae9",
+    "text": "灯る勇気"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "reviewed": true,
+    "source": "Ember Pirouette",
+    "sourceHash": "99237ad6aeb883a9bf76d0d6b2dfa6d8f5cf6d8849c3aa721d36fb5ff32ee752",
+    "text": "熾火のピルエット"
+  },
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "4a0902b694c9e314b8939a93f2164a99db1a90a01510961376f6d478de814d1a",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "reviewed": true,
+    "source": "Thermal Rise",
+    "sourceHash": "67dc13438c0c60da68b7236b7ef4dd678941d42502d43d1b807a2545025a6c77",
+    "text": "熱の上昇"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1840,6 +2476,30 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "d02aa965ada781b5d160c3a20d5d6cd395998d2157b05a4c3eb1f2799169c3f6",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "reviewed": true,
+    "source": "Saffron Screen",
+    "sourceHash": "36a198953c00dc52d0bfed3ad6813c4c899375ada40c9f6a5099e41f500b1732",
+    "text": "サフランの幕"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "reviewed": true,
+    "source": "Forgotten Junction",
+    "sourceHash": "ac4cea155b3f9a31570cc1b7a3f5ba285509b2565b880b4d4c8b570d26306564",
+    "text": "忘れられた分岐点"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "reviewed": true,
+    "source": "Lantern Fare",
+    "sourceHash": "305f2b0a63aec33551b574c5147588735f4e28a50595b46296fc03f044349141",
+    "text": "ランタンの乗車券"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "reviewed": true,
+    "source": "Left Luggage",
+    "sourceHash": "2aeca850469fdec17cab731855f8d095d83285d1d464455d77af8bca545f621a",
+    "text": "預け荷物"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -2225,6 +2885,12 @@
     "sourceHash": "c94de88083fe5ec567d91def86d6bbedcdf8224c311353a12d82511a723d263a",
     "text": "水"
   },
+  "content.species.aerostat.name": {
+    "reviewed": true,
+    "source": "Aerostat",
+    "sourceHash": "6e0bf1d0bcfcc9416a9499f8bc8fcff18caff38c7f0b75d2ac57b5558ad20cae",
+    "text": "エアロスタット"
+  },
   "content.species.aerostat.passive.0.rule": {
     "reviewed": true,
     "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
@@ -2272,6 +2938,12 @@
     "source": "Well Provisioned",
     "sourceHash": "dfe8eee06e5e3ecf79da2a4af497b6b9bb428038b85307e79ba5f9a74f05d4b0",
     "text": "豊かな備え"
+  },
+  "content.species.almanelle.name": {
+    "reviewed": true,
+    "source": "Almanelle",
+    "sourceHash": "7ec1fa71ad62c0f5d51b723311d1ef892891c378a17d0000156faadbe93c9b9d",
+    "text": "アルマネル"
   },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
@@ -2321,6 +2993,12 @@
     "sourceHash": "bcf0e72847b501fefef22cd81959bf3ea38bc016bdd8a51c1cebd82818e43f1c",
     "text": "落ち葉"
   },
+  "content.species.alpenglen.name": {
+    "reviewed": true,
+    "source": "Alpenglen",
+    "sourceHash": "dff0e4a444b82c6abb9ea7f0ffbb2aba8c1696313db8f7b3b9fcea7f6adc66a5",
+    "text": "アルペングレン"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -2368,6 +3046,12 @@
     "source": "Last Warmth",
     "sourceHash": "0f26c318e902d44ead16f8dc14c1e5fc214cae597b688b9f9985d03e520e9a85",
     "text": "最後のぬくもり"
+  },
+  "content.species.arabesca.name": {
+    "reviewed": true,
+    "source": "Arabesca",
+    "sourceHash": "2fb9d7cf491cf0727a1f952604c2342ad46eb930fa2a995fc409ec63332542b1",
+    "text": "アラベスカ"
   },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
@@ -2417,6 +3101,12 @@
     "sourceHash": "751b1cf266a5dcb3ae254051981e1852cdd4c2f276f0a74937253146bf06c265",
     "text": "花びらの軌跡"
   },
+  "content.species.bloomquail.name": {
+    "reviewed": true,
+    "source": "Bloomquail",
+    "sourceHash": "d0a9d13f9bac30a823f3d28a0890a68089f791abfabcfdd512d1651838557376",
+    "text": "ブルームクエイル"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2464,6 +3154,12 @@
     "source": "Full Bloom",
     "sourceHash": "0a63fc171192e5cb811bd89221d5d34574598b11663033343c34264970653196",
     "text": "満開"
+  },
+  "content.species.cadenza.name": {
+    "reviewed": true,
+    "source": "Cadenza",
+    "sourceHash": "da3d983fe627db1ed1189ddc43b3a191db3f617d732b7cbe2ee56a38e58feced",
+    "text": "カデンツァ"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
@@ -2513,6 +3209,12 @@
     "sourceHash": "6c770b513b873b8cde24037dd2bd0854ef86f9619659ef235cd9464fa117dd21",
     "text": "生きた合唱"
   },
+  "content.species.captoad.name": {
+    "reviewed": true,
+    "source": "Captoad",
+    "sourceHash": "3d8d9829f69453b2d8af88c533757978cd53392274621f3472bb5aee9d4fa066",
+    "text": "キャップトード"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2560,6 +3262,12 @@
     "source": "Sporecoat",
     "sourceHash": "ab5c57ffb182fb14f0177b8421bc8d3dcd3e6a8f91499301d07aafe1bd2ac595",
     "text": "胞子の衣"
+  },
+  "content.species.chimecricket.name": {
+    "reviewed": true,
+    "source": "Chimecricket",
+    "sourceHash": "3facbc8c0d71c710736fcceb6e1179b88add0be9bc4e19e3f7215c45a6cae829",
+    "text": "チャイムクリケット"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2609,6 +3317,12 @@
     "sourceHash": "0c65f076100ea03ca240c744933ca89d2833cbeb7896843d3ecadc960c05568c",
     "text": "アンコール"
   },
+  "content.species.cindernewt.name": {
+    "reviewed": true,
+    "source": "Cindernewt",
+    "sourceHash": "5e5054869232a9466f8bd66683a77fb38ce129a13692cab4d1cbb2969b6c74e4",
+    "text": "シンダーニュート"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2656,6 +3370,12 @@
     "source": "Cinderstep",
     "sourceHash": "ae2111a73df3b70964581aa76c719bd01c263d809a7e38cbe87bc46da1e1ba27",
     "text": "熾火の足取り"
+  },
+  "content.species.coralcurl.name": {
+    "reviewed": true,
+    "source": "Coralcurl",
+    "sourceHash": "14e517f45c3039c1c15f89837c39e1bc0bb9d2ba1b40a71dd5690059df5cf802",
+    "text": "コーラルカール"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2705,6 +3425,12 @@
     "sourceHash": "5df12806f11ca360fac74672685208136535d79fae3394c809fe29f09cb101b1",
     "text": "泡のはじけ"
   },
+  "content.species.dawncall.name": {
+    "reviewed": true,
+    "source": "Dawncall",
+    "sourceHash": "a119fe4e828c6a84ac44191649da2a0f473ae24db7bc660e2938213985875c73",
+    "text": "ドーンコール"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2753,6 +3479,12 @@
     "sourceHash": "1da1c4214968096154cfde6f17f23c27d0746e2a55e553c5dd2eb9a1615c8565",
     "text": "早起き"
   },
+  "content.species.dulcera.name": {
+    "reviewed": true,
+    "source": "Dulcera",
+    "sourceHash": "0556e07f4db561a5741322b4c7cf1a621fd166b7c1e044c089f488154f267011",
+    "text": "ドゥルセラ"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -2788,6 +3520,24 @@
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
     "sourceHash": "a7f2d1c18a2ec4bcd696ecb7acf0480410aa19f16331a629d60e329498c9de0c",
     "text": "味方が交代で場に出ると<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "dad0c702e49b8683e61f3e5010796e438a350aa4aed4219b2305754732ad0e06",
+    "text": "やさしい聖域"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "9711c7466be825a50bc58f69c30781b4a15b2faf5d598381f6d6e63ff6f7be58",
+    "text": "やさしい通り道"
+  },
+  "content.species.dunefox.name": {
+    "reviewed": true,
+    "source": "Dunefox",
+    "sourceHash": "def2bfe63a2d9c92328869fb0697ca329df80acb756908f1bfb9259273e2e613",
+    "text": "デューンフォックス"
   },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
@@ -2825,11 +3575,23 @@
     "sourceHash": "6b445e278840479736f989785609d59c301f9ac0ed7db9fa2934ec6b977a6cc1",
     "text": "味方はあなたの<keyword0>回避</keyword0>率の{{value0}}%を得る"
   },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "a9dc317ccd50171e384143968db2483aa63907bd48ecbf98ab9f9fcaa34b1634",
+    "text": "揺らめく蜃気楼"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "ba32ca08ce42707b8f70ef91c688db3a68f5165d5efa12cc65f0ab0ec478ef3c",
     "text": "移ろう砂"
+  },
+  "content.species.emberback.name": {
+    "reviewed": true,
+    "source": "Emberback",
+    "sourceHash": "e1ea46934b79f6a71ee177f3954a9735c6bddfcc964d9e4c2d2cd16cc38687db",
+    "text": "エンバーバック"
   },
   "content.species.emberback.passive.0.rule": {
     "reviewed": true,
@@ -2867,6 +3629,24 @@
     "sourceHash": "32ef2decbe7ed6b52452a84a3ee72d351a69bbe0a54a31302f772dab1adeded5",
     "text": "自分の<keyword0>装甲</keyword0>が壊れたとき、すべての敵に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "e652049ee2552c7ac3008c16c7864960f9d91287dc92aa23d0c49d1b72ff0194",
+    "text": "静かに燃える炉"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "ccae8bb38a2c9746c5bace7c235119024893773481477d3a4968d48043d8d9ef",
+    "text": "溶けた甲羅"
+  },
+  "content.species.euphera.name": {
+    "reviewed": true,
+    "source": "Euphera",
+    "sourceHash": "da48c5b86d26f1f7a343acc3661ef76f91a04bea894c15896472b1c4ea700702",
+    "text": "ユーフェラ"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,41 +3683,77 @@
     "sourceHash": "f096e0cf640f015621b697c4d4ef11f9724a095268ae40fd246b90dbf1c731cd",
     "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "46cf3778476f0539dc45ee014125ca83b8f214ed49c12ccc7a1d0a218266ad1b",
+    "text": "飛び立つ願い"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "d1aa8863f62c04b723c094c52d1e6b59e5c22a291a537f6cb0492bc85d3d3a43",
+    "text": "幸運"
+  },
+  "content.species.glintstride.name": {
+    "reviewed": true,
+    "source": "Glintstride",
+    "sourceHash": "7000aa9daae8533fa4d2e65fbfd49bb9adc4683aa9ec4ed154d076f0067828f1",
+    "text": "グリントストライド"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "16909c754d04669ae1a8915aee6339e1d0f0ac78e29a69da6307bef4aa84722a",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.1.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "fb1b65b809f612bf7945500a85b01514a21306834e005bdf397a5c2956ea4c46",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.2.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "7d0d7baf0e2f9562f3444b41f25ac7439051b775ad5a0f5f9be46d81b570a546",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.3.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "e866cb0c293eaad836724a66dfa38e1d6917ef229f9c1ccb2d6f2a6735f8ef49",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.4.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "5e3327fb5688efa8d824f2fc5986925adc8fceec13f5000cea38ab03bb471ae4",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.5.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "f2e7969988c0654d991decc0e67302695495680653297a3e117357dd7df8fe82",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "9f4579540a6c5f221387d6c0190845770876d0c80a1db2dbf13d6074f9321af7",
+    "text": "きらめきの先の一歩"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "935da06adc5e75786d06194eaa3cb216208fc6c8cc5a96308cd2ddf40b8f202c",
+    "text": "足をすくう"
+  },
+  "content.species.memento.name": {
+    "reviewed": true,
+    "source": "Memento",
+    "sourceHash": "a738ae58b5e3c7c184cdf639ac750745274a244c8feef467f06e0a449d91e21c",
+    "text": "メメント"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
@@ -2975,6 +3791,24 @@
     "sourceHash": "5e3cd9feb70fb68f5b5ba1eef46a3b6ed8891bdb3ef8a5c5c5d5ca810ac0d8b6",
     "text": "カードを使うたびに、エコーが攻撃し<keyword0>水</keyword0>ダメージを{{value0}}与える"
   },
+  "content.species.memento.title": {
+    "reviewed": true,
+    "source": "The palace that remembers",
+    "sourceHash": "2a8cecb95c4dd332127982fc587718c32df779fa9bf6758d58ad59771f5bba58",
+    "text": "記憶を宿す宮殿"
+  },
+  "content.species.memento.trait": {
+    "reviewed": true,
+    "source": "The Court Remembers",
+    "sourceHash": "412fbf993518a8770e8c25c3c53b28b1547865e95015d9f2e701b12cce6c4810",
+    "text": "宮廷は覚えている"
+  },
+  "content.species.mossguard.name": {
+    "reviewed": true,
+    "source": "Mossguard",
+    "sourceHash": "72fd92d144cc69f619287cd30af264414e8652c176d28aa7114122c6e4da0e7c",
+    "text": "モスガード"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3011,11 +3845,23 @@
     "sourceHash": "d756b79fb3977e9b6c0a426d00f378b393bba87ae9c85bec0b3541a150f42688",
     "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
   },
+  "content.species.mossguard.title": {
+    "reviewed": true,
+    "source": "The gentle guardian",
+    "sourceHash": "5619a213346e4d1162ece42e86cc0378615cba22d5ee1671e14d7f20219d0ac2",
+    "text": "やさしい守り手"
+  },
   "content.species.mossguard.trait": {
     "reviewed": true,
     "source": "Overgrowth",
     "sourceHash": "d588291b9d22c1121262c7c3296ddd17ae4345d8e48a2ecf91c20b392aec4a7c",
     "text": "繁茂"
+  },
+  "content.species.neradora.name": {
+    "reviewed": true,
+    "source": "Neradora",
+    "sourceHash": "1b16bff2091eaed9d17e802dd6f101776e4f758f3d6313c4671cc6929bf40f88",
+    "text": "ネラドーラ"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
@@ -3053,47 +3899,77 @@
     "sourceHash": "189bf866fba0362ca385d156b14f806dee3120ced5d9b729779ea30defbe6b87",
     "text": "1ターンおきに<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.neradora.title": {
+    "reviewed": true,
+    "source": "The living tide flower",
+    "sourceHash": "fb929d5f114c3b7660364ffcf45de67710e50d736f17266981b57c66cc0e36d4",
+    "text": "生きた潮の花"
+  },
+  "content.species.neradora.trait": {
+    "reviewed": true,
+    "source": "Tidal Regeneration",
+    "sourceHash": "e0d5535768c490ffb9880190dbe0a6506849e7f08fbc315f83c7338aceeab346",
+    "text": "潮の再生"
+  },
+  "content.species.oathara.name": {
+    "reviewed": true,
+    "source": "Oathara",
+    "sourceHash": "54974e557eff79f8be4cb43a0c30b092e8edcad7052841c05a1ec90b5498b252",
+    "text": "オーサラ"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
     "sourceHash": "6d06e259cedee4dbfe8af68a15eae8a02dbbf263e0c58ba6ab9ee4833ce9fb46",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.1.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "5f34d991b511a87e6a3c92e773d65779763dc619f37973bc9ca41aa24284a5eb",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.2.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "6ea3c0728a62ec471c443041b26ca4253e8f92d327eb26ae0fef4c5acfb15061",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.3.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "14193768809cc5500e4b413c8e661ef5c53ed400a3a3653785ba82c77400f2f0",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.4.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "af9d9268de6e9c9c6eca017baef7f385a6422343e0429e87e1c63dbf1c2654e5",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.5.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "e32637cb06edec34b017b668ff1e352268a1699fbce019daf93793c722f1bd9e",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+  },
+  "content.species.oathara.title": {
+    "reviewed": true,
+    "source": "The keeper of unfinished journeys",
+    "sourceHash": "1536eb732c1ba9b51f5328d78347643ebdf85953a6bef1a5950e4c452a2285a7",
+    "text": "終わらぬ旅の守り手"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
     "source": "Unfinished Journey",
     "sourceHash": "e3eab89683393ea346a21c7ba1c00818d9d56ad35821feb2392472a00f869e94",
     "text": "未完の旅"
+  },
+  "content.species.orifable.name": {
+    "reviewed": true,
+    "source": "Orifable",
+    "sourceHash": "8137a1b236823a745851d1a4a3133e185cd30ac145c9cd10982fb97274799803",
+    "text": "オリファブル"
   },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
@@ -3131,6 +4007,24 @@
     "sourceHash": "9d9a869b80a11743ee85d4c6a95cb4285ff81f8c91361e5db314b12a77e9fa4c",
     "text": "各ターンにカードを1枚追加で引く"
   },
+  "content.species.orifable.title": {
+    "reviewed": true,
+    "source": "The bearer of good tidings",
+    "sourceHash": "5d3b83cb10abebd29afdbd1511bd3f96aa1fbe55bacd915acbf4967616c21574",
+    "text": "良い知らせを運ぶ者"
+  },
+  "content.species.orifable.trait": {
+    "reviewed": true,
+    "source": "Express Delivery",
+    "sourceHash": "ab7d14e144e81f0d33967afe7ef8869592b9d42efc4ba0de599a0b391c3c5ed1",
+    "text": "速達"
+  },
+  "content.species.parhelion.name": {
+    "reviewed": true,
+    "source": "Parhelion",
+    "sourceHash": "defd6b757b6192d0fc217351043c162f9b5d9b65ebff96218253475441d9314c",
+    "text": "パーヘリオン"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3166,6 +4060,24 @@
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
     "sourceHash": "b77e5fdacd9e3f1a2a043f672b1212510e1184939577e804d6bb0242f57dea5c",
     "text": "<keyword1>凍結</keyword1>の蓄積を<keyword0>浄化</keyword0>すると<keyword2>体力</keyword2>を{{value0}}回復"
+  },
+  "content.species.parhelion.title": {
+    "reviewed": true,
+    "source": "The sun upon the snow",
+    "sourceHash": "48fb81ae765da9c152b64f88f681b192e3e928c53df115d9dd812f432cb9e01c",
+    "text": "雪に差す太陽"
+  },
+  "content.species.parhelion.trait": {
+    "reviewed": true,
+    "source": "Sunthaw",
+    "sourceHash": "12a954d84c072bd22b98e2ed3c55ca67867905309f0b21bac6cafc7e7f24a4a8",
+    "text": "陽だまりの雪解け"
+  },
+  "content.species.pollenmoth.name": {
+    "reviewed": true,
+    "source": "Pollenmoth",
+    "sourceHash": "fe05f667a662ce5b1d34967c8a42021a9c8f36efd6286cbef17cbee4e774e70b",
+    "text": "ポレンモス"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
@@ -3203,6 +4115,24 @@
     "sourceHash": "6cfb6467ec7ee9e38bb78f7f2fe8e7fd58cd789c9aa24bc4e04b30ba55980812",
     "text": "<keyword0>光</keyword0>ダメージと<keyword1>体力</keyword1>回復が2回跳ねる"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "15de6b4c9b6144cfffe83c292550bfa171cb3b388387785c41fcf5c846c10289",
+    "text": "花々の黄金の軌跡"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "8b35b7cb6ba26e26a509034fc4a2a38eae523235f256675a378d458796a18e77",
+    "text": "交差受粉"
+  },
+  "content.species.prismram.name": {
+    "reviewed": true,
+    "source": "Prismram",
+    "sourceHash": "f38864ae01315ef3bb1e1af90025543374ee27e90d78df2b2c64c31f96074a3a",
+    "text": "プリズムラム"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3238,6 +4168,24 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "d06c13021de0539af1c9d01af7d5126bf6fd6bc6bde8d9368624ce29e49ed9f0",
     "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "e0c67b7d9fc1e1ee82cc5959977708920839fc541e991d2effe29895705c6be4",
+    "text": "水晶の番人"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "f013b0e0ba0505f3f278cc5f0b09d6bce2db88db4ee42b8e5b8026c443c527a8",
+    "text": "屈折"
+  },
+  "content.species.pyrella.name": {
+    "reviewed": true,
+    "source": "Pyrella",
+    "sourceHash": "2bc7023d8c8264d11c3747c8b2dba93160b7ac41ec0ea92206d0dca912143f1e",
+    "text": "パイレラ"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3275,6 +4223,24 @@
     "sourceHash": "66591038279a114b10ea888873881c810ad16c5399fc43baaff4584019064397",
     "text": "<keyword0>炎上</keyword0>中の敵を倒すと、その敵の残りの<keyword1>炎上</keyword1>をほかの敵に広げる"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "364ce19ecbc8eb25e130b17ba9d654708746aa0b11fd8eb7997bca10a6480f33",
+    "text": "祭りの火花"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "6e8870973cee7ff9fb739e01afc8980574629eaf702089aeb0ce03868cf8eafa",
+    "text": "巡る炎"
+  },
+  "content.species.reedstag.name": {
+    "reviewed": true,
+    "source": "Reedstag",
+    "sourceHash": "99319d38fb6ac8b1e2d78a3646e3cd8bf80581f5e70e1c35b3907e0137fdda7c",
+    "text": "リードスタッグ"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3310,6 +4276,24 @@
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
     "sourceHash": "6d4085d3c863fb6e3f22421e5e586826dd5a950b5948872bb360f9180289d2fd",
     "text": "<keyword0>ブロック</keyword0>と<keyword1>棘</keyword1>が味方に共有される"
+  },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "b95a81ec3397eb1badd03a7baf834a9cd1d049e29041a711fd5f9dd53fb9a1fc",
+    "text": "生きた葦原"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "68b16a97119b3056fe36961d2eacfe891272ce001e5bac86efbe752195ef8171",
+    "text": "葦の守り"
+  },
+  "content.species.reverie.name": {
+    "reviewed": true,
+    "source": "Reverie",
+    "sourceHash": "63a8d896043bd21904f79f9950f9ebdef0151e44d20cc0c469f567476b4a0ff4",
+    "text": "レヴェリー"
   },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
@@ -3347,41 +4331,77 @@
     "sourceHash": "1e5f5f3f359d50e17d6d146b6dc7b317ea47417b7d8cdd18e6e6b1304b0d5a8f",
     "text": "自分のターン終了時、カードを使わなかった味方はそれぞれ<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "46e6ca7b656026d0c4dfcdc4a835801a15f81d981368619932b3606f86767790",
+    "text": "夢の聖域"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "cf3f665e540678c571e84194c79870d3bd51f5138ab792430393364db282ac4d",
+    "text": "ゆるやかに"
+  },
+  "content.species.ringpalm.name": {
+    "reviewed": true,
+    "source": "Ringpalm",
+    "sourceHash": "59e0cafffae8943af789837dc991beda001ae361161823d5cb760f4e74920d2e",
+    "text": "リングパーム"
+  },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "52fe1959a2e98d415175afc22eceeb9ef3c2f38ff551f15e9bbd5143a44d375a",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.1.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "30026c24b2866a1e1736aa6be4299d22ee72038f83a10fed404432216b1bf8d9",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.2.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "6941c958dd294a1fc58523a2028bf9037bdc8246ea57cb45baa727bc1ec85b3c",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.3.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "3e2fa63c5e998179dd6ae89cf39dc773d64446e8219c656a95a51a394ed7878d",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.4.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "f87e002691f594edd214e561c86645619c114fb4669cd1dbe0b8bb1af45f7d52",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.5.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "d1f4d22d689f179c8ead23dd7d30d48ed302436676829ec4202b57043a791a67",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+  },
+  "content.species.ringpalm.title": {
+    "reviewed": true,
+    "source": "The stone-circle guardian",
+    "sourceHash": "ae692b7db635184d45397b7b996982101a6f8dceef20c7957458ecd46c367a7e",
+    "text": "石の輪の守り手"
+  },
+  "content.species.ringpalm.trait": {
+    "reviewed": true,
+    "source": "Resonance",
+    "sourceHash": "f621056eda38caa0754360bccea8e8d9d5f53090f62f318a0cacf552ec32f501",
+    "text": "共鳴"
+  },
+  "content.species.rookhaven.name": {
+    "reviewed": true,
+    "source": "Rookhaven",
+    "sourceHash": "70008e4a0935a090f7850021ab3eb79caf4b2f008f0a29a0b97d44964423225b",
+    "text": "ルークヘイヴン"
   },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
@@ -3419,6 +4439,24 @@
     "sourceHash": "704ebdaed84c7b89e6ddea373349b3979da62d3bd305f813a7132bd14fb9da23",
     "text": "カードを引くとそのカードをコピー"
   },
+  "content.species.rookhaven.title": {
+    "reviewed": true,
+    "source": "The keeper of forgotten stories",
+    "sourceHash": "2a1faf151a183d9f3e6bdb7c1bd4965c1e4f04a79139be07a53b5306ff11c07f",
+    "text": "忘れられた物語の守り手"
+  },
+  "content.species.rookhaven.trait": {
+    "reviewed": true,
+    "source": "Well Read",
+    "sourceHash": "1f94917d48a2f25700a7eaeba7982bfb27e9d1071806cffaef99272fcb014975",
+    "text": "博覧強記"
+  },
+  "content.species.shadebrim.name": {
+    "reviewed": true,
+    "source": "Shadebrim",
+    "sourceHash": "69fb4c63fb427bd685409220d6b38b7cbc8f6e06d690636fc47811b444870e73",
+    "text": "シェードブリム"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -3454,6 +4492,24 @@
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
     "sourceHash": "a47147bde8233e4ba68cc157afb172b5f3617229cacec4eae39a6d3fd77e216e",
     "text": "味方が受ける<keyword0>炎上</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.shadebrim.title": {
+    "reviewed": true,
+    "source": "The cool refuge",
+    "sourceHash": "c63bdc228a0e4411941c997da747160d6ce10cd32fcac39006ce42c1809fd63b",
+    "text": "涼しい隠れ家"
+  },
+  "content.species.shadebrim.trait": {
+    "reviewed": true,
+    "source": "Cool Refuge",
+    "sourceHash": "d7051ced11a3414326f3169150d641aaaf2c9bea8afb4935be21b0b0db00f0ae",
+    "text": "涼しい隠れ家"
+  },
+  "content.species.skybex.name": {
+    "reviewed": true,
+    "source": "Skybex",
+    "sourceHash": "7f41ae4a2ef04e36365d5d795bf9e5e9c11b3177a8f224a570be4080573825e7",
+    "text": "スカイベックス"
   },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
@@ -3491,41 +4547,77 @@
     "sourceHash": "6c30754e9e3cb9f8eb4b5263b52680397169e4c5ffd5af0716cb5aed0cc196ad",
     "text": "味方が交代で場に出ると<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.species.skybex.title": {
+    "reviewed": true,
+    "source": "The mountain guide",
+    "sourceHash": "baa18e9adc02105408cc412f4970e931b0f3f291607209195228b676c68d8a49",
+    "text": "山の案内人"
+  },
+  "content.species.skybex.trait": {
+    "reviewed": true,
+    "source": "Mountain Guide",
+    "sourceHash": "e99c3ec9537d2c85e797464188d9c59f0b96225d11516c0f788f8f53c752d532",
+    "text": "山の案内人"
+  },
+  "content.species.sternshell.name": {
+    "reviewed": true,
+    "source": "Sternshell",
+    "sourceHash": "33de05631e462fd3c19c6dd893217c1eb37c0aadf86873405d2c693e29b7f06c",
+    "text": "スターンシェル"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "ee1db0492ce586cc184be286e814fbd5e06bb135859789850a6c4dd0d07203f0",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.1.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "7ed3972d9407e8e1304e6c4d42aed89654c78c70ca1ab8b1a7994fd3aff93ffd",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.2.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "3d37aaa77467df9e5a77f410df431388ea0122831fe75a26717028fb96f22d79",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.3.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "f46e8272ea3a795438c537c7b3680826900bf75f85dc5f7df475dac7fab54b52",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.4.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "ed018486708789ef784904f7bc2a0b7002c07bdcea6f15c8d8896a8fdcf58ece",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.5.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "2c40f938ff3e528e35db4de05093010598fb087c32f1bc90ea1fcc3849e0007d",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+  },
+  "content.species.sternshell.title": {
+    "reviewed": true,
+    "source": "The steadfast voyager",
+    "sourceHash": "f428cb2d81fc0c6bbbd395d8c143c85e0d358ef74f55a553199a68f099a921a3",
+    "text": "揺るがぬ旅人"
+  },
+  "content.species.sternshell.trait": {
+    "reviewed": true,
+    "source": "Shelter",
+    "sourceHash": "16dc09c152b40c8fa131670b6cb3cca9353f6de0557578c3de241c32be7abfbb",
+    "text": "庇護"
+  },
+  "content.species.stillara.name": {
+    "reviewed": true,
+    "source": "Stillara",
+    "sourceHash": "33f3fbf07e19e52884895006db3df113eded2399d738b34dd50ff9b994d39832",
+    "text": "スティララ"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
@@ -3563,6 +4655,24 @@
     "sourceHash": "6ced9ca59005c6dbd02630d9f95f702ae0abd317ad380b839fce2ab38ec04177",
     "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
   },
+  "content.species.stillara.title": {
+    "reviewed": true,
+    "source": "The keeper of summer",
+    "sourceHash": "c350968bcff727d3111e37524008b5e7fd7778f00532dc5f2877b292b6c5d928",
+    "text": "夏の守り手"
+  },
+  "content.species.stillara.trait": {
+    "reviewed": true,
+    "source": "First Thaw",
+    "sourceHash": "e14f09efe8bd01c373a5e16d1ab89a9e006d2fd5c490e04a72dc8dc9a299d5b3",
+    "text": "最初の雪解け"
+  },
+  "content.species.tournelle.name": {
+    "reviewed": true,
+    "source": "Tournelle",
+    "sourceHash": "31ac229d711e816b549820a897fc58a2d419a005d218957863f5f74f6106effc",
+    "text": "トゥルネル"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3599,41 +4709,77 @@
     "sourceHash": "a562e3dd064fae2919e1ec5e2bfda472348eebbab482da901d04e354d695902e",
     "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
   },
+  "content.species.tournelle.title": {
+    "reviewed": true,
+    "source": "The little gallant",
+    "sourceHash": "ad16c3457d1b6cb6955d1b7f3aefabab110efc4ba89ec90fc8a60f62904202c7",
+    "text": "小さな騎士"
+  },
+  "content.species.tournelle.trait": {
+    "reviewed": true,
+    "source": "Gallantry",
+    "sourceHash": "66bbf56df47b7860ccba1edcb3bea638a1482a3190fd5726ff61cb8f56e7e9e3",
+    "text": "騎士の心"
+  },
+  "content.species.wickwaltz.name": {
+    "reviewed": true,
+    "source": "Wickwaltz",
+    "sourceHash": "db73b61d56aed0087feca77dcf136173dbffb8d812b23dc489bfa3873e9fe9fb",
+    "text": "ウィックワルツ"
+  },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "52678e78551d17563a919206351f23a120b7431ea0fc806e6140faa0b6920cbc",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.1.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "02d82a9f4e24fdc0510fd677a72b9be9ac6d793d907a40a4c1cc3553d49f3872",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.2.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "0f7f902c4a1c1b2330998fbde0a85488ebd3f0a56b4ebdd0b59db231fac067d9",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.3.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "8e7bf4ef0ff21b967defe5133b54a11108ae37c39b89cd79a7ad351a743b326e",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.4.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
     "sourceHash": "7ba4eff17aa5b17a91c8e4e00e0b7da891e0c3cefb8b3dba7c7addd5b0d4f937",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.5.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn repeats",
     "sourceHash": "5f6598ddbeab00571cb8f3f968ded4dce027028caa6606e86e5f8c27ddf35a6b",
-    "text": "各ターンのWickwaltzの2枚目のカードが繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードが繰り返される"
+  },
+  "content.species.wickwaltz.title": {
+    "reviewed": true,
+    "source": "The kindling dancer",
+    "sourceHash": "03bf36030141bc281a222d90620bd9514ae5565ccd2612a34dcf26436cfcdebe",
+    "text": "焚き付けの踊り手"
+  },
+  "content.species.wickwaltz.trait": {
+    "reviewed": true,
+    "source": "Kindling Flourish",
+    "sourceHash": "246f0b12a233294e53c275c0337ff3bcbceb52817135d4324ffd2fc503f0923e",
+    "text": "焚き付けの舞"
+  },
+  "content.species.wisterelle.name": {
+    "reviewed": true,
+    "source": "Wisterelle",
+    "sourceHash": "e45bb574289ec3341a31c271b3034dd4f233b8998233121bdc748be8d1955109",
+    "text": "ウィステレル"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
@@ -3671,6 +4817,18 @@
     "sourceHash": "c7c587f79001eb1e61cd639c436439acd2d00968b738df9ff0654cf491547765",
     "text": "捨て札からカードを引くと、その所有者の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.wisterelle.title": {
+    "reviewed": true,
+    "source": "The keeper of the flowering station",
+    "sourceHash": "8724746227086934d4c3e3e6e81afd3a1c98fb4e95db54156c09a70056391f98",
+    "text": "花咲く駅の守り手"
+  },
+  "content.species.wisterelle.trait": {
+    "reviewed": true,
+    "source": "Lost and Found",
+    "sourceHash": "2ae091bca7d027cf3369a81c347c7962e353352ce00377a22cb0ca634b5e7b25",
+    "text": "落とし物"
+  },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
@@ -3707,11 +4865,53 @@
     "sourceHash": "e32203d5a5a38dd39f479a7e844389818e429c2166a7603a0224a11d13c8dd90",
     "text": "行動不能への耐性 {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "f8f17974ad419e27ca03b97256c590f632a32d86c000904a224d69e368377d93",
+    "text": "無料の追撃：次のカードは無料"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "25c0b714a6e805d04f4360e2fb56ff5c546a1c227f7ff08b8208a4c5365a8507",
+    "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "d0b1fdfd8860370c352587aaf14f5c87c5793fba29def787c36b7c9e2ee8dfb0",
+    "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "152984fd4c12321d5db6d40d61ddfc3682f20c4bd7ec97518f23905c54e79449",
     "text": "死の淵 {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "b28997915cc62f2e5e3e034f966b4ef1fb4d619b6dde93e6cd151757e6c95725",
+    "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "7f56009872efd0a7a4e2c2996630f51330253c0197ae670a839bc8607115b19e",
+    "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "06c58c3bdb82c2390bbf76c3318c5633313d2d14f115871deae9534680254c9d",
+    "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "051d65b655e534873ec8af3bf90ee4d4475577b6c6c3dbeefcabaf169c23b81d",
+    "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
