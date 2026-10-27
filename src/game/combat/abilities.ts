@@ -38,6 +38,7 @@ export function executeAbility(
     kind: "action",
     actionType: def.effect === "attack" ? "attack" : "support",
     actorId: actor.id,
+    announcement: { kind: "useAbility", definitionId: def.id },
     targetId: enemy
       ? def.effect === "attack" && def.target === "allEnemies"
         ? undefined

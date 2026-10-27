@@ -9,8 +9,11 @@ import { localizedCombatantName } from "./combatant-name";
 
 // A repeated English name cannot safely identify a specific authored card.
 const cardsByEnglishName = new Map<string, CardDefinition | null>();
-for (const card of [...CARDS, ...FOOD_CARDS, PEARL])
+const cardsById = new Map<string, CardDefinition>();
+for (const card of [...CARDS, ...FOOD_CARDS, PEARL]) {
   cardsByEnglishName.set(card.name, cardsByEnglishName.has(card.name) ? null : card);
+  cardsById.set(card.id, card);
+}
 const speciesByEnglishName = new Map<string, (typeof SPECIES)[number] | null>();
 for (const entry of SPECIES)
   speciesByEnglishName.set(entry.name, speciesByEnglishName.has(entry.name) ? null : entry);
@@ -94,14 +97,19 @@ export function eventPresentation(
       });
     if (actor) {
       const prefix = `${unitName(actor)} uses `;
-      if (event.text.startsWith(prefix) && event.text.endsWith(".")) {
-        const card = cardsByEnglishName.get(event.text.slice(prefix.length, -1));
-        if (card)
-          return i18n.message("log.useCard", "{{actor}} uses {{card}}.", {
-            actor: localizedCombatantName(actor, i18n),
-            card: i18n.content(`content.card.${card.id}.name`, card.name),
-          });
-      }
+      const announced = event.announcement && cardsById.get(event.announcement.definitionId);
+      const card = event.announcement
+        ? announced && event.text === `${prefix}${announced.name}.`
+          ? cardsByEnglishName.get(announced.name)
+          : undefined
+        : event.text.startsWith(prefix) && event.text.endsWith(".")
+          ? cardsByEnglishName.get(event.text.slice(prefix.length, -1))
+          : undefined;
+      if (card)
+        return i18n.message("log.useCard", "{{actor}} uses {{card}}.", {
+          actor: localizedCombatantName(actor, i18n),
+          card: i18n.content(`content.card.${card.id}.name`, card.name),
+        });
     }
     if (actor && event.actionType === "support") {
       const copyPrefix = `${species(actor.species).name} copies `;

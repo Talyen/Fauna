@@ -164,6 +164,34 @@ export function createCloud(
     metadataWrites = writing.catch(() => {});
     return writing;
   }
+  async function readInventory(port: CloudPort, identity: CloudIdentity, token: number) {
+    const files = (await port.list()).filter(isCloudName);
+    if (!owns(token)) return;
+    if (files.length > 64) throw new Error("Cloud device limit reached. Local progress remains available.");
+    const streams = new Set<string>();
+    const remote: CloudSnapshot[] = [];
+    let invalid = false;
+    for (const name of files) {
+      try {
+        const raw = await port.read(name);
+        if (!owns(token)) return;
+        if (!raw) throw new Error("Cloud slot is unreadable.");
+        const record = await parseSnapshot(raw, identity.profile);
+        if (!owns(token)) return;
+        if (cloudName(record) !== name) throw new Error("Cloud slot identity differs.");
+        streams.add(record.device);
+        remote.push(record);
+        if (record.device === identity.device) sequence = Math.max(sequence, record.sequence);
+      } catch {
+        invalid = true;
+      }
+    }
+    if (!owns(token)) return;
+    if (streams.size + Number(!streams.has(identity.device)) > 32)
+      throw new Error("Cloud device limit reached. Local progress remains available.");
+    if (invalid && streams.size === 0) throw new Error("No valid cloud snapshots; remote files preserved.");
+    return { remote, invalid };
+  }
   async function reconcile(background = false, initialization?: number, recoverEmpty = false) {
     if (!alive() || !port || !identity?.available || identity.enabled === false) return;
     // Startup retains its lease through reconciliation so its deadline covers remote reads too.
@@ -178,31 +206,9 @@ export function createCloud(
       // An in-flight write must finish before comparing remote heads.
       await running;
       if (!owns(token)) return;
-      const files = (await port.list()).filter(isCloudName);
-      if (!owns(token)) return;
-      if (files.length > 64) throw new Error("Cloud device limit reached. Local progress remains available.");
-      const streams = new Set<string>();
-      const remote: CloudSnapshot[] = [];
-      let invalid = false;
-      for (const name of files) {
-        try {
-          const raw = await port.read(name);
-          if (!owns(token)) return;
-          if (!raw) throw new Error("Cloud slot is unreadable.");
-          const record = await parseSnapshot(raw, identity.profile);
-          if (!owns(token)) return;
-          if (cloudName(record) !== name) throw new Error("Cloud slot identity differs.");
-          streams.add(record.device);
-          remote.push(record);
-          if (record.device === identity.device) sequence = Math.max(sequence, record.sequence);
-        } catch {
-          invalid = true;
-        }
-      }
-      if (!owns(token)) return;
-      if (streams.size + Number(!streams.has(identity.device)) > 32)
-        throw new Error("Cloud device limit reached. Local progress remains available.");
-      if (invalid && streams.size === 0) throw new Error("No valid cloud snapshots; remote files preserved.");
+      const inventory = await readInventory(port, identity, token);
+      if (!inventory || !owns(token)) return;
+      const { remote, invalid } = inventory;
       if (background && localData && current?.payload !== localData) await persist(localData);
       if (!owns(token)) return;
       const plan = reconciliationPlan({

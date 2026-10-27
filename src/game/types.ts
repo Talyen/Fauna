@@ -115,6 +115,7 @@ export type GameEvent =
       actorId: string;
       actionType: "attack" | "support" | "swap";
       amount?: number;
+      announcement?: { kind: "useAbility"; definitionId: string };
     })
   | { [K in "turn" | "reward" | "victory" | "knockout"]: EventContext & { kind: K; amount?: number } }[
       "turn" | "reward" | "victory" | "knockout"]

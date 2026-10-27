@@ -146,6 +146,15 @@ it.each(scenarios)("preserves commands, previews, save/resume and rankings: $nam
   const command = availablePlays(game, false)[0]!.commands[0]!;
   const result = dispatch(game, command);
   expect(result.accepted).toBe(true);
+  expect(result.events).toContainEqual(
+    expect.objectContaining({
+      kind: "action",
+      announcement: {
+        kind: "useAbility",
+        definitionId: game.cards.find((card) => card.id === command.cardId)!.definitionId,
+      },
+    }),
+  );
   expect(dispatch(decodeSave(before), command)).toEqual(result);
   expect(result.state.rng).toBe(dispatch(game, command).state.rng);
   const preview = previewCard(game, command.cardId, command.targetId);

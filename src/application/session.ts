@@ -98,6 +98,18 @@ export function createSession(
       if (!disposed && !store.getState().closing) save(store.getState().game);
     }, 5000);
   };
+  const saveFailed = (error: unknown) => {
+    diagnostics.record("save-write", error, store.getState().game);
+    if (!disposed) {
+      saveFailures++;
+      publish({
+        saveStatus: "error",
+        saveUnavailable: store.getState().saveUnavailable || saveFailures >= 2,
+        error: "",
+      });
+      scheduleSaveRetry();
+    }
+  };
   const readCandidates = async (retry = false, owns = () => true) => {
     let active = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
@@ -159,16 +171,7 @@ export function createSession(
             try {
               await writeLocal(encodeSave(store.getState().game));
             } catch (error) {
-              diagnostics.record("save-write", error, store.getState().game);
-              if (!disposed) {
-                saveFailures++;
-                publish({
-                  saveStatus: "error",
-                  saveUnavailable: store.getState().saveUnavailable || saveFailures >= 2,
-                  error: "",
-                });
-                scheduleSaveRetry();
-              }
+              saveFailed(error);
               throw error;
             }
             return;
@@ -225,18 +228,7 @@ export function createSession(
         // A stalled sync must not prevent the next gameplay snapshot reaching disk.
         void cloud.commit(data);
       })
-      .catch((error) => {
-        diagnostics.record("save-write", error, store.getState().game);
-        if (!disposed) {
-          saveFailures++;
-          publish({
-            saveStatus: "error",
-            saveUnavailable: store.getState().saveUnavailable || saveFailures >= 2,
-            error: "",
-          });
-          scheduleSaveRetry();
-        }
-      });
+      .catch(saveFailed);
     // Admit persistence before subscribers can issue another command or dispose.
     publish({ ...committed, saveStatus: "saving" });
   };

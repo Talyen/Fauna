@@ -6,6 +6,8 @@ export const recordedTraceDigest = (value: unknown) =>
   createHash("sha256")
     .update(
       JSON.stringify(value, (key, entry) => {
+        // Presentation metadata does not change the recorded combat facts or text.
+        if (key === "announcement" && entry?.kind === "useAbility") return undefined;
         if (key === "version") return 57;
         if (
           entry &&
