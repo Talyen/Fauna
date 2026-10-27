@@ -169,3 +169,13 @@ export function qualificationIssues(languages, coverage, english, catalogs, glos
   }
   return issues;
 }
+
+export function mergeSources(...catalogs) {
+  const merged = {};
+  for (const catalog of catalogs)
+    for (const [id, message] of Object.entries(catalog)) {
+      if (Object.hasOwn(merged, id)) throw new Error(`Duplicate source message ID: ${id}`);
+      merged[id] = message;
+    }
+  return sorted(merged);
+}

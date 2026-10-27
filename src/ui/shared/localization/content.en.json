@@ -1,0 +1,1418 @@
+{
+  "content.boon.accordioned-bridge.name": {
+    "text": "Accordioned Bridge"
+  },
+  "content.boon.aether-gramophone.name": {
+    "text": "Aether Gramophone"
+  },
+  "content.boon.apiary-smoker.name": {
+    "text": "Apiary Smoker"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "text": "Ashfall Pendant"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "text": "Basalt Glass Bookmark"
+  },
+  "content.boon.blooming-still.name": {
+    "text": "Blooming Still"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "text": "Blossom Cake Stand"
+  },
+  "content.boon.bone-charm.name": {
+    "text": "Bone Charm"
+  },
+  "content.boon.brass-censer.name": {
+    "text": "Brass Censer"
+  },
+  "content.boon.briar-racquet.name": {
+    "text": "Briar Racquet"
+  },
+  "content.boon.brookskip-disc.name": {
+    "text": "Brookskip Disc"
+  },
+  "content.boon.calendula-soap.name": {
+    "text": "Calendula Soap"
+  },
+  "content.boon.camp-hammock.name": {
+    "text": "Camp Hammock"
+  },
+  "content.boon.cinder-fan.name": {
+    "text": "Cinder Fan"
+  },
+  "content.boon.cloud-cup-and-ball.name": {
+    "text": "Cloud Cup-and-Ball"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "text": "Comb Uncapping Fork"
+  },
+  "content.boon.comet-crucible.name": {
+    "text": "Comet Crucible"
+  },
+  "content.boon.coral-music-box.name": {
+    "text": "Coral Music Box"
+  },
+  "content.boon.coral-net-weight.name": {
+    "text": "Coral Net Weight"
+  },
+  "content.boon.coronation-cloche.name": {
+    "text": "Coronation Cloche"
+  },
+  "content.boon.crater-punch.name": {
+    "text": "Crater Punch"
+  },
+  "content.boon.crescent-sextant.name": {
+    "text": "Crescent Sextant"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "text": "Cutpurse Knife"
+  },
+  "content.boon.devotion-clasp.name": {
+    "text": "Devotion Clasp"
+  },
+  "content.boon.dream-tangram.name": {
+    "text": "Dream Tangram"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "text": "Dream Yo-Yo"
+  },
+  "content.boon.dune-shuttle.name": {
+    "text": "Dune Shuttle"
+  },
+  "content.boon.echo-lens.name": {
+    "text": "Echo Lens"
+  },
+  "content.boon.eclipse-protractor.name": {
+    "text": "Eclipse Protractor"
+  },
+  "content.boon.eclipse-rivet.name": {
+    "text": "Eclipse Rivet"
+  },
+  "content.boon.encore-baton.name": {
+    "text": "Encore Baton"
+  },
+  "content.boon.facet-abacus.name": {
+    "text": "Facet Abacus"
+  },
+  "content.boon.fallingstar-anvil.name": {
+    "text": "Fallingstar Anvil"
+  },
+  "content.boon.fern-fencing-foil.name": {
+    "text": "Fern Fencing Foil"
+  },
+  "content.boon.field-lunch-basket.name": {
+    "text": "Field Lunch Basket"
+  },
+  "content.boon.frozen-pocketwatch.name": {
+    "text": "Frozen Pocketwatch"
+  },
+  "content.boon.furnace-prism.name": {
+    "text": "Furnace Prism"
+  },
+  "content.boon.gemmed-scabbard.name": {
+    "text": "Gemmed Scabbard"
+  },
+  "content.boon.geode-anvil.name": {
+    "text": "Geode Anvil"
+  },
+  "content.boon.grafting-needle.name": {
+    "text": "Grafting Needle"
+  },
+  "content.boon.grain-flail.name": {
+    "text": "Grain Flail"
+  },
+  "content.boon.groves-favor.name": {
+    "text": "Grove's Favor"
+  },
+  "content.boon.hearth-coal.name": {
+    "text": "Hearth Coal"
+  },
+  "content.boon.herbarium-press.name": {
+    "text": "Herbarium Press"
+  },
+  "content.boon.hoard-lockplate.name": {
+    "text": "Hoard Lockplate"
+  },
+  "content.boon.honey-press.name": {
+    "text": "Honey Press"
+  },
+  "content.boon.honeycomb-frame.name": {
+    "text": "Honeycomb Frame"
+  },
+  "content.boon.icy-heart.name": {
+    "text": "Icy Heart"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "text": "Ironwood Buckler"
+  },
+  "content.boon.journey-loom.name": {
+    "text": "Journey Loom"
+  },
+  "content.boon.knot-comb.name": {
+    "text": "Knot Comb"
+  },
+  "content.boon.last-candle.name": {
+    "text": "Last Candle"
+  },
+  "content.boon.last-threshold.name": {
+    "text": "Last Threshold"
+  },
+  "content.boon.lava-cameo.name": {
+    "text": "Lava Cameo"
+  },
+  "content.boon.lovers-knot.name": {
+    "text": "Lovers Knot"
+  },
+  "content.boon.lucky-clover.name": {
+    "text": "Lucky Clover"
+  },
+  "content.boon.merchants-favor.name": {
+    "text": "Merchant's Favor"
+  },
+  "content.boon.mercury-metronome.name": {
+    "text": "Mercury Metronome"
+  },
+  "content.boon.meteorite.name": {
+    "text": "Meteorite"
+  },
+  "content.boon.mineral-bookend.name": {
+    "text": "Mineral Bookend"
+  },
+  "content.boon.miracle-megaphone.name": {
+    "text": "Miracle Megaphone"
+  },
+  "content.boon.molten-paperweight.name": {
+    "text": "Molten Paperweight"
+  },
+  "content.boon.moonboat-toy.name": {
+    "text": "Moonboat Toy"
+  },
+  "content.boon.moonveil-mask.name": {
+    "text": "Moonveil Mask"
+  },
+  "content.boon.moss-oven-mitt.name": {
+    "text": "Moss Oven Mitt"
+  },
+  "content.boon.nectar-dipper.name": {
+    "text": "Nectar Dipper"
+  },
+  "content.boon.obsidian-pitcher.name": {
+    "text": "Obsidian Pitcher"
+  },
+  "content.boon.orbit-armillary.name": {
+    "text": "Orbit Armillary"
+  },
+  "content.boon.origami-staircase.name": {
+    "text": "Origami Staircase"
+  },
+  "content.boon.paper-lotus.name": {
+    "text": "Paper Lotus"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "text": "Parasitic Bloom"
+  },
+  "content.boon.pattern-reel.name": {
+    "text": "Pattern Reel"
+  },
+  "content.boon.peace-knot.name": {
+    "text": "Peace Knot"
+  },
+  "content.boon.pearl-sieve.name": {
+    "text": "Pearl Sieve"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "text": "Plague Doctor's Mask"
+  },
+  "content.boon.pleated-pagoda.name": {
+    "text": "Pleated Pagoda"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "text": "Poppy Seed Grinder"
+  },
+  "content.boon.prayer-sailboat.name": {
+    "text": "Prayer Sailboat"
+  },
+  "content.boon.prism-chisel.name": {
+    "text": "Prism Chisel"
+  },
+  "content.boon.pruning-crescent.name": {
+    "text": "Pruning Crescent"
+  },
+  "content.boon.pumpkin-tureen.name": {
+    "text": "Pumpkin Tureen"
+  },
+  "content.boon.rain-cape.name": {
+    "text": "Rain Cape"
+  },
+  "content.boon.raincatcher-bowl.name": {
+    "text": "Raincatcher Bowl"
+  },
+  "content.boon.rainkeeper.name": {
+    "text": "Rainkeeper"
+  },
+  "content.boon.reef-casket.name": {
+    "text": "Reef Casket"
+  },
+  "content.boon.reef-incense-tile.name": {
+    "text": "Reef Incense Tile"
+  },
+  "content.boon.resonance-kalimba.name": {
+    "text": "Resonance Kalimba"
+  },
+  "content.boon.resonant-chimes.name": {
+    "text": "Resonant Chimes"
+  },
+  "content.boon.rook-of-mercy.name": {
+    "text": "Rook of Mercy"
+  },
+  "content.boon.rootvault-pole.name": {
+    "text": "Rootvault Pole"
+  },
+  "content.boon.saddle-pouch.name": {
+    "text": "Saddle Pouch"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "text": "Sin-Eater's Lantern"
+  },
+  "content.boon.sleepers-urn.name": {
+    "text": "Sleepers Urn"
+  },
+  "content.boon.smugglers-map.name": {
+    "text": "Smuggler's Map"
+  },
+  "content.boon.sovereign-toast-rack.name": {
+    "text": "Sovereign Toast Rack"
+  },
+  "content.boon.star-hoop.name": {
+    "text": "Star Hoop"
+  },
+  "content.boon.stardust-whetstone.name": {
+    "text": "Stardust Whetstone"
+  },
+  "content.boon.story-puzzle-cube.name": {
+    "text": "Story Puzzle Cube"
+  },
+  "content.boon.sundering-charm.name": {
+    "text": "Sundering Charm"
+  },
+  "content.boon.tattered-pages.name": {
+    "text": "Tattered Pages"
+  },
+  "content.boon.thaw-spoon.name": {
+    "text": "Thaw Spoon"
+  },
+  "content.boon.thistle-sieve.name": {
+    "text": "Thistle Sieve"
+  },
+  "content.boon.thornheart-ring.name": {
+    "text": "Thornheart Ring"
+  },
+  "content.boon.thunder-conch.name": {
+    "text": "Thunder Conch"
+  },
+  "content.boon.thunderstone.name": {
+    "text": "Thunderstone"
+  },
+  "content.boon.tide-anklet.name": {
+    "text": "Tide Anklet"
+  },
+  "content.boon.tidecrest-hairpin.name": {
+    "text": "Tidecrest Hairpin"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "text": "Tuning Fork Charm"
+  },
+  "content.boon.undertow-castanets.name": {
+    "text": "Undertow Castanets"
+  },
+  "content.boon.velvet-whisk.name": {
+    "text": "Velvet Whisk"
+  },
+  "content.boon.vigil-lantern.name": {
+    "text": "Vigil Lantern"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "text": "Wax Foundation Mold"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "text": "Winnowing Sieve"
+  },
+  "content.boon.wishing-building-block.name": {
+    "text": "Wishing Building Block"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "text": "Wonder Ball Maze"
+  },
+  "content.boon.wonder-domino.name": {
+    "text": "Wonder Domino"
+  },
+  "content.boon.yarrow-salve-tin.name": {
+    "text": "Yarrow Salve Tin"
+  },
+  "content.card.aerostat-parcel-drop.name": {
+    "text": "Parcel Drop"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "text": "True Bearing"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "text": "Voyager’s Rest"
+  },
+  "content.card.almanelle-autumn-insight.name": {
+    "text": "Autumn Insight"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "text": "Rooted Year"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "text": "Spring Current"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "text": "Ember of Evening"
+  },
+  "content.card.alpenglen-last-light-charge.name": {
+    "text": "Last Light Charge"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "text": "Sunset Reversal"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "text": "Dancing Double"
+  },
+  "content.card.arabesca-ribbon-snare.name": {
+    "text": "Ribbon Snare"
+  },
+  "content.card.arabesca-springbound.name": {
+    "text": "Springbound"
+  },
+  "content.card.bloomquail-draw.name": {
+    "text": "Bloom Cradle"
+  },
+  "content.card.bloomquail-guard.name": {
+    "text": "Petal Rampart"
+  },
+  "content.card.bloomquail-heal.name": {
+    "text": "Petal Veil"
+  },
+  "content.card.cadenza-echoes-remember.name": {
+    "text": "Echoes Remember"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "text": "Resonant Well"
+  },
+  "content.card.cadenza-rousing-refrain.name": {
+    "text": "Rousing Refrain"
+  },
+  "content.card.captoad-attack.name": {
+    "text": "Spore Puff"
+  },
+  "content.card.captoad-guard.name": {
+    "text": "Mushroom Guard"
+  },
+  "content.card.captoad-swap.name": {
+    "text": "Bogbound Leap"
+  },
+  "content.card.chimecricket-attack.name": {
+    "text": "Resonant Leap"
+  },
+  "content.card.chimecricket-heal.name": {
+    "text": "Lullaby Drift"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "text": "Hush Dome"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "text": "Ashen Veil"
+  },
+  "content.card.cindernewt-attack.name": {
+    "text": "Cinder Lash"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "text": "Ember Breath"
+  },
+  "content.card.coralcurl-attack.name": {
+    "text": "Reef Jet"
+  },
+  "content.card.coralcurl-guard.name": {
+    "text": "Bubble Ward"
+  },
+  "content.card.coralcurl-swap.name": {
+    "text": "Coral Spiral"
+  },
+  "content.card.dawncall-attack.name": {
+    "text": "Sunwing Sweep"
+  },
+  "content.card.dawncall-heal.name": {
+    "text": "Morning Bloom"
+  },
+  "content.card.dawncall-teamCleanse.name": {
+    "text": "Dawn Cry"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "text": "Chapel Light"
+  },
+  "content.card.dulcera-hushed-waters.name": {
+    "text": "Hushed Waters"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "text": "Meadow Shelter"
+  },
+  "content.card.dunefox-attack.name": {
+    "text": "Sandburst Pounce"
+  },
+  "content.card.dunefox-dodge.name": {
+    "text": "Mirage Step"
+  },
+  "content.card.dunefox-dune-whirl.name": {
+    "text": "Dune Whirl"
+  },
+  "content.card.emberback-attack.name": {
+    "text": "Ember Charge"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "text": "Furnace Breath"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "text": "Magma Stomp"
+  },
+  "content.card.euphera-possible-path.name": {
+    "text": "Possible Path"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "text": "Twilight Lance"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "text": "Wish Exchange"
+  },
+  "content.card.food-apple.name": {
+    "text": "Apple"
+  },
+  "content.card.food-mana-berries.name": {
+    "text": "Mana Berries"
+  },
+  "content.card.food-trail-bread.name": {
+    "text": "Trail Bread"
+  },
+  "content.card.glintstride-attack.name": {
+    "text": "Prism Shear"
+  },
+  "content.card.glintstride-dodge.name": {
+    "text": "Mirage Run"
+  },
+  "content.card.glintstride-teamBlind.name": {
+    "text": "False Horizon"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "text": "Drowned Revelation"
+  },
+  "content.card.memento-lost-procession.name": {
+    "text": "Lost Procession"
+  },
+  "content.card.memento-pearl.name": {
+    "text": "Pearl"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "text": "Treasury Echo"
+  },
+  "content.card.mossguard-attack.name": {
+    "text": "Rooted Stomp"
+  },
+  "content.card.mossguard-guard.name": {
+    "text": "Boulder Brace"
+  },
+  "content.card.mossguard-heal.name": {
+    "text": "Moss Renewal"
+  },
+  "content.card.neradora-bloom-shelter.name": {
+    "text": "Bloom Shelter"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "text": "Tide Cup"
+  },
+  "content.card.neradora-undertow-knot.name": {
+    "text": "Undertow Knot"
+  },
+  "content.card.oathara-never-lost.name": {
+    "text": "Never Lost"
+  },
+  "content.card.oathara-travelers-ward.name": {
+    "text": "Traveler’s Ward"
+  },
+  "content.card.oathara-vow-of-return.name": {
+    "text": "Vow of Return"
+  },
+  "content.card.orifable-attack.name": {
+    "text": "Postal Swarm"
+  },
+  "content.card.orifable-createFood.name": {
+    "text": "Care Package"
+  },
+  "content.card.orifable-heal.name": {
+    "text": "Good Tidings"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "text": "Polar Reprieve"
+  },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "text": "Sundog Reservoir"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "text": "Whiteout Waltz"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "text": "Dazzle Burst"
+  },
+  "content.card.pollenmoth-heal.name": {
+    "text": "Bloomwake"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "text": "Petal Shelter"
+  },
+  "content.card.prismram-attack.name": {
+    "text": "Prism Charge"
+  },
+  "content.card.prismram-guard.name": {
+    "text": "Faceted Ward"
+  },
+  "content.card.prismram-spectrum-lance.name": {
+    "text": "Spectrum Lance"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "text": "Ember Harvest"
+  },
+  "content.card.pyrella-festival-burst.name": {
+    "text": "Festival Burst"
+  },
+  "content.card.pyrella-spark-decoy.name": {
+    "text": "Spark Decoy"
+  },
+  "content.card.reedstag-attack.name": {
+    "text": "Reed Rush"
+  },
+  "content.card.reedstag-guard.name": {
+    "text": "Reed Shelter"
+  },
+  "content.card.reedstag-heal.name": {
+    "text": "Mending Spring"
+  },
+  "content.card.reverie-dream-double.name": {
+    "text": "Dream Double"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "text": "Nightmare Harvest"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "text": "Waking Wonder"
+  },
+  "content.card.ringpalm-attack.name": {
+    "text": "Ringclap"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "text": "Harmonic Set"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "text": "Seedling Circle"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "text": "Borrowed Brilliance"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "text": "Margin of Possibility"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "text": "Unwritten Ending"
+  },
+  "content.card.shadebrim-attack.name": {
+    "text": "Coolfront"
+  },
+  "content.card.shadebrim-draw.name": {
+    "text": "Noon Bloom"
+  },
+  "content.card.shadebrim-guard.name": {
+    "text": "Noonward"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "text": "Cloudstep"
+  },
+  "content.card.skybex-draw.name": {
+    "text": "Far Horizon"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "text": "Sky Shepherd"
+  },
+  "content.card.sternshell-attack.name": {
+    "text": "Surge Ram"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "text": "Spiral Return"
+  },
+  "content.card.sternshell-swap.name": {
+    "text": "Siphon Vault"
+  },
+  "content.card.stillara-reed-reservoir.name": {
+    "text": "Reed Reservoir"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "text": "Thaw Path"
+  },
+  "content.card.stillara-water-remembers.name": {
+    "text": "Water Remembers"
+  },
+  "content.card.tournelle-attack.name": {
+    "text": "Valiant Challenge"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "text": "Safe Passage"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "text": "Kindled Courage"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "text": "Ember Pirouette"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "text": "Thermal Rise"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "text": "Saffron Screen"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "text": "Forgotten Junction"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "text": "Lantern Fare"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "text": "Left Luggage"
+  },
+  "content.species.aerostat.name": {
+    "text": "Aerostat"
+  },
+  "content.species.aerostat.title": {
+    "text": "The well-stocked traveler"
+  },
+  "content.species.aerostat.trait": {
+    "text": "Well Provisioned"
+  },
+  "content.species.almanelle.name": {
+    "text": "Almanelle"
+  },
+  "content.species.almanelle.title": {
+    "text": "The orchard through the seasons"
+  },
+  "content.species.almanelle.trait": {
+    "text": "Fallen Leaves"
+  },
+  "content.species.alpenglen.name": {
+    "text": "Alpenglen"
+  },
+  "content.species.alpenglen.title": {
+    "text": "The last light of the mountain"
+  },
+  "content.species.alpenglen.trait": {
+    "text": "Last Warmth"
+  },
+  "content.species.arabesca.name": {
+    "text": "Arabesca"
+  },
+  "content.species.arabesca.title": {
+    "text": "The dance of returning spring"
+  },
+  "content.species.arabesca.trait": {
+    "text": "Petalwake"
+  },
+  "content.species.bloomquail.name": {
+    "text": "Bloomquail"
+  },
+  "content.species.bloomquail.title": {
+    "text": "The petal keeper"
+  },
+  "content.species.bloomquail.trait": {
+    "text": "Full Bloom"
+  },
+  "content.species.cadenza.name": {
+    "text": "Cadenza"
+  },
+  "content.species.cadenza.title": {
+    "text": "The song of forgotten places"
+  },
+  "content.species.cadenza.trait": {
+    "text": "Living Chorus"
+  },
+  "content.species.captoad.name": {
+    "text": "Captoad"
+  },
+  "content.species.captoad.title": {
+    "text": "Beneath the spotted cap"
+  },
+  "content.species.captoad.trait": {
+    "text": "Sporecoat"
+  },
+  "content.species.chimecricket.name": {
+    "text": "Chimecricket"
+  },
+  "content.species.chimecricket.title": {
+    "text": "The evening chorus"
+  },
+  "content.species.chimecricket.trait": {
+    "text": "Encore"
+  },
+  "content.species.cindernewt.name": {
+    "text": "Cindernewt"
+  },
+  "content.species.cindernewt.title": {
+    "text": "The dancing ember"
+  },
+  "content.species.cindernewt.trait": {
+    "text": "Cinderstep"
+  },
+  "content.species.coralcurl.name": {
+    "text": "Coralcurl"
+  },
+  "content.species.coralcurl.title": {
+    "text": "The sheltered reef"
+  },
+  "content.species.coralcurl.trait": {
+    "text": "Bubbleburst"
+  },
+  "content.species.dawncall.name": {
+    "text": "Dawncall"
+  },
+  "content.species.dawncall.title": {
+    "text": "The sunrise herald"
+  },
+  "content.species.dawncall.trait": {
+    "text": "Early Bird"
+  },
+  "content.species.dulcera.name": {
+    "text": "Dulcera"
+  },
+  "content.species.dulcera.title": {
+    "text": "The gentle sanctuary"
+  },
+  "content.species.dulcera.trait": {
+    "text": "Gentle Passage"
+  },
+  "content.species.dunefox.name": {
+    "text": "Dunefox"
+  },
+  "content.species.dunefox.title": {
+    "text": "The shifting mirage"
+  },
+  "content.species.dunefox.trait": {
+    "text": "Shifting Sands"
+  },
+  "content.species.emberback.name": {
+    "text": "Emberback"
+  },
+  "content.species.emberback.title": {
+    "text": "The banked furnace"
+  },
+  "content.species.emberback.trait": {
+    "text": "Molten Shell"
+  },
+  "content.species.euphera.name": {
+    "text": "Euphera"
+  },
+  "content.species.euphera.title": {
+    "text": "A wish taking flight"
+  },
+  "content.species.euphera.trait": {
+    "text": "Good Fortune"
+  },
+  "content.species.glintstride.name": {
+    "text": "Glintstride"
+  },
+  "content.species.glintstride.title": {
+    "text": "A step beyond the shimmer"
+  },
+  "content.species.glintstride.trait": {
+    "text": "Wrong Foot"
+  },
+  "content.species.memento.name": {
+    "text": "Memento"
+  },
+  "content.species.memento.title": {
+    "text": "The palace that remembers"
+  },
+  "content.species.memento.trait": {
+    "text": "The Court Remembers"
+  },
+  "content.species.mossguard.name": {
+    "text": "Mossguard"
+  },
+  "content.species.mossguard.title": {
+    "text": "The gentle guardian"
+  },
+  "content.species.mossguard.trait": {
+    "text": "Overgrowth"
+  },
+  "content.species.neradora.name": {
+    "text": "Neradora"
+  },
+  "content.species.neradora.title": {
+    "text": "The living tide flower"
+  },
+  "content.species.neradora.trait": {
+    "text": "Tidal Regeneration"
+  },
+  "content.species.oathara.name": {
+    "text": "Oathara"
+  },
+  "content.species.oathara.title": {
+    "text": "The keeper of unfinished journeys"
+  },
+  "content.species.oathara.trait": {
+    "text": "Unfinished Journey"
+  },
+  "content.species.orifable.name": {
+    "text": "Orifable"
+  },
+  "content.species.orifable.title": {
+    "text": "The bearer of good tidings"
+  },
+  "content.species.orifable.trait": {
+    "text": "Express Delivery"
+  },
+  "content.species.parhelion.name": {
+    "text": "Parhelion"
+  },
+  "content.species.parhelion.title": {
+    "text": "The sun upon the snow"
+  },
+  "content.species.parhelion.trait": {
+    "text": "Sunthaw"
+  },
+  "content.species.pollenmoth.name": {
+    "text": "Pollenmoth"
+  },
+  "content.species.pollenmoth.title": {
+    "text": "A golden wake of flowers"
+  },
+  "content.species.pollenmoth.trait": {
+    "text": "Cross-Pollination"
+  },
+  "content.species.prismram.name": {
+    "text": "Prismram"
+  },
+  "content.species.prismram.title": {
+    "text": "The crystal sentinel"
+  },
+  "content.species.prismram.trait": {
+    "text": "Refraction"
+  },
+  "content.species.pyrella.name": {
+    "text": "Pyrella"
+  },
+  "content.species.pyrella.title": {
+    "text": "The festival spark"
+  },
+  "content.species.pyrella.trait": {
+    "text": "Passing Flame"
+  },
+  "content.species.reedstag.name": {
+    "text": "Reedstag"
+  },
+  "content.species.reedstag.title": {
+    "text": "The living reedbed"
+  },
+  "content.species.reedstag.trait": {
+    "text": "Reedguard"
+  },
+  "content.species.reverie.name": {
+    "text": "Reverie"
+  },
+  "content.species.reverie.title": {
+    "text": "The sanctuary of dreams"
+  },
+  "content.species.reverie.trait": {
+    "text": "Unhurried"
+  },
+  "content.species.ringpalm.name": {
+    "text": "Ringpalm"
+  },
+  "content.species.ringpalm.title": {
+    "text": "The stone-circle guardian"
+  },
+  "content.species.ringpalm.trait": {
+    "text": "Resonance"
+  },
+  "content.species.rookhaven.name": {
+    "text": "Rookhaven"
+  },
+  "content.species.rookhaven.title": {
+    "text": "The keeper of forgotten stories"
+  },
+  "content.species.rookhaven.trait": {
+    "text": "Well Read"
+  },
+  "content.species.shadebrim.name": {
+    "text": "Shadebrim"
+  },
+  "content.species.shadebrim.title": {
+    "text": "The cool refuge"
+  },
+  "content.species.shadebrim.trait": {
+    "text": "Cool Refuge"
+  },
+  "content.species.skybex.name": {
+    "text": "Skybex"
+  },
+  "content.species.skybex.title": {
+    "text": "The mountain guide"
+  },
+  "content.species.skybex.trait": {
+    "text": "Mountain Guide"
+  },
+  "content.species.sternshell.name": {
+    "text": "Sternshell"
+  },
+  "content.species.sternshell.title": {
+    "text": "The steadfast voyager"
+  },
+  "content.species.sternshell.trait": {
+    "text": "Shelter"
+  },
+  "content.species.stillara.name": {
+    "text": "Stillara"
+  },
+  "content.species.stillara.title": {
+    "text": "The keeper of summer"
+  },
+  "content.species.stillara.trait": {
+    "text": "First Thaw"
+  },
+  "content.species.tournelle.name": {
+    "text": "Tournelle"
+  },
+  "content.species.tournelle.title": {
+    "text": "The little gallant"
+  },
+  "content.species.tournelle.trait": {
+    "text": "Gallantry"
+  },
+  "content.species.wickwaltz.name": {
+    "text": "Wickwaltz"
+  },
+  "content.species.wickwaltz.title": {
+    "text": "The kindling dancer"
+  },
+  "content.species.wickwaltz.trait": {
+    "text": "Kindling Flourish"
+  },
+  "content.species.wisterelle.name": {
+    "text": "Wisterelle"
+  },
+  "content.species.wisterelle.title": {
+    "text": "The keeper of the flowering station"
+  },
+  "content.species.wisterelle.trait": {
+    "text": "Lost and Found"
+  },
+  "content.talent.armor.armored-surge.name": {
+    "text": "Armored Surge"
+  },
+  "content.talent.armor.bulwark.name": {
+    "text": "Bulwark"
+  },
+  "content.talent.armor.fireward.name": {
+    "text": "Fireward"
+  },
+  "content.talent.armor.iron-guard.name": {
+    "text": "Iron Guard"
+  },
+  "content.talent.armor.last-stand.name": {
+    "text": "Last Stand"
+  },
+  "content.talent.armor.purification.name": {
+    "text": "Purification"
+  },
+  "content.talent.armor.reactive-guard.name": {
+    "text": "Reactive Guard"
+  },
+  "content.talent.armor.reinforced.name": {
+    "text": "Reinforced"
+  },
+  "content.talent.armor.steadfast.name": {
+    "text": "Steadfast"
+  },
+  "content.talent.armor.thick-hide.name": {
+    "text": "Thick Hide"
+  },
+  "content.talent.bleed.bleeding-out.name": {
+    "text": "Bleeding Out"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "text": "Bloodrush"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "text": "First Blood"
+  },
+  "content.talent.bleed.flay.name": {
+    "text": "Flay"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "text": "Mortal Wound"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "text": "Parting Cut"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "text": "Sanguine"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "text": "Septic Shock"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "text": "Tainted Wound"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "text": "Wound Care"
+  },
+  "content.talent.block.blood-ward.name": {
+    "text": "Blood Ward"
+  },
+  "content.talent.block.footwork.name": {
+    "text": "Footwork"
+  },
+  "content.talent.block.grounding.name": {
+    "text": "Grounding"
+  },
+  "content.talent.block.impact-guard.name": {
+    "text": "Impact Guard"
+  },
+  "content.talent.block.reinforce.name": {
+    "text": "Reinforce"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "text": "Sacred Shield"
+  },
+  "content.talent.block.second-wind.name": {
+    "text": "Second Wind"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "text": "Sun-Struck Shield"
+  },
+  "content.talent.block.venom-ward.name": {
+    "text": "Venom Ward"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "text": "Weighted Guard"
+  },
+  "content.talent.burn.fire-resistance.name": {
+    "text": "Fire Resistance"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "text": "Flash Fire"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "text": "Flashpoint"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "text": "Heat Exhaustion"
+  },
+  "content.talent.burn.melting-point.name": {
+    "text": "Melting Point"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "text": "Smoke Screen"
+  },
+  "content.talent.burn.smoldering.name": {
+    "text": "Smoldering"
+  },
+  "content.talent.dodge.catch-breath.name": {
+    "text": "Catch Breath"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "text": "Clean Getaway"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "text": "Finding Rhythm"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "text": "Lightfoot"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "text": "Open Flank"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "text": "Perfect Timing"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "text": "Tailwind"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "text": "Thornstep"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "text": "Unburdened"
+  },
+  "content.talent.freeze.bitter-cold.name": {
+    "text": "Bitter Cold"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "text": "Brittle Armor"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "text": "Brittle Ice"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "text": "Cold Resistance"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "text": "Cryo-preservation"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "text": "Glacial Barrier"
+  },
+  "content.talent.freeze.icebound.name": {
+    "text": "Icebound"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "text": "Thaw Dividend"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "text": "Winter's Grasp"
+  },
+  "content.talent.health.clean-slate.name": {
+    "text": "Clean Slate"
+  },
+  "content.talent.health.combat-surge.name": {
+    "text": "Combat Surge"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "text": "Desperate Guard"
+  },
+  "content.talent.health.last-gasp.name": {
+    "text": "Last Gasp"
+  },
+  "content.talent.health.last-resort.name": {
+    "text": "Last Resort"
+  },
+  "content.talent.health.mending.name": {
+    "text": "Mending"
+  },
+  "content.talent.health.overflow.name": {
+    "text": "Overflow"
+  },
+  "content.talent.health.renewal.name": {
+    "text": "Renewal"
+  },
+  "content.talent.health.vitality.name": {
+    "text": "Vitality"
+  },
+  "content.talent.health.will-to-live.name": {
+    "text": "Will to Live"
+  },
+  "content.talent.leech.affliction-siphon.name": {
+    "text": "Affliction Siphon"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "text": "Armor Siphon"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "text": "Blood Debt"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "text": "Bloodletting"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "text": "Cull the Weak"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "text": "Deep Siphon"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "text": "Desperate Siphon"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "text": "Mana Siphon"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "text": "Sanguine Overflow"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "text": "Virulent Leech"
+  },
+  "content.talent.light.blessed-leech.name": {
+    "text": "Blessed Leech"
+  },
+  "content.talent.light.celestial-ward.name": {
+    "text": "Celestial Ward"
+  },
+  "content.talent.light.divine-favor.name": {
+    "text": "Divine Favor"
+  },
+  "content.talent.light.faith-barrier.name": {
+    "text": "Faith Barrier"
+  },
+  "content.talent.light.prosperity.name": {
+    "text": "Prosperity"
+  },
+  "content.talent.light.purge.name": {
+    "text": "Searing Light"
+  },
+  "content.talent.light.radiant-guard.name": {
+    "text": "Radiant Guard"
+  },
+  "content.talent.light.scorching-light.name": {
+    "text": "Scorching Light"
+  },
+  "content.talent.light.tithe.name": {
+    "text": "Tithe"
+  },
+  "content.talent.mana.arcane-frost.name": {
+    "text": "Arcane Frost"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "text": "Arcane Mending"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "text": "Dark Recovery"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "text": "Leyline Attunement"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "text": "Mana Bulwark"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "text": "Mana Shell"
+  },
+  "content.talent.mana.manaburn.name": {
+    "text": "Manaburn"
+  },
+  "content.talent.mana.wellspring.name": {
+    "text": "Wellspring"
+  },
+  "content.talent.nature.bramblegrowth.name": {
+    "text": "Bramblegrowth"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "text": "Briar Patch"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "text": "Ecosystem"
+  },
+  "content.talent.nature.entangle.name": {
+    "text": "Entangle"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "text": "Overgrowth"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "text": "Photosynthesis"
+  },
+  "content.talent.nature.thornskin.name": {
+    "text": "Thornskin"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "text": "Toxic Pollen"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "text": "Verdant Cycle"
+  },
+  "content.talent.nature.windstep.name": {
+    "text": "Windstep"
+  },
+  "content.talent.physical.armored-fists.name": {
+    "text": "Armored Fists"
+  },
+  "content.talent.physical.finish-him.name": {
+    "text": "Finishing Blow"
+  },
+  "content.talent.physical.heavy-blows.name": {
+    "text": "Heavy Blows"
+  },
+  "content.talent.physical.lacerate.name": {
+    "text": "Lacerate"
+  },
+  "content.talent.physical.riposte.name": {
+    "text": "Riposte"
+  },
+  "content.talent.physical.rupture.name": {
+    "text": "Rupture"
+  },
+  "content.talent.physical.shield-slam.name": {
+    "text": "Shield Slam"
+  },
+  "content.talent.physical.unrelenting.name": {
+    "text": "Unrelenting"
+  },
+  "content.talent.poison.caustic.name": {
+    "text": "Caustic"
+  },
+  "content.talent.poison.corrosive.name": {
+    "text": "Corrosive"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "text": "Hemotoxin"
+  },
+  "content.talent.poison.necrosis.name": {
+    "text": "Necrosis"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "text": "Paralytic Venom"
+  },
+  "content.talent.poison.torpor.name": {
+    "text": "Torpor"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "text": "Toxic Profit"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "text": "Toxin Resistance"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "text": "Venom Strike"
+  },
+  "content.talent.poison.virulent.name": {
+    "text": "Virulent"
+  },
+  "content.talent.stun.concussive-force.name": {
+    "text": "Concussive Force"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "text": "Exploit Weakness"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "text": "Extended Stun"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "text": "Free Follow-up"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "text": "Guarded Counter"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "text": "Jarring Blow"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "text": "Shatter Guard"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "text": "Stun Insight"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "text": "Stun Surge"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "text": "Cleansing Current"
+  },
+  "content.talent.water.erosion.name": {
+    "text": "Erosion"
+  },
+  "content.talent.water.high-tide.name": {
+    "text": "High Tide"
+  },
+  "content.talent.water.pressure.name": {
+    "text": "Pressure"
+  },
+  "content.talent.water.riptide.name": {
+    "text": "Riptide"
+  },
+  "content.talent.water.seafoam.name": {
+    "text": "Seafoam"
+  }
+}

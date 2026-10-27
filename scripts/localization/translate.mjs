@@ -1,16 +1,28 @@
 import fs from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
+import { extractProjectContent } from "./content.mjs";
 import { extractProjectMessages } from "./messages.mjs";
-import { applyPackets, preparePackets, qualificationIssues, validateCatalog } from "./catalog.mjs";
+import {
+  applyPackets,
+  mergeSources,
+  preparePackets,
+  qualificationIssues,
+  validateCatalog,
+} from "./catalog.mjs";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const directory = path.join(root, "src/ui/shared/localization");
 const reports = path.join(root, "reports/localization");
 const read = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 const englishFile = path.join(directory, "messages.en.json");
-const english = read(englishFile);
-if (JSON.stringify(english) !== JSON.stringify(extractProjectMessages(root)))
+const ui = read(englishFile);
+const content = read(path.join(directory, "content.en.json"));
+const english = mergeSources(ui, content);
+if (
+  JSON.stringify(ui) !== JSON.stringify(extractProjectMessages(root)) ||
+  JSON.stringify(content) !== JSON.stringify(extractProjectContent(root))
+)
   throw new Error("English catalog is stale; run npm run localization:extract first");
 const languages = read(path.join(directory, "languages.json"));
 const coverage = read(path.join(directory, "coverage.json"));

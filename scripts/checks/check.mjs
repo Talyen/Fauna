@@ -311,7 +311,14 @@ export function runCheck(
       if (status !== 0) return status;
     }
   }
-  if (paths.some((file) => file.startsWith("src/ui/") || file.startsWith("scripts/localization/"))) {
+  if (
+    paths.some(
+      (file) =>
+        file.startsWith("src/ui/") ||
+        file.startsWith("src/game/content/") ||
+        file.startsWith("scripts/localization/"),
+    )
+  ) {
     const status = run("scripts/localization/messages.mjs", ["check"]);
     if (status !== 0) return status;
     const translations = run("scripts/localization/translate.mjs", ["check"]);

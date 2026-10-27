@@ -1,3 +1,4 @@
+import { useMessages } from "../localization/message-context";
 import { useEffectBaseline } from "../effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../effects/palettes";
 import { CombatStatus } from "../combat/combat-status";
@@ -79,6 +80,7 @@ export function CreatureCard({
   combat,
   sharedDodge = 0,
 }: CreatureProps) {
+  const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const info = species(kind);
   useEffectBaseline(selected ? effectPalette(creatureKeywords(kind, progression)) : null, 1);
@@ -94,7 +96,7 @@ export function CreatureCard({
       className={[selected ? "selected" : "", invalidTarget ? "invalid-target" : ""].join(" ")}
       data-species={kind}
       data-enemy-id={enemyId}
-      aria-label={label ?? info.name}
+      aria-label={label ?? i18n.content(`content.species.${kind}.name`, info.name)}
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
       onClick={(event) => {
@@ -242,6 +244,7 @@ export function ActionCard({
   tooltips?: boolean;
   onDenied?: (element: HTMLElement) => void;
 }) {
+  const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const { def, value } = actionDisplay(card, actor, modifiers, enemy, enemyValue);
   const effectText = cardText(def, card.level, value, enemyPower, modifiers);
@@ -259,7 +262,7 @@ export function ActionCard({
       data-consume={def.consume || undefined}
       aria-label={
         label ??
-        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${modifiers ? cardCost(card, modifiers) : def.cost} mana, `}${effectText}`
+        `${i18n.content(`content.card.${def.id}.name`, def.name)}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${modifiers ? cardCost(card, modifiers) : def.cost} mana, `}${effectText}`
       }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}

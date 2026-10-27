@@ -25,20 +25,22 @@ function format(template: string, values: MessageValues, locale: string) {
 export function createMessageReader(locale: string, catalog: MessageCatalog) {
   const pluralRules = new Intl.PluralRules(locale);
   const englishPlural = new Intl.PluralRules("en");
+  function message(id: string, source: string, values: MessageValues = {}) {
+    const entry = Object.hasOwn(catalog, id) ? catalog[id] : undefined;
+    const translated =
+      entry &&
+      "text" in entry &&
+      entry.source === source &&
+      entry.text.trim() &&
+      matchesVariables(source, entry.text)
+        ? entry.text
+        : null;
+    return format(translated ?? source, values, translated === null ? "en" : locale);
+  }
   return {
     locale,
-    message(id: string, source: string, values: MessageValues = {}) {
-      const entry = Object.hasOwn(catalog, id) ? catalog[id] : undefined;
-      const translated =
-        entry &&
-        "text" in entry &&
-        entry.source === source &&
-        entry.text.trim() &&
-        matchesVariables(source, entry.text)
-          ? entry.text
-          : null;
-      return format(translated ?? source, values, translated === null ? "en" : locale);
-    },
+    message,
+    content: message,
     plural(id: string, source: PluralForms, count: number, values: MessageValues = {}) {
       const entry = Object.hasOwn(catalog, id) ? catalog[id] : undefined;
       const category = pluralRules.select(count);

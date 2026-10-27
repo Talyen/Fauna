@@ -8,11 +8,13 @@ import { act, render, screen, fireEvent, waitFor } from "@testing-library/react"
 import { expect, it, vi } from "vitest";
 import {
   applyPackets,
+  mergeSources,
   preparePackets,
   qualificationIssues,
   sourceHash,
   validateCatalog,
 } from "../../../scripts/localization/catalog.mjs";
+import { extractContent } from "../../../scripts/localization/content.mjs";
 import { extractMessages } from "../../../scripts/localization/messages.mjs";
 import { produce } from "immer";
 import { App } from "../../../src/ui/App";
@@ -20,6 +22,8 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import french from "../../../src/ui/shared/localization/locales/fr.json";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
+import { CreatureCard } from "../../../src/ui/shared/cards/cards";
+import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
 import { addBackups, requireBattle, run, teamRun } from "../../support/game";
 import { BattleScreen } from "../../../src/ui/battle/battle-screen";
@@ -536,4 +540,69 @@ it("changes language from Settings and returns focus without changing the journe
     vi.unstubAllGlobals();
     localStorage.removeItem("fauna.language.v1");
   }
+});
+
+it("extracts authored names by stable content identity and rejects ambiguous changes", () => {
+  const creature = {
+    location: "src/game/content/creatures/ember.ts",
+    source: `const kit = { species: { id: "ember", name: "Ember", title: "The dancer", trait: "Spark" }, cards: [attack("ember-lash", "Lash", 6)] };`,
+  };
+  const boon = {
+    location: "src/game/content/boons.ts",
+    source: `const list = [boon({ id: "old-lamp", name: "Old Lamp" })];`,
+  };
+  const talent = {
+    location: "src/game/content/talents/burn.ts",
+    source: `const list = [talent("burn.spark", "Spark", 0)];`,
+  };
+  const food = {
+    location: "src/game/content/food.ts",
+    source: `const food = [{ id: "food-apple", name: "Apple" }];`,
+  };
+  expect(extractContent([creature, boon, talent, food])).toEqual({
+    "content.boon.old-lamp.name": { text: "Old Lamp" },
+    "content.card.ember-lash.name": { text: "Lash" },
+    "content.card.food-apple.name": { text: "Apple" },
+    "content.species.ember.name": { text: "Ember" },
+    "content.species.ember.title": { text: "The dancer" },
+    "content.species.ember.trait": { text: "Spark" },
+    "content.talent.burn.spark.name": { text: "Spark" },
+  });
+  expect(() =>
+    extractContent([
+      creature,
+      { ...creature, source: creature.source.replace('name: "Ember"', 'name: "Changed"') },
+    ]),
+  ).toThrow("conflicting content");
+});
+
+it("rejects collisions between UI and authored content message IDs", () => {
+  expect(() => mergeSources({ "same.id": { text: "First" } }, { "same.id": { text: "Second" } })).toThrow(
+    "Duplicate source message ID",
+  );
+});
+
+it("renders authored creature and card names by their stable IDs without changing game data", () => {
+  const game = run();
+  const card = game.cards.find((value) => value.definitionId === "mossguard-guard")!;
+  const catalog: MessageCatalog = {
+    "content.species.mossguard.name": { source: "Mossguard", text: "Gardemousse" },
+    "content.species.mossguard.trait": { source: "Overgrowth", text: "Croissance" },
+    "content.card.mossguard-guard.name": { source: "Boulder Brace", text: "Garde de pierre" },
+  };
+  const view = render(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <TooltipProvider>
+        <CreatureCard kind="mossguard" />
+        <CreatureDetails kind="mossguard" />
+        <ActionDetails card={card} ownerName="Gardemousse" />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("button", { name: "Gardemousse" })).toBeTruthy();
+  expect(screen.getByText("Gardemousse")).toBeTruthy();
+  expect(screen.getByText("Croissance")).toBeTruthy();
+  expect(screen.getByText("Garde de pierre")).toBeTruthy();
+  expect(card.definitionId).toBe("mossguard-guard");
+  view.unmount();
 });
