@@ -2,6 +2,8 @@ import { expect, it } from "vitest";
 import { produce } from "immer";
 import { createSession } from "../../../src/application/session";
 import { dispatch } from "../../../src/game/engine";
+import { needsCampfire } from "../../../src/game/destinations";
+import { species } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameState } from "../../../src/game/types";
 import {
@@ -15,6 +17,17 @@ import {
   completeRecruitment,
   run,
 } from "../../support/game";
+
+it("checks the active team and backups for campfire recovery", () => {
+  const state = structuredClone(run());
+  for (const unit of state.team) unit.health = species(unit.species).health;
+  state.reserves = [{ ...state.team[0]!, id: "backup", health: 0 }];
+  expect(needsCampfire(state)).toBe(true);
+  state.reserves[0]!.health = species(state.reserves[0]!.species).health;
+  expect(needsCampfire(state)).toBe(false);
+  state.team[0]!.health = 0;
+  expect(needsCampfire(state)).toBe(true);
+});
 
 it.each([
   [
@@ -41,6 +54,38 @@ it.each([
 it.each([
   ["missing card zone", (state: GameState) => state.battle!.hand.pop()],
   [
+    "duplicate card zone",
+    (state: GameState) => {
+      const battle = state.battle!;
+      battle.draw[0] = battle.hand[0]!;
+    },
+  ],
+  [
+    "foreign card zone",
+    (state: GameState) => {
+      state.battle!.hand[0] = "missing-card";
+    },
+  ],
+  [
+    "incorrect permanent kit",
+    (state: GameState) => {
+      const cards = state.cards.filter((card) => card.ownerId === state.team[0]!.id);
+      cards[0]!.definitionId = cards[1]!.definitionId;
+    },
+  ],
+  [
+    "recruited creature missing from encounters",
+    (state: GameState) => {
+      state.discovery.encountered = state.discovery.encountered.filter((id) => id !== state.team[0]!.species);
+    },
+  ],
+  [
+    "noncanonical enemy identity",
+    (state: GameState) => {
+      state.battle!.enemies[0]!.id = "enemy-00";
+    },
+  ],
+  [
     "foreign enemy target",
     (state: GameState) => {
       state.battle!.enemies[0]!.targetId = "missing";
@@ -50,6 +95,13 @@ it.each([
     "foreign status source",
     (state: GameState) => {
       state.team[0]!.combat!.statusSources.burn = "missing";
+    },
+  ],
+  [
+    "foreign Bleed source",
+    (state: GameState) => {
+      state.team[0]!.combat!.bleed = 1;
+      state.team[0]!.combat!.bleedLeech = [{ sourceId: "missing", amount: 1 }];
     },
   ],
 ] as const)("rejects %s before resuming combat", (_, corrupt) => {

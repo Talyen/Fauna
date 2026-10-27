@@ -51,10 +51,14 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       ids.add(entry.id);
     }
   }
-  const species = new Set(catalog.species.map((entry) => entry.id));
+  const speciesById = new Map<string, (typeof catalog.species)[number]>();
+  for (const entry of catalog.species) if (!speciesById.has(entry.id)) speciesById.set(entry.id, entry);
+  const cardCounts = new Map<string, number>();
+  for (const card of catalog.cards)
+    if (card.species !== null) cardCounts.set(card.species, (cardCounts.get(card.species) ?? 0) + 1);
   if (FIRST_RUN_STARTERS.length < 3 || new Set(FIRST_RUN_STARTERS).size !== FIRST_RUN_STARTERS.length)
     error("first-run", "starter", "First-run starter pool needs at least three distinct species.");
-  for (const id of FIRST_RUN_STARTERS) if (!species.has(id)) error(id, "starter", "Unknown starter.");
+  for (const id of FIRST_RUN_STARTERS) if (!speciesById.has(id)) error(id, "starter", "Unknown starter.");
   for (const entry of catalog.species) {
     if (!Number.isSafeInteger(entry.health) || entry.health < 1 || entry.health > 1_000_000)
       error(entry.id, "health", "Unsupported Health.");
@@ -122,7 +126,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         )
           error(entry.id, "passiveTiers", "Invalid bounce count, effect or chance.");
       }
-    if (catalog.cards.filter((card) => card.species === entry.id).length !== 3)
+    if ((cardCounts.get(entry.id) ?? 0) !== 3)
       error(entry.id, "cards", "Species must contribute exactly three cards.");
   }
   for (const card of catalog.cards) {
@@ -209,13 +213,13 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   }
   if (!catalog.combatPacks.length) error("combat", "packs", "No combat packs.");
   for (const pack of [...catalog.combatPacks, ...catalog.bosses.map((boss) => boss.pack)])
-    if (pack.length < 1 || pack.length > 3 || pack.some((id) => !species.has(id)))
+    if (pack.length < 1 || pack.length > 3 || pack.some((id) => !speciesById.has(id)))
       error("encounters", "packs", "Invalid encounter pack.");
   for (const pack of catalog.combatPacks)
-    if (pack.some((id) => catalog.species.find((entry) => entry.id === id)?.legendary))
+    if (pack.some((id) => speciesById.get(id)?.legendary))
       error("combat", "packs", "Legendaries only appear in Boss encounters");
   for (const boss of catalog.bosses)
-    if (boss.pack.length !== 1 || !catalog.species.find((entry) => entry.id === boss.pack[0])?.legendary)
+    if (boss.pack.length !== 1 || !speciesById.get(boss.pack[0]!)?.legendary)
       error(boss.id, "packs", "Boss encounters require one Legendary");
   const encounters = new Set<number>();
   for (const boss of catalog.bosses) {

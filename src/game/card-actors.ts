@@ -16,14 +16,19 @@ export function cardActor(
   if (card.ownerId === null) return state.team.find((unit) => unit.health > 0);
   const owner = state.team.find((unit) => unit.id === card.ownerId);
   if (!owner || owner.health > 0 || state.phase !== "battle") return owner;
-  const guides = state.team.filter((unit) => unit.health > 0 && unfinishedJourneyLimit(state, unit) > 0);
-  return (
-    guides.find(
-      (unit) =>
-        !controlled(unit, state, card.definitionId ? definition(card.definitionId) : undefined) &&
-        (unit.combat?.fallenCardsPlayedThisTurn ?? 0) < unfinishedJourneyLimit(state, unit),
-    ) ?? guides[0]
-  );
+  let fallback: Creature | undefined;
+  for (const guide of state.team) {
+    if (guide.health <= 0) continue;
+    const limit = unfinishedJourneyLimit(state, guide);
+    if (limit <= 0) continue;
+    fallback ??= guide;
+    if (
+      !controlled(guide, state, card.definitionId ? definition(card.definitionId) : undefined) &&
+      (guide.combat?.fallenCardsPlayedThisTurn ?? 0) < limit
+    )
+      return guide;
+  }
+  return fallback;
 }
 
 /** A spent allowance does not remove fallen cards from drawing or presentation. */
@@ -31,5 +36,7 @@ export function drawableOwnerIds(state: GameState): Set<string> {
   const borrowing =
     state.phase === "battle" &&
     state.team.some((unit) => unit.health > 0 && unfinishedJourneyLimit(state, unit) > 0);
-  return new Set(state.team.filter((unit) => unit.health > 0 || borrowing).map((unit) => unit.id));
+  const owners = new Set<string>();
+  for (const unit of state.team) if (unit.health > 0 || borrowing) owners.add(unit.id);
+  return owners;
 }

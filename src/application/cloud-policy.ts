@@ -26,7 +26,10 @@ export function reconciliationPlan({
   const chosen =
     (mode === "background" ? current : null) ??
     heads.find((head) => head.id === current?.id) ??
-    [...heads].sort((a, b) => a.id.localeCompare(b.id))[0] ??
+    heads.reduce<CloudSnapshot | undefined>(
+      (first, head) => (!first || head.id.localeCompare(first.id) < 0 ? head : first),
+      undefined,
+    ) ??
     null;
   const install = chosen && mode === "startup" && localData !== chosen.payload ? chosen.payload : null;
   return {

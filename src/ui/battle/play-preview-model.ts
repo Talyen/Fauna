@@ -36,13 +36,26 @@ export interface PlayPreviewModel {
   readonly units: ReadonlyMap<string, TargetForecast>;
 }
 
+function baselineUnits(before: GameState) {
+  return [...battlefield(before, "player"), ...battlefield(before, "enemy"), ...before.reserves].map(
+    (old) => ({
+      old,
+      statuses: combatStatuses(old.combat, sharedDodgeChance(before, old)),
+      name: unitName(old),
+      maxHealth: maximumHealth(old),
+    }),
+  );
+}
+
 /** One projection supplies both highlights and per-recipient readouts from authoritative output. */
 function resolvedPreviewModel(
   before: GameState,
   result: CommandResult | null,
   targetId?: string,
+  baseline = () => baselineUnits(before),
 ): PlayPreviewModel {
-  const affected = new Set(result?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? []);
+  const affected = new Set<string>();
+  for (const event of result?.events ?? []) if (event.targetId) affected.add(event.targetId);
   if (targetId) affected.add(targetId);
   const units = new Map<string, TargetForecast>();
   if (!result?.accepted) return { affected, units, messages: [] };
@@ -53,16 +66,16 @@ function resolvedPreviewModel(
       ...result.state.reserves,
     ].map((unit) => [unit.id, unit]),
   );
-  const grouped = new Map<string, GameEvent[]>();
+  const grouped = new Map<string, { events: GameEvent[]; absorbed: number }>();
   for (const event of result.events) {
     if (!event.targetId) continue;
-    const events = grouped.get(event.targetId) ?? [];
-    events.push(event);
-    grouped.set(event.targetId, events);
+    const group = grouped.get(event.targetId) ?? { events: [], absorbed: 0 };
+    group.events.push(event);
+    if (event.kind === "block" && event.amount < 0) group.absorbed += event.amount;
+    grouped.set(event.targetId, group);
   }
-  for (const old of [...battlefield(before, "player"), ...battlefield(before, "enemy"), ...before.reserves]) {
+  for (const { old, statuses: previous, name, maxHealth } of baseline()) {
     const next = nextUnits.get(old.id) ?? { ...old, health: 0, block: 0 };
-    const previous = combatStatuses(old.combat, sharedDodgeChance(before, old));
     const current = combatStatuses(next.combat, sharedDodgeChance(result.state, next));
     const statusesChanged =
       previous.length !== current.length ||
@@ -77,22 +90,17 @@ function resolvedPreviewModel(
       if (prior?.text === now?.text) return [];
       return [{ id, prior, now }];
     });
-    const events = grouped.get(old.id) ?? [];
-    const absorbed = -events
-      .filter(
-        (event): event is Extract<GameEvent, { kind: "block" }> => event.kind === "block" && event.amount < 0,
-      )
-      .reduce((sum, event) => sum + event.amount, 0);
+    const group = grouped.get(old.id);
     units.set(old.id, {
-      name: unitName(old),
+      name,
       health: next.health,
       previousHealth: old.health,
       block: next.block,
       previousBlock: old.block,
-      maxHealth: maximumHealth(old),
-      absorbed,
+      maxHealth,
+      absorbed: -(group?.absorbed ?? 0),
       changes,
-      events,
+      events: group?.events ?? [],
     });
   }
   return {
@@ -117,20 +125,22 @@ export function playPreviewModel(
     units.set(targetId, { ...units.get(targetId)!, unresolved: true });
     return { ...model, units };
   }
-  const worlds = result.outcomes.map((outcome) => resolvedPreviewModel(before, outcome, targetId));
-  const affected = new Set(worlds.flatMap((world) => [...world.affected]));
+  let baseline: ReturnType<typeof baselineUnits> | undefined;
+  const worlds = result.outcomes.map((outcome) =>
+    resolvedPreviewModel(before, outcome, targetId, () => (baseline ??= baselineUnits(before))),
+  );
+  const affected = new Set<string>();
+  for (const world of worlds) for (const id of world.affected) affected.add(id);
   const units = new Map<string, TargetForecast>();
   for (const id of affected) {
-    const possibilities = worlds.flatMap((world) => (world.units.has(id) ? [world.units.get(id)!] : []));
+    const possibilities = new Map<string, TargetForecast>();
+    for (const world of worlds) {
+      const value = world.units.get(id);
+      if (!value) continue;
+      possibilities.set(JSON.stringify({ ...value, changes: value.changes.map(englishStatusChange) }), value);
+    }
     // Keep complete per-recipient outcomes together; never synthesize a world from independent extrema.
-    const distinct = [
-      ...new Map(
-        possibilities.map((value) => [
-          JSON.stringify({ ...value, changes: value.changes.map(englishStatusChange) }),
-          value,
-        ]),
-      ).values(),
-    ];
+    const distinct = [...possibilities.values()];
     const first = distinct[0];
     if (first) units.set(id, distinct.length === 1 ? first : { ...first, alternatives: distinct });
   }

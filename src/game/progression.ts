@@ -12,7 +12,9 @@ import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } fro
 export { progressionLabel as keywordLabel } from "./keywords";
 import type { Card, GameState } from "./types";
 export function collectedSpecies(state: Pick<GameState, "discovery">): SpeciesId[] {
-  return SPECIES.filter(({ id }) => state.discovery.recruited[id] !== undefined).map(({ id }) => id);
+  const collected: SpeciesId[] = [];
+  for (const { id } of SPECIES) if (state.discovery.recruited[id] !== undefined) collected.push(id);
+  return collected;
 }
 export const MAX_CREATURE_STARS = 5;
 export function creatureStars(state: Pick<GameState, "discovery">, kind: SpeciesId): number {
@@ -24,16 +26,26 @@ export function creaturePassive(state: Pick<GameState, "discovery"> | undefined,
   const rank = state ? creatureStars(state, kind) : 0;
   return { rank, ...tiers[rank]! };
 }
+// Only the deeply frozen authored catalog is safe to cache; injected tiers may be mutable.
+const authoredPassiveTiers = new WeakSet(SPECIES.flatMap((entry) => entry.passiveTiers));
+const passiveAmounts = new WeakMap<object, Map<PassiveKind, number>>();
 /** Sum matching effects in authored order at the current rank; undefined state uses the enemy tier. */
 export function passiveAmount(
   state: Pick<GameState, "discovery"> | undefined,
-  species: SpeciesId,
+  speciesId: SpeciesId,
   kind: PassiveKind,
 ): number {
-  return creaturePassive(state, species).effects.reduce(
-    (sum, effect) => sum + (effect.kind === kind ? effect.amount : 0),
-    0,
-  );
+  const rank = state ? creatureStars(state, speciesId) : 0;
+  const tier = species(speciesId).passiveTiers[rank]!;
+  let amounts = passiveAmounts.get(tier);
+  const cached = amounts?.get(kind);
+  if (cached !== undefined) return cached;
+  const amount = tier.effects.reduce((sum, effect) => sum + (effect.kind === kind ? effect.amount : 0), 0);
+  if (authoredPassiveTiers.has(tier)) {
+    if (!amounts) passiveAmounts.set(tier, (amounts = new Map()));
+    amounts.set(kind, amount);
+  }
+  return amount;
 }
 export const KEYWORDS = PROGRESSION_KEYWORDS;
 export type Keyword = ProgressionKeyword;
@@ -61,8 +73,21 @@ export function validTalentSelection(state: Pick<GameState, "talents" | "keyword
   }
   return true;
 }
+const keywordsByDefinition = new WeakMap<object, readonly Keyword[]>();
+function definitionCardKeywords(card: Pick<Card, "definitionId">): readonly Keyword[] {
+  const def = definition(card.definitionId);
+  if (!Object.isFrozen(def)) return definitionKeywords(def);
+  let keywords = keywordsByDefinition.get(def);
+  if (!keywords) keywordsByDefinition.set(def, (keywords = definitionKeywords(def)));
+  return keywords;
+}
+/** Return a mutable copy to callers that need the full list. */
 export function cardKeywords(card: Pick<Card, "definitionId">): Keyword[] {
-  return definitionKeywords(definition(card.definitionId));
+  return [...definitionCardKeywords(card)];
+}
+/** Membership checks do not need a defensive array copy. */
+export function cardHasKeyword(card: Pick<Card, "definitionId">, keyword: Keyword): boolean {
+  return definitionCardKeywords(card).includes(keyword);
 }
 export function xpThreshold(points: number) {
   return 10 * points * (points + 1) - 10 * Math.min(points, 2);
@@ -114,7 +139,9 @@ export function starterOfferPool(state: Pick<GameState, "discovery" | "selected"
 }
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {
-  return collectedSpecies(state).length === 0 || state.selected?.some((kind) => species(kind).legendary)
-    ? 1
-    : Math.max(1, Math.min(3, collectedSpecies(state).filter((kind) => !species(kind).legendary).length));
+  const collected = collectedSpecies(state);
+  if (collected.length === 0 || state.selected?.some((kind) => species(kind).legendary)) return 1;
+  let count = 0;
+  for (const kind of collected) if (!species(kind).legendary && ++count === 3) return 3;
+  return Math.max(1, count);
 }

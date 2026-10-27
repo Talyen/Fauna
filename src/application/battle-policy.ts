@@ -23,9 +23,9 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
     const all = [...state.team, ...state.reserves];
     const active = state.team.map((unit) => unit.id);
-    const incoming = [...state.reserves]
-      .sort((a, b) => a.id.localeCompare(b.id))
+    const incoming = state.reserves
       .filter((unit) => unit.health > 0)
+      .sort((a, b) => a.id.localeCompare(b.id))
       .map((unit) => {
         const ids = formationForSwap(all, active, outgoing.id, unit.id);
         const lineup = ids
@@ -41,7 +41,10 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
           (unit.health / species(unit.species).health) * 100;
         return { unit, score };
       })
-      .sort((a, b) => b.score - a.score)[0]?.unit;
+      .reduce<{ unit: (typeof state.reserves)[number]; score: number } | undefined>(
+        (best, candidate) => (!best || candidate.score > best.score ? candidate : best),
+        undefined,
+      )?.unit;
     if (incoming)
       return [
         {

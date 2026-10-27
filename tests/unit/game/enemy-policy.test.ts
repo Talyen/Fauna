@@ -161,6 +161,19 @@ describe("enemy targeting and card values", () => {
     expect(chooseEnemyCard(state, enemy, [heal])).toBeUndefined();
   });
 
+  it("ranks duplicate cards and distinct definitions independently on every decision", () => {
+    const { state, enemy } = fixture();
+    enemy.health = 90;
+    const strongerGuard = { ...guard, value: 12 };
+    const before = structuredClone(state);
+    const choice = chooseEnemyCard(state, enemy, [heal, heal, guard, strongerGuard, strongerGuard]);
+    expect(choice).toMatchObject({ def: strongerGuard, allyTargetId: enemy.id, value: 12 });
+    expect(state).toEqual(before);
+    enemy.block = 10;
+    enemy.health = 80;
+    expect(chooseEnemyCard(state, enemy, [heal, heal, guard])?.def).toBe(heal);
+  });
+
   it("estimates random attacks across recipients and leaves explicit random targeting intact", () => {
     const { state, enemy } = fixture();
     state.team[0]!.health = 2;
@@ -207,6 +220,27 @@ describe("enemy targeting and card values", () => {
     expect(enemyCardValue(state, enemy, definition("memento-drowned-revelation"))).toBe(1);
     enemy.deck.mana = 0;
     expect(chooseEnemyCard(state, enemy, [definition("memento-drowned-revelation")])).toBeUndefined();
+  });
+
+  it("keeps duplicate Legendary card probes equivalent and refreshes them after state changes", () => {
+    const { state, enemy } = fixture();
+    const pearl = definition("memento-pearl");
+    enemy.deck = { hand: [pearl.id, pearl.id], draw: [], discard: [], buffer: [], mana: 4, pearls: 2 };
+    const before = structuredClone(state);
+    expect(chooseEnemyCard(state, enemy, [pearl, pearl])).toEqual(
+      chooseEnemyCard(state, enemy, [pearl, { ...pearl }]),
+    );
+    expect(state).toEqual(before);
+    enemy.deck.mana = 1;
+    expect(chooseEnemyCard(state, enemy, [pearl, pearl])).toEqual(
+      chooseEnemyCard(state, enemy, [pearl, { ...pearl }]),
+    );
+    expect(chooseEnemyCard(state, enemy, [pearl, pearl])?.value).toBe(
+      enemyCardValue(state, enemy, pearl, state.team[0]!.id, enemy.id),
+    );
+    const strongerGuard = { ...guard, value: 12 };
+    enemy.deck.hand = [guard.id, guard.id];
+    expect(chooseEnemyCard(state, enemy, [guard, strongerGuard])?.def).toBe(strongerGuard);
   });
 
   it("values and executes a Legendary summon and its immediate Echo attack", () => {
