@@ -1250,6 +1250,32 @@ it("presents the reviewed Light and healing bounce tiers with their distinct cha
   view.unmount();
 });
 
+it("presents Russian fallen-ally card counts with the right grammatical forms", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const rankTwo = produce(run(), (draft) => {
+    draft.discovery.recruited.oathara = 2;
+  });
+  const rankFive = produce(run(), (draft) => {
+    draft.discovery.recruited.oathara = 5;
+  });
+  const view = render(
+    <LocalizationProvider catalogs={{ ru: russian }} qualified={["en", "ru"]} systemLanguages={["ru"]}>
+      <TooltipProvider>
+        <CreatureDetails kind="oathara" />
+        <CreatureDetails kind="oathara" progression={rankTwo} />
+        <CreatureDetails kind="oathara" progression={rankFive} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  const rules = [...view.container.querySelectorAll(".card-details p")].map((element) => element.textContent);
+  expect(rules).toEqual([
+    "Oathara может разыграть за ход 1 карту павших союзников",
+    "Oathara может разыграть за ход 2 карты павших союзников",
+    "Oathara может разыграть за ход 5 карт павших союзников",
+  ]);
+  view.unmount();
+});
+
 it("localizes shared pagination and combat announcements while preserving values", () => {
   const view = render(
     <MessageProvider locale="fr" catalog={french}>

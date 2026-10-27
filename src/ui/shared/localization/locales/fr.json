@@ -1499,6 +1499,42 @@
     "sourceHash": "d4b11dc19d99320e0f43f4a68d502cfdea7113733c4e2a496562ef8108d439b5",
     "text": "Les effets aléatoires alliés qui échouent ont {{value0}}% de chances d’être relancés une fois"
   },
+  "content.species.glintstride.passive.0.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "6b4c29c92f88714ce2d2013584c2d8362864e0d8ffa1b461d29d5a4dad6d21b4",
+    "text": "Les attaques de Glintstride infligent {{value0}} dégâts de <keyword0>Lumière</keyword0> supplémentaires aux ennemis <keyword1>aveuglés</keyword1>"
+  },
+  "content.species.glintstride.passive.1.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "92acbec9e6e9c528c4ff518cfd0d981ededaebd7b0e720788a4143c1ef342a23",
+    "text": "Les attaques de Glintstride infligent {{value0}} dégâts de <keyword0>Lumière</keyword0> supplémentaires aux ennemis <keyword1>aveuglés</keyword1>"
+  },
+  "content.species.glintstride.passive.2.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "dde1a784d3878a58674fbf3c307f8852cea56a11d10bba0682fb765f73156f4a",
+    "text": "Les attaques de Glintstride infligent {{value0}} dégâts de <keyword0>Lumière</keyword0> supplémentaires aux ennemis <keyword1>aveuglés</keyword1>"
+  },
+  "content.species.glintstride.passive.3.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "cc3609b3896ad3d6cf4861278d85e2b5c27a377743c00e515d8d0ef343e1ba96",
+    "text": "Les attaques de Glintstride infligent {{value0}} dégâts de <keyword0>Lumière</keyword0> supplémentaires aux ennemis <keyword1>aveuglés</keyword1>"
+  },
+  "content.species.glintstride.passive.4.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "cfc983f3baafc6d70291307bda3d7ea3f4b3f4b7783c3c0e3bfa1d256a9f94ea",
+    "text": "Les attaques de Glintstride infligent {{value0}} dégâts de <keyword0>Lumière</keyword0> supplémentaires aux ennemis <keyword1>aveuglés</keyword1>"
+  },
+  "content.species.glintstride.passive.5.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "852ce922d9e63d350cc8ff50af029674dc327272817cc4d73813bb76f8305a1a",
+    "text": "Les attaques de Glintstride infligent {{value0}} dégâts de <keyword0>Lumière</keyword0> supplémentaires aux ennemis <keyword1>aveuglés</keyword1>"
+  },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
     "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
@@ -1606,6 +1642,42 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
     "sourceHash": "ab867c2bf9553aac537b1b698f076e616acfc024a6a85f99c10af008353df15f",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
+  },
+  "content.species.oathara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally card per turn",
+    "sourceHash": "dd3d3778df55c8af93f1f6a19081ad6ceaf7e6208ed8b55032170b890f4efbeb",
+    "text": "Oathara peut jouer {{value0}} carte d’un allié hors combat par tour"
+  },
+  "content.species.oathara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "4a974df73681a0e624030fc7d3d61fe600b72ff4873dd9a984d51f6dce093687",
+    "text": "Oathara peut jouer {{value0}} cartes d’alliés hors combat par tour"
+  },
+  "content.species.oathara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "3fcd06b943ee4cbfddc83247b884a3bba0069090089b6cc4b1808baacdd82fad",
+    "text": "Oathara peut jouer {{value0}} cartes d’alliés hors combat par tour"
+  },
+  "content.species.oathara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "d69fd02d759e9d9eea513ec71b9f0fbd7316e3200c58c4a90b5fc06368dbec3d",
+    "text": "Oathara peut jouer {{value0}} cartes d’alliés hors combat par tour"
+  },
+  "content.species.oathara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "7db0cc4a603b59afa57fd75dc12b7b998867174b45b3e5a99ec2dc561225965c",
+    "text": "Oathara peut jouer {{value0}} cartes d’alliés hors combat par tour"
+  },
+  "content.species.oathara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "bdd4cc3122184c71b8e02410272bc3ebbed755644d05f9e43d2c6ce2703478ba",
+    "text": "Oathara peut jouer {{value0}} cartes d’alliés hors combat par tour"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
@@ -1865,6 +1937,42 @@
     "sourceHash": "cf93dc0e0b8612c37af4ed80de0dd9a984b2c66b75b3823d72c1b47caad82d41",
     "text": "À la fin de votre tour, chaque allié n’ayant joué aucune carte récupère {{value0}} de <keyword0>Santé</keyword0>"
   },
+  "content.species.ringpalm.passive.0.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "a90d0b96bbd275afa9f9068784611fcfae5c9a8a2bdf276496d158a9c816fe60",
+    "text": "Les dégâts d’<keyword0>Étourdissement</keyword0> de Ringpalm ont {{value0}}% de chances de se répéter"
+  },
+  "content.species.ringpalm.passive.1.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "fdacb3079954c0d19bb2eb1f01fa9249f5bd9b71393aec9dc9f45788d3c31b92",
+    "text": "Les dégâts d’<keyword0>Étourdissement</keyword0> de Ringpalm ont {{value0}}% de chances de se répéter"
+  },
+  "content.species.ringpalm.passive.2.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "40a9efd32c6c1ed370ffd6bd626c81f31b7ec53283a4378698c52991d299a23c",
+    "text": "Les dégâts d’<keyword0>Étourdissement</keyword0> de Ringpalm ont {{value0}}% de chances de se répéter"
+  },
+  "content.species.ringpalm.passive.3.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "31201f58722a63389f65707a641c7136b1f8d93eebf6a3336649dd3f4d820753",
+    "text": "Les dégâts d’<keyword0>Étourdissement</keyword0> de Ringpalm ont {{value0}}% de chances de se répéter"
+  },
+  "content.species.ringpalm.passive.4.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "392870d112d015efc817f9755383714d76efe2f834406c5c660964936f8c21f5",
+    "text": "Les dégâts d’<keyword0>Étourdissement</keyword0> de Ringpalm ont {{value0}}% de chances de se répéter"
+  },
+  "content.species.ringpalm.passive.5.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "6d4ba602891e218c2d8b0f4a7ef63dc65c9a04677f4725c6a2356fed8d2d564c",
+    "text": "Les dégâts d’<keyword0>Étourdissement</keyword0> de Ringpalm ont {{value0}}% de chances de se répéter"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -1973,6 +2081,42 @@
     "sourceHash": "c0087efb545915d3ca8eb09bf9412a6f5810267ba92c82617a1e086ea7da973f",
     "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0> lorsqu’ils entrent en jeu par échange"
   },
+  "content.species.sternshell.passive.0.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "15e175a16c0b238ee950521f0b3da566722b4b9bb97dbc07aa93e002a8ac983e",
+    "text": "Sternshell commence le combat avec {{value0}} <keyword0>Armure</keyword0>"
+  },
+  "content.species.sternshell.passive.1.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "4779183f9602238a037f8ebec16628af2273ef38736e27e19fb0aac876a80b3b",
+    "text": "Sternshell commence le combat avec {{value0}} <keyword0>Armure</keyword0>"
+  },
+  "content.species.sternshell.passive.2.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "e3b37955205cca13cc70d1ea7024eff6f7db06270acf77201c9057f3cfffacd9",
+    "text": "Sternshell commence le combat avec {{value0}} <keyword0>Armure</keyword0>"
+  },
+  "content.species.sternshell.passive.3.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "e1768038acb110ce8ca76bd3dbc8ef537919d8639981021b5184a97091ed652c",
+    "text": "Sternshell commence le combat avec {{value0}} <keyword0>Armure</keyword0>"
+  },
+  "content.species.sternshell.passive.4.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "c5c4e2916d9c0d8df7359661fa4a2e5a038473eaa531f08ce6a856da9ed45982",
+    "text": "Sternshell commence le combat avec {{value0}} <keyword0>Armure</keyword0>"
+  },
+  "content.species.sternshell.passive.5.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "8b6b0b45f84473850a14e049d8dc12931cfd5f0dc5824eebb01443f48d6385e4",
+    "text": "Sternshell commence le combat avec {{value0}} <keyword0>Armure</keyword0>"
+  },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
@@ -2044,6 +2188,42 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "c0a867633dd06897689571df18de2479ab5b879b30804c80426d4c93ade76ddf",
     "text": "{{value0}}% de chances d’intercepter les attaques visant un allié plus blessé"
+  },
+  "content.species.wickwaltz.passive.0.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "2071e068d02c9025aea2ce9e297747a0d82255030cb5238b252a9805856e6c48",
+    "text": "La deuxième carte de Wickwaltz à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.wickwaltz.passive.1.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "68d6c5310423e794be122f95a0b97e65e991e3121d8c1985a0121c9f3f5c6d8d",
+    "text": "La deuxième carte de Wickwaltz à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.wickwaltz.passive.2.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "7324e5fa4fe0296283dc99b2aef8844a6a4875acd330d83f9888bb1ea78d1575",
+    "text": "La deuxième carte de Wickwaltz à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.wickwaltz.passive.3.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "4b3f6dc7ebe40f20f1dbb8a52b822411515126be645ed08462b816903dfff58d",
+    "text": "La deuxième carte de Wickwaltz à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.wickwaltz.passive.4.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
+    "sourceHash": "7034d283fe8ae14b0dceca375541d49dbfb735ba3927176553afbb5aecd6c1f6",
+    "text": "La deuxième carte de Wickwaltz à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.wickwaltz.passive.5.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn repeats",
+    "sourceHash": "be72bf00f5980a039d840fe01519df4fea61233391574f28897439c3e523d08f",
+    "text": "La deuxième carte de Wickwaltz à chaque tour se répète"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

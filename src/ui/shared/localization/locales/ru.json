@@ -1451,6 +1451,42 @@
     "sourceHash": "1a7aa2b14d78fadf52ad82db474f12a00e02077c7dc0679c1979b2bbe9894ee8",
     "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
   },
+  "content.species.glintstride.passive.0.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "6ae00fda9511b494f2a5241d4128aa54f1f12922984dce68fa4f34fb54a30002",
+    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+  },
+  "content.species.glintstride.passive.1.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "b0129b30904cbe3fcd64af2bd56d0d0d6144feb503fa44727406aa184ecb0b8f",
+    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+  },
+  "content.species.glintstride.passive.2.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "c82d2e6f0ad21adfe2bed5025e2ed1e57148851c5fbc2387f75dc0b2c566a627",
+    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+  },
+  "content.species.glintstride.passive.3.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "3d15ca758a7c5f3d0bdbf3850a746e5c74ec61444c598b06bcf20c104752d769",
+    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+  },
+  "content.species.glintstride.passive.4.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "0e78379b77a945b6f25e45529189fdc3e6e8a0ccd5010c1c7f4fda949a2a94e4",
+    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+  },
+  "content.species.glintstride.passive.5.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "654d0f55e907914e7b6cbcc511bd537e1cb12836bbaa9b516dd2aae02cc9ac17",
+    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+  },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
     "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
@@ -1558,6 +1594,42 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
     "sourceHash": "fc61f5df637b43ecff46933ed190b524c0cf239bf309ef2e769f9dc6d7b59e7b",
     "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
+  },
+  "content.species.oathara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally card per turn",
+    "sourceHash": "0c698f1163ee6ec3f327a15f17342407ed5de1d59de364463e63e675aea82110",
+    "text": "Oathara может разыграть за ход {{value0}} карту павших союзников"
+  },
+  "content.species.oathara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "70a845d09ca0986daf802e61fd17e4df1bc36ac0634d6c0fbb7724d8a101aee2",
+    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+  },
+  "content.species.oathara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "56f784988629a120fdb8af49be61e84ceafd295ee8124a199ca156f005cf5d63",
+    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+  },
+  "content.species.oathara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "af117f633b2b57d8dd66767f5acdbd434958bb28fcd1d4945dd20814a4a6e1d2",
+    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+  },
+  "content.species.oathara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "b5a8c329992f1b2c71a9b86e0e1052b48ac90132be0a9a7dd1d100a97054c5c6",
+    "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
+  },
+  "content.species.oathara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Oathara can play {{value0}} fallen ally cards per turn",
+    "sourceHash": "09cc4a55e1f776a448368a65366e52498cc234fdd9453b02e6987a80dce8ccf4",
+    "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
@@ -1817,6 +1889,42 @@
     "sourceHash": "5c05e6d99344c9ebf030da1ad4ee8b8691e470b52962cb987557cbfed5266665",
     "text": "В конце вашего хода каждый союзник, не сыгравший ни одной карты, восстанавливает {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.species.ringpalm.passive.0.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "294ba2b279b795e3b81a92ef47c410b74072bc0a7a7ba8ddf426a854f2040b18",
+    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.ringpalm.passive.1.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "45a1b0eef369aaa5c95ce95ec60f70660d34d69f64b53e6fd157df0b6d59d322",
+    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.ringpalm.passive.2.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "f92d4a9e85129146f001f39b93eff76c9bc4fe5a7700a10fb267f56d7af1e9fb",
+    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.ringpalm.passive.3.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "1b7a715d5d74b30ed4d54379e634b805f966e1691d062d55344a60c82f05a6c7",
+    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.ringpalm.passive.4.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "fe0f0f9ef8fce6240eb59e6c7497371a4ee776a91949c1116b7ae1839c8f72dc",
+    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.ringpalm.passive.5.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "6bb61a3b8424b453a292f85ad20787b73a3e4675ef53632a0fbc15db3cbf31e6",
+    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -1925,6 +2033,42 @@
     "sourceHash": "dabfcefae1240d7f46138366ff9127045eba8a8ee879e41ebb9c87cccb41e800",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
   },
+  "content.species.sternshell.passive.0.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "54c99f5f3b885f912ee5d29cf972cc5c6b9709ee7d2480713dadcc03b30168f1",
+    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+  },
+  "content.species.sternshell.passive.1.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "2965729d0af59eb4679eaf5b00bc836d7fa473d66876fb1991f7e36cd7119253",
+    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+  },
+  "content.species.sternshell.passive.2.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "0e88ffaf29d8d93e32d3605c22a71b7d77ecf7609d7fc533fef1971b3366d9a9",
+    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+  },
+  "content.species.sternshell.passive.3.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "9d7b91b3c25b52bbcb00ae5a2ea9fc35fa6b040769da526e068ad2bdbecc4c69",
+    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+  },
+  "content.species.sternshell.passive.4.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "e2a7aedc17b70f96772bb351ebe543a465860fd6b83dceaf8d19a82e23bcaf17",
+    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+  },
+  "content.species.sternshell.passive.5.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "4fa782f5ce6861fc3c5b5a1cb41f3a3c66a34cf33578c5161082e4f0b10fee76",
+    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+  },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
@@ -1996,6 +2140,42 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "03eb132ec403ee3528af08f3a9f0ac14616a0c55be476bba46a57b18e0e06dac",
     "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
+  },
+  "content.species.wickwaltz.passive.0.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "2af8e6a6b0f1c234db1b444e26db62417438affae22dfe0999031b3b008e72ed",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.1.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "612dcf289b95e112f8f1128ac51adbbe2a5c8f512ab3cc76ea3d3de06b69bfb4",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.2.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "eb3b120610fd4c5c0f0c30b7732ed28bd2edd2c1c8e88522fa9cfc145dd6fc0f",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.3.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "410a59a42e1808f5649bc5c6a429e57534c9165c2170fd5a58438e53aeca43ca",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.4.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
+    "sourceHash": "a1dc193bb449f00c08afee2e263b31009d6449f9f2314ddce269960c584ad81b",
+    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+  },
+  "content.species.wickwaltz.passive.5.rule": {
+    "reviewed": true,
+    "source": "Wickwaltz’s second card each turn repeats",
+    "sourceHash": "ad7d1a8b462fdb80fedede8452ec7f6fa145a83b6e128f6b8b19b05d163d5d5d",
+    "text": "Вторая карта Wickwaltz за ход повторяется"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
