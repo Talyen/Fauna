@@ -3029,6 +3029,12 @@
     "sourceHash": "c44f71093cc710f09a05231b7a7a9c81d2383e77854ca205fa1909e787595182",
     "text": "Prosperidad"
   },
+  "content.talent.light.purge.name": {
+    "reviewed": true,
+    "source": "Searing Light",
+    "sourceHash": "3075124eebd1ebe302499fd17865586eca3d61e3f5853d6b67606b91acfdb5db",
+    "text": "Luz fulgurante"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3184,12 @@
     "source": "Armored Fists",
     "sourceHash": "193bdb73c65ff5c8311cd14f5a720c7bf6e83736d151f1e5cd269b3df5da5d79",
     "text": "Puños acorazados"
+  },
+  "content.talent.physical.finish-him.name": {
+    "reviewed": true,
+    "source": "Finishing Blow",
+    "sourceHash": "41b734d3e638ad459ea9843a499c1f8d437fafdfcb07b312668b7c253d7203c3",
+    "text": "Golpe final"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3400,6 +3412,42 @@
     "source": "Stun Surge",
     "sourceHash": "d1bcf804f27055ec29162392c778e1c9325912efb6a7a87c6b3bb26915facfbf",
     "text": "Oleada de Aturdimiento"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "reviewed": true,
+    "source": "Cleansing Current",
+    "sourceHash": "51965f91925ef68ee99f016d23f112ed3cbef16c6b441a94f6178267b6c60563",
+    "text": "Corriente purificadora"
+  },
+  "content.talent.water.erosion.name": {
+    "reviewed": true,
+    "source": "Erosion",
+    "sourceHash": "80b675c54d1bbf648db14f31d89bedc5f5367438d561a10f6106f7086f69ad96",
+    "text": "Erosión"
+  },
+  "content.talent.water.high-tide.name": {
+    "reviewed": true,
+    "source": "High Tide",
+    "sourceHash": "971d84b584d9d234baa08690fea8d12f7473dda6d8aab9147f022f787bee178c",
+    "text": "Marea alta"
+  },
+  "content.talent.water.pressure.name": {
+    "reviewed": true,
+    "source": "Pressure",
+    "sourceHash": "a0586b1f84e764e8488278a7078bf2218981c077e284afef6fbb7b2e45a87368",
+    "text": "Presión"
+  },
+  "content.talent.water.riptide.name": {
+    "reviewed": true,
+    "source": "Riptide",
+    "sourceHash": "6268de3562b5a373da884c59910c4a5c0de302e447a9de033d131266a8a259c1",
+    "text": "Corriente de resaca"
+  },
+  "content.talent.water.seafoam.name": {
+    "reviewed": true,
+    "source": "Seafoam",
+    "sourceHash": "c774bb556a90abcd163f3e0d1525236618451c6b249b47680cf9857a29422579",
+    "text": "Espuma marina"
   },
   "creature.echo": {
     "reviewed": true,

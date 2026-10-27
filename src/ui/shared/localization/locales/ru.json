@@ -3029,6 +3029,12 @@
     "sourceHash": "5ef05ccdb4f6366c2a9cc5a8cd5b8feb8eb96d61feb9e49cda047b9469542d78",
     "text": "Процветание"
   },
+  "content.talent.light.purge.name": {
+    "reviewed": true,
+    "source": "Searing Light",
+    "sourceHash": "b31c2eb46446929a402b259f0afb2d8187cefd11642bdf987a3e34998b0f8864",
+    "text": "Сжигающий свет"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3184,12 @@
     "source": "Armored Fists",
     "sourceHash": "95cdd43cd858e8b0a946437692987e4e72f0bd9dd61cc785016000e69815c767",
     "text": "Бронированные кулаки"
+  },
+  "content.talent.physical.finish-him.name": {
+    "reviewed": true,
+    "source": "Finishing Blow",
+    "sourceHash": "ccb7abb0216f992f079b810b9f09be5b5c950f91dcd1feeda47dff20b38dc6f1",
+    "text": "Завершающий удар"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3400,6 +3412,42 @@
     "source": "Stun Surge",
     "sourceHash": "b8e31da8807df6f7057f44117ac1322dd897831d14eea0238962a1b6716e5e1a",
     "text": "Всплеск: Оглушение"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "reviewed": true,
+    "source": "Cleansing Current",
+    "sourceHash": "486adb57850370d2aaad77d48f5351ce9a96d5953bbdefaca727f2ddb2e52831",
+    "text": "Очищающее течение"
+  },
+  "content.talent.water.erosion.name": {
+    "reviewed": true,
+    "source": "Erosion",
+    "sourceHash": "24f4a0ede820f6c653ed026646a9d0aac3dd6ab0b91e9767285fd9d7e8567d98",
+    "text": "Эрозия"
+  },
+  "content.talent.water.high-tide.name": {
+    "reviewed": true,
+    "source": "High Tide",
+    "sourceHash": "1b61d115f7bc5507f8e2327375e4d3930958ce90144422c068fd6b60d70aa880",
+    "text": "Прилив"
+  },
+  "content.talent.water.pressure.name": {
+    "reviewed": true,
+    "source": "Pressure",
+    "sourceHash": "6197706d25a31f985b4962c609f667a8ce3973faecbb33d1c9f2378bbc7ddcaa",
+    "text": "Давление"
+  },
+  "content.talent.water.riptide.name": {
+    "reviewed": true,
+    "source": "Riptide",
+    "sourceHash": "9597075bf057155a83daa6ed1644d97302dccdf4f349eaa5fb40b15c5516b5fc",
+    "text": "Отбойное течение"
+  },
+  "content.talent.water.seafoam.name": {
+    "reviewed": true,
+    "source": "Seafoam",
+    "sourceHash": "5b165966c6c11897911c7639b0fd2384c77464b2a3ab5f6de3688955a2c035ca",
+    "text": "Морская пена"
   },
   "creature.echo": {
     "reviewed": true,

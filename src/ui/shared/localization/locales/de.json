@@ -3029,6 +3029,12 @@
     "sourceHash": "1764d2351b232f588f04f583f894e3af80f1eabc544106348acb19be3465990a",
     "text": "Wohlstand"
   },
+  "content.talent.light.purge.name": {
+    "reviewed": true,
+    "source": "Searing Light",
+    "sourceHash": "7d30ecfb59d7e4bc1c36b1f2da3e4753c602d882566fcfd501f00b21b8c0458b",
+    "text": "Glühendes Licht"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3184,12 @@
     "source": "Armored Fists",
     "sourceHash": "86bc973d95f36cdf7adafd097cc7ef1b5787748bc37b1dfa3f7663e4620358b3",
     "text": "Gepanzerte Fäuste"
+  },
+  "content.talent.physical.finish-him.name": {
+    "reviewed": true,
+    "source": "Finishing Blow",
+    "sourceHash": "bff118f26392d2f4a1a74102b13165d497c0f0e3a5ce76cb203ab52dc259a730",
+    "text": "Todesstoß"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3400,6 +3412,42 @@
     "source": "Stun Surge",
     "sourceHash": "771f66a459835c3df0d51de6a20cd93a182b65b378abcfaf650c2b191c2e2f67",
     "text": "Betäubungswoge"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "reviewed": true,
+    "source": "Cleansing Current",
+    "sourceHash": "2b68001b0c7d5359d976d6bcb057bd39dd7129cddcea4199c8444c469249d4fa",
+    "text": "Reinigende Strömung"
+  },
+  "content.talent.water.erosion.name": {
+    "reviewed": true,
+    "source": "Erosion",
+    "sourceHash": "2ce24695d51771f0e3c2263121d472c124b5de14ba0b3be4b71805db75f9bf80",
+    "text": "Erosion"
+  },
+  "content.talent.water.high-tide.name": {
+    "reviewed": true,
+    "source": "High Tide",
+    "sourceHash": "2119ad1d87b5d04bb7035fd204e154f76cf5423dd0c38535dfd94332c93067d8",
+    "text": "Flut"
+  },
+  "content.talent.water.pressure.name": {
+    "reviewed": true,
+    "source": "Pressure",
+    "sourceHash": "b1937364dd8a22cfd9bc06662c4259696f07542d273d82dfd27a33fde6250b8a",
+    "text": "Druck"
+  },
+  "content.talent.water.riptide.name": {
+    "reviewed": true,
+    "source": "Riptide",
+    "sourceHash": "c72bef3205d8c0a61ef1b41bbb852092f6cf38da8d0ad4ebbc099d184425b8c8",
+    "text": "Reißende Strömung"
+  },
+  "content.talent.water.seafoam.name": {
+    "reviewed": true,
+    "source": "Seafoam",
+    "sourceHash": "a9eae19f12b9d6a8935927cbc6110734ca65d581906d1b01ba878ce7619ce39e",
+    "text": "Meerschaum"
   },
   "creature.echo": {
     "reviewed": true,

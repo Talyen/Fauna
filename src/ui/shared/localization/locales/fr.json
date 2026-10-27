@@ -3077,6 +3077,12 @@
     "sourceHash": "5a4e3c646769cb3332837f978e16410787561fa473909144b9000a9885a93ade",
     "text": "Prospérité"
   },
+  "content.talent.light.purge.name": {
+    "reviewed": true,
+    "source": "Searing Light",
+    "sourceHash": "ba65c530145047e84ba0ff6a05885bf4f9cf139110e7124127e26a2b41bf11cd",
+    "text": "Lumière ardente"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3226,6 +3232,12 @@
     "source": "Armored Fists",
     "sourceHash": "d6ccb4879346b1827cf95c9b463934d22dad2f3ce80486a5d9576189114c2e51",
     "text": "Poings blindés"
+  },
+  "content.talent.physical.finish-him.name": {
+    "reviewed": true,
+    "source": "Finishing Blow",
+    "sourceHash": "25a721c082d0d22bf30a58088e66b27196afaae53b306b4b2be423a27f12df21",
+    "text": "Coup de grâce"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3448,6 +3460,42 @@
     "source": "Stun Surge",
     "sourceHash": "238b5f18302030a1508b772dc3df84072e7e37bb6af916e86fd9611e065cb739",
     "text": "Déferlement d'Étourdissement"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "reviewed": true,
+    "source": "Cleansing Current",
+    "sourceHash": "ea6e7fe626d32e98b524a934fdb166eb46fdc5af5463812d22fcd5b4f26ceae5",
+    "text": "Courant purificateur"
+  },
+  "content.talent.water.erosion.name": {
+    "reviewed": true,
+    "source": "Erosion",
+    "sourceHash": "cc43fd5c80cb051e7ff4089130fe968be1bc743e5e50d33400b2cf71465df9a3",
+    "text": "Érosion"
+  },
+  "content.talent.water.high-tide.name": {
+    "reviewed": true,
+    "source": "High Tide",
+    "sourceHash": "b3597682fe51c37606355c154e382ffe572c33ebce0db2a7959ac15399f6ae68",
+    "text": "Marée haute"
+  },
+  "content.talent.water.pressure.name": {
+    "reviewed": true,
+    "source": "Pressure",
+    "sourceHash": "a90eea2ba93917bcf9efcb4d9595db468da080d3cee61abac0cb28e0450c19e8",
+    "text": "Pression"
+  },
+  "content.talent.water.riptide.name": {
+    "reviewed": true,
+    "source": "Riptide",
+    "sourceHash": "5d049c3b01d4447bfb04ab899b493cd088ef30fa002ef1725eccb04ec16f9249",
+    "text": "Courant d’arrachement"
+  },
+  "content.talent.water.seafoam.name": {
+    "reviewed": true,
+    "source": "Seafoam",
+    "sourceHash": "18b1859629600388651f44075213bf354f23ad4b37804081ce19179b9cfab311",
+    "text": "Écume de mer"
   },
   "creature.echo": {
     "reviewed": true,

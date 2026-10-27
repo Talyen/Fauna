@@ -3029,6 +3029,12 @@
     "sourceHash": "1aae1f556c078a7dba33049eec31d3757fc4be030eddbaa492611761bf08d3d5",
     "text": "繁栄"
   },
+  "content.talent.light.purge.name": {
+    "reviewed": true,
+    "source": "Searing Light",
+    "sourceHash": "5e82e1e18d32cbe2b645b51aaa661e98cfffec69daf0d4ca8b7416cac097d251",
+    "text": "灼光"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3184,12 @@
     "source": "Armored Fists",
     "sourceHash": "c8ed3de28292f26c465e84fe9d92d4af7101089ea2fc6fb88db6b24c4dff05e0",
     "text": "装甲の拳"
+  },
+  "content.talent.physical.finish-him.name": {
+    "reviewed": true,
+    "source": "Finishing Blow",
+    "sourceHash": "40680f9bb13449cee3cdcc7447e1fdbe9e7a6b0acbeb7c9703607e2c7fb69365",
+    "text": "とどめの一撃"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3400,6 +3412,42 @@
     "source": "Stun Surge",
     "sourceHash": "d212990cd33314dd9d12c69149566f35e42b39850570f4732e7dbe17f81764d9",
     "text": "スタンの奔流"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "reviewed": true,
+    "source": "Cleansing Current",
+    "sourceHash": "c146974813ae60aea06e4989319cf6e4154add1abf2455e67cab83e6c17f096d",
+    "text": "清めの流れ"
+  },
+  "content.talent.water.erosion.name": {
+    "reviewed": true,
+    "source": "Erosion",
+    "sourceHash": "be390034e7545b8bcd732e82065bc893ad2114ed528e39efbe5495694d30ae52",
+    "text": "浸食"
+  },
+  "content.talent.water.high-tide.name": {
+    "reviewed": true,
+    "source": "High Tide",
+    "sourceHash": "61a2f0a6a7b8384af4aa239fecf0811125a856e5e612bdf0a752cb449687b09c",
+    "text": "満潮"
+  },
+  "content.talent.water.pressure.name": {
+    "reviewed": true,
+    "source": "Pressure",
+    "sourceHash": "ab30d566141f45ecd9bc4673261704d402988a2c8e1bf314b14ecedc90fd9880",
+    "text": "圧力"
+  },
+  "content.talent.water.riptide.name": {
+    "reviewed": true,
+    "source": "Riptide",
+    "sourceHash": "f6e9b510760060871eb052ba384fe10a181f2c7fd42f165fe085c4356566547e",
+    "text": "離岸流"
+  },
+  "content.talent.water.seafoam.name": {
+    "reviewed": true,
+    "source": "Seafoam",
+    "sourceHash": "c6bc85b73bf8cecc7e505347479d564f4cc8d12cec0494cac8063d76f50d864e",
+    "text": "海の泡"
   },
   "creature.echo": {
     "reviewed": true,

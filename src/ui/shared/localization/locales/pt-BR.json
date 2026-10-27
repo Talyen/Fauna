@@ -3029,6 +3029,12 @@
     "sourceHash": "62546615fda59b617255802466f2f5db97c4293086bb4940990ee6121aeda40c",
     "text": "Prosperidade"
   },
+  "content.talent.light.purge.name": {
+    "reviewed": true,
+    "source": "Searing Light",
+    "sourceHash": "085ce5c1d841b9c89257c7ee134852556ee8ec16bb09b89c9358773cc110d3d1",
+    "text": "Luz incandescente"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3184,12 @@
     "source": "Armored Fists",
     "sourceHash": "0054cccb053aa6e1ef64d3af7064f00fcbfac1cf2f368b728d74df78f0316624",
     "text": "Punhos blindados"
+  },
+  "content.talent.physical.finish-him.name": {
+    "reviewed": true,
+    "source": "Finishing Blow",
+    "sourceHash": "ae395916dbd0128d367cd54bcc7a62466059e707912d4db2a67576f24ab2be56",
+    "text": "Golpe final"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3400,6 +3412,42 @@
     "source": "Stun Surge",
     "sourceHash": "36a930997b2ac6eaf6bddd03bb4ce1aa9debc765641eb07f47d777c4dc85a559",
     "text": "Surto de Atordoamento"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "reviewed": true,
+    "source": "Cleansing Current",
+    "sourceHash": "3a1af6d6f9056a2a66a56e2022b0684408b0aaed3ae5502e415359e912fa28ec",
+    "text": "Corrente purificadora"
+  },
+  "content.talent.water.erosion.name": {
+    "reviewed": true,
+    "source": "Erosion",
+    "sourceHash": "1b1ce2f155c5e71b8ac5cacc89998a4bffd686fc9fcf477e0212cccfc1492e3e",
+    "text": "Erosão"
+  },
+  "content.talent.water.high-tide.name": {
+    "reviewed": true,
+    "source": "High Tide",
+    "sourceHash": "db0c84ae0a4b14e7c1f017b45ac2cd703eda6f2c3d345eddd4fa19e9911b1836",
+    "text": "Maré alta"
+  },
+  "content.talent.water.pressure.name": {
+    "reviewed": true,
+    "source": "Pressure",
+    "sourceHash": "45a57aa158891cea6e0da61f1a57f463bfa393485adddce30ffcb31cb9888817",
+    "text": "Pressão"
+  },
+  "content.talent.water.riptide.name": {
+    "reviewed": true,
+    "source": "Riptide",
+    "sourceHash": "3acadb77e3b99b962ffb54bddbb06d48f6047dd0a78ef816272d2d0c5bd4dcbc",
+    "text": "Corrente de retorno"
+  },
+  "content.talent.water.seafoam.name": {
+    "reviewed": true,
+    "source": "Seafoam",
+    "sourceHash": "1b5b0854577a116f062135263781ac2c3208da37e2c82ad46bd8405de8789de4",
+    "text": "Espuma do mar"
   },
   "creature.echo": {
     "reviewed": true,
