@@ -3731,11 +3731,23 @@
     "sourceHash": "86bc973d95f36cdf7adafd097cc7ef1b5787748bc37b1dfa3f7663e4620358b3",
     "text": "Gepanzerte Fäuste"
   },
+  "content.talent.physical.armored-fists.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Armor</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "9d96105c6a75835f1c9c90d06402cd026b14d0c0ec04af1cf888d7906a80cefc",
+    "text": "Addiere die Hälfte deiner <keyword0>Rüstung</keyword0> zum <keyword1>physischen</keyword1> Schaden"
+  },
   "content.talent.physical.finish-him.name": {
     "reviewed": true,
     "source": "Finishing Blow",
     "sourceHash": "bff118f26392d2f4a1a74102b13165d497c0f0e3a5ce76cb203ab52dc259a730",
     "text": "Todesstoß"
+  },
+  "content.talent.physical.finish-him.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled against enemies below {{value0}}% <keyword1>Health</keyword1>",
+    "sourceHash": "f629a32f5ced7ccef0e383af961a0435825c0df7514bb96e1e9faa7d44e538b7",
+    "text": "<keyword0>Physischer</keyword0> Schaden gegen Gegner unter {{value0}}% <keyword1>Gesundheit</keyword1> wird verdoppelt"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3767,11 +3779,23 @@
     "sourceHash": "83c301d9e64a257fefce0a5d6f9cda65e86241ce2531609be71ecb236610ee1c",
     "text": "Schildschlag"
   },
+  "content.talent.physical.shield-slam.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Block</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "84b1d5044c8624b84a2f69fa75f45bc5da8343d9aff6db8a0f61f0491c3416aa",
+    "text": "Addiere die Hälfte deines <keyword0>Blocks</keyword0> zum <keyword1>physischen</keyword1> Schaden"
+  },
   "content.talent.physical.unrelenting.name": {
     "reviewed": true,
     "source": "Unrelenting",
     "sourceHash": "0e39a808107429439094c56983cf19471eb2af2a99dd1ec8b515fe845b44ac2b",
     "text": "Unerbittlich"
+  },
+  "content.talent.physical.unrelenting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled while you're below half <keyword1>Health</keyword1>",
+    "sourceHash": "f58f6f01b4833cec4a84848355ef8a67689cb2520a008b25625ae5557b375194",
+    "text": "<keyword0>Physischer</keyword0> Schaden wird verdoppelt, solange deine <keyword1>Gesundheit</keyword1> unter der Hälfte liegt"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,

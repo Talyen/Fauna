@@ -3731,11 +3731,23 @@
     "sourceHash": "9c5e685ffe3d9bcf64ae4e69722132009118eafcddd622bbb68c4bd748ed056a",
     "text": "铁甲拳"
   },
+  "content.talent.physical.armored-fists.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Armor</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "da9c9dbf7a2c72bd42cf9ea2593d841630d7cbf3932fbaffe78dc54aebd76ac0",
+    "text": "将自身<keyword0>护甲</keyword0>的一半加到<keyword1>物理</keyword1>伤害上"
+  },
   "content.talent.physical.finish-him.name": {
     "reviewed": true,
     "source": "Finishing Blow",
     "sourceHash": "ea1532a58b9813d934baabc90c71f929d679e917a5b5c1ad321ff1bd21f23f79",
     "text": "终结一击"
+  },
+  "content.talent.physical.finish-him.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled against enemies below {{value0}}% <keyword1>Health</keyword1>",
+    "sourceHash": "512e3a84dc01ae1bb7b56a0c0d28c1c1f7f33060b9c4f528148d70e319a24f1d",
+    "text": "对<keyword1>生命</keyword1>低于{{value0}}%的敌人造成的<keyword0>物理</keyword0>伤害翻倍"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3767,11 +3779,23 @@
     "sourceHash": "233046d042c447aeb2ed65585a728f1526aee4f2dc2083b9c8fd03b27ff1bcbb",
     "text": "盾牌重击"
   },
+  "content.talent.physical.shield-slam.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Block</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "66350d89d3f84e36302d7498c288e2fd2d466314967137f576e69f8a128b9996",
+    "text": "将自身<keyword0>格挡</keyword0>的一半加到<keyword1>物理</keyword1>伤害上"
+  },
   "content.talent.physical.unrelenting.name": {
     "reviewed": true,
     "source": "Unrelenting",
     "sourceHash": "f5ba92a6b74223b7659d4e7f14781e4289c29b6e7b7c7776d4d427c8902ce3da",
     "text": "不懈"
+  },
+  "content.talent.physical.unrelenting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled while you're below half <keyword1>Health</keyword1>",
+    "sourceHash": "be7a827cd3540d2c52b1cc7a8d6c3b4750a72e581da3c28213c627673a7f921d",
+    "text": "自身<keyword1>生命</keyword1>低于一半时，<keyword0>物理</keyword0>伤害翻倍"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,

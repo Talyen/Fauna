@@ -3731,11 +3731,23 @@
     "sourceHash": "95cdd43cd858e8b0a946437692987e4e72f0bd9dd61cc785016000e69815c767",
     "text": "Бронированные кулаки"
   },
+  "content.talent.physical.armored-fists.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Armor</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "665e7be1d404f219a1d02f1530e9c1be65cf63f2d95383974240022af6829bf0",
+    "text": "Добавьте половину своей <keyword0>брони</keyword0> к <keyword1>физическому</keyword1> урону"
+  },
   "content.talent.physical.finish-him.name": {
     "reviewed": true,
     "source": "Finishing Blow",
     "sourceHash": "ccb7abb0216f992f079b810b9f09be5b5c950f91dcd1feeda47dff20b38dc6f1",
     "text": "Завершающий удар"
+  },
+  "content.talent.physical.finish-him.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled against enemies below {{value0}}% <keyword1>Health</keyword1>",
+    "sourceHash": "d56d3a00762f41d04a63a20ec0aa57cb9d06974e7e340a3fbc2e2bd0a26fa58b",
+    "text": "<keyword0>Физический</keyword0> урон удваивается против врагов с <keyword1>здоровьем</keyword1> ниже {{value0}}%"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3767,11 +3779,23 @@
     "sourceHash": "39be2b3f3c616d7aaf06bf0daf1c4cded54819ee1881f9f5affc6690182e0149",
     "text": "Мощный удар щитом"
   },
+  "content.talent.physical.shield-slam.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Block</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "a46a24a1be9ba2c0dfb9f693dd637ac986c2b3af80420cc917e21e565a84a4e5",
+    "text": "Добавьте половину своего <keyword0>блока</keyword0> к <keyword1>физическому</keyword1> урону"
+  },
   "content.talent.physical.unrelenting.name": {
     "reviewed": true,
     "source": "Unrelenting",
     "sourceHash": "c262773bce6dfbe7221adbc2603958a6eafbf4ee05669f28ad1182ad6363509a",
     "text": "Неумолимость"
+  },
+  "content.talent.physical.unrelenting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled while you're below half <keyword1>Health</keyword1>",
+    "sourceHash": "180bcae6fa657f65267a465d1022dd189cde9943b59bf85a7caddb929edbab6b",
+    "text": "<keyword0>Физический</keyword0> урон удваивается, пока ваше <keyword1>здоровье</keyword1> ниже половины"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,

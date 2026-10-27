@@ -3731,11 +3731,23 @@
     "sourceHash": "c8ed3de28292f26c465e84fe9d92d4af7101089ea2fc6fb88db6b24c4dff05e0",
     "text": "装甲の拳"
   },
+  "content.talent.physical.armored-fists.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Armor</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "e2f3ed75a9c2e91cdd23b730f0778bea2a14ba9841a1e4acc844841859d56e69",
+    "text": "自身の<keyword0>装甲</keyword0>の半分を<keyword1>物理</keyword1>ダメージに加える"
+  },
   "content.talent.physical.finish-him.name": {
     "reviewed": true,
     "source": "Finishing Blow",
     "sourceHash": "40680f9bb13449cee3cdcc7447e1fdbe9e7a6b0acbeb7c9703607e2c7fb69365",
     "text": "とどめの一撃"
+  },
+  "content.talent.physical.finish-him.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled against enemies below {{value0}}% <keyword1>Health</keyword1>",
+    "sourceHash": "3f2b84d602136785a2521e8f80fcba57c3a6ccf79f0d0f0f87d483ab85a10c92",
+    "text": "<keyword1>体力</keyword1>が{{value0}}%未満の敵への<keyword0>物理</keyword0>ダメージが2倍になる"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3767,11 +3779,23 @@
     "sourceHash": "4fbc75369990261c677446c564c27d68f84cab1da4e169854db99855ef086f70",
     "text": "盾の叩きつけ"
   },
+  "content.talent.physical.shield-slam.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Block</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "e17997cf096e7c9b8c1174c3c5c0d13b62aa97f8e0d40f0b037afbf531e1296c",
+    "text": "自身の<keyword0>ブロック</keyword0>の半分を<keyword1>物理</keyword1>ダメージに加える"
+  },
   "content.talent.physical.unrelenting.name": {
     "reviewed": true,
     "source": "Unrelenting",
     "sourceHash": "d85545f266b3d22080ae34fa179f5c628cc803ac588ea75f6df026bd5860ed79",
     "text": "容赦なし"
+  },
+  "content.talent.physical.unrelenting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled while you're below half <keyword1>Health</keyword1>",
+    "sourceHash": "41045d0536f3b85ffa5fac32a4e03c910b8a67ed5eeb0228d94288ac9413199c",
+    "text": "自身の<keyword1>体力</keyword1>が半分未満の間、<keyword0>物理</keyword0>ダメージが2倍になる"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
