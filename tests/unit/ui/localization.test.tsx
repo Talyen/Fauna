@@ -979,6 +979,54 @@ it("localizes conditional preview outcomes without changing their alternatives",
   view.unmount();
 });
 
+it("keeps translated conditional outcome keywords attached to their effects", () => {
+  const base: TargetForecast = {
+    name: "Rival",
+    previousHealth: 6,
+    health: 6,
+    previousBlock: 0,
+    block: 0,
+    maxHealth: 6,
+    absorbed: 0,
+    changes: [],
+    events: [],
+  };
+  const damaged: TargetForecast = {
+    ...base,
+    health: 3,
+    events: [{ kind: "damage", targetId: "rival", amount: 3, damageType: "burn", text: "" }],
+  };
+  const view = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TargetPreview forecast={{ ...base, alternatives: [damaged, base] }} />
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("status").getAttribute("aria-label")).toContain("3 de Brûlure");
+  const keyword = view.container.querySelector('.conditional-preview [data-keyword="burn"]');
+  expect(keyword?.textContent).toBe("Brûlure");
+  expect(keyword?.getAttribute("data-effect-keywords")).toBe("burn");
+  const critical: TargetForecast = {
+    ...damaged,
+    events: [{ kind: "damage", targetId: "rival", amount: 3, damageType: "burn", critical: true, text: "" }],
+  };
+  const catalog: MessageCatalog = {
+    ...french,
+    "preview.outcomeCritical": { source: "Critical {{description}}", text: "Crit {{description}}" },
+  };
+  view.rerender(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <TargetPreview forecast={{ ...base, alternatives: [critical, base] }} />
+    </MessageProvider>,
+  );
+  expect(view.container.querySelector('.conditional-preview [data-keyword="criticalHit"]')?.textContent).toBe(
+    "Crit ",
+  );
+  expect(view.container.querySelector('.conditional-preview [data-keyword="burn"]')?.textContent).toBe(
+    "Brûlure",
+  );
+  view.unmount();
+});
+
 it("localizes projected status changes and retains their keyword identity", () => {
   localStorage.removeItem("fauna.language.v1");
   const game = run();
