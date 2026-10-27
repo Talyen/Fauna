@@ -677,6 +677,12 @@
     "sourceHash": "da7f98a1566964e4100eb4dd9be6c4f91b012873a70fedf61f9cc471168dff58",
     "text": "造成双倍伤害的攻击"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "417fdaccb32c44716fc93ec14765e407bd1dec29f0100588f52d35eb06052e32",
+    "text": "伤害积累<keyword0>冻结</keyword0>；积累达到最大<keyword1>生命</keyword1>的一半时跳过一回合；恢复后获得{{value0}}回合的<keyword2>眩晕</keyword2>和<keyword3>冻结</keyword3>共享免疫"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -712,6 +718,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "72dfe6715b29ee5dab47e9e1d994106e3923d37b62a217f18b665e32d5bb3e4a",
     "text": "移除一名敌人的有益效果"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "84a949f3e65f5eb638daf8fe1267004894e219d9d64388438aefa78ac818f751",
+    "text": "伤害积累<keyword0>眩晕</keyword0>；积累达到最大<keyword1>生命</keyword1>的一半时跳过一回合；恢复后获得{{value0}}回合的<keyword2>眩晕</keyword2>和<keyword3>冻结</keyword3>共享免疫"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,

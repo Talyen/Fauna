@@ -677,6 +677,12 @@
     "sourceHash": "80dcc7d2c7bac53a55d7f8e752bff2eb8189bffb9babccd0b30203505cb0d600",
     "text": "Ein Angriff, der doppelten Schaden verursacht"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "1a33c3013db49021c6b059953fc146d7cb5376f2f022e8f755f172c3017b745a",
+    "text": "Schaden baut <keyword0>Einfrieren</keyword0> auf; Erreicht der Aufbau die Hälfte der maximalen <keyword1>Gesundheit</keyword1>, wird ein Zug übersprungen; Nach der Erholung besteht {{value0}} Züge lang gemeinsame Immunität gegen <keyword2>Betäubung</keyword2> und <keyword3>Frost</keyword3>"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -712,6 +718,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "8c9ba2938a831d23638bd7a7b6b20b5f084e680b41f7d817138eef2ca618bc2a",
     "text": "Entfernt vorteilhafte Effekte von einem Gegner"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "5c68027efaa288e01630fcd9b20e3ef45821a562701001f69ff24d0d7536b90f",
+    "text": "Schaden baut <keyword0>Betäubung</keyword0> auf; Erreicht der Aufbau die Hälfte der maximalen <keyword1>Gesundheit</keyword1>, wird ein Zug übersprungen; Nach der Erholung besteht {{value0}} Züge lang gemeinsame Immunität gegen <keyword2>Betäubung</keyword2> und <keyword3>Frost</keyword3>"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,

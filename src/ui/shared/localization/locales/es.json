@@ -677,6 +677,12 @@
     "sourceHash": "3571499289142a821fb823071293ca38a6c1b58b42553fa9e759e50261856842",
     "text": "Un ataque que inflige el doble de daño"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "e035c4a09eb429da417dd604bb24d7bade9f853ac53a24944be581c5284b525a",
+    "text": "El daño acumula <keyword0>Congelación</keyword0>; Cuando la acumulación llega a la mitad de la <keyword1>Salud</keyword1> máxima, se pierde un turno; Al recuperarse se obtiene inmunidad compartida a <keyword2>Aturdimiento</keyword2> y <keyword3>Congelación</keyword3> durante {{value0}} turnos"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -712,6 +718,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "fc41d0d24bd0ace61e166f05dd8ac207f872e37b62a0770e3b39e4aac907fc54",
     "text": "Elimina efectos beneficiosos de un enemigo"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "d09bd5001e04e90942f785ca4ceeab8105dc3f2d8b2ac2742bfb2775644b5694",
+    "text": "El daño acumula <keyword0>Aturdimiento</keyword0>; Cuando la acumulación llega a la mitad de la <keyword1>Salud</keyword1> máxima, se pierde un turno; Al recuperarse se obtiene inmunidad compartida a <keyword2>Aturdimiento</keyword2> y <keyword3>Congelación</keyword3> durante {{value0}} turnos"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,

@@ -725,6 +725,12 @@
     "sourceHash": "b41c1e40d42f6f8fbbc358fe5498bf628bdf7b58f1f8df70a9edff61fd932b61",
     "text": "Une attaque qui inflige le double de dégâts"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "f3c0719f87e072e801e417e0149b351558eb21a77d0c690c50766b03ae36ae8a",
+    "text": "Les dégâts accumulent le <keyword0>Gel</keyword0> ; Lorsque cette accumulation atteint la moitié de la <keyword1>Santé</keyword1> maximale, un tour est sauté ; La récupération confère {{value0}} tours d’immunité commune à l’<keyword2>Étourdissement</keyword2> et au <keyword3>Gel</keyword3>"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -760,6 +766,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "c95c6590376097832448440b615a076e233cbc63ee76ee5627e99f5f6599d113",
     "text": "Retire les effets bénéfiques d’un ennemi"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "f70ebc98cb61e0441bcdbf241b97cfbaf10c35c2366a19c4309a636682f8f91c",
+    "text": "Les dégâts accumulent l’<keyword0>Étourdissement</keyword0> ; Lorsque cette accumulation atteint la moitié de la <keyword1>Santé</keyword1> maximale, un tour est sauté ; La récupération confère {{value0}} tours d’immunité commune à l’<keyword2>Étourdissement</keyword2> et au <keyword3>Gel</keyword3>"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,

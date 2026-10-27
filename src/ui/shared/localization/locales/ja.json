@@ -677,6 +677,12 @@
     "sourceHash": "52c6fe2c3393e73bf0036d22fc23ee908fd3c55c133059ced59337f62c4e2eba",
     "text": "ダメージが2倍になる攻撃"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "a687dbe4b14a67d8e07d59e516ad55a9780091ed884976d705793c78ca0134b4",
+    "text": "ダメージで<keyword0>凍結</keyword0>が蓄積; 蓄積が最大<keyword1>体力</keyword1>の半分に達すると1ターン行動不能; 回復後は<keyword2>スタン</keyword2>と<keyword3>凍結</keyword3>の両方に{{value0}}ターン免疫を得る"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -712,6 +718,12 @@
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "cc5594c95f4b5031c889d0524696dda1c4d9dc4bf67ce72739e325a2619beb1c",
     "text": "敵1体の有益な効果を取り除く"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "28416d6f7d348038aa256d32208e2e1817040649193aacc64fe7ca59dfcf14b3",
+    "text": "ダメージで<keyword0>スタン</keyword0>が蓄積; 蓄積が最大<keyword1>体力</keyword1>の半分に達すると1ターン行動不能; 回復後は<keyword2>スタン</keyword2>と<keyword3>凍結</keyword3>の両方に{{value0}}ターン免疫を得る"
   },
   "content.glossary.keyword.thorns.definition.rule": {
     "reviewed": true,
