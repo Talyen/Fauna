@@ -2567,11 +2567,29 @@
     "sourceHash": "eeca01f24088b1b5b818d7d5420832473fc32727760f54f7fb171ae41048b376",
     "text": "Ensemble harmonique"
   },
+  "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
+    "sourceHash": "fee981e2f005f14a29947118cce8127c29075301e7e31406bc2ce85d2492c56b",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Étourdissement</keyword0> à tous les ennemis; Gagne {{value1}} <keyword1>Armure</keyword1>; {{value2}}% de chances de répéter"
+  },
   "content.card.ringpalm-teamProtection.name": {
     "reviewed": true,
     "source": "Seedling Circle",
     "sourceHash": "a0fb38a264339ef195898158ab6d5756773033a86f725b42cc5be242e62dd609",
     "text": "Cercle des pousses"
+  },
+  "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "3ea2fb1bfec4ea765efc76acec8c912590216b0bd527877520c99e3f50203ce6",
+    "text": "Confère à tous les alliés {{value0}} <keyword0>Blocage</keyword0> ou {{value1}} <keyword1>Épines</keyword1>"
+  },
+  "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
+    "sourceHash": "6a176ac5273731981115828a19287fe7b2012a2405617262db830532df4637eb",
+    "text": "Confère à tous les alliés {{value0}} <keyword0>Blocage</keyword0> ou <keyword1>Épines</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
     "reviewed": true,
@@ -2621,6 +2639,12 @@
     "sourceHash": "84ec83ce0bd28d50dd8dbd3907cca9c07cbb9da5c012af40654ea583b3b22bdf",
     "text": "Front frais"
   },
+  "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
+    "sourceHash": "fe1be16d9604e61b0f1a0771f18c113c8fe5fd29f08b2a7ddccecfde0464e208",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Gel</keyword0> à tous les ennemis; <keyword1>Purifie</keyword1> tous les alliés"
+  },
   "content.card.shadebrim-draw.name": {
     "reviewed": true,
     "source": "Noon Bloom",
@@ -2668,6 +2692,12 @@
     "source": "Cloudstep",
     "sourceHash": "f8847519b302209d4a1b5332e84b7c588d758c6d5d13b0ad63dc0b236e335562",
     "text": "Pas de nuage"
+  },
+  "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
+    "sourceHash": "4e253ed6925cdbf295d2f65029d3f94b26976b35b116b1e6ad979cfcf577a8eb",
+    "text": "Échange avec un allié aléatoire / L’allié entrant gagne {{value0}}% d’<keyword0>Esquive</keyword0> jusqu’au prochain tour"
   },
   "content.card.skybex-draw.name": {
     "reviewed": true,
@@ -2801,6 +2831,12 @@
     "sourceHash": "e72a8730daadf983139c608bfb3659869afc9b4892143851a7d41b67de512509",
     "text": "Défi vaillant"
   },
+  "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
+    "sourceHash": "51af1496097fb87640f756f4fa3c47b7945dde188d7aa656dff05269fff259a8",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> / Doublés contre les ennemis ayant plus de <keyword1>Santé</keyword1> que vous"
+  },
   "content.card.tournelle-swapLowest.name": {
     "reviewed": true,
     "source": "Safe Passage",
@@ -2884,6 +2920,12 @@
     "source": "Saffron Screen",
     "sourceHash": "39470146bc608cbd2c67d31cbeb8bc2ee616a6ee5810f878835337ca71433c97",
     "text": "Écran de safran"
+  },
+  "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
+    "sourceHash": "66f99c6fe418a0f81f4b3337fc0a1e3c9fc7d15c8f23f1899bacf692f8d764f0",
+    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0>; <keyword1>Annule</keyword1> les prochains dégâts de <keyword2>Gel</keyword2>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "reviewed": true,

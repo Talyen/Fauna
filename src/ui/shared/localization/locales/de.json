@@ -2555,11 +2555,29 @@
     "sourceHash": "da4ad48212b35782a183952c4927d79e608542a40a236ccc643ab9dc77d18aaa",
     "text": "Harmonischer Satz"
   },
+  "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
+    "sourceHash": "d7af943d30516f4c81166049cd4dcf7486cb76be6705c3a35e30846ff84493f8",
+    "text": "Verursache {{value0}} <keyword0>Betäubungs</keyword0>-Schaden bei allen Gegnern; Erhalte {{value1}} <keyword1>Rüstung</keyword1>; {{value2}}% Chance auf Wiederholung"
+  },
   "content.card.ringpalm-teamProtection.name": {
     "reviewed": true,
     "source": "Seedling Circle",
     "sourceHash": "84be2df6db0e435940059523b3dbce7ebb1d544061e64d6c82390c82f56d0ae8",
     "text": "Setzlingskreis"
+  },
+  "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "4353f6396dea3a4cfc9df9ca9ed3122e3141a25c1d63495a9dec723e0224d2d8",
+    "text": "Gewähre allen Verbündeten {{value0}} <keyword0>Block</keyword0> oder {{value1}} <keyword1>Dornen</keyword1>"
+  },
+  "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
+    "sourceHash": "4e9aa4b6516e57158752a39500488473c406c02d2ef0ed47a501188510b4d369",
+    "text": "Gewähre allen Verbündeten {{value0}} <keyword0>Block</keyword0> oder <keyword1>Dornen</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
     "reviewed": true,
@@ -2609,6 +2627,12 @@
     "sourceHash": "9bc5558972215cab37dcfacc9e962820dbd35e0a090b8cbc994000714390bb57",
     "text": "Kühlefront"
   },
+  "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
+    "sourceHash": "6ca61118a1ca9bd3f83f1f4e318273dd744e9cfdee5e7b8c1fb2b6e4f46a04cd",
+    "text": "Verursache {{value0}} <keyword0>Einfrieren</keyword0>-Schaden bei allen Gegnern; <keyword1>Reinige</keyword1> alle Verbündeten"
+  },
   "content.card.shadebrim-draw.name": {
     "reviewed": true,
     "source": "Noon Bloom",
@@ -2656,6 +2680,12 @@
     "source": "Cloudstep",
     "sourceHash": "852faeec0adb8868ca7a78eb1b70f1aa457f0cd2b5849e600a263f507caf9108",
     "text": "Wolkenschritt"
+  },
+  "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
+    "sourceHash": "85718cd0ca3c13bb38861b865a17118c69827228edc461a1a571ad3c5f947947",
+    "text": "Wechsle gegen einen zufälligen Verbündeten aus / Der eingewechselte Verbündete erhält {{value0}}% <keyword0>Ausweichen</keyword0> bis zum nächsten Zug"
   },
   "content.card.skybex-draw.name": {
     "reviewed": true,
@@ -2789,6 +2819,12 @@
     "sourceHash": "36e09fc91809391fc6f9f262e9b48411977688be4585b5194c605a4ce707759a",
     "text": "Tapfere Herausforderung"
   },
+  "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
+    "sourceHash": "f5c1d1d2995ab23f93ae2717627a843f4862dd8b8eee9e1d1cd9acfe2636fff6",
+    "text": "Verursache {{value0}} <keyword0>Licht</keyword0>-Schaden / Verdoppelt gegen Gegner mit mehr <keyword1>Gesundheit</keyword1> als du"
+  },
   "content.card.tournelle-swapLowest.name": {
     "reviewed": true,
     "source": "Safe Passage",
@@ -2872,6 +2908,12 @@
     "source": "Saffron Screen",
     "sourceHash": "eeec865b4968f4c27a4d611a30a3217b4fa8385b63fea20845c82cb0565cc0c4",
     "text": "Safranschirm"
+  },
+  "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
+    "sourceHash": "3473ed94e01f750555534d78d574f65cdc35a16ea95582a4f99b22eda613f8c1",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Hebe</keyword1> den nächsten <keyword2>Einfrieren</keyword2>-Schaden auf"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "reviewed": true,

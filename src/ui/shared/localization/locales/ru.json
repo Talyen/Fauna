@@ -2555,11 +2555,29 @@
     "sourceHash": "c2799657fc4ebb19c1b7278b6600d04c663b9259fdcc805010e1f26f6e7e0a32",
     "text": "Гармоничный набор"
   },
+  "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
+    "sourceHash": "4c50182bfb326b0dd05c3d92cc82d9cc470477b9a24f023797653bf3780464e1",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>оглушением</keyword0>; Получите {{value1}} <keyword1>брони</keyword1>; {{value2}}% шанс повтора"
+  },
   "content.card.ringpalm-teamProtection.name": {
     "reviewed": true,
     "source": "Seedling Circle",
     "sourceHash": "678c707e433db5b4d3de636b855041e2a848d533fdcf700d3d1040c160dcc384",
     "text": "Круг ростков"
+  },
+  "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "618ca4395a248f18124682c6bad4dc7c9e5ed8ffec58a4ace15932899f25d1fd",
+    "text": "Дайте всем союзникам {{value0}} <keyword0>блока</keyword0> или {{value1}} <keyword1>шипов</keyword1>"
+  },
+  "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
+    "sourceHash": "794f127e1c7253c1a656f5ac10289a4d3e0affc94a82496cb08fb1330c0979dc",
+    "text": "Дайте всем союзникам {{value0}} <keyword0>блока</keyword0> или <keyword1>шипов</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
     "reviewed": true,
@@ -2609,6 +2627,12 @@
     "sourceHash": "50c8a192eb1c59d2b212ab2aabc23cf26df02f1815a3308b24f08f17ed18412d",
     "text": "Прохладный фронт"
   },
+  "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
+    "sourceHash": "9f580165ec835caab3b01f50058e03791d2923e449fa71e0393a9e31b6f2ce32",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>заморозкой</keyword0>; <keyword1>Очистите</keyword1> всех союзников"
+  },
   "content.card.shadebrim-draw.name": {
     "reviewed": true,
     "source": "Noon Bloom",
@@ -2656,6 +2680,12 @@
     "source": "Cloudstep",
     "sourceHash": "8e220a851ac61376179887cd983a96af4b4c9744cadb508f72aac3bf5135c8ad",
     "text": "Облачный шаг"
+  },
+  "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
+    "sourceHash": "efa7c8840dd7d1f5b26bd02a1dd7861ea04d349f9804e97381ec69c8c348a0f0",
+    "text": "Сменитесь со случайным союзником / Входящий союзник получает {{value0}}% <keyword0>уклонения</keyword0> до следующего хода"
   },
   "content.card.skybex-draw.name": {
     "reviewed": true,
@@ -2789,6 +2819,12 @@
     "sourceHash": "a494a2b1d084e058f661934dcec18cb7878152e940ab23d02e9f6e361b1c7749",
     "text": "Доблестный вызов"
   },
+  "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
+    "sourceHash": "e4b087e60ed4c8782fc41c933be85e070aa81e2f42129f24fb620da6634b6096",
+    "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0> / Урон удваивается против врагов с большим <keyword1>здоровьем</keyword1>, чем у вас"
+  },
   "content.card.tournelle-swapLowest.name": {
     "reviewed": true,
     "source": "Safe Passage",
@@ -2872,6 +2908,12 @@
     "source": "Saffron Screen",
     "sourceHash": "1efb2705a5955558aedb12043866a35fc98326fad2a58fafa51613cc3e84eb6c",
     "text": "Шафрановая завеса"
+  },
+  "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
+    "sourceHash": "1bca070063716749ad6d306006db7ac4896b17253c78d8d755fca5beed359166",
+    "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Аннулируйте</keyword1> следующий урон от <keyword2>заморозки</keyword2>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "reviewed": true,

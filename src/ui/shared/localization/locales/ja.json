@@ -2555,11 +2555,29 @@
     "sourceHash": "c4738661e8b5312d8dd9821dbcab073d3506b915643f9b1f9959d476e7c8d5bf",
     "text": "調和の組み手"
   },
+  "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
+    "sourceHash": "102285b7475ee7f38573a01cad6c326e2fff774db4bcb4188d894940bc3857d8",
+    "text": "すべての敵に{{value0}}の<keyword0>スタン</keyword0>ダメージを与える; <keyword1>装甲</keyword1>を{{value1}}獲得; {{value2}}%の確率で繰り返す"
+  },
   "content.card.ringpalm-teamProtection.name": {
     "reviewed": true,
     "source": "Seedling Circle",
     "sourceHash": "2a869f517d35ad3748c5e755cff7a7ad90f23eed7cc215b4f2cee0854376b7fd",
     "text": "若芽の輪"
+  },
+  "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "51d6e018ceb0896780ec673ad8fc10597435f536f15088a255e64fc39b75c835",
+    "text": "すべての味方に<keyword0>ブロック</keyword0>を{{value0}}または<keyword1>棘</keyword1>を{{value1}}付与"
+  },
+  "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
+    "sourceHash": "eb390e60f64db985e6df3c4a332e98b1abbdcaebc1e3268517a913b2871a2350",
+    "text": "すべての味方に<keyword0>ブロック</keyword0>または<keyword1>棘</keyword1>を{{value0}}付与"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
     "reviewed": true,
@@ -2609,6 +2627,12 @@
     "sourceHash": "81f3bab5538a97d21fe54dbd0b0b1a089e4377f510d09bcef34916372b3f7986",
     "text": "涼風前線"
   },
+  "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
+    "sourceHash": "a7f2f06924401b35579c67e82fe110e0b8a1895bb0686829efc2dcb16726ae20",
+    "text": "すべての敵に{{value0}}の<keyword0>凍結</keyword0>ダメージを与える; すべての味方を<keyword1>浄化</keyword1>"
+  },
   "content.card.shadebrim-draw.name": {
     "reviewed": true,
     "source": "Noon Bloom",
@@ -2656,6 +2680,12 @@
     "source": "Cloudstep",
     "sourceHash": "f3e6735b8440ec7c35171cee2521e07d0d6386d29aa4d8dc4915945d6cd7d797",
     "text": "雲の足取り"
+  },
+  "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
+    "sourceHash": "5df0f628e829993e79490d43420a46bb3e88fe4bd08f54e617aa5a13ae54e35a",
+    "text": "ランダムな味方と交代 / 入れ替わる味方は次のターンまで{{value0}}%の<keyword0>回避</keyword0>を獲得"
   },
   "content.card.skybex-draw.name": {
     "reviewed": true,
@@ -2789,6 +2819,12 @@
     "sourceHash": "84e7fa844d9077f2cf53a3dd0bf8c75557caf3876feb1db514fa277aa4311d3e",
     "text": "勇敢な挑戦"
   },
+  "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
+    "sourceHash": "2496fc8acf189db1d05038800cdff506e8ca391d70a174ead57cb255c1d0f1bd",
+    "text": "{{value0}}の<keyword0>光</keyword0>ダメージを与える / 自分より<keyword1>体力</keyword1>が多い敵には2倍"
+  },
   "content.card.tournelle-swapLowest.name": {
     "reviewed": true,
     "source": "Safe Passage",
@@ -2872,6 +2908,12 @@
     "source": "Saffron Screen",
     "sourceHash": "36a198953c00dc52d0bfed3ad6813c4c899375ada40c9f6a5099e41f500b1732",
     "text": "サフランの幕"
+  },
+  "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
+    "sourceHash": "8e06d1e089a3acc1afe9b16f10cf95b3ad46ff4cdb2140a6942b83e4e4a2f251",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 次の<keyword2>凍結</keyword2>ダメージを<keyword1>無効化</keyword1>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "reviewed": true,
