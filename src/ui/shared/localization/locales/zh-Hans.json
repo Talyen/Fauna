@@ -7847,6 +7847,12 @@
     "sourceHash": "56f8dc521ca0a7769f3551368f1c8a13db3d2a8d78df183cd73563a72037c7bd",
     "text": "{{actor}}创建的食物卡牌：{{count}}"
   },
+  "log.createPearls": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Pearls",
+    "sourceHash": "a2338cc751ddc3eaf0c13289e21333ca3e0c830ea47b664052cea341e22e6191",
+    "text": "{{actor}}生成珍珠：{{count}}"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -8003,6 +8009,12 @@
     "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
     "text": "{{name}}：{{action}} — 未移除任何效果。"
   },
+  "log.repeatFood": {
+    "reviewed": true,
+    "source": "{{card}} repeats",
+    "sourceHash": "2437652c3359054b07f643e13f2e7c00809b5ad338d255bf410c419138956d42",
+    "text": "再次使用：{{card}}"
+  },
   "log.repeatNextEnemyCard": {
     "reviewed": true,
     "source": "The enemy's next card is played twice",
@@ -8038,6 +8050,12 @@
     "source": "{{name}} skips its {{status}} turn.",
     "sourceHash": "424648bc8f56704a85b9ec1471c414c9e26049280a4ac37ff8d1e984accb9d39",
     "text": "{{name}}：因{{status}}跳过回合。"
+  },
+  "log.summonEcho": {
+    "reviewed": true,
+    "source": "{{actor}} summons an {{echo}}",
+    "sourceHash": "f68e928d05573be63c2472952e932af500c2cd98607fb85d83e525fc75c51a95",
+    "text": "{{actor}}召唤一个{{echo}}"
   },
   "log.temporaryDodge": {
     "reviewed": true,

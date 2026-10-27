@@ -5,6 +5,7 @@ import { definition, species } from "../../../src/game/content";
 import { drawDiscard } from "../../../src/game/card-zones";
 import { resurrect } from "../../../src/game/combat/resurrection";
 import { createFood } from "../../../src/game/combat/food";
+import { createPearls, summonEcho } from "../../../src/game/combat/legendary";
 import { resolveCombat } from "../../../src/game/combat/resolution";
 import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
@@ -400,6 +401,27 @@ it("localizes the final enemy hit after the battle state is retired", async () =
   } finally {
     await session.dispose();
   }
+});
+
+it("localizes real Pearl and Echo creation and a repeated Food card", () => {
+  const game = structuredClone(requireBattle(teamRun(42, ["memento"])));
+  const actor = game.team[0]!;
+  const events: GameEvent[] = [];
+  createPearls(game, actor, "player", 2, events);
+  summonEcho(game, actor, "player", 5, events);
+  const reader = createMessageReader("fr", french);
+  expect(eventPresentation(game, events[0]!, reader)).toBe("Memento crée des Perles : 2");
+  expect(eventPresentation(game, events[1]!, reader)).toBe("Memento invoque un Écho");
+  const repeat: GameEvent = {
+    kind: "action",
+    actorId: actor.id,
+    actionType: "support",
+    text: "Apple repeats",
+  };
+  expect(eventPresentation(game, repeat, reader)).toBe("Nouvelle utilisation : Pomme");
+  expect(eventPresentation(game, { ...repeat, text: "Unknown repeats" }, reader)).toBe("Unknown repeats");
+  for (const event of [...events, repeat])
+    expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
 });
 
 it("localizes a reflected status using its actual recipient", () => {

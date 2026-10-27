@@ -7847,6 +7847,12 @@
     "sourceHash": "9c81c50dcb46f91458c849e0f76bec98cc3f26995a48c14bd076b3d1f9bc71a1",
     "text": "{{actor}} erzeugt Nahrungskarten: {{count}}"
   },
+  "log.createPearls": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Pearls",
+    "sourceHash": "da1681f71f4652a287657864319f10b072fe8687cb9c98dc75f358421dbf3416",
+    "text": "{{actor}} erzeugt Perlen: {{count}}"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -8003,6 +8009,12 @@
     "sourceHash": "7045c036abd55036084814f8fc5e1f8c311bdf6265b0b4a1c035da5b69d42c6a",
     "text": "{{name}}: {{action}} – kein Effekt entfernt."
   },
+  "log.repeatFood": {
+    "reviewed": true,
+    "source": "{{card}} repeats",
+    "sourceHash": "b56087fece3876a1e421ad1777512eb013e66816a0f7a8057d16502fa8e5a814",
+    "text": "Erneut gespielt: {{card}}"
+  },
   "log.repeatNextEnemyCard": {
     "reviewed": true,
     "source": "The enemy's next card is played twice",
@@ -8038,6 +8050,12 @@
     "source": "{{name}} skips its {{status}} turn.",
     "sourceHash": "b700f08d8ef73e2a19021dc2c8a01c39b6ba94408d60bb19c3287acb22e3aff1",
     "text": "{{name}}: Zug wegen {{status}} übersprungen."
+  },
+  "log.summonEcho": {
+    "reviewed": true,
+    "source": "{{actor}} summons an {{echo}}",
+    "sourceHash": "566520b1e8720d48a296d8988eba5e9588c8b09abf7c05fc36ea6811ab43d291",
+    "text": "{{actor}} beschwört ein {{echo}}"
   },
   "log.temporaryDodge": {
     "reviewed": true,

@@ -290,6 +290,9 @@
   "log.createFood": {
     "text": "{{actor}} creates {{count}} Food cards"
   },
+  "log.createPearls": {
+    "text": "{{actor}} creates {{count}} Pearls"
+  },
   "log.criticalDamage": {
     "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
   },
@@ -368,6 +371,9 @@
   "log.removeNoEffects": {
     "text": "{{name}}: {{action}} removes no effects."
   },
+  "log.repeatFood": {
+    "text": "{{card}} repeats"
+  },
   "log.repeatNextEnemyCard": {
     "text": "The enemy's next card is played twice"
   },
@@ -385,6 +391,9 @@
   },
   "log.skipControlledTurn": {
     "text": "{{name}} skips its {{status}} turn."
+  },
+  "log.summonEcho": {
+    "text": "{{actor}} summons an {{echo}}"
   },
   "log.temporaryDodge": {
     "text": "{{name}} gains {{amount}}% Dodge until its next turn"

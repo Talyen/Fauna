@@ -7847,6 +7847,12 @@
     "sourceHash": "3c3977c51f5c1e1b68ec5f34b8ec7c14501e82ca95f558a90ba85f8963926e09",
     "text": "{{actor}}が作成した食料カード：{{count}}"
   },
+  "log.createPearls": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Pearls",
+    "sourceHash": "e526d0f0fc13c5ba0dcdfe695cc3e793e9b2228f7cd9c31e7c1d17982b268ad3",
+    "text": "{{actor}}が真珠を生成：{{count}}"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -8003,6 +8009,12 @@
     "sourceHash": "e84c3f4bfc1324af913a24c419c5844bc6e97e64f0005168f2f4b6ce36d896c0",
     "text": "{{name}}：{{action}} — 解除された効果はありません。"
   },
+  "log.repeatFood": {
+    "reviewed": true,
+    "source": "{{card}} repeats",
+    "sourceHash": "71bd4976717b650ff8be5a197d53963a519c432d735f4b8b104ad4089bbcf478",
+    "text": "再使用：{{card}}"
+  },
   "log.repeatNextEnemyCard": {
     "reviewed": true,
     "source": "The enemy's next card is played twice",
@@ -8038,6 +8050,12 @@
     "source": "{{name}} skips its {{status}} turn.",
     "sourceHash": "82f9428e30642c0b6209ffbb79609afc42822ae67e610780b8f326d568c02132",
     "text": "{{name}}：{{status}}によりターンをスキップ。"
+  },
+  "log.summonEcho": {
+    "reviewed": true,
+    "source": "{{actor}} summons an {{echo}}",
+    "sourceHash": "4fc66ced44f28eca05ae7122c843f65c93f57a21885e722d037ce377f392fa6d",
+    "text": "{{actor}}が{{echo}}を召喚"
   },
   "log.temporaryDodge": {
     "reviewed": true,

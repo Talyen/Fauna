@@ -7847,6 +7847,12 @@
     "sourceHash": "877f0c1041ca2c34502ac8f802754df070487318088b090d1b32fde435c58c9f",
     "text": "{{actor}} создаёт карты Еды: {{count}}"
   },
+  "log.createPearls": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Pearls",
+    "sourceHash": "503977765038abb89dd7b3feef3f12d5bd34f13d11f7162a370c5c73d95e8fe7",
+    "text": "{{actor}} создаёт Жемчужины: {{count}}"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -8003,6 +8009,12 @@
     "sourceHash": "40b0929fede0b5c6db86af6fe0e5d200eb249e00d717f1ba3a50e32d166e2dd4",
     "text": "{{name}}: {{action}} — эффекты не сняты."
   },
+  "log.repeatFood": {
+    "reviewed": true,
+    "source": "{{card}} repeats",
+    "sourceHash": "36e918d2dadd7fc7e93a82bac97306847ab75f786759514deef7d2be1c11fba8",
+    "text": "Повторный розыгрыш: {{card}}"
+  },
   "log.repeatNextEnemyCard": {
     "reviewed": true,
     "source": "The enemy's next card is played twice",
@@ -8038,6 +8050,12 @@
     "source": "{{name}} skips its {{status}} turn.",
     "sourceHash": "cec1e8e2f612cb2670232e7dea42ed190180fc3170e29577421f06b5cbf64108",
     "text": "{{name}}: ход пропущен ({{status}})."
+  },
+  "log.summonEcho": {
+    "reviewed": true,
+    "source": "{{actor}} summons an {{echo}}",
+    "sourceHash": "61fa59d21f8938aa7c3e2132f98eb3bb14bda2e4e40395f256af6bb09d995a05",
+    "text": "{{actor}} призывает {{echo}}"
   },
   "log.temporaryDodge": {
     "reviewed": true,

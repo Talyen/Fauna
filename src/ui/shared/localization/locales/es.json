@@ -7847,6 +7847,12 @@
     "sourceHash": "5f022bf03b2da4e2dedca5dc858f7c408f9ed54b50814f2b20572d79265f6083",
     "text": "{{actor}} crea cartas de Comida: {{count}}"
   },
+  "log.createPearls": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Pearls",
+    "sourceHash": "cfedea9ee1a74377e5ddb6cd48a221a2b5dee63e46ce61063ddfefb97148b236",
+    "text": "{{actor}} crea Perlas: {{count}}"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -8003,6 +8009,12 @@
     "sourceHash": "ed4015e8d78266625ba5e00abe15b647b70183b3f1e79a9e12d49ed458cf340f",
     "text": "{{name}}: {{action}} — ningún efecto eliminado."
   },
+  "log.repeatFood": {
+    "reviewed": true,
+    "source": "{{card}} repeats",
+    "sourceHash": "063472b6b8e35043678fea28de285e0d868e54a3b142beccb25b34087216b9ef",
+    "text": "Se vuelve a jugar: {{card}}"
+  },
   "log.repeatNextEnemyCard": {
     "reviewed": true,
     "source": "The enemy's next card is played twice",
@@ -8038,6 +8050,12 @@
     "source": "{{name}} skips its {{status}} turn.",
     "sourceHash": "311439bfb73ea9b58482e2627cbf75bb77c35dbb2a814539b22685825b4d5a0c",
     "text": "{{name}}: turno perdido por {{status}}."
+  },
+  "log.summonEcho": {
+    "reviewed": true,
+    "source": "{{actor}} summons an {{echo}}",
+    "sourceHash": "b5fa951e6fd348abc88e394fde3ea46aae6b4d0f33a57d9ca3d241e02ea1b981",
+    "text": "{{actor}} invoca un {{echo}}"
   },
   "log.temporaryDodge": {
     "reviewed": true,

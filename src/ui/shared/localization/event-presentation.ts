@@ -45,6 +45,25 @@ export function eventPresentation(
         actor: localizedCombatantName(actor, i18n),
         count: i18n.locale === "en" ? String(event.amount) : event.amount,
       });
+    if (
+      actor &&
+      event.actionType === "support" &&
+      event.amount !== undefined &&
+      event.text === `${species(actor.species).name} creates ${event.amount} Pearls`
+    )
+      return i18n.message("log.createPearls", "{{actor}} creates {{count}} Pearls", {
+        actor: localizedCombatantName(actor, i18n),
+        count: i18n.locale === "en" ? String(event.amount) : event.amount,
+      });
+    if (
+      actor?.species === "memento" &&
+      event.actionType === "support" &&
+      event.text === "Memento summons an Echo"
+    )
+      return i18n.message("log.summonEcho", "{{actor}} summons an {{echo}}", {
+        actor: localizedCombatantName(actor, i18n),
+        echo: i18n.message("creature.echo", "Echo"),
+      });
     if (actor) {
       const prefix = `${unitName(actor)} uses `;
       if (event.text.startsWith(prefix) && event.text.endsWith(".")) {
@@ -60,6 +79,14 @@ export function eventPresentation(
       const card = cardsByEnglishName.get(event.text.slice(4));
       if (card?.species === null)
         return i18n.message("log.useFood", "Use {{card}}", {
+          card: i18n.content(`content.card.${card.id}.name`, card.name),
+        });
+    }
+    const repeatSuffix = " repeats";
+    if (event.actionType === "support" && event.text.endsWith(repeatSuffix)) {
+      const card = cardsByEnglishName.get(event.text.slice(0, -repeatSuffix.length));
+      if (card?.species === null)
+        return i18n.message("log.repeatFood", "{{card}} repeats", {
           card: i18n.content(`content.card.${card.id}.name`, card.name),
         });
     }
