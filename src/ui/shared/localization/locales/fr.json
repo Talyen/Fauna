@@ -1487,6 +1487,96 @@
     "sourceHash": "69c42bba4915abc9e212b87bc7ef70d8e59214fb3e101d2d4c9950f864803a8d",
     "text": "Les cartes <keyword0>Gel</keyword0> ont {{value0}}% de chances d'être jouées deux fois"
   },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "f76ddfd688b62a8b86946ff715ecec5e8187d3de88afe74bd3701e4fea52272f",
+    "text": "Table rase"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "11f05b3dbb8bb045d15fac6b384181a94a5c3ea15ec7f9c44da045701a4cf2ee",
+    "text": "Élan de combat"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "12b0a20c4dc0304f5fb42702c56661ef1a7d2c8a037f68c86351c2671ede9c3c",
+    "text": "Récupérez {{value0}} de <keyword0>Santé</keyword0> au début du combat"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "5edaa975d370eee63d64267f257b3ac62124dc080096cf57515519301f8fe0f2",
+    "text": "Garde désespérée"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "d9066a8dd989b3e0a5cd211ebdc2a45f753c89ff0d4a74d8a59623796937108b",
+    "text": "La première fois que votre <keyword0>Santé</keyword0> passe sous la moitié à chaque combat, gagnez {{value0}} de <keyword1>Blocage</keyword1>"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "69776c4848cc36c1b9b00a8ebef81a7d079475a724ef705048fe6eb3b1bf8229",
+    "text": "Dernier souffle"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "2241c5537bf07e72ca14ed33fa11058549a6534514581b7279d1d70d0cddb1ed",
+    "text": "Sous la moitié de votre <keyword0>Santé</keyword0>, gagnez {{value0}}% de chances d'<keyword1>Esquive</keyword1>"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "afe291ccd2bdaa16288518cdf850c065f6a41a33bbade5b123155eb08c7047d6",
+    "text": "Dernier recours"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "b31f72e4f2357fd20f6d41dec8cfd6192f0c02dbc8e36b2cf9029d141bdce4fa",
+    "text": "Guérison"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "c6012b17453c43470afdd74a5401fe3316f149cbc2ed0dc0dbff92aa65acec4d",
+    "text": "Débordement"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "faf296c6cd51bd1436f7e1cca4f786004e406c1e51243277bf586ad0afdf6a1d",
+    "text": "Renouveau"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "12af85f3e8c882fbaf6bec919a6fb4613e85655a02a11756d6880518b5021c0f",
+    "text": "Vitalité"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "85e6fefac95a237e3bb3f8023a0549d24971a20662de5bb8041b9c2efb48e083",
+    "text": "Récupérez {{value0}} de <keyword0>Santé</keyword0> après chaque combat"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "287688a50baa7925588147507d9ac265ef9781eeb1e026d423e98e3f9e197382",
+    "text": "Volonté de vivre"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "46c62c1f468b78a3f0fc6fde3b3d7d3578e2810fc90910ddbb1122919c785896",
+    "text": "Aux portes de la mort dure {{value0}} tour de plus"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

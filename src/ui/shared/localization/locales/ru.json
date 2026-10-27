@@ -1439,6 +1439,96 @@
     "sourceHash": "6ca5e75e69aa8f650ae67409b009cbfb1ec7950d27c6c04dcc339d7fcdc58134",
     "text": "Карты типа «<keyword0>Заморозка</keyword0>» с шансом {{value0}}% разыгрываются дважды"
   },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "41d28c48381a2273bbae2a3d91d88a0971c22944b0ced670557c95e84d5b0af7",
+    "text": "Чистый лист"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "fa49f975c7968ea0b0d840430d6931a46e80155f6e38b79ab0104c1682b15f4e",
+    "text": "Боевой всплеск"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "8820c02747316345fda4f96503c14a6606afeeac5fb75e9310ae016240f7621b",
+    "text": "Восстановите {{value0}} ед. <keyword0>здоровья</keyword0> в начале боя"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "9a10d49eac992c82d8d5c12d47c3c03250fee9efceed8337b208756f7c5fe00c",
+    "text": "Отчаянная защита"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "80164c300abdeff72aa1e7c2a13a9c76bf691e45e6f0700b21d214b725d918cc",
+    "text": "Когда ваше <keyword0>Здоровье</keyword0> впервые за бой падает ниже половины, получите {{value0}} ед. <keyword1>блока</keyword1>"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "fc8190ac8da1041c30f8c596c6228d380fc298e1d6f3e792d174925a9ac47ee8",
+    "text": "Последний вздох"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "202e00f253a1d1f02c23e49709ff930783f1054aa59aa55105b17072f69e4678",
+    "text": "Пока у вас меньше половины <keyword0>здоровья</keyword0>, получите {{value0}}% к шансу эффекта «<keyword1>Уклонение</keyword1>»"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "fa326469713b03625b27373760704a583aa690329039b51660418ca95d7c8688",
+    "text": "Последнее средство"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "8ba8b96fc326bea4dcdeb40673cd5bcab29774d404e4618cb5578948a11a4021",
+    "text": "Исцеление"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "c17f0097d0a0aa611936005bbecd95c58036faa1300cc3c612d149652eed9e84",
+    "text": "Переполнение"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "acf1b8c30f93dfac8e646e196bf6f4cf696e490f2dc37bfd58f3b067063f54b0",
+    "text": "Обновление"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "4245ab0d4ab0c065237c11d6a9804f86e1de153be1baabd76dcd28de575b1dca",
+    "text": "Живучесть"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "aeff6f6148318b28dd6a9d8c6d62e5c45279b58be71d5ce2785110d9cdcee08e",
+    "text": "Восстановите {{value0}} ед. <keyword0>здоровья</keyword0> после каждого боя"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "76efc77ce083599ae7efeefd2003245ca313bd60a48b02aeec3a96eac8d9027f",
+    "text": "Воля к жизни"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "a48a087d2bc63705ffe21054f663463c608bab9f5ea9ef62edf33ff6725d631d",
+    "text": "На пороге смерти длится дольше; дополнительных ходов: {{value0}}"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

@@ -1439,6 +1439,96 @@
     "sourceHash": "979f2bd5748ffede5773b60a2b4f1cf0ac2a3f566bcc6319def7df440dfb528c",
     "text": "<keyword0>凍結</keyword0>カードは{{value0}}%の確率で二回使用される"
   },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "82a7b8a71fb798835282b9247a2dfeef000934c3334afa818a6020bae3f30419",
+    "text": "白紙の状態"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "aaca3644c631abbb799094abd71dd8164c8d917b2522a12b20eed14ea0941201",
+    "text": "戦闘の昂揚"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "3dc9b837cb4c824fab1545ae963661b3d549ba802fb0b5fd73f0f844a2edb180",
+    "text": "戦闘開始時に<keyword0>体力</keyword0>を{{value0}}回復する"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "82c67e21340c3c66b77f460a1df68a59f4dd8b760b9f42b832c92f275d98c739",
+    "text": "必死の守り"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "3739790a6d757415964295aa32ab856e0ff0e6b4c06676f1e96e43f3c3d08705",
+    "text": "各戦闘で初めて<keyword0>体力</keyword0>が半分未満になると<keyword1>ブロック</keyword1>を{{value0}}得る"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "94d88f87cf86f97d41213a0b441e579afa0d52a0564c334acd9978bfc849630f",
+    "text": "最後の息"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "b0f0602a6ffd710d026085af0331c6edb06ad07749a39750aa6dbefc323c713b",
+    "text": "<keyword0>体力</keyword0>が半分未満の間、<keyword1>回避</keyword1>率が{{value0}}%増加する"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "26a2b0606e98250d2fac5633825c2cf4c25f3b661290dd1153421c8d25a885f9",
+    "text": "最後の手段"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "ed5e3f740ff946d776e5ad92bafd856fb607ac675cf6fd711eda0cc21ec35826",
+    "text": "癒やし"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "f40500895d21d6b737d22f3d43aa6306b51c7118e7ba68d2f76ff9a1acfa0241",
+    "text": "溢れ出る力"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "e4cfd8903038b281941865fa0a19644f3e578eb1eeed2980551f0745fdbe039d",
+    "text": "新生"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "cc33d4af6b14af3eadd88ca25914298f3952342bc235f461c6de381cc4f0f641",
+    "text": "生命力"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "8a493e5b0bf3ff51105cb1c7eb76b1dfad11f80e6ec0baec29a94e2ceead8f02",
+    "text": "各戦闘後に<keyword0>体力</keyword0>を{{value0}}回復する"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "c852e8d8538e50244fc7c1e8afc5bad8b973fe6a093628b52548efa8fe138a48",
+    "text": "生への意志"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "0d7ef20d1d6b107a8707efd48ee9ca42bf64834e368e7638e689fb9b06d34cb3",
+    "text": "死の淵の持続時間が{{value0}}ターン延びる"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

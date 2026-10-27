@@ -1439,6 +1439,96 @@
     "sourceHash": "eab403051223c69de27419c451f70e1961eb998b9a8d176f947d22de8d551c9d",
     "text": "<keyword0>冻结</keyword0>卡牌有{{value0}}%几率发动两次"
   },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "60f8189f3b4101fcea9aa74bd25086ae6ebafda6559ce8a40378124e25fdad74",
+    "text": "焕然一新"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "377051f46af3d1c29277561d59caf7e95d94123a5d74d7bf46dd5e3243d8451a",
+    "text": "战斗激涌"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "4063cd3327a1d15d606fce84956eae8fd9f1cc2695ae05831acb265946a91efe",
+    "text": "战斗开始时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "c9ebdf0bea399ed1a7683c3cadf281052f0c6fb4c6dc44c511634e18f3995e36",
+    "text": "绝境守卫"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "57d325487e18059994facf8d5d8ed41b3853f6b97f7af2054f632812928e5cfb",
+    "text": "每场战斗你的<keyword0>生命</keyword0>首次低于一半时，获得{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "496c4d68852eee08113cdbe8018dedc185bc4bd305da9776e1913148e2083600",
+    "text": "最后喘息"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "92d9d3da1cf1df1b97fbd1927c31f68569c71d2963ab524eb1b9ef0b69591ade",
+    "text": "你的<keyword0>生命</keyword0>低于一半时，<keyword1>闪避</keyword1>几率增加{{value0}}%"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "0f9837d05b31acf00abf2d35c34becd7d0dfd04b820c34adb3568c66cd86faa6",
+    "text": "最后手段"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "9b2ea918ba4fa4d9f57af8f501a395bbf5c73ca2c5fe0692a235c1d9eff33591",
+    "text": "愈合"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "7ab3662acaab0b29f5656fb31370eabadb688bb0a9e48e484586365d069609eb",
+    "text": "溢出"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "48e834f6518af6ac0327ba23924d73604fd802202ef3d5adbfb3cc639691d7cd",
+    "text": "复苏"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "ae1e286a3a76503d854ed8aed55df17bd8a13f30163ab62c093952ae3d07a74f",
+    "text": "生命力"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "a5a83949577b762d81ffbd1b87b0ee8cab0b6b5625b62ffd9d4bf29797f1f0f2",
+    "text": "每场战斗后恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "297125b3977483b0ae011e016ffb9e8663fc7061b1ed91617b92b4b37402e577",
+    "text": "求生意志"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "40663d04274fb6d5ad9808495326f3617143ffbb9e97b2f6d4df3169d07e2c5c",
+    "text": "濒死状态持续时间延长{{value0}}回合"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

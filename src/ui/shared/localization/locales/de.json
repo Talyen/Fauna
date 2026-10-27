@@ -1439,6 +1439,96 @@
     "sourceHash": "85ffb4325d219bf4bafcc3b10b1d57fe725299d743a9216c5f41733ca832be3a",
     "text": "<keyword0>Frost</keyword0>-Karten haben eine Chance von {{value0}}%, zweimal gespielt zu werden"
   },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "7ea09f2f9391be0bb6bcfec297ad0a5fab7571dc2a868fbfa429bf96da11aa05",
+    "text": "Reiner Tisch"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "abc98b8ba833087eed2df2504c709be9f9f28baaa132f4dd1a4abbb4d5f5e4a5",
+    "text": "Kampfrausch"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "ede48761a6ace8f1d47898e3963cf5e333d5fd80b21cc9919a770edf531d84ab",
+    "text": "Stelle zu Kampfbeginn {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "7537a4663fe141796aeba0d1670fa08896b7a439c92640b2dea9d931f5fb2e82",
+    "text": "Verzweifelte Deckung"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "7489f7b92f15fdeac2dbb46b1c71629ae8e636ed0b8a6721e2ec3c8544199348",
+    "text": "Wenn deine <keyword0>Gesundheit</keyword0> im Kampf erstmals unter die Hälfte fällt, erhalte {{value0}} <keyword1>Block</keyword1>"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "0239884e7c77d0398b17b86d960ef11c8d2d2cd5bb92a55d5b2ad5466c3655c6",
+    "text": "Letzter Atemzug"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "e146c12d1db9774ae1e3211924450eaf860b1f507fc46f08f6ad5e84378730e2",
+    "text": "Solange du weniger als die Hälfte deiner <keyword0>Gesundheit</keyword0> hast, erhalte {{value0}}% <keyword1>Ausweichchance</keyword1>"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "b5f771f690501729c2b49c169ee17475ebae49685af2b13a65600abf1c9ad59c",
+    "text": "Letzter Ausweg"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "d5852803e45d8f249a8de90f56ba7b8c7c33af5cfdca3774ea02c2426ff14daf",
+    "text": "Heilung"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "3641acb1ab481549a2654d639e33e6a344077985ef10de3a9ab688ebcca6bd57",
+    "text": "Überfluss"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "ab735ece08afc945c326d8566136db1614af92537c01ada4cba8a3481ed504b4",
+    "text": "Erneuerung"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "17cfb5bb22ceb699e5115629b74e8f00fc333080393ca406d5e48d8779e0cc22",
+    "text": "Lebenskraft"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "4854cb473133889bce17888489f7409c6f83d631e55040940689013fc0033183",
+    "text": "Stelle nach jedem Kampf {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "24d727e7536890c14bdb84c8a86b3636b838d4fbf6c250e7c4c2faefcb7d590f",
+    "text": "Lebenswille"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "fac0eaa56159b34e950f0cfa9f30e13bb789ac336b75e729537fa0933537b109",
+    "text": "Nahtod dauert {{value0}} Runde länger"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

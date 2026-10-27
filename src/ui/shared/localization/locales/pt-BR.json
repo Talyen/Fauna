@@ -1439,6 +1439,96 @@
     "sourceHash": "96ed148c5aa82b1f68a449624e54e84c1abade242df39ae104e0e5a5a9b232ac",
     "text": "Cartas de <keyword0>Congelamento</keyword0> têm {{value0}}% de chance de serem jogadas duas vezes"
   },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "7db61f1168f5c715f4b1c7ce6fd57b48e3b3457481d67f3a4f0bdc38ede337cc",
+    "text": "Recomeço"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "80ef2f067f4d6e7a9c1dff4469df15421abf16e127d83013182fc9fc201c6bc0",
+    "text": "Surto de combate"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "dbe0d1646de6f9f1de982c2489c7dedd16550739ca77fb725820d41ce7c123df",
+    "text": "Recupere {{value0}} de <keyword0>Saúde</keyword0> no início do combate"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "0bf1b3fc86042a42c84e6fbba0e2316c9aea22bd613e983b36127a2e790bf4e3",
+    "text": "Guarda desesperada"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "6d7bf688c0dc2275d4361170b64c224312954bf9b14e6192eab53f9c5590f78a",
+    "text": "Na primeira vez que sua <keyword0>Saúde</keyword0> cai abaixo da metade em cada combate, ganhe {{value0}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "568e6f913fce329786258cb4eb55779e2f7f28f02c5cbe1d72f0cf11e3dd6e2b",
+    "text": "Último suspiro"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "0ba20e5bc5b19ba5f912dc119fe8e3281c1ede4aa3ae5bab9801ee5b425294ce",
+    "text": "Com menos da metade de <keyword0>Saúde</keyword0>, ganhe {{value0}}% de chance de <keyword1>Esquiva</keyword1>"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "3e3867731cd38e897e68c585b2e93319d0feef169010d4caffcb711b06613d28",
+    "text": "Último recurso"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "2ed45cfc06e5b28a659b9bd0d6a13c3bdf332d072f227e39482197d73ab74ce5",
+    "text": "Cura"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "906be1dc22e0134ac4bc62f9dff06115f46a57a5cddf604a97e7de4540915265",
+    "text": "Transbordamento"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "bb36132d234bc3df81eaa5a823fb0f1b5ae335ef750b3dc494ae4d1545d078c1",
+    "text": "Renovação"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "3c3171d456855f2d782e508b7418b0b5620784a398453a0641596607724201a1",
+    "text": "Vitalidade"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "89a7df5424fa9e02b4b3b9e5f35211367eb82b3aa01152893df298cf3a1331bd",
+    "text": "Recupere {{value0}} de <keyword0>Saúde</keyword0> após cada combate"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "3eac7d37a4175166cdfe9dd845f609bf44574532947cb21772533d98aa001304",
+    "text": "Vontade de viver"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "da3ef1eff7116d8b90c91ba314faeec8458db0a0f3c38f9e327a9a64e9f00f79",
+    "text": "À beira da morte dura {{value0}} turno a mais"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
