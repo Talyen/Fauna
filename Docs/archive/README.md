@@ -45,6 +45,7 @@ These records retain dated source identities, observations and limitations. A la
 - [Ten boundary fixes](../task-evidence/2026-10-25-boundary-audit.md)
 - [Twenty boundary and lifecycle fixes](../task-evidence/2026-10-25-twenty-boundary-fixes.md)
 - [Outstanding review and CI repair](../task-evidence/2026-10-26-outstanding-review.md)
+- [Hosted verification repair](../task-evidence/2026-10-27-hosted-ci-repair.md)
 - [Stack maintenance observations](../task-evidence/2026-10-26-stack-maintenance.md)
 - [Auto-play and content fixes](../task-evidence/2026-10-26-ten-fixes.md)
 
