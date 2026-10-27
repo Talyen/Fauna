@@ -10,6 +10,19 @@ The original portraits are unchanged WebP selections copied from `Alchemy: src/a
 
 The catalog and rule owner define current availability, exact player copy and tuning. This alphabetical reference records specialized timing, recipients and interactions; shared [combat rules](../KEYWORDS.md) apply unless an entry states an exception.
 
+### Rose and hearth Boons
+
+- **Vanishing Hat:** An allied recipient can Dodge an enemy Purge that could remove an effect, using ordinary Dodge chance and Dodge rewards before Star Hoop reflection; attack-only Dodge reactions do not apply. Empty, protected and allied Purges do not roll
+- **Rocking Chair Charm:** Burn, Poison and Bleed ticks on living backup allies deal no damage; the statuses still decay or clear normally and no Bleed Leech is paid without damage. Deployed allies and non-periodic damage are unchanged
+- **Asteroid Hammer:** Allied Stun damage spends enemy Block at twice its normal efficiency, including multi-hit attacks; buildup retains the damage before Block rather than doubling. Ordinary Health and Armor damage remain unchanged
+- **Snowbell:** Enemy Thorns do not retaliate while their owner was Frozen at the start of the incoming attack. The hit that first Freezes an enemy still receives the ordinary retaliation; Thorns remain intact
+- **Harvest Sickle:** Bleed damage against enemies bypasses Block on both hits and periodic damage; Block remains intact. Other damage and allied Bleed retain ordinary Block rules
+- **Meadow Mortar:** Each actual allied Purge of a Poisoned enemy triggers its current Poison damage without consuming or decaying Poison. The stored Poison source supplies attribution when available; the damage uses ordinary periodic defenses and reactions and cannot itself add Poison
+- **Rosewax Seal:** Each landed allied Thorns retaliation against a surviving enemy applies 1 Bleed through ordinary status protection, without adding immediate Bleed damage. Briar Racquet qualifies; normal Thorns wear and Thornheart Ring remain
+- **Solstice Concertina:** An allied Freeze attack against a Burning enemy cannot be Dodged; a Blind miss remains possible, and control, damage and status protections are unchanged
+- **Crown Waffle Iron:** Each Apple or Trail Bread recipient receives Healing equal to their Block after that Food's ordinary effect. Repeats and Pumpkin Tureen apply per resolution and recipient; Nectar Dipper doubles the added Healing. Mana Berries have no ally target and do not trigger this effect
+- **Beeswax Crown:** An actual allied Armor break grants 2 Thorns to every living deployed ally through ordinary protection sharing and gain reactions; the break and its other rewards remain intact
+
 ### Journey artifact Boons
 
 - **Overflow Cup:** Half of excess allied healing, rounded normally, restores the most injured other eligible ally. Healing and Leech qualify; the resulting restoration uses normal healing reactions without spreading its own overflow. Last Threshold retains its separate Death's Door sharing

@@ -38,7 +38,7 @@ test("recruitment adds a backup without exposing free lineup changes", async ({ 
   expect((await state(page)).team[0]!.species).toBe("mossguard");
 });
 
-test("full-roster recruitment banks Collection progress and confirms only the displayed team", async ({
+test("full-roster recruitment banks Collection progress and directly replaces the chosen creature", async ({
   page,
 }) => {
   const fixture = fullRosterReward();
@@ -52,22 +52,21 @@ test("full-roster recruitment banks Collection progress and confirms only the di
     [...fixture.team, ...fixture.reserves].map((unit) => unit.species),
   );
   expect(banked.discovery.recruited.emberback).toBe((fixture.discovery.recruited.emberback ?? 0) + 1);
-  await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
   const first = page.locator(
     '.app:not([inert]) .recruit-team-roster [data-roster-slot="ally-0"] .creature-card',
   );
-  await first.click();
-  await expect(first).toHaveAttribute("data-species", "emberback");
+  await first.hover();
+  await expect(first).toHaveAttribute("data-species", "mossguard");
   expect(await state(page)).toEqual(banked);
   await captureScreen(page, { path: "reports/implementation/recruit-team-preview.png" });
   await reloadHome(page);
   await resume(page);
-  await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
   await expect(first).toHaveAttribute("data-species", "mossguard");
   expect(await state(page)).toEqual(banked);
   await first.click();
-  await page.getByRole("button", { name: "Confirm", exact: true }).click();
   const recruited = await state(page);
   expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).toHaveLength(5);
   expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).not.toContain("mossguard");

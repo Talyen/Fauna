@@ -215,6 +215,18 @@
 .battle-screen .creature-wrap[data-active-target] .creature-card::before {
   border-color: var(--selected);
 }
+/* Target brackets replace hover/focus frames; the actor outline yields to either. */
+.battle-screen .creature-wrap[data-valid-target] .creature-card,
+.battle-screen .creature-wrap[data-acting]:has(.creature-card:hover) .creature-card,
+.battle-screen .creature-wrap[data-acting]:has(.creature-card:focus) .creature-card {
+  outline: none;
+}
+:root .app .battle-screen .creature-wrap[data-valid-target] .creature-card::after {
+  border-color: transparent;
+}
+:root .app .battle-screen .creature-wrap[data-valid-target] .game-button > .effect-shine-border {
+  opacity: 0;
+}
 .target-summary {
   width: var(--target-summary-width);
   max-width: 100%;

@@ -1,5 +1,6 @@
 import { expect, type Page, type Locator } from "@playwright/test";
-import { species, BOONS } from "../../../src/game/content";
+import { species, BOONS, definition } from "../../../src/game/content";
+import { chosenRecipients } from "../../../src/game/play-queries";
 import type { Command, GameState } from "../../../src/game/types";
 import { policy } from "../../support/game";
 import { state } from "./session";
@@ -37,7 +38,7 @@ export async function step(
   } else if (c.type === "confirmRecruit") {
     if (c.replace)
       await activate(page.locator(`.recruit-team-roster [data-roster-slot="${c.replace}"] .creature-card`));
-    await activate(page.getByRole("button", { name: "Confirm", exact: true }));
+    else await activate(page.getByRole("button", { name: "Keep team", exact: true }));
   } else if (c.type === "swap") {
     const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
     await activate(dialog.locator(`[data-actor-id="${c.reserve}"] .creature-card`));
@@ -51,7 +52,13 @@ export async function step(
     );
   } else if (c.type === "play") {
     await activate(page.locator(`.app:not([inert]) .hand [data-card-id="${c.cardId}"]`));
-    if (c.targetId) {
+    const card = s.cards.find((entry) => entry.id === c.cardId);
+    if (
+      c.targetId &&
+      s.phase === "battle" &&
+      card &&
+      chosenRecipients(s, definition(card.definitionId)).length > 1
+    ) {
       await activate(
         s.reserves.some((unit) => unit.id === c.targetId)
           ? page.locator(`.app:not([inert]) [data-backup-target="${c.targetId}"]`)

@@ -1,13 +1,60 @@
 import { expect, it } from "vitest";
 import { rankedBattleChoices } from "../../../src/application/battle-policy";
-import { drawHasAnotherCard, journeyReturn } from "../../../src/game/card-zones";
-import { freshCombat } from "../../../src/game/combat";
+import { drawHasAnotherCard, drawKeyword, drawOwner, journeyReturn } from "../../../src/game/card-zones";
+import { healingBenefit } from "../../../src/game/ability-facts";
+import { freshCombat, restoreHealth } from "../../../src/game/combat";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { finishTurn } from "../../../src/game/combat/turns";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
+import { cardKeywords } from "../../../src/game/progression";
+import { observeDecisions } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
+import { setHand } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
+
+it("Auto-play and Overflow Cup select the same injured ally for excess healing", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  const [healer, recipient] = state.team;
+  state.boons = ["overflow-cup"];
+  recipient!.health -= 10;
+  setHand(state, ["mossguard-heal"]);
+  const before = recipient!.health;
+  expect(healingBenefit(state, healer!, 8, undefined).restored).toBe(4);
+  expect(rankedBattleChoices(state, false)[0]?.command).toMatchObject({
+    type: "play",
+    cardId: state.battle.hand[0],
+  });
+  restoreHealth(healer!, 8, [], false, state);
+  expect(recipient!.health - before).toBe(4);
+});
+
+it("filtered draws retain pile order and hidden decisions across owners, keywords and Journey Loom", () => {
+  for (const method of ["owner", "keyword", "loom"] as const) {
+    const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "emberback"])));
+    const [owner, other] = state.team;
+    const chosen = state.cards.find(
+      (card) => card.ownerId === other!.id && cardKeywords(card).includes("burn"),
+    )!;
+    const skipped = state.cards.find((card) => card.ownerId === owner!.id)!;
+    state.boons = ["journey-loom"];
+    state.battle.hand = [];
+    state.battle.buffer = [];
+    state.battle.draw = [chosen.id, skipped.id];
+    state.battle.discard = [];
+    const decisions: unknown[] = [];
+    observeDecisions(state, (decision) => {
+      decisions.push(decision);
+      return 0;
+    });
+    if (method === "owner") expect(drawOwner(state, other!.id, [])).toBe(true);
+    else if (method === "keyword") drawKeyword(state, "burn");
+    else journeyReturn(state, owner!.id, []);
+    expect(state.battle.hand).toEqual([chosen.id]);
+    expect(state.battle.draw).toEqual([skipped.id]);
+    expect(decisions).toEqual([undefined]);
+  }
+});
 
 it("does not value buffered promotion as a new draw for Auto-play", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["stillara", "mossguard", "prismram"])));

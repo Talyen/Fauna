@@ -27,35 +27,24 @@ export function chosenRecipients(state: BattleState, def: CardDefinition) {
   return recipientPool(state, def, mode).filter((unit) => recipientEligible(unit, def));
 }
 
-function hasChosenRecipient(state: BattleState, def: CardDefinition) {
+function hasChosenRecipient(state: BattleState, def: CardDefinition, targetId?: string) {
   const mode = cardTargeting(def, state);
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return false;
-  if (def.effect === "resurrect")
-    return (
-      state.team.some((unit) => recipientEligible(unit, def)) ||
-      state.reserves.some((unit) => recipientEligible(unit, def))
-    );
-  if (def.effect === "swapChosen") return state.reserves.some((unit) => recipientEligible(unit, def));
+  const eligible = (unit: Creature | Enemy) =>
+    (targetId === undefined || unit.id === targetId) && recipientEligible(unit, def);
+  if (def.effect === "resurrect") return state.team.some(eligible) || state.reserves.some(eligible);
+  if (def.effect === "swapChosen") return state.reserves.some(eligible);
   const side = mode === "enemy" ? "enemy" : "player";
-  if (def.effect !== "heal" || def.target !== "injured") return !!findLivingBattlefield(state, side);
-  return !!findLivingBattlefield(state, side, (unit) => recipientEligible(unit, def));
+  if (targetId === undefined && (def.effect !== "heal" || def.target !== "injured"))
+    return !!findLivingBattlefield(state, side);
+  return !!findLivingBattlefield(state, side, eligible);
 }
 
 export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
   const mode = cardTargeting(def, state);
   if (
     (mode === "enemy" || mode === "ally") &&
-    (targetId === undefined ||
-      !(def.effect === "resurrect"
-        ? state.team.some((unit) => unit.id === targetId && recipientEligible(unit, def)) ||
-          state.reserves.some((unit) => unit.id === targetId && recipientEligible(unit, def))
-        : def.effect === "swapChosen"
-          ? state.reserves.some((unit) => unit.id === targetId && recipientEligible(unit, def))
-          : findLivingBattlefield(
-              state,
-              mode === "enemy" ? "enemy" : "player",
-              (unit) => unit.id === targetId && recipientEligible(unit, def),
-            )))
+    (targetId === undefined || !hasChosenRecipient(state, def, targetId))
   )
     return def.effect === "swapChosen"
       ? "Choose a living backup."

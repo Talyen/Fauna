@@ -6,6 +6,19 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "vanishing-hat": boon({}, () => "Allies can Dodge enemy Purge"),
+    "rocking-chair-charm": boon({}, () => "Burn, Poison and Bleed cannot damage allies in backup"),
+    "asteroid-hammer": boon({ multiplier: 2 }, () => "Stun damage is twice as effective against enemy Block"),
+    snowbell: boon({}, () => "Frozen enemies’ Thorns cannot retaliate"),
+    "harvest-sickle": boon({}, () => "Bleed damage ignores enemy Block"),
+    "meadow-mortar": boon({}, () => "Purging an effect from a Poisoned enemy makes their Poison deal damage"),
+    "rosewax-seal": boon({ bleed: 1 }, (p) => `Allied Thorns apply ${p.bleed} Bleed`),
+    "solstice-concertina": boon({}, () => "Burning enemies cannot Dodge Freeze attacks"),
+    "crown-waffle-iron": boon({}, () => "Food also restores Health equal to its target’s Block"),
+    "beeswax-crown": boon(
+      { thorns: 2 },
+      (p) => `When an ally’s Armor breaks, all allies gain ${p.thorns} Thorns`,
+    ),
     "overflow-cup": boon(
       { divisor: 2 },
       () => "Healing beyond an ally’s maximum Health restores half the excess to the most injured other ally",

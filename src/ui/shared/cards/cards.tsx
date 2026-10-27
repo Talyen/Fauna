@@ -60,7 +60,7 @@ export function CreatureCard({
   health,
   maxHealth,
   block = 0,
-  selected = false,
+  selected,
   disabled = false,
   onClick,
   onInspect,
@@ -241,14 +241,8 @@ export function ActionCard({
   actor,
   tooltips = true,
   onDenied,
-  enemy = false,
-  enemyValue,
-  enemyPower = 1,
 }: {
   card: Card;
-  enemy?: boolean;
-  enemyValue?: number;
-  enemyPower?: number;
   selected?: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -263,8 +257,8 @@ export function ActionCard({
 }) {
   const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
-  const { def, value } = actionDisplay(card, actor, modifiers, enemy, enemyValue);
-  const effectText = cardText(def, card.level, value, enemyPower, modifiers);
+  const { def, value } = actionDisplay(card, actor, modifiers);
+  const effectText = cardText(def, card.level, value, 1, modifiers);
   const effectLabel = useRuleText(effectText, cardRuleId(def, modifiers, effectText))
     .map((part) => part.text)
     .join("");
@@ -272,18 +266,12 @@ export function ActionCard({
   const nameLabel = card.level
     ? i18n.message("card.upgradedName", "{{name}} +{{level}}", { name, level: card.level })
     : name;
-  const accessibleLabel = enemy
-    ? i18n.message("card.enemyActionLabel", "{{name}}, {{owner}}, {{effect}}", {
-        name: nameLabel,
-        owner: ownerName,
-        effect: effectLabel,
-      })
-    : i18n.message("card.actionLabel", "{{name}}, {{owner}}, {{mana}} mana, {{effect}}", {
-        name: nameLabel,
-        owner: ownerName,
-        mana: modifiers ? cardCost(card, modifiers) : def.cost,
-        effect: effectLabel,
-      });
+  const accessibleLabel = i18n.message("card.actionLabel", "{{name}}, {{owner}}, {{mana}} mana, {{effect}}", {
+    name: nameLabel,
+    owner: ownerName,
+    mana: modifiers ? cardCost(card, modifiers) : def.cost,
+    effect: effectLabel,
+  });
   useEffectBaseline(selected ? effectPalette(visualKeywords(effectText)) : null, 1);
   const artwork = (
     <ArtCard
@@ -328,16 +316,7 @@ export function ActionCard({
     <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
       <TooltipContent side="top">
-        <ActionDetails
-          compact
-          card={card}
-          ownerName={ownerName}
-          actor={actor}
-          modifiers={modifiers}
-          enemy={enemy}
-          enemyValue={enemyValue}
-          enemyPower={enemyPower}
-        />
+        <ActionDetails compact card={card} ownerName={ownerName} actor={actor} modifiers={modifiers} />
       </TooltipContent>
     </Tooltip>
   );

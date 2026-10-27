@@ -2,6 +2,7 @@ import { foodForAllies } from "../game/card-rules";
 import { boonRule, cornucopiaHealing } from "../game/rules/boons";
 import {
   foodDodgeBenefit,
+  foodWaffleBenefit,
   healingBenefit,
   ordinaryAttackFacts,
   type OrdinaryHit,
@@ -311,6 +312,7 @@ export function battleBenefits(
         for (const ally of automaticRecipients) {
           const benefit = healingBenefit(state, ally, value, play.def.effects);
           restored += benefit.restored;
+          restored += foodWaffleBenefit(state, def, ally, value);
           benefitUtility += benefit.utility;
           dodgeUtility += foodDodgeBenefit(state, def, ally);
         }
@@ -334,7 +336,7 @@ export function battleBenefits(
               : allies();
       return recipients.map((ally) => {
         const benefit = healingBenefit(state, ally, value, play.def.effects);
-        const { restored } = benefit;
+        const restored = benefit.restored + foodWaffleBenefit(state, def, ally, value);
         const utility = benefit.utility + foodDodgeBenefit(state, def, ally);
         return supportOne(
           restored > 0 ? "healing" : utility > 0 ? "utility" : "none",
@@ -524,9 +526,10 @@ export function battleBenefits(
           !!def.effects?.some((effect) => effect.kind === "cleanse") && hasHarmfulEffects(actor);
         return (def.target === "self" ? [actor] : allies()).map((ally) => {
           const useful = Math.min(value, STACK_LIMIT - ally.block) + foodDodgeBenefit(state, def, ally);
+          const waffle = foodWaffleBenefit(state, def, ally, value);
           return supportOne(
-            healing() > 0 ? "healing" : useful + protection > 0 || cleanse ? "protection" : "none",
-            healing() > 0 ? healing() : useful + protection,
+            healing() + waffle > 0 ? "healing" : useful + protection > 0 || cleanse ? "protection" : "none",
+            healing() + waffle > 0 ? healing() + waffle : useful + protection,
             def.target === "self" ? undefined : ally.id,
           );
         });
@@ -539,7 +542,8 @@ export function battleBenefits(
           (def.effect === "teamProtection" ? Math.min(value, STACK_LIMIT - (ally.combat?.thorns ?? 0)) : 0),
         0,
       );
-      return support(useful > 0 ? "protection" : "none", useful);
+      const waffle = allies().reduce((sum, ally) => sum + foodWaffleBenefit(state, def, ally, value), 0);
+      return support(waffle > 0 ? "healing" : useful > 0 ? "protection" : "none", waffle || useful);
     }
     case "nullify": {
       const useful = countMatching(allies(), (unit) => !unit.combat?.nullify);

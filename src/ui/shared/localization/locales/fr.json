@@ -251,12 +251,6 @@
     "sourceHash": "126c889cd893b589a9f6cd700615d0f312eda280a07a487fd471d3b35134f692",
     "text": "Copie · Dure jusqu’à la fin du combat"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "44173bfd71253db4bf55310349ff9f6eaa6dfa07aaae87c8d6b7057c071cc0b3",
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",
@@ -401,6 +395,18 @@
     "sourceHash": "23f14b3caa422ef28705a1eff59051ca658880ec8dd4316c28ee341b84dbc5fc",
     "text": "La <keyword0>Brûlure</keyword0> perdue par diminution retire autant de <keyword1>Blocage</keyword1> ennemi"
   },
+  "content.boon.asteroid-hammer.name": {
+    "reviewed": true,
+    "source": "Asteroid Hammer",
+    "sourceHash": "28750438b5c6c58c193e662decae5922965f60cd971b52db413f8f742b710325",
+    "text": "Marteau d’astéroïde"
+  },
+  "content.boon.asteroid-hammer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is twice as effective against enemy <keyword1>Block</keyword1>",
+    "sourceHash": "dbe6569b5eda12c58c1ad95513ff90cf00c0842f69dcc2ddbf1efe15c2d70f1c",
+    "text": "Les dégâts d’<keyword0>Étourdissement</keyword0> sont deux fois plus efficaces contre le <keyword1>Blocage</keyword1> ennemi"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -412,6 +418,18 @@
     "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "sourceHash": "63a581c82375063f52b0f5c7c8e88e3964d82efce405eb2ce81882d69c91f949",
     "text": "La <keyword0>Dissipation</keyword0> ne peut pas retirer le dernier effet bénéfique d’un allié"
+  },
+  "content.boon.beeswax-crown.name": {
+    "reviewed": true,
+    "source": "Beeswax Crown",
+    "sourceHash": "48746f3a8fbb369eed699b93e9e6a562fc886a391d441f18a58e77b99800228a",
+    "text": "Couronne de cire d’abeille"
+  },
+  "content.boon.beeswax-crown.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, all allies gain {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "2ef2bab27d539ec68632d06191ee6b22d073a218c75692ab657dfe3770c5449a",
+    "text": "Quand l’<keyword0>Armure</keyword0> d’un allié se brise, tous les alliés gagnent {{value0}} <keyword1>Épines</keyword1>"
   },
   "content.boon.bellows-heart.name": {
     "reviewed": true,
@@ -700,6 +718,18 @@
     "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
     "sourceHash": "ed90aae81adc8fc6c1760fe8d9438925310c6aa55000ddbb659ca74012f6f967",
     "text": "Les seuils ennemis d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> utilisent la <keyword2>Santé</keyword2> actuelle"
+  },
+  "content.boon.crown-waffle-iron.name": {
+    "reviewed": true,
+    "source": "Crown Waffle Iron",
+    "sourceHash": "f2562e67adabffbb6dd160f9ebc13912eb87616d5b0fa70bfd8df1495f2ddde5",
+    "text": "Gaufrier couronne"
+  },
+  "content.boon.crown-waffle-iron.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
+    "sourceHash": "591cdf8810d15f750e6c2107a6ca1b76afd732b84583c7e9874a0f7a337824f0",
+    "text": "La <keyword0>Nourriture</keyword0> restaure aussi des <keyword1>Santé</keyword1> à hauteur du <keyword2>Blocage</keyword2> de sa cible"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1049,6 +1079,18 @@
     "sourceHash": "e9047d2f0b1662e3ac531999fc86b21d6b3440c32d1effbb70680281da32190c",
     "text": "Quand un ennemi tombe, son <keyword0>Saignement</keyword0> se propage à un autre ennemi"
   },
+  "content.boon.harvest-sickle.name": {
+    "reviewed": true,
+    "source": "Harvest Sickle",
+    "sourceHash": "60b0b23fdc078819a3c0c422907ef414a1da933fd0961ea9d2ca8db1de9ac7ed",
+    "text": "Faucille des moissons"
+  },
+  "content.boon.harvest-sickle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "e3974da4dff241e43c371436a28d32e7e7087a4e053f860508900a0f2f308b8a",
+    "text": "Les dégâts de <keyword0>Saignement</keyword0> ignorent le <keyword1>Blocage</keyword1> ennemi"
+  },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
     "source": "Hearth Coal",
@@ -1252,6 +1294,18 @@
     "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
     "sourceHash": "e69c2bafaf0c013a4a82f9a07035f1630dd2ed1af056233f0725ddba615d0d50",
     "text": "Les touches de <keyword0>Nature</keyword0> ont {{value0}}% de chances de donner autant d’or que de <keyword1>Santé</keyword1> perdue par l’ennemi"
+  },
+  "content.boon.meadow-mortar.name": {
+    "reviewed": true,
+    "source": "Meadow Mortar",
+    "sourceHash": "fff7c42175692a320c43accbc7bfbe96467a9688ae8b6b1a74d0d59fa94c17dc",
+    "text": "Mortier des prés"
+  },
+  "content.boon.meadow-mortar.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from a Poisoned enemy makes their <keyword1>Poison</keyword1> deal damage",
+    "sourceHash": "93d565dd94f1e9a22a74a482761f93ea9add6a9368a701f083028b93b6e319f2",
+    "text": "<keyword0>Dissiper</keyword0> un effet d’un ennemi empoisonné inflige les dégâts de son <keyword1>Poison</keyword1>"
   },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
@@ -1733,6 +1787,18 @@
     "sourceHash": "d8fb459a2f789029bd09953908fa36491a5b0076b520217553cd0605bbe69644",
     "text": "Les attaques <keyword0>Renvoyées</keyword0> par les alliés touchent tous les ennemis"
   },
+  "content.boon.rocking-chair-charm.name": {
+    "reviewed": true,
+    "source": "Rocking Chair Charm",
+    "sourceHash": "f7dbb0533a664f66a7a397f5813749f03547d4af2f61ecf2bf00947349106052",
+    "text": "Breloque de fauteuil à bascule"
+  },
+  "content.boon.rocking-chair-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> cannot damage allies in backup",
+    "sourceHash": "b075d798dd61e1deba74dd50dee8107372ee4f58120d5a579a020a8fab8373ad",
+    "text": "La <keyword0>Brûlure</keyword0>, le <keyword1>Poison</keyword1> et le <keyword2>Saignement</keyword2> ne blessent pas les alliés en réserve"
+  },
   "content.boon.rook-of-mercy.name": {
     "reviewed": true,
     "source": "Rook of Mercy",
@@ -1768,6 +1834,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
     "sourceHash": "4d2c3c93003f21e7e4eeba706da2121600604dc73913c49c19e8be4703df6071",
     "text": "Les alliés peuvent <keyword0>esquiver</keyword0> les dégâts d’<keyword1>Épines</keyword1>"
+  },
+  "content.boon.rosewax-seal.name": {
+    "reviewed": true,
+    "source": "Rosewax Seal",
+    "sourceHash": "f6cb1c116368553195de7e100370576618ec17317176ea211617f2871d3bd6fe",
+    "text": "Sceau de cire de rose"
+  },
+  "content.boon.rosewax-seal.rule": {
+    "reviewed": true,
+    "source": "Allied <keyword0>Thorns</keyword0> apply {{value0}} <keyword1>Bleed</keyword1>",
+    "sourceHash": "5a8e6b98a0e87b873dade8fb3b586a8ce1a8200a45f4789d6ee494968841a8ce",
+    "text": "Les <keyword0>Épines</keyword0> alliées appliquent {{value0}} <keyword1>Saignement</keyword1>"
   },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
@@ -1840,6 +1918,30 @@
     "source": "Gain {{value0}} additional Gold for each battle won",
     "sourceHash": "f0abfd5f50fd3a8f53838bac1becf929ff9c56a59497f91b9169287758751a50",
     "text": "Gagnez {{value0}} Or supplémentaire pour chaque combat remporté"
+  },
+  "content.boon.snowbell.name": {
+    "reviewed": true,
+    "source": "Snowbell",
+    "sourceHash": "cb068fc3d7af740b68bb4b4d786472b52edd847861c3f058d1a2f9e02604221f",
+    "text": "Cloche des neiges"
+  },
+  "content.boon.snowbell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies’ <keyword1>Thorns</keyword1> cannot retaliate",
+    "sourceHash": "201a23d71cb39e2d14e86218aeba8e89313a517673583366da9851e18e4a61f0",
+    "text": "Les <keyword1>Épines</keyword1> des ennemis <keyword0>gelés</keyword0> ne peuvent pas riposter"
+  },
+  "content.boon.solstice-concertina.name": {
+    "reviewed": true,
+    "source": "Solstice Concertina",
+    "sourceHash": "7960b5a17e8deb9313102856c7e57c8214b4fac8d0e3b58f679b98b18af82b6b",
+    "text": "Concertina du solstice"
+  },
+  "content.boon.solstice-concertina.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burning</keyword0> enemies cannot <keyword1>Dodge</keyword1> <keyword2>Freeze</keyword2> attacks",
+    "sourceHash": "c3bed0f6f2b122448f7e838f8d82ee4ce888af88c5c360ed01794d8d152005d2",
+    "text": "Les ennemis en <keyword0>Brûlure</keyword0> ne peuvent pas <keyword1>esquiver</keyword1> les attaques de <keyword2>Gel</keyword2>"
   },
   "content.boon.soot-brush.name": {
     "reviewed": true,
@@ -2044,6 +2146,18 @@
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "718b98243ec99376927c03d64a25abc4b45906e6da7032ef5ff985df380cf1fc",
     "text": "Les accumulations d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> se combinent sur les ennemis"
+  },
+  "content.boon.vanishing-hat.name": {
+    "reviewed": true,
+    "source": "Vanishing Hat",
+    "sourceHash": "3cd29e0c276b4641cd9483249d34e8a0100dc9c36ac7daee1d557a9e36d17e1c",
+    "text": "Chapeau de disparition"
+  },
+  "content.boon.vanishing-hat.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "b22c6527e725d9399da8a33afbe2298f99df7a483deb32ca05d85ceb1d61c07f",
+    "text": "Les alliés peuvent <keyword0>esquiver</keyword0> la <keyword1>Dissipation</keyword1> ennemie"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
@@ -8291,12 +8405,6 @@
     "sourceHash": "29832e1a1679f7b4c53a2452c6f8a6582c94403727fb3e043de55792786fc113",
     "text": "Choisissez votre créature de départ"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "88c8313edb41ba735ac92514c2f7c330ab99f3934f0df8717b53cdec5a7c4dea",
-    "text": "Sélectionné"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -8958,11 +9066,11 @@
     "sourceHash": "443685e099379ac3399754804e58ab26356cbef7e4c76f10bd159e30dc69f422",
     "text": "Pas assez de pièces d’or"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "402390b51d6f824a59aaa4ab3eb0e54bebee0d044ce2b6a2c902200b86345158",
-    "text": "Une seule par client - Aucun remboursement !"
+    "source": "One per visit",
+    "sourceHash": "14d3a700ecae1c8074ef690a362a2d5c303c99543534a97292c03a10f0d2f6a0",
+    "text": "Un par visite"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9240,47 +9348,35 @@
     "sourceHash": "8290dedec4e3feb5c318c11eb3a518c395b82b224ac5959420e821cc5a64e99c",
     "text": "La progression ne peut pas être enregistrée pour le moment ; laissez Fauna ouvert pendant les nouvelles tentatives"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "7b3766c75fe32433e0fc711f141f9c2b2254a4455e4a7c55685210ae83c76b42",
-    "text": "Choisissez votre équipe"
+    "source": "Incoming creature",
+    "sourceHash": "78f0077960114da98db934e2eac34ab76966acc82ae34bca04c14636a3a13615",
+    "text": "Créature recrutée"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "3e86b13c41ad9767aa2c24eb62193b4d4cd7c555c4d9884adee6349d1a01796d",
-    "text": "Confirmer"
+    "source": "Keep team",
+    "sourceHash": "a6afe948869fa3d050566ad0966ad5e63a9625a88f0259b4d1a92a2ccec4a7ce",
+    "text": "Garder l’équipe"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "45c4eb74fb701e168400b8a12f81f8ab27a9eb06271671c7efe067b19456b9ee",
-    "text": "Échanger une créature"
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "30f40775eebf482eb3c2d8b1e5a323635f3e63d5754065222e4859a32aa87d38",
+    "text": "Remplacer {{outgoing}} par {{incoming}}"
   },
-  "recruit.previewSlot": {
+  "recruit.replaceHeading": {
     "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "d7d3aea57df1d3095ffea81a93e751a8fd9a47da7de0fc61656639771e2c8817",
-    "text": "Prévisualiser le remplacement de {{name}} à l’emplacement {{slot}} de l’équipe"
+    "source": "Replace a creature",
+    "sourceHash": "c0c9f03f18f538f17d10071b33530c5eb9f09e7e6505ab1bc53e5b11848c8689",
+    "text": "Remplacer une créature"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "a6f3c323ea49dcf2021deab5a255f34aa3c162ea647398cd8493f2113e7a42dc",
     "text": "Équipe"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "100a711fc3e9da590047c7d30cf9594cb7226641fb3cfda3b255061f57babe10",
-    "text": "Annuler le remplacement de {{name}}"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "1dde2181c46baceb3275f86d44cc4d5bd78849096a2a98f162e8b9867f894602",
-    "text": "Retirer {{name}} de l’emplacement {{slot}} de l’équipe"
   },
   "replacement.backup": {
     "reviewed": true,

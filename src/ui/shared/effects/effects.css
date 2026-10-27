@@ -65,6 +65,11 @@
 .game-button:is(.action-card, .creature-card):has(> .effect-shine-border)::after {
   border-color: transparent;
 }
+.game-button:is(.action-card, .creature-card):has(> .effect-shine-border):not(.selected):not(:disabled):not(
+    [aria-disabled="true"]
+  ):hover::after {
+  border-color: transparent;
+}
 .game-button:is(.action-card, .creature-card):hover > .effect-shine-border,
 :root[data-focus="visible"] .game-button:is(.action-card, .creature-card):focus > .effect-shine-border {
   --shine-width: 3px;
