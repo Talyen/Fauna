@@ -22,6 +22,9 @@ import { generateEncounterPack } from "../../../src/game/encounters";
 import { returnDodgedCard } from "../../../src/game/combat/card-modifiers";
 import { observeDecisions } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
+import { matchesPermanentKit, permanentKit } from "../../../src/game/card-kit";
+import { rebuildCards } from "../../../src/game/team";
+import { createMessageReader } from "../../../src/ui/shared/localization/messages";
 
 it("keeps cached card keywords isolated from callers", () => {
   const card = { definitionId: "emberback-attack" };
@@ -246,4 +249,45 @@ it("preserves the automated actor's ranked choice and repeated reads", () => {
   const expected = rankedBattleChoices(state, false)[0]!;
   expect(actor.choose(state, false)).toEqual(expected);
   expect(actor.choose(state, false)).toEqual(expected);
+});
+
+it("validates complete kits as multisets, including repeated legendary cards", () => {
+  for (const kind of ["mossguard", "memento"] as const) {
+    const ids = permanentKit(kind).map(({ definition }) => definition.id);
+    expect(matchesPermanentKit(kind, [...ids].reverse())).toBe(true);
+    expect(matchesPermanentKit(kind, ids.slice(1))).toBe(false);
+    expect(matchesPermanentKit(kind, [...ids.slice(1), "unknown"])).toBe(false);
+    const extra = [...ids];
+    extra[0] = extra.at(-1)!;
+    if (extra[0] !== ids[0]) expect(matchesPermanentKit(kind, extra)).toBe(false);
+  }
+});
+
+it("keeps the first matching card and its progress when rebuilding a lineup", () => {
+  const state = structuredClone(teamRun(42, ["mossguard"]));
+  const card = state.cards[0]!;
+  state.cards = [
+    { ...card, ownerId: "different" },
+    { ...card, level: 2 },
+    { ...card, level: 4 },
+  ];
+  rebuildCards(state);
+  expect(state.cards.find((entry) => entry.id === card.id)?.level).toBe(2);
+});
+
+it("formats translated and fallback values with the correct locale across repeated reads", () => {
+  const catalog = {
+    value: { source: "Count {{n}}", text: "Nombre {{n}}" },
+    plain: { source: "Ready", text: "Prêt" },
+    broken: { source: "Ready", text: "Prêt }}" },
+  };
+  const reader = createMessageReader("fr", catalog);
+  const french = new Intl.NumberFormat("fr").format(1234);
+  const english = new Intl.NumberFormat("en").format(1234);
+  for (let i = 0; i < 2; i++) {
+    expect(reader.message("value", "Count {{n}}", { n: 1234 })).toBe(`Nombre ${french}`);
+    expect(reader.message("value", "Total {{n}}", { n: 1234 })).toBe(`Total ${english}`);
+    expect(reader.message("plain", "Ready")).toBe("Prêt");
+    expect(reader.message("broken", "Ready")).toBe("Ready");
+  }
 });

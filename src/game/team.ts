@@ -67,7 +67,9 @@ export function rosterHasSpecies(
   state: Pick<GameState, "team" | "reserves">,
   kind: import("./content").SpeciesId,
 ) {
-  return [...state.team, ...state.reserves].some((unit) => unit.species === kind);
+  return (
+    state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind)
+  );
 }
 export function ownedCards(id: string, kind: GameState["team"][number]["species"]): Card[] {
   return permanentKit(kind).map(({ definition, copy }) => ({
@@ -122,14 +124,19 @@ function prepareLineup(state: GameState, ids: string[]) {
 }
 export function rebuildCards(state: GameState) {
   const previous = state.cards;
+  const previousById = new Map<string, Card[]>();
+  for (const card of previous) {
+    const matching = previousById.get(card.id);
+    if (matching) matching.push(card);
+    else previousById.set(card.id, [card]);
+  }
   state.cards = state.team
     .flatMap((c) => ownedCards(c.id, c.species))
     .map(
       (card) =>
-        previous.find(
-          (old) =>
-            old.id === card.id && old.ownerId === card.ownerId && old.definitionId === card.definitionId,
-        ) ?? card,
+        previousById
+          .get(card.id)
+          ?.find((old) => old.ownerId === card.ownerId && old.definitionId === card.definitionId) ?? card,
     );
   if (state.battle) {
     state.battle.hand = [];

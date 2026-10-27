@@ -453,10 +453,10 @@ export function battleBenefits(
               );
             return sum;
           }, 0) ?? 0;
+        const cleanse =
+          def.effects?.some((effect) => effect.kind === "cleanse" && hasHarmfulEffects(actor)) ?? false;
         return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
           const useful = Math.min(value, STACK_LIMIT - ally.block) + foodDodgeBenefit(state, def, ally);
-          const cleanse =
-            def.effects?.some((effect) => effect.kind === "cleanse" && hasHarmfulEffects(actor)) ?? false;
           return support(
             healing > 0 ? "healing" : useful + protection > 0 || cleanse ? "protection" : "none",
             healing > 0 ? healing : useful + protection,

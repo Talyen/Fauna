@@ -134,7 +134,8 @@ export function appendFeedback(
         isFeedbackNotice(e) ? e : { ...e, reservedDigits: String(Math.abs(e.amount ?? 0)).length + 1 },
       );
     let result = combineBursts(bursts, targetId, entries, now);
-    if (result.unmatched.length && bursts.filter((b) => b.targetId === targetId).length >= 3) {
+    let matchingBursts = 0;
+    if (result.unmatched.length && bursts.some((b) => b.targetId === targetId && ++matchingBursts >= 3)) {
       // Retry from untouched survivors so eviction cannot erase a newly merged result.
       const oldest = bursts.findIndex((b) => b.targetId === targetId);
       bursts = bursts.filter((_, i) => i !== oldest);

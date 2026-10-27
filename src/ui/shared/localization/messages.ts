@@ -7,17 +7,17 @@ export type MessageCatalog = Readonly<Record<string, MessageEntry | PluralEntry>
 
 const variables = (text: string) => new Set([...text.matchAll(/\{\{([a-zA-Z][\w]*)\}\}/g)].map((m) => m[1]!));
 function matchesVariables(source: string, translation: string) {
+  if (!source.includes("{{") && !translation.includes("{{") && !translation.includes("}}")) return true;
   const expected = variables(source);
   const actual = variables(translation);
   const valid = !/\{\{|\}\}/.test(translation.replace(/\{\{[a-zA-Z][\w]*\}\}/g, ""));
   return valid && expected.size === actual.size && [...expected].every((name) => actual.has(name));
 }
-function format(template: string, values: MessageValues, locale: string) {
+function format(template: string, values: MessageValues, number: () => Intl.NumberFormat) {
   if (!template.includes("{{")) return template;
-  const number = new Intl.NumberFormat(locale);
   return template.replace(/\{\{([a-zA-Z][\w]*)\}\}/g, (token, name: string) => {
     const value = Object.hasOwn(values, name) ? values[name] : undefined;
-    return typeof value === "number" ? number.format(value) : (value ?? token);
+    return typeof value === "number" ? number().format(value) : (value ?? token);
   });
 }
 
@@ -25,6 +25,10 @@ function format(template: string, values: MessageValues, locale: string) {
 export function createMessageReader(locale: string, catalog: MessageCatalog) {
   const pluralRules = new Intl.PluralRules(locale);
   const englishPlural = new Intl.PluralRules("en");
+  let localNumber: Intl.NumberFormat | undefined;
+  let englishNumber: Intl.NumberFormat | undefined;
+  const localFormatter = () => (localNumber ??= new Intl.NumberFormat(locale));
+  const englishFormatter = () => (englishNumber ??= new Intl.NumberFormat("en"));
   return {
     locale,
     message(id: string, source: string, values: MessageValues = {}) {
@@ -37,7 +41,7 @@ export function createMessageReader(locale: string, catalog: MessageCatalog) {
         matchesVariables(source, entry.text)
           ? entry.text
           : null;
-      return format(translated ?? source, values, translated === null ? "en" : locale);
+      return format(translated ?? source, values, translated === null ? englishFormatter : localFormatter);
     },
     plural(id: string, source: PluralForms, count: number, values: MessageValues = {}) {
       const entry = Object.hasOwn(catalog, id) ? catalog[id] : undefined;
@@ -53,7 +57,11 @@ export function createMessageReader(locale: string, catalog: MessageCatalog) {
         matchesVariables(sourceForm, candidate)
           ? candidate
           : null;
-      return format(translated ?? sourceForm, { ...values, count }, translated === null ? "en" : locale);
+      return format(
+        translated ?? sourceForm,
+        { ...values, count },
+        translated === null ? englishFormatter : localFormatter,
+      );
     },
   };
 }
