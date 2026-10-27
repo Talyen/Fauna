@@ -527,6 +527,12 @@
     "sourceHash": "d28738aabaf86dd306fff01dd1153d29466ff4940e105c6f7c87dcc21b86e269",
     "text": "下一张牌打出两次"
   },
+  "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0>",
+    "sourceHash": "771fd496c101e8f7dc05b851306f6589ae5b815700d29c624f2121c214ee706d",
+    "text": "<keyword0>反射下一次攻击</keyword0>"
+  },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
@@ -617,6 +623,18 @@
     "sourceHash": "500b810665dd4830074b2add80830372ec9e6b70a957bcce934d94110f41e95f",
     "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
   },
+  "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "8339d1d2d661dad91dc3ba0edadc3a19583afed11b12b509a453c8a332c8cb6c",
+    "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合"
+  },
+  "content.card.dunefox-dodge.v5300ccdb9ff1590e.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "04925025d1dd9a594cd2d1f23a3844fdba22fba28c837d0e2abbb802001a683c",
+    "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合；抽{{value1}}张牌"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
@@ -628,6 +646,12 @@
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
     "sourceHash": "685ecb7b6c9ca1b6693c8cc5a7867aebc1cd8fb47e34a2bbf24d4ed5b92e35ca",
     "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
+  },
+  "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
+    "reviewed": true,
+    "source": "Shuffle your hand into your deck; Draw that many cards",
+    "sourceHash": "2f70bb41979358c5b64a62ef161156af8404d082306149031e9c139b0fa79113",
+    "text": "将手牌洗入牌组；抽取相同数量的牌"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -664,6 +688,18 @@
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "9052deaec2cf163dbd2fc23bfe817738f67cf9a9879c598bef3a916b8494c475",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "a1de1c9cee587d06b3a33667ff3f152d16e89773edded2fa8e2e3cb779b3dda6",
+    "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合"
+  },
+  "content.card.glintstride-dodge.v5300ccdb9ff1590e.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "2b306c2da9aeca3c7f8b691bb1b817c1ac3b6555f2ae85c8e8f46111bd53534b",
+    "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合；抽{{value1}}张牌"
   },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -725,6 +761,18 @@
     "sourceHash": "529d329dcb9119f8ff24af8d6a516e276184ae6bac6eef29b625391cd58a7fb7",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
+  "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
+    "reviewed": true,
+    "source": "Shuffle your hand into your deck; Draw that many cards",
+    "sourceHash": "a0bffae07f701f972012f71d0865f66b072d623c18363382a710d58f625e6ef1",
+    "text": "将手牌洗入牌组；抽取相同数量的牌"
+  },
+  "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0>",
+    "sourceHash": "5d8294c2d460d5fd247e75550c6252a592bbe4fe3bd5219569415e289a9db369",
+    "text": "<keyword0>反射下一次攻击</keyword0>"
+  },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
@@ -736,6 +784,18 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "1b347a9a5e5ecbedf0104a637f0a3fbc80703b3be5e5a6bb72a99683fb280e0e",
     "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
+    "sourceHash": "7621c01d47c2625ad0b3d81cb36b1db8750914dadcb59d1757e47d7919f9201f",
+    "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累；抽{{value0}}张牌"
+  },
+  "content.card.parhelion-polar-reprieve.vf7757826e2996d68.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
+    "sourceHash": "225858c2197f617de9ae2d76a0778e46830ef0a9e4922f115baf6706abb32659",
+    "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累"
   },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
@@ -868,6 +928,18 @@
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "9dc86cd4234883c5b48f0e33d88465ed57cfd2a59a43e9650ee463e1a340b705",
     "text": "获得{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
+    "sourceHash": "fa5950faffdb1dfbdbf36e1ea411615a8258360e5bebb080cd084b24e2b553e1",
+    "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累；抽{{value0}}张牌"
+  },
+  "content.card.stillara-thaw-path.vf7757826e2996d68.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
+    "sourceHash": "d8cd0a6dee1748b397b5d9b9b9f2e7b540e8e9a6f009c34ee086d6656d598918",
+    "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,

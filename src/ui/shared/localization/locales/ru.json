@@ -527,6 +527,12 @@
     "sourceHash": "7a3a295d78aa9a34f6dbc67ac219b0a4cd840eb5b7ef37fb617a34abb23b7ef0",
     "text": "Ваша следующая карта разыгрывается дважды"
   },
+  "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0>",
+    "sourceHash": "56f6e4ee5634015ac0715fbc37cbd9f8740883862461811a0df5d0869980a8e8",
+    "text": "<keyword0>Отразите следующую атаку</keyword0>"
+  },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
@@ -617,6 +623,18 @@
     "sourceHash": "734383629daa5e86768cd0747f8f88a060ec2e4db563f550cdbb427a6404054d",
     "text": "Нанести {{value0}} <keyword0>физического</keyword0> урона"
   },
+  "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "853deae1339df428e2842f85693f3e9d0ed10200ac0fed35fc65d897980e1190",
+    "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода"
+  },
+  "content.card.dunefox-dodge.v5300ccdb9ff1590e.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "e154193493a9a493cd96aea74639c9c82456d85b0f88177e1ff465ad723f8092",
+    "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Добор карт: {{value1}}"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
@@ -628,6 +646,12 @@
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
     "sourceHash": "6a41e1274fc1bd2fbb1f20fcc4382d5ba39edba40d07c0e25bf7c0944f31ac1a",
     "text": "Нанести всем врагам {{value0}} урона типа «<keyword0>Оглушение</keyword0>»"
+  },
+  "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
+    "reviewed": true,
+    "source": "Shuffle your hand into your deck; Draw that many cards",
+    "sourceHash": "cfa2ea2b5834357e08b27c260763479e504642d5ed9bbe3163d3009360d63f98",
+    "text": "Замешайте руку в колоду; Возьмите столько же карт"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -664,6 +688,18 @@
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "c662c28932695c63cd5fabb5c35982eb6002df23b5a0ab6f1d2035c6b42af0f4",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "99c259994b4da74f77e2f9556d76f867682a29b4cbb3a521d1a20e9a652260de",
+    "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода"
+  },
+  "content.card.glintstride-dodge.v5300ccdb9ff1590e.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "e9542973bdc020f5faf5dfe571a845916c04716d3eb7f9a28e4bfd165c738daf",
+    "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Добор карт: {{value1}}"
   },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -725,6 +761,18 @@
     "sourceHash": "295f0b47d5252e9e1954b71e2f6c80dae537709a39280913498cc7b62e7425d5",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
+  "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
+    "reviewed": true,
+    "source": "Shuffle your hand into your deck; Draw that many cards",
+    "sourceHash": "b435114236e5cdc01818c5ace2aa1facd8f06c8295a719beccb1a70c607468ad",
+    "text": "Замешайте руку в колоду; Возьмите столько же карт"
+  },
+  "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0>",
+    "sourceHash": "de88359d71608607ccf036abd98ab480cef847557d9cea6c7077327d1c584a4c",
+    "text": "<keyword0>Отразите следующую атаку</keyword0>"
+  },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
@@ -736,6 +784,18 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "ce57696583c748249e66d57dea6f55a608dddf1067f30f086192d20e54f7d8f8",
     "text": "Восстановить наиболее раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
+    "sourceHash": "5365c5ddf96794530a4e67956a095970880fd2ec3b3b431c68a0af769bcd4c97",
+    "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников; Добор карт: {{value0}}"
+  },
+  "content.card.parhelion-polar-reprieve.vf7757826e2996d68.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
+    "sourceHash": "9ad1f1e6a43ad0c3d85b22d57d3e7e29340f5064c4a8055077ac558becbbcdec",
+    "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников"
   },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
@@ -868,6 +928,18 @@
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "fd629f218c894b05142310fcceffdd806a2de45589edb93a7be7f0c9d0ed141d",
     "text": "Получите {{value0}} <keyword0>маны</keyword0>"
+  },
+  "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
+    "sourceHash": "b20b2c000cba1cd4bb64d234565052bc12d70a74a773a6f06c3654bc08d0f6c7",
+    "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников; Добор карт: {{value0}}"
+  },
+  "content.card.stillara-thaw-path.vf7757826e2996d68.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
+    "sourceHash": "3186b54ecbd94c04178297a3e329003097070b9e902916b803dc6321fc29a178",
+    "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,

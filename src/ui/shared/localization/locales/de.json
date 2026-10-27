@@ -527,6 +527,12 @@
     "sourceHash": "a239081e9e4cbcb14a436f69810818ee4afae5a6b46bd89ed9f340cb202fca1b",
     "text": "Deine nächste Karte wird zweimal gespielt"
   },
+  "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0>",
+    "sourceHash": "fc9a601701a35113a5c3690d2ee3c54ab5685e415691aed2a454925b39645b71",
+    "text": "<keyword0>Reflektiere den nächsten Angriff</keyword0>"
+  },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
     "source": "Your next card is played twice",
@@ -617,6 +623,18 @@
     "sourceHash": "c7bdfdf1bed9dc39e9b14a2fa1a9c1f86eaf8b0c411980d0897005106490a6ad",
     "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu"
   },
+  "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "fae240396503a5573fa323284cdd9c7a64cfc52a50f61c92c1c624652c3e8269",
+    "text": "Erhalte {{value0}}% <keyword0>Ausweichen</keyword0> bis zu deinem nächsten Zug"
+  },
+  "content.card.dunefox-dodge.v5300ccdb9ff1590e.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "49c3280da5e8912d8ae755f9df91ee4ed1393c6a09187949a3e3698b378cc274",
+    "text": "Erhalte {{value0}}% <keyword0>Ausweichen</keyword0> bis zu deinem nächsten Zug; Ziehe {{value1}} Karte"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
@@ -628,6 +646,12 @@
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
     "sourceHash": "28c6d6d844821b1200c6c07fc890a1d2b59cfb16e71a2fa93d333c638cc21860",
     "text": "Füge allen Gegnern {{value0}} <keyword0>Betäubungs</keyword0>schaden zu"
+  },
+  "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
+    "reviewed": true,
+    "source": "Shuffle your hand into your deck; Draw that many cards",
+    "sourceHash": "8ca38c738f10220900c0c2c8ca04fb8ae9a1faaee3e6adb96e52b78430d91b8d",
+    "text": "Mische deine Hand in dein Deck; Ziehe ebenso viele Karten"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -664,6 +688,18 @@
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "d20756e6b139b74a383dadb7cdaf6ab99bed5a9085a9c34b85c797e677c026c2",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "4957dd4e71183802075d2fe68d68996076dcd270a54a4ba4551e13427e42ce7d",
+    "text": "Erhalte {{value0}}% <keyword0>Ausweichen</keyword0> bis zu deinem nächsten Zug"
+  },
+  "content.card.glintstride-dodge.v5300ccdb9ff1590e.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "d6d0b93eea30826a00c1a57b07d83593e5dfd0b99cb0244ec20fc90441a87b62",
+    "text": "Erhalte {{value0}}% <keyword0>Ausweichen</keyword0> bis zu deinem nächsten Zug; Ziehe {{value1}} Karte"
   },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -725,6 +761,18 @@
     "sourceHash": "5487536b4b0c1f976dacf0aca81ecca9e4e11243f5335b95b771b0d355adccfb",
     "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
   },
+  "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
+    "reviewed": true,
+    "source": "Shuffle your hand into your deck; Draw that many cards",
+    "sourceHash": "cb32a87e7bdafdc6f7599d765a8feb06154b6ba7875563acaaf7731f9c7f5c51",
+    "text": "Mische deine Hand in dein Deck; Ziehe ebenso viele Karten"
+  },
+  "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect the next attack</keyword0>",
+    "sourceHash": "60644642fadffe5a5981fec143b6a7324700ec937e42e5bebaa1de2c9644a2b5",
+    "text": "<keyword0>Reflektiere den nächsten Angriff</keyword0>"
+  },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
@@ -736,6 +784,18 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "9d268ad910db7ae83817d8f806e884fccb6c51db4eaa6d0bd1bdd2d6b6e26a3d",
     "text": "Stelle dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
+    "sourceHash": "de50159e0374b835a7c2ce9baf5364fc1a2eedb81c713a50bb6c43e3152cb24b",
+    "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Frost</keyword1>-Aufbau von Verbündeten; Ziehe {{value0}} Karte"
+  },
+  "content.card.parhelion-polar-reprieve.vf7757826e2996d68.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
+    "sourceHash": "ee7c1b8b4b91e6a58d43413869bd5ea8a5ac5d8b7fd1c9024cc7b9116ab3668a",
+    "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Frost</keyword1>-Aufbau von Verbündeten"
   },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
@@ -868,6 +928,18 @@
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "31360abb54198a9131d51c692dd2b3f1295bede6da9a9d285ac13dfb8ade559e",
     "text": "Erhalte {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies; Draw {{value0}} card",
+    "sourceHash": "ed396e6fdd95d72f137746ed81803c218a78ba84118c13f969380e3584cf10ea",
+    "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Frost</keyword1>-Aufbau von Verbündeten; Ziehe {{value0}} Karte"
+  },
+  "content.card.stillara-thaw-path.vf7757826e2996d68.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
+    "sourceHash": "6852e323a692b9e5996a6874ba23193670e70ecb6626b599c74394908392859b",
+    "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Frost</keyword1>-Aufbau von Verbündeten"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
