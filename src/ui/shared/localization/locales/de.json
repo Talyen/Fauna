@@ -3029,6 +3029,12 @@
     "sourceHash": "1764d2351b232f588f04f583f894e3af80f1eabc544106348acb19be3465990a",
     "text": "Wohlstand"
   },
+  "content.talent.light.purge.name": {
+    "reviewed": true,
+    "source": "Searing Light",
+    "sourceHash": "7d30ecfb59d7e4bc1c36b1f2da3e4753c602d882566fcfd501f00b21b8c0458b",
+    "text": "Glühendes Licht"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3143,17 +3149,35 @@
     "sourceHash": "83693b32d99ead35306a50fa4cf9c0102172d450340e7cedc70d113243890ba6",
     "text": "Wildwuchs"
   },
+  "content.talent.nature.overgrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "e8140a72556116574784569f8a37c73df81265bca1ee96b737021548915f4963",
+    "text": "<keyword0>Natur</keyword0>-Karten haben eine Chance von {{value0}}%, zweimal gespielt zu werden"
+  },
   "content.talent.nature.photosynthesis.name": {
     "reviewed": true,
     "source": "Photosynthesis",
     "sourceHash": "3ec5f1f685983de633d4cfaa200c942093382bcff5f52fb26925c8c2d3c83337",
     "text": "Photosynthese"
   },
+  "content.talent.nature.photosynthesis.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also restore <keyword1>Health</keyword1>",
+    "sourceHash": "e022b3af1fcdcb3632c806d183a8ee30dd50e475b36ef24e20fc7cb3a050a50e",
+    "text": "Schaden vom Typ <keyword0>Natur</keyword0> hat eine Chance von {{value0}}%, zusätzlich <keyword1>Gesundheit</keyword1> wiederherzustellen"
+  },
   "content.talent.nature.thornskin.name": {
     "reviewed": true,
     "source": "Thornskin",
     "sourceHash": "34eb19c5224d81cddc51e964f0b44e0c39f08445c8a8aa5d1c3715a0593d4aa1",
     "text": "Dornenhaut"
+  },
+  "content.talent.nature.thornskin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also grant <keyword1>Armor</keyword1>",
+    "sourceHash": "3b0b448057a08652127584575b309218f6bdae6ed05a122f898c96c0cb54513c",
+    "text": "Schaden vom Typ <keyword0>Natur</keyword0> hat eine Chance von {{value0}}%, zusätzlich <keyword1>Rüstung</keyword1> zu gewähren"
   },
   "content.talent.nature.toxic-pollen.name": {
     "reviewed": true,
@@ -3173,11 +3197,23 @@
     "sourceHash": "73f828acbc2afb2675190b1add444cfd198a680938b68c036909f8d9452e0010",
     "text": "Windschritt"
   },
+  "content.talent.nature.windstep.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next <keyword1>Nature</keyword1> card is free",
+    "sourceHash": "ee1da62330f8e7674f66310c1bac0ebc2ec233b1b61a95aae685b66febbbc76b",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, ist deine nächste <keyword1>Natur</keyword1>-Karte kostenlos"
+  },
   "content.talent.physical.armored-fists.name": {
     "reviewed": true,
     "source": "Armored Fists",
     "sourceHash": "86bc973d95f36cdf7adafd097cc7ef1b5787748bc37b1dfa3f7663e4620358b3",
     "text": "Gepanzerte Fäuste"
+  },
+  "content.talent.physical.finish-him.name": {
+    "reviewed": true,
+    "source": "Finishing Blow",
+    "sourceHash": "bff118f26392d2f4a1a74102b13165d497c0f0e3a5ce76cb203ab52dc259a730",
+    "text": "Todesstoß"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3400,6 +3436,78 @@
     "source": "Stun Surge",
     "sourceHash": "771f66a459835c3df0d51de6a20cd93a182b65b378abcfaf650c2b191c2e2f67",
     "text": "Betäubungswoge"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "reviewed": true,
+    "source": "Cleansing Current",
+    "sourceHash": "2b68001b0c7d5359d976d6bcb057bd39dd7129cddcea4199c8444c469249d4fa",
+    "text": "Reinigende Strömung"
+  },
+  "content.talent.water.cleansing-current.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to <keyword1>Cleanse</keyword1> {{value1}} harmful effect from you",
+    "sourceHash": "fd781eb008fd438af0fd2feef82093db3ee45dcdea521375bea36f4459c2c4e4",
+    "text": "<keyword0>Wasser</keyword0>-Treffer haben eine Chance von {{value0}}%, {{value1}} schädlichen Effekt von dir zu <keyword1>reinigen</keyword1>"
+  },
+  "content.talent.water.erosion.name": {
+    "reviewed": true,
+    "source": "Erosion",
+    "sourceHash": "2ce24695d51771f0e3c2263121d472c124b5de14ba0b3be4b71805db75f9bf80",
+    "text": "Erosion"
+  },
+  "content.talent.water.erosion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits remove {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "c547450eafa9f9cc45fdfab722215cdd0b684bd5f66ba017d729c2eb7354d2dc",
+    "text": "<keyword0>Wasser</keyword0>-Treffer entfernen {{value0}} <keyword1>Rüstung</keyword1>"
+  },
+  "content.talent.water.high-tide.name": {
+    "reviewed": true,
+    "source": "High Tide",
+    "sourceHash": "2119ad1d87b5d04bb7035fd204e154f76cf5423dd0c38535dfd94332c93067d8",
+    "text": "Flut"
+  },
+  "content.talent.water.high-tide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "0c4286fa5594131842e2f5b57cb25239a0d0ff71c7d2a929f71d086bb5c62e66",
+    "text": "<keyword0>Wasser</keyword0>-Angriffe verursachen {{value0}}% mehr Schaden, solange du <keyword1>Block</keyword1> hast"
+  },
+  "content.talent.water.pressure.name": {
+    "reviewed": true,
+    "source": "Pressure",
+    "sourceHash": "b1937364dd8a22cfd9bc06662c4259696f07542d273d82dfd27a33fde6250b8a",
+    "text": "Druck"
+  },
+  "content.talent.water.pressure.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks deal {{value0}} more damage",
+    "sourceHash": "73d4d1f743172d12ced6c6ef1251b5340fbdf168e19d7ca16019a382cf4329ee",
+    "text": "<keyword0>Wasser</keyword0>-Angriffe verursachen {{value0}} zusätzlichen Schaden"
+  },
+  "content.talent.water.riptide.name": {
+    "reviewed": true,
+    "source": "Riptide",
+    "sourceHash": "c72bef3205d8c0a61ef1b41bbb852092f6cf38da8d0ad4ebbc099d184425b8c8",
+    "text": "Reißende Strömung"
+  },
+  "content.talent.water.riptide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "ce182e09ccfc210d6b4b8901c63691322a472f45e4ff921b9be2105f68899cd0",
+    "text": "<keyword0>Wasser</keyword0>-Treffer haben eine Chance von {{value0}}%, eine <keyword1>Wasser</keyword1>-Karte zu ziehen"
+  },
+  "content.talent.water.seafoam.name": {
+    "reviewed": true,
+    "source": "Seafoam",
+    "sourceHash": "a9eae19f12b9d6a8935927cbc6110734ca65d581906d1b01ba878ce7619ce39e",
+    "text": "Meerschaum"
+  },
+  "content.talent.water.seafoam.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "d59de5b5578f686589ffc7057480016730c5e877654889b91a45357203e17adb",
+    "text": "<keyword0>Wasser</keyword0>-Treffer gewähren {{value0}} <keyword1>Block</keyword1>"
   },
   "creature.echo": {
     "reviewed": true,

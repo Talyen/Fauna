@@ -3029,6 +3029,12 @@
     "sourceHash": "1aae1f556c078a7dba33049eec31d3757fc4be030eddbaa492611761bf08d3d5",
     "text": "繁栄"
   },
+  "content.talent.light.purge.name": {
+    "reviewed": true,
+    "source": "Searing Light",
+    "sourceHash": "5e82e1e18d32cbe2b645b51aaa661e98cfffec69daf0d4ca8b7416cac097d251",
+    "text": "灼光"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3143,17 +3149,35 @@
     "sourceHash": "d588291b9d22c1121262c7c3296ddd17ae4345d8e48a2ecf91c20b392aec4a7c",
     "text": "繁茂"
   },
+  "content.talent.nature.overgrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "b26a64a9f2eea8be45369bfcaba19eb78d889b8a3e155cb4679e64dc5b37cca8",
+    "text": "<keyword0>自然</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
   "content.talent.nature.photosynthesis.name": {
     "reviewed": true,
     "source": "Photosynthesis",
     "sourceHash": "8966ab1747f5f6bd6f29ee22c99127760d7059381cbdec4ac56252b790cfdd0e",
     "text": "光合成"
   },
+  "content.talent.nature.photosynthesis.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also restore <keyword1>Health</keyword1>",
+    "sourceHash": "34355d8f14962f1a0345dd9c515daa8a7a0d70453f9bc713cb68f0ed01254ca4",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で<keyword1>体力</keyword1>も回復する"
+  },
   "content.talent.nature.thornskin.name": {
     "reviewed": true,
     "source": "Thornskin",
     "sourceHash": "abcc3b7a9c2f432bbeed84de54af3924b53ab659ba92aa9c440fa3ccdfa31406",
     "text": "棘の肌"
+  },
+  "content.talent.nature.thornskin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also grant <keyword1>Armor</keyword1>",
+    "sourceHash": "75180299ebf11bb0c5fff81e220354cf9b6fb88d8b6efb7d7b57de3805287b97",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で自身に<keyword1>装甲</keyword1>も付与する"
   },
   "content.talent.nature.toxic-pollen.name": {
     "reviewed": true,
@@ -3173,11 +3197,23 @@
     "sourceHash": "b3cebde57933d42e1e01c96aee22e8adbb159d3093577e9b36f057f8d1bc7100",
     "text": "風の歩み"
   },
+  "content.talent.nature.windstep.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next <keyword1>Nature</keyword1> card is free",
+    "sourceHash": "dc726122a6438d5f227a96018b8ea9e1de2ba639bd4f6c080d535e6592f369cf",
+    "text": "<keyword0>回避</keyword0>時に次の<keyword1>自然</keyword1>カードが無料になる"
+  },
   "content.talent.physical.armored-fists.name": {
     "reviewed": true,
     "source": "Armored Fists",
     "sourceHash": "c8ed3de28292f26c465e84fe9d92d4af7101089ea2fc6fb88db6b24c4dff05e0",
     "text": "装甲の拳"
+  },
+  "content.talent.physical.finish-him.name": {
+    "reviewed": true,
+    "source": "Finishing Blow",
+    "sourceHash": "40680f9bb13449cee3cdcc7447e1fdbe9e7a6b0acbeb7c9703607e2c7fb69365",
+    "text": "とどめの一撃"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3400,6 +3436,78 @@
     "source": "Stun Surge",
     "sourceHash": "d212990cd33314dd9d12c69149566f35e42b39850570f4732e7dbe17f81764d9",
     "text": "スタンの奔流"
+  },
+  "content.talent.water.cleansing-current.name": {
+    "reviewed": true,
+    "source": "Cleansing Current",
+    "sourceHash": "c146974813ae60aea06e4989319cf6e4154add1abf2455e67cab83e6c17f096d",
+    "text": "清めの流れ"
+  },
+  "content.talent.water.cleansing-current.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to <keyword1>Cleanse</keyword1> {{value1}} harmful effect from you",
+    "sourceHash": "cec3f6013552a8843b99504ed3ff4dd9fec25d9c51d30ee25d50144971b1efbf",
+    "text": "<keyword0>水</keyword0>の命中時に{{value0}}%の確率で自身の有害な効果を{{value1}}つ<keyword1>浄化</keyword1>する"
+  },
+  "content.talent.water.erosion.name": {
+    "reviewed": true,
+    "source": "Erosion",
+    "sourceHash": "be390034e7545b8bcd732e82065bc893ad2114ed528e39efbe5495694d30ae52",
+    "text": "浸食"
+  },
+  "content.talent.water.erosion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits remove {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "b9d91e152106fc0358fc09d19869e66e2f03dfbaea7b2688647c1f3401569407",
+    "text": "<keyword0>水</keyword0>の命中時に<keyword1>装甲</keyword1>を{{value0}}除去する"
+  },
+  "content.talent.water.high-tide.name": {
+    "reviewed": true,
+    "source": "High Tide",
+    "sourceHash": "61a2f0a6a7b8384af4aa239fecf0811125a856e5e612bdf0a752cb449687b09c",
+    "text": "満潮"
+  },
+  "content.talent.water.high-tide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "f5d01c7f004c7f9c80d6c03c415e40f669c0e108e7bf8384969d75aeed15f3e3",
+    "text": "<keyword1>ブロック</keyword1>がある間、<keyword0>水</keyword0>攻撃のダメージが{{value0}}%増加"
+  },
+  "content.talent.water.pressure.name": {
+    "reviewed": true,
+    "source": "Pressure",
+    "sourceHash": "ab30d566141f45ecd9bc4673261704d402988a2c8e1bf314b14ecedc90fd9880",
+    "text": "圧力"
+  },
+  "content.talent.water.pressure.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks deal {{value0}} more damage",
+    "sourceHash": "35b5ff61c64c9b0dab3b58f28d2cfccb227a78764e171984ba3bf4cd42ef5273",
+    "text": "<keyword0>水</keyword0>攻撃のダメージが{{value0}}増加"
+  },
+  "content.talent.water.riptide.name": {
+    "reviewed": true,
+    "source": "Riptide",
+    "sourceHash": "f6e9b510760060871eb052ba384fe10a181f2c7fd42f165fe085c4356566547e",
+    "text": "離岸流"
+  },
+  "content.talent.water.riptide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "26c179c8dbbbc70cd8e92ff524c5e8ae92fc8b1913d3017260a32b275c69af4d",
+    "text": "<keyword0>水</keyword0>の命中時に{{value0}}%の確率で<keyword1>水</keyword1>カードを1枚引く"
+  },
+  "content.talent.water.seafoam.name": {
+    "reviewed": true,
+    "source": "Seafoam",
+    "sourceHash": "c6bc85b73bf8cecc7e505347479d564f4cc8d12cec0494cac8063d76f50d864e",
+    "text": "海の泡"
+  },
+  "content.talent.water.seafoam.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "ab2e32c696c9f862c8b55601c72cfda2b5a667d5ea0b07364ea7f7b76d849447",
+    "text": "<keyword0>水</keyword0>の命中時に<keyword1>ブロック</keyword1>を{{value0}}獲得"
   },
   "creature.echo": {
     "reviewed": true,
