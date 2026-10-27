@@ -48,6 +48,11 @@ the translation can move the value without remounting it. Authored names use
 never derive gameplay identity from the translated name. Missing, stale or
 structurally invalid translations fall back to English.
 
+Creature proper names retain their canonical spelling in German, French, Spanish
+and Brazilian Portuguese; Japanese, Simplified Chinese and Russian use the
+reviewed names in their own scripts. Rules that name a creature must use the
+same localized name, inflected where the language requires it.
+
 Run `npm run localization:extract` after changing these calls and commit the
 resulting English catalogs and generated shipped-catalog imports. Production
 bundles only qualified language catalogs; development previews can exercise
