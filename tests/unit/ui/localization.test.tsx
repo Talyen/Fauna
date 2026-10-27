@@ -1392,7 +1392,9 @@ it("extracts and presents transient combat status variants without changing thei
     </LocalizationProvider>,
   );
   expect(screen.getByRole("button", { name: "Gel : 2 tours" })).toBeTruthy();
-  expect(view.container.querySelector('.combat-status-details [data-keyword="freeze"]')?.textContent).toBe("Gel");
+  expect(view.container.querySelector('.combat-status-details [data-keyword="freeze"]')?.textContent).toBe(
+    "Gel",
+  );
   expect(frozen.controlTurns).toBe(2);
   view.unmount();
 });
