@@ -197,6 +197,18 @@
     "sourceHash": "52eb70b8b51c445140720f1b6825fee60a03ba592581126245644bb39f474662",
     "text": "Santé de {{name}}"
   },
+  "campfire.healthAndRest": {
+    "reviewed": true,
+    "source": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+    "sourceHash": "63842790bae18ad1d8360b0fd3915111b57f589162df519b421794c629b21923",
+    "text": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "reviewed": true,
+    "source": "{{before}} → {{after}} {{keyword}} · +{{amount}}",
+    "sourceHash": "825aff466e4c31e6461041f451de4b0dbdf9779e798ad24a0c47718d6d6b7d87",
+    "text": "{{before}} → {{after}} {{keyword}} · +{{amount}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
@@ -7883,6 +7895,30 @@
     "sourceHash": "315caa7049daa306e278afdb3f65017663f46ee9f257075ba6fb1d23445448ab",
     "text": "Les coups d’<keyword0>Eau</keyword0> accordent {{value0}} <keyword1>Blocage</keyword1>"
   },
+  "controller.circle": {
+    "reviewed": true,
+    "source": "Circle",
+    "sourceHash": "0747541157e1ba5f325a31cdae2c910f8ab922688df9486a4d04ffe472a68d5f",
+    "text": "Rond"
+  },
+  "controller.cross": {
+    "reviewed": true,
+    "source": "Cross",
+    "sourceHash": "f20c39de9c555553309ed37538463cb5ad491859fdb2918cfab71e8fd35e3b98",
+    "text": "Croix"
+  },
+  "controller.square": {
+    "reviewed": true,
+    "source": "Square",
+    "sourceHash": "ac71e61d8df81fbf221d39000585447b4ecdfada440c52ed786f550e13c4440e",
+    "text": "Carré"
+  },
+  "controller.triangle": {
+    "reviewed": true,
+    "source": "Triangle",
+    "sourceHash": "7bcb2ad5b0f0f77138cf6f514bc6bc525ebf8c3f300652c1cbbf1ab8251f4443",
+    "text": "Triangle"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -9305,6 +9341,66 @@
     "source": "Windowed",
     "sourceHash": "c878888968e6756d634d036919b632dc3a7c30bfd8a58fded1bee970e58f5f6c",
     "text": "Fenêtré"
+  },
+  "startup.adventure": {
+    "reviewed": true,
+    "source": "Adventure awaits…",
+    "sourceHash": "03456da78f653dc75fb5f71a3cf7a4b966522889155ac1e137ca04dc053caf8d",
+    "text": "L’aventure vous attend…"
+  },
+  "startup.boons": {
+    "reviewed": true,
+    "source": "Gathering Boons…",
+    "sourceHash": "853d1ba60281a83328ddeb1968b470c4da4a5d33d89dea252436b0251013f9d7",
+    "text": "Collecte des Bénédictions…"
+  },
+  "startup.creatures": {
+    "reviewed": true,
+    "source": "Waking creatures…",
+    "sourceHash": "30359ff0af72a96f4c6ff2aa5ad5cce775dce17339457e1893889fdd3dac1e2b",
+    "text": "Réveil des créatures…"
+  },
+  "startup.decks": {
+    "reviewed": true,
+    "source": "Shuffling decks…",
+    "sourceHash": "13b190a2f82f971c05001fb34139af0b1f4395203fed3fab998796796154bc8b",
+    "text": "Mélange des cartes…"
+  },
+  "startup.expeditions": {
+    "reviewed": true,
+    "source": "Preparing expeditions…",
+    "sourceHash": "6d3487e8c375e4df464d8ad6659536c862c99d631ee59d90d51223c21571b071",
+    "text": "Préparation des expéditions…"
+  },
+  "startup.failed": {
+    "reviewed": true,
+    "source": "Fauna could not start",
+    "sourceHash": "57f3412103928695b9491e70146d7d7ddb5f5c11ef2d8a0455262749ba142285",
+    "text": "Fauna n’a pas pu démarrer"
+  },
+  "startup.habitats": {
+    "reviewed": true,
+    "source": "Exploring habitats…",
+    "sourceHash": "cac21c8b8be9aa36e73b86fb9e989c8834bcecda22efedcb6173892cf750cf50",
+    "text": "Exploration des habitats…"
+  },
+  "startup.loading": {
+    "reviewed": true,
+    "source": "Loading Fauna",
+    "sourceHash": "b20aca1bca573536ce3d2890d755807aa1e725eda9828cc9cb148036dc8713b9",
+    "text": "Chargement de Fauna"
+  },
+  "startup.shops": {
+    "reviewed": true,
+    "source": "Restocking shops…",
+    "sourceHash": "772e5a74b55b40705eac17d821b4598c9ba2cc83425d57440e7a320ff8a8e07a",
+    "text": "Réapprovisionnement des boutiques…"
+  },
+  "startup.starters": {
+    "reviewed": true,
+    "source": "Training starters…",
+    "sourceHash": "ceffcdb34ad12e231fbe75eaa6062bcb0d7c33d335dc4558f0b92fe6d666b76b",
+    "text": "Entraînement des créatures de départ…"
   },
   "status.additional": {
     "reviewed": true,

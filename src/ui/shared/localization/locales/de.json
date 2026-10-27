@@ -197,6 +197,18 @@
     "sourceHash": "3fc5914010c05965b65659e18c422f39e105997917ede4f0ad3733306a037234",
     "text": "Gesundheit von {{name}}"
   },
+  "campfire.healthAndRest": {
+    "reviewed": true,
+    "source": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+    "sourceHash": "cf7d8a1715e66e20ce820f873d99f5f6f52a60de7209ea493d022f9b76e8829c",
+    "text": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "reviewed": true,
+    "source": "{{before}} → {{after}} {{keyword}} · +{{amount}}",
+    "sourceHash": "e0aec44441eba6c44304367719351125c2984553a31c8c32acd2b950c1e396b8",
+    "text": "{{before}} → {{after}} {{keyword}} · +{{amount}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
@@ -7883,6 +7895,30 @@
     "sourceHash": "d59de5b5578f686589ffc7057480016730c5e877654889b91a45357203e17adb",
     "text": "<keyword0>Wasser</keyword0>-Treffer gewähren {{value0}} <keyword1>Block</keyword1>"
   },
+  "controller.circle": {
+    "reviewed": true,
+    "source": "Circle",
+    "sourceHash": "6df2451c138e4bacabe0b5fd4fd0a1c8e47e7d604d42998461e7e3a87fadcc11",
+    "text": "Kreis"
+  },
+  "controller.cross": {
+    "reviewed": true,
+    "source": "Cross",
+    "sourceHash": "f1dc2a7436847b17c132baf40b07658c206ae7fc9c8d662eb5b1fa68071ab4af",
+    "text": "Kreuz"
+  },
+  "controller.square": {
+    "reviewed": true,
+    "source": "Square",
+    "sourceHash": "938d31b3c6d154711f55b35211462d8c3dd73a040cb5ae87d12c3ed6dac63451",
+    "text": "Quadrat"
+  },
+  "controller.triangle": {
+    "reviewed": true,
+    "source": "Triangle",
+    "sourceHash": "1f79168e51805de65f33a00f2b36a923f0551783bb23cfe762153986c1490020",
+    "text": "Dreieck"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -9304,6 +9340,66 @@
     "source": "Windowed",
     "sourceHash": "b8fcfa9543285f6e991d33c5164c4246e8cf937ca208532bd6abf04fa8949e3a",
     "text": "Fenstermodus"
+  },
+  "startup.adventure": {
+    "reviewed": true,
+    "source": "Adventure awaits…",
+    "sourceHash": "2cc4f5394132b1061b4a18d700f09fbb4026e55622c994c99533cf34f2e3539a",
+    "text": "Das Abenteuer wartet…"
+  },
+  "startup.boons": {
+    "reviewed": true,
+    "source": "Gathering Boons…",
+    "sourceHash": "b384e8cc045f699d48f1ffd95af512e0f4063abc0f92460cde588239946fd424",
+    "text": "Segen werden gesammelt…"
+  },
+  "startup.creatures": {
+    "reviewed": true,
+    "source": "Waking creatures…",
+    "sourceHash": "a6af2989d6ca6cd85bdc97cbc073519851558fbef4a25cb6879bd6dde675b518",
+    "text": "Kreaturen erwachen…"
+  },
+  "startup.decks": {
+    "reviewed": true,
+    "source": "Shuffling decks…",
+    "sourceHash": "6f24c25439770d39cb6f8b924e83d459b6a62c14255ece9c03945c726a4cfe60",
+    "text": "Karten werden gemischt…"
+  },
+  "startup.expeditions": {
+    "reviewed": true,
+    "source": "Preparing expeditions…",
+    "sourceHash": "b05a3ab1c8e6c5a7fe307ac111e19f742498c21b156a60fe4b07f041d022f87c",
+    "text": "Expeditionen werden vorbereitet…"
+  },
+  "startup.failed": {
+    "reviewed": true,
+    "source": "Fauna could not start",
+    "sourceHash": "686211f5f0316d19ae5e4763e0f1d7e3806ae037f6d0e5c371ead3e52ed0ca9b",
+    "text": "Fauna konnte nicht gestartet werden"
+  },
+  "startup.habitats": {
+    "reviewed": true,
+    "source": "Exploring habitats…",
+    "sourceHash": "8f736d4aa3802543761a20a7a526459489aaa9f872958690cccd4af852fd1eb8",
+    "text": "Lebensräume werden erkundet…"
+  },
+  "startup.loading": {
+    "reviewed": true,
+    "source": "Loading Fauna",
+    "sourceHash": "366bc0c709511d2434e7d7e7bec2de4d880b43b5a5d954e5e2775aaae911b8ce",
+    "text": "Fauna wird geladen"
+  },
+  "startup.shops": {
+    "reviewed": true,
+    "source": "Restocking shops…",
+    "sourceHash": "f46236dc28ce6bbdcbdd96563401a8e974361304de5bd4d977690d4855a44938",
+    "text": "Läden werden aufgefüllt…"
+  },
+  "startup.starters": {
+    "reviewed": true,
+    "source": "Training starters…",
+    "sourceHash": "306c6cf7153b7b2badd7be0a78d07c6658c454db5015fb36d3eede764005d093",
+    "text": "Starter werden trainiert…"
   },
   "status.additional": {
     "reviewed": true,

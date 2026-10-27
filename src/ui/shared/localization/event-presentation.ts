@@ -282,7 +282,9 @@ export function eventPresentation(
   if (event.kind === "status") {
     if (event.status === "negate" && event.outcome === "immune") {
       const suffix = ` protects ${englishName} with Devotion Clasp`;
-      const bearer = event.text.endsWith(suffix) ? uniqueName(event.text.slice(0, -suffix.length)) : undefined;
+      const bearer = event.text.endsWith(suffix)
+        ? uniqueName(event.text.slice(0, -suffix.length))
+        : undefined;
       if (bearer)
         return i18n.message("log.sharedNegate", "{{actor}} protects {{target}} with {{boon}}", {
           actor: bearer,

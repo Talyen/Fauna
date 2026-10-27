@@ -197,6 +197,18 @@
     "sourceHash": "95ecdccfb9d8b38b6c754ec3399712aaa02511f4bd060eddfd0a44eb17304967",
     "text": "Salud de {{name}}"
   },
+  "campfire.healthAndRest": {
+    "reviewed": true,
+    "source": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+    "sourceHash": "05debd8f53d05495508443915c233119ff73b1b454ddf321e7fe844cc66eeec6",
+    "text": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "reviewed": true,
+    "source": "{{before}} → {{after}} {{keyword}} · +{{amount}}",
+    "sourceHash": "3c8e5bee478be2ab41e5b88b5980081a614313116e3d001498b7827c803f89e3",
+    "text": "{{before}} → {{after}} {{keyword}} · +{{amount}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
@@ -7883,6 +7895,30 @@
     "sourceHash": "33e5a557325be78378302228cff1a566efc83e278217a90609a24579b6eef5f6",
     "text": "Los impactos de <keyword0>Agua</keyword0> otorgan {{value0}} de <keyword1>Bloqueo</keyword1>"
   },
+  "controller.circle": {
+    "reviewed": true,
+    "source": "Circle",
+    "sourceHash": "9335ebd81d5512f736bf84314eb7cbe6b378f8f4d0fb5be3abdbfa1a6dd69aca",
+    "text": "Círculo"
+  },
+  "controller.cross": {
+    "reviewed": true,
+    "source": "Cross",
+    "sourceHash": "a35920d765cf34b3aa6cf72b926cc04df8e3bdfe3cfa3fc599d1d73d06309f31",
+    "text": "Cruz"
+  },
+  "controller.square": {
+    "reviewed": true,
+    "source": "Square",
+    "sourceHash": "94ac7e360722cce0ccd8096361ba4f8a68f32ccdee250e3fdd0148ef2e69ccce",
+    "text": "Cuadrado"
+  },
+  "controller.triangle": {
+    "reviewed": true,
+    "source": "Triangle",
+    "sourceHash": "de60c48d863a9edf4de4b3cd8c785503e5ff16d47e57ae66070a553fa6c7cb8b",
+    "text": "Triángulo"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -9305,6 +9341,66 @@
     "source": "Windowed",
     "sourceHash": "05dee1c7397a50956d463bcc0b2d317fba45ef4e411cdcd5282958540927aa5b",
     "text": "Ventana"
+  },
+  "startup.adventure": {
+    "reviewed": true,
+    "source": "Adventure awaits…",
+    "sourceHash": "60cd95326b43bfddac176ed7356a6a7eb288a89942ac6e5be5e4ea1de6125c71",
+    "text": "La aventura te espera…"
+  },
+  "startup.boons": {
+    "reviewed": true,
+    "source": "Gathering Boons…",
+    "sourceHash": "3cb93e201938f217438bd5ae5eccf077f5a088386c90e41d31a4185db12ebb5a",
+    "text": "Reuniendo Bendiciones…"
+  },
+  "startup.creatures": {
+    "reviewed": true,
+    "source": "Waking creatures…",
+    "sourceHash": "6081d996d96b6efca5ca2839f7dbdaae8e2cd05bf07c962fb507f5d446488d94",
+    "text": "Despertando criaturas…"
+  },
+  "startup.decks": {
+    "reviewed": true,
+    "source": "Shuffling decks…",
+    "sourceHash": "d6270ecf17393397d2b0361b0e0aea48bc7c118e51121f423ac46f17451080b1",
+    "text": "Barajando cartas…"
+  },
+  "startup.expeditions": {
+    "reviewed": true,
+    "source": "Preparing expeditions…",
+    "sourceHash": "8f471be5832b973ea6dfc7d6414ecf33160717fe59c47edfbb5558856c6da336",
+    "text": "Preparando expediciones…"
+  },
+  "startup.failed": {
+    "reviewed": true,
+    "source": "Fauna could not start",
+    "sourceHash": "e215ce2d4e9fab135a42a0bbfa40d407e1b77f2ea3035a4c5c7d3254d2c3d31e",
+    "text": "No se pudo iniciar Fauna"
+  },
+  "startup.habitats": {
+    "reviewed": true,
+    "source": "Exploring habitats…",
+    "sourceHash": "f04b04ad4306841d9eea2a60fa0c0953f1bce9111745b11215bba033283eb105",
+    "text": "Explorando hábitats…"
+  },
+  "startup.loading": {
+    "reviewed": true,
+    "source": "Loading Fauna",
+    "sourceHash": "4b712ca48a2e12d84f51a4e88e763d68e6c4ae3427a8cc1f10ddd33288a083b6",
+    "text": "Cargando Fauna"
+  },
+  "startup.shops": {
+    "reviewed": true,
+    "source": "Restocking shops…",
+    "sourceHash": "0401e892980e70cd61fca6e491f2e4a807eef02a0ce4e2483067a0590ad5afe7",
+    "text": "Reponiendo tiendas…"
+  },
+  "startup.starters": {
+    "reviewed": true,
+    "source": "Training starters…",
+    "sourceHash": "f8d766e51ca8d8cc144c5deadb5ee2eccf7e6a5f0b39b5a86ec4a0de3f24173d",
+    "text": "Entrenando criaturas iniciales…"
   },
   "status.additional": {
     "reviewed": true,

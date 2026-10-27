@@ -16,10 +16,41 @@ beforeEach(() => {
 });
 afterEach(() => {
   splash?.dispose();
+  localStorage.removeItem("fauna.language.v1");
   vi.useRealTimers();
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
   document.body.replaceChildren();
+});
+it("localizes the splash and failure while manual language wins over Steam", () => {
+  localStorage.setItem("fauna.language.v1", "fr");
+  const catalog = {
+    "startup.loading": { source: "Loading Fauna", text: "Chargement de Fauna" },
+    "startup.adventure": { source: "Adventure awaits…", text: "L’aventure vous attend…" },
+    "startup.failed": { source: "Fauna could not start", text: "Fauna n’a pas pu démarrer" },
+  };
+  splash = createStartupSplash({
+    catalogs: { fr: catalog },
+    qualified: ["en", "fr"],
+    systemLanguages: ["en"],
+  });
+  expect(document.getElementById("startup-splash")?.getAttribute("aria-label")).toBe("Chargement de Fauna");
+  expect(document.getElementById("startup-splash-phrase")?.textContent).toBe("L’aventure vous attend…");
+  splash.setSteamLanguage("english");
+  expect(document.getElementById("startup-splash-phrase")?.textContent).toBe("L’aventure vous attend…");
+  splash.fail();
+  expect(document.getElementById("startup-splash-phrase")?.textContent).toBe("Fauna n’a pas pu démarrer");
+});
+it("updates an automatic splash when the Steam language arrives", () => {
+  const catalog = { "startup.adventure": { source: "Adventure awaits…", text: "L’aventure vous attend…" } };
+  splash = createStartupSplash({
+    catalogs: { fr: catalog },
+    qualified: ["en", "fr"],
+    systemLanguages: ["en"],
+  });
+  expect(document.getElementById("startup-splash-phrase")?.textContent).toBe("Adventure awaits…");
+  splash.setSteamLanguage("french");
+  expect(document.getElementById("startup-splash-phrase")?.textContent).toBe("L’aventure vous attend…");
 });
 it("counts the minimum from navigation and keeps the same splash and phrase clock through React startup", async () => {
   vi.spyOn(performance, "now").mockReturnValue(2000);

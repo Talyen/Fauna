@@ -1,4 +1,6 @@
 import { CombatStatus } from "../../../src/ui/shared/combat/combat-status";
+import { Campfire, RestRecovery } from "../../../src/ui/expedition/campfire";
+import { dispatch } from "../../../src/game/engine";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import japanese from "../../../src/ui/shared/localization/locales/ja.json";
 import { definition, species } from "../../../src/game/content";
@@ -82,7 +84,15 @@ import { Keyword } from "../../../src/ui/shared/keyword-text";
 import { CreatureCard } from "../../../src/ui/shared/cards/cards";
 import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
-import { addBackups, requireBattle, run, teamRun, victoryReady } from "../../support/game";
+import {
+  accept,
+  addBackups,
+  merchantDestination,
+  requireBattle,
+  run,
+  teamRun,
+  victoryReady,
+} from "../../support/game";
 import { BattleScreen } from "../../../src/ui/battle/battle-screen";
 import { ManaCrystals } from "../../../src/ui/battle/mana-crystals";
 import { MenuActions } from "../../../src/ui/menu/menu-actions";
@@ -562,6 +572,44 @@ it("localizes a reflected status using its actual recipient", () => {
     text: `${other.name} reflects poison to Echo`,
   };
   expect(eventPresentation(ambiguous, uncertain, reader)).toBe(uncertain.text);
+});
+
+it("localizes campfire health and committed recovery without changing the rest outcome", () => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  );
+  const before = accept(
+    produce(merchantDestination(), (draft) => {
+      draft.team[0]!.health = 5;
+    }),
+    { type: "visitCampfire" },
+  );
+  if (before.phase !== "campfire") throw new Error("Expected campfire");
+  const result = dispatch(before, { type: "rest" });
+  expect(result.accepted).toBe(true);
+  expect(result.state.rng).toBe(before.rng);
+  const { container, rerender } = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TooltipProvider>
+        <Campfire game={before} send={() => true} />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  expect(container.textContent).toContain(`5/${species(before.team[0]!.species).health} Santé · +`);
+  expect(container.querySelector('[data-keyword="health"]')?.textContent).toBe("Santé");
+  rerender(
+    <MessageProvider locale="fr" catalog={french}>
+      <RestRecovery game={result.state} events={result.events} />
+    </MessageProvider>,
+  );
+  const after = result.state.team[0]!.health;
+  expect(container.textContent).toContain(`5 → ${after} Santé · +${after - 5}`);
+  vi.unstubAllGlobals();
 });
 
 it("localizes shared Negate only when the bearer can be identified", () => {

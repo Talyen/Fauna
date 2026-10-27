@@ -1,4 +1,5 @@
 import { useMessages } from "../shared/localization/message-context";
+import { MessageParts } from "../shared/localization/message-parts";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Progress } from "../shared/progress";
 import { motionValue } from "../shared/motion-values";
@@ -9,7 +10,7 @@ import { species } from "../../game/content";
 import type { Command, GameState, GameEvent, StateAt } from "../../game/types";
 import { Button } from "../../components/ui/button";
 import { AllyCard } from "../shared/cards/cards";
-import { KeywordText } from "../shared/keyword-text";
+import { Keyword } from "../shared/keyword-text";
 export function Campfire({ game, send }: { game: StateAt<"campfire">; send: (command: Command) => boolean }) {
   const i18n = useMessages();
   const creatures = [...game.team, ...game.reserves];
@@ -43,8 +44,17 @@ export function Campfire({ game, send }: { game: StateAt<"campfire">; send: (com
               tone="health"
             />
             <p>
-              <KeywordText
-                text={`${creature.health}/${species(creature.species).health} Health · Rest +${campfireRecovery(creature)}`}
+              <MessageParts
+                template={i18n.template(
+                  "campfire.healthAndRest",
+                  "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+                )}
+                values={{
+                  health: creature.health.toLocaleString(i18n.locale),
+                  maximum: species(creature.species).health.toLocaleString(i18n.locale),
+                  keyword: <Keyword id="health" className="rule-keyword" />,
+                  amount: campfireRecovery(creature).toLocaleString(i18n.locale),
+                }}
               />
             </p>
           </div>
@@ -129,7 +139,18 @@ export function RestRecovery({ game, events }: { game: GameState; events: GameEv
               tone="health"
             />
             <p>
-              <KeywordText text={`${creature.health - amount} → ${creature.health} Health · +${amount}`} />
+              <MessageParts
+                template={i18n.template(
+                  "campfire.healthRecovered",
+                  "{{before}} → {{after}} {{keyword}} · +{{amount}}",
+                )}
+                values={{
+                  before: (creature.health - amount).toLocaleString(i18n.locale),
+                  after: creature.health.toLocaleString(i18n.locale),
+                  keyword: <Keyword id="health" className="rule-keyword" />,
+                  amount: amount.toLocaleString(i18n.locale),
+                }}
+              />
             </p>
           </div>
         );

@@ -197,6 +197,18 @@
     "sourceHash": "f6ec245c99459d264a63819dc02c26f8dfa3d2c31aae9a9b76b4f38b1178ff8c",
     "text": "Здоровье: {{name}}"
   },
+  "campfire.healthAndRest": {
+    "reviewed": true,
+    "source": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+    "sourceHash": "391f1a8d7828adb0d70b46634fee6a653c04627217731551e2401531545f369c",
+    "text": "{{keyword}}: {{health}}/{{maximum}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "reviewed": true,
+    "source": "{{before}} → {{after}} {{keyword}} · +{{amount}}",
+    "sourceHash": "ca91a91abcaf3f24575e924ef4713aff0ea4dfc27d3b76b75f7eabe91bf0910b",
+    "text": "{{keyword}}: {{before}} → {{after}} · +{{amount}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
@@ -7883,6 +7895,30 @@
     "sourceHash": "f2cd5f313c45d9c176a8d273a25e90e6a7c821157b76b91c9478c1ee28a18104",
     "text": "Попадания типа «<keyword0>Вода</keyword0>» дают {{value0}} <keyword1>блока</keyword1>"
   },
+  "controller.circle": {
+    "reviewed": true,
+    "source": "Circle",
+    "sourceHash": "2634db7da33f31f659b64a3d9afe123e8313431ca7a8bc33f3b377f93ae46a98",
+    "text": "Круг"
+  },
+  "controller.cross": {
+    "reviewed": true,
+    "source": "Cross",
+    "sourceHash": "9c7f260044a5abc079bbf63fb9d42477559ce1c38e65ba385b57ee27e693630a",
+    "text": "Крест"
+  },
+  "controller.square": {
+    "reviewed": true,
+    "source": "Square",
+    "sourceHash": "b4da880ed32b4f6d5e1037a04e75a57e05684efce20551a9c942ea4581a5e98b",
+    "text": "Квадрат"
+  },
+  "controller.triangle": {
+    "reviewed": true,
+    "source": "Triangle",
+    "sourceHash": "aebcde2ecf7f6a852b0bc552fb3725d0d15e88c6be64232cba0e48b4a00797ba",
+    "text": "Треугольник"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -9306,6 +9342,66 @@
     "source": "Windowed",
     "sourceHash": "02cf45b6a54ac390243ce36ca965ab9fdb1d44eeced83f80ecd73b38204f3c62",
     "text": "Оконный режим"
+  },
+  "startup.adventure": {
+    "reviewed": true,
+    "source": "Adventure awaits…",
+    "sourceHash": "f8d8be7e101a95ed5e3e1817011266fb85b04b2d9c74f87e09686f6850a765f6",
+    "text": "Приключение ждёт…"
+  },
+  "startup.boons": {
+    "reviewed": true,
+    "source": "Gathering Boons…",
+    "sourceHash": "9d82f213eb2bf2c87d0eefaefb39113ca3caa0a2eb43aaa4bb58e39fdbe38140",
+    "text": "Собираем благословения…"
+  },
+  "startup.creatures": {
+    "reviewed": true,
+    "source": "Waking creatures…",
+    "sourceHash": "7783f2e8b9d82a4daf7c4b44afefe7c7f27324576ae5f3cbaa604fb80dbececc",
+    "text": "Будим существ…"
+  },
+  "startup.decks": {
+    "reviewed": true,
+    "source": "Shuffling decks…",
+    "sourceHash": "55ad4f1b5f930b87f2b4e07272cd5608eff075cdddbaf73fb883efb916c767c4",
+    "text": "Перемешиваем колоды…"
+  },
+  "startup.expeditions": {
+    "reviewed": true,
+    "source": "Preparing expeditions…",
+    "sourceHash": "c355ee9394a87f72fc07b30ab108905652576b410fb811f3095f9db525c1bbc8",
+    "text": "Готовим экспедиции…"
+  },
+  "startup.failed": {
+    "reviewed": true,
+    "source": "Fauna could not start",
+    "sourceHash": "9be5b8ea6356e5914a5ce0cc4dc0f2da48f9b5cd9ddd9cafe0e7f9fb1a26a7d1",
+    "text": "Не удалось запустить Fauna"
+  },
+  "startup.habitats": {
+    "reviewed": true,
+    "source": "Exploring habitats…",
+    "sourceHash": "e773211879797ddadd5674a9768d5587a2160e86e9b3e13f6d60dd857ed0ee7c",
+    "text": "Исследуем места обитания…"
+  },
+  "startup.loading": {
+    "reviewed": true,
+    "source": "Loading Fauna",
+    "sourceHash": "8e6321a9e8cde2b7a073fa4e50fd8c876e5ea0749d19e608f37f97035f8cc2f2",
+    "text": "Загрузка Fauna"
+  },
+  "startup.shops": {
+    "reviewed": true,
+    "source": "Restocking shops…",
+    "sourceHash": "13a852dadccb378523289b21b01b35fc41396a3c93664b7572e7fcacfcfe452d",
+    "text": "Пополняем магазины…"
+  },
+  "startup.starters": {
+    "reviewed": true,
+    "source": "Training starters…",
+    "sourceHash": "4a293d27e4c93a14178545828b3afd31019cabec27f1fd68d7c53a1ddc373747",
+    "text": "Обучаем начальных существ…"
   },
   "status.additional": {
     "reviewed": true,
