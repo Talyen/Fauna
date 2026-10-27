@@ -161,6 +161,15 @@
   "overlay.replacementHelp": {
     "text": "Choose a living backup for your knocked-out creature"
   },
+  "progress.keywordLevel": {
+    "text": "{{keyword}} level {{level}} progress"
+  },
+  "progress.keywordXpEarned": {
+    "text": "Keyword XP earned"
+  },
+  "progress.levelShort": {
+    "text": "Lv {{level}}"
+  },
   "recovery.display": {
     "text": "Fauna could not display this screen; trying again…"
   },

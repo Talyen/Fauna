@@ -24,6 +24,7 @@ export function extractContent(files) {
     const talent = /\/content\/talents\/[^/]+\.ts$/.test(location);
     const boon = location.endsWith("/content/boons.ts");
     const food = location.endsWith("/content/food.ts");
+    const keywords = location === "src/game/keywords.ts";
     function visit(node) {
       if (!node || typeof node !== "object") return;
       if (
@@ -40,6 +41,18 @@ export function extractContent(files) {
             throw new Error(`${location}: species ${key} must be literal`);
           add(`content.species.${id}.${key}`, value.value, location);
         }
+      }
+      if (
+        keywords &&
+        node.type === "KeyValueProperty" &&
+        node.value?.type === "CallExpression" &&
+        node.value.callee?.type === "Identifier" &&
+        node.value.callee.value === "entry"
+      ) {
+        const label = node.value.arguments[0]?.expression;
+        if (!node.key?.value || label?.type !== "StringLiteral")
+          throw new Error(`${location}: keyword ID and label must be literal`);
+        add(`content.keyword.${node.key.value}.label`, label.value, location);
       }
       if (node.type === "CallExpression" && node.callee?.type === "Identifier") {
         const callee = node.callee.value;
@@ -84,5 +97,7 @@ export function extractProjectContent(root) {
       location: path.relative(root, file).replaceAll(path.sep, "/"),
       source: fs.readFileSync(file, "utf8"),
     }));
+  const keywordFile = path.join(root, "src/game/keywords.ts");
+  files.push({ location: "src/game/keywords.ts", source: fs.readFileSync(keywordFile, "utf8") });
   return extractContent(files);
 }

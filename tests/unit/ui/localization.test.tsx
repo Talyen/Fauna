@@ -22,6 +22,7 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import french from "../../../src/ui/shared/localization/locales/fr.json";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
+import { Keyword } from "../../../src/ui/shared/keyword-text";
 import { CreatureCard } from "../../../src/ui/shared/cards/cards";
 import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
@@ -604,5 +605,21 @@ it("renders authored creature and card names by their stable IDs without changin
   expect(screen.getByText("Croissance")).toBeTruthy();
   expect(screen.getByText("Garde de pierre")).toBeTruthy();
   expect(card.definitionId).toBe("mossguard-guard");
+  view.unmount();
+});
+
+it("extracts and renders keyword labels without changing their semantic identity", () => {
+  const source = 'const terms = { burn: entry("Burn", "damage", "active", "Deals damage") };';
+  expect(extractContent([{ location: "src/game/keywords.ts", source }])).toEqual({
+    "content.keyword.burn.label": { text: "Burn" },
+  });
+  const catalog: MessageCatalog = { "content.keyword.burn.label": { source: "Burn", text: "Brûlure" } };
+  const view = render(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <Keyword id="burn" />
+    </MessageProvider>,
+  );
+  const term = screen.getByText("Brûlure");
+  expect(term.getAttribute("data-keyword")).toBe("burn");
   view.unmount();
 });

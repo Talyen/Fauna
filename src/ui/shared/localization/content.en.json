@@ -686,6 +686,87 @@
   "content.card.wisterelle-left-luggage.name": {
     "text": "Left Luggage"
   },
+  "content.keyword.armor.label": {
+    "text": "Armor"
+  },
+  "content.keyword.attackReflection.label": {
+    "text": "Attack Reflection"
+  },
+  "content.keyword.bleed.label": {
+    "text": "Bleed"
+  },
+  "content.keyword.blind.label": {
+    "text": "Blind"
+  },
+  "content.keyword.block.label": {
+    "text": "Block"
+  },
+  "content.keyword.burn.label": {
+    "text": "Burn"
+  },
+  "content.keyword.cleanse.label": {
+    "text": "Cleanse"
+  },
+  "content.keyword.consume.label": {
+    "text": "Consume"
+  },
+  "content.keyword.criticalHit.label": {
+    "text": "Critical Hit"
+  },
+  "content.keyword.dodge.label": {
+    "text": "Dodge"
+  },
+  "content.keyword.food.label": {
+    "text": "Food"
+  },
+  "content.keyword.freeze.label": {
+    "text": "Freeze"
+  },
+  "content.keyword.health.label": {
+    "text": "Health"
+  },
+  "content.keyword.leech.label": {
+    "text": "Leech"
+  },
+  "content.keyword.light.label": {
+    "text": "Light"
+  },
+  "content.keyword.mana.label": {
+    "text": "Mana"
+  },
+  "content.keyword.nature.label": {
+    "text": "Nature"
+  },
+  "content.keyword.negate.label": {
+    "text": "Negate"
+  },
+  "content.keyword.nullify.label": {
+    "text": "Nullify"
+  },
+  "content.keyword.physical.label": {
+    "text": "Physical"
+  },
+  "content.keyword.poison.label": {
+    "text": "Poison"
+  },
+  "content.keyword.purge.label": {
+    "text": "Purge"
+  },
+  "content.keyword.reflect.label": {
+    "text": "Reflect"
+  },
+  "content.keyword.resurrect.label": {
+    "text": "Resurrect"
+  },
+  "content.keyword.stun.label": {
+    "text": "Stun"
+  },
+  "content.keyword.thorns.label": {
+    "text": "Thorns"
+  },
+  "content.keyword.water.label": {
+    "text": "Water"
+  },
   "content.species.aerostat.name": {
     "text": "Aerostat"
   },

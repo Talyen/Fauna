@@ -1,11 +1,13 @@
+import { useMessages } from "./localization/message-context";
 import { useEffectMetadata } from "./effects/effects";
 import { KEYWORD_DEFINITIONS, type KeywordId } from "../../game/keywords";
 import { useRuleText } from "./localization/rule-catalog";
 export function Keyword({ id }: { id: KeywordId }) {
+  const i18n = useMessages();
   const metadata = useEffectMetadata([id]);
   return (
     <span {...metadata} data-keyword={id}>
-      {KEYWORD_DEFINITIONS[id].label}
+      {i18n.content(`content.keyword.${id}.label`, KEYWORD_DEFINITIONS[id].label)}
     </span>
   );
 }
