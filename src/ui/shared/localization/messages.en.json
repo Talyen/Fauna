@@ -365,6 +365,9 @@
   "log.resurrect": {
     "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"
   },
+  "log.returnCard": {
+    "text": "{{card}} returns to hand"
+  },
   "log.returnHome": {
     "text": "You return from the wilds. Discoveries are kept."
   },

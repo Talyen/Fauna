@@ -449,6 +449,12 @@ it("localizes an authored ability and Food announcement without guessing unknown
   expect(eventPresentation(game, { ...announcement, text: "Unknown is drawn from Discard" }, reader)).toBe(
     "Unknown is drawn from Discard",
   );
+  expect(eventPresentation(game, { ...announcement, text: `${ability.name} returns to hand` }, reader)).toBe(
+    "Carte retournée en main : Capacité traduite",
+  );
+  expect(eventPresentation(game, { ...announcement, text: "Unknown returns to hand" }, reader)).toBe(
+    "Unknown returns to hand",
+  );
   expect(eventPresentation(game, { ...announcement, text: `${actorName} uses Unknown.` }, reader)).toBe(
     `${actorName} uses Unknown.`,
   );

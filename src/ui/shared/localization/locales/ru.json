@@ -5549,6 +5549,12 @@
     "sourceHash": "095668484d35e142be598a773323ec0936078230b9c868f0ba40c796cb46ad73",
     "text": "{{actor}} воскрешает {{target}} с запасом здоровья {{amount}}"
   },
+  "log.returnCard": {
+    "reviewed": true,
+    "source": "{{card}} returns to hand",
+    "sourceHash": "7363c8ee4ccd3887e65b5e9828b5700b41bb139396dfc24d33e687e7ea8771d4",
+    "text": "Карта возвращена в руку: {{card}}"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",

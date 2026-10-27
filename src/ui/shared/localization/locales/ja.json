@@ -5549,6 +5549,12 @@
     "sourceHash": "9226368024f231d467c86e9f84a518452aad61f10c847c055073fdddd205b051",
     "text": "{{actor}}が{{target}}を体力{{amount}}で復活させた"
   },
+  "log.returnCard": {
+    "reviewed": true,
+    "source": "{{card}} returns to hand",
+    "sourceHash": "ee6302032af439da2743901b87e7ec677736df9b09e0923155660020db53819d",
+    "text": "手札に戻ったカード：{{card}}"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",

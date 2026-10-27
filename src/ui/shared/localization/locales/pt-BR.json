@@ -5549,6 +5549,12 @@
     "sourceHash": "b14d6b64671b598f7c22433c903878eb2fc058b629f24e10316da291c5b2f04a",
     "text": "{{actor}} ressuscita {{target}} com {{amount}} de Saúde"
   },
+  "log.returnCard": {
+    "reviewed": true,
+    "source": "{{card}} returns to hand",
+    "sourceHash": "febe7ceaaaa26ea43c67bdb0257efeaf453d2ae65c1da8cc05a5337099ae1c37",
+    "text": "Carta devolvida à mão: {{card}}"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",

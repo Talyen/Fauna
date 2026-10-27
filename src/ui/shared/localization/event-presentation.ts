@@ -59,6 +59,14 @@ export function eventPresentation(
           card: i18n.content(`content.card.${card.id}.name`, card.name),
         });
     }
+    const returnSuffix = " returns to hand";
+    if (actor && event.actionType === "support" && event.text.endsWith(returnSuffix)) {
+      const card = cardsByEnglishName.get(event.text.slice(0, -returnSuffix.length));
+      if (card)
+        return i18n.message("log.returnCard", "{{card}} returns to hand", {
+          card: i18n.content(`content.card.${card.id}.name`, card.name),
+        });
+    }
   }
   if (event.kind === "turn") {
     if (event.text === "Your journey begins.")

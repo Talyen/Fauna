@@ -5549,6 +5549,12 @@
     "sourceHash": "2f06f2ba0803c75bca6f592d7fef36468e4e8fb98ce538fc72e7220bc72c3ea4",
     "text": "{{actor}}复活了{{target}}，其生命为{{amount}}"
   },
+  "log.returnCard": {
+    "reviewed": true,
+    "source": "{{card}} returns to hand",
+    "sourceHash": "abf08cb47d819f6c105aa06ad05a43788de027c9db3f6493d0c27a9f7a496c92",
+    "text": "返回手牌的卡牌：{{card}}"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",
