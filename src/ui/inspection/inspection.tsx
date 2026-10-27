@@ -159,7 +159,11 @@ export function Inspector({
               </DialogDescription>
               <ActionCard
                 card={card}
-                ownerName={creature?.name ?? "Food"}
+                ownerName={
+                  creature
+                    ? i18n.content(`content.species.${creature.id}.name`, creature.name)
+                    : i18n.content("content.keyword.food.label", "Food")
+                }
                 actor={actor}
                 modifiers={modifiers}
                 enemy={!!enemy}
@@ -190,7 +194,11 @@ export function Inspector({
                     <ActionCard
                       key={action.id}
                       card={action}
-                      ownerName={creature?.name ?? "Food"}
+                      ownerName={
+                        creature
+                          ? i18n.content(`content.species.${creature.id}.name`, creature.name)
+                          : i18n.content("content.keyword.food.label", "Food")
+                      }
                       actor={actor}
                       modifiers={modifiers}
                       enemy={!!enemy}

@@ -1,3 +1,4 @@
+import { cardRuleId } from "../localization/card-rule-id";
 import { useMessages } from "../localization/message-context";
 import type { GameState } from "../../../game/types";
 import { KeywordText } from "../keyword-text";
@@ -58,7 +59,7 @@ export function CardRules({
 }) {
   return (
     <span className="action-effect">
-      <KeywordText text={cardText(card, level, value, power, modifiers)} />
+      <KeywordText text={cardText(card, level, value, power, modifiers)} id={cardRuleId(card, modifiers)} />
     </span>
   );
 }

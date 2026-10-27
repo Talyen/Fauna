@@ -51,7 +51,7 @@ structurally invalid translations fall back to English.
 Run `npm run localization:extract` after changing these calls and commit the
 resulting English catalogs. Authored species names, titles and traits, card
 names, Talent names, Boon names, keyword labels, and Boon, Talent and creature
-passive rules, and glossary terms and definitions are extracted by their stable
+passive rules, Food rules, and glossary terms and definitions are extracted by their stable
 identities. Glossary keyword terms reuse the shared keyword labels. Rules retain keyword tags
 and named values;
 translation records also retain the exact English rule for freshness checks.

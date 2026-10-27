@@ -77,11 +77,29 @@
     "sourceHash": "565bc8cdb0fb36fdeae87be13437efbef4071d52279c12c8f3c090d46a09158d",
     "text": "Посетить костёр"
   },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "cab1738cd30f3f21bce118e31c52168492a066d8fc669a8314456981f037da8e",
+    "text": "{{name}}, {{owner}}, мана: {{mana}}, {{effect}}"
+  },
   "card.copy": {
     "reviewed": true,
     "source": "Copy · Lasts for this battle",
     "sourceHash": "0df2865189cddd41c915b94e60a7e33734c75c42bc3b55b46cb5f5d1788c100f",
     "text": "Копия · Действует до конца боя"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "d5d028a4c395f319e0c26b2254fa9fea838bfe7dd4d7175fe7c3d2075ee256c7",
+    "text": "{{name}}, {{owner}}, {{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "985679792d19a36b4692c2a21a1b7462a1c7a0baf6913b81fadf6ee60760d5f4",
+    "text": "{{name}} +{{level}}"
   },
   "collection.all": {
     "reviewed": true,
@@ -239,11 +257,41 @@
     "sourceHash": "b0890f6fdeaf37521864d749af5b59a14e7f308777f0cd337fdbfb0d92a9cfda",
     "text": "Громовой камень"
   },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "ff932e08b4ef52f8b47853ce289c0448493dacf3f24abf8357b89b86d5678ba5",
+    "text": "Восстановить всем союзникам {{value0}} ед. <keyword0>здоровья</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
   "content.card.food-apple.name": {
     "reviewed": true,
     "source": "Apple",
     "sourceHash": "8459bdb09e855f874fb499cafaae6f1937baf45b9a96a7f12cfed8bb00d73aa2",
     "text": "Яблоко"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "b081c5a8b5ca44099da97c54136905709bab91c82a11fe70c9b04bd46bde7cd3",
+    "text": "Восстановить {{value0}} ед. <keyword0>здоровья</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "80e2f86b6c98e31e1da3a658881357bad040ac2ce24660c8923614c196a0b9f2",
+    "text": "Получить {{value0}} ед. <keyword0>маны</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "28cae0ae7fdb5c57b5a55bde5b2ce8f043c5892ca59a2e7427a0de2c3e7b6eb0",
+    "text": "Дать всем союзникам {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "c662c28932695c63cd5fabb5c35982eb6002df23b5a0ab6f1d2035c6b42af0f4",
+    "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

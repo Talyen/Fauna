@@ -77,11 +77,29 @@
     "sourceHash": "f5d934d81e2cc7d37d7c64806c29b1243c42ce1dc2a2c3b9825498f63303d502",
     "text": "Visitar a fogueira"
   },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "a9c7f7aff806e59211ae8e73815d4848b1cecf36bb46d73be7c1cb50a542444d",
+    "text": "{{name}}, {{owner}}, {{mana}} de mana, {{effect}}"
+  },
   "card.copy": {
     "reviewed": true,
     "source": "Copy · Lasts for this battle",
     "sourceHash": "23fc8cdaffba75467ac26b9ee61ecb36fcf72f416f1922d7138854b74343fd9d",
     "text": "Cópia · Dura até o fim do combate"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "2eaa05185008028d4c0bac556088297a8edf2762d745000ee4702535f935abb7",
+    "text": "{{name}}, {{owner}}, {{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "946f6da81046e505521b5c6cf7c509137da4105268e567f1782453368e636b86",
+    "text": "{{name}} +{{level}}"
   },
   "collection.all": {
     "reviewed": true,
@@ -239,11 +257,41 @@
     "sourceHash": "9ff5bb7c579c839ea071590ac6e211168fcff02f6180c9b9d72fec5fe445e8e9",
     "text": "Pedra do trovão"
   },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "95f06557b7617db1763e9b96dd1e7aa811e8a28df0d97c31ccd572a0904a0d34",
+    "text": "Restaura {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados; <keyword1>Consumir</keyword1>"
+  },
   "content.card.food-apple.name": {
     "reviewed": true,
     "source": "Apple",
     "sourceHash": "45658eff686c42e366cbb9fb92fedb8867ffb1d3a292d46c97e794c201f2dad1",
     "text": "Maçã"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "2cdd1a48983467d819c01b91e089e3e3436fb05ab9c70f3d3f5c98abdacd3caa",
+    "text": "Restaura {{value0}} de <keyword0>Saúde</keyword0>; <keyword1>Consumir</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "eb64d76d800da4baa2eff8824a73c204e08ed8c04062f59d2afcac5946e03ceb",
+    "text": "Ganhe {{value0}} de <keyword0>Mana</keyword0>; <keyword1>Consumir</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "56b68ee5d7ea06d7128454298b5ff03a61a65642550e40d9cc72fbfbec7005e8",
+    "text": "Concede {{value0}} de <keyword0>Bloqueio</keyword0> a todos os aliados; <keyword1>Consumir</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "ccbb5d8071770ffad33f89d77dec750e6b27c9543bc9ed20948d8465f01f7a90",
+    "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0>; <keyword1>Consumir</keyword1>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

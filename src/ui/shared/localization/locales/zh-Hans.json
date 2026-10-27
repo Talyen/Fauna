@@ -77,11 +77,29 @@
     "sourceHash": "2f4eba67deedc1b6516240c9516307228d3562dea8bf95d52b35a691f11b9197",
     "text": "前往篝火"
   },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "3e7f1cabf47a780c5c894e194f9d6fdeb2027c4218b697cbb06d764d3e8c5536",
+    "text": "{{name}}，{{owner}}，{{mana}} 点法力，{{effect}}"
+  },
   "card.copy": {
     "reviewed": true,
     "source": "Copy · Lasts for this battle",
     "sourceHash": "79b4b8572c542a3f26da1a5390090f376f27ab498e380eaea3da8f4f3fea598d",
     "text": "复制品 · 本场战斗有效"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "40428e6ed8b278eaf740359f1c34923695c212d65fb8e14e176da95c1ceb0be2",
+    "text": "{{name}}，{{owner}}，{{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "ba814e3c469cc951d4875fbf25d5fc5d1f69d177b15cf0fa93484cf29d562d22",
+    "text": "{{name}} +{{level}}"
   },
   "collection.all": {
     "reviewed": true,
@@ -239,11 +257,41 @@
     "sourceHash": "2d33b89e873cfddc229e0448f75c3165f79fac6e33835018e64721946dd2d44f",
     "text": "雷霆石"
   },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "d1c199ef5d6428f6868c83a1ed4068ae5fddd88bd49325960636d1582b40312b",
+    "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>；<keyword1>消耗</keyword1>"
+  },
   "content.card.food-apple.name": {
     "reviewed": true,
     "source": "Apple",
     "sourceHash": "d42f3575fd44a7df9d2e48570f725880d17760077b1f195274f2451545b52594",
     "text": "苹果"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "e1cd03e701089ccf106d2878e2ac25f90e3b3d6c2c6a4c0068682c3ff21ad216",
+    "text": "恢复 {{value0}} 点<keyword0>生命</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "dcf6993a03ffa59807309a9aeef2804cd60bdd4e8b7d4a0c4a12b5cdc35f546b",
+    "text": "获得 {{value0}} 点<keyword0>法力</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "a000f7e03407eebbc6cddce4b4550bfaf1df400f096cf3a76eeb354154d09211",
+    "text": "使所有盟友获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "9052deaec2cf163dbd2fc23bfe817738f67cf9a9879c598bef3a916b8494c475",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

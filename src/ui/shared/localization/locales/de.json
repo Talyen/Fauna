@@ -77,11 +77,29 @@
     "sourceHash": "4eb13fd1442f34d07a90c49eb854c108f4a0c04a606bba98845a1bf1a9235443",
     "text": "Lagerfeuer besuchen"
   },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "2b009571dd007c131484d7cec14fa495c704edd166862e7a1570ddc6b9fc0d60",
+    "text": "{{name}}, {{owner}}, {{mana}} Mana, {{effect}}"
+  },
   "card.copy": {
     "reviewed": true,
     "source": "Copy · Lasts for this battle",
     "sourceHash": "656aa5bc7213692a8ef4780d037bd8995ed6da4ac2f49423a5395266f6a62372",
     "text": "Kopie · Bleibt für diesen Kampf"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "00d9c4a2d8ec9ecfeb4205f07bcea039fe046c77e1826888108b0f5570e15ccc",
+    "text": "{{name}}, {{owner}}, {{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "236713dc8d5d8e716cc50f7ae8e7e303c943628d791d64b99f4b86ba84b43341",
+    "text": "{{name}} +{{level}}"
   },
   "collection.all": {
     "reviewed": true,
@@ -239,11 +257,41 @@
     "sourceHash": "ea8f2c71542762eb6644d3df9c6ff1646f844da29c4816e82317984ada005b49",
     "text": "Donnerstein"
   },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "b6a5f45d823f6d75736221410236d2946f5a9255b2f3ebbb0479747731655410",
+    "text": "Stellt bei allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Verbrauchen</keyword1>"
+  },
   "content.card.food-apple.name": {
     "reviewed": true,
     "source": "Apple",
     "sourceHash": "77ca6c755cbf37658939fa37108c278aa20e4388ccdd840a64971119b5598b69",
     "text": "Apfel"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "6802c43071144aff57eb8da0ce8cb599eec1fb3e01aa0f4f1d958d1042b453b3",
+    "text": "Stellt {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "0a2d92d0328a5fc3dd75eb32b22dda82758436fbcdc20c32180e7b1dacfd203b",
+    "text": "Erhalte {{value0}} <keyword0>Mana</keyword0>; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "03a98fb54ea5abbd19eb6effe97a70e883981eebd732f09d9e888becbb7c9add",
+    "text": "Alle Verbündeten erhalten {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "d20756e6b139b74a383dadb7cdaf6ab99bed5a9085a9c34b85c797e677c026c2",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

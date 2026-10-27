@@ -113,8 +113,17 @@
   "campfire.visit": {
     "text": "Visit Campfire"
   },
+  "card.actionLabel": {
+    "text": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}"
+  },
   "card.copy": {
     "text": "Copy · Lasts for this battle"
+  },
+  "card.enemyActionLabel": {
+    "text": "{{name}}, {{owner}}, {{effect}}"
+  },
+  "card.upgradedName": {
+    "text": "{{name}} +{{level}}"
   },
   "collection.all": {
     "text": "All"

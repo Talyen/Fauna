@@ -953,14 +953,34 @@
   "content.card.euphera-wish-exchange.name": {
     "text": "Wish Exchange"
   },
+  "content.card.food-apple.all.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "reference": "Restore 6 Health to all allies; Consume"
+  },
   "content.card.food-apple.name": {
     "text": "Apple"
+  },
+  "content.card.food-apple.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "reference": "Restore 6 Health; Consume"
   },
   "content.card.food-mana-berries.name": {
     "text": "Mana Berries"
   },
+  "content.card.food-mana-berries.rule": {
+    "text": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "reference": "Gain 2 Mana; Consume"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "text": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "reference": "Give all allies 6 Block; Consume"
+  },
   "content.card.food-trail-bread.name": {
     "text": "Trail Bread"
+  },
+  "content.card.food-trail-bread.rule": {
+    "text": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "reference": "Gain 6 Block; Consume"
   },
   "content.card.glintstride-attack.name": {
     "text": "Prism Shear"

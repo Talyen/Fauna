@@ -1,3 +1,9 @@
+import { extractFoodRules } from "../../../scripts/localization/food-rules.mjs";
+import { FOOD_CARDS } from "../../../src/game/content/food";
+import { cardText } from "../../../src/game/card-rules";
+import { CardRules } from "../../../src/ui/shared/combat/combat-values";
+import { ActionCard } from "../../../src/ui/shared/cards/cards";
+import { RuleCatalogProvider } from "../../../src/ui/shared/localization/rule-catalog";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import { GlossaryScreen } from "../../../src/ui/menu/glossary-screen";
 import { extractGlossaryRules } from "../../../scripts/localization/glossary-rules.mjs";
@@ -909,4 +915,86 @@ it("bundles fonts covering each script language's native selector label", () => 
     for (const character of label)
       expect(fontHasGlyph(font, character.codePointAt(0)!), `${file}: ${character}`).toBe(true);
   }
+});
+
+it("localizes action-card announcements with the same translated rule used for presentation", () => {
+  const game = run();
+  const card = game.cards.find((item) => item.definitionId === "mossguard-guard")!;
+  const rule = ruleMessage("Gain 6 Block");
+  const catalog: MessageCatalog = {
+    "content.card.mossguard-guard.name": { source: "Boulder Brace", text: "Garde de pierre" },
+    "card.actionLabel": {
+      source: "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+      text: "{{effect}} · {{name}} · {{owner}} · {{mana}} Mana",
+    },
+  };
+  const view = render(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <RuleCatalogProvider catalog={{ [rule.template]: "Gagnez {{value0}} <keyword0>Blocage</keyword0>" }}>
+        <TooltipProvider>
+          <ActionCard card={card} ownerName="Gardemousse" onClick={() => {}} />
+        </TooltipProvider>
+      </RuleCatalogProvider>
+    </MessageProvider>,
+  );
+  expect(
+    screen.getByRole("button", { name: "Gagnez 6 Blocage · Garde de pierre · Gardemousse · 1 Mana" }),
+  ).toBeTruthy();
+  expect(card.definitionId).toBe("mossguard-guard");
+  view.unmount();
+});
+
+it("extracts Food rules for individual and team targets from the production descriptions", () => {
+  const rules = extractFoodRules(
+    readFileSync("src/game/content/food.ts", "utf8"),
+    readFileSync("src/game/card-rules.ts", "utf8"),
+    readFileSync("src/game/rules/abilities.ts", "utf8"),
+    readFileSync("src/game/keywords.ts", "utf8"),
+  );
+  for (const card of FOOD_CARDS) {
+    for (const all of card.effect === "heal" || card.effect === "guard" ? [false, true] : [false]) {
+      const text = cardText(card, 0, undefined, 1, all ? { boons: ["pumpkin-tureen"] } : undefined);
+      const rule = rules[`content.card.${card.id}.${all ? "all." : ""}rule`];
+      expect(rule?.reference, `${card.id} ${all}`).toBe(text);
+      expect(rule?.text, `${card.id} ${all}`).toBe(ruleMessage(text).template);
+    }
+  }
+  expect(Object.keys(rules)).toHaveLength(5);
+});
+
+it("uses the same localized Food rule in tooltips and accessible card names", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const apple = FOOD_CARDS.find((entry) => entry.id === "food-apple")!;
+  const card = { id: "food-test", definitionId: "food-apple" as const, ownerId: null, level: 0 };
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <ActionCard card={card} ownerName="Nourriture" onClick={() => {}} />
+        <CardRules card={apple} value={12} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    screen.getByRole("button", { name: "Pomme, Nourriture, 1 Mana, Restaure 6 Santé ; Consommer" }),
+  ).toBeTruthy();
+  expect(screen.getByText("Santé").getAttribute("data-keyword")).toBe("health");
+  expect(view.container.textContent).toContain("Restaure 12 Santé ; Consommer");
+  const teamBuff = produce(run(), (draft) => {
+    draft.boons.push("pumpkin-tureen");
+  });
+  view.rerender(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <ActionCard card={card} ownerName="Nourriture" modifiers={teamBuff} onClick={() => {}} />
+        <CardRules card={apple} value={12} modifiers={teamBuff} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    screen.getByRole("button", {
+      name: "Pomme, Nourriture, 1 Mana, Restaure 6 Santé à tous les alliés ; Consommer",
+    }),
+  ).toBeTruthy();
+  expect(view.container.textContent).toContain("Restaure 12 Santé à tous les alliés ; Consommer");
+  view.unmount();
 });

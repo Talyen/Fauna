@@ -227,11 +227,29 @@
     "sourceHash": "ebbdcec4ae97b518fc3d3906e746be7acaa14d17aa110c8565a52f62aa89d39d",
     "text": "Visiter le feu de camp"
   },
+  "card.actionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
+    "sourceHash": "44a66b97fd922336fba996f585d7b3c18701d83aca2912cab41882873d4497fe",
+    "text": "{{name}}, {{owner}}, {{mana}} Mana, {{effect}}"
+  },
   "card.copy": {
     "reviewed": true,
     "source": "Copy · Lasts for this battle",
     "sourceHash": "126c889cd893b589a9f6cd700615d0f312eda280a07a487fd471d3b35134f692",
     "text": "Copie · Dure jusqu’à la fin du combat"
+  },
+  "card.enemyActionLabel": {
+    "reviewed": true,
+    "source": "{{name}}, {{owner}}, {{effect}}",
+    "sourceHash": "44173bfd71253db4bf55310349ff9f6eaa6dfa07aaae87c8d6b7057c071cc0b3",
+    "text": "{{name}}, {{owner}}, {{effect}}"
+  },
+  "card.upgradedName": {
+    "reviewed": true,
+    "source": "{{name}} +{{level}}",
+    "sourceHash": "5c38a8e78dbddaf89d6314288f037f23fbb3f7f92924459447506f24c267852e",
+    "text": "{{name}} +{{level}}"
   },
   "collection.all": {
     "reviewed": true,
@@ -443,11 +461,41 @@
     "sourceHash": "e75e58fea7c74c42395d86a9f2c1307dacedb73ef63e3c16604513b7bd3772f5",
     "text": "Pierre de tonnerre"
   },
+  "content.card.food-apple.all.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
+    "sourceHash": "4b3687617937cca469068534328d5df523d9f3904eb3082ca8eef27f73e4bffc",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> à tous les alliés ; <keyword1>Consommer</keyword1>"
+  },
   "content.card.food-apple.name": {
     "reviewed": true,
     "source": "Apple",
     "sourceHash": "f4a85c47e34b003a1a9273be3ef10fcda1eb323ae34604fca8d88c9837023fe3",
     "text": "Pomme"
+  },
+  "content.card.food-apple.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "ea5b74dee969bb77a784f9c918ff8d56819ef1f2d8a3fab13fcf534942ea2aa6",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> ; <keyword1>Consommer</keyword1>"
+  },
+  "content.card.food-mana-berries.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "f90d92b551f08d4ff3465adb7800c4bcf98edd7976433310013478469157d888",
+    "text": "Gagne {{value0}} <keyword0>Mana</keyword0> ; <keyword1>Consommer</keyword1>"
+  },
+  "content.card.food-trail-bread.all.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "b8ed91ecda1a4355fad31be95b03fc980de165650965884d2b391b1a6443d51c",
+    "text": "Confère {{value0}} <keyword0>Blocage</keyword0> à tous les alliés ; <keyword1>Consommer</keyword1>"
+  },
+  "content.card.food-trail-bread.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
+    "sourceHash": "16466e95a192f766e9463139ae0153ef50e9791644e791cf7ad7c35f31a3c47a",
+    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0> ; <keyword1>Consommer</keyword1>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
