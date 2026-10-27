@@ -3395,6 +3395,12 @@
     "sourceHash": "beab2cb2953da999901e0a1f010896b3c32faab768ed5cc76f5e8764b1d58fb4",
     "text": "Вытягивание недугов"
   },
+  "content.talent.leech.affliction-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}}% more <keyword1>Health</keyword1> against Poisoned or <keyword2>Bleeding</keyword2> enemies",
+    "sourceHash": "8b5fa678537121047dfbb623d21d07b0456be2da818d6721be94bfc6ef3674fa",
+    "text": "<keyword0>Вампиризм</keyword0> восстанавливает на {{value0}}% больше <keyword1>здоровья</keyword1> против отравленных или <keyword2>кровоточащих</keyword2> врагов"
+  },
   "content.talent.leech.armor-siphon.name": {
     "reviewed": true,
     "source": "Armor Siphon",
@@ -3833,6 +3839,12 @@
     "sourceHash": "88fea11c1e3299a1fe55ab452d9f884bb716700eb2d9bd3e64343123b89c1f6e",
     "text": "Разъедание"
   },
+  "content.talent.poison.corrosive.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies take {{value0}} additional damage",
+    "sourceHash": "991d9287b27f14cf4df0b97791b253638071bfc47e973f7335cd965a870e490c",
+    "text": "Отравленные враги получают на {{value0}} больше урона"
+  },
   "content.talent.poison.hemotoxin.name": {
     "reviewed": true,
     "source": "Hemotoxin",
@@ -3850,6 +3862,12 @@
     "source": "Necrosis",
     "sourceHash": "bfe4a091f5c19b15d3c8e7809c2df34f9882d5187299cc14db8f699a0cfaa469",
     "text": "Некроз"
+  },
+  "content.talent.poison.necrosis.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies receive half as much <keyword0>healing</keyword0>",
+    "sourceHash": "eccb221f561b2a584c8eeaac1db59ebcfc60e145e68c5888fb33e87c1fa40454",
+    "text": "Отравленные враги получают вдвое меньше <keyword0>лечения</keyword0>"
   },
   "content.talent.poison.paralytic-venom.name": {
     "reviewed": true,
@@ -3869,11 +3887,23 @@
     "sourceHash": "154a23850a5790467e0646eaf95750a512e012ebab8d35ad12e2d0b02c2df408",
     "text": "Оцепенение"
   },
+  "content.talent.poison.torpor.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies cannot <keyword0>Dodge</keyword0>",
+    "sourceHash": "1110b2fca6a9cc99617c277b650d91f0673db0ae5b44c0a455d4fd2f1628c73b",
+    "text": "Отравленные враги не могут <keyword0>уклоняться</keyword0>"
+  },
   "content.talent.poison.toxic-profit.name": {
     "reviewed": true,
     "source": "Toxic Profit",
     "sourceHash": "62defcc6d70adc7581d4ff8514b153fe819dc0af5892167e82e48b377d2c176d",
     "text": "Ядовитая прибыль"
+  },
+  "content.talent.poison.toxic-profit.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you defeat a Poisoned enemy",
+    "sourceHash": "12fde2b43a82101576f06b2465584f636b742580da0d104d231aecacbe5e17f8",
+    "text": "Получите {{value0}} золота за победу над отравленным врагом"
   },
   "content.talent.poison.toxin-resistance.name": {
     "reviewed": true,

@@ -3395,6 +3395,12 @@
     "sourceHash": "b280a4274536653a9f8ce05bc5fe901de8436d76779b06d541221056029364c9",
     "text": "苦难虹吸"
   },
+  "content.talent.leech.affliction-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}}% more <keyword1>Health</keyword1> against Poisoned or <keyword2>Bleeding</keyword2> enemies",
+    "sourceHash": "f7dc96e82de9ed458caaef6c95b1d601e9daf6335812f78bdf1a2ce03357712e",
+    "text": "对中毒或<keyword2>流血</keyword2>的敌人，<keyword0>汲取</keyword0>恢复的<keyword1>生命</keyword1>提高{{value0}}%"
+  },
   "content.talent.leech.armor-siphon.name": {
     "reviewed": true,
     "source": "Armor Siphon",
@@ -3833,6 +3839,12 @@
     "sourceHash": "2df072b3b41f61f2bb7d4d2c5d4b364691c1fed005e69ef6d77f6d8dc54b5baf",
     "text": "腐蚀"
   },
+  "content.talent.poison.corrosive.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies take {{value0}} additional damage",
+    "sourceHash": "0d6e80986531a20b854e51d9a9712207d3718d4b2ccd2ebfe312075ac3bb225c",
+    "text": "中毒的敌人受到的伤害增加{{value0}}点"
+  },
   "content.talent.poison.hemotoxin.name": {
     "reviewed": true,
     "source": "Hemotoxin",
@@ -3850,6 +3862,12 @@
     "source": "Necrosis",
     "sourceHash": "7068af1d19f2099052ac45cff2db27945aa18e48480d494945ff0c7ad4707820",
     "text": "坏死"
+  },
+  "content.talent.poison.necrosis.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies receive half as much <keyword0>healing</keyword0>",
+    "sourceHash": "18ece87712cc1471f4b206d3c8108fdf7f86d5af52398cb548a93a752bb57fae",
+    "text": "中毒的敌人受到的<keyword0>治疗</keyword0>减半"
   },
   "content.talent.poison.paralytic-venom.name": {
     "reviewed": true,
@@ -3869,11 +3887,23 @@
     "sourceHash": "9b7a9b2fe48d9165e9299ccf8a4027bc8d7da9f72dc0eaad12a2280b380dcb75",
     "text": "麻木"
   },
+  "content.talent.poison.torpor.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies cannot <keyword0>Dodge</keyword0>",
+    "sourceHash": "b8173c8de97538eb39ae26f089190808036c0ce0d31029144f9b3b44a363fd54",
+    "text": "中毒的敌人无法<keyword0>闪避</keyword0>"
+  },
   "content.talent.poison.toxic-profit.name": {
     "reviewed": true,
     "source": "Toxic Profit",
     "sourceHash": "4897ab91b0c8b5d784aacc6c84ba5ddf422ab67e300376c713df89892e1d19e0",
     "text": "毒素获利"
+  },
+  "content.talent.poison.toxic-profit.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you defeat a Poisoned enemy",
+    "sourceHash": "0833eb893b1895e501abc18aa26e981c1f9d58c040f26931b19c6a523f8b4c33",
+    "text": "击倒中毒的敌人时获得{{value0}}金币"
   },
   "content.talent.poison.toxin-resistance.name": {
     "reviewed": true,

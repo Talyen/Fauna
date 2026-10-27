@@ -3395,6 +3395,12 @@
     "sourceHash": "ea5a0c27ad690d5eb8ed1c16b4d39455d64e72fc85c0da92bc4d1ceaf5126a97",
     "text": "Leidensentzug"
   },
+  "content.talent.leech.affliction-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}}% more <keyword1>Health</keyword1> against Poisoned or <keyword2>Bleeding</keyword2> enemies",
+    "sourceHash": "071a41f476f59ef475865e99b198812783cbcf9dcbe1228745bc0f06b6fdf191",
+    "text": "<keyword0>Lebensraub</keyword0> stellt gegen vergiftete oder <keyword2>blutende</keyword2> Gegner {{value0}}% mehr <keyword1>Gesundheit</keyword1> wieder her"
+  },
   "content.talent.leech.armor-siphon.name": {
     "reviewed": true,
     "source": "Armor Siphon",
@@ -3833,6 +3839,12 @@
     "sourceHash": "a00a14af4f572df31f1c4952700aa8df50a380165c86adc3684dbf39ce36d262",
     "text": "Korrosiv"
   },
+  "content.talent.poison.corrosive.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies take {{value0}} additional damage",
+    "sourceHash": "90966faf51eb10232023bfcc7d75fafe09c2dbccd85a37f1f6943533faf6b188",
+    "text": "Vergiftete Gegner erleiden {{value0}} zusätzlichen Schaden"
+  },
   "content.talent.poison.hemotoxin.name": {
     "reviewed": true,
     "source": "Hemotoxin",
@@ -3850,6 +3862,12 @@
     "source": "Necrosis",
     "sourceHash": "10936137371de1a64dc5ece1536e36f5e5bb1193b5cca2ad86d051c97e3d8501",
     "text": "Nekrose"
+  },
+  "content.talent.poison.necrosis.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies receive half as much <keyword0>healing</keyword0>",
+    "sourceHash": "cdb90611bb68068f707c83d9190c820b03e54036df8bc0d649622490e8209966",
+    "text": "Vergiftete Gegner erhalten halb so viel <keyword0>Heilung</keyword0>"
   },
   "content.talent.poison.paralytic-venom.name": {
     "reviewed": true,
@@ -3869,11 +3887,23 @@
     "sourceHash": "7b0ecbbdc6dd3ae9b621335cd33571b924cccce2620bbcf927ad7982d84f5b73",
     "text": "Erstarrung"
   },
+  "content.talent.poison.torpor.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies cannot <keyword0>Dodge</keyword0>",
+    "sourceHash": "f88dc62a5150e5a5a738e39dfc594c4e23d400df9e93dc9ba65218e512acde68",
+    "text": "Vergiftete Gegner können nicht <keyword0>ausweichen</keyword0>"
+  },
   "content.talent.poison.toxic-profit.name": {
     "reviewed": true,
     "source": "Toxic Profit",
     "sourceHash": "f44b282340488c0a5a9632c13405c0b64000dd985edc5747f9cc73cce360b0df",
     "text": "Giftgewinn"
+  },
+  "content.talent.poison.toxic-profit.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you defeat a Poisoned enemy",
+    "sourceHash": "b8217dd84d0683c3ae05d9bc0a2fef960ab9398dab43d272b4d604e5273805fd",
+    "text": "Erhalte {{value0}} Gold, wenn du einen vergifteten Gegner besiegst"
   },
   "content.talent.poison.toxin-resistance.name": {
     "reviewed": true,

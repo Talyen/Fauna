@@ -3395,6 +3395,12 @@
     "sourceHash": "442e9b15db163e0d320099e965dd9538fe362f032d54b5b7e0f5baa3fe29cf7b",
     "text": "Succión de aflicciones"
   },
+  "content.talent.leech.affliction-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}}% more <keyword1>Health</keyword1> against Poisoned or <keyword2>Bleeding</keyword2> enemies",
+    "sourceHash": "f89fad28a58a952834492a7cd24d2e51c494fad2a0242d02e6f501a25458cc98",
+    "text": "<keyword0>Drenaje</keyword0> restaura un {{value0}}% más de <keyword1>Salud</keyword1> contra enemigos envenenados o con <keyword2>Sangrado</keyword2>"
+  },
   "content.talent.leech.armor-siphon.name": {
     "reviewed": true,
     "source": "Armor Siphon",
@@ -3833,6 +3839,12 @@
     "sourceHash": "609f47638c59a61cd1aa3d89f10fe87a45f886c2b42dcd37d6763b5933ce5c28",
     "text": "Corrosivo"
   },
+  "content.talent.poison.corrosive.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies take {{value0}} additional damage",
+    "sourceHash": "7c4895d9b466cadf058e3c7f99dc4a27d0309ab0355f239993d8d3a6dcc455c8",
+    "text": "Los enemigos envenenados reciben {{value0}} de daño adicional"
+  },
   "content.talent.poison.hemotoxin.name": {
     "reviewed": true,
     "source": "Hemotoxin",
@@ -3850,6 +3862,12 @@
     "source": "Necrosis",
     "sourceHash": "51f096fc690c9a9683ad01c1cb351e644c16a2f13a693e69d21c741df85d8e72",
     "text": "Necrosis"
+  },
+  "content.talent.poison.necrosis.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies receive half as much <keyword0>healing</keyword0>",
+    "sourceHash": "f85a896e1bdb1474f4c31730cdd4b30cda8af912561b9772ae474cc66b4b202c",
+    "text": "Los enemigos envenenados reciben la mitad de <keyword0>curación</keyword0>"
   },
   "content.talent.poison.paralytic-venom.name": {
     "reviewed": true,
@@ -3869,11 +3887,23 @@
     "sourceHash": "b1b960ed468546d8dfd6f983fe9a92f421ccd419e09b9aa54b05ca3c48cf85bc",
     "text": "Letargo"
   },
+  "content.talent.poison.torpor.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies cannot <keyword0>Dodge</keyword0>",
+    "sourceHash": "f328e9755108488519c6628427d292b7c00405018846aed53538157ccd7f1a98",
+    "text": "Los enemigos envenenados no pueden <keyword0>esquivar</keyword0>"
+  },
   "content.talent.poison.toxic-profit.name": {
     "reviewed": true,
     "source": "Toxic Profit",
     "sourceHash": "235306c8398476f2e6b1ff4d54a559b42475e13572eac10cbeb27cfcbc0159ca",
     "text": "Beneficio tóxico"
+  },
+  "content.talent.poison.toxic-profit.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you defeat a Poisoned enemy",
+    "sourceHash": "3af554918bc03952eb6967004293528260a1d8169fe318618b47e4a295b63c8f",
+    "text": "Obtienes {{value0}} de Oro al derrotar a un enemigo envenenado"
   },
   "content.talent.poison.toxin-resistance.name": {
     "reviewed": true,

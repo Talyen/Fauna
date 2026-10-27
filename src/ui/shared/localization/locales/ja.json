@@ -3395,6 +3395,12 @@
     "sourceHash": "e063ea75a5293dee441e37c3c3a53116af0a02fcceb0f8adeef56a20b6f2cbfa",
     "text": "苦難の吸収"
   },
+  "content.talent.leech.affliction-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}}% more <keyword1>Health</keyword1> against Poisoned or <keyword2>Bleeding</keyword2> enemies",
+    "sourceHash": "a811a628f2b5a9d47c944d27a540dcdf3dd36cce33d5df31afd525995ea30deb",
+    "text": "毒または<keyword2>出血</keyword2>状態の敵に対する<keyword0>吸血</keyword0>の<keyword1>体力</keyword1>回復量が{{value0}}%増加"
+  },
   "content.talent.leech.armor-siphon.name": {
     "reviewed": true,
     "source": "Armor Siphon",
@@ -3833,6 +3839,12 @@
     "sourceHash": "ed7c26fe4ac9f066ba753377a1894f03f294ac3f6397e252189c2157cb78d7c7",
     "text": "腐食"
   },
+  "content.talent.poison.corrosive.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies take {{value0}} additional damage",
+    "sourceHash": "45e4243d8be55cb5ccb20c7b0552b99df6901c37556eddc2837570524f04db68",
+    "text": "毒状態の敵が受けるダメージが{{value0}}増加"
+  },
   "content.talent.poison.hemotoxin.name": {
     "reviewed": true,
     "source": "Hemotoxin",
@@ -3850,6 +3862,12 @@
     "source": "Necrosis",
     "sourceHash": "f0ff903b9d025f800e10437afb88049156b71d7fb85ba360d4b221333c4b56ae",
     "text": "壊死"
+  },
+  "content.talent.poison.necrosis.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies receive half as much <keyword0>healing</keyword0>",
+    "sourceHash": "971e1043a643dd8a816b60f249d553d8bccd848dccab19f77f181d1d0eae4866",
+    "text": "毒状態の敵が受ける<keyword0>回復</keyword0>が半分になる"
   },
   "content.talent.poison.paralytic-venom.name": {
     "reviewed": true,
@@ -3869,11 +3887,23 @@
     "sourceHash": "5299e38b683c8eef2f68acb613850036d232e16cfbbafa196dfb97086368c4e2",
     "text": "昏睡"
   },
+  "content.talent.poison.torpor.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies cannot <keyword0>Dodge</keyword0>",
+    "sourceHash": "43b27d0849a450f6d4a7991f88f137f8cf770672e6c3fb7f5eda6b3e4cdf4a22",
+    "text": "毒状態の敵は<keyword0>回避</keyword0>できない"
+  },
   "content.talent.poison.toxic-profit.name": {
     "reviewed": true,
     "source": "Toxic Profit",
     "sourceHash": "e594470af691268bf0102cb3ca93c6e0fb5fd7572540ea55242935f8774856a0",
     "text": "毒の利益"
+  },
+  "content.talent.poison.toxic-profit.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you defeat a Poisoned enemy",
+    "sourceHash": "880e264cd9d7e7aaadcae4b53a160d41e3fbe1aa978a958d407988ac41cfaa82",
+    "text": "毒状態の敵を倒すとゴールドを{{value0}}獲得"
   },
   "content.talent.poison.toxin-resistance.name": {
     "reviewed": true,
