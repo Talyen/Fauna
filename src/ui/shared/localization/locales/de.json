@@ -3317,6 +3317,18 @@
     "sourceHash": "509f1d6be1565a324f23da290ad827031a0ea0994e380459fef8bf6d160ec20c",
     "text": "Schaden vom Typ <keyword0>Licht</keyword0> und Wiederherstellung von <keyword1>Gesundheit</keyword1> springen zweimal weiter"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "901d7a8845ed177131bcfc783ad49357983c0f168ddac8c26ef796e464749235",
+    "text": "Eine goldene Spur aus Blumen"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "1b5790c1cabb8ffbfca04ae32acae08b8f4b45382b4612a9574f940d9bcb3cac",
+    "text": "Fremdbestäubung"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3352,6 +3364,18 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "4d18e7ce1df62e313bb45e71a6480d8f7743d03fcbbac222351842c78635b435",
     "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "98d8e87157b078125f0ab4440aaf3c322ddd2a0ca2715ddd10d76757e52e8410",
+    "text": "Der Kristallwächter"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "b7442d984f1b5dfb2327cbfcdf80e943b0f4b118c8061370f6f5d218412b09db",
+    "text": "Lichtbrechung"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3389,6 +3413,18 @@
     "sourceHash": "4e681f7db31067faf2fc230927750c42535ed2828cac17fbdd66256e5957920c",
     "text": "Nach dem Besiegen eines <keyword0>brennenden</keyword0> Gegners verteile seinen verbleibenden <keyword1>Brand</keyword1> auf andere Gegner"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "7ed05115cbadfc5ac36820f26d19cc41fd88d502ac039a3b9ff5827f4a9ac92d",
+    "text": "Der Funke des Festes"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "90677f1a1f48b553ce9e0ac0b96da89b3c22dd1f09566cd92a972fd306455b4f",
+    "text": "Weitergegebene Flamme"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3425,6 +3461,18 @@
     "sourceHash": "7bcf3a91eac81633c4df7ee4aa38ba61e08dbc430d0e3655357c99a09a8b86a7",
     "text": "<keyword0>Block</keyword0> und <keyword1>Dornen</keyword1> werden mit Verbündeten geteilt"
   },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "9e5656dfea55568e0a62532c8badd8102c8593d95de4b965f628e782cca0a509",
+    "text": "Das lebendige Schilfbett"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "d5aa84ad9151763789a2c6915785a6847e08446bfd8a76b765a14437999b4ca2",
+    "text": "Schilfwacht"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -3460,6 +3508,18 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "be5cefcbb0084277233398b2b99c41816c3af9838a8135a3e1da44de915c4def",
     "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "0b01a22ef4c1d55af280e255e3920ef84dbbc1b8d1013545b6a38d77c71e6bc7",
+    "text": "Das Heiligtum der Träume"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "7c02c5a4ac3b705e2bdb75b4dae5bcd25abf1e0f76027ca1b9be12bac10498e4",
+    "text": "Ohne Eile"
   },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,

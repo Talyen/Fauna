@@ -3317,6 +3317,18 @@
     "sourceHash": "9fd0d5367e63c8414ffd92d2d4300f8418029ec131dc33b7a03ceabc82a4122c",
     "text": "<keyword0>光</keyword0>伤害和<keyword1>生命</keyword1>恢复弹跳两次"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "03afce836387e4f78724a3b1457b78b8b74d6df490c3fd623406b2fc588b3900",
+    "text": "金色花踪"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "7ebd48bfd7c7c1bb3e88af69840efdd4ed23f5756ded0e517062433aa426413d",
+    "text": "异花授粉"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3352,6 +3364,18 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "4a5e98e42fe4f641964c98de81f236e30f1cc7a92acc3a81b6c19ab3136b9b95",
     "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "1c872a5b28e8a5abf013770c27065bca62096fbb65996bf6b4804f2490a14f0e",
+    "text": "水晶哨兵"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "327e8a2f068a1cf8ac1de699d3aff3bdb415bed0fa543e3bbb3cb4675e49af27",
+    "text": "折射"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3389,6 +3413,18 @@
     "sourceHash": "565e0ac30bf1812a995ea67d99d3321917890f9fd712cbbbd3ccf11fa8a28641",
     "text": "击败<keyword0>灼烧</keyword0>中的敌人后，将其剩余<keyword1>灼烧</keyword1>扩散给其他敌人"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "e58faf46203190e2a941068f1310ae15dcf1a6e004ade2da500879454701f03c",
+    "text": "节庆火花"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "882af31494b5d2116a23d6c4ccd2b13c4b0611b3539c5301b62c8b5ed92ebaae",
+    "text": "流转之焰"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3425,6 +3461,18 @@
     "sourceHash": "e9cb2238db9f42c8e382f693d1cc9b7f190686a61d88110d6d3bf013b9f7fd3e",
     "text": "<keyword0>格挡</keyword0>和<keyword1>荆棘</keyword1>与盟友共享"
   },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "431186218ded88d38e09fb84a897bc22c836d2320cef5e10152a62bd9b532ee8",
+    "text": "活着的芦苇荡"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "7c7e514d1223c87c89a6347bd4fa89545cbac708fe5899a5f8452d47cf9692b0",
+    "text": "芦苇守护"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -3460,6 +3508,18 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "975c56f9139e854228a93883368a3dd212979d3b4793c2b7cfdbbfc11f46fc7e",
     "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "71fa2f2e1187dedac04330ada40ad1321ee2b6f3421414fce7d3865b940cb5a6",
+    "text": "梦之庇护所"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "3bb8586de03af4f14042d0d97c0b9b96190f66023960621028e04e3fc2bbdbaa",
+    "text": "从容"
   },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,

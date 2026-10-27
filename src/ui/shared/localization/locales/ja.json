@@ -3317,6 +3317,18 @@
     "sourceHash": "6cfb6467ec7ee9e38bb78f7f2fe8e7fd58cd789c9aa24bc4e04b30ba55980812",
     "text": "<keyword0>光</keyword0>ダメージと<keyword1>体力</keyword1>回復が2回跳ねる"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "15de6b4c9b6144cfffe83c292550bfa171cb3b388387785c41fcf5c846c10289",
+    "text": "花々の黄金の軌跡"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "8b35b7cb6ba26e26a509034fc4a2a38eae523235f256675a378d458796a18e77",
+    "text": "交差受粉"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3352,6 +3364,18 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "d06c13021de0539af1c9d01af7d5126bf6fd6bc6bde8d9368624ce29e49ed9f0",
     "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "e0c67b7d9fc1e1ee82cc5959977708920839fc541e991d2effe29895705c6be4",
+    "text": "水晶の番人"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "f013b0e0ba0505f3f278cc5f0b09d6bce2db88db4ee42b8e5b8026c443c527a8",
+    "text": "屈折"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3389,6 +3413,18 @@
     "sourceHash": "66591038279a114b10ea888873881c810ad16c5399fc43baaff4584019064397",
     "text": "<keyword0>炎上</keyword0>中の敵を倒すと、その敵の残りの<keyword1>炎上</keyword1>をほかの敵に広げる"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "364ce19ecbc8eb25e130b17ba9d654708746aa0b11fd8eb7997bca10a6480f33",
+    "text": "祭りの火花"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "6e8870973cee7ff9fb739e01afc8980574629eaf702089aeb0ce03868cf8eafa",
+    "text": "巡る炎"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3425,6 +3461,18 @@
     "sourceHash": "6d4085d3c863fb6e3f22421e5e586826dd5a950b5948872bb360f9180289d2fd",
     "text": "<keyword0>ブロック</keyword0>と<keyword1>棘</keyword1>が味方に共有される"
   },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "b95a81ec3397eb1badd03a7baf834a9cd1d049e29041a711fd5f9dd53fb9a1fc",
+    "text": "生きた葦原"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "68b16a97119b3056fe36961d2eacfe891272ce001e5bac86efbe752195ef8171",
+    "text": "葦の守り"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -3460,6 +3508,18 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "1e5f5f3f359d50e17d6d146b6dc7b317ea47417b7d8cdd18e6e6b1304b0d5a8f",
     "text": "自分のターン終了時、カードを使わなかった味方はそれぞれ<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "46e6ca7b656026d0c4dfcdc4a835801a15f81d981368619932b3606f86767790",
+    "text": "夢の聖域"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "cf3f665e540678c571e84194c79870d3bd51f5138ab792430393364db282ac4d",
+    "text": "ゆるやかに"
   },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,

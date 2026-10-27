@@ -3317,6 +3317,18 @@
     "sourceHash": "cf5ff074592103d40e5181098f310a257b6b3079bd51c60b3ae11c9ac6286fb6",
     "text": "El daño de <keyword0>Luz</keyword0> y la restauración de <keyword1>Salud</keyword1> rebotan dos veces"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "659d5eba57d2b653da5421c8b354373f866c90d10cd9912d169b7abb357d07bf",
+    "text": "Una estela dorada de flores"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "7cf7ed347d438505e2e05930f6eec78e917424536b2f25c87ca546119cf3c2ff",
+    "text": "Polinización cruzada"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3352,6 +3364,18 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "56460035635be50fcc6d44fc6efa8c58b317bb65659441610060af260dace186",
     "text": "Los efectos de estado perjudiciales que recibes tienen un {{value0}}% de probabilidad de redirigirse a un enemigo aleatorio"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "f79243c3067542a5fd1827a55d4e14ced8021ddd60a4c814f7886b1d76d72e44",
+    "text": "El centinela de cristal"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "5db8e70d84dc473375c44c0a0145012e1d03d623480fabcd57771f9d0cd4b325",
+    "text": "Refracción"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3389,6 +3413,18 @@
     "sourceHash": "7676d95af73e65b8870c7108a310431f17c7abb816056673496d032b59c19f33",
     "text": "Tras derrotar a un enemigo <keyword0>en llamas</keyword0>, propaga su <keyword1>Quemadura</keyword1> restante a los demás enemigos"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "0ce39fe4e731b25b2e30a6eb4f0b8afee499fa861cbe90ad809a4b292b866a8c",
+    "text": "La chispa de la fiesta"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "3c9183e9ba4a4f89a9d2be4d1fcb8c20b26fde741abb26f8f4b987d1ae095af5",
+    "text": "Llama pasajera"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3425,6 +3461,18 @@
     "sourceHash": "3edf11f2376de3dcdc69084b0e59ada94bb4f9cf4cdf9e893ec93835f5e1e7c1",
     "text": "El <keyword0>Bloqueo</keyword0> y las <keyword1>Espinas</keyword1> se comparten con los aliados"
   },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "da2f4c46514810297476b6406b0c6dd7913cdf6b4193bd7fc540f231782463df",
+    "text": "El cañaveral viviente"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "a2b49b241ea640ecb26cdd3256f327ec59a92795c2525fd9c63b08c1c786ac6c",
+    "text": "Guardia de juncos"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -3460,6 +3508,18 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "a082ae1fa55bf87ab6aed76f71da42322f80df077c4509f486e6a047f29703dc",
     "text": "Al final de tu turno, cada aliado que no haya jugado cartas recupera {{value0}} de <keyword0>Salud</keyword0>"
+  },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "40c16f9f0ee1a955f6778510e5e2087e1673684535229d788527e92a05d6c276",
+    "text": "El santuario de los sueños"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "1588d27e3da2d6eada17f1366491127536a6f1cb2e71010eaefdbbf7da6f64b1",
+    "text": "Sin prisa"
   },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,

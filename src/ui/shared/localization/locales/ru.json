@@ -3317,6 +3317,18 @@
     "sourceHash": "d772df48e3adc77a82d55651d80b01db469f75b8a9dfb017a8c88396598e83d5",
     "text": "Урон типа «<keyword0>Свет</keyword0>» и восстановление <keyword1>здоровья</keyword1> перескакивают дважды"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "8c7be11d1e463c2e588c4c2aa348b2c3ab4a46ae18d830621dd638d1caf87c4d",
+    "text": "Золотой след цветов"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "439b253d36b95453ac69eef550a76ecb7c34712bd367e4617c78f1344e932f75",
+    "text": "Перекрёстное опыление"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3352,6 +3364,18 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "7e4a58e135bb61a0403bb0b29ade2fd1569e85ec46208eebcf462aa35b3313fd",
     "text": "Вредные эффекты состояния, которые вы получаете, с вероятностью {{value0}}% перенаправляются случайному врагу"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "fa47e98f27ef60cbc685fa78da9d351c416425cf074e5b891933c5e949f6e506",
+    "text": "Хрустальный страж"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "3ce44dcf0300d9d4f2e4ea0decddbcbbeae6f7bcac5bf5799b5f80e7c7bff7dd",
+    "text": "Преломление"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3389,6 +3413,18 @@
     "sourceHash": "202ee0ec29a8d51aeabef3ad7e013d3b80db09542d0aa61ec9f72d4168a32a2b",
     "text": "После победы над <keyword0>горящим</keyword0> врагом перенесите его оставшееся <keyword1>горение</keyword1> на других врагов"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "a9383a093f14d688502604953615edee46d6bc6c0dc9ce502eda01b0e66517b7",
+    "text": "Искра праздника"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "94d8908a2591a329938c9c0dcc15a209f1d14437b027e42c51e625ca1919f114",
+    "text": "Переданное пламя"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3425,6 +3461,18 @@
     "sourceHash": "abf2ab04b9663530d9b3cc5e6696d093566bb1cacf0a8533b877870f1b11ed05",
     "text": "<keyword0>Блок</keyword0> и <keyword1>Шипы</keyword1> передаются союзникам"
   },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "420af098a4439c315c15412d6b8065f8e468e94ef9fd7ec12e2aea6e3f90b803",
+    "text": "Живые заросли тростника"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "137fbe7ae77264562ba78a06361008fdd2773624a28d3deff4a0aa4932521fa6",
+    "text": "Тростниковый страж"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -3460,6 +3508,18 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "5c05e6d99344c9ebf030da1ad4ee8b8691e470b52962cb987557cbfed5266665",
     "text": "В конце вашего хода каждый союзник, не сыгравший ни одной карты, восстанавливает {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "9830902a918ce90ca63c463a3d03ec0d5681c8e8ffcaa3b601ec6ec5e33e15a0",
+    "text": "Убежище грёз"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "ecee8eaf5188b4bc48d02c39c570f1e030fdec62dbe6bd0876310ef012f7239a",
+    "text": "Без спешки"
   },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,

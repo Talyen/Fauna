@@ -3329,6 +3329,18 @@
     "sourceHash": "2998cd9b0b5a48335bb6af5573609bf7c842b82b013c31b4ceeecfd64c87f0cf",
     "text": "Les dégâts de <keyword0>Lumière</keyword0> et la restauration de <keyword1>Santé</keyword1> rebondissent deux fois"
   },
+  "content.species.pollenmoth.title": {
+    "reviewed": true,
+    "source": "A golden wake of flowers",
+    "sourceHash": "5c2f9f1643f5f94a62dccc1886577cfafd914ea6e7ba657df9d191eec3e7f6f9",
+    "text": "Un sillage doré de fleurs"
+  },
+  "content.species.pollenmoth.trait": {
+    "reviewed": true,
+    "source": "Cross-Pollination",
+    "sourceHash": "c27cdac28f6a11b9d1766e99c9098205b19ceeff6fbd1df5efb120b0c5789a0d",
+    "text": "Pollinisation croisée"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3364,6 +3376,18 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "16211fb15077c468f4a4664e9aba6fbc5f6b3fcf402d1b80a037270654ae5814",
     "text": "Les effets de statut néfastes que vous recevez ont {{value0}}% de chances d’être redirigés vers un ennemi aléatoire"
+  },
+  "content.species.prismram.title": {
+    "reviewed": true,
+    "source": "The crystal sentinel",
+    "sourceHash": "2e348cc5bd65d62b5081a3171f0581e04cd635bf9650d4d0f586141a4310adcb",
+    "text": "La sentinelle de cristal"
+  },
+  "content.species.prismram.trait": {
+    "reviewed": true,
+    "source": "Refraction",
+    "sourceHash": "b66da028c22dbc95547590a84b5fd69a9734835a471109c116f6ca37c3ddda80",
+    "text": "Réfraction"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3401,6 +3425,18 @@
     "sourceHash": "34b111bf2673961bb572d2b99b085df6e5295df8cdfb154a4d744f1012be162d",
     "text": "Après avoir vaincu un ennemi <keyword0>enflammé</keyword0>, propage sa <keyword1>Brûlure</keyword1> restante aux autres ennemis"
   },
+  "content.species.pyrella.title": {
+    "reviewed": true,
+    "source": "The festival spark",
+    "sourceHash": "0bd1259d0428e998cce277441e8c52091c15d00d978992cbde7f78504ad4aa6d",
+    "text": "L’étincelle de la fête"
+  },
+  "content.species.pyrella.trait": {
+    "reviewed": true,
+    "source": "Passing Flame",
+    "sourceHash": "44b8a665146983cc778ea830529b9b966d0ff558d6dd7963c6dc9a047f7d06cf",
+    "text": "Flamme passagère"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3437,6 +3473,18 @@
     "sourceHash": "37f5a20cf4125cee43249bf84881529177e33a57ccffacb261247de00f1cfd0f",
     "text": "Le <keyword0>Blocage</keyword0> et les <keyword1>Épines</keyword1> sont partagés avec les alliés"
   },
+  "content.species.reedstag.title": {
+    "reviewed": true,
+    "source": "The living reedbed",
+    "sourceHash": "72cae7378b1ca9d861196fc1f4294d5c7c56cb0182459e1e4f4a5e98d4e6cd02",
+    "text": "La roselière vivante"
+  },
+  "content.species.reedstag.trait": {
+    "reviewed": true,
+    "source": "Reedguard",
+    "sourceHash": "2fd93bad57a5ad96ba3735c8b21ff6e65677fe33704e14ba83d1d478bcd30225",
+    "text": "Garde des roseaux"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -3472,6 +3520,18 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "cf93dc0e0b8612c37af4ed80de0dd9a984b2c66b75b3823d72c1b47caad82d41",
     "text": "À la fin de votre tour, chaque allié n’ayant joué aucune carte récupère {{value0}} de <keyword0>Santé</keyword0>"
+  },
+  "content.species.reverie.title": {
+    "reviewed": true,
+    "source": "The sanctuary of dreams",
+    "sourceHash": "8fb8661f656708d90feb467adf3aa3e27d2bb5b6a50c6c1fa0973e0ea039d33d",
+    "text": "Le sanctuaire des rêves"
+  },
+  "content.species.reverie.trait": {
+    "reviewed": true,
+    "source": "Unhurried",
+    "sourceHash": "0a1702686fdcbdbde42422e44af3f7be2d47b2ba25c0cd9c2653f7ced923713c",
+    "text": "Sans hâte"
   },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
