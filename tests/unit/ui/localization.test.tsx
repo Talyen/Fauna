@@ -83,7 +83,10 @@ import { resolveLanguage, type GameLocale } from "../../../src/ui/shared/localiz
 import { LocalizationProvider, useLanguage } from "../../../src/ui/shared/localization/provider";
 import { useMessages, MessageProvider } from "../../../src/ui/shared/localization/message-context";
 import { createMessageReader, type MessageCatalog } from "../../../src/ui/shared/localization/messages";
-import { eventPresentation, localizedPreviewMessage } from "../../../src/ui/shared/localization/event-presentation";
+import {
+  eventPresentation,
+  localizedPreviewMessage,
+} from "../../../src/ui/shared/localization/event-presentation";
 import { localizedCombatantName } from "../../../src/ui/shared/localization/combatant-name";
 import { localizedCardDenial } from "../../../src/ui/shared/localization/card-denial";
 
