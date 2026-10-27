@@ -4829,6 +4829,12 @@
     "sourceHash": "f73059ce757f93b80158d244059f01ebbdb7acd64d00651082c4eb6ed39b184d",
     "text": "失物招领"
   },
+  "content.status.blind.v0b0434b4eb43f4a6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
+    "sourceHash": "a47ff9bae2911f57dccb0e49ef953ad3847349e258b622dab359c76c7df95507",
+    "text": "<keyword0>致盲</keyword0>：下一次攻击有{{value0}}%的概率落空; 无论命中还是落空，该次攻击后效果消失; 落空视为每个目标都进行了<keyword1>闪避</keyword1>; 不叠加"
+  },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
@@ -4888,6 +4894,12 @@
     "source": "Death's Door {{value0}}",
     "sourceHash": "7685dca5f6d2bd8f42a604a47fea8a15a2240dcba43ac121bbbae88a276b3332",
     "text": "濒死 {{value0}}"
+  },
+  "content.status.negate.v74a74c8005c653ca.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
+    "sourceHash": "201ec53c81e7c8629f523737ba6888195e5ed6072d77537d9df851f5088c9c44",
+    "text": "<keyword0>抵消</keyword0>：在<keyword2>闪避</keyword2>之前<keyword1>抵消</keyword1>下一次受到的攻击，防止其伤害和有害效果; <keyword3>荆棘</keyword3>仍会反击; 持续至消耗或被<keyword4>驱散</keyword4>; 不叠加"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
