@@ -1505,6 +1505,7 @@ it("approved new Boons turn outgoing Block into Water damage only for ability sw
       id: `echo-${target.id}-0`,
       name: "Echo",
       species: "memento",
+      lastAbility: null,
       health: 20,
       maxHealth: 20,
       minion: { ownerId: target.id, side: "enemy" },
@@ -1515,7 +1516,7 @@ it("approved new Boons turn outgoing Block into Water damage only for ability sw
   expect(control.battle!.enemies[0]!.health).toBe(100);
   swapBackup(state, source.id, state.reserves[0]!.id, events, true);
   expect(target.health).toBe(95);
-  expect(state.battle!.minions[0]!.health).toBe(15);
+  expect(state.battle!.minions![0]!.health).toBe(15);
   expect(source.block).toBe(10);
 });
 

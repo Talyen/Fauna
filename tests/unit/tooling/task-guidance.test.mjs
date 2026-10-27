@@ -66,6 +66,7 @@ it("locates both implementation and query owners without guessing from names", (
 
 it("guides a matching layout capture without claiming visual approval", () => {
   const guide = uiGuide("layout", "battle");
+  if (process.platform === "darwin") expect(guide).toContain("heavy_lane.py");
   expect(guide).toContain("--label before");
   expect(guide).toContain("--label after");
   expect(guide).toContain("have not been performed");

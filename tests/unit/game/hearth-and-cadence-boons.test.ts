@@ -186,7 +186,9 @@ it("does not add another hit to repeated area attacks", () => {
   const { state, source, enemy, other, events } = fixture();
   state.boons = ["cadence-panpipes"];
   state.battle.repeatNext.player = true;
-  const def = { ...definition("prismram-attack"), target: "allEnemies" as const };
+  const attack = definition("prismram-attack");
+  if (attack.effect !== "attack") throw new Error("Expected an attack");
+  const def = { ...attack, target: "allEnemies" as const };
   executeAbility(state, { side: "player", actor: source, def, value: 4 }, events, { swap: swapFromCard });
   expect(enemy.health).toBe(92);
   expect(other.health).toBe(92);

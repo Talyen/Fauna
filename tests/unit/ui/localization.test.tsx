@@ -70,7 +70,7 @@ import {
 import { extractPassiveRules } from "../../../scripts/localization/passive-rules.mjs";
 import { extractTalentRules } from "../../../scripts/localization/talent-rules.mjs";
 import { extractBoonRules } from "../../../scripts/localization/boon-rules.mjs";
-import { BOONS, TALENTS, SPECIES } from "../../../src/game/content";
+import { BOONS, TALENTS, SPECIES, type BoonId } from "../../../src/game/content";
 import { BoonName, BoonText } from "../../../src/ui/expedition/boon-presentation";
 import { ruleMessage } from "../../../src/ui/shared/localization/rule-message";
 import { extractContent } from "../../../scripts/localization/content.mjs";
@@ -2274,7 +2274,7 @@ it("extracts Food rules for individual and team targets from the production desc
   }
   const berries = FOOD_CARDS.find((card) => card.id === "food-mana-berries")!;
   const cornucopia = rules["content.card.food-mana-berries.cornucopia.rule"];
-  for (const boons of [["cornucopia"], ["cornucopia", "nectar-dipper"]]) {
+  for (const boons of [["cornucopia"], ["cornucopia", "nectar-dipper"]] satisfies BoonId[][]) {
     const text = cardText(berries, 0, undefined, 1, { boons });
     expect(cornucopia?.text).toBe(ruleMessage(text).template);
     expect(cardRuleId(berries, { boons }, text)).toBe("content.card.food-mana-berries.cornucopia.rule");

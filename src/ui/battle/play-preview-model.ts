@@ -57,7 +57,6 @@ function resolvedPreviewModel(
   const affected = new Set<string>();
   const units = new Map<string, TargetForecast>();
   if (!result?.accepted) {
-    for (const event of result?.events ?? []) if (event.targetId) affected.add(event.targetId);
     if (targetId) affected.add(targetId);
     return { affected, units, messages: [] };
   }

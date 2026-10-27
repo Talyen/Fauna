@@ -80,10 +80,16 @@ export function findLivingBattlefield(
 export function findLivingBattlefield(
   state: GameState,
   side: "player" | "enemy",
-  predicate?: (unit: Creature | Enemy) => boolean,
+  predicate?: ((unit: Enemy) => boolean) | ((unit: Creature | Enemy) => boolean),
 ): Creature | Enemy | undefined {
   const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
-  for (const unit of row) if (unit.health > 0 && (!predicate || predicate(unit))) return unit;
+  // Enemy rows and their summoned units are Enemy values; player predicates accept either kind.
+  const matches = (unit: Creature | Enemy) =>
+    !predicate ||
+    (side === "enemy"
+      ? (predicate as (unit: Enemy) => boolean)(unit as Enemy)
+      : (predicate as (unit: Creature | Enemy) => boolean)(unit));
+  for (const unit of row) if (unit.health > 0 && matches(unit)) return unit;
   const minions = state.battle?.minions;
   if (minions)
     for (const unit of minions)
@@ -91,7 +97,7 @@ export function findLivingBattlefield(
         unit.minion.side === side &&
         unit.health > 0 &&
         row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId) &&
-        (!predicate || predicate(unit))
+        matches(unit)
       )
         return unit;
   return undefined;

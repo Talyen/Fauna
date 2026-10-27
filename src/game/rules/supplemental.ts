@@ -114,7 +114,11 @@ const rules: SupplementalRules = freeze(
   true,
 );
 
-export function supplementalRule<K extends SupplementalKind>(kind: K): SupplementalRule<K> {
+export function supplementalRule<K extends SupplementalKind>(kind: K): SupplementalRule<K>;
+// Callers that already checked a string may retain that result separately from the string.
+export function supplementalRule(kind: string): SupplementalRule<SupplementalKind>;
+export function supplementalRule(kind: string): SupplementalRule<SupplementalKind> {
+  if (!isSupplementalKind(kind)) throw new Error(`Unknown supplemental kind: ${kind}`);
   return rules[kind];
 }
 export function isSupplementalKind(kind: string): kind is SupplementalKind {

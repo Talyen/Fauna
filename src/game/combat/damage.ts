@@ -124,8 +124,10 @@ export function* negateAttack(
 
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number; dealt: number };
 
-/** Supplemental hits cannot repeat an attack, start retaliation or retrigger these Boons. */
-function* boonHitFollowups(
+/** Supplemental hits cannot repeat an attack, start retaliation or retrigger these Boons.
+ * @modifierContract Typed data-only binding; the runtime caller is in this module.
+ */
+export function* boonHitFollowups(
   state: GameState,
   source: Combatant,
   target: Combatant,
