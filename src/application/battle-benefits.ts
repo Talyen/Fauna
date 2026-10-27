@@ -111,6 +111,14 @@ function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
   );
 }
 
+function ordinaryDrawBenefit(state: BattleState, play: AvailablePlay, amount: number): boolean {
+  return (
+    drawHasAnotherCard(state, play.card, { kind: "draw", amount }) ||
+    state.boons.includes("mineral-bookend") ||
+    state.boons.includes("dune-shuttle")
+  );
+}
+
 /** A spent primary effect can still justify a play through healing or a useful draw. */
 function supplementalScore(
   state: BattleState,
@@ -300,10 +308,7 @@ export function battleBenefits(
       const blinded = allies.filter((unit) => unit.combat?.blind).length;
       return blinded > 0
         ? controlRemoval(blinded)
-        : def.draw &&
-            (drawHasAnotherCard(state, card, { kind: "draw", amount: value }) ||
-              state.boons.includes("mineral-bookend") ||
-              state.boons.includes("dune-shuttle"))
+        : def.draw && ordinaryDrawBenefit(state, play, value)
           ? support("standardUtility", value)
           : controlRemoval(0);
     }
@@ -371,9 +376,7 @@ export function battleBenefits(
       return support(
         healing > 0
           ? "healing"
-          : drawHasAnotherCard(state, card, { kind: "draw", amount: value }) ||
-              state.boons.includes("mineral-bookend") ||
-              state.boons.includes("dune-shuttle") ||
+          : ordinaryDrawBenefit(state, play, value) ||
               state.battle.minions?.some(
                 (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
               )
