@@ -2909,6 +2909,12 @@
     "sourceHash": "787e772c403f46f801cb007805e9be679f03f83b196d489f22aff45ccec53026",
     "text": "{{name}} блокирует урон: {{amount}}."
   },
+  "log.boonPurchased": {
+    "reviewed": true,
+    "source": "Boon purchased for this journey.",
+    "sourceHash": "cff124b44b28291783a1a1caef687c210b0ea6d6f56de255963ef3eecdb7029a",
+    "text": "Благословение куплено для этого путешествия."
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -2921,6 +2927,12 @@
     "sourceHash": "747bb82af0b37241507089fdd86d545ec5a7ee4cd0314a1d0ac46fcee9b340db",
     "text": "{{name}} получает {{amount}} ед. урона ({{type}})."
   },
+  "log.formationChanges": {
+    "reviewed": true,
+    "source": "Your formation changes",
+    "sourceHash": "a4d2c1de57169841016b0ece45c1f4b5c66faa92c197f29c5b525ad686c0ba86",
+    "text": "Ваше построение меняется"
+  },
   "log.gainBlock": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} Block.",
@@ -2932,6 +2944,12 @@
     "source": "{{name}} gains {{amount}} {{status}} buildup.",
     "sourceHash": "e3d6fc23ca3d59ca925f5b6f3ce97b9267d166a20e3afdcdf11d3d0999cb70dc",
     "text": "{{name}}: накопление «{{status}}» +{{amount}}."
+  },
+  "log.gainGold": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Gold.",
+    "sourceHash": "eeea1d4044bf370394d689ab4555984eb82d3fae1c14a043011d2418e0cf9d2c",
+    "text": "Получено золота: {{amount}}."
   },
   "log.gainMana": {
     "reviewed": true,
@@ -2957,6 +2975,12 @@
     "sourceHash": "e7a6012ca68ac3541a7808d88db139263b5ba91596a4cfa3b8a4ebc7fc458ccb",
     "text": "Ваше путешествие начинается."
   },
+  "log.knockout": {
+    "reviewed": true,
+    "source": "{{name}} is knocked out.",
+    "sourceHash": "45b2f3bbf8706f6c01317f4c08ebfd133c66f232b215d2a4a7f797695ec0294c",
+    "text": "Нокаут: {{name}}."
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -2974,6 +2998,12 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "40b0929fede0b5c6db86af6fe0e5d200eb249e00d717f1ba3a50e32d166e2dd4",
     "text": "{{name}}: {{action}} — эффекты не сняты."
+  },
+  "log.returnHome": {
+    "reviewed": true,
+    "source": "You return from the wilds. Discoveries are kept.",
+    "sourceHash": "48131a3ff6050c17666b35c185c9c980d969a053b0526afd5d2d398cf2039843",
+    "text": "Вы возвращаетесь из диких земель. Открытия сохранены."
   },
   "log.turnRestored": {
     "reviewed": true,

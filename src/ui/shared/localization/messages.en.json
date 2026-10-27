@@ -245,17 +245,26 @@
   "log.absorb": {
     "text": "{{name}} blocks {{amount}} damage."
   },
+  "log.boonPurchased": {
+    "text": "Boon purchased for this journey."
+  },
   "log.criticalDamage": {
     "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
   },
   "log.damage": {
     "text": "{{name}} takes {{amount}} {{type}} damage."
   },
+  "log.formationChanges": {
+    "text": "Your formation changes"
+  },
   "log.gainBlock": {
     "text": "{{name}} gains {{amount}} Block."
   },
   "log.gainBuildup": {
     "text": "{{name}} gains {{amount}} {{status}} buildup."
+  },
+  "log.gainGold": {
+    "text": "Gain {{amount}} Gold."
   },
   "log.gainMana": {
     "text": "Gain {{amount}} Mana."
@@ -269,6 +278,9 @@
   "log.journeyBegins": {
     "text": "Your journey begins."
   },
+  "log.knockout": {
+    "text": "{{name}} is knocked out."
+  },
   "log.removeBuildup": {
     "text": "{{name}}: Cleanse {{status}} build-up"
   },
@@ -277,6 +289,9 @@
   },
   "log.removeNoEffects": {
     "text": "{{name}}: {{action}} removes no effects."
+  },
+  "log.returnHome": {
+    "text": "You return from the wilds. Discoveries are kept."
   },
   "log.turnRestored": {
     "text": "Turn {{turn}}. {{amount}} Mana restored."

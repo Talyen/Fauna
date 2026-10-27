@@ -2909,6 +2909,12 @@
     "sourceHash": "49362037ccbfa5c563f14c345e237ab279c34b9c90e46e39a19add13135f7403",
     "text": "{{name}} blockt {{amount}} Schaden."
   },
+  "log.boonPurchased": {
+    "reviewed": true,
+    "source": "Boon purchased for this journey.",
+    "sourceHash": "c0d7770c0f493266e51dff05c810868d58c14b6fa593aa18b7631412e9258eb4",
+    "text": "Segen für diese Reise gekauft."
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -2921,6 +2927,12 @@
     "sourceHash": "da6c95129aad832f1304cdea2a66dfea570dfb2f84240e6d01dd0b3fed8a72cb",
     "text": "{{name}} erleidet {{amount}} {{type}}-Schaden."
   },
+  "log.formationChanges": {
+    "reviewed": true,
+    "source": "Your formation changes",
+    "sourceHash": "fb3c93e8e857261976b3887b2f8fea262b899e5009e8c907c18146987508b470",
+    "text": "Deine Formation ändert sich"
+  },
   "log.gainBlock": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} Block.",
@@ -2932,6 +2944,12 @@
     "source": "{{name}} gains {{amount}} {{status}} buildup.",
     "sourceHash": "fe6a3a62fbe8106837dc517e7217148d56e4983535fd97fd48a7fbac7699dab9",
     "text": "{{name}}: Aufbau ({{status}}) +{{amount}}."
+  },
+  "log.gainGold": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Gold.",
+    "sourceHash": "0bd10026dc6bada05dbc5922efa4f23a369cb33619aef42c3385f6f90c020ad5",
+    "text": "Erhalte {{amount}} Gold."
   },
   "log.gainMana": {
     "reviewed": true,
@@ -2957,6 +2975,12 @@
     "sourceHash": "377879b40e232d9eff645bb53958b3dc567d96a95ed509ea7b3c9fa3b33e131f",
     "text": "Deine Reise beginnt."
   },
+  "log.knockout": {
+    "reviewed": true,
+    "source": "{{name}} is knocked out.",
+    "sourceHash": "e1b4be8d36ce3b7bb12a18d9a9b233d07ecbebdcbf8d5accb0db8cf4f3d9b6e0",
+    "text": "{{name}} ist K. o."
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -2974,6 +2998,12 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "7045c036abd55036084814f8fc5e1f8c311bdf6265b0b4a1c035da5b69d42c6a",
     "text": "{{name}}: {{action}} – kein Effekt entfernt."
+  },
+  "log.returnHome": {
+    "reviewed": true,
+    "source": "You return from the wilds. Discoveries are kept.",
+    "sourceHash": "2b6c4bc9095e4a541ce13d10831b7f7679deaa5f7d98ed237aa837dc802f5c52",
+    "text": "Du kehrst aus der Wildnis zurück. Entdeckungen bleiben erhalten."
   },
   "log.turnRestored": {
     "reviewed": true,

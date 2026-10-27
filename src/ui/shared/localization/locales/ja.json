@@ -2909,6 +2909,12 @@
     "sourceHash": "2490b28d32a76aa4c843b71baa204b9d8106a96cead5926c04e368b3c6bc86ff",
     "text": "{{name}}は{{amount}}ダメージをブロックした。"
   },
+  "log.boonPurchased": {
+    "reviewed": true,
+    "source": "Boon purchased for this journey.",
+    "sourceHash": "26392d32caaa568973ff3e72754844b0fd648db517c038f16a5e58362599efb5",
+    "text": "この旅の祝福を購入しました。"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -2921,6 +2927,12 @@
     "sourceHash": "8873757c391ed0fea6ff677fa6dcb46f44b9a2031514f7fd489021e143ce37f9",
     "text": "{{name}}は{{type}}ダメージを{{amount}}受けた。"
   },
+  "log.formationChanges": {
+    "reviewed": true,
+    "source": "Your formation changes",
+    "sourceHash": "ae71c4eebf3e6586000f0aaf27fcceee98b5f0f2487032b88227fe2c910d0f26",
+    "text": "編成が変わった"
+  },
   "log.gainBlock": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} Block.",
@@ -2932,6 +2944,12 @@
     "source": "{{name}} gains {{amount}} {{status}} buildup.",
     "sourceHash": "b086ad1f62ea92e3fc7fb64ad4d2be954567602de885055a9de701e42da33a65",
     "text": "{{name}}：{{status}}の蓄積 +{{amount}}。"
+  },
+  "log.gainGold": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Gold.",
+    "sourceHash": "1f9a8288a9098957bca01c325250b3140dec346a33cde60205c0fb5167fedcf0",
+    "text": "ゴールドを{{amount}}獲得。"
   },
   "log.gainMana": {
     "reviewed": true,
@@ -2957,6 +2975,12 @@
     "sourceHash": "a6b3d9f14a1dcbc6c09967ad865576b4508eea27407b93c7c55ae28bbde81b21",
     "text": "旅が始まります。"
   },
+  "log.knockout": {
+    "reviewed": true,
+    "source": "{{name}} is knocked out.",
+    "sourceHash": "2d99c27a7bbea59a267ed125ad199d4952f3b0b81a7e740cd9baf2fcb17eadab",
+    "text": "{{name}}は戦闘不能になった。"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -2974,6 +2998,12 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "e84c3f4bfc1324af913a24c419c5844bc6e97e64f0005168f2f4b6ce36d896c0",
     "text": "{{name}}：{{action}} — 解除された効果はありません。"
+  },
+  "log.returnHome": {
+    "reviewed": true,
+    "source": "You return from the wilds. Discoveries are kept.",
+    "sourceHash": "9e6ccf6977846cf547ea67733133d4f6a1340e7ae829875eddc9ec76fd92cbdb",
+    "text": "野生の地から帰還しました。発見は保持されます。"
   },
   "log.turnRestored": {
     "reviewed": true,

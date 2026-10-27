@@ -2909,6 +2909,12 @@
     "sourceHash": "22395139cf077464bb1936cc58d30b6a1e0f66a266e94f835c5156c788392ed3",
     "text": "{{name}}格挡了{{amount}}点伤害。"
   },
+  "log.boonPurchased": {
+    "reviewed": true,
+    "source": "Boon purchased for this journey.",
+    "sourceHash": "cde852c48b4cde8ef1b88831cc62c926dde81766fd412eb7081d7702acdaf309",
+    "text": "已为本次旅程购买祝福。"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -2921,6 +2927,12 @@
     "sourceHash": "ab57890cb6b9c89b5d6c9277e191217d221f3848c65a8be3a16ffb80181a1234",
     "text": "{{name}}受到了{{amount}}点{{type}}伤害。"
   },
+  "log.formationChanges": {
+    "reviewed": true,
+    "source": "Your formation changes",
+    "sourceHash": "f47b9aad66421d3076e36d9ba4bcfda839bb7a03dac8afb5779c48a445caee91",
+    "text": "你的阵型发生改变"
+  },
   "log.gainBlock": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} Block.",
@@ -2932,6 +2944,12 @@
     "source": "{{name}} gains {{amount}} {{status}} buildup.",
     "sourceHash": "a0c58fb3802dff653219fcfa5d0d6c00cde1e8569fc2b99c6fde1d050f188d5e",
     "text": "{{name}}：{{status}}积累 +{{amount}}。"
+  },
+  "log.gainGold": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Gold.",
+    "sourceHash": "4ac5d347f8a0c15ba14041bb647deda45191b4eecd6487f3c98fbb770058354c",
+    "text": "获得{{amount}}金币。"
   },
   "log.gainMana": {
     "reviewed": true,
@@ -2957,6 +2975,12 @@
     "sourceHash": "107054dc236a3ea5f1859203b6f0c5c609e38c7f2ec72d0d144bcc2f1344591d",
     "text": "你的旅程开始了。"
   },
+  "log.knockout": {
+    "reviewed": true,
+    "source": "{{name}} is knocked out.",
+    "sourceHash": "6b193d08fab442fae7f0e846b44d34e722ecc0031e3dd1033c820477b252c869",
+    "text": "{{name}}被击倒。"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -2974,6 +2998,12 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
     "text": "{{name}}：{{action}} — 未移除任何效果。"
+  },
+  "log.returnHome": {
+    "reviewed": true,
+    "source": "You return from the wilds. Discoveries are kept.",
+    "sourceHash": "17478189a0951aaf75aaa662444195a9e35fe7fa6fdd21c9f2836ae94432b0e7",
+    "text": "你从荒野归来。已保留发现成果。"
   },
   "log.turnRestored": {
     "reviewed": true,
