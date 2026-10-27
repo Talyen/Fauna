@@ -515,6 +515,30 @@
     "sourceHash": "0075cb813d9a142987118957672f314a213659096d164ab3793e775c2dda83c3",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
   },
+  "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "f2e4ddf12d212c4df399825ffc25005155061b1fed63e3b95b0b2882661e088e",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "a3008d015cf37ff45c0e92c9a6ff29755a7c32d739b5cbc42b21d26e3684c7d6",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "176e4c00b9ea080a6a556335bf6f49abe7ff6b4ae0b1029ba9be2c49a2c1bbe9",
+    "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
+  "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "a9c8bed2689d8683e02cdeab321ec5ced26db75888ad955be78401f21c3905d6",
+    "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -581,6 +605,18 @@
     "sourceHash": "c662c28932695c63cd5fabb5c35982eb6002df23b5a0ab6f1d2035c6b42af0f4",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
   },
+  "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "558a6dffc87ebe2606ce155ff9f3e10e14a5f21214fe9558fa6154c0ceae7295",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "0e3bc788ae3e344c9133c2c0a53850affaf54635cdc1993b833d5126236ecd8f",
+    "text": "Добор карт: {{value0}}"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -604,6 +640,30 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "09a768e01ac9f08c2bd0dc3bc96988515f221e07d3f79c051326873c478ab00a",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "03d6b448df8b248e330556ed65ecfe2bd5b4bb5b5347fdd8ebb2bff5d7b68018",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "cba5acf03df66386528a444fd9a8200dea88ba71c5210d3ff6eae6ebbdbf33e7",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.neradora-tide-cup.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "851b3bc743869dd757f88090fe05b457e9c25cb178645e638ffaf8a51f4fde0a",
+    "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
+  "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "295f0b47d5252e9e1954b71e2f6c80dae537709a39280913498cc7b62e7425d5",
+    "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
@@ -647,11 +707,95 @@
     "sourceHash": "5b2ab1e6733b0d82f42554a8f0b067eb2112c1bbf836698b01a806bdcd69b8f8",
     "text": "Нанести {{value0}} ед. урона <keyword0>светом</keyword0>; <keyword1>Рассеять</keyword1> цель: удалить эффектов: {{value1}}"
   },
+  "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "ffc0856fd45458d59aa79e8ad6c15aa909cd4f28e2ec4f517ae8e25e57cbc79b",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "08c9f7ea9b387ef817629ee751f9b3ebd8e930570d18c48c73c5601068e914b5",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "be9e99e3d47a204e73fdd6fe7f24494f9e9237fa3615c4dfea8c314b9d02d0ed",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "06459513e7d38bc676719cbb18850affa996f127f414799ad15c8c25e7d6b213",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "558c9b00d9159fe121142d314cc6a82683f4e06e9532761853513f3cff4fdb18",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "f0296c679ca22a0d011d6be82a82834a49a97f88ea1a77ad8c453d3d91af5844",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.shadebrim-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "0b2fd58cdf2a30ae2c5b154cab1756884766d21f74185bf3f8ed6a33713a5977",
+    "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
+  "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "15cb705eef8ebf391a133fd1214326f13539ed1e32b7b787e0667bc46f21c5cf",
+    "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
+  "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "81df543c1faef80c3f88458affdf8683e53b619a00b12a02a17e893488ab18c0",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.skybex-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "bb3533084605512d00537891d097e2280971d2066644d477737574dae21290c4",
+    "text": "Добор карт: {{value0}}"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "ae397fb38f658e5a4e5133bcbdae0988a1259addf4b000a00e2b7411030bac17",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "05267e111016179ae79fd9f7de352bda71c34cea420c308233a1cd72414103d8",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "6a71b89d29110cada49782a1fc5192ca44efc240d6b03ec5c81c6f0fa4105968",
+    "text": "Добор карт: {{value0}}"
+  },
+  "content.card.wickwaltz-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "17495f4fb9cf6d67a888a4b991c9744d05a65c246e3922f5c0c2fd76af3142d2",
+    "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
+  "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "59cf8bbab7841de4f6f87b361421530108123d9bbc9728a06a356a467765867c",
+    "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

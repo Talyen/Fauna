@@ -515,6 +515,30 @@
     "sourceHash": "9c2f636de458c0c9a9e221ab880a4c83b4b15dd8b77681c00d9568a02461fa51",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
+  "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "764922d33c679da39f97e02f86c31c526d81a6b7001d9d0e78d77c5ee23a07a8",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "83bbc6f2e450144963bf3e0fe4b02042de5dee289204e06bfb629a66feea6b79",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "faef54b99b60cba1d680e6b30eeef5f5302f1d7d0b16eba17a699d0ec244d59e",
+    "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "07356005106008f44a4972c648ea4c61871369abe6fce9cd2eba755a5446c02a",
+    "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -581,6 +605,18 @@
     "sourceHash": "9052deaec2cf163dbd2fc23bfe817738f67cf9a9879c598bef3a916b8494c475",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
   },
+  "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "b776dcdb186029c72a4cb55b82812493c5f82a24a45c5a4d87efc05c99fd3b18",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "ca9a67617384e38f31db764e7729082f7a5be4b5cdf9f7bb9061c0aa92f9dde2",
+    "text": "抽{{value0}}张牌"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -604,6 +640,30 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "2f5f0549d0f16ddf90742b2aab466595719d23c4f223574fc820bd905e061b91",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "1c564fbb264c6bd51a98292f72f53b4348d1d7d638df9103d946a39fb9efccff",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "e9cfebd5440120c6c35656079b6c8e217f437e7649e7ffeb4adc3452211e045a",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.neradora-tide-cup.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "66f984489bd65c47c1db4f6ef421c9ccd5d7aecb32fceaf31918143e1822326f",
+    "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "529d329dcb9119f8ff24af8d6a516e276184ae6bac6eef29b625391cd58a7fb7",
+    "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
@@ -647,11 +707,95 @@
     "sourceHash": "9087d65f4358b070975dda0bdafcdcf8b6d0e9fd6debd9eb6e68dda9bd5e587c",
     "text": "造成 {{value0}} 点<keyword0>光</keyword0>伤害；<keyword1>驱散</keyword1>目标：移除 {{value1}} 个效果"
   },
+  "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "3ddaaf46299eb67d96ae34e9242a59018bdf02e3a773d0bf180de98ba2ffb286",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "e1ad593458278ff4337c134735ac3782e9bad17157e1f2590c11ed73938827e4",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "5db2b360be0d8e44f75cb745a69a92ca013e86c887cd64cb1d811c93d085179f",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "79e1622b37d610dba2902ddbcd30c0913f13d70cc5fce950ab2df2a3ffde0a2a",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "2ffb64b34706282151e32d510411535ab97cda454d6163b0f62f75ec1e8fc044",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "1a14a1ac528a5f7a034d38d3326a6e900b06602e2f40c0e1bcfed522ad7227ad",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.shadebrim-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "b13e662839cac0a5908a6bc330f1ef4f12712dc126a369fe4b8a51545ecf81cc",
+    "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "3438d4d7671f830d93c90941682b3b330069a09e2fa1757c979e08902d994473",
+    "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "505c659c0eff05f678d339cbbd1abf1a401c3d73b2cd6ef8dc064cf5067abb4d",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.skybex-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "b1dbe4106465559e3d1b0bd7fefd2ac240da5c6d7158c746ced516a22e89a020",
+    "text": "抽{{value0}}张牌"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "80e4f7459a1145c0aceffab163413b05c054382c1af5aa17aca8b830d3a9c0a1",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "9abae521e3cc4523a3a25bb4a2580dea148e4577f6c91677b0b540372117bf7b",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "93fcb760ea9863627c4b04d9756d470d81d8aef905261bc532ce66bd82038da6",
+    "text": "抽{{value0}}张牌"
+  },
+  "content.card.wickwaltz-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "ddea0ea3025bf365d1f174a99f23daaee0738a5fdeed02cd6e6b09c9fd870166",
+    "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "96abcf90bd50f0475f2b2ab0c5765fdc1de9f0e432ecd12617768157dbc22ef7",
+    "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

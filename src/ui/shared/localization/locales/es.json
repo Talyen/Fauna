@@ -515,6 +515,30 @@
     "sourceHash": "6abc5736f5aa5fc473f502d5a50b5a1667f737673b55dd87711526e51d8cdd92",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
+  "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "208dbbce046dd30bd382edb85b056af279bd7fe635344443e6ce28f10187da1c",
+    "text": "Roba {{value0}} cartas"
+  },
+  "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "c4c64cd7b6694fe88690b06ea4afb1553d550ab4b3022f282811f7a7e0490dec",
+    "text": "Roba {{value0}} carta"
+  },
+  "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "1a1cc437f86ad07aab5699adc9fcb0259807894397ce967b614c5449fbeb3cce",
+    "text": "Roba {{value0}} cartas; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "42ed8cd0908c9c57a4ea8c16cb6ad341874cc40c57e61875fb0886d1655b96e0",
+    "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -581,6 +605,18 @@
     "sourceHash": "4b95ac2346db8c9d0cc4c8ce4efb48cb65d4180e84696e5178fef4259a9c46d0",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>; <keyword1>Consumir</keyword1>"
   },
+  "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "2a765d940a7cc9ac245d791a75f77b8b24af94484abb5f0efad971093e216d9e",
+    "text": "Roba {{value0}} cartas"
+  },
+  "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "0c83ca78215a22d5ef9e634bb6b025e1c9c8073ebf27092da54e4a3a942d879e",
+    "text": "Roba {{value0}} carta"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -604,6 +640,30 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "7d4903bde0383b23756e60c06042b7a7f87d3f0c906d12dfed098b9fc455eb46",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
+  },
+  "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "41278b00cc926f2e87478be0b3faf15961e8680067cf52b02351c006fad35819",
+    "text": "Roba {{value0}} cartas"
+  },
+  "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "35f5696710007d072fa80e99b349ae55c489ad98235e9bd37f204617584dff02",
+    "text": "Roba {{value0}} carta"
+  },
+  "content.card.neradora-tide-cup.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "be54458e82244fc10e2d999e22cbf6814553deca61338bde59d5b38f31628159",
+    "text": "Roba {{value0}} cartas; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "69dcc1239cf3b2670777ef5465eee01e2266166315b916a14f683aa8e0b36a2d",
+    "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
@@ -647,11 +707,95 @@
     "sourceHash": "4622f18c2489617f5d9aeaf0ff5ff11f98763b70e87ac525835ce6b1ca9d16bf",
     "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0>; <keyword1>Purga</keyword1> al objetivo: elimina {{value1}} efecto"
   },
+  "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "11434fa89f9e9e0f406298d99cd9dcb7151165c25753b55e298896f49b54f26a",
+    "text": "Roba {{value0}} cartas"
+  },
+  "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "04f3b93444dc2990f62cbe06a7900b550e06303245f4165ea38cf2bd39da77bc",
+    "text": "Roba {{value0}} carta"
+  },
+  "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "ea867352ce53d785a01c576ba65d49f33df9f55e137bbb6cea9e4f7108af857b",
+    "text": "Roba {{value0}} cartas"
+  },
+  "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "7c031b1b685816644af38fe7b43d731f05aeecd0aa83a6259f0012e7a75dfc79",
+    "text": "Roba {{value0}} carta"
+  },
+  "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "ea2c645bb6044b26dc94d9db49e16477db0e4f702d97efc85bd1a7783e8c3afc",
+    "text": "Roba {{value0}} cartas"
+  },
+  "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "bba2f29d35880fb49fffe15fa184b8bf964eaadf618d1e6c3a204e1e2bd66760",
+    "text": "Roba {{value0}} carta"
+  },
+  "content.card.shadebrim-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "7ed732fe168c883bd8f790b85d38ce499ed9c1b4898ad85892ee9fdfd75c3688",
+    "text": "Roba {{value0}} cartas; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "13fddaf85ffff5252e9aa9cd84f8bdcacdaf27da7f11e5849044444cfab64555",
+    "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "10fb5b985b819991b1da3e8241adc53ddb76095991cea4bf1dd3deda69330c41",
+    "text": "Roba {{value0}} cartas"
+  },
+  "content.card.skybex-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "925c448f624959f1a14f4efda9243519c601a130ad8c58f5af27aa19a45aa40e",
+    "text": "Roba {{value0}} carta"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "ae708bdd576adb2e8246c6390944186a50166794915d15804b31e5b9ec1693f5",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
+  },
+  "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "fd4e31d9d8f3237b1ae29118fb783b536e579e9eaf102d7d6f1b31d2c18330f6",
+    "text": "Roba {{value0}} cartas"
+  },
+  "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "debf7884ab1182074cb7da42674385d33321ab18afd02b08d2559179580f5498",
+    "text": "Roba {{value0}} carta"
+  },
+  "content.card.wickwaltz-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "fc491774107e30e7be2ad342b8b0204a0446eb34e789ac760d770482d287a75d",
+    "text": "Roba {{value0}} cartas; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "cabd689b98b05c1fd5d94905a588c3031c68f4e2916a27b6e8c83b706cf86e2a",
+    "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

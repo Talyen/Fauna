@@ -1769,6 +1769,49 @@ it("uses the same localized Food rule in tooltips and accessible card names", ()
   view.unmount();
 });
 
+it("presents reviewed draw and Mana variants with their actual values", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const card = definition("wickwaltz-draw");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={card} value={1} />
+        <CardRules card={card} value={2} />
+        <CardRules card={enemyCard(card)} value={1} />
+        <CardRules card={enemyCard(card)} value={2} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Piochez 1 carte ; Gagnez 1 Mana",
+    "Piochez 2 cartes ; Gagnez 1 Mana",
+    "Piochez 1 carte",
+    "Piochez 2 cartes",
+  ]);
+  expect(view.container.querySelectorAll('[data-keyword="mana"]')).toHaveLength(2);
+  view.unmount();
+  localStorage.removeItem("fauna.language.v1");
+  const russianView = render(
+    <LocalizationProvider catalogs={{ ru: russian }} qualified={["en", "ru"]} systemLanguages={["ru"]}>
+      <TooltipProvider>
+        <CardRules card={card} value={1} />
+        <CardRules card={card} value={2} />
+        <CardRules card={card} value={5} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...russianView.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Добор карт: 1; Получено маны: 1",
+    "Добор карт: 2; Получено маны: 1",
+    "Добор карт: 5; Получено маны: 1",
+  ]);
+  russianView.unmount();
+});
+
 it("reads authored card description functions without executing source", () => {
   const abilities = readCardDescriptionFunctions(readFileSync("src/game/rules/abilities.ts", "utf8"));
   const extras = readCardDescriptionFunctions(readFileSync("src/game/rules/supplemental.ts", "utf8"));

@@ -563,6 +563,30 @@
     "sourceHash": "7b8c9f1c65074462f19a2888bf91235fff26cf4d9213e58bb97aaf3225aab712",
     "text": "Gagne {{value0}} <keyword0>Blocage</keyword0>"
   },
+  "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "83d577bb40d1905301681467862fcc3bc6027244fb098bca07ebe4be147b06dc",
+    "text": "Piochez {{value0}} cartes"
+  },
+  "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "fab7d60fba0009aa437e78adfc808ce0238f4730243da7f37c38604457b4e21c",
+    "text": "Piochez {{value0}} carte"
+  },
+  "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "c8dc13f518f21078921d63c04ca2a29f324f0bde1f0b258fe43fd9e2cf1dfefb",
+    "text": "Piochez {{value0}} cartes ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "1a29c1d9f2f16f7228c7106d2cd6b383263760fc0eef4a98f05a1b97d6082efe",
+    "text": "Piochez {{value0}} carte ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -629,6 +653,18 @@
     "sourceHash": "16466e95a192f766e9463139ae0153ef50e9791644e791cf7ad7c35f31a3c47a",
     "text": "Gagne {{value0}} <keyword0>Blocage</keyword0> ; <keyword1>Consommer</keyword1>"
   },
+  "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "efc514b382c1821f159e7db3d1241b256abba6985812af85b6475a0f3d68b5d3",
+    "text": "Piochez {{value0}} cartes"
+  },
+  "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "4e9c46d7ef3b9ae3e4bb428e6828dcadff9babd14ce8f54169f525729685672a",
+    "text": "Piochez {{value0}} carte"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -652,6 +688,30 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "5524e0374b257d13148892310a5d93afed4e0e9d907d3c61f860bbff0bf5ea9e",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> à tous les alliés"
+  },
+  "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "ba11050a62331d324574ed7ca753cf988f9715840d2a89a0e5108d3865dc82d5",
+    "text": "Piochez {{value0}} cartes"
+  },
+  "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "b4ba6060859b94a15ecc08bd8c5100e31e93bfa193815efb8a3408103657baa7",
+    "text": "Piochez {{value0}} carte"
+  },
+  "content.card.neradora-tide-cup.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "a62a78363bedfa78747d5c43f7a3077c0bc1fdc7fe5e5cd70957ee6aba79becd",
+    "text": "Piochez {{value0}} cartes ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "ba23026f4c60ca65517a02ce15dcf76b09b59eb6a6101ef0eb97764112427aef",
+    "text": "Piochez {{value0}} carte ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
   },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
@@ -695,11 +755,95 @@
     "sourceHash": "c728b8c4f0c2425dc86e08cf4e27e3f05863ed0c404b9c4ecc87a950f3f55985",
     "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> ; <keyword1>Dissipe</keyword1> la cible : retire {{value1}} effet"
   },
+  "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "011fb82fc0953c415f264fdc9f0d0bec0377d5b57b4c0eb5ea7b01d44435f3cb",
+    "text": "Piochez {{value0}} cartes"
+  },
+  "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "8324a8329a0f00a9d61e93572968ff0260e270381a2d3b16970f47c1508729a2",
+    "text": "Piochez {{value0}} carte"
+  },
+  "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "da5478cac6f0c53f240261ffa3225193cea34070600a9c4d46b3274f50b6018a",
+    "text": "Piochez {{value0}} cartes"
+  },
+  "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "09f7aab462f5d2ee15aea97941ef731a03479ec053586224fbf7602f73c12107",
+    "text": "Piochez {{value0}} carte"
+  },
+  "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "4477ada3701f53595fd2d30d052df3ad26bb479f3e80c5e516159635b9d86b01",
+    "text": "Piochez {{value0}} cartes"
+  },
+  "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "4bd6f7ba443c68521bda77d39b324b043940cf4f137d3d0d7d19a9032d041b7a",
+    "text": "Piochez {{value0}} carte"
+  },
+  "content.card.shadebrim-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "c8042c6feb90aaf84c8b2911a2178279c481dada2b5d3b47d9e1aab1ed6031bd",
+    "text": "Piochez {{value0}} cartes ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "558a5193b6c95dfb4a1990adf2005ab0a030e7ece571b41d94f9476b82214d6e",
+    "text": "Piochez {{value0}} carte ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "bd0123186a335b3baa2b1a1ea69581b1e21d14bd0b8c1dc69971a3eb2bf2a644",
+    "text": "Piochez {{value0}} cartes"
+  },
+  "content.card.skybex-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "9665771c579aac941d5b6a3027c63797c7c02e2064de6859e25f8fa762d613ec",
+    "text": "Piochez {{value0}} carte"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "300fc647e7b5317e1e4e8f1b9f77a87ecea87649e686ec1ef158124d639a2315",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> à tous les alliés"
+  },
+  "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "306085a29f94591c358c794655504790a0a8df6e2278e8c156058a1c23692af1",
+    "text": "Piochez {{value0}} cartes"
+  },
+  "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "27c1f34aa13225833cbe9b3df5e9b64c87e5563b1009249d4325b8fa1c251e2d",
+    "text": "Piochez {{value0}} carte"
+  },
+  "content.card.wickwaltz-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "73b8fcd71580eceae850c6eefebeddac17efb1843dbd34c7e2b66ebb97f8e77e",
+    "text": "Piochez {{value0}} cartes ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "d63c128952034c0fee3355b6d15ab42e7a7a75e13aa341db5f1a9a00f3b95242",
+    "text": "Piochez {{value0}} carte ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

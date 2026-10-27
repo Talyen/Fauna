@@ -515,6 +515,30 @@
     "sourceHash": "5d08a38a57e5bf3d331a5a49805c44287b61aff3448a4fe2896d8d691258680c",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
   },
+  "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "a68f7c1f2db2fb95dac8e3cacbf36bcda56999a218973220ace9f59f2a4c247a",
+    "text": "Ziehe {{value0}} Karten"
+  },
+  "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "d4e992f6bacf28a071f0790edea045b228c86fec9cdedf8880796c5777937f50",
+    "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "8e6c3cb5af9d889b06fa31c6d6e7f37d392a618826f950071f540f6d3c0efd67",
+    "text": "Ziehe {{value0}} Karten; Erhalte {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "024126437235e52b3a99691a8d14e3630b7a08367f5be25fc9e14daff7c0affd",
+    "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -581,6 +605,18 @@
     "sourceHash": "d20756e6b139b74a383dadb7cdaf6ab99bed5a9085a9c34b85c797e677c026c2",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
   },
+  "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "5abb7fd67101d25c3e61eec4fad28f70c29579fb87e31c1fe127a01487e3f9f7",
+    "text": "Ziehe {{value0}} Karten"
+  },
+  "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "7170aa5d0fd2a377b950155acd702539b838cb64c1e81593a7e77b322268df39",
+    "text": "Ziehe {{value0}} Karte"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -604,6 +640,30 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "e3498b036be89eb6f847bd0325e2da4a8f157210f0b60df049db5321a8581925",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "411b108aaa78d428a1034d07b7a1f2639acf8435f1aaa27d858279a11f5772c1",
+    "text": "Ziehe {{value0}} Karten"
+  },
+  "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "8f86cdc73acfb0c968144e7964523c7e35f28c5fe84cf9f0c1f44b4fd319c68c",
+    "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.neradora-tide-cup.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "f29b452ee76aaf408ac25ce9f81d8f9568197c189478385851699d57b2b87a4d",
+    "text": "Ziehe {{value0}} Karten; Erhalte {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "5487536b4b0c1f976dacf0aca81ecca9e4e11243f5335b95b771b0d355adccfb",
+    "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
   },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
@@ -647,11 +707,95 @@
     "sourceHash": "f3976bbe0ac7c3f458f6b048660bdd70aec812269ac3182f4171097ca8a41a88",
     "text": "Füge {{value0}} <keyword0>Licht</keyword0>schaden zu; <keyword1>Entferne</keyword1> {{value1}} Effekt vom Ziel"
   },
+  "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "43eac78223bf4f1fe9ee9150836ae18a33e1d6a3e9a51950ab7a06ac0c53f52a",
+    "text": "Ziehe {{value0}} Karten"
+  },
+  "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "cbef235e68b9e21b81b1f96178443b281da359f731d02566bc629859f5fbfe32",
+    "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "46349a1fb794baec33f8c9df807c71682fb8ba5eb6850d29ef3b7fe3cbb5f64b",
+    "text": "Ziehe {{value0}} Karten"
+  },
+  "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "06a3eb42e449d752493b96188f808af4f42bccdeb5ca555cb5b44225ae13578e",
+    "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "54d1e14fca90ae6141e4de81e3c84238f7cd4a415fe145a9eb09b9274aa59319",
+    "text": "Ziehe {{value0}} Karten"
+  },
+  "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "9a1ec3ea860270edf28412f8c4f5d1411d16ee2a189f6bb741c88a8e91b5c0d5",
+    "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.shadebrim-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "bd63c15e469805a2c491d7b1b9e25f1661ba11d58118f79ea7916bc810632599",
+    "text": "Ziehe {{value0}} Karten; Erhalte {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "02f07033c252f2388acf6f696f219a43044ed4ac471bac50562ac2cc1744413b",
+    "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "445f6a3ca22fd742dd547c4f9db3de3e7ab6b66bef980937f6267ce7efc8c461",
+    "text": "Ziehe {{value0}} Karten"
+  },
+  "content.card.skybex-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "56391f8e54733b552d827ccdc357884ea7b0b294c865a694c673de93b3432b99",
+    "text": "Ziehe {{value0}} Karte"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "b5caa068add01640c0bf807173baa0664a28348149e15bbe1aab9ab96b83e1ea",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "4abb6a97c2e6fa4f7b5c6850c5a5ea477be694407f70e9bf730a6fda54703e39",
+    "text": "Ziehe {{value0}} Karten"
+  },
+  "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "17c8a0a5312511fbcbd0142fff4039234673a525c9d72c366d24ca781aed944e",
+    "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.wickwaltz-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "3b14aadc937677fa20b33f14e94b202c2ded21295e8bace9c7eff1ad75f80656",
+    "text": "Ziehe {{value0}} Karten; Erhalte {{value1}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "2c755737f441d49d87c32b30c11aba45b76cca607aa3b8355d7b80eb01d73435",
+    "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

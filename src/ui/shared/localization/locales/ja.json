@@ -515,6 +515,30 @@
     "sourceHash": "61f0295fc178d27cfc6fd80020f3375571aee701bec1e374514034ce8eee4cbd",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "79cc66bd8d9f787c6a4cf78303b6db93449d151f631abeb5365517095122e3f9",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "f536c5a1bf74ff7a73019a19010d2e0d322f9435b0ce7af0e0da976aa66c6f76",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "729cd76388c96ef9f58cdb157bc23e994b24fa679f79f193eed15388a2f7a4dc",
+    "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
+  "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "90df205ebfa58aa7e3ee24c7d4d6f9bd457c5c44931425e7573a9181d56bd73b",
+    "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -581,6 +605,18 @@
     "sourceHash": "030720f4314043dc32b0f0e58acb79a354e69ee57257cfcd4315b1d60c36fea9",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；<keyword1>消費</keyword1>"
   },
+  "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "aab579c7a89ec242bbe651dc9531e73744b35a28024ebcbaaeb3d581f847c6cc",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "44ccb7c32cb99ed76494480881ffdd5276f0b9701ac8f5e4f06cea1e0f50ce43",
+    "text": "カードを{{value0}}枚引く"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -604,6 +640,30 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "53ea86f603adde373da0c8bfdd33ea041eca6cdd2971c22455306e93b4252232",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "b747a82b5d95d7c6c03980af60d9a0fdf1a9af247c849df61bdca83a39421cf4",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "8f792a197bd8cc376520a8f64f6d6f807446e0fafbb5ccea49f926531fd7294a",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.neradora-tide-cup.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "8d13f79a909bf42dbf9ba23496177e9bbfc2e867f3a190825083e439d5f2f425",
+    "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
+  "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "cd2f758e08031abaa6db15161a0da8c20b48fce2d465504336b0842a87373739",
+    "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
@@ -647,11 +707,95 @@
     "sourceHash": "dd90cd704804766f06ac76864c1800a512b442870777cc8b803222880ffbcf07",
     "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象の<keyword1>強化解除</keyword1>：効果を{{value1}}個取り除く"
   },
+  "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "30e6af9a44ee6e7d1f5bf298ce0878eae8bb29d01d2d73ffae2d7b96a85aaf2b",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "b621a56a1cbfbb42532f4d8a9ff1ba3e73a1d0fc5d5ddfb30e8539a05dd9734d",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "ce6d0bb61a62e0cc486d61823ee8458b4111b77522675d20aaca72d2ee98ae29",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "5e3aba9c5f05369c44f0a26e5b00d574fa27ddb725f991f78c75e1fa90f46699",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "668fdbcbf2e28fb248a6aa00a66a60233f744da5b19be10a41e418a49c61bd5c",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "078ca283cb640269d61d5a5796d8111c61328b9a869d1e2b8b3a3214d63cc7ae",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.shadebrim-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "088ffccc52e5b2caca5c5a993027baba8f4d98661f1728903f48805d0a37ab10",
+    "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
+  "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "f8fe9e5250761b781b5edd4cfb0e4867b122f1e72368b4835f5117f258ad07ee",
+    "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
+  "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "623ed8745f18c35397dc619296edb49a4dc65bbb6e1e1923ebafde3aa06b30ec",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.skybex-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "207a3f1bc0938509a0b9d125d77d3c3aa97c68d063640ee9a53ff34c478e817e",
+    "text": "カードを{{value0}}枚引く"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "67ce9d6a43ccd096543f1304f3076ac576af54d13078ffda67086275837eafea",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "3897ba5222fd1416ba3e750bf46a76821b5eb0419004c527a021699c511efe79",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "3162d8cf418d124f6b36bed770a7f98aca6c3a39755d84b684b2ef39bf60fcb0",
+    "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.wickwaltz-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "357888a2a76aaf0d9d5c97f41e8212cc00c6911471733e8d9c7850a340be5e8c",
+    "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
+  "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "d02aa965ada781b5d160c3a20d5d6cd395998d2157b05a4c3eb1f2799169c3f6",
+    "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

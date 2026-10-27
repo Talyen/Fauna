@@ -515,6 +515,30 @@
     "sourceHash": "e1f62f4d3e1c622e3308ea536e34debbe8cce07ab0e828b25191ddb4775d22c6",
     "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0>"
   },
+  "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "9ff3ff3e9e972033f3bcf8c3dccecffa116540092ebfd05f2461b33d9fadde24",
+    "text": "Compre {{value0}} cartas"
+  },
+  "content.card.cadenza-resonant-well.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "36fa57c146cd17827fe03279e84373f5360855ffb1ae33775242638bad53eaff",
+    "text": "Compre {{value0}} carta"
+  },
+  "content.card.cadenza-resonant-well.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "db0dbdb27d3e7913a1ed56e27a016e5f68e4a9ad12a1ef19ce97654299f4d849",
+    "text": "Compre {{value0}} cartas; Receba {{value1}} de <keyword0>Mana</keyword0>"
+  },
+  "content.card.cadenza-resonant-well.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "75d177cde7a029773ce096f8fb2a8c509f8a73a9572acb95f60a718c5004ac7f",
+    "text": "Compre {{value0}} carta; Receba {{value1}} de <keyword0>Mana</keyword0>"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -581,6 +605,18 @@
     "sourceHash": "ccbb5d8071770ffad33f89d77dec750e6b27c9543bc9ed20948d8465f01f7a90",
     "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0>; <keyword1>Consumir</keyword1>"
   },
+  "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "bedfa32af3050c352711e8bfe0742a62ce211ed954263e67b2746b5a764ca1d9",
+    "text": "Compre {{value0}} cartas"
+  },
+  "content.card.memento-drowned-revelation.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "1293aea250755d207c8ce10f3a67a46aec7979953390c815d6377eaae78f82bc",
+    "text": "Compre {{value0}} carta"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -604,6 +640,30 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "1568e13408d7efb104f1b6b0871a506cf6f888652ccb9b309963bb3b6d79c974",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
+  },
+  "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "9422844e2912ed744f2fb4352c4619ee0eb72e502f3165f9a1211c950d103581",
+    "text": "Compre {{value0}} cartas"
+  },
+  "content.card.neradora-tide-cup.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "5a8502bb6f150b23651ecd7ed482addea997b36831b6ffb3fb7694ced13c455c",
+    "text": "Compre {{value0}} carta"
+  },
+  "content.card.neradora-tide-cup.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "7b2695dba6873aff7ec9118c3ada7960aaa9b40d00c37d569c8e0562270de588",
+    "text": "Compre {{value0}} cartas; Receba {{value1}} de <keyword0>Mana</keyword0>"
+  },
+  "content.card.neradora-tide-cup.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "575941b79a0acc77f56397b35d80d8451dcbf8ab481735a8407038b40991e878",
+    "text": "Compre {{value0}} carta; Receba {{value1}} de <keyword0>Mana</keyword0>"
   },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
@@ -647,11 +707,95 @@
     "sourceHash": "d132e201925469a66b3e9d3f2d37479d31d1ae487bbee4c229f84d78701df65a",
     "text": "Cause {{value0}} de dano de <keyword0>Luz</keyword0>; <keyword1>Expurgue</keyword1> o alvo: remova {{value1}} efeito"
   },
+  "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "57ac6dfa7e87d4eba2179bdf3bb2daa0d423657f6ae60138dd58403628068fcd",
+    "text": "Compre {{value0}} cartas"
+  },
+  "content.card.reverie-waking-wonder.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "7c0db56cc61a5c1d94f8bfc8092d7d345de31b339b598105f7662c951ac2e55c",
+    "text": "Compre {{value0}} carta"
+  },
+  "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "8f0486835ee76c6ad82705b04da921adbd21e73c015f3501ba6f9ad495b82ce9",
+    "text": "Compre {{value0}} cartas"
+  },
+  "content.card.rookhaven-margin-of-possibility.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "e0ad04ced53655139275c7465c6261e47dfe2bb25aa027e263c216e5019eb63c",
+    "text": "Compre {{value0}} carta"
+  },
+  "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "ba4d4237c27d516133bac596d69d80d6bece3d4b9c5dc1382888211e8920a6fb",
+    "text": "Compre {{value0}} cartas"
+  },
+  "content.card.shadebrim-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "f2bea49b66ebc79932be8dfb30ce181d609bf58981842258d9358286d6b57c34",
+    "text": "Compre {{value0}} carta"
+  },
+  "content.card.shadebrim-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "179af5bc20ed3b104f969619b19bcf9c82150275ea2b0a8cad7bfc7a09ee3139",
+    "text": "Compre {{value0}} cartas; Receba {{value1}} de <keyword0>Mana</keyword0>"
+  },
+  "content.card.shadebrim-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "71f2a57f54a875fd0ff9741a808e6c44a6bb32cf7a61569eb0b6f1f163c1eef7",
+    "text": "Compre {{value0}} carta; Receba {{value1}} de <keyword0>Mana</keyword0>"
+  },
+  "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "0b8bdb63ad3835580231a8d56fbaea16d4ed8008d726241e67169bbed46f9459",
+    "text": "Compre {{value0}} cartas"
+  },
+  "content.card.skybex-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "9ac0047d0579a8d29d80cd3be40ee55c0de95e2a2b2336b02f3df4a04b9db680",
+    "text": "Compre {{value0}} carta"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "06010de21ec70f8bba60eeb56e3d9ddd200add4f52f281870ad23fab8f9c6179",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
+  },
+  "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards",
+    "sourceHash": "204e72cdaca999a3a61c7dcf0cfd80dec6590da2701bc8e3aa29e88b46f53279",
+    "text": "Compre {{value0}} cartas"
+  },
+  "content.card.wickwaltz-draw.v838ebf993af44c14.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card",
+    "sourceHash": "44414b75a562169db7cdbe4a5095d6f1ab4ef9f95a685dd81136a74cca25adb6",
+    "text": "Compre {{value0}} carta"
+  },
+  "content.card.wickwaltz-draw.vce386818937868ab.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "48e2a303442a93255f9f385a65592cbfa65906c4fecf76295b5636d7f3bfb9de",
+    "text": "Compre {{value0}} cartas; Receba {{value1}} de <keyword0>Mana</keyword0>"
+  },
+  "content.card.wickwaltz-draw.ve4c0c8184be1e85c.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
+    "sourceHash": "1e7a698043b6e2ef197c7958d679f4ed7169510b665a14050a3590ef647ce62b",
+    "text": "Compre {{value0}} carta; Receba {{value1}} de <keyword0>Mana</keyword0>"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
