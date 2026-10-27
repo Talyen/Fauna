@@ -5,7 +5,7 @@ import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
 import { enemyCard } from "./card-rules";
-import { creaturePassiveTier, cardHasKeyword, hasTalent, passiveAmount } from "./progression";
+import { creaturePassiveTier, cardKeywordView, hasTalent, passiveAmount } from "./progression";
 import type { BattleState, Card, Creature, GameState } from "./types";
 
 export function metronomeActorValid(state: BattleState): boolean {
@@ -100,10 +100,13 @@ export function cardCost(
   if (actor?.combat?.[talentRule("stun.free-follow-up").state]) return 0;
   const freeNature = actor?.combat?.[talentRule("nature.windstep").state];
   const freeLight = actor?.combat?.[talentRule("light.divine-favor").state];
+  let keywords: ReturnType<typeof cardKeywordView> | undefined;
   if (
-    (freeNature && cardHasKeyword(card, "nature")) ||
-    (freeLight && cardHasKeyword(card, "light")) ||
-    (!state.battle?.freeBurnUsed && hasTalent(state, "burn.flashpoint") && cardHasKeyword(card, "burn"))
+    (freeNature && (keywords ??= cardKeywordView(card)).includes("nature")) ||
+    (freeLight && (keywords ??= cardKeywordView(card)).includes("light")) ||
+    (!state.battle?.freeBurnUsed &&
+      hasTalent(state, "burn.flashpoint") &&
+      (keywords ??= cardKeywordView(card)).includes("burn"))
   )
     return 0;
   return def.cost;

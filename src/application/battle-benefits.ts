@@ -13,7 +13,7 @@ import {
   journeyReturnHasDraw,
 } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
-import { livingBattlefield, healingAllies } from "../game/battlefield";
+import { findLivingBattlefield, livingBattlefield, healingAllies } from "../game/battlefield";
 import { cardHasKeyword, hasTalent, passiveAmount } from "../game/progression";
 import {
   controlled,
@@ -80,9 +80,15 @@ export function battleBenefitFacts(state: BattleState) {
   let healingTargets: ReturnType<typeof healingAllies> | undefined;
   const healingTargetsForPlay = () => (healingTargets ??= healingAllies(state));
   const injuredAllies = () =>
-    (injured ??= healingTargetsForPlay().some((unit) => unit.health < maximumHealth(unit)));
+    (injured ??=
+      !!findLivingBattlefield(state, "player", (unit) => unit.health < maximumHealth(unit)) ||
+      (state.boons.includes("camp-hammock") &&
+        state.reserves.some((unit) => unit.health > 0 && unit.health < maximumHealth(unit))));
   const healingOnPlay = () =>
     (healing ??=
+      (state.battle.hand.length === 1 ||
+        state.battle.cardsPlayedThisTurn === 1 ||
+        state.battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards - 1) &&
       injuredAllies() &&
       ((state.battle.hand.length === 1 &&
         state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "lastWarmth") > 0)) ||
@@ -104,6 +110,7 @@ export function battleBenefitFacts(state: BattleState) {
       return healingOnPlay();
     },
     recoverable: (actorId?: string) => {
+      if (!state.battle.discard.length) return false;
       recoverable ??= new Map();
       let result = recoverable.get(actorId);
       if (result === undefined) {

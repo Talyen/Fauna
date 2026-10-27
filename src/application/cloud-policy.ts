@@ -1,20 +1,22 @@
 import type { CloudSnapshot } from "./cloud-snapshots";
 
+function twoHeads(first: CloudSnapshot, last: CloudSnapshot): CloudSnapshot[] {
+  if (first.id === last.id) return last.ancestors.includes(last.id) ? [] : [last];
+  const heads: CloudSnapshot[] = [];
+  if (!first.ancestors.includes(first.id) && !last.ancestors.includes(first.id)) heads.push(first);
+  if (!first.ancestors.includes(last.id) && !last.ancestors.includes(last.id)) heads.push(last);
+  return heads;
+}
+
 export function newestHeads(records: readonly CloudSnapshot[]) {
   if (records.length === 0) return [];
   if (records.length === 1) return records[0]!.ancestors.includes(records[0]!.id) ? [] : records.slice();
-  if (records.length === 2) {
-    const [first, last] = records as readonly [CloudSnapshot, CloudSnapshot];
-    if (first.id === last.id) return last.ancestors.includes(last.id) ? [] : [last];
-    const heads: CloudSnapshot[] = [];
-    if (!first.ancestors.includes(first.id) && !last.ancestors.includes(first.id)) heads.push(first);
-    if (!first.ancestors.includes(last.id) && !last.ancestors.includes(last.id)) heads.push(last);
-    return heads;
-  }
+  if (records.length === 2) return twoHeads(records[0]!, records[1]!);
   const byId = new Map<string, CloudSnapshot>();
   for (const record of records) byId.set(record.id, record);
   const unique = [...byId.values()];
   if (unique.length === 1) return unique[0]!.ancestors.includes(unique[0]!.id) ? [] : unique;
+  if (unique.length === 2) return twoHeads(unique[0]!, unique[1]!);
   let ancestors: Set<string> | undefined;
   for (const record of unique)
     for (const ancestor of record.ancestors) (ancestors ??= new Set()).add(ancestor);
@@ -41,7 +43,7 @@ export function reconciliationPlan({
   const heads = newestHeads(records);
   const chosen =
     (mode === "background" ? current : null) ??
-    heads.find((head) => head.id === current?.id) ??
+    (current ? heads.find((head) => head.id === current.id) : undefined) ??
     heads.reduce<CloudSnapshot | undefined>(
       (first, head) => (!first || head.id.localeCompare(first.id) < 0 ? head : first),
       undefined,

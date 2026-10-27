@@ -21,9 +21,7 @@ import { receiveCard, draw, journeyReturn } from "../card-zones";
 export function returnDodgedCard(state: BattleState, card: Card, events: GameEvent[], start: number) {
   if (!state.boons.includes("dream-yo-yo")) return;
   const def = definition(card.definitionId);
-  if (def.consume || !state.cards.some((entry) => entry.id === card.id)) return;
-  const owner = state.team.find((ally) => ally.id === card.ownerId);
-  if (!owner) return;
+  if (def.consume) return;
   // A summoner may fall after its Echo Dodges during the same card. The retained
   // Echo receipt still identifies that opponent after it leaves the battlefield.
   let enemies: Set<string> | undefined;
@@ -44,7 +42,9 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
   }
   if (!dodged) return;
   const index = state.battle.discard.indexOf(card.id);
-  if (index < 0) return;
+  if (index < 0 || !state.cards.some((entry) => entry.id === card.id)) return;
+  const owner = state.team.find((ally) => ally.id === card.ownerId);
+  if (!owner) return;
   state.battle.discard.splice(index, 1);
   receiveCard(state, card.id);
   journeyReturn(state, card.ownerId, events);

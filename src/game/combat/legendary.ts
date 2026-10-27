@@ -87,14 +87,14 @@ export function summonEcho(
   const minions = state.battle.minions ?? (state.battle.minions = []);
   let ownedCount = 0;
   let old: (typeof minions)[number] | undefined;
-  const alive: (typeof minions)[number][] = [];
+  let alive: (typeof minions)[number][] | undefined;
   for (const unit of minions) {
     if (unit.minion.ownerId !== actor.id) continue;
     ownedCount++;
-    if (unit.health > 0) alive.push(unit);
+    if (unit.health > 0) (alive ??= []).push(unit);
     else if (unit.health === 0 && !old) old = unit;
   }
-  if (alive.length >= MINION_LIMIT) {
+  if (alive && alive.length >= MINION_LIMIT) {
     for (const unit of alive) restoreHealth(unit, unit.maxHealth, events, false, state);
     return;
   }
