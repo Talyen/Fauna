@@ -250,11 +250,11 @@ it("localizes prevented Freeze damage and skipped control turns", () => {
   expect(
     eventPresentation(
       game,
-      { ...skipped, status: "stun", text: `${targetName} skips its Stunned turn.` },
+      { ...skipped, status: "stun" as const, text: `${targetName} skips its Stunned turn.` },
       reader,
     ),
   ).toBe("Créature traduite : tour sauté (Étourdissement).");
-  expect(eventPresentation(game, { ...skipped, status: "stun" }, reader)).toBe(skipped.text);
+  expect(eventPresentation(game, { ...skipped, status: "stun" as const }, reader)).toBe(skipped.text);
   expect(eventPresentation(game, skipped, createMessageReader("en", {}))).toBe(skipped.text);
 });
 
