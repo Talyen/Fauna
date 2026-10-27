@@ -759,9 +759,12 @@ it("localizes standard combatant and Echo names while retaining a distinct boss 
   });
   expect(localizedCombatantName({ ...enemy, name: canonical }, reader)).toBe("Créature traduite");
   expect(localizedCombatantName({ ...enemy, name: "Distinct Boss" }, reader)).toBe("Distinct Boss");
-  expect(localizedCombatantName({ ...enemy, species: "memento", name: "Echo", minion: true }, reader)).toBe(
-    "Écho",
-  );
+  expect(
+    localizedCombatantName(
+      { ...enemy, species: "memento", name: "Echo", minion: { ownerId: "legend", side: "player" } },
+      reader,
+    ),
+  ).toBe("Écho");
 });
 
 it("uses the localized backup name for the visible and accessible swap choice", () => {
