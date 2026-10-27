@@ -2225,6 +2225,12 @@
     "sourceHash": "c94de88083fe5ec567d91def86d6bbedcdf8224c311353a12d82511a723d263a",
     "text": "水"
   },
+  "content.species.aerostat.name": {
+    "reviewed": true,
+    "source": "Aerostat",
+    "sourceHash": "6e0bf1d0bcfcc9416a9499f8bc8fcff18caff38c7f0b75d2ac57b5558ad20cae",
+    "text": "エアロスタット"
+  },
   "content.species.aerostat.passive.0.rule": {
     "reviewed": true,
     "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
@@ -2272,6 +2278,12 @@
     "source": "Well Provisioned",
     "sourceHash": "dfe8eee06e5e3ecf79da2a4af497b6b9bb428038b85307e79ba5f9a74f05d4b0",
     "text": "豊かな備え"
+  },
+  "content.species.almanelle.name": {
+    "reviewed": true,
+    "source": "Almanelle",
+    "sourceHash": "7ec1fa71ad62c0f5d51b723311d1ef892891c378a17d0000156faadbe93c9b9d",
+    "text": "アルマネル"
   },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
@@ -2321,6 +2333,12 @@
     "sourceHash": "bcf0e72847b501fefef22cd81959bf3ea38bc016bdd8a51c1cebd82818e43f1c",
     "text": "落ち葉"
   },
+  "content.species.alpenglen.name": {
+    "reviewed": true,
+    "source": "Alpenglen",
+    "sourceHash": "dff0e4a444b82c6abb9ea7f0ffbb2aba8c1696313db8f7b3b9fcea7f6adc66a5",
+    "text": "アルペングレン"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -2368,6 +2386,12 @@
     "source": "Last Warmth",
     "sourceHash": "0f26c318e902d44ead16f8dc14c1e5fc214cae597b688b9f9985d03e520e9a85",
     "text": "最後のぬくもり"
+  },
+  "content.species.arabesca.name": {
+    "reviewed": true,
+    "source": "Arabesca",
+    "sourceHash": "2fb9d7cf491cf0727a1f952604c2342ad46eb930fa2a995fc409ec63332542b1",
+    "text": "アラベスカ"
   },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
@@ -2417,6 +2441,12 @@
     "sourceHash": "751b1cf266a5dcb3ae254051981e1852cdd4c2f276f0a74937253146bf06c265",
     "text": "花びらの軌跡"
   },
+  "content.species.bloomquail.name": {
+    "reviewed": true,
+    "source": "Bloomquail",
+    "sourceHash": "d0a9d13f9bac30a823f3d28a0890a68089f791abfabcfdd512d1651838557376",
+    "text": "ブルームクエイル"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2464,6 +2494,12 @@
     "source": "Full Bloom",
     "sourceHash": "0a63fc171192e5cb811bd89221d5d34574598b11663033343c34264970653196",
     "text": "満開"
+  },
+  "content.species.cadenza.name": {
+    "reviewed": true,
+    "source": "Cadenza",
+    "sourceHash": "da3d983fe627db1ed1189ddc43b3a191db3f617d732b7cbe2ee56a38e58feced",
+    "text": "カデンツァ"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
@@ -2513,6 +2549,12 @@
     "sourceHash": "6c770b513b873b8cde24037dd2bd0854ef86f9619659ef235cd9464fa117dd21",
     "text": "生きた合唱"
   },
+  "content.species.captoad.name": {
+    "reviewed": true,
+    "source": "Captoad",
+    "sourceHash": "3d8d9829f69453b2d8af88c533757978cd53392274621f3472bb5aee9d4fa066",
+    "text": "キャップトード"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2560,6 +2602,12 @@
     "source": "Sporecoat",
     "sourceHash": "ab5c57ffb182fb14f0177b8421bc8d3dcd3e6a8f91499301d07aafe1bd2ac595",
     "text": "胞子の衣"
+  },
+  "content.species.chimecricket.name": {
+    "reviewed": true,
+    "source": "Chimecricket",
+    "sourceHash": "3facbc8c0d71c710736fcceb6e1179b88add0be9bc4e19e3f7215c45a6cae829",
+    "text": "チャイムクリケット"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2609,6 +2657,12 @@
     "sourceHash": "0c65f076100ea03ca240c744933ca89d2833cbeb7896843d3ecadc960c05568c",
     "text": "アンコール"
   },
+  "content.species.cindernewt.name": {
+    "reviewed": true,
+    "source": "Cindernewt",
+    "sourceHash": "5e5054869232a9466f8bd66683a77fb38ce129a13692cab4d1cbb2969b6c74e4",
+    "text": "シンダーニュート"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2656,6 +2710,12 @@
     "source": "Cinderstep",
     "sourceHash": "ae2111a73df3b70964581aa76c719bd01c263d809a7e38cbe87bc46da1e1ba27",
     "text": "熾火の足取り"
+  },
+  "content.species.coralcurl.name": {
+    "reviewed": true,
+    "source": "Coralcurl",
+    "sourceHash": "14e517f45c3039c1c15f89837c39e1bc0bb9d2ba1b40a71dd5690059df5cf802",
+    "text": "コーラルカール"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2705,6 +2765,12 @@
     "sourceHash": "5df12806f11ca360fac74672685208136535d79fae3394c809fe29f09cb101b1",
     "text": "泡のはじけ"
   },
+  "content.species.dawncall.name": {
+    "reviewed": true,
+    "source": "Dawncall",
+    "sourceHash": "a119fe4e828c6a84ac44191649da2a0f473ae24db7bc660e2938213985875c73",
+    "text": "ドーンコール"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2752,6 +2818,12 @@
     "source": "Early Bird",
     "sourceHash": "1da1c4214968096154cfde6f17f23c27d0746e2a55e553c5dd2eb9a1615c8565",
     "text": "早起き"
+  },
+  "content.species.dulcera.name": {
+    "reviewed": true,
+    "source": "Dulcera",
+    "sourceHash": "0556e07f4db561a5741322b4c7cf1a621fd166b7c1e044c089f488154f267011",
+    "text": "ドゥルセラ"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
@@ -2801,6 +2873,12 @@
     "sourceHash": "9711c7466be825a50bc58f69c30781b4a15b2faf5d598381f6d6e63ff6f7be58",
     "text": "やさしい通り道"
   },
+  "content.species.dunefox.name": {
+    "reviewed": true,
+    "source": "Dunefox",
+    "sourceHash": "def2bfe63a2d9c92328869fb0697ca329df80acb756908f1bfb9259273e2e613",
+    "text": "デューンフォックス"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2848,6 +2926,12 @@
     "source": "Shifting Sands",
     "sourceHash": "ba32ca08ce42707b8f70ef91c688db3a68f5165d5efa12cc65f0ab0ec478ef3c",
     "text": "移ろう砂"
+  },
+  "content.species.emberback.name": {
+    "reviewed": true,
+    "source": "Emberback",
+    "sourceHash": "e1ea46934b79f6a71ee177f3954a9735c6bddfcc964d9e4c2d2cd16cc38687db",
+    "text": "エンバーバック"
   },
   "content.species.emberback.passive.0.rule": {
     "reviewed": true,
@@ -2897,6 +2981,12 @@
     "sourceHash": "ccae8bb38a2c9746c5bace7c235119024893773481477d3a4968d48043d8d9ef",
     "text": "溶けた甲羅"
   },
+  "content.species.euphera.name": {
+    "reviewed": true,
+    "source": "Euphera",
+    "sourceHash": "da48c5b86d26f1f7a343acc3661ef76f91a04bea894c15896472b1c4ea700702",
+    "text": "ユーフェラ"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2945,41 +3035,47 @@
     "sourceHash": "d1aa8863f62c04b723c094c52d1e6b59e5c22a291a537f6cb0492bc85d3d3a43",
     "text": "幸運"
   },
+  "content.species.glintstride.name": {
+    "reviewed": true,
+    "source": "Glintstride",
+    "sourceHash": "7000aa9daae8533fa4d2e65fbfd49bb9adc4683aa9ec4ed154d076f0067828f1",
+    "text": "グリントストライド"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "16909c754d04669ae1a8915aee6339e1d0f0ac78e29a69da6307bef4aa84722a",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.1.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "fb1b65b809f612bf7945500a85b01514a21306834e005bdf397a5c2956ea4c46",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.2.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "7d0d7baf0e2f9562f3444b41f25ac7439051b775ad5a0f5f9be46d81b570a546",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.3.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "e866cb0c293eaad836724a66dfa38e1d6917ef229f9c1ccb2d6f2a6735f8ef49",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.4.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "5e3327fb5688efa8d824f2fc5986925adc8fceec13f5000cea38ab03bb471ae4",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.passive.5.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "f2e7969988c0654d991decc0e67302695495680653297a3e117357dd7df8fe82",
-    "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+    "text": "グリントストライドの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
   "content.species.glintstride.title": {
     "reviewed": true,
@@ -2992,6 +3088,12 @@
     "source": "Wrong Foot",
     "sourceHash": "935da06adc5e75786d06194eaa3cb216208fc6c8cc5a96308cd2ddf40b8f202c",
     "text": "足をすくう"
+  },
+  "content.species.memento.name": {
+    "reviewed": true,
+    "source": "Memento",
+    "sourceHash": "a738ae58b5e3c7c184cdf639ac750745274a244c8feef467f06e0a449d91e21c",
+    "text": "メメント"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
@@ -3041,6 +3143,12 @@
     "sourceHash": "412fbf993518a8770e8c25c3c53b28b1547865e95015d9f2e701b12cce6c4810",
     "text": "宮廷は覚えている"
   },
+  "content.species.mossguard.name": {
+    "reviewed": true,
+    "source": "Mossguard",
+    "sourceHash": "72fd92d144cc69f619287cd30af264414e8652c176d28aa7114122c6e4da0e7c",
+    "text": "モスガード"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3088,6 +3196,12 @@
     "source": "Overgrowth",
     "sourceHash": "d588291b9d22c1121262c7c3296ddd17ae4345d8e48a2ecf91c20b392aec4a7c",
     "text": "繁茂"
+  },
+  "content.species.neradora.name": {
+    "reviewed": true,
+    "source": "Neradora",
+    "sourceHash": "1b16bff2091eaed9d17e802dd6f101776e4f758f3d6313c4671cc6929bf40f88",
+    "text": "ネラドーラ"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
@@ -3137,41 +3251,47 @@
     "sourceHash": "e0d5535768c490ffb9880190dbe0a6506849e7f08fbc315f83c7338aceeab346",
     "text": "潮の再生"
   },
+  "content.species.oathara.name": {
+    "reviewed": true,
+    "source": "Oathara",
+    "sourceHash": "54974e557eff79f8be4cb43a0c30b092e8edcad7052841c05a1ec90b5498b252",
+    "text": "オーサラ"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
     "sourceHash": "6d06e259cedee4dbfe8af68a15eae8a02dbbf263e0c58ba6ab9ee4833ce9fb46",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.1.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "5f34d991b511a87e6a3c92e773d65779763dc619f37973bc9ca41aa24284a5eb",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.2.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "6ea3c0728a62ec471c443041b26ca4253e8f92d327eb26ae0fef4c5acfb15061",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.3.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "14193768809cc5500e4b413c8e661ef5c53ed400a3a3653785ba82c77400f2f0",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.4.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "af9d9268de6e9c9c6eca017baef7f385a6422343e0429e87e1c63dbf1c2654e5",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.passive.5.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "e32637cb06edec34b017b668ff1e352268a1699fbce019daf93793c722f1bd9e",
-    "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+    "text": "オーサラは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
   },
   "content.species.oathara.title": {
     "reviewed": true,
@@ -3184,6 +3304,12 @@
     "source": "Unfinished Journey",
     "sourceHash": "e3eab89683393ea346a21c7ba1c00818d9d56ad35821feb2392472a00f869e94",
     "text": "未完の旅"
+  },
+  "content.species.orifable.name": {
+    "reviewed": true,
+    "source": "Orifable",
+    "sourceHash": "8137a1b236823a745851d1a4a3133e185cd30ac145c9cd10982fb97274799803",
+    "text": "オリファブル"
   },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
@@ -3233,6 +3359,12 @@
     "sourceHash": "ab7d14e144e81f0d33967afe7ef8869592b9d42efc4ba0de599a0b391c3c5ed1",
     "text": "速達"
   },
+  "content.species.parhelion.name": {
+    "reviewed": true,
+    "source": "Parhelion",
+    "sourceHash": "defd6b757b6192d0fc217351043c162f9b5d9b65ebff96218253475441d9314c",
+    "text": "パーヘリオン"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3280,6 +3412,12 @@
     "source": "Sunthaw",
     "sourceHash": "12a954d84c072bd22b98e2ed3c55ca67867905309f0b21bac6cafc7e7f24a4a8",
     "text": "陽だまりの雪解け"
+  },
+  "content.species.pollenmoth.name": {
+    "reviewed": true,
+    "source": "Pollenmoth",
+    "sourceHash": "fe05f667a662ce5b1d34967c8a42021a9c8f36efd6286cbef17cbee4e774e70b",
+    "text": "ポレンモス"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
@@ -3329,6 +3467,12 @@
     "sourceHash": "8b35b7cb6ba26e26a509034fc4a2a38eae523235f256675a378d458796a18e77",
     "text": "交差受粉"
   },
+  "content.species.prismram.name": {
+    "reviewed": true,
+    "source": "Prismram",
+    "sourceHash": "f38864ae01315ef3bb1e1af90025543374ee27e90d78df2b2c64c31f96074a3a",
+    "text": "プリズムラム"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3376,6 +3520,12 @@
     "source": "Refraction",
     "sourceHash": "f013b0e0ba0505f3f278cc5f0b09d6bce2db88db4ee42b8e5b8026c443c527a8",
     "text": "屈折"
+  },
+  "content.species.pyrella.name": {
+    "reviewed": true,
+    "source": "Pyrella",
+    "sourceHash": "2bc7023d8c8264d11c3747c8b2dba93160b7ac41ec0ea92206d0dca912143f1e",
+    "text": "パイレラ"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3425,6 +3575,12 @@
     "sourceHash": "6e8870973cee7ff9fb739e01afc8980574629eaf702089aeb0ce03868cf8eafa",
     "text": "巡る炎"
   },
+  "content.species.reedstag.name": {
+    "reviewed": true,
+    "source": "Reedstag",
+    "sourceHash": "99319d38fb6ac8b1e2d78a3646e3cd8bf80581f5e70e1c35b3907e0137fdda7c",
+    "text": "リードスタッグ"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3472,6 +3628,12 @@
     "source": "Reedguard",
     "sourceHash": "68b16a97119b3056fe36961d2eacfe891272ce001e5bac86efbe752195ef8171",
     "text": "葦の守り"
+  },
+  "content.species.reverie.name": {
+    "reviewed": true,
+    "source": "Reverie",
+    "sourceHash": "63a8d896043bd21904f79f9950f9ebdef0151e44d20cc0c469f567476b4a0ff4",
+    "text": "レヴェリー"
   },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
@@ -3521,41 +3683,47 @@
     "sourceHash": "cf3f665e540678c571e84194c79870d3bd51f5138ab792430393364db282ac4d",
     "text": "ゆるやかに"
   },
+  "content.species.ringpalm.name": {
+    "reviewed": true,
+    "source": "Ringpalm",
+    "sourceHash": "59e0cafffae8943af789837dc991beda001ae361161823d5cb760f4e74920d2e",
+    "text": "リングパーム"
+  },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "52fe1959a2e98d415175afc22eceeb9ef3c2f38ff551f15e9bbd5143a44d375a",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.1.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "30026c24b2866a1e1736aa6be4299d22ee72038f83a10fed404432216b1bf8d9",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.2.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "6941c958dd294a1fc58523a2028bf9037bdc8246ea57cb45baa727bc1ec85b3c",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.3.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "3e2fa63c5e998179dd6ae89cf39dc773d64446e8219c656a95a51a394ed7878d",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.4.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "f87e002691f594edd214e561c86645619c114fb4669cd1dbe0b8bb1af45f7d52",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.passive.5.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "d1f4d22d689f179c8ead23dd7d30d48ed302436676829ec4202b57043a791a67",
-    "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
+    "text": "リングパームの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
   "content.species.ringpalm.title": {
     "reviewed": true,
@@ -3568,6 +3736,12 @@
     "source": "Resonance",
     "sourceHash": "f621056eda38caa0754360bccea8e8d9d5f53090f62f318a0cacf552ec32f501",
     "text": "共鳴"
+  },
+  "content.species.rookhaven.name": {
+    "reviewed": true,
+    "source": "Rookhaven",
+    "sourceHash": "70008e4a0935a090f7850021ab3eb79caf4b2f008f0a29a0b97d44964423225b",
+    "text": "ルークヘイヴン"
   },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
@@ -3617,6 +3791,12 @@
     "sourceHash": "1f94917d48a2f25700a7eaeba7982bfb27e9d1071806cffaef99272fcb014975",
     "text": "博覧強記"
   },
+  "content.species.shadebrim.name": {
+    "reviewed": true,
+    "source": "Shadebrim",
+    "sourceHash": "69fb4c63fb427bd685409220d6b38b7cbc8f6e06d690636fc47811b444870e73",
+    "text": "シェードブリム"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -3664,6 +3844,12 @@
     "source": "Cool Refuge",
     "sourceHash": "d7051ced11a3414326f3169150d641aaaf2c9bea8afb4935be21b0b0db00f0ae",
     "text": "涼しい隠れ家"
+  },
+  "content.species.skybex.name": {
+    "reviewed": true,
+    "source": "Skybex",
+    "sourceHash": "7f41ae4a2ef04e36365d5d795bf9e5e9c11b3177a8f224a570be4080573825e7",
+    "text": "スカイベックス"
   },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
@@ -3713,41 +3899,47 @@
     "sourceHash": "e99c3ec9537d2c85e797464188d9c59f0b96225d11516c0f788f8f53c752d532",
     "text": "山の案内人"
   },
+  "content.species.sternshell.name": {
+    "reviewed": true,
+    "source": "Sternshell",
+    "sourceHash": "33de05631e462fd3c19c6dd893217c1eb37c0aadf86873405d2c693e29b7f06c",
+    "text": "スターンシェル"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "ee1db0492ce586cc184be286e814fbd5e06bb135859789850a6c4dd0d07203f0",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.1.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "7ed3972d9407e8e1304e6c4d42aed89654c78c70ca1ab8b1a7994fd3aff93ffd",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.2.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "3d37aaa77467df9e5a77f410df431388ea0122831fe75a26717028fb96f22d79",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.3.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "f46e8272ea3a795438c537c7b3680826900bf75f85dc5f7df475dac7fab54b52",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.4.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "ed018486708789ef784904f7bc2a0b7002c07bdcea6f15c8d8896a8fdcf58ece",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.passive.5.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "2c40f938ff3e528e35db4de05093010598fb087c32f1bc90ea1fcc3849e0007d",
-    "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+    "text": "スターンシェルは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
   },
   "content.species.sternshell.title": {
     "reviewed": true,
@@ -3760,6 +3952,12 @@
     "source": "Shelter",
     "sourceHash": "16dc09c152b40c8fa131670b6cb3cca9353f6de0557578c3de241c32be7abfbb",
     "text": "庇護"
+  },
+  "content.species.stillara.name": {
+    "reviewed": true,
+    "source": "Stillara",
+    "sourceHash": "33f3fbf07e19e52884895006db3df113eded2399d738b34dd50ff9b994d39832",
+    "text": "スティララ"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
@@ -3809,6 +4007,12 @@
     "sourceHash": "e14f09efe8bd01c373a5e16d1ab89a9e006d2fd5c490e04a72dc8dc9a299d5b3",
     "text": "最初の雪解け"
   },
+  "content.species.tournelle.name": {
+    "reviewed": true,
+    "source": "Tournelle",
+    "sourceHash": "31ac229d711e816b549820a897fc58a2d419a005d218957863f5f74f6106effc",
+    "text": "トゥルネル"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3857,41 +4061,47 @@
     "sourceHash": "66bbf56df47b7860ccba1edcb3bea638a1482a3190fd5726ff61cb8f56e7e9e3",
     "text": "騎士の心"
   },
+  "content.species.wickwaltz.name": {
+    "reviewed": true,
+    "source": "Wickwaltz",
+    "sourceHash": "db73b61d56aed0087feca77dcf136173dbffb8d812b23dc489bfa3873e9fe9fb",
+    "text": "ウィックワルツ"
+  },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "52678e78551d17563a919206351f23a120b7431ea0fc806e6140faa0b6920cbc",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.1.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "02d82a9f4e24fdc0510fd677a72b9be9ac6d793d907a40a4c1cc3553d49f3872",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.2.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "0f7f902c4a1c1b2330998fbde0a85488ebd3f0a56b4ebdd0b59db231fac067d9",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.3.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "8e7bf4ef0ff21b967defe5133b54a11108ae37c39b89cd79a7ad351a743b326e",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.4.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
     "sourceHash": "7ba4eff17aa5b17a91c8e4e00e0b7da891e0c3cefb8b3dba7c7addd5b0d4f937",
-    "text": "各ターンのWickwaltzの2枚目のカードは{{value0}}%の確率で繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードは{{value0}}%の確率で繰り返される"
   },
   "content.species.wickwaltz.passive.5.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn repeats",
     "sourceHash": "5f6598ddbeab00571cb8f3f968ded4dce027028caa6606e86e5f8c27ddf35a6b",
-    "text": "各ターンのWickwaltzの2枚目のカードが繰り返される"
+    "text": "各ターンのウィックワルツの2枚目のカードが繰り返される"
   },
   "content.species.wickwaltz.title": {
     "reviewed": true,
@@ -3904,6 +4114,12 @@
     "source": "Kindling Flourish",
     "sourceHash": "246f0b12a233294e53c275c0337ff3bcbceb52817135d4324ffd2fc503f0923e",
     "text": "焚き付けの舞"
+  },
+  "content.species.wisterelle.name": {
+    "reviewed": true,
+    "source": "Wisterelle",
+    "sourceHash": "e45bb574289ec3341a31c271b3034dd4f233b8998233121bdc748be8d1955109",
+    "text": "ウィステレル"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

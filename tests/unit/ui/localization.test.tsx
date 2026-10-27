@@ -1603,9 +1603,9 @@ it("presents Russian fallen-ally card counts with the right grammatical forms", 
   );
   const rules = [...view.container.querySelectorAll(".card-details p")].map((element) => element.textContent);
   expect(rules).toEqual([
-    "Oathara может разыграть за ход 1 карту павших союзников",
-    "Oathara может разыграть за ход 2 карты павших союзников",
-    "Oathara может разыграть за ход 5 карт павших союзников",
+    "Оатара может разыграть за ход 1 карту павших союзников",
+    "Оатара может разыграть за ход 2 карты павших союзников",
+    "Оатара может разыграть за ход 5 карт павших союзников",
   ]);
   view.unmount();
 });

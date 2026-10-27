@@ -2225,6 +2225,12 @@
     "sourceHash": "42f4269432d70809a8af8dbe3ebee3ade9688fe4506a58103c7bbef4b15565f4",
     "text": "Água"
   },
+  "content.species.aerostat.name": {
+    "reviewed": true,
+    "source": "Aerostat",
+    "sourceHash": "e660a6892aa2f6cd3c5f2fd0e8d6222bfbe8f9f38f34980c805f2fc7fcc57da5",
+    "text": "Aerostat"
+  },
   "content.species.aerostat.passive.0.rule": {
     "reviewed": true,
     "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
@@ -2272,6 +2278,12 @@
     "source": "Well Provisioned",
     "sourceHash": "2b8e0d96b84e3ed6cc4cbcd94b62a3077cd4a39a2fc8f32d50ff6dcb52e0ea6b",
     "text": "Bem abastecido"
+  },
+  "content.species.almanelle.name": {
+    "reviewed": true,
+    "source": "Almanelle",
+    "sourceHash": "0b5bbc4edb08f9d350a35c1b92523b5dbc792d37fe920d8b4f0a8e9be38a2d46",
+    "text": "Almanelle"
   },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
@@ -2321,6 +2333,12 @@
     "sourceHash": "0bcad4116f0f3830aabc40f88199042ef88334805c288e7e176f4097b4a29351",
     "text": "Folhas caídas"
   },
+  "content.species.alpenglen.name": {
+    "reviewed": true,
+    "source": "Alpenglen",
+    "sourceHash": "a698cc67a28471ec49be69ccacd9cc87ae0765cd35391aba3b5c81ef3fdad7eb",
+    "text": "Alpenglen"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -2368,6 +2386,12 @@
     "source": "Last Warmth",
     "sourceHash": "7c420fc9102864c01b2b14d5e9c9ec73c3edddc7884c81b2e59dc83c2221570b",
     "text": "Último calor"
+  },
+  "content.species.arabesca.name": {
+    "reviewed": true,
+    "source": "Arabesca",
+    "sourceHash": "f184e01bc9f3b4021575f9aebfc01eebcfe15bac77888289f88ebe286408f6e3",
+    "text": "Arabesca"
   },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
@@ -2417,6 +2441,12 @@
     "sourceHash": "280a9887c782c4189fde224b531f5192864705c4be32a2f50a764849ccbcd217",
     "text": "Rastro de pétalas"
   },
+  "content.species.bloomquail.name": {
+    "reviewed": true,
+    "source": "Bloomquail",
+    "sourceHash": "203fc3111b04b473849763365e4ae1dfead3f741f31832a6128320e8bae4219e",
+    "text": "Bloomquail"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2464,6 +2494,12 @@
     "source": "Full Bloom",
     "sourceHash": "2624d0f4fefc247aca3105b846f9772a05249c0fe9169854ae55d0188a84a368",
     "text": "Plena floração"
+  },
+  "content.species.cadenza.name": {
+    "reviewed": true,
+    "source": "Cadenza",
+    "sourceHash": "900d888e188c42ff0dc8f0f7a2192a0f082f246feabba97a36741e3a53f2d6ba",
+    "text": "Cadenza"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
@@ -2513,6 +2549,12 @@
     "sourceHash": "186a3c4b49276e29fb8759b0159d04f605ec333ad6150971d2cfd2cb0fa64cdf",
     "text": "Coro vivo"
   },
+  "content.species.captoad.name": {
+    "reviewed": true,
+    "source": "Captoad",
+    "sourceHash": "fa9468e0336a55bf7fcb96b72a8567422867ef9794ada73d24ab7efc0e3aedab",
+    "text": "Captoad"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2560,6 +2602,12 @@
     "source": "Sporecoat",
     "sourceHash": "600c28d9878f7c778559783d515bb1d27244d2c1680193028c9897eb91f79d16",
     "text": "Manto de esporos"
+  },
+  "content.species.chimecricket.name": {
+    "reviewed": true,
+    "source": "Chimecricket",
+    "sourceHash": "bd8f845adc99fc92904c33634dc1d6196d20771fc5bbf58aef51c372df6814c0",
+    "text": "Chimecricket"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2609,6 +2657,12 @@
     "sourceHash": "df319a1ccafa4d2a577eee5e5b47497c4591ae933f827f3b80b4454278d45508",
     "text": "Bis"
   },
+  "content.species.cindernewt.name": {
+    "reviewed": true,
+    "source": "Cindernewt",
+    "sourceHash": "e51712e5e4c2fe078123507dea1dea596ce596b3f6c41a62a731bd9c89ca7557",
+    "text": "Cindernewt"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2656,6 +2710,12 @@
     "source": "Cinderstep",
     "sourceHash": "7fd89eedaa01e26e73f109c0ca8a679b58c228243a217f2438c6f8e309f5f72e",
     "text": "Passo de brasa"
+  },
+  "content.species.coralcurl.name": {
+    "reviewed": true,
+    "source": "Coralcurl",
+    "sourceHash": "c15269a27640afe1639dc26a83b443ca0a040808c7593106d79dd150045a789f",
+    "text": "Coralcurl"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2705,6 +2765,12 @@
     "sourceHash": "bc67b8baf4ae5c2420b1af27c6ebe5e7dcca663cf40df66e6d21561ee4bf20b9",
     "text": "Explosão de bolhas"
   },
+  "content.species.dawncall.name": {
+    "reviewed": true,
+    "source": "Dawncall",
+    "sourceHash": "d8e795446da0633dfd99a9b309027759774ddc88990a6a69b4e825d0b830b4a3",
+    "text": "Dawncall"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2752,6 +2818,12 @@
     "source": "Early Bird",
     "sourceHash": "66fabb093b205e3498a1a73dcaedec70eb261ab1b076342c48c0100fe8f0174c",
     "text": "Madrugador"
+  },
+  "content.species.dulcera.name": {
+    "reviewed": true,
+    "source": "Dulcera",
+    "sourceHash": "d96fd0800577938ef5ad486d27e7f5936226b783bd50cf3c5ae76878cdf9e40e",
+    "text": "Dulcera"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
@@ -2801,6 +2873,12 @@
     "sourceHash": "b04829a88df5d523fb270ee9040b6e69f88ab81913c854555d5ab8b278e48f14",
     "text": "Passagem gentil"
   },
+  "content.species.dunefox.name": {
+    "reviewed": true,
+    "source": "Dunefox",
+    "sourceHash": "52658a2d1660c6735079344fae5dc8da7825f44cee33fcf0e087825db44a8f87",
+    "text": "Dunefox"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2848,6 +2926,12 @@
     "source": "Shifting Sands",
     "sourceHash": "98af3f3809faafb97e8e018d040b10915326dd4326c02371c6e296c4264a2d1c",
     "text": "Areias movediças"
+  },
+  "content.species.emberback.name": {
+    "reviewed": true,
+    "source": "Emberback",
+    "sourceHash": "1ada30106b9e9ec683e6cf84ec2c7418706ccce2b4269fac2eb861ca69de3102",
+    "text": "Emberback"
   },
   "content.species.emberback.passive.0.rule": {
     "reviewed": true,
@@ -2897,6 +2981,12 @@
     "sourceHash": "512c2677c3be4d2dadc2f9404ff2a0c9accb045af160ee86afd84f9c88a8c0f4",
     "text": "Carapaça fundida"
   },
+  "content.species.euphera.name": {
+    "reviewed": true,
+    "source": "Euphera",
+    "sourceHash": "7a48892891c341ce31f67e3b3f5453b2b1bd667f4ea0aaf8587a0954d78369e8",
+    "text": "Euphera"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2944,6 +3034,12 @@
     "source": "Good Fortune",
     "sourceHash": "7df83648a03d318ac4549ee06bede8a3bf8e3f540400286dd2148e79932e013f",
     "text": "Boa fortuna"
+  },
+  "content.species.glintstride.name": {
+    "reviewed": true,
+    "source": "Glintstride",
+    "sourceHash": "8d9953f385cfbdfddd01c9daa660dba2e461dad825f0580d96da5813a81756d0",
+    "text": "Glintstride"
   },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
@@ -2993,6 +3089,12 @@
     "sourceHash": "f6ec06b4f7ab07c86d23167c7b5c7cfa69ae970bef2ca07587e590857fd7a107",
     "text": "Passo em falso"
   },
+  "content.species.memento.name": {
+    "reviewed": true,
+    "source": "Memento",
+    "sourceHash": "47e3a2cd3a543729d50a3ca58d3193a56dfca7f08a685b6e92c5e3937ed29d42",
+    "text": "Memento"
+  },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
     "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
@@ -3040,6 +3142,12 @@
     "source": "The Court Remembers",
     "sourceHash": "40302c366dba1eadde4dcc1e01db6a15823cff07a60752e38773224d57fa3b5b",
     "text": "A corte se lembra"
+  },
+  "content.species.mossguard.name": {
+    "reviewed": true,
+    "source": "Mossguard",
+    "sourceHash": "a8b7b1405a4ef238c368d8087b1d7d6a8b615310c8f767442dd2a9f1182b5e18",
+    "text": "Mossguard"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
@@ -3089,6 +3197,12 @@
     "sourceHash": "1f3b79c42c8860c21afb9ed7d7e1cf6e977553f390a13daa475a70145932e952",
     "text": "Crescimento exuberante"
   },
+  "content.species.neradora.name": {
+    "reviewed": true,
+    "source": "Neradora",
+    "sourceHash": "a6ffa7e62270d41300770a42abb4f499af8d978640276c77a7845c629d74c50d",
+    "text": "Neradora"
+  },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
@@ -3136,6 +3250,12 @@
     "source": "Tidal Regeneration",
     "sourceHash": "0a717099ab129a5ace3dbb9ebf64e4017019d58b09b19458a1d19e9a923eb2f8",
     "text": "Regeneração das marés"
+  },
+  "content.species.oathara.name": {
+    "reviewed": true,
+    "source": "Oathara",
+    "sourceHash": "e456c543779882034692f5ac005cb150ca045fddf604ef57a3b2d09392d61ed4",
+    "text": "Oathara"
   },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
@@ -3185,6 +3305,12 @@
     "sourceHash": "e5333407d3ea77fdef012bf0924d28478bc508b5b1d0cfc971ed0f73f3ce3e6b",
     "text": "Jornada inacabada"
   },
+  "content.species.orifable.name": {
+    "reviewed": true,
+    "source": "Orifable",
+    "sourceHash": "d047a302a79ea7fbbdb404b2463c461343ee6a3dec5483b7b3c136e480670558",
+    "text": "Orifable"
+  },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to draw an extra card each turn",
@@ -3232,6 +3358,12 @@
     "source": "Express Delivery",
     "sourceHash": "7a6c2276f2fff2b3fe71d3678a64b15177f48b83ca4b290230052471c99e585d",
     "text": "Entrega expressa"
+  },
+  "content.species.parhelion.name": {
+    "reviewed": true,
+    "source": "Parhelion",
+    "sourceHash": "c191403707f01e9410c91ded64a516b11844ec7b263e4bedf48c6868c20af294",
+    "text": "Parhelion"
   },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
@@ -3281,6 +3413,12 @@
     "sourceHash": "6439d631ea4229ca5dc7d9b8caae0d28be1af2a129ce3cdaf729ba43e9c85ca0",
     "text": "Degelo solar"
   },
+  "content.species.pollenmoth.name": {
+    "reviewed": true,
+    "source": "Pollenmoth",
+    "sourceHash": "60dca72494fe32b2de0da81d7c6cb904c662a7bd874d929edcab06c9c209c96a",
+    "text": "Pollenmoth"
+  },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Light</keyword0> damage bounces once",
@@ -3328,6 +3466,12 @@
     "source": "Cross-Pollination",
     "sourceHash": "5b0a5be3e7a72e796841dbf7716039c70cff79a6f68704fca70917fe68dbfcce",
     "text": "Polinização cruzada"
+  },
+  "content.species.prismram.name": {
+    "reviewed": true,
+    "source": "Prismram",
+    "sourceHash": "99fac60cd0a6c6e65413470e11e684e93961365b7c3a2f8994a995c2f569872d",
+    "text": "Prismram"
   },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
@@ -3377,6 +3521,12 @@
     "sourceHash": "0b25537b71cacad788a2088d29e48f395095a8a552cb0ba8286af2b4a1f349a1",
     "text": "Refração"
   },
+  "content.species.pyrella.name": {
+    "reviewed": true,
+    "source": "Pyrella",
+    "sourceHash": "34f0a12dc1408a30d446bf54e7b403438a1633318d95a747af8d070605a40e60",
+    "text": "Pyrella"
+  },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
     "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
@@ -3424,6 +3574,12 @@
     "source": "Passing Flame",
     "sourceHash": "86332c8042d653cc6d03d208e6783c10e0c4e8c98fb6e174a1c71a8daf68b765",
     "text": "Chama transmitida"
+  },
+  "content.species.reedstag.name": {
+    "reviewed": true,
+    "source": "Reedstag",
+    "sourceHash": "906611ccc327ab5232caacb87d8b02841130726bae4d50156c66836bc7761058",
+    "text": "Reedstag"
   },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
@@ -3473,6 +3629,12 @@
     "sourceHash": "a256e9f2c0f2c266e79e7ae339085faf84ba35e612c05c7a96f68030cb074561",
     "text": "Guarda dos juncos"
   },
+  "content.species.reverie.name": {
+    "reviewed": true,
+    "source": "Reverie",
+    "sourceHash": "26fc75d5a424da1bb206a3adec1c59ce80acc9865e89e2c73d1e77f500fbc95b",
+    "text": "Reverie"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -3520,6 +3682,12 @@
     "source": "Unhurried",
     "sourceHash": "758a69b7d48faf7147d8f1279bbefd37522153ea172b9c87c7d93eb4743ffbd9",
     "text": "Sem pressa"
+  },
+  "content.species.ringpalm.name": {
+    "reviewed": true,
+    "source": "Ringpalm",
+    "sourceHash": "b23232ed44f6dc8c159cd5e30f615cf05290f01cbdb5422c8806c3b340842672",
+    "text": "Ringpalm"
   },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
@@ -3569,6 +3737,12 @@
     "sourceHash": "135f3fbc624e7c620145f216e8784fc04fdf55189e4597bc66e938226452d8d3",
     "text": "Ressonância"
   },
+  "content.species.rookhaven.name": {
+    "reviewed": true,
+    "source": "Rookhaven",
+    "sourceHash": "5bb4c3dcc2107c4e698e55f814f018e3fd3e9309a8671722ed3f756912c2bf45",
+    "text": "Rookhaven"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -3616,6 +3790,12 @@
     "source": "Well Read",
     "sourceHash": "d583199402e06b0076f2cdc53b1c12cf363fd9dec6eb32cc4741c12bcf3e5e09",
     "text": "Grande leitor"
+  },
+  "content.species.shadebrim.name": {
+    "reviewed": true,
+    "source": "Shadebrim",
+    "sourceHash": "e6ead85c5e407427efd1daf955b8a1dc776b2ced6545b91f0393739da10a672f",
+    "text": "Shadebrim"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3665,6 +3845,12 @@
     "sourceHash": "d9d02275367284dcdc8c6fac76c1ef25c68804d7f12c8a05be9aa726a5d738e8",
     "text": "Refúgio fresco"
   },
+  "content.species.skybex.name": {
+    "reviewed": true,
+    "source": "Skybex",
+    "sourceHash": "f8aa448243d3c3884e0716d1ca90752b07584e700fb20c1bbbd4c0aae852c7a6",
+    "text": "Skybex"
+  },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
@@ -3712,6 +3898,12 @@
     "source": "Mountain Guide",
     "sourceHash": "9e8db3a1f0bc10b59830a721c5217e954de9784d3510e426e228a8cf6e03376a",
     "text": "Guia da montanha"
+  },
+  "content.species.sternshell.name": {
+    "reviewed": true,
+    "source": "Sternshell",
+    "sourceHash": "a82a41917afc22cda90867bc7deb781403db868d34c88fa6ae93954027a3c8b0",
+    "text": "Sternshell"
   },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
@@ -3761,6 +3953,12 @@
     "sourceHash": "fe5ca63b1be3cf2181126f3118dbc35d91144883d9f827b70a75d3109c9b945b",
     "text": "Abrigo"
   },
+  "content.species.stillara.name": {
+    "reviewed": true,
+    "source": "Stillara",
+    "sourceHash": "a240faa60bfa26b4f975448a8466522d3ef70a64702b48c542fff962242058dd",
+    "text": "Stillara"
+  },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
@@ -3808,6 +4006,12 @@
     "source": "First Thaw",
     "sourceHash": "23afa34328a8ab833bd81916a5c06c49b4bf612d2d8b9b49ad6a41e87721a7e0",
     "text": "Primeiro degelo"
+  },
+  "content.species.tournelle.name": {
+    "reviewed": true,
+    "source": "Tournelle",
+    "sourceHash": "3c3ff916cfbad5627f26bd4e9b552103476495c16986160eb319656e858cf3d6",
+    "text": "Tournelle"
   },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
@@ -3857,6 +4061,12 @@
     "sourceHash": "81ba6826e459bb4f8a09b087b4e2cfa4658cf4149504310543cdbbbe49336f8a",
     "text": "Galantaria"
   },
+  "content.species.wickwaltz.name": {
+    "reviewed": true,
+    "source": "Wickwaltz",
+    "sourceHash": "390beb6be9fe22dfef313225718341b06de3efda63cc64d509756d7983d14d2b",
+    "text": "Wickwaltz"
+  },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
@@ -3904,6 +4114,12 @@
     "source": "Kindling Flourish",
     "sourceHash": "770a69489de2d10f75c6948310c26fcf44baf579def031897aa78b1678b9fedc",
     "text": "Floreio de gravetos"
+  },
+  "content.species.wisterelle.name": {
+    "reviewed": true,
+    "source": "Wisterelle",
+    "sourceHash": "196db2cb473f7783786f64f669a5f125a7d910f25dda91847de0d134d7b897cc",
+    "text": "Wisterelle"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

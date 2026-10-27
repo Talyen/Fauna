@@ -2225,6 +2225,12 @@
     "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
     "text": "Вода"
   },
+  "content.species.aerostat.name": {
+    "reviewed": true,
+    "source": "Aerostat",
+    "sourceHash": "ccd99abd10acfb66cbb7c4b47e2f82714553791b27407ccdb0e64d1338e4a894",
+    "text": "Аэростат"
+  },
   "content.species.aerostat.passive.0.rule": {
     "reviewed": true,
     "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
@@ -2272,6 +2278,12 @@
     "source": "Well Provisioned",
     "sourceHash": "aecf840e058401eda11413470172108135851b72a36325b3f96d0d37803d2922",
     "text": "Хороший запас"
+  },
+  "content.species.almanelle.name": {
+    "reviewed": true,
+    "source": "Almanelle",
+    "sourceHash": "ad4dca348ce051d178ee5944e1c01e029e8bcfa12a8d8d91892dd70e304615a0",
+    "text": "Альманель"
   },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
@@ -2321,6 +2333,12 @@
     "sourceHash": "164e84ffe11d9ddea8bbe52afad54a643554db3c3f40cade025cfa97fccf84bc",
     "text": "Опавшие листья"
   },
+  "content.species.alpenglen.name": {
+    "reviewed": true,
+    "source": "Alpenglen",
+    "sourceHash": "1d2e30b0e63995268e573a0eaf28b160fd5308c5c3a823326baa8a4041cda32c",
+    "text": "Альпенглен"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -2368,6 +2386,12 @@
     "source": "Last Warmth",
     "sourceHash": "9fc30fda82b2a47df29002fd97d6aef3b0cf7787172ac63d3cdb77efc93c6d4e",
     "text": "Последнее тепло"
+  },
+  "content.species.arabesca.name": {
+    "reviewed": true,
+    "source": "Arabesca",
+    "sourceHash": "e6db5166c4a7000cfb4214830c1055d46f7f9d7a406a54d001515a9d59291684",
+    "text": "Арабеска"
   },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
@@ -2417,6 +2441,12 @@
     "sourceHash": "22710faa362b1ff4021f9dd5db30bf9c24d4a614c9b19c22513f88aaa25a9b2e",
     "text": "След лепестков"
   },
+  "content.species.bloomquail.name": {
+    "reviewed": true,
+    "source": "Bloomquail",
+    "sourceHash": "5e9a84479dbd2f2c95c5b065471bb08278c89a9a25faa8d9da969dd398fcedf3",
+    "text": "Блумквейл"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2464,6 +2494,12 @@
     "source": "Full Bloom",
     "sourceHash": "3b0bbddc4c9332f801b9f3b62c32465a7153fd9f7fdd7b153faaf9c1e5c7177e",
     "text": "Полный цвет"
+  },
+  "content.species.cadenza.name": {
+    "reviewed": true,
+    "source": "Cadenza",
+    "sourceHash": "96b0d30ac9c9d94e9d768588136210d0241bb76a26899770b17e78ea71d0f9ad",
+    "text": "Каденца"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
@@ -2513,6 +2549,12 @@
     "sourceHash": "9aee6d9814d1f77135eab9baf41a4f9834ffe360ad251a9c67456535d6aa0959",
     "text": "Живой хор"
   },
+  "content.species.captoad.name": {
+    "reviewed": true,
+    "source": "Captoad",
+    "sourceHash": "c50dd023322f78ef2e798de8ff6469be13ad4e75cb373bae1c7974a312d1ebf4",
+    "text": "Кэптоуд"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2560,6 +2602,12 @@
     "source": "Sporecoat",
     "sourceHash": "77de3fc6400c01cd35ae99f690b2500f11c9dd159c0d3919ad3b92798605d18a",
     "text": "Покров спор"
+  },
+  "content.species.chimecricket.name": {
+    "reviewed": true,
+    "source": "Chimecricket",
+    "sourceHash": "3b3673e2ce4e097bc9687367857be5f0d95cd00db3912b4c0db902f8cdc34ce6",
+    "text": "Чаймкрикет"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2609,6 +2657,12 @@
     "sourceHash": "19dee03a4480acb1b1031183e2a345b34540913289dd4aa7e9e19ddd54b35045",
     "text": "На бис"
   },
+  "content.species.cindernewt.name": {
+    "reviewed": true,
+    "source": "Cindernewt",
+    "sourceHash": "392d233a79116c4136dfdbced2929c73aecb5ecc159702b5fa643a27b11eeff4",
+    "text": "Синдерньюит"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2656,6 +2710,12 @@
     "source": "Cinderstep",
     "sourceHash": "0e59bc2c70ddf03ab8facdc1b20bb915d2c8c3ea727f03a8e2e8bf1f6e649800",
     "text": "Шаг уголька"
+  },
+  "content.species.coralcurl.name": {
+    "reviewed": true,
+    "source": "Coralcurl",
+    "sourceHash": "4eac3ff3527fd7adbdc0ef4cbb2ff548efaab7f94ae6af543120939da7c2b30b",
+    "text": "Коралкёрл"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2705,6 +2765,12 @@
     "sourceHash": "b33c48f8f4e5cfa7dac2e4525d59496117169edbbf2249020291233b0721cae3",
     "text": "Всплеск пузырей"
   },
+  "content.species.dawncall.name": {
+    "reviewed": true,
+    "source": "Dawncall",
+    "sourceHash": "4e84210d620a4948f0e38a7a4dbb91ac099ffdf1c633d6f53ad2b70c1c1ae443",
+    "text": "Донколл"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2752,6 +2818,12 @@
     "source": "Early Bird",
     "sourceHash": "c2a622177302d126228005d56a0600ed694d549f484931930e62094e676726de",
     "text": "Ранняя пташка"
+  },
+  "content.species.dulcera.name": {
+    "reviewed": true,
+    "source": "Dulcera",
+    "sourceHash": "9661f5d9521c31b3ccf245e733e7822bf77bfd6e28f0eab768bf8d7c4a70fbcb",
+    "text": "Дульцера"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
@@ -2801,6 +2873,12 @@
     "sourceHash": "f658f0e12d4fdc4c32ce2ed57069c49742137bd16057d7ac10eec3208d55fccd",
     "text": "Бережный проход"
   },
+  "content.species.dunefox.name": {
+    "reviewed": true,
+    "source": "Dunefox",
+    "sourceHash": "ff3c5ee10b316683f73df61f92521c9b7962d9ab603398b84e3891b986c109e1",
+    "text": "Дюнфокс"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2848,6 +2926,12 @@
     "source": "Shifting Sands",
     "sourceHash": "433d676012016227c4203e3bdd730a8784091d66c04aa9a4a74cee4b6a02e572",
     "text": "Подвижные пески"
+  },
+  "content.species.emberback.name": {
+    "reviewed": true,
+    "source": "Emberback",
+    "sourceHash": "7ff1caaecb720418ec9df5a1dca2677a06966e3e6cc537e8336c5417e868c4f1",
+    "text": "Эмбербэк"
   },
   "content.species.emberback.passive.0.rule": {
     "reviewed": true,
@@ -2897,6 +2981,12 @@
     "sourceHash": "149bebe830f49d6a848811c87e6f50bed5c9ddbfc577aa1b430ba503fd0bbb8a",
     "text": "Расплавленный панцирь"
   },
+  "content.species.euphera.name": {
+    "reviewed": true,
+    "source": "Euphera",
+    "sourceHash": "6b8fb5950fd1b1c36444cb31351117fa274fd19f6d848de2ff6b3e1861a4b7a9",
+    "text": "Юфера"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2945,41 +3035,47 @@
     "sourceHash": "08e105f5221b42d8df606d5ad4ba677de972111ff68f1b78557ede787d49e5f2",
     "text": "Удача"
   },
+  "content.species.glintstride.name": {
+    "reviewed": true,
+    "source": "Glintstride",
+    "sourceHash": "d50d27521468ed98b629a69006a948dee326fff832132cf2853337f1ad0ba2aa",
+    "text": "Глинтстрайд"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "6ae00fda9511b494f2a5241d4128aa54f1f12922984dce68fa4f34fb54a30002",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.1.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "b0129b30904cbe3fcd64af2bd56d0d0d6144feb503fa44727406aa184ecb0b8f",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.2.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "c82d2e6f0ad21adfe2bed5025e2ed1e57148851c5fbc2387f75dc0b2c566a627",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.3.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "3d15ca758a7c5f3d0bdbf3850a746e5c74ec61444c598b06bcf20c104752d769",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.4.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "0e78379b77a945b6f25e45529189fdc3e6e8a0ccd5010c1c7f4fda949a2a94e4",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.passive.5.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "654d0f55e907914e7b6cbcc511bd537e1cb12836bbaa9b516dd2aae02cc9ac17",
-    "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+    "text": "Атаки Глинтстрайда наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
   },
   "content.species.glintstride.title": {
     "reviewed": true,
@@ -2992,6 +3088,12 @@
     "source": "Wrong Foot",
     "sourceHash": "8e35f791f36277dcad6032db02267a146b0e9b2e438482087d6bcfa2f53a4a23",
     "text": "Не с той ноги"
+  },
+  "content.species.memento.name": {
+    "reviewed": true,
+    "source": "Memento",
+    "sourceHash": "125ad0d789b03de28c7f1fecda14c71b8aa8be1b98914a41aafced059bba91b0",
+    "text": "Мементо"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
@@ -3041,6 +3143,12 @@
     "sourceHash": "cd93ed2e063cf06de300e7ac743f8ba8e414a222889ffe9e2db368582ab09ada",
     "text": "Двор помнит"
   },
+  "content.species.mossguard.name": {
+    "reviewed": true,
+    "source": "Mossguard",
+    "sourceHash": "126e4eccd02637c69f12918f91dd00ff1306ebecc916bffc704ffa5985199ff8",
+    "text": "Моссгард"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3088,6 +3196,12 @@
     "source": "Overgrowth",
     "sourceHash": "caa36e91df0cc3002a1e9f5a91a9645dbbb5cf898667f2c4a10d946a66105ad9",
     "text": "Буйная поросль"
+  },
+  "content.species.neradora.name": {
+    "reviewed": true,
+    "source": "Neradora",
+    "sourceHash": "389e08ddf51112e81d5473b69b841a9d40f9af2f274840114f12f6a79fa970bc",
+    "text": "Нерадора"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
@@ -3137,41 +3251,47 @@
     "sourceHash": "1b6cba425b7af8b582fefb8cd2fd8606210284c00775f00e9a399b84d8a432cd",
     "text": "Приливное восстановление"
   },
+  "content.species.oathara.name": {
+    "reviewed": true,
+    "source": "Oathara",
+    "sourceHash": "55e9ddc94f5e7e42c158bb62c41407377d55c2b94379c5d1e0f524d96bdd90d5",
+    "text": "Оатара"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
     "sourceHash": "0c698f1163ee6ec3f327a15f17342407ed5de1d59de364463e63e675aea82110",
-    "text": "Oathara может разыграть за ход {{value0}} карту павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карту павших союзников"
   },
   "content.species.oathara.passive.1.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "70a845d09ca0986daf802e61fd17e4df1bc36ac0634d6c0fbb7724d8a101aee2",
-    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карты павших союзников"
   },
   "content.species.oathara.passive.2.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "56f784988629a120fdb8af49be61e84ceafd295ee8124a199ca156f005cf5d63",
-    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карты павших союзников"
   },
   "content.species.oathara.passive.3.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "af117f633b2b57d8dd66767f5acdbd434958bb28fcd1d4945dd20814a4a6e1d2",
-    "text": "Oathara может разыграть за ход {{value0}} карты павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карты павших союзников"
   },
   "content.species.oathara.passive.4.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "b5a8c329992f1b2c71a9b86e0e1052b48ac90132be0a9a7dd1d100a97054c5c6",
-    "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карт павших союзников"
   },
   "content.species.oathara.passive.5.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "09cc4a55e1f776a448368a65366e52498cc234fdd9453b02e6987a80dce8ccf4",
-    "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
+    "text": "Оатара может разыграть за ход {{value0}} карт павших союзников"
   },
   "content.species.oathara.title": {
     "reviewed": true,
@@ -3184,6 +3304,12 @@
     "source": "Unfinished Journey",
     "sourceHash": "ab11349a3d7ebe1611e7679ac8f019df9cce6b6a97d41ccf98ba697974db2ecd",
     "text": "Незавершённое путешествие"
+  },
+  "content.species.orifable.name": {
+    "reviewed": true,
+    "source": "Orifable",
+    "sourceHash": "f48cdc51ec4473239961ad6d25c686bfc623b1ba4ca987a919f2602067d75b7b",
+    "text": "Орифейбл"
   },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
@@ -3233,6 +3359,12 @@
     "sourceHash": "17ce38f8f81306e94d10feedd7c85109f576c7b7ee0547a98476ebf6de05eb07",
     "text": "Срочная доставка"
   },
+  "content.species.parhelion.name": {
+    "reviewed": true,
+    "source": "Parhelion",
+    "sourceHash": "68dcb7b3a71121023cf72fc8bcb4e61558483eecc9adb7dd5ea3d3524b4caec3",
+    "text": "Паргелий"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3280,6 +3412,12 @@
     "source": "Sunthaw",
     "sourceHash": "6ec68b0fe95680de3021d740864976cb4f8774757bc1a7745a6ba6978bdf9ad7",
     "text": "Солнечная оттепель"
+  },
+  "content.species.pollenmoth.name": {
+    "reviewed": true,
+    "source": "Pollenmoth",
+    "sourceHash": "b43cf12593f55fa25b79f7e35f3487a6df8a865cfd23c7edb21887a532bc8d13",
+    "text": "Полленмот"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
@@ -3329,6 +3467,12 @@
     "sourceHash": "439b253d36b95453ac69eef550a76ecb7c34712bd367e4617c78f1344e932f75",
     "text": "Перекрёстное опыление"
   },
+  "content.species.prismram.name": {
+    "reviewed": true,
+    "source": "Prismram",
+    "sourceHash": "913f5f52efb3b1a72046a4f4f9854a23a142dd716e142c2eb1bd76b146890106",
+    "text": "Призмрэм"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3376,6 +3520,12 @@
     "source": "Refraction",
     "sourceHash": "3ce44dcf0300d9d4f2e4ea0decddbcbbeae6f7bcac5bf5799b5f80e7c7bff7dd",
     "text": "Преломление"
+  },
+  "content.species.pyrella.name": {
+    "reviewed": true,
+    "source": "Pyrella",
+    "sourceHash": "7fed8f622100ed658853ed3985c4357168c4a47e9e0f0074e18fa9ae0fe4a2af",
+    "text": "Пирелла"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3425,6 +3575,12 @@
     "sourceHash": "94d8908a2591a329938c9c0dcc15a209f1d14437b027e42c51e625ca1919f114",
     "text": "Переданное пламя"
   },
+  "content.species.reedstag.name": {
+    "reviewed": true,
+    "source": "Reedstag",
+    "sourceHash": "596f3161eecbf978c58fd94c70f39d3557700400065d75627344bbc2d949f689",
+    "text": "Ридстаг"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3472,6 +3628,12 @@
     "source": "Reedguard",
     "sourceHash": "137fbe7ae77264562ba78a06361008fdd2773624a28d3deff4a0aa4932521fa6",
     "text": "Тростниковый страж"
+  },
+  "content.species.reverie.name": {
+    "reviewed": true,
+    "source": "Reverie",
+    "sourceHash": "b685619da84d34c3c74eafa04c8e953228b711f500b67c0663bc59eef4c31ccc",
+    "text": "Ревери"
   },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
@@ -3521,41 +3683,47 @@
     "sourceHash": "ecee8eaf5188b4bc48d02c39c570f1e030fdec62dbe6bd0876310ef012f7239a",
     "text": "Без спешки"
   },
+  "content.species.ringpalm.name": {
+    "reviewed": true,
+    "source": "Ringpalm",
+    "sourceHash": "1c231c311f5079e017a1b506a66db276807ef16828c41c3c1ad96db5f34b8344",
+    "text": "Рингпальм"
+  },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "294ba2b279b795e3b81a92ef47c410b74072bc0a7a7ba8ddf426a854f2040b18",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.1.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "45a1b0eef369aaa5c95ce95ec60f70660d34d69f64b53e6fd157df0b6d59d322",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.2.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "f92d4a9e85129146f001f39b93eff76c9bc4fe5a7700a10fb267f56d7af1e9fb",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.3.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "1b7a715d5d74b30ed4d54379e634b805f966e1691d062d55344a60c82f05a6c7",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.4.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "fe0f0f9ef8fce6240eb59e6c7497371a4ee776a91949c1116b7ae1839c8f72dc",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.passive.5.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "6bb61a3b8424b453a292f85ad20787b73a3e4675ef53632a0fbc15db3cbf31e6",
-    "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
+    "text": "Урон от <keyword0>оглушения</keyword0> Рингпальма с вероятностью {{value0}}% повторяется"
   },
   "content.species.ringpalm.title": {
     "reviewed": true,
@@ -3568,6 +3736,12 @@
     "source": "Resonance",
     "sourceHash": "c97dc812e1cec784da9825a5bd021588d5e3493817470286a1be86835bf415b4",
     "text": "Резонанс"
+  },
+  "content.species.rookhaven.name": {
+    "reviewed": true,
+    "source": "Rookhaven",
+    "sourceHash": "bdeb597d1e1909b48dbe520e7fa6d58fb7b3e19e6f7c349be58f3ec13cb5ac05",
+    "text": "Рукхейвен"
   },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
@@ -3617,6 +3791,12 @@
     "sourceHash": "0b8be9d20deee3c1a54b6d712e402c2350896275ae8328d5d6eda8a9dd3a3f2a",
     "text": "Начитанность"
   },
+  "content.species.shadebrim.name": {
+    "reviewed": true,
+    "source": "Shadebrim",
+    "sourceHash": "89211cbabb0bfc78ce4032a70b1904543a7f84d642382f8ee1e9bb66ab44258c",
+    "text": "Шейдбрим"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -3664,6 +3844,12 @@
     "source": "Cool Refuge",
     "sourceHash": "2f62eb3e281a57d4d3e5b1ef87a70a14fa1df306ee0df73063ef83be6bf8ff08",
     "text": "Прохладное убежище"
+  },
+  "content.species.skybex.name": {
+    "reviewed": true,
+    "source": "Skybex",
+    "sourceHash": "3c19530a9322f09e1b4ac35141046f4e65c7a7fe4b6556c4e4737d86569e5a10",
+    "text": "Скайбекс"
   },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
@@ -3713,41 +3899,47 @@
     "sourceHash": "b2696914411979fa8d05b9d8d878fdd35ce4b311a7f8f99e4a10d962cdc53ffb",
     "text": "Горный проводник"
   },
+  "content.species.sternshell.name": {
+    "reviewed": true,
+    "source": "Sternshell",
+    "sourceHash": "ffa03c4d11eac251d648115319286932b832c5dfc6d50cc2f71cb26f94e4bdfb",
+    "text": "Стерншелл"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "54c99f5f3b885f912ee5d29cf972cc5c6b9709ee7d2480713dadcc03b30168f1",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.1.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "2965729d0af59eb4679eaf5b00bc836d7fa473d66876fb1991f7e36cd7119253",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.2.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "0e88ffaf29d8d93e32d3605c22a71b7d77ecf7609d7fc533fef1971b3366d9a9",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.3.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "9d7b91b3c25b52bbcb00ae5a2ea9fc35fa6b040769da526e068ad2bdbecc4c69",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.4.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "e2a7aedc17b70f96772bb351ebe543a465860fd6b83dceaf8d19a82e23bcaf17",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.passive.5.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "4fa782f5ce6861fc3c5b5a1cb41f3a3c66a34cf33578c5161082e4f0b10fee76",
-    "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+    "text": "Стерншелл начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
   },
   "content.species.sternshell.title": {
     "reviewed": true,
@@ -3760,6 +3952,12 @@
     "source": "Shelter",
     "sourceHash": "d08ac02fbdd24f21896f136be1cf315eceb78f09f642cf4cead0b89ce3383a3c",
     "text": "Укрытие"
+  },
+  "content.species.stillara.name": {
+    "reviewed": true,
+    "source": "Stillara",
+    "sourceHash": "4948612da12dc15c251599510d0a8f334f22f1a2f083a138450a51768add8db4",
+    "text": "Стиллара"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
@@ -3809,6 +4007,12 @@
     "sourceHash": "ecc5cfffe63b3ddb1a44c5a58a450c8bb04f8db4d935c85e2eac50256ea6c478",
     "text": "Первая оттепель"
   },
+  "content.species.tournelle.name": {
+    "reviewed": true,
+    "source": "Tournelle",
+    "sourceHash": "5a553b8361b13a9a1f19b25224a34279f7d9d79c9e1e5b4df42b4acc72eba3a5",
+    "text": "Турнель"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3857,41 +4061,47 @@
     "sourceHash": "d88c5d532239642f746a7fc371682cca79ffc4ed27e472e0b1b26a342e493ecd",
     "text": "Галантность"
   },
+  "content.species.wickwaltz.name": {
+    "reviewed": true,
+    "source": "Wickwaltz",
+    "sourceHash": "7b2ea395835229f6509adf23002b8be144c77349dda1552b3db0ff9cd4f40225",
+    "text": "Виквальц"
+  },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "2af8e6a6b0f1c234db1b444e26db62417438affae22dfe0999031b3b008e72ed",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.1.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "612dcf289b95e112f8f1128ac51adbbe2a5c8f512ab3cc76ea3d3de06b69bfb4",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.2.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "eb3b120610fd4c5c0f0c30b7732ed28bd2edd2c1c8e88522fa9cfc145dd6fc0f",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.3.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "410a59a42e1808f5649bc5c6a429e57534c9165c2170fd5a58438e53aeca43ca",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.4.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
     "sourceHash": "a1dc193bb449f00c08afee2e263b31009d6449f9f2314ddce269960c584ad81b",
-    "text": "Вторая карта Wickwaltz за ход повторяется с вероятностью {{value0}}%"
+    "text": "Вторая карта Виквальца за ход повторяется с вероятностью {{value0}}%"
   },
   "content.species.wickwaltz.passive.5.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn repeats",
     "sourceHash": "ad7d1a8b462fdb80fedede8452ec7f6fa145a83b6e128f6b8b19b05d163d5d5d",
-    "text": "Вторая карта Wickwaltz за ход повторяется"
+    "text": "Вторая карта Виквальца за ход повторяется"
   },
   "content.species.wickwaltz.title": {
     "reviewed": true,
@@ -3904,6 +4114,12 @@
     "source": "Kindling Flourish",
     "sourceHash": "d00b35b8230104dfa609b10f789ae484dc5d8a698c4bc7ffea5271e88fa96328",
     "text": "Росчерк растопки"
+  },
+  "content.species.wisterelle.name": {
+    "reviewed": true,
+    "source": "Wisterelle",
+    "sourceHash": "819b7e8cba9a1074c94e008341b98aba252405a3d810242579114cd3fa6ba424",
+    "text": "Вистерель"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

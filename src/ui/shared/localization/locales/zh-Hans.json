@@ -2225,6 +2225,12 @@
     "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
     "text": "水"
   },
+  "content.species.aerostat.name": {
+    "reviewed": true,
+    "source": "Aerostat",
+    "sourceHash": "04e620bb6797309ab55be0a0d48a421fcc8fc290e66f126e664f92d281e97764",
+    "text": "艾罗斯塔"
+  },
   "content.species.aerostat.passive.0.rule": {
     "reviewed": true,
     "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
@@ -2272,6 +2278,12 @@
     "source": "Well Provisioned",
     "sourceHash": "b1cc8a0cc584e7fd445b522af4e2a6725b3ba8411d034e553f2a9c672176cc16",
     "text": "补给充足"
+  },
+  "content.species.almanelle.name": {
+    "reviewed": true,
+    "source": "Almanelle",
+    "sourceHash": "6874fbf89e1288755170f873e6397b35a5feb1ab8d65f0a992fdc9e1bcbe3ee5",
+    "text": "阿尔曼妮尔"
   },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
@@ -2321,6 +2333,12 @@
     "sourceHash": "41ab7c68ffb8ac6ce2b0145e1d054c48a7a5f56e679897749e5256cf38adb9ea",
     "text": "落叶"
   },
+  "content.species.alpenglen.name": {
+    "reviewed": true,
+    "source": "Alpenglen",
+    "sourceHash": "9c3392398a8f48634ec4e10eba0f35c08333ea713680b43effd31b033bb644f7",
+    "text": "阿尔彭格伦"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -2368,6 +2386,12 @@
     "source": "Last Warmth",
     "sourceHash": "8719c6a25fb98a3e20d24ce806fc4c87f1ca86337c5cd71896a9feca8bd8adbc",
     "text": "最后的温暖"
+  },
+  "content.species.arabesca.name": {
+    "reviewed": true,
+    "source": "Arabesca",
+    "sourceHash": "fc2c5e1542e5854740aa3abf04af024003406cfca45265c62bcb99f3052a6d17",
+    "text": "阿拉贝斯卡"
   },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
@@ -2417,6 +2441,12 @@
     "sourceHash": "3be9b592fe0cb107e122369b774e9e450fc63c073fef3417b0e4dfcb54018c9b",
     "text": "花瓣余迹"
   },
+  "content.species.bloomquail.name": {
+    "reviewed": true,
+    "source": "Bloomquail",
+    "sourceHash": "d2fb05f07b17a4aa39cd66cd9d17f42fd7709bac70d7a9141f929beb27ea072d",
+    "text": "布鲁姆奎尔"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2464,6 +2494,12 @@
     "source": "Full Bloom",
     "sourceHash": "ac96a309fe3d0fd18fe143bb10a796429cd5e8b4e1caae068d1036d4b6d088ab",
     "text": "盛放"
+  },
+  "content.species.cadenza.name": {
+    "reviewed": true,
+    "source": "Cadenza",
+    "sourceHash": "53ec30876bf0e7e8ed29f8334ef22872a0368cc587680d41865f6195c91c38a8",
+    "text": "卡登扎"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
@@ -2513,6 +2549,12 @@
     "sourceHash": "0e062ae126e13ab639da8b26c2e6dce50edc8e68cc4fb65aca5bd0f6cc308049",
     "text": "生生合唱"
   },
+  "content.species.captoad.name": {
+    "reviewed": true,
+    "source": "Captoad",
+    "sourceHash": "dfe5e071d4a7ed7424015466abc8a580f007b7c5555fc8014148caecc904f53d",
+    "text": "卡普托德"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2560,6 +2602,12 @@
     "source": "Sporecoat",
     "sourceHash": "b10772ce2de53e1e34f8cf09ae23e8f6f63c54943234ae0453357860e9b3ffd0",
     "text": "孢子外衣"
+  },
+  "content.species.chimecricket.name": {
+    "reviewed": true,
+    "source": "Chimecricket",
+    "sourceHash": "058f224084742ae1480d3ac0082552abc099538784bddbe0e29a0d15ae187792",
+    "text": "奇姆克里克特"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2609,6 +2657,12 @@
     "sourceHash": "35ce9f7f77e6a7d9d9358f4d8bf7a893577c18e01dddad8664ef22c4dada6a58",
     "text": "再来一曲"
   },
+  "content.species.cindernewt.name": {
+    "reviewed": true,
+    "source": "Cindernewt",
+    "sourceHash": "7473620049a8964d76d2d490032f1ee06973fdd18da7a4324b7e3ce63658f42c",
+    "text": "辛德纽特"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2656,6 +2710,12 @@
     "source": "Cinderstep",
     "sourceHash": "a25e8911280edfe5e3ee24c83a0b0691fc6d23a1073c203b865aa7c71ab67018",
     "text": "余烬步"
+  },
+  "content.species.coralcurl.name": {
+    "reviewed": true,
+    "source": "Coralcurl",
+    "sourceHash": "9f543379e299c5db5570ab03d6a09a6271adb744a1e006bf4dc84a0a4cc1aefa",
+    "text": "科拉尔卷"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2705,6 +2765,12 @@
     "sourceHash": "3aab49d67aa157aacb892b44b0616e2bc58a9d711de449f3aac2ff2d79074786",
     "text": "泡沫迸裂"
   },
+  "content.species.dawncall.name": {
+    "reviewed": true,
+    "source": "Dawncall",
+    "sourceHash": "6eed1e3bbd04a1d3ce6428e60f0e231813ab7400c12d3532ba0370f8182b1327",
+    "text": "多恩科尔"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2752,6 +2818,12 @@
     "source": "Early Bird",
     "sourceHash": "e661c833fbc647b63b3ce67fdcd0d511e1f90331871039dcfb72508804f98bb0",
     "text": "早起鸟"
+  },
+  "content.species.dulcera.name": {
+    "reviewed": true,
+    "source": "Dulcera",
+    "sourceHash": "b07ce1319930ab41b779c245ef8395c371846a9fbec7252e0eb055083a367d56",
+    "text": "杜尔塞拉"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
@@ -2801,6 +2873,12 @@
     "sourceHash": "1dc6266cd0a5997ef411bbb8bc41c50d0d91f091069bf6772d919df9ba93d67d",
     "text": "温柔通行"
   },
+  "content.species.dunefox.name": {
+    "reviewed": true,
+    "source": "Dunefox",
+    "sourceHash": "0ec80e5d1ff98860b72938d5d073c8c582a6fff820da50acc68ffa21c34527ca",
+    "text": "沙丘狐"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2848,6 +2926,12 @@
     "source": "Shifting Sands",
     "sourceHash": "3211fa21dd8e7b67c5021ae45d1582d2b96a6fb64d9bf2f47cad4b00e5e3034c",
     "text": "流动沙丘"
+  },
+  "content.species.emberback.name": {
+    "reviewed": true,
+    "source": "Emberback",
+    "sourceHash": "2a28228658dfaf3fbced7a9a79d6c30cf89b10f5e1dcad284a62d39d4570f507",
+    "text": "恩伯巴克"
   },
   "content.species.emberback.passive.0.rule": {
     "reviewed": true,
@@ -2897,6 +2981,12 @@
     "sourceHash": "e034dda4c56be010b5fccd03acda7d865268182f4d31913a655db0777a97eec0",
     "text": "熔融外壳"
   },
+  "content.species.euphera.name": {
+    "reviewed": true,
+    "source": "Euphera",
+    "sourceHash": "5d22d0be312841d455313156f123fe7b1c15d77502012643422cb633e0986401",
+    "text": "优菲拉"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2945,41 +3035,47 @@
     "sourceHash": "34e1e5b4bebf608b607052d7ccc39c5285a63ae05ac5ae6d1528ba2e86577a21",
     "text": "好运"
   },
+  "content.species.glintstride.name": {
+    "reviewed": true,
+    "source": "Glintstride",
+    "sourceHash": "4b48b1f410de5f9e3c00d215e524e8e689495aaa407d02998cf6ce8c1971565b",
+    "text": "格林特斯特莱德"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "7ad78db095af11ab0346f2e4be835de2b93e61699411ebd7160c24fa3c297fcc",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.1.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "5858c7356d958d16d802ea0034e778ba1e526b076475b38124d29b9a3e11ac6d",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.2.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "113fa733d6c73f5ae203048e1309404e4baf06e5139203a1ceac31be3394d60f",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.3.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "a2cdd0d679c084f1bf776e2c210ca6af18b7539f6905770318f93a9c93ac4665",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.4.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "d514432fb71c31f6fd00be528f86f1e34bd47c514f30152b7a44ac753133c28d",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.passive.5.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "ea2a12b1b1f9f204f8c498b4ad9f34fe30b963a5f3214191c20dd10032048f3c",
-    "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+    "text": "格林特斯特莱德的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.species.glintstride.title": {
     "reviewed": true,
@@ -2992,6 +3088,12 @@
     "source": "Wrong Foot",
     "sourceHash": "5864fd3c70b85f6190ba1c1e0f8cea76ef2bf273e629f0a1083253234ea1dc6f",
     "text": "措手不及"
+  },
+  "content.species.memento.name": {
+    "reviewed": true,
+    "source": "Memento",
+    "sourceHash": "ad1d0e0fb710f81eff826b01cd5104f24381afb34a03e94ad9d8e158edb596dd",
+    "text": "梅门托"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
@@ -3041,6 +3143,12 @@
     "sourceHash": "98f2d258a38452e80cdbf7576c845b7d672139d6c702bbae0fb1a0de9a8c9ec1",
     "text": "宫廷铭记"
   },
+  "content.species.mossguard.name": {
+    "reviewed": true,
+    "source": "Mossguard",
+    "sourceHash": "6bdccc676d5124a0d0c4b533e8fa4570df093d67d066696f3de4a545bb666902",
+    "text": "莫斯加德"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3088,6 +3196,12 @@
     "source": "Overgrowth",
     "sourceHash": "0886c0fae0bafff88dbcbcbdc052365e95b94ec0b8daa1f1e54474b1aa287dd0",
     "text": "蔓生"
+  },
+  "content.species.neradora.name": {
+    "reviewed": true,
+    "source": "Neradora",
+    "sourceHash": "5addafbb754babbc73f8f62391dee375a6234232ffe01fd02031bff438c55596",
+    "text": "涅拉多拉"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
@@ -3137,41 +3251,47 @@
     "sourceHash": "88385f6b544220f3a9883398820f1042635c5c4d6283ccb0a6310ac07cdb2db7",
     "text": "潮汐再生"
   },
+  "content.species.oathara.name": {
+    "reviewed": true,
+    "source": "Oathara",
+    "sourceHash": "c6b8d1dada2f184da416c323b96eefcf371a4b3ba01e6a8ec3f34f49103fe5b2",
+    "text": "奥萨拉"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
     "sourceHash": "e19d2746655d2d0161ff70e5b8b6a0a6e7e6f99969ba46158c17f39db15fb6c9",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.1.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "9000b82e7bbbd094c34aa0f03dfa7f49b5d1e96247d2a41c001ca005c120c8c1",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.2.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "d9e147e2cb2b224ca42720ecbdc4e0716659e0e146c4453630219b38add5982e",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.3.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "9b3ba196c8cae9e0a8a8a1edfae9b68fbcfb7295b00189c16055e47bc5207356",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.4.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "65306bda5bde2b93275d6103d631a34dc3d76d06af0d5775356892777fbfb22a",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.passive.5.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "8746a85871b3248d5e7d78c421137baf95513b8677519aaeff6c8753c2ecfc9c",
-    "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+    "text": "奥萨拉每回合可以打出{{value0}}张被击倒盟友的牌"
   },
   "content.species.oathara.title": {
     "reviewed": true,
@@ -3184,6 +3304,12 @@
     "source": "Unfinished Journey",
     "sourceHash": "bffd48a0289da874309a9d999042f5a8176f4df8c2d83f6e9e4dbbac57de73a7",
     "text": "未竟之旅"
+  },
+  "content.species.orifable.name": {
+    "reviewed": true,
+    "source": "Orifable",
+    "sourceHash": "05333ce82df9861fa2b1a38ced4564b2b6e1112db844fad7680d8bc93c80631d",
+    "text": "奥里法布尔"
   },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
@@ -3233,6 +3359,12 @@
     "sourceHash": "ac205a1c22dd317899687bfb14ce3f9875a1f4857a1ebe691aff1f213b6f2408",
     "text": "特快递送"
   },
+  "content.species.parhelion.name": {
+    "reviewed": true,
+    "source": "Parhelion",
+    "sourceHash": "bd5fd464ae24c9ca7107abb5cbf177845d67a2a2e770b38210c3c0362bf60799",
+    "text": "帕赫利昂"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3280,6 +3412,12 @@
     "source": "Sunthaw",
     "sourceHash": "f70065841d95f3822ccf117edba130018811d351e9767ef892a91aeaff1fade3",
     "text": "日暖消融"
+  },
+  "content.species.pollenmoth.name": {
+    "reviewed": true,
+    "source": "Pollenmoth",
+    "sourceHash": "1f7b523079e364111b3eff9d845ceaaa8e768fd945eea2eddb3f68c074da29a3",
+    "text": "波伦莫斯"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
@@ -3329,6 +3467,12 @@
     "sourceHash": "7ebd48bfd7c7c1bb3e88af69840efdd4ed23f5756ded0e517062433aa426413d",
     "text": "异花授粉"
   },
+  "content.species.prismram.name": {
+    "reviewed": true,
+    "source": "Prismram",
+    "sourceHash": "f55f3b978ff6a9d185e414b891effbeaa79d5b5ecce38a23a89129f21e2a9add",
+    "text": "普里兹姆拉姆"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -3376,6 +3520,12 @@
     "source": "Refraction",
     "sourceHash": "327e8a2f068a1cf8ac1de699d3aff3bdb415bed0fa543e3bbb3cb4675e49af27",
     "text": "折射"
+  },
+  "content.species.pyrella.name": {
+    "reviewed": true,
+    "source": "Pyrella",
+    "sourceHash": "dcb145f6649f292b233a3da66489e71a7815b4ff0bcbb2c5a2e9b988e5673156",
+    "text": "派蕾拉"
   },
   "content.species.pyrella.passive.0.rule": {
     "reviewed": true,
@@ -3425,6 +3575,12 @@
     "sourceHash": "882af31494b5d2116a23d6c4ccd2b13c4b0611b3539c5301b62c8b5ed92ebaae",
     "text": "流转之焰"
   },
+  "content.species.reedstag.name": {
+    "reviewed": true,
+    "source": "Reedstag",
+    "sourceHash": "38d95b5217eba579bcc66404ae347fa0d04a0351bb8794fa7d341465f2ed137c",
+    "text": "里德斯塔格"
+  },
   "content.species.reedstag.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
@@ -3472,6 +3628,12 @@
     "source": "Reedguard",
     "sourceHash": "7c7e514d1223c87c89a6347bd4fa89545cbac708fe5899a5f8452d47cf9692b0",
     "text": "芦苇守护"
+  },
+  "content.species.reverie.name": {
+    "reviewed": true,
+    "source": "Reverie",
+    "sourceHash": "627c6a1e372fd78cb35d92c7ff636a66019c5440878070d7f62985e74d8ef17a",
+    "text": "蕾芙丽"
   },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
@@ -3521,41 +3683,47 @@
     "sourceHash": "3bb8586de03af4f14042d0d97c0b9b96190f66023960621028e04e3fc2bbdbaa",
     "text": "从容"
   },
+  "content.species.ringpalm.name": {
+    "reviewed": true,
+    "source": "Ringpalm",
+    "sourceHash": "33bf13fc796bdc145b9ceb16af7f21bd7b32c332b5fb4350d60f3519c0f38d1f",
+    "text": "林帕姆"
+  },
   "content.species.ringpalm.passive.0.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "485aa028199a9f8be5385afa0447b70214f2f86002c88a2ec2a34ccaf7d0112e",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.1.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "a60f5cad2b1087597ef8485e95e7b5445d1db139b0dd34d6b4ad10d352adf9b1",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.2.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "dec44e4654911dc3636825bdf32820c8e13133ad5c47d20fa461328ba485c9bc",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.3.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "2a7c8a021f3590b17dcf6abf5b2252a5f8a165507d84c0ed87be7a9fa8cfde9e",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.4.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "ca651f47cef1b01514065e352658df85cc61cff6758c161c9eb57490a57be798",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.passive.5.rule": {
     "reviewed": true,
     "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
     "sourceHash": "06e723ddc731fb6a064fa90828b9e419466397b1c5ecce06ad7b1a75cd664aa3",
-    "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
+    "text": "林帕姆的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
   "content.species.ringpalm.title": {
     "reviewed": true,
@@ -3568,6 +3736,12 @@
     "source": "Resonance",
     "sourceHash": "25b47385c72b7f07cbae82d13e7943119c448bc3c0bf3fafbd4d46fdfee9a484",
     "text": "共鸣"
+  },
+  "content.species.rookhaven.name": {
+    "reviewed": true,
+    "source": "Rookhaven",
+    "sourceHash": "6cd0a8fc9748b83686262d9188c181ab0f58d8b2ef0be3e1675269c008debd7a",
+    "text": "鲁克黑文"
   },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
@@ -3617,6 +3791,12 @@
     "sourceHash": "8a16cda6b3188d6d8d92f73fa0ac81d744160eee72640af706ee73319f47724d",
     "text": "博览群书"
   },
+  "content.species.shadebrim.name": {
+    "reviewed": true,
+    "source": "Shadebrim",
+    "sourceHash": "9a3541455cd7ba6acb568a44651955625978b394ad213902291948f36033b200",
+    "text": "谢德布里姆"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -3664,6 +3844,12 @@
     "source": "Cool Refuge",
     "sourceHash": "b8655c14588f0c87aa6daede1db24bcd80642c6f1aa0d0fed8d59846194a6133",
     "text": "清凉避所"
+  },
+  "content.species.skybex.name": {
+    "reviewed": true,
+    "source": "Skybex",
+    "sourceHash": "ef6ddd3f90e03cb5af95fb0ac69b89c3ccc35c63495f0c8621c1a29d4c692141",
+    "text": "斯凯贝克斯"
   },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
@@ -3713,41 +3899,47 @@
     "sourceHash": "573133ed11d5239f6eb4c1be17a307a25bf8111bf60b35e32782bdf165207843",
     "text": "山间向导"
   },
+  "content.species.sternshell.name": {
+    "reviewed": true,
+    "source": "Sternshell",
+    "sourceHash": "620d3c1bf2463b68bf330948d30c42df643d9ecad1a8acbc6c80085ac03cf4a7",
+    "text": "斯特恩谢尔"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "74362ecce6480f32107e2c18cde3e1841cb22f2536f826aae7c1f496db963568",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.1.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "f8ebe3869ef29fc48509c091d1e14bb943ed4ed0b14f0a53a0ca0b7c24c6a0d1",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.2.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "e3844e43f43c2fe07304f0d0661b10265a643724da1d479a19a20eb737865094",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.3.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "05ec4fe467b1d62dd4ccebc65ef3132283d9ee423d14d18a83292b91c8bca163",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.4.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "68eb2d492a6abf8569f5678fa3336afbf5ccee67e46e34f5269db5560c9d9112",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.passive.5.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "70dff5c385a9a75d9e28f17bf47b7548d97c685b9a55b30203b44b2525e2c299",
-    "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+    "text": "斯特恩谢尔以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
   },
   "content.species.sternshell.title": {
     "reviewed": true,
@@ -3760,6 +3952,12 @@
     "source": "Shelter",
     "sourceHash": "e90bd11f6b22eb7f7b968077386bf7bd62ac532af158e4b969ee8980576bdb24",
     "text": "庇护"
+  },
+  "content.species.stillara.name": {
+    "reviewed": true,
+    "source": "Stillara",
+    "sourceHash": "55470a31c8e6b4d85e80aecb713f3a9a3f91812d859da99cbe99df0137d5eef4",
+    "text": "斯蒂拉拉"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
@@ -3809,6 +4007,12 @@
     "sourceHash": "6ac2aa988c9284d08fec5557b6aa9522601ef152667fae163be162c751b6fea8",
     "text": "初融"
   },
+  "content.species.tournelle.name": {
+    "reviewed": true,
+    "source": "Tournelle",
+    "sourceHash": "7b0b3bc50c5160cf7810dc8f8ca352528c64343ca40a650ed0c1263a788564a8",
+    "text": "图尔内尔"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3857,41 +4061,47 @@
     "sourceHash": "8b0845581e2720e2fab240d0459185bd8a790e016167a50f0798b4c66346917a",
     "text": "侠义"
   },
+  "content.species.wickwaltz.name": {
+    "reviewed": true,
+    "source": "Wickwaltz",
+    "sourceHash": "6aa040ae53d56933cd041106c39865c180eef25bfbb6b2102fc58ae1fd005d1a",
+    "text": "维克华尔兹"
+  },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "46d7ab3b5264ccaf969e98744dc87a4de6068e22f913c4e056c98fbdcfb36fba",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.1.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "394a20936c206aef124c3840f94d8d3f33ec81f197c76d3cdb187c242c9d6a3b",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.2.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "4bfaaebd5cebc896aee975618769e07e6fe23b9ea7628959a9f6757954b0738e",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.3.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
     "sourceHash": "afc3fd92cfccc231f2d1cf130d88ad26237e74e33b9254b86e99abd163e25b04",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.4.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
     "sourceHash": "6c7ac70cc6cafc9e0068cac516b55d90d6c148da47e99507935dc882510c22f2",
-    "text": "Wickwaltz每回合打出的第二张牌有{{value0}}%的概率重复"
+    "text": "维克华尔兹每回合打出的第二张牌有{{value0}}%的概率重复"
   },
   "content.species.wickwaltz.passive.5.rule": {
     "reviewed": true,
     "source": "Wickwaltz’s second card each turn repeats",
     "sourceHash": "d2c643bee9fe9c37b7625ce3a64928cd60508b668a92abfefba307989e6839b0",
-    "text": "Wickwaltz每回合打出的第二张牌会重复"
+    "text": "维克华尔兹每回合打出的第二张牌会重复"
   },
   "content.species.wickwaltz.title": {
     "reviewed": true,
@@ -3904,6 +4114,12 @@
     "source": "Kindling Flourish",
     "sourceHash": "8df776346e928609096ea0a8f47761daa144aaea507506135bddacb859f57f5c",
     "text": "引火回旋"
+  },
+  "content.species.wisterelle.name": {
+    "reviewed": true,
+    "source": "Wisterelle",
+    "sourceHash": "518eaf9e638607c0ae790e0fab95d75a57b95f3908bf9c062966ee0295d8b623",
+    "text": "薇丝特蕾尔"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
