@@ -137,6 +137,24 @@
     "sourceHash": "18a70d30cd579c11c52360367d2a585d17d8d06f5c8ad64f62e9245141ce6390",
     "text": "{{owner}} · {{target}}"
   },
+  "boons.choose": {
+    "reviewed": true,
+    "source": "Choose {{name}}",
+    "sourceHash": "48fb888614ddc15fdd9a3be136b2c7b6d71dfa891dff4200159bf3370984c707",
+    "text": "Choisir {{name}}"
+  },
+  "boons.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "53bc8e0e9a0b22a32f7663e1b756f1f6386dd2c3f783099488a95a114096584c",
+    "text": "Examiner {{name}}"
+  },
+  "boons.pages": {
+    "reviewed": true,
+    "source": "Boon pages",
+    "sourceHash": "709ad0f9b282712c380506d6e740485555c795d4672b56148ec99f1827efa862",
+    "text": "Pages de bénédictions"
+  },
   "common.cancel": {
     "reviewed": true,
     "source": "Cancel",
@@ -461,6 +479,84 @@
     "source": "Talents",
     "sourceHash": "1a426fd621072515d4e1f0680dbc59f3ba5de856757b912f7117968cfa1d5516",
     "text": "Talents"
+  },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "0a8e11851f65309a927697b2786e2eb40393a9e071ea491dae0bc365c1637c01",
+    "text": "Acheter {{name}} pour {{amount}} pièces d’or"
+  },
+  "merchant.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "ca17cb18acf33b58e3753f2e31ba4c45f835495d9e4cb4a3d3ae210d42a624df",
+    "text": "Continuer"
+  },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "059934bbcb526a02e063263513d3503823ae866b7e438c32b9eab00ebdd07fdc",
+    "text": "Pour ce voyage"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "aac31c9ba53179f57cb24b85fff43426374820f3a27ac7f8a8b1fba935920420",
+    "text": "{{amount}} pièces d’or"
+  },
+  "merchant.leave": {
+    "reviewed": true,
+    "source": "Leave",
+    "sourceHash": "15227a388fe2a15a8be854fb16a20fd9e7a532759084983c6d1387070da3a250",
+    "text": "Partir"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "117eb0af391c91836d0678316c25cebf6d3ba4ae11e2f8c44b233aa4de9f069d",
+    "text": "Marchand de bénédictions"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "443685e099379ac3399754804e58ab26356cbef7e4c76f10bd159e30dc69f422",
+    "text": "Pas assez de pièces d’or"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "402390b51d6f824a59aaa4ab3eb0e54bebee0d044ce2b6a2c902200b86345158",
+    "text": "Une seule par client - Aucun remboursement !"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "5832f59aec5f659317b1de200eebd84610922ee465585fa05a8645237676277d",
+    "text": "Achat déjà effectué"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "9cd485015db9bb5902179b3a0d4dbf82dfd73785e6117fa47fa66751e1436e44",
+    "text": "Bénédiction achetée"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "ee0163116cf6c9054e275eb355fab5593d3b71b478ae26538ecc9c79c739c91a",
+    "text": "Bénédiction reçue"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "39d5de0ea7e29fcabaf0ee980a684603be31bd24defef100430a1e1cf192a10c",
+    "text": "Stock du marchand de bénédictions"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "6e63d9786afbb645ea2275e4b0918e0b7b35c673f9b4b1be449b87fc905a64d6",
+    "text": "Visiter le marchand de bénédictions"
   },
   "navigation.back": {
     "reviewed": true,

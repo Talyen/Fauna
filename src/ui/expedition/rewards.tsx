@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { creatureKeywords } from "../shared/effects/palettes";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
@@ -48,6 +49,7 @@ function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId })
   );
 }
 export function Rewards({ game, send, inspect }: Props) {
+  const i18n = useMessages();
   const selectedRecruit = game.phase === "recruit" ? game.reward.selectedRecruit : undefined;
   const [choosing, setChoosing] = useState(game.phase === "boon" || selectedRecruit !== undefined);
   const proceed = useRef<HTMLButtonElement>(null);
@@ -124,7 +126,9 @@ export function Rewards({ game, send, inspect }: Props) {
                           <BoonArt
                             boon={boon}
                             className="boon-choice"
-                            aria-label={`Choose ${boon.name}`}
+                            aria-label={i18n.message("boons.choose", "Choose {{name}}", {
+                              name: i18n.content(`content.boon.${boon.id}.name`, boon.name),
+                            })}
                             onClick={() => send({ type: "chooseBoon", boon: id })}
                           />
                         </TooltipTrigger>

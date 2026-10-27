@@ -68,6 +68,15 @@
   "battle.targetSummary": {
     "text": "{{owner}} · {{target}}"
   },
+  "boons.choose": {
+    "text": "Choose {{name}}"
+  },
+  "boons.inspect": {
+    "text": "Inspect {{name}}"
+  },
+  "boons.pages": {
+    "text": "Boon pages"
+  },
   "common.cancel": {
     "text": "Cancel"
   },
@@ -124,6 +133,45 @@
   },
   "menu.talents": {
     "text": "Talents"
+  },
+  "merchant.buy": {
+    "text": "Buy {{name}} for {{amount}} Gold"
+  },
+  "merchant.continue": {
+    "text": "Continue"
+  },
+  "merchant.forJourney": {
+    "text": "For this journey"
+  },
+  "merchant.gold": {
+    "text": "{{amount}} Gold"
+  },
+  "merchant.leave": {
+    "text": "Leave"
+  },
+  "merchant.name": {
+    "text": "Boon Merchant"
+  },
+  "merchant.notEnough": {
+    "text": "Not enough Gold"
+  },
+  "merchant.policy": {
+    "text": "Limit 1 per customer - No Refunds!"
+  },
+  "merchant.purchaseUsed": {
+    "text": "Purchase used"
+  },
+  "merchant.purchasedBoon": {
+    "text": "Purchased Boon"
+  },
+  "merchant.received": {
+    "text": "Boon received"
+  },
+  "merchant.stock": {
+    "text": "Boon Merchant stock"
+  },
+  "merchant.visit": {
+    "text": "Visit Boon Merchant"
   },
   "navigation.back": {
     "text": "Back"

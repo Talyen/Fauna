@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { visualKeywords } from "../shared/effects/palettes";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { useLayoutEffect, useRef } from "react";
@@ -11,6 +12,7 @@ import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
 import { BoonArt, BoonName, BoonText } from "./boon-presentation";
 export function SupportOffer({ game, send }: { game: GameState; send: (c: Command) => boolean }) {
+  const i18n = useMessages();
   const visit = game.support;
   if (!visit || !canVisitMerchant(game)) return null;
   return (
@@ -19,15 +21,16 @@ export function SupportOffer({ game, send }: { game: GameState; send: (c: Comman
         aspect="creature"
         artwork={assetUrl("location.silken-clearing")}
         effectTone="gold"
-        aria-label="Visit Boon Merchant"
+        aria-label={i18n.message("merchant.visit", "Visit Boon Merchant")}
         onClick={() => send({ type: "enterSupport", visit: visit.id })}
       />
-      <h2>Boon Merchant</h2>
+      <h2>{i18n.message("merchant.name", "Boon Merchant")}</h2>
     </div>
   );
 }
 
 export function SupportScreen({ game, send }: { game: StateAt<"support">; send: (c: Command) => boolean }) {
+  const i18n = useMessages();
   const visit = game.support;
   const purchased = BOONS.find((boon) => boon.id === visit.purchased);
   const leave = useRef<HTMLButtonElement>(null);
@@ -44,50 +47,68 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
             !purchased ? (
               <p className="merchant-wallet">
                 <Coins className="gold-icon" aria-hidden="true" />
-                {game.currency} Gold
+                {i18n.message("merchant.gold", "{{amount}} Gold", { amount: game.currency })}
               </p>
             ) : undefined
           }
         >
-          {purchased ? "Boon received" : "Boon Merchant"}
+          {purchased
+            ? i18n.message("merchant.received", "Boon received")
+            : i18n.message("merchant.name", "Boon Merchant")}
         </ScreenHeading>
       </header>
       {purchased ? (
-        <section className="merchant-reward" aria-label="Purchased Boon">
-          <BoonArt boon={purchased} presentation aria-label={purchased.name} />
+        <section
+          className="merchant-reward"
+          aria-label={i18n.message("merchant.purchasedBoon", "Purchased Boon")}
+        >
+          <BoonArt
+            boon={purchased}
+            presentation
+            aria-label={i18n.content(`content.boon.${purchased.id}.name`, purchased.name)}
+          />
           <h2>
             <BoonName boon={purchased} />
           </h2>
           <BoonText boon={purchased} />
-          <p className="merchant-terms">For this journey</p>
+          <p className="merchant-terms">{i18n.message("merchant.forJourney", "For this journey")}</p>
         </section>
       ) : (
         <>
           <p className="merchant-terms merchant-policy">
-            <em>Limit 1 per customer - No Refunds!</em>
+            <em>{i18n.message("merchant.policy", "Limit 1 per customer - No Refunds!")}</em>
           </p>
-          <section className="boon-options merchant-stock" aria-label="Boon Merchant stock" data-nav-row>
+          <section
+            className="boon-options merchant-stock"
+            aria-label={i18n.message("merchant.stock", "Boon Merchant stock")}
+            data-nav-row
+          >
             {visit.stock.map((slot) => {
               const boon = BOONS.find((b) => b.id === slot.boon)!;
               const unavailable = visit.resolved || game.currency < slot.price;
               const reason = visit.resolved
-                ? "Purchase used"
+                ? i18n.message("merchant.purchaseUsed", "Purchase used")
                 : game.currency < slot.price
-                  ? "Not enough Gold"
+                  ? i18n.message("merchant.notEnough", "Not enough Gold")
                   : "";
               const statusId = `merchant-${slot.slot}-status`;
               return (
                 <section className="reward-option merchant-offer" key={slot.slot}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <BoonArt boon={boon} aria-label={`Inspect ${boon.name}`} />
+                      <BoonArt
+                        boon={boon}
+                        aria-label={i18n.message("boons.inspect", "Inspect {{name}}", {
+                          name: i18n.content(`content.boon.${boon.id}.name`, boon.name),
+                        })}
+                      />
                     </TooltipTrigger>
                     <TooltipContent>
                       <strong>
                         <BoonName boon={boon} />
                       </strong>
                       <BoonText boon={boon} />
-                      <p>For this journey</p>
+                      <p>{i18n.message("merchant.forJourney", "For this journey")}</p>
                       {reason ? <p>{reason}</p> : null}
                     </TooltipContent>
                   </Tooltip>
@@ -95,7 +116,10 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                     effectKeywords={visualKeywords(boon.text)}
                     variant="secondary"
                     className="merchant-price"
-                    aria-label={`Buy ${boon.name} for ${slot.price} Gold`}
+                    aria-label={i18n.message("merchant.buy", "Buy {{name}} for {{amount}} Gold", {
+                      name: i18n.content(`content.boon.${boon.id}.name`, boon.name),
+                      amount: slot.price,
+                    })}
                     aria-disabled={unavailable}
                     aria-describedby={reason ? statusId : undefined}
                     onClick={() => {
@@ -103,7 +127,7 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                     }}
                   >
                     <Coins className="gold-icon" aria-hidden="true" />
-                    {slot.price} Gold
+                    {i18n.message("merchant.gold", "{{amount}} Gold", { amount: slot.price })}
                   </Button>
                   {reason ? (
                     <p className="merchant-status" id={statusId}>
@@ -117,7 +141,7 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
         </>
       )}
       <Button ref={leave} variant="outline" className="merchant-leave" onClick={finish}>
-        {purchased ? "Continue" : "Leave"}
+        {purchased ? i18n.message("merchant.continue", "Continue") : i18n.message("merchant.leave", "Leave")}
       </Button>
     </Screen>
   );
