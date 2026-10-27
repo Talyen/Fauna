@@ -98,7 +98,12 @@ export function CreatureCard({
       className={[selected ? "selected" : "", invalidTarget ? "invalid-target" : ""].join(" ")}
       data-species={kind}
       data-enemy-id={enemyId}
-      aria-label={label ?? i18n.content(`content.species.${kind}.name`, info.name)}
+      aria-label={
+        label ??
+        (artworkId === "minion.echo"
+          ? i18n.message("creature.echo", "Echo")
+          : i18n.content(`content.species.${kind}.name`, info.name))
+      }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
       onClick={(event) => {

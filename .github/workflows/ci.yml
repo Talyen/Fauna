@@ -273,7 +273,7 @@ jobs:
       - name: Discover the complete browser suite
         run: |
           mkdir -p reports/ci
-          npx playwright test --list --reporter=json > reports/ci/discovery.json
+          npx playwright test --list --reporter=json > reports/ci/discovery.json || { cat reports/ci/discovery.json; exit 1; }
       - name: Balance complete browser coverage by duration
         run: node scripts/ci/ci.mjs plan
       - name: Record exact build identity
