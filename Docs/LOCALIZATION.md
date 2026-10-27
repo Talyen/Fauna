@@ -65,9 +65,9 @@ Measured combat statuses reuse the keyword label and glossary definition while
 keeping their committed English snapshot for animation. Transient status rules
 use IDs derived from their full templates and retain semantic keyword tags;
 unrecognized variants fall back to their English snapshots.
-Conditional combat previews localize their numeric outcome summaries; status
-changes in those summaries still use English, and their translated keyword
-styling requires further migration before qualification.
+Combat previews retain status identities for localized changes, including
+accessible summaries. Conditional outcome keyword styling requires further
+migration before qualification.
 `npm run localization:check`, the local changed-file gate and CI check freshness,
 duplicate IDs, English forms and parameter syntax. UI extraction only covers
 explicit calls in `src/ui`; content extraction does not yet cover all rule prose or generated descriptions. Neither establishes complete coverage or

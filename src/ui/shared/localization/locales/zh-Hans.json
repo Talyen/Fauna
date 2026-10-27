@@ -1151,6 +1151,18 @@
     "sourceHash": "c2f36c0773d7466bed24db9b7c6b1582e3f87c00a82e4a3b20ed1e7e8252cb62",
     "text": "{{name}}的可能结果：{{outcomes}}"
   },
+  "preview.removeStatus": {
+    "reviewed": true,
+    "source": "Remove {{status}}",
+    "sourceHash": "8f4d887411db70d6b152c0ab4157f9e78b88898ad9cf6762b88d2ae2925463ca",
+    "text": "移除{{status}}"
+  },
+  "preview.statusChange": {
+    "reviewed": true,
+    "source": "{{keyword}} {{before}} → {{after}}",
+    "sourceHash": "4c485b767abeac55fd53f4bf80c83a27e90ae0fbf6d7cc5dd509a9133c53ca4a",
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
   "preview.varies": {
     "reviewed": true,
     "source": "Outcome varies",

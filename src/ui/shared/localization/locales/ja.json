@@ -1151,6 +1151,18 @@
     "sourceHash": "ba73d7ff9cc10e2de5897237968e370e105d520120a50998c5249dd883dae748",
     "text": "{{name}}の予測される結果：{{outcomes}}"
   },
+  "preview.removeStatus": {
+    "reviewed": true,
+    "source": "Remove {{status}}",
+    "sourceHash": "baa90f5bc76c80f78dcb589d0e2abd5f91f903569eb19f22b25d9380f53094c5",
+    "text": "{{status}}を解除"
+  },
+  "preview.statusChange": {
+    "reviewed": true,
+    "source": "{{keyword}} {{before}} → {{after}}",
+    "sourceHash": "c0ae6bdf9f336b250e2fb534f717fd569b29f4e86973b4ad42903034b30ee84b",
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
   "preview.varies": {
     "reviewed": true,
     "source": "Outcome varies",

@@ -15,13 +15,19 @@ export function RuleCatalogProvider({ catalog, children }: { catalog: RuleCatalo
   );
 }
 
-export function useRuleText(text: string, id?: string) {
+export function useRuleTranslator() {
   const catalog = useContext(RuleCatalogContext);
-  if (catalog === EMPTY_RULE_CATALOG) return keywordText(text);
-  const message = ruleMessage(text);
-  const key = id ?? message.template;
-  const entry = Object.hasOwn(catalog, key) ? catalog[key] : undefined;
-  const translation =
-    typeof entry === "string" ? entry : entry?.source === message.template ? entry.text : undefined;
-  return renderRuleMessage(message, translation);
+  return (text: string, id?: string) => {
+    if (catalog === EMPTY_RULE_CATALOG) return keywordText(text);
+    const message = ruleMessage(text);
+    const key = id ?? message.template;
+    const entry = Object.hasOwn(catalog, key) ? catalog[key] : undefined;
+    const translation =
+      typeof entry === "string" ? entry : entry?.source === message.template ? entry.text : undefined;
+    return renderRuleMessage(message, translation);
+  };
+}
+
+export function useRuleText(text: string, id?: string) {
+  return useRuleTranslator()(text, id);
 }

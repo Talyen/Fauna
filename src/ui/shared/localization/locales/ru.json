@@ -1151,6 +1151,18 @@
     "sourceHash": "28e31a4f5cb7935e6777441fd36bead876a32d1674bb3e0146e190fa341808a0",
     "text": "Возможные исходы для {{name}}: {{outcomes}}"
   },
+  "preview.removeStatus": {
+    "reviewed": true,
+    "source": "Remove {{status}}",
+    "sourceHash": "b09de723ec9eb6fc1105ed0bbac1078eedf0f20e6d76216e98ec1468ca93a4b4",
+    "text": "Удалить: {{status}}"
+  },
+  "preview.statusChange": {
+    "reviewed": true,
+    "source": "{{keyword}} {{before}} → {{after}}",
+    "sourceHash": "8bbb16e2e125ec4c75e40a2b39cdfd64ea9865e4c30c9964e3ada00215573926",
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
   "preview.varies": {
     "reviewed": true,
     "source": "Outcome varies",

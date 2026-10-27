@@ -26,6 +26,7 @@ import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { RuleCatalogProvider } from "../../../src/ui/shared/localization/rule-catalog";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import type { TargetForecast } from "../../../src/ui/battle/play-preview-model";
+import { playPreviewModel } from "../../../src/ui/battle/play-preview-model";
 import { GlossaryScreen } from "../../../src/ui/menu/glossary-screen";
 import { extractGlossaryRules } from "../../../scripts/localization/glossary-rules.mjs";
 import { GLOSSARY } from "../../../src/game/glossary";
@@ -955,6 +956,29 @@ it("localizes conditional preview outcomes without changing their alternatives",
   expect(label).toContain("Critique : 3 de Brûlure; 2 absorbés; Blocage 2 → 0");
   expect(label).toContain("Aucun changement");
   expect(forecast.alternatives).toEqual([damaged, base]);
+  view.unmount();
+});
+
+it("localizes projected status changes and retains their keyword identity", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const game = run();
+  const changed = produce(game, (draft) => {
+    Object.assign(draft.team[0]!.combat!, { burn: 2, controlled: "freeze", controlTurns: 2 });
+  });
+  const forecast = playPreviewModel(game, { accepted: true, state: changed, events: [] }).units.get(
+    game.team[0]!.id,
+  );
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TargetPreview forecast={forecast} />
+    </LocalizationProvider>,
+  );
+  const label = screen.getByRole("status").getAttribute("aria-label");
+  expect(label).toContain("Brûlure 0 → 2");
+  expect(label).toContain("Gel : 2 tours");
+  expect(view.container.querySelector('[data-keyword="burn"]')?.textContent).toBe("Brûlure");
+  expect(view.container.querySelector('[data-keyword="freeze"]')?.textContent).toBe("Gel");
+  expect(game.team[0]!.combat!.burn).toBe(0);
   view.unmount();
 });
 

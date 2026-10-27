@@ -419,6 +419,12 @@
   "preview.possibleOutcomes": {
     "text": "Possible outcomes for {{name}}: {{outcomes}}"
   },
+  "preview.removeStatus": {
+    "text": "Remove {{status}}"
+  },
+  "preview.statusChange": {
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
   "preview.varies": {
     "text": "Outcome varies"
   },

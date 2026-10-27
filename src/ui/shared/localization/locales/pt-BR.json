@@ -1151,6 +1151,18 @@
     "sourceHash": "e3baa61bc64b9e566ce46d4be6510761f8fb7a7a61ff55f04a3e40623154de10",
     "text": "Resultados possíveis para {{name}}: {{outcomes}}"
   },
+  "preview.removeStatus": {
+    "reviewed": true,
+    "source": "Remove {{status}}",
+    "sourceHash": "c99e647fb408e524c2309178dbef99c6b3f8c10d5eefa2ab859e9a26a75a8d1f",
+    "text": "Remover {{status}}"
+  },
+  "preview.statusChange": {
+    "reviewed": true,
+    "source": "{{keyword}} {{before}} → {{after}}",
+    "sourceHash": "750df2d375d306232abd54f76063937f99ce92763e3bb30ea088f06a199f1ca7",
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
   "preview.varies": {
     "reviewed": true,
     "source": "Outcome varies",
