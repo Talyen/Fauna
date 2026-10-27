@@ -147,12 +147,14 @@ using a saved choice, Steam's game language, then system languages. Optional
 storage and Steam failures fall back without blocking play; stale Steam responses
 cannot override a manual choice. Only English is selectable. The Steam worker
 uses an isolated, bounded language request so an invalid or timed-out optional
-reply does not stop its Cloud transport. Runtime catalog and startup coverage is
-still incomplete, so the runtime qualification flag remains false.
+reply does not stop its Cloud transport. Startup and runtime catalog localization
+are implemented, but the runtime qualification flag remains false until the
+final production build and language-switch checks pass.
 
-The inventory, explicit UI messages and internal rule-message adapter are
-preparation steps. The adapter retains numeric values and keyword identities so a
-complete translated rule can reorder them; invalid templates fall back to the
-English rule. The English catalogs cover only migrated UI calls and selected authored names. They
-do not yet cover every message or generated rule, and no player-facing language
-selector is available until another language is qualified. Fauna remains English-only.
+The rule-message adapter retains numeric values and keyword identities so a
+translated rule can reorder them; invalid or unrecognized templates fall back to
+English. The card extractor checks runtime numeric branches against the forms it
+samples, so newly introduced branches need explicit coverage. The UI inventory is
+an additional aid and cannot by itself prove coverage of dynamic text. The
+language selector offers qualified languages; until another language is
+qualified, Fauna remains English-only.
