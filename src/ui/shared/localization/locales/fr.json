@@ -917,6 +917,12 @@
     "sourceHash": "7f92823342d89defa6787f5e714d17bd264420fb875dbadfdbd720ebc6d63974",
     "text": "Croissant d’élagage"
   },
+  "content.boon.pumpkin-tureen.name": {
+    "reviewed": true,
+    "source": "Pumpkin Tureen",
+    "sourceHash": "281374633c45417f663e50430d9ad2c13a80d5c6e0b9f357352024f8458dc683",
+    "text": "Soupière citrouille"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -929,17 +935,47 @@
     "sourceHash": "64049d1f29316151d13152c2a2901efbb5b085f7cbb7cfba80d7c6a10b5e0071",
     "text": "Le <keyword0>Blocage</keyword0> est deux fois plus efficace contre l’<keyword1>Eau</keyword1>"
   },
+  "content.boon.raincatcher-bowl.name": {
+    "reviewed": true,
+    "source": "Raincatcher Bowl",
+    "sourceHash": "e70dc9eb36afb7700a7f618576aa94cefdbf808e9e2390b4bb15c13430c05a2b",
+    "text": "Bol attrape-pluie"
+  },
+  "content.boon.rainkeeper.name": {
+    "reviewed": true,
+    "source": "Rainkeeper",
+    "sourceHash": "1a409743bb0e0a2caaff2984b6eb7fc9332b77c27236640bf5a90abe6d178d7b",
+    "text": "Gardien de pluie"
+  },
   "content.boon.rainkeeper.rule": {
     "reviewed": true,
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "7f2fa176d43f5f75c343c73fbec980ae34d76d0f78ef76ac899349129623e02c",
     "text": "Le <keyword0>Mana</keyword0> peut dépasser son maximum"
   },
+  "content.boon.reef-casket.name": {
+    "reviewed": true,
+    "source": "Reef Casket",
+    "sourceHash": "284b62f82eaae88e81fa220b2f88d0c5cf953e627a3ebf9f68c47475969a681c",
+    "text": "Coffret de récif"
+  },
   "content.boon.reef-casket.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
     "sourceHash": "369e1cc80d3584027327eb3ea8f87440b2e9502efa3f417f4c9103b549f159ee",
     "text": "<keyword0>Annulation</keyword0> n’est pas consommée tant que vous avez du <keyword1>Blocage</keyword1>"
+  },
+  "content.boon.reef-incense-tile.name": {
+    "reviewed": true,
+    "source": "Reef Incense Tile",
+    "sourceHash": "a11e5aaf06f58cf8e29bc5dc724ec1c2cc91115cec60fc5c7b26248455da3c1a",
+    "text": "Tuile d’encens du récif"
+  },
+  "content.boon.resonance-kalimba.name": {
+    "reviewed": true,
+    "source": "Resonance Kalimba",
+    "sourceHash": "e019d26e00480b112f8223740b876436b5cde2487e04e13a0728bbf71b3e269d",
+    "text": "Kalimba de résonance"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
@@ -971,6 +1007,18 @@
     "sourceHash": "690a3d69ce9c0470f7db402edc1e09d5289ce4c6a43e541f23b83377c7db358a",
     "text": "Les alliés qui entrent gagnent {{value0}} en <keyword0>Armure</keyword0>"
   },
+  "content.boon.rootvault-pole.name": {
+    "reviewed": true,
+    "source": "Rootvault Pole",
+    "sourceHash": "32995cd889e1a1aaa3d1d6b01a14f6fbc41c18eaf16fc6e3615a7a169f481925",
+    "text": "Bâton du saut racine"
+  },
+  "content.boon.saddle-pouch.name": {
+    "reviewed": true,
+    "source": "Saddle Pouch",
+    "sourceHash": "e7b868131851095878f92e798002678b181e755382f7389436a6f8f3d91925c2",
+    "text": "Sacoche de selle"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
@@ -982,6 +1030,12 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
     "sourceHash": "b74000810cb8872142d02173b084a144a402377010662becd6c1bc319a654b94",
     "text": "Restaurez {{value0}} <keyword0>Santé</keyword0> par effet néfaste <keyword1>purifié</keyword1>"
+  },
+  "content.boon.sleepers-urn.name": {
+    "reviewed": true,
+    "source": "Sleepers Urn",
+    "sourceHash": "27d3802742d9e8bcb9f8a7f6d288d42050648ebc9e4ce30d11a32e84ff7292e5",
+    "text": "Urne des dormeurs"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,

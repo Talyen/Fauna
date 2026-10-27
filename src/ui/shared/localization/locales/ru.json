@@ -905,6 +905,12 @@
     "sourceHash": "f133003894fc3c82b2c75fda31f8844cbd3c7699511f6c33c5152d1e000789b5",
     "text": "Серп для обрезки"
   },
+  "content.boon.pumpkin-tureen.name": {
+    "reviewed": true,
+    "source": "Pumpkin Tureen",
+    "sourceHash": "7dc45f01420041a7116aaa488f843cd1d1635d4b964490e4fa01878fba0aa5aa",
+    "text": "Тыквенная супница"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -917,17 +923,47 @@
     "sourceHash": "dd65b8854377225e38cb827d5b5a9ff96668cd57e02e5cd83b0806887b27b8de",
     "text": "<keyword0>Блок</keyword0> вдвое эффективнее против <keyword1>воды</keyword1>"
   },
+  "content.boon.raincatcher-bowl.name": {
+    "reviewed": true,
+    "source": "Raincatcher Bowl",
+    "sourceHash": "5d8025fd406bf97a63006a964129378921b4daa3cabbc31be4d2815ea478f7cb",
+    "text": "Чаша для дождя"
+  },
+  "content.boon.rainkeeper.name": {
+    "reviewed": true,
+    "source": "Rainkeeper",
+    "sourceHash": "c6426c45a82f777d99900be2d6d85097a7ce5dc5d032ec6e78b94d4c31984bfc",
+    "text": "Хранитель дождя"
+  },
   "content.boon.rainkeeper.rule": {
     "reviewed": true,
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "54e635f9eacf2d1a7db8b188d6e63d6762ea6fa1f4511b3d5a3ec451f0987a6d",
     "text": "<keyword0>Мана</keyword0> может превышать максимум"
   },
+  "content.boon.reef-casket.name": {
+    "reviewed": true,
+    "source": "Reef Casket",
+    "sourceHash": "616988601b0158d72dc9e12442d9a6b0f5ab7c4c86f86a66252675f13cce2bc6",
+    "text": "Рифовый ларец"
+  },
   "content.boon.reef-casket.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
     "sourceHash": "24004b25254d8f316dd274c224f0c1f5a5962a8f98e2c850f25c08525155a023",
     "text": "<keyword0>Аннулирование</keyword0> не расходуется, пока у вас есть <keyword1>блок</keyword1>"
+  },
+  "content.boon.reef-incense-tile.name": {
+    "reviewed": true,
+    "source": "Reef Incense Tile",
+    "sourceHash": "ec516cd811352b0fd4957de685d7bbc2a1ff590daa0b51ede6d423ae156cb501",
+    "text": "Рифовая плитка для благовоний"
+  },
+  "content.boon.resonance-kalimba.name": {
+    "reviewed": true,
+    "source": "Resonance Kalimba",
+    "sourceHash": "440cf73b5edf6e5ac2426340496708b96790e3b6a0011f775de987b19260b0a3",
+    "text": "Калимба резонанса"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
@@ -947,6 +983,24 @@
     "sourceHash": "7a41bb177c5246c0caf0bf34bc4d756469e4633257c9c2cbddc7766d5fd2d288",
     "text": "После третьей карты в каждом ходу получите {{value0}} <keyword0>маны</keyword0>"
   },
+  "content.boon.rook-of-mercy.name": {
+    "reviewed": true,
+    "source": "Rook of Mercy",
+    "sourceHash": "730fc5e3b640f07757cb68e7eb9de36c780fd17fe5e4822665f1752a1ed5e7a7",
+    "text": "Ладья милосердия"
+  },
+  "content.boon.rootvault-pole.name": {
+    "reviewed": true,
+    "source": "Rootvault Pole",
+    "sourceHash": "d33122b96f3a4da6e934886b7694032b46b74a501f6139f8f2b181ea6087f1aa",
+    "text": "Шест корневого прыжка"
+  },
+  "content.boon.saddle-pouch.name": {
+    "reviewed": true,
+    "source": "Saddle Pouch",
+    "sourceHash": "ad47290359052950201e225363be0d33f7dbac564ebfd48a2404ecbdc45e0fd8",
+    "text": "Седельная сумка"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
@@ -958,6 +1012,12 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
     "sourceHash": "d81603348455dece44dfef923ad92f832277f2c4185a6341b2d761600efc0d32",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> за каждый <keyword1>очищенный</keyword1> вредный эффект"
+  },
+  "content.boon.sleepers-urn.name": {
+    "reviewed": true,
+    "source": "Sleepers Urn",
+    "sourceHash": "3886858167c7ee6a59083f404dd7139239bfab8c6a26820edbb83eb8b5bfb889",
+    "text": "Урна спящих"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,

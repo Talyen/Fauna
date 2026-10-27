@@ -905,6 +905,12 @@
     "sourceHash": "bbfd2ab19ea13009c6707f7b521a2395597bdeff7529c2685f779210a942ab90",
     "text": "修枝弯刃"
   },
+  "content.boon.pumpkin-tureen.name": {
+    "reviewed": true,
+    "source": "Pumpkin Tureen",
+    "sourceHash": "0e99b646796c46972318df954ed90ed56d58ad82cd834806f6c2cd6c2e82374b",
+    "text": "南瓜汤盅"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -917,17 +923,47 @@
     "sourceHash": "c9ead93fff3c16539f833c937ceb3d19d923b5f5ab1fe53d168fc2491a6e5eb7",
     "text": "<keyword0>格挡</keyword0>对<keyword1>水</keyword1>的效果翻倍"
   },
+  "content.boon.raincatcher-bowl.name": {
+    "reviewed": true,
+    "source": "Raincatcher Bowl",
+    "sourceHash": "176184f8f633cbd144361a33a85ed3330c611a6705051d6d6df582dbbdbb9739",
+    "text": "接雨碗"
+  },
+  "content.boon.rainkeeper.name": {
+    "reviewed": true,
+    "source": "Rainkeeper",
+    "sourceHash": "634e5c3ae0c46723600a5c4724eee61c2741724f35177e0a27fbcf226fc93e59",
+    "text": "守雨瓶"
+  },
   "content.boon.rainkeeper.rule": {
     "reviewed": true,
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "59b40c7666e988f0123d57565ce84146d59f139843afc029cd7875fc0286c00d",
     "text": "<keyword0>法力</keyword0>可以超过上限"
   },
+  "content.boon.reef-casket.name": {
+    "reviewed": true,
+    "source": "Reef Casket",
+    "sourceHash": "231031d69bf10215523dc7ed88a28dbb26933ec2c9ff751b3a6c0b0dbd723cb8",
+    "text": "珊瑚礁宝匣"
+  },
   "content.boon.reef-casket.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
     "sourceHash": "40b3de4118ea85e263d6e6d9846c3ee5d8ce5c9079b647c57fcf26e17d2b1c50",
     "text": "拥有<keyword1>格挡</keyword1>时不会消耗<keyword0>无效化</keyword0>"
+  },
+  "content.boon.reef-incense-tile.name": {
+    "reviewed": true,
+    "source": "Reef Incense Tile",
+    "sourceHash": "9411179434a96073142d1fd3dde013c6acf57eee13fa2ab1a3f0c5aaccf973f1",
+    "text": "珊瑚礁香砖"
+  },
+  "content.boon.resonance-kalimba.name": {
+    "reviewed": true,
+    "source": "Resonance Kalimba",
+    "sourceHash": "52067744054128f426a68db2056a987a7e8bb73295071664e3b051420f2d87fd",
+    "text": "共鸣卡林巴"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
@@ -947,6 +983,24 @@
     "sourceHash": "8b8c8217ec9463185c1a7ec553c3765b72172160b8cdbc87d2bb7b4d5d0bd19f",
     "text": "每回合打出第三张卡牌后，获得{{value0}}点<keyword0>法力</keyword0>"
   },
+  "content.boon.rook-of-mercy.name": {
+    "reviewed": true,
+    "source": "Rook of Mercy",
+    "sourceHash": "7ceb70c75e2ccc8a2ca7b130eba37b6a8f554e93a5dd9fa4023803e85b7b588c",
+    "text": "仁慈之车"
+  },
+  "content.boon.rootvault-pole.name": {
+    "reviewed": true,
+    "source": "Rootvault Pole",
+    "sourceHash": "5538de458828fd8a7e29cda2e7712722bbdf8d3e0bf7679a94a6c433d4fc2fba",
+    "text": "根跃长杖"
+  },
+  "content.boon.saddle-pouch.name": {
+    "reviewed": true,
+    "source": "Saddle Pouch",
+    "sourceHash": "6418b70cebc0682ec15e1b60e87b17af1e063b31fd751e60f984e2d41a647fdc",
+    "text": "鞍囊"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
@@ -958,6 +1012,12 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
     "sourceHash": "f8748993b79c44f2ab1c6933586c6048b1a8de7cf29093b483db53543fc10023",
     "text": "每<keyword1>净化</keyword1>一个有害效果，恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.boon.sleepers-urn.name": {
+    "reviewed": true,
+    "source": "Sleepers Urn",
+    "sourceHash": "44c26cffcc8e3a9f699d827133b408bc65f9c11c685921310a584586372a000f",
+    "text": "沉眠者之瓮"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,

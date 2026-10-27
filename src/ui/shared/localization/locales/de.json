@@ -905,6 +905,12 @@
     "sourceHash": "62ed0bf2dd8c8fd4c172fb63fb4ce3f9fad5ca486feeca87847bdb2a2aba0f0b",
     "text": "Schnittsichel"
   },
+  "content.boon.pumpkin-tureen.name": {
+    "reviewed": true,
+    "source": "Pumpkin Tureen",
+    "sourceHash": "20534b5bd916f4c1a4baac2ec64b84aac327ccb159012ffe1f46df650544035b",
+    "text": "Kürbisterrine"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -917,17 +923,47 @@
     "sourceHash": "4700d65beb6fcad38ef512695b5e0043d0aea2897eb9b51bf2af06e31a388af6",
     "text": "<keyword0>Block</keyword0> ist gegen <keyword1>Wasser</keyword1> doppelt so wirksam"
   },
+  "content.boon.raincatcher-bowl.name": {
+    "reviewed": true,
+    "source": "Raincatcher Bowl",
+    "sourceHash": "f6e07bf1355ec8c1e8abe2175b112000771d366799febbaa469109e365c588de",
+    "text": "Regenfangschale"
+  },
+  "content.boon.rainkeeper.name": {
+    "reviewed": true,
+    "source": "Rainkeeper",
+    "sourceHash": "492f1c65ad7a99188e08e4c8dfba957a8fbe8db16b4deb401babdcc95d1ab071",
+    "text": "Regenbewahrer"
+  },
   "content.boon.rainkeeper.rule": {
     "reviewed": true,
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "1a0cf1e6bfa7787824cde93fb73cdc7814730d2fdb83668fa28a6c30512c19b8",
     "text": "<keyword0>Mana</keyword0> kann über das Maximum hinausgehen"
   },
+  "content.boon.reef-casket.name": {
+    "reviewed": true,
+    "source": "Reef Casket",
+    "sourceHash": "037cfeef30aa241308d00b73302992fc1c01bbbad9576fd1fea162a555a5f61a",
+    "text": "Riffkästchen"
+  },
   "content.boon.reef-casket.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
     "sourceHash": "32d0133f697820f110a8f5e52ff7eb7a9c7515a569914b4cb342c4b0d5ef2644",
     "text": "<keyword0>Aufheben</keyword0> wird nicht verbraucht, solange du <keyword1>Block</keyword1> hast"
+  },
+  "content.boon.reef-incense-tile.name": {
+    "reviewed": true,
+    "source": "Reef Incense Tile",
+    "sourceHash": "598e409f441579f2ee0e2448d3aa26e6d03a517bdf43f502075f1881868c0ca8",
+    "text": "Riff-Räucherplatte"
+  },
+  "content.boon.resonance-kalimba.name": {
+    "reviewed": true,
+    "source": "Resonance Kalimba",
+    "sourceHash": "888463de3cdc3f14b8fa1c021994fe8a68d6fd94e3c355906d892907f8095d5b",
+    "text": "Resonanz-Kalimba"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
@@ -947,6 +983,24 @@
     "sourceHash": "1ff65faed4eef2e2c005fef5998dc9c4f6ef647f35ea152c9d488af956f40f5a",
     "text": "Erhalte nach deiner dritten Karte pro Zug {{value0}} <keyword0>Mana</keyword0>"
   },
+  "content.boon.rook-of-mercy.name": {
+    "reviewed": true,
+    "source": "Rook of Mercy",
+    "sourceHash": "f035fb392ed84569666ece32a8b3d9da50f49e145c58b029dee52b1315e98244",
+    "text": "Turm der Gnade"
+  },
+  "content.boon.rootvault-pole.name": {
+    "reviewed": true,
+    "source": "Rootvault Pole",
+    "sourceHash": "e0a7517a8743aed1745defd14b969fd03e09466d441272dfee54579fd32a6b82",
+    "text": "Wurzelstabspeer"
+  },
+  "content.boon.saddle-pouch.name": {
+    "reviewed": true,
+    "source": "Saddle Pouch",
+    "sourceHash": "371cd7bd21a2e3719680ee5d65fee4a43bcfbf15e087d0a88cd66006d76f11e6",
+    "text": "Satteltasche"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
@@ -958,6 +1012,12 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
     "sourceHash": "59b69c77220f94dbd68774a718360d72b5ce483a39077b90d597e9803d267d96",
     "text": "Stelle für jeden schädlichen Effekt, den du <keyword1>reinigst</keyword1>, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.boon.sleepers-urn.name": {
+    "reviewed": true,
+    "source": "Sleepers Urn",
+    "sourceHash": "029357dbfae6c2e8de657661eef8048aee60405c9ba993fab34f5312e4eca7c9",
+    "text": "Urne der Schlafenden"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,

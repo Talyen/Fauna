@@ -905,6 +905,12 @@
     "sourceHash": "9911e816f5bd72f96c2ea08a40f37cdf0a46c79cbb48c94964d4b61c6c7b2dae",
     "text": "剪定の三日月"
   },
+  "content.boon.pumpkin-tureen.name": {
+    "reviewed": true,
+    "source": "Pumpkin Tureen",
+    "sourceHash": "b42f8205ad1b9d54da72f52b7f17997b8b9c35e614b1f2e01d66cd96860fda76",
+    "text": "カボチャのスープ皿"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -917,17 +923,47 @@
     "sourceHash": "2371bf08998a1e11f574bcf0f7a6ded784d54c80315830dbbdc38a36e1026e62",
     "text": "<keyword0>ブロック</keyword0>は<keyword1>水</keyword1>に対して2倍の効果を持つ"
   },
+  "content.boon.raincatcher-bowl.name": {
+    "reviewed": true,
+    "source": "Raincatcher Bowl",
+    "sourceHash": "3b3d3d185d65ea45022f4d7ec7a3e2708b75090c704afeec8f585f1862bd7f0a",
+    "text": "雨受けの鉢"
+  },
+  "content.boon.rainkeeper.name": {
+    "reviewed": true,
+    "source": "Rainkeeper",
+    "sourceHash": "5677035dab634bffd83efddf8d660ea32ca756f2bd60fb90809b678015baa43e",
+    "text": "雨の守り手"
+  },
   "content.boon.rainkeeper.rule": {
     "reviewed": true,
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "88604a712fd0d1953c7d642d0ca4608942d9eeb74e7dcde565b1f817ee8d74fa",
     "text": "<keyword0>マナ</keyword0>は上限を超えて蓄えられる"
   },
+  "content.boon.reef-casket.name": {
+    "reviewed": true,
+    "source": "Reef Casket",
+    "sourceHash": "d10931c09d11ae3d9584ad0ba2b704b196ad3b3708d44ce7cb3ece71b5e108bb",
+    "text": "珊瑚礁の小箱"
+  },
   "content.boon.reef-casket.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
     "sourceHash": "9e7ad0e3e96988c5af4de96a8b5a312d8386cab69f4df06694724780d9bee13b",
     "text": "<keyword1>ブロック</keyword1>を持つ間、<keyword0>無効化</keyword0>は消費されない"
+  },
+  "content.boon.reef-incense-tile.name": {
+    "reviewed": true,
+    "source": "Reef Incense Tile",
+    "sourceHash": "e177af80f08f4738a08d15fd378bba36c3aa5a74ef3e35ebf40d0a963ce880bf",
+    "text": "珊瑚礁の香皿"
+  },
+  "content.boon.resonance-kalimba.name": {
+    "reviewed": true,
+    "source": "Resonance Kalimba",
+    "sourceHash": "58fa331f9f7b6069ed3fbb45041b87086712643484671bc5e7184aa206d2daaf",
+    "text": "共鳴のカリンバ"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
@@ -947,6 +983,24 @@
     "sourceHash": "e008e914573ac0ba7c62aba3a32fee2e9961ea2884f7361e1daa4c117c9d2a33",
     "text": "各ターンの3枚目のカードの後に<keyword0>マナ</keyword0>を{{value0}}獲得"
   },
+  "content.boon.rook-of-mercy.name": {
+    "reviewed": true,
+    "source": "Rook of Mercy",
+    "sourceHash": "31d18e8f4bdec7f81ade76b27279abb723173e09924ad09e227377ef5da44bab",
+    "text": "慈悲のルーク"
+  },
+  "content.boon.rootvault-pole.name": {
+    "reviewed": true,
+    "source": "Rootvault Pole",
+    "sourceHash": "2e032a9882ba2ac2aa985c4cd05aed818ba38074a32bdc1b10952c07b2e598ab",
+    "text": "根跳びの杖"
+  },
+  "content.boon.saddle-pouch.name": {
+    "reviewed": true,
+    "source": "Saddle Pouch",
+    "sourceHash": "fa086521e385001a40157a8c63de875f573180f435d8872f730a771c39667f84",
+    "text": "鞍袋"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
@@ -958,6 +1012,12 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
     "sourceHash": "5f961b0b46867a5ff124d5581a11488ea28e80e285d6d47eae4c109124896717",
     "text": "害のある効果を<keyword1>浄化</keyword1>するごとに<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.boon.sleepers-urn.name": {
+    "reviewed": true,
+    "source": "Sleepers Urn",
+    "sourceHash": "43025c682d8d30f5bab59ab78dbc166a58ff41c167f75fdc889888f0758d1861",
+    "text": "眠る者の壺"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,

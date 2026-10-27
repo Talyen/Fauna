@@ -905,6 +905,12 @@
     "sourceHash": "f8b073e3e2be43395b0897fb27111159ffdcbaf65f7b898473775cdf317f8c55",
     "text": "Foice de poda"
   },
+  "content.boon.pumpkin-tureen.name": {
+    "reviewed": true,
+    "source": "Pumpkin Tureen",
+    "sourceHash": "15af837d5037553fbab7dc4f643db1bfa04be898de177e7d1b7148dd54a12ae7",
+    "text": "Sopeira de abóbora"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -917,17 +923,47 @@
     "sourceHash": "518256aa7b9dcffbc500aff98e3e44ca00128432e98354972cc5f9fa9a527eb8",
     "text": "<keyword0>Bloqueio</keyword0> é duas vezes mais eficaz contra <keyword1>Água</keyword1>"
   },
+  "content.boon.raincatcher-bowl.name": {
+    "reviewed": true,
+    "source": "Raincatcher Bowl",
+    "sourceHash": "9d8818688d38d2b11d127dc5ce7b29f5db686aecba914bcb79e3f1a20ec9bd3e",
+    "text": "Tigela coletora de chuva"
+  },
+  "content.boon.rainkeeper.name": {
+    "reviewed": true,
+    "source": "Rainkeeper",
+    "sourceHash": "fde2012a26ea68d3a5315babc10ca3cae4a669d76516f292dc2caeb75d3606fe",
+    "text": "Guardião da chuva"
+  },
   "content.boon.rainkeeper.rule": {
     "reviewed": true,
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "7e17fe7d20cd6c6ab1ceb1e47ece2437cf428a2e1ed789ed17e18a72aa36d93c",
     "text": "<keyword0>Mana</keyword0> pode exceder seu máximo"
   },
+  "content.boon.reef-casket.name": {
+    "reviewed": true,
+    "source": "Reef Casket",
+    "sourceHash": "e3ddd418e621cbb79598d835f0e5ba8bca23ce4797be517f9a54369b502c538b",
+    "text": "Cofre de recife"
+  },
   "content.boon.reef-casket.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
     "sourceHash": "bf7bf1ab4f3dd92cf1d27d701e2a4d2b66eea7d9619d2bf274486f537bec6e82",
     "text": "<keyword0>Anulação</keyword0> não é consumida enquanto você tiver <keyword1>Bloqueio</keyword1>"
+  },
+  "content.boon.reef-incense-tile.name": {
+    "reviewed": true,
+    "source": "Reef Incense Tile",
+    "sourceHash": "4bc06beabf1b1061e24a54b4a2925d9d5551e41f4da52dd00fd4f523b013c5e0",
+    "text": "Ladrilho de incenso do recife"
+  },
+  "content.boon.resonance-kalimba.name": {
+    "reviewed": true,
+    "source": "Resonance Kalimba",
+    "sourceHash": "d41ccd825194a33ce170f59f1c13c5a299328e24b9b56672ced06d911ad7a69b",
+    "text": "Kalimba de ressonância"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
@@ -947,6 +983,24 @@
     "sourceHash": "a90d059c78be8843393f3d081d5fa33709345eaa9585afade495f147d4be1224",
     "text": "Após sua terceira carta em cada turno, receba {{value0}} de <keyword0>Mana</keyword0>"
   },
+  "content.boon.rook-of-mercy.name": {
+    "reviewed": true,
+    "source": "Rook of Mercy",
+    "sourceHash": "84c696c7a31ffe9e76500f66c8065a60a58ad6c54271fadc5d78e8923b7deb98",
+    "text": "Torre da misericórdia"
+  },
+  "content.boon.rootvault-pole.name": {
+    "reviewed": true,
+    "source": "Rootvault Pole",
+    "sourceHash": "eed97a1cd9b7c2bfe7273b3dafa8dff374f85d2f536857bcacde9c2f99c3fb84",
+    "text": "Vara de raiz"
+  },
+  "content.boon.saddle-pouch.name": {
+    "reviewed": true,
+    "source": "Saddle Pouch",
+    "sourceHash": "52c63ec269a0f952034a82381116d7f695a0f3a8ba7b204fac2bb4fcc8469fa2",
+    "text": "Bolsa de sela"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
@@ -958,6 +1012,12 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
     "sourceHash": "cc951206b5691b4882854080e0b20678f2533765be07614d636a5940c5956099",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> por efeito prejudicial que você <keyword1>purificar</keyword1>"
+  },
+  "content.boon.sleepers-urn.name": {
+    "reviewed": true,
+    "source": "Sleepers Urn",
+    "sourceHash": "9441be4fb9b6a9cc3526200066aebad126c53e555533a3d9bf6dfad041ee0459",
+    "text": "Urna dos adormecidos"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
