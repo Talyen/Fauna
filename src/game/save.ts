@@ -55,7 +55,11 @@ function utf8Size(text: string) {
 }
 
 export function decodeSave(raw: string): GameState {
-  if (raw.length > saveFormat.maxBytes || utf8Size(raw) > saveFormat.maxBytes)
+  // Each UTF-16 code unit contributes at most three UTF-8 bytes.
+  if (
+    raw.length > saveFormat.maxBytes ||
+    (raw.length > Math.floor(saveFormat.maxBytes / 3) && utf8Size(raw) > saveFormat.maxBytes)
+  )
     throw new Error("Save exceeds the supported size.");
   const state = gameStateSchema.parse(JSON.parse(raw));
   validateCollection(state);
@@ -79,9 +83,9 @@ function validateCollection(state: GameState) {
   invalid(state.phase === "draft" && state.boons.length > 0);
   invalid(SPECIES.some(({ id }) => state.discovery.recruited[id] !== undefined && !encountered.has(id)));
   const starterPool = state.selected.length ? starterSpecies(state) : [];
-  const offerPool = state.phase === "draft" ? starterOfferPool(state) : [];
   const count = state.phase === "draft" ? starterCount(state) : 0;
   const drafting = state.phase === "draft" && state.selected.length < count;
+  const offerPool = drafting ? starterOfferPool(state) : [];
   invalid(
     new Set(state.starterOffers).size !== (drafting ? Math.min(STARTER_OFFER_COUNT, offerPool.length) : 0) ||
       state.starterOffers.some((kind) => !offerPool.includes(kind)) ||
@@ -204,8 +208,8 @@ function validateRoster(state: GameState) {
   if (state.phase === "draft")
     invalid(state.team.length !== 0 || state.cards.length !== 0 || state.reserves.length !== 0);
   else invalid(state.team.length < 1);
-  invalid(state.team.some((unit) => species(unit.species).legendary) && state.team.length !== 1);
-  invalid(state.selected.some((kind) => species(kind).legendary) && state.selected.length !== 1);
+  invalid(state.team.length !== 1 && state.team.some((unit) => species(unit.species).legendary));
+  invalid(state.selected.length !== 1 && state.selected.some((kind) => species(kind).legendary));
 }
 
 function validateSupport(state: GameState) {
@@ -417,12 +421,14 @@ function validateCombatants(state: GameState) {
       invalid((stats.controlled === null) !== (stats.controlTurns === 0));
       invalid(stats.controlled !== null && stats[stats.controlled] !== 0);
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
-      invalid(
-        Object.values(stats.statusSources).some((id) => !combatantIds.has(id)) ||
-          !uniqueBy(stats.bleedLeech, (row) => row.sourceId) ||
-          stats.bleedLeech.some((row) => row.amount === 0) ||
-          stats.bleedLeech.reduce((sum, row) => sum + row.amount, 0) > stats.bleed ||
-          stats.bleedLeech.some((row) => !combatantIds.has(row.sourceId)),
-      );
+      invalid(Object.values(stats.statusSources).some((id) => !combatantIds.has(id)));
+      const sources = new Set<string>();
+      let total = 0;
+      for (const row of stats.bleedLeech) {
+        invalid(sources.has(row.sourceId) || row.amount === 0 || !combatantIds.has(row.sourceId));
+        sources.add(row.sourceId);
+        total += row.amount;
+      }
+      invalid(total > stats.bleed);
     }
 }

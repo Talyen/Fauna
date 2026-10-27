@@ -300,6 +300,14 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
 export function drawOwner(state: GameState, ownerId: string, events: GameEvent[]) {
   fillHand(state);
   if (!state.battle!.draw.length && !state.battle!.discard.length) return false;
+  const single =
+    state.battle!.draw.length + state.battle!.discard.length === 1
+      ? (state.battle!.draw[0] ?? state.battle!.discard[0])
+      : undefined;
+  if (single !== undefined) {
+    if (!state.cards.some((card) => card.id === single && card.ownerId === ownerId)) return false;
+    return drawEligibleCard(state, (id) => id === single, events);
+  }
   const eligible = new Set<string>();
   for (const card of state.cards) if (card.ownerId === ownerId) eligible.add(card.id);
   if (!eligible.size) return false;
@@ -315,6 +323,22 @@ export function drawKeyword(
   fillHand(state);
   if (!state.battle.draw.length && !state.battle.discard.length) return;
   const owners = drawableOwnerIds(state);
+  const single =
+    state.battle.draw.length + state.battle.discard.length === 1
+      ? (state.battle.draw[0] ?? state.battle.discard[0])
+      : undefined;
+  if (single !== undefined) {
+    if (
+      state.cards.some(
+        (card) =>
+          card.id === single &&
+          (card.ownerId === null || owners.has(card.ownerId)) &&
+          cardHasKeyword(card, keyword),
+      )
+    )
+      drawEligibleCard(state, (id) => id === single, events);
+    return;
+  }
   const eligibleCards = new Set<string>();
   for (const card of state.cards)
     if ((card.ownerId === null || owners.has(card.ownerId)) && cardHasKeyword(card, keyword))

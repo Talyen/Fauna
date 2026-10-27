@@ -8,8 +8,9 @@ import type { GameState, GameEvent } from "../types";
 
 export function encore(state: GameState, actor: Combatant, events: GameEvent[]) {
   const stats = ensureCombat(actor);
+  if (stats.encoreUsed) return false;
   const chance = passiveAmount(isRosterCreature(actor) ? state : undefined, actor.species, "encore");
-  if (chance <= 0 || stats.encoreUsed) return false;
+  if (chance <= 0) return false;
   stats.encoreUsed = true;
   return succeeds(state, chance / 100, !isRosterCreature(actor), events);
 }
@@ -38,6 +39,14 @@ export function beforeAbility(
   if (keywords.includes("block") && talentChance(state, "armor.armored-surge", events))
     grantArmor(state, actor, talentRule("armor.armored-surge").amount, events);
 }
+const repeatTalents = [
+  ["burn", "burn.flash-fire"],
+  ["freeze", "freeze.winter-s-grasp"],
+  ["nature", "nature.overgrowth"],
+  ["poison", "poison.venom-strike"],
+  ["stun", "stun.jarring-blow"],
+] as const;
+
 export function talentRepeat(
   state: GameState,
   keywords: readonly ProgressionKeyword[],
@@ -45,13 +54,6 @@ export function talentRepeat(
   events: GameEvent[],
 ) {
   if (enemy) return false;
-  const repeatTalents = [
-    ["burn", "burn.flash-fire"],
-    ["freeze", "freeze.winter-s-grasp"],
-    ["nature", "nature.overgrowth"],
-    ["poison", "poison.venom-strike"],
-    ["stun", "stun.jarring-blow"],
-  ] as const;
   return repeatTalents.some(
     ([keyword, talent]) => keywords.includes(keyword) && talentChance(state, talent, events),
   );

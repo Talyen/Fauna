@@ -92,18 +92,14 @@ export function offenseValue(state: GameState, kind: SpeciesId): number {
   const cards = speciesCards(kind);
   let values = authoredOffense.get(kind);
   if (!values) {
-    const authored = cards.reduce(
-      (sum, card) =>
-        sum +
-        (card.effect === "attack" ? card.value : 0) +
-        (card.effects?.reduce((n, effect) => n + (effect.kind === "damage" ? effect.amount : 0), 0) ?? 0),
-      0,
-    );
-    const reactive = cards.reduce(
-      (sum, card) =>
-        sum + (card.effect === "dreamDouble" || card.effect === "teamProtection" ? card.value : 0),
-      0,
-    );
+    let authored = 0;
+    let reactive = 0;
+    for (const card of cards) {
+      authored += card.effect === "attack" ? card.value : 0;
+      authored +=
+        card.effects?.reduce((n, effect) => n + (effect.kind === "damage" ? effect.amount : 0), 0) ?? 0;
+      reactive += card.effect === "dreamDouble" || card.effect === "teamProtection" ? card.value : 0;
+    }
     values = { authored, reactive };
     authoredOffense.set(kind, values);
   }

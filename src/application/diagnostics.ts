@@ -43,21 +43,21 @@ function readEntries(raw: string | null | undefined): Diagnostic[] {
   if (!raw || raw.length >= MAX_STORED_LENGTH) return [];
   const parsed: unknown = JSON.parse(raw);
   if (!Array.isArray(parsed)) return [];
-  return parsed.slice(-MAX_ENTRIES).flatMap((entry: unknown) => {
-    const result = storedDiagnostic.safeParse(entry);
-    if (!result.success) return [];
+  const entries: Diagnostic[] = [];
+  for (let index = Math.max(0, parsed.length - MAX_ENTRIES); index < parsed.length; index++) {
+    const result = storedDiagnostic.safeParse(parsed[index]);
+    if (!result.success) continue;
     const { source, message, count, revision, phase } = result.data;
-    return [
-      {
-        source,
-        message: sanitize(message),
-        count: Math.min(count, MAX_COUNT),
-        ...(revision !== undefined && phase !== undefined
-          ? { revision, phase: sanitize(phase).slice(0, MAX_PHASE_LENGTH) }
-          : {}),
-      },
-    ];
-  });
+    entries.push({
+      source,
+      message: sanitize(message),
+      count: Math.min(count, MAX_COUNT),
+      ...(revision !== undefined && phase !== undefined
+        ? { revision, phase: sanitize(phase).slice(0, MAX_PHASE_LENGTH) }
+        : {}),
+    });
+  }
+  return entries;
 }
 
 function errorMessage(error: unknown): string {
@@ -117,17 +117,15 @@ export function createDiagnostics(port?: DiagnosticPort) {
         }
         if (disposed) return;
         const match = entries.find((entry) => entry.source === source && entry.message === message);
-        entries = retain(
-          [
-            ...entries.filter((entry) => entry !== match),
-            {
-              source,
-              message,
-              count: Math.min((match?.count ?? 0) + 1, MAX_COUNT),
-              ...location,
-            },
-          ].slice(-MAX_ENTRIES),
-        );
+        entries = retain([
+          ...entries.filter((entry) => entry !== match),
+          {
+            source,
+            message,
+            count: Math.min((match?.count ?? 0) + 1, MAX_COUNT),
+            ...location,
+          },
+        ]);
         // Capture delivery ownership before persistence or listeners can register new viewers.
         const notification = [...listeners];
         try {

@@ -38,6 +38,7 @@ export const FOOD_CARDS: readonly CardDefinition[] = freeze(
   true,
 );
 
+const foodIds = new Set(FOOD_CARDS.map((card) => card.id));
 export function isFood(id: string): boolean {
-  return FOOD_CARDS.some((card) => card.id === id);
+  return foodIds.has(id);
 }
