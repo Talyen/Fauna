@@ -81,7 +81,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Dodge",
       "status",
       "active",
-      "Both sides have a 5% chance to avoid each attack packet before defenses; Controlled targets cannot Dodge; Total Dodge is capped at 75%",
+      "Both sides have a 5% chance to avoid each attack packet before defenses; Controlled targets normally cannot Dodge; Total Dodge is capped at 75%",
       ["Dodges", "Dodged", "Dodging"],
     ),
     blind: entry(
