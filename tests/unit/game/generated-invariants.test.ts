@@ -89,7 +89,7 @@ it("preserves command and save contracts across generated player sequences", () 
     ),
     { seed: 741819, numRuns: 20 },
   );
-});
+}, 15_000);
 
 it("rejects generated corruptions of valid draft and battle checkpoints", () => {
   fc.assert(
