@@ -1,7 +1,7 @@
 import { actionValue } from "../ability-rules";
 import { takeCardRepeat } from "./card-repeat";
 import { battleCardCapacity, createTemporaryCard, draw } from "../card-zones";
-import { boonRule } from "../rules/boons";
+import { boonRule, cornucopiaHealing } from "../rules/boons";
 import { foodForAllies } from "../card-rules";
 import { FOOD_CARDS } from "../content/food";
 import { species, type CardDefinition } from "../content";
@@ -98,8 +98,15 @@ export function useFood(
         actorId: presenter.id,
         text: `${def.name} repeats`,
       });
-    if (def.effect === "mana") gainMana(state, value, events);
-    else {
+    if (def.effect === "mana") {
+      gainMana(state, value, events);
+      if (def.id === "food-mana-berries" && state.boons.includes("cornucopia"))
+        for (const ally of healingAllies(state)) {
+          restoreHealth(ally, cornucopiaHealing(state), events, false, state, true);
+          if (state.boons.includes("velvet-whisk"))
+            grantTemporaryDodge(ally, boonRule("velvet-whisk").dodge, events);
+        }
+    } else {
       const recipients = foodForAllies(def, state)
         ? def.effect === "heal"
           ? healingAllies(state)

@@ -131,6 +131,32 @@ export function* restoreHealth(
     excess > 0 &&
     state?.phase === "battle" &&
     !isEnemy(unit) &&
+    state.boons.includes("overflow-cup")
+  ) {
+    const recipient = mostInjured(
+      healingAllies(state).filter((ally) => ally.id !== unit.id && ally.health < maximumHealth(ally)),
+    );
+    if (recipient)
+      yield* reaction(
+        "restoreHealth",
+        recipient,
+        Math.round(excess / boonRule("overflow-cup").divisor),
+        events,
+        false,
+        state,
+        false,
+        undefined,
+        {
+          adjusted: true,
+          shareOverflow: false,
+        },
+      );
+  }
+  if (
+    options.shareOverflow !== false &&
+    excess > 0 &&
+    state?.phase === "battle" &&
+    !isEnemy(unit) &&
     state.boons.includes("last-threshold")
   ) {
     let remaining = excess;

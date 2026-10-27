@@ -4,6 +4,7 @@ import { abilityExtras, primaryAbilityValue } from "./combat/ability-values";
 import { DAMAGE_TYPES, keywordLabel } from "./keywords";
 import type { CardDefinition, DamageType } from "./content/types";
 import type { GameState } from "./types";
+import { cornucopiaHealing } from "./rules/boons";
 export function foodForAllies(card: CardDefinition, state?: Pick<GameState, "boons">) {
   return (
     card.species === null &&
@@ -115,6 +116,8 @@ export function cardText(
     if (foodForAllies(card, state))
       text =
         card.effect === "heal" ? `Restore ${value} Health to all allies` : `Give all allies ${value} Block`;
+    if (card.id === "food-mana-berries" && cornucopiaHealing(state))
+      text += `; Restore ${cornucopiaHealing(state)} Health to all allies`;
     if (card.consume) text += "; Consume";
   } else if (card.consume) text = `Consume; ${text}`;
   return text;

@@ -9,6 +9,7 @@ import { passiveAmount } from "./progression";
 import { shuffle, roll } from "./random";
 import { speciesCards, species } from "./content";
 import type { Card, GameEvent, GameState } from "./types";
+import { replenishJourneyCards } from "./journey-cards";
 
 /** Both sides of the exchange provide passage, including Dulcera's own departure or arrival. */
 export function gentlePassage(state: GameState, previous: GameState["team"], events: GameEvent[]) {
@@ -189,6 +190,7 @@ export function rebuildCards(state: GameState) {
       cards.push(retained ?? { id, definitionId: definition.id, ownerId: creature.id, level: 0 });
     });
   state.cards = cards;
+  if (state.phase !== "battle") replenishJourneyCards(state);
   if (state.battle) {
     state.battle.hand = [];
     state.battle.buffer = [];

@@ -18,6 +18,7 @@ import { shuffle, roll } from "./random";
 import { bossEncounter, encounterSource, finalEncounter, generateEncounterPack } from "./encounters";
 import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
 import { rebuildCards } from "./team";
+import { replenishJourneyCards } from "./journey-cards";
 const OPTIONAL_DESTINATION_CHANCE = 0.25;
 const recruitSpecies = SPECIES.filter((entry) => !entry.legendary);
 
@@ -264,6 +265,7 @@ function clearCombat(state: GameState) {
     else kept?.push(card);
   }
   if (kept) state.cards = kept;
+  replenishJourneyCards(state);
   for (const row of [state.team, state.reserves])
     for (const creature of row) {
       creature.block = 0;

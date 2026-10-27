@@ -255,13 +255,23 @@ export function* hit(
     options.delivery !== "reflection" &&
     (negation === "reflected" || takeAttackReflection(source, target, events))
   ) {
-    return yield* reaction("hit", state, target, source, value, type, events, {
-      ...options,
-      delivery: "reflection",
-      interceptionChecked: true,
-      blindMiss: false,
-      cannotDodge: false,
-    });
+    const recipients =
+      isEnemy(source) && !isEnemy(target) && state.boons.includes("ripple-mirror")
+        ? [source, ...battlefield(state, "enemy").filter((unit) => unit.health > 0 && unit.id !== source.id)]
+        : [source];
+    let primary: number | undefined;
+    for (const recipient of recipients) {
+      if (target.health <= 0 || recipient.health <= 0) continue;
+      const result = yield* reaction("hit", state, target, recipient, value, type, events, {
+        ...options,
+        delivery: "reflection",
+        interceptionChecked: true,
+        blindMiss: false,
+        cannotDodge: false,
+      });
+      if (recipient.id === source.id) primary = result;
+    }
+    return primary;
   }
   const policy = packetPolicyView(options);
   const wrongFoot =
@@ -535,6 +545,27 @@ export function* resolveHit(
   yield* faultline(context, depletedBlock);
   yield* damageRewards(context, facts, policy);
   if (
+    dealt > 0 &&
+    alliedSource &&
+    !alliedTarget &&
+    options.origin === "retaliation" &&
+    options.thorns &&
+    source.health > 0 &&
+    state.boons.includes("rootspool")
+  )
+    yield* reaction("leechHealth", state, source, dealt, events, stats.poison > 0 || stats.bleed > 0, target);
+  if (
+    attack &&
+    alliedSource &&
+    !alliedTarget &&
+    type === "light" &&
+    depletedBlock &&
+    source.health > 0 &&
+    target.health > 0 &&
+    state.boons.includes("suncrust-rolling-pin")
+  )
+    yield* applyResolvedStatus(state, source, target, 1, "blind", events);
+  if (
     attack &&
     alliedSource &&
     !alliedTarget &&
@@ -598,6 +629,17 @@ export function* resolveHit(
       },
     );
     depletions.push(...statusResult.depletions);
+    if (
+      attack &&
+      alliedSource &&
+      !alliedTarget &&
+      type === "freeze" &&
+      state.boons.includes("moonpath-divider")
+    ) {
+      const other = findLivingBattlefield(state, "enemy", (enemy) => enemy.id !== target.id);
+      const amount = Math.round(effectDamage / boonRule("moonpath-divider").divisor);
+      if (other && amount > 0) yield* applyResolvedStatus(state, source, other, amount, "freeze", events);
+    }
     yield* poisonStun(context, effectDamage);
     if (direct && alliedSource && !alliedTarget && source.health > 0)
       yield* attackProcs(

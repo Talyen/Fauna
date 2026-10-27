@@ -118,38 +118,49 @@ export function executePrimary(context: PrimaryContext) {
           !blindMiss && (negation === "reflected" || takeAttackReflection(actor, recipient, events));
         if (reflected) {
           negated.add(recipient.id);
-          if (negateAttack(state, recipient, actor, events, false, damageType)) continue;
         }
         const source = reflected ? recipient : actor;
-        const victim = reflected ? actor : recipient;
-        if (def.purgeThorns) purgeAttackThorns(state, victim, events, source);
-        hit(
-          state,
-          source,
-          victim,
-          value * (def.doubleAgainstHealthier && victim.health > source.health ? 2 : 1),
-          damageType,
-          events,
-          {
-            origin: "ability",
-            delivery: reflected ? "reflection" : undefined,
-            interceptionChecked: true,
-            blindMiss: reflected ? false : blindMiss,
-            cannotDodge: !reflected && cannotDodge,
-            criticalBonus,
-            leech:
-              def.leech ||
-              (!reflected &&
-                (oasisLeech ||
-                  (action.side === "player" &&
-                    damageType === "water" &&
-                    actor.block > 0 &&
-                    state.boons.includes("lagoon-chalice")))),
-            cardLeech: keywords.includes("leech"),
-            sharedNegate: reflected ? undefined : sharedNegate,
-          },
-        );
-        if (reflected) reflectExtras(state, action, recipient, events, power);
+        const reflectedTargets =
+          reflected && action.side === "enemy" && state.boons.includes("ripple-mirror")
+            ? [
+                actor,
+                ...battlefield(state, "enemy").filter((unit) => unit.health > 0 && unit.id !== actor.id),
+              ]
+            : reflected
+              ? [actor]
+              : [recipient];
+        for (const victim of reflectedTargets) {
+          if (source.health <= 0 || victim.health <= 0) continue;
+          if (reflected && negateAttack(state, recipient, victim, events, false, damageType)) continue;
+          if (def.purgeThorns) purgeAttackThorns(state, victim, events, source);
+          hit(
+            state,
+            source,
+            victim,
+            value * (def.doubleAgainstHealthier && victim.health > source.health ? 2 : 1),
+            damageType,
+            events,
+            {
+              origin: "ability",
+              delivery: reflected ? "reflection" : undefined,
+              interceptionChecked: true,
+              blindMiss: reflected ? false : blindMiss,
+              cannotDodge: !reflected && cannotDodge,
+              criticalBonus,
+              leech:
+                def.leech ||
+                (!reflected &&
+                  (oasisLeech ||
+                    (action.side === "player" &&
+                      damageType === "water" &&
+                      actor.block > 0 &&
+                      state.boons.includes("lagoon-chalice")))),
+              cardLeech: keywords.includes("leech"),
+              sharedNegate: reflected ? undefined : sharedNegate,
+            },
+          );
+          if (reflected) reflectExtras(state, action, recipient, events, power, victim);
+        }
       }
       if (action.side === "player") action.actor.attacked = true;
       return { attackTarget, extraAttackTarget, negated, sharedNegate };

@@ -20,6 +20,7 @@ import { gameStateSchema } from "./state-schema";
 import { speciesCards, SPECIES, species } from "./content";
 import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { BattleState, GameState } from "./types";
+import { CORNUCOPIA_CARD_ID } from "./journey-cards";
 function unique(values: readonly unknown[]) {
   if (values.length < 2) return true;
   if (values.length === 2) return values[0] !== values[1] && !Object.is(values[0], values[1]);
@@ -179,7 +180,7 @@ function speciesHasCard(kind: GameState["team"][number]["species"], cardId: stri
   return ids.has(cardId);
 }
 
-function validateRoster(state: GameState) {
+export function validateRoster(state: GameState) {
   const roster = [...state.team, ...state.reserves];
   invalid(!uniqueBy(roster, (c) => c.id) || !uniqueBy(state.cards, (c) => c.id));
   invalid(state.team.length + state.reserves.length > 5);
@@ -197,7 +198,24 @@ function validateRoster(state: GameState) {
   for (const unit of state.team) teamById.set(unit.id, unit);
   invalid(
     state.cards.some((card) => {
-      if (card.ownerId === null) return !(card.temporary && card.level === 0 && isFood(card.definitionId));
+      if (
+        card.id === CORNUCOPIA_CARD_ID &&
+        (card.ownerId !== null ||
+          card.definitionId !== "food-mana-berries" ||
+          card.level !== 0 ||
+          card.temporary ||
+          !state.boons.includes("cornucopia"))
+      )
+        return true;
+      if (card.ownerId === null)
+        return !(
+          card.level === 0 &&
+          isFood(card.definitionId) &&
+          (card.temporary ||
+            (card.id === CORNUCOPIA_CARD_ID &&
+              card.definitionId === "food-mana-berries" &&
+              state.boons.includes("cornucopia")))
+        );
       const owner = teamById.get(card.ownerId);
       if (!owner) return true;
       return (
@@ -206,6 +224,10 @@ function validateRoster(state: GameState) {
       );
     }),
   );
+  if (state.phase !== "battle")
+    invalid(
+      state.cards.some((card) => card.id === CORNUCOPIA_CARD_ID) !== state.boons.includes("cornucopia"),
+    );
   invalid(
     state.cards.some(
       (card) =>

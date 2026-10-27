@@ -6,6 +6,28 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "overflow-cup": boon(
+      { divisor: 2 },
+      () => "Healing beyond an ally’s maximum Health restores half the excess to the most injured other ally",
+    ),
+    "ripple-mirror": boon({}, () => "Attacks Reflected by allies hit all enemies"),
+    "sail-needle": boon({ armor: 2 }, (p) => `Cleansing an ally’s Bleed grants them ${p.armor} Armor`),
+    rootspool: boon({}, () => "Thorns have Leech"),
+    winterseed: boon({}, () => "Frozen allies keep their Block between turns"),
+    "moonpath-divider": boon(
+      { divisor: 2 },
+      () => "Freeze hits also add half their Freeze buildup to another enemy",
+    ),
+    cornucopia: boon(
+      { healing: 2 },
+      (p) => `Add Mana Berries to your deck; Mana Berries also restore ${p.healing} Health to all allies`,
+    ),
+    "suncrust-rolling-pin": boon({}, () => "Light attacks Blind enemies when they break their Block"),
+    "dandelion-poultice": boon(
+      { damage: 2 },
+      (p) => `Cleansing an ally deals ${p.damage} Nature damage to all enemies`,
+    ),
+    "dew-pendulum": boon({}, () => "At the end of your turn, allies gain Block equal to unspent Mana"),
     "quiet-pinwheel": boon({}, () => "Allies can Dodge while Stunned or Frozen"),
     "lagoon-chalice": boon({}, () => "Water attacks have Leech while you have Block"),
     "acorn-skittle": boon(
@@ -247,6 +269,13 @@ const rules = freeze(
 );
 export function boonRule<K extends keyof typeof rules>(id: K): (typeof rules)[K] {
   return rules[id];
+}
+export function cornucopiaHealing(state?: { boons: readonly string[] }): number {
+  if (!state?.boons.includes("cornucopia")) return 0;
+  return (
+    boonRule("cornucopia").healing *
+    (state.boons.includes("nectar-dipper") ? boonRule("nectar-dipper").multiplier : 1)
+  );
 }
 
 // Living Chorus needs two cards; Resonant Chimes owns the later trigger.

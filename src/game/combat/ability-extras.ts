@@ -171,10 +171,11 @@ export function reflectExtras(
   reflectedBy: Combatant,
   events: GameEvent[],
   power: number,
+  target: Combatant = action.actor,
 ) {
   for (const effect of abilityExtras(action.def, power)) {
-    if (action.actor.health <= 0 || reflectedBy.health <= 0) break;
-    const actor = action.actor;
+    if (target.health <= 0 || reflectedBy.health <= 0) break;
+    const actor = target;
     switch (effect.kind) {
       case "damage":
         hit(state, reflectedBy, actor, effect.amount, effect.damageType, events, {

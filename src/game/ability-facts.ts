@@ -9,6 +9,7 @@ import {
   dodgeChance,
   hasHarmfulEffects,
   maximumHealth,
+  mostInjured,
   STACK_LIMIT,
   type Combatant,
 } from "./combat/state";
@@ -66,7 +67,19 @@ export function healingBenefit(
           overflowRecipients(state, ally).reduce((sum, unit) => sum + maximumHealth(unit) - unit.health, 0),
         )
       : 0;
-  return { restored: gain + shared, utility: overflow + Number(cleanses) };
+  const cupTarget =
+    excess > 0 && !isEnemy(ally) && state.boons.includes("overflow-cup")
+      ? mostInjured(
+          healingAllies(state).filter((unit) => unit.id !== ally.id && unit.health < maximumHealth(unit)),
+        )
+      : undefined;
+  const cup = cupTarget
+    ? Math.min(
+        Math.round(excess / boonRule("overflow-cup").divisor),
+        maximumHealth(cupTarget) - cupTarget.health,
+      )
+    : 0;
+  return { restored: gain + shared + cup, utility: overflow + Number(cleanses) };
 }
 
 /** Ordinary primary-hit approximation only: excludes chance effects, extras and most talent reactions.

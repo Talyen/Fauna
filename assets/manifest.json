@@ -2,6 +2,116 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.suncrust-rolling-pin",
+      "origin": "repository",
+      "source": "public/art/boons/suncrust-rolling-pin.png",
+      "output": "art/boons/suncrust-rolling-pin.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Suncrust Rolling Pin.png; https://drive.google.com/file/d/19UxmbNrMVgoy4c1FCC3d87YC-03sPR6k/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.moonpath-divider",
+      "origin": "repository",
+      "source": "public/art/boons/moonpath-divider.png",
+      "output": "art/boons/moonpath-divider.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Moonpath Divider.png; https://drive.google.com/file/d/1sBoljAaCV1i7bOvOG6foAZUqj79tT_XL/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.cornucopia",
+      "origin": "repository",
+      "source": "public/art/boons/cornucopia.png",
+      "output": "art/boons/cornucopia.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Cornucopia.png; https://drive.google.com/file/d/1VW8Dfq0lWRHvwzPT9hWFDvLx2aF0bTEl/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.dandelion-poultice",
+      "origin": "repository",
+      "source": "public/art/boons/dandelion-poultice.png",
+      "output": "art/boons/dandelion-poultice.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Dandelion Poultice.png; https://drive.google.com/file/d/1otOpQOqGstMY33s4zGMQJdCCLFJNNjPz/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.ripple-mirror",
+      "origin": "repository",
+      "source": "public/art/boons/ripple-mirror.png",
+      "output": "art/boons/ripple-mirror.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Ripple Mirror.png; https://drive.google.com/file/d/1M7KalpD8CbNkzFS-Zlp_Wow2_YGm-OES/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.overflow-cup",
+      "origin": "repository",
+      "source": "public/art/boons/overflow-cup.png",
+      "output": "art/boons/overflow-cup.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Overflow Cup.png; https://drive.google.com/file/d/1gUAl8IVeW-kbSBdmU02wMYRhVw3mTS9G/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.dew-pendulum",
+      "origin": "repository",
+      "source": "public/art/boons/dew-pendulum.png",
+      "output": "art/boons/dew-pendulum.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Dew Pendulum.png; https://drive.google.com/file/d/1urFphAIQgs3N85YT1tmvHj3Sm9aBXuVG/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.winterseed",
+      "origin": "repository",
+      "source": "public/art/boons/winterseed.png",
+      "output": "art/boons/winterseed.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Winterseed.png; https://drive.google.com/file/d/1PE4nu4dC_hsuR4zg973st0q_JItPVSHE/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.sail-needle",
+      "origin": "repository",
+      "source": "public/art/boons/sail-needle.png",
+      "output": "art/boons/sail-needle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Sail Needle.png; https://drive.google.com/file/d/10DZ7JxvBDiRzhysEE_akNybTk_bfzWMy/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.rootspool",
+      "origin": "repository",
+      "source": "public/art/boons/rootspool.png",
+      "output": "art/boons/rootspool.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Rootspool.png; https://drive.google.com/file/d/1oal9B7s55ma1YBc300ePCzA5zzSa0Myz/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.hearthcap-kettle",
       "origin": "repository",
       "source": "public/art/boons/hearthcap-kettle.png",

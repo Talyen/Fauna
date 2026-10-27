@@ -13,6 +13,7 @@ import { passiveAmount } from "../progression";
 import {
   ensureCombat,
   gainMana,
+  grantBlock,
   restoreHealth,
   mostInjured,
   startAction,
@@ -45,6 +46,7 @@ export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[
   const allied = !isEnemy(unit);
   if (allied && state.boons.includes("caravan-rug") && state.reserves.some((ally) => ally.id === unit.id))
     return;
+  if (allied && state.boons.includes("winterseed") && ensureCombat(unit).controlled === "freeze") return;
   const retained = retainedBlock(unit, allied ? state : undefined);
   unit.block =
     allied && state.boons.includes("geode-anvil")
@@ -84,6 +86,9 @@ export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[
 }
 export function finishTurn(draft: BattleState, events: GameEvent[]) {
   const battle = draft.battle;
+  const unspentMana = battle.mana;
+  if (draft.boons.includes("dew-pendulum") && unspentMana > 0)
+    for (const ally of livingBattlefield(draft, "player")) grantBlock(draft, ally, unspentMana, events);
   // Enemy-phase draws and existing overflow survive into the next player turn.
   battle.discard.push(...battle.hand.splice(0));
   recycleDiscard(draft);
