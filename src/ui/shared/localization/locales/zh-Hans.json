@@ -3233,6 +3233,12 @@
     "sourceHash": "3ea7b3a8e66cfd8a69e7c791c5b6788028842a7e6e22bd6d206d97d694ecdcb0",
     "text": "替补"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "dd7052c910a639a36bb5fcc85300fc5fcff3633c6e4584549ec075045dec781b",
+    "text": "一次遭遇; 击败所有敌人即可获胜; <keyword0>生命</keyword0>和击倒状态在遭遇之间保留; 营火休息会恢复每个生物最大<keyword1>生命</keyword1>的{{value0}}%，包括被击倒的生物; 战斗效果和<keyword2>格挡</keyword2>会在下一场战斗重置"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -3268,6 +3274,12 @@
     "source": "Damage",
     "sourceHash": "3a07c3fae919e834d9330da0382db8b2c67ea7618016dd6b68d367fa5c20d40b",
     "text": "伤害"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "9c3a47433c778d069480b404ba5429541a5ad39c515255f6a5f970a35441d265",
+    "text": "每个盟友生物每场战斗可承受一次致命伤害并以{{value0}}点<keyword0>生命</keyword0>存活，获得{{value1}}个宽限回合; 宽限期间的致命伤害仍会留下{{value2}}点<keyword1>生命</keyword1>; 此后的伤害可以将其击倒; 在后备度过的回合也会消耗宽限"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3358,6 +3370,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "a63a0ec0c228b0032bfced352d2d6b26d58a7db8003351e098ecdb8094b8636d",
     "text": "下一次攻击有{{value0}}%的概率落空; 无论命中还是落空，该次攻击后效果消失; 落空视为每个目标都进行了<keyword0>闪避</keyword0>; 不叠加"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "be871dc5f6b0d3d449a18374a96e76e703f458f8133ec0dc76d824d3986fefa4",
+    "text": "在<keyword3>生命</keyword3>之前吸收受到的伤害，包括<keyword0>灼烧</keyword0>、<keyword1>中毒</keyword1>和<keyword2>流血</keyword2>的持续伤害; 除非另有说明，不会阻止命中效果、累积或<keyword4>汲取</keyword4>; 剩余<keyword5>格挡</keyword5>通常在下一个己方回合开始时减半并正常四舍五入"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,

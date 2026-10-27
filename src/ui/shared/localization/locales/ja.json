@@ -3233,6 +3233,12 @@
     "sourceHash": "1bdf747ec7ce04dbeeb267d251c2ec9d04deb1ac705b0ea0259efbddd11e29be",
     "text": "控え"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "2ea5eb3825da6072d39b088928867e233152fb3cdfe96a16ed23670751d1b64e",
+    "text": "1回の遭遇; すべての敵を倒すと勝利; <keyword0>体力</keyword0>と戦闘不能状態は遭遇をまたいで維持; 焚き火で休むと戦闘不能を含む各クリーチャーの最大<keyword1>体力</keyword1>の{{value0}}%を回復; 戦闘効果と<keyword2>ブロック</keyword2>は次の戦闘でリセット"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -3268,6 +3274,12 @@
     "source": "Damage",
     "sourceHash": "23f2c223761a6365519fe0cb1e3e92d57def21e9648cc6a0844313760c82a4da",
     "text": "ダメージ"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "a5d0e293c62d98b54284f3db9d451fa0efcffb244b5a6adbdf4daebc057168eb",
+    "text": "味方クリーチャーは各戦闘で1回、致命傷を<keyword0>体力</keyword0>{{value0}}で生き残り、猶予を{{value1}}ターン得る; 猶予中の致命的なダメージでも<keyword1>体力</keyword1>{{value2}}が残る; その後のダメージで戦闘不能になることがある; 控えで過ごすターンも猶予を消費"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3358,6 +3370,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "6a4e228c102f35034518ce6a4656b740de91cf0a41e4e414f11582da2d98629a",
     "text": "次の攻撃が{{value0}}%の確率で外れる; 命中の有無にかかわらずその攻撃後に消える; 外れた攻撃は各対象の<keyword0>回避</keyword0>として扱う; 重複しない"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "37632409d3676b2ff75d2d4c1451b70f091426c54c01b44a90e9d78f7e682eb3",
+    "text": "<keyword0>炎上</keyword0>、<keyword1>毒</keyword1>、<keyword2>出血</keyword2>の継続ダメージを含む被ダメージを<keyword3>体力</keyword3>より先に吸収; 特記がない限りヒット効果、蓄積、<keyword4>吸血</keyword4>は防がない; 残った<keyword5>ブロック</keyword5>は通常、次の自分のターン開始時に半減し、通常通り四捨五入"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,

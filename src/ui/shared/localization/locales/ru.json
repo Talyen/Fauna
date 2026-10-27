@@ -3233,6 +3233,12 @@
     "sourceHash": "b8cb5c518bd1561b198b791cefdcf4593c154e2374bc64b2db055e7e1a3ea41d",
     "text": "Запас"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "64a99767d8f5efa92efad524e676cf8309de3cb668db8c954544a57943ada853",
+    "text": "Одна встреча; Победите всех врагов для победы; <keyword0>Здоровье</keyword0> и выбытие сохраняются между встречами; Отдых у костра восстанавливает {{value0}}% максимального <keyword1>здоровья</keyword1> каждого существа, включая выбывших; Боевые эффекты и <keyword2>блок</keyword2> сбрасываются перед следующим боем"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -3268,6 +3274,12 @@
     "source": "Damage",
     "sourceHash": "9243fc7f599e3e38df0cdede4659420394e4ec551b0d00f30f0f33bae820d7fe",
     "text": "Урон"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "de4c81bde74db4ba7aea20f44864e087b576d790888deb705b66dcbea74e0f91",
+    "text": "Каждое союзное существо один раз за бой переживает смертельный урон с {{value0}} <keyword0>здоровья</keyword0> и получает льготные ходы: {{value1}}; Смертельный урон во время этих ходов по-прежнему оставляет {{value2}} <keyword1>здоровья</keyword1>; Последующий урон может вывести его из строя; Ходы в запасе тоже расходуют льготное время"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3358,6 +3370,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "d4003e5a111463c013c6c0fed3288c45a5731daf7c74b279f94f319e57bd0ccf",
     "text": "вероятность промаха следующей атаки — {{value0}}%; Исчезает после этой атаки независимо от попадания; Промах считается <keyword0>уклонением</keyword0> каждой цели; Не суммируется"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "04049fb96d6b87becf45b821647e48a5538aed773713d49c72349cd78bb874d5",
+    "text": "Поглощает входящий урон до <keyword3>здоровья</keyword3>, включая периодический урон от <keyword0>горения</keyword0>, <keyword1>яда</keyword1> и <keyword2>кровотечения</keyword2>; Не предотвращает эффекты попадания, накопление или <keyword4>вампиризм</keyword4>, если не указано иное; Оставшийся <keyword5>блок</keyword5> обычно уменьшается вдвое в начале следующего хода с обычным округлением"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,

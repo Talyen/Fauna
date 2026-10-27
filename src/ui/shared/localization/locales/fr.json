@@ -3233,6 +3233,12 @@
     "sourceHash": "5ee474a37f832f061c7a9352741336b05c3b9d885ab9c64b20b12cdd390322c1",
     "text": "Réserve"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "0a3b30d1d7d4f73250e854e733d3d19daefb105fb03be715ada6c6e0f16d47f2",
+    "text": "Une rencontre; Vaincre tous les ennemis pour gagner; La <keyword0>Santé</keyword0> et les K.-O. persistent entre les rencontres; Le repos au feu restaure {{value0}}% de la <keyword1>Santé</keyword1> maximale de chaque créature, même mise K.-O.; Les effets de combat et le <keyword2>Blocage</keyword2> sont réinitialisés pour le combat suivant"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -3268,6 +3274,12 @@
     "source": "Damage",
     "sourceHash": "d20e5f41380e44dc318e49da96063e1f8e4c11ab760843982287a98f63cd47bf",
     "text": "Dégâts"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "a562785819d42c44f940b5fe0c188c5fac99d66b10529a87eb3cc8e84dd6913b",
+    "text": "Chaque créature alliée survit une fois par combat aux dégâts mortels avec {{value0}} <keyword0>Santé</keyword0> et {{value1}} tours de répit; Les dégâts mortels pendant ce répit laissent encore {{value2}} <keyword1>Santé</keyword1>; Les dégâts ultérieurs peuvent la mettre K.-O.; Les tours en réserve consomment aussi le répit"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3358,6 +3370,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "d5a2de3648b928eb996a36d6f32c899ffbcd7d61065ab752d2d348fcfe696a93",
     "text": "{{value0}}% de chances de rater votre prochaine attaque; Expire après cette attaque, qu’elle touche ou non; Un échec compte comme une <keyword0>Esquive</keyword0> pour chaque cible; Ne se cumule pas"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "704bc642d94937eb6933990c928e16ddbab4f9f47930d05abdbeedbc310c0049",
+    "text": "Absorbe les dégâts reçus avant la <keyword3>Santé</keyword3>, y compris les dégâts périodiques de <keyword0>Brûlure</keyword0>, <keyword1>Poison</keyword1> et <keyword2>Saignement</keyword2>; Ne prévient ni les effets de touche, ni l’accumulation, ni le <keyword4>Vol de vie</keyword4> sauf indication contraire; Le <keyword5>Blocage</keyword5> restant est normalement réduit de moitié au début de votre prochain tour, avec un arrondi normal"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,

@@ -3233,6 +3233,12 @@
     "sourceHash": "9d32a3dc30d346601027568bc3a79984af8a3331a7e0d803051d00adafb4c14d",
     "text": "Reserve"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "db9455aecff16b30738375c31c22ad0d4928e43343e354201ad66d7aedff4186",
+    "text": "Eine Begegnung; Besiege alle Gegner, um zu gewinnen; <keyword0>Gesundheit</keyword0> und ausgeschaltete Kreaturen bleiben zwischen Begegnungen bestehen; Lagerfeuerrast stellt {{value0}}% der maximalen <keyword1>Gesundheit</keyword1> jeder Kreatur wieder her, auch bei ausgeschalteten Kreaturen; Kampfeffekte und <keyword2>Block</keyword2> werden für den nächsten Kampf zurückgesetzt"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -3268,6 +3274,12 @@
     "source": "Damage",
     "sourceHash": "285844a7cb76af9b7754eb1cdacdf85e91f75cf3024f4e4442b36e3d46035e5f",
     "text": "Schaden"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "101514cb317bdb671098117e5c98237009404e0f296fc5d84e77d15b8280a0d4",
+    "text": "Jede verbündete Kreatur überlebt einmal pro Kampf tödlichen Schaden mit {{value0}} <keyword0>Gesundheit</keyword0> und {{value1}} Schonzügen; Tödliche Schadenspakete während dieser Schonzüge lassen weiterhin {{value2}} <keyword1>Gesundheit</keyword1> übrig; Späterer Schaden kann sie ausschalten; Auch Züge in der Reserve verbrauchen Schonzeit"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3358,6 +3370,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "dbaccb940332cd13ee78ec0716c7749595241800f367af102d0327003bd132ab",
     "text": "{{value0}}% Chance, den nächsten Angriff zu verfehlen; Endet nach diesem Angriff, ob er trifft oder nicht; Ein Fehlschlag zählt für jedes Ziel als <keyword0>Ausweichen</keyword0>; Ist nicht stapelbar"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "89c45f8f277a4fdccbd36e6d7d3162610b7eec13f52595342f8abaf4a94a834d",
+    "text": "Fängt eingehenden Schaden einschließlich <keyword0>Brand</keyword0>-, <keyword1>Gift</keyword1>- und <keyword2>Blutungs</keyword2>-Schadensschüben vor der <keyword3>Gesundheit</keyword3> ab; Verhindert Trefferwirkungen, Aufbau oder <keyword4>Lebensraub</keyword4> nur, wenn ausdrücklich angegeben; Verbleibender <keyword5>Block</keyword5> halbiert sich normalerweise zu Beginn deines nächsten Zuges und wird normal gerundet"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,

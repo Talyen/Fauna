@@ -3233,6 +3233,12 @@
     "sourceHash": "697da417f36aa6863bdc7f472cbcc9c370021164c39c8075088b514713720b32",
     "text": "Reserva"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "be82c49b92dddd10c4bd245b5f161ea538c44216fbfaaee627fccc8f7a65774c",
+    "text": "Um encontro; Derrote todos os inimigos para vencer; <keyword0>Saúde</keyword0> e nocautes persistem entre encontros; Descansar na fogueira restaura {{value0}}% da <keyword1>Saúde</keyword1> máxima de cada criatura, inclusive as nocauteadas; Efeitos de combate e <keyword2>Bloqueio</keyword2> são reiniciados para a próxima batalha"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -3268,6 +3274,12 @@
     "source": "Damage",
     "sourceHash": "d2aeee4baf7f9f1eef9c7c656183ef01d546b6f51427503dcf3ccd1fe841543d",
     "text": "Dano"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "b658d9e70c765f9dcad9345e79281ac173405ddda9112bf05a493a18f9fe5e7d",
+    "text": "Cada criatura aliada sobrevive uma vez por batalha a dano fatal com {{value0}} de <keyword0>Saúde</keyword0> e {{value1}} turnos de graça; Dano fatal durante esses turnos ainda deixa {{value2}} de <keyword1>Saúde</keyword1>; Dano posterior pode nocauteá-la; Turnos na reserva também consomem a graça"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3358,6 +3370,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "a4400ee798e6ce3c22356540892292e77dfb91585de9c378a62f9512c5f01e8a",
     "text": "{{value0}}% de chance de errar seu próximo ataque; Expira após esse ataque, acerte ou erre; Um erro conta como <keyword0>Esquiva</keyword0> para cada alvo; Não acumula"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "0e85fb9c3b84e42672254d78227dc371cde61b87a9d4122459648da88ea09476",
+    "text": "Absorve dano recebido antes da <keyword3>Saúde</keyword3>, incluindo pulsos de <keyword0>Queimadura</keyword0>, <keyword1>Veneno</keyword1> e <keyword2>Sangramento</keyword2>; Não impede efeitos de acerto, acúmulo ou <keyword4>Drenagem</keyword4> salvo indicação; O <keyword5>Bloqueio</keyword5> restante normalmente cai pela metade no início do próximo turno, com arredondamento normal"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
