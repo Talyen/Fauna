@@ -2867,6 +2867,12 @@
     "sourceHash": "cc523022c580e8bc76a6a40df16564bfe778d730f86d7b58fee8a378a741a27a",
     "text": "Золото"
   },
+  "content.glossary.hit.definition.rule": {
+    "reviewed": true,
+    "source": "A landed attack, including one absorbed by <keyword0>Block</keyword0>; <keyword1>Dodges</keyword1> and periodic damage are not hits; <keyword2>Thorns</keyword2> and Sporecoat retaliate when hit",
+    "sourceHash": "ed64a5dd8473e5cb089d0bfbb3e78fa28efd646b0e252f7112bb4410b576853c",
+    "text": "Попавшая атака, включая поглощённую <keyword0>блоком</keyword0>; <keyword1>Уклонения</keyword1> и периодический урон не считаются попаданиями; <keyword2>Шипы</keyword2> и Покров спор отвечают на попадание"
+  },
   "content.glossary.hit.term.rule": {
     "reviewed": true,
     "source": "Hit",
@@ -2927,6 +2933,12 @@
     "sourceHash": "c05cb9ffba539cf3d0e68002be4991be4fa1cf8f78446c19d68300856383e55a",
     "text": "Атака, наносящая двойной урон"
   },
+  "content.glossary.keyword.dodge.definition.rule": {
+    "reviewed": true,
+    "source": "Both sides have a {{value0}}% chance to avoid each attack packet before defenses; Controlled targets cannot <keyword0>Dodge</keyword0>; Total <keyword1>Dodge</keyword1> is capped at {{value1}}%",
+    "sourceHash": "03bdf52d47a9a61c2770c19b00c6b3ea6544e1b436e2107b4b92902afe983e58",
+    "text": "Обе стороны с вероятностью {{value0}}% избегают каждого пакета атаки до защит; Под контролем цель не может <keyword0>уклоняться</keyword0>; Общий шанс <keyword1>уклонения</keyword1> ограничен {{value1}}%"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -2968,6 +2980,12 @@
     "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
     "sourceHash": "ff5597940b8ff005a27a33140313682b2244e3e27623f679dd2a243ccdfb0cdf",
     "text": "<keyword0>Физический</keyword0> урон снижается <keyword1>бронёй</keyword1> после <keyword2>блока</keyword2>; Атаки с вероятностью {{value0}}% наносят <keyword3>критический</keyword3> двойной урон"
+  },
+  "content.glossary.keyword.poison.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> hits add damage dealt as <keyword1>Poison</keyword1>; At turn start it deals its stacks as damage, then loses {{value0}}% (at least {{value1}})",
+    "sourceHash": "5c77ae291be818ae1ae6e0ffbb43feab797cc2edab31cd8d4f8959d784d2f92d",
+    "text": "Попадания <keyword0>ядом</keyword0> добавляют нанесённый урон как <keyword1>яд</keyword1>; В начале хода он наносит урон по числу зарядов, затем теряет {{value0}}% (не менее {{value1}})"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,

@@ -2867,6 +2867,12 @@
     "sourceHash": "28b093aa57ca84f4b5bf5599dfc1c3564eee39e7c9e38a9f54ff08daf557adcd",
     "text": "金币"
   },
+  "content.glossary.hit.definition.rule": {
+    "reviewed": true,
+    "source": "A landed attack, including one absorbed by <keyword0>Block</keyword0>; <keyword1>Dodges</keyword1> and periodic damage are not hits; <keyword2>Thorns</keyword2> and Sporecoat retaliate when hit",
+    "sourceHash": "cbf316e883a25862bb721ff335e9486829e18e51c62f96b93cf96d58b2d77f40",
+    "text": "命中的攻击，包括被<keyword0>格挡</keyword0>吸收的攻击; <keyword1>闪避</keyword1>和周期伤害不算命中; <keyword2>荆棘</keyword2>与孢子外衣在受到命中时反击"
+  },
   "content.glossary.hit.term.rule": {
     "reviewed": true,
     "source": "Hit",
@@ -2927,6 +2933,12 @@
     "sourceHash": "da7f98a1566964e4100eb4dd9be6c4f91b012873a70fedf61f9cc471168dff58",
     "text": "造成双倍伤害的攻击"
   },
+  "content.glossary.keyword.dodge.definition.rule": {
+    "reviewed": true,
+    "source": "Both sides have a {{value0}}% chance to avoid each attack packet before defenses; Controlled targets cannot <keyword0>Dodge</keyword0>; Total <keyword1>Dodge</keyword1> is capped at {{value1}}%",
+    "sourceHash": "8a4093fa9594572b78160cc461ee858a5b24197ea076faa09caa7d1a219c599e",
+    "text": "双方在防御之前都有{{value0}}%的概率避开每个攻击伤害包; 被控制的目标无法<keyword0>闪避</keyword0>; 总<keyword1>闪避</keyword1>概率上限为{{value1}}%"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -2968,6 +2980,12 @@
     "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
     "sourceHash": "59ea88914a1d28a611369eb86b92350a19dba31e3b84a8629af5fce2a59b271d",
     "text": "<keyword0>物理</keyword0>伤害在<keyword2>格挡</keyword2>之后受<keyword1>护甲</keyword1>减免；攻击有{{value0}}%的概率<keyword3>暴击</keyword3>，造成双倍伤害"
+  },
+  "content.glossary.keyword.poison.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> hits add damage dealt as <keyword1>Poison</keyword1>; At turn start it deals its stacks as damage, then loses {{value0}}% (at least {{value1}})",
+    "sourceHash": "55fb2bbd53842e88b015074799ceed937620fa9ce3d9aa19a502f700c8f8ec1a",
+    "text": "<keyword0>中毒</keyword0>命中会将造成的伤害加为<keyword1>中毒</keyword1>; 回合开始时按层数造成伤害，然后减少{{value0}}%（至少{{value1}}）"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,

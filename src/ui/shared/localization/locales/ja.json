@@ -2867,6 +2867,12 @@
     "sourceHash": "8aa234646e34429f2a0951a38b6914938c87058628b10c497ddd8e41026e5f46",
     "text": "ゴールド"
   },
+  "content.glossary.hit.definition.rule": {
+    "reviewed": true,
+    "source": "A landed attack, including one absorbed by <keyword0>Block</keyword0>; <keyword1>Dodges</keyword1> and periodic damage are not hits; <keyword2>Thorns</keyword2> and Sporecoat retaliate when hit",
+    "sourceHash": "5f0668aa71c85e46457d1c22a28b38f233ba24a9b40ca6ff8dcacad120799858",
+    "text": "命中した攻撃で、<keyword0>ブロック</keyword0>に吸収されたものも含む; <keyword1>回避</keyword1>と継続ダメージは命中ではない; <keyword2>棘</keyword2>と胞子の衣は命中を受けると反撃する"
+  },
   "content.glossary.hit.term.rule": {
     "reviewed": true,
     "source": "Hit",
@@ -2927,6 +2933,12 @@
     "sourceHash": "52c6fe2c3393e73bf0036d22fc23ee908fd3c55c133059ced59337f62c4e2eba",
     "text": "ダメージが2倍になる攻撃"
   },
+  "content.glossary.keyword.dodge.definition.rule": {
+    "reviewed": true,
+    "source": "Both sides have a {{value0}}% chance to avoid each attack packet before defenses; Controlled targets cannot <keyword0>Dodge</keyword0>; Total <keyword1>Dodge</keyword1> is capped at {{value1}}%",
+    "sourceHash": "b2467e7d4cf8b26276f061d64315340ac90e43ff6eff4125a498856bdaa8a859",
+    "text": "両陣営は防御の前に各攻撃ダメージを{{value0}}%の確率で避ける; 行動不能の対象は<keyword0>回避</keyword0>できない; 合計<keyword1>回避</keyword1>率は{{value1}}%が上限"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -2968,6 +2980,12 @@
     "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
     "sourceHash": "8c26dc2f0a4353eaf59f940495183f56b02427884f500aa0cdbc877ca57aff83",
     "text": "<keyword0>物理</keyword0>ダメージは<keyword2>ブロック</keyword2>の後に<keyword1>装甲</keyword1>で軽減される; 攻撃は{{value0}}%の確率で<keyword3>クリティカル</keyword3>になり、ダメージが2倍になる"
+  },
+  "content.glossary.keyword.poison.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> hits add damage dealt as <keyword1>Poison</keyword1>; At turn start it deals its stacks as damage, then loses {{value0}}% (at least {{value1}})",
+    "sourceHash": "8c7dc48766f19a269604fb657c867e886c253cedb45ecd2afffdf63a59b06917",
+    "text": "<keyword0>毒</keyword0>の命中は与えたダメージを<keyword1>毒</keyword1>として加算; ターン開始時に蓄積分のダメージを与え、その後{{value0}}%減る（最低{{value1}}）"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,

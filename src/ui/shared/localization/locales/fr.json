@@ -2879,6 +2879,12 @@
     "sourceHash": "539a1a12d5f91374ede46475bc75bdbe963833574e1a8ff4f90145c66f6bacde",
     "text": "Or"
   },
+  "content.glossary.hit.definition.rule": {
+    "reviewed": true,
+    "source": "A landed attack, including one absorbed by <keyword0>Block</keyword0>; <keyword1>Dodges</keyword1> and periodic damage are not hits; <keyword2>Thorns</keyword2> and Sporecoat retaliate when hit",
+    "sourceHash": "6f9760946b1b0aa58fac4c37c7a03887e426f93001ecd9e780cbe0751ceb8c3c",
+    "text": "Une attaque réussie, y compris absorbée par le <keyword0>Blocage</keyword0>; Les <keyword1>Esquives</keyword1> et dégâts périodiques ne sont pas des coups; Les <keyword2>Épines</keyword2> et Manteau de spores ripostent en cas de coup"
+  },
   "content.glossary.hit.term.rule": {
     "reviewed": true,
     "source": "Hit",
@@ -2939,6 +2945,12 @@
     "sourceHash": "b41c1e40d42f6f8fbbc358fe5498bf628bdf7b58f1f8df70a9edff61fd932b61",
     "text": "Une attaque qui inflige le double de dégâts"
   },
+  "content.glossary.keyword.dodge.definition.rule": {
+    "reviewed": true,
+    "source": "Both sides have a {{value0}}% chance to avoid each attack packet before defenses; Controlled targets cannot <keyword0>Dodge</keyword0>; Total <keyword1>Dodge</keyword1> is capped at {{value1}}%",
+    "sourceHash": "98644f3333ccdfb8f3d91cceca68b174bbc0fcaa1664c851ef299a8466fd8951",
+    "text": "Les deux camps ont {{value0}}% de chances d’éviter chaque paquet d’attaque avant les défenses; Les cibles sous contrôle ne peuvent pas <keyword0>esquiver</keyword0>; L’<keyword1>Esquive</keyword1> totale est limitée à {{value1}}%"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -2980,6 +2992,12 @@
     "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
     "sourceHash": "370fd0c3157c1e3e29b16acc4e4cb0ed288200ae26c90a217746cd108bba42c0",
     "text": "Les dégâts <keyword0>Physiques</keyword0> sont réduits par l’<keyword1>Armure</keyword1> après le <keyword2>Blocage</keyword2> ; Les attaques ont {{value0}}% de chances d’infliger un <keyword3>coup critique</keyword3> aux dégâts doublés"
+  },
+  "content.glossary.keyword.poison.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> hits add damage dealt as <keyword1>Poison</keyword1>; At turn start it deals its stacks as damage, then loses {{value0}}% (at least {{value1}})",
+    "sourceHash": "ba21a59771694224774a9c72f07267b7aca490b587f84124bca136d877a00cce",
+    "text": "Les coups de <keyword0>Poison</keyword0> ajoutent les dégâts infligés en <keyword1>Poison</keyword1>; Au début du tour, il inflige ses charges en dégâts puis perd {{value0}}% (au moins {{value1}})"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
