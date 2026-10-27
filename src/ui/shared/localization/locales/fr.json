@@ -2987,6 +2987,54 @@
     "sourceHash": "46c62c1f468b78a3f0fc6fde3b3d7d3578e2810fc90910ddbb1122919c785896",
     "text": "Aux portes de la mort dure {{value0}} tour de plus"
   },
+  "content.talent.light.blessed-leech.name": {
+    "reviewed": true,
+    "source": "Blessed Leech",
+    "sourceHash": "f8cff6341d42398db7874fa74f6ba559596f11389c165b99ce7898acee4beda2",
+    "text": "Vol de vie béni"
+  },
+  "content.talent.light.celestial-ward.name": {
+    "reviewed": true,
+    "source": "Celestial Ward",
+    "sourceHash": "0f22d662c7a2b1278eacc52a9dd9f7894e9f09dd266d258aaea567f4e238cd83",
+    "text": "Protection céleste"
+  },
+  "content.talent.light.divine-favor.name": {
+    "reviewed": true,
+    "source": "Divine Favor",
+    "sourceHash": "0cfd3fc1051c21a732e15dca1800bc81fc05fc021ed5eb1213e3aecd57f0755b",
+    "text": "Faveur divine"
+  },
+  "content.talent.light.faith-barrier.name": {
+    "reviewed": true,
+    "source": "Faith Barrier",
+    "sourceHash": "999e16ec7f5578daad999453978c97ecab1e50489f93e68243200b2d66170757",
+    "text": "Barrière de foi"
+  },
+  "content.talent.light.prosperity.name": {
+    "reviewed": true,
+    "source": "Prosperity",
+    "sourceHash": "5a4e3c646769cb3332837f978e16410787561fa473909144b9000a9885a93ade",
+    "text": "Prospérité"
+  },
+  "content.talent.light.radiant-guard.name": {
+    "reviewed": true,
+    "source": "Radiant Guard",
+    "sourceHash": "88a504c970771ccbaf834f8163b817c5c3fb585d38a7fda88958b765eb7c29d3",
+    "text": "Garde rayonnante"
+  },
+  "content.talent.light.scorching-light.name": {
+    "reviewed": true,
+    "source": "Scorching Light",
+    "sourceHash": "0f27908c78746892d7bdfa83da2c8d0a88ead0cb272517f7d0c457ca89d495b2",
+    "text": "Lumière brûlante"
+  },
+  "content.talent.light.tithe.name": {
+    "reviewed": true,
+    "source": "Tithe",
+    "sourceHash": "fdc05305f9da94e959d3c3630e06fa3633125763f6ffec346ecefb0fab12862a",
+    "text": "Dîme"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -3112,6 +3160,48 @@
     "source": "Windstep",
     "sourceHash": "272b18d7063faca2bd02ec7abcdf98e664fa763692049daa251679b33a82082e",
     "text": "Pas du vent"
+  },
+  "content.talent.physical.armored-fists.name": {
+    "reviewed": true,
+    "source": "Armored Fists",
+    "sourceHash": "d6ccb4879346b1827cf95c9b463934d22dad2f3ce80486a5d9576189114c2e51",
+    "text": "Poings blindés"
+  },
+  "content.talent.physical.heavy-blows.name": {
+    "reviewed": true,
+    "source": "Heavy Blows",
+    "sourceHash": "672fed8b6336c61b24e0b04e0e9e2485fe0e001975d171d927102ea5f83172d8",
+    "text": "Coups lourds"
+  },
+  "content.talent.physical.lacerate.name": {
+    "reviewed": true,
+    "source": "Lacerate",
+    "sourceHash": "701a6f43f5f20b8a25fe5514db659dbd4bfd61290a93118472a81a63f0750c1f",
+    "text": "Lacération"
+  },
+  "content.talent.physical.riposte.name": {
+    "reviewed": true,
+    "source": "Riposte",
+    "sourceHash": "bd38ba36594940d2c271c071f5d7466a74748ae9b478e39fac578b2f3739ec79",
+    "text": "Riposte"
+  },
+  "content.talent.physical.rupture.name": {
+    "reviewed": true,
+    "source": "Rupture",
+    "sourceHash": "a79746d5ddf280ba65b3efc86b5d4d35f7bc6f7879e7ba6f0a362660b84e9e1d",
+    "text": "Rupture"
+  },
+  "content.talent.physical.shield-slam.name": {
+    "reviewed": true,
+    "source": "Shield Slam",
+    "sourceHash": "f206d701532f87408494cc96b5bc61a5bffc66a654262c439951ad739d31e670",
+    "text": "Heurt de bouclier"
+  },
+  "content.talent.physical.unrelenting.name": {
+    "reviewed": true,
+    "source": "Unrelenting",
+    "sourceHash": "e490d1f42e15dad2fa6ea3b1f1d1dafa16a12ec92087639d1b12712142fe60d3",
+    "text": "Implacable"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,

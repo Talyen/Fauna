@@ -2939,6 +2939,54 @@
     "sourceHash": "0d7ef20d1d6b107a8707efd48ee9ca42bf64834e368e7638e689fb9b06d34cb3",
     "text": "死の淵の持続時間が{{value0}}ターン延びる"
   },
+  "content.talent.light.blessed-leech.name": {
+    "reviewed": true,
+    "source": "Blessed Leech",
+    "sourceHash": "29d89987cc6708fac4911372df15cd4fb755e3deeef3550db1d5b0a63160b010",
+    "text": "祝福の吸血"
+  },
+  "content.talent.light.celestial-ward.name": {
+    "reviewed": true,
+    "source": "Celestial Ward",
+    "sourceHash": "a7ea7b14e1390fabeebdd3860b74cc4897fa4e3a56276cf4b5595b51c7b6201c",
+    "text": "天の守り"
+  },
+  "content.talent.light.divine-favor.name": {
+    "reviewed": true,
+    "source": "Divine Favor",
+    "sourceHash": "06e41efacce561b77848957a6155acbce04defaf3c007d98c443663d40293cde",
+    "text": "神の恩寵"
+  },
+  "content.talent.light.faith-barrier.name": {
+    "reviewed": true,
+    "source": "Faith Barrier",
+    "sourceHash": "eb6597e0012332b16dd9fe1f2b1682e8dfdb1814323d88b7c0991aa9147507fa",
+    "text": "信仰の障壁"
+  },
+  "content.talent.light.prosperity.name": {
+    "reviewed": true,
+    "source": "Prosperity",
+    "sourceHash": "1aae1f556c078a7dba33049eec31d3757fc4be030eddbaa492611761bf08d3d5",
+    "text": "繁栄"
+  },
+  "content.talent.light.radiant-guard.name": {
+    "reviewed": true,
+    "source": "Radiant Guard",
+    "sourceHash": "826128cdfd3c3f4a1544f06cb74dca330d844b6df763cc1fd5b4e8331ca0dbb4",
+    "text": "光輝の守り"
+  },
+  "content.talent.light.scorching-light.name": {
+    "reviewed": true,
+    "source": "Scorching Light",
+    "sourceHash": "36d94845f7ef77b4e09ff9e4a427dab6b844d6c9cb3f13f7ae2b0593ca28dca5",
+    "text": "灼熱の光"
+  },
+  "content.talent.light.tithe.name": {
+    "reviewed": true,
+    "source": "Tithe",
+    "sourceHash": "3d65b08d32776f2a4e0a49a3da42330f19526cae28939e3fd3a8697002e5a04f",
+    "text": "十分の一税"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -3064,6 +3112,48 @@
     "source": "Windstep",
     "sourceHash": "b3cebde57933d42e1e01c96aee22e8adbb159d3093577e9b36f057f8d1bc7100",
     "text": "風の歩み"
+  },
+  "content.talent.physical.armored-fists.name": {
+    "reviewed": true,
+    "source": "Armored Fists",
+    "sourceHash": "c8ed3de28292f26c465e84fe9d92d4af7101089ea2fc6fb88db6b24c4dff05e0",
+    "text": "装甲の拳"
+  },
+  "content.talent.physical.heavy-blows.name": {
+    "reviewed": true,
+    "source": "Heavy Blows",
+    "sourceHash": "1d52dc32e783e7359bd641b3e3144ce64404ff46db19d06b5f253b3e181ad562",
+    "text": "重い打撃"
+  },
+  "content.talent.physical.lacerate.name": {
+    "reviewed": true,
+    "source": "Lacerate",
+    "sourceHash": "fb31a41a27b68ff0b2411f223d0598c45078134490672a3a55d3870a33e00fdc",
+    "text": "裂傷"
+  },
+  "content.talent.physical.riposte.name": {
+    "reviewed": true,
+    "source": "Riposte",
+    "sourceHash": "c7f7a22d25cf89475dd4dc3e83a2335700f0713c3654f6b35debf796c04f00d9",
+    "text": "反撃"
+  },
+  "content.talent.physical.rupture.name": {
+    "reviewed": true,
+    "source": "Rupture",
+    "sourceHash": "3820ac49fd78d75bc8b12993bd571379defd978aa1585d94ddbbc1230422cd3e",
+    "text": "破裂"
+  },
+  "content.talent.physical.shield-slam.name": {
+    "reviewed": true,
+    "source": "Shield Slam",
+    "sourceHash": "4fbc75369990261c677446c564c27d68f84cab1da4e169854db99855ef086f70",
+    "text": "盾の叩きつけ"
+  },
+  "content.talent.physical.unrelenting.name": {
+    "reviewed": true,
+    "source": "Unrelenting",
+    "sourceHash": "d85545f266b3d22080ae34fa179f5c628cc803ac588ea75f6df026bd5860ed79",
+    "text": "容赦なし"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,

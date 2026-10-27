@@ -2939,6 +2939,54 @@
     "sourceHash": "a48a087d2bc63705ffe21054f663463c608bab9f5ea9ef62edf33ff6725d631d",
     "text": "На пороге смерти длится дольше; дополнительных ходов: {{value0}}"
   },
+  "content.talent.light.blessed-leech.name": {
+    "reviewed": true,
+    "source": "Blessed Leech",
+    "sourceHash": "e58c7bb6c0e758e2ec60952833801161ff31422b980f18ee30228b4e81c781b1",
+    "text": "Благословенный вампиризм"
+  },
+  "content.talent.light.celestial-ward.name": {
+    "reviewed": true,
+    "source": "Celestial Ward",
+    "sourceHash": "42124c3e5cdcd3b1ebb851a1ee5d5d37e7cec4485ed8fe060ee8ca14234f6048",
+    "text": "Небесный оберег"
+  },
+  "content.talent.light.divine-favor.name": {
+    "reviewed": true,
+    "source": "Divine Favor",
+    "sourceHash": "ff1bdd6dc9240e95893039da7d65a2332d32b407130a8e64ad40f9869db70129",
+    "text": "Божественная милость"
+  },
+  "content.talent.light.faith-barrier.name": {
+    "reviewed": true,
+    "source": "Faith Barrier",
+    "sourceHash": "7a6e1f3bb51720452b41f8d5a1a79c2bed6c48b45b17f5dbf1f8ea302ff24e3d",
+    "text": "Барьер веры"
+  },
+  "content.talent.light.prosperity.name": {
+    "reviewed": true,
+    "source": "Prosperity",
+    "sourceHash": "5ef05ccdb4f6366c2a9cc5a8cd5b8feb8eb96d61feb9e49cda047b9469542d78",
+    "text": "Процветание"
+  },
+  "content.talent.light.radiant-guard.name": {
+    "reviewed": true,
+    "source": "Radiant Guard",
+    "sourceHash": "12922685e9b5c1ddeb4ee38e28f085e2cb8eab8b1097165ea2960536026ab664",
+    "text": "Сияющая защита"
+  },
+  "content.talent.light.scorching-light.name": {
+    "reviewed": true,
+    "source": "Scorching Light",
+    "sourceHash": "aec9e5f8db3391146f8268fd250cea0f9e76f649e3ad3f7a8198d5b2c4e93e24",
+    "text": "Палящий свет"
+  },
+  "content.talent.light.tithe.name": {
+    "reviewed": true,
+    "source": "Tithe",
+    "sourceHash": "bc7cb74fd507ed8609481c746ccc1e1bcb1411fb78e305735e94ca7eb436432b",
+    "text": "Десятина"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -3064,6 +3112,48 @@
     "source": "Windstep",
     "sourceHash": "eda003bc7aad6a45870e3817e4f3696624bd2fb2d834a2a288b478745c3a030d",
     "text": "Шаг ветра"
+  },
+  "content.talent.physical.armored-fists.name": {
+    "reviewed": true,
+    "source": "Armored Fists",
+    "sourceHash": "95cdd43cd858e8b0a946437692987e4e72f0bd9dd61cc785016000e69815c767",
+    "text": "Бронированные кулаки"
+  },
+  "content.talent.physical.heavy-blows.name": {
+    "reviewed": true,
+    "source": "Heavy Blows",
+    "sourceHash": "9764e752030fc413ae8b9293f7941b2f2c3038d54a113cef4df5b6bf44b6d536",
+    "text": "Тяжёлые удары"
+  },
+  "content.talent.physical.lacerate.name": {
+    "reviewed": true,
+    "source": "Lacerate",
+    "sourceHash": "18ae3fb4af5585e6ca805e645ae867b220484eb12c86757ccc987bf64ce15976",
+    "text": "Рваная рана"
+  },
+  "content.talent.physical.riposte.name": {
+    "reviewed": true,
+    "source": "Riposte",
+    "sourceHash": "53390c0028ac33ce14847de63b74d0912fb3c1e8303466c6eacf9d58563e190e",
+    "text": "Рипост"
+  },
+  "content.talent.physical.rupture.name": {
+    "reviewed": true,
+    "source": "Rupture",
+    "sourceHash": "eac173c1760b143e8ae3d4c66bd9611fac49e1a02adcee7dbbb90382901c53a0",
+    "text": "Разрыв"
+  },
+  "content.talent.physical.shield-slam.name": {
+    "reviewed": true,
+    "source": "Shield Slam",
+    "sourceHash": "39be2b3f3c616d7aaf06bf0daf1c4cded54819ee1881f9f5affc6690182e0149",
+    "text": "Мощный удар щитом"
+  },
+  "content.talent.physical.unrelenting.name": {
+    "reviewed": true,
+    "source": "Unrelenting",
+    "sourceHash": "c262773bce6dfbe7221adbc2603958a6eafbf4ee05669f28ad1182ad6363509a",
+    "text": "Неумолимость"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
