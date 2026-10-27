@@ -329,11 +329,23 @@
     "sourceHash": "50ff0c6b0f6f15dcc2e67242ae37cb2d02c7b47b6a40dd6a9e4153761f7a295e",
     "text": "Эфирный граммофон"
   },
+  "content.boon.aether-gramophone.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
+    "sourceHash": "802946d391815be0b0997183977e56ea3dc6edbf8597a90f2f6236e78f845b09",
+    "text": "От повторных атак нельзя <keyword0>уклониться</keyword0>"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
     "sourceHash": "483afe11e336dfbe0dd6bdf0a4f6b005c183b58a79bfb21ca912ca894465fa31",
     "text": "Пасечный дымарь"
+  },
+  "content.boon.apiary-smoker.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
+    "sourceHash": "51d4ebc7fe2ba85e615f1157844d5d495b051db6f1ec32df37f9cc21c2b86fee",
+    "text": "<keyword0>Ослеплённые</keyword0> враги не могут получать <keyword1>шипы</keyword1>"
   },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
@@ -791,17 +803,35 @@
     "sourceHash": "45ac9c5df53304c5789984c16eac1661d6fd97f2f50839bf664dadde0a18c4ff",
     "text": "Расплавленное пресс-папье"
   },
+  "content.boon.molten-paperweight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot be <keyword1>Cleansed</keyword1> from enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "f1182854e9e2881529c48e3f1432ad865bf4fb6547937cf3085b843ec879a5c8",
+    "text": "<keyword0>Горение</keyword0> нельзя <keyword1>очистить</keyword1> с врагов, у которых есть <keyword2>блок</keyword2>"
+  },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
     "source": "Moonboat Toy",
     "sourceHash": "07e4fc912c773b8fc90d65c80352c42f36c2d5d3ce724003b3733b307fbedbec",
     "text": "Игрушечная лунная лодка"
   },
+  "content.boon.moonboat-toy.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks do not trigger <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "0b7b23c44a170a036a7a04b0fa59116e4b12930cc3fcd149ce0a8b2d1bb6e6aa",
+    "text": "Атаки <keyword0>водой</keyword0> не вызывают урон от <keyword1>шипов</keyword1>"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
     "sourceHash": "29e33e756a0dd9a32d938393cb7492989ce9bf8b1cd6be822c3bc2ce7d17d0af",
     "text": "Маска лунной вуали"
+  },
+  "content.boon.moonveil-mask.rule": {
+    "reviewed": true,
+    "source": "Enemies keep <keyword0>Blind</keyword0> when it causes their attacks to miss",
+    "sourceHash": "2c2ec383537f62fefc990a4b0ddefe03ac96533bcc7469ebdab38ceb1f129eb9",
+    "text": "Враги сохраняют <keyword0>слепоту</keyword0>, когда она заставляет их атаки промахнуться"
   },
   "content.boon.moss-oven-mitt.name": {
     "reviewed": true,

@@ -329,11 +329,23 @@
     "sourceHash": "9e17185652b47954eb11b1e93b21e960b342b150c4085001c9a33c5d0b9c46b1",
     "text": "Gramofone etéreo"
   },
+  "content.boon.aether-gramophone.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
+    "sourceHash": "858b78fd9f00619bd866ea792851f74ca1178d6ef87ba78602386c9a451ca8f3",
+    "text": "Ataques repetidos não podem ser <keyword0>esquivados</keyword0>"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
     "sourceHash": "f40e439952efa95457028dadad9edbdf590ca44527d44520f9f7160d8fa6c607",
     "text": "Fumigador de apiário"
+  },
+  "content.boon.apiary-smoker.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
+    "sourceHash": "712f1bfa9f1534c8613a705d47951690909b5035bbdd18a8e7253f93b918b20a",
+    "text": "Inimigos <keyword0>cegos</keyword0> não podem receber <keyword1>Espinhos</keyword1>"
   },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
@@ -791,17 +803,35 @@
     "sourceHash": "f34c8d650f9b3b71e9ee2f3e333bbcc7672e84848df7da658f99286697521104",
     "text": "Peso de papel fundido"
   },
+  "content.boon.molten-paperweight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot be <keyword1>Cleansed</keyword1> from enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "b3c8146ba79dc75fff3fc0ea04dca26fa7cfb0c36a19a361d4e77452b4c7b008",
+    "text": "<keyword0>Queimadura</keyword0> não pode ser <keyword1>purificada</keyword1> de inimigos com <keyword2>Bloqueio</keyword2>"
+  },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
     "source": "Moonboat Toy",
     "sourceHash": "23f69cfea821675ab9c7269d469c04bab9cf1c9b6257534c29f0d5a4b438eed0",
     "text": "Barquinho lunar de brinquedo"
   },
+  "content.boon.moonboat-toy.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks do not trigger <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "6f7b0f46a021824469b7ce223a922404875be0313b782af79ea61e8df3eca1cf",
+    "text": "Ataques de <keyword0>Água</keyword0> não ativam dano de <keyword1>Espinhos</keyword1>"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
     "sourceHash": "af1760f66425b2c186283f0cc95269995676a4832c25529a1fc402b94e4ce85b",
     "text": "Máscara do véu lunar"
+  },
+  "content.boon.moonveil-mask.rule": {
+    "reviewed": true,
+    "source": "Enemies keep <keyword0>Blind</keyword0> when it causes their attacks to miss",
+    "sourceHash": "5287e23460a44edee4d151513ba6c78071faceadb8ccb2fea9d5e6ec184b63a8",
+    "text": "Inimigos mantêm <keyword0>Cegueira</keyword0> quando ela faz seus ataques errarem"
   },
   "content.boon.moss-oven-mitt.name": {
     "reviewed": true,

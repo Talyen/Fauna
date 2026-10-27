@@ -341,6 +341,12 @@
     "sourceHash": "ff245ef3eee7926be1f5f808e49d017095a1c5ffb7dd4d3322d21de26007e41b",
     "text": "Enfumoir d’apiculteur"
   },
+  "content.boon.apiary-smoker.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
+    "sourceHash": "d705339873322afce6a9b97215f2e50880e79df49de353b17b0db67280e96c7f",
+    "text": "Les ennemis <keyword0>aveuglés</keyword0> ne peuvent pas gagner d’<keyword1>Épines</keyword1>"
+  },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
     "source": "Ashfall Pendant",
@@ -803,17 +809,35 @@
     "sourceHash": "325b723a2baab78e1e053fbdeb982545b26a79ad1bfaf7bddd6d910a41ab00a8",
     "text": "Presse-papier en fusion"
   },
+  "content.boon.molten-paperweight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot be <keyword1>Cleansed</keyword1> from enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "58f963ae9a48d3e2f6656f307808773df4ef6c31fe51a0b6cff6a1462d5752f4",
+    "text": "La <keyword0>Brûlure</keyword0> ne peut pas être <keyword1>purifiée</keyword1> sur les ennemis avec du <keyword2>Blocage</keyword2>"
+  },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
     "source": "Moonboat Toy",
     "sourceHash": "502b8bd863be846df278338aa64c9472ae8e5418ce53f2cfd07277154eab11f2",
     "text": "Bateau lunaire miniature"
   },
+  "content.boon.moonboat-toy.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks do not trigger <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "7e1f85495e49229f0619c02c8c6064a1f8743877773d47bfac0aad16522fdf4b",
+    "text": "Les attaques d’<keyword0>Eau</keyword0> ne déclenchent pas les dégâts d’<keyword1>Épines</keyword1>"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
     "sourceHash": "8b777daffa32cb00c48a86760b2cc7306e1bffcea8df562c714fe3b2a8dc6b1b",
     "text": "Masque de voile lunaire"
+  },
+  "content.boon.moonveil-mask.rule": {
+    "reviewed": true,
+    "source": "Enemies keep <keyword0>Blind</keyword0> when it causes their attacks to miss",
+    "sourceHash": "f946d41513be7acc5b4a153489494f3c4652a284aff8d4e1db7cbd2a6eaa0cfc",
+    "text": "Les ennemis conservent <keyword0>Aveuglement</keyword0> lorsque leurs attaques ratent à cause de cet effet"
   },
   "content.boon.moss-oven-mitt.name": {
     "reviewed": true,

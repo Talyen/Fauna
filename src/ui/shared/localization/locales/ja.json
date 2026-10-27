@@ -329,11 +329,23 @@
     "sourceHash": "29a08fbbcba3a8cf5c8a036d85887c1c960d01715f9557de14875c7c76f53b70",
     "text": "エーテルの蓄音機"
   },
+  "content.boon.aether-gramophone.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
+    "sourceHash": "dc78e39b876ec65494afcd236f1a1a0841149b69a7948c4a62196899bf609689",
+    "text": "繰り返し攻撃は<keyword0>回避</keyword0>できない"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
     "sourceHash": "52a0912b205b51db663bbdb1e9efeff6f81577c87ad14d7824788c66dc823fc5",
     "text": "養蜂の燻煙器"
+  },
+  "content.boon.apiary-smoker.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
+    "sourceHash": "e66278989206b868b50a1628cad97df2547b7edf51b317f0ddfd12ef6af5b93b",
+    "text": "<keyword0>盲目</keyword0>状態の敵は<keyword1>棘</keyword1>を獲得できない"
   },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
@@ -633,7 +645,7 @@
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "sourceHash": "bf2df9c17e7e6ec3d9153fa40e4b9cd004659e02753974ec2515e20defad811e",
-    "text": "戦闘中に<keyword1>体力</keyword1>を回復すると<keyword0>トゲ</keyword0>を{{value0}}獲得"
+    "text": "戦闘中に<keyword1>体力</keyword1>を回復すると<keyword0>棘</keyword0>を{{value0}}獲得"
   },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
@@ -699,7 +711,7 @@
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "7b9608600cb038d6c2a9088128cf64244ee405db912c9b4d9a0b3d33ce5d66d4",
-    "text": "<keyword1>ブロック</keyword1>を獲得するたびに<keyword0>トゲ</keyword0>を{{value0}}獲得"
+    "text": "<keyword1>ブロック</keyword1>を獲得するたびに<keyword0>棘</keyword0>を{{value0}}獲得"
   },
   "content.boon.journey-loom.name": {
     "reviewed": true,
@@ -735,7 +747,7 @@
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "85417a766b69a58a839ff8d1d7974aa256a95ad96bd321999026401e7766a6d3",
-    "text": "<keyword1>アーマー</keyword1>を持つ敵の<keyword0>火傷</keyword0>は減衰しない"
+    "text": "<keyword1>アーマー</keyword1>を持つ敵の<keyword0>炎上</keyword0>は減衰しない"
   },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
@@ -791,17 +803,35 @@
     "sourceHash": "e961baf0f036bcee2ee4824803488cff04785d7dcee7c68a356be817e15415e6",
     "text": "溶岩の文鎮"
   },
+  "content.boon.molten-paperweight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot be <keyword1>Cleansed</keyword1> from enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "12b4af49c3310af4be6a9b6c1769c4f3ff32fdffbab7fb7198864ccac2eababd",
+    "text": "<keyword2>ブロック</keyword2>を持つ敵から<keyword0>炎上</keyword0>を<keyword1>浄化</keyword1>できない"
+  },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
     "source": "Moonboat Toy",
     "sourceHash": "f03e00acae05af416a0d565bf18b96ba612abf209eb8e192fddd4142b47e0b1f",
     "text": "月の小舟のおもちゃ"
   },
+  "content.boon.moonboat-toy.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks do not trigger <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "8d02c4eed5bcf32ed027347940bc718baf94d15b6310691b47a3f32fbc205442",
+    "text": "<keyword0>水</keyword0>攻撃は<keyword1>棘</keyword1>ダメージを発動させない"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
     "sourceHash": "a74326bf86398b62f455677ecc6b7a067447bd5b2004fbb16eca146caff21b38",
     "text": "月の帳の仮面"
+  },
+  "content.boon.moonveil-mask.rule": {
+    "reviewed": true,
+    "source": "Enemies keep <keyword0>Blind</keyword0> when it causes their attacks to miss",
+    "sourceHash": "b31d396229baa8e984169b999e130490388269388b797f49c68966b77bf269d8",
+    "text": "敵の攻撃が外れた原因が<keyword0>盲目</keyword0>の場合、その効果は残る"
   },
   "content.boon.moss-oven-mitt.name": {
     "reviewed": true,
@@ -849,7 +879,7 @@
     "reviewed": true,
     "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
     "sourceHash": "ca66ddb90225fed2c71bb3826c110ab48ab6c2aec777db859a31b86aec6ddd8b",
-    "text": "<keyword0>無効化</keyword0>を持つ味方が受ける<keyword1>火傷</keyword1>、<keyword2>毒</keyword2>、<keyword3>出血</keyword3>ダメージが半分になる"
+    "text": "<keyword0>無効化</keyword0>を持つ味方が受ける<keyword1>炎上</keyword1>、<keyword2>毒</keyword2>、<keyword3>出血</keyword3>ダメージが半分になる"
   },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
@@ -3843,7 +3873,7 @@
     "reviewed": true,
     "source": "Your first <keyword0>Burn</keyword0> each battle is free",
     "sourceHash": "9605391568549de810d87d8779fa5fddd7887c75573cac2622b01f8e00a0c8c2",
-    "text": "各戦闘で最初の<keyword0>火傷</keyword0>は無料"
+    "text": "各戦闘で最初の<keyword0>炎上</keyword0>は無料"
   },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
@@ -3867,7 +3897,7 @@
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
     "sourceHash": "d8870ad86f51249508605f47a98031c022d0756d479cff3ba0a0a6b5d5d782fa",
-    "text": "<keyword0>火傷</keyword0>ダメージと同量の<keyword1>アーマー</keyword1>を除去"
+    "text": "<keyword0>炎上</keyword0>ダメージと同量の<keyword1>アーマー</keyword1>を除去"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -4563,7 +4593,7 @@
     "reviewed": true,
     "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
     "sourceHash": "0d93c18f53cb189896437d3532ed9a5728074f4cc121eb4e483fe92bc6576def",
-    "text": "<keyword0>自然</keyword0>のヒットは{{value0}}%の確率で、与えたダメージと同量の<keyword1>トゲ</keyword1>を獲得"
+    "text": "<keyword0>自然</keyword0>のヒットは{{value0}}%の確率で、与えたダメージと同量の<keyword1>棘</keyword1>を獲得"
   },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,

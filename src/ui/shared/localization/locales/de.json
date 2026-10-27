@@ -329,11 +329,23 @@
     "sourceHash": "9105438124368af1b70aaab7365fdab71dfaf3f9b9beebd6b4474aca69c1607b",
     "text": "Äthergrammophon"
   },
+  "content.boon.aether-gramophone.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
+    "sourceHash": "d8a90f291b70e94d22bf86f7f8e32bfdc402396979abdb15f7a16ca16eff4bf8",
+    "text": "Wiederholten Angriffen kann nicht <keyword0>ausgewichen</keyword0> werden"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
     "sourceHash": "7e01ed7f2f9e25971ef4a0f12b61a46c0a0448da8e63bb753369386580c5ca3b",
     "text": "Imkerrauchgerät"
+  },
+  "content.boon.apiary-smoker.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
+    "sourceHash": "559c4715d7497453d9371afa9c0d1d097868f28704e11fe9d87b7e62a038084e",
+    "text": "<keyword0>Geblendete</keyword0> Gegner können keine <keyword1>Dornen</keyword1> erhalten"
   },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
@@ -735,7 +747,7 @@
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "56e06855d9832a5b680e576ff27101a865e8b9041d181a0dbef24d3c49918263",
-    "text": "<keyword0>Verbrennung</keyword0> verfällt nicht bei Gegnern mit <keyword1>Rüstung</keyword1>"
+    "text": "<keyword0>Brand</keyword0> verfällt nicht bei Gegnern mit <keyword1>Rüstung</keyword1>"
   },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
@@ -791,17 +803,35 @@
     "sourceHash": "e7cd2ce8294484889c722742c628abdf5c3d787afc91f56a52b2b23a97915499",
     "text": "Geschmolzener Briefbeschwerer"
   },
+  "content.boon.molten-paperweight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot be <keyword1>Cleansed</keyword1> from enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "af9721de2a1849289f49d686ffedf09dd54baccac2a0eff0f3d879f3a70306ad",
+    "text": "<keyword0>Brand</keyword0> kann bei Gegnern mit <keyword2>Block</keyword2> nicht <keyword1>gereinigt</keyword1> werden"
+  },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
     "source": "Moonboat Toy",
     "sourceHash": "a377ab922829f8be8b6cb36ce4b7b956ff3cf69617ebd8e13084a178403cdb0b",
     "text": "Mondbootspielzeug"
   },
+  "content.boon.moonboat-toy.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks do not trigger <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "def4560c92029e175f5b25f264722c142b029c8983dc9cdcd51b83a050b48899",
+    "text": "<keyword0>Wasser</keyword0>-Angriffe lösen keinen <keyword1>Dornenschaden</keyword1> aus"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
     "sourceHash": "e91163267d38d36d81efd12f2015d9b212e0d4412a45764056b7072d949344e2",
     "text": "Mondschleiermaske"
+  },
+  "content.boon.moonveil-mask.rule": {
+    "reviewed": true,
+    "source": "Enemies keep <keyword0>Blind</keyword0> when it causes their attacks to miss",
+    "sourceHash": "e63b2e8465e4d5a85c6d394e7edcbdd973c61f26f8cccc7da7700f24241c6855",
+    "text": "Gegner behalten <keyword0>Blindheit</keyword0>, wenn ihre Angriffe dadurch verfehlen"
   },
   "content.boon.moss-oven-mitt.name": {
     "reviewed": true,
@@ -849,7 +879,7 @@
     "reviewed": true,
     "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
     "sourceHash": "d4f17fe0df5a52c9a1cac9c86c7b24eea246e87e227e4e00431d7ecad1a45e61",
-    "text": "Verbündete mit <keyword0>Aufheben</keyword0> erleiden nur halben Schaden durch <keyword1>Verbrennung</keyword1>, <keyword2>Gift</keyword2> und <keyword3>Blutung</keyword3>"
+    "text": "Verbündete mit <keyword0>Aufheben</keyword0> erleiden nur halben Schaden durch <keyword1>Brand</keyword1>, <keyword2>Gift</keyword2> und <keyword3>Blutung</keyword3>"
   },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
@@ -3843,7 +3873,7 @@
     "reviewed": true,
     "source": "Your first <keyword0>Burn</keyword0> each battle is free",
     "sourceHash": "b88011ea51baa2909a27b72202d2efde924fadc9f1e9b846736690f4c1f00672",
-    "text": "Dein erstes <keyword0>Verbrennen</keyword0> in jedem Kampf ist kostenlos"
+    "text": "Dein erster <keyword0>Brand</keyword0> in jedem Kampf ist kostenlos"
   },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
@@ -3867,7 +3897,7 @@
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
     "sourceHash": "9fcd48cb682504646580e1d21ba27e86afcbace4bf08833b0453f1ee4eaab5a9",
-    "text": "<keyword0>Verbrennungsschaden</keyword0> entfernt ebenso viel <keyword1>Rüstung</keyword1>"
+    "text": "<keyword0>Brandschaden</keyword0> entfernt ebenso viel <keyword1>Rüstung</keyword1>"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,

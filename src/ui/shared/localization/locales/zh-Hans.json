@@ -329,11 +329,23 @@
     "sourceHash": "50513500316b28cf90a4fbedf34150267e5cff5489cbaffdee3c83afab31c2d9",
     "text": "以太留声机"
   },
+  "content.boon.aether-gramophone.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
+    "sourceHash": "d5edf851b6211047577c1a9a0dc84ac061f342e180f0e7de0220369d62333bfe",
+    "text": "重复攻击无法被<keyword0>闪避</keyword0>"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
     "sourceHash": "8dcf85614cff70efcd2b69516712ec11f92c802cb08a6bb553580bf47dfc8d78",
     "text": "蜂场熏烟器"
+  },
+  "content.boon.apiary-smoker.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
+    "sourceHash": "0975804eb3991b60ab67f4a9f83bd89c194ed538dec4bc8eff31a703073bd898",
+    "text": "<keyword0>致盲</keyword0>的敌人无法获得<keyword1>荆棘</keyword1>"
   },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
@@ -791,17 +803,35 @@
     "sourceHash": "2b5ae5b03a0038bf518f1061b73bbf80afb4e397459466a958c29f4bc067931e",
     "text": "熔岩镇纸"
   },
+  "content.boon.molten-paperweight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot be <keyword1>Cleansed</keyword1> from enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "a05cfdce6f6dd0be795a85e8ab1ba6dd85e0a4ea0af7ea1b961fa24a4e97eca6",
+    "text": "无法从拥有<keyword2>格挡</keyword2>的敌人身上<keyword1>净化</keyword1><keyword0>灼烧</keyword0>"
+  },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
     "source": "Moonboat Toy",
     "sourceHash": "62c046081354b1c744ce4f49bb0ee5b5c3060254aa1c2d368b46f983128e7622",
     "text": "月舟玩具"
   },
+  "content.boon.moonboat-toy.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks do not trigger <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "3dae3d89b7645e4842ccedc826cc03cc0a577a7a596c506c4c89e9e553055fc5",
+    "text": "<keyword0>水</keyword0>攻击不会触发<keyword1>荆棘</keyword1>伤害"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
     "sourceHash": "79f615ab50ebd45e9822d1854bb2ab14dbd0ec65a8469cd81507c43c1f18ced6",
     "text": "月幕面具"
+  },
+  "content.boon.moonveil-mask.rule": {
+    "reviewed": true,
+    "source": "Enemies keep <keyword0>Blind</keyword0> when it causes their attacks to miss",
+    "sourceHash": "24abb3813f6eb285c2a678c4a906947d2a3f5da902c1c8e38d239342566b953e",
+    "text": "敌人因<keyword0>致盲</keyword0>而攻击落空时，保留该效果"
   },
   "content.boon.moss-oven-mitt.name": {
     "reviewed": true,
