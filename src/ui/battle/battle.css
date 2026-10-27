@@ -201,6 +201,16 @@
 .target-summary .card-details {
   gap: 0;
 }
+/* Neighboring readout wrappers can overlap a status button without visible content. */
+.battle-screen .creature-wrap,
+.battle-screen .combatant-motion,
+.battle-screen .combatant-reaction,
+.battle-screen .combatant-details {
+  pointer-events: none;
+}
+.battle-screen .creature-card:not(:disabled) {
+  pointer-events: auto;
+}
 .battle-screen .combatant-details {
   display: flex;
   align-items: flex-start;
@@ -500,6 +510,7 @@
 
 .battle-screen .combat-status {
   flex-shrink: 0;
+  pointer-events: auto;
 }
 .card-transfer {
   overflow: hidden;
