@@ -1487,6 +1487,18 @@
     "sourceHash": "c9b777a36d1ca50c86950ca11af8c45b97b387a707a7bc31f38a1790e6aa8b12",
     "text": "花瓣帷幕"
   },
+  "content.card.cadenza-echoes-remember.name": {
+    "reviewed": true,
+    "source": "Echoes Remember",
+    "sourceHash": "506c68c86633d1c223ad974c01e254d92f5810202ba9b9bb13e9299d2a972aaf",
+    "text": "回声铭记"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "reviewed": true,
+    "source": "Resonant Well",
+    "sourceHash": "7758343e1e45fee3e4e132d43126ef87e224bff7eb656ec03632aa7d92dca224",
+    "text": "共鸣之泉"
+  },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1511,6 +1523,30 @@
     "sourceHash": "07356005106008f44a4972c648ea4c61871369abe6fce9cd2eba755a5446c02a",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
+  "content.card.cadenza-rousing-refrain.name": {
+    "reviewed": true,
+    "source": "Rousing Refrain",
+    "sourceHash": "45b0b6867a72153e045e004000de2b30d50e7ad9da797e3ca062565a83e58699",
+    "text": "振奋叠句"
+  },
+  "content.card.captoad-attack.name": {
+    "reviewed": true,
+    "source": "Spore Puff",
+    "sourceHash": "466d458141bd4a55e48b50b587f9a384d6037793c0a0bd09bb516866f437eafd",
+    "text": "孢子轻喷"
+  },
+  "content.card.captoad-guard.name": {
+    "reviewed": true,
+    "source": "Mushroom Guard",
+    "sourceHash": "14b3c4d8d74b82a5c5fd1a64391dcb0b0032d0177b921bdd9a468cf7144bcc7e",
+    "text": "蘑菇守护"
+  },
+  "content.card.captoad-swap.name": {
+    "reviewed": true,
+    "source": "Bogbound Leap",
+    "sourceHash": "60cdb0da7f0ae967b5367acdb6b54820f80f4b73115adedc13db3d26221820cf",
+    "text": "沼泽之跃"
+  },
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
@@ -1522,6 +1558,12 @@
     "source": "Swap out for a random backup; Draw {{value0}} cards",
     "sourceHash": "78f8ce48477685b6809430847c486ab289f597e07177787c4737af69c99a0122",
     "text": "与随机后备盟友交换；抽{{value0}}张牌"
+  },
+  "content.card.chimecricket-attack.name": {
+    "reviewed": true,
+    "source": "Resonant Leap",
+    "sourceHash": "35361f7caaed147f626bb6752a2aaa142bbf25fe350aa129fa7d959865a548ee",
+    "text": "共鸣之跃"
   },
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
@@ -1535,11 +1577,59 @@
     "sourceHash": "b1ba43987724d1c2e6131022c052eab607a8502c0fa0c5b7cbf21f6b3caaa70f",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
   },
+  "content.card.chimecricket-heal.name": {
+    "reviewed": true,
+    "source": "Lullaby Drift",
+    "sourceHash": "210bd199abdf77090d11135fad92e9f0b6e213ec9590000cea407f078f56b8e8",
+    "text": "摇篮曲漂流"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "reviewed": true,
+    "source": "Hush Dome",
+    "sourceHash": "8eb3775e35708caa9e644f1d6fda395d60586af6188785bad16e6241a5c2264b",
+    "text": "静谧穹顶"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "reviewed": true,
+    "source": "Ashen Veil",
+    "sourceHash": "aefbd0a56aff642fac490df432813ad0014cca17ebe6b16654acf8d46b52e4fe",
+    "text": "灰烬帷幕"
+  },
+  "content.card.cindernewt-attack.name": {
+    "reviewed": true,
+    "source": "Cinder Lash",
+    "sourceHash": "1b21a9a9392ab0174e7c6ccea040f1b55f9505c8942bebd1e5b0362d68446dd8",
+    "text": "余烬鞭"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "reviewed": true,
+    "source": "Ember Breath",
+    "sourceHash": "11875e3db4b861bae29bd7555d97bc0fdd3f0536aa13683de2e53ee18b31d081",
+    "text": "余烬吐息"
+  },
+  "content.card.coralcurl-attack.name": {
+    "reviewed": true,
+    "source": "Reef Jet",
+    "sourceHash": "4be5774136237d02b271cc3eabeadccdde33a7698d6f7fde973ad5c801ae13bc",
+    "text": "礁石喷流"
+  },
+  "content.card.coralcurl-guard.name": {
+    "reviewed": true,
+    "source": "Bubble Ward",
+    "sourceHash": "5518a12c6fc12552019b73775cfff5cc0d5993f0125b83685d577812c66adb6d",
+    "text": "泡泡护盾"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "8e1445e575b7b5e75b4932d063d5f0a20fcc21d43b6d79820e67a92a7f3f3143",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.coralcurl-swap.name": {
+    "reviewed": true,
+    "source": "Coral Spiral",
+    "sourceHash": "14110428b0fe2175c568646b751e4edecadd896bc3cf8ca2e9a2187af7c96634",
+    "text": "珊瑚旋舞"
   },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,

@@ -1487,6 +1487,18 @@
     "sourceHash": "e1330139e5a5660cc07feceffcde758285ee1c6fb50e8b805ca613a1d0dac5af",
     "text": "Véu de pétalas"
   },
+  "content.card.cadenza-echoes-remember.name": {
+    "reviewed": true,
+    "source": "Echoes Remember",
+    "sourceHash": "df1a615322d67b7346db05fdd68f1bc785e548112b762e42b31999ff2057052f",
+    "text": "Ecos se lembram"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "reviewed": true,
+    "source": "Resonant Well",
+    "sourceHash": "a4f2e1cccdd9eca5e4dba1f6e16b5a3211bfeeedcdb8654925146559bdd88418",
+    "text": "Fonte ressonante"
+  },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1511,6 +1523,30 @@
     "sourceHash": "75d177cde7a029773ce096f8fb2a8c509f8a73a9572acb95f60a718c5004ac7f",
     "text": "Compre {{value0}} carta; Receba {{value1}} de <keyword0>Mana</keyword0>"
   },
+  "content.card.cadenza-rousing-refrain.name": {
+    "reviewed": true,
+    "source": "Rousing Refrain",
+    "sourceHash": "6192f0b31e55f1965c32662b3aaec7f8b7c475572db62f0647a76d711082d160",
+    "text": "Refrão animado"
+  },
+  "content.card.captoad-attack.name": {
+    "reviewed": true,
+    "source": "Spore Puff",
+    "sourceHash": "98ea952d49592003865962b0d85090a23a17d62074c7fff88d7acb0c0a6142e4",
+    "text": "Nuvem de esporos"
+  },
+  "content.card.captoad-guard.name": {
+    "reviewed": true,
+    "source": "Mushroom Guard",
+    "sourceHash": "062794d95d27b858e76e982bd60a731c0b4c1846834faf79f2bf543002aed92e",
+    "text": "Guarda de cogumelo"
+  },
+  "content.card.captoad-swap.name": {
+    "reviewed": true,
+    "source": "Bogbound Leap",
+    "sourceHash": "bbbe4d529ed6c456fcf20f06f9327106387b3b877154536a270f7f47e4d089fc",
+    "text": "Salto do pântano"
+  },
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
@@ -1522,6 +1558,12 @@
     "source": "Swap out for a random backup; Draw {{value0}} cards",
     "sourceHash": "f525abb2bfa3e3d6c00ed6c8fadea544e0d9ae6bb0df0aa289818ae86bd12b27",
     "text": "Troque por um aliado aleatório da reserva; Compre {{value0}} cartas"
+  },
+  "content.card.chimecricket-attack.name": {
+    "reviewed": true,
+    "source": "Resonant Leap",
+    "sourceHash": "739249af48a7717fb0dd6da3dc439e9d3f227a96533dc80d38dd0013fde74b25",
+    "text": "Salto ressonante"
   },
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
@@ -1535,11 +1577,59 @@
     "sourceHash": "231879bba82744c8f8e0732db06eb3c29fd309bd9642b40395c14fe976a48ca5",
     "text": "Cause {{value0}} de dano de <keyword0>Atordoamento</keyword0>"
   },
+  "content.card.chimecricket-heal.name": {
+    "reviewed": true,
+    "source": "Lullaby Drift",
+    "sourceHash": "514057845913e008412fc82f92990697fb2b00da6a028adf749f22fb6e8673a6",
+    "text": "Deriva de canção de ninar"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "reviewed": true,
+    "source": "Hush Dome",
+    "sourceHash": "a881e8edd630c81c770d0ba9822c7986a0a2a3764fe0de40d76cc3e61b6e2055",
+    "text": "Cúpula do silêncio"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "reviewed": true,
+    "source": "Ashen Veil",
+    "sourceHash": "e6cd3082032e5e95217c2a838dddbcfd54efe188c38306bd501027391c519a73",
+    "text": "Véu de cinzas"
+  },
+  "content.card.cindernewt-attack.name": {
+    "reviewed": true,
+    "source": "Cinder Lash",
+    "sourceHash": "3f80c199d5ecd14631f71906476f9cee4b29bf20902b864cad60727541080c55",
+    "text": "Chicote de brasa"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "reviewed": true,
+    "source": "Ember Breath",
+    "sourceHash": "263b98880e006ac99b59a4f9b6e78612b2bb407fa40235610a8e06dcb0b6e2e2",
+    "text": "Sopro de brasa"
+  },
+  "content.card.coralcurl-attack.name": {
+    "reviewed": true,
+    "source": "Reef Jet",
+    "sourceHash": "3213b47b08cbf00a5773e7f7ad71cdfe9b1b3ace5f35641243ebd6cbdd3a19b7",
+    "text": "Jato do recife"
+  },
+  "content.card.coralcurl-guard.name": {
+    "reviewed": true,
+    "source": "Bubble Ward",
+    "sourceHash": "d5fce8470259691b37a13d68c38b938bb03bba7834b63ef84b4d5f01ec337918",
+    "text": "Barreira de bolhas"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "054eb2aa500eb7cf3822aa6b7cf73977437f5d71a408c2cbcf0793eedafdab4c",
     "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0>"
+  },
+  "content.card.coralcurl-swap.name": {
+    "reviewed": true,
+    "source": "Coral Spiral",
+    "sourceHash": "c0c94042503295c34279ee95192c7965aaaeb50823aa48605740b417b29cdf21",
+    "text": "Espiral de coral"
   },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,

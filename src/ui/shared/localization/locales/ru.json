@@ -1487,6 +1487,18 @@
     "sourceHash": "d9ad82913a9428a17b793811ef5775ae1fb92e697bbf4fb2b201e8156fa67084",
     "text": "Лепестковая вуаль"
   },
+  "content.card.cadenza-echoes-remember.name": {
+    "reviewed": true,
+    "source": "Echoes Remember",
+    "sourceHash": "0307b0f5f0e8437769ab05f7406c14ae3b15e42dbeb6c4dcb032825f0c412d69",
+    "text": "Эхо помнит"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "reviewed": true,
+    "source": "Resonant Well",
+    "sourceHash": "04262654db93c324382f0d81744cbb48c8f14a78ee4c2c42ff45696502d6e805",
+    "text": "Звучащий источник"
+  },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1511,6 +1523,30 @@
     "sourceHash": "a9c8bed2689d8683e02cdeab321ec5ced26db75888ad955be78401f21c3905d6",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
+  "content.card.cadenza-rousing-refrain.name": {
+    "reviewed": true,
+    "source": "Rousing Refrain",
+    "sourceHash": "558773bebaf67bf32b6c09de40deafe7ad9286fd050bdd12eae92e423453ef39",
+    "text": "Бодрящий припев"
+  },
+  "content.card.captoad-attack.name": {
+    "reviewed": true,
+    "source": "Spore Puff",
+    "sourceHash": "5711a982d86b106f966fe8e5be451d17ed5ee10c9e98ff5286af02ab1dd3150d",
+    "text": "Облако спор"
+  },
+  "content.card.captoad-guard.name": {
+    "reviewed": true,
+    "source": "Mushroom Guard",
+    "sourceHash": "21a40797a55ceeaf000e78cd0199ccc3b86da181d452d8cc03ef2d456ad17e43",
+    "text": "Грибной щит"
+  },
+  "content.card.captoad-swap.name": {
+    "reviewed": true,
+    "source": "Bogbound Leap",
+    "sourceHash": "ab7e3151a562c80129fad74eaf023197b64a24f2dcf50c1cb35721f7dd7db3f7",
+    "text": "Прыжок в топь"
+  },
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
@@ -1522,6 +1558,12 @@
     "source": "Swap out for a random backup; Draw {{value0}} cards",
     "sourceHash": "c5e9c365fbe99bf82c68ebd4277a8cbd49b877c64b7620b2e6c6daa12eafc14e",
     "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
+  },
+  "content.card.chimecricket-attack.name": {
+    "reviewed": true,
+    "source": "Resonant Leap",
+    "sourceHash": "dfb18cc6ec3334f6ed44807a6a504202c2b397daae5dc6d6f2a8711eaaa9fbd5",
+    "text": "Звучный прыжок"
   },
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
@@ -1535,11 +1577,59 @@
     "sourceHash": "a68cbe16509edf15a3edb09e029e550f5da70b2cef3a93d55e239cd4b172caa6",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
   },
+  "content.card.chimecricket-heal.name": {
+    "reviewed": true,
+    "source": "Lullaby Drift",
+    "sourceHash": "62eda776fba8f3755eb08979b1d7d816bc6f8a0460671592b98f6ce26aed4f7c",
+    "text": "Дрёма под колыбельную"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "reviewed": true,
+    "source": "Hush Dome",
+    "sourceHash": "c8cd884a4e926b96cd41528893e379b0139ec3833ec85c919789cb6f9abde8b4",
+    "text": "Купол тишины"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "reviewed": true,
+    "source": "Ashen Veil",
+    "sourceHash": "bc0739aacd57cb335f48910d77a1bff6f4bcc03ddaca3b1b68cf8e624a2a100c",
+    "text": "Пепельная вуаль"
+  },
+  "content.card.cindernewt-attack.name": {
+    "reviewed": true,
+    "source": "Cinder Lash",
+    "sourceHash": "763a1c200e2db3017d937e0481649b147ad6421bd7df3f791a6d18520389bfb6",
+    "text": "Плеть угольков"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "reviewed": true,
+    "source": "Ember Breath",
+    "sourceHash": "eafb3ea52f350549d889c4bf274910830f1b909360915ea6da347bccdc862d19",
+    "text": "Дыхание углей"
+  },
+  "content.card.coralcurl-attack.name": {
+    "reviewed": true,
+    "source": "Reef Jet",
+    "sourceHash": "5e846f218a076293590d80f42d76d1042d32627a097cb90bbbbda3e13f92e979",
+    "text": "Струя рифа"
+  },
+  "content.card.coralcurl-guard.name": {
+    "reviewed": true,
+    "source": "Bubble Ward",
+    "sourceHash": "3e5e04a74ecf89f965dbd1ec34c53784c281da753c9f6f71aa0affee850a8dbc",
+    "text": "Пузырьковый щит"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "9d1a3364c1d65db2e141c518f69b6c22de14eb2472ab1038931870e7a48d2d97",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
+  },
+  "content.card.coralcurl-swap.name": {
+    "reviewed": true,
+    "source": "Coral Spiral",
+    "sourceHash": "2731afd974db53e15cceb26febaac9626e0f45508417560387617b6b3b4d3d9b",
+    "text": "Коралловая спираль"
   },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,

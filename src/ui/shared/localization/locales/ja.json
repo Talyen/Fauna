@@ -1487,6 +1487,18 @@
     "sourceHash": "194f6e9252e4da58d5e79866c7993001fa8f24d605afd6b43a17b6405ed9926c",
     "text": "花びらの帳"
   },
+  "content.card.cadenza-echoes-remember.name": {
+    "reviewed": true,
+    "source": "Echoes Remember",
+    "sourceHash": "3dca4f58293c448c3d5f48608e6b7298a34a1df8b683b0329cbea27b5c9b076f",
+    "text": "こだまの記憶"
+  },
+  "content.card.cadenza-resonant-well.name": {
+    "reviewed": true,
+    "source": "Resonant Well",
+    "sourceHash": "5206ce4659ead4a471d14204785a8de0ec1ee37a14a19284c72dabd6f8c4086a",
+    "text": "共鳴の泉"
+  },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1511,6 +1523,30 @@
     "sourceHash": "90df205ebfa58aa7e3ee24c7d4d6f9bd457c5c44931425e7573a9181d56bd73b",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
+  "content.card.cadenza-rousing-refrain.name": {
+    "reviewed": true,
+    "source": "Rousing Refrain",
+    "sourceHash": "e9464877a3e4c91fac7a3fca37055c1bb0a7aaaf64b35cb037b9f70ea6aaac38",
+    "text": "奮い立つリフレイン"
+  },
+  "content.card.captoad-attack.name": {
+    "reviewed": true,
+    "source": "Spore Puff",
+    "sourceHash": "c6227299d54f2e689710806abe821c06d31a63972e821103372ac14c666e467d",
+    "text": "胞子の一吹き"
+  },
+  "content.card.captoad-guard.name": {
+    "reviewed": true,
+    "source": "Mushroom Guard",
+    "sourceHash": "e7c17782398e1e23dfcd37e54baf72e995a6b31abb4ff30309dd8ecf8edb5762",
+    "text": "キノコの守り"
+  },
+  "content.card.captoad-swap.name": {
+    "reviewed": true,
+    "source": "Bogbound Leap",
+    "sourceHash": "eb658e83ef7ef5780239a17972248a44d1070738fddc32fd4483ac97e0f44d2e",
+    "text": "沼地への跳躍"
+  },
   "content.card.captoad-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
     "source": "Swap out for a random backup",
@@ -1522,6 +1558,12 @@
     "source": "Swap out for a random backup; Draw {{value0}} cards",
     "sourceHash": "17f60b570f9ef0134cbea3609fba180044309d57547c528314d26f5a5609dc3b",
     "text": "控えの味方1体とランダムに交代; カードを{{value0}}枚引く"
+  },
+  "content.card.chimecricket-attack.name": {
+    "reviewed": true,
+    "source": "Resonant Leap",
+    "sourceHash": "d931a031e18c249c6e70e45f8d80de9333d6ac8b8ae79e2e2ea0c054bf27d1a7",
+    "text": "響きの跳躍"
   },
   "content.card.chimecricket-attack.v974e88827d51761b.rule": {
     "reviewed": true,
@@ -1535,11 +1577,59 @@
     "sourceHash": "a2cdd64746b31d58b93bdded98d431555f65fa8191eb58865f9c396c72384f69",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.chimecricket-heal.name": {
+    "reviewed": true,
+    "source": "Lullaby Drift",
+    "sourceHash": "178534e62224f38377e7a674d1265feb86fb9d94f9ca3f5aa7a9669e4b0846d2",
+    "text": "子守唄の漂い"
+  },
+  "content.card.chimecricket-nullify.name": {
+    "reviewed": true,
+    "source": "Hush Dome",
+    "sourceHash": "43207416035c83f73e97101b71bae5b622b80fded73df67d41079fae0f09151a",
+    "text": "静寂のドーム"
+  },
+  "content.card.cindernewt-ashen-veil.name": {
+    "reviewed": true,
+    "source": "Ashen Veil",
+    "sourceHash": "33a1775f83b13f043b0bd03b302fbf46e4518eee16cc852a66e748d33a5c3ead",
+    "text": "灰の帳"
+  },
+  "content.card.cindernewt-attack.name": {
+    "reviewed": true,
+    "source": "Cinder Lash",
+    "sourceHash": "18c2572ab81c805e9d9775f91b346be8ce80061892fd97f7660dc24ff4c53f65",
+    "text": "熾火の鞭"
+  },
+  "content.card.cindernewt-ember-breath.name": {
+    "reviewed": true,
+    "source": "Ember Breath",
+    "sourceHash": "db2974c1059b6335663d518fb6561df7c0e26cf43d05d2492cbdae1cb8a2fbfd",
+    "text": "熾火の息吹"
+  },
+  "content.card.coralcurl-attack.name": {
+    "reviewed": true,
+    "source": "Reef Jet",
+    "sourceHash": "b27d93aa443f4c12567789c6613e5797f005b83196bceef217f9e8a0b4a7bc16",
+    "text": "珊瑚礁の噴流"
+  },
+  "content.card.coralcurl-guard.name": {
+    "reviewed": true,
+    "source": "Bubble Ward",
+    "sourceHash": "14f1ab4360f6d9e7d864382ef3c14889822aad4854bc9ea11c4d555ebf0c9a16",
+    "text": "泡の守り"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "3e0d5e2005e2b4de8d20f5231d9abfecfd1703657bfb6d3b97ff24c2193199d7",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.coralcurl-swap.name": {
+    "reviewed": true,
+    "source": "Coral Spiral",
+    "sourceHash": "eaa72438b21c37c702efc5a523aa756dc782949b59e7c0256a71caea05e5b621",
+    "text": "珊瑚の螺旋"
   },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
