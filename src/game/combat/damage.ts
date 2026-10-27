@@ -27,6 +27,7 @@ import { modifiedDamage, blockPayment, blockEfficiency, armoredDamage, armorAppl
 import {
   dodgeResponse,
   blockDepletionRewards,
+  faultline,
   publishHit,
   damageRewards,
   poisonStun,
@@ -323,6 +324,7 @@ export function* resolveHit(
       );
       target.block -= payment.spent;
       if (payment.spent > 0) {
+        const depletedBlock = target.block === 0;
         events.push({
           kind: "block",
           actorId: source.id,
@@ -338,11 +340,12 @@ export function* resolveHit(
             dealt: 0,
             blocked: payment.absorbed,
             blockSpent: payment.spent,
-            depletedBlock: target.block === 0,
+            depletedBlock,
             critical: false,
           },
           false,
         );
+        yield* faultline(context, depletedBlock);
       }
     }
     yield* dodgeResponse(context, !thornDodge);
@@ -478,6 +481,7 @@ export function* resolveHit(
   };
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
+  yield* faultline(context, depletedBlock);
   yield* damageRewards(context, facts, policy);
   if (
     attack &&

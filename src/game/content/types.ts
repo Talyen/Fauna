@@ -36,7 +36,8 @@ export type SpeciesId =
   | "pyrella"
   | "aerostat"
   | "alpenglen"
-  | "wisterelle";
+  | "wisterelle"
+  | "ravelland";
 export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "lostAndFound"; amount: number }
@@ -72,6 +73,7 @@ type PassiveEffect =
   | { kind: "earlyBird"; amount: number }
   | { kind: "armorBreak"; amount: number }
   | { kind: "blockBreak"; amount: number }
+  | { kind: "faultline"; amount: number }
   | { kind: "statusReflection"; amount: number }
   | { kind: "shareProtection"; amount: number }
   | { kind: "shareDodge"; amount: number }
