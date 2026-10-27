@@ -143,6 +143,132 @@
     "sourceHash": "fd09ad73d233655e6f78a51e5806c5140c35e6047b504ee6cbe805f41de842a9",
     "text": "Abbrechen"
   },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "a418518747ed6b89f206302b119fa4ac53a26fef5afe099b50bfad7fbf633760",
+    "text": "Aktionskarte"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "7fb2eaea3361819dd5b3a8a087a72acda3438bfa37c973534364ec9599515567",
+    "text": "Angriff"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "9d32a3dc30d346601027568bc3a79984af8a3331a7e0d803051d00adafb4c14d",
+    "text": "Reserve"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "876c80c65806e27f6e9d7a98bcc336f648d675643c355ae15f557eb5ab7bd9a7",
+    "text": "Kampf"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "de4fddb4c3560b3105b64eace9de08c48fccdc92f555c0a357f6e73a5ab39011",
+    "text": "Segen"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "524372835a6d82304b684986925a3cc146e509d70260ac5bb56f16756ac70964",
+    "text": "Kopie"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "285844a7cb76af9b7754eb1cdacdf85e91f75cf3024f4e4442b36e3d46035e5f",
+    "text": "Schaden"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "3ac7bc7ce1e01afb2b4a212e6df6f738b1b8b1e4019be92bda487722caa392ee",
+    "text": "Nahtod"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "3400d55105771797d44c9d6807456fc113e4022c8a0df79ceca535f93ad6b68d",
+    "text": "Nachziehen / Ablegen"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "043126a51a018d9c4b6a62910adc3a3ca42968a3e4efb84d190ac6dfed280870",
+    "text": "Echo"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "67f4b727747e1faf6b4bf67074c819c0779c4c30e72419c33600aeaa3d9b9751",
+    "text": "Gold"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "7d39e3ecc65f85ca0d468934424165d242b52068ca066f4daea024cc613e2580",
+    "text": "Treffer"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "270a8876fb1ec2d1f226cbdd603cd20de6f6dd533b1cd2c15e5bacec008470fe",
+    "text": "Stichwort-EP"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "842b9ac328d40462daa40440e2886e2ebb1b3a78a26ebe9a7794019462268596",
+    "text": "K. o."
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "b9b170aaf69e0ebc04df96da35d5d5cebcce8481705533e435371eca7f94216b",
+    "text": "Legendär"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "6da3b7db3f0bb7ffd9a49ab07feb3dc28d277b1849ad11ef60ac7910eb0a4bb4",
+    "text": "Diener"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "8aa4ce2a21f12f160f60b96d4f5ddfb8aebaf1eb57c1f0acab2f7a5c98651718",
+    "text": "Perle"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "3361f043c84b71e0e0356d2b87097b83c4c4fb128ea7876e5dfe2c12f2c729bb",
+    "text": "Startaufstellung"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "979f982a683fcca8672e76f0eaa0f173c24292312ec4c96d89b110b15ae8f175",
+    "text": "Wechselkarten"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "0bfec134a8655c68c8930e96aad8889d40f49daa248f508b14885f63b6da1894",
+    "text": "Talente"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "81c2939f7e21edb703fc7fd207e0eae991c3dbc98a83f5b164698eb49f092966",
+    "text": "Zug"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

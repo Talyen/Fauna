@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { extractGlossaryRules } from "./glossary-rules.mjs";
 import { extractPassiveRules } from "./passive-rules.mjs";
 import { extractTalentRules } from "./talent-rules.mjs";
 import { extractBoonRules } from "./boon-rules.mjs";
@@ -119,6 +120,11 @@ export function extractProjectContent(root) {
       ...names,
       ...rules,
       ...authoredTalentRules,
+      ...extractGlossaryRules(
+        fs.readFileSync(path.join(root, "src/game/glossary.ts"), "utf8"),
+        fs.readFileSync(keywordFile, "utf8"),
+        fs.readFileSync(path.join(root, "src/game/resurrection-rules.ts"), "utf8"),
+      ),
       ...extractPassiveRules(files, fs.readFileSync(keywordFile, "utf8")),
     }).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)),
   );

@@ -1,3 +1,6 @@
+import { GlossaryScreen } from "../../../src/ui/menu/glossary-screen";
+import { extractGlossaryRules } from "../../../scripts/localization/glossary-rules.mjs";
+import { GLOSSARY } from "../../../src/game/glossary";
 import { MessageParts } from "../../../src/ui/shared/localization/message-parts";
 import { fontHasGlyph, qualifiedFontIssues } from "../../../scripts/localization/font-coverage.mjs";
 import { PageControls } from "../../../src/ui/shared/navigation/pagination";
@@ -803,5 +806,53 @@ it("reorders rich message values without replacing interactive content and rejec
     </MessageProvider>,
   );
   expect(view.container.textContent).toBe("42 Gold earned");
+  view.unmount();
+});
+
+it("extracts glossary terms and definitions from the actual game vocabulary", () => {
+  const rules = extractGlossaryRules(
+    readFileSync("src/game/glossary.ts", "utf8"),
+    readFileSync("src/game/keywords.ts", "utf8"),
+    readFileSync("src/game/resurrection-rules.ts", "utf8"),
+  );
+  expect(() =>
+    extractGlossaryRules(
+      readFileSync("src/game/glossary.ts", "utf8").replace('"health", "block", "mana"', '"health", "block"'),
+      readFileSync("src/game/keywords.ts", "utf8"),
+      readFileSync("src/game/resurrection-rules.ts", "utf8"),
+    ),
+  ).toThrow("Unsupported glossary keyword list");
+  expect(Object.keys(rules)).toHaveLength(
+    GLOSSARY.length + GLOSSARY.filter((entry) => !entry.id.startsWith("keyword.")).length,
+  );
+  expect(new Set(GLOSSARY.map((entry) => entry.id)).size).toBe(GLOSSARY.length);
+  for (const entry of GLOSSARY) {
+    for (const kind of ["term", "definition"] as const) {
+      if (kind === "term" && entry.id.startsWith("keyword.")) continue;
+      const rule = rules[`content.glossary.${entry.id}.${kind}.rule`];
+      expect(rule?.reference, `${entry.id} ${kind}`).toBe(entry[kind]);
+      expect(rule?.text, `${entry.id} ${kind}`).toBe(ruleMessage(entry[kind]).template);
+    }
+  }
+});
+
+it("renders localized glossary rules with keyword identity and leaves authored vocabulary unchanged", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const entry = GLOSSARY.find((item) => item.id === "keyword.burn")!;
+  const catalog: MessageCatalog = {
+    "content.keyword.burn.label": { source: "Burn", text: "Brûlure" },
+    "content.glossary.keyword.burn.definition.rule": {
+      source: ruleMessage(entry.definition).template,
+      text: "Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+    },
+  };
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: catalog }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <GlossaryScreen back={() => {}} />
+    </LocalizationProvider>,
+  );
+  expect(screen.getByText("Brûlure").getAttribute("data-keyword")).toBe("burn");
+  expect(screen.getByText("Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié")).toBeTruthy();
+  expect(entry.term).toBe("Burn");
   view.unmount();
 });

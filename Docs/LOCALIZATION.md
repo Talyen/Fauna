@@ -51,13 +51,13 @@ structurally invalid translations fall back to English.
 Run `npm run localization:extract` after changing these calls and commit the
 resulting English catalogs. Authored species names, titles and traits, card
 names, Talent names, Boon names, keyword labels, and Boon, Talent and creature
-passive rules are extracted by their stable gameplay IDs. Rules retain keyword tags
+passive rules, and glossary terms and definitions are extracted by their stable
+identities. Glossary keyword terms reuse the shared keyword labels. Rules retain keyword tags
 and named values;
 translation records also retain the exact English rule for freshness checks.
 `npm run localization:check`, the local changed-file gate and CI check freshness,
 duplicate IDs, English forms and parameter syntax. UI extraction only covers
-explicit calls in `src/ui`; content extraction does not yet cover all rule prose,
-glossary or generated descriptions. Neither establishes complete coverage or
+explicit calls in `src/ui`; content extraction does not yet cover all rule prose or generated descriptions. Neither establishes complete coverage or
 qualifies a language. The inventory remains a separate migration aid.
 
 ### Translation packets

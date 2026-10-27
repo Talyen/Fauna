@@ -143,6 +143,132 @@
     "sourceHash": "604f98d5003ba57802913ccf3818130cf31f74ece361d04e556883ced4dcb799",
     "text": "取消"
   },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "69442cf84fcd7789699713d6e82083202db874d60733fc74b4202aabc4e737bb",
+    "text": "行动牌"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "333e5d544afb16b1c7a1dd69e3e9e3878f66b07e1b499395e7627551d29bb421",
+    "text": "攻击"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "3ea7b3a8e66cfd8a69e7c791c5b6788028842a7e6e22bd6d206d97d694ecdcb0",
+    "text": "替补"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "3d5fb15aec4261c015a53f2725b2711f38489e7b26c34a4ea08fe08a629b25fc",
+    "text": "战斗"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "148439d4a24f4e38d7855371d77cc1cc77542542228dcfe58803c6e91b0cea84",
+    "text": "祝福"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "f917656942ac7765ac4df9d16f8bfcbb079a6cd232a8e1a900adf997aeb1f87e",
+    "text": "复制品"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "3a07c3fae919e834d9330da0382db8b2c67ea7618016dd6b68d367fa5c20d40b",
+    "text": "伤害"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "ca5b12250ec4340a4567536b37e2555f9b1f2f8dd5cf2ca902e586e4e7440720",
+    "text": "濒死"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "9f40d39e1b26c040233fe2eac9d7e348f0d4e3f1661547c56380e3aaaf6acda2",
+    "text": "抽牌 / 弃牌"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "7b19b6962b092714e4740bbb91c140fa9fcd790736ceaf1589d218ba93dfd3be",
+    "text": "回响"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "28b093aa57ca84f4b5bf5599dfc1c3564eee39e7c9e38a9f54ff08daf557adcd",
+    "text": "金币"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "8860f843ac0b94d350bd126154974cbb5bed282e57cf2f0a407e8ff730d8e9b4",
+    "text": "命中"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "13cd1211886d48bb7b0c3d392909b923ee5a6891825ce2e9910e9d6d136127d8",
+    "text": "关键词经验"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "31a939b5ec9df4c7e61f866dec2a2ba7caa1a4ce146be930017be72920411e4f",
+    "text": "击倒"
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "99f528a21f579793bb24b73eaa55320bf6bc4cb730f813689b4d5f0f2551c17f",
+    "text": "传奇"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "cfddfbd1e60848c823ba0ec15da2987762e8341422ec1d3c9f8fa847299fb0d4",
+    "text": "召唤物"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "205c42b34b294faad32e156b0c9d0b28d52275fa7400628b6ab947b60c103fbc",
+    "text": "珍珠"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "436eafd98e21279d35d5b52e82c7ec215f55605dafbf51e1c5d82baa769fb809",
+    "text": "初始阵容"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "5be0d3e95cde202ced91e9845bada75f54a1ba5974150329b60cd2cf9c142d29",
+    "text": "换位牌"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "359b05f4983397590eddf1327a842ec5f5941bc7a962c5d1d3131f42b8f85d28",
+    "text": "天赋"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "e96b1c4856ae78d9fa6df8b3be4bf9476d448ae3a333c78091f4d97b0c7bab75",
+    "text": "回合"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

@@ -143,6 +143,132 @@
     "sourceHash": "056d4c9242f835e8d5fd4e0795f64451621001a801cdae3de09bfaa66b8c1f82",
     "text": "キャンセル"
   },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "2d6eed21c43cbc2e00187894410a7624f4b0e28047c82ec09dfb6ac248d57027",
+    "text": "アクションカード"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "fdb0cb37cd1ec5b30168ac2ed88ed29af551d91c5ab1a60b1182a547d6c8b122",
+    "text": "攻撃"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "1bdf747ec7ce04dbeeb267d251c2ec9d04deb1ac705b0ea0259efbddd11e29be",
+    "text": "控え"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "352eb6a83b22eca296f13648a003a6a3dc852d177c6256773ccdf2662a73b885",
+    "text": "戦闘"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "ccb812556e3fd22460b5cf98e62008d34c52cd1b73426fafc87c6546ccf506a0",
+    "text": "祝福"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "371b35e9a654363f7096ee30692aa6dc3bc6008c32c9fee79515571db3b8c6ec",
+    "text": "コピー"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "23f2c223761a6365519fe0cb1e3e92d57def21e9648cc6a0844313760c82a4da",
+    "text": "ダメージ"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "4d872e678a42a5ae844d691076e1197aa97b03af2c91741589289b30e0f5f28a",
+    "text": "死の淵"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "82e6c309927c88e95b17b1ad92d2a2f5285ba4dbcf86ec53612c82b1ebf79e98",
+    "text": "ドロー / 捨て札"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "2543aef2713fe0fc2fcc7639c3be4873a14b4d99662c41a19f079cdd1efbe201",
+    "text": "エコー"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "8aa234646e34429f2a0951a38b6914938c87058628b10c497ddd8e41026e5f46",
+    "text": "ゴールド"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "a94912b6413eb63fc1bb280904d6b14942541249b60b0e341fa166e2f2afd954",
+    "text": "命中"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "13444f48a5d8083588e83622f98126c8861e1afaf98bbb53765cf59fcef2553e",
+    "text": "キーワード経験値"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "508cdd6d341755846a4c606017cc9a74f5254bc7b27fb39588b91919dbfb23b5",
+    "text": "戦闘不能"
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "743003abd109ee81332954f7da3ee23710d664154cb827e7536db5dba6a41b2d",
+    "text": "レジェンダリー"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "087c9a3e1783c1a104cf021364f5d9d9f838605675aef114b1d8ccb81edebdd5",
+    "text": "ミニオン"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "417c3036e350d66b7fc34fc386a3925af2db6a8859838acdad10e3c6fb8fc468",
+    "text": "真珠"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "f548258861a5573a059e631f4e3c3219d6faf9a579cd59350f995cf9f7a8e68f",
+    "text": "初期編成"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "dff6f8178a344474eaea7a472abf4eb06e75f8c99d597b9c29234cade44cb65b",
+    "text": "交代カード"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "3dbf6443e070712fbc6a295e5d03b756e1142980facae998ff11013700865824",
+    "text": "才能"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "60ba59531a92e5af2830e15a6f80c564cbc4db2821f97dec7e3bf39da5cb7623",
+    "text": "ターン"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

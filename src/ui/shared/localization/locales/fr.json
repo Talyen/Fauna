@@ -347,6 +347,132 @@
     "sourceHash": "690a3d69ce9c0470f7db402edc1e09d5289ce4c6a43e541f23b83377c7db358a",
     "text": "Les alliés qui entrent gagnent {{value0}} en <keyword0>Armure</keyword0>"
   },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "0637f28b44d25dfc61a467bbe6ffcc62c12eee2aa4d88d71e50322ee712e8312",
+    "text": "Carte d’action"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "d8a3461f51b089a62b7198b16ef483e4730d28460d328b1024f402c115f09fbc",
+    "text": "Attaque"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "5ee474a37f832f061c7a9352741336b05c3b9d885ab9c64b20b12cdd390322c1",
+    "text": "Réserve"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "785739b74b624093ec179bb3c10f18acd17fdec458d08e5cc6a22adbce0b1f0d",
+    "text": "Combat"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "87bb95cde8868427a623a54de52158b61b99465c627a47e815b3137d8fdce9da",
+    "text": "Bénédictions"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "c4ce3b749892a8f9536a12ecdc57869b30a8d65a66c0a7308ecbf3f127c0cf2b",
+    "text": "Copie"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "d20e5f41380e44dc318e49da96063e1f8e4c11ab760843982287a98f63cd47bf",
+    "text": "Dégâts"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "1baa58a94da4d9bb16a5680b17cd2683086a0f55c8c355f17fb37507cadea7c3",
+    "text": "Aux portes de la mort"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "c6213e8fbdac462d02c5b9db074f0b35344f5751bf20fdf1a178759650a0534a",
+    "text": "Pioche / défausse"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "b16249c7a26ed306f636ed32d53e573a8a49ab2b3ba953911f3544426f1caed4",
+    "text": "Écho"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "539a1a12d5f91374ede46475bc75bdbe963833574e1a8ff4f90145c66f6bacde",
+    "text": "Or"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "cb59590c1fe50e64ace033cc1d1ac760d9d533b879d4dd13a0ae81c6da7874cd",
+    "text": "Coup"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "3168d79e09a86b43fd7a94bcd20da10f0a14f84e894f4b55bcd00f92f6b7bab7",
+    "text": "EXP de mots-clés"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "56a3d098511d0c50c6f6a60e2fa1c27997f024d6e0d23111356753eaae51deac",
+    "text": "K.-O."
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "170db689a9f0f3b9ac2dfa2f984644fefd542d0481128de93628ef9c18cabda3",
+    "text": "Légendaire"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "505752f89c78882e273eaae2cd2547a876a5263ad77414cbe2ac2f13bfab5475",
+    "text": "Serviteur"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "09becc1887c78af1e593b65814146640d1fca46d3c43f0e6a2ae637fd36df570",
+    "text": "Perle"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "fb7807fe8748b57eadfc3ee8dd4e6e8051184e8e1640f2d426eef80ae2d1c650",
+    "text": "Formation initiale"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "cec66492a67aa2073cd8467541268f77b52435c2cc2d08197e8149b2cf74a7a2",
+    "text": "Cartes d’échange"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "5a078c036b8c5dd9443216de5515b475678085fc3ca27dffd0f64c1b034507fa",
+    "text": "Talents"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "443bb7ecb520f564524d1b83a3b97be49b4a96aec963529842f49846586b1875",
+    "text": "Tour"
+  },
   "content.keyword.armor.label": {
     "reviewed": true,
     "source": "Armor",

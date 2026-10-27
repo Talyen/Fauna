@@ -143,6 +143,132 @@
     "sourceHash": "e1457ed1e2bf91a58fef5969d4d92ee1114d30375c35fcbd660affc5f4d92f91",
     "text": "Cancelar"
   },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "8123169bb191e6c7c96f508ae9e224c93fcf7682fdc21ae29526f5606f604241",
+    "text": "Carta de acción"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "f10158b49a610e4dce0a502c2a7fd998e5811f95c6dde605bb11a751ae7c5715",
+    "text": "Ataque"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "2f08564b6366e9e364742fd87d24cdfedca958185ca72584549771666bc565ba",
+    "text": "Reserva"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "24665b3c1e6e3bad3594b2123c69af202eacd70b018786bc8622ee5f894d9f12",
+    "text": "Combate"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "32797c70189abd7f6d0101b04d5d817be1cf26f7a97a508292c20a52692c2283",
+    "text": "Bendiciones"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "793f2876375fe36bf39016d551c1b125bb242667dbf8cdebe1caa0115b9a37d0",
+    "text": "Copia"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "85b82a5ab4fa5f401839e84b17637bc1711415c711fa01b75a4e5d0bd34cf761",
+    "text": "Daño"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "29c21b018e997612b389dbda2628273d8e0e975ed3893b45696974a4ad87ca73",
+    "text": "Al borde de la muerte"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "f7da30425ed9066cd26594aa79b3922a7d56295cf08216d8875042c1cede9dea",
+    "text": "Robo / descarte"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "429b20871fd42deb395420ba1df14389f57e2cdf2b1055e0eee809a2225d3ba0",
+    "text": "Eco"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "8ab6b2a1917cc51fb2c3361061620816d2e68a1709ba9b7ec846b20a06f1f57e",
+    "text": "Oro"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "7c0c7ccdfb890ae660cbb5065a2469f7ffb35c529c79d9def7b8bb005d7a5955",
+    "text": "Impacto"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "bd65c960515b94ad2430a8e71bc1a7a5d2c4e96f308f9d9d03707ad1d70e56d5",
+    "text": "EXP de palabras clave"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "c4382a83f952c1d2f85058fd175f4a32672880c17886edb036c8dd18b0f27e4e",
+    "text": "Fuera de combate"
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "e18657ac61181836be93768a2fae81775b42bb78258802bfba802ebf1398f265",
+    "text": "Legendaria"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "1d5092e3a956d19c4c1e17a0a90c6b362fd10fdf0d1601656eb709ed9922f1fb",
+    "text": "Esbirro"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "00afd12a88a2b22ba0c14476f44d4107b8cc98402ad72281c87fb7a0487de977",
+    "text": "Perla"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "d2d1c05faf53be65c847bbe0e2f53c7e2e6df88050c82f12bd5ec802628eb915",
+    "text": "Formación inicial"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "b38fc9e1f641c364fb711b383f5ec943bff703507229935c76b7734e7629c268",
+    "text": "Cartas de intercambio"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "b7e4449b9b207260c75b406e65b0e56935e447216d9c96b2a3c2839407dba04f",
+    "text": "Talentos"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "f4c3675a00137a5d9816900389863b87694f7379262b56f958bfad9dd45a9006",
+    "text": "Turno"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

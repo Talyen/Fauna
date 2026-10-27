@@ -143,6 +143,132 @@
     "sourceHash": "119e3a2c89e05b14e64af902b0d574a628e4b5db14a1a4175a9cbb1608a5513b",
     "text": "Отмена"
   },
+  "content.glossary.action-card.term.rule": {
+    "reviewed": true,
+    "source": "Action card",
+    "sourceHash": "51e6c7787b66a2774498b93f11a0d49b60e9cf6a8052bbe0188957455316bffc",
+    "text": "Карта действия"
+  },
+  "content.glossary.attack.term.rule": {
+    "reviewed": true,
+    "source": "Attack",
+    "sourceHash": "4d4a5332e1f1ac9a149a6cd5b8f1113351f562ede0efaa6ad0f477398450f1f5",
+    "text": "Атака"
+  },
+  "content.glossary.backup.term.rule": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "b8cb5c518bd1561b198b791cefdcf4593c154e2374bc64b2db055e7e1a3ea41d",
+    "text": "Запас"
+  },
+  "content.glossary.battle.term.rule": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "530bce49934e4f08735627199787dd1e03a1ea3b2f0ce8b33b225a6bb651df20",
+    "text": "Бой"
+  },
+  "content.glossary.boons.term.rule": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "ff257c3a9bc029fb4fb72d32f8a0c697e1d82e425ad59789ff8264286bf24eea",
+    "text": "Благословения"
+  },
+  "content.glossary.copy.term.rule": {
+    "reviewed": true,
+    "source": "Copy",
+    "sourceHash": "492c24aa964731c719f652564b5c4aa913d999d6e7fb9742e3293550ac0fd232",
+    "text": "Копия"
+  },
+  "content.glossary.damage.term.rule": {
+    "reviewed": true,
+    "source": "Damage",
+    "sourceHash": "9243fc7f599e3e38df0cdede4659420394e4ec551b0d00f30f0f33bae820d7fe",
+    "text": "Урон"
+  },
+  "content.glossary.deaths-door.term.rule": {
+    "reviewed": true,
+    "source": "Death's Door",
+    "sourceHash": "570b8a30292b93321bab96b6d447d0f258992dfdcf740d6087382e1a3cbee369",
+    "text": "На пороге смерти"
+  },
+  "content.glossary.draw-discard.term.rule": {
+    "reviewed": true,
+    "source": "Draw / discard",
+    "sourceHash": "46cda6db57a1f5b565f108c5a07f0bc56e8df00151d26e3c61d2d569d159d90b",
+    "text": "Добор / сброс"
+  },
+  "content.glossary.echo.term.rule": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "0b254bb368b158652489742054f444bc34164da2277f35815a5cd7baf225f5be",
+    "text": "Эхо"
+  },
+  "content.glossary.gold.term.rule": {
+    "reviewed": true,
+    "source": "Gold",
+    "sourceHash": "cc523022c580e8bc76a6a40df16564bfe778d730f86d7b58fee8a378a741a27a",
+    "text": "Золото"
+  },
+  "content.glossary.hit.term.rule": {
+    "reviewed": true,
+    "source": "Hit",
+    "sourceHash": "e21f3fd2a41bfb5d12d60862ed3e87fe9c5bed601faf7a5cf7aa846255ee1fd2",
+    "text": "Попадание"
+  },
+  "content.glossary.keyword-xp.term.rule": {
+    "reviewed": true,
+    "source": "Keyword XP",
+    "sourceHash": "62bc0e044f711b5fb425fbc9615657481a7a12c23d4633085c64aa2021a0fe02",
+    "text": "Опыт ключевых слов"
+  },
+  "content.glossary.knockout.term.rule": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "a7e8cbbbab304eb7e8a333343c9f79dbf8f4175ecb162c069c56d3d1cb52b0c3",
+    "text": "Нокаут"
+  },
+  "content.glossary.legendary.term.rule": {
+    "reviewed": true,
+    "source": "Legendary",
+    "sourceHash": "2e04e1a4848fc84686d6c92b89d768ce90d9a2b65fe670d788cb0e9811d595f2",
+    "text": "Легендарное существо"
+  },
+  "content.glossary.minion.term.rule": {
+    "reviewed": true,
+    "source": "Minion",
+    "sourceHash": "f0eb9e4fe280d07139141e6e9afe57ae510b3455beac922230db7b56592d3ea3",
+    "text": "Прислужник"
+  },
+  "content.glossary.pearl.term.rule": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "3bdff8c3f2955403126135737b8e5705053bfd105eaf28cd535c6e50b44866ff",
+    "text": "Жемчужина"
+  },
+  "content.glossary.starting-lineup.term.rule": {
+    "reviewed": true,
+    "source": "Starting lineup",
+    "sourceHash": "797005a0a4b6fc3a30e46af95ed390af163944f900efa2274cc2b2f9cdb578af",
+    "text": "Начальный состав"
+  },
+  "content.glossary.swap-cards.term.rule": {
+    "reviewed": true,
+    "source": "Swap cards",
+    "sourceHash": "d27bae2406c0bd1356843ec5d8412cba4d47c90863d80bc90ee107b5399d94ad",
+    "text": "Карты замены"
+  },
+  "content.glossary.talents.term.rule": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "6e01e476006db82a2e1e5ecb0541d9815e5065d3a3aee508626d1444ad112a68",
+    "text": "Таланты"
+  },
+  "content.glossary.turn.term.rule": {
+    "reviewed": true,
+    "source": "Turn",
+    "sourceHash": "ffd8d88c0bfa1872f5df31d917f025d724f2916efeabadadefac1b5daaab2a3d",
+    "text": "Ход"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
