@@ -1,3 +1,6 @@
+import { PageControls } from "../../../src/ui/shared/navigation/pagination";
+import { BattleReadout } from "../../../src/ui/shared/combat/battle-readout";
+import { DamageValue } from "../../../src/ui/shared/combat/combat-values";
 // @vitest-environment jsdom
 import { createRequire } from "node:module";
 import { EventEmitter } from "node:events";
@@ -719,4 +722,20 @@ it("extracts every creature passive tier exactly as the game produces it", () =>
       expect(extracted?.text, `${creature.id} ${rank}`).toBe(ruleMessage(tier.description).template);
     });
   }
+});
+
+it("localizes shared pagination and combat announcements while preserving values", () => {
+  const view = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <PageControls page={1} pages={3} change={() => {}} />
+      <BattleReadout health={7} maxHealth={10} block={4} previousBlock={2} knockout />
+      <DamageValue type="burn" amount={3} />
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("button", { name: "Page précédente" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Page suivante" })).toBeTruthy();
+  expect(screen.getByLabelText("Blocage de 2 à 4")).toBeTruthy();
+  expect(screen.getByLabelText("3 dégâts de Brûlure")).toBeTruthy();
+  expect(view.container.textContent).toContain("2 → 4");
+  view.unmount();
 });

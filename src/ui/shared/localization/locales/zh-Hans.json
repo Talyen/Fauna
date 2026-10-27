@@ -1,4 +1,46 @@
 {
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "021a5ce6d170d5532aacbd94314cff2bcb667f87afb7d3f9c6f8796fcaf5b2e0",
+    "text": "格挡 {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "3f5d95808b7877bc5c404e1b4f00a5b2c0436e993c5c2a120ddbbb8ebb3d87f0",
+    "text": "格挡从 {{previous}} 变为 {{current}}"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "3f1cc622c5ff1d2f8cdaf4f6999e15c277d035763740443caca5c09114988437",
+    "text": "{{amount}} 点{{type}}伤害"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "b92ded67ee66fc4663df36fc87d8142e7a2dd77bb18df1cc5f506306c725c174",
+    "text": "击倒"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "359eae4370469690076f229e0b642c5ae303f1b9e49047f30a7b061d4f5f19c6",
+    "text": "篝火"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "16c8245211812fd4625b1908626da132f66f397ad687a0b2adacab3dc65767f4",
+    "text": "休息"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "2f4eba67deedc1b6516240c9516307228d3562dea8bf95d52b35a691f11b9197",
+    "text": "前往篝火"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -88,6 +130,48 @@
     "source": "Your starter team",
     "sourceHash": "c175ce08276fabba673466a5c4e0a9d2f01266e7c094fbf158ff5738f2e188f3",
     "text": "你的初始队伍"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "1137b5fc4933c67c2bc3e25dd61859bbd8369f58100326b0004cb46a52d95164",
+    "text": "首领：{{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "59537c2d96f84af9419a9f9dd6dcaaecbbf4758d1913d1bd1655b0f4a8e434d8",
+    "text": "战斗"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "d955310d50be1e7f135767eafe1d4f8681bdd718dd797acee13f3b294f13428b",
+    "text": "遭遇 {{current}} / {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "7d9124c442e0737fe9de74917cd24e3ecbc1d2c1dabff69020d287c8fbfeae8b",
+    "text": "遭遇"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "c5e23378cb851ee1e2e8ac9446dcd6bd28af540cfb711efa0b6fc03f3b0952fa",
+    "text": "下一页"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "341cf2f1fdedf5fc126749d51b9a5add67190afb39f79cef01e57c63c426ec0f",
+    "text": "页面"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "439181c6cdfa4bd2523053c3bc0530716a3847733afe3ee78f6a642cf74be0d3",
+    "text": "上一页"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

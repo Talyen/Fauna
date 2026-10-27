@@ -23,6 +23,18 @@
     "sourceHash": "bf008ab384c9845dfd2223ebab0dacd490fcb0ce5e506016f08ff24d3477a41f",
     "text": "Champ de bataille"
   },
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "97450df988b322c4348cfe2c25b2005e4da70fc9fb57184d678834602df53806",
+    "text": "Blocage {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "cc1b16f5d3a725e4b743318bbb2ccff0ff5190465652bd0a7089f160b5239a1a",
+    "text": "Blocage de {{previous}} à {{current}}"
+  },
   "battle.cardsAndControls": {
     "reviewed": true,
     "source": "Battle cards and controls",
@@ -46,6 +58,12 @@
     "source": "Choose an enemy",
     "sourceHash": "5550ed587337accee7d8d1d20f27e49bec68389431844caa5bde9924e5632c0b",
     "text": "Choisir un ennemi"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "bc86c72d8fbadf94231894e79b9df50730bd1ae57665ae9efae4d2ddc79be746",
+    "text": "{{amount}} dégâts de {{type}}"
   },
   "battle.endTurn": {
     "reviewed": true,
@@ -82,6 +100,12 @@
     "source": "Inspect Draw Pile",
     "sourceHash": "450998b0fbdcd4a6b371b2d99a0c8a8bcb78452cbf5a4756423914051a3f4ff2",
     "text": "Examiner la pioche"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "e1806a5a63f3df10100ffd166919b7cf97ade06bf30345d6863f0245a8a3c677",
+    "text": "K.-O."
   },
   "battle.mana": {
     "reviewed": true,
@@ -154,6 +178,24 @@
     "source": "Boon pages",
     "sourceHash": "709ad0f9b282712c380506d6e740485555c795d4672b56148ec99f1827efa862",
     "text": "Pages de bénédictions"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "ff92a7d7e7c93802ced6dfad6e0ffdd24cf35e90d012602b4e1bb611ecc71dd3",
+    "text": "Feu de camp"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "f3ffb61c3da61b9efbee26667a0a16eed574ec5f6426132df8d5bc74a256f3b7",
+    "text": "Repos"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "ebbdcec4ae97b518fc3d3906e746be7acaa14d17aa110c8565a52f62aa89d39d",
+    "text": "Visiter le feu de camp"
   },
   "collection.all": {
     "reviewed": true,
@@ -527,6 +569,30 @@
     "sourceHash": "fdf741c4d6f7f5a00bdf6f889bee73de966a8de6d7d6e8eeb67ac135bb37ca63",
     "text": "Trait"
   },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "6c6249e58ffb1bbcc9f1efd73819069855d60489fad07ad33a5384bb8f3a7c90",
+    "text": "Boss : {{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "a427843cd0d0a3b7555efd76848add09d4071e675b5148aef24b529be115bbec",
+    "text": "Combat"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "37db2c718f458fba8a2f19795b790d39aba0779c762cd0eeb7f5fa788074c525",
+    "text": "Rencontre {{current}} sur {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "43bfa8fc9ffaa103fa81f11bcbb3860376e123caf4cb57b2c9cc5c36c8ac4ebc",
+    "text": "Rencontres"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",
@@ -755,6 +821,24 @@
     "source": "Choose a living backup for your knocked-out creature",
     "sourceHash": "ec5094a81138df1bc9b3d0a553de51b1289dcf465caf1d7a59219d10a76a0aaa",
     "text": "Choisissez une créature vivante en réserve pour remplacer votre créature K.-O."
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "05087b57bb959321cd45692d6f8822bf62f9d6437018aa73f720c016dee3d2d6",
+    "text": "Page suivante"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "b41161ab6e486fe77e70e94ff4fb3a73a9267555f792ef5ca0e30f0a170a14e8",
+    "text": "Pages"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "ccab45aba2fad5bbf08357bfb18e08d6ac21500048e74f90eaa0128c4b93d819",
+    "text": "Page précédente"
   },
   "progress.keywordLevel": {
     "reviewed": true,

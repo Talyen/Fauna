@@ -1,4 +1,46 @@
 {
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "4f55b0a45dbe7ba2109047987a0739c687be6ea342d7dfb9fd46ccc2fb41abb0",
+    "text": "Bloqueo {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "2f200ca7131b72f5e682414901a7bd6065a36d8f7468253e36f7782c0cb11d63",
+    "text": "Bloqueo de {{previous}} a {{current}}"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "cab9cd2c6b56342a00f6207e6886f4cf1ff9a8a176d728f8a8032153020ac593",
+    "text": "{{amount}} de daño de {{type}}"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "16f15239fbd26addf1364a9c8e2eed0b85c242de8836b054226cc44a568e43d8",
+    "text": "Fuera de combate"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "8cc6a7c4e8bd66214999d9841d70d462dbbda3895f3157da590f1df116a3cb98",
+    "text": "Fogata"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "d5f782028b34ba2f5251be3384b476e0104551a87ccbabf9b332e439230c043b",
+    "text": "Descansar"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "784b2e08bb993e0822ae2f9866c5a812e4a5f25d2794950a798666a933c91d6c",
+    "text": "Visitar la fogata"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -88,6 +130,48 @@
     "source": "Your starter team",
     "sourceHash": "cde76a0ce153e5babde71bb5fead75b24495937d38a627087e7396e1dd2167b6",
     "text": "Tu equipo inicial"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "42224f14c44f5851102535bc51e149035609a1dfb4c83df15dc84a7697f507d2",
+    "text": "Jefe: {{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "c7a23bc0fb5587d25b9c5d199789845f70cece3014687cf651131d76b8858ff3",
+    "text": "Combate"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "1e025200a3849a9df592debe673cafb3992911c69eeb753d12a6c61d571d8e4a",
+    "text": "Encuentro {{current}} de {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "080692b48aeca6d70b81faa5f1fa1a18df01d28596af4791240ce9c8eebce360",
+    "text": "Encuentros"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "336dd0430716373e3ce7b86bcd7c6a47e47c3d0cbecf5fe8a7f6658ccd561136",
+    "text": "Página siguiente"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "d0d99cc943a63117c5b18b1eb163aa1f16b0d7c0c3992144d7de8c0c2cec0c5c",
+    "text": "Páginas"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "8d5cde2a11d98a25a0a6f34875fbaaa833144a138c2a6998ac4f907fccc1d42a",
+    "text": "Página anterior"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

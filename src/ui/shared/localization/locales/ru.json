@@ -1,4 +1,46 @@
 {
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "0ad7fef52cab330cdb61b75f49614bdf2a9e56c311936ebf2e4fde6295ac8a43",
+    "text": "Блок: {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "4f71b574f27cc82b863036f565115a04061e58b462200622d520b4634038801d",
+    "text": "Блок: от {{previous}} до {{current}}"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "55c48e9f1a1b8e2ff74a05f14fafdc05edb0a927188956f13b5b4f2fdf23a194",
+    "text": "{{type}}: {{amount}} урона"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "cd398b59ae17b96dd8da5b3a0df540da5084ad71a122d20f0790e29368822852",
+    "text": "Нокаут"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "8ec0eb8468097e46dff82ed8a30b3196a686cade771987b784105cd3c7471d19",
+    "text": "Костёр"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "82be3babc733a822b64cbc0028953d447f4441ce872147675b28e1694483f288",
+    "text": "Отдых"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "565bc8cdb0fb36fdeae87be13437efbef4071d52279c12c8f3c090d46a09158d",
+    "text": "Посетить костёр"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -88,6 +130,48 @@
     "source": "Your starter team",
     "sourceHash": "fae9b7eda36947cf609c1cea558671cf3c26b88309a7cf9fbc5ef62daa80ef26",
     "text": "Ваша стартовая команда"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "1d3cf1220651a0dec79803d89517188c11132f378e19b00200d59c4370cbc63c",
+    "text": "Босс: {{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "398964b01545bf36267b58a83ec79acee81941320b960eb3d40d144418cc9398",
+    "text": "Бой"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "26ffe89bcdcabbc0fcbb3b8817dbcc61a38cfe775fccb87c5c02cc43cd940e3b",
+    "text": "Встреча {{current}} из {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "459b7fb38c5a7aede5fa3d62573dc1f6f95f2f38ff54785d80b5eff8928f104e",
+    "text": "Встречи"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "86a47fc2011be1036eb6b3e87b28bb97079deb80d31ca223f521cffe151b21e8",
+    "text": "Следующая страница"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "ea1b988bd895d9465a369ee208ae9405c3885d51d116821556ffebbe54915a39",
+    "text": "Страницы"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "d6993d2cb204595a936ffe93f39b592fd1c90728529418d57ac2bac3e44e7323",
+    "text": "Предыдущая страница"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

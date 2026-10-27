@@ -1,3 +1,4 @@
+import { useMessages } from "../localization/message-context";
 import type { GameState } from "../../../game/types";
 import { KeywordText } from "../keyword-text";
 import { Droplet, Flame, FlaskConical, Leaf, Snowflake, Sun, Swords, Zap } from "lucide-react";
@@ -23,12 +24,16 @@ export function DamageValue({
   amount: number;
   signed?: boolean;
 }) {
+  const i18n = useMessages();
   const Icon = DAMAGE_ICONS[type];
   return (
     <span
       className="damage-value"
       data-damage-type={type}
-      aria-label={`${amount} ${DAMAGE_LABELS[type]} damage`}
+      aria-label={i18n.message("battle.damage", "{{amount}} {{type}} damage", {
+        amount,
+        type: i18n.content(`content.keyword.${type}.label`, DAMAGE_LABELS[type]),
+      })}
     >
       <Icon aria-hidden="true" />
       <span>

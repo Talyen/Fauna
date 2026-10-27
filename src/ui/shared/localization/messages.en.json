@@ -11,6 +11,12 @@
   "battle.battlefield": {
     "text": "Battlefield"
   },
+  "battle.block": {
+    "text": "Block {{amount}}"
+  },
+  "battle.blockChange": {
+    "text": "Block {{previous}} to {{current}}"
+  },
   "battle.cardsAndControls": {
     "text": "Battle cards and controls"
   },
@@ -22,6 +28,9 @@
   },
   "battle.chooseEnemy": {
     "text": "Choose an enemy"
+  },
+  "battle.damage": {
+    "text": "{{amount}} {{type}} damage"
   },
   "battle.endTurn": {
     "text": "End turn"
@@ -40,6 +49,9 @@
   },
   "battle.inspectDrawPile": {
     "text": "Inspect Draw Pile"
+  },
+  "battle.knockout": {
+    "text": "Knockout"
   },
   "battle.mana": {
     "text": "Mana {{mana}} of {{maximum}}"
@@ -76,6 +88,15 @@
   },
   "boons.pages": {
     "text": "Boon pages"
+  },
+  "campfire.name": {
+    "text": "Campfire"
+  },
+  "campfire.rest": {
+    "text": "Rest"
+  },
+  "campfire.visit": {
+    "text": "Visit Campfire"
   },
   "collection.all": {
     "text": "All"
@@ -157,6 +178,18 @@
   },
   "inspection.trait": {
     "text": "Trait"
+  },
+  "journey.boss": {
+    "text": "Boss: {{name}}"
+  },
+  "journey.combat": {
+    "text": "Combat"
+  },
+  "journey.encounter": {
+    "text": "Encounter {{current}} of {{total}}"
+  },
+  "journey.encounters": {
+    "text": "Encounters"
   },
   "menu.boons": {
     "text": "Boons"
@@ -271,6 +304,15 @@
   },
   "overlay.replacementHelp": {
     "text": "Choose a living backup for your knocked-out creature"
+  },
+  "pagination.next": {
+    "text": "Next page"
+  },
+  "pagination.pages": {
+    "text": "Pages"
+  },
+  "pagination.previous": {
+    "text": "Previous page"
   },
   "progress.keywordLevel": {
     "text": "{{keyword}} level {{level}} progress"

@@ -1,4 +1,46 @@
 {
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "f590f86eefe98446e7641f7cedbf802ad55f4aea40aaaec4507b009ac04af298",
+    "text": "Block {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "d9ee6bed1e36e68f1e9f0af1d1e71506ecff74fff021a7ef8eb29a42e513130a",
+    "text": "Block von {{previous}} auf {{current}}"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "f801d88f838042fa8c5b4dc1866221894454287eb298ae8b63f857712b31bff7",
+    "text": "{{amount}} {{type}}-Schaden"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "787e34f6238264e1fe9387983993d1fc90619048294ca6ce7ae9f0727469fe57",
+    "text": "K. o."
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "0feb5be59ff9db8dee98837dfd191bf629ecd5815976423bd29e1c739cdd123d",
+    "text": "Lagerfeuer"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "591bac614005b3ba729756100c8a5e00703a7aa2dbcc5fdc04bd2594e63139ea",
+    "text": "Rasten"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "4eb13fd1442f34d07a90c49eb854c108f4a0c04a606bba98845a1bf1a9235443",
+    "text": "Lagerfeuer besuchen"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -88,6 +130,48 @@
     "source": "Your starter team",
     "sourceHash": "eda5a6211ceda5533e23d5d19d02366c6b5b736920877917183b04325f086cc2",
     "text": "Dein Startteam"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "c365e02d12991aea5883ed99404d3bbeb82fb8ea2fba856bb881de5c59ad5342",
+    "text": "Boss: {{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "dd72965bb9236071b03a64d40e5d0f2daee6cd167c9a1330ba40df2a01d12446",
+    "text": "Kampf"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "a44e158a84129ff854a92ee25eb719077747a03e8bcb2bfcdc32a2a359182714",
+    "text": "Begegnung {{current}} von {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "25d8cc8bb5e5ac2249327073ddad280d13c54fb6356488401922aa0a4436f724",
+    "text": "Begegnungen"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "5795a9b8996bc625c48298eb7f09f2542e5c151495bc95f37aaef8700dc23821",
+    "text": "Nächste Seite"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "eba6bb3373e2d8c806bf4bb7a3d5520f773eea0cc61ee12fb9adc0d64e69959c",
+    "text": "Seiten"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "13a83e7e010edaa44c94ac6d5c9af3f3d9372e51274c5e99cfebbd00d7a5b23a",
+    "text": "Vorherige Seite"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

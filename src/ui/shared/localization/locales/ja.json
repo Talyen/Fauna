@@ -1,4 +1,46 @@
 {
+  "battle.block": {
+    "reviewed": true,
+    "source": "Block {{amount}}",
+    "sourceHash": "c49fccc78c3e35c3ac1f0bfc6543f07558230940ee1dba18e3b992e9bbf3e957",
+    "text": "ブロック {{amount}}"
+  },
+  "battle.blockChange": {
+    "reviewed": true,
+    "source": "Block {{previous}} to {{current}}",
+    "sourceHash": "1a7f351413536f918872848c814820d6b80c6fab3aaa0a37b66db8876d768be7",
+    "text": "ブロック {{previous}} から {{current}}"
+  },
+  "battle.damage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}} damage",
+    "sourceHash": "ed9bd984c55d6166a8e05fc1b014b97a77456418f337e63a04240fb64fe865c4",
+    "text": "{{type}}ダメージ {{amount}}"
+  },
+  "battle.knockout": {
+    "reviewed": true,
+    "source": "Knockout",
+    "sourceHash": "bce87ae77a03178d4d66ed60dc31c0baac00a71cc2a1f0156e9e2a0a53c8f9e7",
+    "text": "戦闘不能"
+  },
+  "campfire.name": {
+    "reviewed": true,
+    "source": "Campfire",
+    "sourceHash": "8019f1bd0af15dc3eeabc690fe0cd1dee308d88ca51bc65a3c157613da5b7115",
+    "text": "焚き火"
+  },
+  "campfire.rest": {
+    "reviewed": true,
+    "source": "Rest",
+    "sourceHash": "c4e96f9edd216a6b5a164a20b8e7717abc693629ef1ae8c28b134e5642593cc9",
+    "text": "休む"
+  },
+  "campfire.visit": {
+    "reviewed": true,
+    "source": "Visit Campfire",
+    "sourceHash": "bfe2ef6f7439571e92d2a65a44f30e8b8ca38fa7fc390c1878a7813fcf1dbf6f",
+    "text": "焚き火に向かう"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -88,6 +130,48 @@
     "source": "Your starter team",
     "sourceHash": "60602fbabbb3b02e3daeaaf114fdb6e65eac24d667536a9b13e8baaec27e1bb6",
     "text": "最初のチーム"
+  },
+  "journey.boss": {
+    "reviewed": true,
+    "source": "Boss: {{name}}",
+    "sourceHash": "84c74beb67e6595e182fc15a00cfd100b2058340d92a113cd98ee2210218a75e",
+    "text": "ボス：{{name}}"
+  },
+  "journey.combat": {
+    "reviewed": true,
+    "source": "Combat",
+    "sourceHash": "4c8c28d044ba5cb0fbf2ddb102f7b543e0fb5ab8e80cab34cdc0e90545d56c58",
+    "text": "戦闘"
+  },
+  "journey.encounter": {
+    "reviewed": true,
+    "source": "Encounter {{current}} of {{total}}",
+    "sourceHash": "9b9127183b81792627fcae6899181ad10c329a27da81a93447c19f7546b80741",
+    "text": "遭遇 {{current}} / {{total}}"
+  },
+  "journey.encounters": {
+    "reviewed": true,
+    "source": "Encounters",
+    "sourceHash": "6efb73c1a958c170a294361e9450987de86df741758871408be5e802a50f1a0c",
+    "text": "遭遇"
+  },
+  "pagination.next": {
+    "reviewed": true,
+    "source": "Next page",
+    "sourceHash": "e2d49cfc3c153ea8fa98ec67f3b263555df912264608966321c8dff65202755a",
+    "text": "次のページ"
+  },
+  "pagination.pages": {
+    "reviewed": true,
+    "source": "Pages",
+    "sourceHash": "fc5b4cbe5433e8d2a97350af98353bf1f1130635b11f4dcb6e1f44cf4aaf0e02",
+    "text": "ページ"
+  },
+  "pagination.previous": {
+    "reviewed": true,
+    "source": "Previous page",
+    "sourceHash": "30f0a0c620f2db1f97b09be79567bda1cf045a1e709f4c9a8e9afab14184add0",
+    "text": "前のページ"
   },
   "rewards.chooseBoon": {
     "reviewed": true,
