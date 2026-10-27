@@ -2315,6 +2315,18 @@
     "sourceHash": "d990598c98d5a55e83f9dfcfef2a61ebcde74eb19725c98425b1a81260a62b4d",
     "text": "{{summary}}，{{details}}"
   },
+  "progress.keywordXpEarned": {
+    "reviewed": true,
+    "source": "Keyword XP earned",
+    "sourceHash": "615f7bfed3f1f50816f67488323524a05395e2e13616daea269e34c2d0e8599d",
+    "text": "获得关键词经验"
+  },
+  "progress.levelShort": {
+    "reviewed": true,
+    "source": "Lv {{level}}",
+    "sourceHash": "c001a97226b5aeb23c58411c17b46f27fef50b1ea7c794189b8254177c2adc42",
+    "text": "等级 {{level}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",
@@ -2363,11 +2375,23 @@
     "sourceHash": "167c68222525c4fab2045f5146c33bfb87f851a05e8613e065bb3c81d91bd269",
     "text": "替补"
   },
+  "replacement.backupCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, backup",
+    "sourceHash": "9c4a292b030bb31715a7af83231174b40394a96a26d330659194bc6590a5d416",
+    "text": "{{creature}}，替补"
+  },
   "replacement.knockedOut": {
     "reviewed": true,
     "source": "Knocked out",
     "sourceHash": "c7182a087375b8988635a1c9faeb61e1ad5a2dbc16af261333d6784bb293bdc5",
     "text": "已倒下"
+  },
+  "replacement.knockedOutCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, knocked out",
+    "sourceHash": "9a52e3bbc7bdee56df81f83d38b6ee0e256258d8a81c843e3472cafe481a717f",
+    "text": "{{creature}}，已倒下"
   },
   "results.complete": {
     "reviewed": true,
@@ -2687,11 +2711,23 @@
     "sourceHash": "5ec2e3c4a7a9faaadbbd3256dd2e881980e101975ec96cecc3c290756378decf",
     "text": "{{keyword}} {{count}}；{{description}}"
   },
+  "talents.category": {
+    "reviewed": true,
+    "source": "{{keyword}} talents",
+    "sourceHash": "343c5cdab929710001e9a9ac1a8338dbacebd87c3af64f5e8819098e3a627059",
+    "text": "{{keyword}}天赋"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
     "sourceHash": "dac06e4d0f179724abbeba370abf4c5be7f3fa7b5845b549a3fa52b6de52444d",
     "text": "{{keyword}}经验"
+  },
+  "talents.pages": {
+    "reviewed": true,
+    "source": "Talent pages",
+    "sourceHash": "c2b405f5d4d966798dcca39203203a055a5dad22fae6c63dc8c91c2b8ebdd278",
+    "text": "天赋页面"
   },
   "talents.requiresPoint": {
     "reviewed": true,
@@ -2711,6 +2747,12 @@
     "sourceHash": "f22ebf32cc48429ccdab76f2c2361a2e07f497333a5b2d6bc6c7c4a208398b3f",
     "text": "需要解锁之前的所有行"
   },
+  "talents.reset": {
+    "reviewed": true,
+    "source": "Reset {{keyword}} talents",
+    "sourceHash": "d82f96135f27aef7356a8046e41600f2a1f8fa1ab7d1f13e42e1027b330e644d",
+    "text": "重置{{keyword}}天赋"
+  },
   "talents.row": {
     "reviewed": true,
     "source": "Row {{row}}",
@@ -2728,5 +2770,17 @@
     "source": "Unlocked",
     "sourceHash": "c9ee651c6b855b04d0cf7e97074e506c33c2188f67c752ffef58196c7c5e7d70",
     "text": "已解锁"
+  },
+  "talents.unlockedName": {
+    "reviewed": true,
+    "source": "{{name}}, unlocked",
+    "sourceHash": "5fbaff5b2a1dcf03c64c4d1e07183e4d1b742d95cb9a163bb9adfd4082d21150",
+    "text": "{{name}}，已解锁"
+  },
+  "talents.xpProgress": {
+    "reviewed": true,
+    "source": "{{current}} / {{required}} XP",
+    "sourceHash": "93db719733c10e760759ea9d09430e8a0b7a9051b8639ca57f773d2caf44d37c",
+    "text": "{{current}} / {{required}} 经验"
   }
 }

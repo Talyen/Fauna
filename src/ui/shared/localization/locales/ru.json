@@ -1623,7 +1623,7 @@
     "reviewed": true,
     "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
     "sourceHash": "298f62065fed80d6f6959656c9b0da74eda70510f9f15d7a6d1d6a094181c2c9",
-    "text": "Эффект «<keyword0>Яд</keyword0>» с шансом {{value0}}% также наносит урона от <keyword1>кровотечения</keyword1>"
+    "text": "Эффект «<keyword0>Яд</keyword0>» с шансом {{value0}}% также наносит урон от <keyword1>кровотечения</keyword1>"
   },
   "content.talent.poison.necrosis.name": {
     "reviewed": true,
@@ -2315,6 +2315,18 @@
     "sourceHash": "2c72d6158462849533c72905b6b7d57401e53cccc2df9884bc61a43a0dde14d1",
     "text": "{{summary}}, {{details}}"
   },
+  "progress.keywordXpEarned": {
+    "reviewed": true,
+    "source": "Keyword XP earned",
+    "sourceHash": "c4717d4d7a26e24d5aa4eba7f5aceb9b42bb21e470185bf68a92d13818da215c",
+    "text": "Получен опыт ключевых слов"
+  },
+  "progress.levelShort": {
+    "reviewed": true,
+    "source": "Lv {{level}}",
+    "sourceHash": "67ced7a1720afe07f00c294eb05127dbba3b334b3bca7a95a7f067454383e6d9",
+    "text": "Ур. {{level}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",
@@ -2363,11 +2375,23 @@
     "sourceHash": "2081630706095adcb333755653b3f0ea6f9a16b16f9fe7d80a20ba4b29d1bacd",
     "text": "Запас"
   },
+  "replacement.backupCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, backup",
+    "sourceHash": "b0e306e4f7f8d0e9d7d3d7a6ccc1b7422c7ca52628bbea0b9046b7c06d7cc0d0",
+    "text": "{{creature}}, запасной"
+  },
   "replacement.knockedOut": {
     "reviewed": true,
     "source": "Knocked out",
     "sourceHash": "3f5e487b447dc7a9597ee0820e298f38a1b80df8ae9045e14188a57f9556c2e5",
     "text": "Без сознания"
+  },
+  "replacement.knockedOutCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, knocked out",
+    "sourceHash": "dd7789af55763d582575f7a31e803a1b7881ad78c489833a1d5db95c6bf7b6f3",
+    "text": "{{creature}}, без сознания"
   },
   "results.complete": {
     "reviewed": true,
@@ -2687,11 +2711,23 @@
     "sourceHash": "fcd419a91d9472f513ba9d27f609f223165eb8b0f2c2ce581b3d6e9305f2d6c3",
     "text": "{{keyword}}: {{count}}; {{description}}"
   },
+  "talents.category": {
+    "reviewed": true,
+    "source": "{{keyword}} talents",
+    "sourceHash": "70d3b6f92a98ae111ad9bd866a5566e6a0c57009f4ab487ee10bf2575733f48a",
+    "text": "Таланты: {{keyword}}"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
     "sourceHash": "e8f9f158698f1ddb7c38f90a7e4d5354576d292af616dc1c2266575b49ebe31d",
     "text": "Опыт: {{keyword}}"
+  },
+  "talents.pages": {
+    "reviewed": true,
+    "source": "Talent pages",
+    "sourceHash": "ca81cef174188bb25fc331532e82ef3b240b2c9ac5342fea62c87fba79e97463",
+    "text": "Страницы талантов"
   },
   "talents.requiresPoint": {
     "reviewed": true,
@@ -2711,6 +2747,12 @@
     "sourceHash": "cb8b62fdac1eefb99ccf08af95d82766b893202deb36c8b540436b2872a00a15",
     "text": "Требуются все предыдущие ряды"
   },
+  "talents.reset": {
+    "reviewed": true,
+    "source": "Reset {{keyword}} talents",
+    "sourceHash": "a565345135365f0aceb345dff4f6453e8e484ccde4dc67277e44e43dc815fed1",
+    "text": "Сбросить таланты: {{keyword}}"
+  },
   "talents.row": {
     "reviewed": true,
     "source": "Row {{row}}",
@@ -2728,5 +2770,17 @@
     "source": "Unlocked",
     "sourceHash": "6b41dfe8a88e10bf683ce4f2c5ae603a78227d800b90b18135026cba974dd3a2",
     "text": "Открыто"
+  },
+  "talents.unlockedName": {
+    "reviewed": true,
+    "source": "{{name}}, unlocked",
+    "sourceHash": "d2180684ec91fc1402625b13e8c27d85ce5e13b545c02d2256a3ac27c6cf173e",
+    "text": "{{name}}, открыто"
+  },
+  "talents.xpProgress": {
+    "reviewed": true,
+    "source": "{{current}} / {{required}} XP",
+    "sourceHash": "cdfa45bc6aab421ece7e111268bab3b728a7d7813c5e27918b18425ff53e34f4",
+    "text": "{{current}} / {{required}} опыта"
   }
 }

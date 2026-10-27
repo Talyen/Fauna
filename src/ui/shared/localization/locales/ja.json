@@ -2315,6 +2315,18 @@
     "sourceHash": "7406c65db573dad61f5e87a510d860406fbd85ffafb7d14cb8b0c50efb5f4ece",
     "text": "{{summary}}、{{details}}"
   },
+  "progress.keywordXpEarned": {
+    "reviewed": true,
+    "source": "Keyword XP earned",
+    "sourceHash": "215454fe89485c77a01e63ff005888b91480932db43aa3ca0fd165311bf1134a",
+    "text": "キーワード経験値獲得"
+  },
+  "progress.levelShort": {
+    "reviewed": true,
+    "source": "Lv {{level}}",
+    "sourceHash": "945a38c9b1f3623fa3a408ab975d6a52d624caf814eac34bd72590e143e7c82f",
+    "text": "Lv {{level}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",
@@ -2363,11 +2375,23 @@
     "sourceHash": "fb2c99eca56604386f21b9f217dad37c68f798baacb0e833c46bfd03c6053474",
     "text": "控え"
   },
+  "replacement.backupCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, backup",
+    "sourceHash": "745170c795e298c3dbb3c1dd57c767e4484ac085bb612b2f3aced1a2b878684d",
+    "text": "{{creature}}、控え"
+  },
   "replacement.knockedOut": {
     "reviewed": true,
     "source": "Knocked out",
     "sourceHash": "1b25a07a5a3465f6fee29af43751b94f51a3c380b6e925840654c7f861d5f8e3",
     "text": "戦闘不能"
+  },
+  "replacement.knockedOutCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, knocked out",
+    "sourceHash": "6fee73b7f3b177ead34cc94c77a9e3db97e398d8f9a2e445d1879f5c612ec5b0",
+    "text": "{{creature}}、戦闘不能"
   },
   "results.complete": {
     "reviewed": true,
@@ -2687,11 +2711,23 @@
     "sourceHash": "cc4099054fbc1ef2828eec14d18cf4c06039fee7928d9aa928ec499ac4000f14",
     "text": "{{keyword}} {{count}}；{{description}}"
   },
+  "talents.category": {
+    "reviewed": true,
+    "source": "{{keyword}} talents",
+    "sourceHash": "6d4446554bd64d5f7357712b5109a1381565c44a80412092301d096d8f56abc9",
+    "text": "{{keyword}}のタレント"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
     "sourceHash": "7a5d34d409bb550ea0d8b57f4ab44c5ff71bbc5909188e38c71b848d8f5e2123",
     "text": "{{keyword}}の経験値"
+  },
+  "talents.pages": {
+    "reviewed": true,
+    "source": "Talent pages",
+    "sourceHash": "970014842449a55625201e6831a300a7b258adefda4387ffd335a2e4e656c79e",
+    "text": "タレントページ"
   },
   "talents.requiresPoint": {
     "reviewed": true,
@@ -2711,6 +2747,12 @@
     "sourceHash": "462cdb2839d931c4b2f2b98e05410a25faed738a0287eb545a3f99d396c3b236",
     "text": "前のすべての段が必要"
   },
+  "talents.reset": {
+    "reviewed": true,
+    "source": "Reset {{keyword}} talents",
+    "sourceHash": "eb8ae9d968e3855bab510ce12487fb1917b6cf26e5dab30b8d17145d03bd8a57",
+    "text": "{{keyword}}のタレントをリセット"
+  },
   "talents.row": {
     "reviewed": true,
     "source": "Row {{row}}",
@@ -2728,5 +2770,17 @@
     "source": "Unlocked",
     "sourceHash": "28aec51b4050ac6106d05d55e3d3bc628e684eb134d17da95b8a75a9ce26330e",
     "text": "解放済み"
+  },
+  "talents.unlockedName": {
+    "reviewed": true,
+    "source": "{{name}}, unlocked",
+    "sourceHash": "2184591cc309a616e8676e47fe0b2fabe75b1d779e83c89f89e654d8ca23a394",
+    "text": "{{name}}、解放済み"
+  },
+  "talents.xpProgress": {
+    "reviewed": true,
+    "source": "{{current}} / {{required}} XP",
+    "sourceHash": "f8a97e9c2e60be6afe6b89d04f4283ba746822996ce38af88f39f6b99ff04f78",
+    "text": "{{current}} / {{required}} 経験値"
   }
 }

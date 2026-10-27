@@ -2315,6 +2315,18 @@
     "sourceHash": "6450a8e1378195fff0b4f50e683f9f6a45c2aa550cf1e46cf33004cdff94f7c7",
     "text": "{{summary}}, {{details}}"
   },
+  "progress.keywordXpEarned": {
+    "reviewed": true,
+    "source": "Keyword XP earned",
+    "sourceHash": "07c37a3269ca85eb0eb7b5ebbd40b67e6639838516e90e1d95f2d8e742081acf",
+    "text": "Stichwort-EP erhalten"
+  },
+  "progress.levelShort": {
+    "reviewed": true,
+    "source": "Lv {{level}}",
+    "sourceHash": "984da87de8cab02d728f8874dadce01f7e2c3a4e6882839788e470b0d03f050c",
+    "text": "Stufe {{level}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",
@@ -2363,11 +2375,23 @@
     "sourceHash": "a5d17fac233afa034d1521ce71509286ee4f551b52c27f591a87db398ae18fa5",
     "text": "Reserve"
   },
+  "replacement.backupCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, backup",
+    "sourceHash": "2b85c510815f956b20943bf24396e7813f8e2f093e01cdabf227319ee8e0b122",
+    "text": "{{creature}}, Reserve"
+  },
   "replacement.knockedOut": {
     "reviewed": true,
     "source": "Knocked out",
     "sourceHash": "87577d0a842c5fe42ce9ca4117b9855ce32027d10bdfbfce9ab29393036e16fb",
     "text": "Ausgeschaltet"
+  },
+  "replacement.knockedOutCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, knocked out",
+    "sourceHash": "1d4d2858b56fc4b2319ade04e3cfa841571845eef3b9b1b3e1906e760d468163",
+    "text": "{{creature}}, kampfunfähig"
   },
   "results.complete": {
     "reviewed": true,
@@ -2687,11 +2711,23 @@
     "sourceHash": "378aa09a183438643e12761f02012f807b517d38c6ef6e27f0648b44a86fe173",
     "text": "{{keyword}} {{count}}; {{description}}"
   },
+  "talents.category": {
+    "reviewed": true,
+    "source": "{{keyword}} talents",
+    "sourceHash": "43d8b093d16ceb79acee029198a7d9cd5bc24dad78a08c4ba7c980a28cd32df3",
+    "text": "{{keyword}}-Talente"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
     "sourceHash": "250392c61b9c8c76dc82e2614d2c86f7e9d01f7ba8865bfa88a828001b044896",
     "text": "{{keyword}}-EP"
+  },
+  "talents.pages": {
+    "reviewed": true,
+    "source": "Talent pages",
+    "sourceHash": "a925be719965ffe7b0484decb4a834aed4ede93a591990a160c930a512e904ab",
+    "text": "Talentseiten"
   },
   "talents.requiresPoint": {
     "reviewed": true,
@@ -2711,6 +2747,12 @@
     "sourceHash": "8dab548363a973c8079ae840b6d165e2c87900bb9a1b14405d6e5413ce1fa645",
     "text": "Benötigt alle vorherigen Reihen"
   },
+  "talents.reset": {
+    "reviewed": true,
+    "source": "Reset {{keyword}} talents",
+    "sourceHash": "2b4b0ad298535f2480a48a9904e14805258bc78612cb2f0672695e6f2924efc0",
+    "text": "{{keyword}}-Talente zurücksetzen"
+  },
   "talents.row": {
     "reviewed": true,
     "source": "Row {{row}}",
@@ -2728,5 +2770,17 @@
     "source": "Unlocked",
     "sourceHash": "6dcb8bb72a58df270da73fd878b22f9f27d60f1184085f9c9f138a5c9cfb1484",
     "text": "Freigeschaltet"
+  },
+  "talents.unlockedName": {
+    "reviewed": true,
+    "source": "{{name}}, unlocked",
+    "sourceHash": "b816abec569d2dab9aa7bebbebf7e9ff849374c785a1130dbb13e8fd9d83b949",
+    "text": "{{name}}, freigeschaltet"
+  },
+  "talents.xpProgress": {
+    "reviewed": true,
+    "source": "{{current}} / {{required}} XP",
+    "sourceHash": "66eb9b9a00a22bd06ee7b0465134a93dfa457958ec117f34d71a09e217fbd762",
+    "text": "{{current}} / {{required}} EP"
   }
 }
