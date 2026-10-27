@@ -111,7 +111,8 @@ function evaluateEnemyCard(
 export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonly CardDefinition[]) {
   const targetId = highestHealth(battlefield(state, "player"))?.id;
   let before: number | undefined;
-  let allies: Enemy[] | undefined;
+  let livingAllies: string[] | undefined;
+  let fallenAllies: string[] | undefined;
   // Probes use the same state and fixed decisions throughout this choice. Keep
   // this cache local because the live turn draft can change after every play.
   const values = enemy.deck ? new Map<CardDefinition, Map<string, number>>() : undefined;
@@ -120,9 +121,11 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
     if (enemy.deck && def.cost > enemy.deck.mana) continue;
     const recipients =
       def.effect === "resurrect"
-        ? state.battle.enemies.filter((unit) => unit.health <= 0).map((unit) => unit.id)
+        ? (fallenAllies ??= state.battle.enemies.filter((unit) => unit.health <= 0).map((unit) => unit.id))
         : cardTargeting(def) === "ally"
-          ? (allies ??= battlefield(state, "enemy")).filter((unit) => unit.health > 0).map((unit) => unit.id)
+          ? (livingAllies ??= battlefield(state, "enemy")
+              .filter((unit) => unit.health > 0)
+              .map((unit) => unit.id))
           : [enemy.id];
     for (const allyTargetId of recipients) {
       let cardValues = values?.get(def);

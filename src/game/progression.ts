@@ -62,8 +62,13 @@ export function validTalentSelection(state: Pick<GameState, "talents" | "keyword
   }
   return true;
 }
+const keywordsByDefinition = new WeakMap<object, readonly Keyword[]>();
 export function cardKeywords(card: Pick<Card, "definitionId">): Keyword[] {
-  return definitionKeywords(definition(card.definitionId));
+  const def = definition(card.definitionId);
+  if (!Object.isFrozen(def)) return definitionKeywords(def);
+  let keywords = keywordsByDefinition.get(def);
+  if (!keywords) keywordsByDefinition.set(def, (keywords = definitionKeywords(def)));
+  return [...keywords];
 }
 export function xpThreshold(points: number) {
   return 10 * points * (points + 1) - 10 * Math.min(points, 2);
@@ -115,7 +120,8 @@ export function starterOfferPool(state: Pick<GameState, "discovery" | "selected"
 }
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {
-  return collectedSpecies(state).length === 0 || state.selected?.some((kind) => species(kind).legendary)
+  const collected = collectedSpecies(state);
+  return collected.length === 0 || state.selected?.some((kind) => species(kind).legendary)
     ? 1
-    : Math.max(1, Math.min(3, collectedSpecies(state).filter((kind) => !species(kind).legendary).length));
+    : Math.max(1, Math.min(3, collected.filter((kind) => !species(kind).legendary).length));
 }

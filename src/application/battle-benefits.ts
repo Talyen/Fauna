@@ -26,7 +26,7 @@ import {
 import { actionValue, cardCost, manaCapacity } from "../game/ability-rules";
 import { healingValue, restoration } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
-import type { BattleState, Enemy } from "../game/types";
+import type { BattleState, Creature, Enemy } from "../game/types";
 
 export const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 const priorities = {
@@ -84,10 +84,12 @@ export function battleBenefitFacts(state: BattleState) {
         state.boons.includes("resonant-chimes") &&
         hasTalent(state, "mana.arcane-mending")));
   let enemies: Enemy[] | undefined;
+  let allies: (Creature | Enemy)[] | undefined;
   return {
     injuredAllies,
     healingOnPlay,
     livingEnemies: () => (enemies ??= battlefield(state, "enemy").filter((unit) => unit.health > 0)),
+    livingAllies: () => (allies ??= battlefield(state, "player").filter((unit) => unit.health > 0)),
   };
 }
 
@@ -177,7 +179,7 @@ export function battleBenefits(
       reason,
     },
   ];
-  const allies = battlefield(state, "player").filter((unit) => unit.health > 0);
+  const allies = facts.livingAllies();
   const controlRemoval = (amount: number) => support(amount > 0 ? "controlRemoval" : "none", amount);
   const dodgeSupport = (useful: number) => support(useful > 0 ? "utility" : "none", useful > 0 ? useful : 0);
   switch (def.effect) {
@@ -357,10 +359,10 @@ export function battleBenefits(
     }
     case "dodge":
       return dodgeSupport(
-        (def.target === "allAllies"
-          ? battlefield(state, "player").filter((unit) => unit.health > 0)
-          : [actor]
-        ).reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0),
+        (def.target === "allAllies" ? allies : [actor]).reduce(
+          (sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)),
+          0,
+        ),
       );
     case "redraw":
       return support(state.battle.hand.length > 1 ? "redraw" : "none");
