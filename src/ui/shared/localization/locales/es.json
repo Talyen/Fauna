@@ -1,0 +1,140 @@
+{
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "54d52960a9408940ac9d9bdd44461190e0b66c1d3b2df34905371997b417299c",
+    "text": "Todas"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "31d9da3df8a0d2feb014e6c66d844c22ff4ea475a170b467ad8dfb26d4e871f7",
+    "text": "Coleccionadas"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "f5b3e0534d6db22b4e2f8f55790eb4e463c72207d68cdfff3824941f768303ae",
+    "text": "No hay criaturas en esta vista"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "fe846ac90cbe5f3c1c6ac68dbcb460b0bf81463175b792a9e3d6c426cc55ee58",
+    "text": "Filtro de colección"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "b63f326dbd556aadba1750016a40e41fcf7e1ce0261e0ddef29d4c58fbfd495a",
+    "text": "Examinar a {{name}}"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "3a1243378d0059f8900caf288ca61eb10ca8994cb77f533dcc4e6220f8fab62a",
+    "text": "Especie bloqueada"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "542b2c09b256be624b972d6e94d395329801627fcebb572da34354dece7c8fdf",
+    "text": "Páginas de colección"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "28c79d30aad38eda347e4aa8c6016debc0995072e724a1822cb1b386ed74e7da",
+    "text": "{{name}}: {{rank}} de {{maximum}} estrellas"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "49e3cf3eab7b6d90a941041d331bb479c115751735b4157757ddb7a554914738",
+    "text": "Sin coleccionar"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "b63f326dbd556aadba1750016a40e41fcf7e1ce0261e0ddef29d4c58fbfd495a",
+    "text": "Examinar a {{name}}"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "956544568bfe62ba50de7f3f64ea19c101b247bd2a6ab2fe2ef2af8baa0d556a",
+    "text": "Reclutar a {{name}}"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "6798e4ee0b1488c4b12fb9be0dfa03c479b45c84fc4858d72143a49b54ca4174",
+    "text": "Reclutar"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "09dff029a543b67e7beef06e624d3042a58aae1c303957ed99cfa4009dbac398",
+    "text": "Elige tu criatura inicial"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "8fad4cd3e3f66f560debd3c542d36af88b8a709160efcd233c518ea0efb373c6",
+    "text": "Seleccionada"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "cde76a0ce153e5babde71bb5fead75b24495937d38a627087e7396e1dd2167b6",
+    "text": "Tu equipo inicial"
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "b9d325be7751fec0925c6d59f2cab20d339f136a3c68c1f43447559da6a9f867",
+    "text": "Elige una bendición"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "422b83aef5dc46a5857ca2ae35d5626e5eb3fee2f2f5c06293c5327bd3708adc",
+    "text": "Elige una criatura"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "0d5657f9b2e700f8421937196266815962ca0f2d85be4ac4d953fb4e1fb95132",
+    "text": "¡Nueva!"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "95ea07e0798fec5b7575ef7ad7a1d18c848f060b73d6ba28f70887deb955e1c9",
+    "text": "{{name}}: nueva en la colección, cero estrellas"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "8923479cf52e6a8cc8c9ecdb0a48c4577bda3e7cdec1ad67f01b8151041e8e28",
+    "text": "{{name}}: de {{rank}} a {{next}} de {{maximum}} estrellas"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "63f41b00d58b6ceef4e9780448a051561b68566c498cc7f550f99fc5dd0252c1",
+    "text": "Páginas de reclutas"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "f677c5db0d852dc933a20c6b15bf73ff0148710ff674d4779e32011536cc815f",
+    "text": "Omitir"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "13099ad277f529808dcc20b29b7256639c359126ce7b604c2aa955022db9dcc8",
+    "text": "Victoria"
+  }
+}

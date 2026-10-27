@@ -1,0 +1,140 @@
+{
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "c7ecdf521033d19bea087e4194e0bc846bc014a187d7657b3e68669a23aeb358",
+    "text": "すべて"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "4c69d9562726b2fc113907069ac1af80f442ea9468cbd4fb2682af9521ebd0af",
+    "text": "収集済み"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "dfe49aa3952794c492a2bae78f1f78a499ff6c6bc62d6ce061881083709c58f1",
+    "text": "この画面に生き物はいません"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "72e8d35b572dbf28477b51470f265dc4493f396ad6391d1f5b9c5bb717577e2f",
+    "text": "コレクションの絞り込み"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "854fedc6d662ce02f76b452b07949124d8aa8b0e33a65863ba293870fec89669",
+    "text": "{{name}}を調べる"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "644e5db23c0bb6c641fee5bb755ae7b017306c30aeb78d89b1e859eb6fe37c00",
+    "text": "未解放の種"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "a782ed3b62e3c529794b03d8029280d33fac4c0cb865f481c5d7ce0935d87977",
+    "text": "コレクションのページ"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "1538b8e9b46d87a6d42782c096bcb5867606767dd4d401717532293f43d04c53",
+    "text": "{{name}}：星{{rank}} / {{maximum}}"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "1eb47856d45185c76a953da5eb10289b7e84f19624c85f9efe71fc0341e045bb",
+    "text": "未収集"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "854fedc6d662ce02f76b452b07949124d8aa8b0e33a65863ba293870fec89669",
+    "text": "{{name}}を調べる"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "4d25b31a3946bcf363f2e7f28c68d1478038a5080aa0e1bb3afe047e07eec7a8",
+    "text": "{{name}}を仲間にする"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "e32ee6fbef213e52d82dbe10a016dd4eca3951b52077212718bd0e6c32131207",
+    "text": "仲間にする"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "63808663e5628b0023b10f13ea9b04cd4bc07b88a7373c64466abc51ebd461bc",
+    "text": "最初の生き物を選ぶ"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "b83d8ad5a8edb8db6494a63160f34728cab51460223feabe5e1e3937e19e3584",
+    "text": "選択済み"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "60602fbabbb3b02e3daeaaf114fdb6e65eac24d667536a9b13e8baaec27e1bb6",
+    "text": "最初のチーム"
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "d7228d6866c9fe3c2363c9dbb4bcfbb1ea1f0a42fb7fda2d59cba2211fc89d85",
+    "text": "祝福を選ぶ"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "cab1a741a359f02b8c5efb5c5c016aa9c2ed53487c632856dd566c2f2c1afff6",
+    "text": "仲間を選ぶ"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "e5cccb2d663d0f57ac6690c3f67961275cdf9c79e86d1b434b823a6cf50380cb",
+    "text": "新規！"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "07302f7f8619066f444cc229d94ef17380655f370d80070849ca485063637397",
+    "text": "{{name}}：コレクションに新規追加、星0"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "5eba6afd03f9bd5ac8b528c1c2f3742ff0f4bbc5f95c7ac6eab5635bf84f234b",
+    "text": "{{name}}：星{{rank}}から{{next}}へ（最大{{maximum}}）"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "ec5bd694a25ba1f404ad1edca8c84e95c8284277d0c0a3fd74fdb79a5af147a4",
+    "text": "仲間のページ"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "460af97e6c28d4364e446cc5a356eca91bc9ff42df0312bd46853d97bb89b7ef",
+    "text": "スキップ"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "30edc2983a1b6fa10e471093ed3c0bd94cc5a8d909327228f17c4de3b0293b9b",
+    "text": "勝利"
+  }
+}

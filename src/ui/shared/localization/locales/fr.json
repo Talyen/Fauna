@@ -155,6 +155,60 @@
     "sourceHash": "709ad0f9b282712c380506d6e740485555c795d4672b56148ec99f1827efa862",
     "text": "Pages de bénédictions"
   },
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "1ade44d8a42d370f1281f9ce61dd41bd85b5f58fdd0bc06a8e869268339f1b9c",
+    "text": "Tout"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "70eb4ff31973824fe5da3597f8de4c0f3172babc5f822af1db43ebd551e392e6",
+    "text": "Collectionnées"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "ee1d1b36b03871c5123c71ad8944b23e41acabc4dd58278888f2b87796e2f8c3",
+    "text": "Aucune créature dans cette vue"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "4452c939c1f8cab5fdcfcaa7a7c889df9ab2dc8fac3673c11c46b15e361d9bd7",
+    "text": "Filtre de collection"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "53bc8e0e9a0b22a32f7663e1b756f1f6386dd2c3f783099488a95a114096584c",
+    "text": "Examiner {{name}}"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "03c4a00515c25cd6116deefffdcd1566aa1f99d28364b4ee83a4aaf02770abb1",
+    "text": "Espèce verrouillée"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "3437f00c7038359397c0e9557437e2894f5b2f847ec52bdf4e1bedded997db5c",
+    "text": "Pages de collection"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "e125c11be70f8e88a42ce362c54d4565c661494767dd36836c8fb80a79cec198",
+    "text": "{{name}} : {{rank}} étoiles sur {{maximum}}"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "e1d47cd4bf11aa8c4a9389e25b365a803229cb2fdcf657acb1ae4fc4ea52f652",
+    "text": "Non collectionnées"
+  },
   "common.cancel": {
     "reviewed": true,
     "source": "Cancel",
@@ -376,6 +430,42 @@
     "source": "Water",
     "sourceHash": "58003e51ae85c37048a64ffc1a053a6f2736e83e005e119093edc05f72430227",
     "text": "Eau"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "53bc8e0e9a0b22a32f7663e1b756f1f6386dd2c3f783099488a95a114096584c",
+    "text": "Examiner {{name}}"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "555db1a389d7fd4e641c811718f85258a4e424a6a89b36c50eee355cbd912a89",
+    "text": "Recruter {{name}}"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "b7db602a635c9f0de1f59eee9b0a407c3c1dcf3e8ce559e52dfc076086eda900",
+    "text": "Recruter"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "29832e1a1679f7b4c53a2452c6f8a6582c94403727fb3e043de55792786fc113",
+    "text": "Choisissez votre créature de départ"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "88c8313edb41ba735ac92514c2f7c330ab99f3934f0df8717b53cdec5a7c4dea",
+    "text": "Sélectionné"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "f82d3d3aaf23f6818779c37151ca8e8cf9df46859ade9cf5d9c4a6a8675097c4",
+    "text": "Votre équipe de départ"
   },
   "glossary.controllerHelp": {
     "reviewed": true,
@@ -719,6 +809,54 @@
     "source": "{{creature}}, knocked out",
     "sourceHash": "332e1841592c4235405a982372d202768d51780780e31830e3047cb595565d18",
     "text": "{{creature}}, K.-O."
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "ca5d509a0eb2142c63f5cae956276a8b1b9f9072b18b2349886d07ac0ba46243",
+    "text": "Choisissez une bénédiction"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "3f62299c351a1e0aad1d01f3ce19176ecff8e756431ce6f53c440d9b24796719",
+    "text": "Choisissez une recrue"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "d93634428eed014b093d22128e9c461cb5e59be36dc03fd7af48755f44634a0b",
+    "text": "Nouveau !"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "df665b0b6e1d0d29db0d78c08f2fb55f40d0ed2c6b8bc938c057f8f8d2751c88",
+    "text": "{{name}} : nouveau dans la collection, zéro étoile"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "d6f5631975af176d5827b68c777e0f699e1a0eddb944dbfb5063070e9e7d317f",
+    "text": "{{name}} : de {{rank}} à {{next}} étoiles sur {{maximum}}"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "80ed4e7cad28b4bcd620bb902bb6b1e82d0abb0930f4c74a8c45bb95d0128278",
+    "text": "Pages de recrues"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "ae9542d574d0066334ba241295de8e4128d7ecd82e97e4fe36f0823942c8c2dc",
+    "text": "Passer"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "d535f43d9b42c714871469d0d26143850ad834d9dd4b3bc69d34406146e6ad0c",
+    "text": "Victoire"
   },
   "settings.audio": {
     "reviewed": true,

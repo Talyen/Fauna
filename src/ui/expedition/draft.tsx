@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { useLayoutEffect, useRef } from "react";
 import { returnFocus } from "../shared/navigation/focus";
@@ -18,6 +19,7 @@ type Props = {
   inspect: (item: Inspection) => void;
 };
 export function Draft({ game, send, inspect }: Props) {
+  const i18n = useMessages();
   const grid = useRef<HTMLDivElement>(null);
   const restore = useRef<number | null>(null);
   useLayoutEffect(() => {
@@ -35,7 +37,9 @@ export function Draft({ game, send, inspect }: Props) {
   return (
     <Screen className="draft-screen">
       <ScreenHeading>
-        {game.selected.length < starterCount(game) ? "Choose your starter" : "Your starter team"}
+        {game.selected.length < starterCount(game)
+          ? i18n.message("draft.choose", "Choose your starter")
+          : i18n.message("draft.team", "Your starter team")}
       </ScreenHeading>
       <div className="draft-grid" data-nav-row ref={grid}>
         {(game.selected.length === starterCount(game) ? game.selected : game.starterOffers).map(
@@ -49,23 +53,27 @@ export function Draft({ game, send, inspect }: Props) {
                   selected={game.selected.length === starterCount(game)}
                   onClick={() => inspect({ species: s.id })}
                   onInspect={() => inspect({ species: s.id })}
-                  label={`Inspect ${s.name}`}
+                  label={i18n.message("creature.inspect", "Inspect {{name}}", {
+                    name: i18n.content(`content.species.${s.id}.name`, s.name),
+                  })}
                 />
                 {game.selected.length === starterCount(game) ? (
                   <span className="starter-selection">
-                    <Check aria-hidden="true" /> Selected
+                    <Check aria-hidden="true" /> {i18n.message("draft.selected", "Selected")}
                   </span>
                 ) : (
                   <Button
                     effectKeywords={creatureKeywords(s.id, game)}
                     className="recruit-button"
-                    aria-label={`Recruit ${s.name}`}
+                    aria-label={i18n.message("creature.recruit", "Recruit {{name}}", {
+                      name: i18n.content(`content.species.${s.id}.name`, s.name),
+                    })}
                     onClick={() => {
                       restore.current = index;
                       if (!send({ type: "draft", species: s.id })) restore.current = null;
                     }}
                   >
-                    Recruit
+                    {i18n.message("creature.recruitAction", "Recruit")}
                   </Button>
                 )}
               </div>

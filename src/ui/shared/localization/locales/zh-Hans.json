@@ -1,0 +1,140 @@
+{
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "fa20407d8c2f40e7db9e834bc0c4b295d24e8c8ff6df5dd492b24223daf9398c",
+    "text": "全部"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "6bda57f283d2a73e2ae08d1a49280c8c48de1d70a236fc95d19561adcfd81897",
+    "text": "已收集"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "9f72b8b03dead1e499cc23961ed573098ee2d20fef7a0098d1b89387b3ebbdd2",
+    "text": "此视图中没有生物"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "1dcdd4fec608e53d3b44a24903bbfbe88cc706b6c30a7d42e66b07ab589b3dde",
+    "text": "收藏筛选"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
+    "text": "查看{{name}}"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "000d85fc98e6578a6cdeba4ad5d173cf38b82e2380d2c7a3a4d6fd052436d4fe",
+    "text": "未解锁的物种"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "64e9269ae29322779716c23ca7560fcb5312d2dd2c84c1fe4d3a4b561af0f9ed",
+    "text": "收藏页面"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "d225fb3a55baeb45db3accb482c5e3d31c0c8f12a3b1be2d6bd00c8d6834aa9f",
+    "text": "{{name}}：{{rank}} / {{maximum}} 星"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "08b7f2067ffe90d5e4dafdbff61184c588db331d404efa8638ece95592d4a8d2",
+    "text": "未收集"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
+    "text": "查看{{name}}"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "381d13a07b54b0a38b13ac39bc852ab5da2c875dcb2f3ff09eaf3c122a644763",
+    "text": "招募{{name}}"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "cd26922237a543d76b8ab88484730519b56182a53c2bdc0c5e02894120df1ddc",
+    "text": "招募"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "a8fcdcf8a2c639e53d1059c0c058ee2b878d88d71e4364eda6ce6cbde6b408b4",
+    "text": "选择初始生物"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "8eeb928d803a6b3bdf8fcbc878f15c3687b8528f99eb129a84be8fa913908bae",
+    "text": "已选择"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "c175ce08276fabba673466a5c4e0a9d2f01266e7c094fbf158ff5738f2e188f3",
+    "text": "你的初始队伍"
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "22d8a7bc17ac182e492678e2b2bfd6b3477dd65da97cd5c75a16afcf2dbd5a24",
+    "text": "选择一个祝福"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "fce61f8d57a19e0436d3b25ea1e0bae87000725aa482f142b8c78c76e18f6248",
+    "text": "选择一名新伙伴"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "5b6889c2af4ec0cea0e9ee161a91933b323234c40a7f640e63b9e5741395a890",
+    "text": "新！"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "c0b566da2f1815348ac50ce4b06b1193150e9fd2c84e3c8212fd89c223440a84",
+    "text": "{{name}}：新加入收藏，零星"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "46a90ba16847e5abe8ae9809dfda28f49c8a0834b9880c9a05e84bc7140cdc11",
+    "text": "{{name}}：从 {{rank}} 星升至 {{next}} 星，最高 {{maximum}} 星"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "dfec461a869d311a8ec8c78b1ecb838ba0ef44dc7d19b233184fa4d54727a98c",
+    "text": "招募页面"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "75abfbefd44b69bdae2ef692b77b5c669982fe44c094f1427290215da5375930",
+    "text": "跳过"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "6f14bf3366f8ef6025a7dbd056d65145ea17b6fb7b92e7ec95b2cd3745bbe212",
+    "text": "胜利"
+  }
+}

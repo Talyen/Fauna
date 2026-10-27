@@ -1,0 +1,140 @@
+{
+  "collection.all": {
+    "reviewed": true,
+    "source": "All",
+    "sourceHash": "5b4361ccfb68340dbf44fda8e9bcacfae1d96c9bfa74fc5da542bf4cb8c26494",
+    "text": "Все"
+  },
+  "collection.collected": {
+    "reviewed": true,
+    "source": "Collected",
+    "sourceHash": "e4421d58ac9f105b3cb4f1a95096a617686a2bc83461877cca04335262632d80",
+    "text": "Собраны"
+  },
+  "collection.empty": {
+    "reviewed": true,
+    "source": "No creatures in this view",
+    "sourceHash": "f270792afdda00f34378991cb7f3dce7ab6766f03021fbc1ef66d5e10db93b98",
+    "text": "В этом разделе нет существ"
+  },
+  "collection.filter": {
+    "reviewed": true,
+    "source": "Collection filter",
+    "sourceHash": "2149bbef853397a92baf3dd252e31a9c75bb4c6095da9246610f42c42a2d5068",
+    "text": "Фильтр коллекции"
+  },
+  "collection.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
+    "text": "Осмотреть: {{name}}"
+  },
+  "collection.locked": {
+    "reviewed": true,
+    "source": "Locked species",
+    "sourceHash": "6a4cf465ea4c6484527330869b25557ce9bdb9e21ef522b5fbba532b42551a44",
+    "text": "Неоткрытый вид"
+  },
+  "collection.pages": {
+    "reviewed": true,
+    "source": "Collection pages",
+    "sourceHash": "4dd72ff441e3ec46f265fc446ddec96c8b7b2472f39cf77bee13beb54736a7b1",
+    "text": "Страницы коллекции"
+  },
+  "collection.stars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} of {{maximum}} stars",
+    "sourceHash": "5af8ee83d84466d0d9d95245e89a0ac06e105819e94e2a54e54a73801b6483eb",
+    "text": "{{name}}: {{rank}} из {{maximum}} звёзд"
+  },
+  "collection.uncollected": {
+    "reviewed": true,
+    "source": "Uncollected",
+    "sourceHash": "adba27a0f1e9cbed76c38b3be0189fbce42ed018545f52f6402c4bbe19704bfc",
+    "text": "Не собраны"
+  },
+  "creature.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
+    "text": "Осмотреть: {{name}}"
+  },
+  "creature.recruit": {
+    "reviewed": true,
+    "source": "Recruit {{name}}",
+    "sourceHash": "4bbc71441ff352ca8820ce2c4b2f30ac5eaa6b049a28ea07dc7bce82c49fc206",
+    "text": "Призвать: {{name}}"
+  },
+  "creature.recruitAction": {
+    "reviewed": true,
+    "source": "Recruit",
+    "sourceHash": "e30321c9335b247e0c869475df74992e1061af69ccf1435dab62d53402ffb510",
+    "text": "Призвать"
+  },
+  "draft.choose": {
+    "reviewed": true,
+    "source": "Choose your starter",
+    "sourceHash": "2eac3f4d62e5c53a7f5df11e6fbbf56a415314b0bf24087fb10adeb5560836e5",
+    "text": "Выберите первое существо"
+  },
+  "draft.selected": {
+    "reviewed": true,
+    "source": "Selected",
+    "sourceHash": "7ea453fa3a2be68085d8da4cc46a4d0dd02a68214149b5221e07bfc27dfc69fe",
+    "text": "Выбрано"
+  },
+  "draft.team": {
+    "reviewed": true,
+    "source": "Your starter team",
+    "sourceHash": "fae9b7eda36947cf609c1cea558671cf3c26b88309a7cf9fbc5ef62daa80ef26",
+    "text": "Ваша стартовая команда"
+  },
+  "rewards.chooseBoon": {
+    "reviewed": true,
+    "source": "Choose a Boon",
+    "sourceHash": "2b4c282d41e60812d45afe89dc2c63e12ecf7d6d660f15504ef215abed9d1e3b",
+    "text": "Выберите благословение"
+  },
+  "rewards.chooseRecruit": {
+    "reviewed": true,
+    "source": "Choose a Recruit",
+    "sourceHash": "ac5be7863b2253b758900c6cdd535451bcf69b1004ae85fc4d0303532deef850",
+    "text": "Выберите существо"
+  },
+  "rewards.new": {
+    "reviewed": true,
+    "source": "New!",
+    "sourceHash": "95d987fe228db9ec6612aac88789b4b9c2d83865a649f16db51d4584da0fcd41",
+    "text": "Новое!"
+  },
+  "rewards.newStars": {
+    "reviewed": true,
+    "source": "{{name}}: New to Collection, zero stars",
+    "sourceHash": "7350e6697019620b0611d7fe6e242d2584f46ea066e8608832db4540fac72a53",
+    "text": "{{name}}: новое в коллекции, ноль звёзд"
+  },
+  "rewards.nextStars": {
+    "reviewed": true,
+    "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
+    "sourceHash": "737575256fb34390e0644b3228b7b8dfc5b4d1f921f5f508e59c7d908618975a",
+    "text": "{{name}}: с {{rank}} до {{next}} из {{maximum}} звёзд"
+  },
+  "rewards.recruitPages": {
+    "reviewed": true,
+    "source": "Recruit pages",
+    "sourceHash": "8c3b270aeef73886a742a0e58e50168d21d97f294f41e390a46df493e3227b38",
+    "text": "Страницы существ"
+  },
+  "rewards.skip": {
+    "reviewed": true,
+    "source": "Skip",
+    "sourceHash": "b5de5806b02f7d1c06603fcce9ef31bdf5f685b1969099c11922d336824c2465",
+    "text": "Пропустить"
+  },
+  "rewards.victory": {
+    "reviewed": true,
+    "source": "Victory",
+    "sourceHash": "c9b719a5f44e7be100ce5f116bb39c5a1edfc6a590123855c7a84856d3a63205",
+    "text": "Победа"
+  }
+}

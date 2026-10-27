@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PageControls, usePagination, useGridColumns } from "../shared/navigation/pagination";
 
@@ -29,6 +30,7 @@ export function Collection({
   openMenu: () => void;
   inspect: (item: Inspection) => void;
 }) {
+  const i18n = useMessages();
   const showCreature = (kind: SpeciesId) => inspect({ species: kind, speciesKit: true });
   useLayoutEffect(() => {
     controlsRef.current = (action) => {
@@ -78,7 +80,7 @@ export function Collection({
       >
         <header className="collection-heading">
           <ScreenHeading back={openMenu} openMenu={openMenu}>
-            Collection
+            {i18n.message("menu.collection", "Collection")}
           </ScreenHeading>
         </header>
         <Tabs
@@ -88,18 +90,18 @@ export function Collection({
             setFilter(value);
           }}
         >
-          <TabsList aria-label="Collection filter">
+          <TabsList aria-label={i18n.message("collection.filter", "Collection filter")}>
             <TabsTrigger value="all">
               <LayoutGrid aria-hidden="true" />
-              All
+              {i18n.message("collection.all", "All")}
             </TabsTrigger>
             <TabsTrigger value="known">
               <BookOpen aria-hidden="true" />
-              Collected
+              {i18n.message("collection.collected", "Collected")}
             </TabsTrigger>
             <TabsTrigger value="unknown">
               <LockKeyhole aria-hidden="true" />
-              Uncollected
+              {i18n.message("collection.uncollected", "Uncollected")}
             </TabsTrigger>
           </TabsList>
           <TabsContent className="collection-content" value={filter}>
@@ -113,12 +115,22 @@ export function Collection({
                         kind={creature.id}
                         onClick={() => showCreature(creature.id)}
                         onInspect={() => showCreature(creature.id)}
-                        label={`Inspect ${creature.name}`}
+                        label={i18n.message("collection.inspect", "Inspect {{name}}", {
+                          name: i18n.content(`content.species.${creature.id}.name`, creature.name),
+                        })}
                       />
                       <span
                         className="collection-stars"
                         role="img"
-                        aria-label={`${creature.name}: ${creatureStars(game, creature.id)} of ${MAX_CREATURE_STARS} stars`}
+                        aria-label={i18n.message(
+                          "collection.stars",
+                          "{{name}}: {{rank}} of {{maximum}} stars",
+                          {
+                            name: i18n.content(`content.species.${creature.id}.name`, creature.name),
+                            rank: creatureStars(game, creature.id),
+                            maximum: MAX_CREATURE_STARS,
+                          },
+                        )}
                       >
                         {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
                           <Star
@@ -135,13 +147,15 @@ export function Collection({
                         aspect="creature"
                         artwork={assetUrl(`creature.${creature.id}`)}
                         presentation
-                        aria-label="Locked species"
+                        aria-label={i18n.message("collection.locked", "Locked species")}
                       />
                     </div>
                   ),
                 )}
               </div>
-              {ordered.length === 0 ? <EmptyState label="No creatures in this view" /> : null}
+              {ordered.length === 0 ? (
+                <EmptyState label={i18n.message("collection.empty", "No creatures in this view")} />
+              ) : null}
             </div>
             <div className="collection-pagination">
               {totalPages > 1 ? (
@@ -149,7 +163,7 @@ export function Collection({
                   page={activePage}
                   pages={totalPages}
                   change={change}
-                  label="Collection pages"
+                  label={i18n.message("collection.pages", "Collection pages")}
                   showCount={false}
                 />
               ) : null}

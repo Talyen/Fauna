@@ -3,6 +3,8 @@ import { afterEach, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { produce } from "immer";
+import { MessageProvider } from "../../../src/ui/shared/localization/message-context";
+import french from "../../../src/ui/shared/localization/locales/fr.json";
 import { Collection } from "../../../src/ui/collection/collection";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { createGame } from "../../../src/game/engine";
@@ -169,4 +171,29 @@ it("remembers each filter's page and retains its first visible creature when cap
   expect(screen.getByRole("tab", { name: "All" }).getAttribute("aria-selected")).toBe("true");
   expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(anchor);
   expect(document.activeElement).toBe(screen.getByRole("button", { name: anchor }));
+});
+
+it("uses localized collection controls while inspection retains the creature identity", async () => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      disconnect() {}
+    },
+  );
+  const game = produce(createGame(), (draft) => {
+    draft.discovery.recruited = { mossguard: 3 };
+  });
+  const inspect = vi.fn();
+  render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TooltipProvider>
+        <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} inspect={inspect} />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("tab", { name: "Collectionnées" })).toBeTruthy();
+  expect(screen.getByRole("img", { name: "Mossguard : 2 étoiles sur 5" })).toBeTruthy();
+  await userEvent.click(screen.getByRole("button", { name: "Examiner Mossguard" }));
+  expect(inspect).toHaveBeenCalledWith({ species: "mossguard", speciesKit: true });
 });

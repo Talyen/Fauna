@@ -77,11 +77,56 @@
   "boons.pages": {
     "text": "Boon pages"
   },
+  "collection.all": {
+    "text": "All"
+  },
+  "collection.collected": {
+    "text": "Collected"
+  },
+  "collection.empty": {
+    "text": "No creatures in this view"
+  },
+  "collection.filter": {
+    "text": "Collection filter"
+  },
+  "collection.inspect": {
+    "text": "Inspect {{name}}"
+  },
+  "collection.locked": {
+    "text": "Locked species"
+  },
+  "collection.pages": {
+    "text": "Collection pages"
+  },
+  "collection.stars": {
+    "text": "{{name}}: {{rank}} of {{maximum}} stars"
+  },
+  "collection.uncollected": {
+    "text": "Uncollected"
+  },
   "common.cancel": {
     "text": "Cancel"
   },
   "common.loading": {
     "text": "Loading…"
+  },
+  "creature.inspect": {
+    "text": "Inspect {{name}}"
+  },
+  "creature.recruit": {
+    "text": "Recruit {{name}}"
+  },
+  "creature.recruitAction": {
+    "text": "Recruit"
+  },
+  "draft.choose": {
+    "text": "Choose your starter"
+  },
+  "draft.selected": {
+    "text": "Selected"
+  },
+  "draft.team": {
+    "text": "Your starter team"
   },
   "glossary.controllerHelp": {
     "text": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu"
@@ -253,6 +298,30 @@
   },
   "replacement.knockedOutCreature": {
     "text": "{{creature}}, knocked out"
+  },
+  "rewards.chooseBoon": {
+    "text": "Choose a Boon"
+  },
+  "rewards.chooseRecruit": {
+    "text": "Choose a Recruit"
+  },
+  "rewards.new": {
+    "text": "New!"
+  },
+  "rewards.newStars": {
+    "text": "{{name}}: New to Collection, zero stars"
+  },
+  "rewards.nextStars": {
+    "text": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars"
+  },
+  "rewards.recruitPages": {
+    "text": "Recruit pages"
+  },
+  "rewards.skip": {
+    "text": "Skip"
+  },
+  "rewards.victory": {
+    "text": "Victory"
   },
   "settings.audio": {
     "text": "Audio"
