@@ -1559,6 +1559,12 @@
     "sourceHash": "189bf866fba0362ca385d156b14f806dee3120ced5d9b729779ea30defbe6b87",
     "text": "1ターンおきに<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.oathara.trait": {
+    "reviewed": true,
+    "source": "Unfinished Journey",
+    "sourceHash": "e3eab89683393ea346a21c7ba1c00818d9d56ad35821feb2392472a00f869e94",
+    "text": "未完の旅"
+  },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to draw an extra card each turn",
@@ -2962,6 +2968,72 @@
     "source": "Deck pages",
     "sourceHash": "5b719238f89915ddbfbd8d29d7f3370a9b873714d9b2f4a7b7a72605d93b51cf",
     "text": "デッキのページ"
+  },
+  "denial.actorKnockedOut": {
+    "reviewed": true,
+    "source": "That creature is knocked out.",
+    "sourceHash": "1e931cdb85c623a3cb40684a5849889c6a90964df26dcaeb3bde252b6e7ac82e",
+    "text": "そのクリーチャーは戦闘不能です。"
+  },
+  "denial.cardNotInHand": {
+    "reviewed": true,
+    "source": "That card is not in your hand.",
+    "sourceHash": "1a3b553cffd609fb75e6cf76b8aedcf20657f972e03a41204f176118e66fd5e1",
+    "text": "そのカードは手札にありません。"
+  },
+  "denial.frozen": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Frozen.",
+    "sourceHash": "78c4bda8d7a3cc7f01fa36696d17d916e17a63fdbc473ffd68b5a8f857bf5dce",
+    "text": "{{name}}は凍結中に行動できません。"
+  },
+  "denial.noDiscardCards": {
+    "reviewed": true,
+    "source": "There are no eligible ally cards in Discard.",
+    "sourceHash": "709671ae05a4c7e59745920ed9edd1941ca3c25a76038e05d01cc9bc95d61935",
+    "text": "捨て札に対象となる味方のカードがありません。"
+  },
+  "denial.noInjuredAllies": {
+    "reviewed": true,
+    "source": "There are no injured allies.",
+    "sourceHash": "45a4fea7ca9564b19b33c1b218f205410e1abdcee9bb2b4b73ea337a227ab150",
+    "text": "負傷した味方がいません。"
+  },
+  "denial.noKnockedOutAllies": {
+    "reviewed": true,
+    "source": "There are no knocked-out allies.",
+    "sourceHash": "eb06490da5cba1f42d9ef993da498d686eb8ea20d3c89aa8b6eead443ab2ece9",
+    "text": "戦闘不能の味方がいません。"
+  },
+  "denial.noLivingBackups": {
+    "reviewed": true,
+    "source": "There are no living backups.",
+    "sourceHash": "649aefb4a410a1038c500bd561974e16612340226d5da489657ed4af729389e8",
+    "text": "生存している控えがいません。"
+  },
+  "denial.notEnoughMana": {
+    "reviewed": true,
+    "source": "Not enough Mana.",
+    "sourceHash": "62e37228fcb1c80de008e0f76c697194293fd65f6d6fe58b27cea511c37f395d",
+    "text": "マナが足りません。"
+  },
+  "denial.skipped": {
+    "reviewed": true,
+    "source": "{{name}} cannot act this turn.",
+    "sourceHash": "8630ed935fe86c6443bc9112955473ca1a2cbbf9ac5f495083066a7dbdf64f4d",
+    "text": "{{name}}はこのターンに行動できません。"
+  },
+  "denial.stunned": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Stunned.",
+    "sourceHash": "b843fd379c87a586240984c07524fe180d0cbcd498f1caa23f4017f3a5ed617a",
+    "text": "{{name}}はスタン中に行動できません。"
+  },
+  "denial.unfinishedJourney": {
+    "reviewed": true,
+    "source": "{{trait}}’s limit is spent this turn.",
+    "sourceHash": "85d5649d943f4fcc2f4878986bf31a9c590e8c4462bb55fd588acf2b6afa7cb8",
+    "text": "今ターンの{{trait}}の上限に達しました。"
   },
   "draft.choose": {
     "reviewed": true,

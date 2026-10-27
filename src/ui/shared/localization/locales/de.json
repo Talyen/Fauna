@@ -1559,6 +1559,12 @@
     "sourceHash": "9d0e3708cc87d94088b36a0d0b9d34349ac1cec9995895109583820597a44371",
     "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.species.oathara.trait": {
+    "reviewed": true,
+    "source": "Unfinished Journey",
+    "sourceHash": "37392bd985abd09715272ff2ced4b21e33c6465fa261a4a63be1e41761fa4a3c",
+    "text": "Unvollendete Reise"
+  },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to draw an extra card each turn",
@@ -2962,6 +2968,72 @@
     "source": "Deck pages",
     "sourceHash": "2105a9d578c4a72449e6483f3ad3a39af9afa59e23cdd223f2790f624f1622eb",
     "text": "Deckseiten"
+  },
+  "denial.actorKnockedOut": {
+    "reviewed": true,
+    "source": "That creature is knocked out.",
+    "sourceHash": "0d518b5e493ffcfe87b031c1f59c478eba34c0d5e02086768dc28c252000bfdc",
+    "text": "Diese Kreatur ist ausgeschaltet."
+  },
+  "denial.cardNotInHand": {
+    "reviewed": true,
+    "source": "That card is not in your hand.",
+    "sourceHash": "0f8ab23816d4aec31c2abb05e96de7783b31fec319f1ee3f36e749b4ffeabe4e",
+    "text": "Diese Karte ist nicht auf deiner Hand."
+  },
+  "denial.frozen": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Frozen.",
+    "sourceHash": "89b377839088d8002b726958dfc27bc389e2fabf9a1c9c0f0e847693a5a8f88e",
+    "text": "{{name}} kann im eingefrorenen Zustand nicht handeln."
+  },
+  "denial.noDiscardCards": {
+    "reviewed": true,
+    "source": "There are no eligible ally cards in Discard.",
+    "sourceHash": "117a1f47ab754868a0cc8de2a994414e2f6e312ef1aa9238508e742818ac327a",
+    "text": "Im Ablagestapel liegen keine geeigneten Karten von Verbündeten."
+  },
+  "denial.noInjuredAllies": {
+    "reviewed": true,
+    "source": "There are no injured allies.",
+    "sourceHash": "3ecf2e7864a3acc14ca20932a8874339bea923bc026dc6c8c8f3f1ad0320482d",
+    "text": "Es gibt keine verletzten Verbündeten."
+  },
+  "denial.noKnockedOutAllies": {
+    "reviewed": true,
+    "source": "There are no knocked-out allies.",
+    "sourceHash": "932c84b9647ac3c73c5a199fabfab8d08ca192f47a0bfb07049da1949ae8038b",
+    "text": "Es gibt keine ausgeschalteten Verbündeten."
+  },
+  "denial.noLivingBackups": {
+    "reviewed": true,
+    "source": "There are no living backups.",
+    "sourceHash": "c6715ef9beab07738e888f8ac053c2c05598f626bed75a7389669bdb0269d4aa",
+    "text": "Es gibt keine lebenden Kreaturen in der Reserve."
+  },
+  "denial.notEnoughMana": {
+    "reviewed": true,
+    "source": "Not enough Mana.",
+    "sourceHash": "a61730a70455be324f2ce4dcd1f700d71975de96f3f2f8b42006b9735e131580",
+    "text": "Nicht genug Mana."
+  },
+  "denial.skipped": {
+    "reviewed": true,
+    "source": "{{name}} cannot act this turn.",
+    "sourceHash": "fb0edb8f61dc485528d329c90ee612895d4427f96fc11b0fefe705c8b40b6ffb",
+    "text": "{{name}} kann in diesem Zug nicht handeln."
+  },
+  "denial.stunned": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Stunned.",
+    "sourceHash": "3efc37f42f2888e16a2bcf3bfc85970647d831de42c8c1069ec76a3bf3f841c4",
+    "text": "{{name}} kann im betäubten Zustand nicht handeln."
+  },
+  "denial.unfinishedJourney": {
+    "reviewed": true,
+    "source": "{{trait}}’s limit is spent this turn.",
+    "sourceHash": "376a938f2c750cb8b5554653d514b551cee6f2f72aab9190fd4f288b0cead3fb",
+    "text": "Das Limit von {{trait}} ist für diesen Zug ausgeschöpft."
   },
   "draft.choose": {
     "reviewed": true,

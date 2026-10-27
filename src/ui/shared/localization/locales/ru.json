@@ -1559,6 +1559,12 @@
     "sourceHash": "fc61f5df637b43ecff46933ed190b524c0cf239bf309ef2e769f9dc6d7b59e7b",
     "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
   },
+  "content.species.oathara.trait": {
+    "reviewed": true,
+    "source": "Unfinished Journey",
+    "sourceHash": "ab11349a3d7ebe1611e7679ac8f019df9cce6b6a97d41ccf98ba697974db2ecd",
+    "text": "Незавершённое путешествие"
+  },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to draw an extra card each turn",
@@ -2962,6 +2968,72 @@
     "source": "Deck pages",
     "sourceHash": "25cf7bfd96f89479bf4d0e3a40a62a2b4f0a3ef5f218230bd6158fefe66855a1",
     "text": "Страницы колоды"
+  },
+  "denial.actorKnockedOut": {
+    "reviewed": true,
+    "source": "That creature is knocked out.",
+    "sourceHash": "d1e74a75dbcd0ce723880ae791dd479a3ebf498ad28e890ff5cefcfc7c00fa91",
+    "text": "Это существо без сознания."
+  },
+  "denial.cardNotInHand": {
+    "reviewed": true,
+    "source": "That card is not in your hand.",
+    "sourceHash": "310ab2045c32a0d3b67a36f2914d0e7e772f06e6c3c60eaf5af74c080410babe",
+    "text": "Этой карты нет у вас в руке."
+  },
+  "denial.frozen": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Frozen.",
+    "sourceHash": "2112a9daff67cc58ae9eed88d152990adf028a8bf113e7a20bc2c1bd0454b6bf",
+    "text": "{{name}} не может действовать в состоянии заморозки."
+  },
+  "denial.noDiscardCards": {
+    "reviewed": true,
+    "source": "There are no eligible ally cards in Discard.",
+    "sourceHash": "568d7d095ce97b95ce69425de0439ed0e2da55216eb94189acc0205253ac3541",
+    "text": "В сбросе нет подходящих карт союзников."
+  },
+  "denial.noInjuredAllies": {
+    "reviewed": true,
+    "source": "There are no injured allies.",
+    "sourceHash": "30f4d2d40b1413c7b7a5ea89774dd23e13a7053ab4dd03a0e70e402414657b28",
+    "text": "Нет раненых союзников."
+  },
+  "denial.noKnockedOutAllies": {
+    "reviewed": true,
+    "source": "There are no knocked-out allies.",
+    "sourceHash": "4f5cbc5d168d46e30b71ecc4345ff6a4c873d07099c6c47a2b21d2809846ca25",
+    "text": "Нет союзников без сознания."
+  },
+  "denial.noLivingBackups": {
+    "reviewed": true,
+    "source": "There are no living backups.",
+    "sourceHash": "db0f262727bf3c7e9e14981a4d02d8e30259c276b1de9b0cf4fbb43cdffb92ed",
+    "text": "В запасе нет живых существ."
+  },
+  "denial.notEnoughMana": {
+    "reviewed": true,
+    "source": "Not enough Mana.",
+    "sourceHash": "e8cfe426363d08e82e08a629387f5076b3c2609057efbf859f4dcfa462d0b6f5",
+    "text": "Недостаточно маны."
+  },
+  "denial.skipped": {
+    "reviewed": true,
+    "source": "{{name}} cannot act this turn.",
+    "sourceHash": "729f894c43c9e4630fd0aaa21ab1a890688a58610f0fef85893b34f1da498bb2",
+    "text": "{{name}} не может действовать в этом ходу."
+  },
+  "denial.stunned": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Stunned.",
+    "sourceHash": "4816ae37f822644d342cb51a6a2a10158f5c79b5eec2cc7f93e3eed4ce8b0f02",
+    "text": "{{name}} не может действовать в состоянии оглушения."
+  },
+  "denial.unfinishedJourney": {
+    "reviewed": true,
+    "source": "{{trait}}’s limit is spent this turn.",
+    "sourceHash": "ab1014565c9b687e2e5866ba1c9e8018e8e04db46a7d304218906395750d5d51",
+    "text": "Лимит «{{trait}}» на этот ход исчерпан."
   },
   "draft.choose": {
     "reviewed": true,

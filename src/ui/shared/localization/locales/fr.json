@@ -1607,6 +1607,12 @@
     "sourceHash": "ab867c2bf9553aac537b1b698f076e616acfc024a6a85f99c10af008353df15f",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
   },
+  "content.species.oathara.trait": {
+    "reviewed": true,
+    "source": "Unfinished Journey",
+    "sourceHash": "24081bedc28a2666cc8b7f032f6cdea569e840644c444b33b834d0b7cbdd1312",
+    "text": "Voyage inachevé"
+  },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to draw an extra card each turn",
@@ -3010,6 +3016,72 @@
     "source": "Deck pages",
     "sourceHash": "7a5f7dcd9ec5e579a961bc78aad365eb2014ed7adfb5bfb71a6dc15e2d2eee9a",
     "text": "Pages du deck"
+  },
+  "denial.actorKnockedOut": {
+    "reviewed": true,
+    "source": "That creature is knocked out.",
+    "sourceHash": "bd88e724e4a62977b312188df60cc15d3ef623c5b553b38e9328afc46f199561",
+    "text": "Cette créature est K.-O."
+  },
+  "denial.cardNotInHand": {
+    "reviewed": true,
+    "source": "That card is not in your hand.",
+    "sourceHash": "bb1c88420444f36e27dfc7e65e5aa870c728e4e3bfaac8919c75cae8d804825f",
+    "text": "Cette carte n’est pas dans votre main."
+  },
+  "denial.frozen": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Frozen.",
+    "sourceHash": "5b18b28960be4a5930f40f97c77dc2b412f07e2d2404d2551fa0e2651e274c71",
+    "text": "{{name}} ne peut pas agir sous l’effet du Gel."
+  },
+  "denial.noDiscardCards": {
+    "reviewed": true,
+    "source": "There are no eligible ally cards in Discard.",
+    "sourceHash": "b5324903fa1dc46214cb191e5ab300d812218d02cab319d518786d61391a5f6e",
+    "text": "Aucune carte alliée admissible dans la défausse."
+  },
+  "denial.noInjuredAllies": {
+    "reviewed": true,
+    "source": "There are no injured allies.",
+    "sourceHash": "1a0f8add089c2f14dda4aebbb0097dce4d6edfa523517424463490b32a891da5",
+    "text": "Aucun allié blessé."
+  },
+  "denial.noKnockedOutAllies": {
+    "reviewed": true,
+    "source": "There are no knocked-out allies.",
+    "sourceHash": "04a68c35e5d89ec8c98036aeba213ddb9ace8faa74fb913890a0f511bba13fa4",
+    "text": "Aucun allié K.-O."
+  },
+  "denial.noLivingBackups": {
+    "reviewed": true,
+    "source": "There are no living backups.",
+    "sourceHash": "79fad030aa179052d86e6c8965d81b7f6d643309ecb1019c725407318a81203d",
+    "text": "Aucune créature en vie dans la réserve."
+  },
+  "denial.notEnoughMana": {
+    "reviewed": true,
+    "source": "Not enough Mana.",
+    "sourceHash": "bea90f3f5aa9bfea00f6050b60e5a0ee4edd7e316361707b841190d4e9d622a5",
+    "text": "Mana insuffisant."
+  },
+  "denial.skipped": {
+    "reviewed": true,
+    "source": "{{name}} cannot act this turn.",
+    "sourceHash": "8ac1d0a420763677de53948378583e7f6540a403a61711c662d819c191a6ef71",
+    "text": "{{name}} ne peut pas agir ce tour-ci."
+  },
+  "denial.stunned": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Stunned.",
+    "sourceHash": "d2b4a695c8a4ac97fe38cab11a0dccd2093fa5c0098a5cb7c65f53b0259a8cdd",
+    "text": "{{name}} ne peut pas agir sous l’effet de l’Étourdissement."
+  },
+  "denial.unfinishedJourney": {
+    "reviewed": true,
+    "source": "{{trait}}’s limit is spent this turn.",
+    "sourceHash": "41ef6af3ee4101c3523a7c793c754e7edb1075fd5054fb3d75bf21b4aa719ea3",
+    "text": "La limite de {{trait}} est atteinte pour ce tour."
   },
   "draft.choose": {
     "reviewed": true,

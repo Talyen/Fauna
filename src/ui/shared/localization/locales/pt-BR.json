@@ -1559,6 +1559,12 @@
     "sourceHash": "81dee4257325ac29b691f7a88efdffbe2578ae491d00a2521958ea4dc0f2228f",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a cada dois turnos"
   },
+  "content.species.oathara.trait": {
+    "reviewed": true,
+    "source": "Unfinished Journey",
+    "sourceHash": "e5333407d3ea77fdef012bf0924d28478bc508b5b1d0cfc971ed0f73f3ce3e6b",
+    "text": "Jornada inacabada"
+  },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to draw an extra card each turn",
@@ -2962,6 +2968,72 @@
     "source": "Deck pages",
     "sourceHash": "d4c8299a09b999fb58720f5a6ac635fcec7c21a1eb537bf1604a573ac22fda68",
     "text": "Páginas do baralho"
+  },
+  "denial.actorKnockedOut": {
+    "reviewed": true,
+    "source": "That creature is knocked out.",
+    "sourceHash": "c99eb535ea89275f917433aa64ec49e60831dbcc9c1e8b1ea9eb0e34f8625e47",
+    "text": "Essa criatura está fora de combate."
+  },
+  "denial.cardNotInHand": {
+    "reviewed": true,
+    "source": "That card is not in your hand.",
+    "sourceHash": "5f98e0b79834c5c039ab2a11d5bac8e6b091b4f2bd5d5356edd1a8f0e378a6a5",
+    "text": "Essa carta não está na sua mão."
+  },
+  "denial.frozen": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Frozen.",
+    "sourceHash": "a8d59936b4efea269fc3e4fe3f05ffce74364d567237aa5d2b0132ebc8a1e474",
+    "text": "{{name}} não pode agir sob Congelamento."
+  },
+  "denial.noDiscardCards": {
+    "reviewed": true,
+    "source": "There are no eligible ally cards in Discard.",
+    "sourceHash": "575c4b5d41be0f6015fc9e1871adc251b2c6ac17115e05e0950b990c0de5d656",
+    "text": "Não há cartas aliadas elegíveis no descarte."
+  },
+  "denial.noInjuredAllies": {
+    "reviewed": true,
+    "source": "There are no injured allies.",
+    "sourceHash": "a29522650b2e1c4df43f92d875a2df77a5355de2f745a7adabff076239bdf6fc",
+    "text": "Não há aliados feridos."
+  },
+  "denial.noKnockedOutAllies": {
+    "reviewed": true,
+    "source": "There are no knocked-out allies.",
+    "sourceHash": "a290a64b9acd10cb2016d856841ce133647903f714d1453db19b46fdb67c1c2a",
+    "text": "Não há aliados fora de combate."
+  },
+  "denial.noLivingBackups": {
+    "reviewed": true,
+    "source": "There are no living backups.",
+    "sourceHash": "1f68ff805ec083d874b36df3ab0d885a37112fdf8bc9c5a51b4c7d4fb01a3dcf",
+    "text": "Não há criaturas vivas na reserva."
+  },
+  "denial.notEnoughMana": {
+    "reviewed": true,
+    "source": "Not enough Mana.",
+    "sourceHash": "0ab819eb81f054d4110b92396884b13beaf78b1244593a833fb3f3a05e1f2336",
+    "text": "Mana insuficiente."
+  },
+  "denial.skipped": {
+    "reviewed": true,
+    "source": "{{name}} cannot act this turn.",
+    "sourceHash": "7360042f07a5f947f603dae3e3597700077b669e00dd31ad1bca2cc08992813a",
+    "text": "{{name}} não pode agir neste turno."
+  },
+  "denial.stunned": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Stunned.",
+    "sourceHash": "f461d91595c20fa826447b2b98ee7993a8f38d15205b5b77bab3d9ab9c634b7f",
+    "text": "{{name}} não pode agir sob Atordoamento."
+  },
+  "denial.unfinishedJourney": {
+    "reviewed": true,
+    "source": "{{trait}}’s limit is spent this turn.",
+    "sourceHash": "cda273f9541127cf19c27037ab3eebe5fa832c52b92de961d4914bf7120eacdc",
+    "text": "O limite de {{trait}} já foi usado neste turno."
   },
   "draft.choose": {
     "reviewed": true,

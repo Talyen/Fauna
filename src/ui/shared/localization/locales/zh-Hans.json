@@ -1559,6 +1559,12 @@
     "sourceHash": "ebd556352efcac5c386465ca6734cf40051bb154b6ab4fb0792fded9d3dba711",
     "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.oathara.trait": {
+    "reviewed": true,
+    "source": "Unfinished Journey",
+    "sourceHash": "bffd48a0289da874309a9d999042f5a8176f4df8c2d83f6e9e4dbbac57de73a7",
+    "text": "未竟之旅"
+  },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to draw an extra card each turn",
@@ -2962,6 +2968,72 @@
     "source": "Deck pages",
     "sourceHash": "db5df1878664092c49053e9a590d3f7d098bba742c7bdef6d8bf121a7d70253c",
     "text": "牌组页面"
+  },
+  "denial.actorKnockedOut": {
+    "reviewed": true,
+    "source": "That creature is knocked out.",
+    "sourceHash": "1745906f73f03007cbf7d30c3173093c872ba32117b955963a4753fc3670777f",
+    "text": "该生物已倒下。"
+  },
+  "denial.cardNotInHand": {
+    "reviewed": true,
+    "source": "That card is not in your hand.",
+    "sourceHash": "a3dd4967526cf53e887699d92da3b5f0c31bbcb9c240241eec98a434c0299a84",
+    "text": "该牌不在你的手牌中。"
+  },
+  "denial.frozen": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Frozen.",
+    "sourceHash": "32a30fff3b547e36185d7aad5b21e1934d6af66cfd809b059e8c2c7fa8263508",
+    "text": "{{name}}处于冻结状态时无法行动。"
+  },
+  "denial.noDiscardCards": {
+    "reviewed": true,
+    "source": "There are no eligible ally cards in Discard.",
+    "sourceHash": "6d0c470d67ea6a2c9738ba5ad7dd96b684214b0835657734336da99265ec6f50",
+    "text": "弃牌堆中没有符合条件的盟友牌。"
+  },
+  "denial.noInjuredAllies": {
+    "reviewed": true,
+    "source": "There are no injured allies.",
+    "sourceHash": "12ee2fca4258868cb893a3b56ceb99541406268dc51368c507fcaa6c50a1339c",
+    "text": "没有受伤的盟友。"
+  },
+  "denial.noKnockedOutAllies": {
+    "reviewed": true,
+    "source": "There are no knocked-out allies.",
+    "sourceHash": "ec9ba013a5902cf40afa9f23b6d59490010d812c5a4dafdfe00737f3499cd5aa",
+    "text": "没有已倒下的盟友。"
+  },
+  "denial.noLivingBackups": {
+    "reviewed": true,
+    "source": "There are no living backups.",
+    "sourceHash": "c2314021de4c99e252e9cac67f361e9940c06d7c9f74f43928f9d616c579c17b",
+    "text": "没有存活的替补。"
+  },
+  "denial.notEnoughMana": {
+    "reviewed": true,
+    "source": "Not enough Mana.",
+    "sourceHash": "eb62f3b6f2720b625f7d9e6b52a5b655e0e292a7208e40e6531668fe32106fbc",
+    "text": "法力不足。"
+  },
+  "denial.skipped": {
+    "reviewed": true,
+    "source": "{{name}} cannot act this turn.",
+    "sourceHash": "4eb5d1c1db5b53b276e51abacf969e814b5635b43bc81749755ab4a9b8c93878",
+    "text": "{{name}}本回合无法行动。"
+  },
+  "denial.stunned": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Stunned.",
+    "sourceHash": "4fbf5dc1a8fb87c11158eff8ccaa7ba9d8a3d343f28d6438e2610c75d5f6180c",
+    "text": "{{name}}处于眩晕状态时无法行动。"
+  },
+  "denial.unfinishedJourney": {
+    "reviewed": true,
+    "source": "{{trait}}’s limit is spent this turn.",
+    "sourceHash": "cb8e15cfd88149938cfbcbb08e0f5d3872c1b6467d3b9bc4ae6ab80c7f9f3ed3",
+    "text": "本回合{{trait}}的次数已用完。"
   },
   "draft.choose": {
     "reviewed": true,

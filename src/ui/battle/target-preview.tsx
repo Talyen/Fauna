@@ -13,12 +13,20 @@ import { BattleReadout } from "../shared/combat/battle-readout";
 import { DamageValue } from "../shared/combat/combat-values";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../game/keywords";
 import { useEffectMetadata } from "../shared/effects/effects";
-export function TargetPreview({ forecast }: { forecast: TargetForecast | undefined }) {
+export function TargetPreview({
+  forecast,
+  displayName,
+}: {
+  forecast: TargetForecast | undefined;
+  displayName?: string;
+}) {
   const i18n = useMessages();
   const translateRule = useRuleTranslator();
   if (!forecast) return null;
-  if (forecast.unresolved || forecast.alternatives) return <ConditionalPreview forecast={forecast} />;
-  const { name, health, previousHealth, block, previousBlock, maxHealth, absorbed, events } = forecast;
+  if (forecast.unresolved || forecast.alternatives)
+    return <ConditionalPreview forecast={forecast} displayName={displayName} />;
+  const { health, previousHealth, block, previousBlock, maxHealth, absorbed, events } = forecast;
+  const name = displayName ?? forecast.name;
   const changes = forecast.changes.map((change) => statusChangeText(change, i18n, translateRule));
   const summary = i18n.message(
     "preview.exact",
@@ -91,7 +99,7 @@ export function TargetPreview({ forecast }: { forecast: TargetForecast | undefin
   );
 }
 
-function ConditionalPreview({ forecast }: { forecast: TargetForecast }) {
+function ConditionalPreview({ forecast, displayName }: { forecast: TargetForecast; displayName?: string }) {
   const i18n = useMessages();
   const translateRule = useRuleTranslator();
   const alternatives = forecast.alternatives ?? [];
@@ -125,7 +133,7 @@ function ConditionalPreview({ forecast }: { forecast: TargetForecast }) {
         "",
       );
   const summary = i18n.message("preview.possibleOutcomes", "Possible outcomes for {{name}}: {{outcomes}}", {
-    name: forecast.name,
+    name: displayName ?? forecast.name,
     outcomes,
   });
   const label = possibleKnockout
