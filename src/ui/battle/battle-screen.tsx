@@ -406,7 +406,11 @@ export function BattleScreen({
                 onClick={() => play({ type: "endTurn" })}
               >
                 <span>{i18n.message("battle.endTurn", "End turn")}</span>
-                {controller ? <span aria-hidden="true">{endTurnPrompt}</span> : null}
+                {controller ? (
+                  <span className="end-turn-prompt" aria-hidden="true">
+                    {endTurnPrompt}
+                  </span>
+                ) : null}
               </Button>
             </div>
             <div className="battle-pile">

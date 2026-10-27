@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { parseSync } from "@swc/core";
-import { keywordPattern, templateFor } from "./boon-rules.mjs";
+import { keywordPattern, templateFor, walk } from "./boon-rules.mjs";
 import { cardRuleVariantId } from "../../src/ui/shared/localization/rule-key.mjs";
 import {
   describeCompleteCard,
@@ -10,6 +10,83 @@ import {
   readKeywordLabels,
   readSupplementalPolicies,
 } from "./card-model.mjs";
+
+// Values and room power vary at runtime. The sampled forms cover equality to 1
+// and its complement; reject new numeric branches until extraction covers them.
+function checkDynamicBranches(ability, supplemental, policies) {
+  const branchTest = (node) => {
+    if (["ConditionalExpression", "IfStatement"].includes(node.type)) return node.test;
+    if (node.type !== "BinaryExpression") return undefined;
+    if (["&&", "||", "??"].includes(node.operator)) return node.left;
+    if (["===", "!==", "==", "!=", ">", ">=", "<", "<="].includes(node.operator)) return node;
+    return undefined;
+  };
+  const references = (node, names) => {
+    if (!node || typeof node !== "object") return false;
+    if (node.type === "Identifier") return names.has(node.value);
+    if (node.type === "MemberExpression")
+      return (
+        references(node.object, names) ||
+        (node.property?.type === "Computed" && references(node.property.expression, names))
+      );
+    return Object.entries(node).some(
+      ([key, value]) =>
+        key !== "span" &&
+        (Array.isArray(value) ? value.some((item) => references(item, names)) : references(value, names)),
+    );
+  };
+  for (const [id, fn] of Object.entries(ability)) {
+    const dynamic = new Set(["value", "power", "level"]);
+    let size;
+    do {
+      size = dynamic.size;
+      walk(fn, (node) => {
+        if (
+          node.type === "VariableDeclarator" &&
+          node.id?.type === "Identifier" &&
+          references(node.init, dynamic)
+        )
+          dynamic.add(node.id.value);
+        if (
+          node.type === "AssignmentExpression" &&
+          node.left?.type === "Identifier" &&
+          references(node.right, dynamic)
+        )
+          dynamic.add(node.left.value);
+      });
+    } while (dynamic.size !== size);
+    walk(fn, (node) => {
+      const test = branchTest(node);
+      if (!test || !references(test, dynamic)) return;
+      if (
+        test?.type !== "BinaryExpression" ||
+        test.operator !== "===" ||
+        test.left?.type !== "Identifier" ||
+        !["value", "power"].includes(test.left.value) ||
+        test.right?.type !== "NumericLiteral" ||
+        test.right.value !== 1
+      )
+        throw new Error(`Unsupported dynamic card branch: ${id}`);
+    });
+  }
+  for (const [id, fn] of Object.entries(supplemental)) {
+    if (policies[id]?.scaling !== "power") continue;
+    walk(fn, (node) => {
+      const test = branchTest(node);
+      if (!test) return;
+      let amount = false;
+      walk(test, (part) => {
+        if (
+          part.type === "MemberExpression" &&
+          part.object?.value === "effect" &&
+          part.property?.value === "amount"
+        )
+          amount = true;
+      });
+      if (amount) throw new Error(`Unsupported scaled supplemental branch: ${id}`);
+    });
+  }
+}
 
 /** Catalog every authored card's known player and enemy rule form using its actual DSL. */
 export function extractCardVariants(files, sources, keywordSource) {
@@ -30,6 +107,10 @@ export function extractCardVariants(files, sources, keywordSource) {
     },
   );
   if (core.length !== 3) throw new Error("Missing card rule owner");
+  const cardText = core
+    .map((node) => (node.type === "ExportDeclaration" ? node.declaration : node))
+    .find((node) => node.identifier?.value === "cardText");
+  checkDynamicBranches({ ...ability, cardText }, supplemental, policies);
   const normalize = (value) =>
     JSON.stringify(value, (key, item) => (["span", "ctxt", "raw"].includes(key) ? undefined : item));
   const scaleAst = parseSync(sources.contracts, { syntax: "typescript", target: "es2022" })

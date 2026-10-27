@@ -88,11 +88,28 @@
   max-width: calc(var(--battle-pile-width) + var(--page-inline-gutter) * 2);
 }
 .battle-actions > .end-turn {
+  position: relative;
   max-width: 100%;
   height: auto;
   min-height: var(--control-height);
   white-space: normal;
-  flex-wrap: wrap;
+}
+.end-turn-prompt {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--muted-foreground);
+  border-radius: 50%;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: var(--text-secondary);
+  line-height: 1;
+  transform: translate(30%, -30%);
+  pointer-events: none;
 }
 .hand {
   display: flex;
