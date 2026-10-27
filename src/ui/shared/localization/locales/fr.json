@@ -911,6 +911,108 @@
     "sourceHash": "392034dfd6e2306279671a8e635a19bee8e65cd79e5eab0d3a2a277b09ef71ab",
     "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tour"
   },
+  "content.talent.armor.armored-surge.name": {
+    "reviewed": true,
+    "source": "Armored Surge",
+    "sourceHash": "c87a54709e14d4d0db9521745c25e05942b74014868dbe6cf20308d5a222b9f0",
+    "text": "Élan blindé"
+  },
+  "content.talent.armor.armored-surge.rule": {
+    "reviewed": true,
+    "source": "Playing a <keyword0>Block</keyword0> card has a {{value0}}% chance to grant {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "3f6af0d0ab74af28a10c0156ab2517b00e97788b30e85c6e272ba3bc161265fe",
+    "text": "Jouer une carte <keyword0>Blocage</keyword0> a {{value0}}% de chances d'accorder {{value1}} d'<keyword1>Armure</keyword1>"
+  },
+  "content.talent.armor.bulwark.name": {
+    "reviewed": true,
+    "source": "Bulwark",
+    "sourceHash": "a02479973b01ee55fc05c59d9914bcea299001eed3eceaeba5abb9ee4edd0c44",
+    "text": "Rempart"
+  },
+  "content.talent.armor.fireward.name": {
+    "reviewed": true,
+    "source": "Fireward",
+    "sourceHash": "249e083e90fcf1d7b521e3bb978c8572dd21566e6f3aa0e85fef52545fc742da",
+    "text": "Garde-feu"
+  },
+  "content.talent.armor.fireward.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Burn</keyword1> damage taken",
+    "sourceHash": "b6bcd28af16998c0fe172fe564c577a1d91b10fe02991079facda221083a5f72",
+    "text": "L'<keyword0>Armure</keyword0> atténue les dégâts de <keyword1>Brûlure</keyword1> subis"
+  },
+  "content.talent.armor.iron-guard.name": {
+    "reviewed": true,
+    "source": "Iron Guard",
+    "sourceHash": "febd788d436b7841c2535fc5a8b143e0ef563f80555444ee973548e89164408e",
+    "text": "Garde de fer"
+  },
+  "content.talent.armor.iron-guard.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Physical</keyword0> damage has a {{value0}}% chance to also grant that amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "e8693dd6e532cd7c914fa7d5e6f85cdcce33f34ef4606af97b9888cc190db639",
+    "text": "Infliger des dégâts <keyword0>Physiques</keyword0> a {{value0}}% de chances d'accorder aussi autant d'<keyword1>Armure</keyword1>"
+  },
+  "content.talent.armor.last-stand.name": {
+    "reviewed": true,
+    "source": "Last Stand",
+    "sourceHash": "df6092d058164b186dba23f4cfc80e4a8961d396ad500758981a75f470a339cb",
+    "text": "Dernier rempart"
+  },
+  "content.talent.armor.last-stand.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% more <keyword0>Armor</keyword0> while below half <keyword1>Health</keyword1>",
+    "sourceHash": "159cbda6811c94f3b0eb4d037fa9471890f0b41752ef876a8ed060d14bdfd0c2",
+    "text": "Gagnez {{value0}}% d'<keyword0>Armure</keyword0> supplémentaires sous la moitié de votre <keyword1>Santé</keyword1>"
+  },
+  "content.talent.armor.purification.name": {
+    "reviewed": true,
+    "source": "Purification",
+    "sourceHash": "3b43e1da54655687ee51bf91e83dda0dab48eb2f29b230a83df7093a6af73b27",
+    "text": "Purification"
+  },
+  "content.talent.armor.reactive-guard.name": {
+    "reviewed": true,
+    "source": "Reactive Guard",
+    "sourceHash": "269b24e14fa588ffd7d606dd0042590c6120aa6fd333139a9a8219dea80b6b15",
+    "text": "Garde réactive"
+  },
+  "content.talent.armor.reinforced.name": {
+    "reviewed": true,
+    "source": "Reinforced",
+    "sourceHash": "554639ba1a4ad849c7553c974455f252bb029b880008337aaff12e2b9d99f656",
+    "text": "Renforcé"
+  },
+  "content.talent.armor.reinforced.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to double <keyword0>Armor</keyword0> gained",
+    "sourceHash": "4eabb8e231e9f0747fd7fe47b82977c27422e2836e6a44db99b448bf506048ae",
+    "text": "{{value0}}% de chances de doubler l'<keyword0>Armure</keyword0> gagnée"
+  },
+  "content.talent.armor.steadfast.name": {
+    "reviewed": true,
+    "source": "Steadfast",
+    "sourceHash": "62d86011c4b9e595eed13df02997b3087e363c31349cfa17fad31fc835d9d216",
+    "text": "Ferme"
+  },
+  "content.talent.armor.steadfast.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below half, gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "b6890abdaf3bda76125ac7b065ac1787d43b927ba7b76432666b096b82184a1f",
+    "text": "Quand votre <keyword0>Santé</keyword0> passe sous la moitié, gagnez {{value0}} d'<keyword1>Armure</keyword1>"
+  },
+  "content.talent.armor.thick-hide.name": {
+    "reviewed": true,
+    "source": "Thick Hide",
+    "sourceHash": "6eb5f3a14cc2640f69a69f367cabfc1231c5180f219faa265c240f8018763231",
+    "text": "Peau épaisse"
+  },
+  "content.talent.armor.thick-hide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Bleed</keyword1> damage taken",
+    "sourceHash": "bec9f7f225465023861f68f5ef9365bce55fe9c95cf9c336934f9e965a526370",
+    "text": "L'<keyword0>Armure</keyword0> atténue les dégâts de <keyword1>Saignement</keyword1> subis"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

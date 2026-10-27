@@ -173,6 +173,24 @@
     "sourceHash": "c81b6b3d0d35cd62725d20033edf85898a884fe82a321f8119d420107c9b710b",
     "text": "{{owner}} · {{target}}"
   },
+  "boons.choose": {
+    "reviewed": true,
+    "source": "Choose {{name}}",
+    "sourceHash": "91b44ad088d3342529dbb1537b4590ae7773f5f6be8dbaf3eefe2f01ac60bdda",
+    "text": "{{name}}を選ぶ"
+  },
+  "boons.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "854fedc6d662ce02f76b452b07949124d8aa8b0e33a65863ba293870fec89669",
+    "text": "{{name}}を確認"
+  },
+  "boons.pages": {
+    "reviewed": true,
+    "source": "Boon pages",
+    "sourceHash": "22c86d59573db6289012968130a5103f0b98f11febf163cac87207ada70cacda",
+    "text": "祝福のページ"
+  },
   "campfire.creatureHealth": {
     "reviewed": true,
     "source": "{{name}} Health",
@@ -845,6 +863,108 @@
     "sourceHash": "cea38a121bf3d16eb662a21e9598ef84564ba121af980bebcb450387c2c7a134",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
+  "content.talent.armor.armored-surge.name": {
+    "reviewed": true,
+    "source": "Armored Surge",
+    "sourceHash": "9d0d9b3108779e75247a3dfd3735d6b37341d077d2fcce1916ba39c1f9d451fa",
+    "text": "装甲の躍動"
+  },
+  "content.talent.armor.armored-surge.rule": {
+    "reviewed": true,
+    "source": "Playing a <keyword0>Block</keyword0> card has a {{value0}}% chance to grant {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "f9dd57b0560f8942cf6e92e04a746decb6adbff770e16492fd99e817a3e9a2e1",
+    "text": "<keyword0>ブロック</keyword0>カードを使うと{{value0}}%の確率で<keyword1>装甲</keyword1>を{{value1}}得る"
+  },
+  "content.talent.armor.bulwark.name": {
+    "reviewed": true,
+    "source": "Bulwark",
+    "sourceHash": "13af12669a8d4986674eb3c317e05960e50117ecd4a0e76be61ee85c4410bd02",
+    "text": "城壁"
+  },
+  "content.talent.armor.fireward.name": {
+    "reviewed": true,
+    "source": "Fireward",
+    "sourceHash": "a7dbd674a1cd283342fd43deaef0804450698a9a0cfe3e6299bcd2640537af44",
+    "text": "炎の守り"
+  },
+  "content.talent.armor.fireward.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Burn</keyword1> damage taken",
+    "sourceHash": "4a786f4a4a735c0687d262ab0b995b28d38e7c21bb1afa23c046bedd8c0540f1",
+    "text": "<keyword0>装甲</keyword0>が受ける<keyword1>炎上</keyword1>ダメージを軽減する"
+  },
+  "content.talent.armor.iron-guard.name": {
+    "reviewed": true,
+    "source": "Iron Guard",
+    "sourceHash": "9c4cfb7744c747e0c290d1b48c63b313ffc8bba3c529dd9da69f46ef15f1d4d7",
+    "text": "鉄の防御"
+  },
+  "content.talent.armor.iron-guard.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Physical</keyword0> damage has a {{value0}}% chance to also grant that amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "4ab78b45de929467f88285afbb1e3b57fddc868376f0bfba6c7aea0e825c03c8",
+    "text": "<keyword0>物理</keyword0>ダメージを与えると{{value0}}%の確率で同量の<keyword1>装甲</keyword1>も得る"
+  },
+  "content.talent.armor.last-stand.name": {
+    "reviewed": true,
+    "source": "Last Stand",
+    "sourceHash": "8c835ca0bccf7ffabbf87ac83e043e2eb415a9f2fdcacd5db8dbcc1bbd93fdf0",
+    "text": "最後の抵抗"
+  },
+  "content.talent.armor.last-stand.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% more <keyword0>Armor</keyword0> while below half <keyword1>Health</keyword1>",
+    "sourceHash": "15a50d4df96376d4e0970c5a58d2bdd3e97ef3adb6283a780611b8cc5fc7070f",
+    "text": "<keyword1>体力</keyword1>が半分未満の間、得る<keyword0>装甲</keyword0>が{{value0}}%増加する"
+  },
+  "content.talent.armor.purification.name": {
+    "reviewed": true,
+    "source": "Purification",
+    "sourceHash": "40e823f2f15664ed0cad5448feb4edba8ddc858556fdf3ddadbbe8df8167eb17",
+    "text": "清め"
+  },
+  "content.talent.armor.reactive-guard.name": {
+    "reviewed": true,
+    "source": "Reactive Guard",
+    "sourceHash": "acf9dbc4c1c77e252001dbd3f11f4464db301bd0888dedae309e334050f82b35",
+    "text": "反応する守り"
+  },
+  "content.talent.armor.reinforced.name": {
+    "reviewed": true,
+    "source": "Reinforced",
+    "sourceHash": "ac9fe6d586144710f2f74f9cc0de8d9df9a769dd506ef3774b3eb59951751b92",
+    "text": "補強"
+  },
+  "content.talent.armor.reinforced.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to double <keyword0>Armor</keyword0> gained",
+    "sourceHash": "73e5dfe42ec5691e3d7398116d53473738930d33d9c72e4c317999e39ba3ec14",
+    "text": "得る<keyword0>装甲</keyword0>が{{value0}}%の確率で二倍になる"
+  },
+  "content.talent.armor.steadfast.name": {
+    "reviewed": true,
+    "source": "Steadfast",
+    "sourceHash": "dab71bc4107ced82398ecf3267a5446c03e7f0400432cac431d12a18f95233a6",
+    "text": "堅実"
+  },
+  "content.talent.armor.steadfast.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below half, gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "735953c491b3b8a926032e76da1694a3c47b013df3981711caa9f4c9ea7b3adf",
+    "text": "<keyword0>体力</keyword0>が半分未満になると<keyword1>装甲</keyword1>を{{value0}}得る"
+  },
+  "content.talent.armor.thick-hide.name": {
+    "reviewed": true,
+    "source": "Thick Hide",
+    "sourceHash": "6abd6f4db2cd33ea5d39c5fe74a3f8191f8c8ef1f7629213ca1de76fc46c7393",
+    "text": "厚い皮"
+  },
+  "content.talent.armor.thick-hide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Bleed</keyword1> damage taken",
+    "sourceHash": "fa04912d5f7c65518285b726f50a8d898ee86bd59049e709e18d0155fe41710e",
+    "text": "<keyword0>装甲</keyword0>が受ける<keyword1>出血</keyword1>ダメージを軽減する"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -929,6 +1049,42 @@
     "sourceHash": "c3cc4539064d747d94fdbc24ed184d42f2751c1f95d0cef773901380302e74ea",
     "text": "前回の戦闘報酬"
   },
+  "glossary.entries": {
+    "reviewed": true,
+    "source": "Glossary entries",
+    "sourceHash": "f22a188d08416e71c88731b0187884249e1f67da031c6197e398453ccfa05202",
+    "text": "用語一覧"
+  },
+  "glossary.title": {
+    "reviewed": true,
+    "source": "Glossary & controls",
+    "sourceHash": "a4799aed087939ad0f17c792a009d52b6517331efec03988f5bd6f083228b636",
+    "text": "用語と操作"
+  },
+  "inspection.abilities": {
+    "reviewed": true,
+    "source": "Abilities",
+    "sourceHash": "74fcd651f0f0f9efe793b93b6ab6020be449f4481352cd5a7003972ed00fc871",
+    "text": "能力"
+  },
+  "inspection.cardDetails": {
+    "reviewed": true,
+    "source": "{{name}} details",
+    "sourceHash": "631176b231dd25e378d69aaab346a08327d2c3faed63385cdb432de699bb5953",
+    "text": "{{name}}の詳細"
+  },
+  "inspection.stars": {
+    "reviewed": true,
+    "source": "{{rank}} of {{maximum}} stars",
+    "sourceHash": "733b6b5044ba46e27d3afc444f5660ba16d474bd90c791b5da86725793ddd55c",
+    "text": "星{{rank}} / {{maximum}}"
+  },
+  "inspection.trait": {
+    "reviewed": true,
+    "source": "Trait",
+    "sourceHash": "2cabe282e113d0594f1ecc752b9ad04989e308edc5e0c17f31450614cb89ad30",
+    "text": "特性"
+  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
@@ -953,6 +1109,12 @@
     "sourceHash": "6efb73c1a958c170a294361e9450987de86df741758871408be5e802a50f1a0c",
     "text": "遭遇"
   },
+  "menu.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "8a1cbbb686d9cff01bbed189404b2d41b025c4f5f08e3e196d39991814d154fb",
+    "text": "祝福"
+  },
   "menu.collection": {
     "reviewed": true,
     "source": "Collection",
@@ -976,6 +1138,12 @@
     "source": "Glossary",
     "sourceHash": "7df1542c72aa12dcb7de30c23fe6e4c822da4ce74523943d83987f0d0106c3f9",
     "text": "用語集"
+  },
+  "menu.logo": {
+    "reviewed": true,
+    "source": "Fauna logo",
+    "sourceHash": "7f9809e3cebfe0a1e2b4b564f5db4a29963f2c78841099aaa7347654f11cbad7",
+    "text": "Faunaのロゴ"
   },
   "menu.mainMenu": {
     "reviewed": true,
@@ -1007,11 +1175,41 @@
     "sourceHash": "e47edbf7a62bc2a57d2bdcfe7f0008f8cb004efcb26dc1596bf460ed08d3c432",
     "text": "設定"
   },
+  "menu.talents": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "59b56238f018f6ae095a3800570b006ee07b043be33b17b9a737105ca356c99c",
+    "text": "タレント"
+  },
+  "merchant.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "dd5493f5769beb1d5875a7c003d12415fabfbba53fb6f0bdf412ce0f506e8048",
+    "text": "続ける"
+  },
+  "merchant.leave": {
+    "reviewed": true,
+    "source": "Leave",
+    "sourceHash": "e4e5ead8c83d21b792eda400394ee11d2d4bbbfb630d51e96f08f6d2a2190558",
+    "text": "立ち去る"
+  },
   "navigation.back": {
     "reviewed": true,
     "source": "Back",
     "sourceHash": "66d7bd82d62deb418bcb57a8faa95fc319fa61b52dbf3916fe4c8180a6f26fe8",
     "text": "戻る"
+  },
+  "overlay.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "8a1cbbb686d9cff01bbed189404b2d41b025c4f5f08e3e196d39991814d154fb",
+    "text": "祝福"
+  },
+  "overlay.closeBoons": {
+    "reviewed": true,
+    "source": "Close Boons",
+    "sourceHash": "35e2874111f8638d0e77c8bcd9eae3ec7af2e60b3e25cffe42c7513d174536c7",
+    "text": "祝福を閉じる"
   },
   "overlay.deck": {
     "reviewed": true,
@@ -1534,6 +1732,42 @@
     "source": "{{keyword}} {{count}}; {{description}}",
     "sourceHash": "cc4099054fbc1ef2828eec14d18cf4c06039fee7928d9aa928ec499ac4000f14",
     "text": "{{keyword}} {{count}}；{{description}}"
+  },
+  "talents.keywordXp": {
+    "reviewed": true,
+    "source": "{{keyword}} XP",
+    "sourceHash": "7a5d34d409bb550ea0d8b57f4ab44c5ff71bbc5909188e38c71b848d8f5e2123",
+    "text": "{{keyword}}の経験値"
+  },
+  "talents.requiresPoint": {
+    "reviewed": true,
+    "source": "Requires 1 point",
+    "sourceHash": "10639f63e2e999398a2124ec0d88f28c838b65042d5cf5b08c4b784cf86cdb3e",
+    "text": "1ポイント必要"
+  },
+  "talents.requiresPointAndRows": {
+    "reviewed": true,
+    "source": "Requires 1 point and all earlier rows",
+    "sourceHash": "532468f3630e26c35d35db2f60abf46d0478eb1b9f5f0356131cb71fd1a7af98",
+    "text": "1ポイントと前のすべての段が必要"
+  },
+  "talents.requiresRows": {
+    "reviewed": true,
+    "source": "Requires all earlier rows",
+    "sourceHash": "462cdb2839d931c4b2f2b98e05410a25faed738a0287eb545a3f99d396c3b236",
+    "text": "前のすべての段が必要"
+  },
+  "talents.row": {
+    "reviewed": true,
+    "source": "Row {{row}}",
+    "sourceHash": "ebeb8c09a79c14f7572daf394d0280f2d15f0df7788b54e7c88c2ed8bfd2a904",
+    "text": "{{row}}段目"
+  },
+  "talents.unlockOne": {
+    "reviewed": true,
+    "source": "Unlock · 1 point",
+    "sourceHash": "9f9451ac58df00d0f8867961747238372a6087e70a6d9ef377eccf8f60248efa",
+    "text": "解放 · 1ポイント"
   },
   "talents.unlocked": {
     "reviewed": true,

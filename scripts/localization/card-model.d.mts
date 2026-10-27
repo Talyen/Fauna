@@ -12,7 +12,6 @@ export function describeCompleteCard(
   sources: { cardRules: string; abilities: string; supplemental: string },
   labels: Record<string, string>,
 ): string;
-export function readAbilityAdaptations(source: string): Record<string, string>;
 export function enemyCardModel(
   card: Record<string, unknown>,
   abilitiesSource: string,

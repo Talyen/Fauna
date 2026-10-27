@@ -198,11 +198,7 @@ function StatusChangeText({ change }: { change: StatusChange }) {
           after: change.now?.count ?? 0,
         })}
         values={{
-          keyword: (
-            <span className="rule-keyword">
-              <Keyword id={change.id} />
-            </span>
-          ),
+          keyword: <Keyword id={change.id} className="rule-keyword" />,
         }}
       />
     );

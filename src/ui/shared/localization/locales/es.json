@@ -173,6 +173,24 @@
     "sourceHash": "e24821dab31e1361bad3feadb29a1ba6f3dab20769fd6ed183655dcced94a12c",
     "text": "{{owner}} · {{target}}"
   },
+  "boons.choose": {
+    "reviewed": true,
+    "source": "Choose {{name}}",
+    "sourceHash": "6b065b2ffc932fcee97efc8af24daf54710002ec5b8cd6e10a533888c74c1034",
+    "text": "Elegir {{name}}"
+  },
+  "boons.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "b63f326dbd556aadba1750016a40e41fcf7e1ce0261e0ddef29d4c58fbfd495a",
+    "text": "Examinar {{name}}"
+  },
+  "boons.pages": {
+    "reviewed": true,
+    "source": "Boon pages",
+    "sourceHash": "9e73a2834e7bf6cfd4a381a08fa273a375a3c94d8b9d456aa791ae6c0b998420",
+    "text": "Páginas de bendiciones"
+  },
   "campfire.creatureHealth": {
     "reviewed": true,
     "source": "{{name}} Health",
@@ -845,6 +863,108 @@
     "sourceHash": "9f7c42c97f48ee97218b8721dc85d7750ae3a4c7c108ffecf3dda3c3a84021aa",
     "text": "<keyword0>Aturdimiento</keyword0>: {{value0}} turno"
   },
+  "content.talent.armor.armored-surge.name": {
+    "reviewed": true,
+    "source": "Armored Surge",
+    "sourceHash": "eb857c3d9c807037a9c5190d71ee4bdcd267114c16249aba1ed5cea476ccd941",
+    "text": "Oleada acorazada"
+  },
+  "content.talent.armor.armored-surge.rule": {
+    "reviewed": true,
+    "source": "Playing a <keyword0>Block</keyword0> card has a {{value0}}% chance to grant {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "c4b7e28f2255b3561dcc3058d0d61208a12a2b112ee031f27398a8a07eaf16f6",
+    "text": "Jugar una carta de <keyword0>Bloqueo</keyword0> tiene un {{value0}}% de probabilidad de otorgar {{value1}} de <keyword1>Armadura</keyword1>"
+  },
+  "content.talent.armor.bulwark.name": {
+    "reviewed": true,
+    "source": "Bulwark",
+    "sourceHash": "7decd0cb0396746b7a8dd2af5ed06ac74be1c06b94c4b06d368cf107d421f530",
+    "text": "Baluarte"
+  },
+  "content.talent.armor.fireward.name": {
+    "reviewed": true,
+    "source": "Fireward",
+    "sourceHash": "9df1fed401b6f4c33b7774c65f0a42998e4ea9396596c52fb5fc3d67fdefd976",
+    "text": "Resguardo de fuego"
+  },
+  "content.talent.armor.fireward.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Burn</keyword1> damage taken",
+    "sourceHash": "53bb32e5701647f174ae42a3c8ef0258b0c4966cb6df95d76c768de4e9eed15c",
+    "text": "<keyword0>Armadura</keyword0> mitiga el daño de <keyword1>Quemadura</keyword1> recibido"
+  },
+  "content.talent.armor.iron-guard.name": {
+    "reviewed": true,
+    "source": "Iron Guard",
+    "sourceHash": "45e9287f409e1962f9ae64a953fb207cc551ddc14b1c042c342a3d3c55797fcd",
+    "text": "Guardia de hierro"
+  },
+  "content.talent.armor.iron-guard.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Physical</keyword0> damage has a {{value0}}% chance to also grant that amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "5bd3a1ccd900875cb036e32b5a17a0d92db0d436c1cc7dc91593d5060258ef70",
+    "text": "Infligir daño <keyword0>físico</keyword0> tiene un {{value0}}% de probabilidad de otorgar también esa cantidad de <keyword1>Armadura</keyword1>"
+  },
+  "content.talent.armor.last-stand.name": {
+    "reviewed": true,
+    "source": "Last Stand",
+    "sourceHash": "b92876364161753ec6711e9e56d963db653e5d114aa42db0215373ec4fd7d85b",
+    "text": "Última resistencia"
+  },
+  "content.talent.armor.last-stand.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% more <keyword0>Armor</keyword0> while below half <keyword1>Health</keyword1>",
+    "sourceHash": "dfe76beacae745878f6177d5a96a59eac2a1029f4f4cfb4aa1f699e3db5708d9",
+    "text": "Obtén un {{value0}}% más de <keyword0>Armadura</keyword0> mientras tienes menos de la mitad de <keyword1>Salud</keyword1>"
+  },
+  "content.talent.armor.purification.name": {
+    "reviewed": true,
+    "source": "Purification",
+    "sourceHash": "b5120b02d66d307340de21910569ef6f8f08fb454e145f0a7f93ae854a0468e1",
+    "text": "Purificación"
+  },
+  "content.talent.armor.reactive-guard.name": {
+    "reviewed": true,
+    "source": "Reactive Guard",
+    "sourceHash": "da115d9a575c399fd50e2ffd92e55550874a30fdd283b0f9bff0062dcd4253cc",
+    "text": "Guardia reactiva"
+  },
+  "content.talent.armor.reinforced.name": {
+    "reviewed": true,
+    "source": "Reinforced",
+    "sourceHash": "f147a696e93437ef4f401a8842220a681222c20aca3b350a4bbef14841fc5239",
+    "text": "Reforzado"
+  },
+  "content.talent.armor.reinforced.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to double <keyword0>Armor</keyword0> gained",
+    "sourceHash": "bbaf4d9807323afc7020f5e28ff8d330f71cd23a796f2013f5be25d3717dd546",
+    "text": "Un {{value0}}% de probabilidad de duplicar la <keyword0>Armadura</keyword0> obtenida"
+  },
+  "content.talent.armor.steadfast.name": {
+    "reviewed": true,
+    "source": "Steadfast",
+    "sourceHash": "c257c904326ead26e18e732002800744f071634e9f4f8b14d663cbbc7a3d1ba2",
+    "text": "Firme"
+  },
+  "content.talent.armor.steadfast.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below half, gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "f8d02ed4605d2eefb13d8d2d57a9d13e937b9dc2cd737cadf51e96d34c79f09a",
+    "text": "Cuando tu <keyword0>Salud</keyword0> baja de la mitad, obtén {{value0}} de <keyword1>Armadura</keyword1>"
+  },
+  "content.talent.armor.thick-hide.name": {
+    "reviewed": true,
+    "source": "Thick Hide",
+    "sourceHash": "bbad8acf03a674741f1f76b37726f81a4945b1d22d4a8b45e6f23bdad7d5cdca",
+    "text": "Piel gruesa"
+  },
+  "content.talent.armor.thick-hide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Bleed</keyword1> damage taken",
+    "sourceHash": "957fbcc50b724b1f31678d4dbba79f2f64b75e576cc9c9d1f25a5db5784c3d25",
+    "text": "<keyword0>Armadura</keyword0> mitiga el daño de <keyword1>Sangrado</keyword1> recibido"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -929,6 +1049,42 @@
     "sourceHash": "6c68ac74f5863ed979135a751055de215565901852ba9b67a2aed977a40bcae1",
     "text": "Ganancias del último combate"
   },
+  "glossary.entries": {
+    "reviewed": true,
+    "source": "Glossary entries",
+    "sourceHash": "71fce53ce8c939f3cf31c5d357970cabdc4b4b49ca0f7b95364261505256c5bd",
+    "text": "Entradas del glosario"
+  },
+  "glossary.title": {
+    "reviewed": true,
+    "source": "Glossary & controls",
+    "sourceHash": "5b8f31eadde054efca0de0f6dc92106b276e0d7b715d391e7e75671dfc6c914b",
+    "text": "Glosario y controles"
+  },
+  "inspection.abilities": {
+    "reviewed": true,
+    "source": "Abilities",
+    "sourceHash": "b2a20f236bbc2cf36fae2b5eebe451f60fc161e5f506fae661a5919931fd53d0",
+    "text": "Habilidades"
+  },
+  "inspection.cardDetails": {
+    "reviewed": true,
+    "source": "{{name}} details",
+    "sourceHash": "4cb7c40433e1898f93722e7454293a443559488b77c56e52792068fd2ba7cd75",
+    "text": "Detalles de {{name}}"
+  },
+  "inspection.stars": {
+    "reviewed": true,
+    "source": "{{rank}} of {{maximum}} stars",
+    "sourceHash": "325a09fad0084102b2b0a575c94ff89c4a836c4c2d6c96f6b5bec02ebf8ed0b2",
+    "text": "{{rank}} de {{maximum}} estrellas"
+  },
+  "inspection.trait": {
+    "reviewed": true,
+    "source": "Trait",
+    "sourceHash": "1960ec6375c89c145c4c5dd158daa425df982aab4c43811df1f837ea09720150",
+    "text": "Rasgo"
+  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
@@ -953,6 +1109,12 @@
     "sourceHash": "080692b48aeca6d70b81faa5f1fa1a18df01d28596af4791240ce9c8eebce360",
     "text": "Encuentros"
   },
+  "menu.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "10aded1a76ec6fd46b021f803119e7b900e21c7c0ef37d7949a3b685a05a8f4f",
+    "text": "Bendiciones"
+  },
   "menu.collection": {
     "reviewed": true,
     "source": "Collection",
@@ -976,6 +1138,12 @@
     "source": "Glossary",
     "sourceHash": "e803d8796b19ac1baade3109be90137dd37ea9d9aeedab80983511d798261937",
     "text": "Glosario"
+  },
+  "menu.logo": {
+    "reviewed": true,
+    "source": "Fauna logo",
+    "sourceHash": "7e4eb0a90829898433877ba780035e1256707e48619e177d6e767e5940a50b8e",
+    "text": "Logotipo de Fauna"
   },
   "menu.mainMenu": {
     "reviewed": true,
@@ -1007,11 +1175,41 @@
     "sourceHash": "c9427be40e03a6fc43788b83d61904cfecc7f4117960099f7d135add90f890d2",
     "text": "Ajustes"
   },
+  "menu.talents": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "47615ab48ffd315ed77e3c9f4c4a354ad2dd6f2a23027319bca0340b772c65ce",
+    "text": "Talentos"
+  },
+  "merchant.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "d53e5eab633a4b64c06bfbc9188448e864616505450d0e8a4a3ae458527dfd44",
+    "text": "Continuar"
+  },
+  "merchant.leave": {
+    "reviewed": true,
+    "source": "Leave",
+    "sourceHash": "6be2a4e7931b53b701208cc65aee87f4fd58aa0ed0d042e4cbbccb483d7e475e",
+    "text": "Salir"
+  },
   "navigation.back": {
     "reviewed": true,
     "source": "Back",
     "sourceHash": "53f964bb7bbfb66ed9e7d3929e30ab1b9c99f04a8296891f2daa8359ae1174d0",
     "text": "Atrás"
+  },
+  "overlay.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "10aded1a76ec6fd46b021f803119e7b900e21c7c0ef37d7949a3b685a05a8f4f",
+    "text": "Bendiciones"
+  },
+  "overlay.closeBoons": {
+    "reviewed": true,
+    "source": "Close Boons",
+    "sourceHash": "433aa5019dde158fe0e1ce2a1491ae267922a1c8fb6fff8ec4f3f8768bed8f5c",
+    "text": "Cerrar bendiciones"
   },
   "overlay.deck": {
     "reviewed": true,
@@ -1534,6 +1732,42 @@
     "source": "{{keyword}} {{count}}; {{description}}",
     "sourceHash": "6715ab52b9aa8204ef0c58852c13f3e826b469aa77247060bc24b55197fbbe63",
     "text": "{{keyword}} {{count}}; {{description}}"
+  },
+  "talents.keywordXp": {
+    "reviewed": true,
+    "source": "{{keyword}} XP",
+    "sourceHash": "b35672927e718e9dbeaf30bfae8ec1d808f73ac48821f1a4d605495930ca62ee",
+    "text": "EXP de {{keyword}}"
+  },
+  "talents.requiresPoint": {
+    "reviewed": true,
+    "source": "Requires 1 point",
+    "sourceHash": "e6f6ea4ecbb44dae92215395c9f584202a3897484e6e220ab7899a67c1539dac",
+    "text": "Requiere 1 punto"
+  },
+  "talents.requiresPointAndRows": {
+    "reviewed": true,
+    "source": "Requires 1 point and all earlier rows",
+    "sourceHash": "912e7ac1543418abebbe999aa2eb0ffeddbec34102a878c2365530661385ecd5",
+    "text": "Requiere 1 punto y todas las filas anteriores"
+  },
+  "talents.requiresRows": {
+    "reviewed": true,
+    "source": "Requires all earlier rows",
+    "sourceHash": "023dd6b66d19fc7a3aa9d608eaa86acbc6c13fdaeaf4e7afc5f67d7cb4688ff3",
+    "text": "Requiere todas las filas anteriores"
+  },
+  "talents.row": {
+    "reviewed": true,
+    "source": "Row {{row}}",
+    "sourceHash": "aced698019dbb7d8a7a0c94ada9eca0152b02062615db902d6b9ab50ed402c28",
+    "text": "Fila {{row}}"
+  },
+  "talents.unlockOne": {
+    "reviewed": true,
+    "source": "Unlock · 1 point",
+    "sourceHash": "be94791d700bbcf29d53816090e18617866842b786f83a96d552287078545620",
+    "text": "Desbloquear · 1 punto"
   },
   "talents.unlocked": {
     "reviewed": true,

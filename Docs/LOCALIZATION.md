@@ -49,7 +49,9 @@ never derive gameplay identity from the translated name. Missing, stale or
 structurally invalid translations fall back to English.
 
 Run `npm run localization:extract` after changing these calls and commit the
-resulting English catalogs. Authored species names, titles and traits, card
+resulting English catalogs and generated shipped-catalog imports. Production
+bundles only qualified language catalogs; development previews can exercise
+unqualified catalogs with temporary qualification. Authored species names, titles and traits, card
 names, Talent names, Boon names, keyword labels, and Boon, Talent and creature
 passive rules, Food rules, and glossary terms and definitions are extracted by their stable
 identities. Glossary keyword terms reuse the shared keyword labels. Rules retain keyword tags

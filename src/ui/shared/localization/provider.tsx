@@ -10,14 +10,20 @@ import {
 import { RuleCatalogProvider, type RuleCatalog } from "./rule-catalog";
 import { MessageProvider } from "./message-context";
 import type { MessageCatalog } from "./messages";
+import { shippedCatalogs } from "./shipped-catalogs";
 
 const preferenceKey = "fauna.language.v1";
-const bundled = import.meta.glob<MessageCatalog>("./locales/*.json", { eager: true, import: "default" });
-const bundledCatalogs: Partial<Record<GameLocale, MessageCatalog>> = {};
-for (const locale of Object.keys(LANGUAGES) as GameLocale[]) {
-  const catalog = bundled[`./locales/${locale}.json`];
-  if (catalog) bundledCatalogs[locale] = catalog;
-}
+const previewCatalogs = import.meta.env.DEV
+  ? import.meta.glob<MessageCatalog>("./locales/*.json", { eager: true, import: "default" })
+  : {};
+const bundledCatalogs: Partial<Record<GameLocale, MessageCatalog>> = import.meta.env.DEV
+  ? Object.fromEntries(
+      (Object.keys(LANGUAGES) as GameLocale[]).flatMap((locale) => {
+        const catalog = previewCatalogs[`./locales/${locale}.json`];
+        return catalog ? [[locale, catalog]] : [];
+      }),
+    )
+  : shippedCatalogs;
 const englishCatalog: MessageCatalog = Object.freeze({});
 interface LanguageState {
   locale: GameLocale;
@@ -40,12 +46,14 @@ export function LocalizationProvider({
   qualified = QUALIFIED_LANGUAGES,
   systemLanguages,
   steamLanguage,
+  persist = true,
 }: {
   children: ReactNode;
   catalogs?: Partial<Record<GameLocale, MessageCatalog>>;
   qualified?: readonly GameLocale[];
   systemLanguages?: readonly string[];
   steamLanguage?: () => Promise<string | null>;
+  persist?: boolean;
 }) {
   const options = useMemo(
     () => [
@@ -55,7 +63,7 @@ export function LocalizationProvider({
     [catalogs, qualified],
   );
   const [preference, setPreferenceState] = useState<LanguagePreference>(() => {
-    const saved = readPreference(preferenceKey);
+    const saved = persist ? readPreference(preferenceKey) : null;
     return saved === "auto" || options.some((locale) => locale === saved)
       ? (saved as LanguagePreference)
       : "auto";
@@ -90,9 +98,9 @@ export function LocalizationProvider({
     (value: LanguagePreference) => {
       if (value !== "auto" && !options.includes(value)) return;
       setPreferenceState(value);
-      writePreference(preferenceKey, value);
+      if (persist) writePreference(preferenceKey, value);
     },
-    [options],
+    [options, persist],
   );
   useEffect(() => {
     const previous = document.documentElement.lang;
