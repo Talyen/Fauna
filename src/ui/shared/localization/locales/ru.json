@@ -1817,6 +1817,12 @@
     "sourceHash": "8b45c44b563902a2ae631d0979586df880aed625069792ee6905d3a70ec1cf1c",
     "text": "Свет часовни"
   },
+  "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "1366dc16238e4eab8a9c1e4994a1630427c06de1592cb12bde11eeafed7cb1b1",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> / Получите {{value1}} <keyword1>маны</keyword1>"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
@@ -2069,17 +2075,35 @@
     "sourceHash": "59b4f66aead365579f09931451e2863dbaa463d7864c2e671bac54fa47a43d7d",
     "text": "Потерянная процессия"
   },
+  "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
+    "reviewed": true,
+    "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
+    "sourceHash": "1942cf9e096750518b58c85c2ad3f78f64a4a8c7c1f9923817bd4abc177c73e7",
+    "text": "Призовите Эхо / Полностью восстановите <keyword0>здоровье</keyword0> своих прислужников"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "31c96d8085588861c0e99a0ce4e9c9315550a19d91cf65d85bade1a61b155169",
     "text": "Жемчужина"
   },
+  "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
+    "sourceHash": "f11eb72c11bfd67db61d1775709904a33619f17dcbf938bb410f71f3e412fc2f",
+    "text": "<keyword0>Расходуется</keyword0>; Случайно получите {{value0}} <keyword1>блока</keyword1> или {{value1}} <keyword2>маны</keyword2>"
+  },
   "content.card.memento-treasury-echo.name": {
     "reviewed": true,
     "source": "Treasury Echo",
     "sourceHash": "7a10d3627a75757ca7d9f5220a7defbb3206ae056cd1a99a1d431c8e8142c76a",
     "text": "Эхо сокровищницы"
+  },
+  "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
+    "reviewed": true,
+    "source": "Create {{value0}} Pearls",
+    "sourceHash": "0daf7ed4f7dafc20b021b451f25f7f6f8f958ae4afc525a99a7d15f16807d3a5",
+    "text": "Создано жемчужин: {{value0}}"
   },
   "content.card.mossguard-attack.name": {
     "reviewed": true,
@@ -2369,6 +2393,12 @@
     "sourceHash": "244ce69ed6b7bbd676a33aacafa0389abee06df1278d60cdf13ba89202274905",
     "text": "Восстановите {{value0}} <keyword0>маны</keyword0>"
   },
+  "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
+    "sourceHash": "15805ba0372abf793a77453cba2ebacb26b3b5d31703d7641c57b90d63802683",
+    "text": "Восстановите {{value0}} <keyword0>маны</keyword0> / Возьмите карту <keyword1>горения</keyword1>"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2434,6 +2464,12 @@
     "source": "Nightmare Harvest",
     "sourceHash": "c066db5c2890f4df94763e5068209e07910f5f94892b6a350e40c0a122f39f62",
     "text": "Урожай кошмаров"
+  },
+  "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
+    "sourceHash": "b29deb66636320deb36e22a50f087d9770e2c58d1945f509339f104591d6d0f2",
+    "text": "<keyword0>Очистите</keyword0> всех союзников / Получите {{value0}} <keyword1>маны</keyword1> за каждый удалённый эффект"
   },
   "content.card.reverie-waking-wonder.name": {
     "reviewed": true,

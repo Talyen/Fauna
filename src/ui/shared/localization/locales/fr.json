@@ -1829,6 +1829,12 @@
     "sourceHash": "733b4af9fe6a6ffc2fab11c56a852cae848c106d1de0db8b7f8dbb201d6d847b",
     "text": "Lumière de chapelle"
   },
+  "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "acd689f173028ba377ccc6c1e02e17f252a56a4724e259b8b671acb0ce4fc493",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> / Gagne {{value1}} <keyword1>Mana</keyword1>"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
@@ -2081,17 +2087,35 @@
     "sourceHash": "0bf9e7bc9c786f437ee344b25b34a1b19dddfaab14fcacbcbee813ae147f7e94",
     "text": "Cortège perdu"
   },
+  "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
+    "reviewed": true,
+    "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
+    "sourceHash": "b886d5cbb7aef0d2116aa39665d0b6f902971d04d72a4bf91018a109849d1650",
+    "text": "Invoque un Écho / Restaure entièrement la <keyword0>Santé</keyword0> de vos serviteurs"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "eea54a3875d8ddd4964d7cfec4148949f61253532f36482dd2d831fc2c3a073b",
     "text": "Perle"
   },
+  "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
+    "sourceHash": "0ee8027ccec49d155278b37a821bd770e0dc8945fd754dced759034c135ca291",
+    "text": "<keyword0>Consommer</keyword0>; Gagne au hasard {{value0}} <keyword1>Blocage</keyword1> ou {{value1}} <keyword2>Mana</keyword2>"
+  },
   "content.card.memento-treasury-echo.name": {
     "reviewed": true,
     "source": "Treasury Echo",
     "sourceHash": "f440c1da6da843e2fac68b6112d5a526ce98a73a3ed4ee77d13c3609755c14be",
     "text": "Écho du trésor"
+  },
+  "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
+    "reviewed": true,
+    "source": "Create {{value0}} Pearls",
+    "sourceHash": "6d994f4aa195bff9af8415edfe306ca0db867dd121463cb1ec42db7f4e95016c",
+    "text": "Perles créées : {{value0}}"
   },
   "content.card.mossguard-attack.name": {
     "reviewed": true,
@@ -2381,6 +2405,12 @@
     "sourceHash": "a03815b1ece6d89509fdc89435ae8d3fd724b26458279e05fb80f26dc78d9ec1",
     "text": "Restaure {{value0}} <keyword0>Mana</keyword0>"
   },
+  "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
+    "sourceHash": "2ed09afa43b90f618487a80da4ceb95ffddd9fb355bc2960e5c883fd0b7a5ac6",
+    "text": "Restaure {{value0}} <keyword0>Mana</keyword0> / Pioche une carte de <keyword1>Brûlure</keyword1>"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2446,6 +2476,12 @@
     "source": "Nightmare Harvest",
     "sourceHash": "0a8f3d06b88bbb7b24c9249e19db8544db1e34f4e13620e47a772b6164c3c843",
     "text": "Moisson des cauchemars"
+  },
+  "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
+    "sourceHash": "88dd14e4dca87b7fe35219eefcc988f4873c6a1af8600dd301555efb10a76ed8",
+    "text": "<keyword0>Purifie</keyword0> tous les alliés / Gagne {{value0}} <keyword1>Mana</keyword1> par effet retiré"
   },
   "content.card.reverie-waking-wonder.name": {
     "reviewed": true,

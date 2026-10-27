@@ -1817,6 +1817,12 @@
     "sourceHash": "47e749126a215f3e7c0344940ae345da2b58a0427e5e0e216a8b5aabd5ff875d",
     "text": "礼拜堂之光"
   },
+  "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "243a4259b30807213c7d3f8ebd995fdbcfb562165c265fe20a0899a55b149e37",
+    "text": "恢复{{value0}}点<keyword0>生命</keyword0> / 获得{{value1}}点<keyword1>法力</keyword1>"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
@@ -2069,17 +2075,35 @@
     "sourceHash": "36016743b9b3f0deccb45ffb9e364339528fc35bbd67e07c91dba2c3e11907cf",
     "text": "迷失的队列"
   },
+  "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
+    "reviewed": true,
+    "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
+    "sourceHash": "0870517128996511785a6737cbde69d9245136598a743ff6bfc3f84afb3bb96d",
+    "text": "召唤一个回响 / 将你的召唤物<keyword0>生命</keyword0>恢复至满值"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "68e88774b5263e7346f26741e49700eadd732424c87b1fa38a727f86e6a0a048",
     "text": "珍珠"
   },
+  "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
+    "sourceHash": "336b3f5791446e10d15e42b0bc0754f74d495fd2cb1b236e36978c447d156b53",
+    "text": "<keyword0>消耗</keyword0>; 随机获得{{value0}}点<keyword1>格挡</keyword1>或{{value1}}点<keyword2>法力</keyword2>"
+  },
   "content.card.memento-treasury-echo.name": {
     "reviewed": true,
     "source": "Treasury Echo",
     "sourceHash": "a68636b4a2614611b4a06765b994f5c2a693dd8445a7234413fa7e01fb2a1f3d",
     "text": "宝库回响"
+  },
+  "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
+    "reviewed": true,
+    "source": "Create {{value0}} Pearls",
+    "sourceHash": "383fcd33644dde5dccff4ac2374ffd0573e73e56ebaedff73175d1039fb6e059",
+    "text": "创建珍珠：{{value0}}个"
   },
   "content.card.mossguard-attack.name": {
     "reviewed": true,
@@ -2369,6 +2393,12 @@
     "sourceHash": "faf4071e61d9277e16e4b45e5c86b46d69a2a450632b3e35fb1dc1954ad98921",
     "text": "恢复{{value0}}点<keyword0>法力</keyword0>"
   },
+  "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
+    "sourceHash": "c83350a437a2efc54583f964a0cbf6f3fd781f7794b657afa2ffb43ca7c0d01e",
+    "text": "恢复{{value0}}点<keyword0>法力</keyword0> / 抽取一张<keyword1>灼烧</keyword1>卡牌"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2434,6 +2464,12 @@
     "source": "Nightmare Harvest",
     "sourceHash": "6a98f474b628d97a7c24bc6e19ed09e9c639bf8583265b19d6704d1681019883",
     "text": "噩梦收获"
+  },
+  "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
+    "sourceHash": "0605cb056a37eeeab459fecf0296b60b5b89d5cbb556e0157c1ef7adf601b434",
+    "text": "<keyword0>净化</keyword0>所有盟友 / 每移除一个效果获得{{value0}}点<keyword1>法力</keyword1>"
   },
   "content.card.reverie-waking-wonder.name": {
     "reviewed": true,

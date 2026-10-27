@@ -1817,6 +1817,12 @@
     "sourceHash": "227f54217780a29614351da14b9603bb979485c3ef1dc0217b41cc7007c29509",
     "text": "礼拝堂の光"
   },
+  "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "b4f47f61b5ce7508a1f508fdbc053ba7b83acb57aaf5a592f90b6c9287fab99c",
+    "text": "<keyword0>体力</keyword0>を{{value0}}回復 / <keyword1>マナ</keyword1>を{{value1}}獲得"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
@@ -2069,17 +2075,35 @@
     "sourceHash": "1c41840400b9d478d5bd43a28427dae3ad7608df2e4b6113f4ecf5f2036ef4af",
     "text": "失われた行列"
   },
+  "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
+    "reviewed": true,
+    "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
+    "sourceHash": "a17dedb4fcbecb0d7f54018d8a9ae465c6479d025e01c671be284d9046465598",
+    "text": "エコーを召喚 / 自分のミニオンの<keyword0>体力</keyword0>を全回復"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "019e5829c808a7ca1ebea6419a1bb13150be52c291d363bbfc3527e9cebc49db",
     "text": "真珠"
   },
+  "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
+    "sourceHash": "a90ae8851c0a96ffd2e55cea8f066cbde1aff7efcb6d0bcebcd8c010d6f3346e",
+    "text": "<keyword0>消費</keyword0>; <keyword1>ブロック</keyword1>{{value0}}または<keyword2>マナ</keyword2>{{value1}}をランダムに獲得"
+  },
   "content.card.memento-treasury-echo.name": {
     "reviewed": true,
     "source": "Treasury Echo",
     "sourceHash": "fcf71ee14fefb8bff124f6bc619b455b80b5ef25dd2e94f0fbe0eee54cfedf81",
     "text": "宝物庫のエコー"
+  },
+  "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
+    "reviewed": true,
+    "source": "Create {{value0}} Pearls",
+    "sourceHash": "570939e7773e62935db6ab8eaeecfe1adf49a6b96bf9db7187876750c94db693",
+    "text": "真珠を{{value0}}個作成"
   },
   "content.card.mossguard-attack.name": {
     "reviewed": true,
@@ -2369,6 +2393,12 @@
     "sourceHash": "ec54a88ba99b024efc925275163917c75f5aa04e92373a7fe6741fb41915cf70",
     "text": "<keyword0>マナ</keyword0>を{{value0}}回復"
   },
+  "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
+    "sourceHash": "f2c282ca84adcf540c17de33ee4f8a022a651d1a9968ad6b1f3ea630a9374995",
+    "text": "<keyword0>マナ</keyword0>を{{value0}}回復 / <keyword1>炎上</keyword1>カードを1枚引く"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2434,6 +2464,12 @@
     "source": "Nightmare Harvest",
     "sourceHash": "202501e722b2ab885e67f42d3bed9aed929214a6cb9f8b8917d45682acdcab66",
     "text": "悪夢の収穫"
+  },
+  "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
+    "sourceHash": "fd983f33851d1c059a7f4b16163cfb1dc1b22b03d35a3395b08e5ce7453ce634",
+    "text": "すべての味方を<keyword0>浄化</keyword0> / 除去した効果1つにつき<keyword1>マナ</keyword1>を{{value0}}獲得"
   },
   "content.card.reverie-waking-wonder.name": {
     "reviewed": true,

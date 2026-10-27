@@ -1817,6 +1817,12 @@
     "sourceHash": "a6850382dcf7e6c04fd4291258aac7e7c7621d3311f5ca7b64bfc047ef795d21",
     "text": "Kapellenlicht"
   },
+  "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "f44f89209ae2f990c67dbba3a06a086fbc5012b1da334931cc702dd57c5a3af1",
+    "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her / Erhalte {{value1}} <keyword1>Mana</keyword1>"
+  },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
@@ -2069,17 +2075,35 @@
     "sourceHash": "de4f5126b035b93f2cdd019457a3f6fd5c4727a3d4e36779bb12d47aa9c5136b",
     "text": "Verlorene Prozession"
   },
+  "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
+    "reviewed": true,
+    "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
+    "sourceHash": "d0affbd6af2163d4e22542b1cc9af820909b4b6db312ac5c8d740d89588d4b39",
+    "text": "Beschwöre ein Echo / Stelle die <keyword0>Gesundheit</keyword0> deiner Diener vollständig wieder her"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "49ca4d6a6acdfbc34b1b0de1e9a91b241880ea45191c4c0b65f3c3353d21d3d6",
     "text": "Perle"
   },
+  "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
+    "sourceHash": "3eb12449b9f8f53ca1e94c547380ae83924ba9057b3038477dd265b44129b9cd",
+    "text": "<keyword0>Verbrauchen</keyword0>; Erhalte zufällig {{value0}} <keyword1>Block</keyword1> oder {{value1}} <keyword2>Mana</keyword2>"
+  },
   "content.card.memento-treasury-echo.name": {
     "reviewed": true,
     "source": "Treasury Echo",
     "sourceHash": "4849e0bf595ca0175b9b448f293ece308ef95772832b5dc90700cbb1e3ee3c0d",
     "text": "Schatzkammer-Echo"
+  },
+  "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
+    "reviewed": true,
+    "source": "Create {{value0}} Pearls",
+    "sourceHash": "02b01122a163f55605c41f7a04a021c02e5448fb2a7f542956669e57f3883a8a",
+    "text": "Erzeuge Perlen: {{value0}}"
   },
   "content.card.mossguard-attack.name": {
     "reviewed": true,
@@ -2369,6 +2393,12 @@
     "sourceHash": "0a19dc6575c8322f2c3aafaa7863a723eb123b605698915351b14261bb0e97cf",
     "text": "Stelle {{value0}} <keyword0>Mana</keyword0> wieder her"
   },
+  "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
+    "sourceHash": "705211054adc0f11cd785826da14a2ad6f7c3f768dcecf6c412a167238a7dd77",
+    "text": "Stelle {{value0}} <keyword0>Mana</keyword0> wieder her / Ziehe eine <keyword1>Brand</keyword1>-Karte"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2434,6 +2464,12 @@
     "source": "Nightmare Harvest",
     "sourceHash": "288dbcde69e4e6be005c2fa6ca52528e239f98863fa4f2ad6b99c7a87888a111",
     "text": "Albtraumernte"
+  },
+  "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
+    "sourceHash": "367ac81bfbf90a3e678b062eea08f02c5cadf7197be3304a45f7fe0a42e456f9",
+    "text": "<keyword0>Reinige</keyword0> alle Verbündeten / Erhalte {{value0}} <keyword1>Mana</keyword1> pro entferntem Effekt"
   },
   "content.card.reverie-waking-wonder.name": {
     "reviewed": true,
