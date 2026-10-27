@@ -21,7 +21,16 @@ import { createBattleActor } from "../../../src/application/battle-actor";
 import { battleBenefitFacts } from "../../../src/application/battle-benefits";
 import * as engine from "../../../src/game/engine";
 import { projectPlay } from "../../../src/game/preview";
-import { abilityKeywords, cardKeywords, passiveAmount } from "../../../src/game/progression";
+import {
+  abilityKeywords,
+  availablePoints,
+  canBuyTalent,
+  cardKeywords,
+  passiveAmount,
+  starterOfferPool,
+  talentPoints,
+  validTalentSelection,
+} from "../../../src/game/progression";
 import { definitionKeywords } from "../../../src/game/keywords";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { packetPolicy, packetPolicyView, type DamagePacket } from "../../../src/game/combat/policy";
@@ -31,7 +40,7 @@ import { supplementalRule } from "../../../src/game/rules/supplemental";
 import { selectCombatCue } from "../../../src/ui/audio/combat-audio";
 import { feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
 import type { GameEvent } from "../../../src/game/types";
-import { BOONS, definition, findBoon, speciesCards, SPECIES } from "../../../src/game/content";
+import { BOONS, definition, findBoon, speciesCards, SPECIES, TALENTS } from "../../../src/game/content";
 import { capabilities, offenseValue } from "../../../src/application/team-policy";
 import {
   availablePlays,
@@ -857,6 +866,8 @@ it("retains the last duplicate cloud record and its ancestry", async () => {
   const second = { ...first, id: "c".repeat(64), ancestors: [first.id] };
   expect(newestHeads([first, second])).toEqual([second]);
   expect(newestHeads([second, first])).toEqual([second]);
+  expect(newestHeads([first, second, first])).toEqual([second]);
+  expect(newestHeads([second, first, updated])).toEqual([second]);
   expect(newestHeads([first, { ...second, ancestors: [] }])).toEqual([first, { ...second, ancestors: [] }]);
 });
 
@@ -954,4 +965,61 @@ it("keeps authored ability values independent of levels, passives and enemy room
     }
   }
   expect(checked).toBeGreaterThan(0);
+});
+
+it("preserves talent prerequisites and points for short and complete selections", () => {
+  const keywordXP = Object.fromEntries(
+    [...new Set(TALENTS.map((talent) => talent.keyword))].map((id) => [id, 1000]),
+  );
+  for (const talent of TALENTS) {
+    const prerequisites = TALENTS.filter(
+      (entry) => entry.keyword === talent.keyword && entry.row < talent.row,
+    );
+    const state = { talents: prerequisites.map((entry) => entry.id), keywordXP };
+    expect(canBuyTalent(state, talent.id)).toBe(true);
+    expect(validTalentSelection({ ...state, talents: [talent.id] })).toBe(prerequisites.length === 0);
+    for (const xp of [0, 10, 1000]) {
+      const test = { ...state, keywordXP: { ...keywordXP, [talent.keyword]: xp } };
+      const total = TALENTS.filter((entry) => entry.keyword === talent.keyword).length;
+      expect(availablePoints(test, talent.keyword)).toBe(
+        Math.max(0, Math.min(talentPoints(xp), total) - state.talents.length),
+      );
+    }
+  }
+});
+
+it("preserves starter offer order with one selected creature", () => {
+  const state = structuredClone(teamRun(42, ["mossguard"]));
+  state.selected = ["mossguard"];
+  const pool = ["mossguard", "prismram", "memento", "emberback"] as const;
+  expect(starterOfferPool(state, pool)).toEqual(["prismram", "emberback"]);
+});
+
+it("keeps enemy ability validation and committed victory rewards across save and resume", () => {
+  const battle = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  const enemy = battle.battle.enemies[0]!;
+  enemy.lastAbility = speciesCards(enemy.species)[0]!.id;
+  expect(decodeSave(encodeSave(battle))).toEqual(battle);
+  enemy.lastAbility = "not-an-ability";
+  expect(() => decodeSave(encodeSave(battle))).toThrow();
+  enemy.lastAbility = null;
+  const expectedRecruits = [...battle.expedition.pack!];
+  const result = engine.dispatch(battle, { type: "devWinBattle" }, true);
+  expect(result.accepted).toBe(true);
+  expect(result.state.reward?.recruits).toEqual(expectedRecruits);
+  expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+});
+
+it("detects injured deployed and eligible reserve allies without changing heal targets", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  const backup = state.team.pop()!;
+  state.reserves.push(backup);
+  backup.health--;
+  expect(battleBenefitFacts(state).injuredAllies).toBe(false);
+  state.boons.push("camp-hammock");
+  expect(battleBenefitFacts(state).injuredAllies).toBe(true);
+  backup.health = 0;
+  expect(battleBenefitFacts(state).injuredAllies).toBe(false);
+  state.team[0]!.health--;
+  expect(battleBenefitFacts(state).injuredAllies).toBe(true);
 });

@@ -40,9 +40,9 @@ export function* restoreHealth(
   source?: Combatant,
   options: { shareOverflow?: boolean; adjusted?: boolean; bounce?: boolean } = {},
 ): Resolution<void> {
+  if (unit.health === 0 && !revive) return;
   const baseAmount = amount;
   if (!options.adjusted) amount = healingValue(state, unit, amount);
-  if (unit.health === 0 && !revive) return;
   const { gain, excess } = restoration(unit, amount);
   const bleedAtRestoration = unit.combat?.bleed ?? 0;
   unit.health += gain;
