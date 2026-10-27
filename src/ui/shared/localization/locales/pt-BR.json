@@ -3755,17 +3755,35 @@
     "sourceHash": "cb61383521fdb55b651a3f2f252e289aa8ec225e9a55790af07777d7f38d6313",
     "text": "Golpes pesados"
   },
+  "content.talent.physical.heavy-blows.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
+    "sourceHash": "29f3a8204ab46b97067090cc5366ad5cad55b17a88b4b86236f831752f8b0d22",
+    "text": "O dano <keyword0>Físico</keyword0> tem {{value0}}% de chance de também causar dano de <keyword1>Atordoamento</keyword1>"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
     "sourceHash": "94449f36198feced02ff803810dc1ac3709d1286b258abe770607171e9dcb67b",
     "text": "Lacerar"
   },
+  "content.talent.physical.lacerate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to <keyword1>Bleed</keyword1>",
+    "sourceHash": "ff2b80a2bf68f61ba65ed329b6c6a2c9908b9cc50e3e56873e8a1fbeee10041e",
+    "text": "O dano <keyword0>Físico</keyword0> tem {{value0}}% de chance de causar dano de <keyword1>Sangramento</keyword1>"
+  },
   "content.talent.physical.riposte.name": {
     "reviewed": true,
     "source": "Riposte",
     "sourceHash": "45d707276aad66541d7867e86adf85188cce58308e2a3ff5fded0bba7d797d05",
     "text": "Contra-ataque"
+  },
+  "content.talent.physical.riposte.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> attack is guaranteed to <keyword2>Critical Hit</keyword2>",
+    "sourceHash": "4ba7bf8da17812f7c9802d8186fba421f219705d10c79e0f5469d94a816f23e8",
+    "text": "Após <keyword0>esquivar</keyword0>, seu próximo ataque <keyword1>Físico</keyword1> causa um <keyword2>acerto crítico</keyword2> garantido"
   },
   "content.talent.physical.rupture.name": {
     "reviewed": true,

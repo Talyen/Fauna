@@ -3803,17 +3803,35 @@
     "sourceHash": "672fed8b6336c61b24e0b04e0e9e2485fe0e001975d171d927102ea5f83172d8",
     "text": "Coups lourds"
   },
+  "content.talent.physical.heavy-blows.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
+    "sourceHash": "b16c11012b0bdd03bc8fac7fbfdcf9697dab168bb99ce68d0162f33959ed0fe4",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> ont {{value0}}% de chances d’infliger aussi des dégâts d’<keyword1>Étourdissement</keyword1>"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
     "sourceHash": "701a6f43f5f20b8a25fe5514db659dbd4bfd61290a93118472a81a63f0750c1f",
     "text": "Lacération"
   },
+  "content.talent.physical.lacerate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to <keyword1>Bleed</keyword1>",
+    "sourceHash": "7c625c9bc7879305eb88a7b9378664ba87c3623cf0690aaf615f6e307b3a4a4d",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> ont {{value0}}% de chances d’infliger des dégâts de <keyword1>Saignement</keyword1>"
+  },
   "content.talent.physical.riposte.name": {
     "reviewed": true,
     "source": "Riposte",
     "sourceHash": "bd38ba36594940d2c271c071f5d7466a74748ae9b478e39fac578b2f3739ec79",
     "text": "Riposte"
+  },
+  "content.talent.physical.riposte.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> attack is guaranteed to <keyword2>Critical Hit</keyword2>",
+    "sourceHash": "b7f85bbb3fb6338666d337aa1bc27b3c27c8e6223bccc7f754a6c4641d188ad0",
+    "text": "Après une <keyword0>Esquive</keyword0>, votre prochaine attaque <keyword1>Physique</keyword1> inflige forcément un <keyword2>coup critique</keyword2>"
   },
   "content.talent.physical.rupture.name": {
     "reviewed": true,

@@ -3755,17 +3755,35 @@
     "sourceHash": "6201a2930cdadc6f3253797097d90d8b4f3e7e473aa7193de482fdfab7062a45",
     "text": "重击"
   },
+  "content.talent.physical.heavy-blows.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
+    "sourceHash": "4e01cb7c03d0b8b726c05a68c57128657468275d65f44d4ee35f930db684e4b7",
+    "text": "<keyword0>物理</keyword0>伤害有{{value0}}%的概率同时造成<keyword1>眩晕</keyword1>伤害"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
     "sourceHash": "f4653605613309a244c10069d36976e027715877e5fffdaba78bc183ae3867bd",
     "text": "割裂"
   },
+  "content.talent.physical.lacerate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to <keyword1>Bleed</keyword1>",
+    "sourceHash": "b8b252c19da501cbd51988a905cbd4caf60f44afb40ed791c4440365f5559c36",
+    "text": "<keyword0>物理</keyword0>伤害有{{value0}}%的概率造成<keyword1>流血</keyword1>伤害"
+  },
   "content.talent.physical.riposte.name": {
     "reviewed": true,
     "source": "Riposte",
     "sourceHash": "daad59d5235f03f4f51d4c9096424b2157b9ae18e18bff0c92d0971fae4e32ae",
     "text": "还击"
+  },
+  "content.talent.physical.riposte.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> attack is guaranteed to <keyword2>Critical Hit</keyword2>",
+    "sourceHash": "2484231def7c8095f024dcac6f1b083a7d916766fd7c0c72b27f6076e6c17601",
+    "text": "<keyword0>闪避</keyword0>后，下一次<keyword1>物理</keyword1>攻击必定<keyword2>暴击</keyword2>"
   },
   "content.talent.physical.rupture.name": {
     "reviewed": true,
