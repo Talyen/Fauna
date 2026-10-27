@@ -701,11 +701,23 @@
     "sourceHash": "8152da7153916fd413b4ce059ef6bae0f9387efe55fadbd1bb3f0026ac8b7f8d",
     "text": "Verhindert den nächsten schädlichen Statuseffekt; Direkter Schaden trifft weiterhin; Hält an, bis es verbraucht oder <keyword0>gebannt</keyword0> wird; Nicht stapelbar"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "cf3cc333f007855714eca5d5f02310da37507ee8fad4284196c490b5aaadd015",
+    "text": "<keyword0>Physischer</keyword0> Schaden wird nach <keyword2>Block</keyword2> durch <keyword1>Rüstung</keyword1> reduziert; Angriffe haben eine Chance von {{value0}}% auf einen <keyword3>kritischen Treffer</keyword3> mit doppeltem Schaden"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "8c9ba2938a831d23638bd7a7b6b20b5f084e680b41f7d817138eef2ca618bc2a",
     "text": "Entfernt vorteilhafte Effekte von einem Gegner"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "9f6304e60c316ab7a7dddd9b7434824b66fef32d6ac90ce8c80ae9dd61bb1646",
+    "text": "<keyword0>Dornen</keyword0> vergelten bei Treffern mit Schaden vom Typ <keyword1>Natur</keyword1>, auch durch <keyword2>Block</keyword2>; Danach verlieren sie {{value0}} Stapel"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

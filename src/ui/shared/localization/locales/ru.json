@@ -701,11 +701,23 @@
     "sourceHash": "4494901e538c1aa5662d82c64771d0329f5aaa570ce3166c5960ee3a936f8003",
     "text": "Предотвращает следующий вредный эффект состояния; Прямой урон по-прежнему проходит; Действует до расходования или <keyword0>рассеивания</keyword0>; Не накапливается"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "ff5597940b8ff005a27a33140313682b2244e3e27623f679dd2a243ccdfb0cdf",
+    "text": "<keyword0>Физический</keyword0> урон снижается <keyword1>бронёй</keyword1> после <keyword2>блока</keyword2>; Атаки с вероятностью {{value0}}% наносят <keyword3>критический</keyword3> двойной урон"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "06e1f7da09ee7ba1c60b29cc5c51aa6c0cdceb5c0469ade33654400ac986d58a",
     "text": "Снимает полезные эффекты с врага"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "b979f8ad503aa572ec8083fc664655367e99bc05736a52ba111a87669bf37a95",
+    "text": "При попадании <keyword0>шипы</keyword0> отвечают уроном типа «<keyword1>Природа</keyword1>», даже через <keyword2>блок</keyword2>; Затем теряют {{value0}} уровень"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

@@ -701,11 +701,23 @@
     "sourceHash": "1a0b82356ab84b2b309c3aec1f5380bc44d5efcd80a6012085624b5d91488129",
     "text": "次に受ける有害な状態効果を防ぐ; 直接ダメージは受ける; 消費されるか<keyword0>強化解除</keyword0>されるまで持続; 重複しない"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "8c26dc2f0a4353eaf59f940495183f56b02427884f500aa0cdbc877ca57aff83",
+    "text": "<keyword0>物理</keyword0>ダメージは<keyword2>ブロック</keyword2>の後に<keyword1>装甲</keyword1>で軽減される; 攻撃は{{value0}}%の確率で<keyword3>クリティカル</keyword3>になり、ダメージが2倍になる"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "cc5594c95f4b5031c889d0524696dda1c4d9dc4bf67ce72739e325a2619beb1c",
     "text": "敵1体の有益な効果を取り除く"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "86eb02f3e384d0293bf3b549aaf3795438a115ca85ef3846dc22d987b3e9917b",
+    "text": "被弾すると<keyword0>棘</keyword0>が<keyword1>自然</keyword1>ダメージで反撃する; <keyword2>ブロック</keyword2>越しでも反撃し、その後スタックが{{value0}}減少"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

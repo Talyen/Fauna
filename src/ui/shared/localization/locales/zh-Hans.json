@@ -701,11 +701,23 @@
     "sourceHash": "76944386a8cf72516e3072d140dc392da55d49285419fcd4121c42705f089cde",
     "text": "防止下一次有害状态效果；仍会受到直接伤害；持续至消耗或被<keyword0>驱散</keyword0>；不可叠加"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "59ea88914a1d28a611369eb86b92350a19dba31e3b84a8629af5fce2a59b271d",
+    "text": "<keyword0>物理</keyword0>伤害在<keyword2>格挡</keyword2>之后受<keyword1>护甲</keyword1>减免；攻击有{{value0}}%的概率<keyword3>暴击</keyword3>，造成双倍伤害"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "72dfe6715b29ee5dab47e9e1d994106e3923d37b62a217f18b665e32d5bb3e4a",
     "text": "移除一名敌人的有益效果"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "7d198d9e8851c6c26d33f508f626ef970c4c27cd5b983088b1da935bd58e81d2",
+    "text": "受到命中时，<keyword0>荆棘</keyword0>以<keyword1>自然</keyword1>伤害反击，即使伤害被<keyword2>格挡</keyword2>；随后减少{{value0}}层"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

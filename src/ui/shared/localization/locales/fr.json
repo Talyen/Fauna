@@ -749,11 +749,23 @@
     "sourceHash": "2602d446f940f6ebe3914c3b27d28f2f06e18239209a6fcd04624d6137ddc777",
     "text": "Empêche le prochain effet de statut néfaste ; Les dégâts directs s’appliquent toujours ; Dure jusqu’à utilisation ou <keyword0>dissipation</keyword0> ; Ne se cumule pas"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "370fd0c3157c1e3e29b16acc4e4cb0ed288200ae26c90a217746cd108bba42c0",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> sont réduits par l’<keyword1>Armure</keyword1> après le <keyword2>Blocage</keyword2> ; Les attaques ont {{value0}}% de chances d’infliger un <keyword3>coup critique</keyword3> aux dégâts doublés"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "c95c6590376097832448440b615a076e233cbc63ee76ee5627e99f5f6599d113",
     "text": "Retire les effets bénéfiques d’un ennemi"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "d1abbe060b93e889424bd84f161330c092282d4e0f69a4cbc46f55f3976a3baa",
+    "text": "Les <keyword0>Épines</keyword0> ripostent avec des dégâts de <keyword1>Nature</keyword1> lorsque leur porteur est touché, même à travers le <keyword2>Blocage</keyword2> ; Elles perdent ensuite {{value0}} cumul"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

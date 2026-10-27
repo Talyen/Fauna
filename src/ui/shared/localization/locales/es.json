@@ -701,11 +701,23 @@
     "sourceHash": "7bcfd86b67cec0ab92d8ea00d0f048638e6f839217859328b59c34ef663afec2",
     "text": "Evita el siguiente efecto de estado perjudicial; El daño directo sigue impactando; Dura hasta consumirse o ser <keyword0>purgado</keyword0>; No se acumula"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "6938e835d5cbc0c3425c32c497bfb17e25c175efdc117d210bf3053274bf9de3",
+    "text": "El daño <keyword0>Físico</keyword0> se reduce por la <keyword1>Armadura</keyword1> después del <keyword2>Bloqueo</keyword2>; Los ataques tienen un {{value0}}% de probabilidad de <keyword3>crítico</keyword3> para infligir el doble de daño"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "fc41d0d24bd0ace61e166f05dd8ac207f872e37b62a0770e3b39e4aac907fc54",
     "text": "Elimina efectos beneficiosos de un enemigo"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "f929c8f4848456d29abc791e72984d46149cbe28fca17396e1a54719f75c262b",
+    "text": "Las <keyword0>Espinas</keyword0> contraatacan con daño de <keyword1>Naturaleza</keyword1> al recibir un impacto, incluso a través del <keyword2>Bloqueo</keyword2>; Luego pierden {{value0}} acumulación"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,
