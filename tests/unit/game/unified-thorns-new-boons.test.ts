@@ -78,6 +78,17 @@ it("spreads existing Blind with Water without consuming the original or bypassin
   expect(other.combat.blind).toBe(true);
 });
 
+it("spreads Blind when the Water hit defeats its original target", () => {
+  const { state, ally, enemy, events } = fixture();
+  state.boons = ["reef-incense-tile"];
+  enemy.health = 1;
+  enemy.combat.blind = true;
+  const other = state.battle.enemies[1]!;
+  hit(state, ally, enemy, 2, "water", events);
+  expect(enemy.health).toBe(0);
+  expect(other.combat.blind).toBe(true);
+});
+
 it("preserves Burn decay only while an enemy has Armor", () => {
   const { state, ally, enemy, events } = fixture();
   state.boons = ["lava-cameo"];
@@ -187,5 +198,21 @@ it("draws an eligible Water card when an ally's Block breaks", () => {
   state.battle.draw.push(card.id);
   ally.block = 2;
   hit(state, enemy, ally, 2, "physical", events);
+  expect([...state.battle.hand, ...state.battle.buffer]).toContain(card.id);
+});
+
+it("draws a Water card when the same hit breaks Block and defeats the ally", () => {
+  const { state, enemy, events } = fixture();
+  const ally = state.team[1]!;
+  state.boons = ["coral-music-box"];
+  const card = state.cards.find((entry) => entry.definitionId === "coralcurl-attack")!;
+  for (const zone of ["draw", "discard", "hand", "buffer"] as const)
+    state.battle[zone] = state.battle[zone].filter((id) => id !== card.id);
+  state.battle.draw.push(card.id);
+  ally.block = 2;
+  ally.health = 1;
+  ally.combat!.deathDoorUsed = true;
+  hit(state, enemy, ally, 4, "physical", events);
+  expect(ally.health).toBe(0);
   expect([...state.battle.hand, ...state.battle.buffer]).toContain(card.id);
 });

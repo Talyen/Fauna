@@ -133,7 +133,6 @@ export function* blockDepletionRewards(
   if (
     alliedTarget &&
     depletedBlock &&
-    target.health > 0 &&
     state.boons.includes("coral-music-box") &&
     battlefield(state, "player").some((unit) => unit.id === target.id)
   )
@@ -231,7 +230,6 @@ export function* damageRewards(
     type === "water" &&
     stats.blind &&
     source.health > 0 &&
-    target.health > 0 &&
     state.boons.includes("reef-incense-tile")
   ) {
     const other = battlefield(state, "enemy").find(
