@@ -1,4 +1,4 @@
-import { combatantById } from "../../../game/battlefield";
+import { battlefield, combatantById } from "../../../game/battlefield";
 import { unitName } from "../../../game/combat/state";
 import { CARDS, FOOD_CARDS, SPECIES, species, type CardDefinition } from "../../../game/content";
 import { PEARL } from "../../../game/content/creatures/memento";
@@ -30,6 +30,19 @@ export function eventPresentation(
 ) {
   const combatant = (id: string | undefined) =>
     combatantById(game, id) ?? (previousGame ? combatantById(previousGame, id) : undefined);
+  const uniqueName = (english: string) => {
+    const units = (state: GameState) => [
+      ...battlefield(state, "player"),
+      ...battlefield(state, "enemy"),
+      ...state.reserves,
+    ];
+    const names = new Set(
+      [...units(game), ...(previousGame ? units(previousGame) : [])]
+        .filter((unit) => unitName(unit) === english)
+        .map((unit) => localizedCombatantName(unit, i18n)),
+    );
+    return names.size === 1 ? [...names][0] : undefined;
+  };
   if (event.kind === "action" && event.actionType !== "swap") {
     if (event.actionType === "attack" && event.text === "The Court Remembers")
       return i18n.content("content.species.memento.trait", "The Court Remembers");
@@ -313,21 +326,19 @@ export function eventPresentation(
     }
     if (event.status === "reflect" && event.outcome === "apply") {
       const actor = combatant(event.actorId);
-      const recipient = combatant(event.recipientId ?? (event.affectedStatus ? undefined : event.targetId));
       const status = event.affectedStatus ?? "purge";
       const englishStatus = event.affectedStatus ?? "Purge";
-      if (
-        actor &&
-        recipient &&
-        event.text === `${unitName(actor)} reflects ${englishStatus} to ${unitName(recipient)}`
-      )
+      const prefix = actor ? `${unitName(actor)} reflects ${englishStatus} to ` : "";
+      const recipient =
+        actor && event.text.startsWith(prefix) ? uniqueName(event.text.slice(prefix.length)) : undefined;
+      if (actor && recipient)
         return i18n.message("log.reflectStatus", "{{actor}} reflects {{status}} to {{target}}", {
           actor: localizedCombatantName(actor, i18n),
           status:
             i18n.locale === "en"
               ? englishStatus
               : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
-          target: localizedCombatantName(recipient, i18n),
+          target: recipient,
         });
     }
     if (event.status === "attackReflection" && event.outcome === "immune") {

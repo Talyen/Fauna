@@ -730,7 +730,6 @@ export function* applyHarmfulStatus(
         kind: "status",
         actorId: target.id,
         targetId: target.id,
-        recipientId: recipient.id,
         status: "reflect",
         affectedStatus: type,
         outcome: "apply",
