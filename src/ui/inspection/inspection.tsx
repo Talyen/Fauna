@@ -1,5 +1,4 @@
 import { useMessages } from "../shared/localization/message-context";
-import { localizedCombatantName } from "../shared/localization/combatant-name";
 import { EffectScope, EffectBaseline, EffectBackdropHost } from "../shared/effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../shared/effects/palettes";
 import { cardActor } from "../../game/card-actors";
@@ -7,7 +6,6 @@ import { cardText } from "../../game/card-rules";
 import { ShineText } from "../shared/effects/treatments";
 import { creaturePassive, creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
-import { enemyInspectionValue } from "../../game/ability-rules";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { Star } from "lucide-react";
@@ -40,20 +38,18 @@ export function Inspector({
   const ally = creatureId
     ? (game.team.find((c) => c.id === creatureId) ?? game.reserves.find((c) => c.id === creatureId))
     : undefined;
-  const enemy = "enemyId" in item ? game.battle?.enemies.find((e) => e.id === item.enemyId) : undefined;
   const speciesKit = "speciesKit" in item && item.speciesKit;
-  const actor = enemy || speciesKit ? undefined : rootCard ? (cardActor(game, rootCard) ?? ally) : ally;
-  const modifiers = enemy || speciesKit ? undefined : game;
-  const rank = enemy || kind === null ? 0 : creatureStars(game, kind);
-  const passive = kind === null ? null : creaturePassive(enemy ? undefined : game, kind);
+  const actor = speciesKit ? undefined : rootCard ? (cardActor(game, rootCard) ?? ally) : ally;
+  const modifiers = speciesKit ? undefined : game;
+  const rank = kind === null ? 0 : creatureStars(game, kind);
+  const passive = kind === null ? null : creaturePassive(game, kind);
   const cards: Card[] =
     kind === null && rootCard
       ? [rootCard]
       : (kind ? speciesCards(kind) : []).map((def) =>
           rootCard?.definitionId === def.id
             ? rootCard
-            : (!enemy &&
-                game.cards.find((card) => card.ownerId === actor?.id && card.definitionId === def.id)) || {
+            : game.cards.find((card) => card.ownerId === actor?.id && card.definitionId === def.id) || {
                 id: `inspect-${def.id}`,
                 definitionId: def.id,
                 ownerId: actor?.id ?? kind,
@@ -140,7 +136,7 @@ export function Inspector({
                 ? visualKeywords(cardText(definition(card.definitionId), card.level))
                 : kind === null
                   ? []
-                  : creatureKeywords(kind, enemy ? undefined : game),
+                  : creatureKeywords(kind, game),
             )}
           />
           {card ? (
@@ -168,9 +164,6 @@ export function Inspector({
                 }
                 actor={actor}
                 modifiers={modifiers}
-                enemy={!!enemy}
-                enemyPower={enemy?.power}
-                enemyValue={enemy ? enemyInspectionValue(enemy, definition(card.definitionId)) : undefined}
                 onClick={() => {}}
               />
             </>
@@ -178,9 +171,7 @@ export function Inspector({
             <>
               <header className="inspection-heading">
                 <DialogTitle>
-                  {enemy
-                    ? localizedCombatantName(enemy, i18n)
-                    : i18n.content(`content.species.${creature.id}.name`, creature.name)}
+                  {i18n.content(`content.species.${creature.id}.name`, creature.name)}
                 </DialogTitle>
               </header>
               <DialogDescription className="sr-only">
@@ -205,11 +196,6 @@ export function Inspector({
                       }
                       actor={actor}
                       modifiers={modifiers}
-                      enemy={!!enemy}
-                      enemyPower={enemy?.power}
-                      enemyValue={
-                        enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
-                      }
                       onClick={() => setSelected(index)}
                       onInspect={() => setSelected(index)}
                     />
