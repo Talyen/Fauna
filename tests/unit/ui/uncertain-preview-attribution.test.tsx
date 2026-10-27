@@ -103,6 +103,24 @@ it("keeps unchanged recipients as possible outcomes when another branch affects 
   ]);
 });
 
+it("preserves event order, absorbed Block and distinct outcome order across branches", () => {
+  const game = ready();
+  const events = [
+    { kind: "block" as const, targetId: "enemy-0", amount: -2, text: "First hit" },
+    { kind: "block" as const, targetId: "enemy-0", amount: 1, text: "Block gained" },
+    { kind: "block" as const, targetId: "enemy-0", amount: -3, text: "Second hit" },
+  ];
+  const unchanged = { accepted: true as const, state: game, events: [] };
+  const blocked = { accepted: true as const, state: game, events };
+  const forecast = playPreviewModel(
+    game,
+    { kind: "complete", replays: 3, outcomes: [blocked, unchanged, blocked] },
+    "enemy-0",
+  ).units.get("enemy-0");
+  expect(forecast?.alternatives?.map((value) => value.absorbed)).toEqual([5, -0]);
+  expect(forecast?.alternatives?.[0]?.events).toEqual(events);
+});
+
 it("keeps conditional knockouts conditional and gives every visible branch an accessible explanation", () => {
   const game = ready();
   const forecast = playPreviewModel(

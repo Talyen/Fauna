@@ -5,7 +5,8 @@ import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import { battleBenefitFacts } from "../../../src/application/battle-benefits";
 import * as engine from "../../../src/game/engine";
 import { projectPlay } from "../../../src/game/preview";
-import { cardKeywords } from "../../../src/game/progression";
+import { cardKeywords, passiveAmount } from "../../../src/game/progression";
+import { SPECIES } from "../../../src/game/content";
 import { observeDecisions } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
 
@@ -15,6 +16,21 @@ it("keeps cached card keywords isolated from callers", () => {
   const expected = [...keywords];
   keywords.splice(0);
   expect(cardKeywords(card)).toEqual(expected);
+});
+
+it("keeps passive amounts tied to the current complete tier", () => {
+  const state = structuredClone(teamRun(42, ["prismram"]));
+  for (const entry of SPECIES) {
+    for (let rank = 5; rank >= 0; rank--) {
+      state.discovery.recruited[entry.id] = rank + 1;
+      const effects = entry.passiveTiers[rank]!.effects;
+      for (const { kind } of effects) {
+        const expected = effects.reduce((sum, effect) => sum + (effect.kind === kind ? effect.amount : 0), 0);
+        expect(passiveAmount(state, entry.id, kind)).toBe(expected);
+        expect(passiveAmount(state, entry.id, kind)).toBe(expected);
+      }
+    }
+  }
 });
 
 it("refreshes battlefield facts between decisions and keeps replacement ties in ID order", () => {

@@ -1,14 +1,13 @@
-import { creaturePassive } from "../game/progression";
+import { cardKeywords, creaturePassive } from "../game/progression";
 import { speciesCards, type SpeciesId } from "../game/content";
 import { permanentCardCopies } from "../game/card-kit";
-import { definitionKeywords } from "../game/keywords";
 import type { GameState } from "../game/types";
 
 export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
   const result = new Set<string>();
   for (const kind of kinds) {
     for (const card of speciesCards(kind)) {
-      for (const keyword of definitionKeywords(card)) result.add(keyword);
+      for (const keyword of cardKeywords({ definitionId: card.id })) result.add(keyword);
       if (card.effect === "attack") {
         result.add("attack");
         if (

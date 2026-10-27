@@ -135,7 +135,7 @@ export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) 
 
 export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[] {
   if (!state.battle!.discard.length) return [];
-  const owners = drawableOwnerIds(state);
+  const owners = otherOwnerId === undefined ? drawableOwnerIds(state) : undefined;
   const livingOwners =
     otherOwnerId === undefined
       ? undefined
@@ -146,7 +146,7 @@ export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[
     const card = cards.get(id)!;
     return (
       otherOwnerId === undefined
-        ? card.ownerId === null || owners.has(card.ownerId)
+        ? card.ownerId === null || owners!.has(card.ownerId)
         : card.ownerId !== null && card.ownerId !== otherOwnerId && livingOwners!.has(card.ownerId)
     )
       ? [card]

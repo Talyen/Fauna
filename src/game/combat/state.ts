@@ -165,9 +165,10 @@ export function ownDodgeChance(state: GameState, unit: Combatant): number {
 }
 /** Share intrinsic Dodge only; received aura bonuses never amplify another provider. */
 export function sharedDodgeChance(state: GameState, target: Combatant): number {
+  if (target.health <= 0) return 0;
   const allied = !isEnemy(target);
   const row = battlefield(state, allied ? "player" : "enemy");
-  if (target.health <= 0 || !row.some((unit) => unit.id === target.id)) return 0;
+  if (!row.some((unit) => unit.id === target.id)) return 0;
   let total = 0;
   for (const unit of row) {
     if (unit.id === target.id || unit.health <= 0) continue;

@@ -26,6 +26,9 @@ export function creaturePassive(state: Pick<GameState, "discovery"> | undefined,
   const rank = state ? creatureStars(state, kind) : 0;
   return { rank, ...tiers[rank]! };
 }
+// Only the deeply frozen authored catalog is safe to cache; injected tiers may be mutable.
+const authoredPassiveTiers = new WeakSet(SPECIES.flatMap((entry) => entry.passiveTiers));
+const passiveAmounts = new WeakMap<object, Map<PassiveKind, number>>();
 /** Sum matching effects in authored order at the current rank; undefined state uses the enemy tier. */
 export function passiveAmount(
   state: Pick<GameState, "discovery"> | undefined,
@@ -33,10 +36,16 @@ export function passiveAmount(
   kind: PassiveKind,
 ): number {
   const rank = state ? creatureStars(state, speciesId) : 0;
-  return species(speciesId).passiveTiers[rank]!.effects.reduce(
-    (sum, effect) => sum + (effect.kind === kind ? effect.amount : 0),
-    0,
-  );
+  const tier = species(speciesId).passiveTiers[rank]!;
+  let amounts = passiveAmounts.get(tier);
+  const cached = amounts?.get(kind);
+  if (cached !== undefined) return cached;
+  const amount = tier.effects.reduce((sum, effect) => sum + (effect.kind === kind ? effect.amount : 0), 0);
+  if (authoredPassiveTiers.has(tier)) {
+    if (!amounts) passiveAmounts.set(tier, (amounts = new Map()));
+    amounts.set(kind, amount);
+  }
+  return amount;
 }
 export const KEYWORDS = PROGRESSION_KEYWORDS;
 export type Keyword = ProgressionKeyword;
