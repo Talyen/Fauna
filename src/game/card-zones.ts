@@ -19,7 +19,16 @@ export const MAX_BATTLE_CARDS = 256;
 const CARD_ZONES = ["draw", "hand", "buffer", "discard"] as const;
 /** Preserve pile order while retiring or relocating slots across the whole battle. */
 export function filterCardZones(battle: BattleState["battle"], keep: (id: string) => boolean) {
-  for (const zone of CARD_ZONES) if (battle[zone].length) battle[zone] = battle[zone].filter(keep);
+  for (const zone of CARD_ZONES) {
+    const cards = battle[zone];
+    let kept: string[] | undefined;
+    for (let index = 0; index < cards.length; index++) {
+      const id = cards[index]!;
+      if (keep(id)) kept?.push(id);
+      else kept ??= cards.slice(0, index);
+    }
+    if (kept) battle[zone] = kept;
+  }
 }
 
 type HandZones = Pick<BattleState["battle"], "hand" | "buffer">;

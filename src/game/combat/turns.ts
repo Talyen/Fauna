@@ -170,12 +170,16 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if (settle(draft, events)) return;
     }
     unhurried(draft, true, events);
-    for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
+    const ticking = battlefield(draft, "player");
+    ticking.push(...draft.reserves);
+    for (const c of ticking) {
       if (c.health <= 0) continue;
       tickStatuses(draft, c, events);
       if (settle(draft, events)) return;
     }
-    for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
+    const starting = battlefield(draft, "player");
+    starting.push(...draft.reserves);
+    for (const c of starting) {
       const stats = ensureCombat(c);
       if (stats.grace > 0) stats.grace--;
       decayBlock(draft, c, events);
