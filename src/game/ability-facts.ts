@@ -80,17 +80,19 @@ export function ordinaryAttackFacts(
   const lastCardCritical = def.criticalWhenLastCard && state.battle.hand.length === 1;
   const erosion = state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0;
   const usefulExtras = !!def.effects?.some((effect) => supplementalRule(effect.kind).ordinaryAttackUtility);
+  const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
+  const cardLeech = def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech);
   return [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
     const baseDamage = modifiedDamage(
       paid,
       actor,
       enemy,
-      value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1),
+      magnitude,
       type,
       {
         origin: "ability",
-        cardLeech: def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech),
+        cardLeech,
       },
       true,
     );

@@ -1,12 +1,19 @@
 import { expect, it, vi } from "vitest";
 import { cardActor, drawableOwnerIds } from "../../../src/game/card-actors";
-import { discardDrawCards, drawHasAnotherCard, recoverBrokenGuard } from "../../../src/game/card-zones";
+import {
+  discardDrawCards,
+  drawHasAnotherCard,
+  journeyReturnHasDraw,
+  recoverBrokenGuard,
+} from "../../../src/game/card-zones";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import { battleBenefitFacts } from "../../../src/application/battle-benefits";
 import * as engine from "../../../src/game/engine";
 import { projectPlay } from "../../../src/game/preview";
 import { cardKeywords, passiveAmount } from "../../../src/game/progression";
 import { SPECIES } from "../../../src/game/content";
+import { generateEncounterPack } from "../../../src/game/encounters";
+import { returnDodgedCard } from "../../../src/game/combat/card-modifiers";
 import { observeDecisions } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
 
@@ -98,4 +105,67 @@ it("preserves singleton decisions and the order of every projected alternative",
   } finally {
     spy.mockRestore();
   }
+});
+
+it("preserves saved encounter order and only rolls for roster conflicts", () => {
+  const state = structuredClone(teamRun(42, ["mossguard"]));
+  state.encounter = 2;
+  const decisions: unknown[] = [];
+  observeDecisions(state, (decision) => {
+    decisions.push(decision);
+    return 0;
+  });
+  expect(generateEncounterPack(state, ["prismram", "emberback", "pollenmoth"])).toEqual([
+    "prismram",
+    "emberback",
+    "pollenmoth",
+  ]);
+  expect(decisions).toEqual([]);
+  const pack = generateEncounterPack(state, ["mossguard", "prismram", "mossguard"]);
+  expect(pack[1]).toBe("prismram");
+  expect(pack[0]).not.toBe("mossguard");
+  expect(pack[2]).toBe(pack[0]);
+  expect(decisions).toEqual([undefined, undefined]);
+});
+
+it("keeps the copy draw fallback when both draw piles are empty", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["rookhaven", "mossguard"])));
+  const card = state.cards.find((entry) => entry.ownerId === state.team[1]!.id)!;
+  state.battle.draw = [];
+  state.battle.discard = [];
+  state.boons = ["journey-loom"];
+  expect(journeyReturnHasDraw(state, card.ownerId)).toBe(false);
+  expect(drawHasAnotherCard(state, card, { kind: "draw", amount: 1 })).toBe(true);
+  state.team[0]!.health = 0;
+  expect(drawHasAnotherCard(state, card, { kind: "draw", amount: 1 })).toBe(false);
+});
+
+it("returns a dodged card only for enemy dodges after the current ability started", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.boons = ["dream-yo-yo"];
+  const card = state.cards.find((entry) => entry.ownerId === state.team[0]!.id)!;
+  state.battle.hand = [];
+  state.battle.buffer = [];
+  state.battle.discard = [card.id];
+  const events: Parameters<typeof returnDodgedCard>[2] = [
+    {
+      kind: "status",
+      targetId: state.battle.enemies[0]!.id,
+      status: "dodge",
+      outcome: "dodge",
+      text: "Dodge",
+    },
+    { kind: "status", targetId: state.team[0]!.id, status: "dodge", outcome: "dodge", text: "Dodge" },
+  ];
+  returnDodgedCard(state, card, events, 1);
+  expect(state.battle.discard).toEqual([card.id]);
+  events.push({
+    kind: "status",
+    targetId: state.battle.enemies[0]!.id,
+    status: "dodge",
+    outcome: "dodge",
+    text: "Dodge",
+  });
+  returnDodgedCard(state, card, events, 1);
+  expect(state.battle.hand).toEqual([card.id]);
 });

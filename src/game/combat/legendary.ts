@@ -122,8 +122,9 @@ export function courtRemembers(state: BattleState, actor: Combatant, events: Gam
   const echoes = (state.battle.minions ?? []).filter(
     (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
   );
+  if (!echoes.length) return;
   const enemies = battlefield(state, isEnemy(actor) ? "player" : "enemy").filter((unit) => unit.health > 0);
-  if (!echoes.length || !enemies.length) return;
+  if (!enemies.length) return;
   const echo = echoes[Math.floor(roll(state, { kind: "index", size: echoes.length }) * echoes.length)]!;
   const target = enemies[Math.floor(roll(state, { kind: "index", size: enemies.length }) * enemies.length)]!;
   events.push({

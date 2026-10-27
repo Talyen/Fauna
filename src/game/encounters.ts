@@ -98,10 +98,12 @@ export function generateEncounterPack(state: GameState, savedPack?: readonly Spe
   const packs = encounterPacks(state.encounter);
   const pack = savedPack ?? packs[Math.floor(roll(state) * packs.length)]!;
   const roster = [...state.team, ...state.reserves].map((unit) => unit.species);
+  const selected = pack.slice(0, Math.min(3, state.encounter + 1));
+  if (!selected.some((kind) => roster.includes(kind))) return selected;
   const eligible = SPECIES.filter((entry) => !entry.legendary && !roster.includes(entry.id));
-  return pack
-    .slice(0, Math.min(3, state.encounter + 1))
-    .map((kind) => (roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind));
+  return selected.map((kind) =>
+    roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind,
+  );
 }
 
 function scaleEnemyStat(base: number, encounter: number) {

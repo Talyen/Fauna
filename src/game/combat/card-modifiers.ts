@@ -19,28 +19,31 @@ import { receiveCard, draw, journeyReturn } from "../card-zones";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
 export function returnDodgedCard(state: BattleState, card: Card, events: GameEvent[], start: number) {
-  const owner = state.team.find((ally) => ally.id === card.ownerId);
   if (
     !state.boons.includes("dream-yo-yo") ||
     definition(card.definitionId).consume ||
-    !state.cards.some((entry) => entry.id === card.id) ||
-    !owner
+    !state.cards.some((entry) => entry.id === card.id)
   )
     return;
+  const owner = state.team.find((ally) => ally.id === card.ownerId);
+  if (!owner) return;
   // A summoner may fall after its Echo Dodges during the same card. The retained
   // Echo receipt still identifies that opponent after it leaves the battlefield.
   let enemies: Set<string> | undefined;
-  if (
-    !events.slice(start).some((event) => {
-      if (event.kind !== "status" || event.outcome !== "dodge") return false;
-      enemies ??= new Set([
-        ...state.battle.enemies.map((enemy) => enemy.id),
-        ...(state.battle.minions ?? []).filter((unit) => unit.minion.side === "enemy").map((unit) => unit.id),
-      ]);
-      return enemies.has(event.targetId);
-    })
-  )
-    return;
+  let dodged = false;
+  for (let index = start; index < events.length; index++) {
+    const event = events[index]!;
+    if (event.kind !== "status" || event.outcome !== "dodge") continue;
+    enemies ??= new Set([
+      ...state.battle.enemies.map((enemy) => enemy.id),
+      ...(state.battle.minions ?? []).filter((unit) => unit.minion.side === "enemy").map((unit) => unit.id),
+    ]);
+    if (enemies.has(event.targetId)) {
+      dodged = true;
+      break;
+    }
+  }
+  if (!dodged) return;
   const index = state.battle.discard.indexOf(card.id);
   if (index < 0) return;
   state.battle.discard.splice(index, 1);

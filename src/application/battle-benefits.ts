@@ -204,9 +204,10 @@ export function battleBenefits(
       return support("pearl");
     case "attack": {
       const enemies = facts.livingEnemies();
+      const cost = cardCost(card, state);
       const attacks = enemies.map((enemy) => ({
         enemy,
-        outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cardCost(card, state)),
+        outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cost),
       }));
       const cleanse = def.effects?.some(
         (effect) =>

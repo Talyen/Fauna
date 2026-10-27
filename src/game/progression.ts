@@ -54,19 +54,28 @@ const talentsById = new Map<string, (typeof TALENTS)[number]>(TALENTS.map((talen
 const talentsByKeyword = new Map(
   KEYWORDS.map((keyword) => [keyword, TALENTS.filter((talent) => talent.keyword === keyword)]),
 );
-function hasTalentPrerequisites(state: Pick<GameState, "talents">, talent: (typeof TALENTS)[number]) {
+function hasTalentPrerequisites(
+  state: Pick<GameState, "talents">,
+  talent: (typeof TALENTS)[number],
+  selected?: ReadonlySet<string>,
+) {
   return talentsByKeyword
     .get(talent.keyword)!
-    .every((earlier) => earlier.row >= talent.row || state.talents.includes(earlier.id));
+    .every(
+      (earlier) =>
+        earlier.row >= talent.row ||
+        (selected ? selected.has(earlier.id) : state.talents.includes(earlier.id)),
+    );
 }
 
 /** Validate the complete selection, including purchases restored from a save. */
 export function validTalentSelection(state: Pick<GameState, "talents" | "keywordXP">): boolean {
-  if (new Set(state.talents).size !== state.talents.length) return false;
+  const selected = new Set(state.talents);
+  if (selected.size !== state.talents.length) return false;
   const spent = new Map<Keyword, number>();
   for (const id of state.talents) {
     const talent = talentsById.get(id);
-    if (!talent || !hasTalentPrerequisites(state, talent)) return false;
+    if (!talent || !hasTalentPrerequisites(state, talent, selected)) return false;
     const points = (spent.get(talent.keyword) ?? 0) + 1;
     if (points > talentPoints(state.keywordXP[talent.keyword] ?? 0)) return false;
     spent.set(talent.keyword, points);

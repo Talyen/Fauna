@@ -53,7 +53,8 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
     !state.team.some((unit) => unit.id === ownerId && unit.health > 0)
   )
     return;
-  const owned = new Set(state.cards.filter((card) => card.ownerId === ownerId).map((card) => card.id));
+  const owned = new Set<string>();
+  for (const card of state.cards) if (card.ownerId === ownerId) owned.add(card.id);
   const available = state.battle.discard.filter((id) => owned.has(id));
   if (!available.length) return;
   const id =
@@ -84,7 +85,12 @@ function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
 
 /** Inspect the same draw pool without changing its order or revealing a hidden card. */
 export function journeyReturnHasDraw(state: BattleState, ownerId: string | null): boolean {
-  if (!ownerId || !state.boons.includes("journey-loom")) return false;
+  if (
+    !ownerId ||
+    !state.boons.includes("journey-loom") ||
+    (!state.battle.draw.length && !state.battle.discard.length)
+  )
+    return false;
   const eligible = journeyReturnCards(state, ownerId);
   return (
     state.battle.draw.some((id) => eligible.has(id)) || state.battle.discard.some((id) => eligible.has(id))
@@ -316,22 +322,23 @@ export function drawHasAnotherCard(
   played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
-  const owners = drawableOwnerIds(state);
-  const cards = new Map<string, Card>();
-  for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
-  const eligible = (id: string) => {
-    const drawn = cards.get(id)!;
-    return (
-      (drawn.ownerId === null || owners.has(drawn.ownerId)) &&
-      (effect.kind === "draw" || cardHasKeyword(drawn, effect.keyword))
-    );
-  };
+  if (state.battle.draw.length || state.battle.discard.length) {
+    const owners = drawableOwnerIds(state);
+    const cards = new Map<string, Card>();
+    for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+    const eligible = (id: string) => {
+      const drawn = cards.get(id)!;
+      return (
+        (drawn.ownerId === null || owners.has(drawn.ownerId)) &&
+        (effect.kind === "draw" || cardHasKeyword(drawn, effect.keyword))
+      );
+    };
+    if (state.battle.draw.some(eligible) || state.battle.discard.some(eligible)) return true;
+  }
   return (
-    state.battle.draw.some(eligible) ||
-    state.battle.discard.some(eligible) ||
-    (!definition(played.definitionId).consume &&
-      (effect.kind === "draw" || cardHasKeyword(played, effect.keyword)) &&
-      battleCardCapacity(state) > 0 &&
-      state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "wellRead") > 0))
+    !definition(played.definitionId).consume &&
+    (effect.kind === "draw" || cardHasKeyword(played, effect.keyword)) &&
+    battleCardCapacity(state) > 0 &&
+    state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "wellRead") > 0)
   );
 }
