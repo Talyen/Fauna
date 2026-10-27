@@ -1985,11 +1985,35 @@
     "sourceHash": "b435114236e5cdc01818c5ace2aa1facd8f06c8295a719beccb1a70c607468ad",
     "text": "Замешайте руку в колоду; Возьмите столько же карт"
   },
+  "content.card.oathara-travelers-ward.name": {
+    "reviewed": true,
+    "source": "Traveler’s Ward",
+    "sourceHash": "951383f234eacad58d1387bceb345860fd55c602562a4ede9180c8c5880ef36a",
+    "text": "Защита странника"
+  },
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "de88359d71608607ccf036abd98ab480cef847557d9cea6c7077327d1c584a4c",
     "text": "<keyword0>Отразите следующую атаку</keyword0>"
+  },
+  "content.card.oathara-vow-of-return.name": {
+    "reviewed": true,
+    "source": "Vow of Return",
+    "sourceHash": "55d7b041ff24fb40f973316d4d25216caf2d6798387e47fe4ff6f3924a45af32",
+    "text": "Клятва возвращения"
+  },
+  "content.card.orifable-attack.name": {
+    "reviewed": true,
+    "source": "Postal Swarm",
+    "sourceHash": "59024cf9a52fad25b2b30137e9e9aae0e97b453154e31cf7b3dd0be73746baa4",
+    "text": "Почтовый рой"
+  },
+  "content.card.orifable-createFood.name": {
+    "reviewed": true,
+    "source": "Care Package",
+    "sourceHash": "b77e79eb17d7012e099756490d530a68487d51f473e383f555508f3e7f1696cd",
+    "text": "Посылка заботы"
   },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
@@ -1997,11 +2021,23 @@
     "sourceHash": "12a123c9b50780a85d0ddf77fc195a8aebde99a0fe39957ebe6f53a385808246",
     "text": "Добавьте в руку <keyword0>еду</keyword0>: {{value0}}"
   },
+  "content.card.orifable-heal.name": {
+    "reviewed": true,
+    "source": "Good Tidings",
+    "sourceHash": "816657492bb0dc581deda72a5f16151a200658941a3f460432725fb73d6b493c",
+    "text": "Добрые вести"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "ce57696583c748249e66d57dea6f55a608dddf1067f30f086192d20e54f7d8f8",
     "text": "Восстановить наиболее раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "reviewed": true,
+    "source": "Polar Reprieve",
+    "sourceHash": "54ada74edf3345a35daac68ae11776a8b5891538df6690b4db9c7cfccf2cf181",
+    "text": "Полярная передышка"
   },
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2015,11 +2051,29 @@
     "sourceHash": "9ad1f1e6a43ad0c3d85b22d57d3e7e29340f5064c4a8055077ac558becbbcdec",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников"
   },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "reviewed": true,
+    "source": "Sundog Reservoir",
+    "sourceHash": "0f8abcbe77cb243dbc855f6094a6bc49173a273f0cd25557372d1f71c10af69b",
+    "text": "Водоём паргелия"
+  },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "1f84adbbbe596fb0dec0d923122f8feab444b09e9da7639b4749731b12e6ac8e",
     "text": "Получите {{value0}} <keyword0>маны</keyword0>"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "reviewed": true,
+    "source": "Whiteout Waltz",
+    "sourceHash": "404465287f659e55ad304ce0d3d7a5de11c411bcef7e982b67bef4388e796255",
+    "text": "Вальс снежной пелены"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "reviewed": true,
+    "source": "Dazzle Burst",
+    "sourceHash": "58fac44e147d66059c08e276ea93fcd8d2b5ce37cc7c2fcf51ff493a3e776898",
+    "text": "Ослепительная вспышка"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -2027,11 +2081,23 @@
     "sourceHash": "8042c47cd429044299f717d1d71d6ed18ba5b55fc6c0d946ac2fb337aef45938",
     "text": "Нанести случайному врагу {{value0}} ед. урона <keyword0>светом</keyword0>"
   },
+  "content.card.pollenmoth-heal.name": {
+    "reviewed": true,
+    "source": "Bloomwake",
+    "sourceHash": "15b6b26afd1a06283eade4a77d78dea5401b0d4723e1ae2a0fc815363dcf0642",
+    "text": "Цветочный след"
+  },
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "36180da72538867cabf6487a9964a96ca64347b00b56dc1a43ba27b755d7f452",
     "text": "Восстановить наиболее раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "reviewed": true,
+    "source": "Petal Shelter",
+    "sourceHash": "548b87c9e8447b67c44a2b97fb9f3cd4dc21d1e5c8413684d0bc05db1d7358f6",
+    "text": "Лепестковое укрытие"
   },
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -2039,11 +2105,23 @@
     "sourceHash": "3e0b039dcc6960a82ac578329dbff73a49d63c9b22f57e22096d09e93b020078",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
+  "content.card.prismram-attack.name": {
+    "reviewed": true,
+    "source": "Prism Charge",
+    "sourceHash": "c46cef71ebe9858da234218ec11cb7eac3267226810009d631cd3dce7c49912d",
+    "text": "Призматический натиск"
+  },
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "2755a03c43b3daeb970b811839969b05e5ecfa2555a5325c2ffe57d083203b05",
     "text": "Нанести {{value0}} <keyword0>физического</keyword0> урона"
+  },
+  "content.card.prismram-guard.name": {
+    "reviewed": true,
+    "source": "Faceted Ward",
+    "sourceHash": "abf6459955f4f6bb3e478e128a9587da7f9ba82015031990b2733832bc6b63a4",
+    "text": "Гранёная защита"
   },
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
@@ -2051,11 +2129,23 @@
     "sourceHash": "ae1f27e0369b556c456fa43cc81f19dc47ebb7c6b1dddddd13ed039cb2767209",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Отразить</keyword1> следующий вредный эффект"
   },
+  "content.card.prismram-spectrum-lance.name": {
+    "reviewed": true,
+    "source": "Spectrum Lance",
+    "sourceHash": "766941de9b26e69c3c6e75662b1d8d429ad17cc809ce152422069cfb0f4babe5",
+    "text": "Копьё спектра"
+  },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "5b2ab1e6733b0d82f42554a8f0b067eb2112c1bbf836698b01a806bdcd69b8f8",
     "text": "Нанести {{value0}} ед. урона <keyword0>светом</keyword0>; <keyword1>Рассеять</keyword1> цель: удалить эффектов: {{value1}}"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "reviewed": true,
+    "source": "Ember Harvest",
+    "sourceHash": "45880f0438e251efd83461dd3d7ee1e5e07e3d7646643e5d4ee4952b0d89c518",
+    "text": "Сбор углей"
   },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,

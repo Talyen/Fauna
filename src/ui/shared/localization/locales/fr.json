@@ -1997,11 +1997,35 @@
     "sourceHash": "87a3ec04a20d9f98b366b6c7f7d96c8c7b7caa8150805d411e7c4e88db986817",
     "text": "Mélangez votre main dans votre deck ; Piochez autant de cartes"
   },
+  "content.card.oathara-travelers-ward.name": {
+    "reviewed": true,
+    "source": "Traveler’s Ward",
+    "sourceHash": "63098dce81d61799352ae518a0ac8b5db4536003c869b61e2a606a9467acfea1",
+    "text": "Garde du voyageur"
+  },
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "de509ac7bf722bb9ff16c6f74f7efe148644677238c6f81036a803aab08f0295",
     "text": "<keyword0>Renvoyez la prochaine attaque</keyword0>"
+  },
+  "content.card.oathara-vow-of-return.name": {
+    "reviewed": true,
+    "source": "Vow of Return",
+    "sourceHash": "4132a968fce98f29ab0bd3e10b543d034bea4d90f3d34d5d09bcc23142e07c2f",
+    "text": "Serment de retour"
+  },
+  "content.card.orifable-attack.name": {
+    "reviewed": true,
+    "source": "Postal Swarm",
+    "sourceHash": "357e522fb387723f55827797c82f782a53f38967ce722fdb8eb8e142d6a186ff",
+    "text": "Essaim postal"
+  },
+  "content.card.orifable-createFood.name": {
+    "reviewed": true,
+    "source": "Care Package",
+    "sourceHash": "55734c61bd821bc50235e517d35c139414bd6ad14d4b5a73737e87105ef12c8a",
+    "text": "Colis attentionné"
   },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
@@ -2009,11 +2033,23 @@
     "sourceHash": "3a6b26e4bd47126e5f98c4601ec317c50df99db2999e0ebbcbae217506ff2df4",
     "text": "Ajoutez de la <keyword0>Nourriture</keyword0> à votre main : {{value0}}"
   },
+  "content.card.orifable-heal.name": {
+    "reviewed": true,
+    "source": "Good Tidings",
+    "sourceHash": "d4d4cdde2a8834d703b8d8e3d4ec32fc4a396526d7baf473949a4206d93c8993",
+    "text": "Bonnes nouvelles"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "e542cddd12711dae8103f165be9eacab16ef0abfc7d1fcaf875d396b586cb182",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> à l’allié le plus blessé"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "reviewed": true,
+    "source": "Polar Reprieve",
+    "sourceHash": "ccd6b80d997e94cbb9e13f8a522fde5a0b7bf62de1c6a445d32ea226954c202f",
+    "text": "Répit polaire"
   },
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2027,11 +2063,29 @@
     "sourceHash": "a68ddbe229670cb55f2a23f70eceb6986a982db1b622ba838df9f81456f27d1a",
     "text": "<keyword0>Purifiez</keyword0> toute l’accumulation de <keyword1>Gel</keyword1> des alliés"
   },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "reviewed": true,
+    "source": "Sundog Reservoir",
+    "sourceHash": "ac3955d644fda9444899ea26e55095236943743a344474282666e22f8eb93619",
+    "text": "Réservoir du parhélie"
+  },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "a0ed452a057112c1403bb8a2141d2d57b98b7a2e3f2593d0d1f2084520470348",
     "text": "Gagnez {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "reviewed": true,
+    "source": "Whiteout Waltz",
+    "sourceHash": "8ee980110e8a69d5905c90836c58ea2c25faa72447afd16c228b40ae76b977b3",
+    "text": "Valse du blizzard"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "reviewed": true,
+    "source": "Dazzle Burst",
+    "sourceHash": "0c85095a8bbc14db325f8d0d8178840afdcde0aaf8cd0e8cf857de9126effe3b",
+    "text": "Éclat éblouissant"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -2039,11 +2093,23 @@
     "sourceHash": "2a0d20400a42a62933263a15c5f852037057236ac5948c194d4520cf17ce4dee",
     "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> à un ennemi aléatoire"
   },
+  "content.card.pollenmoth-heal.name": {
+    "reviewed": true,
+    "source": "Bloomwake",
+    "sourceHash": "e1aeb33af8b8670aa911f1624b31adb1c13995e941a11452c26e14e0e493f30d",
+    "text": "Sillage fleuri"
+  },
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "a1d1276c71fd1027117ebeb623b3e5d0b1cf390438a5c1ec1194d0a38f10e907",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> à l’allié le plus blessé"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "reviewed": true,
+    "source": "Petal Shelter",
+    "sourceHash": "08dbc05f263791814da0259a722bd599667211317a94ba195f959ee2889915c8",
+    "text": "Abri de pétales"
   },
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -2051,11 +2117,23 @@
     "sourceHash": "4c27372a00491b242836d220da23ccf05a1e12945ba91aaba8a902723733ebc7",
     "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0>"
   },
+  "content.card.prismram-attack.name": {
+    "reviewed": true,
+    "source": "Prism Charge",
+    "sourceHash": "e73fd7701a3a5470c3b697a9dd64957253de7245ba4960b4bf0c4cdbbfeeb30b",
+    "text": "Charge prismatique"
+  },
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "d83f8ad8fceff4655a385fcddfcf4c02ee273bfca93d58c2da9b5fceb511878b",
     "text": "Inflige {{value0}} dégâts <keyword0>Physiques</keyword0>"
+  },
+  "content.card.prismram-guard.name": {
+    "reviewed": true,
+    "source": "Faceted Ward",
+    "sourceHash": "fbbce55281787128df0ad469c7188e0dd805a211e0db06c541cca7b97e605fe4",
+    "text": "Garde à facettes"
   },
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
@@ -2063,11 +2141,23 @@
     "sourceHash": "fdb0ffef8a9222cac3846bf47d0e4fe2a546f50b98fa5207fb03d1308d1c9fa1",
     "text": "Gagne {{value0}} <keyword0>Blocage</keyword0> ; <keyword1>Renvoie</keyword1> le prochain effet néfaste"
   },
+  "content.card.prismram-spectrum-lance.name": {
+    "reviewed": true,
+    "source": "Spectrum Lance",
+    "sourceHash": "2e9656232e80aa1fc799e88401138c86797ef6172b01b7ef958a599730e127f8",
+    "text": "Lance du spectre"
+  },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "c728b8c4f0c2425dc86e08cf4e27e3f05863ed0c404b9c4ecc87a950f3f55985",
     "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> ; <keyword1>Dissipe</keyword1> la cible : retire {{value1}} effet"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "reviewed": true,
+    "source": "Ember Harvest",
+    "sourceHash": "f9d521dde339049a97569953d5d7b940103d4f62798f453e0aa0a6197451f340",
+    "text": "Moisson de braises"
   },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,

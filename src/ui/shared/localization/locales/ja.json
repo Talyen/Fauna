@@ -1985,11 +1985,35 @@
     "sourceHash": "588dc4cf12368651ec08cd3edcc1bb2a12ea9de23e84caa7e0270c1d63d58409",
     "text": "手札をデッキに戻してシャッフル; 同じ枚数のカードを引く"
   },
+  "content.card.oathara-travelers-ward.name": {
+    "reviewed": true,
+    "source": "Traveler’s Ward",
+    "sourceHash": "3dfec54ba6f51734fc5a0291060aabd5a797b37f058e1718940d7d0a894217d6",
+    "text": "旅人の守り"
+  },
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "21378d0172012b3f580e9fd1641f001b7f545eafdc5d099e8a414b4641778392",
     "text": "<keyword0>次の攻撃を反射</keyword0>"
+  },
+  "content.card.oathara-vow-of-return.name": {
+    "reviewed": true,
+    "source": "Vow of Return",
+    "sourceHash": "cf588bec88e14a590538bb24bc5b1e33833b0804c51172ffcf7a855d85b613a1",
+    "text": "帰還の誓い"
+  },
+  "content.card.orifable-attack.name": {
+    "reviewed": true,
+    "source": "Postal Swarm",
+    "sourceHash": "3f1d541887b2abb9cbb1b0248190d734cd9e241a61b943268c92613954c0f5f7",
+    "text": "郵便の群れ"
+  },
+  "content.card.orifable-createFood.name": {
+    "reviewed": true,
+    "source": "Care Package",
+    "sourceHash": "816905d241a1234cf9e00886c7f716334a6b1194c990de29254b9954d6d89ac1",
+    "text": "いたわりの小包"
   },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
@@ -1997,11 +2021,23 @@
     "sourceHash": "e7899402960d32defabadb213dac5971b5cd6b2a9b8a071f7d7587a2786b3887",
     "text": "手札に<keyword0>食料</keyword0>を{{value0}}枚加える"
   },
+  "content.card.orifable-heal.name": {
+    "reviewed": true,
+    "source": "Good Tidings",
+    "sourceHash": "3ee2afc6f57177b21cb107a00f3b52b63dd919d9d4ca4b86351226f274fc59e2",
+    "text": "良い知らせ"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "a1ff2c8f0f0afb90cd262257ebe1bb8f0c213bf2d99f778619556a1c8a0a9eb1",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "reviewed": true,
+    "source": "Polar Reprieve",
+    "sourceHash": "a16bfbe34e6b34a04165af985a8eb12bcc66fedc607bd9a6c3046de60a5c8fdd",
+    "text": "極地のひと休み"
   },
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2015,11 +2051,29 @@
     "sourceHash": "ec54567f2180204ef95e7ee544e6f41279cd1d86ff0674890afa56e280d56954",
     "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0>"
   },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "reviewed": true,
+    "source": "Sundog Reservoir",
+    "sourceHash": "4db43dd4915fbc689c06e1ef781d6d0137715febd1e367d901bca24086dce35c",
+    "text": "幻日の貯水池"
+  },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "aac0e26b72d6c892fdd7ee928e83a2d990b2d6b8a0e9e1f26a5397306437b8f6",
     "text": "<keyword0>マナ</keyword0>を{{value0}}獲得"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "reviewed": true,
+    "source": "Whiteout Waltz",
+    "sourceHash": "4328c7cb17a31af4d7382358d0108ac26c600d59195435b424fac7ccdbeb4409",
+    "text": "白嵐のワルツ"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "reviewed": true,
+    "source": "Dazzle Burst",
+    "sourceHash": "889f61cbdf74a757de15373818477616635b1bcb2ff770262a030d165489bd6e",
+    "text": "まばゆい閃光"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -2027,11 +2081,23 @@
     "sourceHash": "5d3fae2809498819470e25de20a0c82cb27dbbe5237469ed36f647f5e95230c9",
     "text": "ランダムな敵に<keyword0>光</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.pollenmoth-heal.name": {
+    "reviewed": true,
+    "source": "Bloomwake",
+    "sourceHash": "ece7adeca78227901bc07e5e573fa721fc1907ebb74c09b8974b1b3c377319b6",
+    "text": "花の軌跡"
+  },
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "c0b1257bf9c8bc8840cf81fca96e552c38f3c4f0c5d52789f688318e325b56a4",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "reviewed": true,
+    "source": "Petal Shelter",
+    "sourceHash": "06016302db7b3352c9ea697620cf7c99662bb298211d907723dc97c64ec7e811",
+    "text": "花びらの避難所"
   },
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -2039,11 +2105,23 @@
     "sourceHash": "7b628f1d69e8f24e4f9fa7dc9d304276bb9fc6f71a785f2eb596860f834b04c5",
     "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.card.prismram-attack.name": {
+    "reviewed": true,
+    "source": "Prism Charge",
+    "sourceHash": "61b4aa2549ce664c4456cbf9d92895e0a7f1e3d36b69e88fca049c869d4ffb79",
+    "text": "プリズムの突進"
+  },
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "75e891abb6b39d9220faa888fcb982dd697491bfc4a4df9056234dde9a095570",
     "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.prismram-guard.name": {
+    "reviewed": true,
+    "source": "Faceted Ward",
+    "sourceHash": "ca233b5813ca3fed30f23c3479cd4244904ea95c7e4d8e1ca25ec999f51ddf26",
+    "text": "多面の守り"
   },
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
@@ -2051,11 +2129,23 @@
     "sourceHash": "4e5adb815870f401f4e3407fd41029b0db83c871b1704c81dcb5898d8d00186b",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；次の有害な状態効果を<keyword1>反射</keyword1>"
   },
+  "content.card.prismram-spectrum-lance.name": {
+    "reviewed": true,
+    "source": "Spectrum Lance",
+    "sourceHash": "cf9eda86e28dbfa937ccbf77690791d6f1342ae0bec3a4bcf2bac07dc90bde2f",
+    "text": "スペクトルの槍"
+  },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "dd90cd704804766f06ac76864c1800a512b442870777cc8b803222880ffbcf07",
     "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象の<keyword1>強化解除</keyword1>：効果を{{value1}}個取り除く"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "reviewed": true,
+    "source": "Ember Harvest",
+    "sourceHash": "3be60043e6ddf45fe4089219030cdba63247ca4d24546a7e511c09ce8d02c0a4",
+    "text": "熾火の収穫"
   },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,

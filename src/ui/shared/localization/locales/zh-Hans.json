@@ -1985,11 +1985,35 @@
     "sourceHash": "a0bffae07f701f972012f71d0865f66b072d623c18363382a710d58f625e6ef1",
     "text": "将手牌洗入牌组；抽取相同数量的牌"
   },
+  "content.card.oathara-travelers-ward.name": {
+    "reviewed": true,
+    "source": "Traveler’s Ward",
+    "sourceHash": "d058ba783555018484de1cd1ac4f216e2a03bf8e0ae45485768ee30c688ab0fa",
+    "text": "旅人守护"
+  },
   "content.card.oathara-travelers-ward.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "5d8294c2d460d5fd247e75550c6252a592bbe4fe3bd5219569415e289a9db369",
     "text": "<keyword0>反射下一次攻击</keyword0>"
+  },
+  "content.card.oathara-vow-of-return.name": {
+    "reviewed": true,
+    "source": "Vow of Return",
+    "sourceHash": "7939231754aee0fda3ee345e258d00f2a0b7ecc211ffbc72d1fd9a5ed50a7f27",
+    "text": "归途誓言"
+  },
+  "content.card.orifable-attack.name": {
+    "reviewed": true,
+    "source": "Postal Swarm",
+    "sourceHash": "ec6f42dbbcbc1183241e6ed189807e7f14afd2deb9df436fc0d6d5935f41e5c8",
+    "text": "邮递群舞"
+  },
+  "content.card.orifable-createFood.name": {
+    "reviewed": true,
+    "source": "Care Package",
+    "sourceHash": "fbac38b16a61813d5c5d06fc7d79e7bcb47b8fa053bcac49b8348ab8a41130a9",
+    "text": "关怀包裹"
   },
   "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
@@ -1997,11 +2021,23 @@
     "sourceHash": "a4baf8fa996db7388818ebf626289ae77d0c15cd09d10bb4f16dcf588d2423c8",
     "text": "将{{value0}}张<keyword0>食物</keyword0>加入手牌"
   },
+  "content.card.orifable-heal.name": {
+    "reviewed": true,
+    "source": "Good Tidings",
+    "sourceHash": "bd40f61d5007dbd92f958fa42cdb25d53e6d1226d34d946646fd86789f1aced8",
+    "text": "佳音"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "1b347a9a5e5ecbedf0104a637f0a3fbc80703b3be5e5a6bb72a99683fb280e0e",
     "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.parhelion-polar-reprieve.name": {
+    "reviewed": true,
+    "source": "Polar Reprieve",
+    "sourceHash": "534a84f53314e8800c43e2eccda1052d02fdf9918990d35f6a397a61ae2186e7",
+    "text": "极地喘息"
   },
   "content.card.parhelion-polar-reprieve.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2015,11 +2051,29 @@
     "sourceHash": "225858c2197f617de9ae2d76a0778e46830ef0a9e4922f115baf6706abb32659",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累"
   },
+  "content.card.parhelion-sundog-reservoir.name": {
+    "reviewed": true,
+    "source": "Sundog Reservoir",
+    "sourceHash": "10627658b2e95c6af15861868bc1733b187f5381fd64b1a6ce19a0dc4eb67dbd",
+    "text": "幻日蓄池"
+  },
   "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "0596469155dcd03878b156db82d2704510e31764c7c90065ca9d2b60926eca86",
     "text": "获得{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.parhelion-whiteout-waltz.name": {
+    "reviewed": true,
+    "source": "Whiteout Waltz",
+    "sourceHash": "0ebf6192f6c608970958fc7085bb4bacc6596f5bc0815a9168c15883ee7cad4e",
+    "text": "白茫华尔兹"
+  },
+  "content.card.pollenmoth-attack.name": {
+    "reviewed": true,
+    "source": "Dazzle Burst",
+    "sourceHash": "a467063088dd08ab42d38bd8cd7f2bbcdc7e6c4b5b21ab70357008bd6b2503bb",
+    "text": "耀目爆发"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -2027,11 +2081,23 @@
     "sourceHash": "8548fb96ed0b67ce31ae6961a75b320d112c4cb5e0b4066a89e0b8be6dd811e8",
     "text": "对随机敌人造成 {{value0}} 点<keyword0>光</keyword0>伤害"
   },
+  "content.card.pollenmoth-heal.name": {
+    "reviewed": true,
+    "source": "Bloomwake",
+    "sourceHash": "1bf9b9aaa6f3d66bac7e58dfd8e6786c30cd397a51d0eaaa97592704ca5ee507",
+    "text": "繁花余迹"
+  },
   "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "9f7c94478be8565e0c64cbb97f9a15761a5c8178e98966b74327fed40a07c9b4",
     "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.pollenmoth-teamGuard.name": {
+    "reviewed": true,
+    "source": "Petal Shelter",
+    "sourceHash": "c40144fc56d4b8091cc0c48ccc9359b28e5a997f6072ba137642c8e05a0f1b02",
+    "text": "花瓣庇护"
   },
   "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
     "reviewed": true,
@@ -2039,11 +2105,23 @@
     "sourceHash": "e93ab51615fd5ed0e1fc1d9c47f2d2c6190fa8f48ee08b3258ba699a93bdd034",
     "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
+  "content.card.prismram-attack.name": {
+    "reviewed": true,
+    "source": "Prism Charge",
+    "sourceHash": "68d95dbebf9f00f9f909d9ec7b3aa61f09c0966c618f3e40d4bd84b26d6e7d6c",
+    "text": "棱镜冲锋"
+  },
   "content.card.prismram-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "7f5ae0361fbdea797995360981449471a74fe8fbd7004950f34b6f209836b4c7",
     "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.prismram-guard.name": {
+    "reviewed": true,
+    "source": "Faceted Ward",
+    "sourceHash": "3da9d6eb08c1b9d333d03888d05b1df486acdb7f3feeb74f0d7c3031aced531c",
+    "text": "多面守护"
   },
   "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
     "reviewed": true,
@@ -2051,11 +2129,23 @@
     "sourceHash": "bbc907a154bdf97cee5f6544760533b228565bb186b861d902179e6ef591db4b",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>反射</keyword1>下一个有害状态效果"
   },
+  "content.card.prismram-spectrum-lance.name": {
+    "reviewed": true,
+    "source": "Spectrum Lance",
+    "sourceHash": "85dc001487640b9b5d26e20d4280b1a99c0237769caf7ce535f6122e4fe6657a",
+    "text": "光谱之枪"
+  },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "9087d65f4358b070975dda0bdafcdcf8b6d0e9fd6debd9eb6e68dda9bd5e587c",
     "text": "造成 {{value0}} 点<keyword0>光</keyword0>伤害；<keyword1>驱散</keyword1>目标：移除 {{value1}} 个效果"
+  },
+  "content.card.pyrella-ember-harvest.name": {
+    "reviewed": true,
+    "source": "Ember Harvest",
+    "sourceHash": "19baae80a6583ad86901ad705bb368a9d73ee3c91f83ec15015693b317b59d4d",
+    "text": "余烬收获"
   },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
