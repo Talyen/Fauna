@@ -1343,6 +1343,102 @@
     "sourceHash": "90d588dacab566be20760f59b66f7a1a821d1dc9b92ef6f402da4be18fb3b964",
     "text": "Без бремени"
   },
+  "content.talent.freeze.bitter-cold.name": {
+    "reviewed": true,
+    "source": "Bitter Cold",
+    "sourceHash": "dd94fa6f99b6e4d06b377c561be5fe4eb1592e6138ce8396839138bf416b1980",
+    "text": "Лютый холод"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "reviewed": true,
+    "source": "Brittle Armor",
+    "sourceHash": "08b6c6512cb6bae95646ff42462e2b243499dc0719841a48d02ee5564f1601e1",
+    "text": "Хрупкость: Броня"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "sourceHash": "15871baffdb0c375a0444ce7e07f774c55092b3de9493a8908f247d265dc1861",
+    "text": "Когда вы <keyword0>замораживаете</keyword0> врага, снимите весь его запас <keyword1>брони</keyword1>"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "reviewed": true,
+    "source": "Brittle Ice",
+    "sourceHash": "3f7b55a8b11972e8b6916c04052676877dd27922d4a62227b334e4fa71162f55",
+    "text": "Хрупкий лёд"
+  },
+  "content.talent.freeze.brittle-ice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "sourceHash": "a2d23fbd8e2d43a02be52218f28dbd41c631c1bcbe576bf2c4f5c15e2b5aa383",
+    "text": "<keyword0>Замороженные</keyword0> враги получают на {{value0}} больше урона"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "reviewed": true,
+    "source": "Cold Resistance",
+    "sourceHash": "168f81ebd536816661f1ada01402fb4bb3657c8c8a00c5fac87f1c1460de4253",
+    "text": "Сопротивление холоду"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "e6468507d4c2390c65f4c48cdea02b9712cbc9faa489f45adb335b4c6b01fd16",
+    "text": "Получайте вдвое меньше урона от <keyword0>заморозки</keyword0>"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "reviewed": true,
+    "source": "Cryo-preservation",
+    "sourceHash": "3d54eb325c7bc0e0153dd46579c5fb6f1f466611d8953741205e9ba07609e866",
+    "text": "Криоконсервация"
+  },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "sourceHash": "b311c37c743e301d2f6ef08d7e968162c430c7bbfda34bf2f09e783479ce3995",
+    "text": "<keyword0>Яд</keyword0> не ослабевает на <keyword1>замороженных</keyword1> врагах"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "reviewed": true,
+    "source": "Glacial Barrier",
+    "sourceHash": "b47e4ca347ed8b5d47919a180d78d20146068f7b438cc9667dfd01e524d48173",
+    "text": "Ледниковый барьер"
+  },
+  "content.talent.freeze.icebound.name": {
+    "reviewed": true,
+    "source": "Icebound",
+    "sourceHash": "cc952bbc6ac5d8bd0b25b55a37ea6894569039bfa9ebda68307838be1ce91d04",
+    "text": "Ледяные узы"
+  },
+  "content.talent.freeze.icebound.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "sourceHash": "2d10411358139dfc9fd4aae84efa4c77578851e8fcf50dc0eb3172e4be510a08",
+    "text": "Когда вы <keyword0>замораживаете</keyword0> врага, снимите весь его запас <keyword1>блока</keyword1>"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "reviewed": true,
+    "source": "Thaw Dividend",
+    "sourceHash": "065cc3d23ab7457a4a9651c3c7916bd30c19f3038dedc47867e2988cd37dd9d8",
+    "text": "Дивиденды оттепели"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "reviewed": true,
+    "source": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "sourceHash": "2a873e80a581b60e8cc77dd48c36eb310f5381b62a87d983b08a1e2e9d541f2e",
+    "text": "Когда враг выходит из эффекта «<keyword0>Заморозка</keyword0>», возьмите карту"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "reviewed": true,
+    "source": "Winter's Grasp",
+    "sourceHash": "9ab2adac676174ba808bb382ff1445b5e871754f56dd2179b62ea15563464637",
+    "text": "Хватка зимы"
+  },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "6ca5e75e69aa8f650ae67409b009cbfb1ec7950d27c6c04dcc339d7fcdc58134",
+    "text": "Карты типа «<keyword0>Заморозка</keyword0>» с шансом {{value0}}% разыгрываются дважды"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

@@ -1343,6 +1343,102 @@
     "sourceHash": "0feddf67815ac1b301705dc21131f4762456eee88c89147960d45c2f809f7909",
     "text": "Sem fardos"
   },
+  "content.talent.freeze.bitter-cold.name": {
+    "reviewed": true,
+    "source": "Bitter Cold",
+    "sourceHash": "ed4d67c8a3800b2e37f2f93a24b2c433846ca7342eecf8744189aa4fdb41e6b9",
+    "text": "Frio cortante"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "reviewed": true,
+    "source": "Brittle Armor",
+    "sourceHash": "7c7224a4ccbec0ce5ac7d1fc0476de298ecbb7d4f8f9a9a293f174a6c918eb90",
+    "text": "Armadura frágil"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "sourceHash": "e17d5a55aded636d5e469067753fb12ded69e33c5ef502c2922355f7dde20e61",
+    "text": "Ao <keyword0>congelar</keyword0> um inimigo, remova toda a sua <keyword1>Armadura</keyword1>"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "reviewed": true,
+    "source": "Brittle Ice",
+    "sourceHash": "883c212d0a051a64603450252defbe65b44bb535acb1a47f4ad1d64016bc33b2",
+    "text": "Gelo frágil"
+  },
+  "content.talent.freeze.brittle-ice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "sourceHash": "7780acfd1011f8d6151b7e1b177d9ee46cbb152c83a0387f74011798fc59f37e",
+    "text": "Inimigos <keyword0>congelados</keyword0> recebem {{value0}} adicionais de dano"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "reviewed": true,
+    "source": "Cold Resistance",
+    "sourceHash": "976835d4d91d75f04c317cb0c055c73e8624a2bde7aad463db7800353afff19a",
+    "text": "Resistência ao frio"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "f914908e9257a4589bd1b6178a1b1b82d5eeab67d1488b5d6d8a14b5c5ec75a9",
+    "text": "Recebe metade do dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "reviewed": true,
+    "source": "Cryo-preservation",
+    "sourceHash": "ad5435a5674e98dd42fadf60a6d5461bde07e296d837c7694f6dbd453c30864d",
+    "text": "Criopreservação"
+  },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "sourceHash": "ba6f179871c16fc1e4c5149f089e5563d17d9f6ce725a058e82d71959ccebeab",
+    "text": "<keyword0>Veneno</keyword0> não diminui em inimigos <keyword1>congelados</keyword1>"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "reviewed": true,
+    "source": "Glacial Barrier",
+    "sourceHash": "d2c8e693ee9afcedeca5a425baa1f44f1990656c5d074cfcda751caaeb5071cd",
+    "text": "Barreira glacial"
+  },
+  "content.talent.freeze.icebound.name": {
+    "reviewed": true,
+    "source": "Icebound",
+    "sourceHash": "370ae5e77c5b13894a233850de33f3786174a37ccac13adafbd3e9283d91c490",
+    "text": "Preso no gelo"
+  },
+  "content.talent.freeze.icebound.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "sourceHash": "b7dad21cecf67ebd4934b0d211decda3f464fdc50aad457e1fa8985695ed0b0b",
+    "text": "Ao <keyword0>congelar</keyword0> um inimigo, remova todo o seu <keyword1>Bloqueio</keyword1>"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "reviewed": true,
+    "source": "Thaw Dividend",
+    "sourceHash": "b0a41b59045816d224016a72d98f404d077cfed79e4d4172fc2449672ba2b4c7",
+    "text": "Dividendo do degelo"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "reviewed": true,
+    "source": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "sourceHash": "09d767d2dd952ff122e361cba786391c955040289f758b065c59210a1fc34da2",
+    "text": "Quando um inimigo se recupera de <keyword0>Congelamento</keyword0>, compre uma carta"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "reviewed": true,
+    "source": "Winter's Grasp",
+    "sourceHash": "4fb3c020593adc153cbb56e0fe296d3910bfc8279d823c8ee3efa578df5fcabc",
+    "text": "Abraço do inverno"
+  },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "96ed148c5aa82b1f68a449624e54e84c1abade242df39ae104e0e5a5a9b232ac",
+    "text": "Cartas de <keyword0>Congelamento</keyword0> têm {{value0}}% de chance de serem jogadas duas vezes"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

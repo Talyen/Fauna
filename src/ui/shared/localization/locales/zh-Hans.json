@@ -1343,6 +1343,102 @@
     "sourceHash": "82b1c9a300c1e0079080c8410490d740effa23009eaaaf719ab8bf6940b9ce6b",
     "text": "卸下重担"
   },
+  "content.talent.freeze.bitter-cold.name": {
+    "reviewed": true,
+    "source": "Bitter Cold",
+    "sourceHash": "b22d84388592adeed4787611e0d2c7c0d3944f9a4eacd3ac02e1c41ac4a75ad9",
+    "text": "刺骨寒冷"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "reviewed": true,
+    "source": "Brittle Armor",
+    "sourceHash": "c999f20cbe3ab1d11e20cbb941e436824131ccdef9326eca627b078bccbed6cd",
+    "text": "脆弱护甲"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "sourceHash": "cc6e1ff59a5d7c218fca5be640c83fe29a7da2270f4ccdeba1ede23c6c499247",
+    "text": "你使敌人<keyword0>冻结</keyword0>时，移除其全部<keyword1>护甲</keyword1>"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "reviewed": true,
+    "source": "Brittle Ice",
+    "sourceHash": "d392b14d972ff8f432c749235c9d09fe7e7059e16207f151e8c040d9cc835931",
+    "text": "脆冰"
+  },
+  "content.talent.freeze.brittle-ice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "sourceHash": "04e81b861385bacc197a180109ac08f1cbad65a7dca06df37633103b2221fa2e",
+    "text": "处于<keyword0>冻结</keyword0>状态的敌人额外受到{{value0}}点伤害"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "reviewed": true,
+    "source": "Cold Resistance",
+    "sourceHash": "52a15bfd278205d5a01fa2c1708c4798722794615d3694fcd730ac837b8464b4",
+    "text": "寒冷抗性"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "9be38b8b719e16d855081b622210930795dd973e9f4169128fbbc02ab4659f70",
+    "text": "受到的<keyword0>冻结</keyword0>伤害减半"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "reviewed": true,
+    "source": "Cryo-preservation",
+    "sourceHash": "3f0e19466586439cc2f94fac0da3d93d4f1aeda0932a140e4ae3b00d1ae8daae",
+    "text": "低温保存"
+  },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "sourceHash": "57b0dc6c8878b0c0b6abe22173e56c298ebc50afcc88b775ecf209c89c43b872",
+    "text": "处于<keyword1>冻结</keyword1>状态的敌人的<keyword0>中毒</keyword0>不会衰减"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "reviewed": true,
+    "source": "Glacial Barrier",
+    "sourceHash": "3013e2ac4d48958cfc5e4850bdfc21228fe6ea20b5d4fc7867381c2220240eed",
+    "text": "冰川屏障"
+  },
+  "content.talent.freeze.icebound.name": {
+    "reviewed": true,
+    "source": "Icebound",
+    "sourceHash": "5fc034189638923c3b772c1b073ea6bd6c28fc65bd8b4a1624712f2c34ff837e",
+    "text": "冰缚"
+  },
+  "content.talent.freeze.icebound.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "sourceHash": "95e0aef2342b918392aeed709b18e5d6375896984ca59dd1e5bc77056ba8d1d5",
+    "text": "你使敌人<keyword0>冻结</keyword0>时，移除其全部<keyword1>格挡</keyword1>"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "reviewed": true,
+    "source": "Thaw Dividend",
+    "sourceHash": "97aef753ba2bc598e640d03f3525e3143268a11fe949d7f64f4783695e27a074",
+    "text": "融冰红利"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "reviewed": true,
+    "source": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "sourceHash": "d9b8118789d6da586107600dcbc9c59673886b0cc5124928a4f697f68784c9fb",
+    "text": "敌人从<keyword0>冻结</keyword0>中恢复时抽一张牌"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "reviewed": true,
+    "source": "Winter's Grasp",
+    "sourceHash": "2449fed9dbc274c89928494119b869305ee916afbac29e10fbe6cb88671291ab",
+    "text": "寒冬之握"
+  },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "eab403051223c69de27419c451f70e1961eb998b9a8d176f947d22de8d551c9d",
+    "text": "<keyword0>冻结</keyword0>卡牌有{{value0}}%几率发动两次"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

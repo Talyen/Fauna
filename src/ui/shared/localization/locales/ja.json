@@ -1343,6 +1343,102 @@
     "sourceHash": "f7303c4797bf7dd60ffd64a71efc6cba8d08a7fefb909d2347d2afb3cdfce515",
     "text": "身軽"
   },
+  "content.talent.freeze.bitter-cold.name": {
+    "reviewed": true,
+    "source": "Bitter Cold",
+    "sourceHash": "a729d9035d9aa488a9973d6220a789c14cf14ce7dee8eeff3f386499d40d5f42",
+    "text": "厳寒"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "reviewed": true,
+    "source": "Brittle Armor",
+    "sourceHash": "68a99f38d654fcc205ae151ba942b0b2d054a763588274c4398bb41d2ccb5e27",
+    "text": "脆い装甲"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "sourceHash": "a82b46b1122f6f8f30fcdc92fe5e92d76ca880955fe4cd32a4904b3a4858ba7e",
+    "text": "敵を<keyword0>凍結</keyword0>させるとその<keyword1>装甲</keyword1>をすべて取り除く"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "reviewed": true,
+    "source": "Brittle Ice",
+    "sourceHash": "239e178a923afe12ca9bae52053d3ba2a441fe58c1fd8e762077b3316781c015",
+    "text": "脆い氷"
+  },
+  "content.talent.freeze.brittle-ice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "sourceHash": "9d0927429d98cb05532c940fdc9465923b26b74bc29e99c5da7d6d5330051be1",
+    "text": "<keyword0>凍結</keyword0>中の敵が受けるダメージが{{value0}}増加する"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "reviewed": true,
+    "source": "Cold Resistance",
+    "sourceHash": "51e176a67523e9f6a729abfd47d81bfd9f209843a666f4cbfcf318a685bb9534",
+    "text": "耐寒性"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "8d236995de3fc6aff2c4af417f71f8f457104386aa2276cc8d44acf983937460",
+    "text": "受ける<keyword0>凍結</keyword0>ダメージが半分になる"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "reviewed": true,
+    "source": "Cryo-preservation",
+    "sourceHash": "7504779f998f676ada564716b439a3a459ff05bedcad6cc953455e190c6ea07e",
+    "text": "冷凍保存"
+  },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "sourceHash": "81d20a3365872db950f0f8b78f39329d5a079ac3bf5b7a2c338a9de5bae2ba14",
+    "text": "<keyword1>凍結</keyword1>した敵の<keyword0>毒</keyword0>は減衰しない"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "reviewed": true,
+    "source": "Glacial Barrier",
+    "sourceHash": "332b29db0bce8fc03ce23e54b540ba6da79f5c9127d75320dbcc0c906b0c5d7b",
+    "text": "氷河の障壁"
+  },
+  "content.talent.freeze.icebound.name": {
+    "reviewed": true,
+    "source": "Icebound",
+    "sourceHash": "ca358f1a1c8e58d55dc91c3fa2a74a4458216314a47ec3b5f9f83bd4b4ba52ef",
+    "text": "氷縛"
+  },
+  "content.talent.freeze.icebound.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "sourceHash": "6a58abed8f9984a36cc9a02c58acbae58653e1f3c2dd2863a5feede0f10586f5",
+    "text": "敵を<keyword0>凍結</keyword0>させるとその<keyword1>ブロック</keyword1>をすべて取り除く"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "reviewed": true,
+    "source": "Thaw Dividend",
+    "sourceHash": "b3bd7017fc888f64f7730f16d85af8d98c4c6388817f8a4cab5988a65779e464",
+    "text": "雪解けの配当"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "reviewed": true,
+    "source": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "sourceHash": "0f85c31fe48384f6d88150589f8958c1c95a0bc455061c8d0052203040836d2f",
+    "text": "敵が<keyword0>凍結</keyword0>から回復するとカードを一枚引く"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "reviewed": true,
+    "source": "Winter's Grasp",
+    "sourceHash": "03dffcb4e1ef972f1d3ba800ea1905232759ce565c12410db266a51cadde96ff",
+    "text": "冬の掌握"
+  },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "979f2bd5748ffede5773b60a2b4f1cf0ac2a3f566bcc6319def7df440dfb528c",
+    "text": "<keyword0>凍結</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
