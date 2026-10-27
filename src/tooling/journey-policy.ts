@@ -41,6 +41,27 @@ function boonScorer(
     cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
   return (boon: BoonId): number => {
     switch (boon) {
+      case "caravan-rug":
+        return has.has("block") && hasLivingBackup() ? 60 : 0;
+      case "folded-mountain":
+      case "cypress-reliquary":
+        return has.has("armor") ? 60 : 0;
+      case "apple-press":
+        return has.has("bleed") ||
+          (has.has("physical") &&
+            (state.boons.includes("stardust-whetstone") ||
+              state.talents.includes("physical.lacerate") ||
+              (has.has("dodge") && state.talents.includes("bleed.parting-cut")))) ||
+          (has.has("nature") && state.talents.includes("nature.briar-patch")) ||
+          (has.has("poison") && state.talents.includes("poison.hemotoxin"))
+          ? 60
+          : 0;
+      case "pollen-basket":
+        return kinds.length > 1 && thorns ? 60 : 0;
+      case "farewell-oar":
+        return swapping && has.has("block") ? 60 : 0;
+      case "oasis-seed":
+        return kinds.length > 1 && healing && has.has("attack") ? 60 : 0;
       case "bellows-heart":
         return healing && has.has("burn") ? 60 : 0;
       case "leafwing-shuttlecock":
