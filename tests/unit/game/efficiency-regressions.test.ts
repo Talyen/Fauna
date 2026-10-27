@@ -1,6 +1,6 @@
 import { expect, it, vi } from "vitest";
 import { modifiedDamage } from "../../../src/game/combat/damage-values";
-import { applyHarmfulStatus, startAction } from "../../../src/game/combat/index";
+import { applyHarmfulStatus, removeEffects, startAction } from "../../../src/game/combat/index";
 import { sharedDodgeChance } from "../../../src/game/combat/state";
 import { cardCost } from "../../../src/game/ability-rules";
 import { cardActor, drawableOwnerIds } from "../../../src/game/card-actors";
@@ -40,6 +40,7 @@ import { matchesPermanentKit, permanentKit } from "../../../src/game/card-kit";
 import { rebuildCards } from "../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { snapshot } from "../../../src/application/cloud-snapshots";
+import { newestHeads } from "../../../src/application/cloud-policy";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createMessageReader } from "../../../src/ui/shared/localization/messages";
 
@@ -623,4 +624,39 @@ it("draws an eligible single card without changing decisions or buffer promotion
       expect(decisions).toEqual([undefined]);
     }
   }
+});
+
+it("preserves drawable owner order when a fallen creature can borrow", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "oathara", "prismram"])));
+  state.team[0]!.health = 0;
+  expect([...drawableOwnerIds(state)]).toEqual(state.team.map((unit) => unit.id));
+  state.team[1]!.health = 0;
+  expect([...drawableOwnerIds(state)]).toEqual([state.team[2]!.id]);
+});
+
+it("preserves Cleanse feedback when control and buildup share a status", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  const unit = state.team[0]!;
+  unit.combat!.controlled = "freeze";
+  unit.combat!.controlTurns = 1;
+  unit.combat!.freeze = 2;
+  const events: Parameters<typeof removeEffects>[3] = [];
+  expect(removeEffects(unit, "cleanse", 2, events, state)).toBe(1);
+  expect(events.filter((event) => event.kind === "status" && event.outcome === "remove")).toHaveLength(1);
+  expect(unit.combat!.controlled).toBeNull();
+  expect(unit.combat!.freeze).toBe(0);
+});
+
+it("retains the last duplicate cloud record and its ancestry", async () => {
+  const payload = encodeSave(teamRun(42, ["mossguard"]));
+  const identity = {
+    available: true,
+    device: "a".repeat(32),
+    profile: "b".repeat(32),
+    importAvailable: false,
+  };
+  const first = await snapshot(payload, identity, 1);
+  const updated = { ...first, ancestors: [first.id] };
+  expect(newestHeads([updated, first])).toEqual([first]);
+  expect(newestHeads([first, updated])).toEqual([]);
 });

@@ -73,7 +73,15 @@ export function enemyCardValue(
   targetId?: string,
   allyTargetId?: string,
 ) {
-  return evaluateEnemyCard(state, enemy, def, positionValue(state), targetId, allyTargetId);
+  return evaluateEnemyCard(
+    state,
+    enemy,
+    def,
+    positionValue(state),
+    state.battle.enemies.findIndex((unit) => unit.id === enemy.id),
+    targetId,
+    allyTargetId,
+  );
 }
 
 function evaluateEnemyCard(
@@ -81,12 +89,12 @@ function evaluateEnemyCard(
   enemy: Enemy,
   def: CardDefinition,
   before: number,
+  actorIndex: number,
   targetId?: string,
   allyTargetId?: string,
 ) {
   const spentCard = enemy.deck?.hand.includes(def.id) ? 1 : 0;
   let total = 0;
-  const actorIndex = state.battle.enemies.findIndex((unit) => unit.id === enemy.id);
   for (let probe = 0; probe < 8; probe++) {
     let decisions = 0;
     const after = evaluation.produce(state, (draft) => {
@@ -120,6 +128,7 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
   let targetId: string | undefined;
   let targetResolved = false;
   let before: number | undefined;
+  let actorIndex: number | undefined;
   let livingAllies: string[] | undefined;
   let fallenAllies: string[] | undefined;
   // Probes use the same state and fixed decisions throughout this choice. Keep
@@ -149,6 +158,7 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
           enemy,
           def,
           (before ??= positionValue(state)),
+          (actorIndex ??= state.battle.enemies.findIndex((unit) => unit.id === enemy.id)),
           targetId,
           allyTargetId,
         );

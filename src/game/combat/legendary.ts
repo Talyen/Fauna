@@ -147,11 +147,13 @@ export function courtRemembers(state: BattleState, actor: Combatant, events: Gam
 }
 export function removeDepartedMinions(state: GameState) {
   if (!state.battle?.minions) return;
-  const present = new Set<string>();
-  for (const unit of state.team) if (unit.health > 0) present.add(unit.id);
-  for (const unit of state.battle.enemies) if (unit.health > 0) present.add(unit.id);
-  // Retain inert records for status-source receipts until combat ends; they never act or render.
-  for (const unit of state.battle.minions) if (!present.has(unit.minion.ownerId)) unit.health = 0;
+  if (state.battle.minions.length) {
+    const present = new Set<string>();
+    for (const unit of state.team) if (unit.health > 0) present.add(unit.id);
+    for (const unit of state.battle.enemies) if (unit.health > 0) present.add(unit.id);
+    // Retain inert records for status-source receipts until combat ends; they never act or render.
+    for (const unit of state.battle.minions) if (!present.has(unit.minion.ownerId)) unit.health = 0;
+  }
   const targets = new Set<string>();
   for (const unit of battlefield(state, "player")) targets.add(unit.id);
   for (const enemy of state.battle.enemies)

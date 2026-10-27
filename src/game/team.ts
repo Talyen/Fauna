@@ -172,15 +172,21 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   for (const unit of state.team) if (!activeIds.has(unit.id)) departing.add(unit.id);
   state.team = ids.map((id) => all.find((unit) => unit.id === id)!);
   state.reserves = all.filter((unit) => !activeIds.has(unit.id));
-  const retained = previous.filter((card) => card.ownerId === null || activeIds.has(card.ownerId));
-  const slots = previous.filter(
-    (card) => card.ownerId !== null && departing.has(card.ownerId) && !card.temporary,
-  );
-  const previousOwners = new Set(previous.map((card) => card.ownerId));
-  const needed = state.team
-    .filter((unit) => !previousOwners.has(unit.id))
-    .flatMap((unit) => ownedCards(unit.id, unit.species));
-  const used = new Set(retained.map((card) => card.id));
+  const retained: Card[] = [];
+  const slots: Card[] = [];
+  const previousOwners = new Set<string | null>();
+  const used = new Set<string>();
+  for (const card of previous) {
+    previousOwners.add(card.ownerId);
+    if (card.ownerId === null || activeIds.has(card.ownerId)) {
+      retained.push(card);
+      used.add(card.id);
+    }
+    if (card.ownerId !== null && departing.has(card.ownerId) && !card.temporary) slots.push(card);
+  }
+  const needed: Card[] = [];
+  for (const unit of state.team)
+    if (!previousOwners.has(unit.id)) needed.push(...ownedCards(unit.id, unit.species));
   const mapped = needed.map((card, index) => {
     let id = slots[index]?.id ?? card.id;
     for (let serial = 0; used.has(id); serial++) id = `slot-${state.revision}-${index}-${serial}`;
@@ -209,7 +215,8 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
         ...state.battle.buffer,
         ...state.battle.discard,
       ]);
-      const added = mapped.filter((card) => !zoned.has(card.id)).map((card) => card.id);
+      const added: string[] = [];
+      for (const card of mapped) if (!zoned.has(card.id)) added.push(card.id);
       if (added.length) state.battle.draw = shuffle(state, [...state.battle.draw, ...added]);
     }
     for (const enemy of state.battle.enemies) if (departing.has(enemy.targetId)) enemy.targetId = ids[0]!;

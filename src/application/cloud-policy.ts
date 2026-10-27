@@ -6,6 +6,7 @@ export function newestHeads(records: readonly CloudSnapshot[]) {
   const byId = new Map<string, CloudSnapshot>();
   for (const record of records) byId.set(record.id, record);
   const unique = [...byId.values()];
+  if (unique.length === 1) return unique[0]!.ancestors.includes(unique[0]!.id) ? [] : unique;
   let ancestors: Set<string> | undefined;
   for (const record of unique)
     for (const ancestor of record.ancestors) (ancestors ??= new Set()).add(ancestor);
