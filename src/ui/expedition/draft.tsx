@@ -3,7 +3,6 @@ import { useLayoutEffect, useRef } from "react";
 import { returnFocus } from "../shared/navigation/focus";
 import { starterCount } from "../../game/progression";
 
-import { Check } from "lucide-react";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { creatureKeywords } from "../shared/effects/palettes";
 import { CreatureCard } from "../shared/cards/cards";
@@ -51,11 +50,7 @@ export function Draft({ game, send, inspect }: Props) {
                   onInspect={() => inspect({ species: s.id })}
                   label={`Inspect ${s.name}`}
                 />
-                {game.selected.length === starterCount(game) ? (
-                  <span className="starter-selection">
-                    <Check aria-hidden="true" /> Selected
-                  </span>
-                ) : (
+                {game.selected.length !== starterCount(game) ? (
                   <Button
                     effectKeywords={creatureKeywords(s.id, game)}
                     className="recruit-button"
@@ -67,7 +62,7 @@ export function Draft({ game, send, inspect }: Props) {
                   >
                     Recruit
                   </Button>
-                )}
+                ) : null}
               </div>
             );
           },

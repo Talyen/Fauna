@@ -26,7 +26,7 @@ async function open(game: GameState, resume = true) {
   if (resume) await user.click(screen.getByRole("button", { name: "Continue" }));
   return { session, user };
 }
-it("keeps fallen cards visible, uses Oathara's allowance and permits targeting a knockout for resurrection", async () => {
+it("keeps fallen cards visible and immediately resurrects the sole knocked-out ally", async () => {
   document.documentElement.style.setProperty("--target-denial-duration", "2400ms");
   const { session, user } = await open(oatharaBattle());
   try {
@@ -41,13 +41,6 @@ it("keeps fallen cards visible, uses Oathara's allowance and permits targeting a
     await user.click(unavailable);
     expect(screen.getByText("Unfinished Journey’s limit is spent this turn.")).toBeTruthy();
     await user.click(screen.getByRole("button", { name: /^Vow of Return,/ }));
-    const target = screen.getByRole("button", { name: "Target Emberback" });
-    await user.hover(target);
-    expect(session.store.getState().game).toBe(borrowed);
-    await user.click(screen.getByRole("button", { name: "Cancel" }));
-    expect(session.store.getState().game).toBe(borrowed);
-    await user.click(screen.getByRole("button", { name: /^Vow of Return,/ }));
-    await user.click(screen.getByRole("button", { name: "Target Emberback" }));
     expect(session.store.getState().game.team[1]!.health).toBe(6);
     expect(session.store.getState().game.team[0]!.combat!.fallenCardsPlayedThisTurn).toBe(1);
     expect(

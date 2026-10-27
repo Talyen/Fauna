@@ -57,7 +57,7 @@ export function CreatureCard({
   health,
   maxHealth,
   block = 0,
-  selected = false,
+  selected,
   disabled = false,
   onClick,
   onInspect,

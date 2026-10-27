@@ -19,6 +19,9 @@ import { integrate } from "../../../scripts/integrate.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 import { reviewOptions } from "../../../scripts/dev/review-options.mjs";
 import { reviewScenario } from "../../../scripts/dev/review-scenarios.mjs";
+import * as gameFixtures from "../../support/game";
+import * as save from "../../../src/game/save";
+import * as content from "../../../src/game/content";
 
 const fixture = () =>
   repository(
@@ -73,6 +76,28 @@ it("prepares creature artwork reviews with their rank, fixture arguments and pla
     ["oathara", []],
   ]);
   expect(JSON.parse(decoy.save).command).toEqual({ type: "play", cardId: "decoy", autoEndTurn: false });
+});
+
+it("prepares valid full-roster recruitment review scenarios", async () => {
+  const modules = {
+    "/tests/support/game.ts": gameFixtures,
+    "/src/game/save.ts": save,
+    "/src/game/content.ts": content,
+  };
+  const server = { ssrLoadModule: async (path) => modules[path] };
+  for (const name of ["recruit-replacement", "recruit-team-preview"]) {
+    const scenario = await reviewScenario(server, name);
+    const game = save.decodeSave(scenario.save);
+    const roster = [...game.team, ...game.reserves];
+    expect(roster).toHaveLength(5);
+    expect(new Set(roster.map((creature) => creature.species)).size).toBe(5);
+    expect(roster.every((creature) => game.discovery.recruited[creature.species] !== undefined)).toBe(true);
+    expect(game.reward.recruits).toContain("emberback");
+    const selected = gameFixtures.accept(game, { type: "recruit", species: "emberback" });
+    expect(selected.phase).toBe("recruit");
+    expect(selected.reward.selectedRecruit).toBe("emberback");
+    expect([...selected.team, ...selected.reserves]).toEqual(roster);
+  }
 });
 
 it.skipIf(process.platform === "win32")(

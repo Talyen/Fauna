@@ -63,9 +63,6 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
         </section>
       ) : (
         <>
-          <p className="merchant-terms merchant-policy">
-            <em>Limit 1 per customer - No Refunds!</em>
-          </p>
           <section className="boon-options merchant-stock" aria-label="Boon Merchant stock" data-nav-row>
             {visit.stock.map((slot) => {
               const boon = findBoon(slot.boon)!;
@@ -88,6 +85,7 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                       </strong>
                       <BoonText boon={boon} />
                       <p>For this journey</p>
+                      <p>One per visit</p>
                       {reason ? <p>{reason}</p> : null}
                     </TooltipContent>
                   </Tooltip>

@@ -179,8 +179,3 @@
 [data-art-keyword="purge"] {
   --art-keyword-color: var(--keyword-purge);
 }
-
-:root[data-focus="visible"]
-  .game-button[data-effect-art]:not(.selected):not([aria-disabled="true"]):focus::after {
-  border-color: var(--art-keyword-color);
-}
