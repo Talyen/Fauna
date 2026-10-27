@@ -1133,6 +1133,12 @@
     "sourceHash": "a683da00d04da3189af8cf8b0c17e8fc896c64d8092091e347ca5ab108e237c9",
     "text": "Moulin à graines de pavot"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "efd3a81509c1920804f1ce7a6da93535a821a051505c39cf79a016c92fadb54b",
+    "text": "Les dégâts de <keyword0>Poison</keyword0> ajoutent la moitié de cette valeur en accumulation d’<keyword1>Étourdissement</keyword1>"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
@@ -1367,6 +1373,12 @@
     "sourceHash": "4d3c7c162a89db406c434b90ec882b879a63caaddc5404612b1c3514624df01b",
     "text": "Pierre à aiguiser stellaire"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "0f3978969c0b91b89959a4a89f38c8cc210e186f149e4daeabd5ec2ec1f05912",
+    "text": "Les touches <keyword0>Physiques</keyword0> appliquent {{value0}} <keyword1>Saignement</keyword1> aux ennemis ayant de l’<keyword2>Armure</keyword2>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -1384,6 +1396,12 @@
     "source": "Sundering Charm",
     "sourceHash": "99b52eb0c84940a82daee20c3adfe6a32b69d1bc90a2131a60de218ccbda12e2",
     "text": "Charme de fracture"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "8ba42ee5948b92a96da587844e112284e4aaa3d75a89cfc618b0a1e22f62ad78",
+    "text": "Vos touches <keyword0>Physiques</keyword0> et d’<keyword1>Étourdissement</keyword1> retirent {{value0}} <keyword2>Armure</keyword2> ennemie avant les dégâts"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1414,6 +1432,12 @@
     "source": "Thistle Sieve",
     "sourceHash": "e121e2ef459c97014aac9879d1c81de17ed67fc0734f59064245c306847110ac",
     "text": "Tamis de chardon"
+  },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "db7fe5dc27027873f49298ace1392844dd803c905258f00b58ff83987cef9c89",
+    "text": "La moitié du <keyword0>Poison</keyword0> et du <keyword1>Saignement</keyword1> <keyword2>purifiés</keyword2> des alliés devient des <keyword3>Épines</keyword3>"
   },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
@@ -1481,6 +1505,12 @@
     "sourceHash": "c54d8702dcbf0bf0bf4f8f5352431b9abae2b66e64181a51a2e6147521b553fb",
     "text": "Charme diapason"
   },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "c014bc8ff31bb63fc38eec12a8bf38e914ff710610d468d4f315a03a2fd3b628",
+    "text": "Les touches <keyword0>Physiques</keyword0> ignorent l’<keyword1>Armure</keyword1> des ennemis ayant une accumulation d’<keyword2>Étourdissement</keyword2>"
+  },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
     "source": "Undertow Castanets",
@@ -1517,6 +1547,12 @@
     "sourceHash": "32b4d376621265b68f183b354a2f83a58dd599f87cd3d05e58b43a0c6a7097f0",
     "text": "Moule à cire gaufrée"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "82e2e2386974ffaac839b027074ee9767e9eea16290528e3a4ba05a49f5f688d",
+    "text": "Les alliés ayant de l’<keyword0>Armure</keyword0> conservent {{value0}}% de leur <keyword1>Blocage</keyword1> lors de sa diminution"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1534,6 +1570,12 @@
     "source": "Wishing Building Block",
     "sourceHash": "635b24673ffc93c215f3c7562282937672cbcd820426974a0ab4536eefa92124",
     "text": "Brique à souhaits"
+  },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "c408c949f1dd0aa112d4a10b46ce65d9a67073962cf3ab6c6aedff8c9d47a486",
+    "text": "Gagner de l’<keyword0>Armure</keyword0> confère {{value0}} <keyword1>Blocage</keyword1> aux autres alliés ayant de l’<keyword2>Armure</keyword2>"
   },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,

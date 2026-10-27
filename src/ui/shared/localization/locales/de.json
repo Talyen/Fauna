@@ -1133,6 +1133,12 @@
     "sourceHash": "f35d8ec95f876631c54a47684f790485bb71e7d56af5009524e616f8cbafd388",
     "text": "Mohnmühle"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "2d87acc5bd63b0094b42635cfccd90f77d27d21c328aea6714de720f21fcfb47",
+    "text": "<keyword0>Gift</keyword0>-Schaden fügt halb so viel <keyword1>Betäubungs</keyword1>-Aufbau hinzu"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
@@ -1367,6 +1373,12 @@
     "sourceHash": "083805e099e2643f4d544854887734f49c46b28d08fb0bce45b919109f726d38",
     "text": "Sternenstaub-Wetzstein"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "6699ec3fb812b511e6f3bda84804f0fabfcb59ce6672b71556459a6907e28755",
+    "text": "<keyword0>Physische</keyword0> Treffer verursachen {{value0}} <keyword1>Blutung</keyword1> bei Gegnern mit <keyword2>Rüstung</keyword2>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -1384,6 +1396,12 @@
     "source": "Sundering Charm",
     "sourceHash": "d55d0e7bb4444b923b93d0fde82b28e45d5de22c415a5075b0aa93fbb70eaa4f",
     "text": "Spaltungsamulett"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "0a62b9d6b4183b0e5f4c464298ac4da2c964f6ac025da3d0c97c63ae12450122",
+    "text": "Deine <keyword0>physischen</keyword0> und <keyword1>Betäubungs</keyword1>-Treffer entfernen vor dem Schaden {{value0}} gegnerische <keyword2>Rüstung</keyword2>"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1414,6 +1432,12 @@
     "source": "Thistle Sieve",
     "sourceHash": "0913e85a4514f2657c64db8fdffc9acbe6623c7c54eda2a8259a3dac101e848f",
     "text": "Distelsieb"
+  },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "ade377cae88f63f203ef1086dc7b1b2717946ce76a2b6aad76f495f7ff315483",
+    "text": "Die Hälfte von <keyword0>Gift</keyword0> und <keyword1>Blutung</keyword1>, die von Verbündeten <keyword2>gereinigt</keyword2> werden, wird zu <keyword3>Dornen</keyword3>"
   },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
@@ -1481,6 +1505,12 @@
     "sourceHash": "cb5cb61b517816a8815209169f2556cf08548ecca32c8f509c837993082071ec",
     "text": "Stimmgabelanhänger"
   },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "cdeca30265996b59c5b2203624933092872df071940699dc5e11a13709828e92",
+    "text": "<keyword0>Physische</keyword0> Treffer ignorieren <keyword1>Rüstung</keyword1> bei Gegnern mit <keyword2>Betäubungs</keyword2>-Aufbau"
+  },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
     "source": "Undertow Castanets",
@@ -1517,6 +1547,12 @@
     "sourceHash": "976f6dbec60c29ace9618b73d0363e7446e5dac36b9fb082c95fd9608307a620",
     "text": "Wachsplattenform"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "13e11706ffb6a6deaa70eaa4d906897fc39666c0e36d2c60cb1fbe9703351fa7",
+    "text": "Verbündete mit <keyword0>Rüstung</keyword0> behalten beim Verfall {{value0}}% ihres <keyword1>Blocks</keyword1>"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1534,6 +1570,12 @@
     "source": "Wishing Building Block",
     "sourceHash": "97220019e8a93d63451a9e13cde7579115ac84b0d14616100d2f07926b8b69fa",
     "text": "Wunschbaustein"
+  },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "c3dfebcafdc14cc998357914ddcfd32922426c9f9962a7fdf07f1825a4d45fcb",
+    "text": "Der Erhalt von <keyword0>Rüstung</keyword0> gewährt anderen Verbündeten mit <keyword2>Rüstung</keyword2> {{value0}} <keyword1>Block</keyword1>"
   },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,

@@ -1133,6 +1133,12 @@
     "sourceHash": "8ab526f84ab50a87584bcbe78388b2d0590ce9c182d8902c109b44c053dc9c16",
     "text": "Molinillo de amapola"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "6f33ccf6b58f473ae7efbd39ec96bfc523941ac5f08cf2982316fecc6ea7999e",
+    "text": "El daño de <keyword0>Veneno</keyword0> añade la mitad de esa cantidad como acumulación de <keyword1>Aturdimiento</keyword1>"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
@@ -1367,6 +1373,12 @@
     "sourceHash": "669db6d406df8920c35342f38de38eed0e6e34a0e141b3e29836e67bb715f995",
     "text": "Piedra de afilar estelar"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "09641c4ecadeec823e8d1e8e005f38c120960c66f5f17aed5b07773533913d0d",
+    "text": "Los impactos <keyword0>Físicos</keyword0> aplican {{value0}} de <keyword1>Sangrado</keyword1> a enemigos con <keyword2>Armadura</keyword2>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -1384,6 +1396,12 @@
     "source": "Sundering Charm",
     "sourceHash": "e0537d987ceb3697692c4c9f04db3989d000e28f1adb5b6beeb0ca74ce90ed84",
     "text": "Talismán de hendidura"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "7826414237f98e41f6723b1e748cbf9179562f78aa51e34a70ce12a9522558e1",
+    "text": "Tus impactos <keyword0>Físicos</keyword0> y de <keyword1>Aturdimiento</keyword1> eliminan {{value0}} de <keyword2>Armadura</keyword2> enemiga antes del daño"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1414,6 +1432,12 @@
     "source": "Thistle Sieve",
     "sourceHash": "39c5fb2f7c09a5c077c70ecba00a97d534e75c28d9837097eea3a3018ca945b9",
     "text": "Tamiz de cardo"
+  },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "50c7987bcd6cc4f3dafe5ce6f2ee32489c6a15f3782525d412d689dafdd9548e",
+    "text": "La mitad del <keyword0>Veneno</keyword0> y <keyword1>Sangrado</keyword1> <keyword2>purificados</keyword2> de los aliados se convierte en <keyword3>Espinas</keyword3>"
   },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
@@ -1481,6 +1505,12 @@
     "sourceHash": "bc6ab8f914aea157598a9d455fb1e8d9d4db56d8ab0b52b5179eeb25872c44c6",
     "text": "Talismán diapasón"
   },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "ea790cf5c4d3f4a11bf685972df608ea1136ab6bddecc6db552a268a36892bc7",
+    "text": "Los impactos <keyword0>Físicos</keyword0> ignoran la <keyword1>Armadura</keyword1> de enemigos con acumulación de <keyword2>Aturdimiento</keyword2>"
+  },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
     "source": "Undertow Castanets",
@@ -1517,6 +1547,12 @@
     "sourceHash": "92fdc9129f64f8139e18a9d743ac3625f62273389a99b25fb09344ae707f525a",
     "text": "Molde para lámina de cera"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "eaab52d57b9899d344e2a9e6ea7db869d094148e7e5d3018af0e93bc81c0f470",
+    "text": "Los aliados con <keyword0>Armadura</keyword0> conservan el {{value0}}% de su <keyword1>Bloqueo</keyword1> cuando disminuye"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1534,6 +1570,12 @@
     "source": "Wishing Building Block",
     "sourceHash": "8780272dd26e66fe2b2a5732c0ff76c9ae263c7eef3cf53d5d91115c095f4989",
     "text": "Bloque de deseos"
+  },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "67e2fb7695eae1ab809ada50319f9116b3385a4614d6ff4208e76ffdcd0bff63",
+    "text": "Obtener <keyword0>Armadura</keyword0> otorga {{value0}} de <keyword1>Bloqueo</keyword1> a los demás aliados con <keyword2>Armadura</keyword2>"
   },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,

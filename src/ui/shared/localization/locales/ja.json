@@ -1133,6 +1133,12 @@
     "sourceHash": "481ea74dbd77cfd1bc573a8fbc5d045b7f063f9cfc216ea57bd368d7bd6a44e5",
     "text": "ケシの実の挽き器"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "2af259d4544f545fa5173d6ba06a666910d38dd98a022116bb4d390ae59a0f22",
+    "text": "<keyword0>毒</keyword0>ダメージはその半分の<keyword1>スタン</keyword1>蓄積を加える"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
@@ -1367,6 +1373,12 @@
     "sourceHash": "f7d03b5e94a216fe18341decdee0b652914e6ed94bbda62e93946d03befba943",
     "text": "星屑の砥石"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "cf893173dd92d86c5e1db48b83291cc792b75927235a1e91148e474a669abe35",
+    "text": "<keyword0>物理</keyword0>ヒットは<keyword2>装甲</keyword2>を持つ敵に<keyword1>出血</keyword1>を{{value0}}付与"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -1384,6 +1396,12 @@
     "source": "Sundering Charm",
     "sourceHash": "b4a7f6c9705df97cd3771da54429a5d408b267c7a5506a999c79b055adeb3988",
     "text": "粉砕のお守り"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "ca7e4bfd9a7b224769d7ab99c9d9671bdd712e618233d000a387c39fb31766be",
+    "text": "自分の<keyword0>物理</keyword0>と<keyword1>スタン</keyword1>のヒットは、ダメージ前に敵の<keyword2>装甲</keyword2>を{{value0}}取り除く"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1414,6 +1432,12 @@
     "source": "Thistle Sieve",
     "sourceHash": "3c5f5219be28ccbf4abbf433e086d51ce56a3f136b151885efdd594a79052324",
     "text": "アザミのふるい"
+  },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "84b034217be8451c7a0c8909579b016300ce389a40b432db62d502e160a23f17",
+    "text": "味方から<keyword2>浄化</keyword2>した<keyword0>毒</keyword0>と<keyword1>出血</keyword1>の半分が<keyword3>棘</keyword3>になる"
   },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
@@ -1481,6 +1505,12 @@
     "sourceHash": "75954335587feb2d3d9e6dac2ddeaa793f038e763416f9aab97999b84cc2f263",
     "text": "音叉のお守り"
   },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "ee0045527c2354e87cb2244482f4fc0f4f062a7a3b48c1e3b6c034344299f059",
+    "text": "<keyword0>物理</keyword0>ヒットは<keyword2>スタン</keyword2>蓄積のある敵の<keyword1>装甲</keyword1>を無視"
+  },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
     "source": "Undertow Castanets",
@@ -1517,6 +1547,12 @@
     "sourceHash": "b815cf7271fc2b15c981fc8c71af7a839663f1d5ce2892baade92699c67c602d",
     "text": "巣礎の型"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "1fc7327b7ba02e11121276866ba7e1f6149d71acb1d3632e41cdebcdbc4d6f50",
+    "text": "<keyword0>装甲</keyword0>を持つ味方は<keyword1>ブロック</keyword1>が減衰する際、{{value0}}%を維持"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1534,6 +1570,12 @@
     "source": "Wishing Building Block",
     "sourceHash": "fe77de5c237224240fc5f3fba739a0dee454ea68e7ea02c1006e0bc85018a5c8",
     "text": "願いの積み木"
+  },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "ff525e7036d60e6b29d7e294f506d113f75d7856f46f11a0f7500bd1b3048965",
+    "text": "<keyword0>装甲</keyword0>を得ると、<keyword2>装甲</keyword2>を持つ他の味方に<keyword1>ブロック</keyword1>を{{value0}}付与"
   },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,

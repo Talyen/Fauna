@@ -1133,6 +1133,12 @@
     "sourceHash": "2357bb3c2450d3cd49b7fa4c300437814bb4555ef257474b1cb38cd23c2ac11c",
     "text": "罂粟籽研磨器"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "087d4f2f0dfb41dfcd3df18e215ed03009ff4e1ba97c254119b97c4aa3e6258b",
+    "text": "<keyword0>中毒</keyword0>伤害会增加相当于伤害一半的<keyword1>眩晕</keyword1>累积"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
@@ -1367,6 +1373,12 @@
     "sourceHash": "71e9b63927789147413e215d4f17a1f0fafbba7130ae13c5d329d030870e3dd4",
     "text": "星尘磨刀石"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "5bcf5d59056b7be03e93eacc6106468c588828b92e7fc67280d8eeaa20166c20",
+    "text": "<keyword0>物理</keyword0>命中会对拥有<keyword2>护甲</keyword2>的敌人施加{{value0}}点<keyword1>流血</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -1384,6 +1396,12 @@
     "source": "Sundering Charm",
     "sourceHash": "a1e6e9a3d4a0397c10f88680e443e4948ce7f3cb2bceff322d729d157f9ffb52",
     "text": "破甲护符"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "3dc04d502c87f2aed1228d0df2795996f37a583e5942ee0c904199c47d6d8d0c",
+    "text": "你的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>命中在造成伤害前移除敌人{{value0}}点<keyword2>护甲</keyword2>"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1414,6 +1432,12 @@
     "source": "Thistle Sieve",
     "sourceHash": "bffca800e2ddbf677384be11f3bcaaa53cb9bfaecf0a674655be2d1d3b367ead",
     "text": "蓟花筛"
+  },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "994b93202f15d81ee467e50f216f191672b896499f3c59845b9d3e137288dc8e",
+    "text": "从盟友身上<keyword2>净化</keyword2>的<keyword0>中毒</keyword0>和<keyword1>流血</keyword1>有一半转化为<keyword3>荆棘</keyword3>"
   },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
@@ -1481,6 +1505,12 @@
     "sourceHash": "c944d275c9c67992ce6f6f9c02a217844215befcca43e6adbcd19ae9a393f4b4",
     "text": "音叉护符"
   },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "b5b70ee0aa0ad3d8474fabec8d4d5d401dd8a8d9670ca47531506b33f9c382a7",
+    "text": "<keyword0>物理</keyword0>命中无视有<keyword2>眩晕</keyword2>累积的敌人的<keyword1>护甲</keyword1>"
+  },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
     "source": "Undertow Castanets",
@@ -1517,6 +1547,12 @@
     "sourceHash": "863361a17e4b4fe270fb3d695a46db7980ac8234bd2b041a85dd205486afb44b",
     "text": "蜂蜡巢础模具"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "de4dc706b8cb1e5cbb7016440b4d1bd275799ea07fdc0a7704f1f8fac0c0ef1e",
+    "text": "拥有<keyword0>护甲</keyword0>的盟友在<keyword1>格挡</keyword1>衰减时保留{{value0}}%"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1534,6 +1570,12 @@
     "source": "Wishing Building Block",
     "sourceHash": "9ce02fb6ca694148bdc6a94cfbdf2d13aa3e4de6d27e01d357dbd39c85bef4f7",
     "text": "许愿积木"
+  },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "c36ca3e9fc340e5e6c16f2f6fb853bab30368fb5a036295cf0ff1351f49bfcb6",
+    "text": "获得<keyword0>护甲</keyword0>时，为其他拥有<keyword2>护甲</keyword2>的盟友提供{{value0}}点<keyword1>格挡</keyword1>"
   },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,

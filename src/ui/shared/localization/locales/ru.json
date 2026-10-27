@@ -1133,6 +1133,12 @@
     "sourceHash": "fdc503b60e69fa07c1b37f5dff4ae9da60a859bbeb6d69c58b467f9e9b48bc40",
     "text": "Мельница для мака"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "3a58d0a81bbc88db3cec1aef64970dc456f978e1e0b0d0c8ddaff83fe97d1570",
+    "text": "Урон от <keyword0>яда</keyword0> добавляет накопление <keyword1>оглушения</keyword1> в размере половины урона"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
@@ -1367,6 +1373,12 @@
     "sourceHash": "eee81d2cd0d734c13724f2752d9a519aebc45e350515c262798bfc30611ecdf5",
     "text": "Точильный камень звёздной пыли"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "cb66ca8066b1cadc1975d0984921cf2261ae59406beac3f165f68324f193869d",
+    "text": "<keyword0>Физические</keyword0> попадания накладывают {{value0}} <keyword1>кровотечения</keyword1> на врагов с <keyword2>бронёй</keyword2>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
@@ -1384,6 +1396,12 @@
     "source": "Sundering Charm",
     "sourceHash": "911e7f2c70348a7f2c3f2da7ee3d99c069c7ff28e7d5b133e4fd3b4299b7c7e7",
     "text": "Оберег раскола"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "bf2189031c768abafd044fbc42d6a126bed8539f22b555db508f5d46bcf324e8",
+    "text": "Ваши <keyword0>физические</keyword0> попадания и попадания <keyword1>оглушением</keyword1> снимают {{value0}} вражеской <keyword2>брони</keyword2> до нанесения урона"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1414,6 +1432,12 @@
     "source": "Thistle Sieve",
     "sourceHash": "a6165dc737ae32bc5507ce487c5b4c9aebe02e5bac7023463de3451ece2c21e7",
     "text": "Сито чертополоха"
+  },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "f7d73b0dbac0572197c678dada939afdc1b9626e17f24abe746b6c764791cff6",
+    "text": "Половина <keyword0>яда</keyword0> и <keyword1>кровотечения</keyword1>, <keyword2>очищенных</keyword2> с союзников, превращается в <keyword3>шипы</keyword3>"
   },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
@@ -1481,6 +1505,12 @@
     "sourceHash": "d8a58afb308a59d150fbca62b7cca48f9f20f9863c4ebf28695adf9042ee9476",
     "text": "Оберег-камертон"
   },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "4c7c15469a11d750610d1fc01c2b0ed18016e2c780514bb9e8f690e964f6481a",
+    "text": "<keyword0>Физические</keyword0> попадания игнорируют <keyword1>броню</keyword1> врагов с накоплением <keyword2>оглушения</keyword2>"
+  },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
     "source": "Undertow Castanets",
@@ -1517,6 +1547,12 @@
     "sourceHash": "5afbf7cb88e9394d8fbf6f083d8631ad86829823e2bffbd2e86c38be9c2c45c4",
     "text": "Форма для восковой вощины"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "9d82a1776d255834f1f23725eaccfddfba1c48698446f8ffb3e41438c836abb5",
+    "text": "Союзники с <keyword0>бронёй</keyword0> сохраняют {{value0}}% <keyword1>блока</keyword1> при его уменьшении"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1534,6 +1570,12 @@
     "source": "Wishing Building Block",
     "sourceHash": "c9aa983f1ec3e5ab314b3ad45c5d823adc4a5e53f4f3d43c460c360c15d714ac",
     "text": "Кубик желаний"
+  },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "485a7b18ad352c0932989ca38632f2b5c3b8ed5e514a04df136d1f3ec1c74f7d",
+    "text": "Получение <keyword0>брони</keyword0> даёт {{value0}} <keyword1>блока</keyword1> другим союзникам с <keyword2>бронёй</keyword2>"
   },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,
