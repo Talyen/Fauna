@@ -2047,6 +2047,24 @@ it("presents shared Stun, area Burn and Mana rules with their keyword identities
   view.unmount();
 });
 
+it("presents conditional damage and Armor removal with their gameplay values", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={definition("alpenglen-last-light-charge")} value={4} />
+        <CardRules card={definition("cindernewt-ember-breath")} value={2} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  const rules = [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent);
+  expect(rules[0]).toContain("dernière carte en main");
+  expect(rules[1]).toContain("50% de l’Armure");
+  expect(view.container.querySelector('[data-keyword="light"]')).toBeTruthy();
+  expect(view.container.querySelector('[data-keyword="armor"]')).toBeTruthy();
+  view.unmount();
+});
+
 it("presents shared Dodge and reflected attack card rules", () => {
   localStorage.removeItem("fauna.language.v1");
   const dodge = definition("dunefox-dodge");
