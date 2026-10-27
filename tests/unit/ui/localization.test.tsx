@@ -241,7 +241,9 @@ it("localizes an actual discard draw event using its authored card", () => {
     ...french,
     [`content.card.${authored.id}.name`]: { source: authored.name, text: "Capacité traduite" },
   });
-  expect(eventPresentation(game, event!, reader)).toBe("Carte piochée depuis la défausse : Capacité traduite");
+  expect(eventPresentation(game, event!, reader)).toBe(
+    "Carte piochée depuis la défausse : Capacité traduite",
+  );
   expect(eventPresentation(game, event!, createMessageReader("en", {}))).toBe(event!.text);
 });
 
