@@ -164,7 +164,7 @@ function ConditionalPreview({ forecast }: { forecast: TargetForecast }) {
                       ? i18n.template("preview.alternative", "or {{description}}")
                       : i18n.template("preview.possible", "Possible: {{description}}")
                   }
-                  values={{ description: description.content }}
+                  values={{ description: description.content() }}
                 />
               </span>
             ))
@@ -247,13 +247,13 @@ function outcomePresentation(
     if (event.kind === "damage")
       damage.set(event.damageType, (damage.get(event.damageType) ?? 0) + event.amount);
   }
-  const parts: { text: string; content: ReactNode }[] = [...damage].map(([type, amount]) => {
+  const parts: { text: string; content: () => ReactNode }[] = [...damage].map(([type, amount]) => {
     const label = isKeywordId(type)
       ? i18n.content(`content.keyword.${type}.label`, KEYWORD_DEFINITIONS[type].label)
       : `${type[0]!.toUpperCase()}${type.slice(1)}`;
     return {
       text: i18n.message("preview.outcomeDamage", "{{amount}} {{type}}", { amount, type: label }),
-      content: (
+      content: () => (
         <MessageParts
           template={i18n.message("preview.outcomeDamage", "{{amount}} {{type}}", {
             amount,
@@ -271,7 +271,7 @@ function outcomePresentation(
   )
     parts.push({
       text: i18n.content("content.keyword.dodge.label", "Dodge"),
-      content: <Keyword id="dodge" className="rule-keyword" />,
+      content: () => <Keyword id="dodge" className="rule-keyword" />,
     });
   if (value.events.some((event) => event.kind === "damage" && event.critical) && parts[0]) {
     const previous = parts[0];
@@ -280,54 +280,56 @@ function outcomePresentation(
       text: i18n.message("preview.outcomeCritical", "Critical {{description}}", {
         description: previous.text,
       }),
-      content: template.split("{{description}}").map((text, index) => (
-        <Fragment key={index}>
-          {index ? previous.content : null}
-          {text ? <OutcomeKeyword id="criticalHit">{text}</OutcomeKeyword> : null}
-        </Fragment>
-      )),
+      content: () =>
+        template.split("{{description}}").map((text, index) => (
+          <Fragment key={index}>
+            {index ? previous.content() : null}
+            {text ? <OutcomeKeyword id="criticalHit">{text}</OutcomeKeyword> : null}
+          </Fragment>
+        )),
     };
   }
   if (value.absorbed) {
     const text = i18n.message("preview.absorbed", "{{amount}} absorbed", { amount: value.absorbed });
-    parts.push({ text, content: text });
+    parts.push({ text, content: () => text });
   }
   const healed = value.events.reduce((total, event) => total + (event.kind === "heal" ? event.amount : 0), 0);
   if (healed || value.health > value.previousHealth) {
     const amount = healed || value.health - value.previousHealth;
     const text = i18n.message("preview.outcomeHeal", "Heal {{amount}}", { amount });
-    parts.push({ text, content: <OutcomeKeyword id="health">{text}</OutcomeKeyword> });
+    parts.push({ text, content: () => <OutcomeKeyword id="health">{text}</OutcomeKeyword> });
   }
   if (!damage.size && value.health < value.previousHealth) {
     const text = i18n.message("preview.outcomeLoseHealth", "Lose {{amount}} Health", {
       amount: value.previousHealth - value.health,
     });
-    parts.push({ text, content: <OutcomeKeyword id="health">{text}</OutcomeKeyword> });
+    parts.push({ text, content: () => <OutcomeKeyword id="health">{text}</OutcomeKeyword> });
   }
   if (value.block !== value.previousBlock) {
     const text = i18n.message("preview.outcomeBlock", "Block {{before}} → {{after}}", {
       before: value.previousBlock,
       after: value.block,
     });
-    parts.push({ text, content: <OutcomeKeyword id="block">{text}</OutcomeKeyword> });
+    parts.push({ text, content: () => <OutcomeKeyword id="block">{text}</OutcomeKeyword> });
   }
   parts.push(
     ...value.changes.map((change) => ({
       text: statusChangeText(change, i18n, translateRule),
-      content: <StatusChangeText change={change} />,
+      content: () => <StatusChangeText change={change} />,
     })),
   );
   if (!parts.length) {
     const text = i18n.message("preview.outcomeNoChange", "No change");
-    parts.push({ text, content: text });
+    parts.push({ text, content: () => text });
   }
   return {
     text: parts.map((part) => part.text).join("; "),
-    content: parts.map((part, index) => (
-      <Fragment key={index}>
-        {index ? "; " : ""}
-        {part.content}
-      </Fragment>
-    )),
+    content: () =>
+      parts.map((part, index) => (
+        <Fragment key={index}>
+          {index ? "; " : ""}
+          {part.content()}
+        </Fragment>
+      )),
   };
 }
