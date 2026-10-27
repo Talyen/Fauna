@@ -251,12 +251,6 @@
     "sourceHash": "f2b7ac5a272db7cec019acd3625967dd0d037e89f0bec0f1487a4d73c2a83869",
     "text": "コピー · この戦闘中のみ有効"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "84e06474eba5e97c11460e229c54b506da5dd7162d6b01eeca1e2bf29a4b7c7d",
-    "text": "{{name}}、{{owner}}、{{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",

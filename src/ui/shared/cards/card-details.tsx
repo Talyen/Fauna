@@ -14,22 +14,16 @@ export function ActionDetails({
   ownerName,
   actor,
   modifiers,
-  enemy = false,
-  enemyValue,
-  enemyPower = 1,
   compact = false,
 }: {
   card: Card;
   compact?: boolean;
-  enemy?: boolean;
-  enemyValue?: number;
-  enemyPower?: number;
   ownerName: string;
   actor?: Creature;
   modifiers?: GameState;
 }) {
   const i18n = useMessages();
-  const { def, value } = actionDisplay(card, actor, modifiers, enemy, enemyValue);
+  const { def, value } = actionDisplay(card, actor, modifiers);
   return (
     <div className="card-details">
       <strong>
@@ -38,17 +32,13 @@ export function ActionDetails({
       </strong>
       {compact ? null : (
         <p>
-          <KeywordText
-            text={
-              enemy ? ownerName : `${ownerName} · ${modifiers ? cardCost(card, modifiers) : def.cost} mana`
-            }
-          />
+          <KeywordText text={`${ownerName} · ${modifiers ? cardCost(card, modifiers) : def.cost} mana`} />
         </p>
       )}
       {card.temporary && !def.consume ? (
         <p>{i18n.message("card.copy", "Copy · Lasts for this battle")}</p>
       ) : null}
-      <CardRules card={def} modifiers={modifiers} power={enemyPower} level={card.level} value={value} />
+      <CardRules card={def} modifiers={modifiers} level={card.level} value={value} />
     </div>
   );
 }
