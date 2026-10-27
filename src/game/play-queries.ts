@@ -30,6 +30,11 @@ export function chosenRecipients(state: BattleState, def: CardDefinition) {
 function hasChosenRecipient(state: BattleState, def: CardDefinition) {
   const mode = cardTargeting(def, state);
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return false;
+  if (def.effect === "resurrect")
+    return (
+      state.team.some((unit) => recipientEligible(unit, def)) ||
+      state.reserves.some((unit) => recipientEligible(unit, def))
+    );
   return recipientPool(state, def, mode).some((unit) => recipientEligible(unit, def));
 }
 
@@ -38,7 +43,12 @@ export function playTargetError(state: BattleState, def: CardDefinition, actorId
   if (
     (mode === "enemy" || mode === "ally") &&
     (targetId === undefined ||
-      !recipientPool(state, def, mode).some((unit) => unit.id === targetId && recipientEligible(unit, def)))
+      !(def.effect === "resurrect"
+        ? state.team.some((unit) => unit.id === targetId && recipientEligible(unit, def)) ||
+          state.reserves.some((unit) => unit.id === targetId && recipientEligible(unit, def))
+        : recipientPool(state, def, mode).some(
+            (unit) => unit.id === targetId && recipientEligible(unit, def),
+          )))
   )
     return def.effect === "swapChosen"
       ? "Choose a living backup."

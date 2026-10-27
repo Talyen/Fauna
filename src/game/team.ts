@@ -30,9 +30,10 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
 export function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
 }
+const controlStatuses = ["stun", "freeze"] as const;
 export function cleanseDeparture(state: GameState, outgoing: Combatant, events: GameEvent[]) {
   if (state.phase !== "battle" || outgoing.health <= 0 || !state.boons.includes("prayer-sailboat")) return;
-  for (const status of ["stun", "freeze"] as const)
+  for (const status of controlStatuses)
     if (
       outgoing.health > 0 &&
       (outgoing.combat?.controlled === status || (outgoing.combat?.[status] ?? 0) > 0)

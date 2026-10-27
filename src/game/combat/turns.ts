@@ -140,7 +140,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         continue;
       }
       const hasFallen = battle.enemies.some((unit) => unit.health <= 0);
-      const inherited: ReturnType<typeof enemyCard>[] = [];
+      let inherited: ReturnType<typeof enemyCard>[] | undefined;
       if (
         hasFallen &&
         unfinishedJourneyLimit(undefined, enemy) > ensureCombat(enemy).fallenCardsPlayedThisTurn
@@ -148,10 +148,10 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         for (const unit of battle.enemies)
           if (unit.health <= 0)
             for (const card of enemyAbilities.get(unit.species)!)
-              if (card.species !== enemy.species) inherited.push(card);
+              if (card.species !== enemy.species) (inherited ??= []).push(card);
       const own = enemyAbilities.get(enemy.species)!;
       const abilities = hasFallen
-        ? inherited.length
+        ? inherited
           ? [...own, ...inherited]
           : own
         : enemyAbilitiesWithoutResurrection.get(enemy.species)!;
@@ -160,7 +160,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       const { def, targetId, allyTargetId } = choice;
       enemy.targetId = targetId ?? enemy.targetId;
       enemy.lastAbility = def.id;
-      if (inherited.includes(def)) ensureCombat(enemy).fallenCardsPlayedThisTurn++;
+      if (inherited?.includes(def)) ensureCombat(enemy).fallenCardsPlayedThisTurn++;
       playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events);
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       if (settle(draft, events)) return;

@@ -106,6 +106,23 @@ it("retains discard order, eligible owners and recovery events", () => {
   expect(events.at(-1)).toMatchObject({ kind: "action", actorId: living!.id });
 });
 
+it("returns a sole eligible Discard card without consuming a random decision", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  const owner = state.team[0]!;
+  const card = state.cards.find((entry) => entry.ownerId === owner.id)!;
+  state.boons = ["cloud-cup-and-ball"];
+  state.battle.discard = [card.id];
+  state.battle.hand = [];
+  state.battle.buffer = [];
+  const rng = state.rng;
+  const events: Parameters<typeof recoverBrokenGuard>[2] = [];
+  recoverBrokenGuard(state, owner.id, events);
+  expect(state.battle.hand).toEqual([card.id]);
+  expect(state.battle.discard).toEqual([]);
+  expect(state.rng).toBe(rng);
+  expect(events.at(-1)).toMatchObject({ kind: "action", actorId: owner.id });
+});
+
 it("preserves singleton decisions and the order of every projected alternative", () => {
   const state = requireBattle(teamRun(42, ["mossguard", "prismram"]));
   const seen: number[][] = [];

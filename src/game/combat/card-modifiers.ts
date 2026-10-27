@@ -37,7 +37,8 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
     if (!enemies) {
       enemies = new Set();
       for (const enemy of state.battle.enemies) enemies.add(enemy.id);
-      for (const unit of state.battle.minions ?? []) if (unit.minion.side === "enemy") enemies.add(unit.id);
+      if (state.battle.minions)
+        for (const unit of state.battle.minions) if (unit.minion.side === "enemy") enemies.add(unit.id);
     }
     if (enemies.has(event.targetId)) {
       dodged = true;
