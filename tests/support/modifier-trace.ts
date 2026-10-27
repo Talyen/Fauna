@@ -16,7 +16,12 @@ export const recordedTraceDigest = (value: unknown) =>
         )
           return Object.fromEntries(
             Object.entries(entry).flatMap(([name, item]) =>
-              name === "thorns" ? [[name, item], ["waterThorns", 0]] : [[name, item]],
+              name === "thorns"
+                ? [
+                    [name, item],
+                    ["waterThorns", 0],
+                  ]
+                : [[name, item]],
             ),
           );
         if (key === "metronomeActor" && entry === null) return undefined;
