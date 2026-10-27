@@ -905,6 +905,78 @@
     "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
     "text": "水"
   },
+  "content.species.aerostat.passive.0.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
+    "sourceHash": "dcdd2c75b233089d9baa81af7149889776253868ad0df31fb57a1bd821ca514e",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.1.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "852dfcccb07319872c8892edc94e859c11ce9fb11c28a81dff832e73ef7cbc08",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.2.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "7c876a32b7197706817332af69a7cd059381504af03c26ed71cc247d506bd1be",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.3.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "ca364d29070110dd729b35e832472b7236dbc0978d3048dc53a1edc9b4b910cb",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.4.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "5373ba9cbff722c447d20a51f662723339eef831281da120f6d71b7e4396962a",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.5.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "73b6178be78652b69ce1e44e077bfa338515c31ca55bb947d0f64e469bcf31b0",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.almanelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "cdb6be27744a221346262445d93f7247167d9487bf0a2e029db713f4b834cca5",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "9075f22960d761c94ba81869ef1462aa6292d67761c03ca38b5afb46867a13ae",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "8c3509e388d290f222ab8bc4f60b4febcc46a39951ce0ad533724c4f6df0f66d",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "c697df54afeb90513e9b002ffd14b1365115af4069214e5f273abe4ad7b7f447",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "224db3195a28a9c78ecde2eb3b7f5f3bb8fa813786f2ba1d750f21c517eecdf4",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "7151dacd1fddc2743b6e9300b8ec04e5842bd65f3cb00e333caacd74c71ab876",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>转化为<keyword1>荆棘</keyword1>"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -1157,6 +1229,42 @@
     "sourceHash": "31f2dfae539359f4d8e2ed87b5ec0aad86aaf9c001921d73e87a8c876c7fcbe1",
     "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
   },
+  "content.species.dawncall.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "c3c833412c81ec2baa59d5a9bde40f1e2d11d25718d6f4d92e949edf526fae96",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "ea31f76e46bedc255b29eaa23da90c37ee2531ec37333b4fbe342fda2548bbac",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "6c1a14ef27bed9be6bc9ed8b0033ce0bb6c2c29882ea1c16baad2f4f166a7041",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "c8e71be9820d00f361c3f71ffc6d95fc5d5c229c9d269de3dd17d2c8edb6ad28",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "b7939ea382ea7634cccad5b4aff770b32195b6cf625526f721405e4deb29d9d2",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
+    "sourceHash": "7600bd446b9b622ec3286e050f88f7b4892acd52ccb6a96b8990dcfff35fc974",
+    "text": "每回合第一次攻击必定<keyword0>暴击</keyword0>"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1378,6 +1486,42 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
     "sourceHash": "ebd556352efcac5c386465ca6734cf40051bb154b6ab4fb0792fded9d3dba711",
     "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.orifable.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "e4d7481229f90dde0b9744cb9c2c72f4f64a6e33eecdc0e8b8df8d8d5792a540",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "b59ef67743bb8a68c3ed8d4d3e3ac685466ae828a5c1f57133e03aff527f038e",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "bcebd7545b360421c3ad5810450751a53c89f7ea4d4189b2e792c76a4015dd9c",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "cac8ed6c1053707f8efb8e4ccd7fe3780f5e852ccd2bbdacfbeecb06fa57c0af",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "b24779ce586bf6b4212350520c04cb6fe4bfb252c3e0a00c194a4077f2c5e1ab",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.5.rule": {
+    "reviewed": true,
+    "source": "Draw an extra card each turn",
+    "sourceHash": "201cb82c8320c725652b53245c9504e839cf3d58e5504ade0227bfb7a5f44aec",
+    "text": "每回合额外抽一张牌"
   },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,

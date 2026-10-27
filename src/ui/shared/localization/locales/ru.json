@@ -905,6 +905,78 @@
     "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
     "text": "Вода"
   },
+  "content.species.aerostat.passive.0.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
+    "sourceHash": "bb54d3e0de75b3be9fec479358af898891ebb142730a8f41d0f7ef6b37a0251c",
+    "text": "Начинайте с {{value0}} картой <keyword0>еды</keyword0> в колоде"
+  },
+  "content.species.aerostat.passive.1.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "a951dee5deac6561b1a8f12f1ef4c2b7b88dda560756d7042fb27d4b1a867d46",
+    "text": "Начинайте с {{value0}} картами <keyword0>еды</keyword0> в колоде"
+  },
+  "content.species.aerostat.passive.2.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "ef8ac5087d573ffdac629cd402fc6e618dada10a83a9e5f0e3d85321588777ac",
+    "text": "Начинайте с {{value0}} картами <keyword0>еды</keyword0> в колоде"
+  },
+  "content.species.aerostat.passive.3.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "59ef1b327a8133e03f07d4be98420fc3ed831f6c38954aa3f235445dee5f0586",
+    "text": "Начинайте с {{value0}} картами <keyword0>еды</keyword0> в колоде"
+  },
+  "content.species.aerostat.passive.4.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "7f76834580c5229819ef67fc055ba0f21c6aa9be507fb69e2635778c4fe309ca",
+    "text": "Начинайте с {{value0}} картами <keyword0>еды</keyword0> в колоде"
+  },
+  "content.species.aerostat.passive.5.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "06a94d7077761c963f8dbce8b65326dd2003d4663728c2ca176200920e3c4ace",
+    "text": "Начинайте с {{value0}} картами <keyword0>еды</keyword0> в колоде"
+  },
+  "content.species.almanelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "68c7772e6173f97f089c81d05a628b6b586faa143c01845d62334e28c61f2275",
+    "text": "{{value0}}% <keyword0>блока</keyword0>, теряемого при распаде, превращается в <keyword1>шипы</keyword1>"
+  },
+  "content.species.almanelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "6cedb508891fefd9a366a9d47cb0092985bbe2dcfe5f3b11931993c58e670bf7",
+    "text": "{{value0}}% <keyword0>блока</keyword0>, теряемого при распаде, превращается в <keyword1>шипы</keyword1>"
+  },
+  "content.species.almanelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "b86f900f10649971221c3343c9a5126cfed3f45102948ea8d4e3552cad447acb",
+    "text": "{{value0}}% <keyword0>блока</keyword0>, теряемого при распаде, превращается в <keyword1>шипы</keyword1>"
+  },
+  "content.species.almanelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "fb6f723b2be68e0014b45a6332d1c8c288de800cc90a61cf018620b46b7f1856",
+    "text": "{{value0}}% <keyword0>блока</keyword0>, теряемого при распаде, превращается в <keyword1>шипы</keyword1>"
+  },
+  "content.species.almanelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "243184380147ec4d6f0134332bf266eb7205ce767de99ac5e8721e0ee17ed403",
+    "text": "{{value0}}% <keyword0>блока</keyword0>, теряемого при распаде, превращается в <keyword1>шипы</keyword1>"
+  },
+  "content.species.almanelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "7e0a3b9dc6f88d883d6d043a181fb2bbc73eaad9b3e0ead44fa744dacf94901c",
+    "text": "<keyword0>Блок</keyword0>, теряемый при распаде, превращается в <keyword1>шипы</keyword1>"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -1157,6 +1229,42 @@
     "sourceHash": "c912f860bde54fc4de6451459d0f9dcb6320db609fe16b9743dd72067a8d56e0",
     "text": "Когда ваш <keyword1>блок</keyword1> ломается, нанесите {{value0}} урона типа «<keyword0>Вода</keyword0>»"
   },
+  "content.species.dawncall.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "be724df75d85a41a70d7fd649e79f40e79d29b3c8cd1a775743ddf8905cc5f28",
+    "text": "Первая ваша атака за ход получает {{value0}}% шанса <keyword0>критического удара</keyword0>"
+  },
+  "content.species.dawncall.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "8dfc87c5718743e5b05e80e8c885ecb2f926ea3445d3ce01209681ce6fd56846",
+    "text": "Первая ваша атака за ход получает {{value0}}% шанса <keyword0>критического удара</keyword0>"
+  },
+  "content.species.dawncall.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "a133d18ef61a1889f143f06d0058a5a0cddee42f1b1754299158f47683f0f8bf",
+    "text": "Первая ваша атака за ход получает {{value0}}% шанса <keyword0>критического удара</keyword0>"
+  },
+  "content.species.dawncall.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "568a8870452289067e47df9f63142fbcb30b2e14bf7d679ab14d0bbd5e203407",
+    "text": "Первая ваша атака за ход получает {{value0}}% шанса <keyword0>критического удара</keyword0>"
+  },
+  "content.species.dawncall.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "9824208d289ad9d578410593690202a2a61c7fe3a5903c45b9c336564458211b",
+    "text": "Первая ваша атака за ход получает {{value0}}% шанса <keyword0>критического удара</keyword0>"
+  },
+  "content.species.dawncall.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
+    "sourceHash": "1e2af0ffa326474b761455114b8cccbf1ab5f6164daa8d6f6348999dabca56ec",
+    "text": "Первая ваша атака за ход — <keyword0>критический удар</keyword0>"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1378,6 +1486,42 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
     "sourceHash": "fc61f5df637b43ecff46933ed190b524c0cf239bf309ef2e769f9dc6d7b59e7b",
     "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
+  },
+  "content.species.orifable.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "eb512acdeafc8ad4cc2f05402ece2b5ec97854b161dade540353ca34ccb713b4",
+    "text": "Шанс {{value0}}% взять дополнительную карту каждый ход"
+  },
+  "content.species.orifable.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "3d9104551f6c3b6adea5dbc4e54a807bfb5bcb2b7ce0ee29765717c13f06555c",
+    "text": "Шанс {{value0}}% взять дополнительную карту каждый ход"
+  },
+  "content.species.orifable.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "006fb954a954abbad1ff1b98bb54f9ff55beb1c60149fc4a1141c2523255931c",
+    "text": "Шанс {{value0}}% взять дополнительную карту каждый ход"
+  },
+  "content.species.orifable.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "e301241efc80bd6a1aa98429c3fc07404b4734786a89aaab2f6a38d5152d31c4",
+    "text": "Шанс {{value0}}% взять дополнительную карту каждый ход"
+  },
+  "content.species.orifable.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "52d8792d2ca7aa2dd843fe824a074635a5cf626f3b566a31999083687ef67f94",
+    "text": "Шанс {{value0}}% взять дополнительную карту каждый ход"
+  },
+  "content.species.orifable.passive.5.rule": {
+    "reviewed": true,
+    "source": "Draw an extra card each turn",
+    "sourceHash": "074968e167b9b8e56e87c8e6c8a4f5f79a1796f902d29c1ebbd4fd35c3fad68f",
+    "text": "Берите дополнительную карту каждый ход"
   },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,

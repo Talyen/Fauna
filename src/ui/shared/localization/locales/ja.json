@@ -905,6 +905,78 @@
     "sourceHash": "c94de88083fe5ec567d91def86d6bbedcdf8224c311353a12d82511a723d263a",
     "text": "水"
   },
+  "content.species.aerostat.passive.0.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
+    "sourceHash": "6fafcd7e0e25020e159f48d27b43d3ff794724ecaae805f9980e1dad860623ac",
+    "text": "デッキに<keyword0>食料</keyword0>カードを{{value0}}枚入れた状態で開始"
+  },
+  "content.species.aerostat.passive.1.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "89896de25c14d1ae754bc85bb18122af9d380a65b517c2e1cb1f69ef7c206a95",
+    "text": "デッキに<keyword0>食料</keyword0>カードを{{value0}}枚入れた状態で開始"
+  },
+  "content.species.aerostat.passive.2.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "5826b5a883968ab001923655119dbbb553ed155d06282571fdf4bdf30a8bb987",
+    "text": "デッキに<keyword0>食料</keyword0>カードを{{value0}}枚入れた状態で開始"
+  },
+  "content.species.aerostat.passive.3.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "feb06eca53e8dc3b58c4fb60b0c53cd5073a82387780e81bbb8cb30b4874ce54",
+    "text": "デッキに<keyword0>食料</keyword0>カードを{{value0}}枚入れた状態で開始"
+  },
+  "content.species.aerostat.passive.4.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "32ebab7b600c2c86cc78959e0a3b9525655e62a64cdee6c13ab216f034fd718d",
+    "text": "デッキに<keyword0>食料</keyword0>カードを{{value0}}枚入れた状態で開始"
+  },
+  "content.species.aerostat.passive.5.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "0722d968c7483e96451d1ee21323d9a4c284607940c6f9a099fd98dbca8cf19e",
+    "text": "デッキに<keyword0>食料</keyword0>カードを{{value0}}枚入れた状態で開始"
+  },
+  "content.species.almanelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "abf50860bd686f8b306fbee15b428e7629980e308e783ffe3e395f8c68829a8c",
+    "text": "減衰で失った<keyword0>ブロック</keyword0>の{{value0}}%が<keyword1>棘</keyword1>になる"
+  },
+  "content.species.almanelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "a3a9159cffe04e1b53564478f44a75620935db4b1ed5712bb33a3c378d110bce",
+    "text": "減衰で失った<keyword0>ブロック</keyword0>の{{value0}}%が<keyword1>棘</keyword1>になる"
+  },
+  "content.species.almanelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "59c2743a274c6c1619266536a5c06010200fcb14363f44b5399fa6d4961b32bb",
+    "text": "減衰で失った<keyword0>ブロック</keyword0>の{{value0}}%が<keyword1>棘</keyword1>になる"
+  },
+  "content.species.almanelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "5f004bcf37764957d4f5aefeebbcd852f2d313f1d8365ecc66a96bdc84bf3c24",
+    "text": "減衰で失った<keyword0>ブロック</keyword0>の{{value0}}%が<keyword1>棘</keyword1>になる"
+  },
+  "content.species.almanelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "270c33ad2d2b9508acea75d3c2f29244e4763726e669b5d95f2df9696cd127db",
+    "text": "減衰で失った<keyword0>ブロック</keyword0>の{{value0}}%が<keyword1>棘</keyword1>になる"
+  },
+  "content.species.almanelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "1f44b50a0a8fafc5fb9f144d6f47b9db774f1a4f24645cca9a9803e03fe91843",
+    "text": "減衰で失った<keyword0>ブロック</keyword0>が<keyword1>棘</keyword1>になる"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -1157,6 +1229,42 @@
     "sourceHash": "8ab69927624fd2876b27fc28ea9d80d1aa6488b42185c5abeacf9f1ab4ca6bfc",
     "text": "自分の<keyword1>ブロック</keyword1>が壊れたとき、<keyword0>水</keyword0>ダメージを{{value0}}与える"
   },
+  "content.species.dawncall.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "dd04acd8d7acaf93317723bc0471a7d5435ff6675212438e2dfb83353eccc0c7",
+    "text": "各ターンの最初の攻撃の<keyword0>クリティカル</keyword0>率が{{value0}}%増加"
+  },
+  "content.species.dawncall.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "43d0279764ca39d3fd8d1092da90853fc92199f4150fb906e598e4f269e33756",
+    "text": "各ターンの最初の攻撃の<keyword0>クリティカル</keyword0>率が{{value0}}%増加"
+  },
+  "content.species.dawncall.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "6b990a36feb84191d1903589f76e89f1f4bc78023877b0e3a6458e539da40d9d",
+    "text": "各ターンの最初の攻撃の<keyword0>クリティカル</keyword0>率が{{value0}}%増加"
+  },
+  "content.species.dawncall.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "a5b9244779d8d5d2df99de97c496154f46d4bacee1c9504db2159ae844514de3",
+    "text": "各ターンの最初の攻撃の<keyword0>クリティカル</keyword0>率が{{value0}}%増加"
+  },
+  "content.species.dawncall.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "4374d2b3330da41f5f40f696f743c176c8a23aa6e2c326f6b4110d4b960a8d15",
+    "text": "各ターンの最初の攻撃の<keyword0>クリティカル</keyword0>率が{{value0}}%増加"
+  },
+  "content.species.dawncall.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
+    "sourceHash": "b8d7e717f8f94a3469adb95e9917d80208595895bfc44db7f4e60f3b4a704638",
+    "text": "各ターンの最初の攻撃は<keyword0>クリティカル</keyword0>になる"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1378,6 +1486,42 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
     "sourceHash": "189bf866fba0362ca385d156b14f806dee3120ced5d9b729779ea30defbe6b87",
     "text": "1ターンおきに<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.orifable.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "fbb4c8c5031f36ecc4a276beb005e5b7314c6c02a95f0935476626e1d47588a4",
+    "text": "各ターンに{{value0}}%の確率でカードを1枚追加で引く"
+  },
+  "content.species.orifable.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "b64ccfccc927efabd0a1323fcb6bdc42a3912f6d2d014a057a4efd1174c3b0da",
+    "text": "各ターンに{{value0}}%の確率でカードを1枚追加で引く"
+  },
+  "content.species.orifable.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "98ecd2769e379728f41ec7101d793f4f62d840a8fe6f21208f31dd52d051ec0c",
+    "text": "各ターンに{{value0}}%の確率でカードを1枚追加で引く"
+  },
+  "content.species.orifable.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "4ac6be35b697cd187f85bd11a0959c4ecad02873247b336dce374529bce16c82",
+    "text": "各ターンに{{value0}}%の確率でカードを1枚追加で引く"
+  },
+  "content.species.orifable.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "179afc97454f8ab9c9b5e440f2a9bacc07aad1856afb1360256e4e09a72e5f60",
+    "text": "各ターンに{{value0}}%の確率でカードを1枚追加で引く"
+  },
+  "content.species.orifable.passive.5.rule": {
+    "reviewed": true,
+    "source": "Draw an extra card each turn",
+    "sourceHash": "9d9a869b80a11743ee85d4c6a95cb4285ff81f8c91361e5db314b12a77e9fa4c",
+    "text": "各ターンにカードを1枚追加で引く"
   },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,

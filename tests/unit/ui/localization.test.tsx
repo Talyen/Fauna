@@ -923,6 +923,24 @@ it("extracts every creature passive tier exactly as the game produces it", () =>
   }
 });
 
+it("presents the probabilistic and guaranteed passive tiers distinctly", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const progressed = produce(run(), (draft) => {
+    draft.discovery.recruited.orifable = 6;
+  });
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CreatureDetails kind="orifable" />
+        <CreatureDetails kind="orifable" progression={progressed} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(screen.getByText("50% de chances de piocher une carte supplémentaire à chaque tour")).toBeTruthy();
+  expect(screen.getByText("Pioche une carte supplémentaire à chaque tour")).toBeTruthy();
+  view.unmount();
+});
+
 it("localizes shared pagination and combat announcements while preserving values", () => {
   const view = render(
     <MessageProvider locale="fr" catalog={french}>

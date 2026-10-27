@@ -905,6 +905,78 @@
     "sourceHash": "b195dfae9746c0b16c16b90d185f9f421e80a9071b2f7125941a4c07f983e9c5",
     "text": "Agua"
   },
+  "content.species.aerostat.passive.0.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
+    "sourceHash": "0c6ff1e105fe5c35b090b399bbf52160d4ce94d2d12b1e326693da9f4f64020e",
+    "text": "Empieza con {{value0}} carta de <keyword0>Comida</keyword0> en tu mazo"
+  },
+  "content.species.aerostat.passive.1.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "50cefd0ef751d1d8fe612dacee673bf91ffe152199a36230d98720e747bbcf63",
+    "text": "Empieza con {{value0}} cartas de <keyword0>Comida</keyword0> en tu mazo"
+  },
+  "content.species.aerostat.passive.2.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "75b9da3aa8a7b29d669755d81fa7f813b120b7f6437e3ef7900d38e1b72fd331",
+    "text": "Empieza con {{value0}} cartas de <keyword0>Comida</keyword0> en tu mazo"
+  },
+  "content.species.aerostat.passive.3.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "a3944f5ae4357ca65e10e2c72430c81dc2e91e58d04cc4e5d4b091f2ecbb9e63",
+    "text": "Empieza con {{value0}} cartas de <keyword0>Comida</keyword0> en tu mazo"
+  },
+  "content.species.aerostat.passive.4.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "06d19052e0269c0a3566f2b662ee9ccdc534d05855418a0ff4247a53dff4f9aa",
+    "text": "Empieza con {{value0}} cartas de <keyword0>Comida</keyword0> en tu mazo"
+  },
+  "content.species.aerostat.passive.5.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "c44ec93147db13198faa062d5733611e94fa24201d6b3eafdf0850063a3b6195",
+    "text": "Empieza con {{value0}} cartas de <keyword0>Comida</keyword0> en tu mazo"
+  },
+  "content.species.almanelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "ebf584d3278a7511e14980abb71ea2235d37e735a46c87441a2bd69b81b75c86",
+    "text": "El {{value0}}% del <keyword0>Bloqueo</keyword0> perdido por decaimiento se convierte en <keyword1>Espinas</keyword1>"
+  },
+  "content.species.almanelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "2259faf5b304eb61799ca961e4a12da4335da0b0a47b3354268f0fe5438bdc2c",
+    "text": "El {{value0}}% del <keyword0>Bloqueo</keyword0> perdido por decaimiento se convierte en <keyword1>Espinas</keyword1>"
+  },
+  "content.species.almanelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "2707f0bfd79ee1c26e1c429ae01bf23d9b03181de5c9e29e39974ba9d4ccb423",
+    "text": "El {{value0}}% del <keyword0>Bloqueo</keyword0> perdido por decaimiento se convierte en <keyword1>Espinas</keyword1>"
+  },
+  "content.species.almanelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "4d968ac5b5e256930a6fef212e637e68bdfd39cd7b5f980adce4304e89ced478",
+    "text": "El {{value0}}% del <keyword0>Bloqueo</keyword0> perdido por decaimiento se convierte en <keyword1>Espinas</keyword1>"
+  },
+  "content.species.almanelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "9ec9ffe8763dee2beb4bb6f7d538d3301ef9694716751b32995a961494c716a8",
+    "text": "El {{value0}}% del <keyword0>Bloqueo</keyword0> perdido por decaimiento se convierte en <keyword1>Espinas</keyword1>"
+  },
+  "content.species.almanelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "1ba8afba2d6069e7076730d9731a53c2157fae4e1e2135dd5157a45075838144",
+    "text": "El <keyword0>Bloqueo</keyword0> perdido por decaimiento se convierte en <keyword1>Espinas</keyword1>"
+  },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
     "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -1157,6 +1229,42 @@
     "sourceHash": "7b335a9bdd9818223802c8658f068f6a72d637d13413c14f2896ad2afbd9435c",
     "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0> cuando se rompe tu <keyword1>Bloqueo</keyword1>"
   },
+  "content.species.dawncall.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "c4abd12d1c59dd8664d156365bb3f096562407c354620f589db04b12943055b5",
+    "text": "Tu primer ataque de cada turno obtiene un {{value0}}% de probabilidad de <keyword0>golpe crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "a5c97d2ce23c0e8ae813c06d3f6b173d4c25372facee71c2bc68cf1e3e1f7baa",
+    "text": "Tu primer ataque de cada turno obtiene un {{value0}}% de probabilidad de <keyword0>golpe crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "5aba6681fca7c1df9acbbdc0f277949119950cb3d1f8f765a8ad9a36313f4b62",
+    "text": "Tu primer ataque de cada turno obtiene un {{value0}}% de probabilidad de <keyword0>golpe crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "b38d63c204063a9aa2ec65058df5d79743e0190aff65ed17e9480f9418804cf5",
+    "text": "Tu primer ataque de cada turno obtiene un {{value0}}% de probabilidad de <keyword0>golpe crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "ce664b3c7b2c093ae6a321b1b70338b8e9eb968966fa31b28776750381f4a679",
+    "text": "Tu primer ataque de cada turno obtiene un {{value0}}% de probabilidad de <keyword0>golpe crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
+    "sourceHash": "be2da3e271994ea0e295e720b729be83309b0a50105db936632646f08bea7cbe",
+    "text": "Tu primer ataque de cada turno es un <keyword0>golpe crítico</keyword0>"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1378,6 +1486,42 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
     "sourceHash": "1e3751e4d9e7b2646145b29c786f52520dd16b1863431b67fc2259a24a002686",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> cada dos turnos"
+  },
+  "content.species.orifable.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "2b0d91053688bb1665d47a6608fd2f7ddf1e0a3a6dc3269dd449c73c66b92c5a",
+    "text": "{{value0}}% de probabilidad de robar una carta adicional cada turno"
+  },
+  "content.species.orifable.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "831cc6d1db4e6a330300a37690c06ad965986cfe6be112565c81cb78ff718f91",
+    "text": "{{value0}}% de probabilidad de robar una carta adicional cada turno"
+  },
+  "content.species.orifable.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "05ebd83052f3ddfa6a8a294c0b6e67365e225fa109539e944f34d5f122c91a2c",
+    "text": "{{value0}}% de probabilidad de robar una carta adicional cada turno"
+  },
+  "content.species.orifable.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "92a68c48afc6d82c1e59e07b8513831f26ff6506cefe118691fa415f7c8b9e45",
+    "text": "{{value0}}% de probabilidad de robar una carta adicional cada turno"
+  },
+  "content.species.orifable.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "c7fa0d8097c91f19cc5ad9c969b50c1d2a64385e43d45570acfa5e47f5b89265",
+    "text": "{{value0}}% de probabilidad de robar una carta adicional cada turno"
+  },
+  "content.species.orifable.passive.5.rule": {
+    "reviewed": true,
+    "source": "Draw an extra card each turn",
+    "sourceHash": "312eaae0f12e3ddcca0bcd0162feab3cea0694c9ec92913c07a2c19922e321be",
+    "text": "Roba una carta adicional cada turno"
   },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
