@@ -1,6 +1,6 @@
 import { git, readFixture, repository, writeFixture } from "../../support/tooling.mjs";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { mkdirSync, rmSync } from "node:fs";
+import { existsSync, mkdirSync, rmSync } from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import {
@@ -279,8 +279,14 @@ describe("lightweight local verification", () => {
       "tests/unit/ui/pagination.test.tsx",
     ]);
     // A moved or deleted contract must be repaired in the checked-in owner map.
-    for (const { suites } of Object.values(owners))
-      for (const file of suites) expect(readFixture(repo, file).length).toBeGreaterThan(0);
+    for (const [owner, { suites }] of Object.entries(owners))
+      for (const file of suites) {
+        if (!existsSync(path.join(repo, file)))
+          throw new Error(
+            `Missing owner suite ${file} for ${owner}; restore it or update scripts/checks/test-owners.json.`,
+          );
+        expect(readFixture(repo, file).length).toBeGreaterThan(0);
+      }
   });
 
   it("blocks verification when a required owner suite is deleted or replaced by a directory", () => {

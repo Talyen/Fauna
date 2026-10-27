@@ -20,7 +20,7 @@ Keep complete scenarios with their contract owner; do not split or remove useful
 | `tests/e2e/`                   | Browser player flows; `expedition.spec.ts` retains the full starter-to-victory journey |
 | `tests/e2e/support/`           | Browser saves, input, layout, evidence capture and journey driving                     |
 
-`vitest.config.ts` discovers unit, integration and exhaustive suites, retaining each suite's Node or DOM environment. [CI](../Docs/CI.md#pipeline) owns partitioning and completeness against unfiltered discovery. Moving suites requires updating declared owner suites, explicit routes/documentation and affected fixed smoke selections; recursive full discovery must retain all three groups.
+`vitest.config.ts` discovers unit, integration and exhaustive suites, retaining each suite's Node or DOM environment. [CI](../Docs/CI.md#pipeline) owns partitioning and completeness against unfiltered discovery. Moving suites requires updating declared owner suites, explicit routes/documentation and affected fixed smoke selections; the owner-registry regression names missing paths and their owner; recursive full discovery must retain all three groups.
 
 `tests/exhaustive/` contains extended matrices; [Contributing](../CONTRIBUTING.md#verification) owns command selection and execution. Full discovery must retain the complete matrix. [The lineup scenarios](support/lineups.ts) share the same command limit, seeded identities, save round trips and terminal/abandonment assertions between five fixed local trios and [the complete ordinary-lineup matrix](exhaustive/roster-combinations.test.ts). Its local contracts include coverage checks for every distinct ordinary trio and full-suite discovery. Preserve all exhaustive cases and assertions when separating these tiers; retain focused contracts for the changed boundary.
 
@@ -34,7 +34,7 @@ Protect consequential player behavior, command rejection, ownership, persistence
 
 [Auto-play ranking baselines](unit/application/fixtures/battle-policy-rankings.tsv) retain each ordered command, score and reason for every creature in four battle conditions, including Talent and Boon effects. Each row is one choice; `null` represents an empty ranking. Preserve the recorded expectations for behavior-preserving changes and review changes to them as player-facing policy changes.
 
-[Boon catalog checks](unit/game/boons.test.ts) cover approved rules, prepared portraits and individual save round trips once for every entry in the independent [expected rules](support/boons.ts). Focused Boon suites retain their separate mechanic and interaction scenarios.
+[Boon catalog checks](unit/game/boon-catalog.test.ts) cover approved rules, prepared portraits and individual save round trips once for every entry in the independent [expected rules](support/boons.ts). Focused Boon suites retain their separate mechanic and interaction scenarios.
 
 Prefer focused behavioral assertions over tests of incidental implementation, markup or wrappers. Browser coverage should protect actual interaction and integration failures; arithmetic already covered in the engine rarely needs another browser journey. Test observable contracts instead of exact npm command strings, YAML formatting or internal call sequences. Keep literal assertions only where the literal itself is a public interface or authorization/security boundary. Never remove or weaken a regression test just to obtain a passing gate. Report exact suites run and remaining verification boundaries under [Contributing](../CONTRIBUTING.md#verification).
 

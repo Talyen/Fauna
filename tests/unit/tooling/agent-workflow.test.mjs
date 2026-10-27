@@ -356,8 +356,8 @@ it(
     await integrate(root, task.branch, { runner: launch, log: () => {}, tests: [suite] });
     expect(launch).toHaveBeenCalledTimes(1);
     const testRuns = runner.mock.calls.filter((call) => call[1][0].endsWith("vitest.mjs"));
-    expect(testRuns).toHaveLength(1);
-    expect(testRuns[0][1]).toContain(suite);
+    expect(testRuns).toHaveLength(0);
+    expect(launch.mock.calls[0][1]).toEqual(expect.arrayContaining(["--test", suite]));
     expect(git(root, "show", "HEAD:README.md")).toBe("# Verified task");
   },
 );

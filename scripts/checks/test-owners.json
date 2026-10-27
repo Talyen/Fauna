@@ -36,6 +36,15 @@
       "tests/unit/game/modifier-contracts.test.ts"
     ]
   },
+  "src/game/content/boons.ts": {
+    "reason": "Boon catalog identity, prepared portraits, save round trips and modifier ownership",
+    "suites": [
+      "tests/unit/game/boon-catalog.test.ts",
+      "tests/unit/game/content-ownership.test.ts",
+      "tests/unit/game/creature-passives.test.ts",
+      "tests/unit/game/modifier-contracts.test.ts"
+    ]
+  },
   "src/game/content/": {
     "reason": "Content catalog ownership and all six passive tiers",
     "suites": [

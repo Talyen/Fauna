@@ -30,10 +30,10 @@ export function parseCheckArgs(args) {
     if (arg === "--plan") plan = true;
     else if (arg === "--related") related = true;
     else if (arg === "--diff" || arg === "--working-tree") diff = true;
-    else if (arg === "--test" || arg === "--forget-test") {
+    else if (arg === "--test" || arg === "--record-test" || arg === "--forget-test") {
       if (!args[i + 1] || args[i + 1].startsWith("-"))
         throw new Error(`${arg} requires a unit/integration/exhaustive suite path.`);
-      (arg === "--test" ? tests : forget).push(args[++i]);
+      (arg === "--forget-test" ? forget : tests).push(args[++i]);
     } else if (arg === "--base") {
       if (base || !args[i + 1] || args[i + 1].startsWith("-"))
         throw new Error("--base requires one Git commit or branch.");
@@ -183,6 +183,15 @@ export function runCheck(
   const docs = paths.some((file) => /\.md$/i.test(file));
   const docsOnly = paths.length > 0 && paths.every((file) => /\.md$/i.test(file));
   log(CI_NOTICE);
+  log(
+    `Commit: ${git(root, ["rev-parse", "HEAD"]).trim()}${git(root, ["status", "--porcelain", "--untracked-files=all"]) ? " (working changes are not represented by this commit)" : ""}.`,
+  );
+  log("Ran and passed: nothing yet; the following is a plan.");
+  log(
+    detailed
+      ? "Planned: selected suites and compilers; no checks have run yet."
+      : "Planned but not run locally: selected suites and compilers; hosted CI and rendered evidence remain separate.",
+  );
   log(
     `Selection base: ${base}${selection.paths.length ? "; explicit paths" : "; committed and working changes"}.`,
   );
@@ -365,7 +374,9 @@ export function runCheck(
     return 1;
   }
   log(
-    `Task checks passed. ${detailed ? "Local handoff gate" : "Lightweight local gate"} complete; full CI and any required rendered review remain separate.`,
+    detailed
+      ? "Task checks passed. Ran and passed: selected formatting, lint, source contracts, applicable documentation, compilers and selected suites (or smoke when stated). Full CI and required rendered review remain separate."
+      : "Task checks passed. Ran and passed: selected formatting, syntax lint, source contracts and applicable documentation. Planned but not run: selected suites and compilers. Required separately: full hosted CI and any rendered review.",
   );
   return 0;
 }

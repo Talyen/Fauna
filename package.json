@@ -75,7 +75,10 @@
     "check:format": "node scripts/local.mjs check:format",
     "check:boundaries": "node scripts/local.mjs check:boundaries",
     "generate:release-inventory": "node scripts/release/dependency-inventory.mjs",
-    "finish": "node scripts/finish.mjs"
+    "finish": "node scripts/finish.mjs",
+    "task:status": "node scripts/agent/task-status.mjs",
+    "modifier:lookup": "node scripts/agent/modifier-lookup.mjs",
+    "ui:guide": "node scripts/agent/ui-guide.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

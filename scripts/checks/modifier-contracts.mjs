@@ -86,6 +86,22 @@ function catalogIds(ast, file) {
   return ids;
 }
 
+/** Return declared owners directly from the same AST representation as the contract checker. */
+export function modifierBindings(source, id) {
+  const ast = parseSync(source, { syntax: "typescript" });
+  const result = [];
+  for (const contract of ["modifierImplementations", "modifierQueries"]) {
+    const object = declaredObject(ast, contract);
+    for (const group of groups) {
+      const entries = unwrap(property(object, group));
+      const handlers = unwrap(property(entries, id));
+      if (handlers?.type === "ArrayExpression")
+        result.push({ contract, group, handlers: handlers.elements.map((entry) => entry.expression.value) });
+    }
+  }
+  return result;
+}
+
 /** Statically tie authored identities to actual functions, without running gameplay or changing dispatch. */
 export function modifierContractViolations(sources) {
   if (!sources[bindingFile]) return [`${bindingFile}: Missing modifier implementation contract.`];

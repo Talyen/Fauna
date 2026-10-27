@@ -15,7 +15,7 @@ All commands follow [Contributing's execution policy](../CONTRIBUTING.md#executi
 
 ## Task checkouts and previews
 
-Start a browser preview, then capture matching before/after states:
+Run `npm run ui:guide -- <small|interaction|layout> <scenario>` for the appropriate capture commands, conditions and inspection checklist. The guide performs no capture or review. Start a browser preview, then capture matching before/after states:
 
 ```sh
 npm run preview:task -- --browser --scenario battle
@@ -193,6 +193,10 @@ The [October 26 compiler observation](task-evidence/2026-10-26-stack-maintenance
 
 The [October 27 production visual review](task-evidence/2026-10-27-react-compiler-visual-review.md) records the user's approval and the comparison's tested scope and remaining limits.
 
+## Combat resolution trace
+
+For a focused deterministic investigation, call `traceCombat` from [combat-trace.ts](../src/tooling/combat-trace.ts) with a root operation, its ordinary arguments, and the same state and event array. Each enter/exit record contains the operation, depth, detached state (including RNG) and events. [The focused regression](../tests/unit/game/combat-trace.test.ts) demonstrates a Thorns child reaction and compares its result with ordinary resolution. The trace covers only the explicitly invoked root; it does not capture other operations or install a global observer. Snapshots can be large, so use it for focused scenarios, not routine play. It is diagnostic evidence, not proof of preview or full-journey parity.
+
 ## Local diagnostics
 
 The [session-owned collector](ARCHITECTURE.md#discovery-and-diagnostics) records bounded, redacted failures separately from progression. It has no player report/export surface or automatic upload. Inspect its persistence port and focused tests when investigating collection, deduplication or disposal; ordinary features reuse it rather than collecting saves or arbitrary context.
@@ -201,17 +205,17 @@ The [session-owned collector](ARCHITECTURE.md#discovery-and-diagnostics) records
 
 Verification, context and review share the base recorded in worktree-local Git metadata, surviving commits and branch renames. Unregistered non-main branches and detached checkouts use their common ancestor with local main; main defaults to HEAD. Empty selections explicitly run no checks or review.
 
-| Option                  | Behavior                                                                                                          |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Explicit paths          | Narrow the selection                                                                                              |
-| `--base <commit>`       | Override the base                                                                                                 |
-| `--working-tree`        | Select only uncommitted changes                                                                                   |
-| Review `--layers`       | Show committed, staged and unstaged patches, including reverted edits; default review shows the net task change   |
-| `--test <suite>`        | Record extra coverage for the integration plan, including failed attempts; execution is deferred to CI by default |
-| `--forget-test <suite>` | Remove an obsolete extra selection                                                                                |
-| `--plan`                | Preview selection without changing remembered intent                                                              |
-| `--plan --related`      | Suggest import-related tests for coverage investigation; suggestions never displace required or explicit suites   |
-| `--diagnostic <mode>`   | Run a [bounded investigation](#bounded-diagnostics), subject to the local/CI execution policy                     |
+| Option                  | Behavior                                                                                                              |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Explicit paths          | Narrow the selection                                                                                                  |
+| `--base <commit>`       | Override the base                                                                                                     |
+| `--working-tree`        | Select only uncommitted changes                                                                                       |
+| Review `--layers`       | Show committed, staged and unstaged patches, including reverted edits; default review shows the net task change       |
+| `--record-test <suite>` | Record extra coverage for the integration plan; `--test` remains an alias, and execution is deferred to CI by default |
+| `--forget-test <suite>` | Remove an obsolete extra selection                                                                                    |
+| `--plan`                | Preview selection without changing remembered intent                                                                  |
+| `--plan --related`      | Suggest import-related tests for coverage investigation; suggestions never displace required or explicit suites       |
+| `--diagnostic <mode>`   | Run a [bounded investigation](#bounded-diagnostics), subject to the local/CI execution policy                         |
 
 Only the base and extra suite paths are stored, never passing results. Test and static commands have the same scope on every branch; [Contributing](../CONTRIBUTING.md#verification) owns required coverage and suite maintenance.
 
@@ -225,12 +229,14 @@ The coverage plan prints batches, compiler environments, documentation coverage 
 
 [Task selection](#task-selection-and-diagnostics) applies to these read-only tools; [Contributing](../CONTRIBUTING.md#verification) owns verification coverage. They locate and inspect the selection without staging files or inspecting chats:
 
-| Command                                      | Output                                                                                                              |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `npm run context -- --task combat --task ui` | Canonical guide sections and implementation entrypoints; also accepts source paths and `--json`                     |
-| `npm run review:status -- [paths]`           | Bounded file inventory without patch bodies                                                                         |
-| `npm run review:diff -- --summary [paths]`   | Inventory plus patch ranges                                                                                         |
-| `npm run review:diff`                        | Readable net-task patches; `--layers` includes committed/staged/unstaged layers; `--json` returns structured output |
+| Command                                           | Output                                                                                                              |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `npm run task:status -- --ci`                     | Task identity, readiness, recorded test intent and latest hosted result for the exact commit                        |
+| `npm run modifier:lookup -- dodge.finding-rhythm` | Declared modifier owners and literal source/test references; indirect consumers still need inspection               |
+| `npm run context -- --task combat --task ui`      | Canonical guide sections and implementation entrypoints; also accepts source paths and `--json`                     |
+| `npm run review:status -- [paths]`                | Bounded file inventory without patch bodies                                                                         |
+| `npm run review:diff -- --summary [paths]`        | Inventory plus patch ranges                                                                                         |
+| `npm run review:diff`                             | Readable net-task patches; `--layers` includes committed/staged/unstaged layers; `--json` returns structured output |
 
 Context `--help` lists topics, including layout and recovery; unknown topics fail. Bounded output reports omissions and retains the complete JSON under `reports/agent-context/`. These pointers are navigation aids, not test coverage.
 
