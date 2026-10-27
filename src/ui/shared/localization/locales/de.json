@@ -8465,6 +8465,12 @@
     "sourceHash": "2b6c4bc9095e4a541ce13d10831b7f7679deaa5f7d98ed237aa837dc802f5c52",
     "text": "Du kehrst aus der Wildnis zurück. Entdeckungen bleiben erhalten."
   },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "0ffa2e9bfc009c8da199974754d831061e601cf556b7a1bdb0605d812af536dd",
+    "text": "{{actor}} schützt {{target}} mit {{boon}}"
+  },
   "log.skipControlledTurn": {
     "reviewed": true,
     "source": "{{name}} skips its {{status}} turn.",

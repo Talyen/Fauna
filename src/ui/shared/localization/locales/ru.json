@@ -8465,6 +8465,12 @@
     "sourceHash": "48131a3ff6050c17666b35c185c9c980d969a053b0526afd5d2d398cf2039843",
     "text": "Вы возвращаетесь из диких земель. Открытия сохранены."
   },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "3123ff49387101059cb976964d2d6862e23bd9435bd329963b525208f5d9219e",
+    "text": "{{actor}} защищает {{target}} с помощью {{boon}}"
+  },
   "log.skipControlledTurn": {
     "reviewed": true,
     "source": "{{name}} skips its {{status}} turn.",

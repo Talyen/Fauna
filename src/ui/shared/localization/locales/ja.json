@@ -8465,6 +8465,12 @@
     "sourceHash": "9e6ccf6977846cf547ea67733133d4f6a1340e7ae829875eddc9ec76fd92cbdb",
     "text": "野生の地から帰還しました。発見は保持されます。"
   },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "df96c7d56d5fc10e03e46813f9d8272d5e906b1e1ba0ae36bf7783c84fd226ff",
+    "text": "{{actor}}が{{boon}}で{{target}}を守る"
+  },
   "log.skipControlledTurn": {
     "reviewed": true,
     "source": "{{name}} skips its {{status}} turn.",

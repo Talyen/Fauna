@@ -280,6 +280,16 @@ export function eventPresentation(
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status") {
+    if (event.status === "negate" && event.outcome === "immune") {
+      const suffix = ` protects ${englishName} with Devotion Clasp`;
+      const bearer = event.text.endsWith(suffix) ? uniqueName(event.text.slice(0, -suffix.length)) : undefined;
+      if (bearer)
+        return i18n.message("log.sharedNegate", "{{actor}} protects {{target}} with {{boon}}", {
+          actor: bearer,
+          target: name,
+          boon: i18n.content("content.boon.devotion-clasp.name", "Devotion Clasp"),
+        });
+    }
     if (event.status === "block" && event.text === "Wish Exchange redistributes Block")
       return i18n.message("log.redistributeBlock", "{{card}} redistributes Block", {
         card: i18n.content("content.card.euphera-wish-exchange.name", "Wish Exchange"),

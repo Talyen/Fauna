@@ -8465,6 +8465,12 @@
     "sourceHash": "46bd2d96d9c00ce3dc75ef9b1b7461d6ff8abdac87943dcb9590dfcf70f83bb5",
     "text": "Você retorna das terras selvagens. As descobertas são mantidas."
   },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "24731eb79031693e760dbe53cd526b95eab5bf8160b6d6cd81c49d7449c76c2c",
+    "text": "{{actor}} protege {{target}} com {{boon}}"
+  },
   "log.skipControlledTurn": {
     "reviewed": true,
     "source": "{{name}} skips its {{status}} turn.",

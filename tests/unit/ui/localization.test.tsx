@@ -564,6 +564,29 @@ it("localizes a reflected status using its actual recipient", () => {
   expect(eventPresentation(ambiguous, uncertain, reader)).toBe(uncertain.text);
 });
 
+it("localizes shared Negate only when the bearer can be identified", () => {
+  const game = structuredClone(requireBattle(teamRun(42, ["memento", "mossguard"])));
+  const bearer = game.team[0]!;
+  const target = game.team[1]!;
+  const reader = createMessageReader("fr", french);
+  const event: GameEvent = {
+    kind: "status",
+    actorId: game.battle.enemies[0]!.id,
+    targetId: target.id,
+    status: "negate",
+    outcome: "immune",
+    text: `${species(bearer.species).name} protects ${species(target.species).name} with Devotion Clasp`,
+  };
+  expect(eventPresentation(game, event, reader)).toBe(
+    `${localizedCombatantName(bearer, reader)} protège ${localizedCombatantName(target, reader)} avec ${reader.content("content.boon.devotion-clasp.name", "Devotion Clasp")}`,
+  );
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+  summonEcho(game, bearer, "player", 5, []);
+  game.battle.enemies[0]!.name = "Echo";
+  const ambiguous = { ...event, text: `Echo protects ${species(target.species).name} with Devotion Clasp` };
+  expect(eventPresentation(game, ambiguous, reader)).toBe(ambiguous.text);
+});
+
 it("localizes Death's Door and Armor loss using committed combat facts", () => {
   const initial = run();
   const target = initial.team[0]!;

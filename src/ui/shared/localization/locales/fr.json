@@ -8465,6 +8465,12 @@
     "sourceHash": "08014edb9ff0edba5a8241f4bb4708ff00fc332ad91ce5be2a334ca05d5f498d",
     "text": "Vous revenez des terres sauvages. Les découvertes sont conservées."
   },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "1b9757a6cd0405f3fbb0a7bba119bd5f5aa196dab5d187e3f7ecdfa71a4c0e13",
+    "text": "{{actor}} protège {{target}} avec {{boon}}"
+  },
   "log.skipControlledTurn": {
     "reviewed": true,
     "source": "{{name}} skips its {{status}} turn.",

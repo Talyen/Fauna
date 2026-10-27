@@ -8465,6 +8465,12 @@
     "sourceHash": "17478189a0951aaf75aaa662444195a9e35fe7fa6fdd21c9f2836ae94432b0e7",
     "text": "你从荒野归来。已保留发现成果。"
   },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "bc13df4aebe9c28b0b8de096d89ea1a7770abbedb4efc7e58602f318ef7654a1",
+    "text": "{{actor}}用{{boon}}保护{{target}}"
+  },
   "log.skipControlledTurn": {
     "reviewed": true,
     "source": "{{name}} skips its {{status}} turn.",
