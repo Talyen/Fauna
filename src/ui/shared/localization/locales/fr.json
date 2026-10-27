@@ -3503,6 +3503,12 @@
     "sourceHash": "0f69e2272c6b831516204daab933e07a3dc1eba8bbe079a81392dcfaa5f7339c",
     "text": "{{name}} esquive."
   },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "733cd8e5f634228ef19b49a8535d3b08d6c5bc5af6052bf249dccaea58f1b991",
+    "text": "Carte piochée depuis la défausse : {{card}}"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",

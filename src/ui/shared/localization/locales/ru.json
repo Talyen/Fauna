@@ -3455,6 +3455,12 @@
     "sourceHash": "1ece2134f0a9309bec390a52609d01db2c5802313fb3680e0143c0bf3d5c5e87",
     "text": "{{name}} уклоняется."
   },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "49a48117fda208751650eb4c47214d3fc99e35db2aafa179a887e32f49a67f21",
+    "text": "Из сброса взята карта: {{card}}"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",

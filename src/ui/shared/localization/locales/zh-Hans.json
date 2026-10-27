@@ -3455,6 +3455,12 @@
     "sourceHash": "dc6472ad5e8ee5c1a223188bb2a93a210ed933726f7e89f8303d1d6e794353b5",
     "text": "{{name}}闪避了。"
   },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "4005e4198578eb868700e3fdf2dd4b7d81c7357c5e8eb74845225fd7491bf140",
+    "text": "从弃牌堆抽取：{{card}}"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",

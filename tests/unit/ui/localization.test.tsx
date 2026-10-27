@@ -208,6 +208,12 @@ it("localizes an authored ability and Food announcement without guessing unknown
   };
   expect(eventPresentation(game, announcement, reader)).toBe("Créature traduite utilise Capacité traduite.");
   expect(eventPresentation(game, { ...announcement, text: "Use Apple" }, reader)).toBe("Utilise Pomme");
+  expect(
+    eventPresentation(game, { ...announcement, text: `${ability.name} is drawn from Discard` }, reader),
+  ).toBe("Carte piochée depuis la défausse : Capacité traduite");
+  expect(eventPresentation(game, { ...announcement, text: "Unknown is drawn from Discard" }, reader)).toBe(
+    "Unknown is drawn from Discard",
+  );
   expect(eventPresentation(game, { ...announcement, text: `${actorName} uses Unknown.` }, reader)).toBe(
     `${actorName} uses Unknown.`,
   );

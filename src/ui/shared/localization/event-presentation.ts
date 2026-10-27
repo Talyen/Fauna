@@ -44,6 +44,14 @@ export function eventPresentation(
           card: i18n.content(`content.card.${card.id}.name`, card.name),
         });
     }
+    const discardSuffix = " is drawn from Discard";
+    if (actor && event.actionType === "support" && event.text.endsWith(discardSuffix)) {
+      const card = cardsByEnglishName.get(event.text.slice(0, -discardSuffix.length));
+      if (card)
+        return i18n.message("log.drawDiscard", "{{card}} is drawn from Discard", {
+          card: i18n.content(`content.card.${card.id}.name`, card.name),
+        });
+    }
   }
   if (event.kind === "turn") {
     if (event.text === "Your journey begins.")

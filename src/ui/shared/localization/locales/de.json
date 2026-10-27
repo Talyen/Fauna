@@ -3455,6 +3455,12 @@
     "sourceHash": "67b6adf57ff5771399c0329788cf220fc6cf900d8c41e056e4c3baa104228eea",
     "text": "{{name}} weicht aus."
   },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "d028681e1e972e9a5914c51a6583c9b45887fbf9facb360599eef35c85ef4d5f",
+    "text": "Aus dem Ablagestapel gezogen: {{card}}"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",

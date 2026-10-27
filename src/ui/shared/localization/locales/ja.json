@@ -3455,6 +3455,12 @@
     "sourceHash": "2f8e9f0ca3e8f23e003925b76f37908419d4b17e8fa0e7a4a2c91a97ce46dac8",
     "text": "{{name}}が回避した。"
   },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "81bb92280c0e731ba3995055c95bfe9c652319dd8f82c352636376858530fcd5",
+    "text": "捨て札から引いたカード: {{card}}"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",

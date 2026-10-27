@@ -3455,6 +3455,12 @@
     "sourceHash": "12211435d0caa0e27a7f74204cd98727d90e6262d20081056c41b3fb9d283190",
     "text": "{{name}} esquiva."
   },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "6e90d74c817aca85aeeb8b80c14dbdf581a2d546a482bfb01400c3cca828f993",
+    "text": "Carta comprada do descarte: {{card}}"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
