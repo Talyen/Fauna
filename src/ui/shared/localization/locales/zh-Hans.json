@@ -2027,17 +2027,83 @@
     "sourceHash": "a86c721b6dc21cd42ab7377e7a0ad8bb4d13656d75d582e73b0da88ed462ebd2",
     "text": "天赋"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "40f84d6db9bdbe971f33f276e33d88067d518ea49456fcf24862b4fa620e2c4a",
+    "text": "花费{{amount}}金币购买{{name}}"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "0a68231ab6433cb984439f259f7e70b410e2d71c8b1a8e576bef6fb89a1e9721",
     "text": "继续"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "7afef986d64312165926fef60de9654b4f5d14e72fc19305e801e230fe7d7784",
+    "text": "用于本次旅程"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "74deaed40d1a8f6393dbed841fb4f3c46116de63587db69c9d815313a73b7b3e",
+    "text": "{{amount}}金币"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "d5bc13250361ef435ec0a18de368401bc49a065989f9171799477022bde3a1e8",
     "text": "离开"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "575519c87770f1ee9e7987b24441a1ec39b7bbad51235bd49fd4dda6207df5bb",
+    "text": "祝福商人"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "31be2475dd59abb7121f18a6245fa72801a699e7c21eeb899a19b0a55b88ed34",
+    "text": "金币不足"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "8d96aeb7ee7bd102a8c49969df47fc7d9f2f8a3862fedfc4896605f116558495",
+    "text": "每位顾客限购一件，不予退款！"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "1fd6162d34007248e3f71eb511113dc7a53bc3eae75e8ae0e632c73669f4115e",
+    "text": "购买机会已使用"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "166182db0bae1ccddc8a65d8d2cbc536ac14f56b75b8683205b154260862a3d7",
+    "text": "已购买的祝福"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "5780a0a7d14b8ca4b5e7aa8f8f81b86e3cceb291c0e597a6ade013822b055274",
+    "text": "已获得祝福"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "b19d516e0c0e6694bd535ba11b1876ff4a53b7742e8d559c374ce45b2e094689",
+    "text": "祝福商人的商品"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "94cc7e6f6625594ebf88ac8c8b9fb7d380fe78a38ab415a6ed73adf105d234ad",
+    "text": "拜访祝福商人"
   },
   "navigation.back": {
     "reviewed": true,
@@ -2057,6 +2123,24 @@
     "sourceHash": "f9a6641ed4629742b86a726b9e7bc5dbff2843096451b4d2756cbdd2ade2662b",
     "text": "关闭祝福"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "ce59fb1cd174850242a645c4bf2db7f5cf51460a9e3ef17dfc61e266ef3b6947",
+    "text": "关闭牌组"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "d70f8be4a82255a69b7129dd3104cf9b5d50968af9fb827b1c534c56998cc2e4",
+    "text": "关闭弃牌堆"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "3d6bffabb0d0ca95ec71b8f312c7e99d8a84432e72c47048b37bfbd33c10c527",
+    "text": "关闭抽牌堆"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -2074,6 +2158,18 @@
     "source": "Draw Pile",
     "sourceHash": "46085f17a5d94081443d5f112e22fc5405760812c324ceaa9171cff7f64b0967",
     "text": "抽牌堆"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "84a87d585babb65a6fe28eade5ee09a37d563b08f7d01972b1ca5f1870470096",
+    "text": "游戏信息与操作"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "b73f4363337dbaaedd9f9b31d5b9d876c0b96811e6de7b4bf529d7e001d407ac",
+    "text": "选择替补"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2260,6 +2356,18 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "dac9a0b97a6233c1cf4d0657d5380031de8ab5a5ef4ff1eb26fb4214aa6f26bf",
     "text": "撤销队伍位置 {{slot}} 中的{{name}}"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "167c68222525c4fab2045f5146c33bfb87f851a05e8613e065bb3c81d91bd269",
+    "text": "替补"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "c7182a087375b8988635a1c9faeb61e1ad5a2dbc16af261333d6784bb293bdc5",
+    "text": "已倒下"
   },
   "results.complete": {
     "reviewed": true,

@@ -2027,17 +2027,83 @@
     "sourceHash": "59b56238f018f6ae095a3800570b006ee07b043be33b17b9a737105ca356c99c",
     "text": "タレント"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "322607ac03b4228574ea1dc8092c702d4dbb2759c771cec5bbb9bdfd5bb8a35c",
+    "text": "{{name}}を{{amount}}ゴールドで購入"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "dd5493f5769beb1d5875a7c003d12415fabfbba53fb6f0bdf412ce0f506e8048",
     "text": "続ける"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "1208c26aaf9293d536e278ca7dde9836b156a87bd45ed1720421918a7ee89af3",
+    "text": "この旅の間"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "354d6e9a95afe5aae6e4dd4f430117b5e63783a7ceaad4087e0e4571fdf0d5d9",
+    "text": "{{amount}}ゴールド"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "e4e5ead8c83d21b792eda400394ee11d2d4bbbfb630d51e96f08f6d2a2190558",
     "text": "立ち去る"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "bd010ebbc4eafea02acdd91b1df3148186b6b015765c4ccbda0c164caa42af0e",
+    "text": "祝福商人"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "d04c87e73f7ac7b5abd6550e89fcae983d05b5024ddc973849a5d03f0d15872f",
+    "text": "ゴールドが足りない"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "c80f8c08ec33f265303209701b104be01f3769e668650b467a6abfeb64fe3166",
+    "text": "お一人様一点限り・返品不可！"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "bed00294e8b265af9dbdb231c5fece4c3bb622abe6d6ab8dfca6bd217a4c6e2f",
+    "text": "購入済み"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "82e16881c5ef536b0645d30abfebef20be15a952cc95ef9d7f320f11960039d8",
+    "text": "購入した祝福"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "aa22d5a292ef8501156bafab5923125acf0bdab69ae72323d3da5d0c7f03f597",
+    "text": "祝福を獲得"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "d8f4043b5eb51f55db3af6929e03d5ca8e364987a2b3b35a60783b8617cd73cc",
+    "text": "祝福商人の商品"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "f020207367e087bfc748d50fe13166e4f68c5a8b6441361247a9cdf9bd8acc11",
+    "text": "祝福商人を訪ねる"
   },
   "navigation.back": {
     "reviewed": true,
@@ -2057,6 +2123,24 @@
     "sourceHash": "35e2874111f8638d0e77c8bcd9eae3ec7af2e60b3e25cffe42c7513d174536c7",
     "text": "祝福を閉じる"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "123b57b96c00e24b98231f8ecdc541227983bc73e76e5528ba48b4dff78ff912",
+    "text": "デッキを閉じる"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "914444032408daf4e1380f4b79d28ebc00863161a729ee03ff1dd01cab657aab",
+    "text": "捨て札を閉じる"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "5528a20912b2f2796268ef130e1918cc987609987ff2f4a1be638adf435d4b41",
+    "text": "山札を閉じる"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -2074,6 +2158,18 @@
     "source": "Draw Pile",
     "sourceHash": "5fb976e02ba89acb51407a66a774c8e617f08d093908f89c380a37cc73dfe9de",
     "text": "山札"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "34f09db99778911206f48c78920857c965b23b80136c781000e5f193ca1a62dc",
+    "text": "ゲーム情報と操作"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "1e891c5c694e6c58d93cafab53c4993f8c34eab252f0d601932b0314b9910a2b",
+    "text": "交代する仲間を選ぶ"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2260,6 +2356,18 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "e10054772192f2360d1b61d7b7bd872374a3dbc27eecfa11524a674e54722b08",
     "text": "チーム枠{{slot}}の{{name}}を取り消す"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "fb2c99eca56604386f21b9f217dad37c68f798baacb0e833c46bfd03c6053474",
+    "text": "控え"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "1b25a07a5a3465f6fee29af43751b94f51a3c380b6e925840654c7f861d5f8e3",
+    "text": "戦闘不能"
   },
   "results.complete": {
     "reviewed": true,

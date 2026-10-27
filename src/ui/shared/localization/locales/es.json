@@ -2027,17 +2027,83 @@
     "sourceHash": "47615ab48ffd315ed77e3c9f4c4a354ad2dd6f2a23027319bca0340b772c65ce",
     "text": "Talentos"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "586783eede1bc2b41609955f7c3b59fee16d4a345bf5abecc57325b14f747baa",
+    "text": "Comprar {{name}} por {{amount}} de Oro"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "d53e5eab633a4b64c06bfbc9188448e864616505450d0e8a4a3ae458527dfd44",
     "text": "Continuar"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "229bd18d9a561de3f44f5c07ebcc6d363afa5dc97f0dee48da3f74f1f27ab789",
+    "text": "Para este viaje"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "4b9ea1045ec21d9aba121075a404e630fe8b5aa8f5bc05c25185a2027bdce8c4",
+    "text": "{{amount}} de Oro"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "6be2a4e7931b53b701208cc65aee87f4fd58aa0ed0d042e4cbbccb483d7e475e",
     "text": "Salir"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "8b37dfbf4de026ad35f3e9da419bc3b3063293cfd258ef35abd97992a3f722fe",
+    "text": "Mercader de bendiciones"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "ee238ee9e2aef3f8cc5b3e9de158fdf7aaf503a81a4aafb89b338310d69e719f",
+    "text": "No hay suficiente Oro"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "26021a3525b41ca76409cb89f3ea936277043f3e108ffc23ff293a8ba7b06df9",
+    "text": "Una unidad por cliente. ¡No se admiten devoluciones!"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "8d05f2f200cafdde5316130788f6e607e5307e89a9012fac10dd3e466918f820",
+    "text": "Compra ya realizada"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "c2cda56df1b7888af38828586f9c6187ad73583456ef13aba9ca0201cac138d1",
+    "text": "Bendición comprada"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "e5872370d7fcf6b4e255c2eba2458cfeed1fe365d9707e0cbf1a948f258dbe71",
+    "text": "Bendición recibida"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "ad1b4bc3afe775c8be9e6fc334742c13cf24e5f72b18b1b795241d360967f79f",
+    "text": "Existencias del mercader de bendiciones"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "22e687e93ec1826dcc29b3b8bef32a6888eb37bdf98f404cafcc0c810af6e01b",
+    "text": "Visitar al mercader de bendiciones"
   },
   "navigation.back": {
     "reviewed": true,
@@ -2057,6 +2123,24 @@
     "sourceHash": "433aa5019dde158fe0e1ce2a1491ae267922a1c8fb6fff8ec4f3f8768bed8f5c",
     "text": "Cerrar bendiciones"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "a15c47f1c39318a487e2c71f9cd6a3da924350e32e194cc0d8fff4fe8068cf38",
+    "text": "Cerrar mazo"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "ff444fa499688d9331ab56169073a4de298bddabb78f6eb7e214ae22c3f2f894",
+    "text": "Cerrar pila de descarte"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "a92911382b063d380b457eb89b5fdf93c0f32f6db7e2836ea1daedd8db9b5940",
+    "text": "Cerrar pila de robo"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -2074,6 +2158,18 @@
     "source": "Draw Pile",
     "sourceHash": "e2008941b136189229b816d9cce46d7f479e73f1f201b6bbdbdce8c0d6a7554d",
     "text": "Pila de robo"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "5e31deda984995814e1b5c757cb0fafbf4f7c157c2d74f4de4bc53ef8f9d578b",
+    "text": "Información del juego y controles"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "e9e995ba6ae8e4b6711d5b5f19ca2d868752532bad8ec16a83048988d6e043d0",
+    "text": "Elige un reemplazo"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2260,6 +2356,18 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "df79f2296cd65fe4534a70d7f85703eaffa640561a5d627ff346d3a1b9006171",
     "text": "Deshacer {{name}} en el puesto {{slot}} del equipo"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "936d7b4a5debb109d38167348189155cb8c8f317845ee26241601970fe236b0e",
+    "text": "Reserva"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "a32e013cbcbeabc70a31b33b2df458df09f8792faa3eeb2c6a9bb41ea268bca6",
+    "text": "Fuera de combate"
   },
   "results.complete": {
     "reviewed": true,

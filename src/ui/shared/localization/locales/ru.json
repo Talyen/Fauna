@@ -2027,17 +2027,83 @@
     "sourceHash": "dcc2580b8417a0d0595d997f16e938f5b8944234fc6ef8c9ed5117f3e3814ea2",
     "text": "Таланты"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "87f66eeedfaaa2c54b02e7dc9950c82566aa42f460aeead0dede67113df95299",
+    "text": "Купить {{name}} за {{amount}} золота"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "b55998e086ab77556f80015f46195b8db045eb64f62b7749ca6cdc0b10b44966",
     "text": "Продолжить"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "b09cb23401c1a7bd6d19d5bddf95336d2df9067af9a07ff9c7ce4b6f130c838a",
+    "text": "Для этого путешествия"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "956bfa5c87b9c295e759d567600fa85ee6e1f0aed53a694254480a58a48fd3b7",
+    "text": "Золото: {{amount}}"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "e4bc953ce5048e41e1e1e1e04548cfb1c731fc1967bb0c82d99a4a8a0583e1d9",
     "text": "Уйти"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "da4c76db441e1218bf4d793e80f24c818b97319f3a91f33810b7882adfb4f076",
+    "text": "Торговец благословениями"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "df24c365a3b65980d8f0e7863e259d896e6790116bc4e6db87522823762ae1b6",
+    "text": "Недостаточно золота"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "9507422da30841067c86b7113ae4cadb41d20865c4a02c95cde6d58d0d1fdee3",
+    "text": "Не более одного товара на покупателя — возвратов нет!"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "2d3b219e66699198c017aa566bb0f7363de651a23185d5db5ffe92e89bcc8ae3",
+    "text": "Покупка уже совершена"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "61bd9200ae70de7fa01700a5d01c74b4d4ea08986311d6301c1ba60c370c46ee",
+    "text": "Купленное благословение"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "04ead5517bbe163c0f1e3f43f6ce46155691ac12814fac1e201ceb61c2df5739",
+    "text": "Благословение получено"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "e8afb1069e3e391de0285578c613a99bef264319319303eafb5e0160955a1681",
+    "text": "Товары торговца благословениями"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "2f190268a9e772211f0b335f5889befdac259395c02ee9f805368267ef227092",
+    "text": "Посетить торговца благословениями"
   },
   "navigation.back": {
     "reviewed": true,
@@ -2057,6 +2123,24 @@
     "sourceHash": "d8086b642ef7ed7d620e5dc574d23dfe2d1e8666310cbfd7ca4d51cc4c4eb3d3",
     "text": "Закрыть благословения"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "68f4b82ac48c306e7c06ef350571c81d4c037942bdf140b990b64473f0cf8acc",
+    "text": "Закрыть колоду"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "8a311ef7b6de935e0e2970bc58a8b1d942be59fc732d2afd98a72006b9d620c3",
+    "text": "Закрыть стопку сброса"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "7ab27c31f190145666f738d8cd5871362ae988c032bd867ffd2b2d20d56c2d3f",
+    "text": "Закрыть колоду добора"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -2074,6 +2158,18 @@
     "source": "Draw Pile",
     "sourceHash": "31eb6576ce3d27e35abbc10d6763aa871acdda5abf881e2828f93d353625168c",
     "text": "Колода добора"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "65f67816ecf4fa4dfca8c477ce80aa7efe79b53f0a969ca76e4027776aaf5afb",
+    "text": "Информация об игре и управление"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "875944a737c869d6912c39d0ac73768c7d98cb6ce0aca031ab4e835ba370eea1",
+    "text": "Выберите замену"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2260,6 +2356,18 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "b73bd6fd85f5994834c8f12bc2da6df78b279c8c9e438bab78acc501437985a4",
     "text": "Отменить замену на {{name}} в ячейке команды {{slot}}"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "2081630706095adcb333755653b3f0ea6f9a16b16f9fe7d80a20ba4b29d1bacd",
+    "text": "Запас"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "3f5e487b447dc7a9597ee0820e298f38a1b80df8ae9045e14188a57f9556c2e5",
+    "text": "Без сознания"
   },
   "results.complete": {
     "reviewed": true,

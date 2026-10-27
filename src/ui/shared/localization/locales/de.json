@@ -2027,17 +2027,83 @@
     "sourceHash": "749a12c5fbcc7a262570dbef29e3ecf4c93674e8b5113e02f6c44aa9634a81bb",
     "text": "Talente"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "ae4252411f095e964c8f99c1f24f735d386b2b1081e59940e921736710e268a3",
+    "text": "{{name}} für {{amount}} Gold kaufen"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "f207404f10e031ca0f3dc006b4d8b1cb40de5ab3fe269bc852bf89965cfa2636",
     "text": "Weiter"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "71bc996796ad747c07aaaf60c87609d12ca0e76179d5540c1b917ed58fd7ed54",
+    "text": "Für diese Reise"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "72af53ee1df004561ca63b194137a5d14a0f6ebea993c86de0874836dcb32854",
+    "text": "{{amount}} Gold"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "ef366665f016c37ee40d90774709636bfd7e1a8aa7ad6a1170b93311069b3a76",
     "text": "Verlassen"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "2c6d71761f27ce24816d54bf5a355026c9710b8e2b63e82100bf574c8f28f634",
+    "text": "Segenhändler"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "d35365471fb8c5e8d7b77fd20ef4417f3d9ca618a03a3fd64eb64ce3c50ebaa1",
+    "text": "Nicht genug Gold"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "20a35b8666a00680fce585fb1c8a71ce19b119c2f05f097151daacc1901dfc01",
+    "text": "Ein Stück pro Kunde – keine Rückerstattung!"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "5259615f095c31a299281dda7f4ca07ed913fab7c6c3311efc79e51df7f1588c",
+    "text": "Kauf bereits genutzt"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "35abd134f6fdd89fcf81492e95747684fb8f2b7e59b6a6df8e3faebe0cfdaddc",
+    "text": "Gekaufter Segen"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "39285974cfd1854df9b5d6104d932c3756962d7db2d349e68d77b637da871261",
+    "text": "Segen erhalten"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "7d502bb30ff470174d2312da71e01d173497a131eb26490686cec63dfd72e29b",
+    "text": "Angebot des Segenhändlers"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "fe18530833124a721542ab46a4057d00191dca91294a28dd27d5c73feef5f06b",
+    "text": "Segenhändler besuchen"
   },
   "navigation.back": {
     "reviewed": true,
@@ -2057,6 +2123,24 @@
     "sourceHash": "f3076dc39f5889a29560d16472ce20e52de58ef2dac074a7dd7769aea2d60ce8",
     "text": "Segen schließen"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "8fa04246e32453f9bcff5051842dec90d1fdf4bf88db73ac69ae352bf0ad3328",
+    "text": "Deck schließen"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "f04971f762dd72aab367d8be82ec7d1c957aec9d5edb309647f052e335d1e250",
+    "text": "Ablagestapel schließen"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "c2d066a1be7e9bf79248272127b96c3f3deac76a8da19dd5314eddf55074a24b",
+    "text": "Nachziehstapel schließen"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -2074,6 +2158,18 @@
     "source": "Draw Pile",
     "sourceHash": "d72dbb204cee7dc1901b0687a41e2b73b46d778a78d84f4165c59bb89e54c1c8",
     "text": "Nachziehstapel"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "c3eca978b0af80cb600fb1a7bc63c688e070076b4fceaff67cc7bd8336c41de4",
+    "text": "Spielinformationen und Steuerung"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "e194e23a8abc2652444983d7dcf5799a43ae2dccda7390dc496827c357d7d37a",
+    "text": "Ersatz wählen"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2260,6 +2356,18 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "22e0e6de9394a0d39cb847760da3aa3800a0f6e239ebccd79386afa6d631f409",
     "text": "{{name}} auf Teamplatz {{slot}} rückgängig machen"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "a5d17fac233afa034d1521ce71509286ee4f551b52c27f591a87db398ae18fa5",
+    "text": "Reserve"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "87577d0a842c5fe42ce9ca4117b9855ce32027d10bdfbfce9ab29393036e16fb",
+    "text": "Ausgeschaltet"
   },
   "results.complete": {
     "reviewed": true,

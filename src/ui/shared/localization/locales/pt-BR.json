@@ -2027,17 +2027,83 @@
     "sourceHash": "8f812388fe1df75677367ff66ba64c6e0a225c6e4ff6787023ea1a888de50a93",
     "text": "Talentos"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "99508a24da81504953d42374edf64990075536d4b28818197547195c872f0ba5",
+    "text": "Comprar {{name}} por {{amount}} de Ouro"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "e19dadda2236badf3df3a28b16ef50a2234f041a984dbf9ac93d3ce99b29dade",
     "text": "Continuar"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "5b067a74ce3233ac114a4b6bc6d19d16f76df481bade1c36f1cdee85a2df9db9",
+    "text": "Para esta jornada"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "f7470e42d6265011e45d0fb274881716a89d14770368578a0c4c55231b369ecb",
+    "text": "{{amount}} de Ouro"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "2d47c04c3aa9031ec896642c0a6225182fbe52cf10c72ad760abf23b0da02716",
     "text": "Sair"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "f7062ea60fa03f23a657425f74cc8ec97ab2b1e61b5459550dcd3d6de17fc3fd",
+    "text": "Mercador de bênçãos"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "8192e3a341344a1f95d64ee13c5a65dfe5518420eecc7399089a07909268c188",
+    "text": "Ouro insuficiente"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "d3b98ba0d589d5a0a2f16d865d4ca6572ea39b9120c4012d064fa705ab366c49",
+    "text": "Limite de um por cliente. Sem reembolsos!"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "3d31c764dc018f9de31a2fd551cbe240d71e4cf025f09b47085274107a676a40",
+    "text": "Compra já realizada"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "217ad01c41a4b9752b349f6ea7c5ffecc0b3f43e1f50dc763c43157c31f53ce4",
+    "text": "Bênção comprada"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "47e9d524f88ccc50fd96c5f54a139fa3848d97803f982c311e079ffdaa4b8cf8",
+    "text": "Bênção recebida"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "6e7d0e0cb831f8e68b17e983834d70844261fb9c0b4e003859a86fe7f89ad033",
+    "text": "Estoque do mercador de bênçãos"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "13b8ebbe13a8cf6619efd2a9bd75af4b177cbd8870a12575424b4db20bcbef40",
+    "text": "Visitar mercador de bênçãos"
   },
   "navigation.back": {
     "reviewed": true,
@@ -2057,6 +2123,24 @@
     "sourceHash": "a6d2ae96b3786b7279934c73c865b2aab21e10e25a2a869e7fa72d7f194883cd",
     "text": "Fechar bênçãos"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "e013190b7498793576aa53a28de826ce5546a1728ca2b6838688acdfd0a32fba",
+    "text": "Fechar baralho"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "e95f8ad0c6ebc30d016f6b42763f42dcbaaedc1d3967e1a676d6772944784345",
+    "text": "Fechar pilha de descarte"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "f984748aabba345ef34a3f2a02d175b966dbf7c12a6c0908f7b976161e0647c5",
+    "text": "Fechar pilha de compra"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -2074,6 +2158,18 @@
     "source": "Draw Pile",
     "sourceHash": "0de8ddec84b989dc0a581229a51a6e6ca80f2d27ee9416b551a814b5c58a733b",
     "text": "Pilha de compra"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "b56c31b35c139ea63b3c37518e1170021f27aadc0c8123e2be47fbf5fda813fe",
+    "text": "Informações do jogo e controles"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "eafb5d0a22ee6ba09777398c4dcf5359be577b713be30bde1eda73bcd0247e4a",
+    "text": "Escolha um substituto"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2260,6 +2356,18 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "d7e46b405f861dfae69fca623ee05da3f43de3642d1c11fe38763afbaf6833f9",
     "text": "Desfazer {{name}} na posição {{slot}} da equipe"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "590e944dd489296700e356ea59bed974be03f6467d88fc93f867d82b9882c956",
+    "text": "Reserva"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "fab980af0b0986f087e5e46cc34a7beab5b023a577c606c0f577e7dc800071c9",
+    "text": "Fora de combate"
   },
   "results.complete": {
     "reviewed": true,
