@@ -6,7 +6,7 @@ import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
 import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
-import { battlefield, healingAllies, isDepartedMinion } from "../battlefield";
+import { battlefield, battlefieldView, healingAllies, isDepartedMinion } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { scalePower } from "./ability-values";
 import { species } from "../content";
@@ -315,7 +315,7 @@ export function executePrimary(context: PrimaryContext) {
       }
       return;
     case "nullify":
-      for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
+      for (const unit of battlefieldView(state, enemy ? "enemy" : "player")) {
         if (unit.health <= 0) continue;
         ensureCombat(unit).nullify = true;
         events.push({

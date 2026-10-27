@@ -150,7 +150,7 @@ export function canSpreadCleanse(state: GameState | undefined, unit: Creature | 
 export function cleanseTargets(state: GameState | undefined, unit: Creature | Enemy) {
   const targets: (Creature | Enemy)[] = [unit];
   if (state && canSpreadCleanse(state, unit))
-    for (const ally of battlefield(state, "player"))
+    for (const ally of battlefieldView(state, "player"))
       if (ally.id !== unit.id && ally.health > 0) targets.push(ally);
   return targets;
 }

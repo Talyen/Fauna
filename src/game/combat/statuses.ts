@@ -5,6 +5,7 @@ import {
   findLivingBattlefield,
   isEnemy,
   battlefield,
+  battlefieldView,
   battlefieldHasId,
   livingBattlefield,
   healingAllies,
@@ -597,7 +598,7 @@ export function* cleanseRewards(
   }
   if (freezeBuildupRemoved && unit.health > 0) {
     const allied = !isEnemy(unit);
-    const row = battlefield(state, allied ? "player" : "enemy");
+    const row = battlefieldView(state, allied ? "player" : "enemy");
     const healing = row.some((ally) => ally.id === unit.id)
       ? row.reduce(
           (total, ally) =>

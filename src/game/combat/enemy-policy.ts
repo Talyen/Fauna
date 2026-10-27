@@ -1,5 +1,5 @@
 import { Immer } from "immer";
-import { battlefield, battlefieldView } from "../battlefield";
+import { battlefieldView } from "../battlefield";
 import { cardTargeting } from "../card-rules";
 import type { CardDefinition } from "../content/types";
 import { observeDecisions } from "../random";
@@ -141,7 +141,7 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
       def.effect === "resurrect"
         ? (fallenAllies ??= recipientIds(state.battle.enemies, false))
         : cardTargeting(def) === "ally"
-          ? (livingAllies ??= recipientIds(battlefield(state, "enemy"), true))
+          ? (livingAllies ??= recipientIds(battlefieldView(state, "enemy"), true))
           : (self ??= [enemy.id]);
     for (const allyTargetId of recipients) {
       let cardValues = values?.get(def);
@@ -149,7 +149,7 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
       let value = cardValues?.get(allyTargetId);
       if (value === undefined) {
         if (!targetResolved) {
-          targetId = highestHealth(battlefield(state, "player"))?.id;
+          targetId = highestHealth(battlefieldView(state, "player"))?.id;
           targetResolved = true;
         }
         value = evaluateEnemyCard(

@@ -7,6 +7,7 @@ import {
   findLivingBattlefield,
   isEnemy,
   battlefield,
+  battlefieldView,
   battlefieldHasId,
   healingAllies,
   combatantById,
@@ -182,7 +183,7 @@ export function* grantBlock(
 ): Resolution<void> {
   if (unit.health <= 0 || amount <= 0) return;
   if (!isEnemy(unit) && state.phase === "battle" && state.boons.includes("origami-staircase")) {
-    const row = battlefield(state, "player");
+    const row = battlefieldView(state, "player");
     if (row.some((ally) => ally.id === unit.id)) {
       let armored = 0;
       for (const ally of row) if (ally.health > 0 && ensureCombat(ally).armor > 0) armored++;

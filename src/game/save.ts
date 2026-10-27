@@ -4,7 +4,7 @@ import { isFood } from "./content/food";
 import { manaCapacity, encoreProgressLimit, puzzleProgressLimit, metronomeActorValid } from "./ability-rules";
 import { unfinishedJourneyLimit } from "./card-actors";
 import { PEARL } from "./content/creatures/memento";
-import { battlefield } from "./battlefield";
+import { battlefieldView } from "./battlefield";
 import { needsCampfire, merchantPriceRange } from "./destinations";
 import { freeze } from "immer";
 import { MAX_BATTLE_CARDS, MAX_HAND_SIZE, handCapacity } from "./card-zones";
@@ -309,7 +309,7 @@ function validateBattle(state: BattleState) {
   invalid(battle.encoreProgress > encoreProgressLimit(state));
   invalid(!unique(battle.puzzleProgress) || battle.puzzleProgress.length > puzzleProgressLimit(state));
   invalid(battle.enemies.length !== source.enemies.length || !uniqueBy(battle.enemies, (e) => e.id));
-  const playerField = battlefield(state, "player");
+  const playerField = battlefieldView(state, "player");
   battle.enemies.forEach((enemy) => {
     const index = Number(enemy.id.replace(/^enemy-/, ""));
     const original = source.enemies[index];

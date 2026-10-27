@@ -760,3 +760,42 @@ it("retains the last duplicate cloud record and its ancestry", async () => {
   expect(newestHeads([second, first])).toEqual([second]);
   expect(newestHeads([first, { ...second, ancestors: [] }])).toEqual([first, { ...second, ancestors: [] }]);
 });
+
+it("keeps Journey Loom's single-card eligibility, draw order and decisions", () => {
+  for (const pile of ["draw", "discard"] as const) {
+    const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+    const [owner, other] = state.team;
+    const card = state.cards.find((entry) => entry.ownerId === other!.id)!;
+    state.boons = ["journey-loom"];
+    state.battle.draw = [];
+    state.battle.discard = [];
+    state.battle[pile] = [card.id];
+    state.battle.hand = [];
+    state.battle.buffer = [];
+    expect(journeyReturnHasDraw(state, owner!.id)).toBe(true);
+    other!.health = 0;
+    expect(journeyReturnHasDraw(state, owner!.id)).toBe(false);
+    other!.health = 1;
+    const decisions: unknown[] = [];
+    observeDecisions(state, (decision) => {
+      decisions.push(decision);
+      return 0;
+    });
+    journeyReturn(state, owner!.id, []);
+    expect(state.battle.hand).toEqual([card.id]);
+    expect(state.battle.draw).toEqual([]);
+    expect(state.battle.discard).toEqual([]);
+    expect(decisions).toEqual([undefined]);
+  }
+});
+
+it("rebuilds permanent cards in kit order while retaining the matching original", () => {
+  const state = structuredClone(teamRun(42, ["mossguard", "prismram"]));
+  const retained = state.cards[0]!;
+  retained.level = 2;
+  const expected = state.team.flatMap((unit) => ownedCards(unit.id, unit.species).map((card) => card.id));
+  rebuildCards(state);
+  expect(state.cards.map((card) => card.id)).toEqual(expected);
+  expect(state.cards[0]).toBe(retained);
+  expect(state.cards[0]!.level).toBe(2);
+});

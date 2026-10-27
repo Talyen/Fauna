@@ -3,7 +3,7 @@ import { boonRule } from "../rules/boons";
 import { chance as succeeds, talentChance } from "../chance";
 import {
   findLivingBattlefield,
-  battlefield,
+  battlefieldView,
   battlefieldHasId,
   livingBattlefield,
   healingAllies,
@@ -65,7 +65,7 @@ export function* dodgeResponse(
   // The Dodge is committed even if its first follow-up causes a knockout.
   if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
   if (alliedTarget && state.boons.includes("echo-ocarina")) {
-    const allies = battlefield(state, "player");
+    const allies = battlefieldView(state, "player");
     if (allies.some((ally) => ally.id === target.id))
       for (const ally of allies)
         if (ally.id !== target.id && ally.health > 0)

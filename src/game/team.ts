@@ -172,20 +172,22 @@ function prepareLineup(state: GameState, ids: string[]) {
 }
 export function rebuildCards(state: GameState) {
   const previous = state.cards;
-  const previousById = new Map<string, Card[]>();
+  let previousById: Map<string, Card[]> | undefined;
   for (const card of previous) {
+    previousById ??= new Map();
     const matching = previousById.get(card.id);
     if (matching) matching.push(card);
     else previousById.set(card.id, [card]);
   }
   const cards: Card[] = [];
   for (const creature of state.team)
-    for (const card of ownedCards(creature.id, creature.species))
-      cards.push(
-        previousById
-          .get(card.id)
-          ?.find((old) => old.ownerId === card.ownerId && old.definitionId === card.definitionId) ?? card,
-      );
+    forEachPermanentCard(creature.species, (definition, copy) => {
+      const id = `${creature.id}:${definition.id}${copy ? ":2" : ""}`;
+      const retained = previousById
+        ?.get(id)
+        ?.find((old) => old.ownerId === creature.id && old.definitionId === definition.id);
+      cards.push(retained ?? { id, definitionId: definition.id, ownerId: creature.id, level: 0 });
+    });
   state.cards = cards;
   if (state.battle) {
     state.battle.hand = [];
@@ -253,7 +255,7 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   state.cards = [...(removed.size ? retained.filter((card) => !removed.has(card.id)) : retained), ...mapped];
   if (state.battle) {
     const kept = new Set(state.cards.map((card) => card.id));
-    const changed = fromCard ? new Set(mapped.map((card) => card.id)) : undefined;
+    const changed = fromCard && mapped.length ? new Set(mapped.map((card) => card.id)) : undefined;
     filterCardZones(state.battle, (id) => kept.has(id) && (!changed || !changed.has(id)));
     if (mapped.length) {
       const zoned = new Set<string>();

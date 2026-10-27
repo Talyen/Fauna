@@ -280,7 +280,7 @@ function resolve(
         const keywords = cardKeywords(card);
         for (const keyword of keywords)
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
-        battle.mana -= cardCost(card, draft);
+        battle.mana -= cardCost(card, draft, def, actor);
         if (card.ownerId !== null) {
           if (actor.id !== card.ownerId) ensureCombat(actor).fallenCardsPlayedThisTurn++;
           consumeCardGrants(actor, keywords);

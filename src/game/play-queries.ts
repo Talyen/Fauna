@@ -138,16 +138,35 @@ export function hasAvailablePlay(state: BattleState): boolean {
   if (!state.battle.hand.length || pendingReplacement(state)) return false;
   const cards = state.battle.hand.length > 1 ? new Map<string, Card>() : undefined;
   if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+  let lastDefinition: CardDefinition | undefined;
+  let lastRecipients = false;
+  const hasRecipients = (def: CardDefinition) => {
+    if (lastDefinition !== def) {
+      lastDefinition = def;
+      lastRecipients = hasChosenRecipient(state, def);
+    }
+    return lastRecipients;
+  };
+  let lastActorId: string | undefined;
+  let lastRecoverable = false;
+  const canRecover = (actorId: string) => {
+    if (lastActorId !== actorId) {
+      lastActorId = actorId;
+      lastRecoverable = hasDiscardDrawCard(state, actorId);
+    }
+    return lastRecoverable;
+  };
   for (const id of state.battle.hand) {
     const play = inspectCard(
       state,
       cards ? cards.get(id) : state.cards.find((card) => card.id === id),
-      (def) => hasChosenRecipient(state, def),
+      hasRecipients,
       true,
+      canRecover,
     );
     if (!play.allowed) continue;
     const mode = cardTargeting(play.def, state);
-    if ((mode !== "enemy" && mode !== "ally") || hasChosenRecipient(state, play.def)) return true;
+    if ((mode !== "enemy" && mode !== "ally") || hasRecipients(play.def)) return true;
   }
   return false;
 }
