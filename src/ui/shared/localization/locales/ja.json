@@ -1949,11 +1949,29 @@
     "sourceHash": "3a59b72e8d9d3469b223e1eb7563cbe1e70584f8cf8043fb9afa692ce2470390",
     "text": "{{name}}はブロックを{{amount}}得た。"
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "7a8857da5197463e071c4d83b77482e69ef0268c6a9d4b77409012d0f817097f",
+    "text": "マナを{{amount}}獲得。"
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "762f4ff8e996ed0a7c533de2d8cc77e1a6790c638e36cc0e240458396edc3eba",
     "text": "{{name}}は体力を{{amount}}回復した。"
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "a6b3d9f14a1dcbc6c09967ad865576b4508eea27407b93c7c55ae28bbde81b21",
+    "text": "旅が始まります。"
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "5384bdf330a826607912ab4e1060cd4a7ff70bd06f47552c378fe776145337ce",
+    "text": "ターン{{turn}}。マナを{{amount}}回復。"
   },
   "menu.boons": {
     "reviewed": true,

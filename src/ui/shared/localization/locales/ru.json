@@ -1949,11 +1949,29 @@
     "sourceHash": "00991c09cd00b146e8dd4781a045101991e80266997717e46dd99d452d294229",
     "text": "{{name}} получает блок: {{amount}}."
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "3ccefae6bfb077e765d9944a0ff25ce3ffdc8753438e15120526d96a18b77458",
+    "text": "Получено маны: {{amount}}."
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "52026a959f0c750f99ef440cae18d653b76c82d5733d396fb0ed60db733cd47e",
     "text": "{{name}} восстанавливает здоровье: {{amount}}."
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "e7a6012ca68ac3541a7808d88db139263b5ba91596a4cfa3b8a4ebc7fc458ccb",
+    "text": "Ваше путешествие начинается."
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "211938f6fc251306ce49a030ea7f25d70a412e60071effaac54ecada068970cd",
+    "text": "Ход {{turn}}. Восстановлено маны: {{amount}}."
   },
   "menu.boons": {
     "reviewed": true,

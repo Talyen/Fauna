@@ -139,6 +139,33 @@ it("translates recognized combat announcements and preserves unfamiliar event te
   expect(eventPresentation(game, damage, createMessageReader("en", {}))).toBe(damage.text);
 });
 
+it("translates turn and Mana announcements without inventing their values", () => {
+  const game = run();
+  const reader = createMessageReader("fr", {
+    "log.journeyBegins": { source: "Your journey begins.", text: "Votre voyage commence." },
+    "log.turnRestored": {
+      source: "Turn {{turn}}. {{amount}} Mana restored.",
+      text: "Tour {{turn}}. {{amount}} Mana récupéré.",
+    },
+    "log.gainMana": { source: "Gain {{amount}} Mana.", text: "Gagne {{amount}} Mana." },
+  });
+  expect(eventPresentation(game, { kind: "turn", text: "Your journey begins." }, reader)).toBe(
+    "Votre voyage commence.",
+  );
+  expect(eventPresentation(game, { kind: "turn", text: "Turn 4. 3 Mana restored." }, reader)).toBe(
+    "Tour 4. 3 Mana récupéré.",
+  );
+  expect(eventPresentation(game, { kind: "status", amount: 2, text: "Gain 2 Mana." }, reader)).toBe(
+    "Gagne 2 Mana.",
+  );
+  expect(eventPresentation(game, { kind: "status", amount: 2, text: "Gain 3 Mana." }, reader)).toBe(
+    "Gain 3 Mana.",
+  );
+  expect(eventPresentation(game, { kind: "turn", text: "Turn 4. 3 Mana restored!" }, reader)).toBe(
+    "Turn 4. 3 Mana restored!",
+  );
+});
+
 it("changes menu messages and accessible counts without replacing the focused action", () => {
   const actions = {
     home: true,

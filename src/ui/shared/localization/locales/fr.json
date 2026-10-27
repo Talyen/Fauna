@@ -2021,11 +2021,29 @@
     "sourceHash": "78bc2f722bb0af1f795f5210b19a884efe0d05395368b4fb6b00db8df8064a0d",
     "text": "{{name}} gagne {{amount}} Blocage."
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "c986ab4b3632640d313e94d2fd533a62e7197135f371255356c42f93dc2392e9",
+    "text": "Gagnez {{amount}} Mana."
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "226de8b37af66db24dfd957aeb9754bd3c22a40fc9eb0ee6e062e4ca20c1a131",
     "text": "{{name}} récupère {{amount}} Santé."
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "f580068ba34cded602012ebc7a05e42e46b50d90c10ed91f102af630c171f10a",
+    "text": "Votre voyage commence."
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "d2cce0d7b3d71188828a1fc9dff179573070c18d0eaf77bd7e7d360f568c661c",
+    "text": "Tour {{turn}}. {{amount}} Mana récupéré."
   },
   "menu.boons": {
     "reviewed": true,

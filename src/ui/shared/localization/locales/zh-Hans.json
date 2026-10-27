@@ -1949,11 +1949,29 @@
     "sourceHash": "b3e955c2f3af820229ddaa6441b3f4b4ad5c69a38bcbd1b767cf7d41649324af",
     "text": "{{name}}获得了{{amount}}点格挡。"
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "e8fce4485ff73f81d316395b816ac572dfd5493c5dfeb26e421739d47218a6d8",
+    "text": "获得{{amount}}点法力。"
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "774a6f04bf39a8f4dc5d5fac1888879906000164d8e6ff6e508b69cce62118ab",
     "text": "{{name}}恢复了{{amount}}点生命。"
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "107054dc236a3ea5f1859203b6f0c5c609e38c7f2ec72d0d144bcc2f1344591d",
+    "text": "你的旅程开始了。"
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "7a31d7b5fa425f4a432ac11603dc793f1e346f169a2c6ec8e3f0e5e9f0c43297",
+    "text": "第{{turn}}回合。恢复{{amount}}点法力。"
   },
   "menu.boons": {
     "reviewed": true,

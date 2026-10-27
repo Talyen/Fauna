@@ -1949,11 +1949,29 @@
     "sourceHash": "9bed9f26d6546e6049c6f308931976c0988cd18e811122b1cb665959f4f82643",
     "text": "{{name}} erhält {{amount}} Block."
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "cbfbac7208fc8966d1b4801343c841f1f88e7eaf9f585d1f5064f4401d6fc6ba",
+    "text": "Erhalte {{amount}} Mana."
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "903677f2738c2cc07f4f66009dbf29404380bfc269c9e14b17bf17b8d581ee4d",
     "text": "{{name}} stellt {{amount}} Gesundheit wieder her."
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "377879b40e232d9eff645bb53958b3dc567d96a95ed509ea7b3c9fa3b33e131f",
+    "text": "Deine Reise beginnt."
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "3432d275f020761a5c16082331e7d582809225e8acbb95a276a4f5c15c6c8e6f",
+    "text": "Zug {{turn}}. {{amount}} Mana wiederhergestellt."
   },
   "menu.boons": {
     "reviewed": true,

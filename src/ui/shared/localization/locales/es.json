@@ -1949,11 +1949,29 @@
     "sourceHash": "39ac8559f974676451bca865b938f75f23ae2ffcc16b63ced19414f8253d6014",
     "text": "{{name}} obtiene {{amount}} de Bloqueo."
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "b9e929f73595a6883441499e553c262c0c97b221d0bf382bd73023d5822e8136",
+    "text": "Obtienes {{amount}} de maná."
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "72afeb4651933b9d809ebc7a58de488cb55680cd95b47d69903bb140888aecbc",
     "text": "{{name}} recupera {{amount}} de Salud."
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "b549e0c5efde661787fc6035713b84143980de12d0f1edf977786cde4ff80d85",
+    "text": "Tu viaje comienza."
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "3d67c4df9c11d023b7a7424a80d4fa2f31ac2c849ecf11061d829b491ad91c3e",
+    "text": "Turno {{turn}}. Se recuperan {{amount}} de maná."
   },
   "menu.boons": {
     "reviewed": true,
