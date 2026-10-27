@@ -53,5 +53,8 @@ missing surfaces. Do not infer completion from the count.
    qualify browser, desktop, Windows and Steam separately. Do not offer or advertise
    a language until its catalog, fonts, interactions and layouts are complete
 
-The inventory is the first preparation step; no runtime translation, language
-selector or non-English catalog has been implemented yet.
+The inventory and the internal rule-message adapter are preparation steps. The
+adapter retains numeric values and keyword identities so a complete translated
+rule can reorder them; invalid templates fall back to the English rule. It does
+not yet cover every message or provide catalog extraction, language selection or
+non-English catalogs. Fauna remains English-only.
