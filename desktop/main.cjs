@@ -152,6 +152,10 @@ void app.whenReady().then(async () => {
       return steam[method](...args);
     });
   }
+  ipcMain.handle("fauna:steam-language", (event) => {
+    authorize(event);
+    return steam.language();
+  });
   ipcMain.handle("fauna:overlay-state", (event) => {
     authorize(event);
     return steam.overlay();

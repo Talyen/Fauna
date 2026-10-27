@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { assetUrl } from "../shared/assets";
 import { type CSSProperties, useState } from "react";
 import { Button } from "../../components/ui/button";
@@ -11,6 +12,7 @@ export function ManaCrystals({
   maximum?: number;
   previewCost?: number;
 }) {
+  const i18n = useMessages();
   const slots = Math.max(mana, maximum);
   const [glints, setGlints] = useState<number[]>([]);
   const glint = (index: number) =>
@@ -31,7 +33,7 @@ export function ManaCrystals({
       variant="ghost"
       className="mana"
       data-overflow-row={slots > 6}
-      aria-label={`Mana ${mana} of ${maximum}`}
+      aria-label={i18n.message("battle.mana", "Mana {{mana}} of {{maximum}}", { mana, maximum })}
       onFocus={() => {
         if (document.documentElement.dataset.focus === "visible")
           setGlints((previous) => Array.from({ length: slots }, (_, index) => (previous[index] ?? 0) + 1));

@@ -14,6 +14,7 @@ interface SaveStorage {
 interface SteamCapabilities {
   readonly available: boolean;
   achievements?: { unlock(id: string): Promise<void> };
+  getLanguage?: () => Promise<string | null>;
 }
 export interface Platform {
   diagnostics?: DiagnosticPort;
@@ -27,6 +28,7 @@ export interface Platform {
   onCloseRequested?: (listener: () => Promise<boolean>) => () => void;
 }
 export interface DesktopBridge {
+  getSteamLanguage?: () => Promise<string | null>;
   display?: DisplayPort;
   cloud?: CloudPort;
   onOverlay?: (listener: (active: boolean) => void) => () => void;

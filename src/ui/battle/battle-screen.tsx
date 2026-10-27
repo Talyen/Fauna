@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { measurePerformance } from "../../lib/performance";
 import { useBattleArtworkSize } from "./use-battle-artwork-size";
 import { sharedDodgeChance } from "../../game/combat/index";
@@ -102,6 +103,7 @@ export function BattleScreen({
   openPile?: (pile: "draw" | "discard") => void;
   openingDraw?: boolean;
 }) {
+  const i18n = useMessages();
   const board = useRef<HTMLElement>(null);
   useBattleArtworkSize(board);
   const interaction = useBattleInteraction({
@@ -143,14 +145,14 @@ export function BattleScreen({
       ref={board}
       className="battle-screen"
       data-nav-layout="rows"
-      aria-label="Battlefield"
+      aria-label={i18n.message("battle.battlefield", "Battlefield")}
       data-selected-card={selected ?? ""}
     >
       <CombatFeedback bursts={bursts} root={board} />
       <section
         className="enemy-row"
         data-nav-row
-        aria-label="Enemy row"
+        aria-label={i18n.message("battle.enemyRow", "Enemy row")}
         data-legendary={battle.enemies.some((unit) => species(unit.species).legendary) || undefined}
       >
         {enemyRow
@@ -180,14 +182,18 @@ export function BattleScreen({
                   else onDenied(element);
                 }
               }}
-              label={selected && enemyTarget && enemy.health > 0 ? `Target ${enemy.name}` : enemy.name}
+              label={
+                selected && enemyTarget && enemy.health > 0
+                  ? i18n.message("battle.target", "Target {{name}}", { name: enemy.name })
+                  : enemy.name
+              }
             />
           ))}
       </section>
       <section
         className="player-row"
         data-nav-row
-        aria-label="Player row"
+        aria-label={i18n.message("battle.playerRow", "Player row")}
         data-legendary={game.team.some((unit) => species(unit.species).legendary) || undefined}
       >
         {playerRow
@@ -221,7 +227,9 @@ export function BattleScreen({
               }}
               label={
                 selected && allyTarget && legalTargets.has(creature.id)
-                  ? `Target ${"name" in creature ? creature.name : species(creature.species).name}`
+                  ? i18n.message("battle.target", "Target {{name}}", {
+                      name: "name" in creature ? creature.name : species(creature.species).name,
+                    })
                   : "name" in creature
                     ? creature.name
                     : species(creature.species).name
@@ -236,25 +244,28 @@ export function BattleScreen({
           ) : card && def ? (
             <>
               <p>
-                {def.species === null
-                  ? "Food"
-                  : acting
-                    ? species(acting.species).name
-                    : species(def.species).name}{" "}
-                ·{" "}
-                {recipient ??
-                  (enemyTarget
-                    ? "Choose an enemy"
-                    : def.effect === "swapChosen"
-                      ? "Choose a backup"
-                      : "Choose an ally")}
+                {i18n.message("battle.targetSummary", "{{owner}} · {{target}}", {
+                  owner:
+                    def.species === null
+                      ? i18n.message("battle.food", "Food")
+                      : acting
+                        ? species(acting.species).name
+                        : species(def.species).name,
+                  target:
+                    recipient ??
+                    (enemyTarget
+                      ? i18n.message("battle.chooseEnemy", "Choose an enemy")
+                      : def.effect === "swapChosen"
+                        ? i18n.message("battle.chooseBackup", "Choose a backup")
+                        : i18n.message("battle.chooseAlly", "Choose an ally")),
+                })}
               </p>
               <ActionDetails
                 compact
                 card={card}
                 ownerName={
                   def.species === null
-                    ? "Food"
+                    ? i18n.message("battle.food", "Food")
                     : acting
                       ? species(acting.species).name
                       : species(def.species).name
@@ -271,14 +282,25 @@ export function BattleScreen({
                         variant="outline"
                         data-backup-target={unit.id}
                         data-resurrection-target={def.effect === "resurrect" ? unit.id : undefined}
-                        aria-label={`${def.effect === "swapChosen" ? "Swap in" : "Resurrect"} ${species(unit.species).name} from backup`}
+                        aria-label={
+                          def.effect === "swapChosen"
+                            ? i18n.message("battle.swapBackup", "Swap in {{name}} from backup", {
+                                name: species(unit.species).name,
+                              })
+                            : i18n.message("battle.resurrectBackup", "Resurrect {{name}} from backup", {
+                                name: species(unit.species).name,
+                              })
+                        }
                         onFocus={() => setTarget(unit.id)}
                         onMouseEnter={() => setTarget(unit.id)}
                         onMouseLeave={() => leaveTarget(unit.id)}
                         onClick={() => play({ type: "play", cardId: card.id, targetId: unit.id })}
                       >
-                        {species(unit.species).name}
-                        {def.effect === "resurrect" ? " (backup)" : ""}
+                        {def.effect === "resurrect"
+                          ? i18n.message("battle.backupName", "{{name}} (backup)", {
+                              name: species(unit.species).name,
+                            })
+                          : species(unit.species).name}
                       </Button>
                     ))
                 : null}
@@ -290,7 +312,7 @@ export function BattleScreen({
         </div>
         {selected ? (
           <Button variant="outline" onClick={cancel}>
-            Cancel
+            {i18n.message("common.cancel", "Cancel")}
           </Button>
         ) : null}
       </div>
@@ -301,7 +323,11 @@ export function BattleScreen({
         paused={clearSelection}
         cardIds={game.cards.map((card) => card.id)}
       >
-        <section className="hand-toolbar" aria-label="Battle cards and controls" data-nav-row>
+        <section
+          className="hand-toolbar"
+          aria-label={i18n.message("battle.cardsAndControls", "Battle cards and controls")}
+          data-nav-row
+        >
           <div className="battle-dock">
             <ManaCrystals
               mana={battle.mana}
@@ -313,12 +339,12 @@ export function BattleScreen({
                 artwork={assetUrl("pile.draw")}
                 aspect="action"
                 data-pile="draw"
-                aria-label="Inspect Draw Pile"
+                aria-label={i18n.message("battle.inspectDrawPile", "Inspect Draw Pile")}
                 onClick={() => openPile?.("draw")}
               />
             </div>
           </div>
-          <section className="hand-section" aria-label="Action hand">
+          <section className="hand-section" aria-label={i18n.message("battle.actionHand", "Action hand")}>
             <div className="hand">
               {visibleHand.map((id, index, hand) => {
                 const card = game.cards.find((c) => c.id === id)!,
@@ -330,7 +356,11 @@ export function BattleScreen({
                       card={card}
                       actor={owner}
                       modifiers={game}
-                      ownerName={card.ownerId === null ? "Food" : species(owner.species).name}
+                      ownerName={
+                        card.ownerId === null
+                          ? i18n.message("battle.food", "Food")
+                          : species(owner.species).name
+                      }
                       selected={selected === id}
                       disabled={!admission.allowed}
                       onDenied={(element) => {
@@ -351,11 +381,13 @@ export function BattleScreen({
             <div className="battle-actions">
               {battle.repeatNext.player ? (
                 <span className="next-card-repeat" role="status">
-                  Next card ×2
+                  {i18n.message("battle.nextCardRepeat", "Next card ×2")}
                 </span>
               ) : null}
               <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
-                End turn{controller ? ` · ${endTurnPrompt}` : ""}
+                {controller
+                  ? i18n.message("battle.endTurnPrompt", "End turn · {{prompt}}", { prompt: endTurnPrompt })
+                  : i18n.message("battle.endTurn", "End turn")}
               </Button>
             </div>
             <div className="battle-pile">
@@ -363,7 +395,7 @@ export function BattleScreen({
                 artwork={assetUrl("pile.discard")}
                 aspect="action"
                 data-pile="discard"
-                aria-label="Inspect Discard Pile"
+                aria-label={i18n.message("battle.inspectDiscardPile", "Inspect Discard Pile")}
                 onClick={() => openPile?.("discard")}
               />
             </div>

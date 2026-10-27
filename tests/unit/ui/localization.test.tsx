@@ -1,5 +1,10 @@
 // @vitest-environment jsdom
-import { render, screen, fireEvent } from "@testing-library/react";
+import { createRequire } from "node:module";
+import { EventEmitter } from "node:events";
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { act, render, screen, fireEvent } from "@testing-library/react";
 import { expect, it, vi } from "vitest";
 import {
   applyPackets,
@@ -12,10 +17,13 @@ import { extractMessages } from "../../../scripts/localization/messages.mjs";
 import { produce } from "immer";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
-import { addBackups, run } from "../../support/game";
+import { addBackups, requireBattle, run, teamRun } from "../../support/game";
+import { BattleScreen } from "../../../src/ui/battle/battle-screen";
+import { ManaCrystals } from "../../../src/ui/battle/mana-crystals";
 import { MenuActions } from "../../../src/ui/menu/menu-actions";
 import { resolveLanguage, type GameLocale } from "../../../src/ui/shared/localization/languages";
-import { MessageProvider } from "../../../src/ui/shared/localization/message-context";
+import { LocalizationProvider, useLanguage } from "../../../src/ui/shared/localization/provider";
+import { useMessages, MessageProvider } from "../../../src/ui/shared/localization/message-context";
 import { createMessageReader, type MessageCatalog } from "../../../src/ui/shared/localization/messages";
 
 it("selects locale plural forms and falls back when source or placeholders are stale", () => {
@@ -237,4 +245,232 @@ it("refuses to qualify a language before complete source migration and reviewed 
   expect(
     qualificationIssues({ ...languages, fr: { qualified: false } }, coverage, english, {}, { fr: {} }),
   ).toEqual([]);
+});
+
+function LanguageProbe() {
+  const language = useLanguage();
+  const i18n = useMessages();
+  return (
+    <>
+      <output aria-label="locale">{language.locale}</output>
+      <span>{i18n.message("menu.play", "Play")}</span>
+      <button onClick={() => language.setPreference("fr")}>French</button>
+      <button onClick={() => language.setPreference("ja")}>Japanese</button>
+    </>
+  );
+}
+
+it("persists a qualified language locally and never selects an unavailable catalog", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const catalog: MessageCatalog = { "menu.play": { source: "Play", text: "Jouer" } };
+  const props = {
+    catalogs: { fr: catalog },
+    qualified: ["en", "fr", "ja"] as GameLocale[],
+    systemLanguages: ["en-US"],
+  };
+  const view = render(
+    <LocalizationProvider {...props}>
+      <LanguageProbe />
+    </LocalizationProvider>,
+  );
+  expect(screen.getByLabelText("locale").textContent).toBe("en");
+  fireEvent.click(screen.getByRole("button", { name: "Japanese" }));
+  expect(screen.getByLabelText("locale").textContent).toBe("en");
+  fireEvent.click(screen.getByRole("button", { name: "French" }));
+  expect(screen.getByLabelText("locale").textContent).toBe("fr");
+  expect(screen.getByText("Jouer")).toBeTruthy();
+  expect(document.documentElement.lang).toBe("fr");
+  expect(localStorage.getItem("fauna.language.v1")).toBe("fr");
+  view.unmount();
+  const reopened = render(
+    <LocalizationProvider {...props}>
+      <LanguageProbe />
+    </LocalizationProvider>,
+  );
+  expect(screen.getByLabelText("locale").textContent).toBe("fr");
+  reopened.unmount();
+  localStorage.removeItem("fauna.language.v1");
+});
+
+it("a late Steam response cannot override a manual language choice", async () => {
+  localStorage.removeItem("fauna.language.v1");
+  let resolveSteam!: (value: string | null) => void;
+  const steamLanguage = () =>
+    new Promise<string | null>((resolve) => {
+      resolveSteam = resolve;
+    });
+  const props = {
+    catalogs: { fr: {}, de: {} },
+    qualified: ["en", "fr", "de"] as GameLocale[],
+    systemLanguages: ["en"],
+    steamLanguage,
+  };
+  const view = render(
+    <LocalizationProvider {...props}>
+      <LanguageProbe />
+    </LocalizationProvider>,
+  );
+  await act(async () => {
+    await Promise.resolve();
+  });
+  fireEvent.click(screen.getByRole("button", { name: "French" }));
+  await act(async () => {
+    resolveSteam("german");
+    await Promise.resolve();
+  });
+  expect(screen.getByLabelText("locale").textContent).toBe("fr");
+  view.unmount();
+  localStorage.removeItem("fauna.language.v1");
+});
+
+it("keeps play usable when optional language storage or Steam access fails", async () => {
+  const read = vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+    throw new Error("unavailable");
+  });
+  const write = vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+    throw new Error("unavailable");
+  });
+  const steamLanguage = () => {
+    throw new Error("Steam unavailable");
+  };
+  const view = render(
+    <LocalizationProvider
+      catalogs={{ fr: {} }}
+      qualified={["en", "fr"]}
+      systemLanguages={["en"]}
+      steamLanguage={steamLanguage}
+    >
+      <LanguageProbe />
+    </LocalizationProvider>,
+  );
+  await act(async () => {
+    await Promise.resolve();
+  });
+  fireEvent.click(screen.getByRole("button", { name: "French" }));
+  expect(screen.getByLabelText("locale").textContent).toBe("fr");
+  view.unmount();
+  read.mockRestore();
+  write.mockRestore();
+});
+
+it("keeps Steam Cloud usable when optional language replies are malformed or time out", async () => {
+  const { createSteam } = createRequire(import.meta.url)("../../../desktop/steam.cjs");
+  const directory = await mkdtemp(path.join(tmpdir(), "fauna-language-"));
+  vi.stubEnv("FAUNA_STEAM_APP_ID", "480");
+  let languageMode = "invalid";
+  let timedOutId = 0;
+  const worker = Object.assign(new EventEmitter(), {
+    kill: vi.fn(),
+    postMessage: ({ id, operation }: { id: number; operation: string }) => {
+      if (operation === "language" && languageMode === "timeout") {
+        timedOutId = id;
+        return;
+      }
+      void Promise.resolve().then(() =>
+        worker.emit("message", {
+          id,
+          value:
+            operation === "init"
+              ? "76561190000000000"
+              : operation === "language"
+                ? "not a valid language!"
+                : [],
+        }),
+      );
+    },
+  });
+  let adapter: Awaited<ReturnType<typeof createSteam>> | undefined;
+  try {
+    adapter = await createSteam({
+      app: { isPackaged: false },
+      directory,
+      isolated: false,
+      pause() {},
+      utilityProcess: { fork: () => worker },
+      loadBinding: () => ({ createOverlay: () => ({ account: "76561190000000000", disconnect() {} }) }),
+    });
+    expect(await adapter!.language()).toBeNull();
+    expect(worker.kill).not.toHaveBeenCalled();
+    expect(await adapter!.list()).toEqual([]);
+    languageMode = "timeout";
+    vi.useFakeTimers();
+    const pending = adapter!.language();
+    await vi.advanceTimersByTimeAsync(1500);
+    expect(await pending).toBeNull();
+    worker.emit("message", { id: timedOutId, value: "german" });
+    expect(worker.kill).not.toHaveBeenCalled();
+    expect(await adapter!.list()).toEqual([]);
+  } finally {
+    vi.useRealTimers();
+    await adapter?.dispose();
+    vi.unstubAllEnvs();
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+it("updates the battle mana announcement while preserving the same interactive control", () => {
+  const catalog: MessageCatalog = {
+    "battle.mana": { source: "Mana {{mana}} of {{maximum}}", text: "Mana {{mana}} sur {{maximum}}" },
+  };
+  const view = render(
+    <MessageProvider locale="en" catalog={{}}>
+      <ManaCrystals mana={3} maximum={4} />
+    </MessageProvider>,
+  );
+  const control = screen.getByRole("button", { name: "Mana 3 of 4" });
+  control.focus();
+  view.rerender(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <ManaCrystals mana={3} maximum={4} />
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("button", { name: "Mana 3 sur 4" })).toBe(control);
+  expect(document.activeElement).toBe(control);
+  view.unmount();
+});
+
+it("translates a battle targeting prompt without issuing a gameplay command", () => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  );
+  const game = produce(teamRun(7, ["prismram", "emberback", "pollenmoth"]), (draft) => {
+    draft.battle!.hand = draft.cards.map((card) => card.id);
+    draft.battle!.draw = [];
+    draft.battle!.mana = 4;
+  });
+  const catalog: MessageCatalog = {
+    "battle.chooseEnemy": { source: "Choose an enemy", text: "Choisir un ennemi" },
+    "battle.targetSummary": { source: "{{owner}} · {{target}}", text: "{{target}} · {{owner}}" },
+  };
+  const send = vi.fn(() => true);
+  const view = render(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <TooltipProvider>
+        <BattleScreen
+          game={requireBattle(game)}
+          send={send}
+          controls={{ current: null }}
+          bursts={[]}
+          controller={false}
+          navigateFocus={false}
+          onDenied={() => {}}
+        />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  try {
+    const attack = view.container.querySelector<HTMLButtonElement>('.hand [data-effect="attack"]');
+    expect(attack).not.toBeNull();
+    fireEvent.click(attack!);
+    expect(screen.getByText("Choisir un ennemi · Prismram")).toBeTruthy();
+    expect(send).not.toHaveBeenCalled();
+  } finally {
+    view.unmount();
+    vi.unstubAllGlobals();
+  }
 });

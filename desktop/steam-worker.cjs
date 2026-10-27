@@ -29,6 +29,15 @@ parentPort.on("message", (/** @type {{data: unknown}} */ { data }) => {
       } else {
         if (!client || client.localplayer.getSteamId().steamId64.toString() !== account)
           throw new Error("Steam account changed. Restart to sync safely.");
+        if (operation === "language") {
+          try {
+            value = client.apps.currentGameLanguage() || null;
+          } catch {
+            value = null;
+          }
+          parentPort.postMessage({ id, value });
+          return;
+        }
         if (operation === "enabled") {
           parentPort.postMessage({
             id,
