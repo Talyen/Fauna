@@ -3389,6 +3389,12 @@
     "sourceHash": "492c24aa964731c719f652564b5c4aa913d999d6e7fb9742e3293550ac0fd232",
     "text": "Копия"
   },
+  "content.glossary.damage.definition.rule": {
+    "reviewed": true,
+    "source": "Attacks can <keyword0>Dodge</keyword0> or critically hit; <keyword1>Block</keyword1> absorbs damage first; <keyword2>Armor</keyword2> then reduces <keyword3>Physical</keyword3> and <keyword4>Stun</keyword4> damage; Reducing damage removes {{value0}} <keyword5>Armor</keyword5>; <keyword6>Burn</keyword6>, <keyword7>Poison</keyword7>, <keyword8>Bleed</keyword8>, <keyword9>Stun</keyword9>, and <keyword10>Freeze</keyword10> hits add their matching buildup; There are no elemental reactions",
+    "sourceHash": "92715b864b3157ce0f6cb44f9e5bb129a868d3fc4e0c0a3701b994e2cb307bc1",
+    "text": "От атак можно <keyword0>уклониться</keyword0>, а сами они могут быть критическими; <keyword1>Блок</keyword1> первым поглощает урон; Затем <keyword2>броня</keyword2> снижает <keyword3>физический</keyword3> урон и урон <keyword4>оглушением</keyword4>; Снижение урона снимает {{value0}} <keyword5>брони</keyword5>; Попадания <keyword6>горением</keyword6>, <keyword7>ядом</keyword7>, <keyword8>кровотечением</keyword8>, <keyword9>оглушением</keyword9> и <keyword10>заморозкой</keyword10> добавляют соответствующее накопление; Элементальных реакций нет"
+  },
   "content.glossary.damage.term.rule": {
     "reviewed": true,
     "source": "Damage",
@@ -3712,6 +3718,12 @@
     "source": "Talents",
     "sourceHash": "6e01e476006db82a2e1e5ecb0541d9815e5065d3a3aee508626d1444ad112a68",
     "text": "Таланты"
+  },
+  "content.glossary.turn.definition.rule": {
+    "reviewed": true,
+    "source": "Play cards using shared <keyword0>mana</keyword0>; Spending your last <keyword1>mana</keyword1> automatically resolves the enemy turn; You can also press End turn at any time without confirmation; Discard remaining hand cards; restore {{value0}} <keyword2>Mana</keyword2> and draw {{value1}} cards for the next turn; The hand normally holds {{value2}}, or {{value3}} with Facet Abacus; overflow waits in order and survives turn changes",
+    "sourceHash": "c4bfca365b41d692f77aa179ec5e822acf7db448b411a60f6769a8807cef4a86",
+    "text": "Разыгрывайте карты за общую <keyword0>ману</keyword0>; Расход последней <keyword1>маны</keyword1> автоматически проводит ход врага; Можно также в любой момент нажать Завершить ход без подтверждения; Сбросьте оставшиеся карты из руки; Восстановите {{value0}} <keyword2>маны</keyword2> и возьмите карт для следующего хода: {{value1}}; Обычно в руке помещается {{value2}} карт, с Гранёными счётами — {{value3}}; Лишние карты ждут по порядку и сохраняются при смене хода"
   },
   "content.glossary.turn.term.rule": {
     "reviewed": true,
