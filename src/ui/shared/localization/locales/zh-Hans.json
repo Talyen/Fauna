@@ -173,6 +173,24 @@
     "sourceHash": "03be546630e2b6d259a79f728068c15f93e2c6de9e61304e9ffaf8d4fe05f721",
     "text": "{{owner}} · {{target}}"
   },
+  "boons.choose": {
+    "reviewed": true,
+    "source": "Choose {{name}}",
+    "sourceHash": "0356a0729f6f95a9a52941815aa9e87650f14db35f6d6b96839dc1d0710e08b4",
+    "text": "选择{{name}}"
+  },
+  "boons.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
+    "text": "查看{{name}}"
+  },
+  "boons.pages": {
+    "reviewed": true,
+    "source": "Boon pages",
+    "sourceHash": "982e5f583ee38231be7bc995b1f8f0b8c2aea864caefbe757fc7fe07f6ad265f",
+    "text": "祝福分页"
+  },
   "campfire.creatureHealth": {
     "reviewed": true,
     "source": "{{name}} Health",
@@ -845,6 +863,108 @@
     "sourceHash": "1e0652a803449aaf663855f6eeaceea7d30541ae349861410e8114f8105e5627",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
+  "content.talent.armor.armored-surge.name": {
+    "reviewed": true,
+    "source": "Armored Surge",
+    "sourceHash": "716b4a13be91714e02a1fbc87dce12df90be842854f141ab93c8156837f10763",
+    "text": "护甲激涌"
+  },
+  "content.talent.armor.armored-surge.rule": {
+    "reviewed": true,
+    "source": "Playing a <keyword0>Block</keyword0> card has a {{value0}}% chance to grant {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "8c10dd134245b2f4d44481f122cd5ac6304acc09eacf7a68cca77d8f2273954d",
+    "text": "打出<keyword0>格挡</keyword0>卡牌时有{{value0}}%几率获得{{value1}}点<keyword1>护甲</keyword1>"
+  },
+  "content.talent.armor.bulwark.name": {
+    "reviewed": true,
+    "source": "Bulwark",
+    "sourceHash": "023533e18a4d94ec23ba6c325be994a8dddf0cddd97c6b7257677dce6df70991",
+    "text": "壁垒"
+  },
+  "content.talent.armor.fireward.name": {
+    "reviewed": true,
+    "source": "Fireward",
+    "sourceHash": "d399cacad93dfdd2ad0f21836bd44a7a815c2538eec0e7cfc97747f4f232714a",
+    "text": "火焰守护"
+  },
+  "content.talent.armor.fireward.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Burn</keyword1> damage taken",
+    "sourceHash": "1fdfafd4d04721a9f2634d819b067006c3d8ef3d3a6aa674e8741d2180c3e2d7",
+    "text": "<keyword0>护甲</keyword0>减少受到的<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.talent.armor.iron-guard.name": {
+    "reviewed": true,
+    "source": "Iron Guard",
+    "sourceHash": "e9c9c60e92b7bab7c61f7c4ee3ea50a67ea7fc450da4edd82e6f9dfab4b68a54",
+    "text": "钢铁守卫"
+  },
+  "content.talent.armor.iron-guard.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Physical</keyword0> damage has a {{value0}}% chance to also grant that amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "4a92755916141f3d5fe27141023e24d7fdb55e7c66c43fc399a25fabc7010c7e",
+    "text": "造成<keyword0>物理</keyword0>伤害时，有{{value0}}%几率同时获得等量<keyword1>护甲</keyword1>"
+  },
+  "content.talent.armor.last-stand.name": {
+    "reviewed": true,
+    "source": "Last Stand",
+    "sourceHash": "7752712e18d02482876176cd19bc3af98e03e36bacfbb4362b1422de90600dab",
+    "text": "最后抵抗"
+  },
+  "content.talent.armor.last-stand.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% more <keyword0>Armor</keyword0> while below half <keyword1>Health</keyword1>",
+    "sourceHash": "662e631c63c2508863b5c6539bc246f0b020331d1a2d13133dd2d0e72406187a",
+    "text": "你的<keyword1>生命</keyword1>低于一半时，获得的<keyword0>护甲</keyword0>增加{{value0}}%"
+  },
+  "content.talent.armor.purification.name": {
+    "reviewed": true,
+    "source": "Purification",
+    "sourceHash": "4f308551073c10dbe98e7488ad90995a289fc039a54f6a7f74883f47d4a74c62",
+    "text": "净化仪式"
+  },
+  "content.talent.armor.reactive-guard.name": {
+    "reviewed": true,
+    "source": "Reactive Guard",
+    "sourceHash": "bc03ff573593e76323154b602097c1415c79ee8c960dd9ff2f7d3009dd302d43",
+    "text": "应激守卫"
+  },
+  "content.talent.armor.reinforced.name": {
+    "reviewed": true,
+    "source": "Reinforced",
+    "sourceHash": "0bb2c1403a88f681fb65336acc4b54f36e81207e56aafd7c6908433035dc10a1",
+    "text": "加固"
+  },
+  "content.talent.armor.reinforced.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to double <keyword0>Armor</keyword0> gained",
+    "sourceHash": "d6c8c1a24bdd00a9229e8051872653f0d4f0a556daa12ccabbc5af3261d760ef",
+    "text": "获得的<keyword0>护甲</keyword0>有{{value0}}%几率翻倍"
+  },
+  "content.talent.armor.steadfast.name": {
+    "reviewed": true,
+    "source": "Steadfast",
+    "sourceHash": "7c2fb2bfaab0d00f26e65f871e297ed4f4824f829c9cab28b0e7b9f968461a95",
+    "text": "坚定"
+  },
+  "content.talent.armor.steadfast.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below half, gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "29088e29c4c9a7c2e7979b2d71e6f74d23a761fd3c65cf5384a62c0c00acacff",
+    "text": "当你的<keyword0>生命</keyword0>降至一半以下时，获得{{value0}}点<keyword1>护甲</keyword1>"
+  },
+  "content.talent.armor.thick-hide.name": {
+    "reviewed": true,
+    "source": "Thick Hide",
+    "sourceHash": "74630642d18f8b8b94d8646298fc620447bdfba7f1808db877a931008e9bffc4",
+    "text": "厚皮"
+  },
+  "content.talent.armor.thick-hide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Bleed</keyword1> damage taken",
+    "sourceHash": "bcf3be6e82b79e9386834f7fedf40950bdf5f883daaa3a41d03402d3bf7b221b",
+    "text": "<keyword0>护甲</keyword0>减少受到的<keyword1>流血</keyword1>伤害"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -929,6 +1049,42 @@
     "sourceHash": "0c7d92f4c4d00423b12f630ab67ca477079db086fc187b7447382ae74ec8a284",
     "text": "上场战斗的收益"
   },
+  "glossary.entries": {
+    "reviewed": true,
+    "source": "Glossary entries",
+    "sourceHash": "062ee016bb5ef45aca46790f7d8c5fdda4b514e5916abf47cfc623ddb3cbc2a4",
+    "text": "词汇表条目"
+  },
+  "glossary.title": {
+    "reviewed": true,
+    "source": "Glossary & controls",
+    "sourceHash": "c6b9e03941fa32cf8489de17ee434ada745f8c589a2f6172472431dc485ba1a0",
+    "text": "词汇表与操作"
+  },
+  "inspection.abilities": {
+    "reviewed": true,
+    "source": "Abilities",
+    "sourceHash": "ba1564b54565c8a61c83b5b54617ef2d678be6c5c9ec0f723ef4098dbb341c6d",
+    "text": "能力"
+  },
+  "inspection.cardDetails": {
+    "reviewed": true,
+    "source": "{{name}} details",
+    "sourceHash": "2c1418240de383db98769ec3c8a0575bb511a69506eb6dbe9008e8696e85ada6",
+    "text": "{{name}}详情"
+  },
+  "inspection.stars": {
+    "reviewed": true,
+    "source": "{{rank}} of {{maximum}} stars",
+    "sourceHash": "70aa45f402ef2326247dc88cfc8af2b2898fc20275baa186e1971c8df319af57",
+    "text": "{{rank}} / {{maximum}}星"
+  },
+  "inspection.trait": {
+    "reviewed": true,
+    "source": "Trait",
+    "sourceHash": "d334931dac1262c4e67fb3ebb45750f5be2f45f678d39c0d5ef342a52042fae1",
+    "text": "特性"
+  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
@@ -953,6 +1109,12 @@
     "sourceHash": "7d9124c442e0737fe9de74917cd24e3ecbc1d2c1dabff69020d287c8fbfeae8b",
     "text": "遭遇"
   },
+  "menu.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "91f144e9bdf9ea1110c3a2a7684c4234fbfc24f2de595bfacd86e3ad28abd599",
+    "text": "祝福"
+  },
   "menu.collection": {
     "reviewed": true,
     "source": "Collection",
@@ -976,6 +1138,12 @@
     "source": "Glossary",
     "sourceHash": "5dfde89af12293409fb335723116e5ec70abe48733a2fb3f5b845e57026c401b",
     "text": "词汇表"
+  },
+  "menu.logo": {
+    "reviewed": true,
+    "source": "Fauna logo",
+    "sourceHash": "d1143fa423740421b461e7455e8fd5ce71fd0f3d3fe272934e9628406582d986",
+    "text": "Fauna标志"
   },
   "menu.mainMenu": {
     "reviewed": true,
@@ -1007,11 +1175,41 @@
     "sourceHash": "262699dba3aa49fe023fba30ae4885b7b1c994d963b3c697c2afa9dc07392ad6",
     "text": "设置"
   },
+  "menu.talents": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "a86c721b6dc21cd42ab7377e7a0ad8bb4d13656d75d582e73b0da88ed462ebd2",
+    "text": "天赋"
+  },
+  "merchant.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "0a68231ab6433cb984439f259f7e70b410e2d71c8b1a8e576bef6fb89a1e9721",
+    "text": "继续"
+  },
+  "merchant.leave": {
+    "reviewed": true,
+    "source": "Leave",
+    "sourceHash": "d5bc13250361ef435ec0a18de368401bc49a065989f9171799477022bde3a1e8",
+    "text": "离开"
+  },
   "navigation.back": {
     "reviewed": true,
     "source": "Back",
     "sourceHash": "626fa599c9aadc2f0487946bb36735017a656d12267640c1c897b8a1d7645947",
     "text": "返回"
+  },
+  "overlay.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "91f144e9bdf9ea1110c3a2a7684c4234fbfc24f2de595bfacd86e3ad28abd599",
+    "text": "祝福"
+  },
+  "overlay.closeBoons": {
+    "reviewed": true,
+    "source": "Close Boons",
+    "sourceHash": "f9a6641ed4629742b86a726b9e7bc5dbff2843096451b4d2756cbdd2ade2662b",
+    "text": "关闭祝福"
   },
   "overlay.deck": {
     "reviewed": true,
@@ -1534,6 +1732,42 @@
     "source": "{{keyword}} {{count}}; {{description}}",
     "sourceHash": "5ec2e3c4a7a9faaadbbd3256dd2e881980e101975ec96cecc3c290756378decf",
     "text": "{{keyword}} {{count}}；{{description}}"
+  },
+  "talents.keywordXp": {
+    "reviewed": true,
+    "source": "{{keyword}} XP",
+    "sourceHash": "dac06e4d0f179724abbeba370abf4c5be7f3fa7b5845b549a3fa52b6de52444d",
+    "text": "{{keyword}}经验"
+  },
+  "talents.requiresPoint": {
+    "reviewed": true,
+    "source": "Requires 1 point",
+    "sourceHash": "8b386f39e450d49a4ca25e1d8c20517a2dc5619d1b979e83de6176439279eb3d",
+    "text": "需要1点"
+  },
+  "talents.requiresPointAndRows": {
+    "reviewed": true,
+    "source": "Requires 1 point and all earlier rows",
+    "sourceHash": "e83cd59ebd20b5fcdb4110add7cdb20e88f03d7f5c43cc6cc1978ac1c15e077f",
+    "text": "需要1点及之前的所有行"
+  },
+  "talents.requiresRows": {
+    "reviewed": true,
+    "source": "Requires all earlier rows",
+    "sourceHash": "f22ebf32cc48429ccdab76f2c2361a2e07f497333a5b2d6bc6c7c4a208398b3f",
+    "text": "需要解锁之前的所有行"
+  },
+  "talents.row": {
+    "reviewed": true,
+    "source": "Row {{row}}",
+    "sourceHash": "b418139f7cc5196d73143da56a4e867296a600db37e1c781df2fda9b9f2221f7",
+    "text": "第{{row}}行"
+  },
+  "talents.unlockOne": {
+    "reviewed": true,
+    "source": "Unlock · 1 point",
+    "sourceHash": "56dcb1d478ca6d28352ecc4780c8102c2f351b69a81b572dc829a1e6024bbcb8",
+    "text": "解锁 · 1点"
   },
   "talents.unlocked": {
     "reviewed": true,

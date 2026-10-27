@@ -198,7 +198,7 @@ export function describeCompleteCard(card, level, value, power, sources, labels)
 }
 
 /** Read the adaptation policy used when an authored card appears on an enemy. */
-export function readAbilityAdaptations(source) {
+function readAbilityAdaptations(source) {
   const ast = parseSync(source, { syntax: "typescript", target: "es2022" });
   const declarations = ast.body
     .filter((node) => node.type === "VariableDeclaration")

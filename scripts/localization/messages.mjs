@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { extractProjectContent } from "./content.mjs";
 import { parseSync } from "@swc/core";
+import { runtimeCatalogModule } from "./runtime-catalogs.mjs";
 
 function parameters(text, location) {
   if (!text.trim()) throw new Error(`${location}: localization source cannot be empty`);
@@ -82,10 +83,16 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const contentFile = path.join(root, "src/ui/shared/localization/content.en.json");
   const content = extractProjectContent(root);
   const contentOutput = JSON.stringify(content, null, 2) + "\n";
+  const runtimeFile = path.join(root, "src/ui/shared/localization/shipped-catalogs.ts");
+  const languages = JSON.parse(
+    fs.readFileSync(path.join(root, "src/ui/shared/localization/languages.json"), "utf8"),
+  );
+  const runtimeOutput = runtimeCatalogModule(languages);
   switch (process.argv[2]) {
     case "extract":
       fs.writeFileSync(destination, output);
       fs.writeFileSync(contentFile, contentOutput);
+      fs.writeFileSync(runtimeFile, runtimeOutput);
       console.log(
         `Extracted ${Object.keys(messages).length} explicit UI messages and ${Object.keys(content).length} authored entries`,
       );
@@ -96,6 +103,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
         process.exitCode = 1;
       } else if (!fs.existsSync(contentFile) || fs.readFileSync(contentFile, "utf8") !== contentOutput) {
         console.error("English content catalog is stale; run npm run localization:extract");
+        process.exitCode = 1;
+      } else if (!fs.existsSync(runtimeFile) || fs.readFileSync(runtimeFile, "utf8") !== runtimeOutput) {
+        console.error("Shipped language catalog imports are stale; run npm run localization:extract");
         process.exitCode = 1;
       } else
         console.log(

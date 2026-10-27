@@ -349,6 +349,26 @@ it("persists a qualified language locally and never selects an unavailable catal
   localStorage.removeItem("fauna.language.v1");
 });
 
+it("keeps preview language choices isolated from saved preferences", () => {
+  localStorage.setItem("fauna.language.v1", "ja");
+  const view = render(
+    <LocalizationProvider
+      persist={false}
+      catalogs={{ fr: french }}
+      qualified={["en", "fr"]}
+      systemLanguages={["en"]}
+    >
+      <LanguageProbe />
+    </LocalizationProvider>,
+  );
+  expect(screen.getByLabelText("locale").textContent).toBe("en");
+  fireEvent.click(screen.getByRole("button", { name: "French" }));
+  expect(screen.getByLabelText("locale").textContent).toBe("fr");
+  expect(localStorage.getItem("fauna.language.v1")).toBe("ja");
+  view.unmount();
+  localStorage.removeItem("fauna.language.v1");
+});
+
 it("a late Steam response cannot override a manual language choice", async () => {
   localStorage.removeItem("fauna.language.v1");
   let resolveSteam!: (value: string | null) => void;
@@ -987,7 +1007,7 @@ it("bundles fonts covering each script language's native selector label", () => 
     ["noto-sans-jp.ttf", "日本語"],
     ["noto-sans-sc.ttf", "简体中文"],
     ["noto-sans.ttf", "Русский"],
-  ]) {
+  ] as const) {
     const font = readFileSync(`src/assets/fonts/${file}`);
     for (const character of label)
       expect(fontHasGlyph(font, character.codePointAt(0)!), `${file}: ${character}`).toBe(true);

@@ -173,6 +173,24 @@
     "sourceHash": "9098aa5276c677b60b4a65f096a1ed69f6161a13ecf335375f94b13b669fa040",
     "text": "{{owner}} · {{target}}"
   },
+  "boons.choose": {
+    "reviewed": true,
+    "source": "Choose {{name}}",
+    "sourceHash": "d2914a70ad34110fe155685823ae3cf98726213bd647626a219bc0ea36f9e3b7",
+    "text": "Выбрать: {{name}}"
+  },
+  "boons.inspect": {
+    "reviewed": true,
+    "source": "Inspect {{name}}",
+    "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
+    "text": "Осмотреть: {{name}}"
+  },
+  "boons.pages": {
+    "reviewed": true,
+    "source": "Boon pages",
+    "sourceHash": "b0cb4deca6c137fa6373ffbd09a0dfe7f7287987203753c37d4ee959e0ad7ee7",
+    "text": "Страницы благословений"
+  },
   "campfire.creatureHealth": {
     "reviewed": true,
     "source": "{{name}} Health",
@@ -845,6 +863,108 @@
     "sourceHash": "02a14098de145f01ec9cc17334afdad1cfb0619bc32dbd8e4ced186feb47cfeb",
     "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
   },
+  "content.talent.armor.armored-surge.name": {
+    "reviewed": true,
+    "source": "Armored Surge",
+    "sourceHash": "9a12a9319fa805f33ecdbc9bebcd7731baa74f0a50c10b2fb0c7415fae64f097",
+    "text": "Броневой всплеск"
+  },
+  "content.talent.armor.armored-surge.rule": {
+    "reviewed": true,
+    "source": "Playing a <keyword0>Block</keyword0> card has a {{value0}}% chance to grant {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "f534b95beace1a46baecd1bee684117ff14591b853d2ff7eb59a07b7812c8e92",
+    "text": "Розыгрыш карты типа «<keyword0>Блок</keyword0>» с шансом {{value0}}% даёт {{value1}} ед. <keyword1>брони</keyword1>"
+  },
+  "content.talent.armor.bulwark.name": {
+    "reviewed": true,
+    "source": "Bulwark",
+    "sourceHash": "f56b5138b3b510e6f42eb4ac9326e2eb49eb5fc7dd6e78d3a85819738b56c20a",
+    "text": "Бастион"
+  },
+  "content.talent.armor.fireward.name": {
+    "reviewed": true,
+    "source": "Fireward",
+    "sourceHash": "e871b6a71bb5de1e89e3d3dfcef8b4024a4f81ef0e1715d89f070bde972f17c3",
+    "text": "Огненный оберег"
+  },
+  "content.talent.armor.fireward.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Burn</keyword1> damage taken",
+    "sourceHash": "7dfaa633354fb5a3306584b9434466f6c9b9f40592ff95b22ec2a8b3ab433a93",
+    "text": "Эффект «<keyword0>Броня</keyword0>» снижает получаемый урон типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.talent.armor.iron-guard.name": {
+    "reviewed": true,
+    "source": "Iron Guard",
+    "sourceHash": "8957040993b28ba948405f501e03571a28ee3e4c50465f0a9cb75eb6616b53ac",
+    "text": "Железная стража"
+  },
+  "content.talent.armor.iron-guard.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Physical</keyword0> damage has a {{value0}}% chance to also grant that amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "d538971008d56672b603504c8e8237589dfb15cbb648a2a18b6edcdb181732d4",
+    "text": "Нанесение урона типа «<keyword0>Физический</keyword0>» с шансом {{value0}}% также даёт столько же <keyword1>брони</keyword1>"
+  },
+  "content.talent.armor.last-stand.name": {
+    "reviewed": true,
+    "source": "Last Stand",
+    "sourceHash": "2a047eb521ad3b959015b8d51aa2b2059c1745d19d05f971bbe247a495ca2c11",
+    "text": "Последний рубеж"
+  },
+  "content.talent.armor.last-stand.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% more <keyword0>Armor</keyword0> while below half <keyword1>Health</keyword1>",
+    "sourceHash": "e1126ad37a6409f4e1a214701dd0747d63c437a0f70409a01e33c01c85622042",
+    "text": "Получайте на {{value0}}% больше <keyword0>брони</keyword0>, пока у вас меньше половины <keyword1>здоровья</keyword1>"
+  },
+  "content.talent.armor.purification.name": {
+    "reviewed": true,
+    "source": "Purification",
+    "sourceHash": "f0837d52922a37597451652d5f65f455bd321135bc769d59777f3559b4e67954",
+    "text": "Очищение"
+  },
+  "content.talent.armor.reactive-guard.name": {
+    "reviewed": true,
+    "source": "Reactive Guard",
+    "sourceHash": "4a9155bb7508fd6fd8b88a58b35966b09f7bd0cdcac6d2036ac555bd1dd5b223",
+    "text": "Ответная защита"
+  },
+  "content.talent.armor.reinforced.name": {
+    "reviewed": true,
+    "source": "Reinforced",
+    "sourceHash": "ccbf320270d385008007f5a346894cd38e59d185d3844cec5259d06f9c24acd5",
+    "text": "Усиление"
+  },
+  "content.talent.armor.reinforced.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to double <keyword0>Armor</keyword0> gained",
+    "sourceHash": "59a28254effa32c1e5f1e41d0da316387973d1e4b3e428e956cfac816ba57879",
+    "text": "С шансом {{value0}}% получаемый запас <keyword0>брони</keyword0> удваивается"
+  },
+  "content.talent.armor.steadfast.name": {
+    "reviewed": true,
+    "source": "Steadfast",
+    "sourceHash": "07ee43477355971b90f373a235d71ce7d02be0ac5704132215c5de2835fa3161",
+    "text": "Непоколебимость"
+  },
+  "content.talent.armor.steadfast.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below half, gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "40082aab149bf7cc3e203c37db6e4c8944f41d7909a3fdca16e09b4ab93e1e90",
+    "text": "Когда ваше <keyword0>Здоровье</keyword0> падает ниже половины, получите {{value0}} ед. <keyword1>брони</keyword1>"
+  },
+  "content.talent.armor.thick-hide.name": {
+    "reviewed": true,
+    "source": "Thick Hide",
+    "sourceHash": "95ed10a2ce6c11fbd07d8cf3e3c6e822e2b2cd78ba6944dd5ed4f48003bd945d",
+    "text": "Толстая шкура"
+  },
+  "content.talent.armor.thick-hide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> mitigates <keyword1>Bleed</keyword1> damage taken",
+    "sourceHash": "1265905b37e45bf20953f58a181518a05e54ec8532d6aa19f68481fe2e3fd783",
+    "text": "Эффект «<keyword0>Броня</keyword0>» снижает получаемый урон типа «<keyword1>Кровотечение</keyword1>»"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -929,6 +1049,42 @@
     "sourceHash": "0853cdc18205f19aa815888675cb97a8f1cab1f4dd03d01a48d644165e03794f",
     "text": "Награды последнего боя"
   },
+  "glossary.entries": {
+    "reviewed": true,
+    "source": "Glossary entries",
+    "sourceHash": "aa07487f2c816d366c99be725947feee1b0f8ca8092d103e23a04a0dda83f19c",
+    "text": "Записи глоссария"
+  },
+  "glossary.title": {
+    "reviewed": true,
+    "source": "Glossary & controls",
+    "sourceHash": "4b8e188c960e169292db5b798c26cd373b189ca5f86a5f5088f9339b9152ba37",
+    "text": "Глоссарий и управление"
+  },
+  "inspection.abilities": {
+    "reviewed": true,
+    "source": "Abilities",
+    "sourceHash": "d27559e25324d123747a498a5b382f680829fcbfd507d04c695e9281ee7829f7",
+    "text": "Способности"
+  },
+  "inspection.cardDetails": {
+    "reviewed": true,
+    "source": "{{name}} details",
+    "sourceHash": "9e78e995167ef2385a7e654f43f827e3e37a9bb633c0063dd23b3083dc1f23cf",
+    "text": "Подробности: {{name}}"
+  },
+  "inspection.stars": {
+    "reviewed": true,
+    "source": "{{rank}} of {{maximum}} stars",
+    "sourceHash": "9f2b9c16b5cbc7fca02f838b8be1a12f77c48215ba12d469db60d9338e8f9a6e",
+    "text": "Звёзды: {{rank}} из {{maximum}}"
+  },
+  "inspection.trait": {
+    "reviewed": true,
+    "source": "Trait",
+    "sourceHash": "bf9b5183ac3a4326d7b7693c86f7c0adb180df89f1ba1f86853dd123e7609064",
+    "text": "Черта"
+  },
   "journey.boss": {
     "reviewed": true,
     "source": "Boss: {{name}}",
@@ -953,6 +1109,12 @@
     "sourceHash": "459b7fb38c5a7aede5fa3d62573dc1f6f95f2f38ff54785d80b5eff8928f104e",
     "text": "Встречи"
   },
+  "menu.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "ea7e2e7fa5a3adc7aac1f8ebef9b31984e6e9cfb2ec5e8eb01fd827f96a267da",
+    "text": "Благословения"
+  },
   "menu.collection": {
     "reviewed": true,
     "source": "Collection",
@@ -976,6 +1138,12 @@
     "source": "Glossary",
     "sourceHash": "1af26747d9db05deb8d4fbe5e3a321a8cd3243db84c4119750a0f72af51795db",
     "text": "Справочник"
+  },
+  "menu.logo": {
+    "reviewed": true,
+    "source": "Fauna logo",
+    "sourceHash": "63adc8d8799c137cb44175525d703afca78d02006867d4c15c07c2987c8cf260",
+    "text": "Логотип Fauna"
   },
   "menu.mainMenu": {
     "reviewed": true,
@@ -1007,11 +1175,41 @@
     "sourceHash": "c67f0d8192b23371e580c0809e1ee273d3806c2ce34a9b4b323da247f4bf64c6",
     "text": "Настройки"
   },
+  "menu.talents": {
+    "reviewed": true,
+    "source": "Talents",
+    "sourceHash": "dcc2580b8417a0d0595d997f16e938f5b8944234fc6ef8c9ed5117f3e3814ea2",
+    "text": "Таланты"
+  },
+  "merchant.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "b55998e086ab77556f80015f46195b8db045eb64f62b7749ca6cdc0b10b44966",
+    "text": "Продолжить"
+  },
+  "merchant.leave": {
+    "reviewed": true,
+    "source": "Leave",
+    "sourceHash": "e4bc953ce5048e41e1e1e1e04548cfb1c731fc1967bb0c82d99a4a8a0583e1d9",
+    "text": "Уйти"
+  },
   "navigation.back": {
     "reviewed": true,
     "source": "Back",
     "sourceHash": "153aa33b1a24a8992740a70f39f2e8e5d1fe5c6248c071ff6ea78bbab92e6dca",
     "text": "Назад"
+  },
+  "overlay.boons": {
+    "reviewed": true,
+    "source": "Boons",
+    "sourceHash": "ea7e2e7fa5a3adc7aac1f8ebef9b31984e6e9cfb2ec5e8eb01fd827f96a267da",
+    "text": "Благословения"
+  },
+  "overlay.closeBoons": {
+    "reviewed": true,
+    "source": "Close Boons",
+    "sourceHash": "d8086b642ef7ed7d620e5dc574d23dfe2d1e8666310cbfd7ca4d51cc4c4eb3d3",
+    "text": "Закрыть благословения"
   },
   "overlay.deck": {
     "reviewed": true,
@@ -1534,6 +1732,42 @@
     "source": "{{keyword}} {{count}}; {{description}}",
     "sourceHash": "fcd419a91d9472f513ba9d27f609f223165eb8b0f2c2ce581b3d6e9305f2d6c3",
     "text": "{{keyword}}: {{count}}; {{description}}"
+  },
+  "talents.keywordXp": {
+    "reviewed": true,
+    "source": "{{keyword}} XP",
+    "sourceHash": "e8f9f158698f1ddb7c38f90a7e4d5354576d292af616dc1c2266575b49ebe31d",
+    "text": "Опыт: {{keyword}}"
+  },
+  "talents.requiresPoint": {
+    "reviewed": true,
+    "source": "Requires 1 point",
+    "sourceHash": "0db023b03985627745bea9a3575275165824acc2af91e547a67b823d461160fd",
+    "text": "Требуется 1 очко"
+  },
+  "talents.requiresPointAndRows": {
+    "reviewed": true,
+    "source": "Requires 1 point and all earlier rows",
+    "sourceHash": "5829ffca0d3578d97cacfbff762ecb901714478be2d88f7b16961d15b149b40a",
+    "text": "Требуются 1 очко и все предыдущие ряды"
+  },
+  "talents.requiresRows": {
+    "reviewed": true,
+    "source": "Requires all earlier rows",
+    "sourceHash": "cb8b62fdac1eefb99ccf08af95d82766b893202deb36c8b540436b2872a00a15",
+    "text": "Требуются все предыдущие ряды"
+  },
+  "talents.row": {
+    "reviewed": true,
+    "source": "Row {{row}}",
+    "sourceHash": "3a39bee219fb89b85f319884a04a6dedf2ef0d372e756099e395c53c2170f384",
+    "text": "Ряд {{row}}"
+  },
+  "talents.unlockOne": {
+    "reviewed": true,
+    "source": "Unlock · 1 point",
+    "sourceHash": "e252954566d547ab2fcc9ff4ea57ee727f79de237987ed471a14df45fd72cb0c",
+    "text": "Открыть · 1 очко"
   },
   "talents.unlocked": {
     "reviewed": true,
