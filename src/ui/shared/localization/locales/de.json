@@ -3149,17 +3149,35 @@
     "sourceHash": "83693b32d99ead35306a50fa4cf9c0102172d450340e7cedc70d113243890ba6",
     "text": "Wildwuchs"
   },
+  "content.talent.nature.overgrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "e8140a72556116574784569f8a37c73df81265bca1ee96b737021548915f4963",
+    "text": "<keyword0>Natur</keyword0>-Karten haben eine Chance von {{value0}}%, zweimal gespielt zu werden"
+  },
   "content.talent.nature.photosynthesis.name": {
     "reviewed": true,
     "source": "Photosynthesis",
     "sourceHash": "3ec5f1f685983de633d4cfaa200c942093382bcff5f52fb26925c8c2d3c83337",
     "text": "Photosynthese"
   },
+  "content.talent.nature.photosynthesis.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also restore <keyword1>Health</keyword1>",
+    "sourceHash": "e022b3af1fcdcb3632c806d183a8ee30dd50e475b36ef24e20fc7cb3a050a50e",
+    "text": "Schaden vom Typ <keyword0>Natur</keyword0> hat eine Chance von {{value0}}%, zusätzlich <keyword1>Gesundheit</keyword1> wiederherzustellen"
+  },
   "content.talent.nature.thornskin.name": {
     "reviewed": true,
     "source": "Thornskin",
     "sourceHash": "34eb19c5224d81cddc51e964f0b44e0c39f08445c8a8aa5d1c3715a0593d4aa1",
     "text": "Dornenhaut"
+  },
+  "content.talent.nature.thornskin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also grant <keyword1>Armor</keyword1>",
+    "sourceHash": "3b0b448057a08652127584575b309218f6bdae6ed05a122f898c96c0cb54513c",
+    "text": "Schaden vom Typ <keyword0>Natur</keyword0> hat eine Chance von {{value0}}%, zusätzlich <keyword1>Rüstung</keyword1> zu gewähren"
   },
   "content.talent.nature.toxic-pollen.name": {
     "reviewed": true,
@@ -3178,6 +3196,12 @@
     "source": "Windstep",
     "sourceHash": "73f828acbc2afb2675190b1add444cfd198a680938b68c036909f8d9452e0010",
     "text": "Windschritt"
+  },
+  "content.talent.nature.windstep.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next <keyword1>Nature</keyword1> card is free",
+    "sourceHash": "ee1da62330f8e7674f66310c1bac0ebc2ec233b1b61a95aae685b66febbbc76b",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, ist deine nächste <keyword1>Natur</keyword1>-Karte kostenlos"
   },
   "content.talent.physical.armored-fists.name": {
     "reviewed": true,

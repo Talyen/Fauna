@@ -3149,17 +3149,35 @@
     "sourceHash": "d588291b9d22c1121262c7c3296ddd17ae4345d8e48a2ecf91c20b392aec4a7c",
     "text": "繁茂"
   },
+  "content.talent.nature.overgrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "b26a64a9f2eea8be45369bfcaba19eb78d889b8a3e155cb4679e64dc5b37cca8",
+    "text": "<keyword0>自然</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
   "content.talent.nature.photosynthesis.name": {
     "reviewed": true,
     "source": "Photosynthesis",
     "sourceHash": "8966ab1747f5f6bd6f29ee22c99127760d7059381cbdec4ac56252b790cfdd0e",
     "text": "光合成"
   },
+  "content.talent.nature.photosynthesis.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also restore <keyword1>Health</keyword1>",
+    "sourceHash": "34355d8f14962f1a0345dd9c515daa8a7a0d70453f9bc713cb68f0ed01254ca4",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で<keyword1>体力</keyword1>も回復する"
+  },
   "content.talent.nature.thornskin.name": {
     "reviewed": true,
     "source": "Thornskin",
     "sourceHash": "abcc3b7a9c2f432bbeed84de54af3924b53ab659ba92aa9c440fa3ccdfa31406",
     "text": "棘の肌"
+  },
+  "content.talent.nature.thornskin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also grant <keyword1>Armor</keyword1>",
+    "sourceHash": "75180299ebf11bb0c5fff81e220354cf9b6fb88d8b6efb7d7b57de3805287b97",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で自身に<keyword1>装甲</keyword1>も付与する"
   },
   "content.talent.nature.toxic-pollen.name": {
     "reviewed": true,
@@ -3178,6 +3196,12 @@
     "source": "Windstep",
     "sourceHash": "b3cebde57933d42e1e01c96aee22e8adbb159d3093577e9b36f057f8d1bc7100",
     "text": "風の歩み"
+  },
+  "content.talent.nature.windstep.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next <keyword1>Nature</keyword1> card is free",
+    "sourceHash": "dc726122a6438d5f227a96018b8ea9e1de2ba639bd4f6c080d535e6592f369cf",
+    "text": "<keyword0>回避</keyword0>時に次の<keyword1>自然</keyword1>カードが無料になる"
   },
   "content.talent.physical.armored-fists.name": {
     "reviewed": true,

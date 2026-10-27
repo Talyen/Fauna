@@ -3197,17 +3197,35 @@
     "sourceHash": "f0832e9e0c1ba59f6417dafed54ac925abb6682476df262dd3b576592f76cdc9",
     "text": "Prolifération"
   },
+  "content.talent.nature.overgrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "b8385c8468ede4be7962703edcf7a377c9ec47224e92c9269811c300f1512944",
+    "text": "Les cartes <keyword0>Nature</keyword0> ont {{value0}}% de chances d’être jouées deux fois"
+  },
   "content.talent.nature.photosynthesis.name": {
     "reviewed": true,
     "source": "Photosynthesis",
     "sourceHash": "7d8856279b55cd65c83731542382839b9bfc944de4675e0bdae1f04b4580815a",
     "text": "Photosynthèse"
   },
+  "content.talent.nature.photosynthesis.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also restore <keyword1>Health</keyword1>",
+    "sourceHash": "881cfaa0fc182a57e477f4820e06e49145f5af063e444d1c5723b070ba9e1410",
+    "text": "Les dégâts de <keyword0>Nature</keyword0> ont {{value0}}% de chances de restaurer aussi de la <keyword1>Santé</keyword1>"
+  },
   "content.talent.nature.thornskin.name": {
     "reviewed": true,
     "source": "Thornskin",
     "sourceHash": "4d31b118fdcb206c2b6b94a2f43ddf9b20276d29b8bc41d516376f67c53395df",
     "text": "Peau d’épines"
+  },
+  "content.talent.nature.thornskin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also grant <keyword1>Armor</keyword1>",
+    "sourceHash": "00ba6ec00310b2f45388693cd3f7d852acf527963835fbe928938f33ce3d07f6",
+    "text": "Les dégâts de <keyword0>Nature</keyword0> ont {{value0}}% de chances d’accorder aussi de l’<keyword1>Armure</keyword1>"
   },
   "content.talent.nature.toxic-pollen.name": {
     "reviewed": true,
@@ -3226,6 +3244,12 @@
     "source": "Windstep",
     "sourceHash": "272b18d7063faca2bd02ec7abcdf98e664fa763692049daa251679b33a82082e",
     "text": "Pas du vent"
+  },
+  "content.talent.nature.windstep.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next <keyword1>Nature</keyword1> card is free",
+    "sourceHash": "5fe22ac68a0f8c2e04ec8d8d94ceba21ea25c1c86bd8d38a6e37d1b4a310cd28",
+    "text": "Quand vous <keyword0>Esquivez</keyword0>, votre prochaine carte <keyword1>Nature</keyword1> est gratuite"
   },
   "content.talent.physical.armored-fists.name": {
     "reviewed": true,
