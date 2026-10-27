@@ -2433,7 +2433,7 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
     "sourceHash": "81abe6f441f1f752648430cbe09814388bd3d35b1530ea6835d01735ad566ca3",
-    "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Einfrieren</keyword1>-Aufbau von Verbündeten / Erhalte {{value0}}% <keyword2>Ausweichen</keyword2> bis zum nächsten Zug"
+    "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Frost</keyword1>-Aufbau von Verbündeten / Erhalte {{value0}}% <keyword2>Ausweichen</keyword2> bis zum nächsten Zug"
   },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
@@ -3261,7 +3261,7 @@
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
     "sourceHash": "e30ef20a7235692a2666f0270cb8832e3afb8eb0385986f5824c4f8dc177aee0",
-    "text": "Verursache {{value0}} <keyword0>Einfrieren</keyword0>-Schaden; <keyword1>Blende</keyword1> alle Gegner"
+    "text": "Verursache {{value0}} <keyword0>Frost</keyword0>-Schaden; <keyword1>Blende</keyword1> alle Gegner"
   },
   "content.card.pollenmoth-attack.name": {
     "reviewed": true,
@@ -3585,7 +3585,7 @@
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
     "sourceHash": "f1645fde8121db93a55ef32ef75cdc26ba27af5187d2722ac2f273b46bb93925",
-    "text": "Verursache {{value0}} <keyword0>Einfrieren</keyword0>-Schaden bei allen Gegnern; <keyword1>Reinige</keyword1> alle Verbündeten"
+    "text": "Verursache {{value0}} <keyword0>Frost</keyword0>-Schaden bei allen Gegnern; <keyword1>Reinige</keyword1> alle Verbündeten"
   },
   "content.card.shadebrim-draw.name": {
     "reviewed": true,
@@ -3867,7 +3867,7 @@
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
     "sourceHash": "3f375ea5fba8c5c6d7239d5356883e990260f482fbd1d345869c4fb834b1bc9c",
-    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Hebe</keyword1> den nächsten <keyword2>Einfrieren</keyword2>-Schaden auf"
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Hebe</keyword1> den nächsten <keyword2>Frost</keyword2>-Schaden auf"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "reviewed": true,
@@ -4077,7 +4077,7 @@
     "reviewed": true,
     "source": "Keyword XP",
     "sourceHash": "270a8876fb1ec2d1f226cbdd603cd20de6f6dd533b1cd2c15e5bacec008470fe",
-    "text": "Stichwort-EP"
+    "text": "Schlüsselwort-EP"
   },
   "content.glossary.keyword.armor.definition.rule": {
     "reviewed": true,
@@ -4149,7 +4149,7 @@
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
     "sourceHash": "1a33c3013db49021c6b059953fc146d7cb5376f2f022e8f755f172c3017b745a",
-    "text": "Schaden baut <keyword0>Einfrieren</keyword0> auf; Erreicht der Aufbau die Hälfte der maximalen <keyword1>Gesundheit</keyword1>, wird ein Zug übersprungen; Nach der Erholung besteht {{value0}} Züge lang gemeinsame Immunität gegen <keyword2>Betäubung</keyword2> und <keyword3>Frost</keyword3>"
+    "text": "Schaden baut <keyword0>Frost</keyword0> auf; Erreicht der Aufbau die Hälfte der maximalen <keyword1>Gesundheit</keyword1>, wird ein Zug übersprungen; Nach der Erholung besteht {{value0}} Züge lang gemeinsame Immunität gegen <keyword2>Betäubung</keyword2> und <keyword3>Frost</keyword3>"
   },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
@@ -6591,7 +6591,7 @@
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "sourceHash": "840a10d77fdbd871ed91f96723463785edc6d69e809075e77c1181b185f0c2c0",
-    "text": "Den nächsten <keyword1>Einfrieren</keyword1>-Schaden <keyword0>aufheben</keyword0>; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
+    "text": "Den nächsten <keyword1>Frost</keyword1>-Schaden <keyword0>aufheben</keyword0>; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
@@ -7179,7 +7179,7 @@
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
     "sourceHash": "6b5517965131ab9c1a1fcbf9cacd44079c8e54ce0826c7ff2043c88b4f8456c1",
-    "text": "Wenn du <keyword0>ausweichst</keyword0>, <keyword1>reinige</keyword1> deinen <keyword2>Betäubungs</keyword2>- und <keyword3>Einfrieren</keyword3>-Aufbau"
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, <keyword1>reinige</keyword1> deinen <keyword2>Betäubungs</keyword2>- und <keyword3>Frost</keyword3>-Aufbau"
   },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,
@@ -7191,7 +7191,7 @@
     "reviewed": true,
     "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
     "sourceHash": "51d91f4038c350ffd7288aacba90ef65a11f18b64bd4802e331ce25315ca1aae",
-    "text": "Senke die <keyword0>Einfrieren</keyword0>-Schwellen von Gegnern um {{value0}} Prozentpunkte"
+    "text": "Senke die <keyword0>Frost</keyword0>-Schwellen von Gegnern um {{value0}} Prozentpunkte"
   },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
@@ -8415,7 +8415,7 @@
     "reviewed": true,
     "source": "+{{amount}} keyword XP",
     "sourceHash": "9dfc989a749dd4cec17c19c6eac8aca0ae16520937356e6d582211dacccea07f",
-    "text": "+{{amount}} Stichwort-EP"
+    "text": "+{{amount}} Schlüsselwort-EP"
   },
   "earnings.lastBattle": {
     "reviewed": true,
@@ -9321,7 +9321,7 @@
     "reviewed": true,
     "source": "Keyword XP earned",
     "sourceHash": "07c37a3269ca85eb0eb7b5ebbd40b67e6639838516e90e1d95f2d8e742081acf",
-    "text": "Stichwort-EP erhalten"
+    "text": "Schlüsselwort-EP erhalten"
   },
   "progress.levelShort": {
     "reviewed": true,
@@ -9453,7 +9453,7 @@
     "reviewed": true,
     "source": "Choose a Recruit",
     "sourceHash": "7ad719dc92a0e671f93f501fa5a4044dd3c57d22d069cd3480118d8c660bc050",
-    "text": "Wähle eine Rekrutierung"
+    "text": "Wähle eine Kreatur"
   },
   "rewards.new": {
     "reviewed": true,
@@ -9471,7 +9471,7 @@
     "reviewed": true,
     "source": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars",
     "sourceHash": "3508417872e4b91bdceb460ea7c12871fb5b50004287ec95178dc44c6ff998c7",
-    "text": "{{name}}: {{rank}} bis {{next}} von {{maximum}} Sternen"
+    "text": "{{name}}: von {{rank}} auf {{next}} von {{maximum}} Sternen"
   },
   "rewards.recruitPages": {
     "reviewed": true,

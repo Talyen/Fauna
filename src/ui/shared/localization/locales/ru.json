@@ -8295,13 +8295,13 @@
     "reviewed": true,
     "source": "Recruit {{name}}",
     "sourceHash": "4bbc71441ff352ca8820ce2c4b2f30ac5eaa6b049a28ea07dc7bce82c49fc206",
-    "text": "Призвать: {{name}}"
+    "text": "Завербовать: {{name}}"
   },
   "creature.recruitAction": {
     "reviewed": true,
     "source": "Recruit",
     "sourceHash": "e30321c9335b247e0c869475df74992e1061af69ccf1435dab62d53402ffb510",
-    "text": "Призвать"
+    "text": "Завербовать"
   },
   "deck.discardEmpty": {
     "reviewed": true,
@@ -8961,7 +8961,7 @@
     "reviewed": true,
     "source": "Glossary",
     "sourceHash": "1af26747d9db05deb8d4fbe5e3a321a8cd3243db84c4119750a0f72af51795db",
-    "text": "Справочник"
+    "text": "Глоссарий"
   },
   "menu.logo": {
     "reviewed": true,

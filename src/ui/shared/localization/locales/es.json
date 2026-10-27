@@ -207,7 +207,7 @@
     "reviewed": true,
     "source": "Campfire",
     "sourceHash": "8cc6a7c4e8bd66214999d9841d70d462dbbda3895f3157da590f1df116a3cb98",
-    "text": "Fogata"
+    "text": "Hoguera"
   },
   "campfire.pages": {
     "reviewed": true,
@@ -231,7 +231,7 @@
     "reviewed": true,
     "source": "Visit Campfire",
     "sourceHash": "784b2e08bb993e0822ae2f9866c5a812e4a5f25d2794950a798666a933c91d6c",
-    "text": "Visitar la fogata"
+    "text": "Visitar la hoguera"
   },
   "card.actionLabel": {
     "reviewed": true,
@@ -2307,7 +2307,7 @@
     "reviewed": true,
     "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
     "sourceHash": "016a5a1c1743f2847d440f3049054e4b351f7310b98a472a9c306920053fe4a7",
-    "text": "Cartas robadas: {{value0}} / <keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados"
+    "text": "Roba {{value0}} cartas / <keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados"
   },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
@@ -2445,13 +2445,13 @@
     "reviewed": true,
     "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
     "sourceHash": "2970eac4acaab3c1332b2eca73c1bd874b2ef17beebfa8463d17cb9f8376fd13",
-    "text": "Cartas robadas: {{value0}}; Restaura {{value1}} de <keyword0>Salud</keyword0>"
+    "text": "Roba {{value0}} cartas; Restaura {{value1}} de <keyword0>Salud</keyword0>"
   },
   "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
     "sourceHash": "db306ec043e919fd2b2fd3e4a6bb0d119d105af17f1adf6e50b91dd1f0fcc9d7",
-    "text": "Cartas robadas: {{value0}}; Restaura {{value1}} de <keyword0>Salud</keyword0>"
+    "text": "Roba {{value0}} carta; Restaura {{value1}} de <keyword0>Salud</keyword0>"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -2541,7 +2541,7 @@
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
     "sourceHash": "6d783a924d009c32421276166480fe968449265cebd67739e984eb10783ae5d1",
-    "text": "Otorga un {{value0}}% de <keyword0>Esquiva</keyword0> a todos los aliados hasta tu próximo turno; Cartas robadas: {{value1}}"
+    "text": "Otorga un {{value0}}% de <keyword0>Esquiva</keyword0> a todos los aliados hasta tu próximo turno; Roba {{value1}} carta"
   },
   "content.card.captoad-attack.name": {
     "reviewed": true,
@@ -2733,7 +2733,7 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "sourceHash": "6658e705dd079e69d688c5bfa2ccc5ae0d7bd55a931560e1c2d40a320c6d804a",
-    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}; Cartas robadas: {{value1}}"
+    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}; Roba {{value1}} carta"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
@@ -2745,7 +2745,7 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "sourceHash": "2c3e1606b3f6f7c022dabe3206036d261095f521184f3a264fdadb820b9feb92",
-    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}; Cartas robadas: {{value1}}"
+    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}; Roba {{value1}} carta"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
@@ -3759,7 +3759,7 @@
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
     "sourceHash": "a72f674a28871f1fdf24395bc9fe2c2219fc8eb87d10208ea6c3127c635ee514",
-    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados; Cartas robadas: {{value1}}"
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados; Roba {{value1}} carta"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -8571,7 +8571,7 @@
     "reviewed": true,
     "source": "{{name}} was discovered again; your roster is unchanged.",
     "sourceHash": "753e9c3a668011d32ec22ce2ad50ec6de8d28d66c789b717b6db3a62abc094d9",
-    "text": "Nuevo descubrimiento: {{name}}; tu equipo no cambia."
+    "text": "Redescubrimiento: {{name}}; tu equipo no cambia."
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -8745,13 +8745,13 @@
     "reviewed": true,
     "source": "{{name}} nullifies {{status}}",
     "sourceHash": "10ee9586d4f5e045e969bfcab9245622816ca9aa6d269f5a36d0b194479ac2ea",
-    "text": "{{name}} anula {{status}}"
+    "text": "{{name}} nulifica {{status}}"
   },
   "log.nullifyFreezeDamage": {
     "reviewed": true,
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "f4377085303b31f5d0310756addeea9d28e2c9d7016357b345d880cd03d08137",
-    "text": "{{name}} anula el daño de Congelación"
+    "text": "{{name}} nulifica el daño de Congelación"
   },
   "log.reachDeathsDoor": {
     "reviewed": true,
@@ -9280,7 +9280,7 @@
     "reviewed": true,
     "source": "Possible knockout",
     "sourceHash": "25bbd456709badb695fc5271abf5f7d71bf736d97a0f3939e8442972804a6354",
-    "text": "Posible derrota"
+    "text": "Puede quedar fuera de combate"
   },
   "preview.possibleOutcomes": {
     "reviewed": true,

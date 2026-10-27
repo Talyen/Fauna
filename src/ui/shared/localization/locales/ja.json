@@ -267,7 +267,7 @@
     "reviewed": true,
     "source": "No creatures in this view",
     "sourceHash": "dfe49aa3952794c492a2bae78f1f78a499ff6c6bc62d6ce061881083709c58f1",
-    "text": "この画面に生き物はいません"
+    "text": "この画面にクリーチャーはいません"
   },
   "collection.filter": {
     "reviewed": true,
@@ -1407,7 +1407,7 @@
     "reviewed": true,
     "source": "<keyword0>Freeze</keyword0> hits also add half their <keyword1>Freeze</keyword1> buildup to another enemy",
     "sourceHash": "77cf9b972de6b01697d0f3a20d563dcf60916ad739f1bc5af6c80f41cd7fb2e3",
-    "text": "<keyword0>凍結</keyword0>攻撃は、その<keyword1>凍結</keyword1>蓄積の半分を別の敵にも与える"
+    "text": "<keyword0>凍結</keyword0>のヒットは、その<keyword1>凍結</keyword1>蓄積の半分を別の敵にも与える"
   },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
@@ -3183,7 +3183,7 @@
     "reviewed": true,
     "source": "<keyword0>Resurrect</keyword0> an ally",
     "sourceHash": "d645fe7c9a6a0cfe5e957c591d27a6815df6773474047e9fdad908d3ea3ba8c5",
-    "text": "味方を1体<keyword0>蘇生</keyword0>"
+    "text": "味方を1体<keyword0>復活</keyword0>させる"
   },
   "content.card.orifable-attack.name": {
     "reviewed": true,
@@ -4047,7 +4047,7 @@
     "reviewed": true,
     "source": "Gold earned in battle carries between journeys; Spend Gold at Boon Merchants on Boons for the current journey; Gold is not a keyword or talent category",
     "sourceHash": "363b26c1cbc3bff1e374c6a98fe28544c76ac5cadce261932ac60fb681a20811",
-    "text": "戦闘で得たゴールドは旅をまたいで保持される; 祝福商人で現在の旅の祝福を購入できる; ゴールドはキーワードでも才能のカテゴリでもない"
+    "text": "戦闘で得たゴールドは旅をまたいで保持される; 祝福商人で現在の旅の祝福を購入できる; ゴールドはキーワードでもタレントのカテゴリでもない"
   },
   "content.glossary.gold.term.rule": {
     "reviewed": true,
@@ -4167,7 +4167,7 @@
     "reviewed": true,
     "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "bb6441fd170f9398de509d3aa940161c6aadd16983a45279e7c40ac064b88cab",
-    "text": "<keyword0>光</keyword0>ダメージ; 耐性や状態効果があるとは限らない"
+    "text": "<keyword0>光</keyword0>ダメージ; 耐性や状態効果を意味しない"
   },
   "content.glossary.keyword.mana.definition.rule": {
     "reviewed": true,
@@ -4179,7 +4179,7 @@
     "reviewed": true,
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "e5430c262b9b46377350f662643f0a1aaa0d22fb3ae50648281adea563b0c71e",
-    "text": "<keyword0>自然</keyword0>ダメージ；耐性や状態効果は付随しない"
+    "text": "<keyword0>自然</keyword0>ダメージ；耐性や状態効果を意味しない"
   },
   "content.glossary.keyword.negate.definition.rule": {
     "reviewed": true,
@@ -4317,13 +4317,13 @@
     "reviewed": true,
     "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
     "sourceHash": "f25c29843dcaef88e09a17debd4e8fda1d66ba97522f2acd44d401672bc36770",
-    "text": "キーワード経験値でそのキーワードの才能ポイントを獲得; 最初のポイントには経験値{{value0}}、次はさらに{{value1}}、その次は{{value2}}必要; 各段を完成させると次の段が開く; 才能は該当するすべてのクリーチャーにすぐ適用; カテゴリーはいつでもリセットでき、経験値を維持したまま全ポイントが戻る"
+    "text": "キーワード経験値でそのキーワードのタレントポイントを獲得; 最初のポイントには経験値{{value0}}、次はさらに{{value1}}、その次は{{value2}}必要; 各段を完成させると次の段が開く; タレントは該当するすべてのクリーチャーにすぐ適用; カテゴリーはいつでもリセットでき、経験値を維持したまま全ポイントが戻る"
   },
   "content.glossary.talents.term.rule": {
     "reviewed": true,
     "source": "Talents",
     "sourceHash": "3dbf6443e070712fbc6a295e5d03b756e1142980facae998ff11013700865824",
-    "text": "才能"
+    "text": "タレント"
   },
   "content.glossary.turn.definition.rule": {
     "reviewed": true,
@@ -8397,7 +8397,7 @@
     "reviewed": true,
     "source": "Choose your starter",
     "sourceHash": "63808663e5628b0023b10f13ea9b04cd4bc07b88a7373c64466abc51ebd461bc",
-    "text": "最初の生き物を選ぶ"
+    "text": "最初のクリーチャーを選ぶ"
   },
   "draft.team": {
     "reviewed": true,
@@ -9344,7 +9344,7 @@
     "reviewed": true,
     "source": "Incoming creature",
     "sourceHash": "18f9b32c405344d045b602a085a0051c1a3b812f77c86cddb12de27d2ca5430a",
-    "text": "新しい生き物"
+    "text": "新しいクリーチャー"
   },
   "recruit.keepTeam": {
     "reviewed": true,
@@ -9362,7 +9362,7 @@
     "reviewed": true,
     "source": "Replace a creature",
     "sourceHash": "a86633bb177c864315258b93382cabac8f86d1f25bc3156750bfb8b07d6d9b32",
-    "text": "生き物を入れ替える"
+    "text": "クリーチャーを入れ替える"
   },
   "recruit.team": {
     "reviewed": true,

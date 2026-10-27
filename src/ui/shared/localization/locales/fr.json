@@ -1503,7 +1503,7 @@
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> beyond an ally’s maximum <keyword1>Health</keyword1> restores half the excess to the most injured other ally",
     "sourceHash": "785b416b3e855f10f74ba62764883549ba0282cc69137bc86a94e2ec94485f96",
-    "text": "Une <keyword0>Guérison</keyword0> au-delà de la <keyword1>Santé</keyword1> maximale d’un allié rend la moitié de l’excédent à l’autre allié le plus blessé"
+    "text": "Les <keyword0>soins</keyword0> dépassant la <keyword1>Santé</keyword1> maximale d’un allié rendent la moitié de l’excédent à l’autre allié le plus blessé"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -1623,7 +1623,7 @@
     "reviewed": true,
     "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
     "sourceHash": "236881127b524ee33dccda84795a192801be8e120ba2bfd089055a7d5452266a",
-    "text": "Sortir du combat <keyword0>purifie</keyword0> l’<keyword1>Étourdissement</keyword1> et le <keyword2>Gel</keyword2>"
+    "text": "Lors d’une permutation, la créature sortante <keyword0>purifie</keyword0> l’<keyword1>Étourdissement</keyword1> et le <keyword2>Gel</keyword2>"
   },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
@@ -2307,7 +2307,7 @@
     "reviewed": true,
     "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
     "sourceHash": "a491167e7de66cfb532f1a1277c0e85a3c092cc9c2c05b120cbffbc9d03f87c5",
-    "text": "Cartes piochées : {{value0}} / <keyword0>Purifie</keyword0> l’<keyword1>Aveuglement</keyword1> des alliés"
+    "text": "Piochez {{value0}} cartes / <keyword0>Purifiez</keyword0> l’<keyword1>Aveuglement</keyword1> des alliés"
   },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
@@ -2445,13 +2445,13 @@
     "reviewed": true,
     "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
     "sourceHash": "9177199390eb8b0e48741b30c19832d477c0c45a5acc0d3fc3ab5583d307ab9a",
-    "text": "Cartes piochées : {{value0}}; Restaure {{value1}} <keyword0>Santé</keyword0>"
+    "text": "Piochez {{value0}} cartes; Restaurez {{value1}} <keyword0>Santé</keyword0>"
   },
   "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
     "sourceHash": "7e31db41b1a8958f6898a557ddb3c024986a9ef2e197ea85af905d732497fb14",
-    "text": "Cartes piochées : {{value0}}; Restaure {{value1}} <keyword0>Santé</keyword0>"
+    "text": "Piochez {{value0}} carte; Restaurez {{value1}} <keyword0>Santé</keyword0>"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -2541,7 +2541,7 @@
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
     "sourceHash": "1ede4970154bfaeedb7bf183ff9f8df945e23aa1c7fb7c1b7ae6ab8eb0296b4e",
-    "text": "Confère {{value0}}% d’<keyword0>Esquive</keyword0> à tous les alliés jusqu’à votre prochain tour; Cartes piochées : {{value1}}"
+    "text": "Conférez {{value0}}% d’<keyword0>Esquive</keyword0> à tous les alliés jusqu’à votre prochain tour; Piochez {{value1}} carte"
   },
   "content.card.captoad-attack.name": {
     "reviewed": true,
@@ -2733,7 +2733,7 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "sourceHash": "44725acf10d77eef32098bb1be65889b06340f4d83cf801d948c361724233644",
-    "text": "<keyword0>Purifie</keyword0> les effets néfastes de chaque allié : {{value0}}; Cartes piochées : {{value1}}"
+    "text": "<keyword0>Purifiez</keyword0> les effets néfastes de chaque allié : {{value0}}; Piochez {{value1}} carte"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
@@ -2745,7 +2745,7 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "sourceHash": "709e6437baa095b40ee61515ae5fd69fa3214d9e1b67a3fe70c6dba30af5d772",
-    "text": "<keyword0>Purifie</keyword0> les effets néfastes de chaque allié : {{value0}}; Cartes piochées : {{value1}}"
+    "text": "<keyword0>Purifiez</keyword0> les effets néfastes de chaque allié : {{value0}}; Piochez {{value1}} carte"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
@@ -3759,7 +3759,7 @@
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
     "sourceHash": "64515169d5c96989cbe058c81d4007fbe18c3e73ce3e175dbda07dc0d4a82e72",
-    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> à tous les alliés; Cartes piochées : {{value1}}"
+    "text": "Restaurez {{value0}} <keyword0>Santé</keyword0> à tous les alliés; Piochez {{value1}} carte"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -5859,37 +5859,37 @@
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
     "sourceHash": "8436b6c621dc7fb432e3a04ce984c8e378fca444db845a7fdfbe0ca7f5f28b0c",
-    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
   },
   "content.species.ravelland.passive.1.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
     "sourceHash": "66e0f6c2a8f302c12c19ed0c72c7d4949b2884b989e435d9f81b6ec243ae93c2",
-    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
   },
   "content.species.ravelland.passive.2.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
     "sourceHash": "79dbd7bab9649f370ee2d0603c39dacba04734054620c9d6548fe6cb960c8d4d",
-    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
   },
   "content.species.ravelland.passive.3.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
     "sourceHash": "34f31813cc461915344bcfaf45aa1ca6d84c363ab0e4a6f619a55f5e6d530679",
-    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
   },
   "content.species.ravelland.passive.4.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
     "sourceHash": "2407d6e72b04a457798fb55c581e351ddc71f7285cf6933269720ba01395b38a",
-    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
   },
   "content.species.ravelland.passive.5.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
     "sourceHash": "d8f2711e5f1136bdc2553436c2303a193047533f07f7036230169216b8ee4d99",
-    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+    "text": "Gagnez {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent votre <keyword1>Blocage</keyword1>"
   },
   "content.species.ravelland.title": {
     "reviewed": true,
@@ -8571,7 +8571,7 @@
     "reviewed": true,
     "source": "{{name}} was discovered again; your roster is unchanged.",
     "sourceHash": "4c2c6dfa8f425ac7dd9da8ef20bcd82374dbe96e790083c8a2c254f1327ffc78",
-    "text": "Nouvelle découverte : {{name}}; votre groupe reste inchangé."
+    "text": "Redécouverte : {{name}}; votre groupe reste inchangé."
   },
   "log.criticalDamage": {
     "reviewed": true,
