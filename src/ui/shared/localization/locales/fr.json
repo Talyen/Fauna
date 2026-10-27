@@ -2801,6 +2801,18 @@
     "sourceHash": "6b2a29bba8a75e566bf4889aed1368913cfb0b18e6f95c89a5103d02c3f1bddb",
     "text": "Les alliés récupèrent {{value0}} de <keyword0>Santé</keyword0> lorsqu’ils entrent en jeu par échange"
   },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "3d2f1f0ccf50b154917d7df2876e13a91ef6d0182b9200a4fa065a517fe0a200",
+    "text": "Le doux sanctuaire"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "afcc1eb903488fa9bb0fa046ba8edc546279179231ca5fe71da166da1ba52fd7",
+    "text": "Doux passage"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2836,6 +2848,12 @@
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
     "sourceHash": "bfb213df52896d0577a0110831b74a5764f02e8e82fca90a6e83337ba2218b9e",
     "text": "Les alliés gagnent {{value0}}% de votre chance d’<keyword0>Esquive</keyword0>"
+  },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "30c8327647c1ea0ff5aaf0866fbf554719149c4da407504cc9136f6b96c7a59b",
+    "text": "Le mirage mouvant"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -2879,6 +2897,18 @@
     "sourceHash": "8384f0b731167019061d598ede3292c00738469a0c4d1ceacb6c74913ccdf014",
     "text": "Lorsque votre <keyword0>Armure</keyword0> se brise, inflige {{value0}} dégâts de <keyword1>Brûlure</keyword1> à tous les ennemis"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "f390d21989a656662c7686f6d1569faaa6713203cf315543771788371f0820ec",
+    "text": "La fournaise couvante"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "2ea5bf7af69c0ae0fe28aa642d8c5731c5a6159058f27845c09f71df103538da",
+    "text": "Carapace en fusion"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2915,6 +2945,18 @@
     "sourceHash": "d4b11dc19d99320e0f43f4a68d502cfdea7113733c4e2a496562ef8108d439b5",
     "text": "Les effets aléatoires alliés qui échouent ont {{value0}}% de chances d’être relancés une fois"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "332067889bdc51538200fd898f03180b648f2e8189f70379306fcbc93f50fa28",
+    "text": "Un souhait prend son envol"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "ac7f9ad6647d121efc35321143960d14ad9db2d16f417f97e14e7bbd2f497ea2",
+    "text": "Bonne fortune"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
@@ -2950,6 +2992,18 @@
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "852ce922d9e63d350cc8ff50af029674dc327272817cc4d73813bb76f8305a1a",
     "text": "Les attaques de Glintstride infligent {{value0}} dégâts de <keyword0>Lumière</keyword0> supplémentaires aux ennemis <keyword1>aveuglés</keyword1>"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "4ca9ff57708ad016304ee5f6cbbe31529c4dab3e65ab3ef806cb4c60eec1bb6b",
+    "text": "Un pas au-delà du reflet"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "de1a06375e09f8cf74e318851a465804e3935a5bdbfdd9d69a3a5a65d924297b",
+    "text": "À contre-pied"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,

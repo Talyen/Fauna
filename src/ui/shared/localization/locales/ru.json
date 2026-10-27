@@ -2789,6 +2789,18 @@
     "sourceHash": "629256f38f72be17c309c460e36b60dda6b551b20b073aaf81ec2cded16b1b28",
     "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
   },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "6a2122fe1ed185c6570a6adc7aec64711df8bf31fd7583aa6f2441d1d7707d93",
+    "text": "Тихое убежище"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "f658f0e12d4fdc4c32ce2ed57069c49742137bd16057d7ac10eec3208d55fccd",
+    "text": "Бережный проход"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2824,6 +2836,12 @@
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
     "sourceHash": "ab78aafe285efa73ee58c7a160c3611daa836f6a263002b4bb8aa257a60a2015",
     "text": "Союзники получают {{value0}}% от вашего шанса <keyword0>уклонения</keyword0>"
+  },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "ab643e3f879e5c540a76569d012e170fd271ef57fa54c8300ba3b3229330b4ec",
+    "text": "Меняющийся мираж"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -2867,6 +2885,18 @@
     "sourceHash": "ee3cf2f3222425924769220e1265b13dbc052d3b8fe76252910f71b1d6715b4c",
     "text": "Когда ваша <keyword0>броня</keyword0> ломается, нанесите всем врагам {{value0}} урона типа «<keyword1>Горение</keyword1>»"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "e8a16cd73f0e4908d5b8abce2baedb0fcf9699ed2c1c1cfdc9470921c530a0cf",
+    "text": "Тлеющая печь"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "149bebe830f49d6a848811c87e6f50bed5c9ddbfc577aa1b430ba503fd0bbb8a",
+    "text": "Расплавленный панцирь"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,6 +2933,18 @@
     "sourceHash": "1a7aa2b14d78fadf52ad82db474f12a00e02077c7dc0679c1979b2bbe9894ee8",
     "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "ff398cd662f73e0dbd1cdb29def859e13e0de38eec0d5a37a6ab17d7aa4c6664",
+    "text": "Желание в полёте"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "08e105f5221b42d8df606d5ad4ba677de972111ff68f1b78557ede787d49e5f2",
+    "text": "Удача"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
@@ -2938,6 +2980,18 @@
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "654d0f55e907914e7b6cbcc511bd537e1cb12836bbaa9b516dd2aae02cc9ac17",
     "text": "Атаки Glintstride наносят <keyword1>ослеплённым</keyword1> врагам дополнительно {{value0}} урона типа «<keyword0>Свет</keyword0>»"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "83209fecf7cc414000aa1ea25fb947d5960097435af6dfdb08e3710ce861e8c1",
+    "text": "Шаг за пределы сияния"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "8e35f791f36277dcad6032db02267a146b0e9b2e438482087d6bcfa2f53a4a23",
+    "text": "Не с той ноги"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,

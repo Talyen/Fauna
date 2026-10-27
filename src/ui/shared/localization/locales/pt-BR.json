@@ -2789,6 +2789,18 @@
     "sourceHash": "c501954b31c4638802132d1d11e47c3501aa4fac7f3e7414e95eb8ffa1f85d94",
     "text": "Aliados recuperam {{value0}} de <keyword0>Saúde</keyword0> ao entrar em campo por troca"
   },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "75aa12db863c41e81268a7922e5dd6e4cdf63f238587f87372b9381f9f218fa4",
+    "text": "O santuário gentil"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "b04829a88df5d523fb270ee9040b6e69f88ab81913c854555d5ab8b278e48f14",
+    "text": "Passagem gentil"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2824,6 +2836,12 @@
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
     "sourceHash": "9494c6db6cd5134ca8cb62a9fd35e5ba0d67d8ed876d10f9484a8214bb69ebc0",
     "text": "Aliados ganham {{value0}}% da sua chance de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "cd735a4cef593ff1093cd650069da7114b8df72644798bb214e318540bd92065",
+    "text": "A miragem mutável"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -2867,6 +2885,18 @@
     "sourceHash": "6ba4db8f48b16c5770d2ec7e22047c966ae207f8274551d37e541f0383f5346b",
     "text": "Quando sua <keyword0>Armadura</keyword0> quebrar, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> a todos os inimigos"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "9d0e94205c65a98cb0c57cb0f2069f9e57632b5499650d7326686e3c75a9609b",
+    "text": "A fornalha abafada"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "512c2677c3be4d2dadc2f9404ff2a0c9accb045af160ee86afd84f9c88a8c0f4",
+    "text": "Carapaça fundida"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,6 +2933,18 @@
     "sourceHash": "fdeca820bb19cf0e5eaa5a3f2d2a111c76564eca378e3e35a8969fa0a5b7abab",
     "text": "Efeitos de chance aliados que falham têm {{value0}}% de chance de uma nova rolagem"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "ec0be15d52d937eee546881cd91880f4e4272dcb97e5301a2ba5b0fe6df68026",
+    "text": "Um desejo alça voo"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "7df83648a03d318ac4549ee06bede8a3bf8e3f540400286dd2148e79932e013f",
+    "text": "Boa fortuna"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
@@ -2938,6 +2980,18 @@
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "7d689328729910849a226cd7ccf291bba15bbff3e43ee6f2738acacfc678bd5e",
     "text": "Os ataques de Glintstride causam {{value0}} de dano de <keyword0>Luz</keyword0> adicional a inimigos <keyword1>cegos</keyword1>"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "f9d57cdd3062d8caa86e035cb77e9dc71a459bff99d5c3f0585a563514f71126",
+    "text": "Um passo além do brilho"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "f6ec06b4f7ab07c86d23167c7b5c7cfa69ae970bef2ca07587e590857fd7a107",
+    "text": "Passo em falso"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,

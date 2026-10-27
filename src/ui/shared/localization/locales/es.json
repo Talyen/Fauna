@@ -2789,6 +2789,18 @@
     "sourceHash": "97321aceea93a52fe6bedb34f03dd976fc07279f20e12ee3b4d97a8a35d26819",
     "text": "Los aliados recuperan {{value0}} de <keyword0>Salud</keyword0> al entrar mediante un cambio"
   },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "0c91708c542962954b845500e35071b006df1e766a697a076b9cee3822b365ba",
+    "text": "El refugio apacible"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "d7666e366b3b3fe64d9125cd48e67f51030b60c6415da0b00f07aecaceaab914",
+    "text": "Paso apacible"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2824,6 +2836,12 @@
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
     "sourceHash": "d7b6c980d428f12f620810a8884debd345289f37d99194a08e111f6e314f5776",
     "text": "Los aliados obtienen un {{value0}}% de tu probabilidad de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "ee11ff9729973b496eb515fe44a0f552c808d85b8c4352a272ffeea4fb9e800b",
+    "text": "El espejismo cambiante"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -2867,6 +2885,18 @@
     "sourceHash": "1520ebae7ab254bd95e43ac574adb89eaa98cbc5db755dfded7271b062a99fa4",
     "text": "Cuando se rompe tu <keyword0>Armadura</keyword0>, inflige {{value0}} de daño de <keyword1>Quemadura</keyword1> a todos los enemigos"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "da853b4db302490b424987318d09d8481e104c39cca3c311bb7cbca5a6084e82",
+    "text": "El horno latente"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "a619dd958f76a1020cb3a7dd695400e8f6ab3559b807206d519c83f760d15762",
+    "text": "Caparazón fundido"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,6 +2933,18 @@
     "sourceHash": "ee752b999fa3ba97efe96096c26f5efcc858f8e18f1b4b5a56283a83fc4037af",
     "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "7e40199a6806cf0b656a2ec06755447d37fb1d52037d6c4c4764714b258b5803",
+    "text": "Un deseo alza el vuelo"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "88fa1251a0d113b386f95fa4ab40d8f6680c3d47adae790e3ac0d8d3cec51323",
+    "text": "Buena fortuna"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
@@ -2938,6 +2980,18 @@
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "bd0f8197f73e2183bd925798a063efe88d49f60890df20a0e9f887b3df1ac321",
     "text": "Los ataques de Glintstride infligen {{value0}} de daño de <keyword0>Luz</keyword0> adicional a los enemigos <keyword1>cegados</keyword1>"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "617457071941e62972001df4a7036d09c3bb8064f9e364fed21d2f92faefabc0",
+    "text": "Un paso más allá del destello"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "29b0ca117dd11bd60df0c3e18ad1787f697d77d473638156dbd3bc885c7dc194",
+    "text": "A contrapié"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,

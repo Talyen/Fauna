@@ -2789,6 +2789,18 @@
     "sourceHash": "a54d79b16e5ffc27a3dd861c3df04a2c8d41223d8733378bd1dd7bab0b2dd950",
     "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
   },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "37610e78f18443200dce169373fad0cc669f58e8ae44df9de909998f909a776e",
+    "text": "Das sanfte Heiligtum"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "1e73d2396cfb0104c676cbed00dda251d4e68080766821585babe81cd0bc092f",
+    "text": "Sanfter Übergang"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2824,6 +2836,12 @@
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
     "sourceHash": "7534f32d1875c05ab189d065e53cdd7df9e9121965cee879755bd4ed22ed9f6b",
     "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "ac5ec855de4484bd449df964692573925620e07eb0a95c24b25317c40b746377",
+    "text": "Die wandelnde Fata Morgana"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -2867,6 +2885,18 @@
     "sourceHash": "d442d9412116ac1e92a0d9b7e8b08611ca2ad1d17a8369885f97f4ca36e2583d",
     "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "190aa8f949be58bf19ec122a631e4b23c3979f9af62b9c2087a55de14af18312",
+    "text": "Der gedämpfte Ofen"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "cae331ae9a820f23ad5880988356714d574ee3f7bdd1ffb6ff684399fe12272b",
+    "text": "Geschmolzener Panzer"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,6 +2933,18 @@
     "sourceHash": "46d85ad83d4d7e17ba17c52e45253e76b2cc9a32c48ee64a21fa893940121805",
     "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "91f5a679813ee233c84a1d389b68a9bd0c6b1370849c380e3862ec1de148d2c8",
+    "text": "Ein Wunsch hebt ab"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "5b3f470603c2e2e1cf43e8abf1e059f3b551dae70adb4411075774e8850d30d5",
+    "text": "Gutes Glück"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
@@ -2938,6 +2980,18 @@
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "851e55955538880560f6827f7ac87631a1cff9f168dc5fff8bf5a0ac0aa494b2",
     "text": "Glintstrides Angriffe verursachen bei <keyword1>geblendeten</keyword1> Gegnern zusätzlich {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "d5c6ca10bb9d67e8ed960c883b80b4f865e934a47341834294502dfeb770c189",
+    "text": "Ein Schritt jenseits des Schimmers"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "da29f0d686584d03764cdf787b04670a7ef6a46cfce1d9e5eba90625199458d9",
+    "text": "Auf dem falschen Fuß"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,

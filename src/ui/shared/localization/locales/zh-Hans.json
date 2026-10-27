@@ -2789,6 +2789,18 @@
     "sourceHash": "046784892aec5129365c4c3b654a1e13645f3a7f8d89dbbf706f5c35c5b43371",
     "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "a5d685f446ed5bc26c6e8e526f056a887aa776879a2fd70d6e56998ce1027227",
+    "text": "温柔的庇护所"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "1dc6266cd0a5997ef411bbb8bc41c50d0d91f091069bf6772d919df9ba93d67d",
+    "text": "温柔通行"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2824,6 +2836,12 @@
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
     "sourceHash": "e15e57c37af34e82e517db1ab73cec80dc08e2ec956fad61d8177642c478668e",
     "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "15a4de55a75fe0e0d619c39e812debd1bba8bfcd0993f53522765681dc6ff6a8",
+    "text": "变幻的海市蜃楼"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -2867,6 +2885,18 @@
     "sourceHash": "f3a23100489c0fecf8ea4f34ef7891ed5c30f425d89bd8143c9d0492cfc99fa3",
     "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "26a86f89586aee5ea235187a68e1518158f2e609143ea697e46c585b7575a1b6",
+    "text": "焖燃的炉火"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "e034dda4c56be010b5fccd03acda7d865268182f4d31913a655db0777a97eec0",
+    "text": "熔融外壳"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,6 +2933,18 @@
     "sourceHash": "bb1c684f9c5a8cc3031e23c78d5116593df23889750a1db6e8329e08ceb9cace",
     "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "2d89c1b68066a80834bfe5b7f44ece2033d2001e0696893c924f5e9a1b15bdc0",
+    "text": "展翅的心愿"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "34e1e5b4bebf608b607052d7ccc39c5285a63ae05ac5ae6d1528ba2e86577a21",
+    "text": "好运"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
@@ -2938,6 +2980,18 @@
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "ea2a12b1b1f9f204f8c498b4ad9f34fe30b963a5f3214191c20dd10032048f3c",
     "text": "Glintstride的攻击对<keyword1>致盲</keyword1>的敌人额外造成{{value0}}点<keyword0>光</keyword0>伤害"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "4928d235610350ec818f41f629f431de39c993d74d9c33715459b810acb90c85",
+    "text": "踏出微光之外"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "5864fd3c70b85f6190ba1c1e0f8cea76ef2bf273e629f0a1083253234ea1dc6f",
+    "text": "措手不及"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,

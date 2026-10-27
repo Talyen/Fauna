@@ -2789,6 +2789,18 @@
     "sourceHash": "a7f2d1c18a2ec4bcd696ecb7acf0480410aa19f16331a629d60e329498c9de0c",
     "text": "味方が交代で場に出ると<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.dulcera.title": {
+    "reviewed": true,
+    "source": "The gentle sanctuary",
+    "sourceHash": "dad0c702e49b8683e61f3e5010796e438a350aa4aed4219b2305754732ad0e06",
+    "text": "やさしい聖域"
+  },
+  "content.species.dulcera.trait": {
+    "reviewed": true,
+    "source": "Gentle Passage",
+    "sourceHash": "9711c7466be825a50bc58f69c30781b4a15b2faf5d598381f6d6e63ff6f7be58",
+    "text": "やさしい通り道"
+  },
   "content.species.dunefox.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
@@ -2824,6 +2836,12 @@
     "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
     "sourceHash": "6b445e278840479736f989785609d59c301f9ac0ed7db9fa2934ec6b977a6cc1",
     "text": "味方はあなたの<keyword0>回避</keyword0>率の{{value0}}%を得る"
+  },
+  "content.species.dunefox.title": {
+    "reviewed": true,
+    "source": "The shifting mirage",
+    "sourceHash": "a9dc317ccd50171e384143968db2483aa63907bd48ecbf98ab9f9fcaa34b1634",
+    "text": "揺らめく蜃気楼"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -2867,6 +2885,18 @@
     "sourceHash": "32ef2decbe7ed6b52452a84a3ee72d351a69bbe0a54a31302f772dab1adeded5",
     "text": "自分の<keyword0>装甲</keyword0>が壊れたとき、すべての敵に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
   },
+  "content.species.emberback.title": {
+    "reviewed": true,
+    "source": "The banked furnace",
+    "sourceHash": "e652049ee2552c7ac3008c16c7864960f9d91287dc92aa23d0c49d1b72ff0194",
+    "text": "静かに燃える炉"
+  },
+  "content.species.emberback.trait": {
+    "reviewed": true,
+    "source": "Molten Shell",
+    "sourceHash": "ccae8bb38a2c9746c5bace7c235119024893773481477d3a4968d48043d8d9ef",
+    "text": "溶けた甲羅"
+  },
   "content.species.euphera.passive.0.rule": {
     "reviewed": true,
     "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
@@ -2903,6 +2933,18 @@
     "sourceHash": "f096e0cf640f015621b697c4d4ef11f9724a095268ae40fd246b90dbf1c731cd",
     "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
   },
+  "content.species.euphera.title": {
+    "reviewed": true,
+    "source": "A wish taking flight",
+    "sourceHash": "46cf3778476f0539dc45ee014125ca83b8f214ed49c12ccc7a1d0a218266ad1b",
+    "text": "飛び立つ願い"
+  },
+  "content.species.euphera.trait": {
+    "reviewed": true,
+    "source": "Good Fortune",
+    "sourceHash": "d1aa8863f62c04b723c094c52d1e6b59e5c22a291a537f6cb0492bc85d3d3a43",
+    "text": "幸運"
+  },
   "content.species.glintstride.passive.0.rule": {
     "reviewed": true,
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
@@ -2938,6 +2980,18 @@
     "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
     "sourceHash": "f2e7969988c0654d991decc0e67302695495680653297a3e117357dd7df8fe82",
     "text": "Glintstrideの攻撃は<keyword1>盲目</keyword1>の敵に追加で<keyword0>光</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.glintstride.title": {
+    "reviewed": true,
+    "source": "A step beyond the shimmer",
+    "sourceHash": "9f4579540a6c5f221387d6c0190845770876d0c80a1db2dbf13d6074f9321af7",
+    "text": "きらめきの先の一歩"
+  },
+  "content.species.glintstride.trait": {
+    "reviewed": true,
+    "source": "Wrong Foot",
+    "sourceHash": "935da06adc5e75786d06194eaa3cb216208fc6c8cc5a96308cd2ddf40b8f202c",
+    "text": "足をすくう"
   },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
