@@ -3881,6 +3881,12 @@
     "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
     "text": "{{name}}：{{action}} — 未移除任何效果。"
   },
+  "log.resurrect": {
+    "reviewed": true,
+    "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
+    "sourceHash": "2f06f2ba0803c75bca6f592d7fef36468e4e8fb98ce538fc72e7220bc72c3ea4",
+    "text": "{{actor}}复活了{{target}}，其生命为{{amount}}"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",

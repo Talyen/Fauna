@@ -335,6 +335,9 @@
   "log.removeNoEffects": {
     "text": "{{name}}: {{action}} removes no effects."
   },
+  "log.resurrect": {
+    "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"
+  },
   "log.returnHome": {
     "text": "You return from the wilds. Discoveries are kept."
   },

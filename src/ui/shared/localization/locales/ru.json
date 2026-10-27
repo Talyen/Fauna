@@ -3881,6 +3881,12 @@
     "sourceHash": "40b0929fede0b5c6db86af6fe0e5d200eb249e00d717f1ba3a50e32d166e2dd4",
     "text": "{{name}}: {{action}} — эффекты не сняты."
   },
+  "log.resurrect": {
+    "reviewed": true,
+    "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
+    "sourceHash": "095668484d35e142be598a773323ec0936078230b9c868f0ba40c796cb46ad73",
+    "text": "{{actor}} воскрешает {{target}} с запасом здоровья {{amount}}"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",

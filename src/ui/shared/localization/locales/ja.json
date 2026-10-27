@@ -3881,6 +3881,12 @@
     "sourceHash": "e84c3f4bfc1324af913a24c419c5844bc6e97e64f0005168f2f4b6ce36d896c0",
     "text": "{{name}}：{{action}} — 解除された効果はありません。"
   },
+  "log.resurrect": {
+    "reviewed": true,
+    "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
+    "sourceHash": "9226368024f231d467c86e9f84a518452aad61f10c847c055073fdddd205b051",
+    "text": "{{actor}}が{{target}}を体力{{amount}}で復活させた"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",

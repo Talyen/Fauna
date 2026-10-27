@@ -3929,6 +3929,12 @@
     "sourceHash": "83626e7eb2d2f70e21238932f1774ff5f4285a6893ae59e72d7d5b03fd0b3d96",
     "text": "{{name}} : {{action}} — aucun effet retiré."
   },
+  "log.resurrect": {
+    "reviewed": true,
+    "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
+    "sourceHash": "c328177d8f23f11a22e911d59448be26356354e32a50304ddf0bd472beab2cb7",
+    "text": "{{actor}} ressuscite {{target}} avec {{amount}} Santé"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",

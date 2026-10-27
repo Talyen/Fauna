@@ -3,6 +3,7 @@ import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-mode
 import japanese from "../../../src/ui/shared/localization/locales/ja.json";
 import { definition, species } from "../../../src/game/content";
 import { drawDiscard } from "../../../src/game/card-zones";
+import { resurrect } from "../../../src/game/combat/resurrection";
 import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
@@ -219,6 +220,28 @@ it("localizes temporary Dodge and lost Freeze buildup with their exact amounts",
   expect(eventPresentation(game, freeze, reader)).toBe("Créature traduite perd 2 d’accumulation de Gel");
   expect(eventPresentation(game, { ...freeze, amount: 3 }, reader)).toBe(freeze.text);
   expect(eventPresentation(game, dodge, createMessageReader("en", {}))).toBe(dodge.text);
+});
+
+it("localizes a committed resurrection without changing its Health or participants", () => {
+  const initial = run();
+  const actor = initial.team[0]!;
+  const target = initial.team[1]!;
+  const events: GameEvent[] = [];
+  const game = produce(initial, (draft) => {
+    draft.team[1]!.health = 0;
+    resurrect(draft.team[1]!, draft.team[0]!, events);
+  });
+  const event = events.find((item) => item.kind === "heal")!;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: species(actor.species).name, text: "Guide" },
+    [`content.species.${target.species}.name`]: { source: species(target.species).name, text: "Allié" },
+  });
+  expect(eventPresentation(game, event, reader)).toBe(
+    `Guide ressuscite Allié avec ${game.team[1]!.health} Santé`,
+  );
+  expect(eventPresentation(game, { ...event, text: "Unrelated healing" }, reader)).toBe("Unrelated healing");
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
 });
 
 it("localizes an authored ability and Food announcement without guessing unknown cards", () => {

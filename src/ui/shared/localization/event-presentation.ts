@@ -176,6 +176,15 @@ export function eventPresentation(
         return i18n.message("log.gainBuildup", "{{name}} gains {{amount}} {{status}} buildup.", values);
     }
   }
+  if (event.kind === "heal" && event.actorId) {
+    const actor = combatantById(game, event.actorId);
+    if (actor && event.text === `${unitName(actor)} Resurrects ${englishName} with ${event.amount} Health`)
+      return i18n.message("log.resurrect", "{{actor}} Resurrects {{target}} with {{amount}} Health", {
+        actor: localizedCombatantName(actor, i18n),
+        target: name,
+        amount: quantity(event.amount),
+      });
+  }
   if (event.kind === "heal" && event.text === `${englishName} restores ${event.amount} Health.`)
     return i18n.message("log.heal", "{{name}} restores {{amount}} Health.", {
       name,
