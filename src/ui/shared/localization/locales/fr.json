@@ -563,11 +563,23 @@
     "sourceHash": "40ec26e01902e63ddbf1fabd683bffa324ba385bd8a7bb27a49c6c06342b063c",
     "text": "Fermoir de dévotion"
   },
+  "content.boon.devotion-clasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "sourceHash": "2a2d600bc9a9a9888883ebe0cba7e57630172a1b2a26a2934fb097d4ae8c0f25",
+    "text": "La <keyword0>Négation</keyword0> protège aussi un autre allié de la même attaque"
+  },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
     "source": "Dream Tangram",
     "sourceHash": "f0dfd0bdd81853a3c7e57986cdc07ea60bdc6180eed681f9ef95bc89c1da319b",
     "text": "Tangram des rêves"
+  },
+  "content.boon.dream-tangram.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks move on when their target falls",
+    "sourceHash": "8945425daf2c8e1ec2d274c396ecb2c7ee800a01d34eb484498541089dc54827",
+    "text": "Les attaques répétées passent à une autre cible quand la leur tombe"
   },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
@@ -598,6 +610,12 @@
     "source": "Echo Lens",
     "sourceHash": "26c1939f712efb2e51e31903fad474280109b0329b3124cb82669236797682a6",
     "text": "Lentille d’écho"
+  },
+  "content.boon.echo-lens.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "sourceHash": "61ba24d3e720922edcfcecd27db345cf4a87bda7ee4c802d51878eed3bc6dcec",
+    "text": "La <keyword0>Négation</keyword0> a {{value0}}% de chances de provoquer aussi un <keyword1>Renvoi</keyword1>"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -1217,6 +1235,12 @@
     "sourceHash": "a11e5aaf06f58cf8e29bc5dc724ec1c2cc91115cec60fc5c7b26248455da3c1a",
     "text": "Tuile d’encens du récif"
   },
+  "content.boon.reef-incense-tile.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "sourceHash": "99b5e2b0497de098d3305941d37d19e3b80ff453e8d15c3d5ed09a44a43b417f",
+    "text": "Les touches d’<keyword0>Eau</keyword0> propagent l’<keyword1>Aveuglement</keyword1> à un autre ennemi"
+  },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
     "source": "Resonance Kalimba",
@@ -1294,6 +1318,12 @@
     "source": "Sleepers Urn",
     "sourceHash": "27d3802742d9e8bcb9f8a7f6d288d42050648ebc9e4ce30d11a32e84ff7292e5",
     "text": "Urne des dormeurs"
+  },
+  "content.boon.sleepers-urn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "sourceHash": "3fa2252a0d1528dfe6b9df2dd7654cf859bddcea6da686ca7f10ac66b3abd514",
+    "text": "L’accumulation d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> peut augmenter pendant l’immunité ennemie"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -1397,6 +1427,12 @@
     "sourceHash": "1401857a4fbe16ee5e8dd2d1ff1e6701c98298a5921d0ffb2f5c3e5d91b9729a",
     "text": "Conque du tonnerre"
   },
+  "content.boon.thunder-conch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "sourceHash": "4786c668d66444f931033faf07370bb9ddea63d6e65d64d953f59af52f9d61cb",
+    "text": "<keyword0>Étourdir</keyword0> un ennemi <keyword1>aveugle</keyword1> les autres ennemis"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
@@ -1414,6 +1450,12 @@
     "source": "Tide Anklet",
     "sourceHash": "0882161c2274236158ef89d680e4e0a37ee89455f98075d7dcc51f1c457a5ee3",
     "text": "Bracelet de cheville des marées"
+  },
+  "content.boon.tide-anklet.rule": {
+    "reviewed": true,
+    "source": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "sourceHash": "98a2354228faea82f536b429dbda7f9ce6216cafefa2312ee9e308b247f8144f",
+    "text": "Les deux alliés permutés conservent chacun le total de <keyword0>Blocage</keyword0> le plus élevé"
   },
   "content.boon.tidecrest-hairpin.name": {
     "reviewed": true,
@@ -1456,6 +1498,12 @@
     "source": "Vigil Lantern",
     "sourceHash": "d540420762d5d48ae90afcc2f7c82eb9b7969e1abcf904927ad177912f24b6d0",
     "text": "Lanterne de veille"
+  },
+  "content.boon.vigil-lantern.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "a6fffe41e2a1d2d6ab992099c0226e6acbdf1c275f075d3899c80d281bb5ec0b",
+    "text": "Les alliés aux portes de la mort peuvent agir malgré l’<keyword0>Étourdissement</keyword0> et le <keyword1>Gel</keyword1>"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,

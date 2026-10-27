@@ -563,11 +563,23 @@
     "sourceHash": "eef7c0db75b1e245b85a6d1e4620abff0b008eaa59831fa7c58ea128167e792a",
     "text": "虔心扣饰"
   },
+  "content.boon.devotion-clasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "sourceHash": "7b9af1ed732cc7fa8ba893a58b69b7e4c355256f8506dd156af9169a235a942a",
+    "text": "<keyword0>抵消</keyword0>还会保护另一名盟友免受同一次攻击"
+  },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
     "source": "Dream Tangram",
     "sourceHash": "674052d42aa643a9310d82a1d0acadf3ae44096346b25da5e2678f8fd52a8886",
     "text": "梦境七巧板"
+  },
+  "content.boon.dream-tangram.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks move on when their target falls",
+    "sourceHash": "cbce199aa29a273b7d95627f5295617fcc0e3851ef59fe57a07b315f8bb24602",
+    "text": "连续攻击的目标倒下时会转向另一目标"
   },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
@@ -598,6 +610,12 @@
     "source": "Echo Lens",
     "sourceHash": "cc193299b7588a6e38ffcd17cde1eb10979d65867bfff1aacf283002c5014a82",
     "text": "回声透镜"
+  },
+  "content.boon.echo-lens.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "sourceHash": "2055e71a815edddb09ab520b3db491e034e0824eba7a62a1e76a038b107a8c9a",
+    "text": "<keyword0>抵消</keyword0>有{{value0}}%的概率同时触发<keyword1>反射</keyword1>"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -1217,6 +1235,12 @@
     "sourceHash": "9411179434a96073142d1fd3dde013c6acf57eee13fa2ab1a3f0c5aaccf973f1",
     "text": "珊瑚礁香砖"
   },
+  "content.boon.reef-incense-tile.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "sourceHash": "2a8434c4f322fad42d43ad9cf2d8441ce1f271463fb2cd365c4317426fd82dd6",
+    "text": "<keyword0>水</keyword0>命中会将<keyword1>致盲</keyword1>扩散给另一名敌人"
+  },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
     "source": "Resonance Kalimba",
@@ -1294,6 +1318,12 @@
     "source": "Sleepers Urn",
     "sourceHash": "44c26cffcc8e3a9f699d827133b408bc65f9c11c685921310a584586372a000f",
     "text": "沉眠者之瓮"
+  },
+  "content.boon.sleepers-urn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "sourceHash": "bb4c02fbb28714f6b396ce47fcfb8833e066879636790b8127de521b1e25e390",
+    "text": "敌人免疫期间仍可累积<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -1397,6 +1427,12 @@
     "sourceHash": "b81321c7a1ec53e1e90743255ddf28169712efe1e5e87aaf7371f56abc28f54a",
     "text": "雷鸣海螺"
   },
+  "content.boon.thunder-conch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "sourceHash": "c8be771cb4f745160dc20ca68fa623273376a68d586ec2e17baee03871c96207",
+    "text": "使一名敌人<keyword0>眩晕</keyword0>时，<keyword1>致盲</keyword1>其他敌人"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
@@ -1414,6 +1450,12 @@
     "source": "Tide Anklet",
     "sourceHash": "04f6585b3aa88c34eec786a2869c65a687d0cf4fcacefa0ce9917312689463d3",
     "text": "潮汐脚环"
+  },
+  "content.boon.tide-anklet.rule": {
+    "reviewed": true,
+    "source": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "sourceHash": "9bca9ce574af72b6561fbd93b7c833fa214cf37bfa84d5e8cebef97f99a4b7e1",
+    "text": "换人的两名盟友都保留较高的<keyword0>格挡</keyword0>值"
   },
   "content.boon.tidecrest-hairpin.name": {
     "reviewed": true,
@@ -1456,6 +1498,12 @@
     "source": "Vigil Lantern",
     "sourceHash": "fc2a866b7a6cfa26312d16f96b93e2549abec29e103518cfb8dd91a6568f6b86",
     "text": "守夜灯"
+  },
+  "content.boon.vigil-lantern.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "55164b40f577f7d40c379e2c8765aff81762d96fa3e73c34a3c3136db07be67e",
+    "text": "濒死的盟友可以在<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>状态下行动"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,

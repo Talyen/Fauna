@@ -563,11 +563,23 @@
     "sourceHash": "65801bc87ce1a9e2a4951f155dc869ea183dbfd100a4680758cfc638d6e85e8f",
     "text": "Hingabeverschluss"
   },
+  "content.boon.devotion-clasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "sourceHash": "58d8e2cbe3bda1b9a7381ed664b35731362a2b19c7cdc3f7b7f53b7357443ea0",
+    "text": "<keyword0>Abwehren</keyword0> schützt auch einen weiteren Verbündeten vor demselben Angriff"
+  },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
     "source": "Dream Tangram",
     "sourceHash": "7ded4003837d86e16e95b9dad6d9e2605eed32e3061ebf3cc1a8aec00f0de156",
     "text": "Traum-Tangram"
+  },
+  "content.boon.dream-tangram.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks move on when their target falls",
+    "sourceHash": "e622e6fc7ce8806734a1fa2c5f1cfc34ecac56440faec346cc6977ee1497b972",
+    "text": "Wiederholte Angriffe wechseln das Ziel, wenn es fällt"
   },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
@@ -598,6 +610,12 @@
     "source": "Echo Lens",
     "sourceHash": "975d79b7f4a2cd8d4e282e1fb685cfa7dcbae15ffb9081643909de39ecb94dcd",
     "text": "Echolinse"
+  },
+  "content.boon.echo-lens.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "sourceHash": "05bb28605fb08a51bbfb6f4a631922fd0448702869684ac5af62ee05fbddca29",
+    "text": "<keyword0>Abwehren</keyword0> hat eine Chance von {{value0}}%, auch zu <keyword1>reflektieren</keyword1>"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -1217,6 +1235,12 @@
     "sourceHash": "598e409f441579f2ee0e2448d3aa26e6d03a517bdf43f502075f1881868c0ca8",
     "text": "Riff-Räucherplatte"
   },
+  "content.boon.reef-incense-tile.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "sourceHash": "edc7d93c7dc3ba3751e9e77d6abce6c373f644748da6767aa1cfbec538c1d2d2",
+    "text": "<keyword0>Wasser</keyword0>-Treffer übertragen <keyword1>Blindheit</keyword1> auf einen weiteren Gegner"
+  },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
     "source": "Resonance Kalimba",
@@ -1294,6 +1318,12 @@
     "source": "Sleepers Urn",
     "sourceHash": "029357dbfae6c2e8de657661eef8048aee60405c9ba993fab34f5312e4eca7c9",
     "text": "Urne der Schlafenden"
+  },
+  "content.boon.sleepers-urn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "sourceHash": "1b34d4da250f8507f8a54a58268cf9739d24358ff1eb687732ad861840c5c999",
+    "text": "<keyword0>Betäubung</keyword0> und <keyword1>Frost</keyword1> können sich während gegnerischer Immunität aufbauen"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -1397,6 +1427,12 @@
     "sourceHash": "97eb5a3c459ca187685337ba15e79e8cab972e725df39b2410cb62300d1c4c40",
     "text": "Donnerschnecke"
   },
+  "content.boon.thunder-conch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "sourceHash": "887a298be9efd98d9a12d3ab0f48179fae7467acb8d3d726cbd74cc560dbee82",
+    "text": "Die <keyword0>Betäubung</keyword0> eines Gegners verursacht <keyword1>Blindheit</keyword1> bei den anderen Gegnern"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
@@ -1414,6 +1450,12 @@
     "source": "Tide Anklet",
     "sourceHash": "e01bf6df1c7e26f63a0ab99fbe8dd7096c2277298fd0125bf9027cd6b580979c",
     "text": "Gezeitenfußreif"
+  },
+  "content.boon.tide-anklet.rule": {
+    "reviewed": true,
+    "source": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "sourceHash": "9b7bbf060bbe8f31bb1913ea64f03f5b4384e987d1296dc3d82cd37a400a09c9",
+    "text": "Beide wechselnden Verbündeten behalten den höheren <keyword0>Block</keyword0>-Wert"
   },
   "content.boon.tidecrest-hairpin.name": {
     "reviewed": true,
@@ -1456,6 +1498,12 @@
     "source": "Vigil Lantern",
     "sourceHash": "74d7a942cdeace3fcc8aa34bca618f8898c83a167a639d31577c50cb7a87b59c",
     "text": "Wachlaterne"
+  },
+  "content.boon.vigil-lantern.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "5068ad33f8ec6d6b4e75980de215633e633b78762e61d9decb7ca0a2893f5ade",
+    "text": "Verbündete im Nahtod können trotz <keyword0>Betäubung</keyword0> und <keyword1>Frost</keyword1> handeln"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,

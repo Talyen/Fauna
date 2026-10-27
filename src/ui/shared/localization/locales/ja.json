@@ -563,11 +563,23 @@
     "sourceHash": "fa8270d9646c7c82720abba252e5640421d7d9dd47511dcc22e8f24c185324bf",
     "text": "献身の留め具"
   },
+  "content.boon.devotion-clasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "sourceHash": "5eacbdf77c51e0050a7f14ae1f2f2d2bcf244ae2c4765bbca9e63736d19eb069",
+    "text": "<keyword0>防止</keyword0>は同じ攻撃から別の味方も守る"
+  },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
     "source": "Dream Tangram",
     "sourceHash": "278b9ce0e26269dc3638f916064dfc91db4e98f65ac563c541dcf94e43331005",
     "text": "夢のタングラム"
+  },
+  "content.boon.dream-tangram.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks move on when their target falls",
+    "sourceHash": "ea561eabbf38e7742a7c5ab3b4095bc59097fcec2c601e6f917798b6d33d6a01",
+    "text": "連続攻撃中に対象が倒れると次の対象へ移る"
   },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
@@ -598,6 +610,12 @@
     "source": "Echo Lens",
     "sourceHash": "3c03f945e0eb706e408e7f660566685da4efb8c32d5e0fddd6fb096393f80f60",
     "text": "こだまのレンズ"
+  },
+  "content.boon.echo-lens.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "sourceHash": "6b165f8b62836cc44bb9f596bc2bdf2c04b972508b1e1ae77138f51748e1ab01",
+    "text": "<keyword0>防止</keyword0>時、{{value0}}%の確率で<keyword1>反射</keyword1>も発動"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -1217,6 +1235,12 @@
     "sourceHash": "e177af80f08f4738a08d15fd378bba36c3aa5a74ef3e35ebf40d0a963ce880bf",
     "text": "珊瑚礁の香皿"
   },
+  "content.boon.reef-incense-tile.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "sourceHash": "b1a3dd66b0e2d7f6a3d43d43b9c42c8ff66ecf3ae1f3bb074411dd55840066fa",
+    "text": "<keyword0>水</keyword0>のヒットは<keyword1>盲目</keyword1>を別の敵に広げる"
+  },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
     "source": "Resonance Kalimba",
@@ -1294,6 +1318,12 @@
     "source": "Sleepers Urn",
     "sourceHash": "43025c682d8d30f5bab59ab78dbc166a58ff41c167f75fdc889888f0758d1861",
     "text": "眠る者の壺"
+  },
+  "content.boon.sleepers-urn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "sourceHash": "41bed11737b3d1caa3070d39b03c051f0cd910caccca2af216c2e9eb8eb208a6",
+    "text": "敵の免疫中でも<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>の蓄積が増える"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -1397,6 +1427,12 @@
     "sourceHash": "9cbd33429fc1a378a373ba72605afe634eb20134a45b1793d3f7ba6eb9a3de65",
     "text": "雷のほら貝"
   },
+  "content.boon.thunder-conch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "sourceHash": "ba95240512dc90a83beb9e63842f1b41ebe06562e7de5ebb566c1af78975dc7d",
+    "text": "敵を<keyword0>スタン</keyword0>させると他の敵を<keyword1>盲目</keyword1>にする"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
@@ -1414,6 +1450,12 @@
     "source": "Tide Anklet",
     "sourceHash": "811328c900778d13c1d19c22b53fe1bb80b15292911923954e4f0b0c347a7aef",
     "text": "潮の足輪"
+  },
+  "content.boon.tide-anklet.rule": {
+    "reviewed": true,
+    "source": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "sourceHash": "da39f1da85bea6a99bb2e4e124ccc6208a16bad136aba88871955b3d5419c23e",
+    "text": "交代する両方の味方は、高い方の<keyword0>ブロック</keyword0>値をそれぞれ維持"
   },
   "content.boon.tidecrest-hairpin.name": {
     "reviewed": true,
@@ -1456,6 +1498,12 @@
     "source": "Vigil Lantern",
     "sourceHash": "c0074dd099f566cc71275d6449723460416d080433b7bdf1b37591cb9294c93c",
     "text": "見守りのランタン"
+  },
+  "content.boon.vigil-lantern.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "26a8d939180620aaa352c616a6e5c9d3a0c19ae9cfd6278707c6af1de140c71e",
+    "text": "死の淵にいる味方は<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>中でも行動できる"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,

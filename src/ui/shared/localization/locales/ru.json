@@ -563,11 +563,23 @@
     "sourceHash": "822f04a42e71bf3d18db036c77eec469389a2075a3f72c930a1b4f20204ae03b",
     "text": "Застёжка преданности"
   },
+  "content.boon.devotion-clasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "sourceHash": "db7788a52d701d331ce16e3356f165b8003c6117c3b92ddf6fb92c7bfe816870",
+    "text": "<keyword0>Отведение</keyword0> также защищает другого союзника от той же атаки"
+  },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
     "source": "Dream Tangram",
     "sourceHash": "33a004af846ddae97163223a6b49a336abc04f35056d22630ebb3045d1e2ff9a",
     "text": "Танграм грёз"
+  },
+  "content.boon.dream-tangram.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks move on when their target falls",
+    "sourceHash": "951c7f90f77580defbb29952e324f26f608af9b427b54f59cd95dbab3c70957d",
+    "text": "Повторные атаки переходят к другой цели, когда прежняя падает"
   },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
@@ -598,6 +610,12 @@
     "source": "Echo Lens",
     "sourceHash": "2cea17f965e43470f2eb1890c70009fbbbb607452c79e332e80cdb6ef124cd13",
     "text": "Линза эха"
+  },
+  "content.boon.echo-lens.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "sourceHash": "42176b2e04f52ec11f3764e16c2224e077e073f13feeb6b923902748197658b6",
+    "text": "<keyword0>Отведение</keyword0> с вероятностью {{value0}}% также вызывает <keyword1>отражение</keyword1>"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -1217,6 +1235,12 @@
     "sourceHash": "ec516cd811352b0fd4957de685d7bbc2a1ff590daa0b51ede6d423ae156cb501",
     "text": "Рифовая плитка для благовоний"
   },
+  "content.boon.reef-incense-tile.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "sourceHash": "ecc45567144548983e2ccfef139c22371a85285d3cf2320db94705931feed91d",
+    "text": "Попадания <keyword0>водой</keyword0> распространяют <keyword1>ослепление</keyword1> на другого врага"
+  },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
     "source": "Resonance Kalimba",
@@ -1294,6 +1318,12 @@
     "source": "Sleepers Urn",
     "sourceHash": "3886858167c7ee6a59083f404dd7139239bfab8c6a26820edbb83eb8b5bfb889",
     "text": "Урна спящих"
+  },
+  "content.boon.sleepers-urn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "sourceHash": "2e1c35de6108e9609c4685dd579100cd6c48df4dbcb156ec1ed26786215bce02",
+    "text": "Накопление <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> может расти во время иммунитета врага"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -1397,6 +1427,12 @@
     "sourceHash": "98529655f315cad16e9406825e71f9030955246d70c22405fe43a96c10073f1b",
     "text": "Громовая раковина"
   },
+  "content.boon.thunder-conch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "sourceHash": "cb1be52d1c114ccb483275f345c21a0b4d0159c46067e239ab5ff76dfe333dea",
+    "text": "<keyword0>Оглушение</keyword0> врага <keyword1>ослепляет</keyword1> остальных врагов"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
@@ -1414,6 +1450,12 @@
     "source": "Tide Anklet",
     "sourceHash": "9f0339f52f6d122d46bd718f22d76e2365a4e78719005b0ae9664a4ceaee0bbd",
     "text": "Ножной браслет прилива"
+  },
+  "content.boon.tide-anklet.rule": {
+    "reviewed": true,
+    "source": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "sourceHash": "4036a81f761a1b0a6c23c738352eea815e97e4063df1e399cfacf182d971e309",
+    "text": "Оба меняющихся союзника сохраняют большее значение <keyword0>блока</keyword0>"
   },
   "content.boon.tidecrest-hairpin.name": {
     "reviewed": true,
@@ -1456,6 +1498,12 @@
     "source": "Vigil Lantern",
     "sourceHash": "681ce831317b6af2b782397a3f4c2b6f6cf595db0a28818818940328bbaff10f",
     "text": "Фонарь бдения"
+  },
+  "content.boon.vigil-lantern.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "464a2abc05f1419bc3d0aadb55b580d6e888dce41f89b758b857ec35d24ad37d",
+    "text": "Союзники на пороге смерти могут действовать несмотря на <keyword0>оглушение</keyword0> и <keyword1>заморозку</keyword1>"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,
