@@ -4271,11 +4271,23 @@
     "sourceHash": "2490b28d32a76aa4c843b71baa204b9d8106a96cead5926c04e368b3c6bc86ff",
     "text": "{{name}}は{{amount}}ダメージをブロックした。"
   },
+  "log.blinded": {
+    "reviewed": true,
+    "source": "{{name}} is Blinded",
+    "sourceHash": "023924136d4645a91a33ec9f4c66b460799273a0a2f2bd62571756aa6597ed08",
+    "text": "{{name}}に盲目が付与された"
+  },
   "log.boonPurchased": {
     "reviewed": true,
     "source": "Boon purchased for this journey.",
     "sourceHash": "26392d32caaa568973ff3e72754844b0fd648db517c038f16a5e58362599efb5",
     "text": "この旅の祝福を購入しました。"
+  },
+  "log.controlApplied": {
+    "reviewed": true,
+    "source": "{{name}} is {{status}}.",
+    "sourceHash": "1c0e3d89ce02a9217ff25a04a3c2f538bcd1c915e2687f87964c571083204b7a",
+    "text": "{{name}}に{{status}}が付与された。"
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -4331,6 +4343,12 @@
     "sourceHash": "7a8857da5197463e071c4d83b77482e69ef0268c6a9d4b77409012d0f817097f",
     "text": "マナを{{amount}}獲得。"
   },
+  "log.gainNullify": {
+    "reviewed": true,
+    "source": "{{name}} gains Nullify",
+    "sourceHash": "907b54682b84a10cc5356124782728bd885bc661e4b4e5383cb30de6ac3cc49d",
+    "text": "{{name}}は無効化を獲得"
+  },
   "log.gainStatus": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} {{status}}.",
@@ -4342,6 +4360,12 @@
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "762f4ff8e996ed0a7c533de2d8cc77e1a6790c638e36cc0e240458396edc3eba",
     "text": "{{name}}は体力を{{amount}}回復した。"
+  },
+  "log.immuneBuildup": {
+    "reviewed": true,
+    "source": "{{name}} is immune to {{status}} buildup.",
+    "sourceHash": "41658ed0d2afac856ebb9007f1c575d90509df59e651212feafa107e1f9e54cc",
+    "text": "{{name}}は{{status}}の蓄積に免疫がある。"
   },
   "log.intercept": {
     "reviewed": true,
@@ -4366,6 +4390,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "545add015fb4014eeade563dc1325a44d1e905c57677329b7a55fee202c784b9",
     "text": "{{name}}の凍結の蓄積が{{amount}}減少"
+  },
+  "log.nullifyEffect": {
+    "reviewed": true,
+    "source": "{{name}} nullifies {{status}}",
+    "sourceHash": "31881ff6ba41d8f0a326c087d635f296e373e3680d8c578feeaf046b00133583",
+    "text": "{{name}}は{{status}}を無効化した"
   },
   "log.nullifyFreezeDamage": {
     "reviewed": true,

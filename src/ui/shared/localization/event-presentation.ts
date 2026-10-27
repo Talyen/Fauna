@@ -108,11 +108,60 @@ export function eventPresentation(
   if (event.kind === "status") {
     if (
       event.status === "nullify" &&
+      event.outcome === "gain" &&
+      event.text === `${englishName} gains Nullify`
+    )
+      return i18n.message("log.gainNullify", "{{name}} gains Nullify", { name });
+    if (event.status === "blind" && event.outcome === "apply" && event.text === `${englishName} is Blinded`)
+      return i18n.message("log.blinded", "{{name}} is Blinded", { name });
+    if (
+      event.status === "nullify" &&
       event.outcome === "immune" &&
       event.affectedStatus === "freeze" &&
       event.text === `${englishName} nullifies Freeze damage`
     )
       return i18n.message("log.nullifyFreezeDamage", "{{name}} nullifies Freeze damage", { name });
+    if (
+      event.status === "nullify" &&
+      (event.outcome === "immune" || event.outcome === "remove") &&
+      event.affectedStatus &&
+      isKeywordId(event.affectedStatus) &&
+      event.text === `${englishName} nullifies ${event.affectedStatus}`
+    ) {
+      const status = event.affectedStatus;
+      return i18n.message("log.nullifyEffect", "{{name}} nullifies {{status}}", {
+        name,
+        status:
+          i18n.locale === "en"
+            ? status
+            : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
+      });
+    }
+    if ((event.status === "freeze" || event.status === "stun") && event.outcome === "immune") {
+      const status = event.status;
+      if (event.text === `${englishName} is immune to ${status} buildup.`)
+        return i18n.message("log.immuneBuildup", "{{name}} is immune to {{status}} buildup.", {
+          name,
+          status:
+            i18n.locale === "en"
+              ? status
+              : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
+        });
+    }
+    if ((event.status === "freeze" || event.status === "stun") && event.outcome === "apply") {
+      const englishStatus = event.status === "freeze" ? "Frozen" : "Stunned";
+      if (event.text === `${englishName} is ${englishStatus}.`)
+        return i18n.message("log.controlApplied", "{{name}} is {{status}}.", {
+          name,
+          status:
+            i18n.locale === "en"
+              ? englishStatus
+              : i18n.content(
+                  `content.keyword.${event.status}.label`,
+                  KEYWORD_DEFINITIONS[event.status].label,
+                ),
+        });
+    }
     if ((event.status === "freeze" || event.status === "stun") && event.outcome === "skip") {
       const englishStatus = event.status === "freeze" ? "Frozen" : "Stunned";
       if (event.text === `${englishName} skips its ${englishStatus} turn.`)

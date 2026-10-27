@@ -4271,11 +4271,23 @@
     "sourceHash": "081bb48c5e8bccaff2bd777bcee6d215f79872b4e579e4b3ed5c4e577a070d93",
     "text": "{{name}} bloqueia {{amount}} de dano."
   },
+  "log.blinded": {
+    "reviewed": true,
+    "source": "{{name}} is Blinded",
+    "sourceHash": "5397a254f24c923a43b8152701b62f4ec2f68bf56c6340b9ae96f0fecb0fc404",
+    "text": "{{name}}: Cegueira aplicada"
+  },
   "log.boonPurchased": {
     "reviewed": true,
     "source": "Boon purchased for this journey.",
     "sourceHash": "9110d7233be3ad3f81907e8c14802ccf6b9aeae91b218679c14fea9b5ab6d992",
     "text": "Bênção comprada para esta jornada."
+  },
+  "log.controlApplied": {
+    "reviewed": true,
+    "source": "{{name}} is {{status}}.",
+    "sourceHash": "3bf5f3aa0998c58ec8b7efa62b2feb2a356cfec162e2f6ab1673777e8bd8c1a2",
+    "text": "{{name}}: efeito aplicado ({{status}})."
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -4331,6 +4343,12 @@
     "sourceHash": "90592d31d0fc1e5a0f47990396ed61df5f9c6d9117bf94a878c4aa8050607d22",
     "text": "Receba {{amount}} de Mana."
   },
+  "log.gainNullify": {
+    "reviewed": true,
+    "source": "{{name}} gains Nullify",
+    "sourceHash": "1ed990a19f8136e0a60780886b51cb17bb7058e8b3a2756e819a07e915629297",
+    "text": "{{name}} recebe Anulação"
+  },
   "log.gainStatus": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} {{status}}.",
@@ -4342,6 +4360,12 @@
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "55e584718510d21033b106a168fc2d7d833982a739755303f3b9b9dabb7860c0",
     "text": "{{name}} recupera {{amount}} de Saúde."
+  },
+  "log.immuneBuildup": {
+    "reviewed": true,
+    "source": "{{name}} is immune to {{status}} buildup.",
+    "sourceHash": "af3187031e3a93154391edc497591deb0961f95cb3eb96b4470b1d8ddea62877",
+    "text": "{{name}}: imunidade ao acúmulo de {{status}}."
   },
   "log.intercept": {
     "reviewed": true,
@@ -4366,6 +4390,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "4f1b28fb06ea2047c626e0e9ab6819052ea07f79cc1378a66744b7b86b926630",
     "text": "{{name}} perde {{amount}} de acúmulo de Congelamento"
+  },
+  "log.nullifyEffect": {
+    "reviewed": true,
+    "source": "{{name}} nullifies {{status}}",
+    "sourceHash": "21202e5b68c6f84c0bef28a852c920c48d0081db6d290daa1af880ee2588b2b1",
+    "text": "{{name}} anula {{status}}"
   },
   "log.nullifyFreezeDamage": {
     "reviewed": true,

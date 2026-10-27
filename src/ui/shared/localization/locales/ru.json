@@ -4271,11 +4271,23 @@
     "sourceHash": "787e772c403f46f801cb007805e9be679f03f83b196d489f22aff45ccec53026",
     "text": "{{name}} блокирует урон: {{amount}}."
   },
+  "log.blinded": {
+    "reviewed": true,
+    "source": "{{name}} is Blinded",
+    "sourceHash": "67a4fcd17be0cd5b3a9023c47a08e9ccd24e2a24c10c10e77460176deb7c895a",
+    "text": "{{name}}: наложлено Ослепление"
+  },
   "log.boonPurchased": {
     "reviewed": true,
     "source": "Boon purchased for this journey.",
     "sourceHash": "cff124b44b28291783a1a1caef687c210b0ea6d6f56de255963ef3eecdb7029a",
     "text": "Благословение куплено для этого путешествия."
+  },
+  "log.controlApplied": {
+    "reviewed": true,
+    "source": "{{name}} is {{status}}.",
+    "sourceHash": "22262a4e1005d248dcfbfbd6674e5126232a27ea4e50e1c89c0e0668cd78b6e7",
+    "text": "{{name}}: наложен эффект ({{status}})."
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -4331,6 +4343,12 @@
     "sourceHash": "3ccefae6bfb077e765d9944a0ff25ce3ffdc8753438e15120526d96a18b77458",
     "text": "Получено маны: {{amount}}."
   },
+  "log.gainNullify": {
+    "reviewed": true,
+    "source": "{{name}} gains Nullify",
+    "sourceHash": "089b3c015e0eabdbcff380252915e548e5e766c726c1382fd6099cbc41a7ec09",
+    "text": "{{name}} получает Аннулирование"
+  },
   "log.gainStatus": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} {{status}}.",
@@ -4342,6 +4360,12 @@
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "52026a959f0c750f99ef440cae18d653b76c82d5733d396fb0ed60db733cd47e",
     "text": "{{name}} восстанавливает здоровье: {{amount}}."
+  },
+  "log.immuneBuildup": {
+    "reviewed": true,
+    "source": "{{name}} is immune to {{status}} buildup.",
+    "sourceHash": "73adb4c55c4512ef7008278af7cb8c82fd8cfbb539a3dbe81ef16fe0273b2f52",
+    "text": "{{name}}: невосприимчивость к накоплению ({{status}})."
   },
   "log.intercept": {
     "reviewed": true,
@@ -4366,6 +4390,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "0b9507e3907d1eeee7fb457f957fca6ebbecc6a7c8f7bb5a7f16871233c3f42e",
     "text": "У {{name}} накопление заморозки уменьшается на {{amount}}"
+  },
+  "log.nullifyEffect": {
+    "reviewed": true,
+    "source": "{{name}} nullifies {{status}}",
+    "sourceHash": "630b2bfe1368297f5892dc48218af4a0249d824e22dc930030b9ece942e21d15",
+    "text": "{{name}} предотвращает {{status}}"
   },
   "log.nullifyFreezeDamage": {
     "reviewed": true,

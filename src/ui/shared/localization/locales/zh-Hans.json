@@ -4271,11 +4271,23 @@
     "sourceHash": "22395139cf077464bb1936cc58d30b6a1e0f66a266e94f835c5156c788392ed3",
     "text": "{{name}}格挡了{{amount}}点伤害。"
   },
+  "log.blinded": {
+    "reviewed": true,
+    "source": "{{name}} is Blinded",
+    "sourceHash": "e46682d217542df47d67113aedc550265bc2e14e2a826c8f8c97a3ac7945da8b",
+    "text": "{{name}}受到致盲"
+  },
   "log.boonPurchased": {
     "reviewed": true,
     "source": "Boon purchased for this journey.",
     "sourceHash": "cde852c48b4cde8ef1b88831cc62c926dde81766fd412eb7081d7702acdaf309",
     "text": "已为本次旅程购买祝福。"
+  },
+  "log.controlApplied": {
+    "reviewed": true,
+    "source": "{{name}} is {{status}}.",
+    "sourceHash": "b58382f6889cc30d8edf2d383b2d154fec1b8b56e610d57389750581ae554512",
+    "text": "{{name}}受到{{status}}效果。"
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -4331,6 +4343,12 @@
     "sourceHash": "e8fce4485ff73f81d316395b816ac572dfd5493c5dfeb26e421739d47218a6d8",
     "text": "获得{{amount}}点法力。"
   },
+  "log.gainNullify": {
+    "reviewed": true,
+    "source": "{{name}} gains Nullify",
+    "sourceHash": "34c9fdee8dbe2f77ddd200a101d2f0c7906f0018fc0fc936af119001f6325522",
+    "text": "{{name}}获得无效化"
+  },
   "log.gainStatus": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} {{status}}.",
@@ -4342,6 +4360,12 @@
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "774a6f04bf39a8f4dc5d5fac1888879906000164d8e6ff6e508b69cce62118ab",
     "text": "{{name}}恢复了{{amount}}点生命。"
+  },
+  "log.immuneBuildup": {
+    "reviewed": true,
+    "source": "{{name}} is immune to {{status}} buildup.",
+    "sourceHash": "f558df0228bd356a92e2045d135f7975482bc638e9eb5da7c1c354354a2d0748",
+    "text": "{{name}}免疫{{status}}积累。"
   },
   "log.intercept": {
     "reviewed": true,
@@ -4366,6 +4390,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "7a9ebeb5c55006d03ebb285c14516a62d439274e46af4c0388501a8eff3ae549",
     "text": "{{name}}减少{{amount}}点冻结积累"
+  },
+  "log.nullifyEffect": {
+    "reviewed": true,
+    "source": "{{name}} nullifies {{status}}",
+    "sourceHash": "5ccaa194342a763fdbf865b34cbddd4ed324b7944e2fc8490183e6a31c660cb2",
+    "text": "{{name}}抵消了{{status}}"
   },
   "log.nullifyFreezeDamage": {
     "reviewed": true,

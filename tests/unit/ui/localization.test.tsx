@@ -222,6 +222,69 @@ it("localizes temporary Dodge and lost Freeze buildup with their exact amounts",
   expect(eventPresentation(game, dodge, createMessageReader("en", {}))).toBe(dodge.text);
 });
 
+it("localizes applied, prevented and immune combat status announcements", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const targetName = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: targetName, text: "Créature traduite" },
+  });
+  const base = { kind: "status" as const, targetId: target.id };
+  const gain = {
+    ...base,
+    status: "nullify" as const,
+    outcome: "gain" as const,
+    text: `${targetName} gains Nullify`,
+  };
+  const blinded = {
+    ...base,
+    status: "blind" as const,
+    outcome: "apply" as const,
+    text: `${targetName} is Blinded`,
+  };
+  const prevented = {
+    ...base,
+    status: "nullify" as const,
+    outcome: "remove" as const,
+    affectedStatus: "poison" as const,
+    text: `${targetName} nullifies poison`,
+  };
+  const immune = {
+    ...base,
+    status: "freeze" as const,
+    outcome: "immune" as const,
+    text: `${targetName} is immune to freeze buildup.`,
+  };
+  const frozen = {
+    ...base,
+    status: "freeze" as const,
+    outcome: "apply" as const,
+    text: `${targetName} is Frozen.`,
+  };
+  const stunned = {
+    ...base,
+    status: "stun" as const,
+    outcome: "apply" as const,
+    text: `${targetName} is Stunned.`,
+  };
+  expect(eventPresentation(game, gain, reader)).toBe("Créature traduite gagne Annulation");
+  expect(eventPresentation(game, blinded, reader)).toBe("Créature traduite : Aveuglement appliqué");
+  expect(eventPresentation(game, prevented, reader)).toBe("Créature traduite annule Poison");
+  expect(eventPresentation(game, immune, reader)).toBe(
+    "Créature traduite : immunité à l’accumulation (Gel).",
+  );
+  expect(eventPresentation(game, frozen, reader)).toBe("Créature traduite : effet appliqué (Gel).");
+  expect(eventPresentation(game, stunned, reader)).toBe(
+    "Créature traduite : effet appliqué (Étourdissement).",
+  );
+  expect(eventPresentation(game, { ...prevented, affectedStatus: "burn" as const }, reader)).toBe(
+    prevented.text,
+  );
+  for (const event of [gain, blinded, prevented, immune, frozen, stunned])
+    expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+});
+
 it("localizes prevented Freeze damage and skipped control turns", () => {
   const game = run();
   const target = game.team[0]!;
