@@ -50,9 +50,24 @@ test("mouse targeting previews without committing and stays stable across live r
   });
   await seed(page, game);
   await resume(page);
+  let previousFittedWidth: string | undefined;
   for (const width of [1280, 1920]) {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await settleScreen(page);
+    const board = page.locator(".app:not([inert]) .battle-screen");
+    if (previousFittedWidth !== undefined) {
+      // Artwork fitting runs in a resize-observer animation frame after the viewport changes.
+      await expect
+        .poll(() =>
+          board.evaluate((element) =>
+            (element as HTMLElement).style.getPropertyValue("--battle-fitted-width"),
+          ),
+        )
+        .not.toBe(previousFittedWidth);
+    }
+    previousFittedWidth = await board.evaluate((element) =>
+      (element as HTMLElement).style.getPropertyValue("--battle-fitted-width"),
+    );
     const card = page.locator(".app:not([inert]) .hand .action-card");
     const row = page.getByRole("region", { name: "Player row" });
     const before = await row.evaluate((element) => ({

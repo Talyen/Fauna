@@ -1,4 +1,5 @@
 import { useMessages } from "../shared/localization/message-context";
+import { eventPresentation } from "../shared/localization/event-presentation";
 import { measurePerformance, startPerformanceSpan } from "../../lib/performance";
 import { EffectScope, EffectsScene } from "../shared/effects/effects";
 import { useDevicePreferences } from "../settings/preferences";
@@ -30,7 +31,7 @@ import { Button } from "../../components/ui/button";
 import { Popover, PopoverAnchor, PopoverContent } from "../../components/ui/popover";
 import { BattleScreen } from "../battle/battle-screen";
 import type { Inspection } from "../shared/inspection-model";
-import { CONTROLLER_PROMPTS, type ControllerFamily } from "../shared/navigation/controller-prompts";
+import { localizedControllerPrompts, type ControllerFamily } from "../shared/navigation/controller-prompts";
 import { type Controls, connectInput, type InputAction } from "../shared/navigation/input";
 import { Draft } from "../expedition/draft";
 import { TeamSelection } from "../expedition/team-selection";
@@ -74,7 +75,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const [navigation, setNavigation] = useState(false);
   const playSound = useGameAudio(session, audio, route === "home");
   useActivationAudio(playSound);
-  const controllerPrompts = CONTROLLER_PROMPTS[controller === "auto" ? detectedController : controller];
+  const controllerKind = controller === "auto" ? detectedController : controller;
+  const controllerPrompts = localizedControllerPrompts(controllerKind, i18n);
   const active =
     !["victory", "defeat"].includes(game.phase) &&
     (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));
@@ -335,7 +337,12 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                         {i18n.message("menu.settings", "Settings")}
                       </ScreenHeading>
                     </header>
-                    <Settings session={session} preferences={preferences} update={updatePreferences} />
+                    <Settings
+                      session={session}
+                      preferences={preferences}
+                      update={updatePreferences}
+                      openLanguage={() => openModal("language")}
+                    />
                   </Screen>
                 ) : null}
                 <EffectScope name="play">
@@ -412,7 +419,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           bursts={bursts}
                           onDenied={deny}
                           controller={mode === "controller"}
-                          endTurnPrompt={controllerPrompts.endTurn}
+                          endTurnPrompt={controllerKind === "playstation" ? "△" : controllerPrompts.endTurn}
+                          endTurnPromptLabel={controllerPrompts.endTurn}
                           navigateFocus={navigation}
                         />
                       ) : game.phase === "recruit" || game.phase === "boon" ? (
@@ -427,7 +435,9 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                       )}
                     </HeaderNavigation.Provider>
                     <div className="sr-only" role="log" aria-live="polite">
-                      {view.events.map((event) => event.text).join(" ")}
+                      {view.events
+                        .map((event) => eventPresentation(game, event, i18n, view.eventPreviousGame))
+                        .join(" ")}
                     </div>
                   </div>
                 </EffectScope>
@@ -439,12 +449,12 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
               <PopoverContent
                 key={menuInstance}
                 className="menu-panel"
-                aria-label="Pause menu"
+                aria-label={i18n.message("menu.pause", "Pause menu")}
                 onOpenAutoFocus={focus.openMenuFocus}
                 onCloseAutoFocus={focus.closeMenuFocus}
               >
                 <EffectScope name="menu">
-                  <nav className="pause-menu-choices" aria-label="Pause menu">
+                  <nav className="pause-menu-choices" aria-label={i18n.message("menu.pause", "Pause menu")}>
                     {menuItems(false)}
                   </nav>
                 </EffectScope>

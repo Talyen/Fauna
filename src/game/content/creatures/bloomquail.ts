@@ -12,8 +12,8 @@ export const bloomquail: CreatureKit = {
     passiveTiers: sixPassiveTiers([50, 60, 70, 80, 90, 100], (amount) => ({
       description:
         amount === 100
-          ? "Convert your Block into Health for the most injured ally"
-          : `Convert ${amount}% of your Block into Health for the most injured ally`,
+          ? "Convert Block you gain into Health for the most injured ally"
+          : `Convert ${amount}% of Block you gain into Health for the most injured ally`,
       effects: [{ kind: "blockConversion", amount }],
     })),
   },

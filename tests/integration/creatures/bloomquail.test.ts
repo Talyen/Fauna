@@ -72,7 +72,7 @@ it.each([50, 60, 70, 80, 90, 100])("converts %i percent of newly gained Block im
     expect.objectContaining({ kind: "heal", targetId: "ally-1", amount: percent / 10 }),
   );
   expect(species("bloomquail").passiveTiers[(percent - 50) / 10]!.description).toBe(
-    `Convert ${percent === 100 ? "your Block" : `${percent}% of your Block`} into Health for the most injured ally`,
+    `Convert ${percent === 100 ? "Block" : `${percent}% of Block`} you gain into Health for the most injured ally`,
   );
 });
 

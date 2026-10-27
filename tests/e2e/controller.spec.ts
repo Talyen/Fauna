@@ -19,6 +19,7 @@ test("manual controller prompts persist and disconnection pauses without changin
   await resume(page);
   await press(13);
   await expect(page.getByRole("button", { name: "End turn · Triangle", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "End turn · Triangle", exact: true })).toContainText("△");
   await captureScreen(page, { path: "playstation-battle.png" });
   await page.getByRole("button", { name: "Auto-play", exact: true }).click();
   await press(13);

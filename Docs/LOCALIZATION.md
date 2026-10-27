@@ -41,15 +41,49 @@ Migrated components use `useMessages()` as `i18n`. Call `i18n.message` with a
 stable literal ID and English sentence, or `i18n.plural` with literal English
 `one` and `other` forms. Named `{{value}}` parameters let translations reorder
 values; use a complete message for accessible names as well as visible labels.
-Numbers are formatted for the selected language. Missing, stale or structurally
-invalid translations fall back to English.
+Numeric message parameters are formatted for the selected language. For rich
+values such as animated numbers, use `i18n.template` with `MessageParts` so
+the translation can move the value without remounting it. Authored names use
+`i18n.content` with the extracted content ID and the original English value;
+never derive gameplay identity from the translated name. Missing, stale or
+structurally invalid translations fall back to English.
+
+Creature proper names retain their canonical spelling in German, French, Spanish
+and Brazilian Portuguese; Japanese, Simplified Chinese and Russian use the
+reviewed names in their own scripts. Rules that name a creature must use the
+same localized name, inflected where the language requires it.
 
 Run `npm run localization:extract` after changing these calls and commit the
-resulting English catalog. `npm run localization:check`, the local changed-file
-gate and CI check its freshness, duplicate IDs, English forms and parameter
-syntax. This only covers explicit calls in `src/ui`; it does not detect all
-unconverted player text, validate non-English catalogs or qualify a language.
-The inventory remains a separate migration aid.
+resulting English catalogs and generated shipped-catalog imports. Production
+bundles only qualified language catalogs. Its generated imports retain each
+translation's source text for runtime freshness checks but omit authoring-only
+review flags and hashes. Development previews can exercise unqualified catalogs
+with temporary qualification. Authored species names, titles and traits, card
+names, Talent names, Boon names, keyword labels, and Boon, Talent and creature
+passive rules, Food rules, and glossary terms and definitions are extracted by their stable
+identities. Glossary keyword terms reuse the shared keyword labels. Rules retain keyword tags
+and named values;
+translation records also retain the exact English rule for freshness checks.
+Authored creature card variants use stable IDs derived from the whole English
+template and preserve the production rule's ordering. The extractor samples the
+known singular and enemy-power branches; unrecognized runtime forms fall back to
+English, so sampling alone does not establish complete card-rule coverage.
+Translations must remain grammatical for every numeric value that can fill a
+template; add explicit plural handling when a count-neutral sentence is not enough.
+Measured combat statuses reuse the keyword label and glossary definition while
+keeping their committed English snapshot for animation. Transient status rules
+use IDs derived from their full templates and retain semantic keyword tags;
+unrecognized variants fall back to their English snapshots.
+Combat previews retain keyword and status identities for localized changes and
+conditional outcomes, including accessible summaries. Their rendered behavior
+still requires review in the qualified languages before qualification.
+The live combat log translates recognized combat, action, status and reward
+events only when their complete committed text matches the corresponding event
+payload. Unrecognized announcements retain their original English until migrated.
+`npm run localization:check`, the local changed-file gate and CI check freshness,
+duplicate IDs, English forms and parameter syntax. UI extraction only covers
+explicit calls in `src/ui`; content extraction does not yet cover all rule prose or generated descriptions. Neither establishes complete coverage or
+qualifies a language. The inventory remains a separate migration aid.
 
 ### Translation packets
 
@@ -71,11 +105,23 @@ incorrect parameters and missing locale-specific plural categories.
 `npm run localization:translations:check` validates existing reviewed records;
 the local changed-file gate and CI run it as well.
 
-The language registry marks only English qualified. Its qualification check
+The language registry identifies qualified languages. Its qualification check
 requires complete reviewed catalogs for each enabled language, completed UI,
-content and rule migration, and a runtime connected to those catalogs. These structural checks do not establish font,
-rendered-flow, platform or linguistic quality; the remaining qualification
-steps below still apply.
+content and rule migration, and a runtime connected to those catalogs. Japanese,
+Simplified Chinese and Russian also require bundled script fonts whose character
+maps cover the translated catalog, native language name and compact numbers.
+The checks do not establish font wiring, rendered-flow, platform or linguistic
+quality; the remaining qualification steps below still apply.
+
+Font preparation is an explicit authoring step. `npm run localization:fonts`
+uses fontTools 4.60.1, fetches commit-pinned Noto sources, verifies their SHA-256
+digests, and subsets the current translations and native language names. Set
+`FAUNA_FONT_PYTHON` to the Python environment containing that version, or pass
+`-- --source-dir <directory>` to use verified original fonts offline. Replaced
+fonts are backed up under `reports/localization/backups`. The bundled OFL notices
+are in `Docs/NOTO-SANS-LICENSE.txt`, `Docs/NOTO-SANS-JP-LICENSE.txt`
+and `Docs/NOTO-SANS-SC-LICENSE.txt`. Regenerate after adding glyphs and inspect actual
+rendering before qualification; a subset alone does not enable a language.
 
 ## Implementation and qualification
 
@@ -87,7 +133,8 @@ steps below still apply.
    language; test cross-language save/resume and unchanged command/RNG outcomes
 3. Translate and semantically review every target catalog, including actor,
    timing, quantities, negation and glossary consistency. Bundle fonts covering
-   all required glyphs and validate those fonts against the catalogs
+   all required glyphs and validate those fonts against the catalogs. Semantic
+   review is part of implementation; separate native-speaker review is not required
 4. Add a device-local language choice and automatic detection through Fauna's
    existing platform capabilities, with English fallback. Check live switching,
    focus and controller navigation; verify startup, recovery and storage failures
@@ -98,13 +145,15 @@ steps below still apply.
 The device-local preference owner can resolve an available qualified catalog
 using a saved choice, Steam's game language, then system languages. Optional
 storage and Steam failures fall back without blocking play; stale Steam responses
-cannot override a manual choice. Only English is selectable. The Steam worker
+cannot override a manual choice. The Steam worker
 uses an isolated, bounded language request so an invalid or timed-out optional
-reply does not stop its Cloud transport. Runtime catalog and startup coverage is
-still incomplete, so the runtime qualification flag remains false.
+reply does not stop its Cloud transport. Startup and runtime catalog localization
+use the same qualified languages. Production build and platform verification are
+reported separately from catalog and rendered-flow checks.
 
-The inventory, explicit UI messages and internal rule-message adapter are
-preparation steps. The adapter retains numeric values and keyword identities so a
-complete translated rule can reorder them; invalid templates fall back to the
-English rule. The English catalog covers only migrated UI calls. It does not yet
-cover every message, generated rules or non-English catalogs, and no player-facing language selector is available. Fauna remains English-only.
+The rule-message adapter retains numeric values and keyword identities so a
+translated rule can reorder them; invalid or unrecognized templates fall back to
+English. The card extractor checks runtime numeric branches against the forms it
+samples, so newly introduced branches need explicit coverage. The UI inventory is
+an additional aid and cannot by itself prove coverage of dynamic text. The
+language selector offers the languages marked qualified in the registry.

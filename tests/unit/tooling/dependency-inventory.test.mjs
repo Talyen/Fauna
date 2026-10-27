@@ -13,6 +13,8 @@ it("retains production license text and rejects missing or mismatched installed 
 
   write("Docs/SHADCN-LICENSE.txt", "source license");
   write("Docs/FONT-LICENSE.txt", "font license");
+  for (const file of ["NOTO-SANS-LICENSE.txt", "NOTO-SANS-JP-LICENSE.txt", "NOTO-SANS-SC-LICENSE.txt"])
+    write(`Docs/${file}`, `notice for ${file}`);
   write("node_modules/example/package.json", JSON.stringify({ name: "example", version: "1.0.0" }));
   write("node_modules/example/LICENSE", "copyright and permission");
   const lock = {
@@ -26,6 +28,7 @@ it("retains production license text and rejects missing or mismatched installed 
   const result = dependencyNotices(root, lock);
   expect(result.notices).toContain("copyright and permission");
   expect(result.notices).toContain("font license");
+  expect(result.notices).toContain("notice for NOTO-SANS-JP-LICENSE.txt");
   expect(result.inventory).toHaveLength(1);
   lock.packages["node_modules/example"].version = "2.0.0";
   expect(() => dependencyNotices(root, lock)).toThrow("version differs");
@@ -63,6 +66,8 @@ it.each(["3.3.3", "3.3.4"])(
 
     write("Docs/SHADCN-LICENSE.txt", "source license");
     write("Docs/FONT-LICENSE.txt", "font license");
+    for (const file of ["NOTO-SANS-LICENSE.txt", "NOTO-SANS-JP-LICENSE.txt", "NOTO-SANS-SC-LICENSE.txt"])
+      write(`Docs/${file}`, `notice for ${file}`);
     write("node_modules/koffi/LICENSE.txt", "Koffi copyright and MIT permission");
     write("node_modules/koffi/package.json", JSON.stringify({ name: "koffi", version, license: "MIT" }));
     write(`node_modules/${name}/package.json`, JSON.stringify({ name, version, license: "MIT" }));

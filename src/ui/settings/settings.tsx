@@ -1,6 +1,9 @@
+import { useLanguage } from "../shared/localization/provider";
+import { LANGUAGES } from "../shared/localization/languages";
+import { Button } from "../../components/ui/button";
 import { useMessages } from "../shared/localization/message-context";
 import { Slider } from "../../components/ui/slider";
-import { Eclipse, Sparkles, Gamepad2 } from "lucide-react";
+import { Eclipse, Sparkles, Gamepad2, Languages } from "lucide-react";
 import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
 import { useState } from "react";
@@ -17,12 +20,19 @@ export function Settings({
   session,
   preferences,
   update,
+  openLanguage,
 }: {
   session: Session;
   preferences: DevicePreferences;
   update: (patch: PreferencesPatch) => void;
+  openLanguage: () => void;
 }) {
   const i18n = useMessages();
+  const language = useLanguage();
+  const languageLabel =
+    language.preference === "auto"
+      ? i18n.message("settings.automatic", "Automatic")
+      : LANGUAGES[language.preference].name;
   const { audio, scale, tooltipScale, autoEndTurn, controller } = preferences;
   const [tab, setTab] = useState("display");
   return (
@@ -55,6 +65,21 @@ export function Settings({
       >
         <h2 className="settings-heading">{i18n.message("settings.display", "Display")}</h2>
         <DisplaySettings session={session} />
+        {language.options.length > 1 ? (
+          <SettingRow icon={Languages} label={i18n.message("settings.language", "Language")}>
+            <Button
+              variant="outline"
+              onClick={openLanguage}
+              aria-label={i18n.message("settings.languageValue", "Language: {{language}}", {
+                language: languageLabel,
+              })}
+            >
+              <span lang={language.preference === "auto" ? undefined : language.preference}>
+                {languageLabel}
+              </span>
+            </Button>
+          </SettingRow>
+        ) : null}
         <SettingRow icon={CaseSensitive} label={i18n.message("settings.textSize", "Text size")}>
           <RadioGroup
             orientation="horizontal"

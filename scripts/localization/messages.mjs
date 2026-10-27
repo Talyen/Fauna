@@ -1,7 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { extractProjectContent } from "./content.mjs";
 import { parseSync } from "@swc/core";
+import { runtimeCatalogModule } from "./runtime-catalogs.mjs";
+import { walk } from "./source-ast.mjs";
 
 function parameters(text, location) {
   if (!text.trim()) throw new Error(`${location}: localization source cannot be empty`);
@@ -16,21 +19,20 @@ export function extractMessages(files) {
   const messages = new Map();
   for (const { location, source } of files) {
     const ast = parseSync(source, { syntax: "typescript", tsx: location.endsWith(".tsx"), target: "es2022" });
-    function visit(node) {
-      if (!node || typeof node !== "object") return;
+    walk(ast, (node) => {
       const callee = node.callee;
       if (
         node.type === "CallExpression" &&
         callee?.type === "MemberExpression" &&
         callee.object?.type === "Identifier" &&
         callee.object.value === "i18n" &&
-        ["message", "plural"].includes(callee.property?.value)
+        ["message", "template", "plural"].includes(callee.property?.value)
       ) {
         const [id, source] = node.arguments.map((arg) => arg.expression);
         if (id?.type !== "StringLiteral" || !/^[a-z][\w]*(?:\.[a-zA-Z][\w]*)+$/.test(id.value))
           throw new Error(`${location}: localization requires a stable literal message ID`);
         let record;
-        if (callee.property.value === "message" && source?.type === "StringLiteral")
+        if (["message", "template"].includes(callee.property.value) && source?.type === "StringLiteral")
           record = { text: source.value };
         else if (callee.property.value === "plural" && source?.type === "ObjectExpression") {
           const forms = Object.fromEntries(
@@ -52,13 +54,7 @@ export function extractMessages(files) {
           throw new Error(`${location}: conflicting English source for ${id.value}`);
         messages.set(id.value, record);
       }
-      for (const [key, child] of Object.entries(node)) {
-        if (key === "span") continue;
-        if (Array.isArray(child)) child.forEach(visit);
-        else if (child && typeof child === "object") visit(child);
-      }
-    }
-    visit(ast);
+    });
   }
   return Object.fromEntries([...messages].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
 }
@@ -78,17 +74,37 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const destination = path.join(root, "src/ui/shared/localization/messages.en.json");
   const messages = extractProjectMessages(root);
   const output = JSON.stringify(messages, null, 2) + "\n";
+  const contentFile = path.join(root, "src/ui/shared/localization/content.en.json");
+  const content = extractProjectContent(root);
+  const contentOutput = JSON.stringify(content, null, 2) + "\n";
+  const runtimeFile = path.join(root, "src/ui/shared/localization/shipped-catalogs.ts");
+  const languages = JSON.parse(
+    fs.readFileSync(path.join(root, "src/ui/shared/localization/languages.json"), "utf8"),
+  );
+  const runtimeOutput = runtimeCatalogModule(languages);
   switch (process.argv[2]) {
     case "extract":
       fs.writeFileSync(destination, output);
-      console.log(`Extracted ${Object.keys(messages).length} explicit UI messages`);
+      fs.writeFileSync(contentFile, contentOutput);
+      fs.writeFileSync(runtimeFile, runtimeOutput);
+      console.log(
+        `Extracted ${Object.keys(messages).length} explicit UI messages and ${Object.keys(content).length} authored entries`,
+      );
       break;
     case "check":
       if (!fs.existsSync(destination) || fs.readFileSync(destination, "utf8") !== output) {
         console.error("English localization catalog is stale; run npm run localization:extract");
         process.exitCode = 1;
+      } else if (!fs.existsSync(contentFile) || fs.readFileSync(contentFile, "utf8") !== contentOutput) {
+        console.error("English content catalog is stale; run npm run localization:extract");
+        process.exitCode = 1;
+      } else if (!fs.existsSync(runtimeFile) || fs.readFileSync(runtimeFile, "utf8") !== runtimeOutput) {
+        console.error("Shipped language catalog imports are stale; run npm run localization:extract");
+        process.exitCode = 1;
       } else
-        console.log(`English localization catalog is current (${Object.keys(messages).length} messages)`);
+        console.log(
+          `English localization catalogs are current (${Object.keys(messages).length} UI messages; ${Object.keys(content).length} authored entries)`,
+        );
       break;
     default:
       throw new Error("Use extract or check");

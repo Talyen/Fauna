@@ -36,6 +36,7 @@
     "localization:translations:check": "node scripts/localization/translate.mjs check",
     "localization:extract": "node scripts/localization/messages.mjs extract",
     "localization:check": "node scripts/localization/messages.mjs check",
+    "localization:fonts": "node scripts/localization/subset-fonts.mjs",
     "localization:inventory": "node scripts/localization/inventory.mjs",
     "docs:check": "node scripts/checks/check-docs.mjs",
     "check:bundle": "node scripts/checks/check-bundle-budget.mjs",

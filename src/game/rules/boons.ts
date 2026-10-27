@@ -207,7 +207,7 @@ const rules = freeze(
     "dune-shuttle": boon({ block: 1 }, () => "Drawing an ally's card grants them 1 Block"),
     "story-puzzle-cube": boon(
       { effects: 3, purge: 1 },
-      () => "Every third harmful effect you apply Purges the enemy",
+      () => "Applying three different harmful effects Purges the last enemy affected",
     ),
     "mineral-bookend": boon({ mana: 1 }, () => "Drawing the last card in your draw pile restores 1 Mana"),
     "briar-racquet": boon({ divisor: 2 }, () => "Thorns retaliates at half strength when you Dodge"),

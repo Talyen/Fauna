@@ -138,6 +138,6 @@ export const NEW_BOON_EFFECTS = {
   "nectar-dipper": "Food cards are twice as effective",
   "saddle-pouch": "Swapping an ally in from backup draws one of its cards",
   "dune-shuttle": "Drawing an ally's card grants them 1 Block",
-  "story-puzzle-cube": "Every third harmful effect you apply Purges the enemy",
+  "story-puzzle-cube": "Applying three different harmful effects Purges the last enemy affected",
   "mineral-bookend": "Drawing the last card in your draw pile restores 1 Mana",
 } as const;

@@ -1,6 +1,8 @@
 import { defineConfig } from "vitest/config";
+import { runtimeCatalogPlugin } from "./scripts/localization/runtime-catalogs.mjs";
 
 export default defineConfig({
+  plugins: [runtimeCatalogPlugin()],
   test: {
     include: [
       "tests/integration/gameplay/mana.test.ts",

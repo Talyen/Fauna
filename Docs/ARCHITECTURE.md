@@ -155,7 +155,7 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 
 [Diagnostics](../src/application/diagnostics.ts) is a bounded session-owned collector with a separate persistence port. It records selected revision/phase fields rather than saves or arbitrary objects, truncates errors and redacts common paths/credentials, including directories with Unicode names. Sink failures, unavailable storage and recursive logging cannot affect gameplay. Stored history obeys the serialized-size limit as well as entry/message limits, including JSON escaping. Context receives the same path/credential redaction as messages; malformed context cannot suppress the original failure. Notifications snapshot their independently owned subscriptions, and disposal revokes collection. There is no player report/clipboard export or automatic upload.
 
-`committedCommand` is transient session presentation metadata. Loading a checkpoint cannot manufacture a committed action or replay audio. Collection discovery and passive ranks belong to [journey progression](EXPEDITION_DESIGN.md); local browsing never grants them.
+`committedCommand` is transient session presentation metadata. While committed events are present, the session also retains the immutable pre-command game so presentation can resolve combatants removed by a battle-ending transition. This context is not saved and loading a checkpoint clears it; loading cannot manufacture a committed action or replay audio. Collection discovery and passive ranks belong to [journey progression](EXPEDITION_DESIGN.md); local browsing never grants them.
 
 ## Optional performance recording
 

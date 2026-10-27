@@ -14,6 +14,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../
 import { KeywordText } from "../../src/ui/shared/keyword-text";
 import { KEYWORD_DEFINITIONS } from "../../src/game/keywords";
 import { Settings } from "../../src/ui/settings/settings";
+import { LanguageChoices } from "../../src/ui/settings/language-choices";
+import { LocalizationProvider } from "../../src/ui/shared/localization/provider";
 import { returnFocus } from "../../src/ui/shared/navigation/focus";
 import {
   defaultAudioPreferences,
@@ -40,6 +42,7 @@ function freshPreferences(): DevicePreferences {
 
 function SettingsReview() {
   const [open, setOpen] = useState(true);
+  const [languageOpen, setLanguageOpen] = useState(false);
   const [preferences, setPreferences] = useState(freshPreferences);
   const { scale, tooltipScale } = preferences;
   const [session] = useState(() =>
@@ -172,7 +175,20 @@ function SettingsReview() {
               </Button>
             </div>
           ) : null}
-          <Settings key={revision} session={session} preferences={preferences} update={update} />
+          <Settings
+            key={revision}
+            session={session}
+            preferences={preferences}
+            update={update}
+            openLanguage={() => setLanguageOpen(true)}
+          />
+          <Dialog open={languageOpen} onOpenChange={setLanguageOpen}>
+            <DialogContent closeLabel="Close Language">
+              <DialogTitle>Language</DialogTitle>
+              <DialogDescription className="sr-only">Choose a preview language</DialogDescription>
+              <LanguageChoices />
+            </DialogContent>
+          </Dialog>
           <section className="settings-preview-tools" aria-label="Preview tools">
             <h2>Preview tools</h2>
             <div className="preview-toggles">
@@ -235,7 +251,9 @@ function SettingsReview() {
   );
 }
 createRoot(document.getElementById("root")!).render(
-  <TooltipProvider delayDuration={0} skipDelayDuration={0}>
-    <SettingsReview />
-  </TooltipProvider>,
+  <LocalizationProvider persist={false}>
+    <TooltipProvider delayDuration={0} skipDelayDuration={0}>
+      <SettingsReview />
+    </TooltipProvider>
+  </LocalizationProvider>,
 );

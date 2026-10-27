@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { ArrowDownUp, Users } from "lucide-react";
@@ -19,6 +20,8 @@ type Props = {
 
 /** Only the final command changes the roster; every artwork exchange is a local preview. */
 export function RecruitTeam({ game, incoming, send, inspect }: Props) {
+  const i18n = useMessages();
+  const creatureName = (kind: SpeciesId) => i18n.content(`content.species.${kind}.name`, species(kind).name);
   const [replacement, setReplacement] = useState<string>();
   const root = useRef<HTMLElement>(null);
   const motion = useRef<ReturnType<typeof captureArtworkSwap> | null>(null);
@@ -49,15 +52,22 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
   const inspectCreature = (kind: SpeciesId, id?: string) => inspect({ species: kind, creatureId: id });
   return (
     <Screen className="recruit-team-screen" ref={root}>
-      <ScreenHeading back={false}>Choose your team</ScreenHeading>
-      <section className="recruit-team-exchange" aria-label="Exchange creature">
+      <ScreenHeading back={false}>{i18n.message("recruit.chooseTeam", "Choose your team")}</ScreenHeading>
+      <section
+        className="recruit-team-exchange"
+        aria-label={i18n.message("recruit.exchange", "Exchange creature")}
+      >
         <CreatureCard
           progression={game}
           kind={outside}
           actorId={outgoing?.id}
           readout={false}
           label={
-            outgoing ? `Undo replacement of ${species(outside).name}` : `Inspect ${species(incoming).name}`
+            outgoing
+              ? i18n.message("recruit.undoReplacement", "Undo replacement of {{name}}", {
+                  name: creatureName(outside),
+                })
+              : i18n.message("creature.inspect", "Inspect {{name}}", { name: creatureName(incoming) })
           }
           onClick={() => (outgoing ? preview(undefined) : inspectCreature(incoming))}
           onInspect={() => inspectCreature(outside, outgoing?.id)}
@@ -67,7 +77,7 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
       <section className="recruit-team-tray" aria-labelledby="recruit-team-heading">
         <h2 id="recruit-team-heading">
           <Users aria-hidden="true" />
-          Team
+          {i18n.message("recruit.team", "Team")}
         </h2>
         <div className="recruit-team-roster" data-nav-row>
           {all.map((unit, index) => {
@@ -83,8 +93,15 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
                   selected={selected}
                   label={
                     selected
-                      ? `Undo ${species(incoming).name} in team slot ${index + 1}`
-                      : `Preview replacing ${species(kind).name} in team slot ${index + 1}`
+                      ? i18n.message("recruit.undoSlot", "Undo {{name}} in team slot {{slot}}", {
+                          name: creatureName(incoming),
+                          slot: index + 1,
+                        })
+                      : i18n.message(
+                          "recruit.previewSlot",
+                          "Preview replacing {{name}} in team slot {{slot}}",
+                          { name: creatureName(kind), slot: index + 1 },
+                        )
                   }
                   onClick={() => preview(selected ? undefined : unit.id)}
                   onInspect={() => inspectCreature(kind, selected ? undefined : unit.id)}
@@ -101,7 +118,7 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
             send({ type: "confirmRecruit", replace: replacement });
           }}
         >
-          Confirm
+          {i18n.message("recruit.confirm", "Confirm")}
         </Button>
       </footer>
     </Screen>

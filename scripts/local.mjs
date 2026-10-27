@@ -132,7 +132,7 @@ export async function runLocal(
         "--owner",
         env.CODEX_THREAD_ID ?? `fauna:${process.pid}`,
         "--wait",
-        "30",
+        "900",
         "--timeout",
         "300",
         "--",
@@ -147,7 +147,7 @@ export async function runLocal(
         env,
         grouped: false,
         // The helper owns its process group and needs time to finish cancellation.
-        timeout: 315_000,
+        timeout: 1_215_000,
         cleanupGraceMs: 12_000,
       },
     );
@@ -155,7 +155,12 @@ export async function runLocal(
     return result.error ? result.status || 1 : (result.status ?? 1);
   }
   const bounded = !ci && env.FAUNA_COMMAND_BUDGET !== "1";
-  const timeout = !ci && env.FAUNA_LOCAL_HEAVY !== "1" && kind !== "integrate" ? 30_000 : 300_000;
+  const timeout =
+    !ci && env.FAUNA_LOCAL_HEAVY !== "1" && kind !== "integrate"
+      ? kind === "verify:changed"
+        ? 90_000
+        : 30_000
+      : 300_000;
   const deadline = Date.now() + timeout;
   const childEnv = {
     ...env,

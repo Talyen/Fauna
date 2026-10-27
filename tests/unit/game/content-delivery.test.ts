@@ -6,6 +6,15 @@ it("accepts all current authored delivery and passive limits", () => {
   expect(validateCatalog().filter((issue) => issue.severity === "error")).toEqual([]);
 });
 
+it("rejects an ability owned by an unknown species", () => {
+  const catalog = structuredClone(contentCatalog);
+  const card = catalog.cards.find((entry) => entry.id === "mossguard-guard")!;
+  Object.assign(card, { species: "unknown-species" });
+  expect(validateCatalog(catalog)).toContainEqual(
+    expect.objectContaining({ id: card.id, field: "species", message: "Unknown owner.", severity: "error" }),
+  );
+});
+
 it.each([
   ["mossguard-guard", "self", false],
   ["mossguard-guard", "injured", true],
