@@ -1373,6 +1373,12 @@
     "sourceHash": "fb30f57feb34c3b7582363ca3efd91102135d5d09d2e17a45844e63c8f740323",
     "text": "物語のパズルキューブ"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "fb2101d38588d4595600f98866d98bdfc2a9eae32822c340dbaa1551e1f03397",
+    "text": "異なる有害効果を3種類付与すると、最後に効果を受けた敵の有益な効果を<keyword0>強化解除</keyword0>"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",

@@ -1373,6 +1373,12 @@
     "sourceHash": "87c84a1ddb5b0312b03dc617c7b717a5e8f89d09c2fa5d3a2ee0700507d54d94",
     "text": "Кубик историй"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "4c8be9867be9e7a9ef60e4d905e5528c9c26aa22a6c1ba55c2fba495b55504ce",
+    "text": "Применение трёх разных вредных эффектов <keyword0>рассеивает</keyword0> полезный эффект последнего затронутого врага"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",

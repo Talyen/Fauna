@@ -1373,6 +1373,12 @@
     "sourceHash": "e6daa4f80a2235903a8899f291db021cdd5e8a1f17381a37ba526f12de7cde1f",
     "text": "Cube d’énigmes"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "b79c4ccbdc223929724211e333352d603948fda82366cc432ca4792e8999a461",
+    "text": "Appliquer trois effets néfastes différents <keyword0>dissipe</keyword0> un effet bénéfique du dernier ennemi affecté"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",

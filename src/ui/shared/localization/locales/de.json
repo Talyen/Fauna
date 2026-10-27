@@ -1373,6 +1373,12 @@
     "sourceHash": "2808d30cadf2e1e441309c027b4e95df92452090d37575c5a477aa29b514b774",
     "text": "Geschichtenrätselwürfel"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "ba62d16cc23c23d4a30ad5018684c889138552e4b294472845407798dc533ff8",
+    "text": "Das Anwenden von drei verschiedenen schädlichen Effekten <keyword0>bannt</keyword0> einen positiven Effekt des zuletzt betroffenen Gegners"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",

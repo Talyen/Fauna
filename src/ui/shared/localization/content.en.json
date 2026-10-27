@@ -682,8 +682,8 @@
     "text": "Story Puzzle Cube"
   },
   "content.boon.story-puzzle-cube.rule": {
-    "text": "Every third harmful effect you apply <keyword0>Purges</keyword0> the enemy",
-    "reference": "Every third harmful effect you apply Purges the enemy"
+    "text": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "reference": "Applying three different harmful effects Purges the last enemy affected"
   },
   "content.boon.sundering-charm.name": {
     "text": "Sundering Charm"

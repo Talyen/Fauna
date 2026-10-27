@@ -1373,6 +1373,12 @@
     "sourceHash": "23dc1303d16f4d7dfaa1d8535744127df5f273834162ddfedb91520e6a988d41",
     "text": "故事谜题方块"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "b7f38ca433e096485aa92a81e8061e8c00d67af4c6a1c2f76aa38d5202abc272",
+    "text": "施加三种不同的有害效果时，<keyword0>驱散</keyword0>最后受影响敌人的一个有益效果"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",

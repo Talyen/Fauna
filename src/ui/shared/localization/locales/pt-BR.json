@@ -1373,6 +1373,12 @@
     "sourceHash": "de503d1be730332dfe3f5c56336ffa601d0f2c95e1d2d453e09b98b2e1e6301c",
     "text": "Cubo de histórias"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "6101050477edb771f63ed4525d9d497caec83fb6d92aec47ea2a4fe705730211",
+    "text": "Aplicar três efeitos prejudiciais diferentes <keyword0>expurga</keyword0> um efeito benéfico do último inimigo afetado"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",
