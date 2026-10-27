@@ -905,6 +905,258 @@
     "sourceHash": "42f4269432d70809a8af8dbe3ebee3ade9688fe4506a58103c7bbef4b15565f4",
     "text": "Água"
   },
+  "content.species.aerostat.passive.0.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
+    "sourceHash": "63c1b47199c5b97f81e8a71db459bc67449950bfe2e6a31129252e9efe787790",
+    "text": "Comece com {{value0}} carta de <keyword0>Comida</keyword0> no seu baralho"
+  },
+  "content.species.aerostat.passive.1.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "7b232393c8435e8d8ffa106181092432a6de66ec153112f84fe5a8f635f86a0b",
+    "text": "Comece com {{value0}} cartas de <keyword0>Comida</keyword0> no seu baralho"
+  },
+  "content.species.aerostat.passive.2.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "d406f778a591e21b7519c2a045adfa6d98c1b8bbc7f303bbbe686506b6326362",
+    "text": "Comece com {{value0}} cartas de <keyword0>Comida</keyword0> no seu baralho"
+  },
+  "content.species.aerostat.passive.3.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "09317bc2af788db6a4cfcddb45ea752670e8cee55ec00b7c3cfaf92cc54c7c30",
+    "text": "Comece com {{value0}} cartas de <keyword0>Comida</keyword0> no seu baralho"
+  },
+  "content.species.aerostat.passive.4.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "a83c200e340b9484126cfb5a489f766ae2214a379161356e8fcaf1dd9ac0e151",
+    "text": "Comece com {{value0}} cartas de <keyword0>Comida</keyword0> no seu baralho"
+  },
+  "content.species.aerostat.passive.5.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "b21c6050f5aecd660340d1bfd04c97fe16e71681c3df3d663568feea5b64fced",
+    "text": "Comece com {{value0}} cartas de <keyword0>Comida</keyword0> no seu baralho"
+  },
+  "content.species.almanelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "c800aed285a4e5b6339fc80fa68ccbc92d3bfc9b2d6d68b344818ab6156c4b8f",
+    "text": "{{value0}}% do <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.almanelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "0580493bbfdffdc2e9f3f72ad3572c906eac620236ce5d904f18f3736d622b29",
+    "text": "{{value0}}% do <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.almanelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "456a6b626ab1e42d5e8729bfa91dade9be60e53bc73f7277fb4e988e71d01141",
+    "text": "{{value0}}% do <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.almanelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "d61805a2dac8875274825e3cfcdb2e0ba843ed719bcf6c6e67eae0c4def2a3d7",
+    "text": "{{value0}}% do <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.almanelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "f76bc3a8289dcec64d427756d05d7f74a316799a7d08d2f6e0f500e96ef0e071",
+    "text": "{{value0}}% do <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.almanelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "c5427ea59690d2c99ae590ebed5874f91076cf6656f57d115045d4e65a357b85",
+    "text": "O <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.alpenglen.passive.0.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "bf622a7f77aa1d8b945caf92920da1b7c97364d3afdffa3209e95bd05dd40c6a",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.1.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "990546a8b2332314d7d5995ddae267112d2e32a2b1c30c45d5dab323bb337527",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.2.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "69732dfca45537befb23c6d546fa7d074c1ee726599afd3803aa4cccc450681b",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.3.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "21626a393e754fafa5222b513ec323226a7408582f0de54a3fb182bcaacde4f7",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.4.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "7fddc48a48fde2d641a1f4697cc494535990c2d3e48b20e28c7fc7f90d3ef1ae",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.5.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "7991e0aa8c8d75ace141ba3e7b75a4e26401421df11f2f8dc6729f81eac5c274",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.arabesca.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "cbe2b832dd865512048aea05fd23b57debf96df5f28d8bb4e4a81ad0ecc22871",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "25335a04ea79c0da30573856cd507a33d882d9a00eb729c4b486007fcae5b9c3",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "ec9c8659dde39a7fe3235cde2789f0f4f44dc83fd9046c068768a0fc3646a9cd",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f4924e0bf71a24c71e71f75454179b8d2edff6a38c8aaf638fd33688a0b83b68",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "7884eb105b4ef8881e45506f13d978c16b28d9a6bcbb277c34b7d268cab3b359",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "1348451d41ffec0c18e7deba2fccd0c2d7826d7971782eaa39f3a86c428fed59",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.bloomquail.passive.0.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "64f94c5c05ce120763d9d8ac447c8d9e29c21d42a9d7f7179e9769148d9d9da1",
+    "text": "Converta {{value0}}% do <keyword0>Bloqueio</keyword0> que você ganha em <keyword1>Saúde</keyword1> para o aliado mais ferido"
+  },
+  "content.species.bloomquail.passive.1.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "5dae0483bde2abc8651c832c169cb977138ecd2ffb145d5e7c75279b933de8be",
+    "text": "Converta {{value0}}% do <keyword0>Bloqueio</keyword0> que você ganha em <keyword1>Saúde</keyword1> para o aliado mais ferido"
+  },
+  "content.species.bloomquail.passive.2.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "438eade4bfbd20433115d225390522ea4c8a1b817b1d182806d3fa81052ae00e",
+    "text": "Converta {{value0}}% do <keyword0>Bloqueio</keyword0> que você ganha em <keyword1>Saúde</keyword1> para o aliado mais ferido"
+  },
+  "content.species.bloomquail.passive.3.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "8280b46197b145c4072b6f8a81f7675d9182ef74165fc4c9c2e535b9a024fa4d",
+    "text": "Converta {{value0}}% do <keyword0>Bloqueio</keyword0> que você ganha em <keyword1>Saúde</keyword1> para o aliado mais ferido"
+  },
+  "content.species.bloomquail.passive.4.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "6360bfe5a9387f3a5c98d6c5cdba5b2db2795162eee78f2577b6c872ae8b8337",
+    "text": "Converta {{value0}}% do <keyword0>Bloqueio</keyword0> que você ganha em <keyword1>Saúde</keyword1> para o aliado mais ferido"
+  },
+  "content.species.bloomquail.passive.5.rule": {
+    "reviewed": true,
+    "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "6ba17d5d4eaeef7223a4d229b41d78b8fef79070fb3959f19f432ffb1fa33e99",
+    "text": "Converta o <keyword0>Bloqueio</keyword0> que você ganha em <keyword1>Saúde</keyword1> para o aliado mais ferido"
+  },
+  "content.species.cadenza.passive.0.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "08b3722b1ac8f67e89024f34908a688c6fb2c315d0c095816c0e622c2499c4d5",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.1.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "606423ea640b885fa7eca45cc5715a470d8d8b461ab2f7bdeb47ddfc5612476f",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.2.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "fb38e5b3402a6206abad0ad626faebc4966fab26c20bc0ad1fba9039f5484de4",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.3.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "ab2bb854bd040c630da57caff548476ab664d9dc793fbcf849f97c207e408869",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.4.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "4f5d2c5a1e9e7dc3d66c5fc9e9865c1f591c5955bcc266ccba93bf559b32245d",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.5.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "f4f212f9e7c6bbdcc9a69e1094002c88a9f5c8833b7cb065f54af3b2f5bf122b",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.captoad.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "e6c5a6656f678a97ab6a6494efea08232c5700ec80d1af906b92705ced54c841",
+    "text": "Revide com {{value0}} de dano de <keyword0>Veneno</keyword0> ao receber um acerto"
+  },
+  "content.species.captoad.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "ddc501bc649b60697af17bc4adb839fea2b2a1632255073f94d5a1c209ddcd24",
+    "text": "Revide com {{value0}} de dano de <keyword0>Veneno</keyword0> ao receber um acerto"
+  },
+  "content.species.captoad.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "165165e24a02ba2fdc5468bcef89987312c136b3226ac2adfa578145a40539c6",
+    "text": "Revide com {{value0}} de dano de <keyword0>Veneno</keyword0> ao receber um acerto"
+  },
+  "content.species.captoad.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "801e124bb775e537ea633bcfd695310caba1f5ae984d565a9e9bf6211d794805",
+    "text": "Revide com {{value0}} de dano de <keyword0>Veneno</keyword0> ao receber um acerto"
+  },
+  "content.species.captoad.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "79fec7a970830a6a6e1d4ece349cb6e827b9c672322b7a9e21072dd19910cf3e",
+    "text": "Revide com {{value0}} de dano de <keyword0>Veneno</keyword0> ao receber um acerto"
+  },
+  "content.species.captoad.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "f2d26bd7b3f1d5895ab3760e20148faac039921dd0261b44240eb9ecaee5037d",
+    "text": "Revide com {{value0}} de dano de <keyword0>Veneno</keyword0> ao receber um acerto"
+  },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
@@ -941,11 +1193,263 @@
     "sourceHash": "b9631d8288c4bb633c02adfc9fad3866d814f855a5f6af21336df5a91d05b10b",
     "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
   },
+  "content.species.cindernewt.passive.0.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "0dc6d4620a34b1e9b6973638bc28028882b7aef62b7abf3e58864ccb140642f1",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.1.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "28159d0636ba99bf43e130098f2004a656e686bb2fbf1dc0791dbcecf6d424f4",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.2.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "f64f18e0b7c1e543f5e12fca54e12c37eb57f8a852d13f938b01268bb529209b",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.3.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "afd898e9f4c8b2b7a1b488a12736fba92cd0bbd76a9939e193453cd958f01cde",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.4.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "f3e2a229440ba50a5e9e0897e96c99d4c431d0d888e268f586e496fd1f8585a5",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.5.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "81cc0b6cc699a5792e04e8ff42e9ebf72c37f2a7e448ed84e4770c5f0a73df83",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "2c2824df4ca2b5fab74c9612d215a389c2c7397251b1f463ac3fd85c757a4d0b",
+    "text": "Cause {{value0}} de dano de <keyword0>Água</keyword0> quando seu <keyword1>Bloqueio</keyword1> quebrar"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "0b69d4f56b421349fd4b36e4ed765d560716101616f3fe440ad6f9e3c6feb4cc",
+    "text": "Cause {{value0}} de dano de <keyword0>Água</keyword0> quando seu <keyword1>Bloqueio</keyword1> quebrar"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "cbfb2344f84bef3298fbbe17eb472a67920a6a1c8e3df8361497bce87c49dd9e",
+    "text": "Cause {{value0}} de dano de <keyword0>Água</keyword0> quando seu <keyword1>Bloqueio</keyword1> quebrar"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "4cb6a6bcfd284c6c9540dba9c81a3bd97ee77898c68aff297e4f89c5a1a9f9be",
+    "text": "Cause {{value0}} de dano de <keyword0>Água</keyword0> quando seu <keyword1>Bloqueio</keyword1> quebrar"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "b15cea2f70ef905a960a92b253ab7be58b11aec0d8d7abb40e425f1b082e4ebd",
+    "text": "Cause {{value0}} de dano de <keyword0>Água</keyword0> quando seu <keyword1>Bloqueio</keyword1> quebrar"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "6b30401e7b65373ba46a190743cbd5a1b0c887bacbce86cd214e791e35cffcf7",
+    "text": "Cause {{value0}} de dano de <keyword0>Água</keyword0> quando seu <keyword1>Bloqueio</keyword1> quebrar"
+  },
+  "content.species.dawncall.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "215c2a1a4d59626615d450d76e7863fb04c03d63b537a9fbce79838e81a60f7d",
+    "text": "Seu primeiro ataque de cada turno ganha {{value0}}% de chance de <keyword0>acerto crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "82c4dac149d0d9b98e8fd1c4fd1092d99930904d01377939c48f7d41218acf1a",
+    "text": "Seu primeiro ataque de cada turno ganha {{value0}}% de chance de <keyword0>acerto crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "21256917de89078130a683ab546a16ef15e46d24d44384da7a0d5486994a0f60",
+    "text": "Seu primeiro ataque de cada turno ganha {{value0}}% de chance de <keyword0>acerto crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "2c4381252d05b96b85d0beac1a22e5f626d3b526a8cd82d8173090d11c8a21c2",
+    "text": "Seu primeiro ataque de cada turno ganha {{value0}}% de chance de <keyword0>acerto crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "468675a0093846560ce2c1060339484bb88c20bb11f8f3eed425668390a3ffc8",
+    "text": "Seu primeiro ataque de cada turno ganha {{value0}}% de chance de <keyword0>acerto crítico</keyword0>"
+  },
+  "content.species.dawncall.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
+    "sourceHash": "54e8faa452310221ce3ca67412868ba1b62dc03970407ce09ec61b84621725a2",
+    "text": "Seu primeiro ataque de cada turno é um <keyword0>acerto crítico</keyword0>"
+  },
+  "content.species.dulcera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "5176620f08ff4e8cd6cd7f44c13458899dd0647079ee93f1212b2646026a9723",
+    "text": "Aliados recuperam {{value0}} de <keyword0>Saúde</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.dulcera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "876f503c2fa7e0d380fb2b1ed177f95233b3100a67562cfe526c37f0961dcba3",
+    "text": "Aliados recuperam {{value0}} de <keyword0>Saúde</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.dulcera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "ea8e4e3d2a776c20cbc9ef53d8d6db926752b206000987971e5fc9cce16e0b3b",
+    "text": "Aliados recuperam {{value0}} de <keyword0>Saúde</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.dulcera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "bade8e92a0a060f956722eed6dd96611a687062030671eb8478b6af9d89c2c79",
+    "text": "Aliados recuperam {{value0}} de <keyword0>Saúde</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.dulcera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "25320fb3615cc6fb0f06db129ffe5d85d06799c779986beb95780b17da8c7bb7",
+    "text": "Aliados recuperam {{value0}} de <keyword0>Saúde</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.dulcera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "c501954b31c4638802132d1d11e47c3501aa4fac7f3e7414e95eb8ffa1f85d94",
+    "text": "Aliados recuperam {{value0}} de <keyword0>Saúde</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "419d057136a5e24a936c77eafeb21f250a5853d1a0046b1c97c3512584262709",
+    "text": "Aliados ganham {{value0}}% da sua chance de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "671d987ef73b7593b263ed38205c5ba447d02eef3d2eec04557d3f856d41d864",
+    "text": "Aliados ganham {{value0}}% da sua chance de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "f25ac0480bf428e4aac11575df5016c0ce9ad9e843c413e462ce420959443bfc",
+    "text": "Aliados ganham {{value0}}% da sua chance de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "a8ba464965b04b571da2ba4811e0d68e23e85d053fc6813713f2151ca7f02411",
+    "text": "Aliados ganham {{value0}}% da sua chance de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "fb8fa2949006b72e606361f724f659095e4514a5904bcead1e92e309f056c424",
+    "text": "Aliados ganham {{value0}}% da sua chance de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "9494c6db6cd5134ca8cb62a9fd35e5ba0d67d8ed876d10f9484a8214bb69ebc0",
+    "text": "Aliados ganham {{value0}}% da sua chance de <keyword0>Esquiva</keyword0>"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "98af3f3809faafb97e8e018d040b10915326dd4326c02371c6e296c4264a2d1c",
     "text": "Areias movediças"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "1aaf1076010102ec1d669d4bef755220045b8a4d38833979729416e46cdd87d3",
+    "text": "Quando sua <keyword0>Armadura</keyword0> quebrar, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> a todos os inimigos"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "f5c721389fe0455c3bd8716e920d84f427701c8f7003ee6e24863aac55825907",
+    "text": "Quando sua <keyword0>Armadura</keyword0> quebrar, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> a todos os inimigos"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "04b801010399a6d88880d7c91a4d462fa61d0f338f977d4b1ea0ecb08ed1f72d",
+    "text": "Quando sua <keyword0>Armadura</keyword0> quebrar, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> a todos os inimigos"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "1948fdffe4d43b12b40edad2adba9959fb438495359270284a8b9480167fce27",
+    "text": "Quando sua <keyword0>Armadura</keyword0> quebrar, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> a todos os inimigos"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "eb1546d207f8dafe5fa37b8a8a4579b6854b963935379ee2607c30a259cad225",
+    "text": "Quando sua <keyword0>Armadura</keyword0> quebrar, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> a todos os inimigos"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "6ba4db8f48b16c5770d2ec7e22047c966ae207f8274551d37e541f0383f5346b",
+    "text": "Quando sua <keyword0>Armadura</keyword0> quebrar, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> a todos os inimigos"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "b90115cf244a18777e955119b9329ef4e12e8788731accbff0a1f6f5e155d778",
+    "text": "Efeitos de chance aliados que falham têm {{value0}}% de chance de uma nova rolagem"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "1ebc12acda54b4c78b71dec91b94057e81a945a3016d1853ba1ad04974b68be6",
+    "text": "Efeitos de chance aliados que falham têm {{value0}}% de chance de uma nova rolagem"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "0b03364793e257da14223169a11ee84d4e8c246b1c0af123b45c4f894f12c657",
+    "text": "Efeitos de chance aliados que falham têm {{value0}}% de chance de uma nova rolagem"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "2f217f1c6be39e8502c997d4aadad10977941eaff20198c5164f340d1314232f",
+    "text": "Efeitos de chance aliados que falham têm {{value0}}% de chance de uma nova rolagem"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "163cec424d156dc3ee0653bc392d2c7d6032a23efe8495b72326980f1dd1facf",
+    "text": "Efeitos de chance aliados que falham têm {{value0}}% de chance de uma nova rolagem"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "fdeca820bb19cf0e5eaa5a3f2d2a111c76564eca378e3e35a8969fa0a5b7abab",
+    "text": "Efeitos de chance aliados que falham têm {{value0}}% de chance de uma nova rolagem"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
@@ -983,6 +1487,186 @@
     "sourceHash": "d8bafefa2a2330d0df96a9010d812e3210bfc5de212d6cbe7cbd4fa355e4b3af",
     "text": "Mantenha {{value0}}% a mais de <keyword0>Bloqueio</keyword0> entre turnos"
   },
+  "content.species.neradora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "4343235cd075dfe93293b4a70ab38c3f61837c0e31e85982f61ad840c98c7830",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a cada dois turnos"
+  },
+  "content.species.neradora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "88f674293a05c452cc4bc3ff17cee7749ca752e5097d454b22d7f0427c59c3b1",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a cada dois turnos"
+  },
+  "content.species.neradora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "b7d15f61102f668f3c450b4d3b55eb519d096e993b5e227f02e70459b6fd08a6",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a cada dois turnos"
+  },
+  "content.species.neradora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "80007bc4211d47202b4cff12ee5c4b9a3e520666be1878cbcbf4dd633af770d2",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a cada dois turnos"
+  },
+  "content.species.neradora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "d9e029f87f3e9f3b0ff44dbc183d7efd0e51a5a0e078ba44117ea3d3b84d28db",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a cada dois turnos"
+  },
+  "content.species.neradora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "81dee4257325ac29b691f7a88efdffbe2578ae491d00a2521958ea4dc0f2228f",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a cada dois turnos"
+  },
+  "content.species.orifable.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "7ffea8aa42e2f961b755d629e6369e58476252139a6f3bf1e4000628d0d9c37e",
+    "text": "{{value0}}% de chance de comprar uma carta extra a cada turno"
+  },
+  "content.species.orifable.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "6f29022a9e950f4df24c020d086eebc0261b314cdf8c2cd740639ae28316b001",
+    "text": "{{value0}}% de chance de comprar uma carta extra a cada turno"
+  },
+  "content.species.orifable.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "42264dd1abfb9f93b750ffe36372f5abca0b684ec312c3051210eb13b5142697",
+    "text": "{{value0}}% de chance de comprar uma carta extra a cada turno"
+  },
+  "content.species.orifable.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "a484412bf79c04c9e34f955bcf4c894ae5d4271c2616e55e8d416ec5c3bc8fab",
+    "text": "{{value0}}% de chance de comprar uma carta extra a cada turno"
+  },
+  "content.species.orifable.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "3fb1cfcb26c03ac4e4bd871bae821784b607e147c2843cd97c214d3a5656e444",
+    "text": "{{value0}}% de chance de comprar uma carta extra a cada turno"
+  },
+  "content.species.orifable.passive.5.rule": {
+    "reviewed": true,
+    "source": "Draw an extra card each turn",
+    "sourceHash": "ffd78b6de6c4523572e74e04d45af21e4ca1a6050ae6af6c2f17afbf7baffbd4",
+    "text": "Compre uma carta extra a cada turno"
+  },
+  "content.species.parhelion.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "26a9b17896a9f3180426bd6bedf3891508f0498ee4e0371eadb561a486fae691",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "e48fe00767c47e83e7a8845a102b25f334ae70e43aabbe2f59453eedd7f8ecdc",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "685f0dfda97bec1ed59c802322ad7f91c1927ece1be99c22ae3605b35272ba94",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "df8298256b15a514bf63a67ea2c29fdf786f85dc173e8c907a5733455de79c29",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "08fce52422847f064b6b537eaafbc4176e72ee611ad1503ed0b76736a94f0777",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.parhelion.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "475184902169d4665d1495a8a9e6cc6411dcbf8c943093de797ad7b40573abc8",
+    "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
+  },
+  "content.species.prismram.passive.0.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "732bc4734c7e3bb9587f1f7e3400b5a9423fe602370309915761b059170f26c8",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.1.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "25c2b400e1a281742f67001c5371f2ef073362992c141cc26f3582927984f502",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.2.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "ddfa79fb2be0b56faac2bf71967d3b09fc8675473b394e505151aed1de8e015f",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.3.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "a7a58b17183cf0e878e7e4da8c3f3c7724b2b4912927ae9af75943d615b58263",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.4.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "79bf8aa4664a0f16dc63daa4d1f468748798f951e734f2044532e4a0123fa014",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.prismram.passive.5.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "d47b177d2b06cc682b40e2079e70d2509b84c1c9cb914a6e0eb29cbc76e73737",
+    "text": "Efeitos de status prejudiciais que você recebe têm {{value0}}% de chance de serem redirecionados a um inimigo aleatório"
+  },
+  "content.species.reverie.passive.0.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "ebab7042a9455693aaf1881bbb41657591e579af96ffb24900b57d26c2bb5cf2",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.1.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "954fe234de0d296857f7b431db9ca0c8c2eb429c140a587762579537305769ca",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.2.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "376afbad25ba093f14de3ca527e88ab99503417709ff3043daf5e2112178bcc4",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.3.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "0c83ba5f7190010e89c6b1b1986dd7ad4158ec469d50e43865b132e8d16475d6",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.4.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "64e12ca795c37acb9d9759534c1c6058a849a29cbcb6c5629e05a59f650b044a",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.reverie.passive.5.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "991afe5f1bd509951de263ce8f1180b6a687520ba2d1a545d367fd39f8e5301f",
+    "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1019,6 +1703,42 @@
     "sourceHash": "df2d35a5e7fa8100200ccd3243b9b029304de5b978985aa8370d50aa56c3450b",
     "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Queimadura</keyword0>"
   },
+  "content.species.skybex.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "87b2fc58910148a7b277282c38257a01796cbd7ac566503f96ab121ade20dfb2",
+    "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.skybex.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "98b0c5df6fa72765e3d29b6a6ade3046deb7e368c64a31d372574ad16cd0c7d8",
+    "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.skybex.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "12d6918e36ca0b3e0078787c163b0a7e53ac86d95d61e5cbe3d44fff2f8e2361",
+    "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.skybex.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "295f1c2a59e0980954d6688fa9fcaf062d8302a1a4f6571eee0a721c35ec6ecd",
+    "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.skybex.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "d4dd68c7940304c01d518975c15d822d2008607da392989d88d282ee35aeb898",
+    "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0> ao entrar em campo por troca"
+  },
+  "content.species.skybex.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "33a2043f88a69c193a9d3b308da6af2b423ee6755224c0d2cf03db6444ff6bd0",
+    "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0> ao entrar em campo por troca"
+  },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
@@ -1054,6 +1774,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "5f7d3ea23e9a3b179c3c82b989c56dca8fb59669130e9df0bf6f256626778b6d",
     "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.species.wisterelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "b11190dc749f6ad37d06bc126ff6a5e9f8d19057dca8fce780c571dd49989911",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "1cda005da6730cdc55b905ff1547ed423cb906aa4717eb3db60a863df9394778",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "69c3d73af6eb107e13b35d65b0be2ce622502ac4f5651802c80b9876a64259ed",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "dc14194f87fc8629849a300b4ce955c5a4dde3e120e18f84880006a14c86538f",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "1326a2ac0b93471320565a30ebe791f788df93c83a40c473b33426f5db264628",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "5f0fb8f15541368069c321b90a50e8007177a1b2e7b4ddf1e357bdc53f1f163c",
+    "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
@@ -2189,6 +2945,12 @@
     "sourceHash": "081bb48c5e8bccaff2bd777bcee6d215f79872b4e579e4b3ed5c4e577a070d93",
     "text": "{{name}} bloqueia {{amount}} de dano."
   },
+  "log.boonPurchased": {
+    "reviewed": true,
+    "source": "Boon purchased for this journey.",
+    "sourceHash": "9110d7233be3ad3f81907e8c14802ccf6b9aeae91b218679c14fea9b5ab6d992",
+    "text": "Bênção comprada para esta jornada."
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -2201,6 +2963,12 @@
     "sourceHash": "a7a0856da414984b9bdf4b69579f4d7789aabfd92274e69d473c105c8d7f4dd7",
     "text": "{{name}} recebe {{amount}} de dano do tipo {{type}}."
   },
+  "log.formationChanges": {
+    "reviewed": true,
+    "source": "Your formation changes",
+    "sourceHash": "67938d1baa56253e278530861df274c868d7a4e7e003f9853b907b71cf7723ca",
+    "text": "Sua formação muda"
+  },
   "log.gainBlock": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} Block.",
@@ -2212,6 +2980,12 @@
     "source": "{{name}} gains {{amount}} {{status}} buildup.",
     "sourceHash": "e519b9fc89da268b1f33513f15cd71357f235ca2bda94e4363309ceaa87f8938",
     "text": "{{name}}: acúmulo ({{status}}) +{{amount}}."
+  },
+  "log.gainGold": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Gold.",
+    "sourceHash": "c9d05f5ac042dd000f31dd0839cd66749976b5446ae71c0c7027fddbe2054832",
+    "text": "Receba {{amount}} de Ouro."
   },
   "log.gainMana": {
     "reviewed": true,
@@ -2237,6 +3011,12 @@
     "sourceHash": "79c3d57a6bb5bcb5932735e932349a9386451aec513d4d8121f603913bcd305e",
     "text": "Sua jornada começa."
   },
+  "log.knockout": {
+    "reviewed": true,
+    "source": "{{name}} is knocked out.",
+    "sourceHash": "1dfc2c54c058f41cfc495b947e25d976988a9028a4410f31f2379dbb98e5b0ea",
+    "text": "{{name}}: nocaute."
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -2254,6 +3034,12 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "5da25adfbf37b81255946712c968ceedcf5a4b3be41fccb40361986684e7ece7",
     "text": "{{name}}: {{action}} — nenhum efeito removido."
+  },
+  "log.returnHome": {
+    "reviewed": true,
+    "source": "You return from the wilds. Discoveries are kept.",
+    "sourceHash": "46bd2d96d9c00ce3dc75ef9b1b7461d6ff8abdac87943dcb9590dfcf70f83bb5",
+    "text": "Você retorna das terras selvagens. As descobertas são mantidas."
   },
   "log.turnRestored": {
     "reviewed": true,

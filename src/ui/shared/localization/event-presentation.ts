@@ -21,6 +21,18 @@ export function eventPresentation(
         amount: turn[2]!,
       });
   }
+  if (event.kind === "reward") {
+    if (event.text === "Boon purchased for this journey.")
+      return i18n.message("log.boonPurchased", "Boon purchased for this journey.");
+    if (event.amount !== undefined && event.text === `Gain ${event.amount} Gold.`)
+      return i18n.message("log.gainGold", "Gain {{amount}} Gold.", {
+        amount: i18n.locale === "en" ? String(event.amount) : event.amount,
+      });
+  }
+  if (event.kind === "knockout" && event.text === "You return from the wilds. Discoveries are kept.")
+    return i18n.message("log.returnHome", "You return from the wilds. Discoveries are kept.");
+  if (event.kind === "action" && event.actionType === "swap" && event.text === "Your formation changes")
+    return i18n.message("log.formationChanges", "Your formation changes");
   if (event.kind === "status" && event.targetId === undefined && event.text === `Gain ${event.amount} Mana.`)
     return i18n.message("log.gainMana", "Gain {{amount}} Mana.", {
       amount: i18n.locale === "en" ? String(event.amount) : event.amount,
@@ -35,6 +47,8 @@ export function eventPresentation(
       ? i18n.content(`content.species.${target.species}.name`, speciesName)
       : englishName;
   const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
+  if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
+    return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status" && event.outcome === "remove") {
     const { status, affectedStatus } = event;
     if (status === "cleanse" || status === "purge") {

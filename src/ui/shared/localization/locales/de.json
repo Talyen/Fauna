@@ -905,6 +905,258 @@
     "sourceHash": "a5db157930d4196b9c2631088f33b4fa95b07fcd1157220dbed9bbb734ff10c8",
     "text": "Wasser"
   },
+  "content.species.aerostat.passive.0.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
+    "sourceHash": "0382723a90600fbee9c5b2fa76ed66fff0eeb34407dc0703b5bf32038113f2d8",
+    "text": "Beginne mit {{value0}} <keyword0>Nahrungs</keyword0>karte in deinem Deck"
+  },
+  "content.species.aerostat.passive.1.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "839d99955a1ae1adfc28b04d8ad4e4d8b979cb181b3a7f4def7bb18b084e7e31",
+    "text": "Beginne mit {{value0}} <keyword0>Nahrungs</keyword0>karten in deinem Deck"
+  },
+  "content.species.aerostat.passive.2.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "21d3fe444452126e8cad66ed9e6338f0eb3cf65a4a713c0b6161e5686995666c",
+    "text": "Beginne mit {{value0}} <keyword0>Nahrungs</keyword0>karten in deinem Deck"
+  },
+  "content.species.aerostat.passive.3.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "7710992420dc05394f7f4999d946d0603d1ca86daccc789292fe8aabf29c9278",
+    "text": "Beginne mit {{value0}} <keyword0>Nahrungs</keyword0>karten in deinem Deck"
+  },
+  "content.species.aerostat.passive.4.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "09b1fdf586009c623dacdcb24a851c3a75dff54f19d58b51b6c6525a9c06b0de",
+    "text": "Beginne mit {{value0}} <keyword0>Nahrungs</keyword0>karten in deinem Deck"
+  },
+  "content.species.aerostat.passive.5.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "a1284669c3fcc038911222d0f1dac4fe2cecd6875f6fb9f427c6dc821a43bfad",
+    "text": "Beginne mit {{value0}} <keyword0>Nahrungs</keyword0>karten in deinem Deck"
+  },
+  "content.species.almanelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "31520c717dbb2310c9a2f912464ac45d7d0f6e1cc8ad4ae2436f7479a7d6ce25",
+    "text": "{{value0}}% des durch Verfall verlorenen <keyword0>Blocks</keyword0> werden zu <keyword1>Dornen</keyword1>"
+  },
+  "content.species.almanelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "15b9f68535ff1f1169c94c1c5bff57fb7ddd6dc95b9fc3406826c0fecd1cc606",
+    "text": "{{value0}}% des durch Verfall verlorenen <keyword0>Blocks</keyword0> werden zu <keyword1>Dornen</keyword1>"
+  },
+  "content.species.almanelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "2d1cf35cdef4641d9f1d4155ad4ae9af8781093bbe4d013d1ea7eaf63b508a1b",
+    "text": "{{value0}}% des durch Verfall verlorenen <keyword0>Blocks</keyword0> werden zu <keyword1>Dornen</keyword1>"
+  },
+  "content.species.almanelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "6f76c7784160e30ec65e2bf5fd27ca717b9972c95fbfd5427dcf15502be4e9ec",
+    "text": "{{value0}}% des durch Verfall verlorenen <keyword0>Blocks</keyword0> werden zu <keyword1>Dornen</keyword1>"
+  },
+  "content.species.almanelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "c48aaa6f2a4bd0bb871fe52fde7ce2e6189f2ef781c48b2d13a00bfb01780515",
+    "text": "{{value0}}% des durch Verfall verlorenen <keyword0>Blocks</keyword0> werden zu <keyword1>Dornen</keyword1>"
+  },
+  "content.species.almanelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "96d6c6ff1c2f1b153e725d11ca7c0629e315e7bad9c7348beca7de8e15e5e007",
+    "text": "Durch Verfall verlorener <keyword0>Block</keyword0> wird zu <keyword1>Dornen</keyword1>"
+  },
+  "content.species.alpenglen.passive.0.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "13bbe39036718533a880460d6e380de6f806547b171e0a9a1cea7e93f94a2562",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.1.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a15ddd08745747b3c372bdbcda35f247dcbe69d123e33eea416c1f3eaefe9eee",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.2.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "df7c1283861738ed3c908ed02a9d7cb722f3d199991d33cb50c4221a7bf04485",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.3.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "6e2687e90ac95eaaad7a7896f9a537e6547b4bfd6de23c9685e80bbec061a7c7",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.4.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "bb129a1108c23d5e93b7f5c171890133896dab9eba4de61a58daf3a0002cf9d4",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.5.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "ab3ed1930e39b5adfa82ff9588f971017d5700ba351e8fbefbc56d52daca9088",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.arabesca.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a2b46d0d064ddf350f2749c68dcb0dac5f513828658cdcf7f42b1e76e0c669be",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a77bae79054d8c0a487f987618e7f9ccc56daf9b7f37a45fe48300738a9c3247",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "e84f7ed00c2aa03ae1aa5ade7c34733485d00de1b71edae993ad33c231528f61",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a4a8f678203c17acfc803b731f3bb27f263f388d3b8a0c5cb9e22c737077f34e",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "63ea72d8f43984d26e749afddd010260bd41bb48f9dbfd0074dea217ca9014e2",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "84f02df2a86aaf617c422439b8a77813747a5073dfc8b30bdb0bf7eac1d90c17",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.bloomquail.passive.0.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "e4387b3b72a67bd46b5f1b605f16dc2f877c7868276f1fc934529358891862a7",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.1.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "d01a90c1900eb9b7ebff1af61371fb5263c328b52552275bb01fc77dce209117",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.2.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "3cc6d9972d8e2cd35bff1f68fbbefbacb164684d6088abd805a5a9792306a8a6",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.3.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "ee09a2b494027a7c3ddb84ab57d675192fe17f52f3b96d13b5336c60d3cefcd7",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.4.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "cd1f88f65d115977e58e1f76b172c367319fa6eb59918a36492f4ba2725b074b",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.5.rule": {
+    "reviewed": true,
+    "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "b7d58560cfcc973f47e64e65680d886834f7ad77a40697a72c5d4dced3a837d9",
+    "text": "Wandle <keyword0>Block</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.cadenza.passive.0.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "24d4ac62a1f6293369dd4a808061557eda7e0124f220f7da339306d5b64f1b52",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.1.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "ed49e64ef9adabafeca30c5512458b3a0c0bf50b44445754af35092d4dd5d8a0",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.2.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "cc96a68629ae3fbdc84a31f3c2ff4c0edde0034f8e48a236ab37867ab44f20df",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.3.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a09c4e7a07f92d896c8c6c60ac2b26cb65da8d0d76f7d7b4f4e0eef9de435e72",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.4.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "caa8864a163bf97ff83d6110cac22faedb82757a3471d78aa1dca0e404ed1fa9",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.5.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a62d0dc98fe3b1c691522d9e04ff9adbf6fa4f271407f0dadead3ec7d36b71e1",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.captoad.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "f75da2272c0d44453d792b6c6301d0398ec190a5f1d5a1a37fe67cc0c3222a30",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "47b738b656d0794d508f791c5322722c5d22b06030275a3639edf96fc471aa88",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "2c5d33a09b4364eabcc626e6a9a1907a354ad44a60f353e16c7bcf26dc543423",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "7da6617c693836d81a45e1d41eefde0a27fc28f2d54df7ad4ec007d903606893",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "c81616129e98e354384621d8c02cb8ad69e74054bfcf983119fc502d6ddfae9d",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "36a6b8047c8a16dd9c5e95dd80937b54b4f0b4814e047464d1b02843a6cc2b4b",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
@@ -941,11 +1193,263 @@
     "sourceHash": "4b0631daf1a7f0f0f110e11f828588180ed401ec3ccf6425e597d86db38e915f",
     "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
   },
+  "content.species.cindernewt.passive.0.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "f797781bb40974f1758eec53748d826c5faa5e456387fed098024c27cfbdbe13",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.1.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "ba48a3c4a6d625ee68658b597d890450b77ca98c7c5289b85c75363b275d59ce",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.2.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "8fdd14a750858beabb1a5e99202ea9b7ce341348ebd8247e077ccd353652768b",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.3.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "899628c6baf8c485e059e7ec9b175288d828ec51dbdfeb33b3bf181e35b0c137",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.4.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "91a489fba19916a916a44dd8bab15791adbee314cabf3e9ea681d85f8a7d00ca",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.5.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "069031dc57d290a024c1b23f3e4d17c73f10817ae918b39e21f7106045790942",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "98a5a1bab4e3ef7c75e602f13aa127920691d74a526fd136f76d82cd533e347f",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "cb6cea4bfd106f02cda4b91bc761c48fa68bf91862fac2c519a0f0e556b54ca2",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "e8ea42e607938a3323c49bd41cf8e0bbf256999bde4956050d926eea2b13e383",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "f188f14d478f32681d6a4fc7c2a89fd78098a180717499bb3e718467eaa0eddb",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "ac7a9b36f1fab9d1fa6d1cbd16d678c096f5f8d9ee8451f53464b8c0d701b480",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "73d8584be603951a71ce13a7f352a2c9c7fb41e7fd9af7b26ccdd039cedc2ef6",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.dawncall.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "7742023e95f7705b8ffcc9a1b98c6feac23982dfa2921c2fb87c99498c5390a1",
+    "text": "Dein erster Angriff pro Zug erhält {{value0}}% Chance auf einen <keyword0>kritischen Treffer</keyword0>"
+  },
+  "content.species.dawncall.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "315474515fb778da9ae94924e962eee5a113068922777ee287264bd794912f12",
+    "text": "Dein erster Angriff pro Zug erhält {{value0}}% Chance auf einen <keyword0>kritischen Treffer</keyword0>"
+  },
+  "content.species.dawncall.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "c3200bcb5fe87d620cd976c2eed1f72bd28ddc6db8ae5ec44f3e66a7d16a491e",
+    "text": "Dein erster Angriff pro Zug erhält {{value0}}% Chance auf einen <keyword0>kritischen Treffer</keyword0>"
+  },
+  "content.species.dawncall.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "22a8a7b6ebfec558cbefb7b032e2ffe85fe090f8ee694c074d3d0e5f6ff776ce",
+    "text": "Dein erster Angriff pro Zug erhält {{value0}}% Chance auf einen <keyword0>kritischen Treffer</keyword0>"
+  },
+  "content.species.dawncall.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "06a3ff12c47250ae9fee5625210d851005c159a8ba59c3ebc416f9db94c2ab76",
+    "text": "Dein erster Angriff pro Zug erhält {{value0}}% Chance auf einen <keyword0>kritischen Treffer</keyword0>"
+  },
+  "content.species.dawncall.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
+    "sourceHash": "35d72c9cabf0fb8d219491763634ddcc0cbf93414853f323d20a7c30f854489d",
+    "text": "Dein erster Angriff pro Zug ist ein <keyword0>kritischer Treffer</keyword0>"
+  },
+  "content.species.dulcera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "d3f89b612af00e4d787e941cb39713028c070717a513844ab4c36a4fefc19ea8",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "8cd668cba0135150f9def6348a391babd96dbb0dbe649c4b3fb17e30c72873c8",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "1ff06a36df2df5b5e29c9c17076fb89d209fcf14a6b49b3d38d6fdd76aebe74d",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "847a30ca5ee348a55b16eb196dfb000de1a2e1ca9c4dee7432017ee66448c663",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "68844707ace974ccada312753492c4d0ead17a357f383cf11ece2144b8cfed54",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "a54d79b16e5ffc27a3dd861c3df04a2c8d41223d8733378bd1dd7bab0b2dd950",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "f37030d48dca8858a851e03222c2fbf2c00b502be0e5b209b62c13d7cb30c90e",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "b299999c4136b468a4ccd3892fb587c84ead1360cb27101f54be94f935c842fc",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "0340be6162bf2ff211ed1a248daff0d950da1796f36b6678299065398a24f688",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "7bde9ae642e8a7459329a6ecb51271699174228dd00329d500bd2b27faf5bb0b",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "335d75e52e15f5ffc98d168719c6ef0f0de67f78c5ac732b26ae422e23b3d416",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "7534f32d1875c05ab189d065e53cdd7df9e9121965cee879755bd4ed22ed9f6b",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "300921460f57a2a3444c2b9690f46436dda8e38166b1cceafbbd124fb66affaf",
     "text": "Wandernde Sande"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "18aa48e9c7a16109326aa2d2eda26fc0af95efa697e22284ccf8f17b1c3d41fe",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "3ec1de3bce5102ee566dba4e58cb88297aff5d281fdccfb432c68713520db0bb",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "3acd8dbcf8cb2a43cfbe6a9dc0747c2daca337a3ba866076cef0d3ca42c7ed23",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "176ba8aa1292bbb3eca8e02a68d51a7a411b1973353674946d63c84f68707267",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "b5325f6d01dc2a33de7c61487e03ac69c2cb230438ae738f418299da79114186",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "d442d9412116ac1e92a0d9b7e8b08611ca2ad1d17a8369885f97f4ca36e2583d",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "c60234bf5294029a7b6ba83605cab30fe5da8570a072d7e82fedd2165d5cef55",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "a6c1a095657a84e8e8200b7383449f4f2e35da6851ad4a24255d1d9a6f9fdc3e",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "a259c6d188b34a23af0d1148ae7a30216184ee578dd4e94a78beb17546c6719d",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "27eaae6798fb3e07e8a200ee3f67e6a445f238882e85263937ef749be21822f2",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "6401032c27aa4be7250134b92e03418f57fca23062a02ff697821337c0fe78c0",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "46d85ad83d4d7e17ba17c52e45253e76b2cc9a32c48ee64a21fa893940121805",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
@@ -983,6 +1487,186 @@
     "sourceHash": "0844c7be118e49763c4caeb9b3b9ca2cb2081ed08d168a7d515f03f16e614b91",
     "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
   },
+  "content.species.neradora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "0ba018981adf2e9125144243ed2262e58dfd30712945877b997a8b3c9c9590a2",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "5b93c735936edbe66b24f32daf61c2476166877acd12da5a5e0f953ccdbf7e94",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "07cef65de16f91ab7546372820b03f0dad3d9bbbe33f507c20c385755b0c7a66",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "8ee8fbad05d98867f6b5d5c24da5bc7587876c8c16b89f2c6bd5090eeb909dac",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "9a16e1d13166d5d1a118ab4b8f551308f4a7c20e37449501afb2a120b43e8889",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "9d0e3708cc87d94088b36a0d0b9d34349ac1cec9995895109583820597a44371",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.orifable.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "d4e8ffa195a0f37344f80c0c820f60ddca2379c0d3bb3a2ac6b301667ace1418",
+    "text": "{{value0}}% Chance, pro Zug eine zusätzliche Karte zu ziehen"
+  },
+  "content.species.orifable.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "6688e8b02caba609fcdc41d70c4f8f59bf65e379e8c30d971d1d22f78191c047",
+    "text": "{{value0}}% Chance, pro Zug eine zusätzliche Karte zu ziehen"
+  },
+  "content.species.orifable.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "98d94eda8705e7d2d76508b02a12a5074e113016b1c09669b15fe1b7947a8141",
+    "text": "{{value0}}% Chance, pro Zug eine zusätzliche Karte zu ziehen"
+  },
+  "content.species.orifable.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "48850a80280eb590e438597e982aca33ad50147536fd7a24763d14578af18117",
+    "text": "{{value0}}% Chance, pro Zug eine zusätzliche Karte zu ziehen"
+  },
+  "content.species.orifable.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "60c4e396f5f72039954e3986d282fae437062c333327170132014eef35db72c3",
+    "text": "{{value0}}% Chance, pro Zug eine zusätzliche Karte zu ziehen"
+  },
+  "content.species.orifable.passive.5.rule": {
+    "reviewed": true,
+    "source": "Draw an extra card each turn",
+    "sourceHash": "26266407137cd73769c643e834b4d2aa1142c0d3a947624830303d8882b57f4f",
+    "text": "Ziehe pro Zug eine zusätzliche Karte"
+  },
+  "content.species.parhelion.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "9d0bbef15492de9b5551d253adca5d653fdedf2777106a935c269fac5796e0a8",
+    "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Frost</keyword1>-Aufbau stellt {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
+  },
+  "content.species.parhelion.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "c58950d0b5faf9176fbcf7873f628a003c79af0f4d11611da4540f626886a2b5",
+    "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Frost</keyword1>-Aufbau stellt {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
+  },
+  "content.species.parhelion.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "1bab5f7c7064346da5b6b91a7cef11ff0170b311fdfe6a6e3a0a974307242673",
+    "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Frost</keyword1>-Aufbau stellt {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
+  },
+  "content.species.parhelion.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "c673e767e6815996443030c6f7786a0ad0603763f6bbf301856d043f9b83ff6e",
+    "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Frost</keyword1>-Aufbau stellt {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
+  },
+  "content.species.parhelion.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "732cea5e6297fd3fa986023dd094c1903763a246aa6a54bb28f033469e94dbe8",
+    "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Frost</keyword1>-Aufbau stellt {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
+  },
+  "content.species.parhelion.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "2793ec042454921678923c01aa4ddd8568855bf9a4d69117bccd5d59f9eb9c97",
+    "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Frost</keyword1>-Aufbau stellt {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
+  },
+  "content.species.prismram.passive.0.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "e181b941362ca4f0f798ae5aa940b9599fd67cb7afb0e20f63bd3aa81d35c518",
+    "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
+  },
+  "content.species.prismram.passive.1.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "ba48dd8dd21ee06b5b508cf0cd799b43c45a6a48f842473a10b101bf81a947f1",
+    "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
+  },
+  "content.species.prismram.passive.2.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "6ecec6588d6b064811a487cccf599e080a2c7ba74a27405c97133cd6f32b6395",
+    "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
+  },
+  "content.species.prismram.passive.3.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "ea3adbf29793c1cd4bb8dc9ad808aa93a056ac15679093870fa154a482f95acd",
+    "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
+  },
+  "content.species.prismram.passive.4.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "568fb2397b9834c7a997647557d598e2773706c50906afcfa0a36076b2faf762",
+    "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
+  },
+  "content.species.prismram.passive.5.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "4d18e7ce1df62e313bb45e71a6480d8f7743d03fcbbac222351842c78635b435",
+    "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
+  },
+  "content.species.reverie.passive.0.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "f9b18323cd16fcdf4c24ea596981902983a3e23456a282c547171a8a1598cb9b",
+    "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.reverie.passive.1.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "43befdaf22bf0263b1d9817ef3eb8daa64847213b0d928f9bbf93e313de500ac",
+    "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.reverie.passive.2.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "77e51c1df1ffd750c95b0400def0cf7f2d6c10a2c34b8c6804d0884b19fb3833",
+    "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.reverie.passive.3.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "1df2edcb6aa269bbb6043060a4aa525da3797997307c998be96c0d89c951e714",
+    "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.reverie.passive.4.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "752105236e96c6bd3345eb310b216fd7015dd49d4aecba293fd40b4274d5d8d5",
+    "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.reverie.passive.5.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "be5cefcbb0084277233398b2b99c41816c3af9838a8135a3e1da44de915c4def",
+    "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1019,6 +1703,42 @@
     "sourceHash": "60f88cab68e6979256d9ed86a89fddfa42b610f62feddcebd61cab3644a93259",
     "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
   },
+  "content.species.skybex.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "20725cb9f7e83124018e6bf81a4d42909d76fc5e71596ae87078006f5fbd09b9",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "131b6afe840d0b8e82e434b00b951ad2da541bc2138515ade10ce2e75447f860",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "6ce3a70a67896baeb05d0bc08ce5dca06fc6a07025d9f834a069f828bc3d2047",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "6e192bf25f9bc250a0e319109ed98119f103301448700c700ca14d5ffcbadb82",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "96933d7c6b7e7068c238f986324f33d94ec8bd634f4fe7091b551620f85bffc2",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "8f5e630e22c23361ad739f1a4c47f1544bfa873c9fd18eadcff6ed600de703db",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
@@ -1054,6 +1774,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "064f7b8ea4b15b361c21401b975cdea0e6f8109d23b6f67833abebf7b093de13",
     "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
+  },
+  "content.species.wisterelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "b5f2af4eef70557c9bed8c1a4fe2f4f521e063552f8e3ef45ba7a09c523542a4",
+    "text": "Ziehst du eine Karte aus deinem Ablagestapel, stellt ihr Besitzer {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.wisterelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "3aac0cc0db6f985f3ceb9957f5ae2c4e8f4da49ffc30c6eea90afbea69db6b54",
+    "text": "Ziehst du eine Karte aus deinem Ablagestapel, stellt ihr Besitzer {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.wisterelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "a5e023fe9875336456e7ca44346a439f85e49bb3aac4aa91331ab03b441b307c",
+    "text": "Ziehst du eine Karte aus deinem Ablagestapel, stellt ihr Besitzer {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.wisterelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "7bf1a17df48a80bc20617a0edd7594df645c317bdef3af5a5ae84114783dda1a",
+    "text": "Ziehst du eine Karte aus deinem Ablagestapel, stellt ihr Besitzer {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.wisterelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "8ca772f57cabf295bb8969138ede7fbdf5afc72c109db7fed1fca163e61d83f8",
+    "text": "Ziehst du eine Karte aus deinem Ablagestapel, stellt ihr Besitzer {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.wisterelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "ba1457041801864750c991340e8d8592cb56998c947d754b9fb0dde927a408e2",
+    "text": "Ziehst du eine Karte aus deinem Ablagestapel, stellt ihr Besitzer {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
@@ -2189,6 +2945,12 @@
     "sourceHash": "49362037ccbfa5c563f14c345e237ab279c34b9c90e46e39a19add13135f7403",
     "text": "{{name}} blockt {{amount}} Schaden."
   },
+  "log.boonPurchased": {
+    "reviewed": true,
+    "source": "Boon purchased for this journey.",
+    "sourceHash": "c0d7770c0f493266e51dff05c810868d58c14b6fa593aa18b7631412e9258eb4",
+    "text": "Segen für diese Reise gekauft."
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -2201,6 +2963,12 @@
     "sourceHash": "da6c95129aad832f1304cdea2a66dfea570dfb2f84240e6d01dd0b3fed8a72cb",
     "text": "{{name}} erleidet {{amount}} {{type}}-Schaden."
   },
+  "log.formationChanges": {
+    "reviewed": true,
+    "source": "Your formation changes",
+    "sourceHash": "fb3c93e8e857261976b3887b2f8fea262b899e5009e8c907c18146987508b470",
+    "text": "Deine Formation ändert sich"
+  },
   "log.gainBlock": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} Block.",
@@ -2212,6 +2980,12 @@
     "source": "{{name}} gains {{amount}} {{status}} buildup.",
     "sourceHash": "fe6a3a62fbe8106837dc517e7217148d56e4983535fd97fd48a7fbac7699dab9",
     "text": "{{name}}: Aufbau ({{status}}) +{{amount}}."
+  },
+  "log.gainGold": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Gold.",
+    "sourceHash": "0bd10026dc6bada05dbc5922efa4f23a369cb33619aef42c3385f6f90c020ad5",
+    "text": "Erhalte {{amount}} Gold."
   },
   "log.gainMana": {
     "reviewed": true,
@@ -2237,6 +3011,12 @@
     "sourceHash": "377879b40e232d9eff645bb53958b3dc567d96a95ed509ea7b3c9fa3b33e131f",
     "text": "Deine Reise beginnt."
   },
+  "log.knockout": {
+    "reviewed": true,
+    "source": "{{name}} is knocked out.",
+    "sourceHash": "e1b4be8d36ce3b7bb12a18d9a9b233d07ecbebdcbf8d5accb0db8cf4f3d9b6e0",
+    "text": "{{name}} ist K. o."
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -2254,6 +3034,12 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "7045c036abd55036084814f8fc5e1f8c311bdf6265b0b4a1c035da5b69d42c6a",
     "text": "{{name}}: {{action}} – kein Effekt entfernt."
+  },
+  "log.returnHome": {
+    "reviewed": true,
+    "source": "You return from the wilds. Discoveries are kept.",
+    "sourceHash": "2b6c4bc9095e4a541ce13d10831b7f7679deaa5f7d98ed237aa837dc802f5c52",
+    "text": "Du kehrst aus der Wildnis zurück. Entdeckungen bleiben erhalten."
   },
   "log.turnRestored": {
     "reviewed": true,

@@ -177,6 +177,43 @@ it("translates turn and Mana announcements without inventing their values", () =
   );
 });
 
+it("translates recognized journey and knockout announcements without changing other events", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const name = species(target.species).name;
+  const reader = createMessageReader("fr", french);
+  expect(eventPresentation(game, { kind: "reward", amount: 7, text: "Gain 7 Gold." }, reader)).toBe(
+    "Or gagné : 7.",
+  );
+  expect(eventPresentation(game, { kind: "reward", amount: 7, text: "Gain 8 Gold." }, reader)).toBe(
+    "Gain 8 Gold.",
+  );
+  expect(eventPresentation(game, { kind: "reward", text: "Boon purchased for this journey." }, reader)).toBe(
+    "Bénédiction achetée pour ce voyage.",
+  );
+  expect(
+    eventPresentation(
+      game,
+      { kind: "knockout", text: "You return from the wilds. Discoveries are kept." },
+      reader,
+    ),
+  ).toBe("Vous revenez des terres sauvages. Les découvertes sont conservées.");
+  expect(
+    eventPresentation(
+      game,
+      { kind: "knockout", targetId: target.id, text: `${name} is knocked out.` },
+      reader,
+    ),
+  ).toBe(`${name} est K.-O.`);
+  expect(
+    eventPresentation(
+      game,
+      { kind: "action", actionType: "swap", actorId: target.id, text: "Your formation changes" },
+      reader,
+    ),
+  ).toBe("Votre formation change");
+});
+
 it("distinguishes gained status stacks from Stun or Freeze buildup", () => {
   const game = run();
   const target = game.team[0]!;
@@ -921,6 +958,24 @@ it("extracts every creature passive tier exactly as the game produces it", () =>
       expect(extracted?.text, `${creature.id} ${rank}`).toBe(ruleMessage(tier.description).template);
     });
   }
+});
+
+it("presents the probabilistic and guaranteed passive tiers distinctly", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const progressed = produce(run(), (draft) => {
+    draft.discovery.recruited.orifable = 6;
+  });
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CreatureDetails kind="orifable" />
+        <CreatureDetails kind="orifable" progression={progressed} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(screen.getByText("50% de chances de piocher une carte supplémentaire à chaque tour")).toBeTruthy();
+  expect(screen.getByText("Pioche une carte supplémentaire à chaque tour")).toBeTruthy();
+  view.unmount();
 });
 
 it("localizes shared pagination and combat announcements while preserving values", () => {

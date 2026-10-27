@@ -905,6 +905,258 @@
     "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
     "text": "水"
   },
+  "content.species.aerostat.passive.0.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
+    "sourceHash": "dcdd2c75b233089d9baa81af7149889776253868ad0df31fb57a1bd821ca514e",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.1.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "852dfcccb07319872c8892edc94e859c11ce9fb11c28a81dff832e73ef7cbc08",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.2.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "7c876a32b7197706817332af69a7cd059381504af03c26ed71cc247d506bd1be",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.3.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "ca364d29070110dd729b35e832472b7236dbc0978d3048dc53a1edc9b4b910cb",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.4.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "5373ba9cbff722c447d20a51f662723339eef831281da120f6d71b7e4396962a",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.aerostat.passive.5.rule": {
+    "reviewed": true,
+    "source": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "sourceHash": "73b6178be78652b69ce1e44e077bfa338515c31ca55bb947d0f64e469bcf31b0",
+    "text": "开始时牌组中有{{value0}}张<keyword0>食物</keyword0>牌"
+  },
+  "content.species.almanelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "cdb6be27744a221346262445d93f7247167d9487bf0a2e029db713f4b834cca5",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "9075f22960d761c94ba81869ef1462aa6292d67761c03ca38b5afb46867a13ae",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "8c3509e388d290f222ab8bc4f60b4febcc46a39951ce0ad533724c4f6df0f66d",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "c697df54afeb90513e9b002ffd14b1365115af4069214e5f273abe4ad7b7f447",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "224db3195a28a9c78ecde2eb3b7f5f3bb8fa813786f2ba1d750f21c517eecdf4",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有{{value0}}%转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.almanelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "sourceHash": "7151dacd1fddc2743b6e9300b8ec04e5842bd65f3cb00e333caacd74c71ab876",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>转化为<keyword1>荆棘</keyword1>"
+  },
+  "content.species.alpenglen.passive.0.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "f2b8bc634027157c755521d9c859ea33a6aaba694485c4be1b998890d6974ce4",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.1.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "49b528a21f92caad1dc1d9213fac1aa15f46eafab4a0b0c35a9e1d0745a3123c",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.2.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "216ab0b338be185623a23f0e4278a986313bae83683949baad706590d7c80ee6",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.3.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "870a25ea60bd9d0e856504a903445ccbb29902e07ee96930ec4427d4fc3ec0cb",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.4.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "1a05edee6007d2beba171021a632cf59041c55afbe7845da9ff36db94ed588c6",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.5.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "18fca08cf67c7bac4dea01582f4e578a4917a4fcb271ab2accbef04fc5fa19a3",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a999aad1dd4b31a3838ee861d7e6bdfecd76fee5a58cf9e4302bfd9999ca61b7",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "96d1fe5ccfdcf72c13803d0f6574a31c64a00a6220979ab993619606c871fc69",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "5aea2d550000f4b63324d4e2ee8912740bf080144b78052c56c07c926eda9817",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "00f9cc16cdbeaee3766a31bbf4cd5f4d5681ff7960b539eeb7a328d1fc0352a4",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f603578beb6590b49c123bd78aec1a4f7dc2e0a613f4ea672a8aa6ca8b2d9daf",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "27031063234ebe664fd5958973500445892a50fca3691e68a77da3a907de722c",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.bloomquail.passive.0.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "f9b64430fd10ac8adcdcb5ec2bcc790bf2ac403a7fcac2d61f3657bce5207123",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.1.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "83ac2f3cc32038775666ed365f195e22bbcd99f541d89c04e5ae9a3b35487bf9",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.2.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "6e642a6b76cb441eb4cd1d96021f25ea8b93544e90676e32a23a5226fdc99106",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.3.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "0e07418377770cf15f831ed429a30575751a4d1fa53375167f544b5052cce359",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.4.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "cf89f8ce560b65cae8a89115342b229100d42b5f288f3670d0cff46ac0568fcf",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.5.rule": {
+    "reviewed": true,
+    "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "4ca60feab922197fc88cd6a72aee264e8e6f2ba7ead1ea12b183b18aecad4b1f",
+    "text": "将你获得的<keyword0>格挡</keyword0>转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.cadenza.passive.0.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "e16e0a426b8562b0d55b62ed1637d747904b3e99bcb84ae444e7edc4fe6a450a",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.1.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a0766f4819d8c3573c48076f49605d6bea0f6b0c7de4ca1b15d2b678f4c319da",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.2.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "914e094c3a0da11449169c273e3192903743d17f049c9643dd0287c2f7a61adc",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.3.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "f00fbb28cd801da1857f4d9190dc6895421b0a4acdac03353f7d768846d45ff3",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.4.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "df0583e2996fd4185635d1ff082852e69eb94f545db7bfffe39a1172593a313a",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.5.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "93be031a81e1f34313d00a182a26ba11cab640e62617b5d53db92c97acf44053",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.captoad.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "e021113c6c88893b67bebbec8daf2184663906ba08cf77c407b9e50e118eed6f",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "cff529fd73022f555d17751af26334334a748598002d7c4f1b146283e56926c1",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "498a75abbfb1e9a0e5bc76c59172f0f1b80ac1566da766af04578fede11336f1",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "4a471a2d27a05f0503e3bd6761dc374f0a93e718d6731d7f0ef8af2de1c34d1d",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "ae396d601f698e2c6b71c683deef05b83b96ed40765a009db431930f8423ae37",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "a331ec93e49813d19820cc491ede33af59d1358872576ebc8fc9cf2ae7a52b6c",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
@@ -941,11 +1193,263 @@
     "sourceHash": "6b8815f18775ce1ba89b46dafd387f4022773822d7de88866c68bdc365f6fbea",
     "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
   },
+  "content.species.cindernewt.passive.0.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "da1cbe2a367f87abfd39ef5d2bd0799d290aeb64ab7fbab8043f877a36e68fa9",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.1.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "725f3d7cfce2bcf711e37ae6893e911c966c1276056034d450506fa377a7d193",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.2.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "4fc87bc63878b94f59ce335a13a5d68a5614b55390fbe87b4e6f55c16e7f41c1",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.3.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "ee896ce789493ff4cfdbcfe50c744294cd30f014e95ac808700105f228314b4a",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.4.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "60efe828de7b3c363d95ed2f7e14c37986bb5ef118d9b5a12852f831cab2a02f",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.5.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "14a2e701275e3cc33a833ebc9d2c86d03ca6adc35bc0d5d54694538dde7dca08",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "8d3f4e0a21e237ebbff9383ea46ecfc7bd7db342089a1c98cb7399b4ad12e24a",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "ac388ea55c4fd7a955a47e2e3f46d0afbb95589cafb0b0b6fbf2ca57de829776",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "1bfd4e667d5d9f816dfd5264f13188713c3dc55799c13d541c9e1f8ef116ed60",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "a3fa788a0c9285809a398e7e3e03eb67da40aa5c75fa1acdd237f58be5b71c09",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "d8214e77e7756855a70cb4c97e8ec425d5e49025aa27ea8397d392af9f9ddd8b",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "31f2dfae539359f4d8e2ed87b5ec0aad86aaf9c001921d73e87a8c876c7fcbe1",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.dawncall.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "c3c833412c81ec2baa59d5a9bde40f1e2d11d25718d6f4d92e949edf526fae96",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "ea31f76e46bedc255b29eaa23da90c37ee2531ec37333b4fbe342fda2548bbac",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "6c1a14ef27bed9be6bc9ed8b0033ce0bb6c2c29882ea1c16baad2f4f166a7041",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "c8e71be9820d00f361c3f71ffc6d95fc5d5c229c9d269de3dd17d2c8edb6ad28",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "sourceHash": "b7939ea382ea7634cccad5b4aff770b32195b6cf625526f721405e4deb29d9d2",
+    "text": "每回合第一次攻击的<keyword0>暴击</keyword0>概率增加{{value0}}%"
+  },
+  "content.species.dawncall.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
+    "sourceHash": "7600bd446b9b622ec3286e050f88f7b4892acd52ccb6a96b8990dcfff35fc974",
+    "text": "每回合第一次攻击必定<keyword0>暴击</keyword0>"
+  },
+  "content.species.dulcera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "b34d187923baf144e89c19a340772bb5bc23f994e97e19539926e55ea273dd27",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "eb23ec107d9a7ef19e5017c6ba04a56465dfeb0e3523362310184bfdc4ec0b53",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "b68962895da7ee96ce61b80baf37c0dffd270d75f4064281e91660a4ab08e4cf",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "ca3cb100323aa4bc94ca48a9e25b121b86df885b6fc6640a5e95b06c15f0ea32",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "74c9f0a8639f4cea262ab0f9a523928337690bf8ff0317c760024c6390d273bc",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "046784892aec5129365c4c3b654a1e13645f3a7f8d89dbbf706f5c35c5b43371",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "748d356c4c7229f74d6b53f255a58d9198594c8e761aba8d7a8e0233e0144b64",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "b818e329b10c8094267671ed987de3d59402137932790c2c31bee80e1c7f0556",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "d8cf2507d5b5b0409991bdbcd4b873f8afff53ec509e425ed52cdf29c6eea669",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "e3f93112f32222c67d533d06b3442aeb94904ee68f8c357864276a2f5a87ba1d",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "d68654af1fe6bb9a403162e3d9cf582d151b670f845ba615c6cb24da7b6b06e2",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "e15e57c37af34e82e517db1ab73cec80dc08e2ec956fad61d8177642c478668e",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "3211fa21dd8e7b67c5021ae45d1582d2b96a6fb64d9bf2f47cad4b00e5e3034c",
     "text": "流动沙丘"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "220e5b6997ae38d8d9851e0c436956e830bb21360c9e6dd08ac344ac760e19a9",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "c8d7163d4345eb07bb4a907698d11ab9641dfd8b9c7a5054af7a19f0ab2d1495",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "53be8d8f0b2807b0a0e0d05e58acb9d1bbc89bd30e3f57ef744d350ed5c55474",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "a78ea4ce3f5afc9df2deac6cc983d65fb2a3bbca2928e24f4acb0ebc98dbd499",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "b9bc24378b4cda924ed0d580dc3cbc6aac309351c994cebd825c63e3949fbbdc",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "f3a23100489c0fecf8ea4f34ef7891ed5c30f425d89bd8143c9d0492cfc99fa3",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "3edf66c6807267e6fb3addfe7698c0c7555dc305f09022869f934e1ba138c529",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "27766cd3927d3fca20c7306d5926f4e1f0f221d51b21a945b3c7e4e2743fd483",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "ae0e0a5c04d525199b1a5865b5fe9f6a004a1a5120ba691f11c30fc55881d648",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "1ede8cef0b6c7bcb98079d0356cb769554c67a6a649e159e43e97c8bad9a5b39",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "a6f7dd80950a5def0c88078aab9d4d1ab60604941517da6f273bcc28fe7cfa68",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "bb1c684f9c5a8cc3031e23c78d5116593df23889750a1db6e8329e08ceb9cace",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
@@ -983,6 +1487,186 @@
     "sourceHash": "de7ddb1e167365779c0bfb0defa2980c4b94ea38ee34e7de0940f31423b69e3c",
     "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
   },
+  "content.species.neradora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "1379e2bd89bf01206f06266268eb6b889daef3f6650ef797c5b038ab08351956",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "7ab01a7d73be585b5f45f85f4b389a5c30a439310ae183f33cef3d98ce19afc0",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "786c510e6136be6c4297b71e8a8f52bc82c5d42700cf34493ccf37bb0db8e520",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "5e3462cd681aa43447ee41f3fca7d4d8d5744645208e16ca6945b6001524ef32",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "8cbd6334b8df447e50243452211f4d22656bfeea89b2f7fa35f8b7825107553e",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "ebd556352efcac5c386465ca6734cf40051bb154b6ab4fb0792fded9d3dba711",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.orifable.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "e4d7481229f90dde0b9744cb9c2c72f4f64a6e33eecdc0e8b8df8d8d5792a540",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "b59ef67743bb8a68c3ed8d4d3e3ac685466ae828a5c1f57133e03aff527f038e",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "bcebd7545b360421c3ad5810450751a53c89f7ea4d4189b2e792c76a4015dd9c",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "cac8ed6c1053707f8efb8e4ccd7fe3780f5e852ccd2bbdacfbeecb06fa57c0af",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to draw an extra card each turn",
+    "sourceHash": "b24779ce586bf6b4212350520c04cb6fe4bfb252c3e0a00c194a4077f2c5e1ab",
+    "text": "每回合有{{value0}}%的概率额外抽一张牌"
+  },
+  "content.species.orifable.passive.5.rule": {
+    "reviewed": true,
+    "source": "Draw an extra card each turn",
+    "sourceHash": "201cb82c8320c725652b53245c9504e839cf3d58e5504ade0227bfb7a5f44aec",
+    "text": "每回合额外抽一张牌"
+  },
+  "content.species.parhelion.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "6c1525245607428ed5d725c026293a55be714e8abd77835d76e2e06f109e52c9",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "6635b1e113ea12b5003ce3ec4535d5716475ae4398622a3ba555daa75671d81d",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "4d3e68178b829d439adb9b84831aa837ee94d216602d437402908e7f9cfb4a10",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "653b5379f036fd754af6dfd8f1c7e0ecf3a87a6894fe19491c0d8c7de18aca06",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "2d4bf6f8e7a0e970f61fe70471f722ada6a0649ccc298ed1ba6d0f6699bb55a4",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "sourceHash": "cc324436cdb90c94a26d7afa89f573158c43977537979debf26b75b1a09bd9d3",
+    "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.prismram.passive.0.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "5f9790d8fbc44f2d22ee845a3ad614e7b5aabc3b6d712701782dca3727df4cfa",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.1.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "48550844df758d087e5ea47e2f86dbc10402c83e36c620bb8a72b44627dd352b",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.2.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "8242cad26a8dca668018783b4aaea726ae76c50a15d6168013ced0ba3d4262c8",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.3.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "13c5a39073c7a81d2e8066c67947f19d0a14250788d8353385f8e6643cf9d65c",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.4.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "2251c07a75ad4cc5debc1bea29a9ddd1d6097064099070cf061a324d330b577d",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.prismram.passive.5.rule": {
+    "reviewed": true,
+    "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "sourceHash": "4a5e98e42fe4f641964c98de81f236e30f1cc7a92acc3a81b6c19ab3136b9b95",
+    "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
+  },
+  "content.species.reverie.passive.0.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "ae6d5c299d8697ee8312729a5025e6a2efe563c1b979bfff7bcf1437149b0cc0",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.1.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "fa780cfacf3adc83b2cfa1002305c4d02f5f1e22aab78b9581aab76d5866cffe",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.2.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "80b0e46dc43db5df0e06eb6c3422aeeb754dfd294aa05226fa88e380f9853fd6",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.3.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "b5cf5e40ac3ec155d86291e08ac480827cf8950f7735cad9c3678be8270ea933",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.4.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "8216ca2fa2ef7fa0fadede16f0f77e625b561561ada1399a64e910e4eb15e907",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.reverie.passive.5.rule": {
+    "reviewed": true,
+    "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "975c56f9139e854228a93883368a3dd212979d3b4793c2b7cfdbbfc11f46fc7e",
+    "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1019,6 +1703,42 @@
     "sourceHash": "a5007e4f18df5e35c3bef4f6001691b2475af1403bf76b05f54efcbba4223c60",
     "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
   },
+  "content.species.skybex.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "08b762acd401e9529e6d24d9ac2ef1bf7bfb0a6fdb11a8e7836e5eca6e7117f7",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "b8c0dc3fd03357774529d5fa0712c4bef8c170578117e520003aa84d5e7647f5",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "16fa63b9cc0acf2b1cd918f080b1ec16187ed188b4804a82c47619776620c7e5",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "d317255a64b143e0b69bda933017017ff35df15d6b96d606fdb55bcea091defb",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "96ec181f3876ba6d77b7af0bafd5bce9e685a64cf707baf115d2c983f7cf64d6",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "d28369e5164e2363fe00eb9703c6e39102fe335998056c75416a9e579e8772f1",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
@@ -1054,6 +1774,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "97f7c568936227fd61aa93d1cc734bc67e3d11f0fd72f97db24d848a2646d828",
     "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.wisterelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "262869f64f372e644f2b1f49e9b99186d05c6a41a638196e49230dd9a21df2bf",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "c38b09e2afb6fce918fb75d334b6399dfaa79081d0304ed0ab32b703e5f0ccfc",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "af7d88e9b07c937143fc397cc8d8ec386df07bc8346bf3c502f47d78f6e34ae8",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "618779bca43a48bd6a965c6c47453e011591e012b2de0df5f06e1a78277cb88a",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "b6b4261c1d1aee02904c563f0b4b11617e601ceca606a3a314ac2c1eda7a74dd",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "sourceHash": "d89a29b452a31453585efd6b2dacf539daf80eccf319e6293e41454426fb88dd",
+    "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
@@ -2189,6 +2945,12 @@
     "sourceHash": "22395139cf077464bb1936cc58d30b6a1e0f66a266e94f835c5156c788392ed3",
     "text": "{{name}}格挡了{{amount}}点伤害。"
   },
+  "log.boonPurchased": {
+    "reviewed": true,
+    "source": "Boon purchased for this journey.",
+    "sourceHash": "cde852c48b4cde8ef1b88831cc62c926dde81766fd412eb7081d7702acdaf309",
+    "text": "已为本次旅程购买祝福。"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -2201,6 +2963,12 @@
     "sourceHash": "ab57890cb6b9c89b5d6c9277e191217d221f3848c65a8be3a16ffb80181a1234",
     "text": "{{name}}受到了{{amount}}点{{type}}伤害。"
   },
+  "log.formationChanges": {
+    "reviewed": true,
+    "source": "Your formation changes",
+    "sourceHash": "f47b9aad66421d3076e36d9ba4bcfda839bb7a03dac8afb5779c48a445caee91",
+    "text": "你的阵型发生改变"
+  },
   "log.gainBlock": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}} Block.",
@@ -2212,6 +2980,12 @@
     "source": "{{name}} gains {{amount}} {{status}} buildup.",
     "sourceHash": "a0c58fb3802dff653219fcfa5d0d6c00cde1e8569fc2b99c6fde1d050f188d5e",
     "text": "{{name}}：{{status}}积累 +{{amount}}。"
+  },
+  "log.gainGold": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Gold.",
+    "sourceHash": "4ac5d347f8a0c15ba14041bb647deda45191b4eecd6487f3c98fbb770058354c",
+    "text": "获得{{amount}}金币。"
   },
   "log.gainMana": {
     "reviewed": true,
@@ -2237,6 +3011,12 @@
     "sourceHash": "107054dc236a3ea5f1859203b6f0c5c609e38c7f2ec72d0d144bcc2f1344591d",
     "text": "你的旅程开始了。"
   },
+  "log.knockout": {
+    "reviewed": true,
+    "source": "{{name}} is knocked out.",
+    "sourceHash": "6b193d08fab442fae7f0e846b44d34e722ecc0031e3dd1033c820477b252c869",
+    "text": "{{name}}被击倒。"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -2254,6 +3034,12 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
     "text": "{{name}}：{{action}} — 未移除任何效果。"
+  },
+  "log.returnHome": {
+    "reviewed": true,
+    "source": "You return from the wilds. Discoveries are kept.",
+    "sourceHash": "17478189a0951aaf75aaa662444195a9e35fe7fa6fdd21c9f2836ae94432b0e7",
+    "text": "你从荒野归来。已保留发现成果。"
   },
   "log.turnRestored": {
     "reviewed": true,
