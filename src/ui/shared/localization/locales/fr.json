@@ -401,6 +401,12 @@
     "sourceHash": "6dea2e35425c65a6424df9dacee81b408a9a5f4b052a31456bd8e6c897727025",
     "text": "Raquette de ronces"
   },
+  "content.boon.briar-racquet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliates at half strength when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "5eadc2a3edbbee7773c7f5694862d8ba305ca34f6666c656ec0c1d77479f39d9",
+    "text": "Les <keyword0>Épines</keyword0> ripostent à moitié de leur force lorsque vous <keyword1>esquivez</keyword1>"
+  },
   "content.boon.brookskip-disc.name": {
     "reviewed": true,
     "source": "Brookskip Disc",
@@ -448,6 +454,12 @@
     "source": "Comb Uncapping Fork",
     "sourceHash": "81a59fa9802d7877472b01da609483e7880afbace68ecfe6e1573b481a07206e",
     "text": "Fourchette à désoperculer"
+  },
+  "content.boon.comb-uncapping-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "b8a865f0b6ed9974a4a5bb1b5b894f61fa25349744ce4498532fe6a7fbf4414d",
+    "text": "Les dégâts d’<keyword0>Épines</keyword0> ignorent le <keyword1>Blocage</keyword1> ennemi"
   },
   "content.boon.comet-crucible.name": {
     "reviewed": true,
@@ -604,6 +616,12 @@
     "source": "Fern Fencing Foil",
     "sourceHash": "c48011b6131c9810dd4e807000f582417e5528b99c691f701dd07db4c2b4ba31",
     "text": "Fleuret de fougère"
+  },
+  "content.boon.fern-fencing-foil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> an attack <keyword1>Purges</keyword1> its attacker",
+    "sourceHash": "7666e708fa11c99a74a80c6b8ca262413f4a54d90d26377d4ec32dcf6856f33b",
+    "text": "<keyword0>Esquiver</keyword0> une attaque applique <keyword1>Dissipation</keyword1> à son auteur"
   },
   "content.boon.field-lunch-basket.name": {
     "reviewed": true,
@@ -1133,6 +1151,12 @@
     "sourceHash": "32995cd889e1a1aaa3d1d6b01a14f6fbc41c18eaf16fc6e3615a7a169f481925",
     "text": "Bâton du saut racine"
   },
+  "content.boon.rootvault-pole.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "4d2c3c93003f21e7e4eeba706da2121600604dc73913c49c19e8be4703df6071",
+    "text": "Les alliés peuvent <keyword0>esquiver</keyword0> les dégâts d’<keyword1>Épines</keyword1>"
+  },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
     "source": "Saddle Pouch",
@@ -1186,6 +1210,12 @@
     "source": "Star Hoop",
     "sourceHash": "038cb4ee20afe91e04019f0212fe5f053ab791b660b1686593453ccfbc2b8bd9",
     "text": "Anneau d’étoile"
+  },
+  "content.boon.star-hoop.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0> also returns enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "a84dfc38f97e494261b7c1fdc3a7232db164d0ed21aa7162c85fb0ecf987bf70",
+    "text": "Le <keyword0>Renvoi</keyword0> retourne aussi la <keyword1>Dissipation</keyword1> ennemie"
   },
   "content.boon.stardust-whetstone.name": {
     "reviewed": true,

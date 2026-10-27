@@ -401,6 +401,12 @@
     "sourceHash": "4b39118759b45aafbaa327f95b56ed800540281031b9b7af1941625707e71f8e",
     "text": "茨のラケット"
   },
+  "content.boon.briar-racquet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliates at half strength when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "2df9d38afa97c359cbfe64366e3032d3657c0dad5fbd961ff29a8c688bd7eb9a",
+    "text": "<keyword1>回避</keyword1>すると<keyword0>棘</keyword0>が半分の威力で反撃"
+  },
   "content.boon.brookskip-disc.name": {
     "reviewed": true,
     "source": "Brookskip Disc",
@@ -448,6 +454,12 @@
     "source": "Comb Uncapping Fork",
     "sourceHash": "1dac49007c87ab8f59a9bafe4e0d0d681f1dd6487e91fd03e0f9145ddf85461f",
     "text": "巣房のふた切りフォーク"
+  },
+  "content.boon.comb-uncapping-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "54dada61cd76da19aada8dfc846b8a8eef9c5e6895d4b40b1bce026c7d37d92b",
+    "text": "<keyword0>棘</keyword0>ダメージは敵の<keyword1>ブロック</keyword1>を無視"
   },
   "content.boon.comet-crucible.name": {
     "reviewed": true,
@@ -604,6 +616,12 @@
     "source": "Fern Fencing Foil",
     "sourceHash": "114b04e25dc321a756d6c8fab39b4814fdc2f4f4c397edcba8ec9c736ec6316e",
     "text": "シダのフルーレ"
+  },
+  "content.boon.fern-fencing-foil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> an attack <keyword1>Purges</keyword1> its attacker",
+    "sourceHash": "2d32741f56b95280901450781512bff72c2d168d7f62b8888adb3a40a9bedadc",
+    "text": "攻撃を<keyword0>回避</keyword0>すると、攻撃者に<keyword1>強化解除</keyword1>を適用"
   },
   "content.boon.field-lunch-basket.name": {
     "reviewed": true,
@@ -1121,6 +1139,12 @@
     "sourceHash": "2e032a9882ba2ac2aa985c4cd05aed818ba38074a32bdc1b10952c07b2e598ab",
     "text": "根跳びの杖"
   },
+  "content.boon.rootvault-pole.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "60c0e9023eb805c97af0943b605cff48ee1abaaad95460b36c7cd3663b9b57ea",
+    "text": "味方は<keyword1>棘</keyword1>ダメージを<keyword0>回避</keyword0>できる"
+  },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
     "source": "Saddle Pouch",
@@ -1174,6 +1198,12 @@
     "source": "Star Hoop",
     "sourceHash": "801780757b836e50fbd5e5534b2bd07ad487d5d14f22dc7b31ab6f38734f0578",
     "text": "星の輪"
+  },
+  "content.boon.star-hoop.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0> also returns enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "2cd821dd5ebd1923466f1bdbef991c1812aa23d7d91c7e12ca78d75242b6b785",
+    "text": "<keyword0>反射</keyword0>は敵の<keyword1>強化解除</keyword1>も返す"
   },
   "content.boon.stardust-whetstone.name": {
     "reviewed": true,

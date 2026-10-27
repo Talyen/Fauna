@@ -401,6 +401,12 @@
     "sourceHash": "b1bf4939686a96c5a8f908f28a28cb7de07eb973c4bd8e1bbc592a4cba1c61c3",
     "text": "Dornenschläger"
   },
+  "content.boon.briar-racquet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliates at half strength when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "0f5768588f7a01c7f7ebfa5ba3079aabb777fd3a92e1fcd4c735405f905cc611",
+    "text": "<keyword0>Dornen</keyword0> schlagen mit halber Stärke zurück, wenn du <keyword1>ausweichst</keyword1>"
+  },
   "content.boon.brookskip-disc.name": {
     "reviewed": true,
     "source": "Brookskip Disc",
@@ -448,6 +454,12 @@
     "source": "Comb Uncapping Fork",
     "sourceHash": "b028f2cc191c222804bd7a446b13e5cd56527c10497b0f127beda63c1f9b7487",
     "text": "Wabenentdeckelungsgabel"
+  },
+  "content.boon.comb-uncapping-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "78ebcf4c992efbc5b2576ab62ebcbab5f59942b3e80c1e0d917fded7e94d013e",
+    "text": "<keyword0>Dornenschaden</keyword0> ignoriert gegnerischen <keyword1>Block</keyword1>"
   },
   "content.boon.comet-crucible.name": {
     "reviewed": true,
@@ -604,6 +616,12 @@
     "source": "Fern Fencing Foil",
     "sourceHash": "dc5bf361ab10ec7fce25ef1e940cfb241115e29fd87aa4ff22c00db00245317f",
     "text": "Farnflorett"
+  },
+  "content.boon.fern-fencing-foil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> an attack <keyword1>Purges</keyword1> its attacker",
+    "sourceHash": "808917051b2e66fb721ad66a7df26dfffb717762351ad77dd7cb9b0c9d1ae307",
+    "text": "Beim <keyword0>Ausweichen</keyword0> eines Angriffs wird <keyword1>Bannen</keyword1> auf den Angreifer angewendet"
   },
   "content.boon.field-lunch-basket.name": {
     "reviewed": true,
@@ -1121,6 +1139,12 @@
     "sourceHash": "e0a7517a8743aed1745defd14b969fd03e09466d441272dfee54579fd32a6b82",
     "text": "Wurzelsprungstab"
   },
+  "content.boon.rootvault-pole.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "e0f52eb2470e04f716da3180c085fed1d2c70ad07b70a99c832f38ce54b1b7dc",
+    "text": "Verbündete können <keyword1>Dornenschaden</keyword1> <keyword0>ausweichen</keyword0>"
+  },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
     "source": "Saddle Pouch",
@@ -1174,6 +1198,12 @@
     "source": "Star Hoop",
     "sourceHash": "10895c4f87e6d8ec7ce78fa248569ba5145f22e62eb88fe0cb3419923283aa01",
     "text": "Sternreif"
+  },
+  "content.boon.star-hoop.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0> also returns enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "8dfcfe784a5cbd14903b036550b4424b35230e7234c4d3dcf66e0e88d0e36aa3",
+    "text": "<keyword0>Reflektieren</keyword0> gibt auch gegnerisches <keyword1>Bannen</keyword1> zurück"
   },
   "content.boon.stardust-whetstone.name": {
     "reviewed": true,

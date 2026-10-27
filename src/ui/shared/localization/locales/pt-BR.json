@@ -401,6 +401,12 @@
     "sourceHash": "a8d00863e97b2d948216fcc2d386791baf103a0f31a96f70729b2f18432ade34",
     "text": "Raquete de espinhos"
   },
+  "content.boon.briar-racquet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliates at half strength when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "63a9f633344f56dc7a11773ec976905412e311ad3b1662cf56f4abedf78773f1",
+    "text": "<keyword0>Espinhos</keyword0> retaliam com metade da força quando você <keyword1>esquiva</keyword1>"
+  },
   "content.boon.brookskip-disc.name": {
     "reviewed": true,
     "source": "Brookskip Disc",
@@ -448,6 +454,12 @@
     "source": "Comb Uncapping Fork",
     "sourceHash": "266fe2429697b493f621cf5b6092135b8c697fd5de06dfa030a7c860df5c6918",
     "text": "Garfo desoperculador"
+  },
+  "content.boon.comb-uncapping-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "1e45b4c387f79b81ef3502cd844777fbc0bc55388078c76641d94d56fd518b5a",
+    "text": "O dano de <keyword0>Espinhos</keyword0> ignora o <keyword1>Bloqueio</keyword1> inimigo"
   },
   "content.boon.comet-crucible.name": {
     "reviewed": true,
@@ -604,6 +616,12 @@
     "source": "Fern Fencing Foil",
     "sourceHash": "3039fef676844ae5f484b3e9d557d0177ad381454542fae040416b56afe9554d",
     "text": "Florete de samambaia"
+  },
+  "content.boon.fern-fencing-foil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> an attack <keyword1>Purges</keyword1> its attacker",
+    "sourceHash": "0d2b6411d811e224cc6b2e0918d26b16a66a472c27a3913cc878229b51d76b0e",
+    "text": "<keyword0>Esquivar</keyword0> de um ataque aplica <keyword1>Expurgo</keyword1> ao atacante"
   },
   "content.boon.field-lunch-basket.name": {
     "reviewed": true,
@@ -1121,6 +1139,12 @@
     "sourceHash": "eed97a1cd9b7c2bfe7273b3dafa8dff374f85d2f536857bcacde9c2f99c3fb84",
     "text": "Vara de raiz"
   },
+  "content.boon.rootvault-pole.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "bfed60748139655d989a610521abda549ad1a0be5297095f1f719858517edf57",
+    "text": "Aliados podem <keyword0>esquivar</keyword0> do dano de <keyword1>Espinhos</keyword1>"
+  },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
     "source": "Saddle Pouch",
@@ -1174,6 +1198,12 @@
     "source": "Star Hoop",
     "sourceHash": "a54dded03f3914f9d5c3ada21493c9055b5ea7d63d16a778d655ccd45a50fa70",
     "text": "Aro estelar"
+  },
+  "content.boon.star-hoop.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0> also returns enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "5e58279b5f817219121d4de7d99ba18a82eb3d46ea76625bf1713e02bc7669d3",
+    "text": "<keyword0>Reflexão</keyword0> também devolve o <keyword1>Expurgo</keyword1> inimigo"
   },
   "content.boon.stardust-whetstone.name": {
     "reviewed": true,

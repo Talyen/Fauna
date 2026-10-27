@@ -401,6 +401,12 @@
     "sourceHash": "0fae2234160d4ba1884d2ca3239599a3bf06a0b83ac45184d6c9a3942603d1cf",
     "text": "Ракетка из шиповника"
   },
+  "content.boon.briar-racquet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliates at half strength when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "b50c1a00cb1cc87786e1096b323451cecda634cd93848539c291d5cf22b87246",
+    "text": "<keyword0>Шипы</keyword0> отвечают с половинной силой, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
   "content.boon.brookskip-disc.name": {
     "reviewed": true,
     "source": "Brookskip Disc",
@@ -448,6 +454,12 @@
     "source": "Comb Uncapping Fork",
     "sourceHash": "91689ff7a5d0dfc4d9fa5380943b1d678cae38241394840f693830cf66139981",
     "text": "Вилка для распечатки сот"
+  },
+  "content.boon.comb-uncapping-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "ea82bd41c73efd6a74d6276b4be0a805a488b50f719c0834da16b6ffa7bb0f14",
+    "text": "Урон от <keyword0>шипов</keyword0> игнорирует <keyword1>блок</keyword1> врага"
   },
   "content.boon.comet-crucible.name": {
     "reviewed": true,
@@ -604,6 +616,12 @@
     "source": "Fern Fencing Foil",
     "sourceHash": "ab37c81fdab2fc44016db1b7c2564842e2368234a57622121ba9be2767009b3b",
     "text": "Рапира папоротника"
+  },
+  "content.boon.fern-fencing-foil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> an attack <keyword1>Purges</keyword1> its attacker",
+    "sourceHash": "86e20e0501aa17bf0f39c655d45548658697877789fbc4997f14116951e8b782",
+    "text": "<keyword0>Уклонение</keyword0> от атаки применяет <keyword1>рассеивание</keyword1> к нападающему"
   },
   "content.boon.field-lunch-basket.name": {
     "reviewed": true,
@@ -1121,6 +1139,12 @@
     "sourceHash": "d33122b96f3a4da6e934886b7694032b46b74a501f6139f8f2b181ea6087f1aa",
     "text": "Шест корневого прыжка"
   },
+  "content.boon.rootvault-pole.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "854b4607d60c034b9c8527782260fb6bdc2d9e94fdd580d1e634bada4d7b1513",
+    "text": "Союзники могут <keyword0>уклоняться</keyword0> от урона <keyword1>шипами</keyword1>"
+  },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
     "source": "Saddle Pouch",
@@ -1174,6 +1198,12 @@
     "source": "Star Hoop",
     "sourceHash": "6da122ac7e11a16c85756a28d393453da5ae8e493adca1b57b8fb19ba23bfb60",
     "text": "Звёздный обруч"
+  },
+  "content.boon.star-hoop.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0> also returns enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "1cd3afb569c4a3863a0e6a4fcb898f232812103a6a9b7da43f4016016d60f4da",
+    "text": "<keyword0>Отражение</keyword0> также возвращает вражеское <keyword1>рассеивание</keyword1>"
   },
   "content.boon.stardust-whetstone.name": {
     "reviewed": true,

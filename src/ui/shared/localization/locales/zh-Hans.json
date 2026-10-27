@@ -401,6 +401,12 @@
     "sourceHash": "4a8df0bd03fd4e93dc14fdc698c63bdf32f15079dc9ec9c4ebc6b08809c34f27",
     "text": "荆棘球拍"
   },
+  "content.boon.briar-racquet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliates at half strength when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "9a1203c418dd892a3e613dc4917dcfa4e4ced335a42a0da5587929b43c9b4927",
+    "text": "<keyword1>闪避</keyword1>时，<keyword0>荆棘</keyword0>以一半威力反击"
+  },
   "content.boon.brookskip-disc.name": {
     "reviewed": true,
     "source": "Brookskip Disc",
@@ -448,6 +454,12 @@
     "source": "Comb Uncapping Fork",
     "sourceHash": "3ad014a963a54536f496c870928bc6581b5ebf70cc82c9734fe7202e9771c551",
     "text": "蜂巢开盖叉"
+  },
+  "content.boon.comb-uncapping-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "801c58ef060e93d6f7c63d505d6af2225a3cecc46399278651bc5f3e75da7c8b",
+    "text": "<keyword0>荆棘</keyword0>伤害无视敌人的<keyword1>格挡</keyword1>"
   },
   "content.boon.comet-crucible.name": {
     "reviewed": true,
@@ -604,6 +616,12 @@
     "source": "Fern Fencing Foil",
     "sourceHash": "0929abbe3581c4dbcb7a4d7d2771fbf27597e4991e23b918f49c0d9bfe57499f",
     "text": "蕨叶花剑"
+  },
+  "content.boon.fern-fencing-foil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> an attack <keyword1>Purges</keyword1> its attacker",
+    "sourceHash": "3b8544c0c21406015fece9c2730b04fe269a50794c2d3c912ed1949da83b8a98",
+    "text": "<keyword0>闪避</keyword0>攻击时对攻击者施加<keyword1>驱散</keyword1>"
   },
   "content.boon.field-lunch-basket.name": {
     "reviewed": true,
@@ -1121,6 +1139,12 @@
     "sourceHash": "5538de458828fd8a7e29cda2e7712722bbdf8d3e0bf7679a94a6c433d4fc2fba",
     "text": "根跃长杖"
   },
+  "content.boon.rootvault-pole.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "8f804a6461b253ba19da5a8b9549933f079e0242fa0492639e74c43a98f5fc71",
+    "text": "盟友可以<keyword0>闪避</keyword0><keyword1>荆棘</keyword1>伤害"
+  },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
     "source": "Saddle Pouch",
@@ -1174,6 +1198,12 @@
     "source": "Star Hoop",
     "sourceHash": "b00597dc408897ca23701ef7d461efbb2cd0384d5b750c8700e186b0bfc8387a",
     "text": "星环"
+  },
+  "content.boon.star-hoop.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0> also returns enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "481bd6b8fd01ca51bdbede42f95591540d457e0ed1b7caebe08e61fad7c68e71",
+    "text": "<keyword0>反射</keyword0>也会返还敌人的<keyword1>驱散</keyword1>"
   },
   "content.boon.stardust-whetstone.name": {
     "reviewed": true,
