@@ -905,6 +905,42 @@
     "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
     "text": "Вода"
   },
+  "content.species.captoad.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "885faadfeec51a110c58b782628b149aca2bd963efe490cf3636ecccc935d24b",
+    "text": "При попадании по вам отвечайте {{value0}} уроном типа «<keyword0>Яд</keyword0>»"
+  },
+  "content.species.captoad.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "c1bed6999deacba323f0f536407aa152c25df0853248da6d61b4a0130c511a16",
+    "text": "При попадании по вам отвечайте {{value0}} уроном типа «<keyword0>Яд</keyword0>»"
+  },
+  "content.species.captoad.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "af27238a3a144b42b79091155643a4b71c14c57af9bb09d7de93b6f742a8e051",
+    "text": "При попадании по вам отвечайте {{value0}} уроном типа «<keyword0>Яд</keyword0>»"
+  },
+  "content.species.captoad.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "77c650e3f9b05ede12a92d57f97257a94e3c95c8e189c629d6e9a9eb84f49bea",
+    "text": "При попадании по вам отвечайте {{value0}} уроном типа «<keyword0>Яд</keyword0>»"
+  },
+  "content.species.captoad.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "d918a51a1baaff9cb2f4813c148cfb5c2b174006685014a362918230fe2d20be",
+    "text": "При попадании по вам отвечайте {{value0}} уроном типа «<keyword0>Яд</keyword0>»"
+  },
+  "content.species.captoad.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "4d66b5543d8fbdaa1f0e8744f55cb93893f5c1095b07b840bbe905c5c3c6aadf",
+    "text": "При попадании по вам отвечайте {{value0}} уроном типа «<keyword0>Яд</keyword0>»"
+  },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
@@ -940,6 +976,42 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "4e01103dfd9d8bc2b6d55a9b252315c362a25c3d2e2afbf5d593876d5be05c67",
     "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.dulcera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "0a3be06a5cb505a5762961f42d37b1ccf0ef1ac4546dc7fe86ca267621efa9c0",
+    "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.dulcera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "9deb5e047e9c391a1b688fadc345a69806191c7f1b7740bf44911b5013c40efb",
+    "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.dulcera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "107c5c3774b7106c1bd6072a98710a7a8e7a7035c9cba7875a234f0c3c3d981f",
+    "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.dulcera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "fe69309a91b52ef8f5c39d15af7617032a22563a74c18b57db85a88cc0b40579",
+    "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.dulcera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "d142e4ccf86ff2d810c8231d9494fa9cfa16840fe7a33efa77a58d31ab026465",
+    "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.dulcera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "629256f38f72be17c309c460e36b60dda6b551b20b073aaf81ec2cded16b1b28",
+    "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -983,6 +1055,42 @@
     "sourceHash": "91e795ee9f576f8ac285ed502f61614156bf3295e8430c3a5f0907dbf201338a",
     "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
   },
+  "content.species.neradora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "aad564a07dc974653b2779b045355f08395119ee7e84b5fc9893c46b06dc3d0b",
+    "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
+  },
+  "content.species.neradora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "1da72f8c240ad3fc5131e47000230d300f568c9e40d67ad0b1d1bdb7b05877fe",
+    "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
+  },
+  "content.species.neradora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "b49989e2284e78a53e06ccaf857eb488326ab8e83c58001c2212faa57a454875",
+    "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
+  },
+  "content.species.neradora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "4d5af0b47948b1e86c731f93818ece14345456fadab8ce9d408f571c32d6879c",
+    "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
+  },
+  "content.species.neradora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "5058e2afa01c2a93a8b5672aaa5e09fcc31fd2d20210ca0c96d22117e1660ec9",
+    "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
+  },
+  "content.species.neradora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "fc61f5df637b43ecff46933ed190b524c0cf239bf309ef2e769f9dc6d7b59e7b",
+    "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1018,6 +1126,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
     "sourceHash": "6dbc929b5542c1fe33edcec2343eb68d16a26e778a445bd831102d712b796163",
     "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.species.skybex.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "6151762512c02d541b903a1941645e9603e80d04d2302c247b83c503bb2d306f",
+    "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.skybex.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "c87abc6c02d9c78d082a1a14e3e5c7964a83bbaaae0a296139f67f26014e2f44",
+    "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.skybex.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "0a95487a3dfdc02218bafb8c666e627b9b0992fa4a00fa7822076b37edc8db8d",
+    "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.skybex.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "2a715d2f46a4c31b74ef5abbc32cd55267826649548fce783faa68c3dd0fb593",
+    "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.skybex.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "33edaa84bfdcd919c44745ec721d2abc8ea9fc76b7b41d96f6dc7bec535fbf53",
+    "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
+  },
+  "content.species.skybex.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "dabfcefae1240d7f46138366ff9127045eba8a8ee879e41ebb9c87cccb41e800",
+    "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,

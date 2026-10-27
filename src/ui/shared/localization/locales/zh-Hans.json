@@ -905,6 +905,42 @@
     "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
     "text": "水"
   },
+  "content.species.captoad.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "e021113c6c88893b67bebbec8daf2184663906ba08cf77c407b9e50e118eed6f",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "cff529fd73022f555d17751af26334334a748598002d7c4f1b146283e56926c1",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "498a75abbfb1e9a0e5bc76c59172f0f1b80ac1566da766af04578fede11336f1",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "4a471a2d27a05f0503e3bd6761dc374f0a93e718d6731d7f0ef8af2de1c34d1d",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "ae396d601f698e2c6b71c683deef05b83b96ed40765a009db431930f8423ae37",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "a331ec93e49813d19820cc491ede33af59d1358872576ebc8fc9cf2ae7a52b6c",
+    "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
@@ -940,6 +976,42 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "6b8815f18775ce1ba89b46dafd387f4022773822d7de88866c68bdc365f6fbea",
     "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
+  },
+  "content.species.dulcera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "b34d187923baf144e89c19a340772bb5bc23f994e97e19539926e55ea273dd27",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "eb23ec107d9a7ef19e5017c6ba04a56465dfeb0e3523362310184bfdc4ec0b53",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "b68962895da7ee96ce61b80baf37c0dffd270d75f4064281e91660a4ab08e4cf",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "ca3cb100323aa4bc94ca48a9e25b121b86df885b6fc6640a5e95b06c15f0ea32",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "74c9f0a8639f4cea262ab0f9a523928337690bf8ff0317c760024c6390d273bc",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.dulcera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "046784892aec5129365c4c3b654a1e13645f3a7f8d89dbbf706f5c35c5b43371",
+    "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -983,6 +1055,42 @@
     "sourceHash": "de7ddb1e167365779c0bfb0defa2980c4b94ea38ee34e7de0940f31423b69e3c",
     "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
   },
+  "content.species.neradora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "1379e2bd89bf01206f06266268eb6b889daef3f6650ef797c5b038ab08351956",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "7ab01a7d73be585b5f45f85f4b389a5c30a439310ae183f33cef3d98ce19afc0",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "786c510e6136be6c4297b71e8a8f52bc82c5d42700cf34493ccf37bb0db8e520",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "5e3462cd681aa43447ee41f3fca7d4d8d5744645208e16ca6945b6001524ef32",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "8cbd6334b8df447e50243452211f4d22656bfeea89b2f7fa35f8b7825107553e",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.neradora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "ebd556352efcac5c386465ca6734cf40051bb154b6ab4fb0792fded9d3dba711",
+    "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1018,6 +1126,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
     "sourceHash": "a5007e4f18df5e35c3bef4f6001691b2475af1403bf76b05f54efcbba4223c60",
     "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.skybex.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "08b762acd401e9529e6d24d9ac2ef1bf7bfb0a6fdb11a8e7836e5eca6e7117f7",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "b8c0dc3fd03357774529d5fa0712c4bef8c170578117e520003aa84d5e7647f5",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "16fa63b9cc0acf2b1cd918f080b1ec16187ed188b4804a82c47619776620c7e5",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "d317255a64b143e0b69bda933017017ff35df15d6b96d606fdb55bcea091defb",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "96ec181f3876ba6d77b7af0bafd5bce9e685a64cf707baf115d2c983f7cf64d6",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.species.skybex.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "d28369e5164e2363fe00eb9703c6e39102fe335998056c75416a9e579e8772f1",
+    "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,

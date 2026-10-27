@@ -953,6 +953,42 @@
     "sourceHash": "58003e51ae85c37048a64ffc1a053a6f2736e83e005e119093edc05f72430227",
     "text": "Eau"
   },
+  "content.species.captoad.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "9ca24f08e4f51bb08d7c70bfebb14fc1c444fee6f9aecd162ad26a3e966de9dd",
+    "text": "Riposte aux coups avec {{value0}} dégâts de <keyword0>Poison</keyword0>"
+  },
+  "content.species.captoad.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "7c6665e946f0fbbcc9de2e47aa7be6e9611d25ec14c14f37464d00e0b60bd565",
+    "text": "Riposte aux coups avec {{value0}} dégâts de <keyword0>Poison</keyword0>"
+  },
+  "content.species.captoad.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "c929b28cefc6b7f403d6fd0d2fc74ef8c39447bf4b8f217315866fbe200289d5",
+    "text": "Riposte aux coups avec {{value0}} dégâts de <keyword0>Poison</keyword0>"
+  },
+  "content.species.captoad.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "14d3b7cdb556dda96751fbe79764245c8cfb742fa5db0ca07b349326a4408a3d",
+    "text": "Riposte aux coups avec {{value0}} dégâts de <keyword0>Poison</keyword0>"
+  },
+  "content.species.captoad.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "535e0f606ab92ea9b1eb72cbe77deb887f6bb71085d2663ba6b127269a1457f5",
+    "text": "Riposte aux coups avec {{value0}} dégâts de <keyword0>Poison</keyword0>"
+  },
+  "content.species.captoad.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "f6e22c7a7f8ed7b51d5785fa017e2ac18bcd4ca56b06113dd278ec0e75372db7",
+    "text": "Riposte aux coups avec {{value0}} dégâts de <keyword0>Poison</keyword0>"
+  },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
@@ -988,6 +1024,42 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "19e4191b1f015fbefb9dee52037020ea20a6ab5f80ce6aedf5fe4d83628279d4",
     "text": "Votre première capacité à chaque tour a {{value0}}% de chances de se répéter"
+  },
+  "content.species.dulcera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "324771ad964c3755e4cc5b146409ae2189948258c05fc6b35566fb27c9772bc7",
+    "text": "Les alliés récupèrent {{value0}} de <keyword0>Santé</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.dulcera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "71eaf7b6334635a653908cd07a5884d201b7facb94769daada98a03dc3a4ee2e",
+    "text": "Les alliés récupèrent {{value0}} de <keyword0>Santé</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.dulcera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "d47f703a0704936aecf1558f04ac9a8803a6f313b26ca7f4e4b7018252fae948",
+    "text": "Les alliés récupèrent {{value0}} de <keyword0>Santé</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.dulcera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "ecf0699a304b25e2b505388b1f9909625217b7eaf3ed57ff13390939d4182471",
+    "text": "Les alliés récupèrent {{value0}} de <keyword0>Santé</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.dulcera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "87c64d7b89db67b9e4e2b27011ec33538dd32d05a7cf33c3797193b69b37bb2f",
+    "text": "Les alliés récupèrent {{value0}} de <keyword0>Santé</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.dulcera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "6b2a29bba8a75e566bf4889aed1368913cfb0b18e6f95c89a5103d02c3f1bddb",
+    "text": "Les alliés récupèrent {{value0}} de <keyword0>Santé</keyword0> lorsqu’ils entrent en jeu par échange"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -1031,6 +1103,42 @@
     "sourceHash": "c67877125d19fae2e3e2746a0b6a7934c06d00657d6e69eb95ff80cf86a21195",
     "text": "Conserve {{value0}}% de <keyword0>Blocage</keyword0> en plus entre les tours"
   },
+  "content.species.neradora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "f94dc4cadb60f3ffb52a96965a919b99a167a45df6d7495b623a4793577db86b",
+    "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
+  },
+  "content.species.neradora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "0a1f2375e337332abc66a1dd77574ee28f49222ed9aaaa305a853a4853b6f089",
+    "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
+  },
+  "content.species.neradora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "3c0a3c8f979f573c06dad8ac3fc0d4a781264e92504b8b1797b102306373d56e",
+    "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
+  },
+  "content.species.neradora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "182bd19fbf07779a00a30b481fa035edc205afafc74d9537bf0d47e70803369f",
+    "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
+  },
+  "content.species.neradora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "6d134e9202729b5a5b02e7c2f93ca0cf58ec050fc242874a19ad23f7285cdfa3",
+    "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
+  },
+  "content.species.neradora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "ab867c2bf9553aac537b1b698f076e616acfc024a6a85f99c10af008353df15f",
+    "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1066,6 +1174,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
     "sourceHash": "80b5ed17cc2a67a5fc72a75e40f141cf1560ce8b2e6f4e92f89860bfe483166d",
     "text": "Les alliés subissent {{value0}}% de dégâts de <keyword0>Brûlure</keyword0> en moins"
+  },
+  "content.species.skybex.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "fb75928623ea5ab2a419d3cbafb07336ceae8d203c10af00fd98aad33ae3822a",
+    "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.skybex.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "4cf93b954811952be3eecf68cceb1068eeb8cef463eaa57ffe6f8310cf3060d1",
+    "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.skybex.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "439fda911aea489eecffb1b6eeb07e9e53ca17dab954a2f04d765fc85bd5963d",
+    "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.skybex.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "752f5e45561cae0f884f6ce832139c8f93259c3140f340dee18d913580237c0f",
+    "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.skybex.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "b969654fdf80a6bfd7f22fee72a0bed4507aa6f6e7895db906021e65b30b5a7b",
+    "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0> lorsqu’ils entrent en jeu par échange"
+  },
+  "content.species.skybex.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "c0087efb545915d3ca8eb09bf9412a6f5810267ba92c82617a1e086ea7da973f",
+    "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0> lorsqu’ils entrent en jeu par échange"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,

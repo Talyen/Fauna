@@ -905,6 +905,42 @@
     "sourceHash": "a5db157930d4196b9c2631088f33b4fa95b07fcd1157220dbed9bbb734ff10c8",
     "text": "Wasser"
   },
+  "content.species.captoad.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "f75da2272c0d44453d792b6c6301d0398ec190a5f1d5a1a37fe67cc0c3222a30",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "47b738b656d0794d508f791c5322722c5d22b06030275a3639edf96fc471aa88",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "2c5d33a09b4364eabcc626e6a9a1907a354ad44a60f353e16c7bcf26dc543423",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "7da6617c693836d81a45e1d41eefde0a27fc28f2d54df7ad4ec007d903606893",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "c81616129e98e354384621d8c02cb8ad69e74054bfcf983119fc502d6ddfae9d",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "sourceHash": "36a6b8047c8a16dd9c5e95dd80937b54b4f0b4814e047464d1b02843a6cc2b4b",
+    "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
@@ -940,6 +976,42 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "4b0631daf1a7f0f0f110e11f828588180ed401ec3ccf6425e597d86db38e915f",
     "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.dulcera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "d3f89b612af00e4d787e941cb39713028c070717a513844ab4c36a4fefc19ea8",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "8cd668cba0135150f9def6348a391babd96dbb0dbe649c4b3fb17e30c72873c8",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "1ff06a36df2df5b5e29c9c17076fb89d209fcf14a6b49b3d38d6fdd76aebe74d",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "847a30ca5ee348a55b16eb196dfb000de1a2e1ca9c4dee7432017ee66448c663",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "68844707ace974ccada312753492c4d0ead17a357f383cf11ece2144b8cfed54",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
+  },
+  "content.species.dulcera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "sourceHash": "a54d79b16e5ffc27a3dd861c3df04a2c8d41223d8733378bd1dd7bab0b2dd950",
+    "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
   },
   "content.species.dunefox.trait": {
     "reviewed": true,
@@ -983,6 +1055,42 @@
     "sourceHash": "0844c7be118e49763c4caeb9b3b9ca2cb2081ed08d168a7d515f03f16e614b91",
     "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
   },
+  "content.species.neradora.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "0ba018981adf2e9125144243ed2262e58dfd30712945877b997a8b3c9c9590a2",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "5b93c735936edbe66b24f32daf61c2476166877acd12da5a5e0f953ccdbf7e94",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "07cef65de16f91ab7546372820b03f0dad3d9bbbe33f507c20c385755b0c7a66",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "8ee8fbad05d98867f6b5d5c24da5bc7587876c8c16b89f2c6bd5090eeb909dac",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "9a16e1d13166d5d1a118ab4b8f551308f4a7c20e37449501afb2a120b43e8889",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.neradora.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "sourceHash": "9d0e3708cc87d94088b36a0d0b9d34349ac1cec9995895109583820597a44371",
+    "text": "Stelle jeden zweiten Zug {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
@@ -1018,6 +1126,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
     "sourceHash": "60f88cab68e6979256d9ed86a89fddfa42b610f62feddcebd61cab3644a93259",
     "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.species.skybex.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "20725cb9f7e83124018e6bf81a4d42909d76fc5e71596ae87078006f5fbd09b9",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "131b6afe840d0b8e82e434b00b951ad2da541bc2138515ade10ce2e75447f860",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "6ce3a70a67896baeb05d0bc08ce5dca06fc6a07025d9f834a069f828bc3d2047",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "6e192bf25f9bc250a0e319109ed98119f103301448700c700ca14d5ffcbadb82",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "96933d7c6b7e7068c238f986324f33d94ec8bd634f4fe7091b551620f85bffc2",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.skybex.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "sourceHash": "8f5e630e22c23361ad739f1a4c47f1544bfa873c9fd18eadcff6ed600de703db",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
