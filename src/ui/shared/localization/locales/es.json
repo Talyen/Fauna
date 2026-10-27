@@ -1169,6 +1169,78 @@
     "sourceHash": "0a384fb8e9e07ba281cd00416b94e67de27be66644e7e4d1aed915a74b802861",
     "text": "El daño <keyword0>físico</keyword0> aumenta en un {{value0}}% de tu <keyword1>Bloqueo</keyword1>"
   },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "3b27ef670fa01b67ead8e8e25d358fa3a52c3aa5cfbb861827b266454a1783ed",
+    "text": "Resistencia al fuego"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "37cc56470c630d7091dbe977aa15443af4f494280b7077d6f501edb04ef017b4",
+    "text": "Recibes la mitad de daño de <keyword0>Quemadura</keyword0>"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "a60b960c05e364c026c532f3881b0f7d1dfe6740f186e3992184704572d70fd6",
+    "text": "Fuego repentino"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "9b36957a7b54405691a8efbce8d702f83e838cd985fe581ff93736680e9c8a23",
+    "text": "Las cartas de <keyword0>Quemadura</keyword0> tienen un {{value0}}% de probabilidad de jugarse dos veces"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "737a2c2911718f899f5ca623ac37f5e039c8f40e66a24b274e019bee00664ad7",
+    "text": "Punto de inflamación"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "ecce017010df1497450cfc66af40974dc7d566e41aea1cc1ed028c1b3d125b70",
+    "text": "Agotamiento por calor"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "ea0e0f12683258aa04dbbf572a7a850d2d37324bbdcfd3c6c2a2b16af09f4f87",
+    "text": "Los impactos de <keyword0>Quemadura</keyword0> tienen un {{value0}}% de probabilidad de infligir también daño de <keyword1>Aturdimiento</keyword1>"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "8e6bd13b7442f78547665ae4390efe70738b2a022a7a6eff977ff6ec42a008d9",
+    "text": "Punto de fusión"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "33d288094d13393f9855b9b1f0beacbf41cf8865691f1225276c80a8a4746e2d",
+    "text": "Cortina de humo"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "2e1b0b090b6e69fd97f66581489d8414aecada9a35d84abc531065330bf21a51",
+    "text": "Al <keyword0>esquivar</keyword0> el ataque de un enemigo con <keyword1>Quemadura</keyword1>, inflige {{value0}} de daño de <keyword2>Quemadura</keyword2>"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "1c0d243b966e8adbfb58e3adcbe8c8300bd8cfd466c2e095363007f7136180d6",
+    "text": "Humeante"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "34d51e68706fb04b2046b852908937a617d89cabe46b391d31d7f1500414aef1",
+    "text": "<keyword0>Quemadura</keyword0> tiene un {{value0}}% de probabilidad de no reducirse"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

@@ -1169,6 +1169,78 @@
     "sourceHash": "4c6837763f915c5651a24ef018080bf1975627642beec98ea20945448e7b58c4",
     "text": "Урон типа «<keyword0>Физический</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>блока</keyword1>"
   },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "e7192a3e6e02cb1501ca7b980a8f9c1b69a37f90fc20065b6c5ae854a6ebf982",
+    "text": "Сопротивление огню"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "0976e4a270bf9bc3b53b3c467e8fab5bce43c1995798388b5ed5d67fc2c4cdf2",
+    "text": "Получайте вдвое меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "0bbe844f5a72616e7feca8b69a5058d0ddf9aca136901db2608b1c1230e5edbc",
+    "text": "Вспышка огня"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "a88ac8907292eb7e4f0b71b5ea4e288bdb0b13a903fac69d8c594a8cd607cbbf",
+    "text": "Карты типа «<keyword0>Горение</keyword0>» с шансом {{value0}}% разыгрываются дважды"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "7471df9bf11f647f6cd907eb77aad524c523854e5b58dcbbdf0a39b576eddd8d",
+    "text": "Точка вспышки"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "7ae3826cfd98dee272bac1cc9c21d47a6885af1847864d261cc752f08ec34561",
+    "text": "Тепловое истощение"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "b8741fcd07d449f9f43ef653bd714bb80d840b1ac058e168d73eb576b6a5b3f4",
+    "text": "Попадания типа «<keyword0>Горение</keyword0>» с шансом {{value0}}% также наносят <keyword1>оглушающего</keyword1> урона"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "1d43a4b0fe682ca5459220354a7a65bc390b012837890ae4b1bcf0ad89177b9f",
+    "text": "Точка плавления"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "18959881adaff8f62760bc2a50c6b2e70b2b0f4907b1d971eec3ab94b23fd9d2",
+    "text": "Дымовая завеса"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "aeaa3f51f8f8c1a39ef05821ef3ff118230e65ddf72aaa83cdc95970634ac927",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0> от атаки врага под эффектом «<keyword1>Горение</keyword1>», нанесите {{value0}} ед. урона от <keyword2>горения</keyword2>"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "49f237450f326859e38e67c433949ad15dc61c7eb6ad7d7d1870e48d6b3bd33a",
+    "text": "Тление"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "b04377d52f4ffa20841ca850e99f7ceeab9882e639e444405a37f99592da74d8",
+    "text": "Эффект «<keyword0>Горение</keyword0>» с шансом {{value0}}% не ослабевает"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

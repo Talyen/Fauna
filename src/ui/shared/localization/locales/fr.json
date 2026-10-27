@@ -1217,6 +1217,78 @@
     "sourceHash": "13f0bdfb183bcb11937090b34633307f026f30ad1dcae508dab4572512d2af84",
     "text": "Les dégâts <keyword0>Physiques</keyword0> augmentent de {{value0}}% de votre <keyword1>Blocage</keyword1>"
   },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "81b693a405f0e59d7ead3177dd6bb64a111ce3fa47d15fc35d64ed3abfd32d80",
+    "text": "Résistance au feu"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "2e8a4478b5895ee5d10c860cc1f4b99d7505622e4164046350dad99411bdfbaa",
+    "text": "Subissez la moitié des dégâts de <keyword0>Brûlure</keyword0>"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "76842f326d55085085bd5b37a8e5cb0002255876c69f223d74d03831aafe4408",
+    "text": "Embrasement soudain"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "c81ac492c292f0f45c6fca4f2df8f4308228302ce2cd70b7bfbe38c2c14ca3ce",
+    "text": "Les cartes <keyword0>Brûlure</keyword0> ont {{value0}}% de chances d'être jouées deux fois"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "ba7dcb9c62e65fbcaab5236294064de02f7395f6f723ed66050a23c79466d530",
+    "text": "Point d'éclair"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "210f554c23b2e440745f26ba40204c2eb3b5b1256a70becc9511d055b2481f79",
+    "text": "Épuisement thermique"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "02721d3d06f388d5be1624a010fc29688b38e1e640e760d63e5654eacbc41020",
+    "text": "Les frappes de <keyword0>Brûlure</keyword0> ont {{value0}}% de chances d'infliger aussi des dégâts d'<keyword1>Étourdissement</keyword1>"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "0301629273066a8f96d629fb854edb0bb531520eac12ef8152c2b3091b62fea7",
+    "text": "Point de fusion"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "84e3c0f33043c106a7a8cb6116ec3f37596df6d58ffe0a9e1c508eaef6a5d9c2",
+    "text": "Écran de fumée"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "d4fa018524b35cfd379fd4a0af0bb20ebb2d32b10d1a9ac36467b29654e9bd53",
+    "text": "Quand vous <keyword0>Esquivez</keyword0> un ennemi <keyword1>Enflammé</keyword1>, infligez {{value0}} dégâts de <keyword2>Brûlure</keyword2>"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "719f009158cbf24c42172c40595624b547122edaab63eb2bf8b1a256b591bf47",
+    "text": "Couvant"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "69ae667e396a82c611219de13fc075f3a8d11de3628ddfeb6d5256c2ff9c1c9a",
+    "text": "La <keyword0>Brûlure</keyword0> a {{value0}}% de chances de ne pas diminuer"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

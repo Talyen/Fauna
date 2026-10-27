@@ -1169,6 +1169,78 @@
     "sourceHash": "af35133ba47511f085cd3e8c673f3c16cb934caff004e710df5cd2352de3e164",
     "text": "<keyword0>物理</keyword0>ダメージが<keyword1>ブロック</keyword1>の{{value0}}%分増加する"
   },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "62c8716017624ec067325dfabb938f64dcd566db61faa585dcc7f70e9dc7e7f6",
+    "text": "耐火性"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "782ca616500e0210d718bc76bb87b29ccb5dc43e3a86969e23365cc18f5c5987",
+    "text": "受ける<keyword0>炎上</keyword0>ダメージが半分になる"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "72534723f9adab3d2de854f810aa08c19cdd4daffc0c908b49d769d91909670b",
+    "text": "瞬間発火"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "748fd39256f37400ce871db70f22bd735491318c7fb225074fee015d642a8061",
+    "text": "<keyword0>炎上</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "73a166746b73c8180f3c2bb66dfd31ab2a0da0e1d8417a648783c3e9a00997b8",
+    "text": "引火点"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "0301343433eb4dd2583094464ea5ad2f84bbf5e18ca87aa9c0a813f34627b9b2",
+    "text": "熱疲労"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "7d8428cc2b6aa63ab760c9258ff04d7223a7db3336f64a6f5cf74cca08471788",
+    "text": "<keyword0>炎上</keyword0>の一撃は{{value0}}%の確率で<keyword1>スタン</keyword1>ダメージも与える"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "32bf87e8e4e40b0f44f6e53be3abe0a6f43e1a7d3c940a30b1e968c2004c77f8",
+    "text": "融点"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "3bad03a896b4880e6278aa1863136e1a0ceeb38ee35cf65c179b5d118b1def36",
+    "text": "煙幕"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "3a3e0ea132015c6999ea59cfa6c6e6559d7c8427bf8058070af89b34ecb568f5",
+    "text": "<keyword1>炎上</keyword1>中の敵を<keyword0>回避</keyword0>すると{{value0}}の<keyword2>炎上</keyword2>ダメージを与える"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "582693c544fbe39ed502797ce6ce9dd7e9b722a3673c338f79bd441498186ef1",
+    "text": "くすぶり"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "27c92ff061b057adabce4d953be78c86cac8ed9b06dbc6a6512aca48af13071d",
+    "text": "<keyword0>炎上</keyword0>は{{value0}}%の確率で減衰しない"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

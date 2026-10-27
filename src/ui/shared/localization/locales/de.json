@@ -1169,6 +1169,78 @@
     "sourceHash": "b955fc62255ac762b1256dc483073d131c1ec7edb25faeccb7c1b0fa5016bed4",
     "text": "Schaden vom Typ <keyword0>Physisch</keyword0> wird um {{value0}}% deines <keyword1>Blocks</keyword1> erhöht"
   },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "2befbdcbd715f2f751f7c59bd127ac82e8540c69c178e93360cbf96dca1e26bd",
+    "text": "Feuerresistenz"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "894c68a5f32223f2da8cdd908980b0687b1479808003d668e425d5c09321dabb",
+    "text": "Erleide halbierten Schaden vom Typ <keyword0>Brand</keyword0>"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "2ee0f06b92e65f60b48782b65aeb8aabff0817abfc24f73e6a6ef79331a4cacc",
+    "text": "Stichflamme"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "09e230c5258a6f3ba200be72627fe2dd8ca0f3364c3a912948a34cc4e5bd8c01",
+    "text": "<keyword0>Brand</keyword0>-Karten haben eine Chance von {{value0}}%, zweimal gespielt zu werden"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "b975fc6ca3c06cc7d8036e42a0e7f28b11d583489e9b2e9309a0799f4bd65bd4",
+    "text": "Flammpunkt"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "f5bab99c93f6303d1b06a2780096afe6124824eb04ed6319f160ffd2f9ca1b74",
+    "text": "Hitzeerschöpfung"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "572d99f54f92182c7f5e120d4d549bb97e866b9d5b7c616451291fe0f5a3f15c",
+    "text": "<keyword0>Brand</keyword0>-Treffer haben eine Chance von {{value0}}%, zusätzlich Schaden vom Typ <keyword1>Betäubung</keyword1> zu verursachen"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "1b9fbd6994f6e7df03550cd03da4c5a069b9c11b0e5baad9bd561dc4d2ae3b8b",
+    "text": "Schmelzpunkt"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "8ec7ae88751f3d91087bed26563f0f85aee0b7d8839591faaa8e2e1b9a9242fd",
+    "text": "Rauchschleier"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "45a3719b6d1e468032c7c676d6414269701678ee006be41028d91884abb84758",
+    "text": "Wenn du einem <keyword1>brennenden</keyword1> Gegner <keyword0>ausweichst</keyword0>, füge {{value0}} Schaden vom Typ <keyword2>Brand</keyword2> zu"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "d6beb4412b82adf016285e4e6ab868b2adf15e72614a8bac294abf3abf44c511",
+    "text": "Schwelend"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "66997d05e2b01940cc393330f2536e844b63748d14095d1442e7c8766a8aeb72",
+    "text": "<keyword0>Brand</keyword0> hat eine Chance von {{value0}}%, nicht abzunehmen"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

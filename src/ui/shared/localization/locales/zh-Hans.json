@@ -1169,6 +1169,78 @@
     "sourceHash": "6d7c560a046fbf6eab1d7899f4e30843ce8b24632d9fcaac9ddd52664da02263",
     "text": "<keyword0>物理</keyword0>伤害增加，数值为你的<keyword1>格挡</keyword1>的{{value0}}%"
   },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "ded66fd4ef5eb5caff67a18c6516893aa60f52cda09b7dc0be76789f9d6fb5f0",
+    "text": "火焰抗性"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "37e59834f5e08126b36d1a29d779e3f4b5743114705caed7e00be7ef98493ed9",
+    "text": "受到的<keyword0>灼烧</keyword0>伤害减半"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "bc86c9ef05a114cc400a376fbae766fc641e3d3525c2b39c480c10ed2aba6e6b",
+    "text": "烈火闪燃"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "09811f8a239a9cef5532364ee0daaa5fbdc751860328ec949b87936e2a2f8327",
+    "text": "<keyword0>灼烧</keyword0>卡牌有{{value0}}%几率发动两次"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "d39d827dee63d5cd3b6f54273e864695e5d13c47ce812e88792b4ff6ef4fb625",
+    "text": "闪燃点"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "c2f8c6b6dc8449eb2fda0e87abd08e25bf550b02f489a025d555c8c1d836ffa7",
+    "text": "热衰竭"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "7379364902f54384ca174e93af69f54c8a641612af2baa1ac7af7683e4446efd",
+    "text": "<keyword0>灼烧</keyword0>命中有{{value0}}%几率同时造成<keyword1>眩晕</keyword1>伤害"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "79d24f75edf0a8eccf8a8b5753f97e670cce7b01ecdf051f32ab1685d0a85113",
+    "text": "熔点"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "e6c380513b77aed2f7b032f2222a1795b40f79370e3f7360149ed92467b4327a",
+    "text": "烟幕"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "05b385a011a972afe142fccba4f99d01b246eb8d8287720cb7f169250232e45e",
+    "text": "你<keyword0>闪避</keyword0>处于<keyword1>灼烧</keyword1>状态的敌人的攻击时，造成{{value0}}点<keyword2>灼烧</keyword2>伤害"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "1ea79fadbf300aaa8dede12947b99728105366d0e128e99a6e5ccdc1e7196ecb",
+    "text": "阴燃"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "ffaf870fb4ddf5729b2d45ce7ab8a1b6dd73cddb47337c26acd19f8ed5b23611",
+    "text": "<keyword0>灼烧</keyword0>有{{value0}}%几率不衰减"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
