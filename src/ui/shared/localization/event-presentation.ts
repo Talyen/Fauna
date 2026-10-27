@@ -1,6 +1,6 @@
 import { combatantById } from "../../../game/battlefield";
 import { unitName } from "../../../game/combat/state";
-import { CARDS, FOOD_CARDS, type CardDefinition } from "../../../game/content";
+import { CARDS, FOOD_CARDS, species, type CardDefinition } from "../../../game/content";
 import { PEARL } from "../../../game/content/creatures/memento";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../../game/keywords";
 import type { GameEvent, GameState } from "../../../game/types";
@@ -33,6 +33,16 @@ export function eventPresentation(
     if (event.actionType === "support" && event.text === "The enemy's next card is played twice")
       return i18n.message("log.repeatNextEnemyCard", "The enemy's next card is played twice");
     const actor = combatant(event.actorId);
+    if (
+      actor &&
+      event.actionType === "support" &&
+      event.amount !== undefined &&
+      event.text === `${species(actor.species).name} creates ${event.amount} Food cards`
+    )
+      return i18n.message("log.createFood", "{{actor}} creates {{count}} Food cards", {
+        actor: localizedCombatantName(actor, i18n),
+        count: i18n.locale === "en" ? String(event.amount) : event.amount,
+      });
     if (actor) {
       const prefix = `${unitName(actor)} uses `;
       if (event.text.startsWith(prefix) && event.text.endsWith(".")) {
@@ -56,6 +66,14 @@ export function eventPresentation(
       const card = cardsByEnglishName.get(event.text.slice(0, -discardSuffix.length));
       if (card)
         return i18n.message("log.drawDiscard", "{{card}} is drawn from Discard", {
+          card: i18n.content(`content.card.${card.id}.name`, card.name),
+        });
+    }
+    const returnSuffix = " returns to hand";
+    if (actor && event.actionType === "support" && event.text.endsWith(returnSuffix)) {
+      const card = cardsByEnglishName.get(event.text.slice(0, -returnSuffix.length));
+      if (card)
+        return i18n.message("log.returnCard", "{{card}} returns to hand", {
           card: i18n.content(`content.card.${card.id}.name`, card.name),
         });
     }

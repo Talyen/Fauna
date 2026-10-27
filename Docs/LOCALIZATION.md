@@ -70,9 +70,9 @@ unrecognized variants fall back to their English snapshots.
 Combat previews retain keyword and status identities for localized changes and
 conditional outcomes, including accessible summaries. Their rendered behavior
 still requires review in the qualified languages before qualification.
-The live combat log translates recognized damage, healing and Block events only
-when their complete committed text matches the corresponding event payload;
-other event announcements retain their original English until migrated.
+The live combat log translates recognized combat, action, status and reward
+events only when their complete committed text matches the corresponding event
+payload. Unrecognized announcements retain their original English until migrated.
 `npm run localization:check`, the local changed-file gate and CI check freshness,
 duplicate IDs, English forms and parameter syntax. UI extraction only covers
 explicit calls in `src/ui`; content extraction does not yet cover all rule prose or generated descriptions. Neither establishes complete coverage or

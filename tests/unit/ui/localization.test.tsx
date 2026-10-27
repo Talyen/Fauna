@@ -4,6 +4,7 @@ import japanese from "../../../src/ui/shared/localization/locales/ja.json";
 import { definition, species } from "../../../src/game/content";
 import { drawDiscard } from "../../../src/game/card-zones";
 import { resurrect } from "../../../src/game/combat/resurrection";
+import { createFood } from "../../../src/game/combat/food";
 import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
@@ -449,11 +450,37 @@ it("localizes an authored ability and Food announcement without guessing unknown
   expect(eventPresentation(game, { ...announcement, text: "Unknown is drawn from Discard" }, reader)).toBe(
     "Unknown is drawn from Discard",
   );
+  expect(eventPresentation(game, { ...announcement, text: `${ability.name} returns to hand` }, reader)).toBe(
+    "Carte retournée en main : Capacité traduite",
+  );
+  expect(eventPresentation(game, { ...announcement, text: "Unknown returns to hand" }, reader)).toBe(
+    "Unknown returns to hand",
+  );
   expect(eventPresentation(game, { ...announcement, text: `${actorName} uses Unknown.` }, reader)).toBe(
     `${actorName} uses Unknown.`,
   );
   expect(eventPresentation(game, { ...announcement, actorId: "missing" }, reader)).toBe(announcement.text);
   expect(eventPresentation(game, announcement, createMessageReader("en", {}))).toBe(announcement.text);
+});
+
+it("localizes an actual Food creation event without changing its count", () => {
+  const initial = requireBattle(run());
+  const actor = initial.team[0]!;
+  const events: GameEvent[] = [];
+  const game = produce(initial, (draft) => {
+    createFood(draft, draft.team[0]!, 2, events);
+  });
+  const event = events.find((item) => item.text === `${species(actor.species).name} creates 2 Food cards`);
+  expect(event).toBeDefined();
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: {
+      source: species(actor.species).name,
+      text: "Créature traduite",
+    },
+  });
+  expect(eventPresentation(game, event!, reader)).toBe("Créature traduite crée des cartes Nourriture : 2");
+  expect(eventPresentation(game, event!, createMessageReader("en", {}))).toBe(event!.text);
 });
 
 it("localizes an actual discard draw event using its authored card", () => {

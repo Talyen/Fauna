@@ -329,11 +329,23 @@
     "sourceHash": "9e17185652b47954eb11b1e93b21e960b342b150c4085001c9a33c5d0b9c46b1",
     "text": "Gramofone etéreo"
   },
+  "content.boon.aether-gramophone.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
+    "sourceHash": "858b78fd9f00619bd866ea792851f74ca1178d6ef87ba78602386c9a451ca8f3",
+    "text": "Ataques repetidos não podem ser <keyword0>esquivados</keyword0>"
+  },
   "content.boon.apiary-smoker.name": {
     "reviewed": true,
     "source": "Apiary Smoker",
     "sourceHash": "f40e439952efa95457028dadad9edbdf590ca44527d44520f9f7160d8fa6c607",
     "text": "Fumigador de apiário"
+  },
+  "content.boon.apiary-smoker.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
+    "sourceHash": "712f1bfa9f1534c8613a705d47951690909b5035bbdd18a8e7253f93b918b20a",
+    "text": "Inimigos <keyword0>cegos</keyword0> não podem receber <keyword1>Espinhos</keyword1>"
   },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
@@ -346,6 +358,12 @@
     "source": "Basalt Glass Bookmark",
     "sourceHash": "01e69aad68adf9821bac64d9d0c7d545dade8395470dbd8254de813806b6e5f1",
     "text": "Marcador de vidro basáltico"
+  },
+  "content.boon.blooming-still.name": {
+    "reviewed": true,
+    "source": "Blooming Still",
+    "sourceHash": "60fc27a513ee5387d94115cc7b91c50b38697b430e3d9db85f2be082996e4ebe",
+    "text": "Alambique florido"
   },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
@@ -419,6 +437,12 @@
     "sourceHash": "a2eee1e0084211e0959136e9d350abf56f7873f7e37b5b5fb96bbf45040f4c33",
     "text": "Bilboquê de nuvem"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "sourceHash": "782d04b8b5321584d34f2b5dbbe204e9aa6b748bf441bcb9993918a03e16798b",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de um aliado quebra, devolva uma das cartas descartadas dele à mão"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -431,11 +455,23 @@
     "sourceHash": "d2a02d69759b3d9c6004c7907c40565e4161125caba54b973f6ea9ede5f51707",
     "text": "Cadinho de cometa"
   },
+  "content.boon.comet-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> <keyword1>Purged</keyword1> from allies becomes <keyword2>Block</keyword2>",
+    "sourceHash": "b31f1733170d4af8bd21015bcbc8ec70af3d5a275a69c9056681bed43f61f784",
+    "text": "<keyword0>Armadura</keyword0> <keyword1>expurgada</keyword1> de aliados se torna <keyword2>Bloqueio</keyword2>"
+  },
   "content.boon.coral-music-box.name": {
     "reviewed": true,
     "source": "Coral Music Box",
     "sourceHash": "9625f62c1aa12928e3c8d09404a2cc49f9fe4296518cefd47a68cb7e8072ea9b",
     "text": "Caixa de música de coral"
+  },
+  "content.boon.coral-music-box.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "4e9896c6fb0f98984e6e4ee1b2363d6a559ddf8b8a6a29c7fbb4763b1e5d566a",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de um aliado quebra, compre uma carta de <keyword1>Água</keyword1>"
   },
   "content.boon.coral-net-weight.name": {
     "reviewed": true,
@@ -454,6 +490,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "34f9998bba8280e9cac7f832991019d299c32edeff99ce81b4ee278ec50cae53",
     "text": "Redoma da coroação"
+  },
+  "content.boon.crater-punch.name": {
+    "reviewed": true,
+    "source": "Crater Punch",
+    "sourceHash": "a5cd03651f7a55f3e8b47dea491580d1ed894ca7be49891ca26e52a854ced049",
+    "text": "Punção de cratera"
   },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
@@ -491,17 +533,83 @@
     "sourceHash": "70a54ef4566f1fbb02f8ebf5c5976282ed623ce7d5e9b5964614204b34b50033",
     "text": "Ioiô dos sonhos"
   },
+  "content.boon.dune-shuttle.name": {
+    "reviewed": true,
+    "source": "Dune Shuttle",
+    "sourceHash": "7a6aa3ddd25a4e535c4826854c010025e37c60e0b333cd913ee20bcc3905bf90",
+    "text": "Lançadeira das dunas"
+  },
+  "content.boon.dune-shuttle.rule": {
+    "reviewed": true,
+    "source": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "9b31f40271d17ee54d3e43c1fa27013cb079561ea63d03c22c6839abb6887535",
+    "text": "Comprar a carta de um aliado concede a ele {{value0}} de <keyword0>Bloqueio</keyword0>"
+  },
+  "content.boon.echo-lens.name": {
+    "reviewed": true,
+    "source": "Echo Lens",
+    "sourceHash": "dd475d1cd342176c0c877e2f40862644c55a24778ca392148568931f9c357e4e",
+    "text": "Lente de eco"
+  },
+  "content.boon.eclipse-protractor.name": {
+    "reviewed": true,
+    "source": "Eclipse Protractor",
+    "sourceHash": "033e37f2ecff6af267d45fcebacd525ad60a5224daa3a1ac7bbbe18781e4d520",
+    "text": "Transferidor do eclipse"
+  },
+  "content.boon.eclipse-rivet.name": {
+    "reviewed": true,
+    "source": "Eclipse Rivet",
+    "sourceHash": "7963a4b9974395a9c9a2eefab01312731cb452c4b89893543dba38a29d50a4a4",
+    "text": "Rebite do eclipse"
+  },
+  "content.boon.eclipse-rivet.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "cf561fd372203e6e0e9e1f53efbba9b63bd538dbaf0a7e184c065fde8e715a9c",
+    "text": "Quando a <keyword0>Armadura</keyword0> de um aliado quebra, os outros aliados recebem {{value0}} de <keyword1>Armadura</keyword1>"
+  },
+  "content.boon.encore-baton.name": {
+    "reviewed": true,
+    "source": "Encore Baton",
+    "sourceHash": "baa37fa4b7f2a1192db9e8c2750a28656d01e8a6d067ea0f61e2ef89a1b2d8d7",
+    "text": "Batuta de bis"
+  },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
     "source": "Draw a card after playing three",
     "sourceHash": "649e4b6c0fd23c7811227734af5b4da1c679b6f2582064cb54af9352cf5bea12",
     "text": "Compre uma carta após jogar três"
   },
+  "content.boon.facet-abacus.name": {
+    "reviewed": true,
+    "source": "Facet Abacus",
+    "sourceHash": "119dc6107d638fc30d85da1db420ac63cafc8b3118bc9f7221f7c66a29fc21a1",
+    "text": "Ábaco facetado"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "f8913ba6d5481968c78b078da586657bee892d3d93736dc14923bc970bfdf236",
     "text": "Ganhe um espaço adicional para cartas na mão"
+  },
+  "content.boon.fallingstar-anvil.name": {
+    "reviewed": true,
+    "source": "Fallingstar Anvil",
+    "sourceHash": "d5970b65e073f3d7f62d8d72c309409f9e8501464b63793df14f2019e860780a",
+    "text": "Bigorna de estrela cadente"
+  },
+  "content.boon.fern-fencing-foil.name": {
+    "reviewed": true,
+    "source": "Fern Fencing Foil",
+    "sourceHash": "3039fef676844ae5f484b3e9d557d0177ad381454542fae040416b56afe9554d",
+    "text": "Florete de samambaia"
+  },
+  "content.boon.field-lunch-basket.name": {
+    "reviewed": true,
+    "source": "Field Lunch Basket",
+    "sourceHash": "e8fc19e88677101f433e77b51e6c6cb2fdaca7484b2bb3768bb8e50bb9dbe4cf",
+    "text": "Cesta de piquenique"
   },
   "content.boon.field-lunch-basket.rule": {
     "reviewed": true,
@@ -515,17 +623,59 @@
     "sourceHash": "f0cc15051c8fbd20e5a1962c672388f654af66808309e8453380dee8c0dddbbe",
     "text": "Relógio de bolso congelado"
   },
+  "content.boon.frozen-pocketwatch.rule": {
+    "reviewed": true,
+    "source": "Enemies stay <keyword0>Frozen</keyword0> for {{value0}} additional turn",
+    "sourceHash": "6845071bff35c46880241ec80b60b545c91da4505159668662e96122192e900c",
+    "text": "Turnos adicionais que os inimigos permanecem <keyword0>congelados</keyword0>: {{value0}}"
+  },
+  "content.boon.furnace-prism.name": {
+    "reviewed": true,
+    "source": "Furnace Prism",
+    "sourceHash": "73801abce4af30109103f689dba29b0f064add2a355c6e41e0b321a0922952bc",
+    "text": "Prisma de fornalha"
+  },
+  "content.boon.gemmed-scabbard.name": {
+    "reviewed": true,
+    "source": "Gemmed Scabbard",
+    "sourceHash": "3e52a8d6f8639abe0956e7a38dbc1f89d97195dfdae387e9ff5ed915862eeac0",
+    "text": "Bainha cravejada"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "22a7fda6465a97620c04d145ce8e4094e1be882e3505f3d2a594b2343170d8cb",
     "text": "<keyword0>Armadura</keyword0> também reduz dano de <keyword1>Espinhos</keyword1>"
   },
+  "content.boon.geode-anvil.name": {
+    "reviewed": true,
+    "source": "Geode Anvil",
+    "sourceHash": "e49647310ba252d1444bf796537289a8a1be1dbd09ede4571bfcdef711b91557",
+    "text": "Bigorna de geodo"
+  },
   "content.boon.geode-anvil.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "sourceHash": "3a90acbca0f0ab5d8fe42b981f47f99f8787a812b0e657a0ee25af3b17de5f86",
     "text": "<keyword0>Bloqueio</keyword0> não pode decair abaixo da <keyword1>Armadura</keyword1>"
+  },
+  "content.boon.grafting-needle.name": {
+    "reviewed": true,
+    "source": "Grafting Needle",
+    "sourceHash": "fe4db32da88934e415cdd53fe7257a67c904e0661c4521650dc973c98733e731",
+    "text": "Agulha de enxerto"
+  },
+  "content.boon.grain-flail.name": {
+    "reviewed": true,
+    "source": "Grain Flail",
+    "sourceHash": "7ecde3f8eff09c8eaf063cfb658e37a4317f6e6403a36c9dae73ee469e3f09a0",
+    "text": "Mangual de grãos"
+  },
+  "content.boon.grain-flail.rule": {
+    "reviewed": true,
+    "source": "Breaking enemy <keyword0>Block</keyword0> also removes their <keyword1>Armor</keyword1>",
+    "sourceHash": "62ca23754e2abc4e875a29bedddb51548bd01754a82c44c6455b50ee48b9379f",
+    "text": "Quebrar o <keyword0>Bloqueio</keyword0> inimigo também remove sua <keyword1>Armadura</keyword1>"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -539,17 +689,59 @@
     "sourceHash": "b9b52fce7e482b6ae1a811ef9969ae1847984b7125db5901aa71e9f4d182cc09",
     "text": "Receba {{value0}} de <keyword0>Espinhos</keyword0> ao restaurar <keyword1>Saúde</keyword1> em combate"
   },
+  "content.boon.hearth-coal.name": {
+    "reviewed": true,
+    "source": "Hearth Coal",
+    "sourceHash": "fcbd15e0d6305ef3befe6ec4485fee2b4e6719f5a3ea93e2dd27460f2b8d9bd0",
+    "text": "Carvão da lareira"
+  },
+  "content.boon.hearth-coal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "be7e200525a67a623ba75df6cb400ff3d6e124dbdc2482a45740c402ec49aa9e",
+    "text": "<keyword0>Queimadura</keyword0> não pode reduzir a <keyword1>Saúde</keyword1> dos aliados abaixo de {{value0}}"
+  },
+  "content.boon.herbarium-press.name": {
+    "reviewed": true,
+    "source": "Herbarium Press",
+    "sourceHash": "9d598ca402932ba575871a315316b4db89a1381da65d41aedbe996284cad6260",
+    "text": "Prensa de herbário"
+  },
   "content.boon.herbarium-press.rule": {
     "reviewed": true,
     "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
     "sourceHash": "dab9567e6ee46228c71d4e9a3a02b8086d1a6d4bb29b63474e1990fb62e7e265",
     "text": "<keyword0>Veneno</keyword0> não pode ser <keyword1>purificado</keyword1> de inimigos <keyword2>congelados</keyword2>"
   },
+  "content.boon.hoard-lockplate.name": {
+    "reviewed": true,
+    "source": "Hoard Lockplate",
+    "sourceHash": "ffc9a4a27099ad2381f72c225414271f9097d813901126c73ea3ae9a555a3847",
+    "text": "Placa de fechadura do tesouro"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
     "sourceHash": "a6e5499613602bce2b97bb966ab9a3030e2050ba8a713ee8ecac11967d19b992",
     "text": "<keyword0>Armadura</keyword0> reduz o dano antes de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.boon.honey-press.name": {
+    "reviewed": true,
+    "source": "Honey Press",
+    "sourceHash": "844613668bfca958ff3d64c03932ba7ffdaa60a5ab584f12b3225a49f3791225",
+    "text": "Prensa de mel"
+  },
+  "content.boon.honeycomb-frame.name": {
+    "reviewed": true,
+    "source": "Honeycomb Frame",
+    "sourceHash": "782fbe68e4904cb50e73a10455169245999e7c2bae0cbff0a44f51fe860ab9d9",
+    "text": "Quadro de favo"
+  },
+  "content.boon.honeycomb-frame.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Critical Hits</keyword1>",
+    "sourceHash": "801b8ecd8571e5c42fc5e6cd7f072e2f154069505c29a616de1186d2331de162",
+    "text": "<keyword0>Armadura</keyword0> impede <keyword1>acertos críticos</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -575,11 +767,59 @@
     "sourceHash": "c2c91a44219bce522e2f965043a27e7f9b6d149cc320a084ddc3d8f0709b97cd",
     "text": "Receba {{value0}} de <keyword0>Espinhos</keyword0> sempre que receber <keyword1>Bloqueio</keyword1>"
   },
+  "content.boon.journey-loom.name": {
+    "reviewed": true,
+    "source": "Journey Loom",
+    "sourceHash": "99ac7959c8287f1275efefb4095b1badfde186055ac70ef9aaaf5d2b7c9479a2",
+    "text": "Tear da jornada"
+  },
+  "content.boon.journey-loom.rule": {
+    "reviewed": true,
+    "source": "Returning an ally’s card to your hand draws another ally’s card",
+    "sourceHash": "ffcd1d8786ca977946573c7711608403289dd30a487ce53d7e0d3579a4b96d2b",
+    "text": "Devolver a carta de um aliado à mão compra a carta de outro aliado"
+  },
+  "content.boon.knot-comb.name": {
+    "reviewed": true,
+    "source": "Knot Comb",
+    "sourceHash": "405675c343eb9eff6669c7ee7601a90b7cbb4f5a24d9abea781ed9b0cab69ccc",
+    "text": "Pente de nó"
+  },
+  "content.boon.last-candle.name": {
+    "reviewed": true,
+    "source": "Last Candle",
+    "sourceHash": "0d2147650f6dacc01552e6c60388901a8f0578aeb6ce323671002537b27a2786",
+    "text": "Última vela"
+  },
+  "content.boon.last-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies cannot decay below {{value0}}",
+    "sourceHash": "5e04c234ccf461c234fd0ba734c32f64dd857f625f64d35a0009baf15f32f6d7",
+    "text": "<keyword0>Queimadura</keyword0> em inimigos não pode decair abaixo de {{value0}}"
+  },
+  "content.boon.last-threshold.name": {
+    "reviewed": true,
+    "source": "Last Threshold",
+    "sourceHash": "7e3e1d3097266ea7a142d7b62034cf675eccca90cd7f7727b9b81a66445a721f",
+    "text": "Último limiar"
+  },
+  "content.boon.lava-cameo.name": {
+    "reviewed": true,
+    "source": "Lava Cameo",
+    "sourceHash": "1fe376a2a50eddfecb9ad23e311a3babce2f6f036044cbd6c7f35d517b15aaee",
+    "text": "Camafeu de lava"
+  },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "86814d6d66816254b9dea1baa60d530d0e4b980171c4342f121088de666f2b78",
     "text": "<keyword0>Queimadura</keyword0> não decai em inimigos com <keyword1>Armadura</keyword1>"
+  },
+  "content.boon.lovers-knot.name": {
+    "reviewed": true,
+    "source": "Lovers Knot",
+    "sourceHash": "d2d2dacffb4cb59c1ae071bd78796fb0f90dd32a4c0ba11bfe968d82fd15a966",
+    "text": "Nó dos amantes"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -599,11 +839,41 @@
     "sourceHash": "101d5ad8bd4267e859354edeec16d2035595897c3758ca6bb1432a3eae456655",
     "text": "Sua compra em cada mercador de bênçãos custa {{value0}} de Ouro a menos"
   },
+  "content.boon.mercury-metronome.name": {
+    "reviewed": true,
+    "source": "Mercury Metronome",
+    "sourceHash": "0980ca387305fec0b94091e93dfd7a564a23fc13349300ee48e2e7de62b16fa6",
+    "text": "Metrônomo de mercúrio"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "9ee6b3291cf72a741575f4f5d66babf82cdf5488a48bb14481c56a4d597a7bce",
     "text": "Meteorito"
+  },
+  "content.boon.mineral-bookend.name": {
+    "reviewed": true,
+    "source": "Mineral Bookend",
+    "sourceHash": "6775d26476f61091a2d7bd1787c19ebef77d2e6c72ce707e0de3bd71660f151b",
+    "text": "Aparador de livros mineral"
+  },
+  "content.boon.miracle-megaphone.name": {
+    "reviewed": true,
+    "source": "Miracle Megaphone",
+    "sourceHash": "ba555957a778becb1f06a105bb9eee2813d8c9b7ec834d318d5a3774c36ee5e1",
+    "text": "Megafone milagroso"
+  },
+  "content.boon.molten-paperweight.name": {
+    "reviewed": true,
+    "source": "Molten Paperweight",
+    "sourceHash": "f34c8d650f9b3b71e9ee2f3e333bbcc7672e84848df7da658f99286697521104",
+    "text": "Peso de papel fundido"
+  },
+  "content.boon.molten-paperweight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot be <keyword1>Cleansed</keyword1> from enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "b3c8146ba79dc75fff3fc0ea04dca26fa7cfb0c36a19a361d4e77452b4c7b008",
+    "text": "<keyword0>Queimadura</keyword0> não pode ser <keyword1>purificada</keyword1> de inimigos com <keyword2>Bloqueio</keyword2>"
   },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
@@ -611,11 +881,41 @@
     "sourceHash": "23f69cfea821675ab9c7269d469c04bab9cf1c9b6257534c29f0d5a4b438eed0",
     "text": "Barquinho lunar de brinquedo"
   },
+  "content.boon.moonboat-toy.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks do not trigger <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "6f7b0f46a021824469b7ce223a922404875be0313b782af79ea61e8df3eca1cf",
+    "text": "Ataques de <keyword0>Água</keyword0> não ativam dano de <keyword1>Espinhos</keyword1>"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
     "sourceHash": "af1760f66425b2c186283f0cc95269995676a4832c25529a1fc402b94e4ce85b",
     "text": "Máscara do véu lunar"
+  },
+  "content.boon.moonveil-mask.rule": {
+    "reviewed": true,
+    "source": "Enemies keep <keyword0>Blind</keyword0> when it causes their attacks to miss",
+    "sourceHash": "5287e23460a44edee4d151513ba6c78071faceadb8ccb2fea9d5e6ec184b63a8",
+    "text": "Inimigos mantêm <keyword0>Cegueira</keyword0> quando ela faz seus ataques errarem"
+  },
+  "content.boon.moss-oven-mitt.name": {
+    "reviewed": true,
+    "source": "Moss Oven Mitt",
+    "sourceHash": "93ebea41e9e78d8dd096621f8fb6a5fe2f1377b61afe6360edeb18887f6818b8",
+    "text": "Luva de forno musgosa"
+  },
+  "content.boon.moss-oven-mitt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Burn</keyword1>",
+    "sourceHash": "b3e7ee051fa6be013e17267d3be10a7bb3e17d85c22eabab734d85fa768f94d3",
+    "text": "<keyword0>Bloqueio</keyword0> é duas vezes mais eficaz contra <keyword1>Queimadura</keyword1>"
+  },
+  "content.boon.nectar-dipper.name": {
+    "reviewed": true,
+    "source": "Nectar Dipper",
+    "sourceHash": "27bb175908bc4c37fbe2ecd713126147d37201ee7f950001695e3325ff966f24",
+    "text": "Colher de néctar"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
@@ -628,6 +928,24 @@
     "source": "Obsidian Pitcher",
     "sourceHash": "61b30c7746f5c432a0d3055204d585dd4e6b2878d1ace5dc3e2ed9ad6dd128da",
     "text": "Jarra de obsidiana"
+  },
+  "content.boon.orbit-armillary.name": {
+    "reviewed": true,
+    "source": "Orbit Armillary",
+    "sourceHash": "2db3fb89d701055c79354c6e79119cd16a8ccbe907190c45bed16a3f86d940f0",
+    "text": "Esfera armilar orbital"
+  },
+  "content.boon.origami-staircase.name": {
+    "reviewed": true,
+    "source": "Origami Staircase",
+    "sourceHash": "dc11c249441c9c5472c21ff2fb5fb71f341ee95100236542479fa71c7aa00985",
+    "text": "Escadaria de origami"
+  },
+  "content.boon.origami-staircase.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} extra <keyword0>Block</keyword0> for each ally with <keyword1>Armor</keyword1>",
+    "sourceHash": "09221ec090a6c2defe8394e7e1a9e4280e153483241255514d81524c11ec8649",
+    "text": "Aliados recebem {{value0}} de <keyword0>Bloqueio</keyword0> extra para cada aliado com <keyword1>Armadura</keyword1>"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -653,17 +971,71 @@
     "sourceHash": "86c5c520f6c3029859638e5621fcd620e2dac267c7817c5aa37e6884979a5e91",
     "text": "Dano de <keyword0>Veneno</keyword0> tem {{value0}}% de chance de ativar <keyword1>Drenagem</keyword1>"
   },
+  "content.boon.pattern-reel.name": {
+    "reviewed": true,
+    "source": "Pattern Reel",
+    "sourceHash": "4f5824d6cdd593811f2be7d513897b14395a7c600d91278d46e29b1039ed1c51",
+    "text": "Rolo de padrões"
+  },
+  "content.boon.peace-knot.name": {
+    "reviewed": true,
+    "source": "Peace Knot",
+    "sourceHash": "1b1e347726da7cac5a274a4d0b6928cb6ab5a758a964980a8dba142944719a7f",
+    "text": "Nó da paz"
+  },
+  "content.boon.pearl-sieve.name": {
+    "reviewed": true,
+    "source": "Pearl Sieve",
+    "sourceHash": "afe449247b9829ac6142601d1e19bba5ad99390abff0b48d4122e4485e2f982f",
+    "text": "Peneira de pérolas"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "5fb4fbe087e270d0e1b61186025ade1fdc966a8a242bbbea3145c6c2d35aa451",
     "text": "Máscara do médico da peste"
   },
+  "content.boon.pleated-pagoda.name": {
+    "reviewed": true,
+    "source": "Pleated Pagoda",
+    "sourceHash": "a862ca3d210fa8d0167cc3068c65a48ef1fb4e385dfa3f53d23ffb1a87a5ddf2",
+    "text": "Pagoda pregueada"
+  },
+  "content.boon.pleated-pagoda.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
+    "sourceHash": "847c69708c509a41362d04bdc52adc040766f813f8a984f7cbccd0ba645cc0e7",
+    "text": "Metade do <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Armadura</keyword1>"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "reviewed": true,
+    "source": "Poppy Seed Grinder",
+    "sourceHash": "c2e31a1d0ac37e1bee27f0f2d4ce80530e6ee9c1795103cc073b57885d824a9a",
+    "text": "Moedor de sementes de papoula"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "2d9cff5d403e169c8720ab4a462fad9a6d834100b8e057e8afc7ab24413d845e",
     "text": "Veleiro de oração"
+  },
+  "content.boon.prism-chisel.name": {
+    "reviewed": true,
+    "source": "Prism Chisel",
+    "sourceHash": "64b0ab5b57dca31fb19f4065945394c41df4ef0645aeb28466d712f5c5025cc9",
+    "text": "Cinzel prismático"
+  },
+  "content.boon.pruning-crescent.name": {
+    "reviewed": true,
+    "source": "Pruning Crescent",
+    "sourceHash": "f8b073e3e2be43395b0897fb27111159ffdcbaf65f7b898473775cdf317f8c55",
+    "text": "Foice de poda"
+  },
+  "content.boon.pumpkin-tureen.name": {
+    "reviewed": true,
+    "source": "Pumpkin Tureen",
+    "sourceHash": "15af837d5037553fbab7dc4f643db1bfa04be898de177e7d1b7148dd54a12ae7",
+    "text": "Sopeira de abóbora"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,
@@ -677,17 +1049,47 @@
     "sourceHash": "518256aa7b9dcffbc500aff98e3e44ca00128432e98354972cc5f9fa9a527eb8",
     "text": "<keyword0>Bloqueio</keyword0> é duas vezes mais eficaz contra <keyword1>Água</keyword1>"
   },
+  "content.boon.raincatcher-bowl.name": {
+    "reviewed": true,
+    "source": "Raincatcher Bowl",
+    "sourceHash": "9d8818688d38d2b11d127dc5ce7b29f5db686aecba914bcb79e3f1a20ec9bd3e",
+    "text": "Tigela coletora de chuva"
+  },
+  "content.boon.rainkeeper.name": {
+    "reviewed": true,
+    "source": "Rainkeeper",
+    "sourceHash": "fde2012a26ea68d3a5315babc10ca3cae4a669d76516f292dc2caeb75d3606fe",
+    "text": "Guardião da chuva"
+  },
   "content.boon.rainkeeper.rule": {
     "reviewed": true,
     "source": "<keyword0>Mana</keyword0> can overflow",
     "sourceHash": "7e17fe7d20cd6c6ab1ceb1e47ece2437cf428a2e1ed789ed17e18a72aa36d93c",
     "text": "<keyword0>Mana</keyword0> pode exceder seu máximo"
   },
+  "content.boon.reef-casket.name": {
+    "reviewed": true,
+    "source": "Reef Casket",
+    "sourceHash": "e3ddd418e621cbb79598d835f0e5ba8bca23ce4797be517f9a54369b502c538b",
+    "text": "Cofre de recife"
+  },
   "content.boon.reef-casket.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
     "sourceHash": "bf7bf1ab4f3dd92cf1d27d701e2a4d2b66eea7d9619d2bf274486f537bec6e82",
     "text": "<keyword0>Anulação</keyword0> não é consumida enquanto você tiver <keyword1>Bloqueio</keyword1>"
+  },
+  "content.boon.reef-incense-tile.name": {
+    "reviewed": true,
+    "source": "Reef Incense Tile",
+    "sourceHash": "4bc06beabf1b1061e24a54b4a2925d9d5551e41f4da52dd00fd4f523b013c5e0",
+    "text": "Ladrilho de incenso do recife"
+  },
+  "content.boon.resonance-kalimba.name": {
+    "reviewed": true,
+    "source": "Resonance Kalimba",
+    "sourceHash": "d41ccd825194a33ce170f59f1c13c5a299328e24b9b56672ced06d911ad7a69b",
+    "text": "Kalimba de ressonância"
   },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
@@ -707,6 +1109,30 @@
     "sourceHash": "a90d059c78be8843393f3d081d5fa33709345eaa9585afade495f147d4be1224",
     "text": "Após sua terceira carta em cada turno, receba {{value0}} de <keyword0>Mana</keyword0>"
   },
+  "content.boon.rook-of-mercy.name": {
+    "reviewed": true,
+    "source": "Rook of Mercy",
+    "sourceHash": "84c696c7a31ffe9e76500f66c8065a60a58ad6c54271fadc5d78e8923b7deb98",
+    "text": "Torre da misericórdia"
+  },
+  "content.boon.rootvault-pole.name": {
+    "reviewed": true,
+    "source": "Rootvault Pole",
+    "sourceHash": "eed97a1cd9b7c2bfe7273b3dafa8dff374f85d2f536857bcacde9c2f99c3fb84",
+    "text": "Vara de raiz"
+  },
+  "content.boon.saddle-pouch.name": {
+    "reviewed": true,
+    "source": "Saddle Pouch",
+    "sourceHash": "52c63ec269a0f952034a82381116d7f695a0f3a8ba7b204fac2bb4fcc8469fa2",
+    "text": "Bolsa de sela"
+  },
+  "content.boon.saddle-pouch.rule": {
+    "reviewed": true,
+    "source": "Swapping an ally in from backup draws one of its cards",
+    "sourceHash": "c69254ed6845bcac102eeb1b3c19d16b035f3dfe4912fab7bb300ef5d18bf914",
+    "text": "Ao trocar um aliado da reserva para o campo, compre uma das cartas dele"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
@@ -718,6 +1144,12 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
     "sourceHash": "cc951206b5691b4882854080e0b20678f2533765be07614d636a5940c5956099",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> por efeito prejudicial que você <keyword1>purificar</keyword1>"
+  },
+  "content.boon.sleepers-urn.name": {
+    "reviewed": true,
+    "source": "Sleepers Urn",
+    "sourceHash": "9441be4fb9b6a9cc3526200066aebad126c53e555533a3d9bf6dfad041ee0459",
+    "text": "Urna dos adormecidos"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -731,6 +1163,36 @@
     "sourceHash": "2657cf48b689540a918b3bdb962684cbb4025c48a7e9366d53652bedcb274afb",
     "text": "Receba {{value0}} de Ouro adicional por cada combate vencido"
   },
+  "content.boon.sovereign-toast-rack.name": {
+    "reviewed": true,
+    "source": "Sovereign Toast Rack",
+    "sourceHash": "8e7eac942d4550df49c070e59be80f391067227d8b3d46557df8293a3eb04829",
+    "text": "Porta-torradas soberano"
+  },
+  "content.boon.star-hoop.name": {
+    "reviewed": true,
+    "source": "Star Hoop",
+    "sourceHash": "a54dded03f3914f9d5c3ada21493c9055b5ea7d63d16a778d655ccd45a50fa70",
+    "text": "Aro estelar"
+  },
+  "content.boon.stardust-whetstone.name": {
+    "reviewed": true,
+    "source": "Stardust Whetstone",
+    "sourceHash": "13b0d3b4e36c5a81f1c30043981690271f1b48b0b7280387db93e2d4997b95db",
+    "text": "Pedra de amolar estelar"
+  },
+  "content.boon.story-puzzle-cube.name": {
+    "reviewed": true,
+    "source": "Story Puzzle Cube",
+    "sourceHash": "de503d1be730332dfe3f5c56336ffa601d0f2c95e1d2d453e09b98b2e1e6301c",
+    "text": "Cubo de histórias"
+  },
+  "content.boon.sundering-charm.name": {
+    "reviewed": true,
+    "source": "Sundering Charm",
+    "sourceHash": "9b5b2739cbaf521121d846a25978e48697aefeb8db626115ea022091c1ef338c",
+    "text": "Talismã da ruptura"
+  },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
     "source": "Tattered Pages",
@@ -743,11 +1205,41 @@
     "sourceHash": "7f4a8c9c4e943358051dd781d97aa63aba1235bce072f8090160a2643d43015a",
     "text": "Compre {{value0}} carta adicional no início do combate"
   },
+  "content.boon.thaw-spoon.name": {
+    "reviewed": true,
+    "source": "Thaw Spoon",
+    "sourceHash": "47d83d71b8d21fda8e529f3e3ce2ea85dc8eed60808f17efe0c503cd57340126",
+    "text": "Colher de degelo"
+  },
   "content.boon.thaw-spoon.rule": {
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
     "sourceHash": "72be59d41318d498c1e2ce4b513083ed8cdc7b458942b0ff60b283e3bec16370",
     "text": "A <keyword0>cura</keyword0> remove a mesma quantidade de acúmulo de <keyword1>Congelamento</keyword1>"
+  },
+  "content.boon.thistle-sieve.name": {
+    "reviewed": true,
+    "source": "Thistle Sieve",
+    "sourceHash": "64fc078ad953c171a04831c008751aebc9c87ede17055fd61ce386c7a64098b4",
+    "text": "Peneira de cardo"
+  },
+  "content.boon.thornheart-ring.name": {
+    "reviewed": true,
+    "source": "Thornheart Ring",
+    "sourceHash": "1b1ade3b1de1d9eed6d52aa387e7903c5fca86a9675d370502fee0a13198accf",
+    "text": "Anel de coração espinhoso"
+  },
+  "content.boon.thornheart-ring.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> does not decay when retaliating against <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "1f13618178cd40c1b0767764a1ec16dfd1efc0179a88a941685e9d1c5d4b9ed5",
+    "text": "<keyword0>Espinhos</keyword0> não decaem ao retaliar inimigos com <keyword1>Sangramento</keyword1>"
+  },
+  "content.boon.thunder-conch.name": {
+    "reviewed": true,
+    "source": "Thunder Conch",
+    "sourceHash": "330953cf97d2a1452f55d1ae14db8cf4014e7e02240e0f5777111191ba75183d",
+    "text": "Concha do trovão"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -761,17 +1253,95 @@
     "sourceHash": "0a4bb94e073b1c3be4e3d6d4134a1131c00445f4deaf3d6d756c6c62405fa718",
     "text": "Cause {{value0}} de dano de <keyword0>Natureza</keyword0> ao <keyword1>atordoar</keyword1> um inimigo"
   },
+  "content.boon.tide-anklet.name": {
+    "reviewed": true,
+    "source": "Tide Anklet",
+    "sourceHash": "edd66efabae9d9248b5a155e1ba46fcc2375d220c83d67513aa04fdcfc095fa0",
+    "text": "Tornozeleira da maré"
+  },
+  "content.boon.tidecrest-hairpin.name": {
+    "reviewed": true,
+    "source": "Tidecrest Hairpin",
+    "sourceHash": "905437204b09eda4c836b0738686cc3379d920bffe870524cc49cd5ff4389dac",
+    "text": "Grampo da crista da maré"
+  },
+  "content.boon.tidecrest-hairpin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
+    "sourceHash": "726b37d0ad0997e7d3aeb9ee999cb65124cebf087824861fe58976ba32e23399",
+    "text": "<keyword0>Espinhos</keyword0> não podem decair abaixo de {{value0}}"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "reviewed": true,
+    "source": "Tuning Fork Charm",
+    "sourceHash": "45e5217eed0e7923b3b8aa503a1ca1e10a1497baad835324243072b647fc59d0",
+    "text": "Talismã de diapasão"
+  },
+  "content.boon.undertow-castanets.name": {
+    "reviewed": true,
+    "source": "Undertow Castanets",
+    "sourceHash": "4e84baca2787ec849ae1f95e6070eb9bd18892934e6891734276e76d33c9d7d6",
+    "text": "Castanholas da ressaca"
+  },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "423affc135585d5cf99fa31ee3dd07b9bfd1979feb9dd0641d80d05a7f1db136",
     "text": "Os acúmulos de <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1> se combinam nos inimigos"
   },
+  "content.boon.velvet-whisk.name": {
+    "reviewed": true,
+    "source": "Velvet Whisk",
+    "sourceHash": "ea48f274b13dcc46a62a71d1b78e9dcf6238e3ae3c00850e7a28a2b06c12691b",
+    "text": "Batedor de veludo"
+  },
+  "content.boon.vigil-lantern.name": {
+    "reviewed": true,
+    "source": "Vigil Lantern",
+    "sourceHash": "167a8d9483940dc4e330474783a5a8df3a844779f6a5690602f8319fd2a4a902",
+    "text": "Lanterna de vigília"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "reviewed": true,
+    "source": "Wax Foundation Mold",
+    "sourceHash": "7e84ac141dd5f51843ac30d92ecdbfc3954f954965d14fa92d9d3a95fef807a1",
+    "text": "Molde de lâmina de cera"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "reviewed": true,
+    "source": "Winnowing Sieve",
+    "sourceHash": "7e62c076c579479a23a7fbc3df939f3275eb342fd9ecdd8c42c651896cef2803",
+    "text": "Peneira de joeirar"
+  },
+  "content.boon.wishing-building-block.name": {
+    "reviewed": true,
+    "source": "Wishing Building Block",
+    "sourceHash": "f01f7a04e3ce976d98d564c055751a981f0af7c5fd0cf7d77140b6727caf049a",
+    "text": "Bloco de desejos"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "reviewed": true,
+    "source": "Wonder Ball Maze",
+    "sourceHash": "15be5915bb3b8278fe3975ff82a40be4b9893e20e7c5692e20b056196f822510",
+    "text": "Labirinto de bolinha maravilhoso"
+  },
+  "content.boon.wonder-domino.name": {
+    "reviewed": true,
+    "source": "Wonder Domino",
+    "sourceHash": "6f1635e11b0c7cd8c5683d6286436de6b1b6f255592ac7cde902e55ad6a8dc91",
+    "text": "Dominó maravilhoso"
+  },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "e99a5f5629e7b1445648677d8cee75f7b3f2eacf241d664911abe77ec2948ff0",
     "text": "O dano excedente ao derrotar um inimigo se espalha para outros inimigos"
+  },
+  "content.boon.yarrow-salve-tin.name": {
+    "reviewed": true,
+    "source": "Yarrow Salve Tin",
+    "sourceHash": "6dacf94267e03eb1ecccede29b5197659a917baac581801a820efa42f6c84651",
+    "text": "Lata de unguento de mil-folhas"
   },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
@@ -1691,6 +2261,18 @@
     "sourceHash": "b21c6050f5aecd660340d1bfd04c97fe16e71681c3df3d663568feea5b64fced",
     "text": "Comece com {{value0}} cartas de <keyword0>Comida</keyword0> no seu baralho"
   },
+  "content.species.aerostat.title": {
+    "reviewed": true,
+    "source": "The well-stocked traveler",
+    "sourceHash": "7fbcd9ff220fc88b50fee9b41cd5a0f8f006ee86d09bcdbd907348973e62dd6d",
+    "text": "O viajante bem abastecido"
+  },
+  "content.species.aerostat.trait": {
+    "reviewed": true,
+    "source": "Well Provisioned",
+    "sourceHash": "2b8e0d96b84e3ed6cc4cbcd94b62a3077cd4a39a2fc8f32d50ff6dcb52e0ea6b",
+    "text": "Bem abastecido"
+  },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
@@ -1726,6 +2308,18 @@
     "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
     "sourceHash": "c5427ea59690d2c99ae590ebed5874f91076cf6656f57d115045d4e65a357b85",
     "text": "O <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Espinhos</keyword1>"
+  },
+  "content.species.almanelle.title": {
+    "reviewed": true,
+    "source": "The orchard through the seasons",
+    "sourceHash": "36f04804af02b60d5c55c035d17dbcec098459f2aff92851294db269d82b517f",
+    "text": "O pomar através das estações"
+  },
+  "content.species.almanelle.trait": {
+    "reviewed": true,
+    "source": "Fallen Leaves",
+    "sourceHash": "0bcad4116f0f3830aabc40f88199042ef88334805c288e7e176f4097b4a29351",
+    "text": "Folhas caídas"
   },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
@@ -1763,6 +2357,18 @@
     "sourceHash": "7991e0aa8c8d75ace141ba3e7b75a4e26401421df11f2f8dc6729f81eac5c274",
     "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
   },
+  "content.species.alpenglen.title": {
+    "reviewed": true,
+    "source": "The last light of the mountain",
+    "sourceHash": "41abbf6edb8c91d2112c24a391d67847ce5a614af77e908d9c53835483502a7f",
+    "text": "A última luz da montanha"
+  },
+  "content.species.alpenglen.trait": {
+    "reviewed": true,
+    "source": "Last Warmth",
+    "sourceHash": "7c420fc9102864c01b2b14d5e9c9ec73c3edddc7884c81b2e59dc83c2221570b",
+    "text": "Último calor"
+  },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
@@ -1798,6 +2404,18 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
     "sourceHash": "1348451d41ffec0c18e7deba2fccd0c2d7826d7971782eaa39f3a86c428fed59",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.title": {
+    "reviewed": true,
+    "source": "The dance of returning spring",
+    "sourceHash": "16cfb76d211f84952ddc31a652ffee3101db76f234ebb45e511e39785e1e05f2",
+    "text": "A dança do retorno da primavera"
+  },
+  "content.species.arabesca.trait": {
+    "reviewed": true,
+    "source": "Petalwake",
+    "sourceHash": "280a9887c782c4189fde224b531f5192864705c4be32a2f50a764849ccbcd217",
+    "text": "Rastro de pétalas"
   },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
@@ -1835,6 +2453,18 @@
     "sourceHash": "6ba17d5d4eaeef7223a4d229b41d78b8fef79070fb3959f19f432ffb1fa33e99",
     "text": "Converta o <keyword0>Bloqueio</keyword0> que você ganha em <keyword1>Saúde</keyword1> para o aliado mais ferido"
   },
+  "content.species.bloomquail.title": {
+    "reviewed": true,
+    "source": "The petal keeper",
+    "sourceHash": "71d20f5bef92f4f30adbe6f9bf6947d6b3228fa5711a92278ee0f97a8ee9f9ce",
+    "text": "O guardião das pétalas"
+  },
+  "content.species.bloomquail.trait": {
+    "reviewed": true,
+    "source": "Full Bloom",
+    "sourceHash": "2624d0f4fefc247aca3105b846f9772a05249c0fe9169854ae55d0188a84a368",
+    "text": "Plena floração"
+  },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
     "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
@@ -1870,6 +2500,18 @@
     "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "f4f212f9e7c6bbdcc9a69e1094002c88a9f5c8833b7cb065f54af3b2f5bf122b",
     "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.title": {
+    "reviewed": true,
+    "source": "The song of forgotten places",
+    "sourceHash": "3e05cc4db4537c81128d0fbd045a4180e97e9ee0caeed4410697c848fccb3c75",
+    "text": "A canção dos lugares esquecidos"
+  },
+  "content.species.cadenza.trait": {
+    "reviewed": true,
+    "source": "Living Chorus",
+    "sourceHash": "186a3c4b49276e29fb8759b0159d04f605ec333ad6150971d2cfd2cb0fa64cdf",
+    "text": "Coro vivo"
   },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
@@ -1907,6 +2549,18 @@
     "sourceHash": "f2d26bd7b3f1d5895ab3760e20148faac039921dd0261b44240eb9ecaee5037d",
     "text": "Revide com {{value0}} de dano de <keyword0>Veneno</keyword0> ao receber um acerto"
   },
+  "content.species.captoad.title": {
+    "reviewed": true,
+    "source": "Beneath the spotted cap",
+    "sourceHash": "746790cb44e076f5860e02c9f6600f1b507a5f04322847c96c8edcbf2cfcbd10",
+    "text": "Sob o chapéu pintado"
+  },
+  "content.species.captoad.trait": {
+    "reviewed": true,
+    "source": "Sporecoat",
+    "sourceHash": "600c28d9878f7c778559783d515bb1d27244d2c1680193028c9897eb91f79d16",
+    "text": "Manto de esporos"
+  },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
@@ -1942,6 +2596,18 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "b9631d8288c4bb633c02adfc9fad3866d814f855a5f6af21336df5a91d05b10b",
     "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
+  },
+  "content.species.chimecricket.title": {
+    "reviewed": true,
+    "source": "The evening chorus",
+    "sourceHash": "95fda1796ab1a64810b3f0de188315ea2895bafcff1798f25b874aa1cf010f68",
+    "text": "O coro do entardecer"
+  },
+  "content.species.chimecricket.trait": {
+    "reviewed": true,
+    "source": "Encore",
+    "sourceHash": "df319a1ccafa4d2a577eee5e5b47497c4591ae933f827f3b80b4454278d45508",
+    "text": "Bis"
   },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
@@ -1979,6 +2645,18 @@
     "sourceHash": "81cc0b6cc699a5792e04e8ff42e9ebf72c37f2a7e448ed84e4770c5f0a73df83",
     "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
   },
+  "content.species.cindernewt.title": {
+    "reviewed": true,
+    "source": "The dancing ember",
+    "sourceHash": "169184f34994c995655d8feef3bd75e53c7d5c0b4204d1b3348e92bbc7ce2f0e",
+    "text": "A brasa dançante"
+  },
+  "content.species.cindernewt.trait": {
+    "reviewed": true,
+    "source": "Cinderstep",
+    "sourceHash": "7fd89eedaa01e26e73f109c0ca8a679b58c228243a217f2438c6f8e309f5f72e",
+    "text": "Passo de brasa"
+  },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
@@ -2015,6 +2693,18 @@
     "sourceHash": "6b30401e7b65373ba46a190743cbd5a1b0c887bacbce86cd214e791e35cffcf7",
     "text": "Cause {{value0}} de dano de <keyword0>Água</keyword0> quando seu <keyword1>Bloqueio</keyword1> quebrar"
   },
+  "content.species.coralcurl.title": {
+    "reviewed": true,
+    "source": "The sheltered reef",
+    "sourceHash": "17b1f8eb6e4a6c7f8fd560a830b1ea2cabadd40d322970f1b0f96d2041391325",
+    "text": "O recife abrigado"
+  },
+  "content.species.coralcurl.trait": {
+    "reviewed": true,
+    "source": "Bubbleburst",
+    "sourceHash": "bc67b8baf4ae5c2420b1af27c6ebe5e7dcca663cf40df66e6d21561ee4bf20b9",
+    "text": "Explosão de bolhas"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2050,6 +2740,18 @@
     "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
     "sourceHash": "54e8faa452310221ce3ca67412868ba1b62dc03970407ce09ec61b84621725a2",
     "text": "Seu primeiro ataque de cada turno é um <keyword0>acerto crítico</keyword0>"
+  },
+  "content.species.dawncall.title": {
+    "reviewed": true,
+    "source": "The sunrise herald",
+    "sourceHash": "1c22f34ba5f4ea33d04ed10b2d7fb7d33511d0a57ab098f97ef692ccef892fca",
+    "text": "O arauto do amanhecer"
+  },
+  "content.species.dawncall.trait": {
+    "reviewed": true,
+    "source": "Early Bird",
+    "sourceHash": "66fabb093b205e3498a1a73dcaedec70eb261ab1b076342c48c0100fe8f0174c",
+    "text": "Madrugador"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
@@ -4889,6 +5591,12 @@
     "sourceHash": "3bf5f3aa0998c58ec8b7efa62b2feb2a356cfec162e2f6ab1673777e8bd8c1a2",
     "text": "{{name}}: efeito aplicado ({{status}})."
   },
+  "log.createFood": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Food cards",
+    "sourceHash": "0290bfa3e238b4e8845d48f79d039672760f7b0a514618038ef6b627476f0dca",
+    "text": "{{actor}} cria cartas de Comida: {{count}}"
+  },
   "log.criticalDamage": {
     "reviewed": true,
     "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
@@ -5044,6 +5752,12 @@
     "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
     "sourceHash": "b14d6b64671b598f7c22433c903878eb2fc058b629f24e10316da291c5b2f04a",
     "text": "{{actor}} ressuscita {{target}} com {{amount}} de Saúde"
+  },
+  "log.returnCard": {
+    "reviewed": true,
+    "source": "{{card}} returns to hand",
+    "sourceHash": "febe7ceaaaa26ea43c67bdb0257efeaf453d2ae65c1da8cc05a5337099ae1c37",
+    "text": "Carta devolvida à mão: {{card}}"
   },
   "log.returnHome": {
     "reviewed": true,

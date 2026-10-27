@@ -287,6 +287,9 @@
   "log.controlApplied": {
     "text": "{{name}} is {{status}}."
   },
+  "log.createFood": {
+    "text": "{{actor}} creates {{count}} Food cards"
+  },
   "log.criticalDamage": {
     "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
   },
@@ -364,6 +367,9 @@
   },
   "log.resurrect": {
     "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"
+  },
+  "log.returnCard": {
+    "text": "{{card}} returns to hand"
   },
   "log.returnHome": {
     "text": "You return from the wilds. Discoveries are kept."
