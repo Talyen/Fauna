@@ -575,17 +575,41 @@
     "sourceHash": "8b9cbf7173d469d894f292d41cc4bbffbbe0ef228b7b65acc99cf0cb6356ff4b",
     "text": "Ofenprisma"
   },
+  "content.boon.gemmed-scabbard.name": {
+    "reviewed": true,
+    "source": "Gemmed Scabbard",
+    "sourceHash": "1c348802bb5cec6ca1cfd61ac0aa4e374d050323674e6e572b20ea9ef51bdc5c",
+    "text": "Edelsteinscheide"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "3d0bc7b0233b24855a65e3744c1705db868019fb3a5771de410f37876d207d0c",
     "text": "<keyword0>Rüstung</keyword0> reduziert auch <keyword1>Dornen</keyword1>schaden"
   },
+  "content.boon.geode-anvil.name": {
+    "reviewed": true,
+    "source": "Geode Anvil",
+    "sourceHash": "56667e8c2096e60ad782d5a08402894fdf67bde13b3d4a660aa70db581ba8b4b",
+    "text": "Geodenamboss"
+  },
   "content.boon.geode-anvil.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "sourceHash": "00a1bbd6231664cd4229344efcbc008d6dae50696f9a371b556e12f188e78426",
     "text": "<keyword0>Block</keyword0> kann nicht unter <keyword1>Rüstung</keyword1> verfallen"
+  },
+  "content.boon.grafting-needle.name": {
+    "reviewed": true,
+    "source": "Grafting Needle",
+    "sourceHash": "d952085944df99ef55611bd5abf70cf6ae542a7cbf3b0780a70596c3ee95c5d3",
+    "text": "Pfropfnadel"
+  },
+  "content.boon.grain-flail.name": {
+    "reviewed": true,
+    "source": "Grain Flail",
+    "sourceHash": "60d165138576fbf7823e224e99d82f9deedc346d48f8e9c162308c1c285c2046",
+    "text": "Dreschflegel"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -599,17 +623,47 @@
     "sourceHash": "7e0c450fbac5f5b1d24f51e0b25c6d267e7ba0abe65129371b196a06a513d56f",
     "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wenn du im Kampf <keyword1>Gesundheit</keyword1> wiederherstellst"
   },
+  "content.boon.hearth-coal.name": {
+    "reviewed": true,
+    "source": "Hearth Coal",
+    "sourceHash": "86dbc67df9b6c63ac191b52fc67bc7d283e48c67108274c5d5c83d173e68b62f",
+    "text": "Herdkohle"
+  },
+  "content.boon.herbarium-press.name": {
+    "reviewed": true,
+    "source": "Herbarium Press",
+    "sourceHash": "49896c234a6f3b4ef15968e3881d6b2d2038307959e34456e4dc301e1346e64d",
+    "text": "Herbariumpresse"
+  },
   "content.boon.herbarium-press.rule": {
     "reviewed": true,
     "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
     "sourceHash": "0b43878c3209a618463d0513b11232caf8450208c8fbd5c88ca780463a4cd181",
     "text": "<keyword0>Gift</keyword0> kann bei <keyword2>eingefrorenen</keyword2> Gegnern nicht <keyword1>gereinigt</keyword1> werden"
   },
+  "content.boon.hoard-lockplate.name": {
+    "reviewed": true,
+    "source": "Hoard Lockplate",
+    "sourceHash": "55e499377f9e8230755b34cd8e312d8f266b0bf3750aebb777a4a016c39796af",
+    "text": "Schatzschlossplatte"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
     "sourceHash": "6355c77eda341553a0d82f0fefaefa0a56ade33959298d0166401f8cfd7d72fe",
     "text": "<keyword0>Rüstung</keyword0> reduziert Schaden vor <keyword1>Block</keyword1>"
+  },
+  "content.boon.honey-press.name": {
+    "reviewed": true,
+    "source": "Honey Press",
+    "sourceHash": "8c95afb4564bd3dc1b10991a1d07657d056d11ebfd7691d975008fe9bbd2a5b0",
+    "text": "Honigpresse"
+  },
+  "content.boon.honeycomb-frame.name": {
+    "reviewed": true,
+    "source": "Honeycomb Frame",
+    "sourceHash": "166d0fb97eff734c9226ff334b459b0a54163f247b4050f4911b270ac0cce64d",
+    "text": "Wabenrahmen"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -634,6 +688,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "ef1f9d50d4cf1c7cd0bcd530a8e5cd7c51b0b43f8cbe798929aa8df9ee2fc24f",
     "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wann immer du <keyword1>Block</keyword1> erhältst"
+  },
+  "content.boon.journey-loom.name": {
+    "reviewed": true,
+    "source": "Journey Loom",
+    "sourceHash": "aef7d24d9f34892f356dcd52c61eeafa901eef5a42882d5ab05486e1c56b5fd3",
+    "text": "Reisewebstuhl"
   },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,

@@ -581,17 +581,41 @@
     "sourceHash": "00064b156ca7a235d488a2226341c146f822c70afffd568978f0c691cef83ca4",
     "text": "Prisme de fournaise"
   },
+  "content.boon.gemmed-scabbard.name": {
+    "reviewed": true,
+    "source": "Gemmed Scabbard",
+    "sourceHash": "0cc6405f0c8cf9534a5549d48c994abdce3cd568c5d84b6d69fddc1e14bfdb09",
+    "text": "Fourreau serti"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "9f49f83086fadf171608c3046ef04cac0e38e1b75c316e6cef42930d892d31f4",
     "text": "L’<keyword0>Armure</keyword0> réduit aussi les dégâts d’<keyword1>Épines</keyword1>"
   },
+  "content.boon.geode-anvil.name": {
+    "reviewed": true,
+    "source": "Geode Anvil",
+    "sourceHash": "e1a84cc80940148e4018f4ff52d32bb851b4a76ca5a597043771ceed7a6a7d34",
+    "text": "Enclume géode"
+  },
   "content.boon.geode-anvil.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "sourceHash": "d45f3297c4f446a032232cf66a7a40283ba4f6e78f37a9ea00ea8f3b7e77d281",
     "text": "Le <keyword0>Blocage</keyword0> ne peut pas décroître sous l’<keyword1>Armure</keyword1>"
+  },
+  "content.boon.grafting-needle.name": {
+    "reviewed": true,
+    "source": "Grafting Needle",
+    "sourceHash": "63b93a062a83b90f33aebee57992acc5bcc1c738f1519f95adee7244b79b07ee",
+    "text": "Aiguille à greffer"
+  },
+  "content.boon.grain-flail.name": {
+    "reviewed": true,
+    "source": "Grain Flail",
+    "sourceHash": "56801c6e89f83a3ac36a18da81c868662d69844d4783a2b18833373d2cdc3422",
+    "text": "Fléau à grains"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -605,6 +629,12 @@
     "sourceHash": "8c93c9f84c3411836de20f31ba1cfaf95d65b73828e9d29672976055beabae52",
     "text": "Gagnez {{value0}} <keyword0>Épines</keyword0> lorsque vous restaurez de la <keyword1>Santé</keyword1> en combat"
   },
+  "content.boon.hearth-coal.name": {
+    "reviewed": true,
+    "source": "Hearth Coal",
+    "sourceHash": "add4e05f5efb77b0bb79e4dfd64afbd27962e52f778aa98fd9d4fe9562067255",
+    "text": "Braise du foyer"
+  },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
     "source": "Herbarium Press",
@@ -617,11 +647,29 @@
     "sourceHash": "f107c022700bf9e64f3473a0c575f1aa642e520d2a930d61a4bfae053c3f1192",
     "text": "Le <keyword0>Poison</keyword0> des ennemis <keyword2>gelés</keyword2> ne peut pas être <keyword1>purifié</keyword1>"
   },
+  "content.boon.hoard-lockplate.name": {
+    "reviewed": true,
+    "source": "Hoard Lockplate",
+    "sourceHash": "da1bd977f16bde2f8df6cc2fd1034460c21aa1b19ef054ed7626463e2c0f0856",
+    "text": "Plaque de serrure du trésor"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
     "sourceHash": "7a0679bdb38dd6b7367e88a3192ce52a8a266fbccfc678486aa19c1bf32519dc",
     "text": "L’<keyword0>Armure</keyword0> réduit les dégâts avant le <keyword1>Blocage</keyword1>"
+  },
+  "content.boon.honey-press.name": {
+    "reviewed": true,
+    "source": "Honey Press",
+    "sourceHash": "576336a05c3928f34a6615436707b85be302b0e0871a215709ef26509f0afa82",
+    "text": "Presse à miel"
+  },
+  "content.boon.honeycomb-frame.name": {
+    "reviewed": true,
+    "source": "Honeycomb Frame",
+    "sourceHash": "7991add0a07eb9ae58fe9341528962eca5273a53ada0d3bc4d05ad50da00d7a0",
+    "text": "Cadre de ruche"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -646,6 +694,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "a29315c7d5d27c0c066e62337230812c395caafd9460e1df348b87a993e1ef02",
     "text": "Gagnez {{value0}} <keyword0>Épines</keyword0> chaque fois que vous gagnez du <keyword1>Blocage</keyword1>"
+  },
+  "content.boon.journey-loom.name": {
+    "reviewed": true,
+    "source": "Journey Loom",
+    "sourceHash": "c61cfaaea6b1c9e800239ca67a870aa1aeb74d818491b0c5046d805516004d6c",
+    "text": "Métier à tisser du voyage"
   },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,

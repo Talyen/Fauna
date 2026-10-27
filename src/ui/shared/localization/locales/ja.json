@@ -575,17 +575,41 @@
     "sourceHash": "a9c72f8aa6b9eb0b4c087be8951381da3fb458e421c800d4408ddfbae41a6d2c",
     "text": "炉のプリズム"
   },
+  "content.boon.gemmed-scabbard.name": {
+    "reviewed": true,
+    "source": "Gemmed Scabbard",
+    "sourceHash": "c2cbdcbd2c8171a6c493e5f08d1e675a2324ee388ba762473516d84b47f54919",
+    "text": "宝石の鞘"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "086e912b446e51772cc545f7fcd8ccbe087c5f7a47bdfb100b59dbfdf961f366",
     "text": "<keyword0>装甲</keyword0>は<keyword1>棘</keyword1>ダメージも軽減する"
   },
+  "content.boon.geode-anvil.name": {
+    "reviewed": true,
+    "source": "Geode Anvil",
+    "sourceHash": "79bba9ff35d0f69aa4a9a147d912e9678363d68dc591a3da7af503b6dfca227d",
+    "text": "晶洞の金床"
+  },
   "content.boon.geode-anvil.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "sourceHash": "9d3dce683041ad6186a796069d359b0b99ac176c8b3efcfb0d7ebbe0a9f77154",
     "text": "<keyword0>ブロック</keyword0>は減衰しても<keyword1>アーマー</keyword1>を下回らない"
+  },
+  "content.boon.grafting-needle.name": {
+    "reviewed": true,
+    "source": "Grafting Needle",
+    "sourceHash": "c704a62fd275ff302ee107327ea530ae9a717978c7d14f34a2c4b6e0953ef35e",
+    "text": "接ぎ木針"
+  },
+  "content.boon.grain-flail.name": {
+    "reviewed": true,
+    "source": "Grain Flail",
+    "sourceHash": "1efb537e714a09b8585ac1234266e166f486849ff691a9d0aef37aa556ab6c46",
+    "text": "穀物の脱穀棒"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -599,17 +623,47 @@
     "sourceHash": "bf2df9c17e7e6ec3d9153fa40e4b9cd004659e02753974ec2515e20defad811e",
     "text": "戦闘中に<keyword1>体力</keyword1>を回復すると<keyword0>トゲ</keyword0>を{{value0}}獲得"
   },
+  "content.boon.hearth-coal.name": {
+    "reviewed": true,
+    "source": "Hearth Coal",
+    "sourceHash": "e33a1ef60131eebede11b02eb03da154a64bd2915ff8cbcbccb86829bd6a4b9c",
+    "text": "暖炉の炭"
+  },
+  "content.boon.herbarium-press.name": {
+    "reviewed": true,
+    "source": "Herbarium Press",
+    "sourceHash": "98638fe8fff31f0aee4184756a9f11121b2b96aa69bb2b1420bc3f22d6e82f1b",
+    "text": "植物標本の押し器"
+  },
   "content.boon.herbarium-press.rule": {
     "reviewed": true,
     "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
     "sourceHash": "8c96353dbdbc3acca7e6d72c82765c0f7bd15955600f93a83f860a0dfcd74c43",
     "text": "<keyword2>凍結</keyword2>した敵から<keyword0>毒</keyword0>を<keyword1>浄化</keyword1>できない"
   },
+  "content.boon.hoard-lockplate.name": {
+    "reviewed": true,
+    "source": "Hoard Lockplate",
+    "sourceHash": "6a61c37a8d329db1f0e4e87e8c9139068f302fdc82b07f9a1ba614085e55b0f3",
+    "text": "宝庫の錠前板"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
     "sourceHash": "135bf7c01d159f5723ce058b83c76882704ba27d8c2ceef8db88aca803891d17",
     "text": "<keyword0>装甲</keyword0>が<keyword1>ブロック</keyword1>より先にダメージを軽減する"
+  },
+  "content.boon.honey-press.name": {
+    "reviewed": true,
+    "source": "Honey Press",
+    "sourceHash": "71fd1935cd4b5a934652d666acfbfc776c671341f96d68a04556193ff5334727",
+    "text": "蜂蜜絞り器"
+  },
+  "content.boon.honeycomb-frame.name": {
+    "reviewed": true,
+    "source": "Honeycomb Frame",
+    "sourceHash": "afa974b231fa4f1dd141b05c9c47022410c649e01e6db4650a40f4206fb7afa3",
+    "text": "蜂の巣枠"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -634,6 +688,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "7b9608600cb038d6c2a9088128cf64244ee405db912c9b4d9a0b3d33ce5d66d4",
     "text": "<keyword1>ブロック</keyword1>を獲得するたびに<keyword0>トゲ</keyword0>を{{value0}}獲得"
+  },
+  "content.boon.journey-loom.name": {
+    "reviewed": true,
+    "source": "Journey Loom",
+    "sourceHash": "2048b2f1b4fdfe9344cadaeea7c13c0f6ea848330c5e4e5106f28f0381fc3cf4",
+    "text": "旅の織機"
   },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,

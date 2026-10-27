@@ -575,17 +575,41 @@
     "sourceHash": "8bf18f43b6b8997cf74e0ca9a6572167efa7add4e8e75fe9292c488ee64281a5",
     "text": "Призма горна"
   },
+  "content.boon.gemmed-scabbard.name": {
+    "reviewed": true,
+    "source": "Gemmed Scabbard",
+    "sourceHash": "c8327b5e744b6f8bb8dbf12ff951fe076d09cea0d2e17a70c56d58ebd0738d3e",
+    "text": "Украшенные ножны"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "4ee950c69c7769a866e694beff0fce7699a2f3325c09615d8de7909aa3d303fe",
     "text": "<keyword0>Броня</keyword0> также снижает урон от <keyword1>шипов</keyword1>"
   },
+  "content.boon.geode-anvil.name": {
+    "reviewed": true,
+    "source": "Geode Anvil",
+    "sourceHash": "d377ec52bf57e63744701af04f838c1a1bb46a062b91ed81791c95c9b4738e6b",
+    "text": "Наковальня-жеода"
+  },
   "content.boon.geode-anvil.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "sourceHash": "85144d34b7dec396fc944e9d98f003a036e7e94004faf75c3b783a16942f950a",
     "text": "<keyword0>Блок</keyword0> не может уменьшиться от угасания ниже <keyword1>брони</keyword1>"
+  },
+  "content.boon.grafting-needle.name": {
+    "reviewed": true,
+    "source": "Grafting Needle",
+    "sourceHash": "23da2665c21a46b7da2efeae3d9b22587d613d4d6cbfbfcfb6ae107abeb546fb",
+    "text": "Игла для прививки"
+  },
+  "content.boon.grain-flail.name": {
+    "reviewed": true,
+    "source": "Grain Flail",
+    "sourceHash": "d9d66cee76d760e73f15f5c986035a25f39de6c5b24c4db6be9a9e7f222595b7",
+    "text": "Цеп для обмолота"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -599,17 +623,47 @@
     "sourceHash": "b3c539ab9ad47638eb6bbc1712d1408b99c2f914b15ee127a986f6c746388304",
     "text": "Получите {{value0}} <keyword0>шипов</keyword0>, когда восстанавливаете <keyword1>здоровье</keyword1> в бою"
   },
+  "content.boon.hearth-coal.name": {
+    "reviewed": true,
+    "source": "Hearth Coal",
+    "sourceHash": "dd5abced4bbe80ea8b5af546c1151ce42f526a90739605e6caa01ed415181d52",
+    "text": "Уголь очага"
+  },
+  "content.boon.herbarium-press.name": {
+    "reviewed": true,
+    "source": "Herbarium Press",
+    "sourceHash": "e4c296f3b1ecb0cbe9d15e19f10f4d2de0ecc2f99b6819b5332eb33b96d8a642",
+    "text": "Гербарный пресс"
+  },
   "content.boon.herbarium-press.rule": {
     "reviewed": true,
     "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
     "sourceHash": "bd7cb9e832bebdd81edf63af5a4fa017c1055be07fff1acd2d867eb7d007eb23",
     "text": "<keyword0>Яд</keyword0> нельзя <keyword1>очистить</keyword1> с <keyword2>замороженных</keyword2> врагов"
   },
+  "content.boon.hoard-lockplate.name": {
+    "reviewed": true,
+    "source": "Hoard Lockplate",
+    "sourceHash": "ecf062d0b51b59f9cc48d0e986eb081de4de2b562e73961692f05a4928fc4fa7",
+    "text": "Накладка замка сокровищницы"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
     "sourceHash": "d3fe1026e8af49b5f55a4339cccf559c86e32d14bfd3663fd63c46c3e1dcb14b",
     "text": "<keyword0>Броня</keyword0> снижает урон до <keyword1>блока</keyword1>"
+  },
+  "content.boon.honey-press.name": {
+    "reviewed": true,
+    "source": "Honey Press",
+    "sourceHash": "947cefdef242c4a8465495237f3fe88f2b8d6d1f1fe2dae54af75c9145f3dbb3",
+    "text": "Медовый пресс"
+  },
+  "content.boon.honeycomb-frame.name": {
+    "reviewed": true,
+    "source": "Honeycomb Frame",
+    "sourceHash": "f150cb3e6a5d2bee87170b6ce77b647a3ab9a66467363a619095e81b2885e2f1",
+    "text": "Рамка с сотами"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -634,6 +688,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "d910d68e2a019eb3fd489563f5a0cf54ce1ebb1f3f226388d7df9e5adfecdfb9",
     "text": "Получайте {{value0}} <keyword0>шипов</keyword0> каждый раз, когда получаете <keyword1>блок</keyword1>"
+  },
+  "content.boon.journey-loom.name": {
+    "reviewed": true,
+    "source": "Journey Loom",
+    "sourceHash": "5a7b2842534604f624aff7b1d43260b30b29333f9c556f676b3f550eabdd50ce",
+    "text": "Ткацкий станок путешествия"
   },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,

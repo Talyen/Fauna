@@ -575,17 +575,41 @@
     "sourceHash": "73801abce4af30109103f689dba29b0f064add2a355c6e41e0b321a0922952bc",
     "text": "Prisma de fornalha"
   },
+  "content.boon.gemmed-scabbard.name": {
+    "reviewed": true,
+    "source": "Gemmed Scabbard",
+    "sourceHash": "3e52a8d6f8639abe0956e7a38dbc1f89d97195dfdae387e9ff5ed915862eeac0",
+    "text": "Bainha cravejada"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "22a7fda6465a97620c04d145ce8e4094e1be882e3505f3d2a594b2343170d8cb",
     "text": "<keyword0>Armadura</keyword0> também reduz dano de <keyword1>Espinhos</keyword1>"
   },
+  "content.boon.geode-anvil.name": {
+    "reviewed": true,
+    "source": "Geode Anvil",
+    "sourceHash": "e49647310ba252d1444bf796537289a8a1be1dbd09ede4571bfcdef711b91557",
+    "text": "Bigorna de geodo"
+  },
   "content.boon.geode-anvil.rule": {
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "sourceHash": "3a90acbca0f0ab5d8fe42b981f47f99f8787a812b0e657a0ee25af3b17de5f86",
     "text": "<keyword0>Bloqueio</keyword0> não pode decair abaixo da <keyword1>Armadura</keyword1>"
+  },
+  "content.boon.grafting-needle.name": {
+    "reviewed": true,
+    "source": "Grafting Needle",
+    "sourceHash": "fe4db32da88934e415cdd53fe7257a67c904e0661c4521650dc973c98733e731",
+    "text": "Agulha de enxerto"
+  },
+  "content.boon.grain-flail.name": {
+    "reviewed": true,
+    "source": "Grain Flail",
+    "sourceHash": "7ecde3f8eff09c8eaf063cfb658e37a4317f6e6403a36c9dae73ee469e3f09a0",
+    "text": "Mangual de grãos"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -599,17 +623,47 @@
     "sourceHash": "b9b52fce7e482b6ae1a811ef9969ae1847984b7125db5901aa71e9f4d182cc09",
     "text": "Receba {{value0}} de <keyword0>Espinhos</keyword0> ao restaurar <keyword1>Saúde</keyword1> em combate"
   },
+  "content.boon.hearth-coal.name": {
+    "reviewed": true,
+    "source": "Hearth Coal",
+    "sourceHash": "fcbd15e0d6305ef3befe6ec4485fee2b4e6719f5a3ea93e2dd27460f2b8d9bd0",
+    "text": "Carvão da lareira"
+  },
+  "content.boon.herbarium-press.name": {
+    "reviewed": true,
+    "source": "Herbarium Press",
+    "sourceHash": "9d598ca402932ba575871a315316b4db89a1381da65d41aedbe996284cad6260",
+    "text": "Prensa de herbário"
+  },
   "content.boon.herbarium-press.rule": {
     "reviewed": true,
     "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
     "sourceHash": "dab9567e6ee46228c71d4e9a3a02b8086d1a6d4bb29b63474e1990fb62e7e265",
     "text": "<keyword0>Veneno</keyword0> não pode ser <keyword1>purificado</keyword1> de inimigos <keyword2>congelados</keyword2>"
   },
+  "content.boon.hoard-lockplate.name": {
+    "reviewed": true,
+    "source": "Hoard Lockplate",
+    "sourceHash": "ffc9a4a27099ad2381f72c225414271f9097d813901126c73ea3ae9a555a3847",
+    "text": "Placa de fechadura do tesouro"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
     "sourceHash": "a6e5499613602bce2b97bb966ab9a3030e2050ba8a713ee8ecac11967d19b992",
     "text": "<keyword0>Armadura</keyword0> reduz o dano antes de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.boon.honey-press.name": {
+    "reviewed": true,
+    "source": "Honey Press",
+    "sourceHash": "844613668bfca958ff3d64c03932ba7ffdaa60a5ab584f12b3225a49f3791225",
+    "text": "Prensa de mel"
+  },
+  "content.boon.honeycomb-frame.name": {
+    "reviewed": true,
+    "source": "Honeycomb Frame",
+    "sourceHash": "782fbe68e4904cb50e73a10455169245999e7c2bae0cbff0a44f51fe860ab9d9",
+    "text": "Quadro de favo"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -634,6 +688,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
     "sourceHash": "c2c91a44219bce522e2f965043a27e7f9b6d149cc320a084ddc3d8f0709b97cd",
     "text": "Receba {{value0}} de <keyword0>Espinhos</keyword0> sempre que receber <keyword1>Bloqueio</keyword1>"
+  },
+  "content.boon.journey-loom.name": {
+    "reviewed": true,
+    "source": "Journey Loom",
+    "sourceHash": "99ac7959c8287f1275efefb4095b1badfde186055ac70ef9aaaf5d2b7c9479a2",
+    "text": "Tear da jornada"
   },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,
