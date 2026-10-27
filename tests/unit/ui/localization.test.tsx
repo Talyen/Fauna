@@ -13,6 +13,7 @@ import { swapFromCard } from "../../../src/game/team";
 import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
+import { cardRuleId } from "../../../src/ui/shared/localization/card-rule-id";
 import { extractStatusVariants } from "../../../scripts/localization/status-variants.mjs";
 import { freshCombat, loseHealth } from "../../../src/game/combat/state";
 import {
@@ -2232,6 +2233,7 @@ it("extracts Food rules for individual and team targets from the production desc
     readFileSync("src/game/card-rules.ts", "utf8"),
     readFileSync("src/game/rules/abilities.ts", "utf8"),
     readFileSync("src/game/keywords.ts", "utf8"),
+    readFileSync("src/game/rules/boons.ts", "utf8"),
   );
   for (const card of FOOD_CARDS) {
     for (const all of card.effect === "heal" || card.effect === "guard" ? [false, true] : [false]) {
@@ -2241,7 +2243,14 @@ it("extracts Food rules for individual and team targets from the production desc
       expect(rule?.text, `${card.id} ${all}`).toBe(ruleMessage(text).template);
     }
   }
-  expect(Object.keys(rules)).toHaveLength(5);
+  const berries = FOOD_CARDS.find((card) => card.id === "food-mana-berries")!;
+  const cornucopia = rules["content.card.food-mana-berries.cornucopia.rule"];
+  for (const boons of [["cornucopia"], ["cornucopia", "nectar-dipper"]]) {
+    const text = cardText(berries, 0, undefined, 1, { boons });
+    expect(cornucopia?.text).toBe(ruleMessage(text).template);
+    expect(cardRuleId(berries, { boons }, text)).toBe("content.card.food-mana-berries.cornucopia.rule");
+  }
+  expect(Object.keys(rules)).toHaveLength(6);
 });
 
 it("uses the same localized Food rule in tooltips and accessible card names", () => {
@@ -2278,6 +2287,29 @@ it("uses the same localized Food rule in tooltips and accessible card names", ()
     }),
   ).toBeTruthy();
   expect(view.container.textContent).toContain("Restaure 12 Santé à tous les alliés ; Consommer");
+  view.unmount();
+});
+
+it("localizes Mana Berries with Cornucopia and Nectar Dipper values", () => {
+  const berries = FOOD_CARDS.find((entry) => entry.id === "food-mana-berries")!;
+  const game = produce(run(), (draft) => {
+    draft.boons.push("cornucopia");
+  });
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <CardRules card={berries} modifiers={game} />
+    </LocalizationProvider>,
+  );
+  expect(view.container.textContent).toBe("Gagne 2 Mana ; restaure 2 Santé à tous les alliés ; Consommer");
+  const doubled = produce(game, (draft) => {
+    draft.boons.push("nectar-dipper");
+  });
+  view.rerender(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <CardRules card={berries} value={4} modifiers={doubled} />
+    </LocalizationProvider>,
+  );
+  expect(view.container.textContent).toBe("Gagne 4 Mana ; restaure 4 Santé à tous les alliés ; Consommer");
   view.unmount();
 });
 

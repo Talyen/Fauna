@@ -145,6 +145,7 @@ export function extractProjectContent(root) {
         fs.readFileSync(path.join(root, "src/game/card-rules.ts"), "utf8"),
         fs.readFileSync(path.join(root, "src/game/rules/abilities.ts"), "utf8"),
         fs.readFileSync(keywordFile, "utf8"),
+        fs.readFileSync(path.join(root, "src/game/rules/boons.ts"), "utf8"),
       ),
       ...extractGlossaryRules(
         fs.readFileSync(path.join(root, "src/game/glossary.ts"), "utf8"),
