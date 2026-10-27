@@ -1793,6 +1793,12 @@
     "sourceHash": "e1cd03e701089ccf106d2878e2ac25f90e3b3d6c2c6a4c0068682c3ff21ad216",
     "text": "恢复 {{value0}} 点<keyword0>生命</keyword0>；<keyword1>消耗</keyword1>"
   },
+  "content.card.food-mana-berries.name": {
+    "reviewed": true,
+    "source": "Mana Berries",
+    "sourceHash": "7fefd35e906fbdca1ae3ac00ac8ebb42ad1f49dbdce0142235bf91f1e3e13218",
+    "text": "法力浆果"
+  },
   "content.card.food-mana-berries.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
@@ -1805,11 +1811,29 @@
     "sourceHash": "a000f7e03407eebbc6cddce4b4550bfaf1df400f096cf3a76eeb354154d09211",
     "text": "使所有盟友获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
   },
+  "content.card.food-trail-bread.name": {
+    "reviewed": true,
+    "source": "Trail Bread",
+    "sourceHash": "41227c360d6ae0bc649cd8e1ba129cdbea8fed2c498ba87f54f944b9a5080169",
+    "text": "旅途面包"
+  },
   "content.card.food-trail-bread.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "9052deaec2cf163dbd2fc23bfe817738f67cf9a9879c598bef3a916b8494c475",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
+  },
+  "content.card.glintstride-attack.name": {
+    "reviewed": true,
+    "source": "Prism Shear",
+    "sourceHash": "b1b31ce629b43461bd7e2f1cb06dc044ca9eaa3542411ef57712afdee96e78ac",
+    "text": "棱镜斩"
+  },
+  "content.card.glintstride-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Run",
+    "sourceHash": "56b426a56da52d9be99db003be59adfbee248499ad5a1aee957abf0cd63fc2f2",
+    "text": "幻影奔行"
   },
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1823,6 +1847,18 @@
     "sourceHash": "2b306c2da9aeca3c7f8b691bb1b817c1ac3b6555f2ae85c8e8f46111bd53534b",
     "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合；抽{{value1}}张牌"
   },
+  "content.card.glintstride-teamBlind.name": {
+    "reviewed": true,
+    "source": "False Horizon",
+    "sourceHash": "c6645afa138899f711e0d5b588f40c292b39b8a485a0f06aa4075150a84d75a6",
+    "text": "虚假地平线"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "reviewed": true,
+    "source": "Drowned Revelation",
+    "sourceHash": "e4b15eeb5daa28bb0dd858f49c3a3c76e9fe19634ab495e7137bbe54ce06d5e1",
+    "text": "沉没的启示"
+  },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1835,11 +1871,29 @@
     "sourceHash": "ca9a67617384e38f31db764e7729082f7a5be4b5cdf9f7bb9061c0aa92f9dde2",
     "text": "抽{{value0}}张牌"
   },
+  "content.card.memento-lost-procession.name": {
+    "reviewed": true,
+    "source": "Lost Procession",
+    "sourceHash": "36016743b9b3f0deccb45ffb9e364339528fc35bbd67e07c91dba2c3e11907cf",
+    "text": "迷失的队列"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "68e88774b5263e7346f26741e49700eadd732424c87b1fa38a727f86e6a0a048",
     "text": "珍珠"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "reviewed": true,
+    "source": "Treasury Echo",
+    "sourceHash": "a68636b4a2614611b4a06765b994f5c2a693dd8445a7234413fa7e01fb2a1f3d",
+    "text": "宝库回响"
+  },
+  "content.card.mossguard-attack.name": {
+    "reviewed": true,
+    "source": "Rooted Stomp",
+    "sourceHash": "dd506e97de11850b7075988af079acfd7e74433b2859986dae1098a0a4c54cfb",
+    "text": "扎根踏击"
   },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1847,11 +1901,23 @@
     "sourceHash": "1020880b8d1c5f37b94b0cc8371b77e09eac9fc65b23b76f64d103d83e64f2a3",
     "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
   },
+  "content.card.mossguard-guard.name": {
+    "reviewed": true,
+    "source": "Boulder Brace",
+    "sourceHash": "8f72dda04798a5406617386fd602ed307d23a8964e98b8b4f41ff9d9bccb3380",
+    "text": "巨岩支撑"
+  },
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "c9aa2458c912c4df5c87a6a9ae03527f3532c7f727ff499203a5cd4e91593cda",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.mossguard-heal.name": {
+    "reviewed": true,
+    "source": "Moss Renewal",
+    "sourceHash": "41f8edc67ba52a1637769052e4d87548f1f56ce4febfb8d1b3567def3579c43b",
+    "text": "苔藓新生"
   },
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1859,11 +1925,23 @@
     "sourceHash": "445cc9505d3bef54d53771422cbf9f5b8a1f178ee4eccbf5230b27c095c02d02",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
+  "content.card.neradora-bloom-shelter.name": {
+    "reviewed": true,
+    "source": "Bloom Shelter",
+    "sourceHash": "5c79fa5fe6ac97a3579f2688f784a0e1761706dcecf104c284c7ef22473527bd",
+    "text": "花之庇护"
+  },
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "2f5f0549d0f16ddf90742b2aab466595719d23c4f223574fc820bd905e061b91",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "reviewed": true,
+    "source": "Tide Cup",
+    "sourceHash": "4065d725d226aebdaa1362b9e6dd504c048ec94d48f15f559633df12eac45a54",
+    "text": "潮汐杯"
   },
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1888,6 +1966,18 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "529d329dcb9119f8ff24af8d6a516e276184ae6bac6eef29b625391cd58a7fb7",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.neradora-undertow-knot.name": {
+    "reviewed": true,
+    "source": "Undertow Knot",
+    "sourceHash": "1bd6af1ba9065ac9da0d9d062b2e0d130ae052b71eda7249f381200680bad224",
+    "text": "暗流结"
+  },
+  "content.card.oathara-never-lost.name": {
+    "reviewed": true,
+    "source": "Never Lost",
+    "sourceHash": "fb0932bc8819f94a32d596d09792b8597aff0bb71cfe0062489c0a1cbabe31ad",
+    "text": "永不迷失"
   },
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,

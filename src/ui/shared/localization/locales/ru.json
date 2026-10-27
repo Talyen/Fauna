@@ -1793,6 +1793,12 @@
     "sourceHash": "b081c5a8b5ca44099da97c54136905709bab91c82a11fe70c9b04bd46bde7cd3",
     "text": "Восстановить {{value0}} ед. <keyword0>здоровья</keyword0>; <keyword1>Расходуется</keyword1>"
   },
+  "content.card.food-mana-berries.name": {
+    "reviewed": true,
+    "source": "Mana Berries",
+    "sourceHash": "8e38ff0ce12f25b2090dca09701244f5ccc13935c0fcd94c741e87a3e94b3ed0",
+    "text": "Ягоды маны"
+  },
   "content.card.food-mana-berries.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
@@ -1805,11 +1811,29 @@
     "sourceHash": "28cae0ae7fdb5c57b5a55bde5b2ce8f043c5892ca59a2e7427a0de2c3e7b6eb0",
     "text": "Дать всем союзникам {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
   },
+  "content.card.food-trail-bread.name": {
+    "reviewed": true,
+    "source": "Trail Bread",
+    "sourceHash": "eaaf164bf5b3c2f82ecd22289f459787285713277c8e7254c29b16015db229f3",
+    "text": "Дорожный хлеб"
+  },
   "content.card.food-trail-bread.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "c662c28932695c63cd5fabb5c35982eb6002df23b5a0ab6f1d2035c6b42af0f4",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
+  },
+  "content.card.glintstride-attack.name": {
+    "reviewed": true,
+    "source": "Prism Shear",
+    "sourceHash": "69425086da10a35ce20be8b0bbe2aacbfe47b81f7476f7562d7c3027be4df3e4",
+    "text": "Призматический разрез"
+  },
+  "content.card.glintstride-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Run",
+    "sourceHash": "88891f67ac5f28e65483d7024c2be69c46ad7d7ac0f4a583787152924764c04e",
+    "text": "Бег миража"
   },
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1823,6 +1847,18 @@
     "sourceHash": "e9542973bdc020f5faf5dfe571a845916c04716d3eb7f9a28e4bfd165c738daf",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Добор карт: {{value1}}"
   },
+  "content.card.glintstride-teamBlind.name": {
+    "reviewed": true,
+    "source": "False Horizon",
+    "sourceHash": "856cab8359d077beeece5a454cad489f4cb68a6af96d2ff51f6d9d677806acd0",
+    "text": "Ложный горизонт"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "reviewed": true,
+    "source": "Drowned Revelation",
+    "sourceHash": "0599fc6231a5e3f79b8641c47397c096a9810ec83ae2c44271aa8d10999dfa2c",
+    "text": "Затонувшее откровение"
+  },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1835,11 +1871,29 @@
     "sourceHash": "0e3bc788ae3e344c9133c2c0a53850affaf54635cdc1993b833d5126236ecd8f",
     "text": "Добор карт: {{value0}}"
   },
+  "content.card.memento-lost-procession.name": {
+    "reviewed": true,
+    "source": "Lost Procession",
+    "sourceHash": "59b4f66aead365579f09931451e2863dbaa463d7864c2e671bac54fa47a43d7d",
+    "text": "Потерянная процессия"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "31c96d8085588861c0e99a0ce4e9c9315550a19d91cf65d85bade1a61b155169",
     "text": "Жемчужина"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "reviewed": true,
+    "source": "Treasury Echo",
+    "sourceHash": "7a10d3627a75757ca7d9f5220a7defbb3206ae056cd1a99a1d431c8e8142c76a",
+    "text": "Эхо сокровищницы"
+  },
+  "content.card.mossguard-attack.name": {
+    "reviewed": true,
+    "source": "Rooted Stomp",
+    "sourceHash": "58a71c6afe1fbffdb6fbb5cc1189678eab4760159b4297d60728a357181ca80c",
+    "text": "Укоренённый удар"
   },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1847,11 +1901,23 @@
     "sourceHash": "c4b849224664d323217669333cca6d758c9350dce76a30d74e1a9e0fbf80d681",
     "text": "Нанести всем врагам {{value0}} урона типа «<keyword0>Оглушение</keyword0>»"
   },
+  "content.card.mossguard-guard.name": {
+    "reviewed": true,
+    "source": "Boulder Brace",
+    "sourceHash": "1a775acd3f23f0331669ded0a93e55851c40d1995bf120991fd7fc856e4d78d2",
+    "text": "Каменный упор"
+  },
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "b34e389db595affa373a250eee7e6cd5a6ad472f9ec76ae32ad806dabe48eadb",
     "text": "Получить {{value0}} <keyword0>блока</keyword0>"
+  },
+  "content.card.mossguard-heal.name": {
+    "reviewed": true,
+    "source": "Moss Renewal",
+    "sourceHash": "c6e11969a3f219514db194000e5fbc73449d891bd42dbc7d452487abd7de0599",
+    "text": "Обновление мха"
   },
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1859,11 +1925,23 @@
     "sourceHash": "034bb2cf5f6278ff24b3b9748f8a32852da0b93c65b482a542ba3cf541256bfd",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.card.neradora-bloom-shelter.name": {
+    "reviewed": true,
+    "source": "Bloom Shelter",
+    "sourceHash": "4077b6fd3f56eadb7d13db9b1746581fe69b895788b85b0a0467df5e296d5633",
+    "text": "Цветочное укрытие"
+  },
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "09a768e01ac9f08c2bd0dc3bc96988515f221e07d3f79c051326873c478ab00a",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "reviewed": true,
+    "source": "Tide Cup",
+    "sourceHash": "4dc70b47a804a4eceec48e2bee29d8048fbf422db59ab0f677012f5fd8a3bf94",
+    "text": "Чаша прилива"
   },
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1888,6 +1966,18 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "295f0b47d5252e9e1954b71e2f6c80dae537709a39280913498cc7b62e7425d5",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
+  "content.card.neradora-undertow-knot.name": {
+    "reviewed": true,
+    "source": "Undertow Knot",
+    "sourceHash": "768b9b379ec07d71005a3c358f140b052a3e0d20dfce8055c7e68efd33308cb2",
+    "text": "Узел отлива"
+  },
+  "content.card.oathara-never-lost.name": {
+    "reviewed": true,
+    "source": "Never Lost",
+    "sourceHash": "e10b49117211dbdfb44c321b0e5d8f83120431fa10f531479f0c5a3dcef8425d",
+    "text": "Никогда не теряется"
   },
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,

@@ -1793,6 +1793,12 @@
     "sourceHash": "e11a5988d8bcf263091206dd4fd2a4093497537d339e896e4500b59fdf4c7133",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0>; <keyword1>Consumir</keyword1>"
   },
+  "content.card.food-mana-berries.name": {
+    "reviewed": true,
+    "source": "Mana Berries",
+    "sourceHash": "99fb208536f39b9fad9f98638a0eed8bda32c6e528d1741c1fa7ad7a5ec28c71",
+    "text": "Bayas de Maná"
+  },
   "content.card.food-mana-berries.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
@@ -1805,11 +1811,29 @@
     "sourceHash": "00283c552e4951f001bc0989d0c75bc314021535a4715ee89bc1fe17d7ad8d46",
     "text": "Otorga {{value0}} de <keyword0>Bloqueo</keyword0> a todos los aliados; <keyword1>Consumir</keyword1>"
   },
+  "content.card.food-trail-bread.name": {
+    "reviewed": true,
+    "source": "Trail Bread",
+    "sourceHash": "6d13c0a487763c6d4505792d707f59eef8109efce6074264d7aaea2da530d871",
+    "text": "Pan de viaje"
+  },
   "content.card.food-trail-bread.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "4b95ac2346db8c9d0cc4c8ce4efb48cb65d4180e84696e5178fef4259a9c46d0",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>; <keyword1>Consumir</keyword1>"
+  },
+  "content.card.glintstride-attack.name": {
+    "reviewed": true,
+    "source": "Prism Shear",
+    "sourceHash": "2563fa1732d8b2463227a48003d3c0b02c09040bccc80288fb6676f8c384ff7e",
+    "text": "Corte prismático"
+  },
+  "content.card.glintstride-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Run",
+    "sourceHash": "389493eec0568a32939c33a08f3c82937b870beb5f627128b87662718c97c1df",
+    "text": "Carrera espejismo"
   },
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1823,6 +1847,18 @@
     "sourceHash": "b925f80bd3cf5ac2319a1ad0d52399a33a15da6f2a161cb1c7395e9023dcbb76",
     "text": "Obtienes {{value0}}% de <keyword0>Esquiva</keyword0> hasta tu próximo turno; Roba {{value1}} carta"
   },
+  "content.card.glintstride-teamBlind.name": {
+    "reviewed": true,
+    "source": "False Horizon",
+    "sourceHash": "e2517349990da06121d6cbfffc46b729858f10d09a33f7a7f1f218076b00b6ad",
+    "text": "Falso horizonte"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "reviewed": true,
+    "source": "Drowned Revelation",
+    "sourceHash": "2de637b842f8bdbe41e1202022b62f365e17b4a6279e6986c843eefe60a93f58",
+    "text": "Revelación sumergida"
+  },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1835,11 +1871,29 @@
     "sourceHash": "0c83ca78215a22d5ef9e634bb6b025e1c9c8073ebf27092da54e4a3a942d879e",
     "text": "Roba {{value0}} carta"
   },
+  "content.card.memento-lost-procession.name": {
+    "reviewed": true,
+    "source": "Lost Procession",
+    "sourceHash": "96bae0a351ec621a3b81c08b509a8e56bed3f3d84b27d1c3f3f81167eed90515",
+    "text": "Cortejo perdido"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "1fb986dfe3f8df5f285e9a572b67047b38985a2eb6959a0ab6a6ebb7b93babdb",
     "text": "Perla"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "reviewed": true,
+    "source": "Treasury Echo",
+    "sourceHash": "d2f4b14c715ba069d8ba8a254e02e82d99b21dde0d5cc7cbe3328809d3585a5f",
+    "text": "Eco del tesoro"
+  },
+  "content.card.mossguard-attack.name": {
+    "reviewed": true,
+    "source": "Rooted Stomp",
+    "sourceHash": "cbef7dab9a73632df9b39447b358b29cbf855ab1bcc51df96026f4cad7e7fb6e",
+    "text": "Pisotón arraigado"
   },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1847,11 +1901,23 @@
     "sourceHash": "d62749e34c9275cb4a80fae344bc7d5b4608f484635ef662d5f2423ebae32121",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0> a todos los enemigos"
   },
+  "content.card.mossguard-guard.name": {
+    "reviewed": true,
+    "source": "Boulder Brace",
+    "sourceHash": "a244f78ba470b3a54d2f47a32b02058cb4063a1745527d60031a233a83ceb93f",
+    "text": "Apoyo de roca"
+  },
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "23544b4e80e6db7b315f96c81e4a48dcc3dfe8d8218fcd8d8eec471c25d1b787",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
+  },
+  "content.card.mossguard-heal.name": {
+    "reviewed": true,
+    "source": "Moss Renewal",
+    "sourceHash": "e46713fc4b7ac31426579110b64a93c477d24ff7e1f67b205517982fd06e1c80",
+    "text": "Renovación de musgo"
   },
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1859,11 +1925,23 @@
     "sourceHash": "27fb80c4545a3d19736346b32bf1cda5c28211a5dacc767b83e2a6bbd2c80310",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
+  "content.card.neradora-bloom-shelter.name": {
+    "reviewed": true,
+    "source": "Bloom Shelter",
+    "sourceHash": "655536a7ebd1c37c44ea895daf9b0434ec5f71928cf855571d6a9d804e596bb6",
+    "text": "Refugio floral"
+  },
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "7d4903bde0383b23756e60c06042b7a7f87d3f0c906d12dfed098b9fc455eb46",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "reviewed": true,
+    "source": "Tide Cup",
+    "sourceHash": "39dcdc1786c382ad17ff7dfa992c2b03d2d01e23ec9d3fc13f515f7fde26039e",
+    "text": "Copa de marea"
   },
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1888,6 +1966,18 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "69dcc1239cf3b2670777ef5465eee01e2266166315b916a14f683aa8e0b36a2d",
     "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.neradora-undertow-knot.name": {
+    "reviewed": true,
+    "source": "Undertow Knot",
+    "sourceHash": "95a6b7d7fe39e73c05e77a4ad897fc937bfb28a495c7e750812f74fecc798fff",
+    "text": "Nudo de resaca"
+  },
+  "content.card.oathara-never-lost.name": {
+    "reviewed": true,
+    "source": "Never Lost",
+    "sourceHash": "7b8236d19d9537465a3a3fe8cc53b414e78c202b24252bbbaf2b151514975c93",
+    "text": "Nunca perdido"
   },
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,

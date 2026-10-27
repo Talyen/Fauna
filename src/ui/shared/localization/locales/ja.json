@@ -1793,6 +1793,12 @@
     "sourceHash": "38ca84d2884f1c96bb1bd3c2b7bb5c624d87b2749df7719c3564380a4565b06e",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復；<keyword1>消費</keyword1>"
   },
+  "content.card.food-mana-berries.name": {
+    "reviewed": true,
+    "source": "Mana Berries",
+    "sourceHash": "a8f918343c1924432d18801daedaaa6cf4d1fd210a9dbdd2375261f7d54628f6",
+    "text": "マナの木の実"
+  },
   "content.card.food-mana-berries.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>; <keyword1>Consume</keyword1>",
@@ -1805,11 +1811,29 @@
     "sourceHash": "5b33efd2d153be93f50985a12337eeac46e056e967411e21146c3a9635fbc6c8",
     "text": "味方全員に<keyword0>ブロック</keyword0>を{{value0}}付与；<keyword1>消費</keyword1>"
   },
+  "content.card.food-trail-bread.name": {
+    "reviewed": true,
+    "source": "Trail Bread",
+    "sourceHash": "745411bc050f598ece40f5ec3321389db91eefd78c633a2d1b94d2da0e56772a",
+    "text": "旅のパン"
+  },
   "content.card.food-trail-bread.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Consume</keyword1>",
     "sourceHash": "030720f4314043dc32b0f0e58acb79a354e69ee57257cfcd4315b1d60c36fea9",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；<keyword1>消費</keyword1>"
+  },
+  "content.card.glintstride-attack.name": {
+    "reviewed": true,
+    "source": "Prism Shear",
+    "sourceHash": "0ec89213fa6a30a9162145ed1396d76155fd609229af6662be3e054e06e1bb81",
+    "text": "プリズムの斬撃"
+  },
+  "content.card.glintstride-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Run",
+    "sourceHash": "a5fed0df9a3c09f35edd12d3b8525be500b30e79f02dea19a017da533a68b06f",
+    "text": "蜃気楼の走り"
   },
   "content.card.glintstride-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1823,6 +1847,18 @@
     "sourceHash": "8db9ef45bc36f7232b7e03585223667c948c4153a1cbe27130360703943c95d9",
     "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%獲得; カードを{{value1}}枚引く"
   },
+  "content.card.glintstride-teamBlind.name": {
+    "reviewed": true,
+    "source": "False Horizon",
+    "sourceHash": "efa83897763e94c850082d75e39bab9dd1239862a4819bff3531bf654137a264",
+    "text": "偽りの地平線"
+  },
+  "content.card.memento-drowned-revelation.name": {
+    "reviewed": true,
+    "source": "Drowned Revelation",
+    "sourceHash": "aca12b56828d2ae6e684d84100e6cc3dee488c9eea70ec2b1b8ce37979045e1f",
+    "text": "沈んだ啓示"
+  },
   "content.card.memento-drowned-revelation.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -1835,11 +1871,29 @@
     "sourceHash": "44ccb7c32cb99ed76494480881ffdd5276f0b9701ac8f5e4f06cea1e0f50ce43",
     "text": "カードを{{value0}}枚引く"
   },
+  "content.card.memento-lost-procession.name": {
+    "reviewed": true,
+    "source": "Lost Procession",
+    "sourceHash": "1c41840400b9d478d5bd43a28427dae3ad7608df2e4b6113f4ecf5f2036ef4af",
+    "text": "失われた行列"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "019e5829c808a7ca1ebea6419a1bb13150be52c291d363bbfc3527e9cebc49db",
     "text": "真珠"
+  },
+  "content.card.memento-treasury-echo.name": {
+    "reviewed": true,
+    "source": "Treasury Echo",
+    "sourceHash": "fcf71ee14fefb8bff124f6bc619b455b80b5ef25dd2e94f0fbe0eee54cfedf81",
+    "text": "宝物庫のエコー"
+  },
+  "content.card.mossguard-attack.name": {
+    "reviewed": true,
+    "source": "Rooted Stomp",
+    "sourceHash": "b4608fbdfb3a8dc2045566a167c89656c449da435cb7fb7dd6a767b71a9e8825",
+    "text": "根を張る踏撃"
   },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1847,11 +1901,23 @@
     "sourceHash": "f3fe52e6736ed42b25fa20062c112c92a027b82c980aac49aa2892b4e077ae7f",
     "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.mossguard-guard.name": {
+    "reviewed": true,
+    "source": "Boulder Brace",
+    "sourceHash": "a295a2ee24e2be40072f5c3710d2e7de22919ed03b80581646eaf573fc25829e",
+    "text": "大岩の構え"
+  },
   "content.card.mossguard-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "f0d71227cc30ffc55a28c2481b8906121cca63fa3a59b2aac2d9abd29b7002dc",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.mossguard-heal.name": {
+    "reviewed": true,
+    "source": "Moss Renewal",
+    "sourceHash": "e8a438e662e6410c88c4464faa4c866ec65dca70dcb9e856e8eaa1764e198927",
+    "text": "苔の再生"
   },
   "content.card.mossguard-heal.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -1859,11 +1925,23 @@
     "sourceHash": "0ab728abb65f93be6e4fb08204647909cf72261e142e134b31c2d84d783482e1",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.neradora-bloom-shelter.name": {
+    "reviewed": true,
+    "source": "Bloom Shelter",
+    "sourceHash": "f6c72a10a3c73378b78bdb8d81038fe617d029e40db8b3a45cb9ffb9d51c2885",
+    "text": "花の避難所"
+  },
   "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "53ea86f603adde373da0c8bfdd33ea041eca6cdd2971c22455306e93b4252232",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.neradora-tide-cup.name": {
+    "reviewed": true,
+    "source": "Tide Cup",
+    "sourceHash": "47b7831a2baf34cdb0cf15669ae162334ce8ee85011dd86c304a111c5eb6e5eb",
+    "text": "潮の杯"
   },
   "content.card.neradora-tide-cup.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -1888,6 +1966,18 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "cd2f758e08031abaa6db15161a0da8c20b48fce2d465504336b0842a87373739",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
+  "content.card.neradora-undertow-knot.name": {
+    "reviewed": true,
+    "source": "Undertow Knot",
+    "sourceHash": "b54c5191edb6e24ecb14c3d54da4970683cd6d815c2515e37ce375f6306587d1",
+    "text": "引き波の結び目"
+  },
+  "content.card.oathara-never-lost.name": {
+    "reviewed": true,
+    "source": "Never Lost",
+    "sourceHash": "1838b977e0fb051e88b0ff1ad8754dc947533f46672f04fa02d68e4b6f77cff6",
+    "text": "道を失わず"
   },
   "content.card.oathara-never-lost.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
