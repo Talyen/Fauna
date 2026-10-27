@@ -443,6 +443,12 @@
     "sourceHash": "54e635f9eacf2d1a7db8b188d6e63d6762ea6fa1f4511b3d5a3ec451f0987a6d",
     "text": "<keyword0>Мана</keyword0> может превышать максимум"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "3f5802d32c44c4b538e9f403f04557c7ad26f11458d64766a516f27a0719bbb4",
+    "text": "Урон от <keyword0>шипов</keyword0> добавляет столько же накопления <keyword1>оглушения</keyword1>"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -473,11 +479,23 @@
     "sourceHash": "7f50d1c08cf33491028f796133fce4c66f314985646207722eda5bb77e1fbdff",
     "text": "В начале боя возьмите {{value0}} дополнительную карту"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "3181b8273645028a797e80ce289aeb02af4aa4817a051beafbbe84ea9c583c57",
+    "text": "<keyword0>Лечение</keyword0> снимает равное количество накопленной <keyword1>заморозки</keyword1>"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "b0890f6fdeaf37521864d749af5b59a14e7f308777f0cd337fdbfb0d92a9cfda",
     "text": "Громовой камень"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "184a897bd6081cc742d82558690bd5f4e379670e37373b351fd45e990e032d96",
+    "text": "Накопления <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> у врагов объединяются"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,
@@ -3119,11 +3137,23 @@
     "sourceHash": "e58c7bb6c0e758e2ec60952833801161ff31422b980f18ee30228b4e81c781b1",
     "text": "Благословенный вампиризм"
   },
+  "content.talent.light.blessed-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage: <keyword1>Leech</keyword1> below half <keyword2>Health</keyword2>",
+    "sourceHash": "762ab63e7bf91dd8d0b3b505601733d793920171521c78f34b693b9497f5e7f3",
+    "text": "Урон типа «<keyword0>Свет</keyword0>»: <keyword1>вампиризм</keyword1>, пока ваше <keyword2>здоровье</keyword2> ниже половины"
+  },
   "content.talent.light.celestial-ward.name": {
     "reviewed": true,
     "source": "Celestial Ward",
     "sourceHash": "42124c3e5cdcd3b1ebb851a1ee5d5d37e7cec4485ed8fe060ee8ca14234f6048",
     "text": "Небесный оберег"
+  },
+  "content.talent.light.celestial-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Light</keyword0> damage",
+    "sourceHash": "6fc17c971657368398f4b205863b78e2c161d05f991f44bc95da7c0378ba2b43",
+    "text": "Получаемый урон типа «<keyword0>Свет</keyword0>» уменьшается вдвое"
   },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
@@ -3131,11 +3161,23 @@
     "sourceHash": "ff1bdd6dc9240e95893039da7d65a2332d32b407130a8e64ad40f9869db70129",
     "text": "Божественная милость"
   },
+  "content.talent.light.divine-favor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>cleanse</keyword0> a harmful status effect, your next <keyword1>Light</keyword1> card is free",
+    "sourceHash": "f1179e361aa78c119136f9001a3e7d625184f6eeeef5cae43af0574e6d9b96bc",
+    "text": "Когда вы <keyword0>очищаете</keyword0> вредный эффект состояния, ваша следующая карта типа «<keyword1>Свет</keyword1>» бесплатна"
+  },
   "content.talent.light.faith-barrier.name": {
     "reviewed": true,
     "source": "Faith Barrier",
     "sourceHash": "7a6e1f3bb51720452b41f8d5a1a79c2bed6c48b45b17f5dbf1f8ea302ff24e3d",
     "text": "Барьер веры"
+  },
+  "content.talent.light.faith-barrier.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to grant <keyword1>Block</keyword1> equal to enemy <keyword2>Health</keyword2> lost",
+    "sourceHash": "48ff5f4dd066ad066dc47e2d9093a1103754f85ce51143c254de98c36a6037e8",
+    "text": "Попадания типа «<keyword0>Свет</keyword0>» с вероятностью {{value0}}% дают <keyword1>блок</keyword1>, равный потерянному врагом <keyword2>здоровью</keyword2>"
   },
   "content.talent.light.prosperity.name": {
     "reviewed": true,
@@ -3143,11 +3185,23 @@
     "sourceHash": "5ef05ccdb4f6366c2a9cc5a8cd5b8feb8eb96d61feb9e49cda047b9469542d78",
     "text": "Процветание"
   },
+  "content.talent.light.prosperity.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your Gold",
+    "sourceHash": "85a03dc4631a72792ffb4dcba3d98b07a7cb4b46e8dd5f6471dbb2385169bcce",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» увеличивается на {{value0}}% вашего золота"
+  },
   "content.talent.light.purge.name": {
     "reviewed": true,
     "source": "Searing Light",
     "sourceHash": "b31c2eb46446929a402b259f0afb2d8187cefd11642bdf987a3e34998b0f8864",
     "text": "Сжигающий свет"
+  },
+  "content.talent.light.purge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "a922ff8b9272a7f7481feb10c30a9e9b352d500f438ba2b76a134d1dab1f8c77",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» против <keyword1>горящих</keyword1> врагов увеличивается на {{value0}}%"
   },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
@@ -3155,17 +3209,35 @@
     "sourceHash": "12922685e9b5c1ddeb4ee38e28f085e2cb8eab8b1097165ea2960536026ab664",
     "text": "Сияющая защита"
   },
+  "content.talent.light.radiant-guard.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Block</keyword0> has a {{value0}}% chance to draw a <keyword1>Light</keyword1> card",
+    "sourceHash": "d82179b22b48eb3443d351236642f971696d41eea1e557dd996daa6cf963bc8b",
+    "text": "Получение <keyword0>блока</keyword0> с вероятностью {{value0}}% позволяет взять карту типа «<keyword1>Свет</keyword1>»"
+  },
   "content.talent.light.scorching-light.name": {
     "reviewed": true,
     "source": "Scorching Light",
     "sourceHash": "aec9e5f8db3391146f8268fd250cea0f9e76f649e3ad3f7a8198d5b2c4e93e24",
     "text": "Палящий свет"
   },
+  "content.talent.light.scorching-light.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Burn</keyword1> damage",
+    "sourceHash": "b81b3d21be877fc0c7e68b6a0085e1817b1f723102453818dd3d619ef95e74f7",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» с вероятностью {{value0}}% также наносит урон от <keyword1>горения</keyword1>"
+  },
   "content.talent.light.tithe.name": {
     "reviewed": true,
     "source": "Tithe",
     "sourceHash": "bc7cb74fd507ed8609481c746ccc1e1bcb1411fb78e305735e94ca7eb436432b",
     "text": "Десятина"
+  },
+  "content.talent.light.tithe.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "30b5176c3532a4b0b5b9c35241d1abb8bfec2646ae349ce2bf1ba5efc7dc9303",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» с вероятностью {{value0}}% даёт золото в размере потерянного врагом <keyword1>здоровья</keyword1>"
   },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,

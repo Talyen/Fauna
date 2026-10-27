@@ -443,6 +443,12 @@
     "sourceHash": "5e3a9f81ddb24c9da2740591acce7ad2a14ddf8c0b5daad3b5102fed46589d08",
     "text": "El <keyword0>Maná</keyword0> puede superar su máximo"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "3117a764799a9270dac61f824dbc262776680e9338d3c6e87f2f17af0304bc4f",
+    "text": "El daño de <keyword0>Espinas</keyword0> añade la misma cantidad de acumulación de <keyword1>Aturdimiento</keyword1>"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -473,11 +479,23 @@
     "sourceHash": "d98b6f11da2ec68522e0f6230e0eefa92995f76b199a56a07e2c90a86107a8b8",
     "text": "Roba {{value0}} carta adicional al comienzo del combate"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "13bd41c09df28ff87aad8ce3f51181a5331219c17120cf2d5403646d5fcd252a",
+    "text": "La <keyword0>curación</keyword0> elimina la misma cantidad de acumulación de <keyword1>Congelación</keyword1>"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "dc463ecee47bb2c8f9da819d6894e75cd86226dc7779ca5cc1a18f8a374b4a73",
     "text": "Piedra del trueno"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "2cbcc737fa978451fa9794fce815393cd0d0474f3bee95bab1f73489a5d42622",
+    "text": "Las acumulaciones de <keyword0>Aturdimiento</keyword0> y <keyword1>Congelación</keyword1> se combinan en los enemigos"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,
@@ -3119,11 +3137,23 @@
     "sourceHash": "ac04c50e0c483bf0047c097f34b494d905ec62f31637bb2943f624f844dabdb1",
     "text": "Drenaje bendito"
   },
+  "content.talent.light.blessed-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage: <keyword1>Leech</keyword1> below half <keyword2>Health</keyword2>",
+    "sourceHash": "a3a41fe8a5e7a8cb5eaea8cbcc605e2c0d7050e0ce89ff34cfbbc32357f33948",
+    "text": "Daño de <keyword0>Luz</keyword0>: <keyword1>Drenaje</keyword1> por debajo de la mitad de tu <keyword2>Salud</keyword2>"
+  },
   "content.talent.light.celestial-ward.name": {
     "reviewed": true,
     "source": "Celestial Ward",
     "sourceHash": "29f6cef53ea5462557f2fff139f754ac8377d02e8d3dd83bc6979d30d9feafa2",
     "text": "Resguardo celestial"
+  },
+  "content.talent.light.celestial-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Light</keyword0> damage",
+    "sourceHash": "ceea27f3429f434c9008f0d155e3aabec4762de009a569d5bcafe873cc2c5049",
+    "text": "Recibes la mitad de daño de <keyword0>Luz</keyword0>"
   },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
@@ -3131,11 +3161,23 @@
     "sourceHash": "8b315761a82787af83c599764b1cc7665fb4bf10723d115a4582397f08f8ca0a",
     "text": "Favor divino"
   },
+  "content.talent.light.divine-favor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>cleanse</keyword0> a harmful status effect, your next <keyword1>Light</keyword1> card is free",
+    "sourceHash": "a6e9ddcb487a5960f9d4be43e72b78be235e00f23df77cc49fabf17a85381daf",
+    "text": "Cuando <keyword0>purificas</keyword0> un efecto de estado perjudicial, tu siguiente carta de <keyword1>Luz</keyword1> es gratis"
+  },
   "content.talent.light.faith-barrier.name": {
     "reviewed": true,
     "source": "Faith Barrier",
     "sourceHash": "405971fc82950d6b82a3f809dbc55adfdc6af48cd6cd0be17c5bf4749fe9febb",
     "text": "Barrera de fe"
+  },
+  "content.talent.light.faith-barrier.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to grant <keyword1>Block</keyword1> equal to enemy <keyword2>Health</keyword2> lost",
+    "sourceHash": "1724c720c87c9ad164f1dd4bd0da2b87ecd7b44a2fc4649f0c3f9596fa5cb617",
+    "text": "Los impactos de <keyword0>Luz</keyword0> tienen un {{value0}}% de probabilidad de otorgar <keyword1>Bloqueo</keyword1> igual a la <keyword2>Salud</keyword2> perdida por el enemigo"
   },
   "content.talent.light.prosperity.name": {
     "reviewed": true,
@@ -3143,11 +3185,23 @@
     "sourceHash": "c44f71093cc710f09a05231b7a7a9c81d2383e77854ca205fa1909e787595182",
     "text": "Prosperidad"
   },
+  "content.talent.light.prosperity.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your Gold",
+    "sourceHash": "1670f1162be38e7a5c0e823010ee14b7a2a76991e300c1d9a519b93ed2c80931",
+    "text": "El daño de <keyword0>Luz</keyword0> aumenta en un {{value0}}% de tu Oro"
+  },
   "content.talent.light.purge.name": {
     "reviewed": true,
     "source": "Searing Light",
     "sourceHash": "3075124eebd1ebe302499fd17865586eca3d61e3f5853d6b67606b91acfdb5db",
     "text": "Luz fulgurante"
+  },
+  "content.talent.light.purge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "2ade24370b5686e38c5ca47ac449cfdc7e8287a6685f7a755513d5ab4a593f3a",
+    "text": "El daño de <keyword0>Luz</keyword0> aumenta un {{value0}}% contra enemigos con <keyword1>Quemadura</keyword1>"
   },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
@@ -3155,17 +3209,35 @@
     "sourceHash": "c672dd54c8b5e13dafd836ca7097481e0476fd91fae92441afa75d93d4adb8d4",
     "text": "Guardia radiante"
   },
+  "content.talent.light.radiant-guard.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Block</keyword0> has a {{value0}}% chance to draw a <keyword1>Light</keyword1> card",
+    "sourceHash": "b667bebbb5278b29737fdc12760631ec3c0b69382f9aaa5bcb68b381d9547303",
+    "text": "Obtener <keyword0>Bloqueo</keyword0> tiene un {{value0}}% de probabilidad de robar una carta de <keyword1>Luz</keyword1>"
+  },
   "content.talent.light.scorching-light.name": {
     "reviewed": true,
     "source": "Scorching Light",
     "sourceHash": "706725b026e9b9454c5cb9cf3c5a80b608250264ad7f84723249eb6ab2ce7b39",
     "text": "Luz abrasadora"
   },
+  "content.talent.light.scorching-light.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Burn</keyword1> damage",
+    "sourceHash": "0b9b1dbcebad2cf3f0c141bc108b39d5bef0079d49a76201909f242ec55534a4",
+    "text": "El daño de <keyword0>Luz</keyword0> tiene un {{value0}}% de probabilidad de infligir también daño de <keyword1>Quemadura</keyword1>"
+  },
   "content.talent.light.tithe.name": {
     "reviewed": true,
     "source": "Tithe",
     "sourceHash": "6e9a7cd762302c6a1c1fc5d14b3a1e960be5cbc8c43fe904fb2ba59940b8e0ea",
     "text": "Diezmo"
+  },
+  "content.talent.light.tithe.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "4a69c95336d3951ecabd4d44e181479c73787e838e9bf245cdeb02987d97fd63",
+    "text": "El daño de <keyword0>Luz</keyword0> tiene un {{value0}}% de probabilidad de otorgar Oro igual a la <keyword1>Salud</keyword1> perdida por el enemigo"
   },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
