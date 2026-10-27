@@ -3251,6 +3251,12 @@
     "sourceHash": "8873757c391ed0fea6ff677fa6dcb46f44b9a2031514f7fd489021e143ce37f9",
     "text": "{{name}}は{{type}}ダメージを{{amount}}受けた。"
   },
+  "log.dodge": {
+    "reviewed": true,
+    "source": "{{name}} Dodges.",
+    "sourceHash": "2f8e9f0ca3e8f23e003925b76f37908419d4b17e8fa0e7a4a2c91a97ce46dac8",
+    "text": "{{name}}が回避した。"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
@@ -3292,6 +3298,12 @@
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "762f4ff8e996ed0a7c533de2d8cc77e1a6790c638e36cc0e240458396edc3eba",
     "text": "{{name}}は体力を{{amount}}回復した。"
+  },
+  "log.intercept": {
+    "reviewed": true,
+    "source": "{{actor}} intercepts the attack against {{target}}",
+    "sourceHash": "fbbc8ca027f26d39594abaee7277d2331519dd26e99a26dedd28f05a937df355",
+    "text": "{{actor}}が{{target}}への攻撃をかばった"
   },
   "log.journeyBegins": {
     "reviewed": true,

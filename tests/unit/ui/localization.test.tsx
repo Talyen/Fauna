@@ -155,6 +155,38 @@ it("translates recognized combat announcements and preserves unfamiliar event te
   expect(eventPresentation(game, damage, createMessageReader("en", {}))).toBe(damage.text);
 });
 
+it("localizes Dodge and interception announcements without rewriting unrelated events", () => {
+  const game = run();
+  const actor = game.team[0]!;
+  const target = game.team[1]!;
+  const actorName = species(actor.species).name;
+  const targetName = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: actorName, text: "Protecteur" },
+    [`content.species.${target.species}.name`]: { source: targetName, text: "Allié" },
+  });
+  const dodge = {
+    kind: "status" as const,
+    status: "dodge" as const,
+    outcome: "dodge" as const,
+    targetId: target.id,
+    text: `${targetName} Dodges.`,
+  };
+  const intercept = {
+    kind: "action" as const,
+    actionType: "support" as const,
+    actorId: actor.id,
+    targetId: target.id,
+    text: `${actorName} intercepts the attack against ${targetName}`,
+  };
+  expect(eventPresentation(game, dodge, reader)).toBe("Allié esquive.");
+  expect(eventPresentation(game, intercept, reader)).toBe("Protecteur intercepte l’attaque contre Allié");
+  expect(eventPresentation(game, { ...intercept, actorId: "missing" }, reader)).toBe(intercept.text);
+  expect(eventPresentation(game, { ...dodge, text: "Another event" }, reader)).toBe("Another event");
+  expect(eventPresentation(game, intercept, createMessageReader("en", {}))).toBe(intercept.text);
+});
+
 it("localizes an authored ability and Food announcement without guessing unknown cards", () => {
   const game = run();
   const actor = game.team[0]!;

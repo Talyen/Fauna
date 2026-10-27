@@ -3251,6 +3251,12 @@
     "sourceHash": "da6c95129aad832f1304cdea2a66dfea570dfb2f84240e6d01dd0b3fed8a72cb",
     "text": "{{name}} erleidet {{amount}} {{type}}-Schaden."
   },
+  "log.dodge": {
+    "reviewed": true,
+    "source": "{{name}} Dodges.",
+    "sourceHash": "67b6adf57ff5771399c0329788cf220fc6cf900d8c41e056e4c3baa104228eea",
+    "text": "{{name}} weicht aus."
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
@@ -3292,6 +3298,12 @@
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "903677f2738c2cc07f4f66009dbf29404380bfc269c9e14b17bf17b8d581ee4d",
     "text": "{{name}} stellt {{amount}} Gesundheit wieder her."
+  },
+  "log.intercept": {
+    "reviewed": true,
+    "source": "{{actor}} intercepts the attack against {{target}}",
+    "sourceHash": "fdd09aa5f8b5016dcceb43876e5f586c65534b5b809e9755ce0ecfe1c6f4f48f",
+    "text": "{{actor}} fängt den Angriff auf {{target}} ab"
   },
   "log.journeyBegins": {
     "reviewed": true,

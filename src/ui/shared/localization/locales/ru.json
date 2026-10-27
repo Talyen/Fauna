@@ -3251,6 +3251,12 @@
     "sourceHash": "747bb82af0b37241507089fdd86d545ec5a7ee4cd0314a1d0ac46fcee9b340db",
     "text": "{{name}} получает {{amount}} ед. урона ({{type}})."
   },
+  "log.dodge": {
+    "reviewed": true,
+    "source": "{{name}} Dodges.",
+    "sourceHash": "1ece2134f0a9309bec390a52609d01db2c5802313fb3680e0143c0bf3d5c5e87",
+    "text": "{{name}} уклоняется."
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
@@ -3292,6 +3298,12 @@
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "52026a959f0c750f99ef440cae18d653b76c82d5733d396fb0ed60db733cd47e",
     "text": "{{name}} восстанавливает здоровье: {{amount}}."
+  },
+  "log.intercept": {
+    "reviewed": true,
+    "source": "{{actor}} intercepts the attack against {{target}}",
+    "sourceHash": "f72695f7c4efeb02f44a9fcea59f284e6986abf4c18a034fa8c621a887ca56bb",
+    "text": "{{actor}} перехватывает атаку, направленную на {{target}}"
   },
   "log.journeyBegins": {
     "reviewed": true,

@@ -77,6 +77,21 @@ export function eventPresentation(
   const englishName = unitName(target);
   const name = localizedCombatantName(target, i18n);
   const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
+  if (event.kind === "action" && event.actionType === "support") {
+    const actor = combatantById(game, event.actorId);
+    if (actor && event.text === `${unitName(actor)} intercepts the attack against ${englishName}`)
+      return i18n.message("log.intercept", "{{actor}} intercepts the attack against {{target}}", {
+        actor: localizedCombatantName(actor, i18n),
+        target: name,
+      });
+  }
+  if (
+    event.kind === "status" &&
+    event.status === "dodge" &&
+    event.outcome === "dodge" &&
+    event.text === `${englishName} Dodges.`
+  )
+    return i18n.message("log.dodge", "{{name}} Dodges.", { name });
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status" && event.outcome === "remove") {

@@ -3251,6 +3251,12 @@
     "sourceHash": "ab57890cb6b9c89b5d6c9277e191217d221f3848c65a8be3a16ffb80181a1234",
     "text": "{{name}}受到了{{amount}}点{{type}}伤害。"
   },
+  "log.dodge": {
+    "reviewed": true,
+    "source": "{{name}} Dodges.",
+    "sourceHash": "dc6472ad5e8ee5c1a223188bb2a93a210ed933726f7e89f8303d1d6e794353b5",
+    "text": "{{name}}闪避了。"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
@@ -3292,6 +3298,12 @@
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "774a6f04bf39a8f4dc5d5fac1888879906000164d8e6ff6e508b69cce62118ab",
     "text": "{{name}}恢复了{{amount}}点生命。"
+  },
+  "log.intercept": {
+    "reviewed": true,
+    "source": "{{actor}} intercepts the attack against {{target}}",
+    "sourceHash": "6bc03ef48c82fe849646c2b6a5c627924670a4e077ece7f5841d3b1d8d74b8ab",
+    "text": "{{actor}}拦截了对{{target}}的攻击"
   },
   "log.journeyBegins": {
     "reviewed": true,
