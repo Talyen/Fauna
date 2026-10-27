@@ -156,8 +156,6 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   const all = [...state.team, ...state.reserves];
   const previous = state.cards;
   const departing = new Set(state.team.filter((unit) => !ids.includes(unit.id)).map((unit) => unit.id));
-  if (fromCard)
-    for (const unit of state.team) if (departing.has(unit.id)) cleanseDeparture(state, unit, events);
   state.team = ids.map((id) => all.find((unit) => unit.id === id)!);
   state.reserves = all.filter((unit) => !ids.includes(unit.id));
   const retained = previous.filter((card) => card.ownerId === null || ids.includes(card.ownerId));
@@ -249,18 +247,17 @@ export function swapBackup(
   const incoming = state.reserves[backupIndex]!;
   const previous = [...state.team];
   if (!outgoing || species(incoming.species).legendary || species(outgoing.species).legendary) {
-    setFormation(
-      state,
-      formationForSwap(
-        [...state.team, ...state.reserves],
-        state.team.map((unit) => unit.id),
-        activeId,
-        backupId,
-      ),
-      events,
-      fromCard,
+    const formation = formationForSwap(
+      [...state.team, ...state.reserves],
+      state.team.map((unit) => unit.id),
+      activeId,
+      backupId,
     );
+    if (fromCard)
+      for (const unit of state.team) if (!formation.includes(unit.id)) cleanseDeparture(state, unit, events);
+    setFormation(state, formation, events, fromCard);
   } else {
+    if (fromCard) cleanseDeparture(state, outgoing, events);
     state.team[index] = incoming;
     state.reserves[backupIndex] = outgoing;
     const removed = new Set(
@@ -295,7 +292,6 @@ export function swapBackup(
     });
   }
   if (fromCard && outgoing) {
-    cleanseDeparture(state, outgoing, events);
     matchSwapBlock(state, outgoing, incoming, events);
     rookOfMercy(
       state,
