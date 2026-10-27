@@ -3,7 +3,7 @@ import { cardTargeting } from "./card-rules";
 import { definition, species, type CardDefinition } from "./content";
 import { cardCost } from "./ability-rules";
 import { controlled, maximumHealth } from "./combat/state";
-import { battlefield } from "./battlefield";
+import { battlefield, findLivingBattlefield } from "./battlefield";
 import { pendingReplacement } from "./team";
 import { hasDiscardDrawCard } from "./card-zones";
 import type { BattleState, Card, Creature, Enemy, Command } from "./types";
@@ -35,7 +35,10 @@ function hasChosenRecipient(state: BattleState, def: CardDefinition) {
       state.team.some((unit) => recipientEligible(unit, def)) ||
       state.reserves.some((unit) => recipientEligible(unit, def))
     );
-  return recipientPool(state, def, mode).some((unit) => recipientEligible(unit, def));
+  if (def.effect === "swapChosen") return state.reserves.some((unit) => recipientEligible(unit, def));
+  return !!findLivingBattlefield(state, mode === "enemy" ? "enemy" : "player", (unit) =>
+    recipientEligible(unit, def),
+  );
 }
 
 export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
@@ -46,9 +49,13 @@ export function playTargetError(state: BattleState, def: CardDefinition, actorId
       !(def.effect === "resurrect"
         ? state.team.some((unit) => unit.id === targetId && recipientEligible(unit, def)) ||
           state.reserves.some((unit) => unit.id === targetId && recipientEligible(unit, def))
-        : recipientPool(state, def, mode).some(
-            (unit) => unit.id === targetId && recipientEligible(unit, def),
-          )))
+        : def.effect === "swapChosen"
+          ? state.reserves.some((unit) => unit.id === targetId && recipientEligible(unit, def))
+          : findLivingBattlefield(
+              state,
+              mode === "enemy" ? "enemy" : "player",
+              (unit) => unit.id === targetId && recipientEligible(unit, def),
+            )))
   )
     return def.effect === "swapChosen"
       ? "Choose a living backup."

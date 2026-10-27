@@ -9,7 +9,13 @@ import { receiveCard } from "../card-zones";
 import { roll } from "../random";
 import { passiveAmount } from "../progression";
 import { gainMana, grantArmor, grantBlock, restoreHealth, grantTemporaryDodge } from "./index";
-import { battlefield, livingBattlefield, healingAllies, isDepartedMinion } from "../battlefield";
+import {
+  findLivingBattlefield,
+  battlefield,
+  livingBattlefield,
+  healingAllies,
+  isDepartedMinion,
+} from "../battlefield";
 import type { BattleState, Creature, GameEvent } from "../types";
 
 export function createFood(
@@ -61,7 +67,7 @@ export function useFood(
   const recipient =
     targetId === undefined
       ? undefined
-      : battlefield(state, "player").find((unit) => unit.id === targetId && unit.health > 0);
+      : findLivingBattlefield(state, "player", (unit) => unit.id === targetId);
   const presenter = recipient ?? state.team.find((unit) => unit.health > 0)!;
   events.push({
     kind: "action",

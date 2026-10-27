@@ -1,5 +1,10 @@
 import { expect, it } from "vitest";
-import { battlefield, battlefieldHasId, livingBattlefield } from "../../../src/game/battlefield";
+import {
+  battlefield,
+  battlefieldHasId,
+  findLivingBattlefield,
+  livingBattlefield,
+} from "../../../src/game/battlefield";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { requireBattle, teamRun } from "../../support/game";
 
@@ -64,6 +69,35 @@ it("matches battlefield membership as summon owners fall or leave", () => {
           battlefield(state, side).some((unit) => unit.id === id),
         );
   };
+  check();
+  owner.health = 0;
+  enemy.health = 0;
+  check();
+  state.reserves.push(state.team.shift()!);
+  check();
+});
+
+it("finds living participants in battlefield order as summons and owners change", () => {
+  const state = structuredClone(requireBattle(teamRun(42, ["memento", "mossguard"])));
+  const owner = state.team[0]!;
+  const enemy = state.battle.enemies[0]!;
+  summonEcho(state, owner, "player", 6, []);
+  summonEcho(state, enemy, "enemy", 6, []);
+  const ids = [...state.team, ...state.battle.enemies, ...state.battle.minions!].map((unit) => unit.id);
+  ids.push("missing");
+  const check = () => {
+    for (const side of ["player", "enemy"] as const) {
+      const row = battlefield(state, side);
+      expect(livingBattlefield(state, side)).toEqual(row.filter((unit) => unit.health > 0));
+      expect(findLivingBattlefield(state, side)).toBe(row.find((unit) => unit.health > 0));
+      for (const id of ids)
+        expect(findLivingBattlefield(state, side, (unit) => unit.id === id)).toBe(
+          row.find((unit) => unit.health > 0 && unit.id === id),
+        );
+    }
+  };
+  check();
+  state.battle.minions![0]!.health = 0;
   check();
   owner.health = 0;
   enemy.health = 0;

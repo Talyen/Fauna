@@ -141,14 +141,13 @@ export function executePrimary(context: PrimaryContext) {
       return;
     }
     case "heal": {
-      const allies = healingAllies(state, action.side);
       const targets =
         def.target === "allAllies"
-          ? alive(allies)
+          ? healingAllies(state, action.side)
           : cardTargeting(def) === "self"
             ? [actor]
             : def.target === "mostInjured"
-              ? [mostInjured(allies)!]
+              ? [mostInjured(healingAllies(state, action.side))!]
               : friendlyRow(state, action).filter(
                   (unit) => unit.id === action.allyTargetId && unit.health > 0,
                 );
@@ -171,8 +170,10 @@ export function executePrimary(context: PrimaryContext) {
       });
       return;
     case "resurrect": {
-      const recipients = enemy ? state.battle.enemies : [...state.team, ...state.reserves];
-      const recipient = recipients.find((unit) => unit.id === action.allyTargetId && unit.health === 0);
+      const matches = (unit: Combatant) => unit.id === action.allyTargetId && unit.health === 0;
+      const recipient = enemy
+        ? state.battle.enemies.find(matches)
+        : (state.team.find(matches) ?? state.reserves.find(matches));
       if (recipient) resurrect(recipient, actor, events);
       return;
     }

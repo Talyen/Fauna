@@ -56,15 +56,57 @@ export function battlefieldHasId(state: GameState, side: "player" | "enemy", id:
   );
 }
 
+/** Find a living participant in battlefield order without creating a row snapshot.
+ * The predicate must not change battlefield membership or health.
+ */
+export function findLivingBattlefield(
+  state: GameState,
+  side: "enemy",
+  predicate?: (unit: Enemy) => boolean,
+): Enemy | undefined;
+export function findLivingBattlefield(
+  state: GameState,
+  side: "player" | "enemy",
+  predicate?: (unit: Creature | Enemy) => boolean,
+): Creature | Enemy | undefined;
+export function findLivingBattlefield(
+  state: GameState,
+  side: "player" | "enemy",
+  predicate?: (unit: Creature | Enemy) => boolean,
+): Creature | Enemy | undefined {
+  const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
+  for (const unit of row) if (unit.health > 0 && (!predicate || predicate(unit))) return unit;
+  for (const unit of state.battle?.minions ?? [])
+    if (
+      unit.minion.side === side &&
+      row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId) &&
+      unit.health > 0 &&
+      (!predicate || predicate(unit))
+    )
+      return unit;
+  return undefined;
+}
+
 /** A fresh, ordered snapshot of living battlefield participants. */
 export function livingBattlefield(state: GameState, side: "enemy"): Enemy[];
 export function livingBattlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[];
 export function livingBattlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[] {
-  const row = battlefield(state, side);
-  let next = 0;
-  for (const unit of row) if (unit.health > 0) row[next++] = unit;
-  row.length = next;
-  return row;
+  const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
+  const living: (Creature | Enemy)[] = [];
+  for (const unit of row) if (unit.health > 0) living.push(unit);
+  const minions = state.battle?.minions;
+  if (!minions?.length) return living;
+  let owners: Set<string> | undefined;
+  for (const unit of minions) {
+    if (unit.minion.side !== side || unit.health <= 0) continue;
+    if (minions.length === 1) {
+      if (row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)) living.push(unit);
+    } else {
+      if (!owners) owners = new Set(living.map((owner) => owner.id));
+      if (owners.has(unit.minion.ownerId)) living.push(unit);
+    }
+  }
+  return living;
 }
 
 /** Stored summon receipts become inert immediately when their owner leaves or falls. */

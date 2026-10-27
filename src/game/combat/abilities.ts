@@ -1,3 +1,4 @@
+import { findLivingBattlefield } from "../battlefield";
 import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability-modifiers";
 import { takeCardRepeat } from "./card-repeat";
 import { executePrimary } from "./ability-handlers";
@@ -21,17 +22,17 @@ export function executeAbility(
   const { actor, def } = action;
   const grantedRepeat = takeCardRepeat(state, action.side);
   const enemy = action.side === "enemy";
-  const opponents =
-    (def.effect === "attack" && def.target === "randomEnemy") || action.targetId !== undefined
-      ? alive(opposingRow(state, action))
-      : [];
+  const randomTarget = def.effect === "attack" && def.target === "randomEnemy";
+  const opponents = randomTarget ? alive(opposingRow(state, action)) : undefined;
   // Keep the selected target across repeats unless Tangram must continue after a defeat.
   let target =
-    def.effect === "attack" && def.target === "randomEnemy"
+    opponents !== undefined
       ? opponents[Math.floor(roll(state, { kind: "index", size: opponents.length }) * opponents.length)]
       : def.effect === "attack" && def.target === "allEnemies"
         ? undefined
-        : opponents.find((unit) => unit.id === action.targetId);
+        : action.targetId === undefined
+          ? undefined
+          : findLivingBattlefield(state, enemy ? "player" : "enemy", (unit) => unit.id === action.targetId);
   const name = enemy ? action.actor.name : species(actor.species).name;
   events.push({
     kind: "action",
@@ -68,12 +69,12 @@ export function executeAbility(
       target.health <= 0 &&
       state.boons.includes("dream-tangram")
     )
-      target = alive(opposingRow(state, action))[0];
+      target = findLivingBattlefield(state, enemy ? "player" : "enemy");
     if (
       actor.health <= 0 ||
       (def.effect === "attack" &&
         (def.target === "allEnemies"
-          ? !opposingRow(state, action).some((unit) => unit.health > 0)
+          ? !findLivingBattlefield(state, enemy ? "player" : "enemy")
           : !target || target.health <= 0))
     )
       break;
