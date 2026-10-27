@@ -3341,6 +3341,12 @@
     "sourceHash": "d8a3461f51b089a62b7198b16ef483e4730d28460d328b1024f402c115f09fbc",
     "text": "Attaque"
   },
+  "content.glossary.backup.definition.rule": {
+    "reviewed": true,
+    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
+    "sourceHash": "007595fcc1338575f0ead8202e9407c16e7c120df74aab81b6c20198fe43115e",
+    "text": "Recrutez jusqu’à cinq créatures : jusqu’à trois créatures ordinaires ou une Légendaire déployées; Seules les créatures vivantes déployées fournissent leurs passifs; Après un K.-O., choisissez une réserve vivante avant de continuer; Les remplacements conservent les emplacements de cartes sans pioche supplémentaire ni bonus d’ouverture; Les autres permutations exigent des capacités ou des effets de jeu"
+  },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
     "source": "Backup",
@@ -3682,6 +3688,12 @@
     "source": "Starting lineup",
     "sourceHash": "fb7807fe8748b57eadfc3ee8dd4e6e8051184e8e1640f2d426eef80ae2d1c650",
     "text": "Formation initiale"
+  },
+  "content.glossary.swap-cards.definition.rule": {
+    "reviewed": true,
+    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
+    "sourceHash": "8e8259e51a309f9c171a36b4f5e7a57881568d2278d6cca64025b0fc43eea25c",
+    "text": "Permute avec une réserve vivante aléatoire; Retire les cartes de la créature sortante de la main et de toutes les piles, puis mélange les cartes de la créature entrante dans la pioche avant toute nouvelle pioche; Sans réserve vivante, échange les positions avec un allié vivant aléatoire; Si la créature est seule, la partie permutation reste sans effet; Passage sûr permute à la place l’allié ayant le moins de <keyword0>Santé</keyword0> et exige une réserve vivante; La <keyword1>Santé</keyword1> et les effets persistent"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,

@@ -3341,6 +3341,12 @@
     "sourceHash": "333e5d544afb16b1c7a1dd69e3e9e3878f66b07e1b499395e7627551d29bb421",
     "text": "攻击"
   },
+  "content.glossary.backup.definition.rule": {
+    "reviewed": true,
+    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
+    "sourceHash": "b63db044ba57afb31429d9096b688b4a4632dcf019ae433493c163c58df2a248",
+    "text": "最多招募五个生物：最多派出三个普通生物或一个传奇生物; 只有派出且存活的生物提供被动效果; 生物被击倒后，继续前须选择一个存活的后备生物; 替换保留卡牌槽位，不提供额外抽牌或开场加成; 其他换人需要技能或游戏效果"
+  },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
     "source": "Backup",
@@ -3682,6 +3688,12 @@
     "source": "Starting lineup",
     "sourceHash": "436eafd98e21279d35d5b52e82c7ec215f55605dafbf51e1c5d82baa769fb809",
     "text": "初始阵容"
+  },
+  "content.glossary.swap-cards.definition.rule": {
+    "reviewed": true,
+    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
+    "sourceHash": "873c5abca848b0517ceb6ae9d1727b05c16cca7540006c40cee9ec44e4512089",
+    "text": "与一名随机存活的后备生物换人; 从手牌和所有牌堆移除离场生物的牌，然后在抽牌前将入场生物的牌组洗入抽牌堆; 没有存活后备时，与一名随机存活盟友交换位置; 只有自己时，仅换人部分无效; 安全通行改为换出<keyword0>生命</keyword0>最低的盟友，且需要存活的后备生物; <keyword1>生命</keyword1>和效果保留"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,

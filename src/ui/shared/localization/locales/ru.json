@@ -3341,6 +3341,12 @@
     "sourceHash": "4d4a5332e1f1ac9a149a6cd5b8f1113351f562ede0efaa6ad0f477398450f1f5",
     "text": "Атака"
   },
+  "content.glossary.backup.definition.rule": {
+    "reviewed": true,
+    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
+    "sourceHash": "898ff5305c51ada40da39e767bcf2991ad371866af632bfcf0604d08f90c94ce",
+    "text": "Наберите до пяти существ: выставить можно до трёх обычных существ или одно легендарное; Пассивные способности дают только выставленные живые существа; После выбытия выберите живого запасного, прежде чем продолжить; Замены сохраняют слоты карт и не дают дополнительных карт или начальных бонусов; Для других смен нужны способности или игровые эффекты"
+  },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
     "source": "Backup",
@@ -3682,6 +3688,12 @@
     "source": "Starting lineup",
     "sourceHash": "797005a0a4b6fc3a30e46af95ed390af163944f900efa2274cc2b2f9cdb578af",
     "text": "Начальный состав"
+  },
+  "content.glossary.swap-cards.definition.rule": {
+    "reviewed": true,
+    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
+    "sourceHash": "e92748c5c0774a016ff911dad4b0b3786b71bee3007ce6b2d64df3251f6cc2a5",
+    "text": "Сменитесь со случайным живым запасным; Уберите карты уходящего существа из руки и всех стопок, затем замешайте набор входящего в колоду добора до взятия карт; Без живого запасного поменяйтесь местами со случайным живым союзником; В одиночку не действует только часть со сменой; Безопасный проход вместо этого меняет союзника с наименьшим <keyword0>здоровьем</keyword0> и требует живого запасного; <keyword1>Здоровье</keyword1> и эффекты сохраняются"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,

@@ -3341,6 +3341,12 @@
     "sourceHash": "fdb0cb37cd1ec5b30168ac2ed88ed29af551d91c5ab1a60b1182a547d6c8b122",
     "text": "攻撃"
   },
+  "content.glossary.backup.definition.rule": {
+    "reviewed": true,
+    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
+    "sourceHash": "6ba1197de2d223b06768b28851264789926ec251f9b491a9f1dfe232a412866d",
+    "text": "最大5体を仲間にできる; 出撃できるのは通常クリーチャー最大3体またはレジェンダリー1体; パッシブを発揮するのは出撃中の生存クリーチャーのみ; 戦闘不能後は生存している控えを選んで続行; 交代後もカード枠は維持され、追加ドローや開始時ボーナスは得られない; 他の交代には能力かゲーム効果が必要"
+  },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
     "source": "Backup",
@@ -3682,6 +3688,12 @@
     "source": "Starting lineup",
     "sourceHash": "f548258861a5573a059e631f4e3c3219d6faf9a579cd59350f995cf9f7a8e68f",
     "text": "初期編成"
+  },
+  "content.glossary.swap-cards.definition.rule": {
+    "reviewed": true,
+    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
+    "sourceHash": "967b47c522ad38bb5de032e850e6aea59251a1895bb09443031ec1af352e1400",
+    "text": "生存しているランダムな控えと交代; 退くクリーチャーのカードを手札とすべての山から取り除き、入るクリーチャーのカードをドロー前に山札へ混ぜる; 生存している控えがいなければ生存味方1体とランダムに位置を交換; 1体だけなら交代部分のみ効果がない; 安全な道は代わりに<keyword0>体力</keyword0>が最も低い味方を交代させ、生存している控えが必要; <keyword1>体力</keyword1>と効果は維持される"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,

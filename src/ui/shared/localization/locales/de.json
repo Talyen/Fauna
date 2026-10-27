@@ -3341,6 +3341,12 @@
     "sourceHash": "7fb2eaea3361819dd5b3a8a087a72acda3438bfa37c973534364ec9599515567",
     "text": "Angriff"
   },
+  "content.glossary.backup.definition.rule": {
+    "reviewed": true,
+    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
+    "sourceHash": "c8811494b084308c39ae89305c424d0e008c3acd815c2a3905d91e92c85f0e98",
+    "text": "Rekrutiere bis zu fünf Kreaturen: bis zu drei gewöhnliche Kreaturen oder eine legendäre Kreatur im Einsatz; Nur eingesetzte lebende Kreaturen gewähren passive Fähigkeiten; Wähle nach dem Ausscheiden vor dem Fortfahren eine lebende Reserve; Ersatz erhält Kartenplätze und gewährt keine zusätzlichen Kartenzüge oder Startboni; Andere Wechsel erfordern Fähigkeiten oder Spieleffekte"
+  },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
     "source": "Backup",
@@ -3682,6 +3688,12 @@
     "source": "Starting lineup",
     "sourceHash": "3361f043c84b71e0e0356d2b87097b83c4c4fb128ea7876e5dfe2c12f2c729bb",
     "text": "Startaufstellung"
+  },
+  "content.glossary.swap-cards.definition.rule": {
+    "reviewed": true,
+    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
+    "sourceHash": "ce83f3448aaf30d35208d387beaf5ae76b89db3c01088126d321ce31972d90cb",
+    "text": "Wechsle mit einer zufälligen lebenden Reserve; Entferne die Karten der ausscheidenden Kreatur aus Hand und allen Stapeln und mische das Set der eingewechselten Kreatur vor weiteren Kartenzügen in den Nachziehstapel; Ohne lebende Reserve tausche Plätze mit einem zufälligen lebenden Verbündeten; Allein bleibt nur der Wechselteil ohne Wirkung; Sicherer Durchgang wechselt stattdessen den Verbündeten mit der niedrigsten <keyword0>Gesundheit</keyword0> und benötigt eine lebende Reserve; <keyword1>Gesundheit</keyword1> und Effekte bleiben erhalten"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,

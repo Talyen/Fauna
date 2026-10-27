@@ -3341,6 +3341,12 @@
     "sourceHash": "3ea640b2c45b7dab6692a3282b5c40f56341699dea92680e2eb913472a2da6c6",
     "text": "Ataque"
   },
+  "content.glossary.backup.definition.rule": {
+    "reviewed": true,
+    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
+    "sourceHash": "4844cc8d823cf54b66177abe0a142dbb3aa454bb1190951d616426ed13d40990",
+    "text": "Recrute até cinco criaturas: até três criaturas comuns ou uma Lendária em campo; Apenas criaturas vivas em campo fornecem passivas; Após um nocaute, escolha uma reserva viva antes de continuar; Substituições preservam espaços de cartas e não concedem compras extras nem bônus iniciais; Outras trocas exigem habilidades ou efeitos de jogo"
+  },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
     "source": "Backup",
@@ -3682,6 +3688,12 @@
     "source": "Starting lineup",
     "sourceHash": "1e8f5ea399be9f0fec5cbb5a68e213b07a8a5cfaf1a6aacc0da053ad411a036c",
     "text": "Formação inicial"
+  },
+  "content.glossary.swap-cards.definition.rule": {
+    "reviewed": true,
+    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
+    "sourceHash": "15c8fafd1c3dd1c361488ec29b8969f36ed1c05a8153cad1665c4d50c197bf6d",
+    "text": "Troque com uma reserva viva aleatória; Remova as cartas da criatura que sai da mão e de todas as pilhas, depois embaralhe o conjunto da criatura que entra na pilha de compra antes de comprar; Sem reserva viva, troque de posição com um aliado vivo aleatório; Sozinha, apenas a parte da troca não faz nada; Passagem segura troca o aliado com menor <keyword0>Saúde</keyword0> e exige uma reserva viva; A <keyword1>Saúde</keyword1> e os efeitos persistem"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,

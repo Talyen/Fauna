@@ -3341,6 +3341,12 @@
     "sourceHash": "f10158b49a610e4dce0a502c2a7fd998e5811f95c6dde605bb11a751ae7c5715",
     "text": "Ataque"
   },
+  "content.glossary.backup.definition.rule": {
+    "reviewed": true,
+    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
+    "sourceHash": "393cfab8902e26212bbcbb9b9b579829079b246594f4c550d98bcc750b331bd0",
+    "text": "Recluta hasta cinco criaturas: despliega hasta tres criaturas comunes o una Legendaria; Solo las criaturas vivas desplegadas aportan pasivas; Tras un nocaut, elige una reserva viva antes de continuar; Los reemplazos conservan los espacios de cartas y no otorgan robos adicionales ni bonificaciones iniciales; Otros intercambios requieren habilidades o efectos del juego"
+  },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
     "source": "Backup",
@@ -3682,6 +3688,12 @@
     "source": "Starting lineup",
     "sourceHash": "d2d1c05faf53be65c847bbe0e2f53c7e2e6df88050c82f12bd5ec802628eb915",
     "text": "Formación inicial"
+  },
+  "content.glossary.swap-cards.definition.rule": {
+    "reviewed": true,
+    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
+    "sourceHash": "54519bee260d7cf66033cf94b1eefb4cf1b9d0764d47124692febde79112590c",
+    "text": "Intercambia con una reserva viva aleatoria; Retira las cartas de la criatura saliente de la mano y de todas las pilas, y baraja el conjunto de la entrante en la pila de robo antes de robar; Sin reserva viva, intercambia posiciones con un aliado vivo aleatorio; Si está sola, solo la parte del intercambio no hace nada; Paso seguro intercambia en su lugar al aliado con menos <keyword0>Salud</keyword0> y requiere una reserva viva; La <keyword1>Salud</keyword1> y los efectos persisten"
   },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,
