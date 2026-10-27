@@ -222,6 +222,42 @@ it("localizes temporary Dodge and lost Freeze buildup with their exact amounts",
   expect(eventPresentation(game, dodge, createMessageReader("en", {}))).toBe(dodge.text);
 });
 
+it("localizes prevented Freeze damage and skipped control turns", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const targetName = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: targetName, text: "Créature traduite" },
+  });
+  const immune = {
+    kind: "status" as const,
+    status: "nullify" as const,
+    outcome: "immune" as const,
+    affectedStatus: "freeze" as const,
+    targetId: target.id,
+    text: `${targetName} nullifies Freeze damage`,
+  };
+  const skipped = {
+    kind: "status" as const,
+    status: "freeze" as const,
+    outcome: "skip" as const,
+    targetId: target.id,
+    text: `${targetName} skips its Frozen turn.`,
+  };
+  expect(eventPresentation(game, immune, reader)).toBe("Créature traduite annule les dégâts de Gel");
+  expect(eventPresentation(game, skipped, reader)).toBe("Créature traduite : tour sauté (Gel).");
+  expect(
+    eventPresentation(
+      game,
+      { ...skipped, status: "stun", text: `${targetName} skips its Stunned turn.` },
+      reader,
+    ),
+  ).toBe("Créature traduite : tour sauté (Étourdissement).");
+  expect(eventPresentation(game, { ...skipped, status: "stun" }, reader)).toBe(skipped.text);
+  expect(eventPresentation(game, skipped, createMessageReader("en", {}))).toBe(skipped.text);
+});
+
 it("localizes a committed resurrection without changing its Health or participants", () => {
   const initial = run();
   const actor = initial.team[0]!;

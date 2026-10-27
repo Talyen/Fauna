@@ -3959,6 +3959,12 @@
     "sourceHash": "8d134786f5457451271433eba54dd90c3ac91abe3521155c3b74145d8c288ff6",
     "text": "{{name}} verliert {{amount}} Frost-Aufbau"
   },
+  "log.nullifyFreezeDamage": {
+    "reviewed": true,
+    "source": "{{name}} nullifies Freeze damage",
+    "sourceHash": "f772535eaa3937db6df72692125501b575f09320f91fa9b517a789a190ff8f72",
+    "text": "{{name}} verhindert Frostschaden"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3988,6 +3994,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "2b6c4bc9095e4a541ce13d10831b7f7679deaa5f7d98ed237aa837dc802f5c52",
     "text": "Du kehrst aus der Wildnis zurück. Entdeckungen bleiben erhalten."
+  },
+  "log.skipControlledTurn": {
+    "reviewed": true,
+    "source": "{{name}} skips its {{status}} turn.",
+    "sourceHash": "b700f08d8ef73e2a19021dc2c8a01c39b6ba94408d60bb19c3287acb22e3aff1",
+    "text": "{{name}}: Zug wegen {{status}} übersprungen."
   },
   "log.temporaryDodge": {
     "reviewed": true,
