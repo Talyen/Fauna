@@ -35,6 +35,12 @@
     "sourceHash": "cd398b59ae17b96dd8da5b3a0df540da5084ad71a122d20f0790e29368822852",
     "text": "Нокаут"
   },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "9b48375b4707f4f1c106917358116f3909926079bda38d0718485e05bba0bfe8",
+    "text": "Открыть меню"
+  },
   "campfire.creatureHealth": {
     "reviewed": true,
     "source": "{{name}} Health",
@@ -124,6 +130,12 @@
     "source": "Uncollected",
     "sourceHash": "adba27a0f1e9cbed76c38b3be0189fbce42ed018545f52f6402c4bbe19704bfc",
     "text": "Не собраны"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "119e3a2c89e05b14e64af902b0d574a628e4b5db14a1a4175a9cbb1608a5513b",
+    "text": "Отмена"
   },
   "creature.echo": {
     "reviewed": true,
@@ -215,11 +227,53 @@
     "sourceHash": "459b7fb38c5a7aede5fa3d62573dc1f6f95f2f38ff54785d80b5eff8928f104e",
     "text": "Встречи"
   },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "157b1b543b7407d33b8260adaffb0baa13fdc4197477f0319bb46c0a3f12750d",
+    "text": "Коллекция"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "b55998e086ab77556f80015f46195b8db045eb64f62b7749ca6cdc0b10b44966",
+    "text": "Продолжить"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
     "sourceHash": "e67f4b82d649ea57e711106f3beb5070bbf360eeb91d6ff480715732e9a24570",
     "text": "Меню паузы"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "f9fb63cff13337d939cb9dfbb1617d729340a75fe028655f94edcab21b6df589",
+    "text": "Играть"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "153aa33b1a24a8992740a70f39f2e8e5d1fe5c6248c071ff6ea78bbab92e6dca",
+    "text": "Назад"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "dd79ff022758d822c74c352405d4de56cbc220a70accd361741bdfffa70102d4",
+    "text": "Колода"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "572667450b2cfa64618e01fd3f0facdbf7b61eda05d8b253934a509434761c0d",
+    "text": "Стопка сброса"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "31eb6576ce3d27e35abbc10d6763aa871acdda5abf881e2828f93d353625168c",
+    "text": "Колода добора"
   },
   "pagination.next": {
     "reviewed": true,
@@ -376,5 +430,71 @@
     "source": "Victory",
     "sourceHash": "c9b719a5f44e7be100ce5f116bb39c5a1edfc6a590123855c7a84856d3a63205",
     "text": "Победа"
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "c8500568a299988f6fa8d4982c5a4557a6711302e19607d6fa90602a64a1172d",
+    "text": "Аудио"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "676f552ff81da4bce38e23168a1b62a55719634bcb3c17f8521f3ca6abda9dbf",
+    "text": "Автоматически"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "ca6edf4934f3e3c2e561cad7dd6efcf37d991d206bade5e25eb0a8b1a25fdfef",
+    "text": "Бой"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "7787ea5e1ffb8b78aeb34c0e94a4022e6285be62dc376ad7087a2315e78c9b5f",
+    "text": "Изображение"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "f768fd55499b029ddb6c383185b39243262a76101c8cc2f35fff60483b8fb36f",
+    "text": "Полный экран"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "e19f2852dbdd847e292eb7df78a57a00f009fbb1d7a1a3f998da60f9d2d07db6",
+    "text": "Свечение фона"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "98fb856edb68a6afdbbd1e1f805135a0eaee6f6a0f52bc8698959d4860995ad0",
+    "text": "Язык"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "11180432ca411ba4d80aac56de5ac37cc4737cecdfe0d5dca62c8bad571df06a",
+    "text": "Частицы фона"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "60901ba6412d7223cd23b06652134bef5d25adc5abc3ff8897284a07f9b90874",
+    "text": "Звук"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "02cf45b6a54ac390243ce36ca965ab9fdb1d44eeced83f80ecd73b38204f3c62",
+    "text": "Оконный режим"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "6b41dfe8a88e10bf683ce4f2c5ae603a78227d800b90b18135026cba974dd3a2",
+    "text": "Открыто"
   }
 }

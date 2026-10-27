@@ -35,6 +35,12 @@
     "sourceHash": "16f15239fbd26addf1364a9c8e2eed0b85c242de8836b054226cc44a568e43d8",
     "text": "Fuera de combate"
   },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "8f1611292a225c98f6dcfb2a7305b22765fbddc7b9cf86861ac97bf962187d05",
+    "text": "Abrir menú"
+  },
   "campfire.creatureHealth": {
     "reviewed": true,
     "source": "{{name}} Health",
@@ -124,6 +130,12 @@
     "source": "Uncollected",
     "sourceHash": "49e3cf3eab7b6d90a941041d331bb479c115751735b4157757ddb7a554914738",
     "text": "Sin coleccionar"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "e1457ed1e2bf91a58fef5969d4d92ee1114d30375c35fcbd660affc5f4d92f91",
+    "text": "Cancelar"
   },
   "creature.echo": {
     "reviewed": true,
@@ -215,11 +227,53 @@
     "sourceHash": "080692b48aeca6d70b81faa5f1fa1a18df01d28596af4791240ce9c8eebce360",
     "text": "Encuentros"
   },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "5bca1762ad6a014e20b6588d6ecfbd93f3e5da6bbeb50edac7799932d75a3a16",
+    "text": "Colección"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "d53e5eab633a4b64c06bfbc9188448e864616505450d0e8a4a3ae458527dfd44",
+    "text": "Continuar"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
     "sourceHash": "88add95337832730efc31271f428f7c54b4fe0f4b77db0e833f4b57f89d68992",
     "text": "Menú de pausa"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "9e9bf0d68af007e4a1ffad467f5ebcfa82fb90b48d6a8cbf0e6f245383972cab",
+    "text": "Jugar"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "53f964bb7bbfb66ed9e7d3929e30ab1b9c99f04a8296891f2daa8359ae1174d0",
+    "text": "Atrás"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "3635b3723dae69203056c020a6a80632e4e8c88c77c949d12f2202a3147dac49",
+    "text": "Mazo"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "06bb1aa830bcb2c6ec6304dd4110783bb8dbb30fb6f034e2e986fe0abc84e39f",
+    "text": "Pila de descarte"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "e2008941b136189229b816d9cce46d7f479e73f1f201b6bbdbdce8c0d6a7554d",
+    "text": "Pila de robo"
   },
   "pagination.next": {
     "reviewed": true,
@@ -376,5 +430,71 @@
     "source": "Victory",
     "sourceHash": "13099ad277f529808dcc20b29b7256639c359126ce7b604c2aa955022db9dcc8",
     "text": "Victoria"
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "22697d73399189fa5f3d7317e245fbeffcb5b2bca9a30b80ce0eacfe9308aa28",
+    "text": "Audio"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "e367f4b186e000c971b8a1951fbf33c75f9752bdea034fafb8b58a5f7235a3bd",
+    "text": "Automático"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "fff649559ab7dbe915bb5d47655d3a5c431d4fd049cf75d1b15f8471b4fb6766",
+    "text": "Combate"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "da9f59a7f232f4b4be5d18b43a5aca8ac11d2b790578c7189d8eb64bea02929e",
+    "text": "Pantalla"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "9596f4064afadc73d6467ecec498f17e3e0e76daab48e7223389418a74554740",
+    "text": "Pantalla completa"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "626f7a5c3bfea685a0ded9bd64cf66af903cb17fe7ea1ce067a1ed7d8f9c6d37",
+    "text": "Resplandor del fondo"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "ce73ce16a3e24f2eae2b1426e6963d2387db4003e79043396862443804fe6111",
+    "text": "Idioma"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "40e4eaf10b0aa6a4a884de1a07ecd96f6b020a73188511e5a70d50d54d224f37",
+    "text": "Partículas del fondo"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "0bc75f0e70d258b814443eddacbb9c2cb94e968832b959a8b5e6a2f0565dd1d1",
+    "text": "Sonido"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "05dee1c7397a50956d463bcc0b2d317fba45ef4e411cdcd5282958540927aa5b",
+    "text": "Ventana"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "9dc0a414b8adf1cceb72dc05390e2fc90441e2687d758de3246796f22a7d80e0",
+    "text": "Desbloqueado"
   }
 }

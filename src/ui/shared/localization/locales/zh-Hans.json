@@ -35,6 +35,12 @@
     "sourceHash": "b92ded67ee66fc4663df36fc87d8142e7a2dd77bb18df1cc5f506306c725c174",
     "text": "击倒"
   },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "b8c0584f8adb00632c34b25222cfbde80f436eb48d9cc62a5d8662986329628b",
+    "text": "打开菜单"
+  },
   "campfire.creatureHealth": {
     "reviewed": true,
     "source": "{{name}} Health",
@@ -124,6 +130,12 @@
     "source": "Uncollected",
     "sourceHash": "08b7f2067ffe90d5e4dafdbff61184c588db331d404efa8638ece95592d4a8d2",
     "text": "未收集"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "604f98d5003ba57802913ccf3818130cf31f74ece361d04e556883ced4dcb799",
+    "text": "取消"
   },
   "creature.echo": {
     "reviewed": true,
@@ -215,11 +227,53 @@
     "sourceHash": "7d9124c442e0737fe9de74917cd24e3ecbc1d2c1dabff69020d287c8fbfeae8b",
     "text": "遭遇"
   },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "931c04f16dba2abce8fa983d2aeb974eb4581701a2033e6f24d9ea7a203b1103",
+    "text": "收藏"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "0a68231ab6433cb984439f259f7e70b410e2d71c8b1a8e576bef6fb89a1e9721",
+    "text": "继续"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
     "sourceHash": "3e2515f9708be84e6f5fc95a3e64b36fe44fec4b3a5b0ff60248597b50fda480",
     "text": "暂停菜单"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "0881cb77235d342cc58f16666c67adb5f2f094c5466182037001953a2b5725e0",
+    "text": "开始"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "626fa599c9aadc2f0487946bb36735017a656d12267640c1c897b8a1d7645947",
+    "text": "返回"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "6f58057060e8c35f71b4a61a1367ab7aebf09373ef4419162a40c3e14deadf97",
+    "text": "牌组"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "8366e16fc01f6d87562c3a0914a9f610cc12be521e3b5d13782ad7d5f57e0469",
+    "text": "弃牌堆"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "46085f17a5d94081443d5f112e22fc5405760812c324ceaa9171cff7f64b0967",
+    "text": "抽牌堆"
   },
   "pagination.next": {
     "reviewed": true,
@@ -376,5 +430,71 @@
     "source": "Victory",
     "sourceHash": "6f14bf3366f8ef6025a7dbd056d65145ea17b6fb7b92e7ec95b2cd3745bbe212",
     "text": "胜利"
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "cd5421517fa666bb02efa3da3feb5d5e61ec6482e9a50b4f8fb6eb5a285db45f",
+    "text": "音频"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "120ec371cd43c461a33481705fa64e1ed9801c352c6ff188054671d5aab21b96",
+    "text": "自动"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "25ee0a137b561bfcd921b2d804230029d24008f02714cb0cfabe95be451ab456",
+    "text": "战斗"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "c3ff7070e888cc42add00e3b0c11fabf582d787a21f5e20006e01841ed9e66de",
+    "text": "显示"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "966a5239212887c0d7a8d8fffd6e7913252376a4b4a0355e3a8305eee6719f97",
+    "text": "全屏"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "448bdf57d26142e5ea4eac3fffaec38e112d24a225c98fc48e222b169ea7525e",
+    "text": "背景辉光"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "52b412e65e977efd2505c2e394b4688dae7066b3b6390f290fd502663758919a",
+    "text": "语言"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "09e31ecc56bd99ea9f79947043195888785944bb8eab72f6469f877734b0ca50",
+    "text": "背景粒子"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "4bf9716880de75ea132500b7d6b091d074067931769358c4529f21f55137afcf",
+    "text": "声音"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "aeb17388b472c4ed3c0374412b81c128014426fffeafcebb0af89951d0347640",
+    "text": "窗口模式"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "c9ee651c6b855b04d0cf7e97074e506c33c2188f67c752ffef58196c7c5e7d70",
+    "text": "已解锁"
   }
 }

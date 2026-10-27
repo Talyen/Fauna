@@ -35,6 +35,12 @@
     "sourceHash": "bce87ae77a03178d4d66ed60dc31c0baac00a71cc2a1f0156e9e2a0a53c8f9e7",
     "text": "戦闘不能"
   },
+  "battle.openMenu": {
+    "reviewed": true,
+    "source": "Open menu",
+    "sourceHash": "dd2c87698aee70c4e500f4c8ad78df0733d77924a2fdd9445305e2944cb0976e",
+    "text": "メニューを開く"
+  },
   "campfire.creatureHealth": {
     "reviewed": true,
     "source": "{{name}} Health",
@@ -124,6 +130,12 @@
     "source": "Uncollected",
     "sourceHash": "1eb47856d45185c76a953da5eb10289b7e84f19624c85f9efe71fc0341e045bb",
     "text": "未収集"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "056d4c9242f835e8d5fd4e0795f64451621001a801cdae3de09bfaa66b8c1f82",
+    "text": "キャンセル"
   },
   "creature.echo": {
     "reviewed": true,
@@ -215,11 +227,53 @@
     "sourceHash": "6efb73c1a958c170a294361e9450987de86df741758871408be5e802a50f1a0c",
     "text": "遭遇"
   },
+  "menu.collection": {
+    "reviewed": true,
+    "source": "Collection",
+    "sourceHash": "aa0df8808c3bef97bf741654d962bd1b8cf3c220139ca16d44ea23d911c64297",
+    "text": "コレクション"
+  },
+  "menu.continue": {
+    "reviewed": true,
+    "source": "Continue",
+    "sourceHash": "dd5493f5769beb1d5875a7c003d12415fabfbba53fb6f0bdf412ce0f506e8048",
+    "text": "続ける"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
     "sourceHash": "d9e7029f31f2ee8491418c746a618989f90806bacbb93372364c4eeb1ad727f2",
     "text": "ポーズメニュー"
+  },
+  "menu.play": {
+    "reviewed": true,
+    "source": "Play",
+    "sourceHash": "0c97f1e1514b1c140bfd1b26ffdbe71ba2d0c0a8fad3399e313de39a018deca8",
+    "text": "プレイ"
+  },
+  "navigation.back": {
+    "reviewed": true,
+    "source": "Back",
+    "sourceHash": "66d7bd82d62deb418bcb57a8faa95fc319fa61b52dbf3916fe4c8180a6f26fe8",
+    "text": "戻る"
+  },
+  "overlay.deck": {
+    "reviewed": true,
+    "source": "Deck",
+    "sourceHash": "abc1febd96effd2b13cef02589943b179b1434dd5454f62260d890780fde102d",
+    "text": "デッキ"
+  },
+  "overlay.discardPile": {
+    "reviewed": true,
+    "source": "Discard Pile",
+    "sourceHash": "5dde70c6af800dcab35a751437affa27b6b68772eae18eed81218a29d6875a62",
+    "text": "捨て札"
+  },
+  "overlay.drawPile": {
+    "reviewed": true,
+    "source": "Draw Pile",
+    "sourceHash": "5fb976e02ba89acb51407a66a774c8e617f08d093908f89c380a37cc73dfe9de",
+    "text": "山札"
   },
   "pagination.next": {
     "reviewed": true,
@@ -376,5 +430,71 @@
     "source": "Victory",
     "sourceHash": "30edc2983a1b6fa10e471093ed3c0bd94cc5a8d909327228f17c4de3b0293b9b",
     "text": "勝利"
+  },
+  "settings.audio": {
+    "reviewed": true,
+    "source": "Audio",
+    "sourceHash": "57c6ac3fd3e2c2616de01a8e579554eb4f854b5c2fab03af4c5f77d6e0d9d6f5",
+    "text": "音声"
+  },
+  "settings.automatic": {
+    "reviewed": true,
+    "source": "Automatic",
+    "sourceHash": "e65cccce078240e6b37ed499a504387bf34ac583d70eb85860d5d9525e629f0e",
+    "text": "自動"
+  },
+  "settings.battle": {
+    "reviewed": true,
+    "source": "Battle",
+    "sourceHash": "b49b81f30cef0f95d07c21d156c60c0b2e6f74b0c4107050a2de31f21e5d8ceb",
+    "text": "戦闘"
+  },
+  "settings.display": {
+    "reviewed": true,
+    "source": "Display",
+    "sourceHash": "9bea1b16f5a1c2971bfcc5d2e621da259af776803f561dd5b1eea2b2f709c090",
+    "text": "表示"
+  },
+  "settings.fullscreen": {
+    "reviewed": true,
+    "source": "Fullscreen",
+    "sourceHash": "6c5a63d32c447bac6ac6ec6ae26edf6cb5485f7f536af48e4c7ba70081d7664a",
+    "text": "全画面"
+  },
+  "settings.glow": {
+    "reviewed": true,
+    "source": "Background Glow",
+    "sourceHash": "e5d35a7360f1c07578c3bab6669d2c7f360bf3b109558154b4ea5df73fc7ea9f",
+    "text": "背景の光"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "aa21bf9edb90febe45b6b96cf0440cb28bceed8400d43c9f8958762fa91bfffc",
+    "text": "言語"
+  },
+  "settings.particles": {
+    "reviewed": true,
+    "source": "Background Particles",
+    "sourceHash": "bbc2687aa34f93df94ce9ec818b16ce8a779c7662bc929c30cf059e18e97b7f8",
+    "text": "背景の粒子"
+  },
+  "settings.sound": {
+    "reviewed": true,
+    "source": "Sound",
+    "sourceHash": "3baf8d8dd3dcde573d27d0ef4cf1d5fd38a15f2935bdc61f5b346f1ef1b61a64",
+    "text": "音声"
+  },
+  "settings.windowed": {
+    "reviewed": true,
+    "source": "Windowed",
+    "sourceHash": "746ae9dc77bd40cb0eadc731954e7b6611ebb5af6d95373d9de5acba197f16b9",
+    "text": "ウィンドウ"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "28aec51b4050ac6106d05d55e3d3bc628e684eb134d17da95b8a75a9ce26330e",
+    "text": "解放済み"
   }
 }
