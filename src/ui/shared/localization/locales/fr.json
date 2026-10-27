@@ -453,7 +453,7 @@
     "reviewed": true,
     "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
     "sourceHash": "4502e4996e21a32819d59f4a5d73181f1762536cd1fcc97689aae3461ad0739a",
-    "text": "Votre achat auprès de chaque marchand de Bienfaits coûte {{value0}} Or de moins"
+    "text": "Votre achat auprès de chaque marchand de bénédictions coûte {{value0}} Or de moins"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,

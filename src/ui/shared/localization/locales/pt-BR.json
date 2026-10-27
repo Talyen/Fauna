@@ -429,7 +429,7 @@
     "reviewed": true,
     "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
     "sourceHash": "101d5ad8bd4267e859354edeec16d2035595897c3758ca6bb1432a3eae456655",
-    "text": "Sua compra em cada comerciante de Bênçãos custa {{value0}} de Ouro a menos"
+    "text": "Sua compra em cada mercador de bênçãos custa {{value0}} de Ouro a menos"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,

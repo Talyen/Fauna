@@ -429,7 +429,7 @@
     "reviewed": true,
     "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
     "sourceHash": "0ac54f19cde6c5c4fee83ab33df0240aef3865b9a40b583e9cd795ffb346ea5a",
-    "text": "在每位恩赐商人处购买的价格减少{{value0}}金币"
+    "text": "在每位祝福商人处购买的价格减少{{value0}}金币"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,

@@ -429,7 +429,7 @@
     "reviewed": true,
     "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
     "sourceHash": "0bc93e18323e79abff09f1df5fddd29094ff813fe614052943a9ee0f6f6afdd8",
-    "text": "Покупка у каждого торговца дарами стоит на {{value0}} золота меньше"
+    "text": "Покупка у каждого торговца благословениями стоит на {{value0}} золота меньше"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,

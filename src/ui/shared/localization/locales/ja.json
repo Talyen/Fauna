@@ -429,7 +429,7 @@
     "reviewed": true,
     "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
     "sourceHash": "2ad0334b2b249454ba2baadee0b2f12a9745850c517a116b544108e247486b01",
-    "text": "各恩恵商人での購入費用がゴールド{{value0}}分減少"
+    "text": "各祝福商人での購入費用がゴールド{{value0}}分減少"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
