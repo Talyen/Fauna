@@ -46,7 +46,7 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
 export function battlefieldView(state: GameState, side: "enemy"): readonly Enemy[];
 export function battlefieldView(state: GameState, side: "player" | "enemy"): readonly (Creature | Enemy)[];
 export function battlefieldView(state: GameState, side: "player" | "enemy"): readonly (Creature | Enemy)[] {
-  if (state.battle?.minions?.length) return battlefield(state, side);
+  if (state.battle?.minions?.some((unit) => unit.minion.side === side)) return battlefield(state, side);
   return side === "player" ? state.team : (state.battle?.enemies ?? []);
 }
 

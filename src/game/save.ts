@@ -144,7 +144,10 @@ function validateJourney(state: GameState) {
       );
   }
   invalid(state.phase === "victory" && (!finalEncounter(state) || state.wins === 0));
-  if (state.phase !== "battle") invalid(Object.values(state.battleXP).some((n) => n !== 0));
+  if (state.phase !== "battle")
+    for (const key in state.battleXP)
+      if (Object.hasOwn(state.battleXP, key))
+        invalid(state.battleXP[key as keyof typeof state.battleXP] !== 0);
 }
 
 function validateExpedition(state: GameState) {

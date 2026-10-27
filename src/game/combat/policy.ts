@@ -35,42 +35,52 @@ const inactive = {
   leechRewards: true,
 };
 const attacking = { ...inactive, attack: true, buildup: true };
-export function packetPolicy(packet: DamagePacket) {
+const ability = Object.freeze({ ...attacking, direct: true, wrongFoot: true, resonance: true, bounce: true });
+const abilityBounce = Object.freeze({ ...ability, wrongFoot: false, bounce: false });
+const abilityReflection = Object.freeze({ ...abilityBounce, resonance: false });
+const proc = Object.freeze({ ...attacking, resonance: true, bounce: true });
+const procBounce = Object.freeze({ ...proc, bounce: false });
+const resonance = Object.freeze({ ...proc, resonance: false });
+const resonanceBounce = Object.freeze({ ...resonance, bounce: false });
+const periodic = Object.freeze({ ...inactive, deadSource: true });
+const passive = Object.freeze({ ...inactive });
+const buildup = Object.freeze({ ...inactive, buildup: true });
+const derived = Object.freeze({ ...inactive, deadSource: true });
+const overkill = Object.freeze({ ...derived, leechRewards: false });
+
+/** Internal readers share immutable policies; the public copy remains independently writable. */
+export function packetPolicyView(packet: DamagePacket) {
   switch (packet.origin) {
     case "ability":
-      return {
-        ...attacking,
-        direct: true,
-        wrongFoot: !packet.delivery,
-        resonance: packet.delivery !== "reflection",
-        bounce: !packet.delivery,
-      };
+      return packet.delivery === "reflection"
+        ? abilityReflection
+        : packet.delivery === "bounce"
+          ? abilityBounce
+          : ability;
     case "proc":
+      return packet.delivery === "bounce" ? procBounce : proc;
     case "resonance":
-      return {
-        ...attacking,
-        resonance: packet.origin !== "resonance",
-        bounce: packet.delivery !== "bounce",
-      };
+      return packet.delivery === "bounce" ? resonanceBounce : resonance;
     case "periodic":
-      return { ...inactive, deadSource: true };
+      return periodic;
     case "retaliation":
+      return passive;
     case "statusRetaliation":
     case "boon":
+      return buildup;
     case "derived":
-    case "overkill":
     case "chain":
-      return {
-        ...inactive,
-        buildup: packet.origin === "statusRetaliation" || packet.origin === "boon",
-        leechRewards: packet.origin !== "overkill",
-        deadSource: packet.origin === "derived" || packet.origin === "overkill" || packet.origin === "chain",
-      };
+      return derived;
+    case "overkill":
+      return overkill;
     default: {
       const unhandled: never = packet;
       throw new Error(`Unknown damage packet: ${unhandled}`);
     }
   }
+}
+export function packetPolicy(packet: DamagePacket) {
+  return { ...packetPolicyView(packet) };
 }
 
 export type AttackPacket = Extract<DamagePacket, { origin: "ability" | "proc" | "resonance" }>;

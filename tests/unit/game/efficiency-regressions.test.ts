@@ -21,7 +21,15 @@ import { createBattleActor } from "../../../src/application/battle-actor";
 import { battleBenefitFacts } from "../../../src/application/battle-benefits";
 import * as engine from "../../../src/game/engine";
 import { projectPlay } from "../../../src/game/preview";
-import { cardKeywords, passiveAmount } from "../../../src/game/progression";
+import { abilityKeywords, cardKeywords, passiveAmount } from "../../../src/game/progression";
+import { definitionKeywords } from "../../../src/game/keywords";
+import { createBrowserPlatform } from "../../../src/platform/browser";
+import { packetPolicy, packetPolicyView, type DamagePacket } from "../../../src/game/combat/policy";
+import { abilityExtras, scalePower } from "../../../src/game/combat/ability-values";
+import { supplementalRule } from "../../../src/game/rules/supplemental";
+import { selectCombatCue } from "../../../src/ui/audio/combat-audio";
+import { feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
+import type { GameEvent } from "../../../src/game/types";
 import { BOONS, definition, findBoon, speciesCards, SPECIES } from "../../../src/game/content";
 import { capabilities, offenseValue } from "../../../src/application/team-policy";
 import {
@@ -57,6 +65,12 @@ it("keeps automatic turn completion aligned with legal card commands", () => {
     expect(hasAvailablePlay(state)).toBe(availablePlays(state).some((play) => play.commands.length > 0));
   check();
   expect(hasAvailablePlay(state)).toBe(true);
+  const other = state.cards.find((card) => card.ownerId !== attack.ownerId)!;
+  state.battle.hand = [attack.id, other.id];
+  check();
+  state.battle.hand = [other.id, attack.id];
+  check();
+  state.battle.hand = [attack.id];
   state.battle.mana = 0;
   check();
   expect(hasAvailablePlay(state)).toBe(false);
@@ -79,6 +93,87 @@ it("keeps cached card keywords isolated from callers", () => {
   const expected = [...keywords];
   keywords.splice(0);
   expect(cardKeywords(card)).toEqual(expected);
+  const authored = definition(card.definitionId);
+  expect(abilityKeywords(authored)).toEqual(definitionKeywords(authored));
+  expect(Object.isFrozen(abilityKeywords(authored))).toBe(true);
+  const adapted = { ...authored, leech: false };
+  expect(abilityKeywords(adapted)).toEqual(definitionKeywords(adapted));
+  adapted.leech = true;
+  expect(abilityKeywords(adapted)).toEqual(definitionKeywords(adapted));
+});
+
+it("preserves the browser save byte boundary for multibyte text", async () => {
+  const values = new Map<string, string>();
+  const storage = {
+    getItem: (key: string) => values.get(key) ?? null,
+    setItem: (key: string, value: string) => values.set(key, value),
+  } as unknown as Storage;
+  const saves = createBrowserPlatform(storage).saves;
+  const exact = "é".repeat(saveFormat.maxBytes / 2);
+  await saves.write(exact);
+  await expect(saves.write(`${exact}é`)).rejects.toThrow("Invalid save payload");
+  expect(values.get("fauna.save.v1")).toBe(exact);
+});
+
+it("keeps packet policies independent and preserves every delivery rule", () => {
+  const cases: [DamagePacket, boolean, boolean, boolean, boolean, boolean][] = [
+    [{ origin: "ability" }, true, true, true, true, false],
+    [{ origin: "ability", delivery: "bounce" }, true, false, true, false, false],
+    [{ origin: "ability", delivery: "reflection" }, true, false, false, false, false],
+    [{ origin: "proc" }, true, false, true, true, false],
+    [{ origin: "proc", delivery: "bounce" }, true, false, true, false, false],
+    [{ origin: "resonance" }, true, false, false, true, false],
+    [{ origin: "resonance", delivery: "bounce" }, true, false, false, false, false],
+    [{ origin: "periodic" }, false, false, false, false, true],
+    [{ origin: "retaliation" }, false, false, false, false, false],
+    [{ origin: "statusRetaliation" }, false, false, false, false, false],
+    [{ origin: "boon" }, false, false, false, false, false],
+    [{ origin: "derived" }, false, false, false, false, true],
+    [{ origin: "chain" }, false, false, false, false, true],
+    [{ origin: "overkill" }, false, false, false, false, true],
+  ];
+  for (const [packet, attack, wrongFoot, resonance, bounce, deadSource] of cases) {
+    const view = packetPolicyView(packet);
+    expect(view).toMatchObject({ attack, wrongFoot, resonance, bounce, deadSource });
+    expect(view.buildup).toBe(attack || packet.origin === "statusRetaliation" || packet.origin === "boon");
+    expect(view.direct).toBe(packet.origin === "ability");
+    expect(view.leechRewards).toBe(packet.origin !== "overkill");
+    const copy = packetPolicy(packet);
+    copy.attack = !copy.attack;
+    expect(packetPolicyView(packet)).toEqual(view);
+  }
+});
+
+it("keeps scaled extras in order for authored and mutable ability definitions", () => {
+  for (const creature of SPECIES)
+    for (const card of speciesCards(creature.id))
+      for (const power of [1, 1, 1.2]) {
+        const expected = (card.effects ?? []).map((effect) =>
+          supplementalRule(effect.kind).scaling === "power"
+            ? { ...effect, amount: scalePower(effect.amount, power) }
+            : effect,
+        );
+        expect(abilityExtras(card, power)).toEqual(expected);
+      }
+  const authored = speciesCards("emberback").find((card) => card.effects?.length)!;
+  const mutable = structuredClone(authored);
+  if (mutable.effects?.[0]) mutable.effects[0].amount = 1.5;
+  expect(abilityExtras(mutable)[0]?.amount).toBe(
+    supplementalRule(mutable.effects![0]!.kind).scaling === "power" ? 2 : 1.5,
+  );
+});
+
+it("keeps combat feedback frames and strongest sound in event order", () => {
+  const events: GameEvent[] = [
+    { kind: "action", actionType: "support", actorId: "ally", text: "Support" },
+    { kind: "heal", targetId: "ally", amount: 4, text: "Heal" },
+    { kind: "block", targetId: "ally", amount: -5, text: "Block" },
+    { kind: "damage", targetId: "enemy", amount: 5, damageType: "burn", text: "Damage" },
+    { kind: "action", actionType: "attack", actorId: "ally", text: "Attack" },
+    { kind: "status", targetId: "enemy", status: "burn", outcome: "gain", text: "Status" },
+  ];
+  expect(feedbackFrames(events)).toEqual([events.slice(0, 4), events.slice(4)]);
+  expect(selectCombatCue(events)).toBe("fire");
 });
 
 it("keeps passive amounts tied to the current complete tier", () => {

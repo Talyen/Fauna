@@ -7,6 +7,8 @@ import {
   species,
   SPECIES,
   FIRST_RUN_STARTERS,
+  CARDS,
+  type CardDefinition,
 } from "./content";
 import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
 export { progressionLabel as keywordLabel } from "./keywords";
@@ -87,11 +89,19 @@ export function validTalentSelection(state: Pick<GameState, "talents" | "keyword
   return true;
 }
 const keywordsByDefinition = new WeakMap<object, readonly Keyword[]>();
+const authoredCards = new WeakSet<object>(CARDS);
 function definitionCardKeywords(card: Pick<Card, "definitionId">): readonly Keyword[] {
   const def = definition(card.definitionId);
   if (!Object.isFrozen(def)) return definitionKeywords(def);
   let keywords = keywordsByDefinition.get(def);
-  if (!keywords) keywordsByDefinition.set(def, (keywords = definitionKeywords(def)));
+  if (!keywords) keywordsByDefinition.set(def, (keywords = Object.freeze(definitionKeywords(def))));
+  return keywords;
+}
+/** Only catalog cards are known to be deeply immutable; adapted and injected cards stay live. */
+export function abilityKeywords(def: CardDefinition): readonly Keyword[] {
+  if (!authoredCards.has(def)) return definitionKeywords(def);
+  let keywords = keywordsByDefinition.get(def);
+  if (!keywords) keywordsByDefinition.set(def, (keywords = Object.freeze(definitionKeywords(def))));
   return keywords;
 }
 /** Return a mutable copy to callers that need the full list. */

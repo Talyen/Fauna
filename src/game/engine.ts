@@ -120,7 +120,8 @@ function resolve(
     return reject(state, "Choose an offered starter.");
   if (
     command.type === "start" &&
-    (state.selected.length !== starterCount(state) || new Set(state.selected).size !== state.selected.length)
+    (state.selected.length !== starterCount(state) ||
+      state.selected.some((kind, index) => state.selected.indexOf(kind) !== index))
   )
     return reject(state, "Complete your starter choices first.");
   if (command.type === "play") {

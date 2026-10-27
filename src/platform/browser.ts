@@ -2,6 +2,7 @@ import saveFormat from "../game/save-format.json" with { type: "json" };
 import { browserDiagnostics } from "./preferences";
 import type { Platform, SaveCandidate } from "./ports";
 const KEY = "fauna.save.v1";
+let textEncoder: TextEncoder | undefined;
 export function createBrowserPlatform(storage?: Storage): Platform {
   return {
     desktop: false,
@@ -25,7 +26,11 @@ export function createBrowserPlatform(storage?: Storage): Platform {
         return results;
       },
       async write(data, isRecoverable = () => false) {
-        if (data.length > saveFormat.maxBytes || new TextEncoder().encode(data).length > saveFormat.maxBytes)
+        if (
+          data.length > saveFormat.maxBytes ||
+          (data.length > Math.floor(saveFormat.maxBytes / 3) &&
+            (textEncoder ??= new TextEncoder()).encode(data).length > saveFormat.maxBytes)
+        )
           throw new Error("Invalid save payload.");
         const source = storage ?? window.localStorage;
         // Only application-approved checkpoints may displace recovery slots.

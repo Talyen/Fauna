@@ -20,7 +20,8 @@ const snapshotSchema = z
 export type CloudSnapshot = z.infer<typeof snapshotSchema>;
 export const cloudName = (s: Pick<CloudSnapshot, "device" | "sequence">) =>
   `fauna-v1-${s.device}-${s.sequence % 2}.json`;
-export const isCloudName = (name: string) => /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+const cloudNamePattern = /^fauna-v1-[a-f0-9]{32}-[01]\.json$/;
+export const isCloudName = (name: string) => cloudNamePattern.test(name);
 const textEncoder = new TextEncoder();
 async function sha(text: string) {
   const bytes = await globalThis.crypto.subtle.digest("SHA-256", textEncoder.encode(text));

@@ -136,8 +136,7 @@ export interface AvailablePlay extends PlayableCard {
 /** Automatic turn completion only needs to know whether any command exists. */
 export function hasAvailablePlay(state: BattleState): boolean {
   if (!state.battle.hand.length || pendingReplacement(state)) return false;
-  const cards = state.battle.hand.length > 1 ? new Map<string, Card>() : undefined;
-  if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+  let cards: Map<string, Card> | undefined;
   let lastDefinition: CardDefinition | undefined;
   let lastRecipients = false;
   const hasRecipients = (def: CardDefinition) => {
@@ -156,7 +155,11 @@ export function hasAvailablePlay(state: BattleState): boolean {
     }
     return lastRecoverable;
   };
-  for (const id of state.battle.hand) {
+  for (const [index, id] of state.battle.hand.entries()) {
+    if (index === 1) {
+      cards = new Map<string, Card>();
+      for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+    }
     const play = inspectCard(
       state,
       cards ? cards.get(id) : state.cards.find((card) => card.id === id),
