@@ -2939,6 +2939,66 @@
     "sourceHash": "a48a087d2bc63705ffe21054f663463c608bab9f5ea9ef62edf33ff6725d631d",
     "text": "На пороге смерти длится дольше; дополнительных ходов: {{value0}}"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "beab2cb2953da999901e0a1f010896b3c32faab768ed5cc76f5e8764b1d58fb4",
+    "text": "Вытягивание недугов"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "84238aa3fe7a4608b554387f022379b6bac874cbd9b6ae465eba134ec49e8268",
+    "text": "Вытягивание: Броня"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "b9a5c1f3694a2dbe2308d3e89958b51d53b917f59380a5b8ff81cb01212a561e",
+    "text": "Кровавый долг"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "bd295635d5cbf0a77ec353fa3c02c04f3a8787d5936314b032c31afe4a00db62",
+    "text": "Кровопускание"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "4e84053c6ba8dfebe14c691530542ba9efac040266225402573a5f2baccd03b6",
+    "text": "Отсечь слабых"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "adbd2fb5ecc37d26b3248f837bdfb418f15cc2172245291b6413b6e979512252",
+    "text": "Глубокое вытягивание"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "4b09c6547089e512ddd623eaba98bcce6b2e7b13f8684cab1909a6b06db8502a",
+    "text": "Отчаянное вытягивание"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "5621332a87f30a915e2954b9627c3d70da9cceb3c9caf9cd58464d05aea21fd5",
+    "text": "Вытягивание: Мана"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "a20b43b28ffe6dbbd2063441062495c221fef2bcd79f267264898d43d33e09ab",
+    "text": "Кровавый избыток"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "b58acff08c2888e57dedfabbac94a7557a5473bc0d0b56d3510f8cb8e0d4dab8",
+    "text": "Ядовитый вампиризм"
+  },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
     "source": "Blessed Leech",

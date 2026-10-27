@@ -2939,6 +2939,66 @@
     "sourceHash": "40663d04274fb6d5ad9808495326f3617143ffbb9e97b2f6d4df3169d07e2c5c",
     "text": "濒死状态持续时间延长{{value0}}回合"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "b280a4274536653a9f8ce05bc5fe901de8436d76779b06d541221056029364c9",
+    "text": "苦难虹吸"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "5cb8c6484d4a79e718776a9e564026c739609fd049df3f18af11a0dc17d16b9d",
+    "text": "护甲虹吸"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "8649a9e71f51239be75da41d157339fc401ac189885e4f0ab71f9b5db7e1c36e",
+    "text": "血债"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "0f33eaf7c358f387a86df28e79fc3cbb36ed0820643901534977a196e660dab2",
+    "text": "放血"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "a71838e8264a3c1af0c0622a2fe040410a1b493779ca116709b5787d8948801b",
+    "text": "剔除弱者"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "3bd43382e22c7c954e8114ccd99e0e6b1a7b7595181c9b9e2513008f4d030dff",
+    "text": "深度虹吸"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "7998982eab4eba7e595b7192060708b43c662e4e4f94af3264c1ab9ea08167fb",
+    "text": "绝境虹吸"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "b4c230243510e04ffc6fde72a4879918486fb124a2b8c427186e8f6ff8bb47f2",
+    "text": "法力虹吸"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "9a437948732ac5cda89d1dbed3cd6c2b535fa58b1e1360b737e632b1afc05264",
+    "text": "鲜血溢流"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "6fc2472b47b79721972bbb6f730950f3789e4103de2341709540da63516351e4",
+    "text": "恶性汲取"
+  },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
     "source": "Blessed Leech",

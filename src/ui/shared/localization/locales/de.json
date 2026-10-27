@@ -2939,6 +2939,66 @@
     "sourceHash": "fac0eaa56159b34e950f0cfa9f30e13bb789ac336b75e729537fa0933537b109",
     "text": "Nahtod dauert {{value0}} Runde länger"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "ea5a0c27ad690d5eb8ed1c16b4d39455d64e72fc85c0da92bc4d1ceaf5126a97",
+    "text": "Leidensentzug"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "c65a69fee5b7122b8ecfddda5c262e1a0c8d8bfffedc069d503e53d1d38be495",
+    "text": "Rüstungsentzug"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "9c6436f34eee994d07a170b4f5c6ea59091942d07283549ada8301913faccf9a",
+    "text": "Blutschuld"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "58a2887f3d01c61141856fb8636f8d70c120c6f1711e9fad79860ab031b2a899",
+    "text": "Aderlass"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "36b5063bf88da03ab72c36b052a101262034facdbfe12dc80fa5dfdb81de078d",
+    "text": "Die Schwachen ausmerzen"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "c442f5da9b1f5b471e4bb9497de01fffea89631fec53a14439a6000fc0f0bcf2",
+    "text": "Tiefes Absaugen"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "7171087166edc718e665f9caa53a41f6c87b50183700bb848478c80f05ad9a12",
+    "text": "Verzweifeltes Absaugen"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "8d9c0229d27b298480a49578600d804fa046962dacb7d2b60c485f47ccf95a65",
+    "text": "Manaentzug"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "6558a74f50cbab80b86ec0de1eb983fd660c3048c037afd5771854e6fb02b7d9",
+    "text": "Blutüberfluss"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "0687287c882f7f18d0f69c69858303d4314aabd44560a5f82043109eb25cf5c1",
+    "text": "Hochgiftiger Lebensraub"
+  },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
     "source": "Blessed Leech",

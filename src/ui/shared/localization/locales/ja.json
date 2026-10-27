@@ -2939,6 +2939,66 @@
     "sourceHash": "0d7ef20d1d6b107a8707efd48ee9ca42bf64834e368e7638e689fb9b06d34cb3",
     "text": "死の淵の持続時間が{{value0}}ターン延びる"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "e063ea75a5293dee441e37c3c3a53116af0a02fcceb0f8adeef56a20b6f2cbfa",
+    "text": "苦難の吸収"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "f849f4eb1c519dcf051d74983081d648dfb235de8dafe33d6230186af8039d1a",
+    "text": "装甲の吸収"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "190c5967ce6eabc1386caa474c2e47b5780a773f6720bdc7af53712db89e47ed",
+    "text": "血の負債"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "0058dcd12ecc8af1ef85c0cc34a325719e9d90e99d9ff2c437d8f7d514815966",
+    "text": "瀉血"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "cd9c371edff853c693472b252f67a37728a911b848c8679df73e5dd653f8bc09",
+    "text": "弱者の淘汰"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "1b2613e4e562b00c52fb7dc1966c6d3b72c8aefaf59e02c2aec48b78b223c990",
+    "text": "深い吸収"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "51791ec0b90c1606e027621e537e57bd0c48eb0447e89d16e02ad54138386879",
+    "text": "窮地の吸収"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "98212219a536e476ec610009adf7998f7766828e1b54d36023d3c1a5b5c31221",
+    "text": "マナの吸収"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "c03cb8be4779b1c44cd9cb0f6a0a6efc200498516b576fb8dba41f98075f9b5a",
+    "text": "溢れる血潮"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "077df4086ff858e2a3ebfde0565663def11ae290ecacb30fa759b1e3be928842",
+    "text": "猛毒の吸血"
+  },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
     "source": "Blessed Leech",

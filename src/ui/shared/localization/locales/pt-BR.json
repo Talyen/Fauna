@@ -2939,6 +2939,66 @@
     "sourceHash": "da3ef1eff7116d8b90c91ba314faeec8458db0a0f3c38f9e327a9a64e9f00f79",
     "text": "À beira da morte dura {{value0}} turno a mais"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "086d2852232ac319d6a46545ac5d714b49af36de583b35862fd983fd4fd22a26",
+    "text": "Sucção de aflições"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "589ab7fd6afc891deac8fd5ab02c58bfecccb1167d35dcc08e6b84905edc9121",
+    "text": "Sucção de Armadura"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "46a8916debe09d785dc276776b31beb62203df9b1f9d9f9b6585eea222bc4837",
+    "text": "Dívida de sangue"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "2120ce44c7c0f559c88a6888465a90858cc85cb34090c1f96066106840b79f5c",
+    "text": "Sangria"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "137a43646b3e5a1c227a91e5739f73d557bd449260e388a2865eb80fe939c741",
+    "text": "Eliminar os fracos"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "44d363073d9e51190e6e066d0fc9670e2c045d7a6f2074dc132845cdf15ec294",
+    "text": "Sucção profunda"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "8015c9f9ce46166290bd115811f44b4ccf75ab7acbdee4c0ba253d3a35d4b48d",
+    "text": "Sucção desesperada"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "ee1b9163ece96965a698735d2bb73cc97236d1a6e2921b17762a84f91d1fa234",
+    "text": "Sucção de Mana"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "fa31a28f0e222899c9dbd6961d61d5c90af293a7b4eaa128751d213ab3633734",
+    "text": "Transbordamento sanguíneo"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "7f1471475b87f36471cdd404661ef5cb17720927a711dd3f3bed800725815f9b",
+    "text": "Drenagem virulenta"
+  },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
     "source": "Blessed Leech",

@@ -2987,6 +2987,66 @@
     "sourceHash": "46c62c1f468b78a3f0fc6fde3b3d7d3578e2810fc90910ddbb1122919c785896",
     "text": "Aux portes de la mort dure {{value0}} tour de plus"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "a2f79167cd9f61935a30062f6aca490b37c92d394e26fa13d51b2d25f9dca713",
+    "text": "Drain d’affliction"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "dd983e044f622bf694439179f95b9894663e90c3bc74c320b93d0fff185de772",
+    "text": "Siphon d’Armure"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "bd83294a38807a90bbc1c4497f48526fa15ad9f659c310dc778af8bba0300766",
+    "text": "Dette de sang"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "8ecaa16b379ec0d7ee89d078313dcaa1fe614c91bcbcb435561ed62dbc6740b9",
+    "text": "Saignée"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "ae9db6e6c08c6ba13809a70ffb683522d072cd102a3b937aee68e0a86bc66525",
+    "text": "Éliminer les faibles"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "44a6346feb00bd6ef3562ca35c6e0aa65509faef13f3945b77959f71bbd098a4",
+    "text": "Drain profond"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "faaa3be893218d8472199bc1468a26882d4f912293eb7f3d05d005efd635668c",
+    "text": "Drain désespéré"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "6016ddec2247b4f0eeeab6f926dd685ace60d221e61998909170f01b1defc5ce",
+    "text": "Siphon de Mana"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "bce93f58310c810eb3ac02691c63186a49106f722019bef2b41dea06ff8a650a",
+    "text": "Débordement sanguin"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "880949279df61053aeeaf03b76228e04ecdac1e88e38908b5dd4c6be6d01986c",
+    "text": "Vol de vie virulent"
+  },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
     "source": "Blessed Leech",
