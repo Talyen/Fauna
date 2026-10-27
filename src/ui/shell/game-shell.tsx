@@ -141,7 +141,16 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     if (current.game !== game || current.overlayActive || current.cloud.blocking) return;
     const command = soleReplacement(current.game, autoEndTurn);
     if (command && session.command(command)) automaticReplacementFocus.current = true;
-  }, [session, game, autoEndTurn, surface.top, view.ready, view.closing]);
+  }, [
+    session,
+    game,
+    autoEndTurn,
+    surface.top,
+    view.ready,
+    view.closing,
+    view.overlayActive,
+    view.cloud.blocking,
+  ]);
   useLayoutEffect(() => {
     if (!automaticReplacementFocus.current) return;
     if (route !== "play" || game.phase !== "battle") {

@@ -8425,9 +8425,9 @@
   },
   "glossary.controllerHelp": {
     "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
-    "sourceHash": "8662f7938a4e66576800aa0ec150d833d634c1e5d47ea2ab22664f2419725b7f",
-    "text": "Utilisez la croix directionnelle ou le stick gauche pour naviguer ; {{confirm}} sélectionne ; {{back}} revient en arrière ; {{endTurn}} termine le tour · Consultez les capacités des créatures dans la Collection depuis le menu"
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
+    "sourceHash": "f60379d6b2d6ff6e1e997f3298b2c8e3adb6c3d5a67bc6994d7e303e0e1e17f4",
+    "text": "Utilisez la croix directionnelle ou le stick gauche pour naviguer ; {{confirm}} active ; {{inspect}} examine les images hors combat ; {{back}} revient en arrière ; {{endTurn}} termine le tour"
   },
   "glossary.entries": {
     "reviewed": true,
@@ -8437,9 +8437,9 @@
   },
   "glossary.keyboardHelp": {
     "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
-    "sourceHash": "0e5e045a36b8b29dc84ad023b5615ac1e657f8bdaec15489c86d03714f6a0eaf",
-    "text": "Utilisez W/A/S/D ou Tab pour naviguer ; A/D change de cible ; Entrée sélectionne ; Échap revient en arrière · Consultez les capacités des créatures dans la Collection depuis le menu"
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
+    "sourceHash": "fd49d123545fdcdb219f83da97c4d11e16f27640cb742b3c5515d09430b2a217",
+    "text": "W/A/S/D ou Tab pour naviguer ; A/D change de cible ; Entrée active ; I ou clic droit examine les images hors combat ; Échap revient en arrière"
   },
   "glossary.title": {
     "reviewed": true,

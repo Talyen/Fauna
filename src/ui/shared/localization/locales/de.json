@@ -8425,9 +8425,9 @@
   },
   "glossary.controllerHelp": {
     "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
-    "sourceHash": "5cd9e39b2ddc27f48d4e2a2d71389b2b6b5ca345545b49f6af61067d5c33e096",
-    "text": "Mit Steuerkreuz oder linkem Stick navigieren; {{confirm}} wählt aus; {{back}} geht zurück; {{endTurn}} beendet den Zug · Kreaturenfähigkeiten in der Sammlung über das Menü ansehen"
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
+    "sourceHash": "fdaaa32d5cd81717a1a56538f78a41629e61eabcd6d8d18cdf3ccccecf76e3f0",
+    "text": "Mit Steuerkreuz oder linkem Stick navigieren; {{confirm}} aktiviert; {{inspect}} untersucht Bilder außerhalb des Kampfes; {{back}} geht zurück; {{endTurn}} beendet den Zug"
   },
   "glossary.entries": {
     "reviewed": true,
@@ -8437,9 +8437,9 @@
   },
   "glossary.keyboardHelp": {
     "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
-    "sourceHash": "3cf9cfde53392761b09ae6a021d839ad8cba0c1af787f98b6d25e6fbe655f02e",
-    "text": "Mit W/A/S/D oder Tab navigieren; A/D wechselt das Ziel; Enter wählt aus; Escape geht zurück · Kreaturenfähigkeiten in der Sammlung über das Menü ansehen"
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
+    "sourceHash": "97200530ae542236fcc75d0f573b3f0602493bdaf09eedc48237829ca787cc18",
+    "text": "Mit W/A/S/D oder Tab navigieren; A/D wechselt das Ziel; Enter aktiviert; I oder Rechtsklick untersucht Bilder außerhalb des Kampfes; Escape geht zurück"
   },
   "glossary.title": {
     "reviewed": true,

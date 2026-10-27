@@ -8425,9 +8425,9 @@
   },
   "glossary.controllerHelp": {
     "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
-    "sourceHash": "d31a24dd081016fc5aa5fad220917c7639dfb330ee2755c209822704a59820b9",
-    "text": "使用方向键或左摇杆导航；{{confirm}}选择；{{back}}返回；{{endTurn}}结束回合 · 从菜单中的收藏查看生物能力"
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
+    "sourceHash": "a35097c86a3273fc0f4ba955263e63f7b8d1f5266e34bb7eecd45c3ab3ce80e2",
+    "text": "使用方向键或左摇杆导航；{{confirm}}执行；{{inspect}}在战斗外查看图画；{{back}}返回；{{endTurn}}结束回合"
   },
   "glossary.entries": {
     "reviewed": true,
@@ -8437,9 +8437,9 @@
   },
   "glossary.keyboardHelp": {
     "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
-    "sourceHash": "d827a2050aa7535dcb3c9199b63ac5901e26fdca991cf5e53a7190445df270a7",
-    "text": "使用W/A/S/D或Tab导航；A/D切换目标；Enter选择；Escape返回 · 从菜单中的收藏查看生物能力"
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
+    "sourceHash": "04adfe61e222730e8fbdded0e6bd05b11cd9f4d0ed55929292b86f664e572aae",
+    "text": "使用 W/A/S/D 或 Tab 导航；A/D 切换目标；Enter 执行；I 或右键在战斗外查看图画；Escape 返回"
   },
   "glossary.title": {
     "reviewed": true,

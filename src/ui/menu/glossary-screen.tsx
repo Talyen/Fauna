@@ -6,11 +6,11 @@ import { Keyword, KeywordText } from "../shared/keyword-text";
 export function GlossaryScreen({
   back,
   controller = false,
-  prompts = { confirm: "A", back: "B", endTurn: "Y" },
+  prompts = { confirm: "A", back: "B", inspect: "X", endTurn: "Y" },
 }: {
   back: () => void;
   controller?: boolean;
-  prompts?: { confirm: string; back: string; endTurn: string };
+  prompts?: { confirm: string; back: string; inspect: string; endTurn: string };
 }) {
   const i18n = useMessages();
   return (
@@ -24,12 +24,12 @@ export function GlossaryScreen({
         {controller
           ? i18n.message(
               "glossary.controllerHelp",
-              "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+              "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
               prompts,
             )
           : i18n.message(
               "glossary.keyboardHelp",
-              "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+              "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
             )}
       </p>
       {/* eslint-disable jsx-a11y/no-noninteractive-tabindex -- A named scrolling region needs focus for native keyboard scrolling and controller access */}

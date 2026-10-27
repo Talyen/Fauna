@@ -8425,9 +8425,9 @@
   },
   "glossary.controllerHelp": {
     "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
-    "sourceHash": "cbe7018247a5d7b1ef90b5e9238ff2a60b7e3f2c5264749dc2068b42a1b176ea",
-    "text": "十字キーまたは左スティックで移動; {{confirm}}で決定; {{back}}で戻る; {{endTurn}}でターン終了 · メニューのコレクションでクリーチャーの能力を確認"
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
+    "sourceHash": "33ee1c29957c0fb9d969dd28147c00100ccc94bcec1e6646f31ace212901c7e9",
+    "text": "方向キーか左スティックで移動; {{confirm}}で実行; {{inspect}}で戦闘外の絵を確認; {{back}}で戻る; {{endTurn}}でターン終了"
   },
   "glossary.entries": {
     "reviewed": true,
@@ -8437,9 +8437,9 @@
   },
   "glossary.keyboardHelp": {
     "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
-    "sourceHash": "0ae311f7e5b781ad4ba3e7b5952722553d77811b7a4ea29b6b977a4f2b8db110",
-    "text": "W/A/S/DまたはTabで移動; A/Dで対象を切り替え; Enterで決定; Escapeで戻る · メニューのコレクションでクリーチャーの能力を確認"
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
+    "sourceHash": "83395823d6858c201eb41f8377f37622004f6a2289aa8400cd231d1662b5d8a8",
+    "text": "W/A/S/DかTabで移動; A/Dで対象を切り替え; Enterで実行; Iか右クリックで戦闘外の絵を確認; Escapeで戻る"
   },
   "glossary.title": {
     "reviewed": true,

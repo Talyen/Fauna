@@ -8425,9 +8425,9 @@
   },
   "glossary.controllerHelp": {
     "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
-    "sourceHash": "c6564a826af889aa6eff96ff532e6aaaa37be99f80be608629df680a62568f07",
-    "text": "Usa la cruceta o el joystick izquierdo para navegar; {{confirm}} selecciona; {{back}} vuelve atrás; {{endTurn}} termina el turno · Consulta las habilidades de las criaturas en Colección desde el menú"
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
+    "sourceHash": "71869476a915cbf9653eb6e5fa05347f4f37ff3ae97cad648ec7212f94ea58ca",
+    "text": "Usa la cruceta o el joystick izquierdo para navegar; {{confirm}} activa; {{inspect}} examina imágenes fuera del combate; {{back}} vuelve atrás; {{endTurn}} termina el turno"
   },
   "glossary.entries": {
     "reviewed": true,
@@ -8437,9 +8437,9 @@
   },
   "glossary.keyboardHelp": {
     "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
-    "sourceHash": "40f2575586e10c3f247374e5daecf2fa734a11bd101a38a9c18c480941f225a2",
-    "text": "Usa W/A/S/D o Tab para navegar; A/D cambia de objetivo; Enter selecciona; Escape vuelve atrás · Consulta las habilidades de las criaturas en Colección desde el menú"
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
+    "sourceHash": "3ae330ac617ade7a4b6a65baf804fb39554200ca8973e6ecfb31085f1299a04c",
+    "text": "W/A/S/D o Tab para navegar; A/D cambia de objetivo; Enter activa; I o clic derecho examina imágenes fuera del combate; Escape vuelve atrás"
   },
   "glossary.title": {
     "reviewed": true,

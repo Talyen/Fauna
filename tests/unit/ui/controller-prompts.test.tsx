@@ -26,7 +26,7 @@ it("uses controller-specific labels for the same standard gamepad positions", ()
 
 it("shows the selected controller instructions without keyboard prompts", () => {
   render(<GlossaryScreen back={() => {}} controller prompts={CONTROLLER_PROMPTS.playstation} />);
-  expect(screen.getByText(/Cross selects; Circle goes back; Triangle ends the turn/)).toBeTruthy();
+  expect(screen.getByText(/Cross activates; Square inspects artwork outside battle/)).toBeTruthy();
   expect(screen.queryByText(/W\/A\/S\/D/)).toBeNull();
 });
 
@@ -42,5 +42,6 @@ it("localizes PlayStation symbol names while retaining the same button positions
   );
   const help = screen.getByText(/Croix/).textContent;
   expect(help).toContain("Rond");
+  expect(help).toContain("Carré");
   expect(help).toContain("Triangle");
 });

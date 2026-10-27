@@ -8425,9 +8425,9 @@
   },
   "glossary.controllerHelp": {
     "reviewed": true,
-    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
-    "sourceHash": "556ccdfef797a86d906a5c68b7cf728b9c745ea11f48c62c105ac830eb66ab33",
-    "text": "Перемещение: крестовина или левый стик; выбор: {{confirm}}; назад: {{back}}; завершить ход: {{endTurn}} · Способности существ можно посмотреть в Коллекции через меню"
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn",
+    "sourceHash": "565322d1ee0d9ac0c910ea0ee3ad3ede3f182b9201aecd73ee6c2b3aadda5d2b",
+    "text": "Крестовина или левый стик для навигации; {{confirm}} — действие; {{inspect}} — осмотр изображений вне боя; {{back}} — назад; {{endTurn}} — завершить ход"
   },
   "glossary.entries": {
     "reviewed": true,
@@ -8437,9 +8437,9 @@
   },
   "glossary.keyboardHelp": {
     "reviewed": true,
-    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
-    "sourceHash": "909da96c1111f2ba60dad05abae071353113652e5cf6b31fbbd6262617e403f8",
-    "text": "Перемещение: W/A/S/D или Tab; смена цели: A/D; выбор: Enter; назад: Escape · Способности существ можно посмотреть в Коллекции через меню"
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back",
+    "sourceHash": "35a36572cf8c3828dcaaae169affda563d79ac352070dd8262a13acfcbef7588",
+    "text": "W/A/S/D или Tab для навигации; A/D меняет цель; Enter — действие; I или правая кнопка мыши — осмотр изображений вне боя; Escape — назад"
   },
   "glossary.title": {
     "reviewed": true,

@@ -246,13 +246,13 @@
     "text": "Last battle earnings"
   },
   "glossary.controllerHelp": {
-    "text": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu"
+    "text": "Use the D-pad or left stick to navigate; {{confirm}} activates; {{inspect}} inspects artwork outside battle; {{back}} goes back; {{endTurn}} ends the turn"
   },
   "glossary.entries": {
     "text": "Glossary entries"
   },
   "glossary.keyboardHelp": {
-    "text": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu"
+    "text": "W/A/S/D or Tab to navigate; A/D switches targets; Enter activates; I or right-click inspects artwork outside battle; Escape goes back"
   },
   "glossary.title": {
     "text": "Glossary & controls"
