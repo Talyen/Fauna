@@ -77,6 +77,12 @@
     "sourceHash": "2f4eba67deedc1b6516240c9516307228d3562dea8bf95d52b35a691f11b9197",
     "text": "前往篝火"
   },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "79b4b8572c542a3f26da1a5390090f376f27ab498e380eaea3da8f4f3fea598d",
+    "text": "复制品 · 本场战斗有效"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -202,6 +208,24 @@
     "source": "Your starter team",
     "sourceHash": "c175ce08276fabba673466a5c4e0a9d2f01266e7c094fbf158ff5738f2e188f3",
     "text": "你的初始队伍"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "e0a2888ce489d6e25a2ec03390ac6156bda2b593348a6c69d7ac3dc4d6a7b195",
+    "text": "+{{amount}} 金币"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "220313d9f85414e60f5dee1620a3e1739b8c1293a2090881461e2ba6cefc2ef6",
+    "text": "+{{amount}} 关键词经验"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "0c7d92f4c4d00423b12f630ab67ca477079db086fc187b7447382ae74ec8a284",
+    "text": "上场战斗的收益"
   },
   "journey.boss": {
     "reviewed": true,
@@ -365,11 +389,11 @@
     "sourceHash": "3717baadd1028e29126f907a9d11248e7df7800406659be1223d172ffb0f64df",
     "text": "旅程收获"
   },
-  "results.goldEarned": {
+  "results.goldEarnedTotal": {
     "reviewed": true,
-    "source": "Gold earned",
-    "sourceHash": "442f8791dc5de6ee8ceaf4239e1da2166686d452c624bf759404aca6f645e03c",
-    "text": "获得的金币"
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "78a1a65cb4f8af8f486d9d525b69599976f1a5bec4ae492543076ce8c4a188ac",
+    "text": "获得 {{amount}} 金币"
   },
   "results.mainMenu": {
     "reviewed": true,

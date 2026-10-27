@@ -1,3 +1,4 @@
+import { MessageParts } from "../../../src/ui/shared/localization/message-parts";
 import { fontHasGlyph, qualifiedFontIssues } from "../../../scripts/localization/font-coverage.mjs";
 import { PageControls } from "../../../src/ui/shared/navigation/pagination";
 import { BattleReadout } from "../../../src/ui/shared/combat/battle-readout";
@@ -766,4 +767,41 @@ it("blocks script qualification when bundled fonts are missing or cannot render 
   expect(
     qualifiedFontIssues({ ...languages, ja: { ...languages.ja, qualified: false } }, {}, () => null),
   ).toEqual([]);
+});
+
+it("reorders rich message values without replacing interactive content and rejects stale translations", () => {
+  const catalog: MessageCatalog = { total: { source: "{{amount}} Gold earned", text: "獲得：{{amount}}" } };
+  function Total() {
+    const i18n = useMessages();
+    return (
+      <p>
+        <MessageParts
+          template={i18n.template("total", "{{amount}} Gold earned")}
+          values={{ amount: <button>42</button> }}
+        />
+      </p>
+    );
+  }
+  const view = render(
+    <MessageProvider locale="en" catalog={{}}>
+      <Total />
+    </MessageProvider>,
+  );
+  const button = screen.getByRole("button", { name: "42" });
+  button.focus();
+  view.rerender(
+    <MessageProvider locale="ja" catalog={catalog}>
+      <Total />
+    </MessageProvider>,
+  );
+  expect(view.container.textContent).toBe("獲得：42");
+  expect(screen.getByRole("button", { name: "42" })).toBe(button);
+  expect(document.activeElement).toBe(button);
+  view.rerender(
+    <MessageProvider locale="ja" catalog={{ total: { source: "Old {{amount}}", text: "古い {{amount}}" } }}>
+      <Total />
+    </MessageProvider>,
+  );
+  expect(view.container.textContent).toBe("42 Gold earned");
+  view.unmount();
 });

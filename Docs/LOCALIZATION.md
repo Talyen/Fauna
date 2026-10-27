@@ -41,7 +41,9 @@ Migrated components use `useMessages()` as `i18n`. Call `i18n.message` with a
 stable literal ID and English sentence, or `i18n.plural` with literal English
 `one` and `other` forms. Named `{{value}}` parameters let translations reorder
 values; use a complete message for accessible names as well as visible labels.
-Numbers are formatted for the selected language. Authored names use
+Numeric message parameters are formatted for the selected language. For rich
+values such as animated numbers, use `i18n.template` with `MessageParts` so
+the translation can move the value without remounting it. Authored names use
 `i18n.content` with the extracted content ID and the original English value;
 never derive gameplay identity from the translated name. Missing, stale or
 structurally invalid translations fall back to English.

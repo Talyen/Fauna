@@ -77,6 +77,12 @@
     "sourceHash": "565bc8cdb0fb36fdeae87be13437efbef4071d52279c12c8f3c090d46a09158d",
     "text": "Посетить костёр"
   },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "0df2865189cddd41c915b94e60a7e33734c75c42bc3b55b46cb5f5d1788c100f",
+    "text": "Копия · Действует до конца боя"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -202,6 +208,24 @@
     "source": "Your starter team",
     "sourceHash": "fae9b7eda36947cf609c1cea558671cf3c26b88309a7cf9fbc5ef62daa80ef26",
     "text": "Ваша стартовая команда"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "a895e349fd9505d98739e1ec5162f10e8a22aa4c6bc4ca72b3614ac551b7a825",
+    "text": "+{{amount}} золота"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "b42e92aa04aa34ff6c0f9fb1fa1ac8755313e9b687b74c76ab60825a30271671",
+    "text": "+{{amount}} опыта ключевых слов"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "0853cdc18205f19aa815888675cb97a8f1cab1f4dd03d01a48d644165e03794f",
+    "text": "Награды последнего боя"
   },
   "journey.boss": {
     "reviewed": true,
@@ -365,11 +389,11 @@
     "sourceHash": "52867d2076ed5d569f5a7473ec0df91a44ea8fd9f865c2d2aa2942434c4084f3",
     "text": "Награды путешествия"
   },
-  "results.goldEarned": {
+  "results.goldEarnedTotal": {
     "reviewed": true,
-    "source": "Gold earned",
-    "sourceHash": "497e9fbe054030d2cbfb16e430eac0ce91434430bdce6765f85f3b49ef5bbf4b",
-    "text": "золота получено"
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "6628b249c8368c931f4cb28e169d432b1ef7ef940cfcfc81f373f0bb1e934598",
+    "text": "Получено золота: {{amount}}"
   },
   "results.mainMenu": {
     "reviewed": true,

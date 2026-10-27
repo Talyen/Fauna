@@ -77,6 +77,12 @@
     "sourceHash": "784b2e08bb993e0822ae2f9866c5a812e4a5f25d2794950a798666a933c91d6c",
     "text": "Visitar la fogata"
   },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "e14e3e4694aabe6436e2717dea5ed14205d0b24f855af2367997d9f521b703ab",
+    "text": "Copia · Dura hasta el final del combate"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -202,6 +208,24 @@
     "source": "Your starter team",
     "sourceHash": "cde76a0ce153e5babde71bb5fead75b24495937d38a627087e7396e1dd2167b6",
     "text": "Tu equipo inicial"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "76e7833e1485588d6df3dc96fb34c945625f5ec415c63e76f2d98ab5b1ab3e65",
+    "text": "+{{amount}} de oro"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "3c3617b92f19459e30268051312ec52fc1f844f99d7edca79f812d7c8fdc5d18",
+    "text": "+{{amount}} de EXP de palabras clave"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "6c68ac74f5863ed979135a751055de215565901852ba9b67a2aed977a40bcae1",
+    "text": "Ganancias del último combate"
   },
   "journey.boss": {
     "reviewed": true,
@@ -365,11 +389,11 @@
     "sourceHash": "928c7934dde70d7b56015dc92b47966c5b7f18229ea80df0290e354e2a4d1699",
     "text": "Ganancias del viaje"
   },
-  "results.goldEarned": {
+  "results.goldEarnedTotal": {
     "reviewed": true,
-    "source": "Gold earned",
-    "sourceHash": "e43bfa75ece9826b8bde0b1edeacb7e22a40724745e088f775a1a0a7e18ede4f",
-    "text": "de oro obtenido"
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "5bc9ddb4c0864ebe28af38f3d250efc1d495c7aba3897aa5ddcc2ab0d90b1bfc",
+    "text": "Oro obtenido: {{amount}}"
   },
   "results.mainMenu": {
     "reviewed": true,

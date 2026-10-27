@@ -113,6 +113,9 @@
   "campfire.visit": {
     "text": "Visit Campfire"
   },
+  "card.copy": {
+    "text": "Copy · Lasts for this battle"
+  },
   "collection.all": {
     "text": "All"
   },
@@ -178,6 +181,15 @@
   },
   "draft.team": {
     "text": "Your starter team"
+  },
+  "earnings.gold": {
+    "text": "+{{amount}} Gold"
+  },
+  "earnings.keywordXp": {
+    "text": "+{{amount}} keyword XP"
+  },
+  "earnings.lastBattle": {
+    "text": "Last battle earnings"
   },
   "glossary.controllerHelp": {
     "text": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu"
@@ -410,8 +422,8 @@
   "results.gains": {
     "text": "Journey gains"
   },
-  "results.goldEarned": {
-    "text": "Gold earned"
+  "results.goldEarnedTotal": {
+    "text": "{{amount}} Gold earned"
   },
   "results.mainMenu": {
     "text": "Main menu"

@@ -77,6 +77,12 @@
     "sourceHash": "4eb13fd1442f34d07a90c49eb854c108f4a0c04a606bba98845a1bf1a9235443",
     "text": "Lagerfeuer besuchen"
   },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "656aa5bc7213692a8ef4780d037bd8995ed6da4ac2f49423a5395266f6a62372",
+    "text": "Kopie · Bleibt für diesen Kampf"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -202,6 +208,24 @@
     "source": "Your starter team",
     "sourceHash": "eda5a6211ceda5533e23d5d19d02366c6b5b736920877917183b04325f086cc2",
     "text": "Dein Startteam"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "0829fd36c19f72abcbcfc16e7059617230b9105d800af294916c9cba89024ad6",
+    "text": "+{{amount}} Gold"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "9dfc989a749dd4cec17c19c6eac8aca0ae16520937356e6d582211dacccea07f",
+    "text": "+{{amount}} Stichwort-EP"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "c00b4d99bbe62fb17bf287d50d3cf1ecbf9a601ad3d71d0b6021d7aa99f12d59",
+    "text": "Erträge des letzten Kampfes"
   },
   "journey.boss": {
     "reviewed": true,
@@ -365,11 +389,11 @@
     "sourceHash": "56be1b15bf63db424afe39654bdd38fd3ebcb30ae6fa66922d3bff4c69d4f61e",
     "text": "Reiseerträge"
   },
-  "results.goldEarned": {
+  "results.goldEarnedTotal": {
     "reviewed": true,
-    "source": "Gold earned",
-    "sourceHash": "45873aec4ed40637da40e397a45b691db0fa1ca537e2f922be9743bd794a5b87",
-    "text": "Gold erhalten"
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "b96e247151de2fc0ad6b1a2228b70819c1e0f9a6ef537eac20693f881679e9c9",
+    "text": "{{amount}} Gold erhalten"
   },
   "results.mainMenu": {
     "reviewed": true,

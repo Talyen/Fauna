@@ -25,13 +25,13 @@ export function extractMessages(files) {
         callee?.type === "MemberExpression" &&
         callee.object?.type === "Identifier" &&
         callee.object.value === "i18n" &&
-        ["message", "plural"].includes(callee.property?.value)
+        ["message", "template", "plural"].includes(callee.property?.value)
       ) {
         const [id, source] = node.arguments.map((arg) => arg.expression);
         if (id?.type !== "StringLiteral" || !/^[a-z][\w]*(?:\.[a-zA-Z][\w]*)+$/.test(id.value))
           throw new Error(`${location}: localization requires a stable literal message ID`);
         let record;
-        if (callee.property.value === "message" && source?.type === "StringLiteral")
+        if (["message", "template"].includes(callee.property.value) && source?.type === "StringLiteral")
           record = { text: source.value };
         else if (callee.property.value === "plural" && source?.type === "ObjectExpression") {
           const forms = Object.fromEntries(

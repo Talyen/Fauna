@@ -77,6 +77,12 @@
     "sourceHash": "bfe2ef6f7439571e92d2a65a44f30e8b8ca38fa7fc390c1878a7813fcf1dbf6f",
     "text": "焚き火に向かう"
   },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "f2b7ac5a272db7cec019acd3625967dd0d037e89f0bec0f1487a4d73c2a83869",
+    "text": "コピー · この戦闘中のみ有効"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -202,6 +208,24 @@
     "source": "Your starter team",
     "sourceHash": "60602fbabbb3b02e3daeaaf114fdb6e65eac24d667536a9b13e8baaec27e1bb6",
     "text": "最初のチーム"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "3ba649b0f7a3a6359c1be1827d5789e3a9aaeeea67e380826c0488b58012b1c6",
+    "text": "ゴールド +{{amount}}"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "4959de8019f1b445d8b331d800cde3319d119bb8bcd9981ef3f0876a3591ce15",
+    "text": "キーワード経験値 +{{amount}}"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "c3cc4539064d747d94fdbc24ed184d42f2751c1f95d0cef773901380302e74ea",
+    "text": "前回の戦闘報酬"
   },
   "journey.boss": {
     "reviewed": true,
@@ -365,11 +389,11 @@
     "sourceHash": "4761c24a98c2b974104260d86bb8615a5283d8b31549e57854a6518da89df5c0",
     "text": "旅の報酬"
   },
-  "results.goldEarned": {
+  "results.goldEarnedTotal": {
     "reviewed": true,
-    "source": "Gold earned",
-    "sourceHash": "c53b9d9a6c9c8042749ca41ffe3cd65f4431fffec5d8089d5f900f8e49dcaba8",
-    "text": "獲得ゴールド"
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "03d0b63220cb5884f7991360d6b90b181e633ab758b8ff1b430abdb2b3d629df",
+    "text": "獲得ゴールド：{{amount}}"
   },
   "results.mainMenu": {
     "reviewed": true,

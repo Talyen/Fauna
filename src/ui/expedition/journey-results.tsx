@@ -1,3 +1,4 @@
+import { MessageParts } from "../shared/localization/message-parts";
 import { useMessages } from "../shared/localization/message-context";
 import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
@@ -45,10 +46,16 @@ export function JourneyResults({ game, home }: { game: StateAt<"victory" | "defe
               <div className="journey-totals">
                 <p>
                   <Coins className="gold-icon" aria-hidden="true" />
-                  <strong>
-                    <AnimatedNumber value={summary.currency} />
-                  </strong>{" "}
-                  {i18n.message("results.goldEarned", "Gold earned")}
+                  <MessageParts
+                    template={i18n.template("results.goldEarnedTotal", "{{amount}} Gold earned")}
+                    values={{
+                      amount: (
+                        <strong>
+                          <AnimatedNumber value={summary.currency} />
+                        </strong>
+                      ),
+                    }}
+                  />
                 </p>
               </div>
             ) : null}

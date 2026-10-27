@@ -45,7 +45,9 @@ export function ActionDetails({
           />
         </p>
       )}
-      {card.temporary && !def.consume ? <p>Copy · Lasts for this battle</p> : null}
+      {card.temporary && !def.consume ? (
+        <p>{i18n.message("card.copy", "Copy · Lasts for this battle")}</p>
+      ) : null}
       <CardRules card={def} modifiers={modifiers} power={enemyPower} level={card.level} value={value} />
     </div>
   );

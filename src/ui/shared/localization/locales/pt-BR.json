@@ -77,6 +77,12 @@
     "sourceHash": "f5d934d81e2cc7d37d7c64806c29b1243c42ce1dc2a2c3b9825498f63303d502",
     "text": "Visitar a fogueira"
   },
+  "card.copy": {
+    "reviewed": true,
+    "source": "Copy · Lasts for this battle",
+    "sourceHash": "23fc8cdaffba75467ac26b9ee61ecb36fcf72f416f1922d7138854b74343fd9d",
+    "text": "Cópia · Dura até o fim do combate"
+  },
   "collection.all": {
     "reviewed": true,
     "source": "All",
@@ -202,6 +208,24 @@
     "source": "Your starter team",
     "sourceHash": "7347a3a23e3f4a175ecdc9056c130f1842a6b681937be28ba0ab492d95d8f70b",
     "text": "Sua equipe inicial"
+  },
+  "earnings.gold": {
+    "reviewed": true,
+    "source": "+{{amount}} Gold",
+    "sourceHash": "105e0fc97f02195027fc13447500c514564aa30c35aaae1426a43e9b94f20d66",
+    "text": "+{{amount}} de ouro"
+  },
+  "earnings.keywordXp": {
+    "reviewed": true,
+    "source": "+{{amount}} keyword XP",
+    "sourceHash": "95df3ed9cf56d5f62bc4dfca1162b748b6ad3c5c6eaebd72f3bd225ecb5d1004",
+    "text": "+{{amount}} de EXP de palavras-chave"
+  },
+  "earnings.lastBattle": {
+    "reviewed": true,
+    "source": "Last battle earnings",
+    "sourceHash": "23f5fbcf120e579668942e48200619d8fe213c8a390194aaf06db8bdff7a5de3",
+    "text": "Ganhos do último combate"
   },
   "journey.boss": {
     "reviewed": true,
@@ -365,11 +389,11 @@
     "sourceHash": "89ef7033a1e5cca756f149ae8eefb336dda72e2ef3bb649fc949560d5e1c0e8f",
     "text": "Ganhos da jornada"
   },
-  "results.goldEarned": {
+  "results.goldEarnedTotal": {
     "reviewed": true,
-    "source": "Gold earned",
-    "sourceHash": "30bdb2ccf71c5f42f65074edf163224599d3c81dffe7f44858b5b991fe83162e",
-    "text": "de ouro recebido"
+    "source": "{{amount}} Gold earned",
+    "sourceHash": "b267c87a19b3e981dcb18a7a5ec8d80d3cd37c78ec4453fc4f331f497c1b600a",
+    "text": "Ouro recebido: {{amount}}"
   },
   "results.mainMenu": {
     "reviewed": true,
