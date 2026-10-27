@@ -1379,6 +1379,12 @@
     "sourceHash": "e22d969f4ff5f7f9664188284e121d7511f6e885592419b099e0156908b1233c",
     "text": "Осеннее озарение"
   },
+  "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
+    "sourceHash": "c9f4587af8c8eca4a9fa2ccfab876c7270906fa4dbe50cf87f8d7461a8dbd7d1",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> живому союзнику"
+  },
   "content.card.almanelle-rooted-year.name": {
     "reviewed": true,
     "source": "Rooted Year",
@@ -1487,6 +1493,12 @@
     "sourceHash": "d9ad82913a9428a17b793811ef5775ae1fb92e697bbf4fb2b201e8156fa67084",
     "text": "Лепестковая вуаль"
   },
+  "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "9cab809f18c469caa159a92cecaf30fd3e97a08b69a23f86e7584bf937dbb923",
+    "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -1534,6 +1546,12 @@
     "source": "Spore Puff",
     "sourceHash": "5711a982d86b106f966fe8e5be451d17ed5ee10c9e98ff5286af02ab1dd3150d",
     "text": "Облако спор"
+  },
+  "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
+    "sourceHash": "683a374791b884033f729322b20303dd7b5361311a6511ca799787321c3f6b8d",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>ядом</keyword0>"
   },
   "content.card.captoad-guard.name": {
     "reviewed": true,
@@ -1583,11 +1601,23 @@
     "sourceHash": "62eda776fba8f3755eb08979b1d7d816bc6f8a0460671592b98f6ce26aed4f7c",
     "text": "Дрёма под колыбельную"
   },
+  "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "6adafd6baf86416a034c720fc0e0287c5d9024fea0615ee1ea24f900d7da15bc",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику; <keyword1>Очистите</keyword1> <keyword2>исцелённого</keyword2> союзника"
+  },
   "content.card.chimecricket-nullify.name": {
     "reviewed": true,
     "source": "Hush Dome",
     "sourceHash": "c8cd884a4e926b96cd41528893e379b0139ec3833ec85c919789cb6f9abde8b4",
     "text": "Купол тишины"
+  },
+  "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
+    "sourceHash": "7c07e261075efe25a81b99eaa307d267d07e813be6b21855711bf2e2a11b8ee7",
+    "text": "<keyword0>Аннулируйте</keyword0> следующий вредный статусный эффект каждого союзника"
   },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
@@ -1613,6 +1643,12 @@
     "sourceHash": "5e846f218a076293590d80f42d76d1042d32627a097cb90bbbbda3e13f92e979",
     "text": "Струя рифа"
   },
+  "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "29244cb9744b81d74419c26b7b28f806182b56d984acdaca77ee3a5c6f3fc49b",
+    "text": "Нанесите {{value0}} урона <keyword0>водой</keyword0>"
+  },
   "content.card.coralcurl-guard.name": {
     "reviewed": true,
     "source": "Bubble Ward",
@@ -1631,11 +1667,23 @@
     "sourceHash": "2731afd974db53e15cceb26febaac9626e0f45508417560387617b6b3b4d3d9b",
     "text": "Коралловая спираль"
   },
+  "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "3ccdea4639a46037eeb4941a413df700aabea65355be377074916fe3062e7fa4",
+    "text": "Сменитесь со случайным существом из резерва; <keyword0>Ослепите</keyword0> всех врагов"
+  },
   "content.card.dawncall-attack.name": {
     "reviewed": true,
     "source": "Sunwing Sweep",
     "sourceHash": "d20db00b4e7258873646ab72a0297cc07b8c77e0bf71740da7eebbf372765baf",
     "text": "Взмах солнечных крыльев"
+  },
+  "content.card.dawncall-attack.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "f797980b28e990edd32cb9c1eb6e84a11bfa2df1383fbfe51139e0b3f303af8d",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>светом</keyword0>"
   },
   "content.card.dawncall-heal.name": {
     "reviewed": true,
@@ -2188,6 +2236,12 @@
     "source": "Mending Spring",
     "sourceHash": "ada03305d04582911caac0b51b644595ed3683d80d24fcdc805100fe4a0d3ca1",
     "text": "Целебный родник"
+  },
+  "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "74a0547d165c872c4a53183160bb4c68ce0b80b872d6f6deb59d27db9b8ae9f8",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику; <keyword1>Очистите</keyword1> <keyword2>исцелённого</keyword2> союзника"
   },
   "content.card.reverie-dream-double.name": {
     "reviewed": true,

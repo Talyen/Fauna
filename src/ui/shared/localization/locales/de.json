@@ -1379,6 +1379,12 @@
     "sourceHash": "e8be47c7dc8c4a14deb284340adda37c2957d8815c2219fa36a93290c8a47855",
     "text": "Herbsterkenntnis"
   },
+  "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
+    "sourceHash": "91c9a181c5d9d5db46258eebc73b2f65f8608338c191196be533a42ed9b09192",
+    "text": "Stelle einem lebenden Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
   "content.card.almanelle-rooted-year.name": {
     "reviewed": true,
     "source": "Rooted Year",
@@ -1487,6 +1493,12 @@
     "sourceHash": "cdfd3e2fd9eab0483f5d730fc90902d53f6d5a2cb617f852821b9af982efd11d",
     "text": "Blütenschleier"
   },
+  "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "a5a514e0d2c1c553e2f76dee9d86186e10b8743cfad52aac07d50e203fb8c68b",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Blende</keyword1> alle Gegner"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -1534,6 +1546,12 @@
     "source": "Spore Puff",
     "sourceHash": "adbcd248940ee6f216d0409c8d1d7f5c95098bb7982c71d139d830afbed30f22",
     "text": "Sporenwolke"
+  },
+  "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
+    "sourceHash": "f0b52e6e1492a612a391e6f0fbbd1741557640a4d0850635c7032eebe231a395",
+    "text": "Verursache {{value0}} <keyword0>Gift</keyword0>-Schaden bei allen Gegnern"
   },
   "content.card.captoad-guard.name": {
     "reviewed": true,
@@ -1583,11 +1601,23 @@
     "sourceHash": "b350efb7e9aa218c42af9629180ce76ff56e11bf1a732aa8281bc54ae8f3e412",
     "text": "Wiegenliedschweben"
   },
+  "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "dc0bd6c123cc8275fe7f012d1545c72e8787d6c05d9998e62b3708b938e36010",
+    "text": "Stelle dem am schwersten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Reinige</keyword1> den <keyword2>geheilten</keyword2> Verbündeten"
+  },
   "content.card.chimecricket-nullify.name": {
     "reviewed": true,
     "source": "Hush Dome",
     "sourceHash": "45981411b411655859963518d9f2f499fd852a287e4195c077676f752df38253",
     "text": "Stillekuppel"
+  },
+  "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
+    "sourceHash": "4f78b96f8f3997ad9a922386b5a595cdf63bce58a479b0504322c87cc1a6e9f3",
+    "text": "<keyword0>Hebe</keyword0> den nächsten schädlichen Statuseffekt jedes Verbündeten auf"
   },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
@@ -1613,6 +1643,12 @@
     "sourceHash": "07933ee332d2c7a58709a76a81d3cd3c003bd797b1eede61b29c6d56a3309b8d",
     "text": "Riffstrahl"
   },
+  "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "bb3fa3d50252a0d751f6396d7f9e2a2de0c35aaddb3bbca3fa6538213fda32b2",
+    "text": "Verursache {{value0}} <keyword0>Wasser</keyword0>-Schaden"
+  },
   "content.card.coralcurl-guard.name": {
     "reviewed": true,
     "source": "Bubble Ward",
@@ -1631,11 +1667,23 @@
     "sourceHash": "2178cfabd598d35cc0217ea545e9845eef77be6d8c65f6ae60d695dbaf90c8b0",
     "text": "Korallenspirale"
   },
+  "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "8d8fe01a6cf0b4b255bb4126b3b44e271aeb4e283b51b948b38954c8514b98ea",
+    "text": "Wechsle gegen eine zufällige Reserve aus; <keyword0>Blende</keyword0> alle Gegner"
+  },
   "content.card.dawncall-attack.name": {
     "reviewed": true,
     "source": "Sunwing Sweep",
     "sourceHash": "99fc16f688341d28abaf4ea5cc44a16a2fe9a23373cdcb22a1b139c8c91447bb",
     "text": "Sonnenflügelschlag"
+  },
+  "content.card.dawncall-attack.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "9f89006125f862f264e24bb824b75731a7e275e00b519afc04c3b99b29521423",
+    "text": "Verursache {{value0}} <keyword0>Licht</keyword0>-Schaden bei allen Gegnern"
   },
   "content.card.dawncall-heal.name": {
     "reviewed": true,
@@ -2188,6 +2236,12 @@
     "source": "Mending Spring",
     "sourceHash": "ee5ceb0db8122cd57462d3f5f4bac1c69d30701d9f62c847bd225c3d2cb84310",
     "text": "Heilquelle"
+  },
+  "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "495bc91abf443fc3d4e2f86fb0e2038ae68be3fe0c25a7833ae5feb6864052e7",
+    "text": "Stelle dem am schwersten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Reinige</keyword1> den <keyword2>geheilten</keyword2> Verbündeten"
   },
   "content.card.reverie-dream-double.name": {
     "reviewed": true,

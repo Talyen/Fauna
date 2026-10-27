@@ -1379,6 +1379,12 @@
     "sourceHash": "3ecf97689ac320155571131fbc81317418537de88f5680de69a72cf1ece0e446",
     "text": "秋日洞见"
   },
+  "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
+    "sourceHash": "14ba7dff99c1943de9e127425f9bb99c59bb7c5750d7cd047c191f656530048a",
+    "text": "为一名存活盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.card.almanelle-rooted-year.name": {
     "reviewed": true,
     "source": "Rooted Year",
@@ -1487,6 +1493,12 @@
     "sourceHash": "c9b777a36d1ca50c86950ca11af8c45b97b387a707a7bc31f38a1790e6aa8b12",
     "text": "花瓣帷幕"
   },
+  "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "2e31ddec3aff7aab34bdc0e2d2b315733a009569d0b686e8023538a5ec38c790",
+    "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -1534,6 +1546,12 @@
     "source": "Spore Puff",
     "sourceHash": "466d458141bd4a55e48b50b587f9a384d6037793c0a0bd09bb516866f437eafd",
     "text": "孢子轻喷"
+  },
+  "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
+    "sourceHash": "26dafcda3878f0a6a6370f864bf524f54efe963b898c7a45ac47be38b39309f0",
+    "text": "对所有敌人造成{{value0}}点<keyword0>中毒</keyword0>伤害"
   },
   "content.card.captoad-guard.name": {
     "reviewed": true,
@@ -1583,11 +1601,23 @@
     "sourceHash": "210bd199abdf77090d11135fad92e9f0b6e213ec9590000cea407f078f56b8e8",
     "text": "摇篮曲漂流"
   },
+  "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "72ba3a11d6b7d6880ca47f05b58a621b024cad1a07dac0e882e10fe16d407230",
+    "text": "为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>净化</keyword1>被<keyword2>治疗</keyword2>的盟友"
+  },
   "content.card.chimecricket-nullify.name": {
     "reviewed": true,
     "source": "Hush Dome",
     "sourceHash": "8eb3775e35708caa9e644f1d6fda395d60586af6188785bad16e6241a5c2264b",
     "text": "静谧穹顶"
+  },
+  "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
+    "sourceHash": "ea60c877d50421741a9aa6c4dacce997f4377fefb1638c63499ad8b787fbb899",
+    "text": "<keyword0>无效化</keyword0>每名盟友受到的下一个有害状态效果"
   },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
@@ -1613,6 +1643,12 @@
     "sourceHash": "4be5774136237d02b271cc3eabeadccdde33a7698d6f7fde973ad5c801ae13bc",
     "text": "礁石喷流"
   },
+  "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "68ea20d29e2babc1e7633aa00ae5c53fd6c73352fed94f5b686575c178968aba",
+    "text": "造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
   "content.card.coralcurl-guard.name": {
     "reviewed": true,
     "source": "Bubble Ward",
@@ -1631,11 +1667,23 @@
     "sourceHash": "14110428b0fe2175c568646b751e4edecadd896bc3cf8ca2e9a2187af7c96634",
     "text": "珊瑚旋舞"
   },
+  "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "89c02cf12984c4907dcb98e57c7e285cbb92e6d9994d456d0ed8b938550013a5",
+    "text": "与一名随机后备交换; <keyword0>致盲</keyword0>所有敌人"
+  },
   "content.card.dawncall-attack.name": {
     "reviewed": true,
     "source": "Sunwing Sweep",
     "sourceHash": "d830650fdc7b93151d3399bb71c9a3e5f8df371a084ea6366ef4ee5705ce46b6",
     "text": "日翼横扫"
+  },
+  "content.card.dawncall-attack.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "24b16891034f83ff281fc239974dac765ce280a686fe31d7bf14753b6f5bb16e",
+    "text": "对所有敌人造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.card.dawncall-heal.name": {
     "reviewed": true,
@@ -2188,6 +2236,12 @@
     "source": "Mending Spring",
     "sourceHash": "856498399db8a630ff482899c90b4fec6fcb8e3f23229fecad545ddb503bb7e4",
     "text": "修复之泉"
+  },
+  "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "4d84b3f965f944bd542329c775d0d38bc8bc671e514bd0f120bef98d29cfc05d",
+    "text": "为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>净化</keyword1>被<keyword2>治疗</keyword2>的盟友"
   },
   "content.card.reverie-dream-double.name": {
     "reviewed": true,

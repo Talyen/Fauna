@@ -1379,6 +1379,12 @@
     "sourceHash": "1b669538da0a84d805f2f80312570c933583eb606900c17c42006fe51a9d7a3a",
     "text": "秋のひらめき"
   },
+  "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
+    "sourceHash": "43fec049237260471501724a62cf2a2d86d59a171398937c0679a8ba7c4253bf",
+    "text": "生存中の味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
   "content.card.almanelle-rooted-year.name": {
     "reviewed": true,
     "source": "Rooted Year",
@@ -1487,6 +1493,12 @@
     "sourceHash": "194f6e9252e4da58d5e79866c7993001fa8f24d605afd6b43a17b6405ed9926c",
     "text": "花びらの帳"
   },
+  "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "3a74a5bb863b153cd24b6a5e68c02498d461b8bdbd0da7dc85e8bc768288d01a",
+    "text": "すべての味方の<keyword0>体力</keyword0>を{{value0}}回復; すべての敵を<keyword1>盲目</keyword1>にする"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -1534,6 +1546,12 @@
     "source": "Spore Puff",
     "sourceHash": "c6227299d54f2e689710806abe821c06d31a63972e821103372ac14c666e467d",
     "text": "胞子の一吹き"
+  },
+  "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
+    "sourceHash": "d30207a5d773ee0052ca390280d509bc769bc7646c8e1514d819ba64fa265610",
+    "text": "すべての敵に{{value0}}の<keyword0>毒</keyword0>ダメージを与える"
   },
   "content.card.captoad-guard.name": {
     "reviewed": true,
@@ -1583,11 +1601,23 @@
     "sourceHash": "178534e62224f38377e7a674d1265feb86fb9d94f9ca3f5aa7a9669e4b0846d2",
     "text": "子守唄の漂い"
   },
+  "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "de0c8ce04e4316d14b1994a4e2b907df3cfc94ef9877d860f59836bf4e38bc0e",
+    "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復; <keyword2>回復</keyword2>した味方を<keyword1>浄化</keyword1>"
+  },
   "content.card.chimecricket-nullify.name": {
     "reviewed": true,
     "source": "Hush Dome",
     "sourceHash": "43207416035c83f73e97101b71bae5b622b80fded73df67d41079fae0f09151a",
     "text": "静寂のドーム"
+  },
+  "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
+    "sourceHash": "7133daaaab661b7a1ad59a0b7561f183c9d4787fab20a9577a6c98d50797c758",
+    "text": "各味方が次に受ける有害な状態効果を<keyword0>無効化</keyword0>"
   },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
@@ -1613,6 +1643,12 @@
     "sourceHash": "b27d93aa443f4c12567789c6613e5797f005b83196bceef217f9e8a0b4a7bc16",
     "text": "珊瑚礁の噴流"
   },
+  "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "9d7602294f22cfb5df337213c260712b695f9be9fbc41c8cd9e5e40d67cbf04d",
+    "text": "{{value0}}の<keyword0>水</keyword0>ダメージを与える"
+  },
   "content.card.coralcurl-guard.name": {
     "reviewed": true,
     "source": "Bubble Ward",
@@ -1631,11 +1667,23 @@
     "sourceHash": "eaa72438b21c37c702efc5a523aa756dc782949b59e7c0256a71caea05e5b621",
     "text": "珊瑚の螺旋"
   },
+  "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "8bd49a5b531870fb41f5a21fd269668376778f8455d6c5457d4484f2b01b132d",
+    "text": "ランダムな控えと交代; すべての敵を<keyword0>盲目</keyword0>にする"
+  },
   "content.card.dawncall-attack.name": {
     "reviewed": true,
     "source": "Sunwing Sweep",
     "sourceHash": "d1752aa2ca92f9a0869f114e0af36f04850a1bd8c1f22ef3ea38ae56cc9a1ab1",
     "text": "太陽の翼の一掃"
+  },
+  "content.card.dawncall-attack.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "e6e1d9345099da7b57d410a77c16d1988d700095eace7d1a89e18d1b8731d751",
+    "text": "すべての敵に{{value0}}の<keyword0>光</keyword0>ダメージを与える"
   },
   "content.card.dawncall-heal.name": {
     "reviewed": true,
@@ -2188,6 +2236,12 @@
     "source": "Mending Spring",
     "sourceHash": "8bc7abcda170e7c5801e92515fa71e00498b271539fdb07e6ad3b7bb68dd49c4",
     "text": "癒やしの泉"
+  },
+  "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "57ba417cc95168a333008bcb5a175c37274ec272f65dd1c5d2307621788af9fd",
+    "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復; <keyword2>回復</keyword2>した味方を<keyword1>浄化</keyword1>"
   },
   "content.card.reverie-dream-double.name": {
     "reviewed": true,

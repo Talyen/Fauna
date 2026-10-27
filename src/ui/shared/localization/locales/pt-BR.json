@@ -1379,6 +1379,12 @@
     "sourceHash": "6031f9250e9a339894d04a46b0f134d9e05d4efb2fdad7a2b7a8c08ecfbe8190",
     "text": "Visão outonal"
   },
+  "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
+    "sourceHash": "72349174cd322e373f0afac7d7cd0fb4ba83c0d6bb3786a2a88e9ef1cb24daba",
+    "text": "Restaura {{value0}} de <keyword0>Saúde</keyword0> a um aliado vivo"
+  },
   "content.card.almanelle-rooted-year.name": {
     "reviewed": true,
     "source": "Rooted Year",
@@ -1487,6 +1493,12 @@
     "sourceHash": "e1330139e5a5660cc07feceffcde758285ee1c6fb50e8b805ca613a1d0dac5af",
     "text": "Véu de pétalas"
   },
+  "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "5d9aa9cc4c4c909ecf39b7252694b60a392df953412afc2d39143970ec3e4c1e",
+    "text": "Restaura {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados; <keyword1>Cega</keyword1> todos os inimigos"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -1534,6 +1546,12 @@
     "source": "Spore Puff",
     "sourceHash": "98ea952d49592003865962b0d85090a23a17d62074c7fff88d7acb0c0a6142e4",
     "text": "Nuvem de esporos"
+  },
+  "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
+    "sourceHash": "7afb38c80150ce346b7e33c1b708f81058286325871e0cec52e67261289f36a9",
+    "text": "Causa {{value0}} de dano de <keyword0>Veneno</keyword0> a todos os inimigos"
   },
   "content.card.captoad-guard.name": {
     "reviewed": true,
@@ -1583,11 +1601,23 @@
     "sourceHash": "514057845913e008412fc82f92990697fb2b00da6a028adf749f22fb6e8673a6",
     "text": "Deriva de canção de ninar"
   },
+  "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "e75b320e13af5d00575e1006b9529b30bf2cb1ef3b3405526791b0b83f73c7bb",
+    "text": "Restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido; <keyword1>Purifica</keyword1> o aliado <keyword2>curado</keyword2>"
+  },
   "content.card.chimecricket-nullify.name": {
     "reviewed": true,
     "source": "Hush Dome",
     "sourceHash": "a881e8edd630c81c770d0ba9822c7986a0a2a3764fe0de40d76cc3e61b6e2055",
     "text": "Cúpula do silêncio"
+  },
+  "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
+    "sourceHash": "1d35350f608233aa655eec61a39bc5130c880388100fe2a9d618f9da1e0b03b8",
+    "text": "<keyword0>Anula</keyword0> o próximo efeito prejudicial em cada aliado"
   },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
@@ -1613,6 +1643,12 @@
     "sourceHash": "3213b47b08cbf00a5773e7f7ad71cdfe9b1b3ace5f35641243ebd6cbdd3a19b7",
     "text": "Jato do recife"
   },
+  "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "37dbb108ed722cde6a65e1d7fd1f330c04372c48a3bdfc0c661846cc429792e1",
+    "text": "Causa {{value0}} de dano de <keyword0>Água</keyword0>"
+  },
   "content.card.coralcurl-guard.name": {
     "reviewed": true,
     "source": "Bubble Ward",
@@ -1631,11 +1667,23 @@
     "sourceHash": "c0c94042503295c34279ee95192c7965aaaeb50823aa48605740b417b29cdf21",
     "text": "Espiral de coral"
   },
+  "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "6ba159adc0b7704e3de8e8fcae517baecadb3264d7038a0137549ece115ae2e1",
+    "text": "Troca por uma reserva aleatória; <keyword0>Cega</keyword0> todos os inimigos"
+  },
   "content.card.dawncall-attack.name": {
     "reviewed": true,
     "source": "Sunwing Sweep",
     "sourceHash": "6fe85da3c07e46e5d91fbac667a114aa08abe147ee179b799eab6699bd9256f2",
     "text": "Varredura de asas solares"
+  },
+  "content.card.dawncall-attack.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "7d362eeaefc2d14b7cf5d559e855e35aa3cbf61ace847db04f8d090aff451716",
+    "text": "Causa {{value0}} de dano de <keyword0>Luz</keyword0> a todos os inimigos"
   },
   "content.card.dawncall-heal.name": {
     "reviewed": true,
@@ -2188,6 +2236,12 @@
     "source": "Mending Spring",
     "sourceHash": "1fdaf30984936578c4671c9b0238bcbf71e6f0acd580683b685c83d9ac90320f",
     "text": "Fonte reparadora"
+  },
+  "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "737b5b6aee6b302689f604e09fabfc041039b1f039a1b7d13a44ef0d06436b30",
+    "text": "Restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido; <keyword1>Purifica</keyword1> o aliado <keyword2>curado</keyword2>"
   },
   "content.card.reverie-dream-double.name": {
     "reviewed": true,
