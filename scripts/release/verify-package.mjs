@@ -6,6 +6,7 @@ import { readFileSync, statSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { leasePackage } from "./development-retention.mjs";
 import { extractFile, listPackage } from "@electron/asar";
 import { assets } from "../assets/assets.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
@@ -126,7 +127,17 @@ export function verifyDesktopDependencies(names) {
       throw new Error(`Unexpected desktop dependency: ${dependency}`);
   }
 }
-export async function verifyPackage(directory = path.join(ROOT, "release/win-unpacked"), releaseTag) {
+export async function verifyPackage(directory, releaseTag) {
+  const lease = releaseTag && !directory ? null : leasePackage(ROOT, directory);
+  directory ??= lease?.directory ?? path.join(ROOT, "release/win-unpacked");
+  try {
+    return await verifyPackageFiles(directory, releaseTag);
+  } finally {
+    lease?.release();
+  }
+}
+
+async function verifyPackageFiles(directory, releaseTag) {
   const expected = JSON.parse(readFileSync(path.join(ROOT, "package.json"), "utf8"));
   if (expected.build.appId !== "com.fauna.game" || expected.build.productName !== "Fauna")
     throw new Error("Unexpected Fauna application identity.");

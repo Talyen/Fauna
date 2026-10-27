@@ -3,14 +3,25 @@ import { readFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "@playwright/test";
 import { isolatedDesktopEnvironment } from "./desktop-environment.mjs";
+import { leaseLatestDevelopment } from "../release/development-retention.mjs";
 /** Renderer CDP works with disabled Node inspector fuses; no package is modified for testing. */
 export async function launchPackaged(profile) {
   await rm(path.join(profile, "DevToolsActivePort"), { force: true });
+  const root = path.resolve(import.meta.dirname, "../..");
+  const lease = leaseLatestDevelopment(root);
   const child = spawn(
-    path.resolve("release/win-unpacked/Fauna.exe"),
+    path.join(lease?.directory ?? path.resolve(root, "release/win-unpacked"), "Fauna.exe"),
     ["--remote-debugging-port=0", `--user-data-dir=${profile}`, "--mute-audio"],
     { env: isolatedDesktopEnvironment(profile), stdio: "ignore" },
   );
+  // An unsuccessful release keeps the lease rather than risking deletion.
+  child.once("close", () => {
+    try {
+      lease?.release();
+    } catch (error) {
+      console.error(`Package lease retained: ${error.message}`);
+    }
+  });
   let browser, launchError;
   const connections = [];
   child.once("error", (error) => {

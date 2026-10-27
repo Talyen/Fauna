@@ -96,7 +96,7 @@ function blobHash(file, size, algorithm) {
 // Node's COPYFILE_FICLONE_FORCE is ENOSYS on Darwin in some supported Node
 // releases. Call Apple's clonefile directly in one optional standard-library
 // Python process; unlike cp -c, this never silently falls back to a physical copy.
-function nativeClones(plans) {
+export function nativeClones(plans) {
   const script = `import ctypes, errno, json, os, sys
 lib = ctypes.CDLL(None, use_errno=True)
 clone = lib.clonefile

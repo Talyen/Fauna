@@ -3,6 +3,12 @@ import path from "node:path";
 import { expect, it } from "vitest";
 import { put, temporaryDirectory } from "../../support/tooling.mjs";
 import { expireEvidence, expiringEvidence } from "../../../scripts/lib/evidence-retention.mjs";
+import { sealBalanceReport } from "../../../scripts/balance/report-retention.mjs";
+import {
+  createDevelopmentRun,
+  finishDevelopmentRun,
+  withDevelopmentLock,
+} from "../../../scripts/release/development-retention.mjs";
 
 it("expires only unchanged, unpinned evidence from new completed archives after 24 hours", () => {
   const root = temporaryDirectory("fauna-retention-");
@@ -64,4 +70,60 @@ it("expires only complete, unchanged focused captures within mixed reports", () 
   writeFileSync(path.join(archive, "manifest.json"), JSON.stringify({ retention }));
   expect(expireEvidence(root, { now: 86_400_000 })).toEqual([path.join(archive, "files", capture)]);
   expect(existsSync(path.join(archive, "files/reports/localization/font-sources/source.otf"))).toBe(true);
+});
+
+it("expires only sealed complete balance and identifiable generated runs", async () => {
+  const root = temporaryDirectory("fauna-retention-generated-");
+  const archive = path.join(root, "task-one"),
+    files = path.join(archive, "files");
+  put(
+    files,
+    "reports/balance/run-1/report.json",
+    JSON.stringify({ complete: true, evidencePolicy: "failures" }),
+  );
+  put(files, "reports/balance/run-2/report.json", JSON.stringify({ complete: true, evidencePolicy: "full" }));
+  await sealBalanceReport(path.join(files, "reports/balance/run-1"), true, { root: files, now: 0 });
+  await sealBalanceReport(path.join(files, "reports/balance/run-2"), true, { root: files, now: 0 });
+  put(
+    files,
+    "reports/interactions/run-1/report.json",
+    JSON.stringify({ format: 1, complete: true, actions: [] }),
+  );
+  put(
+    files,
+    "reports/performance/capture-1/report.json",
+    JSON.stringify({ format: 3, complete: true, environment: { trace: false }, cases: [{ id: "battle" }] }),
+  );
+  put(files, "reports/performance/capture-1/battle-sample.json", "{}");
+  put(files, "reports/performance/capture-1/battle-summary.json", "{}");
+  put(files, "reports/performance/capture-1/battle-hitches.md", "hitches");
+  const retention = expiringEvidence(archive, ["reports/"], 0);
+  writeFileSync(path.join(archive, "manifest.json"), JSON.stringify({ retention }));
+  const removed = expireEvidence(root, { now: 86_400_000 });
+  expect(removed).toHaveLength(3);
+  expect(existsSync(path.join(files, "reports/balance/run-2/report.json"))).toBe(true);
+});
+
+it("expires sealed archived development packages while retaining distributed and unknown releases", () => {
+  const root = temporaryDirectory("fauna-retention-package-");
+  const archive = path.join(root, "task-one"),
+    files = path.join(archive, "files");
+  put(files, "release/unknown.exe", "release artifact");
+  const [normal, distributed] = withDevelopmentLock(files, () => {
+    const runs = [
+      createDevelopmentRun(files, { commit: "abc", dirty: false }),
+      createDevelopmentRun(files, { commit: "abc", dirty: false }),
+    ];
+    for (const run of runs) {
+      put(run.output, "win-unpacked/Fauna.exe", "development output");
+      finishDevelopmentRun(run, "success");
+    }
+    return runs;
+  });
+  writeFileSync(path.join(distributed.entry, ".retention-distributed"), "retain");
+  const retention = expiringEvidence(archive, ["release/"], 0);
+  writeFileSync(path.join(archive, "manifest.json"), JSON.stringify({ retention }));
+  expect(expireEvidence(root, { now: 86_400_000 })).toEqual([normal.output]);
+  expect(existsSync(path.join(distributed.output, "win-unpacked/Fauna.exe"))).toBe(true);
+  expect(existsSync(path.join(files, "release/unknown.exe"))).toBe(true);
 });

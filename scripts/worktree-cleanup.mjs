@@ -13,20 +13,35 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
 import { assertClean, git, worktrees } from "./lib/git.mjs";
 import { acquireIntegrationLock } from "./lib/integration-lock.mjs";
 import { expiringEvidence } from "./lib/evidence-retention.mjs";
+import { deduplicateArchive } from "./lib/archive-dedup.mjs";
 
 const taskBranch = /^(?:task|codex)\//;
 const rebuildable = new Set(["node_modules", "dist"]);
+// Pins and unusual entries prevent an output from being classified as rebuildable.
+function protectedBuild(file) {
+  const item = lstatSync(file);
+  if (item.isSymbolicLink()) return true;
+  if (item.isFile()) return path.basename(file) === ".retention-keep";
+  if (!item.isDirectory()) return true;
+  return readdirSync(file).some((name) => protectedBuild(path.join(file, name)));
+}
 const ignoredEvidence = (root) =>
   git(root, ["ls-files", "--others", "--ignored", "--exclude-standard", "--directory", "-z"])
     .split("\0")
-    .filter((file) => file && !rebuildable.has(file.replace(/\/$/u, "")));
+    .filter((file) => {
+      if (!file) return false;
+      const name = file.replace(/\/$/u, "");
+      if (name === "dist") return protectedBuild(path.join(root, name));
+      return !rebuildable.has(name);
+    });
 
 // Compare bytes without loading large recordings into memory, and never follow evidence symlinks.
-export function verifyEvidence(source, copy) {
+export function verifyEvidence(source, copy, onFile = () => {}) {
   const original = lstatSync(source),
     archived = lstatSync(copy);
   const mismatch = () => {
@@ -39,21 +54,38 @@ export function verifyEvidence(source, copy) {
     const names = readdirSync(source).sort(),
       copies = readdirSync(copy).sort();
     if (names.length !== copies.length || names.some((name, index) => name !== copies[index])) mismatch();
-    for (const name of names) verifyEvidence(path.join(source, name), path.join(copy, name));
+    for (const name of names) verifyEvidence(path.join(source, name), path.join(copy, name), onFile);
   } else if (original.isFile()) {
     if (!archived.isFile() || archived.isSymbolicLink() || original.size !== archived.size) mismatch();
     const input = openSync(source, "r");
     try {
       const output = openSync(copy, "r");
       try {
+        const digest = createHash("sha256");
         const a = Buffer.allocUnsafe(64 * 1024),
           b = Buffer.allocUnsafe(64 * 1024);
         for (;;) {
           const n = readSync(input, a, 0, a.length, null),
             m = readSync(output, b, 0, b.length, null);
           if (n !== m || !a.subarray(0, n).equals(b.subarray(0, m))) mismatch();
+          digest.update(a.subarray(0, n));
           if (!n) break;
         }
+        const after = lstatSync(copy);
+        if (
+          after.ino !== archived.ino ||
+          after.size !== archived.size ||
+          after.mtimeMs !== archived.mtimeMs ||
+          after.ctimeMs !== archived.ctimeMs
+        )
+          mismatch();
+        onFile(copy, {
+          hash: digest.digest("hex"),
+          size: archived.size,
+          ino: after.ino,
+          mtimeMs: after.mtimeMs,
+          ctimeMs: after.ctimeMs,
+        });
       } finally {
         closeSync(output);
       }
@@ -95,12 +127,26 @@ export function removeMergedTask(root, branch, { keepBranch = false, copyEvidenc
           preserveTimestamps: true,
         });
       }
+      const dedup = [];
       for (const file of ignored)
-        verifyEvidence(path.join(task.path, file), path.join(archive, "files", file));
+        verifyEvidence(path.join(task.path, file), path.join(archive, "files", file), (copy, record) => {
+          if (record.size >= 64 * 1024)
+            dedup.push({ ...record, path: path.relative(archive, copy).split(path.sep).join("/") });
+        });
+      const shared = deduplicateArchive(archives, archive, dedup);
+      if (shared.clonedBytes)
+        console.log(`Archived ${shared.clonedBytes} logical bytes using independent shared clones.`);
       writeFileSync(
         path.join(archive, "manifest.json"),
         JSON.stringify(
-          { branch, head, source: task.path, ignored, retention: expiringEvidence(archive, ignored) },
+          {
+            branch,
+            head,
+            source: task.path,
+            ignored,
+            dedup: dedup.map(({ path, hash, size }) => ({ path, hash, size })),
+            retention: expiringEvidence(archive, ignored),
+          },
           null,
           2,
         ),

@@ -1,10 +1,17 @@
 import { createHash, randomUUID } from "node:crypto";
 import { lstatSync, readFileSync, readdirSync, renameSync, rmSync } from "node:fs";
 import path from "node:path";
+import { generatedName } from "../balance/report-retention.mjs";
+import { readReceipt, eligible as eligibleDevelopmentPackage } from "./development-package-receipt.mjs";
 
 const DAY = 24 * 60 * 60 * 1000;
 const eligible = (name) =>
   /^(?:playwright-report|blob-report|all-blob-reports|test-results)$/.test(name) ||
+  /^reports\/balance\/[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(name) ||
+  /^reports\/(?:performance\/capture|interactions\/run)-[0-9]+$/.test(name) ||
+  /^release\/\.fauna-development\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\/output$/.test(
+    name,
+  ) ||
   /^reports\/review\/[a-z0-9-]+-[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(
     name,
   );
@@ -17,6 +24,68 @@ function captureEvidence(file) {
   if (names.some((name) => typeof name !== "string" || path.basename(name) !== name)) return false;
   const actual = readdirSync(file).sort();
   return names.length === actual.length && names.sort().every((name, index) => name === actual[index]);
+}
+
+function balanceEvidence(file) {
+  const marker = path.join(file, ".balance-retention.json");
+  if (!lstatSync(marker).isFile() || lstatSync(marker).isSymbolicLink()) return false;
+  const record = JSON.parse(readFileSync(marker, "utf8"));
+  if (
+    record.schema !== 1 ||
+    record.kind !== "fauna-generated-balance" ||
+    record.complete !== true ||
+    !Array.isArray(record.files) ||
+    !record.files.length
+  )
+    return false;
+  const expected = new Set(record.files.map((entry) => entry.name));
+  const names = readdirSync(file);
+  if (
+    expected.size !== record.files.length ||
+    names.length !== expected.size + 1 ||
+    names.some((name) => name !== ".balance-retention.json" && !expected.has(name))
+  )
+    return false;
+  for (const entry of record.files) {
+    if (typeof entry.name !== "string" || !generatedName.test(entry.name)) return false;
+    const item = lstatSync(path.join(file, entry.name));
+    if (
+      !item.isFile() ||
+      item.isSymbolicLink() ||
+      item.size !== entry.bytes ||
+      Math.abs(item.mtimeMs - entry.modified) >= 2
+    )
+      return false;
+  }
+  const report = JSON.parse(readFileSync(path.join(file, "report.json"), "utf8"));
+  return report.complete === true && report.evidencePolicy !== "full";
+}
+
+function generatedRun(file, kind) {
+  const reportFile = path.join(file, "report.json");
+  const info = lstatSync(reportFile);
+  if (!info.isFile() || info.isSymbolicLink()) return false;
+  const report = JSON.parse(readFileSync(reportFile, "utf8"));
+  if (report.complete !== true) return false;
+  let expected = ["report.json"];
+  if (kind === "interactions") {
+    if (report.format !== 1 || !Array.isArray(report.actions)) return false;
+  } else {
+    if (
+      report.format !== 3 ||
+      !Array.isArray(report.cases) ||
+      !report.cases.length ||
+      report.environment?.trace
+    )
+      return false;
+    for (const item of report.cases) {
+      if (typeof item.id !== "string" || !/^[a-z0-9-]+$/.test(item.id)) return false;
+      expected.push(`${item.id}-sample.json`, `${item.id}-summary.json`, `${item.id}-hitches.md`);
+    }
+  }
+  const names = readdirSync(file).sort();
+  expected = expected.sort();
+  return names.length === expected.length && names.every((name, index) => name === expected[index]);
 }
 
 function safeParents(archive, relative) {
@@ -83,6 +152,71 @@ export function expiringEvidence(archive, ignored, now = Date.now()) {
       }
     } catch {
       // Missing or unusual report trees are retained.
+    }
+    try {
+      const balance = path.join(archive, "files/reports/balance");
+      if (safeParents(archive, "reports/balance/item")) {
+        for (const name of readdirSync(balance)) {
+          const relative = `reports/balance/${name}`;
+          try {
+            const item = lstatSync(path.join(balance, name));
+            if (
+              eligible(relative) &&
+              item.isDirectory() &&
+              !item.isSymbolicLink() &&
+              balanceEvidence(path.join(balance, name))
+            )
+              names.push(relative);
+          } catch {
+            /* Unsealed, modified or incomplete runs are retained. */
+          }
+        }
+      }
+    } catch {
+      /* Missing or unusual report trees are retained. */
+    }
+    for (const kind of ["performance", "interactions"]) {
+      try {
+        const base = path.join(archive, "files/reports", kind);
+        if (!safeParents(archive, `reports/${kind}/item`)) continue;
+        for (const name of readdirSync(base)) {
+          const relative = `reports/${kind}/${name}`;
+          try {
+            const item = lstatSync(path.join(base, name));
+            if (
+              eligible(relative) &&
+              item.isDirectory() &&
+              !item.isSymbolicLink() &&
+              generatedRun(path.join(base, name), kind)
+            )
+              names.push(relative);
+          } catch {
+            /* Retain incomplete, modified and unknown runs. */
+          }
+        }
+      } catch {
+        /* Missing or unusual report trees are retained. */
+      }
+    }
+  }
+  if (ignored.includes("release/")) {
+    try {
+      const managed = path.join(archive, "files/release/.fauna-development");
+      if (safeParents(archive, "release/.fauna-development/item")) {
+        for (const id of readdirSync(managed)) {
+          const relative = `release/.fauna-development/${id}/output`;
+          try {
+            const entry = path.join(managed, id);
+            const receipt = readReceipt(entry, id);
+            if (eligible(relative) && receipt && eligibleDevelopmentPackage(entry, receipt))
+              names.push(relative);
+          } catch {
+            /* Preserve unknown, changed, pinned or leased packages. */
+          }
+        }
+      }
+    } catch {
+      /* Unmanaged releases remain preserved. */
     }
   }
   for (const relative of names) {

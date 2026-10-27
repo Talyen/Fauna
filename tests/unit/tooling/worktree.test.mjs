@@ -105,7 +105,7 @@ it("validates sparse documentation references without hiding deleted files or br
 it("finishes only its completed task while retaining its branch and ignored evidence", async () => {
   const previous = process.cwd();
   const root = repository(
-    { ".gitignore": ".worktrees/\nreports/\ntest-results/\n", done: "base" },
+    { ".gitignore": ".worktrees/\nreports/\ntest-results/\ndist/\n", done: "base" },
     "fauna-finish-",
   );
   try {
@@ -113,11 +113,14 @@ it("finishes only its completed task while retaining its branch and ignored evid
     mkdirSync(path.join(task.path, "reports"));
     writeFixture(task.path, "reports/unique.trace", "keep original evidence");
     put(task.path, "test-results/generated.trace", "generated test evidence");
+    put(task.path, "dist/assets/.retention-keep", "keep build");
+    put(task.path, "dist/assets/build.js", "retained build");
     const integrateTask = async () => ({ integrated: true, worktree: task.path });
     await finishTask(task.path, { keepWorktree: true, integrateTask });
     expect(readFixture(task.path, "reports/unique.trace")).toBe("keep original evidence");
     const result = await finishTask(task.path, { integrateTask });
     expect(readFixture(result.retired.archive, "files/reports/unique.trace")).toBe("keep original evidence");
+    expect(readFixture(result.retired.archive, "files/dist/assets/build.js")).toBe("retained build");
     const manifest = JSON.parse(readFixture(result.retired.archive, "manifest.json"));
     expect(
       expireEvidence(path.dirname(result.retired.archive), { now: manifest.retention.expiresAt - 1 }),
