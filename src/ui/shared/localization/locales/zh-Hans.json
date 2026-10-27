@@ -251,12 +251,6 @@
     "sourceHash": "79b4b8572c542a3f26da1a5390090f376f27ab498e380eaea3da8f4f3fea598d",
     "text": "复制品 · 本场战斗有效"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "40428e6ed8b278eaf740359f1c34923695c212d65fb8e14e176da95c1ceb0be2",
-    "text": "{{name}}，{{owner}}，{{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",

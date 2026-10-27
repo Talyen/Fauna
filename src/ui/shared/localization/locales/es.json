@@ -251,12 +251,6 @@
     "sourceHash": "e14e3e4694aabe6436e2717dea5ed14205d0b24f855af2367997d9f521b703ab",
     "text": "Copia · Dura hasta el final del combate"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "16c6c51f2c09c8964404eb3aa8f129f353d8d3d98c46d062c7af0f329e2fc5c6",
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",

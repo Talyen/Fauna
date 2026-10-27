@@ -251,12 +251,6 @@
     "sourceHash": "656aa5bc7213692a8ef4780d037bd8995ed6da4ac2f49423a5395266f6a62372",
     "text": "Kopie · Bleibt für diesen Kampf"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "00d9c4a2d8ec9ecfeb4205f07bcea039fe046c77e1826888108b0f5570e15ccc",
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",

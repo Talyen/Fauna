@@ -251,12 +251,6 @@
     "sourceHash": "0df2865189cddd41c915b94e60a7e33734c75c42bc3b55b46cb5f5d1788c100f",
     "text": "Копия · Действует до конца боя"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "d5d028a4c395f319e0c26b2254fa9fea838bfe7dd4d7175fe7c3d2075ee256c7",
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",

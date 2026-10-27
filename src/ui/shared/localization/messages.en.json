@@ -125,9 +125,6 @@
   "card.copy": {
     "text": "Copy · Lasts for this battle"
   },
-  "card.enemyActionLabel": {
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "text": "{{name}} +{{level}}"
   },
