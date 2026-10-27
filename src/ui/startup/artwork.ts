@@ -16,8 +16,12 @@ export const startupBaseArtwork = [
 export function likelyArtwork(game: GameState) {
   const visible = new Set(immediateArtwork(game));
   const candidates = new Set<string>();
+  const checked = new Set<string>();
   const add = (card: ReturnType<typeof definition>) => {
-    const url = assetUrl(card.artwork ?? `action.${card.species}`);
+    const id = card.artwork ?? `action.${card.species}`;
+    if (checked.has(id)) return;
+    checked.add(id);
+    const url = assetUrl(id);
     if (!visible.has(url)) candidates.add(url);
   };
   if (game.phase === "draft") {

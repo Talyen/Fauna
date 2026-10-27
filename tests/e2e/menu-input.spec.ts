@@ -170,6 +170,8 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await pad.press(14);
   await expect(page.getByRole("tab", { name: "Display", exact: true })).toBeFocused();
   await pad.press(13);
+  await expect(page.getByRole("button", { name: "Language: Automatic", exact: true })).toBeFocused();
+  await pad.press(13);
   await expect(page.getByRole("radio", { name: enlarged ? "125%" : "100%", exact: true })).toBeFocused();
   await pad.press(15);
   await expect(page.getByRole("radio", { name: enlarged ? "75%" : "125%", exact: true })).toBeChecked();

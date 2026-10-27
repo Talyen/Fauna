@@ -1,5 +1,5 @@
 import { motionValue } from "../shared/motion-values";
-import type { GameEvent, DamageEvent } from "../../game/types";
+import type { GameEvent } from "../../game/types";
 /** Positive health loss recoils; absorbed and ineffective hits keep numbers/audio only. */
 export function impactTargets(events: readonly GameEvent[]): string[] {
   const targets = new Set<string>();
@@ -74,9 +74,15 @@ export function createCombatImpacts(root: () => HTMLElement | null) {
       for (const id of impactTargets(events)) {
         if (performance.now() - (last.get(id) ?? -Infinity) < motionValue("--motion-hit")) continue;
         const actor = root()?.querySelector<HTMLElement>(`[data-actor-id="${id}"]`);
-        const damage = events.filter((e): e is DamageEvent => e.kind === "damage" && e.targetId === id);
-        const loss = damage.reduce((n, e) => n + e.amount, 0) / (Number(actor?.dataset.maxHealth) || 1);
-        const periodic = damage.every((e) => ["burn", "poison", "bleed"].includes(e.damageType));
+        let amount = 0;
+        let periodic = true;
+        for (const event of events) {
+          if (event.kind !== "damage" || event.targetId !== id) continue;
+          amount += event.amount;
+          if (event.damageType !== "burn" && event.damageType !== "poison" && event.damageType !== "bleed")
+            periodic = false;
+        }
+        const loss = amount / (Number(actor?.dataset.maxHealth) || 1);
         const strength = periodic || loss < 0.05 ? 3 : loss < 0.2 ? 6 : 10;
         const recoil = strength * (id.startsWith("enemy-") ? -1 : 1);
         last.set(id, performance.now());

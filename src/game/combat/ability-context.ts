@@ -22,8 +22,6 @@ export interface AbilityOperations {
 export const actorPower = (action: AbilityAction) => (action.side === "enemy" ? action.actor.power : 1);
 export const friendlyRow = (state: GameState, action: AbilityAction): Combatant[] =>
   battlefield(state, action.side);
-export const opposingRow = (state: GameState, action: AbilityAction): Combatant[] =>
-  battlefield(state, action.side === "player" ? "enemy" : "player");
 export const livingFriends = (state: GameState, action: AbilityAction): Combatant[] =>
   livingBattlefield(state, action.side);
 export const livingOpponents = (state: GameState, action: AbilityAction): Combatant[] =>

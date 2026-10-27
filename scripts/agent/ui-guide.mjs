@@ -6,9 +6,17 @@ export function uiGuide(tier, scenario) {
   if (!["small", "interaction", "layout"].includes(tier))
     throw new Error("Choose small, interaction or layout; see Docs/UI.md#required-review.");
   if (!SCENARIOS.includes(scenario)) throw new Error(`Choose a scenario: ${SCENARIOS.join(", ")}.`);
-  const capture = (label) => `npm run capture:task -- --scenario ${scenario} --tier ${tier} --label ${label}`;
+  const lane =
+    process.platform === "darwin"
+      ? 'python3 "$HOME/Developer/.coordination/heavy_lane.py" --owner "$CODEX_THREAD_ID" --wait 900 --timeout 300 -- '
+      : "";
+  const capture = (label) =>
+    `${lane}npm run capture:task -- --scenario ${scenario} --tier ${tier} --label ${label}`;
   return [
     `UI review: ${tier}; scenario ${scenario}`,
+    ...(process.platform === "darwin"
+      ? ["The capture command uses this chat’s CODEX_THREAD_ID for shared host admission."]
+      : []),
     tier === "layout"
       ? "Inspect the current rendered flow and relevant references before editing."
       : "Capture the changed screen after editing.",

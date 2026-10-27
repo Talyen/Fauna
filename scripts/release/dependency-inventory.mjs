@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { npmCommand } from "../lib/npm-command.mjs";
+import { leasePackage } from "./development-retention.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -131,6 +132,15 @@ export function generateInventory(root = ROOT) {
 }
 
 export function packageInventory(directory, output = path.resolve(ROOT, "reports/release-inventory")) {
+  const lease = leasePackage(ROOT, directory);
+  try {
+    return packageInventoryFiles(directory, output);
+  } finally {
+    lease?.release();
+  }
+}
+
+function packageInventoryFiles(directory, output) {
   const files = ["Fauna.exe", "resources/app.asar", "LICENSE.electron.txt", "LICENSES.chromium.html"];
   const manifest = files.map((name) => {
     const bytes = readFileSync(path.join(directory, name));

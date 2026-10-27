@@ -159,9 +159,10 @@ try {
   const before = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
+  if (before.battle.enemies.filter((enemy) => enemy.health > 0).length !== 1)
+    throw new Error("Smoke attack must have exactly one living recipient.");
+  // The sole legal target is selected and committed by the card click itself.
   await window.locator(`.app:not([inert]) .hand [data-card-id=${JSON.stringify(attackCardId)}]`).click();
-  await window.locator('.app:not([inert]) .battle-screen:not([data-selected-card=""])').waitFor();
-  await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;

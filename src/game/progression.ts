@@ -13,7 +13,7 @@ import {
 import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
 export { progressionLabel as keywordLabel } from "./keywords";
 import type { Card, GameState } from "./types";
-export function collectedSpecies(state: Pick<GameState, "discovery">): SpeciesId[] {
+function collectedSpecies(state: Pick<GameState, "discovery">): SpeciesId[] {
   const collected: SpeciesId[] = [];
   for (const { id } of SPECIES) if (state.discovery.recruited[id] !== undefined) collected.push(id);
   return collected;

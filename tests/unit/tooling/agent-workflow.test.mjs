@@ -346,7 +346,12 @@ it(
     git(task.path, "commit", "-qm", "task");
     const runner = vi.fn(() => ({ status: 0 }));
     const launch = vi.fn((_command, args) => ({
-      status: runCheck(args.slice(args.indexOf("--") + 1), { root: task.path, runner, log: () => {} }),
+      status: runCheck(args.slice(args.indexOf("--") + 1), {
+        root: task.path,
+        runner,
+        log: () => {},
+        env: {},
+      }),
     }));
     put(root, "unfinished.md", "unrelated\n");
     await expect(

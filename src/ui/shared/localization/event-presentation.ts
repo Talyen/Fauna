@@ -1,4 +1,4 @@
-import { battlefield, combatantById } from "../../../game/battlefield";
+import { battlefieldView, combatantById } from "../../../game/battlefield";
 import { unitName } from "../../../game/combat/state";
 import { CARDS, FOOD_CARDS, SPECIES, species, type CardDefinition } from "../../../game/content";
 import { PEARL } from "../../../game/content/creatures/memento";
@@ -38,17 +38,18 @@ export function eventPresentation(
   const combatant = (id: string | undefined) =>
     combatantById(game, id) ?? (previousGame ? combatantById(previousGame, id) : undefined);
   const uniqueName = (english: string) => {
-    const units = (state: GameState) => [
-      ...battlefield(state, "player"),
-      ...battlefield(state, "enemy"),
-      ...state.reserves,
-    ];
-    const names = new Set(
-      [...units(game), ...(previousGame ? units(previousGame) : [])]
-        .filter((unit) => unitName(unit) === english)
-        .map((unit) => localizedCombatantName(unit, i18n)),
-    );
-    return names.size === 1 ? [...names][0] : undefined;
+    let name: string | undefined;
+    for (const state of previousGame ? [game, previousGame] : [game]) {
+      for (const row of [battlefieldView(state, "player"), battlefieldView(state, "enemy"), state.reserves]) {
+        for (const unit of row) {
+          if (unitName(unit) !== english) continue;
+          const localized = localizedCombatantName(unit, i18n);
+          if (name !== undefined && name !== localized) return undefined;
+          name = localized;
+        }
+      }
+    }
+    return name;
   };
   if (event.kind === "action" && event.actionType !== "swap") {
     if (event.actionType === "attack" && event.text === "The Court Remembers")

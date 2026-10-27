@@ -27,6 +27,21 @@ import type {
 // Fixed current-catalog full-journey fixture; shared with the browser expedition.
 export const FULL_JOURNEY_SEED = 2;
 export const FULL_JOURNEY_COMMAND_BUDGET = 800;
+/** Preserve the established five-creature roster while still collecting each offered recruit. */
+export function fullJourneyRecruit(
+  state: GameState,
+): Extract<Command, { type: "recruit" | "confirmRecruit" }> {
+  if (state.phase !== "recruit") throw new Error("Expected recruitment choice");
+  if (state.reward.selectedRecruit !== undefined) return { type: "confirmRecruit" };
+  const roster = [...state.team, ...state.reserves];
+  return {
+    type: "recruit",
+    species:
+      (roster.length < 5 &&
+        state.reward.recruits.find((kind) => !roster.some((unit) => unit.species === kind))) ||
+      state.reward.recruits[0]!,
+  };
+}
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);
 }

@@ -42,7 +42,11 @@ test("manual controller prompts persist and disconnection pauses without changin
     () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
   );
   await press(13);
-  await expect(page.getByText(/Cross selects; Circle goes back; Triangle ends the turn/)).toBeVisible();
+  await expect(
+    page.getByText(
+      /Cross activates; Square inspects artwork outside battle; Circle goes back; Triangle ends the turn/,
+    ),
+  ).toBeVisible();
   await captureScreen(page, { path: "playstation-controls.png" });
 });
 

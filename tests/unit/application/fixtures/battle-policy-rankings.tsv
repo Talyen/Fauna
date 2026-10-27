@@ -7,9 +7,9 @@ aerostat	injured	{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0"
 aerostat	defended	{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}
 aerostat	defended	{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}
 aerostat	defended	{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":106,"reason":"Use Trail Bread for its visible benefit"}
+aerostat	talented	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":3026,"reason":"Use Trail Bread for its visible benefit"}
 aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}
 aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-true-bearing","autoEndTurn":false},"score":202,"reason":"Use True Bearing for its visible benefit"}
-aerostat	talented	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":132,"reason":"Use Trail Bread for its visible benefit"}
 aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}
 almanelle	ordinary	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
 almanelle	ordinary	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}

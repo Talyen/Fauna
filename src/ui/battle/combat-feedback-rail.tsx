@@ -73,6 +73,12 @@ function FeedbackNumber({ entry: e }: { entry: FeedbackEntry }) {
   );
 }
 
+function hasFourNumbers(entries: readonly FeedbackEntry[]) {
+  let count = 0;
+  for (const entry of entries) if (!isFeedbackNotice(entry) && ++count === 4) return true;
+  return false;
+}
+
 /** One scene overlay keeps feedback above moving portraits and card flights. */
 export function CombatFeedback({
   bursts,
@@ -249,10 +255,7 @@ export function CombatFeedback({
           data-lifetime={b.lifetime}
         >
           <div className="combat-burst-travel">
-            <div
-              className="combat-numbers"
-              data-columns={b.entries.filter((e) => !isFeedbackNotice(e)).length > 3 ? 2 : 1}
-            >
+            <div className="combat-numbers" data-columns={hasFourNumbers(b.entries) ? 2 : 1}>
               {b.entries.map((e) => (
                 <FeedbackNumber key={e.id} entry={e} />
               ))}

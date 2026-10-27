@@ -129,6 +129,25 @@
     "reason": "Task scope, process lifetime and runtime identity",
     "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/tool-runtime.test.mjs"]
   },
+  "scripts/lib/evidence-retention.mjs": {
+    "reason": "Completed-task evidence expiration and preservation",
+    "suites": ["tests/unit/tooling/evidence-retention.test.mjs"]
+  },
+  "scripts/lib/archive-dedup.mjs": {
+    "reason": "Verified independent sharing of completed-task archive files",
+    "suites": ["tests/unit/tooling/archive-dedup.test.mjs"]
+  },
+  "scripts/lib/development-package-receipt.mjs": {
+    "reason": "Development package integrity and archive eligibility",
+    "suites": [
+      "tests/unit/tooling/development-retention.test.mjs",
+      "tests/unit/tooling/evidence-retention.test.mjs"
+    ]
+  },
+  "scripts/release/development-retention.mjs": {
+    "reason": "Development package identity, leases and retention",
+    "suites": ["tests/unit/tooling/development-retention.test.mjs"]
+  },
   "scripts/integrate.mjs": {
     "reason": "Combined verification, clean-main protection, integration locking and cleanup",
     "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/worktree.test.mjs"]

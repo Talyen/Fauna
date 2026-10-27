@@ -7,6 +7,7 @@ import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame } from "../../../src/game/engine";
+import { decodeSave } from "../../../src/game/save";
 import { authoredPack, accept, run, teamRun, starterJourney, winBattle } from "../../support/game";
 import { encounterSource } from "../../../src/game/encounters";
 
@@ -224,6 +225,16 @@ describe("player interface", () => {
       d.team[1]!.block = 4;
       d.discovery.encountered.push("reedstag");
       d.discovery.recruited.reedstag = 1;
+      if (!d.discovery.encountered.includes("coralcurl")) d.discovery.encountered.push("coralcurl");
+      d.discovery.recruited.coralcurl = 1;
+      d.reserves.push({
+        id: "second-reserve",
+        species: "coralcurl",
+        health: 10,
+        block: 0,
+        combat: freshCombat(),
+        attacked: false,
+      });
       d.reserves.push({
         id: "reserve-copy",
         species: "reedstag",
@@ -256,6 +267,7 @@ describe("player interface", () => {
         draft.team[2]!.health = 0;
       }),
     ]) {
+      decodeSave(JSON.stringify(fixture));
       localStorage.setItem("fauna.save.v1", JSON.stringify(fixture));
       const session = createSession(createBrowserPlatform(localStorage), 7);
       await session.load();

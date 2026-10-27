@@ -41,6 +41,45 @@ function boonScorer(
     cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
   return (boon: BoonId): number => {
     switch (boon) {
+      case "vanishing-hat":
+        return has.has("dodge") ? 60 : 30;
+      case "rocking-chair-charm":
+        return hasLivingBackup() ? 50 : 0;
+      case "asteroid-hammer":
+        return has.has("stun") ? 60 : 0;
+      case "snowbell":
+      case "solstice-concertina":
+      case "moonpath-divider":
+        return has.has("freeze") ? 60 : 0;
+      case "harvest-sickle":
+        return has.has("bleed") ? 60 : 0;
+      case "meadow-mortar":
+        return has.has("poison") && has.has("purge") ? 60 : 0;
+      case "rosewax-seal":
+      case "rootspool":
+        return thorns ? 60 : 0;
+      case "crown-waffle-iron":
+        return (effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")) &&
+          has.has("block")
+          ? 60
+          : 0;
+      case "beeswax-crown":
+        return has.has("armor") ? 60 : 0;
+      case "overflow-cup":
+        return healing && kinds.length > 1 ? 60 : 0;
+      case "ripple-mirror":
+        return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 60 : 0;
+      case "sail-needle":
+      case "dandelion-poultice":
+        return has.has("cleanse") || state.boons.includes("knot-comb") ? 60 : 0;
+      case "winterseed":
+        return has.has("block") ? 40 : 0;
+      case "cornucopia":
+        return 70;
+      case "suncrust-rolling-pin":
+        return has.has("light") ? 60 : 0;
+      case "dew-pendulum":
+        return 40;
       case "quiet-pinwheel":
         return has.has("dodge") ? 60 : 30;
       case "lagoon-chalice":

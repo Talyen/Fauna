@@ -8,19 +8,25 @@ import { BOONS } from "../../src/game/content";
 
 test("unaffordable Merchant details leave the price and exit visible", async ({ page }) => {
   const fixture = structuredClone(merchantDestination());
-  fixture.currency = 0;
+  fixture.currency = Math.min(...fixture.support!.stock.map((entry) => entry.price));
+  const unavailable = fixture.support!.stock.findIndex((entry) => entry.price > fixture.currency);
+  expect(unavailable).toBeGreaterThanOrEqual(0);
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await seed(page, fixture);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
-  const offer = page.getByRole("button", { name: /^Buy / }).nth(1);
+  const offer = page.getByRole("button", { name: /^Buy / }).nth(unavailable);
   await offer.hover();
   const tooltip = page.getByRole("tooltip");
   await expect(tooltip).toContainText("Not enough Gold");
   const tooltipBox = await tooltip.boundingBox();
-  const priceBox = await page.locator(".merchant-offer").nth(1).locator(".merchant-price").boundingBox();
+  const priceBox = await page
+    .locator(".merchant-offer")
+    .nth(unavailable)
+    .locator(".merchant-price")
+    .boundingBox();
   const leaveBox = await page.getByRole("button", { name: "Leave", exact: true }).boundingBox();
   expect(tooltipBox!.y + tooltipBox!.height).toBeLessThan(priceBox!.y);
   expect(tooltipBox!.y + tooltipBox!.height).toBeLessThan(leaveBox!.y);

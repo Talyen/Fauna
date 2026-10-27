@@ -59,7 +59,7 @@ it("uses localized action names for a direct replacement", async () => {
       </TooltipProvider>
     </MessageProvider>,
   );
-  expect(screen.getByRole("heading", { name: "生き物を入れ替える" })).toBeTruthy();
+  expect(screen.getByRole("heading", { name: "クリーチャーを入れ替える" })).toBeTruthy();
   expect(screen.getByRole("button", { name: "チームを維持" })).toBeTruthy();
   const outgoing = japanese["content.species.mossguard.name"].text;
   const incoming = japanese["content.species.emberback.name"].text;

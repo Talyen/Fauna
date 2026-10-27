@@ -4,6 +4,7 @@ import { integrate } from "./integrate.mjs";
 import { removeMergedTask } from "./worktree-cleanup.mjs";
 import { acquireIntegrationLock } from "./lib/integration-lock.mjs";
 import { git, worktrees } from "./lib/git.mjs";
+import { expireEvidence } from "./lib/evidence-retention.mjs";
 
 // Finish retires only its calling task, after integration and preservation.
 // Explicit integration still retains a checkout for ongoing reviews/previews.
@@ -12,6 +13,13 @@ export async function finishTask(
   { keepWorktree = false, retryCleanup = false, integrateTask = integrate, ...options } = {},
 ) {
   if (keepWorktree && retryCleanup) throw new Error("Choose --keep-worktree or --retry-cleanup.");
+  try {
+    const common = path.resolve(root, git(root, ["rev-parse", "--git-common-dir"]).trim());
+    const removed = expireEvidence(path.join(common, "fauna-worktree-archives"));
+    if (removed.length) console.log(`Expired evidence from ${removed.length} completed task outputs.`);
+  } catch (error) {
+    console.warn(`Evidence expiration skipped: ${error.message}`);
+  }
   const branch = git(root, ["branch", "--show-current"]).trim();
   const result = retryCleanup
     ? { integrated: false, worktree: root }

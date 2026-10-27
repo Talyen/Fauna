@@ -117,7 +117,8 @@ export function useBattleInteraction({
     (enemyTarget ? game.battle.enemies : game.team).some((unit) => species(unit.species).legendary)
       ? [row[1]!, row[0]!, ...row.slice(2)]
       : row;
-  const legal = new Set(def ? chosenRecipients(game, def).map((unit) => unit.id) : []);
+  const legal = new Set<string>();
+  if (def) for (const unit of chosenRecipients(game, def)) legal.add(unit.id);
   const targets: string[] = [];
   for (const unit of ordered) if (legal.has(unit.id)) targets.push(unit.id);
   const last = enemyTarget ? remembered.enemy : remembered.ally;

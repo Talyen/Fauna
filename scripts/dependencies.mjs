@@ -114,6 +114,33 @@ export function installDependencies(
     unlinkSync(modules);
     log("Detached task dependency link; installing in this checkout.");
   }
+  // An explicit dependency setup may reconnect a missing task install without
+  // replacing an existing directory that could be in use by another process.
+  if (allowInstall && !lstatSync(modules, { throwIfNoEntry: false })) {
+    const registered = worktrees(root);
+    const main = registered.find((tree) => tree.branch === "refs/heads/main")?.path;
+    if (
+      main &&
+      path.resolve(main) !== root &&
+      registered.some((tree) => path.resolve(tree.path) === root) &&
+      matchingDependencies(root, main) &&
+      dependenciesAvailable(main)
+    ) {
+      try {
+        symlinkSync(
+          path.join(main, "node_modules"),
+          modules,
+          process.platform === "win32" ? "junction" : "dir",
+        );
+        log("Reconnected matching shared dependencies.");
+        return 0;
+      } catch (error) {
+        if (error.code === "EEXIST")
+          throw new Error("Dependency directory appeared during setup; preserved it.");
+        log(`Could not share dependencies: ${error.message}; installing privately.`);
+      }
+    }
+  }
   if (!allowInstall) {
     log(
       "Dependencies are unavailable. Run npm run deps separately; routine verification never installs automatically.",

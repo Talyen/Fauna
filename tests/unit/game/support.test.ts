@@ -4,6 +4,7 @@ import { produce } from "immer";
 import { BOONS } from "../../../src/game/content";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { encodeSave, decodeSave } from "../../../src/game/save";
+import { replenishJourneyCards } from "../../../src/game/journey-cards";
 import {
   recruitChoice,
   accept,
@@ -245,6 +246,7 @@ it.each([0, 1, 2, 3, BOONS.length])(
       draft.rng = 10;
     });
     game = accept(game, { type: "start" });
+    game = produce(game, (draft) => replenishJourneyCards(draft));
     if (!remaining) expect(game.support).toBeNull();
     else {
       expect(game.support!.stock).toHaveLength(Math.min(3, remaining));

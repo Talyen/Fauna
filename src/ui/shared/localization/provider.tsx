@@ -72,15 +72,12 @@ export function LocalizationProvider({
   const system = systemLanguages ?? (typeof navigator === "undefined" ? [] : navigator.languages);
   const locale = resolveLanguage(preference, steam, system, options);
   const catalog = catalogs[locale] ?? englishCatalog;
-  const rules = useMemo<RuleCatalog>(
-    () =>
-      Object.fromEntries(
-        Object.entries(catalog).flatMap(([id, entry]) =>
-          id.endsWith(".rule") && "text" in entry ? [[id, { source: entry.source, text: entry.text }]] : [],
-        ),
-      ),
-    [catalog],
-  );
+  const rules = useMemo<RuleCatalog>(() => {
+    const result: Record<string, { source: string; text: string }> = {};
+    for (const [id, entry] of Object.entries(catalog))
+      if (id.endsWith(".rule") && "text" in entry) result[id] = { source: entry.source, text: entry.text };
+    return result;
+  }, [catalog]);
   const setPreference = useCallback(
     (value: LanguagePreference) => {
       if (value !== "auto" && !options.includes(value)) return;

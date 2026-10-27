@@ -125,7 +125,7 @@ export function* negateAttack(
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number; dealt: number };
 
 /** Supplemental hits cannot repeat an attack, start retaliation or retrigger these Boons. */
-function* boonHitFollowups(
+export function* boonHitFollowups(
   state: GameState,
   source: Combatant,
   target: Combatant,

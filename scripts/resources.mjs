@@ -5,6 +5,7 @@ import { pathToFileURL } from "node:url";
 import { git, worktrees } from "./lib/git.mjs";
 import { matchingDependencies, dependenciesAvailable } from "./dependencies.mjs";
 import { fileHash } from "./lib/file-integrity.mjs";
+import { leaseLatestDevelopment } from "./release/development-retention.mjs";
 
 export function mediaInventory(receipt) {
   const records = [...new Map(Object.values(receipt.records).map((record) => [record.url, record])).values()];
@@ -108,15 +109,20 @@ export async function resourceInventory(root, { local = false, evidence = false 
     dirty: Boolean(git(root, ["status", "--porcelain", "--untracked-files=all"])),
     media: mediaInventory(receipt),
   };
-  for (const [name, directory] of [
-    ["rendererBytes", "dist"],
-    ["windowsBytes", "release/win-unpacked"],
-  ]) {
-    try {
-      report[name] = await directoryBytes(path.join(root, directory));
-    } catch (error) {
-      if (error.code !== "ENOENT") throw error;
+  const lease = leaseLatestDevelopment(root);
+  try {
+    for (const [name, directory] of [
+      ["rendererBytes", path.join(root, "dist")],
+      ["windowsBytes", lease?.directory ?? path.join(root, "release/win-unpacked")],
+    ]) {
+      try {
+        report[name] = await directoryBytes(directory);
+      } catch (error) {
+        if (error.code !== "ENOENT") throw error;
+      }
     }
+  } finally {
+    lease?.release();
   }
   if (local) {
     const common = path.resolve(root, git(root, ["rev-parse", "--git-common-dir"]).trim());

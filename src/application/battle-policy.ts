@@ -10,10 +10,13 @@ import type { Command, GameState } from "../game/types";
 export function soleReplacement(state: GameState, autoEndTurn: boolean): Command | null {
   const outgoing = pendingReplacement(state);
   if (!outgoing) return null;
-  const living = state.reserves.filter((unit) => unit.health > 0);
-  return living.length === 1
-    ? { type: "swap", activeId: outgoing.id, reserve: living[0]!.id, autoEndTurn }
-    : null;
+  let living: (typeof state.reserves)[number] | undefined;
+  for (const unit of state.reserves) {
+    if (!(unit.health > 0)) continue;
+    if (living) return null;
+    living = unit;
+  }
+  return living ? { type: "swap", activeId: outgoing.id, reserve: living.id, autoEndTurn } : null;
 }
 
 export const BATTLE_POLICY_VERSION = 39;

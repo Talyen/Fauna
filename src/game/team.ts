@@ -28,9 +28,6 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
   }
 }
 
-export function living(state: GameState) {
-  return state.team.filter((c) => c.health > 0);
-}
 const controlStatuses = ["stun", "freeze"] as const;
 export function cleanseDeparture(state: GameState, outgoing: Combatant, events: GameEvent[]) {
   if (state.phase !== "battle" || outgoing.health <= 0 || !state.boons.includes("prayer-sailboat")) return;
@@ -78,6 +75,7 @@ export function matchSwapBlock(state: GameState, first: Combatant, second: Comba
     });
   }
 }
+/** @modifierContract Typed data-only binding; the runtime callers are in this module. */
 export function shareSwapNullify(state: GameState, first: Combatant, second: Combatant, events: GameEvent[]) {
   if (
     state.phase !== "battle" ||

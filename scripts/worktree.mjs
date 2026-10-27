@@ -5,6 +5,7 @@ import { git, worktrees } from "./lib/git.mjs";
 import { matchingDependencies, dependenciesAvailable } from "./dependencies.mjs";
 import { storageProfile, populateWorktree } from "./lib/worktree-storage.mjs";
 import { recordTaskIntent, taskIntent } from "./lib/task-intent.mjs";
+import { expireEvidence } from "./lib/evidence-retention.mjs";
 
 export function createWorktree(root, slug, base = "main", options = {}) {
   root = realpathSync(root);
@@ -14,6 +15,13 @@ export function createWorktree(root, slug, base = "main", options = {}) {
     );
   if (git(root, ["branch", "--show-current"]).trim() !== "main")
     throw new Error("Create task worktrees from the main checkout.");
+  try {
+    const common = path.resolve(root, git(root, ["rev-parse", "--git-common-dir"]).trim());
+    const removed = expireEvidence(path.join(common, "fauna-worktree-archives"));
+    if (removed.length) console.log(`Expired evidence from ${removed.length} completed task outputs.`);
+  } catch (error) {
+    console.warn(`Evidence expiration skipped: ${error.message}`);
+  }
   const commit = git(root, ["rev-parse", "--verify", "--end-of-options", `${base}^{commit}`]).trim();
   const target = path.join(root, ".worktrees", slug);
   const branch = `task/${slug}`;

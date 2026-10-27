@@ -1,6 +1,7 @@
 import { freeze } from "immer";
 import type { passiveCardBonus } from "./ability-rules";
-import type { receiveDraw, lostAndFound, drawEligibleCard } from "./card-zones";
+import type { receiveDraw, lostAndFound, drawEligibleCard, journeyReturnEligibility } from "./card-zones";
+import type { boonHitFollowups } from "./combat/damage";
 import type { passingFlame } from "./combat/damage-reactions";
 import type { puzzleEffect } from "./combat/statuses";
 import type { gentlePassage, cleanseDeparture, rookOfMercy, mountainGuide, farewellOar } from "./team";
@@ -24,16 +25,19 @@ type Modules = {
     receiveDraw: typeof receiveDraw;
     lostAndFound: typeof lostAndFound;
     drawEligibleCard: typeof drawEligibleCard;
+    journeyReturnEligibility: typeof journeyReturnEligibility;
   };
   "./chance": typeof import("./chance");
   "./journey-cards": typeof import("./journey-cards");
   "./save": typeof import("./save");
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
   "./combat/abilities": typeof import("./combat/abilities");
+  "./combat/ability-handlers": typeof import("./combat/ability-handlers");
+  "./combat/ability-extras": typeof import("./combat/ability-extras");
   "./combat/battle-modifiers": typeof import("./combat/battle-modifiers");
   "./combat/card-modifiers": typeof import("./combat/card-modifiers");
   "./combat/food": typeof import("./combat/food");
-  "./combat/damage": typeof import("./combat/damage");
+  "./combat/damage": typeof import("./combat/damage") & { boonHitFollowups: typeof boonHitFollowups };
   "./combat/damage-reactions": typeof import("./combat/damage-reactions") & {
     passingFlame: typeof passingFlame;
   };

@@ -86,10 +86,11 @@ for (const [width, enlarged, outcome] of [
       await expect(page.getByRole("alertdialog")).toHaveCount(0);
       await expect(page.getByRole("button", { name: "Play", exact: true })).toHaveCount(0);
     }
+    const defeatedBoss = outcome === "victory" ? game.battle!.enemies[0]!.species : null;
     game = accept(game, ending);
     if (outcome === "victory") {
       expect(game.phase).toBe("recruit");
-      expect(game.reward!.recruits).toEqual(["memento"]);
+      expect(game.reward!.recruits).toEqual([defeatedBoss]);
       await reloadHome(page);
       await resume(page);
       expect(await state(page)).toEqual(game);
@@ -154,7 +155,7 @@ for (const input of ["keyboard", "controller"] as const)
     await step(page, activate);
     const reward = await state(page);
     expect(reward.phase).toBe("recruit");
-    expect(reward.reward!.recruits).toEqual(["memento"]);
+    expect(reward.reward!.recruits).toEqual([fixture.battle!.enemies[0]!.species]);
     await step(page, activate);
     await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
     const won = await state(page);

@@ -5,6 +5,7 @@ import { createRef } from "react";
 import type { Session, SessionView } from "../../../src/application/session";
 import type { GameEvent, DamageEvent } from "../../../src/game/types";
 import { useCombatFeedback, CombatFeedback, appendFeedback } from "../../../src/ui/battle/combat-feedback";
+import { feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
 
 afterEach(() => {
   cleanup();
@@ -48,6 +49,17 @@ const action = (actorId: string): GameEvent => ({
   actionType: "attack",
   actorId,
   text: "Attack",
+});
+it("keeps complete action frames in order while skipping frames without visible feedback", () => {
+  const ignored: GameEvent = { kind: "action", actionType: "swap", actorId: "ally-0", text: "Swap" };
+  const notice: GameEvent = { kind: "status", amount: 1, text: "Untargeted notice" };
+  const first = action("enemy-0");
+  const second = action("enemy-1");
+  const damage = hit(3);
+  expect(feedbackFrames([notice, ignored, notice, first, notice, damage, second])).toEqual([
+    [first, notice, damage],
+    [second],
+  ]);
 });
 it("reveals interrupted numbers without accumulated audio, and Pause/teardown revoke pending work", () => {
   vi.useFakeTimers();

@@ -7,6 +7,7 @@ import { checkDocumentation } from "../../../scripts/checks/check-docs.mjs";
 import { finishTask } from "../../../scripts/finish.mjs";
 import { removeMergedTask, verifyEvidence } from "../../../scripts/worktree-cleanup.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
+import { expireEvidence } from "../../../scripts/lib/evidence-retention.mjs";
 it("creates and reuses a task checkout from committed main while preserving dirty files", () => {
   const main = repository(
     {
@@ -103,15 +104,30 @@ it("validates sparse documentation references without hiding deleted files or br
 
 it("finishes only its completed task while retaining its branch and ignored evidence", async () => {
   const previous = process.cwd();
-  const root = repository({ ".gitignore": ".worktrees/\nreports/\n", done: "base" }, "fauna-finish-");
+  const root = repository(
+    { ".gitignore": ".worktrees/\nreports/\ntest-results/\ndist/\n", done: "base" },
+    "fauna-finish-",
+  );
   try {
     const task = createWorktree(root, "finished");
     mkdirSync(path.join(task.path, "reports"));
     writeFixture(task.path, "reports/unique.trace", "keep original evidence");
+    put(task.path, "test-results/generated.trace", "generated test evidence");
+    put(task.path, "dist/assets/.retention-keep", "keep build");
+    put(task.path, "dist/assets/build.js", "retained build");
     const integrateTask = async () => ({ integrated: true, worktree: task.path });
     await finishTask(task.path, { keepWorktree: true, integrateTask });
     expect(readFixture(task.path, "reports/unique.trace")).toBe("keep original evidence");
     const result = await finishTask(task.path, { integrateTask });
+    expect(readFixture(result.retired.archive, "files/reports/unique.trace")).toBe("keep original evidence");
+    expect(readFixture(result.retired.archive, "files/dist/assets/build.js")).toBe("retained build");
+    const manifest = JSON.parse(readFixture(result.retired.archive, "manifest.json"));
+    expect(
+      expireEvidence(path.dirname(result.retired.archive), { now: manifest.retention.expiresAt - 1 }),
+    ).toEqual([]);
+    expect(
+      expireEvidence(path.dirname(result.retired.archive), { now: manifest.retention.expiresAt }),
+    ).toEqual([path.join(result.retired.archive, "files/test-results")]);
     expect(readFixture(result.retired.archive, "files/reports/unique.trace")).toBe("keep original evidence");
     expect(git(root, "branch", "--list", task.branch).trim()).toContain(task.branch);
   } finally {

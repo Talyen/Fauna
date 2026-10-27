@@ -80,15 +80,20 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
       }
       const next = rows[rowIndex + (direction === "up" ? -1 : 1)];
       if (next) {
-        const x = current.getBoundingClientRect().x + current.getBoundingClientRect().width / 2;
-        buttons
-          .filter((button) => next.contains(button))
-          .sort(
-            (a, b) =>
-              Math.abs(a.getBoundingClientRect().x + a.getBoundingClientRect().width / 2 - x) -
-              Math.abs(b.getBoundingClientRect().x + b.getBoundingClientRect().width / 2 - x),
-          )[0]
-          ?.focus({ preventScroll: true });
+        const currentRect = current.getBoundingClientRect();
+        const x = currentRect.x + currentRect.width / 2;
+        let closest: HTMLElement | undefined;
+        let distance = Infinity;
+        for (const button of buttons) {
+          if (!next.contains(button)) continue;
+          const rect = button.getBoundingClientRect();
+          const candidate = Math.abs(rect.x + rect.width / 2 - x);
+          if (!closest || candidate < distance) {
+            closest = button;
+            distance = candidate;
+          }
+        }
+        closest?.focus({ preventScroll: true });
       }
       if (next) return;
     }

@@ -101,7 +101,8 @@ function eligibleDrawPool(state: GameState, matches: (card: Card) => boolean) {
       ? (candidate: string) => candidate === id
       : undefined;
   }
-  const pool = new Set([...draw, ...discard]);
+  const pool = new Set(draw);
+  for (const id of discard) pool.add(id);
   const ids = new Set<string>();
   for (const card of state.cards) if (pool.has(card.id) && matches(card)) ids.add(card.id);
   if (!ids.size) return;
@@ -117,7 +118,7 @@ function drawableCard(state: GameState, keyword?: "light" | "nature" | "water" |
 }
 
 /** Find cards belonging to another living deployed creature without revealing pile order. */
-function journeyReturnEligibility(
+export function journeyReturnEligibility(
   state: GameState,
   ownerId: string | null,
 ): ((id: string) => boolean) | undefined {
@@ -125,7 +126,10 @@ function journeyReturnEligibility(
   let owners: Set<string> | undefined;
   return eligibleDrawPool(state, (card) => {
     if (!card.ownerId || card.ownerId === ownerId) return false;
-    owners ??= new Set(state.team.filter((unit) => unit.health > 0).map((unit) => unit.id));
+    if (!owners) {
+      owners = new Set();
+      for (const unit of state.team) if (unit.health > 0) owners.add(unit.id);
+    }
     return owners.has(card.ownerId);
   });
 }
@@ -200,11 +204,14 @@ function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = fa
   let owners: Set<string> | undefined;
   const livingOwners = otherOwnerId === undefined ? undefined : new Set<string>();
   if (livingOwners) for (const unit of state.team) if (unit.health > 0) livingOwners.add(unit.id);
-  const cards = new Map<string, Card>();
-  for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+  let cards: Map<string, Card> | undefined;
   const result: Card[] | undefined = firstOnly ? undefined : [];
-  for (const id of state.battle!.discard) {
-    const card = cards.get(id)!;
+  for (const [index, id] of state.battle!.discard.entries()) {
+    if ((!firstOnly && index === 0) || (firstOnly && index === 1)) {
+      cards = new Map<string, Card>();
+      for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+    }
+    const card = cards ? cards.get(id)! : state.cards.find((entry) => entry.id === id)!;
     if (
       otherOwnerId === undefined
         ? card.ownerId === null || (owners ??= drawableOwnerIds(state)).has(card.ownerId)

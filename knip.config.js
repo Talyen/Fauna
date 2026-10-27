@@ -10,6 +10,7 @@ export default {
     "scripts/*.mjs",
     "scripts/{agent,assets,balance,checks,ci,dev,performance,release}/*.mjs",
     "src/tooling/{playthrough,balance,performance}.ts",
+    "tests/support/ravelland.ts", // Vite loads the named review fixture dynamically.
     "design/**/*.tsx",
   ],
   project: [
@@ -19,6 +20,8 @@ export default {
     "design/**/*.{ts,tsx}",
     "tests/**/*.{ts,tsx,mjs}",
   ],
+  // Named modifier owners have local runtime callers and typed data-only references.
+  tags: ["-modifierContract"],
   ignore: ["src/components/ui/**"], // Registered upstream primitive public props are intentionally retained.
   // The regression verifies the matcher shipped inside our pinned electron-builder installation.
   ignoreDependencies: ["app-builder-lib"],

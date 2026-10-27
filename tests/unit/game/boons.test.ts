@@ -263,7 +263,11 @@ it("combines the complete Boon catalog without mutating previews or duplicating 
   expect(result.state.battle!.hand).toHaveLength(1);
   expect(result.state.battle!.mana).toBe(state.battle.mana);
   expect(result.state.battleXP.health).toBe((state.battleXP.health ?? 0) + 1);
-  expect(result.state.team.map((ally) => ally.combat!.freeze)).toEqual([1, 3, 3]);
+  // Overflow Cup redirects the final excess healing; Thaw Spoon spends that actual Health.
+  expect(result.events).toContainEqual(
+    expect.objectContaining({ kind: "heal", targetId: "ally-1", amount: 1 }),
+  );
+  expect(result.state.team.map((ally) => ally.combat!.freeze)).toEqual([1, 2, 3]);
   expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
 
@@ -1505,6 +1509,7 @@ it("approved new Boons turn outgoing Block into Water damage only for ability sw
       id: `echo-${target.id}-0`,
       name: "Echo",
       species: "memento",
+      lastAbility: null,
       health: 20,
       maxHealth: 20,
       minion: { ownerId: target.id, side: "enemy" },
@@ -1515,7 +1520,7 @@ it("approved new Boons turn outgoing Block into Water damage only for ability sw
   expect(control.battle!.enemies[0]!.health).toBe(100);
   swapBackup(state, source.id, state.reserves[0]!.id, events, true);
   expect(target.health).toBe(95);
-  expect(state.battle!.minions[0]!.health).toBe(15);
+  expect(state.battle!.minions![0]!.health).toBe(15);
   expect(source.block).toBe(10);
 });
 

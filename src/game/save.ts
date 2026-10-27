@@ -180,6 +180,7 @@ function speciesHasCard(kind: GameState["team"][number]["species"], cardId: stri
   return ids.has(cardId);
 }
 
+/** @modifierContract Typed data-only binding; the runtime caller is in this module. */
 export function validateRoster(state: GameState) {
   const roster = [...state.team, ...state.reserves];
   invalid(!uniqueBy(roster, (c) => c.id) || !uniqueBy(state.cards, (c) => c.id));

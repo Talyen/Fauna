@@ -124,3 +124,25 @@ it("revokes an in-progress record when error inspection disposes collection", ()
   expect(write).not.toHaveBeenCalled();
   expect(listener).not.toHaveBeenCalled();
 });
+
+it("retains the newest diagnostics that fit the serialized size limit", () => {
+  let stored = "";
+  const diagnostics = createDiagnostics({
+    read: () => null,
+    write: (value) => {
+      stored = value;
+    },
+  });
+  const entries = Array.from({ length: 40 }, (_, index) => ({
+    source: "global" as const,
+    message: `${index}:` + "\u0001".repeat(1190),
+    count: 1,
+  }));
+  for (const entry of entries) diagnostics.record(entry.source, entry.message);
+  const retained = diagnostics.snapshot();
+  expect(retained.length).toBeLessThan(entries.length);
+  expect(retained).toEqual(entries.slice(-retained.length));
+  expect(stored.length).toBeLessThan(100_000);
+  expect(JSON.stringify(entries.slice(-retained.length - 1)).length).toBeGreaterThanOrEqual(100_000);
+  expect(createDiagnostics({ read: () => stored, write: () => {} }).snapshot()).toEqual(retained);
+});

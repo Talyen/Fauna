@@ -4,7 +4,7 @@ import { git } from "../lib/git.mjs";
 
 const receiptName = ".balance-retention.json";
 const day = 86_400_000;
-const generatedName =
+export const generatedName =
   /^(?:case-\d+(?:-config)?\.json(?:\.journal\.jsonl)?|report\.json|comparison\.json|findings\.(?:json|md))$/u;
 
 async function quarantineBytes(directory) {
@@ -68,6 +68,14 @@ export async function pruneBalanceReports(
     if (info?.isDirectory() && !info.isSymbolicLink()) {
       for (const entry of await readdir(archives, { withFileTypes: true })) {
         if (!entry.isDirectory() || entry.isSymbolicLink()) continue;
+        try {
+          const manifest = JSON.parse(
+            await readFile(path.join(archives, entry.name, "manifest.json"), "utf8"),
+          );
+          if (manifest.retention?.version === 1) continue;
+        } catch {
+          /* Legacy and incomplete archives retain their existing handling. */
+        }
         const files = path.join(archives, entry.name, "files");
         const item = await lstat(files).catch((error) => {
           if (error.code === "ENOENT") return null;
