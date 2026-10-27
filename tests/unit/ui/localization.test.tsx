@@ -675,6 +675,33 @@ it("keeps replacement choices addressable when their accessible label is transla
   view.unmount();
 });
 
+it("uses translated creature names for replacement choices and preserves the swap command", () => {
+  const game = produce(run(), (draft) => {
+    addBackups(draft, { ...draft.team[0]!, id: "reserve", species: "reedstag", health: 10 });
+  });
+  const outgoing = game.team[0]!;
+  const send = vi.fn(() => true);
+  const catalog: MessageCatalog = {
+    ...french,
+    [`content.species.${outgoing.species}.name`]: {
+      source: species(outgoing.species).name,
+      text: "Allié traduit",
+    },
+    "content.species.reedstag.name": { source: species("reedstag").name, text: "Réserve traduite" },
+  };
+  const view = render(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <TooltipProvider>
+        <ReplacementPicker game={game} outgoing={outgoing} send={send} />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("button", { name: "Allié traduit, K.-O." })).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "Réserve traduite, en réserve" }));
+  expect(send).toHaveBeenCalledWith({ type: "swap", activeId: outgoing.id, reserve: "reserve" });
+  view.unmount();
+});
+
 it("validates translation freshness, terminology, placeholders, review and locale plural categories", () => {
   const english = {
     "menu.play": { text: "Play {{name}}" },
