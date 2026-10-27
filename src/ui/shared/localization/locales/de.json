@@ -419,11 +419,23 @@
     "sourceHash": "e3634a5ce932eded36128cc6ed8a0650c23e8435c548ed145d6330e9136ec36d",
     "text": "Eisiges Herz"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "b2b9f4de857deaf1928c892846323fb124d5c720db23c1290d97e1a87074f4df",
+    "text": "Einen Gegner <keyword0>einzufrieren</keyword0> verursacht {{value0}} <keyword1>physischen</keyword1> Schaden"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "3db174f5b4acfb4750075bd173891f3787f963bf8ff7ef28bddf1cf245e27232",
     "text": "Eisenholzfaustschild"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "ef1f9d50d4cf1c7cd0bcd530a8e5cd7c51b0b43f8cbe798929aa8df9ee2fc24f",
+    "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wann immer du <keyword1>Block</keyword1> erhältst"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -533,11 +545,23 @@
     "sourceHash": "e1851be702888ab78a489ccfcf902804a56e96deb9904209ca071653d85c6071",
     "text": "Resonanzglocken"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "1ff65faed4eef2e2c005fef5998dc9c4f6ef647f35ea152c9d488af956f40f5a",
+    "text": "Erhalte nach deiner dritten Karte pro Zug {{value0}} <keyword0>Mana</keyword0>"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "390d4ebdaa3c17d81bfbd8c242cf982926760dc07e4ef77c4cc52eb7b9a34003",
     "text": "Laterne des Sündenfressers"
+  },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "59b69c77220f94dbd68774a718360d72b5ce483a39077b90d597e9803d267d96",
+    "text": "Stelle für jeden schädlichen Effekt, den du <keyword1>reinigst</keyword1>, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -574,6 +598,12 @@
     "source": "Thunderstone",
     "sourceHash": "ea8f2c71542762eb6644d3df9c6ff1646f844da29c4816e82317984ada005b49",
     "text": "Donnerstein"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "76dc9188e01ca617eaf2ee169b35533a15b9816fa84d567861e7966dda5dd9c9",
+    "text": "Verursache {{value0}} <keyword0>Natur</keyword0>-Schaden, wenn du einen Gegner <keyword1>betäubst</keyword1>"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

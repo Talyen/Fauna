@@ -419,11 +419,23 @@
     "sourceHash": "2fc38d7865994f4656ff35661281e2999b351201eb5e0a78bff6232cefcba83c",
     "text": "冰冷之心"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "d79c6cb3c7a9ac9e00079cbb1e21bfdfffe4207f0720a87adc55bc02462548b7",
+    "text": "<keyword0>冻结</keyword0>敌人时造成{{value0}}点<keyword1>物理</keyword1>伤害"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "11f14440f6a7888fd5d98c219eaf2c855561af803d66a8727e9713ab2f458044",
     "text": "铁木圆盾"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "4aea213fa5940bce156fab2e3393150fdb67913ab87ffb843f29aa65ec0f38d2",
+    "text": "每次获得<keyword1>格挡</keyword1>时，获得{{value0}}点<keyword0>荆棘</keyword0>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -533,11 +545,23 @@
     "sourceHash": "cd8b9cebdd78583aeb659abe188ffbcb83264552350e62e983e869b3b34fd6b3",
     "text": "共鸣风铃"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "8b8c8217ec9463185c1a7ec553c3765b72172160b8cdbc87d2bb7b4d5d0bd19f",
+    "text": "每回合打出第三张卡牌后，获得{{value0}}点<keyword0>法力</keyword0>"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "bc3fb4d354edd090827fb8b2623df93d39fe405fb421b7b81dbccdf83a3ae3ff",
     "text": "噬罪者灯笼"
+  },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "f8748993b79c44f2ab1c6933586c6048b1a8de7cf29093b483db53543fc10023",
+    "text": "每<keyword1>净化</keyword1>一个有害效果，恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -574,6 +598,12 @@
     "source": "Thunderstone",
     "sourceHash": "2d33b89e873cfddc229e0448f75c3165f79fac6e33835018e64721946dd2d44f",
     "text": "雷霆石"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "1a451ac871b41b3cb8ea6d753ed44a6636f7b0ff1bbd6a8f9ac006e8412e95dd",
+    "text": "<keyword1>眩晕</keyword1>敌人时造成{{value0}}点<keyword0>自然</keyword0>伤害"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

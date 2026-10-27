@@ -443,11 +443,23 @@
     "sourceHash": "bfb201d3fb6b4a42c27ab45bb0258ddff2c39b2f9bd35836b720a3192adaad73",
     "text": "Cœur glacé"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "6f5eea92b5922a4a7d5ebb19efff7dda16334becac6188c11e43aa6029a31ed9",
+    "text": "<keyword0>Geler</keyword0> un ennemi inflige {{value0}} dégâts <keyword1>Physiques</keyword1>"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "b5a3d26ec576f5662ea43544d2ceb44065f99cd343aeee3ad93c8aca6717a78d",
     "text": "Rondache de bois de fer"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "a29315c7d5d27c0c066e62337230812c395caafd9460e1df348b87a993e1ef02",
+    "text": "Gagnez {{value0}} <keyword0>Épines</keyword0> chaque fois que vous gagnez du <keyword1>Blocage</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -569,6 +581,12 @@
     "sourceHash": "58b8df06a0d25952cd39e08615aba599016a98f9696c5c521ad8360688f2a723",
     "text": "Carillons résonnants"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "0faed45c5760dfb883cdece62c580dd571f49a2b1a758d6e0d9110413f5f51aa",
+    "text": "Après votre troisième carte à chaque tour, gagnez {{value0}} <keyword0>Mana</keyword0>"
+  },
   "content.boon.rook-of-mercy.name": {
     "reviewed": true,
     "source": "Rook of Mercy",
@@ -586,6 +604,12 @@
     "source": "Sin-Eater's Lantern",
     "sourceHash": "83bc688105f99364c81cc06a139abd89ff5e90b493da8b56d463b790776df9cc",
     "text": "Lanterne du mangeur de péchés"
+  },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "b74000810cb8872142d02173b084a144a402377010662becd6c1bc319a654b94",
+    "text": "Restaurez {{value0}} <keyword0>Santé</keyword0> par effet néfaste <keyword1>purifié</keyword1>"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -622,6 +646,12 @@
     "source": "Thunderstone",
     "sourceHash": "e75e58fea7c74c42395d86a9f2c1307dacedb73ef63e3c16604513b7bd3772f5",
     "text": "Pierre de tonnerre"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "77e46dc5d5fa3d976a2bdab51de21fc4095ec2dd5fdd02bd29867e7d3333f34c",
+    "text": "Infligez {{value0}} dégâts de <keyword0>Nature</keyword0> lorsque vous <keyword1>étourdissez</keyword1> un ennemi"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

@@ -419,11 +419,23 @@
     "sourceHash": "8c05c89ca4be3653c32752e1c8e0228466e92597505380b46ea07ae48d494945",
     "text": "Corazón helado"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "a5670ce896e94eea395b621f40c8961f5c41a2b6ae5756cff13b7bae5b7de069",
+    "text": "<keyword0>Congelar</keyword0> a un enemigo inflige {{value0}} de daño <keyword1>Físico</keyword1>"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "d6ef245cd33fd963592779e9d2dcd6b19a0e45bad8a7c974478c0f3d3caceb28",
     "text": "Broquel de madera férrea"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "4c740045ce6388b1a495f2c60306c330d1a782a874376d7825f6f95e6fa14ee5",
+    "text": "Obtienes {{value0}} de <keyword0>Espinas</keyword0> cada vez que obtienes <keyword1>Bloqueo</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -533,11 +545,23 @@
     "sourceHash": "292260b88904b0c7663abc93f11e5eead20123edd1790766909d2cdea96150fa",
     "text": "Campanillas resonantes"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "ed20a7fe664c1e4da8c7bd81a71bd74d4b28edfd1618b8a611d9be89f13e15af",
+    "text": "Después de tu tercera carta de cada turno, obtienes {{value0}} de <keyword0>Maná</keyword0>"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "6a4d6adfd940bcbc42a3956f807bbc13cb0a0518027b4a2cae6dd05721bf5d07",
     "text": "Farol del devorador de pecados"
+  },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "738b6c4e5ea101032a59413086244b169549cbd5c3e446d1cc73998927227608",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> por cada efecto perjudicial que <keyword1>purifiques</keyword1>"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -574,6 +598,12 @@
     "source": "Thunderstone",
     "sourceHash": "dc463ecee47bb2c8f9da819d6894e75cd86226dc7779ca5cc1a18f8a374b4a73",
     "text": "Piedra del trueno"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "90c860fb94ed7435d8813a9864c9b6e890977a62c63dcd81ec4f44b8cb1e4dcc",
+    "text": "Infliges {{value0}} de daño de <keyword0>Naturaleza</keyword0> al <keyword1>aturdir</keyword1> a un enemigo"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

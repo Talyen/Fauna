@@ -419,11 +419,23 @@
     "sourceHash": "3b3eca04d7b73a51b7be35f68f35e408da92fbd84c59692a7d3556280a1239db",
     "text": "氷の心"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "5c30a66c1e6715fdc5c7c69f322df95b58c8d92fe26f4339a7da3e952654a050",
+    "text": "敵を<keyword0>凍結</keyword0>させると{{value0}}の<keyword1>物理</keyword1>ダメージを与える"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "b9d14ec72a6f7f63356118cd1aebdbe40562382fa74c9ddbb901e82a089658f0",
     "text": "鉄木の小盾"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "7b9608600cb038d6c2a9088128cf64244ee405db912c9b4d9a0b3d33ce5d66d4",
+    "text": "<keyword1>ブロック</keyword1>を獲得するたびに<keyword0>トゲ</keyword0>を{{value0}}獲得"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -533,11 +545,23 @@
     "sourceHash": "167777a672697ab58080e985b7fff3bc4413a2c09282ae54abce29c9b3d6efd6",
     "text": "共鳴する風鈴"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "e008e914573ac0ba7c62aba3a32fee2e9961ea2884f7361e1daa4c117c9d2a33",
+    "text": "各ターンの3枚目のカードの後に<keyword0>マナ</keyword0>を{{value0}}獲得"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "bc38cadb21104104952917d4c5316676f53bc08dcb474edd5b5037896abc477a",
     "text": "罪喰らいのランタン"
+  },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "5f961b0b46867a5ff124d5581a11488ea28e80e285d6d47eae4c109124896717",
+    "text": "害のある効果を<keyword1>浄化</keyword1>するごとに<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -574,6 +598,12 @@
     "source": "Thunderstone",
     "sourceHash": "daa6d2f6dcdc1c7a8493f5c50d90bb518bcce75778c53cc4d79acb0572f5cb55",
     "text": "雷石"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "bf443095b42a88128b092105e60556c56052cbd4cf2dfc5f3fecad8954c216ad",
+    "text": "敵を<keyword1>スタン</keyword1>させると{{value0}}の<keyword0>自然</keyword0>ダメージを与える"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

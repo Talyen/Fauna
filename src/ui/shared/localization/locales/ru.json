@@ -419,11 +419,23 @@
     "sourceHash": "1c8af3db6b273e1657667e6d95559506d0afc85dd2191902acb86d1bdcba9a09",
     "text": "Ледяное сердце"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "d17f86a5c21bfadad29ba4ea10f39af2a47e653719a2388bc4a31a9e21346af3",
+    "text": "<keyword0>Заморозка</keyword0> врага наносит {{value0}} <keyword1>физического</keyword1> урона"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "6f2a546351b90cd85671a35a015faaeaa780318f2134489b086761c76dd11fb4",
     "text": "Баклер из железного дерева"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "d910d68e2a019eb3fd489563f5a0cf54ce1ebb1f3f226388d7df9e5adfecdfb9",
+    "text": "Получайте {{value0}} <keyword0>шипов</keyword0> каждый раз, когда получаете <keyword1>блок</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -533,11 +545,23 @@
     "sourceHash": "bb6665f9f812972f4fa443083d933359568eb7ae57fa32b5542b12fe50060e6e",
     "text": "Резонирующие колокольчики"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "7a41bb177c5246c0caf0bf34bc4d756469e4633257c9c2cbddc7766d5fd2d288",
+    "text": "После третьей карты в каждом ходу получите {{value0}} <keyword0>маны</keyword0>"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "5331bbd3a45c3f50a7b07b737a908edbe155eb8fcb8113defa1ba917e3b7f06e",
     "text": "Фонарь пожирателя грехов"
+  },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "d81603348455dece44dfef923ad92f832277f2c4185a6341b2d761600efc0d32",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> за каждый <keyword1>очищенный</keyword1> вредный эффект"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -574,6 +598,12 @@
     "source": "Thunderstone",
     "sourceHash": "b0890f6fdeaf37521864d749af5b59a14e7f308777f0cd337fdbfb0d92a9cfda",
     "text": "Громовой камень"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "9142e1dde00b294e67e61e5e26a713682b7e09cba42c71cf6c2074dbd59d4c12",
+    "text": "Нанесите {{value0}} урона <keyword0>природой</keyword0>, когда <keyword1>оглушаете</keyword1> врага"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
