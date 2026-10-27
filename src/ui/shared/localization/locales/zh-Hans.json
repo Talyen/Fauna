@@ -1445,6 +1445,12 @@
     "sourceHash": "2388cbfb329af26fe831bf9c4ed2e432761643a6b40d2240837135e202185bf1",
     "text": "春日流转"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "5edb4c42d8345a546cae43bc6d477e931e3cc9e703f06f8d3cba139b1699f97d",
+    "text": "造成{{value0}}点<keyword0>水</keyword0>伤害; <keyword1>净化</keyword1>行动生物：移除{{value1}}个效果"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1462,6 +1468,12 @@
     "source": "Last Light Charge",
     "sourceHash": "9a476a46e20d744ed99113ddb10c2fc499731dfcb849e0de4f0d349432b8ff4d",
     "text": "余光冲锋"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "570ebf0d3085c3f427360bf1ad50343f8183669723cd02642ba09eaad83c571b",
+    "text": "造成{{value0}}点<keyword0>光</keyword0>伤害 / 若这是手中最后一张卡牌，则必定<keyword1>暴击</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1733,6 +1745,12 @@
     "sourceHash": "11875e3db4b861bae29bd7555d97bc0fdd3f0536aa13683de2e53ee18b31d081",
     "text": "余烬吐息"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "7cf684b5ece40d403236efebda8c7f73e42872c3f2edd47c8b995ad5362ce541",
+    "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害; 移除所有敌人{{value1}}%的<keyword1>护甲</keyword1>，向上取整"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1972,6 +1990,12 @@
     "source": "Wish Exchange",
     "sourceHash": "1ccbde05de4f1bd0209f31d0bac2ae7788445d2fcf1bc831823619fdff0f2984",
     "text": "心愿交换"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "68de5ba6aed053d0d5ecc632207ba492bcc07b8975d025b5d5bdb36a63045948",
+    "text": "均分盟友的<keyword0>格挡</keyword0>; 盟友获得{{value0}}点<keyword1>格挡</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2429,6 +2453,12 @@
     "sourceHash": "5ecf266f7d1c3d94b19a940896fafeb529f2583e936cc2031ece36b76c52afaa",
     "text": "火花诱饵"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "0b6d0d4353bbe3cb4bb9d034edd63a9ba3ac1e08310dd706969ffe3d59cd8a51",
+    "text": "对所有敌人施加{{value0}}点<keyword0>灼烧</keyword0> / 获得<keyword1>抵消</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2470,6 +2500,12 @@
     "source": "Dream Double",
     "sourceHash": "360a5b224c2ecf511642bec7f1d0ca504e1371040a4138cc271f1798f7482963",
     "text": "梦之分身"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "d8f5cd712f00e825850a1d0a43faaf13d9650713317b25b3c77958d4538aff99",
+    "text": "获得{{value0}}点<keyword0>荆棘</keyword0> / <keyword1>抵消</keyword1>下一次受到的攻击"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,

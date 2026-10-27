@@ -1445,6 +1445,12 @@
     "sourceHash": "f0cc591630578e9451b5a0a2e8ab2ef19d33bbeb063959a6be420fb0615083d1",
     "text": "Frühlingsstrom"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "447aacc057d0e774cb62e1a5bca057de1ab5dfbe5cf0fb16a4ad801d2510d1c9",
+    "text": "Verursache {{value0}} <keyword0>Wasser</keyword0>-Schaden; <keyword1>Reinige</keyword1> die handelnde Kreatur: entfernte Effekte {{value1}}"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1462,6 +1468,12 @@
     "source": "Last Light Charge",
     "sourceHash": "1b275e16090def9565ef9ccc28c09bdd5c616c303045a31aedfbceb8ab82b4a1",
     "text": "Ansturm des letzten Lichts"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "0d6c1c92f584308204b62a3426ef02e9bd3b649040d63583c0f3e1fe560ba056",
+    "text": "Verursache {{value0}} <keyword0>Licht</keyword0>-Schaden / Ist dies die letzte Karte auf deiner Hand, erzielt sie einen <keyword1>kritischen Treffer</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1733,6 +1745,12 @@
     "sourceHash": "c0d1b9dc47ad8b32d5bb60ee34e50881d7ec67d3ba6639dbf883f07ab96dc12a",
     "text": "Glutatem"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "9e4d3318e39b6326c28d37966a422da9622592657383d4333f9611862243402a",
+    "text": "Verursache {{value0}} <keyword0>Brand</keyword0>-Schaden bei allen Gegnern; Entferne {{value1}}% der <keyword1>Rüstung</keyword1> aller Gegner, aufgerundet"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1972,6 +1990,12 @@
     "source": "Wish Exchange",
     "sourceHash": "8704ddcc179b7e593990c7ed32da6fbd4d6d8f7ec40c3e59bbc6f9672804018d",
     "text": "Wunschtausch"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "82af9ca74e5d11e9d6f5e374fa3f3b54450ccad0ed70d3e9d66832aa4922ef8c",
+    "text": "Verteile den <keyword0>Block</keyword0> der Verbündeten gleichmäßig neu; Verbündete erhalten {{value0}} <keyword1>Block</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2429,6 +2453,12 @@
     "sourceHash": "76469d06574dfa888e71f505d60f15ef34397ccbeb39c44062bead1f156bc7ca",
     "text": "Funkenköder"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "b3b215e2c9356b46f49a2d0d7c6cc5b84919d32848ce7f73c8172c536aba3e6c",
+    "text": "Wende {{value0}} <keyword0>Brand</keyword0> auf alle Gegner an / Erhalte <keyword1>Abwehren</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2470,6 +2500,12 @@
     "source": "Dream Double",
     "sourceHash": "083dda61ac83c388648dddd21e149e08c4be016a4f44257da05e885b8ede03a1",
     "text": "Traumdoppel"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "e9c051323999168c053ce337622bfdcabb3ee339bef0eeaa9401cdadb9e0276f",
+    "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0> / <keyword1>Wehre</keyword1> den nächsten Angriff gegen dich ab"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,

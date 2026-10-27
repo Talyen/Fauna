@@ -1457,6 +1457,12 @@
     "sourceHash": "9ab449f9c515b6eddd1c62a5ed8e78a250207e86b491dd5f47718112048d5d9f",
     "text": "Courant printanier"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "730614ed3c3096d1b3968be0f9fc07b73ad760a0e4bbf7e965bee3df50a7cfe5",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0>; <keyword1>Purifie</keyword1> la créature qui agit : effets retirés {{value1}}"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1474,6 +1480,12 @@
     "source": "Last Light Charge",
     "sourceHash": "43d3dca40cc982361d4cf87543ab91cd4fc92a98678b6622f78820d8717fc982",
     "text": "Charge de la dernière lueur"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "b02786a7f5fc3d280c0135d465c98bc9f363afda7568fd05478369ff678d0154",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> / Si c’est la dernière carte en main, elle inflige un <keyword1>coup critique</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1745,6 +1757,12 @@
     "sourceHash": "6c1dd56e2a6fdddcfad8a2b6ace0a9edbcfa657d21ade7515032ade8c842abce",
     "text": "Souffle de braise"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "f0d83311a142f1cc543745e79b1b108870b462e4115ac80ea87064aea84d1f11",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Brûlure</keyword0> à tous les ennemis; Retire {{value1}}% de l’<keyword1>Armure</keyword1> de tous les ennemis, arrondi au supérieur"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1984,6 +2002,12 @@
     "source": "Wish Exchange",
     "sourceHash": "ac83f8b4d80106d7a149678cc8b5ba787b335ffea29f932667d45e5afcaad497",
     "text": "Échange de souhaits"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "c202b9bd823bab6dfd53440794760ff519723692308ca7ebfae3789b0f2a40a5",
+    "text": "Redistribue équitablement le <keyword0>Blocage</keyword0> allié; Les alliés gagnent {{value0}} <keyword1>Blocage</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2441,6 +2465,12 @@
     "sourceHash": "9734bd40de5468cabc2ad3813dac4e88a14936f9c00f2fbd46d866cc347cb914",
     "text": "Leurre d’étincelles"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "082bf6fa0d9b9a8a56a99dce809bb71e6fb5f5963af714732902baf7f6cab06d",
+    "text": "Applique {{value0}} <keyword0>Brûlure</keyword0> à tous les ennemis / Gagne <keyword1>Négation</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2482,6 +2512,12 @@
     "source": "Dream Double",
     "sourceHash": "abc4461f2116dfca7462650260f6f913c86528f03f3f7f5205ccd57fc3cb3f81",
     "text": "Double onirique"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "d30570ba6a4dc3d929f111bc516e0b09fb661e8d039c498a1fcb8a32ea81c151",
+    "text": "Gagne {{value0}} <keyword0>Épines</keyword0> / <keyword1>Annule</keyword1> la prochaine attaque contre vous"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,

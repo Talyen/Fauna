@@ -1445,6 +1445,12 @@
     "sourceHash": "6ada2d565169ce23100a3ff425922922f72d50524e2e46962b1b6aced4d4d97a",
     "text": "Весеннее течение"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "fa80df8ebffacfa3a8088f27fab45879b4e8617d73b3338023bfa18d677c37dc",
+    "text": "Нанесите {{value0}} урона <keyword0>водой</keyword0>; <keyword1>Очистите</keyword1> действующее существо: удалить эффектов {{value1}}"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1462,6 +1468,12 @@
     "source": "Last Light Charge",
     "sourceHash": "7e35ed9137baffd63d5ca90d32bb392ca76d1e54f1bfc83885cecfcaef7f8259",
     "text": "Натиск последнего света"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "c13886829ea5d9bfa3a7d10957869a3e64d3c0000849993bb7b0228b4b6bcbaf",
+    "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0> / Если это последняя карта в руке, она наносит <keyword1>критический удар</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1733,6 +1745,12 @@
     "sourceHash": "eafb3ea52f350549d889c4bf274910830f1b909360915ea6da347bccdc862d19",
     "text": "Дыхание углей"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "242186ea99969cae386cdd92d5e0ff4621bacb9e8903a500376c5a815f670eae",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>горением</keyword0>; Удалите {{value1}}% <keyword1>брони</keyword1> всех врагов с округлением вверх"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1972,6 +1990,12 @@
     "source": "Wish Exchange",
     "sourceHash": "bd0b83d114a8f1539d2035a4f9cc5fe3eed75acbb5c80e822011ff1844a3a91f",
     "text": "Обмен желаниями"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "d65f27d7df71732bbb118fb6bb2c1557f07631b5fb245eda27782140a93ee200",
+    "text": "Поровну перераспределите <keyword0>блок</keyword0> союзников; Союзники получают {{value0}} <keyword1>блока</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2429,6 +2453,12 @@
     "sourceHash": "0b65a601e199d2e957f97b8475c84ba75572e8d74e6d3242f5f23bcfe7a950ae",
     "text": "Искристая приманка"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "7068ec2d6b8d2409b0ba67ba60170c2fb0296b13426b88faab0eb5273c810855",
+    "text": "Наложите {{value0}} <keyword0>горения</keyword0> на всех врагов / Получите <keyword1>отведение</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2470,6 +2500,12 @@
     "source": "Dream Double",
     "sourceHash": "0be87cdd5824fe34ba6f4a0530c50bd97c4ea8f2f5c19a55307bfd21fdfe2e5e",
     "text": "Двойник сна"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "504cec32f0bc54fa901323d2084555f0e0b10ec663afeb15e6f4cc511b69a459",
+    "text": "Получите {{value0}} <keyword0>шипов</keyword0> / <keyword1>Отведите</keyword1> следующую атаку против вас"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,

@@ -1445,6 +1445,12 @@
     "sourceHash": "e54ad278c9fe19873976d0776914f5537f7f80003a6162d950ed7ae5034b9795",
     "text": "春の流れ"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "ebe5d56713b4087d7708e24548e24989ddda54cadb5108d39a86b73b816a6512",
+    "text": "{{value0}}の<keyword0>水</keyword0>ダメージを与える; 行動するクリーチャーを<keyword1>浄化</keyword1>：除去する効果{{value1}}個"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1462,6 +1468,12 @@
     "source": "Last Light Charge",
     "sourceHash": "9ab4508776fc78d3c7aec05d741226bf914658ca6573eafec9dba63e782e1858",
     "text": "残光の突進"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "a2107c055bc504529ea2ec80b829c88af2d214adf042d7fdb3f435b935be7d72",
+    "text": "{{value0}}の<keyword0>光</keyword0>ダメージを与える / 手札最後のカードなら<keyword1>クリティカル</keyword1>になる"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1733,6 +1745,12 @@
     "sourceHash": "db2974c1059b6335663d518fb6561df7c0e26cf43d05d2492cbdae1cb8a2fbfd",
     "text": "熾火の息吹"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "be79d198626b3ab106a62fe63b5fe81dd89acc0c28423ec79f0c0c62ae2a9b99",
+    "text": "すべての敵に{{value0}}の<keyword0>炎上</keyword0>ダメージを与える; すべての敵の<keyword1>装甲</keyword1>を{{value1}}%除去（切り上げ）"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1972,6 +1990,12 @@
     "source": "Wish Exchange",
     "sourceHash": "3f5d95bef35446fc3cf5e3097208eab08edd2ab654d4d166756e6b09a32d2c02",
     "text": "願いの交換"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "a0ef1d18ccec37467f63a7049b91f254bb4ce5dd56c80557619f8da200be852f",
+    "text": "味方の<keyword0>ブロック</keyword0>を均等に再配分; 味方が<keyword1>ブロック</keyword1>を{{value0}}獲得"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2429,6 +2453,12 @@
     "sourceHash": "286135e9a0a6d3cc0a32c5d51e9c5e711548b02d73502914c7ecb613ade5d3a2",
     "text": "火花のおとり"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "4021a11e1243ead48f6253045f8e5a2740f0cc50d115cbc012f5be9d222be44a",
+    "text": "すべての敵に<keyword0>炎上</keyword0>を{{value0}}付与 / <keyword1>防止</keyword1>を獲得"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2470,6 +2500,12 @@
     "source": "Dream Double",
     "sourceHash": "6b95483ef6d57e43df26f4ec4299bf8380b981268eb68ebd10509130f12215ec",
     "text": "夢の分身"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "917609ac524c4d2c4c14a7efafcecd7e2d8d56f9374d9224ba117644387b8bf8",
+    "text": "<keyword0>棘</keyword0>を{{value0}}獲得 / 次に受ける攻撃を<keyword1>防止</keyword1>"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,

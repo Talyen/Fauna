@@ -1445,6 +1445,12 @@
     "sourceHash": "bf9853a80140ca979ec3643a06a0347e15c5482f94854b14ade9e959b110f2b6",
     "text": "Corriente primaveral"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "2f362fdf2cd645759116432f4bcaaa41079b1590b26f594cc7ceba0ca6b83979",
+    "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0>; <keyword1>Purifica</keyword1> a la criatura que actúa: efectos eliminados {{value1}}"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1462,6 +1468,12 @@
     "source": "Last Light Charge",
     "sourceHash": "feb2486558a89a89ffa0b7a8d52be46ca2b10eeef57e4fb259728cc940c53354",
     "text": "Carga de la última luz"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "642ba1e1847254128ab0ff0b27373056a54fd708da64fab28dc64d1effdd622f",
+    "text": "Inflige {{value0}} de daño de <keyword0>Luz</keyword0> / Si es la última carta en tu mano, asesta un <keyword1>golpe crítico</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1733,6 +1745,12 @@
     "sourceHash": "5756c544bf266eb963080760388091aff528a1bff840860329e09d0307bd3df2",
     "text": "Aliento de brasa"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "d25ffefc9e3248aced526b1f3258980a2005f856907bb190c0d3e3fc542acd62",
+    "text": "Inflige {{value0}} de daño de <keyword0>Quemadura</keyword0> a todos los enemigos; Elimina un {{value1}}% de la <keyword1>Armadura</keyword1> de todos los enemigos, redondeado hacia arriba"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1972,6 +1990,12 @@
     "source": "Wish Exchange",
     "sourceHash": "1efee4f18623b7a0c2eb69404dad49022c390418480a3d429bbada69087ffe17",
     "text": "Intercambio de deseos"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "2c4c5ead67e6344a96709662d536c42be614744cc8abaf21325c59fc9d728af3",
+    "text": "Redistribuye por igual el <keyword0>Bloqueo</keyword0> aliado; Los aliados obtienen {{value0}} de <keyword1>Bloqueo</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2429,6 +2453,12 @@
     "sourceHash": "462728f3119969b097d29cb5991486da9f2e42418d6a9f84a4bfd8cba409d202",
     "text": "Señuelo de chispas"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "84844f13f28b1ef0ea18b44454a386afbf3add1ccbc2d1246f2306ce8595d4c4",
+    "text": "Aplica {{value0}} de <keyword0>Quemadura</keyword0> a todos los enemigos / Obtiene <keyword1>Anulación</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2470,6 +2500,12 @@
     "source": "Dream Double",
     "sourceHash": "eede46cfd3e407c829f3a669761c94ee5e4575293f65d846102fbbc5d73b8d5c",
     "text": "Doble onírico"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "3dada0ecdc86bd2c3d8c7fa46819c76feab0177c57896883079ede44a5f85bb1",
+    "text": "Obtiene {{value0}} de <keyword0>Espinas</keyword0> / <keyword1>Anula</keyword1> el próximo ataque contra ti"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,

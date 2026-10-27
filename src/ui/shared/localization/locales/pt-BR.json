@@ -1445,6 +1445,12 @@
     "sourceHash": "84421a158f9929df8a613b556bf10cb44664f4eb3975fbecaa09f62296c1d1f9",
     "text": "Corrente primaveril"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "7117711fd29ab3bbbca929f50a3adac85b3b6e0939852fb47cfb2ae87f89c05e",
+    "text": "Causa {{value0}} de dano de <keyword0>Água</keyword0>; <keyword1>Purifica</keyword1> a criatura que age: efeitos removidos {{value1}}"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1462,6 +1468,12 @@
     "source": "Last Light Charge",
     "sourceHash": "84d15f11aa2e274bc5bb906665f6e59e9cff83eeee4f2c0f3bae5de08e56b63b",
     "text": "Investida da última luz"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "d42d70be7fadb79d7267d93e6f664f7a1b1484c186eb504137e2d7df52c3f367",
+    "text": "Causa {{value0}} de dano de <keyword0>Luz</keyword0> / Se esta for a última carta na sua mão, causa um <keyword1>acerto crítico</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1733,6 +1745,12 @@
     "sourceHash": "263b98880e006ac99b59a4f9b6e78612b2bb407fa40235610a8e06dcb0b6e2e2",
     "text": "Sopro de brasa"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "f637d82f8d6a3399f020ce3529f41575d73d51df57b05e0e176d99593f6dd40c",
+    "text": "Causa {{value0}} de dano de <keyword0>Queimadura</keyword0> a todos os inimigos; Remove {{value1}}% da <keyword1>Armadura</keyword1> de todos os inimigos, arredondado para cima"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1972,6 +1990,12 @@
     "source": "Wish Exchange",
     "sourceHash": "a458e50c6170730f8976bd4aac855d916fcb973dad92dae0928e9d9335b953be",
     "text": "Troca de desejos"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "ce191f13a8f719b4b8d76683756377eb6a9930fe5ca698811bd3c2219d878dd9",
+    "text": "Redistribui igualmente o <keyword0>Bloqueio</keyword0> aliado; Aliados recebem {{value0}} de <keyword1>Bloqueio</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2429,6 +2453,12 @@
     "sourceHash": "3ba4708cd5ed1fcd63a513ff34ba48852b9de42a843ea2f57b58e7afb6f12296",
     "text": "Isca de faíscas"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "4c072ce7a176e56915a03c88f9a04aed5e3b3de93c46b525bb05b1ca875db90b",
+    "text": "Aplica {{value0}} de <keyword0>Queimadura</keyword0> a todos os inimigos / Recebe <keyword1>Negação</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2470,6 +2500,12 @@
     "source": "Dream Double",
     "sourceHash": "9714dd2e0a1b437c7890127b56875bfa19172d7be85052e138df45d079ffd6f3",
     "text": "Duplo onírico"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "258b55f076773abb4063d6c615d044b6457e3e917637e75700bcdf748cceb22f",
+    "text": "Recebe {{value0}} de <keyword0>Espinhos</keyword0> / <keyword1>Nega</keyword1> o próximo ataque contra você"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,
