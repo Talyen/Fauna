@@ -7907,6 +7907,12 @@
     "sourceHash": "90592d31d0fc1e5a0f47990396ed61df5f9c6d9117bf94a878c4aa8050607d22",
     "text": "Receba {{amount}} de Mana."
   },
+  "log.gainNegate": {
+    "reviewed": true,
+    "source": "{{name}} gains Negate",
+    "sourceHash": "ab957bab37e48538d627088b19ae77fa4e40868dc7bcb6179016b6cd79b44c7c",
+    "text": "{{name}} ganha Negação"
+  },
   "log.gainNullify": {
     "reviewed": true,
     "source": "{{name}} gains Nullify",
@@ -7960,6 +7966,18 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "4f1b28fb06ea2047c626e0e9ab6819052ea07f79cc1378a66744b7b86b926630",
     "text": "{{name}} perde {{amount}} de acúmulo de Congelamento"
+  },
+  "log.negateAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the attack",
+    "sourceHash": "3177d3fbc6afebda46cc3d5d854f10f99c2a7078bbb7da914608e5ac48e9d603",
+    "text": "{{name}} nega o ataque"
+  },
+  "log.negateNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the next attack against them",
+    "sourceHash": "60964c778eae12b935d47ce3bb28569e97b4a259bde28804438a42091b862724",
+    "text": "{{name}} nega o próximo ataque contra essa criatura"
   },
   "log.nullifyEffect": {
     "reviewed": true,
@@ -8080,6 +8098,36 @@
     "source": "Use {{card}}",
     "sourceHash": "99ef860fc095e21616be35d8b54fce4ab87c786c8d378b7a17e69b8506732c5d",
     "text": "Use {{card}}"
+  },
+  "log.wardNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} reflects the next attack",
+    "sourceHash": "afefbf2f201780485c8080e17de56f32f1fdd214b933db9721dcfb7c3075e25f",
+    "text": "{{name}} reflete o próximo ataque"
+  },
+  "log.wardNextBurn": {
+    "reviewed": true,
+    "source": "Reflect the next Burn",
+    "sourceHash": "033d784846a9d8fd57906760b5b47e444baee0ea49457654d8349937d4aa4485",
+    "text": "Refletir a próxima Queimadura"
+  },
+  "log.wardNextFreeze": {
+    "reviewed": true,
+    "source": "Nullify the next Freeze damage",
+    "sourceHash": "6e719dbf866d7c1a49ef396341f403ab233cf647f4e153e2fe4799949b5c97a3",
+    "text": "Anular o próximo dano de Congelamento"
+  },
+  "log.wardNextHarm": {
+    "reviewed": true,
+    "source": "{{name}} nullifies the next harmful status effect",
+    "sourceHash": "b3610903a74ee50412bcb5489be480ffc87ee2146829613fbf38c3da07219e4b",
+    "text": "{{name}} anula o próximo efeito de estado prejudicial"
+  },
+  "log.wardNextStatus": {
+    "reviewed": true,
+    "source": "Reflect the next harmful status effect",
+    "sourceHash": "d3b94a6535b393db9ec655c8fc5d992d7d40dc89f51074264a22f709325722ac",
+    "text": "Refletir o próximo efeito de estado prejudicial"
   },
   "menu.boons": {
     "reviewed": true,

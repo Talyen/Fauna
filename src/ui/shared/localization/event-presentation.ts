@@ -157,6 +157,35 @@ export function eventPresentation(
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status") {
+    if (event.outcome === "apply") {
+      if (event.status === "nullify" && event.text === "Nullify the next Freeze damage")
+        return i18n.message("log.wardNextFreeze", "Nullify the next Freeze damage");
+      if (event.status === "reflect" && event.text === "Reflect the next Burn")
+        return i18n.message("log.wardNextBurn", "Reflect the next Burn");
+      if (event.status === "reflect" && event.text === "Reflect the next harmful status effect")
+        return i18n.message("log.wardNextStatus", "Reflect the next harmful status effect");
+      if (event.status === "attackReflection" && event.text === `${englishName} reflects the next attack`)
+        return i18n.message("log.wardNextAttack", "{{name}} reflects the next attack", { name });
+      if (event.status === "negate" && event.text === `${englishName} negates the next attack against them`)
+        return i18n.message("log.negateNextAttack", "{{name}} negates the next attack against them", {
+          name,
+        });
+      if (event.status === "negate" && event.text === `${englishName} gains Negate`)
+        return i18n.message("log.gainNegate", "{{name}} gains Negate", { name });
+      if (
+        event.status === "nullify" &&
+        event.text === `${species(target.species).name} nullifies the next harmful status effect`
+      )
+        return i18n.message("log.wardNextHarm", "{{name}} nullifies the next harmful status effect", {
+          name,
+        });
+    }
+    if (
+      event.status === "negate" &&
+      event.outcome === "immune" &&
+      event.text === `${englishName} negates the attack`
+    )
+      return i18n.message("log.negateAttack", "{{name}} negates the attack", { name });
     if (event.status === "deathDoor" && event.outcome === "apply") {
       const prefix = `${englishName} reaches Death's Door: `;
       const turns = event.text.startsWith(prefix)

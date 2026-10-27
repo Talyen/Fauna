@@ -7907,6 +7907,12 @@
     "sourceHash": "c986ab4b3632640d313e94d2fd533a62e7197135f371255356c42f93dc2392e9",
     "text": "Gagnez {{amount}} Mana."
   },
+  "log.gainNegate": {
+    "reviewed": true,
+    "source": "{{name}} gains Negate",
+    "sourceHash": "cd94868a80aa3556bacb436f4389951d7f63531cea79b8a4defff93d3fbf9763",
+    "text": "{{name}} gagne Négation"
+  },
   "log.gainNullify": {
     "reviewed": true,
     "source": "{{name}} gains Nullify",
@@ -7960,6 +7966,18 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "3831f194e21c01b181fd701bca441940789eccebe4742c08fdadb398096aa607",
     "text": "{{name}} perd {{amount}} d’accumulation de Gel"
+  },
+  "log.negateAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the attack",
+    "sourceHash": "e37569375a130b9f4be5252dd2d123018dbaa508a9286762537aa8058abc922b",
+    "text": "{{name}} annule l’attaque"
+  },
+  "log.negateNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the next attack against them",
+    "sourceHash": "349b9c8d7b8b9ff3b3ed16bc0421ac6dbdb1231168ba34d9bd44b88b0c6ad05c",
+    "text": "{{name}} annule la prochaine attaque dirigée contre lui"
   },
   "log.nullifyEffect": {
     "reviewed": true,
@@ -8080,6 +8098,36 @@
     "source": "Use {{card}}",
     "sourceHash": "1bd9da8d302403d4fb7d85826c8e0b3253e1a1cab9abf1e0dcb18815ff55552d",
     "text": "Utilise {{card}}"
+  },
+  "log.wardNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} reflects the next attack",
+    "sourceHash": "83cb49a31974d21ce0fd83509ebdccc5c66dde1742a22d084045a10b5d4a5e64",
+    "text": "{{name}} renvoie la prochaine attaque"
+  },
+  "log.wardNextBurn": {
+    "reviewed": true,
+    "source": "Reflect the next Burn",
+    "sourceHash": "48aa5d03e2985e72f907925e1bbb0365a2563ebde5303f3e25102bacd149ae0e",
+    "text": "Renvoyer la prochaine Brûlure"
+  },
+  "log.wardNextFreeze": {
+    "reviewed": true,
+    "source": "Nullify the next Freeze damage",
+    "sourceHash": "f2205f417ef8928e940cdd3ac5187f5ce3ca74ae59a11bdd1116b6458ceaa981",
+    "text": "Annuler les prochains dégâts de Gel"
+  },
+  "log.wardNextHarm": {
+    "reviewed": true,
+    "source": "{{name}} nullifies the next harmful status effect",
+    "sourceHash": "2ebd76088900af375d4f079aee6c9bdb43ed1e0cb73ea9af24f813c6c8c16603",
+    "text": "{{name}} annule le prochain effet de statut néfaste"
+  },
+  "log.wardNextStatus": {
+    "reviewed": true,
+    "source": "Reflect the next harmful status effect",
+    "sourceHash": "d472fc6d7a543662efe6197cc341d6cdee96df3a2f8b3f8ac6c1c9068647f4e0",
+    "text": "Renvoyer le prochain effet de statut néfaste"
   },
   "menu.boons": {
     "reviewed": true,

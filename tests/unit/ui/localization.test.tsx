@@ -424,6 +424,36 @@ it("localizes real Pearl and Echo creation and a repeated Food card", () => {
     expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
 });
 
+it("localizes protective ward announcements without translating unrelated events", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const english = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: english, text: "Allié" },
+  });
+  const ward: GameEvent = {
+    kind: "status",
+    targetId: target.id,
+    status: "reflect",
+    outcome: "apply",
+    text: "Reflect the next harmful status effect",
+  };
+  expect(eventPresentation(game, ward, reader)).toBe("Renvoyer le prochain effet de statut néfaste");
+  const negate: GameEvent = {
+    kind: "status",
+    targetId: target.id,
+    status: "negate",
+    outcome: "apply",
+    text: `${english} negates the next attack against them`,
+  };
+  expect(eventPresentation(game, negate, reader)).toBe(
+    "Allié annule la prochaine attaque dirigée contre lui",
+  );
+  expect(eventPresentation(game, { ...ward, text: "An unfamiliar ward" }, reader)).toBe("An unfamiliar ward");
+  expect(eventPresentation(game, negate, createMessageReader("en", {}))).toBe(negate.text);
+});
+
 it("localizes a reflected status using its actual recipient", () => {
   const game = structuredClone(run());
   const actor = game.team[0]!;

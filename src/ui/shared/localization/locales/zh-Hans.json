@@ -7907,6 +7907,12 @@
     "sourceHash": "e8fce4485ff73f81d316395b816ac572dfd5493c5dfeb26e421739d47218a6d8",
     "text": "获得{{amount}}点法力。"
   },
+  "log.gainNegate": {
+    "reviewed": true,
+    "source": "{{name}} gains Negate",
+    "sourceHash": "f8aa04799430a218bf00b6a6d611cbf8953a18218bd27c00a57ba98896eb71b1",
+    "text": "{{name}}获得抵消"
+  },
   "log.gainNullify": {
     "reviewed": true,
     "source": "{{name}} gains Nullify",
@@ -7960,6 +7966,18 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "7a9ebeb5c55006d03ebb285c14516a62d439274e46af4c0388501a8eff3ae549",
     "text": "{{name}}减少{{amount}}点冻结积累"
+  },
+  "log.negateAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the attack",
+    "sourceHash": "171cfff1232d6eaa1941e0d8ff4d0cb37e3048aedbdcecc10c100f9d740e57d5",
+    "text": "{{name}}抵消了攻击"
+  },
+  "log.negateNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the next attack against them",
+    "sourceHash": "8395d2999cd34de3f576b5ff4bb418ca3a381abc65692fe2127f9b80ad50c040",
+    "text": "{{name}}抵消下一次针对自己的攻击"
   },
   "log.nullifyEffect": {
     "reviewed": true,
@@ -8080,6 +8098,36 @@
     "source": "Use {{card}}",
     "sourceHash": "081130a0d2d6d7b065991fe0eeec88a7b9a4e1878a29a3964289e7b0d7c6c5a6",
     "text": "使用{{card}}"
+  },
+  "log.wardNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} reflects the next attack",
+    "sourceHash": "7dd26377b9bd624965b9cbb36729b099fbecaa9aeabdd90f2fc0aa41f0e2158f",
+    "text": "{{name}}反射下一次攻击"
+  },
+  "log.wardNextBurn": {
+    "reviewed": true,
+    "source": "Reflect the next Burn",
+    "sourceHash": "71f8c5eaf0f0e00bf212ae2a1ea3294b7742fad468081690744ae87d8c23e967",
+    "text": "反射下一次灼烧"
+  },
+  "log.wardNextFreeze": {
+    "reviewed": true,
+    "source": "Nullify the next Freeze damage",
+    "sourceHash": "e7cc73f75e95a0de244d067d0907289fc076994d840b408d8471c7dca41c91bd",
+    "text": "无效化下一次冻结伤害"
+  },
+  "log.wardNextHarm": {
+    "reviewed": true,
+    "source": "{{name}} nullifies the next harmful status effect",
+    "sourceHash": "aacc35819e7d6a21bc98024502530e371e5d7cc1909cc29e1054b39eb6f5121c",
+    "text": "{{name}}无效化下一次有害状态效果"
+  },
+  "log.wardNextStatus": {
+    "reviewed": true,
+    "source": "Reflect the next harmful status effect",
+    "sourceHash": "e3aff479331571cfaa5cd909fbab30a74d823b9c2c4cb2db71cd3a04798b2534",
+    "text": "反射下一次有害状态效果"
   },
   "menu.boons": {
     "reviewed": true,

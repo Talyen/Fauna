@@ -7907,6 +7907,12 @@
     "sourceHash": "cbfbac7208fc8966d1b4801343c841f1f88e7eaf9f585d1f5064f4401d6fc6ba",
     "text": "Erhalte {{amount}} Mana."
   },
+  "log.gainNegate": {
+    "reviewed": true,
+    "source": "{{name}} gains Negate",
+    "sourceHash": "045d60364a450d37f95553c8cfd90e0612000de7ac9e249f709fc07de09a0b4f",
+    "text": "{{name}} erhält Abwehren"
+  },
   "log.gainNullify": {
     "reviewed": true,
     "source": "{{name}} gains Nullify",
@@ -7960,6 +7966,18 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "8d134786f5457451271433eba54dd90c3ac91abe3521155c3b74145d8c288ff6",
     "text": "{{name}} verliert {{amount}} Frost-Aufbau"
+  },
+  "log.negateAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the attack",
+    "sourceHash": "194d31e1b2b5228cd2f568bdcf09ded0988c2925c028b4e6446402a852aeb385",
+    "text": "{{name}} wehrt den Angriff ab"
+  },
+  "log.negateNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the next attack against them",
+    "sourceHash": "38f9daaf5691083944b7e05c96e6d467cfe8b3c1ae2d549913c78ae5bd96e924",
+    "text": "{{name}} wehrt den nächsten Angriff gegen sich ab"
   },
   "log.nullifyEffect": {
     "reviewed": true,
@@ -8080,6 +8098,36 @@
     "source": "Use {{card}}",
     "sourceHash": "aa329f980c1c7d7c94d1decea7ecba51b598e5356874e3624f598af31e262866",
     "text": "Setze {{card}} ein"
+  },
+  "log.wardNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} reflects the next attack",
+    "sourceHash": "b472f8a0956f9ab18d26afb6030678633274370196eb4bfee3c31cdc7aa19a35",
+    "text": "{{name}} reflektiert den nächsten Angriff"
+  },
+  "log.wardNextBurn": {
+    "reviewed": true,
+    "source": "Reflect the next Burn",
+    "sourceHash": "81f99b27a17e9f1b38efcb945b9093d8ec1638d3e99e7393bf70a0ba47b684fe",
+    "text": "Den nächsten Brand reflektieren"
+  },
+  "log.wardNextFreeze": {
+    "reviewed": true,
+    "source": "Nullify the next Freeze damage",
+    "sourceHash": "844971e1764837287de749d780a53a7602d5cfc263eee98fcd3212d970924113",
+    "text": "Den nächsten Frostschaden aufheben"
+  },
+  "log.wardNextHarm": {
+    "reviewed": true,
+    "source": "{{name}} nullifies the next harmful status effect",
+    "sourceHash": "d980d36be7900ab4364d355f6b5e2c343a69ea27881d81732214af79c1eee95e",
+    "text": "{{name}} hebt den nächsten schädlichen Statuseffekt auf"
+  },
+  "log.wardNextStatus": {
+    "reviewed": true,
+    "source": "Reflect the next harmful status effect",
+    "sourceHash": "a035b4be6916f7605d66b3c00a1e1248c83240486b593a5a1953d5984c3d49ee",
+    "text": "Den nächsten schädlichen Statuseffekt reflektieren"
   },
   "menu.boons": {
     "reviewed": true,

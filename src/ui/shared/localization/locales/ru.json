@@ -7907,6 +7907,12 @@
     "sourceHash": "3ccefae6bfb077e765d9944a0ff25ce3ffdc8753438e15120526d96a18b77458",
     "text": "Получено маны: {{amount}}."
   },
+  "log.gainNegate": {
+    "reviewed": true,
+    "source": "{{name}} gains Negate",
+    "sourceHash": "dd30a1bd91a5387cf029455ca443f0d7038bdf3c55989493936dd34a54f9a07e",
+    "text": "{{name}} получает Отведение"
+  },
   "log.gainNullify": {
     "reviewed": true,
     "source": "{{name}} gains Nullify",
@@ -7960,6 +7966,18 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "0b9507e3907d1eeee7fb457f957fca6ebbecc6a7c8f7bb5a7f16871233c3f42e",
     "text": "У {{name}} накопление заморозки уменьшается на {{amount}}"
+  },
+  "log.negateAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the attack",
+    "sourceHash": "474ec2908136cf8a12138354b1d0bc57b19f30f8350ba1d76cb79bc1a0ca16e0",
+    "text": "{{name}} отводит атаку"
+  },
+  "log.negateNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the next attack against them",
+    "sourceHash": "6e2e7b104f7798ccc0cd7a24b0e976a8001058d6735c15556cb2b7f34d9384a7",
+    "text": "{{name}} отводит следующую атаку против себя"
   },
   "log.nullifyEffect": {
     "reviewed": true,
@@ -8080,6 +8098,36 @@
     "source": "Use {{card}}",
     "sourceHash": "fba73d6df3f1e3f99fd60053bb10c2c3b0f3cb1757529eb2e850ca16ced1b468",
     "text": "Использовать «{{card}}»"
+  },
+  "log.wardNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} reflects the next attack",
+    "sourceHash": "1020e8b8f52e76e02d507d84d8efc86515a54e30c7640ad47c1ed2e87380e488",
+    "text": "{{name}} отражает следующую атаку"
+  },
+  "log.wardNextBurn": {
+    "reviewed": true,
+    "source": "Reflect the next Burn",
+    "sourceHash": "def718c6414c287416a8431cac163d5be0495036a48a1034f4c1481f1b0816cd",
+    "text": "Отразить следующее горение"
+  },
+  "log.wardNextFreeze": {
+    "reviewed": true,
+    "source": "Nullify the next Freeze damage",
+    "sourceHash": "c4695e413835c687c76bd4d33fb6dcc907e1c61967de67111e268db3efd18ca0",
+    "text": "Аннулировать следующий урон заморозкой"
+  },
+  "log.wardNextHarm": {
+    "reviewed": true,
+    "source": "{{name}} nullifies the next harmful status effect",
+    "sourceHash": "8e45458de8b8bd2a93a368fe05ebf0b411f247f0b24dd2a682b206092ed89bbf",
+    "text": "{{name}} аннулирует следующий вредный эффект состояния"
+  },
+  "log.wardNextStatus": {
+    "reviewed": true,
+    "source": "Reflect the next harmful status effect",
+    "sourceHash": "937fed0ae60f8c8f9358c1f7ae55467a335a025f16615cec51f16eff40eae7ec",
+    "text": "Отразить следующий вредный эффект состояния"
   },
   "menu.boons": {
     "reviewed": true,

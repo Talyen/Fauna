@@ -7907,6 +7907,12 @@
     "sourceHash": "7a8857da5197463e071c4d83b77482e69ef0268c6a9d4b77409012d0f817097f",
     "text": "マナを{{amount}}獲得。"
   },
+  "log.gainNegate": {
+    "reviewed": true,
+    "source": "{{name}} gains Negate",
+    "sourceHash": "f472f49756343d0af278bf3d2b763cf815bb38057947276d4a4fc8ed3bff14e6",
+    "text": "{{name}}は防止を獲得"
+  },
   "log.gainNullify": {
     "reviewed": true,
     "source": "{{name}} gains Nullify",
@@ -7960,6 +7966,18 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "545add015fb4014eeade563dc1325a44d1e905c57677329b7a55fee202c784b9",
     "text": "{{name}}の凍結の蓄積が{{amount}}減少"
+  },
+  "log.negateAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the attack",
+    "sourceHash": "008d25ee8900b2097e688e97b7a069a94fff6842be6900375c0f0e97223847b6",
+    "text": "{{name}}は攻撃を防止"
+  },
+  "log.negateNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the next attack against them",
+    "sourceHash": "99c73b01ace347c03440effdd9633011aa16ad09947b7875a4c053c967560097",
+    "text": "{{name}}は自分への次の攻撃を防止"
   },
   "log.nullifyEffect": {
     "reviewed": true,
@@ -8080,6 +8098,36 @@
     "source": "Use {{card}}",
     "sourceHash": "a59cd9c0f42242e871db5e6f6b9fcce212e643364f3c93ab7010cfd2ce19b67f",
     "text": "{{card}}を使用"
+  },
+  "log.wardNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} reflects the next attack",
+    "sourceHash": "6629b5e5bed6fcc27c963042c65a402f28cbf8a38e421b2960271d31b4834e4f",
+    "text": "{{name}}は次の攻撃を反射"
+  },
+  "log.wardNextBurn": {
+    "reviewed": true,
+    "source": "Reflect the next Burn",
+    "sourceHash": "f2291ae7a5bc587e1d2252f8294f66bb1c124c2bc4398dab52c2e378bfc4c9a7",
+    "text": "次の炎上を反射"
+  },
+  "log.wardNextFreeze": {
+    "reviewed": true,
+    "source": "Nullify the next Freeze damage",
+    "sourceHash": "bf73fa30fc9c4695397869c2ec596f9a6c639f83ab79e1bc48fa431136fe5a09",
+    "text": "次の凍結ダメージを無効化"
+  },
+  "log.wardNextHarm": {
+    "reviewed": true,
+    "source": "{{name}} nullifies the next harmful status effect",
+    "sourceHash": "f3490d10546f470eafe7c58f6943abc22936c96419f72b53682aac5bcb7c6af5",
+    "text": "{{name}}は次の有害な状態効果を無効化"
+  },
+  "log.wardNextStatus": {
+    "reviewed": true,
+    "source": "Reflect the next harmful status effect",
+    "sourceHash": "73abc3453a6bdffb07aa5ab7af9ea46042294bdca834003cd99e9d7d06e62f9d",
+    "text": "次の有害な状態効果を反射"
   },
   "menu.boons": {
     "reviewed": true,

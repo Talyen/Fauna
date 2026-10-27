@@ -320,6 +320,9 @@
   "log.gainMana": {
     "text": "Gain {{amount}} Mana."
   },
+  "log.gainNegate": {
+    "text": "{{name}} gains Negate"
+  },
   "log.gainNullify": {
     "text": "{{name}} gains Nullify"
   },
@@ -346,6 +349,12 @@
   },
   "log.loseFreezeBuildup": {
     "text": "{{name}} loses {{amount}} Freeze buildup"
+  },
+  "log.negateAttack": {
+    "text": "{{name}} negates the attack"
+  },
+  "log.negateNextAttack": {
+    "text": "{{name}} negates the next attack against them"
   },
   "log.nullifyEffect": {
     "text": "{{name}} nullifies {{status}}"
@@ -406,6 +415,21 @@
   },
   "log.useFood": {
     "text": "Use {{card}}"
+  },
+  "log.wardNextAttack": {
+    "text": "{{name}} reflects the next attack"
+  },
+  "log.wardNextBurn": {
+    "text": "Reflect the next Burn"
+  },
+  "log.wardNextFreeze": {
+    "text": "Nullify the next Freeze damage"
+  },
+  "log.wardNextHarm": {
+    "text": "{{name}} nullifies the next harmful status effect"
+  },
+  "log.wardNextStatus": {
+    "text": "Reflect the next harmful status effect"
   },
   "menu.boons": {
     "text": "Boons"
