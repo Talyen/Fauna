@@ -4,7 +4,7 @@ import { validateContent } from "../../../src/game/content-validation";
 import { freshCombat, hit, removeEffects, restoreHealth, tickStatuses } from "../../../src/game/combat";
 import { resolveCombat } from "../../../src/game/combat/resolution";
 import { observeDecisions } from "../../../src/game/random";
-import { requireBattle, run } from "../../support/game";
+import { requireBattle, run, teamRun } from "../../support/game";
 import { setBattleCards } from "../../support/cards";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
@@ -80,6 +80,22 @@ it("halves the damage remaining after Block without reducing status buildup", ()
   expect(source.block).toBe(0);
   expect(source.health).toBe(health - 3);
   expect(source.combat!.burn).toBe(10);
+});
+
+it("preserves Ravelland's Block-break Armor after the Shield reduces the same hit", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["ravelland"])));
+  const ally = state.team[0]!;
+  const enemy = state.battle.enemies[0]!;
+  const before = ally.health;
+  const events: GameEvent[] = [];
+  state.boons = ["glassleaf-shield"];
+  state.talents = [];
+  ally.combat = freshCombat();
+  ally.block = 4;
+  observeDecisions(state, () => 0.99);
+  hit(state, enemy, ally, 10, "physical", events);
+  expect(ally.health).toBe(before - 3);
+  expect(ally.combat.armor).toBe(1);
 });
 
 it("shares Bleed after a defeat and leaves the existing hit and its source intact", () => {
