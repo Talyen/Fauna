@@ -2819,6 +2819,12 @@
     "sourceHash": "de4fddb4c3560b3105b64eace9de08c48fccdc92f555c0a357f6e73a5ab39011",
     "text": "Segen"
   },
+  "content.glossary.copy.definition.rule": {
+    "reviewed": true,
+    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
+    "sourceHash": "8cf3aca1abb0326cf9528308db4b2a8aadaf60e758397722e92d1092c944ce2f",
+    "text": "Ein Duplikat einer gezogenen Karte mit demselben Besitzer, Rang und <keyword0>Mana</keyword0>-Preis; Bleibt bis zum Kampfende im Deck; Das Ziehen einer Kopie kann sie erneut kopieren; Erstellen oder Vorrücken einer Kopie zählt nicht als Ziehen"
+  },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
     "source": "Copy",
@@ -2836,6 +2842,12 @@
     "source": "Death's Door",
     "sourceHash": "3ac7bc7ce1e01afb2b4a212e6df6f738b1b8b1e4019be92bda487722caa392ee",
     "text": "Nahtod"
+  },
+  "content.glossary.draw-discard.definition.rule": {
+    "reviewed": true,
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
+    "sourceHash": "9b5e67c004de2ce196ceb6ee3404f1aa75fe1a6dd6ce006643ea38c21447fc43",
+    "text": "Alle Teammitglieder teilen ein Deck, eine Hand und einen Ablagestapel; Gespielte Karten gehen auf die Ablage, außer mit <keyword0>Verbrauchen</keyword0>; Ungespielte Karten gehen am Zugende auf die Ablage; Sobald der Nachziehstapel leer ist, mische die Ablage hinein"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
@@ -2950,6 +2962,12 @@
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
     "sourceHash": "af93369b6e3e062248c8cc7d0a4d10f09a09430c2c791f945fd350b8d2dfc8e0",
     "text": "Verbleibende Lebenspunkte; Bei null <keyword0>Gesundheit</keyword0> wird eine Kreatur kampfunfähig; <keyword1>Gesundheit</keyword1> kann bis zum Maximum wiederhergestellt werden; Wiederherstellung belebt im Kampf nicht wieder"
+  },
+  "content.glossary.keyword.leech.definition.rule": {
+    "reviewed": true,
+    "source": "Restore half the damage dealt, including damage absorbed by <keyword0>Block</keyword0>, rounded normally; Overkill does not count; <keyword1>Bleed</keyword1> pays <keyword2>Leech</keyword2> with its later tick",
+    "sourceHash": "5775c8e83629dac03c8022c2035db02abf92b26d557290a213bfcd92e4acf8ee",
+    "text": "Stelle die Hälfte des verursachten Schadens wieder her, einschließlich durch <keyword0>Block</keyword0> absorbierten Schadens, normal gerundet; Überschüssiger Schaden zählt nicht; <keyword1>Blutung</keyword1> gewährt <keyword2>Lebensraub</keyword2> erst beim späteren Schaden"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,

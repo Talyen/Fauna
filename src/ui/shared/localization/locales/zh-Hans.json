@@ -2819,6 +2819,12 @@
     "sourceHash": "148439d4a24f4e38d7855371d77cc1cc77542542228dcfe58803c6e91b0cea84",
     "text": "祝福"
   },
+  "content.glossary.copy.definition.rule": {
+    "reviewed": true,
+    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
+    "sourceHash": "eafd94726cedb1bc1d90084c9ea9b549fe8fdb358578cf4640d51e142a6b29d1",
+    "text": "抽到的卡牌的副本，拥有相同的持有者、等级和<keyword0>法力</keyword0>费用; 留在牌组中直至战斗结束; 抽到副本可能再次复制它; 创建或递补副本不算抽牌"
+  },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
     "source": "Copy",
@@ -2836,6 +2842,12 @@
     "source": "Death's Door",
     "sourceHash": "ca5b12250ec4340a4567536b37e2555f9b1f2f8dd5cf2ca902e586e4e7440720",
     "text": "濒死"
+  },
+  "content.glossary.draw-discard.definition.rule": {
+    "reviewed": true,
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
+    "sourceHash": "4da829658f5bdfb3794eb1a5d9d010b8c3ff744df18b128498696ba388a7413b",
+    "text": "全队共享牌组、手牌和弃牌堆; 打出的卡牌进入弃牌堆，除非带有<keyword0>消耗</keyword0>; 回合结束时未打出的卡牌进入弃牌堆; 抽牌堆一空就将弃牌洗入抽牌堆"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
@@ -2950,6 +2962,12 @@
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
     "sourceHash": "c2cf7ed58440fd0be81b81eb0c8e9d9bf3b0fee096573b943ef358440cc38e34",
     "text": "剩余生命值；<keyword0>生命</keyword0>降至零时，生物被击倒；<keyword1>生命</keyword1>可恢复至上限；战斗中恢复生命不能使其复活"
+  },
+  "content.glossary.keyword.leech.definition.rule": {
+    "reviewed": true,
+    "source": "Restore half the damage dealt, including damage absorbed by <keyword0>Block</keyword0>, rounded normally; Overkill does not count; <keyword1>Bleed</keyword1> pays <keyword2>Leech</keyword2> with its later tick",
+    "sourceHash": "eda3a9501bda03c9c00a542cbe1242ec97122d6dc73ca7b48c8c35199a089f94",
+    "text": "恢复造成伤害的一半，包括被<keyword0>格挡</keyword0>吸收的伤害，按通常方式取整; 超额伤害不计入; <keyword1>流血</keyword1>在之后造成周期伤害时触发<keyword2>汲取</keyword2>"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,

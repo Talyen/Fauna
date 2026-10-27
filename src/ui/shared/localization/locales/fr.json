@@ -2831,6 +2831,12 @@
     "sourceHash": "87bb95cde8868427a623a54de52158b61b99465c627a47e815b3137d8fdce9da",
     "text": "Bénédictions"
   },
+  "content.glossary.copy.definition.rule": {
+    "reviewed": true,
+    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
+    "sourceHash": "2ea94ca3d7e4adcff0a4d539f3376ceadcc41578f966147b8a70665a2f82e89d",
+    "text": "Un double d’une carte piochée avec le même propriétaire, niveau et coût en <keyword0>Mana</keyword0>; Reste dans le paquet jusqu’à la fin du combat; Piocher une copie peut la copier à nouveau; Créer ou faire avancer une copie ne compte pas comme une pioche"
+  },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
     "source": "Copy",
@@ -2848,6 +2854,12 @@
     "source": "Death's Door",
     "sourceHash": "1baa58a94da4d9bb16a5680b17cd2683086a0f55c8c355f17fb37507cadea7c3",
     "text": "Aux portes de la mort"
+  },
+  "content.glossary.draw-discard.definition.rule": {
+    "reviewed": true,
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
+    "sourceHash": "52a061e2aa13290160c91308277f13c924993067549dd30194322a7f59da7a78",
+    "text": "Tous les équipiers partagent un paquet, une main et une défausse; Les cartes jouées vont à la défausse sauf si elles ont <keyword0>Consommer</keyword0>; Les cartes non jouées y vont en fin de tour; Dès que la pioche est vide, mélangez-y la défausse"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
@@ -2962,6 +2974,12 @@
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
     "sourceHash": "f045775a66bc7619dd675277901c8205596b49164532a0a6812390ca24849ade",
     "text": "Points de vie restants ; À zéro <keyword0>Santé</keyword0>, une créature est mise hors combat ; La <keyword1>Santé</keyword1> peut être restaurée jusqu’à son maximum ; La restauration ne réanime pas pendant le combat"
+  },
+  "content.glossary.keyword.leech.definition.rule": {
+    "reviewed": true,
+    "source": "Restore half the damage dealt, including damage absorbed by <keyword0>Block</keyword0>, rounded normally; Overkill does not count; <keyword1>Bleed</keyword1> pays <keyword2>Leech</keyword2> with its later tick",
+    "sourceHash": "4f0de462a03215e2953083e62b6da1c942f5c0a49a42b7750b60533110b14b8c",
+    "text": "Restaure la moitié des dégâts infligés, y compris ceux absorbés par le <keyword0>Blocage</keyword0>, avec un arrondi normal; Les dégâts excédentaires ne comptent pas; Le <keyword1>Saignement</keyword1> déclenche le <keyword2>Vol de vie</keyword2> lors de ses dégâts ultérieurs"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,

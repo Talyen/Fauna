@@ -2819,6 +2819,12 @@
     "sourceHash": "32797c70189abd7f6d0101b04d5d817be1cf26f7a97a508292c20a52692c2283",
     "text": "Bendiciones"
   },
+  "content.glossary.copy.definition.rule": {
+    "reviewed": true,
+    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
+    "sourceHash": "6f50ce6d26e4525ade6bd9185c7f41fe26df20442936ba9501ab086d585da5d9",
+    "text": "Un duplicado de una carta robada con el mismo propietario, nivel y coste de <keyword0>Maná</keyword0>; Permanece en el mazo hasta el final del combate; Robar una copia puede copiarla de nuevo; Crear o avanzar una copia no cuenta como robo"
+  },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
     "source": "Copy",
@@ -2836,6 +2842,12 @@
     "source": "Death's Door",
     "sourceHash": "29c21b018e997612b389dbda2628273d8e0e975ed3893b45696974a4ad87ca73",
     "text": "Al borde de la muerte"
+  },
+  "content.glossary.draw-discard.definition.rule": {
+    "reviewed": true,
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
+    "sourceHash": "f5157a4b126d17009b2dd54ab8b994f43e942b2d33c713153ecdeac78cdc4dfe",
+    "text": "Todo el equipo comparte mazo, mano y descarte; Las cartas jugadas van al descarte salvo que tengan <keyword0>Consumir</keyword0>; Las cartas no jugadas se descartan al final del turno; En cuanto se vacía el mazo de robo, baraja el descarte en él"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
@@ -2950,6 +2962,12 @@
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
     "sourceHash": "fb61dc1c6bcfe49d0a19c2a9e1105fa29c21a20178143d96c315d187f2301265",
     "text": "Vida restante; Con cero de <keyword0>Salud</keyword0>, una criatura queda fuera de combate; La <keyword1>Salud</keyword1> se puede restaurar hasta su máximo; La restauración no revive durante el combate"
+  },
+  "content.glossary.keyword.leech.definition.rule": {
+    "reviewed": true,
+    "source": "Restore half the damage dealt, including damage absorbed by <keyword0>Block</keyword0>, rounded normally; Overkill does not count; <keyword1>Bleed</keyword1> pays <keyword2>Leech</keyword2> with its later tick",
+    "sourceHash": "d8f7043f2f426cd3808f71b54de59f41ce2ca6d176030b6751b487822b9056b6",
+    "text": "Restaura la mitad del daño infligido, incluido el absorbido por <keyword0>Bloqueo</keyword0>, con redondeo normal; El daño excedente no cuenta; <keyword1>Sangrado</keyword1> activa <keyword2>Drenaje</keyword2> con su daño posterior"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,

@@ -2819,6 +2819,12 @@
     "sourceHash": "ccb812556e3fd22460b5cf98e62008d34c52cd1b73426fafc87c6546ccf506a0",
     "text": "祝福"
   },
+  "content.glossary.copy.definition.rule": {
+    "reviewed": true,
+    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
+    "sourceHash": "26f651d7ba35e72f142ed9a75d667c5ec50c7994836afdf6d25cbc3a52c68383",
+    "text": "引いたカードの複製で、所有者、レベル、<keyword0>マナ</keyword0>コストは同じ; 戦闘終了までデッキに残る; 複製を引くとさらに複製されることがある; 複製の作成や繰り上げはドローではない"
+  },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
     "source": "Copy",
@@ -2836,6 +2842,12 @@
     "source": "Death's Door",
     "sourceHash": "4d872e678a42a5ae844d691076e1197aa97b03af2c91741589289b30e0f5f28a",
     "text": "死の淵"
+  },
+  "content.glossary.draw-discard.definition.rule": {
+    "reviewed": true,
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
+    "sourceHash": "97e571ca53a5f3c5a952216ee514a9a99e3b1fc30da1fdb412e491ac584777ea",
+    "text": "全員でデッキ、手札、捨て札を共有; 使用したカードは<keyword0>消費</keyword0>がなければ捨て札になる; ターン終了時の未使用カードも捨て札になる; 山札が空になったらすぐ捨て札を混ぜて山札にする"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
@@ -2950,6 +2962,12 @@
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
     "sourceHash": "a425f1343bf67f0b86d14c762eab7728391a673711eb294225b4ff71b6ef4542",
     "text": "残りの生命力; <keyword0>体力</keyword0>がゼロになるとクリーチャーは戦闘不能になる; <keyword1>体力</keyword1>は最大値まで回復できる; 戦闘中、回復では戦闘不能から復帰できない"
+  },
+  "content.glossary.keyword.leech.definition.rule": {
+    "reviewed": true,
+    "source": "Restore half the damage dealt, including damage absorbed by <keyword0>Block</keyword0>, rounded normally; Overkill does not count; <keyword1>Bleed</keyword1> pays <keyword2>Leech</keyword2> with its later tick",
+    "sourceHash": "97f85abba3419077c3c2ee8450ef400e3d5db35fd65075e84b77fefff6f0f1ff",
+    "text": "<keyword0>ブロック</keyword0>に吸収された分を含む与ダメージの半分を通常どおり丸めて回復; 過剰ダメージは含まない; <keyword1>出血</keyword1>の<keyword2>吸血</keyword2>は後の継続ダメージ時に発生"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
