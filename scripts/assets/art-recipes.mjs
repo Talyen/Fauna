@@ -20,10 +20,12 @@ export function recipeSettings(entry) {
     : { version: 1, mode: "copy" };
 }
 
-export async function rasterMetadata(bytes) {
+export async function rasterMetadata(bytes, extension) {
   // stats() forces a full decode; metadata alone would accept truncated pixels.
   const image = sharp(bytes, { failOn: "warning" });
   const metadata = await image.metadata();
+  if (![".png", ".webp"].includes(extension) || metadata.format !== extension.slice(1))
+    throw new Error(`Unsupported or corrupt image ${extension}`);
   if (metadata.pages > 1 || metadata.orientation > 1)
     throw new Error("Artwork must be a single, upright image.");
   await image.stats();

@@ -5,7 +5,14 @@ import { speciesCards, species } from "../content";
 import { PEARL } from "../content/creatures/memento";
 import { passiveAmount } from "../progression";
 import { roll, shuffle } from "../random";
-import { recycleDiscard, receiveCard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
+import {
+  recycleDiscard,
+  receiveCard,
+  promoteBufferedCards,
+  queueCard,
+  MAX_BATTLE_CARDS,
+  MAX_HAND_SIZE,
+} from "../card-zones";
 import { battlefield, isEnemy } from "../battlefield";
 import { freshCombat, hit, restoreHealth, controlled } from "./index";
 import type { Combatant } from "./state";
@@ -27,12 +34,12 @@ export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
   };
 }
 export function drawBossCards(state: GameState, deck: EnemyDeck, count: number) {
-  while (deck.hand.length < MAX_HAND_SIZE && deck.buffer.length) deck.hand.push(deck.buffer.shift()!);
+  promoteBufferedCards(deck, MAX_HAND_SIZE);
   recycleDiscard(state, deck);
   for (let i = 0; i < count; i++) {
     const id = deck.draw.pop();
     if (!id) break;
-    (deck.hand.length < MAX_HAND_SIZE ? deck.hand : deck.buffer).push(id);
+    queueCard(deck, MAX_HAND_SIZE, id);
     recycleDiscard(state, deck);
   }
 }
@@ -49,7 +56,7 @@ export function createPearls(
       const deck = actor.deck;
       if (deck.pearls >= MAX_BATTLE_CARDS - permanentKitSize(actor.species)) break;
       deck.pearls++;
-      (deck.hand.length < MAX_HAND_SIZE ? deck.hand : deck.buffer).push(PEARL.id);
+      queueCard(deck, MAX_HAND_SIZE, PEARL.id);
     } else {
       if (battleCardCapacity(state) === 0) break;
       const card = createTemporaryCard(state, {

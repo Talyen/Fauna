@@ -3,7 +3,7 @@ import { mkdir, writeFile, readFile, rm, stat, copyFile } from "node:fs/promises
 import sharp from "sharp";
 import path from "node:path";
 import { expect, it, vi } from "vitest";
-import { assets, validateManifest, imageDimensions } from "../../../scripts/assets/assets.mjs";
+import { assets, validateManifest } from "../../../scripts/assets/assets.mjs";
 
 it("prepares and checks the selected audio from a standalone checkout without changing its bytes", async () => {
   const repository = temporaryDirectory("fauna-standalone-audio-");
@@ -83,16 +83,37 @@ it("preserves the published generation after a missing or invalid source and det
   ).toThrow();
 });
 
-it("reads native PNG dimensions and rejects truncated or invalid PNG headers", async () => {
-  const bytes = Buffer.from(
-    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aL1sAAAAASUVORK5CYII=",
-    "base64",
+it("validates raster bytes and format before replacing the published artwork", async () => {
+  const repository = temporaryDirectory("fauna-raster-validation-");
+  const entry = {
+    id: "creature.test",
+    origin: "repository",
+    source: "source.png",
+    output: "test.png",
+    kind: "art",
+    recipe: "copy",
+    provenance: "fixture",
+    rights: "test",
+  };
+  await mkdir(path.join(repository, "assets"));
+  await writeFile(
+    path.join(repository, "assets/manifest.json"),
+    JSON.stringify({ version: 2, assets: [entry] }),
   );
-  expect(imageDimensions(bytes, ".png")).toEqual([1, 1]);
-  expect(() => imageDimensions(bytes.subarray(0, 24), ".png")).toThrow();
-  const invalid = Buffer.from(bytes);
-  invalid.writeUInt32BE(0, 16);
-  expect(() => imageDimensions(invalid, ".png")).toThrow();
+  const source = path.join(repository, entry.source);
+  const png = await sharp({ create: { width: 8, height: 6, channels: 4, background: "#aabbcc" } })
+    .png()
+    .toBuffer();
+  await writeFile(source, png);
+  const original = await assets({ repository, mode: "prepare" });
+  expect([original.records[entry.id].width, original.records[entry.id].height]).toEqual([8, 6]);
+  const pointer = path.join(repository, "src/assets/prepared.json");
+  const published = await readFile(pointer, "utf8");
+  for (const invalid of [png.subarray(0, 24), await sharp(png).webp().toBuffer()]) {
+    await writeFile(source, invalid);
+    await expect(assets({ repository, mode: "prepare" })).rejects.toThrow();
+    expect(await readFile(pointer, "utf8")).toBe(published);
+  }
 });
 
 it("caches unchanged objects, publishes all selections atomically, and preserves originals and old objects", async () => {

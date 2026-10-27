@@ -7,7 +7,7 @@ import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, removeDepartedMinions } from "./legendary";
 import { chooseEnemyCard } from "./enemy-policy";
 import { lastWarmth } from "./card-modifiers";
-import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
+import { recycleDiscard, promoteBufferedCards, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { playEnemyAbility } from "./enemy-action";
 import { passiveAmount } from "../progression";
 import {
@@ -128,7 +128,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           removeDepartedMinions(draft);
           recycleDiscard(draft, deck);
           if (lastCardInHand) lastWarmth(draft, true, events);
-          while (deck.hand.length < MAX_HAND_SIZE && deck.buffer.length) deck.hand.push(deck.buffer.shift()!);
+          promoteBufferedCards(deck, MAX_HAND_SIZE);
           if (settle(draft, events)) return;
         }
         continue;

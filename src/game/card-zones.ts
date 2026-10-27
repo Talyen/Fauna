@@ -21,9 +21,16 @@ export function filterCardZones(battle: BattleState["battle"], keep: (id: string
   for (const zone of ["draw", "hand", "buffer", "discard"] as const) battle[zone] = battle[zone].filter(keep);
 }
 
-function queueCard(state: GameState, id: string) {
-  const battle = state.battle!;
-  (battle.hand.length < handCapacity(state) ? battle.hand : battle.buffer).push(id);
+type HandZones = Pick<BattleState["battle"], "hand" | "buffer">;
+
+/** Promotion is not a draw: retain FIFO order without triggering draw reactions. */
+export function promoteBufferedCards(zones: HandZones, capacity: number) {
+  const count = Math.min(capacity - zones.hand.length, zones.buffer.length);
+  if (count > 0) zones.hand.push(...zones.buffer.splice(0, count));
+}
+
+export function queueCard(zones: HandZones, capacity: number, id: string) {
+  (zones.hand.length < capacity ? zones.hand : zones.buffer).push(id);
 }
 
 export function recycleDiscard(
@@ -34,7 +41,7 @@ export function recycleDiscard(
 }
 export function receiveCard(state: GameState, id: string) {
   fillHand(state);
-  queueCard(state, id);
+  queueCard(state.battle!, handCapacity(state), id);
 }
 
 /** Return an existing owner slot; returns do not draw, copy, or award draw reactions */
@@ -92,7 +99,7 @@ export function journeyReturn(state: GameState, ownerId: string | null, events: 
   drawEligibleCard(state, (id) => eligible.has(id), events);
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
-  queueCard(state, id);
+  queueCard(state.battle!, handCapacity(state), id);
   const owner = state.team.find(
     (unit) => unit.id === state.cards.find((card) => card.id === id)?.ownerId && unit.health > 0,
   );
@@ -106,7 +113,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
     if (!succeeds(state, chance / 100, false, events)) continue;
     original ??= state.cards.find((entry) => entry.id === id)!;
     const copy = createTemporaryCard(state, original)!;
-    queueCard(state, copy.id);
+    queueCard(state.battle!, handCapacity(state), copy.id);
     events.push({
       kind: "action",
       actionType: "support",
@@ -166,9 +173,7 @@ export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?
 }
 
 export function fillHand(state: GameState) {
-  const battle = state.battle!;
-  const count = Math.min(handCapacity(state) - battle.hand.length, battle.buffer.length);
-  if (count > 0) battle.hand.push(...battle.buffer.splice(0, count));
+  promoteBufferedCards(state.battle!, handCapacity(state));
 }
 
 function recycleEligibleDiscard(state: GameState, eligible: (id: string) => boolean) {

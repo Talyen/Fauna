@@ -6,7 +6,29 @@ import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { draw, drawKeyword, receiveCard } from "../../../src/game/card-zones";
 import { shuffle } from "../../../src/game/random";
+import { drawBossCards } from "../../../src/game/combat/legendary";
 import type { GameEvent } from "../../../src/game/types";
+
+it("promotes a Boss's oldest buffered cards before new draws without consuming randomness", () => {
+  const state = structuredClone(run());
+  const deck = {
+    hand: ["h1", "h2", "h3", "h4"],
+    buffer: ["b1", "b2", "b3"],
+    draw: ["d1", "d2"],
+    discard: [],
+    mana: 4,
+    pearls: 0,
+  };
+  const rng = state.rng;
+  drawBossCards(state, deck, 2);
+  expect(deck.hand).toEqual(["h1", "h2", "h3", "h4", "b1", "b2"]);
+  expect(deck.buffer).toEqual(["b3", "d2", "d1"]);
+  deck.hand.splice(0, 2);
+  drawBossCards(state, deck, 0);
+  expect(deck.hand).toEqual(["h3", "h4", "b1", "b2", "b3", "d2"]);
+  expect(deck.buffer).toEqual(["d1"]);
+  expect(state.rng).toBe(rng);
+});
 
 it("keeps draw eligibility and seeded recycling stable while Well Read grows a large deck", () => {
   const initial = produce(teamRun(42, ["rookhaven", "reedstag", "almanelle"]), (state) => {
