@@ -801,7 +801,7 @@
     "reviewed": true,
     "source": "Repeated attacks move on when their target falls",
     "sourceHash": "cbce199aa29a273b7d95627f5295617fcc0e3851ef59fe57a07b315f8bb24602",
-    "text": "连续攻击的目标倒下时会转向另一目标"
+    "text": "重复攻击的目标倒下时会转向另一目标"
   },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,

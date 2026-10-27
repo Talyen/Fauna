@@ -729,7 +729,7 @@
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
     "sourceHash": "591cdf8810d15f750e6c2107a6ca1b76afd732b84583c7e9874a0f7a337824f0",
-    "text": "La <keyword0>Nourriture</keyword0> restaure aussi des <keyword1>Santé</keyword1> à hauteur du <keyword2>Blocage</keyword2> de sa cible"
+    "text": "La <keyword0>Nourriture</keyword0> restaure aussi de la <keyword1>Santé</keyword1> à hauteur du <keyword2>Blocage</keyword2> de sa cible"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1665,7 +1665,7 @@
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
     "sourceHash": "8e884d125e70c7dade01495a59426a534b675b778798513e39ad792bc9d61903",
-    "text": "La <keyword0>Nourriture</keyword0> confère des <keyword1>Santé</keyword1> et du <keyword2>Blocage</keyword2> à tous les alliés"
+    "text": "La <keyword0>Nourriture</keyword0> confère de la <keyword1>Santé</keyword1> et du <keyword2>Blocage</keyword2> à tous les alliés"
   },
   "content.boon.quiet-pinwheel.name": {
     "reviewed": true,
@@ -3333,7 +3333,7 @@
     "reviewed": true,
     "source": "Spectrum Lance",
     "sourceHash": "2e9656232e80aa1fc799e88401138c86797ef6172b01b7ef958a599730e127f8",
-    "text": "Lance du spectre"
+    "text": "Lance du spectre lumineux"
   },
   "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
     "reviewed": true,

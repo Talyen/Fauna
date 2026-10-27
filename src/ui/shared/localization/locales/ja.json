@@ -525,7 +525,7 @@
     "reviewed": true,
     "source": "Repeated attacks also hit another enemy",
     "sourceHash": "7bf035655484c752631191bfe2befa59e992ee641bb39ddafe0c8e56fb9bd246",
-    "text": "連続攻撃は別の敵にもヒットする"
+    "text": "繰り返し攻撃は別の敵にもヒットする"
   },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
@@ -801,7 +801,7 @@
     "reviewed": true,
     "source": "Repeated attacks move on when their target falls",
     "sourceHash": "ea561eabbf38e7742a7c5ab3b4095bc59097fcec2c601e6f917798b6d33d6a01",
-    "text": "連続攻撃中に対象が倒れると次の対象へ移る"
+    "text": "繰り返し攻撃中に対象が倒れると次の対象へ移る"
   },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
@@ -1113,7 +1113,7 @@
     "reviewed": true,
     "source": "Playing <keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> an effect from the most injured ally",
     "sourceHash": "231b26336476ab77b8afc6227cdfe49fbd785214e508573c246aead4ac8063fc",
-    "text": "<keyword0>食べ物</keyword0>を使うと、最も傷ついた味方の効果を1つ<keyword1>浄化</keyword1>する"
+    "text": "<keyword0>食料</keyword0>を使うと、最も傷ついた味方の効果を1つ<keyword1>浄化</keyword1>する"
   },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
