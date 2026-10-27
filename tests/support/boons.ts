@@ -1,5 +1,16 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "overflow-cup":
+    "Healing beyond an ally’s maximum Health restores half the excess to the most injured other ally",
+  "ripple-mirror": "Attacks Reflected by allies hit all enemies",
+  "sail-needle": "Cleansing an ally’s Bleed grants them 2 Armor",
+  rootspool: "Thorns have Leech",
+  winterseed: "Frozen allies keep their Block between turns",
+  "moonpath-divider": "Freeze hits also add half their Freeze buildup to another enemy",
+  cornucopia: "Add Mana Berries to your deck; Mana Berries also restore 2 Health to all allies",
+  "suncrust-rolling-pin": "Light attacks Blind enemies when they break their Block",
+  "dandelion-poultice": "Cleansing an ally deals 2 Nature damage to all enemies",
+  "dew-pendulum": "At the end of your turn, allies gain Block equal to unspent Mana",
   "quiet-pinwheel": "Allies can Dodge while Stunned or Frozen",
   "lagoon-chalice": "Water attacks have Leech while you have Block",
   "acorn-skittle": "Stun hits on Stunned enemies also deal 2 Stun damage to another enemy",

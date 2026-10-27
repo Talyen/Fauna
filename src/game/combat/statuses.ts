@@ -412,6 +412,15 @@ export function* removeEffects(
       hadFreezeBuildup && stats.freeze === 0 && removedStatuses.includes("freeze"),
     );
   if (
+    state &&
+    kind === "cleanse" &&
+    !isEnemy(unit) &&
+    unit.health > 0 &&
+    removedStatuses.includes("bleed") &&
+    state.boons.includes("sail-needle")
+  )
+    yield* reaction("grantArmor", state, unit, boonRule("sail-needle").armor, events);
+  if (
     kind === "purge" &&
     state &&
     isEnemy(unit) &&
@@ -579,6 +588,18 @@ export function* cleanseRewards(
   freezeBuildupRemoved = false,
 ): Resolution<void> {
   const stats = ensureCombat(unit);
+  if (
+    cleansed > 0 &&
+    unit.health > 0 &&
+    !isEnemy(unit) &&
+    state.phase === "battle" &&
+    state.boons.includes("dandelion-poultice")
+  )
+    for (const enemy of battlefield(state, "enemy"))
+      if (enemy.health > 0 && unit.health > 0)
+        yield* reaction("hit", state, unit, enemy, boonRule("dandelion-poultice").damage, "nature", events, {
+          origin: "derived",
+        });
   if (
     cleansed > 0 &&
     unit.health > 0 &&

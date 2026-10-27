@@ -10,6 +10,23 @@ The original portraits are unchanged WebP selections copied from `Alchemy: src/a
 
 The catalog and rule owner define current availability, exact player copy and tuning. This alphabetical reference records specialized timing, recipients and interactions; shared [combat rules](../KEYWORDS.md) apply unless an entry states an exception.
 
+### Journey artifact Boons
+
+- **Overflow Cup:** Half of excess allied healing, rounded normally, restores the most injured other eligible ally. Healing and Leech qualify; the resulting restoration uses normal healing reactions without spreading its own overflow. Last Threshold retains its separate Death's Door sharing
+- **Ripple Mirror:** An allied attack reflection returns the original attack and its harmful extras to every living enemy. Each recipient uses ordinary Negate, Dodge, Block and Armor; the returned attack cannot reflect again. Status-only Reflect is unchanged
+- **Sail Needle:** Removing allied Bleed by Cleanse grants that recipient 2 Armor through ordinary Armor-gain reactions. Empty Cleanse and natural Bleed expiration grant nothing
+- **Rootspool:** Allied Thorns retaliation has ordinary Leech based on mitigated damage absorbed by Block plus actual Health loss, capped for overkill. Briar Racquet qualifies; ordinary Thorns wear and existing Leech reactions remain
+- **Winterseed:** Frozen allies retain their Block through ordinary turn decay, including in backup. Damage and Purge still remove Block; no Block-gain reaction occurs
+- **Moonpath Divider:** Each allied Freeze attack hit adds half its Freeze buildup, rounded normally, to another living enemy in battlefield order, without another damage hit. Normal control thresholds, immunity, Nullify, reflection and control rewards apply
+- **Cornucopia:** Acquiring the Boon adds one neutral Mana Berries card to the journey deck immediately, including between battles. Formation changes preserve it. Playing it consumes the battle copy; the journey card returns after battle. Mana Berries also restore 2 Health to each eligible ally; Nectar Dipper doubles both effects, repeats resolve both effects, and Camp Hammock extends healing to backups. Card text and Auto-play use the same healing value
+- **Suncrust Rolling Pin:** An allied Light attack that actually depletes enemy Block applies Blind to the surviving enemy through normal status protection. Dodged attacks and Block removal without a Light hit do not qualify
+- **Dandelion Poultice:** Each actual allied Cleanse application deals 2 derived Nature damage to all living enemies. Empty Cleanse does nothing; group Cleanse resolves once per recipient, including Miracle Megaphone. Derived damage cannot start attack or retaliation chains
+- **Dew Pendulum:** At the end of the player turn, each living deployed ally gains Block equal to the same snapshot of unspent Mana, before the enemy phase. Ordinary Block-gain effects apply; Mana is not spent
+
+Development save format 67 supports Cornucopia's journey-owned card and rejects obsolete saves. Current saves validate its identity and ownership; the card may be absent during battle after consumption but must exist outside battle while the Boon is owned.
+
+### Other Boons
+
 | Boon                  | Execution contract                                                                                                                                                                                                                                                                                                                                                                                        |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Caravan Rug           | Living backup allies retain their existing Block through ordinary turn decay; deployed allies and enemy decay remain ordinary; retained Block does not trigger decay rewards                                                                                                                                                                                                                              |

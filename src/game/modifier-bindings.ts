@@ -26,6 +26,8 @@ type Modules = {
     drawEligibleCard: typeof drawEligibleCard;
   };
   "./chance": typeof import("./chance");
+  "./journey-cards": typeof import("./journey-cards");
+  "./save": typeof import("./save");
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
   "./combat/abilities": typeof import("./combat/abilities");
   "./combat/battle-modifiers": typeof import("./combat/battle-modifiers");
@@ -207,6 +209,16 @@ export const modifierImplementations = freeze(
       "water.riptide": ["./combat/damage-reactions#waterFollowups"],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "overflow-cup": ["./combat/protection#restoreHealth"],
+      "ripple-mirror": ["./combat/ability-handlers#executePrimary", "./combat/damage#hit"],
+      "sail-needle": ["./combat/statuses#removeEffects"],
+      rootspool: ["./combat/damage#resolveHit"],
+      winterseed: ["./combat/turns#decayBlock"],
+      "moonpath-divider": ["./combat/damage#resolveHit"],
+      cornucopia: ["./journey-cards#replenishJourneyCards", "./combat/food#useFood", "./save#validateRoster"],
+      "suncrust-rolling-pin": ["./combat/damage#resolveHit"],
+      "dandelion-poultice": ["./combat/statuses#cleanseRewards"],
+      "dew-pendulum": ["./combat/turns#finishTurn"],
       "quiet-pinwheel": ["./combat/state#ownDodgeChance"],
       "lagoon-chalice": ["./combat/ability-handlers#executePrimary", "./combat/ability-extras#applyExtras"],
       "acorn-skittle": ["./combat/damage#resolveHit"],
@@ -417,6 +429,7 @@ export const modifierQueries = freeze(
       "stun.free-follow-up": ["./ability-rules#cardCost"],
     } satisfies Partial<Record<TalentId, Binding>>,
     boons: {
+      "overflow-cup": ["./ability-facts#healingBenefit"],
       "velvet-whisk": ["./ability-facts#foodDodgeBenefit"],
       "journey-loom": ["./card-zones#journeyReturnHasDraw"],
       "last-threshold": ["./ability-facts#healingBenefit"],

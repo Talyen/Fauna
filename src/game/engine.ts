@@ -45,6 +45,7 @@ import {
   rosterHasSpecies,
 } from "./team";
 import { finishTurn } from "./combat/turns";
+import { replenishJourneyCards } from "./journey-cards";
 
 export function createGame(seed = 1): GameState {
   const state: GameState = {
@@ -243,6 +244,7 @@ function resolve(
         const slot = draft.support!.stock.find((s) => s.slot === command.slot)!;
         draft.currency -= slot.price;
         draft.boons.push(slot.boon);
+        replenishJourneyCards(draft);
         draft.support!.purchased = slot.boon;
         draft.support!.resolved = true;
         events.push({ kind: "reward", text: "Boon purchased for this journey." });
@@ -377,6 +379,7 @@ function resolve(
       case "chooseBoon":
         if (draft.phase !== "boon") throw new Error("Invalid Boon choice.");
         draft.boons.push(command.boon);
+        replenishJourneyCards(draft);
         afterRewards(draft);
         break;
       case "skipBoon":

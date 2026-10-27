@@ -1,5 +1,5 @@
 import { foodForAllies } from "../game/card-rules";
-import { boonRule } from "../game/rules/boons";
+import { boonRule, cornucopiaHealing } from "../game/rules/boons";
 import {
   foodDodgeBenefit,
   healingBenefit,
@@ -341,9 +341,29 @@ export function battleBenefits(
       const regained = Math.min(value, manaCapacity(state) - state.battle.mana + cost);
       const net = regained - cost;
       const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && facts.injuredAllies;
+      const foodHealing =
+        def.id === "food-mana-berries" && cornucopiaHealing(state) > 0 && facts.injuredAllies;
+      const foodDodge =
+        def.id === "food-mana-berries" &&
+        cornucopiaHealing(state) > 0 &&
+        healingAllies(state).some((ally) => foodDodgeBenefit(state, def, ally) > 0);
       return support(
-        net > 0 ? "resource" : mending || facts.healingOnPlay ? "healing" : "none",
-        net > 0 ? net : mending || facts.healingOnPlay ? regained : 0,
+        net > 0
+          ? "resource"
+          : mending || foodHealing || facts.healingOnPlay
+            ? "healing"
+            : foodDodge
+              ? "utility"
+              : "none",
+        net > 0
+          ? net
+          : foodHealing
+            ? cornucopiaHealing(state)
+            : mending || facts.healingOnPlay
+              ? regained
+              : foodDodge
+                ? 1
+                : 0,
       );
     }
     case "teamClearBlind": {
