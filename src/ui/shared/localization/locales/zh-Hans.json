@@ -1379,6 +1379,12 @@
     "sourceHash": "3ecf97689ac320155571131fbc81317418537de88f5680de69a72cf1ece0e446",
     "text": "秋日洞见"
   },
+  "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "26edb7ef515334ba8b2d3d23bb4ccd7d3e29b995d4c747f30972f1e6ed491366",
+    "text": "将一张随机弃牌移回手牌; 为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
@@ -1516,6 +1522,12 @@
     "source": "Echoes Remember",
     "sourceHash": "506c68c86633d1c223ad974c01e254d92f5810202ba9b9bb13e9299d2a972aaf",
     "text": "回声铭记"
+  },
+  "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card from a living ally to your hand",
+    "sourceHash": "1500fc037ffa923e60ce9eddad1cb39e587c4a7644f49e7a731f247e09b908a1",
+    "text": "将一名存活盟友的随机弃牌移回手牌"
   },
   "content.card.cadenza-resonant-well.name": {
     "reviewed": true,
@@ -1780,6 +1792,12 @@
     "source": "Hushed Waters",
     "sourceHash": "42b8f49f656f8947ff791425e06d6028983f58bbbdc16cff2949a2a80e520468",
     "text": "静谧之水"
+  },
+  "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
+    "sourceHash": "491e303aa64eaacc301abe7ee01c56d9ae723cbcacc920da44bff679f1b914d4",
+    "text": "与一名随机后备交换 / <keyword0>净化</keyword0>所有盟友"
   },
   "content.card.dulcera-meadow-shelter.name": {
     "reviewed": true,
@@ -2615,6 +2633,18 @@
     "sourceHash": "17a78b5a6087523eee8844e8e6e00f472c8f59117401a66da43b4d8698639099",
     "text": "安全通行"
   },
+  "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
+    "sourceHash": "bc3903e2932e0eaca5a7717222e0c58599c993cf816900d1db75aae81f2220df",
+    "text": "换出<keyword0>生命</keyword0>最低的盟友"
+  },
+  "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
+    "sourceHash": "612183a4f2b138cd5cc05ea039098b7df75930374176d473bee10782e2a892d6",
+    "text": "换出<keyword0>生命</keyword0>最低的盟友 / 抽取一张卡牌"
+  },
   "content.card.tournelle-teamClearBlind.name": {
     "reviewed": true,
     "source": "Kindled Courage",
@@ -2675,11 +2705,35 @@
     "sourceHash": "963e4d64f413740e8ba5e2e76e2305b65ececcfedcca6956ac8125566dc54410",
     "text": "遗忘的岔口"
   },
+  "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup / Draw a Card",
+    "sourceHash": "21c66cfbe9bd85accbee0b8bf9949b79abf60e11403ea21c5a27606c55badf3f",
+    "text": "与选定的后备交换 / 抽取一张卡牌"
+  },
+  "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup",
+    "sourceHash": "8fb74620c3fd0d4e3e243c3e53604f1db98b8da36bdf58de2d75116cc04b2235",
+    "text": "与选定的后备交换"
+  },
   "content.card.wisterelle-lantern-fare.name": {
     "reviewed": true,
     "source": "Lantern Fare",
     "sourceHash": "cfc51b57c9b2f51b58b7fc7a2376e580b434b5336ce0c8c5c3b660fe11661988",
     "text": "灯笼车票"
+  },
+  "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "aa586bff92df0b36c4eec4175edf4172c3f5ca3b35b820e4a9028a60cb5586c7",
+    "text": "为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0> / 获得{{value1}}点<keyword1>法力</keyword1>"
+  },
+  "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "a55d505b14183eaec21a8cc6a11a58f68abe1156004af6ed00975e795915822e",
+    "text": "为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.wisterelle-left-luggage.name": {
     "reviewed": true,

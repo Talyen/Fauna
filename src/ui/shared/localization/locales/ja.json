@@ -1379,6 +1379,12 @@
     "sourceHash": "1b669538da0a84d805f2f80312570c933583eb606900c17c42006fe51a9d7a3a",
     "text": "秋のひらめき"
   },
+  "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "70345d63b96031095cbdc94f2108b8c6d0d876b23033015d3e981ce348a5baad",
+    "text": "ランダムな捨て札を1枚手札に戻す; 傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
@@ -1516,6 +1522,12 @@
     "source": "Echoes Remember",
     "sourceHash": "3dca4f58293c448c3d5f48608e6b7298a34a1df8b683b0329cbea27b5c9b076f",
     "text": "こだまの記憶"
+  },
+  "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card from a living ally to your hand",
+    "sourceHash": "51946e19beebfb14f86f51eb52bf94bbdbc5e2decc844259d376304f65df5143",
+    "text": "生存中の味方の捨て札からランダムに1枚手札へ戻す"
   },
   "content.card.cadenza-resonant-well.name": {
     "reviewed": true,
@@ -1780,6 +1792,12 @@
     "source": "Hushed Waters",
     "sourceHash": "de9de09bf5ea657c1be01e17552a92ac39b47b43304b44af37ac580dcc7f34e2",
     "text": "静かな水"
+  },
+  "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
+    "sourceHash": "a663006fdc86a108963a01c676701ee4127619451cc50bd8b79f6cd8d5e8648c",
+    "text": "ランダムな控えと交代 / すべての味方を<keyword0>浄化</keyword0>"
   },
   "content.card.dulcera-meadow-shelter.name": {
     "reviewed": true,
@@ -2615,6 +2633,18 @@
     "sourceHash": "bd5abb22aa62525d1a4d023af75444ad9991b6cc8110ff623943e8b1e8374ebc",
     "text": "安全な道"
   },
+  "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
+    "sourceHash": "15e95db89710eacfae4e977bd554ca0c35e789bbd8794e497f751605ac8cd7f3",
+    "text": "<keyword0>体力</keyword0>が最も低い味方を交代させる"
+  },
+  "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
+    "sourceHash": "750318dad820060fa2e9141a86715da81f8cdd6cfdb1273feee429369d523169",
+    "text": "<keyword0>体力</keyword0>が最も低い味方を交代させる / カードを1枚引く"
+  },
   "content.card.tournelle-teamClearBlind.name": {
     "reviewed": true,
     "source": "Kindled Courage",
@@ -2675,11 +2705,35 @@
     "sourceHash": "ac4cea155b3f9a31570cc1b7a3f5ba285509b2565b880b4d4c8b570d26306564",
     "text": "忘れられた分岐点"
   },
+  "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup / Draw a Card",
+    "sourceHash": "dcb1d1ccdbb18e1f3b174b920dac00b652df71a2e67d092b18c02e97e3d37a09",
+    "text": "選んだ控えと交代 / カードを1枚引く"
+  },
+  "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup",
+    "sourceHash": "c349fbf3eeda1b05da7c28d8aa5fc1bed3b0db243ae1e1cbd56a5bcf57ee7f4e",
+    "text": "選んだ控えと交代"
+  },
   "content.card.wisterelle-lantern-fare.name": {
     "reviewed": true,
     "source": "Lantern Fare",
     "sourceHash": "305f2b0a63aec33551b574c5147588735f4e28a50595b46296fc03f044349141",
     "text": "ランタンの乗車券"
+  },
+  "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "757c2549cf47a0954c4a963f413ad1908ad172aedd7afd65a38676cc56ab5bde",
+    "text": "傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復 / <keyword1>マナ</keyword1>を{{value1}}獲得"
+  },
+  "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "c4b245c7ba68d205bec04b7458ba96ad15347dfcc07e5b238e57caee1b4df641",
+    "text": "傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.wisterelle-left-luggage.name": {
     "reviewed": true,

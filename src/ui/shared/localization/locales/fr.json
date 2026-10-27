@@ -1391,6 +1391,12 @@
     "sourceHash": "6d0ea3b8f5c2d159c0a8b4fd9659e0173ba5637f086b7056283e6c1394ed9d21",
     "text": "Clarté d’automne"
   },
+  "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "52553693b9e711f425626d78b81d290bebea2c905fd38a45498c82b55520854b",
+    "text": "Renvoyez une carte défaussée aléatoire en main; Restaurez {{value0}} <keyword0>Santé</keyword0> à un allié blessé"
+  },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
@@ -1528,6 +1534,12 @@
     "source": "Echoes Remember",
     "sourceHash": "f5cc6ffb6469ecbcad9746a341102fad73392b7641a1d24e3ca17a8fcbc200e0",
     "text": "Les échos se souviennent"
+  },
+  "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card from a living ally to your hand",
+    "sourceHash": "dd6417f934e0a4b98880a83002cd22af12cbced383856d858dde72bcf8d96934",
+    "text": "Renvoyez en main une carte défaussée aléatoire d’un allié vivant"
   },
   "content.card.cadenza-resonant-well.name": {
     "reviewed": true,
@@ -1792,6 +1804,12 @@
     "source": "Hushed Waters",
     "sourceHash": "77d8f5458209e866ffb37816fa5da81b41ee0ba3096dbfa76513cc462e785a02",
     "text": "Eaux silencieuses"
+  },
+  "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
+    "sourceHash": "ba1c6226a28e6af643fb49290427aff1063047245545ca393c84eb3fc318ea7a",
+    "text": "Échange avec une réserve aléatoire / <keyword0>Purifie</keyword0> tous les alliés"
   },
   "content.card.dulcera-meadow-shelter.name": {
     "reviewed": true,
@@ -2627,6 +2645,18 @@
     "sourceHash": "36305fbb3fa7162ffd3dbff64ca7925e21efd34cbd2d9d916fb6b8bee09090c1",
     "text": "Passage sûr"
   },
+  "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
+    "sourceHash": "23aa99872cbd316e6286b3c57df99ffed8887a3c1321daf36dc4a10c7828a973",
+    "text": "Échange l’allié ayant le moins de <keyword0>Santé</keyword0>"
+  },
+  "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
+    "sourceHash": "9e640874a6e6b97205f41fea7e5ae52de87716093c021d95aa7fccb970fc44c8",
+    "text": "Échange l’allié ayant le moins de <keyword0>Santé</keyword0> / Pioche une carte"
+  },
   "content.card.tournelle-teamClearBlind.name": {
     "reviewed": true,
     "source": "Kindled Courage",
@@ -2687,11 +2717,35 @@
     "sourceHash": "d7923691ed82eb4eed94bf6683da981bd8d7920bfcbfe929399f455d9d220429",
     "text": "Embranchement oublié"
   },
+  "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup / Draw a Card",
+    "sourceHash": "b3cbdcf342512e4ea7b2a59ba91ef9ec6e776d630a110cbf907708e5354e9cf8",
+    "text": "Échange avec une réserve choisie / Pioche une carte"
+  },
+  "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup",
+    "sourceHash": "d91adf1f5feb5824e13ff4dcea37e4ec074d5f3c093928c52dd0e28a84ab48d8",
+    "text": "Échange avec une réserve choisie"
+  },
   "content.card.wisterelle-lantern-fare.name": {
     "reviewed": true,
     "source": "Lantern Fare",
     "sourceHash": "f6a9ccbe84cfea3463ae730b19593fba3da4b570f5bdbaae88a9a037c7733ba4",
     "text": "Billet à la lanterne"
+  },
+  "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "b17de944f0469e4e9f28bae60f1e39d6bc0e93f2347409cdc65883397ab9e9e0",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> à un allié blessé / Gagne {{value1}} <keyword1>Mana</keyword1>"
+  },
+  "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "269a3b1000132159677c64916d19afb136ffb4fd396bb011d4c4007e65150606",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> à un allié blessé"
   },
   "content.card.wisterelle-left-luggage.name": {
     "reviewed": true,

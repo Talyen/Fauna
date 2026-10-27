@@ -1379,6 +1379,12 @@
     "sourceHash": "e22d969f4ff5f7f9664188284e121d7511f6e885592419b099e0156908b1233c",
     "text": "Осеннее озарение"
   },
+  "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "4856ab49a8487cbddf29dfe492d460d3e67041f02ee4303805be06efdd308c00",
+    "text": "Верните случайную сброшенную карту в руку; Восстановите раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
+  },
   "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
@@ -1516,6 +1522,12 @@
     "source": "Echoes Remember",
     "sourceHash": "0307b0f5f0e8437769ab05f7406c14ae3b15e42dbeb6c4dcb032825f0c412d69",
     "text": "Эхо помнит"
+  },
+  "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card from a living ally to your hand",
+    "sourceHash": "74e1b35f60b20c1c8619ed4655afa9193c2f82f71e6919e8d3dc735e9d7324de",
+    "text": "Верните в руку случайную сброшенную карту живого союзника"
   },
   "content.card.cadenza-resonant-well.name": {
     "reviewed": true,
@@ -1780,6 +1792,12 @@
     "source": "Hushed Waters",
     "sourceHash": "c3e4bc38e7742b6cd00b25764ed8707853849b5b6caf6064a8f822a549c478ee",
     "text": "Тихие воды"
+  },
+  "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
+    "sourceHash": "6a11aa6708a86ab612d08155b8c31fc035659e6e918801af2a17a2332795ecb3",
+    "text": "Сменитесь со случайным существом из резерва / <keyword0>Очистите</keyword0> всех союзников"
   },
   "content.card.dulcera-meadow-shelter.name": {
     "reviewed": true,
@@ -2615,6 +2633,18 @@
     "sourceHash": "7f2a0ebc10b570a39a1b62aec71157a6ba0f59eb3159bd925040be09cd2ba389",
     "text": "Безопасный проход"
   },
+  "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
+    "sourceHash": "833cb9b141266228b45043721c1208fde84c8829467528a23894ca30ee7ed336",
+    "text": "Замените союзника с наименьшим <keyword0>здоровьем</keyword0>"
+  },
+  "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
+    "sourceHash": "c686a43a32cfb970569ea68ae1d4750e77ff7a30d79c7795710a69147b35cfce",
+    "text": "Замените союзника с наименьшим <keyword0>здоровьем</keyword0> / Возьмите карту"
+  },
   "content.card.tournelle-teamClearBlind.name": {
     "reviewed": true,
     "source": "Kindled Courage",
@@ -2675,11 +2705,35 @@
     "sourceHash": "42a341dc36f57885684369a7e97e9be463bfd7286b806d8c9c9c62be61b5bfbe",
     "text": "Забытый перекрёсток"
   },
+  "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup / Draw a Card",
+    "sourceHash": "2d56da7f46f5024af31ab2ff1bfdd72608a8ba6f1eebc51f1ed5b18a2d081051",
+    "text": "Сменитесь с выбранным существом из резерва / Возьмите карту"
+  },
+  "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup",
+    "sourceHash": "489d9589f4a99b5f91890371196ef2390f38abe2ecc9a72eba5747a234853167",
+    "text": "Сменитесь с выбранным существом из резерва"
+  },
   "content.card.wisterelle-lantern-fare.name": {
     "reviewed": true,
     "source": "Lantern Fare",
     "sourceHash": "008afeb333af4ee505fc7ccbe3addb4f18ece43d1da5b01899ce1b562c4d173c",
     "text": "Фонарный билет"
+  },
+  "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "e76380558d624ff82a35fcdd14bf3a2a9ec9543dc4f0db7e788b5a301f080407",
+    "text": "Восстановите раненому союзнику {{value0}} <keyword0>здоровья</keyword0> / Получите {{value1}} <keyword1>маны</keyword1>"
+  },
+  "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "0ac135285fae8df9a67e9ff7ef245d17f208708955769dc5a91a1233f271598f",
+    "text": "Восстановите раненому союзнику {{value0}} <keyword0>здоровья</keyword0>"
   },
   "content.card.wisterelle-left-luggage.name": {
     "reviewed": true,
