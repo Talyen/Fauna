@@ -2261,6 +2261,18 @@
     "sourceHash": "a1284669c3fcc038911222d0f1dac4fe2cecd6875f6fb9f427c6dc821a43bfad",
     "text": "Beginne mit {{value0}} <keyword0>Nahrungs</keyword0>karten in deinem Deck"
   },
+  "content.species.aerostat.title": {
+    "reviewed": true,
+    "source": "The well-stocked traveler",
+    "sourceHash": "c654ac66a9c38d56ba2e8bff7221b9e8951dd509a0af9111517c86e552d02a59",
+    "text": "Der wohlversorgte Reisende"
+  },
+  "content.species.aerostat.trait": {
+    "reviewed": true,
+    "source": "Well Provisioned",
+    "sourceHash": "6571b95200b72bbb6faaa42e8eadfed0cb0adf3212abd433b6ac29de6614ac02",
+    "text": "Gut ausgerüstet"
+  },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
@@ -2296,6 +2308,18 @@
     "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
     "sourceHash": "96d6c6ff1c2f1b153e725d11ca7c0629e315e7bad9c7348beca7de8e15e5e007",
     "text": "Durch Verfall verlorener <keyword0>Block</keyword0> wird zu <keyword1>Dornen</keyword1>"
+  },
+  "content.species.almanelle.title": {
+    "reviewed": true,
+    "source": "The orchard through the seasons",
+    "sourceHash": "ae50566889c9310ab20834c04b74949a27b5412efbfb9ce1e2c0a5b4662cbaaf",
+    "text": "Der Obstgarten im Wandel der Jahreszeiten"
+  },
+  "content.species.almanelle.trait": {
+    "reviewed": true,
+    "source": "Fallen Leaves",
+    "sourceHash": "4d1e0e094464299d7b5c9944b536c6b3c50c35f32497e1921a2cceabb167f529",
+    "text": "Gefallenes Laub"
   },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
@@ -2333,6 +2357,18 @@
     "sourceHash": "ab3ed1930e39b5adfa82ff9588f971017d5700ba351e8fbefbc56d52daca9088",
     "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.species.alpenglen.title": {
+    "reviewed": true,
+    "source": "The last light of the mountain",
+    "sourceHash": "1f0bcae5d3f487453294566165e83bf6f637874cdae105fb73f0325b2b756b0d",
+    "text": "Das letzte Licht des Berges"
+  },
+  "content.species.alpenglen.trait": {
+    "reviewed": true,
+    "source": "Last Warmth",
+    "sourceHash": "7c91458a1f187d4c304cd39b99a232bf8ecd6aa60f151b76f0d0d38811a9c78e",
+    "text": "Letzte Wärme"
+  },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
@@ -2369,6 +2405,18 @@
     "sourceHash": "84f02df2a86aaf617c422439b8a77813747a5073dfc8b30bdb0bf7eac1d90c17",
     "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
   },
+  "content.species.arabesca.title": {
+    "reviewed": true,
+    "source": "The dance of returning spring",
+    "sourceHash": "173afa01dc4ef40d4f9bcfafee361453ab4f10c5979df395b1893db9ed0b3947",
+    "text": "Der Tanz des wiederkehrenden Frühlings"
+  },
+  "content.species.arabesca.trait": {
+    "reviewed": true,
+    "source": "Petalwake",
+    "sourceHash": "af6dc135f9bfe2a7fb8c2f5080385c8119139716548adbedc6cba71f1aa89178",
+    "text": "Blütenspur"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2404,6 +2452,18 @@
     "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
     "sourceHash": "b7d58560cfcc973f47e64e65680d886834f7ad77a40697a72c5d4dced3a837d9",
     "text": "Wandle <keyword0>Block</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.title": {
+    "reviewed": true,
+    "source": "The petal keeper",
+    "sourceHash": "f58106720db169bda6d642e49ecce5cb0d4a0f4d16be329dace14ca531d8f294",
+    "text": "Der Hüter der Blütenblätter"
+  },
+  "content.species.bloomquail.trait": {
+    "reviewed": true,
+    "source": "Full Bloom",
+    "sourceHash": "2643e2240c8b4c6dd8f052971c5a484b09e846b9aaf2dae02585d703418391ca",
+    "text": "Volle Blüte"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,

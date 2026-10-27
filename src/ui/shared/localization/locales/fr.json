@@ -2273,6 +2273,18 @@
     "sourceHash": "a1f248c46c3f6871905ceea3eb0cd5a8a329c0ffcb876f0e8ef1ad25d7182f3a",
     "text": "Commence avec {{value0}} cartes de <keyword0>Nourriture</keyword0> dans votre paquet"
   },
+  "content.species.aerostat.title": {
+    "reviewed": true,
+    "source": "The well-stocked traveler",
+    "sourceHash": "8017f7df1e14028ee35882b98855725e49ac8aa890663d53e7f0501c250c3d15",
+    "text": "Le voyageur bien équipé"
+  },
+  "content.species.aerostat.trait": {
+    "reviewed": true,
+    "source": "Well Provisioned",
+    "sourceHash": "917083212ab10195ba753c344120dacc9c7d0def7220896877fb08fcb536a0b3",
+    "text": "Bien approvisionné"
+  },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
@@ -2308,6 +2320,18 @@
     "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
     "sourceHash": "e90d5f58f15d687caeaefa71079204629ed9334110cfccb1bf6faa66c81f8edc",
     "text": "Le <keyword0>Blocage</keyword0> perdu par diminution devient des <keyword1>Épines</keyword1>"
+  },
+  "content.species.almanelle.title": {
+    "reviewed": true,
+    "source": "The orchard through the seasons",
+    "sourceHash": "7552fba6bb78dcdd3675bdb27ed81dca3b459e70228b5563247f6ee01e774414",
+    "text": "Le verger au fil des saisons"
+  },
+  "content.species.almanelle.trait": {
+    "reviewed": true,
+    "source": "Fallen Leaves",
+    "sourceHash": "be03d264289892215b8e2430097f5fdd88291a7be4b499e538baecfdd18c6557",
+    "text": "Feuilles tombées"
   },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
@@ -2345,6 +2369,18 @@
     "sourceHash": "def856cf96ab17390bfa1e17eb5dc39ff2d234a7ba9e73fdbd09651c8924cc01",
     "text": "Jouer la dernière carte de votre main restaure {{value0}} de <keyword0>Santé</keyword0> à l’allié le plus blessé"
   },
+  "content.species.alpenglen.title": {
+    "reviewed": true,
+    "source": "The last light of the mountain",
+    "sourceHash": "e5bc64e27380f68b08a13cc2ffb1bade5554bafc4f76d02cd4048a9d886e752c",
+    "text": "La dernière lumière de la montagne"
+  },
+  "content.species.alpenglen.trait": {
+    "reviewed": true,
+    "source": "Last Warmth",
+    "sourceHash": "0ca1065c9e40c8585a2ee1bb98d3d5be4bbc161ca6e2c99ab0005ec5506d96b6",
+    "text": "Dernière chaleur"
+  },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
@@ -2381,6 +2417,18 @@
     "sourceHash": "67c16536ea408f635eca36fbdf5a703dbe836c10e5cbfa32ea1997d58e1f7f47",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> aux alliés lorsque vous <keyword1>esquivez</keyword1>"
   },
+  "content.species.arabesca.title": {
+    "reviewed": true,
+    "source": "The dance of returning spring",
+    "sourceHash": "cc8a8cf997b23896a9d707df2dac773c0cb974536f87c5d3b7e035bd94a13c8d",
+    "text": "La danse du printemps retrouvé"
+  },
+  "content.species.arabesca.trait": {
+    "reviewed": true,
+    "source": "Petalwake",
+    "sourceHash": "8738f6cd41ea60fd18560c528d745a76f1264659964254ed8cf2b61e269edb22",
+    "text": "Sillage de pétales"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2416,6 +2464,18 @@
     "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
     "sourceHash": "dc1aaa265ff7b8b765453b5bcc6871b538d69eafdd7a3b26857db7881c71db65",
     "text": "Convertit le <keyword0>Blocage</keyword0> que vous gagnez en <keyword1>Santé</keyword1> pour l’allié le plus blessé"
+  },
+  "content.species.bloomquail.title": {
+    "reviewed": true,
+    "source": "The petal keeper",
+    "sourceHash": "19f07b07c915e4ac30991120396cec1ded19f7a5ce37a1ffec97f67e396f3ab4",
+    "text": "Le gardien des pétales"
+  },
+  "content.species.bloomquail.trait": {
+    "reviewed": true,
+    "source": "Full Bloom",
+    "sourceHash": "d5b7fe3a4a2c6c3bc911a80c0ea364d5149ca5317e22799a7e381ea2ced687c4",
+    "text": "Pleine floraison"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,

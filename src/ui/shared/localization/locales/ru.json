@@ -2261,6 +2261,18 @@
     "sourceHash": "06a94d7077761c963f8dbce8b65326dd2003d4663728c2ca176200920e3c4ace",
     "text": "Начинайте с {{value0}} картами <keyword0>еды</keyword0> в колоде"
   },
+  "content.species.aerostat.title": {
+    "reviewed": true,
+    "source": "The well-stocked traveler",
+    "sourceHash": "fcaa6b626408db35b12e0495651301e51a80cec7d03d3294401288dfaca2b255",
+    "text": "Путник с полными запасами"
+  },
+  "content.species.aerostat.trait": {
+    "reviewed": true,
+    "source": "Well Provisioned",
+    "sourceHash": "aecf840e058401eda11413470172108135851b72a36325b3f96d0d37803d2922",
+    "text": "Хороший запас"
+  },
   "content.species.almanelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
@@ -2296,6 +2308,18 @@
     "source": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
     "sourceHash": "7e0a3b9dc6f88d883d6d043a181fb2bbc73eaad9b3e0ead44fa744dacf94901c",
     "text": "<keyword0>Блок</keyword0>, теряемый при распаде, превращается в <keyword1>шипы</keyword1>"
+  },
+  "content.species.almanelle.title": {
+    "reviewed": true,
+    "source": "The orchard through the seasons",
+    "sourceHash": "5953b6cf0782126deb7c941a53eab66c30b195cb7fd8ed5c2ef915a2947bd4da",
+    "text": "Сад сквозь времена года"
+  },
+  "content.species.almanelle.trait": {
+    "reviewed": true,
+    "source": "Fallen Leaves",
+    "sourceHash": "164e84ffe11d9ddea8bbe52afad54a643554db3c3f40cade025cfa97fccf84bc",
+    "text": "Опавшие листья"
   },
   "content.species.alpenglen.passive.0.rule": {
     "reviewed": true,
@@ -2333,6 +2357,18 @@
     "sourceHash": "e616c211aa3eb5f95c180da85c569928f372e2309554af2fc55b6f040c63cf87",
     "text": "Розыгрыш последней карты в вашей руке восстанавливает {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
   },
+  "content.species.alpenglen.title": {
+    "reviewed": true,
+    "source": "The last light of the mountain",
+    "sourceHash": "5dd58541371362ef94c2495abe5b8dc37a1fba82e45a6d2601ed52b4ebe9bce2",
+    "text": "Последний свет горы"
+  },
+  "content.species.alpenglen.trait": {
+    "reviewed": true,
+    "source": "Last Warmth",
+    "sourceHash": "9fc30fda82b2a47df29002fd97d6aef3b0cf7787172ac63d3cdb77efc93c6d4e",
+    "text": "Последнее тепло"
+  },
   "content.species.arabesca.passive.0.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
@@ -2369,6 +2405,18 @@
     "sourceHash": "ffe8441de9ed4c3380797248fac3d48f31faee4554d24c93de1a1aa007c039d0",
     "text": "Восстанавливайте союзникам {{value0}} <keyword0>здоровья</keyword0>, когда <keyword1>уклоняетесь</keyword1>"
   },
+  "content.species.arabesca.title": {
+    "reviewed": true,
+    "source": "The dance of returning spring",
+    "sourceHash": "43aa51c5b297459f89e40bcba55ee5e5f7a1d83f8b7324dc629bbaf218efea50",
+    "text": "Танец возвращающейся весны"
+  },
+  "content.species.arabesca.trait": {
+    "reviewed": true,
+    "source": "Petalwake",
+    "sourceHash": "22710faa362b1ff4021f9dd5db30bf9c24d4a614c9b19c22513f88aaa25a9b2e",
+    "text": "След лепестков"
+  },
   "content.species.bloomquail.passive.0.rule": {
     "reviewed": true,
     "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
@@ -2404,6 +2452,18 @@
     "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
     "sourceHash": "1a6b26304ff7339145c693235e4edb42d629f6b6c584fce19dc4d656d87fa531",
     "text": "Преобразуйте получаемый <keyword0>блок</keyword0> в <keyword1>здоровье</keyword1> наиболее раненого союзника"
+  },
+  "content.species.bloomquail.title": {
+    "reviewed": true,
+    "source": "The petal keeper",
+    "sourceHash": "cb5ad80e99cda90b4a9d389914a474c4166cb819457aefeb36a59c24fb0fb951",
+    "text": "Хранитель лепестков"
+  },
+  "content.species.bloomquail.trait": {
+    "reviewed": true,
+    "source": "Full Bloom",
+    "sourceHash": "3b0bbddc4c9332f801b9f3b62c32465a7153fd9f7fdd7b153faaf9c1e5c7177e",
+    "text": "Полный цвет"
   },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
