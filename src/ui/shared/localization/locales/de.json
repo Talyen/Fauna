@@ -1343,11 +1343,29 @@
     "sourceHash": "9bbac1f8cbe8a71421e1c524590f54fb335c4a84f943f741cbbdd3eab931ca1d",
     "text": "Schafgarbensalben-Dose"
   },
+  "content.card.aerostat-parcel-drop.name": {
+    "reviewed": true,
+    "source": "Parcel Drop",
+    "sourceHash": "b003de653b7834bbec8e35c64ea384faaad1d5565d77b1287fdc3bf8c6007429",
+    "text": "Paketabwurf"
+  },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "86db0cfccb87eaa151d4b69d29be8488123de15884dbc23eefb42fbfd2f16665",
     "text": "Füge deiner Hand {{value0}} <keyword0>Nahrung</keyword0> hinzu"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "reviewed": true,
+    "source": "True Bearing",
+    "sourceHash": "081b54acbfaa1232bc2f38721b594469d9fe184d2119359f319cf65ddfad5296",
+    "text": "Wahrer Kurs"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "reviewed": true,
+    "source": "Voyager’s Rest",
+    "sourceHash": "5d16a21734e7d52cac371b22d78feb953fe18601be02a9520215f5101d4f03bf",
+    "text": "Reisendenrast"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -1355,11 +1373,35 @@
     "sourceHash": "675b8188f6a8c2315f1dcb19b385a9e533a649547a4623b77cd0aaf324001583",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
   },
+  "content.card.almanelle-autumn-insight.name": {
+    "reviewed": true,
+    "source": "Autumn Insight",
+    "sourceHash": "e8be47c7dc8c4a14deb284340adda37c2957d8815c2219fa36a93290c8a47855",
+    "text": "Herbsterkenntnis"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "reviewed": true,
+    "source": "Rooted Year",
+    "sourceHash": "e69e7a391b3c76295093d2c56354f9a92150c790d8fd0c2348c38037b140c4a4",
+    "text": "Verwurzeltes Jahr"
+  },
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "25789891a8941a639e1ad3706164d54312ef2b53f32a32113d60b418d1ea274f",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; Erhalte {{value1}} <keyword1>Dornen</keyword1>"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "reviewed": true,
+    "source": "Spring Current",
+    "sourceHash": "f0cc591630578e9451b5a0a2e8ab2ef19d33bbeb063959a6be420fb0615083d1",
+    "text": "Frühlingsstrom"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "reviewed": true,
+    "source": "Ember of Evening",
+    "sourceHash": "10041da4d1e20c900b4394f5050ae9ccb4bca0eb9e21242d54b0adb150a581cf",
+    "text": "Abendglut"
   },
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1367,11 +1409,29 @@
     "sourceHash": "a239081e9e4cbcb14a436f69810818ee4afae5a6b46bd89ed9f340cb202fca1b",
     "text": "Deine nächste Karte wird zweimal gespielt"
   },
+  "content.card.alpenglen-last-light-charge.name": {
+    "reviewed": true,
+    "source": "Last Light Charge",
+    "sourceHash": "1b275e16090def9565ef9ccc28c09bdd5c616c303045a31aedfbceb8ab82b4a1",
+    "text": "Ansturm des letzten Lichts"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "reviewed": true,
+    "source": "Sunset Reversal",
+    "sourceHash": "b0058d47cc8f6e06ee625611bb8bf6b0fe92bc783b0c623480fecd9eee2d134f",
+    "text": "Sonnenwende"
+  },
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "fc9a601701a35113a5c3690d2ee3c54ab5685e415691aed2a454925b39645b71",
     "text": "<keyword0>Reflektiere den nächsten Angriff</keyword0>"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "reviewed": true,
+    "source": "Dancing Double",
+    "sourceHash": "b3526db10d7e712f81b5f0ddccbc1aab51ec4f973bb554255307e1f8ae279d4f",
+    "text": "Tanzendes Doppel"
   },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1379,11 +1439,29 @@
     "sourceHash": "5bcbf7a6a6bfd06d47b7b5710c221a6e55c1db88b35d71a76f6cea141ab600fa",
     "text": "Deine nächste Karte wird zweimal gespielt"
   },
+  "content.card.arabesca-ribbon-snare.name": {
+    "reviewed": true,
+    "source": "Ribbon Snare",
+    "sourceHash": "47864ebdcf51c3f0e5626ae15bde388a3774251a72f4538d56831fe0721df10b",
+    "text": "Bandschlinge"
+  },
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "1b5edf248192572f784f0eb21eeca75239727f542342451dc238499d5d9b2d9f",
     "text": "Verursache {{value0}} <keyword0>Betäubung</keyword0>sschaden"
+  },
+  "content.card.arabesca-springbound.name": {
+    "reviewed": true,
+    "source": "Springbound",
+    "sourceHash": "92f05e25724f5397b6ac79e649770a4d1ecfade6dd32d354a0815310949c5527",
+    "text": "Frühlingssprung"
+  },
+  "content.card.bloomquail-draw.name": {
+    "reviewed": true,
+    "source": "Bloom Cradle",
+    "sourceHash": "a2571271c903a50293081ba3c79cdae83eaea20a71b17a5330a4113f0d3afee8",
+    "text": "Blütenwiege"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1391,11 +1469,23 @@
     "sourceHash": "cee50dd710257243b7c25531e88b2757dd8377982c8d256d9b4fd72724de2674",
     "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.card.bloomquail-guard.name": {
+    "reviewed": true,
+    "source": "Petal Rampart",
+    "sourceHash": "3c2518f6f776d74106a5921dfd5d7f2b1b2b755cdf91d49570a1e0838b5efdf0",
+    "text": "Blütenwall"
+  },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "5d08a38a57e5bf3d331a5a49805c44287b61aff3448a4fe2896d8d691258680c",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.bloomquail-heal.name": {
+    "reviewed": true,
+    "source": "Petal Veil",
+    "sourceHash": "cdfd3e2fd9eab0483f5d730fc90902d53f6d5a2cb617f852821b9af982efd11d",
+    "text": "Blütenschleier"
   },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

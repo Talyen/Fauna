@@ -1343,11 +1343,29 @@
     "sourceHash": "3ba9fc8c1cd1e5fb8d8b8ca81a6a1a46d9de1b48d78ae6c16ca88334e501b025",
     "text": "Lata de ungüento de milenrama"
   },
+  "content.card.aerostat-parcel-drop.name": {
+    "reviewed": true,
+    "source": "Parcel Drop",
+    "sourceHash": "b6f90a2f4c8c5c2a2b281cef01b1fa8281ed3ebf433166803bbce298f5f3ceec",
+    "text": "Entrega de paquete"
+  },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "0d984b919a19a2892faf37803794aa45ebb9fd93174ced78a40847b350d83ef7",
     "text": "Añade <keyword0>Comida</keyword0> a tu mano: {{value0}}"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "reviewed": true,
+    "source": "True Bearing",
+    "sourceHash": "c89d46e15b7f9e7e02eef3eef95957cfd25d0e5489ac4c97ed44be12a2592898",
+    "text": "Rumbo certero"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "reviewed": true,
+    "source": "Voyager’s Rest",
+    "sourceHash": "8ec7e5e12b84bdee561a64219d1b4432d40728adf2829d3c3c16ad9eee99b8f0",
+    "text": "Descanso del viajero"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -1355,11 +1373,35 @@
     "sourceHash": "04a3cd6bb0a25b14aabdeec7207fd71bff5f39470c7b83827d43685ce4129c80",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
+  "content.card.almanelle-autumn-insight.name": {
+    "reviewed": true,
+    "source": "Autumn Insight",
+    "sourceHash": "69d750da19036037d6a4809387cc0b07de57b613639c195a984d855d8840e32f",
+    "text": "Visión otoñal"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "reviewed": true,
+    "source": "Rooted Year",
+    "sourceHash": "df88028ee4c6080030f4d21bcaa61234569f521d89b329d937caf1c31a8b6c7a",
+    "text": "Año arraigado"
+  },
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "c492c97d330dc506c043effd21be1ce350ff2b3b143c341a5034a9d76f54b3e4",
     "text": "Obtienes {{value0}} de <keyword0>Bloqueo</keyword0>; Obtienes {{value1}} de <keyword1>Espinas</keyword1>"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "reviewed": true,
+    "source": "Spring Current",
+    "sourceHash": "bf9853a80140ca979ec3643a06a0347e15c5482f94854b14ade9e959b110f2b6",
+    "text": "Corriente primaveral"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "reviewed": true,
+    "source": "Ember of Evening",
+    "sourceHash": "8deb80ed5e5eb745e7aa825235eccb67460ac0bc6e8ee3cde63368234aaf0738",
+    "text": "Brasa del anochecer"
   },
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1367,11 +1409,29 @@
     "sourceHash": "9af033e1f0d353581b51786bc9e3f1a9498f4e539cdc7db08a0b34ca48190208",
     "text": "Tu siguiente carta se juega dos veces"
   },
+  "content.card.alpenglen-last-light-charge.name": {
+    "reviewed": true,
+    "source": "Last Light Charge",
+    "sourceHash": "feb2486558a89a89ffa0b7a8d52be46ca2b10eeef57e4fb259728cc940c53354",
+    "text": "Carga de la última luz"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "reviewed": true,
+    "source": "Sunset Reversal",
+    "sourceHash": "bbdc5e8dd49c247bdda6db904982b6646ee0150718f3b93e1b2f999bc10da1b3",
+    "text": "Vuelco del ocaso"
+  },
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "526cd1eccdfa448dfa4f6a5bc2e7a179766b9f1c034105d77e2fa572242415d1",
     "text": "<keyword0>Refleja el siguiente ataque</keyword0>"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "reviewed": true,
+    "source": "Dancing Double",
+    "sourceHash": "41f76f718eba615991b94bd0f706523db8b6eaca9ef27e5729a09831f019d8dd",
+    "text": "Doble danzante"
   },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1379,11 +1439,29 @@
     "sourceHash": "cf950f6c74ed57dfb0fdd7d4e9db58066300afb3a69caa4edfb7007888f67f08",
     "text": "Tu siguiente carta se juega dos veces"
   },
+  "content.card.arabesca-ribbon-snare.name": {
+    "reviewed": true,
+    "source": "Ribbon Snare",
+    "sourceHash": "49b9d417bed905006ee4c527f9c5fc036075f00af534f39defaec17ff584c1df",
+    "text": "Lazo de cinta"
+  },
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "73cbe0c4b567c0855180d0740c57e33ed89e61d1dbf9f77478dcf29b48084f02",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>"
+  },
+  "content.card.arabesca-springbound.name": {
+    "reviewed": true,
+    "source": "Springbound",
+    "sourceHash": "d5e9c4918afead056d100ba19b8e51fbd4fe046a3683b6a4328609aa9d9976ce",
+    "text": "Salto primaveral"
+  },
+  "content.card.bloomquail-draw.name": {
+    "reviewed": true,
+    "source": "Bloom Cradle",
+    "sourceHash": "0c2a6f4224b037e0cdd4cf21cc972c3e4588af8d4b3b3760f292bf65129f533f",
+    "text": "Cuna florida"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1391,11 +1469,23 @@
     "sourceHash": "e8b6c5a1b1da3905e25deddf547719dd150fbca859af5e51c75b74d9c667fd3d",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0>"
   },
+  "content.card.bloomquail-guard.name": {
+    "reviewed": true,
+    "source": "Petal Rampart",
+    "sourceHash": "9effaa95b11a2707b7c3d74ed8ea91445c323a51c3e652bb729bbb51b09511d7",
+    "text": "Baluarte de pétalos"
+  },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "6abc5736f5aa5fc473f502d5a50b5a1667f737673b55dd87711526e51d8cdd92",
     "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0>"
+  },
+  "content.card.bloomquail-heal.name": {
+    "reviewed": true,
+    "source": "Petal Veil",
+    "sourceHash": "37a37b30bbd05954a2d5c481456811de2258ffd8f8baff9e7dad3873c14d6567",
+    "text": "Velo de pétalos"
   },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

@@ -1343,11 +1343,29 @@
     "sourceHash": "32b3c43f1c374145fd5a859c9b761effe558e731ff7d768b48ac7ea05d376d40",
     "text": "ノコギリソウの軟膏缶"
   },
+  "content.card.aerostat-parcel-drop.name": {
+    "reviewed": true,
+    "source": "Parcel Drop",
+    "sourceHash": "7ddb33b134803b8f936bfc77ee823d8dc18ea1139eed41d288f3a56349867683",
+    "text": "小包投下"
+  },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "21bcb6338b7064003fdedb2749ff8e5b535c06156e0f9e50268b85cd19dd72e0",
     "text": "手札に<keyword0>食料</keyword0>を{{value0}}枚加える"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "reviewed": true,
+    "source": "True Bearing",
+    "sourceHash": "c82a76c7f0c0ca2e40b28191184c681c70148ff929e488b3d40cdde648364adc",
+    "text": "正しい方角"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "reviewed": true,
+    "source": "Voyager’s Rest",
+    "sourceHash": "c4f284ebbe56897197385d49f868a242e105e567c26a66a9dd9f16721a77bd61",
+    "text": "旅人の休息"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -1355,11 +1373,35 @@
     "sourceHash": "a162cc787f9f47c761e86ae740b8911c54f862ce4231d54876f486ea3cc71702",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.card.almanelle-autumn-insight.name": {
+    "reviewed": true,
+    "source": "Autumn Insight",
+    "sourceHash": "1b669538da0a84d805f2f80312570c933583eb606900c17c42006fe51a9d7a3a",
+    "text": "秋のひらめき"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "reviewed": true,
+    "source": "Rooted Year",
+    "sourceHash": "1d73dee7acdb617db619fe7d4775a3a117c1ed204266e6fe696579bdfcec6330",
+    "text": "根付く一年"
+  },
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "266a6e934486a913e849a7d763817351b75d9cb3d727991c9749a44310742fb9",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "reviewed": true,
+    "source": "Spring Current",
+    "sourceHash": "e54ad278c9fe19873976d0776914f5537f7f80003a6162d950ed7ae5034b9795",
+    "text": "春の流れ"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "reviewed": true,
+    "source": "Ember of Evening",
+    "sourceHash": "ca13cd305e81eceed9b5cdeaa8debe4e4af2d8b56514bbe6bcae7cb9dd55f9d2",
+    "text": "夕暮れの熾火"
   },
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1367,11 +1409,29 @@
     "sourceHash": "a1f9df1acd9956de30a03ab65f0a4522b2e487bf95d589aeee06351d6d290054",
     "text": "次のカードを2回使用する"
   },
+  "content.card.alpenglen-last-light-charge.name": {
+    "reviewed": true,
+    "source": "Last Light Charge",
+    "sourceHash": "9ab4508776fc78d3c7aec05d741226bf914658ca6573eafec9dba63e782e1858",
+    "text": "残光の突進"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "reviewed": true,
+    "source": "Sunset Reversal",
+    "sourceHash": "0e86df44362b24f34f5b30f0d1c237815783db2984923e0e6759e9913b235cec",
+    "text": "夕暮れの逆転"
+  },
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "056407dae02dddda99cc33bd00884a643234fccc630bf1522e3d75136823e3c5",
     "text": "<keyword0>次の攻撃を反射</keyword0>"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "reviewed": true,
+    "source": "Dancing Double",
+    "sourceHash": "77dfd0d516e0b10a658affed0f6664d6e492d5a3c9f98d44d0513fd2fac2e5a3",
+    "text": "踊る分身"
   },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1379,11 +1439,29 @@
     "sourceHash": "5a873ad9b0a55aee2fe25bf1d162793334638b5155fb82deab83987ebf507c33",
     "text": "次のカードを2回使用する"
   },
+  "content.card.arabesca-ribbon-snare.name": {
+    "reviewed": true,
+    "source": "Ribbon Snare",
+    "sourceHash": "3c9dbf9be403397d1853747edb3614b44940efb6acf751d6a68b4d3047e24969",
+    "text": "リボンの罠"
+  },
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "5d3c672c9ca72780a49951bac2f9d6af9a749ea89f1d79efa6455a942597b77b",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.arabesca-springbound.name": {
+    "reviewed": true,
+    "source": "Springbound",
+    "sourceHash": "80d9eec5125bf492a99245722ce2fce520f5824a70dda357cf0cfb406840103d",
+    "text": "春の跳躍"
+  },
+  "content.card.bloomquail-draw.name": {
+    "reviewed": true,
+    "source": "Bloom Cradle",
+    "sourceHash": "8abe31c5618863ace04a6d29c8c63f56aff8c418ab448a150b88ad6b9314a94e",
+    "text": "花のゆりかご"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1391,11 +1469,23 @@
     "sourceHash": "bbfe47271549480217f8e77b934a17d6a88e0af80d2682b92350cc9340a5e536",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.bloomquail-guard.name": {
+    "reviewed": true,
+    "source": "Petal Rampart",
+    "sourceHash": "5546d227901d0961a613c9de3338317846549632858641046bc49c0f4dfd4d60",
+    "text": "花びらの城壁"
+  },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "61f0295fc178d27cfc6fd80020f3375571aee701bec1e374514034ce8eee4cbd",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.bloomquail-heal.name": {
+    "reviewed": true,
+    "source": "Petal Veil",
+    "sourceHash": "194f6e9252e4da58d5e79866c7993001fa8f24d605afd6b43a17b6405ed9926c",
+    "text": "花びらの帳"
   },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

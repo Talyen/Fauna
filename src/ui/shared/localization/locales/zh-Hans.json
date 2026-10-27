@@ -1343,11 +1343,29 @@
     "sourceHash": "ac83e96624b6724419105335b3ab8ccc2dba227f33acc66aa1d00bbf95423b91",
     "text": "蓍草药膏盒"
   },
+  "content.card.aerostat-parcel-drop.name": {
+    "reviewed": true,
+    "source": "Parcel Drop",
+    "sourceHash": "0a6190849964ffcbbe171e5a35e402836d051b7151cd6f471680032996d926c6",
+    "text": "投递包裹"
+  },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
     "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
     "sourceHash": "b30475c5ea8d11729a68b311e0938eeadc32591cd405b61f029471f0491bd074",
     "text": "将{{value0}}张<keyword0>食物</keyword0>加入手牌"
+  },
+  "content.card.aerostat-true-bearing.name": {
+    "reviewed": true,
+    "source": "True Bearing",
+    "sourceHash": "dbd9b0095db45ddbdf7f4f3d1a197e09ab1848a43665a0d6f8a1abd856baee24",
+    "text": "准确航向"
+  },
+  "content.card.aerostat-voyagers-rest.name": {
+    "reviewed": true,
+    "source": "Voyager’s Rest",
+    "sourceHash": "46277d1d4fe73aeb11c3fc3eaf6f099180d2439768878c036b9a63eae1c6402b",
+    "text": "旅人歇息"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -1355,11 +1373,35 @@
     "sourceHash": "b60760700507d08a4d2c5aea6a5d5e7343a48b86e5f3808849867ad49d9ff685",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
+  "content.card.almanelle-autumn-insight.name": {
+    "reviewed": true,
+    "source": "Autumn Insight",
+    "sourceHash": "3ecf97689ac320155571131fbc81317418537de88f5680de69a72cf1ece0e446",
+    "text": "秋日洞见"
+  },
+  "content.card.almanelle-rooted-year.name": {
+    "reviewed": true,
+    "source": "Rooted Year",
+    "sourceHash": "3695695b0f266a79d2d943e983e6ce360e9b82fbcaee918fb88cb50fdebb3229",
+    "text": "扎根之年"
+  },
   "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "65503f6956ea31502c41de3edb38b539fc08535f34f719782bb71245c615bdc4",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>；获得{{value1}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.card.almanelle-spring-current.name": {
+    "reviewed": true,
+    "source": "Spring Current",
+    "sourceHash": "2388cbfb329af26fe831bf9c4ed2e432761643a6b40d2240837135e202185bf1",
+    "text": "春日流转"
+  },
+  "content.card.alpenglen-ember-of-evening.name": {
+    "reviewed": true,
+    "source": "Ember of Evening",
+    "sourceHash": "c4a1f5a12e3d3bd549b5a5ae65c0d38ab58e0c88409b0238e1b07e3aa8a7c2ee",
+    "text": "暮色余烬"
   },
   "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1367,11 +1409,29 @@
     "sourceHash": "d28738aabaf86dd306fff01dd1153d29466ff4940e105c6f7c87dcc21b86e269",
     "text": "下一张牌打出两次"
   },
+  "content.card.alpenglen-last-light-charge.name": {
+    "reviewed": true,
+    "source": "Last Light Charge",
+    "sourceHash": "9a476a46e20d744ed99113ddb10c2fc499731dfcb849e0de4f0d349432b8ff4d",
+    "text": "余光冲锋"
+  },
+  "content.card.alpenglen-sunset-reversal.name": {
+    "reviewed": true,
+    "source": "Sunset Reversal",
+    "sourceHash": "f7ad40ff7aab7fe381270483589627e89501570b367544216f18467536281bee",
+    "text": "日落逆转"
+  },
   "content.card.alpenglen-sunset-reversal.v027ca06370fe87c9.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect the next attack</keyword0>",
     "sourceHash": "771fd496c101e8f7dc05b851306f6589ae5b815700d29c624f2121c214ee706d",
     "text": "<keyword0>反射下一次攻击</keyword0>"
+  },
+  "content.card.arabesca-dancing-double.name": {
+    "reviewed": true,
+    "source": "Dancing Double",
+    "sourceHash": "19f901e25a0cb0f5eca7a6c98672dbe3aee486e9d98dc1aa23db8d167d3d49a9",
+    "text": "起舞分身"
   },
   "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
     "reviewed": true,
@@ -1379,11 +1439,29 @@
     "sourceHash": "d6efe4e941ff86e9a68eb80cd344e0318ea8cd7787d2d77310c4e72d00727e16",
     "text": "下一张牌打出两次"
   },
+  "content.card.arabesca-ribbon-snare.name": {
+    "reviewed": true,
+    "source": "Ribbon Snare",
+    "sourceHash": "626d24e0da78f825d8d057109b83faa86c8de4115c610cfa1ea1a943ecf8482e",
+    "text": "缎带陷阱"
+  },
   "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "29aa69875bac255bd64235c4c438021c570793de6d8e74ba48a9d79b12374ba4",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
+  },
+  "content.card.arabesca-springbound.name": {
+    "reviewed": true,
+    "source": "Springbound",
+    "sourceHash": "c4f37ecba981948e79e8bfc0507eb43b69df58471d965e1150bd540acda4d72f",
+    "text": "春之跃"
+  },
+  "content.card.bloomquail-draw.name": {
+    "reviewed": true,
+    "source": "Bloom Cradle",
+    "sourceHash": "defa35de9f4840bd5238ba210a8b70359ef63b263ed2fd444d8a9a0c9dac4116",
+    "text": "花之摇篮"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1391,11 +1469,23 @@
     "sourceHash": "b598a8f9c82d1b052ec83903a29102214089e86770b8a28e715800713a7603e5",
     "text": "恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.card.bloomquail-guard.name": {
+    "reviewed": true,
+    "source": "Petal Rampart",
+    "sourceHash": "8fc2cffa503dab92d1b496ab34aa618a731a12f063e447adfac5075edad64db5",
+    "text": "花瓣壁垒"
+  },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "9c2f636de458c0c9a9e221ab880a4c83b4b15dd8b77681c00d9568a02461fa51",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.bloomquail-heal.name": {
+    "reviewed": true,
+    "source": "Petal Veil",
+    "sourceHash": "c9b777a36d1ca50c86950ca11af8c45b97b387a707a7bc31f38a1790e6aa8b12",
+    "text": "花瓣帷幕"
   },
   "content.card.cadenza-resonant-well.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
