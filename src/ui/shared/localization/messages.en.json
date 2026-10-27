@@ -254,14 +254,29 @@
   "log.gainBlock": {
     "text": "{{name}} gains {{amount}} Block."
   },
+  "log.gainBuildup": {
+    "text": "{{name}} gains {{amount}} {{status}} buildup."
+  },
   "log.gainMana": {
     "text": "Gain {{amount}} Mana."
+  },
+  "log.gainStatus": {
+    "text": "{{name}} gains {{amount}} {{status}}."
   },
   "log.heal": {
     "text": "{{name}} restores {{amount}} Health."
   },
   "log.journeyBegins": {
     "text": "Your journey begins."
+  },
+  "log.removeBuildup": {
+    "text": "{{name}}: Cleanse {{status}} build-up"
+  },
+  "log.removeEffect": {
+    "text": "{{name}}: {{action}} {{status}}."
+  },
+  "log.removeNoEffects": {
+    "text": "{{name}}: {{action}} removes no effects."
   },
   "log.turnRestored": {
     "text": "Turn {{turn}}. {{amount}} Mana restored."

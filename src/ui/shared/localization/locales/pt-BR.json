@@ -581,6 +581,12 @@
     "sourceHash": "0373852e2d34d0b357f111a38d5271a36f21bc5a049b09009c9f230e9b1c0297",
     "text": "EXP de palavras-chave"
   },
+  "content.glossary.keyword.armor.definition.rule": {
+    "reviewed": true,
+    "source": "Reduce incoming <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage after <keyword2>Block</keyword2>; lose {{value0}} stack when <keyword3>Armor</keyword3> reduces damage",
+    "sourceHash": "17101a501ea789c9d52d773cd7820f733f10890eba45b4e72fbed892d9a28900",
+    "text": "Reduz o dano recebido de <keyword0>Físico</keyword0> e <keyword1>Atordoamento</keyword1> após o <keyword2>Bloqueio</keyword2>; perde {{value0}} acúmulo quando a <keyword3>Armadura</keyword3> reduz dano"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
@@ -598,6 +604,18 @@
     "source": "Remove harmful effects from an ally",
     "sourceHash": "4e4a1960064e66bc7fc6e559397097497109802a196284226a65f3d5a77c86a1",
     "text": "Remove efeitos prejudiciais de um aliado"
+  },
+  "content.glossary.keyword.criticalHit.definition.rule": {
+    "reviewed": true,
+    "source": "An attack that deals double damage",
+    "sourceHash": "f99d283d9000b60559ccdf7930e9cdb0e6fda6b2c9f34a4667f9a4bc96a40880",
+    "text": "Um ataque que causa o dobro de dano"
+  },
+  "content.glossary.keyword.light.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "17b54c14a8080627a8b7400cbdde12e605cd91f4cc574df7c7de2770b973d1a5",
+    "text": "Dano de <keyword0>Luz</keyword0>; não implica resistência nem efeito de status"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,
@@ -1865,11 +1883,23 @@
     "sourceHash": "23f5fbcf120e579668942e48200619d8fe213c8a390194aaf06db8bdff7a5de3",
     "text": "Ganhos do último combate"
   },
+  "glossary.controllerHelp": {
+    "reviewed": true,
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+    "sourceHash": "f02f4b93a6609c3c4cdbbf11eceea77c2d0b7541944d1cd08c17e6fa20b7b423",
+    "text": "Use o direcional ou o analógico esquerdo para navegar; {{confirm}} seleciona; {{back}} volta; {{endTurn}} encerra o turno · Veja as habilidades das criaturas na Coleção pelo menu"
+  },
   "glossary.entries": {
     "reviewed": true,
     "source": "Glossary entries",
     "sourceHash": "d019f9fac1e0a46af1ec67f1ed14183fca9f197873abb11aa476c671afa1958c",
     "text": "Entradas do glossário"
+  },
+  "glossary.keyboardHelp": {
+    "reviewed": true,
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+    "sourceHash": "9323c84388acc4b9de9a51f81e1c4ec6236888fecb86c6525ed28ecbe04de86a",
+    "text": "Use W/A/S/D ou Tab para navegar; A/D muda o alvo; Enter seleciona; Escape volta · Veja as habilidades das criaturas na Coleção pelo menu"
   },
   "glossary.title": {
     "reviewed": true,
@@ -1883,11 +1913,23 @@
     "sourceHash": "d41e740e576af9377d46898b1e85c63ba37e3a3961049c684a1638cf315bd04d",
     "text": "Habilidades"
   },
+  "inspection.actionHint": {
+    "reviewed": true,
+    "source": "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+    "sourceHash": "02e7fb246c404ebe9ced47c2d6584fc5eb165653dbefd658f76f280fd2bb1684",
+    "text": "Arte da ação. Passe o cursor ou foque nela para ver o nome, o custo de Mana e os efeitos finais."
+  },
   "inspection.cardDetails": {
     "reviewed": true,
     "source": "{{name}} details",
     "sourceHash": "2880eb54ec41eeb648cfc954388d47ab3d1b378256290bc3d0ae0c9b748c844c",
     "text": "Detalhes de {{name}}"
+  },
+  "inspection.creatureHint": {
+    "reviewed": true,
+    "source": "Three abilities and current passive rank. Hover or focus abilities for their details.",
+    "sourceHash": "e6960e8f45c719c92514460962066f4be1274f2e0b562b10b6038bf49fdf5bda",
+    "text": "Três habilidades e o nível passivo atual. Passe o cursor ou foque nas habilidades para ver os detalhes."
   },
   "inspection.stars": {
     "reviewed": true,
@@ -1949,11 +1991,23 @@
     "sourceHash": "8f12f7ab30cf65a98a26ccfe8d42341a35b984413d390a699a27b5850fbebd7c",
     "text": "{{name}} ganha {{amount}} de Bloqueio."
   },
+  "log.gainBuildup": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}} buildup.",
+    "sourceHash": "e519b9fc89da268b1f33513f15cd71357f235ca2bda94e4363309ceaa87f8938",
+    "text": "{{name}}: acúmulo ({{status}}) +{{amount}}."
+  },
   "log.gainMana": {
     "reviewed": true,
     "source": "Gain {{amount}} Mana.",
     "sourceHash": "90592d31d0fc1e5a0f47990396ed61df5f9c6d9117bf94a878c4aa8050607d22",
     "text": "Receba {{amount}} de Mana."
+  },
+  "log.gainStatus": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}}.",
+    "sourceHash": "68ca8b8917e65708ce62f3dc2682a0815ba3d56be1fa21b5b685f11f1f36d287",
+    "text": "{{name}}: {{status}} +{{amount}}."
   },
   "log.heal": {
     "reviewed": true,
@@ -1966,6 +2020,24 @@
     "source": "Your journey begins.",
     "sourceHash": "79c3d57a6bb5bcb5932735e932349a9386451aec513d4d8121f603913bcd305e",
     "text": "Sua jornada começa."
+  },
+  "log.removeBuildup": {
+    "reviewed": true,
+    "source": "{{name}}: Cleanse {{status}} build-up",
+    "sourceHash": "8efbc79948b98815ebac8eaf12634895c85abc97225baf3ecb0e54e27f246907",
+    "text": "{{name}}: purificação do acúmulo ({{status}})"
+  },
+  "log.removeEffect": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} {{status}}.",
+    "sourceHash": "76ea040705e3e68c96343a29f07d24d8e7864dec70f509682fa6ef4ed08e576e",
+    "text": "{{name}}: {{action}} — {{status}}."
+  },
+  "log.removeNoEffects": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} removes no effects.",
+    "sourceHash": "5da25adfbf37b81255946712c968ceedcf5a4b3be41fccb40361986684e7ece7",
+    "text": "{{name}}: {{action}} — nenhum efeito removido."
   },
   "log.turnRestored": {
     "reviewed": true,
@@ -2038,6 +2110,19 @@
     "source": "Settings",
     "sourceHash": "c817944288e8f67f488da20dbd3a5b7845a6d027284f85e660c2ea4297c85d2a",
     "text": "Configurações"
+  },
+  "menu.talentPoints": {
+    "forms": {
+      "many": "{{count}} pontos de talento disponíveis",
+      "one": "{{count}} ponto de talento disponível",
+      "other": "{{count}} pontos de talento disponíveis"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} talent point available",
+      "other": "{{count}} talent points available"
+    },
+    "sourceHash": "ae862d67f6dc6f69a5e38d71cc203276df12193838892a82306fd4f661a5f183"
   },
   "menu.talents": {
     "reviewed": true,
@@ -2189,6 +2274,12 @@
     "sourceHash": "eafb5d0a22ee6ba09777398c4dcf5359be577b713be30bde1eda73bcd0247e4a",
     "text": "Escolha um substituto"
   },
+  "overlay.replacementHelp": {
+    "reviewed": true,
+    "source": "Choose a living backup for your knocked-out creature",
+    "sourceHash": "ebe4e475105ee0caf65454a1e0f942731274ba425321d08078c75ba210e6f5ec",
+    "text": "Escolha uma criatura viva da reserva para substituir sua criatura fora de combate"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -2333,6 +2424,12 @@
     "sourceHash": "f466a9e1d9efdd9526a17af6f3d939cc291cd538075e6371e677e567e4f41942",
     "text": "{{summary}}, {{details}}"
   },
+  "progress.keywordLevel": {
+    "reviewed": true,
+    "source": "{{keyword}} level {{level}} progress",
+    "sourceHash": "7e42b717df66f9a17f51388da8a1f5078205451ab3ec12cdb3f93d0424cc844a",
+    "text": "Progresso de {{keyword}}, nível {{level}}"
+  },
   "progress.keywordXpEarned": {
     "reviewed": true,
     "source": "Keyword XP earned",
@@ -2344,6 +2441,18 @@
     "source": "Lv {{level}}",
     "sourceHash": "f6399a44519f633a673032199232124c76173c635fcba6d0365db5adac4a7622",
     "text": "Nv. {{level}}"
+  },
+  "recovery.display": {
+    "reviewed": true,
+    "source": "Fauna could not display this screen; trying again…",
+    "sourceHash": "a253677c80d21e2d9b0b46a8d66e83fef7ae6455c3ac5d6702366e45196d3cd5",
+    "text": "Fauna não conseguiu exibir esta tela; tentando novamente…"
+  },
+  "recovery.save": {
+    "reviewed": true,
+    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
+    "sourceHash": "90e977afe4eb8693ccd1b2b8be4aecf3188716f4933aafc89ef3bb18894449e1",
+    "text": "Não é possível salvar o progresso agora; mantenha Fauna aberto enquanto tenta novamente"
   },
   "recruit.chooseTeam": {
     "reviewed": true,
@@ -2735,6 +2844,12 @@
     "sourceHash": "b02577ef484df526c381144a643c8918ca7a88d87b4427decac893c237be43a8",
     "text": "Talentos de {{keyword}}"
   },
+  "talents.detailTitle": {
+    "reviewed": true,
+    "source": "{{keyword}} · {{name}}",
+    "sourceHash": "d25aa3127068dab9408451b413433caf9f830de31dc99c2c657b80afafa9f263",
+    "text": "{{keyword}} · {{name}}"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
@@ -2746,6 +2861,19 @@
     "source": "Talent pages",
     "sourceHash": "b21139ea56b31736accf5611d4913dfddab28e08c700fe78c8c796316a11b9fd",
     "text": "Páginas de talentos"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "many": "{{count}} pontos disponíveis",
+      "one": "{{count}} ponto disponível",
+      "other": "{{count}} pontos disponíveis"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    },
+    "sourceHash": "07ab0ebd4159f4997527f0bc3affc0bdbb0f99c9ac23bce58b070fa91a828d3b"
   },
   "talents.requiresPoint": {
     "reviewed": true,

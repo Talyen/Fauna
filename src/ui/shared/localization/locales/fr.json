@@ -629,6 +629,12 @@
     "sourceHash": "3168d79e09a86b43fd7a94bcd20da10f0a14f84e894f4b55bcd00f92f6b7bab7",
     "text": "EXP de mots-clés"
   },
+  "content.glossary.keyword.armor.definition.rule": {
+    "reviewed": true,
+    "source": "Reduce incoming <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage after <keyword2>Block</keyword2>; lose {{value0}} stack when <keyword3>Armor</keyword3> reduces damage",
+    "sourceHash": "67b4dde4475f0594eccc157a1d5c9076620d0400ce0ff30acca9ea0dec5b1404",
+    "text": "Réduit les dégâts de type <keyword0>Physique</keyword0> et <keyword1>Étourdissement</keyword1> reçus après le <keyword2>Blocage</keyword2> ; perd {{value0}} cumul lorsque l’<keyword3>Armure</keyword3> réduit des dégâts"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
@@ -646,6 +652,18 @@
     "source": "Remove harmful effects from an ally",
     "sourceHash": "577247ef0e441f0e1e361fef07fa3338c0e9002ee7184ec58a622aaee7ea593c",
     "text": "Retire les effets néfastes d’un allié"
+  },
+  "content.glossary.keyword.criticalHit.definition.rule": {
+    "reviewed": true,
+    "source": "An attack that deals double damage",
+    "sourceHash": "b41c1e40d42f6f8fbbc358fe5498bf628bdf7b58f1f8df70a9edff61fd932b61",
+    "text": "Une attaque qui inflige le double de dégâts"
+  },
+  "content.glossary.keyword.light.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "0ccdb288626c953c14e40659793745c92f85e1490f84979258f7c5dda3037798",
+    "text": "Dégâts de <keyword0>Lumière</keyword0> ; n’implique aucune résistance ni aucun effet de statut"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,
@@ -2021,11 +2039,23 @@
     "sourceHash": "78bc2f722bb0af1f795f5210b19a884efe0d05395368b4fb6b00db8df8064a0d",
     "text": "{{name}} gagne {{amount}} Blocage."
   },
+  "log.gainBuildup": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}} buildup.",
+    "sourceHash": "61640b33f99a807ade58806f9f8f7fbdc196acd12eca61e0858e9a6c6023b3e1",
+    "text": "{{name}} : accumulation ({{status}}) +{{amount}}."
+  },
   "log.gainMana": {
     "reviewed": true,
     "source": "Gain {{amount}} Mana.",
     "sourceHash": "c986ab4b3632640d313e94d2fd533a62e7197135f371255356c42f93dc2392e9",
     "text": "Gagnez {{amount}} Mana."
+  },
+  "log.gainStatus": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}}.",
+    "sourceHash": "89ac57ba7243e3789ab90b696defd9ae005b6893985715ddd85971e78ca52838",
+    "text": "{{name}} : {{status}} +{{amount}}."
   },
   "log.heal": {
     "reviewed": true,
@@ -2038,6 +2068,24 @@
     "source": "Your journey begins.",
     "sourceHash": "f580068ba34cded602012ebc7a05e42e46b50d90c10ed91f102af630c171f10a",
     "text": "Votre voyage commence."
+  },
+  "log.removeBuildup": {
+    "reviewed": true,
+    "source": "{{name}}: Cleanse {{status}} build-up",
+    "sourceHash": "33fe39db99029eee1ca6dac2ad411dfe4a06de204f3a1a499428de2426e1934a",
+    "text": "{{name}} : purification du cumul ({{status}})"
+  },
+  "log.removeEffect": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} {{status}}.",
+    "sourceHash": "f70b915069bfdf44d30f943ee97b55134c025cca75c98e1807fb40ae9f653db0",
+    "text": "{{name}} : {{action}} — {{status}}."
+  },
+  "log.removeNoEffects": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} removes no effects.",
+    "sourceHash": "83626e7eb2d2f70e21238932f1774ff5f4285a6893ae59e72d7d5b03fd0b3d96",
+    "text": "{{name}} : {{action}} — aucun effet retiré."
   },
   "log.turnRestored": {
     "reviewed": true,

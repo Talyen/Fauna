@@ -69,6 +69,7 @@ import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import french from "../../../src/ui/shared/localization/locales/fr.json";
+import russian from "../../../src/ui/shared/localization/locales/ru.json";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { Keyword } from "../../../src/ui/shared/keyword-text";
 import { CreatureCard } from "../../../src/ui/shared/cards/cards";
@@ -109,6 +110,16 @@ it("selects locale plural forms and falls back when source or placeholders are s
   expect(reader.message("stale", "New {{name}}", { name: "Fauna" })).toBe("New Fauna");
   expect(reader.message("broken", "Hello {{name}}", { name: "Fauna" })).toBe("Hello Fauna");
   expect(reader.plural("points", { ...source, other: "{{count}} new points" }, 2)).toBe("2 new points");
+});
+
+it("uses the reviewed Russian talent point forms for singular, few and many counts", () => {
+  const reader = createMessageReader("ru", russian);
+  const source = { one: "{{count}} talent point available", other: "{{count}} talent points available" };
+  expect([1, 2, 5].map((count) => reader.plural("menu.talentPoints", source, count))).toEqual([
+    "Доступно 1 очко таланта",
+    "Доступно 2 очка таланта",
+    "Доступно 5 очков таланта",
+  ]);
 });
 
 it("translates recognized combat announcements and preserves unfamiliar event text", () => {
@@ -164,6 +175,80 @@ it("translates turn and Mana announcements without inventing their values", () =
   expect(eventPresentation(game, { kind: "turn", text: "Turn 4. 3 Mana restored!" }, reader)).toBe(
     "Turn 4. 3 Mana restored!",
   );
+});
+
+it("distinguishes gained status stacks from Stun or Freeze buildup", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const name = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    "log.gainStatus": {
+      source: "{{name}} gains {{amount}} {{status}}.",
+      text: "{{name}} : {{status}} +{{amount}}.",
+    },
+    "log.gainBuildup": {
+      source: "{{name}} gains {{amount}} {{status}} buildup.",
+      text: "{{name}} : accumulation ({{status}}) +{{amount}}.",
+    },
+  });
+  const burn = {
+    kind: "status" as const,
+    targetId: target.id,
+    status: "burn" as const,
+    outcome: "gain" as const,
+    amount: 3,
+    text: `${name} gains 3 burn.`,
+  };
+  const stun = { ...burn, status: "stun" as const, text: `${name} gains 3 stun buildup.` };
+  expect(eventPresentation(game, burn, reader)).toBe(`${name} : Brûlure +3.`);
+  expect(eventPresentation(game, stun, reader)).toBe(`${name} : accumulation (Étourdissement) +3.`);
+  expect(eventPresentation(game, { ...stun, text: `${name} gains 3 stun.` }, reader)).toBe(
+    `${name} : Étourdissement +3.`,
+  );
+  expect(eventPresentation(game, { ...stun, amount: 2 }, reader)).toBe(stun.text);
+  expect(eventPresentation(game, stun, createMessageReader("en", {}))).toBe(stun.text);
+});
+
+it("distinguishes removed effects, empty removals and cleansed buildup", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const name = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    "log.removeEffect": {
+      source: "{{name}}: {{action}} {{status}}.",
+      text: "{{name}} : {{action}} — {{status}}.",
+    },
+    "log.removeNoEffects": {
+      source: "{{name}}: {{action}} removes no effects.",
+      text: "{{name}} : {{action}} — aucun effet retiré.",
+    },
+    "log.removeBuildup": {
+      source: "{{name}}: Cleanse {{status}} build-up",
+      text: "{{name}} : purification du cumul ({{status}})",
+    },
+  });
+  const removed = {
+    kind: "status" as const,
+    targetId: target.id,
+    status: "cleanse" as const,
+    affectedStatus: "burn" as const,
+    outcome: "remove" as const,
+    text: `${name}: Cleanse burn.`,
+  };
+  const buildup = { ...removed, affectedStatus: "stun" as const, text: `${name}: Cleanse Stun build-up` };
+  const none = {
+    ...removed,
+    affectedStatus: undefined,
+    amount: 0,
+    text: `${name}: Cleanse removes no effects.`,
+  };
+  expect(eventPresentation(game, removed, reader)).toBe(`${name} : Purification — Brûlure.`);
+  expect(eventPresentation(game, buildup, reader)).toBe(`${name} : purification du cumul (Étourdissement)`);
+  expect(eventPresentation(game, none, reader)).toBe(`${name} : Purification — aucun effet retiré.`);
+  expect(eventPresentation(game, { ...removed, text: "Special cleanse" }, reader)).toBe("Special cleanse");
+  expect(eventPresentation(game, removed, createMessageReader("en", {}))).toBe(removed.text);
 });
 
 it("changes menu messages and accessible counts without replacing the focused action", () => {

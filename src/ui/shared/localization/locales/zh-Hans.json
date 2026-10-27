@@ -581,6 +581,12 @@
     "sourceHash": "13cd1211886d48bb7b0c3d392909b923ee5a6891825ce2e9910e9d6d136127d8",
     "text": "关键词经验"
   },
+  "content.glossary.keyword.armor.definition.rule": {
+    "reviewed": true,
+    "source": "Reduce incoming <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage after <keyword2>Block</keyword2>; lose {{value0}} stack when <keyword3>Armor</keyword3> reduces damage",
+    "sourceHash": "a9dcdd315fb4f6efa32357f2a28c9ae247ce2502ce190a09cc4e5c576e0a9834",
+    "text": "在<keyword2>格挡</keyword2>之后减少受到的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>伤害；<keyword3>护甲</keyword3>减少伤害时失去{{value0}}层"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
@@ -598,6 +604,18 @@
     "source": "Remove harmful effects from an ally",
     "sourceHash": "dc0dcbc79326ede174d0a91d6cd9b003f27ff4a722d870efecddf32ef1b44510",
     "text": "移除一名盟友的有害效果"
+  },
+  "content.glossary.keyword.criticalHit.definition.rule": {
+    "reviewed": true,
+    "source": "An attack that deals double damage",
+    "sourceHash": "da7f98a1566964e4100eb4dd9be6c4f91b012873a70fedf61f9cc471168dff58",
+    "text": "造成双倍伤害的攻击"
+  },
+  "content.glossary.keyword.light.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "7dd4a542f4b98d378c045940a9e28125cfeaa0ebd6e37df4dd1e774573844c38",
+    "text": "<keyword0>光</keyword0>伤害；不代表具有抗性或状态效果"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,
@@ -1865,11 +1883,23 @@
     "sourceHash": "0c7d92f4c4d00423b12f630ab67ca477079db086fc187b7447382ae74ec8a284",
     "text": "上场战斗的收益"
   },
+  "glossary.controllerHelp": {
+    "reviewed": true,
+    "source": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu",
+    "sourceHash": "d31a24dd081016fc5aa5fad220917c7639dfb330ee2755c209822704a59820b9",
+    "text": "使用方向键或左摇杆导航；{{confirm}}选择；{{back}}返回；{{endTurn}}结束回合 · 从菜单中的收藏查看生物能力"
+  },
   "glossary.entries": {
     "reviewed": true,
     "source": "Glossary entries",
     "sourceHash": "062ee016bb5ef45aca46790f7d8c5fdda4b514e5916abf47cfc623ddb3cbc2a4",
     "text": "词汇表条目"
+  },
+  "glossary.keyboardHelp": {
+    "reviewed": true,
+    "source": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu",
+    "sourceHash": "d827a2050aa7535dcb3c9199b63ac5901e26fdca991cf5e53a7190445df270a7",
+    "text": "使用W/A/S/D或Tab导航；A/D切换目标；Enter选择；Escape返回 · 从菜单中的收藏查看生物能力"
   },
   "glossary.title": {
     "reviewed": true,
@@ -1883,11 +1913,23 @@
     "sourceHash": "ba1564b54565c8a61c83b5b54617ef2d678be6c5c9ec0f723ef4098dbb341c6d",
     "text": "能力"
   },
+  "inspection.actionHint": {
+    "reviewed": true,
+    "source": "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+    "sourceHash": "ad6c4d74f21420d9af329fc604b39056a6886ca6d3cdc1e7c7250c80652e9c9b",
+    "text": "行动插画。将指针悬停或聚焦以查看名称、法力消耗和最终效果。"
+  },
   "inspection.cardDetails": {
     "reviewed": true,
     "source": "{{name}} details",
     "sourceHash": "2c1418240de383db98769ec3c8a0575bb511a69506eb6dbe9008e8696e85ada6",
     "text": "{{name}}详情"
+  },
+  "inspection.creatureHint": {
+    "reviewed": true,
+    "source": "Three abilities and current passive rank. Hover or focus abilities for their details.",
+    "sourceHash": "a1d70dba9f3dc6b281c521e617de6ea82af333c5560df05466842dde4345e5b1",
+    "text": "三项能力及当前被动等级。将指针悬停或聚焦于能力以查看详情。"
   },
   "inspection.stars": {
     "reviewed": true,
@@ -1949,11 +1991,23 @@
     "sourceHash": "b3e955c2f3af820229ddaa6441b3f4b4ad5c69a38bcbd1b767cf7d41649324af",
     "text": "{{name}}获得了{{amount}}点格挡。"
   },
+  "log.gainBuildup": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}} buildup.",
+    "sourceHash": "a0c58fb3802dff653219fcfa5d0d6c00cde1e8569fc2b99c6fde1d050f188d5e",
+    "text": "{{name}}：{{status}}积累 +{{amount}}。"
+  },
   "log.gainMana": {
     "reviewed": true,
     "source": "Gain {{amount}} Mana.",
     "sourceHash": "e8fce4485ff73f81d316395b816ac572dfd5493c5dfeb26e421739d47218a6d8",
     "text": "获得{{amount}}点法力。"
+  },
+  "log.gainStatus": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}}.",
+    "sourceHash": "fc15b9c726d53b31bf5c2368ba074819581dc7bc291fab7e1ae473670339a3ae",
+    "text": "{{name}}：{{status}} +{{amount}}。"
   },
   "log.heal": {
     "reviewed": true,
@@ -1966,6 +2020,24 @@
     "source": "Your journey begins.",
     "sourceHash": "107054dc236a3ea5f1859203b6f0c5c609e38c7f2ec72d0d144bcc2f1344591d",
     "text": "你的旅程开始了。"
+  },
+  "log.removeBuildup": {
+    "reviewed": true,
+    "source": "{{name}}: Cleanse {{status}} build-up",
+    "sourceHash": "ce9f0241dbac07dac0565a5a1720b7a7c25cd4d9f4f07cc697b5ef797833938e",
+    "text": "{{name}}：净化积累（{{status}}）"
+  },
+  "log.removeEffect": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} {{status}}.",
+    "sourceHash": "6f6837bbe755251b0751637f50b322b5af5b1afecf28700759612d658049fecc",
+    "text": "{{name}}：{{action}} — {{status}}。"
+  },
+  "log.removeNoEffects": {
+    "reviewed": true,
+    "source": "{{name}}: {{action}} removes no effects.",
+    "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
+    "text": "{{name}}：{{action}} — 未移除任何效果。"
   },
   "log.turnRestored": {
     "reviewed": true,
@@ -2038,6 +2110,17 @@
     "source": "Settings",
     "sourceHash": "262699dba3aa49fe023fba30ae4885b7b1c994d963b3c697c2afa9dc07392ad6",
     "text": "设置"
+  },
+  "menu.talentPoints": {
+    "forms": {
+      "other": "可用天赋点：{{count}}"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} talent point available",
+      "other": "{{count}} talent points available"
+    },
+    "sourceHash": "96fcb927d20dba258931488826dadc35266da7ce348a5347a3261844b5963d4c"
   },
   "menu.talents": {
     "reviewed": true,
@@ -2189,6 +2272,12 @@
     "sourceHash": "b73f4363337dbaaedd9f9b31d5b9d876c0b96811e6de7b4bf529d7e001d407ac",
     "text": "选择替补"
   },
+  "overlay.replacementHelp": {
+    "reviewed": true,
+    "source": "Choose a living backup for your knocked-out creature",
+    "sourceHash": "b662b371db543b8b96635015567df8760d34e96d21bb617967663312c2ed84d3",
+    "text": "为已倒下的生物选择一名仍存活的替补"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -2333,6 +2422,12 @@
     "sourceHash": "d990598c98d5a55e83f9dfcfef2a61ebcde74eb19725c98425b1a81260a62b4d",
     "text": "{{summary}}，{{details}}"
   },
+  "progress.keywordLevel": {
+    "reviewed": true,
+    "source": "{{keyword}} level {{level}} progress",
+    "sourceHash": "3baae94db2490b99c7412c730ad805f381358fbb67d2d45d50fd40806890a70e",
+    "text": "{{keyword}}等级{{level}}进度"
+  },
   "progress.keywordXpEarned": {
     "reviewed": true,
     "source": "Keyword XP earned",
@@ -2344,6 +2439,18 @@
     "source": "Lv {{level}}",
     "sourceHash": "c001a97226b5aeb23c58411c17b46f27fef50b1ea7c794189b8254177c2adc42",
     "text": "等级 {{level}}"
+  },
+  "recovery.display": {
+    "reviewed": true,
+    "source": "Fauna could not display this screen; trying again…",
+    "sourceHash": "21227b26da5fca3667002f8b3dcef0400b4e1d590487bc626ee0f2d1621f177a",
+    "text": "Fauna无法显示此画面，正在重试…"
+  },
+  "recovery.save": {
+    "reviewed": true,
+    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
+    "sourceHash": "aaa6a491890a118184d9d92bfed6345adea7ac21744c8f8ac92bce4f5965a566",
+    "text": "目前无法保存进度；请在重试期间保持Fauna运行"
   },
   "recruit.chooseTeam": {
     "reviewed": true,
@@ -2735,6 +2842,12 @@
     "sourceHash": "343c5cdab929710001e9a9ac1a8338dbacebd87c3af64f5e8819098e3a627059",
     "text": "{{keyword}}天赋"
   },
+  "talents.detailTitle": {
+    "reviewed": true,
+    "source": "{{keyword}} · {{name}}",
+    "sourceHash": "ee5865e754e46d719c08a815ed5905785f1f4cf8af1191b168d0ab59b50bd7d5",
+    "text": "{{keyword}} · {{name}}"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
@@ -2746,6 +2859,17 @@
     "source": "Talent pages",
     "sourceHash": "c2b405f5d4d966798dcca39203203a055a5dad22fae6c63dc8c91c2b8ebdd278",
     "text": "天赋页面"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "other": "可用点数：{{count}}"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    },
+    "sourceHash": "73ace21cad8878f130aacca9872b47b1ba864ce4cfec1c7d1e86d90d14e1fccc"
   },
   "talents.requiresPoint": {
     "reviewed": true,
