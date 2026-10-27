@@ -401,6 +401,12 @@
     "sourceHash": "4a8df0bd03fd4e93dc14fdc698c63bdf32f15079dc9ec9c4ebc6b08809c34f27",
     "text": "荆棘球拍"
   },
+  "content.boon.briar-racquet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliates at half strength when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "9a1203c418dd892a3e613dc4917dcfa4e4ced335a42a0da5587929b43c9b4927",
+    "text": "<keyword1>闪避</keyword1>时，<keyword0>荆棘</keyword0>以一半威力反击"
+  },
   "content.boon.brookskip-disc.name": {
     "reviewed": true,
     "source": "Brookskip Disc",
@@ -448,6 +454,12 @@
     "source": "Comb Uncapping Fork",
     "sourceHash": "3ad014a963a54536f496c870928bc6581b5ebf70cc82c9734fe7202e9771c551",
     "text": "蜂巢开盖叉"
+  },
+  "content.boon.comb-uncapping-fork.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "801c58ef060e93d6f7c63d505d6af2225a3cecc46399278651bc5f3e75da7c8b",
+    "text": "<keyword0>荆棘</keyword0>伤害无视敌人的<keyword1>格挡</keyword1>"
   },
   "content.boon.comet-crucible.name": {
     "reviewed": true,
@@ -604,6 +616,12 @@
     "source": "Fern Fencing Foil",
     "sourceHash": "0929abbe3581c4dbcb7a4d7d2771fbf27597e4991e23b918f49c0d9bfe57499f",
     "text": "蕨叶花剑"
+  },
+  "content.boon.fern-fencing-foil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> an attack <keyword1>Purges</keyword1> its attacker",
+    "sourceHash": "3b8544c0c21406015fece9c2730b04fe269a50794c2d3c912ed1949da83b8a98",
+    "text": "<keyword0>闪避</keyword0>攻击时对攻击者施加<keyword1>驱散</keyword1>"
   },
   "content.boon.field-lunch-basket.name": {
     "reviewed": true,
@@ -1121,6 +1139,12 @@
     "sourceHash": "5538de458828fd8a7e29cda2e7712722bbdf8d3e0bf7679a94a6c433d4fc2fba",
     "text": "根跃长杖"
   },
+  "content.boon.rootvault-pole.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "8f804a6461b253ba19da5a8b9549933f079e0242fa0492639e74c43a98f5fc71",
+    "text": "盟友可以<keyword0>闪避</keyword0><keyword1>荆棘</keyword1>伤害"
+  },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
     "source": "Saddle Pouch",
@@ -1174,6 +1198,12 @@
     "source": "Star Hoop",
     "sourceHash": "b00597dc408897ca23701ef7d461efbb2cd0384d5b750c8700e186b0bfc8387a",
     "text": "星环"
+  },
+  "content.boon.star-hoop.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0> also returns enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "481bd6b8fd01ca51bdbede42f95591540d457e0ed1b7caebe08e61fad7c68e71",
+    "text": "<keyword0>反射</keyword0>也会返还敌人的<keyword1>驱散</keyword1>"
   },
   "content.boon.stardust-whetstone.name": {
     "reviewed": true,
@@ -1361,6 +1391,12 @@
     "sourceHash": "dbd9b0095db45ddbdf7f4f3d1a197e09ab1848a43665a0d6f8a1abd856baee24",
     "text": "准确航向"
   },
+  "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
+    "sourceHash": "b54c0239a66e75b1e8175229c5245ea65aeff140faa2aba97bea70191ab504c5",
+    "text": "抽取卡牌：{{value0}}张 / <keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1>"
+  },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
     "source": "Voyager’s Rest",
@@ -1378,6 +1414,18 @@
     "source": "Autumn Insight",
     "sourceHash": "3ecf97689ac320155571131fbc81317418537de88f5680de69a72cf1ece0e446",
     "text": "秋日洞见"
+  },
+  "content.card.almanelle-autumn-insight.v5c614afcf117a1a3.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card to your hand; Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "26edb7ef515334ba8b2d3d23bb4ccd7d3e29b995d4c747f30972f1e6ed491366",
+    "text": "将一张随机弃牌移回手牌; 为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.card.almanelle-autumn-insight.v8fc02c0827722882.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to a living ally",
+    "sourceHash": "14ba7dff99c1943de9e127425f9bb99c59bb7c5750d7cd047c191f656530048a",
+    "text": "为一名存活盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.almanelle-rooted-year.name": {
     "reviewed": true,
@@ -1457,11 +1505,29 @@
     "sourceHash": "c4f37ecba981948e79e8bfc0507eb43b69df58471d965e1150bd540acda4d72f",
     "text": "春之跃"
   },
+  "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
+    "sourceHash": "cdc55784f4f7a189a9a81ba35df35a06fe6646fb6ddc584b2163483cccd7cc89",
+    "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累 / 获得{{value0}}%<keyword2>闪避</keyword2>直至下一回合"
+  },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
     "source": "Bloom Cradle",
     "sourceHash": "defa35de9f4840bd5238ba210a8b70359ef63b263ed2fd444d8a9a0c9dac4116",
     "text": "花之摇篮"
+  },
+  "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
+    "sourceHash": "a87e6b5f0e13bb4530ae5554c61ab7a5dca55b6638f1569bbbe76f99f942a7ba",
+    "text": "抽取卡牌：{{value0}}张; 恢复{{value1}}点<keyword0>生命</keyword0>"
+  },
+  "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
+    "sourceHash": "56108484c746257e9f7bd8451644d48e42fe5a470dc910ca286906b9a5860b01",
+    "text": "抽取卡牌：{{value0}}张; 恢复{{value1}}点<keyword0>生命</keyword0>"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1487,11 +1553,23 @@
     "sourceHash": "c9b777a36d1ca50c86950ca11af8c45b97b387a707a7bc31f38a1790e6aa8b12",
     "text": "花瓣帷幕"
   },
+  "content.card.bloomquail-heal.va7a85fefe08f7215.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "2e31ddec3aff7aab34bdc0e2d2b315733a009569d0b686e8023538a5ec38c790",
+    "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
     "sourceHash": "506c68c86633d1c223ad974c01e254d92f5810202ba9b9bb13e9299d2a972aaf",
     "text": "回声铭记"
+  },
+  "content.card.cadenza-echoes-remember.v3324bab9bb719461.rule": {
+    "reviewed": true,
+    "source": "Return a random discarded card from a living ally to your hand",
+    "sourceHash": "1500fc037ffa923e60ce9eddad1cb39e587c4a7644f49e7a731f247e09b908a1",
+    "text": "将一名存活盟友的随机弃牌移回手牌"
   },
   "content.card.cadenza-resonant-well.name": {
     "reviewed": true,
@@ -1529,17 +1607,41 @@
     "sourceHash": "45b0b6867a72153e045e004000de2b30d50e7ad9da797e3ca062565a83e58699",
     "text": "振奋叠句"
   },
+  "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "49b2af9aec46dc5e8c633a6785ac3c53da7daf48f1fdb06ddb0d458cc79fc67f",
+    "text": "所有盟友获得{{value0}}%<keyword0>闪避</keyword0>，持续至你的下一回合"
+  },
+  "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "d746605737b454d4302fab5faeea5267a7fedc2ef6631b730fabbf0d7494d17c",
+    "text": "所有盟友获得{{value0}}%<keyword0>闪避</keyword0>，持续至你的下一回合; 抽取{{value1}}张卡牌"
+  },
   "content.card.captoad-attack.name": {
     "reviewed": true,
     "source": "Spore Puff",
     "sourceHash": "466d458141bd4a55e48b50b587f9a384d6037793c0a0bd09bb516866f437eafd",
     "text": "孢子轻喷"
   },
+  "content.card.captoad-attack.vc151c39d7f9d54da.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Poison</keyword0> damage to all enemies",
+    "sourceHash": "26dafcda3878f0a6a6370f864bf524f54efe963b898c7a45ac47be38b39309f0",
+    "text": "对所有敌人造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
   "content.card.captoad-guard.name": {
     "reviewed": true,
     "source": "Mushroom Guard",
     "sourceHash": "14b3c4d8d74b82a5c5fd1a64391dcb0b0032d0177b921bdd9a468cf7144bcc7e",
     "text": "蘑菇守护"
+  },
+  "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
+    "sourceHash": "85fdc111a4cba5b48f33c007b1b73b2240c7840b85179fe3004b7eeb7e3cc21b",
+    "text": "获得{{value0}}点<keyword0>格挡</keyword0>; 恢复{{value1}}点<keyword1>生命</keyword1>"
   },
   "content.card.captoad-swap.name": {
     "reviewed": true,
@@ -1583,11 +1685,23 @@
     "sourceHash": "210bd199abdf77090d11135fad92e9f0b6e213ec9590000cea407f078f56b8e8",
     "text": "摇篮曲漂流"
   },
+  "content.card.chimecricket-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "72ba3a11d6b7d6880ca47f05b58a621b024cad1a07dac0e882e10fe16d407230",
+    "text": "为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>净化</keyword1>被<keyword2>治疗</keyword2>的盟友"
+  },
   "content.card.chimecricket-nullify.name": {
     "reviewed": true,
     "source": "Hush Dome",
     "sourceHash": "8eb3775e35708caa9e644f1d6fda395d60586af6188785bad16e6241a5c2264b",
     "text": "静谧穹顶"
+  },
+  "content.card.chimecricket-nullify.ve5613f0f4b0578e3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> the next harmful status effect on each ally",
+    "sourceHash": "ea60c877d50421741a9aa6c4dacce997f4377fefb1638c63499ad8b787fbb899",
+    "text": "<keyword0>无效化</keyword0>每名盟友受到的下一个有害状态效果"
   },
   "content.card.cindernewt-ashen-veil.name": {
     "reviewed": true,
@@ -1595,11 +1709,23 @@
     "sourceHash": "aefbd0a56aff642fac490df432813ad0014cca17ebe6b16654acf8d46b52e4fe",
     "text": "灰烬帷幕"
   },
+  "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "c391f0c9909de43145a31f3c55f6757b2ad749ee49250d8f9cad32cf06745d5b",
+    "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.cindernewt-attack.name": {
     "reviewed": true,
     "source": "Cinder Lash",
     "sourceHash": "1b21a9a9392ab0174e7c6ccea040f1b55f9505c8942bebd1e5b0362d68446dd8",
     "text": "余烬鞭"
+  },
+  "content.card.cindernewt-attack.v8a9e58b96297deb6.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> or <keyword1>Burn</keyword1> damage at random",
+    "sourceHash": "11cd8d48add9d0bfcf556f2a4ab473f34195d6bc198ea19715dd496cb2cfb48b",
+    "text": "随机造成{{value0}}点<keyword0>物理</keyword0>或<keyword1>灼烧</keyword1>伤害"
   },
   "content.card.cindernewt-ember-breath.name": {
     "reviewed": true,
@@ -1612,6 +1738,12 @@
     "source": "Reef Jet",
     "sourceHash": "4be5774136237d02b271cc3eabeadccdde33a7698d6f7fde973ad5c801ae13bc",
     "text": "礁石喷流"
+  },
+  "content.card.coralcurl-attack.vb9f6d31e9a6d68a5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "68ea20d29e2babc1e7633aa00ae5c53fd6c73352fed94f5b686575c178968aba",
+    "text": "造成{{value0}}点<keyword0>水</keyword0>伤害"
   },
   "content.card.coralcurl-guard.name": {
     "reviewed": true,
@@ -1631,11 +1763,23 @@
     "sourceHash": "14110428b0fe2175c568646b751e4edecadd896bc3cf8ca2e9a2187af7c96634",
     "text": "珊瑚旋舞"
   },
+  "content.card.coralcurl-swap.v74bd870a34ed2d33.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; <keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "89c02cf12984c4907dcb98e57c7e285cbb92e6d9994d456d0ed8b938550013a5",
+    "text": "与一名随机后备交换; <keyword0>致盲</keyword0>所有敌人"
+  },
   "content.card.dawncall-attack.name": {
     "reviewed": true,
     "source": "Sunwing Sweep",
     "sourceHash": "d830650fdc7b93151d3399bb71c9a3e5f8df371a084ea6366ef4ee5705ce46b6",
     "text": "日翼横扫"
+  },
+  "content.card.dawncall-attack.v207aea3bff659874.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies",
+    "sourceHash": "24b16891034f83ff281fc239974dac765ce280a686fe31d7bf14753b6f5bb16e",
+    "text": "对所有敌人造成{{value0}}点<keyword0>光</keyword0>伤害"
   },
   "content.card.dawncall-heal.name": {
     "reviewed": true,
@@ -1655,11 +1799,41 @@
     "sourceHash": "41427c50c017d2339e1a339afa54977df1d0f8f84979e52903051ee27ab0d139",
     "text": "黎明之鸣"
   },
+  "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
+    "sourceHash": "e7ceda2c0d0d05f5f08ba1fa38fbef5fb26fe59cd6735af94b0f38a879b162dd",
+    "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个; 抽取{{value1}}张卡牌"
+  },
+  "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
+    "sourceHash": "1731230369ad04d69effa4730c739b624c2c6d630f3f551aaee0bbf1064a1e6b",
+    "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个"
+  },
+  "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
+    "sourceHash": "fe94b44d5ed6992ed078610627f1168bcb312636f473f1fe4092d1842bb56ac9",
+    "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个; 抽取{{value1}}张卡牌"
+  },
+  "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
+    "sourceHash": "2030d093c6a1e71ab8d9d619bef1d540fd248cace1e3910a5acec806ea421812",
+    "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个"
+  },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,
     "source": "Chapel Light",
     "sourceHash": "47e749126a215f3e7c0344940ae345da2b58a0427e5e0e216a8b5aabd5ff875d",
     "text": "礼拜堂之光"
+  },
+  "content.card.dulcera-chapel-light.v6e9990b2b0309141.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "243a4259b30807213c7d3f8ebd995fdbcfb562165c265fe20a0899a55b149e37",
+    "text": "恢复{{value0}}点<keyword0>生命</keyword0> / 获得{{value1}}点<keyword1>法力</keyword1>"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1672,6 +1846,12 @@
     "source": "Hushed Waters",
     "sourceHash": "42b8f49f656f8947ff791425e06d6028983f58bbbdc16cff2949a2a80e520468",
     "text": "静谧之水"
+  },
+  "content.card.dulcera-hushed-waters.v55329ed349ff9a93.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup / <keyword0>Cleanse</keyword0> all allies",
+    "sourceHash": "491e303aa64eaacc301abe7ee01c56d9ae723cbcacc920da44bff679f1b914d4",
+    "text": "与一名随机后备交换 / <keyword0>净化</keyword0>所有盟友"
   },
   "content.card.dulcera-meadow-shelter.name": {
     "reviewed": true,
@@ -1721,11 +1901,23 @@
     "sourceHash": "09e260e369024b34850be92984e34c32997af1164aafcd03805d82ed14589b62",
     "text": "沙丘旋风"
   },
+  "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "f819eec0182272ec28bf275ea0c26abf549fec025d0b905f9e918e9900be5db8",
+    "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.emberback-attack.name": {
     "reviewed": true,
     "source": "Ember Charge",
     "sourceHash": "34ebad272e974ddb08232089794d23b209ca6a0ccd944cd28a69578f0bd80278",
     "text": "余烬冲锋"
+  },
+  "content.card.emberback-attack.v49693240c378631b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Gain {{value1}} <keyword1>Armor</keyword1>",
+    "sourceHash": "415eafcb072e0a3effff182c76f0686fdbe17e76df441415f05824f65ac3bdee",
+    "text": "造成{{value0}}点<keyword0>物理</keyword0>伤害; 获得{{value1}}点<keyword1>护甲</keyword1>"
   },
   "content.card.emberback-furnace-breath.name": {
     "reviewed": true,
@@ -1768,6 +1960,12 @@
     "source": "Twilight Lance",
     "sourceHash": "e0390b73c45a6df7eb7e7ed3b36cbf420637a0b568de6cef436183fb68b0fbf1",
     "text": "暮光之枪"
+  },
+  "content.card.euphera-twilight-lance.v2875e3d8bb41700a.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> enemy <keyword1>Thorns</keyword1>; Deal {{value0}} <keyword2>Light</keyword2> damage",
+    "sourceHash": "e1e53d40b82dad39b751440baf19283a3265994e83b6887159a1f3160cb2942b",
+    "text": "<keyword0>驱散</keyword0>敌人的<keyword1>荆棘</keyword1>; 造成{{value0}}点<keyword2>光</keyword2>伤害"
   },
   "content.card.euphera-wish-exchange.name": {
     "reviewed": true,
@@ -1829,6 +2027,12 @@
     "sourceHash": "b1b31ce629b43461bd7e2f1cb06dc044ca9eaa3542411ef57712afdee96e78ac",
     "text": "棱镜斩"
   },
+  "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "055f4cdc32899a655aa2037dc2098ff652ad480d7f0e26a435da493b12696e24",
+    "text": "造成{{value0}}点<keyword0>光</keyword0>伤害"
+  },
   "content.card.glintstride-dodge.name": {
     "reviewed": true,
     "source": "Mirage Run",
@@ -1852,6 +2056,12 @@
     "source": "False Horizon",
     "sourceHash": "c6645afa138899f711e0d5b588f40c292b39b8a485a0f06aa4075150a84d75a6",
     "text": "虚假地平线"
+  },
+  "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "dcbfc5cdf31997e1c7c575483c0b2bcfc8c85f0ca3665b2fa48570f275455aae",
+    "text": "<keyword0>致盲</keyword0>所有敌人"
   },
   "content.card.memento-drowned-revelation.name": {
     "reviewed": true,
@@ -1877,17 +2087,35 @@
     "sourceHash": "36016743b9b3f0deccb45ffb9e364339528fc35bbd67e07c91dba2c3e11907cf",
     "text": "迷失的队列"
   },
+  "content.card.memento-lost-procession.v35ba7fe54b09d37e.rule": {
+    "reviewed": true,
+    "source": "Summon an Echo / Restore your Minions to full <keyword0>Health</keyword0>",
+    "sourceHash": "0870517128996511785a6737cbde69d9245136598a743ff6bfc3f84afb3bb96d",
+    "text": "召唤一个回响 / 将你的召唤物<keyword0>生命</keyword0>恢复至满值"
+  },
   "content.card.memento-pearl.name": {
     "reviewed": true,
     "source": "Pearl",
     "sourceHash": "68e88774b5263e7346f26741e49700eadd732424c87b1fa38a727f86e6a0a048",
     "text": "珍珠"
   },
+  "content.card.memento-pearl.vc70b8e5a38f50866.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Consume</keyword0>; Gain {{value0}} <keyword1>Block</keyword1> or {{value1}} <keyword2>Mana</keyword2> at random",
+    "sourceHash": "336b3f5791446e10d15e42b0bc0754f74d495fd2cb1b236e36978c447d156b53",
+    "text": "<keyword0>消耗</keyword0>; 随机获得{{value0}}点<keyword1>格挡</keyword1>或{{value1}}点<keyword2>法力</keyword2>"
+  },
   "content.card.memento-treasury-echo.name": {
     "reviewed": true,
     "source": "Treasury Echo",
     "sourceHash": "a68636b4a2614611b4a06765b994f5c2a693dd8445a7234413fa7e01fb2a1f3d",
     "text": "宝库回响"
+  },
+  "content.card.memento-treasury-echo.v8f9441d6fe747d99.rule": {
+    "reviewed": true,
+    "source": "Create {{value0}} Pearls",
+    "sourceHash": "383fcd33644dde5dccff4ac2374ffd0573e73e56ebaedff73175d1039fb6e059",
+    "text": "创建珍珠：{{value0}}个"
   },
   "content.card.mossguard-attack.name": {
     "reviewed": true,
@@ -1973,6 +2201,12 @@
     "sourceHash": "1bd6af1ba9065ac9da0d9d062b2e0d130ae052b71eda7249f381200680bad224",
     "text": "暗流结"
   },
+  "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
+    "sourceHash": "80bd3619521f75b5ae13195602b03facdb07736c70198b0f653aba144a1539ca",
+    "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>净化</keyword1>一个有害效果"
+  },
   "content.card.oathara-never-lost.name": {
     "reviewed": true,
     "source": "Never Lost",
@@ -2003,11 +2237,23 @@
     "sourceHash": "7939231754aee0fda3ee345e258d00f2a0b7ecc211ffbc72d1fd9a5ed50a7f27",
     "text": "归途誓言"
   },
+  "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrect</keyword0> an ally",
+    "sourceHash": "aba6b1794247a542558a8515021917e9565f6be6d17dbc7dad47a5b6db05bd22",
+    "text": "<keyword0>复活</keyword0>一名盟友"
+  },
   "content.card.orifable-attack.name": {
     "reviewed": true,
     "source": "Postal Swarm",
     "sourceHash": "ec6f42dbbcbc1183241e6ed189807e7f14afd2deb9df436fc0d6d5935f41e5c8",
     "text": "邮递群舞"
+  },
+  "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "b010fceda30973c10fc722e9856465ee2a7d4baf8bf5f5bed6daf0c48ad187c4",
+    "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
   "content.card.orifable-createFood.name": {
     "reviewed": true,
@@ -2068,6 +2314,12 @@
     "source": "Whiteout Waltz",
     "sourceHash": "0ebf6192f6c608970958fc7085bb4bacc6596f5bc0815a9168c15883ee7cad4e",
     "text": "白茫华尔兹"
+  },
+  "content.card.parhelion-whiteout-waltz.v1b4ff858f79fede5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "d8775074769294632903edcc3d599b88bcb453372713f61e7807cc27896a1a3a",
+    "text": "造成{{value0}}点<keyword0>冻结</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
   },
   "content.card.pollenmoth-attack.name": {
     "reviewed": true,
@@ -2147,6 +2399,18 @@
     "sourceHash": "19baae80a6583ad86901ad705bb368a9d73ee3c91f83ec15015693b317b59d4d",
     "text": "余烬收获"
   },
+  "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "faf4071e61d9277e16e4b45e5c86b46d69a2a450632b3e35fb1dc1954ad98921",
+    "text": "恢复{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.pyrella-ember-harvest.v704e477933ed72d0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0> / Draw a <keyword1>Burn</keyword1> card",
+    "sourceHash": "c83350a437a2efc54583f964a0cbf6f3fd781f7794b657afa2ffb43ca7c0d01e",
+    "text": "恢复{{value0}}点<keyword0>法力</keyword0> / 抽取一张<keyword1>灼烧</keyword1>卡牌"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2171,6 +2435,12 @@
     "sourceHash": "00d78a28337f8a954f512fe86076e1cefaa1fbd242eddabcf036dbdc26605f59",
     "text": "芦苇冲刺"
   },
+  "content.card.reedstag-attack.vaf3db517079be41f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
+    "sourceHash": "131fe7393623d4ad1d8e7e2ce2268a2bf522f3f036f300f2d7647f188c70a4fc",
+    "text": "造成{{value0}}点<keyword0>自然</keyword0>伤害"
+  },
   "content.card.reedstag-guard.name": {
     "reviewed": true,
     "source": "Reed Shelter",
@@ -2189,6 +2459,12 @@
     "sourceHash": "856498399db8a630ff482899c90b4fec6fcb8e3f23229fecad545ddb503bb7e4",
     "text": "修复之泉"
   },
+  "content.card.reedstag-heal.vb2e7dfe3fd2cc383.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally; <keyword1>Cleanse</keyword1> the <keyword2>healed</keyword2> ally",
+    "sourceHash": "4d84b3f965f944bd542329c775d0d38bc8bc671e514bd0f120bef98d29cfc05d",
+    "text": "为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>净化</keyword1>被<keyword2>治疗</keyword2>的盟友"
+  },
   "content.card.reverie-dream-double.name": {
     "reviewed": true,
     "source": "Dream Double",
@@ -2200,6 +2476,12 @@
     "source": "Nightmare Harvest",
     "sourceHash": "6a98f474b628d97a7c24bc6e19ed09e9c639bf8583265b19d6704d1681019883",
     "text": "噩梦收获"
+  },
+  "content.card.reverie-nightmare-harvest.v0613e30a478ed80b.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all allies / Gain {{value0}} <keyword1>Mana</keyword1> per effect removed",
+    "sourceHash": "0605cb056a37eeeab459fecf0296b60b5b89d5cbb556e0157c1ef7adf601b434",
+    "text": "<keyword0>净化</keyword0>所有盟友 / 每移除一个效果获得{{value0}}点<keyword1>法力</keyword1>"
   },
   "content.card.reverie-waking-wonder.name": {
     "reviewed": true,
@@ -2249,6 +2531,12 @@
     "sourceHash": "a00e71abae40a96ff7ac92171a3c722bf2afbbf7277ff8c36d3ff280b9be6265",
     "text": "借来的光辉"
   },
+  "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "b46c18041df06a20598a619d453cb3eeaf8aaf5ff54c858ba3d28106ade5af51",
+    "text": "对所有敌人造成{{value0}}点<keyword0>光</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.rookhaven-margin-of-possibility.name": {
     "reviewed": true,
     "source": "Margin of Possibility",
@@ -2272,6 +2560,12 @@
     "source": "Unwritten Ending",
     "sourceHash": "4e84091a4848dad1d818940fe32c1eb1b542ca8c79f3328f3322ff48202f56ac",
     "text": "未写的结局"
+  },
+  "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> all enemies",
+    "sourceHash": "361d48273d1a1d5a7296dc00d0c29f9ae5b30f164c21099268e498bcab6ad422",
+    "text": "对所有敌人施加<keyword0>驱散</keyword0>"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,
@@ -2315,6 +2609,12 @@
     "sourceHash": "7a09821d17f5e0f65ec0ba6395dc0d6e1ffeb7aa0c58359a8812977c8d0e4ade",
     "text": "正午守护"
   },
+  "content.card.shadebrim-guard.v66719777fd7fe252.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next <keyword2>Burn</keyword2>",
+    "sourceHash": "35a06caf84ac1d8d886a9264ef5aa73104418443afd28ebfaec3dea0640d2a4b",
+    "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>反射</keyword1>下一次<keyword2>灼烧</keyword2>"
+  },
   "content.card.skybex-cloudstep.name": {
     "reviewed": true,
     "source": "Cloudstep",
@@ -2345,17 +2645,41 @@
     "sourceHash": "abe53912d8f9e51512ae37b52c149c65bf3aac1724698babe7fc569ff57e4ad0",
     "text": "天空牧者"
   },
+  "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
+    "sourceHash": "cc7753726489c64ce4570dfef658fb841936f221b203ea7107a69752a141d1dd",
+    "text": "对所有敌人造成{{value0}}点<keyword0>自然</keyword0>伤害"
+  },
   "content.card.sternshell-attack.name": {
     "reviewed": true,
     "source": "Surge Ram",
     "sourceHash": "d6088ab30dca9f2d9cbe394b04505ac332ab8fbe4ac8b5619735f96bd3607f04",
     "text": "浪涌冲撞"
   },
+  "content.card.sternshell-attack.v40a15e006dd03d5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage; Doubled if you have <keyword1>Armor</keyword1>",
+    "sourceHash": "115fb28d786bceebf3b020884f3cb2c68f54816b66cfe80e8b1996a47be56439",
+    "text": "造成{{value0}}点<keyword0>物理</keyword0>伤害; 拥有<keyword1>护甲</keyword1>时伤害翻倍"
+  },
   "content.card.sternshell-spiral-return.name": {
     "reviewed": true,
     "source": "Spiral Return",
     "sourceHash": "4694a0aa4ef1f65711ee9333fbf10895c8d375e8a6b190f21df6932dd1a6d2d3",
     "text": "螺旋归返"
+  },
+  "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
+    "sourceHash": "57ffb07997cde149b98bc1663b3bbe172d09b742d9606851c1d276c67723c546",
+    "text": "对所有敌人造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.card.sternshell-spiral-return.ve159e41dea9cda25.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "a8f8078e0c129557e6e227ab794e3c73b5d371f5005a00cc8e54635d9bf4ef1a",
+    "text": "对所有敌人造成{{value0}}点<keyword0>水</keyword0>伤害; 获得{{value1}}点<keyword1>法力</keyword1>"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,
@@ -2411,6 +2735,12 @@
     "sourceHash": "0bb979e1d6428a5a1f24a560d656d79380df6b7abfc1da7bd736fc599efe51fa",
     "text": "水的记忆"
   },
+  "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
+    "sourceHash": "33e1d7367421250f061f427e01bf623f5e6ffa25b9b224fa3c8fbb7e5009aea5",
+    "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>; 抽取{{value1}}张卡牌"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
@@ -2429,11 +2759,35 @@
     "sourceHash": "17a78b5a6087523eee8844e8e6e00f472c8f59117401a66da43b4d8698639099",
     "text": "安全通行"
   },
+  "content.card.tournelle-swapLowest.v44ddfe4dbb19ec5c.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally",
+    "sourceHash": "bc3903e2932e0eaca5a7717222e0c58599c993cf816900d1db75aae81f2220df",
+    "text": "换出<keyword0>生命</keyword0>最低的盟友"
+  },
+  "content.card.tournelle-swapLowest.vd1cdd94f8b128e78.rule": {
+    "reviewed": true,
+    "source": "Swap out the lowest <keyword0>Health</keyword0> ally / Draw a Card",
+    "sourceHash": "612183a4f2b138cd5cc05ea039098b7df75930374176d473bee10782e2a892d6",
+    "text": "换出<keyword0>生命</keyword0>最低的盟友 / 抽取一张卡牌"
+  },
   "content.card.tournelle-teamClearBlind.name": {
     "reviewed": true,
     "source": "Kindled Courage",
     "sourceHash": "429116a6d69a81454dca40800bfe3186a5193f7f92bf6bef7f14a77814cec869",
     "text": "燃起勇气"
+  },
+  "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
+    "sourceHash": "7443a153d8a1c353f92eab418665b724f9937b5b7ded7c041db04b0924c15d5f",
+    "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1>"
+  },
+  "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
+    "sourceHash": "14fe93f86c0b45177cd1fad64f9501424d00a4fc4b5c94d3d8e4485e10f9c114",
+    "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1> / 抽取一张<keyword2>光</keyword2>卡牌"
   },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
@@ -2489,11 +2843,35 @@
     "sourceHash": "963e4d64f413740e8ba5e2e76e2305b65ececcfedcca6956ac8125566dc54410",
     "text": "遗忘的岔口"
   },
+  "content.card.wisterelle-forgotten-junction.v00204fb6b4801412.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup / Draw a Card",
+    "sourceHash": "21c66cfbe9bd85accbee0b8bf9949b79abf60e11403ea21c5a27606c55badf3f",
+    "text": "与选定的后备交换 / 抽取一张卡牌"
+  },
+  "content.card.wisterelle-forgotten-junction.v14838ab67a013cb2.rule": {
+    "reviewed": true,
+    "source": "Swap out for a chosen backup",
+    "sourceHash": "8fb74620c3fd0d4e3e243c3e53604f1db98b8da36bdf58de2d75116cc04b2235",
+    "text": "与选定的后备交换"
+  },
   "content.card.wisterelle-lantern-fare.name": {
     "reviewed": true,
     "source": "Lantern Fare",
     "sourceHash": "cfc51b57c9b2f51b58b7fc7a2376e580b434b5336ce0c8c5c3b660fe11661988",
     "text": "灯笼车票"
+  },
+  "content.card.wisterelle-lantern-fare.v0a7c83e245556b72.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally / Gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "aa586bff92df0b36c4eec4175edf4172c3f5ca3b35b820e4a9028a60cb5586c7",
+    "text": "为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0> / 获得{{value1}}点<keyword1>法力</keyword1>"
+  },
+  "content.card.wisterelle-lantern-fare.v41c2d8260b6ad84c.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to an injured ally",
+    "sourceHash": "a55d505b14183eaec21a8cc6a11a58f68abe1156004af6ed00975e795915822e",
+    "text": "为一名受伤盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.card.wisterelle-left-luggage.name": {
     "reviewed": true,
@@ -2501,11 +2879,35 @@
     "sourceHash": "862bfce6cd84d8d66fde34d23b2681acb44b2589d8707cff8d3aa047cc535b34",
     "text": "寄存行李"
   },
+  "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "57f689f38160599e1b013aea23c2ca4f877eb8f169abbadc90aaf5f10d36392e",
+    "text": "从弃牌堆抽取一张盟友的卡牌 / 获得{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile",
+    "sourceHash": "3569abe4e8981db9a743a5a43694098b39e81e4525052753c7106a6f314d8943",
+    "text": "从弃牌堆抽取一张盟友的卡牌"
+  },
+  "content.glossary.action-card.definition.rule": {
+    "reviewed": true,
+    "source": "A card belonging to one creature; That creature acts when you play it; Its cost is paid from the shared <keyword0>mana</keyword0> pool",
+    "sourceHash": "2dbfd33ca4ac31ce68e1af6fd123df74ff059b8be443188053a1d0fe25ce5cef",
+    "text": "属于一只生物的卡牌; 打出时由该生物行动; 费用从共享<keyword0>法力</keyword0>中支付"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",
     "sourceHash": "69442cf84fcd7789699713d6e82083202db874d60733fc74b4202aabc4e737bb",
     "text": "行动牌"
+  },
+  "content.glossary.attack.definition.rule": {
+    "reviewed": true,
+    "source": "An action that deals damage to an enemy; Attack traits modify its damage",
+    "sourceHash": "260e02e556c26aaf011f6914c63fd06d32762fb44f8e090b994b21676abd1df2",
+    "text": "对敌人造成伤害的行动; 攻击特性会改变其伤害"
   },
   "content.glossary.attack.term.rule": {
     "reviewed": true,
@@ -2525,11 +2927,23 @@
     "sourceHash": "3d5fb15aec4261c015a53f2725b2711f38489e7b26c34a4ea08fe08a629b25fc",
     "text": "战斗"
   },
+  "content.glossary.boons.definition.rule": {
+    "reviewed": true,
+    "source": "Passive effects lasting for the current journey; When offered, choose one of three or skip; Boons end with the journey",
+    "sourceHash": "3ad8b80d7ad33c20d99ec15995b26bfea4f324725c079028a9082a254ce1b58f",
+    "text": "持续至当前旅程结束的被动效果; 提供时从三个祝福中选择一个或跳过; 祝福随旅程结束"
+  },
   "content.glossary.boons.term.rule": {
     "reviewed": true,
     "source": "Boons",
     "sourceHash": "148439d4a24f4e38d7855371d77cc1cc77542542228dcfe58803c6e91b0cea84",
     "text": "祝福"
+  },
+  "content.glossary.copy.definition.rule": {
+    "reviewed": true,
+    "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
+    "sourceHash": "eafd94726cedb1bc1d90084c9ea9b549fe8fdb358578cf4640d51e142a6b29d1",
+    "text": "抽到的卡牌的副本，拥有相同的持有者、等级和<keyword0>法力</keyword0>费用; 留在牌组中直至战斗结束; 抽到副本可能再次复制它; 创建或递补副本不算抽牌"
   },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
@@ -2549,11 +2963,23 @@
     "sourceHash": "ca5b12250ec4340a4567536b37e2555f9b1f2f8dd5cf2ca902e586e4e7440720",
     "text": "濒死"
   },
+  "content.glossary.draw-discard.definition.rule": {
+    "reviewed": true,
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
+    "sourceHash": "4da829658f5bdfb3794eb1a5d9d010b8c3ff744df18b128498696ba388a7413b",
+    "text": "全队共享牌组、手牌和弃牌堆; 打出的卡牌进入弃牌堆，除非带有<keyword0>消耗</keyword0>; 回合结束时未打出的卡牌进入弃牌堆; 抽牌堆一空就将弃牌洗入抽牌堆"
+  },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,
     "source": "Draw / discard",
     "sourceHash": "9f40d39e1b26c040233fe2eac9d7e348f0d4e3f1661547c56380e3aaaf6acda2",
     "text": "抽牌 / 弃牌"
+  },
+  "content.glossary.echo.definition.rule": {
+    "reviewed": true,
+    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "14d2bfac40c96a1431aa39b2579e3c8460de2ebda22fcac4aad5771666d42c77",
+    "text": "梅门托的召唤物; 卡牌升级前拥有{{value0}}点<keyword0>生命</keyword0>; 只能通过宫廷铭记攻击; 最多可召唤两个"
   },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
@@ -2561,11 +2987,23 @@
     "sourceHash": "7b19b6962b092714e4740bbb91c140fa9fcd790736ceaf1589d218ba93dfd3be",
     "text": "回响"
   },
+  "content.glossary.gold.definition.rule": {
+    "reviewed": true,
+    "source": "Gold earned in battle carries between journeys; Spend Gold at Boon Merchants on Boons for the current journey; Gold is not a keyword or talent category",
+    "sourceHash": "404a65995b62540fe927737ac645fbee0fb6f5153c770f7c6cf9c6e9a2087482",
+    "text": "战斗中获得的金币会在旅程之间保留; 可在祝福商人处购买当前旅程的祝福; 金币不是关键词或天赋类别"
+  },
   "content.glossary.gold.term.rule": {
     "reviewed": true,
     "source": "Gold",
     "sourceHash": "28b093aa57ca84f4b5bf5599dfc1c3564eee39e7c9e38a9f54ff08daf557adcd",
     "text": "金币"
+  },
+  "content.glossary.hit.definition.rule": {
+    "reviewed": true,
+    "source": "A landed attack, including one absorbed by <keyword0>Block</keyword0>; <keyword1>Dodges</keyword1> and periodic damage are not hits; <keyword2>Thorns</keyword2> and Sporecoat retaliate when hit",
+    "sourceHash": "cbf316e883a25862bb721ff335e9486829e18e51c62f96b93cf96d58b2d77f40",
+    "text": "命中的攻击，包括被<keyword0>格挡</keyword0>吸收的攻击; <keyword1>闪避</keyword1>和周期伤害不算命中; <keyword2>荆棘</keyword2>与孢子外衣在受到命中时反击"
   },
   "content.glossary.hit.term.rule": {
     "reviewed": true,
@@ -2585,11 +3023,23 @@
     "sourceHash": "a9dcdd315fb4f6efa32357f2a28c9ae247ce2502ce190a09cc4e5c576e0a9834",
     "text": "在<keyword2>格挡</keyword2>之后减少受到的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>伤害；<keyword3>护甲</keyword3>减少伤害时失去{{value0}}层"
   },
+  "content.glossary.keyword.attackReflection.definition.rule": {
+    "reviewed": true,
+    "source": "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword0>Reflected</keyword0> attacks cannot <keyword1>reflect</keyword1> again; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "2be6527f93eb9ae13e4bd117e94e554f76dbf464a126e30d67edf8147b08fce2",
+    "text": "将下一次受到的攻击返还给攻击者; 防止该攻击对你造成的伤害和有害效果; 被<keyword0>反射</keyword0>的攻击不能再次<keyword1>反射</keyword1>; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
     "sourceHash": "87478d0d75707bae055802bc645c2117040132cacae63f88e4f7131599daa1c9",
     "text": "下一回合再次造成伤害，然后清除"
+  },
+  "content.glossary.keyword.blind.definition.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
+    "sourceHash": "a63a0ec0c228b0032bfced352d2d6b26d58a7db8003351e098ecdb8094b8636d",
+    "text": "下一次攻击有{{value0}}%的概率落空; 无论命中还是落空，该次攻击后效果消失; 落空视为每个目标都进行了<keyword0>闪避</keyword0>; 不叠加"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -2615,6 +3065,12 @@
     "sourceHash": "da7f98a1566964e4100eb4dd9be6c4f91b012873a70fedf61f9cc471168dff58",
     "text": "造成双倍伤害的攻击"
   },
+  "content.glossary.keyword.dodge.definition.rule": {
+    "reviewed": true,
+    "source": "Both sides have a {{value0}}% chance to avoid each attack packet before defenses; Controlled targets cannot <keyword0>Dodge</keyword0>; Total <keyword1>Dodge</keyword1> is capped at {{value1}}%",
+    "sourceHash": "8a4093fa9594572b78160cc461ee858a5b24197ea076faa09caa7d1a219c599e",
+    "text": "双方在防御之前都有{{value0}}%的概率避开每个攻击伤害包; 被控制的目标无法<keyword0>闪避</keyword0>; 总<keyword1>闪避</keyword1>概率上限为{{value1}}%"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -2626,6 +3082,12 @@
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
     "sourceHash": "c2cf7ed58440fd0be81b81eb0c8e9d9bf3b0fee096573b943ef358440cc38e34",
     "text": "剩余生命值；<keyword0>生命</keyword0>降至零时，生物被击倒；<keyword1>生命</keyword1>可恢复至上限；战斗中恢复生命不能使其复活"
+  },
+  "content.glossary.keyword.leech.definition.rule": {
+    "reviewed": true,
+    "source": "Restore half the damage dealt, including damage absorbed by <keyword0>Block</keyword0>, rounded normally; Overkill does not count; <keyword1>Bleed</keyword1> pays <keyword2>Leech</keyword2> with its later tick",
+    "sourceHash": "eda3a9501bda03c9c00a542cbe1242ec97122d6dc73ca7b48c8c35199a089f94",
+    "text": "恢复造成伤害的一半，包括被<keyword0>格挡</keyword0>吸收的伤害，按通常方式取整; 超额伤害不计入; <keyword1>流血</keyword1>在之后造成周期伤害时触发<keyword2>汲取</keyword2>"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -2639,6 +3101,12 @@
     "sourceHash": "9cd309a2fd91b642fda01f2ee17d69b44df0e2d1f3d344301c7c41179fd94eaa",
     "text": "<keyword0>自然</keyword0>伤害；不隐含抗性或状态效果"
   },
+  "content.glossary.keyword.negate.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> the next attack against you before <keyword1>Dodge</keyword1>, preventing its damage and harmful effects; <keyword2>Thorns</keyword2> still retaliate; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "1b81ee96f44cc7dc2c7d5be7e771a7a7b4c7036b4ea4c64f65994ac33d5a3641",
+    "text": "在<keyword1>闪避</keyword1>之前<keyword0>抵消</keyword0>下一次受到的攻击，防止其伤害和有害效果; <keyword2>荆棘</keyword2>仍会反击; 持续至消耗或被<keyword3>驱散</keyword3>; 不叠加"
+  },
   "content.glossary.keyword.nullify.definition.rule": {
     "reviewed": true,
     "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
@@ -2651,11 +3119,23 @@
     "sourceHash": "59ea88914a1d28a611369eb86b92350a19dba31e3b84a8629af5fce2a59b271d",
     "text": "<keyword0>物理</keyword0>伤害在<keyword2>格挡</keyword2>之后受<keyword1>护甲</keyword1>减免；攻击有{{value0}}%的概率<keyword3>暴击</keyword3>，造成双倍伤害"
   },
+  "content.glossary.keyword.poison.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> hits add damage dealt as <keyword1>Poison</keyword1>; At turn start it deals its stacks as damage, then loses {{value0}}% (at least {{value1}})",
+    "sourceHash": "55fb2bbd53842e88b015074799ceed937620fa9ce3d9aa19a502f700c8f8ec1a",
+    "text": "<keyword0>中毒</keyword0>命中会将造成的伤害加为<keyword1>中毒</keyword1>; 回合开始时按层数造成伤害，然后减少{{value0}}%（至少{{value1}}）"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "72dfe6715b29ee5dab47e9e1d994106e3923d37b62a217f18b665e32d5bb3e4a",
     "text": "移除一名敌人的有益效果"
+  },
+  "content.glossary.keyword.reflect.definition.rule": {
+    "reviewed": true,
+    "source": "Return the specified attack or harmful status effect; <keyword0>Attack reflection</keyword0> returns damage and harmful follow-ups to the attacker; Status-only <keyword1>reflection</keyword1> redirects the effect to a random living enemy while direct damage still lands; <keyword2>Reflected</keyword2> attacks and statuses cannot <keyword3>reflect</keyword3> again; Charges do not stack",
+    "sourceHash": "f2e7cbd378c4c049ce1ecb4db9408575984e35323e3b411af471a66e8b666035",
+    "text": "返还指定的攻击或有害状态效果; <keyword0>攻击反射</keyword0>将伤害和后续有害效果返还给攻击者; 仅状态<keyword1>反射</keyword1>会将效果转向一名随机存活的敌人，直接伤害仍会命中; 被<keyword2>反射</keyword2>的攻击和状态不能再次<keyword3>反射</keyword3>; 次数不叠加"
   },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
@@ -2681,11 +3161,23 @@
     "sourceHash": "31a939b5ec9df4c7e61f866dec2a2ba7caa1a4ce146be930017be72920411e4f",
     "text": "击倒"
   },
+  "content.glossary.legendary.definition.rule": {
+    "reviewed": true,
+    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+    "sourceHash": "3f5ccb38fcca5a8cc70723057183889fc661d09236db3cc0fd4d1107e24dfc3f",
+    "text": "单独上场的生物; 作为敌人时只出现在首领遭遇中; 可以正常招募; 每项技能各向牌组加入两张副本"
+  },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
     "source": "Legendary",
     "sourceHash": "99f528a21f579793bb24b73eaa55320bf6bc4cb730f813689b4d5f0f2551c17f",
     "text": "传奇"
+  },
+  "content.glossary.minion.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+    "sourceHash": "0315a5d96263d2971cfb1ea41603a86f00261f43e885fb90b21a02744940719a",
+    "text": "仅在战斗中存在的召唤物，拥有自己的<keyword0>生命</keyword0>; 没有卡牌，也不占队伍名额; 召唤者倒下或离场时消失"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,
@@ -4829,6 +5321,18 @@
     "sourceHash": "f73059ce757f93b80158d244059f01ebbdb7acd64d00651082c4eb6ed39b184d",
     "text": "失物招领"
   },
+  "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "076064221ce200864206df9c5cb8ffec133989b7983c9c60472a80ebaa4a92ec",
+    "text": "<keyword0>攻击反射</keyword0>：将下一次受到的攻击返还给攻击者; 防止该攻击对你造成的伤害和有害效果; 被<keyword1>反射</keyword1>的攻击不能再次<keyword2>反射</keyword2>; 持续至消耗或被<keyword3>驱散</keyword3>; 不叠加"
+  },
+  "content.status.blind.v0b0434b4eb43f4a6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
+    "sourceHash": "a47ff9bae2911f57dccb0e49ef953ad3847349e258b622dab359c76c7df95507",
+    "text": "<keyword0>致盲</keyword0>：下一次攻击有{{value0}}%的概率落空; 无论命中还是落空，该次攻击后效果消失; 落空视为每个目标都进行了<keyword1>闪避</keyword1>; 不叠加"
+  },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
@@ -4889,17 +5393,47 @@
     "sourceHash": "7685dca5f6d2bd8f42a604a47fea8a15a2240dcba43ac121bbbae88a276b3332",
     "text": "濒死 {{value0}}"
   },
+  "content.status.negate.v74a74c8005c653ca.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
+    "sourceHash": "201ec53c81e7c8629f523737ba6888195e5ed6072d77537d9df851f5088c9c44",
+    "text": "<keyword0>抵消</keyword0>：在<keyword2>闪避</keyword2>之前<keyword1>抵消</keyword1>下一次受到的攻击，防止其伤害和有害效果; <keyword3>荆棘</keyword3>仍会反击; 持续至消耗或被<keyword4>驱散</keyword4>; 不叠加"
+  },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
     "sourceHash": "3ae4500d2e5f7004f91fd8a213edfc2c70c34be38f071f08abb90327fdbca087",
     "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
+  "content.status.nullify.v31f2b57af0674222.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
+    "sourceHash": "371aea798d52973aaec3158b6898ec7fd3722908320757c0ed2c5fb6bfde49c3",
+    "text": "<keyword0>无效化</keyword0>：防止下一个有害状态效果; 直接伤害仍会命中; 持续至消耗或被<keyword1>驱散</keyword1>; 不叠加"
+  },
+  "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "16ba023b5f3cf06ab4af3264844d7aa985f96e7a295b08d1812d4270aa94978d",
+    "text": "<keyword0>无效化</keyword0>下一次<keyword1>冻结</keyword1>伤害; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
+  },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
     "sourceHash": "d2764819aed025a0fa54e7fc6466963953507544caa6749600b41e499fd32e75",
     "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
+  },
+  "content.status.reflect.v1f90dd3050df6a1c.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
+    "sourceHash": "9e37d18721000893ddcf0398b898bf4a2dd296a14e4059dcdd8ed59397a1b280",
+    "text": "<keyword0>反射</keyword0>：返还指定的攻击或有害状态效果; <keyword1>攻击反射</keyword1>将伤害和后续有害效果返还给攻击者; 仅状态<keyword2>反射</keyword2>会将效果转向一名随机存活的敌人，直接伤害仍会命中; 被<keyword3>反射</keyword3>的攻击和状态不能再次<keyword4>反射</keyword4>; 次数不叠加"
+  },
+  "content.status.reflectBurn.vbb43777c9fa04208.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "sourceHash": "56a42873de25f59f4c5d8e8326988295060d7ce9ca21c800940e68b158c4032a",
+    "text": "<keyword0>反射</keyword0>下一次<keyword1>灼烧</keyword1>; 直接伤害仍会命中; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
