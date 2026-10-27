@@ -1121,11 +1121,71 @@
     "sourceHash": "9f0339f52f6d122d46bd718f22d76e2365a4e78719005b0ae9664a4ceaee0bbd",
     "text": "Ножной браслет прилива"
   },
+  "content.boon.tidecrest-hairpin.name": {
+    "reviewed": true,
+    "source": "Tidecrest Hairpin",
+    "sourceHash": "fe9621fce1d4045e42e135acff854ec41df7020c13b2470980863db926393788",
+    "text": "Шпилька гребня прилива"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "reviewed": true,
+    "source": "Tuning Fork Charm",
+    "sourceHash": "d8a58afb308a59d150fbca62b7cca48f9f20f9863c4ebf28695adf9042ee9476",
+    "text": "Оберег-камертон"
+  },
+  "content.boon.undertow-castanets.name": {
+    "reviewed": true,
+    "source": "Undertow Castanets",
+    "sourceHash": "fc1e166a39c6a6d2efa8162b461c8ad3579ec8264ed82edaf50e0322ac148ca1",
+    "text": "Кастаньеты отлива"
+  },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "184a897bd6081cc742d82558690bd5f4e379670e37373b351fd45e990e032d96",
     "text": "Накопления <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> у врагов объединяются"
+  },
+  "content.boon.velvet-whisk.name": {
+    "reviewed": true,
+    "source": "Velvet Whisk",
+    "sourceHash": "679266a8301a1d90162432998870332d4a1441e364feb71fae9a1221c670a062",
+    "text": "Бархатный венчик"
+  },
+  "content.boon.vigil-lantern.name": {
+    "reviewed": true,
+    "source": "Vigil Lantern",
+    "sourceHash": "681ce831317b6af2b782397a3f4c2b6f6cf595db0a28818818940328bbaff10f",
+    "text": "Фонарь бдения"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "reviewed": true,
+    "source": "Wax Foundation Mold",
+    "sourceHash": "5afbf7cb88e9394d8fbf6f083d8631ad86829823e2bffbd2e86c38be9c2c45c4",
+    "text": "Форма для восковой вощины"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "reviewed": true,
+    "source": "Winnowing Sieve",
+    "sourceHash": "8dd85c37fc1d5de5dee072817a543c9bed5f1270a9982f22312e9a38318daea7",
+    "text": "Веялочное сито"
+  },
+  "content.boon.wishing-building-block.name": {
+    "reviewed": true,
+    "source": "Wishing Building Block",
+    "sourceHash": "c9aa983f1ec3e5ab314b3ad45c5d823adc4a5e53f4f3d43c460c360c15d714ac",
+    "text": "Кубик желаний"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "reviewed": true,
+    "source": "Wonder Ball Maze",
+    "sourceHash": "651e399f86ea0d776ff1993f009253cfcd39f6824bc2b6395b291cdd31270288",
+    "text": "Чудесный шариковый лабиринт"
+  },
+  "content.boon.wonder-domino.name": {
+    "reviewed": true,
+    "source": "Wonder Domino",
+    "sourceHash": "9874c4e474fe4208706312760403fa934f98f8a02f56c496d0d7298f1b64a779",
+    "text": "Чудесное домино"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

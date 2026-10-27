@@ -1121,11 +1121,71 @@
     "sourceHash": "e01bf6df1c7e26f63a0ab99fbe8dd7096c2277298fd0125bf9027cd6b580979c",
     "text": "Gezeitenfußreif"
   },
+  "content.boon.tidecrest-hairpin.name": {
+    "reviewed": true,
+    "source": "Tidecrest Hairpin",
+    "sourceHash": "a83b8fd580b9f50f4f0f495d0bd5ca1da44a1e59e58e53144dff665a940e1be1",
+    "text": "Gezeitenkamm-Haarnadel"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "reviewed": true,
+    "source": "Tuning Fork Charm",
+    "sourceHash": "cb5cb61b517816a8815209169f2556cf08548ecca32c8f509c837993082071ec",
+    "text": "Stimmgabelanhänger"
+  },
+  "content.boon.undertow-castanets.name": {
+    "reviewed": true,
+    "source": "Undertow Castanets",
+    "sourceHash": "e909e366d4fae1531c71b321d234edae74f0ced5be2fcfd68ec60ff6264a281f",
+    "text": "Unterströmungs-Kastagnetten"
+  },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "5f64e7197377c02978e81ec67a73ea80adca7ddf5dd4a7955dd0a621e9867b15",
     "text": "<keyword0>Betäubung</keyword0>s- und <keyword1>Frost</keyword1>-Aufbau werden bei Gegnern kombiniert"
+  },
+  "content.boon.velvet-whisk.name": {
+    "reviewed": true,
+    "source": "Velvet Whisk",
+    "sourceHash": "d1037f85945cd2bf26f874c0b4d2d817f4f53541219b7cd552e595d63a7249da",
+    "text": "Samt-Schneebesen"
+  },
+  "content.boon.vigil-lantern.name": {
+    "reviewed": true,
+    "source": "Vigil Lantern",
+    "sourceHash": "74d7a942cdeace3fcc8aa34bca618f8898c83a167a639d31577c50cb7a87b59c",
+    "text": "Wachlaterne"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "reviewed": true,
+    "source": "Wax Foundation Mold",
+    "sourceHash": "976f6dbec60c29ace9618b73d0363e7446e5dac36b9fb082c95fd9608307a620",
+    "text": "Wachsplattenform"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "reviewed": true,
+    "source": "Winnowing Sieve",
+    "sourceHash": "b525ddad84f3ea6693594b1a39b0debd6d35b9532a63f3ab6f9b108548e4192a",
+    "text": "Worfsieb"
+  },
+  "content.boon.wishing-building-block.name": {
+    "reviewed": true,
+    "source": "Wishing Building Block",
+    "sourceHash": "97220019e8a93d63451a9e13cde7579115ac84b0d14616100d2f07926b8b69fa",
+    "text": "Wunschbaustein"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "reviewed": true,
+    "source": "Wonder Ball Maze",
+    "sourceHash": "d5f075fd7d8fbedc88e49f6198ebe258c5d6eea1ee7e45d1a3dd3eb63b882bb9",
+    "text": "Wunderkugellabyrinth"
+  },
+  "content.boon.wonder-domino.name": {
+    "reviewed": true,
+    "source": "Wonder Domino",
+    "sourceHash": "d440ad574ef2e05143bd69f25fdc38ff471e31ebce2f51cdcb559e815fe6eac8",
+    "text": "Wunderdomino"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

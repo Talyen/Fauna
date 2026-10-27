@@ -1121,11 +1121,71 @@
     "sourceHash": "edd66efabae9d9248b5a155e1ba46fcc2375d220c83d67513aa04fdcfc095fa0",
     "text": "Tornozeleira da maré"
   },
+  "content.boon.tidecrest-hairpin.name": {
+    "reviewed": true,
+    "source": "Tidecrest Hairpin",
+    "sourceHash": "905437204b09eda4c836b0738686cc3379d920bffe870524cc49cd5ff4389dac",
+    "text": "Grampo da crista da maré"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "reviewed": true,
+    "source": "Tuning Fork Charm",
+    "sourceHash": "45e5217eed0e7923b3b8aa503a1ca1e10a1497baad835324243072b647fc59d0",
+    "text": "Talismã de diapasão"
+  },
+  "content.boon.undertow-castanets.name": {
+    "reviewed": true,
+    "source": "Undertow Castanets",
+    "sourceHash": "4e84baca2787ec849ae1f95e6070eb9bd18892934e6891734276e76d33c9d7d6",
+    "text": "Castanholas da ressaca"
+  },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "423affc135585d5cf99fa31ee3dd07b9bfd1979feb9dd0641d80d05a7f1db136",
     "text": "Os acúmulos de <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1> se combinam nos inimigos"
+  },
+  "content.boon.velvet-whisk.name": {
+    "reviewed": true,
+    "source": "Velvet Whisk",
+    "sourceHash": "ea48f274b13dcc46a62a71d1b78e9dcf6238e3ae3c00850e7a28a2b06c12691b",
+    "text": "Batedor de veludo"
+  },
+  "content.boon.vigil-lantern.name": {
+    "reviewed": true,
+    "source": "Vigil Lantern",
+    "sourceHash": "167a8d9483940dc4e330474783a5a8df3a844779f6a5690602f8319fd2a4a902",
+    "text": "Lanterna de vigília"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "reviewed": true,
+    "source": "Wax Foundation Mold",
+    "sourceHash": "7e84ac141dd5f51843ac30d92ecdbfc3954f954965d14fa92d9d3a95fef807a1",
+    "text": "Molde de lâmina de cera"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "reviewed": true,
+    "source": "Winnowing Sieve",
+    "sourceHash": "7e62c076c579479a23a7fbc3df939f3275eb342fd9ecdd8c42c651896cef2803",
+    "text": "Peneira de joeirar"
+  },
+  "content.boon.wishing-building-block.name": {
+    "reviewed": true,
+    "source": "Wishing Building Block",
+    "sourceHash": "f01f7a04e3ce976d98d564c055751a981f0af7c5fd0cf7d77140b6727caf049a",
+    "text": "Bloco de desejos"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "reviewed": true,
+    "source": "Wonder Ball Maze",
+    "sourceHash": "15be5915bb3b8278fe3975ff82a40be4b9893e20e7c5692e20b056196f822510",
+    "text": "Labirinto de bolinha maravilhoso"
+  },
+  "content.boon.wonder-domino.name": {
+    "reviewed": true,
+    "source": "Wonder Domino",
+    "sourceHash": "6f1635e11b0c7cd8c5683d6286436de6b1b6f255592ac7cde902e55ad6a8dc91",
+    "text": "Dominó maravilhoso"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

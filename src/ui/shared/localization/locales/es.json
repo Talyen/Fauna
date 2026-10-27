@@ -1121,11 +1121,71 @@
     "sourceHash": "3e520568b691aa4d098fb11ff0a8937eec311f1b406e454df8a7c9598385d9b2",
     "text": "Tobillera de marea"
   },
+  "content.boon.tidecrest-hairpin.name": {
+    "reviewed": true,
+    "source": "Tidecrest Hairpin",
+    "sourceHash": "12fc5c95446544c31bb1e9cd0f6ec7d53116c05ad830fc90ee5ca3186b8317fa",
+    "text": "Horquilla de cresta de marea"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "reviewed": true,
+    "source": "Tuning Fork Charm",
+    "sourceHash": "bc6ab8f914aea157598a9d455fb1e8d9d4db56d8ab0b52b5179eeb25872c44c6",
+    "text": "Talismán diapasón"
+  },
+  "content.boon.undertow-castanets.name": {
+    "reviewed": true,
+    "source": "Undertow Castanets",
+    "sourceHash": "28ac0885b1b17f560de21cf0668067bcc08edc6e75e7dd15a6b62ada5d26041b",
+    "text": "Castañuelas de resaca"
+  },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "2cbcc737fa978451fa9794fce815393cd0d0474f3bee95bab1f73489a5d42622",
     "text": "Las acumulaciones de <keyword0>Aturdimiento</keyword0> y <keyword1>Congelación</keyword1> se combinan en los enemigos"
+  },
+  "content.boon.velvet-whisk.name": {
+    "reviewed": true,
+    "source": "Velvet Whisk",
+    "sourceHash": "6a70bcd0a8f529202109121dafd69e7f865227b86175b58e542efb05f16c4583",
+    "text": "Batidor de terciopelo"
+  },
+  "content.boon.vigil-lantern.name": {
+    "reviewed": true,
+    "source": "Vigil Lantern",
+    "sourceHash": "c2a26b5d11bd19136b5164d28014da84434d1835618be168cc81bb20ad01c203",
+    "text": "Linterna de vigilia"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "reviewed": true,
+    "source": "Wax Foundation Mold",
+    "sourceHash": "92fdc9129f64f8139e18a9d743ac3625f62273389a99b25fb09344ae707f525a",
+    "text": "Molde para lámina de cera"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "reviewed": true,
+    "source": "Winnowing Sieve",
+    "sourceHash": "866391e8241c957296a788c2299cd3620fd1f109c050f7c4a02df59eeeecd170",
+    "text": "Criba de aventar"
+  },
+  "content.boon.wishing-building-block.name": {
+    "reviewed": true,
+    "source": "Wishing Building Block",
+    "sourceHash": "8780272dd26e66fe2b2a5732c0ff76c9ae263c7eef3cf53d5d91115c095f4989",
+    "text": "Bloque de deseos"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "reviewed": true,
+    "source": "Wonder Ball Maze",
+    "sourceHash": "0af77ff367146d3ec532ae6b8cc80d7778cb13855564b6cded6a36bdd2263496",
+    "text": "Laberinto de bola maravilloso"
+  },
+  "content.boon.wonder-domino.name": {
+    "reviewed": true,
+    "source": "Wonder Domino",
+    "sourceHash": "3acac32291f16925f06fa8e7ef4bb6d3cbbc4df5caef8f2691ea5555c1cf61eb",
+    "text": "Dominó maravilloso"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

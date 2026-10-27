@@ -1121,11 +1121,71 @@
     "sourceHash": "04f6585b3aa88c34eec786a2869c65a687d0cf4fcacefa0ce9917312689463d3",
     "text": "潮汐脚环"
   },
+  "content.boon.tidecrest-hairpin.name": {
+    "reviewed": true,
+    "source": "Tidecrest Hairpin",
+    "sourceHash": "a854d75cfd95d60ede03b04450a09b8ab3a126e0329648d97aba1b87f0408125",
+    "text": "潮峰发簪"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "reviewed": true,
+    "source": "Tuning Fork Charm",
+    "sourceHash": "c944d275c9c67992ce6f6f9c02a217844215befcca43e6adbcd19ae9a393f4b4",
+    "text": "音叉护符"
+  },
+  "content.boon.undertow-castanets.name": {
+    "reviewed": true,
+    "source": "Undertow Castanets",
+    "sourceHash": "dc1fcdd96d5de68bb9a979a84bb9daf5279018d1b27596e64f8b73b800f604de",
+    "text": "暗流响板"
+  },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "3546bda1741b5aa68b38606deba987203f84cd2e1da1f00ac3549662056c0fd5",
     "text": "敌人的<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>积累会合并"
+  },
+  "content.boon.velvet-whisk.name": {
+    "reviewed": true,
+    "source": "Velvet Whisk",
+    "sourceHash": "0ebd8e78484999d2d1d0e17b63860d4bc45d6a052a4fe88b5fef985996e9a260",
+    "text": "天鹅绒打蛋器"
+  },
+  "content.boon.vigil-lantern.name": {
+    "reviewed": true,
+    "source": "Vigil Lantern",
+    "sourceHash": "fc2a866b7a6cfa26312d16f96b93e2549abec29e103518cfb8dd91a6568f6b86",
+    "text": "守夜灯"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "reviewed": true,
+    "source": "Wax Foundation Mold",
+    "sourceHash": "863361a17e4b4fe270fb3d695a46db7980ac8234bd2b041a85dd205486afb44b",
+    "text": "蜂蜡巢础模具"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "reviewed": true,
+    "source": "Winnowing Sieve",
+    "sourceHash": "ff3ed8d9600d313c5553597c3043042f5c38a66c5b20f2d6279beb4895e73665",
+    "text": "扬谷筛"
+  },
+  "content.boon.wishing-building-block.name": {
+    "reviewed": true,
+    "source": "Wishing Building Block",
+    "sourceHash": "9ce02fb6ca694148bdc6a94cfbdf2d13aa3e4de6d27e01d357dbd39c85bef4f7",
+    "text": "许愿积木"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "reviewed": true,
+    "source": "Wonder Ball Maze",
+    "sourceHash": "82e4c57a5c68cac93449e6c6f08ee14d02868726be4db1139e1981a9caa9857e",
+    "text": "奇妙滚球迷宫"
+  },
+  "content.boon.wonder-domino.name": {
+    "reviewed": true,
+    "source": "Wonder Domino",
+    "sourceHash": "d0fd121655c23acd6bbcf1f2805a3f1d1a54e5b69504ca54be37ba0c7ede7318",
+    "text": "奇妙多米诺骨牌"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

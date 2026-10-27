@@ -1121,11 +1121,71 @@
     "sourceHash": "811328c900778d13c1d19c22b53fe1bb80b15292911923954e4f0b0c347a7aef",
     "text": "潮の足輪"
   },
+  "content.boon.tidecrest-hairpin.name": {
+    "reviewed": true,
+    "source": "Tidecrest Hairpin",
+    "sourceHash": "1531ee5e4e8364868673fe85fdfa048e61dc9e1aa9c1beaa0a9e15b3d9848f7d",
+    "text": "潮の峰のかんざし"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "reviewed": true,
+    "source": "Tuning Fork Charm",
+    "sourceHash": "75954335587feb2d3d9e6dac2ddeaa793f038e763416f9aab97999b84cc2f263",
+    "text": "音叉のお守り"
+  },
+  "content.boon.undertow-castanets.name": {
+    "reviewed": true,
+    "source": "Undertow Castanets",
+    "sourceHash": "e233472689b4ff8e6f065d9ac2d75696ff9d9c0fecb0fcc588f727790c5c4f7b",
+    "text": "引き波のカスタネット"
+  },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "1162fd09ed0a9369a2298b5462f1964a7fe9f6bb1ff4a9b7df736440567bfbdd",
     "text": "敵の<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>の蓄積が合算される"
+  },
+  "content.boon.velvet-whisk.name": {
+    "reviewed": true,
+    "source": "Velvet Whisk",
+    "sourceHash": "2584b6161537d1b4f9f68f4ecac467b29b536e661e58e8cbdd040df46c6060c0",
+    "text": "ビロードの泡立て器"
+  },
+  "content.boon.vigil-lantern.name": {
+    "reviewed": true,
+    "source": "Vigil Lantern",
+    "sourceHash": "c0074dd099f566cc71275d6449723460416d080433b7bdf1b37591cb9294c93c",
+    "text": "見守りのランタン"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "reviewed": true,
+    "source": "Wax Foundation Mold",
+    "sourceHash": "b815cf7271fc2b15c981fc8c71af7a839663f1d5ce2892baade92699c67c602d",
+    "text": "巣礎の型"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "reviewed": true,
+    "source": "Winnowing Sieve",
+    "sourceHash": "72e8e0d269832cf324c17e9ffe6aa813bdf86bcf253cc5b3a225ba77f0dcd1de",
+    "text": "風選のふるい"
+  },
+  "content.boon.wishing-building-block.name": {
+    "reviewed": true,
+    "source": "Wishing Building Block",
+    "sourceHash": "fe77de5c237224240fc5f3fba739a0dee454ea68e7ea02c1006e0bc85018a5c8",
+    "text": "願いの積み木"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "reviewed": true,
+    "source": "Wonder Ball Maze",
+    "sourceHash": "b0b7c5683e594e93c61bc68b3d3937f48ec81aa1b757a478c8d7ef13fb58b5e1",
+    "text": "不思議な玉迷路"
+  },
+  "content.boon.wonder-domino.name": {
+    "reviewed": true,
+    "source": "Wonder Domino",
+    "sourceHash": "7c2dcfe97c53cd7a9e6a148e35cc98dff25d7f1edc4c7999ec8ce2facb249ff6",
+    "text": "不思議なドミノ"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

@@ -1139,11 +1139,71 @@
     "sourceHash": "0882161c2274236158ef89d680e4e0a37ee89455f98075d7dcc51f1c457a5ee3",
     "text": "Bracelet de cheville des marées"
   },
+  "content.boon.tidecrest-hairpin.name": {
+    "reviewed": true,
+    "source": "Tidecrest Hairpin",
+    "sourceHash": "069ea4db0fcd8b4ca1ee31fb030a5f2b751987ad1b1b4c7c1670c337dbdc69e0",
+    "text": "Épingle à cheveux de la crête des marées"
+  },
+  "content.boon.tuning-fork-charm.name": {
+    "reviewed": true,
+    "source": "Tuning Fork Charm",
+    "sourceHash": "c54d8702dcbf0bf0bf4f8f5352431b9abae2b66e64181a51a2e6147521b553fb",
+    "text": "Charme diapason"
+  },
+  "content.boon.undertow-castanets.name": {
+    "reviewed": true,
+    "source": "Undertow Castanets",
+    "sourceHash": "6cc11e1d51ba467f0a59433f2b914528866613ef14f4a2d2eae1a10a7ba39a90",
+    "text": "Castagnettes du ressac"
+  },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "718b98243ec99376927c03d64a25abc4b45906e6da7032ef5ff985df380cf1fc",
     "text": "Les accumulations d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> se combinent sur les ennemis"
+  },
+  "content.boon.velvet-whisk.name": {
+    "reviewed": true,
+    "source": "Velvet Whisk",
+    "sourceHash": "8e8bfc2429450f0e0a1d9ab4d670480a899aa15519e245913a6b9bb640910199",
+    "text": "Fouet de velours"
+  },
+  "content.boon.vigil-lantern.name": {
+    "reviewed": true,
+    "source": "Vigil Lantern",
+    "sourceHash": "d540420762d5d48ae90afcc2f7c82eb9b7969e1abcf904927ad177912f24b6d0",
+    "text": "Lanterne de veille"
+  },
+  "content.boon.wax-foundation-mold.name": {
+    "reviewed": true,
+    "source": "Wax Foundation Mold",
+    "sourceHash": "32b4d376621265b68f183b354a2f83a58dd599f87cd3d05e58b43a0c6a7097f0",
+    "text": "Moule à cire gaufrée"
+  },
+  "content.boon.winnowing-sieve.name": {
+    "reviewed": true,
+    "source": "Winnowing Sieve",
+    "sourceHash": "b50e8b20e7f50b6a298a6750de223a75ad34933836333eab64f9fca8a454706d",
+    "text": "Tamis à vanner"
+  },
+  "content.boon.wishing-building-block.name": {
+    "reviewed": true,
+    "source": "Wishing Building Block",
+    "sourceHash": "635b24673ffc93c215f3c7562282937672cbcd820426974a0ab4536eefa92124",
+    "text": "Brique à souhaits"
+  },
+  "content.boon.wonder-ball-maze.name": {
+    "reviewed": true,
+    "source": "Wonder Ball Maze",
+    "sourceHash": "cedfbbcd6eedff7f27467c1325da3564ddf54e15d1dd708dff19f98752debea8",
+    "text": "Labyrinthe à bille merveilleux"
+  },
+  "content.boon.wonder-domino.name": {
+    "reviewed": true,
+    "source": "Wonder Domino",
+    "sourceHash": "a4873fe4c3495f970df1120b3035594614241301136bca8385a8a4e9c87ffcc3",
+    "text": "Domino merveilleux"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,
