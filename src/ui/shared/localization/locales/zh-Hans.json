@@ -4829,6 +4829,12 @@
     "sourceHash": "f73059ce757f93b80158d244059f01ebbdb7acd64d00651082c4eb6ed39b184d",
     "text": "失物招领"
   },
+  "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "sourceHash": "076064221ce200864206df9c5cb8ffec133989b7983c9c60472a80ebaa4a92ec",
+    "text": "<keyword0>攻击反射</keyword0>：将下一次受到的攻击返还给攻击者; 防止该攻击对你造成的伤害和有害效果; 被<keyword1>反射</keyword1>的攻击不能再次<keyword2>反射</keyword2>; 持续至消耗或被<keyword3>驱散</keyword3>; 不叠加"
+  },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
@@ -4924,6 +4930,12 @@
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
     "sourceHash": "d2764819aed025a0fa54e7fc6466963953507544caa6749600b41e499fd32e75",
     "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
+  },
+  "content.status.reflect.v1f90dd3050df6a1c.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
+    "sourceHash": "9e37d18721000893ddcf0398b898bf4a2dd296a14e4059dcdd8ed59397a1b280",
+    "text": "<keyword0>反射</keyword0>：返还指定的攻击或有害状态效果; <keyword1>攻击反射</keyword1>将伤害和后续有害效果返还给攻击者; 仅状态<keyword2>反射</keyword2>会将效果转向一名随机存活的敌人，直接伤害仍会命中; 被<keyword3>反射</keyword3>的攻击和状态不能再次<keyword4>反射</keyword4>; 次数不叠加"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
