@@ -4,7 +4,7 @@ exports[`preserves all modifier definitions, text and ordered six-tier passives 
 {
   "boons": "75211afeb67d0d4f0e7082b05c0730b519599eee9abdbb3d6fde48a63344b5f4",
   "passives": "b3793cc066c807ddbcd5df2325452769aaae18656c1035e9609f205579b3da04",
-  "talents": "6b1f7b59bf6b21c959b7b7572ad65c6c4eec5e3b78e174d9709487f47d8fab0c",
+  "talents": "c8cf5cd250fe4e5d70afac3ca9c80a371971e3bea7a40044d76e730431f01ac1",
 }
 `;
 

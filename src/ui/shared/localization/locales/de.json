@@ -317,6 +317,42 @@
     "sourceHash": "852ba2ea847e486cb28f3a870bf49be5d7e4858e4f4e23df1e5e3668417e01db",
     "text": "Wird geladen…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "c15476fa47fa0f8107b3841b810c04c52437a16e99c09b2a74d88995b7c39705",
+    "text": "Faltbrücke"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "9105438124368af1b70aaab7365fdab71dfaf3f9b9beebd6b4474aca69c1607b",
+    "text": "Äthergrammophon"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "7e01ed7f2f9e25971ef4a0f12b61a46c0a0448da8e63bb753369386580c5ca3b",
+    "text": "Imkerrauchgerät"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "d58789ebf365fd2b203979d19e6d28f46d5254425b849ac3afec78fa6111adcf",
+    "text": "Ascheregenanhänger"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "261c54c413787bdcd7522d721b9d4134e88688243204e16542ecbbad175a0a1f",
+    "text": "Basaltglas-Lesezeichen"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "d3441fd0cda28ee4af12d640e589945776877e1a5a4d71490bbc2e3976fe9c22",
+    "text": "Blütenkuchenständer"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -329,11 +365,41 @@
     "sourceHash": "86493f1d983c07bd271fa95e5bbe359ef315eff5b34c102d712c168982979f5f",
     "text": "Knochenamulett"
   },
+  "content.boon.bone-charm.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you defeat an enemy",
+    "sourceHash": "e6706b18ed25a51907705e8e430878acb06fcb6f731432a34333f8750a5da4a4",
+    "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du einen Gegner besiegst"
+  },
   "content.boon.brass-censer.name": {
     "reviewed": true,
     "source": "Brass Censer",
     "sourceHash": "27b172b8743ca9ae484da58a07637eccdff8495b1479bb20b52162256c89e33d",
     "text": "Messingrauchfass"
+  },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "b1bf4939686a96c5a8f908f28a28cb7de07eb973c4bd8e1bbc592a4cba1c61c3",
+    "text": "Dornenschläger"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "649dfd7c5af50351538dcf29f5e4d3d22d6bd6e4e1db4b5558363a9ee21a5e80",
+    "text": "Bachhüpfscheibe"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "dbc7bc620cb798f649a399be5cf3369253c6d169de6cfefa996566901a795537",
+    "text": "Ringelblumenseife"
+  },
+  "content.boon.camp-hammock.name": {
+    "reviewed": true,
+    "source": "Camp Hammock",
+    "sourceHash": "9b04c160e90875c3a994083af0078c77b8a3d1045e230f7ed4c776792055e80d",
+    "text": "Lagerhängematte"
   },
   "content.boon.camp-hammock.rule": {
     "reviewed": true,
@@ -341,11 +407,89 @@
     "sourceHash": "db0cdb33b5c6996905b3a02315b9055309bdce92c3e492181b4935f3d165bfed",
     "text": "Verbündete in Reserve können <keyword0>Heilung</keyword0> erhalten"
   },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "a53c4f0f7010a8d087b6b1fb934f9b73d36bef09c3c6a8a5f0b2a5cd5e79a00e",
+    "text": "Glutfächer"
+  },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "731d3f68c5e57c1f69d1afd2b12d80863e7d60321ba71c22ac9b8ee480c70dbe",
+    "text": "Wolkenfangspiel"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "b028f2cc191c222804bd7a446b13e5cd56527c10497b0f127beda63c1f9b7487",
+    "text": "Wabenentdeckelungsgabel"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "3d577ba6875de80de3d108fd173d20320a8413e8d426e5b352f3b8289adccc1d",
+    "text": "Kometentiegel"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "e093d05b88bdc3df0084d089767d7ab9872a47a29546edddcb8c00f71ad279e2",
+    "text": "Korallenspieluhr"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "73470e2b6bf2ee2a5a57d57b39770e372d44bb1d21adbf6055ad2474c198f50a",
+    "text": "Korallennetzgewicht"
+  },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "0d265a5a7be0bc9a0803787947af845450771fb0551851af2d90225b7027abf4",
+    "text": "<keyword0>Ausgewichene</keyword0> Angriffe beschädigen dennoch den <keyword1>Block</keyword1> des Gegners"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "9d40f526e90d52ac3c5db86f1a1debafb9aa0f83b7b480ccf3c96ccde8e49bc0",
+    "text": "Krönungsglocke"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "5d373506319df54fc99b8fae6aaac349239655db030375488eb11256f2893fa6",
+    "text": "Sichelsextant"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "5cf26d170aa98cdb4926be7bcedfa40cfb5fc539f0cb9c3807b76b2645ade535",
     "text": "Beutelschneidermesser"
+  },
+  "content.boon.cutpurse-knife.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "74a7f063f22918a1bba8cf09302b4788f8c96004d9a78178a8498fcddd4faf69",
+    "text": "Erhalte {{value0}} Gold, wenn du <keyword0>Blutungsschaden</keyword0> verursachst"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "65801bc87ce1a9e2a4951f155dc869ea183dbfd100a4680758cfc638d6e85e8f",
+    "text": "Hingabeverschluss"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "7ded4003837d86e16e95b9dad6d9e2605eed32e3061ebf3cc1a8aec00f0de156",
+    "text": "Traum-Tangram"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "3541b31650e89545ad0f9102e03c1896980df2346a2c08a85f56caaeeb7fea46",
+    "text": "Traum-Jo-Jo"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
@@ -365,17 +509,41 @@
     "sourceHash": "712a20d4921f61f7622d8535cacaaeb510e31ca044f1e2fd5c221c051af6cbe7",
     "text": "Das Spielen von <keyword0>Nahrung</keyword0> zieht eine Karte"
   },
+  "content.boon.frozen-pocketwatch.name": {
+    "reviewed": true,
+    "source": "Frozen Pocketwatch",
+    "sourceHash": "b3b46fa1c1c99cda781aefbd1b4b2516827e79c9c4dcbac49635359883bf7b69",
+    "text": "Gefrorene Taschenuhr"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "3d0bc7b0233b24855a65e3744c1705db868019fb3a5771de410f37876d207d0c",
     "text": "<keyword0>Rüstung</keyword0> reduziert auch <keyword1>Dornen</keyword1>schaden"
   },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "00a1bbd6231664cd4229344efcbc008d6dae50696f9a371b556e12f188e78426",
+    "text": "<keyword0>Block</keyword0> kann nicht unter <keyword1>Rüstung</keyword1> verfallen"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "306550399bba5f790e282e7f4aa0663c92715764c6d325bdb2c48ea4aee58abf",
     "text": "Gunst des Hains"
+  },
+  "content.boon.groves-favor.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
+    "sourceHash": "7e0c450fbac5f5b1d24f51e0b25c6d267e7ba0abe65129371b196a06a513d56f",
+    "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wenn du im Kampf <keyword1>Gesundheit</keyword1> wiederherstellst"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "0b43878c3209a618463d0513b11232caf8450208c8fbd5c88ca780463a4cd181",
+    "text": "<keyword0>Gift</keyword0> kann bei <keyword2>eingefrorenen</keyword2> Gegnern nicht <keyword1>gereinigt</keyword1> werden"
   },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
@@ -389,11 +557,29 @@
     "sourceHash": "e3634a5ce932eded36128cc6ed8a0650c23e8435c548ed145d6330e9136ec36d",
     "text": "Eisiges Herz"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "b2b9f4de857deaf1928c892846323fb124d5c720db23c1290d97e1a87074f4df",
+    "text": "Einen Gegner <keyword0>einzufrieren</keyword0> verursacht {{value0}} <keyword1>physischen</keyword1> Schaden"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "3db174f5b4acfb4750075bd173891f3787f963bf8ff7ef28bddf1cf245e27232",
     "text": "Eisenholzfaustschild"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "ef1f9d50d4cf1c7cd0bcd530a8e5cd7c51b0b43f8cbe798929aa8df9ee2fc24f",
+    "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wann immer du <keyword1>Block</keyword1> erhältst"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "56e06855d9832a5b680e576ff27101a865e8b9041d181a0dbef24d3c49918263",
+    "text": "<keyword0>Verbrennung</keyword0> verfällt nicht bei Gegnern mit <keyword1>Rüstung</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -407,11 +593,29 @@
     "sourceHash": "2db9ad8d8ffc6721001ea16b16c1fe699ea61e9dd5534926bb101c7cab33403a",
     "text": "Gunst des Händlers"
   },
+  "content.boon.merchants-favor.rule": {
+    "reviewed": true,
+    "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
+    "sourceHash": "e23a560ec2bbed90693f44acd87a852a7011a0018a42ee65609c33fe31dce344",
+    "text": "Dein Kauf bei jedem Segenhändler kostet {{value0}} Gold weniger"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "3b95ee5e51821484b2aa8fec425eb9e6ad84080ddb534e0df027d04de5c4f874",
     "text": "Meteorit"
+  },
+  "content.boon.moonboat-toy.name": {
+    "reviewed": true,
+    "source": "Moonboat Toy",
+    "sourceHash": "a377ab922829f8be8b6cb36ce4b7b956ff3cf69617ebd8e13084a178403cdb0b",
+    "text": "Mondbootspielzeug"
+  },
+  "content.boon.moonveil-mask.name": {
+    "reviewed": true,
+    "source": "Moonveil Mask",
+    "sourceHash": "e91163267d38d36d81efd12f2015d9b212e0d4412a45764056b7072d949344e2",
+    "text": "Mondschleiermaske"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
@@ -419,17 +623,53 @@
     "sourceHash": "9d8c470f36425122176f79b3d7f04a0d24f93a5d7847f49000141b9f4e3890c8",
     "text": "<keyword0>Nahrungs</keyword0>karten sind doppelt so wirksam"
   },
+  "content.boon.obsidian-pitcher.name": {
+    "reviewed": true,
+    "source": "Obsidian Pitcher",
+    "sourceHash": "5f684109e1ff5b8d9e3c0957268b27051d4e10f533018963f2ab0f9850b8fd93",
+    "text": "Obsidiankrug"
+  },
+  "content.boon.paper-lotus.name": {
+    "reviewed": true,
+    "source": "Paper Lotus",
+    "sourceHash": "f916cc3ebacf5acaa515b2a0ac3587086d84772406971b41cf959d999396fcdc",
+    "text": "Papierlotus"
+  },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "d4f17fe0df5a52c9a1cac9c86c7b24eea246e87e227e4e00431d7ecad1a45e61",
+    "text": "Verbündete mit <keyword0>Aufheben</keyword0> erleiden nur halben Schaden durch <keyword1>Verbrennung</keyword1>, <keyword2>Gift</keyword2> und <keyword3>Blutung</keyword3>"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
     "sourceHash": "5b94434efee46920a756f5aef516ffd7993ef4c7ad16c58f1671636838e17735",
     "text": "Parasitäre Blüte"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "920bc9de4d21c25618b5fbd7a7cc8e20e873bec6faf705172102269ef59f49e5",
+    "text": "<keyword0>Giftschaden</keyword0> hat eine Chance von {{value0}}% auf <keyword1>Lebensraub</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "f230babf765104b422f3594117d8c455f8422f6a72dcd0962cdf0a4da8f39bb0",
     "text": "Pestdoktormaske"
+  },
+  "content.boon.prayer-sailboat.name": {
+    "reviewed": true,
+    "source": "Prayer Sailboat",
+    "sourceHash": "52b5ad4ac022563168e444205d20509d84bf1462d7cfd3c7ae360e03b4178529",
+    "text": "Gebetssegelboot"
+  },
+  "content.boon.rain-cape.name": {
+    "reviewed": true,
+    "source": "Rain Cape",
+    "sourceHash": "790888100e5d58d3bfc78a45d3aa4a1071dbe0da4b2498230fabe27af73799e9",
+    "text": "Regenumhang"
   },
   "content.boon.rain-cape.rule": {
     "reviewed": true,
@@ -443,6 +683,12 @@
     "sourceHash": "1a0cf1e6bfa7787824cde93fb73cdc7814730d2fdb83668fa28a6c30512c19b8",
     "text": "<keyword0>Mana</keyword0> kann über das Maximum hinausgehen"
   },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "32d0133f697820f110a8f5e52ff7eb7a9c7515a569914b4cb342c4b0d5ef2644",
+    "text": "<keyword0>Aufheben</keyword0> wird nicht verbraucht, solange du <keyword1>Block</keyword1> hast"
+  },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
     "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
@@ -455,17 +701,35 @@
     "sourceHash": "e1851be702888ab78a489ccfcf902804a56e96deb9904209ca071653d85c6071",
     "text": "Resonanzglocken"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "1ff65faed4eef2e2c005fef5998dc9c4f6ef647f35ea152c9d488af956f40f5a",
+    "text": "Erhalte nach deiner dritten Karte pro Zug {{value0}} <keyword0>Mana</keyword0>"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "390d4ebdaa3c17d81bfbd8c242cf982926760dc07e4ef77c4cc52eb7b9a34003",
     "text": "Laterne des Sündenfressers"
   },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "59b69c77220f94dbd68774a718360d72b5ce483a39077b90d597e9803d267d96",
+    "text": "Stelle für jeden schädlichen Effekt, den du <keyword1>reinigst</keyword1>, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
     "source": "Smuggler's Map",
     "sourceHash": "3207af59d62a297d1f6f5fa00dd924b0c8f1eb3cbde692e419c96ad0bb25f6a6",
     "text": "Schmugglerkarte"
+  },
+  "content.boon.smugglers-map.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} additional Gold for each battle won",
+    "sourceHash": "59c4f895527616b69555507ad12caeca6df4bef9d3a6211785f817ec9868df92",
+    "text": "Erhalte {{value0}} zusätzliches Gold für jeden gewonnenen Kampf"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -490,6 +754,12 @@
     "source": "Thunderstone",
     "sourceHash": "ea8f2c71542762eb6644d3df9c6ff1646f844da29c4816e82317984ada005b49",
     "text": "Donnerstein"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "76dc9188e01ca617eaf2ee169b35533a15b9816fa84d567861e7966dda5dd9c9",
+    "text": "Verursache {{value0}} <keyword0>Natur</keyword0>-Schaden, wenn du einen Gegner <keyword1>betäubst</keyword1>"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
@@ -3071,6 +3341,12 @@
     "sourceHash": "b9deb6e2983d1c9bdf080ef6511c6d2fc095646aea746a6373be06342abb267c",
     "text": "Sonnengeküsster Schild"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "82b176ed13e6f88eadb862fd2712756137a219cb4079f088451e89843f378896",
+    "text": "Wenn Angriffe deinen <keyword0>Block</keyword0> aufbrauchen, <keyword1>reflektiere</keyword1> {{value0}}% des verlorenen <keyword2>Blocks</keyword2> als <keyword3>Licht</keyword3>-Schaden"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -3545,17 +3821,35 @@
     "sourceHash": "9c6436f34eee994d07a170b4f5c6ea59091942d07283549ada8301913faccf9a",
     "text": "Blutschuld"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "f0fee322a605962c0c5e08c4963fb934ad2a7aeddc3b24aef143e91128bd9fa6",
+    "text": "<keyword0>Lebensraub</keyword0> hat eine Chance von {{value0}}%, zusätzlich Gold in Höhe der wiederhergestellten <keyword1>Gesundheit</keyword1> zu gewähren"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "58a2887f3d01c61141856fb8636f8d70c120c6f1711e9fad79860ab031b2a899",
     "text": "Aderlass"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "30923c3fc2116531508f567d84ed874159e9c4b53133af25bbb95297ccbea104",
+    "text": "<keyword0>Lebensraub</keyword0> hat eine Chance von {{value0}}%, einen schädlichen Statuseffekt zu <keyword1>reinigen</keyword1>"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "36b5063bf88da03ab72c36b052a101262034facdbfe12dc80fa5dfdb81de078d",
     "text": "Die Schwachen ausmerzen"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "8ff21e441c9c55b87d70bb38879d730d4b364646d3d0b569f9660b528977ba76",
+    "text": "<keyword0>Lebensraub</keyword0>-Karten verursachen {{value0}}% mehr Schaden bei Gegnern unter halber <keyword1>Gesundheit</keyword1>"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3869,12 @@
     "sourceHash": "7171087166edc718e665f9caa53a41f6c87b50183700bb848478c80f05ad9a12",
     "text": "Verzweifeltes Absaugen"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "bc00b1a6615c6628cf52aac531d7ac7cbe88d2804d51343cd5c0a13c30b58189",
+    "text": "Verdopple die <keyword1>Heilung</keyword1> durch <keyword0>Lebensraub</keyword0>, solange du unter halber <keyword2>Gesundheit</keyword2> bist"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3893,23 @@
     "sourceHash": "6558a74f50cbab80b86ec0de1eb983fd660c3048c037afd5771854e6fb02b7d9",
     "text": "Blutüberfluss"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "38e4efa685d5b448f76b585f1ce01313b92f85df7e922fa9aa8f2b3124922601",
+    "text": "Wenn <keyword0>Lebensraub</keyword0> deine <keyword1>Gesundheit</keyword1> vollständig wiederherstellt, erhalte {{value0}} <keyword2>Mana</keyword2>"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "0687287c882f7f18d0f69c69858303d4314aabd44560a5f82043109eb25cf5c1",
     "text": "Hochgiftiger Lebensraub"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "920bc9de4d21c25618b5fbd7a7cc8e20e873bec6faf705172102269ef59f49e5",
+    "text": "<keyword0>Giftschaden</keyword0> hat eine Chance von {{value0}}% auf <keyword1>Lebensraub</keyword1>"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
@@ -3809,11 +4121,23 @@
     "sourceHash": "d192f04ad7b20792f49b29331fb8f34563d041301755565492e5929601a3641b",
     "text": "Dornenwuchs"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "b64baf18a95d3418202202a3f8ab2e08ef0a29f7a34eb3f5f324c9a2c2a03053",
+    "text": "<keyword0>Natur</keyword0>-Treffer haben eine Chance von {{value0}}%, <keyword1>Dornen</keyword1> in Höhe des verursachten Schadens zu gewähren"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
     "sourceHash": "b8bef844adb61e8d293ce311b239908155f6a1b42148e89b8d33c3a2df3891cf",
     "text": "Dornengestrüpp"
+  },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "6f06cb22b260fa5b0cc104a69467d5bc66ea38c089de7fb28e53ae3be6938c94",
+    "text": "<keyword0>Natur</keyword0>-Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Blutungsschaden</keyword1> zu verursachen"
   },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
@@ -3821,11 +4145,23 @@
     "sourceHash": "155beb31e0d2d12226ecda9993acc159e93a2e1776158bfa9b8132fc492fed86",
     "text": "Ökosystem"
   },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "030938ac3206eb7982e2d3d5e30a4db049509d88095aa3c5ef0afa3a83f4c411",
+    "text": "Ziehe zu Kampfbeginn eine <keyword0>Natur</keyword0>-Karte"
+  },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
     "source": "Entangle",
     "sourceHash": "ae0bbbaa4c4d13d0c9163ab9980c65068f30b97cd8ecfef5afffb7d252b9f10f",
     "text": "Umschlingen"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "6d72850d84ffbb2fade13a6702a989d4de52c92dba0fe50421890a77b6dc0ed9",
+    "text": "<keyword0>Natur</keyword0>-Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Betäubungsschaden</keyword1> zu verursachen"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3869,11 +4205,23 @@
     "sourceHash": "f72cc4860e15c519cba297036ea21d44420ba710cf6c5547953bab0112ade4b5",
     "text": "Giftpollen"
   },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "b30bfb90eab8c348b87d9a3ee8e92468b06893ad232116bcdd71b0a63720256d",
+    "text": "<keyword0>Natur</keyword0>-Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Giftschaden</keyword1> zu verursachen"
+  },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
     "source": "Verdant Cycle",
     "sourceHash": "9ee954717c30841ca7de3bdf3af43e4f65938c5815fbf0826ad22fe7724e590a",
     "text": "Grüner Kreislauf"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "511e90f76699cfe52ace3812f4b17a9c1cb04ce63e5c6102aa282c50909db983",
+    "text": "<keyword0>Natur</keyword0>-Schaden hat eine Chance von {{value0}}% auf <keyword1>Lebensraub</keyword1>"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,
@@ -3919,9 +4267,9 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "bdbc30b8e50de01c266ceefd11d769dbb8e213e3579f6dddeb6c472a201152e1",
-    "text": "<keyword0>Physischer</keyword0> Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Betäubung</keyword1>sschaden zu verursachen"
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "d606f1dfeabc51e9bbee5c20f447ca41d7f571f8c83b16b969d2dc7568b43771",
+    "text": "<keyword0>Physischer</keyword0> Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Betäubungsschaden</keyword1> zu verursachen"
   },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
@@ -3952,6 +4300,12 @@
     "source": "Rupture",
     "sourceHash": "114e6bc21ae8392724716afaee5ceaab1a4cf8bb193d4eef3ad79dcd2388b96f",
     "text": "Aufbrechen"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "61018638d8f76b22ad5b958b2f2ee0b5b4e46c2a1028d142acd971579baace62",
+    "text": "<keyword0>Physische</keyword0> <keyword1>kritische Treffer</keyword1> lassen <keyword2>Blutung</keyword2> detonieren"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
@@ -4649,6 +5003,12 @@
     "sourceHash": "f772535eaa3937db6df72692125501b575f09320f91fa9b517a789a190ff8f72",
     "text": "{{name}} verhindert Frostschaden"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "cc00fb66d7e2211fbcdd9bad425cb1ab7d3c1d55932175a681f4218d67f505ec",
+    "text": "{{actor}} reflektiert den Angriff auf {{target}} zurück"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -4666,6 +5026,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "7045c036abd55036084814f8fc5e1f8c311bdf6265b0b4a1c035da5b69d42c6a",
     "text": "{{name}}: {{action}} – kein Effekt entfernt."
+  },
+  "log.repeatNextEnemyCard": {
+    "reviewed": true,
+    "source": "The enemy's next card is played twice",
+    "sourceHash": "d0e9083e6701b0047b53e52a8777179f2328443217a05b8469efb8d73c7fd026",
+    "text": "Die nächste Karte des Gegners wird zweimal gespielt"
+  },
+  "log.repeatNextPlayerCard": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "58aaae72e6a7cc3bf790618a518d3e550a443ac9254f3dcd46fea106233f6a1d",
+    "text": "Deine nächste Karte wird zweimal gespielt"
   },
   "log.resurrect": {
     "reviewed": true,

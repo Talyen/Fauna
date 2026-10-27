@@ -317,6 +317,42 @@
     "sourceHash": "4b4fb2b8421ca2d9b5e9462797c23b087695fbbf0aba3a578edad3a9b1c30e59",
     "text": "加载中…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "9718021cd420b16c699b74e104bad8ecd247cd2504fbf4a1f78bf3b556d01ce4",
+    "text": "折叠桥"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "50513500316b28cf90a4fbedf34150267e5cff5489cbaffdee3c83afab31c2d9",
+    "text": "以太留声机"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "8dcf85614cff70efcd2b69516712ec11f92c802cb08a6bb553580bf47dfc8d78",
+    "text": "蜂场熏烟器"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "b04f8fea8e47c5d27a3228f8fb6a108323f6d6482f5461b7ae68d3b8ff66dd5c",
+    "text": "落灰吊坠"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "78ce397cc13df83037082a0b63654ee1ebc6b1f0e66664029cc7d2bb6500e895",
+    "text": "玄武岩玻璃书签"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "ceaaf69946510c5716d41db176aae3ba417a2bf0d98f7836ee57efe927ebe850",
+    "text": "花朵蛋糕架"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -329,11 +365,41 @@
     "sourceHash": "a7fe733fbfc3e5d01e620a649ef9a19ecb5f8f2ecc6ee7890c3b38edbcd4a729",
     "text": "白骨护符"
   },
+  "content.boon.bone-charm.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you defeat an enemy",
+    "sourceHash": "3706794ae0775a6927c6482221454f5aeeffefd53c24c9235eb35808bcade5e6",
+    "text": "击败敌人时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.boon.brass-censer.name": {
     "reviewed": true,
     "source": "Brass Censer",
     "sourceHash": "492f12f8aa76b4a76af38235126a4e7349ad9ae684e6cfe0c4bff83e7277f316",
     "text": "黄铜香炉"
+  },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "4a8df0bd03fd4e93dc14fdc698c63bdf32f15079dc9ec9c4ebc6b08809c34f27",
+    "text": "荆棘球拍"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "0241fad79df1d9a95b0f17c69dc5f7d7695fee8f8480b6bc6972189a9f4b53e7",
+    "text": "溪流跳石盘"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "c10b6c373d551c96fd5348ab2be587a629eb4066afc4742f2222af533053e50f",
+    "text": "金盏花皂"
+  },
+  "content.boon.camp-hammock.name": {
+    "reviewed": true,
+    "source": "Camp Hammock",
+    "sourceHash": "fdb9866bd415d02050294869c78267ba4789bb65773f985d58db4b98df95b079",
+    "text": "营地吊床"
   },
   "content.boon.camp-hammock.rule": {
     "reviewed": true,
@@ -341,11 +407,89 @@
     "sourceHash": "9a795b7010c74e2fa62b9b1122b1b432ddfc33b1594237ee27a824e424fd8bee",
     "text": "后备盟友可以接受<keyword0>治疗</keyword0>"
   },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "78f3a722bc65210db341dd3352d8d334635d535d4a13f58ea7db820926352565",
+    "text": "余烬扇"
+  },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "1bbbad11d6f26f5a13c8828e7bca91683ac034aba0f369f1ab1f9d9ffeab0e42",
+    "text": "云朵剑玉"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "3ad014a963a54536f496c870928bc6581b5ebf70cc82c9734fe7202e9771c551",
+    "text": "蜂巢开盖叉"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "cae395120bb74cbafc8148a79c83d023ddda90490842d9097022e3bb58a21e33",
+    "text": "彗星坩埚"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "bf9525e8989ea0b8f86818e5b6074d90cb7f7d93c757e1639d746c229b8daf71",
+    "text": "珊瑚音乐盒"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "172b28300fed3e051a23d6578c17a504d69aa53cf81b2eb314f735ae53b9c1a6",
+    "text": "珊瑚网坠"
+  },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "040dd3043e25c42f9530d1e6c1fdc5f8cefac7439c2cbd1678a8d58fbc8a3f09",
+    "text": "被<keyword0>闪避</keyword0>的攻击仍会损伤敌人的<keyword1>格挡</keyword1>"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "d25f80bc61148e49f5078f9e458b0b0bbe42cf6309993bca24550dadca3831b1",
+    "text": "加冕钟罩"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "a948a230831805bfd8a2fd0484feb0684c88856d828f9e2f1fd8463d1fdd9e53",
+    "text": "新月六分仪"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "11cb573923027cdc4262e4a1db262b8143a508cf23cd25d40d992db3a1f529ac",
     "text": "扒手小刀"
+  },
+  "content.boon.cutpurse-knife.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "87acc85e146fd72293ead1895ecad748c47474740e1e617e7490094ed577d44f",
+    "text": "造成<keyword0>流血</keyword0>伤害时获得{{value0}}金币"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "eef7c0db75b1e245b85a6d1e4620abff0b008eaa59831fa7c58ea128167e792a",
+    "text": "虔心扣饰"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "674052d42aa643a9310d82a1d0acadf3ae44096346b25da5e2678f8fd52a8886",
+    "text": "梦境七巧板"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "6ff4a1f39a265ca453c513249eed736e75ce3259da01197f2cf3d88e731cd8ab",
+    "text": "梦境悠悠球"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
@@ -365,17 +509,41 @@
     "sourceHash": "1d0c182a014d7dbecf9937913602a29f60cbe88a3cf3d363c50fa9b09029885f",
     "text": "打出<keyword0>食物</keyword0>时抽一张牌"
   },
+  "content.boon.frozen-pocketwatch.name": {
+    "reviewed": true,
+    "source": "Frozen Pocketwatch",
+    "sourceHash": "f34298c6d522e19da6017d380a40619e2c6c11e6875d65a4da4c70da051e0c76",
+    "text": "冰封怀表"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "a4dd9e61d50a2fe8e7d3273933ee10afe1e301b0de37e1f4b0db64d47aaef36a",
     "text": "<keyword0>护甲</keyword0>也能减免<keyword1>荆棘</keyword1>伤害"
   },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "5e7f1f383da79474955bee837379dad9f994fa3947b2debac16bf3aab7582fde",
+    "text": "<keyword0>格挡</keyword0>衰减时不会低于<keyword1>护甲</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "be6bcb633f8c9ff572f4e1ed65130d1c66a3b1757629ee28832c0e2063847231",
     "text": "林地的恩惠"
+  },
+  "content.boon.groves-favor.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
+    "sourceHash": "32e9f283cb4f5ab34437b341646939f11a87af08b27ef3d33463dec5b50dd215",
+    "text": "战斗中恢复<keyword1>生命</keyword1>时获得{{value0}}点<keyword0>荆棘</keyword0>"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "b5369432b975d15d9f16ca09a1a7c3b6a7e698c6c29ada762ac71428c7cc50b1",
+    "text": "无法从<keyword2>冻结</keyword2>的敌人身上<keyword1>净化</keyword1><keyword0>中毒</keyword0>"
   },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
@@ -389,11 +557,29 @@
     "sourceHash": "2fc38d7865994f4656ff35661281e2999b351201eb5e0a78bff6232cefcba83c",
     "text": "冰冷之心"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "d79c6cb3c7a9ac9e00079cbb1e21bfdfffe4207f0720a87adc55bc02462548b7",
+    "text": "<keyword0>冻结</keyword0>敌人时造成{{value0}}点<keyword1>物理</keyword1>伤害"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "11f14440f6a7888fd5d98c219eaf2c855561af803d66a8727e9713ab2f458044",
     "text": "铁木圆盾"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "4aea213fa5940bce156fab2e3393150fdb67913ab87ffb843f29aa65ec0f38d2",
+    "text": "每次获得<keyword1>格挡</keyword1>时，获得{{value0}}点<keyword0>荆棘</keyword0>"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "f4a47884779d48fd8bda2aaa5fed54529f98c382b500d0b8722a4d43355a4e82",
+    "text": "拥有<keyword1>护甲</keyword1>的敌人身上的<keyword0>灼烧</keyword0>不会衰减"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -407,11 +593,29 @@
     "sourceHash": "4323e0e6d9576ee1d8b1cef1fb25994e82b3eed7336dd3c80a711451cfc72597",
     "text": "商人的恩惠"
   },
+  "content.boon.merchants-favor.rule": {
+    "reviewed": true,
+    "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
+    "sourceHash": "0ac54f19cde6c5c4fee83ab33df0240aef3865b9a40b583e9cd795ffb346ea5a",
+    "text": "在每位祝福商人处购买的价格减少{{value0}}金币"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "4aae5d837f0925ccef875cddf1ebcc301a9cc6f7a5615cc14fa0facfcd61ab36",
     "text": "陨石"
+  },
+  "content.boon.moonboat-toy.name": {
+    "reviewed": true,
+    "source": "Moonboat Toy",
+    "sourceHash": "62c046081354b1c744ce4f49bb0ee5b5c3060254aa1c2d368b46f983128e7622",
+    "text": "月舟玩具"
+  },
+  "content.boon.moonveil-mask.name": {
+    "reviewed": true,
+    "source": "Moonveil Mask",
+    "sourceHash": "79f615ab50ebd45e9822d1854bb2ab14dbd0ec65a8469cd81507c43c1f18ced6",
+    "text": "月幕面具"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
@@ -419,17 +623,53 @@
     "sourceHash": "103266330342e94d32abb8a2a9980f5b0241ad2d58c586aef30591f6dcee5ff3",
     "text": "<keyword0>食物</keyword0>牌的效果翻倍"
   },
+  "content.boon.obsidian-pitcher.name": {
+    "reviewed": true,
+    "source": "Obsidian Pitcher",
+    "sourceHash": "ebd8ae5de1fd9fe6c609781e1ae5ae6f4db0fc7cdcf43645e1f3465e0409bbbf",
+    "text": "黑曜石水壶"
+  },
+  "content.boon.paper-lotus.name": {
+    "reviewed": true,
+    "source": "Paper Lotus",
+    "sourceHash": "e232802ed1635e56b03f9410a13285c521bd9edfca9a1d31fa600b0b55a3102e",
+    "text": "纸莲花"
+  },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "e816a8cb0fae3a71c70d75104aaedcb1b878856eed61eee9cc64594bf2b22025",
+    "text": "拥有<keyword0>无效化</keyword0>的盟友受到的<keyword1>灼烧</keyword1>、<keyword2>中毒</keyword2>和<keyword3>流血</keyword3>伤害减半"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
     "sourceHash": "7892ed624e30bc6c414517013ef22ce2c01f83a4ab6b7296a626f2e53f84958c",
     "text": "寄生之花"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "7bd11cc316ea47b271d3eed1977f612df78bd7e8e9eaaea45b332ace59ded450",
+    "text": "<keyword0>中毒</keyword0>伤害有{{value0}}%的概率触发<keyword1>汲取</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "38ad6125abf904d87538aedf8e368f0c0b18e3243a580525b3efbd764ca33296",
     "text": "瘟疫医生面具"
+  },
+  "content.boon.prayer-sailboat.name": {
+    "reviewed": true,
+    "source": "Prayer Sailboat",
+    "sourceHash": "16e75e0aba4772f4b5c1f6617c864e36cd478742b0dc39e3f63164b7043110ac",
+    "text": "祈愿帆船"
+  },
+  "content.boon.rain-cape.name": {
+    "reviewed": true,
+    "source": "Rain Cape",
+    "sourceHash": "5f05fd43e1d35d4388b69d9bbd340786d7a5849ca1a7305d485658b13dfd854e",
+    "text": "雨披"
   },
   "content.boon.rain-cape.rule": {
     "reviewed": true,
@@ -443,6 +683,12 @@
     "sourceHash": "59b40c7666e988f0123d57565ce84146d59f139843afc029cd7875fc0286c00d",
     "text": "<keyword0>法力</keyword0>可以超过上限"
   },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "40b3de4118ea85e263d6e6d9846c3ee5d8ce5c9079b647c57fcf26e17d2b1c50",
+    "text": "拥有<keyword1>格挡</keyword1>时不会消耗<keyword0>无效化</keyword0>"
+  },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
     "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
@@ -455,17 +701,35 @@
     "sourceHash": "cd8b9cebdd78583aeb659abe188ffbcb83264552350e62e983e869b3b34fd6b3",
     "text": "共鸣风铃"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "8b8c8217ec9463185c1a7ec553c3765b72172160b8cdbc87d2bb7b4d5d0bd19f",
+    "text": "每回合打出第三张卡牌后，获得{{value0}}点<keyword0>法力</keyword0>"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "bc3fb4d354edd090827fb8b2623df93d39fe405fb421b7b81dbccdf83a3ae3ff",
     "text": "噬罪者灯笼"
   },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "f8748993b79c44f2ab1c6933586c6048b1a8de7cf29093b483db53543fc10023",
+    "text": "每<keyword1>净化</keyword1>一个有害效果，恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
     "source": "Smuggler's Map",
     "sourceHash": "343a80e57e42db45935e797c9c04d2e299b37d75017071b365f424f94e55c2f4",
     "text": "走私者地图"
+  },
+  "content.boon.smugglers-map.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} additional Gold for each battle won",
+    "sourceHash": "d4b81f0c97a8e2f1985ec7abd5f59b9b656d3d4d4989bc3d7a896b3a783a78d0",
+    "text": "每赢得一场战斗额外获得{{value0}}金币"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -490,6 +754,12 @@
     "source": "Thunderstone",
     "sourceHash": "2d33b89e873cfddc229e0448f75c3165f79fac6e33835018e64721946dd2d44f",
     "text": "雷霆石"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "1a451ac871b41b3cb8ea6d753ed44a6636f7b0ff1bbd6a8f9ac006e8412e95dd",
+    "text": "<keyword1>眩晕</keyword1>敌人时造成{{value0}}点<keyword0>自然</keyword0>伤害"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
@@ -3071,6 +3341,12 @@
     "sourceHash": "4708c737997688feab96f582d766153493f83a1131b344bcd28aeb2d4c192f22",
     "text": "日灼之盾"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "6d46d096d276c6751a5f2dae4b7b2cd36ac37367f5e61d16442e60f63f547717",
+    "text": "攻击耗尽你的<keyword0>格挡</keyword0>时，将失去<keyword2>格挡</keyword2>的{{value0}}%作为<keyword3>光</keyword3>伤害<keyword1>反射</keyword1>"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -3545,17 +3821,35 @@
     "sourceHash": "8649a9e71f51239be75da41d157339fc401ac189885e4f0ab71f9b5db7e1c36e",
     "text": "血债"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "94797bb59c7e82e84c843c0587c3b01818154dec8214f437c34cbec4951cc366",
+    "text": "<keyword0>汲取</keyword0>有{{value0}}%的概率额外获得等同于恢复<keyword1>生命</keyword1>值的金币"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "0f33eaf7c358f387a86df28e79fc3cbb36ed0820643901534977a196e660dab2",
     "text": "放血"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "36935c28636edf785163c15cb954ff09bff21ce684813e4aabf8782ee4373b1d",
+    "text": "<keyword0>汲取</keyword0>有{{value0}}%的概率<keyword1>净化</keyword1>一个有害状态"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "a71838e8264a3c1af0c0622a2fe040410a1b493779ca116709b5787d8948801b",
     "text": "剔除弱者"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "e843fec5c3e2eaefd83a8a3a51ad64730dcea70d7f8c90d226c8b24828bc44cc",
+    "text": "<keyword0>汲取</keyword0>卡牌对<keyword1>生命</keyword1>低于一半的敌人造成的伤害提高{{value0}}%"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3869,12 @@
     "sourceHash": "7998982eab4eba7e595b7192060708b43c662e4e4f94af3264c1ab9ea08167fb",
     "text": "绝境虹吸"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "1b6f18099e3e778c8086ffcc9a00e17124bfc92ab72646ca8a7ed7b99fd923ef",
+    "text": "自身<keyword2>生命</keyword2>低于一半时，<keyword0>汲取</keyword0>的<keyword1>治疗</keyword1>翻倍"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3893,23 @@
     "sourceHash": "9a437948732ac5cda89d1dbed3cd6c2b535fa58b1e1360b737e632b1afc05264",
     "text": "鲜血溢流"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "ad904bd9ac10b41d4a1642acb610fc5296eb23ed8e62e6a177e912883eb3eb24",
+    "text": "<keyword0>汲取</keyword0>使<keyword1>生命</keyword1>回满时，获得{{value0}}点<keyword2>法力</keyword2>"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "6fc2472b47b79721972bbb6f730950f3789e4103de2341709540da63516351e4",
     "text": "恶性汲取"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "7bd11cc316ea47b271d3eed1977f612df78bd7e8e9eaaea45b332ace59ded450",
+    "text": "<keyword0>中毒</keyword0>伤害有{{value0}}%的概率触发<keyword1>汲取</keyword1>"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
@@ -3809,11 +4121,23 @@
     "sourceHash": "e29caa8daf3f12ae7800248c9f1f3f3deb4118547e59c6bee1a293e050b4852f",
     "text": "荆棘生长"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "a0134413bc3c08f17c40b4e099bed0060503d023aca91f52c52dabeaed924324",
+    "text": "<keyword0>自然</keyword0>命中有{{value0}}%的概率获得等同于造成伤害的<keyword1>荆棘</keyword1>"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
     "sourceHash": "56c72797d2c5640622ed8c52d26ddf6021ddbd56e78f4bef358053ea093c0964",
     "text": "荆棘丛"
+  },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "d96e4492630ff4eb9a6742295efde248d65ec4a7439d5477ebd8b9c050439512",
+    "text": "<keyword0>自然</keyword0>伤害有{{value0}}%的概率额外造成<keyword1>流血</keyword1>伤害"
   },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
@@ -3821,11 +4145,23 @@
     "sourceHash": "01e8ba8e568bfa27b78404a51ac768af92200fe5810eccfa3db0ed66a4039d46",
     "text": "生态系统"
   },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "e6e8c42b14369e6702d0c91f6a54e31bbf2a3950a54c82ad3e97222f93974e57",
+    "text": "战斗开始时抽取一张<keyword0>自然</keyword0>卡牌"
+  },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
     "source": "Entangle",
     "sourceHash": "4c76d54ea1a3549a6455b82f63f0bc91a5ac4db096d70205d5d679336555a5b5",
     "text": "纠缠"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "5955b2b1bd851de53281362cc58c7beba834c63101c36b72ffc2f9bfac9c891c",
+    "text": "<keyword0>自然</keyword0>伤害有{{value0}}%的概率额外造成<keyword1>眩晕</keyword1>伤害"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3869,11 +4205,23 @@
     "sourceHash": "509b6dd71d789cc9f2ff64d33c2a3221db4246a041602e7656db3279667c9a39",
     "text": "毒性花粉"
   },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "b89f8d2c18edf4bcca5f5dcd9fb2b1dd120eb4c5967048f15e2fe18237296ee7",
+    "text": "<keyword0>自然</keyword0>伤害有{{value0}}%的概率额外造成<keyword1>中毒</keyword1>伤害"
+  },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
     "source": "Verdant Cycle",
     "sourceHash": "363b1b4894e06b44926838aa72b2ca993a22220b8ac9ec7679def10128a33ef8",
     "text": "苍翠循环"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "2661bd746399a84d099254dd6de4c2498d4eb339ca84169f694b45b7ff8c273c",
+    "text": "<keyword0>自然</keyword0>伤害有{{value0}}%的概率触发<keyword1>汲取</keyword1>"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,
@@ -3919,9 +4267,9 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "4e01cb7c03d0b8b726c05a68c57128657468275d65f44d4ee35f930db684e4b7",
-    "text": "<keyword0>物理</keyword0>伤害有{{value0}}%的概率同时造成<keyword1>眩晕</keyword1>伤害"
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "1c681480c08a3a71eccc96f15552867ab07880f7395ad3e5cb9805e12ce013d4",
+    "text": "<keyword0>物理</keyword0>伤害有{{value0}}%的概率额外造成<keyword1>眩晕</keyword1>伤害"
   },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
@@ -3952,6 +4300,12 @@
     "source": "Rupture",
     "sourceHash": "06be4294352e217443eece355a49625a0f5320e3e321a5503be44d460352593a",
     "text": "破裂"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "7de9432d0b82dab169e294886560466d17a7189739c83ce4736dd03c77409eb7",
+    "text": "<keyword0>物理</keyword0><keyword1>暴击</keyword1>引爆<keyword2>流血</keyword2>"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
@@ -4649,6 +5003,12 @@
     "sourceHash": "9f1921bf23ba61fd52c991dc57ba442bcf37fc08876ec7fa959c0ce327312c17",
     "text": "{{name}}抵消了冻结伤害"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "1493aca840dc1b3c1c28064ea144eb4c4c3322ff0c3f11144c496585ce2e5fb8",
+    "text": "{{actor}}将攻击反弹给{{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -4666,6 +5026,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
     "text": "{{name}}：{{action}} — 未移除任何效果。"
+  },
+  "log.repeatNextEnemyCard": {
+    "reviewed": true,
+    "source": "The enemy's next card is played twice",
+    "sourceHash": "683b6cb21f773b07c8d5265ba5844052336203c99fd2d7f0f869614fc3c2b315",
+    "text": "敌人的下一张卡牌会打出两次"
+  },
+  "log.repeatNextPlayerCard": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "12b9fe7f9debdfc748433c525c83b03b1e161d45e769f4ae8827a9b2226092a5",
+    "text": "你的下一张卡牌会打出两次"
   },
   "log.resurrect": {
     "reviewed": true,

@@ -317,6 +317,42 @@
     "sourceHash": "aade6585fa0ffaee68cd420c87aecd3748a1258288f93da8a4ff1a847e576e1e",
     "text": "読み込み中…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "8f165bb02cda3e236c8756bcf17153706b3d66435660a46ab3690a28c50fd7e2",
+    "text": "折りたたみ橋"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "29a08fbbcba3a8cf5c8a036d85887c1c960d01715f9557de14875c7c76f53b70",
+    "text": "エーテルの蓄音機"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "52a0912b205b51db663bbdb1e9efeff6f81577c87ad14d7824788c66dc823fc5",
+    "text": "養蜂の燻煙器"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "87bdcb233370c5e2509cb419583d301971170063b70d7e45519744f6bbee08e1",
+    "text": "灰降りのペンダント"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "ebf22e6fddabda9eafb7b961cec515fca30a73b83484bf6c1b5f00052189e8ea",
+    "text": "玄武岩ガラスのしおり"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "b78682858edf8497927a082a846589be15aec9c998da71e98e97c12317dce8b7",
+    "text": "花のケーキスタンド"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -329,11 +365,41 @@
     "sourceHash": "4200aee3e6eb05b76c25c5741e632c8a43638d2a5e470e77ef2a90f9b43cd06d",
     "text": "骨のお守り"
   },
+  "content.boon.bone-charm.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you defeat an enemy",
+    "sourceHash": "e62b217752d68383ac3bdfc7677b58b5e6e528e14c85a29f57c82712671d7d6a",
+    "text": "敵を倒すと<keyword0>体力</keyword0>を{{value0}}回復"
+  },
   "content.boon.brass-censer.name": {
     "reviewed": true,
     "source": "Brass Censer",
     "sourceHash": "7378ce53146d8e518376135c30f1b0b89110c86d6b92894c37f0d6dfbbca379a",
     "text": "真鍮の香炉"
+  },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "4b39118759b45aafbaa327f95b56ed800540281031b9b7af1941625707e71f8e",
+    "text": "茨のラケット"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "b35f245d6c92250961bad24d70227bc053d5bf6e4f6795e6206b560668eab941",
+    "text": "小川跳ねの円盤"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "c6b5cd29a4255a6559599f7f2576e072a4e86410f0e0ccf2d7059b2cce27c85b",
+    "text": "カレンデュラの石鹸"
+  },
+  "content.boon.camp-hammock.name": {
+    "reviewed": true,
+    "source": "Camp Hammock",
+    "sourceHash": "e7c1f5ecfc62d9a3b5f4c0035e2cdfcd972cb4c6c7829b6526b4867300ef3ae3",
+    "text": "野営のハンモック"
   },
   "content.boon.camp-hammock.rule": {
     "reviewed": true,
@@ -341,11 +407,89 @@
     "sourceHash": "675c52706ebbb83ba990d2d3372a507185652ac644bf540ea4d80970cfc6a380",
     "text": "控えの味方も<keyword0>回復</keyword0>を受けられる"
   },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "8cd879760c6a1304004155bbd73f6f144b2599d8bd47c50b20a041f2a555b9f9",
+    "text": "熾火の扇"
+  },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "43ad4de3635b0fe56b5eec9fbe61ed7ee8f375a1d015d44328b06821bd6c31db",
+    "text": "雲のけん玉"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "1dac49007c87ab8f59a9bafe4e0d0d681f1dd6487e91fd03e0f9145ddf85461f",
+    "text": "巣房のふた切りフォーク"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "55308be388dbaf066a795c69da444d0bf821051bc91139a572741fb8a52576bb",
+    "text": "彗星のるつぼ"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "765f13388584673f899822feb68a75c7183864f1a4c21b487d7263263fa0dc96",
+    "text": "珊瑚のオルゴール"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "b1d81906a4c5fdaca5c9b950c534512762774bdaa14728c30df6f32c601ec604",
+    "text": "珊瑚の網のおもり"
+  },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "9ae95c6477b28e74f34c67d89fbf22983d11f00081f7da32071d92cad38eea96",
+    "text": "<keyword0>回避</keyword0>された攻撃も敵の<keyword1>ブロック</keyword1>にダメージを与える"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "7d17f0b1a6151dae26671291836d0e1fc876df3027f4f3a8f3c929e15d5b2d9a",
+    "text": "戴冠のクロッシュ"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "41324b018c588ab438fb3e6bc882daa84bee466ab9496423a39e0ae3596c0a4e",
+    "text": "三日月の六分儀"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "ef709a86e967ff3fae2857e2ec495e58a195e323e61a6e54a26cf9e0000b0196",
     "text": "掏摸のナイフ"
+  },
+  "content.boon.cutpurse-knife.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "6652305266ccdf550e203408ee6d984a490f5331b12f4edf819d1cbf2267ef34",
+    "text": "<keyword0>出血</keyword0>ダメージを与えるとゴールドを{{value0}}獲得"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "fa8270d9646c7c82720abba252e5640421d7d9dd47511dcc22e8f24c185324bf",
+    "text": "献身の留め具"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "278b9ce0e26269dc3638f916064dfc91db4e98f65ac563c541dcf94e43331005",
+    "text": "夢のタングラム"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "c0ab2cf06e669a742eeade6345444f15f1216d9d0e77d42eecfd12f3689fc491",
+    "text": "夢のヨーヨー"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
@@ -365,17 +509,41 @@
     "sourceHash": "7271aa4125770078775d78d7a2da0262908b3a90b6260b588fb018d44294f5d8",
     "text": "<keyword0>食料</keyword0>を使うとカードを1枚引く"
   },
+  "content.boon.frozen-pocketwatch.name": {
+    "reviewed": true,
+    "source": "Frozen Pocketwatch",
+    "sourceHash": "052235072450abb79b0ae25f73d9252ba9774869e722f24eee0662597cd72db2",
+    "text": "凍った懐中時計"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "086e912b446e51772cc545f7fcd8ccbe087c5f7a47bdfb100b59dbfdf961f366",
     "text": "<keyword0>装甲</keyword0>は<keyword1>棘</keyword1>ダメージも軽減する"
   },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "9d3dce683041ad6186a796069d359b0b99ac176c8b3efcfb0d7ebbe0a9f77154",
+    "text": "<keyword0>ブロック</keyword0>は減衰しても<keyword1>アーマー</keyword1>を下回らない"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "6c601a1114b14e5324d89b0749b1422cde3d04bc2e084d03b8b0e4afc5aae29f",
     "text": "木立の恩恵"
+  },
+  "content.boon.groves-favor.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
+    "sourceHash": "bf2df9c17e7e6ec3d9153fa40e4b9cd004659e02753974ec2515e20defad811e",
+    "text": "戦闘中に<keyword1>体力</keyword1>を回復すると<keyword0>トゲ</keyword0>を{{value0}}獲得"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "8c96353dbdbc3acca7e6d72c82765c0f7bd15955600f93a83f860a0dfcd74c43",
+    "text": "<keyword2>凍結</keyword2>した敵から<keyword0>毒</keyword0>を<keyword1>浄化</keyword1>できない"
   },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
@@ -389,11 +557,29 @@
     "sourceHash": "3b3eca04d7b73a51b7be35f68f35e408da92fbd84c59692a7d3556280a1239db",
     "text": "氷の心"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "5c30a66c1e6715fdc5c7c69f322df95b58c8d92fe26f4339a7da3e952654a050",
+    "text": "敵を<keyword0>凍結</keyword0>させると{{value0}}の<keyword1>物理</keyword1>ダメージを与える"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "b9d14ec72a6f7f63356118cd1aebdbe40562382fa74c9ddbb901e82a089658f0",
     "text": "鉄木の小盾"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "7b9608600cb038d6c2a9088128cf64244ee405db912c9b4d9a0b3d33ce5d66d4",
+    "text": "<keyword1>ブロック</keyword1>を獲得するたびに<keyword0>トゲ</keyword0>を{{value0}}獲得"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "85417a766b69a58a839ff8d1d7974aa256a95ad96bd321999026401e7766a6d3",
+    "text": "<keyword1>アーマー</keyword1>を持つ敵の<keyword0>火傷</keyword0>は減衰しない"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -407,11 +593,29 @@
     "sourceHash": "bc6a3861fd14f08f8b499947670ade1d1c956a9e161d500e4fca6250b53e0bb9",
     "text": "商人の恩恵"
   },
+  "content.boon.merchants-favor.rule": {
+    "reviewed": true,
+    "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
+    "sourceHash": "2ad0334b2b249454ba2baadee0b2f12a9745850c517a116b544108e247486b01",
+    "text": "各祝福商人での購入費用がゴールド{{value0}}分減少"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "b546cf6a759fb23f605977258da31082193b1ac3c3ffaa23965dcfa699dca67f",
     "text": "隕石"
+  },
+  "content.boon.moonboat-toy.name": {
+    "reviewed": true,
+    "source": "Moonboat Toy",
+    "sourceHash": "f03e00acae05af416a0d565bf18b96ba612abf209eb8e192fddd4142b47e0b1f",
+    "text": "月の小舟のおもちゃ"
+  },
+  "content.boon.moonveil-mask.name": {
+    "reviewed": true,
+    "source": "Moonveil Mask",
+    "sourceHash": "a74326bf86398b62f455677ecc6b7a067447bd5b2004fbb16eca146caff21b38",
+    "text": "月の帳の仮面"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
@@ -419,17 +623,53 @@
     "sourceHash": "1e548ead6a3391818e1c0670c57c9d5e67e9fcbe850447ecc72a9c986672cd0c",
     "text": "<keyword0>食料</keyword0>カードの効果が2倍になる"
   },
+  "content.boon.obsidian-pitcher.name": {
+    "reviewed": true,
+    "source": "Obsidian Pitcher",
+    "sourceHash": "f3b335fea746f80d27e5265fdc3aa39132a675c03aab923ee6e7b87ee90c8ecc",
+    "text": "黒曜石の水差し"
+  },
+  "content.boon.paper-lotus.name": {
+    "reviewed": true,
+    "source": "Paper Lotus",
+    "sourceHash": "c95b35eede70fab9a189a1b9b2e1392af59036c37fe9ee4219fba128cfe4833e",
+    "text": "紙の蓮"
+  },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "ca66ddb90225fed2c71bb3826c110ab48ab6c2aec777db859a31b86aec6ddd8b",
+    "text": "<keyword0>無効化</keyword0>を持つ味方が受ける<keyword1>火傷</keyword1>、<keyword2>毒</keyword2>、<keyword3>出血</keyword3>ダメージが半分になる"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
     "sourceHash": "e79002e6d8bb9bd7b67d59155cc7cf9070671fc110af915c051821aece984b41",
     "text": "寄生花"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "0fbba5b277129578247118f57fdeaa5b10523eabfd5519bb6d9e5ff122d76998",
+    "text": "<keyword0>毒</keyword0>ダメージは{{value0}}%の確率で<keyword1>吸血</keyword1>を発動"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "5718d4987a110ec5ef5cf2d896c4c97961d24d7385497692a9405c92ca1c85c9",
     "text": "疫病医師の仮面"
+  },
+  "content.boon.prayer-sailboat.name": {
+    "reviewed": true,
+    "source": "Prayer Sailboat",
+    "sourceHash": "96b8b9556e212728642ea7acc0b466fa89990401b2fdb123378ff76cb0a6e8dd",
+    "text": "祈りの帆船"
+  },
+  "content.boon.rain-cape.name": {
+    "reviewed": true,
+    "source": "Rain Cape",
+    "sourceHash": "ad22d924aa5959886f8c3f68f445c5aeb3bce77f5b5a19220eaf2ff7782b02fc",
+    "text": "雨のマント"
   },
   "content.boon.rain-cape.rule": {
     "reviewed": true,
@@ -443,6 +683,12 @@
     "sourceHash": "88604a712fd0d1953c7d642d0ca4608942d9eeb74e7dcde565b1f817ee8d74fa",
     "text": "<keyword0>マナ</keyword0>は上限を超えて蓄えられる"
   },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "9e7ad0e3e96988c5af4de96a8b5a312d8386cab69f4df06694724780d9bee13b",
+    "text": "<keyword1>ブロック</keyword1>を持つ間、<keyword0>無効化</keyword0>は消費されない"
+  },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
     "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
@@ -455,17 +701,35 @@
     "sourceHash": "167777a672697ab58080e985b7fff3bc4413a2c09282ae54abce29c9b3d6efd6",
     "text": "共鳴する風鈴"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "e008e914573ac0ba7c62aba3a32fee2e9961ea2884f7361e1daa4c117c9d2a33",
+    "text": "各ターンの3枚目のカードの後に<keyword0>マナ</keyword0>を{{value0}}獲得"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "bc38cadb21104104952917d4c5316676f53bc08dcb474edd5b5037896abc477a",
     "text": "罪喰らいのランタン"
   },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "5f961b0b46867a5ff124d5581a11488ea28e80e285d6d47eae4c109124896717",
+    "text": "害のある効果を<keyword1>浄化</keyword1>するごとに<keyword0>体力</keyword0>を{{value0}}回復"
+  },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
     "source": "Smuggler's Map",
     "sourceHash": "8410068df61671cb7895453dcc230bac82921c7c638e2d7da1f2f2745cb174fa",
     "text": "密輸人の地図"
+  },
+  "content.boon.smugglers-map.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} additional Gold for each battle won",
+    "sourceHash": "8e2195c2d5e087c23d12fd78b7bb1a808bc188dcb4b4acd26d064d80d0541869",
+    "text": "戦闘に勝利するたびに追加のゴールドを{{value0}}獲得"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -490,6 +754,12 @@
     "source": "Thunderstone",
     "sourceHash": "daa6d2f6dcdc1c7a8493f5c50d90bb518bcce75778c53cc4d79acb0572f5cb55",
     "text": "雷石"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "bf443095b42a88128b092105e60556c56052cbd4cf2dfc5f3fecad8954c216ad",
+    "text": "敵を<keyword1>スタン</keyword1>させると{{value0}}の<keyword0>自然</keyword0>ダメージを与える"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
@@ -3071,6 +3341,12 @@
     "sourceHash": "2c5685ff783da1a158ebe13ba69b7165df997117b8a7f7a9cde13e83d44415a0",
     "text": "日の光の盾"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "4cb6452ef46c313aeeab6f96d4b2690565fca710d39498a037fea0c96935b746",
+    "text": "攻撃で<keyword0>ブロック</keyword0>が尽きると、失った<keyword2>ブロック</keyword2>の{{value0}}%を<keyword3>光</keyword3>ダメージとして<keyword1>反射</keyword1>"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -3545,17 +3821,35 @@
     "sourceHash": "190c5967ce6eabc1386caa474c2e47b5780a773f6720bdc7af53712db89e47ed",
     "text": "血の負債"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "2a18f1a4752c17f6ca1de6cbb3bc8433e6a745a79f95b452f976c13301edfa21",
+    "text": "<keyword0>吸血</keyword0>は{{value0}}%の確率で、回復した<keyword1>体力</keyword1>と同量のゴールドも獲得"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "0058dcd12ecc8af1ef85c0cc34a325719e9d90e99d9ff2c437d8f7d514815966",
     "text": "瀉血"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "e9da5edac21422169b627469cbd0f5eff40a42e4c7e9ab1ceda8f670ee6c45b5",
+    "text": "<keyword0>吸血</keyword0>は{{value0}}%の確率で害のある状態効果を1つ<keyword1>浄化</keyword1>"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "cd9c371edff853c693472b252f67a37728a911b848c8679df73e5dd653f8bc09",
     "text": "弱者の淘汰"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "222c4006bc040d2283f31f738e847fef73066ab34ab21bfa2be17137089f542b",
+    "text": "<keyword0>吸血</keyword0>カードは<keyword1>体力</keyword1>が半分未満の敵に与えるダメージが{{value0}}%増加"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3869,12 @@
     "sourceHash": "51791ec0b90c1606e027621e537e57bd0c48eb0447e89d16e02ad54138386879",
     "text": "窮地の吸収"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "c00578a6128ea6e3255945bd369bcd7b7fccc2badd5f3cefc4bc50ec25a5ea88",
+    "text": "<keyword2>体力</keyword2>が半分未満の間、<keyword0>吸血</keyword0>による<keyword1>回復</keyword1>が2倍"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3893,23 @@
     "sourceHash": "c03cb8be4779b1c44cd9cb0f6a0a6efc200498516b576fb8dba41f98075f9b5a",
     "text": "溢れる血潮"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "234e46e05d41a06d996d70e424fc3b8f3424ad2455f484efb3e533864d4215f0",
+    "text": "<keyword0>吸血</keyword0>で<keyword1>体力</keyword1>が最大になると<keyword2>マナ</keyword2>を{{value0}}獲得"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "077df4086ff858e2a3ebfde0565663def11ae290ecacb30fa759b1e3be928842",
     "text": "猛毒の吸血"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "0fbba5b277129578247118f57fdeaa5b10523eabfd5519bb6d9e5ff122d76998",
+    "text": "<keyword0>毒</keyword0>ダメージは{{value0}}%の確率で<keyword1>吸血</keyword1>を発動"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
@@ -3809,11 +4121,23 @@
     "sourceHash": "73e31e34301b651806c127dd66599676101d5929ccd79e3bdb5baf1f9f77c43a",
     "text": "茨の成長"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "0d93c18f53cb189896437d3532ed9a5728074f4cc121eb4e483fe92bc6576def",
+    "text": "<keyword0>自然</keyword0>のヒットは{{value0}}%の確率で、与えたダメージと同量の<keyword1>トゲ</keyword1>を獲得"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
     "sourceHash": "65fb181c8c33e0ee84c8b18af8d9b4d1470bf3a49b3bbf8f769442655f07a54f",
     "text": "茨の茂み"
+  },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "035969cbd6ce31640bc52d3cbd279badffa086e58ac818c4dc9db6636396c1fb",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>出血</keyword1>ダメージを与える"
   },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
@@ -3821,11 +4145,23 @@
     "sourceHash": "a345c31db0bf36799e1732691bd8b2bb5ca55525c85dc55844fd363a5a497e74",
     "text": "生態系"
   },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "9bfa73ede054fce07677a0b452911dff7382d5518749df20fe10865349c1fb05",
+    "text": "戦闘開始時に<keyword0>自然</keyword0>カードを1枚引く"
+  },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
     "source": "Entangle",
     "sourceHash": "421a272c6bdeecc1909ce96d9c415bda5dc9c96c201a39a4caa35de6ecc44509",
     "text": "絡みつき"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "79c2b09d72f080bb6c993e643a0f0e83800c847f0272f7b34cd0a21671570916",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>スタン</keyword1>ダメージを与える"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3869,11 +4205,23 @@
     "sourceHash": "eecd95f9115170fb84dba2d054cf804fb9d30f46f790ac9a831dd0c24ac0ad02",
     "text": "有毒な花粉"
   },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "15f2a23e03e42fc00aff5e9567f6f0027b89445386f6812ec4bb9c24e7f8e10f",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>毒</keyword1>ダメージを与える"
+  },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
     "source": "Verdant Cycle",
     "sourceHash": "71893f89b32586763e36e238af2d3ca1ca1f64365a5a7cabca25c5bb04b67687",
     "text": "緑の循環"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "21f111646f52bc0d07b63b759788b4dece10b3a74f0b06f3bb498cc4967d6b85",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で<keyword1>吸血</keyword1>を発動"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,
@@ -3919,9 +4267,9 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "c562b2c51af6faa528924e32847dd4c0cce2ce7e29a6e4907a6c619de4f6be99",
-    "text": "<keyword0>物理</keyword0>ダメージは{{value0}}%の確率で<keyword1>スタン</keyword1>ダメージも与える"
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "be7e0ae3e057365aff97cddcfce21a9d7fd458c598934271da60d2cb5279a044",
+    "text": "<keyword0>物理</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>スタン</keyword1>ダメージを与える"
   },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
@@ -3952,6 +4300,12 @@
     "source": "Rupture",
     "sourceHash": "3820ac49fd78d75bc8b12993bd571379defd978aa1585d94ddbbc1230422cd3e",
     "text": "破裂"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "ce8f42722921c2495265ad0e6359999618dda2c4e314a73e22d61de3b2ff3272",
+    "text": "<keyword0>物理</keyword0>の<keyword1>クリティカル</keyword1>は<keyword2>出血</keyword2>を爆発させる"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
@@ -4649,6 +5003,12 @@
     "sourceHash": "edaa2142c6abbc37fec4b9fcb03e8f3487ec301d20f975d066f635d7446612ba",
     "text": "{{name}}は凍結ダメージを無効化した"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "e5589f1c5dda9d60e29265d06fef63dea7acc0d6fb6c645dedd85d302813e871",
+    "text": "{{actor}}が攻撃を{{target}}に跳ね返す"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -4666,6 +5026,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "e84c3f4bfc1324af913a24c419c5844bc6e97e64f0005168f2f4b6ce36d896c0",
     "text": "{{name}}：{{action}} — 解除された効果はありません。"
+  },
+  "log.repeatNextEnemyCard": {
+    "reviewed": true,
+    "source": "The enemy's next card is played twice",
+    "sourceHash": "987e4deb4eaf490cc3b3faf1d3a240f74039911bd1579278c2f506e907189fa6",
+    "text": "敵の次のカードは2回プレイされる"
+  },
+  "log.repeatNextPlayerCard": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "95e7d22366061ccec26e100519b9e9f353ff511584f27f6f7fa36a5e236eb8d9",
+    "text": "次の自分のカードは2回プレイされる"
   },
   "log.resurrect": {
     "reviewed": true,

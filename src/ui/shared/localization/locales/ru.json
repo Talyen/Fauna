@@ -317,6 +317,42 @@
     "sourceHash": "cfda79cf8f70f0029f142732530155f90b9f40050a2ad9dfce35e0144df37df0",
     "text": "Загрузка…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "db58de20cfd7847c5fb19a7958279135ad7c94e3ccc903cd8a0b89f77851b438",
+    "text": "Складной мост"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "50ff0c6b0f6f15dcc2e67242ae37cb2d02c7b47b6a40dd6a9e4153761f7a295e",
+    "text": "Эфирный граммофон"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "483afe11e336dfbe0dd6bdf0a4f6b005c183b58a79bfb21ca912ca894465fa31",
+    "text": "Пасечный дымарь"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "38d7540973cea758166ecd54818df1cbcc84b7d3899c201a3394ea25828fce00",
+    "text": "Пепельная подвеска"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "cfb5239b0367b3f597d4cd16f4decd9538f6288f95ea7e4bc737df597840ecef",
+    "text": "Закладка из базальтового стекла"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "ce85bbdc7961f6c5e9a78efb6a76d2775bddd786ac44222632aa9b921ad4ac8d",
+    "text": "Цветочная подставка для торта"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -329,11 +365,41 @@
     "sourceHash": "83707414887d63cb04879b6f1d5148b973a47cead646245c5e1b2fe5bf5650dd",
     "text": "Костяной оберег"
   },
+  "content.boon.bone-charm.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you defeat an enemy",
+    "sourceHash": "044a95260c47dc368a8dd3affbf7580619cae17cbd637dafd5fce8fa9180e609",
+    "text": "При победе над врагом восстановите {{value0}} <keyword0>здоровья</keyword0>"
+  },
   "content.boon.brass-censer.name": {
     "reviewed": true,
     "source": "Brass Censer",
     "sourceHash": "c064fc4cc4f723be380f1337f6cec221da0c405ec37e9a46c296fef4debbd42b",
     "text": "Латунное кадило"
+  },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "0fae2234160d4ba1884d2ca3239599a3bf06a0b83ac45184d6c9a3942603d1cf",
+    "text": "Ракетка из шиповника"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "e4161cff0d0348725661891c63f0dd2c2461c19b2f5499aac4fac315db2244a4",
+    "text": "Диск для речных скачков"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "1e3d9d963b6511851520b9a9c15e73b344ba56aed694307df735fb6621404637",
+    "text": "Мыло с календулой"
+  },
+  "content.boon.camp-hammock.name": {
+    "reviewed": true,
+    "source": "Camp Hammock",
+    "sourceHash": "652c3a3322784588f8455be832cb587fbe87c84b077fb3e31424c4cd84f3490f",
+    "text": "Походный гамак"
   },
   "content.boon.camp-hammock.rule": {
     "reviewed": true,
@@ -341,11 +407,89 @@
     "sourceHash": "f268dc56e4c35b51aa32871efd655109388e6c44a9fff3176b8c22308c411aba",
     "text": "Союзники в запасе могут получать <keyword0>лечение</keyword0>"
   },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "35eccf0086bafb4b8c79d535fa4409939af5e95fff82b2a69dfb9544f55025a8",
+    "text": "Веер угольков"
+  },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "00d4d81613e151e83824c85d574a51bc51ce22073d373ea116264234c6783bc2",
+    "text": "Облачная кэндама"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "91689ff7a5d0dfc4d9fa5380943b1d678cae38241394840f693830cf66139981",
+    "text": "Вилка для распечатки сот"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "1c0816658405d8ea570790d3922538f0d8ee34aa76b2932155e0359d6536bc55",
+    "text": "Кометный тигель"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "81a25e03cede2ac25f78869e12bd4abbd8fd9dd9a01457679a3e9631d58501f7",
+    "text": "Коралловая музыкальная шкатулка"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "588103b38f36d6bbcb00a16f0671ae3829dc9252bf0bf446b63e582a250a0425",
+    "text": "Коралловое грузило для сети"
+  },
+  "content.boon.coral-net-weight.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "sourceHash": "49591ce2f5eeb45cafe6ef4a9ce08a316057afd1ab95a243f604298447ea7543",
+    "text": "Атаки, от которых <keyword0>уклонились</keyword0>, всё равно повреждают <keyword1>блок</keyword1> врага"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "27a1ad91c0e28ccf204455d6c456e8927609257f9490bfee888f5d9ab13f814c",
+    "text": "Клош коронации"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "14a6d5067f63e0cfe42ce1d12622c83da2816284dd2e24dd14abcdf488b0f507",
+    "text": "Секстант полумесяца"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "b246efade40a55a10c180028b6446de3b072a30b8dc85452fb24f299d5fd2dcb",
     "text": "Нож карманника"
+  },
+  "content.boon.cutpurse-knife.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "9d66a02d34c420ebd71133fa98ddd21ac3248aad5cbd213dc1320c381aeda67d",
+    "text": "Получите {{value0}} золота, когда наносите урон <keyword0>кровотечением</keyword0>"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "822f04a42e71bf3d18db036c77eec469389a2075a3f72c930a1b4f20204ae03b",
+    "text": "Застёжка преданности"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "33a004af846ddae97163223a6b49a336abc04f35056d22630ebb3045d1e2ff9a",
+    "text": "Танграм грёз"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "9da33ad8e494e4234d47c0d6c043d2e2927e7a900247df55e4f00e2ab131f0e6",
+    "text": "Йо-йо грёз"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
@@ -365,17 +509,41 @@
     "sourceHash": "f0c21539cd42724767894374d3466d5d7ac4ff2af775edca77954851f1568d92",
     "text": "Розыгрыш <keyword0>еды</keyword0> позволяет взять карту"
   },
+  "content.boon.frozen-pocketwatch.name": {
+    "reviewed": true,
+    "source": "Frozen Pocketwatch",
+    "sourceHash": "d2a42db23917646ae6d3a0a6d2c904fa09ab1cd5fd98aa4c347aaa59d397565f",
+    "text": "Замёрзшие карманные часы"
+  },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
     "sourceHash": "4ee950c69c7769a866e694beff0fce7699a2f3325c09615d8de7909aa3d303fe",
     "text": "<keyword0>Броня</keyword0> также снижает урон от <keyword1>шипов</keyword1>"
   },
+  "content.boon.geode-anvil.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "sourceHash": "85144d34b7dec396fc944e9d98f003a036e7e94004faf75c3b783a16942f950a",
+    "text": "<keyword0>Блок</keyword0> не может уменьшиться от угасания ниже <keyword1>брони</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "6fbbecd932a54ee1214b395b4759bc9af23cf71b6cdf7a2506fb3142fd72d122",
     "text": "Милость рощи"
+  },
+  "content.boon.groves-favor.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
+    "sourceHash": "b3c539ab9ad47638eb6bbc1712d1408b99c2f914b15ee127a986f6c746388304",
+    "text": "Получите {{value0}} <keyword0>шипов</keyword0>, когда восстанавливаете <keyword1>здоровье</keyword1> в бою"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "bd7cb9e832bebdd81edf63af5a4fa017c1055be07fff1acd2d867eb7d007eb23",
+    "text": "<keyword0>Яд</keyword0> нельзя <keyword1>очистить</keyword1> с <keyword2>замороженных</keyword2> врагов"
   },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
@@ -389,11 +557,29 @@
     "sourceHash": "1c8af3db6b273e1657667e6d95559506d0afc85dd2191902acb86d1bdcba9a09",
     "text": "Ледяное сердце"
   },
+  "content.boon.icy-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "sourceHash": "d17f86a5c21bfadad29ba4ea10f39af2a47e653719a2388bc4a31a9e21346af3",
+    "text": "<keyword0>Заморозка</keyword0> врага наносит {{value0}} <keyword1>физического</keyword1> урона"
+  },
   "content.boon.ironwood-buckler.name": {
     "reviewed": true,
     "source": "Ironwood Buckler",
     "sourceHash": "6f2a546351b90cd85671a35a015faaeaa780318f2134489b086761c76dd11fb4",
     "text": "Баклер из железного дерева"
+  },
+  "content.boon.ironwood-buckler.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "sourceHash": "d910d68e2a019eb3fd489563f5a0cf54ce1ebb1f3f226388d7df9e5adfecdfb9",
+    "text": "Получайте {{value0}} <keyword0>шипов</keyword0> каждый раз, когда получаете <keyword1>блок</keyword1>"
+  },
+  "content.boon.lava-cameo.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "sourceHash": "dc10579d8889f062d1451549f9f6f31c731f26643d84dd5d9fca77b71a44192e",
+    "text": "<keyword0>Горение</keyword0> не угасает на врагах с <keyword1>бронёй</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -407,11 +593,29 @@
     "sourceHash": "68a297b987aa3a296ea7e29d9605a2b7e1e1ba4dfaa60f01a3fdf20f31d4267c",
     "text": "Милость торговца"
   },
+  "content.boon.merchants-favor.rule": {
+    "reviewed": true,
+    "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
+    "sourceHash": "0bc93e18323e79abff09f1df5fddd29094ff813fe614052943a9ee0f6f6afdd8",
+    "text": "Покупка у каждого торговца благословениями стоит на {{value0}} золота меньше"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "e6ec02f602d1380079a33e5c971fd08b95e5942add499e98eb698a18bc313ad5",
     "text": "Метеорит"
+  },
+  "content.boon.moonboat-toy.name": {
+    "reviewed": true,
+    "source": "Moonboat Toy",
+    "sourceHash": "07e4fc912c773b8fc90d65c80352c42f36c2d5d3ce724003b3733b307fbedbec",
+    "text": "Игрушечная лунная лодка"
+  },
+  "content.boon.moonveil-mask.name": {
+    "reviewed": true,
+    "source": "Moonveil Mask",
+    "sourceHash": "29e33e756a0dd9a32d938393cb7492989ce9bf8b1cd6be822c3bc2ce7d17d0af",
+    "text": "Маска лунной вуали"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
@@ -419,17 +623,53 @@
     "sourceHash": "f4bab865c0b267b4d08646e0280b9d1d109b2c2e6434ce29c733a8fec81b35b0",
     "text": "Карты <keyword0>еды</keyword0> действуют вдвое сильнее"
   },
+  "content.boon.obsidian-pitcher.name": {
+    "reviewed": true,
+    "source": "Obsidian Pitcher",
+    "sourceHash": "dfdcb22522a8150397b5b254e9973d921c7b4997485d5f551cbe865944c15f4f",
+    "text": "Обсидиановый кувшин"
+  },
+  "content.boon.paper-lotus.name": {
+    "reviewed": true,
+    "source": "Paper Lotus",
+    "sourceHash": "428c6f63a3f27487a3c493701ff4f155d1c490b8aa6a5946bd8e6e7df2b9f3f3",
+    "text": "Бумажный лотос"
+  },
+  "content.boon.paper-lotus.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "sourceHash": "3f5c83521511b74440755d94541107c8e2128af4dc25c9b637f37ed9121e6c68",
+    "text": "Союзники с <keyword0>аннулированием</keyword0> получают вдвое меньше урона от <keyword1>горения</keyword1>, <keyword2>яда</keyword2> и <keyword3>кровотечения</keyword3>"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
     "sourceHash": "1626ca5f547c46790084e5d7a7027d8db0b22f062170f1ca094283b3e7f0de97",
     "text": "Паразитический цветок"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "738b1809cf3182ae64e2bba187efb3fa6f19164d0a735c2d09852fb6e50156c0",
+    "text": "Урон от <keyword0>яда</keyword0> с вероятностью {{value0}}% вызывает <keyword1>вампиризм</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "8034ee88abdf800612354c2233fdcd68703078f0b22311f072d04b82753a4ac3",
     "text": "Маска чумного доктора"
+  },
+  "content.boon.prayer-sailboat.name": {
+    "reviewed": true,
+    "source": "Prayer Sailboat",
+    "sourceHash": "b2dea3d98d211bb12e3c7c8b7102d967331f4c47c56e2c34f5b6f72d1c5edbb7",
+    "text": "Парусник молитвы"
+  },
+  "content.boon.rain-cape.name": {
+    "reviewed": true,
+    "source": "Rain Cape",
+    "sourceHash": "d407f40b3434d96d319ce184ae56cc97f6ee667447f2f62738278773a645f868",
+    "text": "Дождевой плащ"
   },
   "content.boon.rain-cape.rule": {
     "reviewed": true,
@@ -443,6 +683,12 @@
     "sourceHash": "54e635f9eacf2d1a7db8b188d6e63d6762ea6fa1f4511b3d5a3ec451f0987a6d",
     "text": "<keyword0>Мана</keyword0> может превышать максимум"
   },
+  "content.boon.reef-casket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "sourceHash": "24004b25254d8f316dd274c224f0c1f5a5962a8f98e2c850f25c08525155a023",
+    "text": "<keyword0>Аннулирование</keyword0> не расходуется, пока у вас есть <keyword1>блок</keyword1>"
+  },
   "content.boon.resonance-kalimba.rule": {
     "reviewed": true,
     "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
@@ -455,17 +701,35 @@
     "sourceHash": "bb6665f9f812972f4fa443083d933359568eb7ae57fa32b5542b12fe50060e6e",
     "text": "Резонирующие колокольчики"
   },
+  "content.boon.resonant-chimes.rule": {
+    "reviewed": true,
+    "source": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "7a41bb177c5246c0caf0bf34bc4d756469e4633257c9c2cbddc7766d5fd2d288",
+    "text": "После третьей карты в каждом ходу получите {{value0}} <keyword0>маны</keyword0>"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
     "source": "Sin-Eater's Lantern",
     "sourceHash": "5331bbd3a45c3f50a7b07b737a908edbe155eb8fcb8113defa1ba917e3b7f06e",
     "text": "Фонарь пожирателя грехов"
   },
+  "content.boon.sin-eaters-lantern.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "sourceHash": "d81603348455dece44dfef923ad92f832277f2c4185a6341b2d761600efc0d32",
+    "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0> за каждый <keyword1>очищенный</keyword1> вредный эффект"
+  },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
     "source": "Smuggler's Map",
     "sourceHash": "9266620094bd37be2aaf228115d8e28b13248945bad1fecffc71d708da7fcc43",
     "text": "Карта контрабандиста"
+  },
+  "content.boon.smugglers-map.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} additional Gold for each battle won",
+    "sourceHash": "38a6b3fa7535cc1f0a25c7207d932636df31174e3b54e12835fc8e0f64e25e73",
+    "text": "Получите дополнительно {{value0}} золота за каждый выигранный бой"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -490,6 +754,12 @@
     "source": "Thunderstone",
     "sourceHash": "b0890f6fdeaf37521864d749af5b59a14e7f308777f0cd337fdbfb0d92a9cfda",
     "text": "Громовой камень"
+  },
+  "content.boon.thunderstone.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "sourceHash": "9142e1dde00b294e67e61e5e26a713682b7e09cba42c71cf6c2074dbd59d4c12",
+    "text": "Нанесите {{value0}} урона <keyword0>природой</keyword0>, когда <keyword1>оглушаете</keyword1> врага"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
@@ -3071,6 +3341,12 @@
     "sourceHash": "dd58a0d2656062562df883648eaf196a10ab288bcd3a033288ff575bb2363aa9",
     "text": "Опалённый солнцем щит"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "71ad409b6ecf8e0b05f03b30f65efaf513706dbe254ef335610aab0b0bd8044d",
+    "text": "Когда атаки исчерпывают ваш <keyword0>блок</keyword0>, <keyword1>отразите</keyword1> {{value0}}% потерянного <keyword2>блока</keyword2> как урон <keyword3>светом</keyword3>"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -3545,17 +3821,35 @@
     "sourceHash": "b9a5c1f3694a2dbe2308d3e89958b51d53b917f59380a5b8ff81cb01212a561e",
     "text": "Кровавый долг"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "2aa04b4d49cd31c1a677cb4ed1e06bc38ac0d96ba9c8d249ef293950436f5553",
+    "text": "<keyword0>Вампиризм</keyword0> с вероятностью {{value0}}% также даёт золото в количестве восстановленного <keyword1>здоровья</keyword1>"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "bd295635d5cbf0a77ec353fa3c02c04f3a8787d5936314b032c31afe4a00db62",
     "text": "Кровопускание"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "b7500bcbd36a2bc559050410bccebb3efdf430260f9654df38a7c6ad511ef9ba",
+    "text": "<keyword0>Вампиризм</keyword0> с вероятностью {{value0}}% <keyword1>очищает</keyword1> один вредный эффект"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "4e84053c6ba8dfebe14c691530542ba9efac040266225402573a5f2baccd03b6",
     "text": "Отсечь слабых"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "29b7dd2d54119ad3dfe7a2ec1977964eb4c1ef64a909f45f5eab1e0e8b3454cd",
+    "text": "Карты <keyword0>вампиризма</keyword0> наносят на {{value0}}% больше урона врагам с менее чем половиной <keyword1>здоровья</keyword1>"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3869,12 @@
     "sourceHash": "4b09c6547089e512ddd623eaba98bcce6b2e7b13f8684cab1909a6b06db8502a",
     "text": "Отчаянное вытягивание"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "7e80cdacba7741fb0022051cfaf8a4097f35f2c902bbdf060dbf9dcbe262ae25",
+    "text": "Удвойте <keyword1>лечение</keyword1> от <keyword0>вампиризма</keyword0>, пока у вас менее половины <keyword2>здоровья</keyword2>"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3893,23 @@
     "sourceHash": "a20b43b28ffe6dbbd2063441062495c221fef2bcd79f267264898d43d33e09ab",
     "text": "Кровавый избыток"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "4fa8eacb2ab4173181c6d5baa56ac15041eced0d02102e5575c9462d08aeed96",
+    "text": "Когда <keyword0>вампиризм</keyword0> полностью восстанавливает ваше <keyword1>здоровье</keyword1>, получите {{value0}} <keyword2>маны</keyword2>"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "b58acff08c2888e57dedfabbac94a7557a5473bc0d0b56d3510f8cb8e0d4dab8",
     "text": "Ядовитый вампиризм"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "738b1809cf3182ae64e2bba187efb3fa6f19164d0a735c2d09852fb6e50156c0",
+    "text": "Урон от <keyword0>яда</keyword0> с вероятностью {{value0}}% вызывает <keyword1>вампиризм</keyword1>"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
@@ -3809,11 +4121,23 @@
     "sourceHash": "6f482c42c0c7e4700dad40b29ae0a1a6cb4d81a4c7d3c394a1c262c10ff9b39a",
     "text": "Рост терновника"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "sourceHash": "24da4e2522f6d4780f00c7bdad63d74a798ec933c2dfbff3726a4ff4a0d245e7",
+    "text": "Попадания <keyword0>природой</keyword0> с вероятностью {{value0}}% дают <keyword1>шипы</keyword1> в размере нанесённого урона"
+  },
   "content.talent.nature.briar-patch.name": {
     "reviewed": true,
     "source": "Briar Patch",
     "sourceHash": "072999e16f90f73713766f0d32edf699188382023f88ac63740393707a4c4527",
     "text": "Терновые заросли"
+  },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "656a473a54a3f6ae501772317d1adf9b628328cfef0b47db817c0bb1cedc16c3",
+    "text": "Урон <keyword0>природой</keyword0> с вероятностью {{value0}}% также наносит урон <keyword1>кровотечением</keyword1>"
   },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
@@ -3821,11 +4145,23 @@
     "sourceHash": "5c5caa834cb6c4f6e6feefeece67f06232ec5063913df9b9f4a21150d28c7761",
     "text": "Экосистема"
   },
+  "content.talent.nature.ecosystem.rule": {
+    "reviewed": true,
+    "source": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "sourceHash": "a0db275540243dd614c6f71df67b013196dbe4d079bf7246548457a6283afa4e",
+    "text": "В начале боя возьмите карту <keyword0>природы</keyword0>"
+  },
   "content.talent.nature.entangle.name": {
     "reviewed": true,
     "source": "Entangle",
     "sourceHash": "f7c57e5dbf2405aa11ab5315d724ffe6f88ff5baedd3abe010daf36e2083f1c4",
     "text": "Опутывание"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "7196e89d9a0ca004a0441f5a78badc0c9c38b1c3df8cd9bdd2c05e271da21112",
+    "text": "Урон <keyword0>природой</keyword0> с вероятностью {{value0}}% также наносит урон <keyword1>оглушением</keyword1>"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3869,11 +4205,23 @@
     "sourceHash": "c22136e145858f8938a7e85babf6b0cc1cbb37ca8bc36e654e95b26f6e299cff",
     "text": "Ядовитая пыльца"
   },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "118d4cb94221d7fad079c0ca93525a1abbde12ba48f3872dfd832bd5e66f77cc",
+    "text": "Урон <keyword0>природой</keyword0> с вероятностью {{value0}}% также наносит урон <keyword1>ядом</keyword1>"
+  },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
     "source": "Verdant Cycle",
     "sourceHash": "58e337c2f290061280b59aa7015971916af2d17774271f953469f2971c582dd2",
     "text": "Зелёный цикл"
+  },
+  "content.talent.nature.verdant-cycle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "e6ada0424fa07aa3b55cca01d1609201050b9dedb243da6f57bd3bbee4b7d81a",
+    "text": "Урон <keyword0>природой</keyword0> с вероятностью {{value0}}% вызывает <keyword1>вампиризм</keyword1>"
   },
   "content.talent.nature.windstep.name": {
     "reviewed": true,
@@ -3919,9 +4267,9 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "ef9b79810b3ffc9bca6241a80781c92762f1b38be7d4c6a4a5d7c221b63f1723",
-    "text": "<keyword0>Физический</keyword0> урон с вероятностью {{value0}}% также наносит урон от <keyword1>оглушения</keyword1>"
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "1f202b51cc21c70c0d49ef55eecdf3a83a3725cd3eb1dc9319e50c5add5043e4",
+    "text": "<keyword0>Физический</keyword0> урон с вероятностью {{value0}}% также наносит урон <keyword1>оглушением</keyword1>"
   },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
@@ -3952,6 +4300,12 @@
     "source": "Rupture",
     "sourceHash": "eac173c1760b143e8ae3d4c66bd9611fac49e1a02adcee7dbbb90382901c53a0",
     "text": "Разрыв"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "6203b1b5ec1b74cd24e2baf93ce4a77c3136a5176563007814005a08e7e0ea23",
+    "text": "<keyword0>Физические</keyword0> <keyword1>критические попадания</keyword1> взрывают <keyword2>кровотечение</keyword2>"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
@@ -4649,6 +5003,12 @@
     "sourceHash": "869a101c8c983ac4321747fac44b0fa773f3373b9a123440f5c6d5d5b142f895",
     "text": "{{name}} предотвращает урон от заморозки"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "69f9c3dee8f4c6f1d902ae841fe2f516afb034dd099bec63a2d44a902c4b162a",
+    "text": "{{actor}} отражает атаку — цель: {{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -4666,6 +5026,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "40b0929fede0b5c6db86af6fe0e5d200eb249e00d717f1ba3a50e32d166e2dd4",
     "text": "{{name}}: {{action}} — эффекты не сняты."
+  },
+  "log.repeatNextEnemyCard": {
+    "reviewed": true,
+    "source": "The enemy's next card is played twice",
+    "sourceHash": "dcbfd80d34d767922f8d3223b83ff604dcb691020a7ea34f3a13ba9fb10c4278",
+    "text": "Следующая карта врага разыгрывается дважды"
+  },
+  "log.repeatNextPlayerCard": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "2844ddaca43afb3745d969dbfcf60c40050fa3fc1a5f3d8c48de16809b1e1f55",
+    "text": "Ваша следующая карта разыгрывается дважды"
   },
   "log.resurrect": {
     "reviewed": true,

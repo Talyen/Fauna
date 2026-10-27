@@ -344,6 +344,9 @@
   "log.nullifyFreezeDamage": {
     "text": "{{name}} nullifies Freeze damage"
   },
+  "log.reflectAttack": {
+    "text": "{{actor}} reflects the attack back at {{target}}"
+  },
   "log.removeBuildup": {
     "text": "{{name}}: Cleanse {{status}} build-up"
   },
@@ -352,6 +355,12 @@
   },
   "log.removeNoEffects": {
     "text": "{{name}}: {{action}} removes no effects."
+  },
+  "log.repeatNextEnemyCard": {
+    "text": "The enemy's next card is played twice"
+  },
+  "log.repeatNextPlayerCard": {
+    "text": "Your next card is played twice"
   },
   "log.resurrect": {
     "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"

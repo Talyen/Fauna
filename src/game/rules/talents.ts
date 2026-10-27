@@ -249,19 +249,22 @@ const talentModifiers = freeze(
     "nature.windstep": { state: "freeNature", text: "When you Dodge, your next Nature card is free" },
     "nature.briar-patch": rule(
       { percent: 10 },
-      (p) => `Nature damage has a ${p.percent}% chance to also Bleed`,
+      (p) => `Nature damage has a ${p.percent}% chance to also deal Bleed damage`,
     ),
     "nature.toxic-pollen": rule(
       { percent: 10 },
-      (p) => `Nature damage has a ${p.percent}% chance to also Poison`,
+      (p) => `Nature damage has a ${p.percent}% chance to also deal Poison damage`,
     ),
     "nature.verdant-cycle": rule({ percent: 10 }, (p) => `Nature damage has a ${p.percent}% chance to Leech`),
-    "nature.entangle": rule({ percent: 10 }, (p) => `Nature damage has a ${p.percent}% chance to also Stun`),
+    "nature.entangle": rule(
+      { percent: 10 },
+      (p) => `Nature damage has a ${p.percent}% chance to also deal Stun damage`,
+    ),
     "physical.shield-slam": { text: "Add half your Block to Physical damage" },
     "physical.armored-fists": { text: "Add half your Armor to Physical damage" },
     "physical.heavy-blows": rule(
       { percent: 10 },
-      (p) => `Physical damage has a ${p.percent}% chance to also Stun`,
+      (p) => `Physical damage has a ${p.percent}% chance to also deal Stun damage`,
     ),
     "physical.finish-him": rule(
       { percent: 25 },

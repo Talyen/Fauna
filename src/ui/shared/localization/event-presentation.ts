@@ -28,6 +28,10 @@ export function eventPresentation(
   const combatant = (id: string | undefined) =>
     combatantById(game, id) ?? (previousGame ? combatantById(previousGame, id) : undefined);
   if (event.kind === "action" && event.actionType !== "swap") {
+    if (event.actionType === "support" && event.text === "Your next card is played twice")
+      return i18n.message("log.repeatNextPlayerCard", "Your next card is played twice");
+    if (event.actionType === "support" && event.text === "The enemy's next card is played twice")
+      return i18n.message("log.repeatNextEnemyCard", "The enemy's next card is played twice");
     const actor = combatant(event.actorId);
     if (actor) {
       const prefix = `${unitName(actor)} uses `;
@@ -106,6 +110,14 @@ export function eventPresentation(
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status") {
+    if (event.status === "attackReflection" && event.outcome === "immune") {
+      const actor = combatant(event.actorId);
+      if (actor && event.text === `${unitName(actor)} reflects the attack back at ${englishName}`)
+        return i18n.message("log.reflectAttack", "{{actor}} reflects the attack back at {{target}}", {
+          actor: localizedCombatantName(actor, i18n),
+          target: name,
+        });
+    }
     if (
       event.status === "nullify" &&
       event.outcome === "gain" &&
