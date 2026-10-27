@@ -1961,11 +1961,23 @@
     "sourceHash": "9bed9f26d6546e6049c6f308931976c0988cd18e811122b1cb665959f4f82643",
     "text": "{{name}} erhält {{amount}} Block."
   },
+  "log.gainBuildup": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}} buildup.",
+    "sourceHash": "fe6a3a62fbe8106837dc517e7217148d56e4983535fd97fd48a7fbac7699dab9",
+    "text": "{{name}}: Aufbau ({{status}}) +{{amount}}."
+  },
   "log.gainMana": {
     "reviewed": true,
     "source": "Gain {{amount}} Mana.",
     "sourceHash": "cbfbac7208fc8966d1b4801343c841f1f88e7eaf9f585d1f5064f4401d6fc6ba",
     "text": "Erhalte {{amount}} Mana."
+  },
+  "log.gainStatus": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}}.",
+    "sourceHash": "6b32deb665841a90444815a3b2d6149abdb1f0658ce8c01ecb094059c9bedb42",
+    "text": "{{name}}: {{status}} +{{amount}}."
   },
   "log.heal": {
     "reviewed": true,

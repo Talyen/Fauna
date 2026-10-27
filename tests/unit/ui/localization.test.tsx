@@ -166,6 +166,39 @@ it("translates turn and Mana announcements without inventing their values", () =
   );
 });
 
+it("distinguishes gained status stacks from Stun or Freeze buildup", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const name = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    "log.gainStatus": {
+      source: "{{name}} gains {{amount}} {{status}}.",
+      text: "{{name}} : {{status}} +{{amount}}.",
+    },
+    "log.gainBuildup": {
+      source: "{{name}} gains {{amount}} {{status}} buildup.",
+      text: "{{name}} : accumulation ({{status}}) +{{amount}}.",
+    },
+  });
+  const burn = {
+    kind: "status" as const,
+    targetId: target.id,
+    status: "burn" as const,
+    outcome: "gain" as const,
+    amount: 3,
+    text: `${name} gains 3 burn.`,
+  };
+  const stun = { ...burn, status: "stun" as const, text: `${name} gains 3 stun buildup.` };
+  expect(eventPresentation(game, burn, reader)).toBe(`${name} : Brûlure +3.`);
+  expect(eventPresentation(game, stun, reader)).toBe(`${name} : accumulation (Étourdissement) +3.`);
+  expect(eventPresentation(game, { ...stun, text: `${name} gains 3 stun.` }, reader)).toBe(
+    `${name} : Étourdissement +3.`,
+  );
+  expect(eventPresentation(game, { ...stun, amount: 2 }, reader)).toBe(stun.text);
+  expect(eventPresentation(game, stun, createMessageReader("en", {}))).toBe(stun.text);
+});
+
 it("changes menu messages and accessible counts without replacing the focused action", () => {
   const actions = {
     home: true,

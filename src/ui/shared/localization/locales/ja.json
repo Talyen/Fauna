@@ -1961,11 +1961,23 @@
     "sourceHash": "3a59b72e8d9d3469b223e1eb7563cbe1e70584f8cf8043fb9afa692ce2470390",
     "text": "{{name}}はブロックを{{amount}}得た。"
   },
+  "log.gainBuildup": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}} buildup.",
+    "sourceHash": "b086ad1f62ea92e3fc7fb64ad4d2be954567602de885055a9de701e42da33a65",
+    "text": "{{name}}：{{status}}の蓄積 +{{amount}}。"
+  },
   "log.gainMana": {
     "reviewed": true,
     "source": "Gain {{amount}} Mana.",
     "sourceHash": "7a8857da5197463e071c4d83b77482e69ef0268c6a9d4b77409012d0f817097f",
     "text": "マナを{{amount}}獲得。"
+  },
+  "log.gainStatus": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}}.",
+    "sourceHash": "94a9ebc996a5c0aa2a88ba369a62f55a66afee42bb825eaea038ce02dd305730",
+    "text": "{{name}}：{{status}} +{{amount}}。"
   },
   "log.heal": {
     "reviewed": true,

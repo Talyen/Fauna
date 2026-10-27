@@ -35,6 +35,23 @@ export function eventPresentation(
       ? i18n.content(`content.species.${target.species}.name`, speciesName)
       : englishName;
   const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
+  if (event.kind === "status" && event.outcome === "gain" && event.amount !== undefined) {
+    const status = event.status;
+    if (isKeywordId(status)) {
+      const keyword =
+        i18n.locale === "en"
+          ? status
+          : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label);
+      const values = { name, amount: quantity(event.amount), status: keyword };
+      if (event.text === `${englishName} gains ${event.amount} ${status}.`)
+        return i18n.message("log.gainStatus", "{{name}} gains {{amount}} {{status}}.", values);
+      if (
+        (status === "stun" || status === "freeze") &&
+        event.text === `${englishName} gains ${event.amount} ${status} buildup.`
+      )
+        return i18n.message("log.gainBuildup", "{{name}} gains {{amount}} {{status}} buildup.", values);
+    }
+  }
   if (event.kind === "heal" && event.text === `${englishName} restores ${event.amount} Health.`)
     return i18n.message("log.heal", "{{name}} restores {{amount}} Health.", {
       name,

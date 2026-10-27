@@ -1961,11 +1961,23 @@
     "sourceHash": "b3e955c2f3af820229ddaa6441b3f4b4ad5c69a38bcbd1b767cf7d41649324af",
     "text": "{{name}}获得了{{amount}}点格挡。"
   },
+  "log.gainBuildup": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}} buildup.",
+    "sourceHash": "a0c58fb3802dff653219fcfa5d0d6c00cde1e8569fc2b99c6fde1d050f188d5e",
+    "text": "{{name}}：{{status}}积累 +{{amount}}。"
+  },
   "log.gainMana": {
     "reviewed": true,
     "source": "Gain {{amount}} Mana.",
     "sourceHash": "e8fce4485ff73f81d316395b816ac572dfd5493c5dfeb26e421739d47218a6d8",
     "text": "获得{{amount}}点法力。"
+  },
+  "log.gainStatus": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}}.",
+    "sourceHash": "fc15b9c726d53b31bf5c2368ba074819581dc7bc291fab7e1ae473670339a3ae",
+    "text": "{{name}}：{{status}} +{{amount}}。"
   },
   "log.heal": {
     "reviewed": true,

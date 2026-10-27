@@ -254,8 +254,14 @@
   "log.gainBlock": {
     "text": "{{name}} gains {{amount}} Block."
   },
+  "log.gainBuildup": {
+    "text": "{{name}} gains {{amount}} {{status}} buildup."
+  },
   "log.gainMana": {
     "text": "Gain {{amount}} Mana."
+  },
+  "log.gainStatus": {
+    "text": "{{name}} gains {{amount}} {{status}}."
   },
   "log.heal": {
     "text": "{{name}} restores {{amount}} Health."

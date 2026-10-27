@@ -1961,11 +1961,23 @@
     "sourceHash": "39ac8559f974676451bca865b938f75f23ae2ffcc16b63ced19414f8253d6014",
     "text": "{{name}} obtiene {{amount}} de Bloqueo."
   },
+  "log.gainBuildup": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}} buildup.",
+    "sourceHash": "18a2c75acb56c66c7ab405ed3dfe471e6dbcaf931229b6291b8e31560ce96b8f",
+    "text": "{{name}}: acumulación ({{status}}) +{{amount}}."
+  },
   "log.gainMana": {
     "reviewed": true,
     "source": "Gain {{amount}} Mana.",
     "sourceHash": "b9e929f73595a6883441499e553c262c0c97b221d0bf382bd73023d5822e8136",
     "text": "Obtienes {{amount}} de maná."
+  },
+  "log.gainStatus": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}}.",
+    "sourceHash": "6b31ad2fb30cc9fcbf4ef03511cc6b73433e2b9372d3dc4330a60928333b2978",
+    "text": "{{name}}: {{status}} +{{amount}}."
   },
   "log.heal": {
     "reviewed": true,

@@ -1961,11 +1961,23 @@
     "sourceHash": "00991c09cd00b146e8dd4781a045101991e80266997717e46dd99d452d294229",
     "text": "{{name}} получает блок: {{amount}}."
   },
+  "log.gainBuildup": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}} buildup.",
+    "sourceHash": "e3d6fc23ca3d59ca925f5b6f3ce97b9267d166a20e3afdcdf11d3d0999cb70dc",
+    "text": "{{name}}: накопление «{{status}}» +{{amount}}."
+  },
   "log.gainMana": {
     "reviewed": true,
     "source": "Gain {{amount}} Mana.",
     "sourceHash": "3ccefae6bfb077e765d9944a0ff25ce3ffdc8753438e15120526d96a18b77458",
     "text": "Получено маны: {{amount}}."
+  },
+  "log.gainStatus": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} {{status}}.",
+    "sourceHash": "7d2508cf4eff553eb161350fc6b236ba0fc70587659083f8340c1b78f0282f8c",
+    "text": "{{name}}: {{status}} +{{amount}}."
   },
   "log.heal": {
     "reviewed": true,
