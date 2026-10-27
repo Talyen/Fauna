@@ -137,6 +137,10 @@ export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) 
 export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[] {
   if (!state.battle!.discard.length) return [];
   const owners = drawableOwnerIds(state);
+  const livingOwners =
+    otherOwnerId === undefined
+      ? undefined
+      : new Set(state.team.filter((unit) => unit.health > 0).map((unit) => unit.id));
   const cards = new Map<string, Card>();
   for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
   return state.battle!.discard.flatMap((id) => {
@@ -144,9 +148,7 @@ export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[
     return (
       otherOwnerId === undefined
         ? card.ownerId === null || owners.has(card.ownerId)
-        : card.ownerId !== null &&
-          card.ownerId !== otherOwnerId &&
-          state.team.some((unit) => unit.id === card.ownerId && unit.health > 0)
+        : card.ownerId !== null && card.ownerId !== otherOwnerId && livingOwners!.has(card.ownerId)
     )
       ? [card]
       : [];
@@ -318,14 +320,16 @@ export function drawHasAnotherCard(
   const owners = drawableOwnerIds(state);
   const cards = new Map<string, Card>();
   for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+  const eligible = (id: string) => {
+    const drawn = cards.get(id)!;
+    return (
+      (drawn.ownerId === null || owners.has(drawn.ownerId)) &&
+      (effect.kind === "draw" || cardKeywords(drawn).includes(effect.keyword))
+    );
+  };
   return (
-    [...state.battle.draw, ...state.battle.discard].some((id) => {
-      const drawn = cards.get(id)!;
-      return (
-        (drawn.ownerId === null || owners.has(drawn.ownerId)) &&
-        (effect.kind === "draw" || cardKeywords(drawn).includes(effect.keyword))
-      );
-    }) ||
+    state.battle.draw.some(eligible) ||
+    state.battle.discard.some(eligible) ||
     (!definition(played.definitionId).consume &&
       (effect.kind === "draw" || cardKeywords(played).includes(effect.keyword)) &&
       battleCardCapacity(state) > 0 &&

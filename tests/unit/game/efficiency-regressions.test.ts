@@ -1,10 +1,33 @@
 import { expect, it, vi } from "vitest";
 import { cardActor, drawableOwnerIds } from "../../../src/game/card-actors";
 import { discardDrawCards, drawHasAnotherCard, recoverBrokenGuard } from "../../../src/game/card-zones";
+import { chooseBattleCommand } from "../../../src/application/battle-policy";
+import { battleBenefitFacts } from "../../../src/application/battle-benefits";
 import * as engine from "../../../src/game/engine";
 import { projectPlay } from "../../../src/game/preview";
+import { cardKeywords } from "../../../src/game/progression";
 import { observeDecisions } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
+
+it("keeps cached card keywords isolated from callers", () => {
+  const card = { definitionId: "emberback-attack" };
+  const keywords = cardKeywords(card);
+  const expected = [...keywords];
+  keywords.splice(0);
+  expect(cardKeywords(card)).toEqual(expected);
+});
+
+it("refreshes battlefield facts between decisions and keeps replacement ties in ID order", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  expect(battleBenefitFacts(state).livingAllies()).toHaveLength(2);
+  state.team[0]!.health = 0;
+  expect(battleBenefitFacts(state).livingAllies()).toHaveLength(1);
+  state.reserves = [
+    { ...state.team[1]!, id: "z-backup" },
+    { ...state.team[1]!, id: "a-backup" },
+  ];
+  expect(chooseBattleCommand(state, false)).toMatchObject({ type: "swap", reserve: "a-backup" });
+});
 
 it("retains discard order, eligible owners and recovery events", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["oathara", "mossguard", "prismram"])));

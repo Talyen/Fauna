@@ -123,12 +123,15 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
   const boss = BOSSES.find((entry) => entry.encounter === game.encounter);
   return {
     name: boss ? "Boss" : "Combat",
-    enemies: pack.map((kind, index) => ({
-      name: boss && index === 0 && kind === boss.pack[0] ? boss.name : species(kind).name,
-      species: kind,
-      health: scaleEnemyStat(species(kind).health, game.encounter),
-      power: 1 + game.encounter / 10,
-    })),
+    enemies: pack.map((kind, index) => {
+      const entry = species(kind);
+      return {
+        name: boss && index === 0 && kind === boss.pack[0] ? boss.name : entry.name,
+        species: kind,
+        health: scaleEnemyStat(entry.health, game.encounter),
+        power: 1 + game.encounter / 10,
+      };
+    }),
   };
 }
 

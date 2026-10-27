@@ -19,6 +19,7 @@ import { bossEncounter, encounterSource, finalEncounter, generateEncounterPack }
 import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
 import { rebuildCards } from "./team";
 const OPTIONAL_DESTINATION_CHANCE = 0.25;
+const recruitSpecies = SPECIES.filter((entry) => !entry.legendary);
 
 export function offerStarters(state: GameState) {
   const pool = starterOfferPool(state);
@@ -44,9 +45,7 @@ function prepareEncounter(state: GameState) {
     route.lastRoom !== "recruit" &&
     state.team.length + state.reserves.length < 5 &&
     roll(state) < OPTIONAL_DESTINATION_CHANCE
-      ? SPECIES.filter((entry) => !entry.legendary)[
-          Math.floor(roll(state) * SPECIES.filter((entry) => !entry.legendary).length)
-        ]!.id
+      ? recruitSpecies[Math.floor(roll(state) * recruitSpecies.length)]!.id
       : null;
   const stock =
     kind === "merchant"
