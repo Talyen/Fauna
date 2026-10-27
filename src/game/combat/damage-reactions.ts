@@ -37,6 +37,7 @@ export interface HitContext {
   target: Combatant;
   type: DamageType;
   events: GameEvent[];
+  frozenAtStart?: boolean;
 }
 export interface HitPayment {
   /** Mitigated damage before Block, used by hit effects and buildup. */
@@ -85,6 +86,7 @@ export function* dodgeResponse(
         origin: "boon",
       });
     if (
+      retaliate &&
       target.health > 0 &&
       source.health > 0 &&
       isEnemy(source) &&
@@ -506,10 +508,20 @@ export function* thornRetaliation({
   target,
   events,
   type: attackType,
-}: Pick<HitContext, "state" | "source" | "target" | "events"> & { type?: DamageType }): Resolution<void> {
+  frozenAtStart,
+}: Pick<HitContext, "state" | "source" | "target" | "events" | "frozenAtStart"> & {
+  type?: DamageType;
+}): Resolution<void> {
   const stats = ensureCombat(target);
   const reflected = stats.thorns;
   if (source.health <= 0 || reflected <= 0) return;
+  if (
+    isEnemy(target) &&
+    !isEnemy(source) &&
+    (frozenAtStart ?? stats.controlled === "freeze") &&
+    state.boons.includes("snowbell")
+  )
+    return;
   if (
     !(source.combat?.bleed && !isEnemy(target) && state.boons.includes("thornheart-ring")) &&
     !(

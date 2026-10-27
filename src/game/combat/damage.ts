@@ -345,7 +345,14 @@ export function* resolveHit(
   )
     return { outcome: "ignored" };
   const { attack, direct } = policy;
-  const context = { state, source, target, type, events };
+  const context = {
+    state,
+    source,
+    target,
+    type,
+    events,
+    frozenAtStart: target.combat?.controlled === "freeze",
+  };
   const leech = "leech" in options && options.leech;
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
@@ -373,14 +380,28 @@ export function* resolveHit(
     (direct || thornDodge) &&
     (blindMiss ||
       (!("cannotDodge" in options && options.cannotDodge) &&
+        !(
+          direct &&
+          alliedSource &&
+          !alliedTarget &&
+          type === "freeze" &&
+          stats.burn > 0 &&
+          state.boons.includes("solstice-concertina")
+        ) &&
         (dodge = dodgeChance(state, target)) > 0 &&
         succeeds(state, dodge / 100, !alliedTarget, events)))
   ) {
-    if (alliedSource && !alliedTarget && state.boons.includes("coral-net-weight") && target.block > 0) {
+    if (
+      alliedSource &&
+      !alliedTarget &&
+      state.boons.includes("coral-net-weight") &&
+      target.block > 0 &&
+      !(type === "bleed" && state.boons.includes("harvest-sickle"))
+    ) {
       const payment = blockPayment(
         modifiedDamage(state, source, target, value, type, options, attack),
         target.block,
-        blockEfficiency(state, target, type),
+        blockEfficiency(state, target, type, source),
       );
       target.block -= payment.spent;
       if (payment.spent > 0) {
@@ -477,13 +498,11 @@ export function* resolveHit(
     armorReducedDamage = reduced < damage;
     damage = reduced;
   }
-  const blockRatio = blockEfficiency(state, target, type);
+  const blockRatio = blockEfficiency(state, target, type, source);
   const bypassBlock =
-    alliedSource &&
     !alliedTarget &&
-    "thorns" in options &&
-    options.thorns &&
-    state.boons.includes("comb-uncapping-fork");
+    ((type === "bleed" && state.boons.includes("harvest-sickle")) ||
+      (alliedSource && "thorns" in options && options.thorns && state.boons.includes("comb-uncapping-fork")));
   const payment = blockPayment(damage, bypassBlock ? 0 : target.block, blockRatio);
   const blocked = payment.absorbed,
     blockSpent = payment.spent;
@@ -600,6 +619,17 @@ export function* resolveHit(
     if (result.appliedControl) yield* reaction("controlRewards", state, source, target, "stun", events);
     depletions.push(...result.depletions);
   }
+  if (
+    effectDamage > 0 &&
+    alliedSource &&
+    !alliedTarget &&
+    "thorns" in options &&
+    options.thorns &&
+    source.health > 0 &&
+    target.health > 0 &&
+    state.boons.includes("rosewax-seal")
+  )
+    yield* applyResolvedStatus(state, source, target, boonRule("rosewax-seal").bleed, "bleed", events);
   if (nextPhysical > 0 && source.health > 0)
     yield* reaction("hit", state, source, target, nextPhysical, "physical", events, { origin: "proc" });
   if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {

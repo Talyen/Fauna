@@ -69,6 +69,10 @@ export const SCENARIOS = [
   "journey-boons-2",
   "journey-boons-3",
   "journey-boons-4",
+  "seal-boons-1",
+  "seal-boons-2",
+  "seal-boons-3",
+  "seal-boons-4",
   "journey-results",
   "death-door",
   "inspection",
@@ -197,6 +201,16 @@ export async function reviewScenario(server, name) {
       ["rootspool", "winterseed", "moonpath-divider"],
       ["cornucopia", "suncrust-rolling-pin", "dandelion-poultice"],
       ["dew-pendulum"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
+  if (name.startsWith("seal-boons-")) {
+    const groups = [
+      ["vanishing-hat", "rocking-chair-charm", "asteroid-hammer"],
+      ["snowbell", "harvest-sickle", "meadow-mortar"],
+      ["rosewax-seal", "solstice-concertina", "crown-waffle-iron"],
+      ["beeswax-crown"],
     ];
     game = bossReward();
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };

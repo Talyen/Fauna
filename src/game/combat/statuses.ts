@@ -12,6 +12,7 @@ import {
   cleanseTargets,
   canSpreadCleanse,
   isDepartedMinion,
+  combatantById,
 } from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
@@ -28,6 +29,7 @@ import {
   beneficialStatuses,
   STACK_LIMIT,
   removeArmor,
+  dodgeChance,
   hasBeneficialEffects,
   type ArmorDepletion,
   type Combatant,
@@ -35,6 +37,7 @@ import {
 
 import { reaction, type Resolution } from "./operations";
 import { applyResolvedStatus } from "./status-reactions";
+import { dodgeResponse } from "./damage-reactions";
 import {
   enterControl,
   cleanseControl,
@@ -151,8 +154,13 @@ export function* triggerArmorBreak(
   if (!depletion || depletion.delivered) return;
   depletion.delivered = true;
   const { unit } = depletion;
-  if (state.phase !== "battle" || unit.health <= 0 || !state.battle) return;
+  if (state.phase !== "battle" || !state.battle) return;
   const allied = !isEnemy(unit);
+  if (allied && state.boons.includes("beeswax-crown") && battlefieldHasId(state, "player", unit.id))
+    for (const ally of battlefield(state, "player"))
+      if (ally.health > 0)
+        yield* reaction("grantStatus", ally, "thorns", boonRule("beeswax-crown").thorns, events, state);
+  if (unit.health <= 0) return;
   if (allied && hasTalent(state, "armor.reactive-guard"))
     yield* reaction("grantBlock", state, unit, talentRule("armor.reactive-guard").amount, events);
   if (!battlefieldHasId(state, allied ? "player" : "enemy", unit.id)) return;
@@ -283,6 +291,27 @@ export function* removeEffects(
     for (const status of beneficialStatuses)
       if (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0)) remaining++;
     count = Math.min(count, Math.max(0, remaining - 1));
+  }
+  if (
+    kind === "purge" &&
+    count > 0 &&
+    state &&
+    !isEnemy(unit) &&
+    source &&
+    isEnemy(source) &&
+    source.health > 0 &&
+    unit.health > 0 &&
+    state.boons.includes("vanishing-hat") &&
+    !(unit.block > 0 && onlyStatus && onlyStatus !== "block" && state.boons.includes("shelter-lantern")) &&
+    (onlyStatus === "block"
+      ? unit.block > 0
+      : onlyStatus
+        ? Number(stats[onlyStatus]) > 0 || (onlyStatus === "dodge" && stats.temporaryDodge > 0)
+        : hasBeneficialEffects(unit)) &&
+    succeeds(state, dodgeChance(state, unit) / 100, false, events)
+  ) {
+    yield* dodgeResponse({ state, source, target: unit, type: "physical", events }, false);
+    return 0;
   }
   if (
     kind === "purge" &&
@@ -465,6 +494,22 @@ export function* removeEffects(
   )
     yield* reaction("grantBlock", state, unit, purgedArmor, events);
   if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
+  if (
+    kind === "purge" &&
+    removedStatuses.length > 0 &&
+    state &&
+    isEnemy(unit) &&
+    source &&
+    !isEnemy(source) &&
+    unit.health > 0 &&
+    stats.poison > 0 &&
+    state.boons.includes("meadow-mortar")
+  ) {
+    const poisonSource = combatantById(state, stats.statusSources.poison) ?? source;
+    yield* reaction("resolveHit", state, poisonSource, unit, stats.poison, "poison", events, {
+      origin: "periodic",
+    });
+  }
   if (
     state &&
     isEnemy(unit) &&

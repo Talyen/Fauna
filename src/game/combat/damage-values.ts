@@ -139,7 +139,15 @@ export function blockPayment(damage: number, block: number, ratio = 1) {
   return { absorbed, spent: Math.min(block, Math.ceil(absorbed / ratio)), remaining: damage - absorbed };
 }
 export const armoredDamage = (damage: number, armor: number) => Math.max(0, damage - armor);
-export function blockEfficiency(state: GameState, target: Combatant, type: DamageType) {
+export function blockEfficiency(state: GameState, target: Combatant, type: DamageType, source?: Combatant) {
+  if (
+    isEnemy(target) &&
+    source &&
+    !isEnemy(source) &&
+    type === "stun" &&
+    state.boons.includes("asteroid-hammer")
+  )
+    return boonRule("asteroid-hammer").multiplier;
   if (!isEnemy(target)) {
     if (type === "burn" && state.boons.includes("moss-oven-mitt"))
       return boonRule("moss-oven-mitt").multiplier;

@@ -13,7 +13,13 @@ import {
   STACK_LIMIT,
   type Combatant,
 } from "./combat/state";
-import { armoredDamage, blockPayment, armorApplies, modifiedDamage } from "./combat/damage-values";
+import {
+  armoredDamage,
+  blockPayment,
+  blockEfficiency,
+  armorApplies,
+  modifiedDamage,
+} from "./combat/damage-values";
 import { healingValue, restoration, overflowBlock, overflowRecipients } from "./combat/healing-values";
 
 export interface OrdinaryHit {
@@ -43,6 +49,21 @@ export function foodDodgeBenefit(state: BattleState, card: CardDefinition, ally:
       75 - dodgeChance(state, ally),
     ),
   );
+}
+/** Approximate the Food's extra Healing after its ordinary effect, using visible facts. */
+export function foodWaffleBenefit(state: BattleState, card: CardDefinition, ally: Combatant, value: number) {
+  if (
+    card.species !== null ||
+    !state.boons.includes("crown-waffle-iron") ||
+    (card.effect !== "heal" && card.effect !== "guard")
+  )
+    return 0;
+  const missing = maximumHealth(ally) - ally.health;
+  const firstHealing =
+    card.effect === "heal" ? Math.min(missing, Math.round(healingValue(state, ally, value))) : 0;
+  const block = Math.min(STACK_LIMIT, ally.block + (card.effect === "guard" ? value : 0));
+  const amount = block * (state.boons.includes("nectar-dipper") ? 2 : 1);
+  return Math.min(missing - firstHealing, Math.round(healingValue(state, ally, amount)));
 }
 export function healingBenefit(
   state: BattleState,
@@ -120,7 +141,11 @@ export function ordinaryAttackFacts(
     const damage = baseDamage * (lastCardCritical ? 2 : 1);
     const armored = armorApplies(state, enemy, type, actor);
     const armor = armored ? Math.max(0, enemy.combat.armor - erosion) : 0;
-    const payment = blockPayment(damage, enemy.block);
+    const payment = blockPayment(
+      damage,
+      type === "bleed" && state.boons.includes("harvest-sickle") ? 0 : enemy.block,
+      blockEfficiency(state, enemy, type, actor),
+    );
     const piercing = craterPunch ? Math.round(payment.absorbed / boonRule("crater-punch").divisor) : 0;
     const prevented = negated || (type === "freeze" && enemy.combat.nullifyFreeze);
     const lost = prevented ? 0 : armoredDamage(payment.remaining, armor) + piercing;

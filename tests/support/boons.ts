@@ -1,5 +1,15 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "vanishing-hat": "Allies can Dodge enemy Purge",
+  "rocking-chair-charm": "Burn, Poison and Bleed cannot damage allies in backup",
+  "asteroid-hammer": "Stun damage is twice as effective against enemy Block",
+  snowbell: "Frozen enemies’ Thorns cannot retaliate",
+  "harvest-sickle": "Bleed damage ignores enemy Block",
+  "meadow-mortar": "Purging an effect from a Poisoned enemy makes their Poison deal damage",
+  "rosewax-seal": "Allied Thorns apply 1 Bleed",
+  "solstice-concertina": "Burning enemies cannot Dodge Freeze attacks",
+  "crown-waffle-iron": "Food also restores Health equal to its target’s Block",
+  "beeswax-crown": "When an ally’s Armor breaks, all allies gain 2 Thorns",
   "overflow-cup":
     "Healing beyond an ally’s maximum Health restores half the excess to the most injured other ally",
   "ripple-mirror": "Attacks Reflected by allies hit all enemies",
