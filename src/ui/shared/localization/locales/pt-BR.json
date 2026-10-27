@@ -3557,6 +3557,18 @@
     "sourceHash": "dc62edf983f64be61062c5089d66804b843c1ecb4f3ac11abc0b2ed4d92312ce",
     "text": "O dano de <keyword0>Atordoamento</keyword0> de Ringpalm tem {{value0}}% de chance de se repetir"
   },
+  "content.species.ringpalm.title": {
+    "reviewed": true,
+    "source": "The stone-circle guardian",
+    "sourceHash": "2b5e1d9f239ca296f68aa55652d1671b3a6203fb31aaffb8df301453ab0f78dc",
+    "text": "O guardião do círculo de pedras"
+  },
+  "content.species.ringpalm.trait": {
+    "reviewed": true,
+    "source": "Resonance",
+    "sourceHash": "135f3fbc624e7c620145f216e8784fc04fdf55189e4597bc66e938226452d8d3",
+    "text": "Ressonância"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -3592,6 +3604,18 @@
     "source": "Drawing a card copies it",
     "sourceHash": "de0fcf2be7c0a05af22da3cba0b4fe38c72a07c72f1930eb79802e44056bb143",
     "text": "Ao comprar uma carta, ela é copiada"
+  },
+  "content.species.rookhaven.title": {
+    "reviewed": true,
+    "source": "The keeper of forgotten stories",
+    "sourceHash": "3406cd2c55e33a86e60ce13f9c16343e96d0f8bf4497e02cc9f9c93db08b94fd",
+    "text": "O guardião das histórias esquecidas"
+  },
+  "content.species.rookhaven.trait": {
+    "reviewed": true,
+    "source": "Well Read",
+    "sourceHash": "d583199402e06b0076f2cdc53b1c12cf363fd9dec6eb32cc4741c12bcf3e5e09",
+    "text": "Grande leitor"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3629,6 +3653,18 @@
     "sourceHash": "df2d35a5e7fa8100200ccd3243b9b029304de5b978985aa8370d50aa56c3450b",
     "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Queimadura</keyword0>"
   },
+  "content.species.shadebrim.title": {
+    "reviewed": true,
+    "source": "The cool refuge",
+    "sourceHash": "681813777db513b137c4d422c14eb82c9ceba648ba7d8f6e58f06befa50b2eac",
+    "text": "O refúgio fresco"
+  },
+  "content.species.shadebrim.trait": {
+    "reviewed": true,
+    "source": "Cool Refuge",
+    "sourceHash": "d9d02275367284dcdc8c6fac76c1ef25c68804d7f12c8a05be9aa726a5d738e8",
+    "text": "Refúgio fresco"
+  },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
@@ -3665,6 +3701,18 @@
     "sourceHash": "33a2043f88a69c193a9d3b308da6af2b423ee6755224c0d2cf03db6444ff6bd0",
     "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0> ao entrar em campo por troca"
   },
+  "content.species.skybex.title": {
+    "reviewed": true,
+    "source": "The mountain guide",
+    "sourceHash": "8ec5a6272e81a4db89aaf70b7ace5e73854866a49432e23f7bb1579e28065c51",
+    "text": "O guia da montanha"
+  },
+  "content.species.skybex.trait": {
+    "reviewed": true,
+    "source": "Mountain Guide",
+    "sourceHash": "9e8db3a1f0bc10b59830a721c5217e954de9784d3510e426e228a8cf6e03376a",
+    "text": "Guia da montanha"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
@@ -3700,6 +3748,18 @@
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "0ce56511545bda6e8fcab02b93f4ffb17a7d8c8a0f92dd8a6b55309c5decc90d",
     "text": "Sternshell começa o combate com {{value0}} de <keyword0>Armadura</keyword0>"
+  },
+  "content.species.sternshell.title": {
+    "reviewed": true,
+    "source": "The steadfast voyager",
+    "sourceHash": "63ea8254d1d9ef75942d72336b73ac1321eeb6e0a11d692f5c80ed25be4a840d",
+    "text": "O viajante inabalável"
+  },
+  "content.species.sternshell.trait": {
+    "reviewed": true,
+    "source": "Shelter",
+    "sourceHash": "fe5ca63b1be3cf2181126f3118dbc35d91144883d9f827b70a75d3109c9b945b",
+    "text": "Abrigo"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,

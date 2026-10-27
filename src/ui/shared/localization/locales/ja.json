@@ -3557,6 +3557,18 @@
     "sourceHash": "d1f4d22d689f179c8ead23dd7d30d48ed302436676829ec4202b57043a791a67",
     "text": "Ringpalmの<keyword0>スタン</keyword0>ダメージは{{value0}}%の確率で繰り返される"
   },
+  "content.species.ringpalm.title": {
+    "reviewed": true,
+    "source": "The stone-circle guardian",
+    "sourceHash": "ae692b7db635184d45397b7b996982101a6f8dceef20c7957458ecd46c367a7e",
+    "text": "石の輪の守り手"
+  },
+  "content.species.ringpalm.trait": {
+    "reviewed": true,
+    "source": "Resonance",
+    "sourceHash": "f621056eda38caa0754360bccea8e8d9d5f53090f62f318a0cacf552ec32f501",
+    "text": "共鳴"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -3592,6 +3604,18 @@
     "source": "Drawing a card copies it",
     "sourceHash": "704ebdaed84c7b89e6ddea373349b3979da62d3bd305f813a7132bd14fb9da23",
     "text": "カードを引くとそのカードをコピー"
+  },
+  "content.species.rookhaven.title": {
+    "reviewed": true,
+    "source": "The keeper of forgotten stories",
+    "sourceHash": "2a1faf151a183d9f3e6bdb7c1bd4965c1e4f04a79139be07a53b5306ff11c07f",
+    "text": "忘れられた物語の守り手"
+  },
+  "content.species.rookhaven.trait": {
+    "reviewed": true,
+    "source": "Well Read",
+    "sourceHash": "1f94917d48a2f25700a7eaeba7982bfb27e9d1071806cffaef99272fcb014975",
+    "text": "博覧強記"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3629,6 +3653,18 @@
     "sourceHash": "a47147bde8233e4ba68cc157afb172b5f3617229cacec4eae39a6d3fd77e216e",
     "text": "味方が受ける<keyword0>炎上</keyword0>ダメージが{{value0}}%減少"
   },
+  "content.species.shadebrim.title": {
+    "reviewed": true,
+    "source": "The cool refuge",
+    "sourceHash": "c63bdc228a0e4411941c997da747160d6ce10cd32fcac39006ce42c1809fd63b",
+    "text": "涼しい隠れ家"
+  },
+  "content.species.shadebrim.trait": {
+    "reviewed": true,
+    "source": "Cool Refuge",
+    "sourceHash": "d7051ced11a3414326f3169150d641aaaf2c9bea8afb4935be21b0b0db00f0ae",
+    "text": "涼しい隠れ家"
+  },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
@@ -3665,6 +3701,18 @@
     "sourceHash": "6c30754e9e3cb9f8eb4b5263b52680397169e4c5ffd5af0716cb5aed0cc196ad",
     "text": "味方が交代で場に出ると<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.species.skybex.title": {
+    "reviewed": true,
+    "source": "The mountain guide",
+    "sourceHash": "baa18e9adc02105408cc412f4970e931b0f3f291607209195228b676c68d8a49",
+    "text": "山の案内人"
+  },
+  "content.species.skybex.trait": {
+    "reviewed": true,
+    "source": "Mountain Guide",
+    "sourceHash": "e99c3ec9537d2c85e797464188d9c59f0b96225d11516c0f788f8f53c752d532",
+    "text": "山の案内人"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
@@ -3700,6 +3748,18 @@
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "2c40f938ff3e528e35db4de05093010598fb087c32f1bc90ea1fcc3849e0007d",
     "text": "Sternshellは<keyword0>装甲</keyword0>{{value0}}を持った状態で戦闘を開始する"
+  },
+  "content.species.sternshell.title": {
+    "reviewed": true,
+    "source": "The steadfast voyager",
+    "sourceHash": "f428cb2d81fc0c6bbbd395d8c143c85e0d358ef74f55a553199a68f099a921a3",
+    "text": "揺るがぬ旅人"
+  },
+  "content.species.sternshell.trait": {
+    "reviewed": true,
+    "source": "Shelter",
+    "sourceHash": "16dc09c152b40c8fa131670b6cb3cca9353f6de0557578c3de241c32be7abfbb",
+    "text": "庇護"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,

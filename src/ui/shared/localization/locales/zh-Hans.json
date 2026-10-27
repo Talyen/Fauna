@@ -3557,6 +3557,18 @@
     "sourceHash": "06e723ddc731fb6a064fa90828b9e419466397b1c5ecce06ad7b1a75cd664aa3",
     "text": "Ringpalm的<keyword0>眩晕</keyword0>伤害有{{value0}}%的概率重复"
   },
+  "content.species.ringpalm.title": {
+    "reviewed": true,
+    "source": "The stone-circle guardian",
+    "sourceHash": "930fe41ec6963e1ac65d87370cf412b146991b6244fd8a8e337b19852d7b3656",
+    "text": "石环守护者"
+  },
+  "content.species.ringpalm.trait": {
+    "reviewed": true,
+    "source": "Resonance",
+    "sourceHash": "25b47385c72b7f07cbae82d13e7943119c448bc3c0bf3fafbd4d46fdfee9a484",
+    "text": "共鸣"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -3592,6 +3604,18 @@
     "source": "Drawing a card copies it",
     "sourceHash": "6fe7b060f1113786d349eab525d329f5418889832bdd2180cf15e1ebed429e32",
     "text": "抽牌时复制该牌"
+  },
+  "content.species.rookhaven.title": {
+    "reviewed": true,
+    "source": "The keeper of forgotten stories",
+    "sourceHash": "15df52278b9c78fed17a27ec89478aa09dfb5efc96278e3a4d9b2dc76067f33b",
+    "text": "遗忘故事的守护者"
+  },
+  "content.species.rookhaven.trait": {
+    "reviewed": true,
+    "source": "Well Read",
+    "sourceHash": "8a16cda6b3188d6d8d92f73fa0ac81d744160eee72640af706ee73319f47724d",
+    "text": "博览群书"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3629,6 +3653,18 @@
     "sourceHash": "a5007e4f18df5e35c3bef4f6001691b2475af1403bf76b05f54efcbba4223c60",
     "text": "盟友受到的<keyword0>灼烧</keyword0>伤害减少{{value0}}%"
   },
+  "content.species.shadebrim.title": {
+    "reviewed": true,
+    "source": "The cool refuge",
+    "sourceHash": "5d995decde6320d14432a9dbb5c83243d6cda71d67f38c2ffea05c2ba76297b9",
+    "text": "清凉的避所"
+  },
+  "content.species.shadebrim.trait": {
+    "reviewed": true,
+    "source": "Cool Refuge",
+    "sourceHash": "b8655c14588f0c87aa6daede1db24bcd80642c6f1aa0d0fed8d59846194a6133",
+    "text": "清凉避所"
+  },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
@@ -3665,6 +3701,18 @@
     "sourceHash": "d28369e5164e2363fe00eb9703c6e39102fe335998056c75416a9e579e8772f1",
     "text": "盟友换入时获得{{value0}}点<keyword0>格挡</keyword0>"
   },
+  "content.species.skybex.title": {
+    "reviewed": true,
+    "source": "The mountain guide",
+    "sourceHash": "08640146a2241ea716095084651f48759f4b75a30823cd3b345b27a02442029d",
+    "text": "山间向导"
+  },
+  "content.species.skybex.trait": {
+    "reviewed": true,
+    "source": "Mountain Guide",
+    "sourceHash": "573133ed11d5239f6eb4c1be17a307a25bf8111bf60b35e32782bdf165207843",
+    "text": "山间向导"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
@@ -3700,6 +3748,18 @@
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "70dff5c385a9a75d9e28f17bf47b7548d97c685b9a55b30203b44b2525e2c299",
     "text": "Sternshell以{{value0}}点<keyword0>护甲</keyword0>开始战斗"
+  },
+  "content.species.sternshell.title": {
+    "reviewed": true,
+    "source": "The steadfast voyager",
+    "sourceHash": "36b7b6da0e71977a99efd825cda26230eaa58edf4d5cdbcdee96c45ad16521ff",
+    "text": "坚定的旅者"
+  },
+  "content.species.sternshell.trait": {
+    "reviewed": true,
+    "source": "Shelter",
+    "sourceHash": "e90bd11f6b22eb7f7b968077386bf7bd62ac532af158e4b969ee8980576bdb24",
+    "text": "庇护"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,

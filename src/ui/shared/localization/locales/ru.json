@@ -3557,6 +3557,18 @@
     "sourceHash": "6bb61a3b8424b453a292f85ad20787b73a3e4675ef53632a0fbc15db3cbf31e6",
     "text": "Урон от <keyword0>оглушения</keyword0> Ringpalm с вероятностью {{value0}}% повторяется"
   },
+  "content.species.ringpalm.title": {
+    "reviewed": true,
+    "source": "The stone-circle guardian",
+    "sourceHash": "ac084e4a07b7dfaebb9253516d9a6760fb5ab96e56d8dbc7dc20e239fd9f9c02",
+    "text": "Страж каменного круга"
+  },
+  "content.species.ringpalm.trait": {
+    "reviewed": true,
+    "source": "Resonance",
+    "sourceHash": "c97dc812e1cec784da9825a5bd021588d5e3493817470286a1be86835bf415b4",
+    "text": "Резонанс"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -3592,6 +3604,18 @@
     "source": "Drawing a card copies it",
     "sourceHash": "886f105c2090b43847d9a74e6b937c64ab0b954143546e0543234bafb43c3760",
     "text": "При доборе карты создаётся её копия"
+  },
+  "content.species.rookhaven.title": {
+    "reviewed": true,
+    "source": "The keeper of forgotten stories",
+    "sourceHash": "70976d67206d6ee3ed34656d64407a2591d366884b4fe6460e1fcc5ab82643fc",
+    "text": "Хранитель забытых историй"
+  },
+  "content.species.rookhaven.trait": {
+    "reviewed": true,
+    "source": "Well Read",
+    "sourceHash": "0b8be9d20deee3c1a54b6d712e402c2350896275ae8328d5d6eda8a9dd3a3f2a",
+    "text": "Начитанность"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3629,6 +3653,18 @@
     "sourceHash": "6dbc929b5542c1fe33edcec2343eb68d16a26e778a445bd831102d712b796163",
     "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>горения</keyword0>"
   },
+  "content.species.shadebrim.title": {
+    "reviewed": true,
+    "source": "The cool refuge",
+    "sourceHash": "31c0eb89e6084fe2403e68721c8a6528bee6acd219e23cd3fe8b9a23fd9e46d9",
+    "text": "Прохладное убежище"
+  },
+  "content.species.shadebrim.trait": {
+    "reviewed": true,
+    "source": "Cool Refuge",
+    "sourceHash": "2f62eb3e281a57d4d3e5b1ef87a70a14fa1df306ee0df73063ef83be6bf8ff08",
+    "text": "Прохладное убежище"
+  },
   "content.species.skybex.passive.0.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
@@ -3665,6 +3701,18 @@
     "sourceHash": "dabfcefae1240d7f46138366ff9127045eba8a8ee879e41ebb9c87cccb41e800",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0> при выходе на поле в результате смены"
   },
+  "content.species.skybex.title": {
+    "reviewed": true,
+    "source": "The mountain guide",
+    "sourceHash": "05e660f80d1c6c5d2302cc683086a8e1a2ef0aaa421a3be19c48d2d7f9f80dcb",
+    "text": "Горный проводник"
+  },
+  "content.species.skybex.trait": {
+    "reviewed": true,
+    "source": "Mountain Guide",
+    "sourceHash": "b2696914411979fa8d05b9d8d878fdd35ce4b311a7f8f99e4a10d962cdc53ffb",
+    "text": "Горный проводник"
+  },
   "content.species.sternshell.passive.0.rule": {
     "reviewed": true,
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
@@ -3700,6 +3748,18 @@
     "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "4fa782f5ce6861fc3c5b5a1cb41f3a3c66a34cf33578c5161082e4f0b10fee76",
     "text": "Sternshell начинает бой с запасом <keyword0>брони</keyword0> {{value0}}"
+  },
+  "content.species.sternshell.title": {
+    "reviewed": true,
+    "source": "The steadfast voyager",
+    "sourceHash": "f45957bf73c3ab66537cc432416dbc1f9c8703cfe12de70d7e787bceb9194619",
+    "text": "Стойкий странник"
+  },
+  "content.species.sternshell.trait": {
+    "reviewed": true,
+    "source": "Shelter",
+    "sourceHash": "d08ac02fbdd24f21896f136be1cf315eceb78f09f642cf4cead0b89ce3383a3c",
+    "text": "Укрытие"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
