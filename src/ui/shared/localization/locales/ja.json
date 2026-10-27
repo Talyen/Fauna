@@ -359,6 +359,12 @@
     "sourceHash": "092c354c6fe165445673c327bd0d70994a42fdeef0825f0ad27ef0d0b675cc0e",
     "text": "リンゴ絞り器"
   },
+  "content.boon.apple-press.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Bleed</keyword0> deals damage when they gain <keyword1>Block</keyword1>",
+    "sourceHash": "74dfa40b809687996b167a95385a54120d7c0454e2cb6fc38e3837410f24ac5a",
+    "text": "敵が<keyword1>ブロック</keyword1>を得ると、その敵の<keyword0>出血</keyword0>がダメージを与える"
+  },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
     "source": "Ashfall Pendant",
@@ -388,6 +394,12 @@
     "source": "Bellows Heart",
     "sourceHash": "928eb43609dcf8e041d74f0bcdd43a368ee1780ffb17017a0de034008895df96",
     "text": "ハートのふいご"
+  },
+  "content.boon.bellows-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> allies adds {{value0}} <keyword1>Burn</keyword1> to each <keyword2>Burning</keyword2> enemy",
+    "sourceHash": "87b8a2484513d18980a6b6611dbbccbedf7d1c277f9061e7a5bf245258abdb21",
+    "text": "味方を<keyword0>回復</keyword0>すると、<keyword2>炎上</keyword2>中の敵それぞれに<keyword1>炎上</keyword1>を{{value0}}加える"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -491,11 +503,23 @@
     "sourceHash": "8cc54b11aa58d6945476a41e3a2702ffc3c90ea292e8769c74a05e4964ee356a",
     "text": "隊商の敷物"
   },
+  "content.boon.caravan-rug.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> does not decay on backup allies",
+    "sourceHash": "974ba4b969a373676ef17549fcadbf68969bb1b57d2321e110c5593c86ad6c35",
+    "text": "控えの味方の<keyword0>ブロック</keyword0>は減衰しない"
+  },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
     "source": "Chromatic Viol",
     "sourceHash": "9b24c28aaaab68774dd000c2920c172099bd0347c14e1b77def03dfb5d06311f",
     "text": "彩色のヴィオール"
+  },
+  "content.boon.chromatic-viol.rule": {
+    "reviewed": true,
+    "source": "Attacks deal {{value0}} extra damage for each harmful effect on the enemy",
+    "sourceHash": "3e7a58c4c4561e6b619e5863df8682d2ed68f3d5f31af075dfb75f0ae9480355",
+    "text": "攻撃は敵の有害効果1種類につき追加ダメージを{{value0}}与える"
   },
   "content.boon.cinder-fan.name": {
     "reviewed": true,
@@ -623,6 +647,12 @@
     "sourceHash": "bc1c991ae87207d3debfd11b3eec2327e37eb831a3e8afe93606066a3d15abe0",
     "text": "糸杉の聖遺物箱"
   },
+  "content.boon.cypress-reliquary.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door do not lose <keyword0>Armor</keyword0> from damage",
+    "sourceHash": "1eb4cea99fbee409a5e386f3cf2fdbaf58f9eeaf56e4c0ebf45cae912bd5f2e1",
+    "text": "死の淵にいる味方はダメージで<keyword0>装甲</keyword0>を失わない"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -688,6 +718,12 @@
     "source": "Echo Ocarina",
     "sourceHash": "edc1cc66e5edfd77b1c7933852d915fe01634596fa25da7566a25c5a128ebe56",
     "text": "こだまのオカリナ"
+  },
+  "content.boon.echo-ocarina.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0>, other allies gain {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "c8d3225e536bafcf4b875ac4779e7fac9eed5f4c868d16e16a8da2fac229ee03",
+    "text": "味方が<keyword0>回避</keyword0>すると、他の味方は次のターンまで{{value0}}%の<keyword1>回避</keyword1>を得る"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -755,6 +791,12 @@
     "sourceHash": "4c9c6259edf8dfe720b826d8da43bccc681aedc1fa5a44e28c00401d0d5b2015",
     "text": "別れの櫂"
   },
+  "content.boon.farewell-oar.rule": {
+    "reviewed": true,
+    "source": "Allies swapping out deal half their <keyword0>Block</keyword0> as <keyword1>Water</keyword1> damage to all enemies",
+    "sourceHash": "124bc6b0295471dd2bb7878085b5e75ac82edd7f38ac3c8fcb657cc58d70cb41",
+    "text": "交代で退く味方は自分の<keyword0>ブロック</keyword0>の半分を敵全員に<keyword1>水</keyword1>ダメージとして与える"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -785,11 +827,23 @@
     "sourceHash": "f5913c8fb78aad265fa722ad5c4f86759d5fd70f6fd3d782026a9807321a3fcd",
     "text": "折りたたみ山"
   },
+  "content.boon.folded-mountain.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "efa618646b486ae45bbac245aff5db35020fd5e631f150ee26b7dd4229f03ccd",
+    "text": "<keyword0>装甲</keyword0>は<keyword1>凍結</keyword1>の蓄積を防ぐ"
+  },
   "content.boon.frostglass-die.name": {
     "reviewed": true,
     "source": "Frostglass Die",
     "sourceHash": "20bc2c729f2d05c98f2c8460b1b7080da5d760b15c7c03040fe7a931c638f21f",
     "text": "霜硝子のサイコロ"
+  },
+  "content.boon.frostglass-die.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> hits also deal {{value0}} <keyword1>Burn</keyword1> damage",
+    "sourceHash": "5d5bd0ba8bc73636121dc8a1c51b15a606910d6b06c5548fb648b7db96450ede",
+    "text": "<keyword0>凍結</keyword0>ヒットは<keyword1>炎上</keyword1>ダメージも{{value0}}与える"
   },
   "content.boon.frozen-pocketwatch.name": {
     "reviewed": true,
@@ -845,6 +899,12 @@
     "sourceHash": "8214fa623ee082f3bae4ef586baed73e1d3ef6b76c16a19d6f7d60a1308769c8",
     "text": "硝子葉の盾"
   },
+  "content.boon.glassleaf-shield.rule": {
+    "reviewed": true,
+    "source": "When allied <keyword0>Block</keyword0> breaks, halve the remaining damage",
+    "sourceHash": "cc348a9ca677c494753043da460bd9406f4c6245e440492d57b1bac06e4da494",
+    "text": "味方の<keyword0>ブロック</keyword0>が壊れると残りのダメージを半減"
+  },
   "content.boon.grafting-needle.name": {
     "reviewed": true,
     "source": "Grafting Needle",
@@ -886,6 +946,12 @@
     "source": "Harvest Shears",
     "sourceHash": "d2fd6246edff0e7b816f366884ff599a37771d8b1b89a7afe5e5becd45e3a18d",
     "text": "収穫ばさみ"
+  },
+  "content.boon.harvest-shears.rule": {
+    "reviewed": true,
+    "source": "When an enemy falls, their <keyword0>Bleed</keyword0> spreads to another enemy",
+    "sourceHash": "b96061c98f57c6dc9cc1046c752c336f8b59d3bdfad1818ad534e6e02a911efc",
+    "text": "敵が倒れると、その敵の<keyword0>出血</keyword0>が別の敵に広がる"
   },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
@@ -1037,6 +1103,12 @@
     "sourceHash": "b80339ea81d456ea051d7d4f8ad989ba833feed3c1e8699b489e5fc131fbcb62",
     "text": "葉翼のシャトル"
   },
+  "content.boon.leafwing-shuttlecock.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0> an attack, deal {{value0}} <keyword1>Stun</keyword1> damage to the attacker",
+    "sourceHash": "272d3d8e2d22e25070d4024e4f8f95e1157659c15dd1e32d8e7315888db1edb3",
+    "text": "味方が攻撃を<keyword0>回避</keyword0>すると、攻撃者に<keyword1>スタン</keyword1>ダメージを{{value0}}与える"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -1127,6 +1199,12 @@
     "sourceHash": "105158f2e040a6a7fce389b2c3af57603d2ff760b141fda2a0fbd56bda0a9a8d",
     "text": "鏡のロケットペンダント"
   },
+  "content.boon.mirror-locket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> grants <keyword1>Block</keyword1> equal to half the <keyword2>Health</keyword2> restored",
+    "sourceHash": "a8af4b4825438d472b90969caefb3b6c4f8d173e7610cf9fbb78fa4f239edc34",
+    "text": "<keyword0>吸血</keyword0>は回復した<keyword2>体力</keyword2>の半分に等しい<keyword1>ブロック</keyword1>を付与"
+  },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
     "source": "Molten Paperweight",
@@ -1192,6 +1270,12 @@
     "source": "Oasis Seed",
     "sourceHash": "a23549e8a7ace79684830ce2512e30ff4590cbf85904ed2934473262d7f014e4",
     "text": "オアシスの種"
+  },
+  "content.boon.oasis-seed.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> another ally gives their next attack <keyword1>Leech</keyword1>",
+    "sourceHash": "44a53e0ac8fd4882ce05ea684f005790cab3462e433baf03ce01fabf8bb7d4a2",
+    "text": "他の味方を<keyword0>回復</keyword0>すると、その味方の次の攻撃に<keyword1>吸血</keyword1>を付与"
   },
   "content.boon.obsidian-pitcher.name": {
     "reviewed": true,
@@ -1319,6 +1403,12 @@
     "sourceHash": "1f163c58acda9a1535951a5f61b09147e1121adf851971e13701a5ab7f7f0c2e",
     "text": "花粉かご"
   },
+  "content.boon.pollen-basket.rule": {
+    "reviewed": true,
+    "source": "When an ally is hit, other allies’ <keyword0>Thorns</keyword0> also retaliate",
+    "sourceHash": "ff1739e31b2f4794e76787874a2d0d029bd6efa33182af450cdf5252424aae6a",
+    "text": "味方が攻撃を受けると、他の味方の<keyword0>棘</keyword0>も反撃する"
+  },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
     "source": "Poppy Seed Grinder",
@@ -1433,6 +1523,12 @@
     "sourceHash": "065bc2d90ff3c17aba6bda03b769a3fd0b0a62f079cf409241e68d3af320b725",
     "text": "珊瑚礁の冠"
   },
+  "content.boon.reef-diadem.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits deal half your <keyword1>Thorns</keyword1> as extra <keyword2>Nature</keyword2> damage",
+    "sourceHash": "997c9009697427cb67cb4002792cf543c2db1fe18771048a7508cb3e684c24be",
+    "text": "<keyword0>水</keyword0>ヒットは自分の<keyword1>棘</keyword1>の半分を追加の<keyword2>自然</keyword2>ダメージとして与える"
+  },
   "content.boon.reef-incense-tile.name": {
     "reviewed": true,
     "source": "Reef Incense Tile",
@@ -1546,6 +1642,12 @@
     "source": "Soot Brush",
     "sourceHash": "6562ea969f1f53a87bf4ee9ea9eb324ca1fb94f05c7091292eff29f451e5311d",
     "text": "すすの筆"
+  },
+  "content.boon.soot-brush.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> also <keyword2>Cleanses</keyword2> <keyword3>Blind</keyword3>",
+    "sourceHash": "80d78d7bef34a8dede79e8452e0fbb833561a1497c3e6305019b503e883a1e1f",
+    "text": "<keyword1>炎上</keyword1>を<keyword0>浄化</keyword0>すると<keyword3>盲目</keyword3>も<keyword2>浄化</keyword2>"
   },
   "content.boon.sovereign-toast-rack.name": {
     "reviewed": true,
@@ -6124,6 +6226,12 @@
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "sourceHash": "71263117f29e04f94031862fd2b54bb35ef7ccfb334677d91761bce7a6fb4f92",
     "text": "次の<keyword1>凍結</keyword1>ダメージを<keyword0>無効化</keyword0>; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
+  },
+  "content.status.oasisLeech.vab4f9087afb29b90.rule": {
+    "reviewed": true,
+    "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
+    "sourceHash": "58a1b826bbb944f01e473a0c875ab29c298539ac2623a54120a15be07d99c24e",
+    "text": "オアシスの種：次の攻撃に<keyword0>吸血</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,

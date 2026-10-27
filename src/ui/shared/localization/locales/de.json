@@ -359,6 +359,12 @@
     "sourceHash": "700445ac9e182720ca089a22e0b0a7ffeca0dda3b78ffc3e303ae6b3a7b44a8a",
     "text": "Apfelpresse"
   },
+  "content.boon.apple-press.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Bleed</keyword0> deals damage when they gain <keyword1>Block</keyword1>",
+    "sourceHash": "f62d6cc3e8e517a9cc43a8ff888ddcf32ec02e182ed370699ea8b4431358cbc0",
+    "text": "Gegnerische <keyword0>Blutung</keyword0> verursacht Schaden, wenn Gegner <keyword1>Block</keyword1> erhalten"
+  },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
     "source": "Ashfall Pendant",
@@ -388,6 +394,12 @@
     "source": "Bellows Heart",
     "sourceHash": "93e7be1788ae5d6308bfe763e279eda3b5df8300f0b57a1831ea5b9d2c145032",
     "text": "Herzblasebalg"
+  },
+  "content.boon.bellows-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> allies adds {{value0}} <keyword1>Burn</keyword1> to each <keyword2>Burning</keyword2> enemy",
+    "sourceHash": "31b217b61ea287f461ca4bf9117b30d3f17a9487b4db66650480d1cfc72ed301",
+    "text": "Die <keyword0>Heilung</keyword0> von Verbündeten fügt jedem <keyword2>brennenden</keyword2> Gegner {{value0}} <keyword1>Brand</keyword1> hinzu"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -491,11 +503,23 @@
     "sourceHash": "d784f931db3355dcd5ecc2159e35f6459a059af560d5e803802aad587b8fe933",
     "text": "Karawanenteppich"
   },
+  "content.boon.caravan-rug.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> does not decay on backup allies",
+    "sourceHash": "a2214648def26f238f4c692db799e04a0c826bc9b20465c9f839565ff6dcb57a",
+    "text": "<keyword0>Block</keyword0> verfällt bei Verbündeten in Reserve nicht"
+  },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
     "source": "Chromatic Viol",
     "sourceHash": "305fc0e2fe7336297a5221371a33a067c0ac4ba4a71896283d6fb9dfc84e62f9",
     "text": "Chromatische Gambe"
+  },
+  "content.boon.chromatic-viol.rule": {
+    "reviewed": true,
+    "source": "Attacks deal {{value0}} extra damage for each harmful effect on the enemy",
+    "sourceHash": "b728e9463875db65c990b97365cb074a820025f6e83664d71baca43cc89bc961",
+    "text": "Angriffe verursachen für jeden schädlichen Effekt auf dem Gegner {{value0}} zusätzlichen Schaden"
   },
   "content.boon.cinder-fan.name": {
     "reviewed": true,
@@ -623,6 +647,12 @@
     "sourceHash": "383355116d768db5c01c5d8143f935dc70b9517967600c13f7c46135eed4cce4",
     "text": "Zypressenreliquiar"
   },
+  "content.boon.cypress-reliquary.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door do not lose <keyword0>Armor</keyword0> from damage",
+    "sourceHash": "7edfdd3cd8f6fdbcb626c206e8bb6f43a468bd62212d3e6043bb0af66ee39d12",
+    "text": "Verbündete im Nahtod verlieren durch Schaden keine <keyword0>Rüstung</keyword0>"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -688,6 +718,12 @@
     "source": "Echo Ocarina",
     "sourceHash": "24f2a5a4c82899b74401e1c3e5a78e14dc97c2d77127cae14b6e8cccb0901837",
     "text": "Echo-Okarina"
+  },
+  "content.boon.echo-ocarina.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0>, other allies gain {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "a62429f98fce8d0ecb0b8c9ae166a37999636cd70fecd082a8a8fb41dc855306",
+    "text": "Wenn ein Verbündeter <keyword0>ausweicht</keyword0>, erhalten andere Verbündete bis zu ihrem nächsten Zug {{value0}}% <keyword1>Ausweichen</keyword1>"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -755,6 +791,12 @@
     "sourceHash": "ad585a80bffbff4a7e26a4647300421b3bfc3a9d39d07148d3cf3632e4a24162",
     "text": "Abschiedsruder"
   },
+  "content.boon.farewell-oar.rule": {
+    "reviewed": true,
+    "source": "Allies swapping out deal half their <keyword0>Block</keyword0> as <keyword1>Water</keyword1> damage to all enemies",
+    "sourceHash": "ad06d7117726f9d4aff52a7cc59c24b8e982814d4a18cee25f3b04d46a9cc434",
+    "text": "Ausgewechselte Verbündete fügen allen Gegnern die Hälfte ihres <keyword0>Blocks</keyword0> als <keyword1>Wasser</keyword1>-Schaden zu"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -785,11 +827,23 @@
     "sourceHash": "7203e5b0515a21727bfe35b9d0791ac18064c69b12809572e23d47ae528c1d37",
     "text": "Gefalteter Berg"
   },
+  "content.boon.folded-mountain.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "0b4a52eec0f27e3ac4003cb45f44273b19cdc6c82e3608594b05ea72ad1bbbd8",
+    "text": "<keyword0>Rüstung</keyword0> verhindert <keyword1>Frost</keyword1>-Aufbau"
+  },
   "content.boon.frostglass-die.name": {
     "reviewed": true,
     "source": "Frostglass Die",
     "sourceHash": "8ca42eff9dd361dd12eeaa1e307ba195925a58315cb8c2e2db677709d63f77b1",
     "text": "Frostglaswürfel"
+  },
+  "content.boon.frostglass-die.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> hits also deal {{value0}} <keyword1>Burn</keyword1> damage",
+    "sourceHash": "97e110dd3dd027264a468c552f491aedafae180429f77978866c3d5a20589186",
+    "text": "<keyword0>Frost</keyword0>-Treffer verursachen zusätzlich {{value0}} <keyword1>Brand</keyword1>-Schaden"
   },
   "content.boon.frozen-pocketwatch.name": {
     "reviewed": true,
@@ -845,6 +899,12 @@
     "sourceHash": "606d4c24ec3045ab6f198271dc66af68bbb638af9d4219d3db2196575fa5e70c",
     "text": "Glasblattschild"
   },
+  "content.boon.glassleaf-shield.rule": {
+    "reviewed": true,
+    "source": "When allied <keyword0>Block</keyword0> breaks, halve the remaining damage",
+    "sourceHash": "497ecd32a7772cf61b09ee06d7a153867cb9daea8a2c5f22ed163c8434d6f8fa",
+    "text": "Wenn verbündeter <keyword0>Block</keyword0> bricht, wird der verbleibende Schaden halbiert"
+  },
   "content.boon.grafting-needle.name": {
     "reviewed": true,
     "source": "Grafting Needle",
@@ -886,6 +946,12 @@
     "source": "Harvest Shears",
     "sourceHash": "b2eaaeed98d4dcd7cfb4bf031d8a832a04035a6530a882bc5edee31692c52b7f",
     "text": "Ernteschere"
+  },
+  "content.boon.harvest-shears.rule": {
+    "reviewed": true,
+    "source": "When an enemy falls, their <keyword0>Bleed</keyword0> spreads to another enemy",
+    "sourceHash": "478f17c3d4d41de65d92fc708512861cbbf253e5bf00a80f371934ed4243a858",
+    "text": "Fällt ein Gegner, überträgt sich seine <keyword0>Blutung</keyword0> auf einen anderen Gegner"
   },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
@@ -1037,6 +1103,12 @@
     "sourceHash": "1054057d469b8c6a85f9f395cdb81f945a546ad05bdb0ca373d94acdf83e44b0",
     "text": "Blattflügel-Federball"
   },
+  "content.boon.leafwing-shuttlecock.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0> an attack, deal {{value0}} <keyword1>Stun</keyword1> damage to the attacker",
+    "sourceHash": "33ddc8dad9ae45e4e57d016d33aa6d63456f99d6d8ef03ee81ae2a7f806ee89e",
+    "text": "Wenn ein Verbündeter einem Angriff <keyword0>ausweicht</keyword0>, erleidet der Angreifer {{value0}} <keyword1>Betäubungs</keyword1>-Schaden"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -1127,6 +1199,12 @@
     "sourceHash": "f9d16a4c40d4c055e2d2e7fc0d8a3eae7ffa975f52fec274ab0611afeee365a6",
     "text": "Spiegelmedaillon"
   },
+  "content.boon.mirror-locket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> grants <keyword1>Block</keyword1> equal to half the <keyword2>Health</keyword2> restored",
+    "sourceHash": "cb85f1c19e52140fe275c64248f252afe6454f4f802cf7173c6e6713ab39b390",
+    "text": "<keyword0>Lebensraub</keyword0> gewährt <keyword1>Block</keyword1> in Höhe der Hälfte der wiederhergestellten <keyword2>Gesundheit</keyword2>"
+  },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
     "source": "Molten Paperweight",
@@ -1192,6 +1270,12 @@
     "source": "Oasis Seed",
     "sourceHash": "bbee335b6fb845b102d2ad4af8ee4f20915b0505c62d6c8d62e8a38d3d308694",
     "text": "Oasensamen"
+  },
+  "content.boon.oasis-seed.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> another ally gives their next attack <keyword1>Leech</keyword1>",
+    "sourceHash": "3845fc9886beffa627e64ac00e28b91d7362d816dc4ce05e31a9ddcb7ea4e217",
+    "text": "Die <keyword0>Heilung</keyword0> eines anderen Verbündeten verleiht dessen nächstem Angriff <keyword1>Lebensraub</keyword1>"
   },
   "content.boon.obsidian-pitcher.name": {
     "reviewed": true,
@@ -1319,6 +1403,12 @@
     "sourceHash": "3ff4a6d8caeb237fd0a70750a91c6630a7ad781a1212f27afb5576614979295b",
     "text": "Pollenkorb"
   },
+  "content.boon.pollen-basket.rule": {
+    "reviewed": true,
+    "source": "When an ally is hit, other allies’ <keyword0>Thorns</keyword0> also retaliate",
+    "sourceHash": "f5b4fadd4978795fa134839eab490c6f8938487ad50dfd11017501db2064ae63",
+    "text": "Wird ein Verbündeter getroffen, schlagen auch die <keyword0>Dornen</keyword0> anderer Verbündeter zurück"
+  },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
     "source": "Poppy Seed Grinder",
@@ -1433,6 +1523,12 @@
     "sourceHash": "1d938e5b35b545451ef1c540c667c3595abf4613049e7df163a3f9d0356bb734",
     "text": "Riffdiadem"
   },
+  "content.boon.reef-diadem.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits deal half your <keyword1>Thorns</keyword1> as extra <keyword2>Nature</keyword2> damage",
+    "sourceHash": "b3cceb7bd6a93c3a113d431ece6a875e8c8a02c865804e068f60a8b3666e3a19",
+    "text": "<keyword0>Wasser</keyword0>-Treffer verursachen die Hälfte deiner <keyword1>Dornen</keyword1> als zusätzlichen <keyword2>Natur</keyword2>-Schaden"
+  },
   "content.boon.reef-incense-tile.name": {
     "reviewed": true,
     "source": "Reef Incense Tile",
@@ -1546,6 +1642,12 @@
     "source": "Soot Brush",
     "sourceHash": "4ba82c76052ea02a693efb4a59bf18d2248d0f9701cf6328d2bcdbe9f473986a",
     "text": "Rußpinsel"
+  },
+  "content.boon.soot-brush.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> also <keyword2>Cleanses</keyword2> <keyword3>Blind</keyword3>",
+    "sourceHash": "d324283b2af59abeccb937c49ce5d7f6c884e5ccfeaccd5df3c507f45d06f1df",
+    "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Brand</keyword1> <keyword2>reinigt</keyword2> auch <keyword3>Blindheit</keyword3>"
   },
   "content.boon.sovereign-toast-rack.name": {
     "reviewed": true,
@@ -6124,6 +6226,12 @@
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "sourceHash": "840a10d77fdbd871ed91f96723463785edc6d69e809075e77c1181b185f0c2c0",
     "text": "Den nächsten <keyword1>Einfrieren</keyword1>-Schaden <keyword0>aufheben</keyword0>; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
+  },
+  "content.status.oasisLeech.vab4f9087afb29b90.rule": {
+    "reviewed": true,
+    "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
+    "sourceHash": "44bbfc5535cb1e799468cc558cb21803821644c2eb9f51eb5375853ec3feea81",
+    "text": "Oasensamen: nächster Angriff hat <keyword0>Lebensraub</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,

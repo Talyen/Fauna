@@ -548,6 +548,20 @@ it("localizes a reflected status using its actual recipient", () => {
     "Unknown reflection",
   );
   expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+  const ambiguous = structuredClone(requireBattle(teamRun(42, ["memento"])));
+  summonEcho(ambiguous, ambiguous.team[0]!, "player", 5, []);
+  ambiguous.battle.enemies[0]!.name = "Echo";
+  const other = ambiguous.battle.enemies[1]!;
+  const uncertain: GameEvent = {
+    kind: "status",
+    actorId: other.id,
+    targetId: other.id,
+    status: "reflect",
+    outcome: "apply",
+    affectedStatus: "poison",
+    text: `${other.name} reflects poison to Echo`,
+  };
+  expect(eventPresentation(ambiguous, uncertain, reader)).toBe(uncertain.text);
 });
 
 it("localizes Death's Door and Armor loss using committed combat facts", () => {
@@ -1627,6 +1641,22 @@ it("extracts and renders keyword labels without changing their semantic identity
   );
   const term = screen.getByText("Brûlure");
   expect(term.getAttribute("data-keyword")).toBe("burn");
+  view.unmount();
+});
+
+it("presents the new Oasis Seed status with its localized Leech identity", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const combat = { ...freshCombat(), oasisLeech: true };
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CombatStatus combat={combat} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  const status = view.container.querySelector('[data-status-id="oasisLeech"]');
+  expect(status?.getAttribute("aria-label")).toBe("Graine d’oasis : la prochaine attaque a Vol de vie");
+  expect(status?.querySelector("svg.lucide-heart")).toBeTruthy();
   view.unmount();
 });
 

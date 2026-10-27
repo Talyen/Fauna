@@ -359,6 +359,12 @@
     "sourceHash": "d6c349f88834bf2182d705b53690d0584c3fd72aba30ad48d5d570914333d861",
     "text": "Яблочный пресс"
   },
+  "content.boon.apple-press.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Bleed</keyword0> deals damage when they gain <keyword1>Block</keyword1>",
+    "sourceHash": "ae82777b248644e8d9c59baa8803cf20f9ade8ac8140fec2b99bd381903648f5",
+    "text": "Вражеское <keyword0>кровотечение</keyword0> наносит урон, когда враги получают <keyword1>блок</keyword1>"
+  },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
     "source": "Ashfall Pendant",
@@ -388,6 +394,12 @@
     "source": "Bellows Heart",
     "sourceHash": "65ced8be9cacc5cad1ba80609f2353bc3180b011529b01d93c84bcc7dfca7307",
     "text": "Сердечные мехи"
+  },
+  "content.boon.bellows-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> allies adds {{value0}} <keyword1>Burn</keyword1> to each <keyword2>Burning</keyword2> enemy",
+    "sourceHash": "e06d50a3a5f908cf1c99753b80dded5b3cfa15d71cdd6c7a93b36f1f74e57016",
+    "text": "<keyword0>Лечение</keyword0> союзников добавляет {{value0}} <keyword1>горения</keyword1> каждому врагу с <keyword2>горением</keyword2>"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -491,11 +503,23 @@
     "sourceHash": "04bbdabb863762b03b3ca643d85e0f3f23d78e37dd1e9dea2cd7245085dd9fe7",
     "text": "Караванный ковёр"
   },
+  "content.boon.caravan-rug.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> does not decay on backup allies",
+    "sourceHash": "25a45294177b208657c85875efd3b1de1f06136d8b154fcd896b080aa906576e",
+    "text": "<keyword0>Блок</keyword0> союзников в запасе не уменьшается"
+  },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
     "source": "Chromatic Viol",
     "sourceHash": "9a394ce5b4d62b81cf29e7bebaa91550bada3d832751fb4dc29e1a32dbb795a2",
     "text": "Хроматическая виола"
+  },
+  "content.boon.chromatic-viol.rule": {
+    "reviewed": true,
+    "source": "Attacks deal {{value0}} extra damage for each harmful effect on the enemy",
+    "sourceHash": "e8b9122cd208b70ec7e47188dcee3c417708ed019152bb5fd512794dd7df2a39",
+    "text": "Атаки наносят {{value0}} дополнительного урона за каждый вредный эффект на враге"
   },
   "content.boon.cinder-fan.name": {
     "reviewed": true,
@@ -623,6 +647,12 @@
     "sourceHash": "17753fcb8ed7af91476493c039499c590cc7ad82733fac284687fb0bf5fbb0fb",
     "text": "Кипарисовый реликварий"
   },
+  "content.boon.cypress-reliquary.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door do not lose <keyword0>Armor</keyword0> from damage",
+    "sourceHash": "490c75641a6a4ea7e8af0905df3a82d49a1631694dfc4ed1d8d7fbfd4088ff17",
+    "text": "Союзники на пороге смерти не теряют <keyword0>броню</keyword0> от урона"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -688,6 +718,12 @@
     "source": "Echo Ocarina",
     "sourceHash": "4e57e67b3ec19ba2ae1eab5a415d3d9fe4d0922ab29c635c89291a51d2e1191a",
     "text": "Окарина эха"
+  },
+  "content.boon.echo-ocarina.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0>, other allies gain {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "20e76a017ddb85c7bc491c09ca49e2ae4482b8228bccf325258f516dfeb75338",
+    "text": "Когда союзник <keyword0>уклоняется</keyword0>, остальные союзники получают {{value0}}% <keyword1>уклонения</keyword1> до своего следующего хода"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -755,6 +791,12 @@
     "sourceHash": "f58e0a85540255430dbdda29e20fcd7cfcbd8ce76d6b4ad85ccc029f0eb1ecfb",
     "text": "Весло прощания"
   },
+  "content.boon.farewell-oar.rule": {
+    "reviewed": true,
+    "source": "Allies swapping out deal half their <keyword0>Block</keyword0> as <keyword1>Water</keyword1> damage to all enemies",
+    "sourceHash": "1be64ac567173b160d5e4e01da22b754a5b79dda43e09c29686c9fd04f9ed465",
+    "text": "Уходящие при смене союзники наносят всем врагам урон <keyword1>водой</keyword1> в размере половины своего <keyword0>блока</keyword0>"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -785,11 +827,23 @@
     "sourceHash": "7a9f9a5ac08f0c0c10acc324567eb76cb5d9a3b1bafe95d6f02d0375e3a5f790",
     "text": "Складная гора"
   },
+  "content.boon.folded-mountain.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "54ff3155eb64258c3a5bd56c17e94d1c0d71f25938e60a3e22f6db24b28f99d3",
+    "text": "<keyword0>Броня</keyword0> предотвращает накопление <keyword1>заморозки</keyword1>"
+  },
   "content.boon.frostglass-die.name": {
     "reviewed": true,
     "source": "Frostglass Die",
     "sourceHash": "07985baf99bd619d67985374f92c076cb156892e6cc5f19fc4e3d3ccd0ac935e",
     "text": "Кубик из морозного стекла"
+  },
+  "content.boon.frostglass-die.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> hits also deal {{value0}} <keyword1>Burn</keyword1> damage",
+    "sourceHash": "680b824c889465ddbea96bff2edc7cec72851f66c2bacc0057ab510018ccbd35",
+    "text": "Попадания <keyword0>заморозкой</keyword0> также наносят {{value0}} урона <keyword1>горением</keyword1>"
   },
   "content.boon.frozen-pocketwatch.name": {
     "reviewed": true,
@@ -845,6 +899,12 @@
     "sourceHash": "165bb2b7f50caf4bfc0a4f9e44f8e0e76b1d35dcc4bfb6bcc9c180f403c9b509",
     "text": "Щит стеклянного листа"
   },
+  "content.boon.glassleaf-shield.rule": {
+    "reviewed": true,
+    "source": "When allied <keyword0>Block</keyword0> breaks, halve the remaining damage",
+    "sourceHash": "cb3d11837b6bcaa9d1a12b814532f79197c15c2a52d87021221a44a59aae144b",
+    "text": "Когда союзный <keyword0>блок</keyword0> пробит, оставшийся урон уменьшается вдвое"
+  },
   "content.boon.grafting-needle.name": {
     "reviewed": true,
     "source": "Grafting Needle",
@@ -886,6 +946,12 @@
     "source": "Harvest Shears",
     "sourceHash": "fb1d8b2570d4da14a03dfdb6590036d6194464553740f19a79a0c018b56c19be",
     "text": "Ножницы урожая"
+  },
+  "content.boon.harvest-shears.rule": {
+    "reviewed": true,
+    "source": "When an enemy falls, their <keyword0>Bleed</keyword0> spreads to another enemy",
+    "sourceHash": "7416e177a3270813d45917c7d02a71710211461bbbf9bdd33ed52db5c518f290",
+    "text": "Когда враг падает, его <keyword0>кровотечение</keyword0> распространяется на другого врага"
   },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
@@ -1037,6 +1103,12 @@
     "sourceHash": "516cb2ee1bb9b3754e4e2527389d206604dbcaaf1b6c7aa1c25d62d8aeb4ec05",
     "text": "Волан из листьев"
   },
+  "content.boon.leafwing-shuttlecock.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0> an attack, deal {{value0}} <keyword1>Stun</keyword1> damage to the attacker",
+    "sourceHash": "a6d89f694051930fd7e2b19fa8a03a3c7234d8a5c0d79c8999f66157f3abb382",
+    "text": "Когда союзник <keyword0>уклоняется</keyword0> от атаки, нанесите атакующему {{value0}} урона <keyword1>оглушением</keyword1>"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -1127,6 +1199,12 @@
     "sourceHash": "2e8f919ab6f99a0fd68251b967c631148f53f13a4b2855ad7c8ab63a9e9f38b2",
     "text": "Зеркальный медальон"
   },
+  "content.boon.mirror-locket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> grants <keyword1>Block</keyword1> equal to half the <keyword2>Health</keyword2> restored",
+    "sourceHash": "4e44315a69dbc1af4dca0fc62867b28f61543632e48c7a948e56c1e9edc95ec5",
+    "text": "<keyword0>Вампиризм</keyword0> даёт <keyword1>блок</keyword1> в размере половины восстановленного <keyword2>здоровья</keyword2>"
+  },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
     "source": "Molten Paperweight",
@@ -1192,6 +1270,12 @@
     "source": "Oasis Seed",
     "sourceHash": "3e90b658f76b17b0313daa856807afec0e832536125dd5b92d8706343765d7fb",
     "text": "Семя оазиса"
+  },
+  "content.boon.oasis-seed.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> another ally gives their next attack <keyword1>Leech</keyword1>",
+    "sourceHash": "d79c4fff0346faf990a3253f97ced191cc3b53115e541402b416e5da656f8839",
+    "text": "<keyword0>Лечение</keyword0> другого союзника даёт его следующей атаке <keyword1>вампиризм</keyword1>"
   },
   "content.boon.obsidian-pitcher.name": {
     "reviewed": true,
@@ -1319,6 +1403,12 @@
     "sourceHash": "29ca00952891c20b81be721acb05fc967c22883a6d7d925b67f26041f295f0e3",
     "text": "Корзина пыльцы"
   },
+  "content.boon.pollen-basket.rule": {
+    "reviewed": true,
+    "source": "When an ally is hit, other allies’ <keyword0>Thorns</keyword0> also retaliate",
+    "sourceHash": "6ea760b01607b31ee65a398830ed9a32dcb9f1395770614974dc951aebda6085",
+    "text": "Когда союзник получает попадание, <keyword0>шипы</keyword0> других союзников тоже отвечают"
+  },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
     "source": "Poppy Seed Grinder",
@@ -1433,6 +1523,12 @@
     "sourceHash": "6ba36ac820c286ddde057b4315ee1c11e7def655e2a00d7f628821897cc53aec",
     "text": "Диадема рифа"
   },
+  "content.boon.reef-diadem.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits deal half your <keyword1>Thorns</keyword1> as extra <keyword2>Nature</keyword2> damage",
+    "sourceHash": "aea946271fc31c9ec68293af4027e087bf79314a7e0e25d195c49bd3ec3e6718",
+    "text": "Попадания <keyword0>водой</keyword0> наносят дополнительный урон <keyword2>природой</keyword2> в размере половины ваших <keyword1>шипов</keyword1>"
+  },
   "content.boon.reef-incense-tile.name": {
     "reviewed": true,
     "source": "Reef Incense Tile",
@@ -1546,6 +1642,12 @@
     "source": "Soot Brush",
     "sourceHash": "10a6a3b2d6257db40686fd5d0d28d9f498ae5ba9388d5da46244b48977e63b25",
     "text": "Кисть для сажи"
+  },
+  "content.boon.soot-brush.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> also <keyword2>Cleanses</keyword2> <keyword3>Blind</keyword3>",
+    "sourceHash": "b72cbd5f6eea8541e953f08ee6768bd2f8f50b3c72395b729bcf49fd226253b8",
+    "text": "<keyword0>Очищение</keyword0> <keyword1>горения</keyword1> также <keyword2>очищает</keyword2> <keyword3>ослепление</keyword3>"
   },
   "content.boon.sovereign-toast-rack.name": {
     "reviewed": true,
@@ -6124,6 +6226,12 @@
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "sourceHash": "d93e2e7b1100595e865578049ce3801eb164f91d268f28e2b397d8e5100552f0",
     "text": "<keyword0>Аннулирует</keyword0> следующий урон от <keyword1>заморозки</keyword1>; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
+  },
+  "content.status.oasisLeech.vab4f9087afb29b90.rule": {
+    "reviewed": true,
+    "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
+    "sourceHash": "4f49aaaf6687cea039a3f33ea53cbd702d42ba9375c73cd7d6d09ad541f8aac3",
+    "text": "Семя оазиса: следующая атака имеет <keyword0>вампиризм</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,

@@ -359,6 +359,12 @@
     "sourceHash": "f5a68ce0c36dbdc4f82b8b41083e9abdbefd3165bf13fa5ddc95886a86227f1d",
     "text": "苹果榨汁器"
   },
+  "content.boon.apple-press.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Bleed</keyword0> deals damage when they gain <keyword1>Block</keyword1>",
+    "sourceHash": "dd3deab8a514e3d610d19c4e696caea20319bbdd37cb462ba3a158aaf66175d5",
+    "text": "敌人获得<keyword1>格挡</keyword1>时，其<keyword0>流血</keyword0>会造成伤害"
+  },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
     "source": "Ashfall Pendant",
@@ -388,6 +394,12 @@
     "source": "Bellows Heart",
     "sourceHash": "c0c6d61b7a911c440f169c50135eebc01518edf69cb18e7906d9228e77d6be44",
     "text": "心形风箱"
+  },
+  "content.boon.bellows-heart.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> allies adds {{value0}} <keyword1>Burn</keyword1> to each <keyword2>Burning</keyword2> enemy",
+    "sourceHash": "cf091e72242e320ec2c2ae1f99309042ac7946f7f0a099346cc3bba7ccc5e265",
+    "text": "<keyword0>治疗</keyword0>盟友时，为每个已有<keyword2>灼烧</keyword2>的敌人增加{{value0}}点<keyword1>灼烧</keyword1>"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -491,11 +503,23 @@
     "sourceHash": "651d3a2a75d68222b505b13aae72a03037ac325d8bfab4e3c30c017626ce1bb8",
     "text": "商队地毯"
   },
+  "content.boon.caravan-rug.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> does not decay on backup allies",
+    "sourceHash": "0c209274f22238c9ee734bdcd0763b1be3e9cd96949919ba6948457570b937ff",
+    "text": "后备盟友的<keyword0>格挡</keyword0>不会衰减"
+  },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
     "source": "Chromatic Viol",
     "sourceHash": "5e7e3a43f0a7a4c6249812a8c4852cf20f8f6d0f826328d06006733038f705ef",
     "text": "彩音维奥尔琴"
+  },
+  "content.boon.chromatic-viol.rule": {
+    "reviewed": true,
+    "source": "Attacks deal {{value0}} extra damage for each harmful effect on the enemy",
+    "sourceHash": "9ea685ce2f4841604f200a1bde09acb3e42bf77ac3e85eb54197e48dc36855c5",
+    "text": "敌人身上每有一种有害效果，攻击便额外造成{{value0}}点伤害"
   },
   "content.boon.cinder-fan.name": {
     "reviewed": true,
@@ -623,6 +647,12 @@
     "sourceHash": "124ef2e57bab723c079ec4f97fc5b5633e25c46891be76fee741cb597ca86080",
     "text": "柏木圣物匣"
   },
+  "content.boon.cypress-reliquary.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door do not lose <keyword0>Armor</keyword0> from damage",
+    "sourceHash": "df9da4215f0655fc359d81d908316dead09e351d708b0ab2b730b559c1d73208",
+    "text": "濒死的盟友不会因伤害失去<keyword0>护甲</keyword0>"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -688,6 +718,12 @@
     "source": "Echo Ocarina",
     "sourceHash": "7638c9f2a47b59cae9f3d90ea9a5cce9d2e0b32ad2a4c13fc5f294713ca5bce1",
     "text": "回声陶笛"
+  },
+  "content.boon.echo-ocarina.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0>, other allies gain {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "020b5322b9b7318093e1ed2ae7fd6d1ca4444d311b19fdc9416c12fce1dc87c3",
+    "text": "一名盟友<keyword0>闪避</keyword0>时，其他盟友获得{{value0}}%的<keyword1>闪避</keyword1>，持续至各自的下个回合"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -755,6 +791,12 @@
     "sourceHash": "1244a5aa1ed463ea68f74144821f91f0530b9fe49cc0a179d3686bd76636292b",
     "text": "离别之桨"
   },
+  "content.boon.farewell-oar.rule": {
+    "reviewed": true,
+    "source": "Allies swapping out deal half their <keyword0>Block</keyword0> as <keyword1>Water</keyword1> damage to all enemies",
+    "sourceHash": "d7be14c1a60743974aa1837cfa8889271c46a1ef2776c19b0f9ab3a793525e5b",
+    "text": "换出的盟友对所有敌人造成相当于自身<keyword0>格挡</keyword0>一半的<keyword1>水</keyword1>伤害"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -785,11 +827,23 @@
     "sourceHash": "31dcbd654fedbabd4d235bdbbdf12ed9c9036c5e34a15b8ffc92c4c3eb8aa059",
     "text": "折叠山峰"
   },
+  "content.boon.folded-mountain.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "2f1623098d0e335a9e44cf5eef0795be19cf7b985b9a42d6ac9faa94e9d11300",
+    "text": "<keyword0>护甲</keyword0>防止<keyword1>冻结</keyword1>累积"
+  },
   "content.boon.frostglass-die.name": {
     "reviewed": true,
     "source": "Frostglass Die",
     "sourceHash": "895c32c701a9290a9155f21f09210ba98f7339e04b3f6a47529e624ca0d1dcab",
     "text": "霜玻璃骰子"
+  },
+  "content.boon.frostglass-die.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> hits also deal {{value0}} <keyword1>Burn</keyword1> damage",
+    "sourceHash": "c26cf52cce5fa20217b2255261854684ece299f80c94047c7e2ea0b963333970",
+    "text": "<keyword0>冻结</keyword0>命中还会造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
   },
   "content.boon.frozen-pocketwatch.name": {
     "reviewed": true,
@@ -845,6 +899,12 @@
     "sourceHash": "5d058b36c19370c2d604abaf5066fef8be6f45c89e900343e964cdd1e8c9572b",
     "text": "玻璃叶盾"
   },
+  "content.boon.glassleaf-shield.rule": {
+    "reviewed": true,
+    "source": "When allied <keyword0>Block</keyword0> breaks, halve the remaining damage",
+    "sourceHash": "610fe5ca7fd8e3a2758662cdc070d1944e620ebb812ab46cc9f4e1764c72609a",
+    "text": "盟友的<keyword0>格挡</keyword0>被击破时，将剩余伤害减半"
+  },
   "content.boon.grafting-needle.name": {
     "reviewed": true,
     "source": "Grafting Needle",
@@ -886,6 +946,12 @@
     "source": "Harvest Shears",
     "sourceHash": "f0323afd2059b6e5ccfabde065a12ae93f60c613c9fcb1105c257401751cdabd",
     "text": "收获剪"
+  },
+  "content.boon.harvest-shears.rule": {
+    "reviewed": true,
+    "source": "When an enemy falls, their <keyword0>Bleed</keyword0> spreads to another enemy",
+    "sourceHash": "5f116bd50bdd27584a126e53c2a42694cbbe9d06090fe3070384fc82a4b5ee2b",
+    "text": "敌人倒下时，其<keyword0>流血</keyword0>会扩散给另一名敌人"
   },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
@@ -1037,6 +1103,12 @@
     "sourceHash": "76c8adcce36aa690439b10e8222a978aa2687f572c1187d2aec33cb0479f9ecb",
     "text": "叶翼羽毛球"
   },
+  "content.boon.leafwing-shuttlecock.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0> an attack, deal {{value0}} <keyword1>Stun</keyword1> damage to the attacker",
+    "sourceHash": "ae175e6b788516ef859e8e82314b2b36751f8413897eb29daa60c50bf716e93f",
+    "text": "盟友<keyword0>闪避</keyword0>攻击时，对攻击者造成{{value0}}点<keyword1>眩晕</keyword1>伤害"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -1127,6 +1199,12 @@
     "sourceHash": "600ca6b78b74caf02b757780be5f7a6ee3551b5c5f4496abd85700a58f87f6d9",
     "text": "镜面坠盒"
   },
+  "content.boon.mirror-locket.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> grants <keyword1>Block</keyword1> equal to half the <keyword2>Health</keyword2> restored",
+    "sourceHash": "6f10916c60a48cf208e8d6bdc6ba0330ddba55ab70c6535c17b782623c3f4687",
+    "text": "<keyword0>汲取</keyword0>提供相当于恢复<keyword2>生命</keyword2>一半的<keyword1>格挡</keyword1>"
+  },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
     "source": "Molten Paperweight",
@@ -1192,6 +1270,12 @@
     "source": "Oasis Seed",
     "sourceHash": "6f44fb4f38f5d5f67966ff8bda7c96be9b7d2b764366a6e9093bb4a6491dcbcb",
     "text": "绿洲之种"
+  },
+  "content.boon.oasis-seed.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> another ally gives their next attack <keyword1>Leech</keyword1>",
+    "sourceHash": "695e7a9bbbac4292890a6f9ab3b4299b5663e333d94e8b5acaa896d998ef5aba",
+    "text": "<keyword0>治疗</keyword0>另一名盟友时，其下一次攻击获得<keyword1>汲取</keyword1>"
   },
   "content.boon.obsidian-pitcher.name": {
     "reviewed": true,
@@ -1319,6 +1403,12 @@
     "sourceHash": "001ba5470e241cd4800704a17f5558cafac2fd6d7560129cad76fdd001747968",
     "text": "花粉篮"
   },
+  "content.boon.pollen-basket.rule": {
+    "reviewed": true,
+    "source": "When an ally is hit, other allies’ <keyword0>Thorns</keyword0> also retaliate",
+    "sourceHash": "271af4759bda1dcca5c2433200948658a588dee76eea5a7cb4179c98211cd7cc",
+    "text": "盟友被命中时，其他盟友的<keyword0>荆棘</keyword0>也会反击"
+  },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
     "source": "Poppy Seed Grinder",
@@ -1433,6 +1523,12 @@
     "sourceHash": "0553b76569f92001f2ad66e22c10fdab34812e5a4756819db9cc85a18d1843db",
     "text": "珊瑚礁冠"
   },
+  "content.boon.reef-diadem.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits deal half your <keyword1>Thorns</keyword1> as extra <keyword2>Nature</keyword2> damage",
+    "sourceHash": "5ca7dcb9073239dd109839b4608fb4b9125820489e33364f967f1bc9a33dc805",
+    "text": "<keyword0>水</keyword0>命中会造成相当于自身<keyword1>荆棘</keyword1>一半的额外<keyword2>自然</keyword2>伤害"
+  },
   "content.boon.reef-incense-tile.name": {
     "reviewed": true,
     "source": "Reef Incense Tile",
@@ -1546,6 +1642,12 @@
     "source": "Soot Brush",
     "sourceHash": "fb04a04a39604db261ce6c770273efd9ac949501d9eeee0ce834b8c92cf83ee5",
     "text": "烟灰画笔"
+  },
+  "content.boon.soot-brush.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> also <keyword2>Cleanses</keyword2> <keyword3>Blind</keyword3>",
+    "sourceHash": "c1d365f08f15274959f37d77faafe611b2f5b874eac285f68d1b4bd4c087cf4f",
+    "text": "<keyword0>净化</keyword0><keyword1>灼烧</keyword1>时也会<keyword2>净化</keyword2><keyword3>致盲</keyword3>"
   },
   "content.boon.sovereign-toast-rack.name": {
     "reviewed": true,
@@ -6124,6 +6226,12 @@
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "sourceHash": "20f554227c138d6aa90e8185bd9c50d1412accc35540460d23a437d8e02fc63b",
     "text": "<keyword0>无效化</keyword0>下一次<keyword1>冻结</keyword1>伤害; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
+  },
+  "content.status.oasisLeech.vab4f9087afb29b90.rule": {
+    "reviewed": true,
+    "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
+    "sourceHash": "9639e9f3687524d87a86c7a7666eaab4c25e626619b55f56deb6ba905fdce7d9",
+    "text": "绿洲之种：下一次攻击具有<keyword0>汲取</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
