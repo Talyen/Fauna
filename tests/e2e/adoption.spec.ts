@@ -5,6 +5,31 @@ import { expect } from "@playwright/test";
 import { reloadHome, test, seed, state } from "./support/session";
 import { merchantDestination, run } from "../support/game";
 import { BOONS } from "../../src/game/content";
+
+test("unaffordable Merchant details leave the price and exit visible", async ({ page }) => {
+  const fixture = structuredClone(merchantDestination());
+  fixture.currency = 0;
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await seed(page, fixture);
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
+  const offer = page.getByRole("button", { name: /^Buy / }).nth(1);
+  await offer.hover();
+  const tooltip = page.getByRole("tooltip");
+  await expect(tooltip).toContainText("Not enough Gold");
+  const tooltipBox = await tooltip.boundingBox();
+  const priceBox = await page.locator(".merchant-offer").nth(1).locator(".merchant-price").boundingBox();
+  const leaveBox = await page.getByRole("button", { name: "Leave", exact: true }).boundingBox();
+  expect(tooltipBox!.y + tooltipBox!.height).toBeLessThan(priceBox!.y);
+  expect(tooltipBox!.y + tooltipBox!.height).toBeLessThan(leaveBox!.y);
+  const before = await state(page);
+  await offer.focus();
+  await page.keyboard.press("Enter");
+  expect(await state(page)).toEqual(before);
+});
+
 for (const [width, height] of REVIEW_VIEWPORTS)
   test(`illustrated Boons remain readable and return focus at ${width}×${height}`, async ({ page }) => {
     const fixture = structuredClone(run(7));

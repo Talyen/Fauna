@@ -126,7 +126,8 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                         }}
                       />
                     </TooltipTrigger>
-                    <TooltipContent>
+                    {/* Keep unavailable details above the compact shelf when they fit. */}
+                    <TooltipContent collisionPadding={8}>
                       <strong>
                         <BoonName boon={boon} />
                       </strong>
