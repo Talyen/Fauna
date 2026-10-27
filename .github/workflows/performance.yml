@@ -82,7 +82,7 @@ jobs:
           path: reports/performance/
   paired:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
     steps:
@@ -111,21 +111,47 @@ jobs:
       - name: Capture requested deep trace
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.trace }}
         run: npm run perf -- --scenario preview --trace --out reports/performance/preview-trace
-      - name: Capture baseline on this runner
-        run: |
-          for trial in 1 2 3; do
-            npm run perf -- --out "reports/performance/baseline-$trial"
-          done
+      - name: Preserve ordinary renderer
+        run: cp -a dist "$RUNNER_TEMP/fauna-baseline-dist"
       - name: Build compiler trial
         run: npm run build
         env:
           FAUNA_REACT_COMPILER: "1"
-      - name: Capture compiler trial and compare
+      - name: Exercise compiler build in browser journeys
+        run: >-
+          npm run test:e2e -- tests/e2e/combat.spec.ts tests/e2e/persistence.spec.ts
+          tests/e2e/battle-targeting.spec.ts tests/e2e/menu-input.spec.ts
+          --reporter=list,json --output=reports/performance/compiler-browser-results
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_FILE: reports/performance/compiler-browser.json
+      - name: Preserve compiler renderer
+        run: cp -a dist "$RUNNER_TEMP/fauna-compiler-dist"
+      - name: Capture counterbalanced compiler comparisons
         run: |
-          for trial in 1 2 3; do
-            npm run perf -- --out "reports/performance/compiler-$trial"
+          set -euo pipefail
+          for trial in 1 2 3 4; do
+            if (( trial == 1 || trial == 4 )); then
+              variants=(baseline compiler)
+            else
+              variants=(compiler baseline)
+            fi
+            for variant in "${variants[@]}"; do
+              rm -rf dist
+              cp -a "$RUNNER_TEMP/fauna-$variant-dist" dist
+              npm run perf -- --out "reports/performance/$variant-$trial"
+            done
             npm run perf:compare -- "reports/performance/baseline-$trial/report.json" "reports/performance/compiler-$trial/report.json" "reports/performance/comparison-$trial"
           done
+          baseline=$(jq -er '.buildIdentity' reports/performance/baseline-1/report.json)
+          compiler=$(jq -er '.buildIdentity' reports/performance/compiler-1/report.json)
+          test "$baseline" != "$compiler"
+          for trial in 1 2 3 4; do
+            jq -e --arg identity "$baseline" '.buildIdentity == $identity' "reports/performance/baseline-$trial/report.json" > /dev/null
+            jq -e --arg identity "$compiler" '.buildIdentity == $identity' "reports/performance/compiler-$trial/report.json" > /dev/null
+          done
+          jq -n --arg baseline "$baseline" --arg compiler "$compiler" \
+            '{baselineBuild: $baseline, compilerBuild: $compiler, order: [["baseline", "compiler"], ["compiler", "baseline"], ["compiler", "baseline"], ["baseline", "compiler"]]}' \
+            > reports/performance/compiler-comparison.json
       - name: Retain observations
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

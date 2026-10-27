@@ -35,8 +35,6 @@ export function KeywordPlasmaBackground({
   const activeRef = useRef(colorPair !== null);
   const wakeRef = useRef<() => void>(() => {});
   const velocityRef = useRef({ primary: [0, 0, 0], secondary: [0, 0, 0] });
-  const rafRef = useRef<number | null>(null);
-  const idleTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const currentTarget = { primary: targetPrimary, secondary: targetSecondary };
@@ -76,6 +74,8 @@ export function KeywordPlasmaBackground({
       [fromSecondary, toSecondary, velocity.secondary],
     ] as const;
     const mixedColors: PlasmaColorState = { primary: fromPrimary, secondary: fromSecondary };
+    let frame: number | undefined;
+    let idleTimer: number | undefined;
 
     function tick(now: number) {
       const dt = Math.max(0, now - previousTime);
@@ -103,25 +103,25 @@ export function KeywordPlasmaBackground({
       }
       colorsRef.current = mixedColors;
       if (!settled) {
-        rafRef.current = requestAnimationFrame(tick);
+        frame = requestAnimationFrame(tick);
       } else {
         colorsRef.current = currentTarget;
         velocity.primary.fill(0);
         velocity.secondary.fill(0);
         if (!hasColorPair) {
           // Let the renderer paint the final black frame before going idle.
-          idleTimerRef.current = window.setTimeout(() => {
+          idleTimer = window.setTimeout(() => {
             activeRef.current = false;
           }, 100);
         }
-        rafRef.current = null;
+        frame = undefined;
       }
     }
 
-    rafRef.current = requestAnimationFrame(tick);
+    frame = requestAnimationFrame(tick);
     return () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-      if (idleTimerRef.current !== null) window.clearTimeout(idleTimerRef.current);
+      if (frame !== undefined) cancelAnimationFrame(frame);
+      if (idleTimer !== undefined) window.clearTimeout(idleTimer);
     };
   }, [hasColorPair, targetPrimary, targetSecondary, motionAllowed, visible, webglAvailable]);
 
