@@ -5,14 +5,8 @@ import type { Command, GameState } from "../../../src/game/types";
 import { policy } from "../../support/game";
 import { state } from "./session";
 
-export async function continueToRecruit(
-  page: Page,
-  activate: (el: Locator) => Promise<void> = (el) => el.click(),
-) {
-  if (await page.getByRole("heading", { name: "Choose a Recruit", exact: true }).isVisible()) return;
-  await activate(
-    page.locator(".battle-rewards-screen").getByRole("button", { name: "Continue", exact: true }),
-  );
+export async function continueToRecruit(page: Page) {
+  await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
 }
 
 export async function step(
@@ -30,7 +24,7 @@ export async function step(
   } else if (c.type === "rest") {
     await activate(page.getByRole("button", { name: /^Rest/ }));
   } else if (c.type === "recruit") {
-    await continueToRecruit(page, activate);
+    await continueToRecruit(page);
     await expect(page.locator(".boon-choice")).toHaveCount(0);
     await activate(
       page.getByRole("button", { name: `Recruit ${species(c.species).name}`, exact: true }).first(),

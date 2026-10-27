@@ -1,6 +1,8 @@
 import { captureFrame, settleScreen } from "./support/rendered-evidence";
 import { expect, type Page } from "@playwright/test";
 import { BOONS } from "../../src/game/content";
+import { KEYWORDS } from "../../src/game/progression";
+import { produce } from "immer";
 import { winBattle, bossReward } from "../support/game";
 import { test, seed, state, resume } from "./support/session";
 import { expectScrollFree } from "./support/layout-contract";
@@ -29,8 +31,8 @@ for (const [name, create] of [
     await seed(page, fixture);
     await resume(page);
     if (fixture.phase === "recruit") {
-      await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
-      await expect(page.locator(".recruit-options")).toHaveCount(0);
+      await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+      await expect(page.locator(".recruit-options")).toHaveCount(1);
       await layouts(page, "earnings", async () => {
         expect(
           await page.getByLabel("Last battle earnings").evaluate((receipt) => {
@@ -50,9 +52,6 @@ for (const [name, create] of [
           }),
         ).toEqual({ earningsBelowXP: true, matchingColors: true });
       });
-      await page.getByRole("button", { name: "Continue", exact: true }).click();
-      await expect(page.getByLabel("Last battle earnings")).toHaveCount(0);
-      await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
       await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
     }
     const cards = page.locator(".reward-option");
@@ -94,3 +93,28 @@ for (const [name, create] of [
     await layouts(page, `team-after-${fixture.phase}`);
     expect(await state(page)).toEqual(committed);
   });
+
+test("many earned keywords remain pageable beside the Recruit choice", async ({ page }) => {
+  const fixture = produce(winBattle(), (game) => {
+    const xp = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 5]));
+    game.journey!.lastBattle!.xp = xp;
+    game.journey!.xp = xp;
+    game.reward!.xp = xp;
+    game.keywordXP = xp;
+  });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await seed(page, fixture);
+  await resume(page);
+  await layouts(page, "earnings-with-recruits");
+  const next = page.getByRole("navigation", { name: "Keyword XP earned" }).getByRole("button", {
+    name: "Next page",
+  });
+  let pages = 1;
+  while (await next.isEnabled()) {
+    await next.click();
+    pages++;
+  }
+  expect(pages).toBeGreaterThan(1);
+  expect(await state(page)).toEqual(fixture);
+  await expect(page.getByRole("button", { name: /^Recruit / }).first()).toBeVisible();
+});

@@ -2,7 +2,7 @@ import { useMessages } from "../shared/localization/message-context";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { ResultPresentation } from "../shared/rewards/result-presentation";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { Plus, Star } from "lucide-react";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
@@ -15,7 +15,12 @@ import type { Inspection } from "../shared/inspection-model";
 import { RecruitTeam } from "./recruit-team";
 import { BoonArt, BoonName, BoonText } from "./boon-presentation";
 import { BattleEarnings } from "../shared/rewards/battle-earnings";
-type Props = { game: RewardState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
+type Props = {
+  game: RewardState;
+  send: (command: Command) => boolean;
+  inspect: (item: Inspection) => void;
+  visible?: boolean;
+};
 function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId }) {
   const i18n = useMessages();
   const name = i18n.content(`content.species.${kind}.name`, species(kind).name);
@@ -58,11 +63,9 @@ function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId })
     </div>
   );
 }
-export function Rewards({ game, send, inspect }: Props) {
+export function Rewards({ game, send, inspect, visible = true }: Props) {
   const i18n = useMessages();
   const selectedRecruit = game.phase === "recruit" ? game.reward.selectedRecruit : undefined;
-  const [choosing, setChoosing] = useState(game.phase === "boon" || selectedRecruit !== undefined);
-  const proceed = useRef<HTMLButtonElement>(null);
   const choices = useRef<HTMLElement>(null);
   const choose = (element: HTMLElement, command: Command) => {
     // Mark the outgoing surface before dispatch so its transition snapshot carries the choice.
@@ -71,29 +74,13 @@ export function Rewards({ game, send, inspect }: Props) {
     if (!send(command) && option) delete option.dataset.committed;
   };
   useLayoutEffect(() => {
-    if (selectedRecruit !== undefined) return;
-    returnFocus(
-      choosing
-        ? (choices.current?.querySelector<HTMLButtonElement>(".creature-card, .boon-choice") ?? null)
-        : proceed.current,
-    );
-  }, [choosing, selectedRecruit]);
+    if (!visible || selectedRecruit !== undefined) return;
+    returnFocus(choices.current?.querySelector<HTMLButtonElement>(".creature-card, .boon-choice") ?? null);
+  }, [selectedRecruit, visible]);
   if (game.phase === "recruit" && selectedRecruit !== undefined)
     return <RecruitTeam game={game} incoming={selectedRecruit} send={send} inspect={inspect} />;
   const reward = game.reward;
   const recruiting = game.phase === "recruit";
-  if (!choosing)
-    return (
-      <ResultPresentation>
-        <Screen className="battle-rewards-screen">
-          <ScreenHeading>{i18n.message("rewards.victory", "Victory")}</ScreenHeading>
-          <BattleEarnings game={game} detailed />
-          <Button ref={proceed} onClick={() => setChoosing(true)}>
-            {i18n.message("merchant.continue", "Continue")}
-          </Button>
-        </Screen>
-      </ResultPresentation>
-    );
   return (
     <ResultPresentation>
       <Screen className="reward-screen">
@@ -104,6 +91,7 @@ export function Rewards({ game, send, inspect }: Props) {
               : i18n.message("rewards.chooseBoon", "Choose a Boon")}
           </ScreenHeading>
         </header>
+        {recruiting ? <BattleEarnings game={game} detailed /> : null}
         <section className="reward-choices" ref={choices}>
           <div className="reward-choice-content">
             {recruiting ? (

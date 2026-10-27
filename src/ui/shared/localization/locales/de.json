@@ -9485,12 +9485,6 @@
     "sourceHash": "346a14c0e1cd7a13719ff99dbad69be8537484230fedfb634b2e41266dd736a2",
     "text": "Überspringen"
   },
-  "rewards.victory": {
-    "reviewed": true,
-    "source": "Victory",
-    "sourceHash": "7ac67354f4a43f9e0256a1568982780e99724f8191c302a8ce17d8e3630361df",
-    "text": "Sieg"
-  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",

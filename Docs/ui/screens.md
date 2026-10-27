@@ -91,11 +91,11 @@ Selecting artwork opens a dedicated tree. Show available points, exact XP and Pr
 
 Owned borders are gold. Icons use keyword color at 65% while unowned and full strength when owned, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border gold then fades over 250ms. Focus takes priority over the flash; shared availability rules distinguish missing points from incomplete earlier rows.
 
-## Victory, recruitment and team confirmation
+## Victory, recruitment and team replacement
 
 ### Earnings and choices
 
-Show centered Victory earnings: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. Continue opens Choose a Recruit without repeating earnings beside offers. An unchosen recruitment resumes through earnings; a banked full-roster recruit resumes directly at the replacement choice.
+Show battle earnings above the Recruit offers: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. An unchosen recruitment resumes directly to these offers; a banked full-roster recruit resumes directly at the replacement choice.
 
 [Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Activating starter or reward artwork recruits immediately; hover or focus shows details and the inspection shortcut opens the full kit without recruiting. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
 

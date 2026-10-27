@@ -9484,12 +9484,6 @@
     "sourceHash": "460af97e6c28d4364e446cc5a356eca91bc9ff42df0312bd46853d97bb89b7ef",
     "text": "スキップ"
   },
-  "rewards.victory": {
-    "reviewed": true,
-    "source": "Victory",
-    "sourceHash": "30edc2983a1b6fa10e471093ed3c0bd94cc5a8d909327228f17c4de3b0293b9b",
-    "text": "勝利"
-  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",

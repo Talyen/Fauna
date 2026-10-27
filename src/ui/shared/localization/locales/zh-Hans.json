@@ -9484,12 +9484,6 @@
     "sourceHash": "75abfbefd44b69bdae2ef692b77b5c669982fe44c094f1427290215da5375930",
     "text": "跳过"
   },
-  "rewards.victory": {
-    "reviewed": true,
-    "source": "Victory",
-    "sourceHash": "6f14bf3366f8ef6025a7dbd056d65145ea17b6fb7b92e7ec95b2cd3745bbe212",
-    "text": "胜利"
-  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",

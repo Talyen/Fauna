@@ -30,7 +30,7 @@ After an action or turn resolves, replace knocked-out deployed creatures in depl
 
 If the deployed row falls, stop remaining enemy attacks and begin the next player turn with restored Mana and required replacements. Defeat requires the whole roster to fall. Knocked-out owners retain their card slots in saved zones; ordinary draws skip them unless a living deployed [Oathara](content/creatures/oathara.md#identity-and-ownership) supplies Unfinished Journey. That passive keeps fallen allies' cards drawable and permits a bounded number of borrowed plays without changing ownership. Required replacement still takes priority over card play. The next hand reserves incoming slots after a whole-row knockout, avoiding a free extra draw.
 
-[Captoad](content/creatures/captoad.md) illustrates ordinary swap abilities. [Tournelle](content/creatures/tournelle.md) instead swaps the lowest current-Health ally with random living backup and draws one; without backup it only draws. [Legendary formation changes](#legendaries-and-minions) adjust kit sizes separately. [Recruitment](#recruitment) defines full-roster confirmation and deployed replacements.
+[Captoad](content/creatures/captoad.md) illustrates ordinary swap abilities. [Tournelle](content/creatures/tournelle.md) instead swaps the lowest current-Health ally with random living backup and draws one; without backup it only draws. [Legendary formation changes](#legendaries-and-minions) adjust kit sizes separately. [Recruitment](#recruitment) defines full-roster replacement and deployed replacements.
 
 ## Encounters
 
@@ -97,22 +97,22 @@ Gold is permanent and buys journey Boons at Merchants. Ordinary victories grant 
 
 Intermediate Bosses offer up to three distinct unowned Boons after recruitment. Choose one or Skip; smaller nonempty pools remain available and empty pools advance automatically. Ordinary victories offer recruitment only; the final Boss offers recruitment before results. Boons last for the journey and remain inspectable through its menu.
 
-The [Boon catalog](../src/game/content/boons.ts) defines available items. [Support visits](#optional-support-visits) defines stock, rolls and saved prices; [reward presentation](ui/screens.md#victory-recruitment-and-team-confirmation) defines disclosure.
+The [Boon catalog](../src/game/content/boons.ts) defines available items. [Support visits](#optional-support-visits) defines stock, rolls and saved prices; [reward presentation](ui/screens.md#victory-recruitment-and-team-replacement) defines disclosure.
 
 ## Screen flow and Journey results
 
 Journey is the player-facing name; internal command IDs, routes, filenames and storage paths retain their existing names.
 
-| Outcome                   | Flow after settlement                                                                              |
-| ------------------------- | -------------------------------------------------------------------------------------------------- |
-| Ordinary victory          | Earnings → Continue → required recruitment → next encounter                                        |
-| Intermediate Boss victory | Earnings → Continue → required Legendary recruitment → Boon choice when available → next encounter |
-| Final Boss victory        | Required recruitment → Journey results                                                             |
-| Defeat                    | Journey results                                                                                    |
-| End a started journey     | Bank pending XP → Journey results, labeled Returned home                                           |
-| End an unfinished draft   | Main menu                                                                                          |
+| Outcome                   | Flow after settlement                                                                     |
+| ------------------------- | ----------------------------------------------------------------------------------------- |
+| Ordinary victory          | Earnings and required recruitment → next encounter                                        |
+| Intermediate Boss victory | Earnings and required Legendary recruitment → Boon choice when available → next encounter |
+| Final Boss victory        | Required recruitment → Journey results                                                    |
+| Defeat                    | Journey results                                                                           |
+| End a started journey     | Bank pending XP → Journey results, labeled Returned home                                  |
+| End an unfinished draft   | Main menu                                                                                 |
 
-Victory Continue is presentation-only; it leaves committed earnings and offers unchanged. Recruitment is required; only Boon choices retain Skip. Missing optional choices advance automatically. [Recruitment](#recruitment) owns full-roster confirmation.
+Earnings appear alongside the required Recruit choice without an extra Continue. Recruitment is required; only Boon choices retain Skip. Missing optional choices advance automatically. [Recruitment](#recruitment) owns full-roster replacement.
 
 Settlement and voluntary return bank actual retained earnings atomically, respecting progression caps. Browsing earnings/results never grants rewards or saves. Journey totals include all settled battles and XP banked on return home; they are never inferred from lifetime XP or currency. No material or item rewards are authored.
 

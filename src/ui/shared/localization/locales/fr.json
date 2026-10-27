@@ -9486,12 +9486,6 @@
     "sourceHash": "ae9542d574d0066334ba241295de8e4128d7ecd82e97e4fe36f0823942c8c2dc",
     "text": "Passer"
   },
-  "rewards.victory": {
-    "reviewed": true,
-    "source": "Victory",
-    "sourceHash": "d535f43d9b42c714871469d0d26143850ad834d9dd4b3bc69d34406146e6ad0c",
-    "text": "Victoire"
-  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",

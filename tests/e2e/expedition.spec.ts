@@ -25,7 +25,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
     expect(s.phase).not.toBe("defeat");
     expect(s.reward?.outcome).not.toBe("defeat");
     if (s.phase === "recruit" && s.team.length + s.reserves.length < 5) {
-      await continueToRecruit(page, activate);
+      await continueToRecruit(page);
       const roster = [...s.team, ...s.reserves];
       const incoming =
         s.reward!.recruits.find((kind) => !roster.some((unit) => unit.species === kind)) ??

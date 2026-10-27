@@ -9486,12 +9486,6 @@
     "sourceHash": "f677c5db0d852dc933a20c6b15bf73ff0148710ff674d4779e32011536cc815f",
     "text": "Omitir"
   },
-  "rewards.victory": {
-    "reviewed": true,
-    "source": "Victory",
-    "sourceHash": "13099ad277f529808dcc20b29b7256639c359126ce7b604c2aa955022db9dcc8",
-    "text": "Victoria"
-  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",

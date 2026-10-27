@@ -9487,12 +9487,6 @@
     "sourceHash": "b5de5806b02f7d1c06603fcce9ef31bdf5f685b1969099c11922d336824c2465",
     "text": "Пропустить"
   },
-  "rewards.victory": {
-    "reviewed": true,
-    "source": "Victory",
-    "sourceHash": "c9b719a5f44e7be100ce5f116bb39c5a1edfc6a590123855c7a84856d3a63205",
-    "text": "Победа"
-  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",

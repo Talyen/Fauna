@@ -365,10 +365,6 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   }
   if (["recruit", "recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
-    await page
-      .locator(".battle-rewards-screen")
-      .getByRole("button", { name: "Continue", exact: true })
-      .click();
     await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
     if (["recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
       await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
@@ -383,12 +379,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await expect(page.getByRole("heading", { name: "Returned home", exact: true })).toBeVisible();
   }
   if (scenario.name === "inspection") {
-    await button("Continue").click();
     await page.locator(".recruit-options .creature-card").first().click({ button: "right" });
     await expect(page.locator(".inspection")).toBeVisible();
   }
-  if (scenario.name === "battle-rewards")
-    await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
+  if (scenario.name === "battle-rewards") await expect(page.getByLabel("Last battle earnings")).toBeVisible();
   if (scenario.name.startsWith("merchant"))
     await expect(page.getByRole("region", { name: "Boon Merchant stock" })).toBeVisible();
 }

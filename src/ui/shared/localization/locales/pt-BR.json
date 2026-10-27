@@ -9486,12 +9486,6 @@
     "sourceHash": "26358f519ea1f7fa71ce4c172085b5d9f1c4faecdfb1357aad2e5ff31231bd2d",
     "text": "Pular"
   },
-  "rewards.victory": {
-    "reviewed": true,
-    "source": "Victory",
-    "sourceHash": "6a9c9f1daf2ddd70d41dd4996b2c0da15671a42d36c8a77a6a385244e2a68aff",
-    "text": "Vitória"
-  },
   "settings.audio": {
     "reviewed": true,
     "source": "Audio",

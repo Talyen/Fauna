@@ -44,7 +44,7 @@ describe("player interface", () => {
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(6);
     await session.dispose();
   });
-  it("shows earnings before recruitment without committing or granting rewards again", async () => {
+  it("shows earnings with recruitment without committing or granting rewards again", async () => {
     vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     const started = starterJourney(7, "emberback");
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
@@ -54,12 +54,12 @@ describe("player interface", () => {
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
+    const committed = session.store.getState().game;
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
-    expect(screen.queryByRole("heading", { name: "Choose a Recruit" })).toBeNull();
-    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(0);
+    expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
+    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
     expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
     await waitFor(() =>
       expect(
@@ -71,12 +71,9 @@ describe("player interface", () => {
     expect(progress.getAttribute("aria-valuenow")).toBe("14");
     expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
-    const committed = session.store.getState().game;
-    await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(session.store.getState().game).toBe(committed);
-    expect(screen.queryByLabelText("Last battle earnings")).toBeNull();
-    expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
-    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
+    expect(screen.getByLabelText("Last battle earnings")).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
     expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
     const incoming = game.reward!.recruits[0]!;
     const offer = screen.getByRole("button", { name: `Recruit ${species(incoming).name}` });

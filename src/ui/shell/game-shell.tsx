@@ -456,6 +456,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                         <Rewards
                           key={`${game.encounter}-${game.phase}`}
                           game={game}
+                          visible={route === "play"}
                           send={send}
                           inspect={inspect}
                         />
