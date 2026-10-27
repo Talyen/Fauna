@@ -317,6 +317,8 @@ export function runCheck(
         file.startsWith("src/ui/") ||
         file.startsWith("src/game/content/") ||
         file === "src/game/keywords.ts" ||
+        file === "src/game/rules/boons.ts" ||
+        file === "src/game/rules/talents.ts" ||
         file.startsWith("scripts/localization/"),
     )
   ) {

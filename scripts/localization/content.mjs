@@ -1,5 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
+import { extractPassiveRules } from "./passive-rules.mjs";
+import { extractTalentRules } from "./talent-rules.mjs";
+import { extractBoonRules } from "./boon-rules.mjs";
 import { parseSync } from "@swc/core";
 
 /** Extract literal authored names by gameplay ID; generated rules have a separate migration. */
@@ -99,5 +102,24 @@ export function extractProjectContent(root) {
     }));
   const keywordFile = path.join(root, "src/game/keywords.ts");
   files.push({ location: "src/game/keywords.ts", source: fs.readFileSync(keywordFile, "utf8") });
-  return extractContent(files);
+  const names = extractContent(files);
+  const rules = extractBoonRules(
+    fs.readFileSync(path.join(root, "src/game/rules/boons.ts"), "utf8"),
+    fs.readFileSync(keywordFile, "utf8"),
+  );
+  const talentRules = extractTalentRules(
+    fs.readFileSync(path.join(root, "src/game/rules/talents.ts"), "utf8"),
+    fs.readFileSync(keywordFile, "utf8"),
+  );
+  const authoredTalentRules = Object.fromEntries(
+    Object.entries(talentRules).filter(([id]) => Object.hasOwn(names, id.replace(/\.rule$/, ".name"))),
+  );
+  return Object.fromEntries(
+    Object.entries({
+      ...names,
+      ...rules,
+      ...authoredTalentRules,
+      ...extractPassiveRules(files, fs.readFileSync(keywordFile, "utf8")),
+    }).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)),
+  );
 }

@@ -87,7 +87,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       fs.writeFileSync(destination, output);
       fs.writeFileSync(contentFile, contentOutput);
       console.log(
-        `Extracted ${Object.keys(messages).length} explicit UI messages and ${Object.keys(content).length} authored names`,
+        `Extracted ${Object.keys(messages).length} explicit UI messages and ${Object.keys(content).length} authored entries`,
       );
       break;
     case "check":
@@ -99,7 +99,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
         process.exitCode = 1;
       } else
         console.log(
-          `English localization catalogs are current (${Object.keys(messages).length} UI messages; ${Object.keys(content).length} authored names)`,
+          `English localization catalogs are current (${Object.keys(messages).length} UI messages; ${Object.keys(content).length} authored entries)`,
         );
       break;
     default:

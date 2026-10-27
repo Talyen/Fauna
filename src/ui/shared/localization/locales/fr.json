@@ -149,6 +149,54 @@
     "sourceHash": "46ca41bfed8aa1f6c06b67c52d2831f2fc27ca0feb9cdefcc1d5a6de903eeefa",
     "text": "Chargement…"
   },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "b59e46f88d434060b0f996c2afd250316c8079abcfe5f64c8676c26b42b1293a",
+    "text": "Gramophone d’éther"
+  },
+  "content.boon.aether-gramophone.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
+    "sourceHash": "631deaf094930aa27ff537b4dd6ed48c1238c15e13027714202cc4a15244aa7b",
+    "text": "Les attaques répétées ne peuvent pas être <keyword0>esquivées</keyword0>"
+  },
+  "content.boon.herbarium-press.name": {
+    "reviewed": true,
+    "source": "Herbarium Press",
+    "sourceHash": "ea3ab136d2c7ec122791b212c5224d68fe002c65b081e3eb3cb3c61e4ca739d2",
+    "text": "Presse d’herbier"
+  },
+  "content.boon.herbarium-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "sourceHash": "f107c022700bf9e64f3473a0c575f1aa642e520d2a930d61a4bfae053c3f1192",
+    "text": "Le <keyword0>Poison</keyword0> des ennemis <keyword2>gelés</keyword2> ne peut pas être <keyword1>purifié</keyword1>"
+  },
+  "content.boon.miracle-megaphone.name": {
+    "reviewed": true,
+    "source": "Miracle Megaphone",
+    "sourceHash": "3778223ee1952d78376f5338fe48a845e8bc2edf24dd2d756aee36658126e25b",
+    "text": "Mégaphone miraculeux"
+  },
+  "content.boon.miracle-megaphone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> affects all allies",
+    "sourceHash": "0191ce0358ac6e595036410d4df17b5852f1ff7d2efe385cc1b16d610dac167c",
+    "text": "<keyword0>Purification</keyword0> affecte tous les alliés"
+  },
+  "content.boon.rook-of-mercy.name": {
+    "reviewed": true,
+    "source": "Rook of Mercy",
+    "sourceHash": "ecdf5008089c77bad505e1993d33328815f3995e0520db9c50f11dc7adfc7621",
+    "text": "Tour de miséricorde"
+  },
+  "content.boon.rook-of-mercy.rule": {
+    "reviewed": true,
+    "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "690a3d69ce9c0470f7db402edc1e09d5289ce4c6a43e541f23b83377c7db358a",
+    "text": "Les alliés qui entrent gagnent {{value0}} en <keyword0>Armure</keyword0>"
+  },
   "content.keyword.armor.label": {
     "reviewed": true,
     "source": "Armor",
@@ -731,5 +779,96 @@
     "source": "Windowed",
     "sourceHash": "c878888968e6756d634d036919b632dc3a7c30bfd8a58fded1bee970e58f5f6c",
     "text": "Fenêtré"
+  },
+  "talents.category": {
+    "reviewed": true,
+    "source": "{{keyword}} talents",
+    "sourceHash": "a55b8f81e6f6a3f4c10d27f090638e4ca0ca655cfd4095ac962a36ae5e97b3a5",
+    "text": "Talents : {{keyword}}"
+  },
+  "talents.detailTitle": {
+    "reviewed": true,
+    "source": "{{keyword}} · {{name}}",
+    "sourceHash": "3343e7a8f99a50d7da49a4136ceb51b55ff3b3c1cecae1ca6ddd659c9a2e7072",
+    "text": "{{keyword}} · {{name}}"
+  },
+  "talents.keywordXp": {
+    "reviewed": true,
+    "source": "{{keyword}} XP",
+    "sourceHash": "62742cf2ffd839dcf2699c700e47d23c28ae4a0da62c7aa68d1877d687c9149a",
+    "text": "EXP de {{keyword}}"
+  },
+  "talents.pages": {
+    "reviewed": true,
+    "source": "Talent pages",
+    "sourceHash": "1dd102a767e771c46a490a2e41e3da16cf51f937b6e36124840da8a335799639",
+    "text": "Pages de talents"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "many": "{{count}} points disponibles",
+      "one": "{{count}} point disponible",
+      "other": "{{count}} points disponibles"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    },
+    "sourceHash": "95a2eb36324cf70884278f6d37708718c8407afc98b6ef6e927f609a44d3d495"
+  },
+  "talents.requiresPoint": {
+    "reviewed": true,
+    "source": "Requires 1 point",
+    "sourceHash": "f2d97e7a47659ea5f256dd14bd3cd68525bc909aa0e038b61296f8d669c2a7db",
+    "text": "Nécessite 1 point"
+  },
+  "talents.requiresPointAndRows": {
+    "reviewed": true,
+    "source": "Requires 1 point and all earlier rows",
+    "sourceHash": "8b608a3c9db5bcb0a24e9d68955f8a131c751e1cf5cd72bc4e2ee28195f7c656",
+    "text": "Nécessite 1 point et toutes les rangées précédentes"
+  },
+  "talents.requiresRows": {
+    "reviewed": true,
+    "source": "Requires all earlier rows",
+    "sourceHash": "451bc15c5ad79488a888101a141f17a9672664497b3a5750f278af6b93577b6c",
+    "text": "Nécessite toutes les rangées précédentes"
+  },
+  "talents.reset": {
+    "reviewed": true,
+    "source": "Reset {{keyword}} talents",
+    "sourceHash": "1ec894842a2bfbde9f19614b018cd7fb6b943e2ad4eec989846ab3d52ea24827",
+    "text": "Réinitialiser les talents : {{keyword}}"
+  },
+  "talents.row": {
+    "reviewed": true,
+    "source": "Row {{row}}",
+    "sourceHash": "8dc77f8055126c711a611203f39f31d6112870a336ca2b23262288c8a48bac3a",
+    "text": "Rangée {{row}}"
+  },
+  "talents.unlockOne": {
+    "reviewed": true,
+    "source": "Unlock · 1 point",
+    "sourceHash": "c7bf96d2ca67bc81c8d2912fd8be33bebb9531e8b1e61b88f81408e10fe9b03c",
+    "text": "Débloquer · 1 point"
+  },
+  "talents.unlocked": {
+    "reviewed": true,
+    "source": "Unlocked",
+    "sourceHash": "f5256339b43fb2870ae265fddb20eacab676e3395e4f0cda919358445cc86698",
+    "text": "Débloqué"
+  },
+  "talents.unlockedName": {
+    "reviewed": true,
+    "source": "{{name}}, unlocked",
+    "sourceHash": "dfc7b3e74751965eb3460c210e10e24604330bfed13f8ce2b498588caaf31115",
+    "text": "{{name}}, débloqué"
+  },
+  "talents.xpProgress": {
+    "reviewed": true,
+    "source": "{{current}} / {{required}} XP",
+    "sourceHash": "8c5798d29d8d476527e62e2754bdd5b20d5c56be51c185d4bd36201f3d2acda2",
+    "text": "{{current}} / {{required}} EXP"
   }
 }

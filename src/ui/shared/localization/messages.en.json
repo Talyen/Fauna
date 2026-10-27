@@ -283,5 +283,50 @@
   },
   "settings.windowed": {
     "text": "Windowed"
+  },
+  "talents.category": {
+    "text": "{{keyword}} talents"
+  },
+  "talents.detailTitle": {
+    "text": "{{keyword}} · {{name}}"
+  },
+  "talents.keywordXp": {
+    "text": "{{keyword}} XP"
+  },
+  "talents.pages": {
+    "text": "Talent pages"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    }
+  },
+  "talents.requiresPoint": {
+    "text": "Requires 1 point"
+  },
+  "talents.requiresPointAndRows": {
+    "text": "Requires 1 point and all earlier rows"
+  },
+  "talents.requiresRows": {
+    "text": "Requires all earlier rows"
+  },
+  "talents.reset": {
+    "text": "Reset {{keyword}} talents"
+  },
+  "talents.row": {
+    "text": "Row {{row}}"
+  },
+  "talents.unlockOne": {
+    "text": "Unlock · 1 point"
+  },
+  "talents.unlocked": {
+    "text": "Unlocked"
+  },
+  "talents.unlockedName": {
+    "text": "{{name}}, unlocked"
+  },
+  "talents.xpProgress": {
+    "text": "{{current}} / {{required}} XP"
   }
 }

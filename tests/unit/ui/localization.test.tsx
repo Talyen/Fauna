@@ -2,6 +2,7 @@
 import { createRequire } from "node:module";
 import { EventEmitter } from "node:events";
 import { mkdtemp, rm } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { act, render, screen, fireEvent, waitFor } from "@testing-library/react";
@@ -14,6 +15,12 @@ import {
   sourceHash,
   validateCatalog,
 } from "../../../scripts/localization/catalog.mjs";
+import { extractPassiveRules } from "../../../scripts/localization/passive-rules.mjs";
+import { extractTalentRules } from "../../../scripts/localization/talent-rules.mjs";
+import { extractBoonRules } from "../../../scripts/localization/boon-rules.mjs";
+import { BOONS, TALENTS, SPECIES } from "../../../src/game/content";
+import { BoonName, BoonText } from "../../../src/ui/expedition/boon-presentation";
+import { ruleMessage } from "../../../src/ui/shared/localization/rule-message";
 import { extractContent } from "../../../scripts/localization/content.mjs";
 import { extractMessages } from "../../../scripts/localization/messages.mjs";
 import { produce } from "immer";
@@ -622,4 +629,93 @@ it("extracts and renders keyword labels without changing their semantic identity
   const term = screen.getByText("Brûlure");
   expect(term.getAttribute("data-keyword")).toBe("burn");
   view.unmount();
+});
+
+it("extracts authored Boon rules exactly as the game produces them", () => {
+  const rules = extractBoonRules(
+    readFileSync("src/game/rules/boons.ts", "utf8"),
+    readFileSync("src/game/keywords.ts", "utf8"),
+  );
+  for (const boon of BOONS) {
+    const extracted = rules[`content.boon.${boon.id}.rule`];
+    expect(extracted?.reference, boon.id).toBe(boon.text);
+    expect(extracted?.text, boon.id).toBe(ruleMessage(boon.text).template);
+  }
+});
+
+it("preserves keyword identity in a translated Boon rule and rejects missing semantic tags", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const boon = BOONS.find((item) => item.id === "rook-of-mercy")!;
+  const message = ruleMessage(boon.text);
+  const source = { text: message.template, reference: boon.text };
+  const translated = "<keyword0>Armure</keyword0> {{value0}} à l’arrivée des alliés";
+  const entry = {
+    source: message.template,
+    sourceHash: sourceHash("fr", source, {}),
+    reviewed: true,
+    text: translated,
+  };
+  expect(validateCatalog({ boon: source }, { boon: entry }, "fr", {}, true)).toEqual([]);
+  expect(
+    validateCatalog({ boon: source }, { boon: { ...entry, text: "Armure {{value0}}" } }, "fr", {}, true),
+  ).toContain("boon: invalid text or parameters");
+  const catalog: MessageCatalog = {
+    [`content.boon.${boon.id}.rule`]: entry,
+    [`content.boon.${boon.id}.name`]: { source: boon.name, text: "Tour de miséricorde" },
+  };
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: catalog }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <BoonName boon={boon} />
+      <BoonText boon={boon} />
+    </LocalizationProvider>,
+  );
+  expect(screen.getByText("Tour de miséricorde")).toBeTruthy();
+  expect(screen.getByText("Armure").getAttribute("data-keyword")).toBe("armor");
+  expect(view.container.textContent).toContain("Armure 2 à l’arrivée des alliés");
+  view.unmount();
+  localStorage.removeItem("fauna.language.v1");
+});
+
+it("renders the reviewed French Boon catalog with gameplay magnitudes and keyword identity", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const boon = BOONS.find((item) => item.id === "rook-of-mercy")!;
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <BoonName boon={boon} />
+      <BoonText boon={boon} />
+    </LocalizationProvider>,
+  );
+  expect(screen.getByText("Tour de miséricorde")).toBeTruthy();
+  expect(screen.getByText("Armure").getAttribute("data-keyword")).toBe("armor");
+  expect(view.container.textContent).toContain("Les alliés qui entrent gagnent 2 en Armure");
+  view.unmount();
+});
+
+it("extracts every authored Talent rule exactly as the game produces it", () => {
+  const rules = extractTalentRules(
+    readFileSync("src/game/rules/talents.ts", "utf8"),
+    readFileSync("src/game/keywords.ts", "utf8"),
+  );
+  for (const talent of TALENTS) {
+    const extracted = rules[`content.talent.${talent.id}.rule`];
+    expect(extracted?.reference, talent.id).toBe(talent.text);
+    expect(extracted?.text, talent.id).toBe(ruleMessage(talent.text).template);
+  }
+});
+
+it("extracts every creature passive tier exactly as the game produces it", () => {
+  const rules = extractPassiveRules(
+    SPECIES.map(({ id }) => ({
+      location: `src/game/content/creatures/${id}.ts`,
+      source: readFileSync(`src/game/content/creatures/${id}.ts`, "utf8"),
+    })),
+    readFileSync("src/game/keywords.ts", "utf8"),
+  );
+  for (const creature of SPECIES) {
+    creature.passiveTiers.forEach((tier, rank) => {
+      const extracted = rules[`content.species.${creature.id}.passive.${rank}.rule`];
+      expect(extracted?.reference, `${creature.id} ${rank}`).toBe(tier.description);
+      expect(extracted?.text, `${creature.id} ${rank}`).toBe(ruleMessage(tier.description).template);
+    });
+  }
 });

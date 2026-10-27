@@ -23,6 +23,21 @@ function params(text) {
     .join(",");
 }
 
+function ruleShape(text) {
+  if (typeof text !== "string") return null;
+  const tags = [];
+  const tokens = [];
+  const body = text.replace(/<(keyword\d+)>([^<>]+)<\/\1>/g, (_match, id, content) => {
+    if (/\{\{|\}\}/.test(content)) return "<invalid>";
+    tags.push(id);
+    return "";
+  });
+  for (const match of body.matchAll(/\{\{([a-zA-Z][\w]*)\}\}/g)) tokens.push(match[1]);
+  if (/[<>]|\{\{|\}\}/.test(body.replace(/\{\{[a-zA-Z][\w]*\}\}/g, ""))) return null;
+  if (new Set(tags).size !== tags.length || new Set(tokens).size !== tokens.length) return null;
+  return JSON.stringify({ tags: tags.sort(), tokens: tokens.sort() });
+}
+
 /** Structural and freshness checks do not establish translation quality. */
 export function validateCatalog(english, translations, locale, glossary, complete = false) {
   const issues = [];
@@ -50,6 +65,8 @@ export function validateCatalog(english, translations, locale, glossary, complet
       if (
         params(entry.text) === null ||
         params(entry.text) !== params(source.text) ||
+        (Object.hasOwn(source, "reference") &&
+          (ruleShape(source.text) === null || ruleShape(source.text) !== ruleShape(entry.text))) ||
         Object.hasOwn(entry, "forms")
       )
         issues.push(`${id}: invalid text or parameters`);

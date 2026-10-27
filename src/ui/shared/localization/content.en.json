@@ -2,353 +2,821 @@
   "content.boon.accordioned-bridge.name": {
     "text": "Accordioned Bridge"
   },
+  "content.boon.accordioned-bridge.rule": {
+    "text": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "reference": "Swap cards can be played through Stun and Freeze"
+  },
   "content.boon.aether-gramophone.name": {
     "text": "Aether Gramophone"
+  },
+  "content.boon.aether-gramophone.rule": {
+    "text": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
+    "reference": "Repeated attacks cannot be Dodged"
   },
   "content.boon.apiary-smoker.name": {
     "text": "Apiary Smoker"
   },
+  "content.boon.apiary-smoker.rule": {
+    "text": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
+    "reference": "Blinded enemies cannot gain Thorns"
+  },
   "content.boon.ashfall-pendant.name": {
     "text": "Ashfall Pendant"
+  },
+  "content.boon.ashfall-pendant.rule": {
+    "text": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "reference": "Burn lost through decay also removes that much enemy Block"
   },
   "content.boon.basalt-glass-bookmark.name": {
     "text": "Basalt Glass Bookmark"
   },
+  "content.boon.basalt-glass-bookmark.rule": {
+    "text": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
+    "reference": "Purge cannot remove an ally’s last beneficial effect"
+  },
   "content.boon.blooming-still.name": {
     "text": "Blooming Still"
+  },
+  "content.boon.blooming-still.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "reference": "Cleansing Poison restores 1 Mana"
   },
   "content.boon.blossom-cake-stand.name": {
     "text": "Blossom Cake Stand"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "text": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "reference": "Food cards cost no Mana"
+  },
   "content.boon.bone-charm.name": {
     "text": "Bone Charm"
+  },
+  "content.boon.bone-charm.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> when you defeat an enemy",
+    "reference": "Restore 3 Health when you defeat an enemy"
   },
   "content.boon.brass-censer.name": {
     "text": "Brass Censer"
   },
+  "content.boon.brass-censer.rule": {
+    "text": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to also <keyword1>Burn</keyword1> or <keyword2>Leech</keyword2>",
+    "reference": "Light hits have a 20% chance to also Burn or Leech"
+  },
   "content.boon.briar-racquet.name": {
     "text": "Briar Racquet"
+  },
+  "content.boon.briar-racquet.rule": {
+    "text": "<keyword0>Thorns</keyword0> retaliates at half strength when you <keyword1>Dodge</keyword1>",
+    "reference": "Thorns retaliates at half strength when you Dodge"
   },
   "content.boon.brookskip-disc.name": {
     "text": "Brookskip Disc"
   },
+  "content.boon.brookskip-disc.rule": {
+    "text": "<keyword0>Water</keyword0> damage against enemy <keyword1>Block</keyword1> chains to a second enemy",
+    "reference": "Water damage against enemy Block chains to a second enemy"
+  },
   "content.boon.calendula-soap.name": {
     "text": "Calendula Soap"
+  },
+  "content.boon.calendula-soap.rule": {
+    "text": "<keyword0>Cleansing</keyword0> an ally’s last harmful effect grants them <keyword1>Nullify</keyword1>",
+    "reference": "Cleansing an ally’s last harmful effect grants them Nullify"
   },
   "content.boon.camp-hammock.name": {
     "text": "Camp Hammock"
   },
+  "content.boon.camp-hammock.rule": {
+    "text": "Backup allies can receive <keyword0>Healing</keyword0>",
+    "reference": "Backup allies can receive Healing"
+  },
   "content.boon.cinder-fan.name": {
     "text": "Cinder Fan"
+  },
+  "content.boon.cinder-fan.rule": {
+    "text": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "reference": "Enemy Burn lost through decay deals that much Burn damage, split between other enemies"
   },
   "content.boon.cloud-cup-and-ball.name": {
     "text": "Cloud Cup-and-Ball"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "text": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "reference": "When an ally’s Block breaks, return one of their discarded cards to hand"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "text": "Comb Uncapping Fork"
+  },
+  "content.boon.comb-uncapping-fork.rule": {
+    "text": "<keyword0>Thorns</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "reference": "Thorns damage ignores enemy Block"
   },
   "content.boon.comet-crucible.name": {
     "text": "Comet Crucible"
   },
+  "content.boon.comet-crucible.rule": {
+    "text": "<keyword0>Armor</keyword0> <keyword1>Purged</keyword1> from allies becomes <keyword2>Block</keyword2>",
+    "reference": "Armor Purged from allies becomes Block"
+  },
   "content.boon.coral-music-box.name": {
     "text": "Coral Music Box"
+  },
+  "content.boon.coral-music-box.rule": {
+    "text": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "reference": "When an ally’s Block breaks, draw a Water card"
   },
   "content.boon.coral-net-weight.name": {
     "text": "Coral Net Weight"
   },
+  "content.boon.coral-net-weight.rule": {
+    "text": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
+    "reference": "Dodged attacks still damage enemy Block"
+  },
   "content.boon.coronation-cloche.name": {
     "text": "Coronation Cloche"
+  },
+  "content.boon.coronation-cloche.rule": {
+    "text": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
+    "reference": "Nullify protects allied effects from Purge"
   },
   "content.boon.crater-punch.name": {
     "text": "Crater Punch"
   },
+  "content.boon.crater-punch.rule": {
+    "text": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "reference": "Critical Hits also deal half their blocked damage to Health"
+  },
   "content.boon.crescent-sextant.name": {
     "text": "Crescent Sextant"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "text": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "reference": "Enemy Stun and Freeze thresholds use current Health"
   },
   "content.boon.cutpurse-knife.name": {
     "text": "Cutpurse Knife"
   },
+  "content.boon.cutpurse-knife.rule": {
+    "text": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
+    "reference": "Gain 1 Gold when you deal Bleed damage"
+  },
   "content.boon.devotion-clasp.name": {
     "text": "Devotion Clasp"
+  },
+  "content.boon.devotion-clasp.rule": {
+    "text": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "reference": "Negate also protects another ally from the same attack"
   },
   "content.boon.dream-tangram.name": {
     "text": "Dream Tangram"
   },
+  "content.boon.dream-tangram.rule": {
+    "text": "Repeated attacks move on when their target falls",
+    "reference": "Repeated attacks move on when their target falls"
+  },
   "content.boon.dream-yo-yo.name": {
     "text": "Dream Yo-Yo"
+  },
+  "content.boon.dream-yo-yo.rule": {
+    "text": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "reference": "Cards Dodged by enemies return to hand"
   },
   "content.boon.dune-shuttle.name": {
     "text": "Dune Shuttle"
   },
+  "content.boon.dune-shuttle.rule": {
+    "text": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "reference": "Drawing an ally's card grants them 1 Block"
+  },
   "content.boon.echo-lens.name": {
     "text": "Echo Lens"
+  },
+  "content.boon.echo-lens.rule": {
+    "text": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "reference": "Negate has a 10% chance to also Reflect"
   },
   "content.boon.eclipse-protractor.name": {
     "text": "Eclipse Protractor"
   },
+  "content.boon.eclipse-protractor.rule": {
+    "text": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "reference": "Critical Hits add Freeze build-up equal to the bonus damage"
+  },
   "content.boon.eclipse-rivet.name": {
     "text": "Eclipse Rivet"
+  },
+  "content.boon.eclipse-rivet.rule": {
+    "text": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
+    "reference": "When an ally’s Armor breaks, other allies gain 2 Armor"
   },
   "content.boon.encore-baton.name": {
     "text": "Encore Baton"
   },
+  "content.boon.encore-baton.rule": {
+    "text": "Draw a card after playing three",
+    "reference": "Draw a card after playing three"
+  },
   "content.boon.facet-abacus.name": {
     "text": "Facet Abacus"
+  },
+  "content.boon.facet-abacus.rule": {
+    "text": "Gain an additional hand card slot",
+    "reference": "Gain an additional hand card slot"
   },
   "content.boon.fallingstar-anvil.name": {
     "text": "Fallingstar Anvil"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "text": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "reference": "Half the Block lost to enemy attacks becomes Stun buildup on the attacker"
+  },
   "content.boon.fern-fencing-foil.name": {
     "text": "Fern Fencing Foil"
+  },
+  "content.boon.fern-fencing-foil.rule": {
+    "text": "<keyword0>Dodging</keyword0> an attack <keyword1>Purges</keyword1> its attacker",
+    "reference": "Dodging an attack Purges its attacker"
   },
   "content.boon.field-lunch-basket.name": {
     "text": "Field Lunch Basket"
   },
+  "content.boon.field-lunch-basket.rule": {
+    "text": "Playing <keyword0>Food</keyword0> draws a card",
+    "reference": "Playing Food draws a card"
+  },
   "content.boon.frozen-pocketwatch.name": {
     "text": "Frozen Pocketwatch"
+  },
+  "content.boon.frozen-pocketwatch.rule": {
+    "text": "Enemies stay <keyword0>Frozen</keyword0> for {{value0}} additional turn",
+    "reference": "Enemies stay Frozen for 1 additional turn"
   },
   "content.boon.furnace-prism.name": {
     "text": "Furnace Prism"
   },
+  "content.boon.furnace-prism.rule": {
+    "text": "<keyword0>Light</keyword0> hits <keyword1>Blind</keyword1> <keyword2>Burning</keyword2> enemies",
+    "reference": "Light hits Blind Burning enemies"
+  },
   "content.boon.gemmed-scabbard.name": {
     "text": "Gemmed Scabbard"
+  },
+  "content.boon.gemmed-scabbard.rule": {
+    "text": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
+    "reference": "Armor also reduces Thorns damage"
   },
   "content.boon.geode-anvil.name": {
     "text": "Geode Anvil"
   },
+  "content.boon.geode-anvil.rule": {
+    "text": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
+    "reference": "Block cannot decay below Armor"
+  },
   "content.boon.grafting-needle.name": {
     "text": "Grafting Needle"
+  },
+  "content.boon.grafting-needle.rule": {
+    "text": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "reference": "Healing an ally raises their Armor to half of yours"
   },
   "content.boon.grain-flail.name": {
     "text": "Grain Flail"
   },
+  "content.boon.grain-flail.rule": {
+    "text": "Breaking enemy <keyword0>Block</keyword0> also removes their <keyword1>Armor</keyword1>",
+    "reference": "Breaking enemy Block also removes their Armor"
+  },
   "content.boon.groves-favor.name": {
     "text": "Grove's Favor"
+  },
+  "content.boon.groves-favor.rule": {
+    "text": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
+    "reference": "Gain 1 Thorns when you restore Health in battle"
   },
   "content.boon.hearth-coal.name": {
     "text": "Hearth Coal"
   },
+  "content.boon.hearth-coal.rule": {
+    "text": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
+    "reference": "Burn cannot reduce allies below 1 Health"
+  },
   "content.boon.herbarium-press.name": {
     "text": "Herbarium Press"
+  },
+  "content.boon.herbarium-press.rule": {
+    "text": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
+    "reference": "Poison cannot be Cleansed from Frozen enemies"
   },
   "content.boon.hoard-lockplate.name": {
     "text": "Hoard Lockplate"
   },
+  "content.boon.hoard-lockplate.rule": {
+    "text": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
+    "reference": "Armor reduces damage before Block"
+  },
   "content.boon.honey-press.name": {
     "text": "Honey Press"
+  },
+  "content.boon.honey-press.rule": {
+    "text": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "reference": "Purging enemy Block restores half as much Health to the most injured ally"
   },
   "content.boon.honeycomb-frame.name": {
     "text": "Honeycomb Frame"
   },
+  "content.boon.honeycomb-frame.rule": {
+    "text": "<keyword0>Armor</keyword0> prevents <keyword1>Critical Hits</keyword1>",
+    "reference": "Armor prevents Critical Hits"
+  },
   "content.boon.icy-heart.name": {
     "text": "Icy Heart"
+  },
+  "content.boon.icy-heart.rule": {
+    "text": "<keyword0>Freezing</keyword0> an enemy deals {{value0}} <keyword1>Physical</keyword1> damage",
+    "reference": "Freezing an enemy deals 6 Physical damage"
   },
   "content.boon.ironwood-buckler.name": {
     "text": "Ironwood Buckler"
   },
+  "content.boon.ironwood-buckler.rule": {
+    "text": "Gain {{value0}} <keyword0>Thorns</keyword0> whenever you gain <keyword1>Block</keyword1>",
+    "reference": "Gain 1 Thorns whenever you gain Block"
+  },
   "content.boon.journey-loom.name": {
     "text": "Journey Loom"
+  },
+  "content.boon.journey-loom.rule": {
+    "text": "Returning an ally’s card to your hand draws another ally’s card",
+    "reference": "Returning an ally’s card to your hand draws another ally’s card"
   },
   "content.boon.knot-comb.name": {
     "text": "Knot Comb"
   },
+  "content.boon.knot-comb.rule": {
+    "text": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "reference": "Cleanse a random harmful effect each turn"
+  },
   "content.boon.last-candle.name": {
     "text": "Last Candle"
+  },
+  "content.boon.last-candle.rule": {
+    "text": "<keyword0>Burn</keyword0> on enemies cannot decay below {{value0}}",
+    "reference": "Burn on enemies cannot decay below 1"
   },
   "content.boon.last-threshold.name": {
     "text": "Last Threshold"
   },
+  "content.boon.last-threshold.rule": {
+    "text": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "reference": "Overflow Healing is shared with allies at Death's Door"
+  },
   "content.boon.lava-cameo.name": {
     "text": "Lava Cameo"
+  },
+  "content.boon.lava-cameo.rule": {
+    "text": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
+    "reference": "Burn on enemies with Armor does not decay"
   },
   "content.boon.lovers-knot.name": {
     "text": "Lovers Knot"
   },
+  "content.boon.lovers-knot.rule": {
+    "text": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "reference": "Healing an ally also heals yourself"
+  },
   "content.boon.lucky-clover.name": {
     "text": "Lucky Clover"
+  },
+  "content.boon.lucky-clover.rule": {
+    "text": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "reference": "Nature hits have a 10% chance to grant Gold equal to enemy Health lost"
   },
   "content.boon.merchants-favor.name": {
     "text": "Merchant's Favor"
   },
+  "content.boon.merchants-favor.rule": {
+    "text": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
+    "reference": "Your purchase at each Boon Merchant costs 7 less Gold"
+  },
   "content.boon.mercury-metronome.name": {
     "text": "Mercury Metronome"
+  },
+  "content.boon.mercury-metronome.rule": {
+    "text": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "reference": "Playing cards from different allies in succession adds 1 Stun buildup to all enemies"
   },
   "content.boon.meteorite.name": {
     "text": "Meteorite"
   },
+  "content.boon.meteorite.rule": {
+    "text": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "reference": "Double your first Burn hit each battle"
+  },
   "content.boon.mineral-bookend.name": {
     "text": "Mineral Bookend"
+  },
+  "content.boon.mineral-bookend.rule": {
+    "text": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "reference": "Drawing the last card in your draw pile restores 1 Mana"
   },
   "content.boon.miracle-megaphone.name": {
     "text": "Miracle Megaphone"
   },
+  "content.boon.miracle-megaphone.rule": {
+    "text": "<keyword0>Cleanse</keyword0> affects all allies",
+    "reference": "Cleanse affects all allies"
+  },
   "content.boon.molten-paperweight.name": {
     "text": "Molten Paperweight"
+  },
+  "content.boon.molten-paperweight.rule": {
+    "text": "<keyword0>Burn</keyword0> cannot be <keyword1>Cleansed</keyword1> from enemies with <keyword2>Block</keyword2>",
+    "reference": "Burn cannot be Cleansed from enemies with Block"
   },
   "content.boon.moonboat-toy.name": {
     "text": "Moonboat Toy"
   },
+  "content.boon.moonboat-toy.rule": {
+    "text": "<keyword0>Water</keyword0> attacks do not trigger <keyword1>Thorns</keyword1> damage",
+    "reference": "Water attacks do not trigger Thorns damage"
+  },
   "content.boon.moonveil-mask.name": {
     "text": "Moonveil Mask"
+  },
+  "content.boon.moonveil-mask.rule": {
+    "text": "Enemies keep <keyword0>Blind</keyword0> when it causes their attacks to miss",
+    "reference": "Enemies keep Blind when it causes their attacks to miss"
   },
   "content.boon.moss-oven-mitt.name": {
     "text": "Moss Oven Mitt"
   },
+  "content.boon.moss-oven-mitt.rule": {
+    "text": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Burn</keyword1>",
+    "reference": "Block is twice as effective against Burn"
+  },
   "content.boon.nectar-dipper.name": {
     "text": "Nectar Dipper"
+  },
+  "content.boon.nectar-dipper.rule": {
+    "text": "<keyword0>Food</keyword0> cards are twice as effective",
+    "reference": "Food cards are twice as effective"
   },
   "content.boon.obsidian-pitcher.name": {
     "text": "Obsidian Pitcher"
   },
+  "content.boon.obsidian-pitcher.rule": {
+    "text": "Overflow <keyword0>Leech</keyword0> applies half as much <keyword1>Burn</keyword1> to the enemy",
+    "reference": "Overflow Leech applies half as much Burn to the enemy"
+  },
   "content.boon.orbit-armillary.name": {
     "text": "Orbit Armillary"
+  },
+  "content.boon.orbit-armillary.rule": {
+    "text": "<keyword0>Cleansed</keyword0> effects return to their source",
+    "reference": "Cleansed effects return to their source"
   },
   "content.boon.origami-staircase.name": {
     "text": "Origami Staircase"
   },
+  "content.boon.origami-staircase.rule": {
+    "text": "Allies gain {{value0}} extra <keyword0>Block</keyword0> for each ally with <keyword1>Armor</keyword1>",
+    "reference": "Allies gain 1 extra Block for each ally with Armor"
+  },
   "content.boon.paper-lotus.name": {
     "text": "Paper Lotus"
+  },
+  "content.boon.paper-lotus.rule": {
+    "text": "Allies with <keyword0>Nullify</keyword0> take half <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2> and <keyword3>Bleed</keyword3> damage",
+    "reference": "Allies with Nullify take half Burn, Poison and Bleed damage"
   },
   "content.boon.parasitic-bloom.name": {
     "text": "Parasitic Bloom"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "text": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "reference": "Poison damage has a 10% chance to Leech"
+  },
   "content.boon.pattern-reel.name": {
     "text": "Pattern Reel"
+  },
+  "content.boon.pattern-reel.rule": {
+    "text": "<keyword0>Purging</keyword0> an effect removes it from every enemy",
+    "reference": "Purging an effect removes it from every enemy"
   },
   "content.boon.peace-knot.name": {
     "text": "Peace Knot"
   },
+  "content.boon.peace-knot.rule": {
+    "text": "When <keyword0>Nullify</keyword0> prevents a harmful effect, other allies gain {{value0}} <keyword1>Block</keyword1>",
+    "reference": "When Nullify prevents a harmful effect, other allies gain 2 Block"
+  },
   "content.boon.pearl-sieve.name": {
     "text": "Pearl Sieve"
+  },
+  "content.boon.pearl-sieve.rule": {
+    "text": "<keyword0>Purge</keyword0> removes an extra effect from enemies with <keyword1>Block</keyword1>",
+    "reference": "Purge removes an extra effect from enemies with Block"
   },
   "content.boon.plague-doctors-mask.name": {
     "text": "Plague Doctor's Mask"
   },
+  "content.boon.plague-doctors-mask.rule": {
+    "text": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "reference": "Before turn-start damage, each ally Cleanses up to 2 Poison and deals half the amount removed as Poison damage to the first living enemy"
+  },
   "content.boon.pleated-pagoda.name": {
     "text": "Pleated Pagoda"
+  },
+  "content.boon.pleated-pagoda.rule": {
+    "text": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
+    "reference": "Half the Block lost through decay becomes Armor"
   },
   "content.boon.poppy-seed-grinder.name": {
     "text": "Poppy Seed Grinder"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "text": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "reference": "Poison damage adds half as much Stun buildup"
+  },
   "content.boon.prayer-sailboat.name": {
     "text": "Prayer Sailboat"
+  },
+  "content.boon.prayer-sailboat.rule": {
+    "text": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "reference": "Swapping out Cleanses Stun and Freeze"
   },
   "content.boon.prism-chisel.name": {
     "text": "Prism Chisel"
   },
+  "content.boon.prism-chisel.rule": {
+    "text": "<keyword0>Purging</keyword0> enemy <keyword1>Armor</keyword1> deals equal <keyword2>Light</keyword2> damage to that enemy",
+    "reference": "Purging enemy Armor deals equal Light damage to that enemy"
+  },
   "content.boon.pruning-crescent.name": {
     "text": "Pruning Crescent"
+  },
+  "content.boon.pruning-crescent.rule": {
+    "text": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
+    "reference": "Purging enemy Thorns steals them for yourself"
   },
   "content.boon.pumpkin-tureen.name": {
     "text": "Pumpkin Tureen"
   },
+  "content.boon.pumpkin-tureen.rule": {
+    "text": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "reference": "Food grants Health and Block to all allies"
+  },
   "content.boon.rain-cape.name": {
     "text": "Rain Cape"
+  },
+  "content.boon.rain-cape.rule": {
+    "text": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Water</keyword1>",
+    "reference": "Block is twice as effective against Water"
   },
   "content.boon.raincatcher-bowl.name": {
     "text": "Raincatcher Bowl"
   },
+  "content.boon.raincatcher-bowl.rule": {
+    "text": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "reference": "Gain 1 Mana Crystal if you have a Water card in your deck"
+  },
   "content.boon.rainkeeper.name": {
     "text": "Rainkeeper"
+  },
+  "content.boon.rainkeeper.rule": {
+    "text": "<keyword0>Mana</keyword0> can overflow",
+    "reference": "Mana can overflow"
   },
   "content.boon.reef-casket.name": {
     "text": "Reef Casket"
   },
+  "content.boon.reef-casket.rule": {
+    "text": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
+    "reference": "Nullify is not consumed while you have Block"
+  },
   "content.boon.reef-incense-tile.name": {
     "text": "Reef Incense Tile"
+  },
+  "content.boon.reef-incense-tile.rule": {
+    "text": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "reference": "Water hits spread Blind to another enemy"
   },
   "content.boon.resonance-kalimba.name": {
     "text": "Resonance Kalimba"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "text": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "reference": "Thorns damage adds equal Stun buildup"
+  },
   "content.boon.resonant-chimes.name": {
     "text": "Resonant Chimes"
+  },
+  "content.boon.resonant-chimes.rule": {
+    "text": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
+    "reference": "After your third card each turn, gain 1 Mana"
   },
   "content.boon.rook-of-mercy.name": {
     "text": "Rook of Mercy"
   },
+  "content.boon.rook-of-mercy.rule": {
+    "text": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Allies swapping in gain 2 Armor"
+  },
   "content.boon.rootvault-pole.name": {
     "text": "Rootvault Pole"
+  },
+  "content.boon.rootvault-pole.rule": {
+    "text": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
+    "reference": "Allies can Dodge Thorns damage"
   },
   "content.boon.saddle-pouch.name": {
     "text": "Saddle Pouch"
   },
+  "content.boon.saddle-pouch.rule": {
+    "text": "Swapping an ally in from backup draws one of its cards",
+    "reference": "Swapping an ally in from backup draws one of its cards"
+  },
   "content.boon.sin-eaters-lantern.name": {
     "text": "Sin-Eater's Lantern"
+  },
+  "content.boon.sin-eaters-lantern.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
+    "reference": "Restore 6 Health per harmful effect you Cleanse"
   },
   "content.boon.sleepers-urn.name": {
     "text": "Sleepers Urn"
   },
+  "content.boon.sleepers-urn.rule": {
+    "text": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "reference": "Stun and Freeze build-up can accumulate during enemy immunity"
+  },
   "content.boon.smugglers-map.name": {
     "text": "Smuggler's Map"
+  },
+  "content.boon.smugglers-map.rule": {
+    "text": "Gain {{value0}} additional Gold for each battle won",
+    "reference": "Gain 2 additional Gold for each battle won"
   },
   "content.boon.sovereign-toast-rack.name": {
     "text": "Sovereign Toast Rack"
   },
+  "content.boon.sovereign-toast-rack.rule": {
+    "text": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "reference": "Playing Food grants 2 Armor to all allies"
+  },
   "content.boon.star-hoop.name": {
     "text": "Star Hoop"
+  },
+  "content.boon.star-hoop.rule": {
+    "text": "<keyword0>Reflect</keyword0> also returns enemy <keyword1>Purge</keyword1>",
+    "reference": "Reflect also returns enemy Purge"
   },
   "content.boon.stardust-whetstone.name": {
     "text": "Stardust Whetstone"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "text": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "reference": "Physical hits apply 1 Bleed to enemies with Armor"
+  },
   "content.boon.story-puzzle-cube.name": {
     "text": "Story Puzzle Cube"
+  },
+  "content.boon.story-puzzle-cube.rule": {
+    "text": "Every third harmful effect you apply <keyword0>Purges</keyword0> the enemy",
+    "reference": "Every third harmful effect you apply Purges the enemy"
   },
   "content.boon.sundering-charm.name": {
     "text": "Sundering Charm"
   },
+  "content.boon.sundering-charm.rule": {
+    "text": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "reference": "Your Physical and Stun hits remove 2 enemy Armor before damage"
+  },
   "content.boon.tattered-pages.name": {
     "text": "Tattered Pages"
+  },
+  "content.boon.tattered-pages.rule": {
+    "text": "Draw {{value0}} additional card at battle start",
+    "reference": "Draw 1 additional card at battle start"
   },
   "content.boon.thaw-spoon.name": {
     "text": "Thaw Spoon"
   },
+  "content.boon.thaw-spoon.rule": {
+    "text": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "reference": "Healing removes an equal amount of Freeze buildup"
+  },
   "content.boon.thistle-sieve.name": {
     "text": "Thistle Sieve"
+  },
+  "content.boon.thistle-sieve.rule": {
+    "text": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "reference": "Half the Poison and Bleed Cleansed from allies becomes Thorns"
   },
   "content.boon.thornheart-ring.name": {
     "text": "Thornheart Ring"
   },
+  "content.boon.thornheart-ring.rule": {
+    "text": "<keyword0>Thorns</keyword0> does not decay when retaliating against <keyword1>Bleeding</keyword1> enemies",
+    "reference": "Thorns does not decay when retaliating against Bleeding enemies"
+  },
   "content.boon.thunder-conch.name": {
     "text": "Thunder Conch"
+  },
+  "content.boon.thunder-conch.rule": {
+    "text": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "reference": "Stunning an enemy Blinds the other enemies"
   },
   "content.boon.thunderstone.name": {
     "text": "Thunderstone"
   },
+  "content.boon.thunderstone.rule": {
+    "text": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
+    "reference": "Deal 6 Nature damage when you Stun an enemy"
+  },
   "content.boon.tide-anklet.name": {
     "text": "Tide Anklet"
+  },
+  "content.boon.tide-anklet.rule": {
+    "text": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "reference": "Swapping allies both keep the higher Block total"
   },
   "content.boon.tidecrest-hairpin.name": {
     "text": "Tidecrest Hairpin"
   },
+  "content.boon.tidecrest-hairpin.rule": {
+    "text": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
+    "reference": "Thorns cannot decay below 1"
+  },
   "content.boon.tuning-fork-charm.name": {
     "text": "Tuning Fork Charm"
+  },
+  "content.boon.tuning-fork-charm.rule": {
+    "text": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "reference": "Physical hits ignore Armor on enemies with Stun buildup"
   },
   "content.boon.undertow-castanets.name": {
     "text": "Undertow Castanets"
   },
+  "content.boon.undertow-castanets.rule": {
+    "text": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "reference": "Stun and Freeze buildup combines on enemies"
+  },
   "content.boon.velvet-whisk.name": {
     "text": "Velvet Whisk"
+  },
+  "content.boon.velvet-whisk.rule": {
+    "text": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "reference": "Food grants its targets 20% Dodge until their next turn"
   },
   "content.boon.vigil-lantern.name": {
     "text": "Vigil Lantern"
   },
+  "content.boon.vigil-lantern.rule": {
+    "text": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "reference": "Allies at Death’s Door can act through Stun and Freeze"
+  },
   "content.boon.wax-foundation-mold.name": {
     "text": "Wax Foundation Mold"
+  },
+  "content.boon.wax-foundation-mold.rule": {
+    "text": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "reference": "Allies with Armor keep 75% of their Block when it decays"
   },
   "content.boon.winnowing-sieve.name": {
     "text": "Winnowing Sieve"
   },
+  "content.boon.winnowing-sieve.rule": {
+    "text": "Unused <keyword0>Purge</keyword0> spreads to other enemies",
+    "reference": "Unused Purge spreads to other enemies"
+  },
   "content.boon.wishing-building-block.name": {
     "text": "Wishing Building Block"
+  },
+  "content.boon.wishing-building-block.rule": {
+    "text": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "reference": "Gaining Armor grants 1 Block to other allies with Armor"
   },
   "content.boon.wonder-ball-maze.name": {
     "text": "Wonder Ball Maze"
   },
+  "content.boon.wonder-ball-maze.rule": {
+    "text": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "reference": "Excess Stun and Freeze build-up spreads to other enemies"
+  },
   "content.boon.wonder-domino.name": {
     "text": "Wonder Domino"
   },
+  "content.boon.wonder-domino.rule": {
+    "text": "Overkill damage spreads to other enemies",
+    "reference": "Overkill damage spreads to other enemies"
+  },
   "content.boon.yarrow-salve-tin.name": {
     "text": "Yarrow Salve Tin"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "text": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "reference": "Healing an ally also Cleanses their Bleed"
   },
   "content.card.aerostat-parcel-drop.name": {
     "text": "Parcel Drop"
@@ -770,6 +1238,30 @@
   "content.species.aerostat.name": {
     "text": "Aerostat"
   },
+  "content.species.aerostat.passive.0.rule": {
+    "text": "Start with {{value0}} <keyword0>Food</keyword0> card in your deck",
+    "reference": "Start with 1 Food card in your deck"
+  },
+  "content.species.aerostat.passive.1.rule": {
+    "text": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "reference": "Start with 2 Food cards in your deck"
+  },
+  "content.species.aerostat.passive.2.rule": {
+    "text": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "reference": "Start with 3 Food cards in your deck"
+  },
+  "content.species.aerostat.passive.3.rule": {
+    "text": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "reference": "Start with 4 Food cards in your deck"
+  },
+  "content.species.aerostat.passive.4.rule": {
+    "text": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "reference": "Start with 5 Food cards in your deck"
+  },
+  "content.species.aerostat.passive.5.rule": {
+    "text": "Start with {{value0}} <keyword0>Food</keyword0> cards in your deck",
+    "reference": "Start with 6 Food cards in your deck"
+  },
   "content.species.aerostat.title": {
     "text": "The well-stocked traveler"
   },
@@ -778,6 +1270,30 @@
   },
   "content.species.almanelle.name": {
     "text": "Almanelle"
+  },
+  "content.species.almanelle.passive.0.rule": {
+    "text": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "reference": "50% of decaying Block becomes Thorns"
+  },
+  "content.species.almanelle.passive.1.rule": {
+    "text": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "reference": "60% of decaying Block becomes Thorns"
+  },
+  "content.species.almanelle.passive.2.rule": {
+    "text": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "reference": "70% of decaying Block becomes Thorns"
+  },
+  "content.species.almanelle.passive.3.rule": {
+    "text": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "reference": "80% of decaying Block becomes Thorns"
+  },
+  "content.species.almanelle.passive.4.rule": {
+    "text": "{{value0}}% of decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "reference": "90% of decaying Block becomes Thorns"
+  },
+  "content.species.almanelle.passive.5.rule": {
+    "text": "Decaying <keyword0>Block</keyword0> becomes <keyword1>Thorns</keyword1>",
+    "reference": "Decaying Block becomes Thorns"
   },
   "content.species.almanelle.title": {
     "text": "The orchard through the seasons"
@@ -788,6 +1304,30 @@
   "content.species.alpenglen.name": {
     "text": "Alpenglen"
   },
+  "content.species.alpenglen.passive.0.rule": {
+    "text": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "Playing the last card in your hand restores 2 Health to the most injured ally"
+  },
+  "content.species.alpenglen.passive.1.rule": {
+    "text": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "Playing the last card in your hand restores 3 Health to the most injured ally"
+  },
+  "content.species.alpenglen.passive.2.rule": {
+    "text": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "Playing the last card in your hand restores 4 Health to the most injured ally"
+  },
+  "content.species.alpenglen.passive.3.rule": {
+    "text": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "Playing the last card in your hand restores 5 Health to the most injured ally"
+  },
+  "content.species.alpenglen.passive.4.rule": {
+    "text": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "Playing the last card in your hand restores 6 Health to the most injured ally"
+  },
+  "content.species.alpenglen.passive.5.rule": {
+    "text": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "Playing the last card in your hand restores 7 Health to the most injured ally"
+  },
   "content.species.alpenglen.title": {
     "text": "The last light of the mountain"
   },
@@ -796,6 +1336,30 @@
   },
   "content.species.arabesca.name": {
     "text": "Arabesca"
+  },
+  "content.species.arabesca.passive.0.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "reference": "Restore 1 Health to allies when you Dodge"
+  },
+  "content.species.arabesca.passive.1.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "reference": "Restore 2 Health to allies when you Dodge"
+  },
+  "content.species.arabesca.passive.2.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "reference": "Restore 3 Health to allies when you Dodge"
+  },
+  "content.species.arabesca.passive.3.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "reference": "Restore 4 Health to allies when you Dodge"
+  },
+  "content.species.arabesca.passive.4.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "reference": "Restore 5 Health to allies when you Dodge"
+  },
+  "content.species.arabesca.passive.5.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "reference": "Restore 6 Health to allies when you Dodge"
   },
   "content.species.arabesca.title": {
     "text": "The dance of returning spring"
@@ -806,6 +1370,30 @@
   "content.species.bloomquail.name": {
     "text": "Bloomquail"
   },
+  "content.species.bloomquail.passive.0.rule": {
+    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 50% of your Block into Health for the most injured ally"
+  },
+  "content.species.bloomquail.passive.1.rule": {
+    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 60% of your Block into Health for the most injured ally"
+  },
+  "content.species.bloomquail.passive.2.rule": {
+    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 70% of your Block into Health for the most injured ally"
+  },
+  "content.species.bloomquail.passive.3.rule": {
+    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 80% of your Block into Health for the most injured ally"
+  },
+  "content.species.bloomquail.passive.4.rule": {
+    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 90% of your Block into Health for the most injured ally"
+  },
+  "content.species.bloomquail.passive.5.rule": {
+    "text": "Convert your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert your Block into Health for the most injured ally"
+  },
   "content.species.bloomquail.title": {
     "text": "The petal keeper"
   },
@@ -814,6 +1402,30 @@
   },
   "content.species.cadenza.name": {
     "text": "Cadenza"
+  },
+  "content.species.cadenza.passive.0.rule": {
+    "text": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "After your second card each turn, restore 1 Health to the most injured ally"
+  },
+  "content.species.cadenza.passive.1.rule": {
+    "text": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "After your second card each turn, restore 2 Health to the most injured ally"
+  },
+  "content.species.cadenza.passive.2.rule": {
+    "text": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "After your second card each turn, restore 3 Health to the most injured ally"
+  },
+  "content.species.cadenza.passive.3.rule": {
+    "text": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "After your second card each turn, restore 4 Health to the most injured ally"
+  },
+  "content.species.cadenza.passive.4.rule": {
+    "text": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "After your second card each turn, restore 5 Health to the most injured ally"
+  },
+  "content.species.cadenza.passive.5.rule": {
+    "text": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "reference": "After your second card each turn, restore 6 Health to the most injured ally"
   },
   "content.species.cadenza.title": {
     "text": "The song of forgotten places"
@@ -824,6 +1436,30 @@
   "content.species.captoad.name": {
     "text": "Captoad"
   },
+  "content.species.captoad.passive.0.rule": {
+    "text": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "reference": "Retaliate with 1 Poison damage when hit"
+  },
+  "content.species.captoad.passive.1.rule": {
+    "text": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "reference": "Retaliate with 2 Poison damage when hit"
+  },
+  "content.species.captoad.passive.2.rule": {
+    "text": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "reference": "Retaliate with 3 Poison damage when hit"
+  },
+  "content.species.captoad.passive.3.rule": {
+    "text": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "reference": "Retaliate with 4 Poison damage when hit"
+  },
+  "content.species.captoad.passive.4.rule": {
+    "text": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "reference": "Retaliate with 5 Poison damage when hit"
+  },
+  "content.species.captoad.passive.5.rule": {
+    "text": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
+    "reference": "Retaliate with 6 Poison damage when hit"
+  },
   "content.species.captoad.title": {
     "text": "Beneath the spotted cap"
   },
@@ -832,6 +1468,30 @@
   },
   "content.species.chimecricket.name": {
     "text": "Chimecricket"
+  },
+  "content.species.chimecricket.passive.0.rule": {
+    "text": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "reference": "Your first ability each turn has a 10% chance to repeat"
+  },
+  "content.species.chimecricket.passive.1.rule": {
+    "text": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "reference": "Your first ability each turn has a 20% chance to repeat"
+  },
+  "content.species.chimecricket.passive.2.rule": {
+    "text": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "reference": "Your first ability each turn has a 30% chance to repeat"
+  },
+  "content.species.chimecricket.passive.3.rule": {
+    "text": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "reference": "Your first ability each turn has a 40% chance to repeat"
+  },
+  "content.species.chimecricket.passive.4.rule": {
+    "text": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "reference": "Your first ability each turn has a 50% chance to repeat"
+  },
+  "content.species.chimecricket.passive.5.rule": {
+    "text": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "reference": "Your first ability each turn has a 60% chance to repeat"
   },
   "content.species.chimecricket.title": {
     "text": "The evening chorus"
@@ -842,6 +1502,30 @@
   "content.species.cindernewt.name": {
     "text": "Cindernewt"
   },
+  "content.species.cindernewt.passive.0.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "reference": "When you Dodge, deal 1 Burn damage to the attacker"
+  },
+  "content.species.cindernewt.passive.1.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "reference": "When you Dodge, deal 2 Burn damage to the attacker"
+  },
+  "content.species.cindernewt.passive.2.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "reference": "When you Dodge, deal 3 Burn damage to the attacker"
+  },
+  "content.species.cindernewt.passive.3.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "reference": "When you Dodge, deal 4 Burn damage to the attacker"
+  },
+  "content.species.cindernewt.passive.4.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "reference": "When you Dodge, deal 5 Burn damage to the attacker"
+  },
+  "content.species.cindernewt.passive.5.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "reference": "When you Dodge, deal 6 Burn damage to the attacker"
+  },
   "content.species.cindernewt.title": {
     "text": "The dancing ember"
   },
@@ -850,6 +1534,30 @@
   },
   "content.species.coralcurl.name": {
     "text": "Coralcurl"
+  },
+  "content.species.coralcurl.passive.0.rule": {
+    "text": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "reference": "Deal 1 Water damage when your Block breaks"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "text": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "reference": "Deal 2 Water damage when your Block breaks"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "text": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "reference": "Deal 3 Water damage when your Block breaks"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "text": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "reference": "Deal 4 Water damage when your Block breaks"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "text": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "reference": "Deal 5 Water damage when your Block breaks"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "text": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "reference": "Deal 6 Water damage when your Block breaks"
   },
   "content.species.coralcurl.title": {
     "text": "The sheltered reef"
@@ -860,6 +1568,30 @@
   "content.species.dawncall.name": {
     "text": "Dawncall"
   },
+  "content.species.dawncall.passive.0.rule": {
+    "text": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "reference": "Your first attack each turn gains 20% Critical hit chance"
+  },
+  "content.species.dawncall.passive.1.rule": {
+    "text": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "reference": "Your first attack each turn gains 35% Critical hit chance"
+  },
+  "content.species.dawncall.passive.2.rule": {
+    "text": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "reference": "Your first attack each turn gains 50% Critical hit chance"
+  },
+  "content.species.dawncall.passive.3.rule": {
+    "text": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "reference": "Your first attack each turn gains 65% Critical hit chance"
+  },
+  "content.species.dawncall.passive.4.rule": {
+    "text": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
+    "reference": "Your first attack each turn gains 80% Critical hit chance"
+  },
+  "content.species.dawncall.passive.5.rule": {
+    "text": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
+    "reference": "Your first attack each turn is a Critical Hit"
+  },
   "content.species.dawncall.title": {
     "text": "The sunrise herald"
   },
@@ -868,6 +1600,30 @@
   },
   "content.species.dulcera.name": {
     "text": "Dulcera"
+  },
+  "content.species.dulcera.passive.0.rule": {
+    "text": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "reference": "Allies restore 1 Health when they swap in"
+  },
+  "content.species.dulcera.passive.1.rule": {
+    "text": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "reference": "Allies restore 2 Health when they swap in"
+  },
+  "content.species.dulcera.passive.2.rule": {
+    "text": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "reference": "Allies restore 3 Health when they swap in"
+  },
+  "content.species.dulcera.passive.3.rule": {
+    "text": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "reference": "Allies restore 4 Health when they swap in"
+  },
+  "content.species.dulcera.passive.4.rule": {
+    "text": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "reference": "Allies restore 5 Health when they swap in"
+  },
+  "content.species.dulcera.passive.5.rule": {
+    "text": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
+    "reference": "Allies restore 6 Health when they swap in"
   },
   "content.species.dulcera.title": {
     "text": "The gentle sanctuary"
@@ -878,6 +1634,30 @@
   "content.species.dunefox.name": {
     "text": "Dunefox"
   },
+  "content.species.dunefox.passive.0.rule": {
+    "text": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "reference": "Allies gain 15% of your Dodge chance"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "text": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "reference": "Allies gain 20% of your Dodge chance"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "text": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "reference": "Allies gain 25% of your Dodge chance"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "text": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "reference": "Allies gain 30% of your Dodge chance"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "text": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "reference": "Allies gain 35% of your Dodge chance"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "text": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "reference": "Allies gain 40% of your Dodge chance"
+  },
   "content.species.dunefox.title": {
     "text": "The shifting mirage"
   },
@@ -886,6 +1666,30 @@
   },
   "content.species.emberback.name": {
     "text": "Emberback"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "text": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "reference": "When your Armor breaks, deal 1 Burn damage to all enemies"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "text": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "reference": "When your Armor breaks, deal 2 Burn damage to all enemies"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "text": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "reference": "When your Armor breaks, deal 3 Burn damage to all enemies"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "text": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "reference": "When your Armor breaks, deal 4 Burn damage to all enemies"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "text": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "reference": "When your Armor breaks, deal 5 Burn damage to all enemies"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "text": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "reference": "When your Armor breaks, deal 6 Burn damage to all enemies"
   },
   "content.species.emberback.title": {
     "text": "The banked furnace"
@@ -896,6 +1700,30 @@
   "content.species.euphera.name": {
     "text": "Euphera"
   },
+  "content.species.euphera.passive.0.rule": {
+    "text": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "reference": "Failed allied chance effects have a 10% chance to reroll once"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "text": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "reference": "Failed allied chance effects have a 20% chance to reroll once"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "text": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "reference": "Failed allied chance effects have a 30% chance to reroll once"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "text": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "reference": "Failed allied chance effects have a 40% chance to reroll once"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "text": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "reference": "Failed allied chance effects have a 50% chance to reroll once"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "text": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "reference": "Failed allied chance effects have a 60% chance to reroll once"
+  },
   "content.species.euphera.title": {
     "text": "A wish taking flight"
   },
@@ -904,6 +1732,30 @@
   },
   "content.species.glintstride.name": {
     "text": "Glintstride"
+  },
+  "content.species.glintstride.passive.0.rule": {
+    "text": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "reference": "Glintstride’s attacks deal 1 additional Light damage to Blinded enemies"
+  },
+  "content.species.glintstride.passive.1.rule": {
+    "text": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "reference": "Glintstride’s attacks deal 2 additional Light damage to Blinded enemies"
+  },
+  "content.species.glintstride.passive.2.rule": {
+    "text": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "reference": "Glintstride’s attacks deal 3 additional Light damage to Blinded enemies"
+  },
+  "content.species.glintstride.passive.3.rule": {
+    "text": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "reference": "Glintstride’s attacks deal 4 additional Light damage to Blinded enemies"
+  },
+  "content.species.glintstride.passive.4.rule": {
+    "text": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "reference": "Glintstride’s attacks deal 5 additional Light damage to Blinded enemies"
+  },
+  "content.species.glintstride.passive.5.rule": {
+    "text": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "reference": "Glintstride’s attacks deal 6 additional Light damage to Blinded enemies"
   },
   "content.species.glintstride.title": {
     "text": "A step beyond the shimmer"
@@ -914,6 +1766,30 @@
   "content.species.memento.name": {
     "text": "Memento"
   },
+  "content.species.memento.passive.0.rule": {
+    "text": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "reference": "Each time you play a card, an Echo attacks for 3 Water damage"
+  },
+  "content.species.memento.passive.1.rule": {
+    "text": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "reference": "Each time you play a card, an Echo attacks for 4 Water damage"
+  },
+  "content.species.memento.passive.2.rule": {
+    "text": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "reference": "Each time you play a card, an Echo attacks for 5 Water damage"
+  },
+  "content.species.memento.passive.3.rule": {
+    "text": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "reference": "Each time you play a card, an Echo attacks for 6 Water damage"
+  },
+  "content.species.memento.passive.4.rule": {
+    "text": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "reference": "Each time you play a card, an Echo attacks for 7 Water damage"
+  },
+  "content.species.memento.passive.5.rule": {
+    "text": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "reference": "Each time you play a card, an Echo attacks for 8 Water damage"
+  },
   "content.species.memento.title": {
     "text": "The palace that remembers"
   },
@@ -922,6 +1798,30 @@
   },
   "content.species.mossguard.name": {
     "text": "Mossguard"
+  },
+  "content.species.mossguard.passive.0.rule": {
+    "text": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "reference": "Retain 10% more Block between turns"
+  },
+  "content.species.mossguard.passive.1.rule": {
+    "text": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "reference": "Retain 20% more Block between turns"
+  },
+  "content.species.mossguard.passive.2.rule": {
+    "text": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "reference": "Retain 30% more Block between turns"
+  },
+  "content.species.mossguard.passive.3.rule": {
+    "text": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "reference": "Retain 40% more Block between turns"
+  },
+  "content.species.mossguard.passive.4.rule": {
+    "text": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "reference": "Retain 50% more Block between turns"
+  },
+  "content.species.mossguard.passive.5.rule": {
+    "text": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "reference": "Retain 60% more Block between turns"
   },
   "content.species.mossguard.title": {
     "text": "The gentle guardian"
@@ -932,6 +1832,30 @@
   "content.species.neradora.name": {
     "text": "Neradora"
   },
+  "content.species.neradora.passive.0.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "reference": "Restore 1 Health every other turn"
+  },
+  "content.species.neradora.passive.1.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "reference": "Restore 2 Health every other turn"
+  },
+  "content.species.neradora.passive.2.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "reference": "Restore 3 Health every other turn"
+  },
+  "content.species.neradora.passive.3.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "reference": "Restore 4 Health every other turn"
+  },
+  "content.species.neradora.passive.4.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "reference": "Restore 5 Health every other turn"
+  },
+  "content.species.neradora.passive.5.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
+    "reference": "Restore 6 Health every other turn"
+  },
   "content.species.neradora.title": {
     "text": "The living tide flower"
   },
@@ -940,6 +1864,30 @@
   },
   "content.species.oathara.name": {
     "text": "Oathara"
+  },
+  "content.species.oathara.passive.0.rule": {
+    "text": "Oathara can play {{value0}} fallen ally card per turn",
+    "reference": "Oathara can play 1 fallen ally card per turn"
+  },
+  "content.species.oathara.passive.1.rule": {
+    "text": "Oathara can play {{value0}} fallen ally cards per turn",
+    "reference": "Oathara can play 2 fallen ally cards per turn"
+  },
+  "content.species.oathara.passive.2.rule": {
+    "text": "Oathara can play {{value0}} fallen ally cards per turn",
+    "reference": "Oathara can play 3 fallen ally cards per turn"
+  },
+  "content.species.oathara.passive.3.rule": {
+    "text": "Oathara can play {{value0}} fallen ally cards per turn",
+    "reference": "Oathara can play 4 fallen ally cards per turn"
+  },
+  "content.species.oathara.passive.4.rule": {
+    "text": "Oathara can play {{value0}} fallen ally cards per turn",
+    "reference": "Oathara can play 5 fallen ally cards per turn"
+  },
+  "content.species.oathara.passive.5.rule": {
+    "text": "Oathara can play {{value0}} fallen ally cards per turn",
+    "reference": "Oathara can play 6 fallen ally cards per turn"
   },
   "content.species.oathara.title": {
     "text": "The keeper of unfinished journeys"
@@ -950,6 +1898,30 @@
   "content.species.orifable.name": {
     "text": "Orifable"
   },
+  "content.species.orifable.passive.0.rule": {
+    "text": "{{value0}}% chance to draw an extra card each turn",
+    "reference": "50% chance to draw an extra card each turn"
+  },
+  "content.species.orifable.passive.1.rule": {
+    "text": "{{value0}}% chance to draw an extra card each turn",
+    "reference": "60% chance to draw an extra card each turn"
+  },
+  "content.species.orifable.passive.2.rule": {
+    "text": "{{value0}}% chance to draw an extra card each turn",
+    "reference": "70% chance to draw an extra card each turn"
+  },
+  "content.species.orifable.passive.3.rule": {
+    "text": "{{value0}}% chance to draw an extra card each turn",
+    "reference": "80% chance to draw an extra card each turn"
+  },
+  "content.species.orifable.passive.4.rule": {
+    "text": "{{value0}}% chance to draw an extra card each turn",
+    "reference": "90% chance to draw an extra card each turn"
+  },
+  "content.species.orifable.passive.5.rule": {
+    "text": "Draw an extra card each turn",
+    "reference": "Draw an extra card each turn"
+  },
   "content.species.orifable.title": {
     "text": "The bearer of good tidings"
   },
@@ -958,6 +1930,30 @@
   },
   "content.species.parhelion.name": {
     "text": "Parhelion"
+  },
+  "content.species.parhelion.passive.0.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "reference": "Cleansing Freeze build-up restores 1 Health"
+  },
+  "content.species.parhelion.passive.1.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "reference": "Cleansing Freeze build-up restores 2 Health"
+  },
+  "content.species.parhelion.passive.2.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "reference": "Cleansing Freeze build-up restores 3 Health"
+  },
+  "content.species.parhelion.passive.3.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "reference": "Cleansing Freeze build-up restores 4 Health"
+  },
+  "content.species.parhelion.passive.4.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "reference": "Cleansing Freeze build-up restores 5 Health"
+  },
+  "content.species.parhelion.passive.5.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
+    "reference": "Cleansing Freeze build-up restores 6 Health"
   },
   "content.species.parhelion.title": {
     "text": "The sun upon the snow"
@@ -968,6 +1964,30 @@
   "content.species.pollenmoth.name": {
     "text": "Pollenmoth"
   },
+  "content.species.pollenmoth.passive.0.rule": {
+    "text": "<keyword0>Light</keyword0> damage bounces once",
+    "reference": "Light damage bounces once"
+  },
+  "content.species.pollenmoth.passive.1.rule": {
+    "text": "<keyword0>Light</keyword0> damage bounces once, with a {{value0}}% chance to bounce twice",
+    "reference": "Light damage bounces once, with a 50% chance to bounce twice"
+  },
+  "content.species.pollenmoth.passive.2.rule": {
+    "text": "<keyword0>Light</keyword0> damage bounces twice",
+    "reference": "Light damage bounces twice"
+  },
+  "content.species.pollenmoth.passive.3.rule": {
+    "text": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration has a {{value0}}% chance to bounce once",
+    "reference": "Light damage bounces twice; Health restoration has a 50% chance to bounce once"
+  },
+  "content.species.pollenmoth.passive.4.rule": {
+    "text": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration bounces once, with a {{value0}}% chance to bounce twice",
+    "reference": "Light damage bounces twice; Health restoration bounces once, with a 50% chance to bounce twice"
+  },
+  "content.species.pollenmoth.passive.5.rule": {
+    "text": "<keyword0>Light</keyword0> damage and <keyword1>Health</keyword1> restoration bounce twice",
+    "reference": "Light damage and Health restoration bounce twice"
+  },
   "content.species.pollenmoth.title": {
     "text": "A golden wake of flowers"
   },
@@ -976,6 +1996,30 @@
   },
   "content.species.prismram.name": {
     "text": "Prismram"
+  },
+  "content.species.prismram.passive.0.rule": {
+    "text": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "reference": "Harmful status effects you receive have a 10% chance to be redirected to a random enemy"
+  },
+  "content.species.prismram.passive.1.rule": {
+    "text": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "reference": "Harmful status effects you receive have a 20% chance to be redirected to a random enemy"
+  },
+  "content.species.prismram.passive.2.rule": {
+    "text": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "reference": "Harmful status effects you receive have a 30% chance to be redirected to a random enemy"
+  },
+  "content.species.prismram.passive.3.rule": {
+    "text": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "reference": "Harmful status effects you receive have a 40% chance to be redirected to a random enemy"
+  },
+  "content.species.prismram.passive.4.rule": {
+    "text": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "reference": "Harmful status effects you receive have a 50% chance to be redirected to a random enemy"
+  },
+  "content.species.prismram.passive.5.rule": {
+    "text": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
+    "reference": "Harmful status effects you receive have a 60% chance to be redirected to a random enemy"
   },
   "content.species.prismram.title": {
     "text": "The crystal sentinel"
@@ -986,6 +2030,30 @@
   "content.species.pyrella.name": {
     "text": "Pyrella"
   },
+  "content.species.pyrella.passive.0.rule": {
+    "text": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "reference": "After defeating a Burning enemy, spread 20% of its remaining Burn to other enemies"
+  },
+  "content.species.pyrella.passive.1.rule": {
+    "text": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "reference": "After defeating a Burning enemy, spread 35% of its remaining Burn to other enemies"
+  },
+  "content.species.pyrella.passive.2.rule": {
+    "text": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "reference": "After defeating a Burning enemy, spread 50% of its remaining Burn to other enemies"
+  },
+  "content.species.pyrella.passive.3.rule": {
+    "text": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "reference": "After defeating a Burning enemy, spread 65% of its remaining Burn to other enemies"
+  },
+  "content.species.pyrella.passive.4.rule": {
+    "text": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "reference": "After defeating a Burning enemy, spread 80% of its remaining Burn to other enemies"
+  },
+  "content.species.pyrella.passive.5.rule": {
+    "text": "After defeating a <keyword0>Burning</keyword0> enemy, spread its remaining <keyword1>Burn</keyword1> to other enemies",
+    "reference": "After defeating a Burning enemy, spread its remaining Burn to other enemies"
+  },
   "content.species.pyrella.title": {
     "text": "The festival spark"
   },
@@ -994,6 +2062,30 @@
   },
   "content.species.reedstag.name": {
     "text": "Reedstag"
+  },
+  "content.species.reedstag.passive.0.rule": {
+    "text": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "reference": "Block and Thorns have a 20% chance to be shared with allies"
+  },
+  "content.species.reedstag.passive.1.rule": {
+    "text": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "reference": "Block and Thorns have a 40% chance to be shared with allies"
+  },
+  "content.species.reedstag.passive.2.rule": {
+    "text": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "reference": "Block and Thorns have a 60% chance to be shared with allies"
+  },
+  "content.species.reedstag.passive.3.rule": {
+    "text": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "reference": "Block and Thorns have a 80% chance to be shared with allies"
+  },
+  "content.species.reedstag.passive.4.rule": {
+    "text": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "reference": "Block and Thorns have a 90% chance to be shared with allies"
+  },
+  "content.species.reedstag.passive.5.rule": {
+    "text": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
+    "reference": "Block and Thorns are shared with allies"
   },
   "content.species.reedstag.title": {
     "text": "The living reedbed"
@@ -1004,6 +2096,30 @@
   "content.species.reverie.name": {
     "text": "Reverie"
   },
+  "content.species.reverie.passive.0.rule": {
+    "text": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "reference": "At the end of your turn, each ally that played no cards restores 1 Health"
+  },
+  "content.species.reverie.passive.1.rule": {
+    "text": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "reference": "At the end of your turn, each ally that played no cards restores 2 Health"
+  },
+  "content.species.reverie.passive.2.rule": {
+    "text": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "reference": "At the end of your turn, each ally that played no cards restores 3 Health"
+  },
+  "content.species.reverie.passive.3.rule": {
+    "text": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "reference": "At the end of your turn, each ally that played no cards restores 4 Health"
+  },
+  "content.species.reverie.passive.4.rule": {
+    "text": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "reference": "At the end of your turn, each ally that played no cards restores 5 Health"
+  },
+  "content.species.reverie.passive.5.rule": {
+    "text": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
+    "reference": "At the end of your turn, each ally that played no cards restores 6 Health"
+  },
   "content.species.reverie.title": {
     "text": "The sanctuary of dreams"
   },
@@ -1012,6 +2128,30 @@
   },
   "content.species.ringpalm.name": {
     "text": "Ringpalm"
+  },
+  "content.species.ringpalm.passive.0.rule": {
+    "text": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "reference": "Ringpalm’s Stun damage has a 10% chance to repeat"
+  },
+  "content.species.ringpalm.passive.1.rule": {
+    "text": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "reference": "Ringpalm’s Stun damage has a 20% chance to repeat"
+  },
+  "content.species.ringpalm.passive.2.rule": {
+    "text": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "reference": "Ringpalm’s Stun damage has a 30% chance to repeat"
+  },
+  "content.species.ringpalm.passive.3.rule": {
+    "text": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "reference": "Ringpalm’s Stun damage has a 40% chance to repeat"
+  },
+  "content.species.ringpalm.passive.4.rule": {
+    "text": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "reference": "Ringpalm’s Stun damage has a 50% chance to repeat"
+  },
+  "content.species.ringpalm.passive.5.rule": {
+    "text": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "reference": "Ringpalm’s Stun damage has a 60% chance to repeat"
   },
   "content.species.ringpalm.title": {
     "text": "The stone-circle guardian"
@@ -1022,6 +2162,30 @@
   "content.species.rookhaven.name": {
     "text": "Rookhaven"
   },
+  "content.species.rookhaven.passive.0.rule": {
+    "text": "Drawing a card has a {{value0}}% chance to copy it",
+    "reference": "Drawing a card has a 20% chance to copy it"
+  },
+  "content.species.rookhaven.passive.1.rule": {
+    "text": "Drawing a card has a {{value0}}% chance to copy it",
+    "reference": "Drawing a card has a 35% chance to copy it"
+  },
+  "content.species.rookhaven.passive.2.rule": {
+    "text": "Drawing a card has a {{value0}}% chance to copy it",
+    "reference": "Drawing a card has a 50% chance to copy it"
+  },
+  "content.species.rookhaven.passive.3.rule": {
+    "text": "Drawing a card has a {{value0}}% chance to copy it",
+    "reference": "Drawing a card has a 70% chance to copy it"
+  },
+  "content.species.rookhaven.passive.4.rule": {
+    "text": "Drawing a card has an {{value0}}% chance to copy it",
+    "reference": "Drawing a card has an 85% chance to copy it"
+  },
+  "content.species.rookhaven.passive.5.rule": {
+    "text": "Drawing a card copies it",
+    "reference": "Drawing a card copies it"
+  },
   "content.species.rookhaven.title": {
     "text": "The keeper of forgotten stories"
   },
@@ -1030,6 +2194,30 @@
   },
   "content.species.shadebrim.name": {
     "text": "Shadebrim"
+  },
+  "content.species.shadebrim.passive.0.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "reference": "Allies take 10% less Burn damage"
+  },
+  "content.species.shadebrim.passive.1.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "reference": "Allies take 20% less Burn damage"
+  },
+  "content.species.shadebrim.passive.2.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "reference": "Allies take 30% less Burn damage"
+  },
+  "content.species.shadebrim.passive.3.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "reference": "Allies take 40% less Burn damage"
+  },
+  "content.species.shadebrim.passive.4.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "reference": "Allies take 50% less Burn damage"
+  },
+  "content.species.shadebrim.passive.5.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "reference": "Allies take 60% less Burn damage"
   },
   "content.species.shadebrim.title": {
     "text": "The cool refuge"
@@ -1040,6 +2228,30 @@
   "content.species.skybex.name": {
     "text": "Skybex"
   },
+  "content.species.skybex.passive.0.rule": {
+    "text": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "reference": "Allies gain 1 Block when they swap in"
+  },
+  "content.species.skybex.passive.1.rule": {
+    "text": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "reference": "Allies gain 2 Block when they swap in"
+  },
+  "content.species.skybex.passive.2.rule": {
+    "text": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "reference": "Allies gain 3 Block when they swap in"
+  },
+  "content.species.skybex.passive.3.rule": {
+    "text": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "reference": "Allies gain 4 Block when they swap in"
+  },
+  "content.species.skybex.passive.4.rule": {
+    "text": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "reference": "Allies gain 5 Block when they swap in"
+  },
+  "content.species.skybex.passive.5.rule": {
+    "text": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
+    "reference": "Allies gain 6 Block when they swap in"
+  },
   "content.species.skybex.title": {
     "text": "The mountain guide"
   },
@@ -1048,6 +2260,30 @@
   },
   "content.species.sternshell.name": {
     "text": "Sternshell"
+  },
+  "content.species.sternshell.passive.0.rule": {
+    "text": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Sternshell starts combat with 2 Armor"
+  },
+  "content.species.sternshell.passive.1.rule": {
+    "text": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Sternshell starts combat with 3 Armor"
+  },
+  "content.species.sternshell.passive.2.rule": {
+    "text": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Sternshell starts combat with 4 Armor"
+  },
+  "content.species.sternshell.passive.3.rule": {
+    "text": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Sternshell starts combat with 5 Armor"
+  },
+  "content.species.sternshell.passive.4.rule": {
+    "text": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Sternshell starts combat with 6 Armor"
+  },
+  "content.species.sternshell.passive.5.rule": {
+    "text": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Sternshell starts combat with 7 Armor"
   },
   "content.species.sternshell.title": {
     "text": "The steadfast voyager"
@@ -1058,6 +2294,30 @@
   "content.species.stillara.name": {
     "text": "Stillara"
   },
+  "content.species.stillara.passive.0.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "reference": "Allies take 10% less Freeze damage"
+  },
+  "content.species.stillara.passive.1.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "reference": "Allies take 20% less Freeze damage"
+  },
+  "content.species.stillara.passive.2.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "reference": "Allies take 30% less Freeze damage"
+  },
+  "content.species.stillara.passive.3.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "reference": "Allies take 40% less Freeze damage"
+  },
+  "content.species.stillara.passive.4.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "reference": "Allies take 50% less Freeze damage"
+  },
+  "content.species.stillara.passive.5.rule": {
+    "text": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "reference": "Allies take 60% less Freeze damage"
+  },
   "content.species.stillara.title": {
     "text": "The keeper of summer"
   },
@@ -1066,6 +2326,30 @@
   },
   "content.species.tournelle.name": {
     "text": "Tournelle"
+  },
+  "content.species.tournelle.passive.0.rule": {
+    "text": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "reference": "10% chance to intercept attacks against a more injured ally"
+  },
+  "content.species.tournelle.passive.1.rule": {
+    "text": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "reference": "20% chance to intercept attacks against a more injured ally"
+  },
+  "content.species.tournelle.passive.2.rule": {
+    "text": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "reference": "30% chance to intercept attacks against a more injured ally"
+  },
+  "content.species.tournelle.passive.3.rule": {
+    "text": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "reference": "40% chance to intercept attacks against a more injured ally"
+  },
+  "content.species.tournelle.passive.4.rule": {
+    "text": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "reference": "50% chance to intercept attacks against a more injured ally"
+  },
+  "content.species.tournelle.passive.5.rule": {
+    "text": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "reference": "60% chance to intercept attacks against a more injured ally"
   },
   "content.species.tournelle.title": {
     "text": "The little gallant"
@@ -1076,6 +2360,30 @@
   "content.species.wickwaltz.name": {
     "text": "Wickwaltz"
   },
+  "content.species.wickwaltz.passive.0.rule": {
+    "text": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "reference": "Wickwaltz’s second card each turn has a 20% chance to repeat"
+  },
+  "content.species.wickwaltz.passive.1.rule": {
+    "text": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "reference": "Wickwaltz’s second card each turn has a 36% chance to repeat"
+  },
+  "content.species.wickwaltz.passive.2.rule": {
+    "text": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "reference": "Wickwaltz’s second card each turn has a 52% chance to repeat"
+  },
+  "content.species.wickwaltz.passive.3.rule": {
+    "text": "Wickwaltz’s second card each turn has a {{value0}}% chance to repeat",
+    "reference": "Wickwaltz’s second card each turn has a 68% chance to repeat"
+  },
+  "content.species.wickwaltz.passive.4.rule": {
+    "text": "Wickwaltz’s second card each turn has an {{value0}}% chance to repeat",
+    "reference": "Wickwaltz’s second card each turn has an 84% chance to repeat"
+  },
+  "content.species.wickwaltz.passive.5.rule": {
+    "text": "Wickwaltz’s second card each turn repeats",
+    "reference": "Wickwaltz’s second card each turn repeats"
+  },
   "content.species.wickwaltz.title": {
     "text": "The kindling dancer"
   },
@@ -1084,6 +2392,30 @@
   },
   "content.species.wisterelle.name": {
     "text": "Wisterelle"
+  },
+  "content.species.wisterelle.passive.0.rule": {
+    "text": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "reference": "Drawing a card from your discard pile restores 1 Health to its owner"
+  },
+  "content.species.wisterelle.passive.1.rule": {
+    "text": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "reference": "Drawing a card from your discard pile restores 2 Health to its owner"
+  },
+  "content.species.wisterelle.passive.2.rule": {
+    "text": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "reference": "Drawing a card from your discard pile restores 3 Health to its owner"
+  },
+  "content.species.wisterelle.passive.3.rule": {
+    "text": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "reference": "Drawing a card from your discard pile restores 4 Health to its owner"
+  },
+  "content.species.wisterelle.passive.4.rule": {
+    "text": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "reference": "Drawing a card from your discard pile restores 5 Health to its owner"
+  },
+  "content.species.wisterelle.passive.5.rule": {
+    "text": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
+    "reference": "Drawing a card from your discard pile restores 6 Health to its owner"
   },
   "content.species.wisterelle.title": {
     "text": "The keeper of the flowering station"
@@ -1094,406 +2426,946 @@
   "content.talent.armor.armored-surge.name": {
     "text": "Armored Surge"
   },
+  "content.talent.armor.armored-surge.rule": {
+    "text": "Playing a <keyword0>Block</keyword0> card has a {{value0}}% chance to grant {{value1}} <keyword1>Armor</keyword1>",
+    "reference": "Playing a Block card has a 10% chance to grant 6 Armor"
+  },
   "content.talent.armor.bulwark.name": {
     "text": "Bulwark"
+  },
+  "content.talent.armor.bulwark.rule": {
+    "text": "Start each battle with {{value0}} <keyword0>Armor</keyword0>",
+    "reference": "Start each battle with 2 Armor"
   },
   "content.talent.armor.fireward.name": {
     "text": "Fireward"
   },
+  "content.talent.armor.fireward.rule": {
+    "text": "<keyword0>Armor</keyword0> mitigates <keyword1>Burn</keyword1> damage taken",
+    "reference": "Armor mitigates Burn damage taken"
+  },
   "content.talent.armor.iron-guard.name": {
     "text": "Iron Guard"
+  },
+  "content.talent.armor.iron-guard.rule": {
+    "text": "Dealing <keyword0>Physical</keyword0> damage has a {{value0}}% chance to also grant that amount of <keyword1>Armor</keyword1>",
+    "reference": "Dealing Physical damage has a 10% chance to also grant that amount of Armor"
   },
   "content.talent.armor.last-stand.name": {
     "text": "Last Stand"
   },
+  "content.talent.armor.last-stand.rule": {
+    "text": "Gain {{value0}}% more <keyword0>Armor</keyword0> while below half <keyword1>Health</keyword1>",
+    "reference": "Gain 25% more Armor while below half Health"
+  },
   "content.talent.armor.purification.name": {
     "text": "Purification"
+  },
+  "content.talent.armor.purification.rule": {
+    "text": "Gaining <keyword0>Armor</keyword0> has a {{value0}}% chance to <keyword1>Cleanse</keyword1> a harmful status effect",
+    "reference": "Gaining Armor has a 10% chance to Cleanse a harmful status effect"
   },
   "content.talent.armor.reactive-guard.name": {
     "text": "Reactive Guard"
   },
+  "content.talent.armor.reactive-guard.rule": {
+    "text": "Gain {{value0}} <keyword0>Block</keyword0> when your <keyword1>Armor</keyword1> breaks",
+    "reference": "Gain 3 Block when your Armor breaks"
+  },
   "content.talent.armor.reinforced.name": {
     "text": "Reinforced"
+  },
+  "content.talent.armor.reinforced.rule": {
+    "text": "{{value0}}% chance to double <keyword0>Armor</keyword0> gained",
+    "reference": "10% chance to double Armor gained"
   },
   "content.talent.armor.steadfast.name": {
     "text": "Steadfast"
   },
+  "content.talent.armor.steadfast.rule": {
+    "text": "When your <keyword0>Health</keyword0> falls below half, gain {{value0}} <keyword1>Armor</keyword1>",
+    "reference": "When your Health falls below half, gain 3 Armor"
+  },
   "content.talent.armor.thick-hide.name": {
     "text": "Thick Hide"
+  },
+  "content.talent.armor.thick-hide.rule": {
+    "text": "<keyword0>Armor</keyword0> mitigates <keyword1>Bleed</keyword1> damage taken",
+    "reference": "Armor mitigates Bleed damage taken"
   },
   "content.talent.bleed.bleeding-out.name": {
     "text": "Bleeding Out"
   },
+  "content.talent.bleed.bleeding-out.rule": {
+    "text": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "reference": "Deal 25% more Bleed damage while below half Health"
+  },
   "content.talent.bleed.bloodrush.name": {
     "text": "Bloodrush"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "text": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "reference": "Dealing Bleed damage has a 10% chance to draw a card"
   },
   "content.talent.bleed.first-blood.name": {
     "text": "First Blood"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "text": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "reference": "Deal 25% more Bleed damage against enemies that aren’t already Bleeding"
+  },
   "content.talent.bleed.flay.name": {
     "text": "Flay"
+  },
+  "content.talent.bleed.flay.rule": {
+    "text": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "reference": "Bleed hits have a 20% chance to halve enemy Armor"
   },
   "content.talent.bleed.mortal-wound.name": {
     "text": "Mortal Wound"
   },
+  "content.talent.bleed.mortal-wound.rule": {
+    "text": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "reference": "Bleeding enemies receive half as much healing"
+  },
   "content.talent.bleed.parting-cut.name": {
     "text": "Parting Cut"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "text": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "reference": "After you Dodge, your next Physical hit deals half its damage as additional Bleed damage"
   },
   "content.talent.bleed.sanguine.name": {
     "text": "Sanguine"
   },
+  "content.talent.bleed.sanguine.rule": {
+    "text": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "reference": "Bleed hits have a 10% chance to Leech"
+  },
   "content.talent.bleed.septic-shock.name": {
     "text": "Septic Shock"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "text": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "reference": "Bleeding enemies take 10% more Poison damage"
   },
   "content.talent.bleed.tainted-wound.name": {
     "text": "Tainted Wound"
   },
+  "content.talent.bleed.tainted-wound.rule": {
+    "text": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "reference": "Bleed hits have a 10% chance to deal half their damage as Poison damage"
+  },
   "content.talent.bleed.wound-care.name": {
     "text": "Wound Care"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "text": "Take half <keyword0>Bleed</keyword0> damage",
+    "reference": "Take half Bleed damage"
   },
   "content.talent.block.blood-ward.name": {
     "text": "Blood Ward"
   },
+  "content.talent.block.blood-ward.rule": {
+    "text": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "reference": "Take half Bleed damage while you have Block"
+  },
   "content.talent.block.footwork.name": {
     "text": "Footwork"
+  },
+  "content.talent.block.footwork.rule": {
+    "text": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "reference": "Gain 2 Block when you Dodge"
   },
   "content.talent.block.grounding.name": {
     "text": "Grounding"
   },
+  "content.talent.block.grounding.rule": {
+    "text": "<keyword0>Block</keyword0> prevents <keyword1>Stun</keyword1> buildup",
+    "reference": "Block prevents Stun buildup"
+  },
   "content.talent.block.impact-guard.name": {
     "text": "Impact Guard"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "text": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "reference": "Stun damage is increased by 10% of your Block"
   },
   "content.talent.block.reinforce.name": {
     "text": "Reinforce"
   },
+  "content.talent.block.reinforce.rule": {
+    "text": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "reference": "Block absorbs 10% more Physical damage"
+  },
   "content.talent.block.sacred-shield.name": {
     "text": "Sacred Shield"
+  },
+  "content.talent.block.sacred-shield.rule": {
+    "text": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "reference": "Light damage is increased by 10% of your Block"
   },
   "content.talent.block.second-wind.name": {
     "text": "Second Wind"
   },
+  "content.talent.block.second-wind.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> when your <keyword1>Block</keyword1> is depleted",
+    "reference": "Restore 2 Health when your Block is depleted"
+  },
   "content.talent.block.sun-struck-shield.name": {
     "text": "Sun-Struck Shield"
+  },
+  "content.talent.block.sun-struck-shield.rule": {
+    "text": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "reference": "When attacks deplete your Block, reflect 30% of Block lost as Light damage"
   },
   "content.talent.block.venom-ward.name": {
     "text": "Venom Ward"
   },
+  "content.talent.block.venom-ward.rule": {
+    "text": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "reference": "Take half Poison damage while you have Block"
+  },
   "content.talent.block.weighted-guard.name": {
     "text": "Weighted Guard"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "text": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "reference": "Physical damage is increased by 10% of your Block"
   },
   "content.talent.burn.fire-resistance.name": {
     "text": "Fire Resistance"
   },
+  "content.talent.burn.fire-resistance.rule": {
+    "text": "Take half <keyword0>Burn</keyword0> damage",
+    "reference": "Take half Burn damage"
+  },
   "content.talent.burn.flash-fire.name": {
     "text": "Flash Fire"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "text": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "reference": "Burn cards have a 10% chance to play twice"
   },
   "content.talent.burn.flashpoint.name": {
     "text": "Flashpoint"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "text": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "reference": "Your first Burn each battle is free"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "text": "Heat Exhaustion"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "text": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "reference": "Burn hits have a 10% chance to also deal Stun damage"
   },
   "content.talent.burn.melting-point.name": {
     "text": "Melting Point"
   },
+  "content.talent.burn.melting-point.rule": {
+    "text": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "reference": "Burn damage removes an equal amount of Armor"
+  },
   "content.talent.burn.smoke-screen.name": {
     "text": "Smoke Screen"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "text": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "reference": "When you Dodge a Burning enemy, deal 2 Burn damage"
   },
   "content.talent.burn.smoldering.name": {
     "text": "Smoldering"
   },
+  "content.talent.burn.smoldering.rule": {
+    "text": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "reference": "Burn has a 10% chance to not decay"
+  },
   "content.talent.dodge.catch-breath.name": {
     "text": "Catch Breath"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "reference": "Restore 1 Health when you Dodge"
   },
   "content.talent.dodge.clean-getaway.name": {
     "text": "Clean Getaway"
   },
+  "content.talent.dodge.clean-getaway.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "reference": "When you Dodge, remove 1 stack each of Burn, Poison, and Bleed from yourself"
+  },
   "content.talent.dodge.finding-rhythm.name": {
     "text": "Finding Rhythm"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "text": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "reference": "Taking damage increases your Dodge chance by 5%, resetting when you Dodge"
   },
   "content.talent.dodge.lightfoot.name": {
     "text": "Lightfoot"
   },
+  "content.talent.dodge.lightfoot.rule": {
+    "text": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "reference": "Gain 5% Dodge chance"
+  },
   "content.talent.dodge.open-flank.name": {
     "text": "Open Flank"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "reference": "When you Dodge, your next attack deals 2 additional Physical damage"
   },
   "content.talent.dodge.perfect-timing.name": {
     "text": "Perfect Timing"
   },
+  "content.talent.dodge.perfect-timing.rule": {
+    "text": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "reference": "When you Dodge without Armor, gain 2 Armor"
+  },
   "content.talent.dodge.tailwind.name": {
     "text": "Tailwind"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "reference": "When you Dodge, draw a card"
   },
   "content.talent.dodge.thornstep.name": {
     "text": "Thornstep"
   },
+  "content.talent.dodge.thornstep.rule": {
+    "text": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "reference": "Gain 1 Thorns when you Dodge"
+  },
   "content.talent.dodge.unburdened.name": {
     "text": "Unburdened"
+  },
+  "content.talent.dodge.unburdened.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "reference": "When you Dodge, cleanse your Stun and Freeze buildup"
   },
   "content.talent.freeze.bitter-cold.name": {
     "text": "Bitter Cold"
   },
+  "content.talent.freeze.bitter-cold.rule": {
+    "text": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "reference": "Reduce enemy Freeze thresholds by 10 percentage points"
+  },
   "content.talent.freeze.brittle-armor.name": {
     "text": "Brittle Armor"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "text": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "reference": "When you Freeze an enemy, remove all its Armor"
   },
   "content.talent.freeze.brittle-ice.name": {
     "text": "Brittle Ice"
   },
+  "content.talent.freeze.brittle-ice.rule": {
+    "text": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "reference": "Frozen enemies take 1 additional damage"
+  },
   "content.talent.freeze.cold-resistance.name": {
     "text": "Cold Resistance"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "text": "Take half <keyword0>Freeze</keyword0> damage",
+    "reference": "Take half Freeze damage"
   },
   "content.talent.freeze.cryo-preservation.name": {
     "text": "Cryo-preservation"
   },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "text": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "reference": "Poison does not decay on Frozen enemies"
+  },
   "content.talent.freeze.glacial-barrier.name": {
     "text": "Glacial Barrier"
+  },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "text": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "reference": "Gain 3 Block when you Freeze an enemy"
   },
   "content.talent.freeze.icebound.name": {
     "text": "Icebound"
   },
+  "content.talent.freeze.icebound.rule": {
+    "text": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "reference": "When you Freeze an enemy, remove all its Block"
+  },
   "content.talent.freeze.thaw-dividend.name": {
     "text": "Thaw Dividend"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "text": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "reference": "When an enemy recovers from Freeze, draw a card"
   },
   "content.talent.freeze.winter-s-grasp.name": {
     "text": "Winter's Grasp"
   },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "text": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "reference": "Freeze cards have a 10% chance to play twice"
+  },
   "content.talent.health.clean-slate.name": {
     "text": "Clean Slate"
+  },
+  "content.talent.health.clean-slate.rule": {
+    "text": "When a card restores <keyword0>Health</keyword0> beyond your maximum, <keyword1>cleanse</keyword1> a harmful status effect",
+    "reference": "When a card restores Health beyond your maximum, cleanse a harmful status effect"
   },
   "content.talent.health.combat-surge.name": {
     "text": "Combat Surge"
   },
+  "content.talent.health.combat-surge.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "reference": "Restore 4 Health at the start of combat"
+  },
   "content.talent.health.desperate-guard.name": {
     "text": "Desperate Guard"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "text": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "reference": "The first time your Health falls below half each combat, gain 6 Block"
   },
   "content.talent.health.last-gasp.name": {
     "text": "Last Gasp"
   },
+  "content.talent.health.last-gasp.rule": {
+    "text": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "reference": "While below half Health, gain 10% Dodge chance"
+  },
   "content.talent.health.last-resort.name": {
     "text": "Last Resort"
+  },
+  "content.talent.health.last-resort.rule": {
+    "text": "When your <keyword0>Health</keyword0> falls below {{value0}}%, <keyword1>cleanse</keyword1> all harmful status effects",
+    "reference": "When your Health falls below 25%, cleanse all harmful status effects"
   },
   "content.talent.health.mending.name": {
     "text": "Mending"
   },
+  "content.talent.health.mending.rule": {
+    "text": "Receive {{value0}}% more <keyword0>healing</keyword0> during combat",
+    "reference": "Receive 10% more healing during combat"
+  },
   "content.talent.health.overflow.name": {
     "text": "Overflow"
+  },
+  "content.talent.health.overflow.rule": {
+    "text": "Gain {{value0}}% of excess <keyword0>healing</keyword0> from cards as <keyword1>Block</keyword1>",
+    "reference": "Gain 25% of excess healing from cards as Block"
   },
   "content.talent.health.renewal.name": {
     "text": "Renewal"
   },
+  "content.talent.health.renewal.rule": {
+    "text": "<keyword0>Cleansing</keyword0> a harmful status restores {{value0}} <keyword1>Health</keyword1>",
+    "reference": "Cleansing a harmful status restores 2 Health"
+  },
   "content.talent.health.vitality.name": {
     "text": "Vitality"
+  },
+  "content.talent.health.vitality.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "reference": "Restore 4 Health after every combat"
   },
   "content.talent.health.will-to-live.name": {
     "text": "Will to Live"
   },
+  "content.talent.health.will-to-live.rule": {
+    "text": "Death's Door lasts {{value0}} turn longer",
+    "reference": "Death's Door lasts 1 turn longer"
+  },
   "content.talent.leech.affliction-siphon.name": {
     "text": "Affliction Siphon"
+  },
+  "content.talent.leech.affliction-siphon.rule": {
+    "text": "<keyword0>Leech</keyword0> restores {{value0}}% more <keyword1>Health</keyword1> against Poisoned or <keyword2>Bleeding</keyword2> enemies",
+    "reference": "Leech restores 10% more Health against Poisoned or Bleeding enemies"
   },
   "content.talent.leech.armor-siphon.name": {
     "text": "Armor Siphon"
   },
+  "content.talent.leech.armor-siphon.rule": {
+    "text": "Your <keyword0>Leech</keyword0> cards steal {{value0}} <keyword1>Armor</keyword1> before their effects resolve",
+    "reference": "Your Leech cards steal 1 Armor before their effects resolve"
+  },
   "content.talent.leech.blood-debt.name": {
     "text": "Blood Debt"
+  },
+  "content.talent.leech.blood-debt.rule": {
+    "text": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "reference": "Leech has a 10% chance to also grant Gold equal to Health restored"
   },
   "content.talent.leech.bloodletting.name": {
     "text": "Bloodletting"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "text": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "reference": "Leech has a 10% chance to cleanse a harmful status"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "text": "Cull the Weak"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "text": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "reference": "Leech cards deal 25% more damage against enemies below half Health"
   },
   "content.talent.leech.deep-siphon.name": {
     "text": "Deep Siphon"
   },
+  "content.talent.leech.deep-siphon.rule": {
+    "text": "<keyword0>Leech</keyword0> restores {{value0}} additional <keyword1>Health</keyword1>",
+    "reference": "Leech restores 1 additional Health"
+  },
   "content.talent.leech.desperate-siphon.name": {
     "text": "Desperate Siphon"
+  },
+  "content.talent.leech.desperate-siphon.rule": {
+    "text": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "reference": "Double Leech healing while below half Health"
   },
   "content.talent.leech.mana-siphon.name": {
     "text": "Mana Siphon"
   },
+  "content.talent.leech.mana-siphon.rule": {
+    "text": "<keyword0>Leech</keyword0> has a {{value0}}% chance to gain {{value1}} <keyword1>Mana</keyword1>",
+    "reference": "Leech has a 10% chance to gain 1 Mana"
+  },
   "content.talent.leech.sanguine-overflow.name": {
     "text": "Sanguine Overflow"
+  },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "text": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "reference": "When Leech fills your Health, gain 1 Mana"
   },
   "content.talent.leech.virulent-leech.name": {
     "text": "Virulent Leech"
   },
+  "content.talent.leech.virulent-leech.rule": {
+    "text": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "reference": "Poison damage has a 10% chance to Leech"
+  },
   "content.talent.light.blessed-leech.name": {
     "text": "Blessed Leech"
+  },
+  "content.talent.light.blessed-leech.rule": {
+    "text": "<keyword0>Light</keyword0> damage: <keyword1>Leech</keyword1> below half <keyword2>Health</keyword2>",
+    "reference": "Light damage: Leech below half Health"
   },
   "content.talent.light.celestial-ward.name": {
     "text": "Celestial Ward"
   },
+  "content.talent.light.celestial-ward.rule": {
+    "text": "Take half <keyword0>Light</keyword0> damage",
+    "reference": "Take half Light damage"
+  },
   "content.talent.light.divine-favor.name": {
     "text": "Divine Favor"
+  },
+  "content.talent.light.divine-favor.rule": {
+    "text": "When you <keyword0>cleanse</keyword0> a harmful status effect, your next <keyword1>Light</keyword1> card is free",
+    "reference": "When you cleanse a harmful status effect, your next Light card is free"
   },
   "content.talent.light.faith-barrier.name": {
     "text": "Faith Barrier"
   },
+  "content.talent.light.faith-barrier.rule": {
+    "text": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to grant <keyword1>Block</keyword1> equal to enemy <keyword2>Health</keyword2> lost",
+    "reference": "Light hits have a 10% chance to grant Block equal to enemy Health lost"
+  },
   "content.talent.light.prosperity.name": {
     "text": "Prosperity"
+  },
+  "content.talent.light.prosperity.rule": {
+    "text": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your Gold",
+    "reference": "Light damage is increased by 1% of your Gold"
   },
   "content.talent.light.purge.name": {
     "text": "Searing Light"
   },
+  "content.talent.light.purge.rule": {
+    "text": "<keyword0>Light</keyword0> damage is increased by {{value0}}% against <keyword1>Burning</keyword1> enemies",
+    "reference": "Light damage is increased by 10% against Burning enemies"
+  },
   "content.talent.light.radiant-guard.name": {
     "text": "Radiant Guard"
+  },
+  "content.talent.light.radiant-guard.rule": {
+    "text": "Gaining <keyword0>Block</keyword0> has a {{value0}}% chance to draw a <keyword1>Light</keyword1> card",
+    "reference": "Gaining Block has a 10% chance to draw a Light card"
   },
   "content.talent.light.scorching-light.name": {
     "text": "Scorching Light"
   },
+  "content.talent.light.scorching-light.rule": {
+    "text": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Burn</keyword1> damage",
+    "reference": "Light damage has a 10% chance to also deal Burn damage"
+  },
   "content.talent.light.tithe.name": {
     "text": "Tithe"
+  },
+  "content.talent.light.tithe.rule": {
+    "text": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "reference": "Light damage has a 10% chance to grant Gold equal to enemy Health lost"
   },
   "content.talent.mana.arcane-frost.name": {
     "text": "Arcane Frost"
   },
+  "content.talent.mana.arcane-frost.rule": {
+    "text": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "reference": "Freeze damage is increased by 25% of your Mana"
+  },
   "content.talent.mana.arcane-mending.name": {
     "text": "Arcane Mending"
+  },
+  "content.talent.mana.arcane-mending.rule": {
+    "text": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
+    "reference": "Each living deployed creature restores 1 Health per Mana gained"
   },
   "content.talent.mana.dark-recovery.name": {
     "text": "Dark Recovery"
   },
+  "content.talent.mana.dark-recovery.rule": {
+    "text": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "reference": "End your turn with no Mana to gain 1 extra Mana next turn"
+  },
   "content.talent.mana.leyline-attunement.name": {
     "text": "Leyline Attunement"
+  },
+  "content.talent.mana.leyline-attunement.rule": {
+    "text": "Gain {{value0}} <keyword0>maximum Mana</keyword0> each battle",
+    "reference": "Gain 1 maximum Mana each battle"
   },
   "content.talent.mana.mana-bulwark.name": {
     "text": "Mana Bulwark"
   },
+  "content.talent.mana.mana-bulwark.rule": {
+    "text": "Start each combat with <keyword0>Block</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "reference": "Start each combat with Block equal to your maximum Mana"
+  },
   "content.talent.mana.mana-shell.name": {
     "text": "Mana Shell"
+  },
+  "content.talent.mana.mana-shell.rule": {
+    "text": "Start each combat with <keyword0>Armor</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "reference": "Start each combat with Armor equal to your maximum Mana"
   },
   "content.talent.mana.manaburn.name": {
     "text": "Manaburn"
   },
+  "content.talent.mana.manaburn.rule": {
+    "text": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "reference": "Burn damage is increased by 25% of your Mana"
+  },
   "content.talent.mana.wellspring.name": {
     "text": "Wellspring"
+  },
+  "content.talent.mana.wellspring.rule": {
+    "text": "End your turn with unspent <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "reference": "End your turn with unspent Mana to gain 1 extra Mana next turn"
   },
   "content.talent.nature.bramblegrowth.name": {
     "text": "Bramblegrowth"
   },
+  "content.talent.nature.bramblegrowth.rule": {
+    "text": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant <keyword1>Thorns</keyword1> equal to damage dealt",
+    "reference": "Nature hits have a 10% chance to grant Thorns equal to damage dealt"
+  },
   "content.talent.nature.briar-patch.name": {
     "text": "Briar Patch"
+  },
+  "content.talent.nature.briar-patch.rule": {
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also <keyword1>Bleed</keyword1>",
+    "reference": "Nature damage has a 10% chance to also Bleed"
   },
   "content.talent.nature.ecosystem.name": {
     "text": "Ecosystem"
   },
+  "content.talent.nature.ecosystem.rule": {
+    "text": "Draw a <keyword0>Nature</keyword0> card at battle start",
+    "reference": "Draw a Nature card at battle start"
+  },
   "content.talent.nature.entangle.name": {
     "text": "Entangle"
+  },
+  "content.talent.nature.entangle.rule": {
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
+    "reference": "Nature damage has a 10% chance to also Stun"
   },
   "content.talent.nature.overgrowth.name": {
     "text": "Overgrowth"
   },
+  "content.talent.nature.overgrowth.rule": {
+    "text": "<keyword0>Nature</keyword0> cards have a {{value0}}% chance to play twice",
+    "reference": "Nature cards have a 10% chance to play twice"
+  },
   "content.talent.nature.photosynthesis.name": {
     "text": "Photosynthesis"
+  },
+  "content.talent.nature.photosynthesis.rule": {
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also restore <keyword1>Health</keyword1>",
+    "reference": "Nature damage has a 10% chance to also restore Health"
   },
   "content.talent.nature.thornskin.name": {
     "text": "Thornskin"
   },
+  "content.talent.nature.thornskin.rule": {
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also grant <keyword1>Armor</keyword1>",
+    "reference": "Nature damage has a 10% chance to also grant Armor"
+  },
   "content.talent.nature.toxic-pollen.name": {
     "text": "Toxic Pollen"
+  },
+  "content.talent.nature.toxic-pollen.rule": {
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also <keyword1>Poison</keyword1>",
+    "reference": "Nature damage has a 10% chance to also Poison"
   },
   "content.talent.nature.verdant-cycle.name": {
     "text": "Verdant Cycle"
   },
+  "content.talent.nature.verdant-cycle.rule": {
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "reference": "Nature damage has a 10% chance to Leech"
+  },
   "content.talent.nature.windstep.name": {
     "text": "Windstep"
+  },
+  "content.talent.nature.windstep.rule": {
+    "text": "When you <keyword0>Dodge</keyword0>, your next <keyword1>Nature</keyword1> card is free",
+    "reference": "When you Dodge, your next Nature card is free"
   },
   "content.talent.physical.armored-fists.name": {
     "text": "Armored Fists"
   },
+  "content.talent.physical.armored-fists.rule": {
+    "text": "Add half your <keyword0>Armor</keyword0> to <keyword1>Physical</keyword1> damage",
+    "reference": "Add half your Armor to Physical damage"
+  },
   "content.talent.physical.finish-him.name": {
     "text": "Finishing Blow"
+  },
+  "content.talent.physical.finish-him.rule": {
+    "text": "<keyword0>Physical</keyword0> damage is doubled against enemies below {{value0}}% <keyword1>Health</keyword1>",
+    "reference": "Physical damage is doubled against enemies below 25% Health"
   },
   "content.talent.physical.heavy-blows.name": {
     "text": "Heavy Blows"
   },
+  "content.talent.physical.heavy-blows.rule": {
+    "text": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
+    "reference": "Physical damage has a 10% chance to also Stun"
+  },
   "content.talent.physical.lacerate.name": {
     "text": "Lacerate"
+  },
+  "content.talent.physical.lacerate.rule": {
+    "text": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to <keyword1>Bleed</keyword1>",
+    "reference": "Physical damage has a 10% chance to Bleed"
   },
   "content.talent.physical.riposte.name": {
     "text": "Riposte"
   },
+  "content.talent.physical.riposte.rule": {
+    "text": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> attack is guaranteed to <keyword2>Critical Hit</keyword2>",
+    "reference": "After you Dodge, your next Physical attack is guaranteed to Critical Hit"
+  },
   "content.talent.physical.rupture.name": {
     "text": "Rupture"
+  },
+  "content.talent.physical.rupture.rule": {
+    "text": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "reference": "Physical critical hits detonate Bleed"
   },
   "content.talent.physical.shield-slam.name": {
     "text": "Shield Slam"
   },
+  "content.talent.physical.shield-slam.rule": {
+    "text": "Add half your <keyword0>Block</keyword0> to <keyword1>Physical</keyword1> damage",
+    "reference": "Add half your Block to Physical damage"
+  },
   "content.talent.physical.unrelenting.name": {
     "text": "Unrelenting"
+  },
+  "content.talent.physical.unrelenting.rule": {
+    "text": "<keyword0>Physical</keyword0> damage is doubled while you're below half <keyword1>Health</keyword1>",
+    "reference": "Physical damage is doubled while you're below half Health"
   },
   "content.talent.poison.caustic.name": {
     "text": "Caustic"
   },
+  "content.talent.poison.caustic.rule": {
+    "text": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "reference": "Poison damage removes enemy Armor equal to damage dealt"
+  },
   "content.talent.poison.corrosive.name": {
     "text": "Corrosive"
+  },
+  "content.talent.poison.corrosive.rule": {
+    "text": "Poisoned enemies take {{value0}} additional damage",
+    "reference": "Poisoned enemies take 1 additional damage"
   },
   "content.talent.poison.hemotoxin.name": {
     "text": "Hemotoxin"
   },
+  "content.talent.poison.hemotoxin.rule": {
+    "text": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "reference": "Poison has a 10% chance to also deal Bleed damage"
+  },
   "content.talent.poison.necrosis.name": {
     "text": "Necrosis"
+  },
+  "content.talent.poison.necrosis.rule": {
+    "text": "Poisoned enemies receive half as much <keyword0>healing</keyword0>",
+    "reference": "Poisoned enemies receive half as much healing"
   },
   "content.talent.poison.paralytic-venom.name": {
     "text": "Paralytic Venom"
   },
+  "content.talent.poison.paralytic-venom.rule": {
+    "text": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Stun</keyword1>",
+    "reference": "Poison damage has a 10% chance to Stun"
+  },
   "content.talent.poison.torpor.name": {
     "text": "Torpor"
+  },
+  "content.talent.poison.torpor.rule": {
+    "text": "Poisoned enemies cannot <keyword0>Dodge</keyword0>",
+    "reference": "Poisoned enemies cannot Dodge"
   },
   "content.talent.poison.toxic-profit.name": {
     "text": "Toxic Profit"
   },
+  "content.talent.poison.toxic-profit.rule": {
+    "text": "Gain {{value0}} Gold when you defeat a Poisoned enemy",
+    "reference": "Gain 3 Gold when you defeat a Poisoned enemy"
+  },
   "content.talent.poison.toxin-resistance.name": {
     "text": "Toxin Resistance"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "text": "Take half <keyword0>Poison</keyword0> damage",
+    "reference": "Take half Poison damage"
   },
   "content.talent.poison.venom-strike.name": {
     "text": "Venom Strike"
   },
+  "content.talent.poison.venom-strike.rule": {
+    "text": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "reference": "Poison cards have a 10% chance to play twice"
+  },
   "content.talent.poison.virulent.name": {
     "text": "Virulent"
+  },
+  "content.talent.poison.virulent.rule": {
+    "text": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "reference": "Poison has a 10% chance to gain instead of lose a stack"
   },
   "content.talent.stun.concussive-force.name": {
     "text": "Concussive Force"
   },
+  "content.talent.stun.concussive-force.rule": {
+    "text": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "reference": "Enemy Stun threshold is reduced by 10 percentage points"
+  },
   "content.talent.stun.exploit-weakness.name": {
     "text": "Exploit Weakness"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "text": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "reference": "Stunned enemies take double damage"
   },
   "content.talent.stun.extended-stun.name": {
     "text": "Extended Stun"
   },
+  "content.talent.stun.extended-stun.rule": {
+    "text": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "reference": "Stun effects last 1 turn longer"
+  },
   "content.talent.stun.free-follow-up.name": {
     "text": "Free Follow-up"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "text": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "reference": "When you Stun an enemy, your next card is free"
   },
   "content.talent.stun.guarded-counter.name": {
     "text": "Guarded Counter"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "text": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "reference": "Stunning an enemy grants 4 Block if you have none"
+  },
   "content.talent.stun.jarring-blow.name": {
     "text": "Jarring Blow"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "text": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "reference": "Stun cards have a 10% chance to play twice"
   },
   "content.talent.stun.shatter-guard.name": {
     "text": "Shatter Guard"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "text": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "reference": "Stunning an enemy removes all its Armor"
+  },
   "content.talent.stun.stun-insight.name": {
     "text": "Stun Insight"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "text": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "reference": "When you Stun an enemy, draw a card"
   },
   "content.talent.stun.stun-surge.name": {
     "text": "Stun Surge"
   },
+  "content.talent.stun.stun-surge.rule": {
+    "text": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "reference": "If you have no Mana, Stunning an enemy grants 1 Mana"
+  },
   "content.talent.water.cleansing-current.name": {
     "text": "Cleansing Current"
+  },
+  "content.talent.water.cleansing-current.rule": {
+    "text": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to <keyword1>Cleanse</keyword1> {{value1}} harmful effect from you",
+    "reference": "Water hits have a 20% chance to Cleanse 1 harmful effect from you"
   },
   "content.talent.water.erosion.name": {
     "text": "Erosion"
   },
+  "content.talent.water.erosion.rule": {
+    "text": "<keyword0>Water</keyword0> hits remove {{value0}} <keyword1>Armor</keyword1>",
+    "reference": "Water hits remove 2 Armor"
+  },
   "content.talent.water.high-tide.name": {
     "text": "High Tide"
+  },
+  "content.talent.water.high-tide.rule": {
+    "text": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
+    "reference": "Water attacks deal 25% more damage while you have Block"
   },
   "content.talent.water.pressure.name": {
     "text": "Pressure"
   },
+  "content.talent.water.pressure.rule": {
+    "text": "<keyword0>Water</keyword0> attacks deal {{value0}} more damage",
+    "reference": "Water attacks deal 1 more damage"
+  },
   "content.talent.water.riptide.name": {
     "text": "Riptide"
   },
+  "content.talent.water.riptide.rule": {
+    "text": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to draw a <keyword1>Water</keyword1> card",
+    "reference": "Water hits have a 20% chance to draw a Water card"
+  },
   "content.talent.water.seafoam.name": {
     "text": "Seafoam"
+  },
+  "content.talent.water.seafoam.rule": {
+    "text": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
+    "reference": "Water hits grant 2 Block"
   }
 }

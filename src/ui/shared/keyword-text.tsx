@@ -13,9 +13,9 @@ export function Keyword({ id }: { id: KeywordId }) {
 }
 
 /** Labels stay readable without color; definitions remain in the menu Glossary. */
-export function KeywordText({ text }: { text: string }) {
+export function KeywordText({ text, id }: { text: string; id?: string }) {
   const metadata = useEffectMetadata();
-  return useRuleText(text).map((part, index) =>
+  return useRuleText(text, id).map((part, index) =>
     part.keyword ? (
       <span
         key={index}

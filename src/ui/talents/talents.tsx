@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
 import { EffectButton as Button, ShineText } from "../shared/effects/treatments";
@@ -97,6 +98,8 @@ export function Talents({
   openMenu: () => void;
   controls?: Controls;
 }) {
+  const i18n = useMessages();
+  const keywordName = (id: Keyword) => i18n.content(`content.keyword.${id}.label`, keywordLabel(id));
   const [keyword, setKeyword] = useState<Keyword | null>(null);
   const [treeReset, setTreeReset] = useState(0);
   const [purchased, setPurchased] = useState<string | null>(null);
@@ -155,7 +158,11 @@ export function Talents({
       <EffectBaseline palette={keyword ? effectPalette([keyword]) : null} />
       <header className="page-heading talents-heading">
         <ScreenHeading back={keyword ? () => setKeyword(null) : openMenu} openMenu={openMenu}>
-          {keyword ? <ShineText keywords={[keyword]}>{keywordLabel(keyword)}</ShineText> : "Talents"}
+          {keyword ? (
+            <ShineText keywords={[keyword]}>{keywordName(keyword)}</ShineText>
+          ) : (
+            i18n.message("menu.talents", "Talents")
+          )}
         </ScreenHeading>
         {keyword ? (
           <Button
@@ -165,7 +172,7 @@ export function Talents({
               if (send({ type: "resetTalents", keyword })) setTreeReset((value) => value + 1);
             }}
           >
-            Reset {keywordLabel(keyword)} talents
+            {i18n.message("talents.reset", "Reset {{keyword}} talents", { keyword: keywordName(keyword) })}
           </Button>
         ) : null}
       </header>
@@ -181,15 +188,23 @@ export function Talents({
                     artwork={assetUrl(`keyword.${artwork[id]}`)}
                     effectKeywords={[id]}
                     data-talent-keyword={id}
-                    aria-label={`${keywordLabel(id)} talents`}
+                    aria-label={i18n.message("talents.category", "{{keyword}} talents", {
+                      keyword: keywordName(id),
+                    })}
                     aria-describedby={points > 0 ? `${id}-available-points` : undefined}
                     onClick={() => setKeyword(id)}
                   />
                   <h2>
-                    <ShineText keywords={[id]}>{keywordLabel(id)}</ShineText>
+                    <ShineText keywords={[id]}>{keywordName(id)}</ShineText>
                   </h2>
                   <p className="talent-category-points" id={`${id}-available-points`}>
-                    {points > 0 ? `${points} ${points === 1 ? "point" : "points"} available` : null}
+                    {points > 0
+                      ? i18n.plural(
+                          "talents.pointsAvailable",
+                          { one: "{{count}} point available", other: "{{count}} points available" },
+                          points,
+                        )
+                      : null}
                   </p>
                 </section>
               );
@@ -201,24 +216,30 @@ export function Talents({
           <div className="talent-progress-group">
             <div className="talent-progress">
               <span aria-live="polite" aria-atomic="true">
-                {availablePoints(game, keyword)} {availablePoints(game, keyword) === 1 ? "point" : "points"}{" "}
-                available
+                {i18n.plural(
+                  "talents.pointsAvailable",
+                  { one: "{{count}} point available", other: "{{count}} points available" },
+                  availablePoints(game, keyword),
+                )}
               </span>
               <span>
-                {p.current} / {p.required} XP
+                {i18n.message("talents.xpProgress", "{{current}} / {{required}} XP", {
+                  current: p.current,
+                  required: p.required,
+                })}
               </span>
             </div>
             <Progress
               value={p.current}
               maximum={p.required}
-              label={`${keywordLabel(keyword)} XP`}
+              label={i18n.message("talents.keywordXp", "{{keyword}} XP", { keyword: keywordName(keyword) })}
               tone={keyword}
             />
           </div>
           <PagedItems
             key={`${keyword}:${treeReset}`}
             className="talent-tree"
-            label="Talent pages"
+            label={i18n.message("talents.pages", "Talent pages")}
             pageSize={1}
             adaptive={{ columns: 1, rows: 3 }}
             items={[
@@ -226,8 +247,18 @@ export function Talents({
             ]}
           >
             {(row) => (
-              <div className="talent-row" key={row} data-nav-row aria-label={`Row ${row + 1}`}>
+              <div
+                className="talent-row"
+                key={row}
+                data-nav-row
+                aria-label={i18n.message("talents.row", "Row {{row}}", { row: row + 1 })}
+              >
                 {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
+                  const talentName = i18n.content(`content.talent.${t.id}.name`, t.name);
+                  const categoryName = i18n.content(
+                    `content.keyword.${keyword}.label`,
+                    keywordLabel(keyword),
+                  );
                   const TalentSymbol = talentSymbols[t.id]!;
                   const owned = game.talents.includes(t.id),
                     available = canBuyTalent(game, t.id);
@@ -235,14 +266,17 @@ export function Talents({
                     (talent) => talent.keyword === keyword && talent.row < t.row,
                   ).every((talent) => game.talents.includes(talent.id));
                   const status = owned
-                    ? "Unlocked"
+                    ? i18n.message("talents.unlocked", "Unlocked")
                     : available
-                      ? "Unlock · 1 point"
+                      ? i18n.message("talents.unlockOne", "Unlock · 1 point")
                       : !earlierRowsOwned
                         ? availablePoints(game, keyword) > 0
-                          ? "Requires all earlier rows"
-                          : "Requires 1 point and all earlier rows"
-                        : "Requires 1 point";
+                          ? i18n.message("talents.requiresRows", "Requires all earlier rows")
+                          : i18n.message(
+                              "talents.requiresPointAndRows",
+                              "Requires 1 point and all earlier rows",
+                            )
+                        : i18n.message("talents.requiresPoint", "Requires 1 point");
                   return (
                     <Tooltip key={t.id}>
                       <TooltipTrigger asChild>
@@ -250,7 +284,13 @@ export function Talents({
                           effectKeywords={[keyword]}
                           variant="outline"
                           className="talent-node"
-                          aria-label={`${t.name}${owned ? ", unlocked" : ""}`}
+                          aria-label={
+                            owned
+                              ? i18n.message("talents.unlockedName", "{{name}}, unlocked", {
+                                  name: talentName,
+                                })
+                              : talentName
+                          }
                           aria-disabled={!available}
                           aria-describedby={`${t.id}-effect ${t.id}-status`}
                           data-owned={owned}
@@ -266,11 +306,11 @@ export function Talents({
                               <TalentSymbol className="talent-icon" aria-hidden="true" />
                             </span>
                             <span className="talent-name">
-                              <ShineText keywords={[keyword]}>{t.name}</ShineText>
+                              <ShineText keywords={[keyword]}>{talentName}</ShineText>
                             </span>
                           </span>
                           <span className="talent-effect" id={`${t.id}-effect`}>
-                            <KeywordText text={t.text} />
+                            <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
                           </span>
                           <span className="talent-status" id={`${t.id}-status`}>
                             {status}
@@ -279,10 +319,13 @@ export function Talents({
                       </TooltipTrigger>
                       <TooltipContent>
                         <strong>
-                          {keywordLabel(keyword)} · {t.name}
+                          {i18n.message("talents.detailTitle", "{{keyword}} · {{name}}", {
+                            keyword: categoryName,
+                            name: talentName,
+                          })}
                         </strong>
                         <p>
-                          <KeywordText text={t.text} />
+                          <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
                         </p>
                         <p>{status}</p>
                       </TooltipContent>

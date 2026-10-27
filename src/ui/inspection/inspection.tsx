@@ -198,7 +198,10 @@ export function Inspector({
                   ))}
                 </span>
                 <p>
-                  <KeywordText text={passive.description} />
+                  <KeywordText
+                    text={passive.description}
+                    id={`content.species.${kind}.passive.${passive.rank}.rule`}
+                  />
                 </p>
               </section>
             </>
