@@ -1,10 +1,39 @@
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { produce } from "immer";
 import { describe, expect, expectTypeOf, it } from "vitest";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { journeyBaselinePlays } from "./fixtures/journey-baseline-plays";
 import type { BattleState, Command, GameState, RewardState } from "../../../src/game/types";
+
+// Preserve undefined separately from missing keys, while making one trace step readable per line.
+function traceLine(value: unknown): string {
+  const canonical = (entry: unknown): unknown =>
+    entry === undefined
+      ? { $undefined: true }
+      : Array.isArray(entry)
+        ? entry.map(canonical)
+        : entry && typeof entry === "object"
+          ? Object.fromEntries(
+              Object.entries(entry)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([key, item]) => [key, canonical(item)]),
+            )
+          : entry;
+  return JSON.stringify(canonical(value));
+}
+
+// The captured commands and expected states have one owner, independent of later policy revisions.
+const baselines = new Map<number, string[]>();
+for (const line of readFileSync(new URL("./fixtures/journey-baseline.tsv", import.meta.url), "utf8")
+  .trimEnd()
+  .split("\n")) {
+  const separator = line.indexOf("\t");
+  const seed = Number(line.slice(0, separator));
+  const entries = baselines.get(seed) ?? [];
+  entries.push(line.slice(separator + 1));
+  baselines.set(seed, entries);
+}
 
 // Compare gameplay, RNG and ordered output across the current journey rules.
 function fingerprint(state: GameState, events: unknown) {
@@ -66,6 +95,28 @@ describe("journey lifecycle behavior baseline", () => {
   it.each([3, 10, 98])("preserves seeded commands and outputs for seed %s", (seed) => {
     let state = createGame(seed);
     const trace: unknown[] = [];
+    const baseline = baselines.get(seed)!;
+    const plays = baseline.flatMap((line) => {
+      const [command] = JSON.parse(line) as [
+        | {
+            type?: string;
+            cardId?: string;
+            targetId?: string | { $undefined: true };
+            autoEndTurn?: boolean;
+          }
+        | string,
+      ];
+      return typeof command === "object" && command.type === "play"
+        ? [
+            {
+              ...command,
+              type: "play" as const,
+              cardId: command.cardId!,
+              targetId: typeof command.targetId === "string" ? command.targetId : undefined,
+            },
+          ]
+        : [];
+    });
     const step = (command: Command, development = false) => {
       const before = state;
       const result = dispatch(state, command, development);
@@ -92,7 +143,7 @@ describe("journey lifecycle behavior baseline", () => {
       if (state.expedition?.recruit && state.team.length + state.reserves.length < 5)
         step({ type: "recruitDestination", species: state.expedition.recruit });
       step({ type: "beginBattle" });
-      const command = journeyBaselinePlays[seed]![room];
+      const command = plays[room];
       if (command) {
         const preview = previewCard(state, command.cardId, command.targetId);
         expect(state).toEqual(decodeSave(encodeSave(state)));
@@ -125,7 +176,7 @@ describe("journey lifecycle behavior baseline", () => {
     step({ type: "draft", species: state.starterOffers[0]! });
     step({ type: "start" });
     step({ type: "abandon" });
-    expect(trace).toMatchSnapshot();
+    expect(trace.map(traceLine)).toEqual(baseline);
   });
 });
 
