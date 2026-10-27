@@ -143,6 +143,108 @@
     "sourceHash": "604f98d5003ba57802913ccf3818130cf31f74ece361d04e556883ced4dcb799",
     "text": "取消"
   },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "a7fe733fbfc3e5d01e620a649ef9a19ecb5f8f2ecc6ee7890c3b38edbcd4a729",
+    "text": "白骨护符"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "492f12f8aa76b4a76af38235126a4e7349ad9ae684e6cfe0c4bff83e7277f316",
+    "text": "黄铜香炉"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "11cb573923027cdc4262e4a1db262b8143a508cf23cd25d40d992db3a1f529ac",
+    "text": "扒手小刀"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "be6bcb633f8c9ff572f4e1ed65130d1c66a3b1757629ee28832c0e2063847231",
+    "text": "林地的恩惠"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "2fc38d7865994f4656ff35661281e2999b351201eb5e0a78bff6232cefcba83c",
+    "text": "冰冷之心"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "11f14440f6a7888fd5d98c219eaf2c855561af803d66a8727e9713ab2f458044",
+    "text": "铁木圆盾"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "685118dfe6eb247126e2ad465c902a8625a581aa4abd0923f9e359152dea7026",
+    "text": "幸运三叶草"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "4323e0e6d9576ee1d8b1cef1fb25994e82b3eed7336dd3c80a711451cfc72597",
+    "text": "商人的恩惠"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "4aae5d837f0925ccef875cddf1ebcc301a9cc6f7a5615cc14fa0facfcd61ab36",
+    "text": "陨石"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "7892ed624e30bc6c414517013ef22ce2c01f83a4ab6b7296a626f2e53f84958c",
+    "text": "寄生之花"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "38ad6125abf904d87538aedf8e368f0c0b18e3243a580525b3efbd764ca33296",
+    "text": "瘟疫医生面具"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "cd8b9cebdd78583aeb659abe188ffbcb83264552350e62e983e869b3b34fd6b3",
+    "text": "共鸣风铃"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "bc3fb4d354edd090827fb8b2623df93d39fe405fb421b7b81dbccdf83a3ae3ff",
+    "text": "噬罪者灯笼"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "343a80e57e42db45935e797c9c04d2e299b37d75017071b365f424f94e55c2f4",
+    "text": "走私者地图"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "b46fe72f2695250349ae3452ce721da28e3595059b1655bca42fc219b7b0db59",
+    "text": "破旧书页"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "2d33b89e873cfddc229e0448f75c3165f79fac6e33835018e64721946dd2d44f",
+    "text": "雷霆石"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "d42f3575fd44a7df9d2e48570f725880d17760077b1f195274f2451545b52594",
+    "text": "苹果"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",

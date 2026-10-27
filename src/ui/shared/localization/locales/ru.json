@@ -143,6 +143,108 @@
     "sourceHash": "119e3a2c89e05b14e64af902b0d574a628e4b5db14a1a4175a9cbb1608a5513b",
     "text": "Отмена"
   },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "83707414887d63cb04879b6f1d5148b973a47cead646245c5e1b2fe5bf5650dd",
+    "text": "Костяной оберег"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "c064fc4cc4f723be380f1337f6cec221da0c405ec37e9a46c296fef4debbd42b",
+    "text": "Латунное кадило"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "b246efade40a55a10c180028b6446de3b072a30b8dc85452fb24f299d5fd2dcb",
+    "text": "Нож карманника"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "6fbbecd932a54ee1214b395b4759bc9af23cf71b6cdf7a2506fb3142fd72d122",
+    "text": "Милость рощи"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "1c8af3db6b273e1657667e6d95559506d0afc85dd2191902acb86d1bdcba9a09",
+    "text": "Ледяное сердце"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "6f2a546351b90cd85671a35a015faaeaa780318f2134489b086761c76dd11fb4",
+    "text": "Баклер из железного дерева"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "c5692441990909fb1d67f29164b017865a833343fa5ba530a2bb0d973167003e",
+    "text": "Счастливый клевер"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "68a297b987aa3a296ea7e29d9605a2b7e1e1ba4dfaa60f01a3fdf20f31d4267c",
+    "text": "Милость торговца"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "e6ec02f602d1380079a33e5c971fd08b95e5942add499e98eb698a18bc313ad5",
+    "text": "Метеорит"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "1626ca5f547c46790084e5d7a7027d8db0b22f062170f1ca094283b3e7f0de97",
+    "text": "Паразитический цветок"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "8034ee88abdf800612354c2233fdcd68703078f0b22311f072d04b82753a4ac3",
+    "text": "Маска чумного доктора"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "bb6665f9f812972f4fa443083d933359568eb7ae57fa32b5542b12fe50060e6e",
+    "text": "Резонирующие колокольчики"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "5331bbd3a45c3f50a7b07b737a908edbe155eb8fcb8113defa1ba917e3b7f06e",
+    "text": "Фонарь пожирателя грехов"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "9266620094bd37be2aaf228115d8e28b13248945bad1fecffc71d708da7fcc43",
+    "text": "Карта контрабандиста"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "3d8b6099479a044623315627feb327fed905c4409f3d2bbb060fb065e473844c",
+    "text": "Ветхие страницы"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "b0890f6fdeaf37521864d749af5b59a14e7f308777f0cd337fdbfb0d92a9cfda",
+    "text": "Громовой камень"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "8459bdb09e855f874fb499cafaae6f1937baf45b9a96a7f12cfed8bb00d73aa2",
+    "text": "Яблоко"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",

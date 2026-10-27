@@ -311,6 +311,30 @@
     "sourceHash": "631deaf094930aa27ff537b4dd6ed48c1238c15e13027714202cc4a15244aa7b",
     "text": "Les attaques répétées ne peuvent pas être <keyword0>esquivées</keyword0>"
   },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "917673c873a1d3cf60ff683fcceef36592335b3cae86cfa44e6ad5432ef28efc",
+    "text": "Charme d'os"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "0b572366da476a1ef71d0a44a7f714e96f1e97a39b64c0d0318aaae24c87507f",
+    "text": "Encensoir de laiton"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "c25e943d61f52562ae2c56c923a91faf6fa10da393e46f1593361d09912b23cd",
+    "text": "Couteau de coupe-bourse"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "ec08b49f6fd217c849ac981652e07c2ef902a771efed7791df7cdca06f9f655d",
+    "text": "Faveur du bosquet"
+  },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
     "source": "Herbarium Press",
@@ -322,6 +346,36 @@
     "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
     "sourceHash": "f107c022700bf9e64f3473a0c575f1aa642e520d2a930d61a4bfae053c3f1192",
     "text": "Le <keyword0>Poison</keyword0> des ennemis <keyword2>gelés</keyword2> ne peut pas être <keyword1>purifié</keyword1>"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "bfb201d3fb6b4a42c27ab45bb0258ddff2c39b2f9bd35836b720a3192adaad73",
+    "text": "Cœur glacé"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "b5a3d26ec576f5662ea43544d2ceb44065f99cd343aeee3ad93c8aca6717a78d",
+    "text": "Rondache de bois de fer"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "2320dc206123fc0e4f9a632c5bbfbe159be004acfc554ff2dc5d58e47bbbc628",
+    "text": "Trèfle porte-bonheur"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "821c79a09329013db4257a4432c85003497bc05a27b63c2fc337bc5e31fce79c",
+    "text": "Faveur du marchand"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "322c0d5d9d96ed98bf0cade4b70a33e19d8a874d58e0cd99f0a3e93bb79402d9",
+    "text": "Météorite"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -335,6 +389,24 @@
     "sourceHash": "0191ce0358ac6e595036410d4df17b5852f1ff7d2efe385cc1b16d610dac167c",
     "text": "<keyword0>Purification</keyword0> affecte tous les alliés"
   },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "8a102a835308043172e229afe742c33d30c7206fe37a9525b52a8e48edd30a82",
+    "text": "Fleur parasite"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "2d6fdf1ef7f2a8eb46c8d80b11280e585c07afbef5876fa6caec28035960fd9e",
+    "text": "Masque du médecin de peste"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "58b8df06a0d25952cd39e08615aba599016a98f9696c5c521ad8360688f2a723",
+    "text": "Carillons résonnants"
+  },
   "content.boon.rook-of-mercy.name": {
     "reviewed": true,
     "source": "Rook of Mercy",
@@ -346,6 +418,36 @@
     "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
     "sourceHash": "690a3d69ce9c0470f7db402edc1e09d5289ce4c6a43e541f23b83377c7db358a",
     "text": "Les alliés qui entrent gagnent {{value0}} en <keyword0>Armure</keyword0>"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "83bc688105f99364c81cc06a139abd89ff5e90b493da8b56d463b790776df9cc",
+    "text": "Lanterne du mangeur de péchés"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "6c46ca03b984a10fe45cab0fcd444cd8d0e8b94b6e90e03dad464b5918ebbc72",
+    "text": "Carte du contrebandier"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "9236923ba5717a10381adb85cd30758080b2eb29e4a37b8059c0f95f00f4d054",
+    "text": "Pages déchirées"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "e75e58fea7c74c42395d86a9f2c1307dacedb73ef63e3c16604513b7bd3772f5",
+    "text": "Pierre de tonnerre"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "f4a85c47e34b003a1a9273be3ef10fcda1eb323ae34604fca8d88c9837023fe3",
+    "text": "Pomme"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

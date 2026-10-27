@@ -143,6 +143,108 @@
     "sourceHash": "e1457ed1e2bf91a58fef5969d4d92ee1114d30375c35fcbd660affc5f4d92f91",
     "text": "Cancelar"
   },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "75ac8c6093ade4f69588d7fb742516b49dab71b3a7ea6e55e98727bd1b7e22b9",
+    "text": "Talismán de hueso"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "bf3fe178f2945982b5e674768496f7675205c329c05aeab1a790bfd618e00a3d",
+    "text": "Incensario de latón"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "35b9250db04cffee30d035952783df584bb75ab6421328fd0161ce7c6527690b",
+    "text": "Cuchillo de ratero"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "92eb3f6540556d9da5612e1cbb93e7b75ea6ffa131db067f10d36111e24c91f5",
+    "text": "Favor de la arboleda"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "8c05c89ca4be3653c32752e1c8e0228466e92597505380b46ea07ae48d494945",
+    "text": "Corazón helado"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "d6ef245cd33fd963592779e9d2dcd6b19a0e45bad8a7c974478c0f3d3caceb28",
+    "text": "Broquel de madera férrea"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "480b3c199cb880b57222f731c492b5d538d11315801647f7042a78f4d081f29d",
+    "text": "Trébol de la suerte"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "a4d44a0ab0938a6bafb74dd3eb1ba5b5724cf5cd3fc33c87b935eea4b9648106",
+    "text": "Favor del mercader"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "20474e1de926ee94bcb2400da3945f50049c3808938b8299e11fcd2452b511e3",
+    "text": "Meteorito"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "3503b8705b23bbdc2aad0d6bc3e88bf0bdab424817bd8576a5eef2c1e685d63a",
+    "text": "Flor parasitaria"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "04e72e3b3479810b4e92eceb933ec355efc2d9a3e2c894c5b0caa8833d9a84d2",
+    "text": "Máscara del médico de la peste"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "292260b88904b0c7663abc93f11e5eead20123edd1790766909d2cdea96150fa",
+    "text": "Campanillas resonantes"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "6a4d6adfd940bcbc42a3956f807bbc13cb0a0518027b4a2cae6dd05721bf5d07",
+    "text": "Farol del devorador de pecados"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "b47b4438a32028f8f553108966a037f3934954982437c49925cc4bf5350b029c",
+    "text": "Mapa del contrabandista"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "2f236db2ab2984e50a1c5f8b8eb0f4dd2393698c5a325d88cc27b0f64504b447",
+    "text": "Páginas raídas"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "dc463ecee47bb2c8f9da819d6894e75cd86226dc7779ca5cc1a18f8a374b4a73",
+    "text": "Piedra del trueno"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "9f79dc998e21a41d6af853d17b7f3e9b91cc04b2190e74641c607bfd46c7c39c",
+    "text": "Manzana"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",

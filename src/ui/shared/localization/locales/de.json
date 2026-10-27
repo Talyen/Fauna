@@ -143,6 +143,108 @@
     "sourceHash": "fd09ad73d233655e6f78a51e5806c5140c35e6047b504ee6cbe805f41de842a9",
     "text": "Abbrechen"
   },
+  "content.boon.bone-charm.name": {
+    "reviewed": true,
+    "source": "Bone Charm",
+    "sourceHash": "86493f1d983c07bd271fa95e5bbe359ef315eff5b34c102d712c168982979f5f",
+    "text": "Knochenamulett"
+  },
+  "content.boon.brass-censer.name": {
+    "reviewed": true,
+    "source": "Brass Censer",
+    "sourceHash": "27b172b8743ca9ae484da58a07637eccdff8495b1479bb20b52162256c89e33d",
+    "text": "Messingrauchfass"
+  },
+  "content.boon.cutpurse-knife.name": {
+    "reviewed": true,
+    "source": "Cutpurse Knife",
+    "sourceHash": "5cf26d170aa98cdb4926be7bcedfa40cfb5fc539f0cb9c3807b76b2645ade535",
+    "text": "Beutelschneidermesser"
+  },
+  "content.boon.groves-favor.name": {
+    "reviewed": true,
+    "source": "Grove's Favor",
+    "sourceHash": "306550399bba5f790e282e7f4aa0663c92715764c6d325bdb2c48ea4aee58abf",
+    "text": "Gunst des Hains"
+  },
+  "content.boon.icy-heart.name": {
+    "reviewed": true,
+    "source": "Icy Heart",
+    "sourceHash": "e3634a5ce932eded36128cc6ed8a0650c23e8435c548ed145d6330e9136ec36d",
+    "text": "Eisiges Herz"
+  },
+  "content.boon.ironwood-buckler.name": {
+    "reviewed": true,
+    "source": "Ironwood Buckler",
+    "sourceHash": "3db174f5b4acfb4750075bd173891f3787f963bf8ff7ef28bddf1cf245e27232",
+    "text": "Eisenholzfaustschild"
+  },
+  "content.boon.lucky-clover.name": {
+    "reviewed": true,
+    "source": "Lucky Clover",
+    "sourceHash": "ebb44ee6e8c131a1343b82a3a8e5a17c471b5807284a922721b2769ae1905025",
+    "text": "Glücksklee"
+  },
+  "content.boon.merchants-favor.name": {
+    "reviewed": true,
+    "source": "Merchant's Favor",
+    "sourceHash": "2db9ad8d8ffc6721001ea16b16c1fe699ea61e9dd5534926bb101c7cab33403a",
+    "text": "Gunst des Händlers"
+  },
+  "content.boon.meteorite.name": {
+    "reviewed": true,
+    "source": "Meteorite",
+    "sourceHash": "3b95ee5e51821484b2aa8fec425eb9e6ad84080ddb534e0df027d04de5c4f874",
+    "text": "Meteorit"
+  },
+  "content.boon.parasitic-bloom.name": {
+    "reviewed": true,
+    "source": "Parasitic Bloom",
+    "sourceHash": "5b94434efee46920a756f5aef516ffd7993ef4c7ad16c58f1671636838e17735",
+    "text": "Parasitäre Blüte"
+  },
+  "content.boon.plague-doctors-mask.name": {
+    "reviewed": true,
+    "source": "Plague Doctor's Mask",
+    "sourceHash": "f230babf765104b422f3594117d8c455f8422f6a72dcd0962cdf0a4da8f39bb0",
+    "text": "Pestdoktormaske"
+  },
+  "content.boon.resonant-chimes.name": {
+    "reviewed": true,
+    "source": "Resonant Chimes",
+    "sourceHash": "e1851be702888ab78a489ccfcf902804a56e96deb9904209ca071653d85c6071",
+    "text": "Resonanzglocken"
+  },
+  "content.boon.sin-eaters-lantern.name": {
+    "reviewed": true,
+    "source": "Sin-Eater's Lantern",
+    "sourceHash": "390d4ebdaa3c17d81bfbd8c242cf982926760dc07e4ef77c4cc52eb7b9a34003",
+    "text": "Laterne des Sündenfressers"
+  },
+  "content.boon.smugglers-map.name": {
+    "reviewed": true,
+    "source": "Smuggler's Map",
+    "sourceHash": "3207af59d62a297d1f6f5fa00dd924b0c8f1eb3cbde692e419c96ad0bb25f6a6",
+    "text": "Schmugglerkarte"
+  },
+  "content.boon.tattered-pages.name": {
+    "reviewed": true,
+    "source": "Tattered Pages",
+    "sourceHash": "6f8418837e98173a1718e72c8db57cfaa9b684a7129b9276ad63baf0822c49e3",
+    "text": "Zerrissene Seiten"
+  },
+  "content.boon.thunderstone.name": {
+    "reviewed": true,
+    "source": "Thunderstone",
+    "sourceHash": "ea8f2c71542762eb6644d3df9c6ff1646f844da29c4816e82317984ada005b49",
+    "text": "Donnerstein"
+  },
+  "content.card.food-apple.name": {
+    "reviewed": true,
+    "source": "Apple",
+    "sourceHash": "77ca6c755cbf37658939fa37108c278aa20e4388ccdd840a64971119b5598b69",
+    "text": "Apfel"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",
