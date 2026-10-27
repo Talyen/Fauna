@@ -3137,6 +3137,12 @@
     "sourceHash": "ac04c50e0c483bf0047c097f34b494d905ec62f31637bb2943f624f844dabdb1",
     "text": "Drenaje bendito"
   },
+  "content.talent.light.blessed-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage: <keyword1>Leech</keyword1> below half <keyword2>Health</keyword2>",
+    "sourceHash": "a3a41fe8a5e7a8cb5eaea8cbcc605e2c0d7050e0ce89ff34cfbbc32357f33948",
+    "text": "Daño de <keyword0>Luz</keyword0>: <keyword1>Drenaje</keyword1> por debajo de la mitad de tu <keyword2>Salud</keyword2>"
+  },
   "content.talent.light.celestial-ward.name": {
     "reviewed": true,
     "source": "Celestial Ward",
@@ -3167,11 +3173,23 @@
     "sourceHash": "405971fc82950d6b82a3f809dbc55adfdc6af48cd6cd0be17c5bf4749fe9febb",
     "text": "Barrera de fe"
   },
+  "content.talent.light.faith-barrier.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to grant <keyword1>Block</keyword1> equal to enemy <keyword2>Health</keyword2> lost",
+    "sourceHash": "1724c720c87c9ad164f1dd4bd0da2b87ecd7b44a2fc4649f0c3f9596fa5cb617",
+    "text": "Los impactos de <keyword0>Luz</keyword0> tienen un {{value0}}% de probabilidad de otorgar <keyword1>Bloqueo</keyword1> igual a la <keyword2>Salud</keyword2> perdida por el enemigo"
+  },
   "content.talent.light.prosperity.name": {
     "reviewed": true,
     "source": "Prosperity",
     "sourceHash": "c44f71093cc710f09a05231b7a7a9c81d2383e77854ca205fa1909e787595182",
     "text": "Prosperidad"
+  },
+  "content.talent.light.prosperity.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your Gold",
+    "sourceHash": "1670f1162be38e7a5c0e823010ee14b7a2a76991e300c1d9a519b93ed2c80931",
+    "text": "El daño de <keyword0>Luz</keyword0> aumenta en un {{value0}}% de tu Oro"
   },
   "content.talent.light.purge.name": {
     "reviewed": true,
@@ -3191,6 +3209,12 @@
     "sourceHash": "c672dd54c8b5e13dafd836ca7097481e0476fd91fae92441afa75d93d4adb8d4",
     "text": "Guardia radiante"
   },
+  "content.talent.light.radiant-guard.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Block</keyword0> has a {{value0}}% chance to draw a <keyword1>Light</keyword1> card",
+    "sourceHash": "b667bebbb5278b29737fdc12760631ec3c0b69382f9aaa5bcb68b381d9547303",
+    "text": "Obtener <keyword0>Bloqueo</keyword0> tiene un {{value0}}% de probabilidad de robar una carta de <keyword1>Luz</keyword1>"
+  },
   "content.talent.light.scorching-light.name": {
     "reviewed": true,
     "source": "Scorching Light",
@@ -3208,6 +3232,12 @@
     "source": "Tithe",
     "sourceHash": "6e9a7cd762302c6a1c1fc5d14b3a1e960be5cbc8c43fe904fb2ba59940b8e0ea",
     "text": "Diezmo"
+  },
+  "content.talent.light.tithe.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "4a69c95336d3951ecabd4d44e181479c73787e838e9bf245cdeb02987d97fd63",
+    "text": "El daño de <keyword0>Luz</keyword0> tiene un {{value0}}% de probabilidad de otorgar Oro igual a la <keyword1>Salud</keyword1> perdida por el enemigo"
   },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,

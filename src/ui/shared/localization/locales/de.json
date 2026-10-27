@@ -3137,6 +3137,12 @@
     "sourceHash": "bcecf42fd77ab7333de7e18109cfd731bba8761e8e0a492d5573ca3edbabbae0",
     "text": "Gesegneter Lebensraub"
   },
+  "content.talent.light.blessed-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage: <keyword1>Leech</keyword1> below half <keyword2>Health</keyword2>",
+    "sourceHash": "a83f250d45045098fdc320af1cd92ed1c919447c88db664072912262411c6164",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0>: <keyword1>Lebensraub</keyword1> unter halber <keyword2>Gesundheit</keyword2>"
+  },
   "content.talent.light.celestial-ward.name": {
     "reviewed": true,
     "source": "Celestial Ward",
@@ -3167,11 +3173,23 @@
     "sourceHash": "c4b8f861422cb1c4cf4371caec560b77aa5d349688e42bc78114295057a94d3d",
     "text": "Glaubensbarriere"
   },
+  "content.talent.light.faith-barrier.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to grant <keyword1>Block</keyword1> equal to enemy <keyword2>Health</keyword2> lost",
+    "sourceHash": "c365a82ced60117d6cbb9c6ca74cba12d867f64f906c9b80a048ae7131f98e95",
+    "text": "<keyword0>Licht</keyword0>-Treffer haben eine Chance von {{value0}}%, <keyword1>Block</keyword1> in Höhe der verlorenen gegnerischen <keyword2>Gesundheit</keyword2> zu gewähren"
+  },
   "content.talent.light.prosperity.name": {
     "reviewed": true,
     "source": "Prosperity",
     "sourceHash": "1764d2351b232f588f04f583f894e3af80f1eabc544106348acb19be3465990a",
     "text": "Wohlstand"
+  },
+  "content.talent.light.prosperity.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your Gold",
+    "sourceHash": "c6565138fc8e1be770f42480bbe53b4885b845f5cd8c2db55683981c1038dd13",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> steigt um {{value0}}% deines Goldes"
   },
   "content.talent.light.purge.name": {
     "reviewed": true,
@@ -3191,6 +3209,12 @@
     "sourceHash": "be5b9f384aacbfdf7f2f49c881d947eaa25fe022b0e848c055311ce61735e823",
     "text": "Strahlender Schutz"
   },
+  "content.talent.light.radiant-guard.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Block</keyword0> has a {{value0}}% chance to draw a <keyword1>Light</keyword1> card",
+    "sourceHash": "7bbaa1a004ee889e9878e6c134e8d14b17d061c2bcc6e333bc4afdbf729f6094",
+    "text": "Beim Erhalt von <keyword0>Block</keyword0> besteht eine Chance von {{value0}}%, eine <keyword1>Licht</keyword1>-Karte zu ziehen"
+  },
   "content.talent.light.scorching-light.name": {
     "reviewed": true,
     "source": "Scorching Light",
@@ -3208,6 +3232,12 @@
     "source": "Tithe",
     "sourceHash": "93ab3143fcbd1716bdad5a66796474c65240fadef3b52d5b94be78ae60ebbf62",
     "text": "Zehnt"
+  },
+  "content.talent.light.tithe.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "7f71b65fc55ebe3dfda49e95b80a0344e2db0c274c8172251d080b5b8043be5b",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> hat eine Chance von {{value0}}%, Gold in Höhe der verlorenen gegnerischen <keyword1>Gesundheit</keyword1> zu gewähren"
   },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,

@@ -3137,6 +3137,12 @@
     "sourceHash": "4a7b98f3b85d25f81b8d022e2711a3706718cc4b4780c0b7da10d992f2908f37",
     "text": "祝福汲取"
   },
+  "content.talent.light.blessed-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage: <keyword1>Leech</keyword1> below half <keyword2>Health</keyword2>",
+    "sourceHash": "188f7c54cb8d1ce2ce8eda3b0c7e78fca0624415bd8a023864121c7d26803d48",
+    "text": "自身<keyword2>生命</keyword2>低于一半时，<keyword0>光</keyword0>伤害触发<keyword1>汲取</keyword1>"
+  },
   "content.talent.light.celestial-ward.name": {
     "reviewed": true,
     "source": "Celestial Ward",
@@ -3167,11 +3173,23 @@
     "sourceHash": "38f813ec60aef46dd5ed46b53a2cc971ca3c684a93b1949b2a524d4ae7dcbcce",
     "text": "信仰屏障"
   },
+  "content.talent.light.faith-barrier.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to grant <keyword1>Block</keyword1> equal to enemy <keyword2>Health</keyword2> lost",
+    "sourceHash": "717aa2123e7b80d4b0adfc59651ae0dd0719a8d86915f3ed832df43a5c4ec8ad",
+    "text": "<keyword0>光</keyword0>命中时有{{value0}}%的概率获得等同于敌人损失的<keyword2>生命</keyword2>的<keyword1>格挡</keyword1>"
+  },
   "content.talent.light.prosperity.name": {
     "reviewed": true,
     "source": "Prosperity",
     "sourceHash": "748dc1620fd2d84a21ae7b95926dd4c723e221e308ee08afdbb66ce210d2f475",
     "text": "昌盛"
+  },
+  "content.talent.light.prosperity.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your Gold",
+    "sourceHash": "6d3d569edefe3033af4619e53c0b01e0ab4da559a70ec57dffa49575ee619149",
+    "text": "<keyword0>光</keyword0>伤害提高当前金币的{{value0}}%"
   },
   "content.talent.light.purge.name": {
     "reviewed": true,
@@ -3191,6 +3209,12 @@
     "sourceHash": "686dc494fda1c7211284b161e84a1d5cdaa5ad1dc527faf44e3fdf5c41f07667",
     "text": "光辉守卫"
   },
+  "content.talent.light.radiant-guard.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Block</keyword0> has a {{value0}}% chance to draw a <keyword1>Light</keyword1> card",
+    "sourceHash": "85dc1ea15072c709177127f377df6fed6d6491371d1583e3db4a70fa30ad7bc8",
+    "text": "获得<keyword0>格挡</keyword0>时有{{value0}}%的概率抽一张<keyword1>光</keyword1>牌"
+  },
   "content.talent.light.scorching-light.name": {
     "reviewed": true,
     "source": "Scorching Light",
@@ -3208,6 +3232,12 @@
     "source": "Tithe",
     "sourceHash": "e81c60f356c9d1e1f3b12a5c7eaa1d4a14b69ca66232c764cdbf970d0a885b35",
     "text": "什一税"
+  },
+  "content.talent.light.tithe.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "880f10b16c1204e07b5825f0ee0e9131052db419c2c7092f13e9421d41280e38",
+    "text": "<keyword0>光</keyword0>伤害有{{value0}}%的概率获得等同于敌人损失的<keyword1>生命</keyword1>的金币"
   },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,

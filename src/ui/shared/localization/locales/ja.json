@@ -3137,6 +3137,12 @@
     "sourceHash": "29d89987cc6708fac4911372df15cd4fb755e3deeef3550db1d5b0a63160b010",
     "text": "祝福の吸血"
   },
+  "content.talent.light.blessed-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage: <keyword1>Leech</keyword1> below half <keyword2>Health</keyword2>",
+    "sourceHash": "628ec4f07da8b948671ed4c42ab9be636efae222d018ecbe38c5fac7001725ea",
+    "text": "自身の<keyword2>体力</keyword2>が半分未満なら、<keyword0>光</keyword0>ダメージに<keyword1>吸血</keyword1>が発生"
+  },
   "content.talent.light.celestial-ward.name": {
     "reviewed": true,
     "source": "Celestial Ward",
@@ -3167,11 +3173,23 @@
     "sourceHash": "eb6597e0012332b16dd9fe1f2b1682e8dfdb1814323d88b7c0991aa9147507fa",
     "text": "信仰の障壁"
   },
+  "content.talent.light.faith-barrier.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to grant <keyword1>Block</keyword1> equal to enemy <keyword2>Health</keyword2> lost",
+    "sourceHash": "ae1ee118fc69a46aa4254a2889c5d161d4c0aa6d9e2041ca30890de780ee5d11",
+    "text": "<keyword0>光</keyword0>の命中時に{{value0}}%の確率で、敵が失った<keyword2>体力</keyword2>と同量の<keyword1>ブロック</keyword1>を獲得"
+  },
   "content.talent.light.prosperity.name": {
     "reviewed": true,
     "source": "Prosperity",
     "sourceHash": "1aae1f556c078a7dba33049eec31d3757fc4be030eddbaa492611761bf08d3d5",
     "text": "繁栄"
+  },
+  "content.talent.light.prosperity.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your Gold",
+    "sourceHash": "8a37b63adb85aeb3f25f537d2d70aa0a8e8ac26768592457c6114293c5e0dcc2",
+    "text": "<keyword0>光</keyword0>ダメージが所持ゴールドの{{value0}}%分増加"
   },
   "content.talent.light.purge.name": {
     "reviewed": true,
@@ -3191,6 +3209,12 @@
     "sourceHash": "826128cdfd3c3f4a1544f06cb74dca330d844b6df763cc1fd5b4e8331ca0dbb4",
     "text": "光輝の守り"
   },
+  "content.talent.light.radiant-guard.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Block</keyword0> has a {{value0}}% chance to draw a <keyword1>Light</keyword1> card",
+    "sourceHash": "ca4deb776aa25565371743426e14914a36c3916ebd55d19c998e93528a1f753c",
+    "text": "<keyword0>ブロック</keyword0>獲得時に{{value0}}%の確率で<keyword1>光</keyword1>カードを1枚引く"
+  },
   "content.talent.light.scorching-light.name": {
     "reviewed": true,
     "source": "Scorching Light",
@@ -3208,6 +3232,12 @@
     "source": "Tithe",
     "sourceHash": "3d65b08d32776f2a4e0a49a3da42330f19526cae28939e3fd3a8697002e5a04f",
     "text": "十分の一税"
+  },
+  "content.talent.light.tithe.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "74ba0a14cd8d5199c3f04fe94b0dd1c90f76ef1757282c5e1cbd0a95c720980a",
+    "text": "<keyword0>光</keyword0>ダメージは{{value0}}%の確率で、敵が失った<keyword1>体力</keyword1>と同量のゴールドを獲得"
   },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
