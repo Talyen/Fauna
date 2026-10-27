@@ -35,6 +35,9 @@ import { settle, intents } from "../journey";
 const enemyAbilities = new Map(
   SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse).map(enemyCard)]),
 );
+const enemyAbilitiesWithoutResurrection = new Map(
+  [...enemyAbilities].map(([id, cards]) => [id, cards.filter((card) => card.effect !== "resurrect")]),
+);
 
 /** Convert only Block lost to ordinary turn decay, using the owner's passive tier. */
 export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[]) {
@@ -135,13 +138,18 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       }
       const fallen = battle.enemies.filter((unit) => unit.health <= 0);
       const inherited =
-        unfinishedJourneyLimit(undefined, enemy) > ensureCombat(enemy).fallenCardsPlayedThisTurn
+        unfinishedJourneyLimit(undefined, enemy) > ensureCombat(enemy).fallenCardsPlayedThisTurn &&
+        fallen.length > 0
           ? fallen
               .flatMap((unit) => enemyAbilities.get(unit.species)!)
               .filter((card) => card.species !== enemy.species)
           : [];
-      const choices = [...enemyAbilities.get(enemy.species)!, ...inherited];
-      const abilities = fallen.length ? choices : choices.filter((card) => card.effect !== "resurrect");
+      const own = enemyAbilities.get(enemy.species)!;
+      const abilities = fallen.length
+        ? inherited.length
+          ? [...own, ...inherited]
+          : own
+        : enemyAbilitiesWithoutResurrection.get(enemy.species)!;
       const choice = chooseEnemyCard(draft, enemy, abilities);
       if (!choice) continue;
       const { def, targetId, allyTargetId } = choice;

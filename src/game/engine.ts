@@ -133,7 +133,10 @@ function resolve(
 
   if (command.type === "visitCampfire" && !canVisitCampfire(state))
     return reject(state, "There is no available Campfire.");
-  const replacement = pendingReplacement(state);
+  const replacement =
+    command.type === "play" || command.type === "endTurn" || command.type === "swap"
+      ? pendingReplacement(state)
+      : undefined;
   if ((command.type === "play" || command.type === "endTurn") && replacement)
     return reject(state, "Choose a replacement first.");
   if (
@@ -184,7 +187,7 @@ function resolve(
   if (command.type === "enterSupport" && (!canVisitMerchant(state) || !visit || visit.id !== command.visit))
     return reject(state, "That visit is unavailable.");
   if (
-    ["buyBoon", "leaveSupport"].includes(command.type) &&
+    (command.type === "buyBoon" || command.type === "leaveSupport") &&
     (!visit || !("visit" in command) || command.visit !== visit.id)
   )
     return reject(state, "That visit is no longer active.");

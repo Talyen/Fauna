@@ -1,5 +1,6 @@
 import { expect, it, vi } from "vitest";
 import { modifiedDamage } from "../../../src/game/combat/damage-values";
+import { applyHarmfulStatus, startAction } from "../../../src/game/combat/index";
 import { sharedDodgeChance } from "../../../src/game/combat/state";
 import { cardCost } from "../../../src/game/ability-rules";
 import { cardActor, drawableOwnerIds } from "../../../src/game/card-actors";
@@ -476,4 +477,41 @@ it("keeps direct cloud heads and the earliest unique ancestry at the history lim
   const second = { ...parent, id: id(101), ancestors: [id(50), id(102)] };
   const child = await snapshot(payload, identity, 2, [first, second]);
   expect(child.ancestors).toEqual([id(100), id(101), ...Array.from({ length: 62 }, (_, index) => id(index))]);
+});
+
+it("heals Tidal Regeneration only on its deployed creature's alternating turns", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["neradora", "mossguard"])));
+  const [tide, other] = state.team;
+  tide!.health = 10;
+  state.battle.turn = 1;
+  startAction(tide!, [], state);
+  expect(tide!.health).toBe(11);
+  state.battle.turn = 2;
+  startAction(tide!, [], state);
+  expect(tide!.health).toBe(11);
+  state.team = [other!];
+  state.reserves = [tide!];
+  state.battle.turn = 3;
+  startAction(tide!, [], state);
+  expect(tide!.health).toBe(11);
+});
+
+it("preserves reflected status targeting and random decisions", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  const target = state.team[0]!;
+  const source = state.battle.enemies[0]!;
+  const decisions: unknown[] = [];
+  observeDecisions(state, (decision) => {
+    decisions.push(decision);
+    return 0;
+  });
+  const events: Parameters<typeof applyHarmfulStatus>[5] = [];
+  applyHarmfulStatus(state, source, target, 2, "poison", events);
+  expect(target.combat!.poison).toBe(2);
+  expect(decisions).toEqual([]);
+  target.combat!.reflect = true;
+  applyHarmfulStatus(state, source, target, 2, "poison", events);
+  expect(target.combat!.poison).toBe(2);
+  expect(source.combat.poison).toBe(2);
+  expect(decisions).toEqual([{ kind: "index", size: state.battle.enemies.length }]);
 });

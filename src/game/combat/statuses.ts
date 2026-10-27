@@ -687,9 +687,12 @@ export function* applyHarmfulStatus(
     !immune &&
     Number(stats[type]) < (type === "blind" ? 1 : STACK_LIMIT)
   ) {
-    const enemies = battlefield(state, alliedTarget ? "enemy" : "player").filter((unit) => unit.health > 0);
     const chance = passiveAmount(alliedTarget ? state : undefined, target.species, "statusReflection");
     const burnReflection = type === "burn" && stats.reflectBurn;
+    const enemies =
+      burnReflection || stats.reflect || chance > 0
+        ? battlefield(state, alliedTarget ? "enemy" : "player").filter((unit) => unit.health > 0)
+        : [];
     if (
       enemies.length &&
       (burnReflection || stats.reflect || succeeds(state, chance / 100, !alliedTarget, events))

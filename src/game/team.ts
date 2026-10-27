@@ -13,8 +13,9 @@ import type { Card, GameEvent, GameState } from "./types";
 /** Both sides of the exchange provide passage, including Dulcera's own departure or arrival. */
 export function gentlePassage(state: GameState, previous: GameState["team"], events: GameEvent[]) {
   if (state.phase !== "battle") return;
-  const providers = new Map([...previous, ...state.team].map((unit) => [unit.id, unit]));
   const entering = state.team.filter((unit) => !previous.some((old) => old.id === unit.id));
+  if (!entering.length) return;
+  const providers = new Map([...previous, ...state.team].map((unit) => [unit.id, unit]));
   for (const provider of providers.values()) {
     if (provider.health <= 0) continue;
     const amount = passiveAmount(state, provider.species, "gentlePassage");
@@ -190,19 +191,21 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
           .map((card) => card.id)
       : [],
   );
-  state.cards = [...retained.filter((card) => !removed.has(card.id)), ...mapped];
+  state.cards = [...(removed.size ? retained.filter((card) => !removed.has(card.id)) : retained), ...mapped];
   if (state.battle) {
     const kept = new Set(state.cards.map((card) => card.id));
     const changed = new Set(mapped.map((card) => card.id));
     filterCardZones(state.battle, (id) => kept.has(id) && (!fromCard || !changed.has(id)));
-    const zoned = new Set([
-      ...state.battle.draw,
-      ...state.battle.hand,
-      ...state.battle.buffer,
-      ...state.battle.discard,
-    ]);
-    const added = mapped.filter((card) => !zoned.has(card.id)).map((card) => card.id);
-    if (added.length) state.battle.draw = shuffle(state, [...state.battle.draw, ...added]);
+    if (mapped.length) {
+      const zoned = new Set([
+        ...state.battle.draw,
+        ...state.battle.hand,
+        ...state.battle.buffer,
+        ...state.battle.discard,
+      ]);
+      const added = mapped.filter((card) => !zoned.has(card.id)).map((card) => card.id);
+      if (added.length) state.battle.draw = shuffle(state, [...state.battle.draw, ...added]);
+    }
     for (const enemy of state.battle.enemies) if (departing.has(enemy.targetId)) enemy.targetId = ids[0]!;
     removeDepartedMinions(state);
     fillHand(state);

@@ -59,9 +59,11 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         },
       ];
   }
+  const plays = availablePlays(state, autoEndTurn);
+  if (!plays.length) return [];
   const facts = battleBenefitFacts(state);
   const choices: (BattleChoice & { key: string })[] = [];
-  for (const play of availablePlays(state, autoEndTurn)) {
+  for (const play of plays) {
     for (const benefit of battleBenefits(state, play, facts)) {
       const { score } = benefit;
       const command =

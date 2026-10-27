@@ -21,8 +21,9 @@ export type CloudSnapshot = z.infer<typeof snapshotSchema>;
 export const cloudName = (s: Pick<CloudSnapshot, "device" | "sequence">) =>
   `fauna-v1-${s.device}-${s.sequence % 2}.json`;
 export const isCloudName = (name: string) => /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+const textEncoder = new TextEncoder();
 async function sha(text: string) {
-  const bytes = await globalThis.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  const bytes = await globalThis.crypto.subtle.digest("SHA-256", textEncoder.encode(text));
   return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, "0")).join("");
 }
 const body = (s: Omit<CloudSnapshot, "id">) =>
@@ -41,10 +42,10 @@ export async function snapshot(
   }));
   if (parentsAtAdmission.some((parent) => parent.profile !== identity.profile))
     throw new Error("Cloud ancestry belongs to another profile.");
-  if (new Set(parentsAtAdmission.map((parent) => parent.id)).size > MAX_ANCESTORS)
+  const ancestry = new Set(parentsAtAdmission.map((parent) => parent.id));
+  if (ancestry.size > MAX_ANCESTORS)
     throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
-  const ancestry = new Set(parentsAtAdmission.map((parent) => parent.id));
   for (const parent of parentsAtAdmission) {
     for (const ancestor of parent.ancestors) {
       if (ancestry.size >= MAX_ANCESTORS) break;
@@ -66,12 +67,14 @@ export async function snapshot(
   return snapshotSchema.parse({ ...record, id: await sha(body(record)) });
 }
 export async function parseSnapshot(raw: string, profile: string): Promise<CloudSnapshot> {
-  if (new TextEncoder().encode(raw).length > MAX_SNAPSHOT_BYTES)
+  if (textEncoder.encode(raw).length > MAX_SNAPSHOT_BYTES)
     throw new Error("Cloud snapshot exceeds the size limit.");
   const parsed = snapshotSchema.safeParse(JSON.parse(raw));
   if (!parsed.success) throw new Error("Invalid cloud metadata.");
   const s = parsed.data;
-  if (s.profile !== profile || new Set(s.ancestors).size !== s.ancestors.length || s.ancestors.includes(s.id))
+  if (s.profile !== profile) throw new Error("Invalid cloud metadata.");
+  const ancestors = new Set(s.ancestors);
+  if (ancestors.size !== s.ancestors.length || ancestors.has(s.id))
     throw new Error("Invalid cloud metadata.");
   const payload = encodeSave(decodeSave(s.payload));
   if (payload !== s.payload || (await sha(payload)) !== s.hash || (await sha(body(s))) !== s.id)

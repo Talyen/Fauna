@@ -70,6 +70,7 @@ function hasTalentPrerequisites(
 
 /** Validate the complete selection, including purchases restored from a save. */
 export function validTalentSelection(state: Pick<GameState, "talents" | "keywordXP">): boolean {
+  if (!state.talents.length) return true;
   const selected = new Set(state.talents);
   if (selected.size !== state.talents.length) return false;
   const spent = new Map<Keyword, number>();

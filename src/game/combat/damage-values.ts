@@ -38,20 +38,20 @@ export function modifiedDamage(
       damage += source.block * (talentRule("block.impact-guard").percent / 100);
     if (
       type === "physical" &&
-      target.health < maximumHealth(target) / (100 / talentRule("physical.finish-him").percent) &&
-      hasTalent(state, "physical.finish-him")
+      hasTalent(state, "physical.finish-him") &&
+      target.health < maximumHealth(target) / (100 / talentRule("physical.finish-him").percent)
     )
       damage *= 2;
     if (
       type === "physical" &&
-      source.health < maximumHealth(source) / 2 &&
-      hasTalent(state, "physical.unrelenting")
+      hasTalent(state, "physical.unrelenting") &&
+      source.health < maximumHealth(source) / 2
     )
       damage *= 2;
     if (
       type === "bleed" &&
-      source.health < maximumHealth(source) / 2 &&
-      hasTalent(state, "bleed.bleeding-out")
+      hasTalent(state, "bleed.bleeding-out") &&
+      source.health < maximumHealth(source) / 2
     )
       damage *= 1 + talentRule("bleed.bleeding-out").percent / 100;
     if (type === "burn" && hasTalent(state, "mana.manaburn"))

@@ -115,6 +115,7 @@ function recipientIds(units: readonly Combatant[], living: boolean) {
 
 /** Re-evaluate from current combat after every play; no-repeat preference only breaks equal values. */
 export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonly CardDefinition[]) {
+  if (!cards.length) return;
   const targetId = highestHealth(battlefield(state, "player"))?.id;
   let before: number | undefined;
   let livingAllies: string[] | undefined;

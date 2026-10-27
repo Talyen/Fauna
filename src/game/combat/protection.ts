@@ -147,10 +147,11 @@ export function* grantBlock(
   if (unit.health <= 0 || amount <= 0) return;
   if (!isEnemy(unit) && state.phase === "battle" && state.boons.includes("origami-staircase")) {
     const row = battlefield(state, "player");
-    if (row.some((ally) => ally.id === unit.id))
-      amount +=
-        row.filter((ally) => ally.health > 0 && ensureCombat(ally).armor > 0).length *
-        boonRule("origami-staircase").block;
+    if (row.some((ally) => ally.id === unit.id)) {
+      let armored = 0;
+      for (const ally of row) if (ally.health > 0 && ensureCombat(ally).armor > 0) armored++;
+      amount += armored * boonRule("origami-staircase").block;
+    }
   }
   let gained = Math.min(STACK_LIMIT - unit.block, Math.round(amount));
   if (gained > 0 && state.phase === "battle" && state.battle) {

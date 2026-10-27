@@ -8,10 +8,10 @@ import { pendingReplacement } from "./team";
 import { hasDiscardDrawCard } from "./card-zones";
 import type { BattleState, Card, Creature, Enemy, Command } from "./types";
 
-function recipientPool(state: BattleState, def: CardDefinition) {
+function recipientPool(state: BattleState, def: CardDefinition, mode = cardTargeting(def, state)) {
   if (def.effect === "swapChosen") return state.reserves;
   if (def.effect === "resurrect") return [...state.team, ...state.reserves];
-  return battlefield(state, cardTargeting(def, state) === "enemy" ? "enemy" : "player");
+  return battlefield(state, mode === "enemy" ? "enemy" : "player");
 }
 function recipientEligible(unit: Creature | Enemy, def: CardDefinition) {
   return (
@@ -24,14 +24,20 @@ function recipientEligible(unit: Creature | Enemy, def: CardDefinition) {
 export function chosenRecipients(state: BattleState, def: CardDefinition) {
   const mode = cardTargeting(def, state);
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return [];
-  return recipientPool(state, def).filter((unit) => recipientEligible(unit, def));
+  return recipientPool(state, def, mode).filter((unit) => recipientEligible(unit, def));
+}
+
+function hasChosenRecipient(state: BattleState, def: CardDefinition) {
+  const mode = cardTargeting(def, state);
+  if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return false;
+  return recipientPool(state, def, mode).some((unit) => recipientEligible(unit, def));
 }
 
 export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
   const mode = cardTargeting(def, state);
   if (
     (mode === "enemy" || mode === "ally") &&
-    !recipientPool(state, def).some((unit) => unit.id === targetId && recipientEligible(unit, def))
+    !recipientPool(state, def, mode).some((unit) => unit.id === targetId && recipientEligible(unit, def))
   )
     return def.effect === "swapChosen"
       ? "Choose a living backup."
@@ -61,14 +67,14 @@ export function inspectCardPlay(
   return inspectCard(
     state,
     state.cards.find((entry) => entry.id === cardId),
-    (def) => chosenRecipients(state, def),
+    (def) => hasChosenRecipient(state, def),
   );
 }
 
 function inspectCard(
   state: BattleState,
   card: Card | undefined,
-  recipients: (def: CardDefinition) => ReturnType<typeof chosenRecipients>,
+  hasRecipients: (def: CardDefinition) => boolean,
   inHand = false,
   recoverable = (actorId: string) => hasDiscardDrawCard(state, actorId),
 ): ({ allowed: true } & PlayableCard) | { allowed: false; reason: string } {
@@ -90,11 +96,11 @@ function inspectCard(
     return { allowed: false, reason: "Unfinished Journey’s limit is spent this turn." };
   if (def.effect === "recover" && def.allyOnly && !recoverable(actor.id))
     return { allowed: false, reason: "There are no eligible ally cards in Discard." };
-  if (def.effect === "resurrect" && !recipients(def).length)
+  if (def.effect === "resurrect" && !hasRecipients(def))
     return { allowed: false, reason: "There are no knocked-out allies." };
-  if (def.effect === "swapChosen" && !recipients(def).length)
+  if (def.effect === "swapChosen" && !hasRecipients(def))
     return { allowed: false, reason: "There are no living backups." };
-  if (def.effect === "heal" && def.target === "injured" && !recipients(def).length)
+  if (def.effect === "heal" && def.target === "injured" && !hasRecipients(def))
     return { allowed: false, reason: "There are no injured allies." };
   if (state.battle.mana < cardCost(card, state)) return { allowed: false, reason: "Not enough Mana." };
   return { allowed: true, card, actor, def };
@@ -115,6 +121,7 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     if (!result) recipientsByDefinition.set(def, (result = chosenRecipients(state, def)));
     return result;
   };
+  const hasRecipients = (def: CardDefinition) => recipients(def).length > 0;
   const recipientIds = new Map<CardDefinition, string[]>();
   const targetIds = (def: CardDefinition) => {
     let ids = recipientIds.get(def);
@@ -131,7 +138,7 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     const play = inspectCard(
       state,
       cards ? cards.get(cardId) : state.cards.find((card) => card.id === cardId),
-      recipients,
+      hasRecipients,
       true,
       recoverable,
     );

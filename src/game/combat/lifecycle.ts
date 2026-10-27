@@ -167,12 +167,15 @@ export function* startAction(
   beginControlTurn(stats);
   if (state?.phase === "battle" && state.battle && unit.health > 0) {
     const enemy = isEnemy(unit);
-    const row = battlefield(state, enemy ? "enemy" : "player");
     // The allied turn number advances after startAction; enemies act on the current number
     const turn = state.battle.turn + Number(!enemy);
-    if (turn % 2 === 0 && row.some((deployed) => deployed.id === unit.id)) {
+    if (turn % 2 === 0) {
       const amount = passiveAmount(enemy ? undefined : state, unit.species, "tidalRegeneration");
-      if (amount > 0) yield* reaction("restoreHealth", unit, amount, events, false, state);
+      if (
+        amount > 0 &&
+        battlefield(state, enemy ? "enemy" : "player").some((deployed) => deployed.id === unit.id)
+      )
+        yield* reaction("restoreHealth", unit, amount, events, false, state);
     }
   }
   if (stats.controlled) {
