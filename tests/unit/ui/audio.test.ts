@@ -304,7 +304,7 @@ it("chooses the strongest result, breaking ties by damage, healing, then Block",
       { ...heal, amount: 0 },
     ]),
   ).toBeUndefined();
-  expect(selectCombatCue([damage, { ...damage, damageType: "freeze" }])).toBe("fire");
+  expect(selectCombatCue([damage, { ...damage, damageType: "freeze" as const }])).toBe("fire");
 });
 
 it("registers every playable sound in the asset manifest", () => {
