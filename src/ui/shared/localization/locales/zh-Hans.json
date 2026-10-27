@@ -2891,6 +2891,12 @@
     "sourceHash": "76afe680821057daba7aa562c372ce1c9fc66cb5511780df86ac746cefa02642",
     "text": "初血"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "sourceHash": "5d7eed98ec4f52c07da612610e57c994c41defcf864d99beff9007aaee532ccf",
+    "text": "对尚未<keyword1>流血</keyword1>的敌人造成的<keyword0>流血</keyword0>伤害提高{{value0}}%"
+  },
   "content.talent.bleed.flay.name": {
     "reviewed": true,
     "source": "Flay",
@@ -2908,6 +2914,12 @@
     "source": "Mortal Wound",
     "sourceHash": "967e1657c64fece14debb87f1c2e1c5b8acf45931ea33754b7ce1deb10893f32",
     "text": "致命伤"
+  },
+  "content.talent.bleed.mortal-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "sourceHash": "5c874ce49bd9431f511a1d1068bf5c24190df23a67ff46cf1e0a93eee4505e09",
+    "text": "<keyword0>流血</keyword0>的敌人受到的<keyword1>治疗</keyword1>减半"
   },
   "content.talent.bleed.parting-cut.name": {
     "reviewed": true,
@@ -3113,6 +3125,12 @@
     "sourceHash": "d39d827dee63d5cd3b6f54273e864695e5d13c47ce812e88792b4ff6ef4fb625",
     "text": "闪燃点"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "reviewed": true,
+    "source": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "sourceHash": "14d853bf3637807443c5c443c2cd8db2e76b7aeb0c42917218577b20109507fc",
+    "text": "每场战斗的首次<keyword0>灼烧</keyword0>免费"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -3130,6 +3148,12 @@
     "source": "Melting Point",
     "sourceHash": "79d24f75edf0a8eccf8a8b5753f97e670cce7b01ecdf051f32ab1685d0a85113",
     "text": "熔点"
+  },
+  "content.talent.burn.melting-point.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "25a8de0d57ac900c239faab54256739309e04e51eb353aa5fa7c59f7222fa07d",
+    "text": "<keyword0>灼烧</keyword0>伤害会移除等量的<keyword1>护甲</keyword1>"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -3256,6 +3280,12 @@
     "source": "Unburdened",
     "sourceHash": "82b1c9a300c1e0079080c8410490d740effa23009eaaaf719ab8bf6940b9ce6b",
     "text": "卸下重担"
+  },
+  "content.talent.dodge.unburdened.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "sourceHash": "8c8865beca8c2b5eebff59be9aa0dfaa01b3a068236c072fc054769bbda98d5e",
+    "text": "<keyword0>闪避</keyword0>时，<keyword1>净化</keyword1>自身的<keyword2>眩晕</keyword2>和<keyword3>冻结</keyword3>积累"
   },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,

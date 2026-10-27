@@ -2891,6 +2891,12 @@
     "sourceHash": "588e2bb0acacc8f103f0e03c591447fef8ccc8fa2f4cf09c6b4710a07a95ce52",
     "text": "Erstes Blut"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "sourceHash": "2a665d40f417aef9881752baea631f56eddc89c2a6672819a6f39490846ffb73",
+    "text": "Verursache {{value0}}% mehr <keyword0>Blutungsschaden</keyword0> bei Gegnern, die noch nicht <keyword1>bluten</keyword1>"
+  },
   "content.talent.bleed.flay.name": {
     "reviewed": true,
     "source": "Flay",
@@ -2908,6 +2914,12 @@
     "source": "Mortal Wound",
     "sourceHash": "e1d98c025b3f009dde7013e3d5bd7d6c289bfff1a0c7ecf99d40889df47b0a9a",
     "text": "Tödliche Wunde"
+  },
+  "content.talent.bleed.mortal-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "sourceHash": "a045aadc6379467f9837ac77488c2f0554c1ef20359ca808a1ad80643d1c640c",
+    "text": "<keyword0>Blutende</keyword0> Gegner erhalten halb so viel <keyword1>Heilung</keyword1>"
   },
   "content.talent.bleed.parting-cut.name": {
     "reviewed": true,
@@ -3113,6 +3125,12 @@
     "sourceHash": "b975fc6ca3c06cc7d8036e42a0e7f28b11d583489e9b2e9309a0799f4bd65bd4",
     "text": "Flammpunkt"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "reviewed": true,
+    "source": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "sourceHash": "b88011ea51baa2909a27b72202d2efde924fadc9f1e9b846736690f4c1f00672",
+    "text": "Dein erstes <keyword0>Verbrennen</keyword0> in jedem Kampf ist kostenlos"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -3130,6 +3148,12 @@
     "source": "Melting Point",
     "sourceHash": "1b9fbd6994f6e7df03550cd03da4c5a069b9c11b0e5baad9bd561dc4d2ae3b8b",
     "text": "Schmelzpunkt"
+  },
+  "content.talent.burn.melting-point.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "9fcd48cb682504646580e1d21ba27e86afcbace4bf08833b0453f1ee4eaab5a9",
+    "text": "<keyword0>Verbrennungsschaden</keyword0> entfernt ebenso viel <keyword1>Rüstung</keyword1>"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -3256,6 +3280,12 @@
     "source": "Unburdened",
     "sourceHash": "1e9f02415fdfd1222896f4e6b6e9fadb1abc06b5ba0abb34e9833e71ff84d11c",
     "text": "Unbeschwert"
+  },
+  "content.talent.dodge.unburdened.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "sourceHash": "6b5517965131ab9c1a1fcbf9cacd44079c8e54ce0826c7ff2043c88b4f8456c1",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, <keyword1>reinige</keyword1> deinen <keyword2>Betäubungs</keyword2>- und <keyword3>Einfrieren</keyword3>-Aufbau"
   },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,

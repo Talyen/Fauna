@@ -2891,6 +2891,12 @@
     "sourceHash": "c2b02cae1cb60286a31009eff9b41e4f56e40deafc465896ebee6d0ae3d0227f",
     "text": "Первая кровь"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "sourceHash": "b0bd33a7cd688b00b73ba2dcaa39966d87b1365bbeb614ebbd9b71c395a7672e",
+    "text": "Наносите на {{value0}}% больше урона <keyword0>кровотечением</keyword0> врагам, которые ещё не <keyword1>кровоточат</keyword1>"
+  },
   "content.talent.bleed.flay.name": {
     "reviewed": true,
     "source": "Flay",
@@ -2908,6 +2914,12 @@
     "source": "Mortal Wound",
     "sourceHash": "94249aaea3d378bd8c9b2c5ffa5a1497d8384c0ac705ec4e3013da8edf436eaf",
     "text": "Смертельная рана"
+  },
+  "content.talent.bleed.mortal-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "sourceHash": "f256ab14ff11e60d0185ebd7e406d58b229bb7a3bac4d32b6197a8dfd3722502",
+    "text": "<keyword0>Кровоточащие</keyword0> враги получают вдвое меньше <keyword1>лечения</keyword1>"
   },
   "content.talent.bleed.parting-cut.name": {
     "reviewed": true,
@@ -3113,6 +3125,12 @@
     "sourceHash": "7471df9bf11f647f6cd907eb77aad524c523854e5b58dcbbdf0a39b576eddd8d",
     "text": "Точка вспышки"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "reviewed": true,
+    "source": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "sourceHash": "a585d914a039e9ef08f30cbdaa77607db51ee0dd4c35a7caee065195309fd9e2",
+    "text": "Первое <keyword0>горение</keyword0> в каждом бою бесплатно"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -3130,6 +3148,12 @@
     "source": "Melting Point",
     "sourceHash": "1d43a4b0fe682ca5459220354a7a65bc390b012837890ae4b1bcf0ad89177b9f",
     "text": "Точка плавления"
+  },
+  "content.talent.burn.melting-point.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "ed1873acf3a64088c9bbc2b5c82980d2cb171d9d75b13e3ee6d6bf6645e41135",
+    "text": "Урон от <keyword0>горения</keyword0> снимает столько же <keyword1>брони</keyword1>"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -3256,6 +3280,12 @@
     "source": "Unburdened",
     "sourceHash": "90d588dacab566be20760f59b66f7a1a821d1dc9b92ef6f402da4be18fb3b964",
     "text": "Без бремени"
+  },
+  "content.talent.dodge.unburdened.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "sourceHash": "4be7becae6fa7e92df57e36521bad7362fe4d674452a6b95cd7b585e6edfe0da",
+    "text": "При <keyword0>уклонении</keyword0> <keyword1>очистите</keyword1> своё накопление <keyword2>оглушения</keyword2> и <keyword3>заморозки</keyword3>"
   },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,

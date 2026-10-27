@@ -2891,6 +2891,12 @@
     "sourceHash": "2452076b48a7bd0b6e0b9de25b8ba340d268794dcb213e603940ce8d77d89c77",
     "text": "最初の血"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "sourceHash": "32e73dcbce41d63c1d292e816e4a56c37de39e372fb27187558bd618e6cfda6a",
+    "text": "まだ<keyword1>出血</keyword1>していない敵への<keyword0>出血</keyword0>ダメージが{{value0}}%増加"
+  },
   "content.talent.bleed.flay.name": {
     "reviewed": true,
     "source": "Flay",
@@ -2908,6 +2914,12 @@
     "source": "Mortal Wound",
     "sourceHash": "9d501005bef76408b11e09662b47aab8102148c0092b22d8b3fc6367c03ea669",
     "text": "致命傷"
+  },
+  "content.talent.bleed.mortal-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "sourceHash": "8e30beda121d0d71ec61204eb10282d0bf170fa6f6f3062668d2123297d97ae5",
+    "text": "<keyword0>出血</keyword0>状態の敵が受ける<keyword1>回復</keyword1>が半分になる"
   },
   "content.talent.bleed.parting-cut.name": {
     "reviewed": true,
@@ -3113,6 +3125,12 @@
     "sourceHash": "73a166746b73c8180f3c2bb66dfd31ab2a0da0e1d8417a648783c3e9a00997b8",
     "text": "引火点"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "reviewed": true,
+    "source": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "sourceHash": "9605391568549de810d87d8779fa5fddd7887c75573cac2622b01f8e00a0c8c2",
+    "text": "各戦闘で最初の<keyword0>火傷</keyword0>は無料"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -3130,6 +3148,12 @@
     "source": "Melting Point",
     "sourceHash": "32bf87e8e4e40b0f44f6e53be3abe0a6f43e1a7d3c940a30b1e968c2004c77f8",
     "text": "融点"
+  },
+  "content.talent.burn.melting-point.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "d8870ad86f51249508605f47a98031c022d0756d479cff3ba0a0a6b5d5d782fa",
+    "text": "<keyword0>火傷</keyword0>ダメージと同量の<keyword1>アーマー</keyword1>を除去"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -3256,6 +3280,12 @@
     "source": "Unburdened",
     "sourceHash": "f7303c4797bf7dd60ffd64a71efc6cba8d08a7fefb909d2347d2afb3cdfce515",
     "text": "身軽"
+  },
+  "content.talent.dodge.unburdened.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "sourceHash": "98691de4a7f62e41f37627c4fd43bee0b30d653b28c8f17a72a355c4d83889f0",
+    "text": "<keyword0>回避</keyword0>すると、自分の<keyword2>スタン</keyword2>と<keyword3>凍結</keyword3>の蓄積を<keyword1>浄化</keyword1>"
   },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,

@@ -2939,6 +2939,12 @@
     "sourceHash": "a569ed2551d747a4cefb7c075eef7605a9042601f32ef24f2cfd4b84b5b94794",
     "text": "Premier sang"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "sourceHash": "712492c97a616ec7667c79f51a79a70accb319dc216fc413aa90c833a869d2b7",
+    "text": "Infligez {{value0}}% de dégâts de <keyword0>Saignement</keyword0> supplémentaires aux ennemis qui ne <keyword1>saignent</keyword1> pas encore"
+  },
   "content.talent.bleed.flay.name": {
     "reviewed": true,
     "source": "Flay",
@@ -2956,6 +2962,12 @@
     "source": "Mortal Wound",
     "sourceHash": "571a5f6c20978d85421782ee0060dc973ea5c8fb815c5b52d2acd5980dfc1c64",
     "text": "Blessure mortelle"
+  },
+  "content.talent.bleed.mortal-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "sourceHash": "a0df73afb7911b5a9873d652225029494f63e08b6ba653c31f395d5a6e004063",
+    "text": "Les ennemis en <keyword0>Saignement</keyword0> reçoivent moitié moins de <keyword1>soins</keyword1>"
   },
   "content.talent.bleed.parting-cut.name": {
     "reviewed": true,
@@ -3161,6 +3173,12 @@
     "sourceHash": "ba7dcb9c62e65fbcaab5236294064de02f7395f6f723ed66050a23c79466d530",
     "text": "Point d'éclair"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "reviewed": true,
+    "source": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "sourceHash": "b1e0ed5557e7065fb5907904f1d0c477d2f6ef78f3a758697c882a0d2c05c017",
+    "text": "Votre première <keyword0>Brûlure</keyword0> de chaque combat est gratuite"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -3178,6 +3196,12 @@
     "source": "Melting Point",
     "sourceHash": "0301629273066a8f96d629fb854edb0bb531520eac12ef8152c2b3091b62fea7",
     "text": "Point de fusion"
+  },
+  "content.talent.burn.melting-point.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "72fec40d15d92a16b572875dc62ad590a0ec65ee7eeca1f287c7ecfce85f8abe",
+    "text": "Les dégâts de <keyword0>Brûlure</keyword0> retirent autant d’<keyword1>Armure</keyword1>"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -3304,6 +3328,12 @@
     "source": "Unburdened",
     "sourceHash": "10403df1acd1fe156838062a5e8310c33450e8144144c2aaca2d1203e457461e",
     "text": "Sans fardeau"
+  },
+  "content.talent.dodge.unburdened.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "sourceHash": "d7cf503c6689da7262b5110221579e548fdee9ffa395753b7e6393209db80ddc",
+    "text": "Lorsque vous <keyword0>esquivez</keyword0>, <keyword1>purifiez</keyword1> votre accumulation d’<keyword2>Étourdissement</keyword2> et de <keyword3>Gel</keyword3>"
   },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,

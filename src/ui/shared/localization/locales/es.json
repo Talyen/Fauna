@@ -2891,6 +2891,12 @@
     "sourceHash": "621e9720cda8e9bcb284e7df525f98b8d39393e13b1cd285d80c6c257d6820a4",
     "text": "Primera sangre"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "sourceHash": "9a1184a267fe366a9bcf3de26934db308381de6c7984e646b9082035dde7ecda",
+    "text": "Infliges un {{value0}}% más de daño de <keyword0>Sangrado</keyword0> a enemigos que aún no <keyword1>sangran</keyword1>"
+  },
   "content.talent.bleed.flay.name": {
     "reviewed": true,
     "source": "Flay",
@@ -2908,6 +2914,12 @@
     "source": "Mortal Wound",
     "sourceHash": "80595c89013ee54c05345b8818ba204ee7b14d8a01d895ed57ef455c98e2e656",
     "text": "Herida mortal"
+  },
+  "content.talent.bleed.mortal-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "sourceHash": "942fc7f00e11248d875dc3bad17b7d9d99d14a2b0908a829ea8013aec956e813",
+    "text": "Los enemigos con <keyword0>Sangrado</keyword0> reciben la mitad de <keyword1>curación</keyword1>"
   },
   "content.talent.bleed.parting-cut.name": {
     "reviewed": true,
@@ -3113,6 +3125,12 @@
     "sourceHash": "737a2c2911718f899f5ca623ac37f5e039c8f40e66a24b274e019bee00664ad7",
     "text": "Punto de inflamación"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "reviewed": true,
+    "source": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "sourceHash": "dff0c2cade2e0a6c87981d766137e3bccb9486f9c860218dd5dd3c4048f35e24",
+    "text": "Tu primera <keyword0>Quemadura</keyword0> de cada combate es gratis"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -3130,6 +3148,12 @@
     "source": "Melting Point",
     "sourceHash": "8e6bd13b7442f78547665ae4390efe70738b2a022a7a6eff977ff6ec42a008d9",
     "text": "Punto de fusión"
+  },
+  "content.talent.burn.melting-point.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "e790a0a8a70ed368e44a4272b488700e9862934070fa9ffacdcf0534ea3d2350",
+    "text": "El daño de <keyword0>Quemadura</keyword0> elimina la misma cantidad de <keyword1>Armadura</keyword1>"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -3256,6 +3280,12 @@
     "source": "Unburdened",
     "sourceHash": "cefe65ebab194e318f7cacc2b4b776d8f6aac882ded92588dfa2f7551f27646a",
     "text": "Sin cargas"
+  },
+  "content.talent.dodge.unburdened.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "sourceHash": "aafc5a8352f12ca639379ad1ab1e39a933af5ed0c1f26adcab9311a2477d7360",
+    "text": "Al <keyword0>esquivar</keyword0>, <keyword1>purifica</keyword1> tu acumulación de <keyword2>Aturdimiento</keyword2> y <keyword3>Congelación</keyword3>"
   },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,
