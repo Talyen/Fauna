@@ -1049,6 +1049,42 @@
     "sourceHash": "899374c6db7efebe9f745fc3b4fd3d6a1370e6201ba32ddffca2ce9711cc7b92",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a los aliados cuando <keyword1>esquivas</keyword1>"
   },
+  "content.species.bloomquail.passive.0.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "503c8767a6e55b23a339eab83783ffe560b89af9967351d24f319f498e61e183",
+    "text": "Convierte el {{value0}}% del <keyword0>Bloqueo</keyword0> que obtienes en <keyword1>Salud</keyword1> para el aliado más herido"
+  },
+  "content.species.bloomquail.passive.1.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "cf405a4100ab0f73848f857b55aa67fb6e9149c5b901c5dc32b7383cc373a5c8",
+    "text": "Convierte el {{value0}}% del <keyword0>Bloqueo</keyword0> que obtienes en <keyword1>Salud</keyword1> para el aliado más herido"
+  },
+  "content.species.bloomquail.passive.2.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "53fb4e9f29b832422192326ba2f854781a0e4f88ed80a18796d601c907bf283a",
+    "text": "Convierte el {{value0}}% del <keyword0>Bloqueo</keyword0> que obtienes en <keyword1>Salud</keyword1> para el aliado más herido"
+  },
+  "content.species.bloomquail.passive.3.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "11213dea7d402f16d8388f8b458b090e6a17aad6d8ee2858abfede57edbda70b",
+    "text": "Convierte el {{value0}}% del <keyword0>Bloqueo</keyword0> que obtienes en <keyword1>Salud</keyword1> para el aliado más herido"
+  },
+  "content.species.bloomquail.passive.4.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "4c72716e5d9cb39424b0853daea93ab903f1cd9abf607b2c5b532895369b162b",
+    "text": "Convierte el {{value0}}% del <keyword0>Bloqueo</keyword0> que obtienes en <keyword1>Salud</keyword1> para el aliado más herido"
+  },
+  "content.species.bloomquail.passive.5.rule": {
+    "reviewed": true,
+    "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "dfc2deb17c506658ebd47380b089f973baf464a092f41b61d352d9958dc12e77",
+    "text": "Convierte el <keyword0>Bloqueo</keyword0> que obtienes en <keyword1>Salud</keyword1> para el aliado más herido"
+  },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
     "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",

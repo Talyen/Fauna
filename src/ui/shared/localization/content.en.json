@@ -2412,28 +2412,28 @@
     "text": "Bloomquail"
   },
   "content.species.bloomquail.passive.0.rule": {
-    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
-    "reference": "Convert 50% of your Block into Health for the most injured ally"
+    "text": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 50% of Block you gain into Health for the most injured ally"
   },
   "content.species.bloomquail.passive.1.rule": {
-    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
-    "reference": "Convert 60% of your Block into Health for the most injured ally"
+    "text": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 60% of Block you gain into Health for the most injured ally"
   },
   "content.species.bloomquail.passive.2.rule": {
-    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
-    "reference": "Convert 70% of your Block into Health for the most injured ally"
+    "text": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 70% of Block you gain into Health for the most injured ally"
   },
   "content.species.bloomquail.passive.3.rule": {
-    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
-    "reference": "Convert 80% of your Block into Health for the most injured ally"
+    "text": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 80% of Block you gain into Health for the most injured ally"
   },
   "content.species.bloomquail.passive.4.rule": {
-    "text": "Convert {{value0}}% of your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
-    "reference": "Convert 90% of your Block into Health for the most injured ally"
+    "text": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert 90% of Block you gain into Health for the most injured ally"
   },
   "content.species.bloomquail.passive.5.rule": {
-    "text": "Convert your <keyword0>Block</keyword0> into <keyword1>Health</keyword1> for the most injured ally",
-    "reference": "Convert your Block into Health for the most injured ally"
+    "text": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "reference": "Convert Block you gain into Health for the most injured ally"
   },
   "content.species.bloomquail.title": {
     "text": "The petal keeper"

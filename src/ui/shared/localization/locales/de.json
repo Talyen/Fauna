@@ -1049,6 +1049,42 @@
     "sourceHash": "84f02df2a86aaf617c422439b8a77813747a5073dfc8b30bdb0bf7eac1d90c17",
     "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
   },
+  "content.species.bloomquail.passive.0.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "e4387b3b72a67bd46b5f1b605f16dc2f877c7868276f1fc934529358891862a7",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.1.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "d01a90c1900eb9b7ebff1af61371fb5263c328b52552275bb01fc77dce209117",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.2.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "3cc6d9972d8e2cd35bff1f68fbbefbacb164684d6088abd805a5a9792306a8a6",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.3.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "ee09a2b494027a7c3ddb84ab57d675192fe17f52f3b96d13b5336c60d3cefcd7",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.4.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "cd1f88f65d115977e58e1f76b172c367319fa6eb59918a36492f4ba2725b074b",
+    "text": "Wandle {{value0}}% des <keyword0>Blocks</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
+  "content.species.bloomquail.passive.5.rule": {
+    "reviewed": true,
+    "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "b7d58560cfcc973f47e64e65680d886834f7ad77a40697a72c5d4dced3a837d9",
+    "text": "Wandle <keyword0>Block</keyword0>, den du erhältst, in <keyword1>Gesundheit</keyword1> für den am stärksten verletzten Verbündeten um"
+  },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
     "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",

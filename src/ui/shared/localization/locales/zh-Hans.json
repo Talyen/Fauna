@@ -1049,6 +1049,42 @@
     "sourceHash": "27031063234ebe664fd5958973500445892a50fca3691e68a77da3a907de722c",
     "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.bloomquail.passive.0.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "f9b64430fd10ac8adcdcb5ec2bcc790bf2ac403a7fcac2d61f3657bce5207123",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.1.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "83ac2f3cc32038775666ed365f195e22bbcd99f541d89c04e5ae9a3b35487bf9",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.2.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "6e642a6b76cb441eb4cd1d96021f25ea8b93544e90676e32a23a5226fdc99106",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.3.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "0e07418377770cf15f831ed429a30575751a4d1fa53375167f544b5052cce359",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.4.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "cf89f8ce560b65cae8a89115342b229100d42b5f288f3670d0cff46ac0568fcf",
+    "text": "将你获得的<keyword0>格挡</keyword0>的{{value0}}%转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
+  "content.species.bloomquail.passive.5.rule": {
+    "reviewed": true,
+    "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "4ca60feab922197fc88cd6a72aee264e8e6f2ba7ead1ea12b183b18aecad4b1f",
+    "text": "将你获得的<keyword0>格挡</keyword0>转化为受伤最重盟友的<keyword1>生命</keyword1>"
+  },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
     "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",

@@ -1049,6 +1049,42 @@
     "sourceHash": "ffe8441de9ed4c3380797248fac3d48f31faee4554d24c93de1a1aa007c039d0",
     "text": "Восстанавливайте союзникам {{value0}} <keyword0>здоровья</keyword0>, когда <keyword1>уклоняетесь</keyword1>"
   },
+  "content.species.bloomquail.passive.0.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "66ee370fa2aba3355d591c67a56b57f3c00efbf1c98aa9731fa2c5865bb2f00a",
+    "text": "Преобразуйте {{value0}}% получаемого <keyword0>блока</keyword0> в <keyword1>здоровье</keyword1> наиболее раненого союзника"
+  },
+  "content.species.bloomquail.passive.1.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "69d2a8388f89ab0aa76f157b983e47dedd4a025cb628d97ca676cba8adc65b4f",
+    "text": "Преобразуйте {{value0}}% получаемого <keyword0>блока</keyword0> в <keyword1>здоровье</keyword1> наиболее раненого союзника"
+  },
+  "content.species.bloomquail.passive.2.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "f7f0333e5a838a73a3f5fb5a79805313c1c8ebfa21cf39b9182f4aec3a26928c",
+    "text": "Преобразуйте {{value0}}% получаемого <keyword0>блока</keyword0> в <keyword1>здоровье</keyword1> наиболее раненого союзника"
+  },
+  "content.species.bloomquail.passive.3.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "5ac0ee300ee474c50de80667412a3f25c33ee458c207b2b1446acd3b67191877",
+    "text": "Преобразуйте {{value0}}% получаемого <keyword0>блока</keyword0> в <keyword1>здоровье</keyword1> наиболее раненого союзника"
+  },
+  "content.species.bloomquail.passive.4.rule": {
+    "reviewed": true,
+    "source": "Convert {{value0}}% of <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "d4b220f4fec72e2e84d30dd34d9e8b98d89189f92abe260cb4dd19eb18bef801",
+    "text": "Преобразуйте {{value0}}% получаемого <keyword0>блока</keyword0> в <keyword1>здоровье</keyword1> наиболее раненого союзника"
+  },
+  "content.species.bloomquail.passive.5.rule": {
+    "reviewed": true,
+    "source": "Convert <keyword0>Block</keyword0> you gain into <keyword1>Health</keyword1> for the most injured ally",
+    "sourceHash": "1a6b26304ff7339145c693235e4edb42d629f6b6c584fce19dc4d656d87fa531",
+    "text": "Преобразуйте получаемый <keyword0>блок</keyword0> в <keyword1>здоровье</keyword1> наиболее раненого союзника"
+  },
   "content.species.cadenza.passive.0.rule": {
     "reviewed": true,
     "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
