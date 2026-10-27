@@ -599,6 +599,21 @@
   "settings.windowed": {
     "text": "Windowed"
   },
+  "status.additional": {
+    "text": "{{description}}; {{extra}}"
+  },
+  "status.dodge": {
+    "text": "{{keyword}} {{count}}% bonus; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "text": "{{count}}% expires at your next turn"
+  },
+  "status.dodgeShared": {
+    "text": "{{count}}% from {{trait}}"
+  },
+  "status.measured": {
+    "text": "{{keyword}} {{count}}; {{description}}"
+  },
   "talents.category": {
     "text": "{{keyword}} talents"
   },

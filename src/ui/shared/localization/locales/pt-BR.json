@@ -641,6 +641,12 @@
     "sourceHash": "42f4269432d70809a8af8dbe3ebee3ade9688fe4506a58103c7bbef4b15565f4",
     "text": "Água"
   },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "98af3f3809faafb97e8e018d040b10915326dd4326c02371c6e296c4264a2d1c",
+    "text": "Areias movediças"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1252,6 +1258,36 @@
     "source": "Windowed",
     "sourceHash": "07a4e5214d2a65756fec490d28a2a4ced5a5c63304722164af73d061e33d96f8",
     "text": "Janela"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "4389af882403e1a5c5b4fba49871d90c058c75c05c5978a210290a9652f84250",
+    "text": "{{description}}; {{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "1ac870fee3ebac45a4a05735e62421386e8b5975a9b2a3d92034b8b73f70c2bf",
+    "text": "{{keyword}}: bônus de {{count}}%; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "8a0cfe4edc9ff596eba61e2abc51d7ca565052facd42b47c0090f2c5ae433e5c",
+    "text": "{{count}}% expira no seu próximo turno"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "65a6325c1a6149b01740ee0ef6af506413d6e0039620ffd0f86bbcd926f92dba",
+    "text": "{{count}}% de {{trait}}"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "6cfea0fcfdd5a054a49b13b951325ba0a5997da6d74dc8aba0224cc58134b3f4",
+    "text": "{{keyword}} {{count}}; {{description}}"
   },
   "talents.unlocked": {
     "reviewed": true,

@@ -641,6 +641,12 @@
     "sourceHash": "a5db157930d4196b9c2631088f33b4fa95b07fcd1157220dbed9bbb734ff10c8",
     "text": "Wasser"
   },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "300921460f57a2a3444c2b9690f46436dda8e38166b1cceafbbd124fb66affaf",
+    "text": "Wandernde Sande"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1252,6 +1258,36 @@
     "source": "Windowed",
     "sourceHash": "b8fcfa9543285f6e991d33c5164c4246e8cf937ca208532bd6abf04fa8949e3a",
     "text": "Fenstermodus"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "78a631db26e7f247a24281fed529f8cc705d1d4bdc82a6fbbcb23ca0d7321446",
+    "text": "{{description}}; {{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "635352342d01171cd66bf73ec0d7358cf9b8abab5505844029e403759e9a5315",
+    "text": "{{keyword}} {{count}} % Bonus; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "713f443d39137098c2d99a62b69505d5a946b9631303b5cf6f3d65a0e5b38d19",
+    "text": "{{count}} % verfallen zu Beginn deines nächsten Zuges"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "9ab843fe3eef5eba9ab1ca2d0af7e6f79e5b65e59bf7befcf0d01a089fecfb78",
+    "text": "{{count}} % durch {{trait}}"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "378aa09a183438643e12761f02012f807b517d38c6ef6e27f0648b44a86fe173",
+    "text": "{{keyword}} {{count}}; {{description}}"
   },
   "talents.unlocked": {
     "reviewed": true,

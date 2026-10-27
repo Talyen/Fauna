@@ -1,3 +1,5 @@
+import { CombatStatus } from "../../../src/ui/shared/combat/combat-status";
+import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import japanese from "../../../src/ui/shared/localization/locales/ja.json";
 import { definition } from "../../../src/game/content";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
@@ -1173,5 +1175,102 @@ it("renders localized keyword labels and card rules with their shared gameplay i
   expect(labels).toHaveLength(2);
   expect(labels.every((label) => label.getAttribute("data-keyword") === "stun")).toBe(true);
   expect(view.container.textContent).toContain("すべての敵にスタンダメージを4与える");
+  view.unmount();
+});
+
+it("preserves English combat status snapshots and localizes their rules without changing identity", () => {
+  const game = produce(run(), (draft) => {
+    Object.assign(draft.team[0]!.combat!, {
+      armor: 3,
+      thorns: 2,
+      dodge: 10,
+      temporaryDodge: 4,
+      burn: 1,
+      poison: 2,
+      bleed: 2,
+      stun: 1,
+      freeze: 1,
+    });
+  });
+  const combat = game.team[0]!.combat!;
+  const expected = combatStatuses(combat, 5).map((status) => status.text);
+  const view = render(
+    <TooltipProvider>
+      <CombatStatus combat={combat} sharedDodge={5} details />
+    </TooltipProvider>,
+  );
+  expect(
+    [...view.container.querySelectorAll(".combat-status-details p")].map((item) => item.textContent),
+  ).toEqual(expected);
+  const burn = KEYWORD_DEFINITIONS.burn.description;
+  const catalog: MessageCatalog = {
+    "content.keyword.burn.label": { source: "Burn", text: "Brûlure" },
+    "content.glossary.keyword.burn.definition.rule": {
+      source: ruleMessage(burn).template,
+      text: "Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+    },
+    "status.measured": {
+      source: "{{keyword}} {{count}}; {{description}}",
+      text: "{{keyword}} {{count}} : {{description}}",
+    },
+  };
+  view.rerender(
+    <LocalizationProvider catalogs={{ fr: catalog }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CombatStatus combat={combat} sharedDodge={5} details />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  const keyword = screen.getByText("Brûlure");
+  expect(keyword.getAttribute("data-keyword")).toBe("burn");
+  expect(keyword.closest("p")?.textContent).toBe(
+    "Brûlure 1 : Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+  );
+  view.unmount();
+  const onlyBurn = {
+    ...combat,
+    armor: 0,
+    thorns: 0,
+    dodge: 0,
+    temporaryDodge: 0,
+    poison: 0,
+    bleed: 0,
+    stun: 0,
+    freeze: 0,
+  };
+  const tile = render(
+    <LocalizationProvider catalogs={{ fr: catalog }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CombatStatus combat={onlyBurn} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    screen.getByRole("button", {
+      name: "Brûlure 1 : Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+    }),
+  ).toBeTruthy();
+  tile.unmount();
+});
+
+it("keeps visual and accessible status counts consistent when the message falls back", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const game = produce(run(), (draft) => {
+    draft.team[0]!.combat!.burn = 1000;
+  });
+  const combat = game.team[0]!.combat!;
+  const catalog: MessageCatalog = { "content.keyword.burn.label": { source: "Burn", text: "Brand" } };
+  const view = render(
+    <LocalizationProvider catalogs={{ de: catalog }} qualified={["en", "de"]} systemLanguages={["de"]}>
+      <TooltipProvider>
+        <CombatStatus combat={combat} />
+        <CombatStatus combat={combat} details />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  const label = screen.getByRole("button").getAttribute("aria-label");
+  const text = view.container.querySelector(".combat-status-details p")?.textContent;
+  expect(label).toContain("Brand 1.000");
+  expect(label).toBe(text);
   view.unmount();
 });

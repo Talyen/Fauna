@@ -641,6 +641,12 @@
     "sourceHash": "b195dfae9746c0b16c16b90d185f9f421e80a9071b2f7125941a4c07f983e9c5",
     "text": "Agua"
   },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "5ed56bd3b2f53259c6841185618ed4edbbadb74b1a430cc9f5bebe87b242defa",
+    "text": "Arenas cambiantes"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1252,6 +1258,36 @@
     "source": "Windowed",
     "sourceHash": "05dee1c7397a50956d463bcc0b2d317fba45ef4e411cdcd5282958540927aa5b",
     "text": "Ventana"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "f1005de73cc2ec0b7bb60be50779992e749419cb1466c65208a8672c4422f81e",
+    "text": "{{description}}; {{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "100fb38bcabc471efbc4edf1b73ed4240d88aa1d20546c7f32f366af23b03834",
+    "text": "{{keyword}}: bonificación de {{count}} %; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "1c03bebf797ca09589de49d607af09f4c457daeef44535ae90069cb8a6bccc7c",
+    "text": "{{count}} % caduca en tu próximo turno"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "e20861b07a005a8b05dbeeea1eb8184f52fc96bf4219f358714c93d8beb3f03d",
+    "text": "{{count}} % por {{trait}}"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "6715ab52b9aa8204ef0c58852c13f3e826b469aa77247060bc24b55197fbbe63",
+    "text": "{{keyword}} {{count}}; {{description}}"
   },
   "talents.unlocked": {
     "reviewed": true,

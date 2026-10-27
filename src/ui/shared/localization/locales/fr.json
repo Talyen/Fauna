@@ -839,6 +839,12 @@
     "sourceHash": "58003e51ae85c37048a64ffc1a053a6f2736e83e005e119093edc05f72430227",
     "text": "Eau"
   },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "9ce7a7ea3d0bfc1d406027718df378b8585565bf6e9043591192a13cade68d85",
+    "text": "Sables mouvants"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1721,6 +1727,36 @@
     "source": "Windowed",
     "sourceHash": "c878888968e6756d634d036919b632dc3a7c30bfd8a58fded1bee970e58f5f6c",
     "text": "Fenêtré"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "f57316c6069d7b8ee41740c46c7bd18e03ec7d7fa617563f429c9b129a904284",
+    "text": "{{description}} ; {{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "2bca5dcd75508c7c2c5b0c88baa61dc158e078bda2088eebdbdbbb544acedb16",
+    "text": "{{keyword}} : bonus de {{count}} % ; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "40ad962878df52143556642b703114f4655c40b30345cda068693bbd4aae8019",
+    "text": "{{count}} % expirent à votre prochain tour"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "243fb7de0c94e1116ad66df104e4c0f3a3bee328a0a5aa33d088dfe4b67ae181",
+    "text": "{{count}} % grâce à {{trait}}"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "76ce1a2e50646ec64381988a224a92c94cdb5a3ea36de1ad107030224d6559e5",
+    "text": "{{keyword}} {{count}} ; {{description}}"
   },
   "talents.category": {
     "reviewed": true,

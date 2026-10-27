@@ -641,6 +641,12 @@
     "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
     "text": "Вода"
   },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "433d676012016227c4203e3bdd730a8784091d66c04aa9a4a74cee4b6a02e572",
+    "text": "Подвижные пески"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1252,6 +1258,36 @@
     "source": "Windowed",
     "sourceHash": "02cf45b6a54ac390243ce36ca965ab9fdb1d44eeced83f80ecd73b38204f3c62",
     "text": "Оконный режим"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "0feaba2913fef0ec152fd76adc52f3721cb3b91d788619c9704970ab8d775cb3",
+    "text": "{{description}}; {{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "8a438868db009b03e0948e3a1f626484a4dc09cbe8133494b1fb659083a51c76",
+    "text": "{{keyword}}: бонус {{count}}%; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "7ef87cc86a27fd05674d194ce950024acf7fb34e2fb0b5f5100c744f7fcef532",
+    "text": "{{count}}% исчезает в начале вашего следующего хода"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "b403e710125956433dff2e8eef9d92a4c66fe5382e5e274f680266ba4f4b35ff",
+    "text": "{{count}}% от «{{trait}}»"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "fcd419a91d9472f513ba9d27f609f223165eb8b0f2c2ce581b3d6e9305f2d6c3",
+    "text": "{{keyword}}: {{count}}; {{description}}"
   },
   "talents.unlocked": {
     "reviewed": true,

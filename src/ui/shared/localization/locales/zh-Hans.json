@@ -641,6 +641,12 @@
     "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
     "text": "水"
   },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "3211fa21dd8e7b67c5021ae45d1582d2b96a6fb64d9bf2f47cad4b00e5e3034c",
+    "text": "流动沙丘"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1252,6 +1258,36 @@
     "source": "Windowed",
     "sourceHash": "aeb17388b472c4ed3c0374412b81c128014426fffeafcebb0af89951d0347640",
     "text": "窗口模式"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "3b02687b76ab2bd073877905cfe9af3beb07d41078a0937f1c7096e3674a0643",
+    "text": "{{description}}；{{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "b91a9c8a324c085e4a77852099c242b6b271d0169422394e496a9c7fb0027860",
+    "text": "{{keyword}}加成 {{count}}%；{{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "a03e9e168ebe7685291a1169d8a30b2246c13f7ffec5c55e22f4eb4d80e0be12",
+    "text": "{{count}}% 在你的下一回合到期"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "4e7c61688e9abf1a916faf2152e36f92367f15bd9aa1ee0fb73c13bbeed27e2c",
+    "text": "{{count}}% 来自{{trait}}"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "5ec2e3c4a7a9faaadbbd3256dd2e881980e101975ec96cecc3c290756378decf",
+    "text": "{{keyword}} {{count}}；{{description}}"
   },
   "talents.unlocked": {
     "reviewed": true,

@@ -641,6 +641,12 @@
     "sourceHash": "c94de88083fe5ec567d91def86d6bbedcdf8224c311353a12d82511a723d263a",
     "text": "水"
   },
+  "content.species.dunefox.trait": {
+    "reviewed": true,
+    "source": "Shifting Sands",
+    "sourceHash": "ba32ca08ce42707b8f70ef91c688db3a68f5165d5efa12cc65f0ab0ec478ef3c",
+    "text": "移ろう砂"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1252,6 +1258,36 @@
     "source": "Windowed",
     "sourceHash": "746ae9dc77bd40cb0eadc731954e7b6611ebb5af6d95373d9de5acba197f16b9",
     "text": "ウィンドウ"
+  },
+  "status.additional": {
+    "reviewed": true,
+    "source": "{{description}}; {{extra}}",
+    "sourceHash": "720abd7018bf1fbe224aefe41862579331089edbe191897b86b0430192ab0eb5",
+    "text": "{{description}}；{{extra}}"
+  },
+  "status.dodge": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}% bonus; {{description}}",
+    "sourceHash": "9c91f37c2666014bac453b4adeaaeef78152baf246788a19f5c887ef5b9b870b",
+    "text": "{{keyword}}ボーナス {{count}}%；{{description}}"
+  },
+  "status.dodgeExpires": {
+    "reviewed": true,
+    "source": "{{count}}% expires at your next turn",
+    "sourceHash": "aae3ed7746c07d290bfd1e2f5b65eb84ea1366d6a3f48b9a04966f8aba7d02fc",
+    "text": "{{count}}%は次の自分のターンに終了"
+  },
+  "status.dodgeShared": {
+    "reviewed": true,
+    "source": "{{count}}% from {{trait}}",
+    "sourceHash": "81252b344233e351bcfaae3bdae786e729bd85179818154d08439a941ad5820a",
+    "text": "{{trait}}による{{count}}%"
+  },
+  "status.measured": {
+    "reviewed": true,
+    "source": "{{keyword}} {{count}}; {{description}}",
+    "sourceHash": "cc4099054fbc1ef2828eec14d18cf4c06039fee7928d9aa928ec499ac4000f14",
+    "text": "{{keyword}} {{count}}；{{description}}"
   },
   "talents.unlocked": {
     "reviewed": true,
