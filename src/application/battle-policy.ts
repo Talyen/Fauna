@@ -6,6 +6,16 @@ import { availablePlays } from "../game/play-queries";
 import { battleBenefits, battleBenefitFacts, BATTLE_FINISH_PRIORITY } from "./battle-benefits";
 import type { Command, GameState } from "../game/types";
 
+/** A forced replacement with one living backup has no player decision. */
+export function soleReplacement(state: GameState, autoEndTurn: boolean): Command | null {
+  const outgoing = pendingReplacement(state);
+  if (!outgoing) return null;
+  const living = state.reserves.filter((unit) => unit.health > 0);
+  return living.length === 1
+    ? { type: "swap", activeId: outgoing.id, reserve: living[0]!.id, autoEndTurn }
+    : null;
+}
+
 export const BATTLE_POLICY_VERSION = 39;
 
 export interface BattleChoice {

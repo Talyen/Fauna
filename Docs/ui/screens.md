@@ -113,7 +113,7 @@ Show only outcome and permanent gains. Keywords use names, levels (earned points
 
 Show a quiet encounter number out of eight and keep compact last-battle earnings visible until the next battle begins. Ordinary combat uses one blank landscape ArtCard labeled Combat. Boss entrances show the authored name/species artwork and base-trait hover/focus details. Activating either starts the saved battle directly, without previews or visible intents. Keep Deck available. No free Swap or Lineup control appears.
 
-When deployed knockouts have living backup, show a centered, nondismissible Choose a replacement Dialog. Put the knocked-out creature above living backup at shared sizes, separated by an up/down icon. Only backup choices commit, immediately. Focus the first living choice; successive knockouts receive successive prompts, then focus returns to the hand or End turn. Escape/outside click cannot bypass the choice. Backup stays hidden on the battlefield. [Replacement rules](../EXPEDITION_DESIGN.md#knockout-replacement-and-ability-swaps) own resume.
+When exactly one living backup can replace a knockout, dispatch that replacement immediately. When multiple backups are available, show a centered, nondismissible Choose a replacement Dialog. Put the knocked-out creature above living backup at shared sizes, separated by an up/down icon. Only backup choices commit, immediately. Focus the first living choice; repeat only while a choice remains, then focus returns to the hand or End turn. Escape/outside click cannot bypass the choice. Backup stays hidden on the battlefield. [Replacement rules](../EXPEDITION_DESIGN.md#knockout-replacement-and-ability-swaps) own resume.
 
 ## Optional Recruit destination
 

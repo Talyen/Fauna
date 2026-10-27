@@ -5,6 +5,7 @@ import { EffectScope, EffectsScene } from "../shared/effects/effects";
 import { useDevicePreferences } from "../settings/preferences";
 import { bossEncounter } from "../../game/encounters";
 import { pendingReplacement } from "../../game/team";
+import { soleReplacement } from "../../application/battle-policy";
 import { ShellOverlays } from "./overlays";
 import { routeInput } from "./input";
 import { useActivationAudio } from "../audio/activation-audio";
@@ -22,7 +23,7 @@ import { Campfire } from "../expedition/campfire";
 import { Settings } from "../settings/settings";
 import { useGameAudio } from "../audio/game-audio";
 import { JourneyResults } from "../expedition/journey-results";
-import { useCallback, useEffect, useReducer, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
 import { Menu, Repeat, Pause, FastForward } from "lucide-react";
@@ -33,6 +34,7 @@ import { BattleScreen } from "../battle/battle-screen";
 import type { Inspection } from "../shared/inspection-model";
 import { localizedControllerPrompts, type ControllerFamily } from "../shared/navigation/controller-prompts";
 import { type Controls, connectInput, type InputAction } from "../shared/navigation/input";
+import { returnFocus } from "../shared/navigation/focus";
 import { Draft } from "../expedition/draft";
 import { TeamSelection } from "../expedition/team-selection";
 import { Rewards } from "../expedition/rewards";
@@ -132,6 +134,24 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     },
     [session, autoEndTurn, setAutoplay],
   );
+  const automaticReplacementFocus = useRef(false);
+  useLayoutEffect(() => {
+    if (surface.top !== "replacement" || !view.ready || view.closing) return;
+    const current = session.store.getState();
+    if (current.game !== game || current.overlayActive || current.cloud.blocking) return;
+    const command = soleReplacement(current.game, autoEndTurn);
+    if (command && session.command(command)) automaticReplacementFocus.current = true;
+  }, [session, game, autoEndTurn, surface.top, view.ready, view.closing]);
+  useLayoutEffect(() => {
+    if (!automaticReplacementFocus.current) return;
+    if (route !== "play" || game.phase !== "battle") {
+      automaticReplacementFocus.current = false;
+      return;
+    }
+    if (surface.top !== "page") return;
+    automaticReplacementFocus.current = false;
+    returnFocus(root.current?.querySelector<HTMLElement>(".hand .action-card, .end-turn") ?? null);
+  }, [game, route, surface.top]);
   const leaveResults = () => transition({ type: "home" });
   const menuAnchor = useRef({
     getBoundingClientRect: () =>

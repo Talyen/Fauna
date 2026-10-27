@@ -67,24 +67,21 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     }
   });
 
-test("several knockouts resume as successive choices without a free swap or lineup menu", async ({
-  page,
-}) => {
+test("several knockouts require a choice only while multiple backups remain", async ({ page }) => {
   const initial = produce(fixture(), (d) => {
     d.team.forEach((c) => (c.health = 0));
   });
   await seed(page, initial);
   await resume(page);
-  let dialog = page.getByRole("dialog", { name: "Choose a replacement" });
+  const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
   await dialog.getByRole("button", { name: "Pollenmoth, backup", exact: true }).click();
-  dialog = page.getByRole("dialog", { name: "Choose a replacement" });
-  await expect(dialog.getByRole("button", { name: "Captoad, backup", exact: true })).toBeFocused();
+  await expect(dialog).not.toBeVisible();
+  await expect.poll(async () => (await state(page)).team.filter((c) => c.health > 0)).toHaveLength(2);
+  const next = await state(page);
   await reloadHome(page);
   await resume(page);
-  await expect(dialog).toBeVisible();
-  await dialog.getByRole("button", { name: "Captoad, backup", exact: true }).click();
   await expect(dialog).not.toBeVisible();
-  const next = await state(page);
+  expect(await state(page)).toEqual(next);
   expect(next.team.filter((c) => c.health > 0)).toHaveLength(2);
   await page.getByRole("button", { name: "Open menu" }).click();
   await expect(page.getByRole("button", { name: "Lineup", exact: true })).toHaveCount(0);
