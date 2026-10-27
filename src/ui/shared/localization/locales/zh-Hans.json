@@ -1407,7 +1407,7 @@
     "reviewed": true,
     "source": "<keyword0>Freeze</keyword0> hits also add half their <keyword1>Freeze</keyword1> buildup to another enemy",
     "sourceHash": "e5ea619af8560fd539297fe59f676b1f68dca8fd2709086709fad4d7edc0c508",
-    "text": "<keyword0>冻结</keyword0>攻击还会将其一半的<keyword1>冻结</keyword1>积累施加给另一名敌人"
+    "text": "<keyword0>冻结</keyword0>命中还会将其一半的<keyword1>冻结</keyword1>积累施加给另一名敌人"
   },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
@@ -3963,7 +3963,7 @@
     "reviewed": true,
     "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
     "sourceHash": "dd7052c910a639a36bb5fcc85300fc5fcff3633c6e4584549ec075045dec781b",
-    "text": "一次遭遇; 击败所有敌人即可获胜; <keyword0>生命</keyword0>和击倒状态在遭遇之间保留; 营火休息会恢复每个生物最大<keyword1>生命</keyword1>的{{value0}}%，包括被击倒的生物; 战斗效果和<keyword2>格挡</keyword2>会在下一场战斗重置"
+    "text": "一次遭遇; 击败所有敌人即可获胜; <keyword0>生命</keyword0>和击倒状态在遭遇之间保留; 篝火休息会恢复每个生物最大<keyword1>生命</keyword1>的{{value0}}%，包括被击倒的生物; 战斗效果和<keyword2>格挡</keyword2>会在下一场战斗重置"
   },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
@@ -4311,7 +4311,7 @@
     "reviewed": true,
     "source": "Swap cards",
     "sourceHash": "5be0d3e95cde202ced91e9845bada75f54a1ba5974150329b60cd2cf9c142d29",
-    "text": "换位牌"
+    "text": "换人牌"
   },
   "content.glossary.talents.definition.rule": {
     "reviewed": true,
@@ -8745,13 +8745,13 @@
     "reviewed": true,
     "source": "{{name}} nullifies {{status}}",
     "sourceHash": "5ccaa194342a763fdbf865b34cbddd4ed324b7944e2fc8490183e6a31c660cb2",
-    "text": "{{name}}抵消了{{status}}"
+    "text": "{{name}}无效化了{{status}}"
   },
   "log.nullifyFreezeDamage": {
     "reviewed": true,
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "9f1921bf23ba61fd52c991dc57ba442bcf37fc08876ec7fa959c0ce327312c17",
-    "text": "{{name}}抵消了冻结伤害"
+    "text": "{{name}}无效化了冻结伤害"
   },
   "log.reachDeathsDoor": {
     "reviewed": true,

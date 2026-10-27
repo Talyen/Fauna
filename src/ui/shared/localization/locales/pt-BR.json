@@ -2307,7 +2307,7 @@
     "reviewed": true,
     "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
     "sourceHash": "0206cd8fccc6795d91da148643c992f9c644a4357c8f9375a580f341cc7d4c7a",
-    "text": "Cartas compradas: {{value0}} / <keyword0>Purifica</keyword0> a <keyword1>Cegueira</keyword1> dos aliados"
+    "text": "Compre {{value0}} cartas / <keyword0>Purifique</keyword0> a <keyword1>Cegueira</keyword1> dos aliados"
   },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
@@ -2445,13 +2445,13 @@
     "reviewed": true,
     "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
     "sourceHash": "e9816b43f25b41ad099790b00865e2d0d92fd01ff6a3310fdf1dea6684ff7427",
-    "text": "Cartas compradas: {{value0}}; Restaura {{value1}} de <keyword0>Saúde</keyword0>"
+    "text": "Compre {{value0}} cartas; Restaure {{value1}} de <keyword0>Saúde</keyword0>"
   },
   "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
     "sourceHash": "d7ff58011b23e1049ea95a8f6e4dd625849169b7c3b9d1031d5af4027dbb749d",
-    "text": "Cartas compradas: {{value0}}; Restaura {{value1}} de <keyword0>Saúde</keyword0>"
+    "text": "Compre {{value0}} carta; Restaure {{value1}} de <keyword0>Saúde</keyword0>"
   },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -2541,7 +2541,7 @@
     "reviewed": true,
     "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
     "sourceHash": "1a4b742a0c13787345435f970349077f168d46dd8091918b5d7c72c9043a9b9f",
-    "text": "Concede {{value0}}% de <keyword0>Esquiva</keyword0> a todos os aliados até seu próximo turno; Cartas compradas: {{value1}}"
+    "text": "Conceda {{value0}}% de <keyword0>Esquiva</keyword0> a todos os aliados até seu próximo turno; Compre {{value1}} carta"
   },
   "content.card.captoad-attack.name": {
     "reviewed": true,
@@ -2733,7 +2733,7 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "sourceHash": "0b22112f28eb1d23ed7dbe81986edbc16cce86923a598533b51d3d534d4de44a",
-    "text": "<keyword0>Purifica</keyword0> efeitos prejudiciais de cada aliado: {{value0}}; Cartas compradas: {{value1}}"
+    "text": "<keyword0>Purifique</keyword0> efeitos prejudiciais de cada aliado: {{value0}}; Compre {{value1}} carta"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
@@ -2745,7 +2745,7 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "sourceHash": "a3f4af0a5fc9bd15ad9c042d41954fcf4918280cea7c911325a9258330c61e6e",
-    "text": "<keyword0>Purifica</keyword0> efeitos prejudiciais de cada aliado: {{value0}}; Cartas compradas: {{value1}}"
+    "text": "<keyword0>Purifique</keyword0> efeitos prejudiciais de cada aliado: {{value0}}; Compre {{value1}} carta"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
@@ -3759,7 +3759,7 @@
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
     "sourceHash": "4dad6603e2233105d0d362876e4a478d39c707aed4534aceb717db1a5e40eeb0",
-    "text": "Restaura {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados; Cartas compradas: {{value1}}"
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados; Compre {{value1}} carta"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
@@ -8571,7 +8571,7 @@
     "reviewed": true,
     "source": "{{name}} was discovered again; your roster is unchanged.",
     "sourceHash": "f61bd49e24bc806f9dd8e426c2e8b88da3efcc3623151a82fcc74966d816651a",
-    "text": "Nova descoberta: {{name}}; seu grupo não mudou."
+    "text": "Redescoberta: {{name}}; seu grupo não mudou."
   },
   "log.criticalDamage": {
     "reviewed": true,
