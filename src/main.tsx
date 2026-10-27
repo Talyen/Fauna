@@ -1,5 +1,7 @@
 import { useLayoutEffect } from "react";
 import { assetUrl } from "./ui/shared/assets";
+import { resolveLanguage } from "./ui/shared/localization/languages";
+import { MessageProvider } from "./ui/shared/localization/message-context";
 import { GameErrorBoundary } from "./ui/shared/diagnostics";
 import { createRoot } from "react-dom/client";
 import { createSession } from "./application/session";
@@ -12,10 +14,12 @@ import { prepareStartup } from "./ui/startup/prepare";
 import type { StartupSplash } from "./ui/startup/splash";
 import "@fontsource-variable/inter/wght-italic.css";
 import "./ui/styles.css";
+const englishCatalog = Object.freeze({});
 for (const name of ["full", "empty"])
   document.documentElement.style.setProperty(`--mana-${name}-image`, `url("${assetUrl(`mana.${name}`)}")`);
 export function mountGame(splash: StartupSplash) {
   const platform = createPlatform();
+  const locale = resolveLanguage("auto", null, navigator.languages);
   const releasePerformance = installPerformanceRecorder(rendererPerformanceRecorder);
   const session = createSession(platform, Date.now() >>> 0, {
     development: import.meta.env.DEV,
@@ -29,9 +33,11 @@ export function mountGame(splash: StartupSplash) {
       startup.releaseImages();
     }, []);
     return (
-      <GameErrorBoundary diagnostics={session.diagnostics}>
-        <App session={session} desktop={platform.desktop} />
-      </GameErrorBoundary>
+      <MessageProvider locale={locale} catalog={englishCatalog}>
+        <GameErrorBoundary diagnostics={session.diagnostics}>
+          <App session={session} desktop={platform.desktop} />
+        </GameErrorBoundary>
+      </MessageProvider>
     );
   }
   const onError = (event: ErrorEvent) => session.diagnostics.record("global", event.error ?? event.message);

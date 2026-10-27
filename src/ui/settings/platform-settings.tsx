@@ -1,9 +1,11 @@
+import { useMessages } from "../shared/localization/message-context";
 import { Loading } from "../shared/loading";
 import { useEffect, useRef, useState } from "react";
 import type { Session } from "../../application/session";
 import type { DisplayState } from "../../platform/ports";
 import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group";
 export function DisplaySettings({ session }: { session: Session }) {
+  const i18n = useMessages();
   const port = session.display;
   const mounted = useRef(true);
   useEffect(() => {
@@ -44,9 +46,9 @@ export function DisplaySettings({ session }: { session: Session }) {
   if (!port) return null;
   return (
     <section>
-      <h3 className="settings-heading">Display mode</h3>
+      <h3 className="settings-heading">{i18n.message("settings.displayMode", "Display mode")}</h3>
       <RadioGroup
-        aria-label="Display mode"
+        aria-label={i18n.message("settings.displayMode", "Display mode")}
         orientation="horizontal"
         value={state.mode}
         disabled={busy}
@@ -68,8 +70,17 @@ export function DisplaySettings({ session }: { session: Session }) {
       >
         {(["windowed", "fullscreen"] as const).map((value) => (
           <label className="text-size-option" key={value}>
-            <RadioGroupItem value={value} aria-label={value === "windowed" ? "Windowed" : "Fullscreen"} />
-            {value === "windowed" ? "Windowed" : "Fullscreen"}
+            <RadioGroupItem
+              value={value}
+              aria-label={
+                value === "windowed"
+                  ? i18n.message("settings.windowed", "Windowed")
+                  : i18n.message("settings.fullscreen", "Fullscreen")
+              }
+            />
+            {value === "windowed"
+              ? i18n.message("settings.windowed", "Windowed")
+              : i18n.message("settings.fullscreen", "Fullscreen")}
           </label>
         ))}
       </RadioGroup>

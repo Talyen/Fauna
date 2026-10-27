@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import type { ShellSurface } from "./navigation";
 import { EffectScope } from "../shared/effects/effects";
 import type { RefObject } from "react";
@@ -41,6 +42,7 @@ export function ShellOverlays({
   inspectionControls,
   surface,
 }: ShellOverlaysProps) {
+  const i18n = useMessages();
   const replacement = pendingReplacement(game);
   return (
     <>
@@ -56,12 +58,12 @@ export function ShellOverlays({
           className="deck-dialog"
           closeLabel={
             modal === "draw"
-              ? "Close draw pile"
+              ? i18n.message("overlay.closeDraw", "Close draw pile")
               : modal === "discard"
-                ? "Close discard pile"
+                ? i18n.message("overlay.closeDiscard", "Close discard pile")
                 : modal === "deck"
-                  ? "Close deck"
-                  : "Close Boons"
+                  ? i18n.message("overlay.closeDeck", "Close deck")
+                  : i18n.message("overlay.closeBoons", "Close Boons")
           }
           onCloseAutoFocus={(event) => {
             event.preventDefault();
@@ -70,16 +72,18 @@ export function ShellOverlays({
         >
           <DialogTitle>
             {modal === "draw"
-              ? "Draw Pile"
+              ? i18n.message("overlay.drawPile", "Draw Pile")
               : modal === "discard"
-                ? "Discard Pile"
+                ? i18n.message("overlay.discardPile", "Discard Pile")
                 : modal === "deck"
-                  ? "Deck"
+                  ? i18n.message("overlay.deck", "Deck")
                   : modal === "boons"
-                    ? "Boons"
+                    ? i18n.message("overlay.boons", "Boons")
                     : ""}
           </DialogTitle>
-          <DialogDescription className="sr-only">Game information and controls</DialogDescription>
+          <DialogDescription className="sr-only">
+            {i18n.message("overlay.information", "Game information and controls")}
+          </DialogDescription>
           <EffectScope name={modal ?? "modal"}>
             {modal === "deck" || modal === "draw" || modal === "discard" ? (
               <DeckCards
@@ -108,7 +112,9 @@ export function ShellOverlays({
             data-nav-layout="rows"
             showCloseButton={false}
             onOpenAutoFocus={(event) => {
-              const first = document.querySelector<HTMLElement>('.swap-dialog [aria-label="Backup"] button');
+              const first = document.querySelector<HTMLElement>(
+                ".swap-dialog [data-replacement-choices] button",
+              );
               if (first) {
                 event.preventDefault();
                 first.focus();
@@ -126,9 +132,12 @@ export function ShellOverlays({
               );
             }}
           >
-            <DialogTitle>Choose a replacement</DialogTitle>
+            <DialogTitle>{i18n.message("overlay.replacement", "Choose a replacement")}</DialogTitle>
             <DialogDescription className="sr-only">
-              Choose a living backup for your knocked-out creature
+              {i18n.message(
+                "overlay.replacementHelp",
+                "Choose a living backup for your knocked-out creature",
+              )}
             </DialogDescription>
             <EffectScope name="replacement">
               <ReplacementPicker key={replacement.id} game={game} outgoing={replacement} send={send} />

@@ -35,6 +35,22 @@ helpers, content, game rules, startup code and other attributes, and may include
 non-player literals. Review each candidate in context and separately enumerate the
 missing surfaces. Do not infer completion from the count.
 
+## Explicit UI messages
+
+Migrated components use `useMessages()` as `i18n`. Call `i18n.message` with a
+stable literal ID and English sentence, or `i18n.plural` with literal English
+`one` and `other` forms. Named `{{value}}` parameters let translations reorder
+values; use a complete message for accessible names as well as visible labels.
+Numbers are formatted for the selected language. Missing, stale or structurally
+invalid translations fall back to English.
+
+Run `npm run localization:extract` after changing these calls and commit the
+resulting English catalog. `npm run localization:check`, the local changed-file
+gate and CI check its freshness, duplicate IDs, English forms and parameter
+syntax. This only covers explicit calls in `src/ui`; it does not detect all
+unconverted player text, validate non-English catalogs or qualify a language.
+The inventory remains a separate migration aid.
+
 ## Implementation and qualification
 
 1. Establish stable message IDs, named parameters, semantic keyword parts and a
@@ -53,8 +69,9 @@ missing surfaces. Do not infer completion from the count.
    qualify browser, desktop, Windows and Steam separately. Do not offer or advertise
    a language until its catalog, fonts, interactions and layouts are complete
 
-The inventory and the internal rule-message adapter are preparation steps. The
-adapter retains numeric values and keyword identities so a complete translated
-rule can reorder them; invalid templates fall back to the English rule. It does
-not yet cover every message or provide catalog extraction, language selection or
-non-English catalogs. Fauna remains English-only.
+The inventory, explicit UI messages and internal rule-message adapter are
+preparation steps. The adapter retains numeric values and keyword identities so a
+complete translated rule can reorder them; invalid templates fall back to the
+English rule. The English catalog covers only migrated UI calls. It does not yet
+cover every message, generated rules or non-English catalogs, and no language
+selector is available. Fauna remains English-only.

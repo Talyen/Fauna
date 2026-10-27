@@ -1,0 +1,203 @@
+{
+  "battle.autoplay": {
+    "text": "Auto-play"
+  },
+  "battle.openMenu": {
+    "text": "Open menu"
+  },
+  "battle.skipCombat": {
+    "text": "Skip combat"
+  },
+  "common.loading": {
+    "text": "Loading…"
+  },
+  "glossary.controllerHelp": {
+    "text": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu"
+  },
+  "glossary.entries": {
+    "text": "Glossary entries"
+  },
+  "glossary.keyboardHelp": {
+    "text": "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back · View creature abilities in Collection from the menu"
+  },
+  "glossary.title": {
+    "text": "Glossary & controls"
+  },
+  "menu.boons": {
+    "text": "Boons"
+  },
+  "menu.collection": {
+    "text": "Collection"
+  },
+  "menu.continue": {
+    "text": "Continue"
+  },
+  "menu.endJourney": {
+    "text": "End journey"
+  },
+  "menu.glossary": {
+    "text": "Glossary"
+  },
+  "menu.logo": {
+    "text": "Fauna logo"
+  },
+  "menu.mainMenu": {
+    "text": "Main menu"
+  },
+  "menu.play": {
+    "text": "Play"
+  },
+  "menu.quit": {
+    "text": "Save & quit"
+  },
+  "menu.settings": {
+    "text": "Settings"
+  },
+  "menu.talentPoints": {
+    "forms": {
+      "one": "{{count}} talent point available",
+      "other": "{{count}} talent points available"
+    }
+  },
+  "menu.talents": {
+    "text": "Talents"
+  },
+  "navigation.back": {
+    "text": "Back"
+  },
+  "overlay.boons": {
+    "text": "Boons"
+  },
+  "overlay.closeBoons": {
+    "text": "Close Boons"
+  },
+  "overlay.closeDeck": {
+    "text": "Close deck"
+  },
+  "overlay.closeDiscard": {
+    "text": "Close discard pile"
+  },
+  "overlay.closeDraw": {
+    "text": "Close draw pile"
+  },
+  "overlay.deck": {
+    "text": "Deck"
+  },
+  "overlay.discardPile": {
+    "text": "Discard Pile"
+  },
+  "overlay.drawPile": {
+    "text": "Draw Pile"
+  },
+  "overlay.information": {
+    "text": "Game information and controls"
+  },
+  "overlay.replacement": {
+    "text": "Choose a replacement"
+  },
+  "overlay.replacementHelp": {
+    "text": "Choose a living backup for your knocked-out creature"
+  },
+  "recovery.display": {
+    "text": "Fauna could not display this screen; trying again…"
+  },
+  "recovery.save": {
+    "text": "Progress cannot be saved right now; keep Fauna open while it retries"
+  },
+  "replacement.backup": {
+    "text": "Backup"
+  },
+  "replacement.backupCreature": {
+    "text": "{{creature}}, backup"
+  },
+  "replacement.knockedOut": {
+    "text": "Knocked out"
+  },
+  "replacement.knockedOutCreature": {
+    "text": "{{creature}}, knocked out"
+  },
+  "settings.audio": {
+    "text": "Audio"
+  },
+  "settings.autoEndTurn": {
+    "text": "Auto-end turn"
+  },
+  "settings.automatic": {
+    "text": "Automatic"
+  },
+  "settings.battle": {
+    "text": "Battle"
+  },
+  "settings.categories": {
+    "text": "Settings categories"
+  },
+  "settings.controllerPrompts": {
+    "text": "Controller prompts"
+  },
+  "settings.display": {
+    "text": "Display"
+  },
+  "settings.displayMode": {
+    "text": "Display mode"
+  },
+  "settings.effects": {
+    "text": "Sound effects"
+  },
+  "settings.effectsVolume": {
+    "text": "Sound effects volume"
+  },
+  "settings.effectsVolumeValue": {
+    "text": "Sound effects volume value"
+  },
+  "settings.fullscreen": {
+    "text": "Fullscreen"
+  },
+  "settings.glow": {
+    "text": "Background Glow"
+  },
+  "settings.glowValue": {
+    "text": "Background Glow value"
+  },
+  "settings.master": {
+    "text": "Master"
+  },
+  "settings.masterVolume": {
+    "text": "Master volume"
+  },
+  "settings.masterVolumeValue": {
+    "text": "Master volume value"
+  },
+  "settings.music": {
+    "text": "Music"
+  },
+  "settings.musicVolume": {
+    "text": "Music volume"
+  },
+  "settings.musicVolumeValue": {
+    "text": "Music volume value"
+  },
+  "settings.muteBackground": {
+    "text": "Mute in background"
+  },
+  "settings.particles": {
+    "text": "Background Particles"
+  },
+  "settings.particlesValue": {
+    "text": "Background Particles value"
+  },
+  "settings.sound": {
+    "text": "Sound"
+  },
+  "settings.textSize": {
+    "text": "Text size"
+  },
+  "settings.tooltipPercent": {
+    "text": "Tooltip {{value}}%"
+  },
+  "settings.tooltipSize": {
+    "text": "Tooltip size"
+  },
+  "settings.windowed": {
+    "text": "Windowed"
+  }
+}

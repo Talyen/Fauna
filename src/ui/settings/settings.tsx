@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { Slider } from "../../components/ui/slider";
 import { Eclipse, Sparkles, Gamepad2 } from "lucide-react";
 import { EffectBaseline } from "../shared/effects/effects";
@@ -21,23 +22,28 @@ export function Settings({
   preferences: DevicePreferences;
   update: (patch: PreferencesPatch) => void;
 }) {
+  const i18n = useMessages();
   const { audio, scale, tooltipScale, autoEndTurn, controller } = preferences;
   const [tab, setTab] = useState("display");
   return (
     <Tabs value={tab} onValueChange={setTab} className="settings-controls" data-nav-layout="rows">
       <EffectBaseline palette={effectPalette([], "gold")} />
-      <TabsList data-nav-row aria-label="Settings categories" className="settings-tabs">
+      <TabsList
+        data-nav-row
+        aria-label={i18n.message("settings.categories", "Settings categories")}
+        className="settings-tabs"
+      >
         <TabsTrigger value="display">
           <Monitor aria-hidden="true" />
-          Display
+          {i18n.message("settings.display", "Display")}
         </TabsTrigger>
         <TabsTrigger value="sound">
           <Headphones aria-hidden="true" />
-          Sound
+          {i18n.message("settings.sound", "Sound")}
         </TabsTrigger>
         <TabsTrigger value="battle">
           <Swords aria-hidden="true" />
-          Battle
+          {i18n.message("settings.battle", "Battle")}
         </TabsTrigger>
       </TabsList>
       <TabsContent
@@ -47,13 +53,13 @@ export function Settings({
         aria-hidden={tab !== "display"}
         className="settings-panel"
       >
-        <h2 className="settings-heading">Display</h2>
+        <h2 className="settings-heading">{i18n.message("settings.display", "Display")}</h2>
         <DisplaySettings session={session} />
-        <SettingRow icon={CaseSensitive} label="Text size">
+        <SettingRow icon={CaseSensitive} label={i18n.message("settings.textSize", "Text size")}>
           <RadioGroup
             orientation="horizontal"
             className="text-size-options"
-            aria-label="Text size"
+            aria-label={i18n.message("settings.textSize", "Text size")}
             value={String(scale)}
             onValueChange={(value) => update({ scale: Number(value) })}
           >
@@ -65,17 +71,22 @@ export function Settings({
             ))}
           </RadioGroup>
         </SettingRow>
-        <SettingRow icon={MessageSquareText} label="Tooltip size">
+        <SettingRow icon={MessageSquareText} label={i18n.message("settings.tooltipSize", "Tooltip size")}>
           <RadioGroup
             orientation="horizontal"
             className="text-size-options"
-            aria-label="Tooltip size"
+            aria-label={i18n.message("settings.tooltipSize", "Tooltip size")}
             value={String(tooltipScale)}
             onValueChange={(value) => update({ tooltipScale: Number(value) })}
           >
             {TEXT_SCALES.map((value) => (
               <label key={value} className="text-size-option">
-                <RadioGroupItem value={String(value)} aria-label={`Tooltip ${value * 100}%`} />
+                <RadioGroupItem
+                  value={String(value)}
+                  aria-label={i18n.message("settings.tooltipPercent", "Tooltip {{value}}%", {
+                    value: value * 100,
+                  })}
+                />
                 <span>{value * 100}%</span>
               </label>
             ))}
@@ -83,10 +94,20 @@ export function Settings({
         </SettingRow>
         {(
           [
-            ["glow", "Background Glow", Eclipse],
-            ["particles", "Background Particles", Sparkles],
+            [
+              "glow",
+              i18n.message("settings.glow", "Background Glow"),
+              i18n.message("settings.glowValue", "Background Glow value"),
+              Eclipse,
+            ],
+            [
+              "particles",
+              i18n.message("settings.particles", "Background Particles"),
+              i18n.message("settings.particlesValue", "Background Particles value"),
+              Sparkles,
+            ],
           ] as const
-        ).map(([key, label, icon]) => (
+        ).map(([key, label, valueLabel, icon]) => (
           <SettingRow key={key} icon={icon} label={label}>
             <div className="volume-controls">
               <Slider
@@ -100,7 +121,7 @@ export function Settings({
                 aria-label={label}
                 aria-valuetext={`${preferences[key]}%`}
               />
-              <output aria-label={`${label} value`}>{preferences[key]}%</output>
+              <output aria-label={valueLabel}>{preferences[key]}%</output>
             </div>
           </SettingRow>
         ))}
@@ -121,12 +142,12 @@ export function Settings({
         aria-hidden={tab !== "battle"}
         className="settings-panel"
       >
-        <h2 className="settings-heading">Battle</h2>
-        <SettingRow icon={Gamepad2} label="Controller prompts">
+        <h2 className="settings-heading">{i18n.message("settings.battle", "Battle")}</h2>
+        <SettingRow icon={Gamepad2} label={i18n.message("settings.controllerPrompts", "Controller prompts")}>
           <RadioGroup
             orientation="horizontal"
             className="controller-prompt-options"
-            aria-label="Controller prompts"
+            aria-label={i18n.message("settings.controllerPrompts", "Controller prompts")}
             value={controller}
             onValueChange={(value) => {
               if (value === "auto" || value === "xbox" || value === "playstation" || value === "nintendo")
@@ -135,7 +156,7 @@ export function Settings({
           >
             {(
               [
-                ["auto", "Automatic"],
+                ["auto", i18n.message("settings.automatic", "Automatic")],
                 ["xbox", "Xbox / Deck"],
                 ["playstation", "PlayStation"],
                 ["nintendo", "Nintendo"],
@@ -150,7 +171,7 @@ export function Settings({
         </SettingRow>
         <SettingToggle
           icon={StepForward}
-          label="Auto-end turn"
+          label={i18n.message("settings.autoEndTurn", "Auto-end turn")}
           checked={autoEndTurn}
           onChange={(value) => update({ autoEndTurn: value })}
         />

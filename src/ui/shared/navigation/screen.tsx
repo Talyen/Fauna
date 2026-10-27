@@ -1,3 +1,4 @@
+import { useMessages } from "../localization/message-context";
 import { createContext, useContext, type ComponentPropsWithRef, type ReactNode } from "react";
 import { ArrowLeft, Menu, Layers } from "lucide-react";
 import { Button } from "../../../components/ui/button";
@@ -19,6 +20,7 @@ export function ScreenHeading({
   id?: string;
   trailing?: ReactNode;
 }) {
+  const i18n = useMessages();
   const navigation = useContext(HeaderNavigation);
   return (
     <div className="screen-heading">
@@ -28,7 +30,7 @@ export function ScreenHeading({
             variant="ghost"
             size="icon"
             className="compact-icon-control"
-            aria-label="Back"
+            aria-label={i18n.message("navigation.back", "Back")}
             onClick={back ?? navigation.back}
           >
             <ArrowLeft aria-hidden="true" />
@@ -39,7 +41,7 @@ export function ScreenHeading({
             variant="ghost"
             size="icon"
             className="compact-icon-control"
-            aria-label="Deck"
+            aria-label={i18n.message("overlay.deck", "Deck")}
             onClick={navigation.deck}
           >
             <Layers aria-hidden="true" />
@@ -53,7 +55,7 @@ export function ScreenHeading({
           variant="ghost"
           size="icon"
           className="compact-icon-control"
-          aria-label="Open menu"
+          aria-label={i18n.message("battle.openMenu", "Open menu")}
           onClick={openMenu ?? navigation.openMenu}
         >
           <Menu aria-hidden="true" />

@@ -72,7 +72,7 @@ export function layoutViolations() {
       failures.push(`${describe(main)} content is not vertically centered`);
   }
   if (dialogs.length && active.matches(".menu-panel")) {
-    const anchor = document.querySelector('.play-surface button[aria-label="Open menu"]');
+    const anchor = document.querySelector(".play-surface button[data-menu-anchor]");
     const box = active.getBoundingClientRect();
     if (!anchor) failures.push("menu has no anchor");
     else {
