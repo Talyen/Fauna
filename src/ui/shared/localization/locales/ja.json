@@ -335,11 +335,23 @@
     "sourceHash": "7378ce53146d8e518376135c30f1b0b89110c86d6b92894c37f0d6dfbbca379a",
     "text": "真鍮の香炉"
   },
+  "content.boon.camp-hammock.rule": {
+    "reviewed": true,
+    "source": "Backup allies can receive <keyword0>Healing</keyword0>",
+    "sourceHash": "675c52706ebbb83ba990d2d3372a507185652ac644bf540ea4d80970cfc6a380",
+    "text": "控えの味方も<keyword0>回復</keyword0>を受けられる"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "ef709a86e967ff3fae2857e2ec495e58a195e323e61a6e54a26cf9e0000b0196",
     "text": "掏摸のナイフ"
+  },
+  "content.boon.encore-baton.rule": {
+    "reviewed": true,
+    "source": "Draw a card after playing three",
+    "sourceHash": "7a8e8f1f3f5affc38ad61eff8c06bfec07d5b2a69e95c58bd219e5a7760936a2",
+    "text": "カードを3枚使うたびに1枚引く"
   },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
@@ -347,11 +359,29 @@
     "sourceHash": "ba5f9ed200c9be2f39d86443ca079383e2c187dea840d50b8930543233e05ad0",
     "text": "手札の上限が1枚増える"
   },
+  "content.boon.field-lunch-basket.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> draws a card",
+    "sourceHash": "7271aa4125770078775d78d7a2da0262908b3a90b6260b588fb018d44294f5d8",
+    "text": "<keyword0>食料</keyword0>を使うとカードを1枚引く"
+  },
+  "content.boon.gemmed-scabbard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "086e912b446e51772cc545f7fcd8ccbe087c5f7a47bdfb100b59dbfdf961f366",
+    "text": "<keyword0>装甲</keyword0>は<keyword1>棘</keyword1>ダメージも軽減する"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "6c601a1114b14e5324d89b0749b1422cde3d04bc2e084d03b8b0e4afc5aae29f",
     "text": "木立の恩恵"
+  },
+  "content.boon.hoard-lockplate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
+    "sourceHash": "135bf7c01d159f5723ce058b83c76882704ba27d8c2ceef8db88aca803891d17",
+    "text": "<keyword0>装甲</keyword0>が<keyword1>ブロック</keyword1>より先にダメージを軽減する"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -401,6 +431,18 @@
     "sourceHash": "5718d4987a110ec5ef5cf2d896c4c97961d24d7385497692a9405c92ca1c85c9",
     "text": "疫病医師の仮面"
   },
+  "content.boon.rain-cape.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Water</keyword1>",
+    "sourceHash": "2371bf08998a1e11f574bcf0f7a6ded784d54c80315830dbbdc38a36e1026e62",
+    "text": "<keyword0>ブロック</keyword0>は<keyword1>水</keyword1>に対して2倍の効果を持つ"
+  },
+  "content.boon.rainkeeper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Mana</keyword0> can overflow",
+    "sourceHash": "88604a712fd0d1953c7d642d0ca4608942d9eeb74e7dcde565b1f817ee8d74fa",
+    "text": "<keyword0>マナ</keyword0>は上限を超えて蓄えられる"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -436,6 +478,12 @@
     "source": "Thunderstone",
     "sourceHash": "daa6d2f6dcdc1c7a8493f5c50d90bb518bcce75778c53cc4d79acb0572f5cb55",
     "text": "雷石"
+  },
+  "content.boon.wonder-domino.rule": {
+    "reviewed": true,
+    "source": "Overkill damage spreads to other enemies",
+    "sourceHash": "d2bdb158db2a2863a5288e0b2e268232ac5be698e9aae42159c2f49b476e9471",
+    "text": "敵を倒した際の余剰ダメージが他の敵に広がる"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,

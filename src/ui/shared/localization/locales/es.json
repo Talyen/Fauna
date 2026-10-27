@@ -335,11 +335,23 @@
     "sourceHash": "bf3fe178f2945982b5e674768496f7675205c329c05aeab1a790bfd618e00a3d",
     "text": "Incensario de latón"
   },
+  "content.boon.camp-hammock.rule": {
+    "reviewed": true,
+    "source": "Backup allies can receive <keyword0>Healing</keyword0>",
+    "sourceHash": "87e756cc71521f56c6af1f25508cabfe4a01edf6a5bb3ad7d6c71aab264925a5",
+    "text": "Los aliados de reserva pueden recibir <keyword0>curación</keyword0>"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "35b9250db04cffee30d035952783df584bb75ab6421328fd0161ce7c6527690b",
     "text": "Cuchillo de ratero"
+  },
+  "content.boon.encore-baton.rule": {
+    "reviewed": true,
+    "source": "Draw a card after playing three",
+    "sourceHash": "2d2851685bbbd5ce419eb7770e5945cdecbed629c5545db830c431f89aaeab7e",
+    "text": "Roba una carta después de jugar tres"
   },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
@@ -347,11 +359,29 @@
     "sourceHash": "5b32b80a10a4d366f2da9bce359cac357d59bf3da3cbfaa5d1040bc7a4344e07",
     "text": "Obtienes un espacio adicional para cartas en la mano"
   },
+  "content.boon.field-lunch-basket.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> draws a card",
+    "sourceHash": "72d98a6ca7b01b85a5b90e69ff2d6786cba58d912da329423b3ab079b27fb108",
+    "text": "Jugar <keyword0>Comida</keyword0> roba una carta"
+  },
+  "content.boon.gemmed-scabbard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "16f4f431e199475c2bc5e921d5407428186b3168c21a802e1768de2c30ac6929",
+    "text": "La <keyword0>Armadura</keyword0> también reduce el daño de <keyword1>Espinas</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "92eb3f6540556d9da5612e1cbb93e7b75ea6ffa131db067f10d36111e24c91f5",
     "text": "Favor de la arboleda"
+  },
+  "content.boon.hoard-lockplate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
+    "sourceHash": "115c9de777324c68dd277380e040dc455a175ee8c59a6c8d93d1daafdac83de1",
+    "text": "La <keyword0>Armadura</keyword0> reduce el daño antes del <keyword1>Bloqueo</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -401,6 +431,18 @@
     "sourceHash": "04e72e3b3479810b4e92eceb933ec355efc2d9a3e2c894c5b0caa8833d9a84d2",
     "text": "Máscara del médico de la peste"
   },
+  "content.boon.rain-cape.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Water</keyword1>",
+    "sourceHash": "897aaec3c47b6b10707d1dd3b17ef75829ffbbdc216f51d73ec7f8008069a5de",
+    "text": "El <keyword0>Bloqueo</keyword0> es el doble de eficaz contra <keyword1>Agua</keyword1>"
+  },
+  "content.boon.rainkeeper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Mana</keyword0> can overflow",
+    "sourceHash": "5e3a9f81ddb24c9da2740591acce7ad2a14ddf8c0b5daad3b5102fed46589d08",
+    "text": "El <keyword0>Maná</keyword0> puede superar su máximo"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -436,6 +478,12 @@
     "source": "Thunderstone",
     "sourceHash": "dc463ecee47bb2c8f9da819d6894e75cd86226dc7779ca5cc1a18f8a374b4a73",
     "text": "Piedra del trueno"
+  },
+  "content.boon.wonder-domino.rule": {
+    "reviewed": true,
+    "source": "Overkill damage spreads to other enemies",
+    "sourceHash": "ac32092101c84bd2e02f85bc7a650b6667e88fc7e4a1cf1d370cabe01803eed4",
+    "text": "El daño excedente al derrotar a un enemigo se propaga a otros enemigos"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
