@@ -635,6 +635,18 @@
     "sourceHash": "ea6fb2f9b0f249819387372179a72da3d244c12baef90fad42b57e29b773fbb3",
     "text": "Échangez avec un allié en réserve au hasard"
   },
+  "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} cards",
+    "sourceHash": "1696780acfb359a53cac1d5a3b50db755dcaf35a5d9f1002ac5de907615f7648",
+    "text": "Échangez avec un allié en réserve au hasard ; Piochez {{value0}} cartes"
+  },
+  "content.card.chimecricket-attack.v974e88827d51761b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
+    "sourceHash": "fbdfb14e4209a9a386abd61e0dbcea7537d8c7a52913b7e12a55f764fd22ba7e",
+    "text": "Infligez {{value0}} dégâts d’<keyword0>Étourdissement</keyword0> ; Piochez {{value1}} carte"
+  },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
@@ -976,6 +988,12 @@
     "source": "Swap out for a random backup",
     "sourceHash": "d7c89ad56b200a62188b380bafd24fab7e765f9ff344c4563d212fcbdad97323",
     "text": "Échangez avec un allié en réserve au hasard"
+  },
+  "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} card",
+    "sourceHash": "536fd9111fe7eed70ed3a0faccd14e70aad149248d4ef05c486b8b4e48d76405",
+    "text": "Échangez avec un allié en réserve au hasard ; Piochez {{value0}} carte"
   },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,

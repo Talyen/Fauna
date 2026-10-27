@@ -587,6 +587,18 @@
     "sourceHash": "e54e0da61fef9dc01cbf9f1c441bec9194a99af1444189e785d53108b47180f6",
     "text": "控えの味方1体とランダムに交代"
   },
+  "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} cards",
+    "sourceHash": "17f60b570f9ef0134cbea3609fba180044309d57547c528314d26f5a5609dc3b",
+    "text": "控えの味方1体とランダムに交代; カードを{{value0}}枚引く"
+  },
+  "content.card.chimecricket-attack.v974e88827d51761b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
+    "sourceHash": "c19089a0b8ebb8aa9b048661705aca21a5aeec78effca9373bf1b7a4abd10471",
+    "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える; カードを{{value1}}枚引く"
+  },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
@@ -928,6 +940,12 @@
     "source": "Swap out for a random backup",
     "sourceHash": "ef6989dadf0dd8a094364c7bd3bdb26959846736466c31f58cd83cf386e9b7ae",
     "text": "控えの味方1体とランダムに交代"
+  },
+  "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} card",
+    "sourceHash": "3ab1d4652eed0726dec956b44b6b2267a986765f9e8844dce6173008819f9295",
+    "text": "控えの味方1体とランダムに交代; カードを{{value0}}枚引く"
   },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,

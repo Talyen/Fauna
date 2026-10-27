@@ -587,6 +587,18 @@
     "sourceHash": "d8f9be5e12850c0f7403f9d5a5f13ecf4d190be2b623b34f0ed49f1bd458c70b",
     "text": "Сменитесь со случайным союзником из запаса"
   },
+  "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} cards",
+    "sourceHash": "c5e9c365fbe99bf82c68ebd4277a8cbd49b877c64b7620b2e6c6daa12eafc14e",
+    "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
+  },
+  "content.card.chimecricket-attack.v974e88827d51761b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
+    "sourceHash": "ce4ebe6a10e7a26bc250e5f544ea86f622f0b4de701370470be2076fa1003c67",
+    "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>; Добор карт: {{value1}}"
+  },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
@@ -928,6 +940,12 @@
     "source": "Swap out for a random backup",
     "sourceHash": "1380c7935c13da81c9b123392717fad04abfd193655c9a167875631bea62ef56",
     "text": "Сменитесь со случайным союзником из запаса"
+  },
+  "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} card",
+    "sourceHash": "d396b0a837fc80721c39b58b4f2d5bb150f5f2207a9a90e6d8fcc371ea55b9f4",
+    "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
   },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,

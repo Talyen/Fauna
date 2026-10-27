@@ -587,6 +587,18 @@
     "sourceHash": "98296385dddf4a53195756c60ef372525d957337162a62b2c8b7a19f88f4cb80",
     "text": "Tausche gegen ein zufälliges Reservemitglied aus"
   },
+  "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} cards",
+    "sourceHash": "cd7c0ed185f49c21197f195e414a49619bbb996ac71036d77f6e0ca19b36c0c9",
+    "text": "Tausche gegen ein zufälliges Reservemitglied aus; Ziehe {{value0}} Karten"
+  },
+  "content.card.chimecricket-attack.v974e88827d51761b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
+    "sourceHash": "4c241b686ec3db1521477920dbfe46e852dae478fffc354f6bee0ca74b544ce9",
+    "text": "Verursache {{value0}} <keyword0>Betäubung</keyword0>sschaden; Ziehe {{value1}} Karte"
+  },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
@@ -928,6 +940,12 @@
     "source": "Swap out for a random backup",
     "sourceHash": "449ac4777eb1ffae0d9a2b74095bea72368d7787f69cb5ef1693e6498dff86ee",
     "text": "Tausche gegen ein zufälliges Reservemitglied aus"
+  },
+  "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} card",
+    "sourceHash": "61c429aa7f733e9511251c52040ee944c9dbd93cdacd1e714df4c64539e2f413",
+    "text": "Tausche gegen ein zufälliges Reservemitglied aus; Ziehe {{value0}} Karte"
   },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,

@@ -587,6 +587,18 @@
     "sourceHash": "12e8bcbc6b25e5f8c30411cc1e877b2f1c390ecbe2995bd37292b86e9f1ae274",
     "text": "Cambia por un aliado de reserva al azar"
   },
+  "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} cards",
+    "sourceHash": "ff8220d4c368ba9bd1186a3b1495ec960193a607bbdaec5d0179a6317586b789",
+    "text": "Cambia por un aliado de reserva al azar; Roba {{value0}} cartas"
+  },
+  "content.card.chimecricket-attack.v974e88827d51761b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
+    "sourceHash": "9b8c301a83529f40f2b2e9ee02d11a06c95e600e3ea6f2cbb750b8924140519b",
+    "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0>; Roba {{value1}} carta"
+  },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
@@ -928,6 +940,12 @@
     "source": "Swap out for a random backup",
     "sourceHash": "48ec0ccc3854fa81a515cbc6e3255344de55eeb93beac4c13aefed562395bc2a",
     "text": "Cambia por un aliado de reserva al azar"
+  },
+  "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} card",
+    "sourceHash": "8ce6368a4ee21e612ab704e543415af698b1c13ec49a5471b1a14ba87163ed88",
+    "text": "Cambia por un aliado de reserva al azar; Roba {{value0}} carta"
   },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,

@@ -1961,6 +1961,26 @@ it("presents shared Dodge and reflected attack card rules", () => {
   view.unmount();
 });
 
+it("presents translated composite swap and Stun card rules", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={definition("captoad-swap")} />
+        <CardRules card={definition("chimecricket-attack")} value={4} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Échangez avec un allié en réserve au hasard ; Piochez 2 cartes",
+    "Infligez 4 dégâts d’Étourdissement ; Piochez 1 carte",
+  ]);
+  expect(view.container.querySelector('[data-keyword="stun"]')).toBeTruthy();
+  view.unmount();
+});
+
 it("reads authored card description functions without executing source", () => {
   const abilities = readCardDescriptionFunctions(readFileSync("src/game/rules/abilities.ts", "utf8"));
   const extras = readCardDescriptionFunctions(readFileSync("src/game/rules/supplemental.ts", "utf8"));

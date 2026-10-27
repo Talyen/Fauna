@@ -587,6 +587,18 @@
     "sourceHash": "3b1cdaa7a4eeb95fe260581ae26c2f9f26765c85188985f3c7f75cecf4b63031",
     "text": "与随机后备盟友交换"
   },
+  "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} cards",
+    "sourceHash": "78f8ce48477685b6809430847c486ab289f597e07177787c4737af69c99a0122",
+    "text": "与随机后备盟友交换；抽{{value0}}张牌"
+  },
+  "content.card.chimecricket-attack.v974e88827d51761b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
+    "sourceHash": "108f696e36413d03d2f8d98f2cfa332edb0c9f2b3e2324e7f664daa66c873773",
+    "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害；抽{{value1}}张牌"
+  },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
@@ -928,6 +940,12 @@
     "source": "Swap out for a random backup",
     "sourceHash": "e50ca546980f774e4b22bae03abcb0e98609146de360a2892615a3ba654bd5cc",
     "text": "与随机后备盟友交换"
+  },
+  "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} card",
+    "sourceHash": "9aea09b910bf285aadcb4cb868a8e986d4ddb687b659a464f097e92b919768a1",
+    "text": "与随机后备盟友交换；抽{{value0}}张牌"
   },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
