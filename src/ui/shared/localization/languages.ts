@@ -7,12 +7,15 @@ export const QUALIFIED_LANGUAGES: readonly GameLocale[] = (Object.keys(LANGUAGES
   (locale) => LANGUAGES[locale].qualified,
 );
 
+const steamLanguages = new Map<string, GameLocale>();
+for (const [locale, language] of Object.entries(LANGUAGES) as [GameLocale, { steam: string }][]) {
+  if (!steamLanguages.has(language.steam)) steamLanguages.set(language.steam, locale);
+}
+
 function matchLanguage(value: string): GameLocale | undefined {
   const code = value.toLowerCase().replaceAll("_", "-");
-  const steam = (Object.entries(LANGUAGES) as [GameLocale, { steam: string }][]).find(
-    ([, language]) => language.steam === code,
-  );
-  if (steam) return steam[0];
+  const steam = steamLanguages.get(code);
+  if (steam) return steam;
   if (/^(en|de|ru|ja|fr)(-|$)/.test(code)) return code.split("-")[0] as GameLocale;
   if (/^(zh|zh-hans|zh-cn|zh-sg)$/.test(code) || /^zh-(hans|cn|sg)-/.test(code)) return "zh-Hans";
   if (code === "es" || /^es-es(-|$)/.test(code)) return "es";

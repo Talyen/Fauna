@@ -69,8 +69,10 @@ function inspectCard(
   state: BattleState,
   card: Card | undefined,
   recipients: (def: CardDefinition) => ReturnType<typeof chosenRecipients>,
+  inHand = false,
+  recoverable = (actorId: string) => discardDrawCards(state, actorId).length > 0,
 ): ({ allowed: true } & PlayableCard) | { allowed: false; reason: string } {
-  if (!card || !state.battle.hand.includes(card.id))
+  if (!card || (!inHand && !state.battle.hand.includes(card.id)))
     return { allowed: false, reason: "That card is not in your hand." };
   const actor = cardActor(state, card);
   if (!actor || actor.health <= 0) return { allowed: false, reason: "That creature is knocked out." };
@@ -86,7 +88,7 @@ function inspectCard(
     (actor.combat?.fallenCardsPlayedThisTurn ?? 0) >= unfinishedJourneyLimit(state, actor)
   )
     return { allowed: false, reason: "Unfinished Journey’s limit is spent this turn." };
-  if (def.effect === "recover" && def.allyOnly && !discardDrawCards(state, actor.id).length)
+  if (def.effect === "recover" && def.allyOnly && !recoverable(actor.id))
     return { allowed: false, reason: "There are no eligible ally cards in Discard." };
   if (def.effect === "resurrect" && !recipients(def).length)
     return { allowed: false, reason: "There are no knocked-out allies." };
@@ -113,11 +115,20 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     if (!result) recipientsByDefinition.set(def, (result = chosenRecipients(state, def)));
     return result;
   };
+  let recoverableByActor: Map<string, boolean> | undefined;
+  const recoverable = (actorId: string) => {
+    recoverableByActor ??= new Map();
+    if (!recoverableByActor.has(actorId))
+      recoverableByActor.set(actorId, discardDrawCards(state, actorId).length > 0);
+    return recoverableByActor.get(actorId)!;
+  };
   return state.battle.hand.flatMap((cardId) => {
     const play = inspectCard(
       state,
       cards ? cards.get(cardId) : state.cards.find((card) => card.id === cardId),
       recipients,
+      true,
+      recoverable,
     );
     if (!play.allowed) return [];
     const mode = cardTargeting(play.def, state);

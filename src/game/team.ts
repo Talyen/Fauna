@@ -169,8 +169,9 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   const slots = previous.filter(
     (card) => card.ownerId !== null && departing.has(card.ownerId) && !card.temporary,
   );
+  const previousOwners = new Set(previous.map((card) => card.ownerId));
   const needed = state.team
-    .filter((unit) => !previous.some((card) => card.ownerId === unit.id))
+    .filter((unit) => !previousOwners.has(unit.id))
     .flatMap((unit) => ownedCards(unit.id, unit.species));
   const used = new Set(retained.map((card) => card.id));
   const mapped = needed.map((card, index) => {

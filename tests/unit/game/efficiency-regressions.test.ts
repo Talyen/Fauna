@@ -3,6 +3,7 @@ import { cardActor, drawableOwnerIds } from "../../../src/game/card-actors";
 import {
   discardDrawCards,
   drawKeyword,
+  drawOwner,
   drawHasAnotherCard,
   journeyReturnHasDraw,
   recoverBrokenGuard,
@@ -15,7 +16,12 @@ import { projectPlay } from "../../../src/game/preview";
 import { cardKeywords, passiveAmount } from "../../../src/game/progression";
 import { definition, SPECIES } from "../../../src/game/content";
 import { capabilities, offenseValue } from "../../../src/application/team-policy";
-import { availablePlays, chosenRecipients, playTargetError } from "../../../src/game/play-queries";
+import {
+  availablePlays,
+  chosenRecipients,
+  inspectCardPlay,
+  playTargetError,
+} from "../../../src/game/play-queries";
 import { battlefield, isDepartedMinion } from "../../../src/game/battlefield";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { generateEncounterPack } from "../../../src/game/encounters";
@@ -24,6 +30,7 @@ import { observeDecisions } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
 import { matchesPermanentKit, permanentKit } from "../../../src/game/card-kit";
 import { rebuildCards } from "../../../src/game/team";
+import { decodeSave, encodeSave } from "../../../src/game/save";
 import { createMessageReader } from "../../../src/ui/shared/localization/messages";
 
 it("keeps cached card keywords isolated from callers", () => {
@@ -290,4 +297,44 @@ it("formats translated and fallback values with the correct locale across repeat
     expect(reader.message("plain", "Ready")).toBe("Prêt");
     expect(reader.message("broken", "Ready")).toBe("Ready");
   }
+});
+
+it("refreshes ally recovery eligibility between play queries", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["wisterelle", "mossguard"])));
+  const recovery = state.cards.find((card) => card.definitionId === "wisterelle-left-luggage")!;
+  const copy = { ...recovery, id: "copy-recovery" };
+  const ally = state.cards.find((card) => card.ownerId === state.team[1]!.id)!;
+  state.cards.push(copy);
+  state.battle.hand = [recovery.id, copy.id];
+  state.battle.discard = [ally.id];
+  expect(availablePlays(state).map((play) => play.card.id)).toEqual([recovery.id, copy.id]);
+  expect(inspectCardPlay(state, recovery.id).allowed).toBe(true);
+  state.battle.discard = [];
+  expect(availablePlays(state)).toEqual([]);
+  expect(inspectCardPlay(state, recovery.id).allowed).toBe(false);
+  expect(inspectCardPlay(state, ally.id)).toMatchObject({
+    allowed: false,
+    reason: "That card is not in your hand.",
+  });
+});
+
+it("preserves owner-specific draw order", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  const own = state.cards.filter((card) => card.ownerId === state.team[0]!.id).slice(0, 2);
+  const other = state.cards.find((card) => card.ownerId === state.team[1]!.id)!;
+  state.battle.draw = [own[0]!.id, other.id, own[1]!.id];
+  state.battle.discard = [];
+  state.battle.hand = [];
+  state.battle.buffer = [];
+  expect(drawOwner(state, state.team[0]!.id, [])).toBe(true);
+  expect(state.battle.hand).toEqual([own[1]!.id]);
+  expect(state.battle.draw).toEqual([own[0]!.id, other.id]);
+});
+
+it("validates card ownership when resuming a battle", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const card = state.cards.find((entry) => entry.ownerId === state.team[0]!.id)!;
+  card.ownerId = state.team[1]!.id;
+  expect(() => decodeSave(encodeSave(state))).toThrow("Save contains inconsistent game data.");
 });

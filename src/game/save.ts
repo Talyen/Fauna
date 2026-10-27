@@ -144,17 +144,21 @@ function validateRoster(state: GameState) {
   invalid(!unique(roster.map((creature) => creature.species)));
   invalid(roster.some((creature) => !collected.includes(creature.species)));
   invalid(roster.some((c) => c.health > species(c.species).health));
+  const teamById = new Map(state.team.map((unit) => [unit.id, unit]));
+  const cardIdsBySpecies = new Map<string, Set<string>>();
   invalid(
-    state.cards.some((c) =>
-      c.ownerId === null
-        ? !(c.temporary && c.level === 0 && isFood(c.definitionId))
-        : !state.team.some(
-            (t) =>
-              t.id === c.ownerId &&
-              (speciesCards(t.species).some((d) => d.id === c.definitionId) ||
-                (c.temporary && c.definitionId === PEARL.id && t.species === "memento")),
-          ),
-    ),
+    state.cards.some((card) => {
+      if (card.ownerId === null) return !(card.temporary && card.level === 0 && isFood(card.definitionId));
+      const owner = teamById.get(card.ownerId);
+      if (!owner) return true;
+      let ids = cardIdsBySpecies.get(owner.species);
+      if (!ids)
+        cardIdsBySpecies.set(owner.species, (ids = new Set(speciesCards(owner.species).map((d) => d.id))));
+      return (
+        !ids.has(card.definitionId) &&
+        !(card.temporary && card.definitionId === PEARL.id && owner.species === "memento")
+      );
+    }),
   );
   invalid(
     state.cards.some(
@@ -346,8 +350,11 @@ function validateMinions(state: BattleState) {
   if (counts)
     for (const unit of minions) counts.set(unit.minion.ownerId, (counts.get(unit.minion.ownerId) ?? 0) + 1);
   for (const unit of minions) {
-    const owners = unit.minion.side === "player" ? [...state.team, ...state.reserves] : state.battle.enemies;
-    const owner = owners.find((entry) => entry.id === unit.minion.ownerId);
+    const owner =
+      unit.minion.side === "player"
+        ? (state.team.find((entry) => entry.id === unit.minion.ownerId) ??
+          state.reserves.find((entry) => entry.id === unit.minion.ownerId))
+        : state.battle.enemies.find((entry) => entry.id === unit.minion.ownerId);
     invalid(
       !owner ||
         owner.species !== "memento" ||

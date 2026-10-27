@@ -75,9 +75,8 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
 }
 /** Cards owned by another living deployed creature can follow a return through Journey Loom. */
 function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
-  const owners = new Set(
-    state.team.filter((unit) => unit.health > 0 && unit.id !== ownerId).map((unit) => unit.id),
-  );
+  const owners = new Set<string>();
+  for (const unit of state.team) if (unit.health > 0 && unit.id !== ownerId) owners.add(unit.id);
   const cards = new Set<string>();
   for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
   return cards;
@@ -148,16 +147,17 @@ export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[
       : new Set(state.team.filter((unit) => unit.health > 0).map((unit) => unit.id));
   const cards = new Map<string, Card>();
   for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
-  return state.battle!.discard.flatMap((id) => {
+  const result: Card[] = [];
+  for (const id of state.battle!.discard) {
     const card = cards.get(id)!;
-    return (
+    if (
       otherOwnerId === undefined
         ? card.ownerId === null || owners!.has(card.ownerId)
         : card.ownerId !== null && card.ownerId !== otherOwnerId && livingOwners!.has(card.ownerId)
     )
-      ? [card]
-      : [];
-  });
+      result.push(card);
+  }
+  return result;
 }
 
 export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?: string): Card | undefined {
@@ -260,7 +260,8 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
 
 export function drawOwner(state: GameState, ownerId: string, events: GameEvent[]) {
   fillHand(state);
-  const eligible = new Set(state.cards.filter((card) => card.ownerId === ownerId).map((card) => card.id));
+  const eligible = new Set<string>();
+  for (const card of state.cards) if (card.ownerId === ownerId) eligible.add(card.id);
   return drawEligibleCard(state, (id) => eligible.has(id), events);
 }
 

@@ -19,32 +19,30 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
   if (state.phase !== "battle") return [];
   const outgoing = pendingReplacement(state);
   if (outgoing) {
-    const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit, state));
-    const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
+    const needsDamage = !state.team.some(
+      (unit) => unit.health > 0 && !controlled(unit, state) && offenseValue(state, unit.species) > 0,
+    );
     const all = [...state.team, ...state.reserves];
     const active = state.team.map((unit) => unit.id);
-    const incoming = state.reserves
-      .filter((unit) => unit.health > 0)
-      .sort((a, b) => a.id.localeCompare(b.id))
-      .map((unit) => {
-        const ids = formationForSwap(all, active, outgoing.id, unit.id);
-        const lineup = ids
-          .map((id) => all.find((entry) => entry.id === id)!)
-          .filter((entry) => entry.health > 0);
-        const kinds = lineup.map((entry) => entry.species);
-        const damage = needsDamage ? offenseValue(state, unit.species) : 0;
-        const score =
-          (damage > 0 ? 1_000_000 : 0) +
-          (!controlled(unit, state) ? 100_000 : 0) +
-          coverageScore(state, kinds) +
-          damage * 100 +
-          (unit.health / species(unit.species).health) * 100;
-        return { unit, score };
-      })
-      .reduce<{ unit: (typeof state.reserves)[number]; score: number } | undefined>(
-        (best, candidate) => (!best || candidate.score > best.score ? candidate : best),
-        undefined,
-      )?.unit;
+    let best: { unit: (typeof state.reserves)[number]; score: number } | undefined;
+    for (const unit of state.reserves) {
+      if (unit.health <= 0) continue;
+      const ids = formationForSwap(all, active, outgoing.id, unit.id);
+      const lineup = ids
+        .map((id) => all.find((entry) => entry.id === id)!)
+        .filter((entry) => entry.health > 0);
+      const kinds = lineup.map((entry) => entry.species);
+      const damage = needsDamage ? offenseValue(state, unit.species) : 0;
+      const score =
+        (damage > 0 ? 1_000_000 : 0) +
+        (!controlled(unit, state) ? 100_000 : 0) +
+        coverageScore(state, kinds) +
+        damage * 100 +
+        (unit.health / species(unit.species).health) * 100;
+      if (!best || score > best.score || (score === best.score && unit.id.localeCompare(best.unit.id) < 0))
+        best = { unit, score };
+    }
+    const incoming = best?.unit;
     if (incoming)
       return [
         {
