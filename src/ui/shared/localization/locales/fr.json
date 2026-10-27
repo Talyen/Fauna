@@ -4007,6 +4007,12 @@
     "sourceHash": "3831f194e21c01b181fd701bca441940789eccebe4742c08fdadb398096aa607",
     "text": "{{name}} perd {{amount}} d’accumulation de Gel"
   },
+  "log.nullifyFreezeDamage": {
+    "reviewed": true,
+    "source": "{{name}} nullifies Freeze damage",
+    "sourceHash": "13b45693f5679b6a3fb83f5a7e35e5b360fbad1a4e262948d32b7e5979116f08",
+    "text": "{{name}} annule les dégâts de Gel"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -4036,6 +4042,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "08014edb9ff0edba5a8241f4bb4708ff00fc332ad91ce5be2a334ca05d5f498d",
     "text": "Vous revenez des terres sauvages. Les découvertes sont conservées."
+  },
+  "log.skipControlledTurn": {
+    "reviewed": true,
+    "source": "{{name}} skips its {{status}} turn.",
+    "sourceHash": "808aab6c184b44147d96d576d252266020ded69b3629926ca449c6978966f0b5",
+    "text": "{{name}} : tour sauté ({{status}})."
   },
   "log.temporaryDodge": {
     "reviewed": true,

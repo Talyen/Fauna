@@ -3959,6 +3959,12 @@
     "sourceHash": "7a9ebeb5c55006d03ebb285c14516a62d439274e46af4c0388501a8eff3ae549",
     "text": "{{name}}减少{{amount}}点冻结积累"
   },
+  "log.nullifyFreezeDamage": {
+    "reviewed": true,
+    "source": "{{name}} nullifies Freeze damage",
+    "sourceHash": "9f1921bf23ba61fd52c991dc57ba442bcf37fc08876ec7fa959c0ce327312c17",
+    "text": "{{name}}抵消了冻结伤害"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3988,6 +3994,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "17478189a0951aaf75aaa662444195a9e35fe7fa6fdd21c9f2836ae94432b0e7",
     "text": "你从荒野归来。已保留发现成果。"
+  },
+  "log.skipControlledTurn": {
+    "reviewed": true,
+    "source": "{{name}} skips its {{status}} turn.",
+    "sourceHash": "424648bc8f56704a85b9ec1471c414c9e26049280a4ac37ff8d1e984accb9d39",
+    "text": "{{name}}：因{{status}}跳过回合。"
   },
   "log.temporaryDodge": {
     "reviewed": true,

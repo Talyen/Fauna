@@ -3959,6 +3959,12 @@
     "sourceHash": "545add015fb4014eeade563dc1325a44d1e905c57677329b7a55fee202c784b9",
     "text": "{{name}}の凍結の蓄積が{{amount}}減少"
   },
+  "log.nullifyFreezeDamage": {
+    "reviewed": true,
+    "source": "{{name}} nullifies Freeze damage",
+    "sourceHash": "edaa2142c6abbc37fec4b9fcb03e8f3487ec301d20f975d066f635d7446612ba",
+    "text": "{{name}}は凍結ダメージを無効化した"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3988,6 +3994,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "9e6ccf6977846cf547ea67733133d4f6a1340e7ae829875eddc9ec76fd92cbdb",
     "text": "野生の地から帰還しました。発見は保持されます。"
+  },
+  "log.skipControlledTurn": {
+    "reviewed": true,
+    "source": "{{name}} skips its {{status}} turn.",
+    "sourceHash": "82f9428e30642c0b6209ffbb79609afc42822ae67e610780b8f326d568c02132",
+    "text": "{{name}}：{{status}}によりターンをスキップ。"
   },
   "log.temporaryDodge": {
     "reviewed": true,

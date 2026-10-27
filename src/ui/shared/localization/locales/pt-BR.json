@@ -3959,6 +3959,12 @@
     "sourceHash": "4f1b28fb06ea2047c626e0e9ab6819052ea07f79cc1378a66744b7b86b926630",
     "text": "{{name}} perde {{amount}} de acúmulo de Congelamento"
   },
+  "log.nullifyFreezeDamage": {
+    "reviewed": true,
+    "source": "{{name}} nullifies Freeze damage",
+    "sourceHash": "69dc8348aba5bdcbd0ebf5069a0a0516280c99d8281d96c7fb8fed3819f815b8",
+    "text": "{{name}} anula o dano de Congelamento"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3988,6 +3994,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "46bd2d96d9c00ce3dc75ef9b1b7461d6ff8abdac87943dcb9590dfcf70f83bb5",
     "text": "Você retorna das terras selvagens. As descobertas são mantidas."
+  },
+  "log.skipControlledTurn": {
+    "reviewed": true,
+    "source": "{{name}} skips its {{status}} turn.",
+    "sourceHash": "8eab9ed3285269592011f3c01a9f8fffc20204ba952793f207379f0ae1f27025",
+    "text": "{{name}}: turno perdido por {{status}}."
   },
   "log.temporaryDodge": {
     "reviewed": true,

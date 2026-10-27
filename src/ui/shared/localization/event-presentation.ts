@@ -102,6 +102,29 @@ export function eventPresentation(
     return i18n.message("log.dodge", "{{name}} Dodges.", { name });
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
+  if (event.kind === "status") {
+    if (
+      event.status === "nullify" &&
+      event.outcome === "immune" &&
+      event.affectedStatus === "freeze" &&
+      event.text === `${englishName} nullifies Freeze damage`
+    )
+      return i18n.message("log.nullifyFreezeDamage", "{{name}} nullifies Freeze damage", { name });
+    if ((event.status === "freeze" || event.status === "stun") && event.outcome === "skip") {
+      const englishStatus = event.status === "freeze" ? "Frozen" : "Stunned";
+      if (event.text === `${englishName} skips its ${englishStatus} turn.`)
+        return i18n.message("log.skipControlledTurn", "{{name}} skips its {{status}} turn.", {
+          name,
+          status:
+            i18n.locale === "en"
+              ? englishStatus
+              : i18n.content(
+                  `content.keyword.${event.status}.label`,
+                  KEYWORD_DEFINITIONS[event.status].label,
+                ),
+        });
+    }
+  }
   if (event.kind === "status" && event.amount !== undefined) {
     if (
       event.status === "dodge" &&
