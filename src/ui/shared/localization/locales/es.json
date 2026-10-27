@@ -3545,17 +3545,35 @@
     "sourceHash": "6d84a3c16e8766412b4550e4977cb417a32f6628c5592b6aee998d11a402bd6c",
     "text": "Deuda de sangre"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "772146a1b64d231b634d2d40415b7533277ed5bdf69dcd92c30e8f4bb2a10e46",
+    "text": "<keyword0>Drenaje</keyword0> tiene un {{value0}}% de probabilidad de otorgar también tanto Oro como <keyword1>Salud</keyword1> restaurada"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "202d3851e5189e6161e29e5d5b618a4e1cc737e37e30bd9cd6ec5eb47ab70586",
     "text": "Sangría"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "d7aeea6926e7265ae8200ca94a32e3f40c8ef623185e03e866eb56a35e2f5075",
+    "text": "<keyword0>Drenaje</keyword0> tiene un {{value0}}% de probabilidad de <keyword1>purificar</keyword1> un efecto perjudicial"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "2ad504fe697e731ec90ac15f90ea24e31dbcd55741013ea29112c87a62b46a66",
     "text": "Eliminar a los débiles"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "8ce4c8fca64149d432ac2d66ca0008a8a47da1c4e4df0a238a2da2c5af89648b",
+    "text": "Las cartas de <keyword0>Drenaje</keyword0> infligen un {{value0}}% más de daño a enemigos por debajo de la mitad de su <keyword1>Salud</keyword1>"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3593,12 @@
     "sourceHash": "c8ce9363859abca08ad08c7679ebd32cbccd898d1c341125d469798f643396f3",
     "text": "Succión desesperada"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "599f661f6d81063b8242b7b67eeb631a6c1598bec41b9d6d88ccda980d438ec1",
+    "text": "Duplica la <keyword1>curación</keyword1> de <keyword0>Drenaje</keyword0> mientras estés por debajo de la mitad de tu <keyword2>Salud</keyword2>"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3617,23 @@
     "sourceHash": "223d6abef3536f276205ea0523461b5bbc76d260f3b2d61d16d20b6c27a3a5ee",
     "text": "Desbordamiento sanguíneo"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "b9418d26d1d4fc48d9af0a83f29465c29a364305fb7021080c718c089a15dad5",
+    "text": "Cuando <keyword0>Drenaje</keyword0> llena tu <keyword1>Salud</keyword1>, obtienes {{value0}} de <keyword2>Maná</keyword2>"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "cfa546aee18d16e77f74d2a141fe5409f33daf7bf53c086af416384d78917b98",
     "text": "Drenaje virulento"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "a6343341f3638d29232adb164d5f2c0d472a33f6e340acf4bc059872f9a28f30",
+    "text": "El daño de <keyword0>Veneno</keyword0> tiene un {{value0}}% de probabilidad de activar <keyword1>Drenaje</keyword1>"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,

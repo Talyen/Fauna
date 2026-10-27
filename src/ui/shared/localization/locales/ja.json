@@ -3545,17 +3545,35 @@
     "sourceHash": "190c5967ce6eabc1386caa474c2e47b5780a773f6720bdc7af53712db89e47ed",
     "text": "血の負債"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "2a18f1a4752c17f6ca1de6cbb3bc8433e6a745a79f95b452f976c13301edfa21",
+    "text": "<keyword0>吸血</keyword0>は{{value0}}%の確率で、回復した<keyword1>体力</keyword1>と同量のゴールドも獲得"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "0058dcd12ecc8af1ef85c0cc34a325719e9d90e99d9ff2c437d8f7d514815966",
     "text": "瀉血"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "e9da5edac21422169b627469cbd0f5eff40a42e4c7e9ab1ceda8f670ee6c45b5",
+    "text": "<keyword0>吸血</keyword0>は{{value0}}%の確率で害のある状態効果を1つ<keyword1>浄化</keyword1>"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "cd9c371edff853c693472b252f67a37728a911b848c8679df73e5dd653f8bc09",
     "text": "弱者の淘汰"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "222c4006bc040d2283f31f738e847fef73066ab34ab21bfa2be17137089f542b",
+    "text": "<keyword0>吸血</keyword0>カードは<keyword1>体力</keyword1>が半分未満の敵に与えるダメージが{{value0}}%増加"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3593,12 @@
     "sourceHash": "51791ec0b90c1606e027621e537e57bd0c48eb0447e89d16e02ad54138386879",
     "text": "窮地の吸収"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "c00578a6128ea6e3255945bd369bcd7b7fccc2badd5f3cefc4bc50ec25a5ea88",
+    "text": "<keyword2>体力</keyword2>が半分未満の間、<keyword0>吸血</keyword0>による<keyword1>回復</keyword1>が2倍"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3617,23 @@
     "sourceHash": "c03cb8be4779b1c44cd9cb0f6a0a6efc200498516b576fb8dba41f98075f9b5a",
     "text": "溢れる血潮"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "234e46e05d41a06d996d70e424fc3b8f3424ad2455f484efb3e533864d4215f0",
+    "text": "<keyword0>吸血</keyword0>で<keyword1>体力</keyword1>が最大になると<keyword2>マナ</keyword2>を{{value0}}獲得"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "077df4086ff858e2a3ebfde0565663def11ae290ecacb30fa759b1e3be928842",
     "text": "猛毒の吸血"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "0fbba5b277129578247118f57fdeaa5b10523eabfd5519bb6d9e5ff122d76998",
+    "text": "<keyword0>毒</keyword0>ダメージは{{value0}}%の確率で<keyword1>吸血</keyword1>を発動"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,

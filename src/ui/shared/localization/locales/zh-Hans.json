@@ -3545,17 +3545,35 @@
     "sourceHash": "8649a9e71f51239be75da41d157339fc401ac189885e4f0ab71f9b5db7e1c36e",
     "text": "血债"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "94797bb59c7e82e84c843c0587c3b01818154dec8214f437c34cbec4951cc366",
+    "text": "<keyword0>汲取</keyword0>有{{value0}}%的概率额外获得等同于恢复<keyword1>生命</keyword1>值的金币"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "0f33eaf7c358f387a86df28e79fc3cbb36ed0820643901534977a196e660dab2",
     "text": "放血"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "36935c28636edf785163c15cb954ff09bff21ce684813e4aabf8782ee4373b1d",
+    "text": "<keyword0>汲取</keyword0>有{{value0}}%的概率<keyword1>净化</keyword1>一个有害状态"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "a71838e8264a3c1af0c0622a2fe040410a1b493779ca116709b5787d8948801b",
     "text": "剔除弱者"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "e843fec5c3e2eaefd83a8a3a51ad64730dcea70d7f8c90d226c8b24828bc44cc",
+    "text": "<keyword0>汲取</keyword0>卡牌对<keyword1>生命</keyword1>低于一半的敌人造成的伤害提高{{value0}}%"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3593,12 @@
     "sourceHash": "7998982eab4eba7e595b7192060708b43c662e4e4f94af3264c1ab9ea08167fb",
     "text": "绝境虹吸"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "1b6f18099e3e778c8086ffcc9a00e17124bfc92ab72646ca8a7ed7b99fd923ef",
+    "text": "自身<keyword2>生命</keyword2>低于一半时，<keyword0>汲取</keyword0>的<keyword1>治疗</keyword1>翻倍"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3617,23 @@
     "sourceHash": "9a437948732ac5cda89d1dbed3cd6c2b535fa58b1e1360b737e632b1afc05264",
     "text": "鲜血溢流"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "ad904bd9ac10b41d4a1642acb610fc5296eb23ed8e62e6a177e912883eb3eb24",
+    "text": "<keyword0>汲取</keyword0>使<keyword1>生命</keyword1>回满时，获得{{value0}}点<keyword2>法力</keyword2>"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "6fc2472b47b79721972bbb6f730950f3789e4103de2341709540da63516351e4",
     "text": "恶性汲取"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "7bd11cc316ea47b271d3eed1977f612df78bd7e8e9eaaea45b332ace59ded450",
+    "text": "<keyword0>中毒</keyword0>伤害有{{value0}}%的概率触发<keyword1>汲取</keyword1>"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,

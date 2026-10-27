@@ -3593,17 +3593,35 @@
     "sourceHash": "bd83294a38807a90bbc1c4497f48526fa15ad9f659c310dc778af8bba0300766",
     "text": "Dette de sang"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "2e95c633712cc210552ac788658ea611197cfa88eaf4ade60d25a6f45e11dc3b",
+    "text": "Le <keyword0>Vol de vie</keyword0> a {{value0}}% de chances de conférer aussi autant d’Or que de <keyword1>Santé</keyword1> restaurée"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "8ecaa16b379ec0d7ee89d078313dcaa1fe614c91bcbcb435561ed62dbc6740b9",
     "text": "Saignée"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "171a08b253cc0cd12a32df56356e485a593d43fb86e7c686803d38aaba58cdb2",
+    "text": "Le <keyword0>Vol de vie</keyword0> a {{value0}}% de chances de <keyword1>purifier</keyword1> un effet néfaste"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "ae9db6e6c08c6ba13809a70ffb683522d072cd102a3b937aee68e0a86bc66525",
     "text": "Éliminer les faibles"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "54e47666531aa82bec6018129e97b0888942073ee9e1f1a95a295e51d99ef550",
+    "text": "Les cartes de <keyword0>Vol de vie</keyword0> infligent {{value0}}% de dégâts supplémentaires aux ennemis sous la moitié de leur <keyword1>Santé</keyword1>"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3623,6 +3641,12 @@
     "sourceHash": "faaa3be893218d8472199bc1468a26882d4f912293eb7f3d05d005efd635668c",
     "text": "Drain désespéré"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "f7ffc92a9366b3a56ddb41133ff9762b27db736b8248357f054c9edb8ab89131",
+    "text": "Double les <keyword1>soins</keyword1> du <keyword0>Vol de vie</keyword0> sous la moitié de votre <keyword2>Santé</keyword2>"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3641,11 +3665,23 @@
     "sourceHash": "bce93f58310c810eb3ac02691c63186a49106f722019bef2b41dea06ff8a650a",
     "text": "Débordement sanguin"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "35184441223c39cff4eb3425c2786ef62d1787dcba8bcaddd1e36722a713ae3e",
+    "text": "Lorsque le <keyword0>Vol de vie</keyword0> remplit votre <keyword1>Santé</keyword1>, gagnez {{value0}} <keyword2>Mana</keyword2>"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "880949279df61053aeeaf03b76228e04ecdac1e88e38908b5dd4c6be6d01986c",
     "text": "Vol de vie virulent"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "127aadbf51200c365c834566502475b9750e88412556cbb27fcfe98cf53b06eb",
+    "text": "Les dégâts de <keyword0>Poison</keyword0> ont {{value0}}% de chances de déclencher un <keyword1>Vol de vie</keyword1>"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,

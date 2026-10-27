@@ -3545,17 +3545,35 @@
     "sourceHash": "b9a5c1f3694a2dbe2308d3e89958b51d53b917f59380a5b8ff81cb01212a561e",
     "text": "Кровавый долг"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "2aa04b4d49cd31c1a677cb4ed1e06bc38ac0d96ba9c8d249ef293950436f5553",
+    "text": "<keyword0>Вампиризм</keyword0> с вероятностью {{value0}}% также даёт золото в количестве восстановленного <keyword1>здоровья</keyword1>"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "bd295635d5cbf0a77ec353fa3c02c04f3a8787d5936314b032c31afe4a00db62",
     "text": "Кровопускание"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "b7500bcbd36a2bc559050410bccebb3efdf430260f9654df38a7c6ad511ef9ba",
+    "text": "<keyword0>Вампиризм</keyword0> с вероятностью {{value0}}% <keyword1>очищает</keyword1> один вредный эффект"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "4e84053c6ba8dfebe14c691530542ba9efac040266225402573a5f2baccd03b6",
     "text": "Отсечь слабых"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "29b7dd2d54119ad3dfe7a2ec1977964eb4c1ef64a909f45f5eab1e0e8b3454cd",
+    "text": "Карты <keyword0>вампиризма</keyword0> наносят на {{value0}}% больше урона врагам с менее чем половиной <keyword1>здоровья</keyword1>"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3593,12 @@
     "sourceHash": "4b09c6547089e512ddd623eaba98bcce6b2e7b13f8684cab1909a6b06db8502a",
     "text": "Отчаянное вытягивание"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "7e80cdacba7741fb0022051cfaf8a4097f35f2c902bbdf060dbf9dcbe262ae25",
+    "text": "Удвойте <keyword1>лечение</keyword1> от <keyword0>вампиризма</keyword0>, пока у вас менее половины <keyword2>здоровья</keyword2>"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3617,23 @@
     "sourceHash": "a20b43b28ffe6dbbd2063441062495c221fef2bcd79f267264898d43d33e09ab",
     "text": "Кровавый избыток"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "4fa8eacb2ab4173181c6d5baa56ac15041eced0d02102e5575c9462d08aeed96",
+    "text": "Когда <keyword0>вампиризм</keyword0> полностью восстанавливает ваше <keyword1>здоровье</keyword1>, получите {{value0}} <keyword2>маны</keyword2>"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "b58acff08c2888e57dedfabbac94a7557a5473bc0d0b56d3510f8cb8e0d4dab8",
     "text": "Ядовитый вампиризм"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "738b1809cf3182ae64e2bba187efb3fa6f19164d0a735c2d09852fb6e50156c0",
+    "text": "Урон от <keyword0>яда</keyword0> с вероятностью {{value0}}% вызывает <keyword1>вампиризм</keyword1>"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,

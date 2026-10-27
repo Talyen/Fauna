@@ -3545,17 +3545,35 @@
     "sourceHash": "9c6436f34eee994d07a170b4f5c6ea59091942d07283549ada8301913faccf9a",
     "text": "Blutschuld"
   },
+  "content.talent.leech.blood-debt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to also grant Gold equal to <keyword1>Health</keyword1> restored",
+    "sourceHash": "f0fee322a605962c0c5e08c4963fb934ad2a7aeddc3b24aef143e91128bd9fa6",
+    "text": "<keyword0>Lebensraub</keyword0> hat eine Chance von {{value0}}%, zusätzlich Gold in Höhe der wiederhergestellten <keyword1>Gesundheit</keyword1> zu gewähren"
+  },
   "content.talent.leech.bloodletting.name": {
     "reviewed": true,
     "source": "Bloodletting",
     "sourceHash": "58a2887f3d01c61141856fb8636f8d70c120c6f1711e9fad79860ab031b2a899",
     "text": "Aderlass"
   },
+  "content.talent.leech.bloodletting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to <keyword1>cleanse</keyword1> a harmful status",
+    "sourceHash": "30923c3fc2116531508f567d84ed874159e9c4b53133af25bbb95297ccbea104",
+    "text": "<keyword0>Lebensraub</keyword0> hat eine Chance von {{value0}}%, einen schädlichen Statuseffekt zu <keyword1>reinigen</keyword1>"
+  },
   "content.talent.leech.cull-the-weak.name": {
     "reviewed": true,
     "source": "Cull the Weak",
     "sourceHash": "36b5063bf88da03ab72c36b052a101262034facdbfe12dc80fa5dfdb81de078d",
     "text": "Die Schwachen ausmerzen"
+  },
+  "content.talent.leech.cull-the-weak.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> cards deal {{value0}}% more damage against enemies below half <keyword1>Health</keyword1>",
+    "sourceHash": "8ff21e441c9c55b87d70bb38879d730d4b364646d3d0b569f9660b528977ba76",
+    "text": "<keyword0>Lebensraub</keyword0>-Karten verursachen {{value0}}% mehr Schaden bei Gegnern unter halber <keyword1>Gesundheit</keyword1>"
   },
   "content.talent.leech.deep-siphon.name": {
     "reviewed": true,
@@ -3575,6 +3593,12 @@
     "sourceHash": "7171087166edc718e665f9caa53a41f6c87b50183700bb848478c80f05ad9a12",
     "text": "Verzweifeltes Absaugen"
   },
+  "content.talent.leech.desperate-siphon.rule": {
+    "reviewed": true,
+    "source": "Double <keyword0>Leech</keyword0> <keyword1>healing</keyword1> while below half <keyword2>Health</keyword2>",
+    "sourceHash": "bc00b1a6615c6628cf52aac531d7ac7cbe88d2804d51343cd5c0a13c30b58189",
+    "text": "Verdopple die <keyword1>Heilung</keyword1> durch <keyword0>Lebensraub</keyword0>, solange du unter halber <keyword2>Gesundheit</keyword2> bist"
+  },
   "content.talent.leech.mana-siphon.name": {
     "reviewed": true,
     "source": "Mana Siphon",
@@ -3593,11 +3617,23 @@
     "sourceHash": "6558a74f50cbab80b86ec0de1eb983fd660c3048c037afd5771854e6fb02b7d9",
     "text": "Blutüberfluss"
   },
+  "content.talent.leech.sanguine-overflow.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Leech</keyword0> fills your <keyword1>Health</keyword1>, gain {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "38e4efa685d5b448f76b585f1ce01313b92f85df7e922fa9aa8f2b3124922601",
+    "text": "Wenn <keyword0>Lebensraub</keyword0> deine <keyword1>Gesundheit</keyword1> vollständig wiederherstellt, erhalte {{value0}} <keyword2>Mana</keyword2>"
+  },
   "content.talent.leech.virulent-leech.name": {
     "reviewed": true,
     "source": "Virulent Leech",
     "sourceHash": "0687287c882f7f18d0f69c69858303d4314aabd44560a5f82043109eb25cf5c1",
     "text": "Hochgiftiger Lebensraub"
+  },
+  "content.talent.leech.virulent-leech.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "920bc9de4d21c25618b5fbd7a7cc8e20e873bec6faf705172102269ef59f49e5",
+    "text": "<keyword0>Giftschaden</keyword0> hat eine Chance von {{value0}}% auf <keyword1>Lebensraub</keyword1>"
   },
   "content.talent.light.blessed-leech.name": {
     "reviewed": true,
