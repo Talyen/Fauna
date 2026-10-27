@@ -443,6 +443,12 @@
     "sourceHash": "54e635f9eacf2d1a7db8b188d6e63d6762ea6fa1f4511b3d5a3ec451f0987a6d",
     "text": "<keyword0>Мана</keyword0> может превышать максимум"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "3f5802d32c44c4b538e9f403f04557c7ad26f11458d64766a516f27a0719bbb4",
+    "text": "Урон от <keyword0>шипов</keyword0> добавляет столько же накопления <keyword1>оглушения</keyword1>"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -473,11 +479,23 @@
     "sourceHash": "7f50d1c08cf33491028f796133fce4c66f314985646207722eda5bb77e1fbdff",
     "text": "В начале боя возьмите {{value0}} дополнительную карту"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "3181b8273645028a797e80ce289aeb02af4aa4817a051beafbbe84ea9c583c57",
+    "text": "<keyword0>Лечение</keyword0> снимает равное количество накопленной <keyword1>заморозки</keyword1>"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "b0890f6fdeaf37521864d749af5b59a14e7f308777f0cd337fdbfb0d92a9cfda",
     "text": "Громовой камень"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "184a897bd6081cc742d82558690bd5f4e379670e37373b351fd45e990e032d96",
+    "text": "Накопления <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> у врагов объединяются"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

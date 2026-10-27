@@ -443,6 +443,12 @@
     "sourceHash": "7e17fe7d20cd6c6ab1ceb1e47ece2437cf428a2e1ed789ed17e18a72aa36d93c",
     "text": "<keyword0>Mana</keyword0> pode exceder seu máximo"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "0652d83de2d7d4a689936e5a79e30c5865ade13c253e8f86737505b6f07f974c",
+    "text": "O dano de <keyword0>Espinhos</keyword0> adiciona a mesma quantidade de acúmulo de <keyword1>Atordoamento</keyword1>"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -473,11 +479,23 @@
     "sourceHash": "7f4a8c9c4e943358051dd781d97aa63aba1235bce072f8090160a2643d43015a",
     "text": "Compre {{value0}} carta adicional no início do combate"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "72be59d41318d498c1e2ce4b513083ed8cdc7b458942b0ff60b283e3bec16370",
+    "text": "A <keyword0>cura</keyword0> remove a mesma quantidade de acúmulo de <keyword1>Congelamento</keyword1>"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "9ff5bb7c579c839ea071590ac6e211168fcff02f6180c9b9d72fec5fe445e8e9",
     "text": "Pedra do trovão"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "423affc135585d5cf99fa31ee3dd07b9bfd1979feb9dd0641d80d05a7f1db136",
+    "text": "Os acúmulos de <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1> se combinam nos inimigos"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

@@ -443,6 +443,12 @@
     "sourceHash": "1a0cf1e6bfa7787824cde93fb73cdc7814730d2fdb83668fa28a6c30512c19b8",
     "text": "<keyword0>Mana</keyword0> kann über das Maximum hinausgehen"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "20419346cffa512a6ce6b7d69d5d9192d05c663de204dfba0761e2f5af30c484",
+    "text": "<keyword0>Dornen</keyword0>schaden fügt ebenso viel <keyword1>Betäubung</keyword1>saufbau hinzu"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -473,11 +479,23 @@
     "sourceHash": "51ee765e4dc4f04e3192f2d2de9bae52e4748874a2ab69230885b19ad07a58f1",
     "text": "Ziehe zu Kampfbeginn {{value0}} zusätzliche Karte"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "d5b81022bd951fa17df7d93d09f796e37434f3c13b65917ebc0a533bd77774ca",
+    "text": "<keyword0>Heilung</keyword0> entfernt ebenso viel <keyword1>Frost</keyword1>-Aufbau"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "ea8f2c71542762eb6644d3df9c6ff1646f844da29c4816e82317984ada005b49",
     "text": "Donnerstein"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "5f64e7197377c02978e81ec67a73ea80adca7ddf5dd4a7955dd0a621e9867b15",
+    "text": "<keyword0>Betäubung</keyword0>s- und <keyword1>Frost</keyword1>-Aufbau werden bei Gegnern kombiniert"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

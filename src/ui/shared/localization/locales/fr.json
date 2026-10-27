@@ -479,6 +479,12 @@
     "sourceHash": "7f2fa176d43f5f75c343c73fbec980ae34d76d0f78ef76ac899349129623e02c",
     "text": "Le <keyword0>Mana</keyword0> peut dépasser son maximum"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "d51173dcca55165e9c1a02ebd768d350c42b2fce31f8721abe4f54749da360f3",
+    "text": "Les dégâts d’<keyword0>Épines</keyword0> ajoutent autant d’accumulation d’<keyword1>Étourdissement</keyword1>"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -521,11 +527,23 @@
     "sourceHash": "1c1587ed912c3236f7f7b94975db8b97f8111ff76bb63431a014d5d095150590",
     "text": "Piochez {{value0}} carte supplémentaire au début du combat"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "6c2f44cd8876c8ad6a28a0df7fb67e03dc9e563262024f405a5676f395427abc",
+    "text": "Les <keyword0>soins</keyword0> retirent autant d’accumulation de <keyword1>Gel</keyword1>"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "e75e58fea7c74c42395d86a9f2c1307dacedb73ef63e3c16604513b7bd3772f5",
     "text": "Pierre de tonnerre"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "718b98243ec99376927c03d64a25abc4b45906e6da7032ef5ff985df380cf1fc",
+    "text": "Les accumulations d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> se combinent sur les ennemis"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

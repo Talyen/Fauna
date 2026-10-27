@@ -443,6 +443,12 @@
     "sourceHash": "5e3a9f81ddb24c9da2740591acce7ad2a14ddf8c0b5daad3b5102fed46589d08",
     "text": "El <keyword0>Maná</keyword0> puede superar su máximo"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "3117a764799a9270dac61f824dbc262776680e9338d3c6e87f2f17af0304bc4f",
+    "text": "El daño de <keyword0>Espinas</keyword0> añade la misma cantidad de acumulación de <keyword1>Aturdimiento</keyword1>"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -473,11 +479,23 @@
     "sourceHash": "d98b6f11da2ec68522e0f6230e0eefa92995f76b199a56a07e2c90a86107a8b8",
     "text": "Roba {{value0}} carta adicional al comienzo del combate"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "13bd41c09df28ff87aad8ce3f51181a5331219c17120cf2d5403646d5fcd252a",
+    "text": "La <keyword0>curación</keyword0> elimina la misma cantidad de acumulación de <keyword1>Congelación</keyword1>"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "dc463ecee47bb2c8f9da819d6894e75cd86226dc7779ca5cc1a18f8a374b4a73",
     "text": "Piedra del trueno"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "2cbcc737fa978451fa9794fce815393cd0d0474f3bee95bab1f73489a5d42622",
+    "text": "Las acumulaciones de <keyword0>Aturdimiento</keyword0> y <keyword1>Congelación</keyword1> se combinan en los enemigos"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

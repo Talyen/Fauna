@@ -443,6 +443,12 @@
     "sourceHash": "88604a712fd0d1953c7d642d0ca4608942d9eeb74e7dcde565b1f817ee8d74fa",
     "text": "<keyword0>マナ</keyword0>は上限を超えて蓄えられる"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "f8d0405c868883bd831f04a9b11c38b33fc818959265cf81f2de4d558303ba82",
+    "text": "<keyword0>棘</keyword0>ダメージは同量の<keyword1>スタン</keyword1>の蓄積を加える"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -473,11 +479,23 @@
     "sourceHash": "864fb92047e1067b42bfce85c799bc9c2b653b0c56299040c6a23096014d6419",
     "text": "戦闘開始時にカードを追加で{{value0}}枚引く"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "9346db44525e39dd38c1516994951614847d6803abe3f244641c1e67f719d2b4",
+    "text": "<keyword0>回復</keyword0>は同量の<keyword1>凍結</keyword1>の蓄積を取り除く"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "daa6d2f6dcdc1c7a8493f5c50d90bb518bcce75778c53cc4d79acb0572f5cb55",
     "text": "雷石"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "1162fd09ed0a9369a2298b5462f1964a7fe9f6bb1ff4a9b7df736440567bfbdd",
+    "text": "敵の<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>の蓄積が合算される"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,

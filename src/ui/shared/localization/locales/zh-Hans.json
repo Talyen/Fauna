@@ -443,6 +443,12 @@
     "sourceHash": "59b40c7666e988f0123d57565ce84146d59f139843afc029cd7875fc0286c00d",
     "text": "<keyword0>法力</keyword0>可以超过上限"
   },
+  "content.boon.resonance-kalimba.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> damage adds equal <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "aaeb7b3fb7b0701857505d20fc779e64f6f3e65f647ced870b4afdbe51214a5d",
+    "text": "<keyword0>荆棘</keyword0>伤害会增加等量的<keyword1>眩晕</keyword1>积累"
+  },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
     "source": "Resonant Chimes",
@@ -473,11 +479,23 @@
     "sourceHash": "0580db3d2ee9257ce6a65d145d15a9dcebacddb50b31b7fe3a6f474234ba9e9f",
     "text": "战斗开始时额外抽取{{value0}}张牌"
   },
+  "content.boon.thaw-spoon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
+    "sourceHash": "6eb3c517400d4ca93f5bc1b31b464460cf29579bd89e3270aa23721a54080c57",
+    "text": "<keyword0>治疗</keyword0>会移除等量的<keyword1>冻结</keyword1>积累"
+  },
   "content.boon.thunderstone.name": {
     "reviewed": true,
     "source": "Thunderstone",
     "sourceHash": "2d33b89e873cfddc229e0448f75c3165f79fac6e33835018e64721946dd2d44f",
     "text": "雷霆石"
+  },
+  "content.boon.undertow-castanets.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
+    "sourceHash": "3546bda1741b5aa68b38606deba987203f84cd2e1da1f00ac3549662056c0fd5",
+    "text": "敌人的<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>积累会合并"
   },
   "content.boon.wonder-domino.rule": {
     "reviewed": true,
