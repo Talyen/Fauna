@@ -1,3 +1,4 @@
+import { findLivingBattlefield } from "../battlefield";
 import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability-modifiers";
 import { takeCardRepeat } from "./card-repeat";
 import { executePrimary } from "./ability-handlers";
@@ -21,17 +22,17 @@ export function executeAbility(
   const { actor, def } = action;
   const grantedRepeat = takeCardRepeat(state, action.side);
   const enemy = action.side === "enemy";
-  const opponents =
-    (def.effect === "attack" && def.target === "randomEnemy") || action.targetId !== undefined
-      ? alive(opposingRow(state, action))
-      : [];
+  const randomTarget = def.effect === "attack" && def.target === "randomEnemy";
+  const opponents = randomTarget ? alive(opposingRow(state, action)) : undefined;
   // Keep the selected target across repeats unless Tangram must continue after a defeat.
   let target =
-    def.effect === "attack" && def.target === "randomEnemy"
+    opponents !== undefined
       ? opponents[Math.floor(roll(state, { kind: "index", size: opponents.length }) * opponents.length)]
       : def.effect === "attack" && def.target === "allEnemies"
         ? undefined
-        : opponents.find((unit) => unit.id === action.targetId);
+        : action.targetId === undefined
+          ? undefined
+          : findLivingBattlefield(state, enemy ? "player" : "enemy", (unit) => unit.id === action.targetId);
   const name = enemy ? action.actor.name : species(actor.species).name;
   events.push({
     kind: "action",
@@ -68,12 +69,12 @@ export function executeAbility(
       target.health <= 0 &&
       state.boons.includes("dream-tangram")
     )
-      target = alive(opposingRow(state, action))[0];
+      target = findLivingBattlefield(state, enemy ? "player" : "enemy");
     if (
       actor.health <= 0 ||
       (def.effect === "attack" &&
         (def.target === "allEnemies"
-          ? !opposingRow(state, action).some((unit) => unit.health > 0)
+          ? !findLivingBattlefield(state, enemy ? "player" : "enemy")
           : !target || target.health <= 0))
     )
       break;
@@ -95,6 +96,14 @@ export function executeAbility(
         : 0;
     const cannotDodge = play > 0 && !enemy && state.boons.includes("aether-gramophone");
     const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) && !cannotDodge : false;
+    const additionalTarget =
+      play > 0 &&
+      !enemy &&
+      def.effect === "attack" &&
+      def.target !== "allEnemies" &&
+      state.boons.includes("cadence-panpipes")
+        ? findLivingBattlefield(state, "enemy", (unit) => unit.id !== target?.id)
+        : undefined;
     const primary = executePrimary({
       state,
       action,
@@ -108,6 +117,7 @@ export function executeAbility(
       cannotDodge,
       criticalBonus,
       oasisLeech,
+      additionalTarget,
     });
     applyExtras(state, action, events, {
       target: primary ? primary.attackTarget : target,
@@ -118,5 +128,16 @@ export function executeAbility(
       negated: primary?.negated,
       sharedNegate: primary?.sharedNegate,
     });
+    if (primary?.extraAttackTarget && actor.health > 0)
+      applyExtras(state, action, events, {
+        target: primary.extraAttackTarget,
+        blindMiss,
+        cannotDodge,
+        criticalBonus,
+        oasisLeech,
+        negated: primary.negated,
+        sharedNegate: primary.sharedNegate,
+        attackTargetOnly: true,
+      });
   }
 }

@@ -118,7 +118,7 @@ export function createDiagnostics(port?: DiagnosticPort) {
         if (disposed) return;
         const match = entries.find((entry) => entry.source === source && entry.message === message);
         entries = retain([
-          ...entries.filter((entry) => entry !== match),
+          ...(match ? entries.filter((entry) => entry !== match) : entries),
           {
             source,
             message,

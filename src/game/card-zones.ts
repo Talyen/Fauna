@@ -19,7 +19,16 @@ export const MAX_BATTLE_CARDS = 256;
 const CARD_ZONES = ["draw", "hand", "buffer", "discard"] as const;
 /** Preserve pile order while retiring or relocating slots across the whole battle. */
 export function filterCardZones(battle: BattleState["battle"], keep: (id: string) => boolean) {
-  for (const zone of CARD_ZONES) if (battle[zone].length) battle[zone] = battle[zone].filter(keep);
+  for (const zone of CARD_ZONES) {
+    const cards = battle[zone];
+    let kept: string[] | undefined;
+    for (let index = 0; index < cards.length; index++) {
+      const id = cards[index]!;
+      if (keep(id)) kept?.push(id);
+      else kept ??= cards.slice(0, index);
+    }
+    if (kept) battle[zone] = kept;
+  }
 }
 
 type HandZones = Pick<BattleState["battle"], "hand" | "buffer">;
@@ -92,6 +101,16 @@ function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
   return cards;
 }
 
+function eligibleJourneyReturn(state: GameState, id: string | undefined, ownerId: string) {
+  return state.cards.some(
+    (card) =>
+      card.id === id &&
+      card.ownerId !== null &&
+      card.ownerId !== ownerId &&
+      state.team.some((unit) => unit.id === card.ownerId && unit.health > 0),
+  );
+}
+
 /** Inspect the same draw pool without changing its order or revealing a hidden card. */
 export function journeyReturnHasDraw(state: BattleState, ownerId: string | null): boolean {
   if (
@@ -100,6 +119,10 @@ export function journeyReturnHasDraw(state: BattleState, ownerId: string | null)
     (!state.battle.draw.length && !state.battle.discard.length)
   )
     return false;
+  if (state.battle.draw.length + state.battle.discard.length === 1) {
+    const id = state.battle.draw[0] ?? state.battle.discard[0];
+    return eligibleJourneyReturn(state, id, ownerId);
+  }
   const eligible = journeyReturnCards(state, ownerId);
   if (!eligible.size) return false;
   return (
@@ -112,6 +135,12 @@ export function journeyReturn(state: GameState, ownerId: string | null, events: 
   if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
   fillHand(state);
   if (!state.battle.draw.length && !state.battle.discard.length) return;
+  if (state.battle.draw.length + state.battle.discard.length === 1) {
+    const id = state.battle.draw[0] ?? state.battle.discard[0];
+    if (eligibleJourneyReturn(state, id, ownerId))
+      drawEligibleCard(state, (candidate) => candidate === id, events);
+    return;
+  }
   const eligible = journeyReturnCards(state, ownerId);
   if (eligible.size) drawEligibleCard(state, (id) => eligible.has(id), events);
 }
@@ -169,7 +198,7 @@ function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = fa
           state.team.some((unit) => unit.id === card.ownerId && unit.health > 0);
     return firstOnly ? eligible : eligible ? [card] : [];
   }
-  const owners = otherOwnerId === undefined ? drawableOwnerIds(state) : undefined;
+  let owners: Set<string> | undefined;
   const livingOwners = otherOwnerId === undefined ? undefined : new Set<string>();
   if (livingOwners) for (const unit of state.team) if (unit.health > 0) livingOwners.add(unit.id);
   const cards = new Map<string, Card>();
@@ -179,7 +208,7 @@ function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = fa
     const card = cards.get(id)!;
     if (
       otherOwnerId === undefined
-        ? card.ownerId === null || owners!.has(card.ownerId)
+        ? card.ownerId === null || (owners ??= drawableOwnerIds(state)).has(card.ownerId)
         : card.ownerId !== null && card.ownerId !== otherOwnerId && livingOwners!.has(card.ownerId)
     ) {
       if (firstOnly) return true;

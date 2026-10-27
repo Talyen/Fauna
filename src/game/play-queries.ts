@@ -3,7 +3,7 @@ import { cardTargeting } from "./card-rules";
 import { definition, species, type CardDefinition } from "./content";
 import { cardCost } from "./ability-rules";
 import { controlled, maximumHealth } from "./combat/state";
-import { battlefield } from "./battlefield";
+import { battlefield, findLivingBattlefield } from "./battlefield";
 import { pendingReplacement } from "./team";
 import { hasDiscardDrawCard } from "./card-zones";
 import type { BattleState, Card, Creature, Enemy, Command } from "./types";
@@ -35,7 +35,10 @@ function hasChosenRecipient(state: BattleState, def: CardDefinition) {
       state.team.some((unit) => recipientEligible(unit, def)) ||
       state.reserves.some((unit) => recipientEligible(unit, def))
     );
-  return recipientPool(state, def, mode).some((unit) => recipientEligible(unit, def));
+  if (def.effect === "swapChosen") return state.reserves.some((unit) => recipientEligible(unit, def));
+  return !!findLivingBattlefield(state, mode === "enemy" ? "enemy" : "player", (unit) =>
+    recipientEligible(unit, def),
+  );
 }
 
 export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
@@ -46,9 +49,13 @@ export function playTargetError(state: BattleState, def: CardDefinition, actorId
       !(def.effect === "resurrect"
         ? state.team.some((unit) => unit.id === targetId && recipientEligible(unit, def)) ||
           state.reserves.some((unit) => unit.id === targetId && recipientEligible(unit, def))
-        : recipientPool(state, def, mode).some(
-            (unit) => unit.id === targetId && recipientEligible(unit, def),
-          )))
+        : def.effect === "swapChosen"
+          ? state.reserves.some((unit) => unit.id === targetId && recipientEligible(unit, def))
+          : findLivingBattlefield(
+              state,
+              mode === "enemy" ? "enemy" : "player",
+              (unit) => unit.id === targetId && recipientEligible(unit, def),
+            )))
   )
     return def.effect === "swapChosen"
       ? "Choose a living backup."
@@ -124,6 +131,44 @@ function inspectCard(
 
 export interface AvailablePlay extends PlayableCard {
   commands: Extract<Command, { type: "play" }>[];
+}
+
+/** Automatic turn completion only needs to know whether any command exists. */
+export function hasAvailablePlay(state: BattleState): boolean {
+  if (!state.battle.hand.length || pendingReplacement(state)) return false;
+  const cards = state.battle.hand.length > 1 ? new Map<string, Card>() : undefined;
+  if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+  let lastDefinition: CardDefinition | undefined;
+  let lastRecipients = false;
+  const hasRecipients = (def: CardDefinition) => {
+    if (lastDefinition !== def) {
+      lastDefinition = def;
+      lastRecipients = hasChosenRecipient(state, def);
+    }
+    return lastRecipients;
+  };
+  let lastActorId: string | undefined;
+  let lastRecoverable = false;
+  const canRecover = (actorId: string) => {
+    if (lastActorId !== actorId) {
+      lastActorId = actorId;
+      lastRecoverable = hasDiscardDrawCard(state, actorId);
+    }
+    return lastRecoverable;
+  };
+  for (const id of state.battle.hand) {
+    const play = inspectCard(
+      state,
+      cards ? cards.get(id) : state.cards.find((card) => card.id === id),
+      hasRecipients,
+      true,
+      canRecover,
+    );
+    if (!play.allowed) continue;
+    const mode = cardTargeting(play.def, state);
+    if ((mode !== "enemy" && mode !== "ally") || hasRecipients(play.def)) return true;
+  }
+  return false;
 }
 
 /** Enumerate legal commands without previewing, choosing random recipients or touching RNG. */

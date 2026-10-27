@@ -94,7 +94,11 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     const actionOrder = battle.enemies.slice();
     // Expire the previous round before an ally can grant Dodge for this round.
     for (const enemy of actionOrder) ensureCombat(enemy).temporaryDodge = 0;
-    for (const minion of battlefield(draft, "enemy").filter((unit) => unit.minion && unit.health > 0)) {
+    const actingMinions = battlefield(draft, "enemy");
+    let minionCount = 0;
+    for (const unit of actingMinions) if (unit.minion && unit.health > 0) actingMinions[minionCount++] = unit;
+    actingMinions.length = minionCount;
+    for (const minion of actingMinions) {
       tickStatuses(draft, minion, events);
       if (settle(draft, events)) return;
       if (minion.health <= 0) continue;
@@ -166,12 +170,16 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if (settle(draft, events)) return;
     }
     unhurried(draft, true, events);
-    for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
+    const ticking = battlefield(draft, "player");
+    ticking.push(...draft.reserves);
+    for (const c of ticking) {
       if (c.health <= 0) continue;
       tickStatuses(draft, c, events);
       if (settle(draft, events)) return;
     }
-    for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
+    const starting = battlefield(draft, "player");
+    starting.push(...draft.reserves);
+    for (const c of starting) {
       const stats = ensureCombat(c);
       if (stats.grace > 0) stats.grace--;
       decayBlock(draft, c, events);

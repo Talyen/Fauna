@@ -4,7 +4,7 @@ import { isFood } from "./content/food";
 import { manaCapacity, encoreProgressLimit, puzzleProgressLimit, metronomeActorValid } from "./ability-rules";
 import { unfinishedJourneyLimit } from "./card-actors";
 import { PEARL } from "./content/creatures/memento";
-import { battlefield } from "./battlefield";
+import { battlefieldView } from "./battlefield";
 import { needsCampfire, merchantPriceRange } from "./destinations";
 import { freeze } from "immer";
 import { MAX_BATTLE_CARDS, MAX_HAND_SIZE, handCapacity } from "./card-zones";
@@ -22,6 +22,7 @@ import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { BattleState, GameState } from "./types";
 function unique(values: readonly unknown[]) {
   if (values.length < 2) return true;
+  if (values.length === 2) return values[0] !== values[1] && !Object.is(values[0], values[1]);
   const seen = new Set<unknown>();
   for (const value of values) {
     if (seen.has(value)) return false;
@@ -31,6 +32,11 @@ function unique(values: readonly unknown[]) {
 }
 function uniqueBy<T>(values: readonly T[], key: (value: T) => unknown) {
   if (values.length < 2) return true;
+  if (values.length === 2) {
+    const first = key(values[0]!);
+    const second = key(values[1]!);
+    return first !== second && !Object.is(first, second);
+  }
   const seen = new Set<unknown>();
   for (const value of values) {
     const id = key(value);
@@ -212,9 +218,9 @@ function validateRoster(state: GameState) {
     if (card.temporary) continue;
     invalid(card.id.startsWith("copy-"));
     if (card.ownerId === null) continue;
-    const ids = kits.get(card.ownerId) ?? [];
+    let ids = kits.get(card.ownerId);
+    if (!ids) kits.set(card.ownerId, (ids = []));
     ids.push(card.definitionId);
-    kits.set(card.ownerId, ids);
   }
   for (const creature of state.team)
     invalid(!matchesPermanentKit(creature.species, kits.get(creature.id) ?? []));
@@ -231,7 +237,7 @@ function validateSupport(state: GameState) {
     const visit = state.support;
     // Stock keeps its original price when this visit sells Merchant's Favor.
     const prices = merchantPriceRange({
-      boons: visit.purchased === null ? state.boons : state.boons.filter((boon) => boon !== visit.purchased),
+      boons: visit.purchased === "merchants-favor" ? [] : state.boons,
     });
     invalid(
       visit.encounter !== state.encounter ||
@@ -303,7 +309,7 @@ function validateBattle(state: BattleState) {
   invalid(battle.encoreProgress > encoreProgressLimit(state));
   invalid(!unique(battle.puzzleProgress) || battle.puzzleProgress.length > puzzleProgressLimit(state));
   invalid(battle.enemies.length !== source.enemies.length || !uniqueBy(battle.enemies, (e) => e.id));
-  const playerField = battlefield(state, "player");
+  const playerField = battlefieldView(state, "player");
   battle.enemies.forEach((enemy) => {
     const index = Number(enemy.id.replace(/^enemy-/, ""));
     const original = source.enemies[index];
@@ -439,7 +445,9 @@ function validateCombatants(state: GameState) {
       invalid((stats.controlled === null) !== (stats.controlTurns === 0));
       invalid(stats.controlled !== null && stats[stats.controlled] !== 0);
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
-      invalid(Object.values(stats.statusSources).some((id) => !combatantIds.has(id)));
+      for (const id in stats.statusSources)
+        if (Object.hasOwn(stats.statusSources, id))
+          invalid(!combatantIds.has(stats.statusSources[id as keyof typeof stats.statusSources]!));
       if (stats.bleedLeech.length) {
         const sources = new Set<string>();
         let total = 0;

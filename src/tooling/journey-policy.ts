@@ -24,7 +24,15 @@ function boonScorer(
     state.boons.includes("bone-charm") ||
     state.boons.includes("sin-eaters-lantern");
   const cards = kinds.flatMap(speciesCards);
-  const effect = (kind: (typeof cards)[number]["effect"]) => cards.some((card) => card.effect === kind);
+  const effects = new Set<(typeof cards)[number]["effect"]>();
+  for (const card of cards) effects.add(card.effect);
+  const effect = (kind: (typeof cards)[number]["effect"]) => effects.has(kind);
+  let blind: boolean | undefined;
+  const hasBlind = () =>
+    (blind ??=
+      effect("teamBlind") || cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")));
+  let livingBackup: boolean | undefined;
+  const hasLivingBackup = () => (livingBackup ??= state.reserves.some((unit) => unit.health > 0));
   const swapping = effect("swap") || effect("swapChosen") || effect("swapDodge") || effect("swapLowest");
   const thorns =
     effect("dreamDouble") ||
@@ -33,6 +41,47 @@ function boonScorer(
     cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
   return (boon: BoonId): number => {
     switch (boon) {
+      case "quiet-pinwheel":
+        return has.has("dodge") ? 60 : 30;
+      case "lagoon-chalice":
+        return has.has("water") && has.has("block") ? 60 : 0;
+      case "acorn-skittle":
+        return has.has("stun") ? 60 : 0;
+      case "wonder-kaleidoscope":
+        return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 50 : 0;
+      case "welcome-doormat":
+        return swapping ? 50 : 0;
+      case "shelter-lantern":
+        return has.has("block") ? 50 : 0;
+      case "chestnut-roaster":
+        return has.has("burn") ? 60 : 0;
+      case "chamomile-compress":
+        return healing ? 50 : 0;
+      case "cadence-panpipes":
+        return has.has("attack") ? 50 : 0;
+      case "hearthcap-kettle":
+        return effect("createFood") || kinds.includes("aerostat") ? 60 : 0;
+      case "caravan-rug":
+        return has.has("block") && hasLivingBackup() ? 60 : 0;
+      case "folded-mountain":
+      case "cypress-reliquary":
+        return has.has("armor") ? 60 : 0;
+      case "apple-press":
+        return has.has("bleed") ||
+          (has.has("physical") &&
+            (state.boons.includes("stardust-whetstone") ||
+              state.talents.includes("physical.lacerate") ||
+              (has.has("dodge") && state.talents.includes("bleed.parting-cut")))) ||
+          (has.has("nature") && state.talents.includes("nature.briar-patch")) ||
+          (has.has("poison") && state.talents.includes("poison.hemotoxin"))
+          ? 60
+          : 0;
+      case "pollen-basket":
+        return kinds.length > 1 && thorns ? 60 : 0;
+      case "farewell-oar":
+        return swapping && has.has("block") ? 60 : 0;
+      case "oasis-seed":
+        return kinds.length > 1 && healing && has.has("attack") ? 60 : 0;
       case "bellows-heart":
         return healing && has.has("burn") ? 60 : 0;
       case "leafwing-shuttlecock":
@@ -135,10 +184,7 @@ function boonScorer(
       case "poppy-seed-grinder":
         return has.has("poison") ? 60 : 0;
       case "reef-incense-tile":
-        return has.has("water") &&
-          (effect("teamBlind") || cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")))
-          ? 60
-          : 0;
+        return has.has("water") && hasBlind() ? 60 : 0;
       case "coral-music-box":
         return has.has("block") && has.has("water") ? 60 : 0;
       case "obsidian-pitcher":
@@ -165,15 +211,12 @@ function boonScorer(
       case "grafting-needle":
         return healing && has.has("armor") ? 60 : 0;
       case "camp-hammock":
-        return healing && state.reserves.some((unit) => unit.health > 0) ? 60 : 0;
+        return healing && hasLivingBackup() ? 60 : 0;
       case "thaw-spoon":
         return healing ? 40 : 0;
       case "moonveil-mask":
       case "apiary-smoker":
-        return effect("teamBlind") ||
-          cards.some((card) => card.effects?.some((extra) => extra.kind === "blind"))
-          ? 50
-          : 0;
+        return hasBlind() ? 50 : 0;
       case "mercury-metronome":
         return kinds.length > 1 ? 60 : 0;
       case "raincatcher-bowl":
@@ -190,13 +233,14 @@ function boonScorer(
       case "echo-lens":
         return effect("dreamDouble") || effect("sparkDecoy") ? 50 : 0;
       case "saddle-pouch":
-        return swapping && state.reserves.some((unit) => unit.health > 0) ? 60 : 0;
+        return swapping && hasLivingBackup() ? 60 : 0;
       case "story-puzzle-cube":
-        return ["burn", "poison", "bleed", "stun", "freeze"].filter((keyword) => has.has(keyword)).length +
-          Number(
-            effect("teamBlind") ||
-              cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")),
-          ) >=
+        return Number(has.has("burn")) +
+          Number(has.has("poison")) +
+          Number(has.has("bleed")) +
+          Number(has.has("stun")) +
+          Number(has.has("freeze")) +
+          Number(hasBlind()) >=
           3
           ? 60
           : 0;
@@ -228,7 +272,7 @@ function boonScorer(
         return has.has("burn") ? 80 : 0;
       case "sin-eaters-lantern":
         return has.has("cleanse") ||
-          state.talents.some((id) => ["health.last-resort", "health.clean-slate"].includes(id))
+          state.talents.some((id) => id === "health.last-resort" || id === "health.clean-slate")
           ? 70
           : 0;
       case "thunderstone":
@@ -297,7 +341,9 @@ function recruitDecision(state: GameState): JourneyDecision {
         block: 0,
         attacked: false,
       };
-      const next = [...roster.filter((unit) => unit !== released), incoming];
+      const next = released
+        ? [...roster.filter((unit) => unit !== released), incoming]
+        : [...roster, incoming];
       const active = recruitLineup(state, incoming, released?.id).map((id) =>
         next.find((unit) => unit.id === id)!,
       );
@@ -374,20 +420,27 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
         const visit = state.support!;
         if (visit.resolved)
           return decision({ type: "leaveSupport", visit: visit.id }, "Leave after the committed purchase");
-        const affordable = visit.stock.filter((slot) => slot.price <= state.currency);
-        let scorer: ReturnType<typeof boonScorer> | undefined;
-        const scoreBoon = (boon: BoonId) => (scorer ??= boonScorer(state))(boon);
-        const slot =
-          config.policy === "random"
-            ? affordable[0]
-            : affordable
-                .filter((slot) => scoreBoon(slot.boon) > 0)
-                .sort(
-                  (a, b) =>
-                    scoreBoon(b.boon) / b.price - scoreBoon(a.boon) / a.price ||
-                    a.price - b.price ||
-                    a.slot.localeCompare(b.slot),
-                )[0];
+        let slot: (typeof visit.stock)[number] | undefined;
+        if (config.policy === "random") slot = visit.stock.find((entry) => entry.price <= state.currency);
+        else {
+          let scorer: ReturnType<typeof boonScorer> | undefined;
+          let bestScore = 0;
+          for (const entry of visit.stock) {
+            if (entry.price > state.currency) continue;
+            const score = (scorer ??= boonScorer(state))(entry.boon);
+            if (score <= 0) continue;
+            if (
+              !slot ||
+              score / entry.price > bestScore / slot.price ||
+              (score / entry.price === bestScore / slot.price &&
+                (entry.price < slot.price ||
+                  (entry.price === slot.price && entry.slot.localeCompare(slot.slot) < 0)))
+            ) {
+              slot = entry;
+              bestScore = score;
+            }
+          }
+        }
         return slot
           ? decision(
               { type: "buyBoon", visit: visit.id, slot: slot.slot },
@@ -431,16 +484,22 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
               );
       case "boon": {
         const offers = state.reward!.boons;
-        let scorer: ReturnType<typeof boonScorer> | undefined;
-        const scoreBoon = (boon: BoonId) => (scorer ??= boonScorer(state))(boon);
-        const boon =
-          config.policy === "random"
-            ? offers.length
-              ? pick(offers)
-              : undefined
-            : [...offers]
-                .filter((boon) => scoreBoon(boon) > 0)
-                .sort((a, b) => scoreBoon(b) - scoreBoon(a) || a.localeCompare(b))[0];
+        let boon: BoonId | undefined;
+        if (config.policy === "random") boon = offers.length ? pick(offers) : undefined;
+        else {
+          let scorer: ReturnType<typeof boonScorer> | undefined;
+          let bestScore = 0;
+          for (const offer of offers) {
+            const score = (scorer ??= boonScorer(state))(offer);
+            if (
+              score > bestScore ||
+              (score > 0 && score === bestScore && boon && offer.localeCompare(boon) < 0)
+            ) {
+              boon = offer;
+              bestScore = score;
+            }
+          }
+        }
         return boon
           ? decision(
               { type: "chooseBoon", boon },

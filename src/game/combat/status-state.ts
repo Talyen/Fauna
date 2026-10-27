@@ -110,13 +110,15 @@ export function reducePeriodicStacks(stats: CombatState, status: PeriodicStatus,
   stats[status] = Math.max(0, stats[status] - amount);
   if (status === "bleed") {
     let remaining = removed;
-    while (remaining > 0 && stats.bleedLeech.length) {
-      const payout = stats.bleedLeech[0]!;
+    let consumed = 0;
+    while (remaining > 0 && consumed < stats.bleedLeech.length) {
+      const payout = stats.bleedLeech[consumed]!;
       const reduction = Math.min(remaining, payout.amount);
       payout.amount -= reduction;
       remaining -= reduction;
-      if (!payout.amount) stats.bleedLeech.shift();
+      if (!payout.amount) consumed++;
     }
+    if (consumed) stats.bleedLeech.splice(0, consumed);
   }
   if (stats[status] === 0) clearHarmfulStatus(stats, status);
   return removed;
@@ -140,12 +142,17 @@ export function deferLeech(stats: CombatState, sourceId: string, amount: number)
   else if (gained) stats.bleedLeech.push({ sourceId, amount: gained });
 }
 
+const NO_PAYOUTS: readonly BleedPayout[] = Object.freeze([]);
+
 /** Retain the pre-reaction obligations even when a threshold Cleanse removes the wound. */
 export function periodicTick(stats: CombatState, status: PeriodicStatus) {
   return {
     amount: stats[status],
     sourceId: stats.statusSources[status],
-    payouts: status === "bleed" ? stats.bleedLeech.map((payout) => ({ ...payout })) : [],
+    payouts:
+      status === "bleed" && stats.bleedLeech.length
+        ? stats.bleedLeech.map((payout) => ({ ...payout }))
+        : NO_PAYOUTS,
   };
 }
 

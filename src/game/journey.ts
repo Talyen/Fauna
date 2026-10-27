@@ -5,7 +5,7 @@ import {
   victoryRecovery,
   victoryGoldBonus,
 } from "./combat/battle-modifiers";
-import { battlefield } from "./battlefield";
+import { battlefieldView } from "./battlefield";
 import { wellProvisioned } from "./combat/food";
 import { bossDeck, removeDepartedMinions } from "./combat/legendary";
 import { species } from "./content";
@@ -67,7 +67,7 @@ function prepareEncounter(state: GameState) {
       : null;
 }
 export function intents(state: BattleState) {
-  const target = highestHealth(battlefield(state, "player"));
+  const target = highestHealth(battlefieldView(state, "player"));
   for (const enemy of state.battle.enemies) {
     if (enemy.health > 0) enemy.targetId = target?.id ?? state.team[0]!.id;
   }
@@ -77,11 +77,12 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
   for (const enemy of encounter.enemies)
     if (!state.discovery.encountered.includes(enemy.species)) state.discovery.encountered.push(enemy.species);
   rebuildCards(state);
-  for (const c of [...state.team, ...state.reserves]) {
-    c.combat = freshCombat();
-    c.block = 0;
-    c.attacked = false;
-  }
+  for (const row of [state.team, state.reserves])
+    for (const c of row) {
+      c.combat = freshCombat();
+      c.block = 0;
+      c.attacked = false;
+    }
   const mana = battleMana(state);
   const battle = {
     metronomeActor: null,
@@ -251,11 +252,18 @@ function enterPhase<T extends Lifecycle>(state: GameState, next: T): GameState &
   return Object.assign(state, next);
 }
 function clearCombat(state: GameState) {
-  state.cards = state.cards.filter((card) => !card.temporary);
-  for (const creature of [...state.team, ...state.reserves]) {
-    creature.block = 0;
-    creature.combat = freshCombat();
+  let kept: GameState["cards"] | undefined;
+  for (let index = 0; index < state.cards.length; index++) {
+    const card = state.cards[index]!;
+    if (card.temporary) kept ??= state.cards.slice(0, index);
+    else kept?.push(card);
   }
+  if (kept) state.cards = kept;
+  for (const row of [state.team, state.reserves])
+    for (const creature of row) {
+      creature.block = 0;
+      creature.combat = freshCombat();
+    }
 }
 function enterDestination(state: Exclude<GameState, StateAt<"draft">>) {
   enterPhase(state, {

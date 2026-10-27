@@ -39,4 +39,5 @@ export interface PrimaryContext {
   cannotDodge: boolean;
   criticalBonus: number;
   oasisLeech: boolean;
+  additionalTarget?: Combatant;
 }

@@ -2,11 +2,15 @@ import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import {
+  findLivingBattlefield,
   isEnemy,
   battlefield,
+  battlefieldView,
+  battlefieldHasId,
   livingBattlefield,
   healingAllies,
   cleanseTargets,
+  canSpreadCleanse,
   isDepartedMinion,
 } from "../battlefield";
 import { roll } from "../random";
@@ -84,7 +88,7 @@ export function* returnCleansedEffect(
     !state.boons.includes("orbit-armillary")
   )
     return;
-  const target = battlefield(state, "enemy").find((enemy) => enemy.id === sourceId && enemy.health > 0);
+  const target = findLivingBattlefield(state, "enemy", (enemy) => enemy.id === sourceId);
   if (!target) return;
   yield* applyResolvedStatus(
     state,
@@ -151,10 +155,9 @@ export function* triggerArmorBreak(
   const allied = !isEnemy(unit);
   if (allied && hasTalent(state, "armor.reactive-guard"))
     yield* reaction("grantBlock", state, unit, talentRule("armor.reactive-guard").amount, events);
-  const row = battlefield(state, allied ? "player" : "enemy");
-  if (!row.some((deployed) => deployed.id === unit.id)) return;
+  if (!battlefieldHasId(state, allied ? "player" : "enemy", unit.id)) return;
   if (allied && state.boons.includes("eclipse-rivet"))
-    for (const other of row)
+    for (const other of battlefield(state, "player"))
       if (other.id !== unit.id && other.health > 0)
         yield* reaction("grantArmor", state, other, boonRule("eclipse-rivet").armor, events);
   const amount = passiveAmount(allied ? state : undefined, unit.species, "armorBreak");
@@ -173,7 +176,7 @@ export function* removeControlBuildup(
   events: GameEvent[],
   spread = true,
 ): Resolution<void> {
-  if (spread) {
+  if (spread && canSpreadCleanse(state, unit)) {
     const targets = cleanseTargets(state, unit);
     if (targets.length > 1) {
       for (const target of targets) {
@@ -212,7 +215,7 @@ export function* removeEffects(
   linked = false,
 ): Resolution<number> {
   if (state && isDepartedMinion(state, unit)) return 0;
-  if (kind === "cleanse" && spread) {
+  if (kind === "cleanse" && spread && canSpreadCleanse(state, unit)) {
     const targets = cleanseTargets(state, unit);
     if (targets.length > 1) {
       let removed = 0;
@@ -311,12 +314,16 @@ export function* removeEffects(
     yield* reaction("removeEffects", source, "purge", count, events, state, onlyStatus, unit);
     return 0;
   }
+  const shelter =
+    kind === "purge" && state && !isEnemy(unit) && unit.block > 0 && state.boons.includes("shelter-lantern");
+  if (shelter && onlyStatus && onlyStatus !== "block") count = 0;
   if (kind === "purge" && (!onlyStatus || onlyStatus === "block") && unit.block > 0 && count > 0) {
     purgedBlock = unit.block;
     unit.block = 0;
     removedStatuses.push("block");
     purgedKinds.push("block");
     if (!pearlSieve || !isEnemy(unit) || (source && isEnemy(source))) count--;
+    if (shelter) count = 0;
   }
   if (
     kind === "cleanse" &&
@@ -330,9 +337,9 @@ export function* removeEffects(
     cleansed++;
     count--;
   }
-  for (const status of statuses)
+  for (const status of statuses) {
+    if (!(count > 0)) break;
     if (
-      count > 0 &&
       !(kind === "cleanse" && status === "burn" && isEnemy(unit) && unit.block > 0 && moltenPaperweight) &&
       !(
         kind === "cleanse" &&
@@ -361,6 +368,7 @@ export function* removeEffects(
         status === "reflectBurn" ? "reflect" : status === "nullifyFreeze" ? "nullify" : status,
       );
     }
+  }
   if (
     kind === "cleanse" &&
     state &&
@@ -590,7 +598,7 @@ export function* cleanseRewards(
   }
   if (freezeBuildupRemoved && unit.health > 0) {
     const allied = !isEnemy(unit);
-    const row = battlefield(state, allied ? "player" : "enemy");
+    const row = battlefieldView(state, allied ? "player" : "enemy");
     const healing = row.some((ally) => ally.id === unit.id)
       ? row.reduce(
           (total, ally) =>
@@ -738,6 +746,10 @@ export function* applyHarmfulStatus(
       yield* applyResolvedStatus(state, target, recipient, damage, type, events, {
         reflected: true,
       });
+      if (alliedTarget && type === "blind" && state.boons.includes("wonder-kaleidoscope"))
+        for (const other of enemies)
+          if (target.health > 0 && other.health > 0 && other.id !== recipient.id)
+            yield* applyResolvedStatus(state, target, other, damage, type, events, { reflected: true });
       return { depletions: [], appliedControl: false, suppressed: true };
     }
   }
@@ -846,10 +858,11 @@ export function* applyHarmfulStatus(
         state.boons.includes("wonder-ball-maze")
       ) {
         // Successful control spends this pool; each new control removes another recipient from the route.
-        const recipient = battlefield(state, "enemy").find(
+        const recipient = findLivingBattlefield(
+          state,
+          "enemy",
           (unit) =>
             unit.id !== target.id &&
-            unit.health > 0 &&
             !ensureCombat(unit).controlled &&
             !ensureCombat(unit).skipped &&
             (ensureCombat(unit).cooldown === 0 || state.boons.includes("sleepers-urn")),

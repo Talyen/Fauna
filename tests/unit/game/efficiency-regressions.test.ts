@@ -26,6 +26,7 @@ import { definition, SPECIES } from "../../../src/game/content";
 import { capabilities, offenseValue } from "../../../src/application/team-policy";
 import {
   availablePlays,
+  hasAvailablePlay,
   chosenRecipients,
   inspectCardPlay,
   playTargetError,
@@ -44,6 +45,30 @@ import { chance } from "../../../src/game/chance";
 import { newestHeads } from "../../../src/application/cloud-policy";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createMessageReader } from "../../../src/ui/shared/localization/messages";
+
+it("keeps automatic turn completion aligned with legal card commands", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  const attack = state.cards.find((card) => card.definitionId === "prismram-attack")!;
+  state.battle.hand = [attack.id];
+  const check = () =>
+    expect(hasAvailablePlay(state)).toBe(availablePlays(state).some((play) => play.commands.length > 0));
+  check();
+  expect(hasAvailablePlay(state)).toBe(true);
+  state.battle.mana = 0;
+  check();
+  expect(hasAvailablePlay(state)).toBe(false);
+  state.team.find((unit) => unit.id === attack.ownerId)!.combat!.freeCard = true;
+  check();
+  expect(hasAvailablePlay(state)).toBe(true);
+  state.battle.enemies.forEach((enemy) => (enemy.health = 0));
+  check();
+  expect(hasAvailablePlay(state)).toBe(false);
+  state.team[0]!.health = 0;
+  state.reserves.push({ ...state.team[1]!, id: "backup" });
+  check();
+  state.battle.hand = [];
+  check();
+});
 
 it("keeps cached card keywords isolated from callers", () => {
   const card = { definitionId: "emberback-attack" };
@@ -730,4 +755,47 @@ it("retains the last duplicate cloud record and its ancestry", async () => {
   const updated = { ...first, ancestors: [first.id] };
   expect(newestHeads([updated, first])).toEqual([first]);
   expect(newestHeads([first, updated])).toEqual([]);
+  const second = { ...first, id: "c".repeat(64), ancestors: [first.id] };
+  expect(newestHeads([first, second])).toEqual([second]);
+  expect(newestHeads([second, first])).toEqual([second]);
+  expect(newestHeads([first, { ...second, ancestors: [] }])).toEqual([first, { ...second, ancestors: [] }]);
+});
+
+it("keeps Journey Loom's single-card eligibility, draw order and decisions", () => {
+  for (const pile of ["draw", "discard"] as const) {
+    const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+    const [owner, other] = state.team;
+    const card = state.cards.find((entry) => entry.ownerId === other!.id)!;
+    state.boons = ["journey-loom"];
+    state.battle.draw = [];
+    state.battle.discard = [];
+    state.battle[pile] = [card.id];
+    state.battle.hand = [];
+    state.battle.buffer = [];
+    expect(journeyReturnHasDraw(state, owner!.id)).toBe(true);
+    other!.health = 0;
+    expect(journeyReturnHasDraw(state, owner!.id)).toBe(false);
+    other!.health = 1;
+    const decisions: unknown[] = [];
+    observeDecisions(state, (decision) => {
+      decisions.push(decision);
+      return 0;
+    });
+    journeyReturn(state, owner!.id, []);
+    expect(state.battle.hand).toEqual([card.id]);
+    expect(state.battle.draw).toEqual([]);
+    expect(state.battle.discard).toEqual([]);
+    expect(decisions).toEqual([undefined]);
+  }
+});
+
+it("rebuilds permanent cards in kit order while retaining the matching original", () => {
+  const state = structuredClone(teamRun(42, ["mossguard", "prismram"]));
+  const retained = state.cards[0]!;
+  retained.level = 2;
+  const expected = state.team.flatMap((unit) => ownedCards(unit.id, unit.species).map((card) => card.id));
+  rebuildCards(state);
+  expect(state.cards.map((card) => card.id)).toEqual(expected);
+  expect(state.cards[0]).toBe(retained);
+  expect(state.cards[0]!.level).toBe(2);
 });

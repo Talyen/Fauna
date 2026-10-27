@@ -3,6 +3,14 @@ import type { CloudSnapshot } from "./cloud-snapshots";
 export function newestHeads(records: readonly CloudSnapshot[]) {
   if (records.length === 0) return [];
   if (records.length === 1) return records[0]!.ancestors.includes(records[0]!.id) ? [] : records.slice();
+  if (records.length === 2) {
+    const [first, last] = records as readonly [CloudSnapshot, CloudSnapshot];
+    if (first.id === last.id) return last.ancestors.includes(last.id) ? [] : [last];
+    const heads: CloudSnapshot[] = [];
+    if (!first.ancestors.includes(first.id) && !last.ancestors.includes(first.id)) heads.push(first);
+    if (!first.ancestors.includes(last.id) && !last.ancestors.includes(last.id)) heads.push(last);
+    return heads;
+  }
   const byId = new Map<string, CloudSnapshot>();
   for (const record of records) byId.set(record.id, record);
   const unique = [...byId.values()];
@@ -26,7 +34,8 @@ export function reconciliationPlan({
   localData: string | null;
   mode: "startup" | "background";
 }) {
-  const records = [...remote, ...(current ? [current] : [])];
+  const records = [...remote];
+  if (current) records.push(current);
   if (mode === "background" && !current)
     return { records, chosen: null, parents: [], preserve: false, install: null, deferred: true };
   const heads = newestHeads(records);

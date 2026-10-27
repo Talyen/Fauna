@@ -57,6 +57,10 @@ export const SCENARIOS = [
   "seven-boons-2",
   "seven-boons-3",
   "oasis-battle",
+  "hearth-boons-1",
+  "hearth-boons-2",
+  "hearth-boons-3",
+  "hearth-boons-4",
   "chromatic-boons-1",
   "chromatic-boons-2",
   "chromatic-boons-3",
@@ -159,6 +163,16 @@ export async function reviewScenario(server, name) {
       ["caravan-rug", "folded-mountain", "apple-press"],
       ["pollen-basket", "farewell-oar", "oasis-seed"],
       ["cypress-reliquary"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
+  if (name.startsWith("hearth-boons-")) {
+    const groups = [
+      ["quiet-pinwheel", "lagoon-chalice", "acorn-skittle"],
+      ["wonder-kaleidoscope", "welcome-doormat", "shelter-lantern"],
+      ["chestnut-roaster", "chamomile-compress", "cadence-panpipes"],
+      ["hearthcap-kettle"],
     ];
     game = bossReward();
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };

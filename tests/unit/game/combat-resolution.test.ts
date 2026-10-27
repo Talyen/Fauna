@@ -15,6 +15,8 @@ import { playTargetError } from "../../../src/game/play-queries";
 import { enemyAbilityValue } from "../../../src/game/ability-rules";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { summonEcho } from "../../../src/game/combat/legendary";
+import { shareNegate } from "../../../src/game/combat/damage";
+import { filterCardZones } from "../../../src/game/card-zones";
 import { swapFromCard } from "../../../src/game/team";
 import type { GameEvent } from "../../../src/game/types";
 import {
@@ -32,6 +34,35 @@ const cases: { name: string; seed: number; team: SpeciesId[] }[] = [
   { name: "bounce and healing", seed: 1, team: ["glintstride", "ringpalm", "dawncall"] },
   { name: "repeats and control", seed: 123, team: ["chimecricket", "cadenza", "wickwaltz"] },
 ];
+
+it("preserves protected target choice and card-pile order", () => {
+  produce(teamRun(42, ["mossguard", "emberback", "prismram"]), (state) => {
+    const battle = state.battle!;
+    state.boons = ["devotion-clasp"];
+    const [bearer, protectedAlly, unprotectedAlly] = state.team;
+    bearer!.combat = freshCombat();
+    bearer!.combat.negate = true;
+    protectedAlly!.combat = freshCombat();
+    protectedAlly!.combat.negate = true;
+    protectedAlly!.health = 1;
+    unprotectedAlly!.combat = freshCombat();
+    expect(shareNegate(state, battle.enemies[0]!, state.team, false)?.recipientId).toBe(unprotectedAlly!.id);
+    unprotectedAlly!.combat.negate = true;
+    expect(shareNegate(state, battle.enemies[0]!, state.team, false)?.recipientId).toBe(protectedAlly!.id);
+
+    battle.draw = ["a", "b", "c"];
+    battle.hand = ["b", "d"];
+    battle.buffer = ["e"];
+    battle.discard = ["b", "f"];
+    filterCardZones(battle, (id) => id !== "b");
+    expect([battle.draw, battle.hand, battle.buffer, battle.discard]).toEqual([
+      ["a", "c"],
+      ["d"],
+      ["e"],
+      ["f"],
+    ]);
+  });
+});
 
 it.each(["heal", "status", "cleanse", "turn"] as const)(
   "honors preview work cancellation before a unit-first %s operation",

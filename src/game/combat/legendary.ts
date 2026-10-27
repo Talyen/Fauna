@@ -13,7 +13,7 @@ import {
   MAX_BATTLE_CARDS,
   MAX_HAND_SIZE,
 } from "../card-zones";
-import { battlefield, livingBattlefield, isEnemy } from "../battlefield";
+import { battlefield, battlefieldHasId, livingBattlefield, isEnemy } from "../battlefield";
 import { freshCombat, hit, restoreHealth, controlled } from "./index";
 import type { Combatant } from "./state";
 import type { BattleState, Enemy, EnemyDeck, GameEvent, GameState } from "../types";
@@ -153,6 +153,11 @@ export function removeDepartedMinions(state: GameState) {
     for (const unit of state.battle.enemies) if (unit.health > 0) present.add(unit.id);
     // Retain inert records for status-source receipts until combat ends; they never act or render.
     for (const unit of state.battle.minions) if (!present.has(unit.minion.ownerId)) unit.health = 0;
+  }
+  if (state.battle.enemies.length === 1) {
+    const enemy = state.battle.enemies[0]!;
+    if (!battlefieldHasId(state, "player", enemy.targetId)) enemy.targetId = state.team[0]!.id;
+    return;
   }
   const targets = new Set<string>();
   for (const unit of battlefield(state, "player")) targets.add(unit.id);

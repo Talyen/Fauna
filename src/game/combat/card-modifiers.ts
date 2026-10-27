@@ -19,12 +19,9 @@ import { receiveCard, draw, journeyReturn } from "../card-zones";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
 export function returnDodgedCard(state: BattleState, card: Card, events: GameEvent[], start: number) {
-  if (
-    !state.boons.includes("dream-yo-yo") ||
-    definition(card.definitionId).consume ||
-    !state.cards.some((entry) => entry.id === card.id)
-  )
-    return;
+  if (!state.boons.includes("dream-yo-yo")) return;
+  const def = definition(card.definitionId);
+  if (def.consume || !state.cards.some((entry) => entry.id === card.id)) return;
   const owner = state.team.find((ally) => ally.id === card.ownerId);
   if (!owner) return;
   // A summoner may fall after its Echo Dodges during the same card. The retained
@@ -55,7 +52,7 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
     kind: "action",
     actionType: "support",
     actorId: owner.id,
-    text: `${definition(card.definitionId).name} returns to hand`,
+    text: `${def.name} returns to hand`,
   });
 }
 
@@ -113,8 +110,8 @@ export function afterPlayerCard(state: BattleState, events: GameEvent[], actor?:
     battle.cardsPlayedThisTurn++;
     if (battle.cardsPlayedThisTurn === 2) livingChorus(state, false, events);
     if (
-      battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards &&
-      state.boons.includes("resonant-chimes")
+      state.boons.includes("resonant-chimes") &&
+      battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards
     )
       gainMana(state, boonRule("resonant-chimes").mana, events);
   }

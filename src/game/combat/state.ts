@@ -1,6 +1,6 @@
 import { talentRule } from "../rules/talents";
 import { chance as succeeds } from "../chance";
-import { isEnemy, isRosterCreature, battlefield } from "../battlefield";
+import { isEnemy, isRosterCreature, battlefieldView } from "../battlefield";
 import { hasTalent, passiveAmount } from "../progression";
 import { species, type CardDefinition } from "../content";
 import type { CombatState, Creature, Enemy, GameEvent, GameState } from "../types";
@@ -145,7 +145,11 @@ export function hasHarmfulEffects(unit: Combatant): boolean {
   return !!stats && (!!stats.controlled || harmfulStatuses.some((status) => Number(stats[status]) > 0));
 }
 export function ownDodgeChance(state: GameState, unit: Combatant): number {
-  if (unit.health <= 0 || unit.combat?.controlled) return 0;
+  if (
+    unit.health <= 0 ||
+    (unit.combat?.controlled && (isEnemy(unit) || !state.boons.includes("quiet-pinwheel")))
+  )
+    return 0;
   const allied = !isEnemy(unit);
   const stats = unit.combat;
   if (!allied && (stats?.poison ?? 0) > 0 && hasTalent(state, "poison.torpor")) return 0;
@@ -167,7 +171,9 @@ export function ownDodgeChance(state: GameState, unit: Combatant): number {
 export function sharedDodgeChance(state: GameState, target: Combatant): number {
   if (target.health <= 0) return 0;
   const allied = !isEnemy(target);
-  const row = battlefield(state, allied ? "player" : "enemy");
+  const members = allied ? state.team : (state.battle?.enemies ?? []);
+  if (members.length < 2 && !state.battle?.minions?.length) return 0;
+  const row = battlefieldView(state, allied ? "player" : "enemy");
   if (!row.some((unit) => unit.id === target.id)) return 0;
   let total = 0;
   for (const unit of row) {

@@ -143,7 +143,10 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       state.boons.includes("cinder-fan") &&
       old > decayed
     ) {
-      const targets = battlefield(state, "enemy").filter((enemy) => enemy.id !== unit.id && enemy.health > 0);
+      const targets = battlefield(state, "enemy");
+      let count = 0;
+      for (const enemy of targets) if (enemy.id !== unit.id && enemy.health > 0) targets[count++] = enemy;
+      targets.length = count;
       const lost = old - decayed;
       for (const [index, target] of targets.entries()) {
         const damage = Math.floor(lost / targets.length) + Number(index < lost % targets.length);

@@ -1,4 +1,4 @@
-import { battlefield, isEnemy } from "../battlefield";
+import { battlefieldView, isEnemy } from "../battlefield";
 import { passiveAmount } from "../progression";
 import { chance } from "../chance";
 import { maximumHealth, unitName, type Combatant } from "./state";
@@ -15,7 +15,7 @@ export function interceptAttack(
     return target;
   const enemy = isEnemy(target);
   let targetFraction: number | undefined;
-  for (const protector of battlefield(state, enemy ? "enemy" : "player")) {
+  for (const protector of battlefieldView(state, enemy ? "enemy" : "player")) {
     if (
       protector.id === target.id ||
       protector.health <= 0 ||

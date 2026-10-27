@@ -26,7 +26,7 @@ Stun and Freeze deal damage and build toward one skipped action window. Both sid
 
 ### Dodge and Critical hits
 
-Attacks have a base 5% Dodge chance before defenses and attacks on both sides have a 5% critical chance for double damage. Controlled targets cannot Dodge. Extra Dodge is capped so total chance never exceeds 75%.
+Attacks have a base 5% Dodge chance before defenses and attacks on both sides have a 5% critical chance for double damage. Controlled targets cannot Dodge unless the allied team owns Quiet Pinwheel. Extra Dodge is capped so total chance never exceeds 75%.
 
 ### Block and Armor
 

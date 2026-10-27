@@ -3,7 +3,15 @@ import { boonRule } from "../rules/boons";
 import { manaCapacity } from "../ability-rules";
 import { healingValue, restoration, overflowBlock, overflowRecipients } from "./healing-values";
 import { chance as succeeds, talentChance } from "../chance";
-import { isEnemy, battlefield, battlefieldHasId, healingAllies, combatantById } from "../battlefield";
+import {
+  findLivingBattlefield,
+  isEnemy,
+  battlefield,
+  battlefieldView,
+  battlefieldHasId,
+  healingAllies,
+  combatantById,
+} from "../battlefield";
 import { drawKeyword } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
 
@@ -36,6 +44,7 @@ export function* restoreHealth(
   if (!options.adjusted) amount = healingValue(state, unit, amount);
   if (unit.health === 0 && !revive) return;
   const { gain, excess } = restoration(unit, amount);
+  const bleedAtRestoration = unit.combat?.bleed ?? 0;
   unit.health += gain;
   if (cardHealing && state && !isEnemy(unit) && excess > 0) {
     if (hasTalent(state, "health.overflow"))
@@ -76,6 +85,8 @@ export function* restoreHealth(
             events,
           );
     }
+    if (bleedAtRestoration > 0 && state.boons.includes("chamomile-compress"))
+      yield* reaction("grantBlock", state, unit, bleedAtRestoration, events);
     if (stats.bleed > 0 && state.boons.includes("yarrow-salve-tin"))
       yield* reaction("removeEffects", unit, "cleanse", 1, events, state, "bleed", source);
     if (source && !isEnemy(source) && source.health > 0 && state.boons.includes("grafting-needle")) {
@@ -149,11 +160,14 @@ export function* shareProtection(
   const chance = passiveAmount(allied ? state : undefined, source.species, "shareProtection");
   if (chance <= 0) return;
   const pool = battlefield(state, allied ? "player" : "enemy");
-  if (!pool.some((unit) => unit.id === source.id)) return;
   let count = 0;
-  for (const unit of pool) if (unit.id !== source.id && unit.health > 0) pool[count++] = unit;
+  let deployed = false;
+  for (const unit of pool) {
+    if (unit.id === source.id) deployed = true;
+    else if (unit.health > 0) pool[count++] = unit;
+  }
   pool.length = count;
-  if (!pool.length) return;
+  if (!deployed || !pool.length) return;
   if (!succeeds(state, chance / 100, !allied, events)) return;
   for (const recipient of pool) {
     if (effect === "block") yield* reaction("grantBlock", state, recipient, amount, events, false);
@@ -169,7 +183,7 @@ export function* grantBlock(
 ): Resolution<void> {
   if (unit.health <= 0 || amount <= 0) return;
   if (!isEnemy(unit) && state.phase === "battle" && state.boons.includes("origami-staircase")) {
-    const row = battlefield(state, "player");
+    const row = battlefieldView(state, "player");
     if (row.some((ally) => ally.id === unit.id)) {
       let armored = 0;
       for (const ally of row) if (ally.health > 0 && ensureCombat(ally).armor > 0) armored++;
@@ -208,10 +222,7 @@ export function* grantBlock(
   if (isEnemy(unit) && state.phase === "battle" && state.boons.includes("apple-press")) {
     const stats = ensureCombat(unit);
     const original = combatantById(state, stats.statusSources.bleed);
-    const source =
-      original && !isEnemy(original)
-        ? original
-        : battlefield(state, "player").find((ally) => ally.health > 0);
+    const source = original && !isEnemy(original) ? original : findLivingBattlefield(state, "player");
     if (stats.bleed > 0 && source)
       yield* reaction("resolveHit", state, source, unit, stats.bleed, "bleed", events, {
         origin: "periodic",

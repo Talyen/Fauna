@@ -2,6 +2,116 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.hearthcap-kettle",
+      "origin": "repository",
+      "source": "public/art/boons/hearthcap-kettle.png",
+      "output": "art/boons/hearthcap-kettle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Hearthcap Kettle.png; https://drive.google.com/file/d/13eBcEJl40p2S42UuvYZHG--Kgo9N3R-G/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.cadence-panpipes",
+      "origin": "repository",
+      "source": "public/art/boons/cadence-panpipes.png",
+      "output": "art/boons/cadence-panpipes.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Cadence Panpipes.png; https://drive.google.com/file/d/1vFm5QipEJBVmzIIadCJF1a1u8WQKAOn7/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.chamomile-compress",
+      "origin": "repository",
+      "source": "public/art/boons/chamomile-compress.png",
+      "output": "art/boons/chamomile-compress.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Chamomile Compress.png; https://drive.google.com/file/d/11OyXPheTNRQwu2JiA_uY4mwNpRlSYVv1/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.chestnut-roaster",
+      "origin": "repository",
+      "source": "public/art/boons/chestnut-roaster.png",
+      "output": "art/boons/chestnut-roaster.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Chestnut Roaster.png; https://drive.google.com/file/d/1i-RXYNpS_7sXLEc42H7qbAF6TbxZxWhl/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.shelter-lantern",
+      "origin": "repository",
+      "source": "public/art/boons/shelter-lantern.png",
+      "output": "art/boons/shelter-lantern.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Shelter Lantern.png; https://drive.google.com/file/d/11IL-5Qnk51wDPnOz_88Kg-8w_CXCnTYY/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.welcome-doormat",
+      "origin": "repository",
+      "source": "public/art/boons/welcome-doormat.png",
+      "output": "art/boons/welcome-doormat.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Welcome Doormat.png; https://drive.google.com/file/d/1IiSMf_s3cVzY0prON9jbh6U8Y4oS9V2T/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.wonder-kaleidoscope",
+      "origin": "repository",
+      "source": "public/art/boons/wonder-kaleidoscope.png",
+      "output": "art/boons/wonder-kaleidoscope.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Wonder Kaleidoscope.png; https://drive.google.com/file/d/1wXwB3TwGWkvjjYaINwCEeQ_Ye9L9sqFC/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.acorn-skittle",
+      "origin": "repository",
+      "source": "public/art/boons/acorn-skittle.png",
+      "output": "art/boons/acorn-skittle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Acorn Skittle.png; https://drive.google.com/file/d/1_qSKNgsY4ENIBg62v8Tz5dr5B6pB4OG7/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.lagoon-chalice",
+      "origin": "repository",
+      "source": "public/art/boons/lagoon-chalice.png",
+      "output": "art/boons/lagoon-chalice.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Lagoon Chalice.png; https://drive.google.com/file/d/11JvEZhV0h-C0zpogNJIuc5C4chBXBLpj/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.quiet-pinwheel",
+      "origin": "repository",
+      "source": "public/art/boons/quiet-pinwheel.png",
+      "output": "art/boons/quiet-pinwheel.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Quiet Pinwheel.png; https://drive.google.com/file/d/1-YMVe48vmHL4YhkKJScpP0ynCJogkoO1/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.caravan-rug",
       "origin": "repository",
       "source": "public/art/boons/caravan-rug.png",

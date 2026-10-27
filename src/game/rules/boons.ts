@@ -6,6 +6,25 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "quiet-pinwheel": boon({}, () => "Allies can Dodge while Stunned or Frozen"),
+    "lagoon-chalice": boon({}, () => "Water attacks have Leech while you have Block"),
+    "acorn-skittle": boon(
+      { damage: 2 },
+      (p) => `Stun hits on Stunned enemies also deal ${p.damage} Stun damage to another enemy`,
+    ),
+    "wonder-kaleidoscope": boon({}, () => "Blind reflected by allies also Blinds all other enemies"),
+    "welcome-doormat": boon({}, () => "Swapping allies share Nullify"),
+    "shelter-lantern": boon({}, () => "Block protects allies’ other effects from Purge"),
+    "chestnut-roaster": boon(
+      { multiplier: 2 },
+      () => "Burn hits apply twice as much Burn to enemies with Block",
+    ),
+    "chamomile-compress": boon({}, () => "Restoring an ally’s Health grants them Block equal to their Bleed"),
+    "cadence-panpipes": boon({}, () => "Repeated attacks also hit another enemy"),
+    "hearthcap-kettle": boon(
+      { cleanse: 1 },
+      () => "Playing Food Cleanses an effect from the most injured ally",
+    ),
     "caravan-rug": boon({}, () => "Block does not decay on backup allies"),
     "folded-mountain": boon({}, () => "Armor prevents Freeze buildup"),
     "apple-press": boon({}, () => "Enemy Bleed deals damage when they gain Block"),

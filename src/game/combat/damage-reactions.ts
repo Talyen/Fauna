@@ -2,7 +2,8 @@ import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds, talentChance } from "../chance";
 import {
-  battlefield,
+  findLivingBattlefield,
+  battlefieldView,
   battlefieldHasId,
   livingBattlefield,
   healingAllies,
@@ -64,7 +65,7 @@ export function* dodgeResponse(
   // The Dodge is committed even if its first follow-up causes a knockout.
   if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
   if (alliedTarget && state.boons.includes("echo-ocarina")) {
-    const allies = battlefield(state, "player");
+    const allies = battlefieldView(state, "player");
     if (allies.some((ally) => ally.id === target.id))
       for (const ally of allies)
         if (ally.id !== target.id && ally.health > 0)
@@ -279,8 +280,8 @@ export function* damageRewards(
     const bearer =
       original && !isEnemy(original) && original.health > 0
         ? original
-        : battlefield(state, "player").find((ally) => ally.health > 0);
-    const recipient = battlefield(state, "enemy").find((enemy) => enemy.id !== target.id && enemy.health > 0);
+        : findLivingBattlefield(state, "player");
+    const recipient = findLivingBattlefield(state, "enemy", (enemy) => enemy.id !== target.id);
     if (bearer && recipient)
       yield* reaction("applyHarmfulStatus", state, bearer, recipient, stats.bleed, "bleed", events);
   }
@@ -293,8 +294,10 @@ export function* damageRewards(
     source.health > 0 &&
     state.boons.includes("reef-incense-tile")
   ) {
-    const other = battlefield(state, "enemy").find(
-      (unit) => unit.id !== target.id && unit.health > 0 && !ensureCombat(unit).blind,
+    const other = findLivingBattlefield(
+      state,
+      "enemy",
+      (unit) => unit.id !== target.id && !ensureCombat(unit).blind,
     );
     if (other) yield* reaction("applyBlind", state, source, other, events);
   }
