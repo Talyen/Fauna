@@ -33,8 +33,8 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { BattleState, GameEvent } from "../../../src/game/types";
 
-// Captured before simplifying card authoring; preserve values and array order,
-// while allowing builders to assemble object properties in a different order.
+// Preserve values and array order while allowing builders to assemble object
+// properties in a different order. Card digest updated for Undertow Knot and Spark Decoy.
 it("preserves every authored creature, passive tier, card and Pearl", () => {
   const digest = (value: unknown) =>
     createHash("sha256")
@@ -48,7 +48,7 @@ it("preserves every authored creature, passive tier, card and Pearl", () => {
       .digest("hex");
   expect({ cards: digest(CARDS), species: digest(SPECIES), pearl: digest(PEARL) }).toMatchInlineSnapshot(`
     {
-      "cards": "2bf4b8dbe9bc04a96e5b2eec839b0b3d775ad1209e5d19b18d250c0571063622",
+      "cards": "75badaf3a772c0a564200c08f237c37951ff0fa01f433d156ff4ae1ac710e033",
       "pearl": "1ae0c37e2fc0a8088a6fe7b827c5e7f23512457a723269b79b7e1fc78417ebda",
       "species": "1350b8a3e22b5c16402c3b13723805a20e634ac4844a17498f3b810c215503cb",
     }

@@ -262,7 +262,7 @@ it("retains Water's Moonboat protection when a reflected attack meets Negate", (
   const ally = state.team[0]!;
   const enemy = state.battle.enemies[0]!;
   ally.combat = { ...freshCombat(), attackReflection: true };
-  enemy.combat = { ...freshCombat(), negate: true, thorns: 6, waterThorns: 4, fireThorns: 2 };
+  enemy.combat = { ...freshCombat(), negate: true, thorns: 6 };
   const health = ally.health;
   const events: import("../../../src/game/types").GameEvent[] = [];
   observeDecisions(state, () => 0.99);
@@ -274,7 +274,7 @@ it("retains Water's Moonboat protection when a reflected attack meets Negate", (
   );
   expect(ally.health).toBe(health);
   expect(ally.combat.burn).toBe(0);
-  expect(enemy.combat).toMatchObject({ negate: false, thorns: 5, waterThorns: 3, fireThorns: 1 });
+  expect(enemy.combat).toMatchObject({ negate: false, thorns: 5 });
   expect(events.filter((event) => event.kind === "damage")).toEqual([]);
   expect(decodeSave(encodeSave(state))).toEqual(state);
 });
@@ -298,7 +298,7 @@ it.each(["area", "bounce"] as const)(
     summonEcho(state, boss, "enemy", 6, []);
     summonEcho(state, boss, "enemy", 6, []);
     const [first, later] = state.battle.minions!;
-    later!.combat.waterThorns = 10;
+    later!.combat.thorns = 10;
     later!.combat.negate = true;
     later!.combat.attackReflection = true;
     const health = actor.health;
@@ -312,7 +312,7 @@ it.each(["area", "bounce"] as const)(
       });
     expect(boss.health).toBe(0);
     expect(later!.health).toBe(6);
-    expect(later!.combat).toMatchObject({ negate: true, attackReflection: true, waterThorns: 10 });
+    expect(later!.combat).toMatchObject({ negate: true, attackReflection: true, thorns: 10 });
     expect(actor.health).toBe(health);
     expect(events.some((event) => event.kind === "damage" && event.targetId === later!.id)).toBe(false);
   },

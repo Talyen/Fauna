@@ -36,7 +36,6 @@ describe("keyword foundation", () => {
       [["redraw", "swapLowest", "recover", "teamBlind", "swap", "draw", "nullify"], []],
       [["dodge"], ["dodge"]],
       [["mana"], ["mana"]],
-      [["waterThorns"], ["water"]],
       [["teamPurge"], ["light"]],
     ] as const)
       for (const effect of effects) expect(definitionKeywords({ effect })).toEqual(expected);
@@ -151,7 +150,7 @@ describe("keyword foundation", () => {
 
   it("colors keyword inflections in Boon prose without changing the wording", () => {
     const text =
-      "Light hits Blind Burning enemies; Cards dodged by enemies return to hand; Allies keep their last beneficial effect when Purged; Cleansed effects return to their source; Water Thorns guard Armor and Block; Overflow Healing; Critical Hits";
+      "Light hits Blind Burning enemies; Cards dodged by enemies return to hand; Allies keep their last beneficial effect when Purged; Cleansed effects return to their source; Thorns guard Armor and Block; Overflow Healing; Critical Hits";
     const html = renderToStaticMarkup(<KeywordText text={text} />);
     const colored = Array.from(
       html.matchAll(/<span\b[^>]*\bdata-keyword="([^"]+)"[^>]*>([^<]+)<\/span>/g),
@@ -164,7 +163,7 @@ describe("keyword foundation", () => {
       ["dodged", "dodge"],
       ["Purged", "purge"],
       ["Cleansed", "cleanse"],
-      ["Water Thorns", "waterThorns"],
+      ["Thorns", "thorns"],
       ["Armor", "armor"],
       ["Block", "block"],
       ["Healing", "health"],

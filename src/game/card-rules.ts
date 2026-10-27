@@ -46,25 +46,29 @@ export function cardTargeting(
   }
 }
 
+// Eligibility and adaptation must select the same healing effect.
+function enemyHealing(card: CardDefinition) {
+  return abilityRule(card.effect).adaptation === "healingExtra"
+    ? card.effects?.find((effect) => effect.kind === "heal")
+    : undefined;
+}
+
 export function enemyCard(card: CardDefinition): CardDefinition {
-  if (abilityRule(card.effect).adaptation === "healingExtra") {
-    const healing = card.effects?.find((effect) => effect.kind === "heal");
-    if (healing)
-      return {
-        ...card,
-        effect: "heal",
-        target: healing.target === "recipient" ? undefined : "self",
-        value: healing.amount,
-        effects: [],
-      };
-  }
+  const healing = enemyHealing(card);
+  if (healing)
+    return {
+      ...card,
+      effect: "heal",
+      target: healing.target === "recipient" ? undefined : "self",
+      value: healing.amount,
+      effects: [],
+    };
   return { ...card, effects: card.effects?.filter((effect) => supplementalRule(effect.kind).enemy) };
 }
 
 export function enemyCanUse(card: CardDefinition): boolean {
   const rule = abilityRule(card.effect);
-  if (rule.adaptation === "healingExtra" && card.effects?.some((effect) => effect.kind === "heal"))
-    return true;
+  if (enemyHealing(card)) return true;
   const policy = rule.enemy;
   switch (policy) {
     case "supported":

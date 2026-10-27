@@ -2,6 +2,116 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.reef-incense-tile",
+      "origin": "repository",
+      "source": "public/art/boons/reef-incense-tile.png",
+      "output": "art/boons/reef-incense-tile.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Reef Incense Tile.png; https://drive.google.com/file/d/1Y7hp4SuWYgTuvZ_C1Dg7p_t9Hi5taggW/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.lava-cameo",
+      "origin": "repository",
+      "source": "public/art/boons/lava-cameo.png",
+      "output": "art/boons/lava-cameo.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Lava Cameo.png; https://drive.google.com/file/d/1HbIg1R8cjjIeQrAJAk9Ds7QOVmLf2-KX/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.velvet-whisk",
+      "origin": "repository",
+      "source": "public/art/boons/velvet-whisk.png",
+      "output": "art/boons/velvet-whisk.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Velvet Whisk.png; https://drive.google.com/file/d/1tnf3RHSvw_IkxoElFs-nCof87yp2ftZg/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.paper-lotus",
+      "origin": "repository",
+      "source": "public/art/boons/paper-lotus.png",
+      "output": "art/boons/paper-lotus.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Paper Lotus.png; https://drive.google.com/file/d/1ydCR548ovg9ZTBfm1qCMdPJ-vv94tphz/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.origami-staircase",
+      "origin": "repository",
+      "source": "public/art/boons/origami-staircase.png",
+      "output": "art/boons/origami-staircase.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Origami Staircase.png; https://drive.google.com/file/d/1L5CSJYNMLrY6P6_kHtx9P_Bb5pjKxdfi/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.wax-foundation-mold",
+      "origin": "repository",
+      "source": "public/art/boons/wax-foundation-mold.png",
+      "output": "art/boons/wax-foundation-mold.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Wax Foundation Mold.png; https://drive.google.com/file/d/1eXOtqEtNMeqeLVeTVQhXzvyCfAgHtY16/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.eclipse-rivet",
+      "origin": "repository",
+      "source": "public/art/boons/eclipse-rivet.png",
+      "output": "art/boons/eclipse-rivet.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Eclipse Rivet.png; https://drive.google.com/file/d/1hCRXeY3IvEVtqZLIUDgyCDdy7JCUquwv/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.poppy-seed-grinder",
+      "origin": "repository",
+      "source": "public/art/boons/poppy-seed-grinder.png",
+      "output": "art/boons/poppy-seed-grinder.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Poppy Seed Grinder.png; https://drive.google.com/file/d/1G-mZMl8biV26cUepNMtCUVMomTAuakx4/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.peace-knot",
+      "origin": "repository",
+      "source": "public/art/boons/peace-knot.png",
+      "output": "art/boons/peace-knot.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Peace Knot.png; https://drive.google.com/file/d/1gdM99QomdMI0GAXk_ujsDxNvnhYmCcF3/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.coral-music-box",
+      "origin": "repository",
+      "source": "public/art/boons/coral-music-box.png",
+      "output": "art/boons/coral-music-box.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Coral Music Box.png; https://drive.google.com/file/d/19Tr_5ZO0A9yHh8RsGKBRgyZexGk1RMdB/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.aether-gramophone",
       "origin": "repository",
       "source": "public/art/boons/aether-gramophone.png",

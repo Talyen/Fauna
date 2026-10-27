@@ -6,6 +6,31 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "reef-incense-tile": boon({}, () => "Water hits spread Blind to another enemy"),
+    "lava-cameo": boon({}, () => "Burn on enemies with Armor does not decay"),
+    "velvet-whisk": boon(
+      { dodge: 20 },
+      (p) => `Food grants its targets ${p.dodge}% Dodge until their next turn`,
+    ),
+    "paper-lotus": boon({ divisor: 2 }, () => "Allies with Nullify take half Burn, Poison and Bleed damage"),
+    "origami-staircase": boon(
+      { block: 1 },
+      (p) => `Allies gain ${p.block} extra Block for each ally with Armor`,
+    ),
+    "wax-foundation-mold": boon(
+      { percent: 75 },
+      (p) => `Allies with Armor keep ${p.percent}% of their Block when it decays`,
+    ),
+    "eclipse-rivet": boon(
+      { armor: 2 },
+      (p) => `When an ally’s Armor breaks, other allies gain ${p.armor} Armor`,
+    ),
+    "poppy-seed-grinder": boon({ divisor: 2 }, () => "Poison damage adds half as much Stun buildup"),
+    "peace-knot": boon(
+      { block: 2 },
+      (p) => `When Nullify prevents a harmful effect, other allies gain ${p.block} Block`,
+    ),
+    "coral-music-box": boon({}, () => "When an ally’s Block breaks, draw a Water card"),
     "aether-gramophone": boon({}, () => "Repeated attacks cannot be Dodged"),
     "herbarium-press": boon({}, () => "Poison cannot be Cleansed from Frozen enemies"),
     "honey-press": boon(
@@ -13,7 +38,7 @@ const rules = freeze(
       () => "Purging enemy Block restores half as much Health to the most injured ally",
     ),
     "rook-of-mercy": boon({ armor: 2 }, (p) => `Allies swapping in gain ${p.armor} Armor`),
-    "tidecrest-hairpin": boon({ minimum: 1 }, () => "Water Thorns cannot decay below 1"),
+    "tidecrest-hairpin": boon({ minimum: 1 }, () => "Thorns cannot decay below 1"),
     "stardust-whetstone": boon(
       { bleed: 1 },
       (p) => `Physical hits apply ${p.bleed} Bleed to enemies with Armor`,

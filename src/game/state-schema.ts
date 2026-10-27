@@ -34,8 +34,6 @@ const combatStateSchema = z
     desperateGuardUsed: z.boolean(),
     armor: natural,
     thorns: natural,
-    waterThorns: natural,
-    fireThorns: natural,
     dodge: z.number().int().min(0).max(70),
     temporaryDodge: z.number().int().min(0).max(70),
     blind: z.boolean(),

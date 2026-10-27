@@ -124,14 +124,14 @@ it("grants Armor to a living backup arriving through a swap", () => {
   expect(state.team.find((unit) => unit.id === "backup")!.combat!.armor).toBe(2);
 });
 
-it("retains the last Water Thorns through retaliation but allows Purge", () => {
+it("retains the last Thorns through retaliation but allows Purge", () => {
   const { state, ally, enemy, events } = fixture();
   state.boons = ["tidecrest-hairpin"];
-  ally.combat!.waterThorns = 1;
+  ally.combat!.thorns = 1;
   hit(state, enemy, ally, 2, "physical", events, { origin: "ability", blindMiss: false });
-  expect(ally.combat!.waterThorns).toBe(1);
-  removeEffects(ally, "purge", 1, events, state, "waterThorns", enemy);
-  expect(ally.combat!.waterThorns).toBe(0);
+  expect(ally.combat!.thorns).toBe(1);
+  removeEffects(ally, "purge", 1, events, state, "thorns", enemy);
+  expect(ally.combat!.thorns).toBe(0);
 });
 
 it("applies Bleed on a blocked Physical hit against Armor through normal Nullify", () => {

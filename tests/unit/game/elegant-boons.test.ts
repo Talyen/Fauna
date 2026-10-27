@@ -272,18 +272,18 @@ it("Grain Flail applies to a Dodged shield break through Coral Net Weight", () =
   expect(target.health).toBe(100);
 });
 
-it("Gemmed Scabbard mitigates each Thorns pool with current Armor and retains Fire Thorns buildup", () => {
+it("Gemmed Scabbard mitigates Thorns with current Armor", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["gemmed-scabbard"];
   // Mossguard has no Armor-break attack to obscure retaliation totals.
   const attacker = state.team[0]!;
   attacker.combat!.armor = 3;
-  Object.assign(target.combat, { thorns: 4, waterThorns: 4, fireThorns: 4 });
+  Object.assign(target.combat, { thorns: 4 });
   const health = attacker.health;
   hit(state, attacker, target, 1, "physical", events, { origin: "ability", blindMiss: false });
-  expect(attacker.health).toBe(health - 6);
-  expect(attacker.combat).toMatchObject({ armor: 0, burn: 3 });
-  expect(target.combat).toMatchObject({ thorns: 3, waterThorns: 3, fireThorns: 3 });
+  expect(attacker.health).toBe(health - 1);
+  expect(attacker.combat).toMatchObject({ armor: 2, burn: 0 });
+  expect(target.combat).toMatchObject({ thorns: 3 });
   expect(source.health).toBe(species(source.species).health);
 });
 

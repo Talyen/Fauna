@@ -48,12 +48,14 @@ const rules: SupplementalRules = freeze(
       ...global,
       keyword: "cleanse",
       delivery: (effect) => (effect.target === "recipient" ? "recipient" : "global"),
-      describe: (effect) =>
+      describe: (effect, card) =>
         effect.target === "allAllies"
           ? "Cleanse all allies"
           : effect.target === "recipient"
             ? "Cleanse the healed ally"
-            : `Cleanse acting creature: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`,
+            : card.effect === "guard" && card.target === "self" && effect.amount === 1
+              ? "Cleanse a harmful effect"
+              : `Cleanse acting creature: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`,
     },
     status: {
       ...global,

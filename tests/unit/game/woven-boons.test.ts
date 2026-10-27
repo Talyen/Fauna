@@ -91,7 +91,7 @@ it("Hoard Lockplate respects Armor applicability, wards, wear and Leech through 
   hit(state, enemy, ally, 8, "physical", events);
   expect(ally.block).toBe(7);
 });
-it.each(["thorns", "waterThorns", "fireThorns"] as const)(
+it.each(["thorns"] as const)(
   "Rootvault Pole Dodges %s with ordinary rewards and no retaliation chain",
   (status) => {
     const { state, ally, enemy, events } = fixture();
@@ -148,7 +148,7 @@ it("Star Hoop uses innate Reflect, preserves ineligible charges and lets Nullify
   removeEffects(ally, "purge", 1, events, state, "armor", enemy);
   expect([ally.combat!.armor, enemy.combat.armor]).toEqual([3, 0]);
   ally.combat!.reflect = true;
-  removeEffects(ally, "purge", 1, events, state, "fireThorns", enemy);
+  removeEffects(ally, "purge", 1, events, state, "thorns", enemy);
   expect(ally.combat!.reflect).toBe(true);
   state.boons.push("coronation-cloche");
   ally.combat!.nullify = true;

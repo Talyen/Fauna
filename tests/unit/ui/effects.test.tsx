@@ -23,19 +23,19 @@ afterEach(() => {
 });
 
 it("uses displayed aliases and complete keyword identities rather than progression categories or costs", () => {
-  expect(visualKeywords("Stunned; Bleeding; Stun; gain Water Thorns; Consume")).toEqual([
+  expect(visualKeywords("Stunned; Bleeding; Stun; gain Water; Consume")).toEqual([
     "stun",
     "bleed",
-    "waterThorns",
+    "water",
     "consume",
   ]);
   const pair = effectPalette(["stun", "bleed", "stun"]);
   expect(pair.plasma).toEqual({ primary: "var(--keyword-stun)", secondary: "var(--keyword-bleed)" });
   expect(pair.border).toEqual(["var(--keyword-stun)", "var(--keyword-bleed)", "var(--keyword-stun)"]);
-  expect(effectPalette(["waterThorns"]).border).toEqual([
-    "var(--keyword-waterThorns)",
-    "var(--keyword-waterThorns-deep)",
-    "var(--keyword-waterThorns)",
+  expect(effectPalette(["water"]).border).toEqual([
+    "var(--keyword-water)",
+    "var(--keyword-water-deep)",
+    "var(--keyword-water)",
   ]);
   expect(effectPalette([]).plasma.primary).toBe("var(--keyword-physical)");
   expect(effectPalette(["stun", "bleed", "burn", "water"]).text).toHaveLength(6);
@@ -106,7 +106,7 @@ function Scene({ scope = "home", hidden = false }: { scope?: string; hidden?: bo
         <ArtCard artwork="/test.svg" aspect="creature" aria-label="Unknown creature" />
       </EffectScope>
       <EffectScope name="inspection">
-        <EffectBaseline palette={effectPalette(["waterThorns"])} />
+        <EffectBaseline palette={effectPalette(["water"])} />
       </EffectScope>
     </VisualEffectsProvider>
   );
@@ -132,9 +132,9 @@ it("tracks hover and intentional focus across scopes, hidden mounted screens and
   view.rerender(<Scene hidden />);
   await waitFor(() => expect(screen.getByTestId("palette").textContent).toBe("physical"));
   view.rerender(<Scene scope="inspection" />);
-  expect(screen.getByTestId("palette").textContent).toBe("waterThorns");
+  expect(screen.getByTestId("palette").textContent).toBe("water");
   fireEvent.pointerOver(card);
-  expect(screen.getByTestId("palette").textContent).toBe("waterThorns");
+  expect(screen.getByTestId("palette").textContent).toBe("water");
   view.rerender(<Scene />);
   expect(screen.getByRole("button", { name: "Unknown creature" }).hasAttribute("data-effect-keywords")).toBe(
     false,

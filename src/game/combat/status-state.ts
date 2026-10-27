@@ -82,8 +82,7 @@ export function clearSelectedStatus(
     status === "nullifyFreeze"
   )
     stats[status] = false;
-  else if (status === "thorns" || status === "waterThorns" || status === "fireThorns" || status === "dodge")
-    stats[status] = 0;
+  else if (status === "thorns" || status === "dodge") stats[status] = 0;
   else clearHarmfulStatus(stats, status);
 }
 

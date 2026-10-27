@@ -127,7 +127,6 @@ it("Unwritten Ending removes every beneficial effect, retains harmful effects an
       Object.assign(enemy.combat, {
         armor: 10,
         thorns: 2,
-        waterThorns: 3,
         dodge: 20,
         temporaryDodge: 20,
         reflect: true,
@@ -147,7 +146,6 @@ it("Unwritten Ending removes every beneficial effect, retains harmful effects an
     expect(enemy.combat).toMatchObject({
       armor: 0,
       thorns: 0,
-      waterThorns: 0,
       dodge: 0,
       temporaryDodge: 0,
       reflect: false,

@@ -1,6 +1,11 @@
 import { foodForAllies } from "../game/card-rules";
 import { boonRule } from "../game/rules/boons";
-import { healingBenefit, ordinaryAttackFacts, type OrdinaryHit } from "../game/ability-facts";
+import {
+  foodDodgeBenefit,
+  healingBenefit,
+  ordinaryAttackFacts,
+  type OrdinaryHit,
+} from "../game/ability-facts";
 import {
   battleCardCapacity,
   drawHasAnotherCard,
@@ -269,7 +274,9 @@ export function battleBenefits(
           healingBenefit(state, ally, value, play.def.effects),
         );
         const restored = benefits.reduce((sum, benefit) => sum + benefit.restored, 0);
-        const utility = benefits.reduce((sum, benefit) => sum + benefit.utility, 0);
+        const utility =
+          benefits.reduce((sum, benefit) => sum + benefit.utility, 0) +
+          automaticRecipients.reduce((sum, ally) => sum + foodDodgeBenefit(state, def, ally), 0);
         if (restored > 0) return support("healing", restored);
         if (utility > 0) return support("utility", utility);
         if (
@@ -286,7 +293,9 @@ export function battleBenefits(
             ? [mostInjured(automaticRecipients)!]
             : allies.filter((ally) => def.target !== "injured" || ally.health < maximumHealth(ally));
       return recipients.flatMap((ally) => {
-        const { restored, utility } = healingBenefit(state, ally, value, play.def.effects);
+        const benefit = healingBenefit(state, ally, value, play.def.effects);
+        const { restored } = benefit;
+        const utility = benefit.utility + foodDodgeBenefit(state, def, ally);
         return support(
           restored > 0 ? "healing" : utility > 0 ? "utility" : "none",
           restored > 0 ? restored : utility,
@@ -411,11 +420,15 @@ export function battleBenefits(
             unit.id,
           ),
         );
-    case "sparkDecoy":
     case "dreamDouble": {
-      const status = def.effect === "sparkDecoy" ? "fireThorns" : "thorns";
-      const thorns = Math.min(value, STACK_LIMIT - (actor.combat?.[status] ?? 0));
+      const thorns = Math.min(value, STACK_LIMIT - (actor.combat?.thorns ?? 0));
       return support(!actor.combat?.negate ? "resource" : thorns > 0 ? "protection" : "none", thorns);
+    }
+    case "sparkDecoy": {
+      const useful = facts
+        .livingEnemies()
+        .filter((enemy) => enemy.health > 0 && enemy.combat.burn < STACK_LIMIT).length;
+      return support(!actor.combat?.negate || useful > 0 ? "utility" : "none", useful * value);
     }
     case "nightmareHarvest": {
       const useful = battlefield(state, "player").filter(
@@ -455,9 +468,11 @@ export function battleBenefits(
             return sum;
           }, 0) ?? 0;
         return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
-          const useful = Math.min(value, STACK_LIMIT - ally.block);
+          const useful = Math.min(value, STACK_LIMIT - ally.block) + foodDodgeBenefit(state, def, ally);
+          const cleanse =
+            def.effects?.some((effect) => effect.kind === "cleanse" && hasHarmfulEffects(actor)) ?? false;
           return support(
-            healing > 0 ? "healing" : useful + protection > 0 ? "protection" : "none",
+            healing > 0 ? "healing" : useful + protection > 0 || cleanse ? "protection" : "none",
             healing > 0 ? healing : useful + protection,
             def.target === "self" ? undefined : ally.id,
           );
@@ -467,6 +482,7 @@ export function battleBenefits(
         (sum, ally) =>
           sum +
           Math.min(value, STACK_LIMIT - ally.block) +
+          foodDodgeBenefit(state, def, ally) +
           (def.effect === "teamProtection" ? Math.min(value, STACK_LIMIT - (ally.combat?.thorns ?? 0)) : 0),
         0,
       );
@@ -475,10 +491,6 @@ export function battleBenefits(
     case "nullify": {
       const useful = allies.filter((unit) => !unit.combat?.nullify).length;
       return support(useful > 0 ? "utility" : "none", useful);
-    }
-    case "waterThorns": {
-      const useful = Math.min(value, STACK_LIMIT - (actor.combat?.waterThorns ?? 0));
-      return support(useful > 0 ? "protection" : "none", useful);
     }
     case "swapDodge":
       return support(

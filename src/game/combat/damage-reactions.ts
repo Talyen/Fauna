@@ -10,6 +10,7 @@ import type { GameEvent, GameState } from "../types";
 import { ensureCombat, unitName, STACK_LIMIT, gainGold, removeArmor, type Combatant } from "./state";
 import type { packetPolicy, DamagePacket } from "./policy";
 import { reaction, type Resolution } from "./operations";
+import { applyResolvedStatus } from "./status-reactions";
 import { reducePeriodicStacks, deferLeech, detonateBleedStacks, bleedPayments } from "./status-state";
 
 export interface HitContext {
@@ -67,7 +68,11 @@ export function* dodgeResponse(
     if (target.health <= 0) return;
     if (retaliate && state.boons.includes("briar-racquet") && stats.thorns > 0 && target.health > 0) {
       const damage = Math.round(stats.thorns / boonRule("briar-racquet").divisor);
-      if (!(source.combat?.bleed && state.boons.includes("thornheart-ring"))) stats.thorns--;
+      if (
+        !(source.combat?.bleed && state.boons.includes("thornheart-ring")) &&
+        !(state.boons.includes("tidecrest-hairpin") && stats.thorns <= boonRule("tidecrest-hairpin").minimum)
+      )
+        stats.thorns--;
       yield* reaction("hit", state, target, source, damage, "nature", events, {
         origin: "retaliation",
         thorns: true,
@@ -125,6 +130,13 @@ export function* blockDepletionRewards(
 ): Resolution<void> {
   const alliedTarget = !isEnemy(target);
   if (alliedTarget && depletedBlock) recoverBrokenGuard(state, target.id, events);
+  if (
+    alliedTarget &&
+    depletedBlock &&
+    state.boons.includes("coral-music-box") &&
+    battlefield(state, "player").some((unit) => unit.id === target.id)
+  )
+    drawKeyword(state, "water", events);
   if (!alliedTarget && !isEnemy(source) && depletedBlock && state.boons.includes("grain-flail")) {
     const { removed, depletion } = removeArmor(target, ensureCombat(target).armor);
     if (removed > 0)
@@ -215,6 +227,20 @@ export function* damageRewards(
     policy.attack &&
     alliedSource &&
     !alliedTarget &&
+    type === "water" &&
+    stats.blind &&
+    source.health > 0 &&
+    state.boons.includes("reef-incense-tile")
+  ) {
+    const other = battlefield(state, "enemy").find(
+      (unit) => unit.id !== target.id && unit.health > 0 && !ensureCombat(unit).blind,
+    );
+    if (other) yield* reaction("applyBlind", state, source, other, events);
+  }
+  if (
+    policy.attack &&
+    alliedSource &&
+    !alliedTarget &&
     source.health > 0 &&
     target.health > 0 &&
     type === "light" &&
@@ -282,6 +308,23 @@ export function* damageRewards(
         );
     }
   }
+}
+export function* poisonStun(
+  { state, source, target, type, events }: HitContext,
+  damage: number,
+): Resolution<void> {
+  if (
+    type !== "poison" ||
+    isEnemy(source) ||
+    !isEnemy(target) ||
+    source.health <= 0 ||
+    target.health <= 0 ||
+    !state.boons.includes("poppy-seed-grinder")
+  )
+    return;
+  const amount = Math.round(damage / boonRule("poppy-seed-grinder").divisor);
+  if (amount <= 0) return;
+  yield* applyResolvedStatus(state, source, target, amount, "stun", events);
 }
 export function* waterFollowups(
   { state, source, events }: HitContext,
@@ -403,31 +446,23 @@ export function* thornRetaliation({
   type: attackType,
 }: Pick<HitContext, "state" | "source" | "target" | "events"> & { type?: DamageType }): Resolution<void> {
   const stats = ensureCombat(target);
-  for (const [status, type] of [
-    ["thorns", "nature"],
-    ["waterThorns", "water"],
-    ["fireThorns", "burn"],
-  ] as const) {
-    if (source.health <= 0) break;
-    const reflected = stats[status];
-    if (reflected <= 0) continue;
-    if (
-      !(source.combat?.bleed && !isEnemy(target) && state.boons.includes("thornheart-ring")) &&
-      !(
-        status === "waterThorns" &&
-        !isEnemy(target) &&
-        state.boons.includes("tidecrest-hairpin") &&
-        reflected <= boonRule("tidecrest-hairpin").minimum
-      )
+  const reflected = stats.thorns;
+  if (source.health <= 0 || reflected <= 0) return;
+  if (
+    !(source.combat?.bleed && !isEnemy(target) && state.boons.includes("thornheart-ring")) &&
+    !(
+      !isEnemy(target) &&
+      state.boons.includes("tidecrest-hairpin") &&
+      reflected <= boonRule("tidecrest-hairpin").minimum
     )
-      stats[status]--;
-    if (!isEnemy(source) && isEnemy(target) && attackType === "water" && state.boons.includes("moonboat-toy"))
-      continue;
-    yield* reaction("hit", state, target, source, reflected, type, events, {
-      origin: status === "fireThorns" ? "statusRetaliation" : "retaliation",
-      thorns: true,
-    });
-  }
+  )
+    stats.thorns--;
+  if (!isEnemy(source) && isEnemy(target) && attackType === "water" && state.boons.includes("moonboat-toy"))
+    return;
+  yield* reaction("hit", state, target, source, reflected, "nature", events, {
+    origin: "retaliation",
+    thorns: true,
+  });
 }
 export function* passiveRetaliation(
   { state, source, target, events }: HitContext,

@@ -103,12 +103,11 @@ it.each(["twilight-lance", "wish-exchange", "possible-path"])(
   },
 );
 
-it("purges both Thorns pools before the chosen enemy can retaliate, retaining other effects", () => {
+it("purges Thorns before the chosen enemy can retaliate, retaining other effects", () => {
   const game = produce(ready("twilight-lance"), (draft) => {
     const enemy = draft.battle!.enemies[0]!;
     Object.assign(enemy.combat, {
       thorns: 50,
-      waterThorns: 50,
       armor: 4,
       nullify: true,
       poison: 2,
@@ -121,7 +120,6 @@ it("purges both Thorns pools before the chosen enemy can retaliate, retaining ot
   expect(result.state.team[0]!.health).toBe(game.team[0]!.health);
   expect(result.state.battle!.enemies[0]!.combat).toMatchObject({
     thorns: 0,
-    waterThorns: 0,
     armor: 4,
     nullify: true,
     poison: 2,
@@ -299,7 +297,6 @@ it("enemies redistribute their own Block and purge allied Thorns before attackin
     );
     expect(draft.battle!.enemies.map((unit) => unit.block)).toEqual([4, 3, 3]);
     draft.team[1]!.combat!.thorns = 30;
-    draft.team[1]!.combat!.waterThorns = 20;
     executeAbility(
       draft as Extract<GameState, { phase: "battle" }>,
       {
@@ -312,7 +309,7 @@ it("enemies redistribute their own Block and purge allied Thorns before attackin
       [],
       { swap: swapFromCard },
     );
-    expect(draft.team[1]!.combat).toMatchObject({ thorns: 0, waterThorns: 0 });
+    expect(draft.team[1]!.combat).toMatchObject({ thorns: 0 });
   });
 });
 
