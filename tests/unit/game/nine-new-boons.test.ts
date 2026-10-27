@@ -1,46 +1,19 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
-import { BOONS, definition } from "../../../src/game/content";
+import { definition } from "../../../src/game/content";
 import { freshCombat, grantArmor, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { useFood } from "../../../src/game/combat/food";
 import { swapFromCard } from "../../../src/game/team";
 import { observeDecisions } from "../../../src/game/random";
-import { decodeSave, encodeSave } from "../../../src/game/save";
-import prepared from "../../../src/assets/prepared.json";
 import { requireBattle, run, addReserve } from "../../support/game";
-import { NEW_BOON_EFFECTS } from "../../support/boons";
 import type { GameEvent } from "../../../src/game/types";
 
-const ids = [
-  "aether-gramophone",
-  "herbarium-press",
-  "honey-press",
-  "rook-of-mercy",
-  "tidecrest-hairpin",
-  "stardust-whetstone",
-  "ashfall-pendant",
-  "wishing-building-block",
-  "sovereign-toast-rack",
-] as const;
 function fixture() {
   const state = requireBattle(structuredClone(run()));
-  state.boons = [];
-  state.talents = [];
-  for (const unit of [...state.team, ...state.battle.enemies]) {
-    unit.block = 0;
-    unit.combat = freshCombat();
-  }
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state);
   return { state, ally: state.team[0]!, enemy: state.battle.enemies[0]!, events: [] as GameEvent[] };
 }
-
-it.each(ids)("registers %s with its artwork and save identity", (id) => {
-  const { state } = fixture();
-  state.boons = [id];
-  expect(BOONS.find((boon) => boon.id === id)?.text).toBe(NEW_BOON_EFFECTS[id]);
-  expect(Object.hasOwn(prepared.records, `boon.${id}`)).toBe(true);
-  expect(decodeSave(encodeSave(state)).boons).toEqual([id]);
-});
 
 it("makes a repeated attack reliable without making the first attack reliable", () => {
   const { state, ally, enemy, events } = fixture();

@@ -631,10 +631,11 @@ export function* cleanseRewards(
   cleansed: number,
   events: GameEvent[],
   freezeBuildupRemoved = false,
+  partial = false,
 ): Resolution<void> {
   const stats = ensureCombat(unit);
   if (
-    cleansed > 0 &&
+    (cleansed > 0 || partial) &&
     unit.health > 0 &&
     !isEnemy(unit) &&
     state.phase === "battle" &&
@@ -645,6 +646,7 @@ export function* cleanseRewards(
         yield* reaction("hit", state, unit, enemy, boonRule("dandelion-poultice").damage, "nature", events, {
           origin: "derived",
         });
+  if (cleansed <= 0) return;
   if (
     cleansed > 0 &&
     unit.health > 0 &&

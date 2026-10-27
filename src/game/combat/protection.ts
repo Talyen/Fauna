@@ -1,7 +1,13 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { manaCapacity } from "../ability-rules";
-import { healingValue, restoration, overflowBlock, overflowRecipients } from "./healing-values";
+import {
+  healingValue,
+  restoration,
+  overflowBlock,
+  overflowRecipients,
+  overflowCupRecipient,
+} from "./healing-values";
 import { chance as succeeds, talentChance } from "../chance";
 import {
   findLivingBattlefield,
@@ -133,9 +139,7 @@ export function* restoreHealth(
     !isEnemy(unit) &&
     state.boons.includes("overflow-cup")
   ) {
-    const recipient = mostInjured(
-      healingAllies(state).filter((ally) => ally.id !== unit.id && ally.health < maximumHealth(ally)),
-    );
+    const recipient = overflowCupRecipient(state, unit);
     if (recipient)
       yield* reaction(
         "restoreHealth",

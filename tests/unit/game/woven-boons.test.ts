@@ -1,8 +1,8 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
 import { run, requireBattle, teamRun, addReserve } from "../../support/game";
 import { setBattleCards, cardId } from "../../support/cards";
-import { NEW_BOON_EFFECTS } from "../../support/boons";
-import { BOONS, definition, species } from "../../../src/game/content";
+import { definition, species } from "../../../src/game/content";
 import { freshCombat, hit, removeEffects, restoreHealth, tickStatuses } from "../../../src/game/combat/index";
 import { swapBackup } from "../../../src/game/team";
 import { createTemporaryCard } from "../../../src/game/card-zones";
@@ -14,30 +14,11 @@ import { encodeSave, decodeSave } from "../../../src/game/save";
 import { cardTargeting, cardText } from "../../../src/game/card-rules";
 import { availablePlays } from "../../../src/game/play-queries";
 import { rankedBattleChoices } from "../../../src/application/battle-policy";
-import prepared from "../../../src/assets/prepared.json";
 import type { GameEvent } from "../../../src/game/types";
 
-const ids = [
-  "hoard-lockplate",
-  "rootvault-pole",
-  "star-hoop",
-  "pattern-reel",
-  "prayer-sailboat",
-  "pumpkin-tureen",
-  "field-lunch-basket",
-  "winnowing-sieve",
-  "blooming-still",
-  "yarrow-salve-tin",
-] as const;
 function fixture() {
   const state = requireBattle(structuredClone(run()));
-  state.talents = [];
-  state.boons = [];
-  for (const unit of [...state.team, ...state.battle.enemies]) {
-    unit.block = 0;
-    unit.combat = freshCombat();
-  }
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state);
   return { state, ally: state.team[0]!, enemy: state.battle.enemies[0]!, events: [] as GameEvent[] };
 }
 function foodFixture(id: string) {
@@ -46,14 +27,6 @@ function foodFixture(id: string) {
   setBattleCards(f.state, [card.id]);
   return { ...f, card, def: definition(id) };
 }
-
-it.each(ids)("%s registers its approved rule, portrait and current-format ownership", (id) => {
-  const state = requireBattle(structuredClone(run()));
-  state.boons = [id];
-  expect(BOONS.find((boon) => boon.id === id)?.text).toBe(NEW_BOON_EFFECTS[id]);
-  expect(Object.hasOwn(prepared.records, "boon." + id)).toBe(true);
-  expect(decodeSave(encodeSave(state)).boons).toEqual([id]);
-});
 
 it.each(["physical", "stun"] as const)(
   "Hoard Lockplate protects allied Block from %s without changing the default order",

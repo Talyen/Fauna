@@ -52,9 +52,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
         outcome: "remove",
         text: `${unitName(recipient)} Cleanses ${removed} Poison.`,
       });
-      if (stats.poison === 0) {
-        yield* reaction("cleanseRewards", state, recipient, 1, events);
-      }
+      yield* reaction("cleanseRewards", state, recipient, Number(stats.poison === 0), events, false, true);
       yield* reaction("cleanseThorns", state, recipient, removed, events);
       yield* reaction("poisonCleanseMana", state, recipient, removed, events);
       yield* reaction("returnCleansedEffect", state, recipient, "poison", removed, sourceId, events);

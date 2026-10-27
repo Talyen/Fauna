@@ -9,7 +9,6 @@ import {
   dodgeChance,
   hasHarmfulEffects,
   maximumHealth,
-  mostInjured,
   STACK_LIMIT,
   type Combatant,
 } from "./combat/state";
@@ -20,7 +19,13 @@ import {
   armorApplies,
   modifiedDamage,
 } from "./combat/damage-values";
-import { healingValue, restoration, overflowBlock, overflowRecipients } from "./combat/healing-values";
+import {
+  healingValue,
+  restoration,
+  overflowBlock,
+  overflowRecipients,
+  overflowCupRecipient,
+} from "./combat/healing-values";
 
 export interface OrdinaryHit {
   readonly negated: boolean;
@@ -90,9 +95,7 @@ export function healingBenefit(
       : 0;
   const cupTarget =
     excess > 0 && !isEnemy(ally) && state.boons.includes("overflow-cup")
-      ? mostInjured(
-          healingAllies(state).filter((unit) => unit.id !== ally.id && unit.health < maximumHealth(unit)),
-        )
+      ? overflowCupRecipient(state, ally)
       : undefined;
   const cup = cupTarget
     ? Math.min(

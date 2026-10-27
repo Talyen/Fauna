@@ -2,7 +2,7 @@ import { talentRule } from "../rules/talents";
 import { healingAllies, isEnemy } from "../battlefield";
 import { hasTalent } from "../progression";
 import type { GameState } from "../types";
-import { maximumHealth, type Combatant } from "./state";
+import { maximumHealth, mostInjured, type Combatant } from "./state";
 
 /** Magnitude only; rewards, revival permission and bounce remain execution policy. */
 export function healingValue(state: GameState | undefined, unit: Combatant, amount: number) {
@@ -24,6 +24,13 @@ export function restoration(unit: Combatant, amount: number) {
 
 export const overflowBlock = (excess: number) =>
   Math.round(excess * (talentRule("health.overflow").percent / 100));
+
+/** Overflow Cup uses the same recipient for execution and visible benefit estimates. */
+export function overflowCupRecipient(state: GameState, unit: Combatant) {
+  return mostInjured(
+    healingAllies(state).filter((ally) => ally.id !== unit.id && ally.health < maximumHealth(ally)),
+  );
+}
 
 /** Overflow can reach only other living allies still at Death's Door. */
 export function overflowRecipients(state: GameState, unit: Combatant) {

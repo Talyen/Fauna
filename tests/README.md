@@ -14,6 +14,8 @@ Keep complete scenarios with their contract owner; do not split or remove useful
 | `tests/integration/gameplay/`  | Journey, resource and feedback contracts                                               |
 | `tests/integration/recovery/`  | Application/presentation recovery                                                      |
 | `tests/support/game.ts`        | Shared gameplay scenario builders, independent of unit-suite directories               |
+| `tests/support/cards.ts`       | Complete ordered hand, draw, discard and buffer arrangements                           |
+| `tests/support/combat.ts`      | Deterministic battle setup for isolated modifier regressions                           |
 | `tests/support/tooling.mjs`    | Test-owned temporary directories, file fixtures and committed Git repositories         |
 | `tests/e2e/`                   | Browser player flows; `expedition.spec.ts` retains the full starter-to-victory journey |
 | `tests/e2e/support/`           | Browser saves, input, layout, evidence capture and journey driving                     |
@@ -31,6 +33,8 @@ Tooling suites use `temporaryDirectory` for cleanup at test completion, includin
 Protect consequential player behavior, command rejection, ownership, persistence, lifecycle ordering and architectural boundaries. First inspect existing protection and choose the cheapest layer that can detect the plausible failure. Strengthen a nearby assertion where useful. Adding no permanent test is appropriate when existing coverage is adequate or a change is documentation-only.
 
 [Auto-play ranking baselines](unit/application/fixtures/battle-policy-rankings.tsv) retain each ordered command, score and reason for every creature in four battle conditions, including Talent and Boon effects. Each row is one choice; `null` represents an empty ranking. Preserve the recorded expectations for behavior-preserving changes and review changes to them as player-facing policy changes.
+
+[Boon catalog checks](unit/game/boons.test.ts) cover approved rules, prepared portraits and individual save round trips once for every entry in the independent [expected rules](support/boons.ts). Focused Boon suites retain their separate mechanic and interaction scenarios.
 
 Prefer focused behavioral assertions over tests of incidental implementation, markup or wrappers. Browser coverage should protect actual interaction and integration failures; arithmetic already covered in the engine rarely needs another browser journey. Test observable contracts instead of exact npm command strings, YAML formatting or internal call sequences. Keep literal assertions only where the literal itself is a public interface or authorization/security boundary. Never remove or weaken a regression test just to obtain a passing gate. Report exact suites run and remaining verification boundaries under [Contributing](../CONTRIBUTING.md#verification).
 

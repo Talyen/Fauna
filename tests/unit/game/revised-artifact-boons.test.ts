@@ -1,6 +1,7 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
 import { run, teamRun, requireBattle, addBackups } from "../../support/game";
-import { BOONS, species, type CardDefinition } from "../../../src/game/content";
+import { species, type CardDefinition } from "../../../src/game/content";
 import { freshCombat, hit, removeEffects, tickStatuses, startAction } from "../../../src/game/combat/index";
 import { resolveCombat } from "../../../src/game/combat/resolution";
 import { controlThreshold } from "../../../src/game/combat/statuses";
@@ -14,7 +15,6 @@ import { availablePlays, inspectCardPlay } from "../../../src/game/play-queries"
 import { cardActor } from "../../../src/game/card-actors";
 import { controlled } from "../../../src/game/combat/state";
 import { encodeSave, decodeSave } from "../../../src/game/save";
-import { NEW_BOON_EFFECTS } from "../../support/boons";
 import type { GameEvent } from "../../../src/game/types";
 
 const ids = [
@@ -32,14 +32,7 @@ const ids = [
 
 function fixture(kinds?: Parameters<typeof teamRun>[1]) {
   const state = requireBattle(structuredClone(kinds ? teamRun(42, kinds) : run()));
-  state.boons = [];
-  state.talents = [];
-  for (const unit of [...state.team, ...state.battle.enemies]) {
-    unit.block = 0;
-    unit.combat = freshCombat();
-  }
-  for (const enemy of state.battle.enemies) enemy.health = enemy.maxHealth = 100;
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state, "all");
   return { state, ally: state.team[0]!, enemy: state.battle.enemies[0]!, events: [] as GameEvent[] };
 }
 
@@ -48,13 +41,6 @@ function playAbility(f: ReturnType<typeof fixture>, def: CardDefinition) {
     swap: () => undefined,
   });
 }
-
-it.each(ids)("%s has its approved concise rule and survives current-format resume", (id) => {
-  const state = requireBattle(structuredClone(run()));
-  state.boons = [id];
-  expect(BOONS.find((boon) => boon.id === id)?.text).toBe(NEW_BOON_EFFECTS[id]);
-  expect(decodeSave(encodeSave(state)).boons).toEqual([id]);
-});
 
 it("Comb Uncapping Fork bypasses Block for allied Thorns without spending it", () => {
   const { state, ally, enemy, events } = fixture();

@@ -13,6 +13,7 @@ import { swapFromCard } from "../../../../src/game/team";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { accept, requireBattle, teamRun, winBattle } from "../../../support/game";
 import { wisterelleBattle } from "../../../support/wisterelle";
+import { setBattleCards } from "../../../support/cards";
 import type { BattleState, GameEvent } from "../../../../src/game/types";
 
 const junction = "wisterelle-forgotten-junction";
@@ -165,10 +166,7 @@ describe("Wisterelle", () => {
       draft.discovery.recruited.rookhaven = 6;
       draft.team[2]!.health = 10;
       const recovered = draft.cards.find((card) => card.definitionId === "emberback-attack")!;
-      draft.battle.hand = [];
-      draft.battle.discard = [recovered.id];
-      draft.battle.buffer = [];
-      draft.battle.draw = draft.cards.filter((card) => card.id !== recovered.id).map((card) => card.id);
+      setBattleCards(draft, [], [recovered.id]);
       drawDiscard(draft, events);
     });
     expect(game.team[2]!.health).toBe(11);
@@ -184,10 +182,7 @@ describe("Wisterelle", () => {
       draft.boons.push("groves-favor");
       draft.team[2]!.health = 27;
       const id = cardId(draft, "emberback-attack");
-      draft.battle.hand = [];
-      draft.battle.discard = [id];
-      draft.battle.buffer = [];
-      draft.battle.draw = draft.cards.filter((card) => card.id !== id).map((card) => card.id);
+      setBattleCards(draft, [], [id]);
       drawDiscard(draft, events);
     });
     expect(game.team[2]!.health).toBe(30);

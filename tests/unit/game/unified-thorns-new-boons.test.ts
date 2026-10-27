@@ -1,7 +1,7 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
-import { BOONS, definition } from "../../../src/game/content";
+import { definition } from "../../../src/game/content";
 import {
-  freshCombat,
   grantBlock,
   hit,
   removeEffects,
@@ -11,47 +11,16 @@ import {
 } from "../../../src/game/combat/index";
 import { decayBlock } from "../../../src/game/combat/turns";
 import { useFood } from "../../../src/game/combat/food";
-import { observeDecisions } from "../../../src/game/random";
-import { decodeSave, encodeSave } from "../../../src/game/save";
 import { requireBattle, teamRun } from "../../support/game";
-import { NEW_BOON_EFFECTS } from "../../support/boons";
 import { setBattleCards } from "../../support/cards";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
-import prepared from "../../../src/assets/prepared.json";
 import type { GameEvent } from "../../../src/game/types";
 
 function fixture() {
   const state = requireBattle(structuredClone(teamRun(42, ["coralcurl", "mossguard", "prismram"])));
-  state.boons = [];
-  state.talents = [];
-  for (const unit of [...state.team, ...state.battle.enemies]) {
-    unit.block = 0;
-    unit.combat = freshCombat();
-  }
-  for (const enemy of state.battle.enemies) enemy.health = enemy.maxHealth = 100;
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state, "all");
   return { state, ally: state.team[0]!, enemy: state.battle.enemies[0]!, events: [] as GameEvent[] };
 }
-
-const ids = [
-  "reef-incense-tile",
-  "lava-cameo",
-  "velvet-whisk",
-  "paper-lotus",
-  "origami-staircase",
-  "wax-foundation-mold",
-  "eclipse-rivet",
-  "poppy-seed-grinder",
-  "peace-knot",
-  "coral-music-box",
-] as const;
-it.each(ids)("%s has the approved rule, artwork and save identity", (id) => {
-  const state = requireBattle(structuredClone(teamRun(42, ["coralcurl", "mossguard", "prismram"])));
-  state.boons = [id];
-  expect(BOONS.find((boon) => boon.id === id)?.text).toBe(NEW_BOON_EFFECTS[id]);
-  expect(Object.hasOwn(prepared.records, `boon.${id}`)).toBe(true);
-  expect(decodeSave(encodeSave(state)).boons).toEqual([id]);
-});
 
 it("preserves a single Thorns stack through retaliation and allows Purge", () => {
   const { state, ally, enemy, events } = fixture();

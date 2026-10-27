@@ -1,6 +1,6 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
-import { BOONS, definition } from "../../../src/game/content";
-import { validateContent } from "../../../src/game/content-validation";
+import { definition } from "../../../src/game/content";
 import {
   applyBlind,
   dodgeChance,
@@ -13,23 +13,13 @@ import { maximumHealth } from "../../../src/game/combat/state";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { useFood } from "../../../src/game/combat/food";
 import { swapFromCard } from "../../../src/game/team";
-import { observeDecisions } from "../../../src/game/random";
 import { requireBattle, run, addReserve } from "../../support/game";
-import { NEW_BOON_EFFECTS } from "../../support/boons";
-import prepared from "../../../src/assets/prepared.json";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
 
 function fixture() {
   const state = requireBattle(structuredClone(run()));
-  state.boons = [];
-  state.talents = [];
-  for (const unit of [...state.team, ...state.battle.enemies]) {
-    unit.block = 0;
-    unit.combat = freshCombat();
-  }
-  for (const enemy of state.battle.enemies) enemy.health = enemy.maxHealth = 100;
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state, "all");
   return {
     state,
     source: state.team[1]!,
@@ -38,25 +28,6 @@ function fixture() {
     events: [] as GameEvent[],
   };
 }
-
-it("registers all ten player rules and their portraits", () => {
-  for (const id of [
-    "quiet-pinwheel",
-    "lagoon-chalice",
-    "acorn-skittle",
-    "wonder-kaleidoscope",
-    "welcome-doormat",
-    "shelter-lantern",
-    "chestnut-roaster",
-    "chamomile-compress",
-    "cadence-panpipes",
-    "hearthcap-kettle",
-  ] as const) {
-    expect(BOONS.find((boon) => boon.id === id)?.text).toBe(NEW_BOON_EFFECTS[id]);
-    expect(Object.hasOwn(prepared.records, `boon.${id}`)).toBe(true);
-  }
-  expect(validateContent).not.toThrow();
-});
 
 it("lets controlled allies Dodge without extending the benefit to enemies", () => {
   const { state, source, enemy } = fixture();
