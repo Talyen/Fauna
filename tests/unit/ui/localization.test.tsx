@@ -463,6 +463,21 @@ it("localizes an authored ability and Food announcement without guessing unknown
   expect(eventPresentation(game, announcement, createMessageReader("en", {}))).toBe(announcement.text);
 });
 
+it("uses the translated Memento trait for its combat announcement", () => {
+  const game = run();
+  const event = {
+    kind: "action" as const,
+    actionType: "attack" as const,
+    actorId: game.team[0]!.id,
+    text: "The Court Remembers",
+  };
+  expect(eventPresentation(game, event, createMessageReader("fr", french))).toBe("La cour se souvient");
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+  expect(
+    eventPresentation(game, { ...event, actionType: "support" }, createMessageReader("fr", french)),
+  ).toBe(event.text);
+});
+
 it("localizes an actual Food creation event without changing its count", () => {
   const initial = requireBattle(run());
   const actor = initial.team[0]!;
