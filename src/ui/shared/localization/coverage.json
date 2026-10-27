@@ -1,6 +1,6 @@
 {
-  "ui": false,
-  "content": false,
-  "rules": false,
-  "runtime": false
+  "ui": true,
+  "content": true,
+  "rules": true,
+  "runtime": true
 }

@@ -332,3 +332,43 @@
   --effect-shine-mask: linear-gradient(#fff 0 0);
   --effect-text-contour: #000b;
 }
+
+/* Script-specific subsets are bundled for offline language selection. */
+@font-face {
+  font-family: "Fauna Japanese";
+  src: url("../assets/fonts/noto-sans-jp.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fauna Chinese";
+  src: url("../assets/fonts/noto-sans-sc.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fauna Cyrillic";
+  src: url("../assets/fonts/noto-sans.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+:root:lang(ja),
+[lang="ja"] {
+  --font-ui: "Inter Variable", Inter, "Fauna Japanese", "Fauna Cyrillic", "Fauna Chinese", sans-serif;
+  font-family: var(--font-ui);
+  line-break: strict;
+}
+:root:lang(zh-Hans),
+[lang="zh-Hans"] {
+  --font-ui: "Inter Variable", Inter, "Fauna Chinese", "Fauna Cyrillic", "Fauna Japanese", sans-serif;
+  font-family: var(--font-ui);
+  line-break: strict;
+}
+:root:lang(ru),
+[lang="ru"] {
+  --font-ui: "Inter Variable", Inter, "Fauna Cyrillic", sans-serif;
+  font-family: var(--font-ui);
+}

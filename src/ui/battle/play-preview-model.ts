@@ -1,9 +1,9 @@
 import { battlefield, battlefieldView } from "../../game/battlefield";
 import { sharedDodgeChance } from "../../game/combat/index";
 import { maximumHealth, unitName } from "../../game/combat/state";
-import { KEYWORD_DEFINITIONS } from "../../game/keywords";
+import { isKeywordId, KEYWORD_DEFINITIONS } from "../../game/keywords";
 import type { CommandResult, GameEvent, GameState } from "../../game/types";
-import { combatStatuses } from "../shared/combat/combat-status-model";
+import { combatStatuses, type Status } from "../shared/combat/combat-status-model";
 import type { PlayProjection } from "../../game/preview";
 
 export interface TargetForecast {
@@ -16,8 +16,19 @@ export interface TargetForecast {
   readonly previousBlock: number;
   readonly maxHealth: number;
   readonly absorbed: number;
-  readonly changes: readonly string[];
+  readonly changes: readonly StatusChange[];
   readonly events: readonly GameEvent[];
+}
+export interface StatusChange {
+  readonly id: string;
+  readonly prior?: Status;
+  readonly now?: Status;
+}
+
+function englishStatusChange(change: StatusChange) {
+  if (isKeywordId(change.id))
+    return `${KEYWORD_DEFINITIONS[change.id].label} ${change.prior?.count ?? 0} → ${change.now?.count ?? 0}`;
+  return change.now?.text ?? `Remove ${change.prior!.text}`;
 }
 export interface PlayPreviewModel {
   readonly messages: readonly string[];
@@ -87,14 +98,7 @@ function resolvedPreviewModel(
           const prior = previous.find((status) => status.id === id),
             now = current.find((status) => status.id === id);
           if (prior?.text === now?.text) return [];
-          const keyword = Object.hasOwn(KEYWORD_DEFINITIONS, id)
-            ? KEYWORD_DEFINITIONS[id as keyof typeof KEYWORD_DEFINITIONS].label
-            : undefined;
-          return [
-            keyword
-              ? `${keyword} ${prior?.count ?? 0} → ${now?.count ?? 0}`
-              : (now?.text ?? `Remove ${prior!.text}`),
-          ];
+          return [{ id, prior, now }];
         });
     const group = grouped.get(old.id);
     units.set(old.id, {
@@ -146,7 +150,7 @@ export function playPreviewModel(
     for (const world of worlds) {
       const value = world.units.get(id);
       if (!value) continue;
-      possibilities.set(JSON.stringify(value), value);
+      possibilities.set(JSON.stringify({ ...value, changes: value.changes.map(englishStatusChange) }), value);
     }
     // Keep complete per-recipient outcomes together; never synthesize a world from independent extrema.
     const distinct = [...possibilities.values()];

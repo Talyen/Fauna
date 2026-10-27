@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { useLayoutEffect, useRef } from "react";
 import { ArrowDownUp, Users } from "lucide-react";
 import { Button } from "../../components/ui/button";
@@ -17,6 +18,8 @@ type Props = {
 
 /** The banked recruit stays in Collection even when the player keeps the current team. */
 export function RecruitTeam({ game, incoming, send, inspect }: Props) {
+  const i18n = useMessages();
+  const creatureName = (kind: SpeciesId) => i18n.content(`content.species.${kind}.name`, species(kind).name);
   const root = useRef<HTMLElement>(null);
   const all = [...game.team, ...game.reserves];
   useLayoutEffect(() => {
@@ -26,13 +29,18 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
   }, []);
   return (
     <Screen className="recruit-team-screen" ref={root}>
-      <ScreenHeading back={false}>Replace a creature</ScreenHeading>
-      <section className="recruit-team-exchange" aria-label="Incoming creature">
+      <ScreenHeading back={false}>
+        {i18n.message("recruit.replaceHeading", "Replace a creature")}
+      </ScreenHeading>
+      <section
+        className="recruit-team-exchange"
+        aria-label={i18n.message("recruit.incoming", "Incoming creature")}
+      >
         <CreatureCard
           progression={game}
           kind={incoming}
           readout={false}
-          label={`Inspect ${species(incoming).name}`}
+          label={i18n.message("creature.inspect", "Inspect {{name}}", { name: creatureName(incoming) })}
           onClick={() => inspect({ species: incoming })}
           onInspect={() => inspect({ species: incoming })}
         />
@@ -41,7 +49,7 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
       <section className="recruit-team-tray" aria-labelledby="recruit-team-heading">
         <h2 id="recruit-team-heading">
           <Users aria-hidden="true" />
-          Team
+          {i18n.message("recruit.team", "Team")}
         </h2>
         <div className="recruit-team-roster" data-nav-row>
           {all.map((unit) => (
@@ -51,7 +59,10 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
                 kind={unit.species}
                 actorId={unit.id}
                 readout={false}
-                label={`Replace ${species(unit.species).name} with ${species(incoming).name}`}
+                label={i18n.message("recruit.replace", "Replace {{outgoing}} with {{incoming}}", {
+                  outgoing: creatureName(unit.species),
+                  incoming: creatureName(incoming),
+                })}
                 onClick={() => send({ type: "confirmRecruit", replace: unit.id })}
                 onInspect={() => inspect({ species: unit.species, creatureId: unit.id })}
               />
@@ -61,7 +72,7 @@ export function RecruitTeam({ game, incoming, send, inspect }: Props) {
       </section>
       <footer className="recruit-team-footer">
         <Button variant="outline" onClick={() => send({ type: "confirmRecruit" })}>
-          Keep team
+          {i18n.message("recruit.keepTeam", "Keep team")}
         </Button>
       </footer>
     </Screen>

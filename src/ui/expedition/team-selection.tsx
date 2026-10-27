@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { creatureKeywords } from "../shared/effects/palettes";
 import { ShineText } from "../shared/effects/treatments";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
@@ -24,16 +25,28 @@ type Props = {
   inspect: (item: Inspection) => void;
 };
 export function TeamSelection({ game, send, recovery }: Props & { recovery?: GameEvent[] }) {
+  const i18n = useMessages();
   const boss = bossEncounter(game);
   const bossEnemy = boss ? encounterSource(game).enemies[0]! : null;
+  const bossName =
+    bossEnemy && bossEnemy.name === species(bossEnemy.species).name
+      ? i18n.content(`content.species.${bossEnemy.species}.name`, bossEnemy.name)
+      : bossEnemy?.name;
   return (
     <Screen className="destinations-screen">
       <header className="destination-heading">
         <ScreenHeading>
-          Encounter {game.encounter + 1} of {JOURNEY_LENGTH}
+          {i18n.message("journey.encounter", "Encounter {{current}} of {{total}}", {
+            current: game.encounter + 1,
+            total: JOURNEY_LENGTH,
+          })}
         </ScreenHeading>
       </header>
-      <section className="destination-grid" data-nav-row aria-label="Encounters">
+      <section
+        className="destination-grid"
+        data-nav-row
+        aria-label={i18n.message("journey.encounters", "Encounters")}
+      >
         <SupportOffer game={game} send={send} />
         {canRecruitDestination(game) ? (
           <div className="destination-option">
@@ -42,7 +55,12 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
               progression={game}
               readout={false}
               tooltipSide="right"
-              label={`Recruit ${species(game.expedition.recruit!).name}`}
+              label={i18n.message("creature.recruit", "Recruit {{name}}", {
+                name: i18n.content(
+                  `content.species.${game.expedition.recruit!}.name`,
+                  species(game.expedition.recruit!).name,
+                ),
+              })}
               onClick={(element) => {
                 if (!send({ type: "recruitDestination", species: game.expedition.recruit! })) return;
                 if (document.documentElement.dataset.focus === "visible")
@@ -52,8 +70,13 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
                     ?.focus();
               }}
             />
-            <h2>Recruit</h2>
-            <p>{species(game.expedition.recruit!).name}</p>
+            <h2>{i18n.message("creature.recruitAction", "Recruit")}</h2>
+            <p>
+              {i18n.content(
+                `content.species.${game.expedition.recruit!}.name`,
+                species(game.expedition.recruit!).name,
+              )}
+            </p>
           </div>
         ) : null}
         {canVisitCampfire(game) ? (
@@ -62,11 +85,11 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
               aspect="creature"
               artwork={assetUrl("location.ember-grove")}
               effectKeywords={["burn"]}
-              aria-label="Visit Campfire"
+              aria-label={i18n.message("campfire.visit", "Visit Campfire")}
               onClick={() => send({ type: "visitCampfire" })}
             />
-            <h2>Campfire</h2>
-            <p>Rest</p>
+            <h2>{i18n.message("campfire.name", "Campfire")}</h2>
+            <p>{i18n.message("campfire.rest", "Rest")}</p>
           </div>
         ) : null}
         <div className="destination-option">
@@ -78,7 +101,7 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
                   artwork={assetUrl(`creature.${bossEnemy.species}`)}
                   effectKeywords={creatureKeywords(bossEnemy.species)}
                   data-encounter
-                  aria-label={`Boss: ${bossEnemy.name}`}
+                  aria-label={i18n.message("journey.boss", "Boss: {{name}}", { name: bossName! })}
                   onClick={() => send({ type: "beginBattle" })}
                 />
               </TooltipTrigger>
@@ -92,15 +115,15 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
               artwork={assetUrl("encounter.combat")}
               data-encounter
               effectKeywords={["physical"]}
-              aria-label="Combat"
+              aria-label={i18n.message("journey.combat", "Combat")}
               onClick={() => send({ type: "beginBattle" })}
             />
           )}
           <h2>
             {bossEnemy ? (
-              <ShineText keywords={creatureKeywords(bossEnemy.species)}>{bossEnemy.name}</ShineText>
+              <ShineText keywords={creatureKeywords(bossEnemy.species)}>{bossName}</ShineText>
             ) : (
-              "Combat"
+              i18n.message("journey.combat", "Combat")
             )}
           </h2>
         </div>

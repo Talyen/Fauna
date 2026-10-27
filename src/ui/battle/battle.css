@@ -84,6 +84,32 @@
   display: flex;
   flex-direction: column;
   gap: var(--screen-item-gap);
+  width: max-content;
+  max-width: calc(var(--battle-pile-width) + var(--page-inline-gutter) * 2);
+}
+.battle-actions > .end-turn {
+  position: relative;
+  max-width: 100%;
+  height: auto;
+  min-height: var(--control-height);
+  white-space: normal;
+}
+.end-turn-prompt {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--muted-foreground);
+  border-radius: var(--radius-round);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: var(--text-secondary);
+  line-height: 1;
+  transform: translate(30%, -30%);
+  pointer-events: none;
 }
 .hand {
   display: flex;
@@ -212,6 +238,16 @@
 }
 .target-summary .card-details {
   gap: 0;
+}
+/* Neighboring readout wrappers can overlap a status button without visible content. */
+.battle-screen .creature-wrap,
+.battle-screen .combatant-motion,
+.battle-screen .combatant-reaction,
+.battle-screen .combatant-details {
+  pointer-events: none;
+}
+.battle-screen .creature-card:not(:disabled) {
+  pointer-events: auto;
 }
 .battle-screen .combatant-details {
   display: flex;
@@ -512,6 +548,7 @@
 
 .battle-screen .combat-status {
   flex-shrink: 0;
+  pointer-events: auto;
 }
 .card-transfer {
   overflow: hidden;

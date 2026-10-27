@@ -616,6 +616,15 @@ it("blocks expensive local entrypoints before launching work and bounds one exac
   expect(runner.mock.calls[0][1][0]).toMatch(/run-local-tests\.mjs$/);
 });
 
+it("gives the changed-file gate a longer deadline without widening focused tests", async () => {
+  const root = fixture();
+  const runner = vi.fn(async () => ({ status: 0 }));
+  expect(await runLocal("verify:changed", [], { root, env: {}, runner })).toBe(0);
+  expect(runner.mock.calls[0][2].timeout).toBeGreaterThan(80_000);
+  expect(runner.mock.calls[0][2].timeout).toBeLessThanOrEqual(90_000);
+  expect(runner.mock.calls[0][2].env.RAYON_NUM_THREADS).toBe("1");
+});
+
 it("allows Vercel hosted builds without granting a general local heavy override", async () => {
   const root = fixture();
   const runner = vi.fn(async () => ({ status: 0 }));
@@ -740,7 +749,7 @@ it("admits outer heavy commands before setup, preserves busy status and avoids n
     "--owner",
     "test-owner",
     "--wait",
-    "30",
+    "900",
     "--timeout",
     "300",
     "--",
@@ -749,7 +758,11 @@ it("admits outer heavy commands before setup, preserves busy status and avoids n
     "test",
     "--maxWorkers=8",
   ]);
-  expect(runner.mock.calls[0][2]).toMatchObject({ grouped: false, cleanupGraceMs: 12000 });
+  expect(runner.mock.calls[0][2]).toMatchObject({
+    grouped: false,
+    timeout: 1_215_000,
+    cleanupGraceMs: 12000,
+  });
   runner.mockClear().mockResolvedValue({ status: 0, error: new Error("canceled") });
   vi.spyOn(console, "error").mockImplementation(() => {});
   expect(await runLocal("build", [], { root, env, runner })).toBe(1);

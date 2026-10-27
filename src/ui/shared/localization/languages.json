@@ -7,36 +7,36 @@
   "de": {
     "name": "Deutsch",
     "steam": "german",
-    "qualified": false
+    "qualified": true
   },
   "zh-Hans": {
     "name": "简体中文",
     "steam": "schinese",
-    "qualified": false
+    "qualified": true
   },
   "ru": {
     "name": "Русский",
     "steam": "russian",
-    "qualified": false
+    "qualified": true
   },
   "es": {
     "name": "Español (España)",
     "steam": "spanish",
-    "qualified": false
+    "qualified": true
   },
   "pt-BR": {
     "name": "Português (Brasil)",
     "steam": "brazilian",
-    "qualified": false
+    "qualified": true
   },
   "ja": {
     "name": "日本語",
     "steam": "japanese",
-    "qualified": false
+    "qualified": true
   },
   "fr": {
     "name": "Français",
     "steam": "french",
-    "qualified": false
+    "qualified": true
   }
 }

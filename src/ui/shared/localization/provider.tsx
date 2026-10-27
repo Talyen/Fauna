@@ -1,22 +1,16 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { readPreference, writePreference } from "../../../platform/preferences";
 import {
-  LANGUAGES,
+  LANGUAGE_PREFERENCE_KEY,
   QUALIFIED_LANGUAGES,
   resolveLanguage,
   type GameLocale,
   type LanguagePreference,
 } from "./languages";
+import { RuleCatalogProvider, type RuleCatalog } from "./rule-catalog";
 import { MessageProvider } from "./message-context";
 import type { MessageCatalog } from "./messages";
-
-const preferenceKey = "fauna.language.v1";
-const bundled = import.meta.glob<MessageCatalog>("./locales/*.json", { eager: true, import: "default" });
-const bundledCatalogs: Partial<Record<GameLocale, MessageCatalog>> = {};
-for (const locale of Object.keys(LANGUAGES) as GameLocale[]) {
-  const catalog = bundled[`./locales/${locale}.json`];
-  if (catalog) bundledCatalogs[locale] = catalog;
-}
+import { bundledCatalogs } from "./bundled-catalogs";
 const englishCatalog: MessageCatalog = Object.freeze({});
 interface LanguageState {
   locale: GameLocale;
@@ -24,7 +18,13 @@ interface LanguageState {
   options: readonly GameLocale[];
   setPreference: (value: LanguagePreference) => void;
 }
-const LanguageContext = createContext<LanguageState | null>(null);
+const fallback: LanguageState = {
+  locale: "en",
+  preference: "auto",
+  options: ["en"],
+  setPreference: () => {},
+};
+const LanguageContext = createContext<LanguageState>(fallback);
 
 /** Unqualified or missing catalogs are never selectable, even if stored by an older build. */
 export function LocalizationProvider({
@@ -33,12 +33,14 @@ export function LocalizationProvider({
   qualified = QUALIFIED_LANGUAGES,
   systemLanguages,
   steamLanguage,
+  persist = true,
 }: {
   children: ReactNode;
   catalogs?: Partial<Record<GameLocale, MessageCatalog>>;
   qualified?: readonly GameLocale[];
   systemLanguages?: readonly string[];
   steamLanguage?: () => Promise<string | null>;
+  persist?: boolean;
 }) {
   const options = useMemo(
     () => [
@@ -48,7 +50,7 @@ export function LocalizationProvider({
     [catalogs, qualified],
   );
   const [preference, setPreferenceState] = useState<LanguagePreference>(() => {
-    const saved = readPreference(preferenceKey);
+    const saved = persist ? readPreference(LANGUAGE_PREFERENCE_KEY) : null;
     return saved === "auto" || options.some((locale) => locale === saved)
       ? (saved as LanguagePreference)
       : "auto";
@@ -69,13 +71,23 @@ export function LocalizationProvider({
   }, [steamLanguage, options.length]);
   const system = systemLanguages ?? (typeof navigator === "undefined" ? [] : navigator.languages);
   const locale = resolveLanguage(preference, steam, system, options);
+  const catalog = catalogs[locale] ?? englishCatalog;
+  const rules = useMemo<RuleCatalog>(
+    () =>
+      Object.fromEntries(
+        Object.entries(catalog).flatMap(([id, entry]) =>
+          id.endsWith(".rule") && "text" in entry ? [[id, { source: entry.source, text: entry.text }]] : [],
+        ),
+      ),
+    [catalog],
+  );
   const setPreference = useCallback(
     (value: LanguagePreference) => {
       if (value !== "auto" && !options.includes(value)) return;
       setPreferenceState(value);
-      writePreference(preferenceKey, value);
+      if (persist) writePreference(LANGUAGE_PREFERENCE_KEY, value);
     },
-    [options],
+    [options, persist],
   );
   useEffect(() => {
     const previous = document.documentElement.lang;
@@ -86,15 +98,13 @@ export function LocalizationProvider({
   }, [locale]);
   return (
     <LanguageContext.Provider value={{ locale, preference, options, setPreference }}>
-      <MessageProvider locale={locale} catalog={catalogs[locale] ?? englishCatalog}>
-        {children}
+      <MessageProvider locale={locale} catalog={catalog}>
+        <RuleCatalogProvider catalog={rules}>{children}</RuleCatalogProvider>
       </MessageProvider>
     </LanguageContext.Provider>
   );
 }
 
 export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) throw new Error("Language preference requires LocalizationProvider");
-  return context;
+  return useContext(LanguageContext);
 }

@@ -311,7 +311,24 @@ export function runCheck(
       if (status !== 0) return status;
     }
   }
-  if (paths.some((file) => file.startsWith("src/ui/") || file.startsWith("scripts/localization/"))) {
+  if (
+    paths.some(
+      (file) =>
+        file.startsWith("src/ui/") ||
+        file.startsWith("src/game/content/") ||
+        file === "src/game/keywords.ts" ||
+        file === "src/game/card-rules.ts" ||
+        file === "src/game/rules/abilities.ts" ||
+        file === "src/game/rules/supplemental.ts" ||
+        file === "src/game/rules/contracts.ts" ||
+        file === "src/game/combat/ability-values.ts" ||
+        file === "src/game/glossary.ts" ||
+        file === "src/game/resurrection-rules.ts" ||
+        file === "src/game/rules/boons.ts" ||
+        file === "src/game/rules/talents.ts" ||
+        file.startsWith("scripts/localization/"),
+    )
+  ) {
     const status = run("scripts/localization/messages.mjs", ["check"]);
     if (status !== 0) return status;
     const translations = run("scripts/localization/translate.mjs", ["check"]);

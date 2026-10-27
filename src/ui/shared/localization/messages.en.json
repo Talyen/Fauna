@@ -11,6 +11,12 @@
   "battle.battlefield": {
     "text": "Battlefield"
   },
+  "battle.block": {
+    "text": "Block {{amount}}"
+  },
+  "battle.blockChange": {
+    "text": "Block {{previous}} to {{current}}"
+  },
   "battle.cardsAndControls": {
     "text": "Battle cards and controls"
   },
@@ -22,6 +28,15 @@
   },
   "battle.chooseEnemy": {
     "text": "Choose an enemy"
+  },
+  "battle.damage": {
+    "text": "{{amount}} {{type}} damage"
+  },
+  "battle.effectPages": {
+    "text": "Combat effect pages"
+  },
+  "battle.effects": {
+    "text": "Combat effects"
   },
   "battle.endTurn": {
     "text": "End turn"
@@ -40,6 +55,9 @@
   },
   "battle.inspectDrawPile": {
     "text": "Inspect Draw Pile"
+  },
+  "battle.knockout": {
+    "text": "Knockout"
   },
   "battle.mana": {
     "text": "Mana {{mana}} of {{maximum}}"
@@ -68,11 +86,170 @@
   "battle.targetSummary": {
     "text": "{{owner}} · {{target}}"
   },
+  "boons.choose": {
+    "text": "Choose {{name}}"
+  },
+  "boons.inspect": {
+    "text": "Inspect {{name}}"
+  },
+  "boons.pages": {
+    "text": "Boon pages"
+  },
+  "campfire.creatureHealth": {
+    "text": "{{name}} Health"
+  },
+  "campfire.healthAndRest": {
+    "text": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "text": "{{before}} → {{after}} {{keyword}} · +{{amount}}"
+  },
+  "campfire.name": {
+    "text": "Campfire"
+  },
+  "campfire.pages": {
+    "text": "Rest recovery pages"
+  },
+  "campfire.recovery": {
+    "text": "Rest recovery"
+  },
+  "campfire.rest": {
+    "text": "Rest"
+  },
+  "campfire.visit": {
+    "text": "Visit Campfire"
+  },
+  "card.actionLabel": {
+    "text": "{{name}}, {{owner}}, {{mana}} mana, {{effect}}"
+  },
+  "card.copy": {
+    "text": "Copy · Lasts for this battle"
+  },
+  "card.enemyActionLabel": {
+    "text": "{{name}}, {{owner}}, {{effect}}"
+  },
+  "card.upgradedName": {
+    "text": "{{name}} +{{level}}"
+  },
+  "collection.all": {
+    "text": "All"
+  },
+  "collection.collected": {
+    "text": "Collected"
+  },
+  "collection.empty": {
+    "text": "No creatures in this view"
+  },
+  "collection.filter": {
+    "text": "Collection filter"
+  },
+  "collection.inspect": {
+    "text": "Inspect {{name}}"
+  },
+  "collection.locked": {
+    "text": "Locked species"
+  },
+  "collection.pages": {
+    "text": "Collection pages"
+  },
+  "collection.stars": {
+    "text": "{{name}}: {{rank}} of {{maximum}} stars"
+  },
+  "collection.uncollected": {
+    "text": "Uncollected"
+  },
   "common.cancel": {
     "text": "Cancel"
   },
   "common.loading": {
     "text": "Loading…"
+  },
+  "controller.circle": {
+    "text": "Circle"
+  },
+  "controller.cross": {
+    "text": "Cross"
+  },
+  "controller.square": {
+    "text": "Square"
+  },
+  "controller.triangle": {
+    "text": "Triangle"
+  },
+  "creature.echo": {
+    "text": "Echo"
+  },
+  "creature.healthFraction": {
+    "text": "Health {{health}}/{{maximum}}"
+  },
+  "creature.inspect": {
+    "text": "Inspect {{name}}"
+  },
+  "creature.recruit": {
+    "text": "Recruit {{name}}"
+  },
+  "creature.recruitAction": {
+    "text": "Recruit"
+  },
+  "deck.discardEmpty": {
+    "text": "Discard Pile is empty"
+  },
+  "deck.drawEmpty": {
+    "text": "Draw Pile is empty"
+  },
+  "deck.empty": {
+    "text": "Deck is empty"
+  },
+  "deck.pages": {
+    "text": "Deck pages"
+  },
+  "denial.actorKnockedOut": {
+    "text": "That creature is knocked out."
+  },
+  "denial.cardNotInHand": {
+    "text": "That card is not in your hand."
+  },
+  "denial.frozen": {
+    "text": "{{name}} cannot act while Frozen."
+  },
+  "denial.noDiscardCards": {
+    "text": "There are no eligible ally cards in Discard."
+  },
+  "denial.noInjuredAllies": {
+    "text": "There are no injured allies."
+  },
+  "denial.noKnockedOutAllies": {
+    "text": "There are no knocked-out allies."
+  },
+  "denial.noLivingBackups": {
+    "text": "There are no living backups."
+  },
+  "denial.notEnoughMana": {
+    "text": "Not enough Mana."
+  },
+  "denial.skipped": {
+    "text": "{{name}} cannot act this turn."
+  },
+  "denial.stunned": {
+    "text": "{{name}} cannot act while Stunned."
+  },
+  "denial.unfinishedJourney": {
+    "text": "{{trait}}’s limit is spent this turn."
+  },
+  "draft.choose": {
+    "text": "Choose your starter"
+  },
+  "draft.team": {
+    "text": "Your starter team"
+  },
+  "earnings.gold": {
+    "text": "+{{amount}} Gold"
+  },
+  "earnings.keywordXp": {
+    "text": "+{{amount}} keyword XP"
+  },
+  "earnings.lastBattle": {
+    "text": "Last battle earnings"
   },
   "glossary.controllerHelp": {
     "text": "Use the D-pad or left stick to navigate; {{confirm}} selects; {{back}} goes back; {{endTurn}} ends the turn · View creature abilities in Collection from the menu"
@@ -85,6 +262,249 @@
   },
   "glossary.title": {
     "text": "Glossary & controls"
+  },
+  "inspection.abilities": {
+    "text": "Abilities"
+  },
+  "inspection.actionHint": {
+    "text": "Action artwork. Hover or focus for the name, Mana cost, and final effects."
+  },
+  "inspection.cardDetails": {
+    "text": "{{name}} details"
+  },
+  "inspection.creatureHint": {
+    "text": "Three abilities and current passive rank. Hover or focus abilities for their details."
+  },
+  "inspection.stars": {
+    "text": "{{rank}} of {{maximum}} stars"
+  },
+  "inspection.trait": {
+    "text": "Trait"
+  },
+  "journey.boss": {
+    "text": "Boss: {{name}}"
+  },
+  "journey.combat": {
+    "text": "Combat"
+  },
+  "journey.encounter": {
+    "text": "Encounter {{current}} of {{total}}"
+  },
+  "journey.encounters": {
+    "text": "Encounters"
+  },
+  "log.absorb": {
+    "text": "{{name}} blocks {{amount}} damage."
+  },
+  "log.battleComplete": {
+    "text": "Battle complete. Rewards saved."
+  },
+  "log.blinded": {
+    "text": "{{name}} is Blinded"
+  },
+  "log.boonPurchased": {
+    "text": "Boon purchased for this journey."
+  },
+  "log.cleansePoison": {
+    "text": "{{name}} Cleanses {{amount}} Poison."
+  },
+  "log.controlApplied": {
+    "text": "{{name}} is {{status}}."
+  },
+  "log.copyWithTrait": {
+    "text": "{{actor}} copies {{card}} with {{trait}}"
+  },
+  "log.createFood": {
+    "text": "{{actor}} creates {{count}} Food cards"
+  },
+  "log.createPearls": {
+    "text": "{{actor}} creates {{count}} Pearls"
+  },
+  "log.creatureJoined": {
+    "text": "{{name}} joined your roster."
+  },
+  "log.creatureRediscovered": {
+    "text": "{{name}} was discovered again; your roster is unchanged."
+  },
+  "log.criticalDamage": {
+    "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
+  },
+  "log.damage": {
+    "text": "{{name}} takes {{amount}} {{type}} damage."
+  },
+  "log.dodge": {
+    "text": "{{name}} Dodges."
+  },
+  "log.drawDiscard": {
+    "text": "{{card}} is drawn from Discard"
+  },
+  "log.expressDelivery": {
+    "text": "{{trait}} draws an extra card"
+  },
+  "log.formationChanges": {
+    "text": "Your formation changes"
+  },
+  "log.gainBlock": {
+    "text": "{{name}} gains {{amount}} Block."
+  },
+  "log.gainBuildup": {
+    "text": "{{name}} gains {{amount}} {{status}} buildup."
+  },
+  "log.gainGold": {
+    "text": "Gain {{amount}} Gold."
+  },
+  "log.gainMana": {
+    "text": "Gain {{amount}} Mana."
+  },
+  "log.gainNegate": {
+    "text": "{{name}} gains Negate"
+  },
+  "log.gainNullify": {
+    "text": "{{name}} gains Nullify"
+  },
+  "log.gainStatus": {
+    "text": "{{name}} gains {{amount}} {{status}}."
+  },
+  "log.goodFortune": {
+    "text": "{{trait}} turns the odds"
+  },
+  "log.heal": {
+    "text": "{{name}} restores {{amount}} Health."
+  },
+  "log.immuneBuildup": {
+    "text": "{{name}} is immune to {{status}} buildup."
+  },
+  "log.intercept": {
+    "text": "{{actor}} intercepts the attack against {{target}}"
+  },
+  "log.journeyBegins": {
+    "text": "Your journey begins."
+  },
+  "log.journeyEnded": {
+    "text": "Your journey has ended."
+  },
+  "log.keepBlockWithBoon": {
+    "text": "{{name}} keeps {{amount}} Block with {{boon}}"
+  },
+  "log.knockout": {
+    "text": "{{name}} is knocked out."
+  },
+  "log.loseArmor": {
+    "text": "{{name}} loses {{amount}} Armor"
+  },
+  "log.loseArmorToBoon": {
+    "text": "{{name}} loses {{amount}} Armor to {{boon}}"
+  },
+  "log.loseBlockToBoon": {
+    "text": "{{name}} loses {{amount}} Block to {{boon}}"
+  },
+  "log.loseFreezeBuildup": {
+    "text": "{{name}} loses {{amount}} Freeze buildup"
+  },
+  "log.mountainGuide": {
+    "text": "{{trait}} protects {{target}}"
+  },
+  "log.negateAttack": {
+    "text": "{{name}} negates the attack"
+  },
+  "log.negateNextAttack": {
+    "text": "{{name}} negates the next attack against them"
+  },
+  "log.nullifyEffect": {
+    "text": "{{name}} nullifies {{status}}"
+  },
+  "log.nullifyFreezeDamage": {
+    "text": "{{name}} nullifies Freeze damage"
+  },
+  "log.reachDeathsDoor": {
+    "text": "{{name}} reaches Death's Door: {{amount}} grace turns."
+  },
+  "log.redistributeBlock": {
+    "text": "{{card}} redistributes Block"
+  },
+  "log.reflectAttack": {
+    "text": "{{actor}} reflects the attack back at {{target}}"
+  },
+  "log.reflectStatus": {
+    "text": "{{actor}} reflects {{status}} to {{target}}"
+  },
+  "log.removeBuildup": {
+    "text": "{{name}}: Cleanse {{status}} build-up"
+  },
+  "log.removeEffect": {
+    "text": "{{name}}: {{action}} {{status}}."
+  },
+  "log.removeNoEffects": {
+    "text": "{{name}}: {{action}} removes no effects."
+  },
+  "log.repeatCard": {
+    "text": "{{actor}} repeats {{card}}"
+  },
+  "log.repeatCardWithTrait": {
+    "text": "{{actor}} repeats {{card}} with {{trait}}"
+  },
+  "log.repeatFood": {
+    "text": "{{card}} repeats"
+  },
+  "log.repeatNextEnemyCard": {
+    "text": "The enemy's next card is played twice"
+  },
+  "log.repeatNextPlayerCard": {
+    "text": "Your next card is played twice"
+  },
+  "log.repeatStunTrait": {
+    "text": "{{actor}} repeats Stun damage with {{trait}}"
+  },
+  "log.replacement": {
+    "text": "{{actor}} replaces {{target}}."
+  },
+  "log.resurrect": {
+    "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"
+  },
+  "log.returnCard": {
+    "text": "{{card}} returns to hand"
+  },
+  "log.returnHome": {
+    "text": "You return from the wilds. Discoveries are kept."
+  },
+  "log.sharedNegate": {
+    "text": "{{actor}} protects {{target}} with {{boon}}"
+  },
+  "log.skipControlledTurn": {
+    "text": "{{name}} skips its {{status}} turn."
+  },
+  "log.summonEcho": {
+    "text": "{{actor}} summons an {{echo}}"
+  },
+  "log.swapPositions": {
+    "text": "{{actor}} swaps positions with {{target}}."
+  },
+  "log.temporaryDodge": {
+    "text": "{{name}} gains {{amount}}% Dodge until its next turn"
+  },
+  "log.turnRestored": {
+    "text": "Turn {{turn}}. {{amount}} Mana restored."
+  },
+  "log.useCard": {
+    "text": "{{actor}} uses {{card}}."
+  },
+  "log.useFood": {
+    "text": "Use {{card}}"
+  },
+  "log.wardNextAttack": {
+    "text": "{{name}} reflects the next attack"
+  },
+  "log.wardNextBurn": {
+    "text": "Reflect the next Burn"
+  },
+  "log.wardNextFreeze": {
+    "text": "Nullify the next Freeze damage"
+  },
+  "log.wardNextHarm": {
+    "text": "{{name}} nullifies the next harmful status effect"
+  },
+  "log.wardNextStatus": {
+    "text": "Reflect the next harmful status effect"
   },
   "menu.boons": {
     "text": "Boons"
@@ -107,6 +527,9 @@
   "menu.mainMenu": {
     "text": "Main menu"
   },
+  "menu.pause": {
+    "text": "Pause menu"
+  },
   "menu.play": {
     "text": "Play"
   },
@@ -124,6 +547,45 @@
   },
   "menu.talents": {
     "text": "Talents"
+  },
+  "merchant.buy": {
+    "text": "Buy {{name}} for {{amount}} Gold"
+  },
+  "merchant.continue": {
+    "text": "Continue"
+  },
+  "merchant.forJourney": {
+    "text": "For this journey"
+  },
+  "merchant.gold": {
+    "text": "{{amount}} Gold"
+  },
+  "merchant.leave": {
+    "text": "Leave"
+  },
+  "merchant.name": {
+    "text": "Boon Merchant"
+  },
+  "merchant.notEnough": {
+    "text": "Not enough Gold"
+  },
+  "merchant.onePerVisit": {
+    "text": "One per visit"
+  },
+  "merchant.purchaseUsed": {
+    "text": "Purchase used"
+  },
+  "merchant.purchasedBoon": {
+    "text": "Purchased Boon"
+  },
+  "merchant.received": {
+    "text": "Boon received"
+  },
+  "merchant.stock": {
+    "text": "Boon Merchant stock"
+  },
+  "merchant.visit": {
+    "text": "Visit Boon Merchant"
   },
   "navigation.back": {
     "text": "Back"
@@ -161,11 +623,107 @@
   "overlay.replacementHelp": {
     "text": "Choose a living backup for your knocked-out creature"
   },
+  "pagination.next": {
+    "text": "Next page"
+  },
+  "pagination.pages": {
+    "text": "Pages"
+  },
+  "pagination.previous": {
+    "text": "Previous page"
+  },
+  "preview.absorbed": {
+    "text": "{{amount}} absorbed"
+  },
+  "preview.alternative": {
+    "text": "or {{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "text": "{{amount}} damage absorbed"
+  },
+  "preview.exact": {
+    "text": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "text": "Outcome depends on hidden information or further random effects"
+  },
+  "preview.mayCrit": {
+    "text": "Critical possible"
+  },
+  "preview.mayDodge": {
+    "text": "May be Dodged"
+  },
+  "preview.or": {
+    "text": "{{left}} or {{right}}"
+  },
+  "preview.outcomeBlock": {
+    "text": "Block {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "text": "Critical {{description}}"
+  },
+  "preview.outcomeDamage": {
+    "text": "{{amount}} {{type}}"
+  },
+  "preview.outcomeHeal": {
+    "text": "Heal {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "text": "Lose {{amount}} Health"
+  },
+  "preview.outcomeNoChange": {
+    "text": "No change"
+  },
+  "preview.possible": {
+    "text": "Possible: {{description}}"
+  },
+  "preview.possibleKnockout": {
+    "text": "Possible knockout"
+  },
+  "preview.possibleOutcomes": {
+    "text": "Possible outcomes for {{name}}: {{outcomes}}"
+  },
+  "preview.removeStatus": {
+    "text": "Remove {{status}}"
+  },
+  "preview.statusChange": {
+    "text": "{{keyword}} {{before}} → {{after}}"
+  },
+  "preview.varies": {
+    "text": "Outcome varies"
+  },
+  "preview.withDetails": {
+    "text": "{{summary}}, {{details}}"
+  },
+  "progress.keywordLevel": {
+    "text": "{{keyword}} level {{level}} progress"
+  },
+  "progress.keywordXpEarned": {
+    "text": "Keyword XP earned"
+  },
+  "progress.levelShort": {
+    "text": "Lv {{level}}"
+  },
   "recovery.display": {
     "text": "Fauna could not display this screen; trying again…"
   },
   "recovery.save": {
     "text": "Progress cannot be saved right now; keep Fauna open while it retries"
+  },
+  "recruit.incoming": {
+    "text": "Incoming creature"
+  },
+  "recruit.keepTeam": {
+    "text": "Keep team"
+  },
+  "recruit.replace": {
+    "text": "Replace {{outgoing}} with {{incoming}}"
+  },
+  "recruit.replaceHeading": {
+    "text": "Replace a creature"
+  },
+  "recruit.team": {
+    "text": "Team"
   },
   "replacement.backup": {
     "text": "Backup"
@@ -178,6 +736,54 @@
   },
   "replacement.knockedOutCreature": {
     "text": "{{creature}}, knocked out"
+  },
+  "results.complete": {
+    "text": "Journey complete"
+  },
+  "results.defeated": {
+    "text": "Defeated"
+  },
+  "results.empty": {
+    "text": "No permanent rewards earned"
+  },
+  "results.ended": {
+    "text": "Journey ended"
+  },
+  "results.gains": {
+    "text": "Journey gains"
+  },
+  "results.goldEarnedTotal": {
+    "text": "{{amount}} Gold earned"
+  },
+  "results.mainMenu": {
+    "text": "Main menu"
+  },
+  "results.returned": {
+    "text": "Returned home"
+  },
+  "rewards.chooseBoon": {
+    "text": "Choose a Boon"
+  },
+  "rewards.chooseRecruit": {
+    "text": "Choose a Recruit"
+  },
+  "rewards.new": {
+    "text": "New!"
+  },
+  "rewards.newStars": {
+    "text": "{{name}}: New to Collection, zero stars"
+  },
+  "rewards.nextStars": {
+    "text": "{{name}}: {{rank}} to {{next}} of {{maximum}} stars"
+  },
+  "rewards.recruitPages": {
+    "text": "Recruit pages"
+  },
+  "rewards.skip": {
+    "text": "Skip"
+  },
+  "rewards.victory": {
+    "text": "Victory"
   },
   "settings.audio": {
     "text": "Audio"
@@ -193,6 +799,9 @@
   },
   "settings.categories": {
     "text": "Settings categories"
+  },
+  "settings.closeLanguage": {
+    "text": "Close language"
   },
   "settings.controllerPrompts": {
     "text": "Controller prompts"
@@ -220,6 +829,15 @@
   },
   "settings.glowValue": {
     "text": "Background Glow value"
+  },
+  "settings.language": {
+    "text": "Language"
+  },
+  "settings.languageDescription": {
+    "text": "Choose a language"
+  },
+  "settings.languageValue": {
+    "text": "Language: {{language}}"
   },
   "settings.master": {
     "text": "Master"
@@ -262,5 +880,95 @@
   },
   "settings.windowed": {
     "text": "Windowed"
+  },
+  "startup.adventure": {
+    "text": "Adventure awaits…"
+  },
+  "startup.boons": {
+    "text": "Gathering Boons…"
+  },
+  "startup.creatures": {
+    "text": "Waking creatures…"
+  },
+  "startup.decks": {
+    "text": "Shuffling decks…"
+  },
+  "startup.expeditions": {
+    "text": "Preparing expeditions…"
+  },
+  "startup.failed": {
+    "text": "Fauna could not start"
+  },
+  "startup.habitats": {
+    "text": "Exploring habitats…"
+  },
+  "startup.loading": {
+    "text": "Loading Fauna"
+  },
+  "startup.shops": {
+    "text": "Restocking shops…"
+  },
+  "startup.starters": {
+    "text": "Training starters…"
+  },
+  "status.additional": {
+    "text": "{{description}}; {{extra}}"
+  },
+  "status.dodge": {
+    "text": "{{keyword}} {{count}}% bonus; {{description}}"
+  },
+  "status.dodgeExpires": {
+    "text": "{{count}}% expires at your next turn"
+  },
+  "status.dodgeShared": {
+    "text": "{{count}}% from {{trait}}"
+  },
+  "status.measured": {
+    "text": "{{keyword}} {{count}}; {{description}}"
+  },
+  "talents.category": {
+    "text": "{{keyword}} talents"
+  },
+  "talents.detailTitle": {
+    "text": "{{keyword}} · {{name}}"
+  },
+  "talents.keywordXp": {
+    "text": "{{keyword}} XP"
+  },
+  "talents.pages": {
+    "text": "Talent pages"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    }
+  },
+  "talents.requiresPoint": {
+    "text": "Requires 1 point"
+  },
+  "talents.requiresPointAndRows": {
+    "text": "Requires 1 point and all earlier rows"
+  },
+  "talents.requiresRows": {
+    "text": "Requires all earlier rows"
+  },
+  "talents.reset": {
+    "text": "Reset {{keyword}} talents"
+  },
+  "talents.row": {
+    "text": "Row {{row}}"
+  },
+  "talents.unlockOne": {
+    "text": "Unlock · 1 point"
+  },
+  "talents.unlocked": {
+    "text": "Unlocked"
+  },
+  "talents.unlockedName": {
+    "text": "{{name}}, unlocked"
+  },
+  "talents.xpProgress": {
+    "text": "{{current}} / {{required}} XP"
   }
 }

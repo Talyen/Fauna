@@ -237,6 +237,8 @@
 }
 .reward-option h2 {
   font-size: var(--text-name);
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 .end-screen {
   min-height: 0;

@@ -1,3 +1,5 @@
+import { MessageParts } from "../shared/localization/message-parts";
+import { useMessages } from "../shared/localization/message-context";
 import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
 import { PROGRESSION_KEYWORDS } from "../../game/keywords";
@@ -9,15 +11,16 @@ import { Button } from "../../components/ui/button";
 import type { StateAt } from "../../game/types";
 import { KeywordProgressGrid } from "../shared/keyword-progress-grid";
 export function JourneyResults({ game, home }: { game: StateAt<"victory" | "defeat">; home: () => void }) {
+  const i18n = useMessages();
   const summary = game.journey;
   const title =
     game.phase === "victory"
-      ? "Journey complete"
+      ? i18n.message("results.complete", "Journey complete")
       : summary?.outcome === "defeat"
-        ? "Defeated"
+        ? i18n.message("results.defeated", "Defeated")
         : summary?.outcome === "returned"
-          ? "Returned home"
-          : "Journey ended";
+          ? i18n.message("results.returned", "Returned home")
+          : i18n.message("results.ended", "Journey ended");
   return (
     <ResultPresentation>
       <Screen className="journey-results">
@@ -38,27 +41,33 @@ export function JourneyResults({ game, home }: { game: StateAt<"victory" | "defe
           <ScreenHeading>{title}</ScreenHeading>
         </header>
         {summary ? (
-          <section className="journey-gains" aria-label="Journey gains">
+          <section className="journey-gains" aria-label={i18n.message("results.gains", "Journey gains")}>
             {summary.currency > 0 ? (
               <div className="journey-totals">
                 <p>
                   <Coins className="gold-icon" aria-hidden="true" />
-                  <strong>
-                    <AnimatedNumber value={summary.currency} />
-                  </strong>{" "}
-                  Gold earned
+                  <MessageParts
+                    template={i18n.template("results.goldEarnedTotal", "{{amount}} Gold earned")}
+                    values={{
+                      amount: (
+                        <strong>
+                          <AnimatedNumber value={summary.currency} />
+                        </strong>
+                      ),
+                    }}
+                  />
                 </p>
               </div>
             ) : null}
             <KeywordProgressGrid earned={summary.xp} totals={game.keywordXP} />
             {!summary.currency && !Object.values(summary.xp).some((value) => value > 0) ? (
-              <EmptyState label="No permanent rewards earned" />
+              <EmptyState label={i18n.message("results.empty", "No permanent rewards earned")} />
             ) : null}
           </section>
         ) : null}
         <footer className="journey-results-actions" data-nav-row>
           <Button className="primary-menu-action" onClick={home}>
-            Main menu
+            {i18n.message("results.mainMenu", "Main menu")}
           </Button>
         </footer>
       </Screen>

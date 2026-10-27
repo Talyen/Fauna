@@ -19,7 +19,9 @@ import { TargetPreview } from "./target-preview";
 import { useBattleInteraction } from "./battle-interaction";
 import { useTargetLine } from "./use-target-line";
 import { playPreviewModel } from "./play-preview-model";
-import { unitName } from "../../game/combat/state";
+import { localizedCombatantName } from "../shared/localization/combatant-name";
+import { localizedCardDenial } from "../shared/localization/card-denial";
+import { localizedPreviewMessage } from "../shared/localization/event-presentation";
 import { CombatFeedback, type Burst } from "./combat-feedback";
 import { ManaCrystals } from "./mana-crystals";
 import { ArtCard } from "../shared/cards/art-card";
@@ -83,6 +85,7 @@ export function BattleScreen({
   bursts,
   controller,
   endTurnPrompt = "Y",
+  endTurnPromptLabel = endTurnPrompt,
   navigateFocus,
   onDenied,
   clearSelection = false,
@@ -96,6 +99,7 @@ export function BattleScreen({
   bursts: readonly Burst[];
   controller: boolean;
   endTurnPrompt?: string;
+  endTurnPromptLabel?: string;
   navigateFocus: boolean;
   onDenied: (element: HTMLElement) => void;
   onManualStart?: () => void;
@@ -141,7 +145,7 @@ export function BattleScreen({
     enemyRow.find((unit) => unit.id === target) ??
     playerRow.find((unit) => unit.id === target) ??
     game.reserves.find((unit) => unit.id === target);
-  const recipient = recipientUnit ? unitName(recipientUnit) : undefined;
+  const recipient = recipientUnit ? localizedCombatantName(recipientUnit, i18n) : undefined;
   const acting = card ? cardActor(game, card) : undefined;
   const line = useTargetLine(board, acting?.id, selected, target, allyTarget);
   return (
@@ -176,7 +180,10 @@ export function BattleScreen({
               }}
               preview={
                 selected && model.affected.has(enemy.id) ? (
-                  <TargetPreview forecast={model.units.get(enemy.id)} />
+                  <TargetPreview
+                    forecast={model.units.get(enemy.id)}
+                    displayName={localizedCombatantName(enemy, i18n)}
+                  />
                 ) : undefined
               }
               onClick={(element) => {
@@ -188,8 +195,10 @@ export function BattleScreen({
               }}
               label={
                 selected && enemyTarget && enemy.health > 0
-                  ? i18n.message("battle.target", "Target {{name}}", { name: enemy.name })
-                  : enemy.name
+                  ? i18n.message("battle.target", "Target {{name}}", {
+                      name: localizedCombatantName(enemy, i18n),
+                    })
+                  : localizedCombatantName(enemy, i18n)
               }
             />
           ))}
@@ -219,7 +228,10 @@ export function BattleScreen({
               }}
               preview={
                 selected && model.affected.has(creature.id) ? (
-                  <TargetPreview forecast={model.units.get(creature.id)} />
+                  <TargetPreview
+                    forecast={model.units.get(creature.id)}
+                    displayName={localizedCombatantName(creature, i18n)}
+                  />
                 ) : undefined
               }
               onClick={(element) => {
@@ -232,11 +244,9 @@ export function BattleScreen({
               label={
                 selected && allyTarget && legalTargets.has(creature.id)
                   ? i18n.message("battle.target", "Target {{name}}", {
-                      name: "name" in creature ? creature.name : species(creature.species).name,
+                      name: localizedCombatantName(creature, i18n),
                     })
-                  : "name" in creature
-                    ? creature.name
-                    : species(creature.species).name
+                  : localizedCombatantName(creature, i18n)
               }
             />
           ))}
@@ -253,8 +263,8 @@ export function BattleScreen({
                     def.species === null
                       ? i18n.message("battle.food", "Food")
                       : acting
-                        ? species(acting.species).name
-                        : species(def.species).name,
+                        ? i18n.content(`content.species.${acting.species}.name`, species(acting.species).name)
+                        : i18n.content(`content.species.${def.species}.name`, species(def.species).name),
                   target:
                     recipient ??
                     (enemyTarget
@@ -271,8 +281,8 @@ export function BattleScreen({
                   def.species === null
                     ? i18n.message("battle.food", "Food")
                     : acting
-                      ? species(acting.species).name
-                      : species(def.species).name
+                      ? i18n.content(`content.species.${acting.species}.name`, species(acting.species).name)
+                      : i18n.content(`content.species.${def.species}.name`, species(def.species).name)
                 }
                 actor={acting}
                 modifiers={game}
@@ -289,10 +299,10 @@ export function BattleScreen({
                         aria-label={
                           def.effect === "swapChosen"
                             ? i18n.message("battle.swapBackup", "Swap in {{name}} from backup", {
-                                name: species(unit.species).name,
+                                name: localizedCombatantName(unit, i18n),
                               })
                             : i18n.message("battle.resurrectBackup", "Resurrect {{name}} from backup", {
-                                name: species(unit.species).name,
+                                name: localizedCombatantName(unit, i18n),
                               })
                         }
                         onFocus={() => setTarget(unit.id)}
@@ -302,14 +312,14 @@ export function BattleScreen({
                       >
                         {def.effect === "resurrect"
                           ? i18n.message("battle.backupName", "{{name}} (backup)", {
-                              name: species(unit.species).name,
+                              name: localizedCombatantName(unit, i18n),
                             })
-                          : species(unit.species).name}
+                          : localizedCombatantName(unit, i18n)}
                       </Button>
                     ))
                 : null}
               {model.messages.map((message, index) => (
-                <p key={index}>{message}</p>
+                <p key={index}>{localizedPreviewMessage(message, i18n)}</p>
               ))}
             </>
           ) : null}
@@ -363,12 +373,12 @@ export function BattleScreen({
                       ownerName={
                         card.ownerId === null
                           ? i18n.message("battle.food", "Food")
-                          : species(owner.species).name
+                          : i18n.content(`content.species.${owner.species}.name`, species(owner.species).name)
                       }
                       selected={selected === id}
                       disabled={!admission.allowed}
                       onDenied={(element) => {
-                        deny(admission.allowed ? "" : admission.reason);
+                        deny(admission.allowed ? "" : localizedCardDenial(admission.reason, owner, i18n));
                         onDenied(element);
                       }}
                       onClick={() => {
@@ -388,10 +398,23 @@ export function BattleScreen({
                   {i18n.message("battle.nextCardRepeat", "Next card ×2")}
                 </span>
               ) : null}
-              <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
-                {controller
-                  ? i18n.message("battle.endTurnPrompt", "End turn · {{prompt}}", { prompt: endTurnPrompt })
-                  : i18n.message("battle.endTurn", "End turn")}
+              <Button
+                className="end-turn"
+                aria-label={
+                  controller
+                    ? i18n.message("battle.endTurnPrompt", "End turn · {{prompt}}", {
+                        prompt: endTurnPromptLabel,
+                      })
+                    : undefined
+                }
+                onClick={() => play({ type: "endTurn" })}
+              >
+                <span>{i18n.message("battle.endTurn", "End turn")}</span>
+                {controller ? (
+                  <span className="end-turn-prompt" aria-hidden="true">
+                    {endTurnPrompt}
+                  </span>
+                ) : null}
               </Button>
             </div>
             <div className="battle-pile">

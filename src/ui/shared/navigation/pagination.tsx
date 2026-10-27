@@ -1,3 +1,4 @@
+import { useMessages } from "../localization/message-context";
 import {
   useLayoutEffect,
   useRef,
@@ -66,7 +67,7 @@ export function PageControls({
   page,
   pages,
   change,
-  label = "Pages",
+  label,
   showCount = true,
 }: {
   page: number;
@@ -75,6 +76,7 @@ export function PageControls({
   label?: string;
   showCount?: boolean;
 }) {
+  const i18n = useMessages();
   const nav = useRef<HTMLElement>(null);
   const restore = useRef(false);
   const previousFocus = useRef<HTMLElement | null>(null);
@@ -88,7 +90,7 @@ export function PageControls({
   return (
     <nav
       className="pagination"
-      aria-label={label}
+      aria-label={label ?? i18n.message("pagination.pages", "Pages")}
       ref={nav}
       data-nav-row
       onFocusCapture={(event) => {
@@ -101,7 +103,7 @@ export function PageControls({
       <Button
         variant="ghost"
         size="icon"
-        aria-label="Previous page"
+        aria-label={i18n.message("pagination.previous", "Previous page")}
         disabled={page === 0}
         onClick={() => {
           restore.current = true;
@@ -118,7 +120,7 @@ export function PageControls({
       <Button
         variant="ghost"
         size="icon"
-        aria-label="Next page"
+        aria-label={i18n.message("pagination.next", "Next page")}
         disabled={page >= pages - 1}
         onClick={() => {
           restore.current = true;

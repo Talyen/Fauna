@@ -39,6 +39,8 @@ const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, bo
 // The reviewed October 26 baseline includes the Armor wear rule and current Auto-play scoring.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 // Neradora's six traces were updated when Undertow Knot changed from Water Thorns to Block and Cleanse.
+// The Talent digest includes descriptions that identify the extra status damage packets.
+// The passive digest includes Bloomquail's clarification that only gained Block is converted.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({
     talents: digest(TALENTS),

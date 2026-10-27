@@ -35,20 +35,25 @@ export function createMessageReader(locale: string, catalog: MessageCatalog) {
   let englishNumber: Intl.NumberFormat | undefined;
   const localFormatter = () => (localNumber ??= new Intl.NumberFormat(locale));
   const englishFormatter = () => (englishNumber ??= new Intl.NumberFormat("en"));
+  function translatedTemplate(id: string, source: string) {
+    const entry = Object.hasOwn(catalog, id) ? catalog[id] : undefined;
+    return entry &&
+      "text" in entry &&
+      entry.source === source &&
+      entry.text.trim() &&
+      matchesVariables(source, entry.text)
+      ? entry.text
+      : null;
+  }
+  function message(id: string, source: string, values: MessageValues = {}) {
+    const translated = translatedTemplate(id, source);
+    return format(translated ?? source, values, translated === null ? englishFormatter : localFormatter);
+  }
   return {
     locale,
-    message(id: string, source: string, values: MessageValues = {}) {
-      const entry = Object.hasOwn(catalog, id) ? catalog[id] : undefined;
-      const translated =
-        entry &&
-        "text" in entry &&
-        entry.source === source &&
-        entry.text.trim() &&
-        matchesVariables(source, entry.text)
-          ? entry.text
-          : null;
-      return format(translated ?? source, values, translated === null ? englishFormatter : localFormatter);
-    },
+    message,
+    template: (id: string, source: string) => translatedTemplate(id, source) ?? source,
+    content: message,
     plural(id: string, source: PluralForms, count: number, values: MessageValues = {}) {
       const entry = Object.hasOwn(catalog, id) ? catalog[id] : undefined;
       const category = pluralRules.select(count);

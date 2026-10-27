@@ -1,3 +1,4 @@
+import { useMessages } from "../localization/message-context";
 import { PagedItems, useCompactLayout } from "../navigation/pagination";
 
 import { EmptyState } from "../empty-state";
@@ -19,6 +20,7 @@ export function DeckCards({
   inspect?: Props["inspect"];
   pile?: "draw" | "discard";
 }) {
+  const i18n = useMessages();
   const compact = useCompactLayout();
   const owners =
     game.phase === "draft"
@@ -49,10 +51,21 @@ export function DeckCards({
     <>
       {cards.length === 0 ? (
         <EmptyState
-          label={`${pile === "draw" ? "Draw Pile" : pile === "discard" ? "Discard Pile" : "Deck"} is empty`}
+          label={
+            pile === "draw"
+              ? i18n.message("deck.drawEmpty", "Draw Pile is empty")
+              : pile === "discard"
+                ? i18n.message("deck.discardEmpty", "Discard Pile is empty")
+                : i18n.message("deck.empty", "Deck is empty")
+          }
         />
       ) : null}
-      <PagedItems items={cards} pageSize={compact ? 3 : 6} className="deck-grid" label="Deck pages">
+      <PagedItems
+        items={cards}
+        pageSize={compact ? 3 : 6}
+        className="deck-grid"
+        label={i18n.message("deck.pages", "Deck pages")}
+      >
         {(card) => {
           const owner = cardActor(game, card) ?? owners.find((c) => c.id === card.ownerId)!;
           return (
@@ -61,7 +74,11 @@ export function DeckCards({
               card={card}
               actor={owner}
               modifiers={game}
-              ownerName={card.ownerId === null ? "Food" : species(owner.species).name}
+              ownerName={
+                card.ownerId === null
+                  ? i18n.content("content.keyword.food.label", "Food")
+                  : i18n.content(`content.species.${owner.species}.name`, species(owner.species).name)
+              }
               onClick={() => inspect?.({ card })}
               onInspect={inspect ? () => inspect({ card }) : undefined}
             />

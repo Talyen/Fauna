@@ -5,6 +5,8 @@ import { expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { RecruitTeam } from "../../../src/ui/expedition/recruit-team";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
+import { MessageProvider } from "../../../src/ui/shared/localization/message-context";
+import japanese from "../../../src/ui/shared/localization/locales/ja.json";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
@@ -45,6 +47,24 @@ it("keeps the current team immediately when requested", async () => {
   const { send } = show();
   await userEvent.click(screen.getByRole("button", { name: "Keep team" }));
   expect(send).toHaveBeenCalledExactlyOnceWith({ type: "confirmRecruit" });
+});
+
+it("uses localized action names for a direct replacement", async () => {
+  const game = selected();
+  const send = vi.fn(() => true);
+  render(
+    <MessageProvider locale="ja" catalog={japanese}>
+      <TooltipProvider>
+        <RecruitTeam game={game} incoming="emberback" send={send} inspect={() => {}} />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("heading", { name: "生き物を入れ替える" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "チームを維持" })).toBeTruthy();
+  const outgoing = japanese["content.species.mossguard.name"].text;
+  const incoming = japanese["content.species.emberback.name"].text;
+  await userEvent.click(screen.getByRole("button", { name: `${outgoing}を${incoming}に入れ替える` }));
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "confirmRecruit", replace: game.team[0]!.id });
 });
 
 it("resumes the banked recruit and saves the directly chosen replacement", async () => {
