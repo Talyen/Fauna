@@ -45,10 +45,20 @@ export function dependencyNotices(root, lock) {
       )
       .sort();
     const texts = files.map((name) => readFileSync(path.join(directory, name), "utf8"));
-    // Koffi 3.3.3 publishes its platform binaries separately under the same MIT license.
+    // These platform packages omit the text included with their matching MIT-licensed Koffi release.
+    const nativeKoffi = /^@koromix\/koffi-[a-z0-9-]+@3\.3\.[34]$/.test(identity);
+    const parent =
+      nativeKoffi && !texts.length ? readJSON(path.join(root, "node_modules/koffi/package.json")) : undefined;
     const supplement =
       SUPPLEMENTS.get(identity) ??
-      (/^@koromix\/koffi-[a-z0-9-]+@3\.3\.3$/.test(identity) ? "node_modules/koffi/LICENSE.txt" : undefined);
+      (nativeKoffi &&
+      manifest.license === "MIT" &&
+      parent?.name === "koffi" &&
+      parent.license === "MIT" &&
+      parent.version === manifest.version &&
+      lock.packages["node_modules/koffi"]?.version === manifest.version
+        ? "node_modules/koffi/LICENSE.txt"
+        : undefined);
     if (!texts.length && supplement) texts.push(readFileSync(path.join(root, supplement), "utf8"));
     if (!texts.length || texts.some((text) => !text.trim()))
       throw new Error(`Missing dependency license text: ${identity}`);

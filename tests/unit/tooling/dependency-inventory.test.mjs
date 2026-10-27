@@ -51,29 +51,40 @@ it("binds the final executable, archive and Chromium notices to retained hashes"
   expect(() => packageInventory(root, output)).toThrow();
 });
 
-it("includes the pinned native callback binary under Koffi's upstream license", () => {
-  const root = temporaryDirectory("fauna-koffi-notice-");
-  const name = `@koromix/koffi-${process.platform}-${process.arch}`;
-  const write = (file, text) => {
-    mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
-    writeFixture(root, file, text);
-  };
+it.each(["3.3.3", "3.3.4"])(
+  "includes Koffi %s native binaries under the matching upstream license",
+  (version) => {
+    const root = temporaryDirectory("fauna-koffi-notice-");
+    const name = `@koromix/koffi-${process.platform}-${process.arch}`;
+    const write = (file, text) => {
+      mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+      writeFixture(root, file, text);
+    };
 
-  write("Docs/SHADCN-LICENSE.txt", "source license");
-  write("Docs/FONT-LICENSE.txt", "font license");
-  write("node_modules/koffi/LICENSE.txt", "Koffi copyright and MIT permission");
-  write(`node_modules/${name}/package.json`, JSON.stringify({ name, version: "3.3.3" }));
-  const result = dependencyNotices(root, {
-    packages: {
-      [`node_modules/${name}`]: {
-        version: "3.3.3",
-        optional: true,
-        os: [process.platform],
-        cpu: [process.arch],
-        license: "MIT",
+    write("Docs/SHADCN-LICENSE.txt", "source license");
+    write("Docs/FONT-LICENSE.txt", "font license");
+    write("node_modules/koffi/LICENSE.txt", "Koffi copyright and MIT permission");
+    write("node_modules/koffi/package.json", JSON.stringify({ name: "koffi", version, license: "MIT" }));
+    write(`node_modules/${name}/package.json`, JSON.stringify({ name, version, license: "MIT" }));
+    const lock = {
+      packages: {
+        "node_modules/koffi": { version, license: "MIT" },
+        [`node_modules/${name}`]: {
+          version,
+          optional: true,
+          os: [process.platform],
+          cpu: [process.arch],
+          license: "MIT",
+        },
       },
-    },
-  });
-  expect(result.notices).toContain("Koffi copyright and MIT permission");
-  expect(result.inventory[0].name).toBe(name);
-});
+    };
+    const result = dependencyNotices(root, lock);
+    expect(result.notices).toContain("Koffi copyright and MIT permission");
+    expect(result.inventory.map((entry) => entry.name)).toContain(name);
+    write(
+      "node_modules/koffi/package.json",
+      JSON.stringify({ name: "koffi", version: "0.0.0", license: "MIT" }),
+    );
+    expect(() => dependencyNotices(root, lock)).toThrow();
+  },
+);
