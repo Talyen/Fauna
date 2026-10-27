@@ -581,6 +581,12 @@
     "sourceHash": "0373852e2d34d0b357f111a38d5271a36f21bc5a049b09009c9f230e9b1c0297",
     "text": "EXP de palavras-chave"
   },
+  "content.glossary.keyword.armor.definition.rule": {
+    "reviewed": true,
+    "source": "Reduce incoming <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage after <keyword2>Block</keyword2>; lose {{value0}} stack when <keyword3>Armor</keyword3> reduces damage",
+    "sourceHash": "17101a501ea789c9d52d773cd7820f733f10890eba45b4e72fbed892d9a28900",
+    "text": "Reduz o dano recebido de <keyword0>Físico</keyword0> e <keyword1>Atordoamento</keyword1> após o <keyword2>Bloqueio</keyword2>; perde {{value0}} acúmulo quando a <keyword3>Armadura</keyword3> reduz dano"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
@@ -598,6 +604,18 @@
     "source": "Remove harmful effects from an ally",
     "sourceHash": "4e4a1960064e66bc7fc6e559397097497109802a196284226a65f3d5a77c86a1",
     "text": "Remove efeitos prejudiciais de um aliado"
+  },
+  "content.glossary.keyword.criticalHit.definition.rule": {
+    "reviewed": true,
+    "source": "An attack that deals double damage",
+    "sourceHash": "f99d283d9000b60559ccdf7930e9cdb0e6fda6b2c9f34a4667f9a4bc96a40880",
+    "text": "Um ataque que causa o dobro de dano"
+  },
+  "content.glossary.keyword.light.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "17b54c14a8080627a8b7400cbdde12e605cd91f4cc574df7c7de2770b973d1a5",
+    "text": "Dano de <keyword0>Luz</keyword0>; não implica resistência nem efeito de status"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,

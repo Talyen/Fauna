@@ -581,6 +581,12 @@
     "sourceHash": "13cd1211886d48bb7b0c3d392909b923ee5a6891825ce2e9910e9d6d136127d8",
     "text": "关键词经验"
   },
+  "content.glossary.keyword.armor.definition.rule": {
+    "reviewed": true,
+    "source": "Reduce incoming <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage after <keyword2>Block</keyword2>; lose {{value0}} stack when <keyword3>Armor</keyword3> reduces damage",
+    "sourceHash": "a9dcdd315fb4f6efa32357f2a28c9ae247ce2502ce190a09cc4e5c576e0a9834",
+    "text": "在<keyword2>格挡</keyword2>之后减少受到的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>伤害；<keyword3>护甲</keyword3>减少伤害时失去{{value0}}层"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
@@ -598,6 +604,18 @@
     "source": "Remove harmful effects from an ally",
     "sourceHash": "dc0dcbc79326ede174d0a91d6cd9b003f27ff4a722d870efecddf32ef1b44510",
     "text": "移除一名盟友的有害效果"
+  },
+  "content.glossary.keyword.criticalHit.definition.rule": {
+    "reviewed": true,
+    "source": "An attack that deals double damage",
+    "sourceHash": "da7f98a1566964e4100eb4dd9be6c4f91b012873a70fedf61f9cc471168dff58",
+    "text": "造成双倍伤害的攻击"
+  },
+  "content.glossary.keyword.light.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "7dd4a542f4b98d378c045940a9e28125cfeaa0ebd6e37df4dd1e774573844c38",
+    "text": "<keyword0>光</keyword0>伤害；不代表具有抗性或状态效果"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,

@@ -581,6 +581,12 @@
     "sourceHash": "13444f48a5d8083588e83622f98126c8861e1afaf98bbb53765cf59fcef2553e",
     "text": "キーワード経験値"
   },
+  "content.glossary.keyword.armor.definition.rule": {
+    "reviewed": true,
+    "source": "Reduce incoming <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> damage after <keyword2>Block</keyword2>; lose {{value0}} stack when <keyword3>Armor</keyword3> reduces damage",
+    "sourceHash": "a47e6882afbc2114cb44f9fdaa7651d33a600b74e1d560ff1c46f0a78461b5cb",
+    "text": "<keyword2>ブロック</keyword2>適用後、受ける<keyword0>物理</keyword0>と<keyword1>スタン</keyword1>のダメージを軽減; <keyword3>装甲</keyword3>でダメージを軽減すると{{value0}}スタック失う"
+  },
   "content.glossary.keyword.bleed.definition.rule": {
     "reviewed": true,
     "source": "Repeat damage next turn, then clear",
@@ -598,6 +604,18 @@
     "source": "Remove harmful effects from an ally",
     "sourceHash": "6d8e126df35884ca7b2ad31e5108faec39f214974ad177096aebde98f6f6041a",
     "text": "味方1体の有害な効果を取り除く"
+  },
+  "content.glossary.keyword.criticalHit.definition.rule": {
+    "reviewed": true,
+    "source": "An attack that deals double damage",
+    "sourceHash": "52c6fe2c3393e73bf0036d22fc23ee908fd3c55c133059ced59337f62c4e2eba",
+    "text": "ダメージが2倍になる攻撃"
+  },
+  "content.glossary.keyword.light.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "bb6441fd170f9398de509d3aa940161c6aadd16983a45279e7c40ac064b88cab",
+    "text": "<keyword0>光</keyword0>ダメージ; 耐性や状態効果があるとは限らない"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,
