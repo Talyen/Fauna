@@ -1,9 +1,15 @@
 import { combatantById } from "../../../game/battlefield";
 import { unitName } from "../../../game/combat/state";
-import { species } from "../../../game/content";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../../game/keywords";
 import type { GameEvent, GameState } from "../../../game/types";
 import type { createMessageReader } from "./messages";
+import { localizedCombatantName } from "./combatant-name";
+
+/** Preview models retain common targetless announcements as text across possible outcomes. */
+export function localizedPreviewMessage(text: string, i18n: ReturnType<typeof createMessageReader>) {
+  const mana = /^Gain (\d+) Mana\.$/.exec(text);
+  return mana ? i18n.message("log.gainMana", "Gain {{amount}} Mana.", { amount: mana[1]! }) : text;
+}
 
 /** Translate only recognized complete events; preserve unfamiliar announcements verbatim. */
 export function eventPresentation(
@@ -41,11 +47,7 @@ export function eventPresentation(
   const target = combatantById(game, event.targetId);
   if (!target) return event.text;
   const englishName = unitName(target);
-  const speciesName = species(target.species).name;
-  const name =
-    englishName === speciesName
-      ? i18n.content(`content.species.${target.species}.name`, speciesName)
-      : englishName;
+  const name = localizedCombatantName(target, i18n);
   const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });

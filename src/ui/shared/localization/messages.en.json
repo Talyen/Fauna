@@ -182,6 +182,39 @@
   "deck.pages": {
     "text": "Deck pages"
   },
+  "denial.actorKnockedOut": {
+    "text": "That creature is knocked out."
+  },
+  "denial.cardNotInHand": {
+    "text": "That card is not in your hand."
+  },
+  "denial.frozen": {
+    "text": "{{name}} cannot act while Frozen."
+  },
+  "denial.noDiscardCards": {
+    "text": "There are no eligible ally cards in Discard."
+  },
+  "denial.noInjuredAllies": {
+    "text": "There are no injured allies."
+  },
+  "denial.noKnockedOutAllies": {
+    "text": "There are no knocked-out allies."
+  },
+  "denial.noLivingBackups": {
+    "text": "There are no living backups."
+  },
+  "denial.notEnoughMana": {
+    "text": "Not enough Mana."
+  },
+  "denial.skipped": {
+    "text": "{{name}} cannot act this turn."
+  },
+  "denial.stunned": {
+    "text": "{{name}} cannot act while Stunned."
+  },
+  "denial.unfinishedJourney": {
+    "text": "{{trait}}’s limit is spent this turn."
+  },
   "draft.choose": {
     "text": "Choose your starter"
   },

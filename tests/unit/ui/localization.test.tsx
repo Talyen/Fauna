@@ -83,7 +83,12 @@ import { resolveLanguage, type GameLocale } from "../../../src/ui/shared/localiz
 import { LocalizationProvider, useLanguage } from "../../../src/ui/shared/localization/provider";
 import { useMessages, MessageProvider } from "../../../src/ui/shared/localization/message-context";
 import { createMessageReader, type MessageCatalog } from "../../../src/ui/shared/localization/messages";
-import { eventPresentation } from "../../../src/ui/shared/localization/event-presentation";
+import {
+  eventPresentation,
+  localizedPreviewMessage,
+} from "../../../src/ui/shared/localization/event-presentation";
+import { localizedCombatantName } from "../../../src/ui/shared/localization/combatant-name";
+import { localizedCardDenial } from "../../../src/ui/shared/localization/card-denial";
 
 it("selects locale plural forms and falls back when source or placeholders are stale", () => {
   const source = { one: "{{count}} talent point available", other: "{{count}} talent points available" };
@@ -175,6 +180,8 @@ it("translates turn and Mana announcements without inventing their values", () =
   expect(eventPresentation(game, { kind: "turn", text: "Turn 4. 3 Mana restored!" }, reader)).toBe(
     "Turn 4. 3 Mana restored!",
   );
+  expect(localizedPreviewMessage("Gain 2 Mana.", reader)).toBe("Gagne 2 Mana.");
+  expect(localizedPreviewMessage("A different preview.", reader)).toBe("A different preview.");
 });
 
 it("translates recognized journey and knockout announcements without changing other events", () => {
@@ -702,6 +709,11 @@ it("translates a battle targeting prompt without issuing a gameplay command", ()
   const catalog: MessageCatalog = {
     "battle.chooseEnemy": { source: "Choose an enemy", text: "Choisir un ennemi" },
     "battle.targetSummary": { source: "{{owner}} · {{target}}", text: "{{target}} · {{owner}}" },
+    "content.species.prismram.name": { source: "Prismram", text: "Prisme" },
+    [`content.species.${game.battle!.enemies[0]!.species}.name`]: {
+      source: species(game.battle!.enemies[0]!.species).name,
+      text: "Adversaire localisé",
+    },
   };
   const send = vi.fn(() => true);
   const view = render(
@@ -723,7 +735,178 @@ it("translates a battle targeting prompt without issuing a gameplay command", ()
     const attack = view.container.querySelector<HTMLButtonElement>('.hand [data-effect="attack"]');
     expect(attack).not.toBeNull();
     fireEvent.click(attack!);
-    expect(screen.getByText("Choisir un ennemi · Prismram")).toBeTruthy();
+    expect(screen.getByText("Choisir un ennemi · Prisme")).toBeTruthy();
+    const enemy = view.container.querySelector<HTMLButtonElement>(
+      `[data-actor-id="${game.battle!.enemies[0]!.id}"] .creature-card`,
+    )!;
+    expect(enemy.getAttribute("aria-label")).toBe("Target Adversaire localisé");
+    fireEvent.pointerEnter(enemy);
+    expect(screen.getByText("Adversaire localisé · Prisme")).toBeTruthy();
+    expect(send).not.toHaveBeenCalled();
+  } finally {
+    view.unmount();
+    vi.unstubAllGlobals();
+  }
+});
+
+it("localizes standard combatant and Echo names while retaining a distinct boss name", () => {
+  const game = run();
+  const enemy = game.battle!.enemies[0]!;
+  const canonical = species(enemy.species).name;
+  const reader = createMessageReader("fr", {
+    [`content.species.${enemy.species}.name`]: { source: canonical, text: "Créature traduite" },
+    "creature.echo": { source: "Echo", text: "Écho" },
+  });
+  expect(localizedCombatantName({ ...enemy, name: canonical }, reader)).toBe("Créature traduite");
+  expect(localizedCombatantName({ ...enemy, name: "Distinct Boss" }, reader)).toBe("Distinct Boss");
+  expect(localizedCombatantName({ ...enemy, species: "memento", name: "Echo", minion: true }, reader)).toBe(
+    "Écho",
+  );
+});
+
+it("uses the localized backup name for the visible and accessible swap choice", () => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  );
+  const game = produce(teamRun(7, ["wisterelle", "emberback", "pollenmoth"]), (draft) => {
+    addBackups(draft, { ...draft.team[0]!, id: "reserve", species: "reedstag", health: 10 });
+    const card = draft.cards.find((entry) => entry.definitionId === "wisterelle-forgotten-junction")!;
+    draft.battle!.hand = [card.id];
+    draft.battle!.draw = [];
+    draft.battle!.mana = 4;
+  });
+  const catalog: MessageCatalog = {
+    "content.species.reedstag.name": { source: "Reedstag", text: "Cerf de roseau" },
+    "battle.swapBackup": { source: "Swap in {{name}} from backup", text: "Faire entrer {{name}}" },
+  };
+  const send = vi.fn(() => true);
+  const view = render(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <TooltipProvider>
+        <BattleScreen
+          game={requireBattle(game)}
+          send={send}
+          controls={{ current: null }}
+          bursts={[]}
+          controller={false}
+          navigateFocus={false}
+          onDenied={() => {}}
+        />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  try {
+    const card = view.container.querySelector<HTMLButtonElement>('.hand [data-effect="swapChosen"]')!;
+    fireEvent.click(card);
+    const choice = screen.getByRole("button", { name: "Faire entrer Cerf de roseau" });
+    expect(choice.textContent).toBe("Cerf de roseau");
+    expect(send).not.toHaveBeenCalled();
+  } finally {
+    view.unmount();
+    vi.unstubAllGlobals();
+  }
+});
+
+it("localizes unavailable card reasons and preserves unfamiliar diagnostics", () => {
+  const game = run();
+  const actor = game.team[0]!;
+  const englishName = species(actor.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: englishName, text: "Créature traduite" },
+  });
+  expect(localizedCardDenial("Not enough Mana.", actor, reader)).toBe("Mana insuffisant.");
+  expect(localizedCardDenial("There are no living backups.", actor, reader)).toBe(
+    "Aucune créature en vie dans la réserve.",
+  );
+  expect(localizedCardDenial(`${englishName} cannot act while Frozen.`, actor, reader)).toBe(
+    "Créature traduite ne peut pas agir sous l’effet du Gel.",
+  );
+  expect(localizedCardDenial("A different reason.", actor, reader)).toBe("A different reason.");
+});
+
+it("shows the localized Mana denial without issuing a gameplay command", () => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  );
+  const game = produce(run(), (draft) => {
+    draft.battle!.hand = draft.cards.map((card) => card.id);
+    draft.battle!.draw = [];
+    draft.battle!.mana = 0;
+  });
+  const send = vi.fn(() => true);
+  const view = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TooltipProvider>
+        <BattleScreen
+          game={requireBattle(game)}
+          send={send}
+          controls={{ current: null }}
+          bursts={[]}
+          controller={false}
+          navigateFocus={false}
+          onDenied={() => {}}
+        />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  try {
+    fireEvent.click(view.container.querySelector<HTMLButtonElement>(".hand .action-card")!);
+    expect(screen.getByText("Mana insuffisant.")).toBeTruthy();
+    expect(send).not.toHaveBeenCalled();
+  } finally {
+    view.unmount();
+    vi.unstubAllGlobals();
+  }
+});
+
+it("shows localized Mana gained in a targeting preview without playing the card", () => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  );
+  const game = produce(teamRun(7, ["wisterelle", "emberback", "pollenmoth"]), (draft) => {
+    const card = draft.cards.find((entry) => entry.definitionId === "wisterelle-lantern-fare")!;
+    draft.battle!.hand = [card.id];
+    draft.battle!.draw = [];
+    draft.battle!.mana = 2;
+    draft.team[1]!.health -= 2;
+  });
+  const send = vi.fn(() => true);
+  const view = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TooltipProvider>
+        <BattleScreen
+          game={requireBattle(game)}
+          send={send}
+          controls={{ current: null }}
+          bursts={[]}
+          controller={false}
+          navigateFocus={false}
+          onDenied={() => {}}
+        />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  try {
+    fireEvent.click(view.container.querySelector<HTMLButtonElement>('.hand [data-effect="heal"]')!);
+    const ally = view.container.querySelector<HTMLButtonElement>('[data-actor-id="ally-1"] .creature-card')!;
+    fireEvent.pointerEnter(ally);
+    expect(screen.getByText("Gagnez 1 Mana.")).toBeTruthy();
     expect(send).not.toHaveBeenCalled();
   } finally {
     view.unmount();
@@ -1132,11 +1315,11 @@ it("localizes exact battle previews without changing their committed values", ()
   });
   const view = render(
     <MessageProvider locale="fr" catalog={french}>
-      <TargetPreview forecast={forecast} />
+      <TargetPreview forecast={forecast} displayName="Adversaire localisé" />
     </MessageProvider>,
   );
   expect(screen.getByRole("status").getAttribute("aria-label")).toBe(
-    "Aperçu pour Rival : Santé de 6 à 0, Blocage de 2 à 0, 2 dégâts absorbés, K.-O.",
+    "Aperçu pour Adversaire localisé : Santé de 6 à 0, Blocage de 2 à 0, 2 dégâts absorbés, K.-O.",
   );
   expect(screen.getByText("2 absorbés")).toBeTruthy();
   expect(forecast.health).toBe(0);
@@ -1165,10 +1348,11 @@ it("localizes conditional preview outcomes without changing their alternatives",
   const forecast: TargetForecast = { ...base, alternatives: [damaged, base] };
   const view = render(
     <MessageProvider locale="fr" catalog={french}>
-      <TargetPreview forecast={forecast} />
+      <TargetPreview forecast={forecast} displayName="Adversaire localisé" />
     </MessageProvider>,
   );
   const label = screen.getByRole("status").getAttribute("aria-label");
+  expect(label).toContain("Adversaire localisé");
   expect(label).toContain("Critique : 3 de Brûlure; 2 absorbés; Blocage 2 → 0");
   expect(label).toContain("Aucun changement");
   expect(forecast.alternatives).toEqual([damaged, base]);

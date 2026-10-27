@@ -1451,6 +1451,42 @@
     "sourceHash": "ee752b999fa3ba97efe96096c26f5efcc858f8e18f1b4b5a56283a83fc4037af",
     "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
   },
+  "content.species.memento.passive.0.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "ebb657b45986863e81bf30a7d2e68796c774385dee4de68eba1a51181bb54df6",
+    "text": "Cada vez que juegas una carta, un Eco ataca e inflige {{value0}} de daño de <keyword0>Agua</keyword0>"
+  },
+  "content.species.memento.passive.1.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "f98aca4623fc90bc0c3040a6774f01b07143b167006fd256ed96f8371a68d84a",
+    "text": "Cada vez que juegas una carta, un Eco ataca e inflige {{value0}} de daño de <keyword0>Agua</keyword0>"
+  },
+  "content.species.memento.passive.2.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "137a230b12cd5315f9e895f664efc640b3b3373b352b6ecf9fd82827e6bad872",
+    "text": "Cada vez que juegas una carta, un Eco ataca e inflige {{value0}} de daño de <keyword0>Agua</keyword0>"
+  },
+  "content.species.memento.passive.3.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "0119f4b710dcd4842a0700f5c7e2c4b90b712f9c1907534038fedee5923190ef",
+    "text": "Cada vez que juegas una carta, un Eco ataca e inflige {{value0}} de daño de <keyword0>Agua</keyword0>"
+  },
+  "content.species.memento.passive.4.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "a2b62b2594904dad613a221ac851eeaad6dc40fa8407fffcfd2a0eaf59fc2852",
+    "text": "Cada vez que juegas una carta, un Eco ataca e inflige {{value0}} de daño de <keyword0>Agua</keyword0>"
+  },
+  "content.species.memento.passive.5.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "d4d05c7584d2d22537c32a58fe3efceb8c228d3a8eebb1c0fb34f220e5d42945",
+    "text": "Cada vez que juegas una carta, un Eco ataca e inflige {{value0}} de daño de <keyword0>Agua</keyword0>"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -1522,6 +1558,12 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> every other turn",
     "sourceHash": "1e3751e4d9e7b2646145b29c786f52520dd16b1863431b67fc2259a24a002686",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> cada dos turnos"
+  },
+  "content.species.oathara.trait": {
+    "reviewed": true,
+    "source": "Unfinished Journey",
+    "sourceHash": "81fea6c89e7f5e93d504b9fa414906466fd31b71cb922a2c7dfd90a06017dd9f",
+    "text": "Viaje inacabado"
   },
   "content.species.orifable.passive.0.rule": {
     "reviewed": true,
@@ -1630,6 +1672,78 @@
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
     "sourceHash": "56460035635be50fcc6d44fc6efa8c58b317bb65659441610060af260dace186",
     "text": "Los efectos de estado perjudiciales que recibes tienen un {{value0}}% de probabilidad de redirigirse a un enemigo aleatorio"
+  },
+  "content.species.pyrella.passive.0.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "801716d7207c2474f7cf9a821e040b2878f8892b9b87223f5d46250905bd5100",
+    "text": "Tras derrotar a un enemigo <keyword0>en llamas</keyword0>, propaga un {{value0}}% de su <keyword1>Quemadura</keyword1> restante a los demás enemigos"
+  },
+  "content.species.pyrella.passive.1.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "d8fb3775f94916680fd7d7c0a456db2dba19a55e9976a0650d3b772b60e066ca",
+    "text": "Tras derrotar a un enemigo <keyword0>en llamas</keyword0>, propaga un {{value0}}% de su <keyword1>Quemadura</keyword1> restante a los demás enemigos"
+  },
+  "content.species.pyrella.passive.2.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "05f6f1b3b2e3571a3aa9ad4b783b1e1ec81ccb976baa72827f737c11d93f7c00",
+    "text": "Tras derrotar a un enemigo <keyword0>en llamas</keyword0>, propaga un {{value0}}% de su <keyword1>Quemadura</keyword1> restante a los demás enemigos"
+  },
+  "content.species.pyrella.passive.3.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "5a7a5934b90b3ece94a8f7781c16dad19803e16ce3af78ce1bcd75ef71df2cc5",
+    "text": "Tras derrotar a un enemigo <keyword0>en llamas</keyword0>, propaga un {{value0}}% de su <keyword1>Quemadura</keyword1> restante a los demás enemigos"
+  },
+  "content.species.pyrella.passive.4.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "138e1d804a02da552736cef64092964356ee8db8f3310c6fae7ba0e1fc32af74",
+    "text": "Tras derrotar a un enemigo <keyword0>en llamas</keyword0>, propaga un {{value0}}% de su <keyword1>Quemadura</keyword1> restante a los demás enemigos"
+  },
+  "content.species.pyrella.passive.5.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "7676d95af73e65b8870c7108a310431f17c7abb816056673496d032b59c19f33",
+    "text": "Tras derrotar a un enemigo <keyword0>en llamas</keyword0>, propaga su <keyword1>Quemadura</keyword1> restante a los demás enemigos"
+  },
+  "content.species.reedstag.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "8865edb51910de182082f8a310ae011070d85a601888ee1c875664153ff8f468",
+    "text": "El <keyword0>Bloqueo</keyword0> y las <keyword1>Espinas</keyword1> tienen un {{value0}}% de probabilidad de compartirse con los aliados"
+  },
+  "content.species.reedstag.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "b4e989789a9b5db54ad8a7d9bb55512e231bebc28d207a5d43803f779c6b316a",
+    "text": "El <keyword0>Bloqueo</keyword0> y las <keyword1>Espinas</keyword1> tienen un {{value0}}% de probabilidad de compartirse con los aliados"
+  },
+  "content.species.reedstag.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "993288bbdfa8f22655a37038968327714eca5d3f7f7da4a991eae124b1201f75",
+    "text": "El <keyword0>Bloqueo</keyword0> y las <keyword1>Espinas</keyword1> tienen un {{value0}}% de probabilidad de compartirse con los aliados"
+  },
+  "content.species.reedstag.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "bd372166219f73737b67c660d5fe2e33786ea2a080f78b974a8cc720441aa5f7",
+    "text": "El <keyword0>Bloqueo</keyword0> y las <keyword1>Espinas</keyword1> tienen un {{value0}}% de probabilidad de compartirse con los aliados"
+  },
+  "content.species.reedstag.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "426ddee430af6759dd484fd2f9eb75f43b1280caf9eda2048d97c3405d37dc6c",
+    "text": "El <keyword0>Bloqueo</keyword0> y las <keyword1>Espinas</keyword1> tienen un {{value0}}% de probabilidad de compartirse con los aliados"
+  },
+  "content.species.reedstag.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
+    "sourceHash": "3edf11f2376de3dcdc69084b0e59ada94bb4f9cf4cdf9e893ec93835f5e1e7c1",
+    "text": "El <keyword0>Bloqueo</keyword0> y las <keyword1>Espinas</keyword1> se comparten con los aliados"
   },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
@@ -1774,6 +1888,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "1f99414ffe91b0ffeea8fddd022a6647511cdce021279dade5f823d112b1f79a",
     "text": "Los aliados reciben un {{value0}}% menos de daño de <keyword0>Congelación</keyword0>"
+  },
+  "content.species.tournelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "8ff42b9cd22bc96fd375ee25dbfdc418c9e33dbac4c67d999411a8778637d108",
+    "text": "{{value0}}% de probabilidad de interceptar ataques contra un aliado más herido"
+  },
+  "content.species.tournelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "5f57a14e5bb3a5625c8464ae443841ecfc1e3385cde28bdb139e341b865181f5",
+    "text": "{{value0}}% de probabilidad de interceptar ataques contra un aliado más herido"
+  },
+  "content.species.tournelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "20686806cd11fc235171457540b0edba5776774a94b0d14f86aadd438084d449",
+    "text": "{{value0}}% de probabilidad de interceptar ataques contra un aliado más herido"
+  },
+  "content.species.tournelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "db7cc6ea3ee274d12046f0113c5ed07525139dec92409e76c3c565cc923adeb7",
+    "text": "{{value0}}% de probabilidad de interceptar ataques contra un aliado más herido"
+  },
+  "content.species.tournelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "fbbbabf16573a1a75b275bca19fe43c06ffc1394cd267d94d258885f32fdb1b1",
+    "text": "{{value0}}% de probabilidad de interceptar ataques contra un aliado más herido"
+  },
+  "content.species.tournelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "8db430e107688b8b4c52f311435f2c581ad0e51d37428248cd1cbc77e4062946",
+    "text": "{{value0}}% de probabilidad de interceptar ataques contra un aliado más herido"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
@@ -2818,6 +2968,72 @@
     "source": "Deck pages",
     "sourceHash": "87d94c0cbaeab4c78e5bf2b8c6c634869cd94bf395eaef922430d65e6c378373",
     "text": "Páginas del mazo"
+  },
+  "denial.actorKnockedOut": {
+    "reviewed": true,
+    "source": "That creature is knocked out.",
+    "sourceHash": "21703ea00e836e8ddd99b6c316873ce376f661a9d050de5dc36b09c0bf52ca48",
+    "text": "Esa criatura está fuera de combate."
+  },
+  "denial.cardNotInHand": {
+    "reviewed": true,
+    "source": "That card is not in your hand.",
+    "sourceHash": "2ecc444bcd8b03e09d3b986313fd7259f86d022feea3e90b38a44b5a30602c92",
+    "text": "Esa carta no está en tu mano."
+  },
+  "denial.frozen": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Frozen.",
+    "sourceHash": "6caa982a74dc4c907b6668c483825ec62a8afcc7ea961952d55b4a498b307cef",
+    "text": "{{name}} no puede actuar mientras sufra Congelación."
+  },
+  "denial.noDiscardCards": {
+    "reviewed": true,
+    "source": "There are no eligible ally cards in Discard.",
+    "sourceHash": "2c092f93fd0fff3a7b816d804b2f5815b939566467ceb7397078af924a814e83",
+    "text": "No hay cartas aliadas válidas en el descarte."
+  },
+  "denial.noInjuredAllies": {
+    "reviewed": true,
+    "source": "There are no injured allies.",
+    "sourceHash": "1299f2ba49501fff75409d60d18ee369086ed7b6251c6f3983e3c0e5ac1cd5fa",
+    "text": "No hay aliados heridos."
+  },
+  "denial.noKnockedOutAllies": {
+    "reviewed": true,
+    "source": "There are no knocked-out allies.",
+    "sourceHash": "f95b587362588fe12b38b82d323bd431e12180dcce95025780cbb2a2d092ce91",
+    "text": "No hay aliados fuera de combate."
+  },
+  "denial.noLivingBackups": {
+    "reviewed": true,
+    "source": "There are no living backups.",
+    "sourceHash": "93a6ce827f6443c1e793d494d194a14080224ee898c50c475377c4caf58f7e8f",
+    "text": "No hay criaturas vivas en la reserva."
+  },
+  "denial.notEnoughMana": {
+    "reviewed": true,
+    "source": "Not enough Mana.",
+    "sourceHash": "490c39fc247bf62315110926644de0c4b369a6bc55928c9162ea8c5459134e7b",
+    "text": "Maná insuficiente."
+  },
+  "denial.skipped": {
+    "reviewed": true,
+    "source": "{{name}} cannot act this turn.",
+    "sourceHash": "b1286daebd5ee7ede26769e07485f8544bd51c7cd527fc0aeb7750b0741512c0",
+    "text": "{{name}} no puede actuar este turno."
+  },
+  "denial.stunned": {
+    "reviewed": true,
+    "source": "{{name}} cannot act while Stunned.",
+    "sourceHash": "8aaac72fa9fec423fdf980defb405f83e8aee9060d1f8d9031fdf504a0aeed1d",
+    "text": "{{name}} no puede actuar mientras sufra Aturdimiento."
+  },
+  "denial.unfinishedJourney": {
+    "reviewed": true,
+    "source": "{{trait}}’s limit is spent this turn.",
+    "sourceHash": "4b6f2a077ca16823875fba98954e60786322abcf979939de144451b647034845",
+    "text": "El límite de {{trait}} ya se ha agotado en este turno."
   },
   "draft.choose": {
     "reviewed": true,

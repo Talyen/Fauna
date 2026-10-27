@@ -35,6 +35,7 @@ import type { BattleState, GameEvent } from "../../../src/game/types";
 
 // Preserve values and array order while allowing builders to assemble object
 // properties in a different order. Card digest updated for Undertow Knot and Spark Decoy.
+// Species digest includes Bloomquail's clarification that conversion uses gained Block.
 it("preserves every authored creature, passive tier, card and Pearl", () => {
   const digest = (value: unknown) =>
     createHash("sha256")
@@ -50,7 +51,7 @@ it("preserves every authored creature, passive tier, card and Pearl", () => {
     {
       "cards": "75badaf3a772c0a564200c08f237c37951ff0fa01f433d156ff4ae1ac710e033",
       "pearl": "1ae0c37e2fc0a8088a6fe7b827c5e7f23512457a723269b79b7e1fc78417ebda",
-      "species": "1350b8a3e22b5c16402c3b13723805a20e634ac4844a17498f3b810c215503cb",
+      "species": "9c5cbe00d41d492d377f9f5a9d10626fc1fe4a73dfb1541813d6cf169a4c6a4a",
     }
   `);
 });
