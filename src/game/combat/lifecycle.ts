@@ -18,6 +18,7 @@ import {
   periodicTick,
   finishBleedTick,
   setPeriodicStacks,
+  periodicClearVersion,
 } from "./status-state";
 
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
@@ -75,6 +76,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (unit.health <= 0) break;
     if (stats[status] <= 0) continue;
     const { amount, sourceId, payouts } = periodicTick(stats, status);
+    const clearVersion = periodicClearVersion(stats, status);
     // Ticks use ordinary Block absorption without reapplying their own buildup.
     const source = combatantById(state, sourceId) ?? unit;
     // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
@@ -83,11 +85,11 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       origin: "periodic",
     });
     if (status === "bleed") {
-      finishBleedTick(stats);
+      if (periodicClearVersion(stats, status) === clearVersion) finishBleedTick(stats);
       yield* settleBleedLeech(state, unit, payouts, payment.outcome === "landed" ? payment.dealt : 0, events);
     }
     // Threshold reactions can Cleanse the ticking status; decay must not restore it.
-    if (stats[status] === 0) continue;
+    if (stats[status] === 0 || periodicClearVersion(stats, status) !== clearVersion) continue;
     let next =
       status === "bleed"
         ? 0

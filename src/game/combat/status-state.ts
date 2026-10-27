@@ -6,6 +6,13 @@ export type PeriodicStatus = "burn" | "poison" | "bleed";
 type Control = NonNullable<CombatState["controlled"]>;
 type BleedPayout = CombatState["bleedLeech"][number];
 
+// A tick can synchronously trigger a Cleanse and a fresh application of the
+// same status. The new application belongs to a later tick, not the old one.
+const clearVersions = new WeakMap<CombatState, Partial<Record<PeriodicStatus, number>>>();
+export function periodicClearVersion(stats: CombatState, status: PeriodicStatus) {
+  return clearVersions.get(stats)?.[status] ?? 0;
+}
+
 export function enterControl(stats: CombatState, status: Control, turns: number) {
   stats[status] = 0;
   stats.controlled = status;
@@ -42,6 +49,11 @@ export function advanceControlImmunity(stats: CombatState) {
 }
 
 export function clearHarmfulStatus(stats: CombatState, status: PeriodicStatus | Control | "blind") {
+  if (status === "burn" || status === "poison" || status === "bleed") {
+    const versions = clearVersions.get(stats) ?? {};
+    versions[status] = (versions[status] ?? 0) + 1;
+    clearVersions.set(stats, versions);
+  }
   if (status === "blind") stats.blind = false;
   else stats[status] = 0;
   delete stats.statusSources[status];
