@@ -898,3 +898,15 @@ it("localizes exact battle previews without changing their committed values", ()
   expect(forecast.health).toBe(0);
   view.unmount();
 });
+
+it("bundles fonts covering each script language's native selector label", () => {
+  for (const [file, label] of [
+    ["noto-sans-jp.ttf", "日本語"],
+    ["noto-sans-sc.ttf", "简体中文"],
+    ["noto-sans.ttf", "Русский"],
+  ]) {
+    const font = readFileSync(`src/assets/fonts/${file}`);
+    for (const character of label)
+      expect(fontHasGlyph(font, character.codePointAt(0)!), `${file}: ${character}`).toBe(true);
+  }
+});

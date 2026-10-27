@@ -70,7 +70,13 @@ export function dependencyNotices(root, lock) {
       location,
     });
   }
-  for (const file of ["Docs/SHADCN-LICENSE.txt", "Docs/FONT-LICENSE.txt"])
+  for (const file of [
+    "Docs/SHADCN-LICENSE.txt",
+    "Docs/FONT-LICENSE.txt",
+    "Docs/NOTO-SANS-LICENSE.txt",
+    "Docs/NOTO-SANS-JP-LICENSE.txt",
+    "Docs/NOTO-SANS-SC-LICENSE.txt",
+  ])
     sections.push(`=== ${file} ===`, readFileSync(path.join(root, file), "utf8"));
   return { notices: sections.join("\n\n") + "\n", inventory };
 }

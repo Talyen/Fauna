@@ -94,7 +94,8 @@ digests, and subsets the current translations and native language names. Set
 `FAUNA_FONT_PYTHON` to the Python environment containing that version, or pass
 `-- --source-dir <directory>` to use verified original fonts offline. Replaced
 fonts are backed up under `reports/localization/backups`. The bundled OFL notices
-are in `public/licenses`. Regenerate after adding glyphs and inspect actual
+are in `Docs/NOTO-SANS-LICENSE.txt`, `Docs/NOTO-SANS-JP-LICENSE.txt`
+and `Docs/NOTO-SANS-SC-LICENSE.txt`. Regenerate after adding glyphs and inspect actual
 rendering before qualification; a subset alone does not enable a language.
 
 ## Implementation and qualification

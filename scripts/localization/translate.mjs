@@ -87,7 +87,7 @@ if (command === "prepare" && args.length === 0) {
   issues.push(...qualificationIssues(languages, coverage, english, catalogs, glossaries));
   issues.push(
     ...qualifiedFontIssues(languages, catalogs, (file) => {
-      const font = path.join(root, "public/fonts", file);
+      const font = path.join(root, "src/assets/fonts", file);
       return fs.existsSync(font) ? fs.readFileSync(font) : null;
     }),
   );

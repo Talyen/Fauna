@@ -73,7 +73,7 @@ try {
       throw new Error(`Subset lost required glyphs: ${requirement.file}`);
     generated.push({ file: requirement.file, subset });
   }
-  const destination = path.join(root, "public/fonts"),
+  const destination = path.join(root, "src/assets/fonts"),
     backups = path.join(root, "reports/localization/backups");
   fs.mkdirSync(destination, { recursive: true });
   for (const { file, subset } of generated) {
