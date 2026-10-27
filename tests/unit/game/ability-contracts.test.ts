@@ -2,6 +2,7 @@ import { addReserve, accept, prepareDestination, requireBattle, teamRun } from "
 import { setBattleCards } from "../../support/cards";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createHash } from "node:crypto";
+import { recordedTraceDigest as digest } from "../../support/modifier-trace";
 import { produce } from "immer";
 import { describe, expect, it } from "vitest";
 import {
@@ -53,23 +54,6 @@ it("preserves every authored creature, passive tier, card and Pearl", () => {
     }
   `);
 });
-
-// Keep the pre-existing gameplay oracle anchored to its format-57 envelope.
-// Dormant repeat and Fire Thorns fields are neutral; active grants remain in the oracle.
-const digest = (value: unknown) =>
-  createHash("sha256")
-    .update(
-      JSON.stringify(value, (key, entry) => {
-        if (key === "version") return 57;
-        if (key === "metronomeActor" && entry === null) return undefined;
-        if (key === "fireThorns" && entry === 0) return undefined;
-        if (key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) return undefined;
-        if (key === "encoreProgress" && entry === 0) return undefined;
-        if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
-        return entry;
-      }),
-    )
-    .digest("hex");
 
 // The targeting refactor changes only these two enemy definition representations.
 // Assert their new scope, then retain the recorded shape so the original oracle

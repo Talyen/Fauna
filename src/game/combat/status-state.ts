@@ -1,5 +1,6 @@
 import type { CombatState } from "../types";
-import { STACK_LIMIT } from "./state";
+import { STACK_LIMIT, ensureCombat, removeArmor, type Combatant } from "./state";
+import type { beneficialStatuses, harmfulStatuses } from "./state";
 
 export type PeriodicStatus = "burn" | "poison" | "bleed";
 type Control = NonNullable<CombatState["controlled"]>;
@@ -45,6 +46,29 @@ export function clearHarmfulStatus(stats: CombatState, status: PeriodicStatus | 
   else stats[status] = 0;
   delete stats.statusSources[status];
   if (status === "bleed") stats.bleedLeech = [];
+}
+
+/** Remove one selected status; Armor retains its depletion receipt for later reactions. */
+export function clearSelectedStatus(
+  unit: Combatant,
+  status: (typeof harmfulStatuses)[number] | (typeof beneficialStatuses)[number],
+) {
+  const stats = ensureCombat(unit);
+  if (status === "armor") return removeArmor(unit, stats.armor);
+  if (status === "dodge") stats.temporaryDodge = 0;
+  if (
+    status === "reflect" ||
+    status === "reflectBurn" ||
+    status === "blind" ||
+    status === "nullify" ||
+    status === "negate" ||
+    status === "attackReflection" ||
+    status === "nullifyFreeze"
+  )
+    stats[status] = false;
+  else if (status === "thorns" || status === "waterThorns" || status === "fireThorns" || status === "dodge")
+    stats[status] = 0;
+  else clearHarmfulStatus(stats, status);
 }
 
 export function addPeriodicStacks(
