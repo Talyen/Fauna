@@ -317,6 +317,12 @@
     "sourceHash": "aade6585fa0ffaee68cd420c87aecd3748a1258288f93da8a4ff1a847e576e1e",
     "text": "読み込み中…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "23f6121d68597ec8ff1fa79d8d362f96a096a8fffb5af5815a6881656bdc5e50",
+    "text": "<keyword0>食料</keyword0>カードの<keyword1>マナ</keyword1>消費がなくなる"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "ef709a86e967ff3fae2857e2ec495e58a195e323e61a6e54a26cf9e0000b0196",
     "text": "掏摸のナイフ"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "ba5f9ed200c9be2f39d86443ca079383e2c187dea840d50b8930543233e05ad0",
+    "text": "手札の上限が1枚増える"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "b546cf6a759fb23f605977258da31082193b1ac3c3ffaa23965dcfa699dca67f",
     "text": "隕石"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "1e548ead6a3391818e1c0670c57c9d5e67e9fcbe850447ecc72a9c986672cd0c",
+    "text": "<keyword0>食料</keyword0>カードの効果が2倍になる"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "7283091b43ab45e65197aeede51db13a52c1f8ba7746a2b7b4a31ec15cb9eeb3",
     "text": "破れたページ"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "864fb92047e1067b42bfce85c799bc9c2b653b0c56299040c6a23096014d6419",
+    "text": "戦闘開始時にカードを追加で{{value0}}枚引く"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,

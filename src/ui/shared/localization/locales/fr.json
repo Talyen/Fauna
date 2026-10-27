@@ -329,6 +329,12 @@
     "sourceHash": "631deaf094930aa27ff537b4dd6ed48c1238c15e13027714202cc4a15244aa7b",
     "text": "Les attaques répétées ne peuvent pas être <keyword0>esquivées</keyword0>"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "2a65c8400d2025456c4c68b6ad5261c5d319dafcef5c4b5ca1116dd8f7a1d452",
+    "text": "Les cartes <keyword0>Nourriture</keyword0> ne coûtent pas de <keyword1>Mana</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -346,6 +352,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "c25e943d61f52562ae2c56c923a91faf6fa10da393e46f1593361d09912b23cd",
     "text": "Couteau de coupe-bourse"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "546b25424fbccd1773461ed0c8782a5312d3a60c1076976e0d792a0190a93c44",
+    "text": "Gagnez un emplacement de carte supplémentaire en main"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -407,6 +419,12 @@
     "sourceHash": "0191ce0358ac6e595036410d4df17b5852f1ff7d2efe385cc1b16d610dac167c",
     "text": "<keyword0>Purification</keyword0> affecte tous les alliés"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "a6621a8f9e54a895b3e24ab18328bb3cf893f5d95bc3fe4b09fc582986c24c87",
+    "text": "Les cartes <keyword0>Nourriture</keyword0> sont deux fois plus efficaces"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -454,6 +472,12 @@
     "source": "Tattered Pages",
     "sourceHash": "9236923ba5717a10381adb85cd30758080b2eb29e4a37b8059c0f95f00f4d054",
     "text": "Pages déchirées"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "1c1587ed912c3236f7f7b94975db8b97f8111ff76bb63431a014d5d095150590",
+    "text": "Piochez {{value0}} carte supplémentaire au début du combat"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,

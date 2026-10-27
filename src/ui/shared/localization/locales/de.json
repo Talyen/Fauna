@@ -317,6 +317,12 @@
     "sourceHash": "852ba2ea847e486cb28f3a870bf49be5d7e4858e4f4e23df1e5e3668417e01db",
     "text": "Wird geladen…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "fd221d78ef1b246709d22e54ad05760615e95390f86f398ac210eea6cb236fe5",
+    "text": "<keyword0>Nahrungs</keyword0>karten kosten kein <keyword1>Mana</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "5cf26d170aa98cdb4926be7bcedfa40cfb5fc539f0cb9c3807b76b2645ade535",
     "text": "Beutelschneidermesser"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "22fa15949f07e3fff203772a0477a3b7839b4bd1464b8279c856de54a31571fc",
+    "text": "Erhalte einen zusätzlichen Handkartenplatz"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "3b95ee5e51821484b2aa8fec425eb9e6ad84080ddb534e0df027d04de5c4f874",
     "text": "Meteorit"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "9d8c470f36425122176f79b3d7f04a0d24f93a5d7847f49000141b9f4e3890c8",
+    "text": "<keyword0>Nahrungs</keyword0>karten sind doppelt so wirksam"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "6f8418837e98173a1718e72c8db57cfaa9b684a7129b9276ad63baf0822c49e3",
     "text": "Zerrissene Seiten"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "51ee765e4dc4f04e3192f2d2de9bae52e4748874a2ab69230885b19ad07a58f1",
+    "text": "Ziehe zu Kampfbeginn {{value0}} zusätzliche Karte"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,

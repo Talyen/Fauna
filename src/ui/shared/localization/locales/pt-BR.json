@@ -317,6 +317,12 @@
     "sourceHash": "fee605c9ef7803f260c2cb618c0ea1fca27133010ab1c5d5fb5a11866e9d8c5b",
     "text": "Carregando…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "176ecf7b4d718cd2e775c5026f858618bc2908a7f33a169845e52700c691515f",
+    "text": "Cartas de <keyword0>Comida</keyword0> não custam <keyword1>Mana</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "f8b37d9b84f85d5695ddde6b1444e2be045a017901793cdc4da6801f4b6b5d02",
     "text": "Faca do batedor de carteiras"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "f8913ba6d5481968c78b078da586657bee892d3d93736dc14923bc970bfdf236",
+    "text": "Ganhe um espaço adicional para cartas na mão"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "9ee6b3291cf72a741575f4f5d66babf82cdf5488a48bb14481c56a4d597a7bce",
     "text": "Meteorito"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "0f983afa2d7e1cedfc684abbd2738b9cd1d900363f63dd58f436ac8249b77fdf",
+    "text": "Cartas de <keyword0>Comida</keyword0> são duas vezes mais eficazes"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "1e2fd283f48a6950c8d50bd435edc78fa3fe84effbc1bfd0f0b76f9b337b5b8c",
     "text": "Páginas esfarrapadas"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "7f4a8c9c4e943358051dd781d97aa63aba1235bce072f8090160a2643d43015a",
+    "text": "Compre {{value0}} carta adicional no início do combate"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,

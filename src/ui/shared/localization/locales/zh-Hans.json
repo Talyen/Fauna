@@ -317,6 +317,12 @@
     "sourceHash": "4b4fb2b8421ca2d9b5e9462797c23b087695fbbf0aba3a578edad3a9b1c30e59",
     "text": "加载中…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "413cd5df9349e82c87d096e567f31a6ed19a81c9cc8ad1bf5c9479964d10acf2",
+    "text": "<keyword0>食物</keyword0>牌不消耗<keyword1>法力</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "11cb573923027cdc4262e4a1db262b8143a508cf23cd25d40d992db3a1f529ac",
     "text": "扒手小刀"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "c44078c2529c51609e3c7285bf5c532662968bc62b90bcea34a4f51549bdfd27",
+    "text": "手牌上限增加一个位置"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "4aae5d837f0925ccef875cddf1ebcc301a9cc6f7a5615cc14fa0facfcd61ab36",
     "text": "陨石"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "103266330342e94d32abb8a2a9980f5b0241ad2d58c586aef30591f6dcee5ff3",
+    "text": "<keyword0>食物</keyword0>牌的效果翻倍"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "b46fe72f2695250349ae3452ce721da28e3595059b1655bca42fc219b7b0db59",
     "text": "破旧书页"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "0580db3d2ee9257ce6a65d145d15a9dcebacddb50b31b7fe3a6f474234ba9e9f",
+    "text": "战斗开始时额外抽取{{value0}}张牌"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,

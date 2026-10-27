@@ -317,6 +317,12 @@
     "sourceHash": "3dc785246de4d8761dd23972f5c9fef611a39f01a91ed6f6963f6a60d33208af",
     "text": "Cargando…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "77387f8d5a76be7c005e9a41fb053e7cb08d6ae78d120bb4733a201c444fa388",
+    "text": "Las cartas de <keyword0>Comida</keyword0> no cuestan <keyword1>Maná</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "35b9250db04cffee30d035952783df584bb75ab6421328fd0161ce7c6527690b",
     "text": "Cuchillo de ratero"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "5b32b80a10a4d366f2da9bce359cac357d59bf3da3cbfaa5d1040bc7a4344e07",
+    "text": "Obtienes un espacio adicional para cartas en la mano"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "20474e1de926ee94bcb2400da3945f50049c3808938b8299e11fcd2452b511e3",
     "text": "Meteorito"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "ae751ff57b3585853e427bced1f09ef597c035efd697ceb531c74f1be8801407",
+    "text": "Las cartas de <keyword0>Comida</keyword0> son el doble de eficaces"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "2f236db2ab2984e50a1c5f8b8eb0f4dd2393698c5a325d88cc27b0f64504b447",
     "text": "Páginas raídas"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "d98b6f11da2ec68522e0f6230e0eefa92995f76b199a56a07e2c90a86107a8b8",
+    "text": "Roba {{value0}} carta adicional al comienzo del combate"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,

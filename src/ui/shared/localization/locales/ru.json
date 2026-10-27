@@ -317,6 +317,12 @@
     "sourceHash": "cfda79cf8f70f0029f142732530155f90b9f40050a2ad9dfce35e0144df37df0",
     "text": "Загрузка…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "c4b0042375a84398695a096475bab9b6fba98a5eff6222ca9db27aa09383470a",
+    "text": "Карты <keyword0>еды</keyword0> не расходуют <keyword1>ману</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "b246efade40a55a10c180028b6446de3b072a30b8dc85452fb24f299d5fd2dcb",
     "text": "Нож карманника"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "ec5db118be1a26a3ed9a036aa9cb823d61b9a7d7340eb693194a7cb232a92c38",
+    "text": "Получите дополнительное место для карты в руке"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "e6ec02f602d1380079a33e5c971fd08b95e5942add499e98eb698a18bc313ad5",
     "text": "Метеорит"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "f4bab865c0b267b4d08646e0280b9d1d109b2c2e6434ce29c733a8fec81b35b0",
+    "text": "Карты <keyword0>еды</keyword0> действуют вдвое сильнее"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "3d8b6099479a044623315627feb327fed905c4409f3d2bbb060fb065e473844c",
     "text": "Ветхие страницы"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "7f50d1c08cf33491028f796133fce4c66f314985646207722eda5bb77e1fbdff",
+    "text": "В начале боя возьмите {{value0}} дополнительную карту"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
