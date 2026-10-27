@@ -4865,11 +4865,53 @@
     "sourceHash": "a0ecd0d14c3576d514a5d68edc2ff6cbac03fb78d12198b1968e64f25de82e53",
     "text": "Kontrollimmunität {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "2f9f612cb006bad809a6bb03c3242bfe3c262433873ec2d3925e1547a82d5031",
+    "text": "Kostenloses Nachsetzen: nächste Karte ist kostenlos"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "7d994f7c0213d213de73dd601f83b9218ec5c5c453a148e7f0dcc4fddf2bb965",
+    "text": "Göttliche Gunst: nächste <keyword0>Licht</keyword0>-Karte ist kostenlos"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "9f3dc9ed75eb0d738b233b797f64015864dab3c526d2cd83eb686b9e82851832",
+    "text": "Windschritt: nächste <keyword0>Natur</keyword0>-Karte ist kostenlos"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "b816db65dd8c10a139ab322f9bc6a424aed709de3b75926f1efbafeb50979068",
     "text": "Nahtod {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "994013ba096b3d2fabbc6b4053949eb718d6a00eddb3fe184e0d9d5bdc2f8ea0",
+    "text": "Offene Flanke: nächster Angriff verursacht {{value0}} zusätzlichen <keyword0>physischen</keyword0> Schaden"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "73fec601986e1e61864f27f0565d8d695241c316449fb6c0308869fa1f2620a1",
+    "text": "Abschiedsschnitt: nächster <keyword0>physischer</keyword0> Treffer verursacht die Hälfte seines Schadens zusätzlich als <keyword1>Blutungsschaden</keyword1>"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "4a33858c5f34092b73b8d57d1aa5e33b1d7452cfdb9cfd7c30eda9c19432815e",
+    "text": "Rhythmus finden: +{{value0}}% Chance auf <keyword0>Ausweichen</keyword0>"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "b0d238615b8c28f2100a2b43e3fec65b9c7e48a73265e87468e9efefabe55aa4",
+    "text": "Riposte: nächster <keyword0>physischer</keyword0> Angriff ist garantiert ein <keyword1>kritischer Treffer</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

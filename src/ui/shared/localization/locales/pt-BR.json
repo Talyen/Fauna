@@ -4865,11 +4865,53 @@
     "sourceHash": "ce08427955504a741652173a00fc1cca2fb796a3cdde72f048647caa4d19df84",
     "text": "Imunidade a controle {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "5d1c57f37da9ba5d3ce27747c4d9788c700bffe147daa05f709cfa839fbfa112",
+    "text": "Próxima ação grátis: a próxima carta é gratuita"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "d6ad6ceb4434f8dd2bec40cad0e7479fa1cfa7d69f4bf8b097c2a1d99d26fb2c",
+    "text": "Favor divino: a próxima carta de <keyword0>Luz</keyword0> é gratuita"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "174bb4cfdb9fc97e9c30254aa76cb066b9b6e3e6efc484f8e384e3f263cd7b87",
+    "text": "Passo do vento: a próxima carta de <keyword0>Natureza</keyword0> é gratuita"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "d3c470905d1e6112c982cbc7b4ebcf8826c8bcd82d958174ea4feac4df6ff353",
     "text": "À beira da morte {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "0fdbb1aaf6aced2530a6ac896447a90c7b46af963ebce9561c8c25037561585d",
+    "text": "Flanco aberto: o próximo ataque causa {{value0}} de dano <keyword0>Físico</keyword0> adicional"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "c2dce552c1f0f33af567e1b2a1ff2f2d38884500973b636ee08be56bce951c59",
+    "text": "Corte de despedida: o próximo golpe <keyword0>Físico</keyword0> causa metade do seu dano como dano de <keyword1>Sangramento</keyword1> adicional"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "31141d909a9640d93ec9281f919c91857d9621e968f61546ab783a1d9d6b08a9",
+    "text": "Encontrar o ritmo: +{{value0}}% de chance de <keyword0>Esquiva</keyword0>"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "bfb220d66c4d3b2aa9d7b4d20932287116a3e75dcfa77efb8d27b3eb97b1a613",
+    "text": "Contra-ataque: o próximo ataque <keyword0>Físico</keyword0> é um <keyword1>acerto crítico</keyword1> garantido"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

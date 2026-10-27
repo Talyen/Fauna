@@ -4865,11 +4865,53 @@
     "sourceHash": "e32203d5a5a38dd39f479a7e844389818e429c2166a7603a0224a11d13c8dd90",
     "text": "行動不能への耐性 {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "f8f17974ad419e27ca03b97256c590f632a32d86c000904a224d69e368377d93",
+    "text": "無料の追撃：次のカードは無料"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "25c0b714a6e805d04f4360e2fb56ff5c546a1c227f7ff08b8208a4c5365a8507",
+    "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "d0b1fdfd8860370c352587aaf14f5c87c5793fba29def787c36b7c9e2ee8dfb0",
+    "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "152984fd4c12321d5db6d40d61ddfc3682f20c4bd7ec97518f23905c54e79449",
     "text": "死の淵 {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "b28997915cc62f2e5e3e034f966b4ef1fb4d619b6dde93e6cd151757e6c95725",
+    "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "7f56009872efd0a7a4e2c2996630f51330253c0197ae670a839bc8607115b19e",
+    "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "06c58c3bdb82c2390bbf76c3318c5633313d2d14f115871deae9534680254c9d",
+    "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "051d65b655e534873ec8af3bf90ee4d4475577b6c6c3dbeefcabaf169c23b81d",
+    "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

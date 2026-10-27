@@ -4865,11 +4865,53 @@
     "sourceHash": "3a0250adcbcea11c91b016b0fbfb7627c3d80846f416fca52c364ec5f784cb37",
     "text": "Иммунитет к контролю {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "74a7b4127987e9b49e62d668c2f2ab25c7f14e35eca0df609a8513567bf2d367",
+    "text": "Бесплатное продолжение: следующая карта бесплатна"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "2d4c9136abad339618f4103879f98f5696af1cda697231ac28b445fcea6e607f",
+    "text": "Божественная милость: следующая карта <keyword0>света</keyword0> бесплатна"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "13748ee0221b944cfe70f3b01968885d800578a3eb23de5aa87971d05ec9aa77",
+    "text": "Шаг ветра: следующая карта <keyword0>природы</keyword0> бесплатна"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "c029e40cb666cfbee45bf58c4750f431059c13f92a3ea8f5ea5f5a0da59a97bf",
     "text": "На пороге смерти {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "f00b41a0598c4c6af5f6bfd59165a7346d1d8bd31c4f94e97ce7de4f780bfc5a",
+    "text": "Открытый фланг: следующая атака наносит дополнительно {{value0}} <keyword0>физического</keyword0> урона"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "82a990886eb99969016295f1f2c070ffb8b9c63cb8e352fb9b31e0d7e3f12ad4",
+    "text": "Прощальный порез: следующее <keyword0>физическое</keyword0> попадание дополнительно наносит половину своего урона <keyword1>кровотечением</keyword1>"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "a84185dd2097810d9e810af442bb01a76329bc9f1b1ff427bf0e1ceb2b3f5de3",
+    "text": "Найти ритм: +{{value0}}% к шансу <keyword0>уклонения</keyword0>"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "dcd4881e28b67218975b907353638203032f2ec22184a7e9b63d5bcdd33bef6e",
+    "text": "Рипост: следующая <keyword0>физическая</keyword0> атака гарантированно наносит <keyword1>критический удар</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

@@ -4865,11 +4865,53 @@
     "sourceHash": "9733a94625e8269395326ec072b80a14565d26007740c1992a9ad8a0b78798db",
     "text": "控制免疫 {{value0}}"
   },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "reviewed": true,
+    "source": "Free Follow-up: next card is free",
+    "sourceHash": "a590290157c9ac17dd19194f032c9778d17e8f9a045aece62632aeae098af80a",
+    "text": "免费追击：下一张卡牌免费"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "reviewed": true,
+    "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "sourceHash": "17e0836054def28a7fb5a76880845a167d8403ae4e1f1b076611bd440b8ecff0",
+    "text": "神恩：下一张<keyword0>光</keyword0>卡牌免费"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "reviewed": true,
+    "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "sourceHash": "287d7db70a047f0d2eece85bb494e6a23de4fccc80338c12609cfa088f921957",
+    "text": "风步：下一张<keyword0>自然</keyword0>卡牌免费"
+  },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
     "sourceHash": "7685dca5f6d2bd8f42a604a47fea8a15a2240dcba43ac121bbbae88a276b3332",
     "text": "濒死 {{value0}}"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "reviewed": true,
+    "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "sourceHash": "3ae4500d2e5f7004f91fd8a213edfc2c70c34be38f071f08abb90327fdbca087",
+    "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "reviewed": true,
+    "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "d2764819aed025a0fa54e7fc6466963953507544caa6749600b41e499fd32e75",
+    "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "reviewed": true,
+    "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "8e0f520be902a581612fd84275ce552ba72fe33a8e24112df9e1275c9404b1ad",
+    "text": "找到节奏：<keyword0>闪避</keyword0>概率+{{value0}}%"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "reviewed": true,
+    "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "sourceHash": "e68af47540037972606cc8e667d70952f65932ce145426b702d047dd4d8b6adb",
+    "text": "还击：下一次<keyword0>物理</keyword0>攻击必定<keyword1>暴击</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
