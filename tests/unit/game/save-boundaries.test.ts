@@ -80,6 +80,12 @@ it.each([
     },
   ],
   [
+    "noncanonical enemy identity",
+    (state: GameState) => {
+      state.battle!.enemies[0]!.id = "enemy-00";
+    },
+  ],
+  [
     "foreign enemy target",
     (state: GameState) => {
       state.battle!.enemies[0]!.targetId = "missing";

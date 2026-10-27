@@ -156,7 +156,6 @@ function validateRoster(state: GameState) {
           ),
     ),
   );
-  const permanentCards = state.cards.filter((card) => !card.temporary);
   invalid(
     state.cards.some(
       (card) =>
@@ -166,10 +165,10 @@ function validateRoster(state: GameState) {
           Number(card.id.slice(5)) >= state.battle.copySerial),
     ),
   );
-  invalid(permanentCards.some((card) => card.id.startsWith("copy-")));
-
   const kits = new Map<string, string[]>();
-  for (const card of permanentCards) {
+  for (const card of state.cards) {
+    if (card.temporary) continue;
+    invalid(card.id.startsWith("copy-"));
     if (card.ownerId === null) continue;
     const ids = kits.get(card.ownerId) ?? [];
     ids.push(card.definitionId);
@@ -260,10 +259,11 @@ function validateBattle(state: BattleState) {
   invalid(battle.enemies.length !== source.enemies.length || !unique(battle.enemies.map((e) => e.id)));
   const playerField = battlefield(state, "player");
   battle.enemies.forEach((enemy) => {
-    const original = source.enemies[Number(enemy.id.replace(/^enemy-/, ""))];
+    const index = Number(enemy.id.replace(/^enemy-/, ""));
+    const original = source.enemies[index];
     invalid(
       !original ||
-        !source.enemies.some((_, index) => enemy.id === `enemy-${index}`) ||
+        enemy.id !== `enemy-${index}` ||
         enemy.species !== original.species ||
         enemy.name !== original.name ||
         enemy.maxHealth !== original.health ||
@@ -283,23 +283,32 @@ function validateBattle(state: BattleState) {
           !state.team.some((c) => c.id === enemy.targetId)),
     );
   });
-  const zones = [...battle.draw, ...battle.hand, ...battle.buffer, ...battle.discard];
-  const zoneIds = new Set(zones);
+  const zoneIds = new Set<string>();
   const cardIds = new Set(state.cards.map((card) => card.id));
+  let zoneCount = 0;
+  let unknownZoneCard = false;
+  for (const zone of [battle.draw, battle.hand, battle.buffer, battle.discard]) {
+    zoneCount += zone.length;
+    for (const id of zone) {
+      zoneIds.add(id);
+      if (!cardIds.has(id)) unknownZoneCard = true;
+    }
+  }
   // The current turn capacity survives a category reset.
   invalid(
     battle.mana > manaCapacity(state) ||
       battle.earnedGold > state.currency ||
       battle.earnedGold > state.journey.currency,
   );
-  invalid(zoneIds.size !== zones.length || zones.some((id) => !cardIds.has(id)));
-  invalid([...state.team, ...state.reserves].some((creature) => !creature.combat));
+  invalid(zoneIds.size !== zoneCount || unknownZoneCard);
+  const roster = [...state.team, ...state.reserves];
+  invalid(roster.some((creature) => !creature.combat));
   invalid(
-    ![...state.team, ...state.reserves].some((c) => c.health > 0) ||
+    !roster.some((c) => c.health > 0) ||
       !battle.enemies.some((e) => e.health > 0) ||
       battle.hand.length > handCapacity(state) ||
       (battle.buffer.length > 0 && battle.hand.length < handCapacity(state)) ||
-      zones.length !== state.cards.length ||
+      zoneCount !== state.cards.length ||
       state.cards.some((c) => !zoneIds.has(c.id)),
   );
   validateEnemyDecks(state);
@@ -311,15 +320,18 @@ function validateEnemyDecks(state: BattleState) {
     invalid(!!species(enemy.species).legendary !== !!enemy.deck);
     if (enemy.deck) {
       const deck = enemy.deck;
-      const zones = [...deck.draw, ...deck.hand, ...deck.buffer, ...deck.discard];
       const kit: string[] = [];
       let pearls = 0;
-      for (const id of zones) {
-        if (id === PEARL.id) pearls++;
-        else kit.push(id);
+      let zoneCount = 0;
+      for (const zone of [deck.draw, deck.hand, deck.buffer, deck.discard]) {
+        zoneCount += zone.length;
+        for (const id of zone) {
+          if (id === PEARL.id) pearls++;
+          else kit.push(id);
+        }
       }
       invalid(
-        zones.length > MAX_BATTLE_CARDS ||
+        zoneCount > MAX_BATTLE_CARDS ||
           pearls !== deck.pearls ||
           !matchesPermanentKit(enemy.species, kit) ||
           (deck.buffer.length > 0 && deck.hand.length < MAX_HAND_SIZE),

@@ -1,5 +1,7 @@
 import { expect, it } from "vitest";
 import { definitionKeywords } from "../../../src/game/keywords";
+import { CARDS } from "../../../src/game/content";
+import { cardHasKeyword, cardKeywords, KEYWORDS } from "../../../src/game/progression";
 
 it("keeps first-occurrence keyword order while merging duplicate and aliased effects", () => {
   const card = {
@@ -29,4 +31,16 @@ it("keeps first-occurrence keyword order while merging duplicate and aliased eff
     "nature",
     "light",
   ]);
+});
+
+it("keeps keyword membership equivalent to an independent mutable keyword list", () => {
+  for (const definition of CARDS) {
+    const card = { definitionId: definition.id };
+    const expected = definitionKeywords(definition);
+    const copy = cardKeywords(card);
+    expect(copy).toEqual(expected);
+    copy.length = 0;
+    for (const keyword of KEYWORDS) expect(cardHasKeyword(card, keyword)).toBe(expected.includes(keyword));
+    expect(cardKeywords(card)).toEqual(expected);
+  }
 });

@@ -14,7 +14,7 @@ import {
 } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { battlefield, healingAllies } from "../game/battlefield";
-import { cardKeywords, hasTalent, passiveAmount } from "../game/progression";
+import { cardHasKeyword, hasTalent, passiveAmount } from "../game/progression";
 import {
   controlled,
   hasHarmfulEffects,
@@ -101,7 +101,7 @@ function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
       effect.amount > 0 &&
       (drawHasAnotherCard(state, play.card, effect) ||
         (!play.def.consume &&
-          (effect.kind === "draw" || cardKeywords(play.card).includes(effect.keyword)) &&
+          (effect.kind === "draw" || cardHasKeyword(play.card, effect.keyword)) &&
           (state.boons.includes("mineral-bookend") ||
             (state.boons.includes("dune-shuttle") &&
               state.team.some((unit) => unit.id === play.card.ownerId && unit.health > 0))))),

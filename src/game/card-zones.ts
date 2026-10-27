@@ -6,7 +6,7 @@ import { definition, species } from "./content";
 import type { BattleState, Card, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
 import { shuffle, hiddenDecision, roll } from "./random";
-import { cardKeywords, passiveAmount } from "./progression";
+import { cardHasKeyword, passiveAmount } from "./progression";
 
 export const MAX_HAND_SIZE = 6;
 export const MAX_SUPPORTED_HAND_SIZE = MAX_HAND_SIZE + boonRule("facet-abacus").slots;
@@ -100,25 +100,24 @@ export function journeyReturn(state: GameState, ownerId: string | null, events: 
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   queueCard(state.battle!, handCapacity(state), id);
-  const ownerId = state.cards.find((card) => card.id === id)?.ownerId;
+  const original = state.cards.find((card) => card.id === id);
+  const ownerId = original?.ownerId;
   const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
   if (owner && state.boons.includes("dune-shuttle"))
     grantBlock(state, owner, boonRule("dune-shuttle").block, events);
-  let original: GameState["cards"][number] | undefined;
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
     if (reader.health <= 0 || battleCardCapacity(state) === 0) continue;
     const chance = passiveAmount(state, reader.species, "wellRead");
     if (!succeeds(state, chance / 100, false, events)) continue;
-    original ??= state.cards.find((entry) => entry.id === id)!;
-    const copy = createTemporaryCard(state, original)!;
+    const copy = createTemporaryCard(state, original!)!;
     queueCard(state.battle!, handCapacity(state), copy.id);
     events.push({
       kind: "action",
       actionType: "support",
       actorId: reader.id,
-      targetId: original.ownerId ?? undefined,
-      text: `${species(reader.species).name} copies ${definition(original.definitionId).name} with Well Read`,
+      targetId: original!.ownerId ?? undefined,
+      text: `${species(reader.species).name} copies ${definition(original!.definitionId).name} with Well Read`,
     });
   }
 }
@@ -269,7 +268,7 @@ export function drawKeyword(
   const owners = drawableOwnerIds(state);
   const eligibleCards = new Set<string>();
   for (const card of state.cards)
-    if ((card.ownerId === null || owners.has(card.ownerId)) && cardKeywords(card).includes(keyword))
+    if ((card.ownerId === null || owners.has(card.ownerId)) && cardHasKeyword(card, keyword))
       eligibleCards.add(card.id);
   drawEligibleCard(state, (id) => eligibleCards.has(id), events);
 }
@@ -324,14 +323,14 @@ export function drawHasAnotherCard(
     const drawn = cards.get(id)!;
     return (
       (drawn.ownerId === null || owners.has(drawn.ownerId)) &&
-      (effect.kind === "draw" || cardKeywords(drawn).includes(effect.keyword))
+      (effect.kind === "draw" || cardHasKeyword(drawn, effect.keyword))
     );
   };
   return (
     state.battle.draw.some(eligible) ||
     state.battle.discard.some(eligible) ||
     (!definition(played.definitionId).consume &&
-      (effect.kind === "draw" || cardKeywords(played).includes(effect.keyword)) &&
+      (effect.kind === "draw" || cardHasKeyword(played, effect.keyword)) &&
       battleCardCapacity(state) > 0 &&
       state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "wellRead") > 0))
   );

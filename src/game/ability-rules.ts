@@ -11,7 +11,8 @@ export function metronomeActorValid(state: BattleState): boolean {
   return (
     state.battle.metronomeActor === null ||
     (state.boons.includes("mercury-metronome") &&
-      [...state.team, ...state.reserves].some((unit) => unit.id === state.battle.metronomeActor))
+      (state.team.some((unit) => unit.id === state.battle.metronomeActor) ||
+        state.reserves.some((unit) => unit.id === state.battle.metronomeActor)))
   );
 }
 export function manaCapacity(state: GameState): number {

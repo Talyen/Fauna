@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { healingAllies } from "../battlefield";
-import { creaturePassive, hasTalent, cardKeywords } from "../progression";
+import { creaturePassive, hasTalent, cardHasKeyword } from "../progression";
 import { draw, drawKeyword, expressDelivery } from "../card-zones";
 import { grantArmor, grantStatus, grantBlock, restoreHealth, TURN_MANA, TURN_DRAW } from "./index";
 import type { BattleState, Enemy, Creature, GameState, GameEvent } from "../types";
@@ -10,8 +10,7 @@ export function battleMana(state: Pick<GameState, "talents" | "boons" | "cards">
   return (
     TURN_MANA +
     Number(hasTalent(state, "mana.leyline-attunement")) * talentRule("mana.leyline-attunement").amount +
-    (state.boons.includes("raincatcher-bowl") &&
-    state.cards.some((card) => cardKeywords(card).includes("water"))
+    (state.boons.includes("raincatcher-bowl") && state.cards.some((card) => cardHasKeyword(card, "water"))
       ? boonRule("raincatcher-bowl").mana
       : 0)
   );

@@ -12,7 +12,9 @@ import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } fro
 export { progressionLabel as keywordLabel } from "./keywords";
 import type { Card, GameState } from "./types";
 export function collectedSpecies(state: Pick<GameState, "discovery">): SpeciesId[] {
-  return SPECIES.filter(({ id }) => state.discovery.recruited[id] !== undefined).map(({ id }) => id);
+  const collected: SpeciesId[] = [];
+  for (const { id } of SPECIES) if (state.discovery.recruited[id] !== undefined) collected.push(id);
+  return collected;
 }
 export const MAX_CREATURE_STARS = 5;
 export function creatureStars(state: Pick<GameState, "discovery">, kind: SpeciesId): number {
@@ -63,12 +65,20 @@ export function validTalentSelection(state: Pick<GameState, "talents" | "keyword
   return true;
 }
 const keywordsByDefinition = new WeakMap<object, readonly Keyword[]>();
-export function cardKeywords(card: Pick<Card, "definitionId">): Keyword[] {
+function definitionCardKeywords(card: Pick<Card, "definitionId">): readonly Keyword[] {
   const def = definition(card.definitionId);
   if (!Object.isFrozen(def)) return definitionKeywords(def);
   let keywords = keywordsByDefinition.get(def);
   if (!keywords) keywordsByDefinition.set(def, (keywords = definitionKeywords(def)));
-  return [...keywords];
+  return keywords;
+}
+/** Return a mutable copy to callers that need the full list. */
+export function cardKeywords(card: Pick<Card, "definitionId">): Keyword[] {
+  return [...definitionCardKeywords(card)];
+}
+/** Membership checks do not need a defensive array copy. */
+export function cardHasKeyword(card: Pick<Card, "definitionId">, keyword: Keyword): boolean {
+  return definitionCardKeywords(card).includes(keyword);
 }
 export function xpThreshold(points: number) {
   return 10 * points * (points + 1) - 10 * Math.min(points, 2);
@@ -121,7 +131,8 @@ export function starterOfferPool(state: Pick<GameState, "discovery" | "selected"
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {
   const collected = collectedSpecies(state);
-  return collected.length === 0 || state.selected?.some((kind) => species(kind).legendary)
-    ? 1
-    : Math.max(1, Math.min(3, collected.filter((kind) => !species(kind).legendary).length));
+  if (collected.length === 0 || state.selected?.some((kind) => species(kind).legendary)) return 1;
+  let count = 0;
+  for (const kind of collected) if (!species(kind).legendary && ++count === 3) return 3;
+  return Math.max(1, count);
 }
