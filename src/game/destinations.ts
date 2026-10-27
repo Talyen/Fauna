@@ -10,10 +10,11 @@ export function campfireRecovery(creature: GameState["team"][number]) {
   return Math.min(maximum - creature.health, Math.round(maximum * 0.3));
 }
 export function needsCampfire(state: GameState) {
-  return [...state.team, ...state.reserves].some((creature) => {
+  const needsRecovery = (creature: GameState["team"][number]) => {
     const maximum = species(creature.species).health;
     return (maximum - creature.health) * 10 >= maximum * 3;
-  });
+  };
+  return state.team.some(needsRecovery) || state.reserves.some(needsRecovery);
 }
 export function canVisitCampfire(state: GameState) {
   return (
