@@ -71,6 +71,29 @@ it("restores older sources, scopes baselines, and never lets an outgoing owner c
   expect(currentEffectPalette(effects.store.getState())).toBeNull();
 });
 
+it("prefers the latest equally ranked baseline in the active scope, then restores the previous one", () => {
+  const effects = createEffectsStore();
+  const burn = effectPalette(["burn"]),
+    freeze = effectPalette(["freeze"]),
+    water = effectPalette(["water"]);
+  const baseline = (palette: typeof burn, scope = "home", priority = 0) => ({ scope, priority, palette });
+  effects.register("first", baseline(burn));
+  effects.register("other-scope", baseline(water, "inspection", 10));
+  const clearSecond = effects.register("second", baseline(freeze));
+  expect(currentEffectPalette(effects.store.getState())).toBe(freeze);
+  effects.register("first", baseline(burn));
+  expect(currentEffectPalette(effects.store.getState())).toBe(burn);
+  const clearHigher = effects.register("higher", baseline(water, "home", 1));
+  expect(currentEffectPalette(effects.store.getState())).toBe(water);
+  clearHigher();
+  expect(currentEffectPalette(effects.store.getState())).toBe(burn);
+  clearSecond();
+  effects.store.setState({ interaction: freeze });
+  expect(currentEffectPalette(effects.store.getState())).toBe(freeze);
+  effects.configure({ scope: "inspection", scene: "none", glow: 0, particles: 0 });
+  expect(currentEffectPalette(effects.store.getState())).toBe(water);
+});
+
 function Scene({ scope = "home", hidden = false }: { scope?: string; hidden?: boolean }) {
   return (
     <VisualEffectsProvider>

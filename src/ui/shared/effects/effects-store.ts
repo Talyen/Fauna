@@ -6,7 +6,6 @@ interface Source {
   scope: string;
   palette: EffectPalette;
   priority: number;
-  order: number;
 }
 interface EffectsState {
   scope: string;
@@ -28,7 +27,6 @@ export function createEffectsStore() {
     interaction: null,
     hosts: new Map(),
   }));
-  let order = 0;
   return {
     store,
     configure(next: Pick<EffectsState, "scope" | "scene" | "glow" | "particles">) {
@@ -36,10 +34,14 @@ export function createEffectsStore() {
       if (Object.entries(next).every(([key, value]) => previous[key as keyof EffectsState] === value)) return;
       store.setState({ ...next, ...(previous.scope !== next.scope ? { interaction: null } : {}) });
     },
-    register(owner: string, source: Omit<Source, "order">) {
-      store.setState((state) => ({
-        sources: new Map(state.sources).set(owner, { ...source, order: ++order }),
-      }));
+    register(owner: string, source: Source) {
+      store.setState((state) => {
+        const sources = new Map(state.sources);
+        // Re-registering an owner is a new registration for tie-breaking.
+        sources.delete(owner);
+        sources.set(owner, { ...source });
+        return { sources };
+      });
       return () =>
         store.setState((state) => {
           const sources = new Map(state.sources);
@@ -60,9 +62,10 @@ export function createEffectsStore() {
 
 export function currentEffectPalette(state: EffectsState): EffectPalette | null {
   if (state.interaction) return state.interaction;
-  return (
-    [...state.sources.values()]
-      .filter((source) => source.scope === state.scope)
-      .sort((a, b) => b.priority - a.priority || b.order - a.order)[0]?.palette ?? null
-  );
+  let selected: Source | undefined;
+  for (const source of state.sources.values()) {
+    if (source.scope === state.scope && (!selected || source.priority >= selected.priority))
+      selected = source;
+  }
+  return selected?.palette ?? null;
 }

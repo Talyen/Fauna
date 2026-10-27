@@ -1,5 +1,5 @@
 import { keywordText, KEYWORD_IDS, isKeywordId, type KeywordId } from "../../../game/keywords";
-import { CARDS, type SpeciesId } from "../../../game/content";
+import { speciesCards, type SpeciesId } from "../../../game/content";
 import { cardText } from "../../../game/card-rules";
 import { creaturePassive } from "../../../game/progression";
 import type { GameState } from "../../../game/types";
@@ -21,7 +21,7 @@ export function creatureKeywords(kind: SpeciesId, progression?: Pick<GameState, 
   return visualKeywords(
     [
       creaturePassive(progression, kind).description,
-      ...CARDS.filter((card) => card.species === kind).map((card) => cardText(card)),
+      ...speciesCards(kind).map((card) => cardText(card)),
     ].join("; "),
   );
 }
