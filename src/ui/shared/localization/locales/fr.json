@@ -1889,6 +1889,12 @@
     "sourceHash": "ba69c7266b00480204ef8c97ef1343fd0656ed776ef4b1f1fdbc60310fd65330",
     "text": "Entaille prismatique"
   },
+  "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "f94f8225e2a57c9da3cd2893a285fe599eb1955b70189245c0e01def2c36a48a",
+    "text": "Inflige {{value0}} dégâts de type <keyword0>Lumière</keyword0>"
+  },
   "content.card.glintstride-dodge.name": {
     "reviewed": true,
     "source": "Mirage Run",
@@ -2069,6 +2075,12 @@
     "sourceHash": "357e522fb387723f55827797c82f782a53f38967ce722fdb8eb8e142d6a186ff",
     "text": "Essaim postal"
   },
+  "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "cbb78edc16bb2bbd85ba78a4a6267a8f6f40a6f6f2bad4d6f72cfbbb8c1a8a6b",
+    "text": "Inflige {{value0}} dégâts de type <keyword0>Physique</keyword0> à tous les ennemis"
+  },
   "content.card.orifable-createFood.name": {
     "reviewed": true,
     "source": "Care Package",
@@ -2230,6 +2242,12 @@
     "source": "Reed Rush",
     "sourceHash": "0e925e79c158a0de63f89578521e43e42e54b8b95a5172db543c665ea71f05f9",
     "text": "Ruée des roseaux"
+  },
+  "content.card.reedstag-attack.vaf3db517079be41f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
+    "sourceHash": "c473496aad0e77811cf806d12ad0c6e6cb6e94dadad9b8d3a1b48e714dbe48a3",
+    "text": "Inflige {{value0}} dégâts de type <keyword0>Nature</keyword0>"
   },
   "content.card.reedstag-guard.name": {
     "reviewed": true,
@@ -2411,6 +2429,12 @@
     "sourceHash": "23ee446a18473a939c6232d0c6fdfd1f4d23ac560ccd951230eee1fcca59f079",
     "text": "Berger du ciel"
   },
+  "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
+    "sourceHash": "d20ed82c83194fe02dac40df5be759d1829b3d053afa9a3f12537c2fb4814bbd",
+    "text": "Inflige {{value0}} dégâts de type <keyword0>Nature</keyword0> à tous les ennemis"
+  },
   "content.card.sternshell-attack.name": {
     "reviewed": true,
     "source": "Surge Ram",
@@ -2422,6 +2446,12 @@
     "source": "Spiral Return",
     "sourceHash": "b044df0509a05701f83b4ad7f93f569a79431f575831a1663c1bd63bcb272d56",
     "text": "Retour spiralé"
+  },
+  "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
+    "sourceHash": "1a4aacbf14751b3f140ac61c17c8676930daf13e2c6c933c726aea218a0631a7",
+    "text": "Inflige {{value0}} dégâts de type <keyword0>Eau</keyword0> à tous les ennemis"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

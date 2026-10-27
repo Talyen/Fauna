@@ -1877,6 +1877,12 @@
     "sourceHash": "4c64768cfe80566582de94b166491da8180c5d2a6f456086365135a2ba65862a",
     "text": "Corte prismático"
   },
+  "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "b9f4c33e83c3c56977c2482118e2319a0d0904e8aa06bc0851de519c8c6088f2",
+    "text": "Causa {{value0}} de dano do tipo <keyword0>Luz</keyword0>"
+  },
   "content.card.glintstride-dodge.name": {
     "reviewed": true,
     "source": "Mirage Run",
@@ -2057,6 +2063,12 @@
     "sourceHash": "40e3e7fb9957b0bb9fac16bc8548a55142719ce34435f9dede7afacee34df2b5",
     "text": "Enxame postal"
   },
+  "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "d19455be34a60a4e2c925c56e707b92c585d215ad55c8c0601c98278ed605a0a",
+    "text": "Causa {{value0}} de dano do tipo <keyword0>Físico</keyword0> a todos os inimigos"
+  },
   "content.card.orifable-createFood.name": {
     "reviewed": true,
     "source": "Care Package",
@@ -2218,6 +2230,12 @@
     "source": "Reed Rush",
     "sourceHash": "8888f4418fc3013f98c09da494cd5b19b3352f11b74aa6cda5fb4c172b4a7f5f",
     "text": "Avanço de juncos"
+  },
+  "content.card.reedstag-attack.vaf3db517079be41f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
+    "sourceHash": "8b078944f9c89ba989f58ad71e3a7dcac2c5e107a6378aeaac4841b031720b33",
+    "text": "Causa {{value0}} de dano do tipo <keyword0>Natureza</keyword0>"
   },
   "content.card.reedstag-guard.name": {
     "reviewed": true,
@@ -2399,6 +2417,12 @@
     "sourceHash": "dda95540d291f5318905cc13e0035579c88f0788d0064fddff5aed7fe7654619",
     "text": "Pastor do céu"
   },
+  "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
+    "sourceHash": "d24df4844f68020794fdc1a34c63d26e554389a6bc061bda262da96bf08f595e",
+    "text": "Causa {{value0}} de dano do tipo <keyword0>Natureza</keyword0> a todos os inimigos"
+  },
   "content.card.sternshell-attack.name": {
     "reviewed": true,
     "source": "Surge Ram",
@@ -2410,6 +2434,12 @@
     "source": "Spiral Return",
     "sourceHash": "fcebd243bf2e28b714adee95d55365d1d7a98ebe4900e44efa40900afb0b16c5",
     "text": "Retorno espiral"
+  },
+  "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
+    "sourceHash": "5049806e8f7d46f2db7d31922488d4d743eeaad958025106af3479d6bbb340b7",
+    "text": "Causa {{value0}} de dano do tipo <keyword0>Água</keyword0> a todos os inimigos"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

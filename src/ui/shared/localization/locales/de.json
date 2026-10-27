@@ -1877,6 +1877,12 @@
     "sourceHash": "f3797402552c7640fcfc941c0f06b0b486c628605674327fed85a49c9ee94dd5",
     "text": "Prismenschnitt"
   },
+  "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "c5f6eab02cbbaf1a98bfd72858aca2d5dd38705c67278a96be21847c8f666654",
+    "text": "Verursache {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
   "content.card.glintstride-dodge.name": {
     "reviewed": true,
     "source": "Mirage Run",
@@ -2057,6 +2063,12 @@
     "sourceHash": "cd28d0f3d5c13ff112067f9ff083d4ffc6605b2d6bbc8418c415a95ced3720f5",
     "text": "Postschwarm"
   },
+  "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "d72b25071ea059e5907b189aaa52b1abfef2fa3b15e672b225dacff84ed096cf",
+    "text": "Verursache {{value0}} Schaden vom Typ <keyword0>Physisch</keyword0> bei allen Gegnern"
+  },
   "content.card.orifable-createFood.name": {
     "reviewed": true,
     "source": "Care Package",
@@ -2218,6 +2230,12 @@
     "source": "Reed Rush",
     "sourceHash": "9d83848a9596e611dcd25f266b9e110aa19a7e55b474da211397d721fafd7807",
     "text": "Schilfansturm"
+  },
+  "content.card.reedstag-attack.vaf3db517079be41f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
+    "sourceHash": "ca56545b99904eb1076164da165be9566b1bd20d290aa7ea53bdbdad7c6aa063",
+    "text": "Verursache {{value0}} Schaden vom Typ <keyword0>Natur</keyword0>"
   },
   "content.card.reedstag-guard.name": {
     "reviewed": true,
@@ -2399,6 +2417,12 @@
     "sourceHash": "ebc24f13aa771e29d510850b970aaf7802a89b9e1c76f8857e43c6f331ff60e0",
     "text": "Himmelshirte"
   },
+  "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
+    "sourceHash": "a526ed3d47fc92ae380cd69fa095385995dea2834b342ee7a7d8e73258073b7f",
+    "text": "Verursache {{value0}} Schaden vom Typ <keyword0>Natur</keyword0> bei allen Gegnern"
+  },
   "content.card.sternshell-attack.name": {
     "reviewed": true,
     "source": "Surge Ram",
@@ -2410,6 +2434,12 @@
     "source": "Spiral Return",
     "sourceHash": "24da3cb30752408c9eb1f3d56cbecc0ac8249d1d97dd5d99de063e73e1a95c28",
     "text": "Spiralrückkehr"
+  },
+  "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
+    "sourceHash": "9499d27b8c01465de9367422e052e701ba94d6d878ef7505cdd6b65d95f88dc4",
+    "text": "Verursache {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> bei allen Gegnern"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

@@ -1877,6 +1877,12 @@
     "sourceHash": "0ec89213fa6a30a9162145ed1396d76155fd609229af6662be3e054e06e1bb81",
     "text": "プリズムの斬撃"
   },
+  "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "94f890086d7546212018deecb8877d1c6254c63a0cead4850761cb9c007727b2",
+    "text": "{{value0}}の<keyword0>光</keyword0>ダメージを与える"
+  },
   "content.card.glintstride-dodge.name": {
     "reviewed": true,
     "source": "Mirage Run",
@@ -2057,6 +2063,12 @@
     "sourceHash": "3f1d541887b2abb9cbb1b0248190d734cd9e241a61b943268c92613954c0f5f7",
     "text": "郵便の群れ"
   },
+  "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "d6d5ccf2c41e2c267c62653366516a2b45fa5918ed6e63fbc1d1497862e19fb7",
+    "text": "すべての敵に{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
+  },
   "content.card.orifable-createFood.name": {
     "reviewed": true,
     "source": "Care Package",
@@ -2218,6 +2230,12 @@
     "source": "Reed Rush",
     "sourceHash": "56947c7af5af00e88d94d9cd05b863dead0daab06d8d9cfa4b54200548da0499",
     "text": "葦の突進"
+  },
+  "content.card.reedstag-attack.vaf3db517079be41f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
+    "sourceHash": "e49aa8e6847a1356e0a0f9a49fc70ca3c09c37f1d50081f2b83580687e5e36ac",
+    "text": "{{value0}}の<keyword0>自然</keyword0>ダメージを与える"
   },
   "content.card.reedstag-guard.name": {
     "reviewed": true,
@@ -2399,6 +2417,12 @@
     "sourceHash": "3deb7d9f9fd11085a068c82e7328cf9be139642a0d405a7190454835e053f4d6",
     "text": "空の羊飼い"
   },
+  "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
+    "sourceHash": "55ee4fae9e572d88c191df3528144bb8a555ee3a3651addfab2e5b706653db03",
+    "text": "すべての敵に{{value0}}の<keyword0>自然</keyword0>ダメージを与える"
+  },
   "content.card.sternshell-attack.name": {
     "reviewed": true,
     "source": "Surge Ram",
@@ -2410,6 +2434,12 @@
     "source": "Spiral Return",
     "sourceHash": "5226f0ab4c6547036535695f07fd6ceea4ce8401e110d83ba0ffe82b31e12163",
     "text": "螺旋の帰還"
+  },
+  "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
+    "sourceHash": "30bfc7c7251a554cd8c8e845142d1c5a98fa5f9c74599cda4dc7ac7668c55c34",
+    "text": "すべての敵に{{value0}}の<keyword0>水</keyword0>ダメージを与える"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

@@ -1877,6 +1877,12 @@
     "sourceHash": "69425086da10a35ce20be8b0bbe2aacbfe47b81f7476f7562d7c3027be4df3e4",
     "text": "Призматический разрез"
   },
+  "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "d8e98bee43da2831a2c837fa55280c37e4979c2ebf5bebfd2bccd0b17503a2b4",
+    "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0>"
+  },
   "content.card.glintstride-dodge.name": {
     "reviewed": true,
     "source": "Mirage Run",
@@ -2057,6 +2063,12 @@
     "sourceHash": "59024cf9a52fad25b2b30137e9e9aae0e97b453154e31cf7b3dd0be73746baa4",
     "text": "Почтовый рой"
   },
+  "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "00cd4369084dc0cc0b2d4e3d3cf29b3ff17cfe7a18ce4618ef7d514363c2981f",
+    "text": "Нанесите всем врагам {{value0}} <keyword0>физического</keyword0> урона"
+  },
   "content.card.orifable-createFood.name": {
     "reviewed": true,
     "source": "Care Package",
@@ -2218,6 +2230,12 @@
     "source": "Reed Rush",
     "sourceHash": "8608ec1987589bfb38356ee29ab292ad5384ba2c786fc6ab325256e68bb846e1",
     "text": "Тростниковый рывок"
+  },
+  "content.card.reedstag-attack.vaf3db517079be41f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
+    "sourceHash": "e799051d0194d2ad83bae20123fa15fa21cd35afc9c5ff33c40ae9d08e371671",
+    "text": "Нанесите {{value0}} урона <keyword0>природой</keyword0>"
   },
   "content.card.reedstag-guard.name": {
     "reviewed": true,
@@ -2399,6 +2417,12 @@
     "sourceHash": "b70ac6766a274daf53f9bcf09ece8f0eb91d4dec0baad38cae502be6e2d3f92b",
     "text": "Небесный пастух"
   },
+  "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
+    "sourceHash": "294d4d0c4e2bfb94b9e73a866c6e27dc41104602ef14015fceff5e40ada7821f",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>природой</keyword0>"
+  },
   "content.card.sternshell-attack.name": {
     "reviewed": true,
     "source": "Surge Ram",
@@ -2410,6 +2434,12 @@
     "source": "Spiral Return",
     "sourceHash": "b385dba3369d81f19006f3a2bf1987d3928151aecba05694b7b4054eed2c9cdb",
     "text": "Спиральное возвращение"
+  },
+  "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
+    "sourceHash": "862cd192af14ded2b9a31f2eed7049d6b1a7068404bbbeb8ae6216b44955e0ad",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>водой</keyword0>"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,

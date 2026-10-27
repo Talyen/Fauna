@@ -1877,6 +1877,12 @@
     "sourceHash": "b1b31ce629b43461bd7e2f1cb06dc044ca9eaa3542411ef57712afdee96e78ac",
     "text": "棱镜斩"
   },
+  "content.card.glintstride-attack.vd1159d075d6fff86.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage",
+    "sourceHash": "055f4cdc32899a655aa2037dc2098ff652ad480d7f0e26a435da493b12696e24",
+    "text": "造成{{value0}}点<keyword0>光</keyword0>伤害"
+  },
   "content.card.glintstride-dodge.name": {
     "reviewed": true,
     "source": "Mirage Run",
@@ -2057,6 +2063,12 @@
     "sourceHash": "ec6f42dbbcbc1183241e6ed189807e7f14afd2deb9df436fc0d6d5935f41e5c8",
     "text": "邮递群舞"
   },
+  "content.card.orifable-attack.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "b010fceda30973c10fc722e9856465ee2a7d4baf8bf5f5bed6daf0c48ad187c4",
+    "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害"
+  },
   "content.card.orifable-createFood.name": {
     "reviewed": true,
     "source": "Care Package",
@@ -2218,6 +2230,12 @@
     "source": "Reed Rush",
     "sourceHash": "00d78a28337f8a954f512fe86076e1cefaa1fbd242eddabcf036dbdc26605f59",
     "text": "芦苇冲刺"
+  },
+  "content.card.reedstag-attack.vaf3db517079be41f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage",
+    "sourceHash": "131fe7393623d4ad1d8e7e2ce2268a2bf522f3f036f300f2d7647f188c70a4fc",
+    "text": "造成{{value0}}点<keyword0>自然</keyword0>伤害"
   },
   "content.card.reedstag-guard.name": {
     "reviewed": true,
@@ -2399,6 +2417,12 @@
     "sourceHash": "abe53912d8f9e51512ae37b52c149c65bf3aac1724698babe7fc569ff57e4ad0",
     "text": "天空牧者"
   },
+  "content.card.skybex-sky-shepherd.vb3a8f84dba755ea3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage to all enemies",
+    "sourceHash": "cc7753726489c64ce4570dfef658fb841936f221b203ea7107a69752a141d1dd",
+    "text": "对所有敌人造成{{value0}}点<keyword0>自然</keyword0>伤害"
+  },
   "content.card.sternshell-attack.name": {
     "reviewed": true,
     "source": "Surge Ram",
@@ -2410,6 +2434,12 @@
     "source": "Spiral Return",
     "sourceHash": "4694a0aa4ef1f65711ee9333fbf10895c8d375e8a6b190f21df6932dd1a6d2d3",
     "text": "螺旋归返"
+  },
+  "content.card.sternshell-spiral-return.v092733ae252309d9.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage to all enemies",
+    "sourceHash": "57ffb07997cde149b98bc1663b3bbe172d09b742d9606851c1d276c67723c546",
+    "text": "对所有敌人造成{{value0}}点<keyword0>水</keyword0>伤害"
   },
   "content.card.sternshell-swap.name": {
     "reviewed": true,
