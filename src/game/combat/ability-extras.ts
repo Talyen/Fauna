@@ -26,6 +26,7 @@ interface ExtraOptions {
   criticalBonus?: number;
   oasisLeech?: boolean;
   recipientOnly?: boolean;
+  attackTargetOnly?: boolean;
   negated?: ReadonlySet<string>;
   sharedNegate?: import("./policy").SharedNegate;
 }
@@ -43,6 +44,7 @@ export function applyExtras(
   let cardLeech: boolean | undefined;
   for (const effect of abilityExtras(def, power)) {
     if (recipientOnly !== (supplementalRule(effect.kind).delivery(effect) === "recipient")) continue;
+    if (options.attackTargetOnly && effect.kind !== "damage" && effect.kind !== "purge") continue;
     if (actor.health <= 0) break;
     switch (effect.kind) {
       case "damage":
@@ -53,7 +55,13 @@ export function applyExtras(
             blindMiss,
             cannotDodge: options.cannotDodge,
             criticalBonus,
-            leech: effect.leech || options.oasisLeech,
+            leech:
+              effect.leech ||
+              options.oasisLeech ||
+              (!enemy &&
+                effect.damageType === "water" &&
+                actor.block > 0 &&
+                state.boons.includes("lagoon-chalice")),
             cardLeech: (cardLeech ??=
               def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech) || false),
             sharedNegate: options.sharedNegate,

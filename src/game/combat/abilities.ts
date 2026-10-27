@@ -95,6 +95,14 @@ export function executeAbility(
         : 0;
     const cannotDodge = play > 0 && !enemy && state.boons.includes("aether-gramophone");
     const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) && !cannotDodge : false;
+    const additionalTarget =
+      play > 0 &&
+      !enemy &&
+      def.effect === "attack" &&
+      def.target !== "allEnemies" &&
+      state.boons.includes("cadence-panpipes")
+        ? alive(opposingRow(state, action)).find((unit) => unit.id !== target?.id)
+        : undefined;
     const primary = executePrimary({
       state,
       action,
@@ -108,6 +116,7 @@ export function executeAbility(
       cannotDodge,
       criticalBonus,
       oasisLeech,
+      additionalTarget,
     });
     applyExtras(state, action, events, {
       target: primary ? primary.attackTarget : target,
@@ -118,5 +127,16 @@ export function executeAbility(
       negated: primary?.negated,
       sharedNegate: primary?.sharedNegate,
     });
+    if (primary?.extraAttackTarget && actor.health > 0)
+      applyExtras(state, action, events, {
+        target: primary.extraAttackTarget,
+        blindMiss,
+        cannotDodge,
+        criticalBonus,
+        oasisLeech,
+        negated: primary.negated,
+        sharedNegate: primary.sharedNegate,
+        attackTargetOnly: true,
+      });
   }
 }

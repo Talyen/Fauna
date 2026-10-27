@@ -324,6 +324,7 @@ export function* resolveHit(
   const stats = ensureCombat(target),
     before = target.health;
   const hadArmor = stats.armor > 0;
+  const wasStunned = stats.controlled === "stun";
   const depletions: ArmorDepletion[] = [];
   const erode = (amount: number) => {
     const { depletion } = removeArmor(target, amount);
@@ -567,7 +568,15 @@ export function* resolveHit(
       state,
       source,
       target,
-      effectDamage,
+      effectDamage *
+        (attack &&
+        alliedSource &&
+        !alliedTarget &&
+        type === "burn" &&
+        blocked > 0 &&
+        state.boons.includes("chestnut-roaster")
+          ? boonRule("chestnut-roaster").multiplier
+          : 1),
       type,
       events,
       {
@@ -607,6 +616,21 @@ export function* resolveHit(
   }
   if (!policy.buildup && effectDamage > 0) yield* poisonStun(context, effectDamage);
   yield* boonHitFollowups(state, source, target, type, events, options, attack);
+  if (
+    direct &&
+    alliedSource &&
+    !alliedTarget &&
+    type === "stun" &&
+    wasStunned &&
+    source.health > 0 &&
+    state.boons.includes("acorn-skittle")
+  ) {
+    const other = battlefield(state, "enemy").find((enemy) => enemy.id !== target.id && enemy.health > 0);
+    if (other)
+      yield* reaction("hit", state, source, other, boonRule("acorn-skittle").damage, "stun", events, {
+        origin: "boon",
+      });
+  }
   if (
     criticalBonusDamage > 0 &&
     alliedSource &&

@@ -145,7 +145,11 @@ export function hasHarmfulEffects(unit: Combatant): boolean {
   return !!stats && (!!stats.controlled || harmfulStatuses.some((status) => Number(stats[status]) > 0));
 }
 export function ownDodgeChance(state: GameState, unit: Combatant): number {
-  if (unit.health <= 0 || unit.combat?.controlled) return 0;
+  if (
+    unit.health <= 0 ||
+    (unit.combat?.controlled && (isEnemy(unit) || !state.boons.includes("quiet-pinwheel")))
+  )
+    return 0;
   const allied = !isEnemy(unit);
   const stats = unit.combat;
   if (!allied && (stats?.poison ?? 0) > 0 && hasTalent(state, "poison.torpor")) return 0;

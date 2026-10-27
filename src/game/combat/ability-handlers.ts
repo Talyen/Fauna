@@ -48,6 +48,7 @@ export function executePrimary(context: PrimaryContext) {
     cannotDodge,
     criticalBonus,
     oasisLeech,
+    additionalTarget,
     name,
     stats,
     operations,
@@ -83,14 +84,18 @@ export function executePrimary(context: PrimaryContext) {
         def.target === "allEnemies"
           ? alive(opposingRow(state, action))
           : target && target.health > 0
-            ? [target]
+            ? [target, ...(additionalTarget && additionalTarget.health > 0 ? [additionalTarget] : [])]
             : [];
+      let extraAttackTarget: Combatant | undefined;
       const sharedNegate = shareNegate(state, actor, targets, blindMiss);
       for (const intended of targets) {
         if (actor.health <= 0) break;
         if (isDepartedMinion(state, intended)) continue;
         const recipient = blindMiss ? intended : interceptAttack(state, actor, intended, events);
-        if (def.target !== "allEnemies") attackTarget = recipient;
+        if (def.target !== "allEnemies") {
+          if (intended.id === target?.id) attackTarget = recipient;
+          else extraAttackTarget = recipient;
+        }
         const negation =
           !blindMiss && negateAttack(state, actor, recipient, events, true, damageType, sharedNegate);
         if (negation === "negated") {
@@ -120,7 +125,14 @@ export function executePrimary(context: PrimaryContext) {
             blindMiss: reflected ? false : blindMiss,
             cannotDodge: !reflected && cannotDodge,
             criticalBonus,
-            leech: def.leech || (!reflected && oasisLeech),
+            leech:
+              def.leech ||
+              (!reflected &&
+                (oasisLeech ||
+                  (action.side === "player" &&
+                    damageType === "water" &&
+                    actor.block > 0 &&
+                    state.boons.includes("lagoon-chalice")))),
             cardLeech: keywords.includes("leech"),
             sharedNegate: reflected ? undefined : sharedNegate,
           },
@@ -128,7 +140,7 @@ export function executePrimary(context: PrimaryContext) {
         if (reflected) reflectExtras(state, action, recipient, events, power);
       }
       if (action.side === "player") action.actor.attacked = true;
-      return { attackTarget, negated, sharedNegate };
+      return { attackTarget, extraAttackTarget, negated, sharedNegate };
     }
     case "guard": {
       const targets =

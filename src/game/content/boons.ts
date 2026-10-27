@@ -5,6 +5,16 @@ function boon<const Id extends Parameters<typeof boonRule>[0]>(entry: { id: Id; 
   return { ...entry, text: boonRule(entry.id).text };
 }
 export const BOONS = [
+  boon({ id: "quiet-pinwheel", name: "Quiet Pinwheel" }),
+  boon({ id: "lagoon-chalice", name: "Lagoon Chalice" }),
+  boon({ id: "acorn-skittle", name: "Acorn Skittle" }),
+  boon({ id: "wonder-kaleidoscope", name: "Wonder Kaleidoscope" }),
+  boon({ id: "welcome-doormat", name: "Welcome Doormat" }),
+  boon({ id: "shelter-lantern", name: "Shelter Lantern" }),
+  boon({ id: "chestnut-roaster", name: "Chestnut Roaster" }),
+  boon({ id: "chamomile-compress", name: "Chamomile Compress" }),
+  boon({ id: "cadence-panpipes", name: "Cadence Panpipes" }),
+  boon({ id: "hearthcap-kettle", name: "Hearthcap Kettle" }),
   boon({ id: "caravan-rug", name: "Caravan Rug" }),
   boon({ id: "folded-mountain", name: "Folded Mountain" }),
   boon({ id: "apple-press", name: "Apple Press" }),

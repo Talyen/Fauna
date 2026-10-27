@@ -36,6 +36,7 @@ export function* restoreHealth(
   if (!options.adjusted) amount = healingValue(state, unit, amount);
   if (unit.health === 0 && !revive) return;
   const { gain, excess } = restoration(unit, amount);
+  const bleedAtRestoration = unit.combat?.bleed ?? 0;
   unit.health += gain;
   if (cardHealing && state && !isEnemy(unit) && excess > 0) {
     if (hasTalent(state, "health.overflow"))
@@ -76,6 +77,8 @@ export function* restoreHealth(
             events,
           );
     }
+    if (bleedAtRestoration > 0 && state.boons.includes("chamomile-compress"))
+      yield* reaction("grantBlock", state, unit, bleedAtRestoration, events);
     if (stats.bleed > 0 && state.boons.includes("yarrow-salve-tin"))
       yield* reaction("removeEffects", unit, "cleanse", 1, events, state, "bleed", source);
     if (source && !isEnemy(source) && source.health > 0 && state.boons.includes("grafting-needle")) {

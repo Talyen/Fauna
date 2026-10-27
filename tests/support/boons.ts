@@ -1,5 +1,15 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "quiet-pinwheel": "Allies can Dodge while Stunned or Frozen",
+  "lagoon-chalice": "Water attacks have Leech while you have Block",
+  "acorn-skittle": "Stun hits on Stunned enemies also deal 2 Stun damage to another enemy",
+  "wonder-kaleidoscope": "Blind reflected by allies also Blinds all other enemies",
+  "welcome-doormat": "Swapping allies share Nullify",
+  "shelter-lantern": "Block protects allies’ other effects from Purge",
+  "chestnut-roaster": "Burn hits apply twice as much Burn to enemies with Block",
+  "chamomile-compress": "Restoring an ally’s Health grants them Block equal to their Bleed",
+  "cadence-panpipes": "Repeated attacks also hit another enemy",
+  "hearthcap-kettle": "Playing Food Cleanses an effect from the most injured ally",
   "caravan-rug": "Block does not decay on backup allies",
   "folded-mountain": "Armor prevents Freeze buildup",
   "apple-press": "Enemy Bleed deals damage when they gain Block",

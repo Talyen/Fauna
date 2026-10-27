@@ -2,7 +2,7 @@ import { forEachPermanentCard } from "./card-kit";
 import { battlefield, isRosterCreature } from "./battlefield";
 import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
-import { grantArmor, grantBlock, restoreHealth, removeEffects, hit } from "./combat/index";
+import { grantArmor, grantBlock, restoreHealth, removeEffects, hit, ensureCombat } from "./combat/index";
 import { boonRule } from "./rules/boons";
 import { unitName, type Combatant } from "./combat/state";
 import { passiveAmount } from "./progression";
@@ -74,6 +74,32 @@ export function matchSwapBlock(state: GameState, first: Combatant, second: Comba
       targetId: unit.id,
       amount: gained,
       text: `${unitName(unit)} keeps ${higher} Block with Tide Anklet`,
+    });
+  }
+}
+export function shareSwapNullify(state: GameState, first: Combatant, second: Combatant, events: GameEvent[]) {
+  if (
+    state.phase !== "battle" ||
+    first.health <= 0 ||
+    second.health <= 0 ||
+    !state.boons.includes("welcome-doormat")
+  )
+    return;
+  const a = ensureCombat(first),
+    b = ensureCombat(second);
+  if (!a.nullify && !b.nullify) return;
+  for (const [unit, stats] of [
+    [first, a],
+    [second, b],
+  ] as const) {
+    if (stats.nullify) continue;
+    stats.nullify = true;
+    events.push({
+      kind: "status",
+      status: "nullify",
+      outcome: "apply",
+      targetId: unit.id,
+      text: `${unitName(unit)} gains Nullify`,
     });
   }
 }
@@ -340,6 +366,7 @@ export function swapBackup(
       events,
     );
     matchSwapBlock(state, outgoing, incoming, events);
+    shareSwapNullify(state, outgoing, incoming, events);
     if (state.boons.includes("rook-of-mercy"))
       rookOfMercy(
         state,
@@ -383,6 +410,7 @@ export function swapFromCard(
     cleanseDeparture(state, actor, events);
     farewellOar(state, [actor, other], events);
     matchSwapBlock(state, actor, other, events);
+    shareSwapNullify(state, actor, other, events);
     rookOfMercy(state, [actor, other], events);
   }
   events.push({

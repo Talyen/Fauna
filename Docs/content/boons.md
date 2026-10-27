@@ -165,3 +165,18 @@ The October 26 approved additions use the ordinary unowned Merchant and Boss rew
 - **Ashfall Pendant:** Enemy Burn lost to ordinary decay removes the same amount of remaining Block, capped at that Block. This removal is not attack damage or Purge and does not trigger Block-break rewards; Cinder Fan still uses the same decayed Burn
 - **Wishing Building Block:** An actual allied Armor gain grants 1 Block to every other living deployed ally already holding Armor. The recipient uses ordinary Block gain and sharing; capped Armor grants and undeployed providers do not trigger it
 - **Sovereign Toast Rack:** Each accepted Food play grants 2 Armor to every living deployed ally, including Minions, after Food effects. Food repeats do not grant additional Armor; the grant uses ordinary Armor modifiers and gain reactions
+
+## Hearth and cadence Boons
+
+These Boons use the ordinary reward pools and their portraits from the user-selected Drive collection. Rules and values remain in the Boon rule owner. Their combat interactions use the following contracts:
+
+- **Quiet Pinwheel:** Living controlled allies retain their ordinary Dodge chance and sharing; enemy control and Blind misses keep their normal rules
+- **Lagoon Chalice:** Allied Water ability attacks and authored Water damage extras Leech when their attacker has Block; reflected enemy attacks retain their own rules
+- **Acorn Skittle:** A landed allied Stun attack against an already Stunned enemy deals 2 Stun damage to the first other living enemy, with ordinary status defenses; the extra damage cannot chain
+- **Wonder Kaleidoscope:** Allied Blind reflection also applies Blind to every other living enemy, respecting Nullify without further reflection
+- **Welcome Doormat:** Ability swaps copy an existing Nullify between their living participants without consuming it; replacements do not qualify
+- **Shelter Lantern:** Allied Block at the start of Purge protects other effects for that entire Purge application; the Purge can still remove Block
+- **Chestnut Roaster:** A landed allied Burn hit that encounters enemy Block applies twice the normal Burn buildup; the original damage is unchanged
+- **Chamomile Compress:** Actual allied Health restoration grants Block equal to Bleed at restoration, before a subsequent Cleanse can remove it; overhealing alone does not qualify
+- **Cadence Panpipes:** A repeated single-target attack additionally hits the first other living enemy; its target-directed damage and Purge follow the attack, while self-directed and group effects are not duplicated. Area attacks gain no extra target; Dream Tangram can still continue the repeat after a defeat
+- **Hearthcap Kettle:** Each accepted Food play Cleanses one effect from the living deployed ally with the lowest Health fraction after Food and its repeat; ordinary Cleanse propagation and rewards apply

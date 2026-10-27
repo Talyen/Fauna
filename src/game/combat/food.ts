@@ -8,7 +8,15 @@ import { species, type CardDefinition } from "../content";
 import { receiveCard } from "../card-zones";
 import { roll } from "../random";
 import { passiveAmount } from "../progression";
-import { gainMana, grantArmor, grantBlock, restoreHealth, grantTemporaryDodge } from "./index";
+import {
+  gainMana,
+  grantArmor,
+  grantBlock,
+  restoreHealth,
+  grantTemporaryDodge,
+  removeEffects,
+  mostInjured,
+} from "./index";
 import { battlefield, livingBattlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import type { BattleState, Creature, GameEvent } from "../types";
 
@@ -101,6 +109,10 @@ export function useFood(
           grantTemporaryDodge(target, boonRule("velvet-whisk").dodge, events);
       }
     }
+  }
+  if (state.boons.includes("hearthcap-kettle")) {
+    const ally = mostInjured(livingBattlefield(state, "player"));
+    if (ally) removeEffects(ally, "cleanse", boonRule("hearthcap-kettle").cleanse, events, state);
   }
   if (state.boons.includes("sovereign-toast-rack"))
     for (const ally of battlefield(state, "player"))

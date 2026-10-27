@@ -41,6 +41,26 @@ function boonScorer(
     cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
   return (boon: BoonId): number => {
     switch (boon) {
+      case "quiet-pinwheel":
+        return has.has("dodge") ? 60 : 30;
+      case "lagoon-chalice":
+        return has.has("water") && has.has("block") ? 60 : 0;
+      case "acorn-skittle":
+        return has.has("stun") ? 60 : 0;
+      case "wonder-kaleidoscope":
+        return cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")) ? 50 : 0;
+      case "welcome-doormat":
+        return swapping ? 50 : 0;
+      case "shelter-lantern":
+        return has.has("block") ? 50 : 0;
+      case "chestnut-roaster":
+        return has.has("burn") ? 60 : 0;
+      case "chamomile-compress":
+        return healing ? 50 : 0;
+      case "cadence-panpipes":
+        return has.has("attack") ? 50 : 0;
+      case "hearthcap-kettle":
+        return effect("createFood") || kinds.includes("aerostat") ? 60 : 0;
       case "caravan-rug":
         return has.has("block") && hasLivingBackup() ? 60 : 0;
       case "folded-mountain":
