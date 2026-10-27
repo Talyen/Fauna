@@ -2573,6 +2573,12 @@
     "sourceHash": "9f40d39e1b26c040233fe2eac9d7e348f0d4e3f1661547c56380e3aaaf6acda2",
     "text": "抽牌 / 弃牌"
   },
+  "content.glossary.echo.definition.rule": {
+    "reviewed": true,
+    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "14d2bfac40c96a1431aa39b2579e3c8460de2ebda22fcac4aad5771666d42c77",
+    "text": "梅门托的召唤物; 卡牌升级前拥有{{value0}}点<keyword0>生命</keyword0>; 只能通过宫廷铭记攻击; 最多可召唤两个"
+  },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
     "source": "Echo",
@@ -2729,11 +2735,23 @@
     "sourceHash": "31a939b5ec9df4c7e61f866dec2a2ba7caa1a4ce146be930017be72920411e4f",
     "text": "击倒"
   },
+  "content.glossary.legendary.definition.rule": {
+    "reviewed": true,
+    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+    "sourceHash": "3f5ccb38fcca5a8cc70723057183889fc661d09236db3cc0fd4d1107e24dfc3f",
+    "text": "单独上场的生物; 作为敌人时只出现在首领遭遇中; 可以正常招募; 每项技能各向牌组加入两张副本"
+  },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
     "source": "Legendary",
     "sourceHash": "99f528a21f579793bb24b73eaa55320bf6bc4cb730f813689b4d5f0f2551c17f",
     "text": "传奇"
+  },
+  "content.glossary.minion.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+    "sourceHash": "0315a5d96263d2971cfb1ea41603a86f00261f43e885fb90b21a02744940719a",
+    "text": "仅在战斗中存在的召唤物，拥有自己的<keyword0>生命</keyword0>; 没有卡牌，也不占队伍名额; 召唤者倒下或离场时消失"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,

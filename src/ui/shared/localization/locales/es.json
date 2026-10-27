@@ -2573,6 +2573,12 @@
     "sourceHash": "f7da30425ed9066cd26594aa79b3922a7d56295cf08216d8875042c1cede9dea",
     "text": "Robo / descarte"
   },
+  "content.glossary.echo.definition.rule": {
+    "reviewed": true,
+    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "ac5f094372ca9f8ff775a1335dcb9a9ae3fee6679d84c809aead56ba6a618b02",
+    "text": "Esbirro de Memento; Tiene {{value0}} de <keyword0>Salud</keyword0> antes de las mejoras de carta; Solo ataca mediante La corte recuerda; Se pueden invocar hasta dos"
+  },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
     "source": "Echo",
@@ -2729,11 +2735,23 @@
     "sourceHash": "c4382a83f952c1d2f85058fd175f4a32672880c17886edb036c8dd18b0f27e4e",
     "text": "Fuera de combate"
   },
+  "content.glossary.legendary.definition.rule": {
+    "reviewed": true,
+    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+    "sourceHash": "8203773ceb9d6aafe0312c53de51c40120401f5756da6af4f74ae5794c1b91dc",
+    "text": "Una criatura desplegada sola; Solo aparece como enemiga en encuentros de jefe; Puede reclutarse normalmente; Añade dos copias de cada habilidad a tu mazo"
+  },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
     "source": "Legendary",
     "sourceHash": "e18657ac61181836be93768a2fae81775b42bb78258802bfba802ebf1398f265",
     "text": "Legendaria"
+  },
+  "content.glossary.minion.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+    "sourceHash": "82a6f3f61a07825662af5c72617150f7564c56ce72dfe39deeb2e8bb72052c62",
+    "text": "Una invocación solo para el combate con su propia <keyword0>Salud</keyword0>; No tiene cartas ni espacio en el equipo; Desaparece cuando su invocador cae o abandona el campo"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,

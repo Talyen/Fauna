@@ -2573,6 +2573,12 @@
     "sourceHash": "82e6c309927c88e95b17b1ad92d2a2f5285ba4dbcf86ec53612c82b1ebf79e98",
     "text": "ドロー / 捨て札"
   },
+  "content.glossary.echo.definition.rule": {
+    "reviewed": true,
+    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "d84c1376a17a486b2062d11c10e5ab322e4884a610721f871719d050e9e6a399",
+    "text": "メメントのミニオン; カード強化前の<keyword0>体力</keyword0>は{{value0}}; 宮廷は覚えているによってのみ攻撃する; 最大2体まで召喚できる"
+  },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
     "source": "Echo",
@@ -2729,11 +2735,23 @@
     "sourceHash": "508cdd6d341755846a4c606017cc9a74f5254bc7b27fb39588b91919dbfb23b5",
     "text": "戦闘不能"
   },
+  "content.glossary.legendary.definition.rule": {
+    "reviewed": true,
+    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+    "sourceHash": "1252d1bde9c0dcf48670d6bffc7a0b5adb1cef6b964b1c98ecb45a5b686d70e5",
+    "text": "単独で出撃するクリーチャー; 敵としてはボス戦にのみ登場する; 通常どおり仲間にできる; 各能力のカードを2枚ずつデッキに加える"
+  },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
     "source": "Legendary",
     "sourceHash": "743003abd109ee81332954f7da3ee23710d664154cb827e7536db5dba6a41b2d",
     "text": "レジェンダリー"
+  },
+  "content.glossary.minion.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+    "sourceHash": "f1a2cb2b355aed75e0501a5b202e5e3f498d25452377b5608466b02b73fb292a",
+    "text": "戦闘中のみ召喚され、独自の<keyword0>体力</keyword0>を持つ; カードも編成枠も持たない; 召喚者が倒れるか場を離れると消える"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,

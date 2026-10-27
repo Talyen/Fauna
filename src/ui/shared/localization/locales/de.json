@@ -2573,6 +2573,12 @@
     "sourceHash": "3400d55105771797d44c9d6807456fc113e4022c8a0df79ceca535f93ad6b68d",
     "text": "Nachziehen / Ablegen"
   },
+  "content.glossary.echo.definition.rule": {
+    "reviewed": true,
+    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "eadf10777959cfa4676381df257d1883e4710c99e8ff41bbb9fd3f65afcb3444",
+    "text": "Mementos Diener; Hat vor Kartenaufwertungen {{value0}} <keyword0>Gesundheit</keyword0>; Greift nur durch Der Hof erinnert sich an; Bis zu zwei können beschworen werden"
+  },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
     "source": "Echo",
@@ -2729,11 +2735,23 @@
     "sourceHash": "842b9ac328d40462daa40440e2886e2ebb1b3a78a26ebe9a7794019462268596",
     "text": "K. o."
   },
+  "content.glossary.legendary.definition.rule": {
+    "reviewed": true,
+    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+    "sourceHash": "b6418704612e1333e7229a035e19c9288733985b80fdc146ae900b3d07a29176",
+    "text": "Eine Kreatur, die allein eingesetzt wird; Erscheint als Gegner nur in Bossbegegnungen; Kann normal rekrutiert werden; Fügt deinem Deck zwei Kopien jeder Fähigkeit hinzu"
+  },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
     "source": "Legendary",
     "sourceHash": "b9b170aaf69e0ebc04df96da35d5d5cebcce8481705533e435371eca7f94216b",
     "text": "Legendär"
+  },
+  "content.glossary.minion.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+    "sourceHash": "299fa8fa81461532bb2427ce948d998c5d15d1a3bfbe15502ea353b451228e01",
+    "text": "Eine nur im Kampf beschworene Einheit mit eigener <keyword0>Gesundheit</keyword0>; Hat keine Karten und keinen Kaderplatz; Verschwindet, wenn ihr Beschwörer fällt oder das Feld verlässt"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,

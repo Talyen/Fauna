@@ -2573,6 +2573,12 @@
     "sourceHash": "46cda6db57a1f5b565f108c5a07f0bc56e8df00151d26e3c61d2d569d159d90b",
     "text": "Добор / сброс"
   },
+  "content.glossary.echo.definition.rule": {
+    "reviewed": true,
+    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "d829c904952b62780fc3605f2632e914b32f301f813c2035714103c7c279f7dc",
+    "text": "Прислужник Мементо; Имеет {{value0}} <keyword0>здоровья</keyword0> до улучшения карт; Атакует только через «Двор помнит»; Можно призвать не более двух"
+  },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
     "source": "Echo",
@@ -2729,11 +2735,23 @@
     "sourceHash": "a7e8cbbbab304eb7e8a333343c9f79dbf8f4175ecb162c069c56d3d1cb52b0c3",
     "text": "Нокаут"
   },
+  "content.glossary.legendary.definition.rule": {
+    "reviewed": true,
+    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+    "sourceHash": "a0ea500cbd7d8e25c920dff0ce8ba121e35aaef9fba21dbd9a118122dfef53ab",
+    "text": "Существо, выступающее в одиночку; В качестве врага появляется только в битвах с боссом; Может быть завербовано обычным способом; Добавляет в колоду по две копии каждой способности"
+  },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
     "source": "Legendary",
     "sourceHash": "2e04e1a4848fc84686d6c92b89d768ce90d9a2b65fe670d788cb0e9811d595f2",
     "text": "Легендарное существо"
+  },
+  "content.glossary.minion.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+    "sourceHash": "0b3619fcdda1e0a9a50874ddff3bdc08b211a16aa32852522eef6ad361a2b3fd",
+    "text": "Призыв только на время боя с собственным <keyword0>здоровьем</keyword0>; Не имеет карт и не занимает место в составе; Исчезает, когда призыватель падает или покидает поле"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,

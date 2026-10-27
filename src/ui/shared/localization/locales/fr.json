@@ -2585,6 +2585,12 @@
     "sourceHash": "c6213e8fbdac462d02c5b9db074f0b35344f5751bf20fdf1a178759650a0534a",
     "text": "Pioche / défausse"
   },
+  "content.glossary.echo.definition.rule": {
+    "reviewed": true,
+    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "43724e7882e654f22408f714880839e7630b6fa985724caa38d9a3a67e7106b5",
+    "text": "Serviteur de Memento; Possède {{value0}} <keyword0>Santé</keyword0> avant les améliorations de carte; Attaque uniquement par La cour se souvient; Deux peuvent être invoqués au maximum"
+  },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
     "source": "Echo",
@@ -2741,11 +2747,23 @@
     "sourceHash": "56a3d098511d0c50c6f6a60e2fa1c27997f024d6e0d23111356753eaae51deac",
     "text": "K.-O."
   },
+  "content.glossary.legendary.definition.rule": {
+    "reviewed": true,
+    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+    "sourceHash": "13f338a0d48e792629b4ed3587b1d528a887fd521bed22775437a6b5c6141e7b",
+    "text": "Une créature déployée seule; N’apparaît comme ennemie que lors des combats de boss; Peut être recrutée normalement; Ajoute deux copies de chaque capacité à votre paquet"
+  },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
     "source": "Legendary",
     "sourceHash": "170db689a9f0f3b9ac2dfa2f984644fefd542d0481128de93628ef9c18cabda3",
     "text": "Légendaire"
+  },
+  "content.glossary.minion.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+    "sourceHash": "94d5558154065def55548f549b75a3b1a8a9922b2dc43133cdccd13d47236115",
+    "text": "Une invocation propre au combat avec sa propre <keyword0>Santé</keyword0>; N’a ni cartes ni place dans l’équipe; Disparaît si son invocateur tombe ou quitte le terrain"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,

@@ -2573,6 +2573,12 @@
     "sourceHash": "33fe05890b742762492427232765a5266922ddc2d38733e80480ca0c7fb7ff37",
     "text": "Compra / descarte"
   },
+  "content.glossary.echo.definition.rule": {
+    "reviewed": true,
+    "source": "Memento's Minion; Has {{value0}} <keyword0>Health</keyword0> before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+    "sourceHash": "f0227b4e5f5fc075bbc5998ce8d518bfa694252513e94179107dbd36c3b5c892",
+    "text": "Lacaio de Memento; Tem {{value0}} de <keyword0>Saúde</keyword0> antes das melhorias de carta; Ataca apenas por A corte se lembra; Até dois podem ser invocados"
+  },
   "content.glossary.echo.term.rule": {
     "reviewed": true,
     "source": "Echo",
@@ -2729,11 +2735,23 @@
     "sourceHash": "293998d06373d9598c43d82f0abdb6ca038fef1a0a4cfa41147282f78e1a2613",
     "text": "Nocaute"
   },
+  "content.glossary.legendary.definition.rule": {
+    "reviewed": true,
+    "source": "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+    "sourceHash": "d57effd653eff18d4e2eb2bb432bdb843070c4bb0c40c30faf9ba05d5ab7da52",
+    "text": "Uma criatura colocada em campo sozinha; Aparece como inimiga apenas em encontros de chefe; Pode ser recrutada normalmente; Adiciona duas cópias de cada habilidade ao seu baralho"
+  },
   "content.glossary.legendary.term.rule": {
     "reviewed": true,
     "source": "Legendary",
     "sourceHash": "96d76bbdd211a00ec98a35262a7356f873060b44ccb9c6eba814ae06b065c033",
     "text": "Lendária"
+  },
+  "content.glossary.minion.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only summon with its own <keyword0>Health</keyword0>; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+    "sourceHash": "cb02b816a46c0db1f7f4910d80d337ef77d55bfabcbcaaae582faaa5dbb54484",
+    "text": "Uma invocação exclusiva do combate com sua própria <keyword0>Saúde</keyword0>; Não tem cartas nem ocupa espaço no elenco; Desaparece quando seu invocador cai ou deixa o campo"
   },
   "content.glossary.minion.term.rule": {
     "reviewed": true,
