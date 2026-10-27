@@ -3359,6 +3359,12 @@
     "sourceHash": "82a7b8a71fb798835282b9247a2dfeef000934c3334afa818a6020bae3f30419",
     "text": "白紙の状態"
   },
+  "content.talent.health.clean-slate.rule": {
+    "reviewed": true,
+    "source": "When a card restores <keyword0>Health</keyword0> beyond your maximum, <keyword1>cleanse</keyword1> a harmful status effect",
+    "sourceHash": "8603df152656e9fe6968784a0b665ce28cc43d3799554483fc1407784dc37a17",
+    "text": "カードによる<keyword0>体力</keyword0>回復が最大値を超えると、害のある状態効果を1つ<keyword1>浄化</keyword1>"
+  },
   "content.talent.health.combat-surge.name": {
     "reviewed": true,
     "source": "Combat Surge",
@@ -3401,11 +3407,23 @@
     "sourceHash": "26a2b0606e98250d2fac5633825c2cf4c25f3b661290dd1153421c8d25a885f9",
     "text": "最後の手段"
   },
+  "content.talent.health.last-resort.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below {{value0}}%, <keyword1>cleanse</keyword1> all harmful status effects",
+    "sourceHash": "6eb7cde11c26fb391dfc946f5617d32154d9cb1feeb7823b58dc4253be09c013",
+    "text": "<keyword0>体力</keyword0>が{{value0}}%を下回ると、害のある状態効果をすべて<keyword1>浄化</keyword1>"
+  },
   "content.talent.health.mending.name": {
     "reviewed": true,
     "source": "Mending",
     "sourceHash": "ed5e3f740ff946d776e5ad92bafd856fb607ac675cf6fd711eda0cc21ec35826",
     "text": "癒やし"
+  },
+  "content.talent.health.mending.rule": {
+    "reviewed": true,
+    "source": "Receive {{value0}}% more <keyword0>healing</keyword0> during combat",
+    "sourceHash": "472e0139221d71c31b07acfa22d7375565b219b10044b5b7292149ecef680a03",
+    "text": "戦闘中に受ける<keyword0>回復</keyword0>量が{{value0}}%増加"
   },
   "content.talent.health.overflow.name": {
     "reviewed": true,
@@ -3413,11 +3431,23 @@
     "sourceHash": "f40500895d21d6b737d22f3d43aa6306b51c7118e7ba68d2f76ff9a1acfa0241",
     "text": "溢れ出る力"
   },
+  "content.talent.health.overflow.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% of excess <keyword0>healing</keyword0> from cards as <keyword1>Block</keyword1>",
+    "sourceHash": "b20b060a816733a9af3232d30bd9103c5281d243cdaff449cbdb1d4a2bc4d83e",
+    "text": "カードによる<keyword0>回復</keyword0>の超過分の{{value0}}%を<keyword1>ブロック</keyword1>として獲得"
+  },
   "content.talent.health.renewal.name": {
     "reviewed": true,
     "source": "Renewal",
     "sourceHash": "e4cfd8903038b281941865fa0a19644f3e578eb1eeed2980551f0745fdbe039d",
     "text": "新生"
+  },
+  "content.talent.health.renewal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> a harmful status restores {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "45ae9863492e520f4c946aa09b1f99e25fd6725a790ead5b85778936214c5388",
+    "text": "害のある状態効果を<keyword0>浄化</keyword0>すると<keyword1>体力</keyword1>を{{value0}}回復"
   },
   "content.talent.health.vitality.name": {
     "reviewed": true,

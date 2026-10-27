@@ -3359,6 +3359,12 @@
     "sourceHash": "41d28c48381a2273bbae2a3d91d88a0971c22944b0ced670557c95e84d5b0af7",
     "text": "Чистый лист"
   },
+  "content.talent.health.clean-slate.rule": {
+    "reviewed": true,
+    "source": "When a card restores <keyword0>Health</keyword0> beyond your maximum, <keyword1>cleanse</keyword1> a harmful status effect",
+    "sourceHash": "0b51fe9de8980c07e2f2ac49cbd93ab996ce4bbd4639a3706b459868514af107",
+    "text": "Когда карта восстанавливает <keyword0>здоровье</keyword0> сверх максимума, <keyword1>очистите</keyword1> один вредный эффект"
+  },
   "content.talent.health.combat-surge.name": {
     "reviewed": true,
     "source": "Combat Surge",
@@ -3401,11 +3407,23 @@
     "sourceHash": "fa326469713b03625b27373760704a583aa690329039b51660418ca95d7c8688",
     "text": "Последнее средство"
   },
+  "content.talent.health.last-resort.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below {{value0}}%, <keyword1>cleanse</keyword1> all harmful status effects",
+    "sourceHash": "a2f89f2696d7e4f7df96f97e186a2bb6c7c05c6285d4ca0f13a4fbf40c939513",
+    "text": "Когда <keyword0>здоровье</keyword0> опускается ниже {{value0}}%, <keyword1>очистите</keyword1> все вредные эффекты"
+  },
   "content.talent.health.mending.name": {
     "reviewed": true,
     "source": "Mending",
     "sourceHash": "8ba8b96fc326bea4dcdeb40673cd5bcab29774d404e4618cb5578948a11a4021",
     "text": "Исцеление"
+  },
+  "content.talent.health.mending.rule": {
+    "reviewed": true,
+    "source": "Receive {{value0}}% more <keyword0>healing</keyword0> during combat",
+    "sourceHash": "8e85444668a497b80d162792abb09cadc78551e4e1a2c159a2370d125d265c91",
+    "text": "Получайте на {{value0}}% больше <keyword0>лечения</keyword0> в бою"
   },
   "content.talent.health.overflow.name": {
     "reviewed": true,
@@ -3413,11 +3431,23 @@
     "sourceHash": "c17f0097d0a0aa611936005bbecd95c58036faa1300cc3c612d149652eed9e84",
     "text": "Переполнение"
   },
+  "content.talent.health.overflow.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% of excess <keyword0>healing</keyword0> from cards as <keyword1>Block</keyword1>",
+    "sourceHash": "9971f377ad8c019b3f5f4c70bffca1e655e557558b37b9da5f62e44232ff3f2b",
+    "text": "Получите {{value0}}% избыточного <keyword0>лечения</keyword0> от карт в виде <keyword1>блока</keyword1>"
+  },
   "content.talent.health.renewal.name": {
     "reviewed": true,
     "source": "Renewal",
     "sourceHash": "acf1b8c30f93dfac8e646e196bf6f4cf696e490f2dc37bfd58f3b067063f54b0",
     "text": "Обновление"
+  },
+  "content.talent.health.renewal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> a harmful status restores {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "9e5c82a044aed03ac29f976bacee82f0a8c74990938128a1b7371e7019cb10a9",
+    "text": "<keyword0>Очищение</keyword0> вредного эффекта восстанавливает {{value0}} <keyword1>здоровья</keyword1>"
   },
   "content.talent.health.vitality.name": {
     "reviewed": true,

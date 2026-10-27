@@ -3359,6 +3359,12 @@
     "sourceHash": "375cd825a3a7797f259bcd39dda689b12c22189ce9f0eb47a68f3bcb9dc8cfd9",
     "text": "Borrón y cuenta nueva"
   },
+  "content.talent.health.clean-slate.rule": {
+    "reviewed": true,
+    "source": "When a card restores <keyword0>Health</keyword0> beyond your maximum, <keyword1>cleanse</keyword1> a harmful status effect",
+    "sourceHash": "d6f6308efcd4a9487efef9eb2eda1c4d5711b2a51ba849a2a424ed14c55264e4",
+    "text": "Cuando una carta restaure <keyword0>Salud</keyword0> por encima de tu máximo, <keyword1>purifica</keyword1> un efecto perjudicial"
+  },
   "content.talent.health.combat-surge.name": {
     "reviewed": true,
     "source": "Combat Surge",
@@ -3401,11 +3407,23 @@
     "sourceHash": "d358c3a3c32d2547b5277b97ee21b89cf8e59bb76c74c6513f0b0ccbf4600015",
     "text": "Último recurso"
   },
+  "content.talent.health.last-resort.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below {{value0}}%, <keyword1>cleanse</keyword1> all harmful status effects",
+    "sourceHash": "d9b8516c08bc04579b110503ee1872e4078c9c0fad4079162d1d6ed056172c40",
+    "text": "Cuando tu <keyword0>Salud</keyword0> baje del {{value0}}%, <keyword1>purifica</keyword1> todos los efectos perjudiciales"
+  },
   "content.talent.health.mending.name": {
     "reviewed": true,
     "source": "Mending",
     "sourceHash": "acd4850b1a2bd4b07ae6d4b9b502f6209211bb191996a92f568cb4e24ab1220b",
     "text": "Sanación"
+  },
+  "content.talent.health.mending.rule": {
+    "reviewed": true,
+    "source": "Receive {{value0}}% more <keyword0>healing</keyword0> during combat",
+    "sourceHash": "5597e3d768c9868f82cbefff6051e2e215fa71dadc5fcb85172cc2c8c6678a21",
+    "text": "Recibes un {{value0}}% más de <keyword0>curación</keyword0> durante el combate"
   },
   "content.talent.health.overflow.name": {
     "reviewed": true,
@@ -3413,11 +3431,23 @@
     "sourceHash": "5dda2c8c27833789a583180a2e169cbaf5084c0627c1a837d1e719925b5eb8e5",
     "text": "Desbordamiento"
   },
+  "content.talent.health.overflow.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% of excess <keyword0>healing</keyword0> from cards as <keyword1>Block</keyword1>",
+    "sourceHash": "fefd1944c19be9ac65c483ceeac0fc0441a556cead5766813e3789ad2a65bfa0",
+    "text": "Obtienes como <keyword1>Bloqueo</keyword1> un {{value0}}% de la <keyword0>curación</keyword0> excedente de las cartas"
+  },
   "content.talent.health.renewal.name": {
     "reviewed": true,
     "source": "Renewal",
     "sourceHash": "39cb9528eb4945e06785804604e000f9f3e0890bfbe23802966138a75836414a",
     "text": "Renovación"
+  },
+  "content.talent.health.renewal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> a harmful status restores {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "410c35faef9ddb055719a6c6da26d0fe70b52c3704cefe6e1277b9576518eca1",
+    "text": "<keyword0>Purificar</keyword0> un efecto perjudicial restaura {{value0}} de <keyword1>Salud</keyword1>"
   },
   "content.talent.health.vitality.name": {
     "reviewed": true,

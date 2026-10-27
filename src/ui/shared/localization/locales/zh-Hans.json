@@ -3359,6 +3359,12 @@
     "sourceHash": "60f8189f3b4101fcea9aa74bd25086ae6ebafda6559ce8a40378124e25fdad74",
     "text": "焕然一新"
   },
+  "content.talent.health.clean-slate.rule": {
+    "reviewed": true,
+    "source": "When a card restores <keyword0>Health</keyword0> beyond your maximum, <keyword1>cleanse</keyword1> a harmful status effect",
+    "sourceHash": "65fe3935866d6a037e63b362ea9809264ac934c17919e670a1c4ad67700f9f8e",
+    "text": "卡牌恢复的<keyword0>生命</keyword0>超过上限时，<keyword1>净化</keyword1>一个有害状态效果"
+  },
   "content.talent.health.combat-surge.name": {
     "reviewed": true,
     "source": "Combat Surge",
@@ -3401,11 +3407,23 @@
     "sourceHash": "0f9837d05b31acf00abf2d35c34becd7d0dfd04b820c34adb3568c66cd86faa6",
     "text": "最后手段"
   },
+  "content.talent.health.last-resort.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below {{value0}}%, <keyword1>cleanse</keyword1> all harmful status effects",
+    "sourceHash": "df2e78b643310756f140e563363b94dbbd3ef62ad05511b907b3b6b97fec8b37",
+    "text": "<keyword0>生命</keyword0>降至{{value0}}%以下时，<keyword1>净化</keyword1>所有有害状态效果"
+  },
   "content.talent.health.mending.name": {
     "reviewed": true,
     "source": "Mending",
     "sourceHash": "9b2ea918ba4fa4d9f57af8f501a395bbf5c73ca2c5fe0692a235c1d9eff33591",
     "text": "愈合"
+  },
+  "content.talent.health.mending.rule": {
+    "reviewed": true,
+    "source": "Receive {{value0}}% more <keyword0>healing</keyword0> during combat",
+    "sourceHash": "219f44b260322d19d6df4f1615028b91369a3452cf6ee2b3e066cff3726539d5",
+    "text": "战斗中受到的<keyword0>治疗</keyword0>提高{{value0}}%"
   },
   "content.talent.health.overflow.name": {
     "reviewed": true,
@@ -3413,11 +3431,23 @@
     "sourceHash": "7ab3662acaab0b29f5656fb31370eabadb688bb0a9e48e484586365d069609eb",
     "text": "溢出"
   },
+  "content.talent.health.overflow.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% of excess <keyword0>healing</keyword0> from cards as <keyword1>Block</keyword1>",
+    "sourceHash": "1fce671d8e4b0e550ff7b4592ccd4977cef90ee5c5cd2224c349b59ba1305cfc",
+    "text": "将卡牌产生的超额<keyword0>治疗</keyword0>的{{value0}}%转化为<keyword1>格挡</keyword1>"
+  },
   "content.talent.health.renewal.name": {
     "reviewed": true,
     "source": "Renewal",
     "sourceHash": "48e834f6518af6ac0327ba23924d73604fd802202ef3d5adbfb3cc639691d7cd",
     "text": "复苏"
+  },
+  "content.talent.health.renewal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> a harmful status restores {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "a503968140824d70f8fd8a3dccae118c5cf144871de3809c5c636e127bb4f2cc",
+    "text": "<keyword0>净化</keyword0>一个有害状态时恢复{{value0}}点<keyword1>生命</keyword1>"
   },
   "content.talent.health.vitality.name": {
     "reviewed": true,
