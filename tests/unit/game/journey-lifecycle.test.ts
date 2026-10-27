@@ -24,7 +24,7 @@ function traceLine(value: unknown): string {
 }
 
 // The captured commands and expected states have one owner, independent of later policy revisions.
-// The Boon catalog expansion changed seeded offers and subsequent journey RNG in these traces.
+// The expanded Boon catalog changes seeded merchant offers and subsequent journey RNG.
 const baselines = new Map<number, string[]>();
 for (const line of readFileSync(new URL("./fixtures/journey-baseline.tsv", import.meta.url), "utf8")
   .trimEnd()
@@ -72,6 +72,7 @@ function fingerprint(state: GameState, events: unknown) {
                   !(key === "metronomeActor" && entry === null) &&
                   !(key === "fireThorns" && entry === 0) &&
                   !(key === "encoreProgress" && entry === 0) &&
+                  !(key === "oasisLeech" && entry === false) &&
                   !(key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) &&
                   !(
                     key === "repeatNext" &&
