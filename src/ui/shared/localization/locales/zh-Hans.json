@@ -797,6 +797,12 @@
     "sourceHash": "65a73d52a78fdc89c4199f9d3eb70f7a4985d5ee3dad7236f0b4de6520d02a0a",
     "text": "苔藓隔热手套"
   },
+  "content.boon.nectar-dipper.name": {
+    "reviewed": true,
+    "source": "Nectar Dipper",
+    "sourceHash": "695e16cd3da5d72e56950e3ff57f0afa8d6a1713b627f47feb824ba22a349541",
+    "text": "花蜜棒"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
@@ -808,6 +814,18 @@
     "source": "Obsidian Pitcher",
     "sourceHash": "ebd8ae5de1fd9fe6c609781e1ae5ae6f4db0fc7cdcf43645e1f3465e0409bbbf",
     "text": "黑曜石水壶"
+  },
+  "content.boon.orbit-armillary.name": {
+    "reviewed": true,
+    "source": "Orbit Armillary",
+    "sourceHash": "46f12609ab45130a47a642186948ed8b3deb466705290c81db192735272e72de",
+    "text": "轨道浑天仪"
+  },
+  "content.boon.origami-staircase.name": {
+    "reviewed": true,
+    "source": "Origami Staircase",
+    "sourceHash": "2284e96193e5103e409ceb90d56f4b379fad473b41744e25016fa1f56d4897d9",
+    "text": "折纸楼梯"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -833,17 +851,59 @@
     "sourceHash": "7bd11cc316ea47b271d3eed1977f612df78bd7e8e9eaaea45b332ace59ded450",
     "text": "<keyword0>中毒</keyword0>伤害有{{value0}}%的概率触发<keyword1>汲取</keyword1>"
   },
+  "content.boon.pattern-reel.name": {
+    "reviewed": true,
+    "source": "Pattern Reel",
+    "sourceHash": "904ab4921c150fa7675d38bd3183e9a2e86a892fbc9be51f4b6f48cc2468d183",
+    "text": "花纹卷轴"
+  },
+  "content.boon.peace-knot.name": {
+    "reviewed": true,
+    "source": "Peace Knot",
+    "sourceHash": "5f97ecb3fb6b7ec6dcc450dc013d925fd20404132d62512a700af7642754fb4a",
+    "text": "和平结"
+  },
+  "content.boon.pearl-sieve.name": {
+    "reviewed": true,
+    "source": "Pearl Sieve",
+    "sourceHash": "7da45e13a1a440296bb2a8b4bfefb36c9c15bcc827111ffb8786f38e04049891",
+    "text": "珍珠筛"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "38ad6125abf904d87538aedf8e368f0c0b18e3243a580525b3efbd764ca33296",
     "text": "瘟疫医生面具"
   },
+  "content.boon.pleated-pagoda.name": {
+    "reviewed": true,
+    "source": "Pleated Pagoda",
+    "sourceHash": "00afb12d89650d4f7b5c32e142eb889dffb9b20292dc4fbc06ee018095e0ea62",
+    "text": "折纹宝塔"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "reviewed": true,
+    "source": "Poppy Seed Grinder",
+    "sourceHash": "2357bb3c2450d3cd49b7fa4c300437814bb4555ef257474b1cb38cd23c2ac11c",
+    "text": "罂粟籽研磨器"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "16e75e0aba4772f4b5c1f6617c864e36cd478742b0dc39e3f63164b7043110ac",
     "text": "祈愿帆船"
+  },
+  "content.boon.prism-chisel.name": {
+    "reviewed": true,
+    "source": "Prism Chisel",
+    "sourceHash": "ce8e3bead360ce0fd3c027e9191f235f98c5bc45b0802db56ee58383d98b0bd8",
+    "text": "棱镜凿"
+  },
+  "content.boon.pruning-crescent.name": {
+    "reviewed": true,
+    "source": "Pruning Crescent",
+    "sourceHash": "bbfd2ab19ea13009c6707f7b521a2395597bdeff7529c2685f779210a942ab90",
+    "text": "修枝弯刃"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,

@@ -797,6 +797,12 @@
     "sourceHash": "0943766a7f95cee4350f2190f305388c5e5b88279dae355178b1a2f576d804b4",
     "text": "苔のミトン"
   },
+  "content.boon.nectar-dipper.name": {
+    "reviewed": true,
+    "source": "Nectar Dipper",
+    "sourceHash": "768ffa6e1f508b5edb23d2326f38865690b7a42a9631ab6cf059848e75d515f8",
+    "text": "蜜すくい"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
@@ -808,6 +814,18 @@
     "source": "Obsidian Pitcher",
     "sourceHash": "f3b335fea746f80d27e5265fdc3aa39132a675c03aab923ee6e7b87ee90c8ecc",
     "text": "黒曜石の水差し"
+  },
+  "content.boon.orbit-armillary.name": {
+    "reviewed": true,
+    "source": "Orbit Armillary",
+    "sourceHash": "894184bac9768e85b07e546f84614bc6d3c48dd01782dce9be8d26f7f7d86e89",
+    "text": "軌道の渾天儀"
+  },
+  "content.boon.origami-staircase.name": {
+    "reviewed": true,
+    "source": "Origami Staircase",
+    "sourceHash": "0efadf54a08535fc6dbbf737c6bed308d27969189523be4bc7017c56c6477273",
+    "text": "折り紙の階段"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -833,17 +851,59 @@
     "sourceHash": "0fbba5b277129578247118f57fdeaa5b10523eabfd5519bb6d9e5ff122d76998",
     "text": "<keyword0>毒</keyword0>ダメージは{{value0}}%の確率で<keyword1>吸血</keyword1>を発動"
   },
+  "content.boon.pattern-reel.name": {
+    "reviewed": true,
+    "source": "Pattern Reel",
+    "sourceHash": "e5af1cb7d54d4ae5dfd40d55f8e787ab4c7564e985e9b3da7246fb087fdc3f08",
+    "text": "模様の巻き筒"
+  },
+  "content.boon.peace-knot.name": {
+    "reviewed": true,
+    "source": "Peace Knot",
+    "sourceHash": "00108fdffa4f5652b041bb00b96de351a63d73fbee25192e0663faefab6b8832",
+    "text": "平和の結び目"
+  },
+  "content.boon.pearl-sieve.name": {
+    "reviewed": true,
+    "source": "Pearl Sieve",
+    "sourceHash": "37b27581a9ec5765586d4bd7ca39b76c29727578bbb58af09b5c0559d69db0de",
+    "text": "真珠のふるい"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "5718d4987a110ec5ef5cf2d896c4c97961d24d7385497692a9405c92ca1c85c9",
     "text": "疫病医師の仮面"
   },
+  "content.boon.pleated-pagoda.name": {
+    "reviewed": true,
+    "source": "Pleated Pagoda",
+    "sourceHash": "32aec811cdff5cbbcb94b1137dc5e7058e987462fe083341462c8d16f2a30f9a",
+    "text": "折りひだの塔"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "reviewed": true,
+    "source": "Poppy Seed Grinder",
+    "sourceHash": "481ea74dbd77cfd1bc573a8fbc5d045b7f063f9cfc216ea57bd368d7bd6a44e5",
+    "text": "ケシの実の挽き器"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "96b8b9556e212728642ea7acc0b466fa89990401b2fdb123378ff76cb0a6e8dd",
     "text": "祈りの帆船"
+  },
+  "content.boon.prism-chisel.name": {
+    "reviewed": true,
+    "source": "Prism Chisel",
+    "sourceHash": "16bc9fbfac7a33210cecafb9b7416a7d5bc411c78ee395169f227251ae6e6d95",
+    "text": "プリズムの鑿"
+  },
+  "content.boon.pruning-crescent.name": {
+    "reviewed": true,
+    "source": "Pruning Crescent",
+    "sourceHash": "9911e816f5bd72f96c2ea08a40f37cdf0a46c79cbb48c94964d4b61c6c7b2dae",
+    "text": "剪定の三日月"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,

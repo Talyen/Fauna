@@ -797,6 +797,12 @@
     "sourceHash": "101b9bb1930ca6e67351e67bfe5a8be5ce8fb8851fb7299db2a60834571088b3",
     "text": "Moos-Ofenhandschuh"
   },
+  "content.boon.nectar-dipper.name": {
+    "reviewed": true,
+    "source": "Nectar Dipper",
+    "sourceHash": "a8b8d54f0de109f2f49c773c0c30300877752aaba20f39bc348488be0688de3e",
+    "text": "Nektarheber"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
@@ -808,6 +814,18 @@
     "source": "Obsidian Pitcher",
     "sourceHash": "5f684109e1ff5b8d9e3c0957268b27051d4e10f533018963f2ab0f9850b8fd93",
     "text": "Obsidiankrug"
+  },
+  "content.boon.orbit-armillary.name": {
+    "reviewed": true,
+    "source": "Orbit Armillary",
+    "sourceHash": "b1a1a95fbf9b59fb19c162c59935e98125b313678535dcaa46428646f1a37bd0",
+    "text": "Umlaufarmillarsphäre"
+  },
+  "content.boon.origami-staircase.name": {
+    "reviewed": true,
+    "source": "Origami Staircase",
+    "sourceHash": "91c08565b67bcda5c8372dbd4f70ebbbc88fe9c0272defa65d99ad83c8d7ebd5",
+    "text": "Origamitreppe"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -833,17 +851,59 @@
     "sourceHash": "920bc9de4d21c25618b5fbd7a7cc8e20e873bec6faf705172102269ef59f49e5",
     "text": "<keyword0>Giftschaden</keyword0> hat eine Chance von {{value0}}% auf <keyword1>Lebensraub</keyword1>"
   },
+  "content.boon.pattern-reel.name": {
+    "reviewed": true,
+    "source": "Pattern Reel",
+    "sourceHash": "75101ce55cba4e34b80dfcc8549d49b59adba2c149c4eadc7d969a23973f6a84",
+    "text": "Musterrolle"
+  },
+  "content.boon.peace-knot.name": {
+    "reviewed": true,
+    "source": "Peace Knot",
+    "sourceHash": "cd6e9f5686d5f0e01858bce9166e269120077deb260c649a1dd375d4cf7fca0f",
+    "text": "Friedensknoten"
+  },
+  "content.boon.pearl-sieve.name": {
+    "reviewed": true,
+    "source": "Pearl Sieve",
+    "sourceHash": "1d0019a21741e88aadfcb61cd07bb3abadc9b1f129c58ffa79504617ad6708d9",
+    "text": "Perlensieb"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "f230babf765104b422f3594117d8c455f8422f6a72dcd0962cdf0a4da8f39bb0",
     "text": "Pestdoktormaske"
   },
+  "content.boon.pleated-pagoda.name": {
+    "reviewed": true,
+    "source": "Pleated Pagoda",
+    "sourceHash": "ecc3a33a5f1f92992ff035b98545814b1a0c7312236cccbf8e984838f2335608",
+    "text": "Faltenpagode"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "reviewed": true,
+    "source": "Poppy Seed Grinder",
+    "sourceHash": "f35d8ec95f876631c54a47684f790485bb71e7d56af5009524e616f8cbafd388",
+    "text": "Mohnmühle"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "52b5ad4ac022563168e444205d20509d84bf1462d7cfd3c7ae360e03b4178529",
     "text": "Gebetssegelboot"
+  },
+  "content.boon.prism-chisel.name": {
+    "reviewed": true,
+    "source": "Prism Chisel",
+    "sourceHash": "502b7bed880edbc606987a0d311e10740fbdcf83265e1cd8105739f3380868eb",
+    "text": "Prismameißel"
+  },
+  "content.boon.pruning-crescent.name": {
+    "reviewed": true,
+    "source": "Pruning Crescent",
+    "sourceHash": "62ed0bf2dd8c8fd4c172fb63fb4ce3f9fad5ca486feeca87847bdb2a2aba0f0b",
+    "text": "Schnittsichel"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,

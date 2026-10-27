@@ -797,6 +797,12 @@
     "sourceHash": "93ebea41e9e78d8dd096621f8fb6a5fe2f1377b61afe6360edeb18887f6818b8",
     "text": "Luva de forno musgosa"
   },
+  "content.boon.nectar-dipper.name": {
+    "reviewed": true,
+    "source": "Nectar Dipper",
+    "sourceHash": "27bb175908bc4c37fbe2ecd713126147d37201ee7f950001695e3325ff966f24",
+    "text": "Colher de néctar"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
@@ -808,6 +814,18 @@
     "source": "Obsidian Pitcher",
     "sourceHash": "61b30c7746f5c432a0d3055204d585dd4e6b2878d1ace5dc3e2ed9ad6dd128da",
     "text": "Jarra de obsidiana"
+  },
+  "content.boon.orbit-armillary.name": {
+    "reviewed": true,
+    "source": "Orbit Armillary",
+    "sourceHash": "2db3fb89d701055c79354c6e79119cd16a8ccbe907190c45bed16a3f86d940f0",
+    "text": "Esfera armilar orbital"
+  },
+  "content.boon.origami-staircase.name": {
+    "reviewed": true,
+    "source": "Origami Staircase",
+    "sourceHash": "dc11c249441c9c5472c21ff2fb5fb71f341ee95100236542479fa71c7aa00985",
+    "text": "Escadaria de origami"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -833,17 +851,59 @@
     "sourceHash": "86c5c520f6c3029859638e5621fcd620e2dac267c7817c5aa37e6884979a5e91",
     "text": "Dano de <keyword0>Veneno</keyword0> tem {{value0}}% de chance de ativar <keyword1>Drenagem</keyword1>"
   },
+  "content.boon.pattern-reel.name": {
+    "reviewed": true,
+    "source": "Pattern Reel",
+    "sourceHash": "4f5824d6cdd593811f2be7d513897b14395a7c600d91278d46e29b1039ed1c51",
+    "text": "Rolo de padrões"
+  },
+  "content.boon.peace-knot.name": {
+    "reviewed": true,
+    "source": "Peace Knot",
+    "sourceHash": "1b1e347726da7cac5a274a4d0b6928cb6ab5a758a964980a8dba142944719a7f",
+    "text": "Nó da paz"
+  },
+  "content.boon.pearl-sieve.name": {
+    "reviewed": true,
+    "source": "Pearl Sieve",
+    "sourceHash": "afe449247b9829ac6142601d1e19bba5ad99390abff0b48d4122e4485e2f982f",
+    "text": "Peneira de pérolas"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "5fb4fbe087e270d0e1b61186025ade1fdc966a8a242bbbea3145c6c2d35aa451",
     "text": "Máscara do médico da peste"
   },
+  "content.boon.pleated-pagoda.name": {
+    "reviewed": true,
+    "source": "Pleated Pagoda",
+    "sourceHash": "a862ca3d210fa8d0167cc3068c65a48ef1fb4e385dfa3f53d23ffb1a87a5ddf2",
+    "text": "Pagoda pregueada"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "reviewed": true,
+    "source": "Poppy Seed Grinder",
+    "sourceHash": "c2e31a1d0ac37e1bee27f0f2d4ce80530e6ee9c1795103cc073b57885d824a9a",
+    "text": "Moedor de sementes de papoula"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "2d9cff5d403e169c8720ab4a462fad9a6d834100b8e057e8afc7ab24413d845e",
     "text": "Veleiro de oração"
+  },
+  "content.boon.prism-chisel.name": {
+    "reviewed": true,
+    "source": "Prism Chisel",
+    "sourceHash": "64b0ab5b57dca31fb19f4065945394c41df4ef0645aeb28466d712f5c5025cc9",
+    "text": "Cinzel prismático"
+  },
+  "content.boon.pruning-crescent.name": {
+    "reviewed": true,
+    "source": "Pruning Crescent",
+    "sourceHash": "f8b073e3e2be43395b0897fb27111159ffdcbaf65f7b898473775cdf317f8c55",
+    "text": "Foice de poda"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,

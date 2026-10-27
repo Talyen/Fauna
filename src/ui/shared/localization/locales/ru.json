@@ -797,6 +797,12 @@
     "sourceHash": "974b6428c211c744acdc7646fab704a56801f8b2e921e6a6ff8bc3ab75553403",
     "text": "Прихватка из мха"
   },
+  "content.boon.nectar-dipper.name": {
+    "reviewed": true,
+    "source": "Nectar Dipper",
+    "sourceHash": "cd40af30b266e9fce546c88f375d91bd12dbbbb0b28c998d21ddc639b3510ccf",
+    "text": "Ложка для нектара"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
@@ -808,6 +814,18 @@
     "source": "Obsidian Pitcher",
     "sourceHash": "dfdcb22522a8150397b5b254e9973d921c7b4997485d5f551cbe865944c15f4f",
     "text": "Обсидиановый кувшин"
+  },
+  "content.boon.orbit-armillary.name": {
+    "reviewed": true,
+    "source": "Orbit Armillary",
+    "sourceHash": "e3d51ad14e4f0038d0e491d6fc3cbbe1eeedbe71158268f954d049d2fd27dab6",
+    "text": "Орбитальная армиллярная сфера"
+  },
+  "content.boon.origami-staircase.name": {
+    "reviewed": true,
+    "source": "Origami Staircase",
+    "sourceHash": "5e65becb2ebf7537095f98920042b02ebfb317f4d4f064ff72752517804ec187",
+    "text": "Лестница оригами"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -833,17 +851,59 @@
     "sourceHash": "738b1809cf3182ae64e2bba187efb3fa6f19164d0a735c2d09852fb6e50156c0",
     "text": "Урон от <keyword0>яда</keyword0> с вероятностью {{value0}}% вызывает <keyword1>вампиризм</keyword1>"
   },
+  "content.boon.pattern-reel.name": {
+    "reviewed": true,
+    "source": "Pattern Reel",
+    "sourceHash": "0d0e2f3daae7d5d59ec636c20b604ea06ebf1936ebd3f97436afc5dd93be4095",
+    "text": "Катушка узоров"
+  },
+  "content.boon.peace-knot.name": {
+    "reviewed": true,
+    "source": "Peace Knot",
+    "sourceHash": "23f91a38dd6a7bfa09d0df875ae2dd4b217eae0f1e7d0df03c08261da2a52eed",
+    "text": "Узел мира"
+  },
+  "content.boon.pearl-sieve.name": {
+    "reviewed": true,
+    "source": "Pearl Sieve",
+    "sourceHash": "7f22e4a31b89d9c44a755dbdc0c2e6a9ac2439913170812aaf0843c6223270c6",
+    "text": "Жемчужное сито"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "8034ee88abdf800612354c2233fdcd68703078f0b22311f072d04b82753a4ac3",
     "text": "Маска чумного доктора"
   },
+  "content.boon.pleated-pagoda.name": {
+    "reviewed": true,
+    "source": "Pleated Pagoda",
+    "sourceHash": "21f88960c41c67a0aa40fb757e6e174e6be81c979755862c6360d1e80582011b",
+    "text": "Складчатая пагода"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "reviewed": true,
+    "source": "Poppy Seed Grinder",
+    "sourceHash": "fdc503b60e69fa07c1b37f5dff4ae9da60a859bbeb6d69c58b467f9e9b48bc40",
+    "text": "Мельница для мака"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "b2dea3d98d211bb12e3c7c8b7102d967331f4c47c56e2c34f5b6f72d1c5edbb7",
     "text": "Парусник молитвы"
+  },
+  "content.boon.prism-chisel.name": {
+    "reviewed": true,
+    "source": "Prism Chisel",
+    "sourceHash": "678cace273a990717e1bd39e58d4d4388bc39bc3834f341ea06d76409f981eb4",
+    "text": "Призматическое зубило"
+  },
+  "content.boon.pruning-crescent.name": {
+    "reviewed": true,
+    "source": "Pruning Crescent",
+    "sourceHash": "f133003894fc3c82b2c75fda31f8844cbd3c7699511f6c33c5152d1e000789b5",
+    "text": "Серп для обрезки"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,

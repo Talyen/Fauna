@@ -797,6 +797,12 @@
     "sourceHash": "837c1b9d368162335cd8bebb1e4117dfa42daae6d00cf709015b37bdec824ffc",
     "text": "Manopla de horno musgosa"
   },
+  "content.boon.nectar-dipper.name": {
+    "reviewed": true,
+    "source": "Nectar Dipper",
+    "sourceHash": "36a00e265d3ccf8791077d6b2b0df822a0d139691094f7426e556a0eb2102fca",
+    "text": "Cuchara de néctar"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
@@ -808,6 +814,18 @@
     "source": "Obsidian Pitcher",
     "sourceHash": "dc3cbefd475add02389f867889d88bf00bb3c3ff5e3a046ba72287211f140b9a",
     "text": "Jarra de obsidiana"
+  },
+  "content.boon.orbit-armillary.name": {
+    "reviewed": true,
+    "source": "Orbit Armillary",
+    "sourceHash": "57d18a4ff3b8175440030eee50957fed0dfde46091e9b3c62fc6fca069f2f64f",
+    "text": "Esfera armilar orbital"
+  },
+  "content.boon.origami-staircase.name": {
+    "reviewed": true,
+    "source": "Origami Staircase",
+    "sourceHash": "a752d6f50d98182caf692e02d369e6ab3cadbd7b1f005ff6dd3b1dbac8abd183",
+    "text": "Escalera de origami"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -833,17 +851,59 @@
     "sourceHash": "a6343341f3638d29232adb164d5f2c0d472a33f6e340acf4bc059872f9a28f30",
     "text": "El daño de <keyword0>Veneno</keyword0> tiene un {{value0}}% de probabilidad de activar <keyword1>Drenaje</keyword1>"
   },
+  "content.boon.pattern-reel.name": {
+    "reviewed": true,
+    "source": "Pattern Reel",
+    "sourceHash": "c2172372ba66274b4167759ffd920ddcceaa9d047958aca06f2c963bda169093",
+    "text": "Bobina de patrones"
+  },
+  "content.boon.peace-knot.name": {
+    "reviewed": true,
+    "source": "Peace Knot",
+    "sourceHash": "67742d8b37d84a6d38e65fbe4464ba031144a7e223256cd97f9d47e189b0e8d0",
+    "text": "Nudo de paz"
+  },
+  "content.boon.pearl-sieve.name": {
+    "reviewed": true,
+    "source": "Pearl Sieve",
+    "sourceHash": "914dfbf9ae4dbb9797a57b6276b7a1a4c30a48529df1d706cc056703980af441",
+    "text": "Tamiz de perlas"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "04e72e3b3479810b4e92eceb933ec355efc2d9a3e2c894c5b0caa8833d9a84d2",
     "text": "Máscara del médico de la peste"
   },
+  "content.boon.pleated-pagoda.name": {
+    "reviewed": true,
+    "source": "Pleated Pagoda",
+    "sourceHash": "6667911aed7387b3e77b6b23ab2fe6da965b3ed1e522ea1794683925995e6e88",
+    "text": "Pagoda plegada"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "reviewed": true,
+    "source": "Poppy Seed Grinder",
+    "sourceHash": "8ab526f84ab50a87584bcbe78388b2d0590ce9c182d8902c109b44c053dc9c16",
+    "text": "Molinillo de amapola"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "614e5fc180cbb7c2f1be927b1d150ff3e7dd07d128853fc4f87321ebfd4f6a4a",
     "text": "Velero de oración"
+  },
+  "content.boon.prism-chisel.name": {
+    "reviewed": true,
+    "source": "Prism Chisel",
+    "sourceHash": "a833bfae3bb7dea56fbd8b7727875b1c858de7777e2cac98775451c5150801d5",
+    "text": "Cincel prisma"
+  },
+  "content.boon.pruning-crescent.name": {
+    "reviewed": true,
+    "source": "Pruning Crescent",
+    "sourceHash": "73e44bb4b165ce34ef3b010e070ede34c55da699258133c823c1c0fd976ab72c",
+    "text": "Hoz de poda"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,

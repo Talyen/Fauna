@@ -809,6 +809,12 @@
     "sourceHash": "504b31e93d2fa1ecfbe8234f778cb9dbcbde19c267231ec3ade6c1f843ea5493",
     "text": "Gant de four moussu"
   },
+  "content.boon.nectar-dipper.name": {
+    "reviewed": true,
+    "source": "Nectar Dipper",
+    "sourceHash": "629837c7eb376caaac9eedd50552fc93c46526cdab01e0b99de1dbc2883a0f66",
+    "text": "Cuillère à nectar"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
@@ -820,6 +826,18 @@
     "source": "Obsidian Pitcher",
     "sourceHash": "ae38e4f4f135977098de0833510ade8d1945f0dc843d7429a4c8db5a51cfbad5",
     "text": "Pichet d’obsidienne"
+  },
+  "content.boon.orbit-armillary.name": {
+    "reviewed": true,
+    "source": "Orbit Armillary",
+    "sourceHash": "5b41dc8fdef51fc64b91c529339f431189c6b1c7c368ee73855a91f8415fbc08",
+    "text": "Sphère armillaire orbitale"
+  },
+  "content.boon.origami-staircase.name": {
+    "reviewed": true,
+    "source": "Origami Staircase",
+    "sourceHash": "d19db5ab14efbd4c8f71427ccf347878e0bce1bb624a8c2956a8d66b52bf7831",
+    "text": "Escalier d’origami"
   },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
@@ -845,17 +863,59 @@
     "sourceHash": "127aadbf51200c365c834566502475b9750e88412556cbb27fcfe98cf53b06eb",
     "text": "Les dégâts de <keyword0>Poison</keyword0> ont {{value0}}% de chances de déclencher un <keyword1>Vol de vie</keyword1>"
   },
+  "content.boon.pattern-reel.name": {
+    "reviewed": true,
+    "source": "Pattern Reel",
+    "sourceHash": "03b06354a1022692b6f59b3088d9c8291b04cc1e01f25d7c3d9f64694d3487ce",
+    "text": "Bobine à motifs"
+  },
+  "content.boon.peace-knot.name": {
+    "reviewed": true,
+    "source": "Peace Knot",
+    "sourceHash": "973d42965d6077cc9888ead0c551f787dc9aeaddeb1af3f4fb891173607cba33",
+    "text": "Nœud de paix"
+  },
+  "content.boon.pearl-sieve.name": {
+    "reviewed": true,
+    "source": "Pearl Sieve",
+    "sourceHash": "9eb0c53a847f3f2be8d92301b38911297c49241921ade938ba2c12e795279e4e",
+    "text": "Tamis à perles"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "2d6fdf1ef7f2a8eb46c8d80b11280e585c07afbef5876fa6caec28035960fd9e",
     "text": "Masque du médecin de peste"
   },
+  "content.boon.pleated-pagoda.name": {
+    "reviewed": true,
+    "source": "Pleated Pagoda",
+    "sourceHash": "e60153887cae5582dd86f240313cb7e1ef9c3a71faee01a24b965dbc9305a18d",
+    "text": "Pagode plissée"
+  },
+  "content.boon.poppy-seed-grinder.name": {
+    "reviewed": true,
+    "source": "Poppy Seed Grinder",
+    "sourceHash": "a683da00d04da3189af8cf8b0c17e8fc896c64d8092091e347ca5ab108e237c9",
+    "text": "Moulin à graines de pavot"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "c3ad3a17c5f30d94d885626e8f53c01b29729fd9286f9fc48d8a9e3158def6ce",
     "text": "Voilier de prière"
+  },
+  "content.boon.prism-chisel.name": {
+    "reviewed": true,
+    "source": "Prism Chisel",
+    "sourceHash": "5b3d5056d8390a29a9212c65b5a6224e6dd0cfa873e5ae8d0baabedbe1b782df",
+    "text": "Ciseau prismatique"
+  },
+  "content.boon.pruning-crescent.name": {
+    "reviewed": true,
+    "source": "Pruning Crescent",
+    "sourceHash": "7f92823342d89defa6787f5e714d17bd264420fb875dbadfdbd720ebc6d63974",
+    "text": "Croissant d’élagage"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,
