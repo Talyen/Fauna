@@ -365,11 +365,23 @@
     "sourceHash": "56fec9338290ae20ab4a1af1920d45aadc9a896195f8952586960eda60af2872",
     "text": "Jogar <keyword0>Comida</keyword0> compra uma carta"
   },
+  "content.boon.gemmed-scabbard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "22a7fda6465a97620c04d145ce8e4094e1be882e3505f3d2a594b2343170d8cb",
+    "text": "<keyword0>Armadura</keyword0> também reduz dano de <keyword1>Espinhos</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "1bcadb250728d01010a8e8ed9e1277ff1a4f91ca0d1f4a33c49c1a32ea6cb38d",
     "text": "Favor do bosque"
+  },
+  "content.boon.hoard-lockplate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
+    "sourceHash": "a6e5499613602bce2b97bb966ab9a3030e2050ba8a713ee8ecac11967d19b992",
+    "text": "<keyword0>Armadura</keyword0> reduz o dano antes de <keyword1>Bloqueio</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -418,6 +430,18 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "5fb4fbe087e270d0e1b61186025ade1fdc966a8a242bbbea3145c6c2d35aa451",
     "text": "Máscara do médico da peste"
+  },
+  "content.boon.rain-cape.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Water</keyword1>",
+    "sourceHash": "518256aa7b9dcffbc500aff98e3e44ca00128432e98354972cc5f9fa9a527eb8",
+    "text": "<keyword0>Bloqueio</keyword0> é duas vezes mais eficaz contra <keyword1>Água</keyword1>"
+  },
+  "content.boon.rainkeeper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Mana</keyword0> can overflow",
+    "sourceHash": "7e17fe7d20cd6c6ab1ceb1e47ece2437cf428a2e1ed789ed17e18a72aa36d93c",
+    "text": "<keyword0>Mana</keyword0> pode exceder seu máximo"
   },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,

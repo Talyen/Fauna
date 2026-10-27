@@ -365,11 +365,23 @@
     "sourceHash": "1d0c182a014d7dbecf9937913602a29f60cbe88a3cf3d363c50fa9b09029885f",
     "text": "打出<keyword0>食物</keyword0>时抽一张牌"
   },
+  "content.boon.gemmed-scabbard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "a4dd9e61d50a2fe8e7d3273933ee10afe1e301b0de37e1f4b0db64d47aaef36a",
+    "text": "<keyword0>护甲</keyword0>也能减免<keyword1>荆棘</keyword1>伤害"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "be6bcb633f8c9ff572f4e1ed65130d1c66a3b1757629ee28832c0e2063847231",
     "text": "林地的恩惠"
+  },
+  "content.boon.hoard-lockplate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
+    "sourceHash": "e37ca5c01d6a3f329bd1125a5a51a4cbab51ea3bc53791e4847f0d1c7bb04f32",
+    "text": "<keyword0>护甲</keyword0>在<keyword1>格挡</keyword1>之前减免伤害"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -418,6 +430,18 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "38ad6125abf904d87538aedf8e368f0c0b18e3243a580525b3efbd764ca33296",
     "text": "瘟疫医生面具"
+  },
+  "content.boon.rain-cape.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Water</keyword1>",
+    "sourceHash": "c9ead93fff3c16539f833c937ceb3d19d923b5f5ab1fe53d168fc2491a6e5eb7",
+    "text": "<keyword0>格挡</keyword0>对<keyword1>水</keyword1>的效果翻倍"
+  },
+  "content.boon.rainkeeper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Mana</keyword0> can overflow",
+    "sourceHash": "59b40c7666e988f0123d57565ce84146d59f139843afc029cd7875fc0286c00d",
+    "text": "<keyword0>法力</keyword0>可以超过上限"
   },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,

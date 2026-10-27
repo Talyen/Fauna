@@ -377,6 +377,12 @@
     "sourceHash": "2a6ed4d8e76b5db352449cf74feab42a3eccab30ecaa6183ecaae130e16bb725",
     "text": "Jouer une carte <keyword0>Nourriture</keyword0> permet de piocher une carte"
   },
+  "content.boon.gemmed-scabbard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "9f49f83086fadf171608c3046ef04cac0e38e1b75c316e6cef42930d892d31f4",
+    "text": "L’<keyword0>Armure</keyword0> réduit aussi les dégâts d’<keyword1>Épines</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -394,6 +400,12 @@
     "source": "<keyword0>Poison</keyword0> cannot be <keyword1>Cleansed</keyword1> from <keyword2>Frozen</keyword2> enemies",
     "sourceHash": "f107c022700bf9e64f3473a0c575f1aa642e520d2a930d61a4bfae053c3f1192",
     "text": "Le <keyword0>Poison</keyword0> des ennemis <keyword2>gelés</keyword2> ne peut pas être <keyword1>purifié</keyword1>"
+  },
+  "content.boon.hoard-lockplate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
+    "sourceHash": "7a0679bdb38dd6b7367e88a3192ce52a8a266fbccfc678486aa19c1bf32519dc",
+    "text": "L’<keyword0>Armure</keyword0> réduit les dégâts avant le <keyword1>Blocage</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -454,6 +466,18 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "2d6fdf1ef7f2a8eb46c8d80b11280e585c07afbef5876fa6caec28035960fd9e",
     "text": "Masque du médecin de peste"
+  },
+  "content.boon.rain-cape.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Water</keyword1>",
+    "sourceHash": "64049d1f29316151d13152c2a2901efbb5b085f7cbb7cfba80d7c6a10b5e0071",
+    "text": "Le <keyword0>Blocage</keyword0> est deux fois plus efficace contre l’<keyword1>Eau</keyword1>"
+  },
+  "content.boon.rainkeeper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Mana</keyword0> can overflow",
+    "sourceHash": "7f2fa176d43f5f75c343c73fbec980ae34d76d0f78ef76ac899349129623e02c",
+    "text": "Le <keyword0>Mana</keyword0> peut dépasser son maximum"
   },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,

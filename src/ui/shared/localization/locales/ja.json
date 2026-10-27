@@ -365,11 +365,23 @@
     "sourceHash": "7271aa4125770078775d78d7a2da0262908b3a90b6260b588fb018d44294f5d8",
     "text": "<keyword0>食料</keyword0>を使うとカードを1枚引く"
   },
+  "content.boon.gemmed-scabbard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "086e912b446e51772cc545f7fcd8ccbe087c5f7a47bdfb100b59dbfdf961f366",
+    "text": "<keyword0>装甲</keyword0>は<keyword1>棘</keyword1>ダメージも軽減する"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "6c601a1114b14e5324d89b0749b1422cde3d04bc2e084d03b8b0e4afc5aae29f",
     "text": "木立の恩恵"
+  },
+  "content.boon.hoard-lockplate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
+    "sourceHash": "135bf7c01d159f5723ce058b83c76882704ba27d8c2ceef8db88aca803891d17",
+    "text": "<keyword0>装甲</keyword0>が<keyword1>ブロック</keyword1>より先にダメージを軽減する"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -418,6 +430,18 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "5718d4987a110ec5ef5cf2d896c4c97961d24d7385497692a9405c92ca1c85c9",
     "text": "疫病医師の仮面"
+  },
+  "content.boon.rain-cape.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Water</keyword1>",
+    "sourceHash": "2371bf08998a1e11f574bcf0f7a6ded784d54c80315830dbbdc38a36e1026e62",
+    "text": "<keyword0>ブロック</keyword0>は<keyword1>水</keyword1>に対して2倍の効果を持つ"
+  },
+  "content.boon.rainkeeper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Mana</keyword0> can overflow",
+    "sourceHash": "88604a712fd0d1953c7d642d0ca4608942d9eeb74e7dcde565b1f817ee8d74fa",
+    "text": "<keyword0>マナ</keyword0>は上限を超えて蓄えられる"
   },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,

@@ -365,11 +365,23 @@
     "sourceHash": "f0c21539cd42724767894374d3466d5d7ac4ff2af775edca77954851f1568d92",
     "text": "Розыгрыш <keyword0>еды</keyword0> позволяет взять карту"
   },
+  "content.boon.gemmed-scabbard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> also reduces <keyword1>Thorns</keyword1> damage",
+    "sourceHash": "4ee950c69c7769a866e694beff0fce7699a2f3325c09615d8de7909aa3d303fe",
+    "text": "<keyword0>Броня</keyword0> также снижает урон от <keyword1>шипов</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
     "sourceHash": "6fbbecd932a54ee1214b395b4759bc9af23cf71b6cdf7a2506fb3142fd72d122",
     "text": "Милость рощи"
+  },
+  "content.boon.hoard-lockplate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
+    "sourceHash": "d3fe1026e8af49b5f55a4339cccf559c86e32d14bfd3663fd63c46c3e1dcb14b",
+    "text": "<keyword0>Броня</keyword0> снижает урон до <keyword1>блока</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -418,6 +430,18 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "8034ee88abdf800612354c2233fdcd68703078f0b22311f072d04b82753a4ac3",
     "text": "Маска чумного доктора"
+  },
+  "content.boon.rain-cape.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Water</keyword1>",
+    "sourceHash": "dd65b8854377225e38cb827d5b5a9ff96668cd57e02e5cd83b0806887b27b8de",
+    "text": "<keyword0>Блок</keyword0> вдвое эффективнее против <keyword1>воды</keyword1>"
+  },
+  "content.boon.rainkeeper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Mana</keyword0> can overflow",
+    "sourceHash": "54e635f9eacf2d1a7db8b188d6e63d6762ea6fa1f4511b3d5a3ec451f0987a6d",
+    "text": "<keyword0>Мана</keyword0> может превышать максимум"
   },
   "content.boon.resonant-chimes.name": {
     "reviewed": true,
