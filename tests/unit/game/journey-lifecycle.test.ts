@@ -25,6 +25,7 @@ function traceLine(value: unknown): string {
 
 // The captured commands and expected states have one owner, independent of later policy revisions.
 // The expanded Boon catalog changes seeded merchant offers and subsequent journey RNG.
+// The pre-expansion recording remains in journey-baseline-pre-expansion.tsv.
 const baselines = new Map<number, string[]>();
 for (const line of readFileSync(new URL("./fixtures/journey-baseline.tsv", import.meta.url), "utf8")
   .trimEnd()
