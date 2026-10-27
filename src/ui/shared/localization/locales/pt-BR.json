@@ -317,6 +317,12 @@
     "sourceHash": "fee605c9ef7803f260c2cb618c0ea1fca27133010ab1c5d5fb5a11866e9d8c5b",
     "text": "Carregando…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "176ecf7b4d718cd2e775c5026f858618bc2908a7f33a169845e52700c691515f",
+    "text": "Cartas de <keyword0>Comida</keyword0> não custam <keyword1>Mana</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "f8b37d9b84f85d5695ddde6b1444e2be045a017901793cdc4da6801f4b6b5d02",
     "text": "Faca do batedor de carteiras"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "f8913ba6d5481968c78b078da586657bee892d3d93736dc14923bc970bfdf236",
+    "text": "Ganhe um espaço adicional para cartas na mão"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "9ee6b3291cf72a741575f4f5d66babf82cdf5488a48bb14481c56a4d597a7bce",
     "text": "Meteorito"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "0f983afa2d7e1cedfc684abbd2738b9cd1d900363f63dd58f436ac8249b77fdf",
+    "text": "Cartas de <keyword0>Comida</keyword0> são duas vezes mais eficazes"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "1e2fd283f48a6950c8d50bd435edc78fa3fe84effbc1bfd0f0b76f9b337b5b8c",
     "text": "Páginas esfarrapadas"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "7f4a8c9c4e943358051dd781d97aa63aba1235bce072f8090160a2643d43015a",
+    "text": "Compre {{value0}} carta adicional no início do combate"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -677,6 +701,12 @@
     "sourceHash": "f99d283d9000b60559ccdf7930e9cdb0e6fda6b2c9f34a4667f9a4bc96a40880",
     "text": "Um ataque que causa o dobro de dano"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "8cd996f2f28be53cd9e1edb1e5644f0a64855918744c6185ee7c5c0516dccddc",
+    "text": "O dano acumula <keyword0>Congelamento</keyword0>; Quando o acúmulo atinge metade da <keyword1>Saúde</keyword1> máxima, perde-se um turno; Ao se recuperar, ganha-se imunidade compartilhada a <keyword2>Atordoamento</keyword2> e <keyword3>Congelamento</keyword3> por {{value0}} turnos"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -701,11 +731,29 @@
     "sourceHash": "11072974cb56686c33714388979c796e6cf9b76c4d779a7dcd6a7f70258aa8f0",
     "text": "Impede o próximo efeito de status prejudicial; Dano direto ainda atinge; Dura até ser consumido ou <keyword0>expurgado</keyword0>; Não acumula"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "3d2948adab37c9145d10cdab1116090ad421dd5ae0933116050dcf45ba658a99",
+    "text": "O dano <keyword0>Físico</keyword0> é reduzido pela <keyword1>Armadura</keyword1> depois do <keyword2>Bloqueio</keyword2>; Ataques têm {{value0}}% de chance de <keyword3>crítico</keyword3> para causar o dobro de dano"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "6c9aa5b78e881153020942a4cba370b30782fed4d04745b69426cf5237d786d6",
     "text": "Remove efeitos benéficos de um inimigo"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "10b83683a690b2a3128270b8b5c279a74ffcada8e6f36cf395aa9dc0a80f2218",
+    "text": "O dano acumula <keyword0>Atordoamento</keyword0>; Quando o acúmulo atinge metade da <keyword1>Saúde</keyword1> máxima, perde-se um turno; Ao se recuperar, ganha-se imunidade compartilhada a <keyword2>Atordoamento</keyword2> e <keyword3>Congelamento</keyword3> por {{value0}} turnos"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "920d2da7cf439c310dcc5a01d021c83d2068f6e46f395c87cfa443afb9c31845",
+    "text": "<keyword0>Espinhos</keyword0> retaliam com dano de <keyword1>Natureza</keyword1> ao receber um acerto, mesmo através de <keyword2>Bloqueio</keyword2>; Depois perdem {{value0}} acúmulo"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

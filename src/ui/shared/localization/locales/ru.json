@@ -317,6 +317,12 @@
     "sourceHash": "cfda79cf8f70f0029f142732530155f90b9f40050a2ad9dfce35e0144df37df0",
     "text": "Загрузка…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "c4b0042375a84398695a096475bab9b6fba98a5eff6222ca9db27aa09383470a",
+    "text": "Карты <keyword0>еды</keyword0> не расходуют <keyword1>ману</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "b246efade40a55a10c180028b6446de3b072a30b8dc85452fb24f299d5fd2dcb",
     "text": "Нож карманника"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "ec5db118be1a26a3ed9a036aa9cb823d61b9a7d7340eb693194a7cb232a92c38",
+    "text": "Получите дополнительное место для карты в руке"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "e6ec02f602d1380079a33e5c971fd08b95e5942add499e98eb698a18bc313ad5",
     "text": "Метеорит"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "f4bab865c0b267b4d08646e0280b9d1d109b2c2e6434ce29c733a8fec81b35b0",
+    "text": "Карты <keyword0>еды</keyword0> действуют вдвое сильнее"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "3d8b6099479a044623315627feb327fed905c4409f3d2bbb060fb065e473844c",
     "text": "Ветхие страницы"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "7f50d1c08cf33491028f796133fce4c66f314985646207722eda5bb77e1fbdff",
+    "text": "В начале боя возьмите {{value0}} дополнительную карту"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -677,6 +701,12 @@
     "sourceHash": "c05cb9ffba539cf3d0e68002be4991be4fa1cf8f78446c19d68300856383e55a",
     "text": "Атака, наносящая двойной урон"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "dd362639f6e9f4eada5c75067ccb02d35bb5d89b6612673567ac816ed3b9a244",
+    "text": "Урон накапливает <keyword0>заморозку</keyword0>; При накоплении в половину максимального <keyword1>здоровья</keyword1> пропускается один ход; После восстановления действует общая невосприимчивость к <keyword2>оглушению</keyword2> и <keyword3>заморозке</keyword3> в течение {{value0}} ходов"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -701,11 +731,29 @@
     "sourceHash": "4494901e538c1aa5662d82c64771d0329f5aaa570ce3166c5960ee3a936f8003",
     "text": "Предотвращает следующий вредный эффект состояния; Прямой урон по-прежнему проходит; Действует до расходования или <keyword0>рассеивания</keyword0>; Не накапливается"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "ff5597940b8ff005a27a33140313682b2244e3e27623f679dd2a243ccdfb0cdf",
+    "text": "<keyword0>Физический</keyword0> урон снижается <keyword1>бронёй</keyword1> после <keyword2>блока</keyword2>; Атаки с вероятностью {{value0}}% наносят <keyword3>критический</keyword3> двойной урон"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "06e1f7da09ee7ba1c60b29cc5c51aa6c0cdceb5c0469ade33654400ac986d58a",
     "text": "Снимает полезные эффекты с врага"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "f820b32efbfd7fc8a1c6bfa38a1ce0a5900415ad2b0989debdc99adc37be2780",
+    "text": "Урон накапливает <keyword0>оглушение</keyword0>; При накоплении в половину максимального <keyword1>здоровья</keyword1> пропускается один ход; После восстановления действует общая невосприимчивость к <keyword2>оглушению</keyword2> и <keyword3>заморозке</keyword3> в течение {{value0}} ходов"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "b979f8ad503aa572ec8083fc664655367e99bc05736a52ba111a87669bf37a95",
+    "text": "При попадании <keyword0>шипы</keyword0> отвечают уроном типа «<keyword1>Природа</keyword1>», даже через <keyword2>блок</keyword2>; Затем теряют {{value0}} уровень"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

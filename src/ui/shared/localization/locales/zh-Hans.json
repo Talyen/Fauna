@@ -317,6 +317,12 @@
     "sourceHash": "4b4fb2b8421ca2d9b5e9462797c23b087695fbbf0aba3a578edad3a9b1c30e59",
     "text": "加载中…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "413cd5df9349e82c87d096e567f31a6ed19a81c9cc8ad1bf5c9479964d10acf2",
+    "text": "<keyword0>食物</keyword0>牌不消耗<keyword1>法力</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "11cb573923027cdc4262e4a1db262b8143a508cf23cd25d40d992db3a1f529ac",
     "text": "扒手小刀"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "c44078c2529c51609e3c7285bf5c532662968bc62b90bcea34a4f51549bdfd27",
+    "text": "手牌上限增加一个位置"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "4aae5d837f0925ccef875cddf1ebcc301a9cc6f7a5615cc14fa0facfcd61ab36",
     "text": "陨石"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "103266330342e94d32abb8a2a9980f5b0241ad2d58c586aef30591f6dcee5ff3",
+    "text": "<keyword0>食物</keyword0>牌的效果翻倍"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "b46fe72f2695250349ae3452ce721da28e3595059b1655bca42fc219b7b0db59",
     "text": "破旧书页"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "0580db3d2ee9257ce6a65d145d15a9dcebacddb50b31b7fe3a6f474234ba9e9f",
+    "text": "战斗开始时额外抽取{{value0}}张牌"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -677,6 +701,12 @@
     "sourceHash": "da7f98a1566964e4100eb4dd9be6c4f91b012873a70fedf61f9cc471168dff58",
     "text": "造成双倍伤害的攻击"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "417fdaccb32c44716fc93ec14765e407bd1dec29f0100588f52d35eb06052e32",
+    "text": "伤害积累<keyword0>冻结</keyword0>；积累达到最大<keyword1>生命</keyword1>的一半时跳过一回合；恢复后获得{{value0}}回合的<keyword2>眩晕</keyword2>和<keyword3>冻结</keyword3>共享免疫"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -701,11 +731,29 @@
     "sourceHash": "76944386a8cf72516e3072d140dc392da55d49285419fcd4121c42705f089cde",
     "text": "防止下一次有害状态效果；仍会受到直接伤害；持续至消耗或被<keyword0>驱散</keyword0>；不可叠加"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "59ea88914a1d28a611369eb86b92350a19dba31e3b84a8629af5fce2a59b271d",
+    "text": "<keyword0>物理</keyword0>伤害在<keyword2>格挡</keyword2>之后受<keyword1>护甲</keyword1>减免；攻击有{{value0}}%的概率<keyword3>暴击</keyword3>，造成双倍伤害"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "72dfe6715b29ee5dab47e9e1d994106e3923d37b62a217f18b665e32d5bb3e4a",
     "text": "移除一名敌人的有益效果"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "84a949f3e65f5eb638daf8fe1267004894e219d9d64388438aefa78ac818f751",
+    "text": "伤害积累<keyword0>眩晕</keyword0>；积累达到最大<keyword1>生命</keyword1>的一半时跳过一回合；恢复后获得{{value0}}回合的<keyword2>眩晕</keyword2>和<keyword3>冻结</keyword3>共享免疫"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "7d198d9e8851c6c26d33f508f626ef970c4c27cd5b983088b1da935bd58e81d2",
+    "text": "受到命中时，<keyword0>荆棘</keyword0>以<keyword1>自然</keyword1>伤害反击，即使伤害被<keyword2>格挡</keyword2>；随后减少{{value0}}层"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

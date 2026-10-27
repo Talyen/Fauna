@@ -329,6 +329,12 @@
     "sourceHash": "631deaf094930aa27ff537b4dd6ed48c1238c15e13027714202cc4a15244aa7b",
     "text": "Les attaques répétées ne peuvent pas être <keyword0>esquivées</keyword0>"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "2a65c8400d2025456c4c68b6ad5261c5d319dafcef5c4b5ca1116dd8f7a1d452",
+    "text": "Les cartes <keyword0>Nourriture</keyword0> ne coûtent pas de <keyword1>Mana</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -346,6 +352,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "c25e943d61f52562ae2c56c923a91faf6fa10da393e46f1593361d09912b23cd",
     "text": "Couteau de coupe-bourse"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "546b25424fbccd1773461ed0c8782a5312d3a60c1076976e0d792a0190a93c44",
+    "text": "Gagnez un emplacement de carte supplémentaire en main"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -407,6 +419,12 @@
     "sourceHash": "0191ce0358ac6e595036410d4df17b5852f1ff7d2efe385cc1b16d610dac167c",
     "text": "<keyword0>Purification</keyword0> affecte tous les alliés"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "a6621a8f9e54a895b3e24ab18328bb3cf893f5d95bc3fe4b09fc582986c24c87",
+    "text": "Les cartes <keyword0>Nourriture</keyword0> sont deux fois plus efficaces"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -454,6 +472,12 @@
     "source": "Tattered Pages",
     "sourceHash": "9236923ba5717a10381adb85cd30758080b2eb29e4a37b8059c0f95f00f4d054",
     "text": "Pages déchirées"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "1c1587ed912c3236f7f7b94975db8b97f8111ff76bb63431a014d5d095150590",
+    "text": "Piochez {{value0}} carte supplémentaire au début du combat"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -725,6 +749,12 @@
     "sourceHash": "b41c1e40d42f6f8fbbc358fe5498bf628bdf7b58f1f8df70a9edff61fd932b61",
     "text": "Une attaque qui inflige le double de dégâts"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "f3c0719f87e072e801e417e0149b351558eb21a77d0c690c50766b03ae36ae8a",
+    "text": "Les dégâts accumulent le <keyword0>Gel</keyword0> ; Lorsque cette accumulation atteint la moitié de la <keyword1>Santé</keyword1> maximale, un tour est sauté ; La récupération confère {{value0}} tours d’immunité commune à l’<keyword2>Étourdissement</keyword2> et au <keyword3>Gel</keyword3>"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -749,11 +779,29 @@
     "sourceHash": "2602d446f940f6ebe3914c3b27d28f2f06e18239209a6fcd04624d6137ddc777",
     "text": "Empêche le prochain effet de statut néfaste ; Les dégâts directs s’appliquent toujours ; Dure jusqu’à utilisation ou <keyword0>dissipation</keyword0> ; Ne se cumule pas"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "370fd0c3157c1e3e29b16acc4e4cb0ed288200ae26c90a217746cd108bba42c0",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> sont réduits par l’<keyword1>Armure</keyword1> après le <keyword2>Blocage</keyword2> ; Les attaques ont {{value0}}% de chances d’infliger un <keyword3>coup critique</keyword3> aux dégâts doublés"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "c95c6590376097832448440b615a076e233cbc63ee76ee5627e99f5f6599d113",
     "text": "Retire les effets bénéfiques d’un ennemi"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "f70ebc98cb61e0441bcdbf241b97cfbaf10c35c2366a19c4309a636682f8f91c",
+    "text": "Les dégâts accumulent l’<keyword0>Étourdissement</keyword0> ; Lorsque cette accumulation atteint la moitié de la <keyword1>Santé</keyword1> maximale, un tour est sauté ; La récupération confère {{value0}} tours d’immunité commune à l’<keyword2>Étourdissement</keyword2> et au <keyword3>Gel</keyword3>"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "d1abbe060b93e889424bd84f161330c092282d4e0f69a4cbc46f55f3976a3baa",
+    "text": "Les <keyword0>Épines</keyword0> ripostent avec des dégâts de <keyword1>Nature</keyword1> lorsque leur porteur est touché, même à travers le <keyword2>Blocage</keyword2> ; Elles perdent ensuite {{value0}} cumul"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,

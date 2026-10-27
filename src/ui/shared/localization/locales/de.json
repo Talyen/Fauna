@@ -317,6 +317,12 @@
     "sourceHash": "852ba2ea847e486cb28f3a870bf49be5d7e4858e4f4e23df1e5e3668417e01db",
     "text": "Wird geladen…"
   },
+  "content.boon.blossom-cake-stand.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
+    "sourceHash": "fd221d78ef1b246709d22e54ad05760615e95390f86f398ac210eea6cb236fe5",
+    "text": "<keyword0>Nahrungs</keyword0>karten kosten kein <keyword1>Mana</keyword1>"
+  },
   "content.boon.bone-charm.name": {
     "reviewed": true,
     "source": "Bone Charm",
@@ -334,6 +340,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "5cf26d170aa98cdb4926be7bcedfa40cfb5fc539f0cb9c3807b76b2645ade535",
     "text": "Beutelschneidermesser"
+  },
+  "content.boon.facet-abacus.rule": {
+    "reviewed": true,
+    "source": "Gain an additional hand card slot",
+    "sourceHash": "22fa15949f07e3fff203772a0477a3b7839b4bd1464b8279c856de54a31571fc",
+    "text": "Erhalte einen zusätzlichen Handkartenplatz"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -371,6 +383,12 @@
     "sourceHash": "3b95ee5e51821484b2aa8fec425eb9e6ad84080ddb534e0df027d04de5c4f874",
     "text": "Meteorit"
   },
+  "content.boon.nectar-dipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> cards are twice as effective",
+    "sourceHash": "9d8c470f36425122176f79b3d7f04a0d24f93a5d7847f49000141b9f4e3890c8",
+    "text": "<keyword0>Nahrungs</keyword0>karten sind doppelt so wirksam"
+  },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
     "source": "Parasitic Bloom",
@@ -406,6 +424,12 @@
     "source": "Tattered Pages",
     "sourceHash": "6f8418837e98173a1718e72c8db57cfaa9b684a7129b9276ad63baf0822c49e3",
     "text": "Zerrissene Seiten"
+  },
+  "content.boon.tattered-pages.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} additional card at battle start",
+    "sourceHash": "51ee765e4dc4f04e3192f2d2de9bae52e4748874a2ab69230885b19ad07a58f1",
+    "text": "Ziehe zu Kampfbeginn {{value0}} zusätzliche Karte"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -677,6 +701,12 @@
     "sourceHash": "80dcc7d2c7bac53a55d7f8e752bff2eb8189bffb9babccd0b30203505cb0d600",
     "text": "Ein Angriff, der doppelten Schaden verursacht"
   },
+  "content.glossary.keyword.freeze.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "1a33c3013db49021c6b059953fc146d7cb5376f2f022e8f755f172c3017b745a",
+    "text": "Schaden baut <keyword0>Einfrieren</keyword0> auf; Erreicht der Aufbau die Hälfte der maximalen <keyword1>Gesundheit</keyword1>, wird ein Zug übersprungen; Nach der Erholung besteht {{value0}} Züge lang gemeinsame Immunität gegen <keyword2>Betäubung</keyword2> und <keyword3>Frost</keyword3>"
+  },
   "content.glossary.keyword.health.definition.rule": {
     "reviewed": true,
     "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
@@ -701,11 +731,29 @@
     "sourceHash": "8152da7153916fd413b4ce059ef6bae0f9387efe55fadbd1bb3f0026ac8b7f8d",
     "text": "Verhindert den nächsten schädlichen Statuseffekt; Direkter Schaden trifft weiterhin; Hält an, bis es verbraucht oder <keyword0>gebannt</keyword0> wird; Nicht stapelbar"
   },
+  "content.glossary.keyword.physical.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is reduced by <keyword1>Armor</keyword1> after <keyword2>Block</keyword2>; Attacks have a {{value0}}% <keyword3>critical</keyword3> chance for double damage",
+    "sourceHash": "cf3cc333f007855714eca5d5f02310da37507ee8fad4284196c490b5aaadd015",
+    "text": "<keyword0>Physischer</keyword0> Schaden wird nach <keyword2>Block</keyword2> durch <keyword1>Rüstung</keyword1> reduziert; Angriffe haben eine Chance von {{value0}}% auf einen <keyword3>kritischen Treffer</keyword3> mit doppeltem Schaden"
+  },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
     "source": "Remove beneficial effects from an enemy",
     "sourceHash": "8c9ba2938a831d23638bd7a7b6b20b5f084e680b41f7d817138eef2ca618bc2a",
     "text": "Entfernt vorteilhafte Effekte von einem Gegner"
+  },
+  "content.glossary.keyword.stun.definition.rule": {
+    "reviewed": true,
+    "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
+    "sourceHash": "5c68027efaa288e01630fcd9b20e3ef45821a562701001f69ff24d0d7536b90f",
+    "text": "Schaden baut <keyword0>Betäubung</keyword0> auf; Erreicht der Aufbau die Hälfte der maximalen <keyword1>Gesundheit</keyword1>, wird ein Zug übersprungen; Nach der Erholung besteht {{value0}} Züge lang gemeinsame Immunität gegen <keyword2>Betäubung</keyword2> und <keyword3>Frost</keyword3>"
+  },
+  "content.glossary.keyword.thorns.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> retaliate with <keyword1>Nature</keyword1> damage when hit, even through <keyword2>Block</keyword2>, then lose {{value0}} stack",
+    "sourceHash": "9f6304e60c316ab7a7dddd9b7434824b66fef32d6ac90ce8c80ae9dd61bb1646",
+    "text": "<keyword0>Dornen</keyword0> vergelten bei Treffern mit Schaden vom Typ <keyword1>Natur</keyword1>, auch durch <keyword2>Block</keyword2>; Danach verlieren sie {{value0}} Stapel"
   },
   "content.glossary.keyword.water.definition.rule": {
     "reviewed": true,
