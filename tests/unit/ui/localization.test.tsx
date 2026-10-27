@@ -81,7 +81,7 @@ import french from "../../../src/ui/shared/localization/locales/fr.json";
 import russian from "../../../src/ui/shared/localization/locales/ru.json";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { Keyword } from "../../../src/ui/shared/keyword-text";
-import { CreatureCard } from "../../../src/ui/shared/cards/cards";
+import { AllyCard, CreatureCard } from "../../../src/ui/shared/cards/cards";
 import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
 import {
@@ -611,6 +611,21 @@ it("localizes campfire health and committed recovery without changing the rest o
   expect(container.textContent).toContain(`5 → ${after} Santé · +${after - 5}`);
   unmount();
   vi.unstubAllGlobals();
+});
+
+it("announces a summoned Echo by its localized identity", () => {
+  const game = structuredClone(requireBattle(teamRun(42, ["memento"])));
+  summonEcho(game, game.team[0]!, "player", 5, []);
+  const echo = game.battle.minions![0]!;
+  const view = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TooltipProvider>
+        <AllyCard creature={echo} />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("button", { name: "Écho", exact: true })).toBeTruthy();
+  view.unmount();
 });
 
 it("localizes shared Negate only when the bearer can be identified", () => {
