@@ -317,6 +317,42 @@
     "sourceHash": "852ba2ea847e486cb28f3a870bf49be5d7e4858e4f4e23df1e5e3668417e01db",
     "text": "Wird geladen…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "c15476fa47fa0f8107b3841b810c04c52437a16e99c09b2a74d88995b7c39705",
+    "text": "Faltbrücke"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "9105438124368af1b70aaab7365fdab71dfaf3f9b9beebd6b4474aca69c1607b",
+    "text": "Äthergrammophon"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "7e01ed7f2f9e25971ef4a0f12b61a46c0a0448da8e63bb753369386580c5ca3b",
+    "text": "Imkerrauchgerät"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "d58789ebf365fd2b203979d19e6d28f46d5254425b849ac3afec78fa6111adcf",
+    "text": "Ascheregenanhänger"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "261c54c413787bdcd7522d721b9d4134e88688243204e16542ecbbad175a0a1f",
+    "text": "Basaltglas-Lesezeichen"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "d3441fd0cda28ee4af12d640e589945776877e1a5a4d71490bbc2e3976fe9c22",
+    "text": "Blütenkuchenständer"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -341,6 +377,24 @@
     "sourceHash": "27b172b8743ca9ae484da58a07637eccdff8495b1479bb20b52162256c89e33d",
     "text": "Messingrauchfass"
   },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "b1bf4939686a96c5a8f908f28a28cb7de07eb973c4bd8e1bbc592a4cba1c61c3",
+    "text": "Dornenschläger"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "649dfd7c5af50351538dcf29f5e4d3d22d6bd6e4e1db4b5558363a9ee21a5e80",
+    "text": "Bachhüpfscheibe"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "dbc7bc620cb798f649a399be5cf3369253c6d169de6cfefa996566901a795537",
+    "text": "Ringelblumenseife"
+  },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
     "source": "Camp Hammock",
@@ -352,6 +406,12 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "db0cdb33b5c6996905b3a02315b9055309bdce92c3e492181b4935f3d165bfed",
     "text": "Verbündete in Reserve können <keyword0>Heilung</keyword0> erhalten"
+  },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "a53c4f0f7010a8d087b6b1fb934f9b73d36bef09c3c6a8a5f0b2a5cd5e79a00e",
+    "text": "Glutfächer"
   },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,

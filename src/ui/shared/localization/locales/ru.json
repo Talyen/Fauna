@@ -317,6 +317,42 @@
     "sourceHash": "cfda79cf8f70f0029f142732530155f90b9f40050a2ad9dfce35e0144df37df0",
     "text": "Загрузка…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "db58de20cfd7847c5fb19a7958279135ad7c94e3ccc903cd8a0b89f77851b438",
+    "text": "Складной мост"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "50ff0c6b0f6f15dcc2e67242ae37cb2d02c7b47b6a40dd6a9e4153761f7a295e",
+    "text": "Эфирный граммофон"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "483afe11e336dfbe0dd6bdf0a4f6b005c183b58a79bfb21ca912ca894465fa31",
+    "text": "Пасечный дымарь"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "38d7540973cea758166ecd54818df1cbcc84b7d3899c201a3394ea25828fce00",
+    "text": "Пепельная подвеска"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "cfb5239b0367b3f597d4cd16f4decd9538f6288f95ea7e4bc737df597840ecef",
+    "text": "Закладка из базальтового стекла"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "ce85bbdc7961f6c5e9a78efb6a76d2775bddd786ac44222632aa9b921ad4ac8d",
+    "text": "Цветочная подставка для торта"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -341,6 +377,24 @@
     "sourceHash": "c064fc4cc4f723be380f1337f6cec221da0c405ec37e9a46c296fef4debbd42b",
     "text": "Латунное кадило"
   },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "0fae2234160d4ba1884d2ca3239599a3bf06a0b83ac45184d6c9a3942603d1cf",
+    "text": "Ракетка из шиповника"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "e4161cff0d0348725661891c63f0dd2c2461c19b2f5499aac4fac315db2244a4",
+    "text": "Диск для речных скачков"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "1e3d9d963b6511851520b9a9c15e73b344ba56aed694307df735fb6621404637",
+    "text": "Мыло с календулой"
+  },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
     "source": "Camp Hammock",
@@ -352,6 +406,12 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "f268dc56e4c35b51aa32871efd655109388e6c44a9fff3176b8c22308c411aba",
     "text": "Союзники в запасе могут получать <keyword0>лечение</keyword0>"
+  },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "35eccf0086bafb4b8c79d535fa4409939af5e95fff82b2a69dfb9544f55025a8",
+    "text": "Веер угольков"
   },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,

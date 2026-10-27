@@ -317,6 +317,42 @@
     "sourceHash": "4b4fb2b8421ca2d9b5e9462797c23b087695fbbf0aba3a578edad3a9b1c30e59",
     "text": "加载中…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "9718021cd420b16c699b74e104bad8ecd247cd2504fbf4a1f78bf3b556d01ce4",
+    "text": "折叠桥"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "50513500316b28cf90a4fbedf34150267e5cff5489cbaffdee3c83afab31c2d9",
+    "text": "以太留声机"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "8dcf85614cff70efcd2b69516712ec11f92c802cb08a6bb553580bf47dfc8d78",
+    "text": "蜂场熏烟器"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "b04f8fea8e47c5d27a3228f8fb6a108323f6d6482f5461b7ae68d3b8ff66dd5c",
+    "text": "落灰吊坠"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "78ce397cc13df83037082a0b63654ee1ebc6b1f0e66664029cc7d2bb6500e895",
+    "text": "玄武岩玻璃书签"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "ceaaf69946510c5716d41db176aae3ba417a2bf0d98f7836ee57efe927ebe850",
+    "text": "花朵蛋糕架"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -341,6 +377,24 @@
     "sourceHash": "492f12f8aa76b4a76af38235126a4e7349ad9ae684e6cfe0c4bff83e7277f316",
     "text": "黄铜香炉"
   },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "4a8df0bd03fd4e93dc14fdc698c63bdf32f15079dc9ec9c4ebc6b08809c34f27",
+    "text": "荆棘球拍"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "0241fad79df1d9a95b0f17c69dc5f7d7695fee8f8480b6bc6972189a9f4b53e7",
+    "text": "溪流跳石盘"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "c10b6c373d551c96fd5348ab2be587a629eb4066afc4742f2222af533053e50f",
+    "text": "金盏花皂"
+  },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
     "source": "Camp Hammock",
@@ -352,6 +406,12 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "9a795b7010c74e2fa62b9b1122b1b432ddfc33b1594237ee27a824e424fd8bee",
     "text": "后备盟友可以接受<keyword0>治疗</keyword0>"
+  },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "78f3a722bc65210db341dd3352d8d334635d535d4a13f58ea7db820926352565",
+    "text": "余烬扇"
   },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,

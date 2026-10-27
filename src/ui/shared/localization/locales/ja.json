@@ -317,6 +317,42 @@
     "sourceHash": "aade6585fa0ffaee68cd420c87aecd3748a1258288f93da8a4ff1a847e576e1e",
     "text": "読み込み中…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "8f165bb02cda3e236c8756bcf17153706b3d66435660a46ab3690a28c50fd7e2",
+    "text": "折りたたみ橋"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "29a08fbbcba3a8cf5c8a036d85887c1c960d01715f9557de14875c7c76f53b70",
+    "text": "エーテルの蓄音機"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "52a0912b205b51db663bbdb1e9efeff6f81577c87ad14d7824788c66dc823fc5",
+    "text": "養蜂の燻煙器"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "87bdcb233370c5e2509cb419583d301971170063b70d7e45519744f6bbee08e1",
+    "text": "灰降りのペンダント"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "ebf22e6fddabda9eafb7b961cec515fca30a73b83484bf6c1b5f00052189e8ea",
+    "text": "玄武岩ガラスのしおり"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "b78682858edf8497927a082a846589be15aec9c998da71e98e97c12317dce8b7",
+    "text": "花のケーキスタンド"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -341,6 +377,24 @@
     "sourceHash": "7378ce53146d8e518376135c30f1b0b89110c86d6b92894c37f0d6dfbbca379a",
     "text": "真鍮の香炉"
   },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "4b39118759b45aafbaa327f95b56ed800540281031b9b7af1941625707e71f8e",
+    "text": "茨のラケット"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "b35f245d6c92250961bad24d70227bc053d5bf6e4f6795e6206b560668eab941",
+    "text": "小川跳ねの円盤"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "c6b5cd29a4255a6559599f7f2576e072a4e86410f0e0ccf2d7059b2cce27c85b",
+    "text": "カレンデュラの石鹸"
+  },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
     "source": "Camp Hammock",
@@ -352,6 +406,12 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "675c52706ebbb83ba990d2d3372a507185652ac644bf540ea4d80970cfc6a380",
     "text": "控えの味方も<keyword0>回復</keyword0>を受けられる"
+  },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "8cd879760c6a1304004155bbd73f6f144b2599d8bd47c50b20a041f2a555b9f9",
+    "text": "熾火の扇"
   },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,

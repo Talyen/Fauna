@@ -317,6 +317,42 @@
     "sourceHash": "3dc785246de4d8761dd23972f5c9fef611a39f01a91ed6f6963f6a60d33208af",
     "text": "Cargando…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "d2c101edc8080a385c26bdf51a30adc133258512746be80df4b65d72529e8cf9",
+    "text": "Puente plegable"
+  },
+  "content.boon.aether-gramophone.name": {
+    "reviewed": true,
+    "source": "Aether Gramophone",
+    "sourceHash": "3bed87619a3c26fb4abab1d9b03e44ff220a535e40a66c7de70382600715748e",
+    "text": "Gramófono etéreo"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "b38486ed6a9017f10387921fffcdf616f8f0dae1bb2a7a036bd8b4cdbdf48886",
+    "text": "Ahumador de colmenas"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "dce5b5f3f298d4f9237720f885a20f4ed28f161f222ece98f903b15ceaf723cb",
+    "text": "Colgante de ceniza"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "4b1a6e8d32c14568be168053b1231aaa37c75ee0631abff2fe71c341df11a8de",
+    "text": "Marcapáginas de vidrio basáltico"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "f62c6e9f7b6ab448beabd1c53e52b64ea791984425a42f7f1be0495d3dd0fdff",
+    "text": "Soporte de pastel florido"
+  },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards cost no <keyword1>Mana</keyword1>",
@@ -341,6 +377,24 @@
     "sourceHash": "bf3fe178f2945982b5e674768496f7675205c329c05aeab1a790bfd618e00a3d",
     "text": "Incensario de latón"
   },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "44407b7db6549276f568977a4c7fe0ebf5ea1071af39a0ef8759f6027c9fa1b8",
+    "text": "Raqueta de zarzas"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "04321a4aea5268cbd1a8f5fa7958fa3617016c2cddb746ab2bc49c6a2bbdc274",
+    "text": "Disco saltarín"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "06e63d49cdd8733bae233d6df7af8b6eaffd4710ab4edb347058398bd01629ec",
+    "text": "Jabón de caléndula"
+  },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
     "source": "Camp Hammock",
@@ -352,6 +406,12 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "87e756cc71521f56c6af1f25508cabfe4a01edf6a5bb3ad7d6c71aab264925a5",
     "text": "Los aliados de reserva pueden recibir <keyword0>curación</keyword0>"
+  },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "0aeac65c3e362f3b3582a231f6227228f83e03cca730eddebfdf0530b0ac09d4",
+    "text": "Abanico de brasas"
   },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,

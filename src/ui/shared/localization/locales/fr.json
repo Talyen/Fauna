@@ -317,6 +317,12 @@
     "sourceHash": "46ca41bfed8aa1f6c06b67c52d2831f2fc27ca0feb9cdefcc1d5a6de903eeefa",
     "text": "Chargement…"
   },
+  "content.boon.accordioned-bridge.name": {
+    "reviewed": true,
+    "source": "Accordioned Bridge",
+    "sourceHash": "d51dec70799f31d44fec44319146e0160012cdbe126c8449ba9da036ab28cd70",
+    "text": "Pont en accordéon"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -328,6 +334,30 @@
     "source": "Repeated attacks cannot be <keyword0>Dodged</keyword0>",
     "sourceHash": "631deaf094930aa27ff537b4dd6ed48c1238c15e13027714202cc4a15244aa7b",
     "text": "Les attaques répétées ne peuvent pas être <keyword0>esquivées</keyword0>"
+  },
+  "content.boon.apiary-smoker.name": {
+    "reviewed": true,
+    "source": "Apiary Smoker",
+    "sourceHash": "ff245ef3eee7926be1f5f808e49d017095a1c5ffb7dd4d3322d21de26007e41b",
+    "text": "Enfumoir d’api"
+  },
+  "content.boon.ashfall-pendant.name": {
+    "reviewed": true,
+    "source": "Ashfall Pendant",
+    "sourceHash": "15c082e28952a373b60e834c06cb9b40042c8e2c109e5d79b858c4b1935e9f28",
+    "text": "Pendentif de cendres"
+  },
+  "content.boon.basalt-glass-bookmark.name": {
+    "reviewed": true,
+    "source": "Basalt Glass Bookmark",
+    "sourceHash": "7940fa7af63d2d9030e7478ed2c01a8f859054c77619151112bdac646f466500",
+    "text": "Marque-page de verre basaltique"
+  },
+  "content.boon.blossom-cake-stand.name": {
+    "reviewed": true,
+    "source": "Blossom Cake Stand",
+    "sourceHash": "fffeb3ee612e585899206228584d0349bb42ef20e8ee861ea449a36eb9374ab6",
+    "text": "Présentoir à gâteau fleuri"
   },
   "content.boon.blossom-cake-stand.rule": {
     "reviewed": true,
@@ -353,6 +383,24 @@
     "sourceHash": "0b572366da476a1ef71d0a44a7f714e96f1e97a39b64c0d0318aaae24c87507f",
     "text": "Encensoir de laiton"
   },
+  "content.boon.briar-racquet.name": {
+    "reviewed": true,
+    "source": "Briar Racquet",
+    "sourceHash": "6dea2e35425c65a6424df9dacee81b408a9a5f4b052a31456bd8e6c897727025",
+    "text": "Raquette de ronces"
+  },
+  "content.boon.brookskip-disc.name": {
+    "reviewed": true,
+    "source": "Brookskip Disc",
+    "sourceHash": "a2853be7b9ef61632bed759e68867014dbcee1483d9b53fc0629815fef8e9600",
+    "text": "Disque ricochet"
+  },
+  "content.boon.calendula-soap.name": {
+    "reviewed": true,
+    "source": "Calendula Soap",
+    "sourceHash": "900e99f58180e3260da07df532d719eb36b546c7606effb3b904ac4994c99cde",
+    "text": "Savon au calendula"
+  },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
     "source": "Camp Hammock",
@@ -364,6 +412,12 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "95f4b83f612b70761c990f8c12196a8b2af33ffb37c701215322bdd87884d233",
     "text": "Les alliés en réserve peuvent recevoir des <keyword0>soins</keyword0>"
+  },
+  "content.boon.cinder-fan.name": {
+    "reviewed": true,
+    "source": "Cinder Fan",
+    "sourceHash": "506fd371e60b16f479c91d2f639c4b3e82d9db44fa49d8387a8cb7fe0a34f876",
+    "text": "Éventail de braises"
   },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,
