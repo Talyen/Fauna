@@ -413,6 +413,48 @@
     "sourceHash": "9ff5bb7c579c839ea071590ac6e211168fcff02f6180c9b9d72fec5fe445e8e9",
     "text": "Pedra do trovão"
   },
+  "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "df482ebc1f36a39623bb78560354e0f1d5fc4cb63e9c7b6c8987cfea6b8407e0",
+    "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0>"
+  },
+  "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "e1f62f4d3e1c622e3308ea536e34debbe8cce07ab0e828b25191ddb4775d22c6",
+    "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0>"
+  },
+  "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "054eb2aa500eb7cf3822aa6b7cf73977437f5d71a408c2cbcf0793eedafdab4c",
+    "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0>"
+  },
+  "content.card.dawncall-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "c96c237ebebacc40bc7118174f229d8f4c7ea54887f788212eacbc6a8492a82c",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
+  },
+  "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "6a50096535733716557a83eb1179c8d06d67fa52faa1808215e6c05228f4afd0",
+    "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0>"
+  },
+  "content.card.dunefox-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "c8487a771b515e3c0e0b8344d4e66c150caae0958f9b9f646de5047f5cec845a",
+    "text": "Cause {{value0}} de dano <keyword0>Físico</keyword0>"
+  },
+  "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "42399c1b22e7781b2cba71ef62e38e261a18d54d1de572b67cd7b14ba9659c1c",
+    "text": "Cause {{value0}} de dano de <keyword0>Atordoamento</keyword0> a todos os inimigos"
+  },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
@@ -467,6 +509,18 @@
     "sourceHash": "9a512f756d3caaa8103be985e3756e928d9c45b5d2713d30b4204b42162c48f8",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
   },
+  "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "1568e13408d7efb104f1b6b0871a506cf6f888652ccb9b309963bb3b6d79c974",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
+  },
+  "content.card.orifable-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "15d859e0199aa3615768dc4fd3cc5288690f83a7f4be39ffbf659055e736fdb8",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
@@ -502,6 +556,12 @@
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "d132e201925469a66b3e9d3f2d37479d31d1ae487bbee4c229f84d78701df65a",
     "text": "Cause {{value0}} de dano de <keyword0>Luz</keyword0>; <keyword1>Expurgue</keyword1> o alvo: remova {{value1}} efeito"
+  },
+  "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "06010de21ec70f8bba60eeb56e3d9ddd200add4f52f281870ad23fab8f9c6179",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -845,11 +905,155 @@
     "sourceHash": "42f4269432d70809a8af8dbe3ebee3ade9688fe4506a58103c7bbef4b15565f4",
     "text": "Água"
   },
+  "content.species.chimecricket.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "b277ee5f912ad9a2b69ffd9ec0e1d695a01267258817c5065280c7b29d9b5f6d",
+    "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
+  },
+  "content.species.chimecricket.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "69d3bc4034691c91f6f49a4b816af40ef099401d55a5b1f19cd83ecc5eb54feb",
+    "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
+  },
+  "content.species.chimecricket.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "e96e50ae385d5b1b9ab1e2c80bad1b2c3bc0d825ab9316880958b2b1aca416a5",
+    "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
+  },
+  "content.species.chimecricket.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "37b0a956a6edc46e4e4eea7f3b4fffae6bcb109ee53fa8423737242ab63f75e5",
+    "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
+  },
+  "content.species.chimecricket.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "bcedea5ce65add72420c3c4f37d73396e8b0b81c611b03b01163151f968b3811",
+    "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
+  },
+  "content.species.chimecricket.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "b9631d8288c4bb633c02adfc9fad3866d814f855a5f6af21336df5a91d05b10b",
+    "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "98af3f3809faafb97e8e018d040b10915326dd4326c02371c6e296c4264a2d1c",
     "text": "Areias movediças"
+  },
+  "content.species.mossguard.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "e0aad110439f2351869aaa3e9026b97938a44dad8cdd2ffbd93d70a2079392f7",
+    "text": "Mantenha {{value0}}% a mais de <keyword0>Bloqueio</keyword0> entre turnos"
+  },
+  "content.species.mossguard.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "a6f5b1ad669a27af5d693007771f31ac213ce4bff051a7370a49bb525dd06f10",
+    "text": "Mantenha {{value0}}% a mais de <keyword0>Bloqueio</keyword0> entre turnos"
+  },
+  "content.species.mossguard.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "3aecc079a4cadadb2ea4d778fdfda1af53acfecc943dc915ab9c01c5f1b275e7",
+    "text": "Mantenha {{value0}}% a mais de <keyword0>Bloqueio</keyword0> entre turnos"
+  },
+  "content.species.mossguard.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "16655e331c397aa7f597a200e68be68f4dc9dd5f3f24e42b95759be7643a2517",
+    "text": "Mantenha {{value0}}% a mais de <keyword0>Bloqueio</keyword0> entre turnos"
+  },
+  "content.species.mossguard.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "a5dc772ec49183117ce68aaf553730ff9d825205e10c09c2d33f15a44c794e27",
+    "text": "Mantenha {{value0}}% a mais de <keyword0>Bloqueio</keyword0> entre turnos"
+  },
+  "content.species.mossguard.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "d8bafefa2a2330d0df96a9010d812e3210bfc5de212d6cbe7cbd4fa355e4b3af",
+    "text": "Mantenha {{value0}}% a mais de <keyword0>Bloqueio</keyword0> entre turnos"
+  },
+  "content.species.shadebrim.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "f44ccd3a4c42f87941902dfd18929ad662ab3443b48deeda691d6106189d3289",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Queimadura</keyword0>"
+  },
+  "content.species.shadebrim.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "b57e85145b2f1fae63511b5f89af82c6faf4c894ffadeab93721ea8a4f38a5b2",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Queimadura</keyword0>"
+  },
+  "content.species.shadebrim.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "825fc35bb4c369e57dbbb33beb4cd4489f155e9877a52cdec93bcc8c45312007",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Queimadura</keyword0>"
+  },
+  "content.species.shadebrim.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "8fde7f2847edcfcd888ca0a15ee2b95cc4240dc62c6798c084f3fbdbf484ab88",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Queimadura</keyword0>"
+  },
+  "content.species.shadebrim.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "42b61aa6bd719f726675083743ace75a18bf3f8b31840c0940f694f0cb8c48df",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Queimadura</keyword0>"
+  },
+  "content.species.shadebrim.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "df2d35a5e7fa8100200ccd3243b9b029304de5b978985aa8370d50aa56c3450b",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Queimadura</keyword0>"
+  },
+  "content.species.stillara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "ce6b5d863f9040f310cbb7ee338a2ee88c01f086e83f99d173e5fac4ddadfa32",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.species.stillara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "31cc877e6c15a8bd0fba85e63fe1d67c38f8105fe26fc313fd62a9f18716a74f",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.species.stillara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "65ec20e6c06f4ec35bc6d374b573c6e3700e2d189998d35df37867591d67396b",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.species.stillara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "5ea5b48b7190a727a8d9fbb47fe81231fb681873372a5920b96bb1ca6e37b86e",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.species.stillara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "18c8c9eadfbbd683cf19ef797a5906c29a25e9e83d151fbe72317d4a8b8bfbbd",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.species.stillara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "5f7d3ea23e9a3b179c3c82b989c56dca8fb59669130e9df0bf6f256626778b6d",
+    "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
@@ -880,6 +1084,18 @@
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
     "sourceHash": "70def7ca48503e51f350ca2e934aee0c7f9104428206591fc1caf7c161a11ee2",
     "text": "<keyword0>Atordoamento</keyword0>: {{value0}} turno"
+  },
+  "content.status.cooldown.v2db257f39699f407.rule": {
+    "reviewed": true,
+    "source": "Control immunity {{value0}}",
+    "sourceHash": "ce08427955504a741652173a00fc1cca2fb796a3cdde72f048647caa4d19df84",
+    "text": "Imunidade a controle {{value0}}"
+  },
+  "content.status.grace.v6e81bc0f25243d28.rule": {
+    "reviewed": true,
+    "source": "Death's Door {{value0}}",
+    "sourceHash": "d3c470905d1e6112c982cbc7b4ebcf8826c8bcd82d958174ea4feac4df6ff353",
+    "text": "À beira da morte {{value0}}"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

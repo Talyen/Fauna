@@ -413,6 +413,48 @@
     "sourceHash": "daa6d2f6dcdc1c7a8493f5c50d90bb518bcce75778c53cc4d79acb0572f5cb55",
     "text": "雷石"
   },
+  "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "a162cc787f9f47c761e86ae740b8911c54f862ce4231d54876f486ea3cc71702",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "61f0295fc178d27cfc6fd80020f3375571aee701bec1e374514034ce8eee4cbd",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "3e0d5e2005e2b4de8d20f5231d9abfecfd1703657bfb6d3b97ff24c2193199d7",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.dawncall-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "5e6b8be03a1dae23b916db3b9829c286ecf6cd43dd0b4187015974f6a24a227d",
+    "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "f7d88ea1a8ed34c9a01607a2d34383100fe067f4c6739635d824a02401e48bbc",
+    "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.dunefox-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "cf1ce6404c4c1b7c20f00dc207ae16f69a05623b4fdc8aa4d33a987d8d0c9464",
+    "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "5ef2173e0eb88b1b772d9aaf670d205a4af4cd7ce1daca7419beb27188f376aa",
+    "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Consume</keyword1>",
@@ -467,6 +509,18 @@
     "sourceHash": "0ab728abb65f93be6e4fb08204647909cf72261e142e134b31c2d84d783482e1",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.neradora-bloom-shelter.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "53ea86f603adde373da0c8bfdd33ea041eca6cdd2971c22455306e93b4252232",
+    "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.orifable-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a1ff2c8f0f0afb90cd262257ebe1bb8f0c213bf2d99f778619556a1c8a0a9eb1",
+    "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
@@ -502,6 +556,12 @@
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "dd90cd704804766f06ac76864c1800a512b442870777cc8b803222880ffbcf07",
     "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象の<keyword1>強化解除</keyword1>：効果を{{value1}}個取り除く"
+  },
+  "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "67ce9d6a43ccd096543f1304f3076ac576af54d13078ffda67086275837eafea",
+    "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -845,11 +905,155 @@
     "sourceHash": "c94de88083fe5ec567d91def86d6bbedcdf8224c311353a12d82511a723d263a",
     "text": "水"
   },
+  "content.species.chimecricket.passive.0.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "34bc8f12021efe30fc6a3e418705bac4e38069e449605dc38279ce044ef33170",
+    "text": "各ターンの最初の能力が{{value0}}%の確率で繰り返される"
+  },
+  "content.species.chimecricket.passive.1.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "ab55cfd8276528daa1d4480a698e2f066eecdbd12bd23efa4bf200952db1ae85",
+    "text": "各ターンの最初の能力が{{value0}}%の確率で繰り返される"
+  },
+  "content.species.chimecricket.passive.2.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "7fdda3dd286c02712b04a6e4aa03692d40857200616db029f39e7b57147a74b6",
+    "text": "各ターンの最初の能力が{{value0}}%の確率で繰り返される"
+  },
+  "content.species.chimecricket.passive.3.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "cf2025cf5637959bbd86c3b49f6f1151246e2a9e492b1f05a01697c9eaac3c4b",
+    "text": "各ターンの最初の能力が{{value0}}%の確率で繰り返される"
+  },
+  "content.species.chimecricket.passive.4.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "e76af391258a69c2fac87427244a6388b2c40ffa20f3fcbf9b4ecadb263333cf",
+    "text": "各ターンの最初の能力が{{value0}}%の確率で繰り返される"
+  },
+  "content.species.chimecricket.passive.5.rule": {
+    "reviewed": true,
+    "source": "Your first ability each turn has a {{value0}}% chance to repeat",
+    "sourceHash": "e102d40002bd8e43943ae3485ce9975cc23ac46e42d850d0f7add19e3ce74e56",
+    "text": "各ターンの最初の能力が{{value0}}%の確率で繰り返される"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "ba32ca08ce42707b8f70ef91c688db3a68f5165d5efa12cc65f0ab0ec478ef3c",
     "text": "移ろう砂"
+  },
+  "content.species.mossguard.passive.0.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "8bcb9b2fd7b705921070d8dc461208ea021a0c1c018dab9a2f86a062faeb9ae0",
+    "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
+  },
+  "content.species.mossguard.passive.1.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "eda02733864fe0181497e932d30f2bf44d0eb8d9ac8e9e85b0e85ed86d87104c",
+    "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
+  },
+  "content.species.mossguard.passive.2.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "e8702616fcf64d19fba46ffd07f537193e4a69b6497d9461955d150746e05d04",
+    "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
+  },
+  "content.species.mossguard.passive.3.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "d76f988e967e687e8d2e2d629a917646ef5ee1c5d9a28b62af60943705b190d5",
+    "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
+  },
+  "content.species.mossguard.passive.4.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "9f6e1ae10a7ba2f01d9203254407e04ec9785f1351a3c76dadb493fd6fce3916",
+    "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
+  },
+  "content.species.mossguard.passive.5.rule": {
+    "reviewed": true,
+    "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
+    "sourceHash": "d756b79fb3977e9b6c0a426d00f378b393bba87ae9c85bec0b3541a150f42688",
+    "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
+  },
+  "content.species.shadebrim.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "2a0e326e1d3cacc7b4b2fdd1f3b12ba56e59b392a84ba483723a009c87c01c47",
+    "text": "味方が受ける<keyword0>炎上</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.shadebrim.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "fbb7bf2d21e1407bd4b73c2a132d27aa6f6eb1f738e43c80845cc873856d0241",
+    "text": "味方が受ける<keyword0>炎上</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.shadebrim.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "63f0afbc2d36dd956f242d7280e64858407665a4c5f15c1309dd6393d7553b27",
+    "text": "味方が受ける<keyword0>炎上</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.shadebrim.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "84035e62b428bdf35bcc45a8ebc899e16c20335c0d5c4faf413b4479dc00cae4",
+    "text": "味方が受ける<keyword0>炎上</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.shadebrim.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "3771101a723b35cea109252f70ee27722738960c5d3819b7cd1f55f78e72f413",
+    "text": "味方が受ける<keyword0>炎上</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.shadebrim.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Burn</keyword0> damage",
+    "sourceHash": "a47147bde8233e4ba68cc157afb172b5f3617229cacec4eae39a6d3fd77e216e",
+    "text": "味方が受ける<keyword0>炎上</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.stillara.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "ca2e83eadff2499293ac2a2ca42f60bd062050c73a94966333d1c626c9f7b173",
+    "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.stillara.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "3b9f1417c47a8af63e6aa8ad2ed2578695113220cef18e10483f8d5f9f5df934",
+    "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.stillara.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "395618756bd2730779b617d62f4780975748b5d7ea7ccd03d3dd724fb29fefac",
+    "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.stillara.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "b1b18d72118bb7fdf1ea80545a0be5c818eb4a50919b40480b13d302f7ca6c5d",
+    "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.stillara.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "b0c1e7c512b7e6eba1fb0787f3e71aac71e8e904a2d3f8e1057411e6c43951bd",
+    "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.stillara.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "6ced9ca59005c6dbd02630d9f95f702ae0abd317ad380b839fce2ab38ec04177",
+    "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
@@ -880,6 +1084,18 @@
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
     "sourceHash": "cea38a121bf3d16eb662a21e9598ef84564ba121af980bebcb450387c2c7a134",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
+  },
+  "content.status.cooldown.v2db257f39699f407.rule": {
+    "reviewed": true,
+    "source": "Control immunity {{value0}}",
+    "sourceHash": "e32203d5a5a38dd39f479a7e844389818e429c2166a7603a0224a11d13c8dd90",
+    "text": "行動不能への耐性 {{value0}}"
+  },
+  "content.status.grace.v6e81bc0f25243d28.rule": {
+    "reviewed": true,
+    "source": "Death's Door {{value0}}",
+    "sourceHash": "152984fd4c12321d5db6d40d61ddfc3682f20c4bd7ec97518f23905c54e79449",
+    "text": "死の淵 {{value0}}"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
