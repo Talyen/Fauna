@@ -1637,6 +1637,42 @@
     "sourceHash": "cc324436cdb90c94a26d7afa89f573158c43977537979debf26b75b1a09bd9d3",
     "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
   },
+  "content.species.pollenmoth.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once",
+    "sourceHash": "0bba39b6f2677c42e46fdaf594cebe728b8edc7ed942025265d3cfa1a2d12a64",
+    "text": "<keyword0>光</keyword0>伤害弹跳一次"
+  },
+  "content.species.pollenmoth.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "1fa9dba262146ad3367c788c72979dff080b51b517c3a324838733d312be65a0",
+    "text": "<keyword0>光</keyword0>伤害弹跳一次，并有{{value0}}%的概率再弹跳一次"
+  },
+  "content.species.pollenmoth.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice",
+    "sourceHash": "dfbfeb2ab30793af1a9b60ba0d218804b11efc53fc40f19a4f17440f300299ef",
+    "text": "<keyword0>光</keyword0>伤害弹跳两次"
+  },
+  "content.species.pollenmoth.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration has a {{value0}}% chance to bounce once",
+    "sourceHash": "e09761ec56e3a10987aefad0b210b6ec88256f247adcd99a84c2663b6a6b7761",
+    "text": "<keyword0>光</keyword0>伤害弹跳两次；<keyword1>生命</keyword1>恢复有{{value0}}%的概率弹跳一次"
+  },
+  "content.species.pollenmoth.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "31e0f473c97c9b535647a02db7852e3d1aa6a92ff7b5264ed4f12ff3279ee4d0",
+    "text": "<keyword0>光</keyword0>伤害弹跳两次；<keyword1>生命</keyword1>恢复弹跳一次，并有{{value0}}%的概率再弹跳一次"
+  },
+  "content.species.pollenmoth.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage and <keyword1>Health</keyword1> restoration bounce twice",
+    "sourceHash": "9fd0d5367e63c8414ffd92d2d4300f8418029ec131dc33b7a03ceabc82a4122c",
+    "text": "<keyword0>光</keyword0>伤害和<keyword1>生命</keyword1>恢复弹跳两次"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -1780,6 +1816,42 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "975c56f9139e854228a93883368a3dd212979d3b4793c2b7cfdbbfc11f46fc7e",
     "text": "你的回合结束时，每名未打出卡牌的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.rookhaven.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "f0e53e3f88c82f93e28b436a36bfccec4fb6a8a269759a1f29bcdc04ab34f155",
+    "text": "抽牌时有{{value0}}%的概率复制该牌"
+  },
+  "content.species.rookhaven.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "59df049de0324ac2fde304582fe622e8bf18395a61b038e87dd6d95c41678026",
+    "text": "抽牌时有{{value0}}%的概率复制该牌"
+  },
+  "content.species.rookhaven.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "db312c0a60f7fd3a81d3804acc08bffbdad2d2995341e0e4d2a425a13e32da13",
+    "text": "抽牌时有{{value0}}%的概率复制该牌"
+  },
+  "content.species.rookhaven.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "f6454adb9242e7ff8c1490c9fe6ef1c1abad5c451ab1589ff5ba95485c7c2837",
+    "text": "抽牌时有{{value0}}%的概率复制该牌"
+  },
+  "content.species.rookhaven.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has an {{value0}}% chance to copy it",
+    "sourceHash": "273422d4ba66289be197f164c21765017056d62e7fee173ce39f3cbab9798775",
+    "text": "抽牌时有{{value0}}%的概率复制该牌"
+  },
+  "content.species.rookhaven.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card copies it",
+    "sourceHash": "6fe7b060f1113786d349eab525d329f5418889832bdd2180cf15e1ebed429e32",
+    "text": "抽牌时复制该牌"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3179,6 +3251,12 @@
     "sourceHash": "ab57890cb6b9c89b5d6c9277e191217d221f3848c65a8be3a16ffb80181a1234",
     "text": "{{name}}受到了{{amount}}点{{type}}伤害。"
   },
+  "log.dodge": {
+    "reviewed": true,
+    "source": "{{name}} Dodges.",
+    "sourceHash": "dc6472ad5e8ee5c1a223188bb2a93a210ed933726f7e89f8303d1d6e794353b5",
+    "text": "{{name}}闪避了。"
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
@@ -3221,6 +3299,12 @@
     "sourceHash": "774a6f04bf39a8f4dc5d5fac1888879906000164d8e6ff6e508b69cce62118ab",
     "text": "{{name}}恢复了{{amount}}点生命。"
   },
+  "log.intercept": {
+    "reviewed": true,
+    "source": "{{actor}} intercepts the attack against {{target}}",
+    "sourceHash": "6bc03ef48c82fe849646c2b6a5c627924670a4e077ece7f5841d3b1d8d74b8ab",
+    "text": "{{actor}}拦截了对{{target}}的攻击"
+  },
   "log.journeyBegins": {
     "reviewed": true,
     "source": "Your journey begins.",
@@ -3262,6 +3346,18 @@
     "source": "Turn {{turn}}. {{amount}} Mana restored.",
     "sourceHash": "7a31d7b5fa425f4a432ac11603dc793f1e346f169a2c6ec8e3f0e5e9f0c43297",
     "text": "第{{turn}}回合。恢复{{amount}}点法力。"
+  },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "742c9cea264457b5431305a1272a2d87b3e0d082b5f8046bb54de199a11c9275",
+    "text": "{{actor}}使用了{{card}}。"
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "081130a0d2d6d7b065991fe0eeec88a7b9a4e1878a29a3964289e7b0d7c6c5a6",
+    "text": "使用{{card}}"
   },
   "menu.boons": {
     "reviewed": true,

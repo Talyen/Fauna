@@ -287,6 +287,9 @@
   "log.damage": {
     "text": "{{name}} takes {{amount}} {{type}} damage."
   },
+  "log.dodge": {
+    "text": "{{name}} Dodges."
+  },
   "log.formationChanges": {
     "text": "Your formation changes"
   },
@@ -308,6 +311,9 @@
   "log.heal": {
     "text": "{{name}} restores {{amount}} Health."
   },
+  "log.intercept": {
+    "text": "{{actor}} intercepts the attack against {{target}}"
+  },
   "log.journeyBegins": {
     "text": "Your journey begins."
   },
@@ -328,6 +334,12 @@
   },
   "log.turnRestored": {
     "text": "Turn {{turn}}. {{amount}} Mana restored."
+  },
+  "log.useCard": {
+    "text": "{{actor}} uses {{card}}."
+  },
+  "log.useFood": {
+    "text": "Use {{card}}"
   },
   "menu.boons": {
     "text": "Boons"

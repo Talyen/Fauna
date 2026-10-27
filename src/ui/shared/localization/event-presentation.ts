@@ -1,9 +1,16 @@
 import { combatantById } from "../../../game/battlefield";
 import { unitName } from "../../../game/combat/state";
+import { CARDS, FOOD_CARDS, type CardDefinition } from "../../../game/content";
+import { PEARL } from "../../../game/content/creatures/memento";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../../game/keywords";
 import type { GameEvent, GameState } from "../../../game/types";
 import type { createMessageReader } from "./messages";
 import { localizedCombatantName } from "./combatant-name";
+
+// A repeated English name cannot safely identify a specific authored card.
+const cardsByEnglishName = new Map<string, CardDefinition | null>();
+for (const card of [...CARDS, ...FOOD_CARDS, PEARL])
+  cardsByEnglishName.set(card.name, cardsByEnglishName.has(card.name) ? null : card);
 
 /** Preview models retain common targetless announcements as text across possible outcomes. */
 export function localizedPreviewMessage(text: string, i18n: ReturnType<typeof createMessageReader>) {
@@ -17,6 +24,27 @@ export function eventPresentation(
   event: GameEvent,
   i18n: ReturnType<typeof createMessageReader>,
 ) {
+  if (event.kind === "action" && event.actionType !== "swap") {
+    const actor = combatantById(game, event.actorId);
+    if (actor) {
+      const prefix = `${unitName(actor)} uses `;
+      if (event.text.startsWith(prefix) && event.text.endsWith(".")) {
+        const card = cardsByEnglishName.get(event.text.slice(prefix.length, -1));
+        if (card)
+          return i18n.message("log.useCard", "{{actor}} uses {{card}}.", {
+            actor: localizedCombatantName(actor, i18n),
+            card: i18n.content(`content.card.${card.id}.name`, card.name),
+          });
+      }
+    }
+    if (event.actionType === "support" && event.text.startsWith("Use ")) {
+      const card = cardsByEnglishName.get(event.text.slice(4));
+      if (card?.species === null)
+        return i18n.message("log.useFood", "Use {{card}}", {
+          card: i18n.content(`content.card.${card.id}.name`, card.name),
+        });
+    }
+  }
   if (event.kind === "turn") {
     if (event.text === "Your journey begins.")
       return i18n.message("log.journeyBegins", "Your journey begins.");
@@ -49,6 +77,21 @@ export function eventPresentation(
   const englishName = unitName(target);
   const name = localizedCombatantName(target, i18n);
   const quantity = (amount: number) => (i18n.locale === "en" ? String(amount) : amount);
+  if (event.kind === "action" && event.actionType === "support") {
+    const actor = combatantById(game, event.actorId);
+    if (actor && event.text === `${unitName(actor)} intercepts the attack against ${englishName}`)
+      return i18n.message("log.intercept", "{{actor}} intercepts the attack against {{target}}", {
+        actor: localizedCombatantName(actor, i18n),
+        target: name,
+      });
+  }
+  if (
+    event.kind === "status" &&
+    event.status === "dodge" &&
+    event.outcome === "dodge" &&
+    event.text === `${englishName} Dodges.`
+  )
+    return i18n.message("log.dodge", "{{name}} Dodges.", { name });
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status" && event.outcome === "remove") {

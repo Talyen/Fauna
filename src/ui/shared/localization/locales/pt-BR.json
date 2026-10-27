@@ -1637,6 +1637,42 @@
     "sourceHash": "475184902169d4665d1495a8a9e6cc6411dcbf8c943093de797ad7b40573abc8",
     "text": "<keyword0>Purificar</keyword0> o acúmulo de <keyword1>Congelamento</keyword1> restaura {{value0}} de <keyword2>Saúde</keyword2>"
   },
+  "content.species.pollenmoth.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once",
+    "sourceHash": "85c4a824daedafd9c50cc61a0c8860719810db6d29853304806470334c1b48c6",
+    "text": "O dano de <keyword0>Luz</keyword0> salta uma vez"
+  },
+  "content.species.pollenmoth.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "7ee37f68f2446843738229072bf4b5ecf1f6f4dd8e406970ac246296e46bdf72",
+    "text": "O dano de <keyword0>Luz</keyword0> salta uma vez, com {{value0}}% de chance de saltar uma segunda vez"
+  },
+  "content.species.pollenmoth.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice",
+    "sourceHash": "8cc71b0d0bfc4048fc2043db793db63bdf6cfba901082d8be14426ea54ac9e10",
+    "text": "O dano de <keyword0>Luz</keyword0> salta duas vezes"
+  },
+  "content.species.pollenmoth.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration has a {{value0}}% chance to bounce once",
+    "sourceHash": "9e8332b8c990ae83a65194bc2c7fd68509022f9db19fb0a90deb9da320a756e3",
+    "text": "O dano de <keyword0>Luz</keyword0> salta duas vezes; a restauração de <keyword1>Saúde</keyword1> tem {{value0}}% de chance de saltar uma vez"
+  },
+  "content.species.pollenmoth.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "a790cb2b7641e2a82a0a01f2692b3d23f8fba231d106d777ec4f4f8e776f3b56",
+    "text": "O dano de <keyword0>Luz</keyword0> salta duas vezes; a restauração de <keyword1>Saúde</keyword1> salta uma vez, com {{value0}}% de chance de saltar uma segunda vez"
+  },
+  "content.species.pollenmoth.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage and <keyword1>Health</keyword1> restoration bounce twice",
+    "sourceHash": "0a155155ca77c158b4a2d377ac1b89a14cad7ee999b15dfa460d9505024918fa",
+    "text": "O dano de <keyword0>Luz</keyword0> e a restauração de <keyword1>Saúde</keyword1> saltam duas vezes"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -1780,6 +1816,42 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "991afe5f1bd509951de263ce8f1180b6a687520ba2d1a545d367fd39f8e5301f",
     "text": "No fim do seu turno, cada aliado que não jogou cartas recupera {{value0}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.species.rookhaven.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "ba7679490fdbf67c2b46d6f177461a83849eaee15c5e7a7441653306a194d466",
+    "text": "Ao comprar uma carta, há {{value0}}% de chance de copiá-la"
+  },
+  "content.species.rookhaven.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "ed2109627e6c077f54732bbab3ccbdb4fffc42daba0e1425fcad0b1f6fc9be0f",
+    "text": "Ao comprar uma carta, há {{value0}}% de chance de copiá-la"
+  },
+  "content.species.rookhaven.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "7a0e825cd592a36032eb4dd6e81879f04042ada85071b58fd0d03f3aa2542f24",
+    "text": "Ao comprar uma carta, há {{value0}}% de chance de copiá-la"
+  },
+  "content.species.rookhaven.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "3ed788c3d0b9ffed08c2dc353e390fc65eebd57a9e92b81172b824c017c44c27",
+    "text": "Ao comprar uma carta, há {{value0}}% de chance de copiá-la"
+  },
+  "content.species.rookhaven.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has an {{value0}}% chance to copy it",
+    "sourceHash": "d7b964a0c5cbe302aaf6cff1c45d2fb9375bcd6cc3edcf1c3312522047e46af8",
+    "text": "Ao comprar uma carta, há {{value0}}% de chance de copiá-la"
+  },
+  "content.species.rookhaven.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card copies it",
+    "sourceHash": "de0fcf2be7c0a05af22da3cba0b4fe38c72a07c72f1930eb79802e44056bb143",
+    "text": "Ao comprar uma carta, ela é copiada"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3179,6 +3251,12 @@
     "sourceHash": "a7a0856da414984b9bdf4b69579f4d7789aabfd92274e69d473c105c8d7f4dd7",
     "text": "{{name}} recebe {{amount}} de dano do tipo {{type}}."
   },
+  "log.dodge": {
+    "reviewed": true,
+    "source": "{{name}} Dodges.",
+    "sourceHash": "12211435d0caa0e27a7f74204cd98727d90e6262d20081056c41b3fb9d283190",
+    "text": "{{name}} esquiva."
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
@@ -3221,6 +3299,12 @@
     "sourceHash": "55e584718510d21033b106a168fc2d7d833982a739755303f3b9b9dabb7860c0",
     "text": "{{name}} recupera {{amount}} de Saúde."
   },
+  "log.intercept": {
+    "reviewed": true,
+    "source": "{{actor}} intercepts the attack against {{target}}",
+    "sourceHash": "5969a40e5f82e2d53c58b767b93aa3a270d6be345592f54e611678b86be28127",
+    "text": "{{actor}} intercepta o ataque contra {{target}}"
+  },
   "log.journeyBegins": {
     "reviewed": true,
     "source": "Your journey begins.",
@@ -3262,6 +3346,18 @@
     "source": "Turn {{turn}}. {{amount}} Mana restored.",
     "sourceHash": "87751c7ed2106ca1ecf8b3971e5026acc067fd76f1d00f362e08fae8dc88a671",
     "text": "Turno {{turn}}. {{amount}} de Mana recuperada."
+  },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "91cfc94b2b318fdda178f2cead378e8c53c37bc1b81fd879ae80145509c86884",
+    "text": "{{actor}} usa {{card}}."
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "99ef860fc095e21616be35d8b54fce4ab87c786c8d378b7a17e69b8506732c5d",
+    "text": "Use {{card}}"
   },
   "menu.boons": {
     "reviewed": true,

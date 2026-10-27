@@ -155,6 +155,66 @@ it("translates recognized combat announcements and preserves unfamiliar event te
   expect(eventPresentation(game, damage, createMessageReader("en", {}))).toBe(damage.text);
 });
 
+it("localizes Dodge and interception announcements without rewriting unrelated events", () => {
+  const game = run();
+  const actor = game.team[0]!;
+  const target = game.team[1]!;
+  const actorName = species(actor.species).name;
+  const targetName = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: actorName, text: "Protecteur" },
+    [`content.species.${target.species}.name`]: { source: targetName, text: "Allié" },
+  });
+  const dodge = {
+    kind: "status" as const,
+    status: "dodge" as const,
+    outcome: "dodge" as const,
+    targetId: target.id,
+    text: `${targetName} Dodges.`,
+  };
+  const intercept = {
+    kind: "action" as const,
+    actionType: "support" as const,
+    actorId: actor.id,
+    targetId: target.id,
+    text: `${actorName} intercepts the attack against ${targetName}`,
+  };
+  expect(eventPresentation(game, dodge, reader)).toBe("Allié esquive.");
+  expect(eventPresentation(game, intercept, reader)).toBe("Protecteur intercepte l’attaque contre Allié");
+  expect(eventPresentation(game, { ...intercept, actorId: "missing" }, reader)).toBe(intercept.text);
+  expect(eventPresentation(game, { ...dodge, text: "Another event" }, reader)).toBe("Another event");
+  expect(eventPresentation(game, intercept, createMessageReader("en", {}))).toBe(intercept.text);
+});
+
+it("localizes an authored ability and Food announcement without guessing unknown cards", () => {
+  const game = run();
+  const actor = game.team[0]!;
+  const actorName = species(actor.species).name;
+  const action = game.cards.find((card) => card.ownerId === actor.id)!;
+  const ability = definition(action.definitionId);
+  const apple = definition("food-apple");
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: actorName, text: "Créature traduite" },
+    [`content.card.${ability.id}.name`]: { source: ability.name, text: "Capacité traduite" },
+    [`content.card.${apple.id}.name`]: { source: apple.name, text: "Pomme" },
+  });
+  const announcement = {
+    kind: "action" as const,
+    actionType: "support" as const,
+    actorId: actor.id,
+    text: `${actorName} uses ${ability.name}.`,
+  };
+  expect(eventPresentation(game, announcement, reader)).toBe("Créature traduite utilise Capacité traduite.");
+  expect(eventPresentation(game, { ...announcement, text: "Use Apple" }, reader)).toBe("Utilise Pomme");
+  expect(eventPresentation(game, { ...announcement, text: `${actorName} uses Unknown.` }, reader)).toBe(
+    `${actorName} uses Unknown.`,
+  );
+  expect(eventPresentation(game, { ...announcement, actorId: "missing" }, reader)).toBe(announcement.text);
+  expect(eventPresentation(game, announcement, createMessageReader("en", {}))).toBe(announcement.text);
+});
+
 it("translates turn and Mana announcements without inventing their values", () => {
   const game = run();
   const reader = createMessageReader("fr", {
@@ -759,9 +819,12 @@ it("localizes standard combatant and Echo names while retaining a distinct boss 
   });
   expect(localizedCombatantName({ ...enemy, name: canonical }, reader)).toBe("Créature traduite");
   expect(localizedCombatantName({ ...enemy, name: "Distinct Boss" }, reader)).toBe("Distinct Boss");
-  expect(localizedCombatantName({ ...enemy, species: "memento", name: "Echo", minion: true }, reader)).toBe(
-    "Écho",
-  );
+  expect(
+    localizedCombatantName(
+      { ...enemy, species: "memento", name: "Echo", minion: { ownerId: "legend", side: "player" } },
+      reader,
+    ),
+  ).toBe("Écho");
 });
 
 it("uses the localized backup name for the visible and accessible swap choice", () => {
@@ -1158,6 +1221,32 @@ it("presents the probabilistic and guaranteed passive tiers distinctly", () => {
   );
   expect(screen.getByText("50% de chances de piocher une carte supplémentaire à chaque tour")).toBeTruthy();
   expect(screen.getByText("Pioche une carte supplémentaire à chaque tour")).toBeTruthy();
+  view.unmount();
+});
+
+it("presents the reviewed Light and healing bounce tiers with their distinct chances", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const intermediate = produce(run(), (draft) => {
+    draft.discovery.recruited.pollenmoth = 4;
+  });
+  const maximum = produce(run(), (draft) => {
+    draft.discovery.recruited.pollenmoth = 6;
+  });
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CreatureDetails kind="pollenmoth" />
+        <CreatureDetails kind="pollenmoth" progression={intermediate} />
+        <CreatureDetails kind="pollenmoth" progression={maximum} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  const rules = [...view.container.querySelectorAll(".card-details p")].map((element) => element.textContent);
+  expect(rules).toEqual([
+    "Les dégâts de Lumière rebondissent une fois",
+    "Les dégâts de Lumière rebondissent deux fois ; la restauration de Santé a 50% de chances de rebondir une fois",
+    "Les dégâts de Lumière et la restauration de Santé rebondissent deux fois",
+  ]);
   view.unmount();
 });
 

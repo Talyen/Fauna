@@ -1637,6 +1637,42 @@
     "sourceHash": "2793ec042454921678923c01aa4ddd8568855bf9a4d69117bccd5d59f9eb9c97",
     "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Frost</keyword1>-Aufbau stellt {{value0}} <keyword2>Gesundheit</keyword2> wieder her"
   },
+  "content.species.pollenmoth.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once",
+    "sourceHash": "21299b11923d887b2b0c948c379dcf6254d08a24828c5dd99de2ac9f9632a1fe",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> springt einmal weiter"
+  },
+  "content.species.pollenmoth.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "ab3c79702e4100609be3122e8e900e694b6ba47043ce8e51501e1c71591ccb78",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> springt einmal weiter, mit einer Chance von {{value0}}% auf einen zweiten Sprung"
+  },
+  "content.species.pollenmoth.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice",
+    "sourceHash": "e0a6e760eeb09fb3aab65c46834fc987ff7c885dd923c826195d74dcceed480c",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> springt zweimal weiter"
+  },
+  "content.species.pollenmoth.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration has a {{value0}}% chance to bounce once",
+    "sourceHash": "8266f284aec76d4f58e4397cd08a4adfc1782a600f6fb57d2ef9db78d91a64e9",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> springt zweimal weiter; Wiederherstellung von <keyword1>Gesundheit</keyword1> hat eine Chance von {{value0}}%, einmal weiterzuspringen"
+  },
+  "content.species.pollenmoth.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "e959ea4ed163aafd878947ba0b364a5935554d81d19716fc56a0f97d0d422bc0",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> springt zweimal weiter; Wiederherstellung von <keyword1>Gesundheit</keyword1> springt einmal weiter, mit einer Chance von {{value0}}% auf einen zweiten Sprung"
+  },
+  "content.species.pollenmoth.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage and <keyword1>Health</keyword1> restoration bounce twice",
+    "sourceHash": "509f1d6be1565a324f23da290ad827031a0ea0994e380459fef8bf6d160ec20c",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> und Wiederherstellung von <keyword1>Gesundheit</keyword1> springen zweimal weiter"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -1780,6 +1816,42 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "be5cefcbb0084277233398b2b99c41816c3af9838a8135a3e1da44de915c4def",
     "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.rookhaven.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "3952b7e060c7bd60595c22805b7418ee3805c7456328f8ce51c9c6ae5035e162",
+    "text": "Beim Ziehen einer Karte besteht eine Chance von {{value0}}%, sie zu kopieren"
+  },
+  "content.species.rookhaven.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "fd1c5c9e1635bdeac46d8e623713d21975b60cdbcd3dca3d53f924068fc407cf",
+    "text": "Beim Ziehen einer Karte besteht eine Chance von {{value0}}%, sie zu kopieren"
+  },
+  "content.species.rookhaven.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "b201c7a7685284b48c28a7439a5eefcbd9367471d07aed8309bc39708f44c9f5",
+    "text": "Beim Ziehen einer Karte besteht eine Chance von {{value0}}%, sie zu kopieren"
+  },
+  "content.species.rookhaven.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "c23d8e464baaaf0cb530386c7ce3a067a50153f78f9175dc834130c5fffbba11",
+    "text": "Beim Ziehen einer Karte besteht eine Chance von {{value0}}%, sie zu kopieren"
+  },
+  "content.species.rookhaven.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has an {{value0}}% chance to copy it",
+    "sourceHash": "9a535d7d56663a693b83f67707759a07fd1f66786a00f9c172e1ae63a7cedc9a",
+    "text": "Beim Ziehen einer Karte besteht eine Chance von {{value0}}%, sie zu kopieren"
+  },
+  "content.species.rookhaven.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card copies it",
+    "sourceHash": "bf7097617dbab0e4da6911950665ea10512b8a12434bb245f1998d7310512746",
+    "text": "Das Ziehen einer Karte kopiert sie"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3179,6 +3251,12 @@
     "sourceHash": "da6c95129aad832f1304cdea2a66dfea570dfb2f84240e6d01dd0b3fed8a72cb",
     "text": "{{name}} erleidet {{amount}} {{type}}-Schaden."
   },
+  "log.dodge": {
+    "reviewed": true,
+    "source": "{{name}} Dodges.",
+    "sourceHash": "67b6adf57ff5771399c0329788cf220fc6cf900d8c41e056e4c3baa104228eea",
+    "text": "{{name}} weicht aus."
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
@@ -3221,6 +3299,12 @@
     "sourceHash": "903677f2738c2cc07f4f66009dbf29404380bfc269c9e14b17bf17b8d581ee4d",
     "text": "{{name}} stellt {{amount}} Gesundheit wieder her."
   },
+  "log.intercept": {
+    "reviewed": true,
+    "source": "{{actor}} intercepts the attack against {{target}}",
+    "sourceHash": "fdd09aa5f8b5016dcceb43876e5f586c65534b5b809e9755ce0ecfe1c6f4f48f",
+    "text": "{{actor}} fängt den Angriff auf {{target}} ab"
+  },
   "log.journeyBegins": {
     "reviewed": true,
     "source": "Your journey begins.",
@@ -3262,6 +3346,18 @@
     "source": "Turn {{turn}}. {{amount}} Mana restored.",
     "sourceHash": "3432d275f020761a5c16082331e7d582809225e8acbb95a276a4f5c15c6c8e6f",
     "text": "Zug {{turn}}. {{amount}} Mana wiederhergestellt."
+  },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "64f36f57ed6b84e8107a97e047c0df31bd785ba907bc9c52cf03cdb142b739ef",
+    "text": "{{actor}} setzt {{card}} ein."
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "aa329f980c1c7d7c94d1decea7ecba51b598e5356874e3624f598af31e262866",
+    "text": "Setze {{card}} ein"
   },
   "menu.boons": {
     "reviewed": true,

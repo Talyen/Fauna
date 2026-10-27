@@ -1685,6 +1685,42 @@
     "sourceHash": "0d2b1e9c9ed4ffd4f72deb8768394d0c011dddaea1aeba9cc88ea82722ff7b3d",
     "text": "La <keyword0>purification</keyword0> du cumul de <keyword1>Gel</keyword1> restaure {{value0}} de <keyword2>Santé</keyword2>"
   },
+  "content.species.pollenmoth.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once",
+    "sourceHash": "11103dedc8c501faa0817afab61dd27397536c29c053039b3b9edec41188f991",
+    "text": "Les dégâts de <keyword0>Lumière</keyword0> rebondissent une fois"
+  },
+  "content.species.pollenmoth.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "f66385bc231685e826abad61241d3fd4b99afde008b13c4adec24408a109996b",
+    "text": "Les dégâts de <keyword0>Lumière</keyword0> rebondissent une fois, avec {{value0}}% de chances de rebondir une deuxième fois"
+  },
+  "content.species.pollenmoth.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice",
+    "sourceHash": "bff676adb7d88e2783424050ebb0efeb138ada87bfbc08df88da937ada8d0bb1",
+    "text": "Les dégâts de <keyword0>Lumière</keyword0> rebondissent deux fois"
+  },
+  "content.species.pollenmoth.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration has a {{value0}}% chance to bounce once",
+    "sourceHash": "8b7b8583b8d8608e4b4cea748e558d41c6fdb7f2369be085b0e7e2c007711715",
+    "text": "Les dégâts de <keyword0>Lumière</keyword0> rebondissent deux fois ; la restauration de <keyword1>Santé</keyword1> a {{value0}}% de chances de rebondir une fois"
+  },
+  "content.species.pollenmoth.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "8a7c529b48b0a1e28da263e8cdf23e369317b7d16bfdcffc58c34332b0083799",
+    "text": "Les dégâts de <keyword0>Lumière</keyword0> rebondissent deux fois ; la restauration de <keyword1>Santé</keyword1> rebondit une fois, avec {{value0}}% de chances de rebondir une deuxième fois"
+  },
+  "content.species.pollenmoth.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage and <keyword1>Health</keyword1> restoration bounce twice",
+    "sourceHash": "2998cd9b0b5a48335bb6af5573609bf7c842b82b013c31b4ceeecfd64c87f0cf",
+    "text": "Les dégâts de <keyword0>Lumière</keyword0> et la restauration de <keyword1>Santé</keyword1> rebondissent deux fois"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -1828,6 +1864,42 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "cf93dc0e0b8612c37af4ed80de0dd9a984b2c66b75b3823d72c1b47caad82d41",
     "text": "À la fin de votre tour, chaque allié n’ayant joué aucune carte récupère {{value0}} de <keyword0>Santé</keyword0>"
+  },
+  "content.species.rookhaven.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "bf654e89fb016223bfc922ccfd89be965a319549045e2b34c6679dc8cbc1320b",
+    "text": "Piocher une carte a {{value0}}% de chances de la copier"
+  },
+  "content.species.rookhaven.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "dfbb3d89d16d0357f48018ddc8ad0569911b4e2ae75931a6070de1236a306ad5",
+    "text": "Piocher une carte a {{value0}}% de chances de la copier"
+  },
+  "content.species.rookhaven.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "850ae0670dedc54fbf1b05c743c9dd714b7a0420731b0cce332f0298a5e0b968",
+    "text": "Piocher une carte a {{value0}}% de chances de la copier"
+  },
+  "content.species.rookhaven.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "89124fa6e429995568afdc81db9f7a567fe88941c549729f1f85cb57b76f3dc9",
+    "text": "Piocher une carte a {{value0}}% de chances de la copier"
+  },
+  "content.species.rookhaven.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has an {{value0}}% chance to copy it",
+    "sourceHash": "b5b8d187a6348c18bda5d41b18a240adac743ce23be430233d49fec3e2685811",
+    "text": "Piocher une carte a {{value0}}% de chances de la copier"
+  },
+  "content.species.rookhaven.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card copies it",
+    "sourceHash": "bb0c8cc9953935216ef12a1e24121bada2e0eb747ae8afc46443f2b480630b9c",
+    "text": "Piocher une carte la copie"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
@@ -3227,6 +3299,12 @@
     "sourceHash": "fcab103636da89309f750494b664a2574c207b2a2c8dc709dcf001197cca6e4e",
     "text": "{{name}} subit {{amount}} dégâts de type {{type}}."
   },
+  "log.dodge": {
+    "reviewed": true,
+    "source": "{{name}} Dodges.",
+    "sourceHash": "0f69e2272c6b831516204daab933e07a3dc1eba8bbe079a81392dcfaa5f7339c",
+    "text": "{{name}} esquive."
+  },
   "log.formationChanges": {
     "reviewed": true,
     "source": "Your formation changes",
@@ -3269,6 +3347,12 @@
     "sourceHash": "226de8b37af66db24dfd957aeb9754bd3c22a40fc9eb0ee6e062e4ca20c1a131",
     "text": "{{name}} récupère {{amount}} Santé."
   },
+  "log.intercept": {
+    "reviewed": true,
+    "source": "{{actor}} intercepts the attack against {{target}}",
+    "sourceHash": "905f08593b90385165ad3473c67fe0f8579bf7b3fb3e03f49c482e9bf5a57d2d",
+    "text": "{{actor}} intercepte l’attaque contre {{target}}"
+  },
   "log.journeyBegins": {
     "reviewed": true,
     "source": "Your journey begins.",
@@ -3310,6 +3394,18 @@
     "source": "Turn {{turn}}. {{amount}} Mana restored.",
     "sourceHash": "d2cce0d7b3d71188828a1fc9dff179573070c18d0eaf77bd7e7d360f568c661c",
     "text": "Tour {{turn}}. {{amount}} Mana récupéré."
+  },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "12d194f5838d50c492b08b9bd4b5edd71297efc8fb4bfd4f3c56e09524486ac8",
+    "text": "{{actor}} utilise {{card}}."
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "1bd9da8d302403d4fb7d85826c8e0b3253e1a1cab9abf1e0dcb18815ff55552d",
+    "text": "Utilise {{card}}"
   },
   "menu.boons": {
     "reviewed": true,
