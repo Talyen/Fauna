@@ -55,6 +55,7 @@ export function ScreenHeading({
           variant="ghost"
           size="icon"
           className="compact-icon-control"
+          data-menu-anchor
           aria-label={i18n.message("battle.openMenu", "Open menu")}
           onClick={openMenu ?? navigation.openMenu}
         >
