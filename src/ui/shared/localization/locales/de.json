@@ -545,6 +545,84 @@
     "sourceHash": "13a83e7e010edaa44c94ac6d5c9af3f3d9372e51274c5e99cfebbd00d7a5b23a",
     "text": "Vorherige Seite"
   },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "8c7a39a333cce37d6cca122b54a949ebe95e0fc22d0f2080d58668e084e9170a",
+    "text": "{{amount}} absorbiert"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "b93c3686bf4b78ff91d0679d0d55274ebadc0c05d5d657a5bbb62602ed60c1fb",
+    "text": "oder {{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "1bfb469a12f68f688d31c85dde2190ba447392f391e4e91184f5e0fdb0fe03d2",
+    "text": "{{amount}} Schaden absorbiert"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "5313737b43f83663dcc6d82dc1290779c18205fc08a36b51c97d84299284b9ec",
+    "text": "Zielvorschau für {{name}}: Gesundheit von {{previousHealth}} auf {{health}}, Block von {{previousBlock}} auf {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "37758d320707ac0644e4b6b09ba02a9e7e7b485bb4fcfdf13ea58a4a220ba760",
+    "text": "Das Ergebnis hängt von verborgenen Informationen oder weiteren Zufallseffekten ab"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "4ee663edabd0e6bec3dfc1ce04ab7cab084db341845c9059e351d3b4196a7d8f",
+    "text": "Kritischer Treffer möglich"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "97910116f91e0163245688f63c3a8cd13483437104d916e7186feaebca86ae1c",
+    "text": "Kann ausgewichen werden"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "65363df44718de9c3296d6b76ecd8780fd7d7a380ffefbc8cb3bc2cea1902144",
+    "text": "{{left}} oder {{right}}"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "371bbd4d807a7cfba9ce1612f5ea62aaf2880080469e1aa323693f8110ff846e",
+    "text": "Möglich: {{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "24e1a56fe2821cc785c8e59bb9df1f497d9d6a5ad810596ffd8c720010e168d4",
+    "text": "K. o. möglich"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "9b3c1719231c8ccc34bb0ff08afbe10f44e9faac512b8565bcf0248da569b3fa",
+    "text": "Mögliche Ergebnisse für {{name}}: {{outcomes}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "987508985263eb140a0377c64cfc0e6eb8f024ad7879890335fed7629329b583",
+    "text": "Ergebnis variiert"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "6450a8e1378195fff0b4f50e683f9f6a45c2aa550cf1e46cf33004cdff94f7c7",
+    "text": "{{summary}}, {{details}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",

@@ -545,6 +545,84 @@
     "sourceHash": "30f0a0c620f2db1f97b09be79567bda1cf045a1e709f4c9a8e9afab14184add0",
     "text": "前のページ"
   },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "799d5c13e0e75b846049089cf2672c1dc47fcca5c0e6d2ec8a90e846dd1bbe5f",
+    "text": "{{amount}}を吸収"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "b539fa38cc6b081b2c8b43392817ed9a24926b398d4b699b5d8dba4c5648e170",
+    "text": "または{{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "71de2e1ad2f5a13fb921925469ebc0dcadb464c87d2b8b8c10258da2e3d591f5",
+    "text": "ダメージ{{amount}}を吸収"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "527cac12df35ac26290e09a9b828c9e0d4a5d3f8ba45ab1ee7ef1976ac439757",
+    "text": "{{name}}の予測：体力 {{previousHealth}} → {{health}}、ブロック {{previousBlock}} → {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "75f5d4bf55b5befde3466c742a8523798eb4fef293b6aaf1c5651300ad559200",
+    "text": "結果は非公開の情報や他のランダム効果によって変わります"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "615276c646a70f973e6cedd2d6828aded2bbc910545e56fa469aaa9747d0a2bc",
+    "text": "クリティカルの可能性"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "151717bec0a1613a0c20fbc5241de2450a20dd9fc875e9b593840a6c29d352b1",
+    "text": "回避される可能性"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "c8bb45077b925ec6fbe4f7d26b4ac3ff53933633385a1e930fdd3401d10331a8",
+    "text": "{{left}}または{{right}}"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "7bf05f2d614f7e4b380e18ebe333eaf332e359f7adeff4aa1383b5edb867cd7d",
+    "text": "可能性：{{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "ec7a634d3360132e7d1a506c8a9252a5c763ae9bec3b25327b8884bb26678ef8",
+    "text": "戦闘不能の可能性"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "ba73d7ff9cc10e2de5897237968e370e105d520120a50998c5249dd883dae748",
+    "text": "{{name}}の予測される結果：{{outcomes}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "5d7653b1b4fd3057b110cb2d2503df2b2beb5dddc821b04e057a08f4b13b1498",
+    "text": "結果が変動"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "7406c65db573dad61f5e87a510d860406fbd85ffafb7d14cb8b0c50efb5f4ece",
+    "text": "{{summary}}、{{details}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",

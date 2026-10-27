@@ -1158,6 +1158,84 @@
     "sourceHash": "ccab45aba2fad5bbf08357bfb18e08d6ac21500048e74f90eaa0128c4b93d819",
     "text": "Page précédente"
   },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "16a4ddaeefeeca7bb34566cfadc7255437b536a9897b2956e4db0f9a6e4e6c20",
+    "text": "{{amount}} absorbés"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "d5a5d44d6f6e6c93c633d24964885590d534cbced302bb67cfd81e6c6fcd97e8",
+    "text": "ou {{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "403ae53ac9a27746eb0d66f5ce46f8662d8ee4caccd66d8aa7f68dbb8da0a58a",
+    "text": "{{amount}} dégâts absorbés"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "cebb4951341500936736a5c54d9aaed81832c3a1756ab0a3dbe02e77a2de4c14",
+    "text": "Aperçu pour {{name}} : Santé de {{previousHealth}} à {{health}}, Blocage de {{previousBlock}} à {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "49569f243f1fc7cd516e336ab1471eba3a391764e123466c7298505fa7f5cee5",
+    "text": "Le résultat dépend d’informations cachées ou d’autres effets aléatoires"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "5ff18242fb5a9fc6bd7b76746267dccedbe594448df1d994129e62895422991f",
+    "text": "Coup critique possible"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "af28dc19bcea0427aaa66d7203052163384fbd439f598a3ea3e2f4b79c1d156a",
+    "text": "Peut être esquivé"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "92091ed36a00a95421fd5e7271d611dc2ed0bb88ff6215e81ce954bc9a1afab6",
+    "text": "{{left}} ou {{right}}"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "32c30c71daaae7989710b53987b938be79ff2e29721dc4053fc11dde0ca36fc5",
+    "text": "Possible : {{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "714b4af3393df4e9d34e22638ebb07eb2017df1261a4f80b421930ca4a599202",
+    "text": "K.-O. possible"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "cbb6d84706c03cf63937ed776e9e49e741584f4bc3cde6dc088dfc55f49c2f10",
+    "text": "Résultats possibles pour {{name}} : {{outcomes}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "a8c9b021fc8b0a061342ae7f746c1b5e2a411cca3b61705c40ad82fb106e2434",
+    "text": "Résultat variable"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "3481fc6e2b4b0a176099dee8f9b91c8c0b9f781210b31609a4aeba807e012c80",
+    "text": "{{summary}}, {{details}}"
+  },
   "progress.keywordLevel": {
     "reviewed": true,
     "source": "{{keyword}} level {{level}} progress",

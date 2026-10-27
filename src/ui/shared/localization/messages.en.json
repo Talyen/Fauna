@@ -359,6 +359,45 @@
   "pagination.previous": {
     "text": "Previous page"
   },
+  "preview.absorbed": {
+    "text": "{{amount}} absorbed"
+  },
+  "preview.alternative": {
+    "text": "or {{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "text": "{{amount}} damage absorbed"
+  },
+  "preview.exact": {
+    "text": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "text": "Outcome depends on hidden information or further random effects"
+  },
+  "preview.mayCrit": {
+    "text": "Critical possible"
+  },
+  "preview.mayDodge": {
+    "text": "May be Dodged"
+  },
+  "preview.or": {
+    "text": "{{left}} or {{right}}"
+  },
+  "preview.possible": {
+    "text": "Possible: {{description}}"
+  },
+  "preview.possibleKnockout": {
+    "text": "Possible knockout"
+  },
+  "preview.possibleOutcomes": {
+    "text": "Possible outcomes for {{name}}: {{outcomes}}"
+  },
+  "preview.varies": {
+    "text": "Outcome varies"
+  },
+  "preview.withDetails": {
+    "text": "{{summary}}, {{details}}"
+  },
   "progress.keywordLevel": {
     "text": "{{keyword}} level {{level}} progress"
   },

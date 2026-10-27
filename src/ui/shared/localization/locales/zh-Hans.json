@@ -545,6 +545,84 @@
     "sourceHash": "439181c6cdfa4bd2523053c3bc0530716a3847733afe3ee78f6a642cf74be0d3",
     "text": "上一页"
   },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "bc0469dba83e7dc29e1c3120f04ed0cd1129cdf254bda91a787fc5186099a0f6",
+    "text": "吸收 {{amount}}"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "3e1a924277c8d593e2406cb51b58ec3df3704e87e25fb9d8be7a80091f3934ab",
+    "text": "或{{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "1f2efd18b1e60b2318636da4464a9613334cee5f8f9e7534528984a225b69e78",
+    "text": "吸收 {{amount}} 点伤害"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "1cc89e207b13c55e916fcc807a44e06409b432aa4d81b4a0d4ab5313fe8d8b10",
+    "text": "{{name}}的目标预览：生命从 {{previousHealth}} 变为 {{health}}，格挡从 {{previousBlock}} 变为 {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "f382c2862711a488a2aa2f3190ed45ead3b7562f6b5a87a5ce4cca6d6be1dd6f",
+    "text": "结果取决于隐藏信息或其他随机效果"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "f6aa5c90d1c37206f8f0a568f05ebd7bf41b98f0dde047e3c5bb2f1abde76e06",
+    "text": "可能暴击"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "a499464b9f9bf0fc8e8d64413b1b3c589bd0483a437a44b05fdcde59c7b6c292",
+    "text": "可能被闪避"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "7b2c2412a66e5fb48e37888154f6b11d07ff619d2d88d0b16126ecae0bdbd4c9",
+    "text": "{{left}}或{{right}}"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "2c761b69217201a1c72f970a0b740ff229e9d20e6e1ce951a7557c5abcc5ccbf",
+    "text": "可能：{{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "3a85e8909031748ff694d2bbaa30853d4aba418d7be9a1e3ab248469e7618cdb",
+    "text": "可能击倒"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "c2f36c0773d7466bed24db9b7c6b1582e3f87c00a82e4a3b20ed1e7e8252cb62",
+    "text": "{{name}}的可能结果：{{outcomes}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "831b9ae634ead50cafb0576ce1f237c9c03b213721d58a1c004425adf52a2541",
+    "text": "结果不确定"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "d990598c98d5a55e83f9dfcfef2a61ebcde74eb19725c98425b1a81260a62b4d",
+    "text": "{{summary}}，{{details}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",

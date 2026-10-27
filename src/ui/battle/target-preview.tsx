@@ -1,3 +1,5 @@
+import { useMessages } from "../shared/localization/message-context";
+import { MessageParts } from "../shared/localization/message-parts";
 import type { TargetForecast } from "./play-preview-model";
 import type { GameEvent } from "../../game/types";
 import { KeywordIcon } from "../shared/keyword-icon";
@@ -6,16 +8,31 @@ import { Heart, Shield } from "lucide-react";
 import { BattleReadout } from "../shared/combat/battle-readout";
 import { DamageValue } from "../shared/combat/combat-values";
 export function TargetPreview({ forecast }: { forecast: TargetForecast | undefined }) {
+  const i18n = useMessages();
   if (!forecast) return null;
   if (forecast.unresolved || forecast.alternatives) return <ConditionalPreview forecast={forecast} />;
   const { name, health, previousHealth, block, previousBlock, maxHealth, absorbed, changes, events } =
     forecast;
+  const summary = i18n.message(
+    "preview.exact",
+    "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    { name, previousHealth, health, previousBlock, block },
+  );
+  const details = [
+    ...(absorbed
+      ? [i18n.message("preview.damageAbsorbed", "{{amount}} damage absorbed", { amount: absorbed })]
+      : []),
+    ...changes,
+    ...(health === 0 ? [i18n.message("battle.knockout", "Knockout")] : []),
+  ];
+  const label = details.length
+    ? i18n.message("preview.withDetails", "{{summary}}, {{details}}", {
+        summary,
+        details: details.join(", "),
+      })
+    : summary;
   return (
-    <div
-      className="target-preview"
-      role="status"
-      aria-label={`Target preview for ${name}: Health ${previousHealth} to ${health}, Block ${previousBlock} to ${block}${absorbed ? `, ${absorbed} damage absorbed` : ""}${changes.length ? `, ${changes.join(", ")}` : ""}${health === 0 ? ", Knockout" : ""}`}
-    >
+    <div className="target-preview" role="status" aria-label={label}>
       <BattleReadout
         health={health}
         maxHealth={maxHealth}
@@ -40,7 +57,7 @@ export function TargetPreview({ forecast }: { forecast: TargetForecast | undefin
         {absorbed > 0 ? (
           <span data-combat-tone="block">
             <Shield aria-hidden="true" />
-            {absorbed} absorbed
+            {i18n.message("preview.absorbed", "{{amount}} absorbed", { amount: absorbed })}
           </span>
         ) : null}
         {changes.map((change) => (
@@ -59,7 +76,7 @@ export function TargetPreview({ forecast }: { forecast: TargetForecast | undefin
           .map((event, index) => (
             <span key={`dodge-${index}`} data-combat-tone="dodge">
               <KeywordIcon id="dodge" />
-              Dodge
+              {i18n.content("content.keyword.dodge.label", "Dodge")}
             </span>
           ))}
       </BattleReadout>
@@ -68,6 +85,7 @@ export function TargetPreview({ forecast }: { forecast: TargetForecast | undefin
 }
 
 function ConditionalPreview({ forecast }: { forecast: TargetForecast }) {
+  const i18n = useMessages();
   const alternatives = forecast.alternatives ?? [];
   const sameHealth =
     alternatives.length > 0 && alternatives.every((value) => value.health === alternatives[0]!.health);
@@ -83,13 +101,27 @@ function ConditionalPreview({ forecast }: { forecast: TargetForecast }) {
   const mayCrit = alternatives.some((value) =>
     value.events.some((event) => event.kind === "damage" && event.critical),
   );
+  const outcomes = forecast.unresolved
+    ? i18n.message("preview.hiddenOutcome", "Outcome depends on hidden information or further random effects")
+    : descriptions.reduce(
+        (left, right) =>
+          left ? i18n.message("preview.or", "{{left}} or {{right}}", { left, right }) : right,
+        "",
+      );
+  const summary = i18n.message("preview.possibleOutcomes", "Possible outcomes for {{name}}: {{outcomes}}", {
+    name: forecast.name,
+    outcomes,
+  });
+  const label = possibleKnockout
+    ? i18n.message("preview.withDetails", "{{summary}}, {{details}}", {
+        summary,
+        details: guaranteedKnockout
+          ? i18n.message("battle.knockout", "Knockout")
+          : i18n.message("preview.possibleKnockout", "Possible knockout"),
+      })
+    : summary;
   return (
-    <div
-      className="target-preview"
-      data-conditional="true"
-      role="status"
-      aria-label={`Possible outcomes for ${forecast.name}: ${forecast.unresolved ? "Outcome depends on hidden information or further random effects" : descriptions.join(" or ")}${possibleKnockout ? (guaranteedKnockout ? ", Knockout" : ", Possible knockout") : ""}`}
-    >
+    <div className="target-preview" data-conditional="true" role="status" aria-label={label}>
       <BattleReadout
         health={sameHealth ? alternatives[0]!.health : forecast.previousHealth}
         previous={sameHealth ? forecast.previousHealth : undefined}
@@ -98,18 +130,32 @@ function ConditionalPreview({ forecast }: { forecast: TargetForecast }) {
         previousBlock={sameBlock ? forecast.previousBlock : undefined}
         knockout={guaranteedKnockout}
       >
-        {forecast.unresolved || (!compact && !mayDodge && !mayCrit) ? <span>Outcome varies</span> : null}
-        {!forecast.unresolved && !compact && mayDodge ? <span>May be Dodged</span> : null}
-        {!forecast.unresolved && !compact && mayCrit ? <span>Critical possible</span> : null}
+        {forecast.unresolved || (!compact && !mayDodge && !mayCrit) ? (
+          <span>{i18n.message("preview.varies", "Outcome varies")}</span>
+        ) : null}
+        {!forecast.unresolved && !compact && mayDodge ? (
+          <span>{i18n.message("preview.mayDodge", "May be Dodged")}</span>
+        ) : null}
+        {!forecast.unresolved && !compact && mayCrit ? (
+          <span>{i18n.message("preview.mayCrit", "Critical possible")}</span>
+        ) : null}
         {compact && !forecast.unresolved
           ? descriptions.map((description, index) => (
               <span key={description} className="conditional-preview">
-                {index ? "or " : "Possible: "}
-                <KeywordText text={description} />
+                <MessageParts
+                  template={
+                    index
+                      ? i18n.template("preview.alternative", "or {{description}}")
+                      : i18n.template("preview.possible", "Possible: {{description}}")
+                  }
+                  values={{ description: <KeywordText text={description} /> }}
+                />
               </span>
             ))
           : null}
-        {possibleKnockout && !guaranteedKnockout ? <span>Possible knockout</span> : null}
+        {possibleKnockout && !guaranteedKnockout ? (
+          <span>{i18n.message("preview.possibleKnockout", "Possible knockout")}</span>
+        ) : null}
       </BattleReadout>
     </div>
   );

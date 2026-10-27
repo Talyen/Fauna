@@ -545,6 +545,84 @@
     "sourceHash": "d6993d2cb204595a936ffe93f39b592fd1c90728529418d57ac2bac3e44e7323",
     "text": "Предыдущая страница"
   },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "e1beb87aea1a8886800f5f03db35796d93a92b444c16d544eb88e97acc692582",
+    "text": "Поглощено: {{amount}}"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "446f7d10892e65733042622f1146d41e659c638ccd29e02587eb6fa9365b62c1",
+    "text": "или {{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "035ee3141a1f586203046cc0741bb032b29feb43f9c8a772d027a0eaccb91069",
+    "text": "Поглощено урона: {{amount}}"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "148095229f2aa2dc94b344fa4db381c58de02a625118f4a9bb3e9079b2332be8",
+    "text": "Прогноз для {{name}}: здоровье с {{previousHealth}} до {{health}}, блок с {{previousBlock}} до {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "3fd4489f076ab9a38cee640e47c25ef58b6ce2c0ffdcf90f093de3fe49e805c4",
+    "text": "Результат зависит от скрытой информации или других случайных эффектов"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "df9351420863921fa5caa5c73ffa10b537c18268f2c14b28b2918ea47ffc4bc2",
+    "text": "Возможен критический удар"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "425902da0186b0d3b3790f3412f12dee239cc30beaae5ce1131bd4dbe384d03a",
+    "text": "Возможно уклонение"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "b782f2879a9d725aa53a7435143d94a74cd9c2e5f459029479c3b99e1e5a308e",
+    "text": "{{left}} или {{right}}"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "a5fa76f8cdd7cc56e5b20f12f99af344a817a864f3957d17da33684060d97c00",
+    "text": "Возможно: {{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "cdc954e2cadd8f8a72065a9c8fb744445abd3afeac21916ef4bd59749a3b1539",
+    "text": "Возможен нокаут"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "28e31a4f5cb7935e6777441fd36bead876a32d1674bb3e0146e190fa341808a0",
+    "text": "Возможные исходы для {{name}}: {{outcomes}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "4af2acb150264456f7a75413c4e95ae76b6188c93f19678cac756dd93631d990",
+    "text": "Результат меняется"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "2c72d6158462849533c72905b6b7d57401e53cccc2df9884bc61a43a0dde14d1",
+    "text": "{{summary}}, {{details}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",

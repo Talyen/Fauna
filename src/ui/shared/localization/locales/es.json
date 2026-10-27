@@ -545,6 +545,84 @@
     "sourceHash": "8d5cde2a11d98a25a0a6f34875fbaaa833144a138c2a6998ac4f907fccc1d42a",
     "text": "Página anterior"
   },
+  "preview.absorbed": {
+    "reviewed": true,
+    "source": "{{amount}} absorbed",
+    "sourceHash": "695ce1574dd7cbd57e42ef8c128a025974d6da9a0629079a8f3a98b4589733c7",
+    "text": "{{amount}} absorbidos"
+  },
+  "preview.alternative": {
+    "reviewed": true,
+    "source": "or {{description}}",
+    "sourceHash": "36cd608f979094e7a952b385d64d17d85f6e8b287ca6bf5c7d226d95b54609a5",
+    "text": "o {{description}}"
+  },
+  "preview.damageAbsorbed": {
+    "reviewed": true,
+    "source": "{{amount}} damage absorbed",
+    "sourceHash": "9be5ab3c4452cb19952f71c2731f73a4f0c53251c63558cd36ec08c2f6b9c087",
+    "text": "{{amount}} de daño absorbido"
+  },
+  "preview.exact": {
+    "reviewed": true,
+    "source": "Target preview for {{name}}: Health {{previousHealth}} to {{health}}, Block {{previousBlock}} to {{block}}",
+    "sourceHash": "dd2acc6e06cde1746aa9c2032dc940a22ffbf83afdf8e74ada10e2d6ef16c092",
+    "text": "Previsión para {{name}}: salud de {{previousHealth}} a {{health}}, bloqueo de {{previousBlock}} a {{block}}"
+  },
+  "preview.hiddenOutcome": {
+    "reviewed": true,
+    "source": "Outcome depends on hidden information or further random effects",
+    "sourceHash": "bec8fdfa5e810e700c965b95f979efbcebdb657da1ad411ce745c5f205e1b80a",
+    "text": "El resultado depende de información oculta u otros efectos aleatorios"
+  },
+  "preview.mayCrit": {
+    "reviewed": true,
+    "source": "Critical possible",
+    "sourceHash": "d2490beed01155dcbda1d3f4c3c5ef3da13bb011b8f573912e3806929330be7e",
+    "text": "Posible golpe crítico"
+  },
+  "preview.mayDodge": {
+    "reviewed": true,
+    "source": "May be Dodged",
+    "sourceHash": "4120f7fabb8ced76c11cf3262063e9098569faf14f1cc1aa8c9da560707c2280",
+    "text": "Se puede esquivar"
+  },
+  "preview.or": {
+    "reviewed": true,
+    "source": "{{left}} or {{right}}",
+    "sourceHash": "dd0f708da61334ea674851f72f67370d10e245155b1499999fae53cedc373923",
+    "text": "{{left}} o {{right}}"
+  },
+  "preview.possible": {
+    "reviewed": true,
+    "source": "Possible: {{description}}",
+    "sourceHash": "574be2cdfd230d140f5144d035a476abd9408b97cdcd0e26abe6dc440fd0a3c0",
+    "text": "Posible: {{description}}"
+  },
+  "preview.possibleKnockout": {
+    "reviewed": true,
+    "source": "Possible knockout",
+    "sourceHash": "25bbd456709badb695fc5271abf5f7d71bf736d97a0f3939e8442972804a6354",
+    "text": "Posible derrota"
+  },
+  "preview.possibleOutcomes": {
+    "reviewed": true,
+    "source": "Possible outcomes for {{name}}: {{outcomes}}",
+    "sourceHash": "69f8b18180666948dafccb8ad05fc1747385c5671c71e1387f7530ec4eb7b5eb",
+    "text": "Resultados posibles para {{name}}: {{outcomes}}"
+  },
+  "preview.varies": {
+    "reviewed": true,
+    "source": "Outcome varies",
+    "sourceHash": "e9177d5f148852f3541078daf5c5719a0296c795de79d8b54f6803c277a963b9",
+    "text": "El resultado varía"
+  },
+  "preview.withDetails": {
+    "reviewed": true,
+    "source": "{{summary}}, {{details}}",
+    "sourceHash": "f9b28fe56ccf6199bc3bf56c94a91a1f30a733ed6c8163255a0e4bd2c4024e1d",
+    "text": "{{summary}}, {{details}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",

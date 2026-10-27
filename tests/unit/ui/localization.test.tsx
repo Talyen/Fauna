@@ -1,3 +1,4 @@
+import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import { GlossaryScreen } from "../../../src/ui/menu/glossary-screen";
 import { extractGlossaryRules } from "../../../scripts/localization/glossary-rules.mjs";
 import { GLOSSARY } from "../../../src/game/glossary";
@@ -870,5 +871,30 @@ it("renders localized glossary rules with keyword identity and leaves authored v
   expect(screen.getByText("Brûlure").getAttribute("data-keyword")).toBe("burn");
   expect(screen.getByText("Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié")).toBeTruthy();
   expect(entry.term).toBe("Burn");
+  view.unmount();
+});
+
+it("localizes exact battle previews without changing their committed values", () => {
+  const forecast = Object.freeze({
+    name: "Rival",
+    previousHealth: 6,
+    health: 0,
+    previousBlock: 2,
+    block: 0,
+    maxHealth: 6,
+    absorbed: 2,
+    changes: [],
+    events: [],
+  });
+  const view = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TargetPreview forecast={forecast} />
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("status").getAttribute("aria-label")).toBe(
+    "Aperçu pour Rival : Santé de 6 à 0, Blocage de 2 à 0, 2 dégâts absorbés, K.-O.",
+  );
+  expect(screen.getByText("2 absorbés")).toBeTruthy();
+  expect(forecast.health).toBe(0);
   view.unmount();
 });
