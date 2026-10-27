@@ -1,4 +1,3 @@
-import { ShineText } from "../shared/effects/treatments";
 import { visualKeywords } from "../shared/effects/palettes";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { useLayoutEffect, useRef } from "react";
@@ -9,8 +8,8 @@ import { BOONS } from "../../game/content";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";
-import { KeywordText } from "../shared/keyword-text";
 import { assetUrl } from "../shared/assets";
+import { BoonArt, BoonName, BoonText } from "./boon-presentation";
 export function SupportOffer({ game, send }: { game: GameState; send: (c: Command) => boolean }) {
   const visit = game.support;
   if (!visit || !canVisitMerchant(game)) return null;
@@ -55,19 +54,11 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
       </header>
       {purchased ? (
         <section className="merchant-reward" aria-label="Purchased Boon">
-          <ArtCard
-            aspect="action"
-            artwork={assetUrl(`boon.${purchased.id}`)}
-            effectText={purchased.text}
-            presentation
-            aria-label={purchased.name}
-          />
+          <BoonArt boon={purchased} presentation aria-label={purchased.name} />
           <h2>
-            <ShineText keywords={visualKeywords(purchased.text)}>{purchased.name}</ShineText>
+            <BoonName boon={purchased} />
           </h2>
-          <p>
-            <KeywordText text={purchased.text} />
-          </p>
+          <BoonText boon={purchased} />
           <p className="merchant-terms">For this journey</p>
         </section>
       ) : (
@@ -89,20 +80,13 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                 <section className="reward-option merchant-offer" key={slot.slot}>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <ArtCard
-                        aspect="action"
-                        artwork={assetUrl(`boon.${boon.id}`)}
-                        effectText={boon.text}
-                        aria-label={`Inspect ${boon.name}`}
-                      />
+                      <BoonArt boon={boon} aria-label={`Inspect ${boon.name}`} />
                     </TooltipTrigger>
                     <TooltipContent>
                       <strong>
-                        <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>
+                        <BoonName boon={boon} />
                       </strong>
-                      <p>
-                        <KeywordText text={boon.text} />
-                      </p>
+                      <BoonText boon={boon} />
                       <p>For this journey</p>
                       {reason ? <p>{reason}</p> : null}
                     </TooltipContent>
