@@ -1529,6 +1529,72 @@
     "sourceHash": "0d7ef20d1d6b107a8707efd48ee9ca42bf64834e368e7638e689fb9b06d34cb3",
     "text": "死の淵の持続時間が{{value0}}ターン延びる"
   },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "371afb460071303c08b218add08b5f19c8f215dfcab8bdb607cea9dd51aa4c7c",
+    "text": "秘術の霜"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "edab9577ca9c59f27fc071f72c78f226e01a5c70893e54efcbd1d6f422a6fbf9",
+    "text": "<keyword0>凍結</keyword0>ダメージが<keyword1>マナ</keyword1>の{{value0}}%分増加する"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "d4b891569e0315a443bacb83cbdd8c4dab2ec3cffcb3373a263c1d24c80ae71d",
+    "text": "秘術の癒やし"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "c52a1c3f839012764235b325fc560c539d99eff23119f4f1987d55d378150deb",
+    "text": "闇の回復"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "50382ebd5be6b977ffa13279368c580c05880d4a0a0701227de419692cb728ed",
+    "text": "<keyword0>マナ</keyword0>を使い切ってターンを終えると、次のターンに追加で<keyword1>マナ</keyword1>を{{value0}}得る"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "51e473e881bf983f8d79f6d80a70d20403bbe09606c437a66d76c9e0c8e268dc",
+    "text": "地脈との同調"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "a8ec6449898e73d2c368070a1e0f9c8047c8742c2b730b0d5cb8410a7f3b1477",
+    "text": "マナの防壁"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "a5fa12f29a09f03adfc126c5e2de712a0293cdefb3d459905813b5cf5b9556d9",
+    "text": "マナの甲羅"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "1fa2f0bbeaf0782926312b95959f8377fed9a6a8cab8a6ce0e5077e402585179",
+    "text": "マナ焼却"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "3b6931fa1cca04946af31ae504cba9326d5fb6d675d1dbe863a78873af75e73d",
+    "text": "<keyword0>炎上</keyword0>ダメージが<keyword1>マナ</keyword1>の{{value0}}%分増加する"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "31dfdd9e74052f8a2c1f5539f9a7dfa382744d032ccc0db2ebc370d4adbee385",
+    "text": "源泉"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

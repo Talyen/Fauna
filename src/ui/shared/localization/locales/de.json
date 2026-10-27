@@ -1529,6 +1529,72 @@
     "sourceHash": "fac0eaa56159b34e950f0cfa9f30e13bb789ac336b75e729537fa0933537b109",
     "text": "Nahtod dauert {{value0}} Runde länger"
   },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "9d13ebf87700ad5e2ae12a119e8fd85d748243906460e42e550e48aea37321e1",
+    "text": "Arkaner Frost"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "b6bbaed42355e7cd7b90823c5f71550ac01472bc4aac6345ebfc5add77ea4350",
+    "text": "Schaden vom Typ <keyword0>Frost</keyword0> wird um {{value0}}% deines <keyword1>Manas</keyword1> erhöht"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "377de02875cb2afe3186d8e2664e757ca29e0251c986e4e1ffab47b3e2300017",
+    "text": "Arkane Heilung"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "c60dfd1ac99f65a95f4c51794b2518939d2cce2a25f0f91ef6d9f4534483e98c",
+    "text": "Dunkle Erholung"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "ad0bea4d4960184e67d136decb2e087baac46c299c8dc6e4633812df6335acf9",
+    "text": "Beende deinen Zug ohne <keyword0>Mana</keyword0>, um im nächsten Zug {{value0}} zusätzliches <keyword1>Mana</keyword1> zu erhalten"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "30bf36a8722fcff6b62d76e5d3b2f90240c37ddd8744177fe0d6bcc58954e57e",
+    "text": "Leylinienabstimmung"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "d604a52407ab27ca53417d5d23e80120d59153ac8b1dabe28053a69daae34b3a",
+    "text": "Manabollwerk"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "4e96d7a176d2e7955ee7b7170318aed2b904e7fd6b4ab5789ac4b927fd49a5f6",
+    "text": "Manahülle"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "31e59cd5a66a86c12833f9e043de9427e9aa2e30b38b8cfe0e00dd698389b62b",
+    "text": "Manabrand"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "044da15c9f90f9ed520fe0187fcac96387c24d68184ec71080b7bf47de74b191",
+    "text": "Schaden vom Typ <keyword0>Brand</keyword0> wird um {{value0}}% deines <keyword1>Manas</keyword1> erhöht"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "48041a8bf785727afa94688c038e2f13be3fcb42e4b3919b67c11969731cf9e9",
+    "text": "Quelle"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

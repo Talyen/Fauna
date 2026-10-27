@@ -1529,6 +1529,72 @@
     "sourceHash": "7ec716455b68097e14164446d8d0eb692f876750e5b5fc02268fcd57a2dd1c83",
     "text": "Al borde de la muerte dura {{value0}} turno más"
   },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "2bf7d92ef8276185febda641cff11857d919d739611f9fd9d5917adc2c89dcf4",
+    "text": "Escarcha arcana"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "7be8c745d7f86410863f22d8636c761c89b2173ee19133a6f360a667cff99ea7",
+    "text": "El daño de <keyword0>Congelación</keyword0> aumenta en un {{value0}}% de tu <keyword1>Maná</keyword1>"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "b70aad4e7ccbde5c9d001b9af34f3a9e7a732cd5ce376248abb747c48b07dda7",
+    "text": "Restauración arcana"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "c04d15d8a1851d224945db22df694e27b4752ee48220a9c46b6af7ea7163bc9c",
+    "text": "Recuperación oscura"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "541d13096e9e856fe0050a2de16671057712ef8bc001f6ab19214de73b5b8900",
+    "text": "Termina tu turno sin <keyword0>Maná</keyword0> para obtener {{value0}} más de <keyword1>Maná</keyword1> el siguiente turno"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "974b6d44d6b7fc9e4207822b1766e578cb3a3be5efef8ffea905726cfa1538e2",
+    "text": "Armonía con líneas ley"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "ce050288a7659d8244b3aa68193a806b44d3dc9917f6eb5e51741d0fa94a728d",
+    "text": "Baluarte de Maná"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "8243046e1512f5b3e839b751fc6089b09c00a7d34827a2edb9ddf77b3a45f704",
+    "text": "Coraza de Maná"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "97f7d47894b9f96c8b10085574578ce09d018976e25030b1d4d08889674d3d15",
+    "text": "Quemadura de maná"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "7b0976ffcf648333966f012d5a73d325ad260db81ec51bdcc07d5cd7266d66a4",
+    "text": "El daño de <keyword0>Quemadura</keyword0> aumenta en un {{value0}}% de tu <keyword1>Maná</keyword1>"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "e87440ea7ce1e8825e7618191c60891e5670acd69a1ec8819e753a4be4c7a0ae",
+    "text": "Fuente"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

@@ -1529,6 +1529,72 @@
     "sourceHash": "a48a087d2bc63705ffe21054f663463c608bab9f5ea9ef62edf33ff6725d631d",
     "text": "На пороге смерти длится дольше; дополнительных ходов: {{value0}}"
   },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "3f445d7c061baa6d7fdfd089a0a9187c7a283a20067c9eaf8c8d22501b45ae27",
+    "text": "Чародейский мороз"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "ec82745224613da6725936510cae23b0bde4c6f30f0981307b0a6b8484c71e16",
+    "text": "Урон типа «<keyword0>Заморозка</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>маны</keyword1>"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "9e8e0948d97c2e790938126cb1587128d34defcd2413e20cb8af26c4d0a707f8",
+    "text": "Чародейское восстановление"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "a847792db4e21fca813452dbe11964ce6aa8e0563f8788c0fde2dcaefd600c0d",
+    "text": "Тёмное восстановление"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "00588bd7e6c288f95f33c962313ea2dc1a4f0b6df3900201e3b355635e59bf77",
+    "text": "Завершите ход без <keyword0>маны</keyword0>, чтобы получить дополнительно {{value0}} ед. <keyword1>маны</keyword1> на следующий ход"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "9b490aab7ca1e7c44a3f5acdb9e33e7add64a977ddbe4532cb579fefc15b0be0",
+    "text": "Настройка на лей-линии"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "777f7b019733678f1a0d64750f9024b1531f218a4ed0a93e7d260d31594d9d59",
+    "text": "Бастион: Мана"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "577d68f06e0bec3788d94209f462788a7120e828eea01def9fd2e94b68e9fa59",
+    "text": "Панцирь: Мана"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "1cda35d463dee6b88a648b55476f5dbfa3b97da369531085c99e12764ead2c0f",
+    "text": "Сжигание маны"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "614356963c80ba5c385028be80d325246d793d9ea5cc030d38c21bdaf2358949",
+    "text": "Урон типа «<keyword0>Горение</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>маны</keyword1>"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "25d77f7fd816539896c9a46118d0e8ecc24910e68dae27112e5448b1d52e0efa",
+    "text": "Родник"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

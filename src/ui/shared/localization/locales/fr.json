@@ -1577,6 +1577,72 @@
     "sourceHash": "46c62c1f468b78a3f0fc6fde3b3d7d3578e2810fc90910ddbb1122919c785896",
     "text": "Aux portes de la mort dure {{value0}} tour de plus"
   },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "1489c78d2f508fc298fc20877a52f258fbedcfa609e60f66ca40d101349388fa",
+    "text": "Givre arcanique"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "7029bc29a271ca6ea2f4757871be1c8450dc5af20f0fa8ba197206627c26aec8",
+    "text": "Les dégâts de <keyword0>Gel</keyword0> augmentent de {{value0}}% de votre <keyword1>Mana</keyword1>"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "34480945d0a8cc8d569eee4f877124e160d06471f53e31a28c3e4375c4ee886f",
+    "text": "Soin arcanique"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "cf2ca58ba3b8d41caea007686a332038dc8f121fe11e1371bb275f5cb3ca63db",
+    "text": "Récupération sombre"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "60e7aea15e6b76f7582f941cfe1aa02ce656f6425e3c94c323b304bf8378a7bf",
+    "text": "Terminez votre tour sans <keyword0>Mana</keyword0> pour gagner {{value0}} de <keyword1>Mana</keyword1> supplémentaire au prochain tour"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "6971ac7365edbd37b852fa7587c9b8c5e789f1f3c21f37ff7a814cc7a296e92a",
+    "text": "Harmonisation tellurique"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "6525577e1b2de0d95b245d13f5217db0c51f8f482793179670d1b7488fcf0a6c",
+    "text": "Rempart de Mana"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "acd5a51d8538453c3f74c36d2372c993ecd5ba5e6e80c64650cd8b15025fa036",
+    "text": "Carapace de Mana"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "90b443e4989e7b41d80fff14eaf8b7569b8ae1f3e649f3b49143109aee36bcfd",
+    "text": "Brûlure de mana"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "b855e18b481446200a156c5ce77409887630539099e40956b63ac5a88a526aaa",
+    "text": "Les dégâts de <keyword0>Brûlure</keyword0> augmentent de {{value0}}% de votre <keyword1>Mana</keyword1>"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "07ad5bf1595b76e32ae4b705056ff69d286261307b05c70d0bf72438aab62532",
+    "text": "Source vive"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

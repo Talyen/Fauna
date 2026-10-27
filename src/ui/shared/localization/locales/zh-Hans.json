@@ -1529,6 +1529,72 @@
     "sourceHash": "40663d04274fb6d5ad9808495326f3617143ffbb9e97b2f6d4df3169d07e2c5c",
     "text": "濒死状态持续时间延长{{value0}}回合"
   },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "595a40980d21ce11c96da9c1f01469034f9f1c74d53004392f1d20d5d1727715",
+    "text": "奥术冰霜"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "5ca1755f4bd01f383189e55cf3bc50f4684f87637d1a96adebd29914bbe3ed50",
+    "text": "<keyword0>冻结</keyword0>伤害增加，数值为你的<keyword1>法力</keyword1>的{{value0}}%"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "9d9b90dd3a848e1b8a25adcf78a6c26aeb3f44f0f2bd66f4cf25207edc12bc6f",
+    "text": "奥术修复"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "f86f99c361673717240b34659d3de77dd81307a1cda2debed4ffb5923375d7f0",
+    "text": "黑暗恢复"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "f95449c8e5f279bdc907f79f77aabad2691a679df3ad7982afede52dc7dda086",
+    "text": "结束回合时没有<keyword0>法力</keyword0>，下回合额外获得{{value0}}点<keyword1>法力</keyword1>"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "53fcee63a86537d970688f3700d64b859206e6c3d9714c511fbab2e26ae4bed8",
+    "text": "地脉调谐"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "dbbbfc53e25993030ad2ea9284eae38cc9100f4338d86bcfbf4fa72fb6487fba",
+    "text": "法力壁垒"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "8fd909b3aa8fca13c50caa2189d04bb5f6d4b22d7a5d4604ecee0b3f4997c1d5",
+    "text": "法力外壳"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "2500cfe299c6d3db4dbae7b20c024cdd3573c57df0e2cd5e135c276a029edb8a",
+    "text": "法力燃烧"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "481ad747af702f7082ae0ac1435498552fe93bac52f994a1fc3da604c59981bb",
+    "text": "<keyword0>灼烧</keyword0>伤害增加，数值为你的<keyword1>法力</keyword1>的{{value0}}%"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "1a1334ce4d7d12e04fabe519ebcc7d08ef8500ec7c53b242eab1ba2ccae1ec6e",
+    "text": "源泉"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
