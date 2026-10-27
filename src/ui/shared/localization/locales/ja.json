@@ -8171,6 +8171,12 @@
     "sourceHash": "d977daf5de481bbaebabcb1d5f90e1e0e55f77eda5b9118bfcb54e79888029f1",
     "text": "エコー"
   },
+  "creature.healthFraction": {
+    "reviewed": true,
+    "source": "Health {{health}}/{{maximum}}",
+    "sourceHash": "f59f73f502b3072f22ebf826ce5934cf0d2c29f47a6f7947cdb434d226bcdaed",
+    "text": "体力 {{health}}/{{maximum}}"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",

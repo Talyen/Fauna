@@ -8171,6 +8171,12 @@
     "sourceHash": "3c36e40733abf9b6457c411093d43a8a5f015c90a73a334f5571076209505b7d",
     "text": "回响"
   },
+  "creature.healthFraction": {
+    "reviewed": true,
+    "source": "Health {{health}}/{{maximum}}",
+    "sourceHash": "76517c7fb30762c6e5760dcda282cb6d1f88dabd3ce8c623a9fb8ef3da49373e",
+    "text": "生命 {{health}}/{{maximum}}"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",

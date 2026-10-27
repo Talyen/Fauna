@@ -179,6 +179,9 @@
   "creature.echo": {
     "text": "Echo"
   },
+  "creature.healthFraction": {
+    "text": "Health {{health}}/{{maximum}}"
+  },
   "creature.inspect": {
     "text": "Inspect {{name}}"
   },

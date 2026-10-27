@@ -57,6 +57,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { act, render, screen, fireEvent, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { expect, it, vi } from "vitest";
 import {
   applyPackets,
@@ -626,6 +627,19 @@ it("announces a summoned Echo by its localized identity", () => {
     </MessageProvider>,
   );
   expect(screen.getByRole("button", { name: /^Écho$/ })).toBeTruthy();
+  view.unmount();
+});
+
+it("shows the creature health detail in the selected language", async () => {
+  const view = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TooltipProvider>
+        <CreatureCard kind="mossguard" actorId="ally-1" health={5} maxHealth={32} />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  await userEvent.setup().hover(screen.getByRole("button", { name: "Mossguard" }));
+  expect((await screen.findByRole("tooltip")).textContent).toContain("Santé 5/32");
   view.unmount();
 });
 

@@ -8171,6 +8171,12 @@
     "sourceHash": "f00b96bf3504b36bbe3892b4354144666e3dce04ac20b32c111c8dc1bae9e0d7",
     "text": "Eco"
   },
+  "creature.healthFraction": {
+    "reviewed": true,
+    "source": "Health {{health}}/{{maximum}}",
+    "sourceHash": "f922d00cf6a046d729e419909da8acf92217d37066da8a4c52435e5ed5adc0ab",
+    "text": "Saúde {{health}}/{{maximum}}"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",

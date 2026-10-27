@@ -8171,6 +8171,12 @@
     "sourceHash": "0854cc4ecb103017c0b407a6dddcfb53569734d40adcdb73c7728cb460db869b",
     "text": "Echo"
   },
+  "creature.healthFraction": {
+    "reviewed": true,
+    "source": "Health {{health}}/{{maximum}}",
+    "sourceHash": "8398f6ec14390bc848d4d8ca3bd1311954afd012ad4ed3142068663ac5249b86",
+    "text": "Gesundheit {{health}}/{{maximum}}"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
