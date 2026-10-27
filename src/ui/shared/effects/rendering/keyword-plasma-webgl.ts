@@ -152,24 +152,24 @@ export function startWebGLKeywordPlasma(options: PlasmaRendererOptions): (() => 
     // One fullscreen quad writes every pixel, including transparent ones. It
     // replaces the previous frame without a clear or destination blending.
     gl.disable(gl.BLEND);
-    let cachedPrimarySource: string | RgbTuple | null = null;
-    let cachedSecondarySource: string | RgbTuple | null = null;
-    let cachedPrimary: RgbTuple = [0, 0, 0];
-    let cachedSecondary: RgbTuple = [0, 0, 0];
-    const uploadedPrimary: [number, number, number] = [NaN, NaN, NaN];
-    const uploadedSecondary: [number, number, number] = [NaN, NaN, NaN];
-
-    const uploadColor = (
-      location: WebGLUniformLocation,
-      color: RgbTuple,
-      uploaded: [number, number, number],
-    ): void => {
-      if (color[0] === uploaded[0] && color[1] === uploaded[1] && color[2] === uploaded[2]) return;
-      gl.uniform3f(location, color[0], color[1], color[2]);
-      uploaded[0] = color[0];
-      uploaded[1] = color[1];
-      uploaded[2] = color[2];
+    const colorUniform = (location: WebGLUniformLocation) => {
+      let source: PlasmaColorValue | null = null;
+      let color: RgbTuple = [0, 0, 0];
+      const uploaded: [number, number, number] = [NaN, NaN, NaN];
+      return (next: PlasmaColorValue) => {
+        if (source !== next) {
+          source = next;
+          color = typeof next === "string" ? parsePlasmaHexColor(next) : next;
+        }
+        if (color[0] === uploaded[0] && color[1] === uploaded[1] && color[2] === uploaded[2]) return;
+        gl.uniform3f(location, color[0], color[1], color[2]);
+        uploaded[0] = color[0];
+        uploaded[1] = color[1];
+        uploaded[2] = color[2];
+      };
     };
+    const uploadPrimary = colorUniform(primaryLoc);
+    const uploadSecondary = colorUniform(secondaryLoc);
 
     const startTime = performance.now();
     lifecycle = createCanvasLifecycle({
@@ -187,28 +187,11 @@ export function startWebGLKeywordPlasma(options: PlasmaRendererOptions): (() => 
       onFrame: (now, _dt, width, height) => {
         if (width <= 0 || height <= 0) return;
 
-        if (cachedPrimarySource !== colorsRef.current.primary) {
-          cachedPrimarySource = colorsRef.current.primary;
-          cachedPrimary =
-            typeof cachedPrimarySource === "string"
-              ? parsePlasmaHexColor(cachedPrimarySource)
-              : cachedPrimarySource;
-        }
-        if (cachedSecondarySource !== colorsRef.current.secondary) {
-          cachedSecondarySource = colorsRef.current.secondary;
-          cachedSecondary =
-            typeof cachedSecondarySource === "string"
-              ? parsePlasmaHexColor(cachedSecondarySource)
-              : cachedSecondarySource;
-        }
-        const primary = cachedPrimary;
-        const secondary = cachedSecondary;
-
         gl.uniform1f(timeLoc, (now - startTime) / 1000);
         // Uniforms survive draws and backing resizes. Compare channels so an
         // interpolated or in-place updated tuple still uploads its exact values.
-        uploadColor(primaryLoc, primary, uploadedPrimary);
-        uploadColor(secondaryLoc, secondary, uploadedSecondary);
+        uploadPrimary(colorsRef.current.primary);
+        uploadSecondary(colorsRef.current.secondary);
 
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       },

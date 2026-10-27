@@ -77,6 +77,7 @@ function eligible(element: HTMLElement | null, scope: string) {
 
 /** One delegated observer also covers Radix portals without replacing control handlers. */
 function observeInteractions(effects: ReturnType<typeof createEffectsStore>) {
+  const lifetime = new AbortController();
   let pointer: HTMLElement | null = null;
   let suspended = document.hidden;
   const selector = "[data-effect-keywords], [data-effect-tone]";
@@ -148,26 +149,20 @@ function observeInteractions(effects: ReturnType<typeof createEffectsStore>) {
     attributes: true,
     attributeFilter: ["data-input", "data-focus"],
   });
-  document.addEventListener("pointerover", move);
-  document.addEventListener("pointermove", move);
-  document.addEventListener("pointerout", leave);
-  document.addEventListener("focusin", sync);
-  document.addEventListener("focusout", sync);
-  window.addEventListener("blur", blur);
-  window.addEventListener("focus", focus);
-  document.addEventListener("visibilitychange", visibility);
+  const options = { signal: lifetime.signal };
+  document.addEventListener("pointerover", move, options);
+  document.addEventListener("pointermove", move, options);
+  document.addEventListener("pointerout", leave, options);
+  document.addEventListener("focusin", sync, options);
+  document.addEventListener("focusout", sync, options);
+  window.addEventListener("blur", blur, options);
+  window.addEventListener("focus", focus, options);
+  document.addEventListener("visibilitychange", visibility, options);
   const unsubscribe = effects.store.subscribe(sync);
   return () => {
     unsubscribe();
     observer.disconnect();
-    document.removeEventListener("pointerover", move);
-    document.removeEventListener("pointermove", move);
-    document.removeEventListener("pointerout", leave);
-    document.removeEventListener("focusin", sync);
-    document.removeEventListener("focusout", sync);
-    window.removeEventListener("blur", blur);
-    window.removeEventListener("focus", focus);
-    document.removeEventListener("visibilitychange", visibility);
+    lifetime.abort();
   };
 }
 

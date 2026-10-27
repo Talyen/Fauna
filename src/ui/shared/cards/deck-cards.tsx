@@ -5,7 +5,7 @@ import { EmptyState } from "../empty-state";
 import { ActionCard } from "./cards";
 
 import { cardActor } from "../../../game/card-actors";
-import { CARDS, species } from "../../../game/content";
+import { species, speciesCards } from "../../../game/content";
 import type { Command, GameState } from "../../../game/types";
 import type { Inspection } from "../inspection-model";
 
@@ -33,7 +33,7 @@ export function DeckCards({
   const deck =
     game.phase === "draft"
       ? owners.flatMap((owner) =>
-          CARDS.filter((card) => card.species === owner.species).map((card) => ({
+          speciesCards(owner.species).map((card) => ({
             id: `${owner.id}:${card.id}`,
             definitionId: card.id,
             ownerId: owner.id,
