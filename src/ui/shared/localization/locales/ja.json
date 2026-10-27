@@ -1385,6 +1385,36 @@
     "sourceHash": "6efb73c1a958c170a294361e9450987de86df741758871408be5e802a50f1a0c",
     "text": "遭遇"
   },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "2490b28d32a76aa4c843b71baa204b9d8106a96cead5926c04e368b3c6bc86ff",
+    "text": "{{name}}は{{amount}}ダメージをブロックした。"
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "ca6f45a132ff870f05a779dee924a90e46b3dc4c7418bddc89cf864548962908",
+    "text": "{{name}}は{{type}}ダメージを{{amount}}受けた（クリティカル）。"
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "8873757c391ed0fea6ff677fa6dcb46f44b9a2031514f7fd489021e143ce37f9",
+    "text": "{{name}}は{{type}}ダメージを{{amount}}受けた。"
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "3a59b72e8d9d3469b223e1eb7563cbe1e70584f8cf8043fb9afa692ce2470390",
+    "text": "{{name}}はブロックを{{amount}}得た。"
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "762f4ff8e996ed0a7c533de2d8cc77e1a6790c638e36cc0e240458396edc3eba",
+    "text": "{{name}}は体力を{{amount}}回復した。"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

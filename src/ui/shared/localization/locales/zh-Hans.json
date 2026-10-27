@@ -1385,6 +1385,36 @@
     "sourceHash": "7d9124c442e0737fe9de74917cd24e3ecbc1d2c1dabff69020d287c8fbfeae8b",
     "text": "遭遇"
   },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "22395139cf077464bb1936cc58d30b6a1e0f66a266e94f835c5156c788392ed3",
+    "text": "{{name}}格挡了{{amount}}点伤害。"
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "e4a842230b26bc01b179215784189be9481a78cf1d4864d06337268bc0d2e0ab",
+    "text": "{{name}}受到了{{amount}}点{{type}}伤害（暴击）。"
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "ab57890cb6b9c89b5d6c9277e191217d221f3848c65a8be3a16ffb80181a1234",
+    "text": "{{name}}受到了{{amount}}点{{type}}伤害。"
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "b3e955c2f3af820229ddaa6441b3f4b4ad5c69a38bcbd1b767cf7d41649324af",
+    "text": "{{name}}获得了{{amount}}点格挡。"
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "774a6f04bf39a8f4dc5d5fac1888879906000164d8e6ff6e508b69cce62118ab",
+    "text": "{{name}}恢复了{{amount}}点生命。"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

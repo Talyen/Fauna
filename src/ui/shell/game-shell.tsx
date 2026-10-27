@@ -1,4 +1,5 @@
 import { useMessages } from "../shared/localization/message-context";
+import { eventPresentation } from "../shared/localization/event-presentation";
 import { measurePerformance, startPerformanceSpan } from "../../lib/performance";
 import { EffectScope, EffectsScene } from "../shared/effects/effects";
 import { useDevicePreferences } from "../settings/preferences";
@@ -432,7 +433,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                       )}
                     </HeaderNavigation.Provider>
                     <div className="sr-only" role="log" aria-live="polite">
-                      {view.events.map((event) => event.text).join(" ")}
+                      {view.events.map((event) => eventPresentation(game, event, i18n)).join(" ")}
                     </div>
                   </div>
                 </EffectScope>

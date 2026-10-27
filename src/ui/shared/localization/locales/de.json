@@ -1385,6 +1385,36 @@
     "sourceHash": "25d8cc8bb5e5ac2249327073ddad280d13c54fb6356488401922aa0a4436f724",
     "text": "Begegnungen"
   },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "49362037ccbfa5c563f14c345e237ab279c34b9c90e46e39a19add13135f7403",
+    "text": "{{name}} blockt {{amount}} Schaden."
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "98368012da11a5a9303d187a8613f52767907aea69cd74c33490702095b271fd",
+    "text": "{{name}} erleidet {{amount}} {{type}}-Schaden (kritisch)."
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "da6c95129aad832f1304cdea2a66dfea570dfb2f84240e6d01dd0b3fed8a72cb",
+    "text": "{{name}} erleidet {{amount}} {{type}}-Schaden."
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "9bed9f26d6546e6049c6f308931976c0988cd18e811122b1cb665959f4f82643",
+    "text": "{{name}} erhält {{amount}} Block."
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "903677f2738c2cc07f4f66009dbf29404380bfc269c9e14b17bf17b8d581ee4d",
+    "text": "{{name}} stellt {{amount}} Gesundheit wieder her."
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

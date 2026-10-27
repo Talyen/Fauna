@@ -1,7 +1,7 @@
 import { CombatStatus } from "../../../src/ui/shared/combat/combat-status";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import japanese from "../../../src/ui/shared/localization/locales/ja.json";
-import { definition } from "../../../src/game/content";
+import { definition, species } from "../../../src/game/content";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
 import { extractStatusVariants } from "../../../scripts/localization/status-variants.mjs";
@@ -82,6 +82,7 @@ import { resolveLanguage, type GameLocale } from "../../../src/ui/shared/localiz
 import { LocalizationProvider, useLanguage } from "../../../src/ui/shared/localization/provider";
 import { useMessages, MessageProvider } from "../../../src/ui/shared/localization/message-context";
 import { createMessageReader, type MessageCatalog } from "../../../src/ui/shared/localization/messages";
+import { eventPresentation } from "../../../src/ui/shared/localization/event-presentation";
 
 it("selects locale plural forms and falls back when source or placeholders are stale", () => {
   const source = { one: "{{count}} talent point available", other: "{{count}} talent points available" };
@@ -108,6 +109,34 @@ it("selects locale plural forms and falls back when source or placeholders are s
   expect(reader.message("stale", "New {{name}}", { name: "Fauna" })).toBe("New Fauna");
   expect(reader.message("broken", "Hello {{name}}", { name: "Fauna" })).toBe("Hello Fauna");
   expect(reader.plural("points", { ...source, other: "{{count}} new points" }, 2)).toBe("2 new points");
+});
+
+it("translates recognized combat announcements and preserves unfamiliar event text", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const name = species(target.species).name;
+  const catalog: MessageCatalog = {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: name, text: "Nom localisé" },
+  };
+  const damage = {
+    kind: "damage" as const,
+    targetId: target.id,
+    amount: 3,
+    damageType: "burn" as const,
+    critical: true,
+    text: `${name} takes 3 burn damage (Critical).`,
+  };
+  const heal = { kind: "heal" as const, targetId: target.id, amount: 2, text: `${name} restores 2 Health.` };
+  const reader = createMessageReader("fr", catalog);
+  expect(eventPresentation(game, damage, reader)).toBe(
+    "Nom localisé subit 3 dégâts de type Brûlure (critique).",
+  );
+  expect(eventPresentation(game, heal, reader)).toBe("Nom localisé récupère 2 Santé.");
+  expect(eventPresentation(game, { ...heal, text: "A unique resurrection event" }, reader)).toBe(
+    "A unique resurrection event",
+  );
+  expect(eventPresentation(game, damage, createMessageReader("en", {}))).toBe(damage.text);
 });
 
 it("changes menu messages and accessible counts without replacing the focused action", () => {

@@ -1385,6 +1385,36 @@
     "sourceHash": "1cef9d7bf3b13b88ff3a28683b9d0d0941a1013a7a78f0630539956fecd76c6c",
     "text": "Encontros"
   },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "081bb48c5e8bccaff2bd777bcee6d215f79872b4e579e4b3ed5c4e577a070d93",
+    "text": "{{name}} bloqueia {{amount}} de dano."
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "490526ade8c9cb9e981402c6a915a1cae59fbf0cf21fb7afdf5ace363f65c6a2",
+    "text": "{{name}} recebe {{amount}} de dano do tipo {{type}} (crítico)."
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "a7a0856da414984b9bdf4b69579f4d7789aabfd92274e69d473c105c8d7f4dd7",
+    "text": "{{name}} recebe {{amount}} de dano do tipo {{type}}."
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "8f12f7ab30cf65a98a26ccfe8d42341a35b984413d390a699a27b5850fbebd7c",
+    "text": "{{name}} ganha {{amount}} de Bloqueio."
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "55e584718510d21033b106a168fc2d7d833982a739755303f3b9b9dabb7860c0",
+    "text": "{{name}} recupera {{amount}} de Saúde."
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

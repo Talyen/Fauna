@@ -1385,6 +1385,36 @@
     "sourceHash": "459b7fb38c5a7aede5fa3d62573dc1f6f95f2f38ff54785d80b5eff8928f104e",
     "text": "Встречи"
   },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "787e772c403f46f801cb007805e9be679f03f83b196d489f22aff45ccec53026",
+    "text": "{{name}} блокирует урон: {{amount}}."
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "5010aa4b7e5420e3ce535063ac28cbc6cb6fff020c55cb2d13ab51b631dfeccb",
+    "text": "{{name}} получает {{amount}} ед. урона ({{type}}, критический удар)."
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "747bb82af0b37241507089fdd86d545ec5a7ee4cd0314a1d0ac46fcee9b340db",
+    "text": "{{name}} получает {{amount}} ед. урона ({{type}})."
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "00991c09cd00b146e8dd4781a045101991e80266997717e46dd99d452d294229",
+    "text": "{{name}} получает блок: {{amount}}."
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "52026a959f0c750f99ef440cae18d653b76c82d5733d396fb0ed60db733cd47e",
+    "text": "{{name}} восстанавливает здоровье: {{amount}}."
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",
