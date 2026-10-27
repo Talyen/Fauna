@@ -9,7 +9,7 @@ import {
 import {
   battleCardCapacity,
   drawHasAnotherCard,
-  discardDrawCards,
+  hasDiscardDrawCard,
   journeyReturnHasDraw,
 } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
@@ -69,25 +69,41 @@ function ordinaryHitScore(hit: OrdinaryHit) {
 }
 /** Share visible target discovery across the hand, without caching mutable state across commands. */
 export function battleBenefitFacts(state: BattleState) {
-  const injuredAllies = healingAllies(state).some(
-    (unit) => unit.health > 0 && unit.health < maximumHealth(unit),
-  );
-  const healingOnPlay =
-    injuredAllies &&
-    ((state.battle.hand.length === 1 &&
-      state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "lastWarmth") > 0)) ||
-      (state.battle.cardsPlayedThisTurn === 1 &&
-        state.team.some(
-          (unit) => unit.health > 0 && passiveAmount(state, unit.species, "livingChorus") > 0,
-        )) ||
-      (state.battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards - 1 &&
-        state.boons.includes("resonant-chimes") &&
-        hasTalent(state, "mana.arcane-mending")));
+  let injured: boolean | undefined;
+  let healing: boolean | undefined;
+  const injuredAllies = () =>
+    (injured ??= healingAllies(state).some((unit) => unit.health < maximumHealth(unit)));
+  const healingOnPlay = () =>
+    (healing ??=
+      injuredAllies() &&
+      ((state.battle.hand.length === 1 &&
+        state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "lastWarmth") > 0)) ||
+        (state.battle.cardsPlayedThisTurn === 1 &&
+          state.team.some(
+            (unit) => unit.health > 0 && passiveAmount(state, unit.species, "livingChorus") > 0,
+          )) ||
+        (state.battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards - 1 &&
+          state.boons.includes("resonant-chimes") &&
+          hasTalent(state, "mana.arcane-mending"))));
   let enemies: Enemy[] | undefined;
   let allies: (Creature | Enemy)[] | undefined;
+  let recoverable: Map<string | undefined, boolean> | undefined;
   return {
-    injuredAllies,
-    healingOnPlay,
+    get injuredAllies() {
+      return injuredAllies();
+    },
+    get healingOnPlay() {
+      return healingOnPlay();
+    },
+    recoverable: (actorId?: string) => {
+      recoverable ??= new Map();
+      let result = recoverable.get(actorId);
+      if (result === undefined) {
+        result = hasDiscardDrawCard(state, actorId);
+        recoverable.set(actorId, result);
+      }
+      return result;
+    },
     livingEnemies: () => (enemies ??= battlefield(state, "enemy").filter((unit) => unit.health > 0)),
     livingAllies: () => (allies ??= battlefield(state, "player").filter((unit) => unit.health > 0)),
   };
@@ -153,17 +169,19 @@ export function battleBenefits(
 ): BattleBenefit[] {
   const { card, actor, def } = play;
   const value = actionValue(card, actor, state);
-  const healing = restoration(
-    actor,
-    def.effects?.reduce(
-      (sum, effect) =>
-        sum +
-        (effect.kind === "heal" && effect.target !== "recipient"
-          ? restoration(actor, healingValue(state, actor, effect.amount)).rounded
-          : 0),
-      0,
-    ) ?? 0,
-  ).gain;
+  let healingValueOnPlay: number | undefined;
+  const healing = () =>
+    (healingValueOnPlay ??= restoration(
+      actor,
+      def.effects?.reduce(
+        (sum, effect) =>
+          sum +
+          (effect.kind === "heal" && effect.target !== "recipient"
+            ? restoration(actor, healingValue(state, actor, effect.amount)).rounded
+            : 0),
+        0,
+      ) ?? 0,
+    ).gain);
   const support = (
     priority: keyof typeof priorities,
     amount = 0,
@@ -179,7 +197,7 @@ export function battleBenefits(
       reason,
     },
   ];
-  const allies = facts.livingAllies();
+  const allies = facts.livingAllies;
   const controlRemoval = (amount: number) => support(amount > 0 ? "controlRemoval" : "none", amount);
   const dodgeSupport = (useful: number) => support(useful > 0 ? "utility" : "none", useful > 0 ? useful : 0);
   switch (def.effect) {
@@ -284,7 +302,7 @@ export function battleBenefits(
           ? [actor]
           : def.target === "mostInjured"
             ? [mostInjured(automaticRecipients)!]
-            : allies.filter((ally) => def.target !== "injured" || ally.health < maximumHealth(ally));
+            : allies().filter((ally) => def.target !== "injured" || ally.health < maximumHealth(ally));
       return recipients.flatMap((ally) => {
         const benefit = healingBenefit(state, ally, value, play.def.effects);
         const { restored } = benefit;
@@ -307,7 +325,7 @@ export function battleBenefits(
       );
     }
     case "teamClearBlind": {
-      const blinded = allies.filter((unit) => unit.combat?.blind).length;
+      const blinded = allies().filter((unit) => unit.combat?.blind).length;
       return blinded > 0
         ? controlRemoval(blinded)
         : def.draw && ordinaryDrawBenefit(state, play, value)
@@ -317,15 +335,15 @@ export function battleBenefits(
     case "repeatNextCard":
       return support(state.battle.repeatNext.player ? "none" : "standardUtility");
     case "springbound": {
-      const frozen = allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length;
+      const frozen = allies().filter((unit) => (unit.combat?.freeze ?? 0) > 0).length;
       return frozen > 0
         ? controlRemoval(frozen)
         : dodgeSupport(Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0)));
     }
     case "teamThaw":
-      return controlRemoval(allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
+      return controlRemoval(allies().filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
     case "recover": {
-      const useful = discardDrawCards(state, def.allyOnly ? actor.id : undefined).length > 0;
+      const useful = facts.recoverable(def.allyOnly ? actor.id : undefined);
       if (def.target === "ally") {
         const healing =
           def.effects?.reduce(
@@ -333,7 +351,7 @@ export function battleBenefits(
               sum + (effect.kind === "heal" && effect.target === "recipient" ? effect.amount : 0),
             0,
           ) ?? 0;
-        return allies.flatMap((ally) => {
+        return allies().flatMap((ally) => {
           const { restored, utility } = healingBenefit(state, ally, healing, play.def.effects);
           return support(
             restored > 0 ? "healing" : useful ? "standardUtility" : utility > 0 ? "utility" : "none",
@@ -360,7 +378,7 @@ export function battleBenefits(
     }
     case "dodge":
       return dodgeSupport(
-        (def.target === "allAllies" ? allies : [actor]).reduce(
+        (def.target === "allAllies" ? allies() : [actor]).reduce(
           (sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)),
           0,
         ),
@@ -369,7 +387,7 @@ export function battleBenefits(
       return support(state.battle.hand.length > 1 ? "redraw" : "none");
     case "draw":
       return support(
-        healing > 0
+        healing() > 0
           ? "healing"
           : ordinaryDrawBenefit(state, play, value) ||
               state.battle.minions?.some(
@@ -377,7 +395,7 @@ export function battleBenefits(
               )
             ? "standardUtility"
             : "none",
-        healing > 0 ? healing : value,
+        healing() > 0 ? healing() : value,
       );
     case "teamBlind": {
       const useful = facts.livingEnemies().filter((enemy) => enemy.health > 0 && !enemy.combat.blind).length;
@@ -455,16 +473,16 @@ export function battleBenefits(
           }, 0) ?? 0;
         const cleanse =
           def.effects?.some((effect) => effect.kind === "cleanse" && hasHarmfulEffects(actor)) ?? false;
-        return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
+        return (def.target === "self" ? [actor] : allies()).flatMap((ally) => {
           const useful = Math.min(value, STACK_LIMIT - ally.block) + foodDodgeBenefit(state, def, ally);
           return support(
-            healing > 0 ? "healing" : useful + protection > 0 || cleanse ? "protection" : "none",
-            healing > 0 ? healing : useful + protection,
+            healing() > 0 ? "healing" : useful + protection > 0 || cleanse ? "protection" : "none",
+            healing() > 0 ? healing() : useful + protection,
             def.target === "self" ? undefined : ally.id,
           );
         });
       }
-      const useful = allies.reduce(
+      const useful = allies().reduce(
         (sum, ally) =>
           sum +
           Math.min(value, STACK_LIMIT - ally.block) +
@@ -475,12 +493,12 @@ export function battleBenefits(
       return support(useful > 0 ? "protection" : "none", useful);
     }
     case "nullify": {
-      const useful = allies.filter((unit) => !unit.combat?.nullify).length;
+      const useful = allies().filter((unit) => !unit.combat?.nullify).length;
       return support(useful > 0 ? "utility" : "none", useful);
     }
     case "swapDodge":
       return support(
-        state.reserves.some((unit) => unit.health > 0) || allies.some((unit) => unit.id !== actor.id)
+        state.reserves.some((unit) => unit.health > 0) || allies().some((unit) => unit.id !== actor.id)
           ? "utility"
           : "none",
       );

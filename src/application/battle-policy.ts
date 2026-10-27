@@ -63,8 +63,9 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     .flatMap((play) =>
       battleBenefits(state, play, facts).flatMap((benefit) => {
         const { score } = benefit;
-        const command = play.commands.find((command) => command.targetId === benefit.targetId);
-        return score > 0 && command
+        const command =
+          score > 0 ? play.commands.find((command) => command.targetId === benefit.targetId) : undefined;
+        return command
           ? [
               {
                 command,

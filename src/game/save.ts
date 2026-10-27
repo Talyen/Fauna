@@ -60,7 +60,7 @@ function validateCollection(state: GameState) {
   invalid(state.phase === "draft" && state.boons.length > 0);
   invalid(SPECIES.some(({ id }) => state.discovery.recruited[id] !== undefined && !encountered.has(id)));
   const starterPool = starterSpecies(state);
-  const offerPool = starterOfferPool(state);
+  const offerPool = state.phase === "draft" ? starterOfferPool(state) : [];
   const count = state.phase === "draft" ? starterCount(state) : 0;
   const drafting = state.phase === "draft" && state.selected.length < count;
   invalid(
@@ -115,12 +115,14 @@ function validateExpedition(state: GameState) {
     invalid(
       route.pack !== null || route.recruit !== null || route.lastRoom !== null || state.encounter !== 0,
     );
-  else
+  else {
+    const boss = bossEncounter(state);
     invalid(
       route.pack === null ||
-        route.pack.length !== (bossEncounter(state) ? 1 : Math.min(3, state.encounter + 1)) ||
-        route.pack.some((kind) => species(kind).legendary && !bossEncounter(state)),
+        route.pack.length !== (boss ? 1 : Math.min(3, state.encounter + 1)) ||
+        (!boss && route.pack.some((kind) => species(kind).legendary)),
     );
+  }
   if (route.recruit !== null)
     invalid(
       species(route.recruit).legendary === true ||

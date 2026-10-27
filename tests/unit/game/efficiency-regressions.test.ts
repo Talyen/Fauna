@@ -1,7 +1,11 @@
 import { expect, it, vi } from "vitest";
+import { modifiedDamage } from "../../../src/game/combat/damage-values";
+import { sharedDodgeChance } from "../../../src/game/combat/state";
+import { cardCost } from "../../../src/game/ability-rules";
 import { cardActor, drawableOwnerIds } from "../../../src/game/card-actors";
 import {
   discardDrawCards,
+  hasDiscardDrawCard,
   drawKeyword,
   drawOwner,
   drawHasAnotherCard,
@@ -337,4 +341,56 @@ it("validates card ownership when resuming a battle", () => {
   const card = state.cards.find((entry) => entry.ownerId === state.team[0]!.id)!;
   card.ownerId = state.team[1]!.id;
   expect(() => decodeSave(encodeSave(state))).toThrow("Save contains inconsistent game data.");
+});
+
+it("matches discard eligibility and refreshes policy facts for each decision", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["wisterelle", "mossguard", "prismram"])));
+  const [owner, ally, fallen] = state.team;
+  fallen!.health = 0;
+  const own = state.cards.find((card) => card.ownerId === owner!.id)!;
+  const living = state.cards.find((card) => card.ownerId === ally!.id)!;
+  const knockedOut = state.cards.find((card) => card.ownerId === fallen!.id)!;
+  for (const discard of [[], [own.id], [knockedOut.id, living.id], [living.id, own.id]]) {
+    state.battle.discard = discard;
+    const facts = battleBenefitFacts(state);
+    for (const actor of [undefined, owner!.id, ally!.id]) {
+      const expected = discardDrawCards(state, actor).length > 0;
+      expect(hasDiscardDrawCard(state, actor)).toBe(expected);
+      expect(facts.recoverable(actor)).toBe(expected);
+      expect(facts.recoverable(actor)).toBe(expected);
+    }
+  }
+  state.battle.discard = [];
+  expect(battleBenefitFacts(state).recoverable(owner!.id)).toBe(false);
+  state.battle.discard = [living.id];
+  expect(battleBenefitFacts(state).recoverable(owner!.id)).toBe(true);
+});
+
+it("keeps free card grants and shared food costs independent of card keyword copies", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["reedstag"])));
+  const card = state.cards.find((entry) => cardKeywords(entry).includes("nature"))!;
+  expect(cardCost(card, state)).toBe(1);
+  state.team[0]!.combat!.freeNature = true;
+  expect(cardCost(card, state)).toBe(0);
+  const food = { definitionId: "food-apple", ownerId: null };
+  expect(cardCost(food, state)).toBe(1);
+  state.boons.push("blossom-cake-stand");
+  expect(cardCost(food, state)).toBe(0);
+});
+
+it("keeps passive protection tied to the living deployed battlefield", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["shadebrim", "dunefox", "mossguard"])));
+  const [shadebrim, dunefox, ally] = state.team;
+  const backup = { ...ally!, id: "backup", combat: structuredClone(ally!.combat) };
+  state.reserves.push(backup);
+  const source = state.battle.enemies[0]!;
+  const burn = (target: typeof ally) =>
+    modifiedDamage(state, source, target!, 100, "burn", { origin: "periodic" }, false);
+  expect(burn(ally)).toBe(90);
+  expect(burn(backup)).toBe(100);
+  expect(sharedDodgeChance(state, ally!)).toBe(0.75);
+  shadebrim!.health = 0;
+  dunefox!.health = 0;
+  expect(burn(ally)).toBe(100);
+  expect(sharedDodgeChance(state, ally!)).toBe(0);
 });

@@ -173,7 +173,7 @@ export function sharedDodgeChance(state: GameState, target: Combatant): number {
   for (const unit of row) {
     if (unit.id === target.id || unit.health <= 0) continue;
     const share = passiveAmount(allied ? state : undefined, unit.species, "shareDodge");
-    total += (ownDodgeChance(state, unit) * share) / 100;
+    if (share) total += (ownDodgeChance(state, unit) * share) / 100;
   }
   return total;
 }

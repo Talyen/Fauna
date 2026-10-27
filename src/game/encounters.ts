@@ -88,6 +88,7 @@ export const BOSSES = [
     pack: ["memento"],
   },
 ] as const;
+const recruitableSpecies = SPECIES.filter((entry) => !entry.legendary);
 export function encounterPacks(encounter: number) {
   const boss = BOSSES.find((entry) => entry.encounter === encounter);
   return boss ? [boss.pack] : COMBAT_PACKS;
@@ -100,7 +101,7 @@ export function generateEncounterPack(state: GameState, savedPack?: readonly Spe
   const roster = [...state.team, ...state.reserves].map((unit) => unit.species);
   const selected = pack.slice(0, Math.min(3, state.encounter + 1));
   if (!selected.some((kind) => roster.includes(kind))) return selected;
-  const eligible = SPECIES.filter((entry) => !entry.legendary && !roster.includes(entry.id));
+  const eligible = recruitableSpecies.filter((entry) => !roster.includes(entry.id));
   return selected.map((kind) =>
     roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind,
   );

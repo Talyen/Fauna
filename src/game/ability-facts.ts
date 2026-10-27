@@ -27,7 +27,13 @@ export interface OrdinaryHit {
 }
 /** Estimate the temporary protection Food will actually add without advancing combat. */
 export function foodDodgeBenefit(state: BattleState, card: CardDefinition, ally: Combatant) {
-  if (card.species !== null || !state.boons.includes("velvet-whisk") || controlled(ally, state)) return 0;
+  if (
+    card.species !== null ||
+    !state.boons.includes("velvet-whisk") ||
+    controlled(ally, state) ||
+    (ally.combat?.temporaryDodge ?? 0) === 70
+  )
+    return 0;
   return Math.max(
     0,
     Math.min(
@@ -44,9 +50,10 @@ export function healingBenefit(
   effects: CardDefinition["effects"],
 ) {
   const { gain, excess } = restoration(ally, healingValue(state, ally, value));
-  const overflow = hasTalent(state, "health.overflow")
-    ? Math.min(overflowBlock(excess), STACK_LIMIT - ally.block)
-    : 0;
+  const overflow =
+    excess > 0 && hasTalent(state, "health.overflow")
+      ? Math.min(overflowBlock(excess), STACK_LIMIT - ally.block)
+      : 0;
   const cleanses =
     hasHarmfulEffects(ally) &&
     ((gain > 0 && (ally.combat?.bleed ?? 0) > 0 && state.boons.includes("yarrow-salve-tin")) ||

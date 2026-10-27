@@ -4,7 +4,7 @@ import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
 import { enemyCard } from "./card-rules";
-import { creaturePassive, cardKeywords, hasTalent, passiveAmount } from "./progression";
+import { creaturePassive, cardHasKeyword, hasTalent, passiveAmount } from "./progression";
 import type { BattleState, Card, Creature, GameState } from "./types";
 
 export function metronomeActorValid(state: BattleState): boolean {
@@ -74,19 +74,21 @@ export function cardCost(
   card: Pick<Card, "definitionId"> & Partial<Pick<Card, "ownerId">>,
   state: GameState,
 ) {
-  const actor = card.ownerId === undefined ? undefined : cardActor(state, { ...card, ownerId: card.ownerId });
   const def = definition(card.definitionId);
   if (def.species === null) return state.boons.includes("blossom-cake-stand") ? 0 : def.cost;
+  const actor =
+    card.ownerId === undefined
+      ? undefined
+      : cardActor(state, { ownerId: card.ownerId, definitionId: card.definitionId });
   if (actor?.combat?.[talentRule("stun.free-follow-up").state]) return 0;
   const freeNature = actor?.combat?.[talentRule("nature.windstep").state];
   const freeLight = actor?.combat?.[talentRule("light.divine-favor").state];
   const freeBurn = hasTalent(state, "burn.flashpoint") && !state.battle?.freeBurnUsed;
   if (freeNature || freeLight || freeBurn) {
-    const keywords = cardKeywords(card);
     if (
-      (freeNature && keywords.includes("nature")) ||
-      (freeLight && keywords.includes("light")) ||
-      (freeBurn && keywords.includes("burn"))
+      (freeNature && cardHasKeyword(card, "nature")) ||
+      (freeLight && cardHasKeyword(card, "light")) ||
+      (freeBurn && cardHasKeyword(card, "burn"))
     )
       return 0;
   }

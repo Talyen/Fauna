@@ -138,13 +138,11 @@ export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) 
   }
 }
 
-export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[] {
+function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = false): Card[] {
   if (!state.battle!.discard.length) return [];
   const owners = otherOwnerId === undefined ? drawableOwnerIds(state) : undefined;
-  const livingOwners =
-    otherOwnerId === undefined
-      ? undefined
-      : new Set(state.team.filter((unit) => unit.health > 0).map((unit) => unit.id));
+  const livingOwners = otherOwnerId === undefined ? undefined : new Set<string>();
+  if (livingOwners) for (const unit of state.team) if (unit.health > 0) livingOwners.add(unit.id);
   const cards = new Map<string, Card>();
   for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
   const result: Card[] = [];
@@ -154,10 +152,21 @@ export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[
       otherOwnerId === undefined
         ? card.ownerId === null || owners!.has(card.ownerId)
         : card.ownerId !== null && card.ownerId !== otherOwnerId && livingOwners!.has(card.ownerId)
-    )
+    ) {
       result.push(card);
+      if (firstOnly) break;
+    }
   }
   return result;
+}
+
+export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[] {
+  return discardDrawPool(state, otherOwnerId);
+}
+
+/** Eligibility checks do not need to enumerate the complete ordered draw pool. */
+export function hasDiscardDrawCard(state: GameState, otherOwnerId?: string): boolean {
+  return discardDrawPool(state, otherOwnerId, true).length > 0;
 }
 
 export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?: string): Card | undefined {

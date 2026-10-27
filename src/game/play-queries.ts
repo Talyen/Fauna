@@ -5,7 +5,7 @@ import { cardCost } from "./ability-rules";
 import { controlled, maximumHealth } from "./combat/state";
 import { battlefield } from "./battlefield";
 import { pendingReplacement } from "./team";
-import { discardDrawCards } from "./card-zones";
+import { hasDiscardDrawCard } from "./card-zones";
 import type { BattleState, Card, Creature, Enemy, Command } from "./types";
 
 function recipientPool(state: BattleState, def: CardDefinition) {
@@ -70,7 +70,7 @@ function inspectCard(
   card: Card | undefined,
   recipients: (def: CardDefinition) => ReturnType<typeof chosenRecipients>,
   inHand = false,
-  recoverable = (actorId: string) => discardDrawCards(state, actorId).length > 0,
+  recoverable = (actorId: string) => hasDiscardDrawCard(state, actorId),
 ): ({ allowed: true } & PlayableCard) | { allowed: false; reason: string } {
   if (!card || (!inHand && !state.battle.hand.includes(card.id)))
     return { allowed: false, reason: "That card is not in your hand." };
@@ -115,11 +115,16 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     if (!result) recipientsByDefinition.set(def, (result = chosenRecipients(state, def)));
     return result;
   };
+  const recipientIds = new Map<CardDefinition, string[]>();
+  const targetIds = (def: CardDefinition) => {
+    let ids = recipientIds.get(def);
+    if (!ids) recipientIds.set(def, (ids = recipients(def).map((unit) => unit.id)));
+    return ids;
+  };
   let recoverableByActor: Map<string, boolean> | undefined;
   const recoverable = (actorId: string) => {
     recoverableByActor ??= new Map();
-    if (!recoverableByActor.has(actorId))
-      recoverableByActor.set(actorId, discardDrawCards(state, actorId).length > 0);
+    if (!recoverableByActor.has(actorId)) recoverableByActor.set(actorId, hasDiscardDrawCard(state, actorId));
     return recoverableByActor.get(actorId)!;
   };
   return state.battle.hand.flatMap((cardId) => {
@@ -132,8 +137,7 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     );
     if (!play.allowed) return [];
     const mode = cardTargeting(play.def, state);
-    const ids =
-      mode === "enemy" || mode === "ally" ? recipients(play.def).map((unit) => unit.id) : [undefined];
+    const ids = mode === "enemy" || mode === "ally" ? targetIds(play.def) : [undefined];
     return [
       {
         card: play.card,
