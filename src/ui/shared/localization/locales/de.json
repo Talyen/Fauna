@@ -2823,7 +2823,7 @@
     "reviewed": true,
     "source": "A duplicate of a drawn card with the same owner, level and <keyword0>Mana</keyword0> cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
     "sourceHash": "8cf3aca1abb0326cf9528308db4b2a8aadaf60e758397722e92d1092c944ce2f",
-    "text": "Ein Duplikat einer gezogenen Karte mit demselben Besitzer, Rang und <keyword0>Mana</keyword0>-Preis; Bleibt bis zum Kampfende im Deck; Das Ziehen einer Kopie kann sie erneut kopieren; Erstellen oder Vorrücken einer Kopie zählt nicht als Ziehen"
+    "text": "Ein Duplikat einer gezogenen Karte mit demselben Besitzer, derselben Stufe und <keyword0>Mana</keyword0>-Preis; Bleibt bis zum Kampfende im Deck; Das Ziehen einer Kopie kann sie erneut kopieren; Erstellen oder Vorrücken einer Kopie zählt nicht als Ziehen"
   },
   "content.glossary.copy.term.rule": {
     "reviewed": true,
