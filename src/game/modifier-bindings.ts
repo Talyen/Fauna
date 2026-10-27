@@ -367,6 +367,7 @@ export const modifierImplementations = freeze(
       earlyBird: ["./combat/state#openingCriticalBonus"],
       armorBreak: ["./combat/statuses#triggerArmorBreak"],
       blockBreak: ["./combat/damage-reactions#passiveRetaliation"],
+      faultline: ["./combat/damage-reactions#faultline"],
       statusReflection: ["./combat/statuses#applyHarmfulStatus", "./combat/statuses#removeEffects"],
       shareProtection: ["./combat/protection#shareProtection"],
       shareDodge: ["./combat/state#sharedDodgeChance"],
