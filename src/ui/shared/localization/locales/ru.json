@@ -551,6 +551,12 @@
     "sourceHash": "9da33ad8e494e4234d47c0d6c043d2e2927e7a900247df55e4f00e2ab131f0e6",
     "text": "Йо-йо грёз"
   },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "831e0ffb3564b51f96afd07932c698239c6db42210a42de1b727bf437fe3da18",
+    "text": "Карты, от которых враги <keyword0>уклонились</keyword0>, возвращаются в руку"
+  },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
     "source": "Dune Shuttle",
@@ -899,11 +905,23 @@
     "sourceHash": "e6ec02f602d1380079a33e5c971fd08b95e5942add499e98eb698a18bc313ad5",
     "text": "Метеорит"
   },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "1d498bd9082ab4bfcd29e30e31d7b20103d9f9238e885e09e7ef31056c9bd0a2",
+    "text": "Удвойте первое попадание <keyword0>горением</keyword0> в каждом бою"
+  },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
     "source": "Mineral Bookend",
     "sourceHash": "2e4d5b8b86bc2c909fa9bed6446960812a47b9e43e0953d4f2698ebe55058a7f",
     "text": "Минеральный упор для книг"
+  },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "114ee35d1deccae30ac2afae7806d0288df686be84d7fe60d82d73dfcb099a77",
+    "text": "Взятие последней карты из колоды добора восстанавливает {{value0}} <keyword0>маны</keyword0>"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -1073,6 +1091,12 @@
     "sourceHash": "b2dea3d98d211bb12e3c7c8b7102d967331f4c47c56e2c34f5b6f72d1c5edbb7",
     "text": "Парусник молитвы"
   },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "e719486acc3705dc46be55188f16c2fb299bedac9bf4d6dbe7b8634c6e53bdb1",
+    "text": "При смене уходящий союзник <keyword0>очищается</keyword0> от <keyword1>оглушения</keyword1> и <keyword2>заморозки</keyword2>"
+  },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
     "source": "Prism Chisel",
@@ -1091,6 +1115,12 @@
     "sourceHash": "7dc45f01420041a7116aaa488f843cd1d1635d4b964490e4fa01878fba0aa5aa",
     "text": "Тыквенная супница"
   },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "ebc1979b0a5e7e6c8c9988cfe9cbf1a9235cb70a7eecc825d3738f3249b2b072",
+    "text": "<keyword0>Еда</keyword0> даёт всем союзникам <keyword1>здоровье</keyword1> и <keyword2>блок</keyword2>"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1108,6 +1138,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "5d8025fd406bf97a63006a964129378921b4daa3cabbc31be4d2815ea478f7cb",
     "text": "Чаша для дождя"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "f955d44139f5a607126f68b63f88943d614166fe8e56aedda3f495d03ea7effc",
+    "text": "Получите <keyword0>кристаллы маны</keyword0>: {{value0}}, если в вашей колоде есть карта <keyword1>воды</keyword1>"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1169,6 +1205,12 @@
     "sourceHash": "730fc5e3b640f07757cb68e7eb9de36c780fd17fe5e4822665f1752a1ed5e7a7",
     "text": "Ладья милосердия"
   },
+  "content.boon.rook-of-mercy.rule": {
+    "reviewed": true,
+    "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "b8ad7c874bd2ee4efbfded2dbaf8d615fc49bcc439a29f8e477cf7b4f13508a2",
+    "text": "Входящие при смене союзники получают {{value0}} <keyword0>брони</keyword0>"
+  },
   "content.boon.rootvault-pole.name": {
     "reviewed": true,
     "source": "Rootvault Pole",
@@ -1228,6 +1270,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "a14be87f620dc1f0dce73a6c719a10212bf9507fda34f0f0384cb7ebc7b69238",
     "text": "Королевская подставка для тостов"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "6e5a55795a0bdfebd83fb02572d0c65532bcd436d80ed860db368aeb27175611",
+    "text": "Розыгрыш <keyword0>еды</keyword0> даёт всем союзникам {{value0}} <keyword1>брони</keyword1>"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,

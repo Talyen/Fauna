@@ -551,6 +551,12 @@
     "sourceHash": "07d7e180fcae3c28c386751fe915549f5ffd4740c45e207d69ee186e17ea24c7",
     "text": "Yo-yo des rêves"
   },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "690ed76ee46083bd2c5a042a3148bdfdc8de474e113f0041629d6ee00e5c31fc",
+    "text": "Les cartes <keyword0>esquivées</keyword0> par les ennemis reviennent en main"
+  },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
     "source": "Dune Shuttle",
@@ -899,11 +905,23 @@
     "sourceHash": "322c0d5d9d96ed98bf0cade4b70a33e19d8a874d58e0cd99f0a3e93bb79402d9",
     "text": "Météorite"
   },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "e599aa517d33fe027acbab47f9616f8d6c98a5c7bb7bfa418226e419805553b1",
+    "text": "Double votre première touche de <keyword0>Brûlure</keyword0> à chaque combat"
+  },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
     "source": "Mineral Bookend",
     "sourceHash": "26ee4e0b7828409073064577d7f7d5ffca59cd32bb920db1956ef19e6ba758e6",
     "text": "Serre-livres minéral"
+  },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "8007b9018f79e1801289e6e25b35a8ad10356d0a43eb8339ffcfad7784b38bcf",
+    "text": "Piocher la dernière carte de votre pioche restaure {{value0}} <keyword0>Mana</keyword0>"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -1073,6 +1091,12 @@
     "sourceHash": "c3ad3a17c5f30d94d885626e8f53c01b29729fd9286f9fc48d8a9e3158def6ce",
     "text": "Voilier de prière"
   },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "236881127b524ee33dccda84795a192801be8e120ba2bfd089055a7d5452266a",
+    "text": "Sortir du combat <keyword0>purifie</keyword0> l’<keyword1>Étourdissement</keyword1> et le <keyword2>Gel</keyword2>"
+  },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
     "source": "Prism Chisel",
@@ -1091,6 +1115,12 @@
     "sourceHash": "281374633c45417f663e50430d9ad2c13a80d5c6e0b9f357352024f8458dc683",
     "text": "Soupière citrouille"
   },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "8e884d125e70c7dade01495a59426a534b675b778798513e39ad792bc9d61903",
+    "text": "La <keyword0>Nourriture</keyword0> confère des <keyword1>Santé</keyword1> et du <keyword2>Blocage</keyword2> à tous les alliés"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1108,6 +1138,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "e70dc9eb36afb7700a7f618576aa94cefdbf808e9e2390b4bb15c13430c05a2b",
     "text": "Bol attrape-pluie"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "8e745b390451703a715ca26f4c1eb93586f038610e4a6d2fdd0a913a23a0de4e",
+    "text": "Gagnez {{value0}} <keyword0>Cristal de mana</keyword0> si votre deck contient une carte <keyword1>Eau</keyword1>"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1234,6 +1270,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "d96344ee375a798c3a10df5ffbb8a184d03a47942149940268e4b97ba23ce3af",
     "text": "Porte-toasts souverain"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "c6248b2b287fb4bac94e9af81e7816dc508d3e600e4987b2454b76a116d8ece3",
+    "text": "Jouer de la <keyword0>Nourriture</keyword0> confère {{value0}} <keyword1>Armure</keyword1> à tous les alliés"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,

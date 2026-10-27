@@ -551,6 +551,12 @@
     "sourceHash": "feabc9a35f1293874bd8ddf21a65faf77e114de48d0a4ff94829df077e4c4a3f",
     "text": "Yo-yo de sueños"
   },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "ded87025afbb4b7de32382ab5c9b95c8bc2fac7508db6e848ac221cc7baf0f5e",
+    "text": "Las cartas que los enemigos <keyword0>esquivan</keyword0> vuelven a la mano"
+  },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
     "source": "Dune Shuttle",
@@ -899,11 +905,23 @@
     "sourceHash": "20474e1de926ee94bcb2400da3945f50049c3808938b8299e11fcd2452b511e3",
     "text": "Meteorito"
   },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "3ce46ce0e065a1d05435b53bee60eff8b6f1e9cbd980ec78e914130ff596c03a",
+    "text": "Duplica tu primer impacto de <keyword0>Quemadura</keyword0> en cada combate"
+  },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
     "source": "Mineral Bookend",
     "sourceHash": "6b21e6d93c9c99d030a69480baf6e6bf394858ee815271058e0fbfaf5eaf83d5",
     "text": "Sujetalibros mineral"
+  },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "d97023cf25fcfe0e1fdb343cd3b637ab81ad5960fe9e8514ee84f48476c79a8e",
+    "text": "Robar la última carta del mazo de robo restaura {{value0}} de <keyword0>Maná</keyword0>"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -1073,6 +1091,12 @@
     "sourceHash": "614e5fc180cbb7c2f1be927b1d150ff3e7dd07d128853fc4f87321ebfd4f6a4a",
     "text": "Velero de oración"
   },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "e8b301d94a19e0dfc294db9286ceaab464fe2171119d460031b921fbf812c90a",
+    "text": "Al salir mediante un intercambio se <keyword0>purifican</keyword0> el <keyword1>Aturdimiento</keyword1> y la <keyword2>Congelación</keyword2>"
+  },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
     "source": "Prism Chisel",
@@ -1091,6 +1115,12 @@
     "sourceHash": "64877edd9d67b0e485bca8f23700d6d06ba90db53449c7f61e585e3a3d0ed2b8",
     "text": "Sopera de calabaza"
   },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "e20e1ac60cf71497a84d659a6f0e4029811de862a440486201cbceaff0f14539",
+    "text": "La <keyword0>Comida</keyword0> otorga <keyword1>Salud</keyword1> y <keyword2>Bloqueo</keyword2> a todos los aliados"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1108,6 +1138,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "1d9c235731a030a7187e4eb0de58c59650db93a555a034b25e599e7b2aa9c074",
     "text": "Cuenco atrapalluvias"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "465899301fde506d3da38835f4c23fa702b13e17ee88c310353ce0ea2a4813d2",
+    "text": "Obtienes {{value0}} <keyword0>Cristal de maná</keyword0> si tienes una carta de <keyword1>Agua</keyword1> en tu mazo"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1169,6 +1205,12 @@
     "sourceHash": "fee941ae0f77edb011a97ca1a05464936b4db94a3c9eb3dada561ffdfa6e4ffa",
     "text": "Torre de misericordia"
   },
+  "content.boon.rook-of-mercy.rule": {
+    "reviewed": true,
+    "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "f7db82dbff520627d97b7e8dec1d5370a3d0fd8802e4cac7be61749d88d8f1ec",
+    "text": "Los aliados que entran al intercambiarse obtienen {{value0}} de <keyword0>Armadura</keyword0>"
+  },
   "content.boon.rootvault-pole.name": {
     "reviewed": true,
     "source": "Rootvault Pole",
@@ -1228,6 +1270,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "cf6ff530975bbdf5756b0de899a425b5733f011157858453d3529e2f04200b6e",
     "text": "Soporte real para tostadas"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "b016263ebcea11dbd6971b9dd386964856628597f8c07f73a26223375f4e1080",
+    "text": "Jugar <keyword0>Comida</keyword0> otorga {{value0}} de <keyword1>Armadura</keyword1> a todos los aliados"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,

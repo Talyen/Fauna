@@ -551,6 +551,12 @@
     "sourceHash": "c0ab2cf06e669a742eeade6345444f15f1216d9d0e77d42eecfd12f3689fc491",
     "text": "夢のヨーヨー"
   },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "ab278ecdf9a9d819ce1657c7927d2dc68c0743993c224b63c476586f34a0a544",
+    "text": "敵に<keyword0>回避</keyword0>されたカードは手札に戻る"
+  },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
     "source": "Dune Shuttle",
@@ -899,11 +905,23 @@
     "sourceHash": "b546cf6a759fb23f605977258da31082193b1ac3c3ffaa23965dcfa699dca67f",
     "text": "隕石"
   },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "0c19bf399ef6c707cb15d93a6a9166538beaea1e63993cbae66f973e49e7f84e",
+    "text": "各戦闘で最初の<keyword0>炎上</keyword0>ヒットを2倍にする"
+  },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
     "source": "Mineral Bookend",
     "sourceHash": "0f6b99d9298f58b9e97d5272ad7421d8aad1776fa63eeca3a05a441cb371e06e",
     "text": "鉱石のブックエンド"
+  },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "e2705107c01ba0ca9e648d5e340d39a84122a55a44fcc358da824c1a930cb2e8",
+    "text": "山札の最後のカードを引くと<keyword0>マナ</keyword0>を{{value0}}回復"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -1073,6 +1091,12 @@
     "sourceHash": "96b8b9556e212728642ea7acc0b466fa89990401b2fdb123378ff76cb0a6e8dd",
     "text": "祈りの帆船"
   },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "50077bc8389b7827a655b19f917fb1989a645a4e029bcb6f32f1ab7e6b5e2273",
+    "text": "交代で退くと<keyword1>スタン</keyword1>と<keyword2>凍結</keyword2>を<keyword0>浄化</keyword0>"
+  },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
     "source": "Prism Chisel",
@@ -1091,6 +1115,12 @@
     "sourceHash": "b42f8205ad1b9d54da72f52b7f17997b8b9c35e614b1f2e01d66cd96860fda76",
     "text": "カボチャのスープ皿"
   },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "397e51bc9def533299e7136e22085e1686c7751d17a063a54214d811181581c9",
+    "text": "<keyword0>食料</keyword0>は味方全員に<keyword1>体力</keyword1>と<keyword2>ブロック</keyword2>を付与"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1108,6 +1138,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "3b3d3d185d65ea45022f4d7ec7a3e2708b75090c704afeec8f585f1862bd7f0a",
     "text": "雨受けの鉢"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "163350a183c8faf27883dea8018b10339a6b6c00fe581a1fd4f369e220757507",
+    "text": "デッキに<keyword1>水</keyword1>カードがあれば<keyword0>マナクリスタル</keyword0>を{{value0}}獲得"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1169,6 +1205,12 @@
     "sourceHash": "31d18e8f4bdec7f81ade76b27279abb723173e09924ad09e227377ef5da44bab",
     "text": "慈悲のルーク"
   },
+  "content.boon.rook-of-mercy.rule": {
+    "reviewed": true,
+    "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "dfecefb65cf9f5a51e0b0482b0c64c731b200e82781db70ee2b705ed8d863d34",
+    "text": "交代で出た味方は<keyword0>装甲</keyword0>を{{value0}}獲得"
+  },
   "content.boon.rootvault-pole.name": {
     "reviewed": true,
     "source": "Rootvault Pole",
@@ -1228,6 +1270,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "d2926d7778cf5d7f6a0a74b815fb0a20eeff22976bc49e94a7004e95d25bd185",
     "text": "王のトーストラック"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "9c171901b262853f438cdf5538d05e5f8a09df22dad7607d9a2b8c9b8cb7b580",
+    "text": "<keyword0>食料</keyword0>を使うと味方全員に<keyword1>装甲</keyword1>を{{value0}}付与"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,

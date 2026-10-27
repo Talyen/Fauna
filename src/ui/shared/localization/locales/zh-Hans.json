@@ -551,6 +551,12 @@
     "sourceHash": "6ff4a1f39a265ca453c513249eed736e75ce3259da01197f2cf3d88e731cd8ab",
     "text": "梦境悠悠球"
   },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "017a53fba17910c5d68d22d4fe17ca7206ec1339aa3e13c355d858d16ae66524",
+    "text": "被敌人<keyword0>闪避</keyword0>的牌返回手牌"
+  },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
     "source": "Dune Shuttle",
@@ -899,11 +905,23 @@
     "sourceHash": "4aae5d837f0925ccef875cddf1ebcc301a9cc6f7a5615cc14fa0facfcd61ab36",
     "text": "陨石"
   },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "36c574deff86f81deb808b5371252acc803576f0d3b9450dc6c0d6d173e7e45e",
+    "text": "每场战斗的首次<keyword0>灼烧</keyword0>命中效果翻倍"
+  },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
     "source": "Mineral Bookend",
     "sourceHash": "bbe0a01235b5fc1ea726cba6d8bba5ff85d84d30bff7bc4fbfcd696a5cb073d2",
     "text": "矿石书挡"
+  },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "db6516e54e77a4ac76f98e6d44e2d29e8bdac550d6c889aeba1984d478cb1f30",
+    "text": "抽取抽牌堆中最后一张牌时恢复{{value0}}点<keyword0>法力</keyword0>"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -1073,6 +1091,12 @@
     "sourceHash": "16e75e0aba4772f4b5c1f6617c864e36cd478742b0dc39e3f63164b7043110ac",
     "text": "祈愿帆船"
   },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "d4aaa0d57deb605cb9a48272376188be820844beacfe0757581ecccd5e787378",
+    "text": "换出时<keyword0>净化</keyword0><keyword1>眩晕</keyword1>和<keyword2>冻结</keyword2>"
+  },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
     "source": "Prism Chisel",
@@ -1091,6 +1115,12 @@
     "sourceHash": "0e99b646796c46972318df954ed90ed56d58ad82cd834806f6c2cd6c2e82374b",
     "text": "南瓜汤盅"
   },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "3bd06a50b495d4ac501d6ba1172dbdf45d3d5fe12554d89906c1b9fa05f4ed12",
+    "text": "<keyword0>食物</keyword0>为所有盟友提供<keyword1>生命</keyword1>和<keyword2>格挡</keyword2>"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1108,6 +1138,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "176184f8f633cbd144361a33a85ed3330c611a6705051d6d6df582dbbdbb9739",
     "text": "接雨碗"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "4216b3118bcd3f8e3a8be572c8dfcc70b75c271937597a14c1007b0b0e1fb10d",
+    "text": "如果牌组中有<keyword1>水</keyword1>牌，获得{{value0}}个<keyword0>法力水晶</keyword0>"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1169,6 +1205,12 @@
     "sourceHash": "7ceb70c75e2ccc8a2ca7b130eba37b6a8f554e93a5dd9fa4023803e85b7b588c",
     "text": "仁慈之车"
   },
+  "content.boon.rook-of-mercy.rule": {
+    "reviewed": true,
+    "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "c7dfb27ec67c5631123c0da249cddda7c47a533890eb68f0d34858c7abc5a2ee",
+    "text": "换入的盟友获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
   "content.boon.rootvault-pole.name": {
     "reviewed": true,
     "source": "Rootvault Pole",
@@ -1228,6 +1270,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "701a10ab841891b498163a84f8ea0d831da85b0b83dbb1f8a0e102949326d9b2",
     "text": "君王吐司架"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "099b79a4409c7305e4d432aec062609baec6d0f7ec6dde78b7390ddefbf127c9",
+    "text": "打出<keyword0>食物</keyword0>时，所有盟友获得{{value0}}点<keyword1>护甲</keyword1>"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,

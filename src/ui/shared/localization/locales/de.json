@@ -551,6 +551,12 @@
     "sourceHash": "3541b31650e89545ad0f9102e03c1896980df2346a2c08a85f56caaeeb7fea46",
     "text": "Traum-Jo-Jo"
   },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "59270c48102823a3ba63353193ef856eb76fcca9f6d57dee867fc4a82e9d60c9",
+    "text": "Karten, denen Gegner <keyword0>ausweichen</keyword0>, kehren auf die Hand zurück"
+  },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
     "source": "Dune Shuttle",
@@ -899,11 +905,23 @@
     "sourceHash": "3b95ee5e51821484b2aa8fec425eb9e6ad84080ddb534e0df027d04de5c4f874",
     "text": "Meteorit"
   },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "214b903e4dc708970fc059cb207898ea0780c0fc9918a8232cd57253526ef017",
+    "text": "Verdopple in jedem Kampf deinen ersten <keyword0>Brand</keyword0>-Treffer"
+  },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
     "source": "Mineral Bookend",
     "sourceHash": "544b450663a3485bf49df9627932e5ab75c45ad12ad58e5b42520cd1320e71d8",
     "text": "Mineralbuchstütze"
+  },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "32ab8b9a5fb3d4461d4283b6e750bee838de6ac89f11f7663810ddb0a05b6399",
+    "text": "Das Ziehen der letzten Karte deines Nachziehstapels stellt {{value0}} <keyword0>Mana</keyword0> wieder her"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -1073,6 +1091,12 @@
     "sourceHash": "52b5ad4ac022563168e444205d20509d84bf1462d7cfd3c7ae360e03b4178529",
     "text": "Gebetssegelboot"
   },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "1c691f17a3d5e110e80ac97a5deaec9191b9febd2da01d1644640e424e33ceab",
+    "text": "Beim Auswechseln werden <keyword1>Betäubung</keyword1> und <keyword2>Frost</keyword2> <keyword0>gereinigt</keyword0>"
+  },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
     "source": "Prism Chisel",
@@ -1091,6 +1115,12 @@
     "sourceHash": "20534b5bd916f4c1a4baac2ec64b84aac327ccb159012ffe1f46df650544035b",
     "text": "Kürbisterrine"
   },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "12b53c277da4d6c4c626e2da86ab23a65082aae25763c61b5c8b8ae84dc3ed42",
+    "text": "<keyword0>Nahrung</keyword0> gewährt allen Verbündeten <keyword1>Gesundheit</keyword1> und <keyword2>Block</keyword2>"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1108,6 +1138,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "f6e07bf1355ec8c1e8abe2175b112000771d366799febbaa469109e365c588de",
     "text": "Regenfangschale"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "c9f65d19338930d7c8c1df4d1958391c30db6e38ffbe60ffafd469d8d84537bc",
+    "text": "Erhalte {{value0}} <keyword0>Manakristall</keyword0>, wenn dein Deck eine <keyword1>Wasser</keyword1>-Karte enthält"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1169,6 +1205,12 @@
     "sourceHash": "f035fb392ed84569666ece32a8b3d9da50f49e145c58b029dee52b1315e98244",
     "text": "Turm der Gnade"
   },
+  "content.boon.rook-of-mercy.rule": {
+    "reviewed": true,
+    "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "a6e64661a68189da59ac59f4011b397e038a4aff51adf8583c21d531b62bfaff",
+    "text": "Eingewechselte Verbündete erhalten {{value0}} <keyword0>Rüstung</keyword0>"
+  },
   "content.boon.rootvault-pole.name": {
     "reviewed": true,
     "source": "Rootvault Pole",
@@ -1228,6 +1270,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "7c22e780d2bd8ad3d5889bbf0b02168cda179ffd68778e7695496dd91ba15c21",
     "text": "Königlicher Toastständer"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "821b314753c9751554fdb791c50f35272fffeee883e14130c6d75a44f4ea380a",
+    "text": "Das Spielen von <keyword0>Nahrung</keyword0> gewährt allen Verbündeten {{value0}} <keyword1>Rüstung</keyword1>"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,
