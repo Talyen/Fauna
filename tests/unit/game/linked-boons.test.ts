@@ -1,3 +1,4 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
 import { run, requireBattle, teamRun } from "../../support/game";
 import { setBattleCards } from "../../support/cards";
@@ -16,14 +17,7 @@ import type { GameEvent } from "../../../src/game/types";
 
 function fixture() {
   const state = requireBattle(structuredClone(run()));
-  state.boons = [];
-  state.talents = [];
-  for (const unit of [...state.team, ...state.battle.enemies]) {
-    unit.block = 0;
-    unit.combat = freshCombat();
-  }
-  for (const enemy of state.battle.enemies) enemy.health = enemy.maxHealth = 100;
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state, "all");
   return { state, source: state.team[1]!, target: state.battle.enemies[0]!, events: [] as GameEvent[] };
 }
 

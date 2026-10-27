@@ -101,10 +101,19 @@ function eligibleDrawPool(state: GameState, matches: (card: Card) => boolean) {
       ? (candidate: string) => candidate === id
       : undefined;
   }
+  const pool = new Set([...draw, ...discard]);
   const ids = new Set<string>();
-  for (const card of state.cards) if (matches(card)) ids.add(card.id);
-  if (!draw.some((id) => ids.has(id)) && !discard.some((id) => ids.has(id))) return;
+  for (const card of state.cards) if (pool.has(card.id) && matches(card)) ids.add(card.id);
+  if (!ids.size) return;
   return (id: string) => ids.has(id);
+}
+
+/** Keyword draws and their visible benefit query use identical owner eligibility. */
+function drawableCard(state: GameState, keyword?: "light" | "nature" | "water" | "burn") {
+  let owners: Set<string> | undefined;
+  return (card: Card) =>
+    (card.ownerId === null || (owners ??= drawableOwnerIds(state)).has(card.ownerId)) &&
+    (!keyword || cardHasKeyword(card, keyword));
 }
 
 /** Find cards belonging to another living deployed creature without revealing pile order. */
@@ -329,13 +338,7 @@ export function drawKeyword(
 ) {
   if (!state.battle) return;
   fillHand(state);
-  let owners: Set<string> | undefined;
-  const eligible = eligibleDrawPool(
-    state,
-    (card) =>
-      (card.ownerId === null || (owners ??= drawableOwnerIds(state)).has(card.ownerId)) &&
-      cardHasKeyword(card, keyword),
-  );
+  const eligible = eligibleDrawPool(state, drawableCard(state, keyword));
   if (eligible) drawEligibleCard(state, eligible, events);
 }
 
@@ -382,23 +385,10 @@ export function drawHasAnotherCard(
   played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
-  if (state.battle.draw.length || state.battle.discard.length) {
-    let owners: Set<string> | undefined;
-    const singleId =
-      state.battle.draw.length + state.battle.discard.length === 1
-        ? (state.battle.draw[0] ?? state.battle.discard[0])
-        : undefined;
-    const cards = singleId === undefined ? new Map<string, Card>() : undefined;
-    if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
-    const eligible = (id: string) => {
-      const drawn = cards ? cards.get(id)! : state.cards.find((card) => card.id === id)!;
-      return (
-        (drawn.ownerId === null || (owners ??= drawableOwnerIds(state)).has(drawn.ownerId)) &&
-        (effect.kind === "draw" || cardHasKeyword(drawn, effect.keyword))
-      );
-    };
-    if (state.battle.draw.some(eligible) || state.battle.discard.some(eligible)) return true;
-  }
+  if (
+    eligibleDrawPool(state, drawableCard(state, effect.kind === "drawKeyword" ? effect.keyword : undefined))
+  )
+    return true;
   return (
     !definition(played.definitionId).consume &&
     (effect.kind === "draw" || cardHasKeyword(played, effect.keyword)) &&

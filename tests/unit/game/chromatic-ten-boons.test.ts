@@ -1,6 +1,6 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
-import { BOONS, definition } from "../../../src/game/content";
-import { validateContent } from "../../../src/game/content-validation";
+import { definition } from "../../../src/game/content";
 import { freshCombat, hit, removeEffects, restoreHealth, tickStatuses } from "../../../src/game/combat";
 import { resolveCombat } from "../../../src/game/combat/resolution";
 import { observeDecisions } from "../../../src/game/random";
@@ -8,43 +8,13 @@ import { requireBattle, run, teamRun } from "../../support/game";
 import { setBattleCards } from "../../support/cards";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import prepared from "../../../src/assets/prepared.json";
-import { NEW_BOON_EFFECTS } from "../../support/boons";
 import type { GameEvent } from "../../../src/game/types";
 
 function fixture() {
   const state = requireBattle(structuredClone(run()));
-  state.boons = [];
-  state.talents = [];
-  for (const unit of [...state.team, ...state.battle.enemies]) {
-    unit.block = 0;
-    unit.combat = freshCombat();
-  }
-  for (const enemy of state.battle.enemies) enemy.health = enemy.maxHealth = 100;
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state, "all");
   return { state, source: state.team[1]!, enemy: state.battle.enemies[0]!, events: [] as GameEvent[] };
 }
-
-it("registers the ten distinct Boons and their exact rules", () => {
-  const expected = [
-    "bellows-heart",
-    "leafwing-shuttlecock",
-    "soot-brush",
-    "echo-ocarina",
-    "glassleaf-shield",
-    "harvest-shears",
-    "frostglass-die",
-    "reef-diadem",
-    "chromatic-viol",
-    "mirror-locket",
-  ];
-  for (const id of expected) {
-    const text = NEW_BOON_EFFECTS[id as keyof typeof NEW_BOON_EFFECTS];
-    expect(BOONS.find((boon) => boon.id === id)?.text).toBe(text);
-    expect(Object.hasOwn(prepared.records, `boon.${id}`)).toBe(true);
-  }
-  expect(validateContent).not.toThrow();
-});
 
 it("shares a Dodge and deals actual Stun damage without responding to a Thorns Dodge", () => {
   const { state, source, enemy, events } = fixture();

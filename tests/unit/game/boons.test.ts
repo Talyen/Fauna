@@ -46,6 +46,8 @@ import { NEW_BOON_EFFECTS } from "../../support/boons";
 import { dulceraBattle } from "../../support/dulcera";
 import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
 import { afterPlayerCard } from "../../../src/game/combat/card-modifiers";
+import { CORNUCOPIA_CARD_ID, replenishJourneyCards } from "../../../src/game/journey-cards";
+import { validateContent } from "../../../src/game/content-validation";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import prepared from "../../../src/assets/prepared.json";
 function fixture() {
@@ -63,12 +65,24 @@ function fixture() {
 }
 
 it.each(Object.entries(NEW_BOON_EFFECTS))(
-  "registers the approved %s effect and prepared portrait",
+  "registers the approved %s effect, portrait and save identity",
   (id, text) => {
-    expect(BOONS.find((boon) => boon.id === id)?.text).toBe(text);
+    const boon = BOONS.find((entry) => entry.id === id);
+    expect(boon?.text).toBe(text);
     expect(Object.hasOwn(prepared.records, `boon.${id}`)).toBe(true);
+    if (!boon) throw new Error(`Missing Boon: ${id}`);
+    const state = requireBattle(structuredClone(run()));
+    state.boons = [boon.id];
+    if (boon.id === "cornucopia") {
+      replenishJourneyCards(state);
+      state.battle.draw.push(CORNUCOPIA_CARD_ID);
+    }
+    expect(decodeSave(encodeSave(state)).boons).toEqual([id]);
   },
 );
+it("validates the complete authored content catalog", () => {
+  expect(validateContent).not.toThrow();
+});
 
 it("Briar Racquet spends one Nature Thorns stack for a half-strength Dodge retaliation without a chain", () => {
   const { state, source, target, events } = fixture();

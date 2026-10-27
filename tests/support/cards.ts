@@ -17,10 +17,11 @@ export function cardId(state: Pick<GameState, "cards">, definitionId: string) {
   return state.cards.find((card) => card.definitionId === definitionId)!.id;
 }
 
-export function setHand(state: GameState, definitions: readonly string[]) {
+export function setHand(state: GameState, definitions: readonly string[], discard: readonly string[] = []) {
   setBattleCards(
     state,
     definitions.map((id) => cardId(state, id)),
+    discard.map((id) => cardId(state, id)),
   );
 }
 

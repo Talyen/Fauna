@@ -1,25 +1,18 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
-import { freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat";
+import { hit, removeEffects, tickStatuses } from "../../../src/game/combat";
 import { useFood } from "../../../src/game/combat/food";
-import { definition, BOONS } from "../../../src/game/content";
+import { definition } from "../../../src/game/content";
 import { foodWaffleBenefit } from "../../../src/game/ability-facts";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { observeDecisions } from "../../../src/game/random";
-import prepared from "../../../src/assets/prepared.json";
 import { accept, bossReward, requireBattle, run } from "../../support/game";
 import { produce } from "immer";
 import type { GameEvent } from "../../../src/game/types";
 
 function fixture() {
   const state = requireBattle(structuredClone(run()));
-  state.talents = [];
-  state.boons = [];
-  for (const unit of [...state.team, ...state.battle.enemies]) {
-    unit.combat = freshCombat();
-    unit.block = 0;
-  }
-  for (const enemy of state.battle.enemies) enemy.health = enemy.maxHealth = 100;
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state, "all");
   return {
     state,
     ally: state.team[0]!,
@@ -28,24 +21,6 @@ function fixture() {
     events: [] as GameEvent[],
   };
 }
-
-it("registers the ten Boons and their artwork", () => {
-  for (const id of [
-    "vanishing-hat",
-    "rocking-chair-charm",
-    "asteroid-hammer",
-    "snowbell",
-    "harvest-sickle",
-    "meadow-mortar",
-    "rosewax-seal",
-    "solstice-concertina",
-    "crown-waffle-iron",
-    "beeswax-crown",
-  ]) {
-    expect(BOONS.some((boon) => boon.id === id)).toBe(true);
-    expect(Object.hasOwn(prepared.records, `boon.${id}`)).toBe(true);
-  }
-});
 
 it("lets an ally Dodge an actual enemy Purge and keeps ordinary Dodge rewards", () => {
   const { state, ally, enemy, events } = fixture();

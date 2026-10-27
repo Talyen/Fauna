@@ -47,12 +47,24 @@ it("filtered draws retain pile order and hidden decisions across owners, keyword
       decisions.push(decision);
       return 0;
     });
+    if (method === "keyword") {
+      const before = structuredClone(state);
+      expect(drawHasAnotherCard(state, skipped, { kind: "drawKeyword", keyword: "burn", amount: 1 })).toBe(
+        true,
+      );
+      expect(state).toEqual(before);
+      expect(decisions).toEqual([]);
+    }
     if (method === "owner") expect(drawOwner(state, other!.id, [])).toBe(true);
     else if (method === "keyword") drawKeyword(state, "burn");
     else journeyReturn(state, owner!.id, []);
     expect(state.battle.hand).toEqual([chosen.id]);
     expect(state.battle.draw).toEqual([skipped.id]);
     expect(decisions).toEqual([undefined]);
+    if (method === "keyword")
+      expect(drawHasAnotherCard(state, skipped, { kind: "drawKeyword", keyword: "burn", amount: 1 })).toBe(
+        false,
+      );
   }
 });
 

@@ -1,11 +1,9 @@
+import { prepareCombatFixture } from "../../support/combat";
 import { expect, it } from "vitest";
-import { freshCombat, hit, removeEffects, restoreHealth, tickStatuses } from "../../../src/game/combat";
+import { hit, removeEffects, restoreHealth, tickStatuses } from "../../../src/game/combat";
 import { decayBlock, finishTurn } from "../../../src/game/combat/turns";
 import { useFood } from "../../../src/game/combat/food";
 import { definition } from "../../../src/game/content";
-import { BOONS } from "../../../src/game/content";
-import { validateContent } from "../../../src/game/content-validation";
-import prepared from "../../../src/assets/prepared.json";
 import { cardText } from "../../../src/game/card-rules";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { swapFromCard } from "../../../src/game/team";
@@ -13,44 +11,13 @@ import { dispatch } from "../../../src/game/engine";
 import { produce } from "immer";
 import { replenishJourneyCards, CORNUCOPIA_CARD_ID } from "../../../src/game/journey-cards";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { observeDecisions } from "../../../src/game/random";
 import { accept, bossReward, requireBattle, run, winBattle } from "../../support/game";
 import { setBattleCards } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
 
-it("registers all ten rules and selected portraits", () => {
-  for (const id of [
-    "overflow-cup",
-    "ripple-mirror",
-    "sail-needle",
-    "rootspool",
-    "winterseed",
-    "moonpath-divider",
-    "cornucopia",
-    "suncrust-rolling-pin",
-    "dandelion-poultice",
-    "dew-pendulum",
-  ]) {
-    expect(BOONS.some((boon) => boon.id === id)).toBe(true);
-    expect(Object.hasOwn(prepared.records, `boon.${id}`)).toBe(true);
-  }
-  expect(validateContent).not.toThrow();
-});
-
 function fixture() {
   const state = requireBattle(structuredClone(run()));
-  state.talents = [];
-  state.boons = [];
-  for (const ally of state.team) {
-    ally.combat = freshCombat();
-    ally.block = 0;
-  }
-  for (const enemy of state.battle.enemies) {
-    enemy.combat = freshCombat();
-    enemy.health = enemy.maxHealth = 100;
-    enemy.block = 0;
-  }
-  observeDecisions(state, () => 0.99);
+  prepareCombatFixture(state, "all");
   return {
     state,
     ally: state.team[0]!,
