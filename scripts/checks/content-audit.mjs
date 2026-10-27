@@ -9,6 +9,7 @@ const server = await createServer({
 });
 try {
   const { validateCatalog, contentCatalog } = await server.ssrLoadModule("/src/game/content-validation.ts");
+  const { SOUND_CUES } = await server.ssrLoadModule("/src/ui/audio/cues.ts");
   const issues = validateCatalog();
   const receipt = await assets();
   const manifest = JSON.parse(await readFile("assets/manifest.json", "utf8"));
@@ -29,24 +30,7 @@ try {
   for (const id of ["pile.draw", "pile.discard", "card.back"]) requireAsset(id);
   requireAsset("mana.full");
   requireAsset("mana.empty");
-  for (const cue of [
-    "physical",
-    "fire",
-    "ice",
-    "lightning",
-    "poison",
-    "nature",
-    "light",
-    "heal",
-    "block",
-    "absorb",
-    "deny",
-    "victory",
-    "defeat",
-    "recruit",
-    "talent",
-    "knockout",
-  ]) {
+  for (const cue of SOUND_CUES) {
     const entry = manifest.assets.find((asset) => asset.id === `sound.${cue}`);
     if (!entry || entry.kind !== "sound")
       issues.push({

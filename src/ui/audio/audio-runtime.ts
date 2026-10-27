@@ -4,24 +4,8 @@ import {
   normalizeAudioPreferences,
   type AudioPreferences,
 } from "../settings/preferences";
-export type SoundCue =
-  | "activate"
-  | "physical"
-  | "fire"
-  | "ice"
-  | "lightning"
-  | "poison"
-  | "nature"
-  | "light"
-  | "heal"
-  | "block"
-  | "absorb"
-  | "deny"
-  | "knockout"
-  | "victory"
-  | "defeat"
-  | "recruit"
-  | "talent";
+import type { SoundCue } from "./cues";
+export type { SoundCue } from "./cues";
 export type MusicCue = "menu" | "combat" | "boss";
 export interface MediaVoice {
   readonly paused?: boolean;
