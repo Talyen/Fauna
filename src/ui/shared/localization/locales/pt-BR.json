@@ -2445,7 +2445,7 @@
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
     "sourceHash": "868a519247f2a04fa175c12c032f8b09cc360b3ac247295956582f17f1fa287b",
-    "text": "<keyword0>Expurga</keyword0> todos os inimigos"
+    "text": "Aplica <keyword0>Expurgo</keyword0> a todos os inimigos"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

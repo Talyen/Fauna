@@ -2445,7 +2445,7 @@
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
     "sourceHash": "b1055053570e6de81547761b47345b38bb9d1ad404e209ea83726c09f8e7186c",
-    "text": "すべての敵を<keyword0>強化解除</keyword0>"
+    "text": "すべての敵に<keyword0>強化解除</keyword0>を適用"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

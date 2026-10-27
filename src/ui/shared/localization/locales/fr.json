@@ -2457,7 +2457,7 @@
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
     "sourceHash": "e6cce643fe68ee1ca4bd53079bb67f07017744ec306440ef7c6105523df1e56e",
-    "text": "<keyword0>Dissipe</keyword0> tous les ennemis"
+    "text": "Applique <keyword0>Dissipation</keyword0> à tous les ennemis"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

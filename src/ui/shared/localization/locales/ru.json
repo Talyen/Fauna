@@ -2445,7 +2445,7 @@
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
     "sourceHash": "4b8811595c333f19dfa1ec097781d679559532e61f3a2d037693fd1e3c59b299",
-    "text": "<keyword0>Рассеивание</keyword0> на всех врагов"
+    "text": "Примените <keyword0>рассеивание</keyword0> ко всем врагам"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

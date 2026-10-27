@@ -2445,7 +2445,7 @@
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
     "sourceHash": "361d48273d1a1d5a7296dc00d0c29f9ae5b30f164c21099268e498bcab6ad422",
-    "text": "<keyword0>驱散</keyword0>所有敌人"
+    "text": "对所有敌人施加<keyword0>驱散</keyword0>"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

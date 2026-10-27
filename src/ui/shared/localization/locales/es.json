@@ -2445,7 +2445,7 @@
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
     "sourceHash": "bfd4be10ed81745efd2e154d7cad34c3f7ebf49910c02b34d417901f7d1bbeb0",
-    "text": "<keyword0>Purga</keyword0> a todos los enemigos"
+    "text": "Aplica <keyword0>Purga</keyword0> a todos los enemigos"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

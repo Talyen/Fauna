@@ -2445,7 +2445,7 @@
     "reviewed": true,
     "source": "<keyword0>Purge</keyword0> all enemies",
     "sourceHash": "c80635c0abbdda9d1efee9d40c14fd70cbf79f54b407b8a54171fecf6d2d3604",
-    "text": "<keyword0>Banne</keyword0> alle Gegner"
+    "text": "Wende <keyword0>Bannen</keyword0> auf alle Gegner an"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,
