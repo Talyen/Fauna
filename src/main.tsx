@@ -21,7 +21,7 @@ export function mountGame(splash: StartupSplash) {
   const steamLanguage =
     QUALIFIED_LANGUAGES.length > 1
       ? Promise.resolve()
-          .then(() => platform.steam.getLanguage())
+          .then(() => platform.steam.getLanguage?.() ?? null)
           .catch(() => null)
       : Promise.resolve(null);
   void steamLanguage.then((language) => splash.setSteamLanguage(language));
