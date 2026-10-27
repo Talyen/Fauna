@@ -437,6 +437,12 @@
     "sourceHash": "1bbbad11d6f26f5a13c8828e7bca91683ac034aba0f369f1ab1f9d9ffeab0e42",
     "text": "云朵剑玉"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "sourceHash": "e50baf9b195af62ad0b7b0ef123a5bd400a11b836cb8a7b5a7f010df8256e3b5",
+    "text": "盟友的<keyword0>格挡</keyword0>被击破时，将其一张弃牌移回手牌"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -460,6 +466,12 @@
     "source": "Coral Music Box",
     "sourceHash": "bf9525e8989ea0b8f86818e5b6074d90cb7f7d93c757e1639d746c229b8daf71",
     "text": "珊瑚音乐盒"
+  },
+  "content.boon.coral-music-box.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "5fb77778c97bbb55726885ba76b90bb5b3d0b61ea21e5386ab8c6914f44293d4",
+    "text": "盟友的<keyword0>格挡</keyword0>被击破时，抽取一张<keyword1>水</keyword1>卡牌"
   },
   "content.boon.coral-net-weight.name": {
     "reviewed": true,
@@ -526,6 +538,12 @@
     "source": "Dune Shuttle",
     "sourceHash": "441fb031d997c75c8aa5a69856876d1268b530914be1f4287050b08c186f1550",
     "text": "沙丘梭"
+  },
+  "content.boon.dune-shuttle.rule": {
+    "reviewed": true,
+    "source": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "7c4aed179b8260eb44600ff7d54dfe19e216d3dd5933d21a3a705802204a7902",
+    "text": "抽取盟友的卡牌时，该盟友获得{{value0}}点<keyword0>格挡</keyword0>"
   },
   "content.boon.echo-lens.name": {
     "reviewed": true,
@@ -754,6 +772,12 @@
     "source": "Journey Loom",
     "sourceHash": "e16817992a5c48a3314ef96983216993d37d69aa7eac89534d9270348fafa3ae",
     "text": "旅途织机"
+  },
+  "content.boon.journey-loom.rule": {
+    "reviewed": true,
+    "source": "Returning an ally’s card to your hand draws another ally’s card",
+    "sourceHash": "66d69de7fb563d231cbe4c4cebd7db27c9fb9485a44b6231b5b51ed6b00f28b6",
+    "text": "将盟友的卡牌移回手牌时，抽取另一名盟友的一张卡牌"
   },
   "content.boon.knot-comb.name": {
     "reviewed": true,
@@ -1102,6 +1126,12 @@
     "source": "Saddle Pouch",
     "sourceHash": "6418b70cebc0682ec15e1b60e87b17af1e063b31fd751e60f984e2d41a647fdc",
     "text": "鞍囊"
+  },
+  "content.boon.saddle-pouch.rule": {
+    "reviewed": true,
+    "source": "Swapping an ally in from backup draws one of its cards",
+    "sourceHash": "b2d1e13bb243250c683bbd1a5033f08312b727def64a58652ad7e74c26945ef6",
+    "text": "从后备换入一名盟友时，抽取其一张卡牌"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,

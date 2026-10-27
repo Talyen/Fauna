@@ -437,6 +437,12 @@
     "sourceHash": "a2eee1e0084211e0959136e9d350abf56f7873f7e37b5b5fb96bbf45040f4c33",
     "text": "Bilboquê de nuvem"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "sourceHash": "782d04b8b5321584d34f2b5dbbe204e9aa6b748bf441bcb9993918a03e16798b",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de um aliado quebra, devolva uma das cartas descartadas dele à mão"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -460,6 +466,12 @@
     "source": "Coral Music Box",
     "sourceHash": "9625f62c1aa12928e3c8d09404a2cc49f9fe4296518cefd47a68cb7e8072ea9b",
     "text": "Caixa de música de coral"
+  },
+  "content.boon.coral-music-box.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "4e9896c6fb0f98984e6e4ee1b2363d6a559ddf8b8a6a29c7fbb4763b1e5d566a",
+    "text": "Quando o <keyword0>Bloqueio</keyword0> de um aliado quebra, compre uma carta de <keyword1>Água</keyword1>"
   },
   "content.boon.coral-net-weight.name": {
     "reviewed": true,
@@ -526,6 +538,12 @@
     "source": "Dune Shuttle",
     "sourceHash": "7a6aa3ddd25a4e535c4826854c010025e37c60e0b333cd913ee20bcc3905bf90",
     "text": "Lançadeira das dunas"
+  },
+  "content.boon.dune-shuttle.rule": {
+    "reviewed": true,
+    "source": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "9b31f40271d17ee54d3e43c1fa27013cb079561ea63d03c22c6839abb6887535",
+    "text": "Comprar a carta de um aliado concede a ele {{value0}} de <keyword0>Bloqueio</keyword0>"
   },
   "content.boon.echo-lens.name": {
     "reviewed": true,
@@ -754,6 +772,12 @@
     "source": "Journey Loom",
     "sourceHash": "99ac7959c8287f1275efefb4095b1badfde186055ac70ef9aaaf5d2b7c9479a2",
     "text": "Tear da jornada"
+  },
+  "content.boon.journey-loom.rule": {
+    "reviewed": true,
+    "source": "Returning an ally’s card to your hand draws another ally’s card",
+    "sourceHash": "ffcd1d8786ca977946573c7711608403289dd30a487ce53d7e0d3579a4b96d2b",
+    "text": "Devolver a carta de um aliado à mão compra a carta de outro aliado"
   },
   "content.boon.knot-comb.name": {
     "reviewed": true,
@@ -1102,6 +1126,12 @@
     "source": "Saddle Pouch",
     "sourceHash": "52c63ec269a0f952034a82381116d7f695a0f3a8ba7b204fac2bb4fcc8469fa2",
     "text": "Bolsa de sela"
+  },
+  "content.boon.saddle-pouch.rule": {
+    "reviewed": true,
+    "source": "Swapping an ally in from backup draws one of its cards",
+    "sourceHash": "c69254ed6845bcac102eeb1b3c19d16b035f3dfe4912fab7bb300ef5d18bf914",
+    "text": "Ao trocar um aliado da reserva para o campo, compre uma das cartas dele"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,

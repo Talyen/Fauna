@@ -437,6 +437,12 @@
     "sourceHash": "c723d6876d761069355b3599f9ed2b642536db634888ad3069e2dda007e998c9",
     "text": "Bilboquet des nuages"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "sourceHash": "28524fe7f3ba0d7499d742ccb0e44450af98c8e098c93c93c45552aec990eb1c",
+    "text": "Quand le <keyword0>Blocage</keyword0> d’un allié se brise, renvoyez une de ses cartes défaussées en main"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -460,6 +466,12 @@
     "source": "Coral Music Box",
     "sourceHash": "84f24937adcbaf15de01bd5b41e53a75c79aead75f8bf1502da0e0ab61e15f4b",
     "text": "Boîte à musique de corail"
+  },
+  "content.boon.coral-music-box.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "c5854f326ca9b740d324c3fed9f51be019e3c7aa54aca5dfbfa025833fd04838",
+    "text": "Quand le <keyword0>Blocage</keyword0> d’un allié se brise, piochez une carte d’<keyword1>Eau</keyword1>"
   },
   "content.boon.coral-net-weight.name": {
     "reviewed": true,
@@ -526,6 +538,12 @@
     "source": "Dune Shuttle",
     "sourceHash": "04ded8a530578432afecdb09c547b28025c84199cc867e4132eae2ce2d520648",
     "text": "Navette des dunes"
+  },
+  "content.boon.dune-shuttle.rule": {
+    "reviewed": true,
+    "source": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "f778697ada594cee5ec14c170755a4178a2ad4d446f6e6f9e6a6a1a531448de5",
+    "text": "Piocher la carte d’un allié lui confère {{value0}} <keyword0>Blocage</keyword0>"
   },
   "content.boon.echo-lens.name": {
     "reviewed": true,
@@ -754,6 +772,12 @@
     "source": "Journey Loom",
     "sourceHash": "c61cfaaea6b1c9e800239ca67a870aa1aeb74d818491b0c5046d805516004d6c",
     "text": "Métier à tisser du voyage"
+  },
+  "content.boon.journey-loom.rule": {
+    "reviewed": true,
+    "source": "Returning an ally’s card to your hand draws another ally’s card",
+    "sourceHash": "b303622d0571f9c6cd9dfd7a7613332ed21f6ef21afaa9e5f608b5d023b17953",
+    "text": "Renvoyer la carte d’un allié en main pioche la carte d’un autre allié"
   },
   "content.boon.knot-comb.name": {
     "reviewed": true,
@@ -1114,6 +1138,12 @@
     "source": "Saddle Pouch",
     "sourceHash": "e7b868131851095878f92e798002678b181e755382f7389436a6f8f3d91925c2",
     "text": "Sacoche de selle"
+  },
+  "content.boon.saddle-pouch.rule": {
+    "reviewed": true,
+    "source": "Swapping an ally in from backup draws one of its cards",
+    "sourceHash": "a9feac0a51eaefc728d39b578bbb4595e17f366855f5c929ee1b6329695c822a",
+    "text": "Faire entrer un allié de la réserve pioche une de ses cartes"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,

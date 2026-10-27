@@ -437,6 +437,12 @@
     "sourceHash": "43ad4de3635b0fe56b5eec9fbe61ed7ee8f375a1d015d44328b06821bd6c31db",
     "text": "雲のけん玉"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "sourceHash": "751ddd378eac190cc947984e9112d4451305d5d794bd3432c855d4aedcb359f6",
+    "text": "味方の<keyword0>ブロック</keyword0>が破られると、その味方の捨て札からカードを1枚手札に戻す"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -460,6 +466,12 @@
     "source": "Coral Music Box",
     "sourceHash": "765f13388584673f899822feb68a75c7183864f1a4c21b487d7263263fa0dc96",
     "text": "珊瑚のオルゴール"
+  },
+  "content.boon.coral-music-box.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "cb477b1a1eea68ca99cc0519460ff0580e5ef422abf7f5201886a39e42143fb0",
+    "text": "味方の<keyword0>ブロック</keyword0>が破られると、<keyword1>水</keyword1>カードを1枚引く"
   },
   "content.boon.coral-net-weight.name": {
     "reviewed": true,
@@ -526,6 +538,12 @@
     "source": "Dune Shuttle",
     "sourceHash": "aac5ddd8d8f1a6e2b4b187154e4e731e3a529cda39409c429c4378548dcc5c93",
     "text": "砂丘の杼"
+  },
+  "content.boon.dune-shuttle.rule": {
+    "reviewed": true,
+    "source": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "bf06a7f0dd5c458fa3140d2e1a2196fb3a8bc837ac930cc466562d6bd7ae7e30",
+    "text": "味方のカードを引くと、その味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.boon.echo-lens.name": {
     "reviewed": true,
@@ -754,6 +772,12 @@
     "source": "Journey Loom",
     "sourceHash": "2048b2f1b4fdfe9344cadaeea7c13c0f6ea848330c5e4e5106f28f0381fc3cf4",
     "text": "旅の織機"
+  },
+  "content.boon.journey-loom.rule": {
+    "reviewed": true,
+    "source": "Returning an ally’s card to your hand draws another ally’s card",
+    "sourceHash": "603d2fe3349c7e5c0dc0d07ed91df2477c5732a043607081d830fde7a23cdcb9",
+    "text": "味方のカードを手札に戻すと、別の味方のカードを1枚引く"
   },
   "content.boon.knot-comb.name": {
     "reviewed": true,
@@ -1102,6 +1126,12 @@
     "source": "Saddle Pouch",
     "sourceHash": "fa086521e385001a40157a8c63de875f573180f435d8872f730a771c39667f84",
     "text": "鞍袋"
+  },
+  "content.boon.saddle-pouch.rule": {
+    "reviewed": true,
+    "source": "Swapping an ally in from backup draws one of its cards",
+    "sourceHash": "3445b11054a4e538063bdd5709f358c0cf9b071b2f817894c95dcb589e16c38a",
+    "text": "控えの味方を交代で出すと、その味方のカードを1枚引く"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,

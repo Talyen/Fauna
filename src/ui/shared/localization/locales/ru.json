@@ -437,6 +437,12 @@
     "sourceHash": "00d4d81613e151e83824c85d574a51bc51ce22073d373ea116264234c6783bc2",
     "text": "Облачная кэндама"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "sourceHash": "a5689c51c79f5a150be655efc526acc703c90cd2b37ab620cfd9ecbbebeaefe0",
+    "text": "Когда <keyword0>блок</keyword0> союзника пробит, верните одну из его сброшенных карт в руку"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -460,6 +466,12 @@
     "source": "Coral Music Box",
     "sourceHash": "81a25e03cede2ac25f78869e12bd4abbd8fd9dd9a01457679a3e9631d58501f7",
     "text": "Коралловая музыкальная шкатулка"
+  },
+  "content.boon.coral-music-box.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "0953f81441ab3f1ba5ed46eea1ec5411b04b47af4cd2bcb07b66fa412aa518e5",
+    "text": "Когда <keyword0>блок</keyword0> союзника пробит, возьмите карту <keyword1>воды</keyword1>"
   },
   "content.boon.coral-net-weight.name": {
     "reviewed": true,
@@ -526,6 +538,12 @@
     "source": "Dune Shuttle",
     "sourceHash": "df982dea1be0aeffb2f699fdc5884c83d345ff5917a1cd4245b6d5f0601ae3cb",
     "text": "Челнок дюн"
+  },
+  "content.boon.dune-shuttle.rule": {
+    "reviewed": true,
+    "source": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "398c0c8ae90124f6a9aca2c248c5b43de695a68fb7fc58f9bab3ca4eb245a50c",
+    "text": "Когда вы берёте карту союзника, он получает {{value0}} <keyword0>блока</keyword0>"
   },
   "content.boon.echo-lens.name": {
     "reviewed": true,
@@ -754,6 +772,12 @@
     "source": "Journey Loom",
     "sourceHash": "5a7b2842534604f624aff7b1d43260b30b29333f9c556f676b3f550eabdd50ce",
     "text": "Ткацкий станок путешествия"
+  },
+  "content.boon.journey-loom.rule": {
+    "reviewed": true,
+    "source": "Returning an ally’s card to your hand draws another ally’s card",
+    "sourceHash": "abe8517d49d7bf41e3c143293733c9f3dcc9bd7e57f6015eb667b96b265b1ea8",
+    "text": "Возвращение карты союзника в руку позволяет взять карту другого союзника"
   },
   "content.boon.knot-comb.name": {
     "reviewed": true,
@@ -1102,6 +1126,12 @@
     "source": "Saddle Pouch",
     "sourceHash": "ad47290359052950201e225363be0d33f7dbac564ebfd48a2404ecbdc45e0fd8",
     "text": "Седельная сумка"
+  },
+  "content.boon.saddle-pouch.rule": {
+    "reviewed": true,
+    "source": "Swapping an ally in from backup draws one of its cards",
+    "sourceHash": "2ffdf13d602f9d0ab6bfaf5e27005f3ae5f9485af599cf94bfd487add9279700",
+    "text": "При замене союзником из резерва возьмите одну из его карт"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,

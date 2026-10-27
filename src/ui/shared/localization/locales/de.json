@@ -437,6 +437,12 @@
     "sourceHash": "731d3f68c5e57c1f69d1afd2b12d80863e7d60321ba71c22ac9b8ee480c70dbe",
     "text": "Wolkenfangspiel"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "sourceHash": "f4bbb95c4fb7ad6a9cceecba99fc45d54536bf88234d1298db6fd42e95cca5eb",
+    "text": "Wenn der <keyword0>Block</keyword0> eines Verbündeten bricht, bringe eine seiner abgelegten Karten auf die Hand zurück"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -460,6 +466,12 @@
     "source": "Coral Music Box",
     "sourceHash": "e093d05b88bdc3df0084d089767d7ab9872a47a29546edddcb8c00f71ad279e2",
     "text": "Korallenspieluhr"
+  },
+  "content.boon.coral-music-box.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "594ef23ee5add1a56a9169c583b47f7a2a0004c79448ca09a0324789e0b9cf46",
+    "text": "Wenn der <keyword0>Block</keyword0> eines Verbündeten bricht, ziehe eine <keyword1>Wasser</keyword1>-Karte"
   },
   "content.boon.coral-net-weight.name": {
     "reviewed": true,
@@ -526,6 +538,12 @@
     "source": "Dune Shuttle",
     "sourceHash": "75b15588353b7e4426be3928fe8cbc655dd8f3a9e87ae3078991edb8521f1857",
     "text": "Dünenschiffchen"
+  },
+  "content.boon.dune-shuttle.rule": {
+    "reviewed": true,
+    "source": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "ad6f97e3fbf8c521accfd2a0f1beabc42c0d5d558066500a5d88eed8a08caad8",
+    "text": "Das Ziehen der Karte eines Verbündeten gewährt ihm {{value0}} <keyword0>Block</keyword0>"
   },
   "content.boon.echo-lens.name": {
     "reviewed": true,
@@ -754,6 +772,12 @@
     "source": "Journey Loom",
     "sourceHash": "aef7d24d9f34892f356dcd52c61eeafa901eef5a42882d5ab05486e1c56b5fd3",
     "text": "Reisewebstuhl"
+  },
+  "content.boon.journey-loom.rule": {
+    "reviewed": true,
+    "source": "Returning an ally’s card to your hand draws another ally’s card",
+    "sourceHash": "4185386d1481dc8d4fae6154720ea06f5c9c27bc60481176ef6d457ee6fc0ef1",
+    "text": "Wenn die Karte eines Verbündeten auf deine Hand zurückkehrt, ziehe die Karte eines anderen Verbündeten"
   },
   "content.boon.knot-comb.name": {
     "reviewed": true,
@@ -1102,6 +1126,12 @@
     "source": "Saddle Pouch",
     "sourceHash": "371cd7bd21a2e3719680ee5d65fee4a43bcfbf15e087d0a88cd66006d76f11e6",
     "text": "Satteltasche"
+  },
+  "content.boon.saddle-pouch.rule": {
+    "reviewed": true,
+    "source": "Swapping an ally in from backup draws one of its cards",
+    "sourceHash": "84d6eb0ba617f1fe5c02430b3fd27c38704362ee0a7310ffdb353ac1c3b46944",
+    "text": "Wenn ein Verbündeter aus der Reserve eingewechselt wird, ziehe eine seiner Karten"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,

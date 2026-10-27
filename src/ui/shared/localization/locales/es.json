@@ -437,6 +437,12 @@
     "sourceHash": "4e587536423f06a3f2c3aee4de88717b21a6409955114034c42059cce7cc04f9",
     "text": "Balero de nube"
   },
+  "content.boon.cloud-cup-and-ball.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, return one of their discarded cards to hand",
+    "sourceHash": "0e50574950b05a7d94f09660be7bcc5ad9240f6244392d47e156d0ffe7bace9b",
+    "text": "Cuando se rompe el <keyword0>Bloqueo</keyword0> de un aliado, devuelve una de sus cartas descartadas a la mano"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -460,6 +466,12 @@
     "source": "Coral Music Box",
     "sourceHash": "b4bb5d64ba9c0190d78ed6bfe74c66e4fe472777dc31a63413fc8ad331475093",
     "text": "Caja de música de coral"
+  },
+  "content.boon.coral-music-box.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Block</keyword0> breaks, draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "ad6dfbe4adc3273ccaacd2a38c8d9b8b171994da162723f4746a42ca446834de",
+    "text": "Cuando se rompe el <keyword0>Bloqueo</keyword0> de un aliado, roba una carta de <keyword1>Agua</keyword1>"
   },
   "content.boon.coral-net-weight.name": {
     "reviewed": true,
@@ -526,6 +538,12 @@
     "source": "Dune Shuttle",
     "sourceHash": "28dc5166e848fd1312ed2e2a5101aab50664ede00bf29b2b699402caf7e51a30",
     "text": "Lanzadera de las dunas"
+  },
+  "content.boon.dune-shuttle.rule": {
+    "reviewed": true,
+    "source": "Drawing an ally's card grants them {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "bd601e8daf19d606dc01534a11b5d532a2c09635ab0de7a78a88efc1ef588457",
+    "text": "Robar la carta de un aliado le otorga {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
   "content.boon.echo-lens.name": {
     "reviewed": true,
@@ -754,6 +772,12 @@
     "source": "Journey Loom",
     "sourceHash": "0ad8ca8a6218c1d1c44102e4b7a11405309fb8f2f6577061c6e23c6a0492a264",
     "text": "Telar del viaje"
+  },
+  "content.boon.journey-loom.rule": {
+    "reviewed": true,
+    "source": "Returning an ally’s card to your hand draws another ally’s card",
+    "sourceHash": "3820c671e0e72a774665398b12d7c19ef0c2b4275cf0ba7bf31e9f01c0bc88e6",
+    "text": "Devolver la carta de un aliado a la mano roba la carta de otro aliado"
   },
   "content.boon.knot-comb.name": {
     "reviewed": true,
@@ -1102,6 +1126,12 @@
     "source": "Saddle Pouch",
     "sourceHash": "52d1a38a46cd0896e9693186002ebe24f6ce3bf78fe19265e277daaeb7f55f2d",
     "text": "Alforja"
+  },
+  "content.boon.saddle-pouch.rule": {
+    "reviewed": true,
+    "source": "Swapping an ally in from backup draws one of its cards",
+    "sourceHash": "42dff928c1e1b1a0e2a6f1eb40903d31eb319d61fb1f0155d7c110d8c7e5c1fa",
+    "text": "Al incorporar a un aliado desde la reserva, roba una de sus cartas"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
