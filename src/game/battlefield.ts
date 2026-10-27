@@ -21,6 +21,15 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
   const result: (Creature | Enemy)[] = [...row];
   const minions = state.battle?.minions;
   if (!minions?.length) return result;
+  if (minions.length === 1) {
+    const unit = minions[0]!;
+    if (
+      unit.minion.side === side &&
+      row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)
+    )
+      result.push(unit);
+    return result;
+  }
   let owners: Set<string> | undefined;
   for (const unit of minions) {
     if (unit.minion.side !== side) continue;
@@ -64,7 +73,7 @@ export function isDepartedMinion(state: GameState, unit: Creature | Enemy): bool
   const side = unit.minion.side;
   const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
   if (row.some((current) => current.id === unit.id)) return false;
-  return !(state.battle?.minions ?? []).some(
+  return !state.battle?.minions?.some(
     (current) =>
       current.id === unit.id &&
       current.minion.side === side &&

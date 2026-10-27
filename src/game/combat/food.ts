@@ -58,7 +58,10 @@ export function useFood(
   targetId: string | undefined,
   events: GameEvent[],
 ) {
-  const recipient = battlefield(state, "player").find((unit) => unit.id === targetId && unit.health > 0);
+  const recipient =
+    targetId === undefined
+      ? undefined
+      : battlefield(state, "player").find((unit) => unit.id === targetId && unit.health > 0);
   const presenter = recipient ?? state.team.find((unit) => unit.health > 0)!;
   events.push({
     kind: "action",

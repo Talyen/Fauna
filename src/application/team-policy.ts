@@ -85,13 +85,13 @@ export function coverageScore(state: GameState, kinds: SpeciesId[]) {
     has.size * 20
   );
 }
-const authoredOffense = new Map<SpeciesId, { authored: number; reactive: number }>();
+const authoredOffense = new Map<SpeciesId, { authored: number; reactive: number; cardCount: number }>();
 
 /** Approximate damage over an authored kit rotation; no enemy intent or chance is sampled. */
 export function offenseValue(state: GameState, kind: SpeciesId): number {
-  const cards = speciesCards(kind);
   let values = authoredOffense.get(kind);
   if (!values) {
+    const cards = speciesCards(kind);
     let authored = 0;
     let reactive = 0;
     for (const card of cards) {
@@ -100,18 +100,19 @@ export function offenseValue(state: GameState, kind: SpeciesId): number {
         card.effects?.reduce((n, effect) => n + (effect.kind === "damage" ? effect.amount : 0), 0) ?? 0;
       reactive += card.effect === "dreamDouble" || card.effect === "teamProtection" ? card.value : 0;
     }
-    values = { authored, reactive };
+    values = { authored, reactive, cardCount: cards.length };
     authoredOffense.set(kind, values);
   }
+  const { authored, reactive, cardCount } = values;
   const passive = creaturePassiveTier(state, kind).effects.reduce(
     (sum, effect) =>
       sum +
       (effect.kind === "courtRemembers"
-        ? effect.amount * cards.length
+        ? effect.amount * cardCount
         : effect.kind === "poisonRetaliation" || effect.kind === "dodgeBurn"
           ? effect.amount
           : 0),
     0,
   );
-  return (values.authored + passive + values.reactive) * permanentCardCopies(kind);
+  return (authored + passive + reactive) * permanentCardCopies(kind);
 }

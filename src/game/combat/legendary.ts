@@ -127,7 +127,8 @@ export function courtRemembers(state: BattleState, actor: Combatant, events: Gam
   if (actor.health <= 0) return;
   const amount = passiveAmount(isEnemy(actor) ? undefined : state, actor.species, "courtRemembers");
   if (!amount) return;
-  const echoes = (state.battle.minions ?? []).filter(
+  if (!state.battle.minions?.length) return;
+  const echoes = state.battle.minions.filter(
     (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
   );
   if (!echoes.length) return;

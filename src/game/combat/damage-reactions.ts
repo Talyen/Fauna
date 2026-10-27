@@ -28,6 +28,8 @@ import { reaction, type Resolution } from "./operations";
 import { applyResolvedStatus } from "./status-reactions";
 import { reducePeriodicStacks, deferLeech, detonateBleedStacks, bleedPayments } from "./status-state";
 
+const periodicStatuses = ["burn", "poison", "bleed"] as const;
+
 export interface HitContext {
   state: GameState;
   source: Combatant;
@@ -115,7 +117,7 @@ export function* dodgeResponse(
     if (hasTalent(state, "dodge.thornstep"))
       yield* reaction("grantStatus", target, "thorns", talentRule("dodge.thornstep").amount, events, state);
     if (hasTalent(state, "dodge.clean-getaway")) {
-      for (const status of ["burn", "poison", "bleed"] as const)
+      for (const status of periodicStatuses)
         reducePeriodicStacks(stats, status, talentRule("dodge.clean-getaway").amount);
     }
     if (hasTalent(state, "dodge.open-flank")) stats.nextPhysical = talentRule("dodge.open-flank").amount;

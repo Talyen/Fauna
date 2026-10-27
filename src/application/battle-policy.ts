@@ -66,26 +66,28 @@ function choicesForBattle(state: GameState, autoEndTurn: boolean, firstOnly: boo
   if (!plays.length) return [];
   const facts = battleBenefitFacts(state);
   const choices: (BattleChoice & { key: string })[] = [];
+  let best: (BattleChoice & { key: string }) | undefined;
+  const compare = (a: BattleChoice & { key: string }, b: BattleChoice & { key: string }) =>
+    b.score - a.score || a.key.localeCompare(b.key);
   for (const play of plays) {
     for (const benefit of battleBenefits(state, play, facts)) {
       const { score } = benefit;
       const command =
         score > 0 ? play.commands.find((entry) => entry.targetId === benefit.targetId) : undefined;
-      if (command)
-        choices.push({
+      if (command) {
+        const choice = {
           command,
           score,
           reason: benefit.reason ?? `Use ${play.def.name} for its visible benefit`,
           key: `${play.card.id}:${benefit.targetId ?? ""}`,
-        });
+        };
+        if (firstOnly) {
+          if (!best || compare(choice, best) < 0) best = choice;
+        } else choices.push(choice);
+      }
     }
   }
-  const compare = (a: (typeof choices)[number], b: (typeof choices)[number]) =>
-    b.score - a.score || a.key.localeCompare(b.key);
   if (firstOnly) {
-    let best = choices[0];
-    for (let index = 1; index < choices.length; index++)
-      if (compare(choices[index]!, best!) < 0) best = choices[index];
     if (!best) return [];
     const { command, score, reason } = best;
     return [{ command, score, reason }];
