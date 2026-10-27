@@ -56,6 +56,7 @@ export const SCENARIOS = [
   "settings",
   "collection",
   "battle",
+  "nature-damage-targeting",
   "uncertain-targeting",
   "unknown-targeting",
   "pause",
@@ -194,6 +195,12 @@ export async function reviewScenario(server, name) {
     const { uncertainBattle } = await server.ssrLoadModule("/tests/support/uncertainty.ts");
     game = uncertainBattle(name === "unknown-targeting");
   }
+  if (name === "nature-damage-targeting") {
+    const { teamRun } = await server.ssrLoadModule("/tests/support/game.ts");
+    const { setHand } = await server.ssrLoadModule("/tests/support/cards.ts");
+    game = structuredClone(teamRun(42, ["reedstag", "emberback", "prismram"]));
+    setHand(game, ["reedstag-attack"]);
+  }
   const save = encodeSave(game);
   decodeSave(save);
   return {
@@ -247,6 +254,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await page.locator(".hand .action-card").first().focus();
     await page.keyboard.press("Enter");
     await expect(page.locator(".target-preview .combat-stats").first()).toBeVisible();
+  }
+  if (scenario.name === "nature-damage-targeting") {
+    await page.locator('.hand [data-card-id$="reedstag-attack"]').click();
+    await expect(page.locator('.target-preview [data-damage-type="nature"]').first()).toBeVisible();
   }
   if (scenario.name === "oathara-resurrection") {
     await page.locator('.hand [data-card-id="ally-0:oathara-vow-of-return"]').click();
