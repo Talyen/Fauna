@@ -7979,6 +7979,12 @@
     "sourceHash": "0d98f6ac924b22f6544833945607c110255ff2bf58ce0728970b04c5b82811d0",
     "text": "{{actor}} renvoie l’attaque contre {{target}}"
   },
+  "log.reflectStatus": {
+    "reviewed": true,
+    "source": "{{actor}} reflects {{status}} to {{target}}",
+    "sourceHash": "86560c843b43834e8201ead297422d5dc318e394e4abca1b8d359ef666b9fb40",
+    "text": "{{actor}} renvoie {{status}} vers {{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

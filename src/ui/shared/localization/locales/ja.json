@@ -7979,6 +7979,12 @@
     "sourceHash": "e5589f1c5dda9d60e29265d06fef63dea7acc0d6fb6c645dedd85d302813e871",
     "text": "{{actor}}が攻撃を{{target}}に跳ね返す"
   },
+  "log.reflectStatus": {
+    "reviewed": true,
+    "source": "{{actor}} reflects {{status}} to {{target}}",
+    "sourceHash": "d32b2f548dcd712e1feb6d22b2de517a422ff97faaf4dd70de8d7106cfd402d1",
+    "text": "{{actor}}は{{status}}を{{target}}に反射"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

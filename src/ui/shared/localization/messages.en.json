@@ -356,6 +356,9 @@
   "log.reflectAttack": {
     "text": "{{actor}} reflects the attack back at {{target}}"
   },
+  "log.reflectStatus": {
+    "text": "{{actor}} reflects {{status}} to {{target}}"
+  },
   "log.removeBuildup": {
     "text": "{{name}}: Cleanse {{status}} build-up"
   },

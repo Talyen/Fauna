@@ -7979,6 +7979,12 @@
     "sourceHash": "8e3ae5ee860b56329b591409c5f7b45b22163173a851364828a14874c6114052",
     "text": "{{actor}} reflete o ataque de volta contra {{target}}"
   },
+  "log.reflectStatus": {
+    "reviewed": true,
+    "source": "{{actor}} reflects {{status}} to {{target}}",
+    "sourceHash": "9f0a55f5177147971f94a438a887e6c126f3ec044d7bf48fe11ad378210487b9",
+    "text": "{{actor}} reflete {{status}} para {{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

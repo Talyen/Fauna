@@ -130,6 +130,36 @@ export function eventPresentation(
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status") {
+    if (event.status === "deathDoor" && event.outcome === "apply") {
+      const prefix = `${englishName} reaches Death's Door: `;
+      const turns = event.text.startsWith(prefix)
+        ? /^(\d+) grace turns\.$/.exec(event.text.slice(prefix.length))
+        : null;
+      if (turns)
+        return i18n.message("log.reachDeathsDoor", "{{name}} reaches Death's Door: {{amount}} grace turns.", {
+          name,
+          amount: quantity(Number(turns[1])),
+        });
+    }
+    if (event.status === "reflect" && event.outcome === "apply") {
+      const actor = combatant(event.actorId);
+      const recipient = combatant(event.recipientId ?? (event.affectedStatus ? undefined : event.targetId));
+      const status = event.affectedStatus ?? "purge";
+      const englishStatus = event.affectedStatus ?? "Purge";
+      if (
+        actor &&
+        recipient &&
+        event.text === `${unitName(actor)} reflects ${englishStatus} to ${unitName(recipient)}`
+      )
+        return i18n.message("log.reflectStatus", "{{actor}} reflects {{status}} to {{target}}", {
+          actor: localizedCombatantName(actor, i18n),
+          status:
+            i18n.locale === "en"
+              ? englishStatus
+              : i18n.content(`content.keyword.${status}.label`, KEYWORD_DEFINITIONS[status].label),
+          target: localizedCombatantName(recipient, i18n),
+        });
+    }
     if (event.status === "attackReflection" && event.outcome === "immune") {
       const actor = combatant(event.actorId);
       if (actor && event.text === `${unitName(actor)} reflects the attack back at ${englishName}`)
@@ -210,15 +240,6 @@ export function eventPresentation(
     }
   }
   if (event.kind === "status" && event.amount !== undefined) {
-    if (
-      event.status === "deathDoor" &&
-      event.outcome === "apply" &&
-      event.text === `${englishName} reaches Death's Door: ${event.amount} grace turns.`
-    )
-      return i18n.message("log.reachDeathsDoor", "{{name}} reaches Death's Door: {{amount}} grace turns.", {
-        name,
-        amount: quantity(event.amount),
-      });
     if (
       event.status === "armor" &&
       event.outcome === "remove" &&

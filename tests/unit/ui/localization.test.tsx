@@ -5,6 +5,7 @@ import { definition, species } from "../../../src/game/content";
 import { drawDiscard } from "../../../src/game/card-zones";
 import { resurrect } from "../../../src/game/combat/resurrection";
 import { createFood } from "../../../src/game/combat/food";
+import { resolveCombat } from "../../../src/game/combat/resolution";
 import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
@@ -399,6 +400,26 @@ it("localizes the final enemy hit after the battle state is retired", async () =
   } finally {
     await session.dispose();
   }
+});
+
+it("localizes a reflected status using its actual recipient", () => {
+  const game = structuredClone(run());
+  const actor = game.team[0]!;
+  const reflector = game.battle!.enemies[0]!;
+  reflector.combat.reflect = true;
+  const events: GameEvent[] = [];
+  resolveCombat("applyHarmfulStatus", game, actor, reflector, 1, "poison", events);
+  const event = events.find((entry) => entry.kind === "status" && entry.status === "reflect")!;
+  expect(event.kind === "status" && event.recipientId).toBeTruthy();
+  const recipient = game.team.find((unit) => event.kind === "status" && unit.id === event.recipientId)!;
+  const reader = createMessageReader("fr", french);
+  expect(eventPresentation(game, event, reader)).toBe(
+    `${localizedCombatantName(reflector, reader)} renvoie Poison vers ${localizedCombatantName(recipient, reader)}`,
+  );
+  expect(eventPresentation(game, { ...event, text: "Unknown reflection" }, reader)).toBe(
+    "Unknown reflection",
+  );
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
 });
 
 it("localizes Death's Door and Armor loss using committed combat facts", () => {

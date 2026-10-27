@@ -7979,6 +7979,12 @@
     "sourceHash": "1493aca840dc1b3c1c28064ea144eb4c4c3322ff0c3f11144c496585ce2e5fb8",
     "text": "{{actor}}将攻击反弹给{{target}}"
   },
+  "log.reflectStatus": {
+    "reviewed": true,
+    "source": "{{actor}} reflects {{status}} to {{target}}",
+    "sourceHash": "13fedac715f254013c0430947520fa867336446c943c80349006c3984f90188d",
+    "text": "{{actor}}将{{status}}反射给{{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

@@ -7979,6 +7979,12 @@
     "sourceHash": "69f9c3dee8f4c6f1d902ae841fe2f516afb034dd099bec63a2d44a902c4b162a",
     "text": "{{actor}} отражает атаку — цель: {{target}}"
   },
+  "log.reflectStatus": {
+    "reviewed": true,
+    "source": "{{actor}} reflects {{status}} to {{target}}",
+    "sourceHash": "1ab2941150abacecf0e47e33e599731b095d23d5539cc893388b3e1c98639fdb",
+    "text": "{{actor}} отражает эффект «{{status}}» в сторону {{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
