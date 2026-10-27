@@ -1,5 +1,8 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { createAudioRuntime, type MediaVoice } from "../../../src/ui/audio/audio-runtime";
+import { selectCombatCue } from "../../../src/ui/audio/combat-audio";
+import { SOUND_CUES } from "../../../src/ui/audio/cues";
+import manifest from "../../../assets/manifest.json" with { type: "json" };
 import { defaultAudioPreferences, normalizeAudioPreferences } from "../../../src/ui/settings/preferences";
 
 function fixture(quiet = false, beforeCreate = (_url: string) => {}, playback = () => Promise.resolve()) {
@@ -269,4 +272,43 @@ it("mutes both sides of a crossfade and resumes only the current track", async (
   expect(menu.play).toHaveBeenCalledTimes(1);
   runtime.dispose();
   expect(vi.getTimerCount()).toBe(0);
+});
+
+it.each([
+  ["physical", "physical"],
+  ["poison", "poison"],
+  ["nature", "nature"],
+  ["water", "physical"],
+  ["light", "light"],
+  ["burn", "fire"],
+  ["freeze", "ice"],
+  ["bleed", "physical"],
+  ["stun", "lightning"],
+] as const)("plays the %s damage cue as %s", (damageType, cue) => {
+  expect(selectCombatCue([{ kind: "damage", damageType, targetId: "enemy-0", amount: 4, text: "" }])).toBe(
+    cue,
+  );
+});
+
+it("chooses the strongest result, breaking ties by damage, healing, then Block", () => {
+  const damage = { kind: "damage", damageType: "burn", targetId: "enemy-0", amount: 4, text: "" } as const;
+  const heal = { kind: "heal", targetId: "ally-0", amount: 4, text: "" } as const;
+  const block = { kind: "block", targetId: "ally-0", amount: -4, text: "" } as const;
+  expect(selectCombatCue([block, heal, damage])).toBe("fire");
+  expect(selectCombatCue([block, heal])).toBe("heal");
+  expect(selectCombatCue([damage, { ...block, amount: -5 }])).toBe("absorb");
+  expect(selectCombatCue([{ ...block, amount: 5 }])).toBe("block");
+  expect(
+    selectCombatCue([
+      { ...damage, amount: 0 },
+      { ...heal, amount: 0 },
+    ]),
+  ).toBeUndefined();
+  expect(selectCombatCue([damage, { ...damage, damageType: "freeze" }])).toBe("fire");
+});
+
+it("registers every playable sound in the asset manifest", () => {
+  for (const cue of SOUND_CUES) {
+    expect(manifest.assets).toContainEqual(expect.objectContaining({ id: `sound.${cue}`, kind: "sound" }));
+  }
 });

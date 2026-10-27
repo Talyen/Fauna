@@ -1,7 +1,7 @@
 import { battleCardCapacity, createTemporaryCard } from "../card-zones";
-import { permanentCardCopies, permanentKitSize } from "../card-kit";
+import { permanentKit, permanentKitSize } from "../card-kit";
 import { TURN_MANA } from "../state-limits";
-import { speciesCards, species } from "../content";
+import { species } from "../content";
 import { PEARL } from "../content/creatures/memento";
 import { passiveAmount } from "../progression";
 import { roll, shuffle } from "../random";
@@ -22,9 +22,7 @@ export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
   return {
     draw: shuffle(
       state,
-      speciesCards(enemy.species).flatMap((card) =>
-        Array.from({ length: permanentCardCopies(enemy.species) }, () => card.id),
-      ),
+      permanentKit(enemy.species).map(({ definition }) => definition.id),
     ),
     hand: [],
     buffer: [],

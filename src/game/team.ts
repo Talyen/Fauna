@@ -1,4 +1,4 @@
-import { permanentCardCopies } from "./card-kit";
+import { permanentKit } from "./card-kit";
 import { isRosterCreature } from "./battlefield";
 import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
@@ -70,15 +70,12 @@ export function rosterHasSpecies(
   return [...state.team, ...state.reserves].some((unit) => unit.species === kind);
 }
 export function ownedCards(id: string, kind: GameState["team"][number]["species"]): Card[] {
-  const copies = permanentCardCopies(kind);
-  return speciesCards(kind).flatMap((c) =>
-    Array.from({ length: copies }, (_, index) => ({
-      id: `${id}:${c.id}${index ? ":2" : ""}`,
-      definitionId: c.id,
-      ownerId: id,
-      level: 0,
-    })),
-  );
+  return permanentKit(kind).map(({ definition, copy }) => ({
+    id: `${id}:${definition.id}${copy ? ":2" : ""}`,
+    definitionId: definition.id,
+    ownerId: id,
+    level: 0,
+  }));
 }
 /** Recruitment and its policy projection use the same legal deployment rules. */
 export function recruitLineup(

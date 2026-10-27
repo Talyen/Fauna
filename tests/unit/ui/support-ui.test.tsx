@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { it, expect, vi, afterEach } from "vitest";
-import type { GameState } from "../../../src/game/types";
+import type { GameState, StateAt } from "../../../src/game/types";
 import type { ReactElement } from "react";
 import { render as renderUI, screen, fireEvent, cleanup, within } from "@testing-library/react";
 import { produce } from "immer";
@@ -8,7 +8,10 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { accept, merchantDestination as merchant } from "../../support/game";
 import { TeamSelection } from "../../../src/ui/expedition/team-selection";
 import { SupportOffer, SupportScreen } from "../../../src/ui/expedition/support-screen";
+import { Rewards } from "../../../src/ui/expedition/rewards";
+import { OwnedBoons } from "../../../src/ui/expedition/owned-boons";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
+import { BOONS } from "../../../src/game/content";
 const render = (ui: ReactElement) => renderUI(ui, { wrapper: TooltipProvider });
 afterEach(cleanup);
 function requireMerchant(game: GameState) {
@@ -64,6 +67,51 @@ it.each([-1, 0])("shows Merchant at the lowest committed price plus %s Gold", (o
   });
   render(<SupportOffer game={game} send={() => true} />);
   expect(!!screen.queryByRole("button", { name: "Visit Boon Merchant" })).toBe(offset >= 0);
+});
+
+it("shows the stocked Boon rules when its artwork receives keyboard focus", async () => {
+  const state = merchant();
+  const game = requireMerchant(accept(state, { type: "enterSupport", visit: state.support!.id }));
+  const boon = BOONS.find((entry) => entry.id === game.support.stock[0]!.boon)!;
+  render(<SupportScreen game={game} send={() => true} />);
+  document.documentElement.dataset.focus = "visible";
+  try {
+    fireEvent.focus(screen.getByRole("button", { name: `Inspect ${boon.name}` }));
+    const tooltip = await screen.findByRole("tooltip");
+    expect(tooltip.textContent).toContain(boon.text);
+  } finally {
+    delete document.documentElement.dataset.focus;
+  }
+});
+
+it("keeps Boon reward choices actionable and owned Boon rules readable", async () => {
+  const base = merchant();
+  const boon = BOONS[0];
+  const game = {
+    ...base,
+    phase: "boon",
+    support: null,
+    reward: { outcome: "next", recruits: [], boons: [boon.id], currency: 0, xp: {} },
+  } as StateAt<"boon">;
+  const send = vi.fn(() => true);
+  render(<Rewards game={game} send={send} inspect={() => {}} />);
+  document.documentElement.dataset.focus = "visible";
+  try {
+    const choice = screen.getByRole("button", { name: `Choose ${boon.name}` });
+    fireEvent.focus(choice);
+    expect((await screen.findByRole("tooltip")).textContent).toContain(boon.text);
+    fireEvent.click(choice);
+    expect(send).toHaveBeenCalledExactlyOnceWith({ type: "chooseBoon", boon: boon.id });
+  } finally {
+    delete document.documentElement.dataset.focus;
+  }
+  cleanup();
+  render(<OwnedBoons boons={[boon.id]} />);
+  expect(screen.getByRole("img", { name: boon.name })).toBeTruthy();
+  expect(screen.getByRole("heading", { name: boon.name })).toBeTruthy();
+  expect(
+    screen.getByText((_, element) => element?.tagName === "P" && element.textContent === boon.text),
+  ).toBeTruthy();
 });
 
 it("keeps unavailable offers inspectable and rejects purchases with their specific reason", () => {

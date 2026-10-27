@@ -1,22 +1,19 @@
-import { KeywordText } from "../shared/keyword-text";
-import { ShineText } from "../shared/effects/treatments";
-import { creatureKeywords, visualKeywords } from "../shared/effects/palettes";
+import { creatureKeywords } from "../shared/effects/palettes";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { ResultPresentation } from "../shared/rewards/result-presentation";
-import { assetUrl } from "../shared/assets";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Plus, Star } from "lucide-react";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { CreatureCard } from "../shared/cards/cards";
-import { ArtCard } from "../shared/cards/art-card";
 import { returnFocus } from "../shared/navigation/focus";
 import { species, type SpeciesId, BOONS } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import type { Command, RewardState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 import { RecruitTeam } from "./recruit-team";
+import { BoonArt, BoonName, BoonText } from "./boon-presentation";
 import { BattleEarnings } from "../shared/rewards/battle-earnings";
 type Props = { game: RewardState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId }) {
@@ -124,10 +121,8 @@ export function Rewards({ game, send, inspect }: Props) {
                     <div className="reward-option" key={id}>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <ArtCard
-                            aspect="action"
-                            artwork={assetUrl(`boon.${id}`)}
-                            effectText={boon.text}
+                          <BoonArt
+                            boon={boon}
                             className="boon-choice"
                             aria-label={`Choose ${boon.name}`}
                             onClick={() => send({ type: "chooseBoon", boon: id })}
@@ -135,15 +130,13 @@ export function Rewards({ game, send, inspect }: Props) {
                         </TooltipTrigger>
                         <TooltipContent>
                           <strong>
-                            <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>
+                            <BoonName boon={boon} />
                           </strong>
-                          <p>
-                            <KeywordText text={boon.text} />
-                          </p>
+                          <BoonText boon={boon} />
                         </TooltipContent>
                       </Tooltip>
                       <h2>
-                        <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>
+                        <BoonName boon={boon} />
                       </h2>
                     </div>
                   );

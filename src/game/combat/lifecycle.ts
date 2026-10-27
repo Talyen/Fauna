@@ -18,6 +18,8 @@ import {
   periodicTick,
   finishBleedTick,
   setPeriodicStacks,
+  periodicClearVersion,
+  periodicAddedStacks,
 } from "./status-state";
 
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
@@ -75,6 +77,8 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (unit.health <= 0) break;
     if (stats[status] <= 0) continue;
     const { amount, sourceId, payouts } = periodicTick(stats, status);
+    const clearVersion = periodicClearVersion(stats, status);
+    const addedBefore = periodicAddedStacks(stats, status);
     // Ticks use ordinary Block absorption without reapplying their own buildup.
     const source = combatantById(state, sourceId) ?? unit;
     // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
@@ -83,11 +87,11 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       origin: "periodic",
     });
     if (status === "bleed") {
-      finishBleedTick(stats);
+      if (periodicClearVersion(stats, status) === clearVersion) finishBleedTick(stats);
       yield* settleBleedLeech(state, unit, payouts, payment.outcome === "landed" ? payment.dealt : 0, events);
     }
     // Threshold reactions can Cleanse the ticking status; decay must not restore it.
-    if (stats[status] === 0) continue;
+    if (stats[status] === 0 || periodicClearVersion(stats, status) !== clearVersion) continue;
     let next =
       status === "bleed"
         ? 0
@@ -107,15 +111,19 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       next = amount;
     if (status === "burn" && isEnemy(unit) && state.boons.includes("last-candle"))
       next = Math.max(boonRule("last-candle").minimum, next);
-    setPeriodicStacks(stats, status, next);
+    const fresh =
+      status === "bleed" ? 0 : Math.min(stats[status], periodicAddedStacks(stats, status) - addedBefore);
+    const old = stats[status] - fresh;
+    const decayed = Math.max(0, next - (amount - old));
+    setPeriodicStacks(stats, status, Math.min(STACK_LIMIT, decayed + fresh));
     if (
       status === "burn" &&
       isEnemy(unit) &&
       unit.health > 0 &&
-      amount > next &&
+      old > decayed &&
       state.boons.includes("ashfall-pendant")
     ) {
-      const removed = Math.min(unit.block, amount - next);
+      const removed = Math.min(unit.block, old - decayed);
       unit.block -= removed;
       if (removed > 0)
         events.push({
@@ -131,10 +139,10 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       isEnemy(unit) &&
       !isEnemy(source) &&
       state.boons.includes("cinder-fan") &&
-      amount > next
+      old > decayed
     ) {
       const targets = battlefield(state, "enemy").filter((enemy) => enemy.id !== unit.id && enemy.health > 0);
-      const lost = amount - next;
+      const lost = old - decayed;
       for (const [index, target] of targets.entries()) {
         const damage = Math.floor(lost / targets.length) + Number(index < lost % targets.length);
         if (damage > 0)

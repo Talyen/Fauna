@@ -28,6 +28,8 @@ Tooling suites use `temporaryDirectory` for cleanup at test completion, includin
 
 Protect consequential player behavior, command rejection, ownership, persistence, lifecycle ordering and architectural boundaries. First inspect existing protection and choose the cheapest layer that can detect the plausible failure. Strengthen a nearby assertion where useful. Adding no permanent test is appropriate when existing coverage is adequate or a change is documentation-only.
 
+[Auto-play ranking baselines](unit/application/fixtures/battle-policy-rankings.tsv) retain each ordered command, score and reason for every creature in four battle conditions, including Talent and Boon effects. Each row is one choice; `null` represents an empty ranking. Preserve the recorded expectations for behavior-preserving changes and review changes to them as player-facing policy changes.
+
 Prefer focused behavioral assertions over tests of incidental implementation, markup or wrappers. Browser coverage should protect actual interaction and integration failures; arithmetic already covered in the engine rarely needs another browser journey. Test observable contracts instead of exact npm command strings, YAML formatting or internal call sequences. Keep literal assertions only where the literal itself is a public interface or authorization/security boundary. Never remove or weaken a regression test just to obtain a passing gate. Report exact suites run and remaining verification boundaries under [Contributing](../CONTRIBUTING.md#verification).
 
 ### Browser and UI coverage

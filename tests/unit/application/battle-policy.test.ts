@@ -1,4 +1,5 @@
 import { setBattleCards } from "../../support/cards";
+import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { chooseBattleCommand, rankedBattleChoices } from "../../../src/application/battle-policy";
@@ -331,8 +332,37 @@ it.each(["none", "nullifyFreeze", "negate", "attackReflection"] as const)(
   },
 );
 
+const rankingConditions = ["ordinary", "injured", "defended", "talented"] as const;
+// Each row retains one ordered choice, including its serialized field order; null denotes an empty ranking.
+const rankingBaseline = new Map<string, string[]>();
+const emptyRankings = new Set<string>();
+for (const line of readFileSync(new URL("./fixtures/battle-policy-rankings.tsv", import.meta.url), "utf8")
+  .trimEnd()
+  .split("\n")) {
+  const [id, condition, json] = line.split("\t");
+  const key = `${id}:${condition}`;
+  if (!id || !condition || !json || emptyRankings.has(key))
+    throw new Error(`Invalid ranking baseline: ${key}`);
+  const choice: unknown = JSON.parse(json);
+  if (choice === null) {
+    if (rankingBaseline.has(key)) throw new Error(`Invalid empty ranking: ${key}`);
+    emptyRankings.add(key);
+    rankingBaseline.set(key, []);
+  } else {
+    const choices = rankingBaseline.get(key) ?? [];
+    choices.push(JSON.stringify(choice));
+    rankingBaseline.set(key, choices);
+  }
+}
+
+it("covers each creature and ranking condition in the recorded baseline", () => {
+  expect([...rankingBaseline.keys()].sort()).toEqual(
+    SPECIES.flatMap(({ id }) => rankingConditions.map((condition) => `${id}:${condition}`)).sort(),
+  );
+});
+
 it.each(SPECIES)("preserves visible rankings and legal choices for $id", ({ id }) => {
-  const rankings = ["ordinary", "injured", "defended", "talented"].map((condition) => {
+  for (const condition of rankingConditions) {
     const state = produce(teamRun(42, [id]), (game) => {
       const battle = game.battle!;
       battle.hand = game.cards.map((card) => card.id);
@@ -367,9 +397,11 @@ it.each(SPECIES)("preserves visible rankings and legal choices for $id", ({ id }
     expect(rankedBattleChoices(hidden, false)).toEqual(ranked);
     expect(rankedBattleChoices(decodeSave(saved), false)).toEqual(ranked);
     expect(encodeSave(state)).toBe(saved);
-    return [condition, ranked.map((choice) => JSON.stringify(choice))];
-  });
-  expect(rankings).toMatchSnapshot();
+    expect(
+      ranked.map((choice) => JSON.stringify(choice)),
+      `${id}: ${condition}`,
+    ).toEqual(rankingBaseline.get(`${id}:${condition}`));
+  }
 });
 
 it("ignores hidden draw order and RNG while ranking a partly hidden deck", () => {

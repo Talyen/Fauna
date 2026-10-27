@@ -1,0 +1,487 @@
+aerostat	ordinary	{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}
+aerostat	ordinary	{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}
+aerostat	ordinary	{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":106,"reason":"Use Trail Bread for its visible benefit"}
+aerostat	injured	{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}
+aerostat	injured	{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}
+aerostat	injured	{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":106,"reason":"Use Trail Bread for its visible benefit"}
+aerostat	defended	{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}
+aerostat	defended	{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}
+aerostat	defended	{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":106,"reason":"Use Trail Bread for its visible benefit"}
+aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}
+aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-true-bearing","autoEndTurn":false},"score":202,"reason":"Use True Bearing for its visible benefit"}
+aerostat	talented	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":112,"reason":"Use Trail Bread for its visible benefit"}
+aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}
+almanelle	ordinary	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+almanelle	ordinary	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+almanelle	ordinary	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+almanelle	ordinary	{"command":{"type":"play","cardId":"ally-0:almanelle-rooted-year","autoEndTurn":false},"score":106,"reason":"Use Rooted Year for its visible benefit"}
+almanelle	injured	{"command":{"type":"play","cardId":"ally-0:almanelle-autumn-insight","targetId":"ally-0","autoEndTurn":false},"score":3003,"reason":"Use Autumn Insight for its visible benefit"}
+almanelle	injured	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+almanelle	injured	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+almanelle	injured	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+almanelle	injured	{"command":{"type":"play","cardId":"ally-0:almanelle-rooted-year","autoEndTurn":false},"score":106,"reason":"Use Rooted Year for its visible benefit"}
+almanelle	defended	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+almanelle	defended	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+almanelle	defended	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+almanelle	defended	{"command":{"type":"play","cardId":"ally-0:almanelle-rooted-year","autoEndTurn":false},"score":106,"reason":"Use Rooted Year for its visible benefit"}
+almanelle	talented	{"command":{"type":"play","cardId":"ally-0:almanelle-autumn-insight","targetId":"ally-0","autoEndTurn":false},"score":3003,"reason":"Use Autumn Insight for its visible benefit"}
+almanelle	talented	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+almanelle	talented	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+almanelle	talented	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-2","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+almanelle	talented	{"command":{"type":"play","cardId":"ally-0:almanelle-rooted-year","autoEndTurn":false},"score":106,"reason":"Use Rooted Year for its visible benefit"}
+alpenglen	ordinary	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+alpenglen	ordinary	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+alpenglen	ordinary	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+alpenglen	ordinary	{"command":{"type":"play","cardId":"ally-0:alpenglen-ember-of-evening","autoEndTurn":false},"score":200,"reason":"Use Ember of Evening for its visible benefit"}
+alpenglen	ordinary	{"command":{"type":"play","cardId":"ally-0:alpenglen-sunset-reversal","autoEndTurn":false},"score":101,"reason":"Use Sunset Reversal for its visible benefit"}
+alpenglen	injured	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+alpenglen	injured	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+alpenglen	injured	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+alpenglen	injured	{"command":{"type":"play","cardId":"ally-0:alpenglen-ember-of-evening","autoEndTurn":false},"score":200,"reason":"Use Ember of Evening for its visible benefit"}
+alpenglen	injured	{"command":{"type":"play","cardId":"ally-0:alpenglen-sunset-reversal","autoEndTurn":false},"score":101,"reason":"Use Sunset Reversal for its visible benefit"}
+alpenglen	defended	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+alpenglen	defended	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+alpenglen	defended	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+alpenglen	defended	{"command":{"type":"play","cardId":"ally-0:alpenglen-ember-of-evening","autoEndTurn":false},"score":200,"reason":"Use Ember of Evening for its visible benefit"}
+alpenglen	defended	{"command":{"type":"play","cardId":"ally-0:alpenglen-sunset-reversal","autoEndTurn":false},"score":101,"reason":"Use Sunset Reversal for its visible benefit"}
+alpenglen	talented	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+alpenglen	talented	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+alpenglen	talented	{"command":{"type":"play","cardId":"ally-0:alpenglen-last-light-charge","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+alpenglen	talented	{"command":{"type":"play","cardId":"ally-0:alpenglen-ember-of-evening","autoEndTurn":false},"score":200,"reason":"Use Ember of Evening for its visible benefit"}
+alpenglen	talented	{"command":{"type":"play","cardId":"ally-0:alpenglen-sunset-reversal","autoEndTurn":false},"score":101,"reason":"Use Sunset Reversal for its visible benefit"}
+arabesca	ordinary	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+arabesca	ordinary	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+arabesca	ordinary	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+arabesca	ordinary	{"command":{"type":"play","cardId":"ally-0:arabesca-dancing-double","autoEndTurn":false},"score":200,"reason":"Use Dancing Double for its visible benefit"}
+arabesca	ordinary	{"command":{"type":"play","cardId":"ally-0:arabesca-springbound","autoEndTurn":false},"score":180,"reason":"Use Springbound for its visible benefit"}
+arabesca	injured	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+arabesca	injured	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+arabesca	injured	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+arabesca	injured	{"command":{"type":"play","cardId":"ally-0:arabesca-dancing-double","autoEndTurn":false},"score":200,"reason":"Use Dancing Double for its visible benefit"}
+arabesca	injured	{"command":{"type":"play","cardId":"ally-0:arabesca-springbound","autoEndTurn":false},"score":180,"reason":"Use Springbound for its visible benefit"}
+arabesca	defended	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+arabesca	defended	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+arabesca	defended	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+arabesca	defended	{"command":{"type":"play","cardId":"ally-0:arabesca-dancing-double","autoEndTurn":false},"score":200,"reason":"Use Dancing Double for its visible benefit"}
+arabesca	defended	{"command":{"type":"play","cardId":"ally-0:arabesca-springbound","autoEndTurn":false},"score":180,"reason":"Use Springbound for its visible benefit"}
+arabesca	talented	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+arabesca	talented	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+arabesca	talented	{"command":{"type":"play","cardId":"ally-0:arabesca-ribbon-snare","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+arabesca	talented	{"command":{"type":"play","cardId":"ally-0:arabesca-dancing-double","autoEndTurn":false},"score":200,"reason":"Use Dancing Double for its visible benefit"}
+arabesca	talented	{"command":{"type":"play","cardId":"ally-0:arabesca-springbound","autoEndTurn":false},"score":180,"reason":"Use Springbound for its visible benefit"}
+bloomquail	ordinary	{"command":{"type":"play","cardId":"ally-0:bloomquail-heal","autoEndTurn":false},"score":150,"reason":"Use Petal Veil for its visible benefit"}
+bloomquail	ordinary	{"command":{"type":"play","cardId":"ally-0:bloomquail-guard","autoEndTurn":false},"score":106,"reason":"Use Petal Rampart for its visible benefit"}
+bloomquail	injured	{"command":{"type":"play","cardId":"ally-0:bloomquail-draw","autoEndTurn":false},"score":3002,"reason":"Use Bloom Cradle for its visible benefit"}
+bloomquail	injured	{"command":{"type":"play","cardId":"ally-0:bloomquail-heal","autoEndTurn":false},"score":3002,"reason":"Use Petal Veil for its visible benefit"}
+bloomquail	injured	{"command":{"type":"play","cardId":"ally-0:bloomquail-guard","autoEndTurn":false},"score":106,"reason":"Use Petal Rampart for its visible benefit"}
+bloomquail	defended	{"command":{"type":"play","cardId":"ally-0:bloomquail-heal","autoEndTurn":false},"score":150,"reason":"Use Petal Veil for its visible benefit"}
+bloomquail	defended	{"command":{"type":"play","cardId":"ally-0:bloomquail-guard","autoEndTurn":false},"score":106,"reason":"Use Petal Rampart for its visible benefit"}
+bloomquail	talented	{"command":{"type":"play","cardId":"ally-0:bloomquail-draw","autoEndTurn":false},"score":3002,"reason":"Use Bloom Cradle for its visible benefit"}
+bloomquail	talented	{"command":{"type":"play","cardId":"ally-0:bloomquail-heal","autoEndTurn":false},"score":3002,"reason":"Use Petal Veil for its visible benefit"}
+bloomquail	talented	{"command":{"type":"play","cardId":"ally-0:bloomquail-guard","autoEndTurn":false},"score":106,"reason":"Use Petal Rampart for its visible benefit"}
+cadenza	ordinary	{"command":{"type":"play","cardId":"ally-0:cadenza-rousing-refrain","autoEndTurn":false},"score":170,"reason":"Use Rousing Refrain for its visible benefit"}
+cadenza	injured	{"command":{"type":"play","cardId":"ally-0:cadenza-rousing-refrain","autoEndTurn":false},"score":170,"reason":"Use Rousing Refrain for its visible benefit"}
+cadenza	defended	{"command":{"type":"play","cardId":"ally-0:cadenza-rousing-refrain","autoEndTurn":false},"score":170,"reason":"Use Rousing Refrain for its visible benefit"}
+cadenza	talented	{"command":{"type":"play","cardId":"ally-0:cadenza-resonant-well","autoEndTurn":false},"score":202,"reason":"Use Resonant Well for its visible benefit"}
+cadenza	talented	{"command":{"type":"play","cardId":"ally-0:cadenza-rousing-refrain","autoEndTurn":false},"score":170,"reason":"Use Rousing Refrain for its visible benefit"}
+captoad	ordinary	{"command":{"type":"play","cardId":"ally-0:captoad-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+captoad	ordinary	{"command":{"type":"play","cardId":"ally-0:captoad-guard","autoEndTurn":false},"score":103,"reason":"Use Mushroom Guard for its visible benefit"}
+captoad	injured	{"command":{"type":"play","cardId":"ally-0:captoad-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+captoad	injured	{"command":{"type":"play","cardId":"ally-0:captoad-guard","autoEndTurn":false},"score":3003,"reason":"Use Mushroom Guard for its visible benefit"}
+captoad	defended	{"command":{"type":"play","cardId":"ally-0:captoad-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+captoad	defended	{"command":{"type":"play","cardId":"ally-0:captoad-guard","autoEndTurn":false},"score":103,"reason":"Use Mushroom Guard for its visible benefit"}
+captoad	talented	{"command":{"type":"play","cardId":"ally-0:captoad-guard","autoEndTurn":false},"score":3003,"reason":"Use Mushroom Guard for its visible benefit"}
+captoad	talented	{"command":{"type":"play","cardId":"ally-0:captoad-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+captoad	talented	{"command":{"type":"play","cardId":"ally-0:captoad-swap","autoEndTurn":false},"score":200,"reason":"Use Bogbound Leap for its visible benefit"}
+chimecricket	ordinary	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+chimecricket	ordinary	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+chimecricket	ordinary	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+chimecricket	ordinary	{"command":{"type":"play","cardId":"ally-0:chimecricket-nullify","autoEndTurn":false},"score":151,"reason":"Use Hush Dome for its visible benefit"}
+chimecricket	injured	{"command":{"type":"play","cardId":"ally-0:chimecricket-heal","autoEndTurn":false},"score":3004,"reason":"Use Lullaby Drift for its visible benefit"}
+chimecricket	injured	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+chimecricket	injured	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+chimecricket	injured	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+chimecricket	injured	{"command":{"type":"play","cardId":"ally-0:chimecricket-nullify","autoEndTurn":false},"score":151,"reason":"Use Hush Dome for its visible benefit"}
+chimecricket	defended	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+chimecricket	defended	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+chimecricket	defended	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+chimecricket	defended	{"command":{"type":"play","cardId":"ally-0:chimecricket-nullify","autoEndTurn":false},"score":151,"reason":"Use Hush Dome for its visible benefit"}
+chimecricket	talented	{"command":{"type":"play","cardId":"ally-0:chimecricket-heal","autoEndTurn":false},"score":3004,"reason":"Use Lullaby Drift for its visible benefit"}
+chimecricket	talented	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+chimecricket	talented	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+chimecricket	talented	{"command":{"type":"play","cardId":"ally-0:chimecricket-attack","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+chimecricket	talented	{"command":{"type":"play","cardId":"ally-0:chimecricket-nullify","autoEndTurn":false},"score":151,"reason":"Use Hush Dome for its visible benefit"}
+cindernewt	ordinary	{"command":{"type":"play","cardId":"ally-0:cindernewt-ashen-veil","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+cindernewt	ordinary	{"command":{"type":"play","cardId":"ally-0:cindernewt-ember-breath","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+cindernewt	ordinary	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+cindernewt	ordinary	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+cindernewt	ordinary	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+cindernewt	injured	{"command":{"type":"play","cardId":"ally-0:cindernewt-ashen-veil","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+cindernewt	injured	{"command":{"type":"play","cardId":"ally-0:cindernewt-ember-breath","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+cindernewt	injured	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+cindernewt	injured	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+cindernewt	injured	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+cindernewt	defended	{"command":{"type":"play","cardId":"ally-0:cindernewt-ashen-veil","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+cindernewt	defended	{"command":{"type":"play","cardId":"ally-0:cindernewt-ember-breath","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+cindernewt	defended	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+cindernewt	defended	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+cindernewt	defended	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+cindernewt	talented	{"command":{"type":"play","cardId":"ally-0:cindernewt-ashen-veil","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+cindernewt	talented	{"command":{"type":"play","cardId":"ally-0:cindernewt-ember-breath","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+cindernewt	talented	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-0","autoEndTurn":false},"score":508.5,"reason":"Make progress against an enemy creature"}
+cindernewt	talented	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-1","autoEndTurn":false},"score":508.5,"reason":"Make progress against an enemy creature"}
+cindernewt	talented	{"command":{"type":"play","cardId":"ally-0:cindernewt-attack","targetId":"enemy-2","autoEndTurn":false},"score":508.5,"reason":"Make progress against an enemy creature"}
+coralcurl	ordinary	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+coralcurl	ordinary	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+coralcurl	ordinary	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+coralcurl	ordinary	{"command":{"type":"play","cardId":"ally-0:coralcurl-swap","autoEndTurn":false},"score":150,"reason":"Use Coral Spiral for its visible benefit"}
+coralcurl	ordinary	{"command":{"type":"play","cardId":"ally-0:coralcurl-guard","autoEndTurn":false},"score":106,"reason":"Use Bubble Ward for its visible benefit"}
+coralcurl	injured	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+coralcurl	injured	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+coralcurl	injured	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+coralcurl	injured	{"command":{"type":"play","cardId":"ally-0:coralcurl-swap","autoEndTurn":false},"score":150,"reason":"Use Coral Spiral for its visible benefit"}
+coralcurl	injured	{"command":{"type":"play","cardId":"ally-0:coralcurl-guard","autoEndTurn":false},"score":106,"reason":"Use Bubble Ward for its visible benefit"}
+coralcurl	defended	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+coralcurl	defended	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+coralcurl	defended	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+coralcurl	defended	{"command":{"type":"play","cardId":"ally-0:coralcurl-swap","autoEndTurn":false},"score":150,"reason":"Use Coral Spiral for its visible benefit"}
+coralcurl	defended	{"command":{"type":"play","cardId":"ally-0:coralcurl-guard","autoEndTurn":false},"score":106,"reason":"Use Bubble Ward for its visible benefit"}
+coralcurl	talented	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-0","autoEndTurn":false},"score":507,"reason":"Make progress against an enemy creature"}
+coralcurl	talented	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-1","autoEndTurn":false},"score":507,"reason":"Make progress against an enemy creature"}
+coralcurl	talented	{"command":{"type":"play","cardId":"ally-0:coralcurl-attack","targetId":"enemy-2","autoEndTurn":false},"score":507,"reason":"Make progress against an enemy creature"}
+coralcurl	talented	{"command":{"type":"play","cardId":"ally-0:coralcurl-swap","autoEndTurn":false},"score":150,"reason":"Use Coral Spiral for its visible benefit"}
+coralcurl	talented	{"command":{"type":"play","cardId":"ally-0:coralcurl-guard","autoEndTurn":false},"score":106,"reason":"Use Bubble Ward for its visible benefit"}
+dawncall	ordinary	{"command":{"type":"play","cardId":"ally-0:dawncall-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+dawncall	injured	{"command":{"type":"play","cardId":"ally-0:dawncall-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+dawncall	injured	{"command":{"type":"play","cardId":"ally-0:dawncall-heal","autoEndTurn":false},"score":3002,"reason":"Use Morning Bloom for its visible benefit"}
+dawncall	injured	{"command":{"type":"play","cardId":"ally-0:dawncall-teamCleanse","autoEndTurn":false},"score":150,"reason":"Use Dawn Cry for its visible benefit"}
+dawncall	defended	{"command":{"type":"play","cardId":"ally-0:dawncall-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+dawncall	talented	{"command":{"type":"play","cardId":"ally-0:dawncall-heal","autoEndTurn":false},"score":3002,"reason":"Use Morning Bloom for its visible benefit"}
+dawncall	talented	{"command":{"type":"play","cardId":"ally-0:dawncall-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+dawncall	talented	{"command":{"type":"play","cardId":"ally-0:dawncall-teamCleanse","autoEndTurn":false},"score":150,"reason":"Use Dawn Cry for its visible benefit"}
+dulcera	ordinary	{"command":{"type":"play","cardId":"ally-0:dulcera-meadow-shelter","autoEndTurn":false},"score":102,"reason":"Use Meadow Shelter for its visible benefit"}
+dulcera	injured	{"command":{"type":"play","cardId":"ally-0:dulcera-chapel-light","autoEndTurn":false},"score":3003,"reason":"Use Chapel Light for its visible benefit"}
+dulcera	injured	{"command":{"type":"play","cardId":"ally-0:dulcera-hushed-waters","autoEndTurn":false},"score":150,"reason":"Use Hushed Waters for its visible benefit"}
+dulcera	injured	{"command":{"type":"play","cardId":"ally-0:dulcera-meadow-shelter","autoEndTurn":false},"score":102,"reason":"Use Meadow Shelter for its visible benefit"}
+dulcera	defended	{"command":{"type":"play","cardId":"ally-0:dulcera-meadow-shelter","autoEndTurn":false},"score":102,"reason":"Use Meadow Shelter for its visible benefit"}
+dulcera	talented	{"command":{"type":"play","cardId":"ally-0:dulcera-chapel-light","autoEndTurn":false},"score":3003,"reason":"Use Chapel Light for its visible benefit"}
+dulcera	talented	{"command":{"type":"play","cardId":"ally-0:dulcera-hushed-waters","autoEndTurn":false},"score":150,"reason":"Use Hushed Waters for its visible benefit"}
+dulcera	talented	{"command":{"type":"play","cardId":"ally-0:dulcera-meadow-shelter","autoEndTurn":false},"score":102,"reason":"Use Meadow Shelter for its visible benefit"}
+dunefox	ordinary	{"command":{"type":"play","cardId":"ally-0:dunefox-dune-whirl","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+dunefox	ordinary	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+dunefox	ordinary	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+dunefox	ordinary	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+dunefox	ordinary	{"command":{"type":"play","cardId":"ally-0:dunefox-dodge","autoEndTurn":false},"score":180,"reason":"Use Mirage Step for its visible benefit"}
+dunefox	injured	{"command":{"type":"play","cardId":"ally-0:dunefox-dune-whirl","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+dunefox	injured	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+dunefox	injured	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+dunefox	injured	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+dunefox	injured	{"command":{"type":"play","cardId":"ally-0:dunefox-dodge","autoEndTurn":false},"score":180,"reason":"Use Mirage Step for its visible benefit"}
+dunefox	defended	{"command":{"type":"play","cardId":"ally-0:dunefox-dune-whirl","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+dunefox	defended	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+dunefox	defended	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+dunefox	defended	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+dunefox	defended	{"command":{"type":"play","cardId":"ally-0:dunefox-dodge","autoEndTurn":false},"score":180,"reason":"Use Mirage Step for its visible benefit"}
+dunefox	talented	{"command":{"type":"play","cardId":"ally-0:dunefox-dune-whirl","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+dunefox	talented	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-0","autoEndTurn":false},"score":510,"reason":"Make progress against an enemy creature"}
+dunefox	talented	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-1","autoEndTurn":false},"score":510,"reason":"Make progress against an enemy creature"}
+dunefox	talented	{"command":{"type":"play","cardId":"ally-0:dunefox-attack","targetId":"enemy-2","autoEndTurn":false},"score":510,"reason":"Make progress against an enemy creature"}
+dunefox	talented	{"command":{"type":"play","cardId":"ally-0:dunefox-dodge","autoEndTurn":false},"score":180,"reason":"Use Mirage Step for its visible benefit"}
+emberback	ordinary	{"command":{"type":"play","cardId":"ally-0:emberback-furnace-breath","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+emberback	ordinary	{"command":{"type":"play","cardId":"ally-0:emberback-magma-stomp","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+emberback	ordinary	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+emberback	ordinary	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+emberback	ordinary	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+emberback	injured	{"command":{"type":"play","cardId":"ally-0:emberback-furnace-breath","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+emberback	injured	{"command":{"type":"play","cardId":"ally-0:emberback-magma-stomp","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+emberback	injured	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+emberback	injured	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+emberback	injured	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+emberback	defended	{"command":{"type":"play","cardId":"ally-0:emberback-furnace-breath","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+emberback	defended	{"command":{"type":"play","cardId":"ally-0:emberback-magma-stomp","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+emberback	defended	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+emberback	defended	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+emberback	defended	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+emberback	talented	{"command":{"type":"play","cardId":"ally-0:emberback-furnace-breath","autoEndTurn":false},"score":1509,"reason":"Damage enemies; give roster creatures priority over Minions"}
+emberback	talented	{"command":{"type":"play","cardId":"ally-0:emberback-magma-stomp","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+emberback	talented	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-0","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}
+emberback	talented	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-1","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}
+emberback	talented	{"command":{"type":"play","cardId":"ally-0:emberback-attack","targetId":"enemy-2","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}
+euphera	ordinary	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-0","autoEndTurn":false},"score":1005,"reason":"Make progress against an enemy creature"}
+euphera	ordinary	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-1","autoEndTurn":false},"score":1005,"reason":"Make progress against an enemy creature"}
+euphera	ordinary	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-2","autoEndTurn":false},"score":1005,"reason":"Make progress against an enemy creature"}
+euphera	ordinary	{"command":{"type":"play","cardId":"ally-0:euphera-possible-path","autoEndTurn":false},"score":190,"reason":"Use Possible Path for its visible benefit"}
+euphera	ordinary	{"command":{"type":"play","cardId":"ally-0:euphera-wish-exchange","autoEndTurn":false},"score":101,"reason":"Use Wish Exchange for its visible benefit"}
+euphera	injured	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-0","autoEndTurn":false},"score":1005,"reason":"Make progress against an enemy creature"}
+euphera	injured	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-1","autoEndTurn":false},"score":1005,"reason":"Make progress against an enemy creature"}
+euphera	injured	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-2","autoEndTurn":false},"score":1005,"reason":"Make progress against an enemy creature"}
+euphera	injured	{"command":{"type":"play","cardId":"ally-0:euphera-possible-path","autoEndTurn":false},"score":190,"reason":"Use Possible Path for its visible benefit"}
+euphera	injured	{"command":{"type":"play","cardId":"ally-0:euphera-wish-exchange","autoEndTurn":false},"score":101,"reason":"Use Wish Exchange for its visible benefit"}
+euphera	defended	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-0","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+euphera	defended	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-1","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+euphera	defended	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-2","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+euphera	defended	{"command":{"type":"play","cardId":"ally-0:euphera-possible-path","autoEndTurn":false},"score":190,"reason":"Use Possible Path for its visible benefit"}
+euphera	defended	{"command":{"type":"play","cardId":"ally-0:euphera-wish-exchange","autoEndTurn":false},"score":101,"reason":"Use Wish Exchange for its visible benefit"}
+euphera	talented	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-0","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+euphera	talented	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-1","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+euphera	talented	{"command":{"type":"play","cardId":"ally-0:euphera-twilight-lance","targetId":"enemy-2","autoEndTurn":false},"score":505,"reason":"Make progress against an enemy creature"}
+euphera	talented	{"command":{"type":"play","cardId":"ally-0:euphera-possible-path","autoEndTurn":false},"score":190,"reason":"Use Possible Path for its visible benefit"}
+euphera	talented	{"command":{"type":"play","cardId":"ally-0:euphera-wish-exchange","autoEndTurn":false},"score":101,"reason":"Use Wish Exchange for its visible benefit"}
+glintstride	ordinary	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+glintstride	ordinary	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+glintstride	ordinary	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+glintstride	ordinary	{"command":{"type":"play","cardId":"ally-0:glintstride-dodge","autoEndTurn":false},"score":180,"reason":"Use Mirage Run for its visible benefit"}
+glintstride	ordinary	{"command":{"type":"play","cardId":"ally-0:glintstride-teamBlind","autoEndTurn":false},"score":153,"reason":"Use False Horizon for its visible benefit"}
+glintstride	injured	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+glintstride	injured	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+glintstride	injured	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+glintstride	injured	{"command":{"type":"play","cardId":"ally-0:glintstride-dodge","autoEndTurn":false},"score":180,"reason":"Use Mirage Run for its visible benefit"}
+glintstride	injured	{"command":{"type":"play","cardId":"ally-0:glintstride-teamBlind","autoEndTurn":false},"score":153,"reason":"Use False Horizon for its visible benefit"}
+glintstride	defended	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+glintstride	defended	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+glintstride	defended	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+glintstride	defended	{"command":{"type":"play","cardId":"ally-0:glintstride-dodge","autoEndTurn":false},"score":180,"reason":"Use Mirage Run for its visible benefit"}
+glintstride	defended	{"command":{"type":"play","cardId":"ally-0:glintstride-teamBlind","autoEndTurn":false},"score":153,"reason":"Use False Horizon for its visible benefit"}
+glintstride	talented	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+glintstride	talented	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+glintstride	talented	{"command":{"type":"play","cardId":"ally-0:glintstride-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+glintstride	talented	{"command":{"type":"play","cardId":"ally-0:glintstride-dodge","autoEndTurn":false},"score":180,"reason":"Use Mirage Run for its visible benefit"}
+glintstride	talented	{"command":{"type":"play","cardId":"ally-0:glintstride-teamBlind","autoEndTurn":false},"score":153,"reason":"Use False Horizon for its visible benefit"}
+memento	ordinary	{"command":{"type":"play","cardId":"ally-0:memento-lost-procession","autoEndTurn":false},"score":1600,"reason":"Use Lost Procession for its visible benefit"}
+memento	ordinary	{"command":{"type":"play","cardId":"ally-0:memento-lost-procession:2","autoEndTurn":false},"score":1600,"reason":"Use Lost Procession for its visible benefit"}
+memento	ordinary	{"command":{"type":"play","cardId":"ally-0:memento-treasury-echo","autoEndTurn":false},"score":400,"reason":"Use Treasury Echo for its visible benefit"}
+memento	ordinary	{"command":{"type":"play","cardId":"ally-0:memento-treasury-echo:2","autoEndTurn":false},"score":400,"reason":"Use Treasury Echo for its visible benefit"}
+memento	injured	{"command":{"type":"play","cardId":"ally-0:memento-lost-procession","autoEndTurn":false},"score":1600,"reason":"Use Lost Procession for its visible benefit"}
+memento	injured	{"command":{"type":"play","cardId":"ally-0:memento-lost-procession:2","autoEndTurn":false},"score":1600,"reason":"Use Lost Procession for its visible benefit"}
+memento	injured	{"command":{"type":"play","cardId":"ally-0:memento-treasury-echo","autoEndTurn":false},"score":400,"reason":"Use Treasury Echo for its visible benefit"}
+memento	injured	{"command":{"type":"play","cardId":"ally-0:memento-treasury-echo:2","autoEndTurn":false},"score":400,"reason":"Use Treasury Echo for its visible benefit"}
+memento	defended	{"command":{"type":"play","cardId":"ally-0:memento-lost-procession","autoEndTurn":false},"score":1600,"reason":"Use Lost Procession for its visible benefit"}
+memento	defended	{"command":{"type":"play","cardId":"ally-0:memento-lost-procession:2","autoEndTurn":false},"score":1600,"reason":"Use Lost Procession for its visible benefit"}
+memento	defended	{"command":{"type":"play","cardId":"ally-0:memento-treasury-echo","autoEndTurn":false},"score":400,"reason":"Use Treasury Echo for its visible benefit"}
+memento	defended	{"command":{"type":"play","cardId":"ally-0:memento-treasury-echo:2","autoEndTurn":false},"score":400,"reason":"Use Treasury Echo for its visible benefit"}
+memento	talented	{"command":{"type":"play","cardId":"ally-0:memento-lost-procession","autoEndTurn":false},"score":1600,"reason":"Use Lost Procession for its visible benefit"}
+memento	talented	{"command":{"type":"play","cardId":"ally-0:memento-lost-procession:2","autoEndTurn":false},"score":1600,"reason":"Use Lost Procession for its visible benefit"}
+memento	talented	{"command":{"type":"play","cardId":"ally-0:memento-treasury-echo","autoEndTurn":false},"score":400,"reason":"Use Treasury Echo for its visible benefit"}
+memento	talented	{"command":{"type":"play","cardId":"ally-0:memento-treasury-echo:2","autoEndTurn":false},"score":400,"reason":"Use Treasury Echo for its visible benefit"}
+memento	talented	{"command":{"type":"play","cardId":"ally-0:memento-drowned-revelation","autoEndTurn":false},"score":202,"reason":"Use Drowned Revelation for its visible benefit"}
+memento	talented	{"command":{"type":"play","cardId":"ally-0:memento-drowned-revelation:2","autoEndTurn":false},"score":202,"reason":"Use Drowned Revelation for its visible benefit"}
+mossguard	ordinary	{"command":{"type":"play","cardId":"ally-0:mossguard-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+mossguard	ordinary	{"command":{"type":"play","cardId":"ally-0:mossguard-guard","autoEndTurn":false},"score":106,"reason":"Use Boulder Brace for its visible benefit"}
+mossguard	injured	{"command":{"type":"play","cardId":"ally-0:mossguard-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+mossguard	injured	{"command":{"type":"play","cardId":"ally-0:mossguard-heal","autoEndTurn":false},"score":3002,"reason":"Use Moss Renewal for its visible benefit"}
+mossguard	injured	{"command":{"type":"play","cardId":"ally-0:mossguard-guard","autoEndTurn":false},"score":106,"reason":"Use Boulder Brace for its visible benefit"}
+mossguard	defended	{"command":{"type":"play","cardId":"ally-0:mossguard-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+mossguard	defended	{"command":{"type":"play","cardId":"ally-0:mossguard-guard","autoEndTurn":false},"score":106,"reason":"Use Boulder Brace for its visible benefit"}
+mossguard	talented	{"command":{"type":"play","cardId":"ally-0:mossguard-heal","autoEndTurn":false},"score":3002,"reason":"Use Moss Renewal for its visible benefit"}
+mossguard	talented	{"command":{"type":"play","cardId":"ally-0:mossguard-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+mossguard	talented	{"command":{"type":"play","cardId":"ally-0:mossguard-guard","autoEndTurn":false},"score":106,"reason":"Use Boulder Brace for its visible benefit"}
+neradora	ordinary	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":103,"reason":"Use Undertow Knot for its visible benefit"}
+neradora	injured	{"command":{"type":"play","cardId":"ally-0:neradora-bloom-shelter","autoEndTurn":false},"score":3002,"reason":"Use Bloom Shelter for its visible benefit"}
+neradora	injured	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":103,"reason":"Use Undertow Knot for its visible benefit"}
+neradora	defended	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":103,"reason":"Use Undertow Knot for its visible benefit"}
+neradora	talented	{"command":{"type":"play","cardId":"ally-0:neradora-bloom-shelter","autoEndTurn":false},"score":3002,"reason":"Use Bloom Shelter for its visible benefit"}
+neradora	talented	{"command":{"type":"play","cardId":"ally-0:neradora-tide-cup","autoEndTurn":false},"score":202,"reason":"Use Tide Cup for its visible benefit"}
+neradora	talented	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":103,"reason":"Use Undertow Knot for its visible benefit"}
+oathara	ordinary	{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}
+oathara	ordinary	{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}
+oathara	injured	{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}
+oathara	injured	{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}
+oathara	defended	{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}
+oathara	defended	{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}
+oathara	talented	{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}
+oathara	talented	{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}
+orifable	ordinary	{"command":{"type":"play","cardId":"ally-0:orifable-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+orifable	ordinary	{"command":{"type":"play","cardId":"ally-0:orifable-createFood","autoEndTurn":false},"score":400,"reason":"Use Care Package for its visible benefit"}
+orifable	injured	{"command":{"type":"play","cardId":"ally-0:orifable-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+orifable	injured	{"command":{"type":"play","cardId":"ally-0:orifable-heal","autoEndTurn":false},"score":3006,"reason":"Use Good Tidings for its visible benefit"}
+orifable	injured	{"command":{"type":"play","cardId":"ally-0:orifable-createFood","autoEndTurn":false},"score":400,"reason":"Use Care Package for its visible benefit"}
+orifable	defended	{"command":{"type":"play","cardId":"ally-0:orifable-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+orifable	defended	{"command":{"type":"play","cardId":"ally-0:orifable-createFood","autoEndTurn":false},"score":400,"reason":"Use Care Package for its visible benefit"}
+orifable	talented	{"command":{"type":"play","cardId":"ally-0:orifable-heal","autoEndTurn":false},"score":3007,"reason":"Use Good Tidings for its visible benefit"}
+orifable	talented	{"command":{"type":"play","cardId":"ally-0:orifable-attack","autoEndTurn":false},"score":1512,"reason":"Damage enemies; give roster creatures priority over Minions"}
+orifable	talented	{"command":{"type":"play","cardId":"ally-0:orifable-createFood","autoEndTurn":false},"score":400,"reason":"Use Care Package for its visible benefit"}
+parhelion	ordinary	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-0","autoEndTurn":false},"score":1001,"reason":"Make progress against an enemy creature"}
+parhelion	ordinary	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-1","autoEndTurn":false},"score":1001,"reason":"Make progress against an enemy creature"}
+parhelion	ordinary	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-2","autoEndTurn":false},"score":1001,"reason":"Make progress against an enemy creature"}
+parhelion	injured	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-0","autoEndTurn":false},"score":1001,"reason":"Make progress against an enemy creature"}
+parhelion	injured	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-1","autoEndTurn":false},"score":1001,"reason":"Make progress against an enemy creature"}
+parhelion	injured	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-2","autoEndTurn":false},"score":1001,"reason":"Make progress against an enemy creature"}
+parhelion	defended	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-0","autoEndTurn":false},"score":501,"reason":"Make progress against an enemy creature"}
+parhelion	defended	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-1","autoEndTurn":false},"score":501,"reason":"Make progress against an enemy creature"}
+parhelion	defended	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-2","autoEndTurn":false},"score":501,"reason":"Make progress against an enemy creature"}
+parhelion	talented	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-0","autoEndTurn":false},"score":502,"reason":"Make progress against an enemy creature"}
+parhelion	talented	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-1","autoEndTurn":false},"score":502,"reason":"Make progress against an enemy creature"}
+parhelion	talented	{"command":{"type":"play","cardId":"ally-0:parhelion-whiteout-waltz","targetId":"enemy-2","autoEndTurn":false},"score":502,"reason":"Make progress against an enemy creature"}
+parhelion	talented	{"command":{"type":"play","cardId":"ally-0:parhelion-sundog-reservoir","autoEndTurn":false},"score":401,"reason":"Use Sundog Reservoir for its visible benefit"}
+parhelion	talented	{"command":{"type":"play","cardId":"ally-0:parhelion-polar-reprieve","autoEndTurn":false},"score":200,"reason":"Use Polar Reprieve for its visible benefit"}
+pollenmoth	ordinary	{"command":{"type":"play","cardId":"ally-0:pollenmoth-attack","autoEndTurn":false},"score":1003,"reason":"Use the average visible benefit across random targets"}
+pollenmoth	ordinary	{"command":{"type":"play","cardId":"ally-0:pollenmoth-teamGuard","autoEndTurn":false},"score":102,"reason":"Use Petal Shelter for its visible benefit"}
+pollenmoth	injured	{"command":{"type":"play","cardId":"ally-0:pollenmoth-heal","autoEndTurn":false},"score":3003,"reason":"Use Bloomwake for its visible benefit"}
+pollenmoth	injured	{"command":{"type":"play","cardId":"ally-0:pollenmoth-attack","autoEndTurn":false},"score":1003,"reason":"Use the average visible benefit across random targets"}
+pollenmoth	injured	{"command":{"type":"play","cardId":"ally-0:pollenmoth-teamGuard","autoEndTurn":false},"score":102,"reason":"Use Petal Shelter for its visible benefit"}
+pollenmoth	defended	{"command":{"type":"play","cardId":"ally-0:pollenmoth-attack","autoEndTurn":false},"score":503,"reason":"Use the average visible benefit across random targets"}
+pollenmoth	defended	{"command":{"type":"play","cardId":"ally-0:pollenmoth-teamGuard","autoEndTurn":false},"score":102,"reason":"Use Petal Shelter for its visible benefit"}
+pollenmoth	talented	{"command":{"type":"play","cardId":"ally-0:pollenmoth-heal","autoEndTurn":false},"score":3003,"reason":"Use Bloomwake for its visible benefit"}
+pollenmoth	talented	{"command":{"type":"play","cardId":"ally-0:pollenmoth-attack","autoEndTurn":false},"score":503,"reason":"Use the average visible benefit across random targets"}
+pollenmoth	talented	{"command":{"type":"play","cardId":"ally-0:pollenmoth-teamGuard","autoEndTurn":false},"score":102,"reason":"Use Petal Shelter for its visible benefit"}
+prismram	ordinary	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+prismram	ordinary	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+prismram	ordinary	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+prismram	ordinary	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+prismram	ordinary	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+prismram	ordinary	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+prismram	ordinary	{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}
+prismram	injured	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+prismram	injured	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+prismram	injured	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+prismram	injured	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+prismram	injured	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+prismram	injured	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+prismram	injured	{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}
+prismram	defended	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+prismram	defended	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+prismram	defended	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+prismram	defended	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+prismram	defended	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+prismram	defended	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+prismram	defended	{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}
+prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-0","autoEndTurn":false},"score":510,"reason":"Make progress against an enemy creature"}
+prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-1","autoEndTurn":false},"score":510,"reason":"Make progress against an enemy creature"}
+prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-attack","targetId":"enemy-2","autoEndTurn":false},"score":510,"reason":"Make progress against an enemy creature"}
+prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}
+pyrella	ordinary	{"command":{"type":"play","cardId":"ally-0:pyrella-festival-burst","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+pyrella	ordinary	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":403,"reason":"Use Spark Decoy for its visible benefit"}
+pyrella	injured	{"command":{"type":"play","cardId":"ally-0:pyrella-festival-burst","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+pyrella	injured	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":403,"reason":"Use Spark Decoy for its visible benefit"}
+pyrella	defended	{"command":{"type":"play","cardId":"ally-0:pyrella-festival-burst","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+pyrella	defended	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":403,"reason":"Use Spark Decoy for its visible benefit"}
+pyrella	talented	{"command":{"type":"play","cardId":"ally-0:pyrella-ember-harvest","autoEndTurn":false},"score":3001,"reason":"Use Ember Harvest for its visible benefit"}
+pyrella	talented	{"command":{"type":"play","cardId":"ally-0:pyrella-festival-burst","autoEndTurn":false},"score":1509,"reason":"Damage enemies; give roster creatures priority over Minions"}
+pyrella	talented	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":403,"reason":"Use Spark Decoy for its visible benefit"}
+reedstag	ordinary	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+reedstag	ordinary	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+reedstag	ordinary	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+reedstag	ordinary	{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":106,"reason":"Use Reed Shelter for its visible benefit"}
+reedstag	injured	{"command":{"type":"play","cardId":"ally-0:reedstag-heal","autoEndTurn":false},"score":3004,"reason":"Use Mending Spring for its visible benefit"}
+reedstag	injured	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+reedstag	injured	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+reedstag	injured	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+reedstag	injured	{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":106,"reason":"Use Reed Shelter for its visible benefit"}
+reedstag	defended	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+reedstag	defended	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+reedstag	defended	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+reedstag	defended	{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":106,"reason":"Use Reed Shelter for its visible benefit"}
+reedstag	talented	{"command":{"type":"play","cardId":"ally-0:reedstag-heal","autoEndTurn":false},"score":3004,"reason":"Use Mending Spring for its visible benefit"}
+reedstag	talented	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+reedstag	talented	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+reedstag	talented	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+reedstag	talented	{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":106,"reason":"Use Reed Shelter for its visible benefit"}
+reverie	ordinary	{"command":{"type":"play","cardId":"ally-0:reverie-dream-double","autoEndTurn":false},"score":403,"reason":"Use Dream Double for its visible benefit"}
+reverie	injured	{"command":{"type":"play","cardId":"ally-0:reverie-nightmare-harvest","autoEndTurn":false},"score":2001,"reason":"Use Nightmare Harvest for its visible benefit"}
+reverie	injured	{"command":{"type":"play","cardId":"ally-0:reverie-dream-double","autoEndTurn":false},"score":403,"reason":"Use Dream Double for its visible benefit"}
+reverie	defended	{"command":{"type":"play","cardId":"ally-0:reverie-dream-double","autoEndTurn":false},"score":403,"reason":"Use Dream Double for its visible benefit"}
+reverie	talented	{"command":{"type":"play","cardId":"ally-0:reverie-nightmare-harvest","autoEndTurn":false},"score":2001,"reason":"Use Nightmare Harvest for its visible benefit"}
+reverie	talented	{"command":{"type":"play","cardId":"ally-0:reverie-dream-double","autoEndTurn":false},"score":403,"reason":"Use Dream Double for its visible benefit"}
+reverie	talented	{"command":{"type":"play","cardId":"ally-0:reverie-waking-wonder","autoEndTurn":false},"score":202,"reason":"Use Waking Wonder for its visible benefit"}
+ringpalm	ordinary	{"command":{"type":"play","cardId":"ally-0:ringpalm-harmonic-set","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+ringpalm	ordinary	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+ringpalm	ordinary	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+ringpalm	ordinary	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+ringpalm	ordinary	{"command":{"type":"play","cardId":"ally-0:ringpalm-teamProtection","autoEndTurn":false},"score":104,"reason":"Use Seedling Circle for its visible benefit"}
+ringpalm	injured	{"command":{"type":"play","cardId":"ally-0:ringpalm-harmonic-set","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+ringpalm	injured	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+ringpalm	injured	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+ringpalm	injured	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+ringpalm	injured	{"command":{"type":"play","cardId":"ally-0:ringpalm-teamProtection","autoEndTurn":false},"score":104,"reason":"Use Seedling Circle for its visible benefit"}
+ringpalm	defended	{"command":{"type":"play","cardId":"ally-0:ringpalm-harmonic-set","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+ringpalm	defended	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+ringpalm	defended	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+ringpalm	defended	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+ringpalm	defended	{"command":{"type":"play","cardId":"ally-0:ringpalm-teamProtection","autoEndTurn":false},"score":104,"reason":"Use Seedling Circle for its visible benefit"}
+ringpalm	talented	{"command":{"type":"play","cardId":"ally-0:ringpalm-harmonic-set","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+ringpalm	talented	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+ringpalm	talented	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+ringpalm	talented	{"command":{"type":"play","cardId":"ally-0:ringpalm-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+ringpalm	talented	{"command":{"type":"play","cardId":"ally-0:ringpalm-teamProtection","autoEndTurn":false},"score":104,"reason":"Use Seedling Circle for its visible benefit"}
+rookhaven	ordinary	{"command":{"type":"play","cardId":"ally-0:rookhaven-borrowed-brilliance","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+rookhaven	ordinary	{"command":{"type":"play","cardId":"ally-0:rookhaven-margin-of-possibility","autoEndTurn":false},"score":202,"reason":"Use Margin of Possibility for its visible benefit"}
+rookhaven	ordinary	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":202,"reason":"Use Margin of Possibility for its visible benefit"}
+rookhaven	injured	{"command":{"type":"play","cardId":"ally-0:rookhaven-borrowed-brilliance","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+rookhaven	injured	{"command":{"type":"play","cardId":"ally-0:rookhaven-margin-of-possibility","autoEndTurn":false},"score":202,"reason":"Use Margin of Possibility for its visible benefit"}
+rookhaven	injured	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":202,"reason":"Use Margin of Possibility for its visible benefit"}
+rookhaven	defended	{"command":{"type":"play","cardId":"ally-0:rookhaven-unwritten-ending","autoEndTurn":false},"score":1703,"reason":"Remove visible defenses before spending Mana on blocked attacks"}
+rookhaven	defended	{"command":{"type":"play","cardId":"copy-1","autoEndTurn":false},"score":1703,"reason":"Remove visible defenses before spending Mana on blocked attacks"}
+rookhaven	defended	{"command":{"type":"play","cardId":"ally-0:rookhaven-borrowed-brilliance","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+rookhaven	defended	{"command":{"type":"play","cardId":"ally-0:rookhaven-margin-of-possibility","autoEndTurn":false},"score":202,"reason":"Use Margin of Possibility for its visible benefit"}
+rookhaven	defended	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":202,"reason":"Use Margin of Possibility for its visible benefit"}
+rookhaven	talented	{"command":{"type":"play","cardId":"ally-0:rookhaven-unwritten-ending","autoEndTurn":false},"score":1703,"reason":"Remove visible defenses before spending Mana on blocked attacks"}
+rookhaven	talented	{"command":{"type":"play","cardId":"copy-1","autoEndTurn":false},"score":1703,"reason":"Remove visible defenses before spending Mana on blocked attacks"}
+rookhaven	talented	{"command":{"type":"play","cardId":"ally-0:rookhaven-borrowed-brilliance","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+rookhaven	talented	{"command":{"type":"play","cardId":"ally-0:rookhaven-margin-of-possibility","autoEndTurn":false},"score":202,"reason":"Use Margin of Possibility for its visible benefit"}
+rookhaven	talented	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":202,"reason":"Use Margin of Possibility for its visible benefit"}
+shadebrim	ordinary	{"command":{"type":"play","cardId":"ally-0:shadebrim-attack","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+shadebrim	ordinary	{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":105,"reason":"Use Noonward for its visible benefit"}
+shadebrim	injured	{"command":{"type":"play","cardId":"ally-0:shadebrim-attack","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+shadebrim	injured	{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":105,"reason":"Use Noonward for its visible benefit"}
+shadebrim	defended	{"command":{"type":"play","cardId":"ally-0:shadebrim-attack","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+shadebrim	defended	{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":105,"reason":"Use Noonward for its visible benefit"}
+shadebrim	talented	{"command":{"type":"play","cardId":"ally-0:shadebrim-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+shadebrim	talented	{"command":{"type":"play","cardId":"ally-0:shadebrim-draw","autoEndTurn":false},"score":202,"reason":"Use Noon Bloom for its visible benefit"}
+shadebrim	talented	{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":105,"reason":"Use Noonward for its visible benefit"}
+skybex	ordinary	{"command":{"type":"play","cardId":"ally-0:skybex-sky-shepherd","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+skybex	injured	{"command":{"type":"play","cardId":"ally-0:skybex-sky-shepherd","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+skybex	defended	{"command":{"type":"play","cardId":"ally-0:skybex-sky-shepherd","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+skybex	talented	{"command":{"type":"play","cardId":"ally-0:skybex-sky-shepherd","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+skybex	talented	{"command":{"type":"play","cardId":"ally-0:skybex-draw","autoEndTurn":false},"score":202,"reason":"Use Far Horizon for its visible benefit"}
+sternshell	ordinary	{"command":{"type":"play","cardId":"ally-0:sternshell-spiral-return","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+sternshell	ordinary	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+sternshell	ordinary	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+sternshell	ordinary	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+sternshell	injured	{"command":{"type":"play","cardId":"ally-0:sternshell-spiral-return","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}
+sternshell	injured	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+sternshell	injured	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+sternshell	injured	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+sternshell	defended	{"command":{"type":"play","cardId":"ally-0:sternshell-spiral-return","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}
+sternshell	defended	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+sternshell	defended	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+sternshell	defended	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+sternshell	talented	{"command":{"type":"play","cardId":"ally-0:sternshell-spiral-return","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+sternshell	talented	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-0","autoEndTurn":false},"score":1002,"reason":"Make progress against an enemy creature"}
+sternshell	talented	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-1","autoEndTurn":false},"score":1002,"reason":"Make progress against an enemy creature"}
+sternshell	talented	{"command":{"type":"play","cardId":"ally-0:sternshell-attack","targetId":"enemy-2","autoEndTurn":false},"score":1002,"reason":"Make progress against an enemy creature"}
+sternshell	talented	{"command":{"type":"play","cardId":"ally-0:sternshell-swap","autoEndTurn":false},"score":200,"reason":"Use Siphon Vault for its visible benefit"}
+stillara	ordinary	null
+stillara	injured	{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":3001,"reason":"Use Water Remembers for its visible benefit"}
+stillara	defended	null
+stillara	talented	{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":3001,"reason":"Use Water Remembers for its visible benefit"}
+stillara	talented	{"command":{"type":"play","cardId":"ally-0:stillara-reed-reservoir","autoEndTurn":false},"score":401,"reason":"Use Reed Reservoir for its visible benefit"}
+stillara	talented	{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}
+tournelle	ordinary	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}
+tournelle	ordinary	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}
+tournelle	ordinary	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
+tournelle	injured	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}
+tournelle	injured	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}
+tournelle	injured	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}
+tournelle	defended	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}
+tournelle	defended	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}
+tournelle	defended	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
+tournelle	talented	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}
+tournelle	talented	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}
+tournelle	talented	{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}
+tournelle	talented	{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":200,"reason":"Use Safe Passage for its visible benefit"}
+wickwaltz	ordinary	{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+wickwaltz	ordinary	{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}
+wickwaltz	injured	{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+wickwaltz	injured	{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}
+wickwaltz	defended	{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+wickwaltz	defended	{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}
+wickwaltz	talented	{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":1509,"reason":"Damage enemies; give roster creatures priority over Minions"}
+wickwaltz	talented	{"command":{"type":"play","cardId":"ally-0:wickwaltz-draw","autoEndTurn":false},"score":202,"reason":"Use Thermal Rise for its visible benefit"}
+wickwaltz	talented	{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}
+wisterelle	ordinary	null
+wisterelle	injured	{"command":{"type":"play","cardId":"ally-0:wisterelle-lantern-fare","targetId":"ally-0","autoEndTurn":false},"score":3003,"reason":"Use Lantern Fare for its visible benefit"}
+wisterelle	defended	null
+wisterelle	talented	{"command":{"type":"play","cardId":"ally-0:wisterelle-lantern-fare","targetId":"ally-0","autoEndTurn":false},"score":3003,"reason":"Use Lantern Fare for its visible benefit"}
