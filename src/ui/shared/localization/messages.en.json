@@ -338,6 +338,9 @@
   "log.knockout": {
     "text": "{{name}} is knocked out."
   },
+  "log.loseArmor": {
+    "text": "{{name}} loses {{amount}} Armor"
+  },
   "log.loseFreezeBuildup": {
     "text": "{{name}} loses {{amount}} Freeze buildup"
   },
@@ -346,6 +349,9 @@
   },
   "log.nullifyFreezeDamage": {
     "text": "{{name}} nullifies Freeze damage"
+  },
+  "log.reachDeathsDoor": {
+    "text": "{{name}} reaches Death's Door: {{amount}} grace turns."
   },
   "log.reflectAttack": {
     "text": "{{actor}} reflects the attack back at {{target}}"

@@ -323,6 +323,12 @@
     "sourceHash": "9718021cd420b16c699b74e104bad8ecd247cd2504fbf4a1f78bf3b556d01ce4",
     "text": "折叠桥"
   },
+  "content.boon.accordioned-bridge.rule": {
+    "reviewed": true,
+    "source": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "d3669cb8a4037b1aec0d5408ee2ffa0db8f66bd45fb85bf505f780ffda8b80c4",
+    "text": "处于<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>状态时仍可打出换人牌"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -353,17 +359,35 @@
     "sourceHash": "b04f8fea8e47c5d27a3228f8fb6a108323f6d6482f5461b7ae68d3b8ff66dd5c",
     "text": "落灰吊坠"
   },
+  "content.boon.ashfall-pendant.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "sourceHash": "2c3a7d9112fbbcdaff2a0c4ba46264f7623d428ec33260d3c0f113de03e2c4db",
+    "text": "衰减时失去的<keyword0>灼烧</keyword0>还会移除等量的敌方<keyword1>格挡</keyword1>"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
     "sourceHash": "78ce397cc13df83037082a0b63654ee1ebc6b1f0e66664029cc7d2bb6500e895",
     "text": "玄武岩玻璃书签"
   },
+  "content.boon.basalt-glass-bookmark.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
+    "sourceHash": "f05973df46b38d5a1af91dde5b45891d9df139790400864d818b98410bb2c3ce",
+    "text": "<keyword0>驱散</keyword0>无法移除盟友最后一个有益效果"
+  },
   "content.boon.blooming-still.name": {
     "reviewed": true,
     "source": "Blooming Still",
     "sourceHash": "7b372d0b658788d1149ff87466890ee304ecb700160cdc8ea0e006f5c0c8cfae",
     "text": "花开蒸馏器"
+  },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "0be82532a604f719ed8e55c302f7dfee9b94edee09140f7f93b706f7f124c125",
+    "text": "<keyword0>净化</keyword0><keyword1>中毒</keyword1>时恢复{{value0}}点<keyword2>法力</keyword2>"
   },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
@@ -395,6 +419,12 @@
     "sourceHash": "492f12f8aa76b4a76af38235126a4e7349ad9ae684e6cfe0c4bff83e7277f316",
     "text": "黄铜香炉"
   },
+  "content.boon.brass-censer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to also <keyword1>Burn</keyword1> or <keyword2>Leech</keyword2>",
+    "sourceHash": "0d76ce796e5302006734358a707879b6b83b2f3066c8acba261d01123bef6da0",
+    "text": "<keyword0>光</keyword0>命中有{{value0}}%的概率同时造成<keyword1>灼烧</keyword1>伤害或触发<keyword2>汲取</keyword2>"
+  },
   "content.boon.briar-racquet.name": {
     "reviewed": true,
     "source": "Briar Racquet",
@@ -413,11 +443,23 @@
     "sourceHash": "0241fad79df1d9a95b0f17c69dc5f7d7695fee8f8480b6bc6972189a9f4b53e7",
     "text": "溪流跳石盘"
   },
+  "content.boon.brookskip-disc.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage against enemy <keyword1>Block</keyword1> chains to a second enemy",
+    "sourceHash": "084fb3c30ed3c865b9ee90eb32cb2cbf9330b4fd84a7bc73f4afb39ca17fe0ce",
+    "text": "对敌人<keyword1>格挡</keyword1>造成的<keyword0>水</keyword0>伤害会连锁至第二名敌人"
+  },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
     "source": "Calendula Soap",
     "sourceHash": "c10b6c373d551c96fd5348ab2be587a629eb4066afc4742f2222af533053e50f",
     "text": "金盏花皂"
+  },
+  "content.boon.calendula-soap.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> an ally’s last harmful effect grants them <keyword1>Nullify</keyword1>",
+    "sourceHash": "9926f78a0760ae75d021b3c531537d19ecd7067e1c54565e3e34c0d3088dcd25",
+    "text": "<keyword0>净化</keyword0>盟友最后一个有害效果时，为其提供<keyword1>无效化</keyword1>"
   },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
@@ -436,6 +478,12 @@
     "source": "Cinder Fan",
     "sourceHash": "78f3a722bc65210db341dd3352d8d334635d535d4a13f58ea7db820926352565",
     "text": "余烬扇"
+  },
+  "content.boon.cinder-fan.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "sourceHash": "dc58f83d8c877b2de3f5043046cee99b3117d8133311fb2576bf456d1f3958f4",
+    "text": "敌人衰减失去的<keyword0>灼烧</keyword0>会造成等量<keyword1>灼烧</keyword1>伤害，分配给其他敌人"
   },
   "content.boon.cloud-cup-and-ball.name": {
     "reviewed": true,
@@ -503,17 +551,35 @@
     "sourceHash": "d25f80bc61148e49f5078f9e458b0b0bbe42cf6309993bca24550dadca3831b1",
     "text": "加冕钟罩"
   },
+  "content.boon.coronation-cloche.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "901da5036481b45eadfc3b5c263e23f3a73ccee572e8810ad663b1790c54e064",
+    "text": "<keyword0>无效化</keyword0>保护盟友效果免受<keyword1>驱散</keyword1>"
+  },
   "content.boon.crater-punch.name": {
     "reviewed": true,
     "source": "Crater Punch",
     "sourceHash": "ed584524e49bd1ddb7bbdfc297e652829f4e0ae689e770cbff30351f3d25a67a",
     "text": "陨坑冲头"
   },
+  "content.boon.crater-punch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "sourceHash": "0669b7cc08ea0df0ffc5d6333bb62a8230edfcfd160486d81e6b33552b3b6ad0",
+    "text": "<keyword0>暴击</keyword0>还会将被<keyword1>格挡</keyword1>伤害的一半造成给<keyword2>生命</keyword2>"
+  },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
     "source": "Crescent Sextant",
     "sourceHash": "a948a230831805bfd8a2fd0484feb0684c88856d828f9e2f1fd8463d1fdd9e53",
     "text": "新月六分仪"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "sourceHash": "5051ac5d98369260e3d056c65586a16624d76f38da0666b11c419edad0ea2ef6",
+    "text": "敌人的<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>阈值使用当前<keyword2>生命</keyword2>"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -533,17 +599,35 @@
     "sourceHash": "eef7c0db75b1e245b85a6d1e4620abff0b008eaa59831fa7c58ea128167e792a",
     "text": "虔心扣饰"
   },
+  "content.boon.devotion-clasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "sourceHash": "7b9af1ed732cc7fa8ba893a58b69b7e4c355256f8506dd156af9169a235a942a",
+    "text": "<keyword0>抵消</keyword0>还会保护另一名盟友免受同一次攻击"
+  },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
     "source": "Dream Tangram",
     "sourceHash": "674052d42aa643a9310d82a1d0acadf3ae44096346b25da5e2678f8fd52a8886",
     "text": "梦境七巧板"
   },
+  "content.boon.dream-tangram.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks move on when their target falls",
+    "sourceHash": "cbce199aa29a273b7d95627f5295617fcc0e3851ef59fe57a07b315f8bb24602",
+    "text": "连续攻击的目标倒下时会转向另一目标"
+  },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
     "source": "Dream Yo-Yo",
     "sourceHash": "6ff4a1f39a265ca453c513249eed736e75ce3259da01197f2cf3d88e731cd8ab",
     "text": "梦境悠悠球"
+  },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "017a53fba17910c5d68d22d4fe17ca7206ec1339aa3e13c355d858d16ae66524",
+    "text": "被敌人<keyword0>闪避</keyword0>的牌返回手牌"
   },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
@@ -563,11 +647,23 @@
     "sourceHash": "cc193299b7588a6e38ffcd17cde1eb10979d65867bfff1aacf283002c5014a82",
     "text": "回声透镜"
   },
+  "content.boon.echo-lens.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "sourceHash": "2055e71a815edddb09ab520b3db491e034e0824eba7a62a1e76a038b107a8c9a",
+    "text": "<keyword0>抵消</keyword0>有{{value0}}%的概率同时触发<keyword1>反射</keyword1>"
+  },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
     "source": "Eclipse Protractor",
     "sourceHash": "bbbe1ec8835bf4ebcc6bd740757d86337e0069cab35eca637155e50ea856c19c",
     "text": "日蚀量角器"
+  },
+  "content.boon.eclipse-protractor.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "sourceHash": "13ecc30b93651969e092c2011c3c013f09b6277d2f9fd8fdcccae600cd997001",
+    "text": "<keyword0>暴击</keyword0>增加等同于额外伤害的<keyword1>冻结</keyword1>累积"
   },
   "content.boon.eclipse-rivet.name": {
     "reviewed": true,
@@ -611,6 +707,12 @@
     "sourceHash": "2767464a985ded0ffc7d355aadd28c87035a849e22814f289d6bba6dafe2c335",
     "text": "流星铁砧"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "c4af0ebb7a8ecc0e90b67a945a967afb12e0fd5d82bf49114fd309261f12b6a9",
+    "text": "敌方攻击造成的<keyword0>格挡</keyword0>损失有一半转化为攻击者的<keyword1>眩晕</keyword1>累积"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -653,6 +755,12 @@
     "sourceHash": "bbc1e03f531ecb1fa26c757a48602cd522d90c54eacdaec384cdb0885e78bc7c",
     "text": "熔炉棱镜"
   },
+  "content.boon.furnace-prism.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits <keyword1>Blind</keyword1> <keyword2>Burning</keyword2> enemies",
+    "sourceHash": "f89dcff2df2ac473ac03e4c64e0a23109a062dbe739c039f55d63735f10b1649",
+    "text": "<keyword0>光</keyword0>命中会<keyword1>致盲</keyword1>处于<keyword2>灼烧</keyword2>状态的敌人"
+  },
   "content.boon.gemmed-scabbard.name": {
     "reviewed": true,
     "source": "Gemmed Scabbard",
@@ -682,6 +790,12 @@
     "source": "Grafting Needle",
     "sourceHash": "e95c5498abfa50952a77ee9b860fa6396c46e43aaa9a42088f379147555d002c",
     "text": "嫁接针"
+  },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "83c1c716b5a7cfed36c306587eef460885570582b92176916c7261164d9bb6f0",
+    "text": "<keyword0>治疗</keyword0>盟友时，将其<keyword1>护甲</keyword1>提升至你的一半"
   },
   "content.boon.grain-flail.name": {
     "reviewed": true,
@@ -749,6 +863,12 @@
     "sourceHash": "0367769ad09b0875633d682dbd4c5021f211c809f224dc63117e81065048a37b",
     "text": "蜂蜜压榨机"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "57fb876a168e651e01c0d16e0bb3a9fb2559b5d34ce9d882315d01d3b9ec4e97",
+    "text": "<keyword0>驱散</keyword0>敌方<keyword1>格挡</keyword1>时，为受伤最重的盟友恢复相当于一半移除量的<keyword2>生命</keyword2>"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -803,6 +923,12 @@
     "sourceHash": "eef834c522cd436694c531a4f5cf7c8e4bff286ae2d2fe52d7dec21285caeae9",
     "text": "结纹梳"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "3b4ae1ae4eb1eb556470ea263727b1f9fa83ef1193c345d2c83bd4b4f202c18c",
+    "text": "每回合<keyword0>净化</keyword0>一个随机有害效果"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -820,6 +946,12 @@
     "source": "Last Threshold",
     "sourceHash": "00bd8fd71c19bbdb85baa899928222c0d56bbcce3e861693dbf6131c2c03ec8a",
     "text": "最后的门槛"
+  },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "2e66a8a5f356a7bca594172a426efe30f799054cffa8ca0ab1c86e57af8cca0c",
+    "text": "超额<keyword0>治疗</keyword0>会与濒死的盟友分享"
   },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
@@ -839,11 +971,23 @@
     "sourceHash": "670e4692a3b4457d85ea154ad69edcb9fa264d0165f66c0c7f73dbffc3ee394e",
     "text": "爱人结"
   },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "ce23921ca7d4ebd4d12921df8dce6308ae4a0ba7f4744eecdd8e8eb31ada0cac",
+    "text": "<keyword0>治疗</keyword0>盟友时也会<keyword1>治疗</keyword1>自己"
+  },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
     "source": "Lucky Clover",
     "sourceHash": "685118dfe6eb247126e2ad465c902a8625a581aa4abd0923f9e359152dea7026",
     "text": "幸运三叶草"
+  },
+  "content.boon.lucky-clover.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "b3aca947ae7687b0a45ca5f0e9413e8b41c512e1c392185cc7ea7a486488e420",
+    "text": "<keyword0>自然</keyword0>命中有{{value0}}%的概率获得等同于敌人损失<keyword1>生命</keyword1>的金币"
   },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
@@ -863,11 +1007,23 @@
     "sourceHash": "159310e96942da9a95104effbaf0a4e12b8094850aad67aa02d0432e26d0950d",
     "text": "水银节拍器"
   },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "58092b87cc897d775e664a03412dc89934a4b67527e77ec1e0b7fa1f534b1c6b",
+    "text": "连续打出不同盟友的牌时，为所有敌人增加{{value0}}点<keyword0>眩晕</keyword0>累积"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "4aae5d837f0925ccef875cddf1ebcc301a9cc6f7a5615cc14fa0facfcd61ab36",
     "text": "陨石"
+  },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "36c574deff86f81deb808b5371252acc803576f0d3b9450dc6c0d6d173e7e45e",
+    "text": "每场战斗的首次<keyword0>灼烧</keyword0>命中效果翻倍"
   },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
@@ -875,11 +1031,23 @@
     "sourceHash": "bbe0a01235b5fc1ea726cba6d8bba5ff85d84d30bff7bc4fbfcd696a5cb073d2",
     "text": "矿石书挡"
   },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "db6516e54e77a4ac76f98e6d44e2d29e8bdac550d6c889aeba1984d478cb1f30",
+    "text": "抽取抽牌堆中最后一张牌时恢复{{value0}}点<keyword0>法力</keyword0>"
+  },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
     "source": "Miracle Megaphone",
     "sourceHash": "7fc328b99ed19e4857032e191544613ed026b42cafaa60817a48b0d679ea5bd6",
     "text": "奇迹扩音器"
+  },
+  "content.boon.miracle-megaphone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> affects all allies",
+    "sourceHash": "68dcd9819d30356f52c55b7efa3ec69a6156976738e67307c5b2aa497b2a3e36",
+    "text": "<keyword0>净化</keyword0>影响所有盟友"
   },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
@@ -947,11 +1115,23 @@
     "sourceHash": "ebd8ae5de1fd9fe6c609781e1ae5ae6f4db0fc7cdcf43645e1f3465e0409bbbf",
     "text": "黑曜石水壶"
   },
+  "content.boon.obsidian-pitcher.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Leech</keyword0> applies half as much <keyword1>Burn</keyword1> to the enemy",
+    "sourceHash": "db57782145484032d96194a0765a10d4e52df047de41a5bab2ac5af9ce3c9369",
+    "text": "超额<keyword0>汲取</keyword0>会对敌人施加相当于其一半的<keyword1>灼烧</keyword1>"
+  },
   "content.boon.orbit-armillary.name": {
     "reviewed": true,
     "source": "Orbit Armillary",
     "sourceHash": "46f12609ab45130a47a642186948ed8b3deb466705290c81db192735272e72de",
     "text": "轨道浑天仪"
+  },
+  "content.boon.orbit-armillary.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansed</keyword0> effects return to their source",
+    "sourceHash": "ebfb0e7d883147300537cfa6f5f208f189e2a8072107eab761ed4e029efc5808",
+    "text": "被<keyword0>净化</keyword0>的效果返回其来源"
   },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
@@ -995,11 +1175,23 @@
     "sourceHash": "904ab4921c150fa7675d38bd3183e9a2e86a892fbc9be51f4b6f48cc2468d183",
     "text": "花纹卷轴"
   },
+  "content.boon.pattern-reel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect removes it from every enemy",
+    "sourceHash": "394d21a1975b721c6f2a132465178ffe67da133f0cc1b3be749e4aee8a420e0f",
+    "text": "<keyword0>驱散</keyword0>一个效果时，从所有敌人身上移除该效果"
+  },
   "content.boon.peace-knot.name": {
     "reviewed": true,
     "source": "Peace Knot",
     "sourceHash": "5f97ecb3fb6b7ec6dcc450dc013d925fd20404132d62512a700af7642754fb4a",
     "text": "和平结"
+  },
+  "content.boon.peace-knot.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Nullify</keyword0> prevents a harmful effect, other allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "2a54566a76fb430bd90b617ed5792ea340c43dc715f2f9a9beaa75695c54887b",
+    "text": "<keyword0>无效化</keyword0>阻止有害效果时，其他盟友获得{{value0}}点<keyword1>格挡</keyword1>"
   },
   "content.boon.pearl-sieve.name": {
     "reviewed": true,
@@ -1007,11 +1199,23 @@
     "sourceHash": "7da45e13a1a440296bb2a8b4bfefb36c9c15bcc827111ffb8786f38e04049891",
     "text": "珍珠筛"
   },
+  "content.boon.pearl-sieve.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> removes an extra effect from enemies with <keyword1>Block</keyword1>",
+    "sourceHash": "c3d58c58574cb10dc6530165c08622fc7d7a3278f0ce1ac2fafd0c70a074003e",
+    "text": "<keyword0>驱散</keyword0>会额外移除拥有<keyword1>格挡</keyword1>的敌人身上一个效果"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "38ad6125abf904d87538aedf8e368f0c0b18e3243a580525b3efbd764ca33296",
     "text": "瘟疫医生面具"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "c41500cce4de2266dbcd4267b4f112b272391dd37452b4bffde317716db4c400",
+    "text": "回合开始伤害之前，每名盟友最多<keyword0>净化</keyword0>{{value0}}点<keyword1>中毒</keyword1>，并对第一名存活敌人造成相当于移除量一半的<keyword2>中毒</keyword2>伤害"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1031,11 +1235,23 @@
     "sourceHash": "2357bb3c2450d3cd49b7fa4c300437814bb4555ef257474b1cb38cd23c2ac11c",
     "text": "罂粟籽研磨器"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "087d4f2f0dfb41dfcd3df18e215ed03009ff4e1ba97c254119b97c4aa3e6258b",
+    "text": "<keyword0>中毒</keyword0>伤害会增加相当于伤害一半的<keyword1>眩晕</keyword1>累积"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "16e75e0aba4772f4b5c1f6617c864e36cd478742b0dc39e3f63164b7043110ac",
     "text": "祈愿帆船"
+  },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "d4aaa0d57deb605cb9a48272376188be820844beacfe0757581ecccd5e787378",
+    "text": "换出时<keyword0>净化</keyword0><keyword1>眩晕</keyword1>和<keyword2>冻结</keyword2>"
   },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
@@ -1043,17 +1259,35 @@
     "sourceHash": "ce8e3bead360ce0fd3c027e9191f235f98c5bc45b0802db56ee58383d98b0bd8",
     "text": "棱镜凿"
   },
+  "content.boon.prism-chisel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Armor</keyword1> deals equal <keyword2>Light</keyword2> damage to that enemy",
+    "sourceHash": "ef12f177b927a45e4538843957f3915276d11f33733a881c0a01c265dd86f244",
+    "text": "<keyword0>驱散</keyword0>敌人的<keyword1>护甲</keyword1>时，对该敌人造成等量<keyword2>光</keyword2>伤害"
+  },
   "content.boon.pruning-crescent.name": {
     "reviewed": true,
     "source": "Pruning Crescent",
     "sourceHash": "bbfd2ab19ea13009c6707f7b521a2395597bdeff7529c2685f779210a942ab90",
     "text": "修枝弯刃"
   },
+  "content.boon.pruning-crescent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
+    "sourceHash": "9c48992000b0eeb49b0bba266206341cc9672eea0bea8705da90699882f907fe",
+    "text": "<keyword0>驱散</keyword0>敌人的<keyword1>荆棘</keyword1>时将其窃取给自己"
+  },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
     "source": "Pumpkin Tureen",
     "sourceHash": "0e99b646796c46972318df954ed90ed56d58ad82cd834806f6c2cd6c2e82374b",
     "text": "南瓜汤盅"
+  },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "3bd06a50b495d4ac501d6ba1172dbdf45d3d5fe12554d89906c1b9fa05f4ed12",
+    "text": "<keyword0>食物</keyword0>为所有盟友提供<keyword1>生命</keyword1>和<keyword2>格挡</keyword2>"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,
@@ -1072,6 +1306,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "176184f8f633cbd144361a33a85ed3330c611a6705051d6d6df582dbbdbb9739",
     "text": "接雨碗"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "4216b3118bcd3f8e3a8be572c8dfcc70b75c271937597a14c1007b0b0e1fb10d",
+    "text": "如果牌组中有<keyword1>水</keyword1>牌，获得{{value0}}个<keyword0>法力水晶</keyword0>"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1103,6 +1343,12 @@
     "sourceHash": "9411179434a96073142d1fd3dde013c6acf57eee13fa2ab1a3f0c5aaccf973f1",
     "text": "珊瑚礁香砖"
   },
+  "content.boon.reef-incense-tile.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "sourceHash": "2a8434c4f322fad42d43ad9cf2d8441ce1f271463fb2cd365c4317426fd82dd6",
+    "text": "<keyword0>水</keyword0>命中会将<keyword1>致盲</keyword1>扩散给另一名敌人"
+  },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
     "source": "Resonance Kalimba",
@@ -1132,6 +1378,12 @@
     "source": "Rook of Mercy",
     "sourceHash": "7ceb70c75e2ccc8a2ca7b130eba37b6a8f554e93a5dd9fa4023803e85b7b588c",
     "text": "仁慈之车"
+  },
+  "content.boon.rook-of-mercy.rule": {
+    "reviewed": true,
+    "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "c7dfb27ec67c5631123c0da249cddda7c47a533890eb68f0d34858c7abc5a2ee",
+    "text": "换入的盟友获得{{value0}}点<keyword0>护甲</keyword0>"
   },
   "content.boon.rootvault-pole.name": {
     "reviewed": true,
@@ -1175,6 +1427,12 @@
     "sourceHash": "44c26cffcc8e3a9f699d827133b408bc65f9c11c685921310a584586372a000f",
     "text": "沉眠者之瓮"
   },
+  "content.boon.sleepers-urn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "sourceHash": "bb4c02fbb28714f6b396ce47fcfb8833e066879636790b8127de521b1e25e390",
+    "text": "敌人免疫期间仍可累积<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>"
+  },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
     "source": "Smuggler's Map",
@@ -1192,6 +1450,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "701a10ab841891b498163a84f8ea0d831da85b0b83dbb1f8a0e102949326d9b2",
     "text": "君王吐司架"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "099b79a4409c7305e4d432aec062609baec6d0f7ec6dde78b7390ddefbf127c9",
+    "text": "打出<keyword0>食物</keyword0>时，所有盟友获得{{value0}}点<keyword1>护甲</keyword1>"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,
@@ -1211,17 +1475,35 @@
     "sourceHash": "71e9b63927789147413e215d4f17a1f0fafbba7130ae13c5d329d030870e3dd4",
     "text": "星尘磨刀石"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "5bcf5d59056b7be03e93eacc6106468c588828b92e7fc67280d8eeaa20166c20",
+    "text": "<keyword0>物理</keyword0>命中会对拥有<keyword2>护甲</keyword2>的敌人施加{{value0}}点<keyword1>流血</keyword1>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
     "sourceHash": "23dc1303d16f4d7dfaa1d8535744127df5f273834162ddfedb91520e6a988d41",
     "text": "故事谜题方块"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "b7f38ca433e096485aa92a81e8061e8c00d67af4c6a1c2f76aa38d5202abc272",
+    "text": "施加三种不同的有害效果时，<keyword0>驱散</keyword0>最后受影响敌人的一个有益效果"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",
     "sourceHash": "a1e6e9a3d4a0397c10f88680e443e4948ce7f3cb2bceff322d729d157f9ffb52",
     "text": "破甲护符"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "3dc04d502c87f2aed1228d0df2795996f37a583e5942ee0c904199c47d6d8d0c",
+    "text": "你的<keyword0>物理</keyword0>和<keyword1>眩晕</keyword1>命中在造成伤害前移除敌人{{value0}}点<keyword2>护甲</keyword2>"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1253,6 +1535,12 @@
     "sourceHash": "bffca800e2ddbf677384be11f3bcaaa53cb9bfaecf0a674655be2d1d3b367ead",
     "text": "蓟花筛"
   },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "994b93202f15d81ee467e50f216f191672b896499f3c59845b9d3e137288dc8e",
+    "text": "从盟友身上<keyword2>净化</keyword2>的<keyword0>中毒</keyword0>和<keyword1>流血</keyword1>有一半转化为<keyword3>荆棘</keyword3>"
+  },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
     "source": "Thornheart Ring",
@@ -1270,6 +1558,12 @@
     "source": "Thunder Conch",
     "sourceHash": "b81321c7a1ec53e1e90743255ddf28169712efe1e5e87aaf7371f56abc28f54a",
     "text": "雷鸣海螺"
+  },
+  "content.boon.thunder-conch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "sourceHash": "c8be771cb4f745160dc20ca68fa623273376a68d586ec2e17baee03871c96207",
+    "text": "使一名敌人<keyword0>眩晕</keyword0>时，<keyword1>致盲</keyword1>其他敌人"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1289,6 +1583,12 @@
     "sourceHash": "04f6585b3aa88c34eec786a2869c65a687d0cf4fcacefa0ce9917312689463d3",
     "text": "潮汐脚环"
   },
+  "content.boon.tide-anklet.rule": {
+    "reviewed": true,
+    "source": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "sourceHash": "9bca9ce574af72b6561fbd93b7c833fa214cf37bfa84d5e8cebef97f99a4b7e1",
+    "text": "换人的两名盟友都保留较高的<keyword0>格挡</keyword0>值"
+  },
   "content.boon.tidecrest-hairpin.name": {
     "reviewed": true,
     "source": "Tidecrest Hairpin",
@@ -1306,6 +1606,12 @@
     "source": "Tuning Fork Charm",
     "sourceHash": "c944d275c9c67992ce6f6f9c02a217844215befcca43e6adbcd19ae9a393f4b4",
     "text": "音叉护符"
+  },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "b5b70ee0aa0ad3d8474fabec8d4d5d401dd8a8d9670ca47531506b33f9c382a7",
+    "text": "<keyword0>物理</keyword0>命中无视有<keyword2>眩晕</keyword2>累积的敌人的<keyword1>护甲</keyword1>"
   },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
@@ -1325,11 +1631,23 @@
     "sourceHash": "0ebd8e78484999d2d1d0e17b63860d4bc45d6a052a4fe88b5fef985996e9a260",
     "text": "天鹅绒打蛋器"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "457fd43dc8ed31da44b80150996d1a1fb3760319381b8aeaba11ec3e10e0388a",
+    "text": "<keyword0>食物</keyword0>为其目标提供{{value0}}%的<keyword1>闪避</keyword1>，持续至目标的下个回合"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
     "sourceHash": "fc2a866b7a6cfa26312d16f96b93e2549abec29e103518cfb8dd91a6568f6b86",
     "text": "守夜灯"
+  },
+  "content.boon.vigil-lantern.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "55164b40f577f7d40c379e2c8765aff81762d96fa3e73c34a3c3136db07be67e",
+    "text": "濒死的盟友可以在<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>状态下行动"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,
@@ -1337,11 +1655,23 @@
     "sourceHash": "863361a17e4b4fe270fb3d695a46db7980ac8234bd2b041a85dd205486afb44b",
     "text": "蜂蜡巢础模具"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "de4dc706b8cb1e5cbb7016440b4d1bd275799ea07fdc0a7704f1f8fac0c0ef1e",
+    "text": "拥有<keyword0>护甲</keyword0>的盟友在<keyword1>格挡</keyword1>衰减时保留{{value0}}%"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
     "sourceHash": "ff3ed8d9600d313c5553597c3043042f5c38a66c5b20f2d6279beb4895e73665",
     "text": "扬谷筛"
+  },
+  "content.boon.winnowing-sieve.rule": {
+    "reviewed": true,
+    "source": "Unused <keyword0>Purge</keyword0> spreads to other enemies",
+    "sourceHash": "c8bb42e798c94eb96070834ede1c182b49b9097d5a3c1fae125f35e277b091f3",
+    "text": "未使用的<keyword0>驱散</keyword0>会扩散到其他敌人"
   },
   "content.boon.wishing-building-block.name": {
     "reviewed": true,
@@ -1349,11 +1679,23 @@
     "sourceHash": "9ce02fb6ca694148bdc6a94cfbdf2d13aa3e4de6d27e01d357dbd39c85bef4f7",
     "text": "许愿积木"
   },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "c36ca3e9fc340e5e6c16f2f6fb853bab30368fb5a036295cf0ff1351f49bfcb6",
+    "text": "获得<keyword0>护甲</keyword0>时，为其他拥有<keyword2>护甲</keyword2>的盟友提供{{value0}}点<keyword1>格挡</keyword1>"
+  },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,
     "source": "Wonder Ball Maze",
     "sourceHash": "82e4c57a5c68cac93449e6c6f08ee14d02868726be4db1139e1981a9caa9857e",
     "text": "奇妙滚球迷宫"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "62721a4e39b52379f976f00c8f2637e2473cc1d8e857f47d33004419adbf85ca",
+    "text": "超出的<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>累积会扩散到其他敌人"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,
@@ -1372,6 +1714,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "ac83e96624b6724419105335b3ab8ccc2dba227f33acc66aa1d00bbf95423b91",
     "text": "蓍草药膏盒"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "a0b6043028f83c6caffd4bb10e3636f12b7033abf4ea02d8da99cdcb5ce52cde",
+    "text": "<keyword0>治疗</keyword0>盟友时也会<keyword1>净化</keyword1>其<keyword2>流血</keyword2>"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,
@@ -1445,6 +1793,12 @@
     "sourceHash": "2388cbfb329af26fe831bf9c4ed2e432761643a6b40d2240837135e202185bf1",
     "text": "春日流转"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "5edb4c42d8345a546cae43bc6d477e931e3cc9e703f06f8d3cba139b1699f97d",
+    "text": "造成{{value0}}点<keyword0>水</keyword0>伤害; <keyword1>净化</keyword1>行动生物：移除{{value1}}个效果"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1462,6 +1816,12 @@
     "source": "Last Light Charge",
     "sourceHash": "9a476a46e20d744ed99113ddb10c2fc499731dfcb849e0de4f0d349432b8ff4d",
     "text": "余光冲锋"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "570ebf0d3085c3f427360bf1ad50343f8183669723cd02642ba09eaad83c571b",
+    "text": "造成{{value0}}点<keyword0>光</keyword0>伤害 / 若这是手中最后一张卡牌，则必定<keyword1>暴击</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1733,6 +2093,12 @@
     "sourceHash": "11875e3db4b861bae29bd7555d97bc0fdd3f0536aa13683de2e53ee18b31d081",
     "text": "余烬吐息"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "7cf684b5ece40d403236efebda8c7f73e42872c3f2edd47c8b995ad5362ce541",
+    "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害; 移除所有敌人{{value1}}%的<keyword1>护甲</keyword1>，向上取整"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1972,6 +2338,12 @@
     "source": "Wish Exchange",
     "sourceHash": "1ccbde05de4f1bd0209f31d0bac2ae7788445d2fcf1bc831823619fdff0f2984",
     "text": "心愿交换"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "68de5ba6aed053d0d5ecc632207ba492bcc07b8975d025b5d5bdb36a63045948",
+    "text": "均分盟友的<keyword0>格挡</keyword0>; 盟友获得{{value0}}点<keyword1>格挡</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2429,6 +2801,12 @@
     "sourceHash": "5ecf266f7d1c3d94b19a940896fafeb529f2583e936cc2031ece36b76c52afaa",
     "text": "火花诱饵"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "0b6d0d4353bbe3cb4bb9d034edd63a9ba3ac1e08310dd706969ffe3d59cd8a51",
+    "text": "对所有敌人施加{{value0}}点<keyword0>灼烧</keyword0> / 获得<keyword1>抵消</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2470,6 +2848,12 @@
     "source": "Dream Double",
     "sourceHash": "360a5b224c2ecf511642bec7f1d0ca504e1371040a4138cc271f1798f7482963",
     "text": "梦之分身"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "d8f5cd712f00e825850a1d0a43faaf13d9650713317b25b3c77958d4538aff99",
+    "text": "获得{{value0}}点<keyword0>荆棘</keyword0> / <keyword1>抵消</keyword1>下一次受到的攻击"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,
@@ -2519,11 +2903,29 @@
     "sourceHash": "d5c41a5d9b213d4b3687e5a27ae0606fd68a28cede459a9d0cf0da2ed238c158",
     "text": "谐和组合"
   },
+  "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
+    "sourceHash": "f5856c4ff92e4651d0de2c9d2b335d4948fd488569bd11702b56c70bf769f7f9",
+    "text": "对所有敌人造成{{value0}}点<keyword0>眩晕</keyword0>伤害; 获得{{value1}}点<keyword1>护甲</keyword1>; {{value2}}%概率重复"
+  },
   "content.card.ringpalm-teamProtection.name": {
     "reviewed": true,
     "source": "Seedling Circle",
     "sourceHash": "e7e83d13709293068abadcc0980fffb07ab0a3b06b4a220b014a0100e5920ab9",
     "text": "幼苗之环"
+  },
+  "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "d891627c32f609e55b2d121c0b8de207c54e1268d308765dd32869a00d746e92",
+    "text": "给予所有盟友{{value0}}点<keyword0>格挡</keyword0>或{{value1}}点<keyword1>荆棘</keyword1>"
+  },
+  "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
+    "sourceHash": "271927c65c318dd2224ebff457b46fd6eef7ae87c1b0e305fd93a396338e5cee",
+    "text": "给予所有盟友{{value0}}点<keyword0>格挡</keyword0>或<keyword1>荆棘</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
     "reviewed": true,
@@ -2573,6 +2975,12 @@
     "sourceHash": "cf5b979c69dcc42f4b127e8257538e8f202bc3dbafbab0d57c7876147e2e1307",
     "text": "清凉锋"
   },
+  "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
+    "sourceHash": "51aef593d5ccba9a938c079bc4eb59d0a5ac99ee0359535cf839e144aac48e56",
+    "text": "对所有敌人造成{{value0}}点<keyword0>冻结</keyword0>伤害; <keyword1>净化</keyword1>所有盟友"
+  },
   "content.card.shadebrim-draw.name": {
     "reviewed": true,
     "source": "Noon Bloom",
@@ -2620,6 +3028,12 @@
     "source": "Cloudstep",
     "sourceHash": "d911a8145e9f272af005576e6ba67d65214448ea89cd746107c623ca6deb00bc",
     "text": "云步"
+  },
+  "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
+    "sourceHash": "e289a97d8c8148843fb7675e1393b7bc55d31e54956978d76ef3091a010ba2da",
+    "text": "与一名随机盟友交换 / 换入的盟友获得{{value0}}%<keyword0>闪避</keyword0>直至下一回合"
   },
   "content.card.skybex-draw.name": {
     "reviewed": true,
@@ -2753,6 +3167,12 @@
     "sourceHash": "cd514c4b1646bddcdd0a52b61db3751177fad46d29d1ba005587fb98d80c61c5",
     "text": "英勇挑战"
   },
+  "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
+    "sourceHash": "10acbf0c63c5bbbf4d4b91e815f3ef9d0e49b1b3edcf9996dec997e4a7642e83",
+    "text": "造成{{value0}}点<keyword0>光</keyword0>伤害 / 对<keyword1>生命</keyword1>高于你的敌人伤害翻倍"
+  },
   "content.card.tournelle-swapLowest.name": {
     "reviewed": true,
     "source": "Safe Passage",
@@ -2836,6 +3256,12 @@
     "source": "Saffron Screen",
     "sourceHash": "49053290140083ac4844045b1d956e43d116dd5035379cd88569cd3af4ecbb6c",
     "text": "藏红屏障"
+  },
+  "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
+    "sourceHash": "b5458be02c974c87f1c6ce30cdce28b5b56616dab0100485f96ebf12d40fa612",
+    "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>无效化</keyword1>下一次<keyword2>冻结</keyword2>伤害"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "reviewed": true,
@@ -2921,6 +3347,12 @@
     "sourceHash": "3ea7b3a8e66cfd8a69e7c791c5b6788028842a7e6e22bd6d206d97d694ecdcb0",
     "text": "替补"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "dd7052c910a639a36bb5fcc85300fc5fcff3633c6e4584549ec075045dec781b",
+    "text": "一次遭遇; 击败所有敌人即可获胜; <keyword0>生命</keyword0>和击倒状态在遭遇之间保留; 营火休息会恢复每个生物最大<keyword1>生命</keyword1>的{{value0}}%，包括被击倒的生物; 战斗效果和<keyword2>格挡</keyword2>会在下一场战斗重置"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -2956,6 +3388,12 @@
     "source": "Damage",
     "sourceHash": "3a07c3fae919e834d9330da0382db8b2c67ea7618016dd6b68d367fa5c20d40b",
     "text": "伤害"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "9c3a47433c778d069480b404ba5429541a5ad39c515255f6a5f970a35441d265",
+    "text": "每个盟友生物每场战斗可承受一次致命伤害并以{{value0}}点<keyword0>生命</keyword0>存活，获得{{value1}}个宽限回合; 宽限期间的致命伤害仍会留下{{value2}}点<keyword1>生命</keyword1>; 此后的伤害可以将其击倒; 在后备度过的回合也会消耗宽限"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3011,6 +3449,12 @@
     "sourceHash": "8860f843ac0b94d350bd126154974cbb5bed282e57cf2f0a407e8ff730d8e9b4",
     "text": "命中"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "1e4fa2e47597a6650123b1bc15690adc78255059007150550c07634d52d0e6b2",
+    "text": "打出行动牌时，每个关键词获得{{value0}}经验; 战斗结束获得的经验永久保留，失败也不例外; 放弃战斗会保留已获得的经验，但不提供胜利奖励"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3040,6 +3484,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "a63a0ec0c228b0032bfced352d2d6b26d58a7db8003351e098ecdb8094b8636d",
     "text": "下一次攻击有{{value0}}%的概率落空; 无论命中还是落空，该次攻击后效果消失; 落空视为每个目标都进行了<keyword0>闪避</keyword0>; 不叠加"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "be871dc5f6b0d3d449a18374a96e76e703f458f8133ec0dc76d824d3986fefa4",
+    "text": "在<keyword3>生命</keyword3>之前吸收受到的伤害，包括<keyword0>灼烧</keyword0>、<keyword1>中毒</keyword1>和<keyword2>流血</keyword2>的持续伤害; 除非另有说明，不会阻止命中效果、累积或<keyword4>汲取</keyword4>; 剩余<keyword5>格挡</keyword5>通常在下一个己方回合开始时减半并正常四舍五入"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -3137,6 +3587,12 @@
     "sourceHash": "f2e7cbd378c4c049ce1ecb4db9408575984e35323e3b411af471a66e8b666035",
     "text": "返还指定的攻击或有害状态效果; <keyword0>攻击反射</keyword0>将伤害和后续有害效果返还给攻击者; 仅状态<keyword1>反射</keyword1>会将效果转向一名随机存活的敌人，直接伤害仍会命中; 被<keyword2>反射</keyword2>的攻击和状态不能再次<keyword3>反射</keyword3>; 次数不叠加"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "f18c5c9de41d63dca2f0f4bcb1ec4a114fe66c7a055c592fd6697360ea4a7284",
+    "text": "使一名被击倒的盟友以最大<keyword0>生命</keyword0>的{{value0}}%复活，正常四舍五入且最低为{{value1}}; 不会重置濒死"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3154,6 +3610,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "e56931213832efc6339e2de15a66b6ac621dc3854748a4cd0596bf87816b1f39",
     "text": "<keyword0>水</keyword0>伤害；<keyword1>格挡</keyword1>会吸收；<keyword2>护甲</keyword2>不会减伤；不施加状态效果"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "23b5ad1d1c0a34bed8266f35408f071eedf5475f09e6a106226a10ff616ba622",
+    "text": "<keyword0>生命</keyword0>为零时，生物在本场战斗中无法行动或被<keyword1>治疗</keyword1>; 其牌不能打出，通常也不能抽取; 存活的后备生物可以替换它; 队伍中的所有生物都倒下时旅程结束"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3190,6 +3652,12 @@
     "source": "Pearl",
     "sourceHash": "205c42b34b294faad32e156b0c9d0b28d52275fa7400628b6ab947b60c103fbc",
     "text": "珍珠"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "e4ff2a43b49600a1ef3913f783fa3fb1954154648c8e46a87aa530855c2fbe1c",
+    "text": "选择的生物决定初始阵容; 击倒后的替换和技能换人会改变后续战斗的阵容; 新招募的生物先填补空缺的普通位置，再进入后备; 无法手动编辑阵容"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,
@@ -7427,6 +7895,12 @@
     "sourceHash": "6b193d08fab442fae7f0e846b44d34e722ecc0031e3dd1033c820477b252c869",
     "text": "{{name}}被击倒。"
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "142ea6a1b1c49b03c6055d95ba2cd41812e4c2198f1d0dcf702605e34eb9d6cc",
+    "text": "{{name}}失去{{amount}}点护甲"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7444,6 +7918,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "9f1921bf23ba61fd52c991dc57ba442bcf37fc08876ec7fa959c0ce327312c17",
     "text": "{{name}}抵消了冻结伤害"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "11f4c64afb05d6d0fe438dd232e7990a55b0d4f83bb7f44098b8ca73959e3c6f",
+    "text": "{{name}}濒临死亡：剩余宽限回合数：{{amount}}。"
   },
   "log.reflectAttack": {
     "reviewed": true,

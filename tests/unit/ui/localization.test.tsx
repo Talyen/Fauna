@@ -9,7 +9,7 @@ import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
 import { extractStatusVariants } from "../../../scripts/localization/status-variants.mjs";
-import { freshCombat } from "../../../src/game/combat/state";
+import { freshCombat, loseHealth } from "../../../src/game/combat/state";
 import {
   readCardDescriptionFunctions,
   describeCardRule,
@@ -399,6 +399,36 @@ it("localizes the final enemy hit after the battle state is retired", async () =
   } finally {
     await session.dispose();
   }
+});
+
+it("localizes Death's Door and Armor loss using committed combat facts", () => {
+  const initial = run();
+  const target = initial.team[0]!;
+  const events: GameEvent[] = [];
+  const game = produce(initial, (draft) => {
+    loseHealth(draft, draft.team[0]!, draft.team[0]!.health, events);
+  });
+  const death = events.find((event) => event.kind === "status" && event.status === "deathDoor")!;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: species(target.species).name, text: "Allié" },
+  });
+  expect(eventPresentation(game, death, reader)).toBe(
+    "Allié atteint les portes de la mort : tours de répit restants : 2.",
+  );
+  expect(eventPresentation(game, death, createMessageReader("en", {}))).toBe(death.text);
+  const armor: GameEvent = {
+    kind: "status",
+    targetId: target.id,
+    status: "armor",
+    outcome: "remove",
+    amount: 3,
+    text: `${species(target.species).name} loses 3 Armor`,
+  };
+  expect(eventPresentation(game, armor, reader)).toBe("Allié perd 3 Armure");
+  expect(eventPresentation(game, { ...armor, text: "A different Armor event" }, reader)).toBe(
+    "A different Armor event",
+  );
 });
 
 it("localizes a committed resurrection without changing its Health or participants", () => {
@@ -2044,6 +2074,24 @@ it("presents shared Stun, area Burn and Mana rules with their keyword identities
   expect(view.container.querySelector('[data-keyword="stun"]')).toBeTruthy();
   expect(view.container.querySelector('[data-keyword="burn"]')).toBeTruthy();
   expect(view.container.querySelector('[data-keyword="mana"]')).toBeTruthy();
+  view.unmount();
+});
+
+it("presents conditional damage and Armor removal with their gameplay values", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={definition("alpenglen-last-light-charge")} value={4} />
+        <CardRules card={definition("cindernewt-ember-breath")} value={2} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  const rules = [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent);
+  expect(rules[0]).toContain("dernière carte en main");
+  expect(rules[1]).toContain("50% de l’Armure");
+  expect(view.container.querySelector('[data-keyword="light"]')).toBeTruthy();
+  expect(view.container.querySelector('[data-keyword="armor"]')).toBeTruthy();
   view.unmount();
 });
 

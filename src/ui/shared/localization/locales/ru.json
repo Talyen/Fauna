@@ -323,6 +323,12 @@
     "sourceHash": "db58de20cfd7847c5fb19a7958279135ad7c94e3ccc903cd8a0b89f77851b438",
     "text": "Складной мост"
   },
+  "content.boon.accordioned-bridge.rule": {
+    "reviewed": true,
+    "source": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "673505eacd224bd3604c34495f7cc2579b2deee3b7cd68e271dcd5ec379860eb",
+    "text": "Карты смены можно разыгрывать несмотря на <keyword0>оглушение</keyword0> и <keyword1>заморозку</keyword1>"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -353,17 +359,35 @@
     "sourceHash": "38d7540973cea758166ecd54818df1cbcc84b7d3899c201a3394ea25828fce00",
     "text": "Пепельная подвеска"
   },
+  "content.boon.ashfall-pendant.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "sourceHash": "f81043c1340fcccda13e08b3f0da1014a4b7a64bb9efae7b3fb8bd025c761ae7",
+    "text": "<keyword0>Горение</keyword0>, потерянное при уменьшении, также снимает столько же вражеского <keyword1>блока</keyword1>"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
     "sourceHash": "cfb5239b0367b3f597d4cd16f4decd9538f6288f95ea7e4bc737df597840ecef",
     "text": "Закладка из базальтового стекла"
   },
+  "content.boon.basalt-glass-bookmark.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
+    "sourceHash": "c663b55ea3d7901959b6e52237c66eecdc31000a4fd3bf5f7c2470db8912390a",
+    "text": "<keyword0>Рассеивание</keyword0> не может снять последний полезный эффект союзника"
+  },
   "content.boon.blooming-still.name": {
     "reviewed": true,
     "source": "Blooming Still",
     "sourceHash": "d25094ca52d207bf8dcdfaacd9fe7a9f82770d21ed14cca802529094bdb3a294",
     "text": "Цветущий перегонный куб"
+  },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "8680116e717c8da975cd03e01de9134d7e72ea663f29a9deade08732e04e211b",
+    "text": "<keyword0>Очищение</keyword0> <keyword1>яда</keyword1> восстанавливает {{value0}} <keyword2>маны</keyword2>"
   },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
@@ -395,6 +419,12 @@
     "sourceHash": "c064fc4cc4f723be380f1337f6cec221da0c405ec37e9a46c296fef4debbd42b",
     "text": "Латунное кадило"
   },
+  "content.boon.brass-censer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to also <keyword1>Burn</keyword1> or <keyword2>Leech</keyword2>",
+    "sourceHash": "50de42b55baa8a813af22df7d1acd289073cee5d43e2aefa318e7988ba5b402f",
+    "text": "Попадания <keyword0>светом</keyword0> с вероятностью {{value0}}% также наносят урон <keyword1>горением</keyword1> или вызывают <keyword2>вампиризм</keyword2>"
+  },
   "content.boon.briar-racquet.name": {
     "reviewed": true,
     "source": "Briar Racquet",
@@ -413,11 +443,23 @@
     "sourceHash": "e4161cff0d0348725661891c63f0dd2c2461c19b2f5499aac4fac315db2244a4",
     "text": "Диск для речных скачков"
   },
+  "content.boon.brookskip-disc.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage against enemy <keyword1>Block</keyword1> chains to a second enemy",
+    "sourceHash": "ec2f67f2d7d54b3cf49929262b18ee7b3cb7b114db6bd99659987d1bb25d0023",
+    "text": "Урон <keyword0>водой</keyword0> по вражескому <keyword1>блоку</keyword1> переходит на второго врага"
+  },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
     "source": "Calendula Soap",
     "sourceHash": "1e3d9d963b6511851520b9a9c15e73b344ba56aed694307df735fb6621404637",
     "text": "Мыло с календулой"
+  },
+  "content.boon.calendula-soap.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> an ally’s last harmful effect grants them <keyword1>Nullify</keyword1>",
+    "sourceHash": "065591cf592bd12b3dcc48d5c60b583ca95049732025fc868791e74a1c3cd1bc",
+    "text": "<keyword0>Очищение</keyword0> последнего вредного эффекта союзника даёт ему <keyword1>аннулирование</keyword1>"
   },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
@@ -436,6 +478,12 @@
     "source": "Cinder Fan",
     "sourceHash": "35eccf0086bafb4b8c79d535fa4409939af5e95fff82b2a69dfb9544f55025a8",
     "text": "Веер угольков"
+  },
+  "content.boon.cinder-fan.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "sourceHash": "a66cad4bb93b606dd5a5ab1c9e1d941f8278c7155ec4eeb0612023c873746bea",
+    "text": "Вражеское <keyword0>горение</keyword0>, потерянное при уменьшении, наносит столько же урона <keyword1>горением</keyword1>, распределённого между другими врагами"
   },
   "content.boon.cloud-cup-and-ball.name": {
     "reviewed": true,
@@ -503,17 +551,35 @@
     "sourceHash": "27a1ad91c0e28ccf204455d6c456e8927609257f9490bfee888f5d9ab13f814c",
     "text": "Купол коронации"
   },
+  "content.boon.coronation-cloche.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "6febb7ca875be7c41690a4d6989efda7bfddc599961a1e4e51de888f71c4d41a",
+    "text": "<keyword0>Аннулирование</keyword0> защищает эффекты союзников от <keyword1>рассеивания</keyword1>"
+  },
   "content.boon.crater-punch.name": {
     "reviewed": true,
     "source": "Crater Punch",
     "sourceHash": "70a11a52b9e72d886c8a2411780ea5d96127a07b0935c7b0f84a488f2da3bbd8",
     "text": "Кратерный пуансон"
   },
+  "content.boon.crater-punch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "sourceHash": "1a33d2e95aa01c59229b341a47457e0a31f3c29e10431e228ddd3f70f890023c",
+    "text": "<keyword0>Критические удары</keyword0> также наносят <keyword2>здоровью</keyword2> половину <keyword1>заблокированного</keyword1> урона"
+  },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
     "source": "Crescent Sextant",
     "sourceHash": "14a6d5067f63e0cfe42ce1d12622c83da2816284dd2e24dd14abcdf488b0f507",
     "text": "Секстант полумесяца"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "sourceHash": "5191a89c1eb392fd4f907c60f59f2d767251fe67e25b302ecdde95eefcfb2fde",
+    "text": "Пороги вражеского <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> зависят от текущего <keyword2>здоровья</keyword2>"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -533,17 +599,35 @@
     "sourceHash": "822f04a42e71bf3d18db036c77eec469389a2075a3f72c930a1b4f20204ae03b",
     "text": "Застёжка преданности"
   },
+  "content.boon.devotion-clasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "sourceHash": "db7788a52d701d331ce16e3356f165b8003c6117c3b92ddf6fb92c7bfe816870",
+    "text": "<keyword0>Отведение</keyword0> также защищает другого союзника от той же атаки"
+  },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
     "source": "Dream Tangram",
     "sourceHash": "33a004af846ddae97163223a6b49a336abc04f35056d22630ebb3045d1e2ff9a",
     "text": "Танграм грёз"
   },
+  "content.boon.dream-tangram.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks move on when their target falls",
+    "sourceHash": "951c7f90f77580defbb29952e324f26f608af9b427b54f59cd95dbab3c70957d",
+    "text": "Повторные атаки переходят к другой цели, когда прежняя падает"
+  },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
     "source": "Dream Yo-Yo",
     "sourceHash": "9da33ad8e494e4234d47c0d6c043d2e2927e7a900247df55e4f00e2ab131f0e6",
     "text": "Йо-йо грёз"
+  },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "831e0ffb3564b51f96afd07932c698239c6db42210a42de1b727bf437fe3da18",
+    "text": "Карты, от которых враги <keyword0>уклонились</keyword0>, возвращаются в руку"
   },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
@@ -563,11 +647,23 @@
     "sourceHash": "2cea17f965e43470f2eb1890c70009fbbbb607452c79e332e80cdb6ef124cd13",
     "text": "Линза эха"
   },
+  "content.boon.echo-lens.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "sourceHash": "42176b2e04f52ec11f3764e16c2224e077e073f13feeb6b923902748197658b6",
+    "text": "<keyword0>Отведение</keyword0> с вероятностью {{value0}}% также вызывает <keyword1>отражение</keyword1>"
+  },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
     "source": "Eclipse Protractor",
     "sourceHash": "80bae040c6cbd6f454b7c122c93b98298d859e0ddbd8577b1b5a522fd933f5a5",
     "text": "Транспортир затмения"
+  },
+  "content.boon.eclipse-protractor.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "sourceHash": "5e0c3e173e06b18e400cb52c2c9935dd29650959c3d74fac66d0fd8f2570f8d6",
+    "text": "<keyword0>Критические удары</keyword0> добавляют накопление <keyword1>заморозки</keyword1>, равное дополнительному урону"
   },
   "content.boon.eclipse-rivet.name": {
     "reviewed": true,
@@ -611,6 +707,12 @@
     "sourceHash": "50177ffd4e039b848bb01b87e68aba054580f0735cb234fec60f5aba51942f53",
     "text": "Наковальня падающей звезды"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "a1718dc98a353a9e5174ef335dfcab55beec2a5717c4513430d748f0aabc9907",
+    "text": "Половина <keyword0>блока</keyword0>, потерянного от атак врагов, превращается в накопление <keyword1>оглушения</keyword1> у атакующего"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -653,6 +755,12 @@
     "sourceHash": "8bf18f43b6b8997cf74e0ca9a6572167efa7add4e8e75fe9292c488ee64281a5",
     "text": "Призма горна"
   },
+  "content.boon.furnace-prism.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits <keyword1>Blind</keyword1> <keyword2>Burning</keyword2> enemies",
+    "sourceHash": "27ec4bdba405455215bd7530457ad2d829c3cf8170d16ab3d3d43db1adb79b5c",
+    "text": "Попадания <keyword0>светом</keyword0> <keyword1>ослепляют</keyword1> врагов с <keyword2>горением</keyword2>"
+  },
   "content.boon.gemmed-scabbard.name": {
     "reviewed": true,
     "source": "Gemmed Scabbard",
@@ -682,6 +790,12 @@
     "source": "Grafting Needle",
     "sourceHash": "23da2665c21a46b7da2efeae3d9b22587d613d4d6cbfbfcfb6ae107abeb546fb",
     "text": "Игла для прививки"
+  },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "c006d589b7277708c8536c28814f7eed9b6ffbe0e62133b2432cc869e97030bb",
+    "text": "<keyword0>Лечение</keyword0> союзника повышает его <keyword1>броню</keyword1> до половины вашей"
   },
   "content.boon.grain-flail.name": {
     "reviewed": true,
@@ -749,6 +863,12 @@
     "sourceHash": "947cefdef242c4a8465495237f3fe88f2b8d6d1f1fe2dae54af75c9145f3dbb3",
     "text": "Медовый пресс"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "de7dd4f279c70dcc12fa6f813f140a5390c88a4345d8261a3720c20b8223fade",
+    "text": "<keyword0>Рассеивание</keyword0> вражеского <keyword1>блока</keyword1> восстанавливает наиболее раненому союзнику <keyword2>здоровье</keyword2> в размере половины снятого блока"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -803,6 +923,12 @@
     "sourceHash": "b0eeb86b1129f73ff650ea5c391f9b30623c03ba811bde547ca348a67e5ff33c",
     "text": "Гребень узла"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "2f700bcee72383fbd89a965c51a4a9a06a32b6a94609ef60299b450cda414457",
+    "text": "Каждый ход <keyword0>очищайте</keyword0> случайный вредный эффект"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -820,6 +946,12 @@
     "source": "Last Threshold",
     "sourceHash": "0be7680e71b2154076545cca492395466cb957b6bb4948ebfc71d71dfa390dcd",
     "text": "Последний порог"
+  },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "73bb1f603936e0700c33307adbe4c951d80b00aa5d3692e94c95307838c697f0",
+    "text": "Избыточное <keyword0>лечение</keyword0> делится с союзниками на пороге смерти"
   },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
@@ -839,11 +971,23 @@
     "sourceHash": "1a80a82573a4303401f7c2d44fca9cefc3600b6d94c19eb66229a6d72a2f5422",
     "text": "Узел влюблённых"
   },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "e06000163c4904bede63df8b437c2576ae1790029becb0551e21e18faac4a594",
+    "text": "<keyword0>Лечение</keyword0> союзника также <keyword1>лечит</keyword1> вас"
+  },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
     "source": "Lucky Clover",
     "sourceHash": "c5692441990909fb1d67f29164b017865a833343fa5ba530a2bb0d973167003e",
     "text": "Счастливый клевер"
+  },
+  "content.boon.lucky-clover.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "eea0f3787ecf6a98c07ee659563e1b9b681134338170c38102c3903059dc70e0",
+    "text": "Попадания <keyword0>природой</keyword0> с вероятностью {{value0}}% дают золото в размере потерянного врагом <keyword1>здоровья</keyword1>"
   },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
@@ -863,11 +1007,23 @@
     "sourceHash": "d9c5fb9b5cabf3792aaa335870e9d64537ccdeed5eb4b0fc942884ca76b45597",
     "text": "Ртутный метроном"
   },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "101a4629c02fe26d591fca4800deb755251f6e299eeb31c8e78204ac9da6bb28",
+    "text": "Последовательный розыгрыш карт разных союзников добавляет всем врагам {{value0}} накопления <keyword0>оглушения</keyword0>"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "e6ec02f602d1380079a33e5c971fd08b95e5942add499e98eb698a18bc313ad5",
     "text": "Метеорит"
+  },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "1d498bd9082ab4bfcd29e30e31d7b20103d9f9238e885e09e7ef31056c9bd0a2",
+    "text": "Удвойте первое попадание <keyword0>горением</keyword0> в каждом бою"
   },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
@@ -875,11 +1031,23 @@
     "sourceHash": "2e4d5b8b86bc2c909fa9bed6446960812a47b9e43e0953d4f2698ebe55058a7f",
     "text": "Минеральный упор для книг"
   },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "114ee35d1deccae30ac2afae7806d0288df686be84d7fe60d82d73dfcb099a77",
+    "text": "Взятие последней карты из колоды добора восстанавливает {{value0}} <keyword0>маны</keyword0>"
+  },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
     "source": "Miracle Megaphone",
     "sourceHash": "ebc63365bbf5a7b53b22b56754725ee72b63a52cf38b460faef4b426a42db71c",
     "text": "Чудесный мегафон"
+  },
+  "content.boon.miracle-megaphone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> affects all allies",
+    "sourceHash": "6e5ae773646a20c4279225ff16c4025cd3a52e566e5b21a194137266dcdcf459",
+    "text": "<keyword0>Очищение</keyword0> действует на всех союзников"
   },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
@@ -947,11 +1115,23 @@
     "sourceHash": "dfdcb22522a8150397b5b254e9973d921c7b4997485d5f551cbe865944c15f4f",
     "text": "Обсидиановый кувшин"
   },
+  "content.boon.obsidian-pitcher.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Leech</keyword0> applies half as much <keyword1>Burn</keyword1> to the enemy",
+    "sourceHash": "645879a0916d61cfa2fb49db6d626f2156ca9793e7d8b134cd8485617c035b65",
+    "text": "Избыточный <keyword0>вампиризм</keyword0> накладывает на врага <keyword1>горение</keyword1> в размере половины избытка"
+  },
   "content.boon.orbit-armillary.name": {
     "reviewed": true,
     "source": "Orbit Armillary",
     "sourceHash": "e3d51ad14e4f0038d0e491d6fc3cbbe1eeedbe71158268f954d049d2fd27dab6",
     "text": "Орбитальная армиллярная сфера"
+  },
+  "content.boon.orbit-armillary.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansed</keyword0> effects return to their source",
+    "sourceHash": "f59ed8b3d6ac0b8fef03ab74497e16469cd60d7d0213958b29c69d1948e3312d",
+    "text": "<keyword0>Очищенные</keyword0> эффекты возвращаются к своему источнику"
   },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
@@ -995,11 +1175,23 @@
     "sourceHash": "0d0e2f3daae7d5d59ec636c20b604ea06ebf1936ebd3f97436afc5dd93be4095",
     "text": "Катушка узоров"
   },
+  "content.boon.pattern-reel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect removes it from every enemy",
+    "sourceHash": "1f8b2f24ab5ceec0c675b0afc2b75a6749d324417095f8180f16b331d4914a0d",
+    "text": "<keyword0>Рассеивание</keyword0> эффекта снимает его со всех врагов"
+  },
   "content.boon.peace-knot.name": {
     "reviewed": true,
     "source": "Peace Knot",
     "sourceHash": "23f91a38dd6a7bfa09d0df875ae2dd4b217eae0f1e7d0df03c08261da2a52eed",
     "text": "Узел мира"
+  },
+  "content.boon.peace-knot.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Nullify</keyword0> prevents a harmful effect, other allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "1a975cba5bb8a8bc5000242a8642e199dc720996b2f076c6b93a648155fd9c65",
+    "text": "Когда <keyword0>аннулирование</keyword0> предотвращает вредный эффект, остальные союзники получают {{value0}} <keyword1>блока</keyword1>"
   },
   "content.boon.pearl-sieve.name": {
     "reviewed": true,
@@ -1007,11 +1199,23 @@
     "sourceHash": "7f22e4a31b89d9c44a755dbdc0c2e6a9ac2439913170812aaf0843c6223270c6",
     "text": "Жемчужное сито"
   },
+  "content.boon.pearl-sieve.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> removes an extra effect from enemies with <keyword1>Block</keyword1>",
+    "sourceHash": "1d30be52b9e2df29256f217b24df7b1bc7422abee56948c131f97d25725e1930",
+    "text": "<keyword0>Рассеивание</keyword0> снимает дополнительный эффект с врагов с <keyword1>блоком</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "8034ee88abdf800612354c2233fdcd68703078f0b22311f072d04b82753a4ac3",
     "text": "Маска чумного доктора"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "227253e315055c033f425d1d59b962bec88cb64fd36b7305b5d78c4c241b0e6a",
+    "text": "До урона в начале хода каждый союзник <keyword0>очищает</keyword0> до {{value0}} <keyword1>яда</keyword1> и наносит первому живому врагу урон <keyword2>ядом</keyword2> в размере половины снятого количества"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1031,11 +1235,23 @@
     "sourceHash": "fdc503b60e69fa07c1b37f5dff4ae9da60a859bbeb6d69c58b467f9e9b48bc40",
     "text": "Мельница для мака"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "3a58d0a81bbc88db3cec1aef64970dc456f978e1e0b0d0c8ddaff83fe97d1570",
+    "text": "Урон от <keyword0>яда</keyword0> добавляет накопление <keyword1>оглушения</keyword1> в размере половины урона"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "b2dea3d98d211bb12e3c7c8b7102d967331f4c47c56e2c34f5b6f72d1c5edbb7",
     "text": "Парусник молитвы"
+  },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "e719486acc3705dc46be55188f16c2fb299bedac9bf4d6dbe7b8634c6e53bdb1",
+    "text": "При смене уходящий союзник <keyword0>очищается</keyword0> от <keyword1>оглушения</keyword1> и <keyword2>заморозки</keyword2>"
   },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
@@ -1043,17 +1259,35 @@
     "sourceHash": "678cace273a990717e1bd39e58d4d4388bc39bc3834f341ea06d76409f981eb4",
     "text": "Призматическое зубило"
   },
+  "content.boon.prism-chisel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Armor</keyword1> deals equal <keyword2>Light</keyword2> damage to that enemy",
+    "sourceHash": "8e2347eb57ef141ac6fecfa9cf9e532dbfb83949bf333c37229c3a4c9fba7d95",
+    "text": "<keyword0>Рассеивание</keyword0> вражеской <keyword1>брони</keyword1> наносит этому врагу столько же урона <keyword2>светом</keyword2>"
+  },
   "content.boon.pruning-crescent.name": {
     "reviewed": true,
     "source": "Pruning Crescent",
     "sourceHash": "f133003894fc3c82b2c75fda31f8844cbd3c7699511f6c33c5152d1e000789b5",
     "text": "Серп для обрезки"
   },
+  "content.boon.pruning-crescent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
+    "sourceHash": "54919bbd1d68934ea488d60d7e6224b4be9702133f10ce5e7a4c00d7c750f8c2",
+    "text": "<keyword0>Рассеивание</keyword0> вражеских <keyword1>шипов</keyword1> крадёт их для вас"
+  },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
     "source": "Pumpkin Tureen",
     "sourceHash": "7dc45f01420041a7116aaa488f843cd1d1635d4b964490e4fa01878fba0aa5aa",
     "text": "Тыквенная супница"
+  },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "ebc1979b0a5e7e6c8c9988cfe9cbf1a9235cb70a7eecc825d3738f3249b2b072",
+    "text": "<keyword0>Еда</keyword0> даёт всем союзникам <keyword1>здоровье</keyword1> и <keyword2>блок</keyword2>"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,
@@ -1072,6 +1306,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "5d8025fd406bf97a63006a964129378921b4daa3cabbc31be4d2815ea478f7cb",
     "text": "Чаша для дождя"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "f955d44139f5a607126f68b63f88943d614166fe8e56aedda3f495d03ea7effc",
+    "text": "Получите <keyword0>кристаллы маны</keyword0>: {{value0}}, если в вашей колоде есть карта <keyword1>воды</keyword1>"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1103,6 +1343,12 @@
     "sourceHash": "ec516cd811352b0fd4957de685d7bbc2a1ff590daa0b51ede6d423ae156cb501",
     "text": "Рифовая плитка для благовоний"
   },
+  "content.boon.reef-incense-tile.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "sourceHash": "ecc45567144548983e2ccfef139c22371a85285d3cf2320db94705931feed91d",
+    "text": "Попадания <keyword0>водой</keyword0> распространяют <keyword1>ослепление</keyword1> на другого врага"
+  },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
     "source": "Resonance Kalimba",
@@ -1132,6 +1378,12 @@
     "source": "Rook of Mercy",
     "sourceHash": "730fc5e3b640f07757cb68e7eb9de36c780fd17fe5e4822665f1752a1ed5e7a7",
     "text": "Ладья милосердия"
+  },
+  "content.boon.rook-of-mercy.rule": {
+    "reviewed": true,
+    "source": "Allies swapping in gain {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "b8ad7c874bd2ee4efbfded2dbaf8d615fc49bcc439a29f8e477cf7b4f13508a2",
+    "text": "Входящие при смене союзники получают {{value0}} <keyword0>брони</keyword0>"
   },
   "content.boon.rootvault-pole.name": {
     "reviewed": true,
@@ -1175,6 +1427,12 @@
     "sourceHash": "3886858167c7ee6a59083f404dd7139239bfab8c6a26820edbb83eb8b5bfb889",
     "text": "Урна спящих"
   },
+  "content.boon.sleepers-urn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "sourceHash": "2e1c35de6108e9609c4685dd579100cd6c48df4dbcb156ec1ed26786215bce02",
+    "text": "Накопление <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> может расти во время иммунитета врага"
+  },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
     "source": "Smuggler's Map",
@@ -1192,6 +1450,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "a14be87f620dc1f0dce73a6c719a10212bf9507fda34f0f0384cb7ebc7b69238",
     "text": "Королевская подставка для тостов"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "6e5a55795a0bdfebd83fb02572d0c65532bcd436d80ed860db368aeb27175611",
+    "text": "Розыгрыш <keyword0>еды</keyword0> даёт всем союзникам {{value0}} <keyword1>брони</keyword1>"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,
@@ -1211,17 +1475,35 @@
     "sourceHash": "eee81d2cd0d734c13724f2752d9a519aebc45e350515c262798bfc30611ecdf5",
     "text": "Точильный камень звёздной пыли"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "cb66ca8066b1cadc1975d0984921cf2261ae59406beac3f165f68324f193869d",
+    "text": "<keyword0>Физические</keyword0> попадания накладывают {{value0}} <keyword1>кровотечения</keyword1> на врагов с <keyword2>бронёй</keyword2>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
     "sourceHash": "87c84a1ddb5b0312b03dc617c7b717a5e8f89d09c2fa5d3a2ee0700507d54d94",
     "text": "Кубик историй"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "4c8be9867be9e7a9ef60e4d905e5528c9c26aa22a6c1ba55c2fba495b55504ce",
+    "text": "Применение трёх разных вредных эффектов <keyword0>рассеивает</keyword0> полезный эффект последнего затронутого врага"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",
     "sourceHash": "911e7f2c70348a7f2c3f2da7ee3d99c069c7ff28e7d5b133e4fd3b4299b7c7e7",
     "text": "Оберег раскола"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "bf2189031c768abafd044fbc42d6a126bed8539f22b555db508f5d46bcf324e8",
+    "text": "Ваши <keyword0>физические</keyword0> попадания и попадания <keyword1>оглушением</keyword1> снимают {{value0}} вражеской <keyword2>брони</keyword2> до нанесения урона"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1253,6 +1535,12 @@
     "sourceHash": "a6165dc737ae32bc5507ce487c5b4c9aebe02e5bac7023463de3451ece2c21e7",
     "text": "Сито чертополоха"
   },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "f7d73b0dbac0572197c678dada939afdc1b9626e17f24abe746b6c764791cff6",
+    "text": "Половина <keyword0>яда</keyword0> и <keyword1>кровотечения</keyword1>, <keyword2>очищенных</keyword2> с союзников, превращается в <keyword3>шипы</keyword3>"
+  },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
     "source": "Thornheart Ring",
@@ -1270,6 +1558,12 @@
     "source": "Thunder Conch",
     "sourceHash": "98529655f315cad16e9406825e71f9030955246d70c22405fe43a96c10073f1b",
     "text": "Громовая раковина"
+  },
+  "content.boon.thunder-conch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "sourceHash": "cb1be52d1c114ccb483275f345c21a0b4d0159c46067e239ab5ff76dfe333dea",
+    "text": "<keyword0>Оглушение</keyword0> врага <keyword1>ослепляет</keyword1> остальных врагов"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1289,6 +1583,12 @@
     "sourceHash": "9f0339f52f6d122d46bd718f22d76e2365a4e78719005b0ae9664a4ceaee0bbd",
     "text": "Ножной браслет прилива"
   },
+  "content.boon.tide-anklet.rule": {
+    "reviewed": true,
+    "source": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "sourceHash": "4036a81f761a1b0a6c23c738352eea815e97e4063df1e399cfacf182d971e309",
+    "text": "Оба меняющихся союзника сохраняют большее значение <keyword0>блока</keyword0>"
+  },
   "content.boon.tidecrest-hairpin.name": {
     "reviewed": true,
     "source": "Tidecrest Hairpin",
@@ -1306,6 +1606,12 @@
     "source": "Tuning Fork Charm",
     "sourceHash": "d8a58afb308a59d150fbca62b7cca48f9f20f9863c4ebf28695adf9042ee9476",
     "text": "Оберег-камертон"
+  },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "4c7c15469a11d750610d1fc01c2b0ed18016e2c780514bb9e8f690e964f6481a",
+    "text": "<keyword0>Физические</keyword0> попадания игнорируют <keyword1>броню</keyword1> врагов с накоплением <keyword2>оглушения</keyword2>"
   },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
@@ -1325,11 +1631,23 @@
     "sourceHash": "679266a8301a1d90162432998870332d4a1441e364feb71fae9a1221c670a062",
     "text": "Бархатный венчик"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "44a6dd9d13ce331c0a73d6e61fdd7ff34a944a19b254e1ddf86870000406c68d",
+    "text": "<keyword0>Еда</keyword0> даёт своим целям {{value0}}% <keyword1>уклонения</keyword1> до их следующего хода"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
     "sourceHash": "681ce831317b6af2b782397a3f4c2b6f6cf595db0a28818818940328bbaff10f",
     "text": "Фонарь бдения"
+  },
+  "content.boon.vigil-lantern.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "464a2abc05f1419bc3d0aadb55b580d6e888dce41f89b758b857ec35d24ad37d",
+    "text": "Союзники на пороге смерти могут действовать несмотря на <keyword0>оглушение</keyword0> и <keyword1>заморозку</keyword1>"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,
@@ -1337,11 +1655,23 @@
     "sourceHash": "5afbf7cb88e9394d8fbf6f083d8631ad86829823e2bffbd2e86c38be9c2c45c4",
     "text": "Форма для восковой вощины"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "9d82a1776d255834f1f23725eaccfddfba1c48698446f8ffb3e41438c836abb5",
+    "text": "Союзники с <keyword0>бронёй</keyword0> сохраняют {{value0}}% <keyword1>блока</keyword1> при его уменьшении"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
     "sourceHash": "8dd85c37fc1d5de5dee072817a543c9bed5f1270a9982f22312e9a38318daea7",
     "text": "Веялочное сито"
+  },
+  "content.boon.winnowing-sieve.rule": {
+    "reviewed": true,
+    "source": "Unused <keyword0>Purge</keyword0> spreads to other enemies",
+    "sourceHash": "5e72c88cb62dc46ed11087a08d40ed9d65ceb280c1c51051642ad8dd3e156f8b",
+    "text": "Неиспользованное <keyword0>рассеивание</keyword0> распространяется на других врагов"
   },
   "content.boon.wishing-building-block.name": {
     "reviewed": true,
@@ -1349,11 +1679,23 @@
     "sourceHash": "c9aa983f1ec3e5ab314b3ad45c5d823adc4a5e53f4f3d43c460c360c15d714ac",
     "text": "Кубик желаний"
   },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "485a7b18ad352c0932989ca38632f2b5c3b8ed5e514a04df136d1f3ec1c74f7d",
+    "text": "Получение <keyword0>брони</keyword0> даёт {{value0}} <keyword1>блока</keyword1> другим союзникам с <keyword2>бронёй</keyword2>"
+  },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,
     "source": "Wonder Ball Maze",
     "sourceHash": "651e399f86ea0d776ff1993f009253cfcd39f6824bc2b6395b291cdd31270288",
     "text": "Чудесный шариковый лабиринт"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "b68082d0edfca08b441436f3f55f292cbade7ea7ce0e355029ed91e68909d4ca",
+    "text": "Избыточное накопление <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> распространяется на других врагов"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,
@@ -1372,6 +1714,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "18feda5102939a6fb2a9a98cab101bf1e60098a7b6edf1db04b9e512724ca3d2",
     "text": "Жестянка мази тысячелистника"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "454c047b2e7cbc0844ad6f6fd6b69808356784c036c945b039c32e4d02ca6ae6",
+    "text": "<keyword0>Лечение</keyword0> союзника также <keyword1>очищает</keyword1> его <keyword2>кровотечение</keyword2>"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,
@@ -1445,6 +1793,12 @@
     "sourceHash": "6ada2d565169ce23100a3ff425922922f72d50524e2e46962b1b6aced4d4d97a",
     "text": "Весеннее течение"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "fa80df8ebffacfa3a8088f27fab45879b4e8617d73b3338023bfa18d677c37dc",
+    "text": "Нанесите {{value0}} урона <keyword0>водой</keyword0>; <keyword1>Очистите</keyword1> действующее существо: удалить эффектов {{value1}}"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1462,6 +1816,12 @@
     "source": "Last Light Charge",
     "sourceHash": "7e35ed9137baffd63d5ca90d32bb392ca76d1e54f1bfc83885cecfcaef7f8259",
     "text": "Натиск последнего света"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "c13886829ea5d9bfa3a7d10957869a3e64d3c0000849993bb7b0228b4b6bcbaf",
+    "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0> / Если это последняя карта в руке, она наносит <keyword1>критический удар</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1733,6 +2093,12 @@
     "sourceHash": "eafb3ea52f350549d889c4bf274910830f1b909360915ea6da347bccdc862d19",
     "text": "Дыхание углей"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "242186ea99969cae386cdd92d5e0ff4621bacb9e8903a500376c5a815f670eae",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>горением</keyword0>; Удалите {{value1}}% <keyword1>брони</keyword1> всех врагов с округлением вверх"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1972,6 +2338,12 @@
     "source": "Wish Exchange",
     "sourceHash": "bd0b83d114a8f1539d2035a4f9cc5fe3eed75acbb5c80e822011ff1844a3a91f",
     "text": "Обмен желаниями"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "d65f27d7df71732bbb118fb6bb2c1557f07631b5fb245eda27782140a93ee200",
+    "text": "Поровну перераспределите <keyword0>блок</keyword0> союзников; Союзники получают {{value0}} <keyword1>блока</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2429,6 +2801,12 @@
     "sourceHash": "0b65a601e199d2e957f97b8475c84ba75572e8d74e6d3242f5f23bcfe7a950ae",
     "text": "Искристая приманка"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "7068ec2d6b8d2409b0ba67ba60170c2fb0296b13426b88faab0eb5273c810855",
+    "text": "Наложите {{value0}} <keyword0>горения</keyword0> на всех врагов / Получите <keyword1>отведение</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2470,6 +2848,12 @@
     "source": "Dream Double",
     "sourceHash": "0be87cdd5824fe34ba6f4a0530c50bd97c4ea8f2f5c19a55307bfd21fdfe2e5e",
     "text": "Двойник сна"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "504cec32f0bc54fa901323d2084555f0e0b10ec663afeb15e6f4cc511b69a459",
+    "text": "Получите {{value0}} <keyword0>шипов</keyword0> / <keyword1>Отведите</keyword1> следующую атаку против вас"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,
@@ -2519,11 +2903,29 @@
     "sourceHash": "c2799657fc4ebb19c1b7278b6600d04c663b9259fdcc805010e1f26f6e7e0a32",
     "text": "Гармоничный набор"
   },
+  "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
+    "sourceHash": "4c50182bfb326b0dd05c3d92cc82d9cc470477b9a24f023797653bf3780464e1",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>оглушением</keyword0>; Получите {{value1}} <keyword1>брони</keyword1>; {{value2}}% шанс повтора"
+  },
   "content.card.ringpalm-teamProtection.name": {
     "reviewed": true,
     "source": "Seedling Circle",
     "sourceHash": "678c707e433db5b4d3de636b855041e2a848d533fdcf700d3d1040c160dcc384",
     "text": "Круг ростков"
+  },
+  "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "618ca4395a248f18124682c6bad4dc7c9e5ed8ffec58a4ace15932899f25d1fd",
+    "text": "Дайте всем союзникам {{value0}} <keyword0>блока</keyword0> или {{value1}} <keyword1>шипов</keyword1>"
+  },
+  "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
+    "sourceHash": "794f127e1c7253c1a656f5ac10289a4d3e0affc94a82496cb08fb1330c0979dc",
+    "text": "Дайте всем союзникам {{value0}} <keyword0>блока</keyword0> или <keyword1>шипов</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
     "reviewed": true,
@@ -2573,6 +2975,12 @@
     "sourceHash": "50c8a192eb1c59d2b212ab2aabc23cf26df02f1815a3308b24f08f17ed18412d",
     "text": "Прохладный фронт"
   },
+  "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
+    "sourceHash": "9f580165ec835caab3b01f50058e03791d2923e449fa71e0393a9e31b6f2ce32",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>заморозкой</keyword0>; <keyword1>Очистите</keyword1> всех союзников"
+  },
   "content.card.shadebrim-draw.name": {
     "reviewed": true,
     "source": "Noon Bloom",
@@ -2620,6 +3028,12 @@
     "source": "Cloudstep",
     "sourceHash": "8e220a851ac61376179887cd983a96af4b4c9744cadb508f72aac3bf5135c8ad",
     "text": "Облачный шаг"
+  },
+  "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
+    "sourceHash": "efa7c8840dd7d1f5b26bd02a1dd7861ea04d349f9804e97381ec69c8c348a0f0",
+    "text": "Сменитесь со случайным союзником / Входящий союзник получает {{value0}}% <keyword0>уклонения</keyword0> до следующего хода"
   },
   "content.card.skybex-draw.name": {
     "reviewed": true,
@@ -2753,6 +3167,12 @@
     "sourceHash": "a494a2b1d084e058f661934dcec18cb7878152e940ab23d02e9f6e361b1c7749",
     "text": "Доблестный вызов"
   },
+  "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
+    "sourceHash": "e4b087e60ed4c8782fc41c933be85e070aa81e2f42129f24fb620da6634b6096",
+    "text": "Нанесите {{value0}} урона <keyword0>светом</keyword0> / Урон удваивается против врагов с большим <keyword1>здоровьем</keyword1>, чем у вас"
+  },
   "content.card.tournelle-swapLowest.name": {
     "reviewed": true,
     "source": "Safe Passage",
@@ -2836,6 +3256,12 @@
     "source": "Saffron Screen",
     "sourceHash": "1efb2705a5955558aedb12043866a35fc98326fad2a58fafa51613cc3e84eb6c",
     "text": "Шафрановая завеса"
+  },
+  "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
+    "sourceHash": "1bca070063716749ad6d306006db7ac4896b17253c78d8d755fca5beed359166",
+    "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Аннулируйте</keyword1> следующий урон от <keyword2>заморозки</keyword2>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "reviewed": true,
@@ -2921,6 +3347,12 @@
     "sourceHash": "b8cb5c518bd1561b198b791cefdcf4593c154e2374bc64b2db055e7e1a3ea41d",
     "text": "Запас"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "64a99767d8f5efa92efad524e676cf8309de3cb668db8c954544a57943ada853",
+    "text": "Одна встреча; Победите всех врагов для победы; <keyword0>Здоровье</keyword0> и выбытие сохраняются между встречами; Отдых у костра восстанавливает {{value0}}% максимального <keyword1>здоровья</keyword1> каждого существа, включая выбывших; Боевые эффекты и <keyword2>блок</keyword2> сбрасываются перед следующим боем"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -2956,6 +3388,12 @@
     "source": "Damage",
     "sourceHash": "9243fc7f599e3e38df0cdede4659420394e4ec551b0d00f30f0f33bae820d7fe",
     "text": "Урон"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "de4c81bde74db4ba7aea20f44864e087b576d790888deb705b66dcbea74e0f91",
+    "text": "Каждое союзное существо один раз за бой переживает смертельный урон с {{value0}} <keyword0>здоровья</keyword0> и получает льготные ходы: {{value1}}; Смертельный урон во время этих ходов по-прежнему оставляет {{value2}} <keyword1>здоровья</keyword1>; Последующий урон может вывести его из строя; Ходы в запасе тоже расходуют льготное время"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3011,6 +3449,12 @@
     "sourceHash": "e21f3fd2a41bfb5d12d60862ed3e87fe9c5bed601faf7a5cf7aa846255ee1fd2",
     "text": "Попадание"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "6a46f9ed456db696ef80b2e7cb1c27bf4c4c8cd7d62c8622137715fc7a782866",
+    "text": "Розыгрыш карты действия приносит {{value0}} опыта за каждое её ключевое слово; Опыт по окончании боя сохраняется навсегда, даже после поражения; При выходе из боя полученный опыт сохраняется без наград за победу"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3040,6 +3484,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "d4003e5a111463c013c6c0fed3288c45a5731daf7c74b279f94f319e57bd0ccf",
     "text": "вероятность промаха следующей атаки — {{value0}}%; Исчезает после этой атаки независимо от попадания; Промах считается <keyword0>уклонением</keyword0> каждой цели; Не суммируется"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "04049fb96d6b87becf45b821647e48a5538aed773713d49c72349cd78bb874d5",
+    "text": "Поглощает входящий урон до <keyword3>здоровья</keyword3>, включая периодический урон от <keyword0>горения</keyword0>, <keyword1>яда</keyword1> и <keyword2>кровотечения</keyword2>; Не предотвращает эффекты попадания, накопление или <keyword4>вампиризм</keyword4>, если не указано иное; Оставшийся <keyword5>блок</keyword5> обычно уменьшается вдвое в начале следующего хода с обычным округлением"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -3137,6 +3587,12 @@
     "sourceHash": "7e64930f9fccd46b46b37be13ac2e48b2a9b956f5997131bd65eb916b59c4da9",
     "text": "возвращает указанную атаку или вредный статусный эффект; <keyword0>Отражение атаки</keyword0> возвращает нападающему урон и последующие вредные эффекты; <keyword1>Отражение</keyword1> только статуса направляет эффект случайному живому врагу, а прямой урон всё равно проходит; <keyword2>Отражённые</keyword2> атаки и статусы нельзя <keyword3>отразить</keyword3> повторно; Заряды не суммируются"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "d0b50e5605cb575c7eae60488fdd4aab545021283df998d5e1ba95bd03f2393c",
+    "text": "Возвращает выбывшего союзника с {{value0}}% максимального <keyword0>здоровья</keyword0>, округлёнными обычным образом и не менее {{value1}}; Не восстанавливает Порог смерти"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3154,6 +3610,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "c86471f2356111a9573021b0bf551346cf80985cd4cfe065801cfdac2c82b43a",
     "text": "Урон <keyword0>водой</keyword0>; <keyword1>Блок</keyword1> поглощает его; <keyword2>Броня</keyword2> не уменьшает его; эффект состояния не накладывается"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "9bb90efbe431d15c9e4538c3bb52e41db0d1825c475e1ad53594f55aec7e1f41",
+    "text": "При нулевом <keyword0>здоровье</keyword0> существо не может действовать или получать <keyword1>лечение</keyword1> до конца боя; Его карты нельзя разыграть или обычно взять; Живой запасной может его заменить; Потеря всех существ в составе завершает путешествие"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3190,6 +3652,12 @@
     "source": "Pearl",
     "sourceHash": "3bdff8c3f2955403126135737b8e5705053bfd105eaf28cd535c6e50b44866ff",
     "text": "Жемчужина"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "885a222818452d77e7c08b53b18bdfd0d2bfd1c0880e7bac93b19efcea3198f5",
+    "text": "Выбор существ определяет начальный состав; Замены после выбытия и смены от способностей меняют его для следующих боёв; Новые существа сначала занимают свободные обычные места, затем переходят в запас; Вручную изменить состав нельзя"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,
@@ -7427,6 +7895,12 @@
     "sourceHash": "45b2f3bbf8706f6c01317f4c08ebfd133c66f232b215d2a4a7f797695ec0294c",
     "text": "Нокаут: {{name}}."
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "624150777cd8f8529443e120f7acc840e8143dc94035e24dc1f4a6b37c0e3583",
+    "text": "{{name}} теряет брони: {{amount}}"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7444,6 +7918,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "869a101c8c983ac4321747fac44b0fa773f3373b9a123440f5c6d5d5b142f895",
     "text": "{{name}} предотвращает урон от заморозки"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "2ce4fcfeabbda11f513808ff4d49a58fde5edcf7cb49eb27468107ae0495bfd0",
+    "text": "{{name}} на пороге смерти: оставшиеся льготные ходы: {{amount}}."
   },
   "log.reflectAttack": {
     "reviewed": true,

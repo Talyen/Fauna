@@ -323,6 +323,12 @@
     "sourceHash": "d51dec70799f31d44fec44319146e0160012cdbe126c8449ba9da036ab28cd70",
     "text": "Pont en accordéon"
   },
+  "content.boon.accordioned-bridge.rule": {
+    "reviewed": true,
+    "source": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "a899f27c26de82cc0265bb20e03248d5eec6b84cf80491983958b76724a7faae",
+    "text": "Les cartes de permutation peuvent être jouées malgré l’<keyword0>Étourdissement</keyword0> et le <keyword1>Gel</keyword1>"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -353,17 +359,35 @@
     "sourceHash": "15c082e28952a373b60e834c06cb9b40042c8e2c109e5d79b858c4b1935e9f28",
     "text": "Pendentif de cendres"
   },
+  "content.boon.ashfall-pendant.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "sourceHash": "23f14b3caa422ef28705a1eff59051ca658880ec8dd4316c28ee341b84dbc5fc",
+    "text": "La <keyword0>Brûlure</keyword0> perdue par diminution retire autant de <keyword1>Blocage</keyword1> ennemi"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
     "sourceHash": "7940fa7af63d2d9030e7478ed2c01a8f859054c77619151112bdac646f466500",
     "text": "Marque-page de verre basaltique"
   },
+  "content.boon.basalt-glass-bookmark.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
+    "sourceHash": "63a581c82375063f52b0f5c7c8e88e3964d82efce405eb2ce81882d69c91f949",
+    "text": "La <keyword0>Dissipation</keyword0> ne peut pas retirer le dernier effet bénéfique d’un allié"
+  },
   "content.boon.blooming-still.name": {
     "reviewed": true,
     "source": "Blooming Still",
     "sourceHash": "740ff1ead3b62f5ecebf0ea768c44b3ac5ff158ef7760a12f770b067d1212048",
     "text": "Alambic fleuri"
+  },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "3068d42e12687842217868d57b3146b42c9578d608c456c9cf58f65dda8a884e",
+    "text": "<keyword0>Purifier</keyword0> le <keyword1>Poison</keyword1> restaure {{value0}} <keyword2>Mana</keyword2>"
   },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
@@ -395,6 +419,12 @@
     "sourceHash": "0b572366da476a1ef71d0a44a7f714e96f1e97a39b64c0d0318aaae24c87507f",
     "text": "Encensoir de laiton"
   },
+  "content.boon.brass-censer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits have a {{value0}}% chance to also <keyword1>Burn</keyword1> or <keyword2>Leech</keyword2>",
+    "sourceHash": "bf7227872fb8f42a9f352a542c6fb67e21d346da5a7fa22cf93dc6a431e44fd5",
+    "text": "Les touches de <keyword0>Lumière</keyword0> ont {{value0}}% de chances d’infliger aussi des dégâts de <keyword1>Brûlure</keyword1> ou de provoquer un <keyword2>Vol de vie</keyword2>"
+  },
   "content.boon.briar-racquet.name": {
     "reviewed": true,
     "source": "Briar Racquet",
@@ -413,11 +443,23 @@
     "sourceHash": "a2853be7b9ef61632bed759e68867014dbcee1483d9b53fc0629815fef8e9600",
     "text": "Disque ricochet"
   },
+  "content.boon.brookskip-disc.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage against enemy <keyword1>Block</keyword1> chains to a second enemy",
+    "sourceHash": "1c4a4f80dd8c27b657efe11fbc816511e6a48b1e8b8ccd7050900ecae2997db6",
+    "text": "Les dégâts d’<keyword0>Eau</keyword0> contre le <keyword1>Blocage</keyword1> ennemi se propagent à un second ennemi"
+  },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
     "source": "Calendula Soap",
     "sourceHash": "900e99f58180e3260da07df532d719eb36b546c7606effb3b904ac4994c99cde",
     "text": "Savon au calendula"
+  },
+  "content.boon.calendula-soap.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> an ally’s last harmful effect grants them <keyword1>Nullify</keyword1>",
+    "sourceHash": "960834b9d62fcadcf66d6c81692a0865299cdf44af68a7a1ec00c4db8f92a7d8",
+    "text": "<keyword0>Purifier</keyword0> le dernier effet néfaste d’un allié lui confère <keyword1>Annulation</keyword1>"
   },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
@@ -436,6 +478,12 @@
     "source": "Cinder Fan",
     "sourceHash": "506fd371e60b16f479c91d2f639c4b3e82d9db44fa49d8387a8cb7fe0a34f876",
     "text": "Éventail de braises"
+  },
+  "content.boon.cinder-fan.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "sourceHash": "8146e1239b7c46d19764d574a36eab32a2a8ceef0a6ca2a05f40e65bf68c1b34",
+    "text": "La <keyword0>Brûlure</keyword0> ennemie perdue par diminution inflige autant de dégâts de <keyword1>Brûlure</keyword1>, répartis entre les autres ennemis"
   },
   "content.boon.cloud-cup-and-ball.name": {
     "reviewed": true,
@@ -503,17 +551,35 @@
     "sourceHash": "ef32cae1ad9f288f61c49c67d90b88505efbb0d7370daa2d90f155e56900b0eb",
     "text": "Cloche de couronnement"
   },
+  "content.boon.coronation-cloche.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "d4c11517ed23075a9a088d5859e80531bc2bbf4fb151782a573441b6ea0fb2c3",
+    "text": "<keyword0>Annulation</keyword0> protège les effets alliés de la <keyword1>Dissipation</keyword1>"
+  },
   "content.boon.crater-punch.name": {
     "reviewed": true,
     "source": "Crater Punch",
     "sourceHash": "1261ff1869b1fac3eb6b140100576967cf35f294fc0d5755708084c51abd46d5",
     "text": "Poinçon de cratère"
   },
+  "content.boon.crater-punch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "sourceHash": "56a98aa43570c005a2b3869bf6178dffa0adba611aa7ffe5aaf42d3785876e03",
+    "text": "Les <keyword0>Coups critiques</keyword0> infligent aussi à la <keyword2>Santé</keyword2> la moitié de leurs dégâts <keyword1>bloqués</keyword1>"
+  },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
     "source": "Crescent Sextant",
     "sourceHash": "341065f5332f34dd121647c0acb44779f8688d5762ec20e134634b5313567c02",
     "text": "Sextant du croissant"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "sourceHash": "ed90aae81adc8fc6c1760fe8d9438925310c6aa55000ddbb659ca74012f6f967",
+    "text": "Les seuils ennemis d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> utilisent la <keyword2>Santé</keyword2> actuelle"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -533,17 +599,35 @@
     "sourceHash": "40ec26e01902e63ddbf1fabd683bffa324ba385bd8a7bb27a49c6c06342b063c",
     "text": "Fermoir de dévotion"
   },
+  "content.boon.devotion-clasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> also protects another ally from the same attack",
+    "sourceHash": "2a2d600bc9a9a9888883ebe0cba7e57630172a1b2a26a2934fb097d4ae8c0f25",
+    "text": "La <keyword0>Négation</keyword0> protège aussi un autre allié de la même attaque"
+  },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
     "source": "Dream Tangram",
     "sourceHash": "f0dfd0bdd81853a3c7e57986cdc07ea60bdc6180eed681f9ef95bc89c1da319b",
     "text": "Tangram des rêves"
   },
+  "content.boon.dream-tangram.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks move on when their target falls",
+    "sourceHash": "8945425daf2c8e1ec2d274c396ecb2c7ee800a01d34eb484498541089dc54827",
+    "text": "Les attaques répétées passent à une autre cible quand la leur tombe"
+  },
   "content.boon.dream-yo-yo.name": {
     "reviewed": true,
     "source": "Dream Yo-Yo",
     "sourceHash": "07d7e180fcae3c28c386751fe915549f5ffd4740c45e207d69ee186e17ea24c7",
     "text": "Yo-yo des rêves"
+  },
+  "content.boon.dream-yo-yo.rule": {
+    "reviewed": true,
+    "source": "Cards <keyword0>Dodged</keyword0> by enemies return to hand",
+    "sourceHash": "690ed76ee46083bd2c5a042a3148bdfdc8de474e113f0041629d6ee00e5c31fc",
+    "text": "Les cartes <keyword0>esquivées</keyword0> par les ennemis reviennent en main"
   },
   "content.boon.dune-shuttle.name": {
     "reviewed": true,
@@ -563,11 +647,23 @@
     "sourceHash": "26c1939f712efb2e51e31903fad474280109b0329b3124cb82669236797682a6",
     "text": "Lentille d’écho"
   },
+  "content.boon.echo-lens.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
+    "sourceHash": "61ba24d3e720922edcfcecd27db345cf4a87bda7ee4c802d51878eed3bc6dcec",
+    "text": "La <keyword0>Négation</keyword0> a {{value0}}% de chances de provoquer aussi un <keyword1>Renvoi</keyword1>"
+  },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
     "source": "Eclipse Protractor",
     "sourceHash": "679892d0e0ef8b1df95291dc602585825ba1422d92c2956a85b4d149ac5cefa2",
     "text": "Rapporteur d’éclipse"
+  },
+  "content.boon.eclipse-protractor.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "sourceHash": "4a8c80a8ac6de1e35ab4887999cc7d171eb3af69bf9ac384592eb7ec052cfd79",
+    "text": "Les <keyword0>Coups critiques</keyword0> ajoutent une accumulation de <keyword1>Gel</keyword1> égale aux dégâts bonus"
   },
   "content.boon.eclipse-rivet.name": {
     "reviewed": true,
@@ -611,6 +707,12 @@
     "sourceHash": "3fcf52ba595cddf593189750807bb6db7fdf0533338b595010c4014da583c0b8",
     "text": "Enclume d’étoile filante"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "0487812d69aa6f60a59c8772e3a6d84eb6d7b2a4502c08ba6796882c11445c2a",
+    "text": "La moitié du <keyword0>Blocage</keyword0> perdu face aux attaques ennemies devient une accumulation d’<keyword1>Étourdissement</keyword1> sur l’attaquant"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -653,6 +755,12 @@
     "sourceHash": "00064b156ca7a235d488a2226341c146f822c70afffd568978f0c691cef83ca4",
     "text": "Prisme de fournaise"
   },
+  "content.boon.furnace-prism.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits <keyword1>Blind</keyword1> <keyword2>Burning</keyword2> enemies",
+    "sourceHash": "c012c1cdc5c39090b807fbb35dae044ae1da01c79a5adfe24233d9be29f4053a",
+    "text": "Les touches de <keyword0>Lumière</keyword0> <keyword1>aveuglent</keyword1> les ennemis en <keyword2>Brûlure</keyword2>"
+  },
   "content.boon.gemmed-scabbard.name": {
     "reviewed": true,
     "source": "Gemmed Scabbard",
@@ -682,6 +790,12 @@
     "source": "Grafting Needle",
     "sourceHash": "63b93a062a83b90f33aebee57992acc5bcc1c738f1519f95adee7244b79b07ee",
     "text": "Aiguille à greffer"
+  },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "700a4b69569d88fa700b5e823577cd160bb50ec096e3cbb82f1739e0486e79b2",
+    "text": "<keyword0>Soigner</keyword0> un allié augmente son <keyword1>Armure</keyword1> jusqu’à la moitié de la vôtre"
   },
   "content.boon.grain-flail.name": {
     "reviewed": true,
@@ -749,6 +863,12 @@
     "sourceHash": "576336a05c3928f34a6615436707b85be302b0e0871a215709ef26509f0afa82",
     "text": "Presse à miel"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "d4a5fa8bd49d069854fc6310d7c9e86ea75c2ddd3bd12d80aa9df4269ab694fd",
+    "text": "<keyword0>Dissiper</keyword0> le <keyword1>Blocage</keyword1> ennemi restaure la moitié de cette valeur en <keyword2>Santé</keyword2> à l’allié le plus blessé"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -803,6 +923,12 @@
     "sourceHash": "0191fa14079187c1cc015e004ee279805889b7f972500dcfbc915b663effeb3b",
     "text": "Peigne à nœud"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "66c30d157806a6552c011266e24db91965cbde083c6dea65c68bed8e170710ed",
+    "text": "<keyword0>Purifie</keyword0> un effet néfaste aléatoire à chaque tour"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -820,6 +946,12 @@
     "source": "Last Threshold",
     "sourceHash": "942247d15490990f2dabd5f4d6e495ea6fa884ffc7b7e54e90cda5e9d72d07db",
     "text": "Dernier seuil"
+  },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "1448ecc4fd18fae51a088a39557344ad68751b73b0e44a22bb7b5b5ffc445af9",
+    "text": "Les <keyword0>soins</keyword0> excédentaires sont partagés avec les alliés aux portes de la mort"
   },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
@@ -839,11 +971,23 @@
     "sourceHash": "aa2cd3a15b2bbc3303442b2e3c6f60ae2ab5fda0e9cce21b9f9a3065116cfc06",
     "text": "Nœud des amoureux"
   },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "b97e6aff3343ca56e907011231a75fa1e9cd94ebf4f20fa9b8c3f021f546c825",
+    "text": "<keyword0>Soigner</keyword0> un allié vous <keyword1>soigne</keyword1> aussi"
+  },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
     "source": "Lucky Clover",
     "sourceHash": "2320dc206123fc0e4f9a632c5bbfbe159be004acfc554ff2dc5d58e47bbbc628",
     "text": "Trèfle porte-bonheur"
+  },
+  "content.boon.lucky-clover.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
+    "sourceHash": "e69c2bafaf0c013a4a82f9a07035f1630dd2ed1af056233f0725ddba615d0d50",
+    "text": "Les touches de <keyword0>Nature</keyword0> ont {{value0}}% de chances de donner autant d’or que de <keyword1>Santé</keyword1> perdue par l’ennemi"
   },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
@@ -863,17 +1007,35 @@
     "sourceHash": "56d39877676047c9439da7729131f499ded270cb196f99a6a1b118dc66b0bc0d",
     "text": "Métronome de mercure"
   },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "1e2f130be7d71a568dfaccabebd6021ee7a0bf64b226e9a3da29258f7bdfee6a",
+    "text": "Jouer à la suite des cartes d’alliés différents ajoute {{value0}} accumulation d’<keyword0>Étourdissement</keyword0> à tous les ennemis"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "322c0d5d9d96ed98bf0cade4b70a33e19d8a874d58e0cd99f0a3e93bb79402d9",
     "text": "Météorite"
   },
+  "content.boon.meteorite.rule": {
+    "reviewed": true,
+    "source": "Double your first <keyword0>Burn</keyword0> hit each battle",
+    "sourceHash": "e599aa517d33fe027acbab47f9616f8d6c98a5c7bb7bfa418226e419805553b1",
+    "text": "Double votre première touche de <keyword0>Brûlure</keyword0> à chaque combat"
+  },
   "content.boon.mineral-bookend.name": {
     "reviewed": true,
     "source": "Mineral Bookend",
     "sourceHash": "26ee4e0b7828409073064577d7f7d5ffca59cd32bb920db1956ef19e6ba758e6",
     "text": "Serre-livres minéral"
+  },
+  "content.boon.mineral-bookend.rule": {
+    "reviewed": true,
+    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "8007b9018f79e1801289e6e25b35a8ad10356d0a43eb8339ffcfad7784b38bcf",
+    "text": "Piocher la dernière carte de votre pioche restaure {{value0}} <keyword0>Mana</keyword0>"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -953,11 +1115,23 @@
     "sourceHash": "ae38e4f4f135977098de0833510ade8d1945f0dc843d7429a4c8db5a51cfbad5",
     "text": "Pichet d’obsidienne"
   },
+  "content.boon.obsidian-pitcher.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Leech</keyword0> applies half as much <keyword1>Burn</keyword1> to the enemy",
+    "sourceHash": "30bc0f70f059c259849a2940726f71e3d0e772c7a68f50e42ff2c7687f851876",
+    "text": "Le <keyword0>Vol de vie</keyword0> excédentaire applique à l’ennemi la moitié de sa valeur en <keyword1>Brûlure</keyword1>"
+  },
   "content.boon.orbit-armillary.name": {
     "reviewed": true,
     "source": "Orbit Armillary",
     "sourceHash": "5b41dc8fdef51fc64b91c529339f431189c6b1c7c368ee73855a91f8415fbc08",
     "text": "Sphère armillaire orbitale"
+  },
+  "content.boon.orbit-armillary.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansed</keyword0> effects return to their source",
+    "sourceHash": "1c9644a524ab3764b5a94e2c01c75f161a65a253c401a84e98a4bdff8e3fe7a9",
+    "text": "Les effets <keyword0>purifiés</keyword0> retournent à leur source"
   },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
@@ -1001,11 +1175,23 @@
     "sourceHash": "03b06354a1022692b6f59b3088d9c8291b04cc1e01f25d7c3d9f64694d3487ce",
     "text": "Bobine à motifs"
   },
+  "content.boon.pattern-reel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect removes it from every enemy",
+    "sourceHash": "47bc2d85fd54bd0f4351e8d67b90251d35da05961ee77241855158e15add6993",
+    "text": "<keyword0>Dissiper</keyword0> un effet le retire à tous les ennemis"
+  },
   "content.boon.peace-knot.name": {
     "reviewed": true,
     "source": "Peace Knot",
     "sourceHash": "973d42965d6077cc9888ead0c551f787dc9aeaddeb1af3f4fb891173607cba33",
     "text": "Nœud de paix"
+  },
+  "content.boon.peace-knot.rule": {
+    "reviewed": true,
+    "source": "When <keyword0>Nullify</keyword0> prevents a harmful effect, other allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "4f0cc599b53e5b20287675d0e575a9e8120a287bffcf0406bcb491c08fa175b9",
+    "text": "Quand <keyword0>Annulation</keyword0> prévient un effet néfaste, les autres alliés gagnent {{value0}} <keyword1>Blocage</keyword1>"
   },
   "content.boon.pearl-sieve.name": {
     "reviewed": true,
@@ -1013,11 +1199,23 @@
     "sourceHash": "9eb0c53a847f3f2be8d92301b38911297c49241921ade938ba2c12e795279e4e",
     "text": "Tamis à perles"
   },
+  "content.boon.pearl-sieve.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> removes an extra effect from enemies with <keyword1>Block</keyword1>",
+    "sourceHash": "959101102de7a60a13058d5d814a52720761e55b9f2d8245d0a03072339be9bd",
+    "text": "La <keyword0>Dissipation</keyword0> retire un effet supplémentaire aux ennemis ayant du <keyword1>Blocage</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
     "sourceHash": "2d6fdf1ef7f2a8eb46c8d80b11280e585c07afbef5876fa6caec28035960fd9e",
     "text": "Masque du médecin de peste"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "0967df57efcffc0fec463a0f6e452e407bbeeffd717af6ccac4d0891d3230278",
+    "text": "Avant les dégâts de début de tour, chaque allié <keyword0>purifie</keyword0> jusqu’à {{value0}} <keyword1>Poison</keyword1> et inflige la moitié de la quantité retirée en dégâts de <keyword2>Poison</keyword2> au premier ennemi vivant"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1037,11 +1235,23 @@
     "sourceHash": "a683da00d04da3189af8cf8b0c17e8fc896c64d8092091e347ca5ab108e237c9",
     "text": "Moulin à graines de pavot"
   },
+  "content.boon.poppy-seed-grinder.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage adds half as much <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "efd3a81509c1920804f1ce7a6da93535a821a051505c39cf79a016c92fadb54b",
+    "text": "Les dégâts de <keyword0>Poison</keyword0> ajoutent la moitié de cette valeur en accumulation d’<keyword1>Étourdissement</keyword1>"
+  },
   "content.boon.prayer-sailboat.name": {
     "reviewed": true,
     "source": "Prayer Sailboat",
     "sourceHash": "c3ad3a17c5f30d94d885626e8f53c01b29729fd9286f9fc48d8a9e3158def6ce",
     "text": "Voilier de prière"
+  },
+  "content.boon.prayer-sailboat.rule": {
+    "reviewed": true,
+    "source": "Swapping out <keyword0>Cleanses</keyword0> <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "236881127b524ee33dccda84795a192801be8e120ba2bfd089055a7d5452266a",
+    "text": "Sortir du combat <keyword0>purifie</keyword0> l’<keyword1>Étourdissement</keyword1> et le <keyword2>Gel</keyword2>"
   },
   "content.boon.prism-chisel.name": {
     "reviewed": true,
@@ -1049,17 +1259,35 @@
     "sourceHash": "5b3d5056d8390a29a9212c65b5a6224e6dd0cfa873e5ae8d0baabedbe1b782df",
     "text": "Ciseau prismatique"
   },
+  "content.boon.prism-chisel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Armor</keyword1> deals equal <keyword2>Light</keyword2> damage to that enemy",
+    "sourceHash": "acfaa769f29f60232f7146a34cdbbbcc1196f5f481ed7c2bf022ae98dd2688f2",
+    "text": "<keyword0>Dissiper</keyword0> l’<keyword1>Armure</keyword1> ennemie inflige autant de dégâts de <keyword2>Lumière</keyword2> à cet ennemi"
+  },
   "content.boon.pruning-crescent.name": {
     "reviewed": true,
     "source": "Pruning Crescent",
     "sourceHash": "7f92823342d89defa6787f5e714d17bd264420fb875dbadfdbd720ebc6d63974",
     "text": "Croissant d’élagage"
   },
+  "content.boon.pruning-crescent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
+    "sourceHash": "cf22a3fff26bd111117ed08fa599744d0f443191fee09533799363e296e22cc8",
+    "text": "Vous volez les <keyword1>Épines</keyword1> ennemies en les <keyword0>dissipant</keyword0>"
+  },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
     "source": "Pumpkin Tureen",
     "sourceHash": "281374633c45417f663e50430d9ad2c13a80d5c6e0b9f357352024f8458dc683",
     "text": "Soupière citrouille"
+  },
+  "content.boon.pumpkin-tureen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
+    "sourceHash": "8e884d125e70c7dade01495a59426a534b675b778798513e39ad792bc9d61903",
+    "text": "La <keyword0>Nourriture</keyword0> confère des <keyword1>Santé</keyword1> et du <keyword2>Blocage</keyword2> à tous les alliés"
   },
   "content.boon.rain-cape.name": {
     "reviewed": true,
@@ -1078,6 +1306,12 @@
     "source": "Raincatcher Bowl",
     "sourceHash": "e70dc9eb36afb7700a7f618576aa94cefdbf808e9e2390b4bb15c13430c05a2b",
     "text": "Bol attrape-pluie"
+  },
+  "content.boon.raincatcher-bowl.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana Crystal</keyword0> if you have a <keyword1>Water</keyword1> card in your deck",
+    "sourceHash": "8e745b390451703a715ca26f4c1eb93586f038610e4a6d2fdd0a913a23a0de4e",
+    "text": "Gagnez {{value0}} <keyword0>Cristal de mana</keyword0> si votre deck contient une carte <keyword1>Eau</keyword1>"
   },
   "content.boon.rainkeeper.name": {
     "reviewed": true,
@@ -1108,6 +1342,12 @@
     "source": "Reef Incense Tile",
     "sourceHash": "a11e5aaf06f58cf8e29bc5dc724ec1c2cc91115cec60fc5c7b26248455da3c1a",
     "text": "Tuile d’encens du récif"
+  },
+  "content.boon.reef-incense-tile.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits spread <keyword1>Blind</keyword1> to another enemy",
+    "sourceHash": "99b5e2b0497de098d3305941d37d19e3b80ff453e8d15c3d5ed09a44a43b417f",
+    "text": "Les touches d’<keyword0>Eau</keyword0> propagent l’<keyword1>Aveuglement</keyword1> à un autre ennemi"
   },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
@@ -1187,6 +1427,12 @@
     "sourceHash": "27d3802742d9e8bcb9f8a7f6d288d42050648ebc9e4ce30d11a32e84ff7292e5",
     "text": "Urne des dormeurs"
   },
+  "content.boon.sleepers-urn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
+    "sourceHash": "3fa2252a0d1528dfe6b9df2dd7654cf859bddcea6da686ca7f10ac66b3abd514",
+    "text": "L’accumulation d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> peut augmenter pendant l’immunité ennemie"
+  },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
     "source": "Smuggler's Map",
@@ -1204,6 +1450,12 @@
     "source": "Sovereign Toast Rack",
     "sourceHash": "d96344ee375a798c3a10df5ffbb8a184d03a47942149940268e4b97ba23ce3af",
     "text": "Porte-toasts souverain"
+  },
+  "content.boon.sovereign-toast-rack.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
+    "sourceHash": "c6248b2b287fb4bac94e9af81e7816dc508d3e600e4987b2454b76a116d8ece3",
+    "text": "Jouer de la <keyword0>Nourriture</keyword0> confère {{value0}} <keyword1>Armure</keyword1> à tous les alliés"
   },
   "content.boon.star-hoop.name": {
     "reviewed": true,
@@ -1223,17 +1475,35 @@
     "sourceHash": "4d3c7c162a89db406c434b90ec882b879a63caaddc5404612b1c3514624df01b",
     "text": "Pierre à aiguiser stellaire"
   },
+  "content.boon.stardust-whetstone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits apply {{value0}} <keyword1>Bleed</keyword1> to enemies with <keyword2>Armor</keyword2>",
+    "sourceHash": "0f3978969c0b91b89959a4a89f38c8cc210e186f149e4daeabd5ec2ec1f05912",
+    "text": "Les touches <keyword0>Physiques</keyword0> appliquent {{value0}} <keyword1>Saignement</keyword1> aux ennemis ayant de l’<keyword2>Armure</keyword2>"
+  },
   "content.boon.story-puzzle-cube.name": {
     "reviewed": true,
     "source": "Story Puzzle Cube",
     "sourceHash": "e6daa4f80a2235903a8899f291db021cdd5e8a1f17381a37ba526f12de7cde1f",
     "text": "Cube d’énigmes"
   },
+  "content.boon.story-puzzle-cube.rule": {
+    "reviewed": true,
+    "source": "Applying three different harmful effects <keyword0>Purges</keyword0> the last enemy affected",
+    "sourceHash": "b79c4ccbdc223929724211e333352d603948fda82366cc432ca4792e8999a461",
+    "text": "Appliquer trois effets néfastes différents <keyword0>dissipe</keyword0> un effet bénéfique du dernier ennemi affecté"
+  },
   "content.boon.sundering-charm.name": {
     "reviewed": true,
     "source": "Sundering Charm",
     "sourceHash": "99b52eb0c84940a82daee20c3adfe6a32b69d1bc90a2131a60de218ccbda12e2",
     "text": "Charme de fracture"
+  },
+  "content.boon.sundering-charm.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Physical</keyword0> and <keyword1>Stun</keyword1> hits remove {{value0}} enemy <keyword2>Armor</keyword2> before damage",
+    "sourceHash": "8ba42ee5948b92a96da587844e112284e4aaa3d75a89cfc618b0a1e22f62ad78",
+    "text": "Vos touches <keyword0>Physiques</keyword0> et d’<keyword1>Étourdissement</keyword1> retirent {{value0}} <keyword2>Armure</keyword2> ennemie avant les dégâts"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
@@ -1265,6 +1535,12 @@
     "sourceHash": "e121e2ef459c97014aac9879d1c81de17ed67fc0734f59064245c306847110ac",
     "text": "Tamis de chardon"
   },
+  "content.boon.thistle-sieve.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Poison</keyword0> and <keyword1>Bleed</keyword1> <keyword2>Cleansed</keyword2> from allies becomes <keyword3>Thorns</keyword3>",
+    "sourceHash": "db7fe5dc27027873f49298ace1392844dd803c905258f00b58ff83987cef9c89",
+    "text": "La moitié du <keyword0>Poison</keyword0> et du <keyword1>Saignement</keyword1> <keyword2>purifiés</keyword2> des alliés devient des <keyword3>Épines</keyword3>"
+  },
   "content.boon.thornheart-ring.name": {
     "reviewed": true,
     "source": "Thornheart Ring",
@@ -1282,6 +1558,12 @@
     "source": "Thunder Conch",
     "sourceHash": "1401857a4fbe16ee5e8dd2d1ff1e6701c98298a5921d0ffb2f5c3e5d91b9729a",
     "text": "Conque du tonnerre"
+  },
+  "content.boon.thunder-conch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy <keyword1>Blinds</keyword1> the other enemies",
+    "sourceHash": "4786c668d66444f931033faf07370bb9ddea63d6e65d64d953f59af52f9d61cb",
+    "text": "<keyword0>Étourdir</keyword0> un ennemi <keyword1>aveugle</keyword1> les autres ennemis"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1301,6 +1583,12 @@
     "sourceHash": "0882161c2274236158ef89d680e4e0a37ee89455f98075d7dcc51f1c457a5ee3",
     "text": "Bracelet de cheville des marées"
   },
+  "content.boon.tide-anklet.rule": {
+    "reviewed": true,
+    "source": "Swapping allies both keep the higher <keyword0>Block</keyword0> total",
+    "sourceHash": "98a2354228faea82f536b429dbda7f9ce6216cafefa2312ee9e308b247f8144f",
+    "text": "Les deux alliés permutés conservent chacun le total de <keyword0>Blocage</keyword0> le plus élevé"
+  },
   "content.boon.tidecrest-hairpin.name": {
     "reviewed": true,
     "source": "Tidecrest Hairpin",
@@ -1318,6 +1606,12 @@
     "source": "Tuning Fork Charm",
     "sourceHash": "c54d8702dcbf0bf0bf4f8f5352431b9abae2b66e64181a51a2e6147521b553fb",
     "text": "Charme diapason"
+  },
+  "content.boon.tuning-fork-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits ignore <keyword1>Armor</keyword1> on enemies with <keyword2>Stun</keyword2> buildup",
+    "sourceHash": "c014bc8ff31bb63fc38eec12a8bf38e914ff710610d468d4f315a03a2fd3b628",
+    "text": "Les touches <keyword0>Physiques</keyword0> ignorent l’<keyword1>Armure</keyword1> des ennemis ayant une accumulation d’<keyword2>Étourdissement</keyword2>"
   },
   "content.boon.undertow-castanets.name": {
     "reviewed": true,
@@ -1337,11 +1631,23 @@
     "sourceHash": "8e8bfc2429450f0e0a1d9ab4d670480a899aa15519e245913a6b9bb640910199",
     "text": "Fouet de velours"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "a0a51ba0a06f667eb7dae6ddff7ae971f7aa0a3539af576b84c5d58bd0017b85",
+    "text": "La <keyword0>Nourriture</keyword0> confère {{value0}}% d’<keyword1>Esquive</keyword1> à ses cibles jusqu’à leur prochain tour"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
     "sourceHash": "d540420762d5d48ae90afcc2f7c82eb9b7969e1abcf904927ad177912f24b6d0",
     "text": "Lanterne de veille"
+  },
+  "content.boon.vigil-lantern.rule": {
+    "reviewed": true,
+    "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "a6fffe41e2a1d2d6ab992099c0226e6acbdf1c275f075d3899c80d281bb5ec0b",
+    "text": "Les alliés aux portes de la mort peuvent agir malgré l’<keyword0>Étourdissement</keyword0> et le <keyword1>Gel</keyword1>"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,
@@ -1349,11 +1655,23 @@
     "sourceHash": "32b4d376621265b68f183b354a2f83a58dd599f87cd3d05e58b43a0c6a7097f0",
     "text": "Moule à cire gaufrée"
   },
+  "content.boon.wax-foundation-mold.rule": {
+    "reviewed": true,
+    "source": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
+    "sourceHash": "82e2e2386974ffaac839b027074ee9767e9eea16290528e3a4ba05a49f5f688d",
+    "text": "Les alliés ayant de l’<keyword0>Armure</keyword0> conservent {{value0}}% de leur <keyword1>Blocage</keyword1> lors de sa diminution"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
     "sourceHash": "b50e8b20e7f50b6a298a6750de223a75ad34933836333eab64f9fca8a454706d",
     "text": "Tamis à vanner"
+  },
+  "content.boon.winnowing-sieve.rule": {
+    "reviewed": true,
+    "source": "Unused <keyword0>Purge</keyword0> spreads to other enemies",
+    "sourceHash": "c9d85109c5bc2417d920954979dbeab590b57ca9904227e5b5b62dd4f0fffdfd",
+    "text": "La <keyword0>Dissipation</keyword0> inutilisée se propage aux autres ennemis"
   },
   "content.boon.wishing-building-block.name": {
     "reviewed": true,
@@ -1361,11 +1679,23 @@
     "sourceHash": "635b24673ffc93c215f3c7562282937672cbcd820426974a0ab4536eefa92124",
     "text": "Brique à souhaits"
   },
+  "content.boon.wishing-building-block.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies with <keyword2>Armor</keyword2>",
+    "sourceHash": "c408c949f1dd0aa112d4a10b46ce65d9a67073962cf3ab6c6aedff8c9d47a486",
+    "text": "Gagner de l’<keyword0>Armure</keyword0> confère {{value0}} <keyword1>Blocage</keyword1> aux autres alliés ayant de l’<keyword2>Armure</keyword2>"
+  },
   "content.boon.wonder-ball-maze.name": {
     "reviewed": true,
     "source": "Wonder Ball Maze",
     "sourceHash": "cedfbbcd6eedff7f27467c1325da3564ddf54e15d1dd708dff19f98752debea8",
     "text": "Labyrinthe à bille merveilleux"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "4587fd58b39466d80d321b5df5068acd0891abe5b8718ba960b0ea79e067561d",
+    "text": "L’accumulation excédentaire d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> se propage aux autres ennemis"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,
@@ -1384,6 +1714,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "565668d46f493670bc6810b2dacd12547d824766db391f75d2104305212738b2",
     "text": "Boîte d’onguent d’achillée"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "6aff4b7c2798037e3548d1c94843cf2b33f38a789b3c991199a82aa27d0c8861",
+    "text": "<keyword0>Soigner</keyword0> un allié <keyword1>purifie</keyword1> aussi son <keyword2>Saignement</keyword2>"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,
@@ -1457,6 +1793,12 @@
     "sourceHash": "9ab449f9c515b6eddd1c62a5ed8e78a250207e86b491dd5f47718112048d5d9f",
     "text": "Courant printanier"
   },
+  "content.card.almanelle-spring-current.v4ef670b6f7cbf3dc.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage; <keyword1>Cleanse</keyword1> acting creature: remove {{value1}} effect",
+    "sourceHash": "730614ed3c3096d1b3968be0f9fc07b73ad760a0e4bbf7e965bee3df50a7cfe5",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0>; <keyword1>Purifie</keyword1> la créature qui agit : effets retirés {{value1}}"
+  },
   "content.card.alpenglen-ember-of-evening.name": {
     "reviewed": true,
     "source": "Ember of Evening",
@@ -1474,6 +1816,12 @@
     "source": "Last Light Charge",
     "sourceHash": "43d3dca40cc982361d4cf87543ab91cd4fc92a98678b6622f78820d8717fc982",
     "text": "Charge de la dernière lueur"
+  },
+  "content.card.alpenglen-last-light-charge.v1f33976bc5c4743a.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / If this is the last card in your hand, it <keyword1>Critically Hits</keyword1>",
+    "sourceHash": "b02786a7f5fc3d280c0135d465c98bc9f363afda7568fd05478369ff678d0154",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> / Si c’est la dernière carte en main, elle inflige un <keyword1>coup critique</keyword1>"
   },
   "content.card.alpenglen-sunset-reversal.name": {
     "reviewed": true,
@@ -1745,6 +2093,12 @@
     "sourceHash": "6c1dd56e2a6fdddcfad8a2b6ace0a9edbcfa657d21ade7515032ade8c842abce",
     "text": "Souffle de braise"
   },
+  "content.card.cindernewt-ember-breath.vc78832019def2740.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; Remove {{value1}}% of all enemies’ <keyword1>Armor</keyword1>, rounded up",
+    "sourceHash": "f0d83311a142f1cc543745e79b1b108870b462e4115ac80ea87064aea84d1f11",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Brûlure</keyword0> à tous les ennemis; Retire {{value1}}% de l’<keyword1>Armure</keyword1> de tous les ennemis, arrondi au supérieur"
+  },
   "content.card.coralcurl-attack.name": {
     "reviewed": true,
     "source": "Reef Jet",
@@ -1984,6 +2338,12 @@
     "source": "Wish Exchange",
     "sourceHash": "ac83f8b4d80106d7a149678cc8b5ba787b335ffea29f932667d45e5afcaad497",
     "text": "Échange de souhaits"
+  },
+  "content.card.euphera-wish-exchange.vd1f1e1a2180731d6.rule": {
+    "reviewed": true,
+    "source": "Redistribute allied <keyword0>Block</keyword0> evenly; Allies gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "c202b9bd823bab6dfd53440794760ff519723692308ca7ebfae3789b0f2a40a5",
+    "text": "Redistribue équitablement le <keyword0>Blocage</keyword0> allié; Les alliés gagnent {{value0}} <keyword1>Blocage</keyword1>"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
@@ -2441,6 +2801,12 @@
     "sourceHash": "9734bd40de5468cabc2ad3813dac4e88a14936f9c00f2fbd46d866cc347cb914",
     "text": "Leurre d’étincelles"
   },
+  "content.card.pyrella-spark-decoy.v8a41d40b1299246b.rule": {
+    "reviewed": true,
+    "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
+    "sourceHash": "082bf6fa0d9b9a8a56a99dce809bb71e6fb5f5963af714732902baf7f6cab06d",
+    "text": "Applique {{value0}} <keyword0>Brûlure</keyword0> à tous les ennemis / Gagne <keyword1>Négation</keyword1>"
+  },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
     "source": "Reed Rush",
@@ -2482,6 +2848,12 @@
     "source": "Dream Double",
     "sourceHash": "abc4461f2116dfca7462650260f6f913c86528f03f3f7f5205ccd57fc3cb3f81",
     "text": "Double onirique"
+  },
+  "content.card.reverie-dream-double.v663a5ebcf1603696.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> / <keyword1>Negate</keyword1> the next attack against you",
+    "sourceHash": "d30570ba6a4dc3d929f111bc516e0b09fb661e8d039c498a1fcb8a32ea81c151",
+    "text": "Gagne {{value0}} <keyword0>Épines</keyword0> / <keyword1>Annule</keyword1> la prochaine attaque contre vous"
   },
   "content.card.reverie-nightmare-harvest.name": {
     "reviewed": true,
@@ -2531,11 +2903,29 @@
     "sourceHash": "eeca01f24088b1b5b818d7d5420832473fc32727760f54f7fb171ae41048b376",
     "text": "Ensemble harmonique"
   },
+  "content.card.ringpalm-harmonic-set.v25a5a439abde8b5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies; Gain {{value1}} <keyword1>Armor</keyword1>; {{value2}}% chance to repeat",
+    "sourceHash": "fee981e2f005f14a29947118cce8127c29075301e7e31406bc2ce85d2492c56b",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Étourdissement</keyword0> à tous les ennemis; Gagne {{value1}} <keyword1>Armure</keyword1>; {{value2}}% de chances de répéter"
+  },
   "content.card.ringpalm-teamProtection.name": {
     "reviewed": true,
     "source": "Seedling Circle",
     "sourceHash": "a0fb38a264339ef195898158ab6d5756773033a86f725b42cc5be242e62dd609",
     "text": "Cercle des pousses"
+  },
+  "content.card.ringpalm-teamProtection.v68c094f45469e2e7.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "3ea2fb1bfec4ea765efc76acec8c912590216b0bd527877520c99e3f50203ce6",
+    "text": "Confère à tous les alliés {{value0}} <keyword0>Blocage</keyword0> ou {{value1}} <keyword1>Épines</keyword1>"
+  },
+  "content.card.ringpalm-teamProtection.vd482684309420727.rule": {
+    "reviewed": true,
+    "source": "Grant all allies {{value0}} <keyword0>Block</keyword0> or <keyword1>Thorns</keyword1>",
+    "sourceHash": "6a176ac5273731981115828a19287fe7b2012a2405617262db830532df4637eb",
+    "text": "Confère à tous les alliés {{value0}} <keyword0>Blocage</keyword0> ou <keyword1>Épines</keyword1>"
   },
   "content.card.rookhaven-borrowed-brilliance.name": {
     "reviewed": true,
@@ -2585,6 +2975,12 @@
     "sourceHash": "84ec83ce0bd28d50dd8dbd3907cca9c07cbb9da5c012af40654ea583b3b22bdf",
     "text": "Front frais"
   },
+  "content.card.shadebrim-attack.v3e3afb5ff55b429b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage to all enemies; <keyword1>Cleanse</keyword1> all allies",
+    "sourceHash": "fe1be16d9604e61b0f1a0771f18c113c8fe5fd29f08b2a7ddccecfde0464e208",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Gel</keyword0> à tous les ennemis; <keyword1>Purifie</keyword1> tous les alliés"
+  },
   "content.card.shadebrim-draw.name": {
     "reviewed": true,
     "source": "Noon Bloom",
@@ -2632,6 +3028,12 @@
     "source": "Cloudstep",
     "sourceHash": "f8847519b302209d4a1b5332e84b7c588d758c6d5d13b0ad63dc0b236e335562",
     "text": "Pas de nuage"
+  },
+  "content.card.skybex-cloudstep.va085bbb1553c1dba.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random ally / Incoming ally gains {{value0}}% <keyword0>Dodge</keyword0> until next turn",
+    "sourceHash": "4e253ed6925cdbf295d2f65029d3f94b26976b35b116b1e6ad979cfcf577a8eb",
+    "text": "Échange avec un allié aléatoire / L’allié entrant gagne {{value0}}% d’<keyword0>Esquive</keyword0> jusqu’au prochain tour"
   },
   "content.card.skybex-draw.name": {
     "reviewed": true,
@@ -2765,6 +3167,12 @@
     "sourceHash": "e72a8730daadf983139c608bfb3659869afc9b4892143851a7d41b67de512509",
     "text": "Défi vaillant"
   },
+  "content.card.tournelle-attack.v3552ea72c7b78195.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage / Doubled against enemies with more <keyword1>Health</keyword1> than you",
+    "sourceHash": "51af1496097fb87640f756f4fa3c47b7945dde188d7aa656dff05269fff259a8",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> / Doublés contre les ennemis ayant plus de <keyword1>Santé</keyword1> que vous"
+  },
   "content.card.tournelle-swapLowest.name": {
     "reviewed": true,
     "source": "Safe Passage",
@@ -2848,6 +3256,12 @@
     "source": "Saffron Screen",
     "sourceHash": "39470146bc608cbd2c67d31cbeb8bc2ee616a6ee5810f878835337ca71433c97",
     "text": "Écran de safran"
+  },
+  "content.card.wickwaltz-guard.v88552587eebef41d.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Nullify</keyword1> the next <keyword2>Freeze</keyword2> damage",
+    "sourceHash": "66f99c6fe418a0f81f4b3337fc0a1e3c9fc7d15c8f23f1899bacf692f8d764f0",
+    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0>; <keyword1>Annule</keyword1> les prochains dégâts de <keyword2>Gel</keyword2>"
   },
   "content.card.wisterelle-forgotten-junction.name": {
     "reviewed": true,
@@ -2933,6 +3347,12 @@
     "sourceHash": "5ee474a37f832f061c7a9352741336b05c3b9d885ab9c64b20b12cdd390322c1",
     "text": "Réserve"
   },
+  "content.glossary.battle.definition.rule": {
+    "reviewed": true,
+    "source": "One encounter; Defeat every enemy to win; <keyword0>Health</keyword0> and knockouts persist between encounters; Campfire Rest restores {{value0}}% of each creature's maximum <keyword1>Health</keyword1>, including knocked-out creatures; Combat effects and <keyword2>Block</keyword2> reset for the next battle",
+    "sourceHash": "0a3b30d1d7d4f73250e854e733d3d19daefb105fb03be715ada6c6e0f16d47f2",
+    "text": "Une rencontre; Vaincre tous les ennemis pour gagner; La <keyword0>Santé</keyword0> et les K.-O. persistent entre les rencontres; Le repos au feu restaure {{value0}}% de la <keyword1>Santé</keyword1> maximale de chaque créature, même mise K.-O.; Les effets de combat et le <keyword2>Blocage</keyword2> sont réinitialisés pour le combat suivant"
+  },
   "content.glossary.battle.term.rule": {
     "reviewed": true,
     "source": "Battle",
@@ -2968,6 +3388,12 @@
     "source": "Damage",
     "sourceHash": "d20e5f41380e44dc318e49da96063e1f8e4c11ab760843982287a98f63cd47bf",
     "text": "Dégâts"
+  },
+  "content.glossary.deaths-door.definition.rule": {
+    "reviewed": true,
+    "source": "Each allied creature survives fatal damage once per battle at {{value0}} <keyword0>Health</keyword0>, with {{value1}} grace turns; Fatal packets during those grace turns still leave {{value2}} <keyword1>Health</keyword1>; later damage can knock it out; Reserve turns also spend grace",
+    "sourceHash": "a562785819d42c44f940b5fe0c188c5fac99d66b10529a87eb3cc8e84dd6913b",
+    "text": "Chaque créature alliée survit une fois par combat aux dégâts mortels avec {{value0}} <keyword0>Santé</keyword0> et {{value1}} tours de répit; Les dégâts mortels pendant ce répit laissent encore {{value2}} <keyword1>Santé</keyword1>; Les dégâts ultérieurs peuvent la mettre K.-O.; Les tours en réserve consomment aussi le répit"
   },
   "content.glossary.deaths-door.term.rule": {
     "reviewed": true,
@@ -3023,6 +3449,12 @@
     "sourceHash": "cb59590c1fe50e64ace033cc1d1ac760d9d533b879d4dd13a0ae81c6da7874cd",
     "text": "Coup"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "f6bda186c283c7e0c78d278f315b2d244d9cb61b5579c7417a88f694f8538391",
+    "text": "Jouer une carte d’action rapporte {{value0}} XP pour chacun de ses mots-clés; Les XP de fin de combat sont permanents, même après une défaite; Abandonner conserve les XP déjà gagnés sans accorder les récompenses de victoire"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3052,6 +3484,12 @@
     "source": "{{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword0>Dodge</keyword0> by every recipient; Does not stack",
     "sourceHash": "d5a2de3648b928eb996a36d6f32c899ffbcd7d61065ab752d2d348fcfe696a93",
     "text": "{{value0}}% de chances de rater votre prochaine attaque; Expire après cette attaque, qu’elle touche ou non; Un échec compte comme une <keyword0>Esquive</keyword0> pour chaque cible; Ne se cumule pas"
+  },
+  "content.glossary.keyword.block.definition.rule": {
+    "reviewed": true,
+    "source": "Absorbs incoming damage, including <keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> ticks, before <keyword3>Health</keyword3>; Does not prevent hit effects, buildup or <keyword4>Leech</keyword4> unless specified; Remaining <keyword5>Block</keyword5> normally halves at the start of your next turn, rounded normally",
+    "sourceHash": "704bc642d94937eb6933990c928e16ddbab4f9f47930d05abdbeedbc310c0049",
+    "text": "Absorbe les dégâts reçus avant la <keyword3>Santé</keyword3>, y compris les dégâts périodiques de <keyword0>Brûlure</keyword0>, <keyword1>Poison</keyword1> et <keyword2>Saignement</keyword2>; Ne prévient ni les effets de touche, ni l’accumulation, ni le <keyword4>Vol de vie</keyword4> sauf indication contraire; Le <keyword5>Blocage</keyword5> restant est normalement réduit de moitié au début de votre prochain tour, avec un arrondi normal"
   },
   "content.glossary.keyword.burn.definition.rule": {
     "reviewed": true,
@@ -3149,6 +3587,12 @@
     "sourceHash": "ac71d7c08ee74bd9e1bef6f8b13f817ee8834a7067e55e5205c6050866e322ec",
     "text": "renvoie l’attaque ou l’effet de statut néfaste indiqué; Le <keyword0>renvoi d’attaque</keyword0> retourne les dégâts et effets néfastes associés à l’attaquant; Le <keyword1>renvoi</keyword1> d’un statut seul redirige l’effet vers un ennemi vivant aléatoire, mais les dégâts directs touchent quand même; Les attaques et statuts <keyword2>renvoyés</keyword2> ne peuvent pas être <keyword3>renvoyés</keyword3> à nouveau; Les charges ne se cumulent pas"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "3b4bd723775961557ff8917553b90f873fb86f844e364fdc3879cbc7b18ce9a2",
+    "text": "Ramène un allié mis K.-O. avec {{value0}}% de sa <keyword0>Santé</keyword0> maximale, arrondi normalement avec un minimum de {{value1}}; Ne renouvelle pas les portes de la mort"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3166,6 +3610,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "ec710358846b6afb0280025a62a035fef37b1ff3df5d3a69ac5ca95ed25c19d1",
     "text": "Dégâts d’<keyword0>Eau</keyword0> ; le <keyword1>Blocage</keyword1> les absorbe ; l’<keyword2>Armure</keyword2> ne les réduit pas ; aucun effet de statut n’est appliqué"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "fb7501b113d10ad7a6a80e93188901e33fe9bfc961dcd2a0a5a3afa840242b26",
+    "text": "À zéro <keyword0>Santé</keyword0>, une créature ne peut ni agir ni être <keyword1>soignée</keyword1> pendant ce combat; Ses cartes ne peuvent pas être jouées ni piochées normalement; Une réserve vivante peut la remplacer; Perdre toutes les créatures du groupe termine le voyage"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3202,6 +3652,12 @@
     "source": "Pearl",
     "sourceHash": "09becc1887c78af1e593b65814146640d1fca46d3c43f0e6a2ae637fd36df570",
     "text": "Perle"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "6eeed09de045a4f6c032217ebc2767cf36d3136dddd6bcc30a9b911f0309d5b6",
+    "text": "Votre sélection détermine la formation initiale; Les remplacements après un K.-O. et les permutations par capacité la modifient pour les combats suivants; Les recrues occupent les places ordinaires libres avant de rejoindre la réserve; La formation ne peut pas être modifiée manuellement"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,
@@ -7439,6 +7895,12 @@
     "sourceHash": "90647c9acf3e68303eefcb41c4480f9d921760ca6b2e9c8d470746d3bf0400e2",
     "text": "{{name}} est K.-O."
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "188bbe03eaea8d5bb5bf257d5649713dbc2e28f1be49715641f9a3b111798070",
+    "text": "{{name}} perd {{amount}} Armure"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7456,6 +7918,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "13b45693f5679b6a3fb83f5a7e35e5b360fbad1a4e262948d32b7e5979116f08",
     "text": "{{name}} annule les dégâts de Gel"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "e464e287609f8abb82426e2eb19dae360f47e02ecdd1aed083e46286e82ade13",
+    "text": "{{name}} atteint les portes de la mort : tours de répit restants : {{amount}}."
   },
   "log.reflectAttack": {
     "reviewed": true,

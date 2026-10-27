@@ -112,6 +112,7 @@ export function loseHealth(state: GameState, unit: Combatant, amount: number, ev
         targetId: unit.id,
         status: "deathDoor",
         outcome: "apply",
+        amount: stats.grace,
         text: `${unitName(unit)} reaches Death's Door: ${stats.grace} grace turns.`,
       });
     }
