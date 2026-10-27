@@ -14,7 +14,7 @@ import {
 } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { battlefield, healingAllies } from "../game/battlefield";
-import { cardKeywords, creaturePassive, hasTalent } from "../game/progression";
+import { cardKeywords, hasTalent, passiveAmount } from "../game/progression";
 import {
   controlled,
   hasHarmfulEffects,
@@ -75,20 +75,10 @@ export function battleBenefitFacts(state: BattleState) {
   const healingOnPlay =
     injuredAllies &&
     ((state.battle.hand.length === 1 &&
-      state.team.some(
-        (unit) =>
-          unit.health > 0 &&
-          creaturePassive(state, unit.species).effects.some(
-            (effect) => effect.kind === "lastWarmth" && effect.amount > 0,
-          ),
-      )) ||
+      state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "lastWarmth") > 0)) ||
       (state.battle.cardsPlayedThisTurn === 1 &&
         state.team.some(
-          (unit) =>
-            unit.health > 0 &&
-            creaturePassive(state, unit.species).effects.some(
-              (effect) => effect.kind === "livingChorus" && effect.amount > 0,
-            ),
+          (unit) => unit.health > 0 && passiveAmount(state, unit.species, "livingChorus") > 0,
         )) ||
       (state.battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards - 1 &&
         state.boons.includes("resonant-chimes") &&
@@ -354,14 +344,7 @@ export function battleBenefits(
       const selfRecovery =
         !useful && !def.allyOnly && !def.consume && card.ownerId === actor.id
           ? state.team.reduce(
-              (sum, unit) =>
-                sum +
-                (unit.health > 0
-                  ? creaturePassive(state, unit.species).effects.reduce(
-                      (total, effect) => total + (effect.kind === "lostAndFound" ? effect.amount : 0),
-                      0,
-                    )
-                  : 0),
+              (sum, unit) => sum + (unit.health > 0 ? passiveAmount(state, unit.species, "lostAndFound") : 0),
               0,
             )
           : 0;
