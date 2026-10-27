@@ -4769,6 +4769,12 @@
     "sourceHash": "869a101c8c983ac4321747fac44b0fa773f3373b9a123440f5c6d5d5b142f895",
     "text": "{{name}} предотвращает урон от заморозки"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "69f9c3dee8f4c6f1d902ae841fe2f516afb034dd099bec63a2d44a902c4b162a",
+    "text": "{{actor}} отражает атаку — цель: {{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

@@ -4769,6 +4769,12 @@
     "sourceHash": "f772535eaa3937db6df72692125501b575f09320f91fa9b517a789a190ff8f72",
     "text": "{{name}} verhindert Frostschaden"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "cc00fb66d7e2211fbcdd9bad425cb1ab7d3c1d55932175a681f4218d67f505ec",
+    "text": "{{actor}} reflektiert den Angriff auf {{target}} zurück"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

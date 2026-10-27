@@ -4769,6 +4769,12 @@
     "sourceHash": "f4377085303b31f5d0310756addeea9d28e2c9d7016357b345d880cd03d08137",
     "text": "{{name}} anula el daño de Congelación"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "9c4be7cae8596e04fcae5226c1cee3ca6613cea3b6fdf045b9ad4df8240e2f4e",
+    "text": "{{actor}} refleja el ataque contra {{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

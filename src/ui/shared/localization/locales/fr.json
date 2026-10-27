@@ -4817,6 +4817,12 @@
     "sourceHash": "13b45693f5679b6a3fb83f5a7e35e5b360fbad1a4e262948d32b7e5979116f08",
     "text": "{{name}} annule les dégâts de Gel"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "0d98f6ac924b22f6544833945607c110255ff2bf58ce0728970b04c5b82811d0",
+    "text": "{{actor}} renvoie l’attaque contre {{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

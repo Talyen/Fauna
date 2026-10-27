@@ -4769,6 +4769,12 @@
     "sourceHash": "9f1921bf23ba61fd52c991dc57ba442bcf37fc08876ec7fa959c0ce327312c17",
     "text": "{{name}}抵消了冻结伤害"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "1493aca840dc1b3c1c28064ea144eb4c4c3322ff0c3f11144c496585ce2e5fb8",
+    "text": "{{actor}}将攻击反弹给{{target}}"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

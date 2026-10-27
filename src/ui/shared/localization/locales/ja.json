@@ -4769,6 +4769,12 @@
     "sourceHash": "edaa2142c6abbc37fec4b9fcb03e8f3487ec301d20f975d066f635d7446612ba",
     "text": "{{name}}は凍結ダメージを無効化した"
   },
+  "log.reflectAttack": {
+    "reviewed": true,
+    "source": "{{actor}} reflects the attack back at {{target}}",
+    "sourceHash": "e5589f1c5dda9d60e29265d06fef63dea7acc0d6fb6c645dedd85d302813e871",
+    "text": "{{actor}}が攻撃を{{target}}に跳ね返す"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",

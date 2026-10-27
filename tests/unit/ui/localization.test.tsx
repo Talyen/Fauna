@@ -190,6 +190,30 @@ it("localizes Dodge and interception announcements without rewriting unrelated e
   expect(eventPresentation(game, intercept, createMessageReader("en", {}))).toBe(intercept.text);
 });
 
+it("localizes reflected attacks while preserving unrecognized events", () => {
+  const game = run();
+  const actor = game.team[0]!;
+  const target = game.team[1]!;
+  const actorName = species(actor.species).name;
+  const targetName = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: actorName, text: "Protecteur" },
+    [`content.species.${target.species}.name`]: { source: targetName, text: "Attaquant" },
+  });
+  const event = {
+    kind: "status" as const,
+    status: "attackReflection" as const,
+    outcome: "immune" as const,
+    actorId: actor.id,
+    targetId: target.id,
+    text: `${actorName} reflects the attack back at ${targetName}`,
+  };
+  expect(eventPresentation(game, event, reader)).toBe("Protecteur renvoie l’attaque contre Attaquant");
+  expect(eventPresentation(game, { ...event, actorId: "missing" }, reader)).toBe(event.text);
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+});
+
 it("localizes temporary Dodge and lost Freeze buildup with their exact amounts", () => {
   const game = run();
   const target = game.team[0]!;

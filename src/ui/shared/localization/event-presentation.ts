@@ -106,6 +106,14 @@ export function eventPresentation(
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status") {
+    if (event.status === "attackReflection" && event.outcome === "immune") {
+      const actor = combatant(event.actorId);
+      if (actor && event.text === `${unitName(actor)} reflects the attack back at ${englishName}`)
+        return i18n.message("log.reflectAttack", "{{actor}} reflects the attack back at {{target}}", {
+          actor: localizedCombatantName(actor, i18n),
+          target: name,
+        });
+    }
     if (
       event.status === "nullify" &&
       event.outcome === "gain" &&

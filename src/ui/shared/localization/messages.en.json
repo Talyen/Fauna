@@ -344,6 +344,9 @@
   "log.nullifyFreezeDamage": {
     "text": "{{name}} nullifies Freeze damage"
   },
+  "log.reflectAttack": {
+    "text": "{{actor}} reflects the attack back at {{target}}"
+  },
   "log.removeBuildup": {
     "text": "{{name}}: Cleanse {{status}} build-up"
   },
