@@ -491,17 +491,71 @@
     "sourceHash": "70a54ef4566f1fbb02f8ebf5c5976282ed623ce7d5e9b5964614204b34b50033",
     "text": "Ioiô dos sonhos"
   },
+  "content.boon.dune-shuttle.name": {
+    "reviewed": true,
+    "source": "Dune Shuttle",
+    "sourceHash": "7a6aa3ddd25a4e535c4826854c010025e37c60e0b333cd913ee20bcc3905bf90",
+    "text": "Lançadeira das dunas"
+  },
+  "content.boon.echo-lens.name": {
+    "reviewed": true,
+    "source": "Echo Lens",
+    "sourceHash": "dd475d1cd342176c0c877e2f40862644c55a24778ca392148568931f9c357e4e",
+    "text": "Lente de eco"
+  },
+  "content.boon.eclipse-protractor.name": {
+    "reviewed": true,
+    "source": "Eclipse Protractor",
+    "sourceHash": "033e37f2ecff6af267d45fcebacd525ad60a5224daa3a1ac7bbbe18781e4d520",
+    "text": "Transferidor do eclipse"
+  },
+  "content.boon.eclipse-rivet.name": {
+    "reviewed": true,
+    "source": "Eclipse Rivet",
+    "sourceHash": "7963a4b9974395a9c9a2eefab01312731cb452c4b89893543dba38a29d50a4a4",
+    "text": "Rebite do eclipse"
+  },
+  "content.boon.encore-baton.name": {
+    "reviewed": true,
+    "source": "Encore Baton",
+    "sourceHash": "baa37fa4b7f2a1192db9e8c2750a28656d01e8a6d067ea0f61e2ef89a1b2d8d7",
+    "text": "Batuta de bis"
+  },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
     "source": "Draw a card after playing three",
     "sourceHash": "649e4b6c0fd23c7811227734af5b4da1c679b6f2582064cb54af9352cf5bea12",
     "text": "Compre uma carta após jogar três"
   },
+  "content.boon.facet-abacus.name": {
+    "reviewed": true,
+    "source": "Facet Abacus",
+    "sourceHash": "119dc6107d638fc30d85da1db420ac63cafc8b3118bc9f7221f7c66a29fc21a1",
+    "text": "Ábaco facetado"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "f8913ba6d5481968c78b078da586657bee892d3d93736dc14923bc970bfdf236",
     "text": "Ganhe um espaço adicional para cartas na mão"
+  },
+  "content.boon.fallingstar-anvil.name": {
+    "reviewed": true,
+    "source": "Fallingstar Anvil",
+    "sourceHash": "d5970b65e073f3d7f62d8d72c309409f9e8501464b63793df14f2019e860780a",
+    "text": "Bigorna de estrela cadente"
+  },
+  "content.boon.fern-fencing-foil.name": {
+    "reviewed": true,
+    "source": "Fern Fencing Foil",
+    "sourceHash": "3039fef676844ae5f484b3e9d557d0177ad381454542fae040416b56afe9554d",
+    "text": "Florete de samambaia"
+  },
+  "content.boon.field-lunch-basket.name": {
+    "reviewed": true,
+    "source": "Field Lunch Basket",
+    "sourceHash": "e8fc19e88677101f433e77b51e6c6cb2fdaca7484b2bb3768bb8e50bb9dbe4cf",
+    "text": "Cesta de piquenique"
   },
   "content.boon.field-lunch-basket.rule": {
     "reviewed": true,
@@ -514,6 +568,12 @@
     "source": "Frozen Pocketwatch",
     "sourceHash": "f0cc15051c8fbd20e5a1962c672388f654af66808309e8453380dee8c0dddbbe",
     "text": "Relógio de bolso congelado"
+  },
+  "content.boon.furnace-prism.name": {
+    "reviewed": true,
+    "source": "Furnace Prism",
+    "sourceHash": "73801abce4af30109103f689dba29b0f064add2a355c6e41e0b321a0922952bc",
+    "text": "Prisma de fornalha"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,

@@ -491,17 +491,71 @@
     "sourceHash": "c0ab2cf06e669a742eeade6345444f15f1216d9d0e77d42eecfd12f3689fc491",
     "text": "夢のヨーヨー"
   },
+  "content.boon.dune-shuttle.name": {
+    "reviewed": true,
+    "source": "Dune Shuttle",
+    "sourceHash": "aac5ddd8d8f1a6e2b4b187154e4e731e3a529cda39409c429c4378548dcc5c93",
+    "text": "砂丘の杼"
+  },
+  "content.boon.echo-lens.name": {
+    "reviewed": true,
+    "source": "Echo Lens",
+    "sourceHash": "3c03f945e0eb706e408e7f660566685da4efb8c32d5e0fddd6fb096393f80f60",
+    "text": "こだまのレンズ"
+  },
+  "content.boon.eclipse-protractor.name": {
+    "reviewed": true,
+    "source": "Eclipse Protractor",
+    "sourceHash": "9c5b9ee8b55a6bc8156ffa7ce1b09561cc359ef34d861c50e6105c82de0373e1",
+    "text": "日食の分度器"
+  },
+  "content.boon.eclipse-rivet.name": {
+    "reviewed": true,
+    "source": "Eclipse Rivet",
+    "sourceHash": "30d1c6e221c5fa081517862a147a92c3a4bf7fec291ebe13234dcaf17ddfe201",
+    "text": "日食のリベット"
+  },
+  "content.boon.encore-baton.name": {
+    "reviewed": true,
+    "source": "Encore Baton",
+    "sourceHash": "dc9f7838d0afc0ebe4526a1b990f04b4674749b40375509870907bd494276fc0",
+    "text": "アンコールの指揮棒"
+  },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
     "source": "Draw a card after playing three",
     "sourceHash": "7a8e8f1f3f5affc38ad61eff8c06bfec07d5b2a69e95c58bd219e5a7760936a2",
     "text": "カードを3枚使うたびに1枚引く"
   },
+  "content.boon.facet-abacus.name": {
+    "reviewed": true,
+    "source": "Facet Abacus",
+    "sourceHash": "755c21f276c56ae42cb0c4eaef500c11b6fe0a856364182153f6a5742f9525e7",
+    "text": "多面のそろばん"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "ba5f9ed200c9be2f39d86443ca079383e2c187dea840d50b8930543233e05ad0",
     "text": "手札の上限が1枚増える"
+  },
+  "content.boon.fallingstar-anvil.name": {
+    "reviewed": true,
+    "source": "Fallingstar Anvil",
+    "sourceHash": "b81da587c64275d58d15604ec7d9730132b2aa1481764f7de40ae73740b6e5ad",
+    "text": "流れ星の金床"
+  },
+  "content.boon.fern-fencing-foil.name": {
+    "reviewed": true,
+    "source": "Fern Fencing Foil",
+    "sourceHash": "114b04e25dc321a756d6c8fab39b4814fdc2f4f4c397edcba8ec9c736ec6316e",
+    "text": "シダのフルーレ"
+  },
+  "content.boon.field-lunch-basket.name": {
+    "reviewed": true,
+    "source": "Field Lunch Basket",
+    "sourceHash": "75a539407936639bcc11a76c8e8fb4dcc1d8af24320ef5a1c0dac5fd3aff53d5",
+    "text": "野外ランチのかご"
   },
   "content.boon.field-lunch-basket.rule": {
     "reviewed": true,
@@ -514,6 +568,12 @@
     "source": "Frozen Pocketwatch",
     "sourceHash": "052235072450abb79b0ae25f73d9252ba9774869e722f24eee0662597cd72db2",
     "text": "凍った懐中時計"
+  },
+  "content.boon.furnace-prism.name": {
+    "reviewed": true,
+    "source": "Furnace Prism",
+    "sourceHash": "a9c72f8aa6b9eb0b4c087be8951381da3fb458e421c800d4408ddfbae41a6d2c",
+    "text": "炉のプリズム"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,

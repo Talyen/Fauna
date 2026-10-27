@@ -491,17 +491,71 @@
     "sourceHash": "9da33ad8e494e4234d47c0d6c043d2e2927e7a900247df55e4f00e2ab131f0e6",
     "text": "Йо-йо грёз"
   },
+  "content.boon.dune-shuttle.name": {
+    "reviewed": true,
+    "source": "Dune Shuttle",
+    "sourceHash": "df982dea1be0aeffb2f699fdc5884c83d345ff5917a1cd4245b6d5f0601ae3cb",
+    "text": "Челнок дюн"
+  },
+  "content.boon.echo-lens.name": {
+    "reviewed": true,
+    "source": "Echo Lens",
+    "sourceHash": "2cea17f965e43470f2eb1890c70009fbbbb607452c79e332e80cdb6ef124cd13",
+    "text": "Линза эха"
+  },
+  "content.boon.eclipse-protractor.name": {
+    "reviewed": true,
+    "source": "Eclipse Protractor",
+    "sourceHash": "80bae040c6cbd6f454b7c122c93b98298d859e0ddbd8577b1b5a522fd933f5a5",
+    "text": "Транспортир затмения"
+  },
+  "content.boon.eclipse-rivet.name": {
+    "reviewed": true,
+    "source": "Eclipse Rivet",
+    "sourceHash": "1df99e3e30b4d411fd395d5c8df74effc1710225d93d91d29afdc939c5b4dd28",
+    "text": "Заклёпка затмения"
+  },
+  "content.boon.encore-baton.name": {
+    "reviewed": true,
+    "source": "Encore Baton",
+    "sourceHash": "c1ead5f2a3c8d864d4a2cf3a5027ecf3f8c63ae50cb2b8a54ae62b27c5a73fca",
+    "text": "Палочка на бис"
+  },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
     "source": "Draw a card after playing three",
     "sourceHash": "fb6d8bd472fb0684ae548300ff6484a0252d21edecf086e9eec589c36446e204",
     "text": "После розыгрыша трёх карт возьмите карту"
   },
+  "content.boon.facet-abacus.name": {
+    "reviewed": true,
+    "source": "Facet Abacus",
+    "sourceHash": "9043be4a83d295150cbbb17175f3512125f50e812997b96c205f940d42a0e391",
+    "text": "Гранёные счёты"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "ec5db118be1a26a3ed9a036aa9cb823d61b9a7d7340eb693194a7cb232a92c38",
     "text": "Получите дополнительное место для карты в руке"
+  },
+  "content.boon.fallingstar-anvil.name": {
+    "reviewed": true,
+    "source": "Fallingstar Anvil",
+    "sourceHash": "50177ffd4e039b848bb01b87e68aba054580f0735cb234fec60f5aba51942f53",
+    "text": "Наковальня падающей звезды"
+  },
+  "content.boon.fern-fencing-foil.name": {
+    "reviewed": true,
+    "source": "Fern Fencing Foil",
+    "sourceHash": "ab37c81fdab2fc44016db1b7c2564842e2368234a57622121ba9be2767009b3b",
+    "text": "Рапира папоротника"
+  },
+  "content.boon.field-lunch-basket.name": {
+    "reviewed": true,
+    "source": "Field Lunch Basket",
+    "sourceHash": "8bba3cf69fd5c1c2df5246d05e1102927086b34460564c5c3108cede37871bd9",
+    "text": "Корзина для пикника"
   },
   "content.boon.field-lunch-basket.rule": {
     "reviewed": true,
@@ -514,6 +568,12 @@
     "source": "Frozen Pocketwatch",
     "sourceHash": "d2a42db23917646ae6d3a0a6d2c904fa09ab1cd5fd98aa4c347aaa59d397565f",
     "text": "Замёрзшие карманные часы"
+  },
+  "content.boon.furnace-prism.name": {
+    "reviewed": true,
+    "source": "Furnace Prism",
+    "sourceHash": "8bf18f43b6b8997cf74e0ca9a6572167efa7add4e8e75fe9292c488ee64281a5",
+    "text": "Призма горна"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,

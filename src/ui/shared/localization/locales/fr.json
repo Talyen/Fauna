@@ -497,17 +497,71 @@
     "sourceHash": "07d7e180fcae3c28c386751fe915549f5ffd4740c45e207d69ee186e17ea24c7",
     "text": "Yo-yo des rêves"
   },
+  "content.boon.dune-shuttle.name": {
+    "reviewed": true,
+    "source": "Dune Shuttle",
+    "sourceHash": "04ded8a530578432afecdb09c547b28025c84199cc867e4132eae2ce2d520648",
+    "text": "Navette des dunes"
+  },
+  "content.boon.echo-lens.name": {
+    "reviewed": true,
+    "source": "Echo Lens",
+    "sourceHash": "26c1939f712efb2e51e31903fad474280109b0329b3124cb82669236797682a6",
+    "text": "Lentille d’écho"
+  },
+  "content.boon.eclipse-protractor.name": {
+    "reviewed": true,
+    "source": "Eclipse Protractor",
+    "sourceHash": "679892d0e0ef8b1df95291dc602585825ba1422d92c2956a85b4d149ac5cefa2",
+    "text": "Rapporteur d’éclipse"
+  },
+  "content.boon.eclipse-rivet.name": {
+    "reviewed": true,
+    "source": "Eclipse Rivet",
+    "sourceHash": "1309c3345930ae7d5e735e02e5a523801f7bc84db3eeb98883e1731a74bd9738",
+    "text": "Rivet d’éclipse"
+  },
+  "content.boon.encore-baton.name": {
+    "reviewed": true,
+    "source": "Encore Baton",
+    "sourceHash": "9ef5478db87406276577eb6156d145097828e22903a228849ba4f3f730b24da0",
+    "text": "Baguette de rappel"
+  },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
     "source": "Draw a card after playing three",
     "sourceHash": "3d0495e0fe3e46baa1750c90c691701fed7c691bccd0dc5f090be5565f751212",
     "text": "Piochez une carte après en avoir joué trois"
   },
+  "content.boon.facet-abacus.name": {
+    "reviewed": true,
+    "source": "Facet Abacus",
+    "sourceHash": "33d480a780a7dda63b76f22cf0dd63fa7e752fb6f37ab1cb20c290b86825b016",
+    "text": "Abaque à facettes"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "546b25424fbccd1773461ed0c8782a5312d3a60c1076976e0d792a0190a93c44",
     "text": "Gagnez un emplacement de carte supplémentaire en main"
+  },
+  "content.boon.fallingstar-anvil.name": {
+    "reviewed": true,
+    "source": "Fallingstar Anvil",
+    "sourceHash": "3fcf52ba595cddf593189750807bb6db7fdf0533338b595010c4014da583c0b8",
+    "text": "Enclume d’étoile filante"
+  },
+  "content.boon.fern-fencing-foil.name": {
+    "reviewed": true,
+    "source": "Fern Fencing Foil",
+    "sourceHash": "c48011b6131c9810dd4e807000f582417e5528b99c691f701dd07db4c2b4ba31",
+    "text": "Fleuret de fougère"
+  },
+  "content.boon.field-lunch-basket.name": {
+    "reviewed": true,
+    "source": "Field Lunch Basket",
+    "sourceHash": "1f67c9e56f708c9302eb8cd8a1e85c5e2908386bc5eb0d3f194be04525ba19dc",
+    "text": "Panier de pique-nique"
   },
   "content.boon.field-lunch-basket.rule": {
     "reviewed": true,
@@ -520,6 +574,12 @@
     "source": "Frozen Pocketwatch",
     "sourceHash": "9056b7fe8beab0a6ce0dfe490ff4358e335acf19b2356c7762937d4173f6f597",
     "text": "Montre à gousset gelée"
+  },
+  "content.boon.furnace-prism.name": {
+    "reviewed": true,
+    "source": "Furnace Prism",
+    "sourceHash": "00064b156ca7a235d488a2226341c146f822c70afffd568978f0c691cef83ca4",
+    "text": "Prisme de fournaise"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,

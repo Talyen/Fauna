@@ -491,17 +491,71 @@
     "sourceHash": "3541b31650e89545ad0f9102e03c1896980df2346a2c08a85f56caaeeb7fea46",
     "text": "Traum-Jo-Jo"
   },
+  "content.boon.dune-shuttle.name": {
+    "reviewed": true,
+    "source": "Dune Shuttle",
+    "sourceHash": "75b15588353b7e4426be3928fe8cbc655dd8f3a9e87ae3078991edb8521f1857",
+    "text": "Dünenschiffchen"
+  },
+  "content.boon.echo-lens.name": {
+    "reviewed": true,
+    "source": "Echo Lens",
+    "sourceHash": "975d79b7f4a2cd8d4e282e1fb685cfa7dcbae15ffb9081643909de39ecb94dcd",
+    "text": "Echolinse"
+  },
+  "content.boon.eclipse-protractor.name": {
+    "reviewed": true,
+    "source": "Eclipse Protractor",
+    "sourceHash": "47f387b0e95dc2aa5a3dc839f7061067eeab01d6bb4e298075dfd72eeb37dc7e",
+    "text": "Finsternis-Winkelmesser"
+  },
+  "content.boon.eclipse-rivet.name": {
+    "reviewed": true,
+    "source": "Eclipse Rivet",
+    "sourceHash": "2fa9c20b741879d083504a1bac6fb3ab753bca7366eb0d1f6b0a9909183fc14b",
+    "text": "Finsternisniet"
+  },
+  "content.boon.encore-baton.name": {
+    "reviewed": true,
+    "source": "Encore Baton",
+    "sourceHash": "fc5169591e1328c54162ab5d6f32efef4e8a2d6322d6deb4e3fd63534d34d91a",
+    "text": "Zugabestab"
+  },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
     "source": "Draw a card after playing three",
     "sourceHash": "3166eda34d5314029b90b72c78522046698714f28341a7d9be7fd66501776c60",
     "text": "Ziehe eine Karte, nachdem du drei gespielt hast"
   },
+  "content.boon.facet-abacus.name": {
+    "reviewed": true,
+    "source": "Facet Abacus",
+    "sourceHash": "5491aa5b56d795483723b87e51bf014edbce3ba662acdad20a06ac2f07fc3dce",
+    "text": "Facetten-Abakus"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "22fa15949f07e3fff203772a0477a3b7839b4bd1464b8279c856de54a31571fc",
     "text": "Erhalte einen zusätzlichen Handkartenplatz"
+  },
+  "content.boon.fallingstar-anvil.name": {
+    "reviewed": true,
+    "source": "Fallingstar Anvil",
+    "sourceHash": "e3a9f44e525117da34f17d14756306d78e990bbb102611eedfd367b6a7089972",
+    "text": "Sternschnuppenamboss"
+  },
+  "content.boon.fern-fencing-foil.name": {
+    "reviewed": true,
+    "source": "Fern Fencing Foil",
+    "sourceHash": "dc5bf361ab10ec7fce25ef1e940cfb241115e29fd87aa4ff22c00db00245317f",
+    "text": "Farnflorett"
+  },
+  "content.boon.field-lunch-basket.name": {
+    "reviewed": true,
+    "source": "Field Lunch Basket",
+    "sourceHash": "77fc5bf481893609246c1157fdcc636000b0ae06e1d055e134636ae7446352e2",
+    "text": "Feldpicknickkorb"
   },
   "content.boon.field-lunch-basket.rule": {
     "reviewed": true,
@@ -514,6 +568,12 @@
     "source": "Frozen Pocketwatch",
     "sourceHash": "b3b46fa1c1c99cda781aefbd1b4b2516827e79c9c4dcbac49635359883bf7b69",
     "text": "Gefrorene Taschenuhr"
+  },
+  "content.boon.furnace-prism.name": {
+    "reviewed": true,
+    "source": "Furnace Prism",
+    "sourceHash": "8b9cbf7173d469d894f292d41cc4bbffbbe0ef228b7b65acc99cf0cb6356ff4b",
+    "text": "Ofenprisma"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,

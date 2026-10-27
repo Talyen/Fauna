@@ -491,17 +491,71 @@
     "sourceHash": "6ff4a1f39a265ca453c513249eed736e75ce3259da01197f2cf3d88e731cd8ab",
     "text": "梦境悠悠球"
   },
+  "content.boon.dune-shuttle.name": {
+    "reviewed": true,
+    "source": "Dune Shuttle",
+    "sourceHash": "441fb031d997c75c8aa5a69856876d1268b530914be1f4287050b08c186f1550",
+    "text": "沙丘梭"
+  },
+  "content.boon.echo-lens.name": {
+    "reviewed": true,
+    "source": "Echo Lens",
+    "sourceHash": "cc193299b7588a6e38ffcd17cde1eb10979d65867bfff1aacf283002c5014a82",
+    "text": "回声透镜"
+  },
+  "content.boon.eclipse-protractor.name": {
+    "reviewed": true,
+    "source": "Eclipse Protractor",
+    "sourceHash": "bbbe1ec8835bf4ebcc6bd740757d86337e0069cab35eca637155e50ea856c19c",
+    "text": "日蚀量角器"
+  },
+  "content.boon.eclipse-rivet.name": {
+    "reviewed": true,
+    "source": "Eclipse Rivet",
+    "sourceHash": "b47b600a17ec9d6d645256428135103127005b998f9c10c34982b6b51dc3fd52",
+    "text": "日蚀铆钉"
+  },
+  "content.boon.encore-baton.name": {
+    "reviewed": true,
+    "source": "Encore Baton",
+    "sourceHash": "5b7bba1e4ff30dee8ff98783d292269c9f2b3c597c28fdbea01006f2e43d7ae6",
+    "text": "返场指挥棒"
+  },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
     "source": "Draw a card after playing three",
     "sourceHash": "f6f8abd6629f7e6f4129a3b574a8a5aaeba094b5a3e4ecd00cf69ec2dc569095",
     "text": "每打出三张牌后抽一张牌"
   },
+  "content.boon.facet-abacus.name": {
+    "reviewed": true,
+    "source": "Facet Abacus",
+    "sourceHash": "0e1d0a051bbbb6d849b4c0835689f693b87af9a8b1f3068bec07a4f90cc37cca",
+    "text": "多面算盘"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "c44078c2529c51609e3c7285bf5c532662968bc62b90bcea34a4f51549bdfd27",
     "text": "手牌上限增加一个位置"
+  },
+  "content.boon.fallingstar-anvil.name": {
+    "reviewed": true,
+    "source": "Fallingstar Anvil",
+    "sourceHash": "2767464a985ded0ffc7d355aadd28c87035a849e22814f289d6bba6dafe2c335",
+    "text": "流星铁砧"
+  },
+  "content.boon.fern-fencing-foil.name": {
+    "reviewed": true,
+    "source": "Fern Fencing Foil",
+    "sourceHash": "0929abbe3581c4dbcb7a4d7d2771fbf27597e4991e23b918f49c0d9bfe57499f",
+    "text": "蕨叶花剑"
+  },
+  "content.boon.field-lunch-basket.name": {
+    "reviewed": true,
+    "source": "Field Lunch Basket",
+    "sourceHash": "f19e854a88e3075f175fff7b2f2d92b9fbafbf189b99cad82b05a97a9b813746",
+    "text": "野餐篮"
   },
   "content.boon.field-lunch-basket.rule": {
     "reviewed": true,
@@ -514,6 +568,12 @@
     "source": "Frozen Pocketwatch",
     "sourceHash": "f34298c6d522e19da6017d380a40619e2c6c11e6875d65a4da4c70da051e0c76",
     "text": "冰封怀表"
+  },
+  "content.boon.furnace-prism.name": {
+    "reviewed": true,
+    "source": "Furnace Prism",
+    "sourceHash": "bbc1e03f531ecb1fa26c757a48602cd522d90c54eacdaec384cdb0885e78bc7c",
+    "text": "熔炉棱镜"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
