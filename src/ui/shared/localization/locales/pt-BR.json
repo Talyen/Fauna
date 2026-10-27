@@ -3341,6 +3341,12 @@
     "sourceHash": "3ea640b2c45b7dab6692a3282b5c40f56341699dea92680e2eb913472a2da6c6",
     "text": "Ataque"
   },
+  "content.glossary.backup.definition.rule": {
+    "reviewed": true,
+    "source": "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
+    "sourceHash": "4844cc8d823cf54b66177abe0a142dbb3aa454bb1190951d616426ed13d40990",
+    "text": "Recrute até cinco criaturas: até três criaturas comuns ou uma Lendária em campo; Apenas criaturas vivas em campo fornecem passivas; Após um nocaute, escolha uma reserva viva antes de continuar; Substituições preservam espaços de cartas e não concedem compras extras nem bônus iniciais; Outras trocas exigem habilidades ou efeitos de jogo"
+  },
   "content.glossary.backup.term.rule": {
     "reviewed": true,
     "source": "Backup",
@@ -3382,6 +3388,12 @@
     "source": "Copy",
     "sourceHash": "c5ef7b1704925b25e7b7ed0501d09792188a29b9d2efc8469b3911dfdf86a84b",
     "text": "Cópia"
+  },
+  "content.glossary.damage.definition.rule": {
+    "reviewed": true,
+    "source": "Attacks can <keyword0>Dodge</keyword0> or critically hit; <keyword1>Block</keyword1> absorbs damage first; <keyword2>Armor</keyword2> then reduces <keyword3>Physical</keyword3> and <keyword4>Stun</keyword4> damage; Reducing damage removes {{value0}} <keyword5>Armor</keyword5>; <keyword6>Burn</keyword6>, <keyword7>Poison</keyword7>, <keyword8>Bleed</keyword8>, <keyword9>Stun</keyword9>, and <keyword10>Freeze</keyword10> hits add their matching buildup; There are no elemental reactions",
+    "sourceHash": "8c9075aa69b12db97ef016344da00604b8daa3bd184b62b83b8aece77151459a",
+    "text": "Ataques podem ser <keyword0>esquivados</keyword0> ou causar acertos críticos; O <keyword1>Bloqueio</keyword1> absorve o dano primeiro; A <keyword2>Armadura</keyword2> reduz então dano <keyword3>Físico</keyword3> e de <keyword4>Atordoamento</keyword4>; Reduzir dano remove {{value0}} de <keyword5>Armadura</keyword5>; Acertos de <keyword6>Queimadura</keyword6>, <keyword7>Veneno</keyword7>, <keyword8>Sangramento</keyword8>, <keyword9>Atordoamento</keyword9> e <keyword10>Congelamento</keyword10> adicionam o respectivo acúmulo; Não há reações elementais"
   },
   "content.glossary.damage.term.rule": {
     "reviewed": true,
@@ -3521,6 +3533,12 @@
     "sourceHash": "db9de9ed27e24b0e61b9c8ad664a6ba64b67c691ffdca8ab1735fa5090cd0da3",
     "text": "Ambos os lados têm {{value0}}% de chance de evitar cada pacote de ataque antes das defesas; Alvos controlados não podem <keyword0>esquivar</keyword0>; A <keyword1>Esquiva</keyword1> total é limitada a {{value1}}%"
   },
+  "content.glossary.keyword.food.definition.rule": {
+    "reviewed": true,
+    "source": "Shared consumables; Apple restores {{value0}} <keyword0>Health</keyword0>; <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2>; Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and has <keyword5>Consume</keyword5>",
+    "sourceHash": "4f90e1063bf3802915e9939ad9c5322f1b5b3b52567c895545db5fa7948cb589",
+    "text": "Consumíveis compartilhados; Maçã restaura {{value0}} de <keyword0>Saúde</keyword0>; Bagas de <keyword1>Mana</keyword1> concedem {{value1}} de <keyword2>Mana</keyword2>; Pão de viagem concede {{value2}} de <keyword3>Bloqueio</keyword3>; Cada carta custa {{value3}} de <keyword4>Mana</keyword4> e tem <keyword5>Consumir</keyword5>"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3544,6 +3562,12 @@
     "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "17b54c14a8080627a8b7400cbdde12e605cd91f4cc574df7c7de2770b973d1a5",
     "text": "Dano de <keyword0>Luz</keyword0>; não implica resistência nem efeito de status"
+  },
+  "content.glossary.keyword.mana.definition.rule": {
+    "reviewed": true,
+    "source": "The shared resource spent to play action cards; Each <keyword0>Mana Crystal</keyword0> adds {{value0}} <keyword1>maximum Mana</keyword1>; Your team starts each turn with {{value1}} <keyword2>Mana</keyword2>; <keyword3>Mana</keyword3> is shared; each turn draws {{value2}} cards, with up to {{value3}} in hand",
+    "sourceHash": "62852f4521485b87185dd68e86406b72d9d60a94f8a771608c6169d31404e62f",
+    "text": "O recurso compartilhado gasto para jogar cartas de ação; Cada <keyword0>Cristal de Mana</keyword0> adiciona {{value0}} à <keyword1>Mana máxima</keyword1>; Sua equipe começa cada turno com {{value1}} de <keyword2>Mana</keyword2>; A <keyword3>Mana</keyword3> é compartilhada; Cada turno compra {{value2}} cartas, com até {{value3}} na mão"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,
@@ -3647,6 +3671,12 @@
     "sourceHash": "f451b24a7e185e434915499e5d472ee20c890b47fe7e4076b4e4a755a063ec01",
     "text": "Lacaio"
   },
+  "content.glossary.pearl.definition.rule": {
+    "reviewed": true,
+    "source": "A battle-only card created in your hand; Costs {{value0}} <keyword0>Mana</keyword0>; Randomly grants {{value1}} <keyword1>Block</keyword1> or {{value2}} <keyword2>Mana</keyword2>; <keyword3>Consume</keyword3> removes it after play; Unplayed Pearls can be drawn and discarded normally",
+    "sourceHash": "e9044b3d4097b7ce17a6e964b46883b84b017e1a06d92f64d151578da8d6a258",
+    "text": "Uma carta criada na sua mão apenas para a batalha; Custa {{value0}} de <keyword0>Mana</keyword0>; Concede aleatoriamente {{value1}} de <keyword1>Bloqueio</keyword1> ou {{value2}} de <keyword2>Mana</keyword2>; <keyword3>Consumir</keyword3> a remove após o uso; Pérolas não jogadas podem ser compradas e descartadas normalmente"
+  },
   "content.glossary.pearl.term.rule": {
     "reviewed": true,
     "source": "Pearl",
@@ -3665,17 +3695,35 @@
     "sourceHash": "1e8f5ea399be9f0fec5cbb5a68e213b07a8a5cfaf1a6aacc0da053ad411a036c",
     "text": "Formação inicial"
   },
+  "content.glossary.swap-cards.definition.rule": {
+    "reviewed": true,
+    "source": "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest <keyword0>Health</keyword0> ally and needs a living backup; <keyword1>Health</keyword1> and effects persist",
+    "sourceHash": "15c8fafd1c3dd1c361488ec29b8969f36ed1c05a8153cad1665c4d50c197bf6d",
+    "text": "Troque com uma reserva viva aleatória; Remova as cartas da criatura que sai da mão e de todas as pilhas, depois embaralhe o conjunto da criatura que entra na pilha de compra antes de comprar; Sem reserva viva, troque de posição com um aliado vivo aleatório; Sozinha, apenas a parte da troca não faz nada; Passagem segura troca o aliado com menor <keyword0>Saúde</keyword0> e exige uma reserva viva; A <keyword1>Saúde</keyword1> e os efeitos persistem"
+  },
   "content.glossary.swap-cards.term.rule": {
     "reviewed": true,
     "source": "Swap cards",
     "sourceHash": "c26b77910abb468cdd4e264a3ca9bd7589a56810777a1ed61a1d0281caa8fbba",
     "text": "Cartas de troca"
   },
+  "content.glossary.talents.definition.rule": {
+    "reviewed": true,
+    "source": "Keyword XP earns points for that keyword's talents; The first point takes {{value0}} XP, then another {{value1}}, then {{value2}}; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
+    "sourceHash": "6fb80e4061662561f08d379af39cc5e469e48d3c57a0fb32d1dcfe7c063f917f",
+    "text": "A EXP de uma palavra-chave concede pontos para seus talentos; O primeiro ponto exige {{value0}} de EXP, depois mais {{value1}} e então {{value2}}; Complete cada linha para abrir a próxima; Talentos se aplicam imediatamente a todas as criaturas correspondentes; Reinicie uma categoria a qualquer momento para recuperar todos os pontos sem perder EXP"
+  },
   "content.glossary.talents.term.rule": {
     "reviewed": true,
     "source": "Talents",
     "sourceHash": "d6090876f76a02b5e9fb4a35b06e6f9fdbd52377307f0c9e2764f7ab73cc5da6",
     "text": "Talentos"
+  },
+  "content.glossary.turn.definition.rule": {
+    "reviewed": true,
+    "source": "Play cards using shared <keyword0>mana</keyword0>; Spending your last <keyword1>mana</keyword1> automatically resolves the enemy turn; You can also press End turn at any time without confirmation; Discard remaining hand cards; restore {{value0}} <keyword2>Mana</keyword2> and draw {{value1}} cards for the next turn; The hand normally holds {{value2}}, or {{value3}} with Facet Abacus; overflow waits in order and survives turn changes",
+    "sourceHash": "25f0c411009e0dac621429572619beb8c86bba861bd5d230120076be7781b5cc",
+    "text": "Jogue cartas usando a <keyword0>Mana</keyword0> compartilhada; Gastar sua última <keyword1>Mana</keyword1> resolve automaticamente o turno inimigo; Você também pode pressionar Encerrar turno a qualquer momento sem confirmação; Descarte as cartas restantes da mão; Restaure {{value0}} de <keyword2>Mana</keyword2> e compre {{value1}} cartas para o próximo turno; A mão normalmente comporta {{value2}} cartas, ou {{value3}} com Ábaco facetado; O excedente espera em ordem e permanece entre turnos"
   },
   "content.glossary.turn.term.rule": {
     "reviewed": true,
@@ -7775,6 +7823,12 @@
     "sourceHash": "081bb48c5e8bccaff2bd777bcee6d215f79872b4e579e4b3ed5c4e577a070d93",
     "text": "{{name}} bloqueia {{amount}} de dano."
   },
+  "log.battleComplete": {
+    "reviewed": true,
+    "source": "Battle complete. Rewards saved.",
+    "sourceHash": "b4759018b88b3c7c33d2a1efaabc465ae500102f6b0a0196f4811706c383cafe",
+    "text": "Batalha concluída. Recompensas salvas."
+  },
   "log.blinded": {
     "reviewed": true,
     "source": "{{name}} is Blinded",
@@ -7787,17 +7841,47 @@
     "sourceHash": "9110d7233be3ad3f81907e8c14802ccf6b9aeae91b218679c14fea9b5ab6d992",
     "text": "Bênção comprada para esta jornada."
   },
+  "log.cleansePoison": {
+    "reviewed": true,
+    "source": "{{name}} Cleanses {{amount}} Poison.",
+    "sourceHash": "b6c20ea4b6792a1e115ff2e8eb88d080cdaa0fa122d2d83af3eddb7baca649a0",
+    "text": "{{name}} purifica {{amount}} de Veneno."
+  },
   "log.controlApplied": {
     "reviewed": true,
     "source": "{{name}} is {{status}}.",
     "sourceHash": "3bf5f3aa0998c58ec8b7efa62b2feb2a356cfec162e2f6ab1673777e8bd8c1a2",
     "text": "{{name}}: efeito aplicado ({{status}})."
   },
+  "log.copyWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} copies {{card}} with {{trait}}",
+    "sourceHash": "3ae4233ec9d067a62dbf40107316cd547b329a245ebc49ac325512cdccd5a63b",
+    "text": "{{actor}} copia {{card}} com {{trait}}"
+  },
   "log.createFood": {
     "reviewed": true,
     "source": "{{actor}} creates {{count}} Food cards",
     "sourceHash": "0290bfa3e238b4e8845d48f79d039672760f7b0a514618038ef6b627476f0dca",
     "text": "{{actor}} cria cartas de Comida: {{count}}"
+  },
+  "log.createPearls": {
+    "reviewed": true,
+    "source": "{{actor}} creates {{count}} Pearls",
+    "sourceHash": "1b41e3bacd10e15cbca2efce6677f7770100993320601743383fbd3b19c6f449",
+    "text": "{{actor}} cria Pérolas: {{count}}"
+  },
+  "log.creatureJoined": {
+    "reviewed": true,
+    "source": "{{name}} joined your roster.",
+    "sourceHash": "18185f713b9357109cbfe86f3cad093a2b305fd6d3d62ad7dead2338d72e2f69",
+    "text": "{{name}} entrou no seu grupo."
+  },
+  "log.creatureRediscovered": {
+    "reviewed": true,
+    "source": "{{name}} was discovered again; your roster is unchanged.",
+    "sourceHash": "f61bd49e24bc806f9dd8e426c2e8b88da3efcc3623151a82fcc74966d816651a",
+    "text": "Nova descoberta: {{name}}; seu grupo não mudou."
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -7822,6 +7906,12 @@
     "source": "{{card}} is drawn from Discard",
     "sourceHash": "6e90d74c817aca85aeeb8b80c14dbdf581a2d546a482bfb01400c3cca828f993",
     "text": "Carta comprada do descarte: {{card}}"
+  },
+  "log.expressDelivery": {
+    "reviewed": true,
+    "source": "{{trait}} draws an extra card",
+    "sourceHash": "c2da0e69fd640108e943e73c3cfd49a960154e088546a2a6d51a92bce71de375",
+    "text": "{{trait}} compra uma carta extra"
   },
   "log.formationChanges": {
     "reviewed": true,
@@ -7853,6 +7943,12 @@
     "sourceHash": "90592d31d0fc1e5a0f47990396ed61df5f9c6d9117bf94a878c4aa8050607d22",
     "text": "Receba {{amount}} de Mana."
   },
+  "log.gainNegate": {
+    "reviewed": true,
+    "source": "{{name}} gains Negate",
+    "sourceHash": "ab957bab37e48538d627088b19ae77fa4e40868dc7bcb6179016b6cd79b44c7c",
+    "text": "{{name}} ganha Negação"
+  },
   "log.gainNullify": {
     "reviewed": true,
     "source": "{{name}} gains Nullify",
@@ -7864,6 +7960,12 @@
     "source": "{{name}} gains {{amount}} {{status}}.",
     "sourceHash": "68ca8b8917e65708ce62f3dc2682a0815ba3d56be1fa21b5b685f11f1f36d287",
     "text": "{{name}}: {{status}} +{{amount}}."
+  },
+  "log.goodFortune": {
+    "reviewed": true,
+    "source": "{{trait}} turns the odds",
+    "sourceHash": "5df369bb3de7f3254e8777e2d9fec4368f57e4a1addd4638fc484817cf05e642",
+    "text": "{{trait}} muda as chances"
   },
   "log.heal": {
     "reviewed": true,
@@ -7889,6 +7991,18 @@
     "sourceHash": "79c3d57a6bb5bcb5932735e932349a9386451aec513d4d8121f603913bcd305e",
     "text": "Sua jornada começa."
   },
+  "log.journeyEnded": {
+    "reviewed": true,
+    "source": "Your journey has ended.",
+    "sourceHash": "3d73a901cc4be43089ab8a67e09f1299077deb8a04d52e118a0da7a6defa9a05",
+    "text": "Sua jornada terminou."
+  },
+  "log.keepBlockWithBoon": {
+    "reviewed": true,
+    "source": "{{name}} keeps {{amount}} Block with {{boon}}",
+    "sourceHash": "de26626ec31e7843f7a1e88814e74d5dafed63534f38b3c5a9af9c0d9c1830ad",
+    "text": "{{name}} mantém {{amount}} de Bloqueio com {{boon}}"
+  },
   "log.knockout": {
     "reviewed": true,
     "source": "{{name}} is knocked out.",
@@ -7901,11 +8015,41 @@
     "sourceHash": "a05c5547f769127b4ccdef82091ed17097e338c319fe7c26ee162430ffc32543",
     "text": "{{name}} perde {{amount}} de Armadura"
   },
+  "log.loseArmorToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor to {{boon}}",
+    "sourceHash": "ddad9522eb606a8e7e06038bd4b0b25d21088aafd2a8abdf8e8a2faf6bae3803",
+    "text": "{{name}} perde {{amount}} de Armadura por {{boon}}"
+  },
+  "log.loseBlockToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Block to {{boon}}",
+    "sourceHash": "caec99b41cd71edacea801552aa5613d6271f4890cb1b8b776bdd60d582e0a98",
+    "text": "{{name}} perde {{amount}} de Bloqueio por {{boon}}"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "4f1b28fb06ea2047c626e0e9ab6819052ea07f79cc1378a66744b7b86b926630",
     "text": "{{name}} perde {{amount}} de acúmulo de Congelamento"
+  },
+  "log.mountainGuide": {
+    "reviewed": true,
+    "source": "{{trait}} protects {{target}}",
+    "sourceHash": "049030ff774bec254a25365217b787935b0e134dfccc4b98facb30c78cdb0b14",
+    "text": "{{trait}} protege {{target}}"
+  },
+  "log.negateAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the attack",
+    "sourceHash": "3177d3fbc6afebda46cc3d5d854f10f99c2a7078bbb7da914608e5ac48e9d603",
+    "text": "{{name}} nega o ataque"
+  },
+  "log.negateNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} negates the next attack against them",
+    "sourceHash": "60964c778eae12b935d47ce3bb28569e97b4a259bde28804438a42091b862724",
+    "text": "{{name}} nega o próximo ataque contra essa criatura"
   },
   "log.nullifyEffect": {
     "reviewed": true,
@@ -7925,11 +8069,23 @@
     "sourceHash": "4346104c3c8bd717ac79033913ae304421000a61071d27bd172a5a283ac909c9",
     "text": "{{name}} chega à beira da morte: turnos de graça restantes: {{amount}}."
   },
+  "log.redistributeBlock": {
+    "reviewed": true,
+    "source": "{{card}} redistributes Block",
+    "sourceHash": "2635ad181acafb79e6b6b59f0fa91d89196e46fc31fbb76c98a19aa648abce28",
+    "text": "{{card}} redistribui Bloqueio"
+  },
   "log.reflectAttack": {
     "reviewed": true,
     "source": "{{actor}} reflects the attack back at {{target}}",
     "sourceHash": "8e3ae5ee860b56329b591409c5f7b45b22163173a851364828a14874c6114052",
     "text": "{{actor}} reflete o ataque de volta contra {{target}}"
+  },
+  "log.reflectStatus": {
+    "reviewed": true,
+    "source": "{{actor}} reflects {{status}} to {{target}}",
+    "sourceHash": "9f0a55f5177147971f94a438a887e6c126f3ec044d7bf48fe11ad378210487b9",
+    "text": "{{actor}} reflete {{status}} para {{target}}"
   },
   "log.removeBuildup": {
     "reviewed": true,
@@ -7949,6 +8105,24 @@
     "sourceHash": "5da25adfbf37b81255946712c968ceedcf5a4b3be41fccb40361986684e7ece7",
     "text": "{{name}}: {{action}} — nenhum efeito removido."
   },
+  "log.repeatCard": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}}",
+    "sourceHash": "b04fb600bec07d1f2018b3ef8ade8441df45d336ff50c7bad7cfedcc60ef22c7",
+    "text": "{{actor}} repete {{card}}"
+  },
+  "log.repeatCardWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}} with {{trait}}",
+    "sourceHash": "49c3e03799a3f84e52148be62b9d839f71189f3cafc9601196095ba96d485450",
+    "text": "{{actor}} repete {{card}} com {{trait}}"
+  },
+  "log.repeatFood": {
+    "reviewed": true,
+    "source": "{{card}} repeats",
+    "sourceHash": "d79dbfb8accccfc9f48b36693d9630c6ae6a9203024e586f5370419405e0a696",
+    "text": "Jogada novamente: {{card}}"
+  },
   "log.repeatNextEnemyCard": {
     "reviewed": true,
     "source": "The enemy's next card is played twice",
@@ -7960,6 +8134,18 @@
     "source": "Your next card is played twice",
     "sourceHash": "78c272b3333e29c51098987aa08ef3a5e29289a563402d7c2f779616bde0e4bc",
     "text": "Sua próxima carta é jogada duas vezes"
+  },
+  "log.repeatStunTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats Stun damage with {{trait}}",
+    "sourceHash": "743df68d3cebccebd68ab31af2d0913d5bfd04fc4e36863ffd4d4b60978dcfb8",
+    "text": "{{actor}} repete dano de Atordoamento com {{trait}}"
+  },
+  "log.replacement": {
+    "reviewed": true,
+    "source": "{{actor}} replaces {{target}}.",
+    "sourceHash": "7b0540ab02caf45af785d19fafd72d0252761ebef0833cbd734a3278b43d084f",
+    "text": "{{actor}} substitui {{target}}."
   },
   "log.resurrect": {
     "reviewed": true,
@@ -7985,6 +8171,18 @@
     "sourceHash": "8eab9ed3285269592011f3c01a9f8fffc20204ba952793f207379f0ae1f27025",
     "text": "{{name}}: turno perdido por {{status}}."
   },
+  "log.summonEcho": {
+    "reviewed": true,
+    "source": "{{actor}} summons an {{echo}}",
+    "sourceHash": "e56b4e5a053b76aaa2fd0d09c0afb812c555b2eda54a0297b4e67f6705d113ba",
+    "text": "{{actor}} invoca um {{echo}}"
+  },
+  "log.swapPositions": {
+    "reviewed": true,
+    "source": "{{actor}} swaps positions with {{target}}.",
+    "sourceHash": "77482a435077f2c5bb47f2ccd8d530a4694df0f48eec54a5da2465cdcaf279f7",
+    "text": "{{actor}} troca de posição com {{target}}."
+  },
   "log.temporaryDodge": {
     "reviewed": true,
     "source": "{{name}} gains {{amount}}% Dodge until its next turn",
@@ -8008,6 +8206,36 @@
     "source": "Use {{card}}",
     "sourceHash": "99ef860fc095e21616be35d8b54fce4ab87c786c8d378b7a17e69b8506732c5d",
     "text": "Use {{card}}"
+  },
+  "log.wardNextAttack": {
+    "reviewed": true,
+    "source": "{{name}} reflects the next attack",
+    "sourceHash": "afefbf2f201780485c8080e17de56f32f1fdd214b933db9721dcfb7c3075e25f",
+    "text": "{{name}} reflete o próximo ataque"
+  },
+  "log.wardNextBurn": {
+    "reviewed": true,
+    "source": "Reflect the next Burn",
+    "sourceHash": "033d784846a9d8fd57906760b5b47e444baee0ea49457654d8349937d4aa4485",
+    "text": "Refletir a próxima Queimadura"
+  },
+  "log.wardNextFreeze": {
+    "reviewed": true,
+    "source": "Nullify the next Freeze damage",
+    "sourceHash": "6e719dbf866d7c1a49ef396341f403ab233cf647f4e153e2fe4799949b5c97a3",
+    "text": "Anular o próximo dano de Congelamento"
+  },
+  "log.wardNextHarm": {
+    "reviewed": true,
+    "source": "{{name}} nullifies the next harmful status effect",
+    "sourceHash": "b3610903a74ee50412bcb5489be480ffc87ee2146829613fbf38c3da07219e4b",
+    "text": "{{name}} anula o próximo efeito de estado prejudicial"
+  },
+  "log.wardNextStatus": {
+    "reviewed": true,
+    "source": "Reflect the next harmful status effect",
+    "sourceHash": "d3b94a6535b393db9ec655c8fc5d992d7d40dc89f51074264a22f709325722ac",
+    "text": "Refletir o próximo efeito de estado prejudicial"
   },
   "menu.boons": {
     "reviewed": true,

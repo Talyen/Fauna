@@ -5,6 +5,9 @@ import { definition, species } from "../../../src/game/content";
 import { drawDiscard } from "../../../src/game/card-zones";
 import { resurrect } from "../../../src/game/combat/resurrection";
 import { createFood } from "../../../src/game/combat/food";
+import { createPearls, summonEcho } from "../../../src/game/combat/legendary";
+import { resolveCombat } from "../../../src/game/combat/resolution";
+import { swapFromCard } from "../../../src/game/team";
 import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
@@ -399,6 +402,152 @@ it("localizes the final enemy hit after the battle state is retired", async () =
   } finally {
     await session.dispose();
   }
+});
+
+it("localizes committed position swaps and discovered creature names", () => {
+  const game = structuredClone(run());
+  const actor = game.team[0]!;
+  const events: GameEvent[] = [];
+  const target = swapFromCard(game, actor, events)!;
+  const swap = events.find((event) => event.kind === "action" && event.actionType === "swap")!;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: species(actor.species).name, text: "Premier" },
+    [`content.species.${target.species}.name`]: { source: species(target.species).name, text: "Second" },
+  });
+  expect(eventPresentation(game, swap, reader)).toBe("Premier échange sa place avec Second.");
+  const joined: GameEvent = { kind: "reward", text: `${species(target.species).name} joined your roster.` };
+  expect(eventPresentation(game, joined, reader)).toBe("Second rejoint votre groupe.");
+  expect(eventPresentation(game, { ...joined, text: "Unknown joined your roster." }, reader)).toBe(
+    "Unknown joined your roster.",
+  );
+  expect(eventPresentation(game, swap, createMessageReader("en", {}))).toBe(swap.text);
+});
+
+it("preserves the spent Block and named Boon in a localized combat event", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const name = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: name, text: "Allié" },
+  });
+  const event: GameEvent = {
+    kind: "block",
+    targetId: target.id,
+    amount: -3,
+    text: `${name} loses 2 Block to Coral Net Weight`,
+  };
+  const boon = reader.content("content.boon.coral-net-weight.name", "Coral Net Weight");
+  expect(eventPresentation(game, event, reader)).toBe(`Allié perd 2 Blocage à cause de ${boon}`);
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+  expect(eventPresentation(game, { ...event, text: `${name} loses Block to something else` }, reader)).toBe(
+    `${name} loses Block to something else`,
+  );
+});
+
+it("localizes repeated abilities and the amount of Poison cleansed", () => {
+  const game = teamRun(42, ["wickwaltz"]);
+  const actor = game.team[0]!;
+  const card = definition(game.cards[0]!.definitionId);
+  const actorName = species(actor.species).name;
+  const reader = createMessageReader("fr", french);
+  const repeated: GameEvent = {
+    kind: "action",
+    actionType: "support",
+    actorId: actor.id,
+    text: `${actorName} repeats ${card.name} with Kindling Flourish`,
+  };
+  expect(eventPresentation(game, repeated, reader)).toBe(
+    `${localizedCombatantName(actor, reader)} répète ${reader.content(`content.card.${card.id}.name`, card.name)} avec ${reader.content("content.species.wickwaltz.trait", "Kindling Flourish")}`,
+  );
+  const cleanse: GameEvent = {
+    kind: "status",
+    targetId: actor.id,
+    status: "cleanse",
+    affectedStatus: "poison",
+    outcome: "remove",
+    amount: -2,
+    text: `${actorName} Cleanses 2 Poison.`,
+  };
+  expect(eventPresentation(game, cleanse, reader)).toBe(
+    `${localizedCombatantName(actor, reader)} purifie 2 Poison.`,
+  );
+  expect(eventPresentation(game, { ...cleanse, text: "Unrelated Cleanse" }, reader)).toBe(
+    "Unrelated Cleanse",
+  );
+  expect(eventPresentation(game, repeated, createMessageReader("en", {}))).toBe(repeated.text);
+});
+
+it("localizes real Pearl and Echo creation and a repeated Food card", () => {
+  const game = structuredClone(requireBattle(teamRun(42, ["memento"])));
+  const actor = game.team[0]!;
+  const events: GameEvent[] = [];
+  createPearls(game, actor, "player", 2, events);
+  summonEcho(game, actor, "player", 5, events);
+  const reader = createMessageReader("fr", french);
+  expect(eventPresentation(game, events[0]!, reader)).toBe("Memento crée des Perles : 2");
+  expect(eventPresentation(game, events[1]!, reader)).toBe("Memento invoque un Écho");
+  const repeat: GameEvent = {
+    kind: "action",
+    actorId: actor.id,
+    actionType: "support",
+    text: "Apple repeats",
+  };
+  expect(eventPresentation(game, repeat, reader)).toBe("Nouvelle utilisation : Pomme");
+  expect(eventPresentation(game, { ...repeat, text: "Unknown repeats" }, reader)).toBe("Unknown repeats");
+  for (const event of [...events, repeat])
+    expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+});
+
+it("localizes protective ward announcements without translating unrelated events", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const english = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: english, text: "Allié" },
+  });
+  const ward: GameEvent = {
+    kind: "status",
+    targetId: target.id,
+    status: "reflect",
+    outcome: "apply",
+    text: "Reflect the next harmful status effect",
+  };
+  expect(eventPresentation(game, ward, reader)).toBe("Renvoyer le prochain effet de statut néfaste");
+  const negate: GameEvent = {
+    kind: "status",
+    targetId: target.id,
+    status: "negate",
+    outcome: "apply",
+    text: `${english} negates the next attack against them`,
+  };
+  expect(eventPresentation(game, negate, reader)).toBe(
+    "Allié annule la prochaine attaque dirigée contre lui",
+  );
+  expect(eventPresentation(game, { ...ward, text: "An unfamiliar ward" }, reader)).toBe("An unfamiliar ward");
+  expect(eventPresentation(game, negate, createMessageReader("en", {}))).toBe(negate.text);
+});
+
+it("localizes a reflected status using its actual recipient", () => {
+  const game = structuredClone(run());
+  const actor = game.team[0]!;
+  const reflector = game.battle!.enemies[0]!;
+  reflector.combat.reflect = true;
+  const events: GameEvent[] = [];
+  resolveCombat("applyHarmfulStatus", game, actor, reflector, 1, "poison", events);
+  const event = events.find((entry) => entry.kind === "status" && entry.status === "reflect")!;
+  expect(event.kind === "status" && event.recipientId).toBeTruthy();
+  const recipient = game.team.find((unit) => event.kind === "status" && unit.id === event.recipientId)!;
+  const reader = createMessageReader("fr", french);
+  expect(eventPresentation(game, event, reader)).toBe(
+    `${localizedCombatantName(reflector, reader)} renvoie Poison vers ${localizedCombatantName(recipient, reader)}`,
+  );
+  expect(eventPresentation(game, { ...event, text: "Unknown reflection" }, reader)).toBe(
+    "Unknown reflection",
+  );
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
 });
 
 it("localizes Death's Door and Armor loss using committed combat facts", () => {

@@ -96,6 +96,7 @@ export type StatusEvent = EventContext & {
   outcome: "gain" | "remove" | "apply" | "immune" | "dodge" | "skip";
   amount?: number;
   affectedStatus?: KeywordId;
+  recipientId?: string;
   additive?: boolean;
 };
 /** Committed facts: numeric combat payloads are complete; announcements carry no invented combat data. */
@@ -125,6 +126,7 @@ export type GameEvent =
       status?: undefined;
       outcome?: undefined;
       affectedStatus?: undefined;
+      recipientId?: undefined;
     });
 export type CommandResult =
   | { accepted: true; state: GameState; events: GameEvent[] }

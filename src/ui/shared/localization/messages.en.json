@@ -278,17 +278,35 @@
   "log.absorb": {
     "text": "{{name}} blocks {{amount}} damage."
   },
+  "log.battleComplete": {
+    "text": "Battle complete. Rewards saved."
+  },
   "log.blinded": {
     "text": "{{name}} is Blinded"
   },
   "log.boonPurchased": {
     "text": "Boon purchased for this journey."
   },
+  "log.cleansePoison": {
+    "text": "{{name}} Cleanses {{amount}} Poison."
+  },
   "log.controlApplied": {
     "text": "{{name}} is {{status}}."
   },
+  "log.copyWithTrait": {
+    "text": "{{actor}} copies {{card}} with {{trait}}"
+  },
   "log.createFood": {
     "text": "{{actor}} creates {{count}} Food cards"
+  },
+  "log.createPearls": {
+    "text": "{{actor}} creates {{count}} Pearls"
+  },
+  "log.creatureJoined": {
+    "text": "{{name}} joined your roster."
+  },
+  "log.creatureRediscovered": {
+    "text": "{{name}} was discovered again; your roster is unchanged."
   },
   "log.criticalDamage": {
     "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
@@ -301,6 +319,9 @@
   },
   "log.drawDiscard": {
     "text": "{{card}} is drawn from Discard"
+  },
+  "log.expressDelivery": {
+    "text": "{{trait}} draws an extra card"
   },
   "log.formationChanges": {
     "text": "Your formation changes"
@@ -317,11 +338,17 @@
   "log.gainMana": {
     "text": "Gain {{amount}} Mana."
   },
+  "log.gainNegate": {
+    "text": "{{name}} gains Negate"
+  },
   "log.gainNullify": {
     "text": "{{name}} gains Nullify"
   },
   "log.gainStatus": {
     "text": "{{name}} gains {{amount}} {{status}}."
+  },
+  "log.goodFortune": {
+    "text": "{{trait}} turns the odds"
   },
   "log.heal": {
     "text": "{{name}} restores {{amount}} Health."
@@ -335,14 +362,35 @@
   "log.journeyBegins": {
     "text": "Your journey begins."
   },
+  "log.journeyEnded": {
+    "text": "Your journey has ended."
+  },
+  "log.keepBlockWithBoon": {
+    "text": "{{name}} keeps {{amount}} Block with {{boon}}"
+  },
   "log.knockout": {
     "text": "{{name}} is knocked out."
   },
   "log.loseArmor": {
     "text": "{{name}} loses {{amount}} Armor"
   },
+  "log.loseArmorToBoon": {
+    "text": "{{name}} loses {{amount}} Armor to {{boon}}"
+  },
+  "log.loseBlockToBoon": {
+    "text": "{{name}} loses {{amount}} Block to {{boon}}"
+  },
   "log.loseFreezeBuildup": {
     "text": "{{name}} loses {{amount}} Freeze buildup"
+  },
+  "log.mountainGuide": {
+    "text": "{{trait}} protects {{target}}"
+  },
+  "log.negateAttack": {
+    "text": "{{name}} negates the attack"
+  },
+  "log.negateNextAttack": {
+    "text": "{{name}} negates the next attack against them"
   },
   "log.nullifyEffect": {
     "text": "{{name}} nullifies {{status}}"
@@ -353,8 +401,14 @@
   "log.reachDeathsDoor": {
     "text": "{{name}} reaches Death's Door: {{amount}} grace turns."
   },
+  "log.redistributeBlock": {
+    "text": "{{card}} redistributes Block"
+  },
   "log.reflectAttack": {
     "text": "{{actor}} reflects the attack back at {{target}}"
+  },
+  "log.reflectStatus": {
+    "text": "{{actor}} reflects {{status}} to {{target}}"
   },
   "log.removeBuildup": {
     "text": "{{name}}: Cleanse {{status}} build-up"
@@ -365,11 +419,26 @@
   "log.removeNoEffects": {
     "text": "{{name}}: {{action}} removes no effects."
   },
+  "log.repeatCard": {
+    "text": "{{actor}} repeats {{card}}"
+  },
+  "log.repeatCardWithTrait": {
+    "text": "{{actor}} repeats {{card}} with {{trait}}"
+  },
+  "log.repeatFood": {
+    "text": "{{card}} repeats"
+  },
   "log.repeatNextEnemyCard": {
     "text": "The enemy's next card is played twice"
   },
   "log.repeatNextPlayerCard": {
     "text": "Your next card is played twice"
+  },
+  "log.repeatStunTrait": {
+    "text": "{{actor}} repeats Stun damage with {{trait}}"
+  },
+  "log.replacement": {
+    "text": "{{actor}} replaces {{target}}."
   },
   "log.resurrect": {
     "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"
@@ -383,6 +452,12 @@
   "log.skipControlledTurn": {
     "text": "{{name}} skips its {{status}} turn."
   },
+  "log.summonEcho": {
+    "text": "{{actor}} summons an {{echo}}"
+  },
+  "log.swapPositions": {
+    "text": "{{actor}} swaps positions with {{target}}."
+  },
   "log.temporaryDodge": {
     "text": "{{name}} gains {{amount}}% Dodge until its next turn"
   },
@@ -394,6 +469,21 @@
   },
   "log.useFood": {
     "text": "Use {{card}}"
+  },
+  "log.wardNextAttack": {
+    "text": "{{name}} reflects the next attack"
+  },
+  "log.wardNextBurn": {
+    "text": "Reflect the next Burn"
+  },
+  "log.wardNextFreeze": {
+    "text": "Nullify the next Freeze damage"
+  },
+  "log.wardNextHarm": {
+    "text": "{{name}} nullifies the next harmful status effect"
+  },
+  "log.wardNextStatus": {
+    "text": "Reflect the next harmful status effect"
   },
   "menu.boons": {
     "text": "Boons"
