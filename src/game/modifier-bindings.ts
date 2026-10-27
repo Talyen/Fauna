@@ -221,7 +221,7 @@ export const modifierImplementations = freeze(
       "folded-mountain": ["./combat/statuses#applyHarmfulStatus"],
       "apple-press": ["./combat/protection#grantBlock"],
       "pollen-basket": ["./combat/damage#resolveHit"],
-      "farewell-oar": ["./team#farewellOar"],
+      "farewell-oar": ["./team#farewellOar", "./team#swapBackup"],
       "oasis-seed": ["./combat/protection#restoreHealth", "./combat/abilities#executeAbility"],
       "cypress-reliquary": ["./combat/damage#resolveHit"],
       "bellows-heart": ["./combat/protection#restoreHealth"],

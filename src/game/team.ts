@@ -360,11 +360,12 @@ export function swapBackup(
     });
   }
   if (fromCard && outgoing) {
-    farewellOar(
-      state,
-      previous.filter((ally) => !state.team.some((current) => current.id === ally.id)),
-      events,
-    );
+    if (state.boons.includes("farewell-oar"))
+      farewellOar(
+        state,
+        previous.filter((ally) => !state.team.some((current) => current.id === ally.id)),
+        events,
+      );
     matchSwapBlock(state, outgoing, incoming, events);
     shareSwapNullify(state, outgoing, incoming, events);
     if (state.boons.includes("rook-of-mercy"))

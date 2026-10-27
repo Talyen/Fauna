@@ -2,6 +2,7 @@ import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import {
+  findLivingBattlefield,
   isEnemy,
   battlefield,
   livingBattlefield,
@@ -84,7 +85,7 @@ export function* returnCleansedEffect(
     !state.boons.includes("orbit-armillary")
   )
     return;
-  const target = battlefield(state, "enemy").find((enemy) => enemy.id === sourceId && enemy.health > 0);
+  const target = findLivingBattlefield(state, "enemy", (enemy) => enemy.id === sourceId);
   if (!target) return;
   yield* applyResolvedStatus(
     state,
@@ -854,10 +855,11 @@ export function* applyHarmfulStatus(
         state.boons.includes("wonder-ball-maze")
       ) {
         // Successful control spends this pool; each new control removes another recipient from the route.
-        const recipient = battlefield(state, "enemy").find(
+        const recipient = findLivingBattlefield(
+          state,
+          "enemy",
           (unit) =>
             unit.id !== target.id &&
-            unit.health > 0 &&
             !ensureCombat(unit).controlled &&
             !ensureCombat(unit).skipped &&
             (ensureCombat(unit).cooldown === 0 || state.boons.includes("sleepers-urn")),

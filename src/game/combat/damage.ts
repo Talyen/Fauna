@@ -3,7 +3,7 @@ import { boonRule } from "../rules/boons";
 import { takeAttackReflection, publishAttackReflection } from "./attack-reflection";
 import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield, healingAllies, isDepartedMinion } from "../battlefield";
+import { findLivingBattlefield, isEnemy, battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
 import { hasTalent, creaturePassiveTier, passiveAmount } from "../progression";
@@ -266,7 +266,7 @@ export function* hit(
       target.health > 0
         ? target
         : !isEnemy(source) && state.boons.includes("dream-tangram")
-          ? battlefield(state, "enemy").find((enemy) => enemy.health > 0)
+          ? findLivingBattlefield(state, "enemy")
           : undefined;
     const chance = passiveAmount(isEnemy(source) ? undefined : state, source.species, "resonance");
     if (recipient && succeeds(state, chance / 100, isEnemy(source), events)) {
@@ -671,7 +671,7 @@ export function* resolveHit(
     damage > before &&
     state.boons.includes("wonder-domino")
   ) {
-    const recipient = battlefield(state, "enemy").find((enemy) => enemy.health > 0);
+    const recipient = findLivingBattlefield(state, "enemy");
     if (recipient)
       yield* reaction("hit", state, source, recipient, damage - before, type, events, { origin: "overkill" });
   }
@@ -683,7 +683,7 @@ export function* resolveHit(
     options.origin !== "chain" &&
     state.boons.includes("brookskip-disc")
   ) {
-    const recipient = battlefield(state, "enemy").find((enemy) => enemy.id !== target.id && enemy.health > 0);
+    const recipient = findLivingBattlefield(state, "enemy", (enemy) => enemy.id !== target.id);
     if (recipient)
       yield* reaction("hit", state, source, recipient, blocked, "water", events, { origin: "chain" });
   }
