@@ -27,16 +27,19 @@ const storedDiagnostic = z.object({
   source: diagnosticSource,
   message: z.string(),
   count: z.number().int().positive().catch(1),
-  revision: z.number().int().optional().catch(undefined),
+  revision: z.number().int().min(0).optional().catch(undefined),
   phase: z.string().optional().catch(undefined),
 });
 const sanitize = (value: string) =>
   value
     .replace(/(?:\/[^/\r\n]+){2,}\/|[A-Za-z]:\\(?:[^\\\n]+\\)+/g, "[path]/")
+    .replace(/\\\\[^\\\r\n]+\\[^\\\r\n]+(?:\\[^\\\r\n]+)*/g, "[path]")
+    .replace(/(?:\/[^/\r\n]+){2,}$/g, "[path]")
     .replace(
       /(?:token|password|secret|authorization)["']?\s*[:=]\s*(?:(?:Bearer|Basic)\s+)?(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\S+)/gi,
       "[redacted]",
     )
+    .replace(/\bBearer[ \t]+[^\s,;"']+/gi, "[redacted]")
     .slice(0, MAX_MESSAGE_LENGTH);
 
 function readEntries(raw: string | null | undefined): Diagnostic[] {

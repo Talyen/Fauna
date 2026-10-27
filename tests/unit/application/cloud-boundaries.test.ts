@@ -142,3 +142,47 @@ it.each(["José", "Jose\u0301", "玩家", "🌲"])(
     diagnostics.dispose();
   },
 );
+
+it.each([
+  "failed /Users/private-user",
+  "failed \\\\server\\private-user\\save.json",
+  "request failed with Bearer private-credential",
+])("removes sensitive details from diagnostic messages: %s", (message) => {
+  let stored = "";
+  const diagnostics = createDiagnostics({
+    read: () => null,
+    write: (value) => (stored = value),
+  });
+  diagnostics.record("global", message);
+  expect(diagnostics.snapshot()[0]!.message).not.toContain("private");
+  expect(stored).not.toContain("private");
+});
+
+it("discards invalid persisted revision context just as it does live context", () => {
+  const diagnostics = createDiagnostics({
+    read: () =>
+      JSON.stringify([{ source: "global", message: "failure", count: 1, revision: -1, phase: "battle" }]),
+    write: () => {},
+  });
+  expect(diagnostics.snapshot()).toEqual([{ source: "global", message: "failure", count: 1 }]);
+});
+
+it("keeps cloud recovery available when a transport error message throws", async () => {
+  const f = fixture();
+  const error = new Error();
+  Object.defineProperty(error, "message", {
+    get: () => {
+      throw new Error("unreadable message");
+    },
+  });
+  f.port.identity = vi.fn().mockRejectedValueOnce(error).mockResolvedValue(identity);
+  try {
+    await f.manager.start(payload);
+    expect(f.manager.view).toMatchObject({ status: "Pending", blocking: false, error: "Cloud sync failed." });
+    await f.manager.retry();
+    await f.manager.flush();
+    expect(f.manager.view.status).toBe("Synced");
+  } finally {
+    await f.manager.dispose();
+  }
+});
