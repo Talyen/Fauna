@@ -2147,17 +2147,65 @@
     "sourceHash": "45880f0438e251efd83461dd3d7ee1e5e07e3d7646643e5d4ee4952b0d89c518",
     "text": "Сбор углей"
   },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "e564c2d8fc65092eea985e9d7dd896903be43bab659cdd24fb1a39459926d459",
+    "text": "Праздничная вспышка"
+  },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "d9c81e6d00c072b443fc447fd7b3d756ef2c6595c116e589eaa0adbcf7c1869a",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "0b65a601e199d2e957f97b8475c84ba75572e8d74e6d3242f5f23bcfe7a950ae",
+    "text": "Искристая приманка"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "8608ec1987589bfb38356ee29ab292ad5384ba2c786fc6ab325256e68bb846e1",
+    "text": "Тростниковый рывок"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "482be64930b03a3b4def4e64e017668e96d05c34e21dff739bc6dd6b4eee218b",
+    "text": "Тростниковое укрытие"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "0789b67fad96ad7a4e9b5787df43287fbbd78e21b1f21ce517e5ad633bf7a377",
     "text": "Получите {{value0}} <keyword0>блока</keyword0>; Получите {{value1}} <keyword1>шипов</keyword1>"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "ada03305d04582911caac0b51b644595ed3683d80d24fcdc805100fe4a0d3ca1",
+    "text": "Целебный родник"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "0be87cdd5824fe34ba6f4a0530c50bd97c4ea8f2f5c19a55307bfd21fdfe2e5e",
+    "text": "Двойник сна"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "c066db5c2890f4df94763e5068209e07910f5f94892b6a350e40c0a122f39f62",
+    "text": "Урожай кошмаров"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "6804bdf2b650d512fe567cf328a4cc076fa5f21654e949ae7379459da29306b1",
+    "text": "Чудо пробуждения"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2171,11 +2219,41 @@
     "sourceHash": "08c9f7ea9b387ef817629ee751f9b3ebd8e930570d18c48c73c5601068e914b5",
     "text": "Добор карт: {{value0}}"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "13ea5cbb571bb218a26f580c5c063115b2b6b2d56fddac015fb937addd483913",
+    "text": "Круговой хлопок"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "cb1951251add3015af912ab640ce4c4591bf042684d664d29de46b7e3c5ec90f",
     "text": "Нанесите {{value0}} урона от <keyword0>оглушения</keyword0>"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "c2799657fc4ebb19c1b7278b6600d04c663b9259fdcc805010e1f26f6e7e0a32",
+    "text": "Гармоничный набор"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "678c707e433db5b4d3de636b855041e2a848d533fdcf700d3d1040c160dcc384",
+    "text": "Круг ростков"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "ce2eaf05dcc29a857bb67f22372357ac1d144dcbe6cdcc1d7c830fc7621642cf",
+    "text": "Заимствованное сияние"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "7c4050d581bb932c4959be43ae636e3231f8fd5b92a36b3bb0b7b0884fa08961",
+    "text": "Поле возможностей"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2188,6 +2266,18 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "06459513e7d38bc676719cbb18850affa996f127f414799ad15c8c25e7d6b213",
     "text": "Добор карт: {{value0}}"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "f2133f3ffb93f484579d503f7ac56491ed70620a3e7f476ccc15bfdc681e72b1",
+    "text": "Ненаписанный финал"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "50c8a192eb1c59d2b212ab2aabc23cf26df02f1815a3308b24f08f17ed18412d",
+    "text": "Прохладный фронт"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

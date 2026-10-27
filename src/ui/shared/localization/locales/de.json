@@ -2147,17 +2147,65 @@
     "sourceHash": "27e2543fbd0a7bcf70deb1d2473e98a4412cd4ee7e58eeba1186da765e418b90",
     "text": "Gluternte"
   },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "22c61176b002275c2f82230dcea7c8135309d5db3ad5e14e096e173acc35d2ad",
+    "text": "Festexplosion"
+  },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "2111454a4539b380e72d509c5a9a2b2a752014adceb20620ad2a5a8d5ca5a9b0",
     "text": "Verursache {{value0}} <keyword0>Brand</keyword0>schaden bei allen Gegnern"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "76469d06574dfa888e71f505d60f15ef34397ccbeb39c44062bead1f156bc7ca",
+    "text": "Funkenköder"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "9d83848a9596e611dcd25f266b9e110aa19a7e55b474da211397d721fafd7807",
+    "text": "Schilfansturm"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "374dcb3b9359b2adc54d9c4e8a69080d3a9c91eb63382bbcc6dfe4e541ce2c47",
+    "text": "Schilfzuflucht"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "eff03f569069b21a2f1a3e9e5979e27551a2086d6959e64432bd2e5369599e8c",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; Erhalte {{value1}} <keyword1>Dornen</keyword1>"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "ee5ceb0db8122cd57462d3f5f4bac1c69d30701d9f62c847bd225c3d2cb84310",
+    "text": "Heilquelle"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "083dda61ac83c388648dddd21e149e08c4be016a4f44257da05e885b8ede03a1",
+    "text": "Traumdoppel"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "288dbcde69e4e6be005c2fa6ca52528e239f98863fa4f2ad6b99c7a87888a111",
+    "text": "Albtraumernte"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "bcd63498a3d861b90dc8940882b4cc993a3ef2c515a65df9df176f70b5100097",
+    "text": "Waches Wunder"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2171,11 +2219,41 @@
     "sourceHash": "cbef235e68b9e21b81b1f96178443b281da359f731d02566bc629859f5fbfe32",
     "text": "Ziehe {{value0}} Karte"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "93f556f049dc265b0b2d2bff3bd911cea4e982dc381cda4f4da14fc3c25eef44",
+    "text": "Ringklatschen"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "0a3a679d93ce582d3529768ca5f5d24458cfab406fa40e187bde1d45a4736692",
     "text": "Verursache {{value0}} <keyword0>Betäubung</keyword0>sschaden"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "da4ad48212b35782a183952c4927d79e608542a40a236ccc643ab9dc77d18aaa",
+    "text": "Harmonischer Satz"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "84be2df6db0e435940059523b3dbce7ebb1d544061e64d6c82390c82f56d0ae8",
+    "text": "Setzlingskreis"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "6fc9080a38170e69ea81eb7378af88baf64ab303d7af56c90a4d124419e02852",
+    "text": "Geliehener Glanz"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "5d535567496d1590a699ba5a531ccffc1fc6ae398fbc4b0c2599fea3e604af01",
+    "text": "Spielraum der Möglichkeiten"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2188,6 +2266,18 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "06a3eb42e449d752493b96188f808af4f42bccdeb5ca555cb5b44225ae13578e",
     "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "94f236b0a556935c5a0a310f72ec272265928064b2ed3e420883d7e6a0be8f91",
+    "text": "Ungeschriebenes Ende"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "9bc5558972215cab37dcfacc9e962820dbd35e0a090b8cbc994000714390bb57",
+    "text": "Kühlefront"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

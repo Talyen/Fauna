@@ -2159,17 +2159,65 @@
     "sourceHash": "f9d521dde339049a97569953d5d7b940103d4f62798f453e0aa0a6197451f340",
     "text": "Moisson de braises"
   },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "0c0b25223dc4685051ca2771fffe70cb904c6e26c886d4663dbe9e26f008b5ae",
+    "text": "Éclat festif"
+  },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "3fff4204b19ba6767de36c6800dcd2f1d1e5efdf7c49d1541244a4885b14ec60",
     "text": "Infligez {{value0}} dégâts de <keyword0>Brûlure</keyword0> à tous les ennemis"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "9734bd40de5468cabc2ad3813dac4e88a14936f9c00f2fbd46d866cc347cb914",
+    "text": "Leurre d’étincelles"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "0e925e79c158a0de63f89578521e43e42e54b8b95a5172db543c665ea71f05f9",
+    "text": "Ruée des roseaux"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "06422058530f24f239a35ea515a5177f618b45d82663df79ab3975b999ca4878",
+    "text": "Abri des roseaux"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "f37106c0f8a29fc14369376184e8d521e4df81ad26ffd01f5c1dbc4132baee17",
     "text": "Gagnez {{value0}} <keyword0>Blocage</keyword0> ; Gagnez {{value1}} <keyword1>Épines</keyword1>"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "28c38a96a3a214a8e566049e8f50ce41fb481c69eca06a68e7bebfffeb06d329",
+    "text": "Source réparatrice"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "abc4461f2116dfca7462650260f6f913c86528f03f3f7f5205ccd57fc3cb3f81",
+    "text": "Double onirique"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "0a8f3d06b88bbb7b24c9249e19db8544db1e34f4e13620e47a772b6164c3c843",
+    "text": "Moisson des cauchemars"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "8fd7d7bce969a9bc4385649933311f3c734c51e1e56eab47a13f096d80d9b9ec",
+    "text": "Merveille éveillée"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2183,11 +2231,41 @@
     "sourceHash": "8324a8329a0f00a9d61e93572968ff0260e270381a2d3b16970f47c1508729a2",
     "text": "Piochez {{value0}} carte"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "1f6bc7c616e520d010b1c4d8bc7b1ecb0d56ad80f4d3a487b2151d7d794ada4d",
+    "text": "Claquements en cercle"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "1e524c3ebd565d009bec0eddf5b0167265ce1c24b2e558118e51b35b8282afa9",
     "text": "Infligez {{value0}} dégâts d’<keyword0>Étourdissement</keyword0>"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "eeca01f24088b1b5b818d7d5420832473fc32727760f54f7fb171ae41048b376",
+    "text": "Ensemble harmonique"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "a0fb38a264339ef195898158ab6d5756773033a86f725b42cc5be242e62dd609",
+    "text": "Cercle des pousses"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "2775c6ffef502bb4629dcaf7c333bec5bfca29004a35edc45d4c51fd3d7530a8",
+    "text": "Éclat emprunté"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "59d28577405451c30c0412ce7a4745a682db410ad30a65a1bc4b96370dc3c9dd",
+    "text": "Marge des possibles"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2200,6 +2278,18 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "09f7aab462f5d2ee15aea97941ef731a03479ec053586224fbf7602f73c12107",
     "text": "Piochez {{value0}} carte"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "0a7c4499cc96775e33c92d4352d68b9bf584b9d4775e32d9c55c6a2f73b9482a",
+    "text": "Fin non écrite"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "84ec83ce0bd28d50dd8dbd3907cca9c07cbb9da5c012af40654ea583b3b22bdf",
+    "text": "Front frais"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

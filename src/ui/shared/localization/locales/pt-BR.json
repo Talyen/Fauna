@@ -2147,17 +2147,65 @@
     "sourceHash": "c53c13fe95417969d5704b1122c829cd9a9567673241643c35d3c2db540a8fad",
     "text": "Colheita de brasas"
   },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "769b5cf78bafa54701dae0aa17b95fc579f1cfda4531a6e19ca27ad7378512db",
+    "text": "Explosão festiva"
+  },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "afb3326fdafb21d94a4bc29e4203f5f081a11ffe0ff325a4197c51e63b50c757",
     "text": "Cause {{value0}} de dano de <keyword0>Queimadura</keyword0> a todos os inimigos"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "3ba4708cd5ed1fcd63a513ff34ba48852b9de42a843ea2f57b58e7afb6f12296",
+    "text": "Isca de faíscas"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "8888f4418fc3013f98c09da494cd5b19b3352f11b74aa6cda5fb4c172b4a7f5f",
+    "text": "Avanço de juncos"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "005ac3c85bdd9f6c872e2dfdd4c3b65e1c53b002cd3faa894b3e5cb507f07154",
+    "text": "Abrigo de juncos"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "b0fa40e016b79155c2dc9e3bf6d2368987801780e8eb59185f480892f71c8ca5",
     "text": "Receba {{value0}} de <keyword0>Bloqueio</keyword0>; Receba {{value1}} de <keyword1>Espinhos</keyword1>"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "1fdaf30984936578c4671c9b0238bcbf71e6f0acd580683b685c83d9ac90320f",
+    "text": "Fonte reparadora"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "9714dd2e0a1b437c7890127b56875bfa19172d7be85052e138df45d079ffd6f3",
+    "text": "Duplo onírico"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "4b9d35f6366040ac4abcc92cf407ee721e0a5ed8959a9ed36c4eb7e77f270e61",
+    "text": "Colheita de pesadelos"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "5e14b8b7626fa26e6f0a45f0bf0a8a7c2a77a346afc8103db71b96801ccf5f7c",
+    "text": "Maravilha desperta"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2171,11 +2219,41 @@
     "sourceHash": "7c0db56cc61a5c1d94f8bfc8092d7d345de31b339b598105f7662c951ac2e55c",
     "text": "Compre {{value0}} carta"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "3c393fb87c369c912da695e32252fefb8ba9e8725c6ca674e0c4aad5d77d188d",
+    "text": "Palma circular"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "ce12fd81a0a4b2cfe0a537f57a27db89a7967082a6429a4c07fd5ea4ed277387",
     "text": "Cause {{value0}} de dano de <keyword0>Atordoamento</keyword0>"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "3a9f37daaa8e87ccad77fc31b026ade4cac360e25e856554a7410784949c31bd",
+    "text": "Conjunto harmônico"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "c37900b18042a8d49da92b51e24e93cef693f6731e267d87c74cf5d0f35a1ee0",
+    "text": "Círculo de brotos"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "e82199eea17d7548714350a98760aa66cfc8469209f7c3a3cf29124d65667b92",
+    "text": "Brilho emprestado"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "64612413918630f3cf4ffd394fbdddfd09404fe745cd0e063811755f3b4d78ff",
+    "text": "Margem de possibilidades"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2188,6 +2266,18 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "e0ad04ced53655139275c7465c6261e47dfe2bb25aa027e263c216e5019eb63c",
     "text": "Compre {{value0}} carta"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "5e69e3f9b17b67888c8e0d3ee1eee8aa2237e4656edcf6f63f88df60a1c175a9",
+    "text": "Final não escrito"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "559b6d88c23c8b4dfe965392eefebd0bf624daaa704b1fdacb378a5a50e5f135",
+    "text": "Frente fresca"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

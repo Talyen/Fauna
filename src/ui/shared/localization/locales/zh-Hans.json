@@ -2147,17 +2147,65 @@
     "sourceHash": "19baae80a6583ad86901ad705bb368a9d73ee3c91f83ec15015693b317b59d4d",
     "text": "余烬收获"
   },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "d5bb3a7baf7625967e09496e79354d482d71791d0a8d90714efc8dca8e75df66",
+    "text": "庆典爆发"
+  },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "a30e3d5978bbe93cd64d0e96e1ef32e527ca5e98074b49f6189df6a58991a00e",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "5ecf266f7d1c3d94b19a940896fafeb529f2583e936cc2031ece36b76c52afaa",
+    "text": "火花诱饵"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "00d78a28337f8a954f512fe86076e1cefaa1fbd242eddabcf036dbdc26605f59",
+    "text": "芦苇冲刺"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "0ba4329157798f934273a428d7d8c56c6d3f911ffc7c9a173caee12a42ee05f9",
+    "text": "芦苇庇护"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "bf0ca4ae0bd0fcbebed269b4d9ba6a7bdb4a277305206b744ad16c4e24df62b0",
     "text": "获得{{value0}}点<keyword0>格挡</keyword0>；获得{{value1}}层<keyword1>荆棘</keyword1>"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "856498399db8a630ff482899c90b4fec6fcb8e3f23229fecad545ddb503bb7e4",
+    "text": "修复之泉"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "360a5b224c2ecf511642bec7f1d0ca504e1371040a4138cc271f1798f7482963",
+    "text": "梦之分身"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "6a98f474b628d97a7c24bc6e19ed09e9c639bf8583265b19d6704d1681019883",
+    "text": "噩梦收获"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "9b47671097d589568facbb20e31e29a7c79e1b68102927c68050e928d8256b1c",
+    "text": "醒时奇想"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2171,11 +2219,41 @@
     "sourceHash": "e1ad593458278ff4337c134735ac3782e9bad17157e1f2590c11ed73938827e4",
     "text": "抽{{value0}}张牌"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "61586d526bd2516eb9b6718e8aaad8aa37324c1a51579973c646bce243bb3415",
+    "text": "环掌"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "ffef18da307c53f4bf3000b52eb2b9dfd7dccbe977d5389ff7e33880d664faf6",
     "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "d5c41a5d9b213d4b3687e5a27ae0606fd68a28cede459a9d0cf0da2ed238c158",
+    "text": "谐和组合"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "e7e83d13709293068abadcc0980fffb07ab0a3b06b4a220b014a0100e5920ab9",
+    "text": "幼苗之环"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "a00e71abae40a96ff7ac92171a3c722bf2afbbf7277ff8c36d3ff280b9be6265",
+    "text": "借来的光辉"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "13c5ab80ffb8a2c2f3d3ef2e6f5287271051cc3343562b9591870753da57e799",
+    "text": "可能的余白"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2188,6 +2266,18 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "79e1622b37d610dba2902ddbcd30c0913f13d70cc5fce950ab2df2a3ffde0a2a",
     "text": "抽{{value0}}张牌"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "4e84091a4848dad1d818940fe32c1eb1b542ca8c79f3328f3322ff48202f56ac",
+    "text": "未写的结局"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "cf5b979c69dcc42f4b127e8257538e8f202bc3dbafbab0d57c7876147e2e1307",
+    "text": "清凉锋"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

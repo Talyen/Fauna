@@ -2147,17 +2147,65 @@
     "sourceHash": "3be60043e6ddf45fe4089219030cdba63247ca4d24546a7e511c09ce8d02c0a4",
     "text": "熾火の収穫"
   },
+  "content.card.pyrella-festival-burst.name": {
+    "reviewed": true,
+    "source": "Festival Burst",
+    "sourceHash": "8fa33e235c15c447b6727726f4aba96f24dfbd2948ebe3b7239d07a5642fcfcc",
+    "text": "祭りの炸裂"
+  },
   "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "c39cd03a377badad1519d17c3a568db62c16404f3eeadab5ab7013e9a8a1fd68",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.pyrella-spark-decoy.name": {
+    "reviewed": true,
+    "source": "Spark Decoy",
+    "sourceHash": "286135e9a0a6d3cc0a32c5d51e9c5e711548b02d73502914c7ecb613ade5d3a2",
+    "text": "火花のおとり"
+  },
+  "content.card.reedstag-attack.name": {
+    "reviewed": true,
+    "source": "Reed Rush",
+    "sourceHash": "56947c7af5af00e88d94d9cd05b863dead0daab06d8d9cfa4b54200548da0499",
+    "text": "葦の突進"
+  },
+  "content.card.reedstag-guard.name": {
+    "reviewed": true,
+    "source": "Reed Shelter",
+    "sourceHash": "a898a9dde18a05added5625dccae5bc9238971884de8eb3d43f1c6705da2ca5e",
+    "text": "葦の避難所"
+  },
   "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
     "sourceHash": "a5f4f886c903810e24b17d9ab660f074f3c4924be96ab0ebf9adacb92e4cc18c",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
+  },
+  "content.card.reedstag-heal.name": {
+    "reviewed": true,
+    "source": "Mending Spring",
+    "sourceHash": "8bc7abcda170e7c5801e92515fa71e00498b271539fdb07e6ad3b7bb68dd49c4",
+    "text": "癒やしの泉"
+  },
+  "content.card.reverie-dream-double.name": {
+    "reviewed": true,
+    "source": "Dream Double",
+    "sourceHash": "6b95483ef6d57e43df26f4ec4299bf8380b981268eb68ebd10509130f12215ec",
+    "text": "夢の分身"
+  },
+  "content.card.reverie-nightmare-harvest.name": {
+    "reviewed": true,
+    "source": "Nightmare Harvest",
+    "sourceHash": "202501e722b2ab885e67f42d3bed9aed929214a6cb9f8b8917d45682acdcab66",
+    "text": "悪夢の収穫"
+  },
+  "content.card.reverie-waking-wonder.name": {
+    "reviewed": true,
+    "source": "Waking Wonder",
+    "sourceHash": "0e988dca40e86ae9b1631aab479d13e3cffdf3a360857a4817e3b21fc8ebeed0",
+    "text": "目覚めの不思議"
   },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2171,11 +2219,41 @@
     "sourceHash": "b621a56a1cbfbb42532f4d8a9ff1ba3e73a1d0fc5d5ddfb30e8539a05dd9734d",
     "text": "カードを{{value0}}枚引く"
   },
+  "content.card.ringpalm-attack.name": {
+    "reviewed": true,
+    "source": "Ringclap",
+    "sourceHash": "2a6ac8521eff65023ac4af73c6397810f786ce920c6caad55b1bb1d847220708",
+    "text": "輪の手拍子"
+  },
   "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
     "sourceHash": "ff7665c06bf58d17e56878520a7ca96b4a37d0440f7d08c4dfa52b0609e2030d",
     "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.ringpalm-harmonic-set.name": {
+    "reviewed": true,
+    "source": "Harmonic Set",
+    "sourceHash": "c4738661e8b5312d8dd9821dbcab073d3506b915643f9b1f9959d476e7c8d5bf",
+    "text": "調和の組み手"
+  },
+  "content.card.ringpalm-teamProtection.name": {
+    "reviewed": true,
+    "source": "Seedling Circle",
+    "sourceHash": "2a869f517d35ad3748c5e755cff7a7ad90f23eed7cc215b4f2cee0854376b7fd",
+    "text": "若芽の輪"
+  },
+  "content.card.rookhaven-borrowed-brilliance.name": {
+    "reviewed": true,
+    "source": "Borrowed Brilliance",
+    "sourceHash": "850b9e6b551c46a0f4eeeac48c19f818b1e59ac97cc6ab7b0ca0ba60a41b93f4",
+    "text": "借りた輝き"
+  },
+  "content.card.rookhaven-margin-of-possibility.name": {
+    "reviewed": true,
+    "source": "Margin of Possibility",
+    "sourceHash": "d989cd5d60121875aeaa28b181ff32ba2e5ac54c40937840d379e73bcdde783b",
+    "text": "可能性の余白"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2188,6 +2266,18 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "5e3aba9c5f05369c44f0a26e5b00d574fa27ddb725f991f78c75e1fa90f46699",
     "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.rookhaven-unwritten-ending.name": {
+    "reviewed": true,
+    "source": "Unwritten Ending",
+    "sourceHash": "28efa64e91dd1ce74aa3c8ea8a3ca7ca3a348992a9cb87c04d26b3e4d4ba6e26",
+    "text": "書かれぬ結末"
+  },
+  "content.card.shadebrim-attack.name": {
+    "reviewed": true,
+    "source": "Coolfront",
+    "sourceHash": "81f3bab5538a97d21fe54dbd0b0b1a089e4377f510d09bcef34916372b3f7986",
+    "text": "涼風前線"
   },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
