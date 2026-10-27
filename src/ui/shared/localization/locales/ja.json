@@ -683,6 +683,36 @@
     "sourceHash": "ba32ca08ce42707b8f70ef91c688db3a68f5165d5efa12cc65f0ab0ec478ef3c",
     "text": "移ろう砂"
   },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "fc53c988e6164c7761bf18c6d68a0e52c2f365d2a2d321d8a6a16d1853e4e454",
+    "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "db4fdad727c76b7aab6bd321d0c0d37e2770589fce32a6958e22643489899adc",
+    "text": "ターンをスキップ"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "b34754c705544826a7a21b2655e66bf16fc471f5220f2365b9c4296a3b7a38e5",
+    "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "eb1a94e788d09c8bae86f6f838bfc1bfb2f513a5b4339008fb3359e6b81cad86",
+    "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "cea38a121bf3d16eb662a21e9598ef84564ba121af980bebcb450387c2c7a134",
+    "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

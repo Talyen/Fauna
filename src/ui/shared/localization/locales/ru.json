@@ -683,6 +683,36 @@
     "sourceHash": "433d676012016227c4203e3bdd730a8784091d66c04aa9a4a74cee4b6a02e572",
     "text": "Подвижные пески"
   },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "faa4c3fde3d071af58c5366bbf4aca9796807be2d4976e5a427e932cfd3bdc1e",
+    "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "f9d929ce42db5970678ac608a13b777426a69c70968d65230c4bac7aab823573",
+    "text": "Ход пропущен"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "8ecc369163afdbd929f22274b44882e164227b260cb73f24f439489b43e04928",
+    "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "0e5f7545acca207e785fbb5af65b73ca5b30070ad6aec523c9e832bb729d5dd0",
+    "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "02a14098de145f01ec9cc17334afdad1cfb0619bc32dbd8e4ced186feb47cfeb",
+    "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

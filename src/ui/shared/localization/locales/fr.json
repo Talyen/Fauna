@@ -881,6 +881,36 @@
     "sourceHash": "9ce7a7ea3d0bfc1d406027718df378b8585565bf6e9043591192a13cade68d85",
     "text": "Sables mouvants"
   },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "5f4bc52e2892391e64a621f78a3ebc69b430efc0407745e49ad51e0efe6c4eb8",
+    "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tours"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "979fc06cada375386e9dc03d360c18969caa7dadca8f81395090e06bb340fdd3",
+    "text": "Tour passé"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "935c7a91de080b91af47ec50e1fe57169178072f6342c29c5b7e5f5bd12f91c7",
+    "text": "<keyword0>Gel</keyword0> : {{value0}} tour"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "13097ae3cdd5e9aab6ba7d1d53f65f90fbb5e98ab2b15b52a52bb5166068479e",
+    "text": "<keyword0>Gel</keyword0> : {{value0}} tours"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "392034dfd6e2306279671a8e635a19bee8e65cd79e5eab0d3a2a277b09ef71ab",
+    "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tour"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

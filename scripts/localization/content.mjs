@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { extractStatusVariants } from "./status-variants.mjs";
 import { extractCardVariants } from "./card-variants.mjs";
 import { extractFoodRules } from "./food-rules.mjs";
 import { extractGlossaryRules } from "./glossary-rules.mjs";
@@ -122,6 +123,12 @@ export function extractProjectContent(root) {
       ...names,
       ...rules,
       ...authoredTalentRules,
+      ...extractStatusVariants(
+        fs.readFileSync(path.join(root, "src/ui/shared/combat/combat-status-model.ts"), "utf8"),
+        fs.readFileSync(path.join(root, "src/game/glossary.ts"), "utf8"),
+        fs.readFileSync(keywordFile, "utf8"),
+        fs.readFileSync(path.join(root, "src/game/resurrection-rules.ts"), "utf8"),
+      ),
       ...extractCardVariants(
         files.filter(({ location }) => /\/content\/creatures\/[^/]+\.ts$/.test(location)),
         {

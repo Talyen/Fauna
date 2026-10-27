@@ -48,6 +48,7 @@ export function evaluateRule(node, values, functions) {
       if (node.operator === "||") return left || evaluateRule(node.right, values, functions);
       const right = evaluateRule(node.right, values, functions);
       if (node.operator === "===") return left === right;
+      if (node.operator === ">") return left > right;
       if (node.operator === "+") return left + right;
       if (node.operator === "*") return left * right;
       break;

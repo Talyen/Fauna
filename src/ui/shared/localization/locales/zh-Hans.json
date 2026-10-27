@@ -683,6 +683,36 @@
     "sourceHash": "3211fa21dd8e7b67c5021ae45d1582d2b96a6fb64d9bf2f47cad4b00e5e3034c",
     "text": "流动沙丘"
   },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "5372e761e49994669bf7882361d79a845bc7e5508575fb0108587801c49feb50",
+    "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "28aeddff8a4fd21e8c271c4e0dda6ea680ac89c5bbe76bfe2cb99f6ab93e085b",
+    "text": "跳过回合"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "72c156de50cc3733bd83c90dcb6992ec38d1c4ea97491d7a88be24fa15e96058",
+    "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "12a3536f5552c27dcd86419331284a7e1b7185ad51b9e75b8cf10d8d1d14956b",
+    "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "1e0652a803449aaf663855f6eeaceea7d30541ae349861410e8114f8105e5627",
+    "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

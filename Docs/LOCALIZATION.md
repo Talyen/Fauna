@@ -62,8 +62,9 @@ English, so sampling alone does not establish complete card-rule coverage.
 Translations must remain grammatical for every numeric value that can fill a
 template; add explicit plural handling when a count-neutral sentence is not enough.
 Measured combat statuses reuse the keyword label and glossary definition while
-keeping their committed English snapshot for animation; status descriptions not
-yet migrated still fall back to that snapshot.
+keeping their committed English snapshot for animation. Transient status rules
+use IDs derived from their full templates and retain semantic keyword tags;
+unrecognized variants fall back to their English snapshots.
 `npm run localization:check`, the local changed-file gate and CI check freshness,
 duplicate IDs, English forms and parameter syntax. UI extraction only covers
 explicit calls in `src/ui`; content extraction does not yet cover all rule prose or generated descriptions. Neither establishes complete coverage or

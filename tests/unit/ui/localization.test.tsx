@@ -3,7 +3,9 @@ import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-mode
 import japanese from "../../../src/ui/shared/localization/locales/ja.json";
 import { definition } from "../../../src/game/content";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
-import { cardRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
+import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
+import { extractStatusVariants } from "../../../scripts/localization/status-variants.mjs";
+import { freshCombat } from "../../../src/game/combat/state";
 import {
   readCardDescriptionFunctions,
   describeCardRule,
@@ -1292,5 +1294,72 @@ it("announces a reviewed status and glossary definition in the selected language
       name: "Brûlure 1 ; Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
     }),
   ).toBeTruthy();
+  view.unmount();
+});
+
+it("extracts and presents transient combat status variants without changing their rules", () => {
+  const sources = [
+    "src/ui/shared/combat/combat-status-model.ts",
+    "src/game/glossary.ts",
+    "src/game/keywords.ts",
+    "src/game/resurrection-rules.ts",
+  ].map((file) => readFileSync(file, "utf8")) as [string, string, string, string];
+  const variants = extractStatusVariants(...sources);
+  const seen = new Set<string>();
+  const combat = {
+    ...freshCombat(),
+    cooldown: 2,
+    grace: 2,
+    rhythm: 10,
+    nextPhysical: 2,
+    partingCut: true,
+    riposte: true,
+    freeNature: true,
+    freeLight: true,
+    freeCard: true,
+    blind: true,
+    nullifyFreeze: true,
+    attackReflection: true,
+    negate: true,
+    nullify: true,
+    reflectBurn: true,
+    reflect: true,
+  };
+  for (const controlled of [null, "freeze", "stun"] as const) {
+    for (const controlTurns of [0, 1, 2]) {
+      for (const status of combatStatuses({ ...combat, controlled, controlTurns, skipped: true })) {
+        const template = ruleMessage(status.text).template;
+        const id = statusRuleVariantId(status.id, template);
+        expect(variants[id]?.text).toBe(template);
+        seen.add(id);
+      }
+    }
+  }
+  expect([...seen].sort()).toEqual(Object.keys(variants).sort());
+  expect(() =>
+    extractStatusVariants(
+      sources[0].replace("combat.rhythm}%", "combat.unknownStatus}%"),
+      sources[1],
+      sources[2],
+      sources[3],
+    ),
+  ).toThrow("Unsupported status value");
+
+  const frozen = { ...freshCombat(), controlled: "freeze" as const, controlTurns: 2 };
+  const source = ruleMessage(combatStatuses(frozen)[0]!.text).template;
+  const id = statusRuleVariantId("controlled", source);
+  expect(french[id as keyof typeof french]).toMatchObject({ source });
+  localStorage.removeItem("fauna.language.v1");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CombatStatus combat={frozen} />
+        <CombatStatus combat={frozen} details />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(screen.getByRole("button", { name: "Gel : 2 tours" })).toBeTruthy();
+  expect(view.container.querySelector('.combat-status-details [data-keyword="freeze"]')?.textContent).toBe("Gel");
+  expect(frozen.controlTurns).toBe(2);
   view.unmount();
 });

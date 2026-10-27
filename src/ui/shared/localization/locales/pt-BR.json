@@ -683,6 +683,36 @@
     "sourceHash": "98af3f3809faafb97e8e018d040b10915326dd4326c02371c6e296c4264a2d1c",
     "text": "Areias movediças"
   },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "7c3b1e3722a185531a1bdba2ed7b13825d64bd2f158e6c013ef919c710bf637c",
+    "text": "<keyword0>Atordoamento</keyword0>: {{value0}} turnos"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "dafd137dcfe258a3b789aa117eaef7b23b6ec0035916f44991ab3cdf70d96ec3",
+    "text": "Turno perdido"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "1da4de4ff1503af55436f3f9e663e9d8b3541d998fbc0f81cea77b18397ede5b",
+    "text": "<keyword0>Congelamento</keyword0>: {{value0}} turno"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "fb07a77ee7cee17083c57e28b0c7be51704bc698a5bdf33fe4587ec03fe523dd",
+    "text": "<keyword0>Congelamento</keyword0>: {{value0}} turnos"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "70def7ca48503e51f350ca2e934aee0c7f9104428206591fc1caf7c161a11ee2",
+    "text": "<keyword0>Atordoamento</keyword0>: {{value0}} turno"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

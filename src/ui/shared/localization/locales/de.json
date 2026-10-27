@@ -683,6 +683,36 @@
     "sourceHash": "300921460f57a2a3444c2b9690f46436dda8e38166b1cceafbbd124fb66affaf",
     "text": "Wandernde Sande"
   },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "sourceHash": "687c49dfaf7198fe99e3ab337273660a0abd472332005afcc383321881cad202",
+    "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runden"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "reviewed": true,
+    "source": "Turn skipped",
+    "sourceHash": "f2fe9f0909f853028dc5a12773b86355dabff0ed60388306d0f5a3af69d75fde",
+    "text": "Runde ausgesetzt"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "sourceHash": "84b33f11ea59f3ec97b03fafa9d734d29452077cac9c5f7faa7b0c922e597b66",
+    "text": "<keyword0>Frost</keyword0>: {{value0}} Runde"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "sourceHash": "2e3bc0f9b0975554e380484e328eaceb8665c0aed246044a486a555118061931",
+    "text": "<keyword0>Frost</keyword0>: {{value0}} Runden"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "sourceHash": "3a5819607198808c30905188cd66bcb27b71d2f68ccb7b399bc16ff76b4f7b54",
+    "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runde"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

@@ -3,6 +3,8 @@ import { KEYWORD_DEFINITIONS, isKeywordId } from "../../../game/keywords";
 import { Keyword, KeywordText } from "../keyword-text";
 import { MessageParts } from "../localization/message-parts";
 import { useMessages } from "../localization/message-context";
+import { statusRuleVariantId } from "../localization/rule-key.mjs";
+import { ruleMessage } from "../localization/rule-message";
 import { useRuleText } from "../localization/rule-catalog";
 import type { Status } from "./combat-status-model";
 
@@ -13,11 +15,13 @@ export function useStatusPresentation(status: Status): { text: string; content: 
   const i18n = useMessages();
   const id = isKeywordId(status.id) && measured.includes(status.id) ? status.id : undefined;
   const source = id ? KEYWORD_DEFINITIONS[id].description : status.text;
-  const ruleId = id ? `content.glossary.keyword.${id}.definition.rule` : undefined;
+  const ruleId = id
+    ? `content.glossary.keyword.${id}.definition.rule`
+    : statusRuleVariantId(status.id, ruleMessage(status.text).template);
   const description = useRuleText(source, ruleId)
     .map((part) => part.text)
     .join("");
-  if (!id) return { text: description, content: <KeywordText text={status.text} /> };
+  if (!id) return { text: description, content: <KeywordText text={status.text} id={ruleId} /> };
   const keyword = i18n.content(`content.keyword.${id}.label`, KEYWORD_DEFINITIONS[id].label);
   const count = new Intl.NumberFormat(i18n.locale).format(status.count);
   const values = { keyword, count, description };

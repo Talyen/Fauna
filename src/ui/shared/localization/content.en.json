@@ -3464,6 +3464,111 @@
   "content.species.wisterelle.trait": {
     "text": "Lost and Found"
   },
+  "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
+    "text": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
+    "reference": "Attack Reflection: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; Reflected attacks cannot reflect again; Lasts until consumed or Purged; Does not stack",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.blind.v0b0434b4eb43f4a6.rule": {
+    "text": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
+    "reference": "Blind: 50% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a Dodge by every recipient; Does not stack",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.controlled.v147305c04334e696.rule": {
+    "text": "<keyword0>Stunned</keyword0>: {{value0}} turns",
+    "reference": "Stunned: 2 turns",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.controlled.v676f2c65dec45bce.rule": {
+    "text": "Turn skipped",
+    "reference": "Turn skipped",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.controlled.v89bb2c2caa8815a8.rule": {
+    "text": "<keyword0>Frozen</keyword0>: {{value0}} turn",
+    "reference": "Frozen: 1 turn",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.controlled.v9121eae5c53d2321.rule": {
+    "text": "<keyword0>Frozen</keyword0>: {{value0}} turns",
+    "reference": "Frozen: 2 turns",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.controlled.ve93ba5ee32c41861.rule": {
+    "text": "<keyword0>Stunned</keyword0>: {{value0}} turn",
+    "reference": "Stunned: 1 turn",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.cooldown.v2db257f39699f407.rule": {
+    "text": "Control immunity {{value0}}",
+    "reference": "Control immunity 0",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.freeCard.va99c62bb6b6c39d3.rule": {
+    "text": "Free Follow-up: next card is free",
+    "reference": "Free Follow-up: next card is free",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.freeLight.v6ae602b7426bd9c0.rule": {
+    "text": "Divine Favor: next <keyword0>Light</keyword0> card is free",
+    "reference": "Divine Favor: next Light card is free",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.freeNature.v46ee8ca448af828e.rule": {
+    "text": "Windstep: next <keyword0>Nature</keyword0> card is free",
+    "reference": "Windstep: next Nature card is free",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.grace.v6e81bc0f25243d28.rule": {
+    "text": "Death's Door {{value0}}",
+    "reference": "Death's Door 0",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.negate.v74a74c8005c653ca.rule": {
+    "text": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
+    "reference": "Negate: Negate the next attack against you before Dodge, preventing its damage and harmful effects; Thorns still retaliate; Lasts until consumed or Purged; Does not stack",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
+    "text": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
+    "reference": "Open Flank: next attack deals 0 additional Physical damage",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.nullify.v31f2b57af0674222.rule": {
+    "text": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
+    "reference": "Nullify: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
+    "text": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "reference": "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.partingCut.v7cad0e487210bc8a.rule": {
+    "text": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
+    "reference": "Parting Cut: next Physical hit deals half its damage as additional Bleed damage",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.reflect.v1f90dd3050df6a1c.rule": {
+    "text": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
+    "reference": "Reflect: Return the specified attack or harmful status effect; Attack reflection returns damage and harmful follow-ups to the attacker; Status-only reflection redirects the effect to a random living enemy while direct damage still lands; Reflected attacks and statuses cannot reflect again; Charges do not stack",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.reflectBurn.vbb43777c9fa04208.rule": {
+    "text": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
+    "reference": "Reflect the next Burn; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
+    "text": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
+    "reference": "Finding Rhythm: +0% Dodge chance",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
+  "content.status.riposte.v7f25e6d160e653d4.rule": {
+    "text": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
+    "reference": "Riposte: next Physical attack is a guaranteed Critical Hit",
+    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+  },
   "content.talent.armor.armored-surge.name": {
     "text": "Armored Surge"
   },
