@@ -41,22 +41,33 @@ These records retain dated source identities, observations and limitations. A la
 - [Uncertain previews and hitch attribution](../task-evidence/2026-10-23-uncertainty-and-attribution.md)
 - [Resource efficiency and inventory history](../task-evidence/2026-10-24-resource-efficiency.md)
 - [Repository-owned asset sources](../task-evidence/2026-10-24-standalone-assets.md)
+- [Battle policy and authoring audit](../task-evidence/2026-10-25-battle-policy-and-authoring-audit.md)
+- [Ten boundary fixes](../task-evidence/2026-10-25-boundary-audit.md)
+- [Twenty boundary and lifecycle fixes](../task-evidence/2026-10-25-twenty-boundary-fixes.md)
+- [Outstanding review and CI repair](../task-evidence/2026-10-26-outstanding-review.md)
+- [Stack maintenance observations](../task-evidence/2026-10-26-stack-maintenance.md)
+- [Auto-play and content fixes](../task-evidence/2026-10-26-ten-fixes.md)
 
 ### Boons
 
 - [October 26 revised artifact Boons](../task-evidence/2026-10-26-revised-artifact-boons.md)
-
 - [Passive rule changes and intentional baseline updates](../task-evidence/2026-10-25-passive-boons.md)
 - [Thorns, healing, draw and cross-turn Boons](../task-evidence/2026-10-25-ten-boons.md)
 - [Food, status, draw and swap artifacts](../task-evidence/2026-10-25-artifact-boons.md)
 - [Resonant artifacts](../task-evidence/2026-10-25-resonant-boons.md)
 - [Elegant artifacts and media allowance](../task-evidence/2026-10-25-elegant-boons.md)
+- [Linked artifacts](../task-evidence/2026-10-25-linked-boons.md)
+- [Nine artwork-led Boons](../task-evidence/2026-10-26-nine-new-boons.md)
+- [Woven artifacts](../task-evidence/2026-10-26-woven-boons.md)
+- [Chromatic artifacts](../task-evidence/2026-10-27-chromatic-ten-boons.md)
+- [Journey artifacts](../task-evidence/2026-10-27-journey-artifact-boons.md)
+- [Rose and hearth artifacts](../task-evidence/2026-10-27-seal-boons.md)
+- [Unified Thorns and new Boons](../task-evidence/unified-thorns-new-boons.md)
 
 ### Creatures
 
 - [Recorded kit selections](CREATURE_KIT_SELECTIONS.md): historical catalog excerpts; authored kits own current values
 - [Wisterelle](../task-evidence/wisterelle.md)
-
 - [Aerostat](../task-evidence/aerostat.md)
 - [Almanelle](../task-evidence/almanelle.md)
 - [Alpenglen](../task-evidence/alpenglen.md)
@@ -73,6 +84,7 @@ These records retain dated source identities, observations and limitations. A la
 - [Keyword effects](../task-evidence/KEYWORD_EFFECTS.md)
 - [Alchemy corners and tooltip treatment](../task-evidence/alchemy-corners-tooltips.md)
 - [Creature hover and passive disclosure](../task-evidence/creature-hover-passive.md)
+- [React Compiler visual review](../task-evidence/2026-10-27-react-compiler-visual-review.md)
 
 ## Visual decisions and studies
 

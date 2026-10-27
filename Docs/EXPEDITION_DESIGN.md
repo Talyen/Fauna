@@ -103,14 +103,14 @@ The [Boon catalog](../src/game/content/boons.ts) defines available items. [Suppo
 
 Journey is the player-facing name; internal command IDs, routes, filenames and storage paths retain their existing names.
 
-| Outcome                   | Flow after settlement                                                                     |
-| ------------------------- | ----------------------------------------------------------------------------------------- |
-| Ordinary victory          | Earnings and required recruitment → next encounter                                        |
-| Intermediate Boss victory | Earnings and required Legendary recruitment → Boon choice when available → next encounter |
-| Final Boss victory        | Required recruitment → Journey results                                                    |
-| Defeat                    | Journey results                                                                           |
-| End a started journey     | Bank pending XP → Journey results, labeled Returned home                                  |
-| End an unfinished draft   | Main menu                                                                                 |
+| Outcome                   | Flow after settlement                                                           |
+| ------------------------- | ------------------------------------------------------------------------------- |
+| Ordinary victory          | Earnings and required recruitment → next encounter                              |
+| Intermediate Boss victory | Earnings and required recruitment → Boon choice when available → next encounter |
+| Final Boss victory        | Required recruitment → Journey results                                          |
+| Defeat                    | Journey results                                                                 |
+| End a started journey     | Bank pending XP → Journey results, labeled Returned home                        |
+| End an unfinished draft   | Main menu                                                                       |
 
 Earnings appear alongside the required Recruit choice without an extra Continue. Recruitment is required; only Boon choices retain Skip. Missing optional choices advance automatically. [Recruitment](#recruitment) owns full-roster replacement.
 
