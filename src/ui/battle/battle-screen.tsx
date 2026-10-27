@@ -400,6 +400,7 @@ export function BattleScreen({
               ) : null}
               <Button
                 className="end-turn"
+                variant="outline"
                 aria-label={
                   controller
                     ? i18n.message("battle.endTurnPrompt", "End turn · {{prompt}}", {

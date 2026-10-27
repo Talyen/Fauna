@@ -55,6 +55,7 @@
   background-clip: border-box;
 }
 :is(.action-card, .creature-card) > .effect-shine-border {
+  inset: calc(-1 * var(--border-art-width));
   opacity: 0;
   transition: opacity var(--motion-hover);
 }

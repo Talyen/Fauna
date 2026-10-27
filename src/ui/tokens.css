@@ -50,7 +50,7 @@
   --radius-panel: 22px;
   --border-art-width: 1px;
   --radius-round: 9999px;
-  --border-art: transparent;
+  --border-art: color-mix(in srgb, var(--border) 80%, transparent);
   --feedback-shadow: var(--background);
   --overlay: #000c;
   --error: #ffc4ad;

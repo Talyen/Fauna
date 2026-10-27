@@ -75,9 +75,9 @@ Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and con
 
 ## Collection
 
-Use a centered title, All/Collected/Uncollected tabs, a gallery and pagination. Order collected species first. Collected artwork shows five external progress stars; name/details appear on hover/focus and activation opens the shared inspector. Uncollected artwork is grayscale and noninteractive, with no tooltip, kit details or unlock requirement. Browsing never grants discovery.
+Use a centered title, All/Collected/Uncollected tabs, a gallery and pagination. Order collected species first. Collected artwork shows five external progress stars; name/details appear on hover/focus and activation opens the shared inspector. Uncollected artwork rests in grayscale, with no tooltip, kit details or unlock requirement. Browsing never grants discovery.
 
-Uncollected artwork remains grayscale and still on hover. The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
+Uncollected artwork reveals its colors and keyword shine on hover or intentional keyboard/controller focus, returning to grayscale at rest; it cannot be activated. The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
 
 Reserve two gallery rows and a footer slot. Measured width chooses one to four columns independently of item count before reducing artwork. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the filter when neither remains.
 
