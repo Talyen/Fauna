@@ -1667,6 +1667,12 @@
     "sourceHash": "97f14a87343358c7f4e3420009f24794c8f9d75fd73c4d833645101aad9156f0",
     "text": "Voile de cendres"
   },
+  "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "12300a7cc1e72c95a76f08c7041e0c928715062071febd2d438eca2277e536ca",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Brûlure</keyword0> à tous les ennemis; <keyword1>Aveugle</keyword1> tous les ennemis"
+  },
   "content.card.cindernewt-attack.name": {
     "reviewed": true,
     "source": "Cinder Lash",
@@ -1835,6 +1841,12 @@
     "sourceHash": "f05fa1522a32579b0979d0344d784d216305073bf6e32d4d501fb4f462746d25",
     "text": "Tourbillon des dunes"
   },
+  "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "b2715cf9304d60d6d602c9d72638a54e043b0aff365e7ac35f89a474b65c62cc",
+    "text": "Inflige {{value0}} dégâts <keyword0>Physiques</keyword0> à tous les ennemis; <keyword1>Aveugle</keyword1> tous les ennemis"
+  },
   "content.card.emberback-attack.name": {
     "reviewed": true,
     "source": "Ember Charge",
@@ -1973,6 +1985,12 @@
     "sourceHash": "184ce4ae0f1b01590908dfa674be00d04e95943721155707ae272158bb0d4995",
     "text": "Faux horizon"
   },
+  "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "50b83047273a084a0f4183e5dca586033eeb5ddd97c1eb309927e56704207de1",
+    "text": "<keyword0>Aveugle</keyword0> tous les ennemis"
+  },
   "content.card.memento-drowned-revelation.name": {
     "reviewed": true,
     "source": "Drowned Revelation",
@@ -2093,6 +2111,12 @@
     "sourceHash": "32cc0a04bed351288ac6cfc001cc21f5dd48bd2f4118071b4851d1b54c0c77ce",
     "text": "Nœud du ressac"
   },
+  "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
+    "sourceHash": "e0cf1dee64fffb2e4147995c34f84afed5b184634983fd945d71065c1212f74c",
+    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0>; <keyword1>Purifie</keyword1> un effet néfaste"
+  },
   "content.card.oathara-never-lost.name": {
     "reviewed": true,
     "source": "Never Lost",
@@ -2122,6 +2146,12 @@
     "source": "Vow of Return",
     "sourceHash": "4132a968fce98f29ab0bd3e10b543d034bea4d90f3d34d5d09bcc23142e07c2f",
     "text": "Serment de retour"
+  },
+  "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrect</keyword0> an ally",
+    "sourceHash": "6d3d79697812e8b158b5d8ce18aa45b404053c6d48e4ba7faab77ff670713fb8",
+    "text": "<keyword0>Ressuscite</keyword0> un allié"
   },
   "content.card.orifable-attack.name": {
     "reviewed": true,
@@ -2273,6 +2303,12 @@
     "sourceHash": "f9d521dde339049a97569953d5d7b940103d4f62798f453e0aa0a6197451f340",
     "text": "Moisson de braises"
   },
+  "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "a03815b1ece6d89509fdc89435ae8d3fd724b26458279e05fb80f26dc78d9ec1",
+    "text": "Restaure {{value0}} <keyword0>Mana</keyword0>"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2387,6 +2423,12 @@
     "sourceHash": "2775c6ffef502bb4629dcaf7c333bec5bfca29004a35edc45d4c51fd3d7530a8",
     "text": "Éclat emprunté"
   },
+  "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "d40a6017500e2d2f1ca3675a8014a011236022c36c7ef4acf4eef69c8b8a1be4",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> à tous les ennemis; <keyword1>Aveugle</keyword1> tous les ennemis"
+  },
   "content.card.rookhaven-margin-of-possibility.name": {
     "reviewed": true,
     "source": "Margin of Possibility",
@@ -2410,6 +2452,12 @@
     "source": "Unwritten Ending",
     "sourceHash": "0a7c4499cc96775e33c92d4352d68b9bf584b9d4775e32d9c55c6a2f73b9482a",
     "text": "Fin non écrite"
+  },
+  "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> all enemies",
+    "sourceHash": "e6cce643fe68ee1ca4bd53079bb67f07017744ec306440ef7c6105523df1e56e",
+    "text": "<keyword0>Dissipe</keyword0> tous les ennemis"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

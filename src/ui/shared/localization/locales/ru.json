@@ -1655,6 +1655,12 @@
     "sourceHash": "bc0739aacd57cb335f48910d77a1bff6f4bcc03ddaca3b1b68cf8e624a2a100c",
     "text": "Пепельная вуаль"
   },
+  "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "ea18ad91732e34d3957476598e7b1f9fe84ea3489e1f032e1c60b0feb20f17ae",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>горением</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
+  },
   "content.card.cindernewt-attack.name": {
     "reviewed": true,
     "source": "Cinder Lash",
@@ -1823,6 +1829,12 @@
     "sourceHash": "a8ee908374582b8498c897b444b794e791d721904c9d535aa93987abac49de99",
     "text": "Вихрь дюн"
   },
+  "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "43c80ba59404915a3f57304da023ad605429c3637761c30892adc6bf5fbda2c5",
+    "text": "Нанесите всем врагам {{value0}} <keyword0>физического</keyword0> урона; <keyword1>Ослепите</keyword1> всех врагов"
+  },
   "content.card.emberback-attack.name": {
     "reviewed": true,
     "source": "Ember Charge",
@@ -1961,6 +1973,12 @@
     "sourceHash": "856cab8359d077beeece5a454cad489f4cb68a6af96d2ff51f6d9d677806acd0",
     "text": "Ложный горизонт"
   },
+  "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "fcab63195fa8405fc97ec8c842ff042a0cfd5a0df4f5b874e8f9d1d90b890b40",
+    "text": "<keyword0>Ослепите</keyword0> всех врагов"
+  },
   "content.card.memento-drowned-revelation.name": {
     "reviewed": true,
     "source": "Drowned Revelation",
@@ -2081,6 +2099,12 @@
     "sourceHash": "768b9b379ec07d71005a3c358f140b052a3e0d20dfce8055c7e68efd33308cb2",
     "text": "Узел отлива"
   },
+  "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
+    "sourceHash": "cf16f2119a09b3e18bd24105c86c9d564660e47a2b97d3e6525ebfc105bd433f",
+    "text": "Получите {{value0}} <keyword0>блока</keyword0>; <keyword1>Очистите</keyword1> один вредный эффект"
+  },
   "content.card.oathara-never-lost.name": {
     "reviewed": true,
     "source": "Never Lost",
@@ -2110,6 +2134,12 @@
     "source": "Vow of Return",
     "sourceHash": "55d7b041ff24fb40f973316d4d25216caf2d6798387e47fe4ff6f3924a45af32",
     "text": "Клятва возвращения"
+  },
+  "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrect</keyword0> an ally",
+    "sourceHash": "74c6ba6c8507d6e85fbe2bd7f058be615f5101069c093504de177640ea9d7d93",
+    "text": "<keyword0>Воскресите</keyword0> союзника"
   },
   "content.card.orifable-attack.name": {
     "reviewed": true,
@@ -2261,6 +2291,12 @@
     "sourceHash": "45880f0438e251efd83461dd3d7ee1e5e07e3d7646643e5d4ee4952b0d89c518",
     "text": "Сбор углей"
   },
+  "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "244ce69ed6b7bbd676a33aacafa0389abee06df1278d60cdf13ba89202274905",
+    "text": "Восстановите {{value0}} <keyword0>маны</keyword0>"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2375,6 +2411,12 @@
     "sourceHash": "ce2eaf05dcc29a857bb67f22372357ac1d144dcbe6cdcc1d7c830fc7621642cf",
     "text": "Заимствованное сияние"
   },
+  "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "9e45f798f4b2d9b8fc49ff3ead1d9932d00f43c9fd10ec02c37c34d37b047677",
+    "text": "Нанесите всем врагам {{value0}} урона <keyword0>светом</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
+  },
   "content.card.rookhaven-margin-of-possibility.name": {
     "reviewed": true,
     "source": "Margin of Possibility",
@@ -2398,6 +2440,12 @@
     "source": "Unwritten Ending",
     "sourceHash": "f2133f3ffb93f484579d503f7ac56491ed70620a3e7f476ccc15bfdc681e72b1",
     "text": "Ненаписанный финал"
+  },
+  "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> all enemies",
+    "sourceHash": "4b8811595c333f19dfa1ec097781d679559532e61f3a2d037693fd1e3c59b299",
+    "text": "<keyword0>Рассеивание</keyword0> на всех врагов"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

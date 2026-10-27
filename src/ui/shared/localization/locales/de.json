@@ -1655,6 +1655,12 @@
     "sourceHash": "44994188f8994ef8ef1d4719a9532dab6b6cabd6b00d99fa5dff50dc62fd312a",
     "text": "Aschenschleier"
   },
+  "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "40d9a3eb7de7e36a58040e1314db6ecc3cb26a49e31e051e2c6a03f4441f9070",
+    "text": "Verursache {{value0}} <keyword0>Brand</keyword0>-Schaden bei allen Gegnern; <keyword1>Blende</keyword1> alle Gegner"
+  },
   "content.card.cindernewt-attack.name": {
     "reviewed": true,
     "source": "Cinder Lash",
@@ -1823,6 +1829,12 @@
     "sourceHash": "9c10656f191aad34aa33bec16f332ee943093d910314219a4df02bd81a55d5a0",
     "text": "Dünenwirbel"
   },
+  "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "a1b835a7c472148195c70a436860c5b7e7241e2c063d879fb5331f0ac44e3d1f",
+    "text": "Verursache {{value0}} <keyword0>physischen</keyword0> Schaden bei allen Gegnern; <keyword1>Blende</keyword1> alle Gegner"
+  },
   "content.card.emberback-attack.name": {
     "reviewed": true,
     "source": "Ember Charge",
@@ -1961,6 +1973,12 @@
     "sourceHash": "87d1eb5b603a6e403bf32d8fc4ceab7e59dda587681a1a1ba70373356465b26f",
     "text": "Falscher Horizont"
   },
+  "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "dd663c4e66bcdab55c45ca805dbb9fcf027014a5658ec4ab93807d7cdc2904a6",
+    "text": "<keyword0>Blende</keyword0> alle Gegner"
+  },
   "content.card.memento-drowned-revelation.name": {
     "reviewed": true,
     "source": "Drowned Revelation",
@@ -2081,6 +2099,12 @@
     "sourceHash": "9552672eb2651cefd22aa3c50c51797db7285917e875b027f4a58fb5014cc68e",
     "text": "Unterströmungsknoten"
   },
+  "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
+    "sourceHash": "872ce795b684d73bb2b9306c91e6b883dca5a579c9547d44284cbe919b2f2ad0",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Reinige</keyword1> einen schädlichen Effekt"
+  },
   "content.card.oathara-never-lost.name": {
     "reviewed": true,
     "source": "Never Lost",
@@ -2110,6 +2134,12 @@
     "source": "Vow of Return",
     "sourceHash": "c910f75f0efbafc614fc524fe1db6cb4b817217eb4ca7f46b331cb2085dc8160",
     "text": "Gelübde der Rückkehr"
+  },
+  "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrect</keyword0> an ally",
+    "sourceHash": "9dc54e76830aae447badfa81efe81b47f88eb8a3c017c889597ec7c94e965611",
+    "text": "<keyword0>Belebe</keyword0> einen Verbündeten wieder"
   },
   "content.card.orifable-attack.name": {
     "reviewed": true,
@@ -2261,6 +2291,12 @@
     "sourceHash": "27e2543fbd0a7bcf70deb1d2473e98a4412cd4ee7e58eeba1186da765e418b90",
     "text": "Gluternte"
   },
+  "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "0a19dc6575c8322f2c3aafaa7863a723eb123b605698915351b14261bb0e97cf",
+    "text": "Stelle {{value0}} <keyword0>Mana</keyword0> wieder her"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2375,6 +2411,12 @@
     "sourceHash": "6fc9080a38170e69ea81eb7378af88baf64ab303d7af56c90a4d124419e02852",
     "text": "Geliehener Glanz"
   },
+  "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "c720599b8c67286883900a8d0d7c93db977e77b6c2adcbd619f661eda221862f",
+    "text": "Verursache {{value0}} <keyword0>Licht</keyword0>-Schaden bei allen Gegnern; <keyword1>Blende</keyword1> alle Gegner"
+  },
   "content.card.rookhaven-margin-of-possibility.name": {
     "reviewed": true,
     "source": "Margin of Possibility",
@@ -2398,6 +2440,12 @@
     "source": "Unwritten Ending",
     "sourceHash": "94f236b0a556935c5a0a310f72ec272265928064b2ed3e420883d7e6a0be8f91",
     "text": "Ungeschriebenes Ende"
+  },
+  "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> all enemies",
+    "sourceHash": "c80635c0abbdda9d1efee9d40c14fd70cbf79f54b407b8a54171fecf6d2d3604",
+    "text": "<keyword0>Banne</keyword0> alle Gegner"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

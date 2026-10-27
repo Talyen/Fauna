@@ -1655,6 +1655,12 @@
     "sourceHash": "aefbd0a56aff642fac490df432813ad0014cca17ebe6b16654acf8d46b52e4fe",
     "text": "灰烬帷幕"
   },
+  "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "c391f0c9909de43145a31f3c55f6757b2ad749ee49250d8f9cad32cf06745d5b",
+    "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.cindernewt-attack.name": {
     "reviewed": true,
     "source": "Cinder Lash",
@@ -1823,6 +1829,12 @@
     "sourceHash": "09e260e369024b34850be92984e34c32997af1164aafcd03805d82ed14589b62",
     "text": "沙丘旋风"
   },
+  "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "f819eec0182272ec28bf275ea0c26abf549fec025d0b905f9e918e9900be5db8",
+    "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.emberback-attack.name": {
     "reviewed": true,
     "source": "Ember Charge",
@@ -1961,6 +1973,12 @@
     "sourceHash": "c6645afa138899f711e0d5b588f40c292b39b8a485a0f06aa4075150a84d75a6",
     "text": "虚假地平线"
   },
+  "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "dcbfc5cdf31997e1c7c575483c0b2bcfc8c85f0ca3665b2fa48570f275455aae",
+    "text": "<keyword0>致盲</keyword0>所有敌人"
+  },
   "content.card.memento-drowned-revelation.name": {
     "reviewed": true,
     "source": "Drowned Revelation",
@@ -2081,6 +2099,12 @@
     "sourceHash": "1bd6af1ba9065ac9da0d9d062b2e0d130ae052b71eda7249f381200680bad224",
     "text": "暗流结"
   },
+  "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
+    "sourceHash": "80bd3619521f75b5ae13195602b03facdb07736c70198b0f653aba144a1539ca",
+    "text": "获得{{value0}}点<keyword0>格挡</keyword0>; <keyword1>净化</keyword1>一个有害效果"
+  },
   "content.card.oathara-never-lost.name": {
     "reviewed": true,
     "source": "Never Lost",
@@ -2110,6 +2134,12 @@
     "source": "Vow of Return",
     "sourceHash": "7939231754aee0fda3ee345e258d00f2a0b7ecc211ffbc72d1fd9a5ed50a7f27",
     "text": "归途誓言"
+  },
+  "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrect</keyword0> an ally",
+    "sourceHash": "aba6b1794247a542558a8515021917e9565f6be6d17dbc7dad47a5b6db05bd22",
+    "text": "<keyword0>复活</keyword0>一名盟友"
   },
   "content.card.orifable-attack.name": {
     "reviewed": true,
@@ -2261,6 +2291,12 @@
     "sourceHash": "19baae80a6583ad86901ad705bb368a9d73ee3c91f83ec15015693b317b59d4d",
     "text": "余烬收获"
   },
+  "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "faf4071e61d9277e16e4b45e5c86b46d69a2a450632b3e35fb1dc1954ad98921",
+    "text": "恢复{{value0}}点<keyword0>法力</keyword0>"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2375,6 +2411,12 @@
     "sourceHash": "a00e71abae40a96ff7ac92171a3c722bf2afbbf7277ff8c36d3ff280b9be6265",
     "text": "借来的光辉"
   },
+  "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "b46c18041df06a20598a619d453cb3eeaf8aaf5ff54c858ba3d28106ade5af51",
+    "text": "对所有敌人造成{{value0}}点<keyword0>光</keyword0>伤害; <keyword1>致盲</keyword1>所有敌人"
+  },
   "content.card.rookhaven-margin-of-possibility.name": {
     "reviewed": true,
     "source": "Margin of Possibility",
@@ -2398,6 +2440,12 @@
     "source": "Unwritten Ending",
     "sourceHash": "4e84091a4848dad1d818940fe32c1eb1b542ca8c79f3328f3322ff48202f56ac",
     "text": "未写的结局"
+  },
+  "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> all enemies",
+    "sourceHash": "361d48273d1a1d5a7296dc00d0c29f9ae5b30f164c21099268e498bcab6ad422",
+    "text": "<keyword0>驱散</keyword0>所有敌人"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,

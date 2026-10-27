@@ -1655,6 +1655,12 @@
     "sourceHash": "33a1775f83b13f043b0bd03b302fbf46e4518eee16cc852a66e748d33a5c3ead",
     "text": "灰の帳"
   },
+  "content.card.cindernewt-ashen-veil.v8b1edcb868f215e3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "90a560dd4ce89b69822f8c8990468332f75b612c724c9ca19d28682fa732b91f",
+    "text": "すべての敵に{{value0}}の<keyword0>炎上</keyword0>ダメージを与える; すべての敵を<keyword1>盲目</keyword1>にする"
+  },
   "content.card.cindernewt-attack.name": {
     "reviewed": true,
     "source": "Cinder Lash",
@@ -1823,6 +1829,12 @@
     "sourceHash": "4247b7d67e4e0ff5bd86759c4d02767bcd4a01d62c5f44153a5e4f4af32b32db",
     "text": "砂丘の渦"
   },
+  "content.card.dunefox-dune-whirl.v91966fa58cbd7837.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "8e47c74c178cd11fe86b26f1e2db3fbc6a3a868d86758970e86226de2c306e3f",
+    "text": "すべての敵に{{value0}}の<keyword0>物理</keyword0>ダメージを与える; すべての敵を<keyword1>盲目</keyword1>にする"
+  },
   "content.card.emberback-attack.name": {
     "reviewed": true,
     "source": "Ember Charge",
@@ -1961,6 +1973,12 @@
     "sourceHash": "efa83897763e94c850082d75e39bab9dd1239862a4819bff3531bf654137a264",
     "text": "偽りの地平線"
   },
+  "content.card.glintstride-teamBlind.vd879239c5c4569d8.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> all enemies",
+    "sourceHash": "426a26d2d817f1b7ee549a4f6f0e729573bea4a99f14722c64ee8b77f65ba5be",
+    "text": "すべての敵を<keyword0>盲目</keyword0>にする"
+  },
   "content.card.memento-drowned-revelation.name": {
     "reviewed": true,
     "source": "Drowned Revelation",
@@ -2081,6 +2099,12 @@
     "sourceHash": "b54c5191edb6e24ecb14c3d54da4970683cd6d815c2515e37ce375f6306587d1",
     "text": "引き波の結び目"
   },
+  "content.card.neradora-undertow-knot.v0cee3869a6abc417.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Cleanse</keyword1> a harmful effect",
+    "sourceHash": "e585cb2b0dc76e16721aa95acd4ee25bf96a6d409792700e552abb566d2875c3",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; 有害な効果を1つ<keyword1>浄化</keyword1>"
+  },
   "content.card.oathara-never-lost.name": {
     "reviewed": true,
     "source": "Never Lost",
@@ -2110,6 +2134,12 @@
     "source": "Vow of Return",
     "sourceHash": "cf588bec88e14a590538bb24bc5b1e33833b0804c51172ffcf7a855d85b613a1",
     "text": "帰還の誓い"
+  },
+  "content.card.oathara-vow-of-return.v1ab6fcfbb4a607f0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrect</keyword0> an ally",
+    "sourceHash": "2c50811e10924060a2638eab82767f134646df42844c2d7920f142b86e72e8bc",
+    "text": "味方を1体<keyword0>蘇生</keyword0>"
   },
   "content.card.orifable-attack.name": {
     "reviewed": true,
@@ -2261,6 +2291,12 @@
     "sourceHash": "3be60043e6ddf45fe4089219030cdba63247ca4d24546a7e511c09ce8d02c0a4",
     "text": "熾火の収穫"
   },
+  "content.card.pyrella-ember-harvest.v684401539229bf24.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "ec54a88ba99b024efc925275163917c75f5aa04e92373a7fe6741fb41915cf70",
+    "text": "<keyword0>マナ</keyword0>を{{value0}}回復"
+  },
   "content.card.pyrella-festival-burst.name": {
     "reviewed": true,
     "source": "Festival Burst",
@@ -2375,6 +2411,12 @@
     "sourceHash": "850b9e6b551c46a0f4eeeac48c19f818b1e59ac97cc6ab7b0ca0ba60a41b93f4",
     "text": "借りた輝き"
   },
+  "content.card.rookhaven-borrowed-brilliance.vd96616f774251f52.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to all enemies; <keyword1>Blind</keyword1> all enemies",
+    "sourceHash": "97687b2777e20271ef097363a457acc990f637a3bc717851389e6590a82738df",
+    "text": "すべての敵に{{value0}}の<keyword0>光</keyword0>ダメージを与える; すべての敵を<keyword1>盲目</keyword1>にする"
+  },
   "content.card.rookhaven-margin-of-possibility.name": {
     "reviewed": true,
     "source": "Margin of Possibility",
@@ -2398,6 +2440,12 @@
     "source": "Unwritten Ending",
     "sourceHash": "28efa64e91dd1ce74aa3c8ea8a3ca7ca3a348992a9cb87c04d26b3e4d4ba6e26",
     "text": "書かれぬ結末"
+  },
+  "content.card.rookhaven-unwritten-ending.v0ef4ab29699e8368.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> all enemies",
+    "sourceHash": "b1055053570e6de81547761b47345b38bb9d1ad404e209ea83726c09f8e7186c",
+    "text": "すべての敵を<keyword0>強化解除</keyword0>"
   },
   "content.card.shadebrim-attack.name": {
     "reviewed": true,
