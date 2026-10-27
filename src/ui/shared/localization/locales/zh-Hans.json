@@ -1121,6 +1121,42 @@
     "sourceHash": "14a2e701275e3cc33a833ebc9d2c86d03ca6adc35bc0d5d54694538dde7dca08",
     "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
   },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "8d3f4e0a21e237ebbff9383ea46ecfc7bd7db342089a1c98cb7399b4ad12e24a",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "ac388ea55c4fd7a955a47e2e3f46d0afbb95589cafb0b0b6fbf2ca57de829776",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "1bfd4e667d5d9f816dfd5264f13188713c3dc55799c13d541c9e1f8ef116ed60",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "a3fa788a0c9285809a398e7e3e03eb67da40aa5c75fa1acdd237f58be5b71c09",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "d8214e77e7756855a70cb4c97e8ec425d5e49025aa27ea8397d392af9f9ddd8b",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "31f2dfae539359f4d8e2ed87b5ec0aad86aaf9c001921d73e87a8c876c7fcbe1",
+    "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1157,11 +1193,119 @@
     "sourceHash": "046784892aec5129365c4c3b654a1e13645f3a7f8d89dbbf706f5c35c5b43371",
     "text": "盟友换入时恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "748d356c4c7229f74d6b53f255a58d9198594c8e761aba8d7a8e0233e0144b64",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "b818e329b10c8094267671ed987de3d59402137932790c2c31bee80e1c7f0556",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "d8cf2507d5b5b0409991bdbcd4b873f8afff53ec509e425ed52cdf29c6eea669",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "e3f93112f32222c67d533d06b3442aeb94904ee68f8c357864276a2f5a87ba1d",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "d68654af1fe6bb9a403162e3d9cf582d151b670f845ba615c6cb24da7b6b06e2",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "e15e57c37af34e82e517db1ab73cec80dc08e2ec956fad61d8177642c478668e",
+    "text": "盟友获得相当于你<keyword0>闪避</keyword0>概率{{value0}}%的闪避概率"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "3211fa21dd8e7b67c5021ae45d1582d2b96a6fb64d9bf2f47cad4b00e5e3034c",
     "text": "流动沙丘"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "220e5b6997ae38d8d9851e0c436956e830bb21360c9e6dd08ac344ac760e19a9",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "c8d7163d4345eb07bb4a907698d11ab9641dfd8b9c7a5054af7a19f0ab2d1495",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "53be8d8f0b2807b0a0e0d05e58acb9d1bbc89bd30e3f57ef744d350ed5c55474",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "a78ea4ce3f5afc9df2deac6cc983d65fb2a3bbca2928e24f4acb0ebc98dbd499",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "b9bc24378b4cda924ed0d580dc3cbc6aac309351c994cebd825c63e3949fbbdc",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "f3a23100489c0fecf8ea4f34ef7891ed5c30f425d89bd8143c9d0492cfc99fa3",
+    "text": "你的<keyword0>护甲</keyword0>被击破时，对所有敌人造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "3edf66c6807267e6fb3addfe7698c0c7555dc305f09022869f934e1ba138c529",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "27766cd3927d3fca20c7306d5926f4e1f0f221d51b21a945b3c7e4e2743fd483",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "ae0e0a5c04d525199b1a5865b5fe9f6a004a1a5120ba691f11c30fc55881d648",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "1ede8cef0b6c7bcb98079d0356cb769554c67a6a649e159e43e97c8bad9a5b39",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "a6f7dd80950a5def0c88078aab9d4d1ab60604941517da6f273bcc28fe7cfa68",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "bb1c684f9c5a8cc3031e23c78d5116593df23889750a1db6e8329e08ceb9cace",
+    "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,

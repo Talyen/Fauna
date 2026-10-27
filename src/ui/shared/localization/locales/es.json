@@ -1121,6 +1121,42 @@
     "sourceHash": "6c2275cfeeda18addf60f6b975c5019a4f96718d89283ebbf5dc66ba9e48ab03",
     "text": "Cuando <keyword0>esquivas</keyword0>, inflige {{value0}} de daño de <keyword1>Quemadura</keyword1> al atacante"
   },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "9e8a2b3fca4e9a85b20f9100f6869918e779a5c4c5721b39512585df802ee7a8",
+    "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0> cuando se rompe tu <keyword1>Bloqueo</keyword1>"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "6bfaa970463566269fbc84ac8b305368c4baa355144709386ef9d10d02ffeba8",
+    "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0> cuando se rompe tu <keyword1>Bloqueo</keyword1>"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "9acb17466a97501d4fe4ef8886258656cf80f303266cfb5d7d6e8e9f218bf2f3",
+    "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0> cuando se rompe tu <keyword1>Bloqueo</keyword1>"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "f7a9532070890e5c897cf66e9c8a59db27abff09f7c640984f44a3d8889d3d87",
+    "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0> cuando se rompe tu <keyword1>Bloqueo</keyword1>"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "54b3d1600715284a000f12ea13a1ab2f436646fcdb9fee291e41a3b76d8d2658",
+    "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0> cuando se rompe tu <keyword1>Bloqueo</keyword1>"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "7b335a9bdd9818223802c8658f068f6a72d637d13413c14f2896ad2afbd9435c",
+    "text": "Inflige {{value0}} de daño de <keyword0>Agua</keyword0> cuando se rompe tu <keyword1>Bloqueo</keyword1>"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1157,11 +1193,119 @@
     "sourceHash": "97321aceea93a52fe6bedb34f03dd976fc07279f20e12ee3b4d97a8a35d26819",
     "text": "Los aliados recuperan {{value0}} de <keyword0>Salud</keyword0> al entrar mediante un cambio"
   },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "b7e1958fff973895706155cb76ea9f170e57d4fcd64c94e5d52b86d77776055d",
+    "text": "Los aliados obtienen un {{value0}}% de tu probabilidad de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "c510147496cd66a445819b277893a02c9eee50bde7cf430ab7825bf0758d08de",
+    "text": "Los aliados obtienen un {{value0}}% de tu probabilidad de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "95479f0118a9b0889f937c5907062cc7fd3a85d92d21c09b9bde9619aca40238",
+    "text": "Los aliados obtienen un {{value0}}% de tu probabilidad de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "2196ab36c5e93284a655f745ee491cb760e7e8b62d6e2cd9f822df6ecf2459d3",
+    "text": "Los aliados obtienen un {{value0}}% de tu probabilidad de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "74fdbc1bb8ecfa022e8a1024d50137e7e6742bede78227d8d46de5f2e7893d83",
+    "text": "Los aliados obtienen un {{value0}}% de tu probabilidad de <keyword0>Esquiva</keyword0>"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "d7b6c980d428f12f620810a8884debd345289f37d99194a08e111f6e314f5776",
+    "text": "Los aliados obtienen un {{value0}}% de tu probabilidad de <keyword0>Esquiva</keyword0>"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "5ed56bd3b2f53259c6841185618ed4edbbadb74b1a430cc9f5bebe87b242defa",
     "text": "Arenas cambiantes"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "6c6c9595c9239e4d36dbd00db800a99d577b3637a63fb7fe8b433d20414c074c",
+    "text": "Cuando se rompe tu <keyword0>Armadura</keyword0>, inflige {{value0}} de daño de <keyword1>Quemadura</keyword1> a todos los enemigos"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "436b48ecb715fa6e991ed14692548ff8092153f605523c11bc204ce9d593b365",
+    "text": "Cuando se rompe tu <keyword0>Armadura</keyword0>, inflige {{value0}} de daño de <keyword1>Quemadura</keyword1> a todos los enemigos"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "9d546731113add8e3e721f8c77ad808c8ff4573148389128148dac6f5f80d747",
+    "text": "Cuando se rompe tu <keyword0>Armadura</keyword0>, inflige {{value0}} de daño de <keyword1>Quemadura</keyword1> a todos los enemigos"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "094606195f63fdf6c16a418ea8a8f3445a1a068d2d69bc103cbbce88b8ba4e99",
+    "text": "Cuando se rompe tu <keyword0>Armadura</keyword0>, inflige {{value0}} de daño de <keyword1>Quemadura</keyword1> a todos los enemigos"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "2c7be311773be4229440c1edcd5300a0c410600e2182fde301ce38f5bb91b702",
+    "text": "Cuando se rompe tu <keyword0>Armadura</keyword0>, inflige {{value0}} de daño de <keyword1>Quemadura</keyword1> a todos los enemigos"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "1520ebae7ab254bd95e43ac574adb89eaa98cbc5db755dfded7271b062a99fa4",
+    "text": "Cuando se rompe tu <keyword0>Armadura</keyword0>, inflige {{value0}} de daño de <keyword1>Quemadura</keyword1> a todos los enemigos"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "1b8c9a23212e32b3b7a44b8db5cf02cbd8a32973993a7e079d1b72f5d42cf0d4",
+    "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "5fc4f6a77b5e7b6097dadc970194b924d3bec393662a4760a26202054dee2bfe",
+    "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "0e2eb1a73a486564b04fec4c41ad93817e0efa8a6879eb98cfd58118e2549005",
+    "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "f64d83b51d0c6626ebba1b36da3bdbd901904e6bd7f1525339d41e1954c45265",
+    "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "6409bef3a1a730633c22d69b797b7523f1e697028033a9a7756d336cb2d7d998",
+    "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "ee752b999fa3ba97efe96096c26f5efcc858f8e18f1b4b5a56283a83fc4037af",
+    "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,

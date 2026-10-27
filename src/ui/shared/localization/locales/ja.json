@@ -1121,6 +1121,42 @@
     "sourceHash": "d5affab4bae49e15b4349cddab482f6101c48167fc2123647b54e64d853407bf",
     "text": "<keyword0>回避</keyword0>すると攻撃者に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
   },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "587dd573ab54b18905f13d50be6cb25dfee769e4015a47192a470f240a5646f7",
+    "text": "自分の<keyword1>ブロック</keyword1>が壊れたとき、<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "8849361f1fe15003b17ddf57b29b481d6e729a542e57a4d16759d1a767cacb99",
+    "text": "自分の<keyword1>ブロック</keyword1>が壊れたとき、<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "927842033eeaeb7b0e9be4ce491629d9aae64135db73dba5bcef05b771fc8b24",
+    "text": "自分の<keyword1>ブロック</keyword1>が壊れたとき、<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "9e448efb3536841e2703f105f47e058aad7c0173fab13b19f8565011d22f8e72",
+    "text": "自分の<keyword1>ブロック</keyword1>が壊れたとき、<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "30b3f70353ab30161543854785dd176f7c09bb37f1ea3b7845f5f66eabd92cfc",
+    "text": "自分の<keyword1>ブロック</keyword1>が壊れたとき、<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "8ab69927624fd2876b27fc28ea9d80d1aa6488b42185c5abeacf9f1ab4ca6bfc",
+    "text": "自分の<keyword1>ブロック</keyword1>が壊れたとき、<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1157,11 +1193,119 @@
     "sourceHash": "a7f2d1c18a2ec4bcd696ecb7acf0480410aa19f16331a629d60e329498c9de0c",
     "text": "味方が交代で場に出ると<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "465303405889b593320bead1840025e69ab00b2137a8018826a4b44d457ad7a3",
+    "text": "味方はあなたの<keyword0>回避</keyword0>率の{{value0}}%を得る"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "463e2fb87a8fced459edc2518066a2978c1e5a87a5f0e6323207ce2130e7dc4a",
+    "text": "味方はあなたの<keyword0>回避</keyword0>率の{{value0}}%を得る"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "de46a0c473555a2a367284a42d2ac92d32d12d9d88380d3d5c474cca13c81b77",
+    "text": "味方はあなたの<keyword0>回避</keyword0>率の{{value0}}%を得る"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "784eee2ac3bc992cfa1688f03b5857c1fdc57052e02c3fa0c27578138d8f19fe",
+    "text": "味方はあなたの<keyword0>回避</keyword0>率の{{value0}}%を得る"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "9efa0d6a237d4f48cb6f17aace4e100eff1246801d2c3d77beeeac3897e6e6ad",
+    "text": "味方はあなたの<keyword0>回避</keyword0>率の{{value0}}%を得る"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "6b445e278840479736f989785609d59c301f9ac0ed7db9fa2934ec6b977a6cc1",
+    "text": "味方はあなたの<keyword0>回避</keyword0>率の{{value0}}%を得る"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "ba32ca08ce42707b8f70ef91c688db3a68f5165d5efa12cc65f0ab0ec478ef3c",
     "text": "移ろう砂"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "c14f0afcfdede14daec41742021b75c8857fd281b1ddd542354bd6738339f4f4",
+    "text": "自分の<keyword0>装甲</keyword0>が壊れたとき、すべての敵に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "524d0be3c2cb7dbfc6ff08b774b53314781d4348f056738b7f3aa814577f770c",
+    "text": "自分の<keyword0>装甲</keyword0>が壊れたとき、すべての敵に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "84e551a87c34e4ac01431ccb39f3be4e66a5a3eaff402b65fbacf063ebdab61d",
+    "text": "自分の<keyword0>装甲</keyword0>が壊れたとき、すべての敵に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "1db0af964cd026bcde950483e225366a2ea1cbb5e6163702ccd86aa33bd19f8b",
+    "text": "自分の<keyword0>装甲</keyword0>が壊れたとき、すべての敵に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "3cadb188790e4bff0a984e14b9bc9806535e7e7744480ecf9e75fabd3dfdc524",
+    "text": "自分の<keyword0>装甲</keyword0>が壊れたとき、すべての敵に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "32ef2decbe7ed6b52452a84a3ee72d351a69bbe0a54a31302f772dab1adeded5",
+    "text": "自分の<keyword0>装甲</keyword0>が壊れたとき、すべての敵に<keyword1>炎上</keyword1>ダメージを{{value0}}与える"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "39bd0c12361aec709d0f33be2a721a3ac1f0171e009b777e541414d0ab23850e",
+    "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "c902db4e62b90b41f7d32be09e447412eaea56b9a21b986759750173929ff806",
+    "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "97107e1d5c9580d7a9a24c2b80af2309199628c6f734814344269256089bb140",
+    "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "d97acd61bae77b69b85dd51d91feff20b7373f44f624d8a629db24492c829c5c",
+    "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "d06a29845f94af96f9fa16fa1225e98ae009369c04a0baa090ff91537a945fe6",
+    "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "f096e0cf640f015621b697c4d4ef11f9724a095268ae40fd246b90dbf1c731cd",
+    "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,

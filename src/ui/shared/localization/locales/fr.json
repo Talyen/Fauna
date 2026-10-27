@@ -1169,6 +1169,42 @@
     "sourceHash": "30952f48e0ab1c241315c359ef4fcd2dfe90210479d0678b8e889dc66169f0e6",
     "text": "Lorsque vous <keyword0>esquivez</keyword0>, inflige {{value0}} dégâts de <keyword1>Brûlure</keyword1> à l’attaquant"
   },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "2764460a158e7097dbfb2d8a8992f316ec11bf1b9049c1012c3dfde81744dc47",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0> lorsque votre <keyword1>Blocage</keyword1> se brise"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "4426e5443034e8064ee34a9d58fed7f00d6c6be3f80641e6a0a59ff31c754ca3",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0> lorsque votre <keyword1>Blocage</keyword1> se brise"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "2f9a34f8333a3c9440613e1884225d8ac521f53a4544b3950c4f2a6a9c9dae4e",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0> lorsque votre <keyword1>Blocage</keyword1> se brise"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "dcb07dba1bd3b4c2711b555c511ca81396a86af56595ec6aee389b635e016a59",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0> lorsque votre <keyword1>Blocage</keyword1> se brise"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "8052a68a4e1bf6b116dcdf83bc7ad6604603319a6a2dccad09fc9b6e8c8ccfe7",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0> lorsque votre <keyword1>Blocage</keyword1> se brise"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "3f999fb2d3fd1229205d7a80d736daceee2ab44c19d339b45e08b7ce8534a94f",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Eau</keyword0> lorsque votre <keyword1>Blocage</keyword1> se brise"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1205,11 +1241,119 @@
     "sourceHash": "6b2a29bba8a75e566bf4889aed1368913cfb0b18e6f95c89a5103d02c3f1bddb",
     "text": "Les alliés récupèrent {{value0}} de <keyword0>Santé</keyword0> lorsqu’ils entrent en jeu par échange"
   },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "7ffd16e3b301dc488ea02dccbb4fb4ced38781dae25293cf46ac8455dbfa6769",
+    "text": "Les alliés gagnent {{value0}}% de votre chance d’<keyword0>Esquive</keyword0>"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "15120c4a0280b9fa9eda6e23aece978097e4d5a08e43c8b1ed1143166c8bf0cc",
+    "text": "Les alliés gagnent {{value0}}% de votre chance d’<keyword0>Esquive</keyword0>"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "55b8bc465e951f0fb14aab8fc870c7773dc15b013acb967e781a8631c88e4cce",
+    "text": "Les alliés gagnent {{value0}}% de votre chance d’<keyword0>Esquive</keyword0>"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "a6ff80026620569b02875ce598309f6d107dee31ee48eb7089d76a65a57437a5",
+    "text": "Les alliés gagnent {{value0}}% de votre chance d’<keyword0>Esquive</keyword0>"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "f576c5538eb71517d974d520f89bdefd4f2fddc34c749a432c3f36a59ce1e09c",
+    "text": "Les alliés gagnent {{value0}}% de votre chance d’<keyword0>Esquive</keyword0>"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "bfb213df52896d0577a0110831b74a5764f02e8e82fca90a6e83337ba2218b9e",
+    "text": "Les alliés gagnent {{value0}}% de votre chance d’<keyword0>Esquive</keyword0>"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "9ce7a7ea3d0bfc1d406027718df378b8585565bf6e9043591192a13cade68d85",
     "text": "Sables mouvants"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "3cafde33066f23eb5d769fd3c0d097a5c698c03c9e227c7e98d5113b9dfd8ee8",
+    "text": "Lorsque votre <keyword0>Armure</keyword0> se brise, inflige {{value0}} dégâts de <keyword1>Brûlure</keyword1> à tous les ennemis"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "5d31beba14170f73502134dc67e777c037d441b3570aee98a815b3a2a8030575",
+    "text": "Lorsque votre <keyword0>Armure</keyword0> se brise, inflige {{value0}} dégâts de <keyword1>Brûlure</keyword1> à tous les ennemis"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "fca17eb039e5ca374439f342213db7a213a4c1f259fd892f23d7e0fbbd65ca04",
+    "text": "Lorsque votre <keyword0>Armure</keyword0> se brise, inflige {{value0}} dégâts de <keyword1>Brûlure</keyword1> à tous les ennemis"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "0ee1f3c56d9f77032c647166326ec84a975f25bf63041427779cb13cca30088a",
+    "text": "Lorsque votre <keyword0>Armure</keyword0> se brise, inflige {{value0}} dégâts de <keyword1>Brûlure</keyword1> à tous les ennemis"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "804ca7e4885fbfa14f22e5c8813a44a40b0a09fa0a47b34db283c2986c513f14",
+    "text": "Lorsque votre <keyword0>Armure</keyword0> se brise, inflige {{value0}} dégâts de <keyword1>Brûlure</keyword1> à tous les ennemis"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "8384f0b731167019061d598ede3292c00738469a0c4d1ceacb6c74913ccdf014",
+    "text": "Lorsque votre <keyword0>Armure</keyword0> se brise, inflige {{value0}} dégâts de <keyword1>Brûlure</keyword1> à tous les ennemis"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "f10bd8b800ed25f6de942395d783e454e03b3e3817428bd2f0b5eb4a5be85c5b",
+    "text": "Les effets aléatoires alliés qui échouent ont {{value0}}% de chances d’être relancés une fois"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "7ba273d9b472da3cc81348216797caa12fa50209ec61265e6cf9b8aa599e22c8",
+    "text": "Les effets aléatoires alliés qui échouent ont {{value0}}% de chances d’être relancés une fois"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "8c8edbaeef2b344f736d1ba97d6e01019b7aaf13895d4522b1be3067c663bdef",
+    "text": "Les effets aléatoires alliés qui échouent ont {{value0}}% de chances d’être relancés une fois"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "13c1a6580a18c6c67e008f173747f4a13fc3ed378cb27aa780b2a38d06b926aa",
+    "text": "Les effets aléatoires alliés qui échouent ont {{value0}}% de chances d’être relancés une fois"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "15637a80713551bdcdf8bf8dad035f7e52b7528586a85bab7dff1c81364f390f",
+    "text": "Les effets aléatoires alliés qui échouent ont {{value0}}% de chances d’être relancés une fois"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "d4b11dc19d99320e0f43f4a68d502cfdea7113733c4e2a496562ef8108d439b5",
+    "text": "Les effets aléatoires alliés qui échouent ont {{value0}}% de chances d’être relancés une fois"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,

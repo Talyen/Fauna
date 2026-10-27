@@ -1121,6 +1121,42 @@
     "sourceHash": "069031dc57d290a024c1b23f3e4d17c73f10817ae918b39e21f7106045790942",
     "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
   },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "98a5a1bab4e3ef7c75e602f13aa127920691d74a526fd136f76d82cd533e347f",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "cb6cea4bfd106f02cda4b91bc761c48fa68bf91862fac2c519a0f0e556b54ca2",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "e8ea42e607938a3323c49bd41cf8e0bbf256999bde4956050d926eea2b13e383",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "f188f14d478f32681d6a4fc7c2a89fd78098a180717499bb3e718467eaa0eddb",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "ac7a9b36f1fab9d1fa6d1cbd16d678c096f5f8d9ee8451f53464b8c0d701b480",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "73d8584be603951a71ce13a7f352a2c9c7fb41e7fd9af7b26ccdd039cedc2ef6",
+    "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1157,11 +1193,119 @@
     "sourceHash": "a54d79b16e5ffc27a3dd861c3df04a2c8d41223d8733378bd1dd7bab0b2dd950",
     "text": "Verbündete stellen {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn sie eingewechselt werden"
   },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "f37030d48dca8858a851e03222c2fbf2c00b502be0e5b209b62c13d7cb30c90e",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "b299999c4136b468a4ccd3892fb587c84ead1360cb27101f54be94f935c842fc",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "0340be6162bf2ff211ed1a248daff0d950da1796f36b6678299065398a24f688",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "7bde9ae642e8a7459329a6ecb51271699174228dd00329d500bd2b27faf5bb0b",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "335d75e52e15f5ffc98d168719c6ef0f0de67f78c5ac732b26ae422e23b3d416",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "7534f32d1875c05ab189d065e53cdd7df9e9121965cee879755bd4ed22ed9f6b",
+    "text": "Verbündete erhalten {{value0}}% deiner <keyword0>Ausweich</keyword0>chance"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "300921460f57a2a3444c2b9690f46436dda8e38166b1cceafbbd124fb66affaf",
     "text": "Wandernde Sande"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "18aa48e9c7a16109326aa2d2eda26fc0af95efa697e22284ccf8f17b1c3d41fe",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "3ec1de3bce5102ee566dba4e58cb88297aff5d281fdccfb432c68713520db0bb",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "3acd8dbcf8cb2a43cfbe6a9dc0747c2daca337a3ba866076cef0d3ca42c7ed23",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "176ba8aa1292bbb3eca8e02a68d51a7a411b1973353674946d63c84f68707267",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "b5325f6d01dc2a33de7c61487e03ac69c2cb230438ae738f418299da79114186",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "d442d9412116ac1e92a0d9b7e8b08611ca2ad1d17a8369885f97f4ca36e2583d",
+    "text": "Wenn deine <keyword0>Rüstung</keyword0> bricht, füge allen Gegnern {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "c60234bf5294029a7b6ba83605cab30fe5da8570a072d7e82fedd2165d5cef55",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "a6c1a095657a84e8e8200b7383449f4f2e35da6851ad4a24255d1d9a6f9fdc3e",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "a259c6d188b34a23af0d1148ae7a30216184ee578dd4e94a78beb17546c6719d",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "27eaae6798fb3e07e8a200ee3f67e6a445f238882e85263937ef749be21822f2",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "6401032c27aa4be7250134b92e03418f57fca23062a02ff697821337c0fe78c0",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "46d85ad83d4d7e17ba17c52e45253e76b2cc9a32c48ee64a21fa893940121805",
+    "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,

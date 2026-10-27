@@ -1121,6 +1121,42 @@
     "sourceHash": "7330d594f679b682c8dbebead58c000da00d9ffe7b3d2e128c2561d9dfa56251",
     "text": "Когда вы <keyword0>уклоняетесь</keyword0>, нанесите атакующему {{value0}} урона типа «<keyword1>Горение</keyword1>»"
   },
+  "content.species.coralcurl.passive.0.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "bb749f7067918d60c3413e7f5d3d210d9defda04ae868e0bd09f69897bbbb47f",
+    "text": "Когда ваш <keyword1>блок</keyword1> ломается, нанесите {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.coralcurl.passive.1.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "36dcebdb1198a7f3bfe20c9ed9ab30a0ce348a6596705706ae967adbc4cf94a1",
+    "text": "Когда ваш <keyword1>блок</keyword1> ломается, нанесите {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.coralcurl.passive.2.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "8f95e85f72b8d02a95c75328074f98c42b26ed1b02e5411c9eba4b0212872041",
+    "text": "Когда ваш <keyword1>блок</keyword1> ломается, нанесите {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.coralcurl.passive.3.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "1b38aee71ce7189040a5457140380b3e4f94e57031efd6ca3ecbe041a2080efd",
+    "text": "Когда ваш <keyword1>блок</keyword1> ломается, нанесите {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.coralcurl.passive.4.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "e8fe45b76757758fc42a675bde13b8d36465d1a7c3f82d58cbbf56cb97817dd8",
+    "text": "Когда ваш <keyword1>блок</keyword1> ломается, нанесите {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.coralcurl.passive.5.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Water</keyword0> damage when your <keyword1>Block</keyword1> breaks",
+    "sourceHash": "c912f860bde54fc4de6451459d0f9dcb6320db609fe16b9743dd72067a8d56e0",
+    "text": "Когда ваш <keyword1>блок</keyword1> ломается, нанесите {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
     "source": "Allies restore {{value0}} <keyword0>Health</keyword0> when they swap in",
@@ -1157,11 +1193,119 @@
     "sourceHash": "629256f38f72be17c309c460e36b60dda6b551b20b073aaf81ec2cded16b1b28",
     "text": "Союзники восстанавливают {{value0}} <keyword0>здоровья</keyword0> при выходе на поле в результате смены"
   },
+  "content.species.dunefox.passive.0.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "e5e969b0249c6b51d862d43761c5c21e40e625f15c6d19eca9624f2d76335f5e",
+    "text": "Союзники получают {{value0}}% от вашего шанса <keyword0>уклонения</keyword0>"
+  },
+  "content.species.dunefox.passive.1.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "6d39ba32c74fdd2b71533cef8a5bfeb453f08c50f3206256f4b9f6e3843f8cc5",
+    "text": "Союзники получают {{value0}}% от вашего шанса <keyword0>уклонения</keyword0>"
+  },
+  "content.species.dunefox.passive.2.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "30cab0815dccb45402fdf772353b8a1167259a82f590583a6d46ecb3e0ea390e",
+    "text": "Союзники получают {{value0}}% от вашего шанса <keyword0>уклонения</keyword0>"
+  },
+  "content.species.dunefox.passive.3.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "42d8e8b4590981a22f9b51d9d8adaadc8bc8460df71995908025cc205d366dc0",
+    "text": "Союзники получают {{value0}}% от вашего шанса <keyword0>уклонения</keyword0>"
+  },
+  "content.species.dunefox.passive.4.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "65fa0f8a9e60921f2e0d32480ff15b7a12a0ea8057b99027e19c0a724e7be0f2",
+    "text": "Союзники получают {{value0}}% от вашего шанса <keyword0>уклонения</keyword0>"
+  },
+  "content.species.dunefox.passive.5.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}}% of your <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "ab78aafe285efa73ee58c7a160c3611daa836f6a263002b4bb8aa257a60a2015",
+    "text": "Союзники получают {{value0}}% от вашего шанса <keyword0>уклонения</keyword0>"
+  },
   "content.species.dunefox.trait": {
     "reviewed": true,
     "source": "Shifting Sands",
     "sourceHash": "433d676012016227c4203e3bdd730a8784091d66c04aa9a4a74cee4b6a02e572",
     "text": "Подвижные пески"
+  },
+  "content.species.emberback.passive.0.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "cd5987a740f38db1b69df48283002717ae902c189be2fec2fbc59df9b8e32834",
+    "text": "Когда ваша <keyword0>броня</keyword0> ломается, нанесите всем врагам {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.emberback.passive.1.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "4dc58eb7593c03c5b28edddd1afb8515ff90ad13b49092166fa38ef39109c1b9",
+    "text": "Когда ваша <keyword0>броня</keyword0> ломается, нанесите всем врагам {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.emberback.passive.2.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "38dfb1d458680921f678e12e6b153583e3775dc419b4a6ed7ec31f1b10826c9f",
+    "text": "Когда ваша <keyword0>броня</keyword0> ломается, нанесите всем врагам {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.emberback.passive.3.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "e333a03e34c91f600752f594affdc6efbb2a46ff7869c938b92b12afdb7936ea",
+    "text": "Когда ваша <keyword0>броня</keyword0> ломается, нанесите всем врагам {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.emberback.passive.4.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "5da81c0bb166e4333e004b7f9c2a6472a06ffff625887fe660da542115530a8c",
+    "text": "Когда ваша <keyword0>броня</keyword0> ломается, нанесите всем врагам {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.emberback.passive.5.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Armor</keyword0> breaks, deal {{value0}} <keyword1>Burn</keyword1> damage to all enemies",
+    "sourceHash": "ee3cf2f3222425924769220e1265b13dbc052d3b8fe76252910f71b1d6715b4c",
+    "text": "Когда ваша <keyword0>броня</keyword0> ломается, нанесите всем врагам {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.euphera.passive.0.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "a67b95de605abb3f15f53c7caa7804f63969e9d2f102c9036506c4c0b21e8ecd",
+    "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
+  },
+  "content.species.euphera.passive.1.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "30386df0a6ca3935534d278f6703df902174d6e84c976f109be9d250531e4afe",
+    "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
+  },
+  "content.species.euphera.passive.2.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "050f6b40cb0ebe4a9bfbd79ba3930122886ef25d9c0a624416eef2dbe7371216",
+    "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
+  },
+  "content.species.euphera.passive.3.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "9121018405584169ffd5a5bce1eb79984281fe776ed09223c15d4a55a7ffb804",
+    "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
+  },
+  "content.species.euphera.passive.4.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "5c5ec6d6a053bcea8a84d003a231eafe09419e0412e579e138216aeec9dd85aa",
+    "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
+  },
+  "content.species.euphera.passive.5.rule": {
+    "reviewed": true,
+    "source": "Failed allied chance effects have a {{value0}}% chance to reroll once",
+    "sourceHash": "1a7aa2b14d78fadf52ad82db474f12a00e02077c7dc0679c1979b2bbe9894ee8",
+    "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
   },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
