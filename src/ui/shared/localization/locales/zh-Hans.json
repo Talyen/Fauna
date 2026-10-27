@@ -587,6 +587,18 @@
     "sourceHash": "3b1cdaa7a4eeb95fe260581ae26c2f9f26765c85188985f3c7f75cecf4b63031",
     "text": "与随机后备盟友交换"
   },
+  "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} cards",
+    "sourceHash": "78f8ce48477685b6809430847c486ab289f597e07177787c4737af69c99a0122",
+    "text": "与随机后备盟友交换；抽{{value0}}张牌"
+  },
+  "content.card.chimecricket-attack.v974e88827d51761b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
+    "sourceHash": "108f696e36413d03d2f8d98f2cfa332edb0c9f2b3e2324e7f664daa66c873773",
+    "text": "造成{{value0}}点<keyword0>眩晕</keyword0>伤害；抽{{value1}}张牌"
+  },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
@@ -928,6 +940,12 @@
     "source": "Swap out for a random backup",
     "sourceHash": "e50ca546980f774e4b22bae03abcb0e98609146de360a2892615a3ba654bd5cc",
     "text": "与随机后备盟友交换"
+  },
+  "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} card",
+    "sourceHash": "9aea09b910bf285aadcb4cb868a8e986d4ddb687b659a464f097e92b919768a1",
+    "text": "与随机后备盟友交换；抽{{value0}}张牌"
   },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
@@ -2741,6 +2759,12 @@
     "sourceHash": "023533e18a4d94ec23ba6c325be994a8dddf0cddd97c6b7257677dce6df70991",
     "text": "壁垒"
   },
+  "content.talent.armor.bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each battle with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "201a63d627b8980214f781ccd84c921e332e0491b4090265ffcb7215ccae964d",
+    "text": "每场战斗开始时获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
   "content.talent.armor.fireward.name": {
     "reviewed": true,
     "source": "Fireward",
@@ -2783,11 +2807,23 @@
     "sourceHash": "4f308551073c10dbe98e7488ad90995a289fc039a54f6a7f74883f47d4a74c62",
     "text": "净化仪式"
   },
+  "content.talent.armor.purification.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> has a {{value0}}% chance to <keyword1>Cleanse</keyword1> a harmful status effect",
+    "sourceHash": "d55dff24f99fccc7de4f418ecca8bffa9330356a6fcb432d4358950489e8ffe6",
+    "text": "获得<keyword0>护甲</keyword0>时有{{value0}}%的概率<keyword1>净化</keyword1>一个有害状态效果"
+  },
   "content.talent.armor.reactive-guard.name": {
     "reviewed": true,
     "source": "Reactive Guard",
     "sourceHash": "bc03ff573593e76323154b602097c1415c79ee8c960dd9ff2f7d3009dd302d43",
     "text": "应激守卫"
+  },
+  "content.talent.armor.reactive-guard.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when your <keyword1>Armor</keyword1> breaks",
+    "sourceHash": "12d3e5e7ecaa1285557623d47789e08d3a65ed36008ff0af59b277b010019d32",
+    "text": "自身<keyword1>护甲</keyword1>破裂时获得{{value0}}点<keyword0>格挡</keyword0>"
   },
   "content.talent.armor.reinforced.name": {
     "reviewed": true,
@@ -2855,6 +2891,12 @@
     "sourceHash": "76afe680821057daba7aa562c372ce1c9fc66cb5511780df86ac746cefa02642",
     "text": "初血"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "sourceHash": "5d7eed98ec4f52c07da612610e57c994c41defcf864d99beff9007aaee532ccf",
+    "text": "对尚未<keyword1>流血</keyword1>的敌人造成的<keyword0>流血</keyword0>伤害提高{{value0}}%"
+  },
   "content.talent.bleed.flay.name": {
     "reviewed": true,
     "source": "Flay",
@@ -2872,6 +2914,12 @@
     "source": "Mortal Wound",
     "sourceHash": "967e1657c64fece14debb87f1c2e1c5b8acf45931ea33754b7ce1deb10893f32",
     "text": "致命伤"
+  },
+  "content.talent.bleed.mortal-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "sourceHash": "5c874ce49bd9431f511a1d1068bf5c24190df23a67ff46cf1e0a93eee4505e09",
+    "text": "<keyword0>流血</keyword0>的敌人受到的<keyword1>治疗</keyword1>减半"
   },
   "content.talent.bleed.parting-cut.name": {
     "reviewed": true,
@@ -2963,6 +3011,12 @@
     "sourceHash": "8012dbcb79efc8ba082f0a94dc462ca6f45f550748df89cc2c7c764afe3490a9",
     "text": "接地"
   },
+  "content.talent.block.grounding.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> prevents <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "64080eca10888f15c6fe2b5db32db3a1df37cb9d0ea452e1e12684f69515ca36",
+    "text": "<keyword0>格挡</keyword0>防止<keyword1>眩晕</keyword1>积累"
+  },
   "content.talent.block.impact-guard.name": {
     "reviewed": true,
     "source": "Impact Guard",
@@ -2993,11 +3047,23 @@
     "sourceHash": "f7895ddd137c50b2950e880df01bebaff468f50fd138d7de806041082b2002e3",
     "text": "神圣之盾"
   },
+  "content.talent.block.sacred-shield.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "0ba1fdce9c4a15f6d50f2bd9350b5bee48cddcd1711bbc1edb66b6bd6a233e14",
+    "text": "<keyword0>光</keyword0>伤害提高自身<keyword1>格挡</keyword1>的{{value0}}%"
+  },
   "content.talent.block.second-wind.name": {
     "reviewed": true,
     "source": "Second Wind",
     "sourceHash": "b4ac9131d1d2d0ccd12a1207f849344afee2495f3e5f5193e72b920ae20a4655",
     "text": "重振旗鼓"
+  },
+  "content.talent.block.second-wind.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when your <keyword1>Block</keyword1> is depleted",
+    "sourceHash": "c7960e7f19835756f3c6246845059a9e14e87e3ab9641e638f0f18910834c556",
+    "text": "自身<keyword1>格挡</keyword1>耗尽时恢复{{value0}}点<keyword0>生命</keyword0>"
   },
   "content.talent.block.sun-struck-shield.name": {
     "reviewed": true,
@@ -3059,6 +3125,12 @@
     "sourceHash": "d39d827dee63d5cd3b6f54273e864695e5d13c47ce812e88792b4ff6ef4fb625",
     "text": "闪燃点"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "reviewed": true,
+    "source": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "sourceHash": "14d853bf3637807443c5c443c2cd8db2e76b7aeb0c42917218577b20109507fc",
+    "text": "每场战斗的首次<keyword0>灼烧</keyword0>免费"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -3076,6 +3148,12 @@
     "source": "Melting Point",
     "sourceHash": "79d24f75edf0a8eccf8a8b5753f97e670cce7b01ecdf051f32ab1685d0a85113",
     "text": "熔点"
+  },
+  "content.talent.burn.melting-point.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "25a8de0d57ac900c239faab54256739309e04e51eb353aa5fa7c59f7222fa07d",
+    "text": "<keyword0>灼烧</keyword0>伤害会移除等量的<keyword1>护甲</keyword1>"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -3203,11 +3281,23 @@
     "sourceHash": "82b1c9a300c1e0079080c8410490d740effa23009eaaaf719ab8bf6940b9ce6b",
     "text": "卸下重担"
   },
+  "content.talent.dodge.unburdened.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "sourceHash": "8c8865beca8c2b5eebff59be9aa0dfaa01b3a068236c072fc054769bbda98d5e",
+    "text": "<keyword0>闪避</keyword0>时，<keyword1>净化</keyword1>自身的<keyword2>眩晕</keyword2>和<keyword3>冻结</keyword3>积累"
+  },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,
     "source": "Bitter Cold",
     "sourceHash": "b22d84388592adeed4787611e0d2c7c0d3944f9a4eacd3ac02e1c41ac4a75ad9",
     "text": "刺骨寒冷"
+  },
+  "content.talent.freeze.bitter-cold.rule": {
+    "reviewed": true,
+    "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "sourceHash": "a22c829f6d1aa35e5af6f26141197e5ca1d2bac751ff5773e3ec2e48ab7713ed",
+    "text": "使敌人的<keyword0>冻结</keyword0>阈值降低{{value0}}个百分点"
   },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
@@ -3263,6 +3353,12 @@
     "sourceHash": "3013e2ac4d48958cfc5e4850bdfc21228fe6ea20b5d4fc7867381c2220240eed",
     "text": "冰川屏障"
   },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "sourceHash": "e0b04ff90dc6a01c95c2414be4c11f3ff9b5ae606f1171d3e040298468773d64",
+    "text": "<keyword1>冻结</keyword1>敌人时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
   "content.talent.freeze.icebound.name": {
     "reviewed": true,
     "source": "Icebound",
@@ -3304,6 +3400,12 @@
     "source": "Clean Slate",
     "sourceHash": "60f8189f3b4101fcea9aa74bd25086ae6ebafda6559ce8a40378124e25fdad74",
     "text": "焕然一新"
+  },
+  "content.talent.health.clean-slate.rule": {
+    "reviewed": true,
+    "source": "When a card restores <keyword0>Health</keyword0> beyond your maximum, <keyword1>cleanse</keyword1> a harmful status effect",
+    "sourceHash": "65fe3935866d6a037e63b362ea9809264ac934c17919e670a1c4ad67700f9f8e",
+    "text": "卡牌恢复的<keyword0>生命</keyword0>超过上限时，<keyword1>净化</keyword1>一个有害状态效果"
   },
   "content.talent.health.combat-surge.name": {
     "reviewed": true,
@@ -3347,11 +3449,23 @@
     "sourceHash": "0f9837d05b31acf00abf2d35c34becd7d0dfd04b820c34adb3568c66cd86faa6",
     "text": "最后手段"
   },
+  "content.talent.health.last-resort.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below {{value0}}%, <keyword1>cleanse</keyword1> all harmful status effects",
+    "sourceHash": "df2e78b643310756f140e563363b94dbbd3ef62ad05511b907b3b6b97fec8b37",
+    "text": "<keyword0>生命</keyword0>降至{{value0}}%以下时，<keyword1>净化</keyword1>所有有害状态效果"
+  },
   "content.talent.health.mending.name": {
     "reviewed": true,
     "source": "Mending",
     "sourceHash": "9b2ea918ba4fa4d9f57af8f501a395bbf5c73ca2c5fe0692a235c1d9eff33591",
     "text": "愈合"
+  },
+  "content.talent.health.mending.rule": {
+    "reviewed": true,
+    "source": "Receive {{value0}}% more <keyword0>healing</keyword0> during combat",
+    "sourceHash": "219f44b260322d19d6df4f1615028b91369a3452cf6ee2b3e066cff3726539d5",
+    "text": "战斗中受到的<keyword0>治疗</keyword0>提高{{value0}}%"
   },
   "content.talent.health.overflow.name": {
     "reviewed": true,
@@ -3359,11 +3473,23 @@
     "sourceHash": "7ab3662acaab0b29f5656fb31370eabadb688bb0a9e48e484586365d069609eb",
     "text": "溢出"
   },
+  "content.talent.health.overflow.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% of excess <keyword0>healing</keyword0> from cards as <keyword1>Block</keyword1>",
+    "sourceHash": "1fce671d8e4b0e550ff7b4592ccd4977cef90ee5c5cd2224c349b59ba1305cfc",
+    "text": "将卡牌产生的超额<keyword0>治疗</keyword0>的{{value0}}%转化为<keyword1>格挡</keyword1>"
+  },
   "content.talent.health.renewal.name": {
     "reviewed": true,
     "source": "Renewal",
     "sourceHash": "48e834f6518af6ac0327ba23924d73604fd802202ef3d5adbfb3cc639691d7cd",
     "text": "复苏"
+  },
+  "content.talent.health.renewal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> a harmful status restores {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "a503968140824d70f8fd8a3dccae118c5cf144871de3809c5c636e127bb4f2cc",
+    "text": "<keyword0>净化</keyword0>一个有害状态时恢复{{value0}}点<keyword1>生命</keyword1>"
   },
   "content.talent.health.vitality.name": {
     "reviewed": true,
@@ -3394,6 +3520,12 @@
     "source": "Affliction Siphon",
     "sourceHash": "b280a4274536653a9f8ce05bc5fe901de8436d76779b06d541221056029364c9",
     "text": "苦难虹吸"
+  },
+  "content.talent.leech.affliction-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}}% more <keyword1>Health</keyword1> against Poisoned or <keyword2>Bleeding</keyword2> enemies",
+    "sourceHash": "f7dc96e82de9ed458caaef6c95b1d601e9daf6335812f78bdf1a2ce03357712e",
+    "text": "对中毒或<keyword2>流血</keyword2>的敌人，<keyword0>汲取</keyword0>恢复的<keyword1>生命</keyword1>提高{{value0}}%"
   },
   "content.talent.leech.armor-siphon.name": {
     "reviewed": true,
@@ -3593,6 +3725,12 @@
     "sourceHash": "9d9b90dd3a848e1b8a25adcf78a6c26aeb3f44f0f2bd66f4cf25207edc12bc6f",
     "text": "奥术修复"
   },
+  "content.talent.mana.arcane-mending.rule": {
+    "reviewed": true,
+    "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
+    "sourceHash": "112b4b2c0b77275a741e05898f10f3f23fa0fd4501ddea8e19ce0247fd25861d",
+    "text": "每获得1点<keyword1>法力</keyword1>，每个存活的上场生物恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
     "source": "Dark Recovery",
@@ -3611,17 +3749,35 @@
     "sourceHash": "53fcee63a86537d970688f3700d64b859206e6c3d9714c511fbab2e26ae4bed8",
     "text": "地脉调谐"
   },
+  "content.talent.mana.leyline-attunement.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>maximum Mana</keyword0> each battle",
+    "sourceHash": "b02b38ba89c72a411cf97fbeb0ea4adc4b797a129827e4deebd1dc685ba6b2a2",
+    "text": "每场战斗获得{{value0}}点<keyword0>最大法力</keyword0>"
+  },
   "content.talent.mana.mana-bulwark.name": {
     "reviewed": true,
     "source": "Mana Bulwark",
     "sourceHash": "dbbbfc53e25993030ad2ea9284eae38cc9100f4338d86bcfbf4fa72fb6487fba",
     "text": "法力壁垒"
   },
+  "content.talent.mana.mana-bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Block</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "81c473f947c8f38fce65b58de47371c6585be58c19927187728dd89aa044acab",
+    "text": "每场战斗开始时获得等同于<keyword1>最大法力</keyword1>的<keyword0>格挡</keyword0>"
+  },
   "content.talent.mana.mana-shell.name": {
     "reviewed": true,
     "source": "Mana Shell",
     "sourceHash": "8fd909b3aa8fca13c50caa2189d04bb5f6d4b22d7a5d4604ecee0b3f4997c1d5",
     "text": "法力外壳"
+  },
+  "content.talent.mana.mana-shell.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Armor</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "f57502e5e576d27aa9992dac17e2ad4fc96b3e498a9f538b7ec2b92606e06bac",
+    "text": "每场战斗开始时获得等同于<keyword1>最大法力</keyword1>的<keyword0>护甲</keyword0>"
   },
   "content.talent.mana.manaburn.name": {
     "reviewed": true,
@@ -3640,6 +3796,12 @@
     "source": "Wellspring",
     "sourceHash": "1a1334ce4d7d12e04fabe519ebcc7d08ef8500ec7c53b242eab1ba2ccae1ec6e",
     "text": "源泉"
+  },
+  "content.talent.mana.wellspring.rule": {
+    "reviewed": true,
+    "source": "End your turn with unspent <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "c623a159641387c9418fc7d20d8004450626ae625a97910b843884176f15c807",
+    "text": "结束回合时若有未使用的<keyword0>法力</keyword0>，下回合额外获得{{value0}}点<keyword1>法力</keyword1>"
   },
   "content.talent.nature.bramblegrowth.name": {
     "reviewed": true,
@@ -3731,11 +3893,23 @@
     "sourceHash": "9c5e685ffe3d9bcf64ae4e69722132009118eafcddd622bbb68c4bd748ed056a",
     "text": "铁甲拳"
   },
+  "content.talent.physical.armored-fists.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Armor</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "da9c9dbf7a2c72bd42cf9ea2593d841630d7cbf3932fbaffe78dc54aebd76ac0",
+    "text": "将自身<keyword0>护甲</keyword0>的一半加到<keyword1>物理</keyword1>伤害上"
+  },
   "content.talent.physical.finish-him.name": {
     "reviewed": true,
     "source": "Finishing Blow",
     "sourceHash": "ea1532a58b9813d934baabc90c71f929d679e917a5b5c1ad321ff1bd21f23f79",
     "text": "终结一击"
+  },
+  "content.talent.physical.finish-him.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled against enemies below {{value0}}% <keyword1>Health</keyword1>",
+    "sourceHash": "512e3a84dc01ae1bb7b56a0c0d28c1c1f7f33060b9c4f528148d70e319a24f1d",
+    "text": "对<keyword1>生命</keyword1>低于{{value0}}%的敌人造成的<keyword0>物理</keyword0>伤害翻倍"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3743,17 +3917,35 @@
     "sourceHash": "6201a2930cdadc6f3253797097d90d8b4f3e7e473aa7193de482fdfab7062a45",
     "text": "重击"
   },
+  "content.talent.physical.heavy-blows.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
+    "sourceHash": "4e01cb7c03d0b8b726c05a68c57128657468275d65f44d4ee35f930db684e4b7",
+    "text": "<keyword0>物理</keyword0>伤害有{{value0}}%的概率同时造成<keyword1>眩晕</keyword1>伤害"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
     "sourceHash": "f4653605613309a244c10069d36976e027715877e5fffdaba78bc183ae3867bd",
     "text": "割裂"
   },
+  "content.talent.physical.lacerate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to <keyword1>Bleed</keyword1>",
+    "sourceHash": "b8b252c19da501cbd51988a905cbd4caf60f44afb40ed791c4440365f5559c36",
+    "text": "<keyword0>物理</keyword0>伤害有{{value0}}%的概率造成<keyword1>流血</keyword1>伤害"
+  },
   "content.talent.physical.riposte.name": {
     "reviewed": true,
     "source": "Riposte",
     "sourceHash": "daad59d5235f03f4f51d4c9096424b2157b9ae18e18bff0c92d0971fae4e32ae",
     "text": "还击"
+  },
+  "content.talent.physical.riposte.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> attack is guaranteed to <keyword2>Critical Hit</keyword2>",
+    "sourceHash": "2484231def7c8095f024dcac6f1b083a7d916766fd7c0c72b27f6076e6c17601",
+    "text": "<keyword0>闪避</keyword0>后，下一次<keyword1>物理</keyword1>攻击必定<keyword2>暴击</keyword2>"
   },
   "content.talent.physical.rupture.name": {
     "reviewed": true,
@@ -3767,11 +3959,23 @@
     "sourceHash": "233046d042c447aeb2ed65585a728f1526aee4f2dc2083b9c8fd03b27ff1bcbb",
     "text": "盾牌重击"
   },
+  "content.talent.physical.shield-slam.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Block</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "66350d89d3f84e36302d7498c288e2fd2d466314967137f576e69f8a128b9996",
+    "text": "将自身<keyword0>格挡</keyword0>的一半加到<keyword1>物理</keyword1>伤害上"
+  },
   "content.talent.physical.unrelenting.name": {
     "reviewed": true,
     "source": "Unrelenting",
     "sourceHash": "f5ba92a6b74223b7659d4e7f14781e4289c29b6e7b7c7776d4d427c8902ce3da",
     "text": "不懈"
+  },
+  "content.talent.physical.unrelenting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled while you're below half <keyword1>Health</keyword1>",
+    "sourceHash": "be7a827cd3540d2c52b1cc7a8d6c3b4750a72e581da3c28213c627673a7f921d",
+    "text": "自身<keyword1>生命</keyword1>低于一半时，<keyword0>物理</keyword0>伤害翻倍"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
@@ -3791,6 +3995,12 @@
     "sourceHash": "2df072b3b41f61f2bb7d4d2c5d4b364691c1fed005e69ef6d77f6d8dc54b5baf",
     "text": "腐蚀"
   },
+  "content.talent.poison.corrosive.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies take {{value0}} additional damage",
+    "sourceHash": "0d6e80986531a20b854e51d9a9712207d3718d4b2ccd2ebfe312075ac3bb225c",
+    "text": "中毒的敌人受到的伤害增加{{value0}}点"
+  },
   "content.talent.poison.hemotoxin.name": {
     "reviewed": true,
     "source": "Hemotoxin",
@@ -3808,6 +4018,12 @@
     "source": "Necrosis",
     "sourceHash": "7068af1d19f2099052ac45cff2db27945aa18e48480d494945ff0c7ad4707820",
     "text": "坏死"
+  },
+  "content.talent.poison.necrosis.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies receive half as much <keyword0>healing</keyword0>",
+    "sourceHash": "18ece87712cc1471f4b206d3c8108fdf7f86d5af52398cb548a93a752bb57fae",
+    "text": "中毒的敌人受到的<keyword0>治疗</keyword0>减半"
   },
   "content.talent.poison.paralytic-venom.name": {
     "reviewed": true,
@@ -3827,11 +4043,23 @@
     "sourceHash": "9b7a9b2fe48d9165e9299ccf8a4027bc8d7da9f72dc0eaad12a2280b380dcb75",
     "text": "麻木"
   },
+  "content.talent.poison.torpor.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies cannot <keyword0>Dodge</keyword0>",
+    "sourceHash": "b8173c8de97538eb39ae26f089190808036c0ce0d31029144f9b3b44a363fd54",
+    "text": "中毒的敌人无法<keyword0>闪避</keyword0>"
+  },
   "content.talent.poison.toxic-profit.name": {
     "reviewed": true,
     "source": "Toxic Profit",
     "sourceHash": "4897ab91b0c8b5d784aacc6c84ba5ddf422ab67e300376c713df89892e1d19e0",
     "text": "毒素获利"
+  },
+  "content.talent.poison.toxic-profit.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you defeat a Poisoned enemy",
+    "sourceHash": "0833eb893b1895e501abc18aa26e981c1f9d58c040f26931b19c6a523f8b4c33",
+    "text": "击倒中毒的敌人时获得{{value0}}金币"
   },
   "content.talent.poison.toxin-resistance.name": {
     "reviewed": true,
@@ -3923,6 +4151,12 @@
     "sourceHash": "bdc9b1574beb548666ed21e403a501093e5b4568fb62c7b3dd55f6acdefda440",
     "text": "防守反击"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "sourceHash": "5543ce582338f4c40976961b9cdecee6642d5075d961187803a101d39d28190b",
+    "text": "<keyword0>眩晕</keyword0>敌人时，若没有<keyword1>格挡</keyword1>，获得{{value0}}点"
+  },
   "content.talent.stun.jarring-blow.name": {
     "reviewed": true,
     "source": "Jarring Blow",
@@ -3941,6 +4175,12 @@
     "sourceHash": "31d1abbc3bbb5c33343ecae90afeed10528b5006d2f32c0c0ece852460e61c82",
     "text": "击碎守卫"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "sourceHash": "c1ab80f2b09089b0032c9a20c2211c09f69fa9d7b5f43453c9c4e8de8954eb7d",
+    "text": "<keyword0>眩晕</keyword0>敌人时移除其全部<keyword1>护甲</keyword1>"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -3958,6 +4198,12 @@
     "source": "Stun Surge",
     "sourceHash": "512b969f2f8a0baf25bdcea636207a8e377bc0635340459ebd0f0cb266b681d7",
     "text": "眩晕激涌"
+  },
+  "content.talent.stun.stun-surge.rule": {
+    "reviewed": true,
+    "source": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "34eb5e5f2faa67305611c680d310faf5c667d80627b8d6e2aba77084b121b18b",
+    "text": "没有<keyword0>法力</keyword0>时，<keyword1>眩晕</keyword1>敌人可获得{{value0}}点<keyword2>法力</keyword2>"
   },
   "content.talent.water.cleansing-current.name": {
     "reviewed": true,

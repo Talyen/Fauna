@@ -126,7 +126,8 @@ rendering before qualification; a subset alone does not enable a language.
    language; test cross-language save/resume and unchanged command/RNG outcomes
 3. Translate and semantically review every target catalog, including actor,
    timing, quantities, negation and glossary consistency. Bundle fonts covering
-   all required glyphs and validate those fonts against the catalogs
+   all required glyphs and validate those fonts against the catalogs. Semantic
+   review is part of implementation; separate native-speaker review is not required
 4. Add a device-local language choice and automatic detection through Fauna's
    existing platform capabilities, with English fallback. Check live switching,
    focus and controller navigation; verify startup, recovery and storage failures

@@ -635,6 +635,18 @@
     "sourceHash": "ea6fb2f9b0f249819387372179a72da3d244c12baef90fad42b57e29b773fbb3",
     "text": "Échangez avec un allié en réserve au hasard"
   },
+  "content.card.captoad-swap.vfcd7a0df354e0e1c.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} cards",
+    "sourceHash": "1696780acfb359a53cac1d5a3b50db755dcaf35a5d9f1002ac5de907615f7648",
+    "text": "Échangez avec un allié en réserve au hasard ; Piochez {{value0}} cartes"
+  },
+  "content.card.chimecricket-attack.v974e88827d51761b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage; Draw {{value1}} card",
+    "sourceHash": "fbdfb14e4209a9a386abd61e0dbcea7537d8c7a52913b7e12a55f764fd22ba7e",
+    "text": "Infligez {{value0}} dégâts d’<keyword0>Étourdissement</keyword0> ; Piochez {{value1}} carte"
+  },
   "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
@@ -976,6 +988,12 @@
     "source": "Swap out for a random backup",
     "sourceHash": "d7c89ad56b200a62188b380bafd24fab7e765f9ff344c4563d212fcbdad97323",
     "text": "Échangez avec un allié en réserve au hasard"
+  },
+  "content.card.sternshell-swap.v7681556fbd9f1307.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup; Draw {{value0}} card",
+    "sourceHash": "536fd9111fe7eed70ed3a0faccd14e70aad149248d4ef05c486b8b4e48d76405",
+    "text": "Échangez avec un allié en réserve au hasard ; Piochez {{value0}} carte"
   },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
@@ -2789,6 +2807,12 @@
     "sourceHash": "a02479973b01ee55fc05c59d9914bcea299001eed3eceaeba5abb9ee4edd0c44",
     "text": "Rempart"
   },
+  "content.talent.armor.bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each battle with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "783d5691b34844c14b136d22a51551a42d08a899809dd5b0433bb613fe8a4238",
+    "text": "Commencez chaque combat avec {{value0}} <keyword0>Armure</keyword0>"
+  },
   "content.talent.armor.fireward.name": {
     "reviewed": true,
     "source": "Fireward",
@@ -2831,11 +2855,23 @@
     "sourceHash": "3b43e1da54655687ee51bf91e83dda0dab48eb2f29b230a83df7093a6af73b27",
     "text": "Purification"
   },
+  "content.talent.armor.purification.rule": {
+    "reviewed": true,
+    "source": "Gaining <keyword0>Armor</keyword0> has a {{value0}}% chance to <keyword1>Cleanse</keyword1> a harmful status effect",
+    "sourceHash": "384f01a51bd14b78c8f747a3eb603697e5260de0b67845cae821519593a44162",
+    "text": "Gagner de l’<keyword0>Armure</keyword0> donne {{value0}}% de chances de <keyword1>purifier</keyword1> un effet de statut néfaste"
+  },
   "content.talent.armor.reactive-guard.name": {
     "reviewed": true,
     "source": "Reactive Guard",
     "sourceHash": "269b24e14fa588ffd7d606dd0042590c6120aa6fd333139a9a8219dea80b6b15",
     "text": "Garde réactive"
+  },
+  "content.talent.armor.reactive-guard.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when your <keyword1>Armor</keyword1> breaks",
+    "sourceHash": "00921a6b629ba95d3cb08e74bba719c53a36c591dca0d3e044345f7a61ecc219",
+    "text": "Gagnez {{value0}} <keyword0>Blocage</keyword0> lorsque votre <keyword1>Armure</keyword1> se brise"
   },
   "content.talent.armor.reinforced.name": {
     "reviewed": true,
@@ -2903,6 +2939,12 @@
     "sourceHash": "a569ed2551d747a4cefb7c075eef7605a9042601f32ef24f2cfd4b84b5b94794",
     "text": "Premier sang"
   },
+  "content.talent.bleed.first-blood.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage against enemies that aren’t already <keyword1>Bleeding</keyword1>",
+    "sourceHash": "712492c97a616ec7667c79f51a79a70accb319dc216fc413aa90c833a869d2b7",
+    "text": "Infligez {{value0}}% de dégâts de <keyword0>Saignement</keyword0> supplémentaires aux ennemis qui ne <keyword1>saignent</keyword1> pas encore"
+  },
   "content.talent.bleed.flay.name": {
     "reviewed": true,
     "source": "Flay",
@@ -2920,6 +2962,12 @@
     "source": "Mortal Wound",
     "sourceHash": "571a5f6c20978d85421782ee0060dc973ea5c8fb815c5b52d2acd5980dfc1c64",
     "text": "Blessure mortelle"
+  },
+  "content.talent.bleed.mortal-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies receive half as much <keyword1>healing</keyword1>",
+    "sourceHash": "a0df73afb7911b5a9873d652225029494f63e08b6ba653c31f395d5a6e004063",
+    "text": "Les ennemis en <keyword0>Saignement</keyword0> reçoivent moitié moins de <keyword1>soins</keyword1>"
   },
   "content.talent.bleed.parting-cut.name": {
     "reviewed": true,
@@ -3011,6 +3059,12 @@
     "sourceHash": "db7c22ff03ea558f0fdd0d098142ca10e40fd7d617424ce4b8778f2c542ec639",
     "text": "Mise à la terre"
   },
+  "content.talent.block.grounding.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> prevents <keyword1>Stun</keyword1> buildup",
+    "sourceHash": "c1d81e3f2f056ab47c68185b7fabd6766e677f2e6dbdf287e04b8be12ad41d1c",
+    "text": "Le <keyword0>Blocage</keyword0> empêche l’accumulation d’<keyword1>Étourdissement</keyword1>"
+  },
   "content.talent.block.impact-guard.name": {
     "reviewed": true,
     "source": "Impact Guard",
@@ -3041,11 +3095,23 @@
     "sourceHash": "3f843cf37c91f8d2721d0b1ff5e0816e394fee9701cf8b8de66a64a5c238c845",
     "text": "Bouclier sacré"
   },
+  "content.talent.block.sacred-shield.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "689d562313e24c284433ff7043ab23fb16781dce6eca377019e9684feb2844dc",
+    "text": "Les dégâts de <keyword0>Lumière</keyword0> augmentent de {{value0}}% de votre <keyword1>Blocage</keyword1>"
+  },
   "content.talent.block.second-wind.name": {
     "reviewed": true,
     "source": "Second Wind",
     "sourceHash": "6dcc1006356cfa4d168675019d86688b434ea24f8c00f68a4c98989843e4a94b",
     "text": "Second souffle"
+  },
+  "content.talent.block.second-wind.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when your <keyword1>Block</keyword1> is depleted",
+    "sourceHash": "7c8b27cd0c22db1e9c878ce9fb9862eeeeed200905eb8e07d1c1ba58ca5fb5fc",
+    "text": "Restaurez {{value0}} <keyword0>Santé</keyword0> lorsque votre <keyword1>Blocage</keyword1> est épuisé"
   },
   "content.talent.block.sun-struck-shield.name": {
     "reviewed": true,
@@ -3107,6 +3173,12 @@
     "sourceHash": "ba7dcb9c62e65fbcaab5236294064de02f7395f6f723ed66050a23c79466d530",
     "text": "Point d'éclair"
   },
+  "content.talent.burn.flashpoint.rule": {
+    "reviewed": true,
+    "source": "Your first <keyword0>Burn</keyword0> each battle is free",
+    "sourceHash": "b1e0ed5557e7065fb5907904f1d0c477d2f6ef78f3a758697c882a0d2c05c017",
+    "text": "Votre première <keyword0>Brûlure</keyword0> de chaque combat est gratuite"
+  },
   "content.talent.burn.heat-exhaustion.name": {
     "reviewed": true,
     "source": "Heat Exhaustion",
@@ -3124,6 +3196,12 @@
     "source": "Melting Point",
     "sourceHash": "0301629273066a8f96d629fb854edb0bb531520eac12ef8152c2b3091b62fea7",
     "text": "Point de fusion"
+  },
+  "content.talent.burn.melting-point.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
+    "sourceHash": "72fec40d15d92a16b572875dc62ad590a0ec65ee7eeca1f287c7ecfce85f8abe",
+    "text": "Les dégâts de <keyword0>Brûlure</keyword0> retirent autant d’<keyword1>Armure</keyword1>"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -3251,11 +3329,23 @@
     "sourceHash": "10403df1acd1fe156838062a5e8310c33450e8144144c2aaca2d1203e457461e",
     "text": "Sans fardeau"
   },
+  "content.talent.dodge.unburdened.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, <keyword1>cleanse</keyword1> your <keyword2>Stun</keyword2> and <keyword3>Freeze</keyword3> buildup",
+    "sourceHash": "d7cf503c6689da7262b5110221579e548fdee9ffa395753b7e6393209db80ddc",
+    "text": "Lorsque vous <keyword0>esquivez</keyword0>, <keyword1>purifiez</keyword1> votre accumulation d’<keyword2>Étourdissement</keyword2> et de <keyword3>Gel</keyword3>"
+  },
   "content.talent.freeze.bitter-cold.name": {
     "reviewed": true,
     "source": "Bitter Cold",
     "sourceHash": "ce74129984768b2acd21b013bfa4e5d7a7283db2af3edc32f6d33d8c7e001e22",
     "text": "Froid mordant"
+  },
+  "content.talent.freeze.bitter-cold.rule": {
+    "reviewed": true,
+    "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "sourceHash": "f5c0892d11d0a14a48ebf396e2165ea81ed59ef4518f474d129caa9f4b8dbc92",
+    "text": "Réduit les seuils de <keyword0>Gel</keyword0> ennemis de {{value0}} points de pourcentage"
   },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
@@ -3311,6 +3401,12 @@
     "sourceHash": "9adb79410f5bbbded8d2e5a7d96db7a22c406a3700daa858587e4dc2b2cdb1a1",
     "text": "Barrière glaciale"
   },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "sourceHash": "16b729248b6979c32cceda6415e59a581dace396413227207f6745922b3366ea",
+    "text": "Gagnez {{value0}} <keyword0>Blocage</keyword0> lorsque vous <keyword1>gelez</keyword1> un ennemi"
+  },
   "content.talent.freeze.icebound.name": {
     "reviewed": true,
     "source": "Icebound",
@@ -3352,6 +3448,12 @@
     "source": "Clean Slate",
     "sourceHash": "f76ddfd688b62a8b86946ff715ecec5e8187d3de88afe74bd3701e4fea52272f",
     "text": "Table rase"
+  },
+  "content.talent.health.clean-slate.rule": {
+    "reviewed": true,
+    "source": "When a card restores <keyword0>Health</keyword0> beyond your maximum, <keyword1>cleanse</keyword1> a harmful status effect",
+    "sourceHash": "96b3093a8ce34e34cdd29a21eb6e7cd25569181e9755ae072f4cd3e016d9bb57",
+    "text": "Lorsqu’une carte restaure de la <keyword0>Santé</keyword0> au-delà de votre maximum, <keyword1>purifiez</keyword1> un effet néfaste"
   },
   "content.talent.health.combat-surge.name": {
     "reviewed": true,
@@ -3395,11 +3497,23 @@
     "sourceHash": "afe291ccd2bdaa16288518cdf850c065f6a41a33bbade5b123155eb08c7047d6",
     "text": "Dernier recours"
   },
+  "content.talent.health.last-resort.rule": {
+    "reviewed": true,
+    "source": "When your <keyword0>Health</keyword0> falls below {{value0}}%, <keyword1>cleanse</keyword1> all harmful status effects",
+    "sourceHash": "109c5d97368f1c01f915aa415133263034269a032d4665e9da0c43276843f8cb",
+    "text": "Lorsque votre <keyword0>Santé</keyword0> descend sous {{value0}}%, <keyword1>purifiez</keyword1> tous les effets néfastes"
+  },
   "content.talent.health.mending.name": {
     "reviewed": true,
     "source": "Mending",
     "sourceHash": "b31f72e4f2357fd20f6d41dec8cfd6192f0c02dbc8e36b2cf9029d141bdce4fa",
     "text": "Guérison"
+  },
+  "content.talent.health.mending.rule": {
+    "reviewed": true,
+    "source": "Receive {{value0}}% more <keyword0>healing</keyword0> during combat",
+    "sourceHash": "68efdcf4ce29e31eb7c5b6719f26974259196b5a7f3965f2ec67891b45acb3c9",
+    "text": "Recevez {{value0}}% de <keyword0>soins</keyword0> supplémentaires en combat"
   },
   "content.talent.health.overflow.name": {
     "reviewed": true,
@@ -3407,11 +3521,23 @@
     "sourceHash": "c6012b17453c43470afdd74a5401fe3316f149cbc2ed0dc0dbff92aa65acec4d",
     "text": "Débordement"
   },
+  "content.talent.health.overflow.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% of excess <keyword0>healing</keyword0> from cards as <keyword1>Block</keyword1>",
+    "sourceHash": "379065e6e47173aedcd03bad66e41af093359925d85204975b24c92efa34916e",
+    "text": "Gagnez {{value0}}% des <keyword0>soins</keyword0> excédentaires des cartes en <keyword1>Blocage</keyword1>"
+  },
   "content.talent.health.renewal.name": {
     "reviewed": true,
     "source": "Renewal",
     "sourceHash": "faf296c6cd51bd1436f7e1cca4f786004e406c1e51243277bf586ad0afdf6a1d",
     "text": "Renouveau"
+  },
+  "content.talent.health.renewal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> a harmful status restores {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "c32b3219f3f340fa6f0569fac93d48779e936312ef9007c27cf70eedcf870b4d",
+    "text": "La <keyword0>purification</keyword0> d’un effet néfaste restaure {{value0}} <keyword1>Santé</keyword1>"
   },
   "content.talent.health.vitality.name": {
     "reviewed": true,
@@ -3442,6 +3568,12 @@
     "source": "Affliction Siphon",
     "sourceHash": "a2f79167cd9f61935a30062f6aca490b37c92d394e26fa13d51b2d25f9dca713",
     "text": "Drain d’affliction"
+  },
+  "content.talent.leech.affliction-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}}% more <keyword1>Health</keyword1> against Poisoned or <keyword2>Bleeding</keyword2> enemies",
+    "sourceHash": "dd5a6ec77c7d97e7ca73f54b7d2166aca2e890aa39e4251f00835a78ccffc28e",
+    "text": "Le <keyword0>Vol de vie</keyword0> restaure {{value0}}% de <keyword1>Santé</keyword1> en plus contre les ennemis empoisonnés ou en <keyword2>Saignement</keyword2>"
   },
   "content.talent.leech.armor-siphon.name": {
     "reviewed": true,
@@ -3641,6 +3773,12 @@
     "sourceHash": "34480945d0a8cc8d569eee4f877124e160d06471f53e31a28c3e4375c4ee886f",
     "text": "Soin arcanique"
   },
+  "content.talent.mana.arcane-mending.rule": {
+    "reviewed": true,
+    "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
+    "sourceHash": "c4a08059157e60a46b8d9c1e0e8ab5ef98271c349815c9fb6a42a2e8f5314338",
+    "text": "Chaque créature déployée en vie restaure {{value0}} <keyword0>Santé</keyword0> par <keyword1>Mana</keyword1> gagné"
+  },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
     "source": "Dark Recovery",
@@ -3659,17 +3797,35 @@
     "sourceHash": "6971ac7365edbd37b852fa7587c9b8c5e789f1f3c21f37ff7a814cc7a296e92a",
     "text": "Harmonisation tellurique"
   },
+  "content.talent.mana.leyline-attunement.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>maximum Mana</keyword0> each battle",
+    "sourceHash": "c48105a8e697a52381fa48f583354dda777f72415253650357fb46f012a2b0e6",
+    "text": "Gagnez {{value0}} <keyword0>Mana maximum</keyword0> à chaque combat"
+  },
   "content.talent.mana.mana-bulwark.name": {
     "reviewed": true,
     "source": "Mana Bulwark",
     "sourceHash": "6525577e1b2de0d95b245d13f5217db0c51f8f482793179670d1b7488fcf0a6c",
     "text": "Rempart de Mana"
   },
+  "content.talent.mana.mana-bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Block</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "56a38e10c763da26edd3de93e7d5e330d3e7527b5b10b92dead913fe603002a9",
+    "text": "Commencez chaque combat avec un <keyword0>Blocage</keyword0> égal à votre <keyword1>Mana maximum</keyword1>"
+  },
   "content.talent.mana.mana-shell.name": {
     "reviewed": true,
     "source": "Mana Shell",
     "sourceHash": "acd5a51d8538453c3f74c36d2372c993ecd5ba5e6e80c64650cd8b15025fa036",
     "text": "Carapace de Mana"
+  },
+  "content.talent.mana.mana-shell.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Armor</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "0d6c8e3bfb36fc065af16b9dd6cd15467a09059c24bac3d1b69314c96d958122",
+    "text": "Commencez chaque combat avec une <keyword0>Armure</keyword0> égale à votre <keyword1>Mana maximum</keyword1>"
   },
   "content.talent.mana.manaburn.name": {
     "reviewed": true,
@@ -3688,6 +3844,12 @@
     "source": "Wellspring",
     "sourceHash": "07ad5bf1595b76e32ae4b705056ff69d286261307b05c70d0bf72438aab62532",
     "text": "Source vive"
+  },
+  "content.talent.mana.wellspring.rule": {
+    "reviewed": true,
+    "source": "End your turn with unspent <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "883d0ab7ac8b7c63267b05a6782209ff770708ab2f7e0d0632258ab166cbd75c",
+    "text": "Terminez votre tour avec du <keyword0>Mana</keyword0> non dépensé pour gagner {{value0}} <keyword1>Mana</keyword1> supplémentaire au tour suivant"
   },
   "content.talent.nature.bramblegrowth.name": {
     "reviewed": true,
@@ -3779,11 +3941,23 @@
     "sourceHash": "d6ccb4879346b1827cf95c9b463934d22dad2f3ce80486a5d9576189114c2e51",
     "text": "Poings blindés"
   },
+  "content.talent.physical.armored-fists.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Armor</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "1e1a85a84b7ad38e19c98eca19253b57439b84140b5979a040f75d7d6ad9b8cd",
+    "text": "Ajoutez la moitié de votre <keyword0>Armure</keyword0> aux dégâts <keyword1>Physiques</keyword1>"
+  },
   "content.talent.physical.finish-him.name": {
     "reviewed": true,
     "source": "Finishing Blow",
     "sourceHash": "25a721c082d0d22bf30a58088e66b27196afaae53b306b4b2be423a27f12df21",
     "text": "Coup de grâce"
+  },
+  "content.talent.physical.finish-him.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled against enemies below {{value0}}% <keyword1>Health</keyword1>",
+    "sourceHash": "e345e8ab5ad971afd3b8fcdf942075f09e6621dc1db51a8263b7626eb68b1df3",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> sont doublés contre les ennemis sous {{value0}}% de <keyword1>Santé</keyword1>"
   },
   "content.talent.physical.heavy-blows.name": {
     "reviewed": true,
@@ -3791,17 +3965,35 @@
     "sourceHash": "672fed8b6336c61b24e0b04e0e9e2485fe0e001975d171d927102ea5f83172d8",
     "text": "Coups lourds"
   },
+  "content.talent.physical.heavy-blows.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
+    "sourceHash": "b16c11012b0bdd03bc8fac7fbfdcf9697dab168bb99ce68d0162f33959ed0fe4",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> ont {{value0}}% de chances d’infliger aussi des dégâts d’<keyword1>Étourdissement</keyword1>"
+  },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
     "source": "Lacerate",
     "sourceHash": "701a6f43f5f20b8a25fe5514db659dbd4bfd61290a93118472a81a63f0750c1f",
     "text": "Lacération"
   },
+  "content.talent.physical.lacerate.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to <keyword1>Bleed</keyword1>",
+    "sourceHash": "7c625c9bc7879305eb88a7b9378664ba87c3623cf0690aaf615f6e307b3a4a4d",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> ont {{value0}}% de chances d’infliger des dégâts de <keyword1>Saignement</keyword1>"
+  },
   "content.talent.physical.riposte.name": {
     "reviewed": true,
     "source": "Riposte",
     "sourceHash": "bd38ba36594940d2c271c071f5d7466a74748ae9b478e39fac578b2f3739ec79",
     "text": "Riposte"
+  },
+  "content.talent.physical.riposte.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> attack is guaranteed to <keyword2>Critical Hit</keyword2>",
+    "sourceHash": "b7f85bbb3fb6338666d337aa1bc27b3c27c8e6223bccc7f754a6c4641d188ad0",
+    "text": "Après une <keyword0>Esquive</keyword0>, votre prochaine attaque <keyword1>Physique</keyword1> inflige forcément un <keyword2>coup critique</keyword2>"
   },
   "content.talent.physical.rupture.name": {
     "reviewed": true,
@@ -3815,11 +4007,23 @@
     "sourceHash": "f206d701532f87408494cc96b5bc61a5bffc66a654262c439951ad739d31e670",
     "text": "Heurt de bouclier"
   },
+  "content.talent.physical.shield-slam.rule": {
+    "reviewed": true,
+    "source": "Add half your <keyword0>Block</keyword0> to <keyword1>Physical</keyword1> damage",
+    "sourceHash": "8ce4927b38c0f87ae49e0800ecc55e9be9267217174443dceb50573835ad5aa6",
+    "text": "Ajoutez la moitié de votre <keyword0>Blocage</keyword0> aux dégâts <keyword1>Physiques</keyword1>"
+  },
   "content.talent.physical.unrelenting.name": {
     "reviewed": true,
     "source": "Unrelenting",
     "sourceHash": "e490d1f42e15dad2fa6ea3b1f1d1dafa16a12ec92087639d1b12712142fe60d3",
     "text": "Implacable"
+  },
+  "content.talent.physical.unrelenting.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is doubled while you're below half <keyword1>Health</keyword1>",
+    "sourceHash": "3011147bf9a658e564ad6502224eb78a5e021ee89ad626fe1b7f4c0dc01ee3b3",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> sont doublés lorsque votre <keyword1>Santé</keyword1> est sous la moitié"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
@@ -3839,6 +4043,12 @@
     "sourceHash": "cb21f3197e2ff3bb0c49968cf8ea217a5db706a1676d7426cae6b322d527c8ef",
     "text": "Corrosif"
   },
+  "content.talent.poison.corrosive.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies take {{value0}} additional damage",
+    "sourceHash": "e6cba74600d616ba26a99c6ff2c19b0e18be840f78edbf5423b82ec41f55c109",
+    "text": "Les ennemis empoisonnés subissent {{value0}} dégâts supplémentaires"
+  },
   "content.talent.poison.hemotoxin.name": {
     "reviewed": true,
     "source": "Hemotoxin",
@@ -3856,6 +4066,12 @@
     "source": "Necrosis",
     "sourceHash": "fe0b4af0d492c58fa4d9e95eb8754c9ead8b1e01f61b094b79a97b35f4f37b12",
     "text": "Nécrose"
+  },
+  "content.talent.poison.necrosis.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies receive half as much <keyword0>healing</keyword0>",
+    "sourceHash": "34e8178138f41ea3c6a979447cd15d76f9451cf991e420903844b1d4fa5f773d",
+    "text": "Les ennemis empoisonnés reçoivent moitié moins de <keyword0>soins</keyword0>"
   },
   "content.talent.poison.paralytic-venom.name": {
     "reviewed": true,
@@ -3875,11 +4091,23 @@
     "sourceHash": "d090c642deaa9571467848787ebe290ebcf135d706559861561b43f89edda63b",
     "text": "Torpeur"
   },
+  "content.talent.poison.torpor.rule": {
+    "reviewed": true,
+    "source": "Poisoned enemies cannot <keyword0>Dodge</keyword0>",
+    "sourceHash": "b134410f192d567345a660378b3c3d1627e542be5bf80a85d8a25afb0a651d69",
+    "text": "Les ennemis empoisonnés ne peuvent pas <keyword0>esquiver</keyword0>"
+  },
   "content.talent.poison.toxic-profit.name": {
     "reviewed": true,
     "source": "Toxic Profit",
     "sourceHash": "04d7391b5aabb155f7cfef22e8d1d03e1767b26ff763cfa6480915ceed3efd32",
     "text": "Profit toxique"
+  },
+  "content.talent.poison.toxic-profit.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you defeat a Poisoned enemy",
+    "sourceHash": "3aa6eff45b5525b3431e8687438cf043a04c213e4965f41a992bb4b8f0eea084",
+    "text": "Gagnez {{value0}} Or lorsque vous vainquez un ennemi empoisonné"
   },
   "content.talent.poison.toxin-resistance.name": {
     "reviewed": true,
@@ -3971,6 +4199,12 @@
     "sourceHash": "586a087659b038a12e6e802c603188b40c19e6ec39619474d8590fbf25480d0d",
     "text": "Contre protégé"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "sourceHash": "8ec30a98604ec96b88ff1def810e99d385f7cd1df0ff2eff7f169fd6ab59dbbc",
+    "text": "<keyword0>Étourdir</keyword0> un ennemi confère {{value0}} <keyword1>Blocage</keyword1> si vous n’en avez pas"
+  },
   "content.talent.stun.jarring-blow.name": {
     "reviewed": true,
     "source": "Jarring Blow",
@@ -3989,6 +4223,12 @@
     "sourceHash": "f7b49ffa961a97280edb1e30692ae92d261efa93c2e9a493ff95037b72c74928",
     "text": "Briser la garde"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "sourceHash": "7980a2300cbfd54968bcccbe9cfa037477b019af121e61cafb81c9b56ade5b76",
+    "text": "<keyword0>Étourdir</keyword0> un ennemi retire toute son <keyword1>Armure</keyword1>"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -4006,6 +4246,12 @@
     "source": "Stun Surge",
     "sourceHash": "238b5f18302030a1508b772dc3df84072e7e37bb6af916e86fd9611e065cb739",
     "text": "Déferlement d'Étourdissement"
+  },
+  "content.talent.stun.stun-surge.rule": {
+    "reviewed": true,
+    "source": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "2633b570925cec4dd666e44db71a115f39efab4c323136ee4fd8694fc157b2fc",
+    "text": "Si vous n’avez pas de <keyword0>Mana</keyword0>, <keyword1>étourdir</keyword1> un ennemi confère {{value0}} <keyword2>Mana</keyword2>"
   },
   "content.talent.water.cleansing-current.name": {
     "reviewed": true,

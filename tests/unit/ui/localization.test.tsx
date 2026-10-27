@@ -675,6 +675,33 @@ it("keeps replacement choices addressable when their accessible label is transla
   view.unmount();
 });
 
+it("uses translated creature names for replacement choices and preserves the swap command", () => {
+  const game = produce(run(), (draft) => {
+    addBackups(draft, { ...draft.team[0]!, id: "reserve", species: "reedstag", health: 10 });
+  });
+  const outgoing = game.team[0]!;
+  const send = vi.fn(() => true);
+  const catalog: MessageCatalog = {
+    ...french,
+    [`content.species.${outgoing.species}.name`]: {
+      source: species(outgoing.species).name,
+      text: "Allié traduit",
+    },
+    "content.species.reedstag.name": { source: species("reedstag").name, text: "Réserve traduite" },
+  };
+  const view = render(
+    <MessageProvider locale="fr" catalog={catalog}>
+      <TooltipProvider>
+        <ReplacementPicker game={game} outgoing={outgoing} send={send} />
+      </TooltipProvider>
+    </MessageProvider>,
+  );
+  expect(screen.getByRole("button", { name: "Allié traduit, K.-O." })).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "Réserve traduite, en réserve" }));
+  expect(send).toHaveBeenCalledWith({ type: "swap", activeId: outgoing.id, reserve: "reserve" });
+  view.unmount();
+});
+
 it("validates translation freshness, terminology, placeholders, review and locale plural categories", () => {
   const english = {
     "menu.play": { text: "Play {{name}}" },
@@ -1958,6 +1985,26 @@ it("presents shared Dodge and reflected attack card rules", () => {
   ]);
   expect(view.container.querySelectorAll('[data-keyword="dodge"]')).toHaveLength(2);
   expect(view.container.querySelector('[data-keyword="attackReflection"]')).toBeTruthy();
+  view.unmount();
+});
+
+it("presents translated composite swap and Stun card rules", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={definition("captoad-swap")} />
+        <CardRules card={definition("chimecricket-attack")} value={4} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Échangez avec un allié en réserve au hasard ; Piochez 2 cartes",
+    "Infligez 4 dégâts d’Étourdissement ; Piochez 1 carte",
+  ]);
+  expect(view.container.querySelector('[data-keyword="stun"]')).toBeTruthy();
   view.unmount();
 });
 
