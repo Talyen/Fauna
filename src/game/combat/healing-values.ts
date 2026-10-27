@@ -7,10 +7,11 @@ import { maximumHealth, type Combatant } from "./state";
 /** Magnitude only; rewards, revival permission and bounce remain execution policy. */
 export function healingValue(state: GameState | undefined, unit: Combatant, amount: number) {
   if (state?.phase === "battle") {
-    if (!isEnemy(unit) && hasTalent(state, "health.mending"))
+    const enemy = isEnemy(unit);
+    if (!enemy && hasTalent(state, "health.mending"))
       amount *= 1 + talentRule("health.mending").percent / 100;
-    if (isEnemy(unit) && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
-    if (isEnemy(unit) && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
+    if (enemy && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
+    if (enemy && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
   }
   return amount;
 }

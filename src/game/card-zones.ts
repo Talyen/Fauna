@@ -271,6 +271,7 @@ export function drawKeyword(
 ) {
   if (!state.battle) return;
   fillHand(state);
+  if (!state.battle.draw.length && !state.battle.discard.length) return;
   const owners = drawableOwnerIds(state);
   const eligibleCards = new Set<string>();
   for (const card of state.cards)

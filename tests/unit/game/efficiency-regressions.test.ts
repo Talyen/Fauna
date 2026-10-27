@@ -2,16 +2,22 @@ import { expect, it, vi } from "vitest";
 import { cardActor, drawableOwnerIds } from "../../../src/game/card-actors";
 import {
   discardDrawCards,
+  drawKeyword,
   drawHasAnotherCard,
   journeyReturnHasDraw,
   recoverBrokenGuard,
 } from "../../../src/game/card-zones";
-import { chooseBattleCommand } from "../../../src/application/battle-policy";
+import { chooseBattleCommand, rankedBattleChoices } from "../../../src/application/battle-policy";
+import { createBattleActor } from "../../../src/application/battle-actor";
 import { battleBenefitFacts } from "../../../src/application/battle-benefits";
 import * as engine from "../../../src/game/engine";
 import { projectPlay } from "../../../src/game/preview";
 import { cardKeywords, passiveAmount } from "../../../src/game/progression";
-import { SPECIES } from "../../../src/game/content";
+import { definition, SPECIES } from "../../../src/game/content";
+import { capabilities, offenseValue } from "../../../src/application/team-policy";
+import { availablePlays, chosenRecipients, playTargetError } from "../../../src/game/play-queries";
+import { battlefield, isDepartedMinion } from "../../../src/game/battlefield";
+import { summonEcho } from "../../../src/game/combat/legendary";
 import { generateEncounterPack } from "../../../src/game/encounters";
 import { returnDodgedCard } from "../../../src/game/combat/card-modifiers";
 import { observeDecisions } from "../../../src/game/random";
@@ -168,4 +174,76 @@ it("returns a dodged card only for enemy dodges after the current ability starte
   });
   returnDodgedCard(state, card, events, 1);
   expect(state.battle.hand).toEqual([card.id]);
+});
+
+it("keeps authored policy caches private and refreshes the current passive tier", () => {
+  const state = structuredClone(teamRun(42, ["memento"]));
+  state.discovery.recruited.memento = 1;
+  const initial = capabilities(state, ["memento"]);
+  const initialValues = [...initial];
+  const initialOffense = offenseValue(state, "memento");
+  initial.clear();
+  expect([...capabilities(state, ["memento"])]).toEqual(initialValues);
+  state.discovery.recruited.memento = 6;
+  expect(offenseValue(state, "memento")).not.toBe(initialOffense);
+  state.discovery.recruited.memento = 1;
+  expect(offenseValue(state, "memento")).toBe(initialOffense);
+});
+
+it("keeps available targets current across decisions and in battlefield order", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  const card = state.cards.find((entry) => entry.definitionId === "prismram-attack")!;
+  const copy = { ...card, id: "copy-test" };
+  state.cards.push(copy);
+  state.battle.hand = [card.id, copy.id];
+  const targets = chosenRecipients(state, definition(card.definitionId));
+  const plays = availablePlays(state, false);
+  expect(plays.map((play) => play.commands.map((command) => command.targetId))).toEqual([
+    targets.map((unit) => unit.id),
+    targets.map((unit) => unit.id),
+  ]);
+  for (const target of targets)
+    expect(playTargetError(state, definition(card.definitionId), card.ownerId!, target.id)).toBeNull();
+  targets[0]!.health = 0;
+  expect(playTargetError(state, definition(card.definitionId), card.ownerId!, targets[0]!.id)).not.toBeNull();
+  expect(availablePlays(state, false)[0]!.commands.map((command) => command.targetId)).toEqual(
+    targets.slice(1).map((unit) => unit.id),
+  );
+});
+
+it("keeps summons active exactly while they remain on the owner's battlefield", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["memento", "mossguard"])));
+  const owner = state.team[0]!;
+  summonEcho(state, owner, "player", 6, []);
+  const echo = state.battle.minions![0]!;
+  for (const health of [owner.health, 0, 1]) {
+    owner.health = health;
+    expect(isDepartedMinion(state, echo)).toBe(
+      !battlefield(state, "player").some((unit) => unit.id === echo.id),
+    );
+  }
+  state.battle.minions = [];
+  expect(isDepartedMinion(state, echo)).toBe(true);
+});
+
+it("promotes buffered cards before an empty keyword draw", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  const card = state.cards[0]!;
+  state.battle.draw = [];
+  state.battle.discard = [];
+  state.battle.hand = [];
+  state.battle.buffer = [card.id];
+  const rng = state.rng;
+  drawKeyword(state, "light");
+  expect(state.battle.hand).toEqual([card.id]);
+  expect(state.battle.buffer).toEqual([]);
+  expect(state.rng).toEqual(rng);
+});
+
+it("preserves the automated actor's ranked choice and repeated reads", () => {
+  const state = requireBattle(teamRun(42, ["mossguard", "prismram"]));
+  const actor = createBattleActor();
+  const expected = rankedBattleChoices(state, false)[0]!;
+  expect(actor.choose(state, false)).toEqual(expected);
+  expect(actor.choose(state, false)).toEqual(expected);
 });

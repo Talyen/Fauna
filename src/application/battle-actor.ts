@@ -3,16 +3,18 @@ import { rankedBattleChoices, type BattleChoice } from "./battle-policy";
 import { freeze } from "immer";
 import type { Card, Command, GameState } from "../game/types";
 
+type TacticalCard = { visible: (string | number | boolean | null)[]; serialized: string; card: Card };
+
 /** Public combat state only; hidden draw order, RNG, XP and raw copy serials are not progress. */
-function tacticalState(state: GameState): string {
-  if (state.phase !== "battle") return state.phase;
+function tacticalState(state: GameState) {
+  if (state.phase !== "battle") return { key: state.phase, cards: new Map<string, TacticalCard>() };
   const battle = state.battle;
   const card = (entry: Card) => [entry.ownerId, entry.definitionId, entry.level, !!entry.temporary];
-  const cards = new Map<string, { visible: ReturnType<typeof card>; serialized: string }>();
+  const cards = new Map<string, TacticalCard>();
   const allCards = state.cards.map((entry) => {
     const visible = card(entry);
     const serialized = JSON.stringify(visible);
-    if (!cards.has(entry.id)) cards.set(entry.id, { visible, serialized });
+    if (!cards.has(entry.id)) cards.set(entry.id, { visible, serialized, card: entry });
     return serialized;
   });
   const unit = (entry: GameState["team"][number]) => [
@@ -23,7 +25,7 @@ function tacticalState(state: GameState): string {
     entry.attacked,
     entry.combat,
   ];
-  return JSON.stringify([
+  const key = JSON.stringify([
     state.team.map(unit),
     state.reserves.map(unit),
     battle.enemies.map((entry) => [entry.id, entry.species, entry.health, entry.block, entry.combat]),
@@ -48,10 +50,11 @@ function tacticalState(state: GameState): string {
     state.boons,
     state.discovery.recruited,
   ]);
+  return { key, cards };
 }
-function actionKey(state: GameState, command: Command): string {
+function actionKey(cards: ReturnType<typeof tacticalState>["cards"], command: Command): string {
   if (command.type !== "play") return JSON.stringify(command);
-  const card = state.cards.find((entry) => entry.id === command.cardId)!;
+  const card = cards.get(command.cardId)!.card;
   return JSON.stringify([card.ownerId, card.definitionId, card.level, command.targetId]);
 }
 
@@ -91,10 +94,10 @@ export function createBattleActor() {
           : previous;
       }
       scope = currentScope;
-      const visible = tacticalState(state);
-      const tried = attempted.get(visible) ?? new Set<string>();
+      const { key, cards } = tacticalState(state);
+      const tried = attempted.get(key) ?? new Set<string>();
       const choices = rankedBattleChoices(state, autoEndTurn);
-      const selected = choices.find((choice) => !tried.has(actionKey(state, choice.command)));
+      const selected = choices.find((choice) => !tried.has(actionKey(cards, choice.command)));
       previous = freeze(
         selected ?? {
           command: { type: "endTurn" },
@@ -105,8 +108,8 @@ export function createBattleActor() {
         },
         true,
       );
-      tried.add(actionKey(state, previous.command));
-      attempted.set(visible, tried);
+      tried.add(actionKey(cards, previous.command));
+      attempted.set(key, tried);
       // Bound long productive turns without restricting their actions.
       if (attempted.size > 256) attempted.delete(attempted.keys().next().value!);
       revision = state.revision;

@@ -141,7 +141,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
               .filter((card) => card.species !== enemy.species)
           : [];
       const choices = [...enemyAbilities.get(enemy.species)!, ...inherited];
-      const abilities = choices.filter((card) => card.effect !== "resurrect" || fallen.length > 0);
+      const abilities = fallen.length ? choices : choices.filter((card) => card.effect !== "resurrect");
       const choice = chooseEnemyCard(draft, enemy, abilities);
       if (!choice) continue;
       const { def, targetId, allyTargetId } = choice;

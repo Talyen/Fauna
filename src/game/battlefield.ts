@@ -30,10 +30,15 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
 
 /** Stored summon receipts become inert immediately when their owner leaves or falls. */
 export function isDepartedMinion(state: GameState, unit: Creature | Enemy): boolean {
-  return !!(
-    "minion" in unit &&
-    unit.minion &&
-    !battlefield(state, unit.minion.side).some((current) => current.id === unit.id)
+  if (!("minion" in unit) || !unit.minion) return false;
+  const side = unit.minion.side;
+  const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
+  if (row.some((current) => current.id === unit.id)) return false;
+  return !(state.battle?.minions ?? []).some(
+    (current) =>
+      current.id === unit.id &&
+      current.minion.side === side &&
+      row.some((owner) => owner.health > 0 && owner.id === current.minion.ownerId),
   );
 }
 
