@@ -63,7 +63,7 @@ export function victoryGoldBonus(state: Pick<GameState, "boons">) {
 
 /** Captured before enemy actions, while the outgoing turn still owns its Mana. */
 export function renewalManaBonus(state: BattleState) {
-  return state.battle.mana > 0
-    ? Number(hasTalent(state, "mana.wellspring")) * talentRule("mana.wellspring").amount
-    : Number(hasTalent(state, "mana.dark-recovery")) * talentRule("mana.dark-recovery").amount;
+  if (state.battle.mana > 0)
+    return hasTalent(state, "mana.wellspring") ? talentRule("mana.wellspring").amount : 0;
+  return hasTalent(state, "mana.dark-recovery") ? talentRule("mana.dark-recovery").amount : 0;
 }

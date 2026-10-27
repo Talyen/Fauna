@@ -125,9 +125,9 @@ export function summonEcho(
 /** Exactly once per accepted card, after its effects; summons can answer their own creation. */
 export function courtRemembers(state: BattleState, actor: Combatant, events: GameEvent[]) {
   if (actor.health <= 0) return;
+  if (!state.battle.minions?.length) return;
   const amount = passiveAmount(isEnemy(actor) ? undefined : state, actor.species, "courtRemembers");
   if (!amount) return;
-  if (!state.battle.minions?.length) return;
   const echoes = state.battle.minions.filter(
     (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
   );

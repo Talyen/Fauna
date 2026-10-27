@@ -9,19 +9,12 @@ import { executeAbility } from "./combat/abilities";
 import { canVisitCampfire, campfireRecovery, canVisitMerchant, canRecruitDestination } from "./destinations";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze, produce } from "immer";
-import {
-  collectedSpecies,
-  starterCount,
-  MAX_CREATURE_STARS,
-  KEYWORDS,
-  cardKeywords,
-  canBuyTalent,
-} from "./progression";
+import { starterCount, MAX_CREATURE_STARS, KEYWORDS, cardKeywordView, canBuyTalent } from "./progression";
 import { ensureCombat, restoreHealth } from "./combat/index";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
 import { fillHand, recycleDiscard } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";
-import { definition, species } from "./content";
+import { definition, species, SPECIES } from "./content";
 import { bossEncounter, generateEncounterPack } from "./encounters";
 import type { Command, CommandResult, GameEvent, GameState } from "./types";
 import {
@@ -215,7 +208,7 @@ function resolve(
         break;
       }
       case "start":
-        if (collectedSpecies(draft).length === 0) {
+        if (!SPECIES.some(({ id }) => draft.discovery.recruited[id] !== undefined)) {
           for (const kind of draft.selected) draft.discovery.recruited[kind] = 1;
           for (const kind of draft.selected)
             if (!draft.discovery.encountered.includes(kind)) draft.discovery.encountered.push(kind);
@@ -267,8 +260,8 @@ function resolve(
         break;
       case "rest":
         if (draft.phase !== "campfire") throw new Error("Invalid Campfire rest.");
-        for (const creature of [...draft.team, ...draft.reserves])
-          restoreHealth(creature, campfireRecovery(creature), events, true);
+        for (const row of [draft.team, draft.reserves])
+          for (const creature of row) restoreHealth(creature, campfireRecovery(creature), events, true);
         leaveCampfire(draft);
         break;
       case "play": {
@@ -277,8 +270,8 @@ function resolve(
         const card = draft.cards.find((c) => c.id === command.cardId)!;
         const def = definition(card.definitionId);
         const actor = cardActor(draft, card)!;
-        const value = actionValue(card, actor, draft);
-        const keywords = cardKeywords(card);
+        const value = def.species === null ? 0 : actionValue(card, actor, draft, def);
+        const keywords = cardKeywordView(card);
         for (const keyword of keywords)
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
         battle.mana -= cardCost(card, draft, def, actor);

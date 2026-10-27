@@ -55,15 +55,12 @@ function utf8Size(text: string) {
     const code = text.charCodeAt(i);
     if (code <= 0x7f) bytes++;
     else if (code <= 0x7ff) bytes += 2;
-    else if (
-      code >= 0xd800 &&
-      code <= 0xdbff &&
-      i + 1 < text.length &&
-      text.charCodeAt(i + 1) >= 0xdc00 &&
-      text.charCodeAt(i + 1) <= 0xdfff
-    ) {
-      bytes += 4;
-      i++;
+    else if (code >= 0xd800 && code <= 0xdbff && i + 1 < text.length) {
+      const next = text.charCodeAt(i + 1);
+      if (next >= 0xdc00 && next <= 0xdfff) {
+        bytes += 4;
+        i++;
+      } else bytes += 3;
     } else bytes += 3;
   }
   return bytes;

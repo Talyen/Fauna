@@ -90,7 +90,7 @@ export function validTalentSelection(state: Pick<GameState, "talents" | "keyword
 }
 const keywordsByDefinition = new WeakMap<object, readonly Keyword[]>();
 const authoredCards = new WeakSet<object>(CARDS);
-function definitionCardKeywords(card: Pick<Card, "definitionId">): readonly Keyword[] {
+export function cardKeywordView(card: Pick<Card, "definitionId">): readonly Keyword[] {
   const def = definition(card.definitionId);
   if (!Object.isFrozen(def)) return definitionKeywords(def);
   let keywords = keywordsByDefinition.get(def);
@@ -106,11 +106,11 @@ export function abilityKeywords(def: CardDefinition): readonly Keyword[] {
 }
 /** Return a mutable copy to callers that need the full list. */
 export function cardKeywords(card: Pick<Card, "definitionId">): Keyword[] {
-  return [...definitionCardKeywords(card)];
+  return [...cardKeywordView(card)];
 }
 /** Membership checks do not need a defensive array copy. */
 export function cardHasKeyword(card: Pick<Card, "definitionId">, keyword: Keyword): boolean {
-  return definitionCardKeywords(card).includes(keyword);
+  return cardKeywordView(card).includes(keyword);
 }
 export function xpThreshold(points: number) {
   return 10 * points * (points + 1) - 10 * Math.min(points, 2);

@@ -160,7 +160,7 @@ export function ownDodgeChance(state: GameState, unit: Combatant): number {
       (stats?.temporaryDodge ?? 0) +
       (allied
         ? (stats?.[talentRule("dodge.finding-rhythm").state] ?? 0) +
-          Number(hasTalent(state, "dodge.lightfoot")) * talentRule("dodge.lightfoot").amount +
+          (hasTalent(state, "dodge.lightfoot") ? talentRule("dodge.lightfoot").amount : 0) +
           (hasTalent(state, "health.last-gasp") && unit.health < maximumHealth(unit) / 2
             ? talentRule("health.last-gasp").percent
             : 0)
