@@ -1,5 +1,6 @@
 import { parseSync } from "@swc/core";
-import { evaluate, keywordPattern, templateFor, walk } from "./boon-rules.mjs";
+import { evaluate, keywordPattern, templateFor } from "./boon-rules.mjs";
+import { walk } from "./source-ast.mjs";
 
 /** Read authored glossary entries and active keyword definitions without executing game code. */
 export function extractGlossaryRules(glossarySource, keywordSource, resurrectionSource) {

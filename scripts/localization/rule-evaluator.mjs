@@ -1,5 +1,22 @@
 /** Evaluate only the finite, side-effect-free expression forms used by authored descriptions. */
-export function evaluateRule(node, values, functions) {
+export function evaluateRule(node, values, functions, literalOnly = false) {
+  const evaluate = (child) => evaluateRule(child, values, functions, literalOnly);
+  if (
+    literalOnly &&
+    ![
+      "StringLiteral",
+      "NumericLiteral",
+      "BooleanLiteral",
+      "Identifier",
+      "MemberExpression",
+      "TemplateLiteral",
+      "ParenthesisExpression",
+      "TsConstAssertion",
+      "ConditionalExpression",
+      "BinaryExpression",
+    ].includes(node?.type)
+  )
+    throw new Error(`Unsupported rule description expression: ${node?.type ?? "missing"}`);
   switch (node?.type) {
     case "StringLiteral":
     case "NumericLiteral":
@@ -10,19 +27,24 @@ export function evaluateRule(node, values, functions) {
     case "Identifier":
       if (Object.hasOwn(values, node.value)) return values[node.value];
       if (Object.hasOwn(functions, node.value)) return functions[node.value];
-      throw new Error(`Unknown description variable: ${node.value}`);
+      if (!literalOnly) throw new Error(`Unknown description variable: ${node.value}`);
+      break;
     case "MemberExpression": {
-      const object = evaluateRule(node.object, values, functions);
-      if (node.property?.type !== "Identifier" || !object || typeof object !== "object") break;
+      const object = evaluate(node.object);
+      if (
+        node.property?.type !== "Identifier" ||
+        !object ||
+        (literalOnly ? !Object.hasOwn(object, node.property.value) : typeof object !== "object")
+      )
+        break;
       return object[node.property.value];
     }
     case "ObjectExpression":
       return Object.fromEntries(
         node.properties.map((property) => {
-          if (property.type === "Identifier")
-            return [property.value, evaluateRule(property, values, functions)];
+          if (property.type === "Identifier") return [property.value, evaluate(property)];
           if (property.type === "KeyValueProperty" && property.key?.type === "Identifier")
-            return [property.key.value, evaluateRule(property.value, values, functions)];
+            return [property.key.value, evaluate(property.value)];
           throw new Error("Unsupported description object property");
         }),
       );
@@ -31,31 +53,30 @@ export function evaluateRule(node, values, functions) {
         .map(
           (part, index) =>
             (part.cooked ?? part.raw) +
-            (index < node.expressions.length
-              ? String(evaluateRule(node.expressions[index], values, functions))
-              : ""),
+            (index < node.expressions.length ? String(evaluate(node.expressions[index])) : ""),
         )
         .join("");
+    case "TsConstAssertion":
+      if (!literalOnly) break;
+    // Both authoring forms wrap an expression without changing its value.
     case "ParenthesisExpression":
-      return evaluateRule(node.expression, values, functions);
+      return evaluate(node.expression);
     case "ConditionalExpression":
-      return evaluateRule(node.test, values, functions)
-        ? evaluateRule(node.consequent, values, functions)
-        : evaluateRule(node.alternate, values, functions);
+      return evaluate(node.test) ? evaluate(node.consequent) : evaluate(node.alternate);
     case "BinaryExpression": {
-      const left = evaluateRule(node.left, values, functions);
-      if (node.operator === "&&") return left && evaluateRule(node.right, values, functions);
-      if (node.operator === "||") return left || evaluateRule(node.right, values, functions);
-      const right = evaluateRule(node.right, values, functions);
+      const left = evaluate(node.left);
+      if (!literalOnly && node.operator === "&&") return left && evaluate(node.right);
+      if (!literalOnly && node.operator === "||") return left || evaluate(node.right);
+      const right = evaluate(node.right);
       if (node.operator === "===") return left === right;
-      if (node.operator === ">") return left > right;
-      if (node.operator === "+") return left + right;
+      if (!literalOnly && node.operator === ">") return left > right;
+      if (!literalOnly && node.operator === "+") return left + right;
       if (node.operator === "*") return left * right;
       break;
     }
     case "CallExpression": {
       const name = node.callee?.value;
-      const args = node.arguments.map((arg) => evaluateRule(arg.expression, values, functions));
+      const args = node.arguments.map((arg) => evaluate(arg.expression));
       if (node.callee?.type === "Identifier" && Object.hasOwn(functions, name))
         return functions[name](...args);
       if (
@@ -63,11 +84,13 @@ export function evaluateRule(node, values, functions) {
         node.callee.property?.value === "describe" &&
         Object.hasOwn(functions, "describe")
       )
-        return functions.describe(evaluateRule(node.callee.object, values, functions), ...args);
+        return functions.describe(evaluate(node.callee.object), ...args);
       break;
     }
   }
-  throw new Error(`Unsupported description expression: ${node?.type ?? "missing"}`);
+  throw new Error(
+    `Unsupported ${literalOnly ? "rule description" : "description"} expression: ${node?.type ?? "missing"}`,
+  );
 }
 
 /** Bind explicitly supplied data to a description function; never execute source. */

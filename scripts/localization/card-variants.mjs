@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { parseSync } from "@swc/core";
-import { keywordPattern, templateFor, walk } from "./boon-rules.mjs";
+import { keywordPattern, templateFor } from "./boon-rules.mjs";
+import { walk } from "./source-ast.mjs";
 import { cardRuleVariantId } from "../../src/ui/shared/localization/rule-key.mjs";
 import {
   describeCompleteCard,
