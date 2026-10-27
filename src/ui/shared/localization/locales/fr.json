@@ -1403,6 +1403,12 @@
     "sourceHash": "fc58871caf3219cd21c71365c06000b8d8c7f31a9055e1c36f196cfd3cd4342b",
     "text": "Juste cap"
   },
+  "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
+    "sourceHash": "94558b20463cede642eacdbcf62f585860995a4e4b952ec7dc83c47e1afe64dc",
+    "text": "Cartes piochées : {{value0}} / <keyword0>Purifie</keyword0> l’<keyword1>Aveuglement</keyword1> des alliés"
+  },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
     "source": "Voyager’s Rest",
@@ -1510,6 +1516,12 @@
     "source": "Springbound",
     "sourceHash": "f63e34df4a7ee755477046125be50aafe862fd981be147259effcc609a635d16",
     "text": "Bond printanier"
+  },
+  "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
+    "sourceHash": "208f2525736a15e07f1a52031322a06e069e30202e58a19a0c35cd0af330ab8d",
+    "text": "<keyword0>Purifie</keyword0> toute accumulation de <keyword1>Gel</keyword1> des alliés / Gagne {{value0}}% d’<keyword2>Esquive</keyword2> jusqu’au prochain tour"
   },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
@@ -2735,6 +2747,12 @@
     "sourceHash": "77490d86d49d8e662ba1053437c47766f5fafb30f8eb7460954f2aa66a9265b3",
     "text": "L’eau se souvient"
   },
+  "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
+    "sourceHash": "d00619517c0f43101d6d7347bd385de09e8981e20248fe48db3880f8e2d13791",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> à tous les alliés; Cartes piochées : {{value1}}"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
@@ -2770,6 +2788,18 @@
     "source": "Kindled Courage",
     "sourceHash": "1a815c3e318b5724191ed5683f6a7c130ae4a26aafb79281dd0f437c9e2746e2",
     "text": "Courage ravivé"
+  },
+  "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
+    "sourceHash": "d9c8ddcb64006b369676a65a6338de5ff124e6e7a25c63aede51c163c798ce0b",
+    "text": "<keyword0>Purifie</keyword0> l’<keyword1>Aveuglement</keyword1> des alliés"
+  },
+  "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
+    "sourceHash": "cbf20d0cedeb8dea1a70b40d576c604db41c24746b0a04699c1c3637e5b0697b",
+    "text": "<keyword0>Purifie</keyword0> l’<keyword1>Aveuglement</keyword1> des alliés / Pioche une carte de <keyword2>Lumière</keyword2>"
   },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
@@ -2860,6 +2890,18 @@
     "source": "Left Luggage",
     "sourceHash": "7ede5e7ba19760eb09088eaad6a558f740feb18437b1b4a5f3a397681dc1d5ea",
     "text": "Bagages en consigne"
+  },
+  "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "643e724ee24089d87b5ec16df1520b59fdd78cb3fd1b96f3b4b5433f1a948635",
+    "text": "Pioche une carte d’allié depuis votre défausse / Gagne {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile",
+    "sourceHash": "f1fdcac1a97ee2cb75f127cd6a75be9ea06e0068955de1ba30b363c60b0599db",
+    "text": "Pioche une carte d’allié depuis votre défausse"
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,

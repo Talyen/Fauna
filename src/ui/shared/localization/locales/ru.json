@@ -1391,6 +1391,12 @@
     "sourceHash": "6b4e7806f28a7b612a830db9bf239ee6aaaf156e48b38645e9c7dd13bfbb39bf",
     "text": "Верный курс"
   },
+  "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
+    "sourceHash": "7a8837d9d238a4a7f797b775b76cdb3325fb3f40b13c1e0bdebc17736ec35570",
+    "text": "Взять карт: {{value0}} / <keyword0>Очистите</keyword0> <keyword1>ослепление</keyword1> союзников"
+  },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
     "source": "Voyager’s Rest",
@@ -1498,6 +1504,12 @@
     "source": "Springbound",
     "sourceHash": "1edafb9e616feb4a0810ad94ad5520818c9c7fd02fe27dba07f4f20cf377c9b4",
     "text": "Весенний прыжок"
+  },
+  "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
+    "sourceHash": "c1a140f7dce35cef267fda35194c291c0b0c8a7209c187e33a0db254364e7851",
+    "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> союзников / Получите {{value0}}% <keyword2>уклонения</keyword2> до следующего хода"
   },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
@@ -2723,6 +2735,12 @@
     "sourceHash": "befbdcf333a7b6eae9fe6ce75163094f375a55b9244f2b47cd83e9032a5eeccd",
     "text": "Вода помнит"
   },
+  "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
+    "sourceHash": "2ac4a39a9eac8fd0865b34bc736e3221b4946c06ae7d948e120da382ee914952",
+    "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>; Взять карт: {{value1}}"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
@@ -2758,6 +2776,18 @@
     "source": "Kindled Courage",
     "sourceHash": "d812526b5289166d85deff476cf1e19c047ffdd7f5bbc53c3390e1a237611b58",
     "text": "Разожжённая смелость"
+  },
+  "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
+    "sourceHash": "51df39bed784b5d39a9f703eb69252d16dfca503292ea138dab2cd4319c0ac07",
+    "text": "<keyword0>Очистите</keyword0> <keyword1>ослепление</keyword1> союзников"
+  },
+  "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
+    "sourceHash": "2d8e5cc6d0c8968960213bc2826514dc6fea042da4f72ecea8a50c39d09e21a7",
+    "text": "<keyword0>Очистите</keyword0> <keyword1>ослепление</keyword1> союзников / Возьмите карту <keyword2>света</keyword2>"
   },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
@@ -2848,6 +2878,18 @@
     "source": "Left Luggage",
     "sourceHash": "2d0ad9e30b2407c435a1f3f8f6d9086998ec6cdeab4cf4b776ce1d315042f77f",
     "text": "Оставленный багаж"
+  },
+  "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "5000551880227455a6cef1616803a5e3e1d78a1f2fef7c8149ba5187c8f7fc07",
+    "text": "Возьмите карту союзника из сброса / Получите {{value0}} <keyword0>маны</keyword0>"
+  },
+  "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile",
+    "sourceHash": "b488b87cf5d5477a72df0467f726a47a969d2054ffad2571c4e6a1f3a8e35195",
+    "text": "Возьмите карту союзника из сброса"
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,

@@ -1391,6 +1391,12 @@
     "sourceHash": "dbd9b0095db45ddbdf7f4f3d1a197e09ab1848a43665a0d6f8a1abd856baee24",
     "text": "准确航向"
   },
+  "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
+    "sourceHash": "b54c0239a66e75b1e8175229c5245ea65aeff140faa2aba97bea70191ab504c5",
+    "text": "抽取卡牌：{{value0}}张 / <keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1>"
+  },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
     "source": "Voyager’s Rest",
@@ -1498,6 +1504,12 @@
     "source": "Springbound",
     "sourceHash": "c4f37ecba981948e79e8bfc0507eb43b69df58471d965e1150bd540acda4d72f",
     "text": "春之跃"
+  },
+  "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
+    "sourceHash": "cdc55784f4f7a189a9a81ba35df35a06fe6646fb6ddc584b2163483cccd7cc89",
+    "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累 / 获得{{value0}}%<keyword2>闪避</keyword2>直至下一回合"
   },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
@@ -2723,6 +2735,12 @@
     "sourceHash": "0bb979e1d6428a5a1f24a560d656d79380df6b7abfc1da7bd736fc599efe51fa",
     "text": "水的记忆"
   },
+  "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
+    "sourceHash": "33e1d7367421250f061f427e01bf623f5e6ffa25b9b224fa3c8fbb7e5009aea5",
+    "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>; 抽取{{value1}}张卡牌"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
@@ -2758,6 +2776,18 @@
     "source": "Kindled Courage",
     "sourceHash": "429116a6d69a81454dca40800bfe3186a5193f7f92bf6bef7f14a77814cec869",
     "text": "燃起勇气"
+  },
+  "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
+    "sourceHash": "7443a153d8a1c353f92eab418665b724f9937b5b7ded7c041db04b0924c15d5f",
+    "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1>"
+  },
+  "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
+    "sourceHash": "14fe93f86c0b45177cd1fad64f9501424d00a4fc4b5c94d3d8e4485e10f9c114",
+    "text": "<keyword0>净化</keyword0>盟友的<keyword1>致盲</keyword1> / 抽取一张<keyword2>光</keyword2>卡牌"
   },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
@@ -2848,6 +2878,18 @@
     "source": "Left Luggage",
     "sourceHash": "862bfce6cd84d8d66fde34d23b2681acb44b2589d8707cff8d3aa047cc535b34",
     "text": "寄存行李"
+  },
+  "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "57f689f38160599e1b013aea23c2ca4f877eb8f169abbadc90aaf5f10d36392e",
+    "text": "从弃牌堆抽取一张盟友的卡牌 / 获得{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile",
+    "sourceHash": "3569abe4e8981db9a743a5a43694098b39e81e4525052753c7106a6f314d8943",
+    "text": "从弃牌堆抽取一张盟友的卡牌"
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,

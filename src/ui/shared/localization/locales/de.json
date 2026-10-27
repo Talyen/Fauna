@@ -1391,6 +1391,12 @@
     "sourceHash": "081b54acbfaa1232bc2f38721b594469d9fe184d2119359f319cf65ddfad5296",
     "text": "Wahrer Kurs"
   },
+  "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
+    "sourceHash": "2967825bad102d6af5004d87110a956d1a98376ca5b5cb31190551278b077a79",
+    "text": "Ziehe Karten: {{value0}} / <keyword0>Reinige</keyword0> <keyword1>Blindheit</keyword1> von Verbündeten"
+  },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
     "source": "Voyager’s Rest",
@@ -1498,6 +1504,12 @@
     "source": "Springbound",
     "sourceHash": "92f05e25724f5397b6ac79e649770a4d1ecfade6dd32d354a0815310949c5527",
     "text": "Frühlingssprung"
+  },
+  "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
+    "sourceHash": "8bb8a4ac5b54e50dbfdf012eefde3cce31853aa8fa5d07e916c17d665df51d37",
+    "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Einfrieren</keyword1>-Aufbau von Verbündeten / Erhalte {{value0}}% <keyword2>Ausweichen</keyword2> bis zum nächsten Zug"
   },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
@@ -2723,6 +2735,12 @@
     "sourceHash": "844421f9e578518e065a89956e87ed6a8934ba45c2bf9da5ec1ea270826ef5ee",
     "text": "Wasser erinnert sich"
   },
+  "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
+    "sourceHash": "5817e1312d2762c1ac2dd644179eda179e47df4ce480343065531c78f7ebd9f0",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her; Ziehe Karten: {{value1}}"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
@@ -2758,6 +2776,18 @@
     "source": "Kindled Courage",
     "sourceHash": "94d8c99e15257c0336e51de8b8f5fd8cc7516b11833b45c045b7b7e96473b8c7",
     "text": "Entfachter Mut"
+  },
+  "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
+    "sourceHash": "7a9e0edece162e15588b97af237b2aed949d16d6c419c210bb3e5c8dc4ebc439",
+    "text": "<keyword0>Reinige</keyword0> <keyword1>Blindheit</keyword1> von Verbündeten"
+  },
+  "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
+    "sourceHash": "7e019c2567b6a08d7feca1a4f41840061eb7ef45e563ac4ee48b722d58d7431b",
+    "text": "<keyword0>Reinige</keyword0> <keyword1>Blindheit</keyword1> von Verbündeten / Ziehe eine <keyword2>Licht</keyword2>-Karte"
   },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
@@ -2848,6 +2878,18 @@
     "source": "Left Luggage",
     "sourceHash": "9a8e8887cce2408b04fb8b98349d82b7b6ff738bef859df81e2056fdb32612dd",
     "text": "Aufbewahrtes Gepäck"
+  },
+  "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "555d4c28388874c7caa0a64071ab607966f57b6eee433bfee9e238b6d05ddb28",
+    "text": "Ziehe die Karte eines Verbündeten aus deiner Ablage / Erhalte {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile",
+    "sourceHash": "e6da01839966e30d2dcfdd80898b4f54358ce8db61067c45bf60e3ee768576a0",
+    "text": "Ziehe die Karte eines Verbündeten aus deiner Ablage"
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,

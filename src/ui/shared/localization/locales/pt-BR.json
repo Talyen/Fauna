@@ -1391,6 +1391,12 @@
     "sourceHash": "53dd93ab6e7b7ad2844e0aff345631fdc51ba23ef96646891fa98d770470badd",
     "text": "Rumo certo"
   },
+  "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
+    "sourceHash": "d0cf5c9d5ba8c4db6c3c5650f677d119c997d46b58a94459bfef96a55be81413",
+    "text": "Cartas compradas: {{value0}} / <keyword0>Purifica</keyword0> a <keyword1>Cegueira</keyword1> dos aliados"
+  },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
     "source": "Voyager’s Rest",
@@ -1498,6 +1504,12 @@
     "source": "Springbound",
     "sourceHash": "7ef143881e85fce3a3f061e4d5a11caaf2167b4ca04fb51c2eae2a615dc2e86a",
     "text": "Salto primaveril"
+  },
+  "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
+    "sourceHash": "904d8bfdeffa6c4506efe35de5383df3ff694461dbdb05ff19e5a889f7fcbe2e",
+    "text": "<keyword0>Purifica</keyword0> todo o acúmulo de <keyword1>Congelamento</keyword1> dos aliados / Recebe {{value0}}% de <keyword2>Esquiva</keyword2> até o próximo turno"
   },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
@@ -2723,6 +2735,12 @@
     "sourceHash": "21e57f7f2d6d9ef233729925df008192bdacc64d5d42dad5b53b83d88039d10a",
     "text": "A água se lembra"
   },
+  "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
+    "sourceHash": "adcbcee3d8c07ea6a8b632ee1329c5cddb035afad526ec70fc018ed5b958e89b",
+    "text": "Restaura {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados; Cartas compradas: {{value1}}"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
@@ -2758,6 +2776,18 @@
     "source": "Kindled Courage",
     "sourceHash": "3f9dc2943f0c37b6e732cdba6603e04f9b51d2da9eeda47c479a295393962347",
     "text": "Coragem acesa"
+  },
+  "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
+    "sourceHash": "ff6d2734e800b2e603036129983cfe20dabc1db2d9f6f4fc657c27b16aa8be19",
+    "text": "<keyword0>Purifica</keyword0> a <keyword1>Cegueira</keyword1> dos aliados"
+  },
+  "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
+    "sourceHash": "29f4aa7e2d5a437a767566d26af1f82692a9ebc061edeb6da1095d87d9104772",
+    "text": "<keyword0>Purifica</keyword0> a <keyword1>Cegueira</keyword1> dos aliados / Compre uma carta de <keyword2>Luz</keyword2>"
   },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
@@ -2848,6 +2878,18 @@
     "source": "Left Luggage",
     "sourceHash": "70e2177e4e7c3c2a2ad4821eb57eff36c6e45f32b134861b4cca9edad408b236",
     "text": "Bagagem guardada"
+  },
+  "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "f7b57df62de24d6b954cf6e876becf61bbead4d0a0adca49b1a9147732f17cdc",
+    "text": "Compre uma carta de aliado do seu descarte / Recebe {{value0}} de <keyword0>Mana</keyword0>"
+  },
+  "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile",
+    "sourceHash": "654ea1f09179a09d70ee28a06a086ebc13819aa4c406434e03759358e7f2ff85",
+    "text": "Compre uma carta de aliado do seu descarte"
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,

@@ -1391,6 +1391,12 @@
     "sourceHash": "c82a76c7f0c0ca2e40b28191184c681c70148ff929e488b3d40cdde648364adc",
     "text": "正しい方角"
   },
+  "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
+    "sourceHash": "318831461599ab86ca91a7f79b4cb2abc19eabf00f42190c7bed676969a121fb",
+    "text": "引くカード：{{value0}}枚 / 味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0>"
+  },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
     "source": "Voyager’s Rest",
@@ -1498,6 +1504,12 @@
     "source": "Springbound",
     "sourceHash": "80d9eec5125bf492a99245722ce2fce520f5824a70dda357cf0cfb406840103d",
     "text": "春の跳躍"
+  },
+  "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
+    "sourceHash": "d1bb227c72de0f1342a64096a0c214ce192bcc4455f8a5b597fb7cf36ffcfbaf",
+    "text": "味方の<keyword1>凍結</keyword1>の蓄積をすべて<keyword0>浄化</keyword0> / 次のターンまで{{value0}}%の<keyword2>回避</keyword2>を獲得"
   },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
@@ -2723,6 +2735,12 @@
     "sourceHash": "f19d1152e2eee9aa939e24f93f9219bd03a6f7d4cc02dc67d1fde654ae8163c7",
     "text": "水は覚えている"
   },
+  "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
+    "sourceHash": "d6c03d58c58b7c451111c31075695366670656ec74a31aeea8be23ed3ee446e0",
+    "text": "すべての味方の<keyword0>体力</keyword0>を{{value0}}回復; カードを{{value1}}枚引く"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
@@ -2758,6 +2776,18 @@
     "source": "Kindled Courage",
     "sourceHash": "5d08450e51c9f5c7d70b23a1dcb63cec3178c9b92cfb721159c760bf1a1f6ae9",
     "text": "灯る勇気"
+  },
+  "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
+    "sourceHash": "d86e16a6b7d5c6593cb35c506cac804f1c0680032a396361c40a0172355fbe56",
+    "text": "味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0>"
+  },
+  "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
+    "sourceHash": "9cb5ef69e07a7b1ea031f480901b30d8e0aa26b82acee11f7f91f0a462988066",
+    "text": "味方の<keyword1>盲目</keyword1>を<keyword0>浄化</keyword0> / <keyword2>光</keyword2>カードを1枚引く"
   },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
@@ -2848,6 +2878,18 @@
     "source": "Left Luggage",
     "sourceHash": "2aeca850469fdec17cab731855f8d095d83285d1d464455d77af8bca545f621a",
     "text": "預け荷物"
+  },
+  "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "bb5bc931023b4b3440b806a3b6272205999dbfb99e133ed65c8887c5cb3bc047",
+    "text": "捨て札から味方のカードを1枚引く / <keyword0>マナ</keyword0>を{{value0}}獲得"
+  },
+  "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile",
+    "sourceHash": "9f8c85fc3515f2d199623d443b926340700d5aaf1d0900af1d1b6e09afc6a01d",
+    "text": "捨て札から味方のカードを1枚引く"
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,

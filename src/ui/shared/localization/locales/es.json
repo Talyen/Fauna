@@ -1391,6 +1391,12 @@
     "sourceHash": "c89d46e15b7f9e7e02eef3eef95957cfd25d0e5489ac4c97ed44be12a2592898",
     "text": "Rumbo certero"
   },
+  "content.card.aerostat-true-bearing.veaf42325c0fd2664.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards / <keyword0>Cleanse</keyword0> <keyword1>Blind</keyword1> from allies",
+    "sourceHash": "a375b1e85ee2e249ca06aba2adf2239e073a491c0f75e2305bd2ae975f9454ee",
+    "text": "Cartas robadas: {{value0}} / <keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados"
+  },
   "content.card.aerostat-voyagers-rest.name": {
     "reviewed": true,
     "source": "Voyager’s Rest",
@@ -1498,6 +1504,12 @@
     "source": "Springbound",
     "sourceHash": "d5e9c4918afead056d100ba19b8e51fbd4fe046a3683b6a4328609aa9d9976ce",
     "text": "Salto primaveral"
+  },
+  "content.card.arabesca-springbound.v5eba84eb65777f78.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies / Gain {{value0}}% <keyword2>Dodge</keyword2> until next turn",
+    "sourceHash": "212c701f0780f4caef068912b3b9f923bec709f4848effb230082530cef0e468",
+    "text": "<keyword0>Purifica</keyword0> toda la acumulación de <keyword1>Congelación</keyword1> de los aliados / Obtiene un {{value0}}% de <keyword2>Esquiva</keyword2> hasta el próximo turno"
   },
   "content.card.bloomquail-draw.name": {
     "reviewed": true,
@@ -2723,6 +2735,12 @@
     "sourceHash": "b57bfad3c6bd5d6c4b6bb12a1edbbd41bc95364ac7366404ed9e1e557e602f28",
     "text": "El agua recuerda"
   },
+  "content.card.stillara-water-remembers.v4279f7c86731d0c4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; Draw {{value1}} card",
+    "sourceHash": "b554e34c6224b983282de703e00cbed888e672d09b1311c768e932f517674afb",
+    "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados; Cartas robadas: {{value1}}"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
@@ -2758,6 +2776,18 @@
     "source": "Kindled Courage",
     "sourceHash": "4eaaa4476dcae7717d1b755b3fe6d6270fab6a65828da8ddb5f914d5bb76905b",
     "text": "Valor encendido"
+  },
+  "content.card.tournelle-teamClearBlind.v0ddf672e2bb541c9.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1>",
+    "sourceHash": "9b09ef3cabeb9ef59dabe787976cc6443a00c60db08759c147d97da564bdceea",
+    "text": "<keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados"
+  },
+  "content.card.tournelle-teamClearBlind.v3773c4b157eb06d6.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> allies <keyword1>Blind</keyword1> / Draw a <keyword2>Light</keyword2> card",
+    "sourceHash": "f3ecc5c5f6b82dd21f4ae784e80fd5ef857b442ccad98d271307ce0491881ef6",
+    "text": "<keyword0>Purifica</keyword0> la <keyword1>Ceguera</keyword1> de los aliados / Roba una carta de <keyword2>Luz</keyword2>"
   },
   "content.card.wickwaltz-attack.name": {
     "reviewed": true,
@@ -2848,6 +2878,18 @@
     "source": "Left Luggage",
     "sourceHash": "510c9cd1ecb125496bb35cb79115b4a3cc132bf620d3dc17aa79afa7edbaa198",
     "text": "Equipaje en consigna"
+  },
+  "content.card.wisterelle-left-luggage.v6288e2e3c8ec9d26.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile / Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "c5674729dfae1b5c90da5c5561283af2121921f9cac9e45b6c5b21c58b58cbe4",
+    "text": "Roba una carta de aliado de tu descarte / Obtiene {{value0}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.wisterelle-left-luggage.vf6eff373e638b1ad.rule": {
+    "reviewed": true,
+    "source": "Draw an ally’s card from your Discard pile",
+    "sourceHash": "4396ffdd08dda2db823d007ca7304eea4a74de01c5281929839e9e3d5ce409c4",
+    "text": "Roba una carta de aliado de tu descarte"
   },
   "content.glossary.action-card.definition.rule": {
     "reviewed": true,
