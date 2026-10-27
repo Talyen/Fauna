@@ -449,6 +449,12 @@
     "sourceHash": "55308be388dbaf066a795c69da444d0bf821051bc91139a572741fb8a52576bb",
     "text": "彗星のるつぼ"
   },
+  "content.boon.comet-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> <keyword1>Purged</keyword1> from allies becomes <keyword2>Block</keyword2>",
+    "sourceHash": "0a917ed2a27107ecf520ee13ae7573652c8cee096074cb4bd9c376b9ec5059f7",
+    "text": "味方から<keyword1>強化解除</keyword1>された<keyword0>装甲</keyword0>が<keyword2>ブロック</keyword2>になる"
+  },
   "content.boon.coral-music-box.name": {
     "reviewed": true,
     "source": "Coral Music Box",
@@ -539,6 +545,12 @@
     "sourceHash": "30d1c6e221c5fa081517862a147a92c3a4bf7fec291ebe13234dcaf17ddfe201",
     "text": "日食のリベット"
   },
+  "content.boon.eclipse-rivet.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "dda830783cdc09742de798edfb189fcaeabca117c8de36801da61ef802f8b42d",
+    "text": "味方の<keyword0>装甲</keyword0>が壊れると、他の味方が<keyword1>装甲</keyword1>を{{value0}}獲得"
+  },
   "content.boon.encore-baton.name": {
     "reviewed": true,
     "source": "Encore Baton",
@@ -627,7 +639,7 @@
     "reviewed": true,
     "source": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "sourceHash": "9d3dce683041ad6186a796069d359b0b99ac176c8b3efcfb0d7ebbe0a9f77154",
-    "text": "<keyword0>ブロック</keyword0>は減衰しても<keyword1>アーマー</keyword1>を下回らない"
+    "text": "<keyword0>ブロック</keyword0>は減衰しても<keyword1>装甲</keyword1>を下回らない"
   },
   "content.boon.grafting-needle.name": {
     "reviewed": true,
@@ -640,6 +652,12 @@
     "source": "Grain Flail",
     "sourceHash": "1efb537e714a09b8585ac1234266e166f486849ff691a9d0aef37aa556ab6c46",
     "text": "穀物の脱穀棒"
+  },
+  "content.boon.grain-flail.rule": {
+    "reviewed": true,
+    "source": "Breaking enemy <keyword0>Block</keyword0> also removes their <keyword1>Armor</keyword1>",
+    "sourceHash": "b3dc17ad8c78ac11424358120d50cb39e8419a732e7ab54dcfa37e99dbcc261f",
+    "text": "敵の<keyword0>ブロック</keyword0>を破ると、その敵の<keyword1>装甲</keyword1>も除去"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -700,6 +718,12 @@
     "source": "Honeycomb Frame",
     "sourceHash": "afa974b231fa4f1dd141b05c9c47022410c649e01e6db4650a40f4206fb7afa3",
     "text": "蜂の巣枠"
+  },
+  "content.boon.honeycomb-frame.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Critical Hits</keyword1>",
+    "sourceHash": "dcf8b9f1a21417babb55d0093d3ded86e26ec75820294c1da5f4b4a1a848b79e",
+    "text": "<keyword0>装甲</keyword0>は<keyword1>クリティカル</keyword1>を防ぐ"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -765,7 +789,7 @@
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "85417a766b69a58a839ff8d1d7974aa256a95ad96bd321999026401e7766a6d3",
-    "text": "<keyword1>アーマー</keyword1>を持つ敵の<keyword0>炎上</keyword0>は減衰しない"
+    "text": "<keyword1>装甲</keyword1>を持つ敵の<keyword0>炎上</keyword0>は減衰しない"
   },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
@@ -893,6 +917,12 @@
     "sourceHash": "0efadf54a08535fc6dbbf737c6bed308d27969189523be4bc7017c56c6477273",
     "text": "折り紙の階段"
   },
+  "content.boon.origami-staircase.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} extra <keyword0>Block</keyword0> for each ally with <keyword1>Armor</keyword1>",
+    "sourceHash": "5da3f4d34495c7492125b8870f446e0f8d832378c9866d588435b2c0b0e9372b",
+    "text": "<keyword1>装甲</keyword1>を持つ味方1体につき、味方が追加の<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
     "source": "Paper Lotus",
@@ -946,6 +976,12 @@
     "source": "Pleated Pagoda",
     "sourceHash": "32aec811cdff5cbbcb94b1137dc5e7058e987462fe083341462c8d16f2a30f9a",
     "text": "折りひだの塔"
+  },
+  "content.boon.pleated-pagoda.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
+    "sourceHash": "1049956914230fd758ccf561d9798343fc1089ce230c73de760359aa2ebaa13f",
+    "text": "減衰で失った<keyword0>ブロック</keyword0>の半分が<keyword1>装甲</keyword1>になる"
   },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
@@ -3933,7 +3969,7 @@
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> damage removes an equal amount of <keyword1>Armor</keyword1>",
     "sourceHash": "d8870ad86f51249508605f47a98031c022d0756d479cff3ba0a0a6b5d5d782fa",
-    "text": "<keyword0>炎上</keyword0>ダメージと同量の<keyword1>アーマー</keyword1>を除去"
+    "text": "<keyword0>炎上</keyword0>ダメージと同量の<keyword1>装甲</keyword1>を除去"
   },
   "content.talent.burn.smoke-screen.name": {
     "reviewed": true,
@@ -4593,7 +4629,7 @@
     "reviewed": true,
     "source": "Start each combat with <keyword0>Armor</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
     "sourceHash": "6596a637b784ea1289eca980b58979cac131093498aa2b8a3c10bafda144ad8b",
-    "text": "各戦闘の開始時に<keyword1>最大マナ</keyword1>に等しい<keyword0>アーマー</keyword0>を獲得"
+    "text": "各戦闘の開始時に<keyword1>最大マナ</keyword1>に等しい<keyword0>装甲</keyword0>を獲得"
   },
   "content.talent.mana.manaburn.name": {
     "reviewed": true,
@@ -5037,7 +5073,7 @@
     "reviewed": true,
     "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
     "sourceHash": "2c46d0fd587edb34290565bb93eb5fbba3e6e79a2f705b3b75a90690fc225adf",
-    "text": "敵を<keyword0>スタン</keyword0>させると、その敵の<keyword1>アーマー</keyword1>をすべて除去"
+    "text": "敵を<keyword0>スタン</keyword0>させると、その敵の<keyword1>装甲</keyword1>をすべて除去"
   },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,

@@ -449,6 +449,12 @@
     "sourceHash": "1c0816658405d8ea570790d3922538f0d8ee34aa76b2932155e0359d6536bc55",
     "text": "Кометный тигель"
   },
+  "content.boon.comet-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> <keyword1>Purged</keyword1> from allies becomes <keyword2>Block</keyword2>",
+    "sourceHash": "196fecbed687722b6a4c631a589dae8c6b4e4a81083de354206f173c045bd0b4",
+    "text": "<keyword0>Броня</keyword0>, <keyword1>рассеянная</keyword1> с союзников, превращается в <keyword2>блок</keyword2>"
+  },
   "content.boon.coral-music-box.name": {
     "reviewed": true,
     "source": "Coral Music Box",
@@ -538,6 +544,12 @@
     "source": "Eclipse Rivet",
     "sourceHash": "1df99e3e30b4d411fd395d5c8df74effc1710225d93d91d29afdc939c5b4dd28",
     "text": "Заклёпка затмения"
+  },
+  "content.boon.eclipse-rivet.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "8dbd670ea3d1ce23ff168cd7104c445bcd5334dca8e1a676cca40caefad9be14",
+    "text": "Когда <keyword0>броня</keyword0> союзника ломается, остальные союзники получают {{value0}} <keyword1>брони</keyword1>"
   },
   "content.boon.encore-baton.name": {
     "reviewed": true,
@@ -641,6 +653,12 @@
     "sourceHash": "d9d66cee76d760e73f15f5c986035a25f39de6c5b24c4db6be9a9e7f222595b7",
     "text": "Цеп для обмолота"
   },
+  "content.boon.grain-flail.rule": {
+    "reviewed": true,
+    "source": "Breaking enemy <keyword0>Block</keyword0> also removes their <keyword1>Armor</keyword1>",
+    "sourceHash": "4dcca39a9303b3674071a6034a8af888ee533f806cf4f7271bc93d88ee1d9b12",
+    "text": "Пробитие <keyword0>блока</keyword0> врага также снимает его <keyword1>броню</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -700,6 +718,12 @@
     "source": "Honeycomb Frame",
     "sourceHash": "f150cb3e6a5d2bee87170b6ce77b647a3ab9a66467363a619095e81b2885e2f1",
     "text": "Рамка с сотами"
+  },
+  "content.boon.honeycomb-frame.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Critical Hits</keyword1>",
+    "sourceHash": "2ca364172663f2a38bc7d2633eb4041a531757e8c8e08ffc0c71db4ce68ced9f",
+    "text": "<keyword0>Броня</keyword0> предотвращает <keyword1>критические попадания</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -893,6 +917,12 @@
     "sourceHash": "5e65becb2ebf7537095f98920042b02ebfb317f4d4f064ff72752517804ec187",
     "text": "Лестница оригами"
   },
+  "content.boon.origami-staircase.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} extra <keyword0>Block</keyword0> for each ally with <keyword1>Armor</keyword1>",
+    "sourceHash": "e58cb4853860a31bdd5fda0622b2b197d9062ab0d5cd815124a55fa72a30417e",
+    "text": "Союзники получают {{value0}} дополнительного <keyword0>блока</keyword0> за каждого союзника с <keyword1>бронёй</keyword1>"
+  },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
     "source": "Paper Lotus",
@@ -946,6 +976,12 @@
     "source": "Pleated Pagoda",
     "sourceHash": "21f88960c41c67a0aa40fb757e6e174e6be81c979755862c6360d1e80582011b",
     "text": "Складчатая пагода"
+  },
+  "content.boon.pleated-pagoda.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
+    "sourceHash": "cd8f7ac0da973c7b459b1499123f4dbc9c5286942a81a0ee0cb26a434f15afae",
+    "text": "Половина <keyword0>блока</keyword0>, потерянного при угасании, превращается в <keyword1>броню</keyword1>"
   },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,

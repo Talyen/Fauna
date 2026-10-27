@@ -449,6 +449,12 @@
     "sourceHash": "74dc40f9a367a91ea0fec99b7db5a00e777180c3b10498b4215a5bab964992bc",
     "text": "Creuset de comète"
   },
+  "content.boon.comet-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> <keyword1>Purged</keyword1> from allies becomes <keyword2>Block</keyword2>",
+    "sourceHash": "84bbad19eade4fc2d3117a5e230cf3caad9f03133612d5da8e28ec2763637f4d",
+    "text": "L’<keyword0>Armure</keyword0> <keyword1>dissipée</keyword1> sur les alliés devient du <keyword2>Blocage</keyword2>"
+  },
   "content.boon.coral-music-box.name": {
     "reviewed": true,
     "source": "Coral Music Box",
@@ -538,6 +544,12 @@
     "source": "Eclipse Rivet",
     "sourceHash": "1309c3345930ae7d5e735e02e5a523801f7bc84db3eeb98883e1731a74bd9738",
     "text": "Rivet d’éclipse"
+  },
+  "content.boon.eclipse-rivet.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "b446ed0a85bff70e0225487b7a301472143a27a0ef36009db1465662084a6f82",
+    "text": "Quand l’<keyword0>Armure</keyword0> d’un allié se brise, les autres alliés gagnent {{value0}} <keyword1>Armure</keyword1>"
   },
   "content.boon.encore-baton.name": {
     "reviewed": true,
@@ -641,6 +653,12 @@
     "sourceHash": "56801c6e89f83a3ac36a18da81c868662d69844d4783a2b18833373d2cdc3422",
     "text": "Fléau à grains"
   },
+  "content.boon.grain-flail.rule": {
+    "reviewed": true,
+    "source": "Breaking enemy <keyword0>Block</keyword0> also removes their <keyword1>Armor</keyword1>",
+    "sourceHash": "81c93b0600982465bf02631f4ea8a8d52a3aaf94c401492503ed132c4ff4f37f",
+    "text": "Briser le <keyword0>Blocage</keyword0> ennemi retire aussi son <keyword1>Armure</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -700,6 +718,12 @@
     "source": "Honeycomb Frame",
     "sourceHash": "7991add0a07eb9ae58fe9341528962eca5273a53ada0d3bc4d05ad50da00d7a0",
     "text": "Cadre de ruche"
+  },
+  "content.boon.honeycomb-frame.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Critical Hits</keyword1>",
+    "sourceHash": "1e1a6c51145c572140cd3f0002ea22d1663955645e93e3cddcd14111cbfe54a9",
+    "text": "L’<keyword0>Armure</keyword0> empêche les <keyword1>coups critiques</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -899,6 +923,12 @@
     "sourceHash": "d19db5ab14efbd4c8f71427ccf347878e0bce1bb624a8c2956a8d66b52bf7831",
     "text": "Escalier d’origami"
   },
+  "content.boon.origami-staircase.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} extra <keyword0>Block</keyword0> for each ally with <keyword1>Armor</keyword1>",
+    "sourceHash": "bba3579766c86844dd2c8798a6a457f90ed977906a207cdfd7070bf9a98baacd",
+    "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0> supplémentaire par allié avec de l’<keyword1>Armure</keyword1>"
+  },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
     "source": "Paper Lotus",
@@ -952,6 +982,12 @@
     "source": "Pleated Pagoda",
     "sourceHash": "e60153887cae5582dd86f240313cb7e1ef9c3a71faee01a24b965dbc9305a18d",
     "text": "Pagode plissée"
+  },
+  "content.boon.pleated-pagoda.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
+    "sourceHash": "ece2c0d7ba699fa0f0993c002da4bbe589a2abd47eb82a12507ceb446763ff68",
+    "text": "La moitié du <keyword0>Blocage</keyword0> perdu par décroissance devient de l’<keyword1>Armure</keyword1>"
   },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,

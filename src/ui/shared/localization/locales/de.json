@@ -449,6 +449,12 @@
     "sourceHash": "3d577ba6875de80de3d108fd173d20320a8413e8d426e5b352f3b8289adccc1d",
     "text": "Kometentiegel"
   },
+  "content.boon.comet-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> <keyword1>Purged</keyword1> from allies becomes <keyword2>Block</keyword2>",
+    "sourceHash": "ed71a1d79dda9a0d50f09c69ffd94c559fa7d8a6eadd31dcdca36d52089d697c",
+    "text": "Von Verbündeten <keyword1>gebannt</keyword1>e <keyword0>Rüstung</keyword0> wird zu <keyword2>Block</keyword2>"
+  },
   "content.boon.coral-music-box.name": {
     "reviewed": true,
     "source": "Coral Music Box",
@@ -538,6 +544,12 @@
     "source": "Eclipse Rivet",
     "sourceHash": "2fa9c20b741879d083504a1bac6fb3ab753bca7366eb0d1f6b0a9909183fc14b",
     "text": "Finsternisniet"
+  },
+  "content.boon.eclipse-rivet.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "3abb55a55a9079731a1731d01171b37fa8f6193d673c4c41889b4d5e61ff2c74",
+    "text": "Wenn die <keyword0>Rüstung</keyword0> eines Verbündeten bricht, erhalten andere Verbündete {{value0}} <keyword1>Rüstung</keyword1>"
   },
   "content.boon.encore-baton.name": {
     "reviewed": true,
@@ -641,6 +653,12 @@
     "sourceHash": "60d165138576fbf7823e224e99d82f9deedc346d48f8e9c162308c1c285c2046",
     "text": "Dreschflegel"
   },
+  "content.boon.grain-flail.rule": {
+    "reviewed": true,
+    "source": "Breaking enemy <keyword0>Block</keyword0> also removes their <keyword1>Armor</keyword1>",
+    "sourceHash": "ec8ab6d856c49a1040f3a5591393bdd66817b8463bddf7c3118fe848a4d2512e",
+    "text": "Das Brechen von gegnerischem <keyword0>Block</keyword0> entfernt auch dessen <keyword1>Rüstung</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -700,6 +718,12 @@
     "source": "Honeycomb Frame",
     "sourceHash": "166d0fb97eff734c9226ff334b459b0a54163f247b4050f4911b270ac0cce64d",
     "text": "Wabenrahmen"
+  },
+  "content.boon.honeycomb-frame.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Critical Hits</keyword1>",
+    "sourceHash": "669a44a2f02eb084afd16e0101e0a77fe81e7355c30dcd337e9c3dae128ad223",
+    "text": "<keyword0>Rüstung</keyword0> verhindert <keyword1>kritische Treffer</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -893,6 +917,12 @@
     "sourceHash": "91c08565b67bcda5c8372dbd4f70ebbbc88fe9c0272defa65d99ad83c8d7ebd5",
     "text": "Origamitreppe"
   },
+  "content.boon.origami-staircase.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} extra <keyword0>Block</keyword0> for each ally with <keyword1>Armor</keyword1>",
+    "sourceHash": "07fa65f6ef11666079ce56d02d4001b29168a20e600cd952cc4daed25c277429",
+    "text": "Verbündete erhalten für jeden Verbündeten mit <keyword1>Rüstung</keyword1> {{value0}} zusätzlichen <keyword0>Block</keyword0>"
+  },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
     "source": "Paper Lotus",
@@ -946,6 +976,12 @@
     "source": "Pleated Pagoda",
     "sourceHash": "ecc3a33a5f1f92992ff035b98545814b1a0c7312236cccbf8e984838f2335608",
     "text": "Faltenpagode"
+  },
+  "content.boon.pleated-pagoda.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
+    "sourceHash": "2db9a6e0c8799eca3ae8867c59a00fcef191ab07de65e957cc76530e8c6ea18d",
+    "text": "Die Hälfte des durch Verfall verlorenen <keyword0>Blocks</keyword0> wird zu <keyword1>Rüstung</keyword1>"
   },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,

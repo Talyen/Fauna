@@ -449,6 +449,12 @@
     "sourceHash": "cae395120bb74cbafc8148a79c83d023ddda90490842d9097022e3bb58a21e33",
     "text": "彗星坩埚"
   },
+  "content.boon.comet-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> <keyword1>Purged</keyword1> from allies becomes <keyword2>Block</keyword2>",
+    "sourceHash": "8b139cac2cb912e56f1228a6f8e33c92c28053dce76a5a256e6931c51b8012a3",
+    "text": "从盟友身上<keyword1>驱散</keyword1>的<keyword0>护甲</keyword0>转化为<keyword2>格挡</keyword2>"
+  },
   "content.boon.coral-music-box.name": {
     "reviewed": true,
     "source": "Coral Music Box",
@@ -538,6 +544,12 @@
     "source": "Eclipse Rivet",
     "sourceHash": "b47b600a17ec9d6d645256428135103127005b998f9c10c34982b6b51dc3fd52",
     "text": "日蚀铆钉"
+  },
+  "content.boon.eclipse-rivet.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "d9598bf6319f94e2cb1bbe2db00213c89b0fcf81fc98d52ff72f592c69b34be0",
+    "text": "盟友的<keyword0>护甲</keyword0>被击破时，其他盟友获得{{value0}}点<keyword1>护甲</keyword1>"
   },
   "content.boon.encore-baton.name": {
     "reviewed": true,
@@ -641,6 +653,12 @@
     "sourceHash": "88e57ee02970360671a3dd3f27cd47f503fdf9a0e21f5f88e106cddb925a1fa4",
     "text": "脱粒连枷"
   },
+  "content.boon.grain-flail.rule": {
+    "reviewed": true,
+    "source": "Breaking enemy <keyword0>Block</keyword0> also removes their <keyword1>Armor</keyword1>",
+    "sourceHash": "d7cf8cf9567352c317fd130e10ac030292eaba1e8d7e5be02ddf07595616a7a3",
+    "text": "击破敌人的<keyword0>格挡</keyword0>时也会移除其<keyword1>护甲</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -700,6 +718,12 @@
     "source": "Honeycomb Frame",
     "sourceHash": "e2c5175fc43199b505eef4f5418ed1187ddd28a13133013fb8385f643c206d53",
     "text": "蜂巢框"
+  },
+  "content.boon.honeycomb-frame.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Critical Hits</keyword1>",
+    "sourceHash": "fef704ac0c0b2fe542d6eb820a059113da72d7bcf2e6b82adbfaef93c1de87ee",
+    "text": "<keyword0>护甲</keyword0>可防止<keyword1>暴击</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -893,6 +917,12 @@
     "sourceHash": "2284e96193e5103e409ceb90d56f4b379fad473b41744e25016fa1f56d4897d9",
     "text": "折纸楼梯"
   },
+  "content.boon.origami-staircase.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} extra <keyword0>Block</keyword0> for each ally with <keyword1>Armor</keyword1>",
+    "sourceHash": "42e3ff44d25a31dfad478489bfed46aa0441b121091986e4b0b950d5e17c02d4",
+    "text": "每有一名拥有<keyword1>护甲</keyword1>的盟友，盟友额外获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
     "source": "Paper Lotus",
@@ -946,6 +976,12 @@
     "source": "Pleated Pagoda",
     "sourceHash": "00afb12d89650d4f7b5c32e142eb889dffb9b20292dc4fbc06ee018095e0ea62",
     "text": "折纹宝塔"
+  },
+  "content.boon.pleated-pagoda.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
+    "sourceHash": "85bfa2bfefb578c64122f1e3fa9baf1b8f7d40d26c0682be5baab678ed735d06",
+    "text": "因衰减失去的<keyword0>格挡</keyword0>有一半转化为<keyword1>护甲</keyword1>"
   },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,

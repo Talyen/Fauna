@@ -449,6 +449,12 @@
     "sourceHash": "d2a02d69759b3d9c6004c7907c40565e4161125caba54b973f6ea9ede5f51707",
     "text": "Cadinho de cometa"
   },
+  "content.boon.comet-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> <keyword1>Purged</keyword1> from allies becomes <keyword2>Block</keyword2>",
+    "sourceHash": "b31f1733170d4af8bd21015bcbc8ec70af3d5a275a69c9056681bed43f61f784",
+    "text": "<keyword0>Armadura</keyword0> <keyword1>expurgada</keyword1> de aliados se torna <keyword2>Bloqueio</keyword2>"
+  },
   "content.boon.coral-music-box.name": {
     "reviewed": true,
     "source": "Coral Music Box",
@@ -538,6 +544,12 @@
     "source": "Eclipse Rivet",
     "sourceHash": "7963a4b9974395a9c9a2eefab01312731cb452c4b89893543dba38a29d50a4a4",
     "text": "Rebite do eclipse"
+  },
+  "content.boon.eclipse-rivet.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "cf561fd372203e6e0e9e1f53efbba9b63bd538dbaf0a7e184c065fde8e715a9c",
+    "text": "Quando a <keyword0>Armadura</keyword0> de um aliado quebra, os outros aliados recebem {{value0}} de <keyword1>Armadura</keyword1>"
   },
   "content.boon.encore-baton.name": {
     "reviewed": true,
@@ -641,6 +653,12 @@
     "sourceHash": "7ecde3f8eff09c8eaf063cfb658e37a4317f6e6403a36c9dae73ee469e3f09a0",
     "text": "Mangual de grãos"
   },
+  "content.boon.grain-flail.rule": {
+    "reviewed": true,
+    "source": "Breaking enemy <keyword0>Block</keyword0> also removes their <keyword1>Armor</keyword1>",
+    "sourceHash": "62ca23754e2abc4e875a29bedddb51548bd01754a82c44c6455b50ee48b9379f",
+    "text": "Quebrar o <keyword0>Bloqueio</keyword0> inimigo também remove sua <keyword1>Armadura</keyword1>"
+  },
   "content.boon.groves-favor.name": {
     "reviewed": true,
     "source": "Grove's Favor",
@@ -700,6 +718,12 @@
     "source": "Honeycomb Frame",
     "sourceHash": "782fbe68e4904cb50e73a10455169245999e7c2bae0cbff0a44f51fe860ab9d9",
     "text": "Quadro de favo"
+  },
+  "content.boon.honeycomb-frame.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Armor</keyword0> prevents <keyword1>Critical Hits</keyword1>",
+    "sourceHash": "801b8ecd8571e5c42fc5e6cd7f072e2f154069505c29a616de1186d2331de162",
+    "text": "<keyword0>Armadura</keyword0> impede <keyword1>acertos críticos</keyword1>"
   },
   "content.boon.icy-heart.name": {
     "reviewed": true,
@@ -893,6 +917,12 @@
     "sourceHash": "dc11c249441c9c5472c21ff2fb5fb71f341ee95100236542479fa71c7aa00985",
     "text": "Escadaria de origami"
   },
+  "content.boon.origami-staircase.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} extra <keyword0>Block</keyword0> for each ally with <keyword1>Armor</keyword1>",
+    "sourceHash": "09221ec090a6c2defe8394e7e1a9e4280e153483241255514d81524c11ec8649",
+    "text": "Aliados recebem {{value0}} de <keyword0>Bloqueio</keyword0> extra para cada aliado com <keyword1>Armadura</keyword1>"
+  },
   "content.boon.paper-lotus.name": {
     "reviewed": true,
     "source": "Paper Lotus",
@@ -946,6 +976,12 @@
     "source": "Pleated Pagoda",
     "sourceHash": "a862ca3d210fa8d0167cc3068c65a48ef1fb4e385dfa3f53d23ffb1a87a5ddf2",
     "text": "Pagoda pregueada"
+  },
+  "content.boon.pleated-pagoda.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
+    "sourceHash": "847c69708c509a41362d04bdc52adc040766f813f8a984f7cbccd0ba645cc0e7",
+    "text": "Metade do <keyword0>Bloqueio</keyword0> perdido por decaimento se torna <keyword1>Armadura</keyword1>"
   },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
