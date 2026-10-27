@@ -2417,11 +2417,41 @@
     "sourceHash": "67ce9d6a43ccd096543f1304f3076ac576af54d13078ffda67086275837eafea",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.tournelle-attack.name": {
+    "reviewed": true,
+    "source": "Valiant Challenge",
+    "sourceHash": "84e7fa844d9077f2cf53a3dd0bf8c75557caf3876feb1db514fa277aa4311d3e",
+    "text": "勇敢な挑戦"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "reviewed": true,
+    "source": "Safe Passage",
+    "sourceHash": "bd5abb22aa62525d1a4d023af75444ad9991b6cc8110ff623943e8b1e8374ebc",
+    "text": "安全な道"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "reviewed": true,
+    "source": "Kindled Courage",
+    "sourceHash": "5d08450e51c9f5c7d70b23a1dcb63cec3178c9b92cfb721159c760bf1a1f6ae9",
+    "text": "灯る勇気"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "reviewed": true,
+    "source": "Ember Pirouette",
+    "sourceHash": "99237ad6aeb883a9bf76d0d6b2dfa6d8f5cf6d8849c3aa721d36fb5ff32ee752",
+    "text": "熾火のピルエット"
+  },
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "4a0902b694c9e314b8939a93f2164a99db1a90a01510961376f6d478de814d1a",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "reviewed": true,
+    "source": "Thermal Rise",
+    "sourceHash": "67dc13438c0c60da68b7236b7ef4dd678941d42502d43d1b807a2545025a6c77",
+    "text": "熱の上昇"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2446,6 +2476,30 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "d02aa965ada781b5d160c3a20d5d6cd395998d2157b05a4c3eb1f2799169c3f6",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "reviewed": true,
+    "source": "Saffron Screen",
+    "sourceHash": "36a198953c00dc52d0bfed3ad6813c4c899375ada40c9f6a5099e41f500b1732",
+    "text": "サフランの幕"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "reviewed": true,
+    "source": "Forgotten Junction",
+    "sourceHash": "ac4cea155b3f9a31570cc1b7a3f5ba285509b2565b880b4d4c8b570d26306564",
+    "text": "忘れられた分岐点"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "reviewed": true,
+    "source": "Lantern Fare",
+    "sourceHash": "305f2b0a63aec33551b574c5147588735f4e28a50595b46296fc03f044349141",
+    "text": "ランタンの乗車券"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "reviewed": true,
+    "source": "Left Luggage",
+    "sourceHash": "2aeca850469fdec17cab731855f8d095d83285d1d464455d77af8bca545f621a",
+    "text": "預け荷物"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

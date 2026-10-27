@@ -2417,11 +2417,41 @@
     "sourceHash": "80e4f7459a1145c0aceffab163413b05c054382c1af5aa17aca8b830d3a9c0a1",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
   },
+  "content.card.tournelle-attack.name": {
+    "reviewed": true,
+    "source": "Valiant Challenge",
+    "sourceHash": "cd514c4b1646bddcdd0a52b61db3751177fad46d29d1ba005587fb98d80c61c5",
+    "text": "英勇挑战"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "reviewed": true,
+    "source": "Safe Passage",
+    "sourceHash": "17a78b5a6087523eee8844e8e6e00f472c8f59117401a66da43b4d8698639099",
+    "text": "安全通行"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "reviewed": true,
+    "source": "Kindled Courage",
+    "sourceHash": "429116a6d69a81454dca40800bfe3186a5193f7f92bf6bef7f14a77814cec869",
+    "text": "燃起勇气"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "reviewed": true,
+    "source": "Ember Pirouette",
+    "sourceHash": "4c442dfac054e4f0481ced97f748fbd4ab799558c12ecbf06598defe0ed76f65",
+    "text": "余烬旋舞"
+  },
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "fa88aaa877f09ae25634bbeb88a44cb286fd4f5f5b1398cb3b6fa1f2ef54edc0",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "reviewed": true,
+    "source": "Thermal Rise",
+    "sourceHash": "7c554fc9d3fb6481af538ca12278e1b6e7f57ecf8516ad08d71d9b833d792507",
+    "text": "热流上升"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2446,6 +2476,30 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "96abcf90bd50f0475f2b2ab0c5765fdc1de9f0e432ecd12617768157dbc22ef7",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "reviewed": true,
+    "source": "Saffron Screen",
+    "sourceHash": "49053290140083ac4844045b1d956e43d116dd5035379cd88569cd3af4ecbb6c",
+    "text": "藏红屏障"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "reviewed": true,
+    "source": "Forgotten Junction",
+    "sourceHash": "963e4d64f413740e8ba5e2e76e2305b65ececcfedcca6956ac8125566dc54410",
+    "text": "遗忘的岔口"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "reviewed": true,
+    "source": "Lantern Fare",
+    "sourceHash": "cfc51b57c9b2f51b58b7fc7a2376e580b434b5336ce0c8c5c3b660fe11661988",
+    "text": "灯笼车票"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "reviewed": true,
+    "source": "Left Luggage",
+    "sourceHash": "862bfce6cd84d8d66fde34d23b2681acb44b2589d8707cff8d3aa047cc535b34",
+    "text": "寄存行李"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

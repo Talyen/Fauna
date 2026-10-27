@@ -2417,11 +2417,41 @@
     "sourceHash": "ae397fb38f658e5a4e5133bcbdae0988a1259addf4b000a00e2b7411030bac17",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.card.tournelle-attack.name": {
+    "reviewed": true,
+    "source": "Valiant Challenge",
+    "sourceHash": "a494a2b1d084e058f661934dcec18cb7878152e940ab23d02e9f6e361b1c7749",
+    "text": "Доблестный вызов"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "reviewed": true,
+    "source": "Safe Passage",
+    "sourceHash": "7f2a0ebc10b570a39a1b62aec71157a6ba0f59eb3159bd925040be09cd2ba389",
+    "text": "Безопасный проход"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "reviewed": true,
+    "source": "Kindled Courage",
+    "sourceHash": "d812526b5289166d85deff476cf1e19c047ffdd7f5bbc53c3390e1a237611b58",
+    "text": "Разожжённая смелость"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "reviewed": true,
+    "source": "Ember Pirouette",
+    "sourceHash": "f051184ac24406b78481331666264d6b7d2610341b84e989a3a347e6b5ccfd8f",
+    "text": "Пируэт уголька"
+  },
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "4fff7e4426718b5eb9a1a7edf59304e6cf4491ee4de3159ed397b2bc90d517f5",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "reviewed": true,
+    "source": "Thermal Rise",
+    "sourceHash": "2d15f3435d91b78fdab40fe28a124b0e734b5eba8e89c121001e070139824d7c",
+    "text": "Восходящий поток"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2446,6 +2476,30 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "59cf8bbab7841de4f6f87b361421530108123d9bbc9728a06a356a467765867c",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "reviewed": true,
+    "source": "Saffron Screen",
+    "sourceHash": "1efb2705a5955558aedb12043866a35fc98326fad2a58fafa51613cc3e84eb6c",
+    "text": "Шафрановая завеса"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "reviewed": true,
+    "source": "Forgotten Junction",
+    "sourceHash": "42a341dc36f57885684369a7e97e9be463bfd7286b806d8c9c9c62be61b5bfbe",
+    "text": "Забытый перекрёсток"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "reviewed": true,
+    "source": "Lantern Fare",
+    "sourceHash": "008afeb333af4ee505fc7ccbe3addb4f18ece43d1da5b01899ce1b562c4d173c",
+    "text": "Фонарный билет"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "reviewed": true,
+    "source": "Left Luggage",
+    "sourceHash": "2d0ad9e30b2407c435a1f3f8f6d9086998ec6cdeab4cf4b776ce1d315042f77f",
+    "text": "Оставленный багаж"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,

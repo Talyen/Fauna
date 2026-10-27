@@ -2417,11 +2417,41 @@
     "sourceHash": "ae708bdd576adb2e8246c6390944186a50166794915d15804b31e5b9ec1693f5",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
   },
+  "content.card.tournelle-attack.name": {
+    "reviewed": true,
+    "source": "Valiant Challenge",
+    "sourceHash": "606a655277bfe360dd2969fc2d2627b935b754b0a4a8d404f459e1ab4789fa0f",
+    "text": "Desafío valiente"
+  },
+  "content.card.tournelle-swapLowest.name": {
+    "reviewed": true,
+    "source": "Safe Passage",
+    "sourceHash": "0102b380f73320b944fe84e9d3c8d12bc3690051590a6623a5668c7ef1546093",
+    "text": "Paso seguro"
+  },
+  "content.card.tournelle-teamClearBlind.name": {
+    "reviewed": true,
+    "source": "Kindled Courage",
+    "sourceHash": "4eaaa4476dcae7717d1b755b3fe6d6270fab6a65828da8ddb5f914d5bb76905b",
+    "text": "Valor encendido"
+  },
+  "content.card.wickwaltz-attack.name": {
+    "reviewed": true,
+    "source": "Ember Pirouette",
+    "sourceHash": "9843f7a84f410610c4cd939b86eb2f1ebb97757833ae54cdc7a5fc94c5986514",
+    "text": "Pirueta de brasa"
+  },
   "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "9f469777ac5ad353b26fa60acf45a9b9614448bee8f7edb485be34c3898deece",
     "text": "Inflige {{value0}} de daño de <keyword0>Quemadura</keyword0> a todos los enemigos"
+  },
+  "content.card.wickwaltz-draw.name": {
+    "reviewed": true,
+    "source": "Thermal Rise",
+    "sourceHash": "c21609a79ef5d33b4e9a06bbb605fb571ebd1b3c06d6fbebfa5dd4e78be98347",
+    "text": "Ascenso térmico"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -2446,6 +2476,30 @@
     "source": "Draw {{value0}} card; Gain {{value1}} <keyword0>Mana</keyword0>",
     "sourceHash": "cabd689b98b05c1fd5d94905a588c3031c68f4e2916a27b6e8c83b706cf86e2a",
     "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.wickwaltz-guard.name": {
+    "reviewed": true,
+    "source": "Saffron Screen",
+    "sourceHash": "42219df9b0ca66426a43620b0528858bdc59253262e7f441da56df5563615ce2",
+    "text": "Pantalla de azafrán"
+  },
+  "content.card.wisterelle-forgotten-junction.name": {
+    "reviewed": true,
+    "source": "Forgotten Junction",
+    "sourceHash": "ea4f06c11b0e44e991da1594e7f5a35ee61fbab153f9d7f92ef29c2f7c8cc784",
+    "text": "Cruce olvidado"
+  },
+  "content.card.wisterelle-lantern-fare.name": {
+    "reviewed": true,
+    "source": "Lantern Fare",
+    "sourceHash": "77a4335418f7d1439459789aa04d4b4161786cf5a18ffe49a75a997d5485fc7d",
+    "text": "Pasaje de linterna"
+  },
+  "content.card.wisterelle-left-luggage.name": {
+    "reviewed": true,
+    "source": "Left Luggage",
+    "sourceHash": "510c9cd1ecb125496bb35cb79115b4a3cc132bf620d3dc17aa79afa7edbaa198",
+    "text": "Equipaje en consigna"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
