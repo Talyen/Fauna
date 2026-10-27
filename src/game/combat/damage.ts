@@ -109,6 +109,35 @@ export function* negateAttack(
 
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number; dealt: number };
 
+/** Supplemental hits cannot repeat an attack, start retaliation or retrigger these Boons. */
+function* boonHitFollowups(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  type: DamageType,
+  events: GameEvent[],
+  options: DamagePacket,
+  attack: boolean,
+): Resolution<void> {
+  if (
+    isEnemy(source) ||
+    !isEnemy(target) ||
+    source.health <= 0 ||
+    target.health <= 0 ||
+    options.origin === "boon"
+  )
+    return;
+  if (type === "freeze" && attack && state.boons.includes("frostglass-die"))
+    yield* reaction("hit", state, source, target, boonRule("frostglass-die").damage, "burn", events, {
+      origin: "boon",
+    });
+  if (type === "water" && state.boons.includes("reef-diadem")) {
+    const amount = Math.round(ensureCombat(source).thorns / boonRule("reef-diadem").divisor);
+    if (amount > 0 && source.health > 0 && target.health > 0)
+      yield* reaction("hit", state, source, target, amount, "nature", events, { origin: "boon" });
+  }
+}
+
 export function* bounce(
   state: GameState,
   source: Combatant,
@@ -358,6 +387,10 @@ export function* resolveHit(
       affectedStatus: "freeze",
       text: `${unitName(target)} nullifies Freeze damage`,
     });
+    if (attack && alliedSource && !alliedTarget && state.boons.includes("frostglass-die"))
+      yield* reaction("hit", state, source, target, boonRule("frostglass-die").damage, "burn", events, {
+        origin: "boon",
+      });
     return { outcome: "landed", lost: 0, dealt: 0 };
   }
   const nextPhysical =
@@ -436,6 +469,8 @@ export function* resolveHit(
     !armorFirst && armorApplies(state, target, type, source, options)
       ? armoredDamage(damage + blocked, stats.armor)
       : damage + blocked;
+  if (alliedTarget && depletedBlock && damage > 0 && state.boons.includes("glassleaf-shield"))
+    damage = Math.round(damage / boonRule("glassleaf-shield").divisor);
   if (!armorFirst && armorApplies(state, target, type, source, options)) {
     const reduced = armoredDamage(damage, stats.armor);
     armorReducedDamage = reduced < damage;
@@ -565,6 +600,7 @@ export function* resolveHit(
       yield* reaction("controlRewards", state, source, target, type, events);
   }
   if (!policy.buildup && effectDamage > 0) yield* poisonStun(context, effectDamage);
+  yield* boonHitFollowups(state, source, target, type, events, options, attack);
   if (
     criticalBonusDamage > 0 &&
     alliedSource &&

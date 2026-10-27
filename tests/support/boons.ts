@@ -1,5 +1,15 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "bellows-heart": "Healing allies adds 1 Burn to each Burning enemy",
+  "leafwing-shuttlecock": "When an ally Dodges an attack, deal 2 Stun damage to the attacker",
+  "soot-brush": "Cleansing Burn also Cleanses Blind",
+  "echo-ocarina": "When an ally Dodges, other allies gain 10% Dodge until their next turn",
+  "glassleaf-shield": "When allied Block breaks, halve the remaining damage",
+  "harvest-shears": "When an enemy falls, their Bleed spreads to another enemy",
+  "frostglass-die": "Freeze hits also deal 2 Burn damage",
+  "reef-diadem": "Water hits deal half your Thorns as extra Nature damage",
+  "chromatic-viol": "Attacks deal 1 extra damage for each harmful effect on the enemy",
+  "mirror-locket": "Leech grants Block equal to half the Health restored",
   "reef-incense-tile": "Water hits spread Blind to another enemy",
   "lava-cameo": "Burn on enemies with Armor does not decay",
   "velvet-whisk": "Food grants its targets 20% Dodge until their next turn",

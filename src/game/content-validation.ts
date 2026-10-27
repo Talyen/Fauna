@@ -144,7 +144,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(card.id, "species", "Shared Food must use the supported neutral consumable rules");
     if (card.species !== null && card.consume)
       error(card.id, "consume", "Permanent creature kits cannot consume their required slots");
-    if (card.species === null ? !card.consume : !species.has(card.species))
+    if (card.species === null ? !card.consume : !speciesById.has(card.species))
       error(card.id, "species", "Unknown owner.");
     if (card.cost !== 1) error(card.id, "cost", "Every ability must cost exactly 1 Mana.");
     if (!Number.isSafeInteger(card.value) || card.value < 1 || card.value > 1_000_000)

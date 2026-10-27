@@ -6,6 +6,25 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "bellows-heart": boon({ burn: 1 }, (p) => `Healing allies adds ${p.burn} Burn to each Burning enemy`),
+    "leafwing-shuttlecock": boon(
+      { damage: 2 },
+      (p) => `When an ally Dodges an attack, deal ${p.damage} Stun damage to the attacker`,
+    ),
+    "soot-brush": boon({}, () => "Cleansing Burn also Cleanses Blind"),
+    "echo-ocarina": boon(
+      { dodge: 10 },
+      (p) => `When an ally Dodges, other allies gain ${p.dodge}% Dodge until their next turn`,
+    ),
+    "glassleaf-shield": boon({ divisor: 2 }, () => "When allied Block breaks, halve the remaining damage"),
+    "harvest-shears": boon({}, () => "When an enemy falls, their Bleed spreads to another enemy"),
+    "frostglass-die": boon({ damage: 2 }, (p) => `Freeze hits also deal ${p.damage} Burn damage`),
+    "reef-diadem": boon({ divisor: 2 }, () => "Water hits deal half your Thorns as extra Nature damage"),
+    "chromatic-viol": boon(
+      { damage: 1 },
+      (p) => `Attacks deal ${p.damage} extra damage for each harmful effect on the enemy`,
+    ),
+    "mirror-locket": boon({ divisor: 2 }, () => "Leech grants Block equal to half the Health restored"),
     "reef-incense-tile": boon({}, () => "Water hits spread Blind to another enemy"),
     "lava-cameo": boon({}, () => "Burn on enemies with Armor does not decay"),
     "velvet-whisk": boon(

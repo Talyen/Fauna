@@ -7,7 +7,15 @@ import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
-import { ensureCombat, unitName, STACK_LIMIT, gainGold, removeArmor, type Combatant } from "./state";
+import {
+  ensureCombat,
+  unitName,
+  STACK_LIMIT,
+  gainGold,
+  removeArmor,
+  grantTemporaryDodge,
+  type Combatant,
+} from "./state";
 import type { packetPolicy, DamagePacket } from "./policy";
 import { reaction, type Resolution } from "./operations";
 import { applyResolvedStatus } from "./status-reactions";
@@ -46,9 +54,26 @@ export function* dodgeResponse(
   });
   // The Dodge is committed even if its first follow-up causes a knockout.
   if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
+  if (alliedTarget && state.boons.includes("echo-ocarina")) {
+    const allies = battlefield(state, "player");
+    if (allies.some((ally) => ally.id === target.id))
+      for (const ally of allies)
+        if (ally.id !== target.id && ally.health > 0)
+          grantTemporaryDodge(ally, boonRule("echo-ocarina").dodge, events);
+  }
   if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
     yield* reaction("restoreHealth", target, talentRule("dodge.catch-breath").amount, events, false, state);
   if (alliedTarget) {
+    if (
+      retaliate &&
+      isEnemy(source) &&
+      source.health > 0 &&
+      target.health > 0 &&
+      state.boons.includes("leafwing-shuttlecock")
+    )
+      yield* reaction("hit", state, target, source, boonRule("leafwing-shuttlecock").damage, "stun", events, {
+        origin: "boon",
+      });
     if (
       target.health > 0 &&
       source.health > 0 &&
@@ -223,6 +248,22 @@ export function* damageRewards(
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target),
     stats = ensureCombat(target);
+  if (
+    lost > 0 &&
+    target.health === 0 &&
+    !alliedTarget &&
+    stats.bleed > 0 &&
+    state.boons.includes("harvest-shears")
+  ) {
+    const original = combatantById(state, stats.statusSources.bleed);
+    const bearer =
+      original && !isEnemy(original) && original.health > 0
+        ? original
+        : battlefield(state, "player").find((ally) => ally.health > 0);
+    const recipient = battlefield(state, "enemy").find((enemy) => enemy.id !== target.id && enemy.health > 0);
+    if (bearer && recipient)
+      yield* reaction("applyHarmfulStatus", state, bearer, recipient, stats.bleed, "bleed", events);
+  }
   if (
     policy.attack &&
     alliedSource &&

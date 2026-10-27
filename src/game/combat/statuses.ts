@@ -354,6 +354,20 @@ export function* removeEffects(
         status === "reflectBurn" ? "reflect" : status === "nullifyFreeze" ? "nullify" : status,
       );
     }
+  if (
+    kind === "cleanse" &&
+    state &&
+    !isEnemy(unit) &&
+    state.boons.includes("soot-brush") &&
+    removedStatuses.includes("burn") &&
+    stats.blind
+  ) {
+    remember("blind");
+    clearSelectedStatus(unit, "blind");
+    delete stats.statusSources.blind;
+    removedStatuses.push("blind");
+    cleansed++;
+  }
   for (const affectedStatus of new Set(removedStatuses))
     events.push({
       kind: "status",

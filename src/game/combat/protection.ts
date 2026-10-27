@@ -55,6 +55,19 @@ export function* restoreHealth(
   }
   if (gain > 0 && state?.phase === "battle" && !isEnemy(unit)) {
     const stats = ensureCombat(unit);
+    if (unit.health > 0 && state.boons.includes("bellows-heart")) {
+      for (const enemy of battlefield(state, "enemy"))
+        if (unit.health > 0 && enemy.health > 0 && ensureCombat(enemy).burn > 0)
+          yield* reaction(
+            "applyHarmfulStatus",
+            state,
+            unit,
+            enemy,
+            boonRule("bellows-heart").burn,
+            "burn",
+            events,
+          );
+    }
     if (stats.bleed > 0 && state.boons.includes("yarrow-salve-tin"))
       yield* reaction("removeEffects", unit, "cleanse", 1, events, state, "bleed", source);
     if (source && !isEnemy(source) && source.health > 0 && state.boons.includes("grafting-needle")) {
@@ -251,9 +264,18 @@ export function* leechHealth(
     if (hasTalent(state, "leech.desperate-siphon") && unit.health < maximumHealth(unit) / 2) amount *= 2;
   }
   const before = unit.health;
-  const excess = restoration(unit, healingValue(state, unit, amount)).excess;
+  const leechRestoration = restoration(unit, healingValue(state, unit, amount));
+  const excess = leechRestoration.excess;
   yield* reaction("restoreHealth", unit, amount, events, false, state);
   const restored = unit.health - before;
+  if (!isEnemy(unit) && unit.health > 0 && leechRestoration.gain > 0 && state.boons.includes("mirror-locket"))
+    yield* reaction(
+      "grantBlock",
+      state,
+      unit,
+      Math.round(leechRestoration.gain / boonRule("mirror-locket").divisor),
+      events,
+    );
   if (!isEnemy(unit) && restored > 0) {
     if (talentChance(state, "leech.blood-debt", events)) gainGold(state, restored, events);
     if (

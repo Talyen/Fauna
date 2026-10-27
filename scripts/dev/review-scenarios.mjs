@@ -50,6 +50,10 @@ export const SCENARIOS = [
   "new-boons-2",
   "new-boons-3",
   "new-boons-4",
+  "chromatic-boons-1",
+  "chromatic-boons-2",
+  "chromatic-boons-3",
+  "chromatic-boons-4",
   "journey-results",
   "death-door",
   "inspection",
@@ -138,6 +142,16 @@ export async function reviewScenario(server, name) {
       ["paper-lotus", "origami-staircase", "wax-foundation-mold"],
       ["eclipse-rivet", "poppy-seed-grinder", "peace-knot"],
       ["coral-music-box", "tidecrest-hairpin", "moonboat-toy"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
+  if (name.startsWith("chromatic-boons-")) {
+    const groups = [
+      ["bellows-heart", "leafwing-shuttlecock", "soot-brush"],
+      ["echo-ocarina", "glassleaf-shield", "harvest-shears"],
+      ["frostglass-die", "reef-diadem", "chromatic-viol"],
+      ["mirror-locket"],
     ];
     game = bossReward();
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };

@@ -6,7 +6,7 @@ import { physicalBonus } from "../ability-rules";
 import type { DamageType } from "../content";
 import type { GameState } from "../types";
 import type { DamagePacket } from "./policy";
-import { maximumHealth, type Combatant } from "./state";
+import { maximumHealth, harmfulStatuses, type Combatant } from "./state";
 
 /** Current attack facts only; no RNG, flag consumption, events or child reactions. */
 export function modifiedDamage(
@@ -23,6 +23,17 @@ export function modifiedDamage(
   const stats = target.combat!;
   const cardLeech = "cardLeech" in options && options.cardLeech;
   let damage = value;
+  if (
+    options.origin === "ability" &&
+    alliedSource &&
+    !alliedTarget &&
+    state.boons.includes("chromatic-viol")
+  ) {
+    const effects = harmfulStatuses.filter(
+      (status) => stats.controlled === status || Number(stats[status]) > 0,
+    );
+    damage += effects.length * boonRule("chromatic-viol").damage;
+  }
   if (attack && alliedSource) {
     if (type === "water") {
       if (hasTalent(state, "water.pressure")) damage += talentRule("water.pressure").amount;
