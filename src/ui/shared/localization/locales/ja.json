@@ -3263,6 +3263,18 @@
     "sourceHash": "5384bdf330a826607912ab4e1060cd4a7ff70bd06f47552c378fe776145337ce",
     "text": "ターン{{turn}}。マナを{{amount}}回復。"
   },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "81eeb8f1b13904fd0add6d4e5df4796262a7e3548893cc7e8ce586217c1015e8",
+    "text": "{{actor}}が{{card}}を使用。"
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "a59cd9c0f42242e871db5e6f6b9fcce212e643364f3c93ab7010cfd2ce19b67f",
+    "text": "{{card}}を使用"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

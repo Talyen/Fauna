@@ -3263,6 +3263,18 @@
     "sourceHash": "3432d275f020761a5c16082331e7d582809225e8acbb95a276a4f5c15c6c8e6f",
     "text": "Zug {{turn}}. {{amount}} Mana wiederhergestellt."
   },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "64f36f57ed6b84e8107a97e047c0df31bd785ba907bc9c52cf03cdb142b739ef",
+    "text": "{{actor}} setzt {{card}} ein."
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "aa329f980c1c7d7c94d1decea7ecba51b598e5356874e3624f598af31e262866",
+    "text": "Setze {{card}} ein"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

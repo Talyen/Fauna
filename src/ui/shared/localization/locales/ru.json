@@ -3263,6 +3263,18 @@
     "sourceHash": "211938f6fc251306ce49a030ea7f25d70a412e60071effaac54ecada068970cd",
     "text": "Ход {{turn}}. Восстановлено маны: {{amount}}."
   },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "181d0dbffd53f9752ac14765c605a00e856fdd09109befc8aa3413d1a3a06d81",
+    "text": "{{actor}} применяет «{{card}}»."
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "fba73d6df3f1e3f99fd60053bb10c2c3b0f3cb1757529eb2e850ca16ced1b468",
+    "text": "Использовать «{{card}}»"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

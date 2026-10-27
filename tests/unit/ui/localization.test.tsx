@@ -155,6 +155,34 @@ it("translates recognized combat announcements and preserves unfamiliar event te
   expect(eventPresentation(game, damage, createMessageReader("en", {}))).toBe(damage.text);
 });
 
+it("localizes an authored ability and Food announcement without guessing unknown cards", () => {
+  const game = run();
+  const actor = game.team[0]!;
+  const actorName = species(actor.species).name;
+  const action = game.cards.find((card) => card.ownerId === actor.id)!;
+  const ability = definition(action.definitionId);
+  const apple = definition("food-apple");
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: actorName, text: "Créature traduite" },
+    [`content.card.${ability.id}.name`]: { source: ability.name, text: "Capacité traduite" },
+    [`content.card.${apple.id}.name`]: { source: apple.name, text: "Pomme" },
+  });
+  const announcement = {
+    kind: "action" as const,
+    actionType: "support" as const,
+    actorId: actor.id,
+    text: `${actorName} uses ${ability.name}.`,
+  };
+  expect(eventPresentation(game, announcement, reader)).toBe("Créature traduite utilise Capacité traduite.");
+  expect(eventPresentation(game, { ...announcement, text: "Use Apple" }, reader)).toBe("Utilise Pomme");
+  expect(eventPresentation(game, { ...announcement, text: `${actorName} uses Unknown.` }, reader)).toBe(
+    `${actorName} uses Unknown.`,
+  );
+  expect(eventPresentation(game, { ...announcement, actorId: "missing" }, reader)).toBe(announcement.text);
+  expect(eventPresentation(game, announcement, createMessageReader("en", {}))).toBe(announcement.text);
+});
+
 it("translates turn and Mana announcements without inventing their values", () => {
   const game = run();
   const reader = createMessageReader("fr", {

@@ -3311,6 +3311,18 @@
     "sourceHash": "d2cce0d7b3d71188828a1fc9dff179573070c18d0eaf77bd7e7d360f568c661c",
     "text": "Tour {{turn}}. {{amount}} Mana récupéré."
   },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "12d194f5838d50c492b08b9bd4b5edd71297efc8fb4bfd4f3c56e09524486ac8",
+    "text": "{{actor}} utilise {{card}}."
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "1bd9da8d302403d4fb7d85826c8e0b3253e1a1cab9abf1e0dcb18815ff55552d",
+    "text": "Utilise {{card}}"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

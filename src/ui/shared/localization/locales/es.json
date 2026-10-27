@@ -3263,6 +3263,18 @@
     "sourceHash": "3d67c4df9c11d023b7a7424a80d4fa2f31ac2c849ecf11061d829b491ad91c3e",
     "text": "Turno {{turn}}. Se recuperan {{amount}} de maná."
   },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "fb6d33713521c5299ea95f83b8e34263b283e7d97f91757b0acf9577274ac023",
+    "text": "{{actor}} usa {{card}}."
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "54e7020902ddec8bf20091242883ef1ec2c50cdbb9729eaee1eca124022301b5",
+    "text": "Usa {{card}}"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

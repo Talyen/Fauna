@@ -3263,6 +3263,18 @@
     "sourceHash": "7a31d7b5fa425f4a432ac11603dc793f1e346f169a2c6ec8e3f0e5e9f0c43297",
     "text": "第{{turn}}回合。恢复{{amount}}点法力。"
   },
+  "log.useCard": {
+    "reviewed": true,
+    "source": "{{actor}} uses {{card}}.",
+    "sourceHash": "742c9cea264457b5431305a1272a2d87b3e0d082b5f8046bb54de199a11c9275",
+    "text": "{{actor}}使用了{{card}}。"
+  },
+  "log.useFood": {
+    "reviewed": true,
+    "source": "Use {{card}}",
+    "sourceHash": "081130a0d2d6d7b065991fe0eeec88a7b9a4e1878a29a3964289e7b0d7c6c5a6",
+    "text": "使用{{card}}"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",

@@ -329,6 +329,12 @@
   "log.turnRestored": {
     "text": "Turn {{turn}}. {{amount}} Mana restored."
   },
+  "log.useCard": {
+    "text": "{{actor}} uses {{card}}."
+  },
+  "log.useFood": {
+    "text": "Use {{card}}"
+  },
   "menu.boons": {
     "text": "Boons"
   },
