@@ -3119,6 +3119,12 @@
     "sourceHash": "a9e3540659d1e9860a1f571bf5c2cda7bb629560f98b1f568fc5f514501e0514",
     "text": "Bouclier solaire"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "dedc1883990cd775f13e9ae09e28711bec61a3e377f48b25951bd0376c565d8c",
+    "text": "Lorsque des attaques épuisent votre <keyword0>Blocage</keyword0>, <keyword1>renvoyez</keyword1> {{value0}}% du <keyword2>Blocage</keyword2> perdu en dégâts de <keyword3>Lumière</keyword3>"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -4072,6 +4078,12 @@
     "source": "Rupture",
     "sourceHash": "a79746d5ddf280ba65b3efc86b5d4d35f7bc6f7879e7ba6f0a362660b84e9e1d",
     "text": "Rupture"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "c2e5a4fe08b0b45343384fbe7f967f763400b9835fe66e9b7a8670dc1785e95e",
+    "text": "Les <keyword1>coups critiques</keyword1> <keyword0>Physiques</keyword0> font exploser le <keyword2>Saignement</keyword2>"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,

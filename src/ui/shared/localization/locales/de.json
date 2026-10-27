@@ -3071,6 +3071,12 @@
     "sourceHash": "b9deb6e2983d1c9bdf080ef6511c6d2fc095646aea746a6373be06342abb267c",
     "text": "Sonnengeküsster Schild"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "82b176ed13e6f88eadb862fd2712756137a219cb4079f088451e89843f378896",
+    "text": "Wenn Angriffe deinen <keyword0>Block</keyword0> aufbrauchen, <keyword1>reflektiere</keyword1> {{value0}}% des verlorenen <keyword2>Blocks</keyword2> als <keyword3>Licht</keyword3>-Schaden"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -4024,6 +4030,12 @@
     "source": "Rupture",
     "sourceHash": "114e6bc21ae8392724716afaee5ceaab1a4cf8bb193d4eef3ad79dcd2388b96f",
     "text": "Aufbrechen"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "61018638d8f76b22ad5b958b2f2ee0b5b4e46c2a1028d142acd971579baace62",
+    "text": "<keyword0>Physische</keyword0> <keyword1>kritische Treffer</keyword1> lassen <keyword2>Blutung</keyword2> detonieren"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,

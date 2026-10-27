@@ -3071,6 +3071,12 @@
     "sourceHash": "dd58a0d2656062562df883648eaf196a10ab288bcd3a033288ff575bb2363aa9",
     "text": "Опалённый солнцем щит"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "71ad409b6ecf8e0b05f03b30f65efaf513706dbe254ef335610aab0b0bd8044d",
+    "text": "Когда атаки исчерпывают ваш <keyword0>блок</keyword0>, <keyword1>отразите</keyword1> {{value0}}% потерянного <keyword2>блока</keyword2> как урон <keyword3>светом</keyword3>"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -4024,6 +4030,12 @@
     "source": "Rupture",
     "sourceHash": "eac173c1760b143e8ae3d4c66bd9611fac49e1a02adcee7dbbb90382901c53a0",
     "text": "Разрыв"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "6203b1b5ec1b74cd24e2baf93ce4a77c3136a5176563007814005a08e7e0ea23",
+    "text": "<keyword0>Физические</keyword0> <keyword1>критические попадания</keyword1> взрывают <keyword2>кровотечение</keyword2>"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,

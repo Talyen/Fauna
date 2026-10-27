@@ -3071,6 +3071,12 @@
     "sourceHash": "50ec0e254061f00d06860027f044b535737e0355fa849db1cc1a5b168f90180d",
     "text": "Escudo solar"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "1fd3eed6e6cf7c1e2b70174e006542dead63d55813bb0193375e3b91728c3b6c",
+    "text": "Cuando los ataques agotan tu <keyword0>Bloqueo</keyword0>, <keyword1>refleja</keyword1> un {{value0}}% del <keyword2>Bloqueo</keyword2> perdido como daño de <keyword3>Luz</keyword3>"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -4024,6 +4030,12 @@
     "source": "Rupture",
     "sourceHash": "d6623609e8293985bd1b216deccf272c8d1e1c440ebebc83995bfbc55bf9c397",
     "text": "Rotura"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "bc1dfde5ca7fd949f5448fd8c4a01cbe06458126b69fc9666ea885f798ceea83",
+    "text": "Los <keyword1>golpes críticos</keyword1> <keyword0>Físicos</keyword0> detonan el <keyword2>Sangrado</keyword2>"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,

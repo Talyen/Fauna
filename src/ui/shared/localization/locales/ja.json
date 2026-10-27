@@ -3071,6 +3071,12 @@
     "sourceHash": "2c5685ff783da1a158ebe13ba69b7165df997117b8a7f7a9cde13e83d44415a0",
     "text": "日の光の盾"
   },
+  "content.talent.block.sun-struck-shield.rule": {
+    "reviewed": true,
+    "source": "When attacks deplete your <keyword0>Block</keyword0>, <keyword1>reflect</keyword1> {{value0}}% of <keyword2>Block</keyword2> lost as <keyword3>Light</keyword3> damage",
+    "sourceHash": "4cb6452ef46c313aeeab6f96d4b2690565fca710d39498a037fea0c96935b746",
+    "text": "攻撃で<keyword0>ブロック</keyword0>が尽きると、失った<keyword2>ブロック</keyword2>の{{value0}}%を<keyword3>光</keyword3>ダメージとして<keyword1>反射</keyword1>"
+  },
   "content.talent.block.venom-ward.name": {
     "reviewed": true,
     "source": "Venom Ward",
@@ -4024,6 +4030,12 @@
     "source": "Rupture",
     "sourceHash": "3820ac49fd78d75bc8b12993bd571379defd978aa1585d94ddbbc1230422cd3e",
     "text": "破裂"
+  },
+  "content.talent.physical.rupture.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> <keyword1>critical hits</keyword1> detonate <keyword2>Bleed</keyword2>",
+    "sourceHash": "ce8f42722921c2495265ad0e6359999618dda2c4e314a73e22d61de3b2ff3272",
+    "text": "<keyword0>物理</keyword0>の<keyword1>クリティカル</keyword1>は<keyword2>出血</keyword2>を爆発させる"
   },
   "content.talent.physical.shield-slam.name": {
     "reviewed": true,
