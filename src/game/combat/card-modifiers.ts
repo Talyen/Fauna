@@ -25,10 +25,22 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
   // A summoner may fall after its Echo Dodges during the same card. The retained
   // Echo receipt still identifies that opponent after it leaves the battlefield.
   let enemies: Set<string> | undefined;
+  let checked = false;
   let dodged = false;
   for (let index = start; index < events.length; index++) {
     const event = events[index]!;
     if (event.kind !== "status" || event.outcome !== "dodge") continue;
+    if (!checked) {
+      checked = true;
+      if (
+        state.battle.enemies.some((enemy) => enemy.id === event.targetId) ||
+        state.battle.minions?.some((unit) => unit.minion.side === "enemy" && unit.id === event.targetId)
+      ) {
+        dodged = true;
+        break;
+      }
+      continue;
+    }
     if (!enemies) {
       enemies = new Set();
       for (const enemy of state.battle.enemies) enemies.add(enemy.id);

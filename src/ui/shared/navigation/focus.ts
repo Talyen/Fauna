@@ -12,12 +12,15 @@ export function returnFocus(opener: HTMLElement | null) {
     opener.focus({ preventScroll: true });
     return;
   }
-  const fallback = [
+  for (const selector of [
     '.hand .action-card:not([aria-disabled="true"])',
     "main button:not(:disabled)",
     ".menu-button",
-  ]
-    .flatMap((selector) => Array.from(document.querySelectorAll<HTMLElement>(selector)))
-    .find(isAvailableFocusTarget);
-  fallback?.focus({ preventScroll: true });
+  ]) {
+    for (const element of document.querySelectorAll<HTMLElement>(selector)) {
+      if (!isAvailableFocusTarget(element)) continue;
+      element.focus({ preventScroll: true });
+      return;
+    }
+  }
 }

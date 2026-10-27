@@ -10,7 +10,6 @@ import type { BattleState, Card, Creature, Enemy, Command } from "./types";
 
 function recipientPool(state: BattleState, def: CardDefinition, mode = cardTargeting(def, state)) {
   if (def.effect === "swapChosen") return state.reserves;
-  if (def.effect === "resurrect") return [...state.team, ...state.reserves];
   return battlefieldView(state, mode === "enemy" ? "enemy" : "player");
 }
 function recipientEligible(unit: Creature | Enemy, def: CardDefinition) {
@@ -24,11 +23,21 @@ function recipientEligible(unit: Creature | Enemy, def: CardDefinition) {
 export function chosenRecipients(state: BattleState, def: CardDefinition) {
   const mode = cardTargeting(def, state);
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return [];
+  if (def.effect === "resurrect") {
+    const recipients: (Creature | Enemy)[] = [];
+    for (const row of [state.team, state.reserves])
+      for (const unit of row) if (recipientEligible(unit, def)) recipients.push(unit);
+    return recipients;
+  }
   return recipientPool(state, def, mode).filter((unit) => recipientEligible(unit, def));
 }
 
-function hasChosenRecipient(state: BattleState, def: CardDefinition, targetId?: string) {
-  const mode = cardTargeting(def, state);
+function hasChosenRecipient(
+  state: BattleState,
+  def: CardDefinition,
+  targetId?: string,
+  mode = cardTargeting(def, state),
+) {
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return false;
   const eligible = (unit: Creature | Enemy) =>
     (targetId === undefined || unit.id === targetId) && recipientEligible(unit, def);
@@ -44,7 +53,7 @@ export function playTargetError(state: BattleState, def: CardDefinition, actorId
   const mode = cardTargeting(def, state);
   if (
     (mode === "enemy" || mode === "ally") &&
-    (targetId === undefined || !hasChosenRecipient(state, def, targetId))
+    (targetId === undefined || !hasChosenRecipient(state, def, targetId, mode))
   )
     return def.effect === "swapChosen"
       ? "Choose a living backup."

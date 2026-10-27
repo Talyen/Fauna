@@ -18,16 +18,16 @@ export interface FeedbackEntry {
   affectedStatus?: StatusEvent["affectedStatus"];
   reservedDigits?: number;
 }
-function feedbackEntry(event: GameEvent, id: string): FeedbackEntry | null {
+function feedbackEntry(event: GameEvent, batch: number | string, index: number): FeedbackEntry | null {
   switch (event.kind) {
     case "damage":
     case "heal":
     case "block":
-      return { ...event, id };
+      return { ...event, id: `${batch}:${index}` };
     case "status":
-      return event.targetId ? { ...event, targetId: event.targetId, id } : null;
+      return event.targetId ? { ...event, targetId: event.targetId, id: `${batch}:${index}` } : null;
     case "knockout":
-      return event.targetId ? { ...event, targetId: event.targetId, id } : null;
+      return event.targetId ? { ...event, targetId: event.targetId, id: `${batch}:${index}` } : null;
     default:
       return null;
   }
@@ -71,6 +71,7 @@ function merge(a: FeedbackEntry, b: FeedbackEntry): FeedbackEntry {
 /** Try the newest eligible burst first, without mutating the published bursts. */
 function combineBursts(bursts: readonly Burst[], targetId: string, entries: FeedbackEntry[], now: number) {
   const next = [...bursts];
+  if (!next.length) return { next, unmatched: entries };
   const unmatched: FeedbackEntry[] = [];
   for (const entry of entries) {
     let found = false;
@@ -108,9 +109,10 @@ export function appendFeedback(
   let bursts = previous.filter((b) => now < b.started + b.lifetime);
   const targets = new Map<string, FeedbackEntry[]>();
   for (const [index, event] of events.entries()) {
-    const entry = feedbackEntry(event, `${id}:${index}`);
+    const entry = feedbackEntry(event, id, index);
     if (!entry) continue;
-    const entries = targets.get(entry.targetId) ?? [];
+    let entries = targets.get(entry.targetId);
+    if (!entries) targets.set(entry.targetId, (entries = []));
     const prior = entries.findIndex(
       (e) =>
         matches(e, entry) &&
@@ -120,7 +122,6 @@ export function appendFeedback(
     );
     if (prior >= 0) entries[prior] = merge(entries[prior]!, entry);
     else entries.push(entry);
-    targets.set(entry.targetId, entries);
   }
   let hasMeaningful = false;
   for (const entries of targets.values()) {
@@ -131,14 +132,18 @@ export function appendFeedback(
   }
   let fallbackShown = false;
   for (const [targetId, raw] of targets) {
-    const meaningful = raw.filter((e) => e.amount !== 0);
-    if (!meaningful.length && (hasMeaningful || fallbackShown)) continue;
-    if (!meaningful.length) fallbackShown = true;
-    const entries = (meaningful.length ? meaningful : raw.slice(0, 1))
-      .sort((a, b) => priority(a) - priority(b))
-      .map((e) =>
+    const entries: FeedbackEntry[] = [];
+    const add = (e: FeedbackEntry) =>
+      entries.push(
         isFeedbackNotice(e) ? e : { ...e, reservedDigits: String(Math.abs(e.amount ?? 0)).length + 1 },
       );
+    for (const entry of raw) if (entry.amount !== 0) add(entry);
+    if (!entries.length && (hasMeaningful || fallbackShown)) continue;
+    if (!entries.length) {
+      fallbackShown = true;
+      add(raw[0]!);
+    }
+    entries.sort((a, b) => priority(a) - priority(b));
     let result = combineBursts(bursts, targetId, entries, now);
     let matchingBursts = 0;
     if (result.unmatched.length && bursts.some((b) => b.targetId === targetId && ++matchingBursts >= 3)) {
@@ -157,21 +162,26 @@ export function appendFeedback(
 /** Action boundaries, rather than proc source IDs, own presentation sequencing. */
 export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
   const frames: GameEvent[][] = [];
+  let frame: GameEvent[] | undefined;
+  let meaningful = false;
   for (const event of events) {
-    if (event.kind === "action" || !frames.length) frames.push([]);
-    frames[frames.length - 1]!.push(event);
+    if (event.kind === "action" || !frame) {
+      if (frame && meaningful) frames.push(frame);
+      frame = [];
+      meaningful = false;
+    }
+    frame.push(event);
+    meaningful ||= !!(
+      (event.kind === "action" && (event.actionType === "attack" || event.actionType === "support")) ||
+      ("targetId" in event &&
+        event.targetId &&
+        (event.kind === "damage" ||
+          event.kind === "heal" ||
+          event.kind === "block" ||
+          event.kind === "knockout" ||
+          event.kind === "status"))
+    );
   }
-  return frames.filter((frame) =>
-    frame.some(
-      (e) =>
-        (e.kind === "action" && (e.actionType === "attack" || e.actionType === "support")) ||
-        ("targetId" in e &&
-          e.targetId &&
-          (e.kind === "damage" ||
-            e.kind === "heal" ||
-            e.kind === "block" ||
-            e.kind === "knockout" ||
-            e.kind === "status")),
-    ),
-  );
+  if (frame && meaningful) frames.push(frame);
+  return frames;
 }
