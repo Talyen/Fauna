@@ -341,6 +341,12 @@
     "sourceHash": "27b172b8743ca9ae484da58a07637eccdff8495b1479bb20b52162256c89e33d",
     "text": "Messingrauchfass"
   },
+  "content.boon.camp-hammock.name": {
+    "reviewed": true,
+    "source": "Camp Hammock",
+    "sourceHash": "9b04c160e90875c3a994083af0078c77b8a3d1045e230f7ed4c776792055e80d",
+    "text": "Lagerhängematte"
+  },
   "content.boon.camp-hammock.rule": {
     "reviewed": true,
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
@@ -376,6 +382,12 @@
     "source": "Playing <keyword0>Food</keyword0> draws a card",
     "sourceHash": "712a20d4921f61f7622d8535cacaaeb510e31ca044f1e2fd5c221c051af6cbe7",
     "text": "Das Spielen von <keyword0>Nahrung</keyword0> zieht eine Karte"
+  },
+  "content.boon.frozen-pocketwatch.name": {
+    "reviewed": true,
+    "source": "Frozen Pocketwatch",
+    "sourceHash": "b3b46fa1c1c99cda781aefbd1b4b2516827e79c9c4dcbac49635359883bf7b69",
+    "text": "Gefrorene Taschenuhr"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
@@ -437,11 +449,35 @@
     "sourceHash": "3b95ee5e51821484b2aa8fec425eb9e6ad84080ddb534e0df027d04de5c4f874",
     "text": "Meteorit"
   },
+  "content.boon.moonboat-toy.name": {
+    "reviewed": true,
+    "source": "Moonboat Toy",
+    "sourceHash": "a377ab922829f8be8b6cb36ce4b7b956ff3cf69617ebd8e13084a178403cdb0b",
+    "text": "Mondbootspielzeug"
+  },
+  "content.boon.moonveil-mask.name": {
+    "reviewed": true,
+    "source": "Moonveil Mask",
+    "sourceHash": "e91163267d38d36d81efd12f2015d9b212e0d4412a45764056b7072d949344e2",
+    "text": "Mondschleiermaske"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "9d8c470f36425122176f79b3d7f04a0d24f93a5d7847f49000141b9f4e3890c8",
     "text": "<keyword0>Nahrungs</keyword0>karten sind doppelt so wirksam"
+  },
+  "content.boon.obsidian-pitcher.name": {
+    "reviewed": true,
+    "source": "Obsidian Pitcher",
+    "sourceHash": "5f684109e1ff5b8d9e3c0957268b27051d4e10f533018963f2ab0f9850b8fd93",
+    "text": "Obsidiankrug"
+  },
+  "content.boon.paper-lotus.name": {
+    "reviewed": true,
+    "source": "Paper Lotus",
+    "sourceHash": "f916cc3ebacf5acaa515b2a0ac3587086d84772406971b41cf959d999396fcdc",
+    "text": "Papierlotus"
   },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
@@ -460,6 +496,18 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "f230babf765104b422f3594117d8c455f8422f6a72dcd0962cdf0a4da8f39bb0",
     "text": "Pestdoktormaske"
+  },
+  "content.boon.prayer-sailboat.name": {
+    "reviewed": true,
+    "source": "Prayer Sailboat",
+    "sourceHash": "52b5ad4ac022563168e444205d20509d84bf1462d7cfd3c7ae360e03b4178529",
+    "text": "Gebetssegelboot"
+  },
+  "content.boon.rain-cape.name": {
+    "reviewed": true,
+    "source": "Rain Cape",
+    "sourceHash": "790888100e5d58d3bfc78a45d3aa4a1071dbe0da4b2498230fabe27af73799e9",
+    "text": "Regenumhang"
   },
   "content.boon.rain-cape.rule": {
     "reviewed": true,

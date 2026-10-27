@@ -341,6 +341,12 @@
     "sourceHash": "04f3bb1cfdae55c87f882f4884d018bea11d4f22c2bbd30c9b59b32125768507",
     "text": "Incensário de latão"
   },
+  "content.boon.camp-hammock.name": {
+    "reviewed": true,
+    "source": "Camp Hammock",
+    "sourceHash": "26d6b91c042373c9891c2fa977cca3ed6e039dcb86dffaa2c549644eb73316e9",
+    "text": "Rede de acampamento"
+  },
   "content.boon.camp-hammock.rule": {
     "reviewed": true,
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
@@ -376,6 +382,12 @@
     "source": "Playing <keyword0>Food</keyword0> draws a card",
     "sourceHash": "56fec9338290ae20ab4a1af1920d45aadc9a896195f8952586960eda60af2872",
     "text": "Jogar <keyword0>Comida</keyword0> compra uma carta"
+  },
+  "content.boon.frozen-pocketwatch.name": {
+    "reviewed": true,
+    "source": "Frozen Pocketwatch",
+    "sourceHash": "f0cc15051c8fbd20e5a1962c672388f654af66808309e8453380dee8c0dddbbe",
+    "text": "Relógio de bolso congelado"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
@@ -437,11 +449,35 @@
     "sourceHash": "9ee6b3291cf72a741575f4f5d66babf82cdf5488a48bb14481c56a4d597a7bce",
     "text": "Meteorito"
   },
+  "content.boon.moonboat-toy.name": {
+    "reviewed": true,
+    "source": "Moonboat Toy",
+    "sourceHash": "23f69cfea821675ab9c7269d469c04bab9cf1c9b6257534c29f0d5a4b438eed0",
+    "text": "Barquinho lunar de brinquedo"
+  },
+  "content.boon.moonveil-mask.name": {
+    "reviewed": true,
+    "source": "Moonveil Mask",
+    "sourceHash": "af1760f66425b2c186283f0cc95269995676a4832c25529a1fc402b94e4ce85b",
+    "text": "Máscara do véu lunar"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "0f983afa2d7e1cedfc684abbd2738b9cd1d900363f63dd58f436ac8249b77fdf",
     "text": "Cartas de <keyword0>Comida</keyword0> são duas vezes mais eficazes"
+  },
+  "content.boon.obsidian-pitcher.name": {
+    "reviewed": true,
+    "source": "Obsidian Pitcher",
+    "sourceHash": "61b30c7746f5c432a0d3055204d585dd4e6b2878d1ace5dc3e2ed9ad6dd128da",
+    "text": "Jarra de obsidiana"
+  },
+  "content.boon.paper-lotus.name": {
+    "reviewed": true,
+    "source": "Paper Lotus",
+    "sourceHash": "3e3ec27a4ebe9cc8811af7937e6fc3638c1b3b6999f2ff5ab1dda213b73b5e04",
+    "text": "Lótus de papel"
   },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
@@ -460,6 +496,18 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "5fb4fbe087e270d0e1b61186025ade1fdc966a8a242bbbea3145c6c2d35aa451",
     "text": "Máscara do médico da peste"
+  },
+  "content.boon.prayer-sailboat.name": {
+    "reviewed": true,
+    "source": "Prayer Sailboat",
+    "sourceHash": "2d9cff5d403e169c8720ab4a462fad9a6d834100b8e057e8afc7ab24413d845e",
+    "text": "Veleiro de oração"
+  },
+  "content.boon.rain-cape.name": {
+    "reviewed": true,
+    "source": "Rain Cape",
+    "sourceHash": "686b7fc510d3e5d25ab80d15ed4c1480ffffb0290ec548ec81d98bee05578aa2",
+    "text": "Capa de chuva"
   },
   "content.boon.rain-cape.rule": {
     "reviewed": true,

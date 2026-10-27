@@ -353,6 +353,12 @@
     "sourceHash": "0b572366da476a1ef71d0a44a7f714e96f1e97a39b64c0d0318aaae24c87507f",
     "text": "Encensoir de laiton"
   },
+  "content.boon.camp-hammock.name": {
+    "reviewed": true,
+    "source": "Camp Hammock",
+    "sourceHash": "d79ab8885237fd36f6aa9ec9fd5914fd7140a098a44a61a17d8e47598d3829df",
+    "text": "Hamac de camp"
+  },
   "content.boon.camp-hammock.rule": {
     "reviewed": true,
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
@@ -388,6 +394,12 @@
     "source": "Playing <keyword0>Food</keyword0> draws a card",
     "sourceHash": "2a6ed4d8e76b5db352449cf74feab42a3eccab30ecaa6183ecaae130e16bb725",
     "text": "Jouer une carte <keyword0>Nourriture</keyword0> permet de piocher une carte"
+  },
+  "content.boon.frozen-pocketwatch.name": {
+    "reviewed": true,
+    "source": "Frozen Pocketwatch",
+    "sourceHash": "9056b7fe8beab0a6ce0dfe490ff4358e335acf19b2356c7762937d4173f6f597",
+    "text": "Montre à gousset gelée"
   },
   "content.boon.gemmed-scabbard.rule": {
     "reviewed": true,
@@ -473,11 +485,35 @@
     "sourceHash": "0191ce0358ac6e595036410d4df17b5852f1ff7d2efe385cc1b16d610dac167c",
     "text": "<keyword0>Purification</keyword0> affecte tous les alliés"
   },
+  "content.boon.moonboat-toy.name": {
+    "reviewed": true,
+    "source": "Moonboat Toy",
+    "sourceHash": "502b8bd863be846df278338aa64c9472ae8e5418ce53f2cfd07277154eab11f2",
+    "text": "Bateau lunaire miniature"
+  },
+  "content.boon.moonveil-mask.name": {
+    "reviewed": true,
+    "source": "Moonveil Mask",
+    "sourceHash": "8b777daffa32cb00c48a86760b2cc7306e1bffcea8df562c714fe3b2a8dc6b1b",
+    "text": "Masque de voile lunaire"
+  },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "a6621a8f9e54a895b3e24ab18328bb3cf893f5d95bc3fe4b09fc582986c24c87",
     "text": "Les cartes <keyword0>Nourriture</keyword0> sont deux fois plus efficaces"
+  },
+  "content.boon.obsidian-pitcher.name": {
+    "reviewed": true,
+    "source": "Obsidian Pitcher",
+    "sourceHash": "ae38e4f4f135977098de0833510ade8d1945f0dc843d7429a4c8db5a51cfbad5",
+    "text": "Pichet d’obsidienne"
+  },
+  "content.boon.paper-lotus.name": {
+    "reviewed": true,
+    "source": "Paper Lotus",
+    "sourceHash": "2687d0e524b5fa42e740e1083c3fe76df54c34f502a71dbc43eae0d7ba9ceff4",
+    "text": "Lotus de papier"
   },
   "content.boon.parasitic-bloom.name": {
     "reviewed": true,
@@ -496,6 +532,18 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "2d6fdf1ef7f2a8eb46c8d80b11280e585c07afbef5876fa6caec28035960fd9e",
     "text": "Masque du médecin de peste"
+  },
+  "content.boon.prayer-sailboat.name": {
+    "reviewed": true,
+    "source": "Prayer Sailboat",
+    "sourceHash": "c3ad3a17c5f30d94d885626e8f53c01b29729fd9286f9fc48d8a9e3158def6ce",
+    "text": "Voilier de prière"
+  },
+  "content.boon.rain-cape.name": {
+    "reviewed": true,
+    "source": "Rain Cape",
+    "sourceHash": "63aa082db1a65db42e2894c99ad950a7bc91bc0c95df94a9e9af562e2629da42",
+    "text": "Cape de pluie"
   },
   "content.boon.rain-cape.rule": {
     "reviewed": true,
