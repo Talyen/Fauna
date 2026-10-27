@@ -1883,11 +1883,23 @@
     "sourceHash": "d41e740e576af9377d46898b1e85c63ba37e3a3961049c684a1638cf315bd04d",
     "text": "Habilidades"
   },
+  "inspection.actionHint": {
+    "reviewed": true,
+    "source": "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+    "sourceHash": "02e7fb246c404ebe9ced47c2d6584fc5eb165653dbefd658f76f280fd2bb1684",
+    "text": "Arte da ação. Passe o cursor ou foque nela para ver o nome, o custo de Mana e os efeitos finais."
+  },
   "inspection.cardDetails": {
     "reviewed": true,
     "source": "{{name}} details",
     "sourceHash": "2880eb54ec41eeb648cfc954388d47ab3d1b378256290bc3d0ae0c9b748c844c",
     "text": "Detalhes de {{name}}"
+  },
+  "inspection.creatureHint": {
+    "reviewed": true,
+    "source": "Three abilities and current passive rank. Hover or focus abilities for their details.",
+    "sourceHash": "e6960e8f45c719c92514460962066f4be1274f2e0b562b10b6038bf49fdf5bda",
+    "text": "Três habilidades e o nível passivo atual. Passe o cursor ou foque nas habilidades para ver os detalhes."
   },
   "inspection.stars": {
     "reviewed": true,
@@ -2189,6 +2201,12 @@
     "sourceHash": "eafb5d0a22ee6ba09777398c4dcf5359be577b713be30bde1eda73bcd0247e4a",
     "text": "Escolha um substituto"
   },
+  "overlay.replacementHelp": {
+    "reviewed": true,
+    "source": "Choose a living backup for your knocked-out creature",
+    "sourceHash": "ebe4e475105ee0caf65454a1e0f942731274ba425321d08078c75ba210e6f5ec",
+    "text": "Escolha uma criatura viva da reserva para substituir sua criatura fora de combate"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -2333,6 +2351,12 @@
     "sourceHash": "f466a9e1d9efdd9526a17af6f3d939cc291cd538075e6371e677e567e4f41942",
     "text": "{{summary}}, {{details}}"
   },
+  "progress.keywordLevel": {
+    "reviewed": true,
+    "source": "{{keyword}} level {{level}} progress",
+    "sourceHash": "7e42b717df66f9a17f51388da8a1f5078205451ab3ec12cdb3f93d0424cc844a",
+    "text": "Progresso de {{keyword}}, nível {{level}}"
+  },
   "progress.keywordXpEarned": {
     "reviewed": true,
     "source": "Keyword XP earned",
@@ -2344,6 +2368,18 @@
     "source": "Lv {{level}}",
     "sourceHash": "f6399a44519f633a673032199232124c76173c635fcba6d0365db5adac4a7622",
     "text": "Nv. {{level}}"
+  },
+  "recovery.display": {
+    "reviewed": true,
+    "source": "Fauna could not display this screen; trying again…",
+    "sourceHash": "a253677c80d21e2d9b0b46a8d66e83fef7ae6455c3ac5d6702366e45196d3cd5",
+    "text": "Fauna não conseguiu exibir esta tela; tentando novamente…"
+  },
+  "recovery.save": {
+    "reviewed": true,
+    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
+    "sourceHash": "90e977afe4eb8693ccd1b2b8be4aecf3188716f4933aafc89ef3bb18894449e1",
+    "text": "Não é possível salvar o progresso agora; mantenha Fauna aberto enquanto tenta novamente"
   },
   "recruit.chooseTeam": {
     "reviewed": true,
@@ -2734,6 +2770,12 @@
     "source": "{{keyword}} talents",
     "sourceHash": "b02577ef484df526c381144a643c8918ca7a88d87b4427decac893c237be43a8",
     "text": "Talentos de {{keyword}}"
+  },
+  "talents.detailTitle": {
+    "reviewed": true,
+    "source": "{{keyword}} · {{name}}",
+    "sourceHash": "d25aa3127068dab9408451b413433caf9f830de31dc99c2c657b80afafa9f263",
+    "text": "{{keyword}} · {{name}}"
   },
   "talents.keywordXp": {
     "reviewed": true,

@@ -1883,11 +1883,23 @@
     "sourceHash": "74fcd651f0f0f9efe793b93b6ab6020be449f4481352cd5a7003972ed00fc871",
     "text": "能力"
   },
+  "inspection.actionHint": {
+    "reviewed": true,
+    "source": "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+    "sourceHash": "1e6a64d1d06813b47fe5b0d76c8f6836ba398e8717cc8cc6ab3169d223c0fd18",
+    "text": "アクションのアート。カーソルを合わせるかフォーカスすると、名前、マナコスト、最終効果を確認できます。"
+  },
   "inspection.cardDetails": {
     "reviewed": true,
     "source": "{{name}} details",
     "sourceHash": "631176b231dd25e378d69aaab346a08327d2c3faed63385cdb432de699bb5953",
     "text": "{{name}}の詳細"
+  },
+  "inspection.creatureHint": {
+    "reviewed": true,
+    "source": "Three abilities and current passive rank. Hover or focus abilities for their details.",
+    "sourceHash": "b08b0a6da2933656a428b3ac7252b28490fb8064e2a25001e29a37d277c23cc8",
+    "text": "3つの能力と現在のパッシブランク。能力にカーソルを合わせるかフォーカスすると、詳細を確認できます。"
   },
   "inspection.stars": {
     "reviewed": true,
@@ -2189,6 +2201,12 @@
     "sourceHash": "1e891c5c694e6c58d93cafab53c4993f8c34eab252f0d601932b0314b9910a2b",
     "text": "交代する仲間を選ぶ"
   },
+  "overlay.replacementHelp": {
+    "reviewed": true,
+    "source": "Choose a living backup for your knocked-out creature",
+    "sourceHash": "c146ee4f0f43e6e609cf0f57aafef1af1e285bd3017eb118d28c9d7b45ee287e",
+    "text": "戦闘不能のクリーチャーと交代する、生きている控えを選択"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -2333,6 +2351,12 @@
     "sourceHash": "7406c65db573dad61f5e87a510d860406fbd85ffafb7d14cb8b0c50efb5f4ece",
     "text": "{{summary}}、{{details}}"
   },
+  "progress.keywordLevel": {
+    "reviewed": true,
+    "source": "{{keyword}} level {{level}} progress",
+    "sourceHash": "4cee8317a11c9e8164f6b6e02ff90b13cbe254a3757d655d6e88f93109368439",
+    "text": "{{keyword}}のレベル{{level}}の進行状況"
+  },
   "progress.keywordXpEarned": {
     "reviewed": true,
     "source": "Keyword XP earned",
@@ -2344,6 +2368,18 @@
     "source": "Lv {{level}}",
     "sourceHash": "945a38c9b1f3623fa3a408ab975d6a52d624caf814eac34bd72590e143e7c82f",
     "text": "Lv {{level}}"
+  },
+  "recovery.display": {
+    "reviewed": true,
+    "source": "Fauna could not display this screen; trying again…",
+    "sourceHash": "dda7825baa782002172db08961c9dcc8df0b256e154d049ab697d5d423db16cb",
+    "text": "Faunaはこの画面を表示できませんでした。再試行しています…"
+  },
+  "recovery.save": {
+    "reviewed": true,
+    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
+    "sourceHash": "59c06015219f39f3e051ba153ee5dcd2bc6e5cc77675d1f4c328fd6c24f6563f",
+    "text": "現在、進行状況を保存できません。再試行中はFaunaを開いたままにしてください"
   },
   "recruit.chooseTeam": {
     "reviewed": true,
@@ -2734,6 +2770,12 @@
     "source": "{{keyword}} talents",
     "sourceHash": "6d4446554bd64d5f7357712b5109a1381565c44a80412092301d096d8f56abc9",
     "text": "{{keyword}}のタレント"
+  },
+  "talents.detailTitle": {
+    "reviewed": true,
+    "source": "{{keyword}} · {{name}}",
+    "sourceHash": "59c29e6c48d4b7e49e852a416ad5c8bbaec0545cdea3f7d56b8635da40bee978",
+    "text": "{{keyword}} · {{name}}"
   },
   "talents.keywordXp": {
     "reviewed": true,

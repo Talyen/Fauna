@@ -1883,11 +1883,23 @@
     "sourceHash": "ba1564b54565c8a61c83b5b54617ef2d678be6c5c9ec0f723ef4098dbb341c6d",
     "text": "能力"
   },
+  "inspection.actionHint": {
+    "reviewed": true,
+    "source": "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+    "sourceHash": "ad6c4d74f21420d9af329fc604b39056a6886ca6d3cdc1e7c7250c80652e9c9b",
+    "text": "行动插画。将指针悬停或聚焦以查看名称、法力消耗和最终效果。"
+  },
   "inspection.cardDetails": {
     "reviewed": true,
     "source": "{{name}} details",
     "sourceHash": "2c1418240de383db98769ec3c8a0575bb511a69506eb6dbe9008e8696e85ada6",
     "text": "{{name}}详情"
+  },
+  "inspection.creatureHint": {
+    "reviewed": true,
+    "source": "Three abilities and current passive rank. Hover or focus abilities for their details.",
+    "sourceHash": "a1d70dba9f3dc6b281c521e617de6ea82af333c5560df05466842dde4345e5b1",
+    "text": "三项能力及当前被动等级。将指针悬停或聚焦于能力以查看详情。"
   },
   "inspection.stars": {
     "reviewed": true,
@@ -2189,6 +2201,12 @@
     "sourceHash": "b73f4363337dbaaedd9f9b31d5b9d876c0b96811e6de7b4bf529d7e001d407ac",
     "text": "选择替补"
   },
+  "overlay.replacementHelp": {
+    "reviewed": true,
+    "source": "Choose a living backup for your knocked-out creature",
+    "sourceHash": "b662b371db543b8b96635015567df8760d34e96d21bb617967663312c2ed84d3",
+    "text": "为已倒下的生物选择一名仍存活的替补"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -2333,6 +2351,12 @@
     "sourceHash": "d990598c98d5a55e83f9dfcfef2a61ebcde74eb19725c98425b1a81260a62b4d",
     "text": "{{summary}}，{{details}}"
   },
+  "progress.keywordLevel": {
+    "reviewed": true,
+    "source": "{{keyword}} level {{level}} progress",
+    "sourceHash": "3baae94db2490b99c7412c730ad805f381358fbb67d2d45d50fd40806890a70e",
+    "text": "{{keyword}}等级{{level}}进度"
+  },
   "progress.keywordXpEarned": {
     "reviewed": true,
     "source": "Keyword XP earned",
@@ -2344,6 +2368,18 @@
     "source": "Lv {{level}}",
     "sourceHash": "c001a97226b5aeb23c58411c17b46f27fef50b1ea7c794189b8254177c2adc42",
     "text": "等级 {{level}}"
+  },
+  "recovery.display": {
+    "reviewed": true,
+    "source": "Fauna could not display this screen; trying again…",
+    "sourceHash": "21227b26da5fca3667002f8b3dcef0400b4e1d590487bc626ee0f2d1621f177a",
+    "text": "Fauna无法显示此画面，正在重试…"
+  },
+  "recovery.save": {
+    "reviewed": true,
+    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
+    "sourceHash": "aaa6a491890a118184d9d92bfed6345adea7ac21744c8f8ac92bce4f5965a566",
+    "text": "目前无法保存进度；请在重试期间保持Fauna运行"
   },
   "recruit.chooseTeam": {
     "reviewed": true,
@@ -2734,6 +2770,12 @@
     "source": "{{keyword}} talents",
     "sourceHash": "343c5cdab929710001e9a9ac1a8338dbacebd87c3af64f5e8819098e3a627059",
     "text": "{{keyword}}天赋"
+  },
+  "talents.detailTitle": {
+    "reviewed": true,
+    "source": "{{keyword}} · {{name}}",
+    "sourceHash": "ee5865e754e46d719c08a815ed5905785f1f4cf8af1191b168d0ab59b50bd7d5",
+    "text": "{{keyword}} · {{name}}"
   },
   "talents.keywordXp": {
     "reviewed": true,

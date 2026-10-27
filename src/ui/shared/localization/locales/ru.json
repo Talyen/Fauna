@@ -1883,11 +1883,23 @@
     "sourceHash": "d27559e25324d123747a498a5b382f680829fcbfd507d04c695e9281ee7829f7",
     "text": "Способности"
   },
+  "inspection.actionHint": {
+    "reviewed": true,
+    "source": "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+    "sourceHash": "39543892c3cf930e1ab3f2bdc53e75d67256273c97f1526ddec1c9798a933729",
+    "text": "Изображение действия. Наведите курсор или переведите фокус, чтобы увидеть название, стоимость маны и итоговые эффекты."
+  },
   "inspection.cardDetails": {
     "reviewed": true,
     "source": "{{name}} details",
     "sourceHash": "9e78e995167ef2385a7e654f43f827e3e37a9bb633c0063dd23b3083dc1f23cf",
     "text": "Подробности: {{name}}"
+  },
+  "inspection.creatureHint": {
+    "reviewed": true,
+    "source": "Three abilities and current passive rank. Hover or focus abilities for their details.",
+    "sourceHash": "b476ca007f2b1484f4e16772d0e94c11b20782d1b71ff1dd909ed14d653faac2",
+    "text": "Три способности и текущий ранг пассивного умения. Наведите курсор или переведите фокус на способность, чтобы узнать подробности."
   },
   "inspection.stars": {
     "reviewed": true,
@@ -2189,6 +2201,12 @@
     "sourceHash": "875944a737c869d6912c39d0ac73768c7d98cb6ce0aca031ab4e835ba370eea1",
     "text": "Выберите замену"
   },
+  "overlay.replacementHelp": {
+    "reviewed": true,
+    "source": "Choose a living backup for your knocked-out creature",
+    "sourceHash": "7e71ea502580ecfe6266aaeb2008e2dd197f7f94bc48d342ddf67d71ab96bd8a",
+    "text": "Выберите живое существо из запаса вместо потерявшего сознание"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -2333,6 +2351,12 @@
     "sourceHash": "2c72d6158462849533c72905b6b7d57401e53cccc2df9884bc61a43a0dde14d1",
     "text": "{{summary}}, {{details}}"
   },
+  "progress.keywordLevel": {
+    "reviewed": true,
+    "source": "{{keyword}} level {{level}} progress",
+    "sourceHash": "074845e2e99c6ad0ee8af218a1b10cabb410a419e84bed9818c6eeda7a2f1d9f",
+    "text": "Прогресс: {{keyword}}, уровень {{level}}"
+  },
   "progress.keywordXpEarned": {
     "reviewed": true,
     "source": "Keyword XP earned",
@@ -2344,6 +2368,18 @@
     "source": "Lv {{level}}",
     "sourceHash": "67ced7a1720afe07f00c294eb05127dbba3b334b3bca7a95a7f067454383e6d9",
     "text": "Ур. {{level}}"
+  },
+  "recovery.display": {
+    "reviewed": true,
+    "source": "Fauna could not display this screen; trying again…",
+    "sourceHash": "e864363694ee679c9abed318a6e2d125a3a7227b846aa1221d7302ee836073a1",
+    "text": "Fauna не удалось показать этот экран; повторная попытка…"
+  },
+  "recovery.save": {
+    "reviewed": true,
+    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
+    "sourceHash": "bd77e86301a4c8cd133f091ae674511953a759825095261d556a9f7666ed1e10",
+    "text": "Сейчас не удаётся сохранить прогресс; не закрывайте Fauna, пока выполняется повторная попытка"
   },
   "recruit.chooseTeam": {
     "reviewed": true,
@@ -2734,6 +2770,12 @@
     "source": "{{keyword}} talents",
     "sourceHash": "70d3b6f92a98ae111ad9bd866a5566e6a0c57009f4ab487ee10bf2575733f48a",
     "text": "Таланты: {{keyword}}"
+  },
+  "talents.detailTitle": {
+    "reviewed": true,
+    "source": "{{keyword}} · {{name}}",
+    "sourceHash": "3caa8e48187f0c3e9072200be3bf2d205ab1aad0985300e8da4a528f355623b8",
+    "text": "{{keyword}} · {{name}}"
   },
   "talents.keywordXp": {
     "reviewed": true,

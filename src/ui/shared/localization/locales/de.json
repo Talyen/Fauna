@@ -1883,11 +1883,23 @@
     "sourceHash": "80ebf962e950dd3ad0b63d2482ab499147fa474f95b228e3f7cd34320b37b4ae",
     "text": "Fähigkeiten"
   },
+  "inspection.actionHint": {
+    "reviewed": true,
+    "source": "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+    "sourceHash": "6b147f9d6b52fd730209c20e1d092327669170f792b53f0a9598d23e978ceef7",
+    "text": "Aktionsgrafik. Bewege den Zeiger darüber oder fokussiere sie, um Name, Manakosten und endgültige Effekte zu sehen."
+  },
   "inspection.cardDetails": {
     "reviewed": true,
     "source": "{{name}} details",
     "sourceHash": "b4d1f581e30c3271764550df12fdfc6da6100e536ce42bfe6b6701b3ab10bce5",
     "text": "Details: {{name}}"
+  },
+  "inspection.creatureHint": {
+    "reviewed": true,
+    "source": "Three abilities and current passive rank. Hover or focus abilities for their details.",
+    "sourceHash": "26933007a8479009eb96c46176d29d695ad32f693ee7d8a05e1e8d593cd9e5fa",
+    "text": "Drei Fähigkeiten und der aktuelle Passivrang. Bewege den Zeiger über Fähigkeiten oder fokussiere sie, um Details zu sehen."
   },
   "inspection.stars": {
     "reviewed": true,
@@ -2189,6 +2201,12 @@
     "sourceHash": "e194e23a8abc2652444983d7dcf5799a43ae2dccda7390dc496827c357d7d37a",
     "text": "Ersatz wählen"
   },
+  "overlay.replacementHelp": {
+    "reviewed": true,
+    "source": "Choose a living backup for your knocked-out creature",
+    "sourceHash": "c36f2d2a5e7b5255ee97a6c4965f5397301d4ad7ee17eddcafd456cee185b515",
+    "text": "Wähle eine lebende Reserve für deine ausgeschaltete Kreatur"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -2333,6 +2351,12 @@
     "sourceHash": "6450a8e1378195fff0b4f50e683f9f6a45c2aa550cf1e46cf33004cdff94f7c7",
     "text": "{{summary}}, {{details}}"
   },
+  "progress.keywordLevel": {
+    "reviewed": true,
+    "source": "{{keyword}} level {{level}} progress",
+    "sourceHash": "28949cb92274862ffcd48fd42d7c83c78628d0498ee453067cdb6083f19eb012",
+    "text": "Fortschritt für {{keyword}}, Stufe {{level}}"
+  },
   "progress.keywordXpEarned": {
     "reviewed": true,
     "source": "Keyword XP earned",
@@ -2344,6 +2368,18 @@
     "source": "Lv {{level}}",
     "sourceHash": "984da87de8cab02d728f8874dadce01f7e2c3a4e6882839788e470b0d03f050c",
     "text": "Stufe {{level}}"
+  },
+  "recovery.display": {
+    "reviewed": true,
+    "source": "Fauna could not display this screen; trying again…",
+    "sourceHash": "4e4ded2a9c06ffc30617b4573be4c366a7e2409989521d5f677eaba842386704",
+    "text": "Fauna konnte diesen Bildschirm nicht anzeigen; erneuter Versuch…"
+  },
+  "recovery.save": {
+    "reviewed": true,
+    "source": "Progress cannot be saved right now; keep Fauna open while it retries",
+    "sourceHash": "78a06159651575b8d05f9b95a1b4633f3c304b832ee1aeaacccc87cd9f335e1b",
+    "text": "Der Fortschritt kann gerade nicht gespeichert werden; lasse Fauna geöffnet, während es erneut versucht wird"
   },
   "recruit.chooseTeam": {
     "reviewed": true,
@@ -2734,6 +2770,12 @@
     "source": "{{keyword}} talents",
     "sourceHash": "43d8b093d16ceb79acee029198a7d9cd5bc24dad78a08c4ba7c980a28cd32df3",
     "text": "{{keyword}}-Talente"
+  },
+  "talents.detailTitle": {
+    "reviewed": true,
+    "source": "{{keyword}} · {{name}}",
+    "sourceHash": "de74b4e831ce0b51bd05d15b6d60ae40707b7115cdfc2a089107723639698ca4",
+    "text": "{{keyword}} · {{name}}"
   },
   "talents.keywordXp": {
     "reviewed": true,
