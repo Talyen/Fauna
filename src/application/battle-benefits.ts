@@ -161,7 +161,7 @@ function supplementalScore(
     facts.injuredAllies &&
     hasTalent(state, "mana.arcane-mending") &&
     play.def.effects?.some((effect) => effect.kind === "mana" && effect.amount > 0) &&
-    state.battle.mana - cardCost(play.card, state) < manaCapacity(state)
+    state.battle.mana - cardCost(play.card, state, play.def, play.actor) < manaCapacity(state)
   )
     return priorities.healing + amount;
   return usefulDraw(state, play) ? priorities.standardUtility + amount : 0;
@@ -228,7 +228,7 @@ export function battleBenefits(
       return support("pearl");
     case "attack": {
       const enemies = facts.livingEnemies();
-      const cost = cardCost(card, state);
+      const cost = cardCost(card, state, def, actor);
       const attacks = enemies.map((enemy) => ({
         enemy,
         outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cost),
@@ -326,7 +326,7 @@ export function battleBenefits(
       });
     }
     case "mana": {
-      const cost = cardCost(card, state);
+      const cost = cardCost(card, state, def, actor);
       const regained = Math.min(value, manaCapacity(state) - state.battle.mana + cost);
       const net = regained - cost;
       const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && facts.injuredAllies;

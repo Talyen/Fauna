@@ -20,11 +20,14 @@ export const MAX_CREATURE_STARS = 5;
 export function creatureStars(state: Pick<GameState, "discovery">, kind: SpeciesId): number {
   return Math.max(0, (state.discovery.recruited[kind] ?? 0) - 1);
 }
+/** Read the authored tier without allocating a ranked presentation object. */
+export function creaturePassiveTier(state: Pick<GameState, "discovery"> | undefined, kind: SpeciesId) {
+  return species(kind).passiveTiers[state ? creatureStars(state, kind) : 0]!;
+}
 /** Every star rank has a complete replacement passive; enemies always use the base tier. */
 export function creaturePassive(state: Pick<GameState, "discovery"> | undefined, kind: SpeciesId) {
-  const tiers = species(kind).passiveTiers;
   const rank = state ? creatureStars(state, kind) : 0;
-  return { rank, ...tiers[rank]! };
+  return { rank, ...species(kind).passiveTiers[rank]! };
 }
 // Only the deeply frozen authored catalog is safe to cache; injected tiers may be mutable.
 const authoredPassiveTiers = new WeakSet(SPECIES.flatMap((entry) => entry.passiveTiers));

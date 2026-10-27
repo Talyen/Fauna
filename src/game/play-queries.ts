@@ -76,7 +76,7 @@ function inspectCard(
   card: Card | undefined,
   hasRecipients: (def: CardDefinition) => boolean,
   inHand = false,
-  recoverable = (actorId: string) => hasDiscardDrawCard(state, actorId),
+  recoverable?: (actorId: string) => boolean,
 ): ({ allowed: true } & PlayableCard) | { allowed: false; reason: string } {
   if (!card || (!inHand && !state.battle.hand.includes(card.id)))
     return { allowed: false, reason: "That card is not in your hand." };
@@ -94,7 +94,11 @@ function inspectCard(
     (actor.combat?.fallenCardsPlayedThisTurn ?? 0) >= unfinishedJourneyLimit(state, actor)
   )
     return { allowed: false, reason: "Unfinished Journey’s limit is spent this turn." };
-  if (def.effect === "recover" && def.allyOnly && !recoverable(actor.id))
+  if (
+    def.effect === "recover" &&
+    def.allyOnly &&
+    !(recoverable?.(actor.id) ?? hasDiscardDrawCard(state, actor.id))
+  )
     return { allowed: false, reason: "There are no eligible ally cards in Discard." };
   if (def.effect === "resurrect" && !hasRecipients(def))
     return { allowed: false, reason: "There are no knocked-out allies." };
@@ -102,7 +106,8 @@ function inspectCard(
     return { allowed: false, reason: "There are no living backups." };
   if (def.effect === "heal" && def.target === "injured" && !hasRecipients(def))
     return { allowed: false, reason: "There are no injured allies." };
-  if (state.battle.mana < cardCost(card, state)) return { allowed: false, reason: "Not enough Mana." };
+  if (state.battle.mana < cardCost(card, state, def, actor))
+    return { allowed: false, reason: "Not enough Mana." };
   return { allowed: true, card, actor, def };
 }
 
@@ -136,7 +141,8 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     if (!recoverableByActor.has(actorId)) recoverableByActor.set(actorId, hasDiscardDrawCard(state, actorId));
     return recoverableByActor.get(actorId)!;
   };
-  return state.battle.hand.flatMap((cardId) => {
+  const plays: AvailablePlay[] = [];
+  for (const cardId of state.battle.hand) {
     const play = inspectCard(
       state,
       cards ? cards.get(cardId) : state.cards.find((card) => card.id === cardId),
@@ -144,16 +150,15 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
       true,
       recoverable,
     );
-    if (!play.allowed) return [];
+    if (!play.allowed) continue;
     const mode = cardTargeting(play.def, state);
     const ids = mode === "enemy" || mode === "ally" ? targetIds(play.def) : [undefined];
-    return [
-      {
-        card: play.card,
-        actor: play.actor,
-        def: play.def,
-        commands: ids.map((targetId) => ({ type: "play" as const, cardId, targetId, autoEndTurn })),
-      },
-    ];
-  });
+    plays.push({
+      card: play.card,
+      actor: play.actor,
+      def: play.def,
+      commands: ids.map((targetId) => ({ type: "play" as const, cardId, targetId, autoEndTurn })),
+    });
+  }
+  return plays;
 }

@@ -73,10 +73,9 @@ export function controlled(unit: Combatant, state?: GameState, card?: CardDefini
 }
 /** Current Health, not maximum Health or Health fraction; ties retain battlefield order. */
 export function highestHealth<T extends Combatant>(units: readonly T[]): T | undefined {
-  return units.reduce<T | undefined>(
-    (target, unit) => (unit.health > 0 && (!target || unit.health > target.health) ? unit : target),
-    undefined,
-  );
+  let target: T | undefined;
+  for (const unit of units) if (unit.health > 0 && (!target || unit.health > target.health)) target = unit;
+  return target;
 }
 /** Ties retain battlefield order; reserves and knockouts are never recipients. */
 export function mostInjured<T extends Combatant>(units: readonly T[]): T | undefined {

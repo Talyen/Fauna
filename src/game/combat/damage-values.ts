@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { isEnemy, battlefield } from "../battlefield";
-import { hasTalent, creaturePassive } from "../progression";
+import { hasTalent, creaturePassiveTier } from "../progression";
 import { physicalBonus } from "../ability-rules";
 import type { DamageType } from "../content";
 import type { GameState } from "../types";
@@ -113,7 +113,7 @@ export function modifiedDamage(
     if (deployed) {
       for (const unit of protectors) {
         if (unit.health <= 0) continue;
-        for (const effect of creaturePassive(alliedTarget ? state : undefined, unit.species).effects)
+        for (const effect of creaturePassiveTier(alliedTarget ? state : undefined, unit.species).effects)
           if (effect.kind === resistanceKind) resistance = Math.max(resistance, effect.amount);
       }
       damage *= 1 - Math.min(100, resistance) / 100;

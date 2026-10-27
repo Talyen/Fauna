@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { healingAllies } from "../battlefield";
-import { creaturePassive, hasTalent, cardHasKeyword } from "../progression";
+import { creaturePassiveTier, hasTalent, cardHasKeyword } from "../progression";
 import { draw, drawKeyword, expressDelivery } from "../card-zones";
 import { grantArmor, grantStatus, grantBlock, restoreHealth, TURN_MANA, TURN_DRAW } from "./index";
 import type { BattleState, Enemy, Creature, GameState, GameEvent } from "../types";
@@ -16,7 +16,7 @@ export function battleMana(state: Pick<GameState, "talents" | "boons" | "cards">
   );
 }
 export function enemyBattleStart(enemy: Enemy) {
-  for (const effect of creaturePassive(undefined, enemy.species).effects) {
+  for (const effect of creaturePassiveTier(undefined, enemy.species).effects) {
     if (effect.kind !== "battleStart") continue;
     if (effect.effect === "block") enemy.block += effect.amount;
     else enemy.combat[effect.effect] += effect.amount;
@@ -32,21 +32,23 @@ export function playerBattleStart(state: BattleState, events: GameEvent[]) {
   );
   expressDelivery(state, events);
   if (hasTalent(state, "nature.ecosystem")) drawKeyword(state, "nature", events);
+  const bulwark = hasTalent(state, "armor.bulwark");
+  const manaBulwark = hasTalent(state, "mana.mana-bulwark");
+  const manaShell = hasTalent(state, "mana.mana-shell");
+  const combatSurge = hasTalent(state, "health.combat-surge");
   for (const unit of state.team) {
-    if (hasTalent(state, "armor.bulwark"))
-      grantArmor(state, unit, talentRule("armor.bulwark").amount, events);
-    for (const effect of creaturePassive(state, unit.species).effects) {
+    if (bulwark) grantArmor(state, unit, talentRule("armor.bulwark").amount, events);
+    for (const effect of creaturePassiveTier(state, unit.species).effects) {
       if (effect.kind !== "battleStart") continue;
       if (effect.effect === "block") grantBlock(state, unit, effect.amount, events);
       else if (effect.effect === "armor") grantArmor(state, unit, effect.amount, events);
       else grantStatus(unit, "thorns", effect.amount, events, state);
     }
-    if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
-    if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, state.battle.maxMana, events);
-    if (hasTalent(state, "health.combat-surge"))
-      restoreHealth(unit, talentRule("health.combat-surge").amount, events, false, state);
+    if (manaBulwark) grantBlock(state, unit, state.battle.maxMana, events);
+    if (manaShell) grantArmor(state, unit, state.battle.maxMana, events);
+    if (combatSurge) restoreHealth(unit, talentRule("health.combat-surge").amount, events, false, state);
   }
-  if (hasTalent(state, "health.combat-surge"))
+  if (combatSurge)
     for (const unit of healingAllies(state))
       if (state.reserves.some((backup) => backup.id === unit.id))
         restoreHealth(unit, talentRule("health.combat-surge").amount, events, false, state);

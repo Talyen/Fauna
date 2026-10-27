@@ -4,7 +4,7 @@ import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
 import { enemyCard } from "./card-rules";
-import { creaturePassive, cardHasKeyword, hasTalent, passiveAmount } from "./progression";
+import { creaturePassiveTier, cardHasKeyword, hasTalent, passiveAmount } from "./progression";
 import type { BattleState, Card, Creature, GameState } from "./types";
 
 export function metronomeActorValid(state: BattleState): boolean {
@@ -38,7 +38,7 @@ export function actionValue(
     return (
       def.value * (state && state.boons.includes("nectar-dipper") ? boonRule("nectar-dipper").multiplier : 1)
     );
-  return intrinsicAbilityValue(def, actor, card.level, creaturePassive(state, actor.species!));
+  return intrinsicAbilityValue(def, actor, card.level, creaturePassiveTier(state, actor.species!));
 }
 function intrinsicAbilityValue(
   def: CardDefinition,
@@ -73,11 +73,15 @@ export function passiveCardBonus(def: CardDefinition, passive: PassiveTier, atta
 export function cardCost(
   card: Pick<Card, "definitionId"> & Partial<Pick<Card, "ownerId">>,
   state: GameState,
+  resolvedDef?: CardDefinition,
+  resolvedActor?: Creature,
 ) {
-  const def = definition(card.definitionId);
+  const def = resolvedDef ?? definition(card.definitionId);
   if (def.species === null) return state.boons.includes("blossom-cake-stand") ? 0 : def.cost;
-  const actor =
-    card.ownerId === undefined
+  // Admission and policy have already resolved the same actor for this card.
+  const actor = resolvedDef
+    ? resolvedActor
+    : card.ownerId === undefined
       ? undefined
       : cardActor(state, { ownerId: card.ownerId, definitionId: card.definitionId });
   if (actor?.combat?.[talentRule("stun.free-follow-up").state]) return 0;
@@ -107,7 +111,7 @@ export function enemyAbilityValue(
     Partial<Pick<import("./types").Enemy, "combat">>,
   card: CardDefinition,
 ) {
-  return intrinsicAbilityValue(card, enemy, 0, creaturePassive(undefined, enemy.species), enemy.power);
+  return intrinsicAbilityValue(card, enemy, 0, creaturePassiveTier(undefined, enemy.species), enemy.power);
 }
 
 export function enemyInspectionValue(enemy: Parameters<typeof enemyAbilityValue>[0], card: CardDefinition) {
