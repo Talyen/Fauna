@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { EffectScope, EffectBaseline, EffectBackdropHost } from "../shared/effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../shared/effects/palettes";
 import { cardActor } from "../../game/card-actors";
@@ -28,6 +29,7 @@ export function Inspector({
   controls: Controls;
   onClose: () => void;
 }) {
+  const i18n = useMessages();
   const [opener] = useState(() => document.activeElement as HTMLElement | null);
   const game = useStore(session.store, (s) => s.game);
   const rootCard = "card" in item ? item.card : null;
@@ -141,9 +143,19 @@ export function Inspector({
           />
           {card ? (
             <>
-              <DialogTitle className="sr-only">{definition(card.definitionId).name} details</DialogTitle>
+              <DialogTitle className="sr-only">
+                {i18n.message("inspection.cardDetails", "{{name}} details", {
+                  name: i18n.content(
+                    `content.card.${card.definitionId}.name`,
+                    definition(card.definitionId).name,
+                  ),
+                })}
+              </DialogTitle>
               <DialogDescription className="sr-only">
-                Action artwork. Hover or focus for the name, Mana cost, and final effects.
+                {i18n.message(
+                  "inspection.actionHint",
+                  "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+                )}
               </DialogDescription>
               <ActionCard
                 card={card}
@@ -159,12 +171,20 @@ export function Inspector({
           ) : creature && passive ? (
             <>
               <header className="inspection-heading">
-                <DialogTitle>{enemy?.name ?? creature.name}</DialogTitle>
+                <DialogTitle>
+                  {enemy?.name ?? i18n.content(`content.species.${creature.id}.name`, creature.name)}
+                </DialogTitle>
               </header>
               <DialogDescription className="sr-only">
-                Three abilities and current passive rank. Hover or focus abilities for their details.
+                {i18n.message(
+                  "inspection.creatureHint",
+                  "Three abilities and current passive rank. Hover or focus abilities for their details.",
+                )}
               </DialogDescription>
-              <section className="inspection-abilities" aria-label="Abilities">
+              <section
+                className="inspection-abilities"
+                aria-label={i18n.message("inspection.abilities", "Abilities")}
+              >
                 <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
                   {cards.map((action, index) => (
                     <ActionCard
@@ -184,14 +204,22 @@ export function Inspector({
                   ))}
                 </div>
               </section>
-              <section className="inspection-active-trait" aria-label="Trait">
+              <section
+                className="inspection-active-trait"
+                aria-label={i18n.message("inspection.trait", "Trait")}
+              >
                 <h2>
-                  <ShineText keywords={visualKeywords(passive.description)}>{creature.trait}</ShineText>
+                  <ShineText keywords={visualKeywords(passive.description)}>
+                    {i18n.content(`content.species.${creature.id}.trait`, creature.trait)}
+                  </ShineText>
                 </h2>
                 <span
                   className="inspection-stars"
                   role="img"
-                  aria-label={`${rank} of ${MAX_CREATURE_STARS} stars`}
+                  aria-label={i18n.message("inspection.stars", "{{rank}} of {{maximum}} stars", {
+                    rank,
+                    maximum: MAX_CREATURE_STARS,
+                  })}
                 >
                   {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
                     <Star key={index} aria-hidden="true" data-earned={index < rank} />

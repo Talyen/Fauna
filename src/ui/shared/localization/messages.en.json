@@ -95,6 +95,24 @@
   "glossary.title": {
     "text": "Glossary & controls"
   },
+  "inspection.abilities": {
+    "text": "Abilities"
+  },
+  "inspection.actionHint": {
+    "text": "Action artwork. Hover or focus for the name, Mana cost, and final effects."
+  },
+  "inspection.cardDetails": {
+    "text": "{{name}} details"
+  },
+  "inspection.creatureHint": {
+    "text": "Three abilities and current passive rank. Hover or focus abilities for their details."
+  },
+  "inspection.stars": {
+    "text": "{{rank}} of {{maximum}} stars"
+  },
+  "inspection.trait": {
+    "text": "Trait"
+  },
   "menu.boons": {
     "text": "Boons"
   },

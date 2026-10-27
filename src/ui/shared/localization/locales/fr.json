@@ -401,6 +401,42 @@
     "sourceHash": "c083affa1232aef10bc976cc33a286c6b2e96eba5588ef3f9301bec5c59b9a18",
     "text": "Glossaire et commandes"
   },
+  "inspection.abilities": {
+    "reviewed": true,
+    "source": "Abilities",
+    "sourceHash": "9008dac0bfaa50820aef003c7cbf892154d2db045b373e599283ac67a73d4908",
+    "text": "Capacités"
+  },
+  "inspection.actionHint": {
+    "reviewed": true,
+    "source": "Action artwork. Hover or focus for the name, Mana cost, and final effects.",
+    "sourceHash": "7bdfd2943b11fde4ccabf90f47e6039d524efa333560a78f47cf23439c91b0bd",
+    "text": "Illustration de l’action. Survolez-la ou sélectionnez-la pour voir son nom, son coût en Mana et ses effets finaux."
+  },
+  "inspection.cardDetails": {
+    "reviewed": true,
+    "source": "{{name}} details",
+    "sourceHash": "6e2cf38dd4acc125646fcb59bfeec283e1b393e9022e100c5f28b2d538c73f83",
+    "text": "Détails de {{name}}"
+  },
+  "inspection.creatureHint": {
+    "reviewed": true,
+    "source": "Three abilities and current passive rank. Hover or focus abilities for their details.",
+    "sourceHash": "0a098674f00ab63ae1a8495af22998ec69d66584071b8a8739112814ec0a8d34",
+    "text": "Trois capacités et niveau actuel du passif. Survolez ou sélectionnez une capacité pour voir ses détails."
+  },
+  "inspection.stars": {
+    "reviewed": true,
+    "source": "{{rank}} of {{maximum}} stars",
+    "sourceHash": "987d9f6c8a9e606d19cfcf7d8b5e9001298c94fdbad2d7f21f771d0d1fcb7f4d",
+    "text": "{{rank}} étoiles sur {{maximum}}"
+  },
+  "inspection.trait": {
+    "reviewed": true,
+    "source": "Trait",
+    "sourceHash": "fdf741c4d6f7f5a00bdf6f889bee73de966a8de6d7d6e8eeb67ac135bb37ca63",
+    "text": "Trait"
+  },
   "menu.boons": {
     "reviewed": true,
     "source": "Boons",
