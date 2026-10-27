@@ -905,6 +905,114 @@
     "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
     "text": "水"
   },
+  "content.species.alpenglen.passive.0.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "f2b8bc634027157c755521d9c859ea33a6aaba694485c4be1b998890d6974ce4",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.1.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "49b528a21f92caad1dc1d9213fac1aa15f46eafab4a0b0c35a9e1d0745a3123c",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.2.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "216ab0b338be185623a23f0e4278a986313bae83683949baad706590d7c80ee6",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.3.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "870a25ea60bd9d0e856504a903445ccbb29902e07ee96930ec4427d4fc3ec0cb",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.4.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "1a05edee6007d2beba171021a632cf59041c55afbe7845da9ff36db94ed588c6",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.alpenglen.passive.5.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "18fca08cf67c7bac4dea01582f4e578a4917a4fcb271ab2accbef04fc5fa19a3",
+    "text": "打出手中最后一张牌时，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a999aad1dd4b31a3838ee861d7e6bdfecd76fee5a58cf9e4302bfd9999ca61b7",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "96d1fe5ccfdcf72c13803d0f6574a31c64a00a6220979ab993619606c871fc69",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "5aea2d550000f4b63324d4e2ee8912740bf080144b78052c56c07c926eda9817",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "00f9cc16cdbeaee3766a31bbf4cd5f4d5681ff7960b539eeb7a328d1fc0352a4",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f603578beb6590b49c123bd78aec1a4f7dc2e0a613f4ea672a8aa6ca8b2d9daf",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.arabesca.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "27031063234ebe664fd5958973500445892a50fca3691e68a77da3a907de722c",
+    "text": "<keyword1>闪避</keyword1>时为盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.0.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "e16e0a426b8562b0d55b62ed1637d747904b3e99bcb84ae444e7edc4fe6a450a",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.1.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a0766f4819d8c3573c48076f49605d6bea0f6b0c7de4ca1b15d2b678f4c319da",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.2.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "914e094c3a0da11449169c273e3192903743d17f049c9643dd0287c2f7a61adc",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.3.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "f00fbb28cd801da1857f4d9190dc6895421b0a4acdac03353f7d768846d45ff3",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.4.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "df0583e2996fd4185635d1ff082852e69eb94f545db7bfffe39a1172593a313a",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.cadenza.passive.5.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "93be031a81e1f34313d00a182a26ba11cab640e62617b5d53db92c97acf44053",
+    "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -976,6 +1084,42 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "6b8815f18775ce1ba89b46dafd387f4022773822d7de88866c68bdc365f6fbea",
     "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
+  },
+  "content.species.cindernewt.passive.0.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "da1cbe2a367f87abfd39ef5d2bd0799d290aeb64ab7fbab8043f877a36e68fa9",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.1.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "725f3d7cfce2bcf711e37ae6893e911c966c1276056034d450506fa377a7d193",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.2.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "4fc87bc63878b94f59ce335a13a5d68a5614b55390fbe87b4e6f55c16e7f41c1",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.3.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "ee896ce789493ff4cfdbcfe50c744294cd30f014e95ac808700105f228314b4a",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.4.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "60efe828de7b3c363d95ed2f7e14c37986bb5ef118d9b5a12852f831cab2a02f",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.passive.5.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "14a2e701275e3cc33a833ebc9d2c86d03ca6adc35bc0d5d54694538dde7dca08",
+    "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,

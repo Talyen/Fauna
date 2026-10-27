@@ -905,6 +905,114 @@
     "sourceHash": "42f4269432d70809a8af8dbe3ebee3ade9688fe4506a58103c7bbef4b15565f4",
     "text": "Água"
   },
+  "content.species.alpenglen.passive.0.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "bf622a7f77aa1d8b945caf92920da1b7c97364d3afdffa3209e95bd05dd40c6a",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.1.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "990546a8b2332314d7d5995ddae267112d2e32a2b1c30c45d5dab323bb337527",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.2.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "69732dfca45537befb23c6d546fa7d074c1ee726599afd3803aa4cccc450681b",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.3.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "21626a393e754fafa5222b513ec323226a7408582f0de54a3fb182bcaacde4f7",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.4.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "7fddc48a48fde2d641a1f4697cc494535990c2d3e48b20e28c7fc7f90d3ef1ae",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.alpenglen.passive.5.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "7991e0aa8c8d75ace141ba3e7b75a4e26401421df11f2f8dc6729f81eac5c274",
+    "text": "Jogar a última carta da sua mão restaura {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.arabesca.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "cbe2b832dd865512048aea05fd23b57debf96df5f28d8bb4e4a81ad0ecc22871",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "25335a04ea79c0da30573856cd507a33d882d9a00eb729c4b486007fcae5b9c3",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "ec9c8659dde39a7fe3235cde2789f0f4f44dc83fd9046c068768a0fc3646a9cd",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f4924e0bf71a24c71e71f75454179b8d2edff6a38c8aaf638fd33688a0b83b68",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "7884eb105b4ef8881e45506f13d978c16b28d9a6bcbb277c34b7d268cab3b359",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.arabesca.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "1348451d41ffec0c18e7deba2fccd0c2d7826d7971782eaa39f3a86c428fed59",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> aos aliados quando você <keyword1>esquivar</keyword1>"
+  },
+  "content.species.cadenza.passive.0.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "08b3722b1ac8f67e89024f34908a688c6fb2c315d0c095816c0e622c2499c4d5",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.1.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "606423ea640b885fa7eca45cc5715a470d8d8b461ab2f7bdeb47ddfc5612476f",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.2.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "fb38e5b3402a6206abad0ad626faebc4966fab26c20bc0ad1fba9039f5484de4",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.3.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "ab2bb854bd040c630da57caff548476ab664d9dc793fbcf849f97c207e408869",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.4.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "4f5d2c5a1e9e7dc3d66c5fc9e9865c1f591c5955bcc266ccba93bf559b32245d",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.species.cadenza.passive.5.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "f4f212f9e7c6bbdcc9a69e1094002c88a9f5c8833b7cb065f54af3b2f5bf122b",
+    "text": "Após sua segunda carta em cada turno, restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -976,6 +1084,42 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "b9631d8288c4bb633c02adfc9fad3866d814f855a5f6af21336df5a91d05b10b",
     "text": "Sua primeira habilidade de cada turno tem {{value0}}% de chance de se repetir"
+  },
+  "content.species.cindernewt.passive.0.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "0dc6d4620a34b1e9b6973638bc28028882b7aef62b7abf3e58864ccb140642f1",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.1.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "28159d0636ba99bf43e130098f2004a656e686bb2fbf1dc0791dbcecf6d424f4",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.2.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "f64f18e0b7c1e543f5e12fca54e12c37eb57f8a852d13f938b01268bb529209b",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.3.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "afd898e9f4c8b2b7a1b488a12736fba92cd0bbd76a9939e193453cd958f01cde",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.4.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "f3e2a229440ba50a5e9e0897e96c99d4c431d0d888e268f586e496fd1f8585a5",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
+  },
+  "content.species.cindernewt.passive.5.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "81cc0b6cc699a5792e04e8ff42e9ebf72c37f2a7e448ed84e4770c5f0a73df83",
+    "text": "Quando você <keyword0>esquivar</keyword0>, cause {{value0}} de dano de <keyword1>Queimadura</keyword1> ao atacante"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,

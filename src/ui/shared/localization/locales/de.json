@@ -905,6 +905,114 @@
     "sourceHash": "a5db157930d4196b9c2631088f33b4fa95b07fcd1157220dbed9bbb734ff10c8",
     "text": "Wasser"
   },
+  "content.species.alpenglen.passive.0.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "13bbe39036718533a880460d6e380de6f806547b171e0a9a1cea7e93f94a2562",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.1.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a15ddd08745747b3c372bdbcda35f247dcbe69d123e33eea416c1f3eaefe9eee",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.2.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "df7c1283861738ed3c908ed02a9d7cb722f3d199991d33cb50c4221a7bf04485",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.3.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "6e2687e90ac95eaaad7a7896f9a537e6547b4bfd6de23c9685e80bbec061a7c7",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.4.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "bb129a1108c23d5e93b7f5c171890133896dab9eba4de61a58daf3a0002cf9d4",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.alpenglen.passive.5.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "ab3ed1930e39b5adfa82ff9588f971017d5700ba351e8fbefbc56d52daca9088",
+    "text": "Das Spielen der letzten Karte auf deiner Hand stellt dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.arabesca.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a2b46d0d064ddf350f2749c68dcb0dac5f513828658cdcf7f42b1e76e0c669be",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a77bae79054d8c0a487f987618e7f9ccc56daf9b7f37a45fe48300738a9c3247",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "e84f7ed00c2aa03ae1aa5ade7c34733485d00de1b71edae993ad33c231528f61",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a4a8f678203c17acfc803b731f3bb27f263f388d3b8a0c5cb9e22c737077f34e",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "63ea72d8f43984d26e749afddd010260bd41bb48f9dbfd0074dea217ca9014e2",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.arabesca.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "84f02df2a86aaf617c422439b8a77813747a5073dfc8b30bdb0bf7eac1d90c17",
+    "text": "Stelle Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.species.cadenza.passive.0.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "24d4ac62a1f6293369dd4a808061557eda7e0124f220f7da339306d5b64f1b52",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.1.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "ed49e64ef9adabafeca30c5512458b3a0c0bf50b44445754af35092d4dd5d8a0",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.2.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "cc96a68629ae3fbdc84a31f3c2ff4c0edde0034f8e48a236ab37867ab44f20df",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.3.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a09c4e7a07f92d896c8c6c60ac2b26cb65da8d0d76f7d7b4f4e0eef9de435e72",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.4.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "caa8864a163bf97ff83d6110cac22faedb82757a3471d78aa1dca0e404ed1fa9",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.species.cadenza.passive.5.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a62d0dc98fe3b1c691522d9e04ff9adbf6fa4f271407f0dadead3ec7d36b71e1",
+    "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -976,6 +1084,42 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "4b0631daf1a7f0f0f110e11f828588180ed401ec3ccf6425e597d86db38e915f",
     "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.cindernewt.passive.0.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "f797781bb40974f1758eec53748d826c5faa5e456387fed098024c27cfbdbe13",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.1.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "ba48a3c4a6d625ee68658b597d890450b77ca98c7c5289b85c75363b275d59ce",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.2.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "8fdd14a750858beabb1a5e99202ea9b7ce341348ebd8247e077ccd353652768b",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.3.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "899628c6baf8c485e059e7ec9b175288d828ec51dbdfeb33b3bf181e35b0c137",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.4.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "91a489fba19916a916a44dd8bab15791adbee314cabf3e9ea681d85f8a7d00ca",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.passive.5.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "069031dc57d290a024c1b23f3e4d17c73f10817ae918b39e21f7106045790942",
+    "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,

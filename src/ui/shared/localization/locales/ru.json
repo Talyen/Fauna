@@ -905,6 +905,114 @@
     "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
     "text": "Вода"
   },
+  "content.species.alpenglen.passive.0.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "12d6b3387c668a9613358f9ef49bc597ddd74a5a92d417a047c63930bdc2086a",
+    "text": "Розыгрыш последней карты в вашей руке восстанавливает {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.alpenglen.passive.1.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "4e58957ca1f179adfae5e0b7064c133789d80a0fd139517ee38270a86755e668",
+    "text": "Розыгрыш последней карты в вашей руке восстанавливает {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.alpenglen.passive.2.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "4a555214acca85ca5ae2fb06e032ef308dd5b4787cb3c9c6126ba00eaf3ac087",
+    "text": "Розыгрыш последней карты в вашей руке восстанавливает {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.alpenglen.passive.3.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "c76c7ec829c9b74bc0287cec586103082e9be7680fe5d1b93e769e4371b59858",
+    "text": "Розыгрыш последней карты в вашей руке восстанавливает {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.alpenglen.passive.4.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "86c6ec687e9a6451c07456968b20ba26c4745c721ccf7e66637cf2bb39959d6a",
+    "text": "Розыгрыш последней карты в вашей руке восстанавливает {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.alpenglen.passive.5.rule": {
+    "reviewed": true,
+    "source": "Playing the last card in your hand restores {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "e616c211aa3eb5f95c180da85c569928f372e2309554af2fc55b6f040c63cf87",
+    "text": "Розыгрыш последней карты в вашей руке восстанавливает {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.arabesca.passive.0.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "b6a1d11644f6cc070be16ba76d6cce2c8aefc315173a184b792c2a7c82edabc4",
+    "text": "Восстанавливайте союзникам {{value0}} <keyword0>здоровья</keyword0>, когда <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.species.arabesca.passive.1.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f7d0ef9a42ac49637c16874c928cfe890e52791bdcfb131b52f172ad7930c27e",
+    "text": "Восстанавливайте союзникам {{value0}} <keyword0>здоровья</keyword0>, когда <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.species.arabesca.passive.2.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "3b696463eb8a4ff97366229c6d9470b018edfe97bcc51b8cf2ce4c2c427bbef4",
+    "text": "Восстанавливайте союзникам {{value0}} <keyword0>здоровья</keyword0>, когда <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.species.arabesca.passive.3.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "fd8a57c7af182d45dfac83caf9a2f2feb2191756cd97dae9e43b111e056aa7da",
+    "text": "Восстанавливайте союзникам {{value0}} <keyword0>здоровья</keyword0>, когда <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.species.arabesca.passive.4.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "bb18b656a92e1d900a6aaf0b2897cec5637acf32591088524ee2967d4874e191",
+    "text": "Восстанавливайте союзникам {{value0}} <keyword0>здоровья</keyword0>, когда <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.species.arabesca.passive.5.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to allies when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "ffe8441de9ed4c3380797248fac3d48f31faee4554d24c93de1a1aa007c039d0",
+    "text": "Восстанавливайте союзникам {{value0}} <keyword0>здоровья</keyword0>, когда <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.species.cadenza.passive.0.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "957f3026426e0aab971edafffa276e0403bffdfc2f8cc432c6139ebe27a3aa9c",
+    "text": "После вашей второй карты за ход восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.cadenza.passive.1.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "89a47cfb79c1bd46ba8d3832381cf6054a26ea7ae870ec749ed708146f44d347",
+    "text": "После вашей второй карты за ход восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.cadenza.passive.2.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "6d48fb431815e100f57926ad78b8d5d2cec4103aae86e961d57565e11d0b6126",
+    "text": "После вашей второй карты за ход восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.cadenza.passive.3.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "2e02cb18d429eed6c688cdeb73883b62aac37c586877f5f54d67cc0b8f7f3c70",
+    "text": "После вашей второй карты за ход восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.cadenza.passive.4.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "f224610e86608cc572bcb33efb79b5fed6a50e15cc01eafe85034786915978b2",
+    "text": "После вашей второй карты за ход восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
+  "content.species.cadenza.passive.5.rule": {
+    "reviewed": true,
+    "source": "After your second card each turn, restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "e3ff39a1f67ce0137219f26848cb7713b4d6ac560322be20ef96fc185697eca8",
+    "text": "После вашей второй карты за ход восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -976,6 +1084,42 @@
     "source": "Your first ability each turn has a {{value0}}% chance to repeat",
     "sourceHash": "4e01103dfd9d8bc2b6d55a9b252315c362a25c3d2e2afbf5d593876d5be05c67",
     "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
+  },
+  "content.species.cindernewt.passive.0.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "1ec702ff8c8c0ce0a9e6cf0184885927dd0b06b414f8ea6a9ee34e9b133c6088",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, нанесите атакующему {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.cindernewt.passive.1.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "bd275a45f6283f35343e4601d4bac2db6a87712b2486a63c29b1a4cc43190349",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, нанесите атакующему {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.cindernewt.passive.2.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "b1b5b3fcc2bcc45809cdeb56d7fb3abf6132d99b71f2b82395f4329921d05ba8",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, нанесите атакующему {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.cindernewt.passive.3.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "35cb8ef862bf6ac29c0d6f5ab59f54fa04fbb0eba4d2ac944b3ca1289d0ddf7d",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, нанесите атакующему {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.cindernewt.passive.4.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "9473d578dd42829ee10880125eb86434bb8ecf82ffed3dbfdd88401cd3b252aa",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, нанесите атакующему {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.cindernewt.passive.5.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
+    "sourceHash": "7330d594f679b682c8dbebead58c000da00d9ffe7b3d2e128c2561d9dfa56251",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, нанесите атакующему {{value0}} урона типа «<keyword1>Горение</keyword1>»"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
