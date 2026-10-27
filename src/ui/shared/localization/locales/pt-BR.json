@@ -3443,11 +3443,23 @@
     "sourceHash": "3a1af6d6f9056a2a66a56e2022b0684408b0aaed3ae5502e415359e912fa28ec",
     "text": "Corrente purificadora"
   },
+  "content.talent.water.cleansing-current.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to <keyword1>Cleanse</keyword1> {{value1}} harmful effect from you",
+    "sourceHash": "ebc254e770e5d199687db59964e8257cd4189c35c6952de9d2b14cbb20b249d2",
+    "text": "Acertos de <keyword0>Água</keyword0> têm {{value0}}% de chance de <keyword1>purificar</keyword1> {{value1}} efeito prejudicial de você"
+  },
   "content.talent.water.erosion.name": {
     "reviewed": true,
     "source": "Erosion",
     "sourceHash": "1b1ce2f155c5e71b8ac5cacc89998a4bffd686fc9fcf477e0212cccfc1492e3e",
     "text": "Erosão"
+  },
+  "content.talent.water.erosion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits remove {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "fe5767167f21acb8a2939c3bf273ed1111eb8951a17511f10f29ef3ace0b1e00",
+    "text": "Acertos de <keyword0>Água</keyword0> removem {{value0}} de <keyword1>Armadura</keyword1>"
   },
   "content.talent.water.high-tide.name": {
     "reviewed": true,
@@ -3455,11 +3467,23 @@
     "sourceHash": "db0c84ae0a4b14e7c1f017b45ac2cd703eda6f2c3d345eddd4fa19e9911b1836",
     "text": "Maré alta"
   },
+  "content.talent.water.high-tide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "acee2e889170e54338c6475422302019bbaa921a276355fa3757b1144cca3e33",
+    "text": "Ataques de <keyword0>Água</keyword0> causam {{value0}}% mais dano enquanto você tiver <keyword1>Bloqueio</keyword1>"
+  },
   "content.talent.water.pressure.name": {
     "reviewed": true,
     "source": "Pressure",
     "sourceHash": "45a57aa158891cea6e0da61f1a57f463bfa393485adddce30ffcb31cb9888817",
     "text": "Pressão"
+  },
+  "content.talent.water.pressure.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks deal {{value0}} more damage",
+    "sourceHash": "405c5afd076e1f1645901da32792b43610704f8efb0fff9e33d40bd199a8d531",
+    "text": "Ataques de <keyword0>Água</keyword0> causam {{value0}} de dano adicional"
   },
   "content.talent.water.riptide.name": {
     "reviewed": true,
@@ -3467,11 +3491,23 @@
     "sourceHash": "3acadb77e3b99b962ffb54bddbb06d48f6047dd0a78ef816272d2d0c5bd4dcbc",
     "text": "Corrente de retorno"
   },
+  "content.talent.water.riptide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "5fd03039395a2b627b835e082a838b0bd6d3df0f1d623f6735daff43bdf7b6ea",
+    "text": "Acertos de <keyword0>Água</keyword0> têm {{value0}}% de chance de comprar uma carta de <keyword1>Água</keyword1>"
+  },
   "content.talent.water.seafoam.name": {
     "reviewed": true,
     "source": "Seafoam",
     "sourceHash": "1b5b0854577a116f062135263781ac2c3208da37e2c82ad46bd8405de8789de4",
     "text": "Espuma do mar"
+  },
+  "content.talent.water.seafoam.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "0bbb1ec7645a6e38d56158af31186591a81f0acc4095e8de88383f0afeca7a3b",
+    "text": "Acertos de <keyword0>Água</keyword0> concedem {{value0}} de <keyword1>Bloqueio</keyword1>"
   },
   "creature.echo": {
     "reviewed": true,

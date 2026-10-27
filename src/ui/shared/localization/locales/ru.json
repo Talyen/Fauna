@@ -3443,11 +3443,23 @@
     "sourceHash": "486adb57850370d2aaad77d48f5351ce9a96d5953bbdefaca727f2ddb2e52831",
     "text": "Очищающее течение"
   },
+  "content.talent.water.cleansing-current.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to <keyword1>Cleanse</keyword1> {{value1}} harmful effect from you",
+    "sourceHash": "ea12e77e5efc97ea4180c669fc55c94cc93d25677ff00dba7f47ac8ce38eebb1",
+    "text": "Попадание типа «<keyword0>Вода</keyword0>» с вероятностью {{value0}}% <keyword1>очищает</keyword1> вас от {{value1}} вредного эффекта"
+  },
   "content.talent.water.erosion.name": {
     "reviewed": true,
     "source": "Erosion",
     "sourceHash": "24f4a0ede820f6c653ed026646a9d0aac3dd6ab0b91e9767285fd9d7e8567d98",
     "text": "Эрозия"
+  },
+  "content.talent.water.erosion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits remove {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "a70ebacbfa9015595b07cca44c4491d8570bd67944d913faad99f9876513ceb2",
+    "text": "Попадания типа «<keyword0>Вода</keyword0>» снимают {{value0}} <keyword1>брони</keyword1>"
   },
   "content.talent.water.high-tide.name": {
     "reviewed": true,
@@ -3455,11 +3467,23 @@
     "sourceHash": "1b61d115f7bc5507f8e2327375e4d3930958ce90144422c068fd6b60d70aa880",
     "text": "Прилив"
   },
+  "content.talent.water.high-tide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks deal {{value0}}% more damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "e7f1a9e4158b4b64ad1c2bf488e9fa5f399f63c0f4b00684c7d02bb178408cf9",
+    "text": "Атаки типа «<keyword0>Вода</keyword0>» наносят на {{value0}}% больше урона, пока у вас есть <keyword1>блок</keyword1>"
+  },
   "content.talent.water.pressure.name": {
     "reviewed": true,
     "source": "Pressure",
     "sourceHash": "6197706d25a31f985b4962c609f667a8ce3973faecbb33d1c9f2378bbc7ddcaa",
     "text": "Давление"
+  },
+  "content.talent.water.pressure.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks deal {{value0}} more damage",
+    "sourceHash": "b530561915ba6c2198f3e25686cb66dce401d2ebaeabbd9e18b3510653f6b560",
+    "text": "Атаки типа «<keyword0>Вода</keyword0>» наносят на {{value0}} больше урона"
   },
   "content.talent.water.riptide.name": {
     "reviewed": true,
@@ -3467,11 +3491,23 @@
     "sourceHash": "9597075bf057155a83daa6ed1644d97302dccdf4f349eaa5fb40b15c5516b5fc",
     "text": "Отбойное течение"
   },
+  "content.talent.water.riptide.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits have a {{value0}}% chance to draw a <keyword1>Water</keyword1> card",
+    "sourceHash": "00c66d2eb230b68e16f4093ddb5c39ef6eb88f980311e468c5060b653098bd09",
+    "text": "Попадания типа «<keyword0>Вода</keyword0>» с вероятностью {{value0}}% позволяют взять карту типа «<keyword1>Вода</keyword1>»"
+  },
   "content.talent.water.seafoam.name": {
     "reviewed": true,
     "source": "Seafoam",
     "sourceHash": "5b165966c6c11897911c7639b0fd2384c77464b2a3ab5f6de3688955a2c035ca",
     "text": "Морская пена"
+  },
+  "content.talent.water.seafoam.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> hits grant {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "f2cd5f313c45d9c176a8d273a25e90e6a7c821157b76b91c9478c1ee28a18104",
+    "text": "Попадания типа «<keyword0>Вода</keyword0>» дают {{value0}} <keyword1>блока</keyword1>"
   },
   "creature.echo": {
     "reviewed": true,
