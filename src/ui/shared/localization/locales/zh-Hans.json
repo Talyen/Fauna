@@ -1031,6 +1031,36 @@
     "sourceHash": "d4b81f0c97a8e2f1985ec7abd5f59b9b656d3d4d4989bc3d7a896b3a783a78d0",
     "text": "每赢得一场战斗额外获得{{value0}}金币"
   },
+  "content.boon.sovereign-toast-rack.name": {
+    "reviewed": true,
+    "source": "Sovereign Toast Rack",
+    "sourceHash": "701a10ab841891b498163a84f8ea0d831da85b0b83dbb1f8a0e102949326d9b2",
+    "text": "君王吐司架"
+  },
+  "content.boon.star-hoop.name": {
+    "reviewed": true,
+    "source": "Star Hoop",
+    "sourceHash": "b00597dc408897ca23701ef7d461efbb2cd0384d5b750c8700e186b0bfc8387a",
+    "text": "星环"
+  },
+  "content.boon.stardust-whetstone.name": {
+    "reviewed": true,
+    "source": "Stardust Whetstone",
+    "sourceHash": "71e9b63927789147413e215d4f17a1f0fafbba7130ae13c5d329d030870e3dd4",
+    "text": "星尘磨刀石"
+  },
+  "content.boon.story-puzzle-cube.name": {
+    "reviewed": true,
+    "source": "Story Puzzle Cube",
+    "sourceHash": "23dc1303d16f4d7dfaa1d8535744127df5f273834162ddfedb91520e6a988d41",
+    "text": "故事谜题方块"
+  },
+  "content.boon.sundering-charm.name": {
+    "reviewed": true,
+    "source": "Sundering Charm",
+    "sourceHash": "a1e6e9a3d4a0397c10f88680e443e4948ce7f3cb2bceff322d729d157f9ffb52",
+    "text": "破甲护符"
+  },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
     "source": "Tattered Pages",
@@ -1043,11 +1073,35 @@
     "sourceHash": "0580db3d2ee9257ce6a65d145d15a9dcebacddb50b31b7fe3a6f474234ba9e9f",
     "text": "战斗开始时额外抽取{{value0}}张牌"
   },
+  "content.boon.thaw-spoon.name": {
+    "reviewed": true,
+    "source": "Thaw Spoon",
+    "sourceHash": "14b30bf266fc6b2bfda6e7a6d7d54d175a6fdc1b2e6559740f8d516c402e5b97",
+    "text": "融冰匙"
+  },
   "content.boon.thaw-spoon.rule": {
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
     "sourceHash": "6eb3c517400d4ca93f5bc1b31b464460cf29579bd89e3270aa23721a54080c57",
     "text": "<keyword0>治疗</keyword0>会移除等量的<keyword1>冻结</keyword1>积累"
+  },
+  "content.boon.thistle-sieve.name": {
+    "reviewed": true,
+    "source": "Thistle Sieve",
+    "sourceHash": "bffca800e2ddbf677384be11f3bcaaa53cb9bfaecf0a674655be2d1d3b367ead",
+    "text": "蓟花筛"
+  },
+  "content.boon.thornheart-ring.name": {
+    "reviewed": true,
+    "source": "Thornheart Ring",
+    "sourceHash": "493c1170a9f7948f8d1d11d002ada460042fc85040d0ecf2b5151bbc760116e7",
+    "text": "荆心戒指"
+  },
+  "content.boon.thunder-conch.name": {
+    "reviewed": true,
+    "source": "Thunder Conch",
+    "sourceHash": "b81321c7a1ec53e1e90743255ddf28169712efe1e5e87aaf7371f56abc28f54a",
+    "text": "雷鸣海螺"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1060,6 +1114,12 @@
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
     "sourceHash": "1a451ac871b41b3cb8ea6d753ed44a6636f7b0ff1bbd6a8f9ac006e8412e95dd",
     "text": "<keyword1>眩晕</keyword1>敌人时造成{{value0}}点<keyword0>自然</keyword0>伤害"
+  },
+  "content.boon.tide-anklet.name": {
+    "reviewed": true,
+    "source": "Tide Anklet",
+    "sourceHash": "04f6585b3aa88c34eec786a2869c65a687d0cf4fcacefa0ce9917312689463d3",
+    "text": "潮汐脚环"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

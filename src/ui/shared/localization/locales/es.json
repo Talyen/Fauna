@@ -1031,6 +1031,36 @@
     "sourceHash": "4afa3df9129a04626a19d108ade3fc50ec5ea577ca010616347743d8788eb68e",
     "text": "Obtienes {{value0}} de Oro adicional por cada combate ganado"
   },
+  "content.boon.sovereign-toast-rack.name": {
+    "reviewed": true,
+    "source": "Sovereign Toast Rack",
+    "sourceHash": "cf6ff530975bbdf5756b0de899a425b5733f011157858453d3529e2f04200b6e",
+    "text": "Tostadero soberano"
+  },
+  "content.boon.star-hoop.name": {
+    "reviewed": true,
+    "source": "Star Hoop",
+    "sourceHash": "e5b365cd584f8c99a79ca4231fde939778f8605f4d6a3dcd99c656bcb7bce786",
+    "text": "Aro estelar"
+  },
+  "content.boon.stardust-whetstone.name": {
+    "reviewed": true,
+    "source": "Stardust Whetstone",
+    "sourceHash": "669db6d406df8920c35342f38de38eed0e6e34a0e141b3e29836e67bb715f995",
+    "text": "Piedra de afilar estelar"
+  },
+  "content.boon.story-puzzle-cube.name": {
+    "reviewed": true,
+    "source": "Story Puzzle Cube",
+    "sourceHash": "d5d9d5f1fd9cb0091a11995dcd3afdced34fb626bb1cec36451045cc2c33efbb",
+    "text": "Cubo de historias"
+  },
+  "content.boon.sundering-charm.name": {
+    "reviewed": true,
+    "source": "Sundering Charm",
+    "sourceHash": "e0537d987ceb3697692c4c9f04db3989d000e28f1adb5b6beeb0ca74ce90ed84",
+    "text": "Talismán de hendidura"
+  },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
     "source": "Tattered Pages",
@@ -1043,11 +1073,35 @@
     "sourceHash": "d98b6f11da2ec68522e0f6230e0eefa92995f76b199a56a07e2c90a86107a8b8",
     "text": "Roba {{value0}} carta adicional al comienzo del combate"
   },
+  "content.boon.thaw-spoon.name": {
+    "reviewed": true,
+    "source": "Thaw Spoon",
+    "sourceHash": "7af2b1f77984de1a87a006cb6e92eaef0895cc37bdbb658f4abec14cbdef2ad4",
+    "text": "Cuchara de deshielo"
+  },
   "content.boon.thaw-spoon.rule": {
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
     "sourceHash": "13bd41c09df28ff87aad8ce3f51181a5331219c17120cf2d5403646d5fcd252a",
     "text": "La <keyword0>curación</keyword0> elimina la misma cantidad de acumulación de <keyword1>Congelación</keyword1>"
+  },
+  "content.boon.thistle-sieve.name": {
+    "reviewed": true,
+    "source": "Thistle Sieve",
+    "sourceHash": "39c5fb2f7c09a5c077c70ecba00a97d534e75c28d9837097eea3a3018ca945b9",
+    "text": "Tamiz de cardo"
+  },
+  "content.boon.thornheart-ring.name": {
+    "reviewed": true,
+    "source": "Thornheart Ring",
+    "sourceHash": "48d9bf1d8254c95f219d8001c29846eb212f4005a0e62fc4f59e50ad7c11528d",
+    "text": "Anillo de corazón espinoso"
+  },
+  "content.boon.thunder-conch.name": {
+    "reviewed": true,
+    "source": "Thunder Conch",
+    "sourceHash": "ccddd182cd2648c6a54722f19b2f9c91217787124afad54ce42eec094a4eb579",
+    "text": "Caracola del trueno"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1060,6 +1114,12 @@
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
     "sourceHash": "90c860fb94ed7435d8813a9864c9b6e890977a62c63dcd81ec4f44b8cb1e4dcc",
     "text": "Infliges {{value0}} de daño de <keyword0>Naturaleza</keyword0> al <keyword1>aturdir</keyword1> a un enemigo"
+  },
+  "content.boon.tide-anklet.name": {
+    "reviewed": true,
+    "source": "Tide Anklet",
+    "sourceHash": "3e520568b691aa4d098fb11ff0a8937eec311f1b406e454df8a7c9598385d9b2",
+    "text": "Tobillera de marea"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

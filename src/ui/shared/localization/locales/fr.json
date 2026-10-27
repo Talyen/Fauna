@@ -1049,6 +1049,36 @@
     "sourceHash": "f0abfd5f50fd3a8f53838bac1becf929ff9c56a59497f91b9169287758751a50",
     "text": "Gagnez {{value0}} Or supplémentaire pour chaque combat remporté"
   },
+  "content.boon.sovereign-toast-rack.name": {
+    "reviewed": true,
+    "source": "Sovereign Toast Rack",
+    "sourceHash": "d96344ee375a798c3a10df5ffbb8a184d03a47942149940268e4b97ba23ce3af",
+    "text": "Porte-toasts souverain"
+  },
+  "content.boon.star-hoop.name": {
+    "reviewed": true,
+    "source": "Star Hoop",
+    "sourceHash": "038cb4ee20afe91e04019f0212fe5f053ab791b660b1686593453ccfbc2b8bd9",
+    "text": "Anneau d’étoile"
+  },
+  "content.boon.stardust-whetstone.name": {
+    "reviewed": true,
+    "source": "Stardust Whetstone",
+    "sourceHash": "4d3c7c162a89db406c434b90ec882b879a63caaddc5404612b1c3514624df01b",
+    "text": "Pierre à aiguiser stellaire"
+  },
+  "content.boon.story-puzzle-cube.name": {
+    "reviewed": true,
+    "source": "Story Puzzle Cube",
+    "sourceHash": "e6daa4f80a2235903a8899f291db021cdd5e8a1f17381a37ba526f12de7cde1f",
+    "text": "Cube d’énigmes"
+  },
+  "content.boon.sundering-charm.name": {
+    "reviewed": true,
+    "source": "Sundering Charm",
+    "sourceHash": "99b52eb0c84940a82daee20c3adfe6a32b69d1bc90a2131a60de218ccbda12e2",
+    "text": "Charme de fracture"
+  },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
     "source": "Tattered Pages",
@@ -1061,11 +1091,35 @@
     "sourceHash": "1c1587ed912c3236f7f7b94975db8b97f8111ff76bb63431a014d5d095150590",
     "text": "Piochez {{value0}} carte supplémentaire au début du combat"
   },
+  "content.boon.thaw-spoon.name": {
+    "reviewed": true,
+    "source": "Thaw Spoon",
+    "sourceHash": "8623b68dee1c21c38ac672e28bd0b6ce97ab80b956846af81932fb0c1a7fb6b4",
+    "text": "Cuillère de dégel"
+  },
   "content.boon.thaw-spoon.rule": {
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
     "sourceHash": "6c2f44cd8876c8ad6a28a0df7fb67e03dc9e563262024f405a5676f395427abc",
     "text": "Les <keyword0>soins</keyword0> retirent autant d’accumulation de <keyword1>Gel</keyword1>"
+  },
+  "content.boon.thistle-sieve.name": {
+    "reviewed": true,
+    "source": "Thistle Sieve",
+    "sourceHash": "e121e2ef459c97014aac9879d1c81de17ed67fc0734f59064245c306847110ac",
+    "text": "Tamis de chardon"
+  },
+  "content.boon.thornheart-ring.name": {
+    "reviewed": true,
+    "source": "Thornheart Ring",
+    "sourceHash": "5a2710a0a6b720a9cbb1c9fac4453dfb166a8a39658f01604ad0eadb5ae4c466",
+    "text": "Anneau cœur d’épines"
+  },
+  "content.boon.thunder-conch.name": {
+    "reviewed": true,
+    "source": "Thunder Conch",
+    "sourceHash": "1401857a4fbe16ee5e8dd2d1ff1e6701c98298a5921d0ffb2f5c3e5d91b9729a",
+    "text": "Conque du tonnerre"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1078,6 +1132,12 @@
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
     "sourceHash": "77e46dc5d5fa3d976a2bdab51de21fc4095ec2dd5fdd02bd29867e7d3333f34c",
     "text": "Infligez {{value0}} dégâts de <keyword0>Nature</keyword0> lorsque vous <keyword1>étourdissez</keyword1> un ennemi"
+  },
+  "content.boon.tide-anklet.name": {
+    "reviewed": true,
+    "source": "Tide Anklet",
+    "sourceHash": "0882161c2274236158ef89d680e4e0a37ee89455f98075d7dcc51f1c457a5ee3",
+    "text": "Bracelet de cheville des marées"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

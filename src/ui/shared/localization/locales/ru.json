@@ -1031,6 +1031,36 @@
     "sourceHash": "38a6b3fa7535cc1f0a25c7207d932636df31174e3b54e12835fc8e0f64e25e73",
     "text": "Получите дополнительно {{value0}} золота за каждый выигранный бой"
   },
+  "content.boon.sovereign-toast-rack.name": {
+    "reviewed": true,
+    "source": "Sovereign Toast Rack",
+    "sourceHash": "a14be87f620dc1f0dce73a6c719a10212bf9507fda34f0f0384cb7ebc7b69238",
+    "text": "Королевская подставка для тостов"
+  },
+  "content.boon.star-hoop.name": {
+    "reviewed": true,
+    "source": "Star Hoop",
+    "sourceHash": "6da122ac7e11a16c85756a28d393453da5ae8e493adca1b57b8fb19ba23bfb60",
+    "text": "Звёздный обруч"
+  },
+  "content.boon.stardust-whetstone.name": {
+    "reviewed": true,
+    "source": "Stardust Whetstone",
+    "sourceHash": "eee81d2cd0d734c13724f2752d9a519aebc45e350515c262798bfc30611ecdf5",
+    "text": "Точильный камень звёздной пыли"
+  },
+  "content.boon.story-puzzle-cube.name": {
+    "reviewed": true,
+    "source": "Story Puzzle Cube",
+    "sourceHash": "87c84a1ddb5b0312b03dc617c7b717a5e8f89d09c2fa5d3a2ee0700507d54d94",
+    "text": "Кубик историй"
+  },
+  "content.boon.sundering-charm.name": {
+    "reviewed": true,
+    "source": "Sundering Charm",
+    "sourceHash": "911e7f2c70348a7f2c3f2da7ee3d99c069c7ff28e7d5b133e4fd3b4299b7c7e7",
+    "text": "Оберег раскола"
+  },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
     "source": "Tattered Pages",
@@ -1043,11 +1073,35 @@
     "sourceHash": "7f50d1c08cf33491028f796133fce4c66f314985646207722eda5bb77e1fbdff",
     "text": "В начале боя возьмите {{value0}} дополнительную карту"
   },
+  "content.boon.thaw-spoon.name": {
+    "reviewed": true,
+    "source": "Thaw Spoon",
+    "sourceHash": "d5a75190adb0a756f4d4ba85f6fb18bbd2a48eeb076d42d1f5f270e487c3bec0",
+    "text": "Ложка оттепели"
+  },
   "content.boon.thaw-spoon.rule": {
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
     "sourceHash": "3181b8273645028a797e80ce289aeb02af4aa4817a051beafbbe84ea9c583c57",
     "text": "<keyword0>Лечение</keyword0> снимает равное количество накопленной <keyword1>заморозки</keyword1>"
+  },
+  "content.boon.thistle-sieve.name": {
+    "reviewed": true,
+    "source": "Thistle Sieve",
+    "sourceHash": "a6165dc737ae32bc5507ce487c5b4c9aebe02e5bac7023463de3451ece2c21e7",
+    "text": "Сито чертополоха"
+  },
+  "content.boon.thornheart-ring.name": {
+    "reviewed": true,
+    "source": "Thornheart Ring",
+    "sourceHash": "ae379c1c505e2b8cabed810d2100da5cd994d57fc5b5dd4f3529039041226d32",
+    "text": "Кольцо тернового сердца"
+  },
+  "content.boon.thunder-conch.name": {
+    "reviewed": true,
+    "source": "Thunder Conch",
+    "sourceHash": "98529655f315cad16e9406825e71f9030955246d70c22405fe43a96c10073f1b",
+    "text": "Громовая раковина"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1060,6 +1114,12 @@
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
     "sourceHash": "9142e1dde00b294e67e61e5e26a713682b7e09cba42c71cf6c2074dbd59d4c12",
     "text": "Нанесите {{value0}} урона <keyword0>природой</keyword0>, когда <keyword1>оглушаете</keyword1> врага"
+  },
+  "content.boon.tide-anklet.name": {
+    "reviewed": true,
+    "source": "Tide Anklet",
+    "sourceHash": "9f0339f52f6d122d46bd718f22d76e2365a4e78719005b0ae9664a4ceaee0bbd",
+    "text": "Ножной браслет прилива"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

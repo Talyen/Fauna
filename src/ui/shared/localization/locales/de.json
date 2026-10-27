@@ -1031,6 +1031,36 @@
     "sourceHash": "59c4f895527616b69555507ad12caeca6df4bef9d3a6211785f817ec9868df92",
     "text": "Erhalte {{value0}} zusätzliches Gold für jeden gewonnenen Kampf"
   },
+  "content.boon.sovereign-toast-rack.name": {
+    "reviewed": true,
+    "source": "Sovereign Toast Rack",
+    "sourceHash": "7c22e780d2bd8ad3d5889bbf0b02168cda179ffd68778e7695496dd91ba15c21",
+    "text": "Königlicher Toastständer"
+  },
+  "content.boon.star-hoop.name": {
+    "reviewed": true,
+    "source": "Star Hoop",
+    "sourceHash": "10895c4f87e6d8ec7ce78fa248569ba5145f22e62eb88fe0cb3419923283aa01",
+    "text": "Sternreif"
+  },
+  "content.boon.stardust-whetstone.name": {
+    "reviewed": true,
+    "source": "Stardust Whetstone",
+    "sourceHash": "083805e099e2643f4d544854887734f49c46b28d08fb0bce45b919109f726d38",
+    "text": "Sternenstaub-Wetzstein"
+  },
+  "content.boon.story-puzzle-cube.name": {
+    "reviewed": true,
+    "source": "Story Puzzle Cube",
+    "sourceHash": "2808d30cadf2e1e441309c027b4e95df92452090d37575c5a477aa29b514b774",
+    "text": "Geschichtenrätselwürfel"
+  },
+  "content.boon.sundering-charm.name": {
+    "reviewed": true,
+    "source": "Sundering Charm",
+    "sourceHash": "d55d0e7bb4444b923b93d0fde82b28e45d5de22c415a5075b0aa93fbb70eaa4f",
+    "text": "Spaltungsamulett"
+  },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
     "source": "Tattered Pages",
@@ -1043,11 +1073,35 @@
     "sourceHash": "51ee765e4dc4f04e3192f2d2de9bae52e4748874a2ab69230885b19ad07a58f1",
     "text": "Ziehe zu Kampfbeginn {{value0}} zusätzliche Karte"
   },
+  "content.boon.thaw-spoon.name": {
+    "reviewed": true,
+    "source": "Thaw Spoon",
+    "sourceHash": "6932c31e20c8448b8d45d5822e137031df1b3fbe94b5108dff74e129d1011033",
+    "text": "Taulöffel"
+  },
   "content.boon.thaw-spoon.rule": {
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
     "sourceHash": "d5b81022bd951fa17df7d93d09f796e37434f3c13b65917ebc0a533bd77774ca",
     "text": "<keyword0>Heilung</keyword0> entfernt ebenso viel <keyword1>Frost</keyword1>-Aufbau"
+  },
+  "content.boon.thistle-sieve.name": {
+    "reviewed": true,
+    "source": "Thistle Sieve",
+    "sourceHash": "0913e85a4514f2657c64db8fdffc9acbe6623c7c54eda2a8259a3dac101e848f",
+    "text": "Distelsieb"
+  },
+  "content.boon.thornheart-ring.name": {
+    "reviewed": true,
+    "source": "Thornheart Ring",
+    "sourceHash": "11a21968eb864b3ab338e17b31b8d4fdd7234ff0d1db2155a88db46be63cfc73",
+    "text": "Dornenherzring"
+  },
+  "content.boon.thunder-conch.name": {
+    "reviewed": true,
+    "source": "Thunder Conch",
+    "sourceHash": "97eb5a3c459ca187685337ba15e79e8cab972e725df39b2410cb62300d1c4c40",
+    "text": "Donnerschnecke"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1060,6 +1114,12 @@
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
     "sourceHash": "76dc9188e01ca617eaf2ee169b35533a15b9816fa84d567861e7966dda5dd9c9",
     "text": "Verursache {{value0}} <keyword0>Natur</keyword0>-Schaden, wenn du einen Gegner <keyword1>betäubst</keyword1>"
+  },
+  "content.boon.tide-anklet.name": {
+    "reviewed": true,
+    "source": "Tide Anklet",
+    "sourceHash": "e01bf6df1c7e26f63a0ab99fbe8dd7096c2277298fd0125bf9027cd6b580979c",
+    "text": "Gezeitenfußreif"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,

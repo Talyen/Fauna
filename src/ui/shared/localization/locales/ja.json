@@ -1031,6 +1031,36 @@
     "sourceHash": "8e2195c2d5e087c23d12fd78b7bb1a808bc188dcb4b4acd26d064d80d0541869",
     "text": "戦闘に勝利するたびに追加のゴールドを{{value0}}獲得"
   },
+  "content.boon.sovereign-toast-rack.name": {
+    "reviewed": true,
+    "source": "Sovereign Toast Rack",
+    "sourceHash": "d2926d7778cf5d7f6a0a74b815fb0a20eeff22976bc49e94a7004e95d25bd185",
+    "text": "王のトーストラック"
+  },
+  "content.boon.star-hoop.name": {
+    "reviewed": true,
+    "source": "Star Hoop",
+    "sourceHash": "801780757b836e50fbd5e5534b2bd07ad487d5d14f22dc7b31ab6f38734f0578",
+    "text": "星の輪"
+  },
+  "content.boon.stardust-whetstone.name": {
+    "reviewed": true,
+    "source": "Stardust Whetstone",
+    "sourceHash": "f7d03b5e94a216fe18341decdee0b652914e6ed94bbda62e93946d03befba943",
+    "text": "星屑の砥石"
+  },
+  "content.boon.story-puzzle-cube.name": {
+    "reviewed": true,
+    "source": "Story Puzzle Cube",
+    "sourceHash": "fb30f57feb34c3b7582363ca3efd91102135d5d09d2e17a45844e63c8f740323",
+    "text": "物語のパズルキューブ"
+  },
+  "content.boon.sundering-charm.name": {
+    "reviewed": true,
+    "source": "Sundering Charm",
+    "sourceHash": "b4a7f6c9705df97cd3771da54429a5d408b267c7a5506a999c79b055adeb3988",
+    "text": "粉砕のお守り"
+  },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
     "source": "Tattered Pages",
@@ -1043,11 +1073,35 @@
     "sourceHash": "864fb92047e1067b42bfce85c799bc9c2b653b0c56299040c6a23096014d6419",
     "text": "戦闘開始時にカードを追加で{{value0}}枚引く"
   },
+  "content.boon.thaw-spoon.name": {
+    "reviewed": true,
+    "source": "Thaw Spoon",
+    "sourceHash": "a9658e6891055a5594895189a0f039ed161dc0732be074ae0de18c956d46d521",
+    "text": "雪解けのスプーン"
+  },
   "content.boon.thaw-spoon.rule": {
     "reviewed": true,
     "source": "<keyword0>Healing</keyword0> removes an equal amount of <keyword1>Freeze</keyword1> buildup",
     "sourceHash": "9346db44525e39dd38c1516994951614847d6803abe3f244641c1e67f719d2b4",
     "text": "<keyword0>回復</keyword0>は同量の<keyword1>凍結</keyword1>の蓄積を取り除く"
+  },
+  "content.boon.thistle-sieve.name": {
+    "reviewed": true,
+    "source": "Thistle Sieve",
+    "sourceHash": "3c5f5219be28ccbf4abbf433e086d51ce56a3f136b151885efdd594a79052324",
+    "text": "アザミのふるい"
+  },
+  "content.boon.thornheart-ring.name": {
+    "reviewed": true,
+    "source": "Thornheart Ring",
+    "sourceHash": "0bc7f0153d130eaa5a64e9ac95d5caf50e890731dffdacb570ca45486fce1e57",
+    "text": "茨の心の指輪"
+  },
+  "content.boon.thunder-conch.name": {
+    "reviewed": true,
+    "source": "Thunder Conch",
+    "sourceHash": "9cbd33429fc1a378a373ba72605afe634eb20134a45b1793d3f7ba6eb9a3de65",
+    "text": "雷のほら貝"
   },
   "content.boon.thunderstone.name": {
     "reviewed": true,
@@ -1060,6 +1114,12 @@
     "source": "Deal {{value0}} <keyword0>Nature</keyword0> damage when you <keyword1>Stun</keyword1> an enemy",
     "sourceHash": "bf443095b42a88128b092105e60556c56052cbd4cf2dfc5f3fecad8954c216ad",
     "text": "敵を<keyword1>スタン</keyword1>させると{{value0}}の<keyword0>自然</keyword0>ダメージを与える"
+  },
+  "content.boon.tide-anklet.name": {
+    "reviewed": true,
+    "source": "Tide Anklet",
+    "sourceHash": "811328c900778d13c1d19c22b53fe1bb80b15292911923954e4f0b0c347a7aef",
+    "text": "潮の足輪"
   },
   "content.boon.undertow-castanets.rule": {
     "reviewed": true,
