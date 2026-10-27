@@ -11,9 +11,10 @@ export function permanentKitSize(kind: SpeciesId) {
 /** Definition order and copy order also determine player slots and seeded boss shuffles. */
 export function permanentKit(kind: SpeciesId) {
   const copies = permanentCardCopies(kind);
-  return speciesCards(kind).flatMap((definition) =>
-    Array.from({ length: copies }, (_, copy) => ({ definition, copy })),
-  );
+  const kit: { definition: ReturnType<typeof speciesCards>[number]; copy: number }[] = [];
+  for (const definition of speciesCards(kind))
+    for (let copy = 0; copy < copies; copy++) kit.push({ definition, copy });
+  return kit;
 }
 
 /** Slots can move between piles, but the complete multiset must survive save and resume. */

@@ -355,7 +355,17 @@ it("matches discard eligibility and refreshes policy facts for each decision", (
   const own = state.cards.find((card) => card.ownerId === owner!.id)!;
   const living = state.cards.find((card) => card.ownerId === ally!.id)!;
   const knockedOut = state.cards.find((card) => card.ownerId === fallen!.id)!;
-  for (const discard of [[], [own.id], [knockedOut.id, living.id], [living.id, own.id]]) {
+  const shared = { ...living, id: "shared", ownerId: null };
+  state.cards.push(shared);
+  for (const discard of [
+    [],
+    [own.id],
+    [living.id],
+    [knockedOut.id],
+    [shared.id],
+    [knockedOut.id, living.id],
+    [living.id, own.id],
+  ]) {
     state.battle.discard = discard;
     const facts = battleBenefitFacts(state);
     for (const actor of [undefined, owner!.id, ally!.id]) {

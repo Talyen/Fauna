@@ -98,9 +98,11 @@ export function encounterPacks(encounter: number) {
 export function generateEncounterPack(state: GameState, savedPack?: readonly SpeciesId[]): SpeciesId[] {
   const packs = encounterPacks(state.encounter);
   const pack = savedPack ?? packs[Math.floor(roll(state) * packs.length)]!;
-  const roster = [...state.team, ...state.reserves].map((unit) => unit.species);
   const selected = pack.slice(0, Math.min(3, state.encounter + 1));
-  if (!selected.some((kind) => roster.includes(kind))) return selected;
+  const inRoster = (kind: SpeciesId) =>
+    state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind);
+  if (!selected.some(inRoster)) return selected;
+  const roster = [...state.team, ...state.reserves].map((unit) => unit.species);
   const eligible = recruitableSpecies.filter((entry) => !roster.includes(entry.id));
   return selected.map((kind) =>
     roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind,

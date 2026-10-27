@@ -219,7 +219,7 @@ export const modifierImplementations = freeze(
       "aether-gramophone": ["./combat/abilities#executeAbility"],
       "herbarium-press": ["./combat/statuses#removeEffects"],
       "honey-press": ["./combat/statuses#removeEffects"],
-      "rook-of-mercy": ["./team#rookOfMercy"],
+      "rook-of-mercy": ["./team#rookOfMercy", "./team#swapBackup"],
       "tidecrest-hairpin": [
         "./combat/damage-reactions#thornRetaliation",
         "./combat/damage-reactions#dodgeResponse",

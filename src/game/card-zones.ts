@@ -18,7 +18,8 @@ export const MAX_BATTLE_CARDS = 256;
 
 /** Preserve pile order while retiring or relocating slots across the whole battle. */
 export function filterCardZones(battle: BattleState["battle"], keep: (id: string) => boolean) {
-  for (const zone of ["draw", "hand", "buffer", "discard"] as const) battle[zone] = battle[zone].filter(keep);
+  for (const zone of ["draw", "hand", "buffer", "discard"] as const)
+    if (battle[zone].length) battle[zone] = battle[zone].filter(keep);
 }
 
 type HandZones = Pick<BattleState["battle"], "hand" | "buffer">;
@@ -78,7 +79,8 @@ function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
   const owners = new Set<string>();
   for (const unit of state.team) if (unit.health > 0 && unit.id !== ownerId) owners.add(unit.id);
   const cards = new Set<string>();
-  for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
+  if (owners.size)
+    for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
   return cards;
 }
 
@@ -106,25 +108,28 @@ export function journeyReturn(state: GameState, ownerId: string | null, events: 
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   queueCard(state.battle!, handCapacity(state), id);
-  const original = state.cards.find((card) => card.id === id);
-  const ownerId = original?.ownerId;
+  let original: Card | undefined;
+  const originalCard = () => (original ??= state.cards.find((card) => card.id === id));
   if (state.boons.includes("dune-shuttle")) {
+    const ownerId = originalCard()?.ownerId;
     const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
     if (owner) grantBlock(state, owner, boonRule("dune-shuttle").block, events);
   }
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
-    if (reader.health <= 0 || battleCardCapacity(state) === 0) continue;
+    if (reader.health <= 0) continue;
+    if (battleCardCapacity(state) === 0) break;
     const chance = passiveAmount(state, reader.species, "wellRead");
     if (!succeeds(state, chance / 100, false, events)) continue;
-    const copy = createTemporaryCard(state, original!)!;
+    const original = originalCard()!;
+    const copy = createTemporaryCard(state, original)!;
     queueCard(state.battle!, handCapacity(state), copy.id);
     events.push({
       kind: "action",
       actionType: "support",
       actorId: reader.id,
-      targetId: original!.ownerId ?? undefined,
-      text: `${species(reader.species).name} copies ${definition(original!.definitionId).name} with Well Read`,
+      targetId: original.ownerId ?? undefined,
+      text: `${species(reader.species).name} copies ${definition(original.definitionId).name} with Well Read`,
     });
   }
 }
@@ -168,6 +173,15 @@ export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[
 
 /** Eligibility checks do not need to enumerate the complete ordered draw pool. */
 export function hasDiscardDrawCard(state: GameState, otherOwnerId?: string): boolean {
+  if (state.battle!.discard.length === 1) {
+    const card = state.cards.find((entry) => entry.id === state.battle!.discard[0])!;
+    if (otherOwnerId === undefined) return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
+    return (
+      card.ownerId !== null &&
+      card.ownerId !== otherOwnerId &&
+      state.team.some((unit) => unit.id === card.ownerId && unit.health > 0)
+    );
+  }
   return discardDrawPool(state, otherOwnerId, true).length > 0;
 }
 
@@ -240,13 +254,13 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
   if (!state.battle!.draw.length && !state.battle!.discard.length) return 0;
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = drawableOwnerIds(state);
-  const eligibleCards = new Set<string>();
+  const eligibleCards = alive.size ? new Set<string>() : undefined;
   // Well Read only inserts copies into the hand/buffer; draw/discard ownership
   // stays fixed throughout this draw, including recycling between draws.
-  if (alive.size)
+  if (eligibleCards)
     for (const card of state.cards)
       if (card.ownerId === null || alive.has(card.ownerId)) eligibleCards.add(card.id);
-  const eligible = (id: string) => !alive.size || eligibleCards.has(id);
+  const eligible = (id: string) => !eligibleCards || eligibleCards.has(id);
   let drawn = 0;
   for (let i = 0; i < count; i++) {
     if (!drawEligibleCard(state, eligible, events)) break;

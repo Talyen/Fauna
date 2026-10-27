@@ -274,7 +274,7 @@ export function swapBackup(
     const removed = new Set(
       state.cards.filter((card) => card.ownerId === outgoing.id && card.temporary).map((card) => card.id),
     );
-    state.cards = state.cards.filter((card) => !removed.has(card.id));
+    if (removed.size) state.cards = state.cards.filter((card) => !removed.has(card.id));
     const oldDefs = speciesCards(outgoing.species);
     const newDefs = speciesCards(incoming.species);
     const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
@@ -284,7 +284,7 @@ export function swapBackup(
       card.level = 0;
     }
     if (state.battle) {
-      filterCardZones(state.battle, (id) => !removed.has(id));
+      if (removed.size) filterCardZones(state.battle, (id) => !removed.has(id));
       for (const enemy of state.battle.enemies)
         if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
       if (fromCard) {
@@ -304,11 +304,12 @@ export function swapBackup(
   }
   if (fromCard && outgoing) {
     matchSwapBlock(state, outgoing, incoming, events);
-    rookOfMercy(
-      state,
-      state.team.filter((ally) => !previous.some((old) => old.id === ally.id)),
-      events,
-    );
+    if (state.boons.includes("rook-of-mercy"))
+      rookOfMercy(
+        state,
+        state.team.filter((ally) => !previous.some((old) => old.id === ally.id)),
+        events,
+      );
   }
   mountainGuide(state, incoming, previous, events);
   gentlePassage(state, previous, events);

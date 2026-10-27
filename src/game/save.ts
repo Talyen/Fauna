@@ -22,6 +22,15 @@ import { speciesCards, SPECIES, species } from "./content";
 import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { BattleState, GameState } from "./types";
 const unique = (values: readonly unknown[]) => new Set(values).size === values.length;
+function uniqueBy<T>(values: readonly T[], key: (value: T) => unknown) {
+  const seen = new Set<unknown>();
+  for (const value of values) {
+    const id = key(value);
+    if (seen.has(id)) return false;
+    seen.add(id);
+  }
+  return true;
+}
 function invalid(condition: boolean) {
   if (condition) throw new Error("Save contains inconsistent game data.");
 }
@@ -83,7 +92,7 @@ function validateCollection(state: GameState) {
     !unique(state.selected) ||
       state.selected.some((kind) => !starterPool.includes(kind)) ||
       (state.phase === "draft" && state.selected.length > count) ||
-      (state.phase !== "draft" && !collectedSpecies(state).length),
+      (state.phase !== "draft" && !SPECIES.some(({ id }) => state.discovery.recruited[id] !== undefined)),
   );
 }
 
@@ -145,7 +154,7 @@ function validateExpedition(state: GameState) {
 function validateRoster(state: GameState) {
   const collected = collectedSpecies(state);
   const roster = [...state.team, ...state.reserves];
-  invalid(!unique(roster.map((c) => c.id)) || !unique(state.cards.map((c) => c.id)));
+  invalid(!uniqueBy(roster, (c) => c.id) || !uniqueBy(state.cards, (c) => c.id));
   invalid(state.team.length + state.reserves.length > 5);
   invalid(
     state.phase !== "draft" &&
@@ -154,7 +163,7 @@ function validateRoster(state: GameState) {
   );
   // Reserve battle-generated identities before a destination can create those combatants.
   invalid(roster.some((unit) => /^(?:enemy-|echo-)/.test(unit.id)));
-  invalid(!unique(roster.map((creature) => creature.species)));
+  invalid(!uniqueBy(roster, (creature) => creature.species));
   invalid(roster.some((creature) => !collected.includes(creature.species)));
   invalid(roster.some((c) => c.health > species(c.species).health));
   const teamById = new Map(state.team.map((unit) => [unit.id, unit]));
@@ -212,8 +221,8 @@ function validateSupport(state: GameState) {
       visit.encounter !== state.encounter ||
         visit.id !== `support-${visit.encounter}` ||
         !visit.stock.length ||
-        !unique(visit.stock.map((r) => r.slot)) ||
-        !unique(visit.stock.map((r) => r.boon)) ||
+        !uniqueBy(visit.stock, (r) => r.slot) ||
+        !uniqueBy(visit.stock, (r) => r.boon) ||
         visit.stock.some(
           (r, i) =>
             r.slot !== `slot-${i}` ||
@@ -242,7 +251,7 @@ function validateRewards(state: GameState) {
         KEYWORDS.some((keyword) => (receipt.xp[keyword] ?? 0) !== (reward.xp[keyword] ?? 0)),
     );
     invalid((!bossEncounter(state) || finalEncounter(state)) && reward.boons.length > 0);
-    const enemies = encounterSource(state).enemies;
+    const enemies = reward.recruits.length || state.phase === "recruit" ? encounterSource(state).enemies : [];
     invalid(
       !unique(reward.boons) ||
         reward.boons.some((boon) => state.boons.includes(boon)) ||
@@ -277,7 +286,7 @@ function validateBattle(state: BattleState) {
   invalid(!metronomeActorValid(state));
   invalid(battle.encoreProgress > encoreProgressLimit(state));
   invalid(!unique(battle.puzzleProgress) || battle.puzzleProgress.length > puzzleProgressLimit(state));
-  invalid(battle.enemies.length !== source.enemies.length || !unique(battle.enemies.map((e) => e.id)));
+  invalid(battle.enemies.length !== source.enemies.length || !uniqueBy(battle.enemies, (e) => e.id));
   const playerField = battlefield(state, "player");
   battle.enemies.forEach((enemy) => {
     const index = Number(enemy.id.replace(/^enemy-/, ""));
@@ -412,7 +421,7 @@ function validateCombatants(state: GameState) {
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
       invalid(
         Object.values(stats.statusSources).some((id) => !combatantIds.has(id)) ||
-          !unique(stats.bleedLeech.map((row) => row.sourceId)) ||
+          !uniqueBy(stats.bleedLeech, (row) => row.sourceId) ||
           stats.bleedLeech.some((row) => row.amount === 0) ||
           stats.bleedLeech.reduce((sum, row) => sum + row.amount, 0) > stats.bleed ||
           stats.bleedLeech.some((row) => !combatantIds.has(row.sourceId)),

@@ -5,7 +5,11 @@ type MessageEntry = { source: string; text: string };
 type PluralEntry = { source: PluralForms; forms: Partial<Record<PluralCategory, string>> };
 export type MessageCatalog = Readonly<Record<string, MessageEntry | PluralEntry>>;
 
-const variables = (text: string) => new Set([...text.matchAll(/\{\{([a-zA-Z][\w]*)\}\}/g)].map((m) => m[1]!));
+function variables(text: string) {
+  const names = new Set<string>();
+  for (const match of text.matchAll(/\{\{([a-zA-Z][\w]*)\}\}/g)) names.add(match[1]!);
+  return names;
+}
 function matchesVariables(source: string, translation: string) {
   if (!source.includes("{{") && !translation.includes("{{") && !translation.includes("}}")) return true;
   const expected = variables(source);

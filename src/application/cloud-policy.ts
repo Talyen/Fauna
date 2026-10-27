@@ -4,9 +4,11 @@ export function newestHeads(records: readonly CloudSnapshot[]) {
   const byId = new Map<string, CloudSnapshot>();
   for (const record of records) byId.set(record.id, record);
   const unique = [...byId.values()];
-  const ancestors = new Set<string>();
-  for (const record of unique) for (const ancestor of record.ancestors) ancestors.add(ancestor);
-  return unique.filter((record) => !ancestors.has(record.id));
+  let ancestors: Set<string> | undefined;
+  for (const record of unique)
+    for (const ancestor of record.ancestors) (ancestors ??= new Set()).add(ancestor);
+  const knownAncestors = ancestors;
+  return knownAncestors ? unique.filter((record) => !knownAncestors.has(record.id)) : unique;
 }
 
 /** Sequence counters select device slots; ancestry alone retires competing progress. */

@@ -95,9 +95,11 @@ export function createBattleActor() {
       }
       scope = currentScope;
       const { key, cards } = tacticalState(state);
-      const tried = attempted.get(key) ?? new Set<string>();
+      const tried = attempted.get(key);
       const choices = rankedBattleChoices(state, autoEndTurn);
-      const selected = choices.find((choice) => !tried.has(actionKey(cards, choice.command)));
+      const selected = tried
+        ? choices.find((choice) => !tried.has(actionKey(cards, choice.command)))
+        : choices[0];
       previous = freeze(
         selected ?? {
           command: { type: "endTurn" },
@@ -108,8 +110,9 @@ export function createBattleActor() {
         },
         true,
       );
-      tried.add(actionKey(cards, previous.command));
-      attempted.set(key, tried);
+      const nextTried = tried ?? new Set<string>();
+      nextTried.add(actionKey(cards, previous.command));
+      attempted.set(key, nextTried);
       // Bound long productive turns without restricting their actions.
       if (attempted.size > 256) attempted.delete(attempted.keys().next().value!);
       revision = state.revision;

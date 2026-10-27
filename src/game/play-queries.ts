@@ -115,15 +115,17 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
   if (pendingReplacement(state) || !state.battle.hand.length) return [];
   const cards = state.battle.hand.length > 1 ? new Map<string, Card>() : undefined;
   if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
-  const recipientsByDefinition = new Map<CardDefinition, ReturnType<typeof chosenRecipients>>();
+  let recipientsByDefinition: Map<CardDefinition, ReturnType<typeof chosenRecipients>> | undefined;
   const recipients = (def: CardDefinition) => {
+    recipientsByDefinition ??= new Map();
     let result = recipientsByDefinition.get(def);
     if (!result) recipientsByDefinition.set(def, (result = chosenRecipients(state, def)));
     return result;
   };
   const hasRecipients = (def: CardDefinition) => recipients(def).length > 0;
-  const recipientIds = new Map<CardDefinition, string[]>();
+  let recipientIds: Map<CardDefinition, string[]> | undefined;
   const targetIds = (def: CardDefinition) => {
+    recipientIds ??= new Map();
     let ids = recipientIds.get(def);
     if (!ids) recipientIds.set(def, (ids = recipients(def).map((unit) => unit.id)));
     return ids;
