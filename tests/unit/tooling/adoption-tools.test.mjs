@@ -235,8 +235,11 @@ it("rejects broken Windows headers, escaping resources and corrupt packaged medi
   ).toThrow("renderer differs");
   entries["dist/prepared/art.svg"] = Buffer.from("corrupt");
   expect(() => verifyArchive(read, options)).toThrow();
-  entries["dist/app.js"] = Buffer.from("Skip combat");
-  expect(() => verifyArchive(read, options)).toThrow();
+  entries["dist/prepared/art.svg"] = Buffer.from("image");
+  entries["dist/app.js"] = Buffer.from('{"source":"Skip combat"}');
+  expect(() => verifyArchive(read, options)).not.toThrow();
+  entries["dist/app.js"] = Buffer.from("skip-combat-control compact-icon-control");
+  expect(() => verifyArchive(read, options)).toThrow("Production renderer contains development controls");
 });
 it("keeps complete patch evidence for unusual filenames without staging or losing staged changes", () => {
   const root = temporaryDirectory("fauna-review-");

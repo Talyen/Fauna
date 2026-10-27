@@ -10,6 +10,8 @@ import { extractFile, listPackage } from "@electron/asar";
 import { assets } from "../assets/assets.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+// A translated catalog can contain the label even when Vite removes the development-only control.
+const DEVELOPMENT_CONTROL_MARKER = Buffer.from("skip-combat-control");
 // Runtime files shipped by Electron 45 Windows x64; verified against its official ZIP.
 export const WINDOWS_RUNTIME_FILES = [
   "resources.pak",
@@ -107,7 +109,7 @@ export function verifyArchive(read, { expected, receipt, runtimeFiles, rendererF
   if (!resources.some((name) => name.endsWith(".js"))) throw new Error("Renderer has no application script.");
   for (const name of resources) {
     const bytes = required(name);
-    if (name.endsWith(".js") && bytes.includes(Buffer.from("Skip combat")))
+    if (name.endsWith(".js") && bytes.includes(DEVELOPMENT_CONTROL_MARKER))
       throw new Error("Production renderer contains development controls.");
   }
   for (const [id, record] of Object.entries(receipt.records)) {
@@ -205,7 +207,7 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
     releaseTag,
   });
   for (const name of names.filter((name) => name.startsWith("dist/") && name.endsWith(".js")))
-    if (readArchive(name).includes(Buffer.from("Skip combat")))
+    if (readArchive(name).includes(DEVELOPMENT_CONTROL_MARKER))
       throw new Error("Development controls in production chunk.");
   return result;
 }
