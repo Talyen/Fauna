@@ -73,7 +73,17 @@ export function enemyCardValue(
   targetId?: string,
   allyTargetId?: string,
 ) {
-  const before = positionValue(state);
+  return evaluateEnemyCard(state, enemy, def, positionValue(state), targetId, allyTargetId);
+}
+
+function evaluateEnemyCard(
+  state: BattleState,
+  enemy: Enemy,
+  def: CardDefinition,
+  before: number,
+  targetId?: string,
+  allyTargetId?: string,
+) {
   const spentCard = enemy.deck?.hand.includes(def.id) ? 1 : 0;
   let total = 0;
   for (let probe = 0; probe < 8; probe++) {
@@ -100,18 +110,35 @@ export function enemyCardValue(
 /** Re-evaluate from current combat after every play; no-repeat preference only breaks equal values. */
 export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonly CardDefinition[]) {
   const targetId = highestHealth(battlefield(state, "player"))?.id;
+  let before: number | undefined;
+  let allies: Enemy[] | undefined;
+  // Probes use the same state and fixed decisions throughout this choice. Keep
+  // this cache local because the live turn draft can change after every play.
+  const values = enemy.deck ? new Map<CardDefinition, Map<string, number>>() : undefined;
   let best: EnemyChoice | undefined;
   for (const def of cards) {
     if (enemy.deck && def.cost > enemy.deck.mana) continue;
-    const allies = battlefield(state, "enemy");
     const recipients =
       def.effect === "resurrect"
         ? state.battle.enemies.filter((unit) => unit.health <= 0).map((unit) => unit.id)
         : cardTargeting(def) === "ally"
-          ? allies.filter((unit) => unit.health > 0).map((unit) => unit.id)
+          ? (allies ??= battlefield(state, "enemy")).filter((unit) => unit.health > 0).map((unit) => unit.id)
           : [enemy.id];
     for (const allyTargetId of recipients) {
-      const value = enemyCardValue(state, enemy, def, targetId, allyTargetId);
+      let cardValues = values?.get(def);
+      if (values && !cardValues) values.set(def, (cardValues = new Map()));
+      let value = cardValues?.get(allyTargetId);
+      if (value === undefined) {
+        value = evaluateEnemyCard(
+          state,
+          enemy,
+          def,
+          (before ??= positionValue(state)),
+          targetId,
+          allyTargetId,
+        );
+        cardValues?.set(allyTargetId, value);
+      }
       if (value <= 0) continue;
       if (
         !best ||
