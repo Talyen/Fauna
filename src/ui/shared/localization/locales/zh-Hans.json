@@ -353,6 +353,12 @@
     "sourceHash": "0975804eb3991b60ab67f4a9f83bd89c194ed538dec4bc8eff31a703073bd898",
     "text": "<keyword0>致盲</keyword0>的敌人无法获得<keyword1>荆棘</keyword1>"
   },
+  "content.boon.apple-press.name": {
+    "reviewed": true,
+    "source": "Apple Press",
+    "sourceHash": "f5a68ce0c36dbdc4f82b8b41083e9abdbefd3165bf13fa5ddc95886a86227f1d",
+    "text": "苹果榨汁器"
+  },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
     "source": "Ashfall Pendant",
@@ -376,6 +382,12 @@
     "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "sourceHash": "f05973df46b38d5a1af91dde5b45891d9df139790400864d818b98410bb2c3ce",
     "text": "<keyword0>驱散</keyword0>无法移除盟友最后一个有益效果"
+  },
+  "content.boon.bellows-heart.name": {
+    "reviewed": true,
+    "source": "Bellows Heart",
+    "sourceHash": "c0c6d61b7a911c440f169c50135eebc01518edf69cb18e7906d9228e77d6be44",
+    "text": "心形风箱"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -472,6 +484,18 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "9a795b7010c74e2fa62b9b1122b1b432ddfc33b1594237ee27a824e424fd8bee",
     "text": "后备盟友可以接受<keyword0>治疗</keyword0>"
+  },
+  "content.boon.caravan-rug.name": {
+    "reviewed": true,
+    "source": "Caravan Rug",
+    "sourceHash": "651d3a2a75d68222b505b13aae72a03037ac325d8bfab4e3c30c017626ce1bb8",
+    "text": "商队地毯"
+  },
+  "content.boon.chromatic-viol.name": {
+    "reviewed": true,
+    "source": "Chromatic Viol",
+    "sourceHash": "5e7e3a43f0a7a4c6249812a8c4852cf20f8f6d0f826328d06006733038f705ef",
+    "text": "彩音维奥尔琴"
   },
   "content.boon.cinder-fan.name": {
     "reviewed": true,
@@ -593,6 +617,12 @@
     "sourceHash": "87acc85e146fd72293ead1895ecad748c47474740e1e617e7490094ed577d44f",
     "text": "造成<keyword0>流血</keyword0>伤害时获得{{value0}}金币"
   },
+  "content.boon.cypress-reliquary.name": {
+    "reviewed": true,
+    "source": "Cypress Reliquary",
+    "sourceHash": "124ef2e57bab723c079ec4f97fc5b5633e25c46891be76fee741cb597ca86080",
+    "text": "柏木圣物匣"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -652,6 +682,12 @@
     "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
     "sourceHash": "2055e71a815edddb09ab520b3db491e034e0824eba7a62a1e76a038b107a8c9a",
     "text": "<keyword0>抵消</keyword0>有{{value0}}%的概率同时触发<keyword1>反射</keyword1>"
+  },
+  "content.boon.echo-ocarina.name": {
+    "reviewed": true,
+    "source": "Echo Ocarina",
+    "sourceHash": "7638c9f2a47b59cae9f3d90ea9a5cce9d2e0b32ad2a4c13fc5f294713ca5bce1",
+    "text": "回声陶笛"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -713,6 +749,12 @@
     "sourceHash": "c4af0ebb7a8ecc0e90b67a945a967afb12e0fd5d82bf49114fd309261f12b6a9",
     "text": "敌方攻击造成的<keyword0>格挡</keyword0>损失有一半转化为攻击者的<keyword1>眩晕</keyword1>累积"
   },
+  "content.boon.farewell-oar.name": {
+    "reviewed": true,
+    "source": "Farewell Oar",
+    "sourceHash": "1244a5aa1ed463ea68f74144821f91f0530b9fe49cc0a179d3686bd76636292b",
+    "text": "离别之桨"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -736,6 +778,18 @@
     "source": "Playing <keyword0>Food</keyword0> draws a card",
     "sourceHash": "1d0c182a014d7dbecf9937913602a29f60cbe88a3cf3d363c50fa9b09029885f",
     "text": "打出<keyword0>食物</keyword0>时抽一张牌"
+  },
+  "content.boon.folded-mountain.name": {
+    "reviewed": true,
+    "source": "Folded Mountain",
+    "sourceHash": "31dcbd654fedbabd4d235bdbbdf12ed9c9036c5e34a15b8ffc92c4c3eb8aa059",
+    "text": "折叠山峰"
+  },
+  "content.boon.frostglass-die.name": {
+    "reviewed": true,
+    "source": "Frostglass Die",
+    "sourceHash": "895c32c701a9290a9155f21f09210ba98f7339e04b3f6a47529e624ca0d1dcab",
+    "text": "霜玻璃骰子"
   },
   "content.boon.frozen-pocketwatch.name": {
     "reviewed": true,
@@ -785,6 +839,12 @@
     "sourceHash": "5e7f1f383da79474955bee837379dad9f994fa3947b2debac16bf3aab7582fde",
     "text": "<keyword0>格挡</keyword0>衰减时不会低于<keyword1>护甲</keyword1>"
   },
+  "content.boon.glassleaf-shield.name": {
+    "reviewed": true,
+    "source": "Glassleaf Shield",
+    "sourceHash": "5d058b36c19370c2d604abaf5066fef8be6f45c89e900343e964cdd1e8c9572b",
+    "text": "玻璃叶盾"
+  },
   "content.boon.grafting-needle.name": {
     "reviewed": true,
     "source": "Grafting Needle",
@@ -820,6 +880,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "sourceHash": "32e9f283cb4f5ab34437b341646939f11a87af08b27ef3d33463dec5b50dd215",
     "text": "战斗中恢复<keyword1>生命</keyword1>时获得{{value0}}点<keyword0>荆棘</keyword0>"
+  },
+  "content.boon.harvest-shears.name": {
+    "reviewed": true,
+    "source": "Harvest Shears",
+    "sourceHash": "f0323afd2059b6e5ccfabde065a12ae93f60c613c9fcb1105c257401751cdabd",
+    "text": "收获剪"
   },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
@@ -965,6 +1031,12 @@
     "sourceHash": "f4a47884779d48fd8bda2aaa5fed54529f98c382b500d0b8722a4d43355a4e82",
     "text": "拥有<keyword1>护甲</keyword1>的敌人身上的<keyword0>灼烧</keyword0>不会衰减"
   },
+  "content.boon.leafwing-shuttlecock.name": {
+    "reviewed": true,
+    "source": "Leafwing Shuttlecock",
+    "sourceHash": "76c8adcce36aa690439b10e8222a978aa2687f572c1187d2aec33cb0479f9ecb",
+    "text": "叶翼羽毛球"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -1049,6 +1121,12 @@
     "sourceHash": "68dcd9819d30356f52c55b7efa3ec69a6156976738e67307c5b2aa497b2a3e36",
     "text": "<keyword0>净化</keyword0>影响所有盟友"
   },
+  "content.boon.mirror-locket.name": {
+    "reviewed": true,
+    "source": "Mirror Locket",
+    "sourceHash": "600ca6b78b74caf02b757780be5f7a6ee3551b5c5f4496abd85700a58f87f6d9",
+    "text": "镜面坠盒"
+  },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
     "source": "Molten Paperweight",
@@ -1108,6 +1186,12 @@
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "103266330342e94d32abb8a2a9980f5b0241ad2d58c586aef30591f6dcee5ff3",
     "text": "<keyword0>食物</keyword0>牌的效果翻倍"
+  },
+  "content.boon.oasis-seed.name": {
+    "reviewed": true,
+    "source": "Oasis Seed",
+    "sourceHash": "6f44fb4f38f5d5f67966ff8bda7c96be9b7d2b764366a6e9093bb4a6491dcbcb",
+    "text": "绿洲之种"
   },
   "content.boon.obsidian-pitcher.name": {
     "reviewed": true,
@@ -1229,6 +1313,12 @@
     "sourceHash": "85bfa2bfefb578c64122f1e3fa9baf1b8f7d40d26c0682be5baab678ed735d06",
     "text": "因衰减失去的<keyword0>格挡</keyword0>有一半转化为<keyword1>护甲</keyword1>"
   },
+  "content.boon.pollen-basket.name": {
+    "reviewed": true,
+    "source": "Pollen Basket",
+    "sourceHash": "001ba5470e241cd4800704a17f5558cafac2fd6d7560129cad76fdd001747968",
+    "text": "花粉篮"
+  },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
     "source": "Poppy Seed Grinder",
@@ -1337,6 +1427,12 @@
     "sourceHash": "40b3de4118ea85e263d6e6d9846c3ee5d8ce5c9079b647c57fcf26e17d2b1c50",
     "text": "拥有<keyword1>格挡</keyword1>时不会消耗<keyword0>无效化</keyword0>"
   },
+  "content.boon.reef-diadem.name": {
+    "reviewed": true,
+    "source": "Reef Diadem",
+    "sourceHash": "0553b76569f92001f2ad66e22c10fdab34812e5a4756819db9cc85a18d1843db",
+    "text": "珊瑚礁冠"
+  },
   "content.boon.reef-incense-tile.name": {
     "reviewed": true,
     "source": "Reef Incense Tile",
@@ -1444,6 +1540,12 @@
     "source": "Gain {{value0}} additional Gold for each battle won",
     "sourceHash": "d4b81f0c97a8e2f1985ec7abd5f59b9b656d3d4d4989bc3d7a896b3a783a78d0",
     "text": "每赢得一场战斗额外获得{{value0}}金币"
+  },
+  "content.boon.soot-brush.name": {
+    "reviewed": true,
+    "source": "Soot Brush",
+    "sourceHash": "fb04a04a39604db261ce6c770273efd9ac949501d9eeee0ce834b8c92cf83ee5",
+    "text": "烟灰画笔"
   },
   "content.boon.sovereign-toast-rack.name": {
     "reviewed": true,
@@ -2806,6 +2908,42 @@
     "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
     "sourceHash": "0b6d0d4353bbe3cb4bb9d034edd63a9ba3ac1e08310dd706969ffe3d59cd8a51",
     "text": "对所有敌人施加{{value0}}点<keyword0>灼烧</keyword0> / 获得<keyword1>抵消</keyword1>"
+  },
+  "content.card.ravelland-antler-pass.name": {
+    "reviewed": true,
+    "source": "Antler Pass",
+    "sourceHash": "8ca602b9a8991e03d031ad52fc8fa052837cfd87c3844d95c9b5b6c7dc8c2ae3",
+    "text": "鹿角山口"
+  },
+  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "826a8f4f5d3a635e056beaa871ed035be6cdec9b7fd05a4d5f472289992d5660",
+    "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.ravelland-canyon-rebuke.name": {
+    "reviewed": true,
+    "source": "Canyon Rebuke",
+    "sourceHash": "67acb0b11e6b4aa29c214319181e34786da56e839f3a0758e1fb6c24d1ba13c6",
+    "text": "峡谷回击"
+  },
+  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "722d5a4dc7d20f3bd8d208c9f4935422c2e90d12b875eed7863967ff0e93477f",
+    "text": "对所有敌人造成{{value0}}点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.ravelland-rainward.name": {
+    "reviewed": true,
+    "source": "Rainward",
+    "sourceHash": "2c05ee4480a90e7b8e450c3059c71f2f3a124b2052a4e78f7a2b018cc9356926",
+    "text": "雨幕守护"
+  },
+  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "34f2bd1d0d9917b870b2a68c73469690f207615df47ec8c3c3ec10119407f634",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
@@ -5243,6 +5381,60 @@
     "sourceHash": "882af31494b5d2116a23d6c4ccd2b13c4b0611b3539c5301b62c8b5ed92ebaae",
     "text": "流转之焰"
   },
+  "content.species.ravelland.name": {
+    "reviewed": true,
+    "source": "Ravelland",
+    "sourceHash": "0cd8202e4490782b1beafc4cdda01691eb49948c9c5e9325d192e2e965aad6f9",
+    "text": "拉文兰"
+  },
+  "content.species.ravelland.passive.0.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "35a5e2baff99c4a7613db9ad2cc55e750d4068b60a9c9517ffb820e4d3b1b032",
+    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
+  "content.species.ravelland.passive.1.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "d2effa1c48f610c5a3fbcfa884b6a227033ccda33b17b263a00c7c61700d2817",
+    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
+  "content.species.ravelland.passive.2.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "469c72ab0109a1a8d1401223e67091db0d6e4abbf4519f9c30e65b524109dcd1",
+    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
+  "content.species.ravelland.passive.3.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "79243f723f266b3c50eecc6e316b2e891e9fa4c5ca779c4df0696666093159ba",
+    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
+  "content.species.ravelland.passive.4.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "368cfa77f8e3baa5a3cb35434c0a6a80fdd04a1f6d9839654f26c1f24e601ab5",
+    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
+  "content.species.ravelland.passive.5.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "3093c5ac0d7a64e3be0e087288f9c436cb88dd4d0510e94906a651b9db39f1e9",
+    "text": "伤害击破你的<keyword1>格挡</keyword1>时获得{{value0}}点<keyword0>护甲</keyword0>"
+  },
+  "content.species.ravelland.title": {
+    "reviewed": true,
+    "source": "The walking canyon",
+    "sourceHash": "04e1d1ae32fcadf965678d38c4fdfa76d767e02d8f1182685db602678f6dd265",
+    "text": "行走的峡谷"
+  },
+  "content.species.ravelland.trait": {
+    "reviewed": true,
+    "source": "Faultline",
+    "sourceHash": "a67e28122e94e003e04d2c73ab96a92ba6b16b33c8b0733a851f8d8bffe6c615",
+    "text": "断层线"
+  },
   "content.species.reedstag.name": {
     "reviewed": true,
     "source": "Reedstag",
@@ -5840,127 +6032,127 @@
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "076064221ce200864206df9c5cb8ffec133989b7983c9c60472a80ebaa4a92ec",
+    "sourceHash": "87f65684b1ac60434da16072d8d55700042f1f1b4d7adf2e398c0e1edb1e97a6",
     "text": "<keyword0>攻击反射</keyword0>：将下一次受到的攻击返还给攻击者; 防止该攻击对你造成的伤害和有害效果; 被<keyword1>反射</keyword1>的攻击不能再次<keyword2>反射</keyword2>; 持续至消耗或被<keyword3>驱散</keyword3>; 不叠加"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "a47ff9bae2911f57dccb0e49ef953ad3847349e258b622dab359c76c7df95507",
+    "sourceHash": "ceaab8a2e302995c41d99a87d9145543173bc1705cad2151711e62368baec015",
     "text": "<keyword0>致盲</keyword0>：下一次攻击有{{value0}}%的概率落空; 无论命中还是落空，该次攻击后效果消失; 落空视为每个目标都进行了<keyword1>闪避</keyword1>; 不叠加"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "5372e761e49994669bf7882361d79a845bc7e5508575fb0108587801c49feb50",
+    "sourceHash": "dde98090f1a2085fb3a83fccc9e46f4d83abd085cd47e85b8c915de40dbb1efa",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "28aeddff8a4fd21e8c271c4e0dda6ea680ac89c5bbe76bfe2cb99f6ab93e085b",
+    "sourceHash": "62caad0c6096fdf875544726eb531e3ced8df574c75b9f1f1d001a7fd03776c2",
     "text": "跳过回合"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "72c156de50cc3733bd83c90dcb6992ec38d1c4ea97491d7a88be24fa15e96058",
+    "sourceHash": "c7a6520d4504363fd2b84a3f440eea61724cd46a38a4abacd824cf5271ff8b29",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "12a3536f5552c27dcd86419331284a7e1b7185ad51b9e75b8cf10d8d1d14956b",
+    "sourceHash": "dbfbb08fae71fa0d024ce344a201a6c5e10a06c7336f0254e4c9deeb379e18d4",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "1e0652a803449aaf663855f6eeaceea7d30541ae349861410e8114f8105e5627",
+    "sourceHash": "e6b826b3b18105cd72deecb0ce44060a2a3feee8858c2ae0f1cadf722d53bdbc",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "9733a94625e8269395326ec072b80a14565d26007740c1992a9ad8a0b78798db",
+    "sourceHash": "b2f7742abbba32f859e89d58e9845f9d92173bcb004164a34e5cb6105b02e4a1",
     "text": "控制免疫 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "a590290157c9ac17dd19194f032c9778d17e8f9a045aece62632aeae098af80a",
+    "sourceHash": "0717f075c689f254b0e828e4d24cfa99d8f0044769c1222af5a06c9ad2dec757",
     "text": "免费追击：下一张卡牌免费"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "17e0836054def28a7fb5a76880845a167d8403ae4e1f1b076611bd440b8ecff0",
+    "sourceHash": "71693b66130c806c6d8a63d64f00f6dd1575520e5e08479cea50b1a5fa118b6d",
     "text": "神恩：下一张<keyword0>光</keyword0>卡牌免费"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "287d7db70a047f0d2eece85bb494e6a23de4fccc80338c12609cfa088f921957",
+    "sourceHash": "706f8d66282faec1496664a3863cc06e5172d1f5d8df5c10b2a2a39732494cb3",
     "text": "风步：下一张<keyword0>自然</keyword0>卡牌免费"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "7685dca5f6d2bd8f42a604a47fea8a15a2240dcba43ac121bbbae88a276b3332",
+    "sourceHash": "11a19a05d76167032c67607d4ae66dddfb806d171018542ca9b9d2e714a732a6",
     "text": "濒死 {{value0}}"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "201ec53c81e7c8629f523737ba6888195e5ed6072d77537d9df851f5088c9c44",
+    "sourceHash": "b2b90f45767c32c14bf5004dc62c3e877086112e576d662627470ee97be5cd02",
     "text": "<keyword0>抵消</keyword0>：在<keyword2>闪避</keyword2>之前<keyword1>抵消</keyword1>下一次受到的攻击，防止其伤害和有害效果; <keyword3>荆棘</keyword3>仍会反击; 持续至消耗或被<keyword4>驱散</keyword4>; 不叠加"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "3ae4500d2e5f7004f91fd8a213edfc2c70c34be38f071f08abb90327fdbca087",
+    "sourceHash": "9200b130aaf95bdee49736ca30b882cc2a7654c4e318a51664d18848322455ed",
     "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "371aea798d52973aaec3158b6898ec7fd3722908320757c0ed2c5fb6bfde49c3",
+    "sourceHash": "250bdc6875d5731d6db6d4fec3ebd27cca2f2121b4a856da024b18a814c24c3c",
     "text": "<keyword0>无效化</keyword0>：防止下一个有害状态效果; 直接伤害仍会命中; 持续至消耗或被<keyword1>驱散</keyword1>; 不叠加"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "16ba023b5f3cf06ab4af3264844d7aa985f96e7a295b08d1812d4270aa94978d",
+    "sourceHash": "20f554227c138d6aa90e8185bd9c50d1412accc35540460d23a437d8e02fc63b",
     "text": "<keyword0>无效化</keyword0>下一次<keyword1>冻结</keyword1>伤害; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "d2764819aed025a0fa54e7fc6466963953507544caa6749600b41e499fd32e75",
+    "sourceHash": "94a541c6b0d6e85c9f56e7cb40cae10b417442ae7ec22522567eebee1f0790b3",
     "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "9e37d18721000893ddcf0398b898bf4a2dd296a14e4059dcdd8ed59397a1b280",
+    "sourceHash": "6c5fd08ed347ac7e058e82d150a37a865d83e2a5eb26da41959053b5aab091df",
     "text": "<keyword0>反射</keyword0>：返还指定的攻击或有害状态效果; <keyword1>攻击反射</keyword1>将伤害和后续有害效果返还给攻击者; 仅状态<keyword2>反射</keyword2>会将效果转向一名随机存活的敌人，直接伤害仍会命中; 被<keyword3>反射</keyword3>的攻击和状态不能再次<keyword4>反射</keyword4>; 次数不叠加"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "56a42873de25f59f4c5d8e8326988295060d7ce9ca21c800940e68b158c4032a",
+    "sourceHash": "369d919da669bccca34a04797be30c20e514b081affc2152bde4565831d9a912",
     "text": "<keyword0>反射</keyword0>下一次<keyword1>灼烧</keyword1>; 直接伤害仍会命中; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "8e0f520be902a581612fd84275ce552ba72fe33a8e24112df9e1275c9404b1ad",
+    "sourceHash": "d9f5ef0906b93b2a41bff56baa912c6178f7650f33338b6dc708a89dd8d7f203",
     "text": "找到节奏：<keyword0>闪避</keyword0>概率+{{value0}}%"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "e68af47540037972606cc8e667d70952f65932ce145426b702d047dd4d8b6adb",
+    "sourceHash": "02f377e08e93cb587f4876ab2750b3c9c6f4d00bf222644e4fa13460fea18cfe",
     "text": "还击：下一次<keyword0>物理</keyword0>攻击必定<keyword1>暴击</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {

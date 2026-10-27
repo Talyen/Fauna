@@ -353,6 +353,12 @@
     "sourceHash": "d705339873322afce6a9b97215f2e50880e79df49de353b17b0db67280e96c7f",
     "text": "Les ennemis <keyword0>aveuglés</keyword0> ne peuvent pas gagner d’<keyword1>Épines</keyword1>"
   },
+  "content.boon.apple-press.name": {
+    "reviewed": true,
+    "source": "Apple Press",
+    "sourceHash": "f405ca2930f53b47d2559e46f3f5df4fb6f4c825d8d3e44f77ff808ce0c129d8",
+    "text": "Presse à pommes"
+  },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
     "source": "Ashfall Pendant",
@@ -376,6 +382,12 @@
     "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "sourceHash": "63a581c82375063f52b0f5c7c8e88e3964d82efce405eb2ce81882d69c91f949",
     "text": "La <keyword0>Dissipation</keyword0> ne peut pas retirer le dernier effet bénéfique d’un allié"
+  },
+  "content.boon.bellows-heart.name": {
+    "reviewed": true,
+    "source": "Bellows Heart",
+    "sourceHash": "b057c579aa4c4c90d6d13cbbf09f8a17fd6cb7cbe2175c3d96846209518ec338",
+    "text": "Soufflet-cœur"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -472,6 +484,18 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "95f4b83f612b70761c990f8c12196a8b2af33ffb37c701215322bdd87884d233",
     "text": "Les alliés en réserve peuvent recevoir des <keyword0>soins</keyword0>"
+  },
+  "content.boon.caravan-rug.name": {
+    "reviewed": true,
+    "source": "Caravan Rug",
+    "sourceHash": "49dfc8f6164ebd1c47fa96ed1d302d8dcd26a9c65c5819b23590376a69860b3e",
+    "text": "Tapis de caravane"
+  },
+  "content.boon.chromatic-viol.name": {
+    "reviewed": true,
+    "source": "Chromatic Viol",
+    "sourceHash": "ff53dbee6e53fdbb2a1cdbeb11845770a4f50405334a8c7a45bd2a863883aa6c",
+    "text": "Viole chromatique"
   },
   "content.boon.cinder-fan.name": {
     "reviewed": true,
@@ -593,6 +617,12 @@
     "sourceHash": "7d97d444965f932a6627c37b153ae2ba38c206a631dac08558516e86a9680be7",
     "text": "Gagnez {{value0}} Or lorsque vous infligez des dégâts de <keyword0>Saignement</keyword0>"
   },
+  "content.boon.cypress-reliquary.name": {
+    "reviewed": true,
+    "source": "Cypress Reliquary",
+    "sourceHash": "7dd71769c5f4895aea92f516ad3dda74f080cee0395b6ac857a7a85316f1e1ba",
+    "text": "Reliquaire de cyprès"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -652,6 +682,12 @@
     "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
     "sourceHash": "61ba24d3e720922edcfcecd27db345cf4a87bda7ee4c802d51878eed3bc6dcec",
     "text": "La <keyword0>Négation</keyword0> a {{value0}}% de chances de provoquer aussi un <keyword1>Renvoi</keyword1>"
+  },
+  "content.boon.echo-ocarina.name": {
+    "reviewed": true,
+    "source": "Echo Ocarina",
+    "sourceHash": "a2aa012cb9438fe0a8f2914f2b4a7441c65757edb2a3d8fa906beee7dc198fed",
+    "text": "Ocarina d’écho"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -713,6 +749,12 @@
     "sourceHash": "0487812d69aa6f60a59c8772e3a6d84eb6d7b2a4502c08ba6796882c11445c2a",
     "text": "La moitié du <keyword0>Blocage</keyword0> perdu face aux attaques ennemies devient une accumulation d’<keyword1>Étourdissement</keyword1> sur l’attaquant"
   },
+  "content.boon.farewell-oar.name": {
+    "reviewed": true,
+    "source": "Farewell Oar",
+    "sourceHash": "9aca1f4d3b883db0e9a7f6dc06820d169775843bab3e18732efa2791f0bb16f7",
+    "text": "Rame d’adieu"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -736,6 +778,18 @@
     "source": "Playing <keyword0>Food</keyword0> draws a card",
     "sourceHash": "2a6ed4d8e76b5db352449cf74feab42a3eccab30ecaa6183ecaae130e16bb725",
     "text": "Jouer une carte <keyword0>Nourriture</keyword0> permet de piocher une carte"
+  },
+  "content.boon.folded-mountain.name": {
+    "reviewed": true,
+    "source": "Folded Mountain",
+    "sourceHash": "2cddda95301c1610f432b954ffad08fde8ea082a0c7db6294eefd061ef0e47a5",
+    "text": "Montagne pliée"
+  },
+  "content.boon.frostglass-die.name": {
+    "reviewed": true,
+    "source": "Frostglass Die",
+    "sourceHash": "e0e869a51839e71732c67d0ba0addb4d095f9c1aad6767fb7d5a802221dc87db",
+    "text": "Dé de verre givré"
   },
   "content.boon.frozen-pocketwatch.name": {
     "reviewed": true,
@@ -785,6 +839,12 @@
     "sourceHash": "d45f3297c4f446a032232cf66a7a40283ba4f6e78f37a9ea00ea8f3b7e77d281",
     "text": "Le <keyword0>Blocage</keyword0> ne peut pas décroître sous l’<keyword1>Armure</keyword1>"
   },
+  "content.boon.glassleaf-shield.name": {
+    "reviewed": true,
+    "source": "Glassleaf Shield",
+    "sourceHash": "d7d9a5655edaf5306835186cf3b05903febadeb13c3321eb81ae9526ab25ffbe",
+    "text": "Bouclier de feuille de verre"
+  },
   "content.boon.grafting-needle.name": {
     "reviewed": true,
     "source": "Grafting Needle",
@@ -820,6 +880,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "sourceHash": "8c93c9f84c3411836de20f31ba1cfaf95d65b73828e9d29672976055beabae52",
     "text": "Gagnez {{value0}} <keyword0>Épines</keyword0> lorsque vous restaurez de la <keyword1>Santé</keyword1> en combat"
+  },
+  "content.boon.harvest-shears.name": {
+    "reviewed": true,
+    "source": "Harvest Shears",
+    "sourceHash": "4cf4e96355f933f053dd11aa7fa2757eb076b2a98c2624cddd4303644cb2b1df",
+    "text": "Sécateur des récoltes"
   },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
@@ -965,6 +1031,12 @@
     "sourceHash": "188edd00c58c21ac1112bcdd0f9327d54ab83356360ab3803df8c74a3ea10ad8",
     "text": "La <keyword0>Brûlure</keyword0> ne décroît pas sur les ennemis avec de l’<keyword1>Armure</keyword1>"
   },
+  "content.boon.leafwing-shuttlecock.name": {
+    "reviewed": true,
+    "source": "Leafwing Shuttlecock",
+    "sourceHash": "631735a46b16bac4b54c4867edb959c855209b36e7be9b2d5a1b73868f754cfd",
+    "text": "Volant à ailes de feuilles"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -1049,6 +1121,12 @@
     "sourceHash": "0191ce0358ac6e595036410d4df17b5852f1ff7d2efe385cc1b16d610dac167c",
     "text": "<keyword0>Purification</keyword0> affecte tous les alliés"
   },
+  "content.boon.mirror-locket.name": {
+    "reviewed": true,
+    "source": "Mirror Locket",
+    "sourceHash": "7836e0e6f53884864716b8ecd48cd01185424439c371684f30aea461f15c3f92",
+    "text": "Médaillon miroir"
+  },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
     "source": "Molten Paperweight",
@@ -1108,6 +1186,12 @@
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "a6621a8f9e54a895b3e24ab18328bb3cf893f5d95bc3fe4b09fc582986c24c87",
     "text": "Les cartes <keyword0>Nourriture</keyword0> sont deux fois plus efficaces"
+  },
+  "content.boon.oasis-seed.name": {
+    "reviewed": true,
+    "source": "Oasis Seed",
+    "sourceHash": "c75ed52c2a14e0e4e1f5b11f182744f297b8701d6436918bfcf83443d1c70ce2",
+    "text": "Graine d’oasis"
   },
   "content.boon.obsidian-pitcher.name": {
     "reviewed": true,
@@ -1229,6 +1313,12 @@
     "sourceHash": "ece2c0d7ba699fa0f0993c002da4bbe589a2abd47eb82a12507ceb446763ff68",
     "text": "La moitié du <keyword0>Blocage</keyword0> perdu par décroissance devient de l’<keyword1>Armure</keyword1>"
   },
+  "content.boon.pollen-basket.name": {
+    "reviewed": true,
+    "source": "Pollen Basket",
+    "sourceHash": "c12d2457da3bdf51a3dbc3d0241b18353952f2ca30162024f1e5b1fcf0778fe5",
+    "text": "Panier à pollen"
+  },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
     "source": "Poppy Seed Grinder",
@@ -1337,6 +1427,12 @@
     "sourceHash": "369e1cc80d3584027327eb3ea8f87440b2e9502efa3f417f4c9103b549f159ee",
     "text": "<keyword0>Annulation</keyword0> n’est pas consommée tant que vous avez du <keyword1>Blocage</keyword1>"
   },
+  "content.boon.reef-diadem.name": {
+    "reviewed": true,
+    "source": "Reef Diadem",
+    "sourceHash": "d5c41973f11a746cce7b2e6d786d99b02a83b8a2c8718149925cf9d238d482dc",
+    "text": "Diadème du récif"
+  },
   "content.boon.reef-incense-tile.name": {
     "reviewed": true,
     "source": "Reef Incense Tile",
@@ -1444,6 +1540,12 @@
     "source": "Gain {{value0}} additional Gold for each battle won",
     "sourceHash": "f0abfd5f50fd3a8f53838bac1becf929ff9c56a59497f91b9169287758751a50",
     "text": "Gagnez {{value0}} Or supplémentaire pour chaque combat remporté"
+  },
+  "content.boon.soot-brush.name": {
+    "reviewed": true,
+    "source": "Soot Brush",
+    "sourceHash": "0ce1f24e6b3f2dd421b0571e39d0a472805c79958de1604c876cd62eaa22f713",
+    "text": "Pinceau de suie"
   },
   "content.boon.sovereign-toast-rack.name": {
     "reviewed": true,
@@ -2806,6 +2908,42 @@
     "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
     "sourceHash": "082bf6fa0d9b9a8a56a99dce809bb71e6fb5f5963af714732902baf7f6cab06d",
     "text": "Applique {{value0}} <keyword0>Brûlure</keyword0> à tous les ennemis / Gagne <keyword1>Négation</keyword1>"
+  },
+  "content.card.ravelland-antler-pass.name": {
+    "reviewed": true,
+    "source": "Antler Pass",
+    "sourceHash": "8317829aa92adf8b15c6818dd545490c3e0948e0004caf5d954cccb551949d53",
+    "text": "Col des bois"
+  },
+  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "c729b19d9b4e2270109b6c34b9ea1f41ac64f4744b4275c3e020ee1361ea4f39",
+    "text": "Inflige {{value0}} dégâts <keyword0>Physiques</keyword0>"
+  },
+  "content.card.ravelland-canyon-rebuke.name": {
+    "reviewed": true,
+    "source": "Canyon Rebuke",
+    "sourceHash": "26bcb57d4e1889d2df96eccade11258f328094ca897a6153ba0fe0e91c7898f1",
+    "text": "Réplique du canyon"
+  },
+  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "751a7722e819ddc32584145265721e174daf9d315d0f31a29ab9b2e3d8a92d4f",
+    "text": "Inflige {{value0}} dégâts de type <keyword0>Physique</keyword0> à tous les ennemis"
+  },
+  "content.card.ravelland-rainward.name": {
+    "reviewed": true,
+    "source": "Rainward",
+    "sourceHash": "ace4a3681857d096ebedf7290f6df48ff32cbae333e43a8a4bb783599bca0e57",
+    "text": "Rempart de pluie"
+  },
+  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "1241dcdf96e680af1e832349e51c3bd9047361e84e8294dea31bb004f2b83af1",
+    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0>"
   },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
@@ -5243,6 +5381,60 @@
     "sourceHash": "44b8a665146983cc778ea830529b9b966d0ff558d6dd7963c6dc9a047f7d06cf",
     "text": "Flamme transmise"
   },
+  "content.species.ravelland.name": {
+    "reviewed": true,
+    "source": "Ravelland",
+    "sourceHash": "282d34381e13b0c0418699d9dfb48014d9312755b77c9e99eae25af3d313d1a0",
+    "text": "Ravelland"
+  },
+  "content.species.ravelland.passive.0.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "8436b6c621dc7fb432e3a04ce984c8e378fca444db845a7fdfbe0ca7f5f28b0c",
+    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+  },
+  "content.species.ravelland.passive.1.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "66e0f6c2a8f302c12c19ed0c72c7d4949b2884b989e435d9f81b6ec243ae93c2",
+    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+  },
+  "content.species.ravelland.passive.2.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "79dbd7bab9649f370ee2d0603c39dacba04734054620c9d6548fe6cb960c8d4d",
+    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+  },
+  "content.species.ravelland.passive.3.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "34f31813cc461915344bcfaf45aa1ca6d84c363ab0e4a6f619a55f5e6d530679",
+    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+  },
+  "content.species.ravelland.passive.4.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "2407d6e72b04a457798fb55c581e351ddc71f7285cf6933269720ba01395b38a",
+    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+  },
+  "content.species.ravelland.passive.5.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "d8f2711e5f1136bdc2553436c2303a193047533f07f7036230169216b8ee4d99",
+    "text": "Gagne {{value0}} <keyword0>Armure</keyword0> quand les dégâts brisent ton <keyword1>Blocage</keyword1>"
+  },
+  "content.species.ravelland.title": {
+    "reviewed": true,
+    "source": "The walking canyon",
+    "sourceHash": "41f95ac939ed30b90f65970f8d4eedf37ce79fb528f71c475c1712ae62f488da",
+    "text": "Le canyon ambulant"
+  },
+  "content.species.ravelland.trait": {
+    "reviewed": true,
+    "source": "Faultline",
+    "sourceHash": "8829c8911c8f738324abc7f9af036e18d6665e1bc55923507412dc4be98e8d7d",
+    "text": "Ligne de faille"
+  },
   "content.species.reedstag.name": {
     "reviewed": true,
     "source": "Reedstag",
@@ -5840,127 +6032,127 @@
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "a8ee39a72ecbd602fb86946cf9397d81f841d4a57b07dd904533fe107bb99c3f",
+    "sourceHash": "dd21c8210af879a791b2ac038ac4785f4c51260d00760d22b2a07d5d4e0e8cfb",
     "text": "<keyword0>Renvoi d’attaque</keyword0> : renvoie la prochaine attaque contre vous à son auteur; Empêche ses dégâts et effets néfastes sur vous; Les attaques <keyword1>renvoyées</keyword1> ne peuvent pas être <keyword2>renvoyées</keyword2> à nouveau; Dure jusqu’à consommation ou <keyword3>dissipation</keyword3>; Ne se cumule pas"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "3c0dcbd025e335c863a31d167c14f3a5ac24b35c7bea53e45faf2f1d0905a1dc",
+    "sourceHash": "413603e08c1d0ecacf3fac456b258c2dc19b6a58515755f820b4d5cb4944c265",
     "text": "<keyword0>Aveuglement</keyword0> : {{value0}}% de chances de rater votre prochaine attaque; Expire après cette attaque, qu’elle touche ou non; Un échec compte comme une <keyword1>Esquive</keyword1> pour chaque cible; Ne se cumule pas"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "5f4bc52e2892391e64a621f78a3ebc69b430efc0407745e49ad51e0efe6c4eb8",
+    "sourceHash": "88d1e7fbd47941617b5bbdc100268f9348c444728e0ce951f5d0b97667b5a80e",
     "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tours"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "979fc06cada375386e9dc03d360c18969caa7dadca8f81395090e06bb340fdd3",
+    "sourceHash": "e9c744a116a0159595df8d3d967bd5f8f76657c1d7e4182fbfbd06dc9be2050a",
     "text": "Tour passé"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "935c7a91de080b91af47ec50e1fe57169178072f6342c29c5b7e5f5bd12f91c7",
+    "sourceHash": "c0d3ce284dc03dbbb432f0fbf0d3ac4f884109e4c698b5e6f71dad576efafb77",
     "text": "<keyword0>Gel</keyword0> : {{value0}} tour"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "13097ae3cdd5e9aab6ba7d1d53f65f90fbb5e98ab2b15b52a52bb5166068479e",
+    "sourceHash": "e33f1315a13fc905b76d85165f09a834006af04572ffe7c2b435c9e401b1a898",
     "text": "<keyword0>Gel</keyword0> : {{value0}} tours"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "392034dfd6e2306279671a8e635a19bee8e65cd79e5eab0d3a2a277b09ef71ab",
+    "sourceHash": "06123aaaf75dcf35266320f5f06b3ce2bb9339fd4db2024791e06b41c6ae8e9d",
     "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tour"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "8c844848b9245b64a51bb524837cad0ab5922f26ecf2f3685cafb6a0ed634cd2",
+    "sourceHash": "5c98c2decfba54c10eac31b8d2c7951189641e2be4105b691df1c82d3baf96a6",
     "text": "Immunité au contrôle {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "f6c07c0953f7683eee68aa3d793e68e2b880d44d96caac2b039524d99a479ea7",
+    "sourceHash": "723c9a9ba6768bceaba7176479541c0fe06104f8545e7d9bb34645cc7c05b66d",
     "text": "Suivi gratuit : la prochaine carte est gratuite"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "6a6d07eccc54a81d4bd2cd00adaf4b7d707250460d618b38181b4cba9ed6ed83",
+    "sourceHash": "30ff62ff82cf97f8446765684709a788fa3ffc47c5eea24a0e5298006a95d0bc",
     "text": "Faveur divine : la prochaine carte de <keyword0>Lumière</keyword0> est gratuite"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "6ae4a86f5cbe6fb6aa851310c0eb9f8ff8d19510f944c87ade3d61feded4c33b",
+    "sourceHash": "e84e4c4b98d1ca394562d248c994b55c05bc093ef06afad37a54fa399ef36b55",
     "text": "Pas du vent : la prochaine carte de <keyword0>Nature</keyword0> est gratuite"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "51e4e30b20d204602f49f0f186d9d627aef52fd2517aeee7d3a12bb019d1b68e",
+    "sourceHash": "a21f1211ae92d3bea46c2bcd9e1f45a00dbdb6ac813effd1a1839a02b96a9d2e",
     "text": "Aux portes de la mort {{value0}}"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "1d52cb7953bb76d0991f88d56354a0333f0eadce40de2ef61d236a48a5c79e55",
+    "sourceHash": "33f9005e133323c19d0ecf375e10465e1253be0ff58d8f2f57378b11a7db232a",
     "text": "<keyword0>Négation</keyword0> : <keyword1>annule</keyword1> la prochaine attaque contre vous avant l’<keyword2>Esquive</keyword2>, empêchant ses dégâts et effets néfastes; Les <keyword3>Épines</keyword3> ripostent quand même; Dure jusqu’à consommation ou <keyword4>dissipation</keyword4>; Ne se cumule pas"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "5140143ce549738c18769ffc0b38dac938babba2a3efe17df743889a06b651ee",
+    "sourceHash": "69e6e96668f90654c6146e9e3d14516a2ddc3bf049e279b7b176d1c0361b2637",
     "text": "Flanc exposé : la prochaine attaque inflige {{value0}} dégâts <keyword0>Physiques</keyword0> supplémentaires"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "7a020baf2dfb8cf1c8c5e09a984a2de18d0dd682144c1320e5a29b2615e4adb6",
+    "sourceHash": "443259d544bc537fd488b34b20f9cf141c1eef0555c75eae35f5df9cb81feadc",
     "text": "<keyword0>Annulation</keyword0> : empêche le prochain effet néfaste; Les dégâts directs touchent quand même; Dure jusqu’à consommation ou <keyword1>dissipation</keyword1>; Ne se cumule pas"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "0a5d92702c5d2789ef482fa11c7083e121490d1c9d9dbf5067ae6a1171b8a66e",
+    "sourceHash": "b0044f3767065bd280cbbe5dff09a05bd28f7c462a4197a50035e052e010991a",
     "text": "<keyword0>Annule</keyword0> les prochains dégâts de <keyword1>Gel</keyword1>; Dure jusqu’à consommation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "cee493d3f4163ca705d9f0da839658902bd23cb9cc782c16ec637fe95babb1d8",
+    "sourceHash": "aed4e7b4504513bcb225b39e3d6f7c78804ccfba68f9255aaa96cffaeff6918a",
     "text": "Entaille d’adieu : le prochain coup <keyword0>Physique</keyword0> inflige la moitié de ses dégâts en dégâts de <keyword1>Saignement</keyword1> supplémentaires"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "94895e5ad0c2f4f9fd8f9316adde76d184de3537f3fc07123f277689ddf5ddbe",
+    "sourceHash": "662ee0fafb3b94a2f0416cdedbe9d256fa250a842a6b9619d6a6e99620f24338",
     "text": "<keyword0>Renvoi</keyword0> : renvoie l’attaque ou l’effet de statut néfaste indiqué; Le <keyword1>renvoi d’attaque</keyword1> retourne les dégâts et effets néfastes associés à l’attaquant; Le <keyword2>renvoi</keyword2> d’un statut seul redirige l’effet vers un ennemi vivant aléatoire, mais les dégâts directs touchent quand même; Les attaques et statuts <keyword3>renvoyés</keyword3> ne peuvent pas être <keyword4>renvoyés</keyword4> à nouveau; Les charges ne se cumulent pas"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "e45d271ea7271fe63aadf083da96db39881d928c58d87bfbbc586fa1879d469b",
+    "sourceHash": "d2db499cf2c14a165e5059e643ffa4e27ca37e65a69fcc5dea2355854f000e4f",
     "text": "<keyword0>Renvoie</keyword0> la prochaine <keyword1>Brûlure</keyword1>; Les dégâts directs touchent quand même; Dure jusqu’à consommation ou <keyword2>dissipation</keyword2>; Ne se cumule pas"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "6b1522f6f78db8c0c1464e0dc2a15fffc629e32bf314e1ee9fefeddbc282dd06",
+    "sourceHash": "a483ccb0dfa5a471112cb5f415c161c77e501db9bef4adef690862836338f62a",
     "text": "Trouver le rythme : +{{value0}}% de chances d’<keyword0>Esquive</keyword0>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "c805d4b416c6784ba4e291a067697a0814b7fdf3e8577ebd68eed64559d171d1",
+    "sourceHash": "9b1fa26990d49a2696f8683cf9f503e1fd5a5d31858867d1a2de8b64dc9a47da",
     "text": "Riposte : la prochaine attaque <keyword0>Physique</keyword0> est un <keyword1>coup critique</keyword1> garanti"
   },
   "content.talent.armor.armored-surge.name": {

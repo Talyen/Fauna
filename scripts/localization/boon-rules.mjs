@@ -77,6 +77,7 @@ export function evaluate(node, params, name, bindings = {}) {
         )
         .join("");
     case "ParenthesisExpression":
+    case "TsConstAssertion":
       return evaluate(node.expression, params, name, bindings);
     case "ConditionalExpression":
       return evaluate(node.test, params, name, bindings)

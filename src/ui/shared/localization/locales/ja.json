@@ -353,6 +353,12 @@
     "sourceHash": "e66278989206b868b50a1628cad97df2547b7edf51b317f0ddfd12ef6af5b93b",
     "text": "<keyword0>盲目</keyword0>状態の敵は<keyword1>棘</keyword1>を獲得できない"
   },
+  "content.boon.apple-press.name": {
+    "reviewed": true,
+    "source": "Apple Press",
+    "sourceHash": "092c354c6fe165445673c327bd0d70994a42fdeef0825f0ad27ef0d0b675cc0e",
+    "text": "リンゴ絞り器"
+  },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
     "source": "Ashfall Pendant",
@@ -376,6 +382,12 @@
     "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "sourceHash": "777e208a05d8444651ad65962d98438b2d6a27ed3fe246ee86dba4db91ec8237",
     "text": "<keyword0>強化解除</keyword0>は味方の最後の有益な効果を取り除けない"
+  },
+  "content.boon.bellows-heart.name": {
+    "reviewed": true,
+    "source": "Bellows Heart",
+    "sourceHash": "928eb43609dcf8e041d74f0bcdd43a368ee1780ffb17017a0de034008895df96",
+    "text": "ハートのふいご"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -472,6 +484,18 @@
     "source": "Backup allies can receive <keyword0>Healing</keyword0>",
     "sourceHash": "675c52706ebbb83ba990d2d3372a507185652ac644bf540ea4d80970cfc6a380",
     "text": "控えの味方も<keyword0>回復</keyword0>を受けられる"
+  },
+  "content.boon.caravan-rug.name": {
+    "reviewed": true,
+    "source": "Caravan Rug",
+    "sourceHash": "8cc54b11aa58d6945476a41e3a2702ffc3c90ea292e8769c74a05e4964ee356a",
+    "text": "隊商の敷物"
+  },
+  "content.boon.chromatic-viol.name": {
+    "reviewed": true,
+    "source": "Chromatic Viol",
+    "sourceHash": "9b24c28aaaab68774dd000c2920c172099bd0347c14e1b77def03dfb5d06311f",
+    "text": "彩色のヴィオール"
   },
   "content.boon.cinder-fan.name": {
     "reviewed": true,
@@ -593,6 +617,12 @@
     "sourceHash": "6652305266ccdf550e203408ee6d984a490f5331b12f4edf819d1cbf2267ef34",
     "text": "<keyword0>出血</keyword0>ダメージを与えるとゴールドを{{value0}}獲得"
   },
+  "content.boon.cypress-reliquary.name": {
+    "reviewed": true,
+    "source": "Cypress Reliquary",
+    "sourceHash": "bc1c991ae87207d3debfd11b3eec2327e37eb831a3e8afe93606066a3d15abe0",
+    "text": "糸杉の聖遺物箱"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -652,6 +682,12 @@
     "source": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
     "sourceHash": "6b165f8b62836cc44bb9f596bc2bdf2c04b972508b1e1ae77138f51748e1ab01",
     "text": "<keyword0>防止</keyword0>時、{{value0}}%の確率で<keyword1>反射</keyword1>も発動"
+  },
+  "content.boon.echo-ocarina.name": {
+    "reviewed": true,
+    "source": "Echo Ocarina",
+    "sourceHash": "edc1cc66e5edfd77b1c7933852d915fe01634596fa25da7566a25c5a128ebe56",
+    "text": "こだまのオカリナ"
   },
   "content.boon.eclipse-protractor.name": {
     "reviewed": true,
@@ -713,6 +749,12 @@
     "sourceHash": "f5def70dcd8aa3bff79054d5912e187a9a8041629f117d4e800d47d923335235",
     "text": "敵の攻撃で失った<keyword0>ブロック</keyword0>の半分が攻撃者の<keyword1>スタン</keyword1>蓄積になる"
   },
+  "content.boon.farewell-oar.name": {
+    "reviewed": true,
+    "source": "Farewell Oar",
+    "sourceHash": "4c9c6259edf8dfe720b826d8da43bccc681aedc1fa5a44e28c00401d0d5b2015",
+    "text": "別れの櫂"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -736,6 +778,18 @@
     "source": "Playing <keyword0>Food</keyword0> draws a card",
     "sourceHash": "7271aa4125770078775d78d7a2da0262908b3a90b6260b588fb018d44294f5d8",
     "text": "<keyword0>食料</keyword0>を使うとカードを1枚引く"
+  },
+  "content.boon.folded-mountain.name": {
+    "reviewed": true,
+    "source": "Folded Mountain",
+    "sourceHash": "f5913c8fb78aad265fa722ad5c4f86759d5fd70f6fd3d782026a9807321a3fcd",
+    "text": "折りたたみ山"
+  },
+  "content.boon.frostglass-die.name": {
+    "reviewed": true,
+    "source": "Frostglass Die",
+    "sourceHash": "20bc2c729f2d05c98f2c8460b1b7080da5d760b15c7c03040fe7a931c638f21f",
+    "text": "霜硝子のサイコロ"
   },
   "content.boon.frozen-pocketwatch.name": {
     "reviewed": true,
@@ -785,6 +839,12 @@
     "sourceHash": "9d3dce683041ad6186a796069d359b0b99ac176c8b3efcfb0d7ebbe0a9f77154",
     "text": "<keyword0>ブロック</keyword0>は減衰しても<keyword1>装甲</keyword1>を下回らない"
   },
+  "content.boon.glassleaf-shield.name": {
+    "reviewed": true,
+    "source": "Glassleaf Shield",
+    "sourceHash": "8214fa623ee082f3bae4ef586baed73e1d3ef6b76c16a19d6f7d60a1308769c8",
+    "text": "硝子葉の盾"
+  },
   "content.boon.grafting-needle.name": {
     "reviewed": true,
     "source": "Grafting Needle",
@@ -820,6 +880,12 @@
     "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "sourceHash": "bf2df9c17e7e6ec3d9153fa40e4b9cd004659e02753974ec2515e20defad811e",
     "text": "戦闘中に<keyword1>体力</keyword1>を回復すると<keyword0>棘</keyword0>を{{value0}}獲得"
+  },
+  "content.boon.harvest-shears.name": {
+    "reviewed": true,
+    "source": "Harvest Shears",
+    "sourceHash": "d2fd6246edff0e7b816f366884ff599a37771d8b1b89a7afe5e5becd45e3a18d",
+    "text": "収穫ばさみ"
   },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
@@ -965,6 +1031,12 @@
     "sourceHash": "85417a766b69a58a839ff8d1d7974aa256a95ad96bd321999026401e7766a6d3",
     "text": "<keyword1>装甲</keyword1>を持つ敵の<keyword0>炎上</keyword0>は減衰しない"
   },
+  "content.boon.leafwing-shuttlecock.name": {
+    "reviewed": true,
+    "source": "Leafwing Shuttlecock",
+    "sourceHash": "b80339ea81d456ea051d7d4f8ad989ba833feed3c1e8699b489e5fc131fbcb62",
+    "text": "葉翼のシャトル"
+  },
   "content.boon.lovers-knot.name": {
     "reviewed": true,
     "source": "Lovers Knot",
@@ -1049,6 +1121,12 @@
     "sourceHash": "c9dd4906cdd143a52314dc08a66a1d9610a9b4fb862ae941d5d74539fe29fe2e",
     "text": "<keyword0>浄化</keyword0>はすべての味方に作用"
   },
+  "content.boon.mirror-locket.name": {
+    "reviewed": true,
+    "source": "Mirror Locket",
+    "sourceHash": "105158f2e040a6a7fce389b2c3af57603d2ff760b141fda2a0fbd56bda0a9a8d",
+    "text": "鏡のロケットペンダント"
+  },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
     "source": "Molten Paperweight",
@@ -1108,6 +1186,12 @@
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "1e548ead6a3391818e1c0670c57c9d5e67e9fcbe850447ecc72a9c986672cd0c",
     "text": "<keyword0>食料</keyword0>カードの効果が2倍になる"
+  },
+  "content.boon.oasis-seed.name": {
+    "reviewed": true,
+    "source": "Oasis Seed",
+    "sourceHash": "a23549e8a7ace79684830ce2512e30ff4590cbf85904ed2934473262d7f014e4",
+    "text": "オアシスの種"
   },
   "content.boon.obsidian-pitcher.name": {
     "reviewed": true,
@@ -1229,6 +1313,12 @@
     "sourceHash": "1049956914230fd758ccf561d9798343fc1089ce230c73de760359aa2ebaa13f",
     "text": "減衰で失った<keyword0>ブロック</keyword0>の半分が<keyword1>装甲</keyword1>になる"
   },
+  "content.boon.pollen-basket.name": {
+    "reviewed": true,
+    "source": "Pollen Basket",
+    "sourceHash": "1f163c58acda9a1535951a5f61b09147e1121adf851971e13701a5ab7f7f0c2e",
+    "text": "花粉かご"
+  },
   "content.boon.poppy-seed-grinder.name": {
     "reviewed": true,
     "source": "Poppy Seed Grinder",
@@ -1337,6 +1427,12 @@
     "sourceHash": "9e7ad0e3e96988c5af4de96a8b5a312d8386cab69f4df06694724780d9bee13b",
     "text": "<keyword1>ブロック</keyword1>を持つ間、<keyword0>無効化</keyword0>は消費されない"
   },
+  "content.boon.reef-diadem.name": {
+    "reviewed": true,
+    "source": "Reef Diadem",
+    "sourceHash": "065bc2d90ff3c17aba6bda03b769a3fd0b0a62f079cf409241e68d3af320b725",
+    "text": "珊瑚礁の冠"
+  },
   "content.boon.reef-incense-tile.name": {
     "reviewed": true,
     "source": "Reef Incense Tile",
@@ -1444,6 +1540,12 @@
     "source": "Gain {{value0}} additional Gold for each battle won",
     "sourceHash": "8e2195c2d5e087c23d12fd78b7bb1a808bc188dcb4b4acd26d064d80d0541869",
     "text": "戦闘に勝利するたびに追加のゴールドを{{value0}}獲得"
+  },
+  "content.boon.soot-brush.name": {
+    "reviewed": true,
+    "source": "Soot Brush",
+    "sourceHash": "6562ea969f1f53a87bf4ee9ea9eb324ca1fb94f05c7091292eff29f451e5311d",
+    "text": "すすの筆"
   },
   "content.boon.sovereign-toast-rack.name": {
     "reviewed": true,
@@ -2806,6 +2908,42 @@
     "source": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
     "sourceHash": "4021a11e1243ead48f6253045f8e5a2740f0cc50d115cbc012f5be9d222be44a",
     "text": "すべての敵に<keyword0>炎上</keyword0>を{{value0}}付与 / <keyword1>防止</keyword1>を獲得"
+  },
+  "content.card.ravelland-antler-pass.name": {
+    "reviewed": true,
+    "source": "Antler Pass",
+    "sourceHash": "f020a6860a8083de4ad309999d08a65143aff4844d6cc8d56dca7091616cf301",
+    "text": "枝角の峠"
+  },
+  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "b21b1684fb401ddf7e416b52ef8277b5ca59b13a6d28c2a75af0a04f2d382bdb",
+    "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.ravelland-canyon-rebuke.name": {
+    "reviewed": true,
+    "source": "Canyon Rebuke",
+    "sourceHash": "301b88543612d51ac467c97c707230e55452aa7c9eeb4e22e6b73aa97a7b9021",
+    "text": "峡谷の叱責"
+  },
+  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "sourceHash": "062552acaebe352d3c7c49dbed99234121d78e578a9de479508d50e7b1a30e70",
+    "text": "すべての敵に{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
+  },
+  "content.card.ravelland-rainward.name": {
+    "reviewed": true,
+    "source": "Rainward",
+    "sourceHash": "83572501f4d28a554872ab5490477174d6f7b52400bc04a883f5e10858621cdb",
+    "text": "雨守り"
+  },
+  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "649353ab00002f26531167b678a2f1f997438e05ca075b42adf5b0aa484e2cef",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.card.reedstag-attack.name": {
     "reviewed": true,
@@ -5243,6 +5381,60 @@
     "sourceHash": "6e8870973cee7ff9fb739e01afc8980574629eaf702089aeb0ce03868cf8eafa",
     "text": "巡る炎"
   },
+  "content.species.ravelland.name": {
+    "reviewed": true,
+    "source": "Ravelland",
+    "sourceHash": "8a0bff31667d48f90066bc37a237c0072f3aadd948d51cdae17553d83eee9db4",
+    "text": "ラヴェランド"
+  },
+  "content.species.ravelland.passive.0.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "508dde7568c4339644d95aebb3516ddd6d10f955a49227844bfc184f57255759",
+    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
+  },
+  "content.species.ravelland.passive.1.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "ccb7d4b02ce059710f3936717bc41fb44e9bd4fccfcb3e35acb9512765ac9d5e",
+    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
+  },
+  "content.species.ravelland.passive.2.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "7158bfd6cbe2a7e4e4f9d4ede25cab630d4e4cea2ec89ab5010dfd6fad0f4a44",
+    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
+  },
+  "content.species.ravelland.passive.3.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "0f3dfd99356339551c9a20d99e2d3e35c8c38de8812e967c0dc66366c5572973",
+    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
+  },
+  "content.species.ravelland.passive.4.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "2d1ea05f937af58743dd59ee3ba5be4f536bc991bf8444dac99d41475c77661e",
+    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
+  },
+  "content.species.ravelland.passive.5.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "sourceHash": "13ece09395857ba1ff1c6e7a55c752e2ff2b3b3a014dc08e0732a3cb349cdb90",
+    "text": "ダメージで<keyword1>ブロック</keyword1>が壊れると<keyword0>装甲</keyword0>を{{value0}}獲得"
+  },
+  "content.species.ravelland.title": {
+    "reviewed": true,
+    "source": "The walking canyon",
+    "sourceHash": "0f123b61e2c5189481b7c0a8ea4920057ebf0d6071b6ee3b37187c0c013ca50c",
+    "text": "歩く峡谷"
+  },
+  "content.species.ravelland.trait": {
+    "reviewed": true,
+    "source": "Faultline",
+    "sourceHash": "05aa7911ad061c36c904cd92f025ad57e9cc6c1c00c89acd58e6e68160682a13",
+    "text": "断層線"
+  },
   "content.species.reedstag.name": {
     "reviewed": true,
     "source": "Reedstag",
@@ -5840,127 +6032,127 @@
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "5ebf78b3ab6ccdd2bb1c3cd383e6460468114818a1a11f6051acea5b33646f65",
+    "sourceHash": "23d6c91d11b171768e88d9d8d57f52ebc75ac17869c7184b683f5d95c96b90c5",
     "text": "<keyword0>攻撃反射</keyword0>：次に受ける攻撃を攻撃者へ返す; その攻撃のダメージと有害効果を防ぐ; <keyword1>反射</keyword1>された攻撃は再び<keyword2>反射</keyword2>できない; 消費されるか<keyword3>強化解除</keyword3>されるまで持続; 重複しない"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "71cd9cc0ca8b1f4d61e568469c9950c7967fe3bcb2538099d584576a5b888ac8",
+    "sourceHash": "fb6fadfb0c4f334a2dbbcb2ab5ebb9f576f74bc45d411cd82097d5ab357dd8ed",
     "text": "<keyword0>盲目</keyword0>：次の攻撃が{{value0}}%の確率で外れる; 命中の有無にかかわらずその攻撃後に消える; 外れた攻撃は各対象の<keyword1>回避</keyword1>として扱う; 重複しない"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "fc53c988e6164c7761bf18c6d68a0e52c2f365d2a2d321d8a6a16d1853e4e454",
+    "sourceHash": "d01274edd145ea1418d1447184a0955d8bb63981d59c9e8cd48d147e2be0c72f",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "db4fdad727c76b7aab6bd321d0c0d37e2770589fce32a6958e22643489899adc",
+    "sourceHash": "267ea940972a053f898adcbab813e46ed70993b0872b645fdf0da2d2c8127312",
     "text": "ターンをスキップ"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "b34754c705544826a7a21b2655e66bf16fc471f5220f2365b9c4296a3b7a38e5",
+    "sourceHash": "ffec4442691a6eaff8daf9b20c24bf5b8def7f38f365575efafb1832d5492843",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "eb1a94e788d09c8bae86f6f838bfc1bfb2f513a5b4339008fb3359e6b81cad86",
+    "sourceHash": "4829a07ebfa4cc107ad437df80ee1df8913cee27528ffb01f749f785597e2a8c",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "cea38a121bf3d16eb662a21e9598ef84564ba121af980bebcb450387c2c7a134",
+    "sourceHash": "af83ef278efa9c7400a8853db4b74a42b3b1d34ce9771b0b5dda80b33cd61a91",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "e32203d5a5a38dd39f479a7e844389818e429c2166a7603a0224a11d13c8dd90",
+    "sourceHash": "be97e14ec8cd381659c5677d1d2534d500b38865870c472640087c784ea64c9d",
     "text": "行動不能への耐性 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "f8f17974ad419e27ca03b97256c590f632a32d86c000904a224d69e368377d93",
+    "sourceHash": "8879c7f577007a3e786e43393aefe8f03baefd9d96fd9a0d6c77ea96e93e8e3f",
     "text": "無料の追撃：次のカードは無料"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "25c0b714a6e805d04f4360e2fb56ff5c546a1c227f7ff08b8208a4c5365a8507",
+    "sourceHash": "6ce452785cd800e6b89790a0e36037b78789c21488616b89377d1188166b2653",
     "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "d0b1fdfd8860370c352587aaf14f5c87c5793fba29def787c36b7c9e2ee8dfb0",
+    "sourceHash": "e43752776f10664873eed6fe6b79d90cdd32aa0167e1af4bd006375a026555a9",
     "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "152984fd4c12321d5db6d40d61ddfc3682f20c4bd7ec97518f23905c54e79449",
+    "sourceHash": "ad513c1866656bee4620e9d5f02d3da249196922023ca25838c86e7f73ea275b",
     "text": "死の淵 {{value0}}"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "d3c2bb5328456875372c4b8b7b546a3989e07a3aa4faa23279167aa63134a2b0",
+    "sourceHash": "0af07311ff8b8a31336ab4e26a355379024e851b5878b204ed0cdb23258125ef",
     "text": "<keyword0>防止</keyword0>：次の攻撃を<keyword2>回避</keyword2>より先に<keyword1>防止</keyword1>し、そのダメージと有害効果を防ぐ; <keyword3>棘</keyword3>は反撃する; 消費されるか<keyword4>強化解除</keyword4>されるまで持続; 重複しない"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "b28997915cc62f2e5e3e034f966b4ef1fb4d619b6dde93e6cd151757e6c95725",
+    "sourceHash": "9fdeb740c0cc3f2e9ee35a3b1eaab1a947b12aad20b99fb37afdcd0b466f6ce9",
     "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "fcd1bd1e3c6aed5356fc9d47abe1e952b1c8dfd3746c3c8ba49e487e89795e14",
+    "sourceHash": "b80310def8d4ef30e9c8b091baa07ae11efb6944f2bc4cc45277809ef0d26a01",
     "text": "<keyword0>無効化</keyword0>：次の有害な状態効果を防ぐ; 直接ダメージは受ける; 消費されるか<keyword1>強化解除</keyword1>されるまで持続; 重複しない"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "442875e085bce0639b2a27627ad3e9c6f32667a811d3ddfd5dbea0702be26706",
+    "sourceHash": "71263117f29e04f94031862fd2b54bb35ef7ccfb334677d91761bce7a6fb4f92",
     "text": "次の<keyword1>凍結</keyword1>ダメージを<keyword0>無効化</keyword0>; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "7f56009872efd0a7a4e2c2996630f51330253c0197ae670a839bc8607115b19e",
+    "sourceHash": "314bb2d36a22e694ae5cad7e158851b8f08ae7c2b618d5e8b336c802a8252ad9",
     "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "fb4ef4cb4367e36fb660cc0be5ea8b59200d206c47e0138c4b604983a3f91720",
+    "sourceHash": "99e7633f8d51c612fb23b7cee9f10fcd2ebf01e920a9a98408bf7e7f8dbc6a56",
     "text": "<keyword0>反射</keyword0>：指定された攻撃または有害な状態効果を返す; <keyword1>攻撃反射</keyword1>はダメージとその後の有害効果を攻撃者へ返す; 状態効果のみの<keyword2>反射</keyword2>は効果をランダムな生存中の敵へ移し、直接ダメージは受ける; <keyword3>反射</keyword3>された攻撃や状態効果は再び<keyword4>反射</keyword4>できない; 回数は重複しない"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "6662c01c788077e056981b12ce75c4c6281cceab83c8f82019e940de91ca5666",
+    "sourceHash": "554632a35dd0e579484853aa079f6b964bdc09f8707bfd6451604dce80439bd1",
     "text": "次の<keyword1>炎上</keyword1>を<keyword0>反射</keyword0>; 直接ダメージは受ける; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "06c58c3bdb82c2390bbf76c3318c5633313d2d14f115871deae9534680254c9d",
+    "sourceHash": "fc5194abb1b4ec7ed22784a1dd3a148815d0ef618de0764ebfaec6e9014762ed",
     "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "051d65b655e534873ec8af3bf90ee4d4475577b6c6c3dbeefcabaf169c23b81d",
+    "sourceHash": "f6297d516656bda45adcfd5095f0d2c7e8ecca68b0d6bf381f3819291c88a1d9",
     "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
   },
   "content.talent.armor.armored-surge.name": {

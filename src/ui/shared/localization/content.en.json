@@ -20,6 +20,13 @@
     "text": "<keyword0>Blinded</keyword0> enemies cannot gain <keyword1>Thorns</keyword1>",
     "reference": "Blinded enemies cannot gain Thorns"
   },
+  "content.boon.apple-press.name": {
+    "text": "Apple Press"
+  },
+  "content.boon.apple-press.rule": {
+    "text": "Enemy <keyword0>Bleed</keyword0> deals damage when they gain <keyword1>Block</keyword1>",
+    "reference": "Enemy Bleed deals damage when they gain Block"
+  },
   "content.boon.ashfall-pendant.name": {
     "text": "Ashfall Pendant"
   },
@@ -33,6 +40,13 @@
   "content.boon.basalt-glass-bookmark.rule": {
     "text": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "reference": "Purge cannot remove an ally’s last beneficial effect"
+  },
+  "content.boon.bellows-heart.name": {
+    "text": "Bellows Heart"
+  },
+  "content.boon.bellows-heart.rule": {
+    "text": "<keyword0>Healing</keyword0> allies adds {{value0}} <keyword1>Burn</keyword1> to each <keyword2>Burning</keyword2> enemy",
+    "reference": "Healing allies adds 1 Burn to each Burning enemy"
   },
   "content.boon.blooming-still.name": {
     "text": "Blooming Still"
@@ -89,6 +103,20 @@
   "content.boon.camp-hammock.rule": {
     "text": "Backup allies can receive <keyword0>Healing</keyword0>",
     "reference": "Backup allies can receive Healing"
+  },
+  "content.boon.caravan-rug.name": {
+    "text": "Caravan Rug"
+  },
+  "content.boon.caravan-rug.rule": {
+    "text": "<keyword0>Block</keyword0> does not decay on backup allies",
+    "reference": "Block does not decay on backup allies"
+  },
+  "content.boon.chromatic-viol.name": {
+    "text": "Chromatic Viol"
+  },
+  "content.boon.chromatic-viol.rule": {
+    "text": "Attacks deal {{value0}} extra damage for each harmful effect on the enemy",
+    "reference": "Attacks deal 1 extra damage for each harmful effect on the enemy"
   },
   "content.boon.cinder-fan.name": {
     "text": "Cinder Fan"
@@ -160,6 +188,13 @@
     "text": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
     "reference": "Gain 1 Gold when you deal Bleed damage"
   },
+  "content.boon.cypress-reliquary.name": {
+    "text": "Cypress Reliquary"
+  },
+  "content.boon.cypress-reliquary.rule": {
+    "text": "Allies at Death’s Door do not lose <keyword0>Armor</keyword0> from damage",
+    "reference": "Allies at Death’s Door do not lose Armor from damage"
+  },
   "content.boon.devotion-clasp.name": {
     "text": "Devotion Clasp"
   },
@@ -194,6 +229,13 @@
   "content.boon.echo-lens.rule": {
     "text": "<keyword0>Negate</keyword0> has a {{value0}}% chance to also <keyword1>Reflect</keyword1>",
     "reference": "Negate has a 10% chance to also Reflect"
+  },
+  "content.boon.echo-ocarina.name": {
+    "text": "Echo Ocarina"
+  },
+  "content.boon.echo-ocarina.rule": {
+    "text": "When an ally <keyword0>Dodges</keyword0>, other allies gain {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "reference": "When an ally Dodges, other allies gain 10% Dodge until their next turn"
   },
   "content.boon.eclipse-protractor.name": {
     "text": "Eclipse Protractor"
@@ -230,6 +272,13 @@
     "text": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
     "reference": "Half the Block lost to enemy attacks becomes Stun buildup on the attacker"
   },
+  "content.boon.farewell-oar.name": {
+    "text": "Farewell Oar"
+  },
+  "content.boon.farewell-oar.rule": {
+    "text": "Allies swapping out deal half their <keyword0>Block</keyword0> as <keyword1>Water</keyword1> damage to all enemies",
+    "reference": "Allies swapping out deal half their Block as Water damage to all enemies"
+  },
   "content.boon.fern-fencing-foil.name": {
     "text": "Fern Fencing Foil"
   },
@@ -243,6 +292,20 @@
   "content.boon.field-lunch-basket.rule": {
     "text": "Playing <keyword0>Food</keyword0> draws a card",
     "reference": "Playing Food draws a card"
+  },
+  "content.boon.folded-mountain.name": {
+    "text": "Folded Mountain"
+  },
+  "content.boon.folded-mountain.rule": {
+    "text": "<keyword0>Armor</keyword0> prevents <keyword1>Freeze</keyword1> buildup",
+    "reference": "Armor prevents Freeze buildup"
+  },
+  "content.boon.frostglass-die.name": {
+    "text": "Frostglass Die"
+  },
+  "content.boon.frostglass-die.rule": {
+    "text": "<keyword0>Freeze</keyword0> hits also deal {{value0}} <keyword1>Burn</keyword1> damage",
+    "reference": "Freeze hits also deal 2 Burn damage"
   },
   "content.boon.frozen-pocketwatch.name": {
     "text": "Frozen Pocketwatch"
@@ -272,6 +335,13 @@
     "text": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "reference": "Block cannot decay below Armor"
   },
+  "content.boon.glassleaf-shield.name": {
+    "text": "Glassleaf Shield"
+  },
+  "content.boon.glassleaf-shield.rule": {
+    "text": "When allied <keyword0>Block</keyword0> breaks, halve the remaining damage",
+    "reference": "When allied Block breaks, halve the remaining damage"
+  },
   "content.boon.grafting-needle.name": {
     "text": "Grafting Needle"
   },
@@ -292,6 +362,13 @@
   "content.boon.groves-favor.rule": {
     "text": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
     "reference": "Gain 1 Thorns when you restore Health in battle"
+  },
+  "content.boon.harvest-shears.name": {
+    "text": "Harvest Shears"
+  },
+  "content.boon.harvest-shears.rule": {
+    "text": "When an enemy falls, their <keyword0>Bleed</keyword0> spreads to another enemy",
+    "reference": "When an enemy falls, their Bleed spreads to another enemy"
   },
   "content.boon.hearth-coal.name": {
     "text": "Hearth Coal"
@@ -377,6 +454,13 @@
     "text": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "reference": "Burn on enemies with Armor does not decay"
   },
+  "content.boon.leafwing-shuttlecock.name": {
+    "text": "Leafwing Shuttlecock"
+  },
+  "content.boon.leafwing-shuttlecock.rule": {
+    "text": "When an ally <keyword0>Dodges</keyword0> an attack, deal {{value0}} <keyword1>Stun</keyword1> damage to the attacker",
+    "reference": "When an ally Dodges an attack, deal 2 Stun damage to the attacker"
+  },
   "content.boon.lovers-knot.name": {
     "text": "Lovers Knot"
   },
@@ -426,6 +510,13 @@
     "text": "<keyword0>Cleanse</keyword0> affects all allies",
     "reference": "Cleanse affects all allies"
   },
+  "content.boon.mirror-locket.name": {
+    "text": "Mirror Locket"
+  },
+  "content.boon.mirror-locket.rule": {
+    "text": "<keyword0>Leech</keyword0> grants <keyword1>Block</keyword1> equal to half the <keyword2>Health</keyword2> restored",
+    "reference": "Leech grants Block equal to half the Health restored"
+  },
   "content.boon.molten-paperweight.name": {
     "text": "Molten Paperweight"
   },
@@ -460,6 +551,13 @@
   "content.boon.nectar-dipper.rule": {
     "text": "<keyword0>Food</keyword0> cards are twice as effective",
     "reference": "Food cards are twice as effective"
+  },
+  "content.boon.oasis-seed.name": {
+    "text": "Oasis Seed"
+  },
+  "content.boon.oasis-seed.rule": {
+    "text": "<keyword0>Healing</keyword0> another ally gives their next attack <keyword1>Leech</keyword1>",
+    "reference": "Healing another ally gives their next attack Leech"
   },
   "content.boon.obsidian-pitcher.name": {
     "text": "Obsidian Pitcher"
@@ -531,6 +629,13 @@
     "text": "Half the <keyword0>Block</keyword0> lost through decay becomes <keyword1>Armor</keyword1>",
     "reference": "Half the Block lost through decay becomes Armor"
   },
+  "content.boon.pollen-basket.name": {
+    "text": "Pollen Basket"
+  },
+  "content.boon.pollen-basket.rule": {
+    "text": "When an ally is hit, other allies’ <keyword0>Thorns</keyword0> also retaliate",
+    "reference": "When an ally is hit, other allies’ Thorns also retaliate"
+  },
   "content.boon.poppy-seed-grinder.name": {
     "text": "Poppy Seed Grinder"
   },
@@ -594,6 +699,13 @@
     "text": "<keyword0>Nullify</keyword0> is not consumed while you have <keyword1>Block</keyword1>",
     "reference": "Nullify is not consumed while you have Block"
   },
+  "content.boon.reef-diadem.name": {
+    "text": "Reef Diadem"
+  },
+  "content.boon.reef-diadem.rule": {
+    "text": "<keyword0>Water</keyword0> hits deal half your <keyword1>Thorns</keyword1> as extra <keyword2>Nature</keyword2> damage",
+    "reference": "Water hits deal half your Thorns as extra Nature damage"
+  },
   "content.boon.reef-incense-tile.name": {
     "text": "Reef Incense Tile"
   },
@@ -656,6 +768,13 @@
   "content.boon.smugglers-map.rule": {
     "text": "Gain {{value0}} additional Gold for each battle won",
     "reference": "Gain 2 additional Gold for each battle won"
+  },
+  "content.boon.soot-brush.name": {
+    "text": "Soot Brush"
+  },
+  "content.boon.soot-brush.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> also <keyword2>Cleanses</keyword2> <keyword3>Blind</keyword3>",
+    "reference": "Cleansing Burn also Cleanses Blind"
   },
   "content.boon.sovereign-toast-rack.name": {
     "text": "Sovereign Toast Rack"
@@ -1559,6 +1678,30 @@
     "text": "Apply {{value0}} <keyword0>Burn</keyword0> to all enemies / Gain <keyword1>Negate</keyword1>",
     "reference": "Apply 2 Burn to all enemies / Gain Negate",
     "contextHash": "55e5a3655ab623acc7a7829ad4f2c68c60c6ccd15f21aace533565116a4cb1d4"
+  },
+  "content.card.ravelland-antler-pass.name": {
+    "text": "Antler Pass"
+  },
+  "content.card.ravelland-antler-pass.vff8d1470887b7499.rule": {
+    "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "reference": "Deal 8 Physical damage",
+    "contextHash": "46bca32e679cc85c7db39b76ea5d5f913fd10e80b8df60667c60775e97559c58"
+  },
+  "content.card.ravelland-canyon-rebuke.name": {
+    "text": "Canyon Rebuke"
+  },
+  "content.card.ravelland-canyon-rebuke.v564b5e404e6f9cbd.rule": {
+    "text": "Deal {{value0}} <keyword0>Physical</keyword0> damage to all enemies",
+    "reference": "Deal 3 Physical damage to all enemies",
+    "contextHash": "cc0fc149d220fdc4c0c68f95b0784abd5ffe1ae746e7473cf47f459bfe2a32ac"
+  },
+  "content.card.ravelland-rainward.name": {
+    "text": "Rainward"
+  },
+  "content.card.ravelland-rainward.vadb3e758e4125447.rule": {
+    "text": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "reference": "Gain 6 Block",
+    "contextHash": "ea349235e4e349efe928111048db69be09de76181642326c0523498cd3d1e573"
   },
   "content.card.reedstag-attack.name": {
     "text": "Reed Rush"
@@ -3101,6 +3244,39 @@
   "content.species.pyrella.trait": {
     "text": "Passing Flame"
   },
+  "content.species.ravelland.name": {
+    "text": "Ravelland"
+  },
+  "content.species.ravelland.passive.0.rule": {
+    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "reference": "Gain 1 Armor when damage breaks your Block"
+  },
+  "content.species.ravelland.passive.1.rule": {
+    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "reference": "Gain 2 Armor when damage breaks your Block"
+  },
+  "content.species.ravelland.passive.2.rule": {
+    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "reference": "Gain 3 Armor when damage breaks your Block"
+  },
+  "content.species.ravelland.passive.3.rule": {
+    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "reference": "Gain 4 Armor when damage breaks your Block"
+  },
+  "content.species.ravelland.passive.4.rule": {
+    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "reference": "Gain 5 Armor when damage breaks your Block"
+  },
+  "content.species.ravelland.passive.5.rule": {
+    "text": "Gain {{value0}} <keyword0>Armor</keyword0> when damage breaks your <keyword1>Block</keyword1>",
+    "reference": "Gain 6 Armor when damage breaks your Block"
+  },
+  "content.species.ravelland.title": {
+    "text": "The walking canyon"
+  },
+  "content.species.ravelland.trait": {
+    "text": "Faultline"
+  },
   "content.species.reedstag.name": {
     "text": "Reedstag"
   },
@@ -3467,107 +3643,112 @@
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "text": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
     "reference": "Attack Reflection: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; Reflected attacks cannot reflect again; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "text": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
     "reference": "Blind: 50% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a Dodge by every recipient; Does not stack",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "text": "<keyword0>Stunned</keyword0>: {{value0}} turns",
     "reference": "Stunned: 2 turns",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "text": "Turn skipped",
     "reference": "Turn skipped",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "text": "<keyword0>Frozen</keyword0>: {{value0}} turn",
     "reference": "Frozen: 1 turn",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "text": "<keyword0>Frozen</keyword0>: {{value0}} turns",
     "reference": "Frozen: 2 turns",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "text": "<keyword0>Stunned</keyword0>: {{value0}} turn",
     "reference": "Stunned: 1 turn",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "text": "Control immunity {{value0}}",
     "reference": "Control immunity 0",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "text": "Free Follow-up: next card is free",
     "reference": "Free Follow-up: next card is free",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "text": "Divine Favor: next <keyword0>Light</keyword0> card is free",
     "reference": "Divine Favor: next Light card is free",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "text": "Windstep: next <keyword0>Nature</keyword0> card is free",
     "reference": "Windstep: next Nature card is free",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "text": "Death's Door {{value0}}",
     "reference": "Death's Door 0",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "text": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
     "reference": "Negate: Negate the next attack against you before Dodge, preventing its damage and harmful effects; Thorns still retaliate; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "text": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
     "reference": "Open Flank: next attack deals 0 additional Physical damage",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "text": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
     "reference": "Nullify: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "text": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "reference": "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
+  },
+  "content.status.oasisLeech.vab4f9087afb29b90.rule": {
+    "text": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
+    "reference": "Oasis Seed: next attack has Leech",
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "text": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
     "reference": "Parting Cut: next Physical hit deals half its damage as additional Bleed damage",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "text": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
     "reference": "Reflect: Return the specified attack or harmful status effect; Attack reflection returns damage and harmful follow-ups to the attacker; Status-only reflection redirects the effect to a random living enemy while direct damage still lands; Reflected attacks and statuses cannot reflect again; Charges do not stack",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "text": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "reference": "Reflect the next Burn; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "text": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
     "reference": "Finding Rhythm: +0% Dodge chance",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "text": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
     "reference": "Riposte: next Physical attack is a guaranteed Critical Hit",
-    "contextHash": "3419cadc71ae52de2d359d70bb4d9042dcb931d8fc447ff35b48f9bf8a14eb6d"
+    "contextHash": "3666b208b80b0758745dd306bdd3c54114e3eccdcb8cb7a32ea9c44803a0b4be"
   },
   "content.talent.armor.armored-surge.name": {
     "text": "Armored Surge"
