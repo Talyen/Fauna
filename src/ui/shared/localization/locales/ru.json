@@ -1737,25 +1737,25 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "sourceHash": "3a95295a163524291700a71d34513f1db73f7e15dc4bc2f85474b3271860ac07",
-    "text": "<keyword0>Очистите</keyword0> вредные эффекты у всех союзников: {{value0}}; Взять карт: {{value1}}"
+    "text": "<keyword0>Очистите</keyword0> вредные эффекты у каждого союзника: {{value0}}; Взять карт: {{value1}}"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
     "sourceHash": "e42e346ba3d6622dfec03e3beb4ef895e2c0697e89055f134eab9f97c79fa42e",
-    "text": "<keyword0>Очистите</keyword0> вредные эффекты у всех союзников: {{value0}}"
+    "text": "<keyword0>Очистите</keyword0> вредные эффекты у каждого союзника: {{value0}}"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "sourceHash": "bbf7003875500fef922309c1644c38c14701f48f300295e5ed4aba4a708581a6",
-    "text": "<keyword0>Очистите</keyword0> вредные эффекты у всех союзников: {{value0}}; Взять карт: {{value1}}"
+    "text": "<keyword0>Очистите</keyword0> вредные эффекты у каждого союзника: {{value0}}; Взять карт: {{value1}}"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
     "sourceHash": "df7c26bac86e33e2ecd100cea139b18f74ccc55dee34125d802f8af725a9317a",
-    "text": "<keyword0>Очистите</keyword0> вредные эффекты у всех союзников: {{value0}}"
+    "text": "<keyword0>Очистите</keyword0> вредные эффекты у каждого союзника: {{value0}}"
   },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,

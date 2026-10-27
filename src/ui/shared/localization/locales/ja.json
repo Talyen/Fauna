@@ -1737,25 +1737,25 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "sourceHash": "15ceea59df1622708599fe28073e3720e15fd3692f571ad97ae09e7240c067c4",
-    "text": "すべての味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>; カードを{{value1}}枚引く"
+    "text": "各味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>; カードを{{value1}}枚引く"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
     "sourceHash": "c135294dc743c1bacd53173145c308e911a08249541de5ac7e3238cf9da0263b",
-    "text": "すべての味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>"
+    "text": "各味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "sourceHash": "f7a266c07c694d67a91d03c9050db42531e1604b1b9d96cea81096d246133f59",
-    "text": "すべての味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>; カードを{{value1}}枚引く"
+    "text": "各味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>; カードを{{value1}}枚引く"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
     "sourceHash": "c4f3986ddf98956e89a29858a63029479bc8dbe0fbb36955749e40f24792b6d3",
-    "text": "すべての味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>"
+    "text": "各味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>"
   },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,

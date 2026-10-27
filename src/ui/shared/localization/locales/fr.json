@@ -1749,25 +1749,25 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "sourceHash": "bcf64d126cd037a19fdb35cd7bb49bcd0d961b921eec743b9aa0e5f6450eff83",
-    "text": "<keyword0>Purifie</keyword0> les effets néfastes de tous les alliés : {{value0}}; Cartes piochées : {{value1}}"
+    "text": "<keyword0>Purifie</keyword0> les effets néfastes de chaque allié : {{value0}}; Cartes piochées : {{value1}}"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
     "sourceHash": "136ef62be170596ad79c71b891537e2f4828e294c9a29e1ae44afbf3033d1618",
-    "text": "<keyword0>Purifie</keyword0> les effets néfastes de tous les alliés : {{value0}}"
+    "text": "<keyword0>Purifie</keyword0> les effets néfastes de chaque allié : {{value0}}"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "sourceHash": "175662f98b23a570e84eb0273db7da464f24c98536b92355f3279ffb05098958",
-    "text": "<keyword0>Purifie</keyword0> les effets néfastes de tous les alliés : {{value0}}; Cartes piochées : {{value1}}"
+    "text": "<keyword0>Purifie</keyword0> les effets néfastes de chaque allié : {{value0}}; Cartes piochées : {{value1}}"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
     "sourceHash": "e48dfe8b6fd2d9d2dbeb05e2d49cc904cff7cb660b204f40f960535ed9a6ca2b",
-    "text": "<keyword0>Purifie</keyword0> les effets néfastes de tous les alliés : {{value0}}"
+    "text": "<keyword0>Purifie</keyword0> les effets néfastes de chaque allié : {{value0}}"
   },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,

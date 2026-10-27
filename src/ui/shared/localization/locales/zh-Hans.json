@@ -1737,25 +1737,25 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "sourceHash": "e7ceda2c0d0d05f5f08ba1fa38fbef5fb26fe59cd6735af94b0f38a879b162dd",
-    "text": "<keyword0>净化</keyword0>所有盟友的有害效果：{{value0}}个; 抽取{{value1}}张卡牌"
+    "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个; 抽取{{value1}}张卡牌"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
     "sourceHash": "1731230369ad04d69effa4730c739b624c2c6d630f3f551aaee0bbf1064a1e6b",
-    "text": "<keyword0>净化</keyword0>所有盟友的有害效果：{{value0}}个"
+    "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "sourceHash": "fe94b44d5ed6992ed078610627f1168bcb312636f473f1fe4092d1842bb56ac9",
-    "text": "<keyword0>净化</keyword0>所有盟友的有害效果：{{value0}}个; 抽取{{value1}}张卡牌"
+    "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个; 抽取{{value1}}张卡牌"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
     "sourceHash": "2030d093c6a1e71ab8d9d619bef1d540fd248cace1e3910a5acec806ea421812",
-    "text": "<keyword0>净化</keyword0>所有盟友的有害效果：{{value0}}个"
+    "text": "<keyword0>净化</keyword0>每名盟友的有害效果：{{value0}}个"
   },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,

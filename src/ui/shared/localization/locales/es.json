@@ -1737,25 +1737,25 @@
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
     "sourceHash": "b3db8f51bef30159a6493af8ca6c1a22f840d0956fcbd8207e9e8fda07c06f88",
-    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de todos los aliados: {{value0}}; Cartas robadas: {{value1}}"
+    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}; Cartas robadas: {{value1}}"
   },
   "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
     "sourceHash": "178125c12db6b4c3233039afcf4f1503724267a3f22fec0a8bb0ebf240daed20",
-    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de todos los aliados: {{value0}}"
+    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}"
   },
   "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
     "sourceHash": "eeb8b81555ab4c0336162785b0fb6b505b632f486f8897000216453c3a9dc049",
-    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de todos los aliados: {{value0}}; Cartas robadas: {{value1}}"
+    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}; Cartas robadas: {{value1}}"
   },
   "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
     "sourceHash": "a6ce7e3b4c4f91a374afeb188e89bfe0809f19f856474ca8395a0f115618e280",
-    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de todos los aliados: {{value0}}"
+    "text": "<keyword0>Purifica</keyword0> efectos perjudiciales de cada aliado: {{value0}}"
   },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,
