@@ -1,19 +1,15 @@
 import { expect } from "@playwright/test";
-import { LANGUAGES, type GameLocale } from "../../src/ui/shared/localization/languages";
-import de from "../../src/ui/shared/localization/locales/de.json";
-import fr from "../../src/ui/shared/localization/locales/fr.json";
-import es from "../../src/ui/shared/localization/locales/es.json";
-import ptBR from "../../src/ui/shared/localization/locales/pt-BR.json";
-import ja from "../../src/ui/shared/localization/locales/ja.json";
-import zhHans from "../../src/ui/shared/localization/locales/zh-Hans.json";
-import ru from "../../src/ui/shared/localization/locales/ru.json";
+import { readFileSync } from "node:fs";
+import type { LANGUAGES as Languages } from "../../src/ui/shared/localization/languages";
 import { run } from "../support/game";
 import { key, seed, test } from "./support/session";
 
-const catalogs = { de, fr, es, "pt-BR": ptBR, ja, "zh-Hans": zhHans, ru };
-for (const locale of Object.keys(catalogs) as (keyof typeof catalogs & GameLocale)[]) {
+const directory = "src/ui/shared/localization";
+const languages = JSON.parse(readFileSync(`${directory}/languages.json`, "utf8")) as typeof Languages;
+const locales = ["de", "fr", "es", "pt-BR", "ja", "zh-Hans", "ru"] as const;
+for (const locale of locales) {
   test(`switches to ${locale} and resumes the same saved battle`, async ({ page }) => {
-    test.skip(!LANGUAGES[locale].qualified, "The language is not yet qualified");
+    test.skip(!languages[locale].qualified, "The language is not yet qualified");
     await page.addInitScript(() => {
       if (!sessionStorage.getItem("fauna.test.language-seeded")) {
         localStorage.setItem("fauna.language.v1", "en");
@@ -24,11 +20,14 @@ for (const locale of Object.keys(catalogs) as (keyof typeof catalogs & GameLocal
     const before = await page.evaluate((saveKey) => localStorage.getItem(saveKey), key);
     await page.getByRole("button", { name: "Settings", exact: true }).click();
     await page.getByRole("button", { name: "Language: English", exact: true }).click();
-    await page.getByRole("radio", { name: LANGUAGES[locale].name, exact: true }).click();
+    await page.getByRole("radio", { name: languages[locale].name, exact: true }).click();
     await expect(page.locator("html")).toHaveAttribute("lang", locale);
     await expect.poll(() => page.evaluate((saveKey) => localStorage.getItem(saveKey), key)).toBe(before);
 
-    const catalog = catalogs[locale] as unknown as Record<string, { text: string }>;
+    const catalog = JSON.parse(readFileSync(`${directory}/locales/${locale}.json`, "utf8")) as Record<
+      string,
+      { text: string }
+    >;
     await page.reload({ waitUntil: "domcontentloaded" });
     await page.clock.fastForward(5500);
     await page.clock.resume();

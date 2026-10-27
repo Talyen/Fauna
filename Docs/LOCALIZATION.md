@@ -55,8 +55,10 @@ same localized name, inflected where the language requires it.
 
 Run `npm run localization:extract` after changing these calls and commit the
 resulting English catalogs and generated shipped-catalog imports. Production
-bundles only qualified language catalogs; development previews can exercise
-unqualified catalogs with temporary qualification. Authored species names, titles and traits, card
+bundles only qualified language catalogs. Its generated imports retain each
+translation's source text for runtime freshness checks but omit authoring-only
+review flags and hashes. Development previews can exercise unqualified catalogs
+with temporary qualification. Authored species names, titles and traits, card
 names, Talent names, Boon names, keyword labels, and Boon, Talent and creature
 passive rules, Food rules, and glossary terms and definitions are extracted by their stable
 identities. Glossary keyword terms reuse the shared keyword labels. Rules retain keyword tags

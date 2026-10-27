@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import { releaseIdentityPlugin } from "./scripts/lib/release-identity.mjs";
 import { activeAssetsPlugin } from "./scripts/assets/active-assets.mjs";
+import { runtimeCatalogPlugin } from "./scripts/localization/runtime-catalogs.mjs";
 import react from "@vitejs/plugin-react";
 import babel from "@rolldown/plugin-babel";
 import tailwind from "@tailwindcss/vite";
@@ -18,6 +19,7 @@ export default defineConfig(({ command }) => ({
   },
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   plugins: [
+    runtimeCatalogPlugin(),
     {
       name: "development-connect-policy",
       transformIndexHtml: (html) =>

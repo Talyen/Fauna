@@ -610,7 +610,7 @@ it("announces a summoned Echo by its localized identity", () => {
       </TooltipProvider>
     </MessageProvider>,
   );
-  expect(screen.getByRole("button", { name: "Écho", exact: true })).toBeTruthy();
+  expect(screen.getByRole("button", { name: /^Écho$/ })).toBeTruthy();
   view.unmount();
 });
 

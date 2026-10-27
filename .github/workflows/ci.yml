@@ -302,6 +302,54 @@ jobs:
         name: Record successful workflow attempt
         run: node scripts/ci/ci.mjs stamp
 
+  localization-candidate:
+    needs: [prepare]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Select pinned npm
+        run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Temporarily qualify catalogs for candidate verification
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from 'node:fs';
+          const dir = 'src/ui/shared/localization';
+          for (const file of ['languages.json', 'coverage.json']) {
+            const path = `${dir}/${file}`;
+            const data = JSON.parse(readFileSync(path, 'utf8'));
+            if (file === 'languages.json') for (const language of Object.values(data)) language.qualified = true;
+            else for (const key of Object.keys(data)) data[key] = true;
+            writeFileSync(path, JSON.stringify(data, null, 2) + '\n');
+          }
+          NODE
+          npm run localization:extract
+          npm run localization:translations:check
+      - name: Build and measure qualified production catalogs
+        run: |
+          npm run build
+          node --input-type=module -e "import {measureBundle} from './scripts/checks/check-bundle-budget.mjs'; const result = measureBundle('dist/assets'); console.log('Qualified production JavaScript bytes:', result.bytes); for (const file of result.files) console.log(file.file, file.bytes);"
+      - name: Install browser
+        run: npx playwright install --with-deps --only-shell chromium
+      - name: Verify language switch and saved battle resume
+        run: npx playwright test tests/e2e/localization.spec.ts --workers=1
+      - name: Retain localization candidate evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: localization-candidate
+          retention-days: 7
+          path: |
+            reports/playwright.json
+            test-results/
+
   browser:
     needs: [prepare, build]
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
