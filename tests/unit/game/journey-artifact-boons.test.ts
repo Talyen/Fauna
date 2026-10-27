@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { freshCombat, hit, removeEffects, restoreHealth } from "../../../src/game/combat";
+import { freshCombat, hit, removeEffects, restoreHealth, tickStatuses } from "../../../src/game/combat";
 import { decayBlock, finishTurn } from "../../../src/game/combat/turns";
 import { useFood } from "../../../src/game/combat/food";
 import { definition } from "../../../src/game/content";
@@ -101,6 +101,24 @@ it("mends Cleansed Bleed and scatters damage only for an actual Cleanse", () => 
   expect(enemy.health).toBe(98);
   removeEffects(ally, "cleanse", 1, events, state);
   expect(enemy.health).toBe(98);
+});
+
+it("triggers Dandelion Poultice for partial and full Mask Cleanses without category healing on partial removal", () => {
+  const { state, ally, enemy, events } = fixture();
+  state.boons = ["plague-doctors-mask", "dandelion-poultice", "sin-eaters-lantern"];
+  ally.health -= 10;
+  ally.combat!.poison = 5;
+  const before = ally.health;
+  tickStatuses(state, ally, events);
+  expect(enemy.health).toBe(97); // Poultice and the Mask's Poison damage
+  expect(events.filter((event) => event.kind === "heal" && event.targetId === ally.id)).toHaveLength(0);
+  expect(ally.health).toBeLessThan(before);
+
+  ally.combat!.poison = 1;
+  const health = enemy.health;
+  tickStatuses(state, ally, events);
+  expect(enemy.health).toBe(health - 3);
+  expect(events.some((event) => event.kind === "heal" && event.targetId === ally.id)).toBe(true);
 });
 
 it("allows actual allied Thorns damage to Leech through Block", () => {
