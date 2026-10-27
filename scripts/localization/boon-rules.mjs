@@ -1,6 +1,7 @@
 import { parseSync } from "@swc/core";
 import { evaluateRule } from "./rule-evaluator.mjs";
 import { walk } from "./source-ast.mjs";
+import { ruleTemplate } from "../../src/ui/shared/localization/rule-template.mjs";
 
 export function keywordPattern(source) {
   const words = [];
@@ -30,18 +31,15 @@ export function keywordPattern(source) {
   );
 }
 export function templateFor(text, pattern) {
-  let keyword = 0,
-    value = 0,
-    cursor = 0,
-    output = "";
-  const plain = (input) => input.replace(/\d+(?:\.\d+)?/g, () => `{{value${value++}}}`);
+  const parts = [];
+  let cursor = 0;
   for (const match of text.matchAll(pattern)) {
-    output += plain(text.slice(cursor, match.index));
-    const id = `keyword${keyword++}`;
-    output += `<${id}>${match[0]}</${id}>`;
+    if (match.index > cursor) parts.push({ text: text.slice(cursor, match.index) });
+    parts.push({ text: match[0], keyword: "matched" });
     cursor = match.index + match[0].length;
   }
-  return output + plain(text.slice(cursor));
+  if (cursor < text.length) parts.push({ text: text.slice(cursor) });
+  return ruleTemplate(parts).template;
 }
 export function evaluate(node, params, name, bindings = {}) {
   return evaluateRule(node, { ...bindings, [name]: params }, {}, true);
