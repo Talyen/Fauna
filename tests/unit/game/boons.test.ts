@@ -263,7 +263,11 @@ it("combines the complete Boon catalog without mutating previews or duplicating 
   expect(result.state.battle!.hand).toHaveLength(1);
   expect(result.state.battle!.mana).toBe(state.battle.mana);
   expect(result.state.battleXP.health).toBe((state.battleXP.health ?? 0) + 1);
-  expect(result.state.team.map((ally) => ally.combat!.freeze)).toEqual([1, 3, 3]);
+  // Overflow Cup redirects the final excess healing; Thaw Spoon spends that actual Health.
+  expect(result.events).toContainEqual(
+    expect.objectContaining({ kind: "heal", targetId: "ally-1", amount: 1 }),
+  );
+  expect(result.state.team.map((ally) => ally.combat!.freeze)).toEqual([1, 2, 3]);
   expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
 

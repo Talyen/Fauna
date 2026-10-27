@@ -116,9 +116,7 @@ function drawableCard(state: GameState, keyword?: "light" | "nature" | "water" |
     (!keyword || cardHasKeyword(card, keyword));
 }
 
-/** Find cards belonging to another living deployed creature without revealing pile order.
- * @modifierContract Typed data-only binding; the runtime callers are in this module.
- */
+/** Find cards belonging to another living deployed creature without revealing pile order. */
 export function journeyReturnEligibility(
   state: GameState,
   ownerId: string | null,

@@ -154,6 +154,16 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
               );
             if (key === "puzzleProgress" && Array.isArray(value) && value.length === 0) return undefined;
             if (key === "encoreProgress" && value === 0) return undefined;
+            // These inert saved fields and localization metadata postdate this combat oracle.
+            if (key === "oasisLeech" && value === false) return undefined;
+            if (
+              key === "announcement" &&
+              value &&
+              typeof value === "object" &&
+              "kind" in value &&
+              value.kind === "useAbility"
+            )
+              return undefined;
             if (
               key === "repeatNext" &&
               value &&

@@ -118,8 +118,31 @@ export function layoutViolations() {
     const clipsY =
       /^(hidden|clip)$/.test(css.overflowY) ||
       el.matches("button:not(.creature-card):not(.action-card), p, dt, dd, h1, h2, h3");
+    const prompt = el.matches("button.end-turn") ? el.querySelector(":scope > .end-turn-prompt") : null;
+    const buttonBox = el.getBoundingClientRect();
+    // The controller badge intentionally overhangs a visible End turn button.
+    // Its label must still fit; the badge itself remains subject to viewport checks below.
+    const visiblePrompt =
+      !!prompt &&
+      css.overflowX === "visible" &&
+      css.overflowY === "visible" &&
+      [...el.children]
+        .filter((child) => child !== prompt)
+        .every((child) => {
+          const bounds = child.getBoundingClientRect();
+          return (
+            bounds.left >= buttonBox.left - 1 &&
+            bounds.right <= buttonBox.right + 1 &&
+            bounds.top >= buttonBox.top - 1 &&
+            bounds.bottom <= buttonBox.bottom + 1 &&
+            (!(child instanceof HTMLElement) ||
+              !child.clientWidth ||
+              child.scrollWidth <= child.clientWidth + 1)
+          );
+        });
     if (
       el.clientWidth &&
+      !visiblePrompt &&
       ((clipsX && el.scrollWidth > el.clientWidth + 1) || (clipsY && el.scrollHeight > el.clientHeight + 1))
     )
       failures.push(`${name} has overflowing or clipped content`);

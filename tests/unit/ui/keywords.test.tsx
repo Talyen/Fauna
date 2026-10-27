@@ -208,7 +208,6 @@ describe("keyword foundation", () => {
       nature: "059669",
       thorns: "059669",
       bleed: "dc2626",
-      leech: "9f1239",
     };
     const luminance = (hex: string) => {
       const [r, g, b] = [0, 2, 4].map((offset) => {
@@ -221,7 +220,7 @@ describe("keyword foundation", () => {
       const alias = new RegExp(`--keyword-${id}: var\\(--keyword-([\\w]+)\\);`).exec(tokens);
       const match = new RegExp(`--keyword-${alias?.[1] ?? id}: #([a-f0-9]{6});`).exec(tokens);
       expect(match, id).not.toBeNull();
-      // The darker Alchemy identities intentionally replace Fauna's lighter contrast variants.
+      // Authored base colors stay exact; other roles must remain readable.
       if (alchemyColors[id]) expect(match![1], id).toBe(alchemyColors[id]);
       else
         expect((luminance(match![1]!) + 0.05) / (luminance("262626") + 0.05), id).toBeGreaterThanOrEqual(4.5);

@@ -1050,8 +1050,8 @@ it("selects only qualified languages, with manual and Steam preferences before s
   expect(resolveLanguage("fr", "german", ["ja-JP"], ready)).toBe("fr");
   expect(resolveLanguage("auto", null, ["zh-TW", "zh-CN"], ready)).toBe("zh-Hans");
   expect(resolveLanguage("auto", null, ["es-MX", "pt-PT", "pt-BR"], ready)).toBe("pt-BR");
-  expect(resolveLanguage("auto", "japanese", ["ja-JP"])).toBe("en");
-  expect(resolveLanguage("ja", null, ["ja-JP"])).toBe("en");
+  expect(resolveLanguage("auto", "japanese", ["ja-JP"], ["en"])).toBe("en");
+  expect(resolveLanguage("ja", null, ["ja-JP"], ["en"])).toBe("en");
   expect(resolveLanguage("auto", "unknown", ["fr-CA"], ready)).toBe("fr");
 });
 
@@ -1486,7 +1486,11 @@ it("uses the localized backup name for the visible and accessible swap choice", 
     },
   );
   const game = produce(teamRun(7, ["wisterelle", "emberback", "pollenmoth"]), (draft) => {
-    addBackups(draft, { ...draft.team[0]!, id: "reserve", species: "reedstag", health: 10 });
+    addBackups(
+      draft,
+      { ...draft.team[0]!, id: "reserve", species: "reedstag", health: 10 },
+      { ...draft.team[0]!, id: "other-reserve", species: "coralcurl", health: 10 },
+    );
     const card = draft.cards.find((entry) => entry.definitionId === "wisterelle-forgotten-junction")!;
     draft.battle!.hand = [card.id];
     draft.battle!.draw = [];
@@ -1597,6 +1601,7 @@ it("shows localized Mana gained in a targeting preview without playing the card"
     draft.battle!.draw = [];
     draft.battle!.mana = 2;
     draft.team[1]!.health -= 2;
+    draft.team[2]!.health -= 1;
   });
   const send = vi.fn(() => true);
   const view = render(
@@ -2777,6 +2782,7 @@ it("extracts and presents transient combat status variants without changing thei
     freeNature: true,
     freeLight: true,
     freeCard: true,
+    oasisLeech: true,
     blind: true,
     nullifyFreeze: true,
     attackReflection: true,

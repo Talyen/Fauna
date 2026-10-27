@@ -349,6 +349,19 @@ test("layout enforcement detects scrolling, clipping, obscured controls and misa
     true,
   );
   await page.setContent(
+    '<main class="app"><button class="end-turn" style="position:relative;width:120px;height:44px;overflow:visible"><span>End turn</span><span class="end-turn-prompt" style="position:absolute;right:-8px;top:0;width:16px;height:16px;pointer-events:none">A</span></button></main>',
+  );
+  expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("clipped content"))).toBe(
+    false,
+  );
+  await page.locator(".end-turn span:first-child").evaluate((el) => {
+    el.textContent = "An intentionally oversized End turn label that cannot fit";
+    el.style.whiteSpace = "nowrap";
+  });
+  expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("clipped content"))).toBe(
+    true,
+  );
+  await page.setContent(
     '<main class="app"><button style="height:44px">Play</button><div style="position:fixed;inset:0"></div></main>',
   );
   expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("obscured"))).toBe(true);
