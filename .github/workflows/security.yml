@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         timeout-minutes: 3
         run: npm ci --no-audit --no-fund
-      - name: Reject new advisories and expired exceptions
+      - name: Reject advisories
         run: npm run security:audit
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()

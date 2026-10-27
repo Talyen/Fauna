@@ -3,30 +3,18 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import path from "node:path";
 import { npmCommand } from "../lib/npm-command.mjs";
-// Latest stable electron-builder still uses this formatter in its download proxy logger.
-// No player-supplied format strings reach it. Reassess upstream rather than forcing a major override.
-const EXCEPTIONS = new Map([["https://github.com/advisories/GHSA-hp3w-g68c-fv3c", "2026-11-21T00:00:00Z"]]);
-export function auditFindings(audit, now = Date.now()) {
+export function auditFindings(audit) {
   if (audit.error || !audit.metadata?.vulnerabilities || !audit.vulnerabilities)
     throw new Error("Dependency audit did not return complete results.");
   const rejected = [];
-  const accepted = new Set();
   for (const entry of Object.values(audit.vulnerabilities))
     for (const advisory of entry.via) {
       if (typeof advisory === "string") continue; // The referenced package is checked separately.
-      const expiry = EXCEPTIONS.get(advisory.url);
-      if (
-        expiry &&
-        now < Date.parse(expiry) &&
-        advisory.name === "sprintf-js" &&
-        advisory.severity === "moderate"
-      )
-        accepted.add(advisory.url);
-      else rejected.push(`${advisory.name}: ${advisory.title} (${advisory.severity})`);
+      rejected.push(`${advisory.name}: ${advisory.title} (${advisory.severity})`);
     }
-  if (Object.keys(audit.vulnerabilities).length && !accepted.size && !rejected.length)
+  if (Object.keys(audit.vulnerabilities).length && !rejected.length)
     throw new Error("Dependency audit contains no advisory details.");
-  return { rejected, accepted: [...accepted] };
+  return { rejected };
 }
 function main() {
   const [command, args] = npmCommand(["audit", "--package-lock-only", "--json", "--ignore-scripts"]);
@@ -36,9 +24,7 @@ function main() {
   const findings = auditFindings(report);
   mkdirSync("reports/security", { recursive: true });
   writeFileSync("reports/security/audit.json", JSON.stringify({ audit: report, ...findings }, null, 2));
-  console.log(
-    `${findings.rejected.length} unaccepted advisories; ${findings.accepted.length} temporary build-tool exception`,
-  );
+  console.log(`${findings.rejected.length} advisories`);
   for (const message of findings.rejected) console.error(message);
   if (findings.rejected.length) process.exitCode = 1;
 }

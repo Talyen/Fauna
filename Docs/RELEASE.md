@@ -94,7 +94,7 @@ After package validation, Windows CI runs `npm run generate:release-inventory --
 
 Optional signed candidates inventory final signed components and attest installer/SBOM for the explicitly selected release tag. Provenance establishes build origin/integrity, not Authenticode trust or suppression of Windows warnings; qualify installer and Steam delivery separately.
 
-The [weekly/manual security workflow](../.github/workflows/security.yml) retains audit details and fails on new advisories or expired exceptions under the [ordinary CI policy](CI.md#pipeline). It neither extends the existing electron-builder advisory exception nor forces a downgrade.
+The [weekly/manual security workflow](../.github/workflows/security.yml) retains audit details and fails on advisories under the [ordinary CI policy](CI.md#pipeline).
 
 ## Player-note generation
 

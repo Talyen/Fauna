@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { auditFindings } from "../../../scripts/checks/security-audit.mjs";
-it("rejects new advisories, incomplete audits and expired build-tool exceptions", () => {
+it("rejects advisories and incomplete audits", () => {
   const advisory = {
     name: "sprintf-js",
     severity: "moderate",
@@ -11,9 +11,10 @@ it("rejects new advisories, incomplete audits and expired build-tool exceptions"
     metadata: { vulnerabilities: {} },
     vulnerabilities: { package: { via: [entry] } },
   });
-  expect(auditFindings(report(advisory), Date.parse("2026-10-21")).accepted).toEqual([advisory.url]);
-  expect(auditFindings(report(advisory), Date.parse("2026-11-21")).rejected).toHaveLength(1);
+  expect(auditFindings({ metadata: { vulnerabilities: {} }, vulnerabilities: {} }).rejected).toEqual([]);
+  expect(auditFindings(report(advisory)).rejected).toHaveLength(1);
   expect(auditFindings(report({ ...advisory, url: "new" })).rejected).toHaveLength(1);
   expect(auditFindings(report({ ...advisory, severity: "high" })).rejected).toHaveLength(1);
   expect(() => auditFindings({ error: "offline" })).toThrow();
+  expect(() => auditFindings(report("indirect-only"))).toThrow();
 });

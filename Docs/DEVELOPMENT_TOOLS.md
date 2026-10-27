@@ -189,6 +189,8 @@ These commands follow the existing CI-first execution policy. The weekly workflo
 
 The [performance workflow](../.github/workflows/performance.yml) runs weekly or on manual dispatch. It serializes three baseline captures and three React Compiler captures on the same hosted runner, retaining samples and comparisons for 30 days. `FAUNA_REACT_COMPILER=1 npm run build` enables the stable Babel compiler for the trial; ordinary builds keep it disabled until repeated observations and rendered interaction review justify adoption. Each report hashes the actual build. Hosted timings are observations, without timing pass/fail thresholds; capture completion and checkpoint correctness remain required. Compare equivalent reports and inspect frame gaps, input delay and heap behavior before promoting any optimization. This does not qualify packaged Windows or Deck performance.
 
+The [October 26 compiler observation](task-evidence/2026-10-26-stack-maintenance.md#react-compiler) found no established p95 improvement in its three comparisons; fixed capture order and the absence of rendered parity evidence limit the conclusion.
+
 ## Local diagnostics
 
 The [session-owned collector](ARCHITECTURE.md#discovery-and-diagnostics) records bounded, redacted failures separately from progression. It has no player report/export surface or automatic upload. Inspect its persistence port and focused tests when investigating collection, deduplication or disposal; ordinary features reuse it rather than collecting saves or arbitrary context.
