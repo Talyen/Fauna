@@ -136,16 +136,16 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         }
         continue;
       }
-      const fallen = battle.enemies.filter((unit) => unit.health <= 0);
+      const hasFallen = battle.enemies.some((unit) => unit.health <= 0);
       const inherited =
-        unfinishedJourneyLimit(undefined, enemy) > ensureCombat(enemy).fallenCardsPlayedThisTurn &&
-        fallen.length > 0
-          ? fallen
+        hasFallen && unfinishedJourneyLimit(undefined, enemy) > ensureCombat(enemy).fallenCardsPlayedThisTurn
+          ? battle.enemies
+              .filter((unit) => unit.health <= 0)
               .flatMap((unit) => enemyAbilities.get(unit.species)!)
               .filter((card) => card.species !== enemy.species)
           : [];
       const own = enemyAbilities.get(enemy.species)!;
-      const abilities = fallen.length
+      const abilities = hasFallen
         ? inherited.length
           ? [...own, ...inherited]
           : own

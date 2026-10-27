@@ -112,6 +112,50 @@
       "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
     },
     {
+      "id": "creature.ravelland",
+      "origin": "repository",
+      "source": "public/art/ravelland/portrait.png",
+      "output": "art/ravelland/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Google Drive artwork: https://drive.google.com/file/d/1EoVHl81YgJBd5zUUlNWJArWPM6qbZH7l/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.ravelland.antler-pass",
+      "origin": "repository",
+      "source": "public/art/ravelland/antler-pass.png",
+      "output": "art/ravelland/antler-pass.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Google Drive artwork: https://drive.google.com/file/d/1cqyYDy4eS5AafQxB0nNdRCUh-5f2Dmn9/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.ravelland.canyon-rebuke",
+      "origin": "repository",
+      "source": "public/art/ravelland/canyon-rebuke.png",
+      "output": "art/ravelland/canyon-rebuke.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Google Drive artwork: https://drive.google.com/file/d/1QAZWt1PDy-dacHS69xJdim9y5vgz1ej_/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.ravelland.rainward",
+      "origin": "repository",
+      "source": "public/art/ravelland/rainward.png",
+      "output": "art/ravelland/rainward.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Google Drive artwork: https://drive.google.com/file/d/1QADNjTs9Nr1NG6ostZqzQXi7wjrsoD32/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
       "id": "boon.reef-incense-tile",
       "origin": "repository",
       "source": "public/art/boons/reef-incense-tile.png",

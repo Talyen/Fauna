@@ -95,15 +95,19 @@ export function recruitLineup(
     !species(incoming.species).legendary &&
     !state.team.some((unit) => species(unit.species).legendary)
     ? [...active, incoming.id]
-    : [...active];
+    : active;
 }
 /** Joining a roster changes individuals and deployment; Collection progress is granted separately. */
 export function addRecruit(state: GameState, kind: import("./content").SpeciesId, replacement?: string) {
   // Repeat discoveries improve Collection rank without replacing or refreshing an individual.
   if (rosterHasSpecies(state, kind)) return;
-  const all = [...state.team, ...state.reserves];
   let id = `recruit-${state.revision}`;
-  for (let suffix = 1; all.some((creature) => creature.id === id); suffix++)
+  for (
+    let suffix = 1;
+    state.team.some((creature) => creature.id === id) ||
+    state.reserves.some((creature) => creature.id === id);
+    suffix++
+  )
     id = `recruit-${state.revision}-${suffix}`;
   const incoming = { id, species: kind, health: species(kind).health, block: 0, attacked: false };
   const lineup = recruitLineup(state, incoming, replacement);
@@ -163,10 +167,12 @@ export function formationForSwap(
 function setFormation(state: GameState, ids: string[], events: GameEvent[] = [], fromCard = false) {
   const all = [...state.team, ...state.reserves];
   const previous = state.cards;
-  const departing = new Set(state.team.filter((unit) => !ids.includes(unit.id)).map((unit) => unit.id));
+  const activeIds = new Set(ids);
+  const departing = new Set<string>();
+  for (const unit of state.team) if (!activeIds.has(unit.id)) departing.add(unit.id);
   state.team = ids.map((id) => all.find((unit) => unit.id === id)!);
-  state.reserves = all.filter((unit) => !ids.includes(unit.id));
-  const retained = previous.filter((card) => card.ownerId === null || ids.includes(card.ownerId));
+  state.reserves = all.filter((unit) => !activeIds.has(unit.id));
+  const retained = previous.filter((card) => card.ownerId === null || activeIds.has(card.ownerId));
   const slots = previous.filter(
     (card) => card.ownerId !== null && departing.has(card.ownerId) && !card.temporary,
   );

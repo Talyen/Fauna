@@ -566,3 +566,33 @@ it("rejects duplicate and missing cards in resumed battle zones", () => {
   occupied[0]!.push(id, id);
   expect(() => decodeSave(encodeSave(state))).toThrow("Save contains inconsistent game data.");
 });
+
+it("uses the borrowing creature's free play when a fallen owner's card is inspected", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["oathara", "mossguard"])));
+  const [guide, fallen] = state.team;
+  fallen!.health = 0;
+  guide!.combat!.freeCard = true;
+  const card = state.cards.find(
+    (entry) => entry.ownerId === fallen!.id && entry.definitionId === "mossguard-attack",
+  )!;
+  state.battle.hand = [card.id];
+  state.battle.mana = 0;
+  expect(cardActor(state, card)).toBe(guide);
+  expect(cardCost(card, state)).toBe(0);
+  expect(inspectCardPlay(state, card.id).allowed).toBe(true);
+  expect(availablePlays(state).map((play) => play.card.id)).toEqual([card.id]);
+});
+
+it("handles a single discarded card consistently for recovery and draw previews", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["wisterelle", "mossguard"])));
+  const [owner, ally] = state.team;
+  const own = state.cards.find((card) => card.ownerId === owner!.id)!;
+  const other = state.cards.find((card) => card.ownerId === ally!.id)!;
+  state.battle.draw = [];
+  state.battle.discard = [other.id];
+  expect(discardDrawCards(state, owner!.id)).toEqual([other]);
+  expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(true);
+  ally!.health = 0;
+  expect(discardDrawCards(state, owner!.id)).toEqual([]);
+  expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(false);
+});

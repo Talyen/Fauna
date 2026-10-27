@@ -36,6 +36,7 @@ import { bloomquail } from "./creatures/bloomquail";
 import { ringpalm } from "./creatures/ringpalm";
 import { shadebrim } from "./creatures/shadebrim";
 import { glintstride } from "./creatures/glintstride";
+import { ravelland } from "./creatures/ravelland";
 // Catalog order determines seeded offers and selections
 const kits = [
   rookhaven,
@@ -74,6 +75,7 @@ const kits = [
   aerostat,
   alpenglen,
   wisterelle,
+  ravelland,
 ];
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
@@ -114,6 +116,7 @@ export const CARDS: readonly CardDefinition[] = [
   aerostat,
   alpenglen,
   wisterelle,
+  ravelland,
 ].flatMap((kit) => kit.cards);
 const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));
 const cardsBySpecies = new Map(kits.map((kit) => [kit.species.id, kit.cards]));

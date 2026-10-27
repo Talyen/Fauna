@@ -6,7 +6,7 @@ import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
-import { hasTalent, creaturePassive, passiveAmount } from "../progression";
+import { hasTalent, creaturePassiveTier, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import {
@@ -27,6 +27,7 @@ import { modifiedDamage, blockPayment, blockEfficiency, armoredDamage, armorAppl
 import {
   dodgeResponse,
   blockDepletionRewards,
+  faultline,
   publishHit,
   damageRewards,
   poisonStun,
@@ -150,7 +151,7 @@ export function* bounce(
   const { effect } = action;
   const allied = !isEnemy(source);
   let visited: Set<string> | undefined;
-  for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
+  for (const entry of creaturePassiveTier(allied ? state : undefined, source.species).effects) {
     if (entry.kind !== "bounce" || entry.effect !== effect) continue;
     visited ??= new Set([first.id]);
     const visitedTargets = visited;
@@ -352,6 +353,7 @@ export function* resolveHit(
       );
       target.block -= payment.spent;
       if (payment.spent > 0) {
+        const depletedBlock = target.block === 0;
         events.push({
           kind: "block",
           actorId: source.id,
@@ -367,11 +369,12 @@ export function* resolveHit(
             dealt: 0,
             blocked: payment.absorbed,
             blockSpent: payment.spent,
-            depletedBlock: target.block === 0,
+            depletedBlock,
             critical: false,
           },
           false,
         );
+        yield* faultline(context, depletedBlock);
       }
     }
     yield* dodgeResponse(context, !thornDodge);
@@ -513,6 +516,7 @@ export function* resolveHit(
   };
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
+  yield* faultline(context, depletedBlock);
   yield* damageRewards(context, facts, policy);
   if (
     attack &&

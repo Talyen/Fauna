@@ -48,11 +48,14 @@ export function createPearls(
   count: number,
   events: GameEvent[],
 ) {
+  if (!(count > 0)) return;
   let created = 0;
+  const enemyDeck = side === "enemy" && "deck" in actor ? actor.deck : undefined;
+  const pearlLimit = enemyDeck ? MAX_BATTLE_CARDS - permanentKitSize(actor.species) : 0;
   for (let i = 0; i < count; i++) {
-    if (side === "enemy" && "deck" in actor && actor.deck) {
-      const deck = actor.deck;
-      if (deck.pearls >= MAX_BATTLE_CARDS - permanentKitSize(actor.species)) break;
+    if (enemyDeck) {
+      const deck = enemyDeck;
+      if (deck.pearls >= pearlLimit) break;
       deck.pearls++;
       queueCard(deck, MAX_HAND_SIZE, PEARL.id);
     } else {

@@ -84,13 +84,16 @@ export const BOSSES = [
   {
     id: "hollow-crown",
     encounter: 7,
-    name: "Memento",
-    pack: ["memento"],
+    name: "Ravelland",
+    pack: ["ravelland"],
   },
 ] as const;
 const recruitableSpecies = SPECIES.filter((entry) => !entry.legendary);
+const bossesByEncounter = new Map<number, (typeof BOSSES)[number]>(
+  BOSSES.map((boss) => [boss.encounter, boss]),
+);
 export function encounterPacks(encounter: number) {
-  const boss = BOSSES.find((entry) => entry.encounter === encounter);
+  const boss = bossesByEncounter.get(encounter);
   return boss ? [boss.pack] : COMBAT_PACKS;
 }
 
@@ -105,10 +108,11 @@ export function generateEncounterPack(state: GameState, savedPack?: readonly Spe
   const inRoster = (kind: SpeciesId) =>
     state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind);
   if (!selected.some(inRoster)) return selected;
-  const roster = [...state.team, ...state.reserves].map((unit) => unit.species);
-  const eligible = recruitableSpecies.filter((entry) => !roster.includes(entry.id));
+  const roster = new Set(state.team.map((unit) => unit.species));
+  for (const unit of state.reserves) roster.add(unit.species);
+  const eligible = recruitableSpecies.filter((entry) => !roster.has(entry.id));
   return selected.map((kind) =>
-    roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind,
+    roster.has(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind,
   );
 }
 
@@ -128,7 +132,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
 } {
   const pack = game.expedition.pack;
   if (!pack) throw new Error("Missing encounter pack.");
-  const boss = BOSSES.find((entry) => entry.encounter === game.encounter);
+  const boss = bossesByEncounter.get(game.encounter);
   const power = 1 + game.encounter / 10;
   return {
     name: boss ? "Boss" : "Combat",
@@ -148,7 +152,7 @@ export function finalEncounter(game: Pick<GameState, "encounter">) {
   return game.encounter === JOURNEY_LENGTH - 1;
 }
 export function bossEncounter(game: Pick<GameState, "encounter">) {
-  return BOSSES.some((boss) => boss.encounter === game.encounter);
+  return bossesByEncounter.has(game.encounter);
 }
 
 freeze(COMBAT_PACKS, true);
