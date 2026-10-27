@@ -347,6 +347,12 @@
     "sourceHash": "4b1a6e8d32c14568be168053b1231aaa37c75ee0631abff2fe71c341df11a8de",
     "text": "Marcapáginas de vidrio basáltico"
   },
+  "content.boon.blooming-still.name": {
+    "reviewed": true,
+    "source": "Blooming Still",
+    "sourceHash": "98725396629601a126ac00b3c6ac51be47a7677ed16c20f5cbe40625896e191e",
+    "text": "Alambique florido"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -454,6 +460,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "d97c4cc5d63f64ff7fd3bfe1d7796cf5a4c66e919d26b60671a23f35eee572eb",
     "text": "Campana de coronación"
+  },
+  "content.boon.crater-punch.name": {
+    "reviewed": true,
+    "source": "Crater Punch",
+    "sourceHash": "d7aa58566dac40f58d2a3a4585f11196fdc877e8221299a5f97b3f3b69c93ab9",
+    "text": "Punzón de cráter"
   },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
@@ -1192,6 +1204,12 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "ac32092101c84bd2e02f85bc7a650b6667e88fc7e4a1cf1d370cabe01803eed4",
     "text": "El daño excedente al derrotar a un enemigo se propaga a otros enemigos"
+  },
+  "content.boon.yarrow-salve-tin.name": {
+    "reviewed": true,
+    "source": "Yarrow Salve Tin",
+    "sourceHash": "3ba9fc8c1cd1e5fb8d8b8ca81a6a1a46d9de1b48d78ae6c16ca88334e501b025",
+    "text": "Lata de ungüento de milenrama"
   },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,

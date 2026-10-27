@@ -347,6 +347,12 @@
     "sourceHash": "ebf22e6fddabda9eafb7b961cec515fca30a73b83484bf6c1b5f00052189e8ea",
     "text": "玄武岩ガラスのしおり"
   },
+  "content.boon.blooming-still.name": {
+    "reviewed": true,
+    "source": "Blooming Still",
+    "sourceHash": "e2bc78f0f3031bba2577bf27fa5a2fd782724dd16a725e43a7171965ff3c45d2",
+    "text": "花咲く蒸留器"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -454,6 +460,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "7d17f0b1a6151dae26671291836d0e1fc876df3027f4f3a8f3c929e15d5b2d9a",
     "text": "戴冠のクロッシュ"
+  },
+  "content.boon.crater-punch.name": {
+    "reviewed": true,
+    "source": "Crater Punch",
+    "sourceHash": "d9f560d35561daa02f0e2493cd214fa1d528aeca357d38bde08f670b252ec6fe",
+    "text": "クレーターの刻印"
   },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
@@ -1192,6 +1204,12 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "d2bdb158db2a2863a5288e0b2e268232ac5be698e9aae42159c2f49b476e9471",
     "text": "敵を倒した際の余剰ダメージが他の敵に広がる"
+  },
+  "content.boon.yarrow-salve-tin.name": {
+    "reviewed": true,
+    "source": "Yarrow Salve Tin",
+    "sourceHash": "32b3c43f1c374145fd5a859c9b761effe558e731ff7d768b48ac7ea05d376d40",
+    "text": "ノコギリソウの軟膏缶"
   },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,

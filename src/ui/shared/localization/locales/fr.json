@@ -353,6 +353,12 @@
     "sourceHash": "7940fa7af63d2d9030e7478ed2c01a8f859054c77619151112bdac646f466500",
     "text": "Marque-page de verre basaltique"
   },
+  "content.boon.blooming-still.name": {
+    "reviewed": true,
+    "source": "Blooming Still",
+    "sourceHash": "740ff1ead3b62f5ecebf0ea768c44b3ac5ff158ef7760a12f770b067d1212048",
+    "text": "Alambic fleuri"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -460,6 +466,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "ef32cae1ad9f288f61c49c67d90b88505efbb0d7370daa2d90f155e56900b0eb",
     "text": "Cloche de couronnement"
+  },
+  "content.boon.crater-punch.name": {
+    "reviewed": true,
+    "source": "Crater Punch",
+    "sourceHash": "1261ff1869b1fac3eb6b140100576967cf35f294fc0d5755708084c51abd46d5",
+    "text": "Poinçon de cratère"
   },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
@@ -1210,6 +1222,12 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "14845adc3f55dc88a438eac3da4cdcbb7b367252775eeb8b9f9295ea7d11d2f0",
     "text": "Les dégâts excédentaires se propagent aux autres ennemis"
+  },
+  "content.boon.yarrow-salve-tin.name": {
+    "reviewed": true,
+    "source": "Yarrow Salve Tin",
+    "sourceHash": "565668d46f493670bc6810b2dacd12547d824766db391f75d2104305212738b2",
+    "text": "Boîte d’onguent d’achillée"
   },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,

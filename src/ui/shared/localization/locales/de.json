@@ -347,6 +347,12 @@
     "sourceHash": "261c54c413787bdcd7522d721b9d4134e88688243204e16542ecbbad175a0a1f",
     "text": "Basaltglas-Lesezeichen"
   },
+  "content.boon.blooming-still.name": {
+    "reviewed": true,
+    "source": "Blooming Still",
+    "sourceHash": "955379f03abdb60af2bd2bc6769b6efb0839fa1f4f1c0b7546b144fed8fedff2",
+    "text": "Blühende Destille"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -454,6 +460,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "9d40f526e90d52ac3c5db86f1a1debafb9aa0f83b7b480ccf3c96ccde8e49bc0",
     "text": "Krönungs-Speiseglocke"
+  },
+  "content.boon.crater-punch.name": {
+    "reviewed": true,
+    "source": "Crater Punch",
+    "sourceHash": "f45f6636f0debbc8f24785a03c789a921cbcb9b80f7c5080a4ae4e7219e405ab",
+    "text": "Kraterpunze"
   },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
@@ -1192,6 +1204,12 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "49e2022d216e0f1884054b2c9ea0b219e92468ca6fdf2a28018be6ba80f89aca",
     "text": "Überschüssiger Schaden bei einem besiegten Gegner überträgt sich auf andere Gegner"
+  },
+  "content.boon.yarrow-salve-tin.name": {
+    "reviewed": true,
+    "source": "Yarrow Salve Tin",
+    "sourceHash": "9bbac1f8cbe8a71421e1c524590f54fb335c4a84f943f741cbbdd3eab931ca1d",
+    "text": "Schafgarbensalben-Dose"
   },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,

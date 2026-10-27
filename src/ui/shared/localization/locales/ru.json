@@ -347,6 +347,12 @@
     "sourceHash": "cfb5239b0367b3f597d4cd16f4decd9538f6288f95ea7e4bc737df597840ecef",
     "text": "Закладка из базальтового стекла"
   },
+  "content.boon.blooming-still.name": {
+    "reviewed": true,
+    "source": "Blooming Still",
+    "sourceHash": "d25094ca52d207bf8dcdfaacd9fe7a9f82770d21ed14cca802529094bdb3a294",
+    "text": "Цветущий перегонный куб"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -454,6 +460,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "27a1ad91c0e28ccf204455d6c456e8927609257f9490bfee888f5d9ab13f814c",
     "text": "Купол коронации"
+  },
+  "content.boon.crater-punch.name": {
+    "reviewed": true,
+    "source": "Crater Punch",
+    "sourceHash": "70a11a52b9e72d886c8a2411780ea5d96127a07b0935c7b0f84a488f2da3bbd8",
+    "text": "Кратерный пуансон"
   },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
@@ -1192,6 +1204,12 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "20b73783625c5013128e4a5b9507c4b2bde2346c906f18c55a7600373f9da6f6",
     "text": "Избыточный урон при победе над врагом переходит к другим врагам"
+  },
+  "content.boon.yarrow-salve-tin.name": {
+    "reviewed": true,
+    "source": "Yarrow Salve Tin",
+    "sourceHash": "18feda5102939a6fb2a9a98cab101bf1e60098a7b6edf1db04b9e512724ca3d2",
+    "text": "Жестянка мази тысячелистника"
   },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,

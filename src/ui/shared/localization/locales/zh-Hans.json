@@ -347,6 +347,12 @@
     "sourceHash": "78ce397cc13df83037082a0b63654ee1ebc6b1f0e66664029cc7d2bb6500e895",
     "text": "玄武岩玻璃书签"
   },
+  "content.boon.blooming-still.name": {
+    "reviewed": true,
+    "source": "Blooming Still",
+    "sourceHash": "7b372d0b658788d1149ff87466890ee304ecb700160cdc8ea0e006f5c0c8cfae",
+    "text": "花开蒸馏器"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -454,6 +460,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "d25f80bc61148e49f5078f9e458b0b0bbe42cf6309993bca24550dadca3831b1",
     "text": "加冕钟罩"
+  },
+  "content.boon.crater-punch.name": {
+    "reviewed": true,
+    "source": "Crater Punch",
+    "sourceHash": "ed584524e49bd1ddb7bbdfc297e652829f4e0ae689e770cbff30351f3d25a67a",
+    "text": "陨坑冲头"
   },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
@@ -1192,6 +1204,12 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "b26eadfee997fb8b65c79a465dd957e4ad5edb47c2ceda8a6a8b882567d54b18",
     "text": "击倒敌人时的溢出伤害会传播给其他敌人"
+  },
+  "content.boon.yarrow-salve-tin.name": {
+    "reviewed": true,
+    "source": "Yarrow Salve Tin",
+    "sourceHash": "ac83e96624b6724419105335b3ab8ccc2dba227f33acc66aa1d00bbf95423b91",
+    "text": "蓍草药膏盒"
   },
   "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
     "reviewed": true,
