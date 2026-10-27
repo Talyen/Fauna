@@ -1595,6 +1595,192 @@
     "sourceHash": "48041a8bf785727afa94688c038e2f13be3fcb42e4b3919b67c11969731cf9e9",
     "text": "Quelle"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "226012b073b4dbd585ec4f76ca8c7ca005002fdd2132d422bd3fd1709bf3104a",
+    "text": "Ätzwirkung"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "8aa6b183164a951ac46b1a74cbf8f580f4bd5043fc54c910c85ad3de210768fb",
+    "text": "Schaden vom Typ <keyword0>Gift</keyword0> entfernt gegnerische <keyword1>Rüstung</keyword1> in Höhe des verursachten Schadens"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "a00a14af4f572df31f1c4952700aa8df50a380165c86adc3684dbf39ce36d262",
+    "text": "Korrosiv"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "42ef1f58a8385f7655c70e37c366b295e24c7c697816b4f9a9b94e50a6ec2ceb",
+    "text": "Blutgift"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "dc000490c226e64468324bd342970eb54120f6086256ab07c4adf8e13fcdd9a1",
+    "text": "<keyword0>Gift</keyword0> hat eine Chance von {{value0}}%, zusätzlich Schaden vom Typ <keyword1>Blutung</keyword1> zu verursachen"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "10936137371de1a64dc5ece1536e36f5e5bb1193b5cca2ad86d051c97e3d8501",
+    "text": "Nekrose"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "9da5466f2efb711e0586edc9cea132f2dce1b92a11a1ab276dbbfb6f836eaa93",
+    "text": "Lähmendes Gift"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "6b7fc8828edfa0baad4987e6e2d59bdc95dc9bf3a62a48ef92d3375076ba0283",
+    "text": "Schaden vom Typ <keyword0>Gift</keyword0> hat eine Chance von {{value0}}%, zusätzlich Schaden vom Typ <keyword1>Betäubung</keyword1> zu verursachen"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "7b0ecbbdc6dd3ae9b621335cd33571b924cccce2620bbcf927ad7982d84f5b73",
+    "text": "Erstarrung"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "f44b282340488c0a5a9632c13405c0b64000dd985edc5747f9cc73cce360b0df",
+    "text": "Giftgewinn"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "cbf45e1238600c7335f398bfd5a7d360dbe3f5f1797e064ac26d94be4842f4ce",
+    "text": "Giftresistenz"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "79edfe9429cf3553098e647c143cb4424c271326f4549f4157383a09224cf579",
+    "text": "Erleide halbierten Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "e87754e0782d83d4ef7cf9180029099c991e7fcc9dc3c2c4972b2eb5dad74487",
+    "text": "Giftschlag"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "b29f24f3b1b12c02a2163a3848dc3bbb94c48eda5b0c3b0434b87c2dd1a6ceaf",
+    "text": "<keyword0>Gift</keyword0>-Karten haben eine Chance von {{value0}}%, zweimal gespielt zu werden"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "242ad0087458ae181ba4b4f8c4ceacbc0d503f2f90f840ebe2cd9035efb42d96",
+    "text": "Hochgiftig"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "e255b97de218f03dc0b268ffd7589089a039e29e05b07ed26ab902d05e345663",
+    "text": "<keyword0>Gift</keyword0> hat eine Chance von {{value0}}%, einen Stapel zu gewinnen statt zu verlieren"
+  },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "c6474cde908d39eedc897a9f757f983be199dd78322de3d6df3598a60a295aa5",
+    "text": "Erschütternde Kraft"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "704bbbb514ac3c061c8831204195b45fcd8be4612bdd46645b43bdf44b697797",
+    "text": "Die gegnerische <keyword0>Betäubungs</keyword0>schwelle wird um {{value0}} Prozentpunkte gesenkt"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "a3f3e5a46a12cb92afebf260650390610d39b53078d3e3702f60aaef8d40a1ed",
+    "text": "Schwäche ausnutzen"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "8840a17ec6ea921e9a0d7a4b623de508b56d24c315ffc290b73c1287ded0c112",
+    "text": "<keyword0>Betäubte</keyword0> Gegner erleiden doppelten Schaden"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "b5740850f32c212f4e67422182173236b3204096497cb7b811f41c25717a34f9",
+    "text": "Verlängerte Betäubung"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "ac07ddae75daa4cc40c69f7070f417fc9bff954626a66c8023ebf8c4d91154f6",
+    "text": "<keyword0>Betäubungs</keyword0>-Effekte halten {{value0}} Runde länger an"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "96019e5fe3988140f6e151b8f03efea3ae9884c304fac6c78ed5ecd14050f0ad",
+    "text": "Kostenloses Nachsetzen"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "2103fd98c280bac9626f3cb73effa089af9be97e399e712ba6d12c4de2198d02",
+    "text": "Wenn du einen Gegner <keyword0>betäubst</keyword0>, ist deine nächste Karte kostenlos"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "5e1d0ff91ff5f7e954841191226a91f47ac82fda2787ba60f672426fec320489",
+    "text": "Gedeckter Konter"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "54af34a1239cbaa0b9858fd95f1872e435c7186ab4223a29d0dba3299eaa1d42",
+    "text": "Erschütternder Schlag"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "39954ed99abf4dc6d17cb9f0d6d4e54e28da3658e6750551f6c023e7a98a2943",
+    "text": "<keyword0>Betäubung</keyword0>-Karten haben eine Chance von {{value0}}%, zweimal gespielt zu werden"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "87b79e28529a08444af257129258d84f662ce450f90cd3099634040fdca28999",
+    "text": "Deckung zerschlagen"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "141d48388b30881a5aaa83cc318430ededcf80a4abfd9a35db455ba36fccfb7d",
+    "text": "Betäubungseinsicht"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "f977c8518e38fc21f3184c987cdea15df9b87af5bef9af8f630efae18bf6c5dc",
+    "text": "Wenn du einen Gegner <keyword0>betäubst</keyword0>, ziehe eine Karte"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "771f66a459835c3df0d51de6a20cd93a182b65b378abcfaf650c2b191c2e2f67",
+    "text": "Betäubungswoge"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1763,11 +1949,29 @@
     "sourceHash": "9bed9f26d6546e6049c6f308931976c0988cd18e811122b1cb665959f4f82643",
     "text": "{{name}} erhält {{amount}} Block."
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "cbfbac7208fc8966d1b4801343c841f1f88e7eaf9f585d1f5064f4401d6fc6ba",
+    "text": "Erhalte {{amount}} Mana."
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "903677f2738c2cc07f4f66009dbf29404380bfc269c9e14b17bf17b8d581ee4d",
     "text": "{{name}} stellt {{amount}} Gesundheit wieder her."
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "377879b40e232d9eff645bb53958b3dc567d96a95ed509ea7b3c9fa3b33e131f",
+    "text": "Deine Reise beginnt."
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "3432d275f020761a5c16082331e7d582809225e8acbb95a276a4f5c15c6c8e6f",
+    "text": "Zug {{turn}}. {{amount}} Mana wiederhergestellt."
   },
   "menu.boons": {
     "reviewed": true,
@@ -1841,17 +2045,83 @@
     "sourceHash": "749a12c5fbcc7a262570dbef29e3ecf4c93674e8b5113e02f6c44aa9634a81bb",
     "text": "Talente"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "ae4252411f095e964c8f99c1f24f735d386b2b1081e59940e921736710e268a3",
+    "text": "{{name}} für {{amount}} Gold kaufen"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "f207404f10e031ca0f3dc006b4d8b1cb40de5ab3fe269bc852bf89965cfa2636",
     "text": "Weiter"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "71bc996796ad747c07aaaf60c87609d12ca0e76179d5540c1b917ed58fd7ed54",
+    "text": "Für diese Reise"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "72af53ee1df004561ca63b194137a5d14a0f6ebea993c86de0874836dcb32854",
+    "text": "{{amount}} Gold"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "ef366665f016c37ee40d90774709636bfd7e1a8aa7ad6a1170b93311069b3a76",
     "text": "Verlassen"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "2c6d71761f27ce24816d54bf5a355026c9710b8e2b63e82100bf574c8f28f634",
+    "text": "Segenhändler"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "d35365471fb8c5e8d7b77fd20ef4417f3d9ca618a03a3fd64eb64ce3c50ebaa1",
+    "text": "Nicht genug Gold"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "20a35b8666a00680fce585fb1c8a71ce19b119c2f05f097151daacc1901dfc01",
+    "text": "Ein Stück pro Kunde – keine Rückerstattung!"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "5259615f095c31a299281dda7f4ca07ed913fab7c6c3311efc79e51df7f1588c",
+    "text": "Kauf bereits genutzt"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "35abd134f6fdd89fcf81492e95747684fb8f2b7e59b6a6df8e3faebe0cfdaddc",
+    "text": "Gekaufter Segen"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "39285974cfd1854df9b5d6104d932c3756962d7db2d349e68d77b637da871261",
+    "text": "Segen erhalten"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "7d502bb30ff470174d2312da71e01d173497a131eb26490686cec63dfd72e29b",
+    "text": "Angebot des Segenhändlers"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "fe18530833124a721542ab46a4057d00191dca91294a28dd27d5c73feef5f06b",
+    "text": "Segenhändler besuchen"
   },
   "navigation.back": {
     "reviewed": true,
@@ -1871,6 +2141,24 @@
     "sourceHash": "f3076dc39f5889a29560d16472ce20e52de58ef2dac074a7dd7769aea2d60ce8",
     "text": "Segen schließen"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "8fa04246e32453f9bcff5051842dec90d1fdf4bf88db73ac69ae352bf0ad3328",
+    "text": "Deck schließen"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "f04971f762dd72aab367d8be82ec7d1c957aec9d5edb309647f052e335d1e250",
+    "text": "Ablagestapel schließen"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "c2d066a1be7e9bf79248272127b96c3f3deac76a8da19dd5314eddf55074a24b",
+    "text": "Nachziehstapel schließen"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -1888,6 +2176,18 @@
     "source": "Draw Pile",
     "sourceHash": "d72dbb204cee7dc1901b0687a41e2b73b46d778a78d84f4165c59bb89e54c1c8",
     "text": "Nachziehstapel"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "c3eca978b0af80cb600fb1a7bc63c688e070076b4fceaff67cc7bd8336c41de4",
+    "text": "Spielinformationen und Steuerung"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "e194e23a8abc2652444983d7dcf5799a43ae2dccda7390dc496827c357d7d37a",
+    "text": "Ersatz wählen"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2033,6 +2333,18 @@
     "sourceHash": "6450a8e1378195fff0b4f50e683f9f6a45c2aa550cf1e46cf33004cdff94f7c7",
     "text": "{{summary}}, {{details}}"
   },
+  "progress.keywordXpEarned": {
+    "reviewed": true,
+    "source": "Keyword XP earned",
+    "sourceHash": "07c37a3269ca85eb0eb7b5ebbd40b67e6639838516e90e1d95f2d8e742081acf",
+    "text": "Stichwort-EP erhalten"
+  },
+  "progress.levelShort": {
+    "reviewed": true,
+    "source": "Lv {{level}}",
+    "sourceHash": "984da87de8cab02d728f8874dadce01f7e2c3a4e6882839788e470b0d03f050c",
+    "text": "Stufe {{level}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",
@@ -2074,6 +2386,30 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "22e0e6de9394a0d39cb847760da3aa3800a0f6e239ebccd79386afa6d631f409",
     "text": "{{name}} auf Teamplatz {{slot}} rückgängig machen"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "a5d17fac233afa034d1521ce71509286ee4f551b52c27f591a87db398ae18fa5",
+    "text": "Reserve"
+  },
+  "replacement.backupCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, backup",
+    "sourceHash": "2b85c510815f956b20943bf24396e7813f8e2f093e01cdabf227319ee8e0b122",
+    "text": "{{creature}}, Reserve"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "87577d0a842c5fe42ce9ca4117b9855ce32027d10bdfbfce9ab29393036e16fb",
+    "text": "Ausgeschaltet"
+  },
+  "replacement.knockedOutCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, knocked out",
+    "sourceHash": "1d4d2858b56fc4b2319ade04e3cfa841571845eef3b9b1b3e1906e760d468163",
+    "text": "{{creature}}, kampfunfähig"
   },
   "results.complete": {
     "reviewed": true,
@@ -2393,11 +2729,23 @@
     "sourceHash": "378aa09a183438643e12761f02012f807b517d38c6ef6e27f0648b44a86fe173",
     "text": "{{keyword}} {{count}}; {{description}}"
   },
+  "talents.category": {
+    "reviewed": true,
+    "source": "{{keyword}} talents",
+    "sourceHash": "43d8b093d16ceb79acee029198a7d9cd5bc24dad78a08c4ba7c980a28cd32df3",
+    "text": "{{keyword}}-Talente"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
     "sourceHash": "250392c61b9c8c76dc82e2614d2c86f7e9d01f7ba8865bfa88a828001b044896",
     "text": "{{keyword}}-EP"
+  },
+  "talents.pages": {
+    "reviewed": true,
+    "source": "Talent pages",
+    "sourceHash": "a925be719965ffe7b0484decb4a834aed4ede93a591990a160c930a512e904ab",
+    "text": "Talentseiten"
   },
   "talents.requiresPoint": {
     "reviewed": true,
@@ -2417,6 +2765,12 @@
     "sourceHash": "8dab548363a973c8079ae840b6d165e2c87900bb9a1b14405d6e5413ce1fa645",
     "text": "Benötigt alle vorherigen Reihen"
   },
+  "talents.reset": {
+    "reviewed": true,
+    "source": "Reset {{keyword}} talents",
+    "sourceHash": "2b4b0ad298535f2480a48a9904e14805258bc78612cb2f0672695e6f2924efc0",
+    "text": "{{keyword}}-Talente zurücksetzen"
+  },
   "talents.row": {
     "reviewed": true,
     "source": "Row {{row}}",
@@ -2434,5 +2788,17 @@
     "source": "Unlocked",
     "sourceHash": "6dcb8bb72a58df270da73fd878b22f9f27d60f1184085f9c9f138a5c9cfb1484",
     "text": "Freigeschaltet"
+  },
+  "talents.unlockedName": {
+    "reviewed": true,
+    "source": "{{name}}, unlocked",
+    "sourceHash": "b816abec569d2dab9aa7bebbebf7e9ff849374c785a1130dbb13e8fd9d83b949",
+    "text": "{{name}}, freigeschaltet"
+  },
+  "talents.xpProgress": {
+    "reviewed": true,
+    "source": "{{current}} / {{required}} XP",
+    "sourceHash": "66eb9b9a00a22bd06ee7b0465134a93dfa457958ec117f34d71a09e217fbd762",
+    "text": "{{current}} / {{required}} EP"
   }
 }

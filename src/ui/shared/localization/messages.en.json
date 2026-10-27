@@ -254,8 +254,17 @@
   "log.gainBlock": {
     "text": "{{name}} gains {{amount}} Block."
   },
+  "log.gainMana": {
+    "text": "Gain {{amount}} Mana."
+  },
   "log.heal": {
     "text": "{{name}} restores {{amount}} Health."
+  },
+  "log.journeyBegins": {
+    "text": "Your journey begins."
+  },
+  "log.turnRestored": {
+    "text": "Turn {{turn}}. {{amount}} Mana restored."
   },
   "menu.boons": {
     "text": "Boons"

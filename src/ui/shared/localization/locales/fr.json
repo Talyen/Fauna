@@ -1643,6 +1643,192 @@
     "sourceHash": "07ad5bf1595b76e32ae4b705056ff69d286261307b05c70d0bf72438aab62532",
     "text": "Source vive"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "aef042194fbffe4fb0ed0c8c6ef7e49166810acadebfcc683951aaadd4ef0355",
+    "text": "Caustique"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "934f0423bf3a5aed2fcd4b26c8089f9a1690fdd0e5bcd5251ecc4eba7c2d914d",
+    "text": "Les dégâts de <keyword0>Poison</keyword0> retirent autant d'<keyword1>Armure</keyword1> ennemie que les dégâts infligés"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "cb21f3197e2ff3bb0c49968cf8ea217a5db706a1676d7426cae6b322d527c8ef",
+    "text": "Corrosif"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "f940df6cd9fd1089cc337d1ed313ce9d1061d84bce831f8e380249eecb928cd5",
+    "text": "Hémotoxine"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "693e808925b36a61e802ccd51fc122647ade8aa2917988e020959b8781d3f37f",
+    "text": "Le <keyword0>Poison</keyword0> a {{value0}}% de chances d'infliger aussi des dégâts de <keyword1>Saignement</keyword1>"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "fe0b4af0d492c58fa4d9e95eb8754c9ead8b1e01f61b094b79a97b35f4f37b12",
+    "text": "Nécrose"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "03e651a6982885561f9b20c9d87c699459c798131ffc708907b70068a131abd5",
+    "text": "Venin paralysant"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "99e43b38adf3088cee1de645a569b98347f231cb75a5c915c0da0187af66e695",
+    "text": "Les dégâts de <keyword0>Poison</keyword0> ont {{value0}}% de chances d'infliger aussi des dégâts d'<keyword1>Étourdissement</keyword1>"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "d090c642deaa9571467848787ebe290ebcf135d706559861561b43f89edda63b",
+    "text": "Torpeur"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "04d7391b5aabb155f7cfef22e8d1d03e1767b26ff763cfa6480915ceed3efd32",
+    "text": "Profit toxique"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "705b3770581fd7aec3526e97afe70f5491f77896cb9e50ff55711e8f99c0c9c6",
+    "text": "Résistance aux toxines"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "6f746366bf64eb52122f8c902d8bb659f4188a69bdb66cad5d464b9e93b8dfa5",
+    "text": "Subissez la moitié des dégâts de <keyword0>Poison</keyword0>"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "8d47ed0c8a1e22e3c6e2b5d29fb831bde4643b38ea3acb59b68afeca197bf8ed",
+    "text": "Frappe venimeuse"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "90103ac21e5fc7436a5c6e69b95a15b5e7039cd9a157995aebd1fa5042175f34",
+    "text": "Les cartes <keyword0>Poison</keyword0> ont {{value0}}% de chances d'être jouées deux fois"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "f7da7918b1562b8c48693300423ec0575a68b5b2e66c78eeacc3cbb0c4d5ec31",
+    "text": "Virulent"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "5dcaaf2f1cb1b5a8a6581d1a5d34b9c9d08ab89a7ee18b7feca3511de86010b8",
+    "text": "Le <keyword0>Poison</keyword0> a {{value0}}% de chances de gagner un cumul au lieu d'en perdre un"
+  },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "c8e66b9838738d90030714a65796e7b23c1e6660ef64b5ed3f651bd095af361c",
+    "text": "Force commotionnante"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "ea3a92c6bceba2b6bb1070c282bb549e4393f3d61c9aeab95b555e2be5845dd5",
+    "text": "Le seuil d'<keyword0>Étourdissement</keyword0> ennemi est réduit de {{value0}} points de pourcentage"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "061bd87d6cb918f38e0caa01cb84b52f8614e19dd4f46adf383831d31b341221",
+    "text": "Exploiter la faiblesse"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "1f33b2204feb6597ff49a3ceabefd0ac1b78cccb672787010168ad74fdebe26e",
+    "text": "Les ennemis <keyword0>Étourdis</keyword0> subissent le double de dégâts"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "17cc6a9480ae1c1b13ba9f440f70df7dc84774c397f9be254077510cb8356a29",
+    "text": "Étourdissement prolongé"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "383ae4b563508564ed7c14c2368c6389d8e7bcb461609039277696b62a522979",
+    "text": "Les effets d'<keyword0>Étourdissement</keyword0> durent {{value0}} tour de plus"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "62a152040be3835ff8a62e3ff39880dea76de47ba817792058203cf8ffe3718d",
+    "text": "Suivi gratuit"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "d1a949a794ed4ab28a0501dc0772c4d846fe151916f511569510c1d781602cbc",
+    "text": "Quand vous <keyword0>Étourdissez</keyword0> un ennemi, votre prochaine carte est gratuite"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "586a087659b038a12e6e802c603188b40c19e6ec39619474d8590fbf25480d0d",
+    "text": "Contre protégé"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "60e505e36ea89e45ac6883dff5ff1f7a97a1c2336ad8b35d8ea7f6d8fab922b0",
+    "text": "Coup déstabilisant"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "59572813f3a374557107ded7429ed2ec86fd4169c9085670b77807b9c465fb2b",
+    "text": "Les cartes d'<keyword0>Étourdissement</keyword0> ont {{value0}}% de chances d'être jouées deux fois"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "f7b49ffa961a97280edb1e30692ae92d261efa93c2e9a493ff95037b72c74928",
+    "text": "Briser la garde"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "2ec44d3ef00550efa312f2d0ab8bd85c36e52d0bb0705d1e18de81b2708567c5",
+    "text": "Intuition d'Étourdissement"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "76fbc600b35e26b44ef448fbabeaeaad38372f8ddffa19b960217ea233f70525",
+    "text": "Quand vous <keyword0>Étourdissez</keyword0> un ennemi, piochez une carte"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "238b5f18302030a1508b772dc3df84072e7e37bb6af916e86fd9611e065cb739",
+    "text": "Déferlement d'Étourdissement"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1835,11 +2021,29 @@
     "sourceHash": "78bc2f722bb0af1f795f5210b19a884efe0d05395368b4fb6b00db8df8064a0d",
     "text": "{{name}} gagne {{amount}} Blocage."
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "c986ab4b3632640d313e94d2fd533a62e7197135f371255356c42f93dc2392e9",
+    "text": "Gagnez {{amount}} Mana."
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "226de8b37af66db24dfd957aeb9754bd3c22a40fc9eb0ee6e062e4ca20c1a131",
     "text": "{{name}} récupère {{amount}} Santé."
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "f580068ba34cded602012ebc7a05e42e46b50d90c10ed91f102af630c171f10a",
+    "text": "Votre voyage commence."
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "d2cce0d7b3d71188828a1fc9dff179573070c18d0eaf77bd7e7d360f568c661c",
+    "text": "Tour {{turn}}. {{amount}} Mana récupéré."
   },
   "menu.boons": {
     "reviewed": true,

@@ -1595,6 +1595,192 @@
     "sourceHash": "25d77f7fd816539896c9a46118d0e8ecc24910e68dae27112e5448b1d52e0efa",
     "text": "Родник"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "d7141852661f2ee31216c3cc983f5a682902bfa19d4de49043a350a0357a8bde",
+    "text": "Едкость"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "7e6f1400adcbb949b07b1d8ccb2e0bc31aa3f2eb9edc7122870e065222158173",
+    "text": "Урон типа «<keyword0>Яд</keyword0>» снимает запас <keyword1>брони</keyword1> врага в размере нанесённого урона"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "88fea11c1e3299a1fe55ab452d9f884bb716700eb2d9bd3e64343123b89c1f6e",
+    "text": "Разъедание"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "f78b685d0cac293ce1c7466558c8e6b6d2f881cc6841b04f5692ebc59fce9797",
+    "text": "Гемотоксин"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "298f62065fed80d6f6959656c9b0da74eda70510f9f15d7a6d1d6a094181c2c9",
+    "text": "Эффект «<keyword0>Яд</keyword0>» с шансом {{value0}}% также наносит урон от <keyword1>кровотечения</keyword1>"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "bfe4a091f5c19b15d3c8e7809c2df34f9882d5187299cc14db8f699a0cfaa469",
+    "text": "Некроз"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "45195be9a3d1b37057ec6d5f42ec5117d3490481ca1263c59bf374300787a9a6",
+    "text": "Парализующий яд"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "11daea52b9ca93e84074b8284b9ca478eb4201c65d4506896628b4ce90750eae",
+    "text": "Урон типа «<keyword0>Яд</keyword0>» с шансом {{value0}}% также наносит урон типа «<keyword1>Оглушение</keyword1>»"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "154a23850a5790467e0646eaf95750a512e012ebab8d35ad12e2d0b02c2df408",
+    "text": "Оцепенение"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "62defcc6d70adc7581d4ff8514b153fe819dc0af5892167e82e48b377d2c176d",
+    "text": "Ядовитая прибыль"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "475719c0b8536c48f5d89f239e91f8b7801b180e7b206a0dd3b20d705050bb3b",
+    "text": "Сопротивление токсинам"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "e05f8fa8e431254ba8ccc24dbcd542b91bae134abe4cd179a61c782a3f18a6fb",
+    "text": "Получайте вдвое меньше урона от <keyword0>яда</keyword0>"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "e8e91845f5a29042090fd5d60cfd4e3d1e016a3e44d85e4e8b7d35dd233c7ced",
+    "text": "Ядовитый удар"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "32800bd83c1d518976e581bfe8613909b6fcfb5cc85cb9b526a0dd650026c153",
+    "text": "Карты типа «<keyword0>Яд</keyword0>» с шансом {{value0}}% разыгрываются дважды"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "00d031c413c10b9bc81509af014ca72a8301644c4fc74efa0cd974af04058806",
+    "text": "Болезнетворность"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "6976b1d67490e5431f7b7c8bba88796ddfb22a4d01066cd7bb1f0f8b51f810a7",
+    "text": "Эффект «<keyword0>Яд</keyword0>» с шансом {{value0}}% получает единицу вместо её потери"
+  },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "b21cb79ea58b2d6000d6ece6459edf6e263109b8ede12a128a12685c87fdb788",
+    "text": "Сила сотрясения"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "5be466dffb480ac1ddef1c600ea56dbc770ad312bd133eaca8ca918fe1e3c3a0",
+    "text": "Порог эффекта «<keyword0>Оглушение</keyword0>» врага снижен на {{value0}} процентных пунктов"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "d35061088a69d67651320d102fe016055dee7362e70cc2b8fbb2c591be67b23d",
+    "text": "Использование слабости"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "746851a22ea345e284f31c84bcf4209fb391a0b45fa831afd6e73e0fd4e31087",
+    "text": "<keyword0>Оглушённые</keyword0> враги получают двойной урон"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "a4388f37c43763fb419e652b2bd843a669fd07521bbc399979ed3c12e396ed3c",
+    "text": "Продление: Оглушение"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "37afd4a1335dd2880eb84bc233776750c5fd2c1b2b120b0ec4d841e3b06fdc6e",
+    "text": "Эффекты «<keyword0>Оглушение</keyword0>» длятся дольше; дополнительных ходов: {{value0}}"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "e125f48ad5cdc81dc7847c72b54fdbb0a0a87cb56da0d8e9e286aed65c1d0f3f",
+    "text": "Бесплатное продолжение"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "7daffe14485db599d0c17c0be63bc330f94effd49cca7c378036dfd5ca974f8b",
+    "text": "Когда вы <keyword0>оглушаете</keyword0> врага, ваша следующая карта бесплатна"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "03623061329607551b641e89b2c31f7b88e7858fc5d0b2adbf7ff956557fe587",
+    "text": "Защищённый контрудар"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "14ac4e4de23f18944bfbab032e0162ee62ee6352aa14ddf98021855215a1bb9b",
+    "text": "Сотрясающий удар"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "4820015cce6becefa7d3bb5a12ab44969b6ed5bd3a1fc73ca502634e2b92d445",
+    "text": "Карты типа «<keyword0>Оглушение</keyword0>» с шансом {{value0}}% разыгрываются дважды"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "e396a9a43bdb49cf0a7e22c711114e2bf7939e98eb34f9f45da7b8b1dfbe02c3",
+    "text": "Разбить защиту"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "0089f59f19506d9a10a8c4b0a701542689a68ac0d1b9512dc885a3995e704b6f",
+    "text": "Озарение: Оглушение"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "c12a85ae3a4cfb680c8fe001320c4f3c34d1277e7dd77f644f3a0543ec4d66f4",
+    "text": "Когда вы <keyword0>оглушаете</keyword0> врага, возьмите карту"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "b8e31da8807df6f7057f44117ac1322dd897831d14eea0238962a1b6716e5e1a",
+    "text": "Всплеск: Оглушение"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1763,11 +1949,29 @@
     "sourceHash": "00991c09cd00b146e8dd4781a045101991e80266997717e46dd99d452d294229",
     "text": "{{name}} получает блок: {{amount}}."
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "3ccefae6bfb077e765d9944a0ff25ce3ffdc8753438e15120526d96a18b77458",
+    "text": "Получено маны: {{amount}}."
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "52026a959f0c750f99ef440cae18d653b76c82d5733d396fb0ed60db733cd47e",
     "text": "{{name}} восстанавливает здоровье: {{amount}}."
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "e7a6012ca68ac3541a7808d88db139263b5ba91596a4cfa3b8a4ebc7fc458ccb",
+    "text": "Ваше путешествие начинается."
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "211938f6fc251306ce49a030ea7f25d70a412e60071effaac54ecada068970cd",
+    "text": "Ход {{turn}}. Восстановлено маны: {{amount}}."
   },
   "menu.boons": {
     "reviewed": true,
@@ -1841,17 +2045,83 @@
     "sourceHash": "dcc2580b8417a0d0595d997f16e938f5b8944234fc6ef8c9ed5117f3e3814ea2",
     "text": "Таланты"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "87f66eeedfaaa2c54b02e7dc9950c82566aa42f460aeead0dede67113df95299",
+    "text": "Купить {{name}} за {{amount}} золота"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "b55998e086ab77556f80015f46195b8db045eb64f62b7749ca6cdc0b10b44966",
     "text": "Продолжить"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "b09cb23401c1a7bd6d19d5bddf95336d2df9067af9a07ff9c7ce4b6f130c838a",
+    "text": "Для этого путешествия"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "956bfa5c87b9c295e759d567600fa85ee6e1f0aed53a694254480a58a48fd3b7",
+    "text": "Золото: {{amount}}"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "e4bc953ce5048e41e1e1e1e04548cfb1c731fc1967bb0c82d99a4a8a0583e1d9",
     "text": "Уйти"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "da4c76db441e1218bf4d793e80f24c818b97319f3a91f33810b7882adfb4f076",
+    "text": "Торговец благословениями"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "df24c365a3b65980d8f0e7863e259d896e6790116bc4e6db87522823762ae1b6",
+    "text": "Недостаточно золота"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "9507422da30841067c86b7113ae4cadb41d20865c4a02c95cde6d58d0d1fdee3",
+    "text": "Не более одного товара на покупателя — возвратов нет!"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "2d3b219e66699198c017aa566bb0f7363de651a23185d5db5ffe92e89bcc8ae3",
+    "text": "Покупка уже совершена"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "61bd9200ae70de7fa01700a5d01c74b4d4ea08986311d6301c1ba60c370c46ee",
+    "text": "Купленное благословение"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "04ead5517bbe163c0f1e3f43f6ce46155691ac12814fac1e201ceb61c2df5739",
+    "text": "Благословение получено"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "e8afb1069e3e391de0285578c613a99bef264319319303eafb5e0160955a1681",
+    "text": "Товары торговца благословениями"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "2f190268a9e772211f0b335f5889befdac259395c02ee9f805368267ef227092",
+    "text": "Посетить торговца благословениями"
   },
   "navigation.back": {
     "reviewed": true,
@@ -1871,6 +2141,24 @@
     "sourceHash": "d8086b642ef7ed7d620e5dc574d23dfe2d1e8666310cbfd7ca4d51cc4c4eb3d3",
     "text": "Закрыть благословения"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "68f4b82ac48c306e7c06ef350571c81d4c037942bdf140b990b64473f0cf8acc",
+    "text": "Закрыть колоду"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "8a311ef7b6de935e0e2970bc58a8b1d942be59fc732d2afd98a72006b9d620c3",
+    "text": "Закрыть стопку сброса"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "7ab27c31f190145666f738d8cd5871362ae988c032bd867ffd2b2d20d56c2d3f",
+    "text": "Закрыть колоду добора"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -1888,6 +2176,18 @@
     "source": "Draw Pile",
     "sourceHash": "31eb6576ce3d27e35abbc10d6763aa871acdda5abf881e2828f93d353625168c",
     "text": "Колода добора"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "65f67816ecf4fa4dfca8c477ce80aa7efe79b53f0a969ca76e4027776aaf5afb",
+    "text": "Информация об игре и управление"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "875944a737c869d6912c39d0ac73768c7d98cb6ce0aca031ab4e835ba370eea1",
+    "text": "Выберите замену"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2033,6 +2333,18 @@
     "sourceHash": "2c72d6158462849533c72905b6b7d57401e53cccc2df9884bc61a43a0dde14d1",
     "text": "{{summary}}, {{details}}"
   },
+  "progress.keywordXpEarned": {
+    "reviewed": true,
+    "source": "Keyword XP earned",
+    "sourceHash": "c4717d4d7a26e24d5aa4eba7f5aceb9b42bb21e470185bf68a92d13818da215c",
+    "text": "Получен опыт ключевых слов"
+  },
+  "progress.levelShort": {
+    "reviewed": true,
+    "source": "Lv {{level}}",
+    "sourceHash": "67ced7a1720afe07f00c294eb05127dbba3b334b3bca7a95a7f067454383e6d9",
+    "text": "Ур. {{level}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",
@@ -2074,6 +2386,30 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "b73bd6fd85f5994834c8f12bc2da6df78b279c8c9e438bab78acc501437985a4",
     "text": "Отменить замену на {{name}} в ячейке команды {{slot}}"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "2081630706095adcb333755653b3f0ea6f9a16b16f9fe7d80a20ba4b29d1bacd",
+    "text": "Запас"
+  },
+  "replacement.backupCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, backup",
+    "sourceHash": "b0e306e4f7f8d0e9d7d3d7a6ccc1b7422c7ca52628bbea0b9046b7c06d7cc0d0",
+    "text": "{{creature}}, запасной"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "3f5e487b447dc7a9597ee0820e298f38a1b80df8ae9045e14188a57f9556c2e5",
+    "text": "Без сознания"
+  },
+  "replacement.knockedOutCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, knocked out",
+    "sourceHash": "dd7789af55763d582575f7a31e803a1b7881ad78c489833a1d5db95c6bf7b6f3",
+    "text": "{{creature}}, без сознания"
   },
   "results.complete": {
     "reviewed": true,
@@ -2393,11 +2729,23 @@
     "sourceHash": "fcd419a91d9472f513ba9d27f609f223165eb8b0f2c2ce581b3d6e9305f2d6c3",
     "text": "{{keyword}}: {{count}}; {{description}}"
   },
+  "talents.category": {
+    "reviewed": true,
+    "source": "{{keyword}} talents",
+    "sourceHash": "70d3b6f92a98ae111ad9bd866a5566e6a0c57009f4ab487ee10bf2575733f48a",
+    "text": "Таланты: {{keyword}}"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
     "sourceHash": "e8f9f158698f1ddb7c38f90a7e4d5354576d292af616dc1c2266575b49ebe31d",
     "text": "Опыт: {{keyword}}"
+  },
+  "talents.pages": {
+    "reviewed": true,
+    "source": "Talent pages",
+    "sourceHash": "ca81cef174188bb25fc331532e82ef3b240b2c9ac5342fea62c87fba79e97463",
+    "text": "Страницы талантов"
   },
   "talents.requiresPoint": {
     "reviewed": true,
@@ -2417,6 +2765,12 @@
     "sourceHash": "cb8b62fdac1eefb99ccf08af95d82766b893202deb36c8b540436b2872a00a15",
     "text": "Требуются все предыдущие ряды"
   },
+  "talents.reset": {
+    "reviewed": true,
+    "source": "Reset {{keyword}} talents",
+    "sourceHash": "a565345135365f0aceb345dff4f6453e8e484ccde4dc67277e44e43dc815fed1",
+    "text": "Сбросить таланты: {{keyword}}"
+  },
   "talents.row": {
     "reviewed": true,
     "source": "Row {{row}}",
@@ -2434,5 +2788,17 @@
     "source": "Unlocked",
     "sourceHash": "6b41dfe8a88e10bf683ce4f2c5ae603a78227d800b90b18135026cba974dd3a2",
     "text": "Открыто"
+  },
+  "talents.unlockedName": {
+    "reviewed": true,
+    "source": "{{name}}, unlocked",
+    "sourceHash": "d2180684ec91fc1402625b13e8c27d85ce5e13b545c02d2256a3ac27c6cf173e",
+    "text": "{{name}}, открыто"
+  },
+  "talents.xpProgress": {
+    "reviewed": true,
+    "source": "{{current}} / {{required}} XP",
+    "sourceHash": "cdfa45bc6aab421ece7e111268bab3b728a7d7813c5e27918b18425ff53e34f4",
+    "text": "{{current}} / {{required}} опыта"
   }
 }

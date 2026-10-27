@@ -4371,8 +4371,8 @@
     "text": "Paralytic Venom"
   },
   "content.talent.poison.paralytic-venom.rule": {
-    "text": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Stun</keyword1>",
-    "reference": "Poison damage has a 10% chance to Stun"
+    "text": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "reference": "Poison damage has a 10% chance to also deal Stun damage"
   },
   "content.talent.poison.torpor.name": {
     "text": "Torpor"

@@ -296,6 +296,10 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     ["bleed.tainted-wound", "bleed", "poison"],
     ["light.scorching-light", "light", "burn"],
   ] as const)("%s adds attributed status damage without a proc chain", (talent, type, status) => {
+    if (talent === "poison.paralytic-venom")
+      expect(TALENTS.find((entry) => entry.id === talent)?.text).toBe(
+        "Poison damage has a 10% chance to also deal Stun damage",
+      );
     anyProc([talent], (f) => {
       hit(f.state, f.source, f.target, 10, type, f.events);
       if (!f.target.combat[status]) return false;

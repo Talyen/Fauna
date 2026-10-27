@@ -11,6 +11,20 @@ export function eventPresentation(
   event: GameEvent,
   i18n: ReturnType<typeof createMessageReader>,
 ) {
+  if (event.kind === "turn") {
+    if (event.text === "Your journey begins.")
+      return i18n.message("log.journeyBegins", "Your journey begins.");
+    const turn = /^Turn (\d+)\. (\d+) Mana restored\.$/.exec(event.text);
+    if (turn)
+      return i18n.message("log.turnRestored", "Turn {{turn}}. {{amount}} Mana restored.", {
+        turn: turn[1]!,
+        amount: turn[2]!,
+      });
+  }
+  if (event.kind === "status" && event.targetId === undefined && event.text === `Gain ${event.amount} Mana.`)
+    return i18n.message("log.gainMana", "Gain {{amount}} Mana.", {
+      amount: i18n.locale === "en" ? String(event.amount) : event.amount,
+    });
   if (!("targetId" in event) || !event.targetId) return event.text;
   const target = combatantById(game, event.targetId);
   if (!target) return event.text;

@@ -1595,6 +1595,192 @@
     "sourceHash": "31dfdd9e74052f8a2c1f5539f9a7dfa382744d032ccc0db2ebc370d4adbee385",
     "text": "源泉"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "6f47281b797aa914c603a1ec2d190a9fa6bbd61f1d6b8a0e472ae850d648f6c3",
+    "text": "腐食性"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "e4911ac7a51f1f23e3e6d10be5fb610ca3f76893d4a1d3f47270fee1341bba5e",
+    "text": "<keyword0>毒</keyword0>ダメージは与えたダメージと同量の敵の<keyword1>装甲</keyword1>を取り除く"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "ed7c26fe4ac9f066ba753377a1894f03f294ac3f6397e252189c2157cb78d7c7",
+    "text": "腐食"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "579583b5ccf12ba9e754d0d5c06932c87ef970b5703a7c5d16cceebf6198dcfc",
+    "text": "血液毒"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "b208d944708ee110d39c1e3d81a37f1875a0e9ab900cbb1f05f4d061945c43dd",
+    "text": "<keyword0>毒</keyword0>は{{value0}}%の確率で<keyword1>出血</keyword1>ダメージも与える"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "f0ff903b9d025f800e10437afb88049156b71d7fb85ba360d4b221333c4b56ae",
+    "text": "壊死"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "68cfb42aebb52a567f72c69ceb7f3be1f63b0aeee9467208e4db8885f4a9faef",
+    "text": "麻痺毒"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "7a342f626b35473632c94fe6b2209567910ad919133262be8acc5783c87677bd",
+    "text": "<keyword0>毒</keyword0>ダメージは{{value0}}%の確率で<keyword1>スタン</keyword1>ダメージも与える"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "5299e38b683c8eef2f68acb613850036d232e16cfbbafa196dfb97086368c4e2",
+    "text": "昏睡"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "e594470af691268bf0102cb3ca93c6e0fb5fd7572540ea55242935f8774856a0",
+    "text": "毒の利益"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "253d45e14babebd709c448627e48cb90fba856ba31bf08a85e1f459124670d9d",
+    "text": "毒素耐性"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "7859d380d9d62b0d8c196be5b35b0e70740407a6d0478f3177525beb8f73f25c",
+    "text": "受ける<keyword0>毒</keyword0>ダメージが半分になる"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "126fbeab4d3370a03e9b78ecd5d008e05104e71646c4dd3f80212ad1174991d3",
+    "text": "毒の一撃"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "94fd95e0fb24dea4ffc738893204c1bf8b805d9b597bc08b200ed511cb2d7f58",
+    "text": "<keyword0>毒</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "2657df12a69580df542835b2c9727fa95cc5d15b6b7258d34b968282c2ee6430",
+    "text": "猛毒性"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "4adf78f1bf8651d7053665a555b3a3552de03819c16d0bdb234079b5888d7834",
+    "text": "<keyword0>毒</keyword0>は{{value0}}%の確率でスタックが減る代わりに一つ増える"
+  },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "18e0dcb07fbe28c41a821863a6dbfa6454c9442c489e3dabf4e8a35b4e30778e",
+    "text": "衝撃の力"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "f8f16e29ebb788f60b2d042d82c2faf71afaa85b0de4c7961d89532ad967f42f",
+    "text": "敵の<keyword0>スタン</keyword0>の発動閾値が{{value0}}パーセントポイント減少する"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "fb40c924481b035eec806b3537e192a3a0cf4e98a2f3840d61e7440db2e80095",
+    "text": "弱点を突く"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "e97c02364033ae5e0e434995ba1778d4273cc159ec772d03bc4965bd9a307eca",
+    "text": "<keyword0>スタン</keyword0>中の敵が受けるダメージが二倍になる"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "728f7d8d023a07030898adfdd0d42c1245170248ed769ba3e17fd707661dea18",
+    "text": "長期スタン"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "538996ac8a2022fb0c2b5f56330825481f89c002122a52da883ed60b46ffd966",
+    "text": "<keyword0>スタン</keyword0>効果が{{value0}}ターン長く続く"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "3f38922a408945ee27e7269b520780d88fc6911f0de33bbb4288ecc4c2ffb7a0",
+    "text": "無料の追撃"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "e762e7958d42a44f469c1ee04d5bba3ad204283ff0d8eccba0419605f996b7f4",
+    "text": "敵を<keyword0>スタン</keyword0>させると次のカードが無料になる"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "4834f765512b53aaacc55f4a8955e0db71338f4b81f78b23e202d1d751605cce",
+    "text": "守りの反撃"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "f98f082a5de4b2bdb87ae88789eee85a100d975622cc131cce95f65d08989e7b",
+    "text": "揺さぶる一撃"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "8a9f315f9438510b56b42b64db64d4e5d4ffbea19f5b9fbe9515462fafb0e652",
+    "text": "<keyword0>スタン</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "5851d524ee4497073c2a13550592b56aef271bd3ff0adc41471a5404e2439b77",
+    "text": "守りの粉砕"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "88e056de88d40ae0489f40ccd43db0ee1a8037b4c4155b50dea73a5809dc3a97",
+    "text": "スタンの洞察"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "623b3ca6f8097b202132a9d5469a6159506655a807914bb7d2f68d12b70675c7",
+    "text": "敵を<keyword0>スタン</keyword0>させるとカードを一枚引く"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "d212990cd33314dd9d12c69149566f35e42b39850570f4732e7dbe17f81764d9",
+    "text": "スタンの奔流"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1763,11 +1949,29 @@
     "sourceHash": "3a59b72e8d9d3469b223e1eb7563cbe1e70584f8cf8043fb9afa692ce2470390",
     "text": "{{name}}はブロックを{{amount}}得た。"
   },
+  "log.gainMana": {
+    "reviewed": true,
+    "source": "Gain {{amount}} Mana.",
+    "sourceHash": "7a8857da5197463e071c4d83b77482e69ef0268c6a9d4b77409012d0f817097f",
+    "text": "マナを{{amount}}獲得。"
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
     "sourceHash": "762f4ff8e996ed0a7c533de2d8cc77e1a6790c638e36cc0e240458396edc3eba",
     "text": "{{name}}は体力を{{amount}}回復した。"
+  },
+  "log.journeyBegins": {
+    "reviewed": true,
+    "source": "Your journey begins.",
+    "sourceHash": "a6b3d9f14a1dcbc6c09967ad865576b4508eea27407b93c7c55ae28bbde81b21",
+    "text": "旅が始まります。"
+  },
+  "log.turnRestored": {
+    "reviewed": true,
+    "source": "Turn {{turn}}. {{amount}} Mana restored.",
+    "sourceHash": "5384bdf330a826607912ab4e1060cd4a7ff70bd06f47552c378fe776145337ce",
+    "text": "ターン{{turn}}。マナを{{amount}}回復。"
   },
   "menu.boons": {
     "reviewed": true,
@@ -1841,17 +2045,83 @@
     "sourceHash": "59b56238f018f6ae095a3800570b006ee07b043be33b17b9a737105ca356c99c",
     "text": "タレント"
   },
+  "merchant.buy": {
+    "reviewed": true,
+    "source": "Buy {{name}} for {{amount}} Gold",
+    "sourceHash": "322607ac03b4228574ea1dc8092c702d4dbb2759c771cec5bbb9bdfd5bb8a35c",
+    "text": "{{name}}を{{amount}}ゴールドで購入"
+  },
   "merchant.continue": {
     "reviewed": true,
     "source": "Continue",
     "sourceHash": "dd5493f5769beb1d5875a7c003d12415fabfbba53fb6f0bdf412ce0f506e8048",
     "text": "続ける"
   },
+  "merchant.forJourney": {
+    "reviewed": true,
+    "source": "For this journey",
+    "sourceHash": "1208c26aaf9293d536e278ca7dde9836b156a87bd45ed1720421918a7ee89af3",
+    "text": "この旅の間"
+  },
+  "merchant.gold": {
+    "reviewed": true,
+    "source": "{{amount}} Gold",
+    "sourceHash": "354d6e9a95afe5aae6e4dd4f430117b5e63783a7ceaad4087e0e4571fdf0d5d9",
+    "text": "{{amount}}ゴールド"
+  },
   "merchant.leave": {
     "reviewed": true,
     "source": "Leave",
     "sourceHash": "e4e5ead8c83d21b792eda400394ee11d2d4bbbfb630d51e96f08f6d2a2190558",
     "text": "立ち去る"
+  },
+  "merchant.name": {
+    "reviewed": true,
+    "source": "Boon Merchant",
+    "sourceHash": "bd010ebbc4eafea02acdd91b1df3148186b6b015765c4ccbda0c164caa42af0e",
+    "text": "祝福商人"
+  },
+  "merchant.notEnough": {
+    "reviewed": true,
+    "source": "Not enough Gold",
+    "sourceHash": "d04c87e73f7ac7b5abd6550e89fcae983d05b5024ddc973849a5d03f0d15872f",
+    "text": "ゴールドが足りない"
+  },
+  "merchant.policy": {
+    "reviewed": true,
+    "source": "Limit 1 per customer - No Refunds!",
+    "sourceHash": "c80f8c08ec33f265303209701b104be01f3769e668650b467a6abfeb64fe3166",
+    "text": "お一人様一点限り・返品不可！"
+  },
+  "merchant.purchaseUsed": {
+    "reviewed": true,
+    "source": "Purchase used",
+    "sourceHash": "bed00294e8b265af9dbdb231c5fece4c3bb622abe6d6ab8dfca6bd217a4c6e2f",
+    "text": "購入済み"
+  },
+  "merchant.purchasedBoon": {
+    "reviewed": true,
+    "source": "Purchased Boon",
+    "sourceHash": "82e16881c5ef536b0645d30abfebef20be15a952cc95ef9d7f320f11960039d8",
+    "text": "購入した祝福"
+  },
+  "merchant.received": {
+    "reviewed": true,
+    "source": "Boon received",
+    "sourceHash": "aa22d5a292ef8501156bafab5923125acf0bdab69ae72323d3da5d0c7f03f597",
+    "text": "祝福を獲得"
+  },
+  "merchant.stock": {
+    "reviewed": true,
+    "source": "Boon Merchant stock",
+    "sourceHash": "d8f4043b5eb51f55db3af6929e03d5ca8e364987a2b3b35a60783b8617cd73cc",
+    "text": "祝福商人の商品"
+  },
+  "merchant.visit": {
+    "reviewed": true,
+    "source": "Visit Boon Merchant",
+    "sourceHash": "f020207367e087bfc748d50fe13166e4f68c5a8b6441361247a9cdf9bd8acc11",
+    "text": "祝福商人を訪ねる"
   },
   "navigation.back": {
     "reviewed": true,
@@ -1871,6 +2141,24 @@
     "sourceHash": "35e2874111f8638d0e77c8bcd9eae3ec7af2e60b3e25cffe42c7513d174536c7",
     "text": "祝福を閉じる"
   },
+  "overlay.closeDeck": {
+    "reviewed": true,
+    "source": "Close deck",
+    "sourceHash": "123b57b96c00e24b98231f8ecdc541227983bc73e76e5528ba48b4dff78ff912",
+    "text": "デッキを閉じる"
+  },
+  "overlay.closeDiscard": {
+    "reviewed": true,
+    "source": "Close discard pile",
+    "sourceHash": "914444032408daf4e1380f4b79d28ebc00863161a729ee03ff1dd01cab657aab",
+    "text": "捨て札を閉じる"
+  },
+  "overlay.closeDraw": {
+    "reviewed": true,
+    "source": "Close draw pile",
+    "sourceHash": "5528a20912b2f2796268ef130e1918cc987609987ff2f4a1be638adf435d4b41",
+    "text": "山札を閉じる"
+  },
   "overlay.deck": {
     "reviewed": true,
     "source": "Deck",
@@ -1888,6 +2176,18 @@
     "source": "Draw Pile",
     "sourceHash": "5fb976e02ba89acb51407a66a774c8e617f08d093908f89c380a37cc73dfe9de",
     "text": "山札"
+  },
+  "overlay.information": {
+    "reviewed": true,
+    "source": "Game information and controls",
+    "sourceHash": "34f09db99778911206f48c78920857c965b23b80136c781000e5f193ca1a62dc",
+    "text": "ゲーム情報と操作"
+  },
+  "overlay.replacement": {
+    "reviewed": true,
+    "source": "Choose a replacement",
+    "sourceHash": "1e891c5c694e6c58d93cafab53c4993f8c34eab252f0d601932b0314b9910a2b",
+    "text": "交代する仲間を選ぶ"
   },
   "pagination.next": {
     "reviewed": true,
@@ -2033,6 +2333,18 @@
     "sourceHash": "7406c65db573dad61f5e87a510d860406fbd85ffafb7d14cb8b0c50efb5f4ece",
     "text": "{{summary}}、{{details}}"
   },
+  "progress.keywordXpEarned": {
+    "reviewed": true,
+    "source": "Keyword XP earned",
+    "sourceHash": "215454fe89485c77a01e63ff005888b91480932db43aa3ca0fd165311bf1134a",
+    "text": "キーワード経験値獲得"
+  },
+  "progress.levelShort": {
+    "reviewed": true,
+    "source": "Lv {{level}}",
+    "sourceHash": "945a38c9b1f3623fa3a408ab975d6a52d624caf814eac34bd72590e143e7c82f",
+    "text": "Lv {{level}}"
+  },
   "recruit.chooseTeam": {
     "reviewed": true,
     "source": "Choose your team",
@@ -2074,6 +2386,30 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "e10054772192f2360d1b61d7b7bd872374a3dbc27eecfa11524a674e54722b08",
     "text": "チーム枠{{slot}}の{{name}}を取り消す"
+  },
+  "replacement.backup": {
+    "reviewed": true,
+    "source": "Backup",
+    "sourceHash": "fb2c99eca56604386f21b9f217dad37c68f798baacb0e833c46bfd03c6053474",
+    "text": "控え"
+  },
+  "replacement.backupCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, backup",
+    "sourceHash": "745170c795e298c3dbb3c1dd57c767e4484ac085bb612b2f3aced1a2b878684d",
+    "text": "{{creature}}、控え"
+  },
+  "replacement.knockedOut": {
+    "reviewed": true,
+    "source": "Knocked out",
+    "sourceHash": "1b25a07a5a3465f6fee29af43751b94f51a3c380b6e925840654c7f861d5f8e3",
+    "text": "戦闘不能"
+  },
+  "replacement.knockedOutCreature": {
+    "reviewed": true,
+    "source": "{{creature}}, knocked out",
+    "sourceHash": "6fee73b7f3b177ead34cc94c77a9e3db97e398d8f9a2e445d1879f5c612ec5b0",
+    "text": "{{creature}}、戦闘不能"
   },
   "results.complete": {
     "reviewed": true,
@@ -2393,11 +2729,23 @@
     "sourceHash": "cc4099054fbc1ef2828eec14d18cf4c06039fee7928d9aa928ec499ac4000f14",
     "text": "{{keyword}} {{count}}；{{description}}"
   },
+  "talents.category": {
+    "reviewed": true,
+    "source": "{{keyword}} talents",
+    "sourceHash": "6d4446554bd64d5f7357712b5109a1381565c44a80412092301d096d8f56abc9",
+    "text": "{{keyword}}のタレント"
+  },
   "talents.keywordXp": {
     "reviewed": true,
     "source": "{{keyword}} XP",
     "sourceHash": "7a5d34d409bb550ea0d8b57f4ab44c5ff71bbc5909188e38c71b848d8f5e2123",
     "text": "{{keyword}}の経験値"
+  },
+  "talents.pages": {
+    "reviewed": true,
+    "source": "Talent pages",
+    "sourceHash": "970014842449a55625201e6831a300a7b258adefda4387ffd335a2e4e656c79e",
+    "text": "タレントページ"
   },
   "talents.requiresPoint": {
     "reviewed": true,
@@ -2417,6 +2765,12 @@
     "sourceHash": "462cdb2839d931c4b2f2b98e05410a25faed738a0287eb545a3f99d396c3b236",
     "text": "前のすべての段が必要"
   },
+  "talents.reset": {
+    "reviewed": true,
+    "source": "Reset {{keyword}} talents",
+    "sourceHash": "eb8ae9d968e3855bab510ce12487fb1917b6cf26e5dab30b8d17145d03bd8a57",
+    "text": "{{keyword}}のタレントをリセット"
+  },
   "talents.row": {
     "reviewed": true,
     "source": "Row {{row}}",
@@ -2434,5 +2788,17 @@
     "source": "Unlocked",
     "sourceHash": "28aec51b4050ac6106d05d55e3d3bc628e684eb134d17da95b8a75a9ce26330e",
     "text": "解放済み"
+  },
+  "talents.unlockedName": {
+    "reviewed": true,
+    "source": "{{name}}, unlocked",
+    "sourceHash": "2184591cc309a616e8676e47fe0b2fabe75b1d779e83c89f89e654d8ca23a394",
+    "text": "{{name}}、解放済み"
+  },
+  "talents.xpProgress": {
+    "reviewed": true,
+    "source": "{{current}} / {{required}} XP",
+    "sourceHash": "f8a97e9c2e60be6afe6b89d04f4283ba746822996ce38af88f39f6b99ff04f78",
+    "text": "{{current}} / {{required}} 経験値"
   }
 }
