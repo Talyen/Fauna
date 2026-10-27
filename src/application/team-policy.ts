@@ -1,4 +1,4 @@
-import { cardKeywords, creaturePassiveTier } from "../game/progression";
+import { abilityKeywords, creaturePassiveTier } from "../game/progression";
 import { speciesCards, type SpeciesId } from "../game/content";
 import { permanentCardCopies } from "../game/card-kit";
 import type { GameState } from "../game/types";
@@ -9,7 +9,7 @@ function cardCapabilities(kind: SpeciesId): readonly string[] {
   if (cached) return cached;
   const result = new Set<string>();
   for (const card of speciesCards(kind)) {
-    for (const keyword of cardKeywords({ definitionId: card.id })) result.add(keyword);
+    for (const keyword of abilityKeywords(card)) result.add(keyword);
     if (card.effect === "attack") {
       result.add("attack");
       if (

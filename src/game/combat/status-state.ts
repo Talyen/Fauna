@@ -54,9 +54,9 @@ export function advanceControlImmunity(stats: CombatState) {
 
 export function clearHarmfulStatus(stats: CombatState, status: PeriodicStatus | Control | "blind") {
   if (status === "burn" || status === "poison" || status === "bleed") {
-    const versions = clearVersions.get(stats) ?? {};
+    let versions = clearVersions.get(stats);
+    if (!versions) clearVersions.set(stats, (versions = {}));
     versions[status] = (versions[status] ?? 0) + 1;
-    clearVersions.set(stats, versions);
   }
   if (status === "blind") stats.blind = false;
   else stats[status] = 0;
@@ -97,9 +97,9 @@ export function addPeriodicStacks(
   const gained = stats[status] - before;
   if (gained > 0) {
     stats.statusSources[status] = sourceId;
-    const additions = addedStacks.get(stats) ?? {};
+    let additions = addedStacks.get(stats);
+    if (!additions) addedStacks.set(stats, (additions = {}));
     additions[status] = (additions[status] ?? 0) + gained;
-    addedStacks.set(stats, additions);
   }
   return gained;
 }

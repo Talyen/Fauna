@@ -2,7 +2,7 @@ import { expect, it, vi } from "vitest";
 import { modifiedDamage } from "../../../src/game/combat/damage-values";
 import { applyHarmfulStatus, removeEffects, startAction } from "../../../src/game/combat/index";
 import { sharedDodgeChance } from "../../../src/game/combat/state";
-import { cardCost } from "../../../src/game/ability-rules";
+import { actionValue, cardCost, enemyAbilityValue } from "../../../src/game/ability-rules";
 import { cardActor, drawableOwnerIds } from "../../../src/game/card-actors";
 import {
   discardDrawCards,
@@ -26,6 +26,7 @@ import { definitionKeywords } from "../../../src/game/keywords";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { packetPolicy, packetPolicyView, type DamagePacket } from "../../../src/game/combat/policy";
 import { abilityExtras, scalePower } from "../../../src/game/combat/ability-values";
+import { abilityRule } from "../../../src/game/rules/abilities";
 import { supplementalRule } from "../../../src/game/rules/supplemental";
 import { selectCombatCue } from "../../../src/ui/audio/combat-audio";
 import { feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
@@ -936,4 +937,21 @@ it("keeps single-world forecasts identical to repeated equivalent worlds", () =>
   );
   expect(single).toEqual(repeated);
   expect(single.messages).toEqual(["Notice"]);
+});
+
+it("keeps authored ability values independent of levels, passives and enemy room power", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["memento"])));
+  const actor = state.team[0]!;
+  const enemy = { ...state.battle.enemies[0]!, power: 2 };
+  let checked = 0;
+  for (const entry of SPECIES) {
+    for (const def of speciesCards(entry.id)) {
+      if (abilityRule(def.effect).scaling !== "authored") continue;
+      const card = { id: "test", definitionId: def.id, ownerId: actor.id, level: 4 };
+      expect(actionValue(card, actor, state, def)).toBe(def.value);
+      expect(enemyAbilityValue(enemy, def)).toBe(def.value);
+      checked++;
+    }
+  }
+  expect(checked).toBeGreaterThan(0);
 });

@@ -41,17 +41,16 @@ export async function snapshot(
   // Own parent facts before hashing yields; readonly inputs can alias caller-owned data.
   const ancestry = new Set<string>();
   let invalidProfile = false;
-  const parentsAtAdmission = parents.map((parent) => {
+  for (const parent of parents) {
     ancestry.add(parent.id);
     if (parent.profile !== identity.profile) invalidProfile = true;
-    return [...parent.ancestors];
-  });
+  }
   if (invalidProfile) throw new Error("Cloud ancestry belongs to another profile.");
   if (ancestry.size > MAX_ANCESTORS)
     throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
-  for (const parent of parentsAtAdmission) {
-    for (const ancestor of parent) {
+  for (const parent of parents) {
+    for (const ancestor of parent.ancestors) {
       if (ancestry.size >= MAX_ANCESTORS) break;
       ancestry.add(ancestor);
     }

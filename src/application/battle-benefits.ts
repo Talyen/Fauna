@@ -177,7 +177,7 @@ export function battleBenefits(
   facts: ReturnType<typeof battleBenefitFacts>,
 ): BattleBenefit[] {
   const { card, actor, def } = play;
-  const value = actionValue(card, actor, state);
+  const value = actionValue(card, actor, state, def);
   let healingValueOnPlay: number | undefined;
   const healing = () =>
     (healingValueOnPlay ??= restoration(

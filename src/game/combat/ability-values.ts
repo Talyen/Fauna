@@ -4,8 +4,12 @@ import { supplementalRule } from "../rules/supplemental";
 import { scalePower } from "../rules/contracts";
 export { scalePower } from "../rules/contracts";
 
-export function primaryAbilityValue(card: CardDefinition, value: number, power = 1): number {
-  const policy = abilityRule(card.effect).scaling;
+export function primaryAbilityValue(
+  card: CardDefinition,
+  value: number,
+  power = 1,
+  policy = abilityRule(card.effect).scaling,
+): number {
   switch (policy) {
     case "authored":
       return card.value;

@@ -1,4 +1,5 @@
 import { talentRule } from "./rules/talents";
+import { abilityRule } from "./rules/abilities";
 import { boonRule } from "./rules/boons";
 import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
@@ -32,13 +33,23 @@ export function actionValue(
     Pick<Creature, "block" | "combat">
   >,
   state?: Pick<GameState, "talents" | "boons" | "discovery">,
+  resolvedDef?: CardDefinition,
 ): number {
-  const def = definition(card.definitionId);
+  const def = resolvedDef ?? definition(card.definitionId);
   if (def.species === null)
     return (
       def.value * (state && state.boons.includes("nectar-dipper") ? boonRule("nectar-dipper").multiplier : 1)
     );
-  return intrinsicAbilityValue(def, actor, card.level, creaturePassiveTier(state, actor.species!));
+  const scaling = abilityRule(def.effect).scaling;
+  if (scaling === "authored") return def.value;
+  return intrinsicAbilityValue(
+    def,
+    actor,
+    card.level,
+    creaturePassiveTier(state, actor.species!),
+    1,
+    scaling,
+  );
 }
 function intrinsicAbilityValue(
   def: CardDefinition,
@@ -46,12 +57,14 @@ function intrinsicAbilityValue(
   level: number,
   passive: PassiveTier,
   power = 1,
+  scaling = abilityRule(def.effect).scaling,
 ) {
   return (
     primaryAbilityValue(
       def,
       def.value + level * 2 + passiveCardBonus(def, passive, actor.attacked ?? false),
       power,
+      scaling,
     ) * (def.effect === "attack" && def.doubleWithArmor && (actor.combat?.armor ?? 0) > 0 ? 2 : 1)
   );
 }
@@ -108,7 +121,16 @@ export function enemyAbilityValue(
     Partial<Pick<import("./types").Enemy, "combat">>,
   card: CardDefinition,
 ) {
-  return intrinsicAbilityValue(card, enemy, 0, creaturePassiveTier(undefined, enemy.species), enemy.power);
+  const scaling = abilityRule(card.effect).scaling;
+  if (scaling === "authored") return card.value;
+  return intrinsicAbilityValue(
+    card,
+    enemy,
+    0,
+    creaturePassiveTier(undefined, enemy.species),
+    enemy.power,
+    scaling,
+  );
 }
 
 export function enemyInspectionValue(enemy: Parameters<typeof enemyAbilityValue>[0], card: CardDefinition) {

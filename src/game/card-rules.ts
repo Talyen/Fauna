@@ -48,8 +48,8 @@ export function cardTargeting(
 }
 
 // Eligibility and adaptation must select the same healing effect.
-function enemyHealing(card: CardDefinition) {
-  return abilityRule(card.effect).adaptation === "healingExtra"
+function enemyHealing(card: CardDefinition, rule = abilityRule(card.effect)) {
+  return rule.adaptation === "healingExtra"
     ? card.effects?.find((effect) => effect.kind === "heal")
     : undefined;
 }
@@ -69,7 +69,7 @@ export function enemyCard(card: CardDefinition): CardDefinition {
 
 export function enemyCanUse(card: CardDefinition): boolean {
   const rule = abilityRule(card.effect);
-  if (enemyHealing(card)) return true;
+  if (enemyHealing(card, rule)) return true;
   const policy = rule.enemy;
   switch (policy) {
     case "supported":
@@ -91,8 +91,9 @@ export function cardText(
   power = 1,
   state?: Pick<GameState, "boons">,
 ): string {
-  value ??= primaryAbilityValue(card, card.value + level * 2, power);
-  let text = abilityRule(card.effect).describe(card, { value, level, power, label: keywordLabel });
+  const rule = abilityRule(card.effect);
+  value ??= primaryAbilityValue(card, card.value + level * 2, power, rule.scaling);
+  let text = rule.describe(card, { value, level, power, label: keywordLabel });
   for (const effect of abilityExtras(card, power)) {
     text +=
       (card.effect === "teamClearBlind" ||
