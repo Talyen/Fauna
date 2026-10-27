@@ -695,11 +695,41 @@
     "sourceHash": "e16817992a5c48a3314ef96983216993d37d69aa7eac89534d9270348fafa3ae",
     "text": "旅途织机"
   },
+  "content.boon.knot-comb.name": {
+    "reviewed": true,
+    "source": "Knot Comb",
+    "sourceHash": "eef834c522cd436694c531a4f5cf7c8e4bff286ae2d2fe52d7dec21285caeae9",
+    "text": "结纹梳"
+  },
+  "content.boon.last-candle.name": {
+    "reviewed": true,
+    "source": "Last Candle",
+    "sourceHash": "068c60e34a6d97118041b218d81ff3972bf3d7a89733619d44f644a6009029fe",
+    "text": "最后的蜡烛"
+  },
+  "content.boon.last-threshold.name": {
+    "reviewed": true,
+    "source": "Last Threshold",
+    "sourceHash": "00bd8fd71c19bbdb85baa899928222c0d56bbcce3e861693dbf6131c2c03ec8a",
+    "text": "最后的门槛"
+  },
+  "content.boon.lava-cameo.name": {
+    "reviewed": true,
+    "source": "Lava Cameo",
+    "sourceHash": "6e95984630d7bd4a28dc3145cf2c9c5d739191305aaf143952c62da3228d4342",
+    "text": "熔岩浮雕"
+  },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "f4a47884779d48fd8bda2aaa5fed54529f98c382b500d0b8722a4d43355a4e82",
     "text": "拥有<keyword1>护甲</keyword1>的敌人身上的<keyword0>灼烧</keyword0>不会衰减"
+  },
+  "content.boon.lovers-knot.name": {
+    "reviewed": true,
+    "source": "Lovers Knot",
+    "sourceHash": "670e4692a3b4457d85ea154ad69edcb9fa264d0165f66c0c7f73dbffc3ee394e",
+    "text": "爱人结"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -719,11 +749,35 @@
     "sourceHash": "0ac54f19cde6c5c4fee83ab33df0240aef3865b9a40b583e9cd795ffb346ea5a",
     "text": "在每位祝福商人处购买的价格减少{{value0}}金币"
   },
+  "content.boon.mercury-metronome.name": {
+    "reviewed": true,
+    "source": "Mercury Metronome",
+    "sourceHash": "159310e96942da9a95104effbaf0a4e12b8094850aad67aa02d0432e26d0950d",
+    "text": "水银节拍器"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "4aae5d837f0925ccef875cddf1ebcc301a9cc6f7a5615cc14fa0facfcd61ab36",
     "text": "陨石"
+  },
+  "content.boon.mineral-bookend.name": {
+    "reviewed": true,
+    "source": "Mineral Bookend",
+    "sourceHash": "bbe0a01235b5fc1ea726cba6d8bba5ff85d84d30bff7bc4fbfcd696a5cb073d2",
+    "text": "矿石书挡"
+  },
+  "content.boon.miracle-megaphone.name": {
+    "reviewed": true,
+    "source": "Miracle Megaphone",
+    "sourceHash": "7fc328b99ed19e4857032e191544613ed026b42cafaa60817a48b0d679ea5bd6",
+    "text": "奇迹扩音器"
+  },
+  "content.boon.molten-paperweight.name": {
+    "reviewed": true,
+    "source": "Molten Paperweight",
+    "sourceHash": "2b5ae5b03a0038bf518f1061b73bbf80afb4e397459466a958c29f4bc067931e",
+    "text": "熔岩镇纸"
   },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
@@ -736,6 +790,12 @@
     "source": "Moonveil Mask",
     "sourceHash": "79f615ab50ebd45e9822d1854bb2ab14dbd0ec65a8469cd81507c43c1f18ced6",
     "text": "月幕面具"
+  },
+  "content.boon.moss-oven-mitt.name": {
+    "reviewed": true,
+    "source": "Moss Oven Mitt",
+    "sourceHash": "65a73d52a78fdc89c4199f9d3eb70f7a4985d5ee3dad7236f0b4de6520d02a0a",
+    "text": "苔藓隔热手套"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,

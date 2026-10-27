@@ -701,11 +701,41 @@
     "sourceHash": "c61cfaaea6b1c9e800239ca67a870aa1aeb74d818491b0c5046d805516004d6c",
     "text": "Métier à tisser du voyage"
   },
+  "content.boon.knot-comb.name": {
+    "reviewed": true,
+    "source": "Knot Comb",
+    "sourceHash": "0191fa14079187c1cc015e004ee279805889b7f972500dcfbc915b663effeb3b",
+    "text": "Peigne à nœud"
+  },
+  "content.boon.last-candle.name": {
+    "reviewed": true,
+    "source": "Last Candle",
+    "sourceHash": "fcb9ba5267a4689ee156269010e38fbee48c110822a8fbf331b7615e5f74ec3f",
+    "text": "Dernière bougie"
+  },
+  "content.boon.last-threshold.name": {
+    "reviewed": true,
+    "source": "Last Threshold",
+    "sourceHash": "942247d15490990f2dabd5f4d6e495ea6fa884ffc7b7e54e90cda5e9d72d07db",
+    "text": "Dernier seuil"
+  },
+  "content.boon.lava-cameo.name": {
+    "reviewed": true,
+    "source": "Lava Cameo",
+    "sourceHash": "e4b82684d749ff075e0ab687c310aab172c5712ebb63d92c18afb3aebe7e4af4",
+    "text": "Camée de lave"
+  },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "188edd00c58c21ac1112bcdd0f9327d54ab83356360ab3803df8c74a3ea10ad8",
     "text": "La <keyword0>Brûlure</keyword0> ne décroît pas sur les ennemis avec de l’<keyword1>Armure</keyword1>"
+  },
+  "content.boon.lovers-knot.name": {
+    "reviewed": true,
+    "source": "Lovers Knot",
+    "sourceHash": "aa2cd3a15b2bbc3303442b2e3c6f60ae2ab5fda0e9cce21b9f9a3065116cfc06",
+    "text": "Nœud des amoureux"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -725,11 +755,23 @@
     "sourceHash": "4502e4996e21a32819d59f4a5d73181f1762536cd1fcc97689aae3461ad0739a",
     "text": "Votre achat auprès de chaque marchand de bénédictions coûte {{value0}} Or de moins"
   },
+  "content.boon.mercury-metronome.name": {
+    "reviewed": true,
+    "source": "Mercury Metronome",
+    "sourceHash": "56d39877676047c9439da7729131f499ded270cb196f99a6a1b118dc66b0bc0d",
+    "text": "Métronome de mercure"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "322c0d5d9d96ed98bf0cade4b70a33e19d8a874d58e0cd99f0a3e93bb79402d9",
     "text": "Météorite"
+  },
+  "content.boon.mineral-bookend.name": {
+    "reviewed": true,
+    "source": "Mineral Bookend",
+    "sourceHash": "26ee4e0b7828409073064577d7f7d5ffca59cd32bb920db1956ef19e6ba758e6",
+    "text": "Serre-livres minéral"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -743,6 +785,12 @@
     "sourceHash": "0191ce0358ac6e595036410d4df17b5852f1ff7d2efe385cc1b16d610dac167c",
     "text": "<keyword0>Purification</keyword0> affecte tous les alliés"
   },
+  "content.boon.molten-paperweight.name": {
+    "reviewed": true,
+    "source": "Molten Paperweight",
+    "sourceHash": "325b723a2baab78e1e053fbdeb982545b26a79ad1bfaf7bddd6d910a41ab00a8",
+    "text": "Presse-papier en fusion"
+  },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
     "source": "Moonboat Toy",
@@ -754,6 +802,12 @@
     "source": "Moonveil Mask",
     "sourceHash": "8b777daffa32cb00c48a86760b2cc7306e1bffcea8df562c714fe3b2a8dc6b1b",
     "text": "Masque de voile lunaire"
+  },
+  "content.boon.moss-oven-mitt.name": {
+    "reviewed": true,
+    "source": "Moss Oven Mitt",
+    "sourceHash": "504b31e93d2fa1ecfbe8234f778cb9dbcbde19c267231ec3ade6c1f843ea5493",
+    "text": "Gant de four moussu"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,

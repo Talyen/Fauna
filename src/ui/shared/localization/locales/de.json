@@ -695,11 +695,41 @@
     "sourceHash": "aef7d24d9f34892f356dcd52c61eeafa901eef5a42882d5ab05486e1c56b5fd3",
     "text": "Reisewebstuhl"
   },
+  "content.boon.knot-comb.name": {
+    "reviewed": true,
+    "source": "Knot Comb",
+    "sourceHash": "98bcada1edcd917c74cd606946c7e372a0e3905509e091e6f715c69b469ea957",
+    "text": "Knotenkamm"
+  },
+  "content.boon.last-candle.name": {
+    "reviewed": true,
+    "source": "Last Candle",
+    "sourceHash": "0a2aaf8cf30c57cd232ae66ac4d57630b5508936d11dc636f4cd657e8895ec06",
+    "text": "Letzte Kerze"
+  },
+  "content.boon.last-threshold.name": {
+    "reviewed": true,
+    "source": "Last Threshold",
+    "sourceHash": "2c448e2b0fbb185b99bf6b39f74c0fd1704011afc2cdf5af6755d00c15699dc8",
+    "text": "Letzte Schwelle"
+  },
+  "content.boon.lava-cameo.name": {
+    "reviewed": true,
+    "source": "Lava Cameo",
+    "sourceHash": "b14cc06d4c8ed5f0d44dbb0d6e787a3b36d0f2b370258008052986dc6c052f8a",
+    "text": "Lavakamee"
+  },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "56e06855d9832a5b680e576ff27101a865e8b9041d181a0dbef24d3c49918263",
     "text": "<keyword0>Verbrennung</keyword0> verfällt nicht bei Gegnern mit <keyword1>Rüstung</keyword1>"
+  },
+  "content.boon.lovers-knot.name": {
+    "reviewed": true,
+    "source": "Lovers Knot",
+    "sourceHash": "64b8a52da1f391055d6d00d11f14b6bc97e2478b442e4f6c30c7096446390483",
+    "text": "Liebesknoten"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -719,11 +749,35 @@
     "sourceHash": "e23a560ec2bbed90693f44acd87a852a7011a0018a42ee65609c33fe31dce344",
     "text": "Dein Kauf bei jedem Segenhändler kostet {{value0}} Gold weniger"
   },
+  "content.boon.mercury-metronome.name": {
+    "reviewed": true,
+    "source": "Mercury Metronome",
+    "sourceHash": "6a0fc6da95c248620ea7bfc115e90a63555a8e660a5a7ec3de0fec98e10c25a3",
+    "text": "Quecksilbermetronom"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "3b95ee5e51821484b2aa8fec425eb9e6ad84080ddb534e0df027d04de5c4f874",
     "text": "Meteorit"
+  },
+  "content.boon.mineral-bookend.name": {
+    "reviewed": true,
+    "source": "Mineral Bookend",
+    "sourceHash": "544b450663a3485bf49df9627932e5ab75c45ad12ad58e5b42520cd1320e71d8",
+    "text": "Mineralbuchstütze"
+  },
+  "content.boon.miracle-megaphone.name": {
+    "reviewed": true,
+    "source": "Miracle Megaphone",
+    "sourceHash": "f40dec7b7b8a4f91fc923ccf5b50052aa49f5dfa13b4a51c669b494faf5792dc",
+    "text": "Wundermegafon"
+  },
+  "content.boon.molten-paperweight.name": {
+    "reviewed": true,
+    "source": "Molten Paperweight",
+    "sourceHash": "e7cd2ce8294484889c722742c628abdf5c3d787afc91f56a52b2b23a97915499",
+    "text": "Geschmolzener Briefbeschwerer"
   },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
@@ -736,6 +790,12 @@
     "source": "Moonveil Mask",
     "sourceHash": "e91163267d38d36d81efd12f2015d9b212e0d4412a45764056b7072d949344e2",
     "text": "Mondschleiermaske"
+  },
+  "content.boon.moss-oven-mitt.name": {
+    "reviewed": true,
+    "source": "Moss Oven Mitt",
+    "sourceHash": "101b9bb1930ca6e67351e67bfe5a8be5ce8fb8851fb7299db2a60834571088b3",
+    "text": "Moos-Ofenhandschuh"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,

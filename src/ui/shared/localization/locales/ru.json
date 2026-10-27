@@ -695,11 +695,41 @@
     "sourceHash": "5a7b2842534604f624aff7b1d43260b30b29333f9c556f676b3f550eabdd50ce",
     "text": "Ткацкий станок путешествия"
   },
+  "content.boon.knot-comb.name": {
+    "reviewed": true,
+    "source": "Knot Comb",
+    "sourceHash": "b0eeb86b1129f73ff650ea5c391f9b30623c03ba811bde547ca348a67e5ff33c",
+    "text": "Гребень узла"
+  },
+  "content.boon.last-candle.name": {
+    "reviewed": true,
+    "source": "Last Candle",
+    "sourceHash": "09fbd87431e4e91d769ab43c2902e670dadffe5fdf82a28da9bb5968a6c7e88f",
+    "text": "Последняя свеча"
+  },
+  "content.boon.last-threshold.name": {
+    "reviewed": true,
+    "source": "Last Threshold",
+    "sourceHash": "0be7680e71b2154076545cca492395466cb957b6bb4948ebfc71d71dfa390dcd",
+    "text": "Последний порог"
+  },
+  "content.boon.lava-cameo.name": {
+    "reviewed": true,
+    "source": "Lava Cameo",
+    "sourceHash": "e3fdc66529b54b5a51bd0dadf4908de3784a10fe3af62b2356ccd6dc812678a2",
+    "text": "Лавовая камея"
+  },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "dc10579d8889f062d1451549f9f6f31c731f26643d84dd5d9fca77b71a44192e",
     "text": "<keyword0>Горение</keyword0> не угасает на врагах с <keyword1>бронёй</keyword1>"
+  },
+  "content.boon.lovers-knot.name": {
+    "reviewed": true,
+    "source": "Lovers Knot",
+    "sourceHash": "1a80a82573a4303401f7c2d44fca9cefc3600b6d94c19eb66229a6d72a2f5422",
+    "text": "Узел влюблённых"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -719,11 +749,35 @@
     "sourceHash": "0bc93e18323e79abff09f1df5fddd29094ff813fe614052943a9ee0f6f6afdd8",
     "text": "Покупка у каждого торговца благословениями стоит на {{value0}} золота меньше"
   },
+  "content.boon.mercury-metronome.name": {
+    "reviewed": true,
+    "source": "Mercury Metronome",
+    "sourceHash": "d9c5fb9b5cabf3792aaa335870e9d64537ccdeed5eb4b0fc942884ca76b45597",
+    "text": "Ртутный метроном"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "e6ec02f602d1380079a33e5c971fd08b95e5942add499e98eb698a18bc313ad5",
     "text": "Метеорит"
+  },
+  "content.boon.mineral-bookend.name": {
+    "reviewed": true,
+    "source": "Mineral Bookend",
+    "sourceHash": "2e4d5b8b86bc2c909fa9bed6446960812a47b9e43e0953d4f2698ebe55058a7f",
+    "text": "Минеральный упор для книг"
+  },
+  "content.boon.miracle-megaphone.name": {
+    "reviewed": true,
+    "source": "Miracle Megaphone",
+    "sourceHash": "ebc63365bbf5a7b53b22b56754725ee72b63a52cf38b460faef4b426a42db71c",
+    "text": "Чудесный мегафон"
+  },
+  "content.boon.molten-paperweight.name": {
+    "reviewed": true,
+    "source": "Molten Paperweight",
+    "sourceHash": "45ac9c5df53304c5789984c16eac1661d6fd97f2f50839bf664dadde0a18c4ff",
+    "text": "Расплавленное пресс-папье"
   },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
@@ -736,6 +790,12 @@
     "source": "Moonveil Mask",
     "sourceHash": "29e33e756a0dd9a32d938393cb7492989ce9bf8b1cd6be822c3bc2ce7d17d0af",
     "text": "Маска лунной вуали"
+  },
+  "content.boon.moss-oven-mitt.name": {
+    "reviewed": true,
+    "source": "Moss Oven Mitt",
+    "sourceHash": "974b6428c211c744acdc7646fab704a56801f8b2e921e6a6ff8bc3ab75553403",
+    "text": "Прихватка из мха"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,

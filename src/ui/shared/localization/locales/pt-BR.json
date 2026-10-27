@@ -695,11 +695,41 @@
     "sourceHash": "99ac7959c8287f1275efefb4095b1badfde186055ac70ef9aaaf5d2b7c9479a2",
     "text": "Tear da jornada"
   },
+  "content.boon.knot-comb.name": {
+    "reviewed": true,
+    "source": "Knot Comb",
+    "sourceHash": "405675c343eb9eff6669c7ee7601a90b7cbb4f5a24d9abea781ed9b0cab69ccc",
+    "text": "Pente de nó"
+  },
+  "content.boon.last-candle.name": {
+    "reviewed": true,
+    "source": "Last Candle",
+    "sourceHash": "0d2147650f6dacc01552e6c60388901a8f0578aeb6ce323671002537b27a2786",
+    "text": "Última vela"
+  },
+  "content.boon.last-threshold.name": {
+    "reviewed": true,
+    "source": "Last Threshold",
+    "sourceHash": "7e3e1d3097266ea7a142d7b62034cf675eccca90cd7f7727b9b81a66445a721f",
+    "text": "Último limiar"
+  },
+  "content.boon.lava-cameo.name": {
+    "reviewed": true,
+    "source": "Lava Cameo",
+    "sourceHash": "1fe376a2a50eddfecb9ad23e311a3babce2f6f036044cbd6c7f35d517b15aaee",
+    "text": "Camafeu de lava"
+  },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "86814d6d66816254b9dea1baa60d530d0e4b980171c4342f121088de666f2b78",
     "text": "<keyword0>Queimadura</keyword0> não decai em inimigos com <keyword1>Armadura</keyword1>"
+  },
+  "content.boon.lovers-knot.name": {
+    "reviewed": true,
+    "source": "Lovers Knot",
+    "sourceHash": "d2d2dacffb4cb59c1ae071bd78796fb0f90dd32a4c0ba11bfe968d82fd15a966",
+    "text": "Nó dos amantes"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -719,11 +749,35 @@
     "sourceHash": "101d5ad8bd4267e859354edeec16d2035595897c3758ca6bb1432a3eae456655",
     "text": "Sua compra em cada mercador de bênçãos custa {{value0}} de Ouro a menos"
   },
+  "content.boon.mercury-metronome.name": {
+    "reviewed": true,
+    "source": "Mercury Metronome",
+    "sourceHash": "0980ca387305fec0b94091e93dfd7a564a23fc13349300ee48e2e7de62b16fa6",
+    "text": "Metrônomo de mercúrio"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "9ee6b3291cf72a741575f4f5d66babf82cdf5488a48bb14481c56a4d597a7bce",
     "text": "Meteorito"
+  },
+  "content.boon.mineral-bookend.name": {
+    "reviewed": true,
+    "source": "Mineral Bookend",
+    "sourceHash": "6775d26476f61091a2d7bd1787c19ebef77d2e6c72ce707e0de3bd71660f151b",
+    "text": "Aparador de livros mineral"
+  },
+  "content.boon.miracle-megaphone.name": {
+    "reviewed": true,
+    "source": "Miracle Megaphone",
+    "sourceHash": "ba555957a778becb1f06a105bb9eee2813d8c9b7ec834d318d5a3774c36ee5e1",
+    "text": "Megafone milagroso"
+  },
+  "content.boon.molten-paperweight.name": {
+    "reviewed": true,
+    "source": "Molten Paperweight",
+    "sourceHash": "f34c8d650f9b3b71e9ee2f3e333bbcc7672e84848df7da658f99286697521104",
+    "text": "Peso de papel fundido"
   },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
@@ -736,6 +790,12 @@
     "source": "Moonveil Mask",
     "sourceHash": "af1760f66425b2c186283f0cc95269995676a4832c25529a1fc402b94e4ce85b",
     "text": "Máscara do véu lunar"
+  },
+  "content.boon.moss-oven-mitt.name": {
+    "reviewed": true,
+    "source": "Moss Oven Mitt",
+    "sourceHash": "93ebea41e9e78d8dd096621f8fb6a5fe2f1377b61afe6360edeb18887f6818b8",
+    "text": "Luva de forno musgosa"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,

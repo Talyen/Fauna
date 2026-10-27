@@ -695,11 +695,41 @@
     "sourceHash": "2048b2f1b4fdfe9344cadaeea7c13c0f6ea848330c5e4e5106f28f0381fc3cf4",
     "text": "旅の織機"
   },
+  "content.boon.knot-comb.name": {
+    "reviewed": true,
+    "source": "Knot Comb",
+    "sourceHash": "e784138615f5015d666def453fa5f7f3fd9f05fad81386385b5a889eeff34cc4",
+    "text": "結び目の櫛"
+  },
+  "content.boon.last-candle.name": {
+    "reviewed": true,
+    "source": "Last Candle",
+    "sourceHash": "85b95a04f244bd42e5cdf1a1e3c79ed9751c0ed6dad23360e75eac90fbc0a998",
+    "text": "最後のろうそく"
+  },
+  "content.boon.last-threshold.name": {
+    "reviewed": true,
+    "source": "Last Threshold",
+    "sourceHash": "1b505f8448020cb828c7ad03a9f03bb0c8e981f2478f4a2d3882033d2d43e97b",
+    "text": "最後の敷居"
+  },
+  "content.boon.lava-cameo.name": {
+    "reviewed": true,
+    "source": "Lava Cameo",
+    "sourceHash": "abf15e22147bb35b211bd2e73a6a6f3a165e284e2f3f21160048e2e05b6db2f1",
+    "text": "溶岩のカメオ"
+  },
   "content.boon.lava-cameo.rule": {
     "reviewed": true,
     "source": "<keyword0>Burn</keyword0> on enemies with <keyword1>Armor</keyword1> does not decay",
     "sourceHash": "85417a766b69a58a839ff8d1d7974aa256a95ad96bd321999026401e7766a6d3",
     "text": "<keyword1>アーマー</keyword1>を持つ敵の<keyword0>火傷</keyword0>は減衰しない"
+  },
+  "content.boon.lovers-knot.name": {
+    "reviewed": true,
+    "source": "Lovers Knot",
+    "sourceHash": "450430f853cba624c02dd040820169b704c79196d1bdb096b280b73025bcaa0b",
+    "text": "恋人の結び目"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -719,11 +749,35 @@
     "sourceHash": "2ad0334b2b249454ba2baadee0b2f12a9745850c517a116b544108e247486b01",
     "text": "各祝福商人での購入費用がゴールド{{value0}}分減少"
   },
+  "content.boon.mercury-metronome.name": {
+    "reviewed": true,
+    "source": "Mercury Metronome",
+    "sourceHash": "8b439bcd1335dfb3608e4387dfd6f1dd32edac06bc3243f419fd2280028b51f4",
+    "text": "水銀のメトロノーム"
+  },
   "content.boon.meteorite.name": {
     "reviewed": true,
     "source": "Meteorite",
     "sourceHash": "b546cf6a759fb23f605977258da31082193b1ac3c3ffaa23965dcfa699dca67f",
     "text": "隕石"
+  },
+  "content.boon.mineral-bookend.name": {
+    "reviewed": true,
+    "source": "Mineral Bookend",
+    "sourceHash": "0f6b99d9298f58b9e97d5272ad7421d8aad1776fa63eeca3a05a441cb371e06e",
+    "text": "鉱石のブックエンド"
+  },
+  "content.boon.miracle-megaphone.name": {
+    "reviewed": true,
+    "source": "Miracle Megaphone",
+    "sourceHash": "d6e9a2c5f1434fc1dc05a62eed4eef474868fb90dc92420c4723baadc204e779",
+    "text": "奇跡のメガホン"
+  },
+  "content.boon.molten-paperweight.name": {
+    "reviewed": true,
+    "source": "Molten Paperweight",
+    "sourceHash": "e961baf0f036bcee2ee4824803488cff04785d7dcee7c68a356be817e15415e6",
+    "text": "溶岩の文鎮"
   },
   "content.boon.moonboat-toy.name": {
     "reviewed": true,
@@ -736,6 +790,12 @@
     "source": "Moonveil Mask",
     "sourceHash": "a74326bf86398b62f455677ecc6b7a067447bd5b2004fbb16eca146caff21b38",
     "text": "月の帳の仮面"
+  },
+  "content.boon.moss-oven-mitt.name": {
+    "reviewed": true,
+    "source": "Moss Oven Mitt",
+    "sourceHash": "0943766a7f95cee4350f2190f305388c5e5b88279dae355178b1a2f576d804b4",
+    "text": "苔のミトン"
   },
   "content.boon.nectar-dipper.rule": {
     "reviewed": true,
