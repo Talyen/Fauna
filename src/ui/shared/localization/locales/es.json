@@ -7643,6 +7643,12 @@
     "sourceHash": "4f85f4eded4ee0ad74079be7c97bb02dee46009215a67b7e80d09d37e06e8ce1",
     "text": "{{name}} queda fuera de combate."
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "c84baaf4e5f84f9907617cfb6e45273743a32454a1ab65110de221b84d190ae3",
+    "text": "{{name}} pierde {{amount}} de Armadura"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7660,6 +7666,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "f4377085303b31f5d0310756addeea9d28e2c9d7016357b345d880cd03d08137",
     "text": "{{name}} anula el daño de Congelación"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "8b2797984b0a8735e0be8aec9bfc988e068c99f29d6e8d8ffc644551c925b92b",
+    "text": "{{name}} llega al borde de la muerte: turnos de gracia restantes: {{amount}}."
   },
   "log.reflectAttack": {
     "reviewed": true,

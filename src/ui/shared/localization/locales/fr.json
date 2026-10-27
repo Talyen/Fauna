@@ -7643,6 +7643,12 @@
     "sourceHash": "90647c9acf3e68303eefcb41c4480f9d921760ca6b2e9c8d470746d3bf0400e2",
     "text": "{{name}} est K.-O."
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "188bbe03eaea8d5bb5bf257d5649713dbc2e28f1be49715641f9a3b111798070",
+    "text": "{{name}} perd {{amount}} Armure"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7660,6 +7666,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "13b45693f5679b6a3fb83f5a7e35e5b360fbad1a4e262948d32b7e5979116f08",
     "text": "{{name}} annule les dégâts de Gel"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "e464e287609f8abb82426e2eb19dae360f47e02ecdd1aed083e46286e82ade13",
+    "text": "{{name}} atteint les portes de la mort : tours de répit restants : {{amount}}."
   },
   "log.reflectAttack": {
     "reviewed": true,

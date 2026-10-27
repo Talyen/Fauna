@@ -7643,6 +7643,12 @@
     "sourceHash": "6b193d08fab442fae7f0e846b44d34e722ecc0031e3dd1033c820477b252c869",
     "text": "{{name}}被击倒。"
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "142ea6a1b1c49b03c6055d95ba2cd41812e4c2198f1d0dcf702605e34eb9d6cc",
+    "text": "{{name}}失去{{amount}}点护甲"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7660,6 +7666,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "9f1921bf23ba61fd52c991dc57ba442bcf37fc08876ec7fa959c0ce327312c17",
     "text": "{{name}}抵消了冻结伤害"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "11f4c64afb05d6d0fe438dd232e7990a55b0d4f83bb7f44098b8ca73959e3c6f",
+    "text": "{{name}}濒临死亡：剩余宽限回合数：{{amount}}。"
   },
   "log.reflectAttack": {
     "reviewed": true,

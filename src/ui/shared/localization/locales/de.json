@@ -7643,6 +7643,12 @@
     "sourceHash": "e1b4be8d36ce3b7bb12a18d9a9b233d07ecbebdcbf8d5accb0db8cf4f3d9b6e0",
     "text": "{{name}} ist K. o."
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "57b57763f8f3094420ed0c50f1246ac1210b36c3d0f3baddbaf4bbc4ab019b8b",
+    "text": "{{name}} verliert {{amount}} Rüstung"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7660,6 +7666,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "f772535eaa3937db6df72692125501b575f09320f91fa9b517a789a190ff8f72",
     "text": "{{name}} verhindert Frostschaden"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "2ce280532cbe58d66260293e47e0ad830c952a949b8eefa77e4507f7cf3aad4e",
+    "text": "{{name}} erreicht den Nahtod: verbleibende Schonzüge: {{amount}}."
   },
   "log.reflectAttack": {
     "reviewed": true,

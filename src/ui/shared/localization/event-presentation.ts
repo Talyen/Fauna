@@ -211,6 +211,24 @@ export function eventPresentation(
   }
   if (event.kind === "status" && event.amount !== undefined) {
     if (
+      event.status === "deathDoor" &&
+      event.outcome === "apply" &&
+      event.text === `${englishName} reaches Death's Door: ${event.amount} grace turns.`
+    )
+      return i18n.message("log.reachDeathsDoor", "{{name}} reaches Death's Door: {{amount}} grace turns.", {
+        name,
+        amount: quantity(event.amount),
+      });
+    if (
+      event.status === "armor" &&
+      event.outcome === "remove" &&
+      event.text === `${englishName} loses ${event.amount} Armor`
+    )
+      return i18n.message("log.loseArmor", "{{name}} loses {{amount}} Armor", {
+        name,
+        amount: quantity(event.amount),
+      });
+    if (
       event.status === "dodge" &&
       event.outcome === "gain" &&
       event.text === `${englishName} gains ${event.amount}% Dodge until its next turn`

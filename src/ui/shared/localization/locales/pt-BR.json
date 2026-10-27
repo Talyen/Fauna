@@ -7643,6 +7643,12 @@
     "sourceHash": "1dfc2c54c058f41cfc495b947e25d976988a9028a4410f31f2379dbb98e5b0ea",
     "text": "{{name}}: nocaute."
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "a05c5547f769127b4ccdef82091ed17097e338c319fe7c26ee162430ffc32543",
+    "text": "{{name}} perde {{amount}} de Armadura"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7660,6 +7666,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "69dc8348aba5bdcbd0ebf5069a0a0516280c99d8281d96c7fb8fed3819f815b8",
     "text": "{{name}} anula o dano de Congelamento"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "4346104c3c8bd717ac79033913ae304421000a61071d27bd172a5a283ac909c9",
+    "text": "{{name}} chega à beira da morte: turnos de graça restantes: {{amount}}."
   },
   "log.reflectAttack": {
     "reviewed": true,

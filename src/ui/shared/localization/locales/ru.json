@@ -7643,6 +7643,12 @@
     "sourceHash": "45b2f3bbf8706f6c01317f4c08ebfd133c66f232b215d2a4a7f797695ec0294c",
     "text": "Нокаут: {{name}}."
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "624150777cd8f8529443e120f7acc840e8143dc94035e24dc1f4a6b37c0e3583",
+    "text": "{{name}} теряет брони: {{amount}}"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7660,6 +7666,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "869a101c8c983ac4321747fac44b0fa773f3373b9a123440f5c6d5d5b142f895",
     "text": "{{name}} предотвращает урон от заморозки"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "2ce4fcfeabbda11f513808ff4d49a58fde5edcf7cb49eb27468107ae0495bfd0",
+    "text": "{{name}} на пороге смерти: оставшиеся льготные ходы: {{amount}}."
   },
   "log.reflectAttack": {
     "reviewed": true,

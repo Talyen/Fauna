@@ -7643,6 +7643,12 @@
     "sourceHash": "2d99c27a7bbea59a267ed125ad199d4952f3b0b81a7e740cd9baf2fcb17eadab",
     "text": "{{name}}は戦闘不能になった。"
   },
+  "log.loseArmor": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor",
+    "sourceHash": "0445fe0ff47f57e4f99f60e8b460f27fbac261d3434fbee25951bed5745abece",
+    "text": "{{name}}は装甲を{{amount}}失う"
+  },
   "log.loseFreezeBuildup": {
     "reviewed": true,
     "source": "{{name}} loses {{amount}} Freeze buildup",
@@ -7660,6 +7666,12 @@
     "source": "{{name}} nullifies Freeze damage",
     "sourceHash": "edaa2142c6abbc37fec4b9fcb03e8f3487ec301d20f975d066f635d7446612ba",
     "text": "{{name}}は凍結ダメージを無効化した"
+  },
+  "log.reachDeathsDoor": {
+    "reviewed": true,
+    "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
+    "sourceHash": "f3e09434cdcc374c3e74c3c92f0d6fa4f63d1420a50b3b38f932a2d6d712627c",
+    "text": "{{name}}は死の淵に達した。猶予ターン数：{{amount}}。"
   },
   "log.reflectAttack": {
     "reviewed": true,
