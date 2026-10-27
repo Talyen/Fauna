@@ -1,3 +1,4 @@
+import { useMessages } from "../localization/message-context";
 import { EffectButton } from "../effects/treatments";
 import { visualKeywords } from "../effects/palettes";
 import { PagedItems } from "../navigation/pagination";
@@ -22,6 +23,7 @@ export function CombatStatus({
   sharedDodge?: number;
   details?: boolean;
 }) {
+  const i18n = useMessages();
   const entries = combatStatuses(combat, sharedDodge);
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
@@ -129,9 +131,14 @@ export function CombatStatus({
     );
   };
   return (
-    <div ref={root} className="combat-status" aria-label="Combat effects">
+    <div ref={root} className="combat-status" aria-label={i18n.message("battle.effects", "Combat effects")}>
       {shown.length > 3 ? (
-        <PagedItems items={shown} pageSize={1} className="combat-effect-page" label="Combat effect pages">
+        <PagedItems
+          items={shown}
+          pageSize={1}
+          className="combat-effect-page"
+          label={i18n.message("battle.effectPages", "Combat effect pages")}
+        >
           {tile}
         </PagedItems>
       ) : (

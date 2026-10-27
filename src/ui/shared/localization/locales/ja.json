@@ -17,17 +17,47 @@
     "sourceHash": "ed9bd984c55d6166a8e05fc1b014b97a77456418f337e63a04240fb64fe865c4",
     "text": "{{type}}ダメージ {{amount}}"
   },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "dd574aeaa510b0be20dd0227ddd0bbaa3783ee1b9b4e292134e23c38879d70c1",
+    "text": "戦闘効果のページ"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "97f79d4d6d313ce5f202278976899ea4890b90ee3971ad96251475041781ed82",
+    "text": "戦闘効果"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "bce87ae77a03178d4d66ed60dc31c0baac00a71cc2a1f0156e9e2a0a53c8f9e7",
     "text": "戦闘不能"
   },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "f3e9a3bfcb38a7a6d7be47c9dcc4321a540b9dd5593fe6e3bc9848039ee8d895",
+    "text": "{{name}}の体力"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
     "sourceHash": "8019f1bd0af15dc3eeabc690fe0cd1dee308d88ca51bc65a3c157613da5b7115",
     "text": "焚き火"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "f135355684e7cf6dff22d73fea945bcb2bc3029b5cb2e024f78769748cbf0c22",
+    "text": "休息回復のページ"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "254030e6a932038ece5275de0575b13e5f672dd2fcbb9581b3bfde62a511ba10",
+    "text": "休息による回復"
   },
   "campfire.rest": {
     "reviewed": true,
@@ -250,6 +280,54 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "e10054772192f2360d1b61d7b7bd872374a3dbc27eecfa11524a674e54722b08",
     "text": "チーム枠{{slot}}の{{name}}を取り消す"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "838435dfc4d3601f9f32c4378063b99581c4a126d52684c1994313112421d669",
+    "text": "旅を完了"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "9375e3bf1115c60c109d5c0c1c17028abe87e49159c588efdf864d68e52d3e32",
+    "text": "敗北"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "efbcbed4d62207ef4e4f062e5730a5e41064e1473375aeb1c66229a3124505c8",
+    "text": "永続報酬はありません"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "b2e9cd5c98e2aa59b5e7bfa040214537e1a6ab0709f93b1116e159f9aeb7c06e",
+    "text": "旅が終了"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "4761c24a98c2b974104260d86bb8615a5283d8b31549e57854a6518da89df5c0",
+    "text": "旅の報酬"
+  },
+  "results.goldEarned": {
+    "reviewed": true,
+    "source": "Gold earned",
+    "sourceHash": "c53b9d9a6c9c8042749ca41ffe3cd65f4431fffec5d8089d5f900f8e49dcaba8",
+    "text": "獲得ゴールド"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "24bec8d437f9ca179deb8cea1e3025f2664e658f7c6604439a8a3850265d46ac",
+    "text": "メインメニュー"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "5ba8a12f61f4cc8abea42fa33dd42e2fad06afafde509097e953627deefb9259",
+    "text": "帰還"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

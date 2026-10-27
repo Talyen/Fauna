@@ -17,17 +17,47 @@
     "sourceHash": "f801d88f838042fa8c5b4dc1866221894454287eb298ae8b63f857712b31bff7",
     "text": "{{amount}} {{type}}-Schaden"
   },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "9e47b9d6f484d9f0fbbaf4f240014fb4c2b7eb1d6ea3600c3732b9ff45b896ec",
+    "text": "Kampfeffektseiten"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "9f86bad70996e8007c156c47411b8042cf92ded7bf7331e9dbea8f9582744a0c",
+    "text": "Kampfeffekte"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "787e34f6238264e1fe9387983993d1fc90619048294ca6ce7ae9f0727469fe57",
     "text": "K. o."
   },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "3fc5914010c05965b65659e18c422f39e105997917ede4f0ad3733306a037234",
+    "text": "Gesundheit von {{name}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
     "sourceHash": "0feb5be59ff9db8dee98837dfd191bf629ecd5815976423bd29e1c739cdd123d",
     "text": "Lagerfeuer"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "cf8323467a2a31c87b03485b30c37a5407aaaeead25d08e1f2574578d4b8c308",
+    "text": "Erholungsseiten"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "b71d7cd02807f60006456e89c4835062db87896056e36354b07b657c96b8a07b",
+    "text": "Erholung durch Rast"
   },
   "campfire.rest": {
     "reviewed": true,
@@ -250,6 +280,54 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "22e0e6de9394a0d39cb847760da3aa3800a0f6e239ebccd79386afa6d631f409",
     "text": "{{name}} auf Teamplatz {{slot}} rückgängig machen"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "81d581d8e6de69b0bbbddb3302d011c5db116bf3afda5402cabd9008d47fdda1",
+    "text": "Reise abgeschlossen"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "165c6b8d7d06042f9807777418b6012661de8be1e1458b55021cdc5384628d35",
+    "text": "Besiegt"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "577872729691c124b79cc8ec2128063b945ecb3e07823c52b094e32495ba4120",
+    "text": "Keine dauerhaften Belohnungen erhalten"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "2f8610c1d8ae1b841bcb113460850d497796bc845463853ffe207e5401653c22",
+    "text": "Reise beendet"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "56be1b15bf63db424afe39654bdd38fd3ebcb30ae6fa66922d3bff4c69d4f61e",
+    "text": "Reiseerträge"
+  },
+  "results.goldEarned": {
+    "reviewed": true,
+    "source": "Gold earned",
+    "sourceHash": "45873aec4ed40637da40e397a45b691db0fa1ca537e2f922be9743bd794a5b87",
+    "text": "Gold erhalten"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "7e108822e7929a01d2aa6792234246fe437e2f34c10d618d19c40b6e2a3b015c",
+    "text": "Hauptmenü"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "3d7d3a8ba5d335cc7b5a6a9b5a341339226cf03bae50cf95f4fea59c4477d2ef",
+    "text": "Nach Hause zurückgekehrt"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

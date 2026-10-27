@@ -17,17 +17,47 @@
     "sourceHash": "cab9cd2c6b56342a00f6207e6886f4cf1ff9a8a176d728f8a8032153020ac593",
     "text": "{{amount}} de daño de {{type}}"
   },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "efe0a39b777c513eadb8bbd7d84d8103b48615bd35d0c82e799537bf0e444312",
+    "text": "Páginas de efectos de combate"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "f93a4850c07cf5e2619d7200ed3a322ca0d9b45b07bd215f919705d8ef506162",
+    "text": "Efectos de combate"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "16f15239fbd26addf1364a9c8e2eed0b85c242de8836b054226cc44a568e43d8",
     "text": "Fuera de combate"
   },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "95ecdccfb9d8b38b6c754ec3399712aaa02511f4bd060eddfd0a44eb17304967",
+    "text": "Salud de {{name}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
     "sourceHash": "8cc6a7c4e8bd66214999d9841d70d462dbbda3895f3157da590f1df116a3cb98",
     "text": "Fogata"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "5da77de6e4aae34dde8486eaddf3b1bde5caf4e30581d4405a5ec8c689673460",
+    "text": "Páginas de recuperación"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "5fa70ab10a95d8a7bba804b742c0bbbd7b13a6812a06b3676c0506376984fc1c",
+    "text": "Recuperación al descansar"
   },
   "campfire.rest": {
     "reviewed": true,
@@ -250,6 +280,54 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "df79f2296cd65fe4534a70d7f85703eaffa640561a5d627ff346d3a1b9006171",
     "text": "Deshacer {{name}} en el puesto {{slot}} del equipo"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "01512232d632f96d522d0841f50a57dd8077e882dde0828d04541b3923e0baba",
+    "text": "Viaje completado"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "3fe4014d5c0a04fd8dd40020034d7760cb104324566545f5578c978c101bebb9",
+    "text": "Derrota"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "f329d63929789046164df2940b155fe5bd02a995d549f10bf58f3f7619465f90",
+    "text": "No se han obtenido recompensas permanentes"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "750be05f891f15602ac583c7050474e9a5f61fa10249938b979a5ac9b31a3c4c",
+    "text": "Viaje terminado"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "928c7934dde70d7b56015dc92b47966c5b7f18229ea80df0290e354e2a4d1699",
+    "text": "Ganancias del viaje"
+  },
+  "results.goldEarned": {
+    "reviewed": true,
+    "source": "Gold earned",
+    "sourceHash": "e43bfa75ece9826b8bde0b1edeacb7e22a40724745e088f775a1a0a7e18ede4f",
+    "text": "de oro obtenido"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "bd73e77af87d8cb01086065740bc8d37fa97d55e6609d54dccd7feb4142e9362",
+    "text": "Menú principal"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "c2e1b2dc9284280f650784e57c3f340fd8e8f229c030d32da08f977e4c4b8ca5",
+    "text": "Regreso a casa"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

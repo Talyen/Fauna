@@ -32,6 +32,12 @@
   "battle.damage": {
     "text": "{{amount}} {{type}} damage"
   },
+  "battle.effectPages": {
+    "text": "Combat effect pages"
+  },
+  "battle.effects": {
+    "text": "Combat effects"
+  },
   "battle.endTurn": {
     "text": "End turn"
   },
@@ -89,8 +95,17 @@
   "boons.pages": {
     "text": "Boon pages"
   },
+  "campfire.creatureHealth": {
+    "text": "{{name}} Health"
+  },
   "campfire.name": {
     "text": "Campfire"
+  },
+  "campfire.pages": {
+    "text": "Rest recovery pages"
+  },
+  "campfire.recovery": {
+    "text": "Rest recovery"
   },
   "campfire.rest": {
     "text": "Rest"
@@ -379,6 +394,30 @@
   },
   "replacement.knockedOutCreature": {
     "text": "{{creature}}, knocked out"
+  },
+  "results.complete": {
+    "text": "Journey complete"
+  },
+  "results.defeated": {
+    "text": "Defeated"
+  },
+  "results.empty": {
+    "text": "No permanent rewards earned"
+  },
+  "results.ended": {
+    "text": "Journey ended"
+  },
+  "results.gains": {
+    "text": "Journey gains"
+  },
+  "results.goldEarned": {
+    "text": "Gold earned"
+  },
+  "results.mainMenu": {
+    "text": "Main menu"
+  },
+  "results.returned": {
+    "text": "Returned home"
   },
   "rewards.chooseBoon": {
     "text": "Choose a Boon"

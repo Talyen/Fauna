@@ -65,6 +65,18 @@
     "sourceHash": "bc86c72d8fbadf94231894e79b9df50730bd1ae57665ae9efae4d2ddc79be746",
     "text": "{{amount}} dégâts de {{type}}"
   },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "729225599a70d45533ae46d0c5d0147b0bbca2ee208cf8e46e0f5dbc8e019a19",
+    "text": "Pages des effets de combat"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "af305b13a4e798ff3eaa1209c6b9ff43a63c63933d74ccb0a041f96d82366fd9",
+    "text": "Effets de combat"
+  },
   "battle.endTurn": {
     "reviewed": true,
     "source": "End turn",
@@ -179,11 +191,29 @@
     "sourceHash": "709ad0f9b282712c380506d6e740485555c795d4672b56148ec99f1827efa862",
     "text": "Pages de bénédictions"
   },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "52eb70b8b51c445140720f1b6825fee60a03ba592581126245644bb39f474662",
+    "text": "Santé de {{name}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
     "sourceHash": "ff92a7d7e7c93802ced6dfad6e0ffdd24cf35e90d012602b4e1bb611ecc71dd3",
     "text": "Feu de camp"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "0b0058ce4486599f09cf6691610a7579a56d89a4fd75bd6aef471f134e8a6d1a",
+    "text": "Pages de récupération au repos"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "ba06c210e852558d80be570b7ab0beabce5da9050b1cfed2991e84579608db30",
+    "text": "Récupération au repos"
   },
   "campfire.rest": {
     "reviewed": true,
@@ -971,6 +1001,54 @@
     "source": "{{creature}}, knocked out",
     "sourceHash": "332e1841592c4235405a982372d202768d51780780e31830e3047cb595565d18",
     "text": "{{creature}}, K.-O."
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "5532a46ae685e75613aa1688b0dc55a767d15973e01dfdd8cc102be404dc1991",
+    "text": "Voyage terminé"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "d51c69ce95519e8a095a498a05d4ce7adba8e81112dc6188d590670cb18b5dd4",
+    "text": "Défaite"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "74fac3f9f13a48c6845366b7493fc34c15c0a31f59d165de36198ec89c00e417",
+    "text": "Aucune récompense permanente obtenue"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "de94e825f17193b53f4a559b2008859ff6bdfcc710582293d66805136d2b1f67",
+    "text": "Voyage achevé"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "a89a2441155a4cf9d5cdc708f537e7ee339d1049bbcfa2b1a4abeced4774cc20",
+    "text": "Gains du voyage"
+  },
+  "results.goldEarned": {
+    "reviewed": true,
+    "source": "Gold earned",
+    "sourceHash": "2de40d8ed4d1e41fcdbdaced04877ca38cdb40b690e3808cd7834a61f8754fda",
+    "text": "pièces d’or gagnées"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "bbc7b126f0ac48c0f8bde64e65551f08c96092d8dd73278e441aea3fe27b0332",
+    "text": "Menu principal"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "76a39cabc6c7fc8b602cf4a4b822a96d05472c24f9535ce5e7451aa87abbfe21",
+    "text": "Retour à la maison"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

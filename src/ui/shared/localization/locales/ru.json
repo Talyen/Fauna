@@ -17,17 +17,47 @@
     "sourceHash": "55c48e9f1a1b8e2ff74a05f14fafdc05edb0a927188956f13b5b4f2fdf23a194",
     "text": "{{type}}: {{amount}} урона"
   },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "7c0bba4830e902249d18a3c61cd311d013d18c57547157a13a73dca946f23657",
+    "text": "Страницы боевых эффектов"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "d44dccac704a0726ab8fbacab707eb40ec6e2721e5991784e0a18a9fbb5be7d3",
+    "text": "Боевые эффекты"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "cd398b59ae17b96dd8da5b3a0df540da5084ad71a122d20f0790e29368822852",
     "text": "Нокаут"
   },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "f6ec245c99459d264a63819dc02c26f8dfa3d2c31aae9a9b76b4f38b1178ff8c",
+    "text": "Здоровье: {{name}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
     "sourceHash": "8ec0eb8468097e46dff82ed8a30b3196a686cade771987b784105cd3c7471d19",
     "text": "Костёр"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "81453f21a2bf371fccce7da89d3a2e679bd5da133b8b4b3a3b1ddec63b84ce89",
+    "text": "Страницы восстановления"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "0a9ad38cddc084e29f276a966650fa67362f4e4fcf498cea55bb9680ea51946c",
+    "text": "Восстановление на отдыхе"
   },
   "campfire.rest": {
     "reviewed": true,
@@ -250,6 +280,54 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "b73bd6fd85f5994834c8f12bc2da6df78b279c8c9e438bab78acc501437985a4",
     "text": "Отменить замену на {{name}} в ячейке команды {{slot}}"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "0fd31ab01142ad1c6085f175a821b6b38adda26bf6653c489fd30364c3180ab1",
+    "text": "Путешествие завершено"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "da31db4c9979db3b3a8ba676a7be4bc152c81c6dfe0a988eb63b185c461b8fe3",
+    "text": "Поражение"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "f123e8be6a672cd533e2b1fc10378cc5330de8bc9e819fb756dd0cd6b0265adf",
+    "text": "Постоянные награды не получены"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "8f90f1c2557fb4240dd77bab59ef011a3a9b7b801e329977108f0ed812ba41b1",
+    "text": "Путешествие окончено"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "52867d2076ed5d569f5a7473ec0df91a44ea8fd9f865c2d2aa2942434c4084f3",
+    "text": "Награды путешествия"
+  },
+  "results.goldEarned": {
+    "reviewed": true,
+    "source": "Gold earned",
+    "sourceHash": "497e9fbe054030d2cbfb16e430eac0ce91434430bdce6765f85f3b49ef5bbf4b",
+    "text": "золота получено"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "2b4bc5a303f37714a70234f66163c5b5b5471e32eb32f3318f9fa311c02bfb9a",
+    "text": "Главное меню"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "73fdf569e55ed58f1d5ecd954da7a92e028f3b36b76c1431048921ac58528889",
+    "text": "Возвращение домой"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

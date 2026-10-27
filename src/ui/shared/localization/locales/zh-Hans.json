@@ -17,17 +17,47 @@
     "sourceHash": "3f1cc622c5ff1d2f8cdaf4f6999e15c277d035763740443caca5c09114988437",
     "text": "{{amount}} 点{{type}}伤害"
   },
+  "battle.effectPages": {
+    "reviewed": true,
+    "source": "Combat effect pages",
+    "sourceHash": "de09d4225852b5f7701119057f3ee4fcf05c2996ce47d874d43a1fd8f0fc6984",
+    "text": "战斗效果页面"
+  },
+  "battle.effects": {
+    "reviewed": true,
+    "source": "Combat effects",
+    "sourceHash": "c46d82e1741df3f6d26c7185a9d2d6e267a96416dfdb2f679b2269de3fa0b4e5",
+    "text": "战斗效果"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "b92ded67ee66fc4663df36fc87d8142e7a2dd77bb18df1cc5f506306c725c174",
     "text": "击倒"
   },
+  "campfire.creatureHealth": {
+    "reviewed": true,
+    "source": "{{name}} Health",
+    "sourceHash": "bd7f3d6a7ec28fed532cfc0fca3aa5e74159fb21f738b0b7f7ab01c703e724b1",
+    "text": "{{name}}的生命"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
     "sourceHash": "359eae4370469690076f229e0b642c5ae303f1b9e49047f30a7b061d4f5f19c6",
     "text": "篝火"
+  },
+  "campfire.pages": {
+    "reviewed": true,
+    "source": "Rest recovery pages",
+    "sourceHash": "11538a483984a4c60d00ff24c9bd15000118c14a8625a774a6335c6b14a0762c",
+    "text": "休息恢复页面"
+  },
+  "campfire.recovery": {
+    "reviewed": true,
+    "source": "Rest recovery",
+    "sourceHash": "046d8ce6bf38fef0cfe44ebc7f7e0596045246818550797ec81228b6d2cb180f",
+    "text": "休息恢复"
   },
   "campfire.rest": {
     "reviewed": true,
@@ -250,6 +280,54 @@
     "source": "Undo {{name}} in team slot {{slot}}",
     "sourceHash": "dac9a0b97a6233c1cf4d0657d5380031de8ab5a5ef4ff1eb26fb4214aa6f26bf",
     "text": "撤销队伍位置 {{slot}} 中的{{name}}"
+  },
+  "results.complete": {
+    "reviewed": true,
+    "source": "Journey complete",
+    "sourceHash": "89ca5b77b8457caa8dc6dac831139e7ded01df5fd192e6247ef81b31e821fc34",
+    "text": "旅程完成"
+  },
+  "results.defeated": {
+    "reviewed": true,
+    "source": "Defeated",
+    "sourceHash": "e67a5a1bcceeb1fd3db00d7c5020883e98ef335c545289888f461b3d363a3153",
+    "text": "战败"
+  },
+  "results.empty": {
+    "reviewed": true,
+    "source": "No permanent rewards earned",
+    "sourceHash": "372fa7fb4c85e45b2161dcb988f25e716d0deddfd3150795b737d4bda90a38ae",
+    "text": "未获得永久奖励"
+  },
+  "results.ended": {
+    "reviewed": true,
+    "source": "Journey ended",
+    "sourceHash": "ef5a0362538e8b0a2ebef1715338e0dee0a8a261c2b2585275023d41061a6c63",
+    "text": "旅程结束"
+  },
+  "results.gains": {
+    "reviewed": true,
+    "source": "Journey gains",
+    "sourceHash": "3717baadd1028e29126f907a9d11248e7df7800406659be1223d172ffb0f64df",
+    "text": "旅程收获"
+  },
+  "results.goldEarned": {
+    "reviewed": true,
+    "source": "Gold earned",
+    "sourceHash": "442f8791dc5de6ee8ceaf4239e1da2166686d452c624bf759404aca6f645e03c",
+    "text": "获得的金币"
+  },
+  "results.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "10da117057e222690e1385497f09fea49e8e2c25a0e526dacca23ddd55a3bf73",
+    "text": "主菜单"
+  },
+  "results.returned": {
+    "reviewed": true,
+    "source": "Returned home",
+    "sourceHash": "04c4231281a20d6d7597aedef8abea83c02b0b198af27892b530d1d156c91acc",
+    "text": "已返回家园"
   },
   "rewards.chooseBoon": {
     "reviewed": true,
