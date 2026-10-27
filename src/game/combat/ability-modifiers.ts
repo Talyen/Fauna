@@ -39,14 +39,6 @@ export function beforeAbility(
   if (keywords.includes("block") && talentChance(state, "armor.armored-surge", events))
     grantArmor(state, actor, talentRule("armor.armored-surge").amount, events);
 }
-const repeatTalents = [
-  ["burn", "burn.flash-fire"],
-  ["freeze", "freeze.winter-s-grasp"],
-  ["nature", "nature.overgrowth"],
-  ["poison", "poison.venom-strike"],
-  ["stun", "stun.jarring-blow"],
-] as const;
-
 export function talentRepeat(
   state: GameState,
   keywords: readonly ProgressionKeyword[],
@@ -54,6 +46,13 @@ export function talentRepeat(
   events: GameEvent[],
 ) {
   if (enemy) return false;
+  const repeatTalents = [
+    ["burn", "burn.flash-fire"],
+    ["freeze", "freeze.winter-s-grasp"],
+    ["nature", "nature.overgrowth"],
+    ["poison", "poison.venom-strike"],
+    ["stun", "stun.jarring-blow"],
+  ] as const;
   return repeatTalents.some(
     ([keyword, talent]) => keywords.includes(keyword) && talentChance(state, talent, events),
   );
