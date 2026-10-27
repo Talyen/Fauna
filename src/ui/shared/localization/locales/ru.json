@@ -1,4 +1,16 @@
 {
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "cd330a5a570521dedba8c70931de23a765c2c8d58f2f2ce3af476249ae39286b",
+    "text": "{{name}} (запасной)"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "65d9c7ea48328530426bd8eec83b88b45b5ea1a9bb3a09aadf7e72be29cd4dcd",
+    "text": "Поле боя"
+  },
   "battle.block": {
     "reviewed": true,
     "source": "Block {{amount}}",
@@ -10,6 +22,24 @@
     "source": "Block {{previous}} to {{current}}",
     "sourceHash": "4f71b574f27cc82b863036f565115a04061e58b462200622d520b4634038801d",
     "text": "Блок: от {{previous}} до {{current}}"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "061f5debac1f44030afe7d252d32b54462c38c8631e5acc9835e978f06d95046",
+    "text": "Выберите союзника"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "1ca431db5c1dcc2eecd1fb1c42c5c0a50de14c6dc0235c1eafb083eb8497fb2f",
+    "text": "Выберите запасного"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "50eb55a6b10d6de8a409cad098fc211252245cb5076dafcd5055df40c2983229",
+    "text": "Выберите врага"
   },
   "battle.damage": {
     "reviewed": true,
@@ -29,6 +59,18 @@
     "sourceHash": "d44dccac704a0726ab8fbacab707eb40ec6e2721e5991784e0a18a9fbb5be7d3",
     "text": "Боевые эффекты"
   },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "59b29e54bee5481ca40637ad60ebcbb908cc93789503ce1ffc78e6d3ebdcff25",
+    "text": "Завершить ход"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "07aa82e294cb50ee8d8f15abe013988c87ce4bfbec23cde26a6cff2c33e8d4fe",
+    "text": "Ряд врагов"
+  },
   "battle.food": {
     "reviewed": true,
     "source": "Food",
@@ -46,6 +88,30 @@
     "source": "Open menu",
     "sourceHash": "9b48375b4707f4f1c106917358116f3909926079bda38d0718485e05bba0bfe8",
     "text": "Открыть меню"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "805fa126f647e4cdb5627a95b246bbeb53dde3cb5d1e746fe3983f6ffa66be71",
+    "text": "Ряд союзников"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "008ae97b9c1a59c7accf6951849fd6f34cb5c2f1b5c9dfdf3857ce8074e3a2f5",
+    "text": "Пропустить бой"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "02e171fbf87d39dd0b92852f58207d523b3b77c397373f0e3f7b7ca728e9c228",
+    "text": "Выбрать цель: {{name}}"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "9098aa5276c677b60b4a65f096a1ed69f6161a13ecf335375f94b13b669fa040",
+    "text": "{{owner}} · {{target}}"
   },
   "campfire.creatureHealth": {
     "reviewed": true,
@@ -166,6 +232,12 @@
     "source": "Cancel",
     "sourceHash": "119e3a2c89e05b14e64af902b0d574a628e4b5db14a1a4175a9cbb1608a5513b",
     "text": "Отмена"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "cfda79cf8f70f0029f142732530155f90b9f40050a2ad9dfce35e0144df37df0",
+    "text": "Загрузка…"
   },
   "content.boon.bone-charm.name": {
     "reviewed": true,

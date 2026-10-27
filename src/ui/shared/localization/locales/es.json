@@ -1,4 +1,16 @@
 {
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "bf81fef526f32bdc7182f0807d6bf4cf6241103171db468ff16bce797e8fbdbe",
+    "text": "{{name}} (suplente)"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "7e17f35e25a51774296892f2dce02dfe5cc2fde04036110dd90022dc29cf5f2b",
+    "text": "Campo de batalla"
+  },
   "battle.block": {
     "reviewed": true,
     "source": "Block {{amount}}",
@@ -10,6 +22,24 @@
     "source": "Block {{previous}} to {{current}}",
     "sourceHash": "2f200ca7131b72f5e682414901a7bd6065a36d8f7468253e36f7782c0cb11d63",
     "text": "Bloqueo de {{previous}} a {{current}}"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "f06ad55f880cf8bdb1a3cd304870e25f9828bda24a80129d534ec67bfca2d278",
+    "text": "Elige un aliado"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "220b8965dcc92624601141d10120fa997c89f640aaa97271a77710495b818e08",
+    "text": "Elige un suplente"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "91a29c75edb8d889b3abbb47a9f582209027766201176ec570ce4c5599d7ba15",
+    "text": "Elige un enemigo"
   },
   "battle.damage": {
     "reviewed": true,
@@ -29,6 +59,18 @@
     "sourceHash": "f93a4850c07cf5e2619d7200ed3a322ca0d9b45b07bd215f919705d8ef506162",
     "text": "Efectos de combate"
   },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "5be4dab0b0f2f0fe2db7524a2271e2f967d2f01531154dc0337d6fe52d56ac5c",
+    "text": "Terminar turno"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "db8720c005edee684034a0f1fc0b50002658e903bd045116d5d4c1a6cbb7414e",
+    "text": "Fila enemiga"
+  },
   "battle.food": {
     "reviewed": true,
     "source": "Food",
@@ -46,6 +88,30 @@
     "source": "Open menu",
     "sourceHash": "8f1611292a225c98f6dcfb2a7305b22765fbddc7b9cf86861ac97bf962187d05",
     "text": "Abrir menú"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "7a63520872149311770775e4c4d3ce8874e75cc83dcad38af3d1a4e4e9a6dd5a",
+    "text": "Fila aliada"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "b4cc6c46ecadde7c7fd176b3e2cba6a5a56bb4c912914e6937f5dce19fecdfb2",
+    "text": "Saltar combate"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "b1bb14667bb2496aa8b872706eee5a8e6f6c99870519c86b164fee106ca493dc",
+    "text": "Seleccionar a {{name}} como objetivo"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "e24821dab31e1361bad3feadb29a1ba6f3dab20769fd6ed183655dcced94a12c",
+    "text": "{{owner}} · {{target}}"
   },
   "campfire.creatureHealth": {
     "reviewed": true,
@@ -166,6 +232,12 @@
     "source": "Cancel",
     "sourceHash": "e1457ed1e2bf91a58fef5969d4d92ee1114d30375c35fcbd660affc5f4d92f91",
     "text": "Cancelar"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "3dc785246de4d8761dd23972f5c9fef611a39f01a91ed6f6963f6a60d33208af",
+    "text": "Cargando…"
   },
   "content.boon.bone-charm.name": {
     "reviewed": true,

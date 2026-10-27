@@ -1,4 +1,16 @@
 {
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "677fad732b5dc1bbb99e445af1896f95c81323f8db4eda39cbfabb48b3302691",
+    "text": "{{name}}（控え）"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "3c4b4d3baba253d45f30ece82f19e02614fbbb3637889574be3dc4b659cbbc64",
+    "text": "戦場"
+  },
   "battle.block": {
     "reviewed": true,
     "source": "Block {{amount}}",
@@ -10,6 +22,24 @@
     "source": "Block {{previous}} to {{current}}",
     "sourceHash": "1a7f351413536f918872848c814820d6b80c6fab3aaa0a37b66db8876d768be7",
     "text": "ブロック {{previous}} から {{current}}"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "91238dc6534c92f7ad67218e55ce8a07dd239472e12846bc8bb7b345e883645e",
+    "text": "味方を選択"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "8c20ff8e00ec0613cac5465b1fda7173924e8dd4f8d466d50b8996231607e207",
+    "text": "控えを選択"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "572f0027224df43358659122c02f18f04cd96c2c095dc34317b40a292724c782",
+    "text": "敵を選択"
   },
   "battle.damage": {
     "reviewed": true,
@@ -29,6 +59,18 @@
     "sourceHash": "97f79d4d6d313ce5f202278976899ea4890b90ee3971ad96251475041781ed82",
     "text": "戦闘効果"
   },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "72e55994cdac4efafcedd8fbe133cda873fd21007530aff1af9319f8a86174ba",
+    "text": "ターン終了"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "730b104319e29d19a5c4365571f6173d39df46601533b0a8eadf375c01fddc4a",
+    "text": "敵の列"
+  },
   "battle.food": {
     "reviewed": true,
     "source": "Food",
@@ -46,6 +88,30 @@
     "source": "Open menu",
     "sourceHash": "dd2c87698aee70c4e500f4c8ad78df0733d77924a2fdd9445305e2944cb0976e",
     "text": "メニューを開く"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "43dd2a8cabc8955d84c2e46d4ca30d95248fa073e2271d8e4d26b3375bc59cf5",
+    "text": "味方の列"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "afe22c950a3d3cdd09e0e3d4f7ac182356b7d4b1fed996c66dcdad00062d7a39",
+    "text": "戦闘をスキップ"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "f067d3da275e2d29fef02423ee0a2f6b149acf4ced59863296911a3615256756",
+    "text": "{{name}}を対象にする"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "c81b6b3d0d35cd62725d20033edf85898a884fe82a321f8119d420107c9b710b",
+    "text": "{{owner}} · {{target}}"
   },
   "campfire.creatureHealth": {
     "reviewed": true,
@@ -166,6 +232,12 @@
     "source": "Cancel",
     "sourceHash": "056d4c9242f835e8d5fd4e0795f64451621001a801cdae3de09bfaa66b8c1f82",
     "text": "キャンセル"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "aade6585fa0ffaee68cd420c87aecd3748a1258288f93da8a4ff1a847e576e1e",
+    "text": "読み込み中…"
   },
   "content.boon.bone-charm.name": {
     "reviewed": true,

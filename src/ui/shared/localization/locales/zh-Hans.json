@@ -1,4 +1,16 @@
 {
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "7e1e3455b886160ff38f5c0537858a96777fc3a46e3dbc5520e5f03492745a05",
+    "text": "{{name}}（后备）"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "9cffb958ef75385da25e8726c336669fca018270d6c1f87395afbbe0924a2e36",
+    "text": "战场"
+  },
   "battle.block": {
     "reviewed": true,
     "source": "Block {{amount}}",
@@ -10,6 +22,24 @@
     "source": "Block {{previous}} to {{current}}",
     "sourceHash": "3f5d95808b7877bc5c404e1b4f00a5b2c0436e993c5c2a120ddbbb8ebb3d87f0",
     "text": "格挡从 {{previous}} 变为 {{current}}"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "6740e80b12f1208b7bf7da53769bad16fa7e284b70c183192f85d0741671b7e6",
+    "text": "选择一名盟友"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "f161254b75aeac10a175137ef2fb0b724b6c063facb06f0cd7342e8f4c7b1b19",
+    "text": "选择一名后备队员"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "88e55a552c754ec9a7ea004e2b3f66df9ce7e9ed897905e1de0fd0afeda28799",
+    "text": "选择一名敌人"
   },
   "battle.damage": {
     "reviewed": true,
@@ -29,6 +59,18 @@
     "sourceHash": "c46d82e1741df3f6d26c7185a9d2d6e267a96416dfdb2f679b2269de3fa0b4e5",
     "text": "战斗效果"
   },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "5b80f008f24350f2552a586709371139714bd44dc5ac50eb1690f70e3c07e605",
+    "text": "结束回合"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "ad196ebc180a5ac888aef19ac9a159703f9ec876538be13f646af1d18b1b3d4e",
+    "text": "敌方队列"
+  },
   "battle.food": {
     "reviewed": true,
     "source": "Food",
@@ -46,6 +88,30 @@
     "source": "Open menu",
     "sourceHash": "b8c0584f8adb00632c34b25222cfbde80f436eb48d9cc62a5d8662986329628b",
     "text": "打开菜单"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "09dc1f933db9e0aa7e537deaf5c9fb7cdf785ab51a8dd9d87358f0b41625ea32",
+    "text": "我方队列"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "642508755ae3b58298844bd8434be0e01088f32d4e90bb7186f0faced6d949f4",
+    "text": "跳过战斗"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "4bcfc56b30abcbece0125381329c78fb1d62b26b6bf553e553825c01073b09a0",
+    "text": "选择{{name}}为目标"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "03be546630e2b6d259a79f728068c15f93e2c6de9e61304e9ffaf8d4fe05f721",
+    "text": "{{owner}} · {{target}}"
   },
   "campfire.creatureHealth": {
     "reviewed": true,
@@ -166,6 +232,12 @@
     "source": "Cancel",
     "sourceHash": "604f98d5003ba57802913ccf3818130cf31f74ece361d04e556883ced4dcb799",
     "text": "取消"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "4b4fb2b8421ca2d9b5e9462797c23b087695fbbf0aba3a578edad3a9b1c30e59",
+    "text": "加载中…"
   },
   "content.boon.bone-charm.name": {
     "reviewed": true,

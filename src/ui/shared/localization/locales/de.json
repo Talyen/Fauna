@@ -1,4 +1,16 @@
 {
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "0ae3bcc15772d71b3fc05b40f8af710136e98303a3b43fdac6ce0ab72f44a5f6",
+    "text": "{{name}} (Ersatz)"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "878e0d71dd8cf9143afa045a7d8018b48a07bbf30bad876f9bc82eb5b614c6c5",
+    "text": "Schlachtfeld"
+  },
   "battle.block": {
     "reviewed": true,
     "source": "Block {{amount}}",
@@ -10,6 +22,24 @@
     "source": "Block {{previous}} to {{current}}",
     "sourceHash": "d9ee6bed1e36e68f1e9f0af1d1e71506ecff74fff021a7ef8eb29a42e513130a",
     "text": "Block von {{previous}} auf {{current}}"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "b3cf2221ce0bfdf9ec432a0ead12c9b7432b5a8807d743e9397d2fb0a1a459b9",
+    "text": "Verbündeten wählen"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "fffc3d54834f5007a643f9d206f21fef87f0a66bf46327a538eb1790c7890a77",
+    "text": "Ersatz wählen"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "840712869af8a3bbf16e1a536d62c84a2cf3bd1ed9a82173e64a065afdb74520",
+    "text": "Gegner wählen"
   },
   "battle.damage": {
     "reviewed": true,
@@ -29,6 +59,18 @@
     "sourceHash": "9f86bad70996e8007c156c47411b8042cf92ded7bf7331e9dbea8f9582744a0c",
     "text": "Kampfeffekte"
   },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "4e43c4d2a5540e38d3838bf69dccfc6a0a22add460f4f1c7820101802951ac7d",
+    "text": "Zug beenden"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "8ec4099d1e6fbe06b28fe23234b560ac33707837c4dd91636718c193350f89b0",
+    "text": "Gegnerreihe"
+  },
   "battle.food": {
     "reviewed": true,
     "source": "Food",
@@ -46,6 +88,30 @@
     "source": "Open menu",
     "sourceHash": "dc8500dd2d436804d5e835eeb18839c9f9186e91565f1f28d45fd23e59796046",
     "text": "Menü öffnen"
+  },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "111f25359eb0585b08ac0b64283a7631822c0595b074fcaa84be6d897a48d6e4",
+    "text": "Verbündetenreihe"
+  },
+  "battle.skipCombat": {
+    "reviewed": true,
+    "source": "Skip combat",
+    "sourceHash": "dc2c13c84107560212bcdba7101e0291d87ea0ee3f999550f22f3a01514f9400",
+    "text": "Kampf überspringen"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "f8f85b9575ee8b90fa65bc9062b85ad60cbc0961b2600e629361350753b87c1c",
+    "text": "{{name}} als Ziel wählen"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "978f70d3a81c5832b12dfc3f0a904251c6589ff4f2d366dc732d1d5e2a26bd21",
+    "text": "{{owner}} · {{target}}"
   },
   "campfire.creatureHealth": {
     "reviewed": true,
@@ -166,6 +232,12 @@
     "source": "Cancel",
     "sourceHash": "fd09ad73d233655e6f78a51e5806c5140c35e6047b504ee6cbe805f41de842a9",
     "text": "Abbrechen"
+  },
+  "common.loading": {
+    "reviewed": true,
+    "source": "Loading…",
+    "sourceHash": "852ba2ea847e486cb28f3a870bf49be5d7e4858e4f4e23df1e5e3668417e01db",
+    "text": "Wird geladen…"
   },
   "content.boon.bone-charm.name": {
     "reviewed": true,
