@@ -593,6 +593,12 @@
     "sourceHash": "d2a42db23917646ae6d3a0a6d2c904fa09ab1cd5fd98aa4c347aaa59d397565f",
     "text": "Замёрзшие карманные часы"
   },
+  "content.boon.frozen-pocketwatch.rule": {
+    "reviewed": true,
+    "source": "Enemies stay <keyword0>Frozen</keyword0> for {{value0}} additional turn",
+    "sourceHash": "a1072e273466af6db26789f97c1d8d58a0b0db736ff670e29a60d6dcebae6552",
+    "text": "Дополнительных ходов, в течение которых враги остаются <keyword0>замороженными</keyword0>: {{value0}}"
+  },
   "content.boon.furnace-prism.name": {
     "reviewed": true,
     "source": "Furnace Prism",
@@ -652,6 +658,12 @@
     "source": "Hearth Coal",
     "sourceHash": "dd5abced4bbe80ea8b5af546c1151ce42f526a90739605e6caa01ed415181d52",
     "text": "Уголь очага"
+  },
+  "content.boon.hearth-coal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "205205939b39bea39ad446bd0c2378c3f494a498fd6d745a6f906fd321094348",
+    "text": "<keyword0>Горение</keyword0> не может снизить <keyword1>здоровье</keyword1> союзников ниже {{value0}}"
   },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
@@ -730,6 +742,12 @@
     "source": "Last Candle",
     "sourceHash": "09fbd87431e4e91d769ab43c2902e670dadffe5fdf82a28da9bb5968a6c7e88f",
     "text": "Последняя свеча"
+  },
+  "content.boon.last-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies cannot decay below {{value0}}",
+    "sourceHash": "805412404370ab46fe6412e18f25cb2f97cbe613dc036297ff2141ff774edb3f",
+    "text": "<keyword0>Горение</keyword0> врагов не может угаснуть ниже {{value0}}"
   },
   "content.boon.last-threshold.name": {
     "reviewed": true,
@@ -838,6 +856,12 @@
     "source": "Moss Oven Mitt",
     "sourceHash": "974b6428c211c744acdc7646fab704a56801f8b2e921e6a6ff8bc3ab75553403",
     "text": "Прихватка из мха"
+  },
+  "content.boon.moss-oven-mitt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Burn</keyword1>",
+    "sourceHash": "e78d6f9aaf7add538bf26f771cf531d620c92e91533a30658e560ba3ae613869",
+    "text": "<keyword0>Блок</keyword0> вдвое эффективнее против <keyword1>горения</keyword1>"
   },
   "content.boon.nectar-dipper.name": {
     "reviewed": true,
@@ -1139,6 +1163,12 @@
     "sourceHash": "ae379c1c505e2b8cabed810d2100da5cd994d57fc5b5dd4f3529039041226d32",
     "text": "Кольцо тернового сердца"
   },
+  "content.boon.thornheart-ring.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> does not decay when retaliating against <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "90c925a1a6a034c8ddc1ebec82235530185fc72acbcde1945dbc9c2e92dfd30b",
+    "text": "<keyword0>Шипы</keyword0> не угасают при ответном ударе по <keyword1>кровоточащим</keyword1> врагам"
+  },
   "content.boon.thunder-conch.name": {
     "reviewed": true,
     "source": "Thunder Conch",
@@ -1168,6 +1198,12 @@
     "source": "Tidecrest Hairpin",
     "sourceHash": "fe9621fce1d4045e42e135acff854ec41df7020c13b2470980863db926393788",
     "text": "Шпилька гребня прилива"
+  },
+  "content.boon.tidecrest-hairpin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
+    "sourceHash": "02ce305e38fdff4b7bc944f9eaea9b03392326416f1d0b7d9bbe85407da9ced0",
+    "text": "<keyword0>Шипы</keyword0> не могут угаснуть ниже {{value0}}"
   },
   "content.boon.tuning-fork-charm.name": {
     "reviewed": true,

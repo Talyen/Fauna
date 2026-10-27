@@ -593,6 +593,12 @@
     "sourceHash": "f34298c6d522e19da6017d380a40619e2c6c11e6875d65a4da4c70da051e0c76",
     "text": "冰封怀表"
   },
+  "content.boon.frozen-pocketwatch.rule": {
+    "reviewed": true,
+    "source": "Enemies stay <keyword0>Frozen</keyword0> for {{value0}} additional turn",
+    "sourceHash": "7153acaed741096a2607c799e1030e48883929f8622acc9fbeaf20a0aa752ca2",
+    "text": "敌人保持<keyword0>冻结</keyword0>的额外回合数：{{value0}}"
+  },
   "content.boon.furnace-prism.name": {
     "reviewed": true,
     "source": "Furnace Prism",
@@ -652,6 +658,12 @@
     "source": "Hearth Coal",
     "sourceHash": "40f79ad1e1ca4b9d9304e9e0f2c01d1e3ebfe79236a8138f843810b7bbff6609",
     "text": "炉边炭"
+  },
+  "content.boon.hearth-coal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "2d8b1ce75a9e01dce699d2155bad71310ab7d386499862435ca040873b80f318",
+    "text": "<keyword0>灼烧</keyword0>不会使盟友的<keyword1>生命</keyword1>降至{{value0}}以下"
   },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
@@ -730,6 +742,12 @@
     "source": "Last Candle",
     "sourceHash": "068c60e34a6d97118041b218d81ff3972bf3d7a89733619d44f644a6009029fe",
     "text": "最后的蜡烛"
+  },
+  "content.boon.last-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies cannot decay below {{value0}}",
+    "sourceHash": "07a3be365f21c50dc247e35ed18de850414740de0d44576dcdbfd47769ed9f07",
+    "text": "敌人身上的<keyword0>灼烧</keyword0>衰减时不会低于{{value0}}"
   },
   "content.boon.last-threshold.name": {
     "reviewed": true,
@@ -838,6 +856,12 @@
     "source": "Moss Oven Mitt",
     "sourceHash": "65a73d52a78fdc89c4199f9d3eb70f7a4985d5ee3dad7236f0b4de6520d02a0a",
     "text": "苔藓隔热手套"
+  },
+  "content.boon.moss-oven-mitt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Burn</keyword1>",
+    "sourceHash": "0d49dd5ad0ccba78d158bd960e979bcec4f0b466a41c3838c72f3e3a871cc648",
+    "text": "<keyword0>格挡</keyword0>对<keyword1>灼烧</keyword1>的效果翻倍"
   },
   "content.boon.nectar-dipper.name": {
     "reviewed": true,
@@ -1139,6 +1163,12 @@
     "sourceHash": "493c1170a9f7948f8d1d11d002ada460042fc85040d0ecf2b5151bbc760116e7",
     "text": "荆心戒指"
   },
+  "content.boon.thornheart-ring.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> does not decay when retaliating against <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "187206de83080d7d8db18e7ded9098240f7863067a3edb445d1679c84d656197",
+    "text": "反击<keyword1>流血</keyword1>的敌人时，<keyword0>荆棘</keyword0>不会衰减"
+  },
   "content.boon.thunder-conch.name": {
     "reviewed": true,
     "source": "Thunder Conch",
@@ -1168,6 +1198,12 @@
     "source": "Tidecrest Hairpin",
     "sourceHash": "a854d75cfd95d60ede03b04450a09b8ab3a126e0329648d97aba1b87f0408125",
     "text": "潮峰发簪"
+  },
+  "content.boon.tidecrest-hairpin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
+    "sourceHash": "dd3676067eb3607d50367f9702e205c40b2827b76ee3fa8e449ac9bd36ef8959",
+    "text": "<keyword0>荆棘</keyword0>衰减时不会低于{{value0}}"
   },
   "content.boon.tuning-fork-charm.name": {
     "reviewed": true,

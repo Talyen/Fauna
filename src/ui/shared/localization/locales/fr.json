@@ -593,6 +593,12 @@
     "sourceHash": "9056b7fe8beab0a6ce0dfe490ff4358e335acf19b2356c7762937d4173f6f597",
     "text": "Montre à gousset gelée"
   },
+  "content.boon.frozen-pocketwatch.rule": {
+    "reviewed": true,
+    "source": "Enemies stay <keyword0>Frozen</keyword0> for {{value0}} additional turn",
+    "sourceHash": "87eb5da100df0f034ffb0ea64f878f05ad0490164276eef3639a46563f6ba1ef",
+    "text": "Tours supplémentaires pendant lesquels les ennemis restent <keyword0>gelés</keyword0> : {{value0}}"
+  },
   "content.boon.furnace-prism.name": {
     "reviewed": true,
     "source": "Furnace Prism",
@@ -652,6 +658,12 @@
     "source": "Hearth Coal",
     "sourceHash": "add4e05f5efb77b0bb79e4dfd64afbd27962e52f778aa98fd9d4fe9562067255",
     "text": "Braise du foyer"
+  },
+  "content.boon.hearth-coal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "8da0ba03f3b8aab923950d5348ec5795adf3846948e33e8b18c4522847990894",
+    "text": "La <keyword0>Brûlure</keyword0> ne peut pas réduire la <keyword1>Santé</keyword1> des alliés sous {{value0}}"
   },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
@@ -730,6 +742,12 @@
     "source": "Last Candle",
     "sourceHash": "fcb9ba5267a4689ee156269010e38fbee48c110822a8fbf331b7615e5f74ec3f",
     "text": "Dernière bougie"
+  },
+  "content.boon.last-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies cannot decay below {{value0}}",
+    "sourceHash": "59943ae5779f4168f2135b8b88a758afd5ff4cb4a29553fb4406390fa77b45ba",
+    "text": "La <keyword0>Brûlure</keyword0> sur les ennemis ne peut pas décroître sous {{value0}}"
   },
   "content.boon.last-threshold.name": {
     "reviewed": true,
@@ -844,6 +862,12 @@
     "source": "Moss Oven Mitt",
     "sourceHash": "504b31e93d2fa1ecfbe8234f778cb9dbcbde19c267231ec3ade6c1f843ea5493",
     "text": "Gant de four moussu"
+  },
+  "content.boon.moss-oven-mitt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Burn</keyword1>",
+    "sourceHash": "22246da5df830ac477e58b680e2761ea440882256bf95654705e4400cd12471b",
+    "text": "Le <keyword0>Blocage</keyword0> est deux fois plus efficace contre la <keyword1>Brûlure</keyword1>"
   },
   "content.boon.nectar-dipper.name": {
     "reviewed": true,
@@ -1151,6 +1175,12 @@
     "sourceHash": "5a2710a0a6b720a9cbb1c9fac4453dfb166a8a39658f01604ad0eadb5ae4c466",
     "text": "Anneau cœur d’épines"
   },
+  "content.boon.thornheart-ring.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> does not decay when retaliating against <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "5b1830d2965aa90f1fcd32a5108415f746211bdfd4459d50b61a7d76f53f3e07",
+    "text": "Les <keyword0>Épines</keyword0> ne décroissent pas en ripostant aux ennemis en <keyword1>Saignement</keyword1>"
+  },
   "content.boon.thunder-conch.name": {
     "reviewed": true,
     "source": "Thunder Conch",
@@ -1180,6 +1210,12 @@
     "source": "Tidecrest Hairpin",
     "sourceHash": "069ea4db0fcd8b4ca1ee31fb030a5f2b751987ad1b1b4c7c1670c337dbdc69e0",
     "text": "Épingle à cheveux de la crête des marées"
+  },
+  "content.boon.tidecrest-hairpin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
+    "sourceHash": "71b874e8ab8320f6d326b1a599e8bc7b0d030beacaabed91c85c3ab414e7a860",
+    "text": "Les <keyword0>Épines</keyword0> ne peuvent pas décroître sous {{value0}}"
   },
   "content.boon.tuning-fork-charm.name": {
     "reviewed": true,

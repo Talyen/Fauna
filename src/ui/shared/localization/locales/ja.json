@@ -593,6 +593,12 @@
     "sourceHash": "052235072450abb79b0ae25f73d9252ba9774869e722f24eee0662597cd72db2",
     "text": "凍った懐中時計"
   },
+  "content.boon.frozen-pocketwatch.rule": {
+    "reviewed": true,
+    "source": "Enemies stay <keyword0>Frozen</keyword0> for {{value0}} additional turn",
+    "sourceHash": "9d023302c20a7837cf106367380516f86d64e57e003733e978dc4f9a798aa8aa",
+    "text": "敵が<keyword0>凍結</keyword0>したままの追加ターン数：{{value0}}"
+  },
   "content.boon.furnace-prism.name": {
     "reviewed": true,
     "source": "Furnace Prism",
@@ -652,6 +658,12 @@
     "source": "Hearth Coal",
     "sourceHash": "e33a1ef60131eebede11b02eb03da154a64bd2915ff8cbcbccb86829bd6a4b9c",
     "text": "暖炉の炭"
+  },
+  "content.boon.hearth-coal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "0496f2b0bdd928304a453968e74f85c7b5aac93ef44e7013c5718aa1e9bdb9ab",
+    "text": "<keyword0>炎上</keyword0>で味方の<keyword1>体力</keyword1>が{{value0}}未満になることはない"
   },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
@@ -730,6 +742,12 @@
     "source": "Last Candle",
     "sourceHash": "85b95a04f244bd42e5cdf1a1e3c79ed9751c0ed6dad23360e75eac90fbc0a998",
     "text": "最後のろうそく"
+  },
+  "content.boon.last-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies cannot decay below {{value0}}",
+    "sourceHash": "89b092651863e06cdec71062d7997cb66cdaa279cc7308fbf6f54b4219d8f18f",
+    "text": "敵の<keyword0>炎上</keyword0>は減衰しても{{value0}}を下回らない"
   },
   "content.boon.last-threshold.name": {
     "reviewed": true,
@@ -838,6 +856,12 @@
     "source": "Moss Oven Mitt",
     "sourceHash": "0943766a7f95cee4350f2190f305388c5e5b88279dae355178b1a2f576d804b4",
     "text": "苔のミトン"
+  },
+  "content.boon.moss-oven-mitt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Burn</keyword1>",
+    "sourceHash": "28aa8a60b6b1c38e0524c4dd9967c91a2c507aa08486ff536068013e216aa681",
+    "text": "<keyword0>ブロック</keyword0>は<keyword1>炎上</keyword1>に対して2倍の効果を持つ"
   },
   "content.boon.nectar-dipper.name": {
     "reviewed": true,
@@ -1139,6 +1163,12 @@
     "sourceHash": "0bc7f0153d130eaa5a64e9ac95d5caf50e890731dffdacb570ca45486fce1e57",
     "text": "茨の心の指輪"
   },
+  "content.boon.thornheart-ring.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> does not decay when retaliating against <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "96207cfc46acaeda89f1e3a6412671ff439c44a06f88e539615219155fa166d4",
+    "text": "<keyword1>出血</keyword1>状態の敵に反撃する時、<keyword0>棘</keyword0>は減衰しない"
+  },
   "content.boon.thunder-conch.name": {
     "reviewed": true,
     "source": "Thunder Conch",
@@ -1168,6 +1198,12 @@
     "source": "Tidecrest Hairpin",
     "sourceHash": "1531ee5e4e8364868673fe85fdfa048e61dc9e1aa9c1beaa0a9e15b3d9848f7d",
     "text": "潮の峰のかんざし"
+  },
+  "content.boon.tidecrest-hairpin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
+    "sourceHash": "b6344bfb53fd1e781d69335d39ca39874c6329490bcc7c46071fc7a114e87ca6",
+    "text": "<keyword0>棘</keyword0>は減衰しても{{value0}}を下回らない"
   },
   "content.boon.tuning-fork-charm.name": {
     "reviewed": true,

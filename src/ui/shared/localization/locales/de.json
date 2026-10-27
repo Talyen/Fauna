@@ -593,6 +593,12 @@
     "sourceHash": "b3b46fa1c1c99cda781aefbd1b4b2516827e79c9c4dcbac49635359883bf7b69",
     "text": "Gefrorene Taschenuhr"
   },
+  "content.boon.frozen-pocketwatch.rule": {
+    "reviewed": true,
+    "source": "Enemies stay <keyword0>Frozen</keyword0> for {{value0}} additional turn",
+    "sourceHash": "0256cd46991ac1afdbb43637fc37f50beb1f410cc1ead6cf92c87d3a03e8e6e9",
+    "text": "Zusätzliche Züge, die Gegner <keyword0>eingefroren</keyword0> bleiben: {{value0}}"
+  },
   "content.boon.furnace-prism.name": {
     "reviewed": true,
     "source": "Furnace Prism",
@@ -652,6 +658,12 @@
     "source": "Hearth Coal",
     "sourceHash": "86dbc67df9b6c63ac191b52fc67bc7d283e48c67108274c5d5c83d173e68b62f",
     "text": "Herdkohle"
+  },
+  "content.boon.hearth-coal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "ee109ce4718202de65aa486a65f6d41068c0ac9a17c5e49ce9bfc428aea69174",
+    "text": "<keyword0>Brand</keyword0> kann die <keyword1>Gesundheit</keyword1> von Verbündeten nicht unter {{value0}} senken"
   },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
@@ -730,6 +742,12 @@
     "source": "Last Candle",
     "sourceHash": "0a2aaf8cf30c57cd232ae66ac4d57630b5508936d11dc636f4cd657e8895ec06",
     "text": "Letzte Kerze"
+  },
+  "content.boon.last-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies cannot decay below {{value0}}",
+    "sourceHash": "1c40841730aa3cf87d8e5a18e21e623d1a4c16a494fa58dffd53c70d1db960cd",
+    "text": "<keyword0>Brand</keyword0> auf Gegnern kann nicht unter {{value0}} verfallen"
   },
   "content.boon.last-threshold.name": {
     "reviewed": true,
@@ -838,6 +856,12 @@
     "source": "Moss Oven Mitt",
     "sourceHash": "101b9bb1930ca6e67351e67bfe5a8be5ce8fb8851fb7299db2a60834571088b3",
     "text": "Moos-Ofenhandschuh"
+  },
+  "content.boon.moss-oven-mitt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Burn</keyword1>",
+    "sourceHash": "ebad6d204c74de24181d8b1aee0a2eb3bc418aa7ae8e9893da76dd8e8d3bdda6",
+    "text": "<keyword0>Block</keyword0> ist gegen <keyword1>Brand</keyword1> doppelt so wirksam"
   },
   "content.boon.nectar-dipper.name": {
     "reviewed": true,
@@ -1139,6 +1163,12 @@
     "sourceHash": "11a21968eb864b3ab338e17b31b8d4fdd7234ff0d1db2155a88db46be63cfc73",
     "text": "Dornenherzring"
   },
+  "content.boon.thornheart-ring.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> does not decay when retaliating against <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "0d21c3d5a01e782bae5437f9b2c13ad261ad37ce79933744b54c60eb2d617e66",
+    "text": "<keyword0>Dornen</keyword0> verfallen nicht bei Gegenangriffen auf <keyword1>blutende</keyword1> Gegner"
+  },
   "content.boon.thunder-conch.name": {
     "reviewed": true,
     "source": "Thunder Conch",
@@ -1168,6 +1198,12 @@
     "source": "Tidecrest Hairpin",
     "sourceHash": "a83b8fd580b9f50f4f0f495d0bd5ca1da44a1e59e58e53144dff665a940e1be1",
     "text": "Gezeitenkamm-Haarnadel"
+  },
+  "content.boon.tidecrest-hairpin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
+    "sourceHash": "c7bfbba29c1d0c635da4db91df1c031fd5d142ade05305b70c1b6be0707962d4",
+    "text": "<keyword0>Dornen</keyword0> können nicht unter {{value0}} verfallen"
   },
   "content.boon.tuning-fork-charm.name": {
     "reviewed": true,

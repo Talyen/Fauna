@@ -593,6 +593,12 @@
     "sourceHash": "f0cc15051c8fbd20e5a1962c672388f654af66808309e8453380dee8c0dddbbe",
     "text": "Relógio de bolso congelado"
   },
+  "content.boon.frozen-pocketwatch.rule": {
+    "reviewed": true,
+    "source": "Enemies stay <keyword0>Frozen</keyword0> for {{value0}} additional turn",
+    "sourceHash": "6845071bff35c46880241ec80b60b545c91da4505159668662e96122192e900c",
+    "text": "Turnos adicionais que os inimigos permanecem <keyword0>congelados</keyword0>: {{value0}}"
+  },
   "content.boon.furnace-prism.name": {
     "reviewed": true,
     "source": "Furnace Prism",
@@ -652,6 +658,12 @@
     "source": "Hearth Coal",
     "sourceHash": "fcbd15e0d6305ef3befe6ec4485fee2b4e6719f5a3ea93e2dd27460f2b8d9bd0",
     "text": "Carvão da lareira"
+  },
+  "content.boon.hearth-coal.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
+    "sourceHash": "be7e200525a67a623ba75df6cb400ff3d6e124dbdc2482a45740c402ec49aa9e",
+    "text": "<keyword0>Queimadura</keyword0> não pode reduzir a <keyword1>Saúde</keyword1> dos aliados abaixo de {{value0}}"
   },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
@@ -730,6 +742,12 @@
     "source": "Last Candle",
     "sourceHash": "0d2147650f6dacc01552e6c60388901a8f0578aeb6ce323671002537b27a2786",
     "text": "Última vela"
+  },
+  "content.boon.last-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> on enemies cannot decay below {{value0}}",
+    "sourceHash": "5e04c234ccf461c234fd0ba734c32f64dd857f625f64d35a0009baf15f32f6d7",
+    "text": "<keyword0>Queimadura</keyword0> em inimigos não pode decair abaixo de {{value0}}"
   },
   "content.boon.last-threshold.name": {
     "reviewed": true,
@@ -838,6 +856,12 @@
     "source": "Moss Oven Mitt",
     "sourceHash": "93ebea41e9e78d8dd096621f8fb6a5fe2f1377b61afe6360edeb18887f6818b8",
     "text": "Luva de forno musgosa"
+  },
+  "content.boon.moss-oven-mitt.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> is twice as effective against <keyword1>Burn</keyword1>",
+    "sourceHash": "b3e7ee051fa6be013e17267d3be10a7bb3e17d85c22eabab734d85fa768f94d3",
+    "text": "<keyword0>Bloqueio</keyword0> é duas vezes mais eficaz contra <keyword1>Queimadura</keyword1>"
   },
   "content.boon.nectar-dipper.name": {
     "reviewed": true,
@@ -1139,6 +1163,12 @@
     "sourceHash": "1b1ade3b1de1d9eed6d52aa387e7903c5fca86a9675d370502fee0a13198accf",
     "text": "Anel de coração espinhoso"
   },
+  "content.boon.thornheart-ring.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> does not decay when retaliating against <keyword1>Bleeding</keyword1> enemies",
+    "sourceHash": "1f13618178cd40c1b0767764a1ec16dfd1efc0179a88a941685e9d1c5d4b9ed5",
+    "text": "<keyword0>Espinhos</keyword0> não decaem ao retaliar inimigos com <keyword1>Sangramento</keyword1>"
+  },
   "content.boon.thunder-conch.name": {
     "reviewed": true,
     "source": "Thunder Conch",
@@ -1168,6 +1198,12 @@
     "source": "Tidecrest Hairpin",
     "sourceHash": "905437204b09eda4c836b0738686cc3379d920bffe870524cc49cd5ff4389dac",
     "text": "Grampo da crista da maré"
+  },
+  "content.boon.tidecrest-hairpin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
+    "sourceHash": "726b37d0ad0997e7d3aeb9ee999cb65124cebf087824861fe58976ba32e23399",
+    "text": "<keyword0>Espinhos</keyword0> não podem decair abaixo de {{value0}}"
   },
   "content.boon.tuning-fork-charm.name": {
     "reviewed": true,
