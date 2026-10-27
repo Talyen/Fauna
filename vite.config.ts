@@ -54,8 +54,8 @@ export default defineConfig(({ command }) => ({
       },
     },
     react(),
-    // Compiler adoption is measured by the paired performance workflow before becoming the default.
-    ...(process.env.FAUNA_REACT_COMPILER === "1"
+    // Keep an uncompiled build available for the paired performance workflow.
+    ...(process.env.FAUNA_REACT_COMPILER !== "0"
       ? [babel({ plugins: ["babel-plugin-react-compiler"] })]
       : []),
     tailwind(),
