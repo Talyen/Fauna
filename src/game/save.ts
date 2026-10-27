@@ -13,7 +13,6 @@ import {
   starterSpecies,
   starterOfferPool,
   STARTER_OFFER_COUNT,
-  collectedSpecies,
   KEYWORDS,
   validTalentSelection,
 } from "./progression";
@@ -79,7 +78,7 @@ function validateCollection(state: GameState) {
   invalid(encountered.size !== state.discovery.encountered.length || !unique(state.boons));
   invalid(state.phase === "draft" && state.boons.length > 0);
   invalid(SPECIES.some(({ id }) => state.discovery.recruited[id] !== undefined && !encountered.has(id)));
-  const starterPool = starterSpecies(state);
+  const starterPool = state.selected.length ? starterSpecies(state) : [];
   const offerPool = state.phase === "draft" ? starterOfferPool(state) : [];
   const count = state.phase === "draft" ? starterCount(state) : 0;
   const drafting = state.phase === "draft" && state.selected.length < count;
@@ -152,7 +151,6 @@ function validateExpedition(state: GameState) {
 }
 
 function validateRoster(state: GameState) {
-  const collected = collectedSpecies(state);
   const roster = [...state.team, ...state.reserves];
   invalid(!uniqueBy(roster, (c) => c.id) || !uniqueBy(state.cards, (c) => c.id));
   invalid(state.team.length + state.reserves.length > 5);
@@ -164,7 +162,7 @@ function validateRoster(state: GameState) {
   // Reserve battle-generated identities before a destination can create those combatants.
   invalid(roster.some((unit) => /^(?:enemy-|echo-)/.test(unit.id)));
   invalid(!uniqueBy(roster, (creature) => creature.species));
-  invalid(roster.some((creature) => !collected.includes(creature.species)));
+  invalid(roster.some((creature) => state.discovery.recruited[creature.species] === undefined));
   invalid(roster.some((c) => c.health > species(c.species).health));
   const teamById = new Map(state.team.map((unit) => [unit.id, unit]));
   const cardIdsBySpecies = new Map<string, Set<string>>();
@@ -329,6 +327,7 @@ function validateBattle(state: BattleState) {
       battle.earnedGold > state.currency ||
       battle.earnedGold > state.journey.currency,
   );
+  // Unique zones containing only known IDs and matching the unique card count cover every card.
   invalid(zoneIds.size !== zoneCount || unknownZoneCard);
   const roster = [...state.team, ...state.reserves];
   const capacity = handCapacity(state);
@@ -338,8 +337,7 @@ function validateBattle(state: BattleState) {
       !battle.enemies.some((e) => e.health > 0) ||
       battle.hand.length > capacity ||
       (battle.buffer.length > 0 && battle.hand.length < capacity) ||
-      zoneCount !== state.cards.length ||
-      state.cards.some((c) => !zoneIds.has(c.id)),
+      zoneCount !== state.cards.length,
   );
   validateEnemyDecks(state);
   validateMinions(state);
@@ -386,7 +384,7 @@ function validateMinions(state: BattleState) {
         owner.species !== "memento" ||
         unit.health > unit.maxHealth ||
         ![6, 8, 10, 12].includes(unit.maxHealth) ||
-        ![0, 1].some((slot) => unit.id === `echo-${unit.minion.ownerId}-${slot}`) ||
+        (unit.id !== `echo-${unit.minion.ownerId}-0` && unit.id !== `echo-${unit.minion.ownerId}-1`) ||
         unit.combat.deathDoorUsed ||
         unit.combat.grace > 0,
     );

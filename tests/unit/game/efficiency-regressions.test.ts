@@ -14,6 +14,7 @@ import {
   drawHasAnotherCard,
   journeyReturnHasDraw,
   recoverBrokenGuard,
+  redrawHand,
 } from "../../../src/game/card-zones";
 import { chooseBattleCommand, rankedBattleChoices } from "../../../src/application/battle-policy";
 import { createBattleActor } from "../../../src/application/battle-actor";
@@ -524,4 +525,74 @@ it("preserves reflected status targeting and random decisions", () => {
   expect(target.combat!.poison).toBe(2);
   expect(source.combat.poison).toBe(2);
   expect(decisions).toEqual([{ kind: "index", size: state.battle.enemies.length }]);
+});
+
+it("keeps promotion, pile order and randomness when draw eligibility is empty", () => {
+  for (const method of ["owner", "keyword", "journey"] as const) {
+    const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+    const card = state.cards[0]!;
+    state.battle.draw = [card.id];
+    state.battle.discard = [];
+    state.battle.hand = [];
+    state.battle.buffer = [state.cards[1]!.id];
+    state.boons = ["journey-loom"];
+    const rng = state.rng;
+    const events: Parameters<typeof draw>[2] = [];
+    if (method === "owner") expect(drawOwner(state, "absent", events)).toBe(false);
+    else if (method === "keyword") drawKeyword(state, "light", events);
+    else journeyReturn(state, card.ownerId, events);
+    expect(state.battle.hand).toEqual([state.cards[1]!.id]);
+    expect(state.battle.draw).toEqual([card.id]);
+    expect(state.rng).toBe(rng);
+    expect(events).toEqual([]);
+  }
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.battle.hand = [];
+  const before = structuredClone(state.battle);
+  const rng = state.rng;
+  redrawHand(state, []);
+  expect(state.battle).toEqual(before);
+  expect(state.rng).toBe(rng);
+});
+
+it("rejects duplicate and missing cards in resumed battle zones", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const zones = [state.battle.draw, state.battle.hand, state.battle.buffer, state.battle.discard];
+  const occupied = zones.filter((zone) => zone.length > 0);
+  const id = occupied[0]![0]!;
+  occupied[0]!.splice(0, 1);
+  expect(() => decodeSave(encodeSave(state))).toThrow("Save contains inconsistent game data.");
+  occupied[0]!.push(id, id);
+  expect(() => decodeSave(encodeSave(state))).toThrow("Save contains inconsistent game data.");
+});
+
+it("uses the borrowing creature's free play when a fallen owner's card is inspected", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["oathara", "mossguard"])));
+  const [guide, fallen] = state.team;
+  fallen!.health = 0;
+  guide!.combat!.freeCard = true;
+  const card = state.cards.find(
+    (entry) => entry.ownerId === fallen!.id && entry.definitionId === "mossguard-attack",
+  )!;
+  state.battle.hand = [card.id];
+  state.battle.mana = 0;
+  expect(cardActor(state, card)).toBe(guide);
+  expect(cardCost(card, state)).toBe(0);
+  expect(inspectCardPlay(state, card.id).allowed).toBe(true);
+  expect(availablePlays(state).map((play) => play.card.id)).toEqual([card.id]);
+});
+
+it("handles a single discarded card consistently for recovery and draw previews", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["wisterelle", "mossguard"])));
+  const [owner, ally] = state.team;
+  const own = state.cards.find((card) => card.ownerId === owner!.id)!;
+  const other = state.cards.find((card) => card.ownerId === ally!.id)!;
+  state.battle.draw = [];
+  state.battle.discard = [other.id];
+  expect(discardDrawCards(state, owner!.id)).toEqual([other]);
+  expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(true);
+  ally!.health = 0;
+  expect(discardDrawCards(state, owner!.id)).toEqual([]);
+  expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(false);
 });

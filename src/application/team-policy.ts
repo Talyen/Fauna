@@ -1,4 +1,4 @@
-import { cardKeywords, creaturePassive } from "../game/progression";
+import { cardKeywords, creaturePassiveTier } from "../game/progression";
 import { speciesCards, type SpeciesId } from "../game/content";
 import { permanentCardCopies } from "../game/card-kit";
 import type { GameState } from "../game/types";
@@ -48,7 +48,7 @@ export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
   const result = new Set<string>();
   for (const kind of kinds) {
     for (const value of cardCapabilities(kind)) result.add(value);
-    for (const effect of creaturePassive(state, kind).effects) {
+    for (const effect of creaturePassiveTier(state, kind).effects) {
       if (effect.kind === "courtRemembers") {
         result.add("attack");
         result.add("water");
@@ -107,7 +107,7 @@ export function offenseValue(state: GameState, kind: SpeciesId): number {
     values = { authored, reactive };
     authoredOffense.set(kind, values);
   }
-  const passive = creaturePassive(state, kind).effects.reduce(
+  const passive = creaturePassiveTier(state, kind).effects.reduce(
     (sum, effect) =>
       sum +
       (effect.kind === "courtRemembers"

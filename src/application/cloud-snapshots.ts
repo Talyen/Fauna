@@ -67,7 +67,7 @@ export async function snapshot(
   return snapshotSchema.parse({ ...record, id: await sha(body(record)) });
 }
 export async function parseSnapshot(raw: string, profile: string): Promise<CloudSnapshot> {
-  if (textEncoder.encode(raw).length > MAX_SNAPSHOT_BYTES)
+  if (raw.length > MAX_SNAPSHOT_BYTES || textEncoder.encode(raw).length > MAX_SNAPSHOT_BYTES)
     throw new Error("Cloud snapshot exceeds the size limit.");
   const parsed = snapshotSchema.safeParse(JSON.parse(raw));
   if (!parsed.success) throw new Error("Invalid cloud metadata.");

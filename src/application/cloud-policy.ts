@@ -1,6 +1,8 @@
 import type { CloudSnapshot } from "./cloud-snapshots";
 
 export function newestHeads(records: readonly CloudSnapshot[]) {
+  if (records.length === 0) return [];
+  if (records.length === 1) return records[0]!.ancestors.includes(records[0]!.id) ? [] : records.slice();
   const byId = new Map<string, CloudSnapshot>();
   for (const record of records) byId.set(record.id, record);
   const unique = [...byId.values()];

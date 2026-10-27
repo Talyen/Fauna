@@ -25,7 +25,7 @@ export function createBrowserPlatform(storage?: Storage): Platform {
         return results;
       },
       async write(data, isRecoverable = () => false) {
-        if (new TextEncoder().encode(data).length > saveFormat.maxBytes)
+        if (data.length > saveFormat.maxBytes || new TextEncoder().encode(data).length > saveFormat.maxBytes)
           throw new Error("Invalid save payload.");
         const source = storage ?? window.localStorage;
         // Only application-approved checkpoints may displace recovery slots.

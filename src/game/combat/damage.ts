@@ -6,7 +6,7 @@ import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
-import { hasTalent, creaturePassive, passiveAmount } from "../progression";
+import { hasTalent, creaturePassiveTier, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import {
@@ -122,7 +122,7 @@ export function* bounce(
   const { effect } = action;
   const allied = !isEnemy(source);
   let visited: Set<string> | undefined;
-  for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
+  for (const entry of creaturePassiveTier(allied ? state : undefined, source.species).effects) {
     if (entry.kind !== "bounce" || entry.effect !== effect) continue;
     visited ??= new Set([first.id]);
     const visitedTargets = visited;

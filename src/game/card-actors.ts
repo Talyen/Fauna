@@ -17,13 +17,18 @@ export function cardActor(
   const owner = state.team.find((unit) => unit.id === card.ownerId);
   if (!owner || owner.health > 0 || state.phase !== "battle") return owner;
   let fallback: Creature | undefined;
+  let cardDefinition: ReturnType<typeof definition> | undefined;
   for (const guide of state.team) {
     if (guide.health <= 0) continue;
     const limit = unfinishedJourneyLimit(state, guide);
     if (limit <= 0) continue;
     fallback ??= guide;
     if (
-      !controlled(guide, state, card.definitionId ? definition(card.definitionId) : undefined) &&
+      !controlled(
+        guide,
+        state,
+        card.definitionId ? (cardDefinition ??= definition(card.definitionId)) : undefined,
+      ) &&
       (guide.combat?.fallenCardsPlayedThisTurn ?? 0) < limit
     )
       return guide;

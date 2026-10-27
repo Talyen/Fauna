@@ -124,6 +124,7 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
   // this cache local because the live turn draft can change after every play.
   const values = enemy.deck ? new Map<CardDefinition, Map<string, number>>() : undefined;
   let best: EnemyChoice | undefined;
+  let self: string[] | undefined;
   for (const def of cards) {
     if (enemy.deck && def.cost > enemy.deck.mana) continue;
     const recipients =
@@ -131,7 +132,7 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
         ? (fallenAllies ??= recipientIds(state.battle.enemies, false))
         : cardTargeting(def) === "ally"
           ? (livingAllies ??= recipientIds(battlefield(state, "enemy"), true))
-          : [enemy.id];
+          : (self ??= [enemy.id]);
     for (const allyTargetId of recipients) {
       let cardValues = values?.get(def);
       if (values && !cardValues) values.set(def, (cardValues = new Map()));

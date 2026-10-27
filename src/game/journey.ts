@@ -27,10 +27,7 @@ export function offerStarters(state: GameState) {
     return;
   }
   const shuffled = shuffle(state, starterOfferPool(state));
-  state.starterOffers = Array.from(
-    { length: Math.min(STARTER_OFFER_COUNT, shuffled.length) },
-    (_, index) => shuffled[index]!,
-  );
+  state.starterOffers = shuffled.slice(0, STARTER_OFFER_COUNT);
 }
 function prepareEncounter(state: GameState) {
   const route = state.expedition;
@@ -158,9 +155,10 @@ function finishBattle(state: BattleState, defeated: boolean) {
   const xp = bankBattleXP(state);
   const earnedGold = state.battle.earnedGold;
   const previousCurrency = state.currency;
+  const boss = !defeated && bossEncounter(state);
   state.currency = Math.min(
     1_000_000,
-    state.currency + (defeated ? 0 : (bossEncounter(state) ? 40 : 20) + victoryGoldBonus(state)),
+    state.currency + (defeated ? 0 : (boss ? 40 : 20) + victoryGoldBonus(state)),
   );
   const currency = state.currency - previousCurrency + earnedGold;
   const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
@@ -170,13 +168,10 @@ function finishBattle(state: BattleState, defeated: boolean) {
   if (outcome === "victory") {
     state.wins = Math.min(1_000_000, state.wins + 1);
   }
-  const boons =
-    defeated || outcome === "victory" || !bossEncounter(state)
-      ? []
-      : shuffle(
-          state,
-          BOONS.filter((r) => !state.boons.includes(r.id)).map((r) => r.id),
-        ).slice(0, 3);
+  const availableBoons: typeof state.boons = [];
+  if (!defeated && outcome !== "victory" && boss)
+    for (const boon of BOONS) if (!state.boons.includes(boon.id)) availableBoons.push(boon.id);
+  const boons = availableBoons.length ? shuffle(state, availableBoons).slice(0, 3) : [];
   const receipt = {
     xp,
     currency,

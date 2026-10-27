@@ -280,6 +280,7 @@ const pattern = new RegExp(
 );
 /** Presentation only. Gameplay classification always comes from authored effects, never prose. */
 export function keywordText(text: string): KeywordTextPart[] {
+  if (!text) return [];
   const parts: KeywordTextPart[] = [];
   let cursor = 0;
   for (const match of text.matchAll(pattern)) {
