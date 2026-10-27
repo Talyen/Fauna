@@ -58,7 +58,7 @@ The groups below are in recommended order. Each proposal needs design and playte
 
 - [ ] **Additional creatures:** fill demonstrated gaps in team roles, each with three unique abilities, six distinct passive tiers and complete artwork
 - [ ] **Distinct journey regions:** explore themed enemy pools, bosses, music and locations if route variety improves replayability
-- [ ] **Localization:** prepare player text for translation, then select languages and verify text fit and input behavior
+- [ ] **Localization:** follow [localization preparation](LOCALIZATION.md) for the target languages, translation and rendered qualification
 - [ ] **Additional desktop platforms:** evaluate native Linux/macOS distribution after Windows and the intended Steam Deck path are qualified
 
 Start with balance and first-journey learning, then challenge modifiers and encounter variety. Reassess larger content expansions after playtests show which teams and decisions players want more of. Multiplayer, accounts and live services are outside the current single-player roadmap.
