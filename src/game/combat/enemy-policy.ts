@@ -64,7 +64,7 @@ interface EnemyChoice {
 
 /** Immediate net gains: one point per actual Health, Block, stack or resource; flags count as one.
  * Production execution owns caps, mitigation, recipients, repeats and secondary effects.
- * Eight fixed probes approximate chance outcomes without reading or advancing the live RNG.
+ * Up to eight fixed probes approximate chance outcomes without reading or advancing the live RNG.
  */
 export function enemyCardValue(
   state: BattleState,
@@ -77,15 +77,22 @@ export function enemyCardValue(
   const spentCard = enemy.deck?.hand.includes(def.id) ? 1 : 0;
   let total = 0;
   for (let probe = 0; probe < 8; probe++) {
+    let decisions = 0;
     const after = evaluation.produce(state, (draft) => {
-      let decision = 0;
-      observeDecisions(draft, () => ((probe + 0.5) / 8 + decision++ * 0.618033988749895) % 1);
+      observeDecisions(draft, () => ((probe + 0.5) / 8 + decisions++ * 0.618033988749895) % 1);
       const actor = draft.battle.enemies.find((unit) => unit.id === enemy.id)!;
       const lastCardInHand = playEnemyAbility(draft, actor, def, targetId, allyTargetId, []);
       if (lastCardInHand) lastWarmth(draft, true, []);
     });
     // Rank effect value, with Mana paid before restoration so resource caps are accurate.
-    total += positionValue(after) - before + (enemy.deck ? def.cost + spentCard : 0);
+    const value = positionValue(after) - before + (enemy.deck ? def.cost + spentCard : 0);
+    total += value;
+    if (probe === 0 && decisions === 0) {
+      // With no random or hidden decision, every remaining probe follows the same path.
+      // Keep the original addition order, including its floating-point behavior.
+      for (let remaining = 1; remaining < 8; remaining++) total += value;
+      break;
+    }
   }
   return total / 8;
 }

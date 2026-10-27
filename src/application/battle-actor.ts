@@ -8,6 +8,13 @@ function tacticalState(state: GameState): string {
   if (state.phase !== "battle") return state.phase;
   const battle = state.battle;
   const card = (entry: Card) => [entry.ownerId, entry.definitionId, entry.level, !!entry.temporary];
+  const cards = new Map<string, { visible: ReturnType<typeof card>; serialized: string }>();
+  const allCards = state.cards.map((entry) => {
+    const visible = card(entry);
+    const serialized = JSON.stringify(visible);
+    if (!cards.has(entry.id)) cards.set(entry.id, { visible, serialized });
+    return serialized;
+  });
   const unit = (entry: GameState["team"][number]) => [
     entry.id,
     entry.species,
@@ -21,12 +28,12 @@ function tacticalState(state: GameState): string {
     state.reserves.map(unit),
     battle.enemies.map((entry) => [entry.id, entry.species, entry.health, entry.block, entry.combat]),
     battle.minions?.map((entry) => [entry.id, entry.health, entry.block, entry.combat, entry.minion]),
-    battle.hand.map((id) => JSON.stringify(card(state.cards.find((entry) => entry.id === id)!))).sort(),
-    state.cards.map((entry) => JSON.stringify(card(entry))).sort(),
+    battle.hand.map((id) => cards.get(id)!.serialized).sort(),
+    allCards.sort(),
     battle.draw.length,
     // Recovery choices depend on visible discard composition, even at an unchanged pile size.
-    battle.discard.map((id) => JSON.stringify(card(state.cards.find((entry) => entry.id === id)!))).sort(),
-    battle.buffer.map((id) => card(state.cards.find((entry) => entry.id === id)!)),
+    battle.discard.map((id) => cards.get(id)!.serialized).sort(),
+    battle.buffer.map((id) => cards.get(id)!.visible),
     battleCardCapacity(state),
     battle.mana,
     battle.maxMana,
