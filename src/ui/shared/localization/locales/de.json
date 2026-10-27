@@ -95,6 +95,12 @@
     "sourceHash": "231f13d8259652a847f0b406d1e1295ff67d4c43e13d4483f3fd67e3dcb918e7",
     "text": "Nicht gesammelt"
   },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "0854cc4ecb103017c0b407a6dddcfb53569734d40adcdb73c7728cb460db869b",
+    "text": "Echo"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
@@ -112,6 +118,30 @@
     "source": "Recruit",
     "sourceHash": "036b11593374719c1a42a936f7e815726056a9011e376fe19d69e74460ab4955",
     "text": "Rekrutieren"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "ccbd655b928ba3f9d59bc1147d885f8e42d3d0d7def505f139801f36122937d6",
+    "text": "Der Ablagestapel ist leer"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "86315ce2dc57aea896dc4375be06150296b825f6ac1f1823d7918b0eb9de4b83",
+    "text": "Der Nachziehstapel ist leer"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "82b95595f19326000c06796c6cf97c2db2723d1c63ff71926ab92bec6dd3449a",
+    "text": "Das Deck ist leer"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "2105a9d578c4a72449e6483f3ad3a39af9afa59e23cdd223f2790f624f1622eb",
+    "text": "Deckseiten"
   },
   "draft.choose": {
     "reviewed": true,
@@ -155,6 +185,12 @@
     "sourceHash": "25d8cc8bb5e5ac2249327073ddad280d13c54fb6356488401922aa0a4436f724",
     "text": "Begegnungen"
   },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "b535ae4e1c43ffd32b399dd1672242c243b8714e48b25436ad9b0193a569155a",
+    "text": "Pausenmenü"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -172,6 +208,48 @@
     "source": "Previous page",
     "sourceHash": "13a83e7e010edaa44c94ac6d5c9af3f3d9372e51274c5e99cfebbd00d7a5b23a",
     "text": "Vorherige Seite"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "a432932af824d04d227c8782c270ba0c187e10df6d9295e72f598e7b14c1864f",
+    "text": "Wähle dein Team"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "1247d4aeea9b2cc9b6e8ac16f525634920fc3911a3ebbaf586774ba4ef0af4d0",
+    "text": "Bestätigen"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "698030250dfdbb1ca230800b6417ff0b3b95790577eae79e5cae2eab9a3bb752",
+    "text": "Kreatur austauschen"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "3b87eb883e0fafe254e8c64e1a65e070c1a2f1233c5c74aaf5e105a64d3478e8",
+    "text": "Austausch von {{name}} auf Teamplatz {{slot}} ansehen"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "5bc5525652948e7b146835755117f0158bba89c55c386761246aea02c0cb0efe",
+    "text": "Team"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "5b4f381719f9711e82c4a97d0329a4fbcbbba74bb02a62c5854a2cc034ecdc1d",
+    "text": "Austausch von {{name}} rückgängig machen"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "22e0e6de9394a0d39cb847760da3aa3800a0f6e239ebccd79386afa6d631f409",
+    "text": "{{name}} auf Teamplatz {{slot}} rückgängig machen"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

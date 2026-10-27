@@ -95,6 +95,12 @@
     "sourceHash": "49e3cf3eab7b6d90a941041d331bb479c115751735b4157757ddb7a554914738",
     "text": "Sin coleccionar"
   },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "7f6b3a93dd5cb1ce4505a6c98d9066e759291b5117d436a43f8cab24a82817a8",
+    "text": "Eco"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
@@ -112,6 +118,30 @@
     "source": "Recruit",
     "sourceHash": "6798e4ee0b1488c4b12fb9be0dfa03c479b45c84fc4858d72143a49b54ca4174",
     "text": "Reclutar"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "f562c634df9bf47a85cb31bdd9fe1f4ec6ebeacf2bea0f5ee462a7f80db2fb82",
+    "text": "El descarte está vacío"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "76f39afccf1de35c68c6f32a64df59622558afcf13db1284b97dd0a76467b0f8",
+    "text": "El mazo de robo está vacío"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "cfb6ba0697d59cce6c02cdde2626a55196d8d8a89f214287b8763a390b76b8a2",
+    "text": "El mazo está vacío"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "87d94c0cbaeab4c78e5bf2b8c6c634869cd94bf395eaef922430d65e6c378373",
+    "text": "Páginas del mazo"
   },
   "draft.choose": {
     "reviewed": true,
@@ -155,6 +185,12 @@
     "sourceHash": "080692b48aeca6d70b81faa5f1fa1a18df01d28596af4791240ce9c8eebce360",
     "text": "Encuentros"
   },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "88add95337832730efc31271f428f7c54b4fe0f4b77db0e833f4b57f89d68992",
+    "text": "Menú de pausa"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -172,6 +208,48 @@
     "source": "Previous page",
     "sourceHash": "8d5cde2a11d98a25a0a6f34875fbaaa833144a138c2a6998ac4f907fccc1d42a",
     "text": "Página anterior"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "70cc3df313dcfbf2694f3aaaebd5d491bf9649594724595e5a96e1d66cec7bed",
+    "text": "Elige tu equipo"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "be50a62de5461d74705e2d72414eed5c1356a2eeb58155cf5433cf34ec1b5d89",
+    "text": "Confirmar"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "c966363fb3e6c27145c530360a524b97406938e8849b00b6d9e71cb28f236509",
+    "text": "Intercambiar criatura"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "ac29343dcf3ced68c5bff81fcc120636add891632212d08839deb408d582b53c",
+    "text": "Previsualizar el reemplazo de {{name}} en el puesto {{slot}} del equipo"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "148418413d5ec58d525670021a1fbeff9443b809720a5a2ec5bdef25d918dff3",
+    "text": "Equipo"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "ce6c51120788180c173b2282177880737f13dde4c797c5c5196b867f3e46ceda",
+    "text": "Deshacer el reemplazo de {{name}}"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "df79f2296cd65fe4534a70d7f85703eaffa640561a5d627ff346d3a1b9006171",
+    "text": "Deshacer {{name}} en el puesto {{slot}} del equipo"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

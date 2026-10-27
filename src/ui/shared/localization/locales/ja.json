@@ -95,6 +95,12 @@
     "sourceHash": "1eb47856d45185c76a953da5eb10289b7e84f19624c85f9efe71fc0341e045bb",
     "text": "未収集"
   },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "d977daf5de481bbaebabcb1d5f90e1e0e55f77eda5b9118bfcb54e79888029f1",
+    "text": "エコー"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
@@ -112,6 +118,30 @@
     "source": "Recruit",
     "sourceHash": "e32ee6fbef213e52d82dbe10a016dd4eca3951b52077212718bd0e6c32131207",
     "text": "仲間にする"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "6ba26813303cb9a23e1dfe246da0a1b630917ef0c5723f054b970a6849a51410",
+    "text": "捨て札は空です"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "c6a65e7a0629c481ce014aa5399d751598e06b2ec4ce9f7a29ca173c6663e35c",
+    "text": "山札は空です"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "d10b9eb2ef7cc6e1b3706580dba596da39f3f69d61405572d37b700b707c2fc1",
+    "text": "デッキは空です"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "5b719238f89915ddbfbd8d29d7f3370a9b873714d9b2f4a7b7a72605d93b51cf",
+    "text": "デッキのページ"
   },
   "draft.choose": {
     "reviewed": true,
@@ -155,6 +185,12 @@
     "sourceHash": "6efb73c1a958c170a294361e9450987de86df741758871408be5e802a50f1a0c",
     "text": "遭遇"
   },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "d9e7029f31f2ee8491418c746a618989f90806bacbb93372364c4eeb1ad727f2",
+    "text": "ポーズメニュー"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -172,6 +208,48 @@
     "source": "Previous page",
     "sourceHash": "30f0a0c620f2db1f97b09be79567bda1cf045a1e709f4c9a8e9afab14184add0",
     "text": "前のページ"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "bd2e1dcef7552f59e97761e2bf6c783a1d5a9e70796f0a72a502ef29dcea59e1",
+    "text": "チームを選ぶ"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "b3f66e2b3d7b5f31979a90830b9ff76096925f669cd2c2827c79d6332d69c336",
+    "text": "決定"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "cee01d3f0e688f8b8436aa4c2420093d321992ba1548692e63d04c99c6bfd949",
+    "text": "生き物を入れ替える"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "a714fd84822eaeeb82a213b57aeff2948372ca956cf8b183360a41d3b7b66cfd",
+    "text": "チーム枠{{slot}}の{{name}}の入れ替えを確認"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "26d3899d55d23fc82b0baa1c6e46fe88d69358b90607d4398c24511a08562ade",
+    "text": "チーム"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "b3fbd2a3e3d57ef2c6155dba3e609434827a0467e1c98fbffb20f8f09202ceb6",
+    "text": "{{name}}の入れ替えを取り消す"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "e10054772192f2360d1b61d7b7bd872374a3dbc27eecfa11524a674e54722b08",
+    "text": "チーム枠{{slot}}の{{name}}を取り消す"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

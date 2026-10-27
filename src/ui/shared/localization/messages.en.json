@@ -131,6 +131,9 @@
   "common.loading": {
     "text": "Loading…"
   },
+  "creature.echo": {
+    "text": "Echo"
+  },
   "creature.inspect": {
     "text": "Inspect {{name}}"
   },
@@ -139,6 +142,18 @@
   },
   "creature.recruitAction": {
     "text": "Recruit"
+  },
+  "deck.discardEmpty": {
+    "text": "Discard Pile is empty"
+  },
+  "deck.drawEmpty": {
+    "text": "Draw Pile is empty"
+  },
+  "deck.empty": {
+    "text": "Deck is empty"
+  },
+  "deck.pages": {
+    "text": "Deck pages"
   },
   "draft.choose": {
     "text": "Choose your starter"
@@ -211,6 +226,9 @@
   },
   "menu.mainMenu": {
     "text": "Main menu"
+  },
+  "menu.pause": {
+    "text": "Pause menu"
   },
   "menu.play": {
     "text": "Play"
@@ -328,6 +346,27 @@
   },
   "recovery.save": {
     "text": "Progress cannot be saved right now; keep Fauna open while it retries"
+  },
+  "recruit.chooseTeam": {
+    "text": "Choose your team"
+  },
+  "recruit.confirm": {
+    "text": "Confirm"
+  },
+  "recruit.exchange": {
+    "text": "Exchange creature"
+  },
+  "recruit.previewSlot": {
+    "text": "Preview replacing {{name}} in team slot {{slot}}"
+  },
+  "recruit.team": {
+    "text": "Team"
+  },
+  "recruit.undoReplacement": {
+    "text": "Undo replacement of {{name}}"
+  },
+  "recruit.undoSlot": {
+    "text": "Undo {{name}} in team slot {{slot}}"
   },
   "replacement.backup": {
     "text": "Backup"

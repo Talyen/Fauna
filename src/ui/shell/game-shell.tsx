@@ -444,12 +444,12 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
               <PopoverContent
                 key={menuInstance}
                 className="menu-panel"
-                aria-label="Pause menu"
+                aria-label={i18n.message("menu.pause", "Pause menu")}
                 onOpenAutoFocus={focus.openMenuFocus}
                 onCloseAutoFocus={focus.closeMenuFocus}
               >
                 <EffectScope name="menu">
-                  <nav className="pause-menu-choices" aria-label="Pause menu">
+                  <nav className="pause-menu-choices" aria-label={i18n.message("menu.pause", "Pause menu")}>
                     {menuItems(false)}
                   </nav>
                 </EffectScope>

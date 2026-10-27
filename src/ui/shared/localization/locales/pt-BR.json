@@ -95,6 +95,12 @@
     "sourceHash": "a0177c67036b87526c1d44ddb421c0872b3c9792464568a4f5a7528b3be90b66",
     "text": "Não colecionadas"
   },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "f00b96bf3504b36bbe3892b4354144666e3dce04ac20b32c111c8dc1bae9e0d7",
+    "text": "Eco"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
@@ -112,6 +118,30 @@
     "source": "Recruit",
     "sourceHash": "ddaf353267b5b43c50eedd5a29313c6d91cc72d1297ccc428eff59a7632a148a",
     "text": "Recrutar"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "a9354c1965097c44a8476848d63f0d6604f472b3962dc79bdc99c11c1cf98582",
+    "text": "A pilha de descarte está vazia"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "95d82a01c38b1d71d4b68b891350e9d3d928bd37a6dc098b62619f9278451402",
+    "text": "A pilha de compra está vazia"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "fb250ecb3388f3653299ec72bcced8cd00fa8e2f638b250a91d94d813a8ca1fc",
+    "text": "O baralho está vazio"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "d4c8299a09b999fb58720f5a6ac635fcec7c21a1eb537bf1604a573ac22fda68",
+    "text": "Páginas do baralho"
   },
   "draft.choose": {
     "reviewed": true,
@@ -155,6 +185,12 @@
     "sourceHash": "1cef9d7bf3b13b88ff3a28683b9d0d0941a1013a7a78f0630539956fecd76c6c",
     "text": "Encontros"
   },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "4c0515fccbb7577cf39710007ec61ca3b3f7301fcbe79797f09ec9f77a6ecfc7",
+    "text": "Menu de pausa"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -172,6 +208,48 @@
     "source": "Previous page",
     "sourceHash": "02ce7f70475f9e254b4bfca48f95d5bb080900b1124022c185235ee078b9eaa9",
     "text": "Página anterior"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "278e0489f32ec62a945df8747635d9394e63170bfbfdeeda09fcedf2ea427fbd",
+    "text": "Escolha sua equipe"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "ff03deade609f298bf1ff5ef525850495b9b678942ce62ec6b298dc105c465e6",
+    "text": "Confirmar"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "db6ce807cca12dc86996ec57ef93905679ce6d2989d1188a41e08157fbe389ea",
+    "text": "Trocar criatura"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "5cbb8632cdf89340b553e93e5251526235060c32633e691454f3a86176999030",
+    "text": "Pré-visualizar a substituição de {{name}} na posição {{slot}} da equipe"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "56d58b0799e878e4d277fdcd1f37664630425a7784ea6a1d899c3724aae1a419",
+    "text": "Equipe"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "de3c0a6b66d7f306c54a5d27ce59c6f584968789d612a05b8ffa037d92d15f34",
+    "text": "Desfazer a substituição de {{name}}"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "d7e46b405f861dfae69fca623ee05da3f43de3642d1c11fe38763afbaf6833f9",
+    "text": "Desfazer {{name}} na posição {{slot}} da equipe"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

@@ -95,6 +95,12 @@
     "sourceHash": "08b7f2067ffe90d5e4dafdbff61184c588db331d404efa8638ece95592d4a8d2",
     "text": "未收集"
   },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "3c36e40733abf9b6457c411093d43a8a5f015c90a73a334f5571076209505b7d",
+    "text": "回响"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
@@ -112,6 +118,30 @@
     "source": "Recruit",
     "sourceHash": "cd26922237a543d76b8ab88484730519b56182a53c2bdc0c5e02894120df1ddc",
     "text": "招募"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "946d9c20c9157cec31467a314fefe9d8d25bcf94decd155d0df3ea1010a99ac4",
+    "text": "弃牌堆为空"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "a375360f6496e01863f252e6fea1b98009b53247b206d4a31b23d4b217cdc227",
+    "text": "抽牌堆为空"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "b4c6a16b7287767af9b69a15345f45dc241fd455ef239f6fc565d6ffafe57b99",
+    "text": "牌组为空"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "db5df1878664092c49053e9a590d3f7d098bba742c7bdef6d8bf121a7d70253c",
+    "text": "牌组页面"
   },
   "draft.choose": {
     "reviewed": true,
@@ -155,6 +185,12 @@
     "sourceHash": "7d9124c442e0737fe9de74917cd24e3ecbc1d2c1dabff69020d287c8fbfeae8b",
     "text": "遭遇"
   },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "3e2515f9708be84e6f5fc95a3e64b36fe44fec4b3a5b0ff60248597b50fda480",
+    "text": "暂停菜单"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -172,6 +208,48 @@
     "source": "Previous page",
     "sourceHash": "439181c6cdfa4bd2523053c3bc0530716a3847733afe3ee78f6a642cf74be0d3",
     "text": "上一页"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "586665056d855cf43c7fab261f28c54238f4730c67403caa00e9f87feac85ce7",
+    "text": "选择你的队伍"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "dc8f3c45d0ac294549e8219daaa407f0b384ea9ea26f0b124be6469ce0959fe2",
+    "text": "确认"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "e16d9b41c34fee4109496c56216f7853da5ff75c8f451ab6b265c8fabe2dcc0e",
+    "text": "交换生物"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "c13923d27115bde3553e8ea73d2b4c2ff04a79b8f3de4a63bbf3e62c90ba1f10",
+    "text": "预览替换队伍位置 {{slot}} 中的{{name}}"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "8b1aebf3268cb393dbc784db5c0981530c694a7d6295c373e585ae16a9f7ad61",
+    "text": "队伍"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "5b9395d69cc1450fab7bfbeadbd794bdad5b756f174f682adaeec53de84d656f",
+    "text": "撤销替换{{name}}"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "dac9a0b97a6233c1cf4d0657d5380031de8ab5a5ef4ff1eb26fb4214aa6f26bf",
+    "text": "撤销队伍位置 {{slot}} 中的{{name}}"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

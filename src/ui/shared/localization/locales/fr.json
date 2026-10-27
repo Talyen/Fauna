@@ -473,6 +473,12 @@
     "sourceHash": "58003e51ae85c37048a64ffc1a053a6f2736e83e005e119093edc05f72430227",
     "text": "Eau"
   },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "18665d19944e8d9c4256dd207322fb59ec4f61d0def00d280a798a55a1a156c6",
+    "text": "Écho"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
@@ -490,6 +496,30 @@
     "source": "Recruit",
     "sourceHash": "b7db602a635c9f0de1f59eee9b0a407c3c1dcf3e8ce559e52dfc076086eda900",
     "text": "Recruter"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "0eb3e4cc7cea3c37156aa1992571b59417459d287bb04170acf8c218277716fa",
+    "text": "La défausse est vide"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "95bf83c3d53bbc842641efd20943b76698c23e0356149d6ae0461b3483abb647",
+    "text": "La pioche est vide"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "6e8d0c614d337893fa3c5561b9895d04674e39e62189ca30fc884638b77f606a",
+    "text": "Le deck est vide"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "7a5f7dcd9ec5e579a961bc78aad365eb2014ed7adfb5bfb71a6dc15e2d2eee9a",
+    "text": "Pages du deck"
   },
   "draft.choose": {
     "reviewed": true,
@@ -634,6 +664,12 @@
     "source": "Main menu",
     "sourceHash": "bbc7b126f0ac48c0f8bde64e65551f08c96092d8dd73278e441aea3fe27b0332",
     "text": "Menu principal"
+  },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "0e9062dee6e95373f6c70ba96182d2f579c8080e5849c94b70d420400b8236fe",
+    "text": "Menu pause"
   },
   "menu.play": {
     "reviewed": true,
@@ -869,6 +905,48 @@
     "source": "Progress cannot be saved right now; keep Fauna open while it retries",
     "sourceHash": "8290dedec4e3feb5c318c11eb3a518c395b82b224ac5959420e821cc5a64e99c",
     "text": "La progression ne peut pas être enregistrée pour le moment ; laissez Fauna ouvert pendant les nouvelles tentatives"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "7b3766c75fe32433e0fc711f141f9c2b2254a4455e4a7c55685210ae83c76b42",
+    "text": "Choisissez votre équipe"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "3e86b13c41ad9767aa2c24eb62193b4d4cd7c555c4d9884adee6349d1a01796d",
+    "text": "Confirmer"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "45c4eb74fb701e168400b8a12f81f8ab27a9eb06271671c7efe067b19456b9ee",
+    "text": "Échanger une créature"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "d7d3aea57df1d3095ffea81a93e751a8fd9a47da7de0fc61656639771e2c8817",
+    "text": "Prévisualiser le remplacement de {{name}} à l’emplacement {{slot}} de l’équipe"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "a6f3c323ea49dcf2021deab5a255f34aa3c162ea647398cd8493f2113e7a42dc",
+    "text": "Équipe"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "100a711fc3e9da590047c7d30cf9594cb7226641fb3cfda3b255061f57babe10",
+    "text": "Annuler le remplacement de {{name}}"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "1dde2181c46baceb3275f86d44cc4d5bd78849096a2a98f162e8b9867f894602",
+    "text": "Retirer {{name}} de l’emplacement {{slot}} de l’équipe"
   },
   "replacement.backup": {
     "reviewed": true,

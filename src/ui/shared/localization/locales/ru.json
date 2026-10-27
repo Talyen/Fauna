@@ -95,6 +95,12 @@
     "sourceHash": "adba27a0f1e9cbed76c38b3be0189fbce42ed018545f52f6402c4bbe19704bfc",
     "text": "Не собраны"
   },
+  "creature.echo": {
+    "reviewed": true,
+    "source": "Echo",
+    "sourceHash": "2720241a7c0ae161461475b03c70b9bf3e6ed49a03730041cc745f31fe5c9f92",
+    "text": "Эхо"
+  },
   "creature.inspect": {
     "reviewed": true,
     "source": "Inspect {{name}}",
@@ -112,6 +118,30 @@
     "source": "Recruit",
     "sourceHash": "e30321c9335b247e0c869475df74992e1061af69ccf1435dab62d53402ffb510",
     "text": "Призвать"
+  },
+  "deck.discardEmpty": {
+    "reviewed": true,
+    "source": "Discard Pile is empty",
+    "sourceHash": "a80b38a758fb3c765f54c9791bec08428ea349e7c556cca18cc2b62223e388ca",
+    "text": "Сброс пуст"
+  },
+  "deck.drawEmpty": {
+    "reviewed": true,
+    "source": "Draw Pile is empty",
+    "sourceHash": "569464b0008b425930d3c0a101b497260c97bfa77f8eb691b5e063889443d89c",
+    "text": "Колода добора пуста"
+  },
+  "deck.empty": {
+    "reviewed": true,
+    "source": "Deck is empty",
+    "sourceHash": "127e6f2ef47c86b7ea9f7d9cfd1b0ac55f6fcc16db232de6ddcf1c0f44705a92",
+    "text": "Колода пуста"
+  },
+  "deck.pages": {
+    "reviewed": true,
+    "source": "Deck pages",
+    "sourceHash": "25cf7bfd96f89479bf4d0e3a40a62a2b4f0a3ef5f218230bd6158fefe66855a1",
+    "text": "Страницы колоды"
   },
   "draft.choose": {
     "reviewed": true,
@@ -155,6 +185,12 @@
     "sourceHash": "459b7fb38c5a7aede5fa3d62573dc1f6f95f2f38ff54785d80b5eff8928f104e",
     "text": "Встречи"
   },
+  "menu.pause": {
+    "reviewed": true,
+    "source": "Pause menu",
+    "sourceHash": "e67f4b82d649ea57e711106f3beb5070bbf360eeb91d6ff480715732e9a24570",
+    "text": "Меню паузы"
+  },
   "pagination.next": {
     "reviewed": true,
     "source": "Next page",
@@ -172,6 +208,48 @@
     "source": "Previous page",
     "sourceHash": "d6993d2cb204595a936ffe93f39b592fd1c90728529418d57ac2bac3e44e7323",
     "text": "Предыдущая страница"
+  },
+  "recruit.chooseTeam": {
+    "reviewed": true,
+    "source": "Choose your team",
+    "sourceHash": "bdc19a51a1799a155ab58eef2fc5bcde2e3b3511cce3c7c69634e1e8a30f7a07",
+    "text": "Выберите команду"
+  },
+  "recruit.confirm": {
+    "reviewed": true,
+    "source": "Confirm",
+    "sourceHash": "5c4dd1109de5b5bab8db0b5e2ed3d4086948252818f06f5bcdbeb9e26c887862",
+    "text": "Подтвердить"
+  },
+  "recruit.exchange": {
+    "reviewed": true,
+    "source": "Exchange creature",
+    "sourceHash": "cd488a8a9afa02d8c4e8ad3369fb766eaf7f1e61798f48f5301af64e4d7d0eb5",
+    "text": "Обменять существо"
+  },
+  "recruit.previewSlot": {
+    "reviewed": true,
+    "source": "Preview replacing {{name}} in team slot {{slot}}",
+    "sourceHash": "899b582b940d7858f62b6b72192d75fb5bdc576bc8f2dcb85a4613c86649a30a",
+    "text": "Предпросмотр замены {{name}} в ячейке команды {{slot}}"
+  },
+  "recruit.team": {
+    "reviewed": true,
+    "source": "Team",
+    "sourceHash": "ddcfd50306cd1e8afbd65f4fcd2963fe87e11cc57355e4a97c2020fd8d63fcd7",
+    "text": "Команда"
+  },
+  "recruit.undoReplacement": {
+    "reviewed": true,
+    "source": "Undo replacement of {{name}}",
+    "sourceHash": "5e4452ef579e88bd7421af0af8ae974460c0c350801635219177abcdf8b52aca",
+    "text": "Отменить замену: {{name}}"
+  },
+  "recruit.undoSlot": {
+    "reviewed": true,
+    "source": "Undo {{name}} in team slot {{slot}}",
+    "sourceHash": "b73bd6fd85f5994834c8f12bc2da6df78b279c8c9e438bab78acc501437985a4",
+    "text": "Отменить замену на {{name}} в ячейке команды {{slot}}"
   },
   "rewards.chooseBoon": {
     "reviewed": true,

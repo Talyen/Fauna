@@ -165,6 +165,7 @@ export function AllyCard({
   creature,
   ...props
 }: { creature: Creature | Enemy } & Omit<CreatureProps, "kind" | "health" | "block">) {
+  const i18n = useMessages();
   return (
     <CreatureCard
       actorId={creature.id}
@@ -174,7 +175,7 @@ export function AllyCard({
       tooltipContent={
         "minion" in creature && creature.minion ? (
           <div className="card-details">
-            <strong>Echo</strong>
+            <strong>{i18n.message("creature.echo", "Echo")}</strong>
           </div>
         ) : undefined
       }
@@ -190,6 +191,7 @@ export function EnemyCard({
   enemy,
   ...props
 }: { enemy: Enemy } & Omit<CreatureProps, "kind" | "health" | "maxHealth" | "name">) {
+  const i18n = useMessages();
   return (
     <CreatureCard
       kind={enemy.species}
@@ -197,7 +199,7 @@ export function EnemyCard({
       tooltipContent={
         enemy.minion ? (
           <div className="card-details">
-            <strong>Echo</strong>
+            <strong>{i18n.message("creature.echo", "Echo")}</strong>
           </div>
         ) : undefined
       }
