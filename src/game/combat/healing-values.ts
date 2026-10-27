@@ -27,9 +27,12 @@ export const overflowBlock = (excess: number) =>
 
 /** Overflow Cup uses the same recipient for execution and visible benefit estimates. */
 export function overflowCupRecipient(state: GameState, unit: Combatant) {
-  return mostInjured(
-    healingAllies(state).filter((ally) => ally.id !== unit.id && ally.health < maximumHealth(ally)),
-  );
+  const allies = healingAllies(state);
+  let next = 0;
+  for (const ally of allies)
+    if (ally.id !== unit.id && ally.health < maximumHealth(ally)) allies[next++] = ally;
+  allies.length = next;
+  return mostInjured(allies);
 }
 
 /** Overflow can reach only other living allies still at Death's Door. */

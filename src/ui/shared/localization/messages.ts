@@ -12,10 +12,10 @@ function variables(text: string) {
 }
 function matchesVariables(source: string, translation: string) {
   if (!source.includes("{{") && !translation.includes("{{") && !translation.includes("}}")) return true;
+  if (/\{\{|\}\}/.test(translation.replace(/\{\{[a-zA-Z][\w]*\}\}/g, ""))) return false;
   const expected = variables(source);
   const actual = variables(translation);
-  const valid = !/\{\{|\}\}/.test(translation.replace(/\{\{[a-zA-Z][\w]*\}\}/g, ""));
-  if (!valid || expected.size !== actual.size) return false;
+  if (expected.size !== actual.size) return false;
   for (const name of expected) if (!actual.has(name)) return false;
   return true;
 }
@@ -27,10 +27,11 @@ function format(template: string, values: MessageValues, number: () => Intl.Numb
   });
 }
 
+const englishPlural = new Intl.PluralRules("en");
+
 /** Source wording must still match: stale entries fall back instead of hiding a change. */
 export function createMessageReader(locale: string, catalog: MessageCatalog) {
   const pluralRules = new Intl.PluralRules(locale);
-  const englishPlural = new Intl.PluralRules("en");
   let localNumber: Intl.NumberFormat | undefined;
   let englishNumber: Intl.NumberFormat | undefined;
   const localFormatter = () => (localNumber ??= new Intl.NumberFormat(locale));
@@ -51,6 +52,7 @@ export function createMessageReader(locale: string, catalog: MessageCatalog) {
   }
   return {
     locale,
+    number: (value: number) => localFormatter().format(value),
     message,
     template: (id: string, source: string) => translatedTemplate(id, source) ?? source,
     content: message,

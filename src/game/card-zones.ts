@@ -101,7 +101,8 @@ function eligibleDrawPool(state: GameState, matches: (card: Card) => boolean) {
       ? (candidate: string) => candidate === id
       : undefined;
   }
-  const pool = new Set([...draw, ...discard]);
+  const pool = new Set(draw);
+  for (const id of discard) pool.add(id);
   const ids = new Set<string>();
   for (const card of state.cards) if (pool.has(card.id) && matches(card)) ids.add(card.id);
   if (!ids.size) return;
@@ -125,7 +126,10 @@ function journeyReturnEligibility(
   let owners: Set<string> | undefined;
   return eligibleDrawPool(state, (card) => {
     if (!card.ownerId || card.ownerId === ownerId) return false;
-    owners ??= new Set(state.team.filter((unit) => unit.health > 0).map((unit) => unit.id));
+    if (!owners) {
+      owners = new Set();
+      for (const unit of state.team) if (unit.health > 0) owners.add(unit.id);
+    }
     return owners.has(card.ownerId);
   });
 }
