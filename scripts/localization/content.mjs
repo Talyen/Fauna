@@ -7,6 +7,7 @@ import { extractGlossaryRules } from "./glossary-rules.mjs";
 import { extractPassiveRules } from "./passive-rules.mjs";
 import { extractTalentRules } from "./talent-rules.mjs";
 import { extractBoonRules } from "./boon-rules.mjs";
+import { walk } from "./source-ast.mjs";
 import { parseSync } from "@swc/core";
 
 /** Extract literal authored names by gameplay ID; generated rules have a separate migration. */
@@ -32,8 +33,7 @@ export function extractContent(files) {
     const boon = location.endsWith("/content/boons.ts");
     const food = location.endsWith("/content/food.ts");
     const keywords = location === "src/game/keywords.ts";
-    function visit(node) {
-      if (!node || typeof node !== "object") return;
+    walk(ast, (node) => {
       if (
         creature &&
         node.type === "KeyValueProperty" &&
@@ -83,13 +83,7 @@ export function extractContent(files) {
           add(`content.card.${values.id.value}.name`, values.name.value, location);
         }
       }
-      for (const [key, child] of Object.entries(node)) {
-        if (key === "span") continue;
-        if (Array.isArray(child)) child.forEach(visit);
-        else if (child && typeof child === "object") visit(child);
-      }
-    }
-    visit(ast);
+    });
   }
   return Object.fromEntries([...messages].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
 }

@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { extractProjectContent } from "./content.mjs";
 import { parseSync } from "@swc/core";
 import { runtimeCatalogModule } from "./runtime-catalogs.mjs";
+import { walk } from "./source-ast.mjs";
 
 function parameters(text, location) {
   if (!text.trim()) throw new Error(`${location}: localization source cannot be empty`);
@@ -18,8 +19,7 @@ export function extractMessages(files) {
   const messages = new Map();
   for (const { location, source } of files) {
     const ast = parseSync(source, { syntax: "typescript", tsx: location.endsWith(".tsx"), target: "es2022" });
-    function visit(node) {
-      if (!node || typeof node !== "object") return;
+    walk(ast, (node) => {
       const callee = node.callee;
       if (
         node.type === "CallExpression" &&
@@ -54,13 +54,7 @@ export function extractMessages(files) {
           throw new Error(`${location}: conflicting English source for ${id.value}`);
         messages.set(id.value, record);
       }
-      for (const [key, child] of Object.entries(node)) {
-        if (key === "span") continue;
-        if (Array.isArray(child)) child.forEach(visit);
-        else if (child && typeof child === "object") visit(child);
-      }
-    }
-    visit(ast);
+    });
   }
   return Object.fromEntries([...messages].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
 }

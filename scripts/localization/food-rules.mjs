@@ -1,5 +1,6 @@
 import { parseSync } from "@swc/core";
-import { evaluate, keywordPattern, templateFor, walk } from "./boon-rules.mjs";
+import { evaluate, keywordPattern, templateFor } from "./boon-rules.mjs";
+import { walk } from "./source-ast.mjs";
 
 /** Extract the finite Food description branches from the game's authoring code. */
 export function extractFoodRules(foodSource, cardRulesSource, abilitySource, keywordSource, boonSource) {
