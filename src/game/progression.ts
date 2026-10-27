@@ -144,7 +144,7 @@ export function starterSpecies(state: Pick<GameState, "discovery">): readonly Sp
 }
 export function starterOfferPool(state: Pick<GameState, "discovery" | "selected">): SpeciesId[] {
   return starterSpecies(state).filter(
-    (kind) => !state.selected.includes(kind) && (!state.selected.length || !species(kind).legendary),
+    (kind) => !state.selected.length || (!state.selected.includes(kind) && !species(kind).legendary),
   );
 }
 

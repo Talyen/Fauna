@@ -96,8 +96,11 @@ export function encounterPacks(encounter: number) {
 
 /** Commit exact species so later roster changes cannot rewrite a battle or its rewards. */
 export function generateEncounterPack(state: GameState, savedPack?: readonly SpeciesId[]): SpeciesId[] {
-  const packs = encounterPacks(state.encounter);
-  const pack = savedPack ?? packs[Math.floor(roll(state) * packs.length)]!;
+  let pack = savedPack;
+  if (!pack) {
+    const packs = encounterPacks(state.encounter);
+    pack = packs[Math.floor(roll(state) * packs.length)]!;
+  }
   const selected = pack.slice(0, Math.min(3, state.encounter + 1));
   const inRoster = (kind: SpeciesId) =>
     state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind);
@@ -126,6 +129,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
   const pack = game.expedition.pack;
   if (!pack) throw new Error("Missing encounter pack.");
   const boss = BOSSES.find((entry) => entry.encounter === game.encounter);
+  const power = 1 + game.encounter / 10;
   return {
     name: boss ? "Boss" : "Combat",
     enemies: pack.map((kind, index) => {
@@ -134,7 +138,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
         name: boss && index === 0 && kind === boss.pack[0] ? boss.name : entry.name,
         species: kind,
         health: scaleEnemyStat(entry.health, game.encounter),
-        power: 1 + game.encounter / 10,
+        power,
       };
     }),
   };
