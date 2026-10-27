@@ -80,9 +80,11 @@ the local changed-file gate and CI run it as well.
 
 The language registry marks only English qualified. Its qualification check
 requires complete reviewed catalogs for each enabled language, completed UI,
-content and rule migration, and a runtime connected to those catalogs. These structural checks do not establish font,
-rendered-flow, platform or linguistic quality; the remaining qualification
-steps below still apply.
+content and rule migration, and a runtime connected to those catalogs. Japanese,
+Simplified Chinese and Russian also require bundled script fonts whose character
+maps cover the translated catalog, native language name and compact numbers.
+The checks do not establish font wiring, rendered-flow, platform or linguistic
+quality; the remaining qualification steps below still apply.
 
 ## Implementation and qualification
 

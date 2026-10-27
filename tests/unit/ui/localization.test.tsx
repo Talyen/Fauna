@@ -1,3 +1,4 @@
+import { fontHasGlyph, qualifiedFontIssues } from "../../../scripts/localization/font-coverage.mjs";
 import { PageControls } from "../../../src/ui/shared/navigation/pagination";
 import { BattleReadout } from "../../../src/ui/shared/combat/battle-readout";
 import { DamageValue } from "../../../src/ui/shared/combat/combat-values";
@@ -738,4 +739,31 @@ it("localizes shared pagination and combat announcements while preserving values
   expect(screen.getByLabelText("3 dégâts de Brûlure")).toBeTruthy();
   expect(view.container.textContent).toContain("2 → 4");
   view.unmount();
+});
+
+it("blocks script qualification when bundled fonts are missing or cannot render the language", () => {
+  const languages = { ja: { name: "日本語", qualified: true }, ru: { name: "Русский", qualified: false } };
+  expect(qualifiedFontIssues(languages, {}, () => null)).toEqual([
+    "ja: missing bundled font noto-sans-jp.ttf",
+  ]);
+  expect(qualifiedFontIssues(languages, {}, () => Buffer.alloc(0))[0]).toContain(
+    "ja: noto-sans-jp.ttf missing glyphs",
+  );
+  expect(fontHasGlyph(Buffer.alloc(0), 0x65e5)).toBe(false);
+  const font = Buffer.alloc(68);
+  font.writeUInt16BE(1, 4);
+  font.write("cmap", 12);
+  font.writeUInt32BE(28, 20);
+  font.writeUInt16BE(1, 30);
+  font.writeUInt32BE(12, 36);
+  font.writeUInt16BE(12, 40);
+  font.writeUInt32BE(1, 52);
+  font.writeUInt32BE(0x65e5, 56);
+  font.writeUInt32BE(0x65e5, 60);
+  font.writeUInt32BE(1, 64);
+  expect(fontHasGlyph(font, 0x65e5)).toBe(true);
+  expect(fontHasGlyph(font, 0x672c)).toBe(false);
+  expect(
+    qualifiedFontIssues({ ...languages, ja: { ...languages.ja, qualified: false } }, {}, () => null),
+  ).toEqual([]);
 });

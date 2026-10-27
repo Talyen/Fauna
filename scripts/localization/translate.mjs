@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
+import { qualifiedFontIssues } from "./font-coverage.mjs";
 import { extractProjectContent } from "./content.mjs";
 import { extractProjectMessages } from "./messages.mjs";
 import {
@@ -84,6 +85,12 @@ if (command === "prepare" && args.length === 0) {
     ),
   );
   issues.push(...qualificationIssues(languages, coverage, english, catalogs, glossaries));
+  issues.push(
+    ...qualifiedFontIssues(languages, catalogs, (file) => {
+      const font = path.join(root, "public/fonts", file);
+      return fs.existsSync(font) ? fs.readFileSync(font) : null;
+    }),
+  );
   if (issues.length) {
     console.error(issues.join("\n"));
     process.exitCode = 1;
