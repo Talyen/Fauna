@@ -293,6 +293,60 @@
     "sourceHash": "c662c28932695c63cd5fabb5c35982eb6002df23b5a0ab6f1d2035c6b42af0f4",
     "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Расходуется</keyword1>"
   },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "c4b849224664d323217669333cca6d758c9350dce76a30d74e1a9e0fbf80d681",
+    "text": "Нанести всем врагам {{value0}} ед. урона <keyword0>оглушением</keyword0>"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "b34e389db595affa373a250eee7e6cd5a6ad472f9ec76ae32ad806dabe48eadb",
+    "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "034bb2cf5f6278ff24b3b9748f8a32852da0b93c65b482a542ba3cf541256bfd",
+    "text": "Восстановить всем союзникам {{value0}} ед. <keyword0>здоровья</keyword0>"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "8042c47cd429044299f717d1d71d6ed18ba5b55fc6c0d946ac2fb337aef45938",
+    "text": "Нанести случайному врагу {{value0}} ед. урона <keyword0>светом</keyword0>"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "36180da72538867cabf6487a9964a96ca64347b00b56dc1a43ba27b755d7f452",
+    "text": "Восстановить наиболее раненому союзнику {{value0}} ед. <keyword0>здоровья</keyword0>"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "3e0b039dcc6960a82ac578329dbff73a49d63c9b22f57e22096d09e93b020078",
+    "text": "Союзники получают {{value0}} ед. <keyword0>блока</keyword0>"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "2755a03c43b3daeb970b811839969b05e5ecfa2555a5325c2ffe57d083203b05",
+    "text": "Нанести {{value0}} ед. <keyword0>физического</keyword0> урона"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "ae1f27e0369b556c456fa43cc81f19dc47ebb7c6b1dddddd13ed039cb2767209",
+    "text": "Получить {{value0}} ед. <keyword0>блока</keyword0>; <keyword1>Отразить</keyword1> следующий вредный эффект"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "5b2ab1e6733b0d82f42554a8f0b067eb2112c1bbf836698b01a806bdcd69b8f8",
+    "text": "Нанести {{value0}} ед. урона <keyword0>светом</keyword0>; <keyword1>Рассеять</keyword1> цель: удалить эффектов: {{value1}}"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",

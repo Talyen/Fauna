@@ -1,6 +1,21 @@
+import { definition } from "../../../src/game/content";
+import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
+import { cardRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
+import {
+  readCardDescriptionFunctions,
+  describeCardRule,
+  readAuthoredCards,
+  describeCompleteCard,
+  enemyCardModel,
+} from "../../../scripts/localization/card-model.mjs";
+import { CARDS } from "../../../src/game/content";
+import { PEARL } from "../../../src/game/content/creatures/memento";
+import { abilityRule } from "../../../src/game/rules/abilities";
+import { supplementalRule } from "../../../src/game/rules/supplemental";
+import { KEYWORD_DEFINITIONS, keywordLabel } from "../../../src/game/keywords";
 import { extractFoodRules } from "../../../scripts/localization/food-rules.mjs";
 import { FOOD_CARDS } from "../../../src/game/content/food";
-import { cardText } from "../../../src/game/card-rules";
+import { cardText, enemyCard } from "../../../src/game/card-rules";
 import { CardRules } from "../../../src/ui/shared/combat/combat-values";
 import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { RuleCatalogProvider } from "../../../src/ui/shared/localization/rule-catalog";
@@ -21,7 +36,7 @@ import { DamageValue } from "../../../src/ui/shared/combat/combat-values";
 import { createRequire } from "node:module";
 import { EventEmitter } from "node:events";
 import { mkdtemp, rm } from "node:fs/promises";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { act, render, screen, fireEvent, waitFor } from "@testing-library/react";
@@ -930,7 +945,14 @@ it("localizes action-card announcements with the same translated rule used for p
   };
   const view = render(
     <MessageProvider locale="fr" catalog={catalog}>
-      <RuleCatalogProvider catalog={{ [rule.template]: "Gagnez {{value0}} <keyword0>Blocage</keyword0>" }}>
+      <RuleCatalogProvider
+        catalog={{
+          [cardRuleVariantId(card.definitionId, rule.template)]: {
+            source: rule.template,
+            text: "Gagnez {{value0}} <keyword0>Blocage</keyword0>",
+          },
+        }}
+      >
         <TooltipProvider>
           <ActionCard card={card} ownerName="Gardemousse" onClick={() => {}} />
         </TooltipProvider>
@@ -996,5 +1018,144 @@ it("uses the same localized Food rule in tooltips and accessible card names", ()
     }),
   ).toBeTruthy();
   expect(view.container.textContent).toContain("Restaure 12 Santé à tous les alliés ; Consommer");
+  view.unmount();
+});
+
+it("reads authored card description functions without executing source", () => {
+  const abilities = readCardDescriptionFunctions(readFileSync("src/game/rules/abilities.ts", "utf8"));
+  const extras = readCardDescriptionFunctions(readFileSync("src/game/rules/supplemental.ts", "utf8"));
+  const labels = Object.fromEntries(
+    Object.entries(KEYWORD_DEFINITIONS).map(([id, entry]) => [id, entry.label]),
+  );
+  for (const card of [...CARDS, PEARL]) {
+    for (const value of [1, 2]) {
+      for (const power of [1, 1.7]) {
+        const context = { value, level: 0, power, label: keywordLabel };
+        expect(describeCardRule(abilities[card.effect], [card, context], labels), card.id).toBe(
+          abilityRule(card.effect).describe(card, context),
+        );
+      }
+    }
+    for (const effect of card.effects ?? [])
+      expect(describeCardRule(extras[effect.kind], [effect, card, keywordLabel], labels), card.id).toBe(
+        supplementalRule(effect.kind).describe(effect, card, keywordLabel),
+      );
+  }
+});
+
+it("reads literal authored cards by identity and rejects unknown builder expressions", () => {
+  const directory = "src/game/content/creatures";
+  const files = readdirSync(directory)
+    .filter((file) => file.endsWith(".ts"))
+    .map((file) => ({
+      location: `${directory}/${file}`,
+      source: readFileSync(`${directory}/${file}`, "utf8"),
+    }));
+  const authored = readAuthoredCards(files);
+  expect(Object.keys(authored).sort()).toEqual([...CARDS, PEARL].map((card) => card.id).sort());
+  for (const card of [...CARDS, PEARL])
+    for (const [key, value] of Object.entries(authored[card.id]!))
+      expect(card, card.id).toHaveProperty(key, value);
+  expect(() =>
+    readAuthoredCards([
+      { location: "creature.ts", source: 'const x = attack("x-a", "A", readValue(), "burn")' },
+    ]),
+  ).toThrow("Unsupported card literal");
+});
+
+it("reads complete authored card rules with changing values and room power", () => {
+  const sources = {
+    cardRules: readFileSync("src/game/card-rules.ts", "utf8"),
+    abilities: readFileSync("src/game/rules/abilities.ts", "utf8"),
+    supplemental: readFileSync("src/game/rules/supplemental.ts", "utf8"),
+  };
+  const labels = Object.fromEntries(
+    Object.entries(KEYWORD_DEFINITIONS).map(([id, entry]) => [id, entry.label]),
+  );
+  for (const card of [...CARDS, PEARL])
+    for (const value of [1, 2])
+      for (const power of [1, 1.7])
+        for (const level of [0, 1])
+          expect(
+            describeCompleteCard(card, level, value, power, sources, labels),
+            `${card.id} ${value} ${power} ${level}`,
+          ).toBe(cardText(card, level, value, power));
+});
+
+it("models enemy card adaptation without changing authored cards", () => {
+  const directory = "src/game/content/creatures";
+  const files = readdirSync(directory)
+    .filter((file) => file.endsWith(".ts"))
+    .map((file) => ({
+      location: `${directory}/${file}`,
+      source: readFileSync(`${directory}/${file}`, "utf8"),
+    }));
+  const cards = readAuthoredCards(files),
+    abilities = readFileSync("src/game/rules/abilities.ts", "utf8"),
+    supplemental = readFileSync("src/game/rules/supplemental.ts", "utf8");
+  for (const card of [...CARDS, PEARL]) {
+    const expected = enemyCard(card);
+    const actual = enemyCardModel(cards[card.id]!, abilities, supplemental);
+    for (const [key, value] of Object.entries(actual)) expect(expected, card.id).toHaveProperty(key, value);
+  }
+});
+
+it("extracts each authored player and enemy rule variant using production text", () => {
+  const directory = "src/game/content/creatures";
+  const files = readdirSync(directory)
+    .filter((file) => file.endsWith(".ts"))
+    .map((file) => ({
+      location: `${directory}/${file}`,
+      source: readFileSync(`${directory}/${file}`, "utf8"),
+    }));
+  const sources = {
+    cardRules: readFileSync("src/game/card-rules.ts", "utf8"),
+    abilities: readFileSync("src/game/rules/abilities.ts", "utf8"),
+    supplemental: readFileSync("src/game/rules/supplemental.ts", "utf8"),
+    contracts: readFileSync("src/game/rules/contracts.ts", "utf8"),
+    abilityValues: readFileSync("src/game/combat/ability-values.ts", "utf8"),
+  };
+  const keywordSource = readFileSync("src/game/keywords.ts", "utf8");
+  const rules = extractCardVariants(files, sources, keywordSource);
+  const missing: string[] = [];
+  for (const card of [...CARDS, PEARL])
+    for (const model of [card, enemyCard(card)])
+      for (const value of [card.value, 1, 2])
+        for (const power of [1, 1.7])
+          for (const level of [0, 1]) {
+            const template = ruleMessage(cardText(model, level, value, power)).template;
+            if (rules[cardRuleVariantId(card.id, template)]?.text !== template)
+              missing.push(`${card.id} ${value} ${power} ${level}: ${template}`);
+          }
+  expect(missing).toEqual([]);
+  expect(() =>
+    extractCardVariants(
+      files,
+      {
+        ...sources,
+        contracts: sources.contracts.replace("Math.round(amount * power)", "Math.floor(amount * power)"),
+      },
+      keywordSource,
+    ),
+  ).toThrow("Unsupported card power scaling");
+});
+
+it("uses the reviewed card rule for both artwork announcements and tooltip values", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const game = run();
+  const card = game.cards.find((item) => item.definitionId === "mossguard-guard")!;
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <ActionCard card={card} ownerName="Mossguard" onClick={() => {}} />
+        <CardRules card={definition(card.definitionId)} value={12} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    screen.getByRole("button", { name: "Boulder Brace, Mossguard, 1 Mana, Gagne 6 Blocage" }),
+  ).toBeTruthy();
+  expect(view.container.textContent).toContain("Gagne 12 Blocage");
+  expect(screen.getByText("Blocage").getAttribute("data-keyword")).toBe("block");
   view.unmount();
 });

@@ -55,6 +55,12 @@ passive rules, Food rules, and glossary terms and definitions are extracted by t
 identities. Glossary keyword terms reuse the shared keyword labels. Rules retain keyword tags
 and named values;
 translation records also retain the exact English rule for freshness checks.
+Authored creature card variants use stable IDs derived from the whole English
+template and preserve the production rule's ordering. The extractor samples the
+known singular and enemy-power branches; unrecognized runtime forms fall back to
+English, so sampling alone does not establish complete card-rule coverage.
+Translations must remain grammatical for every numeric value that can fill a
+template; add explicit plural handling when a count-neutral sentence is not enough.
 `npm run localization:check`, the local changed-file gate and CI check freshness,
 duplicate IDs, English forms and parameter syntax. UI extraction only covers
 explicit calls in `src/ui`; content extraction does not yet cover all rule prose or generated descriptions. Neither establishes complete coverage or

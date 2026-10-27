@@ -57,9 +57,10 @@ export function CardRules({
   power?: number;
   modifiers?: GameState;
 }) {
+  const text = cardText(card, level, value, power, modifiers);
   return (
     <span className="action-effect">
-      <KeywordText text={cardText(card, level, value, power, modifiers)} id={cardRuleId(card, modifiers)} />
+      <KeywordText text={text} id={cardRuleId(card, modifiers, text)} />
     </span>
   );
 }

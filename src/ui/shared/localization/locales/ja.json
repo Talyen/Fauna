@@ -293,6 +293,60 @@
     "sourceHash": "030720f4314043dc32b0f0e58acb79a354e69ee57257cfcd4315b1d60c36fea9",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；<keyword1>消費</keyword1>"
   },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "f3fe52e6736ed42b25fa20062c112c92a027b82c980aac49aa2892b4e077ae7f",
+    "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "f0d71227cc30ffc55a28c2481b8906121cca63fa3a59b2aac2d9abd29b7002dc",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "0ab728abb65f93be6e4fb08204647909cf72261e142e134b31c2d84d783482e1",
+    "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "5d3fae2809498819470e25de20a0c82cb27dbbe5237469ed36f647f5e95230c9",
+    "text": "ランダムな敵に<keyword0>光</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "c0b1257bf9c8bc8840cf81fca96e552c38f3c4f0c5d52789f688318e325b56a4",
+    "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "7b628f1d69e8f24e4f9fa7dc9d304276bb9fc6f71a785f2eb596860f834b04c5",
+    "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "75e891abb6b39d9220faa888fcb982dd697491bfc4a4df9056234dde9a095570",
+    "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "4e5adb815870f401f4e3407fd41029b0db83c871b1704c81dcb5898d8d00186b",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得；次の有害な状態効果を<keyword1>反射</keyword1>"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "dd90cd704804766f06ac76864c1800a512b442870777cc8b803222880ffbcf07",
+    "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象を<keyword1>浄化</keyword1>：効果を{{value1}}個取り除く"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",

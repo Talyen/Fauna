@@ -293,6 +293,60 @@
     "sourceHash": "9052deaec2cf163dbd2fc23bfe817738f67cf9a9879c598bef3a916b8494c475",
     "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>消耗</keyword1>"
   },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "1020880b8d1c5f37b94b0cc8371b77e09eac9fc65b23b76f64d103d83e64f2a3",
+    "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "c9aa2458c912c4df5c87a6a9ae03527f3532c7f727ff499203a5cd4e91593cda",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "445cc9505d3bef54d53771422cbf9f5b8a1f178ee4eccbf5230b27c095c02d02",
+    "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "8548fb96ed0b67ce31ae6961a75b320d112c4cb5e0b4066a89e0b8be6dd811e8",
+    "text": "对随机敌人造成 {{value0}} 点<keyword0>光</keyword0>伤害"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "9f7c94478be8565e0c64cbb97f9a15761a5c8178e98966b74327fed40a07c9b4",
+    "text": "为受伤最重的盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "e93ab51615fd5ed0e1fc1d9c47f2d2c6190fa8f48ee08b3258ba699a93bdd034",
+    "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "7f5ae0361fbdea797995360981449471a74fe8fbd7004950f34b6f209836b4c7",
+    "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "bbc907a154bdf97cee5f6544760533b228565bb186b861d902179e6ef591db4b",
+    "text": "获得 {{value0}} 点<keyword0>格挡</keyword0>；<keyword1>反射</keyword1>下一个有害状态效果"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "9087d65f4358b070975dda0bdafcdcf8b6d0e9fd6debd9eb6e68dda9bd5e587c",
+    "text": "造成 {{value0}} 点<keyword0>光</keyword0>伤害；<keyword1>驱散</keyword1>目标：移除 {{value1}} 个效果"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",

@@ -319,6 +319,9 @@ export function runCheck(
         file === "src/game/keywords.ts" ||
         file === "src/game/card-rules.ts" ||
         file === "src/game/rules/abilities.ts" ||
+        file === "src/game/rules/supplemental.ts" ||
+        file === "src/game/rules/contracts.ts" ||
+        file === "src/game/combat/ability-values.ts" ||
         file === "src/game/glossary.ts" ||
         file === "src/game/resurrection-rules.ts" ||
         file === "src/game/rules/boons.ts" ||

@@ -293,6 +293,60 @@
     "sourceHash": "d20756e6b139b74a383dadb7cdaf6ab99bed5a9085a9c34b85c797e677c026c2",
     "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Verbrauchen</keyword1>"
   },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "b8b8d25309b6b718a631c0d7c1d6f240016f722cf165d70e36482412c02529df",
+    "text": "Füge allen Gegnern {{value0}} <keyword0>Betäubungs</keyword0>schaden zu"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "f14c47906c4513ed67f035d726d53625f3bb9b4ae078d22cd683f52b58859809",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "a1aa580c34cfd6a61483333802e59e1905f1727cb88bb80a3883322bbda6ecfd",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "f4493c8652673e85a987a50bf0e1a7cf9762f7297abe343f6fbdf3b4e1559e2f",
+    "text": "Füge einem zufälligen Gegner {{value0}} <keyword0>Licht</keyword0>schaden zu"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "00d259c23d45a4c04ac4a802d67134909ea6989d28429118aae384e03c4bfae0",
+    "text": "Stelle dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "9dff911c6edfe84f9c79e02a91ab347b789021ab804d0d357d9c3655518de8a9",
+    "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "7753bc0a1d6007a54e5c1e4186999b02ac76975b4bd65391d1c63e28df30da07",
+    "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "d13fe250bac8565f527598fc1d3b0616b9b90c7baeda01df91d223799d18587e",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflektiere</keyword1> den nächsten schädlichen Statuseffekt"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "f3976bbe0ac7c3f458f6b048660bdd70aec812269ac3182f4171097ca8a41a88",
+    "text": "Füge {{value0}} <keyword0>Licht</keyword0>schaden zu; <keyword1>Entferne</keyword1> {{value1}} Effekt vom Ziel"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",

@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { extractCardVariants } from "./card-variants.mjs";
 import { extractFoodRules } from "./food-rules.mjs";
 import { extractGlossaryRules } from "./glossary-rules.mjs";
 import { extractPassiveRules } from "./passive-rules.mjs";
@@ -121,6 +122,17 @@ export function extractProjectContent(root) {
       ...names,
       ...rules,
       ...authoredTalentRules,
+      ...extractCardVariants(
+        files.filter(({ location }) => /\/content\/creatures\/[^/]+\.ts$/.test(location)),
+        {
+          cardRules: fs.readFileSync(path.join(root, "src/game/card-rules.ts"), "utf8"),
+          abilities: fs.readFileSync(path.join(root, "src/game/rules/abilities.ts"), "utf8"),
+          supplemental: fs.readFileSync(path.join(root, "src/game/rules/supplemental.ts"), "utf8"),
+          contracts: fs.readFileSync(path.join(root, "src/game/rules/contracts.ts"), "utf8"),
+          abilityValues: fs.readFileSync(path.join(root, "src/game/combat/ability-values.ts"), "utf8"),
+        },
+        fs.readFileSync(keywordFile, "utf8"),
+      ),
       ...extractFoodRules(
         fs.readFileSync(path.join(root, "src/game/content/food.ts"), "utf8"),
         fs.readFileSync(path.join(root, "src/game/card-rules.ts"), "utf8"),

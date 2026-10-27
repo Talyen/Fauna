@@ -252,7 +252,7 @@ export function ActionCard({
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const { def, value } = actionDisplay(card, actor, modifiers, enemy, enemyValue);
   const effectText = cardText(def, card.level, value, enemyPower, modifiers);
-  const effectLabel = useRuleText(effectText, cardRuleId(def, modifiers))
+  const effectLabel = useRuleText(effectText, cardRuleId(def, modifiers, effectText))
     .map((part) => part.text)
     .join("");
   const name = i18n.content(`content.card.${def.id}.name`, def.name);

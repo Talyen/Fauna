@@ -497,6 +497,60 @@
     "sourceHash": "16466e95a192f766e9463139ae0153ef50e9791644e791cf7ad7c35f31a3c47a",
     "text": "Gagne {{value0}} <keyword0>Blocage</keyword0> ; <keyword1>Consommer</keyword1>"
   },
+  "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
+    "sourceHash": "0a89fe44eda1aba448c3d10b2bea667d27043ad5c977d278f1cc8c615b2f95f1",
+    "text": "Inflige {{value0}} dégâts d’<keyword0>Étourdissement</keyword0> à tous les ennemis"
+  },
+  "content.card.mossguard-guard.vadb3e758e4125447.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "08e931d533bf7cde3722e0f4827b74b00bee610b98a6456d5890c9f02c6d4799",
+    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0>"
+  },
+  "content.card.mossguard-heal.v829391f43731edcb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
+    "sourceHash": "59a72217117bc31c82236ab8723c95c46c0c2cb2d229107c112364fcedc3b78a",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> à tous les alliés"
+  },
+  "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage to a random enemy",
+    "sourceHash": "2a0d20400a42a62933263a15c5f852037057236ac5948c194d4520cf17ce4dee",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> à un ennemi aléatoire"
+  },
+  "content.card.pollenmoth-heal.vb11e8582917748e7.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
+    "sourceHash": "a1d1276c71fd1027117ebeb623b3e5d0b1cf390438a5c1ec1194d0a38f10e907",
+    "text": "Restaure {{value0}} <keyword0>Santé</keyword0> à l’allié le plus blessé"
+  },
+  "content.card.pollenmoth-teamGuard.v1120584113a3339f.rule": {
+    "reviewed": true,
+    "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
+    "sourceHash": "4c27372a00491b242836d220da23ccf05a1e12945ba91aaba8a902723733ebc7",
+    "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0>"
+  },
+  "content.card.prismram-attack.vff8d1470887b7499.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
+    "sourceHash": "d83f8ad8fceff4655a385fcddfcf4c02ee273bfca93d58c2da9b5fceb511878b",
+    "text": "Inflige {{value0}} dégâts <keyword0>Physiques</keyword0>"
+  },
+  "content.card.prismram-guard.vbded938dc56ebcb6.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; <keyword1>Reflect</keyword1> the next harmful status effect",
+    "sourceHash": "fdb0ffef8a9222cac3846bf47d0e4fe2a546f50b98fa5207fb03d1308d1c9fa1",
+    "text": "Gagne {{value0}} <keyword0>Blocage</keyword0> ; <keyword1>Renvoie</keyword1> le prochain effet néfaste"
+  },
+  "content.card.prismram-spectrum-lance.v14186581e3e7bc5f.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
+    "sourceHash": "c728b8c4f0c2425dc86e08cf4e27e3f05863ed0c404b9c4ecc87a950f3f55985",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Lumière</keyword0> ; <keyword1>Dissipe</keyword1> la cible : retire {{value1}} effet"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",
