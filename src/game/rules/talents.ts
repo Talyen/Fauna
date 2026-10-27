@@ -289,7 +289,7 @@ const talentModifiers = freeze(
     ),
     "poison.paralytic-venom": rule(
       { percent: 10 },
-      (p) => `Poison damage has a ${p.percent}% chance to Stun`,
+      (p) => `Poison damage has a ${p.percent}% chance to also deal Stun damage`,
     ),
     "poison.virulent": rule(
       { percent: 10 },

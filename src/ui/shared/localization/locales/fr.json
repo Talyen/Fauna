@@ -1643,6 +1643,102 @@
     "sourceHash": "07ad5bf1595b76e32ae4b705056ff69d286261307b05c70d0bf72438aab62532",
     "text": "Source vive"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "aef042194fbffe4fb0ed0c8c6ef7e49166810acadebfcc683951aaadd4ef0355",
+    "text": "Caustique"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "934f0423bf3a5aed2fcd4b26c8089f9a1690fdd0e5bcd5251ecc4eba7c2d914d",
+    "text": "Les dégâts de <keyword0>Poison</keyword0> retirent autant d'<keyword1>Armure</keyword1> ennemie que les dégâts infligés"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "cb21f3197e2ff3bb0c49968cf8ea217a5db706a1676d7426cae6b322d527c8ef",
+    "text": "Corrosif"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "f940df6cd9fd1089cc337d1ed313ce9d1061d84bce831f8e380249eecb928cd5",
+    "text": "Hémotoxine"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "693e808925b36a61e802ccd51fc122647ade8aa2917988e020959b8781d3f37f",
+    "text": "Le <keyword0>Poison</keyword0> a {{value0}}% de chances d'infliger aussi des dégâts de <keyword1>Saignement</keyword1>"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "fe0b4af0d492c58fa4d9e95eb8754c9ead8b1e01f61b094b79a97b35f4f37b12",
+    "text": "Nécrose"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "03e651a6982885561f9b20c9d87c699459c798131ffc708907b70068a131abd5",
+    "text": "Venin paralysant"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "99e43b38adf3088cee1de645a569b98347f231cb75a5c915c0da0187af66e695",
+    "text": "Les dégâts de <keyword0>Poison</keyword0> ont {{value0}}% de chances d'infliger aussi des dégâts d'<keyword1>Étourdissement</keyword1>"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "d090c642deaa9571467848787ebe290ebcf135d706559861561b43f89edda63b",
+    "text": "Torpeur"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "04d7391b5aabb155f7cfef22e8d1d03e1767b26ff763cfa6480915ceed3efd32",
+    "text": "Profit toxique"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "705b3770581fd7aec3526e97afe70f5491f77896cb9e50ff55711e8f99c0c9c6",
+    "text": "Résistance aux toxines"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "6f746366bf64eb52122f8c902d8bb659f4188a69bdb66cad5d464b9e93b8dfa5",
+    "text": "Subissez la moitié des dégâts de <keyword0>Poison</keyword0>"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "8d47ed0c8a1e22e3c6e2b5d29fb831bde4643b38ea3acb59b68afeca197bf8ed",
+    "text": "Frappe venimeuse"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "90103ac21e5fc7436a5c6e69b95a15b5e7039cd9a157995aebd1fa5042175f34",
+    "text": "Les cartes <keyword0>Poison</keyword0> ont {{value0}}% de chances d'être jouées deux fois"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "f7da7918b1562b8c48693300423ec0575a68b5b2e66c78eeacc3cbb0c4d5ec31",
+    "text": "Virulent"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "5dcaaf2f1cb1b5a8a6581d1a5d34b9c9d08ab89a7ee18b7feca3511de86010b8",
+    "text": "Le <keyword0>Poison</keyword0> a {{value0}}% de chances de gagner un cumul au lieu d'en perdre un"
+  },
   "content.talent.stun.concussive-force.name": {
     "reviewed": true,
     "source": "Concussive Force",

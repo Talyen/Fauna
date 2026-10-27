@@ -1595,6 +1595,102 @@
     "sourceHash": "48041a8bf785727afa94688c038e2f13be3fcb42e4b3919b67c11969731cf9e9",
     "text": "Quelle"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "226012b073b4dbd585ec4f76ca8c7ca005002fdd2132d422bd3fd1709bf3104a",
+    "text": "Ätzwirkung"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "8aa6b183164a951ac46b1a74cbf8f580f4bd5043fc54c910c85ad3de210768fb",
+    "text": "Schaden vom Typ <keyword0>Gift</keyword0> entfernt gegnerische <keyword1>Rüstung</keyword1> in Höhe des verursachten Schadens"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "a00a14af4f572df31f1c4952700aa8df50a380165c86adc3684dbf39ce36d262",
+    "text": "Korrosiv"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "42ef1f58a8385f7655c70e37c366b295e24c7c697816b4f9a9b94e50a6ec2ceb",
+    "text": "Blutgift"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "dc000490c226e64468324bd342970eb54120f6086256ab07c4adf8e13fcdd9a1",
+    "text": "<keyword0>Gift</keyword0> hat eine Chance von {{value0}}%, zusätzlich Schaden vom Typ <keyword1>Blutung</keyword1> zu verursachen"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "10936137371de1a64dc5ece1536e36f5e5bb1193b5cca2ad86d051c97e3d8501",
+    "text": "Nekrose"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "9da5466f2efb711e0586edc9cea132f2dce1b92a11a1ab276dbbfb6f836eaa93",
+    "text": "Lähmendes Gift"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "6b7fc8828edfa0baad4987e6e2d59bdc95dc9bf3a62a48ef92d3375076ba0283",
+    "text": "Schaden vom Typ <keyword0>Gift</keyword0> hat eine Chance von {{value0}}%, zusätzlich Schaden vom Typ <keyword1>Betäubung</keyword1> zu verursachen"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "7b0ecbbdc6dd3ae9b621335cd33571b924cccce2620bbcf927ad7982d84f5b73",
+    "text": "Erstarrung"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "f44b282340488c0a5a9632c13405c0b64000dd985edc5747f9cc73cce360b0df",
+    "text": "Giftgewinn"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "cbf45e1238600c7335f398bfd5a7d360dbe3f5f1797e064ac26d94be4842f4ce",
+    "text": "Giftresistenz"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "79edfe9429cf3553098e647c143cb4424c271326f4549f4157383a09224cf579",
+    "text": "Erleide halbierten Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "e87754e0782d83d4ef7cf9180029099c991e7fcc9dc3c2c4972b2eb5dad74487",
+    "text": "Giftschlag"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "b29f24f3b1b12c02a2163a3848dc3bbb94c48eda5b0c3b0434b87c2dd1a6ceaf",
+    "text": "<keyword0>Gift</keyword0>-Karten haben eine Chance von {{value0}}%, zweimal gespielt zu werden"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "242ad0087458ae181ba4b4f8c4ceacbc0d503f2f90f840ebe2cd9035efb42d96",
+    "text": "Hochgiftig"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "e255b97de218f03dc0b268ffd7589089a039e29e05b07ed26ab902d05e345663",
+    "text": "<keyword0>Gift</keyword0> hat eine Chance von {{value0}}%, einen Stapel zu gewinnen statt zu verlieren"
+  },
   "content.talent.stun.concussive-force.name": {
     "reviewed": true,
     "source": "Concussive Force",

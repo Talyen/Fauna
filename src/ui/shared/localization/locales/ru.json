@@ -1595,6 +1595,102 @@
     "sourceHash": "25d77f7fd816539896c9a46118d0e8ecc24910e68dae27112e5448b1d52e0efa",
     "text": "Родник"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "d7141852661f2ee31216c3cc983f5a682902bfa19d4de49043a350a0357a8bde",
+    "text": "Едкость"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "7e6f1400adcbb949b07b1d8ccb2e0bc31aa3f2eb9edc7122870e065222158173",
+    "text": "Урон типа «<keyword0>Яд</keyword0>» снимает запас <keyword1>брони</keyword1> врага в размере нанесённого урона"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "88fea11c1e3299a1fe55ab452d9f884bb716700eb2d9bd3e64343123b89c1f6e",
+    "text": "Разъедание"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "f78b685d0cac293ce1c7466558c8e6b6d2f881cc6841b04f5692ebc59fce9797",
+    "text": "Гемотоксин"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "298f62065fed80d6f6959656c9b0da74eda70510f9f15d7a6d1d6a094181c2c9",
+    "text": "Эффект «<keyword0>Яд</keyword0>» с шансом {{value0}}% также наносит урона от <keyword1>кровотечения</keyword1>"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "bfe4a091f5c19b15d3c8e7809c2df34f9882d5187299cc14db8f699a0cfaa469",
+    "text": "Некроз"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "45195be9a3d1b37057ec6d5f42ec5117d3490481ca1263c59bf374300787a9a6",
+    "text": "Парализующий яд"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "11daea52b9ca93e84074b8284b9ca478eb4201c65d4506896628b4ce90750eae",
+    "text": "Урон типа «<keyword0>Яд</keyword0>» с шансом {{value0}}% также наносит урон типа «<keyword1>Оглушение</keyword1>»"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "154a23850a5790467e0646eaf95750a512e012ebab8d35ad12e2d0b02c2df408",
+    "text": "Оцепенение"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "62defcc6d70adc7581d4ff8514b153fe819dc0af5892167e82e48b377d2c176d",
+    "text": "Ядовитая прибыль"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "475719c0b8536c48f5d89f239e91f8b7801b180e7b206a0dd3b20d705050bb3b",
+    "text": "Сопротивление токсинам"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "e05f8fa8e431254ba8ccc24dbcd542b91bae134abe4cd179a61c782a3f18a6fb",
+    "text": "Получайте вдвое меньше урона от <keyword0>яда</keyword0>"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "e8e91845f5a29042090fd5d60cfd4e3d1e016a3e44d85e4e8b7d35dd233c7ced",
+    "text": "Ядовитый удар"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "32800bd83c1d518976e581bfe8613909b6fcfb5cc85cb9b526a0dd650026c153",
+    "text": "Карты типа «<keyword0>Яд</keyword0>» с шансом {{value0}}% разыгрываются дважды"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "00d031c413c10b9bc81509af014ca72a8301644c4fc74efa0cd974af04058806",
+    "text": "Болезнетворность"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "6976b1d67490e5431f7b7c8bba88796ddfb22a4d01066cd7bb1f0f8b51f810a7",
+    "text": "Эффект «<keyword0>Яд</keyword0>» с шансом {{value0}}% получает единицу вместо её потери"
+  },
   "content.talent.stun.concussive-force.name": {
     "reviewed": true,
     "source": "Concussive Force",

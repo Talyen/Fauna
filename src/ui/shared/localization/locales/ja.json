@@ -1595,6 +1595,102 @@
     "sourceHash": "31dfdd9e74052f8a2c1f5539f9a7dfa382744d032ccc0db2ebc370d4adbee385",
     "text": "源泉"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "6f47281b797aa914c603a1ec2d190a9fa6bbd61f1d6b8a0e472ae850d648f6c3",
+    "text": "腐食性"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "e4911ac7a51f1f23e3e6d10be5fb610ca3f76893d4a1d3f47270fee1341bba5e",
+    "text": "<keyword0>毒</keyword0>ダメージは与えたダメージと同量の敵の<keyword1>装甲</keyword1>を取り除く"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "ed7c26fe4ac9f066ba753377a1894f03f294ac3f6397e252189c2157cb78d7c7",
+    "text": "腐食"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "579583b5ccf12ba9e754d0d5c06932c87ef970b5703a7c5d16cceebf6198dcfc",
+    "text": "血液毒"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "b208d944708ee110d39c1e3d81a37f1875a0e9ab900cbb1f05f4d061945c43dd",
+    "text": "<keyword0>毒</keyword0>は{{value0}}%の確率で<keyword1>出血</keyword1>ダメージも与える"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "f0ff903b9d025f800e10437afb88049156b71d7fb85ba360d4b221333c4b56ae",
+    "text": "壊死"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "68cfb42aebb52a567f72c69ceb7f3be1f63b0aeee9467208e4db8885f4a9faef",
+    "text": "麻痺毒"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "7a342f626b35473632c94fe6b2209567910ad919133262be8acc5783c87677bd",
+    "text": "<keyword0>毒</keyword0>ダメージは{{value0}}%の確率で<keyword1>スタン</keyword1>ダメージも与える"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "5299e38b683c8eef2f68acb613850036d232e16cfbbafa196dfb97086368c4e2",
+    "text": "昏睡"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "e594470af691268bf0102cb3ca93c6e0fb5fd7572540ea55242935f8774856a0",
+    "text": "毒の利益"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "253d45e14babebd709c448627e48cb90fba856ba31bf08a85e1f459124670d9d",
+    "text": "毒素耐性"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "7859d380d9d62b0d8c196be5b35b0e70740407a6d0478f3177525beb8f73f25c",
+    "text": "受ける<keyword0>毒</keyword0>ダメージが半分になる"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "126fbeab4d3370a03e9b78ecd5d008e05104e71646c4dd3f80212ad1174991d3",
+    "text": "毒の一撃"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "94fd95e0fb24dea4ffc738893204c1bf8b805d9b597bc08b200ed511cb2d7f58",
+    "text": "<keyword0>毒</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "2657df12a69580df542835b2c9727fa95cc5d15b6b7258d34b968282c2ee6430",
+    "text": "猛毒性"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "4adf78f1bf8651d7053665a555b3a3552de03819c16d0bdb234079b5888d7834",
+    "text": "<keyword0>毒</keyword0>は{{value0}}%の確率でスタックが減る代わりに一つ増える"
+  },
   "content.talent.stun.concussive-force.name": {
     "reviewed": true,
     "source": "Concussive Force",

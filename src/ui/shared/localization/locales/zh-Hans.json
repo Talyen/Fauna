@@ -1595,6 +1595,102 @@
     "sourceHash": "1a1334ce4d7d12e04fabe519ebcc7d08ef8500ec7c53b242eab1ba2ccae1ec6e",
     "text": "源泉"
   },
+  "content.talent.poison.caustic.name": {
+    "reviewed": true,
+    "source": "Caustic",
+    "sourceHash": "2d89439ff9555dc37c446407548f446f8b58ed1856a7ccb88bd90789be0c20c3",
+    "text": "灼蚀"
+  },
+  "content.talent.poison.caustic.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage removes enemy <keyword1>Armor</keyword1> equal to damage dealt",
+    "sourceHash": "4b961746d8d984ac8ea7e1bcca240d676a7fc2dba3dff13816f6331c61494a9e",
+    "text": "<keyword0>中毒</keyword0>伤害移除等同于伤害数值的敌人<keyword1>护甲</keyword1>"
+  },
+  "content.talent.poison.corrosive.name": {
+    "reviewed": true,
+    "source": "Corrosive",
+    "sourceHash": "2df072b3b41f61f2bb7d4d2c5d4b364691c1fed005e69ef6d77f6d8dc54b5baf",
+    "text": "腐蚀"
+  },
+  "content.talent.poison.hemotoxin.name": {
+    "reviewed": true,
+    "source": "Hemotoxin",
+    "sourceHash": "2adb8b91234892f5460a34cac8070744265d33fbd9d98320853f3ac3c293ad25",
+    "text": "血液毒素"
+  },
+  "content.talent.poison.hemotoxin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "8594edef404ac43995adf830e88e7660ec53c6bf7f03f3cbe1a11851c6f9dcf4",
+    "text": "<keyword0>中毒</keyword0>有{{value0}}%几率同时造成<keyword1>流血</keyword1>伤害"
+  },
+  "content.talent.poison.necrosis.name": {
+    "reviewed": true,
+    "source": "Necrosis",
+    "sourceHash": "7068af1d19f2099052ac45cff2db27945aa18e48480d494945ff0c7ad4707820",
+    "text": "坏死"
+  },
+  "content.talent.poison.paralytic-venom.name": {
+    "reviewed": true,
+    "source": "Paralytic Venom",
+    "sourceHash": "72705eda3e6fe96b39eb63e597f1a3dbe05b5c9d9a1ad9d7e730e607ab87b328",
+    "text": "麻痹毒液"
+  },
+  "content.talent.poison.paralytic-venom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "fb583f426477012c28b7945460b08b3e082ec1409b303f04706dcc454a0395df",
+    "text": "<keyword0>中毒</keyword0>伤害有{{value0}}%几率同时造成<keyword1>眩晕</keyword1>伤害"
+  },
+  "content.talent.poison.torpor.name": {
+    "reviewed": true,
+    "source": "Torpor",
+    "sourceHash": "9b7a9b2fe48d9165e9299ccf8a4027bc8d7da9f72dc0eaad12a2280b380dcb75",
+    "text": "麻木"
+  },
+  "content.talent.poison.toxic-profit.name": {
+    "reviewed": true,
+    "source": "Toxic Profit",
+    "sourceHash": "4897ab91b0c8b5d784aacc6c84ba5ddf422ab67e300376c713df89892e1d19e0",
+    "text": "毒素获利"
+  },
+  "content.talent.poison.toxin-resistance.name": {
+    "reviewed": true,
+    "source": "Toxin Resistance",
+    "sourceHash": "8024dec5040a0afdab673a2543161662d9565d4991fc19a323b944e7f8836a52",
+    "text": "毒素抗性"
+  },
+  "content.talent.poison.toxin-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage",
+    "sourceHash": "a320c1bfd7dd87a9d3e1c8f268e99394966de4bb722dfea1974b7204d113f865",
+    "text": "受到的<keyword0>中毒</keyword0>伤害减半"
+  },
+  "content.talent.poison.venom-strike.name": {
+    "reviewed": true,
+    "source": "Venom Strike",
+    "sourceHash": "33f1721b00d68a6eeaa94ccdd4caa5ab463e60187be20fbbbe125c83acacf032",
+    "text": "毒液打击"
+  },
+  "content.talent.poison.venom-strike.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "4f90d5d3317c3ebd2ba3c3c2eb89864062389e5e7f66710f339ecb056f5ecc1a",
+    "text": "<keyword0>中毒</keyword0>卡牌有{{value0}}%几率发动两次"
+  },
+  "content.talent.poison.virulent.name": {
+    "reviewed": true,
+    "source": "Virulent",
+    "sourceHash": "2ea44cbc3a60d6c18305a792ad5ab05087907b4da6289eed79e7223ee0287f17",
+    "text": "毒性"
+  },
+  "content.talent.poison.virulent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> has a {{value0}}% chance to gain instead of lose a stack",
+    "sourceHash": "7c5b1b82c0882cc1cd9a1fd1cb5228172681ca2e6540261388e6057ae78b6fc9",
+    "text": "<keyword0>中毒</keyword0>有{{value0}}%几率获得一层而非失去一层"
+  },
   "content.talent.stun.concussive-force.name": {
     "reviewed": true,
     "source": "Concussive Force",
