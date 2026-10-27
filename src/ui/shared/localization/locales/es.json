@@ -1,9 +1,21 @@
 {
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "9ca9e11753313b97ab6afe61b49e6e8886de947ad5d45fd2d4840495abb81a07",
+    "text": "Cartas de acción en mano"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "941875b8bf6526815542bddaf6581801e155325c23ed096ba71794a11f486b87",
+    "text": "Juego automático"
+  },
   "battle.backupName": {
     "reviewed": true,
     "source": "{{name}} (backup)",
     "sourceHash": "bf81fef526f32bdc7182f0807d6bf4cf6241103171db468ff16bce797e8fbdbe",
-    "text": "{{name}} (suplente)"
+    "text": "{{name}} (reserva)"
   },
   "battle.battlefield": {
     "reviewed": true,
@@ -23,6 +35,12 @@
     "sourceHash": "2f200ca7131b72f5e682414901a7bd6065a36d8f7468253e36f7782c0cb11d63",
     "text": "Bloqueo de {{previous}} a {{current}}"
   },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "806fdfaebc57c416fe33e068766a21ae19b85da5c7b3dc329e6cafb766587ee3",
+    "text": "Cartas y controles de combate"
+  },
   "battle.chooseAlly": {
     "reviewed": true,
     "source": "Choose an ally",
@@ -33,7 +51,7 @@
     "reviewed": true,
     "source": "Choose a backup",
     "sourceHash": "220b8965dcc92624601141d10120fa997c89f640aaa97271a77710495b818e08",
-    "text": "Elige un suplente"
+    "text": "Elige una criatura de la reserva"
   },
   "battle.chooseEnemy": {
     "reviewed": true,
@@ -65,6 +83,12 @@
     "sourceHash": "5be4dab0b0f2f0fe2db7524a2271e2f967d2f01531154dc0337d6fe52d56ac5c",
     "text": "Terminar turno"
   },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "c50efb677db703baa869e0e4579465a97b596c73dc222cc9c86ca612b9e2e3a0",
+    "text": "Terminar turno · {{prompt}}"
+  },
   "battle.enemyRow": {
     "reviewed": true,
     "source": "Enemy row",
@@ -77,11 +101,35 @@
     "sourceHash": "25bac78c1cb3197adbe507957647323334820367c1ca25afa095e8621c195fc5",
     "text": "Comida"
   },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "4099eaf131e9b30169afee062e680278901d9bb6a2b52d1f9d8a0d4d7a549edb",
+    "text": "Examinar pila de descarte"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "2b469ba9c904cf381ca3812e62245fb725135423450d889805a3d008f9948e3e",
+    "text": "Examinar pila de robo"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "16f15239fbd26addf1364a9c8e2eed0b85c242de8836b054226cc44a568e43d8",
     "text": "Fuera de combate"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "3ccbe46921acda5f23b22f07b147c11d18aa1401798358fbeac5947aa5e3e8ce",
+    "text": "Maná {{mana}} de {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "af27fc33f023a64532da4b318aea38ee5f4839e07b771a57fdfce153e1ec8fd5",
+    "text": "Siguiente carta ×2"
   },
   "battle.openMenu": {
     "reviewed": true,
@@ -95,11 +143,23 @@
     "sourceHash": "7a63520872149311770775e4c4d3ce8874e75cc83dcad38af3d1a4e4e9a6dd5a",
     "text": "Fila aliada"
   },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "a346a2d0fd033216d49172291768659a6c3ac184982c706650cc4c732db8a283",
+    "text": "Resucitar a {{name}} de la reserva"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
     "sourceHash": "b4cc6c46ecadde7c7fd176b3e2cba6a5a56bb4c912914e6937f5dce19fecdfb2",
     "text": "Saltar combate"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "c135a142b190d6de03eef4542e1b56cb1855633ed0a4500d55ca83db527acf4b",
+    "text": "Cambiar a {{name}} desde la reserva"
   },
   "battle.target": {
     "reviewed": true,

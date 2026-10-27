@@ -1,4 +1,16 @@
 {
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "fb5d7281552f16e52ef4dd5e8f201235d9c88a968c215293614459c1171e4a57",
+    "text": "Карты действий в руке"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "87d894fd187423d8e74b55c33c23a622f016f1335ead4b5a136a07a6cd1daab8",
+    "text": "Автобой"
+  },
   "battle.backupName": {
     "reviewed": true,
     "source": "{{name}} (backup)",
@@ -22,6 +34,12 @@
     "source": "Block {{previous}} to {{current}}",
     "sourceHash": "4f71b574f27cc82b863036f565115a04061e58b462200622d520b4634038801d",
     "text": "Блок: от {{previous}} до {{current}}"
+  },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "f980dd867aa3140ef1a054bc2ae667a9161e9d3ce73a0a7c850acfe24dcf4bec",
+    "text": "Боевые карты и управление"
   },
   "battle.chooseAlly": {
     "reviewed": true,
@@ -65,6 +83,12 @@
     "sourceHash": "59b29e54bee5481ca40637ad60ebcbb908cc93789503ce1ffc78e6d3ebdcff25",
     "text": "Завершить ход"
   },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "e6d611d3212a84a8bb66c982c5c51918e0fe29cf2024aa1f549b180ba4adf82d",
+    "text": "Завершить ход · {{prompt}}"
+  },
   "battle.enemyRow": {
     "reviewed": true,
     "source": "Enemy row",
@@ -77,11 +101,35 @@
     "sourceHash": "a236537d0d1fade20ff06d6f7e354591c70054f268331f1b00fbf4d4ae8df884",
     "text": "Еда"
   },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "909aececc76bdc2e36b5e992dc783432e73e93898eddc362d6fd8da98c4bed8a",
+    "text": "Просмотреть стопку сброса"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "5fe5065e1222eebd6cdd5d96259431fd97680959486d0df3833325cf930b38be",
+    "text": "Просмотреть колоду добора"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "cd398b59ae17b96dd8da5b3a0df540da5084ad71a122d20f0790e29368822852",
     "text": "Нокаут"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "dde2fea7a5db02c84fb29f59feac0cbdd66f6930f63a2f8c3b0713a4f818e0cf",
+    "text": "Мана: {{mana}} из {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "8ad993a0a1361ed05edea7e328890d7e1728d447b7d9a91721f10d0f44aca874",
+    "text": "Следующая карта ×2"
   },
   "battle.openMenu": {
     "reviewed": true,
@@ -95,11 +143,23 @@
     "sourceHash": "805fa126f647e4cdb5627a95b246bbeb53dde3cb5d1e746fe3983f6ffa66be71",
     "text": "Ряд союзников"
   },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "41e5a0ef035cc58990e1efa7e91a749704f081176b1a5b47348ae10490bc0581",
+    "text": "Воскресить запасного: {{name}}"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
     "sourceHash": "008ae97b9c1a59c7accf6951849fd6f34cb5c2f1b5c9dfdf3857ce8074e3a2f5",
     "text": "Пропустить бой"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "642beb1777d9216d67b3bec2aae2d312de1457aca6f7f011f6d9fc09b1fd4cf2",
+    "text": "Выпустить запасного: {{name}}"
   },
   "battle.target": {
     "reviewed": true,

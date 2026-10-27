@@ -1,4 +1,16 @@
 {
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "dcd55ab14cb22b880b47a319d172fcf1c05a2a4373e58f21d36b49644dabf557",
+    "text": "アクションの手札"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "c1fff9f45602edf5ee943aa598829e8c63dde8d27e23d01871717c0d69b69068",
+    "text": "自動プレイ"
+  },
   "battle.backupName": {
     "reviewed": true,
     "source": "{{name}} (backup)",
@@ -22,6 +34,12 @@
     "source": "Block {{previous}} to {{current}}",
     "sourceHash": "1a7f351413536f918872848c814820d6b80c6fab3aaa0a37b66db8876d768be7",
     "text": "ブロック {{previous}} から {{current}}"
+  },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "3e33eb5618aec39ba813ffbfbefc712df5cd172464c8df0f335ac55e4b4531f4",
+    "text": "戦闘カードと操作"
   },
   "battle.chooseAlly": {
     "reviewed": true,
@@ -65,6 +83,12 @@
     "sourceHash": "72e55994cdac4efafcedd8fbe133cda873fd21007530aff1af9319f8a86174ba",
     "text": "ターン終了"
   },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "56d2614773276dfeb248163e948f5384210c50c90c01ece737e6eb989958e964",
+    "text": "ターン終了 · {{prompt}}"
+  },
   "battle.enemyRow": {
     "reviewed": true,
     "source": "Enemy row",
@@ -77,11 +101,35 @@
     "sourceHash": "948c2ccc4f083d05a0fb9b6407d967e2d2e763fdfe57bd3e438a5084e6062fa7",
     "text": "食料"
   },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "f7c6f233c57cdc20aec0610038a3067fad66e8cb2da558e95702a459035eca3e",
+    "text": "捨て札を確認"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "47fa4462bab213e80d8e19ec4fa18dbcaa565d7885ee669e5f90e05faa4c67da",
+    "text": "山札を確認"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "bce87ae77a03178d4d66ed60dc31c0baac00a71cc2a1f0156e9e2a0a53c8f9e7",
     "text": "戦闘不能"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "f370915929a384b298db2b7c3df5e09548d48aaebb8797140ccfe9d5acdfe5a0",
+    "text": "マナ {{mana}} / {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "44c2e53e62d3af4dadafb1912f28640a9127d75cce8d985cace8bb572b828feb",
+    "text": "次のカード ×2"
   },
   "battle.openMenu": {
     "reviewed": true,
@@ -95,11 +143,23 @@
     "sourceHash": "43dd2a8cabc8955d84c2e46d4ca30d95248fa073e2271d8e4d26b3375bc59cf5",
     "text": "味方の列"
   },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "7b1f96f6b860e6d45fe1cd16f4e41a19739cba060e97d123e2fce8eb48439dd3",
+    "text": "控えの{{name}}を復活"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
     "sourceHash": "afe22c950a3d3cdd09e0e3d4f7ac182356b7d4b1fed996c66dcdad00062d7a39",
     "text": "戦闘をスキップ"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "4d468b9189454978a482f4a514b4ba700c012526ca29971815d8d81def1cadff",
+    "text": "控えの{{name}}を交代で出す"
   },
   "battle.target": {
     "reviewed": true,

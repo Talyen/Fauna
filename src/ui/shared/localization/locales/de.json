@@ -1,9 +1,21 @@
 {
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "618eff11dc2c58bd7efcec76d34467bb918c90e5ee5bdaf56ba326de434df826",
+    "text": "Aktionskarten auf der Hand"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "40c6cb20675355969aa4a4f863ea3ea84445654403155e87b479010781bbd2e6",
+    "text": "Automatisch spielen"
+  },
   "battle.backupName": {
     "reviewed": true,
     "source": "{{name}} (backup)",
     "sourceHash": "0ae3bcc15772d71b3fc05b40f8af710136e98303a3b43fdac6ce0ab72f44a5f6",
-    "text": "{{name}} (Ersatz)"
+    "text": "{{name}} (Reserve)"
   },
   "battle.battlefield": {
     "reviewed": true,
@@ -23,6 +35,12 @@
     "sourceHash": "d9ee6bed1e36e68f1e9f0af1d1e71506ecff74fff021a7ef8eb29a42e513130a",
     "text": "Block von {{previous}} auf {{current}}"
   },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "72a37f5f5711b3d7f88378bc3e59c743d3ada0a8795074126a46ca118e8358a5",
+    "text": "Kampfkarten und Steuerung"
+  },
   "battle.chooseAlly": {
     "reviewed": true,
     "source": "Choose an ally",
@@ -33,7 +51,7 @@
     "reviewed": true,
     "source": "Choose a backup",
     "sourceHash": "fffc3d54834f5007a643f9d206f21fef87f0a66bf46327a538eb1790c7890a77",
-    "text": "Ersatz wählen"
+    "text": "Reserve wählen"
   },
   "battle.chooseEnemy": {
     "reviewed": true,
@@ -65,6 +83,12 @@
     "sourceHash": "4e43c4d2a5540e38d3838bf69dccfc6a0a22add460f4f1c7820101802951ac7d",
     "text": "Zug beenden"
   },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "5f5c01544ea69fc5df6decd89e47109a413deefb03361d621c9e48bf6829c085",
+    "text": "Zug beenden · {{prompt}}"
+  },
   "battle.enemyRow": {
     "reviewed": true,
     "source": "Enemy row",
@@ -77,11 +101,35 @@
     "sourceHash": "5d4ef0d166f2ced8d76688898a64700b286faf985e3c4736ccaf33fa227b6942",
     "text": "Nahrung"
   },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "c92c03431b361f6e769d941b77cf0a500a4c09d140bed3b19cd971245913b261",
+    "text": "Ablagestapel ansehen"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "5c3f5f2e59be73f905092d0dbbd7e20c9485321581be777e78d8f1eab32f31c8",
+    "text": "Nachziehstapel ansehen"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "787e34f6238264e1fe9387983993d1fc90619048294ca6ce7ae9f0727469fe57",
     "text": "K. o."
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "3c7adb639d0ed9ce33a49679902ac78366b9333b17c93a65a3734ca4436aa3b6",
+    "text": "Mana {{mana}} von {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "eb0d3049b2d8c3486dd1499426a94d83c6c7cd6674250cba0100d266ded59abe",
+    "text": "Nächste Karte ×2"
   },
   "battle.openMenu": {
     "reviewed": true,
@@ -95,11 +143,23 @@
     "sourceHash": "111f25359eb0585b08ac0b64283a7631822c0595b074fcaa84be6d897a48d6e4",
     "text": "Verbündetenreihe"
   },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "e328a9deb2b6e70c603f3bfcaee83d7ff4a77c232e242fdae4641936fd9cf26a",
+    "text": "{{name}} aus der Reserve wiederbeleben"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
     "sourceHash": "dc2c13c84107560212bcdba7101e0291d87ea0ee3f999550f22f3a01514f9400",
     "text": "Kampf überspringen"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "80ddbd26514e80c8fc6297d6493284c6b6ca33064f59bba4026c5cdedcc63f4d",
+    "text": "{{name}} aus der Reserve einwechseln"
   },
   "battle.target": {
     "reviewed": true,

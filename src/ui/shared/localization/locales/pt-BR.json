@@ -1,4 +1,16 @@
 {
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "f06ec84c01034624eb5854b0cb2607514a0694fd310b45340d39752ac6590dcc",
+    "text": "Cartas de ação na mão"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "e9fb4135f5f8b21790d019ca55aea6abf72897dd05124aaa4dfebd87d81545f5",
+    "text": "Jogo automático"
+  },
   "battle.backupName": {
     "reviewed": true,
     "source": "{{name}} (backup)",
@@ -22,6 +34,12 @@
     "source": "Block {{previous}} to {{current}}",
     "sourceHash": "62465c116ee478f0174d17507656e4703b174bbf4fe4b277838419abbcd4bf4d",
     "text": "Bloqueio de {{previous}} para {{current}}"
+  },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "1ebae51cb2799ba7b4d6728cc060d142a848a19e37bbf3fcb3f178c6460fdf10",
+    "text": "Cartas e controles de combate"
   },
   "battle.chooseAlly": {
     "reviewed": true,
@@ -65,6 +83,12 @@
     "sourceHash": "6c20a17bf481fcfa62e576b1936e822e1e968adce5a1945f416d17e7625e6517",
     "text": "Encerrar turno"
   },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "41429a94d30077e7e77e96a63d50c20107aa824c6006cf91533b911964e5bb10",
+    "text": "Encerrar turno · {{prompt}}"
+  },
   "battle.enemyRow": {
     "reviewed": true,
     "source": "Enemy row",
@@ -77,11 +101,35 @@
     "sourceHash": "b3bfc4fd56754a3f1e5da23f0a908f958319d0b45c36c4c6da799780f7df3664",
     "text": "Comida"
   },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "20934c9cc69d96690f8f6bcc83134fce8c81edbafe5b8e33313b583c633d5506",
+    "text": "Examinar pilha de descarte"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "5b6df85e114f65df3aae2fcadc3c35484201f79ef0c903f539f430527f6892f0",
+    "text": "Examinar pilha de compra"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "90b9dc39d28b973f5bc8e0adde1468d7914d3349e394e0c3ccf9c699c891791d",
     "text": "Nocaute"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "c853f7aa3df142f6cdb9f0bd302182db4692d0cd6be76089e5920e1df5ad7c16",
+    "text": "Mana {{mana}} de {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "04fb30481d990e3b219b6206286b2b0f834e48ad7d98e4fdb9246b23442ab7a5",
+    "text": "Próxima carta ×2"
   },
   "battle.openMenu": {
     "reviewed": true,
@@ -95,11 +143,23 @@
     "sourceHash": "385fdffb05c34c94d9c45be15a92106689a9c2a1a99273a5a0c1516f9409bc0e",
     "text": "Fileira aliada"
   },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "266f25b02bd66409d9c5f5ccb44684fdd2cfc76cdf154b71e307763b1fe6a561",
+    "text": "Ressuscitar {{name}} da reserva"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
     "sourceHash": "5b7f18d9cf35d17fcab91d5f8a476425affb6b52068fc557ab905afdbe125fcd",
     "text": "Pular combate"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "44223c930bb5f3e24a930136a7008311b4591a84ba82475c164301b5417b0b71",
+    "text": "Trocar por {{name}} da reserva"
   },
   "battle.target": {
     "reviewed": true,

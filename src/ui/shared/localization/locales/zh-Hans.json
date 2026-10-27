@@ -1,9 +1,21 @@
 {
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "bb12accce3043cbfe194a5fc7241276ec8400993f7f34ef80385d1b7d0d48daa",
+    "text": "行动手牌"
+  },
+  "battle.autoplay": {
+    "reviewed": true,
+    "source": "Auto-play",
+    "sourceHash": "c7bccf721337d3b7d6e46c9b9195c1f76e979459cb9c26fea4e3cfc5626e0f80",
+    "text": "自动战斗"
+  },
   "battle.backupName": {
     "reviewed": true,
     "source": "{{name}} (backup)",
     "sourceHash": "7e1e3455b886160ff38f5c0537858a96777fc3a46e3dbc5520e5f03492745a05",
-    "text": "{{name}}（后备）"
+    "text": "{{name}}（替补）"
   },
   "battle.battlefield": {
     "reviewed": true,
@@ -23,6 +35,12 @@
     "sourceHash": "3f5d95808b7877bc5c404e1b4f00a5b2c0436e993c5c2a120ddbbb8ebb3d87f0",
     "text": "格挡从 {{previous}} 变为 {{current}}"
   },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "145f188c25c630e72dfb32a2fe109835df487e5131403b50527488e524be7636",
+    "text": "战斗卡牌和控制"
+  },
   "battle.chooseAlly": {
     "reviewed": true,
     "source": "Choose an ally",
@@ -33,7 +51,7 @@
     "reviewed": true,
     "source": "Choose a backup",
     "sourceHash": "f161254b75aeac10a175137ef2fb0b724b6c063facb06f0cd7342e8f4c7b1b19",
-    "text": "选择一名后备队员"
+    "text": "选择一名替补"
   },
   "battle.chooseEnemy": {
     "reviewed": true,
@@ -65,6 +83,12 @@
     "sourceHash": "5b80f008f24350f2552a586709371139714bd44dc5ac50eb1690f70e3c07e605",
     "text": "结束回合"
   },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "da4856d0a18ebeab4b41dd9232b25dc31ff652f3aa55f9a3ed8b375601d975f5",
+    "text": "结束回合 · {{prompt}}"
+  },
   "battle.enemyRow": {
     "reviewed": true,
     "source": "Enemy row",
@@ -77,11 +101,35 @@
     "sourceHash": "c6f25bba2a0d64cd12826f8915bbaf8f1baf6643cc0a8c96c817dfd79d17a9be",
     "text": "食物"
   },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "a34e84bb7c762f55fa073e0c4f1ed40ffb18a68020251dddce2669aeca5ea4e4",
+    "text": "查看弃牌堆"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "1929acf4a61eb3d759efb01878eda30b26ad3f7ac24cdf1e05ea4516e9e0cc5b",
+    "text": "查看抽牌堆"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
     "sourceHash": "b92ded67ee66fc4663df36fc87d8142e7a2dd77bb18df1cc5f506306c725c174",
     "text": "击倒"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "a2e4c022cb4cda5720503372eae452b6088616f62cac3096be473224c2f26697",
+    "text": "法力 {{mana}} / {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "6d2ce81528078c9bcf90106669e55754f3a3ac2f2301c7f76ec803c508cc71f6",
+    "text": "下一张卡牌 ×2"
   },
   "battle.openMenu": {
     "reviewed": true,
@@ -95,11 +143,23 @@
     "sourceHash": "09dc1f933db9e0aa7e537deaf5c9fb7cdf785ab51a8dd9d87358f0b41625ea32",
     "text": "我方队列"
   },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "cfff368e015d7adcd8061fc6a935bcaa86be21cc61900a6673aeb8283cc42589",
+    "text": "复活替补{{name}}"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
     "sourceHash": "642508755ae3b58298844bd8434be0e01088f32d4e90bb7186f0faced6d949f4",
     "text": "跳过战斗"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "a3ef3ff9b70d9422d2aa02c5ccfe65c80f43c207481d268655bf10cfb500eca4",
+    "text": "将替补{{name}}换上场"
   },
   "battle.target": {
     "reviewed": true,
