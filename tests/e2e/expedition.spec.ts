@@ -1,7 +1,7 @@
 import { createBattleActor } from "../../src/application/battle-actor";
 import { expect, type Locator } from "@playwright/test";
 import { species } from "../../src/game/content";
-import { policy, FULL_JOURNEY_SEED, FULL_JOURNEY_COMMAND_BUDGET } from "../support/game";
+import { policy, fullJourneyRecruit, FULL_JOURNEY_SEED, FULL_JOURNEY_COMMAND_BUDGET } from "../support/game";
 import { test, seed, state } from "./support/session";
 import { continueToRecruit, step } from "./support/journey";
 
@@ -27,9 +27,10 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
     if (s.phase === "recruit" && s.team.length + s.reserves.length < 5) {
       await continueToRecruit(page);
       const roster = [...s.team, ...s.reserves];
-      const incoming =
-        s.reward!.recruits.find((kind) => !roster.some((unit) => unit.species === kind)) ??
-        s.reward!.recruits[0]!;
+      const choice = fullJourneyRecruit(s);
+      expect(choice.type).toBe("recruit");
+      if (choice.type !== "recruit") throw new Error("Expected a recruit for an incomplete roster");
+      const incoming = choice.species;
       await activate(
         page
           .getByRole("button", {
@@ -49,7 +50,17 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
         repeated ? [] : [{ species: incoming }],
       );
       expect(recruited.discovery.recruited[incoming]).toBe((s.discovery.recruited[incoming] ?? 0) + 1);
-    } else await step(page, activate, s, s.phase === "battle" ? actor.choose(s).command : policy(s));
+    } else
+      await step(
+        page,
+        activate,
+        s,
+        s.phase === "battle"
+          ? actor.choose(s).command
+          : s.phase === "recruit"
+            ? fullJourneyRecruit(s)
+            : policy(s),
+      );
   }
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
   const final = await state(page);

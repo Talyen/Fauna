@@ -18,6 +18,7 @@ import {
   policy,
   FULL_JOURNEY_SEED,
   FULL_JOURNEY_COMMAND_BUDGET,
+  fullJourneyRecruit,
 } from "../../support/game";
 
 function startedJourney() {
@@ -255,14 +256,8 @@ it("deterministically replays the complete one-starter journey through the final
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");
     const command =
-      game.phase === "recruit" && game.team.length + game.reserves.length < 5
-        ? {
-            type: "recruit" as const,
-            species:
-              game.reward!.recruits.find(
-                (kind) => ![...game.team, ...game.reserves].map((unit) => unit.species).includes(kind),
-              ) ?? game.reward!.recruits[0]!,
-          }
+      game.phase === "recruit"
+        ? fullJourneyRecruit(game)
         : game.phase === "battle"
           ? actor.choose(game).command
           : policy(game);
