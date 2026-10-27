@@ -329,6 +329,12 @@
     "sourceHash": "a0a7e8ed5b1dc81a92b3437f35b6d1ef340b29c85d3d816e898cae915f0cd616",
     "text": "Talismã de osso"
   },
+  "content.boon.bone-charm.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you defeat an enemy",
+    "sourceHash": "a050bb4d8a3278cbdc8d7132f9cdca8efd5bcb64ba4a2ba8b28b363cd136eab7",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> ao derrotar um inimigo"
+  },
   "content.boon.brass-censer.name": {
     "reviewed": true,
     "source": "Brass Censer",
@@ -346,6 +352,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "f8b37d9b84f85d5695ddde6b1444e2be045a017901793cdc4da6801f4b6b5d02",
     "text": "Faca do batedor de carteiras"
+  },
+  "content.boon.cutpurse-knife.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "e8b26221e5cace654788fc920fe201d76d76a2695ef9ff489c756510d94bd995",
+    "text": "Receba {{value0}} de Ouro ao causar dano de <keyword0>Sangramento</keyword0>"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
@@ -377,6 +389,12 @@
     "sourceHash": "1bcadb250728d01010a8e8ed9e1277ff1a4f91ca0d1f4a33c49c1a32ea6cb38d",
     "text": "Favor do bosque"
   },
+  "content.boon.groves-favor.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
+    "sourceHash": "b9b52fce7e482b6ae1a811ef9969ae1847984b7125db5901aa71e9f4d182cc09",
+    "text": "Receba {{value0}} de <keyword0>Espinhos</keyword0> ao restaurar <keyword1>Saúde</keyword1> em combate"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
@@ -406,6 +424,12 @@
     "source": "Merchant's Favor",
     "sourceHash": "9f05c37e385555cdc2bb39c990b020da8de4e73130d6dacd2a5cfb82799c41a2",
     "text": "Favor do mercador"
+  },
+  "content.boon.merchants-favor.rule": {
+    "reviewed": true,
+    "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
+    "sourceHash": "101d5ad8bd4267e859354edeec16d2035595897c3758ca6bb1432a3eae456655",
+    "text": "Sua compra em cada comerciante de Bênçãos custa {{value0}} de Ouro a menos"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -472,6 +496,12 @@
     "source": "Smuggler's Map",
     "sourceHash": "86dd6a132acb207e9d95c98cbd951c4011603f163eb5184b7f246992728d0cad",
     "text": "Mapa do contrabandista"
+  },
+  "content.boon.smugglers-map.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} additional Gold for each battle won",
+    "sourceHash": "2657cf48b689540a918b3bdb962684cbb4025c48a7e9366d53652bedcb274afb",
+    "text": "Receba {{value0}} de Ouro adicional por cada combate vencido"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,

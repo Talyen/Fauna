@@ -329,6 +329,12 @@
     "sourceHash": "83707414887d63cb04879b6f1d5148b973a47cead646245c5e1b2fe5bf5650dd",
     "text": "Костяной оберег"
   },
+  "content.boon.bone-charm.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you defeat an enemy",
+    "sourceHash": "044a95260c47dc368a8dd3affbf7580619cae17cbd637dafd5fce8fa9180e609",
+    "text": "При победе над врагом восстановите {{value0}} <keyword0>здоровья</keyword0>"
+  },
   "content.boon.brass-censer.name": {
     "reviewed": true,
     "source": "Brass Censer",
@@ -346,6 +352,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "b246efade40a55a10c180028b6446de3b072a30b8dc85452fb24f299d5fd2dcb",
     "text": "Нож карманника"
+  },
+  "content.boon.cutpurse-knife.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "9d66a02d34c420ebd71133fa98ddd21ac3248aad5cbd213dc1320c381aeda67d",
+    "text": "Получите {{value0}} золота, когда наносите урон <keyword0>кровотечением</keyword0>"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
@@ -377,6 +389,12 @@
     "sourceHash": "6fbbecd932a54ee1214b395b4759bc9af23cf71b6cdf7a2506fb3142fd72d122",
     "text": "Милость рощи"
   },
+  "content.boon.groves-favor.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
+    "sourceHash": "b3c539ab9ad47638eb6bbc1712d1408b99c2f914b15ee127a986f6c746388304",
+    "text": "Получите {{value0}} <keyword0>шипов</keyword0>, когда восстанавливаете <keyword1>здоровье</keyword1> в бою"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
@@ -406,6 +424,12 @@
     "source": "Merchant's Favor",
     "sourceHash": "68a297b987aa3a296ea7e29d9605a2b7e1e1ba4dfaa60f01a3fdf20f31d4267c",
     "text": "Милость торговца"
+  },
+  "content.boon.merchants-favor.rule": {
+    "reviewed": true,
+    "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
+    "sourceHash": "0bc93e18323e79abff09f1df5fddd29094ff813fe614052943a9ee0f6f6afdd8",
+    "text": "Покупка у каждого торговца дарами стоит на {{value0}} золота меньше"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -472,6 +496,12 @@
     "source": "Smuggler's Map",
     "sourceHash": "9266620094bd37be2aaf228115d8e28b13248945bad1fecffc71d708da7fcc43",
     "text": "Карта контрабандиста"
+  },
+  "content.boon.smugglers-map.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} additional Gold for each battle won",
+    "sourceHash": "38a6b3fa7535cc1f0a25c7207d932636df31174e3b54e12835fc8e0f64e25e73",
+    "text": "Получите дополнительно {{value0}} золота за каждый выигранный бой"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,

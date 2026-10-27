@@ -329,6 +329,12 @@
     "sourceHash": "86493f1d983c07bd271fa95e5bbe359ef315eff5b34c102d712c168982979f5f",
     "text": "Knochenamulett"
   },
+  "content.boon.bone-charm.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you defeat an enemy",
+    "sourceHash": "e6706b18ed25a51907705e8e430878acb06fcb6f731432a34333f8750a5da4a4",
+    "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her, wenn du einen Gegner besiegst"
+  },
   "content.boon.brass-censer.name": {
     "reviewed": true,
     "source": "Brass Censer",
@@ -346,6 +352,12 @@
     "source": "Cutpurse Knife",
     "sourceHash": "5cf26d170aa98cdb4926be7bcedfa40cfb5fc539f0cb9c3807b76b2645ade535",
     "text": "Beutelschneidermesser"
+  },
+  "content.boon.cutpurse-knife.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "74a7f063f22918a1bba8cf09302b4788f8c96004d9a78178a8498fcddd4faf69",
+    "text": "Erhalte {{value0}} Gold, wenn du <keyword0>Blutungsschaden</keyword0> verursachst"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
@@ -377,6 +389,12 @@
     "sourceHash": "306550399bba5f790e282e7f4aa0663c92715764c6d325bdb2c48ea4aee58abf",
     "text": "Gunst des Hains"
   },
+  "content.boon.groves-favor.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you restore <keyword1>Health</keyword1> in battle",
+    "sourceHash": "7e0c450fbac5f5b1d24f51e0b25c6d267e7ba0abe65129371b196a06a513d56f",
+    "text": "Erhalte {{value0}} <keyword0>Dornen</keyword0>, wenn du im Kampf <keyword1>Gesundheit</keyword1> wiederherstellst"
+  },
   "content.boon.hoard-lockplate.rule": {
     "reviewed": true,
     "source": "<keyword0>Armor</keyword0> reduces damage before <keyword1>Block</keyword1>",
@@ -406,6 +424,12 @@
     "source": "Merchant's Favor",
     "sourceHash": "2db9ad8d8ffc6721001ea16b16c1fe699ea61e9dd5534926bb101c7cab33403a",
     "text": "Gunst des Händlers"
+  },
+  "content.boon.merchants-favor.rule": {
+    "reviewed": true,
+    "source": "Your purchase at each Boon Merchant costs {{value0}} less Gold",
+    "sourceHash": "e23a560ec2bbed90693f44acd87a852a7011a0018a42ee65609c33fe31dce344",
+    "text": "Dein Kauf bei jedem Segenhändler kostet {{value0}} Gold weniger"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -472,6 +496,12 @@
     "source": "Smuggler's Map",
     "sourceHash": "3207af59d62a297d1f6f5fa00dd924b0c8f1eb3cbde692e419c96ad0bb25f6a6",
     "text": "Schmugglerkarte"
+  },
+  "content.boon.smugglers-map.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} additional Gold for each battle won",
+    "sourceHash": "59c4f895527616b69555507ad12caeca6df4bef9d3a6211785f817ec9868df92",
+    "text": "Erhalte {{value0}} zusätzliches Gold für jeden gewonnenen Kampf"
   },
   "content.boon.tattered-pages.name": {
     "reviewed": true,
