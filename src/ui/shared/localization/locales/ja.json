@@ -425,6 +425,12 @@
     "sourceHash": "e79002e6d8bb9bd7b67d59155cc7cf9070671fc110af915c051821aece984b41",
     "text": "寄生花"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "0fbba5b277129578247118f57fdeaa5b10523eabfd5519bb6d9e5ff122d76998",
+    "text": "<keyword0>毒</keyword0>ダメージは{{value0}}%の確率で<keyword1>吸血</keyword1>を発動"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",

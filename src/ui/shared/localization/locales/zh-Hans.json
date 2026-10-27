@@ -425,6 +425,12 @@
     "sourceHash": "7892ed624e30bc6c414517013ef22ce2c01f83a4ab6b7296a626f2e53f84958c",
     "text": "寄生之花"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "7bd11cc316ea47b271d3eed1977f612df78bd7e8e9eaaea45b332ace59ded450",
+    "text": "<keyword0>中毒</keyword0>伤害有{{value0}}%的概率触发<keyword1>汲取</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",

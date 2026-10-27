@@ -461,6 +461,12 @@
     "sourceHash": "8a102a835308043172e229afe742c33d30c7206fe37a9525b52a8e48edd30a82",
     "text": "Fleur parasite"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "127aadbf51200c365c834566502475b9750e88412556cbb27fcfe98cf53b06eb",
+    "text": "Les dégâts de <keyword0>Poison</keyword0> ont {{value0}}% de chances de déclencher un <keyword1>Vol de vie</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",

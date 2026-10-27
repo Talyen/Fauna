@@ -425,6 +425,12 @@
     "sourceHash": "3503b8705b23bbdc2aad0d6bc3e88bf0bdab424817bd8576a5eef2c1e685d63a",
     "text": "Flor parasitaria"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "a6343341f3638d29232adb164d5f2c0d472a33f6e340acf4bc059872f9a28f30",
+    "text": "El daño de <keyword0>Veneno</keyword0> tiene un {{value0}}% de probabilidad de activar <keyword1>Drenaje</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",

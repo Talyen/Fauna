@@ -425,6 +425,12 @@
     "sourceHash": "5b94434efee46920a756f5aef516ffd7993ef4c7ad16c58f1671636838e17735",
     "text": "Parasitäre Blüte"
   },
+  "content.boon.parasitic-bloom.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> damage has a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "920bc9de4d21c25618b5fbd7a7cc8e20e873bec6faf705172102269ef59f49e5",
+    "text": "<keyword0>Giftschaden</keyword0> hat eine Chance von {{value0}}% auf <keyword1>Lebensraub</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
