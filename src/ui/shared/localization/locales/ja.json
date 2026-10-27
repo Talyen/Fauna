@@ -2501,11 +2501,23 @@
     "sourceHash": "2aeca850469fdec17cab731855f8d095d83285d1d464455d77af8bca545f621a",
     "text": "預け荷物"
   },
+  "content.glossary.action-card.definition.rule": {
+    "reviewed": true,
+    "source": "A card belonging to one creature; That creature acts when you play it; Its cost is paid from the shared <keyword0>mana</keyword0> pool",
+    "sourceHash": "6574e75d089c55b6783b39261e566e6bfe2836ea74c5f41f71e42cbd05e51db3",
+    "text": "1体のクリーチャーに属するカード; 使用するとそのクリーチャーが行動する; コストは共有の<keyword0>マナ</keyword0>から支払う"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",
     "sourceHash": "2d6eed21c43cbc2e00187894410a7624f4b0e28047c82ec09dfb6ac248d57027",
     "text": "アクションカード"
+  },
+  "content.glossary.attack.definition.rule": {
+    "reviewed": true,
+    "source": "An action that deals damage to an enemy; Attack traits modify its damage",
+    "sourceHash": "031554d6bea6bdab315a6cf2f98b86447cb54fcbfd951b054626dd00ef59af64",
+    "text": "敵にダメージを与える行動; 攻撃特性がそのダメージを変える"
   },
   "content.glossary.attack.term.rule": {
     "reviewed": true,
@@ -2524,6 +2536,12 @@
     "source": "Battle",
     "sourceHash": "352eb6a83b22eca296f13648a003a6a3dc852d177c6256773ccdf2662a73b885",
     "text": "戦闘"
+  },
+  "content.glossary.boons.definition.rule": {
+    "reviewed": true,
+    "source": "Passive effects lasting for the current journey; When offered, choose one of three or skip; Boons end with the journey",
+    "sourceHash": "672a7bbabdd3ecb9ad984de22f8222339a6b44c1c0ca2bf710c8e74dea0e4035",
+    "text": "現在の旅の間続くパッシブ効果; 提示されたら3つの祝福から1つ選ぶか見送る; 旅が終わると祝福も終わる"
   },
   "content.glossary.boons.term.rule": {
     "reviewed": true,
@@ -2560,6 +2578,12 @@
     "source": "Echo",
     "sourceHash": "2543aef2713fe0fc2fcc7639c3be4873a14b4d99662c41a19f079cdd1efbe201",
     "text": "エコー"
+  },
+  "content.glossary.gold.definition.rule": {
+    "reviewed": true,
+    "source": "Gold earned in battle carries between journeys; Spend Gold at Boon Merchants on Boons for the current journey; Gold is not a keyword or talent category",
+    "sourceHash": "363b26c1cbc3bff1e374c6a98fe28544c76ac5cadce261932ac60fb681a20811",
+    "text": "戦闘で得たゴールドは旅をまたいで保持される; 祝福商人で現在の旅の祝福を購入できる; ゴールドはキーワードでも才能のカテゴリでもない"
   },
   "content.glossary.gold.term.rule": {
     "reviewed": true,

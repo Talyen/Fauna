@@ -2501,11 +2501,23 @@
     "sourceHash": "2d0ad9e30b2407c435a1f3f8f6d9086998ec6cdeab4cf4b776ce1d315042f77f",
     "text": "Оставленный багаж"
   },
+  "content.glossary.action-card.definition.rule": {
+    "reviewed": true,
+    "source": "A card belonging to one creature; That creature acts when you play it; Its cost is paid from the shared <keyword0>mana</keyword0> pool",
+    "sourceHash": "b0e43598ea8c03aa180d11aa61d118e5fdb5e6d516213d8c913424e983cdf9ba",
+    "text": "Карта, принадлежащая одному существу; При её розыгрыше действует это существо; Стоимость оплачивается из общего запаса <keyword0>маны</keyword0>"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",
     "sourceHash": "51e6c7787b66a2774498b93f11a0d49b60e9cf6a8052bbe0188957455316bffc",
     "text": "Карта действия"
+  },
+  "content.glossary.attack.definition.rule": {
+    "reviewed": true,
+    "source": "An action that deals damage to an enemy; Attack traits modify its damage",
+    "sourceHash": "ac5d250dbfb02542026ed524384c93aad916ec0f84e736c15f98daf8c0d9f7a5",
+    "text": "Действие, которое наносит урон врагу; Свойства атаки изменяют её урон"
   },
   "content.glossary.attack.term.rule": {
     "reviewed": true,
@@ -2524,6 +2536,12 @@
     "source": "Battle",
     "sourceHash": "530bce49934e4f08735627199787dd1e03a1ea3b2f0ce8b33b225a6bb651df20",
     "text": "Бой"
+  },
+  "content.glossary.boons.definition.rule": {
+    "reviewed": true,
+    "source": "Passive effects lasting for the current journey; When offered, choose one of three or skip; Boons end with the journey",
+    "sourceHash": "801af9cda82ea3ddfe7da2751f041ab7459b507c6f8c0f8e9d7c9cd3beb8f39e",
+    "text": "Пассивные эффекты на время текущего путешествия; При предложении выберите одно из трёх благословений или пропустите; Благословения заканчиваются вместе с путешествием"
   },
   "content.glossary.boons.term.rule": {
     "reviewed": true,
@@ -2560,6 +2578,12 @@
     "source": "Echo",
     "sourceHash": "0b254bb368b158652489742054f444bc34164da2277f35815a5cd7baf225f5be",
     "text": "Эхо"
+  },
+  "content.glossary.gold.definition.rule": {
+    "reviewed": true,
+    "source": "Gold earned in battle carries between journeys; Spend Gold at Boon Merchants on Boons for the current journey; Gold is not a keyword or talent category",
+    "sourceHash": "80707eab4671d1d591e71e3fa610f5d1ca11925f617e52ae27687f3a975907bd",
+    "text": "Золото, полученное в бою, сохраняется между путешествиями; Тратьте его у торговцев благословениями на текущее путешествие; Золото не является ключевым словом или категорией талантов"
   },
   "content.glossary.gold.term.rule": {
     "reviewed": true,

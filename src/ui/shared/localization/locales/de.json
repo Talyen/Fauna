@@ -2501,11 +2501,23 @@
     "sourceHash": "9a8e8887cce2408b04fb8b98349d82b7b6ff738bef859df81e2056fdb32612dd",
     "text": "Aufbewahrtes Gepäck"
   },
+  "content.glossary.action-card.definition.rule": {
+    "reviewed": true,
+    "source": "A card belonging to one creature; That creature acts when you play it; Its cost is paid from the shared <keyword0>mana</keyword0> pool",
+    "sourceHash": "81abf86e82613c5fd85988453f0af720df6201d8d8679a99816f9a503a5a8f16",
+    "text": "Eine Karte, die einer Kreatur gehört; Diese Kreatur handelt, wenn du sie spielst; Ihre Kosten werden aus dem gemeinsamen <keyword0>Mana</keyword0> bezahlt"
+  },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
     "source": "Action card",
     "sourceHash": "a418518747ed6b89f206302b119fa4ac53a26fef5afe099b50bfad7fbf633760",
     "text": "Aktionskarte"
+  },
+  "content.glossary.attack.definition.rule": {
+    "reviewed": true,
+    "source": "An action that deals damage to an enemy; Attack traits modify its damage",
+    "sourceHash": "dbf204b600a3003d85c325ef8c5fcb8a2c240814cc534d23df8418eaac28761a",
+    "text": "Eine Aktion, die einem Gegner Schaden zufügt; Angriffsmerkmale verändern ihren Schaden"
   },
   "content.glossary.attack.term.rule": {
     "reviewed": true,
@@ -2524,6 +2536,12 @@
     "source": "Battle",
     "sourceHash": "876c80c65806e27f6e9d7a98bcc336f648d675643c355ae15f557eb5ab7bd9a7",
     "text": "Kampf"
+  },
+  "content.glossary.boons.definition.rule": {
+    "reviewed": true,
+    "source": "Passive effects lasting for the current journey; When offered, choose one of three or skip; Boons end with the journey",
+    "sourceHash": "60ae0058705b4af71be7d26b9788e819c8f092a77fcb56c92ad4902f8a3fcac7",
+    "text": "Passive Effekte für die aktuelle Reise; Wähle bei einem Angebot einen von drei Segen oder überspringe; Segen enden mit der Reise"
   },
   "content.glossary.boons.term.rule": {
     "reviewed": true,
@@ -2560,6 +2578,12 @@
     "source": "Echo",
     "sourceHash": "043126a51a018d9c4b6a62910adc3a3ca42968a3e4efb84d190ac6dfed280870",
     "text": "Echo"
+  },
+  "content.glossary.gold.definition.rule": {
+    "reviewed": true,
+    "source": "Gold earned in battle carries between journeys; Spend Gold at Boon Merchants on Boons for the current journey; Gold is not a keyword or talent category",
+    "sourceHash": "39bae7628edf6b730d84b18c972e8bc970a5e0c432ecf3e08f45b2b594fabadf",
+    "text": "Im Kampf verdientes Gold bleibt zwischen Reisen erhalten; Gib Gold bei Segenhändlern für Segen der aktuellen Reise aus; Gold ist kein Schlüsselwort und keine Talentkategorie"
   },
   "content.glossary.gold.term.rule": {
     "reviewed": true,
