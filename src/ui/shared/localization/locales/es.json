@@ -707,6 +707,12 @@
     "sourceHash": "e74214f7391bfc75c9d9b1f853094743059c6a9fb95914d42e0d0c4bf2c40206",
     "text": "Yunque de estrella fugaz"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "c3fc9c80012743ec4ebdb79020237014ae09f8a695a2298b7eae154a42915f0b",
+    "text": "La mitad del <keyword0>Bloqueo</keyword0> perdido ante ataques enemigos se convierte en acumulación de <keyword1>Aturdimiento</keyword1> sobre el atacante"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -857,6 +863,12 @@
     "sourceHash": "e1b91ddebe7b1d715a56c5944105caa94345365a413324305a48d4c6d7db1a1b",
     "text": "Prensa de miel"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "b2bb85c9c3788212a94012841c07b2fabca48c8c9f577969a6afc8ea90c06de4",
+    "text": "<keyword0>Purgar</keyword0> el <keyword1>Bloqueo</keyword1> enemigo restaura al aliado más herido la mitad de esa cantidad de <keyword2>Salud</keyword2>"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -994,6 +1006,12 @@
     "source": "Mercury Metronome",
     "sourceHash": "ae67e9f006159ccd3050f9dd1c2257f6b738d0b9ec6537c1ac7bc894b300411b",
     "text": "Metrónomo de mercurio"
+  },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "9a1aa5dc76c1de6fc31f0947d243867caf5b9431bfb8e69c87e74d17b39746c7",
+    "text": "Jugar consecutivamente cartas de distintos aliados añade {{value0}} de acumulación de <keyword0>Aturdimiento</keyword0> a todos los enemigos"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -1192,6 +1210,12 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "04e72e3b3479810b4e92eceb933ec355efc2d9a3e2c894c5b0caa8833d9a84d2",
     "text": "Máscara del médico de la peste"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "30bee89934996ec5d4096773e41006eaf6b6f0c53b2c42a006fdd056fe90e21c",
+    "text": "Antes del daño de inicio de turno, cada aliado <keyword0>purifica</keyword0> hasta {{value0}} de <keyword1>Veneno</keyword1> e inflige la mitad de la cantidad eliminada como daño de <keyword2>Veneno</keyword2> al primer enemigo vivo"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1607,6 +1631,12 @@
     "sourceHash": "6a70bcd0a8f529202109121dafd69e7f865227b86175b58e542efb05f16c4583",
     "text": "Batidor de terciopelo"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "5c52e958b77fc16878f80dbf5450ec5e3ae09eedf37a338931edca458c87bc5d",
+    "text": "La <keyword0>Comida</keyword0> otorga a sus objetivos un {{value0}}% de <keyword1>Esquiva</keyword1> hasta su siguiente turno"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -1660,6 +1690,12 @@
     "source": "Wonder Ball Maze",
     "sourceHash": "0af77ff367146d3ec532ae6b8cc80d7778cb13855564b6cded6a36bdd2263496",
     "text": "Laberinto de bola maravilloso"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "d928bf698c8c5441aa5f2b5442f26cbad3de3b71c8e79b7ff08217eacc8f929a",
+    "text": "La acumulación excedente de <keyword0>Aturdimiento</keyword0> y <keyword1>Congelación</keyword1> se extiende a otros enemigos"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,

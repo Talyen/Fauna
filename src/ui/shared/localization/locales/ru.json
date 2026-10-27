@@ -707,6 +707,12 @@
     "sourceHash": "50177ffd4e039b848bb01b87e68aba054580f0735cb234fec60f5aba51942f53",
     "text": "Наковальня падающей звезды"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "a1718dc98a353a9e5174ef335dfcab55beec2a5717c4513430d748f0aabc9907",
+    "text": "Половина <keyword0>блока</keyword0>, потерянного от атак врагов, превращается в накопление <keyword1>оглушения</keyword1> у атакующего"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -857,6 +863,12 @@
     "sourceHash": "947cefdef242c4a8465495237f3fe88f2b8d6d1f1fe2dae54af75c9145f3dbb3",
     "text": "Медовый пресс"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "de7dd4f279c70dcc12fa6f813f140a5390c88a4345d8261a3720c20b8223fade",
+    "text": "<keyword0>Рассеивание</keyword0> вражеского <keyword1>блока</keyword1> восстанавливает наиболее раненому союзнику <keyword2>здоровье</keyword2> в размере половины снятого блока"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -994,6 +1006,12 @@
     "source": "Mercury Metronome",
     "sourceHash": "d9c5fb9b5cabf3792aaa335870e9d64537ccdeed5eb4b0fc942884ca76b45597",
     "text": "Ртутный метроном"
+  },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "101a4629c02fe26d591fca4800deb755251f6e299eeb31c8e78204ac9da6bb28",
+    "text": "Последовательный розыгрыш карт разных союзников добавляет всем врагам {{value0}} накопления <keyword0>оглушения</keyword0>"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -1192,6 +1210,12 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "8034ee88abdf800612354c2233fdcd68703078f0b22311f072d04b82753a4ac3",
     "text": "Маска чумного доктора"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "227253e315055c033f425d1d59b962bec88cb64fd36b7305b5d78c4c241b0e6a",
+    "text": "До урона в начале хода каждый союзник <keyword0>очищает</keyword0> до {{value0}} <keyword1>яда</keyword1> и наносит первому живому врагу урон <keyword2>ядом</keyword2> в размере половины снятого количества"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1607,6 +1631,12 @@
     "sourceHash": "679266a8301a1d90162432998870332d4a1441e364feb71fae9a1221c670a062",
     "text": "Бархатный венчик"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "44a6dd9d13ce331c0a73d6e61fdd7ff34a944a19b254e1ddf86870000406c68d",
+    "text": "<keyword0>Еда</keyword0> даёт своим целям {{value0}}% <keyword1>уклонения</keyword1> до их следующего хода"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -1660,6 +1690,12 @@
     "source": "Wonder Ball Maze",
     "sourceHash": "651e399f86ea0d776ff1993f009253cfcd39f6824bc2b6395b291cdd31270288",
     "text": "Чудесный шариковый лабиринт"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "b68082d0edfca08b441436f3f55f292cbade7ea7ce0e355029ed91e68909d4ca",
+    "text": "Избыточное накопление <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> распространяется на других врагов"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,

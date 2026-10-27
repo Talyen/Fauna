@@ -707,6 +707,12 @@
     "sourceHash": "3fcf52ba595cddf593189750807bb6db7fdf0533338b595010c4014da583c0b8",
     "text": "Enclume d’étoile filante"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "0487812d69aa6f60a59c8772e3a6d84eb6d7b2a4502c08ba6796882c11445c2a",
+    "text": "La moitié du <keyword0>Blocage</keyword0> perdu face aux attaques ennemies devient une accumulation d’<keyword1>Étourdissement</keyword1> sur l’attaquant"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -857,6 +863,12 @@
     "sourceHash": "576336a05c3928f34a6615436707b85be302b0e0871a215709ef26509f0afa82",
     "text": "Presse à miel"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "d4a5fa8bd49d069854fc6310d7c9e86ea75c2ddd3bd12d80aa9df4269ab694fd",
+    "text": "<keyword0>Dissiper</keyword0> le <keyword1>Blocage</keyword1> ennemi restaure la moitié de cette valeur en <keyword2>Santé</keyword2> à l’allié le plus blessé"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -994,6 +1006,12 @@
     "source": "Mercury Metronome",
     "sourceHash": "56d39877676047c9439da7729131f499ded270cb196f99a6a1b118dc66b0bc0d",
     "text": "Métronome de mercure"
+  },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "1e2f130be7d71a568dfaccabebd6021ee7a0bf64b226e9a3da29258f7bdfee6a",
+    "text": "Jouer à la suite des cartes d’alliés différents ajoute {{value0}} accumulation d’<keyword0>Étourdissement</keyword0> à tous les ennemis"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -1192,6 +1210,12 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "2d6fdf1ef7f2a8eb46c8d80b11280e585c07afbef5876fa6caec28035960fd9e",
     "text": "Masque du médecin de peste"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "0967df57efcffc0fec463a0f6e452e407bbeeffd717af6ccac4d0891d3230278",
+    "text": "Avant les dégâts de début de tour, chaque allié <keyword0>purifie</keyword0> jusqu’à {{value0}} <keyword1>Poison</keyword1> et inflige la moitié de la quantité retirée en dégâts de <keyword2>Poison</keyword2> au premier ennemi vivant"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1607,6 +1631,12 @@
     "sourceHash": "8e8bfc2429450f0e0a1d9ab4d670480a899aa15519e245913a6b9bb640910199",
     "text": "Fouet de velours"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "a0a51ba0a06f667eb7dae6ddff7ae971f7aa0a3539af576b84c5d58bd0017b85",
+    "text": "La <keyword0>Nourriture</keyword0> confère {{value0}}% d’<keyword1>Esquive</keyword1> à ses cibles jusqu’à leur prochain tour"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -1660,6 +1690,12 @@
     "source": "Wonder Ball Maze",
     "sourceHash": "cedfbbcd6eedff7f27467c1325da3564ddf54e15d1dd708dff19f98752debea8",
     "text": "Labyrinthe à bille merveilleux"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "4587fd58b39466d80d321b5df5068acd0891abe5b8718ba960b0ea79e067561d",
+    "text": "L’accumulation excédentaire d’<keyword0>Étourdissement</keyword0> et de <keyword1>Gel</keyword1> se propage aux autres ennemis"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,

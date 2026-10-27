@@ -707,6 +707,12 @@
     "sourceHash": "2767464a985ded0ffc7d355aadd28c87035a849e22814f289d6bba6dafe2c335",
     "text": "流星铁砧"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "c4af0ebb7a8ecc0e90b67a945a967afb12e0fd5d82bf49114fd309261f12b6a9",
+    "text": "敌方攻击造成的<keyword0>格挡</keyword0>损失有一半转化为攻击者的<keyword1>眩晕</keyword1>累积"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -857,6 +863,12 @@
     "sourceHash": "0367769ad09b0875633d682dbd4c5021f211c809f224dc63117e81065048a37b",
     "text": "蜂蜜压榨机"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "57fb876a168e651e01c0d16e0bb3a9fb2559b5d34ce9d882315d01d3b9ec4e97",
+    "text": "<keyword0>驱散</keyword0>敌方<keyword1>格挡</keyword1>时，为受伤最重的盟友恢复相当于一半移除量的<keyword2>生命</keyword2>"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -994,6 +1006,12 @@
     "source": "Mercury Metronome",
     "sourceHash": "159310e96942da9a95104effbaf0a4e12b8094850aad67aa02d0432e26d0950d",
     "text": "水银节拍器"
+  },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "58092b87cc897d775e664a03412dc89934a4b67527e77ec1e0b7fa1f534b1c6b",
+    "text": "连续打出不同盟友的牌时，为所有敌人增加{{value0}}点<keyword0>眩晕</keyword0>累积"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -1192,6 +1210,12 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "38ad6125abf904d87538aedf8e368f0c0b18e3243a580525b3efbd764ca33296",
     "text": "瘟疫医生面具"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "c41500cce4de2266dbcd4267b4f112b272391dd37452b4bffde317716db4c400",
+    "text": "回合开始伤害之前，每名盟友最多<keyword0>净化</keyword0>{{value0}}点<keyword1>中毒</keyword1>，并对第一名存活敌人造成相当于移除量一半的<keyword2>中毒</keyword2>伤害"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1607,6 +1631,12 @@
     "sourceHash": "0ebd8e78484999d2d1d0e17b63860d4bc45d6a052a4fe88b5fef985996e9a260",
     "text": "天鹅绒打蛋器"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "457fd43dc8ed31da44b80150996d1a1fb3760319381b8aeaba11ec3e10e0388a",
+    "text": "<keyword0>食物</keyword0>为其目标提供{{value0}}%的<keyword1>闪避</keyword1>，持续至目标的下个回合"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -1660,6 +1690,12 @@
     "source": "Wonder Ball Maze",
     "sourceHash": "82e4c57a5c68cac93449e6c6f08ee14d02868726be4db1139e1981a9caa9857e",
     "text": "奇妙滚球迷宫"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "62721a4e39b52379f976f00c8f2637e2473cc1d8e857f47d33004419adbf85ca",
+    "text": "超出的<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>累积会扩散到其他敌人"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,

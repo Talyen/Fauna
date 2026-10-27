@@ -707,6 +707,12 @@
     "sourceHash": "b81da587c64275d58d15604ec7d9730132b2aa1481764f7de40ae73740b6e5ad",
     "text": "流れ星の金床"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "f5def70dcd8aa3bff79054d5912e187a9a8041629f117d4e800d47d923335235",
+    "text": "敵の攻撃で失った<keyword0>ブロック</keyword0>の半分が攻撃者の<keyword1>スタン</keyword1>蓄積になる"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -857,6 +863,12 @@
     "sourceHash": "71fd1935cd4b5a934652d666acfbfc776c671341f96d68a04556193ff5334727",
     "text": "蜂蜜絞り器"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "2d3dc17727079d07dacd73e5a9040418d5c8d53fca2a3fdfea868ae7a7895b12",
+    "text": "敵の<keyword1>ブロック</keyword1>を<keyword0>強化解除</keyword0>すると、最も傷ついた味方の<keyword2>体力</keyword2>をその半分回復"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -994,6 +1006,12 @@
     "source": "Mercury Metronome",
     "sourceHash": "8b439bcd1335dfb3608e4387dfd6f1dd32edac06bc3243f419fd2280028b51f4",
     "text": "水銀のメトロノーム"
+  },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "174004f15f271eb86fdb70ccf66db516bbfddf76bd3df395cbb7549e083844eb",
+    "text": "異なる味方のカードを続けて使うと、敵全員に<keyword0>スタン</keyword0>蓄積を{{value0}}加える"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -1192,6 +1210,12 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "5718d4987a110ec5ef5cf2d896c4c97961d24d7385497692a9405c92ca1c85c9",
     "text": "疫病医師の仮面"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "dfa0c14f5dabac9d09fbc109f28b7868031e1de0c4125eecbebb381a41090524",
+    "text": "ターン開始時ダメージの前に、各味方は<keyword1>毒</keyword1>を最大{{value0}}<keyword0>浄化</keyword0>し、除去量の半分の<keyword2>毒</keyword2>ダメージを最初の生存敵に与える"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1607,6 +1631,12 @@
     "sourceHash": "2584b6161537d1b4f9f68f4ecac467b29b536e661e58e8cbdd040df46c6060c0",
     "text": "ビロードの泡立て器"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "68d1644b0e1e301efc4bb8b7ed8e92f3f78e9846b7690da5662f02b0d83611b9",
+    "text": "<keyword0>食料</keyword0>は対象に次のターンまで{{value0}}%の<keyword1>回避</keyword1>を付与"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -1660,6 +1690,12 @@
     "source": "Wonder Ball Maze",
     "sourceHash": "b0b7c5683e594e93c61bc68b3d3937f48ec81aa1b757a478c8d7ef13fb58b5e1",
     "text": "不思議な玉迷路"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "db3a3f2a7dd510c2fa3b1c139e94b2ca942891ac1bd4a2ca74421a8b79bae054",
+    "text": "超過した<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>の蓄積は他の敵に広がる"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,

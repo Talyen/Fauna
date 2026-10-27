@@ -707,6 +707,12 @@
     "sourceHash": "e3a9f44e525117da34f17d14756306d78e990bbb102611eedfd367b6a7089972",
     "text": "Sternschnuppenamboss"
   },
+  "content.boon.fallingstar-anvil.rule": {
+    "reviewed": true,
+    "source": "Half the <keyword0>Block</keyword0> lost to enemy attacks becomes <keyword1>Stun</keyword1> buildup on the attacker",
+    "sourceHash": "7a333070ca3a4fbd8332f6919450cb367baec03aec2d9781ddbf789e589e03cd",
+    "text": "Die Hälfte des durch gegnerische Angriffe verlorenen <keyword0>Blocks</keyword0> wird zu <keyword1>Betäubungs</keyword1>-Aufbau beim Angreifer"
+  },
   "content.boon.fern-fencing-foil.name": {
     "reviewed": true,
     "source": "Fern Fencing Foil",
@@ -857,6 +863,12 @@
     "sourceHash": "8c95afb4564bd3dc1b10991a1d07657d056d11ebfd7691d975008fe9bbd2a5b0",
     "text": "Honigpresse"
   },
+  "content.boon.honey-press.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Block</keyword1> restores half as much <keyword2>Health</keyword2> to the most injured ally",
+    "sourceHash": "385b24f6ba92d0ce160b755b3bb961c727cadee5eb37fb89a9d74dc706069d80",
+    "text": "Das <keyword0>Bannen</keyword0> gegnerischen <keyword1>Blocks</keyword1> stellt dem am stärksten verletzten Verbündeten halb so viel <keyword2>Gesundheit</keyword2> wieder her"
+  },
   "content.boon.honeycomb-frame.name": {
     "reviewed": true,
     "source": "Honeycomb Frame",
@@ -994,6 +1006,12 @@
     "source": "Mercury Metronome",
     "sourceHash": "6a0fc6da95c248620ea7bfc115e90a63555a8e660a5a7ec3de0fec98e10c25a3",
     "text": "Quecksilbermetronom"
+  },
+  "content.boon.mercury-metronome.rule": {
+    "reviewed": true,
+    "source": "Playing cards from different allies in succession adds {{value0}} <keyword0>Stun</keyword0> buildup to all enemies",
+    "sourceHash": "dd39bd929ba523e0c6413acc024382537059b0e9a0024d3ea8f8cd63aaabf63d",
+    "text": "Das aufeinanderfolgende Spielen von Karten verschiedener Verbündeter fügt allen Gegnern {{value0}} <keyword0>Betäubungs</keyword0>-Aufbau hinzu"
   },
   "content.boon.meteorite.name": {
     "reviewed": true,
@@ -1192,6 +1210,12 @@
     "source": "Plague Doctor's Mask",
     "sourceHash": "f230babf765104b422f3594117d8c455f8422f6a72dcd0962cdf0a4da8f39bb0",
     "text": "Pestdoktormaske"
+  },
+  "content.boon.plague-doctors-mask.rule": {
+    "reviewed": true,
+    "source": "Before turn-start damage, each ally <keyword0>Cleanses</keyword0> up to {{value0}} <keyword1>Poison</keyword1> and deals half the amount removed as <keyword2>Poison</keyword2> damage to the first living enemy",
+    "sourceHash": "16f40b440cde381ee365d0ff2405737f05ea72f8389f78d5aa6165757b00467a",
+    "text": "Vor Schaden zu Zugbeginn <keyword0>reinigt</keyword0> jeder Verbündete bis zu {{value0}} <keyword1>Gift</keyword1> und fügt dem ersten lebenden Gegner die Hälfte des entfernten Werts als <keyword2>Gift</keyword2>-Schaden zu"
   },
   "content.boon.pleated-pagoda.name": {
     "reviewed": true,
@@ -1607,6 +1631,12 @@
     "sourceHash": "d1037f85945cd2bf26f874c0b4d2d817f4f53541219b7cd552e595d63a7249da",
     "text": "Samt-Schneebesen"
   },
+  "content.boon.velvet-whisk.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
+    "sourceHash": "0837f36e579e47250e751ecbac5290efb0fe4748a970b9d030c1c44b0234a4f5",
+    "text": "<keyword0>Nahrung</keyword0> gewährt ihren Zielen bis zu ihrem nächsten Zug {{value0}}% <keyword1>Ausweichen</keyword1>"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -1660,6 +1690,12 @@
     "source": "Wonder Ball Maze",
     "sourceHash": "d5f075fd7d8fbedc88e49f6198ebe258c5d6eea1ee7e45d1a3dd3eb63b882bb9",
     "text": "Wunderkugellabyrinth"
+  },
+  "content.boon.wonder-ball-maze.rule": {
+    "reviewed": true,
+    "source": "Excess <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up spreads to other enemies",
+    "sourceHash": "f5013db78a386953bfcb7ccb06b321e95802f6d908cd56693b5ab278c0152de6",
+    "text": "Überschüssiger <keyword0>Betäubungs</keyword0>- und <keyword1>Frost</keyword1>-Aufbau breitet sich auf andere Gegner aus"
   },
   "content.boon.wonder-domino.name": {
     "reviewed": true,
