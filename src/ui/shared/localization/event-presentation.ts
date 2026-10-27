@@ -174,6 +174,11 @@ export function eventPresentation(
         actor: localizedCombatantName(actor, i18n),
         target: name,
       });
+    if (actor && event.text === `${unitName(actor)} repeats Stun damage with Resonance`)
+      return i18n.message("log.repeatStunTrait", "{{actor}} repeats Stun damage with {{trait}}", {
+        actor: localizedCombatantName(actor, i18n),
+        trait: i18n.content("content.species.ringpalm.trait", "Resonance"),
+      });
   }
   if (
     event.kind === "status" &&
@@ -185,6 +190,10 @@ export function eventPresentation(
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
   if (event.kind === "status") {
+    if (event.status === "block" && event.text === "Wish Exchange redistributes Block")
+      return i18n.message("log.redistributeBlock", "{{card}} redistributes Block", {
+        card: i18n.content("content.card.euphera-wish-exchange.name", "Wish Exchange"),
+      });
     if (event.outcome === "apply") {
       if (event.status === "nullify" && event.text === "Nullify the next Freeze damage")
         return i18n.message("log.wardNextFreeze", "Nullify the next Freeze damage");
@@ -325,6 +334,16 @@ export function eventPresentation(
   }
   if (event.kind === "status" && event.amount !== undefined) {
     if (
+      event.status === "armor" &&
+      event.outcome === "remove" &&
+      event.text === `${englishName} loses ${event.amount} Armor to Grain Flail`
+    )
+      return i18n.message("log.loseArmorToBoon", "{{name}} loses {{amount}} Armor to {{boon}}", {
+        name,
+        amount: quantity(event.amount),
+        boon: i18n.content("content.boon.grain-flail.name", "Grain Flail"),
+      });
+    if (
       event.status === "cleanse" &&
       event.outcome === "remove" &&
       event.affectedStatus === "poison" &&
@@ -441,6 +460,34 @@ export function eventPresentation(
       name,
       amount: quantity(-event.amount),
     });
+  if (event.kind === "block") {
+    if (event.amount < 0 && event.text === `${englishName} loses ${-event.amount} Block to Ashfall Pendant`)
+      return i18n.message("log.loseBlockToBoon", "{{name}} loses {{amount}} Block to {{boon}}", {
+        name,
+        amount: quantity(-event.amount),
+        boon: i18n.content("content.boon.ashfall-pendant.name", "Ashfall Pendant"),
+      });
+    const prefix = `${englishName} keeps `;
+    const kept = event.text.startsWith(prefix)
+      ? /^(\d+) Block with Tide Anklet$/.exec(event.text.slice(prefix.length))
+      : null;
+    if (kept && event.amount > 0)
+      return i18n.message("log.keepBlockWithBoon", "{{name}} keeps {{amount}} Block with {{boon}}", {
+        name,
+        amount: quantity(Number(kept[1])),
+        boon: i18n.content("content.boon.tide-anklet.name", "Tide Anklet"),
+      });
+    const lostPrefix = `${englishName} loses `;
+    const lost = event.text.startsWith(lostPrefix)
+      ? /^(\d+) Block to Coral Net Weight$/.exec(event.text.slice(lostPrefix.length))
+      : null;
+    if (lost && event.amount < 0)
+      return i18n.message("log.loseBlockToBoon", "{{name}} loses {{amount}} Block to {{boon}}", {
+        name,
+        amount: quantity(Number(lost[1])),
+        boon: i18n.content("content.boon.coral-net-weight.name", "Coral Net Weight"),
+      });
+  }
   if (event.kind === "damage") {
     const { amount, damageType, critical } = event;
     if (event.text !== `${englishName} takes ${amount} ${damageType} damage${critical ? " (Critical)" : ""}.`)

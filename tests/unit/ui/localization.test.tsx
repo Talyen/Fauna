@@ -403,6 +403,28 @@ it("localizes the final enemy hit after the battle state is retired", async () =
   }
 });
 
+it("preserves the spent Block and named Boon in a localized combat event", () => {
+  const game = run();
+  const target = game.team[0]!;
+  const name = species(target.species).name;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${target.species}.name`]: { source: name, text: "Allié" },
+  });
+  const event: GameEvent = {
+    kind: "block",
+    targetId: target.id,
+    amount: -3,
+    text: `${name} loses 2 Block to Coral Net Weight`,
+  };
+  const boon = reader.content("content.boon.coral-net-weight.name", "Coral Net Weight");
+  expect(eventPresentation(game, event, reader)).toBe(`Allié perd 2 Blocage à cause de ${boon}`);
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+  expect(eventPresentation(game, { ...event, text: `${name} loses Block to something else` }, reader)).toBe(
+    `${name} loses Block to something else`,
+  );
+});
+
 it("localizes repeated abilities and the amount of Poison cleansed", () => {
   const game = teamRun(42, ["wickwaltz"]);
   const actor = game.team[0]!;

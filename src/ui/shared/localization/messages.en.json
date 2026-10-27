@@ -344,11 +344,20 @@
   "log.journeyBegins": {
     "text": "Your journey begins."
   },
+  "log.keepBlockWithBoon": {
+    "text": "{{name}} keeps {{amount}} Block with {{boon}}"
+  },
   "log.knockout": {
     "text": "{{name}} is knocked out."
   },
   "log.loseArmor": {
     "text": "{{name}} loses {{amount}} Armor"
+  },
+  "log.loseArmorToBoon": {
+    "text": "{{name}} loses {{amount}} Armor to {{boon}}"
+  },
+  "log.loseBlockToBoon": {
+    "text": "{{name}} loses {{amount}} Block to {{boon}}"
   },
   "log.loseFreezeBuildup": {
     "text": "{{name}} loses {{amount}} Freeze buildup"
@@ -367,6 +376,9 @@
   },
   "log.reachDeathsDoor": {
     "text": "{{name}} reaches Death's Door: {{amount}} grace turns."
+  },
+  "log.redistributeBlock": {
+    "text": "{{card}} redistributes Block"
   },
   "log.reflectAttack": {
     "text": "{{actor}} reflects the attack back at {{target}}"
@@ -397,6 +409,9 @@
   },
   "log.repeatNextPlayerCard": {
     "text": "Your next card is played twice"
+  },
+  "log.repeatStunTrait": {
+    "text": "{{actor}} repeats Stun damage with {{trait}}"
   },
   "log.resurrect": {
     "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"

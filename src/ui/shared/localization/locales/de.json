@@ -7955,6 +7955,12 @@
     "sourceHash": "377879b40e232d9eff645bb53958b3dc567d96a95ed509ea7b3c9fa3b33e131f",
     "text": "Deine Reise beginnt."
   },
+  "log.keepBlockWithBoon": {
+    "reviewed": true,
+    "source": "{{name}} keeps {{amount}} Block with {{boon}}",
+    "sourceHash": "e18262f2524a0ca7a6842707bcf821f0fe144e40c9e1ce276289b0c58bed69db",
+    "text": "{{name}} behält {{amount}} Block durch {{boon}}"
+  },
   "log.knockout": {
     "reviewed": true,
     "source": "{{name}} is knocked out.",
@@ -7966,6 +7972,18 @@
     "source": "{{name}} loses {{amount}} Armor",
     "sourceHash": "57b57763f8f3094420ed0c50f1246ac1210b36c3d0f3baddbaf4bbc4ab019b8b",
     "text": "{{name}} verliert {{amount}} Rüstung"
+  },
+  "log.loseArmorToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor to {{boon}}",
+    "sourceHash": "dcba85a804fc27c2a44c12fe6fdf7444d9d429bcbffe850022226a170464ddc6",
+    "text": "{{name}} verliert {{amount}} Rüstung durch {{boon}}"
+  },
+  "log.loseBlockToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Block to {{boon}}",
+    "sourceHash": "260454b6be80610ed7dd714159f41bb189ee0a9309ac74d197d3d7dd6a01ad14",
+    "text": "{{name}} verliert {{amount}} Block durch {{boon}}"
   },
   "log.loseFreezeBuildup": {
     "reviewed": true,
@@ -8002,6 +8020,12 @@
     "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
     "sourceHash": "2ce280532cbe58d66260293e47e0ad830c952a949b8eefa77e4507f7cf3aad4e",
     "text": "{{name}} erreicht den Nahtod: verbleibende Schonzüge: {{amount}}."
+  },
+  "log.redistributeBlock": {
+    "reviewed": true,
+    "source": "{{card}} redistributes Block",
+    "sourceHash": "ed062f8082bc5f3796a98abd644e2b8d7a176b04fc7790f9bd951aaa2bcb4786",
+    "text": "{{card}} verteilt Block neu"
   },
   "log.reflectAttack": {
     "reviewed": true,
@@ -8062,6 +8086,12 @@
     "source": "Your next card is played twice",
     "sourceHash": "58aaae72e6a7cc3bf790618a518d3e550a443ac9254f3dcd46fea106233f6a1d",
     "text": "Deine nächste Karte wird zweimal gespielt"
+  },
+  "log.repeatStunTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats Stun damage with {{trait}}",
+    "sourceHash": "cb511eda0a27aaf577fe9ef17b485de3c6b3f859243e9212d4c36d66c804f05c",
+    "text": "{{actor}} wiederholt Betäubungsschaden mit {{trait}}"
   },
   "log.resurrect": {
     "reviewed": true,

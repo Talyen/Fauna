@@ -7955,6 +7955,12 @@
     "sourceHash": "e7a6012ca68ac3541a7808d88db139263b5ba91596a4cfa3b8a4ebc7fc458ccb",
     "text": "Ваше путешествие начинается."
   },
+  "log.keepBlockWithBoon": {
+    "reviewed": true,
+    "source": "{{name}} keeps {{amount}} Block with {{boon}}",
+    "sourceHash": "2c665ce019b7b6325cb6e659aa33408ff42673bf797cb9787af014eac155b6aa",
+    "text": "{{name}} сохраняет блок: {{amount}} благодаря «{{boon}}»"
+  },
   "log.knockout": {
     "reviewed": true,
     "source": "{{name}} is knocked out.",
@@ -7966,6 +7972,18 @@
     "source": "{{name}} loses {{amount}} Armor",
     "sourceHash": "624150777cd8f8529443e120f7acc840e8143dc94035e24dc1f4a6b37c0e3583",
     "text": "{{name}} теряет брони: {{amount}}"
+  },
+  "log.loseArmorToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor to {{boon}}",
+    "sourceHash": "c497ece4a77625e9c21ccd7e74188e5227dd855863d3dcf962ff83f38287a1e5",
+    "text": "{{name}} теряет брони: {{amount}} из-за «{{boon}}»"
+  },
+  "log.loseBlockToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Block to {{boon}}",
+    "sourceHash": "04eab0ace049ded56426a71c55e231cec6015de3c3e9c0346e136497e4148e65",
+    "text": "{{name}} теряет блока: {{amount}} из-за «{{boon}}»"
   },
   "log.loseFreezeBuildup": {
     "reviewed": true,
@@ -8002,6 +8020,12 @@
     "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
     "sourceHash": "2ce4fcfeabbda11f513808ff4d49a58fde5edcf7cb49eb27468107ae0495bfd0",
     "text": "{{name}} на пороге смерти: оставшиеся льготные ходы: {{amount}}."
+  },
+  "log.redistributeBlock": {
+    "reviewed": true,
+    "source": "{{card}} redistributes Block",
+    "sourceHash": "9098e1d10979c06be7df83b5b6a2f1a2976f204da66ffe234907d52781b7aa3c",
+    "text": "{{card}} перераспределяет блок"
   },
   "log.reflectAttack": {
     "reviewed": true,
@@ -8062,6 +8086,12 @@
     "source": "Your next card is played twice",
     "sourceHash": "2844ddaca43afb3745d969dbfcf60c40050fa3fc1a5f3d8c48de16809b1e1f55",
     "text": "Ваша следующая карта разыгрывается дважды"
+  },
+  "log.repeatStunTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats Stun damage with {{trait}}",
+    "sourceHash": "3e59251ba4a5cfb04a75d63515b32f95e904ad2b709a8374c9c8a78f838aa51c",
+    "text": "{{actor}} повторяет урон оглушением с помощью «{{trait}}»"
   },
   "log.resurrect": {
     "reviewed": true,

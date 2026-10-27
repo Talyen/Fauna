@@ -7955,6 +7955,12 @@
     "sourceHash": "107054dc236a3ea5f1859203b6f0c5c609e38c7f2ec72d0d144bcc2f1344591d",
     "text": "你的旅程开始了。"
   },
+  "log.keepBlockWithBoon": {
+    "reviewed": true,
+    "source": "{{name}} keeps {{amount}} Block with {{boon}}",
+    "sourceHash": "7681831a416ee24638450b03c4bce72823164f775dbf96f930bc3e099b18198d",
+    "text": "{{name}}通过{{boon}}保留{{amount}}点格挡"
+  },
   "log.knockout": {
     "reviewed": true,
     "source": "{{name}} is knocked out.",
@@ -7966,6 +7972,18 @@
     "source": "{{name}} loses {{amount}} Armor",
     "sourceHash": "142ea6a1b1c49b03c6055d95ba2cd41812e4c2198f1d0dcf702605e34eb9d6cc",
     "text": "{{name}}失去{{amount}}点护甲"
+  },
+  "log.loseArmorToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor to {{boon}}",
+    "sourceHash": "cc88de778a43d6230b935ed8a6320ae83eab3d9fbd64ebc842baa36b91d9c1a7",
+    "text": "{{name}}因{{boon}}失去{{amount}}点护甲"
+  },
+  "log.loseBlockToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Block to {{boon}}",
+    "sourceHash": "237f3180778c9ad5ce0b9bf542cbd3508b5275db06acda5c86b13671cf2ff1ed",
+    "text": "{{name}}因{{boon}}失去{{amount}}点格挡"
   },
   "log.loseFreezeBuildup": {
     "reviewed": true,
@@ -8002,6 +8020,12 @@
     "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
     "sourceHash": "11f4c64afb05d6d0fe438dd232e7990a55b0d4f83bb7f44098b8ca73959e3c6f",
     "text": "{{name}}濒临死亡：剩余宽限回合数：{{amount}}。"
+  },
+  "log.redistributeBlock": {
+    "reviewed": true,
+    "source": "{{card}} redistributes Block",
+    "sourceHash": "2f03b1c7fed064f9141b4c21199c853bce0b39387a3e45acc5d8dc110efcd762",
+    "text": "{{card}}重新分配格挡"
   },
   "log.reflectAttack": {
     "reviewed": true,
@@ -8062,6 +8086,12 @@
     "source": "Your next card is played twice",
     "sourceHash": "12b9fe7f9debdfc748433c525c83b03b1e161d45e769f4ae8827a9b2226092a5",
     "text": "你的下一张卡牌会打出两次"
+  },
+  "log.repeatStunTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats Stun damage with {{trait}}",
+    "sourceHash": "53385a0c594b214a1998e2eb58010ccf8492fbed3dc2fd5417cf4ec67926eee2",
+    "text": "{{actor}}通过{{trait}}重复眩晕伤害"
   },
   "log.resurrect": {
     "reviewed": true,

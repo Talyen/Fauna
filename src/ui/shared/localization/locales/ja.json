@@ -7955,6 +7955,12 @@
     "sourceHash": "a6b3d9f14a1dcbc6c09967ad865576b4508eea27407b93c7c55ae28bbde81b21",
     "text": "旅が始まります。"
   },
+  "log.keepBlockWithBoon": {
+    "reviewed": true,
+    "source": "{{name}} keeps {{amount}} Block with {{boon}}",
+    "sourceHash": "29022b93b4f69182e532c285d85f3cb7ca79dd6cd2b8c83e3352b4501a6c9ece",
+    "text": "{{name}}は{{boon}}でブロックを{{amount}}維持"
+  },
   "log.knockout": {
     "reviewed": true,
     "source": "{{name}} is knocked out.",
@@ -7966,6 +7972,18 @@
     "source": "{{name}} loses {{amount}} Armor",
     "sourceHash": "0445fe0ff47f57e4f99f60e8b460f27fbac261d3434fbee25951bed5745abece",
     "text": "{{name}}は装甲を{{amount}}失う"
+  },
+  "log.loseArmorToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Armor to {{boon}}",
+    "sourceHash": "696dc2d3e9c2c5a844e39f62142dd6de570078f758deda310b7becce91d35e5f",
+    "text": "{{name}}は{{boon}}で装甲を{{amount}}失う"
+  },
+  "log.loseBlockToBoon": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Block to {{boon}}",
+    "sourceHash": "0babba100394b4f2fa3187ebbdd625be91ea1be984df122e222959a32acbace1",
+    "text": "{{name}}は{{boon}}でブロックを{{amount}}失う"
   },
   "log.loseFreezeBuildup": {
     "reviewed": true,
@@ -8002,6 +8020,12 @@
     "source": "{{name}} reaches Death's Door: {{amount}} grace turns.",
     "sourceHash": "f3e09434cdcc374c3e74c3c92f0d6fa4f63d1420a50b3b38f932a2d6d712627c",
     "text": "{{name}}は死の淵に達した。猶予ターン数：{{amount}}。"
+  },
+  "log.redistributeBlock": {
+    "reviewed": true,
+    "source": "{{card}} redistributes Block",
+    "sourceHash": "f2f9b4fb19a3f0fde23229046aca7222a271e728ffaa5b115735f05e4a2751a3",
+    "text": "{{card}}がブロックを再分配"
   },
   "log.reflectAttack": {
     "reviewed": true,
@@ -8062,6 +8086,12 @@
     "source": "Your next card is played twice",
     "sourceHash": "95e7d22366061ccec26e100519b9e9f353ff511584f27f6f7fa36a5e236eb8d9",
     "text": "次の自分のカードは2回プレイされる"
+  },
+  "log.repeatStunTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats Stun damage with {{trait}}",
+    "sourceHash": "9a3a7eeed17ca4ba465c10875bf71681147e378a5891ab8e87ec6b796744f256",
+    "text": "{{actor}}が{{trait}}でスタンダメージを繰り返す"
   },
   "log.resurrect": {
     "reviewed": true,
