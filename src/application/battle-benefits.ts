@@ -77,8 +77,10 @@ function ordinaryHitScore(hit: OrdinaryHit) {
 export function battleBenefitFacts(state: BattleState) {
   let injured: boolean | undefined;
   let healing: boolean | undefined;
+  let healingTargets: ReturnType<typeof healingAllies> | undefined;
+  const healingTargetsForPlay = () => (healingTargets ??= healingAllies(state));
   const injuredAllies = () =>
-    (injured ??= healingAllies(state).some((unit) => unit.health < maximumHealth(unit)));
+    (injured ??= healingTargetsForPlay().some((unit) => unit.health < maximumHealth(unit)));
   const healingOnPlay = () =>
     (healing ??=
       injuredAllies() &&
@@ -112,6 +114,7 @@ export function battleBenefitFacts(state: BattleState) {
     },
     livingEnemies: () => (enemies ??= livingBattlefield(state, "enemy")),
     livingAllies: () => (allies ??= livingBattlefield(state, "player")),
+    healingAllies: healingTargetsForPlay,
   };
 }
 
@@ -252,15 +255,16 @@ export function battleBenefits(
           (sum, hit) => sum + Math.max(ordinaryHitScore(hit), cleanse ? priorities.standardUtility : 0),
           0,
         ) / outcomes.length;
-      const remaining = attacks.filter(({ enemy }) => !enemy.minion);
+      let remaining = 0;
+      for (const attack of attacks) if (!attack.enemy.minion) remaining++;
       const lethal = (attack: (typeof attacks)[number]) => attack.outcomes.every((outcome) => outcome.lethal);
       const winning =
         !actor.combat?.blind &&
-        remaining.length > 0 &&
+        remaining > 0 &&
         (def.target === "allEnemies"
-          ? remaining.every(lethal)
+          ? attacks.every((attack) => !!attack.enemy.minion || lethal(attack))
           : def.target === "randomEnemy"
-            ? attacks.every((attack) => !attack.enemy.minion && lethal(attack)) && remaining.length === 1
+            ? remaining === 1 && attacks.every((attack) => !attack.enemy.minion && lethal(attack))
             : false);
       if (def.target === "allEnemies" || def.target === "randomEnemy")
         return [
@@ -279,7 +283,7 @@ export function battleBenefits(
         ];
       return attacks.map((attack) => {
         const { enemy } = attack;
-        const finish = !actor.combat?.blind && remaining.length === 1 && !enemy.minion && lethal(attack);
+        const finish = !actor.combat?.blind && remaining === 1 && !enemy.minion && lethal(attack);
         return {
           score: (finish ? BATTLE_FINISH_PRIORITY : 0) + attackScore(attack.outcomes),
           targetId: enemy.id,
@@ -293,7 +297,7 @@ export function battleBenefits(
     }
     case "heal": {
       if (def.target === "allAllies" || foodForAllies(def, state)) {
-        const automaticRecipients = healingAllies(state);
+        const automaticRecipients = facts.healingAllies();
         let restored = 0;
         let benefitUtility = 0;
         let dodgeUtility = 0;
@@ -317,7 +321,7 @@ export function battleBenefits(
         def.target === "self"
           ? [actor]
           : def.target === "mostInjured"
-            ? [mostInjured(healingAllies(state))!]
+            ? [mostInjured(facts.healingAllies())!]
             : def.target === "injured"
               ? allies().filter((ally) => ally.health < maximumHealth(ally))
               : allies();

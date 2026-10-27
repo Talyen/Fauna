@@ -33,6 +33,20 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
   return result;
 }
 
+/** Membership without constructing a snapshot; summons require a living deployed owner. */
+export function battlefieldHasId(state: GameState, side: "player" | "enemy", id: string): boolean {
+  const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
+  if (row.some((unit) => unit.id === id)) return true;
+  return (
+    state.battle?.minions?.some(
+      (unit) =>
+        unit.id === id &&
+        unit.minion.side === side &&
+        row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId),
+    ) ?? false
+  );
+}
+
 /** A fresh, ordered snapshot of living battlefield participants. */
 export function livingBattlefield(state: GameState, side: "enemy"): Enemy[];
 export function livingBattlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[];
@@ -60,12 +74,9 @@ export function isDepartedMinion(state: GameState, unit: Creature | Enemy): bool
 
 /** Automatic healing can include backups; selectable targets remain the battlefield. */
 export function healingAllies(state: GameState, side: "player" | "enemy" = "player"): (Creature | Enemy)[] {
-  const row = battlefield(state, side);
+  const row = livingBattlefield(state, side);
   if (side === "player" && state.phase === "battle" && state.boons.includes("camp-hammock"))
-    row.push(...state.reserves);
-  let next = 0;
-  for (const unit of row) if (unit.health > 0) row[next++] = unit;
-  row.length = next;
+    for (const unit of state.reserves) if (unit.health > 0) row.push(unit);
   return row;
 }
 

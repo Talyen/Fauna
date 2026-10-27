@@ -1,6 +1,6 @@
 import { boonRule } from "../rules/boons";
 import { talentChance } from "../chance";
-import { isEnemy, battlefield, combatantById, cleanseTargets } from "../battlefield";
+import { isEnemy, battlefield, battlefieldHasId, combatantById, cleanseTargets } from "../battlefield";
 import { draw } from "../card-zones";
 import { roll } from "../random";
 import { hasTalent, passiveAmount } from "../progression";
@@ -173,10 +173,7 @@ export function* startAction(
     const turn = state.battle.turn + Number(!enemy);
     if (turn % 2 === 0) {
       const amount = passiveAmount(enemy ? undefined : state, unit.species, "tidalRegeneration");
-      if (
-        amount > 0 &&
-        battlefield(state, enemy ? "enemy" : "player").some((deployed) => deployed.id === unit.id)
-      )
+      if (amount > 0 && battlefieldHasId(state, enemy ? "enemy" : "player", unit.id))
         yield* reaction("restoreHealth", unit, amount, events, false, state);
     }
   }

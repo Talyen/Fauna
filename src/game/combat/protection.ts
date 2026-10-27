@@ -3,7 +3,7 @@ import { boonRule } from "../rules/boons";
 import { manaCapacity } from "../ability-rules";
 import { healingValue, restoration, overflowBlock, overflowRecipients } from "./healing-values";
 import { chance as succeeds, talentChance } from "../chance";
-import { isEnemy, battlefield, healingAllies } from "../battlefield";
+import { isEnemy, battlefield, battlefieldHasId, healingAllies } from "../battlefield";
 import { drawKeyword } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
 
@@ -173,8 +173,7 @@ export function* grantBlock(
     const allied = !isEnemy(unit);
     const percent = passiveAmount(allied ? state : undefined, unit.species, "blockConversion");
     if (percent > 0) {
-      const pool = battlefield(state, allied ? "player" : "enemy");
-      const recipient = pool.some((recipient) => recipient.id === unit.id)
+      const recipient = battlefieldHasId(state, allied ? "player" : "enemy", unit.id)
         ? mostInjured<Combatant>(healingAllies(state, allied ? "player" : "enemy"))
         : undefined;
       if (recipient) {

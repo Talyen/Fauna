@@ -9,11 +9,17 @@ export function permanentKitSize(kind: SpeciesId) {
 }
 
 /** Definition order and copy order also determine player slots and seeded boss shuffles. */
-export function permanentKit(kind: SpeciesId) {
+export function forEachPermanentCard(
+  kind: SpeciesId,
+  visit: (definition: ReturnType<typeof speciesCards>[number], copy: number) => void,
+) {
   const copies = permanentCardCopies(kind);
-  const kit: { definition: ReturnType<typeof speciesCards>[number]; copy: number }[] = [];
   for (const definition of speciesCards(kind))
-    for (let copy = 0; copy < copies; copy++) kit.push({ definition, copy });
+    for (let copy = 0; copy < copies; copy++) visit(definition, copy);
+}
+export function permanentKit(kind: SpeciesId) {
+  const kit: { definition: ReturnType<typeof speciesCards>[number]; copy: number }[] = [];
+  forEachPermanentCard(kind, (definition, copy) => kit.push({ definition, copy }));
   return kit;
 }
 

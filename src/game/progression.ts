@@ -145,8 +145,10 @@ export function starterSpecies(state: Pick<GameState, "discovery">): readonly Sp
   const collected = collectedSpecies(state);
   return collected.length ? collected : FIRST_RUN_STARTERS;
 }
-export function starterOfferPool(state: Pick<GameState, "discovery" | "selected">): SpeciesId[] {
-  const pool = starterSpecies(state);
+export function starterOfferPool(
+  state: Pick<GameState, "discovery" | "selected">,
+  pool: readonly SpeciesId[] = starterSpecies(state),
+): SpeciesId[] {
   if (!state.selected.length) return [...pool];
   return pool.filter((kind) => !state.selected.includes(kind) && !species(kind).legendary);
 }

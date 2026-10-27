@@ -113,7 +113,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         drawBossCards(draft, enemy.deck, TURN_DRAW);
       }
       if (!canAct) continue;
-      if (!battlefield(draft, "player").some((unit) => unit.health > 0)) continue;
+      // A deployed summon also requires a living deployed owner.
+      if (!draft.team.some((unit) => unit.health > 0)) continue;
       if (enemy.deck) {
         const deck = enemy.deck;
         // Bound automatic decision work even in a long Pearl/Mana chain.

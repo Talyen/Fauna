@@ -118,7 +118,7 @@ export interface AvailablePlay extends PlayableCard {
 
 /** Enumerate legal commands without previewing, choosing random recipients or touching RNG. */
 export function availablePlays(state: BattleState, autoEndTurn = true): AvailablePlay[] {
-  if (pendingReplacement(state) || !state.battle.hand.length) return [];
+  if (!state.battle.hand.length || pendingReplacement(state)) return [];
   const cards = state.battle.hand.length > 1 ? new Map<string, Card>() : undefined;
   if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
   let recipientsByDefinition: Map<CardDefinition, ReturnType<typeof chosenRecipients>> | undefined;

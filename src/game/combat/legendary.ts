@@ -1,5 +1,5 @@
 import { battleCardCapacity, createTemporaryCard } from "../card-zones";
-import { permanentKit, permanentKitSize } from "../card-kit";
+import { forEachPermanentCard, permanentKitSize } from "../card-kit";
 import { TURN_MANA } from "../state-limits";
 import { species } from "../content";
 import { PEARL } from "../content/creatures/memento";
@@ -19,11 +19,10 @@ import type { Combatant } from "./state";
 import type { BattleState, Enemy, EnemyDeck, GameEvent, GameState } from "../types";
 const MINION_LIMIT = 2;
 export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
+  const ids: string[] = [];
+  forEachPermanentCard(enemy.species, (card) => ids.push(card.id));
   return {
-    draw: shuffle(
-      state,
-      permanentKit(enemy.species).map(({ definition }) => definition.id),
-    ),
+    draw: shuffle(state, ids),
     hand: [],
     buffer: [],
     discard: [],

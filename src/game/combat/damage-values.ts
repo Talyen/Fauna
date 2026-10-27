@@ -29,10 +29,10 @@ export function modifiedDamage(
     !alliedTarget &&
     state.boons.includes("chromatic-viol")
   ) {
-    const effects = harmfulStatuses.filter(
-      (status) => stats.controlled === status || Number(stats[status]) > 0,
-    );
-    damage += effects.length * boonRule("chromatic-viol").damage;
+    let count = 0;
+    for (const status of harmfulStatuses)
+      if (stats.controlled === status || Number(stats[status]) > 0) count++;
+    damage += count * boonRule("chromatic-viol").damage;
   }
   if (attack && alliedSource) {
     if (type === "water") {

@@ -31,15 +31,16 @@ import {
   playTargetError,
 } from "../../../src/game/play-queries";
 import { battlefield, cleanseTargets, healingAllies, isDepartedMinion } from "../../../src/game/battlefield";
-import { summonEcho } from "../../../src/game/combat/legendary";
+import { bossDeck, summonEcho } from "../../../src/game/combat/legendary";
 import { generateEncounterPack } from "../../../src/game/encounters";
 import { returnDodgedCard } from "../../../src/game/combat/card-modifiers";
-import { observeDecisions } from "../../../src/game/random";
+import { observeDecisions, shuffle } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
 import { matchesPermanentKit, permanentKit } from "../../../src/game/card-kit";
-import { rebuildCards } from "../../../src/game/team";
+import { ownedCards, rebuildCards } from "../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { snapshot } from "../../../src/application/cloud-snapshots";
+import { chance } from "../../../src/game/chance";
 import { newestHeads } from "../../../src/application/cloud-policy";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createMessageReader } from "../../../src/ui/shared/localization/messages";
@@ -131,6 +132,29 @@ it("preserves singleton decisions and the order of every projected alternative",
     ]);
   } finally {
     spy.mockRestore();
+  }
+});
+
+it("preserves chance thresholds and Good Fortune retries in both directions", () => {
+  for (const above of [false, true]) {
+    const state = requireBattle(structuredClone(teamRun(42, ["euphera"])));
+    const values = above ? [0.1, 0, 0.9] : [0.9, 0, 0.1];
+    const decisions: unknown[] = [];
+    observeDecisions(state, (decision) => {
+      decisions.push(decision);
+      return values.shift()!;
+    });
+    const events: Parameters<typeof chance>[3] = [];
+    expect(chance(state, 0.3, false, events, above)).toBe(true);
+    expect(decisions).toEqual([
+      { kind: "chance", threshold: above ? 0.7 : 0.3 },
+      { kind: "chance", threshold: 0.1 },
+      { kind: "chance", threshold: above ? 0.7 : 0.3 },
+    ]);
+    expect(events).toHaveLength(1);
+    expect(chance(state, 0, false, events, above)).toBe(false);
+    expect(chance(state, 1, false, events, above)).toBe(true);
+    expect(decisions).toHaveLength(3);
   }
 });
 
@@ -267,6 +291,36 @@ it("preserves the automated actor's ranked choice and repeated reads", () => {
   const expected = rankedBattleChoices(state, false)[0]!;
   expect(actor.choose(state, false)).toEqual(expected);
   expect(actor.choose(state, false)).toEqual(expected);
+});
+
+it("selects the first ranked command across changing visible battle states", () => {
+  for (const seed of [7, 42, 91]) {
+    const state = requireBattle(structuredClone(teamRun(seed, ["mossguard", "prismram"])));
+    for (const health of [state.team[0]!.health, 1, 0]) {
+      state.team[0]!.health = health;
+      expect(chooseBattleCommand(state, false)).toEqual(
+        rankedBattleChoices(state, false)[0]?.command ?? { type: "endTurn" },
+      );
+    }
+  }
+});
+
+it("preserves permanent card order and boss shuffle decisions", () => {
+  for (const kind of ["mossguard", "memento"] as const) {
+    const kit = permanentKit(kind);
+    expect(ownedCards("owner", kind).map((card) => card.definitionId)).toEqual(
+      kit.map(({ definition }) => definition.id),
+    );
+    const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+    const expected = structuredClone(state);
+    const enemy = { ...state.battle.enemies[0]!, species: kind };
+    const ids = shuffle(
+      expected,
+      kit.map(({ definition }) => definition.id),
+    );
+    expect(bossDeck(state, enemy).draw).toEqual(ids);
+    expect(state.rng).toBe(expected.rng);
+  }
 });
 
 it("validates complete kits as multisets, including repeated legendary cards", () => {

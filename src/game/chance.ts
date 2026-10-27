@@ -4,6 +4,12 @@ import { hasTalent, passiveAmount } from "./progression";
 import { roll } from "./random";
 import type { GameEvent, GameState } from "./types";
 
+function succeeds(state: GameState, probability: number, above: boolean) {
+  return above
+    ? roll(state, { kind: "chance", threshold: 1 - probability }) >= 1 - probability
+    : roll(state, { kind: "chance", threshold: probability }) < probability;
+}
+
 /** A favorable chance, never a random selection; one gate can admit one original-probability retry. */
 export function chance(
   state: GameState,
@@ -14,11 +20,7 @@ export function chance(
 ): boolean {
   if (probability <= 0) return false;
   if (probability >= 1) return true;
-  const succeeds = () =>
-    above
-      ? roll(state, { kind: "chance", threshold: 1 - probability }) >= 1 - probability
-      : roll(state, { kind: "chance", threshold: probability }) < probability;
-  if (succeeds()) return true;
+  if (succeeds(state, probability, above)) return true;
   if (state.phase !== "battle" || !state.battle) return false;
   // The strongest living deployed provider owns the gate; providers never retry each other's gates.
   let provider;
@@ -31,7 +33,11 @@ export function chance(
       provider = unit;
     }
   }
-  if (!provider || roll(state, { kind: "chance", threshold: percent / 100 }) >= percent / 100 || !succeeds())
+  if (
+    !provider ||
+    roll(state, { kind: "chance", threshold: percent / 100 }) >= percent / 100 ||
+    !succeeds(state, probability, above)
+  )
     return false;
   events.push({
     kind: "action",

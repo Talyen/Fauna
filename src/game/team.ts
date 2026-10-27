@@ -1,4 +1,4 @@
-import { permanentKit } from "./card-kit";
+import { forEachPermanentCard } from "./card-kit";
 import { isRosterCreature } from "./battlefield";
 import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
@@ -75,12 +75,16 @@ export function rosterHasSpecies(
   );
 }
 export function ownedCards(id: string, kind: GameState["team"][number]["species"]): Card[] {
-  return permanentKit(kind).map(({ definition, copy }) => ({
-    id: `${id}:${definition.id}${copy ? ":2" : ""}`,
-    definitionId: definition.id,
-    ownerId: id,
-    level: 0,
-  }));
+  const cards: Card[] = [];
+  forEachPermanentCard(kind, (definition, copy) =>
+    cards.push({
+      id: `${id}:${definition.id}${copy ? ":2" : ""}`,
+      definitionId: definition.id,
+      ownerId: id,
+      level: 0,
+    }),
+  );
+  return cards;
 }
 /** Recruitment and its policy projection use the same legal deployment rules. */
 export function recruitLineup(
@@ -209,15 +213,12 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   state.cards = [...(removed.size ? retained.filter((card) => !removed.has(card.id)) : retained), ...mapped];
   if (state.battle) {
     const kept = new Set(state.cards.map((card) => card.id));
-    const changed = new Set(mapped.map((card) => card.id));
-    filterCardZones(state.battle, (id) => kept.has(id) && (!fromCard || !changed.has(id)));
+    const changed = fromCard ? new Set(mapped.map((card) => card.id)) : undefined;
+    filterCardZones(state.battle, (id) => kept.has(id) && (!changed || !changed.has(id)));
     if (mapped.length) {
-      const zoned = new Set([
-        ...state.battle.draw,
-        ...state.battle.hand,
-        ...state.battle.buffer,
-        ...state.battle.discard,
-      ]);
+      const zoned = new Set<string>();
+      for (const zone of [state.battle.draw, state.battle.hand, state.battle.buffer, state.battle.discard])
+        for (const id of zone) zoned.add(id);
       const added: string[] = [];
       for (const card of mapped) if (!zoned.has(card.id)) added.push(card.id);
       if (added.length) state.battle.draw = shuffle(state, [...state.battle.draw, ...added]);

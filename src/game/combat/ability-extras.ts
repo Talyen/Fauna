@@ -35,9 +35,11 @@ export function applyExtras(
   options: ExtraOptions = {},
 ) {
   const { actor, def } = action;
+  if (!def.effects?.length) return;
   const enemy = action.side === "enemy";
   const power = enemy ? action.actor.power : 1;
   const { target, blindMiss = false, criticalBonus = 0, recipientOnly = false } = options;
+  let cardLeech: boolean | undefined;
   for (const effect of abilityExtras(def, power)) {
     if (recipientOnly !== (supplementalRule(effect.kind).delivery(effect) === "recipient")) continue;
     if (actor.health <= 0) break;
@@ -51,7 +53,8 @@ export function applyExtras(
             cannotDodge: options.cannotDodge,
             criticalBonus,
             leech: effect.leech,
-            cardLeech: def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech),
+            cardLeech: (cardLeech ??=
+              def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech) || false),
             sharedNegate: options.sharedNegate,
           });
         break;

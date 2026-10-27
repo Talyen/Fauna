@@ -16,6 +16,9 @@ export interface BattleChoice {
 
 /** Legal candidates, visible benefits and deterministic ranking have distinct owners. */
 export function rankedBattleChoices(state: GameState, autoEndTurn = true): BattleChoice[] {
+  return choicesForBattle(state, autoEndTurn, false);
+}
+function choicesForBattle(state: GameState, autoEndTurn: boolean, firstOnly: boolean): BattleChoice[] {
   if (state.phase !== "battle") return [];
   const outgoing = pendingReplacement(state);
   if (outgoing) {
@@ -77,13 +80,21 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         });
     }
   }
-  return choices
-    .sort((a, b) => b.score - a.score || a.key.localeCompare(b.key))
-    .map(({ command, score, reason }) => ({ command, score, reason }));
+  const compare = (a: (typeof choices)[number], b: (typeof choices)[number]) =>
+    b.score - a.score || a.key.localeCompare(b.key);
+  if (firstOnly) {
+    let best = choices[0];
+    for (let index = 1; index < choices.length; index++)
+      if (compare(choices[index]!, best!) < 0) best = choices[index];
+    if (!best) return [];
+    const { command, score, reason } = best;
+    return [{ command, score, reason }];
+  }
+  return choices.sort(compare).map(({ command, score, reason }) => ({ command, score, reason }));
 }
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   return rankedBattleChoices(state, autoEndTurn).map((choice) => choice.command);
 }
 export function chooseBattleCommand(state: GameState, autoEndTurn = true): Command {
-  return rankedBattleChoices(state, autoEndTurn)[0]?.command ?? { type: "endTurn" };
+  return choicesForBattle(state, autoEndTurn, true)[0]?.command ?? { type: "endTurn" };
 }

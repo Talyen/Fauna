@@ -276,9 +276,9 @@ export function executePrimary(context: PrimaryContext) {
       }
       return;
     case "swapLowest": {
-      const outgoing = alive(action.side === "player" ? state.team : state.battle.enemies).sort(
-        (a, b) => a.health - b.health,
-      )[0];
+      let outgoing: Combatant | undefined;
+      for (const unit of action.side === "player" ? state.team : state.battle.enemies)
+        if (unit.health > 0 && (!outgoing || unit.health < outgoing.health)) outgoing = unit;
       if (outgoing) operations.swap(state, outgoing, events, true);
       return;
     }

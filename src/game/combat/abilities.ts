@@ -20,7 +20,10 @@ export function executeAbility(
   const { actor, def } = action;
   const grantedRepeat = takeCardRepeat(state, action.side);
   const enemy = action.side === "enemy";
-  const opponents = alive(opposingRow(state, action));
+  const opponents =
+    (def.effect === "attack" && def.target === "randomEnemy") || action.targetId !== undefined
+      ? alive(opposingRow(state, action))
+      : [];
   // Keep the selected target across repeats unless Tangram must continue after a defeat.
   let target =
     def.effect === "attack" && def.target === "randomEnemy"
@@ -69,7 +72,7 @@ export function executeAbility(
       actor.health <= 0 ||
       (def.effect === "attack" &&
         (def.target === "allEnemies"
-          ? !alive(opposingRow(state, action)).length
+          ? !opposingRow(state, action).some((unit) => unit.health > 0)
           : !target || target.health <= 0))
     )
       break;

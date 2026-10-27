@@ -91,10 +91,10 @@ function validateCollection(state: GameState) {
   invalid(encountered.size !== state.discovery.encountered.length || !unique(state.boons));
   invalid(state.phase === "draft" && state.boons.length > 0);
   invalid(SPECIES.some(({ id }) => state.discovery.recruited[id] !== undefined && !encountered.has(id)));
-  const starterPool = state.selected.length ? starterSpecies(state) : [];
   const count = state.phase === "draft" ? starterCount(state) : 0;
   const drafting = state.phase === "draft" && state.selected.length < count;
-  const offerPool = drafting ? starterOfferPool(state) : [];
+  const starterPool = state.selected.length || drafting ? starterSpecies(state) : [];
+  const offerPool = drafting ? starterOfferPool(state, starterPool) : [];
   invalid(
     state.starterOffers.length !== (drafting ? Math.min(STARTER_OFFER_COUNT, offerPool.length) : 0) ||
       !unique(state.starterOffers) ||

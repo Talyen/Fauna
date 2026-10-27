@@ -156,6 +156,7 @@ export function* bounce(
     visited ??= new Set([first.id]);
     const visitedTargets = visited;
     for (let i = 0; i < entry.amount; i++) {
+      if (source.health <= 0) return;
       // A previous bounce can remove a summoner and all of its Echoes.
       const pool =
         effect === "heal"
@@ -167,7 +168,7 @@ export function* bounce(
           !visitedTargets.has(unit.id) &&
           (effect !== "heal" || unit.health < maximumHealth(unit)),
       );
-      if (source.health <= 0 || !eligible.length) return;
+      if (!eligible.length) return;
       if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =
         effect === "heal"

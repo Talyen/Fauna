@@ -1,7 +1,14 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds, talentChance } from "../chance";
-import { battlefield, livingBattlefield, healingAllies, isEnemy, combatantById } from "../battlefield";
+import {
+  battlefield,
+  battlefieldHasId,
+  livingBattlefield,
+  healingAllies,
+  isEnemy,
+  combatantById,
+} from "../battlefield";
 import { roll } from "../random";
 import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
@@ -135,7 +142,7 @@ export function* dodgeResponse(
   const petals = passiveAmount(alliedTarget ? state : undefined, target.species, "petalwake");
   if (petals > 0 && target.health > 0) {
     const side = alliedTarget ? "player" : "enemy";
-    if (battlefield(state, side).some((unit) => unit.id === target.id))
+    if (battlefieldHasId(state, side, target.id))
       for (const ally of healingAllies(state, side)) {
         if (target.health <= 0) break;
         if (ally.health > 0)
@@ -159,7 +166,7 @@ export function* blockDepletionRewards(
     alliedTarget &&
     depletedBlock &&
     state.boons.includes("coral-music-box") &&
-    battlefield(state, "player").some((unit) => unit.id === target.id)
+    battlefieldHasId(state, "player", target.id)
   )
     drawKeyword(state, "water", events);
   if (!alliedTarget && !isEnemy(source) && depletedBlock && state.boons.includes("grain-flail")) {
@@ -198,7 +205,7 @@ export function* faultline({ state, target, events }: HitContext, depletedBlock:
   if (
     !depletedBlock ||
     target.health <= 0 ||
-    !battlefield(state, allied ? "player" : "enemy").some((unit) => unit.id === target.id)
+    !battlefieldHasId(state, allied ? "player" : "enemy", target.id)
   )
     return;
   const armor = passiveAmount(allied ? state : undefined, target.species, "faultline");
@@ -233,7 +240,7 @@ export function publishHit(
 export function* passingFlame({ state, source, target, events }: HitContext): Resolution<void> {
   if (target.health > 0 || source.health <= 0 || isEnemy(source) === isEnemy(target)) return;
   const allied = !isEnemy(source);
-  if (!battlefield(state, allied ? "player" : "enemy").some((unit) => unit.id === source.id)) return;
+  if (!battlefieldHasId(state, allied ? "player" : "enemy", source.id)) return;
   const percent = passiveAmount(allied ? state : undefined, source.species, "passingFlame");
   const total = Math.round((ensureCombat(target).burn * percent) / 100);
   if (total <= 0) return;
