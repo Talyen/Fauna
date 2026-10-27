@@ -335,17 +335,35 @@
     "sourceHash": "492f12f8aa76b4a76af38235126a4e7349ad9ae684e6cfe0c4bff83e7277f316",
     "text": "黄铜香炉"
   },
+  "content.boon.camp-hammock.rule": {
+    "reviewed": true,
+    "source": "Backup allies can receive <keyword0>Healing</keyword0>",
+    "sourceHash": "9a795b7010c74e2fa62b9b1122b1b432ddfc33b1594237ee27a824e424fd8bee",
+    "text": "后备盟友可以接受<keyword0>治疗</keyword0>"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "11cb573923027cdc4262e4a1db262b8143a508cf23cd25d40d992db3a1f529ac",
     "text": "扒手小刀"
   },
+  "content.boon.encore-baton.rule": {
+    "reviewed": true,
+    "source": "Draw a card after playing three",
+    "sourceHash": "f6f8abd6629f7e6f4129a3b574a8a5aaeba094b5a3e4ecd00cf69ec2dc569095",
+    "text": "每打出三张牌后抽一张牌"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "c44078c2529c51609e3c7285bf5c532662968bc62b90bcea34a4f51549bdfd27",
     "text": "手牌上限增加一个位置"
+  },
+  "content.boon.field-lunch-basket.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> draws a card",
+    "sourceHash": "1d0c182a014d7dbecf9937913602a29f60cbe88a3cf3d363c50fa9b09029885f",
+    "text": "打出<keyword0>食物</keyword0>时抽一张牌"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -436,6 +454,12 @@
     "source": "Thunderstone",
     "sourceHash": "2d33b89e873cfddc229e0448f75c3165f79fac6e33835018e64721946dd2d44f",
     "text": "雷霆石"
+  },
+  "content.boon.wonder-domino.rule": {
+    "reviewed": true,
+    "source": "Overkill damage spreads to other enemies",
+    "sourceHash": "b26eadfee997fb8b65c79a465dd957e4ad5edb47c2ceda8a6a8b882567d54b18",
+    "text": "击倒敌人时的溢出伤害会传播给其他敌人"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,

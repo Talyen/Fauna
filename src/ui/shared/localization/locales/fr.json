@@ -347,17 +347,35 @@
     "sourceHash": "0b572366da476a1ef71d0a44a7f714e96f1e97a39b64c0d0318aaae24c87507f",
     "text": "Encensoir de laiton"
   },
+  "content.boon.camp-hammock.rule": {
+    "reviewed": true,
+    "source": "Backup allies can receive <keyword0>Healing</keyword0>",
+    "sourceHash": "95f4b83f612b70761c990f8c12196a8b2af33ffb37c701215322bdd87884d233",
+    "text": "Les alliés en réserve peuvent recevoir des <keyword0>soins</keyword0>"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "c25e943d61f52562ae2c56c923a91faf6fa10da393e46f1593361d09912b23cd",
     "text": "Couteau de coupe-bourse"
   },
+  "content.boon.encore-baton.rule": {
+    "reviewed": true,
+    "source": "Draw a card after playing three",
+    "sourceHash": "3d0495e0fe3e46baa1750c90c691701fed7c691bccd0dc5f090be5565f751212",
+    "text": "Piochez une carte après en avoir joué trois"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "546b25424fbccd1773461ed0c8782a5312d3a60c1076976e0d792a0190a93c44",
     "text": "Gagnez un emplacement de carte supplémentaire en main"
+  },
+  "content.boon.field-lunch-basket.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> draws a card",
+    "sourceHash": "2a6ed4d8e76b5db352449cf74feab42a3eccab30ecaa6183ecaae130e16bb725",
+    "text": "Jouer une carte <keyword0>Nourriture</keyword0> permet de piocher une carte"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -484,6 +502,12 @@
     "source": "Thunderstone",
     "sourceHash": "e75e58fea7c74c42395d86a9f2c1307dacedb73ef63e3c16604513b7bd3772f5",
     "text": "Pierre de tonnerre"
+  },
+  "content.boon.wonder-domino.rule": {
+    "reviewed": true,
+    "source": "Overkill damage spreads to other enemies",
+    "sourceHash": "14845adc3f55dc88a438eac3da4cdcbb7b367252775eeb8b9f9295ea7d11d2f0",
+    "text": "Les dégâts excédentaires se propagent aux autres ennemis"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,

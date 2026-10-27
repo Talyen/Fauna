@@ -335,17 +335,35 @@
     "sourceHash": "27b172b8743ca9ae484da58a07637eccdff8495b1479bb20b52162256c89e33d",
     "text": "Messingrauchfass"
   },
+  "content.boon.camp-hammock.rule": {
+    "reviewed": true,
+    "source": "Backup allies can receive <keyword0>Healing</keyword0>",
+    "sourceHash": "db0cdb33b5c6996905b3a02315b9055309bdce92c3e492181b4935f3d165bfed",
+    "text": "Verbündete in Reserve können <keyword0>Heilung</keyword0> erhalten"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "5cf26d170aa98cdb4926be7bcedfa40cfb5fc539f0cb9c3807b76b2645ade535",
     "text": "Beutelschneidermesser"
   },
+  "content.boon.encore-baton.rule": {
+    "reviewed": true,
+    "source": "Draw a card after playing three",
+    "sourceHash": "3166eda34d5314029b90b72c78522046698714f28341a7d9be7fd66501776c60",
+    "text": "Ziehe eine Karte, nachdem du drei gespielt hast"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "22fa15949f07e3fff203772a0477a3b7839b4bd1464b8279c856de54a31571fc",
     "text": "Erhalte einen zusätzlichen Handkartenplatz"
+  },
+  "content.boon.field-lunch-basket.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> draws a card",
+    "sourceHash": "712a20d4921f61f7622d8535cacaaeb510e31ca044f1e2fd5c221c051af6cbe7",
+    "text": "Das Spielen von <keyword0>Nahrung</keyword0> zieht eine Karte"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -436,6 +454,12 @@
     "source": "Thunderstone",
     "sourceHash": "ea8f2c71542762eb6644d3df9c6ff1646f844da29c4816e82317984ada005b49",
     "text": "Donnerstein"
+  },
+  "content.boon.wonder-domino.rule": {
+    "reviewed": true,
+    "source": "Overkill damage spreads to other enemies",
+    "sourceHash": "49e2022d216e0f1884054b2c9ea0b219e92468ca6fdf2a28018be6ba80f89aca",
+    "text": "Überschüssiger Schaden bei einem besiegten Gegner überträgt sich auf andere Gegner"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,

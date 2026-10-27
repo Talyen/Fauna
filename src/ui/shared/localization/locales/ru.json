@@ -335,17 +335,35 @@
     "sourceHash": "c064fc4cc4f723be380f1337f6cec221da0c405ec37e9a46c296fef4debbd42b",
     "text": "Латунное кадило"
   },
+  "content.boon.camp-hammock.rule": {
+    "reviewed": true,
+    "source": "Backup allies can receive <keyword0>Healing</keyword0>",
+    "sourceHash": "f268dc56e4c35b51aa32871efd655109388e6c44a9fff3176b8c22308c411aba",
+    "text": "Союзники в запасе могут получать <keyword0>лечение</keyword0>"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "b246efade40a55a10c180028b6446de3b072a30b8dc85452fb24f299d5fd2dcb",
     "text": "Нож карманника"
   },
+  "content.boon.encore-baton.rule": {
+    "reviewed": true,
+    "source": "Draw a card after playing three",
+    "sourceHash": "fb6d8bd472fb0684ae548300ff6484a0252d21edecf086e9eec589c36446e204",
+    "text": "После розыгрыша трёх карт возьмите карту"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "ec5db118be1a26a3ed9a036aa9cb823d61b9a7d7340eb693194a7cb232a92c38",
     "text": "Получите дополнительное место для карты в руке"
+  },
+  "content.boon.field-lunch-basket.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> draws a card",
+    "sourceHash": "f0c21539cd42724767894374d3466d5d7ac4ff2af775edca77954851f1568d92",
+    "text": "Розыгрыш <keyword0>еды</keyword0> позволяет взять карту"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -436,6 +454,12 @@
     "source": "Thunderstone",
     "sourceHash": "b0890f6fdeaf37521864d749af5b59a14e7f308777f0cd337fdbfb0d92a9cfda",
     "text": "Громовой камень"
+  },
+  "content.boon.wonder-domino.rule": {
+    "reviewed": true,
+    "source": "Overkill damage spreads to other enemies",
+    "sourceHash": "20b73783625c5013128e4a5b9507c4b2bde2346c906f18c55a7600373f9da6f6",
+    "text": "Избыточный урон при победе над врагом переходит к другим врагам"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,

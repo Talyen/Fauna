@@ -335,17 +335,35 @@
     "sourceHash": "bf3fe178f2945982b5e674768496f7675205c329c05aeab1a790bfd618e00a3d",
     "text": "Incensario de latón"
   },
+  "content.boon.camp-hammock.rule": {
+    "reviewed": true,
+    "source": "Backup allies can receive <keyword0>Healing</keyword0>",
+    "sourceHash": "87e756cc71521f56c6af1f25508cabfe4a01edf6a5bb3ad7d6c71aab264925a5",
+    "text": "Los aliados de reserva pueden recibir <keyword0>curación</keyword0>"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
     "sourceHash": "35b9250db04cffee30d035952783df584bb75ab6421328fd0161ce7c6527690b",
     "text": "Cuchillo de ratero"
   },
+  "content.boon.encore-baton.rule": {
+    "reviewed": true,
+    "source": "Draw a card after playing three",
+    "sourceHash": "2d2851685bbbd5ce419eb7770e5945cdecbed629c5545db830c431f89aaeab7e",
+    "text": "Roba una carta después de jugar tres"
+  },
   "content.boon.facet-abacus.rule": {
     "reviewed": true,
     "source": "Gain an additional hand card slot",
     "sourceHash": "5b32b80a10a4d366f2da9bce359cac357d59bf3da3cbfaa5d1040bc7a4344e07",
     "text": "Obtienes un espacio adicional para cartas en la mano"
+  },
+  "content.boon.field-lunch-basket.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> draws a card",
+    "sourceHash": "72d98a6ca7b01b85a5b90e69ff2d6786cba58d912da329423b3ab079b27fb108",
+    "text": "Jugar <keyword0>Comida</keyword0> roba una carta"
   },
   "content.boon.groves-favor.name": {
     "reviewed": true,
@@ -436,6 +454,12 @@
     "source": "Thunderstone",
     "sourceHash": "dc463ecee47bb2c8f9da819d6894e75cd86226dc7779ca5cc1a18f8a374b4a73",
     "text": "Piedra del trueno"
+  },
+  "content.boon.wonder-domino.rule": {
+    "reviewed": true,
+    "source": "Overkill damage spreads to other enemies",
+    "sourceHash": "ac32092101c84bd2e02f85bc7a650b6667e88fc7e4a1cf1d370cabe01803eed4",
+    "text": "El daño excedente al derrotar a un enemigo se propaga a otros enemigos"
   },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
