@@ -187,6 +187,22 @@ it("uses actual Leech restoration for Block and feeds existing Burn once", () =>
   expect(enemy.combat.burn).toBe(4);
 });
 
+it("shares a blocked Water hit between Leech, Mirror Locket, Bellows Heart and Reef Diadem", () => {
+  const { state, source, enemy, events } = fixture();
+  state.boons = ["mirror-locket", "bellows-heart", "reef-diadem"];
+  source.health -= 6;
+  const before = source.health;
+  source.combat!.thorns = 4;
+  enemy.combat.burn = 3;
+  enemy.block = 5;
+  hit(state, source, enemy, 6, "water", events, { origin: "ability", leech: true });
+  expect(source.health).toBe(before + 3);
+  expect(source.block).toBe(2);
+  expect(enemy.combat.burn).toBe(4);
+  expect(enemy.health).toBe(97);
+  expect(source.combat!.thorns).toBe(4);
+});
+
 it("does not feed Burn when healing restores no Health", () => {
   const { state, source, enemy, events } = fixture();
   state.boons = ["bellows-heart"];
