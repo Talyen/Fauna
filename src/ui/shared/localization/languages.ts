@@ -3,6 +3,7 @@ import languages from "./languages.json";
 export const LANGUAGES = languages;
 export type GameLocale = keyof typeof LANGUAGES;
 export type LanguagePreference = "auto" | GameLocale;
+export const LANGUAGE_PREFERENCE_KEY = "fauna.language.v1";
 export const QUALIFIED_LANGUAGES: readonly GameLocale[] = (Object.keys(LANGUAGES) as GameLocale[]).filter(
   (locale) => LANGUAGES[locale].qualified,
 );

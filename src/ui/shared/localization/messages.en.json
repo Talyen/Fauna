@@ -98,6 +98,12 @@
   "campfire.creatureHealth": {
     "text": "{{name}} Health"
   },
+  "campfire.healthAndRest": {
+    "text": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "text": "{{before}} → {{after}} {{keyword}} · +{{amount}}"
+  },
   "campfire.name": {
     "text": "Campfire"
   },
@@ -157,6 +163,18 @@
   },
   "common.loading": {
     "text": "Loading…"
+  },
+  "controller.circle": {
+    "text": "Circle"
+  },
+  "controller.cross": {
+    "text": "Cross"
+  },
+  "controller.square": {
+    "text": "Square"
+  },
+  "controller.triangle": {
+    "text": "Triangle"
   },
   "creature.echo": {
     "text": "Echo"
@@ -448,6 +466,9 @@
   },
   "log.returnHome": {
     "text": "You return from the wilds. Discoveries are kept."
+  },
+  "log.sharedNegate": {
+    "text": "{{actor}} protects {{target}} with {{boon}}"
   },
   "log.skipControlledTurn": {
     "text": "{{name}} skips its {{status}} turn."
@@ -865,6 +886,36 @@
   },
   "settings.windowed": {
     "text": "Windowed"
+  },
+  "startup.adventure": {
+    "text": "Adventure awaits…"
+  },
+  "startup.boons": {
+    "text": "Gathering Boons…"
+  },
+  "startup.creatures": {
+    "text": "Waking creatures…"
+  },
+  "startup.decks": {
+    "text": "Shuffling decks…"
+  },
+  "startup.expeditions": {
+    "text": "Preparing expeditions…"
+  },
+  "startup.failed": {
+    "text": "Fauna could not start"
+  },
+  "startup.habitats": {
+    "text": "Exploring habitats…"
+  },
+  "startup.loading": {
+    "text": "Loading Fauna"
+  },
+  "startup.shops": {
+    "text": "Restocking shops…"
+  },
+  "startup.starters": {
+    "text": "Training starters…"
   },
   "status.additional": {
     "text": "{{description}}; {{extra}}"

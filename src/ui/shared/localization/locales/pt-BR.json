@@ -197,6 +197,18 @@
     "sourceHash": "2066cde3855ce0264d1b445180e171a4eddbb1ceb28617088a131217210c55d2",
     "text": "Saúde de {{name}}"
   },
+  "campfire.healthAndRest": {
+    "reviewed": true,
+    "source": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+    "sourceHash": "a59f456e4396703bf9d58ad268e3fdf27346c1cddfdc74d5acfa2faf16ecdcf1",
+    "text": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "reviewed": true,
+    "source": "{{before}} → {{after}} {{keyword}} · +{{amount}}",
+    "sourceHash": "3fc8a7e84304e1494b575da0a407ad379cc614575f6ebad105f7131e858723e2",
+    "text": "{{before}} → {{after}} {{keyword}} · +{{amount}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
@@ -7583,6 +7595,30 @@
     "sourceHash": "0bbb1ec7645a6e38d56158af31186591a81f0acc4095e8de88383f0afeca7a3b",
     "text": "Acertos de <keyword0>Água</keyword0> concedem {{value0}} de <keyword1>Bloqueio</keyword1>"
   },
+  "controller.circle": {
+    "reviewed": true,
+    "source": "Circle",
+    "sourceHash": "7b479921125e01d4dc973b2590ada70418b6c159413f148b6499c199651d8434",
+    "text": "Círculo"
+  },
+  "controller.cross": {
+    "reviewed": true,
+    "source": "Cross",
+    "sourceHash": "6863ba17b8caf4b0d261207174e691ebeb1fc6488fa5a47d339925090116dc5b",
+    "text": "Cruz"
+  },
+  "controller.square": {
+    "reviewed": true,
+    "source": "Square",
+    "sourceHash": "d6f083e5b4d3bc844326a46919910a36f521d5dcd6bff1f56c972ef24a12c960",
+    "text": "Quadrado"
+  },
+  "controller.triangle": {
+    "reviewed": true,
+    "source": "Triangle",
+    "sourceHash": "3132a2f49ff9f6dccbbfdca854a2b1dacdad8f48872283b019b04bd67fa9ed73",
+    "text": "Triângulo"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -8164,6 +8200,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "46bd2d96d9c00ce3dc75ef9b1b7461d6ff8abdac87943dcb9590dfcf70f83bb5",
     "text": "Você retorna das terras selvagens. As descobertas são mantidas."
+  },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "24731eb79031693e760dbe53cd526b95eab5bf8160b6d6cd81c49d7449c76c2c",
+    "text": "{{actor}} protege {{target}} com {{boon}}"
   },
   "log.skipControlledTurn": {
     "reviewed": true,
@@ -8999,6 +9041,66 @@
     "source": "Windowed",
     "sourceHash": "07a4e5214d2a65756fec490d28a2a4ced5a5c63304722164af73d061e33d96f8",
     "text": "Janela"
+  },
+  "startup.adventure": {
+    "reviewed": true,
+    "source": "Adventure awaits…",
+    "sourceHash": "622db48ffdd68e8c4c7e2eca1736c10de00166598ebe2ddc51a7dd2ec333cf45",
+    "text": "A aventura espera por você…"
+  },
+  "startup.boons": {
+    "reviewed": true,
+    "source": "Gathering Boons…",
+    "sourceHash": "585d00d07b965f7c18b61bcd1ae8d17edd748f04312814dffa9cb8876f6a09ce",
+    "text": "Reunindo Bênçãos…"
+  },
+  "startup.creatures": {
+    "reviewed": true,
+    "source": "Waking creatures…",
+    "sourceHash": "dd990e4e32b9efb6091ecd947bc832b0ec3ec45bc432340903d4951e27467574",
+    "text": "Acordando criaturas…"
+  },
+  "startup.decks": {
+    "reviewed": true,
+    "source": "Shuffling decks…",
+    "sourceHash": "7b4c404fe8e0b86af8d0320b54a8ba9482b935165680b4e644d89b3bf2553645",
+    "text": "Embaralhando cartas…"
+  },
+  "startup.expeditions": {
+    "reviewed": true,
+    "source": "Preparing expeditions…",
+    "sourceHash": "01f1f92d2891f6eed6cb738ce287dfaca24d8400ea69f73ce395f43969e5ea3a",
+    "text": "Preparando expedições…"
+  },
+  "startup.failed": {
+    "reviewed": true,
+    "source": "Fauna could not start",
+    "sourceHash": "4e0a43652068de429481f0f61399a0b31c41e433a717c1355d31b051b8655b18",
+    "text": "Não foi possível iniciar Fauna"
+  },
+  "startup.habitats": {
+    "reviewed": true,
+    "source": "Exploring habitats…",
+    "sourceHash": "0234e44fe1a31666f04f66ff0d723142801303261d6b64d23e87b39a21ae4f14",
+    "text": "Explorando habitats…"
+  },
+  "startup.loading": {
+    "reviewed": true,
+    "source": "Loading Fauna",
+    "sourceHash": "dd93df73f37c0f207dc1bf0bfad3ef317b9ca6238fb0a74c00869892305291a9",
+    "text": "Carregando Fauna"
+  },
+  "startup.shops": {
+    "reviewed": true,
+    "source": "Restocking shops…",
+    "sourceHash": "1726ed05595945b3d88debbdd97045fc8b8ffa47d2ee0e66e5c26df5f840fcac",
+    "text": "Reabastecendo lojas…"
+  },
+  "startup.starters": {
+    "reviewed": true,
+    "source": "Training starters…",
+    "sourceHash": "de8dadc85060de98fe189bc13fa322cfc7cf432ba6e83322125bbe08fb4888c0",
+    "text": "Treinando criaturas iniciais…"
   },
   "status.additional": {
     "reviewed": true,

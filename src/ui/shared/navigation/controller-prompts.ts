@@ -1,3 +1,5 @@
+import type { createMessageReader } from "../localization/messages";
+
 export type ControllerFamily = "xbox" | "playstation" | "nintendo";
 export type ControllerPreference = "auto" | ControllerFamily;
 export function controllerFamily(id: string): ControllerFamily {
@@ -10,3 +12,16 @@ export const CONTROLLER_PROMPTS = {
   playstation: { confirm: "Cross", back: "Circle", inspect: "Square", endTurn: "Triangle" },
   nintendo: { confirm: "B", back: "A", inspect: "Y", endTurn: "X" },
 } as const;
+/** Button positions remain fixed; only the names of PlayStation symbols are translated. */
+export function localizedControllerPrompts(
+  family: ControllerFamily,
+  i18n: ReturnType<typeof createMessageReader>,
+) {
+  if (family !== "playstation") return CONTROLLER_PROMPTS[family];
+  return {
+    confirm: i18n.message("controller.cross", "Cross"),
+    back: i18n.message("controller.circle", "Circle"),
+    inspect: i18n.message("controller.square", "Square"),
+    endTurn: i18n.message("controller.triangle", "Triangle"),
+  };
+}

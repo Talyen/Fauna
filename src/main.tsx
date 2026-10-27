@@ -1,6 +1,7 @@
 import { useLayoutEffect } from "react";
 import { assetUrl } from "./ui/shared/assets";
 import { LocalizationProvider } from "./ui/shared/localization/provider";
+import { QUALIFIED_LANGUAGES } from "./ui/shared/localization/languages";
 import { GameErrorBoundary } from "./ui/shared/diagnostics";
 import { createRoot } from "react-dom/client";
 import { createSession } from "./application/session";
@@ -17,6 +18,13 @@ for (const name of ["full", "empty"])
   document.documentElement.style.setProperty(`--mana-${name}-image`, `url("${assetUrl(`mana.${name}`)}")`);
 export function mountGame(splash: StartupSplash) {
   const platform = createPlatform();
+  const steamLanguage =
+    QUALIFIED_LANGUAGES.length > 1
+      ? Promise.resolve()
+          .then(() => platform.steam.getLanguage())
+          .catch(() => null)
+      : Promise.resolve(null);
+  void steamLanguage.then((language) => splash.setSteamLanguage(language));
   const releasePerformance = installPerformanceRecorder(rendererPerformanceRecorder);
   const session = createSession(platform, Date.now() >>> 0, {
     development: import.meta.env.DEV,
@@ -30,7 +38,7 @@ export function mountGame(splash: StartupSplash) {
       startup.releaseImages();
     }, []);
     return (
-      <LocalizationProvider steamLanguage={platform.steam.getLanguage}>
+      <LocalizationProvider steamLanguage={() => steamLanguage}>
         <GameErrorBoundary diagnostics={session.diagnostics}>
           <App session={session} desktop={platform.desktop} />
         </GameErrorBoundary>

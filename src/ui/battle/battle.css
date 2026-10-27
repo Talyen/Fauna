@@ -85,6 +85,9 @@
   flex-direction: column;
   gap: var(--screen-item-gap);
 }
+.hand-toolbar > .battle-dock:last-child .battle-actions {
+  align-self: flex-end;
+}
 .hand {
   display: flex;
   justify-content: center;

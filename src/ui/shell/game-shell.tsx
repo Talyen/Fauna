@@ -31,7 +31,7 @@ import { Button } from "../../components/ui/button";
 import { Popover, PopoverAnchor, PopoverContent } from "../../components/ui/popover";
 import { BattleScreen } from "../battle/battle-screen";
 import type { Inspection } from "../shared/inspection-model";
-import { CONTROLLER_PROMPTS, type ControllerFamily } from "../shared/navigation/controller-prompts";
+import { localizedControllerPrompts, type ControllerFamily } from "../shared/navigation/controller-prompts";
 import { type Controls, connectInput, type InputAction } from "../shared/navigation/input";
 import { Draft } from "../expedition/draft";
 import { TeamSelection } from "../expedition/team-selection";
@@ -75,7 +75,10 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const [navigation, setNavigation] = useState(false);
   const playSound = useGameAudio(session, audio, route === "home");
   useActivationAudio(playSound);
-  const controllerPrompts = CONTROLLER_PROMPTS[controller === "auto" ? detectedController : controller];
+  const controllerPrompts = localizedControllerPrompts(
+    controller === "auto" ? detectedController : controller,
+    i18n,
+  );
   const active =
     !["victory", "defeat"].includes(game.phase) &&
     (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));

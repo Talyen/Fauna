@@ -197,6 +197,18 @@
     "sourceHash": "f3e9a3bfcb38a7a6d7be47c9dcc4321a540b9dd5593fe6e3bc9848039ee8d895",
     "text": "{{name}}の体力"
   },
+  "campfire.healthAndRest": {
+    "reviewed": true,
+    "source": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+    "sourceHash": "2412c13a25577845c843ba7c71f96eca17b2bf304a8fc8ddfbea01c8c527b6bc",
+    "text": "{{keyword}} {{health}}/{{maximum}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "reviewed": true,
+    "source": "{{before}} → {{after}} {{keyword}} · +{{amount}}",
+    "sourceHash": "1774423705c963530dcf8eaf8dbc26c175971d45fa17267d3cd55e3cf050e333",
+    "text": "{{keyword}} {{before}} → {{after}} · +{{amount}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
@@ -7583,6 +7595,30 @@
     "sourceHash": "ab2e32c696c9f862c8b55601c72cfda2b5a667d5ea0b07364ea7f7b76d849447",
     "text": "<keyword0>水</keyword0>の命中時に<keyword1>ブロック</keyword1>を{{value0}}獲得"
   },
+  "controller.circle": {
+    "reviewed": true,
+    "source": "Circle",
+    "sourceHash": "edfaeabaa43c51eb8b859d07dcf7f893bd8fbf9a69536ee4c33a5fd6ae11dbcb",
+    "text": "マル"
+  },
+  "controller.cross": {
+    "reviewed": true,
+    "source": "Cross",
+    "sourceHash": "0a03c94f3b6a31e6dc686102f76506dfe7ff4adf28d4858dad9e62c9c2fc210e",
+    "text": "バツ"
+  },
+  "controller.square": {
+    "reviewed": true,
+    "source": "Square",
+    "sourceHash": "cbbebd81f21eef542c7294787acfa6c52becb60cdf422902dd77ba291e061107",
+    "text": "四角"
+  },
+  "controller.triangle": {
+    "reviewed": true,
+    "source": "Triangle",
+    "sourceHash": "c63c739148a4e854d8d62ca30fdde4ff935b62744fe807bfaf75f2261581dafb",
+    "text": "三角"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -8164,6 +8200,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "9e6ccf6977846cf547ea67733133d4f6a1340e7ae829875eddc9ec76fd92cbdb",
     "text": "野生の地から帰還しました。発見は保持されます。"
+  },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "df96c7d56d5fc10e03e46813f9d8272d5e906b1e1ba0ae36bf7783c84fd226ff",
+    "text": "{{actor}}が{{boon}}で{{target}}を守る"
   },
   "log.skipControlledTurn": {
     "reviewed": true,
@@ -8997,6 +9039,66 @@
     "source": "Windowed",
     "sourceHash": "746ae9dc77bd40cb0eadc731954e7b6611ebb5af6d95373d9de5acba197f16b9",
     "text": "ウィンドウ"
+  },
+  "startup.adventure": {
+    "reviewed": true,
+    "source": "Adventure awaits…",
+    "sourceHash": "4ae51c4fa796beeacabe23a43a3b97d501f3720f3a1ff07cada56f1f339dc7d7",
+    "text": "冒険が待っている…"
+  },
+  "startup.boons": {
+    "reviewed": true,
+    "source": "Gathering Boons…",
+    "sourceHash": "2f92b2c0c34135f7874dcbe9a9b5c162303114007e1d5beb2baf27b17653b2a0",
+    "text": "祝福を集めています…"
+  },
+  "startup.creatures": {
+    "reviewed": true,
+    "source": "Waking creatures…",
+    "sourceHash": "0c89b78d1978c332810743b54653f54b88cc0a947d799e3b6289a42023f57a37",
+    "text": "クリーチャーを起こしています…"
+  },
+  "startup.decks": {
+    "reviewed": true,
+    "source": "Shuffling decks…",
+    "sourceHash": "e19c03606f9f71c66ee4bf5e9ee79dd9631ec6ffa6f6a5c3aa5e9970748b734b",
+    "text": "デッキをシャッフル中…"
+  },
+  "startup.expeditions": {
+    "reviewed": true,
+    "source": "Preparing expeditions…",
+    "sourceHash": "6e6cd3bedefa00fcd9e08a638596ed09e1ec78c6c4aa4163d76bf2bb79b0f691",
+    "text": "遠征を準備中…"
+  },
+  "startup.failed": {
+    "reviewed": true,
+    "source": "Fauna could not start",
+    "sourceHash": "76a2a4c6ad385202551b71634fa5999044189d1754bcbe1e922750824bce7a89",
+    "text": "Faunaを起動できませんでした"
+  },
+  "startup.habitats": {
+    "reviewed": true,
+    "source": "Exploring habitats…",
+    "sourceHash": "b0bd7d5d497902e72f934094ab741033981ccee5b81941dee498172a09b4a125",
+    "text": "生息地を探索中…"
+  },
+  "startup.loading": {
+    "reviewed": true,
+    "source": "Loading Fauna",
+    "sourceHash": "3d3f75fc42ce1aeb899505a360c418796087cc7071691d8faacdeae4156272fc",
+    "text": "Faunaを読み込み中"
+  },
+  "startup.shops": {
+    "reviewed": true,
+    "source": "Restocking shops…",
+    "sourceHash": "7484da3e635407c83318440cb9249962d2bede710b912ec60b26964e3a189570",
+    "text": "ショップを補充中…"
+  },
+  "startup.starters": {
+    "reviewed": true,
+    "source": "Training starters…",
+    "sourceHash": "81863691fea174e51dcded7a130f09223a2e58ef1112fd6e9c6fe68de81fb669",
+    "text": "最初のクリーチャーを訓練中…"
   },
   "status.additional": {
     "reviewed": true,

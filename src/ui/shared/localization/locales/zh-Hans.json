@@ -197,6 +197,18 @@
     "sourceHash": "bd7f3d6a7ec28fed532cfc0fca3aa5e74159fb21f738b0b7f7ab01c703e724b1",
     "text": "{{name}}的生命"
   },
+  "campfire.healthAndRest": {
+    "reviewed": true,
+    "source": "{{health}}/{{maximum}} {{keyword}} · +{{amount}}",
+    "sourceHash": "760c9a399cd5478278c67298703af90cc020c39d1b09859ca2e1e069bd77cc1b",
+    "text": "{{keyword}} {{health}}/{{maximum}} · +{{amount}}"
+  },
+  "campfire.healthRecovered": {
+    "reviewed": true,
+    "source": "{{before}} → {{after}} {{keyword}} · +{{amount}}",
+    "sourceHash": "dc2c6ffbf5ab281ce3a2e20cb71aacd1f5d16515e67647562b8881e3a874c926",
+    "text": "{{keyword}} {{before}} → {{after}} · +{{amount}}"
+  },
   "campfire.name": {
     "reviewed": true,
     "source": "Campfire",
@@ -7583,6 +7595,30 @@
     "sourceHash": "3f8792322a4ff901f08b225f92a716b55c4b88815120eb3367bfd95b32b40f11",
     "text": "<keyword0>水</keyword0>命中时获得{{value0}}点<keyword1>格挡</keyword1>"
   },
+  "controller.circle": {
+    "reviewed": true,
+    "source": "Circle",
+    "sourceHash": "df729f31ce119285b15fa93e9f8439aab30bb8842bbbd9d102240f9e7ddbf946",
+    "text": "圆形"
+  },
+  "controller.cross": {
+    "reviewed": true,
+    "source": "Cross",
+    "sourceHash": "5e2197de1d7f2a2dc9d39c493ff72ae93eb12bca986d7ca57d4bd08bd0abda7f",
+    "text": "叉形"
+  },
+  "controller.square": {
+    "reviewed": true,
+    "source": "Square",
+    "sourceHash": "051ef9ad172823c9229713bc3e568bf0496ac49815188516e60b88edb6af394a",
+    "text": "方形"
+  },
+  "controller.triangle": {
+    "reviewed": true,
+    "source": "Triangle",
+    "sourceHash": "bff4595f663a4d9bd1f7aaabcb108dfa19a9a02969515e1f251fcc35cbd86296",
+    "text": "三角形"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -8164,6 +8200,12 @@
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "17478189a0951aaf75aaa662444195a9e35fe7fa6fdd21c9f2836ae94432b0e7",
     "text": "你从荒野归来。已保留发现成果。"
+  },
+  "log.sharedNegate": {
+    "reviewed": true,
+    "source": "{{actor}} protects {{target}} with {{boon}}",
+    "sourceHash": "bc13df4aebe9c28b0b8de096d89ea1a7770abbedb4efc7e58602f318ef7654a1",
+    "text": "{{actor}}用{{boon}}保护{{target}}"
   },
   "log.skipControlledTurn": {
     "reviewed": true,
@@ -8997,6 +9039,66 @@
     "source": "Windowed",
     "sourceHash": "aeb17388b472c4ed3c0374412b81c128014426fffeafcebb0af89951d0347640",
     "text": "窗口模式"
+  },
+  "startup.adventure": {
+    "reviewed": true,
+    "source": "Adventure awaits…",
+    "sourceHash": "89db888690e21b81bedc908f35c8c82def4254e7d83642b4434010fb6934b720",
+    "text": "冒险在等待…"
+  },
+  "startup.boons": {
+    "reviewed": true,
+    "source": "Gathering Boons…",
+    "sourceHash": "dc9950e41fb4a3ebde92bc198c50e1b2aeee041fbcb0278abfd0d4f5d4febd52",
+    "text": "正在收集祝福…"
+  },
+  "startup.creatures": {
+    "reviewed": true,
+    "source": "Waking creatures…",
+    "sourceHash": "ef39758f630715ba11fbaab50f036d74e2f6956b8c3275f9a588dc4fc07b8a48",
+    "text": "正在唤醒生物…"
+  },
+  "startup.decks": {
+    "reviewed": true,
+    "source": "Shuffling decks…",
+    "sourceHash": "28ba635abcf451a170b6b153aa721e717c04502bce10060e2612cad24a11cf2f",
+    "text": "正在洗牌…"
+  },
+  "startup.expeditions": {
+    "reviewed": true,
+    "source": "Preparing expeditions…",
+    "sourceHash": "3fca27a233bdaa8e4515a4deda83a16c5bf804abe8c26e4efc285bbf92c3e540",
+    "text": "正在准备远征…"
+  },
+  "startup.failed": {
+    "reviewed": true,
+    "source": "Fauna could not start",
+    "sourceHash": "f526a38688902510bc98c4fff81217e9ce476816c2671c5416f4ecfd2c304671",
+    "text": "Fauna无法启动"
+  },
+  "startup.habitats": {
+    "reviewed": true,
+    "source": "Exploring habitats…",
+    "sourceHash": "a900c58f84253d4e24c5c3c9c7a3eeaf079351eae956bca80e68c47cbb14cf79",
+    "text": "正在探索栖息地…"
+  },
+  "startup.loading": {
+    "reviewed": true,
+    "source": "Loading Fauna",
+    "sourceHash": "1a3c8cbb2ccd7fa0a166a8f02ce93f099c0879185c7aef7597d2c0791501652a",
+    "text": "正在加载Fauna"
+  },
+  "startup.shops": {
+    "reviewed": true,
+    "source": "Restocking shops…",
+    "sourceHash": "b6e09d7ea8ba5a3a6e3f1ebfb4a37b79c51d686606eb405bcc25626401e64140",
+    "text": "正在补充商店货物…"
+  },
+  "startup.starters": {
+    "reviewed": true,
+    "source": "Training starters…",
+    "sourceHash": "ae2383a37767fee305ecd75121c0b3659f097f1c9b4298b76f1f6ca4bbfd0bff",
+    "text": "正在训练初始生物…"
   },
   "status.additional": {
     "reviewed": true,

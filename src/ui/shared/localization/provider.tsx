@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { readPreference, writePreference } from "../../../platform/preferences";
 import {
-  LANGUAGES,
+  LANGUAGE_PREFERENCE_KEY,
   QUALIFIED_LANGUAGES,
   resolveLanguage,
   type GameLocale,
@@ -10,20 +10,7 @@ import {
 import { RuleCatalogProvider, type RuleCatalog } from "./rule-catalog";
 import { MessageProvider } from "./message-context";
 import type { MessageCatalog } from "./messages";
-import { shippedCatalogs } from "./shipped-catalogs";
-
-const preferenceKey = "fauna.language.v1";
-const previewCatalogs = import.meta.env.DEV
-  ? import.meta.glob<MessageCatalog>("./locales/*.json", { eager: true, import: "default" })
-  : {};
-const bundledCatalogs: Partial<Record<GameLocale, MessageCatalog>> = import.meta.env.DEV
-  ? Object.fromEntries(
-      (Object.keys(LANGUAGES) as GameLocale[]).flatMap((locale) => {
-        const catalog = previewCatalogs[`./locales/${locale}.json`];
-        return catalog ? [[locale, catalog]] : [];
-      }),
-    )
-  : shippedCatalogs;
+import { bundledCatalogs } from "./bundled-catalogs";
 const englishCatalog: MessageCatalog = Object.freeze({});
 interface LanguageState {
   locale: GameLocale;
@@ -63,7 +50,7 @@ export function LocalizationProvider({
     [catalogs, qualified],
   );
   const [preference, setPreferenceState] = useState<LanguagePreference>(() => {
-    const saved = persist ? readPreference(preferenceKey) : null;
+    const saved = persist ? readPreference(LANGUAGE_PREFERENCE_KEY) : null;
     return saved === "auto" || options.some((locale) => locale === saved)
       ? (saved as LanguagePreference)
       : "auto";
@@ -98,7 +85,7 @@ export function LocalizationProvider({
     (value: LanguagePreference) => {
       if (value !== "auto" && !options.includes(value)) return;
       setPreferenceState(value);
-      if (persist) writePreference(preferenceKey, value);
+      if (persist) writePreference(LANGUAGE_PREFERENCE_KEY, value);
     },
     [options, persist],
   );
