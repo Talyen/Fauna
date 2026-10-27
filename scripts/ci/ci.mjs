@@ -331,7 +331,9 @@ async function main(command) {
     const shard = Number(process.env.FAUNA_LINEUP_SHARD);
     if (!Number.isInteger(shard) || shard < 1 || shard > LINEUP_SHARDS)
       throw new Error("Invalid lineup shard");
-    write("reports/ci/lineup.json", { ...identity(), shard, total: LINEUP_SHARDS });
+    const schedule = process.env.FAUNA_LINEUP_SCHEDULE ?? "round-robin";
+    if (!["round-robin", "balanced"].includes(schedule)) throw new Error("Invalid lineup schedule");
+    write("reports/ci/lineup.json", { ...identity(), shard, total: LINEUP_SHARDS, schedule });
   } else if (command === "interaction") {
     const manifest = read("reports/ci/build.json");
     assertIdentity(manifest);
@@ -393,11 +395,17 @@ async function main(command) {
     const reports = [];
     const evidence = { ...identity(), build: manifest, unit, interaction, lineups: [], shards: [] };
     const unitReports = [read("reports/vitest.json")];
+    const lineupSchedule = process.env.FAUNA_LINEUP_SCHEDULE ?? "round-robin";
+    if (!["round-robin", "balanced"].includes(lineupSchedule)) throw new Error("Invalid lineup schedule");
     for (let shard = 1; shard <= LINEUP_SHARDS; shard++) {
       const root = `reports/lineups/lineup-results-${shard}`;
       const metadata = read(`${root}/ci/lineup.json`);
       assertIdentity(metadata);
-      if (metadata.shard !== shard || metadata.total !== LINEUP_SHARDS)
+      if (
+        metadata.shard !== shard ||
+        metadata.total !== LINEUP_SHARDS ||
+        metadata.schedule !== lineupSchedule
+      )
         throw new Error("Wrong lineup shard identity");
       evidence.lineups.push(metadata);
       unitReports.push(read(`${root}/vitest.json`));
@@ -408,7 +416,7 @@ async function main(command) {
       group: index === 0 ? "contracts" : `lineups-${index}`,
       duration: Math.max(...report.testResults.map((suite) => suite.endTime)) - report.startTime,
     }));
-    write("reports/ci/unit-timings.json", { ...identity(), shards: unitShards });
+    write("reports/ci/unit-timings.json", { ...identity(), lineupSchedule, shards: unitShards });
     for (let shard = 1; shard <= total; shard++) {
       const root = `reports/shards/browser-shard-${shard}`;
       const metadata = read(`${root}/reports/ci/shard.json`);
