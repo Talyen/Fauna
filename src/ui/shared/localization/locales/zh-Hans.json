@@ -7835,6 +7835,12 @@
     "sourceHash": "cde852c48b4cde8ef1b88831cc62c926dde81766fd412eb7081d7702acdaf309",
     "text": "已为本次旅程购买祝福。"
   },
+  "log.cleansePoison": {
+    "reviewed": true,
+    "source": "{{name}} Cleanses {{amount}} Poison.",
+    "sourceHash": "7c45bc4d2ba9a6827800bb66c1a1908fc5497e38dc21285d81441ed30ee520c0",
+    "text": "{{name}}净化了{{amount}}点中毒。"
+  },
   "log.controlApplied": {
     "reviewed": true,
     "source": "{{name}} is {{status}}.",
@@ -8026,6 +8032,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
     "text": "{{name}}：{{action}} — 未移除任何效果。"
+  },
+  "log.repeatCard": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}}",
+    "sourceHash": "a17db8bb53b25ed21154c749167b1b7f73a9dd65aa613b5ae7ef1f0605aec3fe",
+    "text": "{{actor}}重复使用{{card}}"
+  },
+  "log.repeatCardWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}} with {{trait}}",
+    "sourceHash": "e74e7b0d74a4a14e6e6287424f83d32b028f4ab36bdd6d0bdc81f88e54f2d59b",
+    "text": "{{actor}}通过{{trait}}重复使用{{card}}"
   },
   "log.repeatFood": {
     "reviewed": true,

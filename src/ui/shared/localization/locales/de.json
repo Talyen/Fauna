@@ -7835,6 +7835,12 @@
     "sourceHash": "c0d7770c0f493266e51dff05c810868d58c14b6fa593aa18b7631412e9258eb4",
     "text": "Segen für diese Reise gekauft."
   },
+  "log.cleansePoison": {
+    "reviewed": true,
+    "source": "{{name}} Cleanses {{amount}} Poison.",
+    "sourceHash": "9a1f5947b8bb3631f1cc8dec12c962f01c7ffaa3334c359283b08f4b8242fee6",
+    "text": "{{name}} reinigt {{amount}} Gift."
+  },
   "log.controlApplied": {
     "reviewed": true,
     "source": "{{name}} is {{status}}.",
@@ -8026,6 +8032,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "7045c036abd55036084814f8fc5e1f8c311bdf6265b0b4a1c035da5b69d42c6a",
     "text": "{{name}}: {{action}} – kein Effekt entfernt."
+  },
+  "log.repeatCard": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}}",
+    "sourceHash": "365b5c7a6ff02280460a91c1a8402acee754f32588062f4eb0370531569f6202",
+    "text": "{{actor}} wiederholt {{card}}"
+  },
+  "log.repeatCardWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}} with {{trait}}",
+    "sourceHash": "a0213e57544a1faeb531e50d43312190c16abb41663c56fde23959b3c3bef1f3",
+    "text": "{{actor}} wiederholt {{card}} mit {{trait}}"
   },
   "log.repeatFood": {
     "reviewed": true,

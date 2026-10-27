@@ -75,6 +75,34 @@ export function eventPresentation(
           });
       }
     }
+    if (actor && event.actionType === "support") {
+      const prefix = `${unitName(actor)} repeats `;
+      if (event.text.startsWith(prefix)) {
+        const rest = event.text.slice(prefix.length);
+        const trait = rest.endsWith(" with Kindling Flourish")
+          ? {
+              suffix: " with Kindling Flourish",
+              key: "content.species.wickwaltz.trait",
+              name: "Kindling Flourish",
+            }
+          : rest.endsWith(" with Encore")
+            ? { suffix: " with Encore", key: "content.species.chimecricket.trait", name: "Encore" }
+            : undefined;
+        const card = cardsByEnglishName.get(trait ? rest.slice(0, -trait.suffix.length) : rest);
+        if (card) {
+          const values = {
+            actor: localizedCombatantName(actor, i18n),
+            card: i18n.content(`content.card.${card.id}.name`, card.name),
+          };
+          return trait
+            ? i18n.message("log.repeatCardWithTrait", "{{actor}} repeats {{card}} with {{trait}}", {
+                ...values,
+                trait: i18n.content(trait.key, trait.name),
+              })
+            : i18n.message("log.repeatCard", "{{actor}} repeats {{card}}", values);
+        }
+      }
+    }
     if (event.actionType === "support" && event.text.startsWith("Use ")) {
       const card = cardsByEnglishName.get(event.text.slice(4));
       if (card?.species === null)
@@ -296,6 +324,17 @@ export function eventPresentation(
     }
   }
   if (event.kind === "status" && event.amount !== undefined) {
+    if (
+      event.status === "cleanse" &&
+      event.outcome === "remove" &&
+      event.affectedStatus === "poison" &&
+      event.amount < 0 &&
+      event.text === `${englishName} Cleanses ${-event.amount} Poison.`
+    )
+      return i18n.message("log.cleansePoison", "{{name}} Cleanses {{amount}} Poison.", {
+        name,
+        amount: quantity(-event.amount),
+      });
     if (
       event.status === "armor" &&
       event.outcome === "remove" &&

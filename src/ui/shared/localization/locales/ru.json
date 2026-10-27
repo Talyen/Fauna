@@ -7835,6 +7835,12 @@
     "sourceHash": "cff124b44b28291783a1a1caef687c210b0ea6d6f56de255963ef3eecdb7029a",
     "text": "Благословение куплено для этого путешествия."
   },
+  "log.cleansePoison": {
+    "reviewed": true,
+    "source": "{{name}} Cleanses {{amount}} Poison.",
+    "sourceHash": "53e195cae35966d277afdd7fa12639fa41aee02737425c2f4a1a102aec6a98a8",
+    "text": "{{name}} очищает яд: {{amount}}."
+  },
   "log.controlApplied": {
     "reviewed": true,
     "source": "{{name}} is {{status}}.",
@@ -8026,6 +8032,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "40b0929fede0b5c6db86af6fe0e5d200eb249e00d717f1ba3a50e32d166e2dd4",
     "text": "{{name}}: {{action}} — эффекты не сняты."
+  },
+  "log.repeatCard": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}}",
+    "sourceHash": "b01da7823dfce038a91de5c0aa8e6f66a5cd41392e507558f45b19f9945007a0",
+    "text": "{{actor}} повторяет {{card}}"
+  },
+  "log.repeatCardWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}} with {{trait}}",
+    "sourceHash": "d45973441db7e20540d4672bb23579cb798ef06e09bcf284b1eb1a266cd74f8e",
+    "text": "{{actor}} повторяет {{card}} с помощью «{{trait}}»"
   },
   "log.repeatFood": {
     "reviewed": true,

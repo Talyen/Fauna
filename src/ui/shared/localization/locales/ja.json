@@ -7835,6 +7835,12 @@
     "sourceHash": "26392d32caaa568973ff3e72754844b0fd648db517c038f16a5e58362599efb5",
     "text": "この旅の祝福を購入しました。"
   },
+  "log.cleansePoison": {
+    "reviewed": true,
+    "source": "{{name}} Cleanses {{amount}} Poison.",
+    "sourceHash": "34ef7c36513169fe470095520463e4e6f5e7df5b2be5d90c2ab64ebc879c283e",
+    "text": "{{name}}は毒を{{amount}}浄化。"
+  },
   "log.controlApplied": {
     "reviewed": true,
     "source": "{{name}} is {{status}}.",
@@ -8026,6 +8032,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "e84c3f4bfc1324af913a24c419c5844bc6e97e64f0005168f2f4b6ce36d896c0",
     "text": "{{name}}：{{action}} — 解除された効果はありません。"
+  },
+  "log.repeatCard": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}}",
+    "sourceHash": "4c586b878c168b06c8e43553d27bb31c2ff3b187a726d9cbc24af530dd69c4af",
+    "text": "{{actor}}が{{card}}を繰り返す"
+  },
+  "log.repeatCardWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}} with {{trait}}",
+    "sourceHash": "13441d0f198b1f5c0cf4823c01b5fb02f2834406c9408c1dcc752ea56100a4fb",
+    "text": "{{actor}}が{{trait}}で{{card}}を繰り返す"
   },
   "log.repeatFood": {
     "reviewed": true,

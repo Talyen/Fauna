@@ -7835,6 +7835,12 @@
     "sourceHash": "5d3820b11c4fee28eef1f65ecdcb8bef0f23ec11ae611e3e279f30187de578fd",
     "text": "Bendición comprada para este viaje."
   },
+  "log.cleansePoison": {
+    "reviewed": true,
+    "source": "{{name}} Cleanses {{amount}} Poison.",
+    "sourceHash": "e19c588560ca9ab4e808a4e297e704cffa2e0dc34b53586471dc159ccab11f28",
+    "text": "{{name}} purifica {{amount}} de Veneno."
+  },
   "log.controlApplied": {
     "reviewed": true,
     "source": "{{name}} is {{status}}.",
@@ -8026,6 +8032,18 @@
     "source": "{{name}}: {{action}} removes no effects.",
     "sourceHash": "ed4015e8d78266625ba5e00abe15b647b70183b3f1e79a9e12d49ed458cf340f",
     "text": "{{name}}: {{action}} — ningún efecto eliminado."
+  },
+  "log.repeatCard": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}}",
+    "sourceHash": "781bc1c17de1f8f672b7134466b95ec2739e234f328fb7103699f743786299be",
+    "text": "{{actor}} repite {{card}}"
+  },
+  "log.repeatCardWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} repeats {{card}} with {{trait}}",
+    "sourceHash": "33aee6d9ecd25e10df5b0c1b9227cec5706cf2a583f49664596944a2c58f3707",
+    "text": "{{actor}} repite {{card}} con {{trait}}"
   },
   "log.repeatFood": {
     "reviewed": true,

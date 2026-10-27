@@ -403,6 +403,39 @@ it("localizes the final enemy hit after the battle state is retired", async () =
   }
 });
 
+it("localizes repeated abilities and the amount of Poison cleansed", () => {
+  const game = teamRun(42, ["wickwaltz"]);
+  const actor = game.team[0]!;
+  const card = definition(game.cards[0]!.definitionId);
+  const actorName = species(actor.species).name;
+  const reader = createMessageReader("fr", french);
+  const repeated: GameEvent = {
+    kind: "action",
+    actionType: "support",
+    actorId: actor.id,
+    text: `${actorName} repeats ${card.name} with Kindling Flourish`,
+  };
+  expect(eventPresentation(game, repeated, reader)).toBe(
+    `${localizedCombatantName(actor, reader)} répète ${reader.content(`content.card.${card.id}.name`, card.name)} avec ${reader.content("content.species.wickwaltz.trait", "Kindling Flourish")}`,
+  );
+  const cleanse: GameEvent = {
+    kind: "status",
+    targetId: actor.id,
+    status: "cleanse",
+    affectedStatus: "poison",
+    outcome: "remove",
+    amount: -2,
+    text: `${actorName} Cleanses 2 Poison.`,
+  };
+  expect(eventPresentation(game, cleanse, reader)).toBe(
+    `${localizedCombatantName(actor, reader)} purifie 2 Poison.`,
+  );
+  expect(eventPresentation(game, { ...cleanse, text: "Unrelated Cleanse" }, reader)).toBe(
+    "Unrelated Cleanse",
+  );
+  expect(eventPresentation(game, repeated, createMessageReader("en", {}))).toBe(repeated.text);
+});
+
 it("localizes real Pearl and Echo creation and a repeated Food card", () => {
   const game = structuredClone(requireBattle(teamRun(42, ["memento"])));
   const actor = game.team[0]!;

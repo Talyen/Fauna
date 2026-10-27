@@ -284,6 +284,9 @@
   "log.boonPurchased": {
     "text": "Boon purchased for this journey."
   },
+  "log.cleansePoison": {
+    "text": "{{name}} Cleanses {{amount}} Poison."
+  },
   "log.controlApplied": {
     "text": "{{name}} is {{status}}."
   },
@@ -379,6 +382,12 @@
   },
   "log.removeNoEffects": {
     "text": "{{name}}: {{action}} removes no effects."
+  },
+  "log.repeatCard": {
+    "text": "{{actor}} repeats {{card}}"
+  },
+  "log.repeatCardWithTrait": {
+    "text": "{{actor}} repeats {{card}} with {{trait}}"
   },
   "log.repeatFood": {
     "text": "{{card}} repeats"
