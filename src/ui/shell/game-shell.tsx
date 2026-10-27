@@ -75,10 +75,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const [navigation, setNavigation] = useState(false);
   const playSound = useGameAudio(session, audio, route === "home");
   useActivationAudio(playSound);
-  const controllerPrompts = localizedControllerPrompts(
-    controller === "auto" ? detectedController : controller,
-    i18n,
-  );
+  const controllerKind = controller === "auto" ? detectedController : controller;
+  const controllerPrompts = localizedControllerPrompts(controllerKind, i18n);
   const active =
     !["victory", "defeat"].includes(game.phase) &&
     (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));
@@ -421,7 +419,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           bursts={bursts}
                           onDenied={deny}
                           controller={mode === "controller"}
-                          endTurnPrompt={controllerPrompts.endTurn}
+                          endTurnPrompt={controllerKind === "playstation" ? "△" : controllerPrompts.endTurn}
+                          endTurnPromptLabel={controllerPrompts.endTurn}
                           navigateFocus={navigation}
                         />
                       ) : game.phase === "recruit" || game.phase === "boon" ? (

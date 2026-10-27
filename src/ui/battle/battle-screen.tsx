@@ -85,6 +85,7 @@ export function BattleScreen({
   bursts,
   controller,
   endTurnPrompt = "Y",
+  endTurnPromptLabel = endTurnPrompt,
   navigateFocus,
   onDenied,
   clearSelection = false,
@@ -98,6 +99,7 @@ export function BattleScreen({
   bursts: readonly Burst[];
   controller: boolean;
   endTurnPrompt?: string;
+  endTurnPromptLabel?: string;
   navigateFocus: boolean;
   onDenied: (element: HTMLElement) => void;
   onManualStart?: () => void;
@@ -392,10 +394,23 @@ export function BattleScreen({
                   {i18n.message("battle.nextCardRepeat", "Next card ×2")}
                 </span>
               ) : null}
-              <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
-                {controller
-                  ? i18n.message("battle.endTurnPrompt", "End turn · {{prompt}}", { prompt: endTurnPrompt })
-                  : i18n.message("battle.endTurn", "End turn")}
+              <Button
+                className="end-turn"
+                aria-label={
+                  controller
+                    ? i18n.message("battle.endTurnPrompt", "End turn · {{prompt}}", {
+                        prompt: endTurnPromptLabel,
+                      })
+                    : undefined
+                }
+                onClick={() => play({ type: "endTurn" })}
+              >
+                <span>{i18n.message("battle.endTurn", "End turn")}</span>
+                {controller ? (
+                  <span className="end-turn-prompt" aria-hidden="true">
+                    {endTurnPrompt}
+                  </span>
+                ) : null}
               </Button>
             </div>
             <div className="battle-pile">

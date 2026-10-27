@@ -593,7 +593,7 @@ it("localizes campfire health and committed recovery without changing the rest o
   const result = dispatch(before, { type: "rest" });
   expect(result.accepted).toBe(true);
   expect(result.state.rng).toBe(before.rng);
-  const { container, rerender } = render(
+  const { container, rerender, unmount } = render(
     <MessageProvider locale="fr" catalog={french}>
       <TooltipProvider>
         <Campfire game={before} send={() => true} />
@@ -609,6 +609,7 @@ it("localizes campfire health and committed recovery without changing the rest o
   );
   const after = result.state.team[0]!.health;
   expect(container.textContent).toContain(`5 → ${after} Santé · +${after - 5}`);
+  unmount();
   vi.unstubAllGlobals();
 });
 

@@ -130,7 +130,7 @@ it("rests once, shows committed recovery and enters the next battle without gran
     await user.click(screen.getByRole("button", { name: "Visit Campfire" }));
     expect(screen.getByRole("heading", { name: "Campfire" })).toBeTruthy();
     expect(
-      screen.getByText((_, node) => node?.tagName === "P" && node.textContent === "0/32 Health · Rest +10"),
+      screen.getByText((_, node) => node?.tagName === "P" && node.textContent === "0/32 Health · +10"),
     ).toBeTruthy();
     await user.click(screen.getByRole("button", { name: "Rest" }));
     await session.flush();
