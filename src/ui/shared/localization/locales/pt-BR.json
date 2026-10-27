@@ -323,6 +323,12 @@
     "sourceHash": "ea4a51c542c1ddaf66570255413ad0deb6ab8cd32939d4c8ac22ccec074b826c",
     "text": "Ponte sanfonada"
   },
+  "content.boon.accordioned-bridge.rule": {
+    "reviewed": true,
+    "source": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "0ea6ccc2219c4e0aec24b1266a2040cbdeef6453df259d903b2d89ef62c12a9c",
+    "text": "Cartas de troca podem ser jogadas mesmo com <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1>"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -358,6 +364,12 @@
     "source": "Basalt Glass Bookmark",
     "sourceHash": "01e69aad68adf9821bac64d9d0c7d545dade8395470dbd8254de813806b6e5f1",
     "text": "Marcador de vidro basáltico"
+  },
+  "content.boon.basalt-glass-bookmark.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
+    "sourceHash": "45053a514fd4b5179bb344cfb8288a998ae2795c126a07f882ab6d690a6b9350",
+    "text": "O <keyword0>Expurgo</keyword0> não pode remover o último efeito benéfico de um aliado"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -424,6 +436,12 @@
     "source": "Calendula Soap",
     "sourceHash": "3be391658fda1bf4b1412bca0e8a4c9d5a3cf16a60f6cdd3db3726271a1a3876",
     "text": "Sabonete de calêndula"
+  },
+  "content.boon.calendula-soap.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> an ally’s last harmful effect grants them <keyword1>Nullify</keyword1>",
+    "sourceHash": "3fb5c1e3079909ee2eb7b98c6e5d152bcdff0854aad7d8cc8ff19437782c864d",
+    "text": "<keyword0>Purificar</keyword0> o último efeito prejudicial de um aliado concede <keyword1>Anulação</keyword1> a ele"
   },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
@@ -508,6 +526,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "34f9998bba8280e9cac7f832991019d299c32edeff99ce81b4ee278ec50cae53",
     "text": "Redoma da coroação"
+  },
+  "content.boon.coronation-cloche.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "6ec817efcb6fe711d5c7e082f193021532c4ab2b819720d1275c024e56108846",
+    "text": "<keyword0>Anulação</keyword0> protege os efeitos aliados contra <keyword1>Expurgo</keyword1>"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1061,6 +1085,12 @@
     "sourceHash": "afe449247b9829ac6142601d1e19bba5ad99390abff0b48d4122e4485e2f982f",
     "text": "Peneira de pérolas"
   },
+  "content.boon.pearl-sieve.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> removes an extra effect from enemies with <keyword1>Block</keyword1>",
+    "sourceHash": "cad4cad952b511510509630dcdd044bff3beaf7b74eac1482746e27a47adf979",
+    "text": "O <keyword0>Expurgo</keyword0> remove um efeito adicional de inimigos com <keyword1>Bloqueio</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
@@ -1103,11 +1133,23 @@
     "sourceHash": "64b0ab5b57dca31fb19f4065945394c41df4ef0645aeb28466d712f5c5025cc9",
     "text": "Cinzel prismático"
   },
+  "content.boon.prism-chisel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Armor</keyword1> deals equal <keyword2>Light</keyword2> damage to that enemy",
+    "sourceHash": "82ee1301254e396b292949aad3ecaa93ce5850989213e431e0cda9ea796e22fc",
+    "text": "<keyword0>Expurgar</keyword0> a <keyword1>Armadura</keyword1> inimiga causa a mesma quantidade de dano de <keyword2>Luz</keyword2> a esse inimigo"
+  },
   "content.boon.pruning-crescent.name": {
     "reviewed": true,
     "source": "Pruning Crescent",
     "sourceHash": "f8b073e3e2be43395b0897fb27111159ffdcbaf65f7b898473775cdf317f8c55",
     "text": "Foice de poda"
+  },
+  "content.boon.pruning-crescent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
+    "sourceHash": "01d10a0244e389871d2bbe1b2bc28cd3a996b38bf5e15f84861aead4c25d7286",
+    "text": "<keyword0>Expurgar</keyword0> os <keyword1>Espinhos</keyword1> inimigos rouba-os para você"
   },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
@@ -1426,6 +1468,12 @@
     "source": "Winnowing Sieve",
     "sourceHash": "7e62c076c579479a23a7fbc3df939f3275eb342fd9ecdd8c42c651896cef2803",
     "text": "Peneira de joeirar"
+  },
+  "content.boon.winnowing-sieve.rule": {
+    "reviewed": true,
+    "source": "Unused <keyword0>Purge</keyword0> spreads to other enemies",
+    "sourceHash": "0ce7e18ba84cb5983114aa723012ce1c7dcc140287c919d6d334a941d4af543c",
+    "text": "O <keyword0>Expurgo</keyword0> não usado se espalha para outros inimigos"
   },
   "content.boon.wishing-building-block.name": {
     "reviewed": true,

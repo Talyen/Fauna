@@ -323,6 +323,12 @@
     "sourceHash": "9718021cd420b16c699b74e104bad8ecd247cd2504fbf4a1f78bf3b556d01ce4",
     "text": "折叠桥"
   },
+  "content.boon.accordioned-bridge.rule": {
+    "reviewed": true,
+    "source": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "d3669cb8a4037b1aec0d5408ee2ffa0db8f66bd45fb85bf505f780ffda8b80c4",
+    "text": "处于<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>状态时仍可打出换人牌"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -358,6 +364,12 @@
     "source": "Basalt Glass Bookmark",
     "sourceHash": "78ce397cc13df83037082a0b63654ee1ebc6b1f0e66664029cc7d2bb6500e895",
     "text": "玄武岩玻璃书签"
+  },
+  "content.boon.basalt-glass-bookmark.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
+    "sourceHash": "f05973df46b38d5a1af91dde5b45891d9df139790400864d818b98410bb2c3ce",
+    "text": "<keyword0>驱散</keyword0>无法移除盟友最后一个有益效果"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -424,6 +436,12 @@
     "source": "Calendula Soap",
     "sourceHash": "c10b6c373d551c96fd5348ab2be587a629eb4066afc4742f2222af533053e50f",
     "text": "金盏花皂"
+  },
+  "content.boon.calendula-soap.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> an ally’s last harmful effect grants them <keyword1>Nullify</keyword1>",
+    "sourceHash": "9926f78a0760ae75d021b3c531537d19ecd7067e1c54565e3e34c0d3088dcd25",
+    "text": "<keyword0>净化</keyword0>盟友最后一个有害效果时，为其提供<keyword1>无效化</keyword1>"
   },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
@@ -508,6 +526,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "d25f80bc61148e49f5078f9e458b0b0bbe42cf6309993bca24550dadca3831b1",
     "text": "加冕钟罩"
+  },
+  "content.boon.coronation-cloche.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "901da5036481b45eadfc3b5c263e23f3a73ccee572e8810ad663b1790c54e064",
+    "text": "<keyword0>无效化</keyword0>保护盟友效果免受<keyword1>驱散</keyword1>"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1061,6 +1085,12 @@
     "sourceHash": "7da45e13a1a440296bb2a8b4bfefb36c9c15bcc827111ffb8786f38e04049891",
     "text": "珍珠筛"
   },
+  "content.boon.pearl-sieve.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> removes an extra effect from enemies with <keyword1>Block</keyword1>",
+    "sourceHash": "c3d58c58574cb10dc6530165c08622fc7d7a3278f0ce1ac2fafd0c70a074003e",
+    "text": "<keyword0>驱散</keyword0>会额外移除拥有<keyword1>格挡</keyword1>的敌人身上一个效果"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
@@ -1103,11 +1133,23 @@
     "sourceHash": "ce8e3bead360ce0fd3c027e9191f235f98c5bc45b0802db56ee58383d98b0bd8",
     "text": "棱镜凿"
   },
+  "content.boon.prism-chisel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Armor</keyword1> deals equal <keyword2>Light</keyword2> damage to that enemy",
+    "sourceHash": "ef12f177b927a45e4538843957f3915276d11f33733a881c0a01c265dd86f244",
+    "text": "<keyword0>驱散</keyword0>敌人的<keyword1>护甲</keyword1>时，对该敌人造成等量<keyword2>光</keyword2>伤害"
+  },
   "content.boon.pruning-crescent.name": {
     "reviewed": true,
     "source": "Pruning Crescent",
     "sourceHash": "bbfd2ab19ea13009c6707f7b521a2395597bdeff7529c2685f779210a942ab90",
     "text": "修枝弯刃"
+  },
+  "content.boon.pruning-crescent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
+    "sourceHash": "9c48992000b0eeb49b0bba266206341cc9672eea0bea8705da90699882f907fe",
+    "text": "<keyword0>驱散</keyword0>敌人的<keyword1>荆棘</keyword1>时将其窃取给自己"
   },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
@@ -1426,6 +1468,12 @@
     "source": "Winnowing Sieve",
     "sourceHash": "ff3ed8d9600d313c5553597c3043042f5c38a66c5b20f2d6279beb4895e73665",
     "text": "扬谷筛"
+  },
+  "content.boon.winnowing-sieve.rule": {
+    "reviewed": true,
+    "source": "Unused <keyword0>Purge</keyword0> spreads to other enemies",
+    "sourceHash": "c8bb42e798c94eb96070834ede1c182b49b9097d5a3c1fae125f35e277b091f3",
+    "text": "未使用的<keyword0>驱散</keyword0>会扩散到其他敌人"
   },
   "content.boon.wishing-building-block.name": {
     "reviewed": true,

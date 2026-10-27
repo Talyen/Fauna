@@ -323,6 +323,12 @@
     "sourceHash": "d2c101edc8080a385c26bdf51a30adc133258512746be80df4b65d72529e8cf9",
     "text": "Puente plegable"
   },
+  "content.boon.accordioned-bridge.rule": {
+    "reviewed": true,
+    "source": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "95d87740ab133b37654d3c58427a1b4d9c2da7a376acc512505cbbb3bbeac25d",
+    "text": "Las cartas de intercambio se pueden jugar pese al <keyword0>Aturdimiento</keyword0> y la <keyword1>Congelación</keyword1>"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -358,6 +364,12 @@
     "source": "Basalt Glass Bookmark",
     "sourceHash": "4b1a6e8d32c14568be168053b1231aaa37c75ee0631abff2fe71c341df11a8de",
     "text": "Marcapáginas de vidrio basáltico"
+  },
+  "content.boon.basalt-glass-bookmark.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
+    "sourceHash": "c09db91e00db8e5e61f5b7e4e3a4da49cb27b3f6f965a9e9ef5093e86c60d4d1",
+    "text": "La <keyword0>Purga</keyword0> no puede eliminar el último efecto beneficioso de un aliado"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -424,6 +436,12 @@
     "source": "Calendula Soap",
     "sourceHash": "06e63d49cdd8733bae233d6df7af8b6eaffd4710ab4edb347058398bd01629ec",
     "text": "Jabón de caléndula"
+  },
+  "content.boon.calendula-soap.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> an ally’s last harmful effect grants them <keyword1>Nullify</keyword1>",
+    "sourceHash": "1074931aaaed927392c2d7a3cc47eb3a720cf03244c1b4ff395ff5331d19ae51",
+    "text": "<keyword0>Purificar</keyword0> el último efecto perjudicial de un aliado le otorga <keyword1>Nulificación</keyword1>"
   },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
@@ -508,6 +526,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "d97c4cc5d63f64ff7fd3bfe1d7796cf5a4c66e919d26b60671a23f35eee572eb",
     "text": "Campana de coronación"
+  },
+  "content.boon.coronation-cloche.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "904d4678341181c0ab70fbf6e459e7203486b7c7b75776ed6a6ad0d23ee6d756",
+    "text": "La <keyword0>Nulificación</keyword0> protege los efectos aliados de la <keyword1>Purga</keyword1>"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1061,6 +1085,12 @@
     "sourceHash": "914dfbf9ae4dbb9797a57b6276b7a1a4c30a48529df1d706cc056703980af441",
     "text": "Tamiz de perlas"
   },
+  "content.boon.pearl-sieve.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> removes an extra effect from enemies with <keyword1>Block</keyword1>",
+    "sourceHash": "c7bf688d5b0d224a62833696bd238ba2c7ad0ba9d587c3c3514f50346178df6f",
+    "text": "La <keyword0>Purga</keyword0> elimina un efecto adicional de los enemigos con <keyword1>Bloqueo</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
@@ -1103,11 +1133,23 @@
     "sourceHash": "a833bfae3bb7dea56fbd8b7727875b1c858de7777e2cac98775451c5150801d5",
     "text": "Cincel prisma"
   },
+  "content.boon.prism-chisel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Armor</keyword1> deals equal <keyword2>Light</keyword2> damage to that enemy",
+    "sourceHash": "1bcebe5b70a65742ddc427194d62214e579a9865f875859b1a78e75e9afe1154",
+    "text": "<keyword0>Purgar</keyword0> la <keyword1>Armadura</keyword1> enemiga inflige la misma cantidad de daño de <keyword2>Luz</keyword2> a ese enemigo"
+  },
   "content.boon.pruning-crescent.name": {
     "reviewed": true,
     "source": "Pruning Crescent",
     "sourceHash": "73e44bb4b165ce34ef3b010e070ede34c55da699258133c823c1c0fd976ab72c",
     "text": "Hoz de poda"
+  },
+  "content.boon.pruning-crescent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
+    "sourceHash": "e26e7e6f1ab5f56fd6d1e7f31226322331b5ca6c791c13f689f8e71401e06763",
+    "text": "<keyword0>Purgar</keyword0> las <keyword1>Espinas</keyword1> enemigas las roba para ti"
   },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
@@ -1426,6 +1468,12 @@
     "source": "Winnowing Sieve",
     "sourceHash": "866391e8241c957296a788c2299cd3620fd1f109c050f7c4a02df59eeeecd170",
     "text": "Criba de aventar"
+  },
+  "content.boon.winnowing-sieve.rule": {
+    "reviewed": true,
+    "source": "Unused <keyword0>Purge</keyword0> spreads to other enemies",
+    "sourceHash": "9df51a07b003c22a9df8c4fc4e11f5715adf75782f4c003033af660fecbd422f",
+    "text": "La <keyword0>Purga</keyword0> no utilizada se extiende a otros enemigos"
   },
   "content.boon.wishing-building-block.name": {
     "reviewed": true,

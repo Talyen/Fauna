@@ -323,6 +323,12 @@
     "sourceHash": "db58de20cfd7847c5fb19a7958279135ad7c94e3ccc903cd8a0b89f77851b438",
     "text": "Складной мост"
   },
+  "content.boon.accordioned-bridge.rule": {
+    "reviewed": true,
+    "source": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "673505eacd224bd3604c34495f7cc2579b2deee3b7cd68e271dcd5ec379860eb",
+    "text": "Карты смены можно разыгрывать несмотря на <keyword0>оглушение</keyword0> и <keyword1>заморозку</keyword1>"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -358,6 +364,12 @@
     "source": "Basalt Glass Bookmark",
     "sourceHash": "cfb5239b0367b3f597d4cd16f4decd9538f6288f95ea7e4bc737df597840ecef",
     "text": "Закладка из базальтового стекла"
+  },
+  "content.boon.basalt-glass-bookmark.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
+    "sourceHash": "c663b55ea3d7901959b6e52237c66eecdc31000a4fd3bf5f7c2470db8912390a",
+    "text": "<keyword0>Рассеивание</keyword0> не может снять последний полезный эффект союзника"
   },
   "content.boon.blooming-still.name": {
     "reviewed": true,
@@ -424,6 +436,12 @@
     "source": "Calendula Soap",
     "sourceHash": "1e3d9d963b6511851520b9a9c15e73b344ba56aed694307df735fb6621404637",
     "text": "Мыло с календулой"
+  },
+  "content.boon.calendula-soap.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> an ally’s last harmful effect grants them <keyword1>Nullify</keyword1>",
+    "sourceHash": "065591cf592bd12b3dcc48d5c60b583ca95049732025fc868791e74a1c3cd1bc",
+    "text": "<keyword0>Очищение</keyword0> последнего вредного эффекта союзника даёт ему <keyword1>аннулирование</keyword1>"
   },
   "content.boon.camp-hammock.name": {
     "reviewed": true,
@@ -508,6 +526,12 @@
     "source": "Coronation Cloche",
     "sourceHash": "27a1ad91c0e28ccf204455d6c456e8927609257f9490bfee888f5d9ab13f814c",
     "text": "Купол коронации"
+  },
+  "content.boon.coronation-cloche.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nullify</keyword0> protects allied effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "6febb7ca875be7c41690a4d6989efda7bfddc599961a1e4e51de888f71c4d41a",
+    "text": "<keyword0>Аннулирование</keyword0> защищает эффекты союзников от <keyword1>рассеивания</keyword1>"
   },
   "content.boon.crater-punch.name": {
     "reviewed": true,
@@ -1061,6 +1085,12 @@
     "sourceHash": "7f22e4a31b89d9c44a755dbdc0c2e6a9ac2439913170812aaf0843c6223270c6",
     "text": "Жемчужное сито"
   },
+  "content.boon.pearl-sieve.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purge</keyword0> removes an extra effect from enemies with <keyword1>Block</keyword1>",
+    "sourceHash": "1d30be52b9e2df29256f217b24df7b1bc7422abee56948c131f97d25725e1930",
+    "text": "<keyword0>Рассеивание</keyword0> снимает дополнительный эффект с врагов с <keyword1>блоком</keyword1>"
+  },
   "content.boon.plague-doctors-mask.name": {
     "reviewed": true,
     "source": "Plague Doctor's Mask",
@@ -1103,11 +1133,23 @@
     "sourceHash": "678cace273a990717e1bd39e58d4d4388bc39bc3834f341ea06d76409f981eb4",
     "text": "Призматическое зубило"
   },
+  "content.boon.prism-chisel.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Armor</keyword1> deals equal <keyword2>Light</keyword2> damage to that enemy",
+    "sourceHash": "8e2347eb57ef141ac6fecfa9cf9e532dbfb83949bf333c37229c3a4c9fba7d95",
+    "text": "<keyword0>Рассеивание</keyword0> вражеской <keyword1>брони</keyword1> наносит этому врагу столько же урона <keyword2>светом</keyword2>"
+  },
   "content.boon.pruning-crescent.name": {
     "reviewed": true,
     "source": "Pruning Crescent",
     "sourceHash": "f133003894fc3c82b2c75fda31f8844cbd3c7699511f6c33c5152d1e000789b5",
     "text": "Серп для обрезки"
+  },
+  "content.boon.pruning-crescent.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
+    "sourceHash": "54919bbd1d68934ea488d60d7e6224b4be9702133f10ce5e7a4c00d7c750f8c2",
+    "text": "<keyword0>Рассеивание</keyword0> вражеских <keyword1>шипов</keyword1> крадёт их для вас"
   },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
@@ -1426,6 +1468,12 @@
     "source": "Winnowing Sieve",
     "sourceHash": "8dd85c37fc1d5de5dee072817a543c9bed5f1270a9982f22312e9a38318daea7",
     "text": "Веялочное сито"
+  },
+  "content.boon.winnowing-sieve.rule": {
+    "reviewed": true,
+    "source": "Unused <keyword0>Purge</keyword0> spreads to other enemies",
+    "sourceHash": "5e72c88cb62dc46ed11087a08d40ed9d65ceb280c1c51051642ad8dd3e156f8b",
+    "text": "Неиспользованное <keyword0>рассеивание</keyword0> распространяется на других врагов"
   },
   "content.boon.wishing-building-block.name": {
     "reviewed": true,
