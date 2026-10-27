@@ -341,6 +341,18 @@
     "sourceHash": "d6113aedd603b2997a1b8ab4c571a24940a65802a5a4882745542d5abf0f619a",
     "text": "Wechselkarten können trotz <keyword0>Betäubung</keyword0> und <keyword1>Frost</keyword1> gespielt werden"
   },
+  "content.boon.acorn-skittle.name": {
+    "reviewed": true,
+    "source": "Acorn Skittle",
+    "sourceHash": "33bad56c9ca065459ecf2d56b9d08a74b52cdc003b0e72cca9cbe5f83950f506",
+    "text": "Eichelkegel"
+  },
+  "content.boon.acorn-skittle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits on <keyword1>Stunned</keyword1> enemies also deal {{value0}} <keyword2>Stun</keyword2> damage to another enemy",
+    "sourceHash": "5990735efaf3f77f97a58927a0e5797a6727003fd9b5551acdb1191cf908b782",
+    "text": "<keyword0>Betäubungs</keyword0>-Treffer auf <keyword1>betäubte</keyword1> Gegner verursachen zusätzlich {{value0}} <keyword2>Betäubungs</keyword2>-Schaden bei einem anderen Gegner"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -485,6 +497,18 @@
     "sourceHash": "a372bd51ed21322a4305608465e0578a9083a4b59371635c426510237dc7e01b",
     "text": "<keyword0>Wasser</keyword0>-Schaden gegen gegnerischen <keyword1>Block</keyword1> springt auf einen zweiten Gegner über"
   },
+  "content.boon.cadence-panpipes.name": {
+    "reviewed": true,
+    "source": "Cadence Panpipes",
+    "sourceHash": "5d8c386deadabf3be2375ef4164f8afdfc857a95da5047a7aacd70b3e1f3fb29",
+    "text": "Rhythmus-Panflöte"
+  },
+  "content.boon.cadence-panpipes.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks also hit another enemy",
+    "sourceHash": "eaae28da40d45c43b8ff2a7a1cb82e5b11bbc3de24740b8cc8c7c98ba38dc528",
+    "text": "Wiederholte Angriffe treffen auch einen anderen Gegner"
+  },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
     "source": "Calendula Soap",
@@ -520,6 +544,30 @@
     "source": "<keyword0>Block</keyword0> does not decay on backup allies",
     "sourceHash": "a2214648def26f238f4c692db799e04a0c826bc9b20465c9f839565ff6dcb57a",
     "text": "<keyword0>Block</keyword0> verfällt bei Verbündeten in Reserve nicht"
+  },
+  "content.boon.chamomile-compress.name": {
+    "reviewed": true,
+    "source": "Chamomile Compress",
+    "sourceHash": "68a82ff4bb580d55683ba6b37779d409f5d17d3224a33ad3f6ee23d4f7c5c386",
+    "text": "Kamillenkompresse"
+  },
+  "content.boon.chamomile-compress.rule": {
+    "reviewed": true,
+    "source": "Restoring an ally’s <keyword0>Health</keyword0> grants them <keyword1>Block</keyword1> equal to their <keyword2>Bleed</keyword2>",
+    "sourceHash": "854af9bd481722b607d04846cc0b52c2df12cb60cdcea7845b4e6e6287f4451c",
+    "text": "Die Wiederherstellung der <keyword0>Gesundheit</keyword0> eines Verbündeten gewährt ihm <keyword1>Block</keyword1> in Höhe seiner <keyword2>Blutung</keyword2>"
+  },
+  "content.boon.chestnut-roaster.name": {
+    "reviewed": true,
+    "source": "Chestnut Roaster",
+    "sourceHash": "4433ed4914122a9c256aaff4b795a54be9d649aca6b3e510bbb48bdde29a542e",
+    "text": "Kastanienröster"
+  },
+  "content.boon.chestnut-roaster.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply twice as much <keyword1>Burn</keyword1> to enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "5f503f7d62d447c1c302f11c384de2b50f493fd828cec8ccea7196122fc91a03",
+    "text": "<keyword0>Brand</keyword0>-Treffer verursachen bei Gegnern mit <keyword2>Block</keyword2> doppelt so viel <keyword1>Brand</keyword1>"
   },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
@@ -977,6 +1025,18 @@
     "sourceHash": "ee109ce4718202de65aa486a65f6d41068c0ac9a17c5e49ce9bfc428aea69174",
     "text": "<keyword0>Brand</keyword0> kann die <keyword1>Gesundheit</keyword1> von Verbündeten nicht unter {{value0}} senken"
   },
+  "content.boon.hearthcap-kettle.name": {
+    "reviewed": true,
+    "source": "Hearthcap Kettle",
+    "sourceHash": "1c08bbc0295700a6279f251f2533fa06be1c87ecfc0df62e3a77fff7a6a5a1b7",
+    "text": "Herdpilz-Kessel"
+  },
+  "content.boon.hearthcap-kettle.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> an effect from the most injured ally",
+    "sourceHash": "db9a8d40dc04ebdc433ff5e7d1be412660926003c7185453771746f75b61da62",
+    "text": "Das Spielen von <keyword0>Nahrung</keyword0> <keyword1>reinigt</keyword1> einen Effekt vom am stärksten verletzten Verbündeten"
+  },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
     "source": "Herbarium Press",
@@ -1072,6 +1132,18 @@
     "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
     "sourceHash": "8b2e34d3f4e1ddf2cac02f43992e42ad6383a9baf97b2c47a3f23d1978b4d4ed",
     "text": "<keyword0>Reinige</keyword0> jeden Zug einen zufälligen schädlichen Effekt"
+  },
+  "content.boon.lagoon-chalice.name": {
+    "reviewed": true,
+    "source": "Lagoon Chalice",
+    "sourceHash": "809a2138639fd2c16b40c1033904559f142b67fd8ace5b184a86b7df682d0e89",
+    "text": "Lagunenkelch"
+  },
+  "content.boon.lagoon-chalice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks have <keyword1>Leech</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "0e30984342816290d2885bd24a72043a42d65496cd5a706143f3442cb6aac4a0",
+    "text": "<keyword0>Wasser</keyword0>-Angriffe haben <keyword1>Lebensraub</keyword1>, solange du <keyword2>Block</keyword2> hast"
   },
   "content.boon.last-candle.name": {
     "reviewed": true,
@@ -1481,6 +1553,18 @@
     "sourceHash": "12b53c277da4d6c4c626e2da86ab23a65082aae25763c61b5c8b8ae84dc3ed42",
     "text": "<keyword0>Nahrung</keyword0> gewährt allen Verbündeten <keyword1>Gesundheit</keyword1> und <keyword2>Block</keyword2>"
   },
+  "content.boon.quiet-pinwheel.name": {
+    "reviewed": true,
+    "source": "Quiet Pinwheel",
+    "sourceHash": "2ca7024e6d1bc4dc07d35d2bf68bc85e62660814fd5b0a49ec2c98c56acfdc1a",
+    "text": "Stilles Windrad"
+  },
+  "content.boon.quiet-pinwheel.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> while <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2>",
+    "sourceHash": "9a77fdfc1d92a06607cfe05a6e61ed13fc953693335aca5188abb991d540177e",
+    "text": "Verbündete können auch bei <keyword1>Betäubung</keyword1> oder <keyword2>Frost</keyword2> <keyword0>ausweichen</keyword0>"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1612,6 +1696,18 @@
     "source": "Swapping an ally in from backup draws one of its cards",
     "sourceHash": "84d6eb0ba617f1fe5c02430b3fd27c38704362ee0a7310ffdb353ac1c3b46944",
     "text": "Wenn ein Verbündeter aus der Reserve eingewechselt wird, ziehe eine seiner Karten"
+  },
+  "content.boon.shelter-lantern.name": {
+    "reviewed": true,
+    "source": "Shelter Lantern",
+    "sourceHash": "cceca8d3cfb9b54b856f3f6f045c174286e17d009e800b17d848f40468c6c988",
+    "text": "Schutzlaterne"
+  },
+  "content.boon.shelter-lantern.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> protects allies’ other effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "c43ed68cf0b1265608e5703d86f5700fa71e84a68faf7c339539b4060ff00db0",
+    "text": "<keyword0>Block</keyword0> schützt andere Effekte von Verbündeten vor <keyword1>Bannen</keyword1>"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
@@ -1877,6 +1973,18 @@
     "sourceHash": "13e11706ffb6a6deaa70eaa4d906897fc39666c0e36d2c60cb1fbe9703351fa7",
     "text": "Verbündete mit <keyword0>Rüstung</keyword0> behalten beim Verfall {{value0}}% ihres <keyword1>Blocks</keyword1>"
   },
+  "content.boon.welcome-doormat.name": {
+    "reviewed": true,
+    "source": "Welcome Doormat",
+    "sourceHash": "770216975feb8e6a56164f082d961f0024123810c3cb64d5424299bd0acfe615",
+    "text": "Willkommensmatte"
+  },
+  "content.boon.welcome-doormat.rule": {
+    "reviewed": true,
+    "source": "Swapping allies share <keyword0>Nullify</keyword0>",
+    "sourceHash": "a309a5a68171773e45834ddf1a46d9ecc27091901be19e80488952f10eef5e37",
+    "text": "Wechselnde Verbündete teilen <keyword0>Aufheben</keyword0>"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1924,6 +2032,18 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "49e2022d216e0f1884054b2c9ea0b219e92468ca6fdf2a28018be6ba80f89aca",
     "text": "Überschüssiger Schaden bei einem besiegten Gegner überträgt sich auf andere Gegner"
+  },
+  "content.boon.wonder-kaleidoscope.name": {
+    "reviewed": true,
+    "source": "Wonder Kaleidoscope",
+    "sourceHash": "2b93573b2d876145cb74f5f1072b00bd2bc3c8b6978633b5918df01f96e89af7",
+    "text": "Wunderkaleidoskop"
+  },
+  "content.boon.wonder-kaleidoscope.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> <keyword1>reflected</keyword1> by allies also <keyword2>Blinds</keyword2> all other enemies",
+    "sourceHash": "a4d34a8f22407b0271668e95590fac712ad4d11396a63f467357848be45a639a",
+    "text": "Von Verbündeten <keyword1>reflektierte</keyword1> <keyword0>Blindheit</keyword0> <keyword2>blendet</keyword2> auch alle anderen Gegner"
   },
   "content.boon.yarrow-salve-tin.name": {
     "reviewed": true,

@@ -341,6 +341,18 @@
     "sourceHash": "673505eacd224bd3604c34495f7cc2579b2deee3b7cd68e271dcd5ec379860eb",
     "text": "Карты смены можно разыгрывать несмотря на <keyword0>оглушение</keyword0> и <keyword1>заморозку</keyword1>"
   },
+  "content.boon.acorn-skittle.name": {
+    "reviewed": true,
+    "source": "Acorn Skittle",
+    "sourceHash": "00ec5269c6c48eb695a4ad67b33f15520f1ad03f6f53a20fe11f3ddedf8ddca7",
+    "text": "Жёлудевая кегля"
+  },
+  "content.boon.acorn-skittle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits on <keyword1>Stunned</keyword1> enemies also deal {{value0}} <keyword2>Stun</keyword2> damage to another enemy",
+    "sourceHash": "3dca50c21222631d2c8820e9b0bd38794fd3b6ca84852d2f1317653e9e093ef0",
+    "text": "Попадания <keyword0>оглушением</keyword0> по <keyword1>оглушённым</keyword1> врагам также наносят {{value0}} урона <keyword2>оглушением</keyword2> другому врагу"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -485,6 +497,18 @@
     "sourceHash": "ec2f67f2d7d54b3cf49929262b18ee7b3cb7b114db6bd99659987d1bb25d0023",
     "text": "Урон <keyword0>водой</keyword0> по вражескому <keyword1>блоку</keyword1> переходит на второго врага"
   },
+  "content.boon.cadence-panpipes.name": {
+    "reviewed": true,
+    "source": "Cadence Panpipes",
+    "sourceHash": "a283e329db599c9041e021f4a9bb8749e33c4f6422b30ae0fbe20e2a23ead1f0",
+    "text": "Ритмичная флейта Пана"
+  },
+  "content.boon.cadence-panpipes.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks also hit another enemy",
+    "sourceHash": "ab0121958ca8f3c3b5d22e5f976a734dfc84f98f976a58f0e48dc665ba65f8e0",
+    "text": "Повторные атаки также поражают другого врага"
+  },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
     "source": "Calendula Soap",
@@ -520,6 +544,30 @@
     "source": "<keyword0>Block</keyword0> does not decay on backup allies",
     "sourceHash": "25a45294177b208657c85875efd3b1de1f06136d8b154fcd896b080aa906576e",
     "text": "<keyword0>Блок</keyword0> союзников в запасе не уменьшается"
+  },
+  "content.boon.chamomile-compress.name": {
+    "reviewed": true,
+    "source": "Chamomile Compress",
+    "sourceHash": "56e958bb4c277ad9223c3a77f304fe979fbc930f5182dca86ef690e44ce66b1f",
+    "text": "Ромашковый компресс"
+  },
+  "content.boon.chamomile-compress.rule": {
+    "reviewed": true,
+    "source": "Restoring an ally’s <keyword0>Health</keyword0> grants them <keyword1>Block</keyword1> equal to their <keyword2>Bleed</keyword2>",
+    "sourceHash": "a8c400fc9850a18d3fe0dd5f7d8d14c6c0757f836eaf7160e3c4073f980fb071",
+    "text": "Восстановление <keyword0>здоровья</keyword0> союзника даёт ему <keyword1>блок</keyword1>, равный его <keyword2>кровотечению</keyword2>"
+  },
+  "content.boon.chestnut-roaster.name": {
+    "reviewed": true,
+    "source": "Chestnut Roaster",
+    "sourceHash": "3a4bfa06528931fde8acd659fb8f971d19360667e33cae408c589f124672216e",
+    "text": "Жаровня для каштанов"
+  },
+  "content.boon.chestnut-roaster.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply twice as much <keyword1>Burn</keyword1> to enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "1e7bb9a690346fa150c70c53428d8873c5d6d35218d86641242905cb02c74166",
+    "text": "Попадания <keyword0>горением</keyword0> накладывают вдвое больше <keyword1>горения</keyword1> на врагов с <keyword2>блоком</keyword2>"
   },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
@@ -977,6 +1025,18 @@
     "sourceHash": "205205939b39bea39ad446bd0c2378c3f494a498fd6d745a6f906fd321094348",
     "text": "<keyword0>Горение</keyword0> не может снизить <keyword1>здоровье</keyword1> союзников ниже {{value0}}"
   },
+  "content.boon.hearthcap-kettle.name": {
+    "reviewed": true,
+    "source": "Hearthcap Kettle",
+    "sourceHash": "1ea5fa66e92bc689fc8a1fbf1ccb052506ba3efc145052cb28621643420ecb68",
+    "text": "Чайник очажного гриба"
+  },
+  "content.boon.hearthcap-kettle.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> an effect from the most injured ally",
+    "sourceHash": "e3e27582dc4a7057a680d5b699b2afed761504ea62a5f6a94ffef9f21d0aeeaa",
+    "text": "Розыгрыш <keyword0>еды</keyword0> <keyword1>очищает</keyword1> один эффект у наиболее раненого союзника"
+  },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
     "source": "Herbarium Press",
@@ -1072,6 +1132,18 @@
     "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
     "sourceHash": "2f700bcee72383fbd89a965c51a4a9a06a32b6a94609ef60299b450cda414457",
     "text": "Каждый ход <keyword0>очищайте</keyword0> случайный вредный эффект"
+  },
+  "content.boon.lagoon-chalice.name": {
+    "reviewed": true,
+    "source": "Lagoon Chalice",
+    "sourceHash": "1537f855e7febe7864d8a88c006ab1b63da49fac52fc93c986d519a74930cdb9",
+    "text": "Чаша лагуны"
+  },
+  "content.boon.lagoon-chalice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks have <keyword1>Leech</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "d13f966d6f3bfaee4df131efbabe3f2aa9f3ab247c34588d441823e44f4c1e06",
+    "text": "Атаки <keyword0>водой</keyword0> получают <keyword1>вампиризм</keyword1>, пока у вас есть <keyword2>блок</keyword2>"
   },
   "content.boon.last-candle.name": {
     "reviewed": true,
@@ -1481,6 +1553,18 @@
     "sourceHash": "ebc1979b0a5e7e6c8c9988cfe9cbf1a9235cb70a7eecc825d3738f3249b2b072",
     "text": "<keyword0>Еда</keyword0> даёт всем союзникам <keyword1>здоровье</keyword1> и <keyword2>блок</keyword2>"
   },
+  "content.boon.quiet-pinwheel.name": {
+    "reviewed": true,
+    "source": "Quiet Pinwheel",
+    "sourceHash": "211b5a61aeefd98dd2bfdf7db12285fda0a83a5dde7d69eed6df4e95754a89d0",
+    "text": "Тихая вертушка"
+  },
+  "content.boon.quiet-pinwheel.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> while <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2>",
+    "sourceHash": "1b8b20e3bb20f494fa433ded5253230259bad3e5b2353c880481c7da39bbd1f8",
+    "text": "Союзники могут <keyword0>уклоняться</keyword0> под действием <keyword1>оглушения</keyword1> или <keyword2>заморозки</keyword2>"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1612,6 +1696,18 @@
     "source": "Swapping an ally in from backup draws one of its cards",
     "sourceHash": "2ffdf13d602f9d0ab6bfaf5e27005f3ae5f9485af599cf94bfd487add9279700",
     "text": "При замене союзником из резерва возьмите одну из его карт"
+  },
+  "content.boon.shelter-lantern.name": {
+    "reviewed": true,
+    "source": "Shelter Lantern",
+    "sourceHash": "c1455c4ea1cb48b9ac8a86341fb10768b40cc8ec56327afa2382417948fdb1c8",
+    "text": "Защитный фонарь"
+  },
+  "content.boon.shelter-lantern.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> protects allies’ other effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "0e1273e3ca0cd3606e5a3d03ce1c1b5f5d2451c6f58d7dc92b6e95b19ccf58e6",
+    "text": "<keyword0>Блок</keyword0> защищает другие эффекты союзников от <keyword1>рассеивания</keyword1>"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
@@ -1877,6 +1973,18 @@
     "sourceHash": "9d82a1776d255834f1f23725eaccfddfba1c48698446f8ffb3e41438c836abb5",
     "text": "Союзники с <keyword0>бронёй</keyword0> сохраняют {{value0}}% <keyword1>блока</keyword1> при его уменьшении"
   },
+  "content.boon.welcome-doormat.name": {
+    "reviewed": true,
+    "source": "Welcome Doormat",
+    "sourceHash": "632c08d68b4e9deeb88ef895b8441fe2509ee4158132450bfaedbb5cd45a9689",
+    "text": "Приветственный коврик"
+  },
+  "content.boon.welcome-doormat.rule": {
+    "reviewed": true,
+    "source": "Swapping allies share <keyword0>Nullify</keyword0>",
+    "sourceHash": "48310088d70cdb71b0de07f583060d40b0c2f78ec81d4d74a8545adbf2ad04f6",
+    "text": "Меняющиеся местами союзники делятся <keyword0>аннулированием</keyword0>"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1924,6 +2032,18 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "20b73783625c5013128e4a5b9507c4b2bde2346c906f18c55a7600373f9da6f6",
     "text": "Избыточный урон при победе над врагом переходит к другим врагам"
+  },
+  "content.boon.wonder-kaleidoscope.name": {
+    "reviewed": true,
+    "source": "Wonder Kaleidoscope",
+    "sourceHash": "d734c001811e922e29c03ccbd491fe0871223a8dae0c6da0116249045bca35c0",
+    "text": "Чудесный калейдоскоп"
+  },
+  "content.boon.wonder-kaleidoscope.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> <keyword1>reflected</keyword1> by allies also <keyword2>Blinds</keyword2> all other enemies",
+    "sourceHash": "9bfd94b65f071ac85148d051fbba471898a0a58700235d4f4822bab496f7b675",
+    "text": "<keyword0>Ослепление</keyword0>, <keyword1>отражённое</keyword1> союзниками, также <keyword2>ослепляет</keyword2> всех остальных врагов"
   },
   "content.boon.yarrow-salve-tin.name": {
     "reviewed": true,

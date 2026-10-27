@@ -6,6 +6,13 @@
     "text": "Swap cards can be played through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
     "reference": "Swap cards can be played through Stun and Freeze"
   },
+  "content.boon.acorn-skittle.name": {
+    "text": "Acorn Skittle"
+  },
+  "content.boon.acorn-skittle.rule": {
+    "text": "<keyword0>Stun</keyword0> hits on <keyword1>Stunned</keyword1> enemies also deal {{value0}} <keyword2>Stun</keyword2> damage to another enemy",
+    "reference": "Stun hits on Stunned enemies also deal 2 Stun damage to another enemy"
+  },
   "content.boon.aether-gramophone.name": {
     "text": "Aether Gramophone"
   },
@@ -90,6 +97,13 @@
     "text": "<keyword0>Water</keyword0> damage against enemy <keyword1>Block</keyword1> chains to a second enemy",
     "reference": "Water damage against enemy Block chains to a second enemy"
   },
+  "content.boon.cadence-panpipes.name": {
+    "text": "Cadence Panpipes"
+  },
+  "content.boon.cadence-panpipes.rule": {
+    "text": "Repeated attacks also hit another enemy",
+    "reference": "Repeated attacks also hit another enemy"
+  },
   "content.boon.calendula-soap.name": {
     "text": "Calendula Soap"
   },
@@ -110,6 +124,20 @@
   "content.boon.caravan-rug.rule": {
     "text": "<keyword0>Block</keyword0> does not decay on backup allies",
     "reference": "Block does not decay on backup allies"
+  },
+  "content.boon.chamomile-compress.name": {
+    "text": "Chamomile Compress"
+  },
+  "content.boon.chamomile-compress.rule": {
+    "text": "Restoring an ally’s <keyword0>Health</keyword0> grants them <keyword1>Block</keyword1> equal to their <keyword2>Bleed</keyword2>",
+    "reference": "Restoring an ally’s Health grants them Block equal to their Bleed"
+  },
+  "content.boon.chestnut-roaster.name": {
+    "text": "Chestnut Roaster"
+  },
+  "content.boon.chestnut-roaster.rule": {
+    "text": "<keyword0>Burn</keyword0> hits apply twice as much <keyword1>Burn</keyword1> to enemies with <keyword2>Block</keyword2>",
+    "reference": "Burn hits apply twice as much Burn to enemies with Block"
   },
   "content.boon.chromatic-viol.name": {
     "text": "Chromatic Viol"
@@ -377,6 +405,13 @@
     "text": "<keyword0>Burn</keyword0> cannot reduce allies below {{value0}} <keyword1>Health</keyword1>",
     "reference": "Burn cannot reduce allies below 1 Health"
   },
+  "content.boon.hearthcap-kettle.name": {
+    "text": "Hearthcap Kettle"
+  },
+  "content.boon.hearthcap-kettle.rule": {
+    "text": "Playing <keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> an effect from the most injured ally",
+    "reference": "Playing Food Cleanses an effect from the most injured ally"
+  },
   "content.boon.herbarium-press.name": {
     "text": "Herbarium Press"
   },
@@ -432,6 +467,13 @@
   "content.boon.knot-comb.rule": {
     "text": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
     "reference": "Cleanse a random harmful effect each turn"
+  },
+  "content.boon.lagoon-chalice.name": {
+    "text": "Lagoon Chalice"
+  },
+  "content.boon.lagoon-chalice.rule": {
+    "text": "<keyword0>Water</keyword0> attacks have <keyword1>Leech</keyword1> while you have <keyword2>Block</keyword2>",
+    "reference": "Water attacks have Leech while you have Block"
   },
   "content.boon.last-candle.name": {
     "text": "Last Candle"
@@ -671,6 +713,13 @@
     "text": "<keyword0>Food</keyword0> grants <keyword1>Health</keyword1> and <keyword2>Block</keyword2> to all allies",
     "reference": "Food grants Health and Block to all allies"
   },
+  "content.boon.quiet-pinwheel.name": {
+    "text": "Quiet Pinwheel"
+  },
+  "content.boon.quiet-pinwheel.rule": {
+    "text": "Allies can <keyword0>Dodge</keyword0> while <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2>",
+    "reference": "Allies can Dodge while Stunned or Frozen"
+  },
   "content.boon.rain-cape.name": {
     "text": "Rain Cape"
   },
@@ -747,6 +796,13 @@
   "content.boon.saddle-pouch.rule": {
     "text": "Swapping an ally in from backup draws one of its cards",
     "reference": "Swapping an ally in from backup draws one of its cards"
+  },
+  "content.boon.shelter-lantern.name": {
+    "text": "Shelter Lantern"
+  },
+  "content.boon.shelter-lantern.rule": {
+    "text": "<keyword0>Block</keyword0> protects allies’ other effects from <keyword1>Purge</keyword1>",
+    "reference": "Block protects allies’ other effects from Purge"
   },
   "content.boon.sin-eaters-lantern.name": {
     "text": "Sin-Eater's Lantern"
@@ -902,6 +958,13 @@
     "text": "Allies with <keyword0>Armor</keyword0> keep {{value0}}% of their <keyword1>Block</keyword1> when it decays",
     "reference": "Allies with Armor keep 75% of their Block when it decays"
   },
+  "content.boon.welcome-doormat.name": {
+    "text": "Welcome Doormat"
+  },
+  "content.boon.welcome-doormat.rule": {
+    "text": "Swapping allies share <keyword0>Nullify</keyword0>",
+    "reference": "Swapping allies share Nullify"
+  },
   "content.boon.winnowing-sieve.name": {
     "text": "Winnowing Sieve"
   },
@@ -929,6 +992,13 @@
   "content.boon.wonder-domino.rule": {
     "text": "Overkill damage spreads to other enemies",
     "reference": "Overkill damage spreads to other enemies"
+  },
+  "content.boon.wonder-kaleidoscope.name": {
+    "text": "Wonder Kaleidoscope"
+  },
+  "content.boon.wonder-kaleidoscope.rule": {
+    "text": "<keyword0>Blind</keyword0> <keyword1>reflected</keyword1> by allies also <keyword2>Blinds</keyword2> all other enemies",
+    "reference": "Blind reflected by allies also Blinds all other enemies"
   },
   "content.boon.yarrow-salve-tin.name": {
     "text": "Yarrow Salve Tin"

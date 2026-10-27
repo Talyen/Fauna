@@ -341,6 +341,18 @@
     "sourceHash": "d3669cb8a4037b1aec0d5408ee2ffa0db8f66bd45fb85bf505f780ffda8b80c4",
     "text": "处于<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>状态时仍可打出换人牌"
   },
+  "content.boon.acorn-skittle.name": {
+    "reviewed": true,
+    "source": "Acorn Skittle",
+    "sourceHash": "271323b235814f19bedac1263d4bff2fd97f96a7c76060db9adbc1eba8c8b253",
+    "text": "橡果球瓶"
+  },
+  "content.boon.acorn-skittle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits on <keyword1>Stunned</keyword1> enemies also deal {{value0}} <keyword2>Stun</keyword2> damage to another enemy",
+    "sourceHash": "3301e966a05da57ee7a5756ba0272cd42bafad71076eda425367a435110e424b",
+    "text": "对已<keyword1>眩晕</keyword1>敌人的<keyword0>眩晕</keyword0>命中还会对另一名敌人造成{{value0}}点<keyword2>眩晕</keyword2>伤害"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -485,6 +497,18 @@
     "sourceHash": "084fb3c30ed3c865b9ee90eb32cb2cbf9330b4fd84a7bc73f4afb39ca17fe0ce",
     "text": "对敌人<keyword1>格挡</keyword1>造成的<keyword0>水</keyword0>伤害会连锁至第二名敌人"
   },
+  "content.boon.cadence-panpipes.name": {
+    "reviewed": true,
+    "source": "Cadence Panpipes",
+    "sourceHash": "cdd5d5175434f9160ab138937c2fd48c95f1cc363d3a108ec242579731ffb794",
+    "text": "节奏排箫"
+  },
+  "content.boon.cadence-panpipes.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks also hit another enemy",
+    "sourceHash": "d75fb84f49d3c2a76a5d05fab3b4125b91366338b9111faa07ac8fad812b591f",
+    "text": "重复攻击还会命中另一名敌人"
+  },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
     "source": "Calendula Soap",
@@ -520,6 +544,30 @@
     "source": "<keyword0>Block</keyword0> does not decay on backup allies",
     "sourceHash": "0c209274f22238c9ee734bdcd0763b1be3e9cd96949919ba6948457570b937ff",
     "text": "后备盟友的<keyword0>格挡</keyword0>不会衰减"
+  },
+  "content.boon.chamomile-compress.name": {
+    "reviewed": true,
+    "source": "Chamomile Compress",
+    "sourceHash": "ae20d167fd4edc291f3817195d98a723e2f05bfd5f682272e4334193c2b21782",
+    "text": "洋甘菊热敷包"
+  },
+  "content.boon.chamomile-compress.rule": {
+    "reviewed": true,
+    "source": "Restoring an ally’s <keyword0>Health</keyword0> grants them <keyword1>Block</keyword1> equal to their <keyword2>Bleed</keyword2>",
+    "sourceHash": "71a5e887213b94553e752b026068a78c07f6820c153224644d93c6449c20826d",
+    "text": "恢复盟友的<keyword0>生命</keyword0>时，为其获得等同于其<keyword2>流血</keyword2>层数的<keyword1>格挡</keyword1>"
+  },
+  "content.boon.chestnut-roaster.name": {
+    "reviewed": true,
+    "source": "Chestnut Roaster",
+    "sourceHash": "2d369f5077b7dc4c9432126de80080afd57f6174cd4b1d0f57de027ff4e529f0",
+    "text": "烤栗锅"
+  },
+  "content.boon.chestnut-roaster.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply twice as much <keyword1>Burn</keyword1> to enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "39f64511d2bb5f2aa2b191cde7e1fc52fc5d873b2532bb2894b66e96b805ca2a",
+    "text": "<keyword0>灼烧</keyword0>命中会对拥有<keyword2>格挡</keyword2>的敌人施加双倍<keyword1>灼烧</keyword1>"
   },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
@@ -977,6 +1025,18 @@
     "sourceHash": "2d8b1ce75a9e01dce699d2155bad71310ab7d386499862435ca040873b80f318",
     "text": "<keyword0>灼烧</keyword0>不会使盟友的<keyword1>生命</keyword1>降至{{value0}}以下"
   },
+  "content.boon.hearthcap-kettle.name": {
+    "reviewed": true,
+    "source": "Hearthcap Kettle",
+    "sourceHash": "8f666a5bd79d0bb3d6fd008c503124878e7b50503700d8f39f4d4b4e37053c12",
+    "text": "炉边菇水壶"
+  },
+  "content.boon.hearthcap-kettle.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> an effect from the most injured ally",
+    "sourceHash": "870bc3d378555d01ce8d1b81adc56fe1cfeeab7eab4ee1b8227872a79f33d766",
+    "text": "打出<keyword0>食物</keyword0>时，<keyword1>净化</keyword1>受伤最重盟友的一个效果"
+  },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
     "source": "Herbarium Press",
@@ -1072,6 +1132,18 @@
     "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
     "sourceHash": "3b4ae1ae4eb1eb556470ea263727b1f9fa83ef1193c345d2c83bd4b4f202c18c",
     "text": "每回合<keyword0>净化</keyword0>一个随机有害效果"
+  },
+  "content.boon.lagoon-chalice.name": {
+    "reviewed": true,
+    "source": "Lagoon Chalice",
+    "sourceHash": "536ee88aa94922e1fa954d6f8d7b5cab2c5beba275fafc5560fbca7d0d2098d5",
+    "text": "潟湖圣杯"
+  },
+  "content.boon.lagoon-chalice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks have <keyword1>Leech</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "8d6b990fa188550eb5bcf8e209ef6190739f6b7409406f1261416ae7d3c73186",
+    "text": "拥有<keyword2>格挡</keyword2>时，<keyword0>水</keyword0>攻击具有<keyword1>汲取</keyword1>"
   },
   "content.boon.last-candle.name": {
     "reviewed": true,
@@ -1481,6 +1553,18 @@
     "sourceHash": "3bd06a50b495d4ac501d6ba1172dbdf45d3d5fe12554d89906c1b9fa05f4ed12",
     "text": "<keyword0>食物</keyword0>为所有盟友提供<keyword1>生命</keyword1>和<keyword2>格挡</keyword2>"
   },
+  "content.boon.quiet-pinwheel.name": {
+    "reviewed": true,
+    "source": "Quiet Pinwheel",
+    "sourceHash": "b082a87055752f5d62160e2a8ff7c76afb75608e4bccc109fc6f84a5ab8efc35",
+    "text": "静谧风车"
+  },
+  "content.boon.quiet-pinwheel.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> while <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2>",
+    "sourceHash": "9735cce9e521b477e17320ea697ec96124362783f36f18b5ebec5ec63665d897",
+    "text": "盟友在<keyword1>眩晕</keyword1>或<keyword2>冻结</keyword2>时仍可<keyword0>闪避</keyword0>"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1612,6 +1696,18 @@
     "source": "Swapping an ally in from backup draws one of its cards",
     "sourceHash": "b2d1e13bb243250c683bbd1a5033f08312b727def64a58652ad7e74c26945ef6",
     "text": "从后备换入一名盟友时，抽取其一张卡牌"
+  },
+  "content.boon.shelter-lantern.name": {
+    "reviewed": true,
+    "source": "Shelter Lantern",
+    "sourceHash": "9c9cd2687735c38c85688eb1d46029b96e4ee8f9f1d4db5d8077d3c062259b99",
+    "text": "庇护提灯"
+  },
+  "content.boon.shelter-lantern.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> protects allies’ other effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "364e6c1360afd47a82817d857e3739df3a848769d27fe5eff5b1d454845d5fc4",
+    "text": "<keyword0>格挡</keyword0>保护盟友的其他效果免受<keyword1>驱散</keyword1>"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
@@ -1877,6 +1973,18 @@
     "sourceHash": "de4dc706b8cb1e5cbb7016440b4d1bd275799ea07fdc0a7704f1f8fac0c0ef1e",
     "text": "拥有<keyword0>护甲</keyword0>的盟友在<keyword1>格挡</keyword1>衰减时保留{{value0}}%"
   },
+  "content.boon.welcome-doormat.name": {
+    "reviewed": true,
+    "source": "Welcome Doormat",
+    "sourceHash": "ccc8702df9e53d6cdfb7617b807c24640c15bbfd1ef40124d5f03429ea0fb2cd",
+    "text": "欢迎门垫"
+  },
+  "content.boon.welcome-doormat.rule": {
+    "reviewed": true,
+    "source": "Swapping allies share <keyword0>Nullify</keyword0>",
+    "sourceHash": "e876cee1950047bc90daa61a1b6dadf4194dcc82eb51747532ba631ca1679f61",
+    "text": "换人的盟友共享<keyword0>无效化</keyword0>"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1924,6 +2032,18 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "b26eadfee997fb8b65c79a465dd957e4ad5edb47c2ceda8a6a8b882567d54b18",
     "text": "击倒敌人时的溢出伤害会传播给其他敌人"
+  },
+  "content.boon.wonder-kaleidoscope.name": {
+    "reviewed": true,
+    "source": "Wonder Kaleidoscope",
+    "sourceHash": "ff7279e0cb87c2aae8548bca835b2bc94f8d2422d9aca190574722096a0150e0",
+    "text": "奇妙万花筒"
+  },
+  "content.boon.wonder-kaleidoscope.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> <keyword1>reflected</keyword1> by allies also <keyword2>Blinds</keyword2> all other enemies",
+    "sourceHash": "a562c8fd87e38c51475629e2a885f1c8771bfbebdd89e2832279de68afcf6b72",
+    "text": "盟友<keyword1>反射</keyword1>的<keyword0>致盲</keyword0>也会<keyword2>致盲</keyword2>所有其他敌人"
   },
   "content.boon.yarrow-salve-tin.name": {
     "reviewed": true,

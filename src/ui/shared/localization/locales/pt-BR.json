@@ -341,6 +341,18 @@
     "sourceHash": "0ea6ccc2219c4e0aec24b1266a2040cbdeef6453df259d903b2d89ef62c12a9c",
     "text": "Cartas de troca podem ser jogadas mesmo com <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1>"
   },
+  "content.boon.acorn-skittle.name": {
+    "reviewed": true,
+    "source": "Acorn Skittle",
+    "sourceHash": "93abf0346844e148176896bdfd5b7f4ba452fce948d41d245e76d5657861bde4",
+    "text": "Pino de bolota"
+  },
+  "content.boon.acorn-skittle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits on <keyword1>Stunned</keyword1> enemies also deal {{value0}} <keyword2>Stun</keyword2> damage to another enemy",
+    "sourceHash": "51647e348ccc5c9f713f2d8c2f38ab90d3d3755e5aa96a4e1b6c624bf97c01fb",
+    "text": "Acertos de <keyword0>Atordoamento</keyword0> em inimigos <keyword1>atordoados</keyword1> também causam {{value0}} de dano de <keyword2>Atordoamento</keyword2> a outro inimigo"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -485,6 +497,18 @@
     "sourceHash": "03e0a792f2e59b9cae9d0f37511c2c3a7a3f1f072d5d0030e71f450d19d635c2",
     "text": "Dano de <keyword0>Água</keyword0> contra <keyword1>Bloqueio</keyword1> inimigo salta para um segundo inimigo"
   },
+  "content.boon.cadence-panpipes.name": {
+    "reviewed": true,
+    "source": "Cadence Panpipes",
+    "sourceHash": "0da0c4b87890d4a58b1b3735eae11b341d52153f855b779e3c4bcd5707cd877f",
+    "text": "Flauta de Pã ritmada"
+  },
+  "content.boon.cadence-panpipes.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks also hit another enemy",
+    "sourceHash": "d401d584e2b13dabc3ffb0341f8e3a33aa901eda4bf55d370c92c3a78b740c11",
+    "text": "Ataques repetidos também atingem outro inimigo"
+  },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
     "source": "Calendula Soap",
@@ -520,6 +544,30 @@
     "source": "<keyword0>Block</keyword0> does not decay on backup allies",
     "sourceHash": "dbcbd2247260dc3224068db60c7bf5758fa334efb6dc11badeb749aeba82018f",
     "text": "O <keyword0>Bloqueio</keyword0> de aliados na reserva não diminui"
+  },
+  "content.boon.chamomile-compress.name": {
+    "reviewed": true,
+    "source": "Chamomile Compress",
+    "sourceHash": "68f67a14f9cd4d5cf50feffd3340e77fd6c63085fd6f4b859a81b8b9ee4d0cfe",
+    "text": "Compressa de camomila"
+  },
+  "content.boon.chamomile-compress.rule": {
+    "reviewed": true,
+    "source": "Restoring an ally’s <keyword0>Health</keyword0> grants them <keyword1>Block</keyword1> equal to their <keyword2>Bleed</keyword2>",
+    "sourceHash": "33aa12a4b1f0cd4fccd787abc6c179b390e57b8d530721425b571bb9192257a6",
+    "text": "Restaurar a <keyword0>Saúde</keyword0> de um aliado concede a ele <keyword1>Bloqueio</keyword1> igual ao seu <keyword2>Sangramento</keyword2>"
+  },
+  "content.boon.chestnut-roaster.name": {
+    "reviewed": true,
+    "source": "Chestnut Roaster",
+    "sourceHash": "590b5c9b21e7cbfebb41b946c36a931c2143af106d544e589082fb80c970eecc",
+    "text": "Assador de castanhas"
+  },
+  "content.boon.chestnut-roaster.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply twice as much <keyword1>Burn</keyword1> to enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "18ff6ec020d30be96939160290d9a51a3ef41381e3ff1ab6deeb3d7614c325d4",
+    "text": "Acertos de <keyword0>Queimadura</keyword0> aplicam o dobro de <keyword1>Queimadura</keyword1> a inimigos com <keyword2>Bloqueio</keyword2>"
   },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
@@ -977,6 +1025,18 @@
     "sourceHash": "be7e200525a67a623ba75df6cb400ff3d6e124dbdc2482a45740c402ec49aa9e",
     "text": "<keyword0>Queimadura</keyword0> não pode reduzir a <keyword1>Saúde</keyword1> dos aliados abaixo de {{value0}}"
   },
+  "content.boon.hearthcap-kettle.name": {
+    "reviewed": true,
+    "source": "Hearthcap Kettle",
+    "sourceHash": "b6e810bf300c3993c8340c90c61f7d64241e37effb6273cc3e8f5b2593feb683",
+    "text": "Chaleira cogumelo do lar"
+  },
+  "content.boon.hearthcap-kettle.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> an effect from the most injured ally",
+    "sourceHash": "02d8616c163b0f545ffff8e1edec61577692577aeb8354ea54bb66dd84d4064c",
+    "text": "Jogar <keyword0>Comida</keyword0> <keyword1>purifica</keyword1> um efeito do aliado mais ferido"
+  },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
     "source": "Herbarium Press",
@@ -1072,6 +1132,18 @@
     "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
     "sourceHash": "adf056faf343a7f0e13785737b3c9a45085b09b42b419393ea2095073a40ac40",
     "text": "<keyword0>Purifique</keyword0> um efeito prejudicial aleatório a cada turno"
+  },
+  "content.boon.lagoon-chalice.name": {
+    "reviewed": true,
+    "source": "Lagoon Chalice",
+    "sourceHash": "37f72a72251f2e08ab9a0d918cc9161938b52c8d1f1b3bd98b5664bd1d7226d3",
+    "text": "Cálice da lagoa"
+  },
+  "content.boon.lagoon-chalice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks have <keyword1>Leech</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "8ca13b17c8acb93222d3079d5c5090290035eaa943b2e13401a6a83a5386643a",
+    "text": "Ataques de <keyword0>Água</keyword0> têm <keyword1>Drenagem</keyword1> enquanto você tiver <keyword2>Bloqueio</keyword2>"
   },
   "content.boon.last-candle.name": {
     "reviewed": true,
@@ -1481,6 +1553,18 @@
     "sourceHash": "ce4ae45569e8f352e30f4319f3b8008ae88dc0fa95c27a1e3a814dc7d753d5b8",
     "text": "<keyword0>Comida</keyword0> concede <keyword1>Saúde</keyword1> e <keyword2>Bloqueio</keyword2> a todos os aliados"
   },
+  "content.boon.quiet-pinwheel.name": {
+    "reviewed": true,
+    "source": "Quiet Pinwheel",
+    "sourceHash": "aabd434a1d2b285773b1f089d716b9870e66383a85509b878b83b694950a1dda",
+    "text": "Catavento sereno"
+  },
+  "content.boon.quiet-pinwheel.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> while <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2>",
+    "sourceHash": "9797bd2a2b8523cca28bf06bd20801cf7c6f05566e1982cd3750f061fc97abf0",
+    "text": "Aliados podem <keyword0>esquivar</keyword0> enquanto estiverem <keyword1>atordoados</keyword1> ou <keyword2>congelados</keyword2>"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1612,6 +1696,18 @@
     "source": "Swapping an ally in from backup draws one of its cards",
     "sourceHash": "c69254ed6845bcac102eeb1b3c19d16b035f3dfe4912fab7bb300ef5d18bf914",
     "text": "Ao trocar um aliado da reserva para o campo, compre uma das cartas dele"
+  },
+  "content.boon.shelter-lantern.name": {
+    "reviewed": true,
+    "source": "Shelter Lantern",
+    "sourceHash": "feb670c203b45d87c4621ee3ae123b1dbc8e39abe385f6ca7828c83209c059d9",
+    "text": "Lanterna protetora"
+  },
+  "content.boon.shelter-lantern.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> protects allies’ other effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "d8cb3282e0118654c0a0a1647bdc172c697f8d38e954340baab730682ea6828b",
+    "text": "<keyword0>Bloqueio</keyword0> protege os outros efeitos dos aliados de <keyword1>Expurgo</keyword1>"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
@@ -1877,6 +1973,18 @@
     "sourceHash": "c0e92fafc762358fa2c708c0508bb484787e7ddfb88c773da93e6c03f297aaa1",
     "text": "Aliados com <keyword0>Armadura</keyword0> mantêm {{value0}}% do <keyword1>Bloqueio</keyword1> quando ele diminui"
   },
+  "content.boon.welcome-doormat.name": {
+    "reviewed": true,
+    "source": "Welcome Doormat",
+    "sourceHash": "7ba980c502ea7569075d9512a9ed0ce336285f830e0dcced6a2375ad5d76dc89",
+    "text": "Capacho de boas-vindas"
+  },
+  "content.boon.welcome-doormat.rule": {
+    "reviewed": true,
+    "source": "Swapping allies share <keyword0>Nullify</keyword0>",
+    "sourceHash": "1e9e3fe2cddd1ca154f44f2771b54bde02114cd0c456748732edc32185738eaf",
+    "text": "Aliados que trocam de lugar compartilham <keyword0>Anulação</keyword0>"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1924,6 +2032,18 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "e99a5f5629e7b1445648677d8cee75f7b3f2eacf241d664911abe77ec2948ff0",
     "text": "O dano excedente ao derrotar um inimigo se espalha para outros inimigos"
+  },
+  "content.boon.wonder-kaleidoscope.name": {
+    "reviewed": true,
+    "source": "Wonder Kaleidoscope",
+    "sourceHash": "8d8130cf0678478feb235476d04df45560827655b97baf172e8abad8e44886d4",
+    "text": "Caleidoscópio encantado"
+  },
+  "content.boon.wonder-kaleidoscope.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> <keyword1>reflected</keyword1> by allies also <keyword2>Blinds</keyword2> all other enemies",
+    "sourceHash": "9b4979f87b33b839f47ded97dfb12e39f6361e84e3a04a9346a896861ddd337c",
+    "text": "<keyword0>Cegueira</keyword0> <keyword1>refletida</keyword1> por aliados também <keyword2>cega</keyword2> todos os outros inimigos"
   },
   "content.boon.yarrow-salve-tin.name": {
     "reviewed": true,

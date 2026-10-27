@@ -341,6 +341,18 @@
     "sourceHash": "ef11c3fe604c301346f1a389748f1c7b48487572286ae7adeb4143045bc31b2a",
     "text": "<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>中でも交代カードを使える"
   },
+  "content.boon.acorn-skittle.name": {
+    "reviewed": true,
+    "source": "Acorn Skittle",
+    "sourceHash": "63299b92d747d77755211c89f7c5bb6bcae0279aaea3a430280f25f46bdb8cae",
+    "text": "ドングリのピン"
+  },
+  "content.boon.acorn-skittle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits on <keyword1>Stunned</keyword1> enemies also deal {{value0}} <keyword2>Stun</keyword2> damage to another enemy",
+    "sourceHash": "0a0daaf7a45637bc58b772cc5899ff46edd3155f1809a463fe40fa19b0e53c4f",
+    "text": "<keyword1>スタン</keyword1>中の敵への<keyword0>スタン</keyword0>ヒットは、別の敵にも{{value0}}の<keyword2>スタン</keyword2>ダメージを与える"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -485,6 +497,18 @@
     "sourceHash": "edb1e8dd98cf477a8633e966b58c1496172387021a890e7602e9b187c2d006c4",
     "text": "敵の<keyword1>ブロック</keyword1>に与えた<keyword0>水</keyword0>ダメージは2体目の敵に連鎖"
   },
+  "content.boon.cadence-panpipes.name": {
+    "reviewed": true,
+    "source": "Cadence Panpipes",
+    "sourceHash": "2dd650e5794afe0d5fd6e5612b81c647f5960df15c34a7f373f302f2d5f1b946",
+    "text": "律動のパンフルート"
+  },
+  "content.boon.cadence-panpipes.rule": {
+    "reviewed": true,
+    "source": "Repeated attacks also hit another enemy",
+    "sourceHash": "7bf035655484c752631191bfe2befa59e992ee641bb39ddafe0c8e56fb9bd246",
+    "text": "連続攻撃は別の敵にもヒットする"
+  },
   "content.boon.calendula-soap.name": {
     "reviewed": true,
     "source": "Calendula Soap",
@@ -520,6 +544,30 @@
     "source": "<keyword0>Block</keyword0> does not decay on backup allies",
     "sourceHash": "974ba4b969a373676ef17549fcadbf68969bb1b57d2321e110c5593c86ad6c35",
     "text": "控えの味方の<keyword0>ブロック</keyword0>は減衰しない"
+  },
+  "content.boon.chamomile-compress.name": {
+    "reviewed": true,
+    "source": "Chamomile Compress",
+    "sourceHash": "3c0fe1eea0927db89bf73d0b7cf58c8e06558084bd15627bcc90a2aa794a8b0b",
+    "text": "カモミールの湿布"
+  },
+  "content.boon.chamomile-compress.rule": {
+    "reviewed": true,
+    "source": "Restoring an ally’s <keyword0>Health</keyword0> grants them <keyword1>Block</keyword1> equal to their <keyword2>Bleed</keyword2>",
+    "sourceHash": "0c222975abba1fa7ac04c683c5359a3b5ec2ff4b7aad0a7e4566de2839bd644e",
+    "text": "味方の<keyword0>体力</keyword0>を回復すると、その味方の<keyword2>出血</keyword2>に等しい<keyword1>ブロック</keyword1>を与える"
+  },
+  "content.boon.chestnut-roaster.name": {
+    "reviewed": true,
+    "source": "Chestnut Roaster",
+    "sourceHash": "c83de7ab962f21efcaf77bffbe9222a84e1e4ffd7d3ed35860c61bf6def48fc7",
+    "text": "栗焼き器"
+  },
+  "content.boon.chestnut-roaster.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits apply twice as much <keyword1>Burn</keyword1> to enemies with <keyword2>Block</keyword2>",
+    "sourceHash": "7ff04687ee53266ec942f5d706adad604f4166fbf96abc591c847cac53a13b1d",
+    "text": "<keyword0>炎上</keyword0>ヒットは、<keyword2>ブロック</keyword2>を持つ敵に通常の2倍の<keyword1>炎上</keyword1>を付与する"
   },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
@@ -977,6 +1025,18 @@
     "sourceHash": "0496f2b0bdd928304a453968e74f85c7b5aac93ef44e7013c5718aa1e9bdb9ab",
     "text": "<keyword0>炎上</keyword0>で味方の<keyword1>体力</keyword1>が{{value0}}未満になることはない"
   },
+  "content.boon.hearthcap-kettle.name": {
+    "reviewed": true,
+    "source": "Hearthcap Kettle",
+    "sourceHash": "af088f27b95786f61de3c6eea0e6afe48db20d0c9f929c668c3aaef6e8a369d5",
+    "text": "かまどキノコのやかん"
+  },
+  "content.boon.hearthcap-kettle.rule": {
+    "reviewed": true,
+    "source": "Playing <keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> an effect from the most injured ally",
+    "sourceHash": "231b26336476ab77b8afc6227cdfe49fbd785214e508573c246aead4ac8063fc",
+    "text": "<keyword0>食べ物</keyword0>を使うと、最も傷ついた味方の効果を1つ<keyword1>浄化</keyword1>する"
+  },
   "content.boon.herbarium-press.name": {
     "reviewed": true,
     "source": "Herbarium Press",
@@ -1072,6 +1132,18 @@
     "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
     "sourceHash": "9078d6773619d01dcf9b287fa91bbec0fe87b835c6bb2483a033f344b0699283",
     "text": "毎ターン、ランダムな有害効果を1つ<keyword0>浄化</keyword0>"
+  },
+  "content.boon.lagoon-chalice.name": {
+    "reviewed": true,
+    "source": "Lagoon Chalice",
+    "sourceHash": "9d521066252926534a53a4cbcc86a5ec1a6b8ff199ff5f882ef78344cc4f1f6f",
+    "text": "入江の杯"
+  },
+  "content.boon.lagoon-chalice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> attacks have <keyword1>Leech</keyword1> while you have <keyword2>Block</keyword2>",
+    "sourceHash": "b38e3038dab36296e05cb2adba26cbf44e7b8316e019a2298ad3db7341ac6ce3",
+    "text": "自身に<keyword2>ブロック</keyword2>がある間、<keyword0>水</keyword0>攻撃に<keyword1>吸血</keyword1>が付く"
   },
   "content.boon.last-candle.name": {
     "reviewed": true,
@@ -1481,6 +1553,18 @@
     "sourceHash": "397e51bc9def533299e7136e22085e1686c7751d17a063a54214d811181581c9",
     "text": "<keyword0>食料</keyword0>は味方全員に<keyword1>体力</keyword1>と<keyword2>ブロック</keyword2>を付与"
   },
+  "content.boon.quiet-pinwheel.name": {
+    "reviewed": true,
+    "source": "Quiet Pinwheel",
+    "sourceHash": "1d9f084f82b8213aaa1684dcfefda617032bd3d5375e759837402ecb17d84bc2",
+    "text": "静かな風車"
+  },
+  "content.boon.quiet-pinwheel.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> while <keyword1>Stunned</keyword1> or <keyword2>Frozen</keyword2>",
+    "sourceHash": "e25518914bae6409b152a74b6e028664d2efe35a5b604add9943ff20d114150d",
+    "text": "味方は<keyword1>スタン</keyword1>または<keyword2>凍結</keyword2>中でも<keyword0>回避</keyword0>できる"
+  },
   "content.boon.rain-cape.name": {
     "reviewed": true,
     "source": "Rain Cape",
@@ -1612,6 +1696,18 @@
     "source": "Swapping an ally in from backup draws one of its cards",
     "sourceHash": "3445b11054a4e538063bdd5709f358c0cf9b071b2f817894c95dcb589e16c38a",
     "text": "控えの味方を交代で出すと、その味方のカードを1枚引く"
+  },
+  "content.boon.shelter-lantern.name": {
+    "reviewed": true,
+    "source": "Shelter Lantern",
+    "sourceHash": "ff9ae5c966459b0af7fd529ac8d1a7ce5dbc2344bf36c6f56f65eb4d811bbee7",
+    "text": "守りのランタン"
+  },
+  "content.boon.shelter-lantern.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> protects allies’ other effects from <keyword1>Purge</keyword1>",
+    "sourceHash": "14cd36d4bdcaae7a0b36426f181db54b55c06b0dd604c864b29a1be7c57be0c3",
+    "text": "<keyword0>ブロック</keyword0>は味方の他の効果を<keyword1>強化解除</keyword1>から守る"
   },
   "content.boon.sin-eaters-lantern.name": {
     "reviewed": true,
@@ -1877,6 +1973,18 @@
     "sourceHash": "1fc7327b7ba02e11121276866ba7e1f6149d71acb1d3632e41cdebcdbc4d6f50",
     "text": "<keyword0>装甲</keyword0>を持つ味方は<keyword1>ブロック</keyword1>が減衰する際、{{value0}}%を維持"
   },
+  "content.boon.welcome-doormat.name": {
+    "reviewed": true,
+    "source": "Welcome Doormat",
+    "sourceHash": "d3f9e2a73515705e1c2646e81ff3e090c8aa171b37a95a4b12f2a69504e96e21",
+    "text": "歓迎の玄関マット"
+  },
+  "content.boon.welcome-doormat.rule": {
+    "reviewed": true,
+    "source": "Swapping allies share <keyword0>Nullify</keyword0>",
+    "sourceHash": "b4c34ae10f91cb6d9721d231e1b35c0c2b7a3435350ede5c70b809a8b6473377",
+    "text": "交代する味方同士で<keyword0>無効化</keyword0>を共有する"
+  },
   "content.boon.winnowing-sieve.name": {
     "reviewed": true,
     "source": "Winnowing Sieve",
@@ -1924,6 +2032,18 @@
     "source": "Overkill damage spreads to other enemies",
     "sourceHash": "d2bdb158db2a2863a5288e0b2e268232ac5be698e9aae42159c2f49b476e9471",
     "text": "敵を倒した際の余剰ダメージが他の敵に広がる"
+  },
+  "content.boon.wonder-kaleidoscope.name": {
+    "reviewed": true,
+    "source": "Wonder Kaleidoscope",
+    "sourceHash": "bb7ef004f6ca1cd19bdda1389737511bd4f2422c7467003ee6ab3fd5a3dbc19b",
+    "text": "不思議な万華鏡"
+  },
+  "content.boon.wonder-kaleidoscope.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> <keyword1>reflected</keyword1> by allies also <keyword2>Blinds</keyword2> all other enemies",
+    "sourceHash": "4ec144c64225f2ddfd0021b4a188db4ecec40eaa5310297b19053c21b0cf32ef",
+    "text": "味方が<keyword1>反射</keyword1>した<keyword0>盲目</keyword0>は他の敵全員も<keyword2>盲目</keyword2>にする"
   },
   "content.boon.yarrow-salve-tin.name": {
     "reviewed": true,
