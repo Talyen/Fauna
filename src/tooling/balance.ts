@@ -1,4 +1,4 @@
-import { createSession } from "../application/session";
+import { createRecordedSession } from "./recorded-session";
 import { BATTLE_POLICY_VERSION } from "../application/battle-policy";
 import { createBattleActor } from "../application/battle-actor";
 import { createBattleProgress } from "./battle-progress";
@@ -66,32 +66,17 @@ export async function balanceCase(
     };
   }
   if (replay && replay.initial !== initial) throw new Error("Replay initial checkpoint differs.");
-  let saved = initial;
-  const open = async () => {
-    const session = createSession({
-      desktop: false,
-      steam: { available: false },
-      saves: {
-        readCandidates: async () => [{ source: "primary", data: saved }],
-        write: async (data) => {
-          saved = data;
-        },
-      },
-    });
-    await session.load();
-    return session;
-  };
-  let session = await open();
+  const recording = await createRecordedSession(initial, "saved", journal);
   const steps: JourneyStep[] = [];
   const actor = createBattleActor();
   const progress = createBattleProgress();
-  progress.observe(session.store.getState().game);
+  progress.observe(recording.session.store.getState().game);
   let turns = 1;
   let complete = false,
     reason = "Action budget exhausted";
   try {
     for (let i = 0; i < (replay ? replay.steps.length : 5000); i++) {
-      const before = session.store.getState().game;
+      const before = recording.session.store.getState().game;
       if (before.phase !== "battle") throw new Error("Unexpected completed checkpoint.");
       if (before.battle!.turn > 100) {
         reason = "Turn budget exhausted";
@@ -101,26 +86,11 @@ export async function balanceCase(
         ? { command: replay.steps[i]!.command, reason: replay.steps[i]!.decision }
         : actor.choose(before);
       const command = selected.command;
-      await journal?.({ type: "attempt", index: i, command, decision: selected.reason });
-      const accepted = session.command(command);
-      if (!(await session.flush())) throw new Error("In-memory save failed.");
-      const after = session.store.getState().game;
+      const { after, step } = await recording.step(i, command, selected.reason, replay?.steps[i]);
       progress.observe(after);
-      const step = {
-        command,
-        accepted,
-        checkpoint: encodeSave(decodeSave(saved)),
-        decision: selected.reason,
-      };
       steps.push(step);
-      await journal?.({ type: "completed", index: i, ...step });
       turns = Math.max(turns, (after.battle?.turn ?? before.battle!.turn) - base.battle!.turn + 1);
-      if (
-        replay &&
-        (step.checkpoint !== replay.steps[i]!.checkpoint || accepted !== replay.steps[i]!.accepted)
-      )
-        throw new Error(`Replay diverged at action ${i + 1}.`);
-      if (!accepted) {
+      if (!step.accepted) {
         reason = "Command rejected";
         break;
       }
@@ -130,12 +100,11 @@ export async function balanceCase(
         break;
       }
       if ((i + 1) % 17 === 0) {
-        await session.dispose();
-        session = await open();
+        await recording.resume();
       }
     }
     if (replay && steps.length !== replay.steps.length) throw new Error("Replay ended before its journal.");
-    const final = session.store.getState().game;
+    const final = recording.session.store.getState().game;
     return {
       initial,
       base: encodeSave(base),
@@ -146,7 +115,7 @@ export async function balanceCase(
       metrics: metrics(base, final, steps, turns, final.phase !== "defeat" && complete),
     };
   } finally {
-    await session.dispose();
+    await recording.dispose();
   }
 }
 function metrics(before: GameState, after: GameState, steps: JourneyStep[], turns: number, win: boolean) {

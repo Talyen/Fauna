@@ -2,11 +2,12 @@ import { KEYWORDS, talentPoints } from "../game/progression";
 import { BATTLE_POLICY_VERSION } from "../application/battle-policy";
 import { createJourneyActor } from "./journey-policy";
 import { createBattleProgress, type IncompleteBattle } from "./battle-progress";
-import { createSession, type Session } from "../application/session";
+import { createRecordedSession, type JourneyStep } from "./recorded-session";
+export type { JourneyStep } from "./recorded-session";
 import { createGame } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
 import { type SpeciesId } from "../game/content";
-import type { Command, GameState } from "../game/types";
+import type { GameState } from "../game/types";
 
 export interface JourneyConfig {
   seed: number;
@@ -16,12 +17,6 @@ export interface JourneyConfig {
   maxActions: number;
   maxTurns: number;
   resumeEvery: number;
-}
-export interface JourneyStep {
-  command: Command;
-  accepted: boolean;
-  checkpoint: string;
-  decision: string;
 }
 export interface JourneyBundle {
   format: 4;
@@ -74,25 +69,10 @@ export async function runJourney(
   )
     throw new Error("Replay content/build identity mismatch.");
   decodeSave(initial);
-  let saved = initial;
-  const open = async () => {
-    const session = createSession({
-      desktop: false,
-      steam: { available: false },
-      saves: {
-        readCandidates: async () => [{ source: "primary", data: saved }],
-        write: async (data) => {
-          saved = data;
-        },
-      },
-    });
-    await session.load();
-    return session;
-  };
-  let session: Session = await open();
+  const recording = await createRecordedSession(initial, "state", journal);
   const decide = createJourneyActor(config);
   const progress = createBattleProgress();
-  progress.observe(session.store.getState().game);
+  progress.observe(recording.session.store.getState().game);
   const bundle: JourneyBundle = {
     format: 4,
     policyVersion: BATTLE_POLICY_VERSION,
@@ -110,7 +90,7 @@ export async function runJourney(
   try {
     const limit = replay ? replay.steps.length : config.maxActions;
     for (let index = 0; index < limit; index++) {
-      const before = session.store.getState().game;
+      const before = recording.session.store.getState().game;
       if (before.phase === "battle" && before.battle!.turn > config.maxTurns) {
         bundle.reason = "Turn budget exhausted";
         break;
@@ -119,19 +99,9 @@ export async function runJourney(
         ? { command: replay.steps[index]!.command, reason: replay.steps[index]!.decision }
         : decide(before);
       const command = selected.command;
-      await journal?.({ type: "attempt", index, command, decision: selected.reason });
-      const accepted = session.command(command);
-      if (!(await session.flush())) throw new Error("In-memory save failed.");
-      const after = session.store.getState().game;
+      const { after, step } = await recording.step(index, command, selected.reason, replay?.steps[index]);
       progress.observe(after);
-      const step = {
-        command,
-        accepted,
-        checkpoint: encodeSave(decodeSave(encodeSave(after))),
-        decision: selected.reason,
-      };
       bundle.steps.push(step);
-      await journal?.({ type: "completed", index, ...step });
       for (const keyword of KEYWORDS)
         for (const point of [1, 2])
           if (
@@ -146,13 +116,8 @@ export async function runJourney(
           roster: [...before.team, ...before.reserves].map((unit) => unit.species),
           outcome: after.phase === "defeat" ? "defeat" : "victory",
         });
-      if (
-        replay &&
-        (step.checkpoint !== replay.steps[index]!.checkpoint || accepted !== replay.steps[index]!.accepted)
-      )
-        throw new Error(`Replay diverged at action ${index + 1}.`);
-      if (!accepted) {
-        bundle.reason = `Rejected ${command.type}: ${session.store.getState().error}`;
+      if (!step.accepted) {
+        bundle.reason = `Rejected ${command.type}: ${recording.session.store.getState().error}`;
         break;
       }
       if (before.phase !== after.phase && ["victory", "defeat"].includes(after.phase)) {
@@ -171,8 +136,7 @@ export async function runJourney(
         }
       }
       if (config.resumeEvery > 0 && (index + 1) % config.resumeEvery === 0) {
-        await session.dispose();
-        session = await open();
+        await recording.resume();
       }
     }
     if (replay && bundle.steps.length !== replay.steps.length)
@@ -180,6 +144,6 @@ export async function runJourney(
     bundle.diagnostics = bundle.complete ? null : progress.snapshot();
     return bundle;
   } finally {
-    await session.dispose();
+    await recording.dispose();
   }
 }

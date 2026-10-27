@@ -118,7 +118,7 @@ npm run balance:compare -- experiment --checkpoint reports/checkpoint.json --loa
 
 The JSON defines `baseline` and `treatment`, each with explicit `talents` and `boons` ID arrays. Both retain XP budgets and all other checkpoint fields; invalid IDs, prerequisites or budgets fail. Grants are fixtures, not earned progression. Injecting an active battle does not replay settled opening effects; choose the intended combat checkpoint. Each arm writes command/checkpoint evidence and a paired comparison.
 
-Replay requires matching code identity, checkpoints and complete execution. Balance and playthrough fingerprints cover gameplay/application source and save-format JSON; changing these inputs requires fresh journals. [playthrough.ts](../src/tooling/playthrough.ts) rejects obsolete journal/policy versions. All output stays under ignored `reports/`.
+Replay requires matching code identity, checkpoints and complete execution. Balance and playthrough fingerprints cover gameplay/application source and save-format JSON; changing these inputs requires fresh journals. [playthrough.ts](../src/tooling/playthrough.ts) rejects obsolete journal/policy versions. Both runners use [recorded-session.ts](../src/tooling/recorded-session.ts) to order attempts, save acknowledgements, completion records, replay checks and resume. All output stays under ignored `reports/`.
 
 Balance runs default to `--evidence failures`: completed cases keep compact metrics
 and diagnostics, while failed or interrupted cases retain full checkpoints and
