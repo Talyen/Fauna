@@ -965,6 +965,636 @@
     "sourceHash": "fa04912d5f7c65518285b726f50a8d898ee86bd59049e709e18d0155fe41710e",
     "text": "<keyword0>装甲</keyword0>が受ける<keyword1>出血</keyword1>ダメージを軽減する"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "b6071ce875f3038cca312d831796328438f8dd772cd13a2a89bab83a56104a3d",
+    "text": "出血多量"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "b32be6d6d941d9e1ef5f6f29edab1d073c8f284dfbceccc82b369978f004e8b7",
+    "text": "<keyword1>体力</keyword1>が半分未満の間、<keyword0>出血</keyword0>ダメージが{{value0}}%増加する"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "26ad808289c1e66447bbb6368ff7e2d826d65cc0ad1e21a719febb388d6f8242",
+    "text": "血の昂り"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "3f56ef461ef380aed808b62a399abf448bacdca480d26920ff57abe2b17be435",
+    "text": "<keyword0>出血</keyword0>ダメージを与えると{{value0}}%の確率でカードを一枚引く"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "2452076b48a7bd0b6e0b9de25b8ba340d268794dcb213e603940ce8d77d89c77",
+    "text": "最初の血"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "d33671a1ddae96339a8c4e0e8ceb967c206caea67d843bd1fa2851c0561d1c4b",
+    "text": "皮剥ぎ"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "7f7006ebd5b69bb0a683ca80db964fde99a51f4effafea8cceb0a612842ecf41",
+    "text": "<keyword0>出血</keyword0>の一撃は{{value0}}%の確率で敵の<keyword1>装甲</keyword1>を半分にする"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "9d501005bef76408b11e09662b47aab8102148c0092b22d8b3fc6367c03ea669",
+    "text": "致命傷"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "c2b95a8e9fbb9c03ac545be5ede11cd077924fdc9e5e5b5b40360671f32b4312",
+    "text": "別れの一太刀"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "7753b77d110fc8887fe9678a457c21b94a5f99e6cc7b8226e6aa58d41837cbf0",
+    "text": "<keyword0>回避</keyword0>後、次の<keyword1>物理</keyword1>の一撃がその半分のダメージを追加の<keyword2>出血</keyword2>ダメージとして与える"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "ba522643d2bb1f9293e5852b1717f2b7f2453530a9e5f4d38464a758a488c1c1",
+    "text": "血潮"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "d6e17ff0ff868f07fb4218a67c8f983a4baf4baefff5ebc96409c5e6793c00dc",
+    "text": "<keyword0>出血</keyword0>の一撃は{{value0}}%の確率で<keyword1>吸血</keyword1>する"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "3ec1cacf1073719f45f54a3ac41ec62477121646e9ee117785cb7b5c8643e217",
+    "text": "敗血性ショック"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "d2a7f07c748efb709f6c23de2a8eb70a8a11a92bbe241f77c14b62ab19431016",
+    "text": "<keyword0>出血</keyword0>中の敵が受ける<keyword1>毒</keyword1>ダメージが{{value0}}%増加する"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "e1fee376fabd452acf96ee263c693f4c9edd2bebcd14e11a9d1ec05a6bc0804b",
+    "text": "汚染された傷"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "46a161dc76a10c78033143d7818415d29451b7eeace92a3c097db25144c052e9",
+    "text": "<keyword0>出血</keyword0>の一撃は{{value0}}%の確率でその半分のダメージを<keyword1>毒</keyword1>ダメージとして与える"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "e9a02ef6aba74f45d17a1609492f316a61e51b0c97de036eb52854820c3b0486",
+    "text": "傷の手当て"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "b6ca165594645922c213d5076fcee39f2114366130f4a1dd781bebf77e6fa56d",
+    "text": "受ける<keyword0>出血</keyword0>ダメージが半分になる"
+  },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "e4c1313617d83eda5a78d8428fe4993757a182b866fdda9531009a917124975e",
+    "text": "血の結界"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "b1e45954697c1230ff64a2fcf9ca5fe304207916f526d79bae5671ec2365e95c",
+    "text": "<keyword1>ブロック</keyword1>がある間、受ける<keyword0>出血</keyword0>ダメージが半分になる"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "8def6a0f5f2c5d0e2cb5ab2a900be1f65232dd034362855cfdbfc71d5267b5dd",
+    "text": "足さばき"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "cfa26b34f5eeda127b10076d4eb8e047980dd2dc67948f90aef55cde2a00531a",
+    "text": "<keyword1>回避</keyword1>時に<keyword0>ブロック</keyword0>を{{value0}}得る"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "0291b8562f78a0ad029a8571384fd1d919389dd0433e310e171d4423882f8540",
+    "text": "接地"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "d3890ecd234da49cabd8aad96a4a0d34e11ef2d9bda7fe01443027265d4810ad",
+    "text": "衝撃の守り"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "6dbbc1b117ca33c755936bdf89e26c122ab1c454092fd87e6a59f496a21fb833",
+    "text": "<keyword0>スタン</keyword0>ダメージが<keyword1>ブロック</keyword1>の{{value0}}%分増加する"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "0134bd1d30d33db41e0185d0861f64e2194041981c7c02b1232a95a2cc30d746",
+    "text": "補強"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "3e12e266f4cee7ca536ba026bb6503946048cf67b39164f306b162ff09c3e754",
+    "text": "<keyword0>ブロック</keyword0>が吸収する<keyword1>物理</keyword1>ダメージが{{value0}}%増加する"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "002a9132025f31c9e4ce617ab13a89090fc422d214e1d952d7800dc57cd7e5a4",
+    "text": "聖なる盾"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "82b3634788d050b81ec9fe959aed800674ff8163628091d6b894e7cb82a1c61a",
+    "text": "再起"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "2c5685ff783da1a158ebe13ba69b7165df997117b8a7f7a9cde13e83d44415a0",
+    "text": "日の光の盾"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "255c38117d61187238ba98f358c3b926ce541b2ac03e9db0eec731c9ff7bbeef",
+    "text": "毒の守り"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "99aa41a019e19d6f4d015975fed8ead89fd2790c0fe2fad723532599b9c64d6b",
+    "text": "<keyword1>ブロック</keyword1>がある間、受ける<keyword0>毒</keyword0>ダメージが半分になる"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "5d7b7e399cc92291218b5bf8ed75981d798c163c6fe7f67f28ed3acfeb3cb133",
+    "text": "重みのある守り"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "af35133ba47511f085cd3e8c673f3c16cb934caff004e710df5cd2352de3e164",
+    "text": "<keyword0>物理</keyword0>ダメージが<keyword1>ブロック</keyword1>の{{value0}}%分増加する"
+  },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "62c8716017624ec067325dfabb938f64dcd566db61faa585dcc7f70e9dc7e7f6",
+    "text": "耐火性"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "782ca616500e0210d718bc76bb87b29ccb5dc43e3a86969e23365cc18f5c5987",
+    "text": "受ける<keyword0>炎上</keyword0>ダメージが半分になる"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "72534723f9adab3d2de854f810aa08c19cdd4daffc0c908b49d769d91909670b",
+    "text": "瞬間発火"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "748fd39256f37400ce871db70f22bd735491318c7fb225074fee015d642a8061",
+    "text": "<keyword0>炎上</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "73a166746b73c8180f3c2bb66dfd31ab2a0da0e1d8417a648783c3e9a00997b8",
+    "text": "引火点"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "0301343433eb4dd2583094464ea5ad2f84bbf5e18ca87aa9c0a813f34627b9b2",
+    "text": "熱疲労"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "7d8428cc2b6aa63ab760c9258ff04d7223a7db3336f64a6f5cf74cca08471788",
+    "text": "<keyword0>炎上</keyword0>の一撃は{{value0}}%の確率で<keyword1>スタン</keyword1>ダメージも与える"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "32bf87e8e4e40b0f44f6e53be3abe0a6f43e1a7d3c940a30b1e968c2004c77f8",
+    "text": "融点"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "3bad03a896b4880e6278aa1863136e1a0ceeb38ee35cf65c179b5d118b1def36",
+    "text": "煙幕"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "3a3e0ea132015c6999ea59cfa6c6e6559d7c8427bf8058070af89b34ecb568f5",
+    "text": "<keyword1>炎上</keyword1>中の敵を<keyword0>回避</keyword0>すると{{value0}}の<keyword2>炎上</keyword2>ダメージを与える"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "582693c544fbe39ed502797ce6ce9dd7e9b722a3673c338f79bd441498186ef1",
+    "text": "くすぶり"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "27c92ff061b057adabce4d953be78c86cac8ed9b06dbc6a6512aca48af13071d",
+    "text": "<keyword0>炎上</keyword0>は{{value0}}%の確率で減衰しない"
+  },
+  "content.talent.dodge.catch-breath.name": {
+    "reviewed": true,
+    "source": "Catch Breath",
+    "sourceHash": "87dedb49126d6c1c4518ba62f2815eab4bfa39e4a00ed4fd6cffb4d3389113a7",
+    "text": "息継ぎ"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f6aced59415c81fcb2c463883774168d3e12f5c40536cb4ef1ee909338ce97c0",
+    "text": "<keyword1>回避</keyword1>時に<keyword0>体力</keyword0>を{{value0}}回復する"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "reviewed": true,
+    "source": "Clean Getaway",
+    "sourceHash": "e30788ef56ab5c1de7e81da874a74cc8d3db601e110e0c6794b2443cfde5f205",
+    "text": "鮮やかな逃走"
+  },
+  "content.talent.dodge.clean-getaway.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "sourceHash": "3f6081935e5531b64d47c1f1706ad28feea01b3c2a584382693adaaf509d9c13",
+    "text": "<keyword0>回避</keyword0>時に自分の<keyword1>炎上</keyword1>、<keyword2>毒</keyword2>、<keyword3>出血</keyword3>をそれぞれ{{value0}}スタック取り除く"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "reviewed": true,
+    "source": "Finding Rhythm",
+    "sourceHash": "014c955180b14099bf4c47625ff5267e002782cce33447214ffebad52c1163f0",
+    "text": "リズムをつかむ"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "reviewed": true,
+    "source": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "8a22252ae363c55882f666f391319a0d67537a81d71c4ba0a434d0dcee8aa4a1",
+    "text": "ダメージを受けると<keyword0>回避</keyword0>率が{{value0}}%増加し、<keyword1>回避</keyword1>時にリセットされる"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "reviewed": true,
+    "source": "Lightfoot",
+    "sourceHash": "eb00956eba9dd61c28d244218937f4da158abab6c6e8bf44e4f92aa1b7e9c77e",
+    "text": "軽い足取り"
+  },
+  "content.talent.dodge.lightfoot.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "cdc93ad377d4713ca618bf5f491895a5f15ed831defe5eb07acf14ef38186111",
+    "text": "<keyword0>回避</keyword0>率が{{value0}}%増加する"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "reviewed": true,
+    "source": "Open Flank",
+    "sourceHash": "cda3255313c14643cfb6bf4c9f836e9984c11fe60890a712ceec4c99495abbf6",
+    "text": "側面の隙"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "sourceHash": "2ccb328296e97aa2d98e656d0ef95c6f9a381a51c8feefe529f1b38057c6f2d4",
+    "text": "<keyword0>回避</keyword0>時に次の攻撃が追加で{{value0}}の<keyword1>物理</keyword1>ダメージを与える"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "reviewed": true,
+    "source": "Perfect Timing",
+    "sourceHash": "d816c59559a295e85c95ecf3fe08dbdc4c56ac84d4378efd62ee1f717394993d",
+    "text": "絶妙なタイミング"
+  },
+  "content.talent.dodge.perfect-timing.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "b094ebd033f8e803d3496241cc69cb257c0100c35e4a72ea1007a8f8dfd02330",
+    "text": "<keyword1>装甲</keyword1>がない状態で<keyword0>回避</keyword0>すると<keyword2>装甲</keyword2>を{{value0}}得る"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "reviewed": true,
+    "source": "Tailwind",
+    "sourceHash": "922846dc661508565efec4a3a3cf41905bf17495a15bcff387396cca603f2268",
+    "text": "追い風"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "sourceHash": "1e6d87db757c6a533f8857cc4c5f218462029be67feabe0f797b414d19ad8b45",
+    "text": "<keyword0>回避</keyword0>時にカードを一枚引く"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "reviewed": true,
+    "source": "Thornstep",
+    "sourceHash": "a6dbe4a6391e418742d94e79aa63cb398c7ff4360782c8c369c135974b93fe46",
+    "text": "棘の歩み"
+  },
+  "content.talent.dodge.thornstep.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "79554c22ee89109eaa6f8c167f88f5258c4a564887ce499c59a2284710021997",
+    "text": "<keyword1>回避</keyword1>時に<keyword0>棘</keyword0>を{{value0}}得る"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "reviewed": true,
+    "source": "Unburdened",
+    "sourceHash": "f7303c4797bf7dd60ffd64a71efc6cba8d08a7fefb909d2347d2afb3cdfce515",
+    "text": "身軽"
+  },
+  "content.talent.freeze.bitter-cold.name": {
+    "reviewed": true,
+    "source": "Bitter Cold",
+    "sourceHash": "a729d9035d9aa488a9973d6220a789c14cf14ce7dee8eeff3f386499d40d5f42",
+    "text": "厳寒"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "reviewed": true,
+    "source": "Brittle Armor",
+    "sourceHash": "68a99f38d654fcc205ae151ba942b0b2d054a763588274c4398bb41d2ccb5e27",
+    "text": "脆い装甲"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "sourceHash": "a82b46b1122f6f8f30fcdc92fe5e92d76ca880955fe4cd32a4904b3a4858ba7e",
+    "text": "敵を<keyword0>凍結</keyword0>させるとその<keyword1>装甲</keyword1>をすべて取り除く"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "reviewed": true,
+    "source": "Brittle Ice",
+    "sourceHash": "239e178a923afe12ca9bae52053d3ba2a441fe58c1fd8e762077b3316781c015",
+    "text": "脆い氷"
+  },
+  "content.talent.freeze.brittle-ice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "sourceHash": "9d0927429d98cb05532c940fdc9465923b26b74bc29e99c5da7d6d5330051be1",
+    "text": "<keyword0>凍結</keyword0>中の敵が受けるダメージが{{value0}}増加する"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "reviewed": true,
+    "source": "Cold Resistance",
+    "sourceHash": "51e176a67523e9f6a729abfd47d81bfd9f209843a666f4cbfcf318a685bb9534",
+    "text": "耐寒性"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "8d236995de3fc6aff2c4af417f71f8f457104386aa2276cc8d44acf983937460",
+    "text": "受ける<keyword0>凍結</keyword0>ダメージが半分になる"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "reviewed": true,
+    "source": "Cryo-preservation",
+    "sourceHash": "7504779f998f676ada564716b439a3a459ff05bedcad6cc953455e190c6ea07e",
+    "text": "冷凍保存"
+  },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "sourceHash": "81d20a3365872db950f0f8b78f39329d5a079ac3bf5b7a2c338a9de5bae2ba14",
+    "text": "<keyword1>凍結</keyword1>した敵の<keyword0>毒</keyword0>は減衰しない"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "reviewed": true,
+    "source": "Glacial Barrier",
+    "sourceHash": "332b29db0bce8fc03ce23e54b540ba6da79f5c9127d75320dbcc0c906b0c5d7b",
+    "text": "氷河の障壁"
+  },
+  "content.talent.freeze.icebound.name": {
+    "reviewed": true,
+    "source": "Icebound",
+    "sourceHash": "ca358f1a1c8e58d55dc91c3fa2a74a4458216314a47ec3b5f9f83bd4b4ba52ef",
+    "text": "氷縛"
+  },
+  "content.talent.freeze.icebound.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "sourceHash": "6a58abed8f9984a36cc9a02c58acbae58653e1f3c2dd2863a5feede0f10586f5",
+    "text": "敵を<keyword0>凍結</keyword0>させるとその<keyword1>ブロック</keyword1>をすべて取り除く"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "reviewed": true,
+    "source": "Thaw Dividend",
+    "sourceHash": "b3bd7017fc888f64f7730f16d85af8d98c4c6388817f8a4cab5988a65779e464",
+    "text": "雪解けの配当"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "reviewed": true,
+    "source": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "sourceHash": "0f85c31fe48384f6d88150589f8958c1c95a0bc455061c8d0052203040836d2f",
+    "text": "敵が<keyword0>凍結</keyword0>から回復するとカードを一枚引く"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "reviewed": true,
+    "source": "Winter's Grasp",
+    "sourceHash": "03dffcb4e1ef972f1d3ba800ea1905232759ce565c12410db266a51cadde96ff",
+    "text": "冬の掌握"
+  },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "979f2bd5748ffede5773b60a2b4f1cf0ac2a3f566bcc6319def7df440dfb528c",
+    "text": "<keyword0>凍結</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "82a7b8a71fb798835282b9247a2dfeef000934c3334afa818a6020bae3f30419",
+    "text": "白紙の状態"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "aaca3644c631abbb799094abd71dd8164c8d917b2522a12b20eed14ea0941201",
+    "text": "戦闘の昂揚"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "3dc9b837cb4c824fab1545ae963661b3d549ba802fb0b5fd73f0f844a2edb180",
+    "text": "戦闘開始時に<keyword0>体力</keyword0>を{{value0}}回復する"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "82c67e21340c3c66b77f460a1df68a59f4dd8b760b9f42b832c92f275d98c739",
+    "text": "必死の守り"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "3739790a6d757415964295aa32ab856e0ff0e6b4c06676f1e96e43f3c3d08705",
+    "text": "各戦闘で初めて<keyword0>体力</keyword0>が半分未満になると<keyword1>ブロック</keyword1>を{{value0}}得る"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "94d88f87cf86f97d41213a0b441e579afa0d52a0564c334acd9978bfc849630f",
+    "text": "最後の息"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "b0f0602a6ffd710d026085af0331c6edb06ad07749a39750aa6dbefc323c713b",
+    "text": "<keyword0>体力</keyword0>が半分未満の間、<keyword1>回避</keyword1>率が{{value0}}%増加する"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "26a2b0606e98250d2fac5633825c2cf4c25f3b661290dd1153421c8d25a885f9",
+    "text": "最後の手段"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "ed5e3f740ff946d776e5ad92bafd856fb607ac675cf6fd711eda0cc21ec35826",
+    "text": "癒やし"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "f40500895d21d6b737d22f3d43aa6306b51c7118e7ba68d2f76ff9a1acfa0241",
+    "text": "溢れ出る力"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "e4cfd8903038b281941865fa0a19644f3e578eb1eeed2980551f0745fdbe039d",
+    "text": "新生"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "cc33d4af6b14af3eadd88ca25914298f3952342bc235f461c6de381cc4f0f641",
+    "text": "生命力"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "8a493e5b0bf3ff51105cb1c7eb76b1dfad11f80e6ec0baec29a94e2ceead8f02",
+    "text": "各戦闘後に<keyword0>体力</keyword0>を{{value0}}回復する"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "c852e8d8538e50244fc7c1e8afc5bad8b973fe6a093628b52548efa8fe138a48",
+    "text": "生への意志"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "0d7ef20d1d6b107a8707efd48ee9ca42bf64834e368e7638e689fb9b06d34cb3",
+    "text": "死の淵の持続時間が{{value0}}ターン延びる"
+  },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "371afb460071303c08b218add08b5f19c8f215dfcab8bdb607cea9dd51aa4c7c",
+    "text": "秘術の霜"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "edab9577ca9c59f27fc071f72c78f226e01a5c70893e54efcbd1d6f422a6fbf9",
+    "text": "<keyword0>凍結</keyword0>ダメージが<keyword1>マナ</keyword1>の{{value0}}%分増加する"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "d4b891569e0315a443bacb83cbdd8c4dab2ec3cffcb3373a263c1d24c80ae71d",
+    "text": "秘術の癒やし"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "c52a1c3f839012764235b325fc560c539d99eff23119f4f1987d55d378150deb",
+    "text": "闇の回復"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "50382ebd5be6b977ffa13279368c580c05880d4a0a0701227de419692cb728ed",
+    "text": "<keyword0>マナ</keyword0>を使い切ってターンを終えると、次のターンに追加で<keyword1>マナ</keyword1>を{{value0}}得る"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "51e473e881bf983f8d79f6d80a70d20403bbe09606c437a66d76c9e0c8e268dc",
+    "text": "地脈との同調"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "a8ec6449898e73d2c368070a1e0f9c8047c8742c2b730b0d5cb8410a7f3b1477",
+    "text": "マナの防壁"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "a5fa12f29a09f03adfc126c5e2de712a0293cdefb3d459905813b5cf5b9556d9",
+    "text": "マナの甲羅"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "1fa2f0bbeaf0782926312b95959f8377fed9a6a8cab8a6ce0e5077e402585179",
+    "text": "マナ焼却"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "3b6931fa1cca04946af31ae504cba9326d5fb6d675d1dbe863a78873af75e73d",
+    "text": "<keyword0>炎上</keyword0>ダメージが<keyword1>マナ</keyword1>の{{value0}}%分増加する"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "31dfdd9e74052f8a2c1f5539f9a7dfa382744d032ccc0db2ebc370d4adbee385",
+    "text": "源泉"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1108,6 +1738,36 @@
     "source": "Encounters",
     "sourceHash": "6efb73c1a958c170a294361e9450987de86df741758871408be5e802a50f1a0c",
     "text": "遭遇"
+  },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "2490b28d32a76aa4c843b71baa204b9d8106a96cead5926c04e368b3c6bc86ff",
+    "text": "{{name}}は{{amount}}ダメージをブロックした。"
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "ca6f45a132ff870f05a779dee924a90e46b3dc4c7418bddc89cf864548962908",
+    "text": "{{name}}は{{type}}ダメージを{{amount}}受けた（クリティカル）。"
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "8873757c391ed0fea6ff677fa6dcb46f44b9a2031514f7fd489021e143ce37f9",
+    "text": "{{name}}は{{type}}ダメージを{{amount}}受けた。"
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "3a59b72e8d9d3469b223e1eb7563cbe1e70584f8cf8043fb9afa692ce2470390",
+    "text": "{{name}}はブロックを{{amount}}得た。"
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "762f4ff8e996ed0a7c533de2d8cc77e1a6790c638e36cc0e240458396edc3eba",
+    "text": "{{name}}は体力を{{amount}}回復した。"
   },
   "menu.boons": {
     "reviewed": true,

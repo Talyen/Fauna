@@ -965,6 +965,636 @@
     "sourceHash": "1265905b37e45bf20953f58a181518a05e54ec8532d6aa19f68481fe2e3fd783",
     "text": "Эффект «<keyword0>Броня</keyword0>» снижает получаемый урон типа «<keyword1>Кровотечение</keyword1>»"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "d70e3375129942ba37984b2159056963fae8939d5984f87e1f8653f4259be898",
+    "text": "Истекает кровью"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "bd3dc5cd7d84acd44d8d15695008313e0d31db01220e710a99e78f21d50881df",
+    "text": "Наносите на {{value0}}% больше урона от <keyword0>кровотечения</keyword0>, пока у вас меньше половины <keyword1>здоровья</keyword1>"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "d2d1c731166b33fc53fc5d6d3588a4f1583b1c272f23f113d0a957c281f86aaa",
+    "text": "Прилив крови"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "a6a88a82f1191316cd14acfe3f88e3cc368acfe83292d7a80602bf156b9bf3e7",
+    "text": "Нанесение урона типа «<keyword0>Кровотечение</keyword0>» с шансом {{value0}}% позволяет взять карту"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "c2b02cae1cb60286a31009eff9b41e4f56e40deafc465896ebee6d0ae3d0227f",
+    "text": "Первая кровь"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "5a1b26872c3ac3194f95ab2857fff47d43ebbf35587111ac6f3c7be7bc1ffbbe",
+    "text": "Свежевание"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "3dfcd1865e043d622f19ffcf5f3e4d0d40707511e5600e238c3026271c5c4bc1",
+    "text": "Попадания типа «<keyword0>Кровотечение</keyword0>» с шансом {{value0}}% уменьшают запас <keyword1>брони</keyword1> врага вдвое"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "94249aaea3d378bd8c9b2c5ffa5a1497d8384c0ac705ec4e3013da8edf436eaf",
+    "text": "Смертельная рана"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "a20f7e37471568163ccad2ee2dbe05d44c416b1cf9c164354c25d582b75b6725",
+    "text": "Прощальный порез"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "72e7e13099faad492b29d6c1a1f0d5d8ceafec40654150e7da0e45e56f5fd99b",
+    "text": "После того как вы <keyword0>уклоняетесь</keyword0>, ваше следующее попадание типа «<keyword1>Физический</keyword1>» дополнительно наносит половину своего урона как урона от <keyword2>кровотечения</keyword2>"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "f44aa67d3006648d02f3206486e589932dfd74d72a7d42ae986555648200f97c",
+    "text": "Кровь"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "d0613ef0f0a1f1dc167d29c22c24c729e5dd088ffb6c23e07c5306d17ce1fa9e",
+    "text": "Попадания типа «<keyword0>Кровотечение</keyword0>» с шансом {{value0}}% вызывают <keyword1>вампиризм</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "99eabd75268524aa922257d2268913b620768538fe14d24c2c6c80cb658c6268",
+    "text": "Септический шок"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "450641b3b1474afbf5b7b11d0c9e4358738d74e7212f51d7c3c9f75cb46a5c53",
+    "text": "Враги под эффектом «<keyword0>Кровотечение</keyword0>» получают на {{value0}}% больше урона от <keyword1>яда</keyword1>"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "43a89e7c5864d7f28e66b13f32f9e5837cc968a33f4f7cdd8c5bce517a7f1962",
+    "text": "Заражённая рана"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "259304d9fbcdf8b43922f15650791b694620750e7de9c91e4e84204b0c579b14",
+    "text": "Попадания типа «<keyword0>Кровотечение</keyword0>» с шансом {{value0}}% наносят половину своего урона как урона от <keyword1>яда</keyword1>"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "126749f824aca294667af3e9ec7da6d62b456fd432186f1b6c276528ad0817e7",
+    "text": "Уход за ранами"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "794e7ece43910606a1ad35b9dac83d74605a9ed94e9b7d5ac09bcf216f1cf535",
+    "text": "Получайте вдвое меньше урона от <keyword0>кровотечения</keyword0>"
+  },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "4c28c448f960059b32a7234ae7a12a46316cc52acc0d0eb0dc69684f51be6470",
+    "text": "Кровавый оберег"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "3f7478a7ee63d27f5dd19a3ddd4a73ef7830f10a888e6b4fbd74641db1962331",
+    "text": "Получайте вдвое меньше урона от <keyword0>кровотечения</keyword0>, пока у вас есть <keyword1>Блок</keyword1>"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "02f4f2d7dd59e15d5e58332df5b5e1c5aeb32df8931013774bb6a98df9be0379",
+    "text": "Работа ног"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "8f80d3a8d255fce68b7b41de365aa3910a4c5ffa7b52769f3b794fb9e867a72a",
+    "text": "Получите {{value0}} ед. <keyword0>блока</keyword0>, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "e6e19a7f7ffa4136185f848fe2509eb2258656a66a0ac1268752fe6e58bad241",
+    "text": "Заземление"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "14f9af8c0f4e6640519f36e9d90c6a83bf6fc9e76c2c29c00eabc7ad977fbdc0",
+    "text": "Ударная защита"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "805dc29569ca7348efb73ff41c9124751070fbca1679d5006ff013b5683c3182",
+    "text": "Урон типа «<keyword0>Оглушение</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>блока</keyword1>"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "04634773854f747c8639e6cd849882a6d9ac15e2044c9240ca1855603dd4d134",
+    "text": "Укрепление"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "8d01fe33f900bfdee5ef40408cbf7f7a5e0cb5d20c5ba358fcb1bb518fd6fb3f",
+    "text": "Эффект «<keyword0>Блок</keyword0>» поглощает на {{value0}}% больше <keyword1>физического</keyword1> урона"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "bbf1bc1ffcd47bb394653be415f8e92d6dc1e2b6c81f3c19ac40a9409c6e68e2",
+    "text": "Священный щит"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "5f51c8d9bcdf62b67166b0b3bc6ac8cc651e2c3cf35b873cf277d9b952a9cddd",
+    "text": "Второе дыхание"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "dd58a0d2656062562df883648eaf196a10ab288bcd3a033288ff575bb2363aa9",
+    "text": "Опалённый солнцем щит"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "bb1eaef1a6e316570877dc782a55caa7da5a37a245ed88dcac8147f6f3b7b9d8",
+    "text": "Ядовитый оберег"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "ddb5e36b5491b748352400efb0c90e5412a432aaf533c4b13e8d4298edee6ee7",
+    "text": "Получайте вдвое меньше урона от <keyword0>яда</keyword0>, пока у вас есть <keyword1>Блок</keyword1>"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "a0a5fe798799bbcf09cdd1ef29cd436f21559495eac9e081e5157abba1605169",
+    "text": "Утяжелённая защита"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "4c6837763f915c5651a24ef018080bf1975627642beec98ea20945448e7b58c4",
+    "text": "Урон типа «<keyword0>Физический</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>блока</keyword1>"
+  },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "e7192a3e6e02cb1501ca7b980a8f9c1b69a37f90fc20065b6c5ae854a6ebf982",
+    "text": "Сопротивление огню"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "0976e4a270bf9bc3b53b3c467e8fab5bce43c1995798388b5ed5d67fc2c4cdf2",
+    "text": "Получайте вдвое меньше урона от <keyword0>горения</keyword0>"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "0bbe844f5a72616e7feca8b69a5058d0ddf9aca136901db2608b1c1230e5edbc",
+    "text": "Вспышка огня"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "a88ac8907292eb7e4f0b71b5ea4e288bdb0b13a903fac69d8c594a8cd607cbbf",
+    "text": "Карты типа «<keyword0>Горение</keyword0>» с шансом {{value0}}% разыгрываются дважды"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "7471df9bf11f647f6cd907eb77aad524c523854e5b58dcbbdf0a39b576eddd8d",
+    "text": "Точка вспышки"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "7ae3826cfd98dee272bac1cc9c21d47a6885af1847864d261cc752f08ec34561",
+    "text": "Тепловое истощение"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "b8741fcd07d449f9f43ef653bd714bb80d840b1ac058e168d73eb576b6a5b3f4",
+    "text": "Попадания типа «<keyword0>Горение</keyword0>» с шансом {{value0}}% также наносят <keyword1>оглушающего</keyword1> урона"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "1d43a4b0fe682ca5459220354a7a65bc390b012837890ae4b1bcf0ad89177b9f",
+    "text": "Точка плавления"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "18959881adaff8f62760bc2a50c6b2e70b2b0f4907b1d971eec3ab94b23fd9d2",
+    "text": "Дымовая завеса"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "aeaa3f51f8f8c1a39ef05821ef3ff118230e65ddf72aaa83cdc95970634ac927",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0> от атаки врага под эффектом «<keyword1>Горение</keyword1>», нанесите {{value0}} ед. урона от <keyword2>горения</keyword2>"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "49f237450f326859e38e67c433949ad15dc61c7eb6ad7d7d1870e48d6b3bd33a",
+    "text": "Тление"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "b04377d52f4ffa20841ca850e99f7ceeab9882e639e444405a37f99592da74d8",
+    "text": "Эффект «<keyword0>Горение</keyword0>» с шансом {{value0}}% не ослабевает"
+  },
+  "content.talent.dodge.catch-breath.name": {
+    "reviewed": true,
+    "source": "Catch Breath",
+    "sourceHash": "4a953a331c9444adc793ec4c870948d6422543c49b1428ab938c42baf6b9281d",
+    "text": "Перевести дух"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "e25d0fe00606f4c9e024be9059a6e1b0d325f2c383a7cf8c8534cd93337d4df7",
+    "text": "Восстановите {{value0}} ед. <keyword0>здоровья</keyword0>, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "reviewed": true,
+    "source": "Clean Getaway",
+    "sourceHash": "348c45983a89261d8794c6694cd974c354c334731c628b5a4716db6749971d01",
+    "text": "Чистый побег"
+  },
+  "content.talent.dodge.clean-getaway.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "sourceHash": "1e4ab650e1662534a216b40ada0d4589ea022dcb741183b47d49174f56a977ca",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, снимите с себя по {{value0}} ед. <keyword1>горения</keyword1>, <keyword2>яда</keyword2> и <keyword3>кровотечения</keyword3>"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "reviewed": true,
+    "source": "Finding Rhythm",
+    "sourceHash": "f5b5b3e29290293567e49c2dc32cf16f8af3fce2894972f82015c293fd75da34",
+    "text": "Найти ритм"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "reviewed": true,
+    "source": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "22f06d78305f86608a8fef84e7af05d6ef9b5b146fd6f73766db1c3d279a90f0",
+    "text": "Получение урона увеличивает ваш шанс эффекта «<keyword0>Уклонение</keyword0>» на {{value0}}%; сбрасывается, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "reviewed": true,
+    "source": "Lightfoot",
+    "sourceHash": "25ca618c6a438005c2cd1f27cf477f427de4e1245db0a9068f73cf00ce11c3a7",
+    "text": "Лёгкий шаг"
+  },
+  "content.talent.dodge.lightfoot.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "b5ff86ef86a442cdc5696eafeafac65260a061c8397a547d2caed7c7e9052518",
+    "text": "Получите {{value0}}% к шансу эффекта «<keyword0>Уклонение</keyword0>»"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "reviewed": true,
+    "source": "Open Flank",
+    "sourceHash": "98b6cb1642cbe110c3da429464b5de85e2c3b2287425a95265f5678cc68128cd",
+    "text": "Открытый фланг"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "sourceHash": "a9b7b6c21d0ce741e9361d43c2c240b821ef0202f1eeae29a5d07b688fd4efdd",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, ваша следующая атака дополнительно наносит {{value0}} ед. <keyword1>физического</keyword1> урона"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "reviewed": true,
+    "source": "Perfect Timing",
+    "sourceHash": "90b4c3cf15867e00731add90e2ae5996c212ae75cb6fdb2fbf0c830cb2360ec5",
+    "text": "Идеальный момент"
+  },
+  "content.talent.dodge.perfect-timing.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "0000f83a25d012104bd159ea3257201e8c07b39380352d5aa688b3d6542e8754",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0> без <keyword1>брони</keyword1>, получите {{value0}} ед. <keyword2>брони</keyword2>"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "reviewed": true,
+    "source": "Tailwind",
+    "sourceHash": "d51eeb92cd661921b8b6c3425e792a0441b97c1d56dc1566a0235c44541a2386",
+    "text": "Попутный ветер"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "sourceHash": "5282010eefc5ab90de77e110221237b539237569dcc58bb589b7ec01b6d713cf",
+    "text": "Когда вы <keyword0>уклоняетесь</keyword0>, возьмите карту"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "reviewed": true,
+    "source": "Thornstep",
+    "sourceHash": "b1f3a45ab7d2f1e9ec77be666e5a516a9544d09d09ce86042e079633f05fe539",
+    "text": "Шаг по шипам"
+  },
+  "content.talent.dodge.thornstep.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "aa6f9dbff9a85260231acde2806c75dbd990f6d0e2612abe0fd25925b6382bda",
+    "text": "Получите {{value0}} ед. <keyword0>шипов</keyword0>, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "reviewed": true,
+    "source": "Unburdened",
+    "sourceHash": "90d588dacab566be20760f59b66f7a1a821d1dc9b92ef6f402da4be18fb3b964",
+    "text": "Без бремени"
+  },
+  "content.talent.freeze.bitter-cold.name": {
+    "reviewed": true,
+    "source": "Bitter Cold",
+    "sourceHash": "dd94fa6f99b6e4d06b377c561be5fe4eb1592e6138ce8396839138bf416b1980",
+    "text": "Лютый холод"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "reviewed": true,
+    "source": "Brittle Armor",
+    "sourceHash": "08b6c6512cb6bae95646ff42462e2b243499dc0719841a48d02ee5564f1601e1",
+    "text": "Хрупкость: Броня"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "sourceHash": "15871baffdb0c375a0444ce7e07f774c55092b3de9493a8908f247d265dc1861",
+    "text": "Когда вы <keyword0>замораживаете</keyword0> врага, снимите весь его запас <keyword1>брони</keyword1>"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "reviewed": true,
+    "source": "Brittle Ice",
+    "sourceHash": "3f7b55a8b11972e8b6916c04052676877dd27922d4a62227b334e4fa71162f55",
+    "text": "Хрупкий лёд"
+  },
+  "content.talent.freeze.brittle-ice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "sourceHash": "a2d23fbd8e2d43a02be52218f28dbd41c631c1bcbe576bf2c4f5c15e2b5aa383",
+    "text": "<keyword0>Замороженные</keyword0> враги получают на {{value0}} больше урона"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "reviewed": true,
+    "source": "Cold Resistance",
+    "sourceHash": "168f81ebd536816661f1ada01402fb4bb3657c8c8a00c5fac87f1c1460de4253",
+    "text": "Сопротивление холоду"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "e6468507d4c2390c65f4c48cdea02b9712cbc9faa489f45adb335b4c6b01fd16",
+    "text": "Получайте вдвое меньше урона от <keyword0>заморозки</keyword0>"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "reviewed": true,
+    "source": "Cryo-preservation",
+    "sourceHash": "3d54eb325c7bc0e0153dd46579c5fb6f1f466611d8953741205e9ba07609e866",
+    "text": "Криоконсервация"
+  },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "sourceHash": "b311c37c743e301d2f6ef08d7e968162c430c7bbfda34bf2f09e783479ce3995",
+    "text": "<keyword0>Яд</keyword0> не ослабевает на <keyword1>замороженных</keyword1> врагах"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "reviewed": true,
+    "source": "Glacial Barrier",
+    "sourceHash": "b47e4ca347ed8b5d47919a180d78d20146068f7b438cc9667dfd01e524d48173",
+    "text": "Ледниковый барьер"
+  },
+  "content.talent.freeze.icebound.name": {
+    "reviewed": true,
+    "source": "Icebound",
+    "sourceHash": "cc952bbc6ac5d8bd0b25b55a37ea6894569039bfa9ebda68307838be1ce91d04",
+    "text": "Ледяные узы"
+  },
+  "content.talent.freeze.icebound.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "sourceHash": "2d10411358139dfc9fd4aae84efa4c77578851e8fcf50dc0eb3172e4be510a08",
+    "text": "Когда вы <keyword0>замораживаете</keyword0> врага, снимите весь его запас <keyword1>блока</keyword1>"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "reviewed": true,
+    "source": "Thaw Dividend",
+    "sourceHash": "065cc3d23ab7457a4a9651c3c7916bd30c19f3038dedc47867e2988cd37dd9d8",
+    "text": "Дивиденды оттепели"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "reviewed": true,
+    "source": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "sourceHash": "2a873e80a581b60e8cc77dd48c36eb310f5381b62a87d983b08a1e2e9d541f2e",
+    "text": "Когда враг выходит из эффекта «<keyword0>Заморозка</keyword0>», возьмите карту"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "reviewed": true,
+    "source": "Winter's Grasp",
+    "sourceHash": "9ab2adac676174ba808bb382ff1445b5e871754f56dd2179b62ea15563464637",
+    "text": "Хватка зимы"
+  },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "6ca5e75e69aa8f650ae67409b009cbfb1ec7950d27c6c04dcc339d7fcdc58134",
+    "text": "Карты типа «<keyword0>Заморозка</keyword0>» с шансом {{value0}}% разыгрываются дважды"
+  },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "41d28c48381a2273bbae2a3d91d88a0971c22944b0ced670557c95e84d5b0af7",
+    "text": "Чистый лист"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "fa49f975c7968ea0b0d840430d6931a46e80155f6e38b79ab0104c1682b15f4e",
+    "text": "Боевой всплеск"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "8820c02747316345fda4f96503c14a6606afeeac5fb75e9310ae016240f7621b",
+    "text": "Восстановите {{value0}} ед. <keyword0>здоровья</keyword0> в начале боя"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "9a10d49eac992c82d8d5c12d47c3c03250fee9efceed8337b208756f7c5fe00c",
+    "text": "Отчаянная защита"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "80164c300abdeff72aa1e7c2a13a9c76bf691e45e6f0700b21d214b725d918cc",
+    "text": "Когда ваше <keyword0>Здоровье</keyword0> впервые за бой падает ниже половины, получите {{value0}} ед. <keyword1>блока</keyword1>"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "fc8190ac8da1041c30f8c596c6228d380fc298e1d6f3e792d174925a9ac47ee8",
+    "text": "Последний вздох"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "202e00f253a1d1f02c23e49709ff930783f1054aa59aa55105b17072f69e4678",
+    "text": "Пока у вас меньше половины <keyword0>здоровья</keyword0>, получите {{value0}}% к шансу эффекта «<keyword1>Уклонение</keyword1>»"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "fa326469713b03625b27373760704a583aa690329039b51660418ca95d7c8688",
+    "text": "Последнее средство"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "8ba8b96fc326bea4dcdeb40673cd5bcab29774d404e4618cb5578948a11a4021",
+    "text": "Исцеление"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "c17f0097d0a0aa611936005bbecd95c58036faa1300cc3c612d149652eed9e84",
+    "text": "Переполнение"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "acf1b8c30f93dfac8e646e196bf6f4cf696e490f2dc37bfd58f3b067063f54b0",
+    "text": "Обновление"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "4245ab0d4ab0c065237c11d6a9804f86e1de153be1baabd76dcd28de575b1dca",
+    "text": "Живучесть"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "aeff6f6148318b28dd6a9d8c6d62e5c45279b58be71d5ce2785110d9cdcee08e",
+    "text": "Восстановите {{value0}} ед. <keyword0>здоровья</keyword0> после каждого боя"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "76efc77ce083599ae7efeefd2003245ca313bd60a48b02aeec3a96eac8d9027f",
+    "text": "Воля к жизни"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "a48a087d2bc63705ffe21054f663463c608bab9f5ea9ef62edf33ff6725d631d",
+    "text": "На пороге смерти длится дольше; дополнительных ходов: {{value0}}"
+  },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "3f445d7c061baa6d7fdfd089a0a9187c7a283a20067c9eaf8c8d22501b45ae27",
+    "text": "Чародейский мороз"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "ec82745224613da6725936510cae23b0bde4c6f30f0981307b0a6b8484c71e16",
+    "text": "Урон типа «<keyword0>Заморозка</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>маны</keyword1>"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "9e8e0948d97c2e790938126cb1587128d34defcd2413e20cb8af26c4d0a707f8",
+    "text": "Чародейское восстановление"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "a847792db4e21fca813452dbe11964ce6aa8e0563f8788c0fde2dcaefd600c0d",
+    "text": "Тёмное восстановление"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "00588bd7e6c288f95f33c962313ea2dc1a4f0b6df3900201e3b355635e59bf77",
+    "text": "Завершите ход без <keyword0>маны</keyword0>, чтобы получить дополнительно {{value0}} ед. <keyword1>маны</keyword1> на следующий ход"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "9b490aab7ca1e7c44a3f5acdb9e33e7add64a977ddbe4532cb579fefc15b0be0",
+    "text": "Настройка на лей-линии"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "777f7b019733678f1a0d64750f9024b1531f218a4ed0a93e7d260d31594d9d59",
+    "text": "Бастион: Мана"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "577d68f06e0bec3788d94209f462788a7120e828eea01def9fd2e94b68e9fa59",
+    "text": "Панцирь: Мана"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "1cda35d463dee6b88a648b55476f5dbfa3b97da369531085c99e12764ead2c0f",
+    "text": "Сжигание маны"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "614356963c80ba5c385028be80d325246d793d9ea5cc030d38c21bdaf2358949",
+    "text": "Урон типа «<keyword0>Горение</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>маны</keyword1>"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "25d77f7fd816539896c9a46118d0e8ecc24910e68dae27112e5448b1d52e0efa",
+    "text": "Родник"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1108,6 +1738,36 @@
     "source": "Encounters",
     "sourceHash": "459b7fb38c5a7aede5fa3d62573dc1f6f95f2f38ff54785d80b5eff8928f104e",
     "text": "Встречи"
+  },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "787e772c403f46f801cb007805e9be679f03f83b196d489f22aff45ccec53026",
+    "text": "{{name}} блокирует урон: {{amount}}."
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "5010aa4b7e5420e3ce535063ac28cbc6cb6fff020c55cb2d13ab51b631dfeccb",
+    "text": "{{name}} получает {{amount}} ед. урона ({{type}}, критический удар)."
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "747bb82af0b37241507089fdd86d545ec5a7ee4cd0314a1d0ac46fcee9b340db",
+    "text": "{{name}} получает {{amount}} ед. урона ({{type}})."
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "00991c09cd00b146e8dd4781a045101991e80266997717e46dd99d452d294229",
+    "text": "{{name}} получает блок: {{amount}}."
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "52026a959f0c750f99ef440cae18d653b76c82d5733d396fb0ed60db733cd47e",
+    "text": "{{name}} восстанавливает здоровье: {{amount}}."
   },
   "menu.boons": {
     "reviewed": true,

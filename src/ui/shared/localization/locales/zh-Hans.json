@@ -965,6 +965,636 @@
     "sourceHash": "bcf3be6e82b79e9386834f7fedf40950bdf5f883daaa3a41d03402d3bf7b221b",
     "text": "<keyword0>护甲</keyword0>减少受到的<keyword1>流血</keyword1>伤害"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "68757afec133c71f9262a4946057a5dbf4d156f14ba0ac51db8020fdd57ad3d0",
+    "text": "流血不止"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "82364918638263c16b5f30dca150785b773aa10851e35b28b98f0b0a94759c54",
+    "text": "你的<keyword1>生命</keyword1>低于一半时，<keyword0>流血</keyword0>伤害增加{{value0}}%"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "1fa22198057fc1a757487de1670c0b50f28405340f9a525b907451c7fcc5ab72",
+    "text": "热血奔涌"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "1bb09f7d8dc2e3f09a7901b9dbf63c585b289aab81dd44eebf00b3d3283b5035",
+    "text": "造成<keyword0>流血</keyword0>伤害时有{{value0}}%几率抽一张牌"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "76afe680821057daba7aa562c372ce1c9fc66cb5511780df86ac746cefa02642",
+    "text": "初血"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "759c28d57481941a27159f4e903312d2041acfa259c15d8857340b924b69f8ce",
+    "text": "剥皮"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "6e7de2241e6e7e3808f88c599d71ed4b56b00ff59e608e35039fdf51772ddcd6",
+    "text": "<keyword0>流血</keyword0>命中有{{value0}}%几率将敌人的<keyword1>护甲</keyword1>减半"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "967e1657c64fece14debb87f1c2e1c5b8acf45931ea33754b7ce1deb10893f32",
+    "text": "致命伤"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "c65f6aad098ae9a04e24a61bb90bd6d1a803f997a0ec153da060e4d222239a73",
+    "text": "离别一斩"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "49f21e1fc60e39c7f476ad054408c857aa3685866acc8324feed4fd713aade31",
+    "text": "你<keyword0>闪避</keyword0>后，下一次<keyword1>物理</keyword1>命中额外造成其伤害一半的<keyword2>流血</keyword2>伤害"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "1b9e9155a5aad890d3c010a114cf681be958e8a2d62a0347011d17fb008cf427",
+    "text": "鲜血"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "feb4b89af431829369311816367330aef7e8cfc6ea637189ac91aab27a617390",
+    "text": "<keyword0>流血</keyword0>命中有{{value0}}%几率触发<keyword1>汲取</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "be59091cd492b2572b790d8a02b258227bfa2052da0a4190fd974a7198d542be",
+    "text": "败血休克"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "7e141788ce78146a54c88e01343876c1dec46a37d957a2fa6d719901246aca78",
+    "text": "处于<keyword0>流血</keyword0>状态的敌人受到的<keyword1>中毒</keyword1>伤害增加{{value0}}%"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "18f592d5ec525828e620a03dba4ed678604db24391ac06289a5afa88ba0f7a24",
+    "text": "污浊伤口"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "f817b52151d0ff043565f71ada19e856e4211a9321262e5200e6103542b1956e",
+    "text": "<keyword0>流血</keyword0>命中有{{value0}}%几率造成其伤害一半的<keyword1>中毒</keyword1>伤害"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "b0aa8fcebc6874127babe83518789bd8b14f36cc2f1f5516656e1aa45531f266",
+    "text": "伤口护理"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "98a5c4e6b68253f8b3daa0ba3d02d53c9b6a1e9eebd6e85942be19c99f8af523",
+    "text": "受到的<keyword0>流血</keyword0>伤害减半"
+  },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "70c2ec6d2e69d21a7ae0c6f050a062a888158b5c54c97c8c2d0da88fca719561",
+    "text": "鲜血结界"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "3fbdb5d254adde245f19616b2703aadd8bf29a0131197d450d083d6bec59ca41",
+    "text": "拥有<keyword1>格挡</keyword1>时，受到的<keyword0>流血</keyword0>伤害减半"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "e4a48293cc05263715d521c862f368bdf75dd08d2679bfc8406a8b7cfc136013",
+    "text": "步法"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f3c3f6e1a3d4db447e6650a4e66682c1151523a07d203d8fb7b17b208cd22ea0",
+    "text": "你<keyword1>闪避</keyword1>时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "8012dbcb79efc8ba082f0a94dc462ca6f45f550748df89cc2c7c764afe3490a9",
+    "text": "接地"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "1f27e077a21d523220d2b6d3d073547c8d40f5d0c382be793fd1dcaeb0f4b125",
+    "text": "冲击守卫"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "964d89c5f8f6c0e53c91887423df0661345462e87bf9b680d0777b19d09664b7",
+    "text": "<keyword0>眩晕</keyword0>伤害增加，数值为你的<keyword1>格挡</keyword1>的{{value0}}%"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "91fc238df24da7b1ed51e11b2ec596c02135d3a52ef6b049aa0894828998a8eb",
+    "text": "强化"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "e7576d374c4d9d8e7606293ccc29047cae2752c13998157df5cebd6d7b10f5b3",
+    "text": "<keyword0>格挡</keyword0>吸收的<keyword1>物理</keyword1>伤害增加{{value0}}%"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "f7895ddd137c50b2950e880df01bebaff468f50fd138d7de806041082b2002e3",
+    "text": "神圣之盾"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "b4ac9131d1d2d0ccd12a1207f849344afee2495f3e5f5193e72b920ae20a4655",
+    "text": "重振旗鼓"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "4708c737997688feab96f582d766153493f83a1131b344bcd28aeb2d4c192f22",
+    "text": "日灼之盾"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "7dbd50e0a1c07ebeb8afcc4508bb879553d62655f6d339061fb9605d41b558b7",
+    "text": "毒液结界"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "b2b128a041f46b1e6628b44e033df68ac4e84ce811da25acaa3df4cfaa0d5eec",
+    "text": "拥有<keyword1>格挡</keyword1>时，受到的<keyword0>中毒</keyword0>伤害减半"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "691988a2ef7d5df01f3a5a05f29d954a499e4d4d0a32f3419231ffd76d965a8d",
+    "text": "重型守卫"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "6d7c560a046fbf6eab1d7899f4e30843ce8b24632d9fcaac9ddd52664da02263",
+    "text": "<keyword0>物理</keyword0>伤害增加，数值为你的<keyword1>格挡</keyword1>的{{value0}}%"
+  },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "ded66fd4ef5eb5caff67a18c6516893aa60f52cda09b7dc0be76789f9d6fb5f0",
+    "text": "火焰抗性"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "37e59834f5e08126b36d1a29d779e3f4b5743114705caed7e00be7ef98493ed9",
+    "text": "受到的<keyword0>灼烧</keyword0>伤害减半"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "bc86c9ef05a114cc400a376fbae766fc641e3d3525c2b39c480c10ed2aba6e6b",
+    "text": "烈火闪燃"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "09811f8a239a9cef5532364ee0daaa5fbdc751860328ec949b87936e2a2f8327",
+    "text": "<keyword0>灼烧</keyword0>卡牌有{{value0}}%几率发动两次"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "d39d827dee63d5cd3b6f54273e864695e5d13c47ce812e88792b4ff6ef4fb625",
+    "text": "闪燃点"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "c2f8c6b6dc8449eb2fda0e87abd08e25bf550b02f489a025d555c8c1d836ffa7",
+    "text": "热衰竭"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "7379364902f54384ca174e93af69f54c8a641612af2baa1ac7af7683e4446efd",
+    "text": "<keyword0>灼烧</keyword0>命中有{{value0}}%几率同时造成<keyword1>眩晕</keyword1>伤害"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "79d24f75edf0a8eccf8a8b5753f97e670cce7b01ecdf051f32ab1685d0a85113",
+    "text": "熔点"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "e6c380513b77aed2f7b032f2222a1795b40f79370e3f7360149ed92467b4327a",
+    "text": "烟幕"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "05b385a011a972afe142fccba4f99d01b246eb8d8287720cb7f169250232e45e",
+    "text": "你<keyword0>闪避</keyword0>处于<keyword1>灼烧</keyword1>状态的敌人的攻击时，造成{{value0}}点<keyword2>灼烧</keyword2>伤害"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "1ea79fadbf300aaa8dede12947b99728105366d0e128e99a6e5ccdc1e7196ecb",
+    "text": "阴燃"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "ffaf870fb4ddf5729b2d45ce7ab8a1b6dd73cddb47337c26acd19f8ed5b23611",
+    "text": "<keyword0>灼烧</keyword0>有{{value0}}%几率不衰减"
+  },
+  "content.talent.dodge.catch-breath.name": {
+    "reviewed": true,
+    "source": "Catch Breath",
+    "sourceHash": "9f9a02b43496e1204d4aec3f898c10b2ade8f488c2f21ff09e22c333911991ac",
+    "text": "喘口气"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "503cf91b9951359e75f2690730e6e2b393db20566f4ba4b964214894c18a27ad",
+    "text": "你<keyword1>闪避</keyword1>时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "reviewed": true,
+    "source": "Clean Getaway",
+    "sourceHash": "0c6d746f45b52338dd63ca0402941e16715cb8afb7ad166096bf5f2a2295c7b7",
+    "text": "全身而退"
+  },
+  "content.talent.dodge.clean-getaway.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "sourceHash": "822ef2e19759756cc8d8f250ca4399d829f6d71a8aa55e8f7333042ae42fdd63",
+    "text": "你<keyword0>闪避</keyword0>时，移除自身各{{value0}}层<keyword1>灼烧</keyword1>、<keyword2>中毒</keyword2>和<keyword3>流血</keyword3>"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "reviewed": true,
+    "source": "Finding Rhythm",
+    "sourceHash": "3b80149c23d65633e2325a8de0e4f8cb5b86384dc8781fd78486059eff5b2354",
+    "text": "找到节奏"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "reviewed": true,
+    "source": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "598d71a078d0cce7ae2d73128897ea909c51970633d7010a67c83fa71a632752",
+    "text": "受到伤害时，你的<keyword0>闪避</keyword0>几率增加{{value0}}%，你<keyword1>闪避</keyword1>时重置"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "reviewed": true,
+    "source": "Lightfoot",
+    "sourceHash": "48c72508fb6f78f38a53455baa625d8eb50ee9a8ef9160b68f0f0be629af4e31",
+    "text": "轻步"
+  },
+  "content.talent.dodge.lightfoot.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "14f4a9d7f581c8f1b14cb3d8f92140b354226a576b49b50cee6a1dcdec62cb01",
+    "text": "<keyword0>闪避</keyword0>几率增加{{value0}}%"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "reviewed": true,
+    "source": "Open Flank",
+    "sourceHash": "f605a220084edca9cd16964aceaae8a4c5b5defd71d0b93dd739174e9ac63570",
+    "text": "侧翼破绽"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "sourceHash": "8973a4e117a69ec774c6fa274a07a8aba163ea3e3edfb368f0933a4a50506ef8",
+    "text": "你<keyword0>闪避</keyword0>时，下一次攻击额外造成{{value0}}点<keyword1>物理</keyword1>伤害"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "reviewed": true,
+    "source": "Perfect Timing",
+    "sourceHash": "e4dd2ebafe15f176adfd7d96cd2fd1c027431af9603e6193ba81cec88d727371",
+    "text": "完美时机"
+  },
+  "content.talent.dodge.perfect-timing.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "33646fa880f17375439d120725040040f0111e2c7bf20caec0df61e7467a45c3",
+    "text": "你在没有<keyword1>护甲</keyword1>时<keyword0>闪避</keyword0>，获得{{value0}}点<keyword2>护甲</keyword2>"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "reviewed": true,
+    "source": "Tailwind",
+    "sourceHash": "1c2c956932712108e8266111a0a8373ce5e33cbd53c2cf2e5a7e97005b58bdae",
+    "text": "顺风"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "sourceHash": "0b05c8ec7841289e1b5d471debffb4f200d6fdd07fcacf1a05c3d9345159cf0d",
+    "text": "你<keyword0>闪避</keyword0>时抽一张牌"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "reviewed": true,
+    "source": "Thornstep",
+    "sourceHash": "d6e8baa2602b629217775fbf37cdfeceae1286712d48a266e49a5e838419e86d",
+    "text": "荆棘步"
+  },
+  "content.talent.dodge.thornstep.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "0aa0879327da0b1f77a39999c0d85e394c6beb2736ab16573a11edfc08f84aef",
+    "text": "你<keyword1>闪避</keyword1>时获得{{value0}}点<keyword0>荆棘</keyword0>"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "reviewed": true,
+    "source": "Unburdened",
+    "sourceHash": "82b1c9a300c1e0079080c8410490d740effa23009eaaaf719ab8bf6940b9ce6b",
+    "text": "卸下重担"
+  },
+  "content.talent.freeze.bitter-cold.name": {
+    "reviewed": true,
+    "source": "Bitter Cold",
+    "sourceHash": "b22d84388592adeed4787611e0d2c7c0d3944f9a4eacd3ac02e1c41ac4a75ad9",
+    "text": "刺骨寒冷"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "reviewed": true,
+    "source": "Brittle Armor",
+    "sourceHash": "c999f20cbe3ab1d11e20cbb941e436824131ccdef9326eca627b078bccbed6cd",
+    "text": "脆弱护甲"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "sourceHash": "cc6e1ff59a5d7c218fca5be640c83fe29a7da2270f4ccdeba1ede23c6c499247",
+    "text": "你使敌人<keyword0>冻结</keyword0>时，移除其全部<keyword1>护甲</keyword1>"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "reviewed": true,
+    "source": "Brittle Ice",
+    "sourceHash": "d392b14d972ff8f432c749235c9d09fe7e7059e16207f151e8c040d9cc835931",
+    "text": "脆冰"
+  },
+  "content.talent.freeze.brittle-ice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "sourceHash": "04e81b861385bacc197a180109ac08f1cbad65a7dca06df37633103b2221fa2e",
+    "text": "处于<keyword0>冻结</keyword0>状态的敌人额外受到{{value0}}点伤害"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "reviewed": true,
+    "source": "Cold Resistance",
+    "sourceHash": "52a15bfd278205d5a01fa2c1708c4798722794615d3694fcd730ac837b8464b4",
+    "text": "寒冷抗性"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "9be38b8b719e16d855081b622210930795dd973e9f4169128fbbc02ab4659f70",
+    "text": "受到的<keyword0>冻结</keyword0>伤害减半"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "reviewed": true,
+    "source": "Cryo-preservation",
+    "sourceHash": "3f0e19466586439cc2f94fac0da3d93d4f1aeda0932a140e4ae3b00d1ae8daae",
+    "text": "低温保存"
+  },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "sourceHash": "57b0dc6c8878b0c0b6abe22173e56c298ebc50afcc88b775ecf209c89c43b872",
+    "text": "处于<keyword1>冻结</keyword1>状态的敌人的<keyword0>中毒</keyword0>不会衰减"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "reviewed": true,
+    "source": "Glacial Barrier",
+    "sourceHash": "3013e2ac4d48958cfc5e4850bdfc21228fe6ea20b5d4fc7867381c2220240eed",
+    "text": "冰川屏障"
+  },
+  "content.talent.freeze.icebound.name": {
+    "reviewed": true,
+    "source": "Icebound",
+    "sourceHash": "5fc034189638923c3b772c1b073ea6bd6c28fc65bd8b4a1624712f2c34ff837e",
+    "text": "冰缚"
+  },
+  "content.talent.freeze.icebound.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "sourceHash": "95e0aef2342b918392aeed709b18e5d6375896984ca59dd1e5bc77056ba8d1d5",
+    "text": "你使敌人<keyword0>冻结</keyword0>时，移除其全部<keyword1>格挡</keyword1>"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "reviewed": true,
+    "source": "Thaw Dividend",
+    "sourceHash": "97aef753ba2bc598e640d03f3525e3143268a11fe949d7f64f4783695e27a074",
+    "text": "融冰红利"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "reviewed": true,
+    "source": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "sourceHash": "d9b8118789d6da586107600dcbc9c59673886b0cc5124928a4f697f68784c9fb",
+    "text": "敌人从<keyword0>冻结</keyword0>中恢复时抽一张牌"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "reviewed": true,
+    "source": "Winter's Grasp",
+    "sourceHash": "2449fed9dbc274c89928494119b869305ee916afbac29e10fbe6cb88671291ab",
+    "text": "寒冬之握"
+  },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "eab403051223c69de27419c451f70e1961eb998b9a8d176f947d22de8d551c9d",
+    "text": "<keyword0>冻结</keyword0>卡牌有{{value0}}%几率发动两次"
+  },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "60f8189f3b4101fcea9aa74bd25086ae6ebafda6559ce8a40378124e25fdad74",
+    "text": "焕然一新"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "377051f46af3d1c29277561d59caf7e95d94123a5d74d7bf46dd5e3243d8451a",
+    "text": "战斗激涌"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "4063cd3327a1d15d606fce84956eae8fd9f1cc2695ae05831acb265946a91efe",
+    "text": "战斗开始时恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "c9ebdf0bea399ed1a7683c3cadf281052f0c6fb4c6dc44c511634e18f3995e36",
+    "text": "绝境守卫"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "57d325487e18059994facf8d5d8ed41b3853f6b97f7af2054f632812928e5cfb",
+    "text": "每场战斗你的<keyword0>生命</keyword0>首次低于一半时，获得{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "496c4d68852eee08113cdbe8018dedc185bc4bd305da9776e1913148e2083600",
+    "text": "最后喘息"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "92d9d3da1cf1df1b97fbd1927c31f68569c71d2963ab524eb1b9ef0b69591ade",
+    "text": "你的<keyword0>生命</keyword0>低于一半时，<keyword1>闪避</keyword1>几率增加{{value0}}%"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "0f9837d05b31acf00abf2d35c34becd7d0dfd04b820c34adb3568c66cd86faa6",
+    "text": "最后手段"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "9b2ea918ba4fa4d9f57af8f501a395bbf5c73ca2c5fe0692a235c1d9eff33591",
+    "text": "愈合"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "7ab3662acaab0b29f5656fb31370eabadb688bb0a9e48e484586365d069609eb",
+    "text": "溢出"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "48e834f6518af6ac0327ba23924d73604fd802202ef3d5adbfb3cc639691d7cd",
+    "text": "复苏"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "ae1e286a3a76503d854ed8aed55df17bd8a13f30163ab62c093952ae3d07a74f",
+    "text": "生命力"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "a5a83949577b762d81ffbd1b87b0ee8cab0b6b5625b62ffd9d4bf29797f1f0f2",
+    "text": "每场战斗后恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "297125b3977483b0ae011e016ffb9e8663fc7061b1ed91617b92b4b37402e577",
+    "text": "求生意志"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "40663d04274fb6d5ad9808495326f3617143ffbb9e97b2f6d4df3169d07e2c5c",
+    "text": "濒死状态持续时间延长{{value0}}回合"
+  },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "595a40980d21ce11c96da9c1f01469034f9f1c74d53004392f1d20d5d1727715",
+    "text": "奥术冰霜"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "5ca1755f4bd01f383189e55cf3bc50f4684f87637d1a96adebd29914bbe3ed50",
+    "text": "<keyword0>冻结</keyword0>伤害增加，数值为你的<keyword1>法力</keyword1>的{{value0}}%"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "9d9b90dd3a848e1b8a25adcf78a6c26aeb3f44f0f2bd66f4cf25207edc12bc6f",
+    "text": "奥术修复"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "f86f99c361673717240b34659d3de77dd81307a1cda2debed4ffb5923375d7f0",
+    "text": "黑暗恢复"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "f95449c8e5f279bdc907f79f77aabad2691a679df3ad7982afede52dc7dda086",
+    "text": "结束回合时没有<keyword0>法力</keyword0>，下回合额外获得{{value0}}点<keyword1>法力</keyword1>"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "53fcee63a86537d970688f3700d64b859206e6c3d9714c511fbab2e26ae4bed8",
+    "text": "地脉调谐"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "dbbbfc53e25993030ad2ea9284eae38cc9100f4338d86bcfbf4fa72fb6487fba",
+    "text": "法力壁垒"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "8fd909b3aa8fca13c50caa2189d04bb5f6d4b22d7a5d4604ecee0b3f4997c1d5",
+    "text": "法力外壳"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "2500cfe299c6d3db4dbae7b20c024cdd3573c57df0e2cd5e135c276a029edb8a",
+    "text": "法力燃烧"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "481ad747af702f7082ae0ac1435498552fe93bac52f994a1fc3da604c59981bb",
+    "text": "<keyword0>灼烧</keyword0>伤害增加，数值为你的<keyword1>法力</keyword1>的{{value0}}%"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "1a1334ce4d7d12e04fabe519ebcc7d08ef8500ec7c53b242eab1ba2ccae1ec6e",
+    "text": "源泉"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1108,6 +1738,36 @@
     "source": "Encounters",
     "sourceHash": "7d9124c442e0737fe9de74917cd24e3ecbc1d2c1dabff69020d287c8fbfeae8b",
     "text": "遭遇"
+  },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "22395139cf077464bb1936cc58d30b6a1e0f66a266e94f835c5156c788392ed3",
+    "text": "{{name}}格挡了{{amount}}点伤害。"
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "e4a842230b26bc01b179215784189be9481a78cf1d4864d06337268bc0d2e0ab",
+    "text": "{{name}}受到了{{amount}}点{{type}}伤害（暴击）。"
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "ab57890cb6b9c89b5d6c9277e191217d221f3848c65a8be3a16ffb80181a1234",
+    "text": "{{name}}受到了{{amount}}点{{type}}伤害。"
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "b3e955c2f3af820229ddaa6441b3f4b4ad5c69a38bcbd1b767cf7d41649324af",
+    "text": "{{name}}获得了{{amount}}点格挡。"
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "774a6f04bf39a8f4dc5d5fac1888879906000164d8e6ff6e508b69cce62118ab",
+    "text": "{{name}}恢复了{{amount}}点生命。"
   },
   "menu.boons": {
     "reviewed": true,

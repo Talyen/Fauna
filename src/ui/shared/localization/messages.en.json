@@ -242,6 +242,21 @@
   "journey.encounters": {
     "text": "Encounters"
   },
+  "log.absorb": {
+    "text": "{{name}} blocks {{amount}} damage."
+  },
+  "log.criticalDamage": {
+    "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
+  },
+  "log.damage": {
+    "text": "{{name}} takes {{amount}} {{type}} damage."
+  },
+  "log.gainBlock": {
+    "text": "{{name}} gains {{amount}} Block."
+  },
+  "log.heal": {
+    "text": "{{name}} restores {{amount}} Health."
+  },
   "menu.boons": {
     "text": "Boons"
   },

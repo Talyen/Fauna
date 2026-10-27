@@ -965,6 +965,636 @@
     "sourceHash": "7507725d72098a54010ba8221b854a45667ab398ff93d9db04334bb4f26902df",
     "text": "<keyword0>Armadura</keyword0> reduz o dano de <keyword1>Sangramento</keyword1> recebido"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "2d34ce3141a7b27586059b486465b659524c97558854411e248f71625e954daf",
+    "text": "Sangramento fatal"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "22386bd4a4f2de82aa44f4ed87cacc945c25e804db9c1694b9acede47b0f1b2b",
+    "text": "Cause {{value0}}% mais dano de <keyword0>Sangramento</keyword0> enquanto estiver com menos da metade de <keyword1>Saúde</keyword1>"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "19e86eb96d8d7e54ccead9b31961bcb456cdf5c03dc03b4aeb8322e4f191c27e",
+    "text": "Ímpeto sangrento"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "fa0723297e3a3c5b5374087d4c64aaf23090305b71acecab755437edc004feff",
+    "text": "Causar dano de <keyword0>Sangramento</keyword0> tem {{value0}}% de chance de comprar uma carta"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "274c88e284c160b97a5254fca0276009ee1468fb0ca81b498df87e7317851fb4",
+    "text": "Primeiro sangue"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "7db8d5927dd523f3be48c7f3259c0be5ff12643e6954c2d6595cc3bbe18dab25",
+    "text": "Esfolar"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "38176c1539a52896535cf19e066edfa73d3b591943ca14dc57da94a1b7c9fc59",
+    "text": "Acertos de <keyword0>Sangramento</keyword0> têm {{value0}}% de chance de reduzir pela metade a <keyword1>Armadura</keyword1> do inimigo"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "8dcaccd721e5c1b31540232f7fb37c4ad0c913cfd4cb56e6cdcf44d219299213",
+    "text": "Ferida mortal"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "7cd61bf8268a2530ebf5940d5ed8d7b11e83e9f2f0d79c4dcd841cd1dc03040a",
+    "text": "Corte de despedida"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "8f1826cfd0f6480fab1a03c12a8bbdc633ec60c0db06821c8fd3b1c67a9aa51b",
+    "text": "Após <keyword0>esquivar</keyword0>, seu próximo acerto de <keyword1>Físico</keyword1> adiciona metade do próprio dano como dano de <keyword2>Sangramento</keyword2>"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "640e6a81620c53b7b3182816f54dcc652243cb53c53439f541af7114dce3bf97",
+    "text": "Sanguíneo"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "963aa8bc74ae43c9ef5ac2b2ec241e51b1e58cdfe45e8863eed44613a81e1eff",
+    "text": "Acertos de <keyword0>Sangramento</keyword0> têm {{value0}}% de chance de ativar <keyword1>Drenagem</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "fd13cd18573bd89bbf8be05e7d0534f6e0bee4a4593dd260c8d4597441428299",
+    "text": "Choque séptico"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "01e0a72144390e4b1425d4ca909560eef1fd7cdcc8edafd801a0ef10b228a800",
+    "text": "Inimigos com <keyword0>Sangramento</keyword0> recebem {{value0}}% mais dano de <keyword1>Veneno</keyword1>"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "9bd766d96baa606aaaefa683d8061aedc92f515274fa7df03155d978d6dc5054",
+    "text": "Ferida contaminada"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "5db0400951f3609ed0e05bf6dd0e9a71b420e612107e57495dc14e3ecfeba25b",
+    "text": "Acertos de <keyword0>Sangramento</keyword0> têm {{value0}}% de chance de causar metade do próprio dano como dano de <keyword1>Veneno</keyword1>"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "eb5d42b8683116b3894e2df43a1cff284ff5f8b55d968d1fef17cdc872b31d3d",
+    "text": "Cuidado de feridas"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "bc267f1e0d1b2a0cfd29ecfc119ba5850422db7eb30c30898e3aa68e7b7ed50e",
+    "text": "Recebe metade do dano de <keyword0>Sangramento</keyword0>"
+  },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "554f84c174786df461c5ae62e3a62d80e16d3622d4f29fc01b5c0f2db567ef6d",
+    "text": "Proteção de sangue"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "c35c8f7fb70dfe4c44c86b80fd4b48d11d260027eaa2d73f83535b543254301a",
+    "text": "Receba metade do dano de <keyword0>Sangramento</keyword0> enquanto tiver <keyword1>Bloqueio</keyword1>"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "0334ff2002f99caeb0d032a5ca6220479936681ac97bb7424d1cd60aeb7516e1",
+    "text": "Jogo de pés"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "c339e908b59085da9b10729ce350567101c376549e57659a6c492d4fef2e3a76",
+    "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0> ao <keyword1>esquivar</keyword1>"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "6bcbbebc50c9441cf332e1ca5a65f4dcf834cdcdb4e87911e5aa5c2a6e3ef5b1",
+    "text": "Aterramento"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "d030c1d3fa3739bb41991bd549dc254049362ae8a85f18b5a702c14b83a7304d",
+    "text": "Guarda de impacto"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "26354b53f88e6323d12ec8d4a453178e3de52f671a5f1c85bd3173667f2f5f4a",
+    "text": "O dano de <keyword0>Atordoamento</keyword0> aumenta em {{value0}}% de seu <keyword1>Bloqueio</keyword1>"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "1ca1052b88f8f7d35f6eac7f27ba2b05abc9950aa45eb389330a38f525ec0757",
+    "text": "Reforçar"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "63ca2425106420538d7e9add73a29f3df1865f67b1ffe8da1760414a43703a43",
+    "text": "<keyword0>Bloqueio</keyword0> absorve {{value0}}% mais dano <keyword1>físico</keyword1>"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "93fb0df53c647fb526ecd99d9fc60fbecb4de9dce2bfb3cbaa90baf7f9990b10",
+    "text": "Escudo sagrado"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "050643d3a91c06544de425be402f6b835334c89ac4e9e75512c84253284f0856",
+    "text": "Segundo fôlego"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "4c32fbb298dcdea41b1d54942c1a0f0f8079f50b5bc98a4100e0226548c57370",
+    "text": "Escudo solar"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "209f44ebc5ae29a12b06e7b33912e0903f65ff2f51cff713d30b6fabb4306996",
+    "text": "Proteção venenosa"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "7a15a59bd9b8476e9a6026c19027f97456bca1eb5df420d5fafbbcc301ebc8bc",
+    "text": "Receba metade do dano de <keyword0>Veneno</keyword0> enquanto tiver <keyword1>Bloqueio</keyword1>"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "7336aec2d2e2345e6552c079e148ddf45290ff43553433af4c4dd24cc051bdaf",
+    "text": "Guarda pesada"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "2f40345a39b5fd0aebdbc95cbe223ab2ac01dc29597bb2d72d8e96fd6d0154fb",
+    "text": "O dano <keyword0>físico</keyword0> aumenta em {{value0}}% de seu <keyword1>Bloqueio</keyword1>"
+  },
+  "content.talent.burn.fire-resistance.name": {
+    "reviewed": true,
+    "source": "Fire Resistance",
+    "sourceHash": "859924a6f85dd96aefd4777ebedf9e4d5a140470c798fab61f6151931ca72582",
+    "text": "Resistência ao fogo"
+  },
+  "content.talent.burn.fire-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Burn</keyword0> damage",
+    "sourceHash": "3914a62758a2bbbfca8dca1cdde3c1d8328c1ee845508c613feb8719dc2a66a9",
+    "text": "Recebe metade do dano de <keyword0>Queimadura</keyword0>"
+  },
+  "content.talent.burn.flash-fire.name": {
+    "reviewed": true,
+    "source": "Flash Fire",
+    "sourceHash": "c931b894ec4fbe0e44138c72dc558ed22a4310b4c3446d18dc7e5dac1d809f11",
+    "text": "Fogo repentino"
+  },
+  "content.talent.burn.flash-fire.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "20fadbfc5a0fb5189d37016e689217a974494f3e28bb6c9424a1592d6c0cdad6",
+    "text": "Cartas de <keyword0>Queimadura</keyword0> têm {{value0}}% de chance de serem jogadas duas vezes"
+  },
+  "content.talent.burn.flashpoint.name": {
+    "reviewed": true,
+    "source": "Flashpoint",
+    "sourceHash": "d6ca950b392d04394ce5e59d27fbf3e68739a571387e6ebee38e0315a1733026",
+    "text": "Ponto de fulgor"
+  },
+  "content.talent.burn.heat-exhaustion.name": {
+    "reviewed": true,
+    "source": "Heat Exhaustion",
+    "sourceHash": "c772f8025598c49d055db1a1eb84db82d2eb796d2dd9ad8ebeccfb0d44485b59",
+    "text": "Exaustão térmica"
+  },
+  "content.talent.burn.heat-exhaustion.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits have a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "797d8ff4969276cb2783107bba6d4680dd26eb2b206fa6455a909b5eb4bf168b",
+    "text": "Acertos de <keyword0>Queimadura</keyword0> têm {{value0}}% de chance de também causar dano de <keyword1>Atordoamento</keyword1>"
+  },
+  "content.talent.burn.melting-point.name": {
+    "reviewed": true,
+    "source": "Melting Point",
+    "sourceHash": "49b2418fd7f89b2fc8be19a619f1bf44b570579f0f782c563b11d37102a618ce",
+    "text": "Ponto de fusão"
+  },
+  "content.talent.burn.smoke-screen.name": {
+    "reviewed": true,
+    "source": "Smoke Screen",
+    "sourceHash": "51acc5c8c311fb4858888bd91b78257d4b0b96b89b0c1323ae45ff7f963fac09",
+    "text": "Cortina de fumaça"
+  },
+  "content.talent.burn.smoke-screen.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> a <keyword1>Burning</keyword1> enemy, deal {{value0}} <keyword2>Burn</keyword2> damage",
+    "sourceHash": "58fbbd65548df8738b1209afbbd1f776064c85949bcf8ab03161186e285d819e",
+    "text": "Ao <keyword0>esquivar</keyword0> do ataque de um inimigo com <keyword1>Queimadura</keyword1>, cause {{value0}} de dano de <keyword2>Queimadura</keyword2>"
+  },
+  "content.talent.burn.smoldering.name": {
+    "reviewed": true,
+    "source": "Smoldering",
+    "sourceHash": "d79961983fc19be69f811030d8d07ee23111d2078941a34b62ad61cf3baddc05",
+    "text": "Fumegante"
+  },
+  "content.talent.burn.smoldering.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> has a {{value0}}% chance to not decay",
+    "sourceHash": "4032a99053df613c9319b52bbc07eb852b8595672836d1676b63b4b1b435dadf",
+    "text": "<keyword0>Queimadura</keyword0> tem {{value0}}% de chance de não diminuir"
+  },
+  "content.talent.dodge.catch-breath.name": {
+    "reviewed": true,
+    "source": "Catch Breath",
+    "sourceHash": "bc1108295097c36fadb0c146a5732d678047ee11e23b7b83e4fc3fdb0aa9a191",
+    "text": "Recuperar o fôlego"
+  },
+  "content.talent.dodge.catch-breath.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "723eeae4d79d0347ca1f3d47187250ef0fa6c4f8d9c7783371b41d3890fd5c1c",
+    "text": "Recupere {{value0}} de <keyword0>Saúde</keyword0> ao <keyword1>esquivar</keyword1>"
+  },
+  "content.talent.dodge.clean-getaway.name": {
+    "reviewed": true,
+    "source": "Clean Getaway",
+    "sourceHash": "804629cfadab3eeb75387364eabd8d0b96382e80f6f527c3b35be046427d3907",
+    "text": "Fuga limpa"
+  },
+  "content.talent.dodge.clean-getaway.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, remove {{value0}} stack each of <keyword1>Burn</keyword1>, <keyword2>Poison</keyword2>, and <keyword3>Bleed</keyword3> from yourself",
+    "sourceHash": "261092298edd9628303d6f9678e799a004009371e39648093dce84f82c356932",
+    "text": "Ao <keyword0>esquivar</keyword0>, remova de si {{value0}} acúmulos de cada: <keyword1>Queimadura</keyword1>, <keyword2>Veneno</keyword2> e <keyword3>Sangramento</keyword3>"
+  },
+  "content.talent.dodge.finding-rhythm.name": {
+    "reviewed": true,
+    "source": "Finding Rhythm",
+    "sourceHash": "2a84f1b10f13f47b29b2ca61994763c404de6d322e07f817e42e1bd467f62839",
+    "text": "Encontrar o ritmo"
+  },
+  "content.talent.dodge.finding-rhythm.rule": {
+    "reviewed": true,
+    "source": "Taking damage increases your <keyword0>Dodge</keyword0> chance by {{value0}}%, resetting when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f9dfe69d9585b1cd29fd414073b2230daf64dce35feaa7b0ea6a0ac4be95b7ad",
+    "text": "Receber dano aumenta sua chance de <keyword0>Esquiva</keyword0> em {{value0}}%; reinicia ao <keyword1>esquivar</keyword1>"
+  },
+  "content.talent.dodge.lightfoot.name": {
+    "reviewed": true,
+    "source": "Lightfoot",
+    "sourceHash": "2d3727477c1d706d9bad17122e3ec20b32e017f509486f5064b58abaa7e882a0",
+    "text": "Pés leves"
+  },
+  "content.talent.dodge.lightfoot.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}}% <keyword0>Dodge</keyword0> chance",
+    "sourceHash": "c5e441a2dc7ce8f59558f7b151226a4aa5b186e30abd53c8c0e06f08a3bf1564",
+    "text": "Ganhe {{value0}}% de chance de <keyword0>Esquiva</keyword0>"
+  },
+  "content.talent.dodge.open-flank.name": {
+    "reviewed": true,
+    "source": "Open Flank",
+    "sourceHash": "216a49acaf941e13a0fe1eb747cad13b527698e566fcd304dcfe8304cae64c89",
+    "text": "Flanco aberto"
+  },
+  "content.talent.dodge.open-flank.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, your next attack deals {{value0}} additional <keyword1>Physical</keyword1> damage",
+    "sourceHash": "fcce97d66ee033cd5074330f8685387ca6971e025cd08b26f25c011e75cb2825",
+    "text": "Ao <keyword0>esquivar</keyword0>, seu próximo ataque causa {{value0}} adicionais de dano <keyword1>físico</keyword1>"
+  },
+  "content.talent.dodge.perfect-timing.name": {
+    "reviewed": true,
+    "source": "Perfect Timing",
+    "sourceHash": "6c891d90decc77611efdf679b4f48c77fcea9939b18a439dbcae717691b2cc49",
+    "text": "Momento perfeito"
+  },
+  "content.talent.dodge.perfect-timing.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0> without <keyword1>Armor</keyword1>, gain {{value0}} <keyword2>Armor</keyword2>",
+    "sourceHash": "8734a95156a305db5be6c8f3067b3b97381a318f009563fb2746d2ede3ec7508",
+    "text": "Ao <keyword0>esquivar</keyword0> sem <keyword1>Armadura</keyword1>, ganhe {{value0}} de <keyword2>Armadura</keyword2>"
+  },
+  "content.talent.dodge.tailwind.name": {
+    "reviewed": true,
+    "source": "Tailwind",
+    "sourceHash": "d7abe4dffb845290684218484544956735ce7114deea1b741523d54a5b655f54",
+    "text": "Vento favorável"
+  },
+  "content.talent.dodge.tailwind.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Dodge</keyword0>, draw a card",
+    "sourceHash": "743c03c6b1558511ea1fc39c0ff7d103b471ccbe1d0dcc7f6637faeb64b7c387",
+    "text": "Ao <keyword0>esquivar</keyword0>, compre uma carta"
+  },
+  "content.talent.dodge.thornstep.name": {
+    "reviewed": true,
+    "source": "Thornstep",
+    "sourceHash": "ecfc0ae16ce19bc38779e8de51e5429b996dc848e00ef828479f490cae26c4ed",
+    "text": "Passo espinhoso"
+  },
+  "content.talent.dodge.thornstep.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Thorns</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "c4ebbc15e8e4f0b7e845574c99d0fa7030b9d7d4317cce0f297626ab60f881e2",
+    "text": "Ganhe {{value0}} de <keyword0>Espinhos</keyword0> ao <keyword1>esquivar</keyword1>"
+  },
+  "content.talent.dodge.unburdened.name": {
+    "reviewed": true,
+    "source": "Unburdened",
+    "sourceHash": "0feddf67815ac1b301705dc21131f4762456eee88c89147960d45c2f809f7909",
+    "text": "Sem fardos"
+  },
+  "content.talent.freeze.bitter-cold.name": {
+    "reviewed": true,
+    "source": "Bitter Cold",
+    "sourceHash": "ed4d67c8a3800b2e37f2f93a24b2c433846ca7342eecf8744189aa4fdb41e6b9",
+    "text": "Frio cortante"
+  },
+  "content.talent.freeze.brittle-armor.name": {
+    "reviewed": true,
+    "source": "Brittle Armor",
+    "sourceHash": "7c7224a4ccbec0ce5ac7d1fc0476de298ecbb7d4f8f9a9a293f174a6c918eb90",
+    "text": "Armadura frágil"
+  },
+  "content.talent.freeze.brittle-armor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Armor</keyword1>",
+    "sourceHash": "e17d5a55aded636d5e469067753fb12ded69e33c5ef502c2922355f7dde20e61",
+    "text": "Ao <keyword0>congelar</keyword0> um inimigo, remova toda a sua <keyword1>Armadura</keyword1>"
+  },
+  "content.talent.freeze.brittle-ice.name": {
+    "reviewed": true,
+    "source": "Brittle Ice",
+    "sourceHash": "883c212d0a051a64603450252defbe65b44bb535acb1a47f4ad1d64016bc33b2",
+    "text": "Gelo frágil"
+  },
+  "content.talent.freeze.brittle-ice.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies take {{value0}} additional damage",
+    "sourceHash": "7780acfd1011f8d6151b7e1b177d9ee46cbb152c83a0387f74011798fc59f37e",
+    "text": "Inimigos <keyword0>congelados</keyword0> recebem {{value0}} adicionais de dano"
+  },
+  "content.talent.freeze.cold-resistance.name": {
+    "reviewed": true,
+    "source": "Cold Resistance",
+    "sourceHash": "976835d4d91d75f04c317cb0c055c73e8624a2bde7aad463db7800353afff19a",
+    "text": "Resistência ao frio"
+  },
+  "content.talent.freeze.cold-resistance.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "f914908e9257a4589bd1b6178a1b1b82d5eeab67d1488b5d6d8a14b5c5ec75a9",
+    "text": "Recebe metade do dano de <keyword0>Congelamento</keyword0>"
+  },
+  "content.talent.freeze.cryo-preservation.name": {
+    "reviewed": true,
+    "source": "Cryo-preservation",
+    "sourceHash": "ad5435a5674e98dd42fadf60a6d5461bde07e296d837c7694f6dbd453c30864d",
+    "text": "Criopreservação"
+  },
+  "content.talent.freeze.cryo-preservation.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Poison</keyword0> does not decay on <keyword1>Frozen</keyword1> enemies",
+    "sourceHash": "ba6f179871c16fc1e4c5149f089e5563d17d9f6ce725a058e82d71959ccebeab",
+    "text": "<keyword0>Veneno</keyword0> não diminui em inimigos <keyword1>congelados</keyword1>"
+  },
+  "content.talent.freeze.glacial-barrier.name": {
+    "reviewed": true,
+    "source": "Glacial Barrier",
+    "sourceHash": "d2c8e693ee9afcedeca5a425baa1f44f1990656c5d074cfcda751caaeb5071cd",
+    "text": "Barreira glacial"
+  },
+  "content.talent.freeze.icebound.name": {
+    "reviewed": true,
+    "source": "Icebound",
+    "sourceHash": "370ae5e77c5b13894a233850de33f3786174a37ccac13adafbd3e9283d91c490",
+    "text": "Preso no gelo"
+  },
+  "content.talent.freeze.icebound.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Freeze</keyword0> an enemy, remove all its <keyword1>Block</keyword1>",
+    "sourceHash": "b7dad21cecf67ebd4934b0d211decda3f464fdc50aad457e1fa8985695ed0b0b",
+    "text": "Ao <keyword0>congelar</keyword0> um inimigo, remova todo o seu <keyword1>Bloqueio</keyword1>"
+  },
+  "content.talent.freeze.thaw-dividend.name": {
+    "reviewed": true,
+    "source": "Thaw Dividend",
+    "sourceHash": "b0a41b59045816d224016a72d98f404d077cfed79e4d4172fc2449672ba2b4c7",
+    "text": "Dividendo do degelo"
+  },
+  "content.talent.freeze.thaw-dividend.rule": {
+    "reviewed": true,
+    "source": "When an enemy recovers from <keyword0>Freeze</keyword0>, draw a card",
+    "sourceHash": "09d767d2dd952ff122e361cba786391c955040289f758b065c59210a1fc34da2",
+    "text": "Quando um inimigo se recupera de <keyword0>Congelamento</keyword0>, compre uma carta"
+  },
+  "content.talent.freeze.winter-s-grasp.name": {
+    "reviewed": true,
+    "source": "Winter's Grasp",
+    "sourceHash": "4fb3c020593adc153cbb56e0fe296d3910bfc8279d823c8ee3efa578df5fcabc",
+    "text": "Abraço do inverno"
+  },
+  "content.talent.freeze.winter-s-grasp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "96ed148c5aa82b1f68a449624e54e84c1abade242df39ae104e0e5a5a9b232ac",
+    "text": "Cartas de <keyword0>Congelamento</keyword0> têm {{value0}}% de chance de serem jogadas duas vezes"
+  },
+  "content.talent.health.clean-slate.name": {
+    "reviewed": true,
+    "source": "Clean Slate",
+    "sourceHash": "7db61f1168f5c715f4b1c7ce6fd57b48e3b3457481d67f3a4f0bdc38ede337cc",
+    "text": "Recomeço"
+  },
+  "content.talent.health.combat-surge.name": {
+    "reviewed": true,
+    "source": "Combat Surge",
+    "sourceHash": "80ef2f067f4d6e7a9c1dff4469df15421abf16e127d83013182fc9fc201c6bc0",
+    "text": "Surto de combate"
+  },
+  "content.talent.health.combat-surge.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> at the start of combat",
+    "sourceHash": "dbe0d1646de6f9f1de982c2489c7dedd16550739ca77fb725820d41ce7c123df",
+    "text": "Recupere {{value0}} de <keyword0>Saúde</keyword0> no início do combate"
+  },
+  "content.talent.health.desperate-guard.name": {
+    "reviewed": true,
+    "source": "Desperate Guard",
+    "sourceHash": "0bf1b3fc86042a42c84e6fbba0e2316c9aea22bd613e983b36127a2e790bf4e3",
+    "text": "Guarda desesperada"
+  },
+  "content.talent.health.desperate-guard.rule": {
+    "reviewed": true,
+    "source": "The first time your <keyword0>Health</keyword0> falls below half each combat, gain {{value0}} <keyword1>Block</keyword1>",
+    "sourceHash": "6d7bf688c0dc2275d4361170b64c224312954bf9b14e6192eab53f9c5590f78a",
+    "text": "Na primeira vez que sua <keyword0>Saúde</keyword0> cai abaixo da metade em cada combate, ganhe {{value0}} de <keyword1>Bloqueio</keyword1>"
+  },
+  "content.talent.health.last-gasp.name": {
+    "reviewed": true,
+    "source": "Last Gasp",
+    "sourceHash": "568e6f913fce329786258cb4eb55779e2f7f28f02c5cbe1d72f0cf11e3dd6e2b",
+    "text": "Último suspiro"
+  },
+  "content.talent.health.last-gasp.rule": {
+    "reviewed": true,
+    "source": "While below half <keyword0>Health</keyword0>, gain {{value0}}% <keyword1>Dodge</keyword1> chance",
+    "sourceHash": "0ba20e5bc5b19ba5f912dc119fe8e3281c1ede4aa3ae5bab9801ee5b425294ce",
+    "text": "Com menos da metade de <keyword0>Saúde</keyword0>, ganhe {{value0}}% de chance de <keyword1>Esquiva</keyword1>"
+  },
+  "content.talent.health.last-resort.name": {
+    "reviewed": true,
+    "source": "Last Resort",
+    "sourceHash": "3e3867731cd38e897e68c585b2e93319d0feef169010d4caffcb711b06613d28",
+    "text": "Último recurso"
+  },
+  "content.talent.health.mending.name": {
+    "reviewed": true,
+    "source": "Mending",
+    "sourceHash": "2ed45cfc06e5b28a659b9bd0d6a13c3bdf332d072f227e39482197d73ab74ce5",
+    "text": "Cura"
+  },
+  "content.talent.health.overflow.name": {
+    "reviewed": true,
+    "source": "Overflow",
+    "sourceHash": "906be1dc22e0134ac4bc62f9dff06115f46a57a5cddf604a97e7de4540915265",
+    "text": "Transbordamento"
+  },
+  "content.talent.health.renewal.name": {
+    "reviewed": true,
+    "source": "Renewal",
+    "sourceHash": "bb36132d234bc3df81eaa5a823fb0f1b5ae335ef750b3dc494ae4d1545d078c1",
+    "text": "Renovação"
+  },
+  "content.talent.health.vitality.name": {
+    "reviewed": true,
+    "source": "Vitality",
+    "sourceHash": "3c3171d456855f2d782e508b7418b0b5620784a398453a0641596607724201a1",
+    "text": "Vitalidade"
+  },
+  "content.talent.health.vitality.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> after every combat",
+    "sourceHash": "89a7df5424fa9e02b4b3b9e5f35211367eb82b3aa01152893df298cf3a1331bd",
+    "text": "Recupere {{value0}} de <keyword0>Saúde</keyword0> após cada combate"
+  },
+  "content.talent.health.will-to-live.name": {
+    "reviewed": true,
+    "source": "Will to Live",
+    "sourceHash": "3eac7d37a4175166cdfe9dd845f609bf44574532947cb21772533d98aa001304",
+    "text": "Vontade de viver"
+  },
+  "content.talent.health.will-to-live.rule": {
+    "reviewed": true,
+    "source": "Death's Door lasts {{value0}} turn longer",
+    "sourceHash": "da3ef1eff7116d8b90c91ba314faeec8458db0a0f3c38f9e327a9a64e9f00f79",
+    "text": "À beira da morte dura {{value0}} turno a mais"
+  },
+  "content.talent.mana.arcane-frost.name": {
+    "reviewed": true,
+    "source": "Arcane Frost",
+    "sourceHash": "ca619d6266668851ee50e73e9bac9eafcbe66c73ea06543739fc5865dc383c34",
+    "text": "Geada arcana"
+  },
+  "content.talent.mana.arcane-frost.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Freeze</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "e27444104ae4ab9df5c32834c8605192bdb38ed494d873e835e45085b3b69095",
+    "text": "O dano de <keyword0>Congelamento</keyword0> aumenta em {{value0}}% de sua <keyword1>Mana</keyword1>"
+  },
+  "content.talent.mana.arcane-mending.name": {
+    "reviewed": true,
+    "source": "Arcane Mending",
+    "sourceHash": "fcd4c9186581aad40f55f68b77df7788f3add7a38a2cbf2d48ac6a9d8798e157",
+    "text": "Restauração arcana"
+  },
+  "content.talent.mana.dark-recovery.name": {
+    "reviewed": true,
+    "source": "Dark Recovery",
+    "sourceHash": "e5f51b3c0f565cc1f262081516b1e051f619d2b8d5f7d4ac9edbfe1a4959e82d",
+    "text": "Recuperação sombria"
+  },
+  "content.talent.mana.dark-recovery.rule": {
+    "reviewed": true,
+    "source": "End your turn with no <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "161d7f9e23da4afc5299fbb91cfcd892b7baa940360ee937dd37b6b079f476fb",
+    "text": "Encerre o turno sem <keyword0>Mana</keyword0> para ganhar {{value0}} adicionais de <keyword1>Mana</keyword1> no próximo turno"
+  },
+  "content.talent.mana.leyline-attunement.name": {
+    "reviewed": true,
+    "source": "Leyline Attunement",
+    "sourceHash": "6ac26f9e748c28f3433ca9818c7422698d962d7a272d009754d50373a934e16f",
+    "text": "Sintonia com linhas ley"
+  },
+  "content.talent.mana.mana-bulwark.name": {
+    "reviewed": true,
+    "source": "Mana Bulwark",
+    "sourceHash": "ddaa2ada3fbfbeaa88f1081be85cfed45cf8cf10664fdb92eb628c26828a9a04",
+    "text": "Baluarte de Mana"
+  },
+  "content.talent.mana.mana-shell.name": {
+    "reviewed": true,
+    "source": "Mana Shell",
+    "sourceHash": "e26e468b3d970a521fd587ab5e42c86b449e07971e632d671ec7b04202325993",
+    "text": "Carapaça de Mana"
+  },
+  "content.talent.mana.manaburn.name": {
+    "reviewed": true,
+    "source": "Manaburn",
+    "sourceHash": "6249022b01b39cb9fdccb6078c5827d1c15e6b9024fccdfc251206fc6228cf6a",
+    "text": "Queima de mana"
+  },
+  "content.talent.mana.manaburn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage is increased by {{value0}}% of your <keyword1>Mana</keyword1>",
+    "sourceHash": "1c3a7d957458a40e1ed813d7b3e50415ff49b2947b5385877c077b08d8cd4238",
+    "text": "O dano de <keyword0>Queimadura</keyword0> aumenta em {{value0}}% de sua <keyword1>Mana</keyword1>"
+  },
+  "content.talent.mana.wellspring.name": {
+    "reviewed": true,
+    "source": "Wellspring",
+    "sourceHash": "09d371078d81c6e5b24b5b7c7c34b0917bf2aa448f9ad563731d45db9060d227",
+    "text": "Nascente"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -1108,6 +1738,36 @@
     "source": "Encounters",
     "sourceHash": "1cef9d7bf3b13b88ff3a28683b9d0d0941a1013a7a78f0630539956fecd76c6c",
     "text": "Encontros"
+  },
+  "log.absorb": {
+    "reviewed": true,
+    "source": "{{name}} blocks {{amount}} damage.",
+    "sourceHash": "081bb48c5e8bccaff2bd777bcee6d215f79872b4e579e4b3ed5c4e577a070d93",
+    "text": "{{name}} bloqueia {{amount}} de dano."
+  },
+  "log.criticalDamage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage (Critical).",
+    "sourceHash": "490526ade8c9cb9e981402c6a915a1cae59fbf0cf21fb7afdf5ace363f65c6a2",
+    "text": "{{name}} recebe {{amount}} de dano do tipo {{type}} (crítico)."
+  },
+  "log.damage": {
+    "reviewed": true,
+    "source": "{{name}} takes {{amount}} {{type}} damage.",
+    "sourceHash": "a7a0856da414984b9bdf4b69579f4d7789aabfd92274e69d473c105c8d7f4dd7",
+    "text": "{{name}} recebe {{amount}} de dano do tipo {{type}}."
+  },
+  "log.gainBlock": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}} Block.",
+    "sourceHash": "8f12f7ab30cf65a98a26ccfe8d42341a35b984413d390a699a27b5850fbebd7c",
+    "text": "{{name}} ganha {{amount}} de Bloqueio."
+  },
+  "log.heal": {
+    "reviewed": true,
+    "source": "{{name}} restores {{amount}} Health.",
+    "sourceHash": "55e584718510d21033b106a168fc2d7d833982a739755303f3b9b9dabb7860c0",
+    "text": "{{name}} recupera {{amount}} de Saúde."
   },
   "menu.boons": {
     "reviewed": true,
