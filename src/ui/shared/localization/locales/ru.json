@@ -2093,6 +2093,20 @@
     "sourceHash": "c67f0d8192b23371e580c0809e1ee273d3806c2ce34a9b4b323da247f4bf64c6",
     "text": "Настройки"
   },
+  "menu.talentPoints": {
+    "forms": {
+      "few": "Доступно {{count}} очка таланта",
+      "many": "Доступно {{count}} очков таланта",
+      "one": "Доступно {{count}} очко таланта",
+      "other": "Доступно {{count}} очка таланта"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} talent point available",
+      "other": "{{count}} talent points available"
+    },
+    "sourceHash": "e8414218dedaff068e0a7069f12f097cc733070a53bd9f84fd3091884f73a6e7"
+  },
   "menu.talents": {
     "reviewed": true,
     "source": "Talents",
@@ -2830,6 +2844,20 @@
     "source": "Talent pages",
     "sourceHash": "ca81cef174188bb25fc331532e82ef3b240b2c9ac5342fea62c87fba79e97463",
     "text": "Страницы талантов"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "few": "Доступно {{count}} очка",
+      "many": "Доступно {{count}} очков",
+      "one": "Доступно {{count}} очко",
+      "other": "Доступно {{count}} очка"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    },
+    "sourceHash": "ea72d159080f214483b90f5badc02725fd628bc6e8f694dec67b28517f51dbaf"
   },
   "talents.requiresPoint": {
     "reviewed": true,

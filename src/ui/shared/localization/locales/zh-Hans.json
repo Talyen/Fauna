@@ -2093,6 +2093,17 @@
     "sourceHash": "262699dba3aa49fe023fba30ae4885b7b1c994d963b3c697c2afa9dc07392ad6",
     "text": "设置"
   },
+  "menu.talentPoints": {
+    "forms": {
+      "other": "可用天赋点：{{count}}"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} talent point available",
+      "other": "{{count}} talent points available"
+    },
+    "sourceHash": "96fcb927d20dba258931488826dadc35266da7ce348a5347a3261844b5963d4c"
+  },
   "menu.talents": {
     "reviewed": true,
     "source": "Talents",
@@ -2830,6 +2841,17 @@
     "source": "Talent pages",
     "sourceHash": "c2b405f5d4d966798dcca39203203a055a5dad22fae6c63dc8c91c2b8ebdd278",
     "text": "天赋页面"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "other": "可用点数：{{count}}"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    },
+    "sourceHash": "73ace21cad8878f130aacca9872b47b1ba864ce4cfec1c7d1e86d90d14e1fccc"
   },
   "talents.requiresPoint": {
     "reviewed": true,

@@ -2093,6 +2093,18 @@
     "sourceHash": "76a8d3ab8aa74e0e80669139101dfc48eda2ae1648a5a32bb285938db20fa384",
     "text": "Einstellungen"
   },
+  "menu.talentPoints": {
+    "forms": {
+      "one": "{{count}} Talentpunkt verfügbar",
+      "other": "{{count}} Talentpunkte verfügbar"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} talent point available",
+      "other": "{{count}} talent points available"
+    },
+    "sourceHash": "6612f72029902cae9f6a3a9458b0b08778a6ae234c2a37d34230a291e96a538c"
+  },
   "menu.talents": {
     "reviewed": true,
     "source": "Talents",
@@ -2830,6 +2842,18 @@
     "source": "Talent pages",
     "sourceHash": "a925be719965ffe7b0484decb4a834aed4ede93a591990a160c930a512e904ab",
     "text": "Talentseiten"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "one": "{{count}} Punkt verfügbar",
+      "other": "{{count}} Punkte verfügbar"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    },
+    "sourceHash": "bc7dd036d747bb875fbe76b3440eb420868b6a3caba62f46268ee5357c7604f3"
   },
   "talents.requiresPoint": {
     "reviewed": true,

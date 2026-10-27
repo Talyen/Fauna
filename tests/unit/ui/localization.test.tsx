@@ -69,6 +69,7 @@ import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import french from "../../../src/ui/shared/localization/locales/fr.json";
+import russian from "../../../src/ui/shared/localization/locales/ru.json";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { Keyword } from "../../../src/ui/shared/keyword-text";
 import { CreatureCard } from "../../../src/ui/shared/cards/cards";
@@ -109,6 +110,16 @@ it("selects locale plural forms and falls back when source or placeholders are s
   expect(reader.message("stale", "New {{name}}", { name: "Fauna" })).toBe("New Fauna");
   expect(reader.message("broken", "Hello {{name}}", { name: "Fauna" })).toBe("Hello Fauna");
   expect(reader.plural("points", { ...source, other: "{{count}} new points" }, 2)).toBe("2 new points");
+});
+
+it("uses the reviewed Russian talent point forms for singular, few and many counts", () => {
+  const reader = createMessageReader("ru", russian);
+  const source = { one: "{{count}} talent point available", other: "{{count}} talent points available" };
+  expect([1, 2, 5].map((count) => reader.plural("menu.talentPoints", source, count))).toEqual([
+    "Доступно 1 очко таланта",
+    "Доступно 2 очка таланта",
+    "Доступно 5 очков таланта",
+  ]);
 });
 
 it("translates recognized combat announcements and preserves unfamiliar event text", () => {

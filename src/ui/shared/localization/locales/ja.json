@@ -2093,6 +2093,17 @@
     "sourceHash": "e47edbf7a62bc2a57d2bdcfe7f0008f8cb004efcb26dc1596bf460ed08d3c432",
     "text": "設定"
   },
+  "menu.talentPoints": {
+    "forms": {
+      "other": "使用可能なタレントポイント：{{count}}"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} talent point available",
+      "other": "{{count}} talent points available"
+    },
+    "sourceHash": "4cda7956268594075e17afe811d0e7a9eace43681674221396272636a06f29e6"
+  },
   "menu.talents": {
     "reviewed": true,
     "source": "Talents",
@@ -2830,6 +2841,17 @@
     "source": "Talent pages",
     "sourceHash": "970014842449a55625201e6831a300a7b258adefda4387ffd335a2e4e656c79e",
     "text": "タレントページ"
+  },
+  "talents.pointsAvailable": {
+    "forms": {
+      "other": "使用可能なポイント：{{count}}"
+    },
+    "reviewed": true,
+    "source": {
+      "one": "{{count}} point available",
+      "other": "{{count}} points available"
+    },
+    "sourceHash": "d2f042fde9401a0c2278b0c0ce8313764ebbde62338782b34ec28222120913e6"
   },
   "talents.requiresPoint": {
     "reviewed": true,
