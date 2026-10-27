@@ -1,6 +1,13 @@
 // @vitest-environment jsdom
 import { render, screen, fireEvent } from "@testing-library/react";
 import { expect, it, vi } from "vitest";
+import {
+  applyPackets,
+  preparePackets,
+  qualificationIssues,
+  sourceHash,
+  validateCatalog,
+} from "../../../scripts/localization/catalog.mjs";
 import { extractMessages } from "../../../scripts/localization/messages.mjs";
 import { produce } from "immer";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
@@ -132,4 +139,102 @@ it("keeps replacement choices addressable when their accessible label is transla
   expect(section.matches("[data-replacement-choices]")).toBe(true);
   expect(section.querySelector("button")).not.toBeNull();
   view.unmount();
+});
+
+it("validates translation freshness, terminology, placeholders, review and locale plural categories", () => {
+  const english = {
+    "menu.play": { text: "Play {{name}}" },
+    "menu.points": { forms: { one: "{{count}} point", other: "{{count}} points" } },
+  };
+  const glossary = { point: "очко" };
+  const entries = {
+    "menu.play": {
+      source: english["menu.play"].text,
+      sourceHash: sourceHash("ru", english["menu.play"], glossary),
+      reviewed: true,
+      text: "Играть {{name}}",
+    },
+    "menu.points": {
+      source: english["menu.points"].forms,
+      sourceHash: sourceHash("ru", english["menu.points"], glossary),
+      reviewed: true,
+      forms: {
+        one: "{{count}} очко",
+        few: "{{count}} очка",
+        many: "{{count}} очков",
+        other: "{{count}} очка",
+      },
+    },
+  };
+  expect(validateCatalog(english, entries, "ru", glossary, true)).toEqual([]);
+  expect(validateCatalog(english, entries, "ru", { point: "балл" }, true)).toContain(
+    "menu.play: stale source or glossary",
+  );
+  expect(
+    validateCatalog(
+      english,
+      { ...entries, "menu.play": { ...entries["menu.play"], reviewed: false, text: "Играть {{other}}" } },
+      "ru",
+      glossary,
+      true,
+    ),
+  ).toEqual(expect.arrayContaining(["menu.play: not reviewed", "menu.play: invalid text or parameters"]));
+  const { few: _few, ...incomplete } = entries["menu.points"].forms;
+  expect(
+    validateCatalog(
+      english,
+      { ...entries, "menu.points": { ...entries["menu.points"], forms: incomplete } },
+      "ru",
+      glossary,
+      true,
+    ),
+  ).toContain("menu.points: missing or invalid few plural form");
+  expect(validateCatalog(english, {}, "ru", glossary, true)).toEqual([
+    "menu.play: missing translation",
+    "menu.points: missing translation",
+  ]);
+});
+
+it("preserves matching drafts and refuses stale or invalid batches before applying translations", () => {
+  const english = { "menu.play": { text: "Play {{name}}" } };
+  const glossaries = { fr: { play: "jouer" } };
+  type Packet = {
+    version: number;
+    locales: Array<{
+      locale: string;
+      messages: Record<string, { sourceHash: string }>;
+      results: Record<string, null | { text: string }>;
+    }>;
+  };
+  const prepared = preparePackets(english, ["fr"], {}, glossaries) as Packet;
+  prepared.locales[0]!.results["menu.play"] = { text: "Jouer {{name}}" };
+  const refreshed = preparePackets(english, ["fr"], {}, glossaries, prepared) as Packet;
+  expect(refreshed.locales[0]!.results["menu.play"]).toEqual({ text: "Jouer {{name}}" });
+  const applied = applyPackets(english, ["fr"], {}, glossaries, refreshed);
+  expect(validateCatalog(english, applied.fr!, "fr", glossaries.fr, true)).toEqual([]);
+  expect(() =>
+    applyPackets({ "menu.play": { text: "Play with {{name}}" } }, ["fr"], {}, glossaries, refreshed),
+  ).toThrow("source changed");
+  expect(() => applyPackets(english, ["fr"], {}, { fr: { play: "partie" } }, refreshed)).toThrow(
+    "glossary changed",
+  );
+  refreshed.locales[0]!.results["menu.play"] = { text: "Jouer {{other}}" };
+  expect(() => applyPackets(english, ["fr"], {}, glossaries, refreshed)).toThrow(
+    "invalid text or parameters",
+  );
+  const changed = preparePackets(english, ["fr"], {}, { fr: { play: "partie" } }, refreshed) as Packet;
+  expect(changed.locales[0]!.results["menu.play"]).toBeNull();
+});
+
+it("refuses to qualify a language before complete source migration and reviewed translations", () => {
+  const english = { "menu.play": { text: "Play" } };
+  const languages = { en: { qualified: true }, fr: { qualified: true } };
+  const coverage = { ui: false, content: false, rules: false, runtime: false };
+  expect(qualificationIssues(languages, coverage, english, {}, { fr: {} })).toEqual([
+    "fr: source migration is incomplete",
+    "fr: menu.play: missing translation",
+  ]);
+  expect(
+    qualificationIssues({ ...languages, fr: { qualified: false } }, coverage, english, {}, { fr: {} }),
+  ).toEqual([]);
 });

@@ -314,6 +314,8 @@ export function runCheck(
   if (paths.some((file) => file.startsWith("src/ui/") || file.startsWith("scripts/localization/"))) {
     const status = run("scripts/localization/messages.mjs", ["check"]);
     if (status !== 0) return status;
+    const translations = run("scripts/localization/translate.mjs", ["check"]);
+    if (translations !== 0) return translations;
   }
   if (docs) {
     const status = run("scripts/checks/check-docs.mjs");

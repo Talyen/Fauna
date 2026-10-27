@@ -1,0 +1,17 @@
+{
+  "de": {},
+  "zh-Hans": {},
+  "ru": {},
+  "es": {},
+  "pt-BR": {},
+  "ja": {},
+  "fr": {
+    "Boons": "Bénédictions",
+    "Collection": "Collection",
+    "Talents": "Talents",
+    "Backup": "Réserve",
+    "draw pile": "pioche",
+    "discard pile": "défausse",
+    "deck": "deck"
+  }
+}

@@ -51,6 +51,32 @@ syntax. This only covers explicit calls in `src/ui`; it does not detect all
 unconverted player text, validate non-English catalogs or qualify a language.
 The inventory remains a separate migration aid.
 
+### Translation packets
+
+Run `npm run localization:prepare` to create `reports/localization/tasks.json`
+for pending messages across the seven target languages. Each locale includes
+English source, its glossary, source hashes, previous reviewed records and empty
+result fields. Edit only the result fields. Preparing again retains drafts whose
+source and glossary have not changed; prior packets are backed up under
+`reports/localization/backups/`. The complete locale glossary participates in the
+freshness hash, so a terminology change currently requires that locale's affected
+packet to be reviewed again.
+
+After reviewing meaning and terminology, run `npm run localization:apply --
+--reviewed`. The flag attests to that semantic review; the tool cannot verify
+translation quality. Null results remain pending. Every supplied result is
+validated before any catalog is changed, and replaced locale catalogs are backed
+up. The tool rejects stale source or glossary snapshots, unknown messages,
+incorrect parameters and missing locale-specific plural categories.
+`npm run localization:translations:check` validates existing reviewed records;
+the local changed-file gate and CI run it as well.
+
+The language registry marks only English qualified. Its qualification check
+requires complete reviewed catalogs for each enabled language, completed UI,
+content and rule migration, and a runtime connected to those catalogs. These structural checks do not establish font,
+rendered-flow, platform or linguistic quality; the remaining qualification
+steps below still apply.
+
 ## Implementation and qualification
 
 1. Establish stable message IDs, named parameters, semantic keyword parts and a

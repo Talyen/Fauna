@@ -1,17 +1,11 @@
 /** Targets are not offered until their catalogs and rendered flows are qualified. */
-export const LANGUAGES = {
-  en: { name: "English", steam: "english" },
-  de: { name: "Deutsch", steam: "german" },
-  "zh-Hans": { name: "简体中文", steam: "schinese" },
-  ru: { name: "Русский", steam: "russian" },
-  es: { name: "Español (España)", steam: "spanish" },
-  "pt-BR": { name: "Português (Brasil)", steam: "brazilian" },
-  ja: { name: "日本語", steam: "japanese" },
-  fr: { name: "Français", steam: "french" },
-} as const;
+import languages from "./languages.json";
+export const LANGUAGES = languages;
 export type GameLocale = keyof typeof LANGUAGES;
 export type LanguagePreference = "auto" | GameLocale;
-export const QUALIFIED_LANGUAGES: readonly GameLocale[] = ["en"];
+export const QUALIFIED_LANGUAGES: readonly GameLocale[] = (Object.keys(LANGUAGES) as GameLocale[]).filter(
+  (locale) => LANGUAGES[locale].qualified,
+);
 
 function matchLanguage(value: string): GameLocale | undefined {
   const code = value.toLowerCase().replaceAll("_", "-");
