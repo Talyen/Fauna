@@ -1073,6 +1073,102 @@
     "sourceHash": "b6ca165594645922c213d5076fcee39f2114366130f4a1dd781bebf77e6fa56d",
     "text": "受ける<keyword0>出血</keyword0>ダメージが半分になる"
   },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "e4c1313617d83eda5a78d8428fe4993757a182b866fdda9531009a917124975e",
+    "text": "血の結界"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "b1e45954697c1230ff64a2fcf9ca5fe304207916f526d79bae5671ec2365e95c",
+    "text": "<keyword1>ブロック</keyword1>がある間、受ける<keyword0>出血</keyword0>ダメージが半分になる"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "8def6a0f5f2c5d0e2cb5ab2a900be1f65232dd034362855cfdbfc71d5267b5dd",
+    "text": "足さばき"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "cfa26b34f5eeda127b10076d4eb8e047980dd2dc67948f90aef55cde2a00531a",
+    "text": "<keyword1>回避</keyword1>時に<keyword0>ブロック</keyword0>を{{value0}}得る"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "0291b8562f78a0ad029a8571384fd1d919389dd0433e310e171d4423882f8540",
+    "text": "接地"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "d3890ecd234da49cabd8aad96a4a0d34e11ef2d9bda7fe01443027265d4810ad",
+    "text": "衝撃の守り"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "6dbbc1b117ca33c755936bdf89e26c122ab1c454092fd87e6a59f496a21fb833",
+    "text": "<keyword0>スタン</keyword0>ダメージが<keyword1>ブロック</keyword1>の{{value0}}%分増加する"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "0134bd1d30d33db41e0185d0861f64e2194041981c7c02b1232a95a2cc30d746",
+    "text": "補強"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "3e12e266f4cee7ca536ba026bb6503946048cf67b39164f306b162ff09c3e754",
+    "text": "<keyword0>ブロック</keyword0>が吸収する<keyword1>物理</keyword1>ダメージが{{value0}}%増加する"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "002a9132025f31c9e4ce617ab13a89090fc422d214e1d952d7800dc57cd7e5a4",
+    "text": "聖なる盾"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "82b3634788d050b81ec9fe959aed800674ff8163628091d6b894e7cb82a1c61a",
+    "text": "再起"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "2c5685ff783da1a158ebe13ba69b7165df997117b8a7f7a9cde13e83d44415a0",
+    "text": "日の光の盾"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "255c38117d61187238ba98f358c3b926ce541b2ac03e9db0eec731c9ff7bbeef",
+    "text": "毒の守り"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "99aa41a019e19d6f4d015975fed8ead89fd2790c0fe2fad723532599b9c64d6b",
+    "text": "<keyword1>ブロック</keyword1>がある間、受ける<keyword0>毒</keyword0>ダメージが半分になる"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "5d7b7e399cc92291218b5bf8ed75981d798c163c6fe7f67f28ed3acfeb3cb133",
+    "text": "重みのある守り"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "af35133ba47511f085cd3e8c673f3c16cb934caff004e710df5cd2352de3e164",
+    "text": "<keyword0>物理</keyword0>ダメージが<keyword1>ブロック</keyword1>の{{value0}}%分増加する"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

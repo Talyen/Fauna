@@ -1073,6 +1073,102 @@
     "sourceHash": "794e7ece43910606a1ad35b9dac83d74605a9ed94e9b7d5ac09bcf216f1cf535",
     "text": "Получайте вдвое меньше урона от <keyword0>кровотечения</keyword0>"
   },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "4c28c448f960059b32a7234ae7a12a46316cc52acc0d0eb0dc69684f51be6470",
+    "text": "Кровавый оберег"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "3f7478a7ee63d27f5dd19a3ddd4a73ef7830f10a888e6b4fbd74641db1962331",
+    "text": "Получайте вдвое меньше урона от <keyword0>кровотечения</keyword0>, пока у вас есть <keyword1>Блок</keyword1>"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "02f4f2d7dd59e15d5e58332df5b5e1c5aeb32df8931013774bb6a98df9be0379",
+    "text": "Работа ног"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "8f80d3a8d255fce68b7b41de365aa3910a4c5ffa7b52769f3b794fb9e867a72a",
+    "text": "Получите {{value0}} ед. <keyword0>блока</keyword0>, когда вы <keyword1>уклоняетесь</keyword1>"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "e6e19a7f7ffa4136185f848fe2509eb2258656a66a0ac1268752fe6e58bad241",
+    "text": "Заземление"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "14f9af8c0f4e6640519f36e9d90c6a83bf6fc9e76c2c29c00eabc7ad977fbdc0",
+    "text": "Ударная защита"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "805dc29569ca7348efb73ff41c9124751070fbca1679d5006ff013b5683c3182",
+    "text": "Урон типа «<keyword0>Оглушение</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>блока</keyword1>"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "04634773854f747c8639e6cd849882a6d9ac15e2044c9240ca1855603dd4d134",
+    "text": "Укрепление"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "8d01fe33f900bfdee5ef40408cbf7f7a5e0cb5d20c5ba358fcb1bb518fd6fb3f",
+    "text": "Эффект «<keyword0>Блок</keyword0>» поглощает на {{value0}}% больше <keyword1>физического</keyword1> урона"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "bbf1bc1ffcd47bb394653be415f8e92d6dc1e2b6c81f3c19ac40a9409c6e68e2",
+    "text": "Священный щит"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "5f51c8d9bcdf62b67166b0b3bc6ac8cc651e2c3cf35b873cf277d9b952a9cddd",
+    "text": "Второе дыхание"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "dd58a0d2656062562df883648eaf196a10ab288bcd3a033288ff575bb2363aa9",
+    "text": "Опалённый солнцем щит"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "bb1eaef1a6e316570877dc782a55caa7da5a37a245ed88dcac8147f6f3b7b9d8",
+    "text": "Ядовитый оберег"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "ddb5e36b5491b748352400efb0c90e5412a432aaf533c4b13e8d4298edee6ee7",
+    "text": "Получайте вдвое меньше урона от <keyword0>яда</keyword0>, пока у вас есть <keyword1>Блок</keyword1>"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "a0a5fe798799bbcf09cdd1ef29cd436f21559495eac9e081e5157abba1605169",
+    "text": "Утяжелённая защита"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "4c6837763f915c5651a24ef018080bf1975627642beec98ea20945448e7b58c4",
+    "text": "Урон типа «<keyword0>Физический</keyword0>» повышается на {{value0}}% от вашего запаса <keyword1>блока</keyword1>"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

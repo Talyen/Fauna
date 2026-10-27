@@ -1073,6 +1073,102 @@
     "sourceHash": "71306e9312baa708533239a34765cea406278c956f051bad8bb43ac6ba245064",
     "text": "Recibes la mitad de daño de <keyword0>Sangrado</keyword0>"
   },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "a4ebd7a503742e643844009b33520a54c5397a8bcdd922be31737194f242bbfd",
+    "text": "Resguardo de sangre"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "30e3197487f36350dd68de248b7df24a4212f57f3cd3de401ec3eabed35eb398",
+    "text": "Recibe la mitad de daño de <keyword0>Sangrado</keyword0> mientras tienes <keyword1>Bloqueo</keyword1>"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "609d769084363ae7c533f4a0567bac6549c09d07f6006dfb3273f44ec07ed5da",
+    "text": "Juego de pies"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "a3c007733ebbe3b54a5e70d145ebefa021eda6ed0af54c4c2addb9987887993b",
+    "text": "Obtén {{value0}} de <keyword0>Bloqueo</keyword0> al <keyword1>esquivar</keyword1>"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "d47515d686a3c3512f8a5881a5e93b092d04193215a3897c86e50005ed22c62c",
+    "text": "Conexión a tierra"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "8d696e02ccfe9a6a4b590271f2d3741f81bbd333cb482dcbb718036a8d9b2464",
+    "text": "Guardia de impacto"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "e1c5e4f706400f3853a9e01a090666f9c5f627f9c6ae844fb5baca161340d6ee",
+    "text": "El daño de <keyword0>Aturdimiento</keyword0> aumenta en un {{value0}}% de tu <keyword1>Bloqueo</keyword1>"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "a708769234c1de4b2b6a2917a0cbb1e2a8cd71b742e19821e5b4be0083116088",
+    "text": "Reforzar"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "495056163ff13f0f7fed56cdee3ea3b368f306ca9e4dd711378bb772600fa7c8",
+    "text": "<keyword0>Bloqueo</keyword0> absorbe un {{value0}}% más de daño <keyword1>físico</keyword1>"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "6e3788394d2ab06d7d7f9856fe93e00d19af3d41b2b9f0df5846d7dd16d985c6",
+    "text": "Escudo sagrado"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "c5ed58af155d0316a540ad920e721b4d7939023a6a051fe28f14f46ccfff0e74",
+    "text": "Segundo aliento"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "50ec0e254061f00d06860027f044b535737e0355fa849db1cc1a5b168f90180d",
+    "text": "Escudo solar"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "d656519f5211f607aad64b8a9576a450c7c9b8ceaeeffc374631ad23ee58b04f",
+    "text": "Resguardo venenoso"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "016a120f475676ce8ca93b15de22f27bea9f45d4b2c19e36c9ffdbdb0dd3e4ae",
+    "text": "Recibe la mitad de daño de <keyword0>Veneno</keyword0> mientras tienes <keyword1>Bloqueo</keyword1>"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "4b47b939f6fbbcbf586221759245b06e210791371f7f019fa76372d1f0b4a231",
+    "text": "Guardia lastrada"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "0a384fb8e9e07ba281cd00416b94e67de27be66644e7e4d1aed915a74b802861",
+    "text": "El daño <keyword0>físico</keyword0> aumenta en un {{value0}}% de tu <keyword1>Bloqueo</keyword1>"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

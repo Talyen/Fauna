@@ -1073,6 +1073,102 @@
     "sourceHash": "98a5c4e6b68253f8b3daa0ba3d02d53c9b6a1e9eebd6e85942be19c99f8af523",
     "text": "受到的<keyword0>流血</keyword0>伤害减半"
   },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "70c2ec6d2e69d21a7ae0c6f050a062a888158b5c54c97c8c2d0da88fca719561",
+    "text": "鲜血结界"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "3fbdb5d254adde245f19616b2703aadd8bf29a0131197d450d083d6bec59ca41",
+    "text": "拥有<keyword1>格挡</keyword1>时，受到的<keyword0>流血</keyword0>伤害减半"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "e4a48293cc05263715d521c862f368bdf75dd08d2679bfc8406a8b7cfc136013",
+    "text": "步法"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "f3c3f6e1a3d4db447e6650a4e66682c1151523a07d203d8fb7b17b208cd22ea0",
+    "text": "你<keyword1>闪避</keyword1>时获得{{value0}}点<keyword0>格挡</keyword0>"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "8012dbcb79efc8ba082f0a94dc462ca6f45f550748df89cc2c7c764afe3490a9",
+    "text": "接地"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "1f27e077a21d523220d2b6d3d073547c8d40f5d0c382be793fd1dcaeb0f4b125",
+    "text": "冲击守卫"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "964d89c5f8f6c0e53c91887423df0661345462e87bf9b680d0777b19d09664b7",
+    "text": "<keyword0>眩晕</keyword0>伤害增加，数值为你的<keyword1>格挡</keyword1>的{{value0}}%"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "91fc238df24da7b1ed51e11b2ec596c02135d3a52ef6b049aa0894828998a8eb",
+    "text": "强化"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "e7576d374c4d9d8e7606293ccc29047cae2752c13998157df5cebd6d7b10f5b3",
+    "text": "<keyword0>格挡</keyword0>吸收的<keyword1>物理</keyword1>伤害增加{{value0}}%"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "f7895ddd137c50b2950e880df01bebaff468f50fd138d7de806041082b2002e3",
+    "text": "神圣之盾"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "b4ac9131d1d2d0ccd12a1207f849344afee2495f3e5f5193e72b920ae20a4655",
+    "text": "重振旗鼓"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "4708c737997688feab96f582d766153493f83a1131b344bcd28aeb2d4c192f22",
+    "text": "日灼之盾"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "7dbd50e0a1c07ebeb8afcc4508bb879553d62655f6d339061fb9605d41b558b7",
+    "text": "毒液结界"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "b2b128a041f46b1e6628b44e033df68ac4e84ce811da25acaa3df4cfaa0d5eec",
+    "text": "拥有<keyword1>格挡</keyword1>时，受到的<keyword0>中毒</keyword0>伤害减半"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "691988a2ef7d5df01f3a5a05f29d954a499e4d4d0a32f3419231ffd76d965a8d",
+    "text": "重型守卫"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "6d7c560a046fbf6eab1d7899f4e30843ce8b24632d9fcaac9ddd52664da02263",
+    "text": "<keyword0>物理</keyword0>伤害增加，数值为你的<keyword1>格挡</keyword1>的{{value0}}%"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

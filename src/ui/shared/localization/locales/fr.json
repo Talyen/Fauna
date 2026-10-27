@@ -1121,6 +1121,102 @@
     "sourceHash": "f6529715740d23135b5b886993ab5cbd0735944750d5eaf3798074bd37e58db4",
     "text": "Subissez la moitié des dégâts de <keyword0>Saignement</keyword0>"
   },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "1ee608c75423fd6e867dacb3a46f578858619d652de1ba0490daed29d32bcc83",
+    "text": "Protection sanglante"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "ecdcf044cb05a829c2df937ad1aa40b3eaffcc4eee2628db42e357cb682d5536",
+    "text": "Subissez la moitié des dégâts de <keyword0>Saignement</keyword0> tant que vous avez du <keyword1>Blocage</keyword1>"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "5a56e1b4595b64ce462e2ac6836160a84f06d478ef1b1138e4be13a3c877a0fe",
+    "text": "Jeu de jambes"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "226f7873349d711eb2dad0828c16cb0ab7fe06982cb47629128158e156be0369",
+    "text": "Gagnez {{value0}} <keyword0>Blocage</keyword0> quand vous <keyword1>Esquivez</keyword1>"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "db7c22ff03ea558f0fdd0d098142ca10e40fd7d617424ce4b8778f2c542ec639",
+    "text": "Mise à la terre"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "eccd3c11d169d5d4b5a0a5ff0667d6fc822875e8eb4791e2b903fa0d9c65a6c4",
+    "text": "Garde d'impact"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "703588c06c9b1e078fa81a18e6143cc656e5de37b0266bbc0f1a2c313fc1e96d",
+    "text": "Les dégâts d'<keyword0>Étourdissement</keyword0> augmentent de {{value0}}% de votre <keyword1>Blocage</keyword1>"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "b8d990206cf1bd8f2dafc1663e7ff1c85e54f448dd5dfc6513a0ddfa9b3cbd8c",
+    "text": "Renforcement"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "504c66a165133e7841581c13602c0af008b4e1f8adfd07d91cfb4aa7aaec9a63",
+    "text": "Le <keyword0>Blocage</keyword0> absorbe {{value0}}% de dégâts <keyword1>Physiques</keyword1> supplémentaires"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "3f843cf37c91f8d2721d0b1ff5e0816e394fee9701cf8b8de66a64a5c238c845",
+    "text": "Bouclier sacré"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "6dcc1006356cfa4d168675019d86688b434ea24f8c00f68a4c98989843e4a94b",
+    "text": "Second souffle"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "a9e3540659d1e9860a1f571bf5c2cda7bb629560f98b1f568fc5f514501e0514",
+    "text": "Bouclier solaire"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "9c0ceae4f416cf9469dc65d4de349af0bc5d95d1a990ecb7b7fe3ed0ecbc2bae",
+    "text": "Protection du venin"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "661c7c9804c93340154b24321ac9e79c7867727692672f48033187ccd1c91ccf",
+    "text": "Subissez la moitié des dégâts de <keyword0>Poison</keyword0> tant que vous avez du <keyword1>Blocage</keyword1>"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "87dd7e5c81a1396f863bc52327b9c933f530c1daf00ecf128b9ce9fe32492016",
+    "text": "Garde lestée"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "13f0bdfb183bcb11937090b34633307f026f30ad1dcae508dab4572512d2af84",
+    "text": "Les dégâts <keyword0>Physiques</keyword0> augmentent de {{value0}}% de votre <keyword1>Blocage</keyword1>"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

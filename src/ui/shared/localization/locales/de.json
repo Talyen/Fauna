@@ -1073,6 +1073,102 @@
     "sourceHash": "4ec7c611304b37ffbb2ef2427b33f27ff1bc710d909116af9a50a53bbb7b5bb7",
     "text": "Erleide halbierten Schaden vom Typ <keyword0>Blutung</keyword0>"
   },
+  "content.talent.block.blood-ward.name": {
+    "reviewed": true,
+    "source": "Blood Ward",
+    "sourceHash": "f12f427ab6ef3abc2f88a24a8ed2eea3f330eee5492a8869c3ac389c7f70de5b",
+    "text": "Blutwacht"
+  },
+  "content.talent.block.blood-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "ceda66296d649808fa94be11e85d36bc89be5c0162f03aeff1daf80172b907a3",
+    "text": "Erleide halbierten Schaden vom Typ <keyword0>Blutung</keyword0>, solange du <keyword1>Block</keyword1> hast"
+  },
+  "content.talent.block.footwork.name": {
+    "reviewed": true,
+    "source": "Footwork",
+    "sourceHash": "556ecd5f8c6f77d991fd5315117cddef89d1225e25cdbc3fe629e959adb0b747",
+    "text": "Beinarbeit"
+  },
+  "content.talent.block.footwork.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Dodge</keyword1>",
+    "sourceHash": "878cb69f0fd12510703a7b5c33f79af3ea245c57cd62fef15f63062152c18273",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>, wenn du <keyword1>ausweichst</keyword1>"
+  },
+  "content.talent.block.grounding.name": {
+    "reviewed": true,
+    "source": "Grounding",
+    "sourceHash": "141b70c170717bfcddbeafa6e1314e3802aa5cab21ccdaff32e8fcbdf81a8006",
+    "text": "Erdung"
+  },
+  "content.talent.block.impact-guard.name": {
+    "reviewed": true,
+    "source": "Impact Guard",
+    "sourceHash": "95f9d17977ba6831b11c0c19d45734ef1a5d749093ea061a0439063512d1c7f9",
+    "text": "Aufprallschutz"
+  },
+  "content.talent.block.impact-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "93bd5b0e668b1fcb376624b7541e3384fe60207bae7cb0fa2fab3bb7b7dec255",
+    "text": "Schaden vom Typ <keyword0>Betäubung</keyword0> wird um {{value0}}% deines <keyword1>Blocks</keyword1> erhöht"
+  },
+  "content.talent.block.reinforce.name": {
+    "reviewed": true,
+    "source": "Reinforce",
+    "sourceHash": "497d52810e71ecf7a669d5900ae1f40b8eb0c7a2d5e17454bac6707e39b05dbc",
+    "text": "Verstärkung"
+  },
+  "content.talent.block.reinforce.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> absorbs {{value0}}% more <keyword1>Physical</keyword1> damage",
+    "sourceHash": "33ee249f7bab05336fe62b12f74f75afd58d8c35b84c34e4816fb03ce4a03592",
+    "text": "<keyword0>Block</keyword0> fängt {{value0}}% mehr Schaden vom Typ <keyword1>Physisch</keyword1> ab"
+  },
+  "content.talent.block.sacred-shield.name": {
+    "reviewed": true,
+    "source": "Sacred Shield",
+    "sourceHash": "24e847f3b74c7d60e549239d6d439cef5ca34303206312b092f66cc1eacc1b10",
+    "text": "Heiliger Schild"
+  },
+  "content.talent.block.second-wind.name": {
+    "reviewed": true,
+    "source": "Second Wind",
+    "sourceHash": "92062728924ebcc40c2e30259847e800fb959fc83d16dee0165957e0842e220c",
+    "text": "Neue Kraft"
+  },
+  "content.talent.block.sun-struck-shield.name": {
+    "reviewed": true,
+    "source": "Sun-Struck Shield",
+    "sourceHash": "b9deb6e2983d1c9bdf080ef6511c6d2fc095646aea746a6373be06342abb267c",
+    "text": "Sonnengeküsster Schild"
+  },
+  "content.talent.block.venom-ward.name": {
+    "reviewed": true,
+    "source": "Venom Ward",
+    "sourceHash": "02fc0b29cd4c4aa1b36af8a34a7025ca06312b5f71de921cbd6914b8031b022e",
+    "text": "Giftwacht"
+  },
+  "content.talent.block.venom-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Poison</keyword0> damage while you have <keyword1>Block</keyword1>",
+    "sourceHash": "9aa72cecbea2ac92ddf067cc6b14772d76e0b51d75d1095c52c5783139c1f539",
+    "text": "Erleide halbierten Schaden vom Typ <keyword0>Gift</keyword0>, solange du <keyword1>Block</keyword1> hast"
+  },
+  "content.talent.block.weighted-guard.name": {
+    "reviewed": true,
+    "source": "Weighted Guard",
+    "sourceHash": "2dd347095f65284bef6ee12814bfa7822346b69281188fba2155c59b664bf2da",
+    "text": "Gewichtete Deckung"
+  },
+  "content.talent.block.weighted-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> damage is increased by {{value0}}% of your <keyword1>Block</keyword1>",
+    "sourceHash": "b955fc62255ac762b1256dc483073d131c1ec7edb25faeccb7c1b0fa5016bed4",
+    "text": "Schaden vom Typ <keyword0>Physisch</keyword0> wird um {{value0}}% deines <keyword1>Blocks</keyword1> erhöht"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
