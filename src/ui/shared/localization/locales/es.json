@@ -1451,6 +1451,42 @@
     "sourceHash": "ee752b999fa3ba97efe96096c26f5efcc858f8e18f1b4b5a56283a83fc4037af",
     "text": "Los efectos de probabilidad aliados que fallan tienen un {{value0}}% de probabilidad de volver a intentarse una vez"
   },
+  "content.species.glintstride.passive.0.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "bc21117aba8f39b909d96b4cd268d73650638992ebecf45eb7f0f63448275c84",
+    "text": "Los ataques de Glintstride infligen {{value0}} de daño de <keyword0>Luz</keyword0> adicional a los enemigos <keyword1>cegados</keyword1>"
+  },
+  "content.species.glintstride.passive.1.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "3eb87aee9d204d2a7abeaa35a94fe6171dfc5dfd94be09884909cd897fc72d4f",
+    "text": "Los ataques de Glintstride infligen {{value0}} de daño de <keyword0>Luz</keyword0> adicional a los enemigos <keyword1>cegados</keyword1>"
+  },
+  "content.species.glintstride.passive.2.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "f73ec964273254bd894dc6023adf71506bd469ef426e805f67a3317a79150b29",
+    "text": "Los ataques de Glintstride infligen {{value0}} de daño de <keyword0>Luz</keyword0> adicional a los enemigos <keyword1>cegados</keyword1>"
+  },
+  "content.species.glintstride.passive.3.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "9e924ebe8ce33f46843c88dc695ccaa1110193c428d8a22a1dfca174dec00b21",
+    "text": "Los ataques de Glintstride infligen {{value0}} de daño de <keyword0>Luz</keyword0> adicional a los enemigos <keyword1>cegados</keyword1>"
+  },
+  "content.species.glintstride.passive.4.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "e99b7c9f215eda882d2cfd65b2ab3d5afbd4fc277851b9c5eb1ad468bae111ef",
+    "text": "Los ataques de Glintstride infligen {{value0}} de daño de <keyword0>Luz</keyword0> adicional a los enemigos <keyword1>cegados</keyword1>"
+  },
+  "content.species.glintstride.passive.5.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "bd0f8197f73e2183bd925798a063efe88d49f60890df20a0e9f887b3df1ac321",
+    "text": "Los ataques de Glintstride infligen {{value0}} de daño de <keyword0>Luz</keyword0> adicional a los enemigos <keyword1>cegados</keyword1>"
+  },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
     "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
@@ -1817,6 +1853,42 @@
     "sourceHash": "a082ae1fa55bf87ab6aed76f71da42322f80df077c4509f486e6a047f29703dc",
     "text": "Al final de tu turno, cada aliado que no haya jugado cartas recupera {{value0}} de <keyword0>Salud</keyword0>"
   },
+  "content.species.ringpalm.passive.0.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "b67949f652acb4f9311f237f59c58e79e9da9e8c6d8511d10838581a69388470",
+    "text": "El daño de <keyword0>Aturdimiento</keyword0> de Ringpalm tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.ringpalm.passive.1.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "8ad480ded5a3480d03945ebb67ec8bf7e60f8359e1745bec07ed049f8485e5ed",
+    "text": "El daño de <keyword0>Aturdimiento</keyword0> de Ringpalm tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.ringpalm.passive.2.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "f92d7041ff2565859740aeaac2b1e4441b3341d3b04c7c2e7580d5dc071f30fe",
+    "text": "El daño de <keyword0>Aturdimiento</keyword0> de Ringpalm tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.ringpalm.passive.3.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "dd4e26f97dca9b810b6438d527436a98b44e16e412d5629198f925c24726bf56",
+    "text": "El daño de <keyword0>Aturdimiento</keyword0> de Ringpalm tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.ringpalm.passive.4.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "f5cc17bc96408cf94fa7786b0aae39c70009c46524546a09539f3a549c38c627",
+    "text": "El daño de <keyword0>Aturdimiento</keyword0> de Ringpalm tiene un {{value0}}% de probabilidad de repetirse"
+  },
+  "content.species.ringpalm.passive.5.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "69525ff61c46aa33ac922ff0a5202551bceee385c9ea8a0e3d88fa14e54a6ea5",
+    "text": "El daño de <keyword0>Aturdimiento</keyword0> de Ringpalm tiene un {{value0}}% de probabilidad de repetirse"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -1924,6 +1996,42 @@
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
     "sourceHash": "87b694ac1aa6dcc9e3b6bc7d37a3839986d871e213a7725c29237991197240dc",
     "text": "Los aliados obtienen {{value0}} de <keyword0>Bloqueo</keyword0> al entrar mediante un cambio"
+  },
+  "content.species.sternshell.passive.0.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "250d054de0994e68d1400e4dc02fb71f3940f8cfacd2557c0042b2718cf27656",
+    "text": "Sternshell comienza el combate con {{value0}} de <keyword0>Armadura</keyword0>"
+  },
+  "content.species.sternshell.passive.1.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "e7df030e636519b17e11db96487178af8df21605c9b16c73f48c2b37afa6c9a5",
+    "text": "Sternshell comienza el combate con {{value0}} de <keyword0>Armadura</keyword0>"
+  },
+  "content.species.sternshell.passive.2.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "b21e76ec335da21bfcfc77d58a09b843e5fb3af96119064ad2ad4dbc5add51d2",
+    "text": "Sternshell comienza el combate con {{value0}} de <keyword0>Armadura</keyword0>"
+  },
+  "content.species.sternshell.passive.3.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "22b24a72aa8b1ec1b26a9d0db9fe0337fe88f339cea22b07d0098a79cf8be9c5",
+    "text": "Sternshell comienza el combate con {{value0}} de <keyword0>Armadura</keyword0>"
+  },
+  "content.species.sternshell.passive.4.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "42fbb123f3a15e4f8f52fc0ee9a0e04a43140e167a46aa375f2691cac221b1ac",
+    "text": "Sternshell comienza el combate con {{value0}} de <keyword0>Armadura</keyword0>"
+  },
+  "content.species.sternshell.passive.5.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "66f4ff8d8a1e8e17cecb951154a325191bd8ed610b7d635568a59ac98c0a56f4",
+    "text": "Sternshell comienza el combate con {{value0}} de <keyword0>Armadura</keyword0>"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,

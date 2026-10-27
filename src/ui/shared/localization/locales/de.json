@@ -1451,6 +1451,42 @@
     "sourceHash": "46d85ad83d4d7e17ba17c52e45253e76b2cc9a32c48ee64a21fa893940121805",
     "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
   },
+  "content.species.glintstride.passive.0.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "b6725a62675df1a1131ce669d51520db61e2d813760d55c68f3eea634d4c809b",
+    "text": "Glintstrides Angriffe verursachen bei <keyword1>geblendeten</keyword1> Gegnern zusätzlich {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
+  "content.species.glintstride.passive.1.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "416c65b0612853cc102b8dbee41bb1f8ccb24a79133962d86be506a790f8175e",
+    "text": "Glintstrides Angriffe verursachen bei <keyword1>geblendeten</keyword1> Gegnern zusätzlich {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
+  "content.species.glintstride.passive.2.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "475fda88ebdb4274886d9d8a3c621fc3956182b5f143f534c1745758f9f34f1c",
+    "text": "Glintstrides Angriffe verursachen bei <keyword1>geblendeten</keyword1> Gegnern zusätzlich {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
+  "content.species.glintstride.passive.3.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "79bd2f48c0aeb85a6212abb23cc70ebbfa718307046aed78859ef159d4eefd4c",
+    "text": "Glintstrides Angriffe verursachen bei <keyword1>geblendeten</keyword1> Gegnern zusätzlich {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
+  "content.species.glintstride.passive.4.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "9e71212858c1765285feded749868ba34d676de68a41892618734e519c28fea1",
+    "text": "Glintstrides Angriffe verursachen bei <keyword1>geblendeten</keyword1> Gegnern zusätzlich {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
+  "content.species.glintstride.passive.5.rule": {
+    "reviewed": true,
+    "source": "Glintstride’s attacks deal {{value0}} additional <keyword0>Light</keyword0> damage to <keyword1>Blinded</keyword1> enemies",
+    "sourceHash": "851e55955538880560f6827f7ac87631a1cff9f168dc5fff8bf5a0ac0aa494b2",
+    "text": "Glintstrides Angriffe verursachen bei <keyword1>geblendeten</keyword1> Gegnern zusätzlich {{value0}} Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
   "content.species.memento.passive.0.rule": {
     "reviewed": true,
     "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
@@ -1817,6 +1853,42 @@
     "sourceHash": "be5cefcbb0084277233398b2b99c41816c3af9838a8135a3e1da44de915c4def",
     "text": "Am Ende deines Zuges stellt jeder Verbündete, der keine Karte gespielt hat, {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.species.ringpalm.passive.0.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "b2d6d5a765b7442a11e90bee93d5910a3f40c277283e15db10a2b21a87fbdb6d",
+    "text": "Ringpalms <keyword0>Betäubungs</keyword0>schaden hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.ringpalm.passive.1.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "0aad00c60105624b11ebee7ce0582deebe00d19f57b7817424f5aa1238bdbeb3",
+    "text": "Ringpalms <keyword0>Betäubungs</keyword0>schaden hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.ringpalm.passive.2.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "1180c9fb71f07fada98bc8b7606bd0c5ace0e84554a64299af3fd36f01aa7679",
+    "text": "Ringpalms <keyword0>Betäubungs</keyword0>schaden hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.ringpalm.passive.3.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "7294f5da0a9945b2f55da582c7ce620d13f3aed6d4c8c6d48c1255bd8f99a418",
+    "text": "Ringpalms <keyword0>Betäubungs</keyword0>schaden hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.ringpalm.passive.4.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "d7041db9d8b355d2fae9fa8cdf748b19ef2c846a8d4c99a5ea9a614411d8a813",
+    "text": "Ringpalms <keyword0>Betäubungs</keyword0>schaden hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
+  "content.species.ringpalm.passive.5.rule": {
+    "reviewed": true,
+    "source": "Ringpalm’s <keyword0>Stun</keyword0> damage has a {{value0}}% chance to repeat",
+    "sourceHash": "37174bd770bff62eb65af45b2fe79d9084023a63f215e32831e8af9e70299684",
+    "text": "Ringpalms <keyword0>Betäubungs</keyword0>schaden hat eine Chance von {{value0}}%, sich zu wiederholen"
+  },
   "content.species.rookhaven.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card has a {{value0}}% chance to copy it",
@@ -1924,6 +1996,42 @@
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0> when they swap in",
     "sourceHash": "8f5e630e22c23361ad739f1a4c47f1544bfa873c9fd18eadcff6ed600de703db",
     "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>, wenn sie eingewechselt werden"
+  },
+  "content.species.sternshell.passive.0.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "b16f7440050d34f08cca10c1fd7e5e50a5c4c817c3db03738246d367d7c9b440",
+    "text": "Sternshell beginnt den Kampf mit {{value0}} <keyword0>Rüstung</keyword0>"
+  },
+  "content.species.sternshell.passive.1.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "38eb596fc5d171c4614a5980a8523f25fcba4430c39375a10ab2d75c8f2c5083",
+    "text": "Sternshell beginnt den Kampf mit {{value0}} <keyword0>Rüstung</keyword0>"
+  },
+  "content.species.sternshell.passive.2.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "6fcdcb54bc8d131b6e6920971fb7c8bb41dbaeac1a718b1766710bbf98bcc0b3",
+    "text": "Sternshell beginnt den Kampf mit {{value0}} <keyword0>Rüstung</keyword0>"
+  },
+  "content.species.sternshell.passive.3.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "6d2c96a9dcebddad15cce7c22ad77a0950c2941b3276e2a0d6015443e49046cd",
+    "text": "Sternshell beginnt den Kampf mit {{value0}} <keyword0>Rüstung</keyword0>"
+  },
+  "content.species.sternshell.passive.4.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "d38b5cfbb8231704fbbb26dc49afe2d60b07409576eee8f4f6621d90029a603d",
+    "text": "Sternshell beginnt den Kampf mit {{value0}} <keyword0>Rüstung</keyword0>"
+  },
+  "content.species.sternshell.passive.5.rule": {
+    "reviewed": true,
+    "source": "Sternshell starts combat with {{value0}} <keyword0>Armor</keyword0>",
+    "sourceHash": "71e9f7b8624c238eab1a6d0dfb8bc657fdbc1fbf63ec1f806723fb10fbd69d44",
+    "text": "Sternshell beginnt den Kampf mit {{value0}} <keyword0>Rüstung</keyword0>"
   },
   "content.species.stillara.passive.0.rule": {
     "reviewed": true,
