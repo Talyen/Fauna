@@ -538,8 +538,8 @@ it("localizes a reflected status using its actual recipient", () => {
   const events: GameEvent[] = [];
   resolveCombat("applyHarmfulStatus", game, actor, reflector, 1, "poison", events);
   const event = events.find((entry) => entry.kind === "status" && entry.status === "reflect")!;
-  expect(event.kind === "status" && event.recipientId).toBeTruthy();
-  const recipient = game.team.find((unit) => event.kind === "status" && unit.id === event.recipientId)!;
+  const recipient = game.team.find((unit) => event.text.endsWith(` to ${species(unit.species).name}`))!;
+  expect(recipient).toBeDefined();
   const reader = createMessageReader("fr", french);
   expect(eventPresentation(game, event, reader)).toBe(
     `${localizedCombatantName(reflector, reader)} renvoie Poison vers ${localizedCombatantName(recipient, reader)}`,
