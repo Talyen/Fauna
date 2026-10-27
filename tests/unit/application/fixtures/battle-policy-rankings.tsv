@@ -9,7 +9,7 @@ aerostat	defended	{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-r
 aerostat	defended	{"command":{"type":"play","cardId":"copy-0","targetId":"ally-0","autoEndTurn":false},"score":106,"reason":"Use Trail Bread for its visible benefit"}
 aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-parcel-drop","autoEndTurn":false},"score":400,"reason":"Use Parcel Drop for its visible benefit"}
 aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-true-bearing","autoEndTurn":false},"score":202,"reason":"Use True Bearing for its visible benefit"}
-aerostat	talented	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":112,"reason":"Use Trail Bread for its visible benefit"}
+aerostat	talented	{"command":{"type":"play","cardId":"copy-0","autoEndTurn":false},"score":132,"reason":"Use Trail Bread for its visible benefit"}
 aerostat	talented	{"command":{"type":"play","cardId":"ally-0:aerostat-voyagers-rest","autoEndTurn":false},"score":106,"reason":"Use Voyager’s Rest for its visible benefit"}
 almanelle	ordinary	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
 almanelle	ordinary	{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}
@@ -275,13 +275,13 @@ mossguard	defended	{"command":{"type":"play","cardId":"ally-0:mossguard-guard","
 mossguard	talented	{"command":{"type":"play","cardId":"ally-0:mossguard-heal","autoEndTurn":false},"score":3002,"reason":"Use Moss Renewal for its visible benefit"}
 mossguard	talented	{"command":{"type":"play","cardId":"ally-0:mossguard-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
 mossguard	talented	{"command":{"type":"play","cardId":"ally-0:mossguard-guard","autoEndTurn":false},"score":106,"reason":"Use Boulder Brace for its visible benefit"}
-neradora	ordinary	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":103,"reason":"Use Undertow Knot for its visible benefit"}
+neradora	ordinary	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":104,"reason":"Use Undertow Knot for its visible benefit"}
 neradora	injured	{"command":{"type":"play","cardId":"ally-0:neradora-bloom-shelter","autoEndTurn":false},"score":3002,"reason":"Use Bloom Shelter for its visible benefit"}
-neradora	injured	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":103,"reason":"Use Undertow Knot for its visible benefit"}
-neradora	defended	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":103,"reason":"Use Undertow Knot for its visible benefit"}
+neradora	injured	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":104,"reason":"Use Undertow Knot for its visible benefit"}
+neradora	defended	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":104,"reason":"Use Undertow Knot for its visible benefit"}
 neradora	talented	{"command":{"type":"play","cardId":"ally-0:neradora-bloom-shelter","autoEndTurn":false},"score":3002,"reason":"Use Bloom Shelter for its visible benefit"}
 neradora	talented	{"command":{"type":"play","cardId":"ally-0:neradora-tide-cup","autoEndTurn":false},"score":202,"reason":"Use Tide Cup for its visible benefit"}
-neradora	talented	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":103,"reason":"Use Undertow Knot for its visible benefit"}
+neradora	talented	{"command":{"type":"play","cardId":"ally-0:neradora-undertow-knot","autoEndTurn":false},"score":104,"reason":"Use Undertow Knot for its visible benefit"}
 oathara	ordinary	{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}
 oathara	ordinary	{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}
 oathara	injured	{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}
@@ -353,14 +353,14 @@ prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-l
 prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}
 prismram	talented	{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}
 pyrella	ordinary	{"command":{"type":"play","cardId":"ally-0:pyrella-festival-burst","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
-pyrella	ordinary	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":403,"reason":"Use Spark Decoy for its visible benefit"}
+pyrella	ordinary	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":156,"reason":"Use Spark Decoy for its visible benefit"}
 pyrella	injured	{"command":{"type":"play","cardId":"ally-0:pyrella-festival-burst","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
-pyrella	injured	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":403,"reason":"Use Spark Decoy for its visible benefit"}
+pyrella	injured	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":156,"reason":"Use Spark Decoy for its visible benefit"}
 pyrella	defended	{"command":{"type":"play","cardId":"ally-0:pyrella-festival-burst","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
-pyrella	defended	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":403,"reason":"Use Spark Decoy for its visible benefit"}
+pyrella	defended	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":156,"reason":"Use Spark Decoy for its visible benefit"}
 pyrella	talented	{"command":{"type":"play","cardId":"ally-0:pyrella-ember-harvest","autoEndTurn":false},"score":3001,"reason":"Use Ember Harvest for its visible benefit"}
 pyrella	talented	{"command":{"type":"play","cardId":"ally-0:pyrella-festival-burst","autoEndTurn":false},"score":1509,"reason":"Damage enemies; give roster creatures priority over Minions"}
-pyrella	talented	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":403,"reason":"Use Spark Decoy for its visible benefit"}
+pyrella	talented	{"command":{"type":"play","cardId":"ally-0:pyrella-spark-decoy","autoEndTurn":false},"score":156,"reason":"Use Spark Decoy for its visible benefit"}
 reedstag	ordinary	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
 reedstag	ordinary	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
 reedstag	ordinary	{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
