@@ -58,6 +58,7 @@ const bridge = Object.freeze({
       ipcRenderer.removeListener("fauna:overlay", handler);
     };
   },
+  getSteamLanguage: () => ipcRenderer.invoke("fauna:steam-language"),
   readCandidates: () => ipcRenderer.invoke("fauna:read"),
   writeSave: (/** @type {string} */ data, /** @type {string[]} */ recoverable = []) =>
     ipcRenderer.invoke("fauna:write", data, recoverable),

@@ -95,9 +95,16 @@ steps below still apply.
    qualify browser, desktop, Windows and Steam separately. Do not offer or advertise
    a language until its catalog, fonts, interactions and layouts are complete
 
+The device-local preference owner can resolve an available qualified catalog
+using a saved choice, Steam's game language, then system languages. Optional
+storage and Steam failures fall back without blocking play; stale Steam responses
+cannot override a manual choice. Only English is selectable. The Steam worker
+uses an isolated, bounded language request so an invalid or timed-out optional
+reply does not stop its Cloud transport. Runtime catalog and startup coverage is
+still incomplete, so the runtime qualification flag remains false.
+
 The inventory, explicit UI messages and internal rule-message adapter are
 preparation steps. The adapter retains numeric values and keyword identities so a
 complete translated rule can reorder them; invalid templates fall back to the
 English rule. The English catalog covers only migrated UI calls. It does not yet
-cover every message, generated rules or non-English catalogs, and no language
-selector is available. Fauna remains English-only.
+cover every message, generated rules or non-English catalogs, and no player-facing language selector is available. Fauna remains English-only.

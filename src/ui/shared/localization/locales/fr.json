@@ -1,9 +1,99 @@
 {
+  "battle.actionHand": {
+    "reviewed": true,
+    "source": "Action hand",
+    "sourceHash": "930adb56339671966edd9f9d38aeeca5365378b624151e2391d17808dae2bb15",
+    "text": "Cartes en main"
+  },
   "battle.autoplay": {
     "reviewed": true,
     "source": "Auto-play",
     "sourceHash": "3f09db6e85e5469409c2f194b394ab90594bad15c191d9a60159ee321f668399",
     "text": "Jeu automatique"
+  },
+  "battle.backupName": {
+    "reviewed": true,
+    "source": "{{name}} (backup)",
+    "sourceHash": "11f19012e814452cc64123f0f7b6b5e3473577cebf38f6d584746449e602b522",
+    "text": "{{name}} (en réserve)"
+  },
+  "battle.battlefield": {
+    "reviewed": true,
+    "source": "Battlefield",
+    "sourceHash": "fed897ef28f23f876589eb5bcd1b02615a372c8c968d5c53030e1bc6c80f06fc",
+    "text": "Champ de bataille"
+  },
+  "battle.cardsAndControls": {
+    "reviewed": true,
+    "source": "Battle cards and controls",
+    "sourceHash": "ce3ba0220adc0bdcf6785338695b7dd6d0a5d9dc969bb86c25cdecaf5a42e2f9",
+    "text": "Cartes et commandes du combat"
+  },
+  "battle.chooseAlly": {
+    "reviewed": true,
+    "source": "Choose an ally",
+    "sourceHash": "1e49286aabe62cdd5ed5aae502c79a2349d06d148669eff46127b957d4d30343",
+    "text": "Choisir un allié"
+  },
+  "battle.chooseBackup": {
+    "reviewed": true,
+    "source": "Choose a backup",
+    "sourceHash": "64dd68797af2428e97ab896dbb4ea6803be8e71f3a48c5a73f4d8f962e65c1a5",
+    "text": "Choisir une créature en réserve"
+  },
+  "battle.chooseEnemy": {
+    "reviewed": true,
+    "source": "Choose an enemy",
+    "sourceHash": "026e0593b0f9a4146c523d8f8621fc1d6f68653ee74436ec1d4e7fedaf0edd25",
+    "text": "Choisir un ennemi"
+  },
+  "battle.endTurn": {
+    "reviewed": true,
+    "source": "End turn",
+    "sourceHash": "f9c7ab7f7a00eeb8065225949be29e6224edf6291ea99c3b4583212a576708e0",
+    "text": "Terminer le tour"
+  },
+  "battle.endTurnPrompt": {
+    "reviewed": true,
+    "source": "End turn · {{prompt}}",
+    "sourceHash": "7386dfcef9a93fad34b5f6efb378ed06d4bf26bc551c52acabb9803c6939e37e",
+    "text": "Terminer le tour · {{prompt}}"
+  },
+  "battle.enemyRow": {
+    "reviewed": true,
+    "source": "Enemy row",
+    "sourceHash": "cfdf87620f958ebfa4733bb58198fc71df43ce1c64611caaebe5b297869827d0",
+    "text": "Rangée ennemie"
+  },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "a29eb81fa82692671f60b862f421c625f9597950f960959f788e4fc4090b19fc",
+    "text": "Nourriture"
+  },
+  "battle.inspectDiscardPile": {
+    "reviewed": true,
+    "source": "Inspect Discard Pile",
+    "sourceHash": "1ef6311d4023ea4a8c7e2fdc1b698451d412a5289a0e22db06c8496aa3dc80d2",
+    "text": "Examiner la défausse"
+  },
+  "battle.inspectDrawPile": {
+    "reviewed": true,
+    "source": "Inspect Draw Pile",
+    "sourceHash": "8fa77167f58fb95b8b7d443f5424b8d1b7ef229f9eb0fe0909ee45bd4fe202f3",
+    "text": "Examiner la pioche"
+  },
+  "battle.mana": {
+    "reviewed": true,
+    "source": "Mana {{mana}} of {{maximum}}",
+    "sourceHash": "8bc2955df13cb6cabb67aba029447633531d103cb7983f7ff615223dff836b97",
+    "text": "Mana {{mana}} sur {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "reviewed": true,
+    "source": "Next card ×2",
+    "sourceHash": "f2731f3b6055b34ffe9df8b79050f4167ae1847771c3462d6e2516f178d08553",
+    "text": "Prochaine carte ×2"
   },
   "battle.openMenu": {
     "reviewed": true,
@@ -11,11 +101,47 @@
     "sourceHash": "af2d7a1c144898b56d0f8d3d19de6366479730ef02642dc034996f9a4d184b68",
     "text": "Ouvrir le menu"
   },
+  "battle.playerRow": {
+    "reviewed": true,
+    "source": "Player row",
+    "sourceHash": "bf774b7358a5eb7a3009f315d1d5379b38cb6024c7223e3ad7b011bbc562c189",
+    "text": "Rangée alliée"
+  },
+  "battle.resurrectBackup": {
+    "reviewed": true,
+    "source": "Resurrect {{name}} from backup",
+    "sourceHash": "989b292332b1939cdcf876e9c3dc1733f500f06ae7a4192e8b1b543f6e21be88",
+    "text": "Ressusciter {{name}} depuis la réserve"
+  },
   "battle.skipCombat": {
     "reviewed": true,
     "source": "Skip combat",
     "sourceHash": "105f1e622c5eeca2121146cad24611673a3544d4a27ee4164132f1604a46652b",
     "text": "Passer le combat"
+  },
+  "battle.swapBackup": {
+    "reviewed": true,
+    "source": "Swap in {{name}} from backup",
+    "sourceHash": "2501e433f475cabb4fc0bbc638ab02f00ea627be31f050a3782d9a67004a869e",
+    "text": "Faire entrer {{name}} depuis la réserve"
+  },
+  "battle.target": {
+    "reviewed": true,
+    "source": "Target {{name}}",
+    "sourceHash": "620ddd49706b7c3840f198525e6fc06e4feee6abaff3106b8ba726707cd0251b",
+    "text": "Cibler {{name}}"
+  },
+  "battle.targetSummary": {
+    "reviewed": true,
+    "source": "{{owner}} · {{target}}",
+    "sourceHash": "abcfda8e3d8278a6ae1f5a5c203a6a2d3b2ba62faa96d3edcad92bd8bedd17c6",
+    "text": "{{owner}} · {{target}}"
+  },
+  "common.cancel": {
+    "reviewed": true,
+    "source": "Cancel",
+    "sourceHash": "14703e318dd6f347fa38161a886cdd1dc1fea7783c2dc6c66c0d0eb1118b9124",
+    "text": "Annuler"
   },
   "common.loading": {
     "reviewed": true,

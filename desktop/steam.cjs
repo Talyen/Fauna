@@ -7,7 +7,7 @@ const { createStorage } = require("./storage.cjs");
 const validName = (name) => typeof name === "string" && /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
 /**
  * @param {{app: Pick<import("electron").App, "isPackaged">, utilityProcess: Pick<typeof import("electron").utilityProcess, "fork">, directory: string, isolated: boolean, pause: (active: boolean) => void, loadBinding?: () => typeof import("./steam-overlay.cjs")}} options
- * @returns {Promise<Required<import("../src/platform/ports").CloudPort> & {storage: ReturnType<typeof createStorage>, overlay: () => boolean, dispose: () => Promise<void>}>}
+ * @returns {Promise<Required<import("../src/platform/ports").CloudPort> & {language: () => Promise<string | null>, storage: ReturnType<typeof createStorage>, overlay: () => boolean, dispose: () => Promise<void>}>}
  */
 async function createSteam({
   app,
@@ -71,18 +71,27 @@ async function createSteam({
     if (dead || transportStopped || !worker) return Promise.reject(new Error("Steam transport unavailable."));
     const id = ++sequence;
     return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => {
-        stopTransport(
-          new Error("Steam Cloud timed out. Local saves remain available; restart to reconnect."),
-        );
-      }, 5000);
+      const timer = setTimeout(
+        () => {
+          if (operation === "language") {
+            requests.delete(id);
+            reject(new Error("Steam language unavailable."));
+            return;
+          }
+          stopTransport(
+            new Error("Steam Cloud timed out. Local saves remain available; restart to reconnect."),
+          );
+        },
+        operation === "language" ? 1500 : 5000,
+      );
       requests.set(id, {
         resolve: (value) => {
           try {
             resolve(parseReply(operation, value));
           } catch (error) {
             reject(error);
-            stopTransport(error instanceof Error ? error : new Error("Invalid Steam response."));
+            if (operation !== "language")
+              stopTransport(error instanceof Error ? error : new Error("Invalid Steam response."));
           }
         },
         reject,
@@ -213,6 +222,10 @@ async function createSteam({
   };
   return {
     storage,
+    language: async () => {
+      if (!worker || dead || transportStopped) return null;
+      return request("language", []).catch(() => null);
+    },
     overlay: () => overlayActive,
     identity: async () => {
       const local = available ? await storage.readCandidates() : [];

@@ -1,12 +1,75 @@
 {
+  "battle.actionHand": {
+    "text": "Action hand"
+  },
   "battle.autoplay": {
     "text": "Auto-play"
+  },
+  "battle.backupName": {
+    "text": "{{name}} (backup)"
+  },
+  "battle.battlefield": {
+    "text": "Battlefield"
+  },
+  "battle.cardsAndControls": {
+    "text": "Battle cards and controls"
+  },
+  "battle.chooseAlly": {
+    "text": "Choose an ally"
+  },
+  "battle.chooseBackup": {
+    "text": "Choose a backup"
+  },
+  "battle.chooseEnemy": {
+    "text": "Choose an enemy"
+  },
+  "battle.endTurn": {
+    "text": "End turn"
+  },
+  "battle.endTurnPrompt": {
+    "text": "End turn · {{prompt}}"
+  },
+  "battle.enemyRow": {
+    "text": "Enemy row"
+  },
+  "battle.food": {
+    "text": "Food"
+  },
+  "battle.inspectDiscardPile": {
+    "text": "Inspect Discard Pile"
+  },
+  "battle.inspectDrawPile": {
+    "text": "Inspect Draw Pile"
+  },
+  "battle.mana": {
+    "text": "Mana {{mana}} of {{maximum}}"
+  },
+  "battle.nextCardRepeat": {
+    "text": "Next card ×2"
   },
   "battle.openMenu": {
     "text": "Open menu"
   },
+  "battle.playerRow": {
+    "text": "Player row"
+  },
+  "battle.resurrectBackup": {
+    "text": "Resurrect {{name}} from backup"
+  },
   "battle.skipCombat": {
     "text": "Skip combat"
+  },
+  "battle.swapBackup": {
+    "text": "Swap in {{name}} from backup"
+  },
+  "battle.target": {
+    "text": "Target {{name}}"
+  },
+  "battle.targetSummary": {
+    "text": "{{owner}} · {{target}}"
+  },
+  "common.cancel": {
+    "text": "Cancel"
   },
   "common.loading": {
     "text": "Loading…"

@@ -7,7 +7,7 @@ function parseRequest(value) {
     throw new Error("Invalid Steam request.");
   const valid =
     (operation === "init" && args.length === 1 && Number.isSafeInteger(args[0]) && args[0] > 0) ||
-    ((operation === "enabled" || operation === "list") && args.length === 0) ||
+    ((operation === "enabled" || operation === "language" || operation === "list") && args.length === 0) ||
     (operation === "read" && args.length === 1 && typeof args[0] === "string") ||
     (operation === "write" && args.length === 2 && args.every((arg) => typeof arg === "string"));
   if (!valid) throw new Error("Invalid Steam request.");
@@ -24,6 +24,8 @@ function parseReply(operation, value) {
   const valid =
     (operation === "init" && typeof value === "string" && /^\d{1,20}$/.test(value)) ||
     (operation === "enabled" && typeof value === "boolean") ||
+    (operation === "language" &&
+      (value === null || (typeof value === "string" && /^[a-z0-9_-]{1,32}$/i.test(value)))) ||
     (operation === "write" && value === true) ||
     (operation === "list" &&
       Array.isArray(value) &&

@@ -10,7 +10,7 @@ export function createPlatform(): Platform {
     cloud: bridge.cloud,
     onOverlay: bridge.onOverlay,
     diagnostics: browserDiagnostics(),
-    steam: { available: false },
+    steam: { available: false, getLanguage: bridge.getSteamLanguage },
     saves: {
       readCandidates: () => bridge.readCandidates(),
       async write(data, isRecoverable) {

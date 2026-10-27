@@ -1,6 +1,7 @@
 export interface SteamRequests {
   init: { args: [number]; result: string };
   enabled: { args: []; result: boolean };
+  language: { args: []; result: string | null };
   list: { args: []; result: string[] };
   read: { args: [string]; result: string | null };
   write: { args: [string, string]; result: true };
