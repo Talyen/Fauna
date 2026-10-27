@@ -1563,6 +1563,21 @@ it("announces a reviewed status and glossary definition in the selected language
   view.unmount();
 });
 
+it("announces reviewed control immunity and Death's Door durations", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const combat = { ...freshCombat(), cooldown: 2, grace: 1 };
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CombatStatus combat={combat} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(screen.getByRole("button", { name: "Immunité au contrôle 2" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Aux portes de la mort 1" })).toBeTruthy();
+  view.unmount();
+});
+
 it("extracts and presents transient combat status variants without changing their rules", () => {
   const sources = [
     "src/ui/shared/combat/combat-status-model.ts",

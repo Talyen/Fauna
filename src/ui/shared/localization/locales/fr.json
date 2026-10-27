@@ -929,6 +929,18 @@
     "sourceHash": "392034dfd6e2306279671a8e635a19bee8e65cd79e5eab0d3a2a277b09ef71ab",
     "text": "<keyword0>Étourdissement</keyword0> : {{value0}} tour"
   },
+  "content.status.cooldown.v2db257f39699f407.rule": {
+    "reviewed": true,
+    "source": "Control immunity {{value0}}",
+    "sourceHash": "8c844848b9245b64a51bb524837cad0ab5922f26ecf2f3685cafb6a0ed634cd2",
+    "text": "Immunité au contrôle {{value0}}"
+  },
+  "content.status.grace.v6e81bc0f25243d28.rule": {
+    "reviewed": true,
+    "source": "Death's Door {{value0}}",
+    "sourceHash": "51e4e30b20d204602f49f0f186d9d627aef52fd2517aeee7d3a12bb019d1b68e",
+    "text": "Aux portes de la mort {{value0}}"
+  },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
     "source": "Armored Surge",

@@ -881,6 +881,18 @@
     "sourceHash": "02a14098de145f01ec9cc17334afdad1cfb0619bc32dbd8e4ced186feb47cfeb",
     "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
   },
+  "content.status.cooldown.v2db257f39699f407.rule": {
+    "reviewed": true,
+    "source": "Control immunity {{value0}}",
+    "sourceHash": "3a0250adcbcea11c91b016b0fbfb7627c3d80846f416fca52c364ec5f784cb37",
+    "text": "Иммунитет к контролю {{value0}}"
+  },
+  "content.status.grace.v6e81bc0f25243d28.rule": {
+    "reviewed": true,
+    "source": "Death's Door {{value0}}",
+    "sourceHash": "c029e40cb666cfbee45bf58c4750f431059c13f92a3ea8f5ea5f5a0da59a97bf",
+    "text": "На пороге смерти {{value0}}"
+  },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
     "source": "Armored Surge",

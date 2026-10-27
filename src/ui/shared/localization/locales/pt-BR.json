@@ -881,6 +881,18 @@
     "sourceHash": "70def7ca48503e51f350ca2e934aee0c7f9104428206591fc1caf7c161a11ee2",
     "text": "<keyword0>Atordoamento</keyword0>: {{value0}} turno"
   },
+  "content.status.cooldown.v2db257f39699f407.rule": {
+    "reviewed": true,
+    "source": "Control immunity {{value0}}",
+    "sourceHash": "ce08427955504a741652173a00fc1cca2fb796a3cdde72f048647caa4d19df84",
+    "text": "Imunidade a controle {{value0}}"
+  },
+  "content.status.grace.v6e81bc0f25243d28.rule": {
+    "reviewed": true,
+    "source": "Death's Door {{value0}}",
+    "sourceHash": "d3c470905d1e6112c982cbc7b4ebcf8826c8bcd82d958174ea4feac4df6ff353",
+    "text": "À beira da morte {{value0}}"
+  },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
     "source": "Armored Surge",

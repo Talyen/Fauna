@@ -881,6 +881,18 @@
     "sourceHash": "cea38a121bf3d16eb662a21e9598ef84564ba121af980bebcb450387c2c7a134",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
+  "content.status.cooldown.v2db257f39699f407.rule": {
+    "reviewed": true,
+    "source": "Control immunity {{value0}}",
+    "sourceHash": "e32203d5a5a38dd39f479a7e844389818e429c2166a7603a0224a11d13c8dd90",
+    "text": "行動不能への耐性 {{value0}}"
+  },
+  "content.status.grace.v6e81bc0f25243d28.rule": {
+    "reviewed": true,
+    "source": "Death's Door {{value0}}",
+    "sourceHash": "152984fd4c12321d5db6d40d61ddfc3682f20c4bd7ec97518f23905c54e79449",
+    "text": "死の淵 {{value0}}"
+  },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
     "source": "Armored Surge",

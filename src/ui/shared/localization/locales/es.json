@@ -881,6 +881,18 @@
     "sourceHash": "9f7c42c97f48ee97218b8721dc85d7750ae3a4c7c108ffecf3dda3c3a84021aa",
     "text": "<keyword0>Aturdimiento</keyword0>: {{value0}} turno"
   },
+  "content.status.cooldown.v2db257f39699f407.rule": {
+    "reviewed": true,
+    "source": "Control immunity {{value0}}",
+    "sourceHash": "91c8fc42932708112ef8bd0392bedd31214d30fbab9e78f62e68998779200153",
+    "text": "Inmunidad al control {{value0}}"
+  },
+  "content.status.grace.v6e81bc0f25243d28.rule": {
+    "reviewed": true,
+    "source": "Death's Door {{value0}}",
+    "sourceHash": "17716b43bee3f3b1807b38a5e8daf16160909793f57c1c4234a1c1f452e83e56",
+    "text": "Al borde de la muerte {{value0}}"
+  },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
     "source": "Armored Surge",
