@@ -3521,6 +3521,12 @@
     "sourceHash": "8a4093fa9594572b78160cc461ee858a5b24197ea076faa09caa7d1a219c599e",
     "text": "双方在防御之前都有{{value0}}%的概率避开每个攻击伤害包; 被控制的目标无法<keyword0>闪避</keyword0>; 总<keyword1>闪避</keyword1>概率上限为{{value1}}%"
   },
+  "content.glossary.keyword.food.definition.rule": {
+    "reviewed": true,
+    "source": "Shared consumables; Apple restores {{value0}} <keyword0>Health</keyword0>; <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2>; Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and has <keyword5>Consume</keyword5>",
+    "sourceHash": "ae924c9bcd6385e6208654512e6db1ab65cc1c5e8d6b9554b235d5dc2cb1d398",
+    "text": "共享消耗品; 苹果恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>法力</keyword1>浆果提供{{value1}}点<keyword2>法力</keyword2>; 旅途面包提供{{value2}}点<keyword3>格挡</keyword3>; 每张消耗{{value3}}点<keyword4>法力</keyword4>并具有<keyword5>消耗</keyword5>"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3544,6 +3550,12 @@
     "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "7dd4a542f4b98d378c045940a9e28125cfeaa0ebd6e37df4dd1e774573844c38",
     "text": "<keyword0>光</keyword0>伤害；不代表具有抗性或状态效果"
+  },
+  "content.glossary.keyword.mana.definition.rule": {
+    "reviewed": true,
+    "source": "The shared resource spent to play action cards; Each <keyword0>Mana Crystal</keyword0> adds {{value0}} <keyword1>maximum Mana</keyword1>; Your team starts each turn with {{value1}} <keyword2>Mana</keyword2>; <keyword3>Mana</keyword3> is shared; each turn draws {{value2}} cards, with up to {{value3}} in hand",
+    "sourceHash": "2fd83c3eac3c8f8a876dd6da3b5c11c64cc9f2492278eecee01a47742274fbdf",
+    "text": "打出行动牌时消耗的共享资源; 每个<keyword0>法力水晶</keyword0>使<keyword1>法力上限</keyword1>增加{{value0}}; 队伍每回合开始时拥有{{value1}}点<keyword2>法力</keyword2>; <keyword3>法力</keyword3>由全队共享; 每回合抽{{value2}}张牌，手牌最多{{value3}}张"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,

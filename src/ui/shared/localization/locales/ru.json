@@ -3521,6 +3521,12 @@
     "sourceHash": "03bdf52d47a9a61c2770c19b00c6b3ea6544e1b436e2107b4b92902afe983e58",
     "text": "Обе стороны с вероятностью {{value0}}% избегают каждого пакета атаки до защит; Под контролем цель не может <keyword0>уклоняться</keyword0>; Общий шанс <keyword1>уклонения</keyword1> ограничен {{value1}}%"
   },
+  "content.glossary.keyword.food.definition.rule": {
+    "reviewed": true,
+    "source": "Shared consumables; Apple restores {{value0}} <keyword0>Health</keyword0>; <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2>; Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and has <keyword5>Consume</keyword5>",
+    "sourceHash": "7b35f1640c6ad39449b65fea8662a833b4815d73a784040c47d4e8d6b4f2743e",
+    "text": "Общие расходуемые карты; Яблоко восстанавливает {{value0}} <keyword0>здоровья</keyword0>; Ягоды <keyword1>маны</keyword1> дают {{value1}} <keyword2>маны</keyword2>; Дорожный хлеб даёт {{value2}} <keyword3>блока</keyword3>; Каждая стоит {{value3}} <keyword4>маны</keyword4> и имеет свойство <keyword5>Расходуется</keyword5>"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3544,6 +3550,12 @@
     "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "92bc8bce14a26f18e0492fd7245bfeed22293263ecb3cad1fc2adde2afee4e4c",
     "text": "Урон типа «<keyword0>Свет</keyword0>»; не подразумевает сопротивления или эффекта состояния"
+  },
+  "content.glossary.keyword.mana.definition.rule": {
+    "reviewed": true,
+    "source": "The shared resource spent to play action cards; Each <keyword0>Mana Crystal</keyword0> adds {{value0}} <keyword1>maximum Mana</keyword1>; Your team starts each turn with {{value1}} <keyword2>Mana</keyword2>; <keyword3>Mana</keyword3> is shared; each turn draws {{value2}} cards, with up to {{value3}} in hand",
+    "sourceHash": "7361f869b1f5d48d89dc1b1ca186c976e3ca47042d8e522159aac456a240f097",
+    "text": "Общий ресурс для розыгрыша карт действий; Каждый <keyword0>кристалл маны</keyword0> увеличивает <keyword1>максимум маны</keyword1> на {{value0}}; В начале каждого хода команда получает {{value1}} <keyword2>маны</keyword2>; <keyword3>Мана</keyword3> общая; Каждый ход берётся карт: {{value2}}, в руке может быть до {{value3}}"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,

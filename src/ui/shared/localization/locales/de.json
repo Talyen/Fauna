@@ -3521,6 +3521,12 @@
     "sourceHash": "9ffc755b45c1c24e5e0f83e60a81762df43b7af04f4befa9f5723607faac9e39",
     "text": "Beide Seiten haben vor Verteidigung eine Chance von {{value0}}%, jedem Angriffspaket auszuweichen; Kontrollierte Ziele können nicht <keyword0>ausweichen</keyword0>; Gesamtes <keyword1>Ausweichen</keyword1> ist auf {{value1}}% begrenzt"
   },
+  "content.glossary.keyword.food.definition.rule": {
+    "reviewed": true,
+    "source": "Shared consumables; Apple restores {{value0}} <keyword0>Health</keyword0>; <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2>; Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and has <keyword5>Consume</keyword5>",
+    "sourceHash": "175c836717263297fe7f6a3388b63cb4f57e4d19d1bcbaef17207ae3510a01a5",
+    "text": "Gemeinsam genutzte Verbrauchskarten; Apfel stellt {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Mana</keyword1>beeren gewähren {{value1}} <keyword2>Mana</keyword2>; Wanderbrot gewährt {{value2}} <keyword3>Block</keyword3>; Jede kostet {{value3}} <keyword4>Mana</keyword4> und hat <keyword5>Verbrauchen</keyword5>"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3544,6 +3550,12 @@
     "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "771e21c7b7a393ddd4de047206de914b48cf095c5587606a719411ddd4c7ada2",
     "text": "<keyword0>Licht</keyword0>-Schaden; lässt weder auf Resistenzen noch auf Statuseffekte schließen"
+  },
+  "content.glossary.keyword.mana.definition.rule": {
+    "reviewed": true,
+    "source": "The shared resource spent to play action cards; Each <keyword0>Mana Crystal</keyword0> adds {{value0}} <keyword1>maximum Mana</keyword1>; Your team starts each turn with {{value1}} <keyword2>Mana</keyword2>; <keyword3>Mana</keyword3> is shared; each turn draws {{value2}} cards, with up to {{value3}} in hand",
+    "sourceHash": "8771e1bcb38afbba3423ecdf839ace2f833884a3cfcd4664620281c39c2ea9b0",
+    "text": "Die gemeinsame Ressource zum Spielen von Aktionskarten; Jeder <keyword0>Manakristall</keyword0> erhöht das <keyword1>maximale Mana</keyword1> um {{value0}}; Dein Team beginnt jeden Zug mit {{value1}} <keyword2>Mana</keyword2>; <keyword3>Mana</keyword3> wird geteilt; Pro Zug werden {{value2}} Karten gezogen, mit bis zu {{value3}} auf der Hand"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,

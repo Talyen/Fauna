@@ -3521,6 +3521,12 @@
     "sourceHash": "db9de9ed27e24b0e61b9c8ad664a6ba64b67c691ffdca8ab1735fa5090cd0da3",
     "text": "Ambos os lados têm {{value0}}% de chance de evitar cada pacote de ataque antes das defesas; Alvos controlados não podem <keyword0>esquivar</keyword0>; A <keyword1>Esquiva</keyword1> total é limitada a {{value1}}%"
   },
+  "content.glossary.keyword.food.definition.rule": {
+    "reviewed": true,
+    "source": "Shared consumables; Apple restores {{value0}} <keyword0>Health</keyword0>; <keyword1>Mana</keyword1> Berries grant {{value1}} <keyword2>Mana</keyword2>; Trail Bread grants {{value2}} <keyword3>Block</keyword3>; Each costs {{value3}} <keyword4>Mana</keyword4> and has <keyword5>Consume</keyword5>",
+    "sourceHash": "4f90e1063bf3802915e9939ad9c5322f1b5b3b52567c895545db5fa7948cb589",
+    "text": "Consumíveis compartilhados; Maçã restaura {{value0}} de <keyword0>Saúde</keyword0>; Bagas de <keyword1>Mana</keyword1> concedem {{value1}} de <keyword2>Mana</keyword2>; Pão de viagem concede {{value2}} de <keyword3>Bloqueio</keyword3>; Cada carta custa {{value3}} de <keyword4>Mana</keyword4> e tem <keyword5>Consumir</keyword5>"
+  },
   "content.glossary.keyword.freeze.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Frozen</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3544,6 +3550,12 @@
     "source": "<keyword0>Light</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "17b54c14a8080627a8b7400cbdde12e605cd91f4cc574df7c7de2770b973d1a5",
     "text": "Dano de <keyword0>Luz</keyword0>; não implica resistência nem efeito de status"
+  },
+  "content.glossary.keyword.mana.definition.rule": {
+    "reviewed": true,
+    "source": "The shared resource spent to play action cards; Each <keyword0>Mana Crystal</keyword0> adds {{value0}} <keyword1>maximum Mana</keyword1>; Your team starts each turn with {{value1}} <keyword2>Mana</keyword2>; <keyword3>Mana</keyword3> is shared; each turn draws {{value2}} cards, with up to {{value3}} in hand",
+    "sourceHash": "62852f4521485b87185dd68e86406b72d9d60a94f8a771608c6169d31404e62f",
+    "text": "O recurso compartilhado gasto para jogar cartas de ação; Cada <keyword0>Cristal de Mana</keyword0> adiciona {{value0}} à <keyword1>Mana máxima</keyword1>; Sua equipe começa cada turno com {{value1}} de <keyword2>Mana</keyword2>; A <keyword3>Mana</keyword3> é compartilhada; Cada turno compra {{value2}} cartas, com até {{value3}} na mão"
   },
   "content.glossary.keyword.nature.definition.rule": {
     "reviewed": true,
