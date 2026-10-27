@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { Swords, Sparkles, PawPrint, Gift, BookOpen, Settings2, LogOut, House } from "lucide-react";
 
@@ -30,6 +31,7 @@ export function MenuActions({
   onHome,
   onQuit,
 }: MenuActionsProps) {
+  const i18n = useMessages();
   return (
     <>
       <Button
@@ -40,23 +42,27 @@ export function MenuActions({
         onClick={onContinue}
       >
         <Swords aria-hidden="true" />
-        {home && !active ? "Play" : "Continue"}
+        {home && !active ? i18n.message("menu.play", "Play") : i18n.message("menu.continue", "Continue")}
       </Button>
       <Button
         variant="ghost"
         effectTone="talents"
         data-menu-action="talents"
-        aria-label="Talents"
+        aria-label={i18n.message("menu.talents", "Talents")}
         aria-describedby={talentPoints > 0 ? `menu-talent-points-${home}` : undefined}
         onClick={() => onNavigate("talents")}
       >
         <Sparkles aria-hidden="true" className="menu-icon-talents" />
-        Talents
+        {i18n.message("menu.talents", "Talents")}
         {talentPoints > 0 ? (
           <span
             className="menu-talent-points"
             id={`menu-talent-points-${home}`}
-            aria-label={`${talentPoints} talent ${talentPoints === 1 ? "point" : "points"} available`}
+            aria-label={i18n.plural(
+              "menu.talentPoints",
+              { one: "{{count}} talent point available", other: "{{count}} talent points available" },
+              talentPoints,
+            )}
           >
             {talentPoints}
           </span>
@@ -69,12 +75,12 @@ export function MenuActions({
         onClick={() => onNavigate("collection")}
       >
         <PawPrint aria-hidden="true" className="menu-icon-collection" />
-        Collection
+        {i18n.message("menu.collection", "Collection")}
       </Button>
       {active && hasBoons ? (
         <Button effectTone="talents" variant="ghost" data-menu-action="boons" onClick={onBoons}>
           <Gift aria-hidden="true" className="menu-icon-boons" />
-          Boons
+          {i18n.message("menu.boons", "Boons")}
         </Button>
       ) : null}
       <Button
@@ -84,7 +90,7 @@ export function MenuActions({
         onClick={() => onNavigate("glossary")}
       >
         <BookOpen aria-hidden="true" className="menu-icon-glossary" />
-        Glossary
+        {i18n.message("menu.glossary", "Glossary")}
       </Button>
       <Button
         effectTone="settings"
@@ -93,24 +99,24 @@ export function MenuActions({
         onClick={() => onNavigate("settings")}
       >
         <Settings2 aria-hidden="true" className="menu-icon-settings" />
-        Settings
+        {i18n.message("menu.settings", "Settings")}
       </Button>
       {!home && active ? (
         <Button variant="ghost" className="end-journey" onClick={onEndJourney}>
           <LogOut aria-hidden="true" className="menu-icon-end" />
-          End journey
+          {i18n.message("menu.endJourney", "End journey")}
         </Button>
       ) : null}
       {!home ? (
         <Button variant="ghost" onClick={onHome}>
           <House aria-hidden="true" className="menu-icon-home" />
-          Main menu
+          {i18n.message("menu.mainMenu", "Main menu")}
         </Button>
       ) : null}
       {desktop ? (
         <Button variant="ghost" busy={closing} onClick={onQuit}>
           <LogOut aria-hidden="true" className="menu-icon-quit" />
-          Save & quit
+          {i18n.message("menu.quit", "Save & quit")}
         </Button>
       ) : null}
     </>

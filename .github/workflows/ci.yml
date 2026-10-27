@@ -115,6 +115,8 @@ jobs:
         run: npm run deadcode
       - name: Documentation contracts
         run: npm run docs:check
+      - name: Localization catalog freshness
+        run: npm run localization:check
       - name: Content audit
         run: npm run content:audit
       - name: Upload player-notes

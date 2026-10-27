@@ -57,7 +57,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
   const dialog = page.getByRole("dialog", { name: "Pause menu" });
   await expect(dialog.getByRole("heading", { name: "Fauna", exact: true })).toHaveCount(0);
   const choices = dialog.getByRole("navigation", { name: "Pause menu" });
-  const opener = page.locator('.play-surface button[aria-label="Open menu"]');
+  const opener = page.locator(".play-surface button[data-menu-anchor]");
   const anchor = (await opener.boundingBox())!;
   const panel = (await dialog.boundingBox())!;
   expect(panel.x + panel.width).toBeCloseTo(anchor.x + anchor.width);

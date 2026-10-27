@@ -31,6 +31,8 @@
     "resources": "node scripts/resources.mjs",
     "assets:prune": "node scripts/assets/prune-assets.mjs",
     "worktree:cleanup": "node scripts/worktree-cleanup.mjs",
+    "localization:extract": "node scripts/localization/messages.mjs extract",
+    "localization:check": "node scripts/localization/messages.mjs check",
     "localization:inventory": "node scripts/localization/inventory.mjs",
     "docs:check": "node scripts/checks/check-docs.mjs",
     "check:bundle": "node scripts/checks/check-bundle-budget.mjs",

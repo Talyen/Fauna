@@ -1,3 +1,4 @@
+import { useMessages } from "../shared/localization/message-context";
 import { measurePerformance, startPerformanceSpan } from "../../lib/performance";
 import { EffectScope, EffectsScene } from "../shared/effects/effects";
 import { useDevicePreferences } from "../settings/preferences";
@@ -44,6 +45,7 @@ import type { Command } from "../../game/types";
 import "../battle/mana-crystals.css";
 import type { Modal } from "./types";
 export function GameShell({ session, desktop = false }: { session: Session; desktop?: boolean }) {
+  const i18n = useMessages();
   const view = useStore(session.store),
     game = view.game;
   const talentPoints = KEYWORDS.reduce((total, keyword) => total + availablePoints(game, keyword), 0);
@@ -132,7 +134,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const menuAnchor = useRef({
     getBoundingClientRect: () =>
       root.current
-        ?.querySelector<HTMLButtonElement>('.play-surface button[aria-label="Open menu"]')
+        ?.querySelector<HTMLButtonElement>(".play-surface button[data-menu-anchor]")
         ?.getBoundingClientRect() ?? new DOMRect(),
   });
   const openMenu = () => {
@@ -299,7 +301,10 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
           >
             {view.saveUnavailable ? (
               <p className="save-notice" role="status">
-                Progress cannot be saved right now; keep Fauna open while it retries
+                {i18n.message(
+                  "recovery.save",
+                  "Progress cannot be saved right now; keep Fauna open while it retries",
+                )}
               </p>
             ) : null}
             {!view.cloud.blocking ? (
@@ -327,7 +332,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                   <Screen className="menu-screen settings-screen" aria-labelledby="menu-screen-title">
                     <header className="collection-heading">
                       <ScreenHeading id="menu-screen-title" back={backFromPage} openMenu={backFromPage}>
-                        Settings
+                        {i18n.message("menu.settings", "Settings")}
                       </ScreenHeading>
                     </header>
                     <Settings session={session} preferences={preferences} update={updatePreferences} />
@@ -351,7 +356,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           variant="ghost"
                           size="icon"
                           className="menu-button compact-icon-control"
-                          aria-label="Open menu"
+                          data-menu-anchor
+                          aria-label={i18n.message("battle.openMenu", "Open menu")}
                           onClick={openMenu}
                         >
                           <Menu aria-hidden="true" />
@@ -362,7 +368,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           variant="ghost"
                           size="icon"
                           className="skip-combat-control compact-icon-control"
-                          aria-label="Skip combat"
+                          aria-label={i18n.message("battle.skipCombat", "Skip combat")}
                           onClick={() => send({ type: "devWinBattle" })}
                         >
                           <FastForward aria-hidden="true" className="menu-icon-skip" />
@@ -373,7 +379,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           variant="ghost"
                           size="icon"
                           className="autoplay-control compact-icon-control"
-                          aria-label="Auto-play"
+                          aria-label={i18n.message("battle.autoplay", "Auto-play")}
                           aria-pressed={autoplay}
                           onClick={() => setAutoplay(!autoplay)}
                         >
