@@ -74,7 +74,17 @@ export function createDiagnostics(port?: DiagnosticPort) {
   const retain = (values: Diagnostic[]) => {
     // JSON escaping can cost six characters per message character. Bound the stored form too.
     const bounded = values.slice(-MAX_ENTRIES);
-    while (JSON.stringify(bounded).length >= MAX_STORED_LENGTH) bounded.shift();
+    if (JSON.stringify(bounded).length >= MAX_STORED_LENGTH) {
+      let storedLength = 2 + Math.max(0, bounded.length - 1);
+      const lengths = bounded.map((entry) => JSON.stringify(entry).length);
+      for (const length of lengths) storedLength += length;
+      let removed = 0;
+      while (storedLength >= MAX_STORED_LENGTH) {
+        storedLength -= lengths[removed++]!;
+        if (removed < bounded.length) storedLength--;
+      }
+      bounded.splice(0, removed);
+    }
     return Object.freeze(bounded.map((entry) => Object.freeze(entry)));
   };
   let entries = retain([]);

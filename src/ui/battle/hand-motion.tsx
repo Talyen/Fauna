@@ -139,8 +139,11 @@ export class HandMotion extends Component<Props> {
     const board = this.root.current?.closest(".battle-screen");
     if (!board) return;
     this.endMotion = startPerformanceSpan("hand-motion", { revision: this.props.revision });
-    const removed = [...before].filter(([id]) => newTurn || !after.has(id)).reverse();
-    const added = [...after].filter(([id]) => newTurn || !before.has(id));
+    const removed: [string, Pose][] = [];
+    const added: [string, Pose][] = [];
+    for (const entry of before) if (newTurn || !after.has(entry[0])) removed.push(entry);
+    removed.reverse();
+    for (const entry of after) if (newTurn || !before.has(entry[0])) added.push(entry);
     for (const [id, pose] of after) {
       const old = before.get(id);
       const layer = pose.node.closest(".hand-slot")?.querySelector<HTMLElement>(".hand-reflow");

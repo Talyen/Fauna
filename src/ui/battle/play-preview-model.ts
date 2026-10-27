@@ -37,14 +37,21 @@ export interface PlayPreviewModel {
 }
 
 function baselineUnits(before: GameState) {
-  return [...battlefieldView(before, "player"), ...battlefieldView(before, "enemy"), ...before.reserves].map(
-    (old) => ({
-      old,
-      statuses: combatStatuses(old.combat, sharedDodgeChance(before, old)),
-      name: unitName(old),
-      maxHealth: maximumHealth(old),
-    }),
-  );
+  const units: {
+    old: ReturnType<typeof battlefield>[number];
+    statuses: Status[];
+    name: string;
+    maxHealth: number;
+  }[] = [];
+  for (const row of [battlefieldView(before, "player"), battlefieldView(before, "enemy"), before.reserves])
+    for (const old of row)
+      units.push({
+        old,
+        statuses: combatStatuses(old.combat, sharedDodgeChance(before, old)),
+        name: unitName(old),
+        maxHealth: maximumHealth(old),
+      });
+  return units;
 }
 
 /** One projection supplies both highlights and per-recipient readouts from authoritative output. */
@@ -75,10 +82,10 @@ function resolvedPreviewModel(
       continue;
     }
     affected.add(event.targetId);
-    const group = grouped.get(event.targetId) ?? { events: [], absorbed: 0 };
+    let group = grouped.get(event.targetId);
+    if (!group) grouped.set(event.targetId, (group = { events: [], absorbed: 0 }));
     group.events.push(event);
     if (event.kind === "block" && event.amount < 0) group.absorbed += event.amount;
-    grouped.set(event.targetId, group);
   }
   if (targetId) affected.add(targetId);
   for (const { old, statuses: previous, name, maxHealth } of baseline()) {
@@ -91,14 +98,19 @@ function resolvedPreviewModel(
         return !other || status.id !== other.id || status.text !== other.text || status.count !== other.count;
       });
     if (old.health !== next.health || old.block !== next.block || statusesChanged) affected.add(old.id);
-    const changes = !statusesChanged
-      ? []
-      : [...new Set([...previous, ...current].map((status) => status.id))].flatMap((id) => {
-          const prior = previous.find((status) => status.id === id),
-            now = current.find((status) => status.id === id);
-          if (prior?.text === now?.text) return [];
-          return [{ id, prior, now }];
-        });
+    const changes: StatusChange[] = [];
+    if (statusesChanged) {
+      const seen = new Set<string>();
+      for (const row of [previous, current])
+        for (const status of row) {
+          const id = status.id;
+          if (seen.has(id)) continue;
+          seen.add(id);
+          const prior = previous.find((entry) => entry.id === id);
+          const now = current.find((entry) => entry.id === id);
+          if (prior?.text !== now?.text) changes.push({ id, prior, now });
+        }
+    }
     const group = grouped.get(old.id);
     units.set(old.id, {
       name,

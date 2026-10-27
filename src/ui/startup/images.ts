@@ -67,7 +67,8 @@ export async function warmImages(
   report: Report,
   retain?: Set<HTMLImageElement>,
 ) {
-  const unique = [...new Set(urls)];
+  if (signal.aborted || !urls.length) return;
+  const unique = urls.length === 1 ? [urls[0]!] : [...new Set(urls)];
   for (let index = 0; index < unique.length && !signal.aborted; index += 4) {
     await Promise.all(
       unique.slice(index, index + 4).map(async (src) => {

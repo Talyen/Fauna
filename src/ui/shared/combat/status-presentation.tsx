@@ -23,7 +23,7 @@ export function useStatusPresentation(status: Status): { text: string; content: 
     .join("");
   if (!id) return { text: description, content: <KeywordText text={status.text} id={ruleId} /> };
   const keyword = i18n.content(`content.keyword.${id}.label`, KEYWORD_DEFINITIONS[id].label);
-  const count = new Intl.NumberFormat(i18n.locale).format(status.count);
+  const count = i18n.number(status.count);
   const values = { keyword, count, description };
   const rich = {
     keyword: (
