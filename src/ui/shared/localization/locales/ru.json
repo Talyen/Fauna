@@ -7823,6 +7823,12 @@
     "sourceHash": "787e772c403f46f801cb007805e9be679f03f83b196d489f22aff45ccec53026",
     "text": "{{name}} блокирует урон: {{amount}}."
   },
+  "log.battleComplete": {
+    "reviewed": true,
+    "source": "Battle complete. Rewards saved.",
+    "sourceHash": "3b85dde5a791e0ed7aa509ebf02c090e6b2fbee1fa4d53ec779adf50b78a6e77",
+    "text": "Бой завершён. Награды сохранены."
+  },
   "log.blinded": {
     "reviewed": true,
     "source": "{{name}} is Blinded",
@@ -7847,6 +7853,12 @@
     "sourceHash": "22262a4e1005d248dcfbfbd6674e5126232a27ea4e50e1c89c0e0668cd78b6e7",
     "text": "{{name}}: наложен эффект ({{status}})."
   },
+  "log.copyWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} copies {{card}} with {{trait}}",
+    "sourceHash": "7f499ac8e99e9a3789d63bc880cb4dcbce15494d6724e88c30ce87cd6a31d7eb",
+    "text": "{{actor}} копирует {{card}} с помощью «{{trait}}»"
+  },
   "log.createFood": {
     "reviewed": true,
     "source": "{{actor}} creates {{count}} Food cards",
@@ -7858,6 +7870,18 @@
     "source": "{{actor}} creates {{count}} Pearls",
     "sourceHash": "503977765038abb89dd7b3feef3f12d5bd34f13d11f7162a370c5c73d95e8fe7",
     "text": "{{actor}} создаёт Жемчужины: {{count}}"
+  },
+  "log.creatureJoined": {
+    "reviewed": true,
+    "source": "{{name}} joined your roster.",
+    "sourceHash": "0846b7d9491a986f1bf33c0ae3c9324acfdbc97d4518ff31dd2989e165effa09",
+    "text": "{{name}} вступает в состав."
+  },
+  "log.creatureRediscovered": {
+    "reviewed": true,
+    "source": "{{name}} was discovered again; your roster is unchanged.",
+    "sourceHash": "ee0921ed40bf21cdef819586a212654e8d309141fbf56f52358ffed0f6eec9f8",
+    "text": "Повторное открытие: {{name}}; состав не изменился."
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -7882,6 +7906,12 @@
     "source": "{{card}} is drawn from Discard",
     "sourceHash": "49a48117fda208751650eb4c47214d3fc99e35db2aafa179a887e32f49a67f21",
     "text": "Из сброса взята карта: {{card}}"
+  },
+  "log.expressDelivery": {
+    "reviewed": true,
+    "source": "{{trait}} draws an extra card",
+    "sourceHash": "813cde781e7ddab91d7fda09467666b700bb713606ea20c9aa10628de5adf007",
+    "text": "«{{trait}}» позволяет взять дополнительную карту"
   },
   "log.formationChanges": {
     "reviewed": true,
@@ -7931,6 +7961,12 @@
     "sourceHash": "7d2508cf4eff553eb161350fc6b236ba0fc70587659083f8340c1b78f0282f8c",
     "text": "{{name}}: {{status}} +{{amount}}."
   },
+  "log.goodFortune": {
+    "reviewed": true,
+    "source": "{{trait}} turns the odds",
+    "sourceHash": "f257ddc3e975042e6ab8b07cf325b995bfd5a3d5c3f3170dbe72fa786349c931",
+    "text": "«{{trait}}» меняет шансы"
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
@@ -7954,6 +7990,12 @@
     "source": "Your journey begins.",
     "sourceHash": "e7a6012ca68ac3541a7808d88db139263b5ba91596a4cfa3b8a4ebc7fc458ccb",
     "text": "Ваше путешествие начинается."
+  },
+  "log.journeyEnded": {
+    "reviewed": true,
+    "source": "Your journey has ended.",
+    "sourceHash": "4d9a5e24aa4fc43016ce8be31364367f460ab03c6d67a295d6b6ac68ca23fe38",
+    "text": "Ваше путешествие завершено."
   },
   "log.keepBlockWithBoon": {
     "reviewed": true,
@@ -7990,6 +8032,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "0b9507e3907d1eeee7fb457f957fca6ebbecc6a7c8f7bb5a7f16871233c3f42e",
     "text": "У {{name}} накопление заморозки уменьшается на {{amount}}"
+  },
+  "log.mountainGuide": {
+    "reviewed": true,
+    "source": "{{trait}} protects {{target}}",
+    "sourceHash": "c7aca17942ed2934b09d73b0d46da53926c387930ae84b893e6b3e58aa44cf24",
+    "text": "«{{trait}}» защищает {{target}}"
   },
   "log.negateAttack": {
     "reviewed": true,
@@ -8093,6 +8141,12 @@
     "sourceHash": "3e59251ba4a5cfb04a75d63515b32f95e904ad2b709a8374c9c8a78f838aa51c",
     "text": "{{actor}} повторяет урон оглушением с помощью «{{trait}}»"
   },
+  "log.replacement": {
+    "reviewed": true,
+    "source": "{{actor}} replaces {{target}}.",
+    "sourceHash": "c818c8888b9d22ffcd51a943bf4eb3231e274f586c706ae7dda09ce470c52210",
+    "text": "Замена {{target}}: {{actor}}."
+  },
   "log.resurrect": {
     "reviewed": true,
     "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
@@ -8122,6 +8176,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "61fa59d21f8938aa7c3e2132f98eb3bb14bda2e4e40395f256af6bb09d995a05",
     "text": "{{actor}} призывает {{echo}}"
+  },
+  "log.swapPositions": {
+    "reviewed": true,
+    "source": "{{actor}} swaps positions with {{target}}.",
+    "sourceHash": "44ada5b57a53cbec5e406ee77de76b3bcf771efb2b5a8481c437896817aded55",
+    "text": "Меняются местами: {{actor}} и {{target}}."
   },
   "log.temporaryDodge": {
     "reviewed": true,

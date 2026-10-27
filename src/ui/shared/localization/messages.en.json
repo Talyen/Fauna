@@ -278,6 +278,9 @@
   "log.absorb": {
     "text": "{{name}} blocks {{amount}} damage."
   },
+  "log.battleComplete": {
+    "text": "Battle complete. Rewards saved."
+  },
   "log.blinded": {
     "text": "{{name}} is Blinded"
   },
@@ -290,11 +293,20 @@
   "log.controlApplied": {
     "text": "{{name}} is {{status}}."
   },
+  "log.copyWithTrait": {
+    "text": "{{actor}} copies {{card}} with {{trait}}"
+  },
   "log.createFood": {
     "text": "{{actor}} creates {{count}} Food cards"
   },
   "log.createPearls": {
     "text": "{{actor}} creates {{count}} Pearls"
+  },
+  "log.creatureJoined": {
+    "text": "{{name}} joined your roster."
+  },
+  "log.creatureRediscovered": {
+    "text": "{{name}} was discovered again; your roster is unchanged."
   },
   "log.criticalDamage": {
     "text": "{{name}} takes {{amount}} {{type}} damage (Critical)."
@@ -307,6 +319,9 @@
   },
   "log.drawDiscard": {
     "text": "{{card}} is drawn from Discard"
+  },
+  "log.expressDelivery": {
+    "text": "{{trait}} draws an extra card"
   },
   "log.formationChanges": {
     "text": "Your formation changes"
@@ -332,6 +347,9 @@
   "log.gainStatus": {
     "text": "{{name}} gains {{amount}} {{status}}."
   },
+  "log.goodFortune": {
+    "text": "{{trait}} turns the odds"
+  },
   "log.heal": {
     "text": "{{name}} restores {{amount}} Health."
   },
@@ -343,6 +361,9 @@
   },
   "log.journeyBegins": {
     "text": "Your journey begins."
+  },
+  "log.journeyEnded": {
+    "text": "Your journey has ended."
   },
   "log.keepBlockWithBoon": {
     "text": "{{name}} keeps {{amount}} Block with {{boon}}"
@@ -361,6 +382,9 @@
   },
   "log.loseFreezeBuildup": {
     "text": "{{name}} loses {{amount}} Freeze buildup"
+  },
+  "log.mountainGuide": {
+    "text": "{{trait}} protects {{target}}"
   },
   "log.negateAttack": {
     "text": "{{name}} negates the attack"
@@ -413,6 +437,9 @@
   "log.repeatStunTrait": {
     "text": "{{actor}} repeats Stun damage with {{trait}}"
   },
+  "log.replacement": {
+    "text": "{{actor}} replaces {{target}}."
+  },
   "log.resurrect": {
     "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"
   },
@@ -427,6 +454,9 @@
   },
   "log.summonEcho": {
     "text": "{{actor}} summons an {{echo}}"
+  },
+  "log.swapPositions": {
+    "text": "{{actor}} swaps positions with {{target}}."
   },
   "log.temporaryDodge": {
     "text": "{{name}} gains {{amount}}% Dodge until its next turn"

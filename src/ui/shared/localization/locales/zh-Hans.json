@@ -7823,6 +7823,12 @@
     "sourceHash": "22395139cf077464bb1936cc58d30b6a1e0f66a266e94f835c5156c788392ed3",
     "text": "{{name}}格挡了{{amount}}点伤害。"
   },
+  "log.battleComplete": {
+    "reviewed": true,
+    "source": "Battle complete. Rewards saved.",
+    "sourceHash": "f7aed8b0de636ee1b5c9f8ac134fde82c5589d203d5c52a73f8024117f3acf5b",
+    "text": "战斗结束。奖励已保存。"
+  },
   "log.blinded": {
     "reviewed": true,
     "source": "{{name}} is Blinded",
@@ -7847,6 +7853,12 @@
     "sourceHash": "b58382f6889cc30d8edf2d383b2d154fec1b8b56e610d57389750581ae554512",
     "text": "{{name}}受到{{status}}效果。"
   },
+  "log.copyWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} copies {{card}} with {{trait}}",
+    "sourceHash": "7a0b024e35f5bc9fd6d631017e14bf21ae7acf197d4cb066745e9b7746e20975",
+    "text": "{{actor}}通过{{trait}}复制{{card}}"
+  },
   "log.createFood": {
     "reviewed": true,
     "source": "{{actor}} creates {{count}} Food cards",
@@ -7858,6 +7870,18 @@
     "source": "{{actor}} creates {{count}} Pearls",
     "sourceHash": "a2338cc751ddc3eaf0c13289e21333ca3e0c830ea47b664052cea341e22e6191",
     "text": "{{actor}}生成珍珠：{{count}}"
+  },
+  "log.creatureJoined": {
+    "reviewed": true,
+    "source": "{{name}} joined your roster.",
+    "sourceHash": "602912090268f9ddcdce1e8de1d622002e157b4ba484700d38379e9987505df0",
+    "text": "{{name}}加入了队伍。"
+  },
+  "log.creatureRediscovered": {
+    "reviewed": true,
+    "source": "{{name}} was discovered again; your roster is unchanged.",
+    "sourceHash": "33bef80b325031cb259fd13d3a74c792912fcbb8e5738f1177da32b1488218c5",
+    "text": "再次发现{{name}}；队伍保持不变。"
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -7882,6 +7906,12 @@
     "source": "{{card}} is drawn from Discard",
     "sourceHash": "4005e4198578eb868700e3fdf2dd4b7d81c7357c5e8eb74845225fd7491bf140",
     "text": "从弃牌堆抽取：{{card}}"
+  },
+  "log.expressDelivery": {
+    "reviewed": true,
+    "source": "{{trait}} draws an extra card",
+    "sourceHash": "3d284f2c955e639e968094e80556d81c2db907a3b568c56ac04f8be9e0c53dbc",
+    "text": "{{trait}}额外抽一张牌"
   },
   "log.formationChanges": {
     "reviewed": true,
@@ -7931,6 +7961,12 @@
     "sourceHash": "fc15b9c726d53b31bf5c2368ba074819581dc7bc291fab7e1ae473670339a3ae",
     "text": "{{name}}：{{status}} +{{amount}}。"
   },
+  "log.goodFortune": {
+    "reviewed": true,
+    "source": "{{trait}} turns the odds",
+    "sourceHash": "db8dc7b092280a9ee311cf920c5f3713eacfec0e869318a07013078bb1992476",
+    "text": "{{trait}}改变了概率"
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
@@ -7954,6 +7990,12 @@
     "source": "Your journey begins.",
     "sourceHash": "107054dc236a3ea5f1859203b6f0c5c609e38c7f2ec72d0d144bcc2f1344591d",
     "text": "你的旅程开始了。"
+  },
+  "log.journeyEnded": {
+    "reviewed": true,
+    "source": "Your journey has ended.",
+    "sourceHash": "55f27923f2e7c6fdbf9dcee15e07a37be7005a53f5fb06de0664bf1dacd797f3",
+    "text": "你的旅程结束了。"
   },
   "log.keepBlockWithBoon": {
     "reviewed": true,
@@ -7990,6 +8032,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "7a9ebeb5c55006d03ebb285c14516a62d439274e46af4c0388501a8eff3ae549",
     "text": "{{name}}减少{{amount}}点冻结积累"
+  },
+  "log.mountainGuide": {
+    "reviewed": true,
+    "source": "{{trait}} protects {{target}}",
+    "sourceHash": "e679c5359ce35e563e3982265c215e149f4cf69c29d33bae24c62366e88185c0",
+    "text": "{{trait}}保护{{target}}"
   },
   "log.negateAttack": {
     "reviewed": true,
@@ -8093,6 +8141,12 @@
     "sourceHash": "53385a0c594b214a1998e2eb58010ccf8492fbed3dc2fd5417cf4ec67926eee2",
     "text": "{{actor}}通过{{trait}}重复眩晕伤害"
   },
+  "log.replacement": {
+    "reviewed": true,
+    "source": "{{actor}} replaces {{target}}.",
+    "sourceHash": "a2c6f173e99f8b8aa245822c9bcfda0fac9f9f4024487427ea850e608489db9b",
+    "text": "{{actor}}替换了{{target}}。"
+  },
   "log.resurrect": {
     "reviewed": true,
     "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
@@ -8122,6 +8176,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "f68e928d05573be63c2472952e932af500c2cd98607fb85d83e525fc75c51a95",
     "text": "{{actor}}召唤一个{{echo}}"
+  },
+  "log.swapPositions": {
+    "reviewed": true,
+    "source": "{{actor}} swaps positions with {{target}}.",
+    "sourceHash": "0754bdb00ff08b1a4737c0723ce23d7d8f69678cbff510a93c87a60b70ad383c",
+    "text": "{{actor}}与{{target}}交换位置。"
   },
   "log.temporaryDodge": {
     "reviewed": true,

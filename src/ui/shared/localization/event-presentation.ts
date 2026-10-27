@@ -1,6 +1,6 @@
 import { combatantById } from "../../../game/battlefield";
 import { unitName } from "../../../game/combat/state";
-import { CARDS, FOOD_CARDS, species, type CardDefinition } from "../../../game/content";
+import { CARDS, FOOD_CARDS, SPECIES, species, type CardDefinition } from "../../../game/content";
 import { PEARL } from "../../../game/content/creatures/memento";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../../game/keywords";
 import type { GameEvent, GameState } from "../../../game/types";
@@ -11,6 +11,9 @@ import { localizedCombatantName } from "./combatant-name";
 const cardsByEnglishName = new Map<string, CardDefinition | null>();
 for (const card of [...CARDS, ...FOOD_CARDS, PEARL])
   cardsByEnglishName.set(card.name, cardsByEnglishName.has(card.name) ? null : card);
+const speciesByEnglishName = new Map<string, (typeof SPECIES)[number] | null>();
+for (const entry of SPECIES)
+  speciesByEnglishName.set(entry.name, speciesByEnglishName.has(entry.name) ? null : entry);
 
 /** Preview models retain common targetless announcements as text across possible outcomes. */
 export function localizedPreviewMessage(text: string, i18n: ReturnType<typeof createMessageReader>) {
@@ -64,6 +67,14 @@ export function eventPresentation(
         actor: localizedCombatantName(actor, i18n),
         echo: i18n.message("creature.echo", "Echo"),
       });
+    if (event.actionType === "support" && event.text === "Express Delivery draws an extra card")
+      return i18n.message("log.expressDelivery", "{{trait}} draws an extra card", {
+        trait: i18n.content("content.species.orifable.trait", "Express Delivery"),
+      });
+    if (event.actionType === "support" && event.text === "Good Fortune turns the odds")
+      return i18n.message("log.goodFortune", "{{trait}} turns the odds", {
+        trait: i18n.content("content.species.euphera.trait", "Good Fortune"),
+      });
     if (actor) {
       const prefix = `${unitName(actor)} uses `;
       if (event.text.startsWith(prefix) && event.text.endsWith(".")) {
@@ -76,6 +87,17 @@ export function eventPresentation(
       }
     }
     if (actor && event.actionType === "support") {
+      const copyPrefix = `${species(actor.species).name} copies `;
+      const copySuffix = " with Well Read";
+      if (event.text.startsWith(copyPrefix) && event.text.endsWith(copySuffix)) {
+        const card = cardsByEnglishName.get(event.text.slice(copyPrefix.length, -copySuffix.length));
+        if (card)
+          return i18n.message("log.copyWithTrait", "{{actor}} copies {{card}} with {{trait}}", {
+            actor: localizedCombatantName(actor, i18n),
+            card: i18n.content(`content.card.${card.id}.name`, card.name),
+            trait: i18n.content("content.species.rookhaven.trait", "Well Read"),
+          });
+      }
       const prefix = `${unitName(actor)} repeats `;
       if (event.text.startsWith(prefix)) {
         const rest = event.text.slice(prefix.length);
@@ -152,11 +174,61 @@ export function eventPresentation(
       return i18n.message("log.gainGold", "Gain {{amount}} Gold.", {
         amount: i18n.locale === "en" ? String(event.amount) : event.amount,
       });
+    const joinedSuffix = " joined your roster.";
+    if (event.text.endsWith(joinedSuffix)) {
+      const entry = speciesByEnglishName.get(event.text.slice(0, -joinedSuffix.length));
+      if (entry)
+        return i18n.message("log.creatureJoined", "{{name}} joined your roster.", {
+          name: i18n.content(`content.species.${entry.id}.name`, entry.name),
+        });
+    }
+    const discoveredSuffix = " was discovered again; your roster is unchanged.";
+    if (event.text.endsWith(discoveredSuffix)) {
+      const entry = speciesByEnglishName.get(event.text.slice(0, -discoveredSuffix.length));
+      if (entry)
+        return i18n.message(
+          "log.creatureRediscovered",
+          "{{name}} was discovered again; your roster is unchanged.",
+          {
+            name: i18n.content(`content.species.${entry.id}.name`, entry.name),
+          },
+        );
+    }
   }
+  if (
+    (event.kind === "reward" || event.kind === "victory") &&
+    event.text === "Battle complete. Rewards saved."
+  )
+    return i18n.message("log.battleComplete", "Battle complete. Rewards saved.");
+  if (event.kind === "knockout" && event.text === "Your journey has ended.")
+    return i18n.message("log.journeyEnded", "Your journey has ended.");
   if (event.kind === "knockout" && event.text === "You return from the wilds. Discoveries are kept.")
     return i18n.message("log.returnHome", "You return from the wilds. Discoveries are kept.");
   if (event.kind === "action" && event.actionType === "swap" && event.text === "Your formation changes")
     return i18n.message("log.formationChanges", "Your formation changes");
+  if (event.kind === "action" && event.actionType === "swap") {
+    const actor = combatant(event.actorId);
+    if (actor) {
+      const prefix = `${species(actor.species).name} replaces `;
+      if (event.text.startsWith(prefix) && event.text.endsWith(".")) {
+        const replaced = speciesByEnglishName.get(event.text.slice(prefix.length, -1));
+        if (replaced)
+          return i18n.message("log.replacement", "{{actor}} replaces {{target}}.", {
+            actor: localizedCombatantName(actor, i18n),
+            target: i18n.content(`content.species.${replaced.id}.name`, replaced.name),
+          });
+      }
+      const target = combatant(event.targetId);
+      if (
+        target &&
+        event.text === `${species(actor.species).name} swaps positions with ${species(target.species).name}.`
+      )
+        return i18n.message("log.swapPositions", "{{actor}} swaps positions with {{target}}.", {
+          actor: localizedCombatantName(actor, i18n),
+          target: localizedCombatantName(target, i18n),
+        });
+    }
+  }
   if (event.kind === "status" && event.targetId === undefined && event.text === `Gain ${event.amount} Mana.`)
     return i18n.message("log.gainMana", "Gain {{amount}} Mana.", {
       amount: i18n.locale === "en" ? String(event.amount) : event.amount,
@@ -178,6 +250,11 @@ export function eventPresentation(
       return i18n.message("log.repeatStunTrait", "{{actor}} repeats Stun damage with {{trait}}", {
         actor: localizedCombatantName(actor, i18n),
         trait: i18n.content("content.species.ringpalm.trait", "Resonance"),
+      });
+    if (event.text === `Mountain Guide protects ${englishName}`)
+      return i18n.message("log.mountainGuide", "{{trait}} protects {{target}}", {
+        trait: i18n.content("content.species.skybex.trait", "Mountain Guide"),
+        target: name,
       });
   }
   if (

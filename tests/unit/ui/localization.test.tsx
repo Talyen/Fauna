@@ -7,6 +7,7 @@ import { resurrect } from "../../../src/game/combat/resurrection";
 import { createFood } from "../../../src/game/combat/food";
 import { createPearls, summonEcho } from "../../../src/game/combat/legendary";
 import { resolveCombat } from "../../../src/game/combat/resolution";
+import { swapFromCard } from "../../../src/game/team";
 import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
@@ -401,6 +402,26 @@ it("localizes the final enemy hit after the battle state is retired", async () =
   } finally {
     await session.dispose();
   }
+});
+
+it("localizes committed position swaps and discovered creature names", () => {
+  const game = structuredClone(run());
+  const actor = game.team[0]!;
+  const events: GameEvent[] = [];
+  const target = swapFromCard(game, actor, events)!;
+  const swap = events.find((event) => event.kind === "action" && event.actionType === "swap")!;
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.species.${actor.species}.name`]: { source: species(actor.species).name, text: "Premier" },
+    [`content.species.${target.species}.name`]: { source: species(target.species).name, text: "Second" },
+  });
+  expect(eventPresentation(game, swap, reader)).toBe("Premier échange sa place avec Second.");
+  const joined: GameEvent = { kind: "reward", text: `${species(target.species).name} joined your roster.` };
+  expect(eventPresentation(game, joined, reader)).toBe("Second rejoint votre groupe.");
+  expect(eventPresentation(game, { ...joined, text: "Unknown joined your roster." }, reader)).toBe(
+    "Unknown joined your roster.",
+  );
+  expect(eventPresentation(game, swap, createMessageReader("en", {}))).toBe(swap.text);
 });
 
 it("preserves the spent Block and named Boon in a localized combat event", () => {

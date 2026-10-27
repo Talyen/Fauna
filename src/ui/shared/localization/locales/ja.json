@@ -7823,6 +7823,12 @@
     "sourceHash": "2490b28d32a76aa4c843b71baa204b9d8106a96cead5926c04e368b3c6bc86ff",
     "text": "{{name}}は{{amount}}ダメージをブロックした。"
   },
+  "log.battleComplete": {
+    "reviewed": true,
+    "source": "Battle complete. Rewards saved.",
+    "sourceHash": "684f84edf846f43d9324d87cb4b6a085c7b5b8642f58643b371ad81ba8f3107f",
+    "text": "戦闘終了。報酬を保存しました。"
+  },
   "log.blinded": {
     "reviewed": true,
     "source": "{{name}} is Blinded",
@@ -7847,6 +7853,12 @@
     "sourceHash": "1c0e3d89ce02a9217ff25a04a3c2f538bcd1c915e2687f87964c571083204b7a",
     "text": "{{name}}に{{status}}が付与された。"
   },
+  "log.copyWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} copies {{card}} with {{trait}}",
+    "sourceHash": "da3e3ae445e7ab00977767fcd1e7a007a01e5dfc056be864ab9cb4d6a4c3bb37",
+    "text": "{{actor}}が{{trait}}で{{card}}をコピー"
+  },
   "log.createFood": {
     "reviewed": true,
     "source": "{{actor}} creates {{count}} Food cards",
@@ -7858,6 +7870,18 @@
     "source": "{{actor}} creates {{count}} Pearls",
     "sourceHash": "e526d0f0fc13c5ba0dcdfe695cc3e793e9b2228f7cd9c31e7c1d17982b268ad3",
     "text": "{{actor}}が真珠を生成：{{count}}"
+  },
+  "log.creatureJoined": {
+    "reviewed": true,
+    "source": "{{name}} joined your roster.",
+    "sourceHash": "41e5730a1f34a4db1fc1a71a5aa0f66f4148732acd12d3ef7100e0c0c53e98fa",
+    "text": "{{name}}が仲間に加わった。"
+  },
+  "log.creatureRediscovered": {
+    "reviewed": true,
+    "source": "{{name}} was discovered again; your roster is unchanged.",
+    "sourceHash": "da35b57bf4d286a874828a1f12338cf3318610b6c27ce47f8c3b1f3059e2c0db",
+    "text": "{{name}}を再発見。仲間は変わらない。"
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -7882,6 +7906,12 @@
     "source": "{{card}} is drawn from Discard",
     "sourceHash": "81bb92280c0e731ba3995055c95bfe9c652319dd8f82c352636376858530fcd5",
     "text": "捨て札から引いたカード: {{card}}"
+  },
+  "log.expressDelivery": {
+    "reviewed": true,
+    "source": "{{trait}} draws an extra card",
+    "sourceHash": "cd19f684d9c5dcfc73c5edc4adb76240fc888c4f04bc1f7c782ee73366891b8f",
+    "text": "{{trait}}でカードを追加で1枚引く"
   },
   "log.formationChanges": {
     "reviewed": true,
@@ -7931,6 +7961,12 @@
     "sourceHash": "94a9ebc996a5c0aa2a88ba369a62f55a66afee42bb825eaea038ce02dd305730",
     "text": "{{name}}：{{status}} +{{amount}}。"
   },
+  "log.goodFortune": {
+    "reviewed": true,
+    "source": "{{trait}} turns the odds",
+    "sourceHash": "59c4a6723c7871370b6c97e676bbee0498dc4bc8cc6d47610312d39d5e5194a1",
+    "text": "{{trait}}が確率を変える"
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
@@ -7954,6 +7990,12 @@
     "source": "Your journey begins.",
     "sourceHash": "a6b3d9f14a1dcbc6c09967ad865576b4508eea27407b93c7c55ae28bbde81b21",
     "text": "旅が始まります。"
+  },
+  "log.journeyEnded": {
+    "reviewed": true,
+    "source": "Your journey has ended.",
+    "sourceHash": "abd535e90b3ada6d212ae832ca60759b8a3774ede244f3c447142b20b69f61a5",
+    "text": "旅が終わった。"
   },
   "log.keepBlockWithBoon": {
     "reviewed": true,
@@ -7990,6 +8032,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "545add015fb4014eeade563dc1325a44d1e905c57677329b7a55fee202c784b9",
     "text": "{{name}}の凍結の蓄積が{{amount}}減少"
+  },
+  "log.mountainGuide": {
+    "reviewed": true,
+    "source": "{{trait}} protects {{target}}",
+    "sourceHash": "8b352272710d227747b3f1171739d03a9ba82b627d81dbc6900d71b093b17f4f",
+    "text": "{{trait}}が{{target}}を守る"
   },
   "log.negateAttack": {
     "reviewed": true,
@@ -8093,6 +8141,12 @@
     "sourceHash": "9a3a7eeed17ca4ba465c10875bf71681147e378a5891ab8e87ec6b796744f256",
     "text": "{{actor}}が{{trait}}でスタンダメージを繰り返す"
   },
+  "log.replacement": {
+    "reviewed": true,
+    "source": "{{actor}} replaces {{target}}.",
+    "sourceHash": "8daa1e2b06c22fb0913625cd2378360bc6bb6f1ff79e3dcf2c19bad374985b65",
+    "text": "{{actor}}が{{target}}と交代。"
+  },
   "log.resurrect": {
     "reviewed": true,
     "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
@@ -8122,6 +8176,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "4fc66ced44f28eca05ae7122c843f65c93f57a21885e722d037ce377f392fa6d",
     "text": "{{actor}}が{{echo}}を召喚"
+  },
+  "log.swapPositions": {
+    "reviewed": true,
+    "source": "{{actor}} swaps positions with {{target}}.",
+    "sourceHash": "003387d3d644de00c1a4b70924cafbe8af739b202714b69c80e34a261501b5dc",
+    "text": "{{actor}}が{{target}}と位置を交換。"
   },
   "log.temporaryDodge": {
     "reviewed": true,

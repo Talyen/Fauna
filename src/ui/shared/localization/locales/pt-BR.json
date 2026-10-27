@@ -7823,6 +7823,12 @@
     "sourceHash": "081bb48c5e8bccaff2bd777bcee6d215f79872b4e579e4b3ed5c4e577a070d93",
     "text": "{{name}} bloqueia {{amount}} de dano."
   },
+  "log.battleComplete": {
+    "reviewed": true,
+    "source": "Battle complete. Rewards saved.",
+    "sourceHash": "b4759018b88b3c7c33d2a1efaabc465ae500102f6b0a0196f4811706c383cafe",
+    "text": "Batalha concluída. Recompensas salvas."
+  },
   "log.blinded": {
     "reviewed": true,
     "source": "{{name}} is Blinded",
@@ -7847,6 +7853,12 @@
     "sourceHash": "3bf5f3aa0998c58ec8b7efa62b2feb2a356cfec162e2f6ab1673777e8bd8c1a2",
     "text": "{{name}}: efeito aplicado ({{status}})."
   },
+  "log.copyWithTrait": {
+    "reviewed": true,
+    "source": "{{actor}} copies {{card}} with {{trait}}",
+    "sourceHash": "3ae4233ec9d067a62dbf40107316cd547b329a245ebc49ac325512cdccd5a63b",
+    "text": "{{actor}} copia {{card}} com {{trait}}"
+  },
   "log.createFood": {
     "reviewed": true,
     "source": "{{actor}} creates {{count}} Food cards",
@@ -7858,6 +7870,18 @@
     "source": "{{actor}} creates {{count}} Pearls",
     "sourceHash": "1b41e3bacd10e15cbca2efce6677f7770100993320601743383fbd3b19c6f449",
     "text": "{{actor}} cria Pérolas: {{count}}"
+  },
+  "log.creatureJoined": {
+    "reviewed": true,
+    "source": "{{name}} joined your roster.",
+    "sourceHash": "18185f713b9357109cbfe86f3cad093a2b305fd6d3d62ad7dead2338d72e2f69",
+    "text": "{{name}} entrou no seu grupo."
+  },
+  "log.creatureRediscovered": {
+    "reviewed": true,
+    "source": "{{name}} was discovered again; your roster is unchanged.",
+    "sourceHash": "f61bd49e24bc806f9dd8e426c2e8b88da3efcc3623151a82fcc74966d816651a",
+    "text": "Nova descoberta: {{name}}; seu grupo não mudou."
   },
   "log.criticalDamage": {
     "reviewed": true,
@@ -7882,6 +7906,12 @@
     "source": "{{card}} is drawn from Discard",
     "sourceHash": "6e90d74c817aca85aeeb8b80c14dbdf581a2d546a482bfb01400c3cca828f993",
     "text": "Carta comprada do descarte: {{card}}"
+  },
+  "log.expressDelivery": {
+    "reviewed": true,
+    "source": "{{trait}} draws an extra card",
+    "sourceHash": "c2da0e69fd640108e943e73c3cfd49a960154e088546a2a6d51a92bce71de375",
+    "text": "{{trait}} compra uma carta extra"
   },
   "log.formationChanges": {
     "reviewed": true,
@@ -7931,6 +7961,12 @@
     "sourceHash": "68ca8b8917e65708ce62f3dc2682a0815ba3d56be1fa21b5b685f11f1f36d287",
     "text": "{{name}}: {{status}} +{{amount}}."
   },
+  "log.goodFortune": {
+    "reviewed": true,
+    "source": "{{trait}} turns the odds",
+    "sourceHash": "5df369bb3de7f3254e8777e2d9fec4368f57e4a1addd4638fc484817cf05e642",
+    "text": "{{trait}} muda as chances"
+  },
   "log.heal": {
     "reviewed": true,
     "source": "{{name}} restores {{amount}} Health.",
@@ -7954,6 +7990,12 @@
     "source": "Your journey begins.",
     "sourceHash": "79c3d57a6bb5bcb5932735e932349a9386451aec513d4d8121f603913bcd305e",
     "text": "Sua jornada começa."
+  },
+  "log.journeyEnded": {
+    "reviewed": true,
+    "source": "Your journey has ended.",
+    "sourceHash": "3d73a901cc4be43089ab8a67e09f1299077deb8a04d52e118a0da7a6defa9a05",
+    "text": "Sua jornada terminou."
   },
   "log.keepBlockWithBoon": {
     "reviewed": true,
@@ -7990,6 +8032,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "4f1b28fb06ea2047c626e0e9ab6819052ea07f79cc1378a66744b7b86b926630",
     "text": "{{name}} perde {{amount}} de acúmulo de Congelamento"
+  },
+  "log.mountainGuide": {
+    "reviewed": true,
+    "source": "{{trait}} protects {{target}}",
+    "sourceHash": "049030ff774bec254a25365217b787935b0e134dfccc4b98facb30c78cdb0b14",
+    "text": "{{trait}} protege {{target}}"
   },
   "log.negateAttack": {
     "reviewed": true,
@@ -8093,6 +8141,12 @@
     "sourceHash": "743df68d3cebccebd68ab31af2d0913d5bfd04fc4e36863ffd4d4b60978dcfb8",
     "text": "{{actor}} repete dano de Atordoamento com {{trait}}"
   },
+  "log.replacement": {
+    "reviewed": true,
+    "source": "{{actor}} replaces {{target}}.",
+    "sourceHash": "7b0540ab02caf45af785d19fafd72d0252761ebef0833cbd734a3278b43d084f",
+    "text": "{{actor}} substitui {{target}}."
+  },
   "log.resurrect": {
     "reviewed": true,
     "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
@@ -8122,6 +8176,12 @@
     "source": "{{actor}} summons an {{echo}}",
     "sourceHash": "e56b4e5a053b76aaa2fd0d09c0afb812c555b2eda54a0297b4e67f6705d113ba",
     "text": "{{actor}} invoca um {{echo}}"
+  },
+  "log.swapPositions": {
+    "reviewed": true,
+    "source": "{{actor}} swaps positions with {{target}}.",
+    "sourceHash": "77482a435077f2c5bb47f2ccd8d530a4694df0f48eec54a5da2465cdcaf279f7",
+    "text": "{{actor}} troca de posição com {{target}}."
   },
   "log.temporaryDodge": {
     "reviewed": true,
