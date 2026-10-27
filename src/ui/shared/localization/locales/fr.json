@@ -4841,6 +4841,18 @@
     "sourceHash": "83626e7eb2d2f70e21238932f1774ff5f4285a6893ae59e72d7d5b03fd0b3d96",
     "text": "{{name}} : {{action}} — aucun effet retiré."
   },
+  "log.repeatNextEnemyCard": {
+    "reviewed": true,
+    "source": "The enemy's next card is played twice",
+    "sourceHash": "4d3e61daea0bf17d24eb9a213110e3293116fbc123e8991b934a57a9226f05c6",
+    "text": "La prochaine carte de l’ennemi est jouée deux fois"
+  },
+  "log.repeatNextPlayerCard": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "18ec45e3f0cc1e9820c81c8f37facf49e71c769663e06e8369edf554f3390277",
+    "text": "Votre prochaine carte est jouée deux fois"
+  },
   "log.resurrect": {
     "reviewed": true,
     "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",

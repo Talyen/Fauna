@@ -4793,6 +4793,18 @@
     "sourceHash": "022fab442a9caaf52d6779981388fd2c691ad771c653da4a14b607ccda5bcbb3",
     "text": "{{name}}：{{action}} — 未移除任何效果。"
   },
+  "log.repeatNextEnemyCard": {
+    "reviewed": true,
+    "source": "The enemy's next card is played twice",
+    "sourceHash": "683b6cb21f773b07c8d5265ba5844052336203c99fd2d7f0f869614fc3c2b315",
+    "text": "敌人的下一张卡牌会打出两次"
+  },
+  "log.repeatNextPlayerCard": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "12b9fe7f9debdfc748433c525c83b03b1e161d45e769f4ae8827a9b2226092a5",
+    "text": "你的下一张卡牌会打出两次"
+  },
   "log.resurrect": {
     "reviewed": true,
     "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",

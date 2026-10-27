@@ -214,6 +214,23 @@ it("localizes reflected attacks while preserving unrecognized events", () => {
   expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
 });
 
+it("localizes both next-card repeat announcements", () => {
+  const game = run();
+  const reader = createMessageReader("fr", french);
+  const event = {
+    kind: "action" as const,
+    actionType: "support" as const,
+    actorId: game.team[0]!.id,
+    text: "Your next card is played twice",
+  };
+  expect(eventPresentation(game, event, reader)).toBe("Votre prochaine carte est jouée deux fois");
+  expect(eventPresentation(game, { ...event, text: "The enemy's next card is played twice" }, reader)).toBe(
+    "La prochaine carte de l’ennemi est jouée deux fois",
+  );
+  expect(eventPresentation(game, { ...event, actionType: "attack" }, reader)).toBe(event.text);
+  expect(eventPresentation(game, event, createMessageReader("en", {}))).toBe(event.text);
+});
+
 it("localizes temporary Dodge and lost Freeze buildup with their exact amounts", () => {
   const game = run();
   const target = game.team[0]!;

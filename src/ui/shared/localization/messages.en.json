@@ -356,6 +356,12 @@
   "log.removeNoEffects": {
     "text": "{{name}}: {{action}} removes no effects."
   },
+  "log.repeatNextEnemyCard": {
+    "text": "The enemy's next card is played twice"
+  },
+  "log.repeatNextPlayerCard": {
+    "text": "Your next card is played twice"
+  },
   "log.resurrect": {
     "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"
   },

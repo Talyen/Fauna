@@ -4793,6 +4793,18 @@
     "sourceHash": "e84c3f4bfc1324af913a24c419c5844bc6e97e64f0005168f2f4b6ce36d896c0",
     "text": "{{name}}：{{action}} — 解除された効果はありません。"
   },
+  "log.repeatNextEnemyCard": {
+    "reviewed": true,
+    "source": "The enemy's next card is played twice",
+    "sourceHash": "987e4deb4eaf490cc3b3faf1d3a240f74039911bd1579278c2f506e907189fa6",
+    "text": "敵の次のカードは2回プレイされる"
+  },
+  "log.repeatNextPlayerCard": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "95e7d22366061ccec26e100519b9e9f353ff511584f27f6f7fa36a5e236eb8d9",
+    "text": "次の自分のカードは2回プレイされる"
+  },
   "log.resurrect": {
     "reviewed": true,
     "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
