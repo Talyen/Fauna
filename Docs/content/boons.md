@@ -8,7 +8,7 @@ The original portraits are unchanged WebP selections copied from `Alchemy: src/a
 
 ## Execution contracts
 
-The catalog and rule owner define current availability, exact player copy and tuning. This alphabetical reference records specialized timing, recipients and interactions; shared [combat rules](../KEYWORDS.md) apply unless an entry states an exception.
+The catalog and rule owner define current availability, exact player copy and tuning. This reference records specialized timing, recipients and interactions, grouped by design batch; shared [combat rules](../KEYWORDS.md) apply unless an entry states an exception.
 
 ### Rose and hearth Boons
 
@@ -36,7 +36,7 @@ The catalog and rule owner define current availability, exact player copy and tu
 - **Dandelion Poultice:** Each actual allied Cleanse application deals 2 derived Nature damage to all living enemies. Empty Cleanse does nothing; group Cleanse resolves once per recipient, including Miracle Megaphone. Derived damage cannot start attack or retaliation chains
 - **Dew Pendulum:** At the end of the player turn, each living deployed ally gains Block equal to the same snapshot of unspent Mana, before the enemy phase. Ordinary Block-gain effects apply; Mana is not spent
 
-Development save format 67 supports Cornucopia's journey-owned card and rejects obsolete saves. Current saves validate its identity and ownership; the card may be absent during battle after consumption but must exist outside battle while the Boon is owned.
+Current saves validate the identity and ownership of Cornucopia's journey-owned card; it may be absent during battle after consumption but must exist outside battle while the Boon is owned. The [save format](../../src/game/save-format.json) rejects obsolete development saves.
 
 ### Other Boons
 
@@ -165,7 +165,7 @@ The approved additions use the ordinary unowned Boss reward and Merchant pools, 
 | Thornheart Ring    | Allied Thorns retain their ordinary stack instead of spending it when retaliating against a currently Bleeding attacker; Briar Racquet also qualifies                                                                                                                                                                                                                                                                                                                                                                       |
 | Moonboat Toy       | Allied Water ability packets suppress enemy Thorns damage while retaining ordinary one-stack wear, including when Negated; other damage types, reflected enemy attacks and non-Thorns retaliation keep their ordinary rules                                                                                                                                                                                                                                                                                                 |
 
-Development save format 65 supports the ownership-dependent seventh hand slot and stored build-up during enemy immunity. Obsolete development saves are rejected without migration. [Battle layout](../ui/battle.md#layout) owns the seven-card fan and its existing FIFO overflow behavior.
+Current saves support the ownership-dependent seventh hand slot and stored build-up during enemy immunity. [Battle layout](../ui/battle.md#layout) owns the seven-card fan and its existing FIFO overflow behavior.
 
 ## Woven artifact Boons
 

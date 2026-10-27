@@ -1,6 +1,6 @@
 # Localization preparation
 
-Fauna currently ships in English only. Its target languages are English, German,
+Fauna currently offers English only. Its target languages are English, German,
 Simplified Chinese, Russian, Spanish (Spain), Brazilian Portuguese, Japanese and
 French, matching Alchemy's current selection. These are targets, not a claim that
 translations are available or qualified.
@@ -15,14 +15,14 @@ part of the work, not optional afterthoughts. Fauna should adapt those principle
 to its own content and platform boundaries rather than copy Alchemy's catalogs.
 
 Fauna's generated ability descriptions and passive tiers interpolate gameplay
-values, and `KeywordText` currently recognizes English words to apply semantic
-colors. Before translating these rules, represent values and keyword identities
-independently of the rendered English, retaining complete messages and allowing
-reordering. Resolve them only in presentation; never translate gameplay IDs or
-stored state. Audit names, descriptions, generated rules, glossary, accessibility
-names, feedback, startup and recovery text as well as ordinary controls. Locale
-aware numbers and plural forms must use the selected language. Diagnostics should
-remain useful for troubleshooting and must not be blindly translated as game text.
+values. The rule-message adapter extracts values and keyword identities from the
+existing English generator into complete templates that translations can reorder;
+unrecognized or invalid templates fall back to English. Migration and coverage are
+not complete. Resolve translated rules only in presentation; never translate gameplay
+IDs or stored state. Audit names, descriptions, generated rules, glossary, accessibility
+names, feedback, startup and recovery text as well as ordinary controls. Locale-aware
+numbers and plural forms must use the selected language. Diagnostics should remain
+useful for troubleshooting and must not be blindly translated as game text.
 
 ## Migration inventory
 
