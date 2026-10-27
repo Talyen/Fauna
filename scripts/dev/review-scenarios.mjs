@@ -200,6 +200,9 @@ export async function reviewScenario(server, name) {
     const { setHand } = await server.ssrLoadModule("/tests/support/cards.ts");
     game = structuredClone(teamRun(42, ["reedstag", "emberback", "prismram"]));
     setHand(game, ["reedstag-attack"]);
+    game.battle.enemies[0].combat.thorns = 3;
+    game.battle.enemies[0].combat.controlled = "stun";
+    game.battle.enemies[0].combat.controlTurns = 1;
   }
   const save = encodeSave(game);
   decodeSave(save);
@@ -256,7 +259,9 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await expect(page.locator(".target-preview .combat-stats").first()).toBeVisible();
   }
   if (scenario.name === "nature-damage-targeting") {
-    await page.locator('.hand [data-card-id$="reedstag-attack"]').click();
+    await page.locator('.hand [data-card-id$="reedstag-attack"]').focus();
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("button", { name: "Target Emberback", exact: true })).toBeFocused();
     await expect(page.locator('.target-preview [data-damage-type="nature"]').first()).toBeVisible();
   }
   if (scenario.name === "oathara-resurrection") {
