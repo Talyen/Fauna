@@ -33,7 +33,6 @@ import { FOOD_CARDS } from "../../../src/game/content/food";
 import { cardText, enemyCard } from "../../../src/game/card-rules";
 import { CardRules } from "../../../src/ui/shared/combat/combat-values";
 import { ActionCard } from "../../../src/ui/shared/cards/cards";
-import { RuleCatalogProvider } from "../../../src/ui/shared/localization/rule-catalog";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import type { TargetForecast } from "../../../src/ui/battle/play-preview-model";
 import { playPreviewModel } from "../../../src/ui/battle/play-preview-model";
@@ -2220,40 +2219,6 @@ it("bundles fonts covering each script language's native selector label", () => 
     for (const character of label)
       expect(fontHasGlyph(font, character.codePointAt(0)!), `${file}: ${character}`).toBe(true);
   }
-});
-
-it("localizes action-card announcements with the same translated rule used for presentation", () => {
-  const game = run();
-  const card = game.cards.find((item) => item.definitionId === "mossguard-guard")!;
-  const rule = ruleMessage("Gain 6 Block");
-  const catalog: MessageCatalog = {
-    "content.card.mossguard-guard.name": { source: "Boulder Brace", text: "Garde de pierre" },
-    "card.actionLabel": {
-      source: "{{name}}, {{owner}}, {{mana}} mana, {{effect}}",
-      text: "{{effect}} · {{name}} · {{owner}} · {{mana}} Mana",
-    },
-  };
-  const view = render(
-    <MessageProvider locale="fr" catalog={catalog}>
-      <RuleCatalogProvider
-        catalog={{
-          [cardRuleVariantId(card.definitionId, rule.template)]: {
-            source: rule.template,
-            text: "Gagnez {{value0}} <keyword0>Blocage</keyword0>",
-          },
-        }}
-      >
-        <TooltipProvider>
-          <ActionCard card={card} ownerName="Gardemousse" onClick={() => {}} />
-        </TooltipProvider>
-      </RuleCatalogProvider>
-    </MessageProvider>,
-  );
-  expect(
-    screen.getByRole("button", { name: "Gagnez 6 Blocage · Garde de pierre · Gardemousse · 1 Mana" }),
-  ).toBeTruthy();
-  expect(card.definitionId).toBe("mossguard-guard");
-  view.unmount();
 });
 
 it("extracts Food rules for individual and team targets from the production descriptions", () => {

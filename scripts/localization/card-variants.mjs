@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { parseSync } from "@swc/core";
 import { keywordPattern, templateFor } from "./boon-rules.mjs";
 import { walk } from "./source-ast.mjs";
+import { describeRule } from "./rule-evaluator.mjs";
 import { cardRuleVariantId } from "../../src/ui/shared/localization/rule-key.mjs";
 import {
   describeCompleteCard,
@@ -98,6 +99,10 @@ export function extractCardVariants(files, sources, keywordSource) {
   const ability = readCardDescriptionFunctions(sources.abilities),
     supplemental = readCardDescriptionFunctions(sources.supplemental),
     policies = readSupplementalPolicies(sources.supplemental);
+  const guardHelper = parseSync(sources.abilities, { syntax: "typescript", target: "es2022" }).body.find(
+    (node) => node.type === "ExportDeclaration" && node.declaration?.identifier?.value === "guardSelfRule",
+  )?.declaration;
+  if (!guardHelper) throw new Error("Missing structured guard rule");
   const core = parseSync(sources.cardRules, { syntax: "typescript", target: "es2022" }).body.filter(
     (node) => {
       const declaration = node.type === "ExportDeclaration" ? node.declaration : node;
@@ -147,8 +152,23 @@ export function extractCardVariants(files, sources, keywordSource) {
       for (const value of new Set([card.value, 1, 2])) {
         for (const power of [1, 1.7]) {
           const text = describeCompleteCard(model, 0, value, power, sources, labels);
-          const template = templateFor(text, pattern),
-            id = cardRuleVariantId(card.id, template);
+          let template = templateFor(text, pattern);
+          let id = cardRuleVariantId(card.id, template);
+          if (
+            card.id === "ravelland-rainward" &&
+            model.effect === "guard" &&
+            model.target === "self" &&
+            !model.effects?.length &&
+            !model.consume &&
+            !model.leech &&
+            !model.repeatChance
+          ) {
+            const message = describeRule(guardHelper, [value], { String });
+            if (message.source !== text || message.template !== template)
+              throw new Error("Structured guard rule differs from the complete authored rule");
+            template = message.template;
+            id = "content.card.ravelland-rainward.vadb3e758e4125447.rule";
+          }
           if (result[id] && result[id].text !== template) throw new Error(`Card rule hash collision: ${id}`);
           result[id] ??= { text: template, reference: text, contextHash };
         }

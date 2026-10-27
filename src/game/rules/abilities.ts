@@ -3,6 +3,21 @@ import type { AbilityKind } from "./ability-types";
 import type { AbilityRule, AbilityRuleCatalog } from "./contracts";
 import { scalePower } from "./contracts";
 
+/** Structured pilot for one complete rule; values and keyword identity never come from parsing prose. */
+export function guardSelfRule(value: number): {
+  source: string;
+  template: string;
+  values: { value0: string };
+  keywords: { keyword0: "block" };
+} {
+  return {
+    source: `Gain ${value} Block`,
+    template: "Gain {{value0}} <keyword0>Block</keyword0>",
+    values: { value0: String(value) },
+    keywords: { keyword0: "block" },
+  };
+}
+
 // Ordinary support abilities scale with card level and are usable by either side.
 // Every kind still supplies its own description and can override these shared policies.
 const automatic = {

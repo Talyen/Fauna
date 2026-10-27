@@ -1,4 +1,5 @@
 import { cardRuleId } from "../localization/card-rule-id";
+import { structuredCardRule } from "../localization/structured-card-rule";
 import { useMessages } from "../localization/message-context";
 import type { GameState } from "../../../game/types";
 import { KeywordText } from "../keyword-text";
@@ -58,9 +59,14 @@ export function CardRules({
   modifiers?: GameState;
 }) {
   const text = cardText(card, level, value, power, modifiers);
+  const structured = structuredCardRule(card, level, value, power, text);
   return (
     <span className="action-effect">
-      <KeywordText text={text} id={cardRuleId(card, modifiers, text)} />
+      <KeywordText
+        text={text}
+        id={structured?.id ?? cardRuleId(card, modifiers, text)}
+        structured={structured?.message}
+      />
     </span>
   );
 }

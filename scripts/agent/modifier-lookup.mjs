@@ -39,16 +39,44 @@ export function lookupModifier(root, id) {
         matches.push(`${file}:${index + 1}`);
     }
   }
-  return { id, bindings, matches };
+  const owners = bindings.flatMap((entry) =>
+    entry.handlers.map((handler) => {
+      const [module, name] = handler.split("#");
+      const file = `src/game/${module.slice(2)}.ts`;
+      const lines = readFileSync(path.join(root, file), "utf8").split("\n");
+      const index = lines.findIndex((line) =>
+        new RegExp(`\\b(?:function\\s*\\*?|const|let)\\s+${name}\\b`).test(line),
+      );
+      return { contract: entry.contract, handler, location: index < 0 ? file : `${file}:${index + 1}` };
+    }),
+  );
+  const definitions = matches.filter(
+    (file) => file.startsWith("src/game/content/") || file.startsWith("src/game/rules/"),
+  );
+  const tests = matches.filter(
+    (file) =>
+      /^tests\/(?:unit|integration|e2e|exhaustive)\//.test(file) && !file.startsWith("tests/unit/tooling/"),
+  );
+  return { id, bindings, owners, definitions, tests, matches };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   if (process.argv.length !== 3) throw new Error("Usage: npm run modifier:lookup -- <exact-id>");
   const result = lookupModifier(process.cwd(), process.argv[2]);
-  console.log(`${result.id}\nDeclared owners:`);
-  for (const entry of result.bindings)
-    console.log(`  ${entry.contract}/${entry.group}: ${entry.handlers.join(", ")}`);
+  console.log(`${result.id}\nDeclared execution and query owners (binding order is not reaction order):`);
+  for (const owner of result.owners) console.log(`  ${owner.contract}: ${owner.handler} (${owner.location})`);
   console.log(
-    `Literal references (navigation hints; inspect tests and indirect consumers):\n${result.matches.map((file) => `  ${file}`).join("\n") || "  none"}`,
+    `Definition and parameter references (literal hints):\n${result.definitions.map((file) => `  ${file}`).join("\n") || "  none"}`,
+  );
+  console.log(
+    `Behavior test references (literal hints):\n${result.tests.map((file) => `  ${file}`).join("\n") || "  none"}`,
+  );
+  console.log(
+    `Other literal references (navigation hints; indirect consumers may be missing):\n${
+      result.matches
+        .filter((file) => !result.definitions.includes(file) && !result.tests.includes(file))
+        .map((file) => `  ${file}`)
+        .join("\n") || "  none"
+    }`,
   );
 }

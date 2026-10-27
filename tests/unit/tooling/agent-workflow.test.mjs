@@ -6,6 +6,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import net from "node:net";
 import { taskIntent, recordTaskIntent } from "../../../scripts/lib/task-intent.mjs";
+import { readTaskEvidence } from "../../../scripts/lib/task-evidence.mjs";
 import { runLocal, localPolicy } from "../../../scripts/local.mjs";
 import { selectedPaths, parseCheckArgs, runCheck } from "../../../scripts/checks/check.mjs";
 import { verificationIdentity } from "../../../scripts/checks/input-identity.mjs";
@@ -623,6 +624,27 @@ it("gives the changed-file gate a longer deadline without widening focused tests
   expect(runner.mock.calls[0][2].timeout).toBeGreaterThan(80_000);
   expect(runner.mock.calls[0][2].timeout).toBeLessThanOrEqual(90_000);
   expect(runner.mock.calls[0][2].env.RAYON_NUM_THREADS).toBe("1");
+});
+
+it("retains only completed local command receipts for unchanged source", async () => {
+  const root = fixture();
+  const suite = "tests/unit/example.test.mjs";
+  put(root, suite, "export {};\n");
+  expect(await runLocal("test", [suite], { root, env: {}, runner: async () => ({ status: 0 }) })).toBe(0);
+  expect(readTaskEvidence(root).regression).toBe(suite);
+  expect(await runLocal("test", [suite], { root, env: {}, runner: async () => ({ status: 1 }) })).toBe(1);
+  expect(readTaskEvidence(root).regression).toBeUndefined();
+  expect(
+    await runLocal("test", [suite], {
+      root,
+      env: {},
+      runner: async () => {
+        put(root, "README.md", "# Changed during run\n");
+        return { status: 0 };
+      },
+    }),
+  ).toBe(0);
+  expect(readTaskEvidence(root).regression).toBeUndefined();
 });
 
 it("allows Vercel hosted builds without granting a general local heavy override", async () => {

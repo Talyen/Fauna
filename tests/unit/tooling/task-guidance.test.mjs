@@ -5,6 +5,15 @@ import { parseCheckArgs, runCheck } from "../../../scripts/checks/check.mjs";
 import { describeTask, hostedStatus, taskStatus } from "../../../scripts/agent/task-status.mjs";
 import { lookupModifier } from "../../../scripts/agent/modifier-lookup.mjs";
 import { uiGuide } from "../../../scripts/agent/ui-guide.mjs";
+import {
+  readTaskEvidence,
+  recordTaskEvidence,
+  recordVisualReview,
+  sourceIdentity,
+  visualReviewStatus,
+} from "../../../scripts/lib/task-evidence.mjs";
+import { verificationIdentity } from "../../../scripts/checks/input-identity.mjs";
+import { taskBase } from "../../../scripts/lib/task-selection.mjs";
 
 it("reports recorded tests as intent and never claims that the lightweight gate ran them", () => {
   const root = repository({
@@ -52,6 +61,47 @@ it("requires the exact hosted commit and a real final verify job", () => {
   expect(hostedStatus("/repo", commit, () => ({ status: 1 }))).toContain("unavailable");
 });
 
+it("reports a local result only for the same committed and working source", () => {
+  const root = repository({
+    "package.json": '{"dependencies":{},"devDependencies":{}}',
+    "file.txt": "before\n",
+  });
+  const identity = sourceIdentity(root);
+  recordTaskEvidence(root, identity, "gate", "passed");
+  recordTaskEvidence(root, identity, "regression", "tests/unit/example.test.ts");
+  expect(readTaskEvidence(root)).toEqual({ gate: "passed", regression: "tests/unit/example.test.ts" });
+  expect(describeTask(taskStatus(root))).toContain("Local gate: passed for current source");
+  put(root, "file.txt", "changed\n");
+  expect(readTaskEvidence(root)).toEqual({});
+  expect(describeTask(taskStatus(root))).toContain("Local gate: unknown");
+  put(root, "file.txt", "before\n");
+  put(root, "new.txt", "untracked\n");
+  expect(readTaskEvidence(root)).toEqual({});
+});
+
+it("records only an explicitly inspected complete capture for the current source", () => {
+  const root = repository({
+    ".gitignore": "reports/\n",
+    "package.json": '{"dependencies":{},"devDependencies":{}}',
+  });
+  const file = "reports/capture/evidence.json";
+  const evidence = {
+    complete: true,
+    source: verificationIdentity(root, taskBase(root), [], {}, "capture"),
+    frames: [{ file: "frame.png", errors: [], layoutFailures: [] }],
+  };
+  put(root, "reports/capture/frame.png", "frame");
+  put(root, file, JSON.stringify(evidence));
+  recordVisualReview(root, file, {});
+  expect(visualReviewStatus(root, readTaskEvidence(root).visual)).toBe(file);
+  put(root, "reports/capture/frame.png", "modified");
+  expect(visualReviewStatus(root, readTaskEvidence(root).visual)).toBeNull();
+  put(root, file, JSON.stringify({ ...evidence, complete: false }));
+  expect(() => recordVisualReview(root, file, {})).toThrow("incomplete");
+  put(root, file, JSON.stringify({ ...evidence, source: "different" }));
+  expect(() => recordVisualReview(root, file, {})).toThrow("differs");
+});
+
 it("locates both implementation and query owners without guessing from names", () => {
   const root = path.resolve(import.meta.dirname, "../../..");
   const result = lookupModifier(root, "dodge.finding-rhythm");
@@ -61,6 +111,12 @@ it("locates both implementation and query owners without guessing from names", (
   ]);
   expect(result.matches.some((file) => file.startsWith("src/game/content/talents/dodge.ts:"))).toBe(true);
   expect(result.matches.some((file) => file.startsWith("tests/"))).toBe(true);
+  expect(result.owners.some((owner) => owner.location.startsWith("src/game/combat/state.ts:"))).toBe(true);
+  expect(result.owners.some((owner) => owner.location.startsWith("src/game/combat/damage.ts:"))).toBe(true);
+  expect(result.definitions.some((file) => file.startsWith("src/game/rules/talents.ts:"))).toBe(true);
+  expect(result.tests.some((file) => file.startsWith("tests/unit/game/"))).toBe(true);
+  const boon = lookupModifier(root, "pumpkin-tureen");
+  expect(boon.owners.length).toBeGreaterThan(0);
   expect(() => lookupModifier(root, "not-an-id")).toThrow("No binding found");
 });
 

@@ -2,6 +2,7 @@ import { useMessages } from "./localization/message-context";
 import { useEffectMetadata } from "./effects/effects";
 import { KEYWORD_DEFINITIONS, type KeywordId } from "../../game/keywords";
 import { useRuleText } from "./localization/rule-catalog";
+import type { RuleMessage } from "./localization/rule-message";
 export function Keyword({ id, className }: { id: KeywordId; className?: string }) {
   const i18n = useMessages();
   const metadata = useEffectMetadata([id]);
@@ -13,9 +14,17 @@ export function Keyword({ id, className }: { id: KeywordId; className?: string }
 }
 
 /** Labels stay readable without color; definitions remain in the menu Glossary. */
-export function KeywordText({ text, id }: { text: string; id?: string }) {
+export function KeywordText({
+  text,
+  id,
+  structured,
+}: {
+  text: string;
+  id?: string;
+  structured?: RuleMessage;
+}) {
   const metadata = useEffectMetadata();
-  return useRuleText(text, id).map((part, index) =>
+  return useRuleText(text, id, structured).map((part, index) =>
     part.keyword ? (
       <span
         key={index}

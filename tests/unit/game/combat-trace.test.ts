@@ -24,6 +24,18 @@ it("records nested reactions and detached state, events and RNG without changing
     traced.state,
     traced.events,
   );
+  expect(traced.events.map(({ kind }) => kind)).toEqual(["block", "damage", "damage"]);
+  expect(
+    result.steps.filter(({ phase }) => phase === "enter").map(({ kind, depth }) => [kind, depth]),
+  ).toEqual([
+    ["hit", 0],
+    ["negateAttack", 1],
+    ["resolveHit", 1],
+    ["applyHarmfulStatus", 2],
+    ["hit", 2],
+    ["resolveHit", 3],
+    ["healthThresholds", 4],
+  ]);
   expect(traced.state).toEqual(normal.state);
   expect(traced.events).toEqual(normal.events);
   expect(result.steps[0]).toMatchObject({ kind: "hit", phase: "enter", depth: 0 });

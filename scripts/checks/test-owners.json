@@ -73,6 +73,10 @@
     "reason": "Player screen actions and committed outcomes",
     "suites": ["tests/unit/ui/ui.test.tsx"]
   },
+  "src/ui/shared/localization/structured-card-rule.ts": {
+    "reason": "Structured ability rule text, scaling, keyword identity and translation fallback",
+    "suites": ["tests/unit/ui/structured-card-rule.test.tsx", "tests/unit/ui/localization.test.tsx"]
+  },
   "src/ui/collection/": {
     "reason": "Collection browsing and selection",
     "suites": ["tests/unit/ui/collection-ui.test.tsx"]

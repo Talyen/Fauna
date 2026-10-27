@@ -197,6 +197,8 @@ The [October 27 production visual review](task-evidence/2026-10-27-react-compile
 
 For a focused deterministic investigation, call `traceCombat` from [combat-trace.ts](../src/tooling/combat-trace.ts) with a root operation, its ordinary arguments, and the same state and event array. Each enter/exit record contains the operation, depth, detached state (including RNG) and events. [The focused regression](../tests/unit/game/combat-trace.test.ts) demonstrates a Thorns child reaction and compares its result with ordinary resolution. The trace covers only the explicitly invoked root; it does not capture other operations or install a global observer. Snapshots can be large, so use it for focused scenarios, not routine play. It is diagnostic evidence, not proof of preview or full-journey parity.
 
+In that regression, a 4-damage hit meets 20 Block and 5 Thorns. The entry sequence is `hit` → `negateAttack` → `resolveHit` → `applyHarmfulStatus` → nested `hit` → nested `resolveHit` → `healthThresholds`, with depths 0, 1, 1, 2, 2, 3 and 4. The ordered events are Block loss, the original zero-damage packet and the 5-damage Thorns response. Child frames finish before their parents resume. Compare each detached event list when investigating a changed ordering; do not infer that every hit follows this exact path.
+
 ## Local diagnostics
 
 The [session-owned collector](ARCHITECTURE.md#discovery-and-diagnostics) records bounded, redacted failures separately from progression. It has no player report/export surface or automatic upload. Inspect its persistence port and focused tests when investigating collection, deduplication or disposal; ordinary features reuse it rather than collecting saves or arbitrary context.

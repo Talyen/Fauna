@@ -6,8 +6,9 @@ import { dependenciesAvailable, matchingDependencies } from "../dependencies.mjs
 import { git, worktrees } from "../lib/git.mjs";
 import { taskBase, taskPaths } from "../lib/task-selection.mjs";
 import { taskIntent } from "../lib/task-intent.mjs";
+import { readTaskEvidence, recordVisualReview, visualReviewStatus } from "../lib/task-evidence.mjs";
 
-/** Read-only orientation; it does not establish that any check or review passed. */
+/** Read-only orientation; local receipts do not replace the protected integration gate. */
 export function taskStatus(root) {
   const branch = git(root, ["branch", "--show-current"]).trim() || "(detached)";
   const commit = git(root, ["rev-parse", "HEAD"]).trim();
@@ -30,6 +31,12 @@ export function taskStatus(root) {
   } catch {
     // An unset Git option means a full checkout.
   }
+  let evidence = {};
+  try {
+    evidence = readTaskEvidence(root);
+  } catch {
+    // Missing or unreadable source is never evidence of a pass.
+  }
   return {
     root,
     branch,
@@ -42,6 +49,8 @@ export function taskStatus(root) {
     main: main ?? null,
     mainDirty: main ? Boolean(git(main, ["status", "--porcelain", "--untracked-files=all"])) : null,
     recordedTests: taskIntent(root).tests,
+    evidence,
+    visualReview: visualReviewStatus(root, evidence.visual),
   };
 }
 
@@ -66,7 +75,7 @@ export function hostedStatus(root, commit, runner = spawnSync) {
     ]);
     const latest = runs.find((entry) => entry.headSha === commit);
     if (!latest)
-      return "No hosted workflow found for this commit; it may be unpublished, unavailable or not yet scheduled.";
+      return "No hosted workflow found for this commit; it may be unpublished, unavailable or not yet scheduled. Publishing a task branch requires explicit authorization; see Docs/CI.md#hosted-task-verification.";
     const details = run([
       "run",
       "view",
@@ -94,7 +103,9 @@ export function describeTask(status, ci) {
       : "Source assets: checkout is not sparse; asset readiness has not been checked",
     `Recorded suites (intent only; not evidence of execution): ${status.recordedTests.join(", ") || "none"}`,
     `Main: ${status.main ? (status.mainDirty ? "dirty; integration will preserve it and stop" : "clean at this moment; integration rechecks under lock") : "not found; integration unavailable"}`,
-    "Evidence: local gate, focused regression and rendered review have not been checked by this status command.",
+    `Local gate: ${status.evidence?.gate === "passed" ? "passed for current source (integration reruns it)" : status.changes.length ? "unknown; run npm run verify:changed" : "unknown; no changed files selected"}`,
+    `Focused regression: ${typeof status.evidence?.regression === "string" ? `command exited 0 for current source: ${status.evidence.regression}; check test count in output` : "unknown; run one exact suite when useful"}`,
+    `Rendered review: ${status.visualReview ? `manually recorded for current source: ${status.visualReview}; see handoff for inspection and interactions` : "unknown; inspect and record required UI evidence (Docs/UI.md#required-review)"}`,
     `Hosted CI: ${ci ?? "not checked; run npm run task:status -- --ci for the exact commit"}${status.dirty ? " Working changes are not covered by this commit." : ""}`,
     status.branch === "main"
       ? "Next: create an isolated task with npm run worktree -- <task-name>."
@@ -105,10 +116,20 @@ export function describeTask(status, ci) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
-  if (args.some((arg) => arg !== "--ci") || args.length > 1)
-    throw new Error("Usage: npm run task:status -- [--ci]");
+  let ci = false;
+  let visual;
+  for (let index = 0; index < args.length; index++) {
+    if (args[index] === "--ci" && !ci) ci = true;
+    else if (
+      args[index] === "--record-visual" &&
+      !visual &&
+      args[index + 1] &&
+      !args[index + 1].startsWith("--")
+    )
+      visual = args[++index];
+    else throw new Error("Usage: npm run task:status -- [--ci] [--record-visual <capture-evidence.json>]");
+  }
+  if (visual) recordVisualReview(process.cwd(), visual);
   const status = taskStatus(process.cwd());
-  console.log(
-    describeTask(status, args.includes("--ci") ? hostedStatus(status.root, status.commit) : undefined),
-  );
+  console.log(describeTask(status, ci ? hostedStatus(status.root, status.commit) : undefined));
 }

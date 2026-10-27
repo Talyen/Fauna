@@ -1,9 +1,11 @@
 # Localization preparation
 
-Fauna currently offers English only. Its target languages are English, German,
-Simplified Chinese, Russian, Spanish (Spain), Brazilian Portuguese, Japanese and
-French, matching Alchemy's current selection. These are targets, not a claim that
-translations are available or qualified.
+The language registry currently enables English, German, Simplified Chinese,
+Russian, Spanish (Spain), Brazilian Portuguese, Japanese and French. The
+bundled catalogs and current qualification flags are in
+[languages.json](../src/ui/shared/localization/languages.json) and
+[shipped-catalogs.ts](../src/ui/shared/localization/shipped-catalogs.ts); their
+presence does not establish fresh rendered or linguistic review for a change.
 
 Alchemy provides a useful model: English is authoritative; locally bundled,
 reviewed catalogs resolve player text in presentation; the language preference
@@ -23,6 +25,16 @@ IDs or stored state. Audit names, descriptions, generated rules, glossary, acces
 names, feedback, startup and recovery text as well as ordinary controls. Locale-aware
 numbers and plural forms must use the selected language. Diagnostics should remain
 useful for troubleshooting and must not be blindly translated as game text.
+
+Rainward's self-Block rule is a structured pilot: its existing catalog ID remains
+stable, while its English template, value and keyword identity come from the
+guard rule owner. Card display and accessible text use that structure for the
+complete matching rule; changed effects fall back to the existing adapter. The
+pilot retains the original English description as a compatibility bridge;
+extraction rejects mismatches between it and the structured form. This preserves
+the existing reviewed translations without changing their freshness attestations.
+The pilot does not migrate other abilities; compare singular forms, extras and
+enemy adaptation before expanding it.
 
 ## Migration inventory
 

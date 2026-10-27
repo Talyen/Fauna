@@ -1,6 +1,6 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { keywordText } from "../../../game/keywords";
-import { renderRuleMessage, ruleMessage } from "./rule-message";
+import { renderRuleMessage, ruleMessage, type RuleMessage } from "./rule-message";
 
 export type RuleCatalog = Readonly<Record<string, string | { source: string; text: string }>>;
 const EMPTY_RULE_CATALOG: RuleCatalog = Object.freeze({});
@@ -17,9 +17,9 @@ export function RuleCatalogProvider({ catalog, children }: { catalog: RuleCatalo
 
 export function useRuleTranslator() {
   const catalog = useContext(RuleCatalogContext);
-  return (text: string, id?: string) => {
+  return (text: string, id?: string, structured?: RuleMessage) => {
     if (catalog === EMPTY_RULE_CATALOG) return keywordText(text);
-    const message = ruleMessage(text);
+    const message = structured ?? ruleMessage(text);
     const key = id ?? message.template;
     const entry = Object.hasOwn(catalog, key) ? catalog[key] : undefined;
     const translation =
@@ -28,6 +28,6 @@ export function useRuleTranslator() {
   };
 }
 
-export function useRuleText(text: string, id?: string) {
-  return useRuleTranslator()(text, id);
+export function useRuleText(text: string, id?: string, structured?: RuleMessage) {
+  return useRuleTranslator()(text, id, structured);
 }

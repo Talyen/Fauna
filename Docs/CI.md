@@ -26,6 +26,12 @@ Failed jobs may be rerun within the same run and commit, retaining earlier succe
 
 Branch pushes with an open PR defer to PR verification; main pushes, tags and fork PRs retain their gates. Duplicate suppression may yield a successful workflow with verification skipped, so release qualification requires the exact commit's successful final `verify` job. Superseded automatic branch runs are cancelled; manual benchmarks remain independent.
 
+## Hosted task verification
+
+Local integration does not publish source. When the user explicitly authorizes publishing a task commit for verification, publish that committed SHA to a dedicated task branch on the existing remote and let the push workflow run; do not advance remote main or create a PR unless separately requested. Record the branch, SHA and run URL. If an existing branch would be overwritten or its ownership is unclear, stop and resolve that choice first. A workflow dispatch may instead target the published task branch; verify its returned head SHA, since the branch could move between publication and dispatch.
+
+Use `npm run task:status -- --ci` from that commit to inspect the latest exact-SHA workflow and its final `verify` job. A missing run, a skipped final job, an in-progress job or a different SHA is not a pass. Wait for completion and report failures or unavailable status. If main is integrated afterward, its resulting SHA requires its own CI run; the task branch's result remains evidence only for the task commit. Publication and hosted execution do not authorize deployment or release.
+
 ## Reports and scheduling
 
 CI retains unit JSON, browser blob/JSON/HTML reports, player notes and Windows output for seven days. `unit-results` contains regular contracts and unfiltered discovery; `lineup-results-N` contains each exhaustive shard. `unit-review` contains the coverage-checked combined unit report and shard durations. Unit summaries show the ten slowest files and tests; the final gate reports each group's duration and the spread between fastest and slowest lineup workers. File timings measure each shard separately rather than adding concurrent times. `browser-review` contains the merged browser report; `browser-shard-N` retains raw blob attachments. JSON shares the HTML report's `browser-html/data/` attachments instead of duplicating `test-results/`. Collection and merging run on failure where the runner remains available; missing reports never substitute a passing summary.

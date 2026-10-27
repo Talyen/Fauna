@@ -1,4 +1,5 @@
 import { cardRuleId } from "../localization/card-rule-id";
+import { structuredCardRule } from "../localization/structured-card-rule";
 import { useRuleText } from "../localization/rule-catalog";
 import { useMessages } from "../localization/message-context";
 import { useEffectBaseline } from "../effects/effects";
@@ -259,7 +260,12 @@ export function ActionCard({
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const { def, value } = actionDisplay(card, actor, modifiers);
   const effectText = cardText(def, card.level, value, 1, modifiers);
-  const effectLabel = useRuleText(effectText, cardRuleId(def, modifiers, effectText))
+  const structured = structuredCardRule(def, card.level, value, 1, effectText);
+  const effectLabel = useRuleText(
+    effectText,
+    structured?.id ?? cardRuleId(def, modifiers, effectText),
+    structured?.message,
+  )
     .map((part) => part.text)
     .join("");
   const name = i18n.content(`content.card.${def.id}.name`, def.name);

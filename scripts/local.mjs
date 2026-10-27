@@ -6,6 +6,8 @@ import { lstatSync } from "node:fs";
 import { runInvestigation } from "./agent/investigation-process.mjs";
 import { npmCommand } from "./lib/npm-command.mjs";
 import { ensureDependencies } from "./dependencies.mjs";
+import { recordTaskEvidence, sourceIdentity } from "./lib/task-evidence.mjs";
+import { taskPaths } from "./lib/task-selection.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const require = createRequire(import.meta.url);
@@ -178,6 +180,24 @@ export async function runLocal(
     allowInstall: ci || env.FAUNA_LOCAL_HEAVY === "1",
   });
   if (status !== 0) return status;
+  // Receipts report observations only; integration always reruns its own gate.
+  const evidenceKey =
+    !ci && env.FAUNA_LOCAL_HEAVY !== "1"
+      ? kind === "test" && args.length
+        ? "regression"
+        : kind === "verify:changed" && args.length === 0 && taskPaths(root).length
+          ? "gate"
+          : undefined
+      : undefined;
+  let identity;
+  if (evidenceKey) {
+    try {
+      identity = sourceIdentity(root);
+      recordTaskEvidence(root, identity, evidenceKey, null);
+    } catch {
+      console.error("Could not record local evidence; the check will still run.");
+    }
+  }
   // Nested npm recipes share the outer deadline and process group.
   for (const [command, argv] of localCommands(kind, args, { root, ci })) {
     const result = await runner(command, argv, {
@@ -189,6 +209,15 @@ export async function runLocal(
     });
     if (result.error) console.error(result.error.message);
     if (result.error || result.status !== 0) return result.status || 1;
+  }
+  if (identity && evidenceKey) {
+    try {
+      if (sourceIdentity(root) === identity)
+        recordTaskEvidence(root, identity, evidenceKey, evidenceKey === "gate" ? "passed" : args.join(" "));
+      else console.error("Source changed during the check; no evidence receipt recorded.");
+    } catch {
+      console.error("Could not record local evidence; retain the command output.");
+    }
   }
   return 0;
 }
