@@ -2,7 +2,7 @@ import { MAX_BATTLE_TURN } from "../state-limits";
 import { boonRule } from "../rules/boons";
 import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { cardActor, unfinishedJourneyLimit } from "../card-actors";
-import { battlefield, isEnemy, healingAllies } from "../battlefield";
+import { battlefield, livingBattlefield, isEnemy, healingAllies } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, removeDepartedMinions } from "./legendary";
 import { chooseEnemyCard } from "./enemy-policy";
@@ -71,7 +71,7 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
   }
 }
 export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[]) {
-  const row = battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0);
+  const row = livingBattlefield(state, enemy ? "enemy" : "player");
   for (const dreamer of row) {
     const amount = passiveAmount(enemy ? undefined : state, dreamer.species, "unhurried");
     if (amount <= 0) continue;

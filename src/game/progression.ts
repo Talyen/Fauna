@@ -153,9 +153,8 @@ export function starterOfferPool(state: Pick<GameState, "discovery" | "selected"
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {
   if (state.selected?.some((kind) => species(kind).legendary)) return 1;
-  const collected = collectedSpecies(state);
-  if (collected.length === 0) return 1;
   let count = 0;
-  for (const kind of collected) if (!species(kind).legendary && ++count === 3) return 3;
+  for (const entry of SPECIES)
+    if (state.discovery.recruited[entry.id] !== undefined && !entry.legendary && ++count === 3) return 3;
   return Math.max(1, count);
 }

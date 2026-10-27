@@ -142,10 +142,12 @@ export function* shareProtection(
   if (chance <= 0) return;
   const pool = battlefield(state, allied ? "player" : "enemy");
   if (!pool.some((unit) => unit.id === source.id)) return;
-  const recipients = pool.filter((unit) => unit.id !== source.id && unit.health > 0);
-  if (!recipients.length) return;
+  let count = 0;
+  for (const unit of pool) if (unit.id !== source.id && unit.health > 0) pool[count++] = unit;
+  pool.length = count;
+  if (!pool.length) return;
   if (!succeeds(state, chance / 100, !allied, events)) return;
-  for (const recipient of recipients) {
+  for (const recipient of pool) {
     if (effect === "block") yield* reaction("grantBlock", state, recipient, amount, events, false);
     else yield* reaction("grantStatus", recipient, effect, amount, events, state, false);
   }

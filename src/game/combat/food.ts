@@ -9,7 +9,7 @@ import { receiveCard } from "../card-zones";
 import { roll } from "../random";
 import { passiveAmount } from "../progression";
 import { gainMana, grantArmor, grantBlock, restoreHealth, grantTemporaryDodge } from "./index";
-import { battlefield, healingAllies, isDepartedMinion } from "../battlefield";
+import { battlefield, livingBattlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import type { BattleState, Creature, GameEvent } from "../types";
 
 export function createFood(
@@ -86,7 +86,7 @@ export function useFood(
       const recipients = foodForAllies(def, state)
         ? def.effect === "heal"
           ? healingAllies(state)
-          : battlefield(state, "player").filter((unit) => unit.health > 0)
+          : livingBattlefield(state, "player")
         : recipient
           ? [recipient]
           : [];

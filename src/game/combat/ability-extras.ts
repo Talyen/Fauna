@@ -1,4 +1,4 @@
-import { battlefield } from "../battlefield";
+import { battlefield, livingBattlefield } from "../battlefield";
 import { species } from "../content";
 import { draw, drawKeyword } from "../card-zones";
 import { abilityExtras } from "./ability-values";
@@ -111,7 +111,7 @@ export function applyExtras(
         break;
       case "cleanse":
         for (const recipient of effect.target === "allAllies"
-          ? battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0)
+          ? livingBattlefield(state, enemy ? "enemy" : "player")
           : [effect.target === "recipient" && target ? target : actor]) {
           if (actor.health <= 0) break;
           removeEffects(

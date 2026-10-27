@@ -1,7 +1,14 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield, healingAllies, cleanseTargets, isDepartedMinion } from "../battlefield";
+import {
+  isEnemy,
+  battlefield,
+  livingBattlefield,
+  healingAllies,
+  cleanseTargets,
+  isDepartedMinion,
+} from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
@@ -708,7 +715,7 @@ export function* applyHarmfulStatus(
     const burnReflection = type === "burn" && stats.reflectBurn;
     const enemies =
       burnReflection || stats.reflect || chance > 0
-        ? battlefield(state, alliedTarget ? "enemy" : "player").filter((unit) => unit.health > 0)
+        ? livingBattlefield(state, alliedTarget ? "enemy" : "player")
         : [];
     if (
       enemies.length &&

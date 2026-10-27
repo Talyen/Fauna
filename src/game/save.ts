@@ -20,7 +20,15 @@ import { gameStateSchema } from "./state-schema";
 import { speciesCards, SPECIES, species } from "./content";
 import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { BattleState, GameState } from "./types";
-const unique = (values: readonly unknown[]) => values.length < 2 || new Set(values).size === values.length;
+function unique(values: readonly unknown[]) {
+  if (values.length < 2) return true;
+  const seen = new Set<unknown>();
+  for (const value of values) {
+    if (seen.has(value)) return false;
+    seen.add(value);
+  }
+  return true;
+}
 function uniqueBy<T>(values: readonly T[], key: (value: T) => unknown) {
   if (values.length < 2) return true;
   const seen = new Set<unknown>();
@@ -171,15 +179,19 @@ function validateRoster(state: GameState) {
   invalid(!uniqueBy(roster, (creature) => creature.species));
   invalid(roster.some((creature) => state.discovery.recruited[creature.species] === undefined));
   invalid(roster.some((c) => c.health > species(c.species).health));
-  const teamById = new Map(state.team.map((unit) => [unit.id, unit]));
+  const teamById = new Map<string, (typeof state.team)[number]>();
+  for (const unit of state.team) teamById.set(unit.id, unit);
   invalid(
     state.cards.some((card) => {
       if (card.ownerId === null) return !(card.temporary && card.level === 0 && isFood(card.definitionId));
       const owner = teamById.get(card.ownerId);
       if (!owner) return true;
       let ids = cardIdsBySpecies.get(owner.species);
-      if (!ids)
-        cardIdsBySpecies.set(owner.species, (ids = new Set(speciesCards(owner.species).map((d) => d.id))));
+      if (!ids) {
+        ids = new Set();
+        for (const definition of speciesCards(owner.species)) ids.add(definition.id);
+        cardIdsBySpecies.set(owner.species, ids);
+      }
       return (
         !ids.has(card.definitionId) &&
         !(card.temporary && card.definitionId === PEARL.id && owner.species === "memento")
@@ -317,7 +329,8 @@ function validateBattle(state: BattleState) {
     );
   });
   const zoneIds = new Set<string>();
-  const cardIds = new Set(state.cards.map((card) => card.id));
+  const cardIds = new Set<string>();
+  for (const card of state.cards) cardIds.add(card.id);
   let zoneCount = 0;
   let unknownZoneCard = false;
   for (const zone of [battle.draw, battle.hand, battle.buffer, battle.discard]) {
@@ -411,7 +424,8 @@ function validateCombatants(state: GameState) {
     ...(state.battle?.enemies ?? []),
     ...(state.battle?.minions ?? []),
   ];
-  const combatantIds = new Set(allCombatants.map((unit) => unit.id));
+  const combatantIds = new Set<string>();
+  for (const unit of allCombatants) combatantIds.add(unit.id);
   invalid(combatantIds.size !== allCombatants.length);
   for (const unit of allCombatants)
     if (unit.combat) {

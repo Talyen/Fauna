@@ -15,7 +15,9 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
   if (state.phase !== "battle") return;
   const entering = state.team.filter((unit) => !previous.some((old) => old.id === unit.id));
   if (!entering.length) return;
-  const providers = new Map([...previous, ...state.team].map((unit) => [unit.id, unit]));
+  const providers = new Map<string, (typeof state.team)[number]>();
+  for (const unit of previous) providers.set(unit.id, unit);
+  for (const unit of state.team) providers.set(unit.id, unit);
   for (const provider of providers.values()) {
     if (provider.health <= 0) continue;
     const amount = passiveAmount(state, provider.species, "gentlePassage");
@@ -135,14 +137,15 @@ export function rebuildCards(state: GameState) {
     if (matching) matching.push(card);
     else previousById.set(card.id, [card]);
   }
-  state.cards = state.team
-    .flatMap((c) => ownedCards(c.id, c.species))
-    .map(
-      (card) =>
+  const cards: Card[] = [];
+  for (const creature of state.team)
+    for (const card of ownedCards(creature.id, creature.species))
+      cards.push(
         previousById
           .get(card.id)
           ?.find((old) => old.ownerId === card.ownerId && old.definitionId === card.definitionId) ?? card,
-    );
+      );
+  state.cards = cards;
   if (state.battle) {
     state.battle.hand = [];
     state.battle.buffer = [];

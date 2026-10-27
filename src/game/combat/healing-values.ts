@@ -27,7 +27,11 @@ export const overflowBlock = (excess: number) =>
 
 /** Overflow can reach only other living allies still at Death's Door. */
 export function overflowRecipients(state: GameState, unit: Combatant) {
-  return healingAllies(state).filter(
-    (ally) => ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally),
-  );
+  const allies = healingAllies(state);
+  let next = 0;
+  for (const ally of allies)
+    if (ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally))
+      allies[next++] = ally;
+  allies.length = next;
+  return allies;
 }
