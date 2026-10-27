@@ -1192,6 +1192,32 @@ it("presents the probabilistic and guaranteed passive tiers distinctly", () => {
   view.unmount();
 });
 
+it("presents the reviewed Light and healing bounce tiers with their distinct chances", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const intermediate = produce(run(), (draft) => {
+    draft.discovery.recruited.pollenmoth = 4;
+  });
+  const maximum = produce(run(), (draft) => {
+    draft.discovery.recruited.pollenmoth = 6;
+  });
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CreatureDetails kind="pollenmoth" />
+        <CreatureDetails kind="pollenmoth" progression={intermediate} />
+        <CreatureDetails kind="pollenmoth" progression={maximum} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  const rules = [...view.container.querySelectorAll(".card-details p")].map((element) => element.textContent);
+  expect(rules).toEqual([
+    "Les dégâts de Lumière rebondissent une fois",
+    "Les dégâts de Lumière rebondissent deux fois ; la restauration de Santé a 50% de chances de rebondir une fois",
+    "Les dégâts de Lumière et la restauration de Santé rebondissent deux fois",
+  ]);
+  view.unmount();
+});
+
 it("localizes shared pagination and combat announcements while preserving values", () => {
   const view = render(
     <MessageProvider locale="fr" catalog={french}>

@@ -1637,6 +1637,42 @@
     "sourceHash": "327d1103acbb0c24e5edd44aab4a3731d61c30cf57f7a4a5bcf7d08b182c1de8",
     "text": "<keyword0>Purificar</keyword0> la acumulación de <keyword1>Congelación</keyword1> restaura {{value0}} de <keyword2>Salud</keyword2>"
   },
+  "content.species.pollenmoth.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once",
+    "sourceHash": "dca5692b74346155a295b878e44b5b978640f6e45ce9f2bd8a08a0ef62be8c23",
+    "text": "El daño de <keyword0>Luz</keyword0> rebota una vez"
+  },
+  "content.species.pollenmoth.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "f10096840bcc3bf9a7c8ea86a537ac4c1a3075ce2dc954603dfd4c842dc5f9f6",
+    "text": "El daño de <keyword0>Luz</keyword0> rebota una vez, con un {{value0}}% de probabilidad de rebotar una segunda vez"
+  },
+  "content.species.pollenmoth.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice",
+    "sourceHash": "3adf8b118269507d557ed36216c2b2ed890bf00219c29f8b4929bef2c4c8f860",
+    "text": "El daño de <keyword0>Luz</keyword0> rebota dos veces"
+  },
+  "content.species.pollenmoth.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration has a {{value0}}% chance to bounce once",
+    "sourceHash": "8686087a37c0847522d5327b7e3db1b8b0e0d21c26ed8446a2c9b79539af5e62",
+    "text": "El daño de <keyword0>Luz</keyword0> rebota dos veces; la restauración de <keyword1>Salud</keyword1> tiene un {{value0}}% de probabilidad de rebotar una vez"
+  },
+  "content.species.pollenmoth.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "0fb959c48d5ee76e16023a3ef976ae41b4721d2bea407597d9a2d1d236a5483f",
+    "text": "El daño de <keyword0>Luz</keyword0> rebota dos veces; la restauración de <keyword1>Salud</keyword1> rebota una vez, con un {{value0}}% de probabilidad de rebotar una segunda vez"
+  },
+  "content.species.pollenmoth.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage and <keyword1>Health</keyword1> restoration bounce twice",
+    "sourceHash": "cf5ff074592103d40e5181098f310a257b6b3079bd51c60b3ae11c9ac6286fb6",
+    "text": "El daño de <keyword0>Luz</keyword0> y la restauración de <keyword1>Salud</keyword1> rebotan dos veces"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -1780,6 +1816,42 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "a082ae1fa55bf87ab6aed76f71da42322f80df077c4509f486e6a047f29703dc",
     "text": "Al final de tu turno, cada aliado que no haya jugado cartas recupera {{value0}} de <keyword0>Salud</keyword0>"
+  },
+  "content.species.rookhaven.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "7962740f1feb52c2cf68e5e1a4ed0691fb43ee2353202f2043fbbead9625723c",
+    "text": "Al robar una carta hay un {{value0}}% de probabilidad de copiarla"
+  },
+  "content.species.rookhaven.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "84cf3366d0959aba492b3384f9d58eba4223e74ef9a422ba71a7d03c8c9bd7ce",
+    "text": "Al robar una carta hay un {{value0}}% de probabilidad de copiarla"
+  },
+  "content.species.rookhaven.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "d5d99945a9bd8b000270eefed7d3b7061c51ba6550e609afdeb91ed96f32dd7a",
+    "text": "Al robar una carta hay un {{value0}}% de probabilidad de copiarla"
+  },
+  "content.species.rookhaven.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "c28baf6d16315b79aadc51529587b74d327dc863ece8c3412018278ad118ecd0",
+    "text": "Al robar una carta hay un {{value0}}% de probabilidad de copiarla"
+  },
+  "content.species.rookhaven.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has an {{value0}}% chance to copy it",
+    "sourceHash": "eed8ddc382f649ec4e2dd9450cc63be0bda4b0e57030667e0dc71cf629e97976",
+    "text": "Al robar una carta hay un {{value0}}% de probabilidad de copiarla"
+  },
+  "content.species.rookhaven.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card copies it",
+    "sourceHash": "40c221f20e0fba39a7282b68ec2310aca68be7cc875c612806b8368c659da11a",
+    "text": "Al robar una carta se copia"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,

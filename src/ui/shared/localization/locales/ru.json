@@ -1637,6 +1637,42 @@
     "sourceHash": "6fdcd22e9ff7ab3ca93cdb8b08de0010fad3c251537f7df90fb350a979c75b5e",
     "text": "<keyword0>Очищение</keyword0> накопления <keyword1>заморозки</keyword1> восстанавливает {{value0}} <keyword2>здоровья</keyword2>"
   },
+  "content.species.pollenmoth.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once",
+    "sourceHash": "50f6e24e4783ef4e03365a8bc5e0e7790a40a8760715c8d08a19432fcb2d9bfa",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» перескакивает один раз"
+  },
+  "content.species.pollenmoth.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "58ee505be4544866cbe6448b962f865d5bd5ddf82491ce081fe74fe619f0f975",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» перескакивает один раз и с вероятностью {{value0}}% перескакивает ещё раз"
+  },
+  "content.species.pollenmoth.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice",
+    "sourceHash": "4147523422c7f7eda44150b05631210c6088c0f1d690f69d73158e024814e101",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» перескакивает дважды"
+  },
+  "content.species.pollenmoth.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration has a {{value0}}% chance to bounce once",
+    "sourceHash": "ed6ad9e55acae7aadf826aaee899ee1ef942bd954422856f9a7fdc33bf1638c8",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» перескакивает дважды; восстановление <keyword1>здоровья</keyword1> с вероятностью {{value0}}% перескакивает один раз"
+  },
+  "content.species.pollenmoth.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage bounces twice; <keyword1>Health</keyword1> restoration bounces once, with a {{value0}}% chance to bounce twice",
+    "sourceHash": "569aff26fb3fa121818310bacbf0c3747a56dfc13470b50e2c7a300006ec2115",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» перескакивает дважды; восстановление <keyword1>здоровья</keyword1> перескакивает один раз и с вероятностью {{value0}}% перескакивает ещё раз"
+  },
+  "content.species.pollenmoth.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage and <keyword1>Health</keyword1> restoration bounce twice",
+    "sourceHash": "d772df48e3adc77a82d55651d80b01db469f75b8a9dfb017a8c88396598e83d5",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» и восстановление <keyword1>здоровья</keyword1> перескакивают дважды"
+  },
   "content.species.prismram.passive.0.rule": {
     "reviewed": true,
     "source": "Harmful status effects you receive have a {{value0}}% chance to be redirected to a random enemy",
@@ -1780,6 +1816,42 @@
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
     "sourceHash": "5c05e6d99344c9ebf030da1ad4ee8b8691e470b52962cb987557cbfed5266665",
     "text": "В конце вашего хода каждый союзник, не сыгравший ни одной карты, восстанавливает {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.species.rookhaven.passive.0.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "4ae43d0497d249fb24261bfa736714dc730a62fb92597dd3ba9c3f8eaddc6b16",
+    "text": "При доборе карты с вероятностью {{value0}}% создаётся её копия"
+  },
+  "content.species.rookhaven.passive.1.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "1f93a2b8251bced1f4e648a29a30fabe468147a1fe3c23d44a1f18e72bf4ffd9",
+    "text": "При доборе карты с вероятностью {{value0}}% создаётся её копия"
+  },
+  "content.species.rookhaven.passive.2.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "cb7881fc16253e3063b105c7a1d04bc27a48a714fb9c0a5adecfe265b0ce3914",
+    "text": "При доборе карты с вероятностью {{value0}}% создаётся её копия"
+  },
+  "content.species.rookhaven.passive.3.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has a {{value0}}% chance to copy it",
+    "sourceHash": "71b527f33e5f7118be1eb35c93a2aed82368adfcca23e1459d88675d7d7a72ea",
+    "text": "При доборе карты с вероятностью {{value0}}% создаётся её копия"
+  },
+  "content.species.rookhaven.passive.4.rule": {
+    "reviewed": true,
+    "source": "Drawing a card has an {{value0}}% chance to copy it",
+    "sourceHash": "e1f54e44ca9b43e90c4e007d551cee04c34e3853bc6fff1e8cdaf952f231e30a",
+    "text": "При доборе карты с вероятностью {{value0}}% создаётся её копия"
+  },
+  "content.species.rookhaven.passive.5.rule": {
+    "reviewed": true,
+    "source": "Drawing a card copies it",
+    "sourceHash": "886f105c2090b43847d9a74e6b937c64ab0b954143546e0543234bafb43c3760",
+    "text": "При доборе карты создаётся её копия"
   },
   "content.species.shadebrim.passive.0.rule": {
     "reviewed": true,
