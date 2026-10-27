@@ -25,3 +25,14 @@ Trail Bread heal after Block. Excluding only that Boon restored the prior
 ranking and score. The new all-Boon expectation retains the changed order and
 score. The full hosted run, browser and Windows results must be reported
 separately for the exact revision.
+
+The existing full-journey fixture still fails with seed 2: the automated party
+reaches defeat in encounter 6. Hosted searches of seeds 0–255 using the same
+battle actor and recruitment policy found no qualifying victory within the
+800-command budget. A separate hosted comparison of seeds 0–63 using the
+simpler test policy in battle also found none. In one representative actor run,
+seed 6 remained in battle on turn 109 and repeatedly selected Treasury Echo;
+this observation does not by itself establish the cause or player impact. The
+victory, deterministic replay and browser assertions remain intact. Search
+scripts and logs are retained in the task evidence archive; resolving the
+journey strategy or underlying gameplay behavior requires further investigation.
