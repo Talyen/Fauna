@@ -1,4 +1,5 @@
 import { useMessages } from "../shared/localization/message-context";
+import { localizedCombatantName } from "../shared/localization/combatant-name";
 import { EffectScope, EffectBaseline, EffectBackdropHost } from "../shared/effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../shared/effects/palettes";
 import { cardActor } from "../../game/card-actors";
@@ -177,7 +178,9 @@ export function Inspector({
             <>
               <header className="inspection-heading">
                 <DialogTitle>
-                  {enemy?.name ?? i18n.content(`content.species.${creature.id}.name`, creature.name)}
+                  {enemy
+                    ? localizedCombatantName(enemy, i18n)
+                    : i18n.content(`content.species.${creature.id}.name`, creature.name)}
                 </DialogTitle>
               </header>
               <DialogDescription className="sr-only">

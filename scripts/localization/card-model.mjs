@@ -1,5 +1,6 @@
 import { parseSync } from "@swc/core";
 import { describeRule } from "./rule-evaluator.mjs";
+import { walk } from "./source-ast.mjs";
 
 /** Read each description function from the rule catalog, without running authored source. */
 export function readCardDescriptionFunctions(source) {
@@ -65,7 +66,6 @@ function readLiteral(node) {
 export function readAuthoredCards(files) {
   const cards = {};
   const visit = (node) => {
-    if (!node || typeof node !== "object") return;
     if (node.type === "CallExpression" && ["card", "attack"].includes(node.callee?.value)) {
       const args = node.arguments.map((argument) => {
         if (argument.spread) throw new Error("Unsupported card argument spread");
@@ -102,13 +102,8 @@ export function readAuthoredCards(files) {
         throw new Error(`Invalid or duplicate authored card: ${id}`);
       cards[id] = card;
     }
-    for (const [key, child] of Object.entries(node)) {
-      if (key === "span") continue;
-      if (Array.isArray(child)) child.forEach(visit);
-      else if (child && typeof child === "object") visit(child);
-    }
   };
-  for (const { source } of files) visit(parseSync(source, { syntax: "typescript", target: "es2022" }));
+  for (const { source } of files) walk(parseSync(source, { syntax: "typescript", target: "es2022" }), visit);
   return cards;
 }
 
@@ -266,17 +261,10 @@ export function enemyCardModel(card, abilitiesSource, supplementalSource) {
 export function readKeywordLabels(source) {
   const ast = parseSync(source, { syntax: "typescript", target: "es2022" });
   let catalog;
-  const visit = (node) => {
-    if (!node || typeof node !== "object") return;
+  walk(ast, (node) => {
     if (node.type === "VariableDeclarator" && node.id?.value === "KEYWORD_DEFINITIONS")
       catalog = node.init?.arguments?.[0]?.expression;
-    for (const [key, child] of Object.entries(node)) {
-      if (key === "span") continue;
-      if (Array.isArray(child)) child.forEach(visit);
-      else if (child && typeof child === "object") visit(child);
-    }
-  };
-  visit(ast);
+  });
   if (catalog?.type !== "ObjectExpression") throw new Error("Unsupported keyword catalog");
   return Object.fromEntries(
     catalog.properties.map((entry) => {

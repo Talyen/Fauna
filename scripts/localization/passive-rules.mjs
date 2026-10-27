@@ -1,5 +1,6 @@
 import { parseSync } from "@swc/core";
-import { evaluate, keywordPattern, templateFor, walk } from "./boon-rules.mjs";
+import { evaluate, keywordPattern, templateFor } from "./boon-rules.mjs";
+import { walk } from "./source-ast.mjs";
 
 /** Read the finite creature passive authoring forms without executing gameplay code. */
 export function extractPassiveRules(files, keywordSource) {

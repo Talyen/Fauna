@@ -11,6 +11,7 @@ import { enemyInspectionValue } from "../../../src/game/ability-rules";
 import { freshCombat } from "../../../src/game/combat/index";
 import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { Inspector } from "../../../src/ui/inspection/inspection";
+import { MessageProvider } from "../../../src/ui/shared/localization/message-context";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
@@ -20,6 +21,43 @@ import { run, teamRun } from "../../support/game";
 screenTestEnvironment({ visible: true });
 
 describe("artwork-first inspection", () => {
+  it("localizes canonical enemy inspection names while preserving distinct names", async () => {
+    const game = teamRun(7, ["emberback", "reedstag", "prismram"]);
+    const enemy = game.battle!.enemies[0]!;
+    const canonical = species(enemy.species).name;
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    const store = createStore(() => ({ ...session.store.getState(), game }));
+    try {
+      render(
+        <MessageProvider
+          locale="ja"
+          catalog={{ [`content.species.${enemy.species}.name`]: { source: canonical, text: "翻訳名" } }}
+        >
+          <TooltipProvider>
+            <Inspector
+              item={{ species: enemy.species, enemyId: enemy.id }}
+              session={{ ...session, store }}
+              controls={{ current: null }}
+              onClose={() => {}}
+            />
+          </TooltipProvider>
+        </MessageProvider>,
+      );
+      expect(screen.getByRole("dialog", { name: "翻訳名" })).toBeTruthy();
+      act(() =>
+        store.setState({
+          game: produce(game, (draft) => {
+            draft.battle!.enemies[0]!.name = "Distinct Boss";
+          }),
+        }),
+      );
+      expect(screen.getByRole("dialog", { name: "Distinct Boss" })).toBeTruthy();
+    } finally {
+      cleanup();
+      await session.dispose();
+    }
+  });
+
   it("keeps named Legendary tooltips to the name and passive without rarity or kit labels", () => {
     const creature = species("oathara");
     const { container } = render(<CreatureDetails kind="oathara" name="The Wanderer" />);

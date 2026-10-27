@@ -1,14 +1,7 @@
 import { parseSync } from "@swc/core";
+import { evaluateRule } from "./rule-evaluator.mjs";
+import { walk } from "./source-ast.mjs";
 
-export function walk(node, visit) {
-  if (!node || typeof node !== "object") return;
-  visit(node);
-  for (const [key, child] of Object.entries(node)) {
-    if (key === "span") continue;
-    if (Array.isArray(child)) child.forEach((item) => walk(item, visit));
-    else if (child && typeof child === "object") walk(child, visit);
-  }
-}
 export function keywordPattern(source) {
   const words = [];
   walk(parseSync(source, { syntax: "typescript", target: "es2022" }), (node) => {
@@ -51,47 +44,7 @@ export function templateFor(text, pattern) {
   return output + plain(text.slice(cursor));
 }
 export function evaluate(node, params, name, bindings = {}) {
-  switch (node?.type) {
-    case "StringLiteral":
-    case "NumericLiteral":
-    case "BooleanLiteral":
-      return node.value;
-    case "Identifier":
-      if (node.value === name) return params;
-      if (Object.hasOwn(bindings, node.value)) return bindings[node.value];
-      break;
-    case "MemberExpression": {
-      const object = evaluate(node.object, params, name, bindings);
-      if (node.property?.type === "Identifier" && object && Object.hasOwn(object, node.property.value))
-        return object[node.property.value];
-      break;
-    }
-    case "TemplateLiteral":
-      return node.quasis
-        .map(
-          (part, index) =>
-            (part.cooked ?? part.raw) +
-            (index < node.expressions.length
-              ? String(evaluate(node.expressions[index], params, name, bindings))
-              : ""),
-        )
-        .join("");
-    case "ParenthesisExpression":
-    case "TsConstAssertion":
-      return evaluate(node.expression, params, name, bindings);
-    case "ConditionalExpression":
-      return evaluate(node.test, params, name, bindings)
-        ? evaluate(node.consequent, params, name, bindings)
-        : evaluate(node.alternate, params, name, bindings);
-    case "BinaryExpression": {
-      const left = evaluate(node.left, params, name, bindings),
-        right = evaluate(node.right, params, name, bindings);
-      if (node.operator === "===") return left === right;
-      if (node.operator === "*") return left * right;
-      break;
-    }
-  }
-  throw new Error(`Unsupported rule description expression: ${node?.type ?? "missing"}`);
+  return evaluateRule(node, { ...bindings, [name]: params }, {}, true);
 }
 /** Resolve only the finite literal Boon authoring DSL; never execute source code. */
 export function extractBoonRules(ruleSource, keywordSource) {
