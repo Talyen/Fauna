@@ -2951,6 +2951,12 @@
     "sourceHash": "2d11c4dd85c193aa1e01685a95f4fed387b3bd8bd15cfbe7ee0acfb23b9c468d",
     "text": "Succión de Armadura"
   },
+  "content.talent.leech.armor-siphon.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Leech</keyword0> cards steal {{value0}} <keyword1>Armor</keyword1> before their effects resolve",
+    "sourceHash": "1e13e6659eb22c6ec13be9a53a21e8eb91433cda74ff142b83728541b73d12ce",
+    "text": "Tus cartas de <keyword0>Drenaje</keyword0> roban {{value0}} de <keyword1>Armadura</keyword1> antes de resolver sus efectos"
+  },
   "content.talent.leech.blood-debt.name": {
     "reviewed": true,
     "source": "Blood Debt",
@@ -2975,6 +2981,12 @@
     "sourceHash": "6cc5167bf81f75cd610567b1e1b6ae237fd0429a035707047c679bea04dcfff9",
     "text": "Succión profunda"
   },
+  "content.talent.leech.deep-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}} additional <keyword1>Health</keyword1>",
+    "sourceHash": "da612fc22ffb73d02dc0ddec34315b2772d58d7c33d4e46cf3287ad11c9e6d31",
+    "text": "<keyword0>Drenaje</keyword0> restaura {{value0}} de <keyword1>Salud</keyword1> adicional"
+  },
   "content.talent.leech.desperate-siphon.name": {
     "reviewed": true,
     "source": "Desperate Siphon",
@@ -2986,6 +2998,12 @@
     "source": "Mana Siphon",
     "sourceHash": "bf2e5ae7ba670efaaee1c149a130ec3df7a0ceb8575ac8e464a0eeb8ab6f1dca",
     "text": "Succión de Maná"
+  },
+  "content.talent.leech.mana-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "4ad1ea1d49b7f5e311a5cecf03229ef2066b924f7831bd5090eb61d709684dfe",
+    "text": "<keyword0>Drenaje</keyword0> tiene un {{value0}}% de probabilidad de otorgar {{value1}} de <keyword1>Maná</keyword1>"
   },
   "content.talent.leech.sanguine-overflow.name": {
     "reviewed": true,

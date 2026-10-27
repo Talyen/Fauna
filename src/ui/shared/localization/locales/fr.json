@@ -2999,6 +2999,12 @@
     "sourceHash": "dd983e044f622bf694439179f95b9894663e90c3bc74c320b93d0fff185de772",
     "text": "Siphon d’Armure"
   },
+  "content.talent.leech.armor-siphon.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Leech</keyword0> cards steal {{value0}} <keyword1>Armor</keyword1> before their effects resolve",
+    "sourceHash": "830fdb953e4901b3791f8a377bf04ea7827496a407cfc184fad57fbda2129382",
+    "text": "Vos cartes de <keyword0>Vol de vie</keyword0> volent {{value0}} <keyword1>Armure</keyword1> avant la résolution de leurs effets"
+  },
   "content.talent.leech.blood-debt.name": {
     "reviewed": true,
     "source": "Blood Debt",
@@ -3023,6 +3029,12 @@
     "sourceHash": "44a6346feb00bd6ef3562ca35c6e0aa65509faef13f3945b77959f71bbd098a4",
     "text": "Drain profond"
   },
+  "content.talent.leech.deep-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}} additional <keyword1>Health</keyword1>",
+    "sourceHash": "d520d67629f75fc24f55b723c632a7f4197b384b5daf9f2d127742cde200163f",
+    "text": "Le <keyword0>Vol de vie</keyword0> restaure {{value0}} <keyword1>Santé</keyword1> supplémentaire"
+  },
   "content.talent.leech.desperate-siphon.name": {
     "reviewed": true,
     "source": "Desperate Siphon",
@@ -3034,6 +3046,12 @@
     "source": "Mana Siphon",
     "sourceHash": "6016ddec2247b4f0eeeab6f926dd685ace60d221e61998909170f01b1defc5ce",
     "text": "Siphon de Mana"
+  },
+  "content.talent.leech.mana-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "7aea8afdf831d123a51b98c3bf055eb1bda6624ae246896f010e24a66afbf3a6",
+    "text": "Le <keyword0>Vol de vie</keyword0> a {{value0}}% de chances de faire gagner {{value1}} <keyword1>Mana</keyword1>"
   },
   "content.talent.leech.sanguine-overflow.name": {
     "reviewed": true,
