@@ -14,6 +14,7 @@ export const statusOrder: readonly string[] = [
   "freeNature",
   "freeLight",
   "freeCard",
+  "oasisLeech",
   "reflect",
   "reflectBurn",
   "nullify",
@@ -30,7 +31,8 @@ export type Status = {
   sharedDodge?: number;
 };
 export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] {
-  const dodge = Number(((combat?.dodge ?? 0) + (combat?.temporaryDodge ?? 0) + sharedDodge).toFixed(2));
+  if (!combat) return [];
+  const dodge = Number(((combat.dodge ?? 0) + (combat.temporaryDodge ?? 0) + sharedDodge).toFixed(2));
   const entries: Status[] = combat
     ? stats
         .filter((id) => (id === "dodge" ? dodge : combat[id]) > 0)
@@ -69,6 +71,7 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] 
       ["freeNature", Number(combat.freeNature), "Windstep: next Nature card is free"],
       ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
       ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
+      ["oasisLeech", Number(combat.oasisLeech), "Oasis Seed: next attack has Leech"],
       ["blind", Number(combat.blind), `Blind: ${KEYWORD_DEFINITIONS.blind.description}`],
       [
         "nullifyFreeze",

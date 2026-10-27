@@ -20,11 +20,14 @@ export const MAX_CREATURE_STARS = 5;
 export function creatureStars(state: Pick<GameState, "discovery">, kind: SpeciesId): number {
   return Math.max(0, (state.discovery.recruited[kind] ?? 0) - 1);
 }
+/** Read the authored tier without allocating a ranked presentation object. */
+export function creaturePassiveTier(state: Pick<GameState, "discovery"> | undefined, kind: SpeciesId) {
+  return species(kind).passiveTiers[state ? creatureStars(state, kind) : 0]!;
+}
 /** Every star rank has a complete replacement passive; enemies always use the base tier. */
 export function creaturePassive(state: Pick<GameState, "discovery"> | undefined, kind: SpeciesId) {
-  const tiers = species(kind).passiveTiers;
   const rank = state ? creatureStars(state, kind) : 0;
-  return { rank, ...tiers[rank]! };
+  return { rank, ...species(kind).passiveTiers[rank]! };
 }
 // Only the deeply frozen authored catalog is safe to cache; injected tiers may be mutable.
 const authoredPassiveTiers = new WeakSet(SPECIES.flatMap((entry) => entry.passiveTiers));
@@ -54,19 +57,29 @@ const talentsById = new Map<string, (typeof TALENTS)[number]>(TALENTS.map((talen
 const talentsByKeyword = new Map(
   KEYWORDS.map((keyword) => [keyword, TALENTS.filter((talent) => talent.keyword === keyword)]),
 );
-function hasTalentPrerequisites(state: Pick<GameState, "talents">, talent: (typeof TALENTS)[number]) {
+function hasTalentPrerequisites(
+  state: Pick<GameState, "talents">,
+  talent: (typeof TALENTS)[number],
+  selected?: ReadonlySet<string>,
+) {
   return talentsByKeyword
     .get(talent.keyword)!
-    .every((earlier) => earlier.row >= talent.row || state.talents.includes(earlier.id));
+    .every(
+      (earlier) =>
+        earlier.row >= talent.row ||
+        (selected ? selected.has(earlier.id) : state.talents.includes(earlier.id)),
+    );
 }
 
 /** Validate the complete selection, including purchases restored from a save. */
 export function validTalentSelection(state: Pick<GameState, "talents" | "keywordXP">): boolean {
-  if (new Set(state.talents).size !== state.talents.length) return false;
+  if (!state.talents.length) return true;
+  const selected = new Set(state.talents);
+  if (selected.size !== state.talents.length) return false;
   const spent = new Map<Keyword, number>();
   for (const id of state.talents) {
     const talent = talentsById.get(id);
-    if (!talent || !hasTalentPrerequisites(state, talent)) return false;
+    if (!talent || !hasTalentPrerequisites(state, talent, selected)) return false;
     const points = (spent.get(talent.keyword) ?? 0) + 1;
     if (points > talentPoints(state.keywordXP[talent.keyword] ?? 0)) return false;
     spent.set(talent.keyword, points);
@@ -132,16 +145,18 @@ export function starterSpecies(state: Pick<GameState, "discovery">): readonly Sp
   const collected = collectedSpecies(state);
   return collected.length ? collected : FIRST_RUN_STARTERS;
 }
-export function starterOfferPool(state: Pick<GameState, "discovery" | "selected">): SpeciesId[] {
-  return starterSpecies(state).filter(
-    (kind) => !state.selected.includes(kind) && (!state.selected.length || !species(kind).legendary),
-  );
+export function starterOfferPool(
+  state: Pick<GameState, "discovery" | "selected">,
+  pool: readonly SpeciesId[] = starterSpecies(state),
+): SpeciesId[] {
+  if (!state.selected.length) return [...pool];
+  return pool.filter((kind) => !state.selected.includes(kind) && !species(kind).legendary);
 }
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {
-  const collected = collectedSpecies(state);
-  if (collected.length === 0 || state.selected?.some((kind) => species(kind).legendary)) return 1;
+  if (state.selected?.some((kind) => species(kind).legendary)) return 1;
   let count = 0;
-  for (const kind of collected) if (!species(kind).legendary && ++count === 3) return 3;
+  for (const entry of SPECIES)
+    if (state.discovery.recruited[entry.id] !== undefined && !entry.legendary && ++count === 3) return 3;
   return Math.max(1, count);
 }

@@ -1,12 +1,12 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { isEnemy, battlefield } from "../battlefield";
-import { hasTalent, creaturePassive } from "../progression";
+import { hasTalent, creaturePassiveTier } from "../progression";
 import { physicalBonus } from "../ability-rules";
 import type { DamageType } from "../content";
 import type { GameState } from "../types";
 import type { DamagePacket } from "./policy";
-import { maximumHealth, type Combatant } from "./state";
+import { maximumHealth, harmfulStatuses, type Combatant } from "./state";
 
 /** Current attack facts only; no RNG, flag consumption, events or child reactions. */
 export function modifiedDamage(
@@ -23,6 +23,17 @@ export function modifiedDamage(
   const stats = target.combat!;
   const cardLeech = "cardLeech" in options && options.cardLeech;
   let damage = value;
+  if (
+    options.origin === "ability" &&
+    alliedSource &&
+    !alliedTarget &&
+    state.boons.includes("chromatic-viol")
+  ) {
+    let count = 0;
+    for (const status of harmfulStatuses)
+      if (stats.controlled === status || Number(stats[status]) > 0) count++;
+    damage += count * boonRule("chromatic-viol").damage;
+  }
   if (attack && alliedSource) {
     if (type === "water") {
       if (hasTalent(state, "water.pressure")) damage += talentRule("water.pressure").amount;
@@ -38,20 +49,20 @@ export function modifiedDamage(
       damage += source.block * (talentRule("block.impact-guard").percent / 100);
     if (
       type === "physical" &&
-      target.health < maximumHealth(target) / (100 / talentRule("physical.finish-him").percent) &&
-      hasTalent(state, "physical.finish-him")
+      hasTalent(state, "physical.finish-him") &&
+      target.health < maximumHealth(target) / (100 / talentRule("physical.finish-him").percent)
     )
       damage *= 2;
     if (
       type === "physical" &&
-      source.health < maximumHealth(source) / 2 &&
-      hasTalent(state, "physical.unrelenting")
+      hasTalent(state, "physical.unrelenting") &&
+      source.health < maximumHealth(source) / 2
     )
       damage *= 2;
     if (
       type === "bleed" &&
-      source.health < maximumHealth(source) / 2 &&
-      hasTalent(state, "bleed.bleeding-out")
+      hasTalent(state, "bleed.bleeding-out") &&
+      source.health < maximumHealth(source) / 2
     )
       damage *= 1 + talentRule("bleed.bleeding-out").percent / 100;
     if (type === "burn" && hasTalent(state, "mana.manaburn"))
@@ -107,14 +118,17 @@ export function modifiedDamage(
   if (type === "burn" || type === "freeze") {
     const protectors = battlefield(state, alliedTarget ? "player" : "enemy");
     // Use the strongest deployed protection; swaps and knockouts change it immediately.
+    const deployed = protectors.some((unit) => unit.id === target.id);
     const resistanceKind = type === "burn" ? "teamBurnResistance" : "teamFreezeResistance";
     let resistance = 0;
-    for (const unit of protectors) {
-      if (unit.health <= 0) continue;
-      for (const effect of creaturePassive(alliedTarget ? state : undefined, unit.species).effects)
-        if (effect.kind === resistanceKind) resistance = Math.max(resistance, effect.amount);
+    if (deployed) {
+      for (const unit of protectors) {
+        if (unit.health <= 0) continue;
+        for (const effect of creaturePassiveTier(alliedTarget ? state : undefined, unit.species).effects)
+          if (effect.kind === resistanceKind) resistance = Math.max(resistance, effect.amount);
+      }
+      damage *= 1 - Math.min(100, resistance) / 100;
     }
-    if (protectors.some((unit) => unit.id === target.id)) damage *= 1 - Math.min(100, resistance) / 100;
   }
   damage = Math.round(damage);
   return damage;

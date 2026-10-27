@@ -37,12 +37,11 @@ const harms = [
 function unitValue(unit: Combatant) {
   if (unit.health <= 0) return 0;
   const stats = unit.combat;
-  return (
-    unit.health +
-    unit.block +
-    benefits.reduce((sum, key) => sum + Number(stats?.[key] ?? 0), 0) -
-    harms.reduce((sum, key) => sum + Number(stats?.[key] ?? 0), 0)
-  );
+  let benefit = 0;
+  let harm = 0;
+  for (const key of benefits) benefit += Number(stats?.[key] ?? 0);
+  for (const key of harms) harm += Number(stats?.[key] ?? 0);
+  return unit.health + unit.block + benefit - harm;
 }
 function positionValue(state: BattleState) {
   const rowValue = (side: "player" | "enemy") =>
@@ -73,7 +72,15 @@ export function enemyCardValue(
   targetId?: string,
   allyTargetId?: string,
 ) {
-  return evaluateEnemyCard(state, enemy, def, positionValue(state), targetId, allyTargetId);
+  return evaluateEnemyCard(
+    state,
+    enemy,
+    def,
+    positionValue(state),
+    state.battle.enemies.findIndex((unit) => unit.id === enemy.id),
+    targetId,
+    allyTargetId,
+  );
 }
 
 function evaluateEnemyCard(
@@ -81,6 +88,7 @@ function evaluateEnemyCard(
   enemy: Enemy,
   def: CardDefinition,
   before: number,
+  actorIndex: number,
   targetId?: string,
   allyTargetId?: string,
 ) {
@@ -90,7 +98,7 @@ function evaluateEnemyCard(
     let decisions = 0;
     const after = evaluation.produce(state, (draft) => {
       observeDecisions(draft, () => ((probe + 0.5) / 8 + decisions++ * 0.618033988749895) % 1);
-      const actor = draft.battle.enemies.find((unit) => unit.id === enemy.id)!;
+      const actor = draft.battle.enemies[actorIndex]!;
       const lastCardInHand = playEnemyAbility(draft, actor, def, targetId, allyTargetId, []);
       if (lastCardInHand) lastWarmth(draft, true, []);
     });
@@ -107,36 +115,49 @@ function evaluateEnemyCard(
   return total / 8;
 }
 
+function recipientIds(units: readonly Combatant[], living: boolean) {
+  const ids: string[] = [];
+  for (const unit of units) if (living ? unit.health > 0 : unit.health <= 0) ids.push(unit.id);
+  return ids;
+}
+
 /** Re-evaluate from current combat after every play; no-repeat preference only breaks equal values. */
 export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonly CardDefinition[]) {
-  const targetId = highestHealth(battlefield(state, "player"))?.id;
+  if (!cards.length) return;
+  let targetId: string | undefined;
+  let targetResolved = false;
   let before: number | undefined;
+  let actorIndex: number | undefined;
   let livingAllies: string[] | undefined;
   let fallenAllies: string[] | undefined;
   // Probes use the same state and fixed decisions throughout this choice. Keep
   // this cache local because the live turn draft can change after every play.
   const values = enemy.deck ? new Map<CardDefinition, Map<string, number>>() : undefined;
   let best: EnemyChoice | undefined;
+  let self: string[] | undefined;
   for (const def of cards) {
     if (enemy.deck && def.cost > enemy.deck.mana) continue;
     const recipients =
       def.effect === "resurrect"
-        ? (fallenAllies ??= state.battle.enemies.filter((unit) => unit.health <= 0).map((unit) => unit.id))
+        ? (fallenAllies ??= recipientIds(state.battle.enemies, false))
         : cardTargeting(def) === "ally"
-          ? (livingAllies ??= battlefield(state, "enemy")
-              .filter((unit) => unit.health > 0)
-              .map((unit) => unit.id))
-          : [enemy.id];
+          ? (livingAllies ??= recipientIds(battlefield(state, "enemy"), true))
+          : (self ??= [enemy.id]);
     for (const allyTargetId of recipients) {
       let cardValues = values?.get(def);
       if (values && !cardValues) values.set(def, (cardValues = new Map()));
       let value = cardValues?.get(allyTargetId);
       if (value === undefined) {
+        if (!targetResolved) {
+          targetId = highestHealth(battlefield(state, "player"))?.id;
+          targetResolved = true;
+        }
         value = evaluateEnemyCard(
           state,
           enemy,
           def,
           (before ??= positionValue(state)),
+          (actorIndex ??= state.battle.enemies.findIndex((unit) => unit.id === enemy.id)),
           targetId,
           allyTargetId,
         );

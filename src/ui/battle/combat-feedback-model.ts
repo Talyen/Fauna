@@ -122,7 +122,13 @@ export function appendFeedback(
     else entries.push(entry);
     targets.set(entry.targetId, entries);
   }
-  const hasMeaningful = [...targets.values()].some((entries) => entries.some((e) => e.amount !== 0));
+  let hasMeaningful = false;
+  for (const entries of targets.values()) {
+    if (entries.some((e) => e.amount !== 0)) {
+      hasMeaningful = true;
+      break;
+    }
+  }
   let fallbackShown = false;
   for (const [targetId, raw] of targets) {
     const meaningful = raw.filter((e) => e.amount !== 0);
@@ -134,7 +140,8 @@ export function appendFeedback(
         isFeedbackNotice(e) ? e : { ...e, reservedDigits: String(Math.abs(e.amount ?? 0)).length + 1 },
       );
     let result = combineBursts(bursts, targetId, entries, now);
-    if (result.unmatched.length && bursts.filter((b) => b.targetId === targetId).length >= 3) {
+    let matchingBursts = 0;
+    if (result.unmatched.length && bursts.some((b) => b.targetId === targetId && ++matchingBursts >= 3)) {
       // Retry from untouched survivors so eviction cannot erase a newly merged result.
       const oldest = bursts.findIndex((b) => b.targetId === targetId);
       bursts = bursts.filter((_, i) => i !== oldest);

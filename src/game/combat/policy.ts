@@ -20,7 +20,7 @@ export type DamagePacket =
     })
   | (AttackValues & { origin: "proc" | "resonance"; delivery?: "bounce" })
   | {
-      origin: "periodic" | "retaliation" | "statusRetaliation" | "derived" | "overkill" | "chain";
+      origin: "periodic" | "retaliation" | "statusRetaliation" | "derived" | "overkill" | "chain" | "boon";
       thorns?: true;
     };
 
@@ -56,12 +56,13 @@ export function packetPolicy(packet: DamagePacket) {
       return { ...inactive, deadSource: true };
     case "retaliation":
     case "statusRetaliation":
+    case "boon":
     case "derived":
     case "overkill":
     case "chain":
       return {
         ...inactive,
-        buildup: packet.origin === "statusRetaliation",
+        buildup: packet.origin === "statusRetaliation" || packet.origin === "boon",
         leechRewards: packet.origin !== "overkill",
         deadSource: packet.origin === "derived" || packet.origin === "overkill" || packet.origin === "chain",
       };

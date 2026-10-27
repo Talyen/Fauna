@@ -47,7 +47,12 @@ it("preserves every authored creature, passive tier, card and Pearl", () => {
         ),
       )
       .digest("hex");
-  expect({ cards: digest(CARDS), species: digest(SPECIES), pearl: digest(PEARL) }).toMatchInlineSnapshot(`
+  // Ravelland has dedicated behavioral coverage; retain the existing catalog oracle.
+  expect({
+    cards: digest(CARDS.filter((card) => card.species !== "ravelland")),
+    species: digest(SPECIES.filter((entry) => entry.id !== "ravelland")),
+    pearl: digest(PEARL),
+  }).toMatchInlineSnapshot(`
     {
       "cards": "75badaf3a772c0a564200c08f237c37951ff0fa01f433d156ff4ae1ac710e033",
       "pearl": "1ae0c37e2fc0a8088a6fe7b827c5e7f23512457a723269b79b7e1fc78417ebda",
@@ -77,7 +82,8 @@ it("preserves authored text, targeting, scaling, keywords and enemy adaptations"
   // New kits have direct contracts below or in creatures/*.test.ts; preserve the older oracle.
   const cards = [
     ...CARDS.filter(
-      (card) => !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen"].includes(card.species ?? ""),
+      (card) =>
+        !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen", "ravelland"].includes(card.species ?? ""),
     ),
     PEARL,
     ...FOOD_CARDS,

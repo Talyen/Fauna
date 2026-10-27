@@ -21,8 +21,9 @@ export type CloudSnapshot = z.infer<typeof snapshotSchema>;
 export const cloudName = (s: Pick<CloudSnapshot, "device" | "sequence">) =>
   `fauna-v1-${s.device}-${s.sequence % 2}.json`;
 export const isCloudName = (name: string) => /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+const textEncoder = new TextEncoder();
 async function sha(text: string) {
-  const bytes = await globalThis.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  const bytes = await globalThis.crypto.subtle.digest("SHA-256", textEncoder.encode(text));
   return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, "0")).join("");
 }
 const body = (s: Omit<CloudSnapshot, "id">) =>
@@ -34,16 +35,24 @@ export async function snapshot(
   parents: readonly CloudSnapshot[] = [],
 ): Promise<CloudSnapshot> {
   // Own parent facts before hashing yields; readonly inputs can alias caller-owned data.
-  const parentsAtAdmission = parents.map((parent) => ({
-    id: parent.id,
-    profile: parent.profile,
-    ancestors: [...parent.ancestors],
-  }));
-  if (parentsAtAdmission.some((parent) => parent.profile !== identity.profile))
-    throw new Error("Cloud ancestry belongs to another profile.");
-  if (new Set(parentsAtAdmission.map((parent) => parent.id)).size > MAX_ANCESTORS)
+  const ancestry = new Set<string>();
+  let invalidProfile = false;
+  const parentsAtAdmission = parents.map((parent) => {
+    ancestry.add(parent.id);
+    if (parent.profile !== identity.profile) invalidProfile = true;
+    return [...parent.ancestors];
+  });
+  if (invalidProfile) throw new Error("Cloud ancestry belongs to another profile.");
+  if (ancestry.size > MAX_ANCESTORS)
     throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
+  for (const parent of parentsAtAdmission) {
+    for (const ancestor of parent) {
+      if (ancestry.size >= MAX_ANCESTORS) break;
+      ancestry.add(ancestor);
+    }
+    if (ancestry.size >= MAX_ANCESTORS) break;
+  }
   const record: Omit<CloudSnapshot, "id"> = {
     version: 1,
     device: identity.device,
@@ -52,20 +61,24 @@ export async function snapshot(
     payload,
     hash: await sha(payload),
     // Retain every direct head before spending the bounded history on older ancestry.
-    ancestors: [
-      ...new Set([...parentsAtAdmission.map((p) => p.id), ...parentsAtAdmission.flatMap((p) => p.ancestors)]),
-    ].slice(0, MAX_ANCESTORS),
+    ancestors: [...ancestry],
   };
   Object.freeze(record.ancestors);
   return snapshotSchema.parse({ ...record, id: await sha(body(record)) });
 }
 export async function parseSnapshot(raw: string, profile: string): Promise<CloudSnapshot> {
-  if (new TextEncoder().encode(raw).length > MAX_SNAPSHOT_BYTES)
+  // Each UTF-16 code unit contributes at most three UTF-8 bytes.
+  if (
+    raw.length > MAX_SNAPSHOT_BYTES ||
+    (raw.length > Math.floor(MAX_SNAPSHOT_BYTES / 3) && textEncoder.encode(raw).length > MAX_SNAPSHOT_BYTES)
+  )
     throw new Error("Cloud snapshot exceeds the size limit.");
   const parsed = snapshotSchema.safeParse(JSON.parse(raw));
   if (!parsed.success) throw new Error("Invalid cloud metadata.");
   const s = parsed.data;
-  if (s.profile !== profile || new Set(s.ancestors).size !== s.ancestors.length || s.ancestors.includes(s.id))
+  if (s.profile !== profile) throw new Error("Invalid cloud metadata.");
+  const ancestors = new Set(s.ancestors);
+  if (ancestors.size !== s.ancestors.length || ancestors.has(s.id))
     throw new Error("Invalid cloud metadata.");
   const payload = encodeSave(decodeSave(s.payload));
   if (payload !== s.payload || (await sha(payload)) !== s.hash || (await sha(body(s))) !== s.id)

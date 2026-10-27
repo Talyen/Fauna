@@ -27,7 +27,13 @@ export interface OrdinaryHit {
 }
 /** Estimate the temporary protection Food will actually add without advancing combat. */
 export function foodDodgeBenefit(state: BattleState, card: CardDefinition, ally: Combatant) {
-  if (card.species !== null || !state.boons.includes("velvet-whisk") || controlled(ally, state)) return 0;
+  if (
+    card.species !== null ||
+    !state.boons.includes("velvet-whisk") ||
+    controlled(ally, state) ||
+    (ally.combat?.temporaryDodge ?? 0) === 70
+  )
+    return 0;
   return Math.max(
     0,
     Math.min(
@@ -44,9 +50,10 @@ export function healingBenefit(
   effects: CardDefinition["effects"],
 ) {
   const { gain, excess } = restoration(ally, healingValue(state, ally, value));
-  const overflow = hasTalent(state, "health.overflow")
-    ? Math.min(overflowBlock(excess), STACK_LIMIT - ally.block)
-    : 0;
+  const overflow =
+    excess > 0 && hasTalent(state, "health.overflow")
+      ? Math.min(overflowBlock(excess), STACK_LIMIT - ally.block)
+      : 0;
   const cleanses =
     hasHarmfulEffects(ally) &&
     ((gain > 0 && (ally.combat?.bleed ?? 0) > 0 && state.boons.includes("yarrow-salve-tin")) ||
@@ -80,17 +87,19 @@ export function ordinaryAttackFacts(
   const lastCardCritical = def.criticalWhenLastCard && state.battle.hand.length === 1;
   const erosion = state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0;
   const usefulExtras = !!def.effects?.some((effect) => supplementalRule(effect.kind).ordinaryAttackUtility);
+  const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
+  const cardLeech = def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech);
   return [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
     const baseDamage = modifiedDamage(
       paid,
       actor,
       enemy,
-      value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1),
+      magnitude,
       type,
       {
         origin: "ability",
-        cardLeech: def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech),
+        cardLeech,
       },
       true,
     );

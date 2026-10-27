@@ -14,11 +14,13 @@ export function interceptAttack(
   if (!state.battle || source.health <= 0 || target.health <= 0 || isEnemy(source) === isEnemy(target))
     return target;
   const enemy = isEnemy(target);
+  let targetFraction: number | undefined;
   for (const protector of battlefield(state, enemy ? "enemy" : "player")) {
     if (
       protector.id === target.id ||
       protector.health <= 0 ||
-      target.health / maximumHealth(target) >= protector.health / maximumHealth(protector)
+      (targetFraction ??= target.health / maximumHealth(target)) >=
+        protector.health / maximumHealth(protector)
     )
       continue;
     const percent = passiveAmount(enemy ? undefined : state, protector.species, "gallantry");

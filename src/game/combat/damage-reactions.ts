@@ -1,17 +1,34 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds, talentChance } from "../chance";
-import { battlefield, healingAllies, isEnemy, combatantById } from "../battlefield";
+import {
+  battlefield,
+  battlefieldHasId,
+  livingBattlefield,
+  healingAllies,
+  isEnemy,
+  combatantById,
+} from "../battlefield";
 import { roll } from "../random";
 import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
-import { ensureCombat, unitName, STACK_LIMIT, gainGold, removeArmor, type Combatant } from "./state";
+import {
+  ensureCombat,
+  unitName,
+  STACK_LIMIT,
+  gainGold,
+  removeArmor,
+  grantTemporaryDodge,
+  type Combatant,
+} from "./state";
 import type { packetPolicy, DamagePacket } from "./policy";
 import { reaction, type Resolution } from "./operations";
 import { applyResolvedStatus } from "./status-reactions";
 import { reducePeriodicStacks, deferLeech, detonateBleedStacks, bleedPayments } from "./status-state";
+
+const periodicStatuses = ["burn", "poison", "bleed"] as const;
 
 export interface HitContext {
   state: GameState;
@@ -46,9 +63,26 @@ export function* dodgeResponse(
   });
   // The Dodge is committed even if its first follow-up causes a knockout.
   if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
+  if (alliedTarget && state.boons.includes("echo-ocarina")) {
+    const allies = battlefield(state, "player");
+    if (allies.some((ally) => ally.id === target.id))
+      for (const ally of allies)
+        if (ally.id !== target.id && ally.health > 0)
+          grantTemporaryDodge(ally, boonRule("echo-ocarina").dodge, events);
+  }
   if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
     yield* reaction("restoreHealth", target, talentRule("dodge.catch-breath").amount, events, false, state);
   if (alliedTarget) {
+    if (
+      retaliate &&
+      isEnemy(source) &&
+      source.health > 0 &&
+      target.health > 0 &&
+      state.boons.includes("leafwing-shuttlecock")
+    )
+      yield* reaction("hit", state, target, source, boonRule("leafwing-shuttlecock").damage, "stun", events, {
+        origin: "boon",
+      });
     if (
       target.health > 0 &&
       source.health > 0 &&
@@ -83,7 +117,7 @@ export function* dodgeResponse(
     if (hasTalent(state, "dodge.thornstep"))
       yield* reaction("grantStatus", target, "thorns", talentRule("dodge.thornstep").amount, events, state);
     if (hasTalent(state, "dodge.clean-getaway")) {
-      for (const status of ["burn", "poison", "bleed"] as const)
+      for (const status of periodicStatuses)
         reducePeriodicStacks(stats, status, talentRule("dodge.clean-getaway").amount);
     }
     if (hasTalent(state, "dodge.open-flank")) stats.nextPhysical = talentRule("dodge.open-flank").amount;
@@ -110,7 +144,7 @@ export function* dodgeResponse(
   const petals = passiveAmount(alliedTarget ? state : undefined, target.species, "petalwake");
   if (petals > 0 && target.health > 0) {
     const side = alliedTarget ? "player" : "enemy";
-    if (battlefield(state, side).some((unit) => unit.id === target.id))
+    if (battlefieldHasId(state, side, target.id))
       for (const ally of healingAllies(state, side)) {
         if (target.health <= 0) break;
         if (ally.health > 0)
@@ -134,7 +168,7 @@ export function* blockDepletionRewards(
     alliedTarget &&
     depletedBlock &&
     state.boons.includes("coral-music-box") &&
-    battlefield(state, "player").some((unit) => unit.id === target.id)
+    battlefieldHasId(state, "player", target.id)
   )
     drawKeyword(state, "water", events);
   if (!alliedTarget && !isEnemy(source) && depletedBlock && state.boons.includes("grain-flail")) {
@@ -168,6 +202,17 @@ export function* blockDepletionRewards(
   if (alliedTarget && depletedBlock && hasTalent(state, "block.second-wind"))
     yield* reaction("restoreHealth", target, talentRule("block.second-wind").amount, events, false, state);
 }
+export function* faultline({ state, target, events }: HitContext, depletedBlock: boolean): Resolution<void> {
+  const allied = !isEnemy(target);
+  if (
+    !depletedBlock ||
+    target.health <= 0 ||
+    !battlefieldHasId(state, allied ? "player" : "enemy", target.id)
+  )
+    return;
+  const armor = passiveAmount(allied ? state : undefined, target.species, "faultline");
+  if (armor) yield* reaction("grantArmor", state, target, armor, events);
+}
 export function publishHit(
   { source, target, type, events }: HitContext,
   { blocked, lost, critical }: HitPayment,
@@ -197,11 +242,11 @@ export function publishHit(
 export function* passingFlame({ state, source, target, events }: HitContext): Resolution<void> {
   if (target.health > 0 || source.health <= 0 || isEnemy(source) === isEnemy(target)) return;
   const allied = !isEnemy(source);
-  if (!battlefield(state, allied ? "player" : "enemy").some((unit) => unit.id === source.id)) return;
+  if (!battlefieldHasId(state, allied ? "player" : "enemy", source.id)) return;
   const percent = passiveAmount(allied ? state : undefined, source.species, "passingFlame");
   const total = Math.round((ensureCombat(target).burn * percent) / 100);
   if (total <= 0) return;
-  const recipients = battlefield(state, allied ? "enemy" : "player").filter((unit) => unit.health > 0);
+  const recipients = livingBattlefield(state, allied ? "enemy" : "player");
   if (!recipients.length) return;
   const share = Math.floor(total / recipients.length);
   const remainder = total % recipients.length;
@@ -223,6 +268,22 @@ export function* damageRewards(
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target),
     stats = ensureCombat(target);
+  if (
+    lost > 0 &&
+    target.health === 0 &&
+    !alliedTarget &&
+    stats.bleed > 0 &&
+    state.boons.includes("harvest-shears")
+  ) {
+    const original = combatantById(state, stats.statusSources.bleed);
+    const bearer =
+      original && !isEnemy(original) && original.health > 0
+        ? original
+        : battlefield(state, "player").find((ally) => ally.health > 0);
+    const recipient = battlefield(state, "enemy").find((enemy) => enemy.id !== target.id && enemy.health > 0);
+    if (bearer && recipient)
+      yield* reaction("applyHarmfulStatus", state, bearer, recipient, stats.bleed, "bleed", events);
+  }
   if (
     policy.attack &&
     alliedSource &&

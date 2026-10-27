@@ -70,27 +70,29 @@ export class HandMotion extends Component<Props> {
                 !transform || transform === "none" || typeof DOMMatrixReadOnly === "undefined"
                   ? null
                   : new DOMMatrixReadOnly(transform);
-              const ownTransform = getComputedStyle(node).transform;
+              const ownStyle = getComputedStyle(node);
+              const ownTransform = ownStyle.transform;
               const own =
                 !ownTransform || ownTransform === "none" || typeof DOMMatrixReadOnly === "undefined"
                   ? null
                   : new DOMMatrixReadOnly(ownTransform);
-              const scale = Number.parseFloat(getComputedStyle(node).scale) || 1;
+              const scale = Number.parseFloat(ownStyle.scale) || 1;
               const reflow = slot?.querySelector<HTMLElement>(".hand-reflow");
               const reflowAngle = reflow ? Number.parseFloat(getComputedStyle(reflow).rotate) || 0 : 0;
+              const rect = node.getBoundingClientRect();
               return [
                 node.dataset.cardId!,
                 {
                   node,
                   clone: visualClone(node),
-                  rect: node.getBoundingClientRect(),
+                  rect,
                   angle:
                     (((matrix ? Math.atan2(matrix.b, matrix.a) : 0) + (own ? Math.atan2(own.b, own.a) : 0)) *
                       180) /
                       Math.PI +
                     reflowAngle,
-                  width: node.offsetWidth * scale || node.getBoundingClientRect().width,
-                  height: node.offsetHeight * scale || node.getBoundingClientRect().height,
+                  width: node.offsetWidth * scale || rect.width,
+                  height: node.offsetHeight * scale || rect.height,
                 },
               ];
             },
@@ -189,6 +191,7 @@ export class HandMotion extends Component<Props> {
     if (!flights.length || !start) return;
     const now = performance.now();
     const drawSource = board.querySelector<HTMLElement>('[data-pile="draw"]')?.getBoundingClientRect();
+    const stackOrder = [...before.keys(), ...after.keys()];
     const surfaces = flights.map((flight) => {
       const clone = flight.pose.clone;
       const card = flight.pose.node;
@@ -199,9 +202,7 @@ export class HandMotion extends Component<Props> {
       clone.classList.add("card-transfer");
       clone.style.position = "fixed";
       clone.style.margin = "0";
-      clone.style.zIndex = String(
-        40 + [...before.keys(), ...after.keys()].indexOf(flight.pose.node.dataset.cardId!),
-      );
+      clone.style.zIndex = String(40 + stackOrder.indexOf(flight.pose.node.dataset.cardId!));
       clone.style.transformOrigin = "center";
       clone.style.scale = "1";
       clone.style.translate = "none";

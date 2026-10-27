@@ -245,13 +245,15 @@ export function definitionKeywords(definition: {
   if (definition.effect === "attack") add(definition.damageType!);
   else for (const keyword of abilityRule(definition.effect).keywords) add(keyword);
   if (definition.effect === "attack" && definition.alternateDamageType) add(definition.alternateDamageType);
-  for (const effect of definition.effects ?? []) {
-    if (!isSupplementalKind(effect.kind)) add(effect.kind);
-    const keyword = isSupplementalKind(effect.kind) ? supplementalRule(effect.kind).keyword : null;
-    if (keyword)
-      add(keyword === "damageType" ? effect.damageType! : keyword === "status" ? effect.status! : keyword);
-    if (effect.leech) add("leech");
-  }
+  if (definition.effects)
+    for (const effect of definition.effects) {
+      const supplemental = isSupplementalKind(effect.kind);
+      if (!supplemental) add(effect.kind);
+      const keyword = supplemental ? supplementalRule(effect.kind).keyword : null;
+      if (keyword)
+        add(keyword === "damageType" ? effect.damageType! : keyword === "status" ? effect.status! : keyword);
+      if (effect.leech) add("leech");
+    }
   if (definition.leech) add("leech");
   return keywords;
 }
@@ -279,6 +281,7 @@ const pattern = new RegExp(
 );
 /** Presentation only. Gameplay classification always comes from authored effects, never prose. */
 export function keywordText(text: string): KeywordTextPart[] {
+  if (!text) return [];
   const parts: KeywordTextPart[] = [];
   let cursor = 0;
   for (const match of text.matchAll(pattern)) {

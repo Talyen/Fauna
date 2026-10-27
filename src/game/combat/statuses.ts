@@ -1,7 +1,14 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield, healingAllies, cleanseTargets, isDepartedMinion } from "../battlefield";
+import {
+  isEnemy,
+  battlefield,
+  livingBattlefield,
+  healingAllies,
+  cleanseTargets,
+  isDepartedMinion,
+} from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
@@ -269,11 +276,9 @@ export function* removeEffects(
   )
     count = 0;
   if (kind === "purge" && state && !isEnemy(unit) && state.boons.includes("basalt-glass-bookmark")) {
-    const remaining =
-      Number(unit.block > 0) +
-      beneficialStatuses.filter(
-        (status) => Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0),
-      ).length;
+    let remaining = Number(unit.block > 0);
+    for (const status of beneficialStatuses)
+      if (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0)) remaining++;
     count = Math.min(count, Math.max(0, remaining - 1));
   }
   if (
@@ -356,7 +361,22 @@ export function* removeEffects(
         status === "reflectBurn" ? "reflect" : status === "nullifyFreeze" ? "nullify" : status,
       );
     }
-  for (const affectedStatus of new Set(removedStatuses))
+  if (
+    kind === "cleanse" &&
+    state &&
+    !isEnemy(unit) &&
+    state.boons.includes("soot-brush") &&
+    removedStatuses.includes("burn") &&
+    stats.blind
+  ) {
+    remember("blind");
+    clearSelectedStatus(unit, "blind");
+    delete stats.statusSources.blind;
+    removedStatuses.push("blind");
+    cleansed++;
+  }
+  const distinctRemovedStatuses = removedStatuses.length > 1 ? new Set(removedStatuses) : removedStatuses;
+  for (const affectedStatus of distinctRemovedStatuses)
     events.push({
       kind: "status",
       targetId: unit.id,
@@ -502,7 +522,9 @@ export function* removeEffects(
   }
   // Typed wards share feedback labels but spend separate Purge categories;
   // Cleanse still coalesces active control with buildup of the same status
-  return kind === "purge" ? removedStatuses.length : new Set(removedStatuses).size;
+  return kind === "purge" || Array.isArray(distinctRemovedStatuses)
+    ? removedStatuses.length
+    : distinctRemovedStatuses.size;
 }
 export function* poisonCleanseMana(
   state: GameState,
@@ -654,6 +676,7 @@ export function* applyHarmfulStatus(
     (stats.controlled ||
       stats.skipped ||
       (stats.cooldown > 0 && !storesControl) ||
+      (type === "freeze" && alliedTarget && stats.armor > 0 && state.boons.includes("folded-mountain")) ||
       (type === "stun" &&
         alliedTarget &&
         (target.block > 0 || options.blocked) &&
@@ -689,9 +712,12 @@ export function* applyHarmfulStatus(
     !immune &&
     Number(stats[type]) < (type === "blind" ? 1 : STACK_LIMIT)
   ) {
-    const enemies = battlefield(state, alliedTarget ? "enemy" : "player").filter((unit) => unit.health > 0);
     const chance = passiveAmount(alliedTarget ? state : undefined, target.species, "statusReflection");
     const burnReflection = type === "burn" && stats.reflectBurn;
+    const enemies =
+      burnReflection || stats.reflect || chance > 0
+        ? livingBattlefield(state, alliedTarget ? "enemy" : "player")
+        : [];
     if (
       enemies.length &&
       (burnReflection || stats.reflect || succeeds(state, chance / 100, !alliedTarget, events))

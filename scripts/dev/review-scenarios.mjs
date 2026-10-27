@@ -1,6 +1,9 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "ravelland-battle",
+  "ravelland-collection",
+  "ravelland-rank-five",
   "wisterelle-battle",
   "wisterelle-collection",
   "wisterelle-rank-five",
@@ -50,6 +53,14 @@ export const SCENARIOS = [
   "new-boons-2",
   "new-boons-3",
   "new-boons-4",
+  "seven-boons-1",
+  "seven-boons-2",
+  "seven-boons-3",
+  "oasis-battle",
+  "chromatic-boons-1",
+  "chromatic-boons-2",
+  "chromatic-boons-3",
+  "chromatic-boons-4",
   "journey-results",
   "death-door",
   "inspection",
@@ -78,6 +89,7 @@ export const SCENARIOS = [
 ];
 
 const creatureFixtures = [
+  "ravelland",
   "wisterelle",
   "alpenglen",
   "aerostat",
@@ -142,7 +154,31 @@ export async function reviewScenario(server, name) {
     game = bossReward();
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
   }
+  if (name.startsWith("seven-boons-")) {
+    const groups = [
+      ["caravan-rug", "folded-mountain", "apple-press"],
+      ["pollen-basket", "farewell-oar", "oasis-seed"],
+      ["cypress-reliquary"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
+  if (name.startsWith("chromatic-boons-")) {
+    const groups = [
+      ["bellows-heart", "leafwing-shuttlecock", "soot-brush"],
+      ["echo-ocarina", "glassleaf-shield", "harvest-shears"],
+      ["frostglass-die", "reef-diadem", "chromatic-viol"],
+      ["mirror-locket"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
   if (name === "inspection") game = winBattle();
+  if (name === "oasis-battle") {
+    game = structuredClone(game);
+    game.boons = ["oasis-seed"];
+    game.team[0].combat.oasisLeech = true;
+  }
   if (name === "death-door")
     game = {
       ...game,

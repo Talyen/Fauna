@@ -5,6 +5,13 @@ function boon<const Id extends Parameters<typeof boonRule>[0]>(entry: { id: Id; 
   return { ...entry, text: boonRule(entry.id).text };
 }
 export const BOONS = [
+  boon({ id: "caravan-rug", name: "Caravan Rug" }),
+  boon({ id: "folded-mountain", name: "Folded Mountain" }),
+  boon({ id: "apple-press", name: "Apple Press" }),
+  boon({ id: "pollen-basket", name: "Pollen Basket" }),
+  boon({ id: "farewell-oar", name: "Farewell Oar" }),
+  boon({ id: "oasis-seed", name: "Oasis Seed" }),
+  boon({ id: "cypress-reliquary", name: "Cypress Reliquary" }),
   boon({ id: "aether-gramophone", name: "Aether Gramophone" }),
   boon({ id: "herbarium-press", name: "Herbarium Press" }),
   boon({ id: "honey-press", name: "Honey Press" }),
@@ -122,6 +129,16 @@ export const BOONS = [
   boon({ id: "poppy-seed-grinder", name: "Poppy Seed Grinder" }),
   boon({ id: "peace-knot", name: "Peace Knot" }),
   boon({ id: "coral-music-box", name: "Coral Music Box" }),
+  boon({ id: "bellows-heart", name: "Bellows Heart" }),
+  boon({ id: "leafwing-shuttlecock", name: "Leafwing Shuttlecock" }),
+  boon({ id: "soot-brush", name: "Soot Brush" }),
+  boon({ id: "echo-ocarina", name: "Echo Ocarina" }),
+  boon({ id: "glassleaf-shield", name: "Glassleaf Shield" }),
+  boon({ id: "harvest-shears", name: "Harvest Shears" }),
+  boon({ id: "frostglass-die", name: "Frostglass Die" }),
+  boon({ id: "reef-diadem", name: "Reef Diadem" }),
+  boon({ id: "chromatic-viol", name: "Chromatic Viol" }),
+  boon({ id: "mirror-locket", name: "Mirror Locket" }),
 ] as const;
 export type BoonId = (typeof BOONS)[number]["id"];
 

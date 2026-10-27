@@ -152,7 +152,25 @@ export function modifierContractViolations(sources) {
       continue;
     const moduleImports = imports(module, file);
     const talentSelectors = new Set();
+    const boonStateSelectors = new Map();
     walk(module, (entry, _parent, owner) => {
+      if (
+        entry.type === "MemberExpression" &&
+        entry.property?.value === "state" &&
+        entry.object?.type === "CallExpression" &&
+        entry.object.callee?.type === "Identifier"
+      ) {
+        const target = moduleImports.get(entry.object.callee.value);
+        const id = entry.object.arguments?.[0]?.expression;
+        if (
+          target?.file === "src/game/rules/boons.ts" &&
+          target.name === "boonRule" &&
+          id?.type === "StringLiteral"
+        ) {
+          if (!boonStateSelectors.has(owner)) boonStateSelectors.set(owner, new Set());
+          boonStateSelectors.get(owner).add(id.value);
+        }
+      }
       if (entry.type !== "CallExpression" || entry.callee.type !== "Identifier") return;
       const target = moduleImports.get(entry.callee.value);
       if (
@@ -189,6 +207,7 @@ export function modifierContractViolations(sources) {
         if (group === "talents" && !talentSelectors.has(owner)) continue;
         if (
           group === "boons" &&
+          !boonStateSelectors.get(owner)?.has(entry.value) &&
           !(
             parent?.type === "CallExpression" &&
             parent.callee.type === "MemberExpression" &&

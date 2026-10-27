@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { createMessageReader, type MessageCatalog } from "./messages";
 
 const english = createMessageReader("en", {});
@@ -13,9 +13,8 @@ export function MessageProvider({
   catalog: MessageCatalog;
   children: ReactNode;
 }) {
-  return (
-    <MessageContext.Provider value={createMessageReader(locale, catalog)}>{children}</MessageContext.Provider>
-  );
+  const reader = useMemo(() => createMessageReader(locale, catalog), [locale, catalog]);
+  return <MessageContext.Provider value={reader}>{children}</MessageContext.Provider>;
 }
 
 export function useMessages() {

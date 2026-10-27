@@ -9,20 +9,39 @@ export function permanentKitSize(kind: SpeciesId) {
 }
 
 /** Definition order and copy order also determine player slots and seeded boss shuffles. */
-export function permanentKit(kind: SpeciesId) {
-  return speciesCards(kind).flatMap((definition) =>
-    Array.from({ length: permanentCardCopies(kind) }, (_, copy) => ({ definition, copy })),
-  );
+export function forEachPermanentCard(
+  kind: SpeciesId,
+  visit: (definition: ReturnType<typeof speciesCards>[number], copy: number) => void,
+) {
+  const copies = permanentCardCopies(kind);
+  for (const definition of speciesCards(kind))
+    for (let copy = 0; copy < copies; copy++) visit(definition, copy);
 }
+export function permanentKit(kind: SpeciesId) {
+  const kit: { definition: ReturnType<typeof speciesCards>[number]; copy: number }[] = [];
+  forEachPermanentCard(kind, (definition, copy) => kit.push({ definition, copy }));
+  return kit;
+}
+
+const kitCounts = new Map<SpeciesId, ReadonlyMap<string, number>>();
 
 /** Slots can move between piles, but the complete multiset must survive save and resume. */
 export function matchesPermanentKit(kind: SpeciesId, ids: readonly string[]) {
-  const expected = permanentKit(kind).map(({ definition }) => definition.id);
-  if (ids.length !== expected.length) return false;
+  const definitions = speciesCards(kind);
+  const copies = permanentCardCopies(kind);
+  if (ids.length !== definitions.length * copies) return false;
+  let counts = kitCounts.get(kind);
+  if (!counts) {
+    const authored = new Map<string, number>();
+    for (const definition of definitions)
+      authored.set(definition.id, (authored.get(definition.id) ?? 0) + copies);
+    kitCounts.set(kind, (counts = authored));
+  }
+  const expected = new Map(counts);
   for (const id of ids) {
-    const index = expected.indexOf(id);
-    if (index < 0) return false;
-    expected.splice(index, 1);
+    const remaining = expected.get(id) ?? 0;
+    if (remaining === 0) return false;
+    expected.set(id, remaining - 1);
   }
   return true;
 }

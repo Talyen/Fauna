@@ -1,42 +1,54 @@
-import { cardKeywords, creaturePassive } from "../game/progression";
+import { cardKeywords, creaturePassiveTier } from "../game/progression";
 import { speciesCards, type SpeciesId } from "../game/content";
 import { permanentCardCopies } from "../game/card-kit";
 import type { GameState } from "../game/types";
 
+const authoredCapabilities = new Map<SpeciesId, readonly string[]>();
+function cardCapabilities(kind: SpeciesId): readonly string[] {
+  const cached = authoredCapabilities.get(kind);
+  if (cached) return cached;
+  const result = new Set<string>();
+  for (const card of speciesCards(kind)) {
+    for (const keyword of cardKeywords({ definitionId: card.id })) result.add(keyword);
+    if (card.effect === "attack") {
+      result.add("attack");
+      if (
+        (card.damageType && card.damageType !== "physical" && card.damageType !== "stun") ||
+        (card.alternateDamageType &&
+          card.alternateDamageType !== "physical" &&
+          card.alternateDamageType !== "stun")
+      )
+        result.add("armorBypass");
+    }
+    if (
+      card.effect === "dreamDouble" ||
+      card.effect === "teamProtection" ||
+      card.effects?.some(
+        (effect) =>
+          effect.kind === "damage" && effect.damageType !== "physical" && effect.damageType !== "stun",
+      )
+    )
+      result.add("armorBypass");
+    if (card.effect === "teamPurge" || card.effects?.some((effect) => effect.kind === "purge"))
+      result.add("purge");
+    if (
+      card.effect === "nightmareHarvest" ||
+      card.effect === "teamCleanse" ||
+      card.effect === "springbound" ||
+      card.effects?.some((effect) => effect.kind === "cleanse")
+    )
+      result.add("cleanse");
+  }
+  const values = [...result];
+  authoredCapabilities.set(kind, values);
+  return values;
+}
+
 export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
   const result = new Set<string>();
   for (const kind of kinds) {
-    for (const card of speciesCards(kind)) {
-      for (const keyword of cardKeywords({ definitionId: card.id })) result.add(keyword);
-      if (card.effect === "attack") {
-        result.add("attack");
-        if (
-          [card.damageType, card.alternateDamageType].some(
-            (type) => type && type !== "physical" && type !== "stun",
-          )
-        )
-          result.add("armorBypass");
-      }
-      if (
-        card.effect === "dreamDouble" ||
-        card.effect === "teamProtection" ||
-        card.effects?.some(
-          (effect) =>
-            effect.kind === "damage" && effect.damageType !== "physical" && effect.damageType !== "stun",
-        )
-      )
-        result.add("armorBypass");
-      if (card.effect === "teamPurge" || card.effects?.some((effect) => effect.kind === "purge"))
-        result.add("purge");
-      if (
-        card.effect === "nightmareHarvest" ||
-        card.effect === "teamCleanse" ||
-        card.effect === "springbound" ||
-        card.effects?.some((effect) => effect.kind === "cleanse")
-      )
-        result.add("cleanse");
-    }
-    for (const effect of creaturePassive(state, kind).effects) {
+    for (const value of cardCapabilities(kind)) result.add(value);
+    for (const effect of creaturePassiveTier(state, kind).effects) {
       if (effect.kind === "courtRemembers") {
         result.add("attack");
         result.add("water");
@@ -73,28 +85,33 @@ export function coverageScore(state: GameState, kinds: SpeciesId[]) {
     has.size * 20
   );
 }
+const authoredOffense = new Map<SpeciesId, { authored: number; reactive: number; cardCount: number }>();
+
 /** Approximate damage over an authored kit rotation; no enemy intent or chance is sampled. */
 export function offenseValue(state: GameState, kind: SpeciesId): number {
-  const cards = speciesCards(kind);
-  const authored = cards.reduce(
-    (sum, card) =>
-      sum +
-      (card.effect === "attack" ? card.value : 0) +
-      (card.effects?.reduce((n, effect) => n + (effect.kind === "damage" ? effect.amount : 0), 0) ?? 0),
-    0,
-  );
-  const passive = creaturePassive(state, kind).effects.reduce(
+  let values = authoredOffense.get(kind);
+  if (!values) {
+    const cards = speciesCards(kind);
+    let authored = 0;
+    let reactive = 0;
+    for (const card of cards) {
+      authored += card.effect === "attack" ? card.value : 0;
+      authored +=
+        card.effects?.reduce((n, effect) => n + (effect.kind === "damage" ? effect.amount : 0), 0) ?? 0;
+      reactive += card.effect === "dreamDouble" || card.effect === "teamProtection" ? card.value : 0;
+    }
+    values = { authored, reactive, cardCount: cards.length };
+    authoredOffense.set(kind, values);
+  }
+  const { authored, reactive, cardCount } = values;
+  const passive = creaturePassiveTier(state, kind).effects.reduce(
     (sum, effect) =>
       sum +
       (effect.kind === "courtRemembers"
-        ? effect.amount * cards.length
+        ? effect.amount * cardCount
         : effect.kind === "poisonRetaliation" || effect.kind === "dodgeBurn"
           ? effect.amount
           : 0),
-    0,
-  );
-  const reactive = cards.reduce(
-    (sum, card) => sum + (card.effect === "dreamDouble" || card.effect === "teamProtection" ? card.value : 0),
     0,
   );
   return (authored + passive + reactive) * permanentCardCopies(kind);

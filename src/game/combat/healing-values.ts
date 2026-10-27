@@ -7,10 +7,11 @@ import { maximumHealth, type Combatant } from "./state";
 /** Magnitude only; rewards, revival permission and bounce remain execution policy. */
 export function healingValue(state: GameState | undefined, unit: Combatant, amount: number) {
   if (state?.phase === "battle") {
-    if (!isEnemy(unit) && hasTalent(state, "health.mending"))
+    const enemy = isEnemy(unit);
+    if (!enemy && hasTalent(state, "health.mending"))
       amount *= 1 + talentRule("health.mending").percent / 100;
-    if (isEnemy(unit) && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
-    if (isEnemy(unit) && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
+    if (enemy && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
+    if (enemy && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
   }
   return amount;
 }
@@ -26,7 +27,11 @@ export const overflowBlock = (excess: number) =>
 
 /** Overflow can reach only other living allies still at Death's Door. */
 export function overflowRecipients(state: GameState, unit: Combatant) {
-  return healingAllies(state).filter(
-    (ally) => ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally),
-  );
+  const allies = healingAllies(state);
+  let next = 0;
+  for (const ally of allies)
+    if (ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally))
+      allies[next++] = ally;
+  allies.length = next;
+  return allies;
 }

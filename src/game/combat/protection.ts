@@ -3,7 +3,7 @@ import { boonRule } from "../rules/boons";
 import { manaCapacity } from "../ability-rules";
 import { healingValue, restoration, overflowBlock, overflowRecipients } from "./healing-values";
 import { chance as succeeds, talentChance } from "../chance";
-import { isEnemy, battlefield, healingAllies } from "../battlefield";
+import { isEnemy, battlefield, battlefieldHasId, healingAllies, combatantById } from "../battlefield";
 import { drawKeyword } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
 
@@ -55,6 +55,27 @@ export function* restoreHealth(
   }
   if (gain > 0 && state?.phase === "battle" && !isEnemy(unit)) {
     const stats = ensureCombat(unit);
+    if (
+      source &&
+      source.id !== unit.id &&
+      source.health > 0 &&
+      !isEnemy(source) &&
+      state.boons.includes("oasis-seed")
+    )
+      stats[boonRule("oasis-seed").state] = true;
+    if (unit.health > 0 && state.boons.includes("bellows-heart")) {
+      for (const enemy of battlefield(state, "enemy"))
+        if (unit.health > 0 && enemy.health > 0 && ensureCombat(enemy).burn > 0)
+          yield* reaction(
+            "applyHarmfulStatus",
+            state,
+            unit,
+            enemy,
+            boonRule("bellows-heart").burn,
+            "burn",
+            events,
+          );
+    }
     if (stats.bleed > 0 && state.boons.includes("yarrow-salve-tin"))
       yield* reaction("removeEffects", unit, "cleanse", 1, events, state, "bleed", source);
     if (source && !isEnemy(source) && source.health > 0 && state.boons.includes("grafting-needle")) {
@@ -129,10 +150,12 @@ export function* shareProtection(
   if (chance <= 0) return;
   const pool = battlefield(state, allied ? "player" : "enemy");
   if (!pool.some((unit) => unit.id === source.id)) return;
-  const recipients = pool.filter((unit) => unit.id !== source.id && unit.health > 0);
-  if (!recipients.length) return;
+  let count = 0;
+  for (const unit of pool) if (unit.id !== source.id && unit.health > 0) pool[count++] = unit;
+  pool.length = count;
+  if (!pool.length) return;
   if (!succeeds(state, chance / 100, !allied, events)) return;
-  for (const recipient of recipients) {
+  for (const recipient of pool) {
     if (effect === "block") yield* reaction("grantBlock", state, recipient, amount, events, false);
     else yield* reaction("grantStatus", recipient, effect, amount, events, state, false);
   }
@@ -147,18 +170,18 @@ export function* grantBlock(
   if (unit.health <= 0 || amount <= 0) return;
   if (!isEnemy(unit) && state.phase === "battle" && state.boons.includes("origami-staircase")) {
     const row = battlefield(state, "player");
-    if (row.some((ally) => ally.id === unit.id))
-      amount +=
-        row.filter((ally) => ally.health > 0 && ensureCombat(ally).armor > 0).length *
-        boonRule("origami-staircase").block;
+    if (row.some((ally) => ally.id === unit.id)) {
+      let armored = 0;
+      for (const ally of row) if (ally.health > 0 && ensureCombat(ally).armor > 0) armored++;
+      amount += armored * boonRule("origami-staircase").block;
+    }
   }
   let gained = Math.min(STACK_LIMIT - unit.block, Math.round(amount));
   if (gained > 0 && state.phase === "battle" && state.battle) {
     const allied = !isEnemy(unit);
     const percent = passiveAmount(allied ? state : undefined, unit.species, "blockConversion");
     if (percent > 0) {
-      const pool = battlefield(state, allied ? "player" : "enemy");
-      const recipient = pool.some((recipient) => recipient.id === unit.id)
+      const recipient = battlefieldHasId(state, allied ? "player" : "enemy", unit.id)
         ? mostInjured<Combatant>(healingAllies(state, allied ? "player" : "enemy"))
         : undefined;
       if (recipient) {
@@ -182,6 +205,18 @@ export function* grantBlock(
     amount: gained,
     text: `${unitName(unit)} gains ${gained} Block.`,
   });
+  if (isEnemy(unit) && state.phase === "battle" && state.boons.includes("apple-press")) {
+    const stats = ensureCombat(unit);
+    const original = combatantById(state, stats.statusSources.bleed);
+    const source =
+      original && !isEnemy(original)
+        ? original
+        : battlefield(state, "player").find((ally) => ally.health > 0);
+    if (stats.bleed > 0 && source)
+      yield* reaction("resolveHit", state, source, unit, stats.bleed, "bleed", events, {
+        origin: "periodic",
+      });
+  }
   if (!isEnemy(unit) && talentChance(state, "light.radiant-guard", events))
     drawKeyword(state, "light", events);
   if (!isEnemy(unit) && state.boons.includes("ironwood-buckler"))
@@ -250,9 +285,18 @@ export function* leechHealth(
     if (hasTalent(state, "leech.desperate-siphon") && unit.health < maximumHealth(unit) / 2) amount *= 2;
   }
   const before = unit.health;
-  const excess = restoration(unit, healingValue(state, unit, amount)).excess;
+  const leechRestoration = restoration(unit, healingValue(state, unit, amount));
+  const excess = leechRestoration.excess;
   yield* reaction("restoreHealth", unit, amount, events, false, state);
   const restored = unit.health - before;
+  if (!isEnemy(unit) && unit.health > 0 && leechRestoration.gain > 0 && state.boons.includes("mirror-locket"))
+    yield* reaction(
+      "grantBlock",
+      state,
+      unit,
+      Math.round(leechRestoration.gain / boonRule("mirror-locket").divisor),
+      events,
+    );
   if (!isEnemy(unit) && restored > 0) {
     if (talentChance(state, "leech.blood-debt", events)) gainGold(state, restored, events);
     if (

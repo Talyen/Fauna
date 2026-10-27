@@ -22,25 +22,19 @@ const OPTIONAL_DESTINATION_CHANCE = 0.25;
 const recruitSpecies = SPECIES.filter((entry) => !entry.legendary);
 
 export function offerStarters(state: GameState) {
-  const pool = starterOfferPool(state);
   if (state.selected.length === starterCount(state)) {
     state.starterOffers = [];
     return;
   }
-  const shuffled = shuffle(state, [...pool]);
-  state.starterOffers = Array.from(
-    { length: Math.min(STARTER_OFFER_COUNT, shuffled.length) },
-    (_, index) => shuffled[index]!,
-  );
+  const shuffled = shuffle(state, starterOfferPool(state));
+  state.starterOffers = shuffled.slice(0, STARTER_OFFER_COUNT);
 }
 function prepareEncounter(state: GameState) {
   const route = state.expedition;
   route.pack = generateEncounterPack(state);
-  const prices = merchantPriceRange(state);
+  const prices = route.lastRoom !== "merchant" ? merchantPriceRange(state) : undefined;
   const kind =
-    route.lastRoom !== "merchant" && state.currency >= prices.min && roll(state) < OPTIONAL_DESTINATION_CHANCE
-      ? "merchant"
-      : null;
+    prices && state.currency >= prices.min && roll(state) < OPTIONAL_DESTINATION_CHANCE ? "merchant" : null;
   route.recruit =
     route.lastRoom !== "recruit" &&
     state.team.length + state.reserves.length < 5 &&
@@ -57,7 +51,7 @@ function prepareEncounter(state: GameState) {
           .map((b, i) => ({
             slot: `slot-${i}`,
             boon: b.id,
-            price: prices.min + Math.floor(roll(state) * (prices.max - prices.min + 1)),
+            price: prices!.min + Math.floor(roll(state) * (prices!.max - prices!.min + 1)),
           }))
       : [];
   state.support =
@@ -88,6 +82,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     c.block = 0;
     c.attacked = false;
   }
+  const mana = battleMana(state);
   const battle = {
     metronomeActor: null,
     encoreProgress: 0,
@@ -99,8 +94,8 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     meteoriteUsed: false,
     cardsPlayedThisTurn: 0,
     turn: 1,
-    mana: battleMana(state),
-    maxMana: battleMana(state),
+    mana,
+    maxMana: mana,
     draw: state.cards.map((c) => c.id),
     hand: [],
     buffer: [],
@@ -158,9 +153,10 @@ function finishBattle(state: BattleState, defeated: boolean) {
   const xp = bankBattleXP(state);
   const earnedGold = state.battle.earnedGold;
   const previousCurrency = state.currency;
+  const boss = !defeated && bossEncounter(state);
   state.currency = Math.min(
     1_000_000,
-    state.currency + (defeated ? 0 : (bossEncounter(state) ? 40 : 20) + victoryGoldBonus(state)),
+    state.currency + (defeated ? 0 : (boss ? 40 : 20) + victoryGoldBonus(state)),
   );
   const currency = state.currency - previousCurrency + earnedGold;
   const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
@@ -170,13 +166,10 @@ function finishBattle(state: BattleState, defeated: boolean) {
   if (outcome === "victory") {
     state.wins = Math.min(1_000_000, state.wins + 1);
   }
-  const boons =
-    defeated || outcome === "victory" || !bossEncounter(state)
-      ? []
-      : shuffle(
-          state,
-          BOONS.filter((r) => !state.boons.includes(r.id)).map((r) => r.id),
-        ).slice(0, 3);
+  const availableBoons: typeof state.boons = [];
+  if (!defeated && outcome !== "victory" && boss)
+    for (const boon of BOONS) if (!state.boons.includes(boon.id)) availableBoons.push(boon.id);
+  const boons = availableBoons.length ? shuffle(state, availableBoons).slice(0, 3) : [];
   const receipt = {
     xp,
     currency,
@@ -205,7 +198,7 @@ function finishBattle(state: BattleState, defeated: boolean) {
 
 export function settle(state: BattleState, events: GameEvent[]): boolean {
   removeDepartedMinions(state);
-  if (![...state.team, ...state.reserves].some((c) => c.health > 0)) {
+  if (!state.team.some((c) => c.health > 0) && !state.reserves.some((c) => c.health > 0)) {
     finishBattle(state, true);
     events.push({ kind: "knockout", text: "Your journey has ended." });
     return true;

@@ -3,7 +3,7 @@ import type { passiveCardBonus } from "./ability-rules";
 import type { receiveDraw, lostAndFound, drawEligibleCard } from "./card-zones";
 import type { passingFlame } from "./combat/damage-reactions";
 import type { puzzleEffect } from "./combat/statuses";
-import type { gentlePassage, cleanseDeparture, rookOfMercy, mountainGuide } from "./team";
+import type { gentlePassage, cleanseDeparture, rookOfMercy, mountainGuide, farewellOar } from "./team";
 import type { TalentId, BoonId } from "./content";
 import type { PassiveKind } from "./content/types";
 
@@ -13,6 +13,7 @@ type Modules = {
     cleanseDeparture: typeof cleanseDeparture;
     rookOfMercy: typeof rookOfMercy;
     mountainGuide: typeof mountainGuide;
+    farewellOar: typeof farewellOar;
   };
   "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
@@ -206,6 +207,23 @@ export const modifierImplementations = freeze(
       "water.riptide": ["./combat/damage-reactions#waterFollowups"],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "caravan-rug": ["./combat/turns#decayBlock"],
+      "folded-mountain": ["./combat/statuses#applyHarmfulStatus"],
+      "apple-press": ["./combat/protection#grantBlock"],
+      "pollen-basket": ["./combat/damage#resolveHit"],
+      "farewell-oar": ["./team#farewellOar"],
+      "oasis-seed": ["./combat/protection#restoreHealth", "./combat/abilities#executeAbility"],
+      "cypress-reliquary": ["./combat/damage#resolveHit"],
+      "bellows-heart": ["./combat/protection#restoreHealth"],
+      "leafwing-shuttlecock": ["./combat/damage-reactions#dodgeResponse"],
+      "soot-brush": ["./combat/statuses#removeEffects"],
+      "echo-ocarina": ["./combat/damage-reactions#dodgeResponse"],
+      "glassleaf-shield": ["./combat/damage#resolveHit"],
+      "harvest-shears": ["./combat/damage-reactions#damageRewards"],
+      "frostglass-die": ["./combat/damage#resolveHit", "./combat/damage#boonHitFollowups"],
+      "reef-diadem": ["./combat/damage#boonHitFollowups"],
+      "chromatic-viol": ["./combat/damage-values#modifiedDamage"],
+      "mirror-locket": ["./combat/protection#leechHealth"],
       "reef-incense-tile": ["./combat/damage-reactions#damageRewards"],
       "lava-cameo": ["./combat/lifecycle#tickStatuses"],
       "velvet-whisk": ["./combat/food#useFood"],
@@ -219,7 +237,7 @@ export const modifierImplementations = freeze(
       "aether-gramophone": ["./combat/abilities#executeAbility"],
       "herbarium-press": ["./combat/statuses#removeEffects"],
       "honey-press": ["./combat/statuses#removeEffects"],
-      "rook-of-mercy": ["./team#rookOfMercy"],
+      "rook-of-mercy": ["./team#rookOfMercy", "./team#swapBackup"],
       "tidecrest-hairpin": [
         "./combat/damage-reactions#thornRetaliation",
         "./combat/damage-reactions#dodgeResponse",
@@ -367,6 +385,7 @@ export const modifierImplementations = freeze(
       earlyBird: ["./combat/state#openingCriticalBonus"],
       armorBreak: ["./combat/statuses#triggerArmorBreak"],
       blockBreak: ["./combat/damage-reactions#passiveRetaliation"],
+      faultline: ["./combat/damage-reactions#faultline"],
       statusReflection: ["./combat/statuses#applyHarmfulStatus", "./combat/statuses#removeEffects"],
       shareProtection: ["./combat/protection#shareProtection"],
       shareDodge: ["./combat/state#sharedDodgeChance"],

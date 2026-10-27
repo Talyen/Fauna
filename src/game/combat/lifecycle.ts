@@ -1,6 +1,6 @@
 import { boonRule } from "../rules/boons";
 import { talentChance } from "../chance";
-import { isEnemy, battlefield, combatantById, cleanseTargets } from "../battlefield";
+import { isEnemy, battlefield, battlefieldHasId, combatantById, cleanseTargets } from "../battlefield";
 import { draw } from "../card-zones";
 import { roll } from "../random";
 import { hasTalent, passiveAmount } from "../progression";
@@ -21,6 +21,8 @@ import {
   periodicClearVersion,
   periodicAddedStacks,
 } from "./status-state";
+
+const periodicStatuses = ["burn", "poison", "bleed"] as const;
 
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
   const stats = ensureCombat(unit);
@@ -73,7 +75,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       if (state.battle!.enemies.every((enemy) => enemy.health <= 0)) return;
     }
   }
-  for (const status of ["burn", "poison", "bleed"] as const) {
+  for (const status of periodicStatuses) {
     if (unit.health <= 0) break;
     if (stats[status] <= 0) continue;
     const { amount, sourceId, payouts } = periodicTick(stats, status);
@@ -167,12 +169,12 @@ export function* startAction(
   beginControlTurn(stats);
   if (state?.phase === "battle" && state.battle && unit.health > 0) {
     const enemy = isEnemy(unit);
-    const row = battlefield(state, enemy ? "enemy" : "player");
     // The allied turn number advances after startAction; enemies act on the current number
     const turn = state.battle.turn + Number(!enemy);
-    if (turn % 2 === 0 && row.some((deployed) => deployed.id === unit.id)) {
+    if (turn % 2 === 0) {
       const amount = passiveAmount(enemy ? undefined : state, unit.species, "tidalRegeneration");
-      if (amount > 0) yield* reaction("restoreHealth", unit, amount, events, false, state);
+      if (amount > 0 && battlefieldHasId(state, enemy ? "enemy" : "player", unit.id))
+        yield* reaction("restoreHealth", unit, amount, events, false, state);
     }
   }
   if (stats.controlled) {

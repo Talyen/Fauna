@@ -16,35 +16,37 @@ export interface BattleChoice {
 
 /** Legal candidates, visible benefits and deterministic ranking have distinct owners. */
 export function rankedBattleChoices(state: GameState, autoEndTurn = true): BattleChoice[] {
+  return choicesForBattle(state, autoEndTurn, false);
+}
+function choicesForBattle(state: GameState, autoEndTurn: boolean, firstOnly: boolean): BattleChoice[] {
   if (state.phase !== "battle") return [];
   const outgoing = pendingReplacement(state);
   if (outgoing) {
-    const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit, state));
-    const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
+    const needsDamage = !state.team.some(
+      (unit) => unit.health > 0 && !controlled(unit, state) && offenseValue(state, unit.species) > 0,
+    );
     const all = [...state.team, ...state.reserves];
     const active = state.team.map((unit) => unit.id);
-    const incoming = state.reserves
-      .filter((unit) => unit.health > 0)
-      .sort((a, b) => a.id.localeCompare(b.id))
-      .map((unit) => {
-        const ids = formationForSwap(all, active, outgoing.id, unit.id);
-        const lineup = ids
-          .map((id) => all.find((entry) => entry.id === id)!)
-          .filter((entry) => entry.health > 0);
-        const kinds = lineup.map((entry) => entry.species);
-        const damage = needsDamage ? offenseValue(state, unit.species) : 0;
-        const score =
-          (damage > 0 ? 1_000_000 : 0) +
-          (!controlled(unit, state) ? 100_000 : 0) +
-          coverageScore(state, kinds) +
-          damage * 100 +
-          (unit.health / species(unit.species).health) * 100;
-        return { unit, score };
-      })
-      .reduce<{ unit: (typeof state.reserves)[number]; score: number } | undefined>(
-        (best, candidate) => (!best || candidate.score > best.score ? candidate : best),
-        undefined,
-      )?.unit;
+    let best: { unit: (typeof state.reserves)[number]; score: number } | undefined;
+    for (const unit of state.reserves) {
+      if (unit.health <= 0) continue;
+      const ids = formationForSwap(all, active, outgoing.id, unit.id);
+      const kinds: (typeof unit.species)[] = [];
+      for (const id of ids) {
+        const entry = all.find((candidate) => candidate.id === id)!;
+        if (entry.health > 0) kinds.push(entry.species);
+      }
+      const damage = needsDamage ? offenseValue(state, unit.species) : 0;
+      const score =
+        (damage > 0 ? 1_000_000 : 0) +
+        (!controlled(unit, state) ? 100_000 : 0) +
+        coverageScore(state, kinds) +
+        damage * 100 +
+        (unit.health / species(unit.species).health) * 100;
+      if (!best || score > best.score || (score === best.score && unit.id.localeCompare(best.unit.id) < 0))
+        best = { unit, score };
+    }
+    const incoming = best?.unit;
     if (incoming)
       return [
         {
@@ -60,30 +62,41 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         },
       ];
   }
+  const plays = availablePlays(state, autoEndTurn);
+  if (!plays.length) return [];
   const facts = battleBenefitFacts(state);
-  return availablePlays(state, autoEndTurn)
-    .flatMap((play) =>
-      battleBenefits(state, play, facts).flatMap((benefit) => {
-        const { score } = benefit;
-        const command = play.commands.find((command) => command.targetId === benefit.targetId);
-        return score > 0 && command
-          ? [
-              {
-                command,
-                score,
-                reason: benefit.reason ?? `Use ${play.def.name} for its visible benefit`,
-                key: `${play.card.id}:${benefit.targetId ?? ""}`,
-              },
-            ]
-          : [];
-      }),
-    )
-    .sort((a, b) => b.score - a.score || a.key.localeCompare(b.key))
-    .map(({ command, score, reason }) => ({ command, score, reason }));
+  const choices: (BattleChoice & { key: string })[] = [];
+  let best: (BattleChoice & { key: string }) | undefined;
+  const compare = (a: BattleChoice & { key: string }, b: BattleChoice & { key: string }) =>
+    b.score - a.score || a.key.localeCompare(b.key);
+  for (const play of plays) {
+    for (const benefit of battleBenefits(state, play, facts)) {
+      const { score } = benefit;
+      const command =
+        score > 0 ? play.commands.find((entry) => entry.targetId === benefit.targetId) : undefined;
+      if (command) {
+        const choice = {
+          command,
+          score,
+          reason: benefit.reason ?? `Use ${play.def.name} for its visible benefit`,
+          key: `${play.card.id}:${benefit.targetId ?? ""}`,
+        };
+        if (firstOnly) {
+          if (!best || compare(choice, best) < 0) best = choice;
+        } else choices.push(choice);
+      }
+    }
+  }
+  if (firstOnly) {
+    if (!best) return [];
+    const { command, score, reason } = best;
+    return [{ command, score, reason }];
+  }
+  return choices.sort(compare).map(({ command, score, reason }) => ({ command, score, reason }));
 }
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   return rankedBattleChoices(state, autoEndTurn).map((choice) => choice.command);
 }
 export function chooseBattleCommand(state: GameState, autoEndTurn = true): Command {
-  return rankedBattleChoices(state, autoEndTurn)[0]?.command ?? { type: "endTurn" };
+  return choicesForBattle(state, autoEndTurn, true)[0]?.command ?? { type: "endTurn" };
 }

@@ -1,4 +1,4 @@
-import { battlefield } from "../battlefield";
+import { battlefield, livingBattlefield } from "../battlefield";
 import { species } from "../content";
 import { draw, drawKeyword } from "../card-zones";
 import { abilityExtras } from "./ability-values";
@@ -24,6 +24,7 @@ interface ExtraOptions {
   blindMiss?: boolean;
   cannotDodge?: boolean;
   criticalBonus?: number;
+  oasisLeech?: boolean;
   recipientOnly?: boolean;
   negated?: ReadonlySet<string>;
   sharedNegate?: import("./policy").SharedNegate;
@@ -35,9 +36,11 @@ export function applyExtras(
   options: ExtraOptions = {},
 ) {
   const { actor, def } = action;
+  if (!def.effects?.length) return;
   const enemy = action.side === "enemy";
   const power = enemy ? action.actor.power : 1;
   const { target, blindMiss = false, criticalBonus = 0, recipientOnly = false } = options;
+  let cardLeech: boolean | undefined;
   for (const effect of abilityExtras(def, power)) {
     if (recipientOnly !== (supplementalRule(effect.kind).delivery(effect) === "recipient")) continue;
     if (actor.health <= 0) break;
@@ -50,8 +53,9 @@ export function applyExtras(
             blindMiss,
             cannotDodge: options.cannotDodge,
             criticalBonus,
-            leech: effect.leech,
-            cardLeech: def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech),
+            leech: effect.leech || options.oasisLeech,
+            cardLeech: (cardLeech ??=
+              def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech) || false),
             sharedNegate: options.sharedNegate,
           });
         break;
@@ -111,7 +115,7 @@ export function applyExtras(
         break;
       case "cleanse":
         for (const recipient of effect.target === "allAllies"
-          ? battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0)
+          ? livingBattlefield(state, enemy ? "enemy" : "player")
           : [effect.target === "recipient" && target ? target : actor]) {
           if (actor.health <= 0) break;
           removeEffects(

@@ -51,9 +51,11 @@ export function Collection({
   const gridRef = useRef<HTMLDivElement>(null);
   const columns = useGridColumns(gridRef, 4, filter);
   const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
-  const ordered = [...SPECIES]
-    .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
-    .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
+  const collected: (typeof SPECIES)[number][] = [],
+    uncollected: (typeof SPECIES)[number][] = [];
+  for (const entry of SPECIES) (known(entry.id) ? collected : uncollected).push(entry);
+  const ordered =
+    filter === "known" ? collected : filter === "unknown" ? uncollected : [...collected, ...uncollected];
   const pageSize = columns * 2;
   const {
     page: activePage,
@@ -107,8 +109,10 @@ export function Collection({
           <TabsContent className="collection-content" value={filter}>
             <div className="collection-gallery">
               <div className="collection-grid" ref={gridRef}>
-                {ordered.slice(activePage * pageSize, (activePage + 1) * pageSize).map((creature) =>
-                  known(creature.id) ? (
+                {ordered.slice(activePage * pageSize, (activePage + 1) * pageSize).map((creature) => {
+                  const isKnown = known(creature.id);
+                  const stars = isKnown ? creatureStars(game, creature.id) : 0;
+                  return isKnown ? (
                     <div className="collection-entry" key={creature.id}>
                       <CreatureCard
                         progression={game}
@@ -127,17 +131,13 @@ export function Collection({
                           "{{name}}: {{rank}} of {{maximum}} stars",
                           {
                             name: i18n.content(`content.species.${creature.id}.name`, creature.name),
-                            rank: creatureStars(game, creature.id),
+                            rank: stars,
                             maximum: MAX_CREATURE_STARS,
                           },
                         )}
                       >
                         {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
-                          <Star
-                            key={index}
-                            aria-hidden="true"
-                            data-earned={index < creatureStars(game, creature.id)}
-                          />
+                          <Star key={index} aria-hidden="true" data-earned={index < stars} />
                         ))}
                       </span>
                     </div>
@@ -150,8 +150,8 @@ export function Collection({
                         aria-label={i18n.message("collection.locked", "Locked species")}
                       />
                     </div>
-                  ),
-                )}
+                  );
+                })}
               </div>
               {ordered.length === 0 ? (
                 <EmptyState label={i18n.message("collection.empty", "No creatures in this view")} />

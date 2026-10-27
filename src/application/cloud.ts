@@ -95,9 +95,10 @@ export function createCloud(
       // Status subscribers can synchronously revoke transport admission.
       if (!alive() || !remoteReady) return;
       try {
-        await port.write(cloudName(item), JSON.stringify(item));
+        const name = cloudName(item);
+        await port.write(name, JSON.stringify(item));
         if (!alive() || !remoteReady) return;
-        const confirmation = await port.read(cloudName(item));
+        const confirmation = await port.read(name);
         if (!alive() || !remoteReady) return;
         if (!confirmation || (await parseSnapshot(confirmation, item.profile)).id !== item.id)
           throw new Error("Cloud upload could not be verified.");

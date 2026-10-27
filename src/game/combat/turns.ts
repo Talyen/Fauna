@@ -2,7 +2,7 @@ import { MAX_BATTLE_TURN } from "../state-limits";
 import { boonRule } from "../rules/boons";
 import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { cardActor, unfinishedJourneyLimit } from "../card-actors";
-import { battlefield, isEnemy, healingAllies } from "../battlefield";
+import { battlefield, livingBattlefield, isEnemy, healingAllies } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, removeDepartedMinions } from "./legendary";
 import { chooseEnemyCard } from "./enemy-policy";
@@ -28,18 +28,23 @@ import { draw, expressDelivery } from "../card-zones";
 import { retainedBlock } from "../ability-rules";
 import { enemyCard, enemyCanUse } from "../card-rules";
 import type { GameEvent, GameState, BattleState } from "../types";
-import { living, pendingReplacement } from "../team";
+import { pendingReplacement } from "../team";
 import { settle, intents } from "../journey";
 
 // Adapt immutable authored kits once for both value estimation and execution.
 const enemyAbilities = new Map(
   SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse).map(enemyCard)]),
 );
+const enemyAbilitiesWithoutResurrection = new Map(
+  [...enemyAbilities].map(([id, cards]) => [id, cards.filter((card) => card.effect !== "resurrect")]),
+);
 
 /** Convert only Block lost to ordinary turn decay, using the owner's passive tier. */
 export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[]) {
   const before = unit.block;
   const allied = !isEnemy(unit);
+  if (allied && state.boons.includes("caravan-rug") && state.reserves.some((ally) => ally.id === unit.id))
+    return;
   const retained = retainedBlock(unit, allied ? state : undefined);
   unit.block =
     allied && state.boons.includes("geode-anvil")
@@ -68,7 +73,7 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
   }
 }
 export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[]) {
-  const row = battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0);
+  const row = livingBattlefield(state, enemy ? "enemy" : "player");
   for (const dreamer of row) {
     const amount = passiveAmount(enemy ? undefined : state, dreamer.species, "unhurried");
     if (amount <= 0) continue;
@@ -110,7 +115,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         drawBossCards(draft, enemy.deck, TURN_DRAW);
       }
       if (!canAct) continue;
-      if (!battlefield(draft, "player").some((unit) => unit.health > 0)) continue;
+      // A deployed summon also requires a living deployed owner.
+      if (!draft.team.some((unit) => unit.health > 0)) continue;
       if (enemy.deck) {
         const deck = enemy.deck;
         // Bound automatic decision work even in a long Pearl/Mana chain.
@@ -133,21 +139,28 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         }
         continue;
       }
-      const fallen = battle.enemies.filter((unit) => unit.health <= 0);
-      const inherited =
+      const hasFallen = battle.enemies.some((unit) => unit.health <= 0);
+      let inherited: ReturnType<typeof enemyCard>[] | undefined;
+      if (
+        hasFallen &&
         unfinishedJourneyLimit(undefined, enemy) > ensureCombat(enemy).fallenCardsPlayedThisTurn
-          ? fallen
-              .flatMap((unit) => enemyAbilities.get(unit.species)!)
-              .filter((card) => card.species !== enemy.species)
-          : [];
-      const choices = [...enemyAbilities.get(enemy.species)!, ...inherited];
-      const abilities = choices.filter((card) => card.effect !== "resurrect" || fallen.length > 0);
+      )
+        for (const unit of battle.enemies)
+          if (unit.health <= 0)
+            for (const card of enemyAbilities.get(unit.species)!)
+              if (card.species !== enemy.species) (inherited ??= []).push(card);
+      const own = enemyAbilities.get(enemy.species)!;
+      const abilities = hasFallen
+        ? inherited
+          ? [...own, ...inherited]
+          : own
+        : enemyAbilitiesWithoutResurrection.get(enemy.species)!;
       const choice = chooseEnemyCard(draft, enemy, abilities);
       if (!choice) continue;
       const { def, targetId, allyTargetId } = choice;
       enemy.targetId = targetId ?? enemy.targetId;
       enemy.lastAbility = def.id;
-      if (inherited.includes(def)) ensureCombat(enemy).fallenCardsPlayedThisTurn++;
+      if (inherited?.includes(def)) ensureCombat(enemy).fallenCardsPlayedThisTurn++;
       playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events);
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       if (settle(draft, events)) return;
@@ -176,7 +189,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       pendingReplacement(draft) ||
       // Food may be drawn next and stays playable even when every creature must skip
       draft.cards.some((card) => card.ownerId === null) ||
-      living(draft).some((c) => !controlled(c, draft)) ||
+      draft.team.some((c) => c.health > 0 && !controlled(c, draft)) ||
       draft.cards.some((card) => {
         const actor = cardActor(draft, card);
         return actor && actor.health > 0 && !controlled(actor, draft, definition(card.definitionId));

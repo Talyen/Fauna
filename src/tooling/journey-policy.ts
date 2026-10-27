@@ -33,6 +33,25 @@ function boonScorer(
     cards.some((card) => card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"));
   return (boon: BoonId): number => {
     switch (boon) {
+      case "bellows-heart":
+        return healing && has.has("burn") ? 60 : 0;
+      case "leafwing-shuttlecock":
+      case "echo-ocarina":
+        return has.has("dodge") ? 60 : 30;
+      case "soot-brush":
+        return has.has("cleanse") || state.boons.includes("knot-comb") ? 40 : 0;
+      case "glassleaf-shield":
+        return has.has("block") ? 60 : 0;
+      case "harvest-shears":
+        return has.has("bleed") ? 60 : 0;
+      case "frostglass-die":
+        return has.has("freeze") ? 60 : 0;
+      case "reef-diadem":
+        return has.has("water") && thorns ? 60 : 0;
+      case "chromatic-viol":
+        return has.has("attack") ? 50 : 0;
+      case "mirror-locket":
+        return has.has("leech") ? 60 : 0;
       case "aether-gramophone":
       case "dream-tangram":
       case "eclipse-protractor":

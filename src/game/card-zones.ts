@@ -16,9 +16,10 @@ export function handCapacity(state: Pick<GameState, "boons">) {
 // Bound generated cards and their overflow within the supported save size.
 export const MAX_BATTLE_CARDS = 256;
 
+const CARD_ZONES = ["draw", "hand", "buffer", "discard"] as const;
 /** Preserve pile order while retiring or relocating slots across the whole battle. */
 export function filterCardZones(battle: BattleState["battle"], keep: (id: string) => boolean) {
-  for (const zone of ["draw", "hand", "buffer", "discard"] as const) battle[zone] = battle[zone].filter(keep);
+  for (const zone of CARD_ZONES) if (battle[zone].length) battle[zone] = battle[zone].filter(keep);
 }
 
 type HandZones = Pick<BattleState["battle"], "hand" | "buffer">;
@@ -53,8 +54,17 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
     !state.team.some((unit) => unit.id === ownerId && unit.health > 0)
   )
     return;
-  const owned = new Set(state.cards.filter((card) => card.ownerId === ownerId).map((card) => card.id));
-  const available = state.battle.discard.filter((id) => owned.has(id));
+  const discard = state.battle.discard;
+  let available: string[];
+  if (discard.length === 1) {
+    if (!state.cards.some((card) => card.ownerId === ownerId && card.id === discard[0])) return;
+    available = [discard[0]!];
+  } else {
+    const owned = new Set<string>();
+    for (const card of state.cards) if (card.ownerId === ownerId) owned.add(card.id);
+    if (!owned.size) return;
+    available = discard.filter((id) => owned.has(id));
+  }
   if (!available.length) return;
   const id =
     available[
@@ -74,18 +84,24 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
 }
 /** Cards owned by another living deployed creature can follow a return through Journey Loom. */
 function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
-  const owners = new Set(
-    state.team.filter((unit) => unit.health > 0 && unit.id !== ownerId).map((unit) => unit.id),
-  );
+  const owners = new Set<string>();
+  for (const unit of state.team) if (unit.health > 0 && unit.id !== ownerId) owners.add(unit.id);
   const cards = new Set<string>();
-  for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
+  if (owners.size)
+    for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
   return cards;
 }
 
 /** Inspect the same draw pool without changing its order or revealing a hidden card. */
 export function journeyReturnHasDraw(state: BattleState, ownerId: string | null): boolean {
-  if (!ownerId || !state.boons.includes("journey-loom")) return false;
+  if (
+    !ownerId ||
+    !state.boons.includes("journey-loom") ||
+    (!state.battle.draw.length && !state.battle.discard.length)
+  )
+    return false;
   const eligible = journeyReturnCards(state, ownerId);
+  if (!eligible.size) return false;
   return (
     state.battle.draw.some((id) => eligible.has(id)) || state.battle.discard.some((id) => eligible.has(id))
   );
@@ -94,30 +110,36 @@ export function journeyReturnHasDraw(state: BattleState, ownerId: string | null)
 /** Recovery and returns weave in another living deployed owner's ordinary draw. */
 export function journeyReturn(state: GameState, ownerId: string | null, events: GameEvent[]) {
   if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
-  const eligible = journeyReturnCards(state, ownerId);
   fillHand(state);
-  drawEligibleCard(state, (id) => eligible.has(id), events);
+  if (!state.battle.draw.length && !state.battle.discard.length) return;
+  const eligible = journeyReturnCards(state, ownerId);
+  if (eligible.size) drawEligibleCard(state, (id) => eligible.has(id), events);
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   queueCard(state.battle!, handCapacity(state), id);
-  const original = state.cards.find((card) => card.id === id);
-  const ownerId = original?.ownerId;
-  const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
-  if (owner && state.boons.includes("dune-shuttle"))
-    grantBlock(state, owner, boonRule("dune-shuttle").block, events);
+  let original: Card | undefined;
+  const originalCard = () => (original ??= state.cards.find((card) => card.id === id));
+  if (state.boons.includes("dune-shuttle")) {
+    const ownerId = originalCard()?.ownerId;
+    const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
+    if (owner) grantBlock(state, owner, boonRule("dune-shuttle").block, events);
+  }
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
-    if (reader.health <= 0 || battleCardCapacity(state) === 0) continue;
+    if (reader.health <= 0) continue;
     const chance = passiveAmount(state, reader.species, "wellRead");
+    if (chance <= 0) continue;
+    if (battleCardCapacity(state) === 0) break;
     if (!succeeds(state, chance / 100, false, events)) continue;
-    const copy = createTemporaryCard(state, original!)!;
+    const original = originalCard()!;
+    const copy = createTemporaryCard(state, original)!;
     queueCard(state.battle!, handCapacity(state), copy.id);
     events.push({
       kind: "action",
       actionType: "support",
       actorId: reader.id,
-      targetId: original!.ownerId ?? undefined,
-      text: `${species(reader.species).name} copies ${definition(original!.definitionId).name} with Well Read`,
+      targetId: original.ownerId ?? undefined,
+      text: `${species(reader.species).name} copies ${definition(original.definitionId).name} with Well Read`,
     });
   }
 }
@@ -133,25 +155,57 @@ export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) 
   }
 }
 
-export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[] {
-  if (!state.battle!.discard.length) return [];
+function discardDrawPool(state: GameState, otherOwnerId: string | undefined, firstOnly: true): boolean;
+function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly?: false): Card[];
+function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = false): Card[] | boolean {
+  if (!state.battle!.discard.length) return firstOnly ? false : [];
+  if (state.battle!.discard.length === 1) {
+    const card = state.cards.find((entry) => entry.id === state.battle!.discard[0])!;
+    const eligible =
+      otherOwnerId === undefined
+        ? card.ownerId === null || drawableOwnerIds(state).has(card.ownerId)
+        : card.ownerId !== null &&
+          card.ownerId !== otherOwnerId &&
+          state.team.some((unit) => unit.id === card.ownerId && unit.health > 0);
+    return firstOnly ? eligible : eligible ? [card] : [];
+  }
   const owners = otherOwnerId === undefined ? drawableOwnerIds(state) : undefined;
-  const livingOwners =
-    otherOwnerId === undefined
-      ? undefined
-      : new Set(state.team.filter((unit) => unit.health > 0).map((unit) => unit.id));
+  const livingOwners = otherOwnerId === undefined ? undefined : new Set<string>();
+  if (livingOwners) for (const unit of state.team) if (unit.health > 0) livingOwners.add(unit.id);
   const cards = new Map<string, Card>();
   for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
-  return state.battle!.discard.flatMap((id) => {
+  const result: Card[] | undefined = firstOnly ? undefined : [];
+  for (const id of state.battle!.discard) {
     const card = cards.get(id)!;
-    return (
+    if (
       otherOwnerId === undefined
         ? card.ownerId === null || owners!.has(card.ownerId)
         : card.ownerId !== null && card.ownerId !== otherOwnerId && livingOwners!.has(card.ownerId)
-    )
-      ? [card]
-      : [];
-  });
+    ) {
+      if (firstOnly) return true;
+      result!.push(card);
+    }
+  }
+  return result ?? false;
+}
+
+export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[] {
+  return discardDrawPool(state, otherOwnerId);
+}
+
+/** Eligibility checks do not need to enumerate the complete ordered draw pool. */
+export function hasDiscardDrawCard(state: GameState, otherOwnerId?: string): boolean {
+  if (!state.battle!.discard.length) return false;
+  if (state.battle!.discard.length === 1) {
+    const card = state.cards.find((entry) => entry.id === state.battle!.discard[0])!;
+    if (otherOwnerId === undefined) return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
+    return (
+      card.ownerId !== null &&
+      card.ownerId !== otherOwnerId &&
+      state.team.some((unit) => unit.id === card.ownerId && unit.health > 0)
+    );
+  }
+  return discardDrawPool(state, otherOwnerId, true);
 }
 
 export function drawDiscard(state: GameState, events: GameEvent[], otherOwnerId?: string): Card | undefined {
@@ -220,15 +274,16 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
   fillHand(state);
   // Ordinary draws reshuffle the whole empty pile first; keyword draws only recycle matches.
   recycleDiscard(state);
+  if (!state.battle!.draw.length && !state.battle!.discard.length) return 0;
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = drawableOwnerIds(state);
-  const eligibleCards = new Set<string>();
+  const eligibleCards = alive.size ? new Set<string>() : undefined;
   // Well Read only inserts copies into the hand/buffer; draw/discard ownership
   // stays fixed throughout this draw, including recycling between draws.
-  if (alive.size)
+  if (eligibleCards)
     for (const card of state.cards)
       if (card.ownerId === null || alive.has(card.ownerId)) eligibleCards.add(card.id);
-  const eligible = (id: string) => !alive.size || eligibleCards.has(id);
+  const eligible = (id: string) => !eligibleCards || eligibleCards.has(id);
   let drawn = 0;
   for (let i = 0; i < count; i++) {
     if (!drawEligibleCard(state, eligible, events)) break;
@@ -254,7 +309,18 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
 
 export function drawOwner(state: GameState, ownerId: string, events: GameEvent[]) {
   fillHand(state);
-  const eligible = new Set(state.cards.filter((card) => card.ownerId === ownerId).map((card) => card.id));
+  if (!state.battle!.draw.length && !state.battle!.discard.length) return false;
+  const single =
+    state.battle!.draw.length + state.battle!.discard.length === 1
+      ? (state.battle!.draw[0] ?? state.battle!.discard[0])
+      : undefined;
+  if (single !== undefined) {
+    if (!state.cards.some((card) => card.id === single && card.ownerId === ownerId)) return false;
+    return drawEligibleCard(state, (id) => id === single, events);
+  }
+  const eligible = new Set<string>();
+  for (const card of state.cards) if (card.ownerId === ownerId) eligible.add(card.id);
+  if (!eligible.size) return false;
   return drawEligibleCard(state, (id) => eligible.has(id), events);
 }
 
@@ -265,19 +331,38 @@ export function drawKeyword(
 ) {
   if (!state.battle) return;
   fillHand(state);
+  if (!state.battle.draw.length && !state.battle.discard.length) return;
+  const single =
+    state.battle.draw.length + state.battle.discard.length === 1
+      ? (state.battle.draw[0] ?? state.battle.discard[0])
+      : undefined;
+  if (single !== undefined) {
+    let owners: Set<string> | undefined;
+    if (
+      state.cards.some(
+        (card) =>
+          card.id === single &&
+          (card.ownerId === null || (owners ??= drawableOwnerIds(state)).has(card.ownerId)) &&
+          cardHasKeyword(card, keyword),
+      )
+    )
+      drawEligibleCard(state, (id) => id === single, events);
+    return;
+  }
   const owners = drawableOwnerIds(state);
-  const eligibleCards = new Set<string>();
+  let eligibleCards: Set<string> | undefined;
   for (const card of state.cards)
     if ((card.ownerId === null || owners.has(card.ownerId)) && cardHasKeyword(card, keyword))
-      eligibleCards.add(card.id);
-  drawEligibleCard(state, (id) => eligibleCards.has(id), events);
+      (eligibleCards ??= new Set()).add(card.id);
+  const eligible = eligibleCards;
+  if (eligible) drawEligibleCard(state, (id) => eligible.has(id), events);
 }
 
 /** Only the visible hand is exchanged; buffered draws retain their FIFO ownership. */
 export function redrawHand(state: GameState, events: GameEvent[]) {
   const battle = state.battle!;
+  if (!battle.hand.length) return;
   const returned = battle.hand.splice(0);
-  if (!returned.length) return;
   battle.draw.push(...returned);
   shuffle(state, battle.draw);
   draw(state, returned.length, events);
@@ -316,22 +401,27 @@ export function drawHasAnotherCard(
   played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
-  const owners = drawableOwnerIds(state);
-  const cards = new Map<string, Card>();
-  for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
-  const eligible = (id: string) => {
-    const drawn = cards.get(id)!;
-    return (
-      (drawn.ownerId === null || owners.has(drawn.ownerId)) &&
-      (effect.kind === "draw" || cardHasKeyword(drawn, effect.keyword))
-    );
-  };
+  if (state.battle.draw.length || state.battle.discard.length) {
+    let owners: Set<string> | undefined;
+    const singleId =
+      state.battle.draw.length + state.battle.discard.length === 1
+        ? (state.battle.draw[0] ?? state.battle.discard[0])
+        : undefined;
+    const cards = singleId === undefined ? new Map<string, Card>() : undefined;
+    if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+    const eligible = (id: string) => {
+      const drawn = cards ? cards.get(id)! : state.cards.find((card) => card.id === id)!;
+      return (
+        (drawn.ownerId === null || (owners ??= drawableOwnerIds(state)).has(drawn.ownerId)) &&
+        (effect.kind === "draw" || cardHasKeyword(drawn, effect.keyword))
+      );
+    };
+    if (state.battle.draw.some(eligible) || state.battle.discard.some(eligible)) return true;
+  }
   return (
-    state.battle.draw.some(eligible) ||
-    state.battle.discard.some(eligible) ||
-    (!definition(played.definitionId).consume &&
-      (effect.kind === "draw" || cardHasKeyword(played, effect.keyword)) &&
-      battleCardCapacity(state) > 0 &&
-      state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "wellRead") > 0))
+    !definition(played.definitionId).consume &&
+    (effect.kind === "draw" || cardHasKeyword(played, effect.keyword)) &&
+    battleCardCapacity(state) > 0 &&
+    state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "wellRead") > 0)
   );
 }

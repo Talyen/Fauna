@@ -1,10 +1,17 @@
 import type { CloudSnapshot } from "./cloud-snapshots";
 
 export function newestHeads(records: readonly CloudSnapshot[]) {
-  const unique = [...new Map(records.map((record) => [record.id, record])).values()];
-  const ancestors = new Set<string>();
-  for (const record of unique) for (const ancestor of record.ancestors) ancestors.add(ancestor);
-  return unique.filter((record) => !ancestors.has(record.id));
+  if (records.length === 0) return [];
+  if (records.length === 1) return records[0]!.ancestors.includes(records[0]!.id) ? [] : records.slice();
+  const byId = new Map<string, CloudSnapshot>();
+  for (const record of records) byId.set(record.id, record);
+  const unique = [...byId.values()];
+  if (unique.length === 1) return unique[0]!.ancestors.includes(unique[0]!.id) ? [] : unique;
+  let ancestors: Set<string> | undefined;
+  for (const record of unique)
+    for (const ancestor of record.ancestors) (ancestors ??= new Set()).add(ancestor);
+  const knownAncestors = ancestors;
+  return knownAncestors ? unique.filter((record) => !knownAncestors.has(record.id)) : unique;
 }
 
 /** Sequence counters select device slots; ancestry alone retires competing progress. */
@@ -20,9 +27,9 @@ export function reconciliationPlan({
   mode: "startup" | "background";
 }) {
   const records = [...remote, ...(current ? [current] : [])];
-  const heads = newestHeads(records);
   if (mode === "background" && !current)
     return { records, chosen: null, parents: [], preserve: false, install: null, deferred: true };
+  const heads = newestHeads(records);
   const chosen =
     (mode === "background" ? current : null) ??
     heads.find((head) => head.id === current?.id) ??

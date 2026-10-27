@@ -1,8 +1,8 @@
-import { permanentKit } from "./card-kit";
-import { isRosterCreature } from "./battlefield";
+import { forEachPermanentCard } from "./card-kit";
+import { battlefield, isRosterCreature } from "./battlefield";
 import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
-import { grantArmor, grantBlock, restoreHealth, removeEffects } from "./combat/index";
+import { grantArmor, grantBlock, restoreHealth, removeEffects, hit } from "./combat/index";
 import { boonRule } from "./rules/boons";
 import { unitName, type Combatant } from "./combat/state";
 import { passiveAmount } from "./progression";
@@ -13,8 +13,11 @@ import type { Card, GameEvent, GameState } from "./types";
 /** Both sides of the exchange provide passage, including Dulcera's own departure or arrival. */
 export function gentlePassage(state: GameState, previous: GameState["team"], events: GameEvent[]) {
   if (state.phase !== "battle") return;
-  const providers = new Map([...previous, ...state.team].map((unit) => [unit.id, unit]));
   const entering = state.team.filter((unit) => !previous.some((old) => old.id === unit.id));
+  if (!entering.length) return;
+  const providers = new Map<string, (typeof state.team)[number]>();
+  for (const unit of previous) providers.set(unit.id, unit);
+  for (const unit of state.team) providers.set(unit.id, unit);
   for (const provider of providers.values()) {
     if (provider.health <= 0) continue;
     const amount = passiveAmount(state, provider.species, "gentlePassage");
@@ -27,9 +30,10 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
 export function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
 }
+const controlStatuses = ["stun", "freeze"] as const;
 export function cleanseDeparture(state: GameState, outgoing: Combatant, events: GameEvent[]) {
   if (state.phase !== "battle" || outgoing.health <= 0 || !state.boons.includes("prayer-sailboat")) return;
-  for (const status of ["stun", "freeze"] as const)
+  for (const status of controlStatuses)
     if (
       outgoing.health > 0 &&
       (outgoing.combat?.controlled === status || (outgoing.combat?.[status] ?? 0) > 0)
@@ -40,6 +44,15 @@ export function rookOfMercy(state: GameState, incoming: readonly Combatant[], ev
   if (!state.boons.includes("rook-of-mercy")) return;
   for (const ally of incoming)
     if (ally.health > 0) grantArmor(state, ally, boonRule("rook-of-mercy").armor, events);
+}
+export function farewellOar(state: GameState, outgoing: readonly Combatant[], events: GameEvent[]) {
+  if (state.phase !== "battle" || !state.boons.includes("farewell-oar")) return;
+  for (const ally of outgoing) {
+    const damage = Math.round(ally.block / boonRule("farewell-oar").divisor);
+    for (const enemy of battlefield(state, "enemy"))
+      if (ally.health > 0 && enemy.health > 0 && damage > 0)
+        hit(state, ally, enemy, damage, "water", events, { origin: "derived" });
+  }
 }
 /** Match existing protection without spending it or amplifying fresh Block grants. */
 export function matchSwapBlock(state: GameState, first: Combatant, second: Combatant, events: GameEvent[]) {
@@ -67,15 +80,21 @@ export function rosterHasSpecies(
   state: Pick<GameState, "team" | "reserves">,
   kind: import("./content").SpeciesId,
 ) {
-  return [...state.team, ...state.reserves].some((unit) => unit.species === kind);
+  return (
+    state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind)
+  );
 }
 export function ownedCards(id: string, kind: GameState["team"][number]["species"]): Card[] {
-  return permanentKit(kind).map(({ definition, copy }) => ({
-    id: `${id}:${definition.id}${copy ? ":2" : ""}`,
-    definitionId: definition.id,
-    ownerId: id,
-    level: 0,
-  }));
+  const cards: Card[] = [];
+  forEachPermanentCard(kind, (definition, copy) =>
+    cards.push({
+      id: `${id}:${definition.id}${copy ? ":2" : ""}`,
+      definitionId: definition.id,
+      ownerId: id,
+      level: 0,
+    }),
+  );
+  return cards;
 }
 /** Recruitment and its policy projection use the same legal deployment rules. */
 export function recruitLineup(
@@ -92,15 +111,19 @@ export function recruitLineup(
     !species(incoming.species).legendary &&
     !state.team.some((unit) => species(unit.species).legendary)
     ? [...active, incoming.id]
-    : [...active];
+    : active;
 }
 /** Joining a roster changes individuals and deployment; Collection progress is granted separately. */
 export function addRecruit(state: GameState, kind: import("./content").SpeciesId, replacement?: string) {
   // Repeat discoveries improve Collection rank without replacing or refreshing an individual.
   if (rosterHasSpecies(state, kind)) return;
-  const all = [...state.team, ...state.reserves];
   let id = `recruit-${state.revision}`;
-  for (let suffix = 1; all.some((creature) => creature.id === id); suffix++)
+  for (
+    let suffix = 1;
+    state.team.some((creature) => creature.id === id) ||
+    state.reserves.some((creature) => creature.id === id);
+    suffix++
+  )
     id = `recruit-${state.revision}-${suffix}`;
   const incoming = { id, species: kind, health: species(kind).health, block: 0, attacked: false };
   const lineup = recruitLineup(state, incoming, replacement);
@@ -122,15 +145,21 @@ function prepareLineup(state: GameState, ids: string[]) {
 }
 export function rebuildCards(state: GameState) {
   const previous = state.cards;
-  state.cards = state.team
-    .flatMap((c) => ownedCards(c.id, c.species))
-    .map(
-      (card) =>
-        previous.find(
-          (old) =>
-            old.id === card.id && old.ownerId === card.ownerId && old.definitionId === card.definitionId,
-        ) ?? card,
-    );
+  const previousById = new Map<string, Card[]>();
+  for (const card of previous) {
+    const matching = previousById.get(card.id);
+    if (matching) matching.push(card);
+    else previousById.set(card.id, [card]);
+  }
+  const cards: Card[] = [];
+  for (const creature of state.team)
+    for (const card of ownedCards(creature.id, creature.species))
+      cards.push(
+        previousById
+          .get(card.id)
+          ?.find((old) => old.ownerId === card.ownerId && old.definitionId === card.definitionId) ?? card,
+      );
+  state.cards = cards;
   if (state.battle) {
     state.battle.hand = [];
     state.battle.buffer = [];
@@ -155,17 +184,26 @@ export function formationForSwap(
 function setFormation(state: GameState, ids: string[], events: GameEvent[] = [], fromCard = false) {
   const all = [...state.team, ...state.reserves];
   const previous = state.cards;
-  const departing = new Set(state.team.filter((unit) => !ids.includes(unit.id)).map((unit) => unit.id));
+  const activeIds = new Set(ids);
+  const departing = new Set<string>();
+  for (const unit of state.team) if (!activeIds.has(unit.id)) departing.add(unit.id);
   state.team = ids.map((id) => all.find((unit) => unit.id === id)!);
-  state.reserves = all.filter((unit) => !ids.includes(unit.id));
-  const retained = previous.filter((card) => card.ownerId === null || ids.includes(card.ownerId));
-  const slots = previous.filter(
-    (card) => card.ownerId !== null && departing.has(card.ownerId) && !card.temporary,
-  );
-  const needed = state.team
-    .filter((unit) => !previous.some((card) => card.ownerId === unit.id))
-    .flatMap((unit) => ownedCards(unit.id, unit.species));
-  const used = new Set(retained.map((card) => card.id));
+  state.reserves = all.filter((unit) => !activeIds.has(unit.id));
+  const retained: Card[] = [];
+  const slots: Card[] = [];
+  const previousOwners = new Set<string | null>();
+  const used = new Set<string>();
+  for (const card of previous) {
+    previousOwners.add(card.ownerId);
+    if (card.ownerId === null || activeIds.has(card.ownerId)) {
+      retained.push(card);
+      used.add(card.id);
+    }
+    if (card.ownerId !== null && departing.has(card.ownerId) && !card.temporary) slots.push(card);
+  }
+  const needed: Card[] = [];
+  for (const unit of state.team)
+    if (!previousOwners.has(unit.id)) needed.push(...ownedCards(unit.id, unit.species));
   const mapped = needed.map((card, index) => {
     let id = slots[index]?.id ?? card.id;
     for (let serial = 0; used.has(id); serial++) id = `slot-${state.revision}-${index}-${serial}`;
@@ -182,19 +220,19 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
           .map((card) => card.id)
       : [],
   );
-  state.cards = [...retained.filter((card) => !removed.has(card.id)), ...mapped];
+  state.cards = [...(removed.size ? retained.filter((card) => !removed.has(card.id)) : retained), ...mapped];
   if (state.battle) {
     const kept = new Set(state.cards.map((card) => card.id));
-    const changed = new Set(mapped.map((card) => card.id));
-    filterCardZones(state.battle, (id) => kept.has(id) && (!fromCard || !changed.has(id)));
-    const zoned = new Set([
-      ...state.battle.draw,
-      ...state.battle.hand,
-      ...state.battle.buffer,
-      ...state.battle.discard,
-    ]);
-    const added = mapped.filter((card) => !zoned.has(card.id)).map((card) => card.id);
-    if (added.length) state.battle.draw = shuffle(state, [...state.battle.draw, ...added]);
+    const changed = fromCard ? new Set(mapped.map((card) => card.id)) : undefined;
+    filterCardZones(state.battle, (id) => kept.has(id) && (!changed || !changed.has(id)));
+    if (mapped.length) {
+      const zoned = new Set<string>();
+      for (const zone of [state.battle.draw, state.battle.hand, state.battle.buffer, state.battle.discard])
+        for (const id of zone) zoned.add(id);
+      const added: string[] = [];
+      for (const card of mapped) if (!zoned.has(card.id)) added.push(card.id);
+      if (added.length) state.battle.draw = shuffle(state, [...state.battle.draw, ...added]);
+    }
     for (const enemy of state.battle.enemies) if (departing.has(enemy.targetId)) enemy.targetId = ids[0]!;
     removeDepartedMinions(state);
     fillHand(state);
@@ -263,7 +301,7 @@ export function swapBackup(
     const removed = new Set(
       state.cards.filter((card) => card.ownerId === outgoing.id && card.temporary).map((card) => card.id),
     );
-    state.cards = state.cards.filter((card) => !removed.has(card.id));
+    if (removed.size) state.cards = state.cards.filter((card) => !removed.has(card.id));
     const oldDefs = speciesCards(outgoing.species);
     const newDefs = speciesCards(incoming.species);
     const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
@@ -273,7 +311,7 @@ export function swapBackup(
       card.level = 0;
     }
     if (state.battle) {
-      filterCardZones(state.battle, (id) => !removed.has(id));
+      if (removed.size) filterCardZones(state.battle, (id) => !removed.has(id));
       for (const enemy of state.battle.enemies)
         if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
       if (fromCard) {
@@ -292,12 +330,18 @@ export function swapBackup(
     });
   }
   if (fromCard && outgoing) {
-    matchSwapBlock(state, outgoing, incoming, events);
-    rookOfMercy(
+    farewellOar(
       state,
-      state.team.filter((ally) => !previous.some((old) => old.id === ally.id)),
+      previous.filter((ally) => !state.team.some((current) => current.id === ally.id)),
       events,
     );
+    matchSwapBlock(state, outgoing, incoming, events);
+    if (state.boons.includes("rook-of-mercy"))
+      rookOfMercy(
+        state,
+        state.team.filter((ally) => !previous.some((old) => old.id === ally.id)),
+        events,
+      );
   }
   mountainGuide(state, incoming, previous, events);
   gentlePassage(state, previous, events);
@@ -333,6 +377,7 @@ export function swapFromCard(
   [row[from], row[to]] = [row[to]!, row[from]!];
   if (allied) {
     cleanseDeparture(state, actor, events);
+    farewellOar(state, [actor, other], events);
     matchSwapBlock(state, actor, other, events);
     rookOfMercy(state, [actor, other], events);
   }

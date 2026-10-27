@@ -38,4 +38,5 @@ export interface PrimaryContext {
   blindMiss: boolean;
   cannotDodge: boolean;
   criticalBonus: number;
+  oasisLeech: boolean;
 }

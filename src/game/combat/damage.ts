@@ -6,7 +6,7 @@ import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield, healingAllies, isDepartedMinion } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
-import { hasTalent, creaturePassive, passiveAmount } from "../progression";
+import { hasTalent, creaturePassiveTier, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import {
@@ -27,6 +27,7 @@ import { modifiedDamage, blockPayment, blockEfficiency, armoredDamage, armorAppl
 import {
   dodgeResponse,
   blockDepletionRewards,
+  faultline,
   publishHit,
   damageRewards,
   poisonStun,
@@ -109,6 +110,35 @@ export function* negateAttack(
 
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number; dealt: number };
 
+/** Supplemental hits cannot repeat an attack, start retaliation or retrigger these Boons. */
+function* boonHitFollowups(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  type: DamageType,
+  events: GameEvent[],
+  options: DamagePacket,
+  attack: boolean,
+): Resolution<void> {
+  if (
+    isEnemy(source) ||
+    !isEnemy(target) ||
+    source.health <= 0 ||
+    target.health <= 0 ||
+    options.origin === "boon"
+  )
+    return;
+  if (type === "freeze" && attack && state.boons.includes("frostglass-die"))
+    yield* reaction("hit", state, source, target, boonRule("frostglass-die").damage, "burn", events, {
+      origin: "boon",
+    });
+  if (type === "water" && state.boons.includes("reef-diadem")) {
+    const amount = Math.round(ensureCombat(source).thorns / boonRule("reef-diadem").divisor);
+    if (amount > 0 && source.health > 0 && target.health > 0)
+      yield* reaction("hit", state, source, target, amount, "nature", events, { origin: "boon" });
+  }
+}
+
 export function* bounce(
   state: GameState,
   source: Combatant,
@@ -121,11 +151,12 @@ export function* bounce(
   const { effect } = action;
   const allied = !isEnemy(source);
   let visited: Set<string> | undefined;
-  for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
+  for (const entry of creaturePassiveTier(allied ? state : undefined, source.species).effects) {
     if (entry.kind !== "bounce" || entry.effect !== effect) continue;
     visited ??= new Set([first.id]);
     const visitedTargets = visited;
     for (let i = 0; i < entry.amount; i++) {
+      if (source.health <= 0) return;
       // A previous bounce can remove a summoner and all of its Echoes.
       const pool =
         effect === "heal"
@@ -137,7 +168,7 @@ export function* bounce(
           !visitedTargets.has(unit.id) &&
           (effect !== "heal" || unit.health < maximumHealth(unit)),
       );
-      if (source.health <= 0 || !eligible.length) return;
+      if (!eligible.length) return;
       if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =
         effect === "heal"
@@ -323,6 +354,7 @@ export function* resolveHit(
       );
       target.block -= payment.spent;
       if (payment.spent > 0) {
+        const depletedBlock = target.block === 0;
         events.push({
           kind: "block",
           actorId: source.id,
@@ -338,11 +370,12 @@ export function* resolveHit(
             dealt: 0,
             blocked: payment.absorbed,
             blockSpent: payment.spent,
-            depletedBlock: target.block === 0,
+            depletedBlock,
             critical: false,
           },
           false,
         );
+        yield* faultline(context, depletedBlock);
       }
     }
     yield* dodgeResponse(context, !thornDodge);
@@ -358,6 +391,10 @@ export function* resolveHit(
       affectedStatus: "freeze",
       text: `${unitName(target)} nullifies Freeze damage`,
     });
+    if (attack && alliedSource && !alliedTarget && state.boons.includes("frostglass-die"))
+      yield* reaction("hit", state, source, target, boonRule("frostglass-die").damage, "burn", events, {
+        origin: "boon",
+      });
     return { outcome: "landed", lost: 0, dealt: 0 };
   }
   const nextPhysical =
@@ -436,6 +473,8 @@ export function* resolveHit(
     !armorFirst && armorApplies(state, target, type, source, options)
       ? armoredDamage(damage + blocked, stats.armor)
       : damage + blocked;
+  if (alliedTarget && depletedBlock && damage > 0 && state.boons.includes("glassleaf-shield"))
+    damage = Math.round(damage / boonRule("glassleaf-shield").divisor);
   if (!armorFirst && armorApplies(state, target, type, source, options)) {
     const reduced = armoredDamage(damage, stats.armor);
     armorReducedDamage = reduced < damage;
@@ -456,7 +495,8 @@ export function* resolveHit(
     damage = Math.min(damage, Math.max(0, target.health - boonRule("hearth-coal").minimum));
   const lost = loseHealth(state, target, damage, events);
   const dealt = Math.min(effectDamage, blocked + lost);
-  if (armorReducedDamage) erode(1);
+  if (armorReducedDamage && !(alliedTarget && stats.grace > 0 && state.boons.includes("cypress-reliquary")))
+    erode(1);
   if (effectDamage > 0) {
     if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(effectDamage);
     if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point")) erode(effectDamage);
@@ -478,6 +518,7 @@ export function* resolveHit(
   };
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
+  yield* faultline(context, depletedBlock);
   yield* damageRewards(context, facts, policy);
   if (
     attack &&
@@ -565,6 +606,7 @@ export function* resolveHit(
       yield* reaction("controlRewards", state, source, target, type, events);
   }
   if (!policy.buildup && effectDamage > 0) yield* poisonStun(context, effectDamage);
+  yield* boonHitFollowups(state, source, target, type, events, options, attack);
   if (
     criticalBonusDamage > 0 &&
     alliedSource &&
@@ -588,6 +630,13 @@ export function* resolveHit(
   )
     yield* detonateBleed(state, source, target, events);
   if (effectDamage === 0 && direct && target.health > 0) yield* thornRetaliation(context);
+  if (direct && alliedTarget && isEnemy(source) && state.boons.includes("pollen-basket")) {
+    for (const ally of battlefield(state, "player")) {
+      if (source.health <= 0) break;
+      if (ally.id !== target.id && ally.health > 0)
+        yield* thornRetaliation({ state, source, target: ally, events, type });
+    }
+  }
   if (direct) yield* passiveRetaliation(context, depletedBlock);
   for (const depletion of depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
   if (

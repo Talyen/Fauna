@@ -86,6 +86,30 @@ const talentSymbols = Object.fromEntries(
     return talents.map((talent, index) => [talent.id, symbols[index]!] as const);
   }),
 );
+const talentTrees = new Map(
+  KEYWORDS.map((keyword) => {
+    const talents = TALENTS.filter((talent) => talent.keyword === keyword);
+    const rows = [...new Set(talents.map((talent) => talent.row))];
+    return [keyword, { talents, rows }] as const;
+  }),
+);
+const artwork: Record<Keyword, string> = {
+  physical: "physical",
+  burn: "fire",
+  freeze: "ice",
+  stun: "lightning",
+  poison: "poison",
+  nature: "nature",
+  water: "water",
+  light: "light",
+  bleed: "bleed",
+  block: "block",
+  health: "heal",
+  armor: "armor",
+  dodge: "dodge",
+  leech: "leech",
+  mana: "mana",
+};
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function Talents({
   game,
@@ -131,23 +155,8 @@ export function Talents({
     };
   }, [keyword, controlsRef, treeReset]);
   const p = keywordProgress(keyword ? (game.keywordXP[keyword] ?? 0) : 0);
-  const artwork: Record<Keyword, string> = {
-    physical: "physical",
-    burn: "fire",
-    freeze: "ice",
-    stun: "lightning",
-    poison: "poison",
-    nature: "nature",
-    water: "water",
-    light: "light",
-    bleed: "bleed",
-    block: "block",
-    health: "heal",
-    armor: "armor",
-    dodge: "dodge",
-    leech: "leech",
-    mana: "mana",
-  };
+  const points = keyword ? availablePoints(game, keyword) : 0;
+  const tree = keyword ? talentTrees.get(keyword)! : undefined;
   return (
     <Screen
       data-nav-layout="rows"
@@ -219,7 +228,7 @@ export function Talents({
                 {i18n.plural(
                   "talents.pointsAvailable",
                   { one: "{{count}} point available", other: "{{count}} points available" },
-                  availablePoints(game, keyword),
+                  points,
                 )}
               </span>
               <span>
@@ -242,9 +251,7 @@ export function Talents({
             label={i18n.message("talents.pages", "Talent pages")}
             pageSize={1}
             adaptive={{ columns: 1, rows: 3 }}
-            items={[
-              ...new Set(TALENTS.filter((talent) => talent.keyword === keyword).map((talent) => talent.row)),
-            ]}
+            items={tree!.rows}
           >
             {(row) => (
               <div
@@ -253,85 +260,88 @@ export function Talents({
                 data-nav-row
                 aria-label={i18n.message("talents.row", "Row {{row}}", { row: row + 1 })}
               >
-                {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
-                  const talentName = i18n.content(`content.talent.${t.id}.name`, t.name);
-                  const categoryName = i18n.content(
-                    `content.keyword.${keyword}.label`,
-                    keywordLabel(keyword),
-                  );
-                  const TalentSymbol = talentSymbols[t.id]!;
-                  const owned = game.talents.includes(t.id),
-                    available = canBuyTalent(game, t.id);
-                  const earlierRowsOwned = TALENTS.filter(
-                    (talent) => talent.keyword === keyword && talent.row < t.row,
-                  ).every((talent) => game.talents.includes(talent.id));
-                  const status = owned
-                    ? i18n.message("talents.unlocked", "Unlocked")
-                    : available
-                      ? i18n.message("talents.unlockOne", "Unlock · 1 point")
-                      : !earlierRowsOwned
-                        ? availablePoints(game, keyword) > 0
-                          ? i18n.message("talents.requiresRows", "Requires all earlier rows")
-                          : i18n.message(
-                              "talents.requiresPointAndRows",
-                              "Requires 1 point and all earlier rows",
-                            )
-                        : i18n.message("talents.requiresPoint", "Requires 1 point");
-                  return (
-                    <Tooltip key={t.id}>
-                      <TooltipTrigger asChild>
-                        <Button
-                          effectKeywords={[keyword]}
-                          variant="outline"
-                          className="talent-node"
-                          aria-label={
-                            owned
-                              ? i18n.message("talents.unlockedName", "{{name}}, unlocked", {
-                                  name: talentName,
-                                })
-                              : talentName
-                          }
-                          aria-disabled={!available}
-                          aria-describedby={`${t.id}-effect ${t.id}-status`}
-                          data-owned={owned}
-                          data-keyword={keyword}
-                          data-purchased={purchased === t.id || undefined}
-                          data-available={available}
-                          onClick={() => {
-                            if (available && send({ type: "buyTalent", talentId: t.id })) setPurchased(t.id);
-                          }}
-                        >
-                          <span className="talent-card-heading">
-                            <span data-keyword={keyword}>
-                              <TalentSymbol className="talent-icon" aria-hidden="true" />
+                {tree!.talents
+                  .filter((t) => t.row === row)
+                  .map((t) => {
+                    const talentName = i18n.content(`content.talent.${t.id}.name`, t.name);
+                    const categoryName = i18n.content(
+                      `content.keyword.${keyword}.label`,
+                      keywordLabel(keyword),
+                    );
+                    const TalentSymbol = talentSymbols[t.id]!;
+                    const owned = game.talents.includes(t.id),
+                      available = canBuyTalent(game, t.id);
+                    const earlierRowsOwned = tree!.talents.every(
+                      (talent) => talent.row >= t.row || game.talents.includes(talent.id),
+                    );
+                    const status = owned
+                      ? i18n.message("talents.unlocked", "Unlocked")
+                      : available
+                        ? i18n.message("talents.unlockOne", "Unlock · 1 point")
+                        : !earlierRowsOwned
+                          ? points > 0
+                            ? i18n.message("talents.requiresRows", "Requires all earlier rows")
+                            : i18n.message(
+                                "talents.requiresPointAndRows",
+                                "Requires 1 point and all earlier rows",
+                              )
+                          : i18n.message("talents.requiresPoint", "Requires 1 point");
+                    return (
+                      <Tooltip key={t.id}>
+                        <TooltipTrigger asChild>
+                          <Button
+                            effectKeywords={[keyword]}
+                            variant="outline"
+                            className="talent-node"
+                            aria-label={
+                              owned
+                                ? i18n.message("talents.unlockedName", "{{name}}, unlocked", {
+                                    name: talentName,
+                                  })
+                                : talentName
+                            }
+                            aria-disabled={!available}
+                            aria-describedby={`${t.id}-effect ${t.id}-status`}
+                            data-owned={owned}
+                            data-keyword={keyword}
+                            data-purchased={purchased === t.id || undefined}
+                            data-available={available}
+                            onClick={() => {
+                              if (available && send({ type: "buyTalent", talentId: t.id }))
+                                setPurchased(t.id);
+                            }}
+                          >
+                            <span className="talent-card-heading">
+                              <span data-keyword={keyword}>
+                                <TalentSymbol className="talent-icon" aria-hidden="true" />
+                              </span>
+                              <span className="talent-name">
+                                <ShineText keywords={[keyword]}>{talentName}</ShineText>
+                              </span>
                             </span>
-                            <span className="talent-name">
-                              <ShineText keywords={[keyword]}>{talentName}</ShineText>
+                            <span className="talent-effect" id={`${t.id}-effect`}>
+                              <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
                             </span>
-                          </span>
-                          <span className="talent-effect" id={`${t.id}-effect`}>
+                            <span className="talent-status" id={`${t.id}-status`}>
+                              {status}
+                            </span>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <strong>
+                            {i18n.message("talents.detailTitle", "{{keyword}} · {{name}}", {
+                              keyword: categoryName,
+                              name: talentName,
+                            })}
+                          </strong>
+                          <p>
                             <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
-                          </span>
-                          <span className="talent-status" id={`${t.id}-status`}>
-                            {status}
-                          </span>
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <strong>
-                          {i18n.message("talents.detailTitle", "{{keyword}} · {{name}}", {
-                            keyword: categoryName,
-                            name: talentName,
-                          })}
-                        </strong>
-                        <p>
-                          <KeywordText text={t.text} id={`content.talent.${t.id}.rule`} />
-                        </p>
-                        <p>{status}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  );
-                })}
+                          </p>
+                          <p>{status}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    );
+                  })}
               </div>
             )}
           </PagedItems>

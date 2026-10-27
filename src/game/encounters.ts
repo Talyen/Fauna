@@ -84,24 +84,37 @@ export const BOSSES = [
   {
     id: "hollow-crown",
     encounter: 7,
-    name: "Memento",
-    pack: ["memento"],
+    name: "Ravelland",
+    pack: ["ravelland"],
   },
 ] as const;
+const recruitableSpecies = SPECIES.filter((entry) => !entry.legendary);
+const bossesByEncounter = new Map<number, (typeof BOSSES)[number]>(
+  BOSSES.map((boss) => [boss.encounter, boss]),
+);
 export function encounterPacks(encounter: number) {
-  const boss = BOSSES.find((entry) => entry.encounter === encounter);
+  const boss = bossesByEncounter.get(encounter);
   return boss ? [boss.pack] : COMBAT_PACKS;
 }
 
 /** Commit exact species so later roster changes cannot rewrite a battle or its rewards. */
 export function generateEncounterPack(state: GameState, savedPack?: readonly SpeciesId[]): SpeciesId[] {
-  const packs = encounterPacks(state.encounter);
-  const pack = savedPack ?? packs[Math.floor(roll(state) * packs.length)]!;
-  const roster = [...state.team, ...state.reserves].map((unit) => unit.species);
-  const eligible = SPECIES.filter((entry) => !entry.legendary && !roster.includes(entry.id));
-  return pack
-    .slice(0, Math.min(3, state.encounter + 1))
-    .map((kind) => (roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind));
+  let pack = savedPack;
+  if (!pack) {
+    const packs = encounterPacks(state.encounter);
+    pack = packs[Math.floor(roll(state) * packs.length)]!;
+  }
+  const selected = pack.slice(0, Math.min(3, state.encounter + 1));
+  const inRoster = (kind: SpeciesId) =>
+    state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind);
+  if (!selected.some(inRoster)) return selected;
+  const roster = new Set(state.team.map((unit) => unit.species));
+  for (const unit of state.reserves) roster.add(unit.species);
+  const eligible = recruitableSpecies.filter((entry) => !roster.has(entry.id));
+  for (let index = 0; index < selected.length; index++)
+    if (roster.has(selected[index]!))
+      selected[index] = eligible[Math.floor(roll(state) * eligible.length)]!.id;
+  return selected;
 }
 
 function scaleEnemyStat(base: number, encounter: number) {
@@ -120,7 +133,8 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
 } {
   const pack = game.expedition.pack;
   if (!pack) throw new Error("Missing encounter pack.");
-  const boss = BOSSES.find((entry) => entry.encounter === game.encounter);
+  const boss = bossesByEncounter.get(game.encounter);
+  const power = 1 + game.encounter / 10;
   return {
     name: boss ? "Boss" : "Combat",
     enemies: pack.map((kind, index) => {
@@ -129,7 +143,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
         name: boss && index === 0 && kind === boss.pack[0] ? boss.name : entry.name,
         species: kind,
         health: scaleEnemyStat(entry.health, game.encounter),
-        power: 1 + game.encounter / 10,
+        power,
       };
     }),
   };
@@ -139,7 +153,7 @@ export function finalEncounter(game: Pick<GameState, "encounter">) {
   return game.encounter === JOURNEY_LENGTH - 1;
 }
 export function bossEncounter(game: Pick<GameState, "encounter">) {
-  return BOSSES.some((boss) => boss.encounter === game.encounter);
+  return bossesByEncounter.has(game.encounter);
 }
 
 freeze(COMBAT_PACKS, true);
