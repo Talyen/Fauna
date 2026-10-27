@@ -503,11 +503,47 @@
     "sourceHash": "e99a5f5629e7b1445648677d8cee75f7b3f2eacf241d664911abe77ec2948ff0",
     "text": "O dano excedente ao derrotar um inimigo se espalha para outros inimigos"
   },
+  "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
+    "sourceHash": "d877218babe95bd1e4de81963387bd12c5fa1686450d4462377e5e733e4abfe2",
+    "text": "Adicione <keyword0>Comida</keyword0> à sua mão: {{value0}}"
+  },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "df482ebc1f36a39623bb78560354e0f1d5fc4cb63e9c7b6c8987cfea6b8407e0",
     "text": "Ganhe {{value0}} de <keyword0>Bloqueio</keyword0>"
+  },
+  "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "489d585877225fe572e1458723b14e6baae1a99feef403c8d0fa5aa962b00500",
+    "text": "Receba {{value0}} de <keyword0>Bloqueio</keyword0>; Receba {{value1}} de <keyword1>Espinhos</keyword1>"
+  },
+  "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "a906d8628971e29e13634709d33889132b21e6be2917a3318fc6f81a11558b02",
+    "text": "Sua próxima carta é jogada duas vezes"
+  },
+  "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "4a0c8d2f6b7b715f75f4dc27125df0895155ae0d2264f1cd23b357a03f3418b0",
+    "text": "Sua próxima carta é jogada duas vezes"
+  },
+  "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "41c02a98715044b81a99e6668339a5f2d0cc2b1828c9a6e3992f449c21e8433a",
+    "text": "Cause {{value0}} de dano de <keyword0>Atordoamento</keyword0>"
+  },
+  "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "3437ad40e245184b360c62184d6b8ec86eb3f0e62336cd24f7cad92ed25eb62e",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0>"
   },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -539,6 +575,18 @@
     "sourceHash": "75d177cde7a029773ce096f8fb2a8c509f8a73a9572acb95f60a718c5004ac7f",
     "text": "Compre {{value0}} carta; Receba {{value1}} de <keyword0>Mana</keyword0>"
   },
+  "content.card.captoad-swap.v20ced3ec392925b5.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup",
+    "sourceHash": "54e87ae14b332babf1cf56f62c2eed5578c849fe82bcedc3ad0ea8308392baa9",
+    "text": "Troque por um aliado aleatório da reserva"
+  },
+  "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "231879bba82744c8f8e0732db06eb3c29fd309bd9642b40395c14fe976a48ca5",
+    "text": "Cause {{value0}} de dano de <keyword0>Atordoamento</keyword0>"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -551,6 +599,12 @@
     "sourceHash": "c96c237ebebacc40bc7118174f229d8f4c7ea54887f788212eacbc6a8492a82c",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
   },
+  "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "d9b0a51f76d32df4b2d4985e0b19fc077d18de0f4169b1cade06e97db4db57b4",
+    "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0>"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
@@ -562,6 +616,12 @@
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "c8487a771b515e3c0e0b8344d4e66c150caae0958f9b9f646de5047f5cec845a",
     "text": "Cause {{value0}} de dano <keyword0>Físico</keyword0>"
+  },
+  "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
+    "sourceHash": "2322024a553ef692642d656474f8aa4a62c437cf74ac2901293e01519195c270",
+    "text": "Cause {{value0}} de dano de <keyword0>Queimadura</keyword0> a todos os inimigos"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -665,11 +725,23 @@
     "sourceHash": "575941b79a0acc77f56397b35d80d8451dcbf8ab481735a8407038b40991e878",
     "text": "Compre {{value0}} carta; Receba {{value1}} de <keyword0>Mana</keyword0>"
   },
+  "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
+    "sourceHash": "eef57e5648de0c9f0f8aa471bfb7f38d01aaf9b482d3aa35e5a39970f986c27b",
+    "text": "Adicione <keyword0>Comida</keyword0> à sua mão: {{value0}}"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "15d859e0199aa3615768dc4fd3cc5288690f83a7f4be39ffbf659055e736fdb8",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> ao aliado mais ferido"
+  },
+  "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "83ddadf8eb3de01da81b422124f9a750a9ecd3baf4b15529a8aed53b4c414475",
+    "text": "Receba {{value0}} de <keyword0>Mana</keyword0>"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -707,6 +779,18 @@
     "sourceHash": "d132e201925469a66b3e9d3f2d37479d31d1ae487bbee4c229f84d78701df65a",
     "text": "Cause {{value0}} de dano de <keyword0>Luz</keyword0>; <keyword1>Expurgue</keyword1> o alvo: remova {{value1}} efeito"
   },
+  "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
+    "sourceHash": "afb3326fdafb21d94a4bc29e4203f5f081a11ffe0ff325a4197c51e63b50c757",
+    "text": "Cause {{value0}} de dano de <keyword0>Queimadura</keyword0> a todos os inimigos"
+  },
+  "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "b0fa40e016b79155c2dc9e3bf6d2368987801780e8eb59185f480892f71c8ca5",
+    "text": "Receba {{value0}} de <keyword0>Bloqueio</keyword0>; Receba {{value1}} de <keyword1>Espinhos</keyword1>"
+  },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -718,6 +802,12 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "7c0db56cc61a5c1d94f8bfc8092d7d345de31b339b598105f7662c951ac2e55c",
     "text": "Compre {{value0}} carta"
+  },
+  "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "ce12fd81a0a4b2cfe0a537f57a27db89a7967082a6429a4c07fd5ea4ed277387",
+    "text": "Cause {{value0}} de dano de <keyword0>Atordoamento</keyword0>"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -767,11 +857,29 @@
     "sourceHash": "9ac0047d0579a8d29d80cd3be40ee55c0de95e2a2b2336b02f3df4a04b9db680",
     "text": "Compre {{value0}} carta"
   },
+  "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup",
+    "sourceHash": "ad85fa071ebdd9d9d1f865145941659b578dad5d6237fa500e2ad8a8007dbe5e",
+    "text": "Troque por um aliado aleatório da reserva"
+  },
+  "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "8b7c07e4eb27d011b340545642dd323261e1effd95963b9cdba0da908bb0b349",
+    "text": "Receba {{value0}} de <keyword0>Mana</keyword0>"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "06010de21ec70f8bba60eeb56e3d9ddd200add4f52f281870ad23fab8f9c6179",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
+  },
+  "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
+    "sourceHash": "c91953a775dcdfefa1d4c01b9c2fce0e30e4fa130da850d36a9ca4dc2b406a48",
+    "text": "Cause {{value0}} de dano de <keyword0>Queimadura</keyword0> a todos os inimigos"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

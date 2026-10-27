@@ -503,11 +503,47 @@
     "sourceHash": "d2bdb158db2a2863a5288e0b2e268232ac5be698e9aae42159c2f49b476e9471",
     "text": "敵を倒した際の余剰ダメージが他の敵に広がる"
   },
+  "content.card.aerostat-parcel-drop.vf0ee33310b0ca93b.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
+    "sourceHash": "21bcb6338b7064003fdedb2749ff8e5b535c06156e0f9e50268b85cd19dd72e0",
+    "text": "手札に<keyword0>食料</keyword0>を{{value0}}枚加える"
+  },
   "content.card.aerostat-voyagers-rest.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "a162cc787f9f47c761e86ae740b8911c54f862ce4231d54876f486ea3cc71702",
     "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得"
+  },
+  "content.card.almanelle-rooted-year.v51e73cd6140c698c.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "266a6e934486a913e849a7d763817351b75d9cb3d727991c9749a44310742fb9",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
+  },
+  "content.card.alpenglen-ember-of-evening.v52b38779a5451a1c.rule": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "a1f9df1acd9956de30a03ab65f0a4522b2e487bf95d589aeee06351d6d290054",
+    "text": "次のカードを2回使用する"
+  },
+  "content.card.arabesca-dancing-double.v52b38779a5451a1c.rule": {
+    "reviewed": true,
+    "source": "Your next card is played twice",
+    "sourceHash": "5a873ad9b0a55aee2fe25bf1d162793334638b5155fb82deab83987ebf507c33",
+    "text": "次のカードを2回使用する"
+  },
+  "content.card.arabesca-ribbon-snare.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "5d3c672c9ca72780a49951bac2f9d6af9a749ea89f1d79efa6455a942597b77b",
+    "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "bbfe47271549480217f8e77b934a17d6a88e0af80d2682b92350cc9340a5e536",
+    "text": "<keyword0>体力</keyword0>を{{value0}}回復"
   },
   "content.card.bloomquail-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
@@ -539,6 +575,18 @@
     "sourceHash": "90df205ebfa58aa7e3ee24c7d4d6f9bd457c5c44931425e7573a9181d56bd73b",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
+  "content.card.captoad-swap.v20ced3ec392925b5.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup",
+    "sourceHash": "e54e0da61fef9dc01cbf9f1c441bec9194a99af1444189e785d53108b47180f6",
+    "text": "控えの味方1体とランダムに交代"
+  },
+  "content.card.chimecricket-attack.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "a2cdd64746b31d58b93bdded98d431555f65fa8191eb58865f9c396c72384f69",
+    "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
+  },
   "content.card.coralcurl-guard.vadb3e758e4125447.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Block</keyword0>",
@@ -551,6 +599,12 @@
     "sourceHash": "5e6b8be03a1dae23b916db3b9829c286ecf6cd43dd0b4187015974f6a24a227d",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0>",
+    "sourceHash": "4fd1f7afd18f36b379ab07cf575aaf0eef8f9b36292f3900bfcdaba798c61681",
+    "text": "<keyword0>体力</keyword0>を{{value0}}回復"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
@@ -562,6 +616,12 @@
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "cf1ce6404c4c1b7c20f00dc207ae16f69a05623b4fdc8aa4d33a987d8d0c9464",
     "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
+    "sourceHash": "1ec8a1f97e871021b38e2ce9f2e94849186cf08c366eab3c3273ecb7e6bebaa0",
+    "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -665,11 +725,23 @@
     "sourceHash": "cd2f758e08031abaa6db15161a0da8c20b48fce2d465504336b0842a87373739",
     "text": "カードを{{value0}}枚引く; <keyword0>マナ</keyword0>を{{value1}}獲得"
   },
+  "content.card.orifable-createFood.vf0ee33310b0ca93b.rule": {
+    "reviewed": true,
+    "source": "Add {{value0}} <keyword0>Food</keyword0> to your hand",
+    "sourceHash": "e7899402960d32defabadb213dac5971b5cd6b2a9b8a071f7d7587a2786b3887",
+    "text": "手札に<keyword0>食料</keyword0>を{{value0}}枚加える"
+  },
   "content.card.orifable-heal.vb11e8582917748e7.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to the most injured ally",
     "sourceHash": "a1ff2c8f0f0afb90cd262257ebe1bb8f0c213bf2d99f778619556a1c8a0a9eb1",
     "text": "最も傷ついた味方の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.parhelion-sundog-reservoir.vd2070eac2bd832c9.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "aac0e26b72d6c892fdd7ee928e83a2d990b2d6b8a0e9e1f26a5397306437b8f6",
+    "text": "<keyword0>マナ</keyword0>を{{value0}}獲得"
   },
   "content.card.pollenmoth-attack.v5101062696ccd9cf.rule": {
     "reviewed": true,
@@ -707,6 +779,18 @@
     "sourceHash": "dd90cd704804766f06ac76864c1800a512b442870777cc8b803222880ffbcf07",
     "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象の<keyword1>強化解除</keyword1>：効果を{{value1}}個取り除く"
   },
+  "content.card.pyrella-festival-burst.v22ca5869fa96f531.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
+    "sourceHash": "c39cd03a377badad1519d17c3a568db62c16404f3eeadab5ab7013e9a8a1fd68",
+    "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.reedstag-guard.v51e73cd6140c698c.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; Gain {{value1}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "a5f4f886c903810e24b17d9ab660f074f3c4924be96ab0ebf9adacb92e4cc18c",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>棘</keyword1>を{{value1}}獲得"
+  },
   "content.card.reverie-waking-wonder.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -718,6 +802,12 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "b621a56a1cbfbb42532f4d8a9ff1ba3e73a1d0fc5d5ddfb30e8539a05dd9734d",
     "text": "カードを{{value0}}枚引く"
+  },
+  "content.card.ringpalm-attack.vb7276ae95585762c.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage",
+    "sourceHash": "ff7665c06bf58d17e56878520a7ca96b4a37d0440f7d08c4dfa52b0609e2030d",
+    "text": "<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.rookhaven-margin-of-possibility.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
@@ -767,11 +857,29 @@
     "sourceHash": "207a3f1bc0938509a0b9d125d77d3c3aa97c68d063640ee9a53ff34c478e817e",
     "text": "カードを{{value0}}枚引く"
   },
+  "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
+    "reviewed": true,
+    "source": "Swap out for a random backup",
+    "sourceHash": "ef6989dadf0dd8a094364c7bd3bdb26959846736466c31f58cd83cf386e9b7ae",
+    "text": "控えの味方1体とランダムに交代"
+  },
+  "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "401ebcc869a38fd88b186d1f1e3c14a40cc5d0ac3774b478b21044dd77cdcbc2",
+    "text": "<keyword0>マナ</keyword0>を{{value0}}獲得"
+  },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "67ce9d6a43ccd096543f1304f3076ac576af54d13078ffda67086275837eafea",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.wickwaltz-attack.v22ca5869fa96f531.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
+    "sourceHash": "4a0902b694c9e314b8939a93f2164a99db1a90a01510961376f6d478de814d1a",
+    "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
   },
   "content.card.wickwaltz-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,

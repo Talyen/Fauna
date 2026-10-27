@@ -1812,6 +1812,30 @@ it("presents reviewed draw and Mana variants with their actual values", () => {
   russianView.unmount();
 });
 
+it("presents shared Stun, area Burn and Mana rules with their keyword identities", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CardRules card={enemyCard(definition("chimecricket-attack"))} value={4} />
+        <CardRules card={definition("wickwaltz-attack")} value={2} />
+        <CardRules card={enemyCard(definition("stillara-reed-reservoir"))} value={2} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    [...view.container.querySelectorAll(".action-effect")].map((element) => element.textContent),
+  ).toEqual([
+    "Infligez 4 dégâts d’Étourdissement",
+    "Infligez 2 dégâts de Brûlure à tous les ennemis",
+    "Gagnez 2 Mana",
+  ]);
+  expect(view.container.querySelector('[data-keyword="stun"]')).toBeTruthy();
+  expect(view.container.querySelector('[data-keyword="burn"]')).toBeTruthy();
+  expect(view.container.querySelector('[data-keyword="mana"]')).toBeTruthy();
+  view.unmount();
+});
+
 it("reads authored card description functions without executing source", () => {
   const abilities = readCardDescriptionFunctions(readFileSync("src/game/rules/abilities.ts", "utf8"));
   const extras = readCardDescriptionFunctions(readFileSync("src/game/rules/supplemental.ts", "utf8"));
