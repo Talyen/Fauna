@@ -1,6 +1,6 @@
 # Battle rewards review sample
 
-Historical reward-flow study. Its Continue/Skip/relic behavior describes the fixture below, not current gameplay. Use [journey rules](../../Docs/EXPEDITION_DESIGN.md#screen-flow-and-journey-results) and [reward presentation](../../Docs/ui/screens.md#victory-recruitment-and-team-confirmation) for current behavior.
+Historical reward-flow study. Its Continue/Skip/relic behavior describes the fixture below, not current gameplay. Use [journey rules](../../Docs/EXPEDITION_DESIGN.md#screen-flow-and-journey-results) and [reward presentation](../../Docs/ui/screens.md#victory-recruitment-and-team-replacement) for current behavior.
 
 Open `/design/battle-rewards/index.html` on the development server.
 
