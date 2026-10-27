@@ -65,15 +65,29 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
     text: `${definition(state.cards.find((card) => card.id === id)!.definitionId).name} returns to hand`,
   });
 }
-/** Recovery and returns weave in another living deployed owner's ordinary draw. */
-export function journeyReturn(state: GameState, ownerId: string | null, events: GameEvent[]) {
-  if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
+/** Cards owned by another living deployed creature can follow a return through Journey Loom. */
+function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
   const owners = new Set(
     state.team.filter((unit) => unit.health > 0 && unit.id !== ownerId).map((unit) => unit.id),
   );
-  const eligible = new Set(
+  return new Set(
     state.cards.filter((card) => card.ownerId && owners.has(card.ownerId)).map((card) => card.id),
   );
+}
+
+/** Inspect the same draw pool without changing its order or revealing a hidden card. */
+export function journeyReturnHasDraw(state: BattleState, ownerId: string | null): boolean {
+  if (!ownerId || !state.boons.includes("journey-loom")) return false;
+  const eligible = journeyReturnCards(state, ownerId);
+  return (
+    state.battle.draw.some((id) => eligible.has(id)) || state.battle.discard.some((id) => eligible.has(id))
+  );
+}
+
+/** Recovery and returns weave in another living deployed owner's ordinary draw. */
+export function journeyReturn(state: GameState, ownerId: string | null, events: GameEvent[]) {
+  if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
+  const eligible = journeyReturnCards(state, ownerId);
   fillHand(state);
   drawEligibleCard(state, (id) => eligible.has(id), events);
 }
@@ -297,11 +311,12 @@ export function drawHasAnotherCard(
   played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
+  const owners = drawableOwnerIds(state);
   return (
     [...state.battle.draw, ...state.battle.discard].some((id) => {
       const drawn = state.cards.find((entry) => entry.id === id)!;
       return (
-        (drawn.ownerId === null || drawableOwnerIds(state).has(drawn.ownerId)) &&
+        (drawn.ownerId === null || owners.has(drawn.ownerId)) &&
         (effect.kind === "draw" || cardKeywords(drawn).includes(effect.keyword))
       );
     }) ||

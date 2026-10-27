@@ -375,6 +375,7 @@ export const modifierQueries = freeze(
       "stun.free-follow-up": ["./ability-rules#cardCost"],
     } satisfies Partial<Record<TalentId, Binding>>,
     boons: {
+      "journey-loom": ["./card-zones#journeyReturnHasDraw"],
       "last-threshold": ["./ability-facts#healingBenefit"],
       "pumpkin-tureen": ["./card-rules#foodForAllies"],
       "yarrow-salve-tin": ["./ability-facts#healingBenefit"],

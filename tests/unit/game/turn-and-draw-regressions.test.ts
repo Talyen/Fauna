@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { rankedBattleChoices } from "../../../src/application/battle-policy";
-import { drawHasAnotherCard } from "../../../src/game/card-zones";
+import { drawHasAnotherCard, journeyReturn } from "../../../src/game/card-zones";
 import { freshCombat } from "../../../src/game/combat";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { finishTurn } from "../../../src/game/combat/turns";
@@ -79,6 +79,36 @@ it("uses Echoes Remember to draw another owner's card with Journey Loom", () => 
       (id) => result.state.cards.find((entry) => entry.id === id)?.ownerId !== card.ownerId,
     ),
   ).toBe(true);
+});
+
+it("Journey Loom and Auto-play agree on living owners and the draw pool", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["cadenza", "mossguard", "prismram"])));
+  const card = state.cards.find((entry) => entry.definitionId === "cadenza-echoes-remember")!;
+  const own = state.cards.find((entry) => entry.ownerId === card.ownerId && entry.id !== card.id)!;
+  const fallen = state.cards.find((entry) => entry.ownerId === state.team[1]!.id)!;
+  const living = state.cards.find((entry) => entry.ownerId === state.team[2]!.id)!;
+  state.team[1]!.health = 0;
+  state.boons = ["journey-loom"];
+  state.battle.hand = [card.id, living.id];
+  state.battle.buffer = [];
+  state.battle.draw = [own.id, fallen.id];
+  state.battle.discard = [];
+  const hasChoice = () =>
+    rankedBattleChoices(state, false).some(
+      (choice) => choice.command.type === "play" && choice.command.cardId === card.id,
+    );
+  expect(hasChoice()).toBe(false);
+  const before = structuredClone(state);
+  journeyReturn(state, card.ownerId, []);
+  expect(state).toEqual(before);
+
+  state.battle.hand = [card.id];
+  state.battle.draw.push(living.id);
+  expect(hasChoice()).toBe(true);
+  const result = dispatch(state, { type: "play", cardId: card.id, autoEndTurn: false });
+  expect(result.accepted).toBe(true);
+  expect(result.state.battle!.hand).toContain(living.id);
+  expect(result.state.battle!.draw).toEqual([own.id, fallen.id]);
 });
 
 it("does not give a defeated Echo a Freeze recovery window after its status tick", () => {
