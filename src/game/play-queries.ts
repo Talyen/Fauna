@@ -36,9 +36,9 @@ function hasChosenRecipient(state: BattleState, def: CardDefinition) {
       state.reserves.some((unit) => recipientEligible(unit, def))
     );
   if (def.effect === "swapChosen") return state.reserves.some((unit) => recipientEligible(unit, def));
-  return !!findLivingBattlefield(state, mode === "enemy" ? "enemy" : "player", (unit) =>
-    recipientEligible(unit, def),
-  );
+  const side = mode === "enemy" ? "enemy" : "player";
+  if (def.effect !== "heal" || def.target !== "injured") return !!findLivingBattlefield(state, side);
+  return !!findLivingBattlefield(state, side, (unit) => recipientEligible(unit, def));
 }
 
 export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
@@ -136,8 +136,7 @@ export interface AvailablePlay extends PlayableCard {
 /** Automatic turn completion only needs to know whether any command exists. */
 export function hasAvailablePlay(state: BattleState): boolean {
   if (!state.battle.hand.length || pendingReplacement(state)) return false;
-  const cards = state.battle.hand.length > 1 ? new Map<string, Card>() : undefined;
-  if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+  let cards: Map<string, Card> | undefined;
   let lastDefinition: CardDefinition | undefined;
   let lastRecipients = false;
   const hasRecipients = (def: CardDefinition) => {
@@ -156,7 +155,11 @@ export function hasAvailablePlay(state: BattleState): boolean {
     }
     return lastRecoverable;
   };
-  for (const id of state.battle.hand) {
+  for (const [index, id] of state.battle.hand.entries()) {
+    if (index === 1) {
+      cards = new Map<string, Card>();
+      for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+    }
     const play = inspectCard(
       state,
       cards ? cards.get(id) : state.cards.find((card) => card.id === id),
@@ -208,12 +211,15 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     );
     if (!play.allowed) continue;
     const mode = cardTargeting(play.def, state);
-    const ids = mode === "enemy" || mode === "ally" ? targetIds(play.def) : [undefined];
+    const commands =
+      mode === "enemy" || mode === "ally"
+        ? targetIds(play.def).map((targetId) => ({ type: "play" as const, cardId, targetId, autoEndTurn }))
+        : [{ type: "play" as const, cardId, targetId: undefined, autoEndTurn }];
     plays.push({
       card: play.card,
       actor: play.actor,
       def: play.def,
-      commands: ids.map((targetId) => ({ type: "play" as const, cardId, targetId, autoEndTurn })),
+      commands,
     });
   }
   return plays;

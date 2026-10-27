@@ -4,7 +4,7 @@ import { takeAttackReflection, publishAttackReflection } from "./attack-reflecti
 import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
 import { findLivingBattlefield, isEnemy, battlefield, healingAllies, isDepartedMinion } from "../battlefield";
-import { packetPolicy, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
+import { packetPolicyView, type DamagePacket, type AttackPacket, type SharedNegate } from "./policy";
 import { roll } from "../random";
 import { hasTalent, creaturePassiveTier, passiveAmount } from "../progression";
 import type { DamageType } from "../content";
@@ -263,7 +263,7 @@ export function* hit(
       cannotDodge: false,
     });
   }
-  const policy = packetPolicy(options);
+  const policy = packetPolicyView(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot
       ? passiveAmount(isEnemy(source) ? undefined : state, source.species, "wrongFoot")
@@ -326,7 +326,7 @@ export function* resolveHit(
   events: GameEvent[],
   options: DamagePacket = { origin: "ability" },
 ): Resolution<HitResult> {
-  const policy = packetPolicy(options);
+  const policy = packetPolicyView(options);
   if (
     (source.health <= 0 && !policy.deadSource) ||
     target.health <= 0 ||

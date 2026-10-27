@@ -40,9 +40,9 @@ export function* restoreHealth(
   source?: Combatant,
   options: { shareOverflow?: boolean; adjusted?: boolean; bounce?: boolean } = {},
 ): Resolution<void> {
+  if (unit.health === 0 && !revive) return;
   const baseAmount = amount;
   if (!options.adjusted) amount = healingValue(state, unit, amount);
-  if (unit.health === 0 && !revive) return;
   const { gain, excess } = restoration(unit, amount);
   const bleedAtRestoration = unit.combat?.bleed ?? 0;
   unit.health += gain;
@@ -221,12 +221,14 @@ export function* grantBlock(
   });
   if (isEnemy(unit) && state.phase === "battle" && state.boons.includes("apple-press")) {
     const stats = ensureCombat(unit);
-    const original = combatantById(state, stats.statusSources.bleed);
-    const source = original && !isEnemy(original) ? original : findLivingBattlefield(state, "player");
-    if (stats.bleed > 0 && source)
-      yield* reaction("resolveHit", state, source, unit, stats.bleed, "bleed", events, {
-        origin: "periodic",
-      });
+    if (stats.bleed > 0) {
+      const original = combatantById(state, stats.statusSources.bleed);
+      const source = original && !isEnemy(original) ? original : findLivingBattlefield(state, "player");
+      if (source)
+        yield* reaction("resolveHit", state, source, unit, stats.bleed, "bleed", events, {
+          origin: "periodic",
+        });
+    }
   }
   if (!isEnemy(unit) && talentChance(state, "light.radiant-guard", events))
     drawKeyword(state, "light", events);

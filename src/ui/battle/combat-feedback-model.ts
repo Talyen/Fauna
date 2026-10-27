@@ -165,7 +165,13 @@ export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
     frame.some(
       (e) =>
         (e.kind === "action" && (e.actionType === "attack" || e.actionType === "support")) ||
-        ("targetId" in e && e.targetId && ["damage", "heal", "block", "knockout", "status"].includes(e.kind)),
+        ("targetId" in e &&
+          e.targetId &&
+          (e.kind === "damage" ||
+            e.kind === "heal" ||
+            e.kind === "block" ||
+            e.kind === "knockout" ||
+            e.kind === "status")),
     ),
   );
 }

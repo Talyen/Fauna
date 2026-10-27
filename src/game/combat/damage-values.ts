@@ -73,7 +73,7 @@ export function modifiedDamage(
       damage += state.currency * (talentRule("light.prosperity").percent / 100);
     if (type === "light" && stats.burn > 0 && hasTalent(state, "light.purge"))
       damage *= 1 + talentRule("light.purge").percent / 100;
-    if (cardLeech && target.health < maximumHealth(target) / 2 && hasTalent(state, "leech.cull-the-weak"))
+    if (cardLeech && hasTalent(state, "leech.cull-the-weak") && target.health < maximumHealth(target) / 2)
       damage *= 1 + talentRule("leech.cull-the-weak").percent / 100;
     if (type === "bleed" && stats.bleed === 0 && hasTalent(state, "bleed.first-blood"))
       damage *= 1 + talentRule("bleed.first-blood").percent / 100;

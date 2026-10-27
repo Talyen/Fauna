@@ -55,15 +55,12 @@ function utf8Size(text: string) {
     const code = text.charCodeAt(i);
     if (code <= 0x7f) bytes++;
     else if (code <= 0x7ff) bytes += 2;
-    else if (
-      code >= 0xd800 &&
-      code <= 0xdbff &&
-      i + 1 < text.length &&
-      text.charCodeAt(i + 1) >= 0xdc00 &&
-      text.charCodeAt(i + 1) <= 0xdfff
-    ) {
-      bytes += 4;
-      i++;
+    else if (code >= 0xd800 && code <= 0xdbff && i + 1 < text.length) {
+      const next = text.charCodeAt(i + 1);
+      if (next >= 0xdc00 && next <= 0xdfff) {
+        bytes += 4;
+        i++;
+      } else bytes += 3;
     } else bytes += 3;
   }
   return bytes;
@@ -144,7 +141,10 @@ function validateJourney(state: GameState) {
       );
   }
   invalid(state.phase === "victory" && (!finalEncounter(state) || state.wins === 0));
-  if (state.phase !== "battle") invalid(Object.values(state.battleXP).some((n) => n !== 0));
+  if (state.phase !== "battle")
+    for (const key in state.battleXP)
+      if (Object.hasOwn(state.battleXP, key))
+        invalid(state.battleXP[key as keyof typeof state.battleXP] !== 0);
 }
 
 function validateExpedition(state: GameState) {
@@ -170,6 +170,14 @@ function validateExpedition(state: GameState) {
 }
 
 const cardIdsBySpecies = new Map<string, ReadonlySet<string>>();
+function speciesHasCard(kind: GameState["team"][number]["species"], cardId: string) {
+  let ids = cardIdsBySpecies.get(kind);
+  if (!ids) {
+    ids = new Set(speciesCards(kind).map((card) => card.id));
+    cardIdsBySpecies.set(kind, ids);
+  }
+  return ids.has(cardId);
+}
 
 function validateRoster(state: GameState) {
   const roster = [...state.team, ...state.reserves];
@@ -192,14 +200,8 @@ function validateRoster(state: GameState) {
       if (card.ownerId === null) return !(card.temporary && card.level === 0 && isFood(card.definitionId));
       const owner = teamById.get(card.ownerId);
       if (!owner) return true;
-      let ids = cardIdsBySpecies.get(owner.species);
-      if (!ids) {
-        ids = new Set();
-        for (const definition of speciesCards(owner.species)) ids.add(definition.id);
-        cardIdsBySpecies.set(owner.species, ids);
-      }
       return (
-        !ids.has(card.definitionId) &&
+        !speciesHasCard(owner.species, card.definitionId) &&
         !(card.temporary && card.definitionId === PEARL.id && owner.species === "memento")
       );
     }),
@@ -322,12 +324,10 @@ function validateBattle(state: BattleState) {
         enemy.power !== original.power ||
         enemy.health > enemy.maxHealth ||
         (enemy.lastAbility !== null &&
-          !speciesCards(enemy.species).some((card) => card.id === enemy.lastAbility) &&
+          !speciesHasCard(enemy.species, enemy.lastAbility) &&
           !(
             unfinishedJourneyLimit(undefined, enemy) > 0 &&
-            battle.enemies.some((owner) =>
-              speciesCards(owner.species).some((card) => card.id === enemy.lastAbility),
-            )
+            battle.enemies.some((owner) => speciesHasCard(owner.species, enemy.lastAbility!))
           )) ||
         enemy.combat.oasisLeech ||
         enemy.combat.deathDoorUsed ||

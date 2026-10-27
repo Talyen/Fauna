@@ -7,6 +7,8 @@ import {
   species,
   SPECIES,
   FIRST_RUN_STARTERS,
+  CARDS,
+  type CardDefinition,
 } from "./content";
 import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
 export { progressionLabel as keywordLabel } from "./keywords";
@@ -57,50 +59,71 @@ const talentsById = new Map<string, (typeof TALENTS)[number]>(TALENTS.map((talen
 const talentsByKeyword = new Map(
   KEYWORDS.map((keyword) => [keyword, TALENTS.filter((talent) => talent.keyword === keyword)]),
 );
+const prerequisitesByTalent = new Map(
+  TALENTS.map((talent) => [
+    talent.id,
+    talentsByKeyword.get(talent.keyword)!.filter((earlier) => earlier.row < talent.row),
+  ]),
+);
 function hasTalentPrerequisites(
   state: Pick<GameState, "talents">,
   talent: (typeof TALENTS)[number],
   selected?: ReadonlySet<string>,
 ) {
-  return talentsByKeyword
-    .get(talent.keyword)!
-    .every(
-      (earlier) =>
-        earlier.row >= talent.row ||
-        (selected ? selected.has(earlier.id) : state.talents.includes(earlier.id)),
-    );
+  return prerequisitesByTalent
+    .get(talent.id)!
+    .every((earlier) => (selected ? selected.has(earlier.id) : state.talents.includes(earlier.id)));
 }
 
 /** Validate the complete selection, including purchases restored from a save. */
 export function validTalentSelection(state: Pick<GameState, "talents" | "keywordXP">): boolean {
   if (!state.talents.length) return true;
+  if (state.talents.length === 1) {
+    const talent = talentsById.get(state.talents[0]!);
+    return (
+      !!talent &&
+      hasTalentPrerequisites(state, talent) &&
+      talentPoints(state.keywordXP[talent.keyword] ?? 0) >= 1
+    );
+  }
   const selected = new Set(state.talents);
   if (selected.size !== state.talents.length) return false;
-  const spent = new Map<Keyword, number>();
+  const spent = new Map<Keyword, { count: number; limit: number }>();
   for (const id of state.talents) {
     const talent = talentsById.get(id);
     if (!talent || !hasTalentPrerequisites(state, talent, selected)) return false;
-    const points = (spent.get(talent.keyword) ?? 0) + 1;
-    if (points > talentPoints(state.keywordXP[talent.keyword] ?? 0)) return false;
-    spent.set(talent.keyword, points);
+    let category = spent.get(talent.keyword);
+    if (!category) {
+      category = { count: 0, limit: talentPoints(state.keywordXP[talent.keyword] ?? 0) };
+      spent.set(talent.keyword, category);
+    }
+    if (++category.count > category.limit) return false;
   }
   return true;
 }
 const keywordsByDefinition = new WeakMap<object, readonly Keyword[]>();
-function definitionCardKeywords(card: Pick<Card, "definitionId">): readonly Keyword[] {
+const authoredCards = new WeakSet<object>(CARDS);
+export function cardKeywordView(card: Pick<Card, "definitionId">): readonly Keyword[] {
   const def = definition(card.definitionId);
   if (!Object.isFrozen(def)) return definitionKeywords(def);
   let keywords = keywordsByDefinition.get(def);
-  if (!keywords) keywordsByDefinition.set(def, (keywords = definitionKeywords(def)));
+  if (!keywords) keywordsByDefinition.set(def, (keywords = Object.freeze(definitionKeywords(def))));
+  return keywords;
+}
+/** Only catalog cards are known to be deeply immutable; adapted and injected cards stay live. */
+export function abilityKeywords(def: CardDefinition): readonly Keyword[] {
+  if (!authoredCards.has(def)) return definitionKeywords(def);
+  let keywords = keywordsByDefinition.get(def);
+  if (!keywords) keywordsByDefinition.set(def, (keywords = Object.freeze(definitionKeywords(def))));
   return keywords;
 }
 /** Return a mutable copy to callers that need the full list. */
 export function cardKeywords(card: Pick<Card, "definitionId">): Keyword[] {
-  return [...definitionCardKeywords(card)];
+  return [...cardKeywordView(card)];
 }
 /** Membership checks do not need a defensive array copy. */
 export function cardHasKeyword(card: Pick<Card, "definitionId">, keyword: Keyword): boolean {
-  return definitionCardKeywords(card).includes(keyword);
+  return cardKeywordView(card).includes(keyword);
 }
 export function xpThreshold(points: number) {
   return 10 * points * (points + 1) - 10 * Math.min(points, 2);
@@ -122,13 +145,15 @@ export function hasTalent(state: Pick<GameState, "talents">, id: TalentId) {
   return state.talents.includes(id);
 }
 export function availablePoints(state: Pick<GameState, "talents" | "keywordXP">, keyword: Keyword) {
+  const total = Math.min(
+    talentPoints(state.keywordXP[keyword] ?? 0),
+    talentsByKeyword.get(keyword)?.length ?? 0,
+  );
+  if (!total) return 0;
   let spent = 0;
   const prefix = `${keyword}.`;
-  for (const id of state.talents) if (id.startsWith(prefix)) spent++;
-  return Math.max(
-    0,
-    Math.min(talentPoints(state.keywordXP[keyword] ?? 0), talentsByKeyword.get(keyword)?.length ?? 0) - spent,
-  );
+  for (const id of state.talents) if (id.startsWith(prefix) && ++spent === total) return 0;
+  return total - spent;
 }
 export function canBuyTalent(state: Pick<GameState, "talents" | "keywordXP">, id: string) {
   const talent = talentsById.get(id);
@@ -150,6 +175,8 @@ export function starterOfferPool(
   pool: readonly SpeciesId[] = starterSpecies(state),
 ): SpeciesId[] {
   if (!state.selected.length) return [...pool];
+  if (state.selected.length === 1)
+    return pool.filter((kind) => kind !== state.selected[0] && !species(kind).legendary);
   const selected = new Set(state.selected);
   return pool.filter((kind) => !selected.has(kind) && !species(kind).legendary);
 }

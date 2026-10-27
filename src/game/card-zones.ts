@@ -93,10 +93,11 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
 }
 /** Cards owned by another living deployed creature can follow a return through Journey Loom. */
 function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
-  const owners = new Set<string>();
-  for (const unit of state.team) if (unit.health > 0 && unit.id !== ownerId) owners.add(unit.id);
+  let owners: Set<string> | undefined;
+  for (const unit of state.team)
+    if (unit.health > 0 && unit.id !== ownerId) (owners ??= new Set()).add(unit.id);
   const cards = new Set<string>();
-  if (owners.size)
+  if (owners)
     for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
   return cards;
 }
@@ -175,6 +176,7 @@ export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
 
 /** Direct Discard draws heal the original owner; recycling, copies and promotion do not. */
 export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) {
+  if (card.ownerId === null) return;
   const owner = state.team.find((unit) => unit.id === card.ownerId && unit.health > 0);
   if (!owner) return;
   for (const keeper of state.team) {

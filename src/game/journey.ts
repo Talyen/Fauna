@@ -178,7 +178,11 @@ function finishBattle(state: BattleState, defeated: boolean) {
     xp,
     currency,
     outcome,
-    recruits: defeated ? [] : encounterSource(state).enemies.map((enemy) => enemy.species),
+    recruits: defeated
+      ? []
+      : state.expedition.pack
+        ? [...state.expedition.pack]
+        : encounterSource(state).enemies.map((enemy) => enemy.species),
     boons,
   };
   // Combat identity ends here. Receipts never refer to mutable roster or enemy objects.
@@ -208,16 +212,13 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
     return true;
   }
   if (state.battle.enemies.every((e) => e.health <= 0)) {
+    const recoversHealth = state.talents.includes("health.vitality");
     for (const row of [state.team, state.reserves])
       for (const creature of row) {
-        victoryRecovery(state, creature, events);
+        if (recoversHealth) victoryRecovery(state, creature, events);
         creature.block = 0;
         creature.combat = freshCombat();
       }
-    for (const enemy of state.battle.enemies) {
-      enemy.combat = freshCombat();
-      enemy.block = 0;
-    }
     finishBattle(state, false);
     events.push({
       kind: finalEncounter(state) ? "victory" : "reward",

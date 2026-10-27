@@ -87,14 +87,14 @@ export function summonEcho(
   const minions = state.battle.minions ?? (state.battle.minions = []);
   let ownedCount = 0;
   let old: (typeof minions)[number] | undefined;
-  const alive: (typeof minions)[number][] = [];
+  let alive: (typeof minions)[number][] | undefined;
   for (const unit of minions) {
     if (unit.minion.ownerId !== actor.id) continue;
     ownedCount++;
-    if (unit.health > 0) alive.push(unit);
+    if (unit.health > 0) (alive ??= []).push(unit);
     else if (unit.health === 0 && !old) old = unit;
   }
-  if (alive.length >= MINION_LIMIT) {
+  if (alive && alive.length >= MINION_LIMIT) {
     for (const unit of alive) restoreHealth(unit, unit.maxHealth, events, false, state);
     return;
   }
@@ -125,9 +125,9 @@ export function summonEcho(
 /** Exactly once per accepted card, after its effects; summons can answer their own creation. */
 export function courtRemembers(state: BattleState, actor: Combatant, events: GameEvent[]) {
   if (actor.health <= 0) return;
+  if (!state.battle.minions?.length) return;
   const amount = passiveAmount(isEnemy(actor) ? undefined : state, actor.species, "courtRemembers");
   if (!amount) return;
-  if (!state.battle.minions?.length) return;
   const echoes = state.battle.minions.filter(
     (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
   );
@@ -147,7 +147,14 @@ export function courtRemembers(state: BattleState, actor: Combatant, events: Gam
 }
 export function removeDepartedMinions(state: GameState) {
   if (!state.battle?.minions) return;
-  if (state.battle.minions.length) {
+  if (state.battle.minions.length === 1) {
+    const unit = state.battle.minions[0]!;
+    if (
+      !state.team.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId) &&
+      !state.battle.enemies.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)
+    )
+      unit.health = 0;
+  } else if (state.battle.minions.length > 1) {
     const present = new Set<string>();
     for (const unit of state.team) if (unit.health > 0) present.add(unit.id);
     for (const unit of state.battle.enemies) if (unit.health > 0) present.add(unit.id);

@@ -89,5 +89,7 @@ export function immediateArtwork(game: GameState) {
       return exhaustive;
     }
   }
-  return [...new Set([...startupBaseArtwork, ...[...ids].map(assetUrl)])];
+  const urls = new Set(startupBaseArtwork);
+  for (const id of ids) urls.add(assetUrl(id));
+  return [...urls];
 }

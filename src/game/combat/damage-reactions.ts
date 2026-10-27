@@ -152,11 +152,13 @@ export function* dodgeResponse(
           yield* reaction("restoreHealth", ally, petals, events, false, state, false, target);
       }
   }
-  const cinderstep = passiveAmount(alliedTarget ? state : undefined, target.species, "dodgeBurn");
-  if (retaliate && cinderstep)
-    yield* reaction("hit", state, target, source, cinderstep, "burn", events, {
-      origin: "statusRetaliation",
-    });
+  if (retaliate) {
+    const cinderstep = passiveAmount(alliedTarget ? state : undefined, target.species, "dodgeBurn");
+    if (cinderstep)
+      yield* reaction("hit", state, target, source, cinderstep, "burn", events, {
+        origin: "statusRetaliation",
+      });
+  }
 }
 export function* blockDepletionRewards(
   { state, source, target, events }: HitContext,
@@ -205,14 +207,10 @@ export function* blockDepletionRewards(
 }
 export function* faultline({ state, target, events }: HitContext, depletedBlock: boolean): Resolution<void> {
   const allied = !isEnemy(target);
-  if (
-    !depletedBlock ||
-    target.health <= 0 ||
-    !battlefieldHasId(state, allied ? "player" : "enemy", target.id)
-  )
-    return;
+  if (!depletedBlock || target.health <= 0) return;
   const armor = passiveAmount(allied ? state : undefined, target.species, "faultline");
-  if (armor) yield* reaction("grantArmor", state, target, armor, events);
+  if (armor && battlefieldHasId(state, allied ? "player" : "enemy", target.id))
+    yield* reaction("grantArmor", state, target, armor, events);
 }
 export function publishHit(
   { source, target, type, events }: HitContext,

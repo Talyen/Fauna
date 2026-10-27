@@ -6,7 +6,13 @@ import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
 import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
-import { battlefield, battlefieldView, healingAllies, isDepartedMinion } from "../battlefield";
+import {
+  battlefield,
+  battlefieldView,
+  findLivingBattlefield,
+  healingAllies,
+  isDepartedMinion,
+} from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { scalePower } from "./ability-values";
 import { species } from "../content";
@@ -30,7 +36,13 @@ import { roll } from "../random";
 import { drawDiscard, draw, redrawHand } from "../card-zones";
 import type { GameState, GameEvent } from "../types";
 import { applyExtras, reflectExtras } from "./ability-extras";
-import { actorPower, friendlyRow, opposingRow, alive, type PrimaryContext } from "./ability-context";
+import {
+  actorPower,
+  friendlyRow,
+  livingFriends,
+  livingOpponents,
+  type PrimaryContext,
+} from "./ability-context";
 import type { Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
@@ -82,7 +94,7 @@ export function executePrimary(context: PrimaryContext) {
           : def.damageType;
       const targets =
         def.target === "allEnemies"
-          ? alive(opposingRow(state, action))
+          ? livingOpponents(state, action)
           : target && target.health > 0
             ? [target, ...(additionalTarget && additionalTarget.health > 0 ? [additionalTarget] : [])]
             : [];
@@ -145,7 +157,7 @@ export function executePrimary(context: PrimaryContext) {
     case "guard": {
       const targets =
         def.target === "allAllies"
-          ? alive(friendlyRow(state, action))
+          ? livingFriends(state, action)
           : cardTargeting(def) === "self"
             ? [actor]
             : friendlyRow(state, action).filter((unit) => unit.id === action.allyTargetId);
@@ -193,7 +205,7 @@ export function executePrimary(context: PrimaryContext) {
     case "sparkDecoy":
       if (def.effect === "dreamDouble") grantStatus(actor, "thorns", value, events, state);
       else
-        for (const recipient of alive(opposingRow(state, action))) {
+        for (const recipient of livingOpponents(state, action)) {
           if (actor.health <= 0) break;
           const result = applyHarmfulStatus(state, actor, recipient, value, "burn", events);
           for (const depletion of result.depletions) triggerArmorBreak(state, depletion, events);
@@ -214,7 +226,7 @@ export function executePrimary(context: PrimaryContext) {
       return;
     case "nightmareHarvest": {
       let removed = 0;
-      for (const recipient of alive(friendlyRow(state, action))) {
+      for (const recipient of livingFriends(state, action)) {
         if (action.actor.health <= 0) break;
         removed += removeEffects(
           recipient,
@@ -238,7 +250,7 @@ export function executePrimary(context: PrimaryContext) {
       else if (!enemy) draw(state, value, events);
       return;
     case "redistributeBlock": {
-      const recipients = alive(friendlyRow(state, action));
+      const recipients = livingFriends(state, action);
       const total = recipients.reduce((sum, unit) => sum + unit.block, 0);
       const share = Math.floor(total / recipients.length);
       const remainder = total % recipients.length;
@@ -267,7 +279,7 @@ export function executePrimary(context: PrimaryContext) {
     case "recover":
       if (!enemy) drawDiscard(state, events, def.allyOnly ? actor.id : undefined);
       applyExtras(state, action, events, {
-        target: friendlyRow(state, action).find((unit) => unit.id === action.allyTargetId && unit.health > 0),
+        target: findLivingBattlefield(state, action.side, (unit) => unit.id === action.allyTargetId),
         recipientOnly: true,
       });
       return;
@@ -275,7 +287,7 @@ export function executePrimary(context: PrimaryContext) {
       if (!enemy) gainMana(state, value, events);
       return;
     case "dodge":
-      for (const unit of def.target === "allAllies" ? alive(friendlyRow(state, action)) : [actor])
+      for (const unit of def.target === "allAllies" ? livingFriends(state, action) : [actor])
         grantTemporaryDodge(unit, value, events);
       return;
     case "teamClearBlind":
@@ -283,7 +295,7 @@ export function executePrimary(context: PrimaryContext) {
         if (action.side === "player") draw(state, value, events);
         else if (action.actor.deck) drawBossCards(state, action.actor.deck, value);
       }
-      for (const unit of alive(friendlyRow(state, action))) {
+      for (const unit of livingFriends(state, action)) {
         if (action.actor.health <= 0) break;
         if (ensureCombat(unit).blind)
           removeEffects(unit, "cleanse", 1, events, state, "blind", undefined, false);
@@ -297,19 +309,19 @@ export function executePrimary(context: PrimaryContext) {
       return;
     }
     case "teamBlind":
-      for (const unit of alive(opposingRow(state, action))) {
+      for (const unit of livingOpponents(state, action)) {
         if (actor.health <= 0) break;
         applyBlind(state, actor, unit, events);
       }
       return;
     case "teamPurge":
-      for (const unit of alive(opposingRow(state, action))) {
+      for (const unit of livingOpponents(state, action)) {
         if (actor.health <= 0) break;
         removeEffects(unit, "purge", Number.MAX_SAFE_INTEGER, events, state, undefined, actor);
       }
       return;
     case "teamCleanse":
-      for (const unit of alive(friendlyRow(state, action))) {
+      for (const unit of livingFriends(state, action)) {
         if (action.actor.health <= 0) break;
         removeEffects(unit, "cleanse", value, events, state, undefined, undefined, false);
       }
@@ -350,7 +362,7 @@ export function executePrimary(context: PrimaryContext) {
     }
     case "springbound":
     case "teamThaw":
-      for (const unit of alive(friendlyRow(state, action))) {
+      for (const unit of livingFriends(state, action)) {
         if (action.actor.health <= 0) break;
         removeControlBuildup(state, unit, "freeze", events, false);
       }

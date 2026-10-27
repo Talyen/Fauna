@@ -3,9 +3,9 @@ import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability
 import { takeCardRepeat } from "./card-repeat";
 import { executePrimary } from "./ability-handlers";
 import { applyExtras } from "./ability-extras";
-import { opposingRow, alive, type AbilityAction, type AbilityOperations } from "./ability-context";
+import { livingOpponents, type AbilityAction, type AbilityOperations } from "./ability-context";
 import { species } from "../content";
-import { definitionKeywords } from "../keywords";
+import { abilityKeywords } from "../progression";
 import { ensureCombat, beginAttack, openingCriticalBonus } from "./index";
 import { chance as succeeds } from "../chance";
 import { boonRule } from "../rules/boons";
@@ -23,7 +23,7 @@ export function executeAbility(
   const grantedRepeat = takeCardRepeat(state, action.side);
   const enemy = action.side === "enemy";
   const randomTarget = def.effect === "attack" && def.target === "randomEnemy";
-  const opponents = randomTarget ? alive(opposingRow(state, action)) : undefined;
+  const opponents = randomTarget ? livingOpponents(state, action) : undefined;
   // Keep the selected target across repeats unless Tangram must continue after a defeat.
   let target =
     opponents !== undefined
@@ -45,7 +45,7 @@ export function executeAbility(
       : action.targetId,
     text: `${name} uses ${def.name}.`,
   });
-  const keywords = definitionKeywords(def);
+  const keywords = abilityKeywords(def);
   beforeAbility(state, actor, target, keywords, enemy, events);
   if (actor.health <= 0) return;
   const stats = ensureCombat(actor);

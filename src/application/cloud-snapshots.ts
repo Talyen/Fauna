@@ -20,7 +20,8 @@ const snapshotSchema = z
 export type CloudSnapshot = z.infer<typeof snapshotSchema>;
 export const cloudName = (s: Pick<CloudSnapshot, "device" | "sequence">) =>
   `fauna-v1-${s.device}-${s.sequence % 2}.json`;
-export const isCloudName = (name: string) => /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+const cloudNamePattern = /^fauna-v1-[a-f0-9]{32}-[01]\.json$/;
+export const isCloudName = (name: string) => cloudNamePattern.test(name);
 const textEncoder = new TextEncoder();
 async function sha(text: string) {
   const bytes = await globalThis.crypto.subtle.digest("SHA-256", textEncoder.encode(text));
@@ -40,17 +41,16 @@ export async function snapshot(
   // Own parent facts before hashing yields; readonly inputs can alias caller-owned data.
   const ancestry = new Set<string>();
   let invalidProfile = false;
-  const parentsAtAdmission = parents.map((parent) => {
+  for (const parent of parents) {
     ancestry.add(parent.id);
     if (parent.profile !== identity.profile) invalidProfile = true;
-    return [...parent.ancestors];
-  });
+  }
   if (invalidProfile) throw new Error("Cloud ancestry belongs to another profile.");
   if (ancestry.size > MAX_ANCESTORS)
     throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
-  for (const parent of parentsAtAdmission) {
-    for (const ancestor of parent) {
+  for (const parent of parents) {
+    for (const ancestor of parent.ancestors) {
       if (ancestry.size >= MAX_ANCESTORS) break;
       ancestry.add(ancestor);
     }

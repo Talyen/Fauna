@@ -1,4 +1,4 @@
-import { battlefield } from "../battlefield";
+import { battlefield, livingBattlefield } from "../battlefield";
 import type { CardDefinition } from "../content/types";
 import type { Creature, Enemy, GameState, GameEvent, BattleState, CombatState } from "../types";
 import type { Combatant } from "./state";
@@ -24,7 +24,10 @@ export const friendlyRow = (state: GameState, action: AbilityAction): Combatant[
   battlefield(state, action.side);
 export const opposingRow = (state: GameState, action: AbilityAction): Combatant[] =>
   battlefield(state, action.side === "player" ? "enemy" : "player");
-export const alive = (row: Combatant[]) => row.filter((unit) => unit.health > 0);
+export const livingFriends = (state: GameState, action: AbilityAction): Combatant[] =>
+  livingBattlefield(state, action.side);
+export const livingOpponents = (state: GameState, action: AbilityAction): Combatant[] =>
+  livingBattlefield(state, action.side === "player" ? "enemy" : "player");
 
 export interface PrimaryContext {
   state: BattleState;
