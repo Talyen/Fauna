@@ -28,10 +28,11 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     for (const unit of state.reserves) {
       if (unit.health <= 0) continue;
       const ids = formationForSwap(all, active, outgoing.id, unit.id);
-      const lineup = ids
-        .map((id) => all.find((entry) => entry.id === id)!)
-        .filter((entry) => entry.health > 0);
-      const kinds = lineup.map((entry) => entry.species);
+      const kinds: (typeof unit.species)[] = [];
+      for (const id of ids) {
+        const entry = all.find((candidate) => candidate.id === id)!;
+        if (entry.health > 0) kinds.push(entry.species);
+      }
       const damage = needsDamage ? offenseValue(state, unit.species) : 0;
       const score =
         (damage > 0 ? 1_000_000 : 0) +
@@ -59,24 +60,22 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
       ];
   }
   const facts = battleBenefitFacts(state);
-  return availablePlays(state, autoEndTurn)
-    .flatMap((play) =>
-      battleBenefits(state, play, facts).flatMap((benefit) => {
-        const { score } = benefit;
-        const command =
-          score > 0 ? play.commands.find((command) => command.targetId === benefit.targetId) : undefined;
-        return command
-          ? [
-              {
-                command,
-                score,
-                reason: benefit.reason ?? `Use ${play.def.name} for its visible benefit`,
-                key: `${play.card.id}:${benefit.targetId ?? ""}`,
-              },
-            ]
-          : [];
-      }),
-    )
+  const choices: (BattleChoice & { key: string })[] = [];
+  for (const play of availablePlays(state, autoEndTurn)) {
+    for (const benefit of battleBenefits(state, play, facts)) {
+      const { score } = benefit;
+      const command =
+        score > 0 ? play.commands.find((entry) => entry.targetId === benefit.targetId) : undefined;
+      if (command)
+        choices.push({
+          command,
+          score,
+          reason: benefit.reason ?? `Use ${play.def.name} for its visible benefit`,
+          key: `${play.card.id}:${benefit.targetId ?? ""}`,
+        });
+    }
+  }
+  return choices
     .sort((a, b) => b.score - a.score || a.key.localeCompare(b.key))
     .map(({ command, score, reason }) => ({ command, score, reason }));
 }

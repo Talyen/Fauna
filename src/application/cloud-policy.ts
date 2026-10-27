@@ -22,9 +22,9 @@ export function reconciliationPlan({
   mode: "startup" | "background";
 }) {
   const records = [...remote, ...(current ? [current] : [])];
-  const heads = newestHeads(records);
   if (mode === "background" && !current)
     return { records, chosen: null, parents: [], preserve: false, install: null, deferred: true };
+  const heads = newestHeads(records);
   const chosen =
     (mode === "background" ? current : null) ??
     heads.find((head) => head.id === current?.id) ??

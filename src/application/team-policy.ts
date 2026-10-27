@@ -13,9 +13,10 @@ function cardCapabilities(kind: SpeciesId): readonly string[] {
     if (card.effect === "attack") {
       result.add("attack");
       if (
-        [card.damageType, card.alternateDamageType].some(
-          (type) => type && type !== "physical" && type !== "stun",
-        )
+        (card.damageType && card.damageType !== "physical" && card.damageType !== "stun") ||
+        (card.alternateDamageType &&
+          card.alternateDamageType !== "physical" &&
+          card.alternateDamageType !== "stun")
       )
         result.add("armorBypass");
     }

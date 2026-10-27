@@ -246,8 +246,9 @@ export function definitionKeywords(definition: {
   else for (const keyword of abilityRule(definition.effect).keywords) add(keyword);
   if (definition.effect === "attack" && definition.alternateDamageType) add(definition.alternateDamageType);
   for (const effect of definition.effects ?? []) {
-    if (!isSupplementalKind(effect.kind)) add(effect.kind);
-    const keyword = isSupplementalKind(effect.kind) ? supplementalRule(effect.kind).keyword : null;
+    const supplemental = isSupplementalKind(effect.kind);
+    if (!supplemental) add(effect.kind);
+    const keyword = supplemental ? supplementalRule(effect.kind).keyword : null;
     if (keyword)
       add(keyword === "damageType" ? effect.damageType! : keyword === "status" ? effect.status! : keyword);
     if (effect.leech) add("leech");

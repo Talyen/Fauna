@@ -83,14 +83,20 @@ export function summonEcho(
   events: GameEvent[],
 ) {
   const minions = state.battle.minions ?? (state.battle.minions = []);
-  const owned = minions.filter((unit) => unit.minion.ownerId === actor.id);
-  const alive = owned.filter((unit) => unit.health > 0);
+  let ownedCount = 0;
+  let old: (typeof minions)[number] | undefined;
+  const alive: (typeof minions)[number][] = [];
+  for (const unit of minions) {
+    if (unit.minion.ownerId !== actor.id) continue;
+    ownedCount++;
+    if (unit.health > 0) alive.push(unit);
+    else if (unit.health === 0 && !old) old = unit;
+  }
   if (alive.length >= MINION_LIMIT) {
     for (const unit of alive) restoreHealth(unit, unit.maxHealth, events, false, state);
     return;
   }
-  const old = owned.find((unit) => unit.health === 0);
-  const id = old?.id ?? `echo-${actor.id}-${owned.length}`;
+  const id = old?.id ?? `echo-${actor.id}-${ownedCount}`;
   const echo = {
     id,
     name: "Echo" as const,

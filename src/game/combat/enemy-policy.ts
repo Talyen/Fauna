@@ -107,6 +107,12 @@ function evaluateEnemyCard(
   return total / 8;
 }
 
+function recipientIds(units: readonly Combatant[], living: boolean) {
+  const ids: string[] = [];
+  for (const unit of units) if (living ? unit.health > 0 : unit.health <= 0) ids.push(unit.id);
+  return ids;
+}
+
 /** Re-evaluate from current combat after every play; no-repeat preference only breaks equal values. */
 export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonly CardDefinition[]) {
   const targetId = highestHealth(battlefield(state, "player"))?.id;
@@ -121,11 +127,9 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
     if (enemy.deck && def.cost > enemy.deck.mana) continue;
     const recipients =
       def.effect === "resurrect"
-        ? (fallenAllies ??= state.battle.enemies.filter((unit) => unit.health <= 0).map((unit) => unit.id))
+        ? (fallenAllies ??= recipientIds(state.battle.enemies, false))
         : cardTargeting(def) === "ally"
-          ? (livingAllies ??= battlefield(state, "enemy")
-              .filter((unit) => unit.health > 0)
-              .map((unit) => unit.id))
+          ? (livingAllies ??= recipientIds(battlefield(state, "enemy"), true))
           : [enemy.id];
     for (const allyTargetId of recipients) {
       let cardValues = values?.get(def);

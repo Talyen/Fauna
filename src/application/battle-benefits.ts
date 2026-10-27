@@ -45,6 +45,12 @@ const priorities = {
   purge: 160,
   statusHarvest: 2000,
 };
+function countMatching<T>(items: readonly T[], predicate: (item: T) => unknown): number {
+  let count = 0;
+  for (const item of items) if (predicate(item)) count++;
+  return count;
+}
+
 interface BattleBenefit {
   targetId?: string;
   reason?: string;
@@ -230,9 +236,9 @@ export function battleBenefits(
       const cleanse = def.effects?.some(
         (effect) =>
           effect.kind === "cleanse" &&
-          (effect.target === "allAllies" ? battlefield(state, "player") : [actor]).some(
-            (unit) => unit.health > 0 && hasHarmfulEffects(unit),
-          ),
+          (effect.target === "allAllies"
+            ? allies().some(hasHarmfulEffects)
+            : actor.health > 0 && hasHarmfulEffects(actor)),
       );
       const attackScore = (outcomes: OrdinaryHit[]) =>
         outcomes.reduce(
@@ -281,13 +287,16 @@ export function battleBenefits(
     case "heal": {
       const automaticRecipients = healingAllies(state);
       if (def.target === "allAllies" || foodForAllies(def, state)) {
-        const benefits = automaticRecipients.map((ally) =>
-          healingBenefit(state, ally, value, play.def.effects),
-        );
-        const restored = benefits.reduce((sum, benefit) => sum + benefit.restored, 0);
-        const utility =
-          benefits.reduce((sum, benefit) => sum + benefit.utility, 0) +
-          automaticRecipients.reduce((sum, ally) => sum + foodDodgeBenefit(state, def, ally), 0);
+        let restored = 0;
+        let benefitUtility = 0;
+        let dodgeUtility = 0;
+        for (const ally of automaticRecipients) {
+          const benefit = healingBenefit(state, ally, value, play.def.effects);
+          restored += benefit.restored;
+          benefitUtility += benefit.utility;
+          dodgeUtility += foodDodgeBenefit(state, def, ally);
+        }
+        const utility = benefitUtility + dodgeUtility;
         if (restored > 0) return support("healing", restored);
         if (utility > 0) return support("utility", utility);
         if (
@@ -325,7 +334,7 @@ export function battleBenefits(
       );
     }
     case "teamClearBlind": {
-      const blinded = allies().filter((unit) => unit.combat?.blind).length;
+      const blinded = countMatching(allies(), (unit) => unit.combat?.blind);
       return blinded > 0
         ? controlRemoval(blinded)
         : def.draw && ordinaryDrawBenefit(state, play, value)
@@ -335,13 +344,13 @@ export function battleBenefits(
     case "repeatNextCard":
       return support(state.battle.repeatNext.player ? "none" : "standardUtility");
     case "springbound": {
-      const frozen = allies().filter((unit) => (unit.combat?.freeze ?? 0) > 0).length;
+      const frozen = countMatching(allies(), (unit) => (unit.combat?.freeze ?? 0) > 0);
       return frozen > 0
         ? controlRemoval(frozen)
         : dodgeSupport(Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0)));
     }
     case "teamThaw":
-      return controlRemoval(allies().filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
+      return controlRemoval(countMatching(allies(), (unit) => (unit.combat?.freeze ?? 0) > 0));
     case "recover": {
       const useful = facts.recoverable(def.allyOnly ? actor.id : undefined);
       if (def.target === "ally") {
@@ -398,12 +407,12 @@ export function battleBenefits(
         healing() > 0 ? healing() : value,
       );
     case "teamBlind": {
-      const useful = facts.livingEnemies().filter((enemy) => enemy.health > 0 && !enemy.combat.blind).length;
+      const useful = countMatching(facts.livingEnemies(), (enemy) => !enemy.combat.blind);
       return support(useful > 0 ? "utility" : "none", useful);
     }
     case "teamPurge": {
       const enemies = facts.livingEnemies();
-      const useful = enemies.filter(hasBeneficialEffects).length;
+      const useful = countMatching(enemies, hasBeneficialEffects);
       const defense = enemies.some((enemy) => enemy.block > 0 || enemy.combat.armor > 0);
       return support(
         useful > 0 ? (defense ? "defensePurge" : "purge") : "none",
@@ -429,15 +438,11 @@ export function battleBenefits(
       return support(!actor.combat?.negate ? "resource" : thorns > 0 ? "protection" : "none", thorns);
     }
     case "sparkDecoy": {
-      const useful = facts
-        .livingEnemies()
-        .filter((enemy) => enemy.health > 0 && enemy.combat.burn < STACK_LIMIT).length;
+      const useful = countMatching(facts.livingEnemies(), (enemy) => enemy.combat.burn < STACK_LIMIT);
       return support(!actor.combat?.negate || useful > 0 ? "utility" : "none", useful * value);
     }
     case "nightmareHarvest": {
-      const useful = battlefield(state, "player").filter(
-        (unit) => unit.health > 0 && hasHarmfulEffects(unit),
-      ).length;
+      const useful = countMatching(allies(), hasHarmfulEffects);
       return support(useful > 0 ? "statusHarvest" : "none", useful);
     }
     case "teamCleanse":
@@ -493,7 +498,7 @@ export function battleBenefits(
       return support(useful > 0 ? "protection" : "none", useful);
     }
     case "nullify": {
-      const useful = allies().filter((unit) => !unit.combat?.nullify).length;
+      const useful = countMatching(allies(), (unit) => !unit.combat?.nullify);
       return support(useful > 0 ? "utility" : "none", useful);
     }
     case "swapDodge":

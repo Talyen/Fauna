@@ -269,11 +269,9 @@ export function* removeEffects(
   )
     count = 0;
   if (kind === "purge" && state && !isEnemy(unit) && state.boons.includes("basalt-glass-bookmark")) {
-    const remaining =
-      Number(unit.block > 0) +
-      beneficialStatuses.filter(
-        (status) => Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0),
-      ).length;
+    let remaining = Number(unit.block > 0);
+    for (const status of beneficialStatuses)
+      if (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0)) remaining++;
     count = Math.min(count, Math.max(0, remaining - 1));
   }
   if (

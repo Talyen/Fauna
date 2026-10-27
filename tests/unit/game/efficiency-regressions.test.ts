@@ -394,3 +394,25 @@ it("keeps passive protection tied to the living deployed battlefield", () => {
   expect(burn(ally)).toBe(100);
   expect(sharedDodgeChance(state, ally!)).toBe(0);
 });
+
+it("reuses the first fallen Echo and restores living Echoes in their original order", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["memento", "mossguard"])));
+  const owner = state.team[0]!;
+  summonEcho(state, owner, "player", 6, []);
+  summonEcho(state, owner, "player", 6, []);
+  const [first, second] = state.battle.minions!;
+  first!.health = 0;
+  const events: Parameters<typeof summonEcho>[4] = [];
+  summonEcho(state, owner, "player", 8, events);
+  expect(state.battle.minions!.map((unit) => unit.id)).toEqual([first!.id, second!.id]);
+  expect(state.battle.minions![0]!.health).toBe(8);
+  expect(events[0]).toMatchObject({ kind: "action", targetId: first!.id });
+  state.battle.minions![0]!.health = 1;
+  second!.health = 1;
+  const healing: Parameters<typeof summonEcho>[4] = [];
+  summonEcho(state, owner, "player", 6, healing);
+  expect(healing.filter((event) => event.kind === "heal").map((event) => event.targetId)).toEqual([
+    first!.id,
+    second!.id,
+  ]);
+});

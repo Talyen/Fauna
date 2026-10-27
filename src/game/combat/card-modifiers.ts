@@ -59,9 +59,10 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
 
 /** Spend already granted effects without rechecking whether the granting Talent is selected. */
 export function consumeCardGrants(actor: Combatant, keywords: readonly ProgressionKeyword[]) {
-  ensureCombat(actor)[talentRule("stun.free-follow-up").state] = false;
-  if (keywords.includes("nature")) ensureCombat(actor)[talentRule("nature.windstep").state] = false;
-  if (keywords.includes("light")) ensureCombat(actor)[talentRule("light.divine-favor").state] = false;
+  const stats = ensureCombat(actor);
+  stats[talentRule("stun.free-follow-up").state] = false;
+  if (keywords.includes("nature")) stats[talentRule("nature.windstep").state] = false;
+  if (keywords.includes("light")) stats[talentRule("light.divine-favor").state] = false;
 }
 
 /** The command snapshots the last-card condition before effects, draws and repeats. */
