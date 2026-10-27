@@ -91,59 +91,45 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
     text: `${definition(state.cards.find((card) => card.id === id)!.definitionId).name} returns to hand`,
   });
 }
-/** Cards owned by another living deployed creature can follow a return through Journey Loom. */
-function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
-  let owners: Set<string> | undefined;
-  for (const unit of state.team)
-    if (unit.health > 0 && unit.id !== ownerId) (owners ??= new Set()).add(unit.id);
+/** Find cards belonging to another living deployed creature without revealing pile order. */
+function journeyReturnEligibility(
+  state: GameState,
+  ownerId: string | null,
+): ((id: string) => boolean) | undefined {
+  if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
+  const { draw, discard } = state.battle;
+  if (!draw.length && !discard.length) return;
+  if (draw.length + discard.length === 1) {
+    const id = draw[0] ?? discard[0];
+    const eligible = state.cards.some(
+      (card) =>
+        card.id === id &&
+        card.ownerId !== null &&
+        card.ownerId !== ownerId &&
+        state.team.some((unit) => unit.id === card.ownerId && unit.health > 0),
+    );
+    return eligible ? (candidate) => candidate === id : undefined;
+  }
+  const owners = new Set<string>();
+  for (const unit of state.team) if (unit.health > 0 && unit.id !== ownerId) owners.add(unit.id);
+  if (!owners.size) return;
   const cards = new Set<string>();
-  if (owners)
-    for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
-  return cards;
-}
-
-function eligibleJourneyReturn(state: GameState, id: string | undefined, ownerId: string) {
-  return state.cards.some(
-    (card) =>
-      card.id === id &&
-      card.ownerId !== null &&
-      card.ownerId !== ownerId &&
-      state.team.some((unit) => unit.id === card.ownerId && unit.health > 0),
-  );
+  for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
+  if (!draw.some((id) => cards.has(id)) && !discard.some((id) => cards.has(id))) return;
+  return (id) => cards.has(id);
 }
 
 /** Inspect the same draw pool without changing its order or revealing a hidden card. */
 export function journeyReturnHasDraw(state: BattleState, ownerId: string | null): boolean {
-  if (
-    !ownerId ||
-    !state.boons.includes("journey-loom") ||
-    (!state.battle.draw.length && !state.battle.discard.length)
-  )
-    return false;
-  if (state.battle.draw.length + state.battle.discard.length === 1) {
-    const id = state.battle.draw[0] ?? state.battle.discard[0];
-    return eligibleJourneyReturn(state, id, ownerId);
-  }
-  const eligible = journeyReturnCards(state, ownerId);
-  if (!eligible.size) return false;
-  return (
-    state.battle.draw.some((id) => eligible.has(id)) || state.battle.discard.some((id) => eligible.has(id))
-  );
+  return !!journeyReturnEligibility(state, ownerId);
 }
 
 /** Recovery and returns weave in another living deployed owner's ordinary draw. */
 export function journeyReturn(state: GameState, ownerId: string | null, events: GameEvent[]) {
   if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
   fillHand(state);
-  if (!state.battle.draw.length && !state.battle.discard.length) return;
-  if (state.battle.draw.length + state.battle.discard.length === 1) {
-    const id = state.battle.draw[0] ?? state.battle.discard[0];
-    if (eligibleJourneyReturn(state, id, ownerId))
-      drawEligibleCard(state, (candidate) => candidate === id, events);
-    return;
-  }
-  const eligible = journeyReturnCards(state, ownerId);
-  if (eligible.size) drawEligibleCard(state, (id) => eligible.has(id), events);
+  const eligible = journeyReturnEligibility(state, ownerId);
+  if (eligible) drawEligibleCard(state, eligible, events);
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   queueCard(state.battle!, handCapacity(state), id);
@@ -226,16 +212,6 @@ export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[
 
 /** Eligibility checks do not need to enumerate the complete ordered draw pool. */
 export function hasDiscardDrawCard(state: GameState, otherOwnerId?: string): boolean {
-  if (!state.battle!.discard.length) return false;
-  if (state.battle!.discard.length === 1) {
-    const card = state.cards.find((entry) => entry.id === state.battle!.discard[0])!;
-    if (otherOwnerId === undefined) return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
-    return (
-      card.ownerId !== null &&
-      card.ownerId !== otherOwnerId &&
-      state.team.some((unit) => unit.id === card.ownerId && unit.health > 0)
-    );
-  }
   return discardDrawPool(state, otherOwnerId, true);
 }
 

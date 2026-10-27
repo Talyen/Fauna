@@ -431,7 +431,7 @@ export const modifierQueries = freeze(
     boons: {
       "overflow-cup": ["./ability-facts#healingBenefit"],
       "velvet-whisk": ["./ability-facts#foodDodgeBenefit"],
-      "journey-loom": ["./card-zones#journeyReturnHasDraw"],
+      "journey-loom": ["./card-zones#journeyReturnEligibility"],
       "last-threshold": ["./ability-facts#healingBenefit"],
       "pumpkin-tureen": ["./card-rules#foodForAllies"],
       "yarrow-salve-tin": ["./ability-facts#healingBenefit"],

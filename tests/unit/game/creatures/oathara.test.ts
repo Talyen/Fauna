@@ -6,9 +6,20 @@ import { oatharaBattle } from "../../../support/oathara";
 import { dispatch, previewCard } from "../../../../src/game/engine";
 import { definition, species, speciesCards, FIRST_RUN_STARTERS } from "../../../../src/game/content";
 import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
-import { inspectCardPlay, availablePlays } from "../../../../src/game/play-queries";
+import {
+  inspectCardPlay,
+  availablePlays,
+  chosenRecipients,
+  playTargetError,
+} from "../../../../src/game/play-queries";
 import { cardActor } from "../../../../src/game/card-actors";
-import { draw, drawKeyword, MAX_HAND_SIZE } from "../../../../src/game/card-zones";
+import {
+  draw,
+  drawKeyword,
+  journeyReturn,
+  journeyReturnHasDraw,
+  MAX_HAND_SIZE,
+} from "../../../../src/game/card-zones";
 import { executeAbility } from "../../../../src/game/combat/abilities";
 import { freshCombat, hit, removeEffects } from "../../../../src/game/combat/index";
 import { swapFromCard } from "../../../../src/game/team";
@@ -156,6 +167,47 @@ describe("Oathara", () => {
       drawKeyword(draft, "light");
     });
     expect(absent.battle.hand).toEqual([]);
+  });
+
+  it("keeps Journey Loom's availability aligned with the actual draw across both piles", () => {
+    const base = oatharaBattle();
+    const owner = base.team[0]!;
+    const living = base.cards.find((card) => card.ownerId === base.team[2]!.id)!;
+    const fallen = base.cards.find((card) => card.ownerId === base.team[1]!.id)!;
+    const own = base.cards.find((card) => card.ownerId === owner.id)!;
+    for (const pile of ["draw", "discard"] as const) {
+      for (const ids of [[own.id], [fallen.id], [living.id], [own.id, fallen.id], [fallen.id, living.id]]) {
+        const game = structuredClone(base);
+        game.boons = ["journey-loom"];
+        game.battle.hand = [];
+        game.battle.buffer = [];
+        game.battle.draw = [];
+        game.battle.discard = [];
+        game.battle[pile] = ids.slice();
+        const expected = ids.includes(living.id);
+        const before = structuredClone(game);
+        expect(journeyReturnHasDraw(game, owner.id)).toBe(expected);
+        expect(game).toEqual(before);
+        journeyReturn(game, owner.id, []);
+        expect(game.battle.hand.includes(living.id)).toBe(expected);
+        if (!expected) expect(game).toEqual(before);
+      }
+    }
+  });
+
+  it("accepts exactly the displayed resurrection targets, including fallen backups", () => {
+    const game = produce(oatharaBattle(), (draft) => {
+      addReserve(draft, "fallen-backup", "coralcurl", 0, freshCombat());
+      addReserve(draft, "living-backup", "prismram", 30, freshCombat());
+    });
+    const def = definition(vow);
+    const recipients = chosenRecipients(game, def).map((unit) => unit.id);
+    expect(recipients).toEqual([game.team[1]!.id, "fallen-backup"]);
+    for (const unit of [...game.team, ...game.reserves, ...game.battle.enemies])
+      expect(playTargetError(game, def, game.team[0]!.id, unit.id) === null).toBe(
+        recipients.includes(unit.id),
+      );
+    expect(playTargetError(game, def, game.team[0]!.id)).toBe("Choose a knocked-out ally.");
   });
 
   it("resets allowance at turn start, not through resurrection, repeats or swapping", () => {
