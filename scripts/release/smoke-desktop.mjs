@@ -134,8 +134,14 @@ try {
   // Exercise automatic turn settlement with a known attack that does not restore Mana.
   const attackCardId = await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
-    const attack = state.cards.find((card) => card.definitionId === "emberback-attack");
-    if (!attack) throw new Error("Smoke lineup has no Ember Charge");
+    // The knocked-out starter may itself have been Emberback, so choose an
+    // attack from one of the known living teammates after replacement.
+    const activeIds = new Set(state.team.filter((unit) => unit.health > 0).map((unit) => unit.id));
+    const attack = state.cards.find(
+      (card) =>
+        activeIds.has(card.ownerId) && ["emberback-attack", "prismram-attack"].includes(card.definitionId),
+    );
+    if (!attack) throw new Error("Smoke lineup has no suitable single-target attack");
     state.battle.hand = [attack.id];
     state.battle.draw = state.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
     state.battle.buffer = [];

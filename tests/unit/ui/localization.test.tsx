@@ -2223,7 +2223,7 @@ it("uses the reviewed card rule for both artwork announcements and tooltip value
     </LocalizationProvider>,
   );
   expect(
-    screen.getByRole("button", { name: "Boulder Brace, Mossguard, 1 Mana, Gagne 6 Blocage" }),
+    screen.getByRole("button", { name: "Appui de rocher, Mossguard, 1 Mana, Gagne 6 Blocage" }),
   ).toBeTruthy();
   expect(view.container.textContent).toContain("Gagne 12 Blocage");
   expect(screen.getByText("Blocage").getAttribute("data-keyword")).toBe("block");
