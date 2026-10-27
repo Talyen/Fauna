@@ -2501,6 +2501,18 @@
     "sourceHash": "93be031a81e1f34313d00a182a26ba11cab640e62617b5d53db92c97acf44053",
     "text": "每回合打出第二张牌后，为受伤最重的盟友恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.cadenza.title": {
+    "reviewed": true,
+    "source": "The song of forgotten places",
+    "sourceHash": "a4c71359f9a664d2eacb9470fc40f2cc158e07c745ac0e79e50dbe269e5c4112",
+    "text": "遗忘之地的歌"
+  },
+  "content.species.cadenza.trait": {
+    "reviewed": true,
+    "source": "Living Chorus",
+    "sourceHash": "0e062ae126e13ab639da8b26c2e6dce50edc8e68cc4fb65aca5bd0f6cc308049",
+    "text": "生生合唱"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2536,6 +2548,18 @@
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
     "sourceHash": "a331ec93e49813d19820cc491ede33af59d1358872576ebc8fc9cf2ae7a52b6c",
     "text": "被命中时反击，造成{{value0}}点<keyword0>中毒</keyword0>伤害"
+  },
+  "content.species.captoad.title": {
+    "reviewed": true,
+    "source": "Beneath the spotted cap",
+    "sourceHash": "a3b568c2222751f25a19355faec9d214234aaf9f7ed87de35c5b934a1810f6ae",
+    "text": "斑点伞盖之下"
+  },
+  "content.species.captoad.trait": {
+    "reviewed": true,
+    "source": "Sporecoat",
+    "sourceHash": "b10772ce2de53e1e34f8cf09ae23e8f6f63c54943234ae0453357860e9b3ffd0",
+    "text": "孢子外衣"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2573,6 +2597,18 @@
     "sourceHash": "6b8815f18775ce1ba89b46dafd387f4022773822d7de88866c68bdc365f6fbea",
     "text": "每回合的第一个能力有{{value0}}%的概率重复发动"
   },
+  "content.species.chimecricket.title": {
+    "reviewed": true,
+    "source": "The evening chorus",
+    "sourceHash": "f6ff93774268a163585560d26a880d47a78c8eac539c2ba6c26ff4690d0a2e08",
+    "text": "暮色合唱"
+  },
+  "content.species.chimecricket.trait": {
+    "reviewed": true,
+    "source": "Encore",
+    "sourceHash": "35ce9f7f77e6a7d9d9358f4d8bf7a893577c18e01dddad8664ef22c4dada6a58",
+    "text": "再来一曲"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2608,6 +2644,18 @@
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
     "sourceHash": "14a2e701275e3cc33a833ebc9d2c86d03ca6adc35bc0d5d54694538dde7dca08",
     "text": "<keyword0>闪避</keyword0>时对攻击者造成{{value0}}点<keyword1>灼烧</keyword1>伤害"
+  },
+  "content.species.cindernewt.title": {
+    "reviewed": true,
+    "source": "The dancing ember",
+    "sourceHash": "d37caa330d338d3dab260298d7399dca7fd93f85e6b568beb4b4d967122b3762",
+    "text": "起舞的余烬"
+  },
+  "content.species.cindernewt.trait": {
+    "reviewed": true,
+    "source": "Cinderstep",
+    "sourceHash": "a25e8911280edfe5e3ee24c83a0b0691fc6d23a1073c203b865aa7c71ab67018",
+    "text": "余烬步"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2645,6 +2693,18 @@
     "sourceHash": "31f2dfae539359f4d8e2ed87b5ec0aad86aaf9c001921d73e87a8c876c7fcbe1",
     "text": "你的<keyword1>格挡</keyword1>被击破时造成{{value0}}点<keyword0>水</keyword0>伤害"
   },
+  "content.species.coralcurl.title": {
+    "reviewed": true,
+    "source": "The sheltered reef",
+    "sourceHash": "367d6c3a45d6dfa8ea60f907a8f955426ca783108290573d1436639c7b86f4d7",
+    "text": "庇护之礁"
+  },
+  "content.species.coralcurl.trait": {
+    "reviewed": true,
+    "source": "Bubbleburst",
+    "sourceHash": "3aab49d67aa157aacb892b44b0616e2bc58a9d711de449f3aac2ff2d79074786",
+    "text": "泡沫迸裂"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2680,6 +2740,18 @@
     "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
     "sourceHash": "7600bd446b9b622ec3286e050f88f7b4892acd52ccb6a96b8990dcfff35fc974",
     "text": "每回合第一次攻击必定<keyword0>暴击</keyword0>"
+  },
+  "content.species.dawncall.title": {
+    "reviewed": true,
+    "source": "The sunrise herald",
+    "sourceHash": "2a067dc951ad0bc631e6eef2bb28703606fa9708baafd32e87c687c58f1d3634",
+    "text": "日出使者"
+  },
+  "content.species.dawncall.trait": {
+    "reviewed": true,
+    "source": "Early Bird",
+    "sourceHash": "e661c833fbc647b63b3ce67fdcd0d511e1f90331871039dcfb72508804f98bb0",
+    "text": "早起鸟"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,

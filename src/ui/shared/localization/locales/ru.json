@@ -2501,6 +2501,18 @@
     "sourceHash": "e3ff39a1f67ce0137219f26848cb7713b4d6ac560322be20ef96fc185697eca8",
     "text": "После вашей второй карты за ход восстановите {{value0}} <keyword0>здоровья</keyword0> наиболее раненому союзнику"
   },
+  "content.species.cadenza.title": {
+    "reviewed": true,
+    "source": "The song of forgotten places",
+    "sourceHash": "57d4c2d607bf0370d68d7e7234bbb6beb5b6bcd7371b969a45fbfc6b1a4d1f53",
+    "text": "Песнь забытых мест"
+  },
+  "content.species.cadenza.trait": {
+    "reviewed": true,
+    "source": "Living Chorus",
+    "sourceHash": "9aee6d9814d1f77135eab9baf41a4f9834ffe360ad251a9c67456535d6aa0959",
+    "text": "Живой хор"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2536,6 +2548,18 @@
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
     "sourceHash": "4d66b5543d8fbdaa1f0e8744f55cb93893f5c1095b07b840bbe905c5c3c6aadf",
     "text": "При попадании по вам отвечайте {{value0}} уроном типа «<keyword0>Яд</keyword0>»"
+  },
+  "content.species.captoad.title": {
+    "reviewed": true,
+    "source": "Beneath the spotted cap",
+    "sourceHash": "edab89305594ce69109f7204a73d0e0386c022d791d3ab4a30f8ffc921356f02",
+    "text": "Под пятнистой шляпкой"
+  },
+  "content.species.captoad.trait": {
+    "reviewed": true,
+    "source": "Sporecoat",
+    "sourceHash": "77de3fc6400c01cd35ae99f690b2500f11c9dd159c0d3919ad3b92798605d18a",
+    "text": "Покров спор"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2573,6 +2597,18 @@
     "sourceHash": "4e01103dfd9d8bc2b6d55a9b252315c362a25c3d2e2afbf5d593876d5be05c67",
     "text": "Ваша первая способность в каждом ходу с вероятностью {{value0}}% повторяется"
   },
+  "content.species.chimecricket.title": {
+    "reviewed": true,
+    "source": "The evening chorus",
+    "sourceHash": "a60cd344efcf63c1b4018e3ea9e1a8cae7584b1122221a0d8ef02980a89f329b",
+    "text": "Вечерний хор"
+  },
+  "content.species.chimecricket.trait": {
+    "reviewed": true,
+    "source": "Encore",
+    "sourceHash": "19dee03a4480acb1b1031183e2a345b34540913289dd4aa7e9e19ddd54b35045",
+    "text": "На бис"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2608,6 +2644,18 @@
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
     "sourceHash": "7330d594f679b682c8dbebead58c000da00d9ffe7b3d2e128c2561d9dfa56251",
     "text": "Когда вы <keyword0>уклоняетесь</keyword0>, нанесите атакующему {{value0}} урона типа «<keyword1>Горение</keyword1>»"
+  },
+  "content.species.cindernewt.title": {
+    "reviewed": true,
+    "source": "The dancing ember",
+    "sourceHash": "8ac6f38dfc29a911190fb149eac97a97baf7b4b53e5af4282abc01d213b09a06",
+    "text": "Танцующий уголёк"
+  },
+  "content.species.cindernewt.trait": {
+    "reviewed": true,
+    "source": "Cinderstep",
+    "sourceHash": "0e59bc2c70ddf03ab8facdc1b20bb915d2c8c3ea727f03a8e2e8bf1f6e649800",
+    "text": "Шаг уголька"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2645,6 +2693,18 @@
     "sourceHash": "c912f860bde54fc4de6451459d0f9dcb6320db609fe16b9743dd72067a8d56e0",
     "text": "Когда ваш <keyword1>блок</keyword1> ломается, нанесите {{value0}} урона типа «<keyword0>Вода</keyword0>»"
   },
+  "content.species.coralcurl.title": {
+    "reviewed": true,
+    "source": "The sheltered reef",
+    "sourceHash": "b5200f5cb03ba563f9c6382b2eb5be135fbfa4e8020a522df2014363d867fbe6",
+    "text": "Укрытый риф"
+  },
+  "content.species.coralcurl.trait": {
+    "reviewed": true,
+    "source": "Bubbleburst",
+    "sourceHash": "b33c48f8f4e5cfa7dac2e4525d59496117169edbbf2249020291233b0721cae3",
+    "text": "Всплеск пузырей"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2680,6 +2740,18 @@
     "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
     "sourceHash": "1e2af0ffa326474b761455114b8cccbf1ab5f6164daa8d6f6348999dabca56ec",
     "text": "Первая ваша атака за ход — <keyword0>критический удар</keyword0>"
+  },
+  "content.species.dawncall.title": {
+    "reviewed": true,
+    "source": "The sunrise herald",
+    "sourceHash": "8fb1d8c099111ced341cad5e40916621f9234a372494b2e40a0fbc6146602855",
+    "text": "Вестник рассвета"
+  },
+  "content.species.dawncall.trait": {
+    "reviewed": true,
+    "source": "Early Bird",
+    "sourceHash": "c2a622177302d126228005d56a0600ed694d549f484931930e62094e676726de",
+    "text": "Ранняя пташка"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,

@@ -2501,6 +2501,18 @@
     "sourceHash": "a62d0dc98fe3b1c691522d9e04ff9adbf6fa4f271407f0dadead3ec7d36b71e1",
     "text": "Stelle nach deiner zweiten Karte pro Zug dem am stärksten verletzten Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.species.cadenza.title": {
+    "reviewed": true,
+    "source": "The song of forgotten places",
+    "sourceHash": "fff927b3292a30bbe4c2dd1219466bcb19c470765dec7c5dd4e1d724c980b635",
+    "text": "Das Lied vergessener Orte"
+  },
+  "content.species.cadenza.trait": {
+    "reviewed": true,
+    "source": "Living Chorus",
+    "sourceHash": "990f5d6e608a8b3c9b3e84a257ff0e91060f4a81c3b0ab65672d1c5b343fa8de",
+    "text": "Lebendiger Chor"
+  },
   "content.species.captoad.passive.0.rule": {
     "reviewed": true,
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
@@ -2536,6 +2548,18 @@
     "source": "Retaliate with {{value0}} <keyword0>Poison</keyword0> damage when hit",
     "sourceHash": "36a6b8047c8a16dd9c5e95dd80937b54b4f0b4814e047464d1b02843a6cc2b4b",
     "text": "Vergelte Treffer mit {{value0}} Schaden vom Typ <keyword0>Gift</keyword0>"
+  },
+  "content.species.captoad.title": {
+    "reviewed": true,
+    "source": "Beneath the spotted cap",
+    "sourceHash": "228ddceb79b1c1348607b17e928c04ba3c708244e963fb20d2780a591407a9df",
+    "text": "Unter dem gefleckten Hut"
+  },
+  "content.species.captoad.trait": {
+    "reviewed": true,
+    "source": "Sporecoat",
+    "sourceHash": "0f8b8f34a8b127faa858ea6969253be828e4d49c9101b9f98ea5a39a27bf8dd4",
+    "text": "Sporenmantel"
   },
   "content.species.chimecricket.passive.0.rule": {
     "reviewed": true,
@@ -2573,6 +2597,18 @@
     "sourceHash": "4b0631daf1a7f0f0f110e11f828588180ed401ec3ccf6425e597d86db38e915f",
     "text": "Deine erste Fähigkeit pro Zug hat eine Chance von {{value0}}%, sich zu wiederholen"
   },
+  "content.species.chimecricket.title": {
+    "reviewed": true,
+    "source": "The evening chorus",
+    "sourceHash": "7fa1ca5fa2f94cfb8cef7ca1e7da1ed96562249d4ae098638431f3bd8087b57e",
+    "text": "Der Abendchor"
+  },
+  "content.species.chimecricket.trait": {
+    "reviewed": true,
+    "source": "Encore",
+    "sourceHash": "8d4a358c4b50f134e0b43d2dc1c67c18df65729d52701ac99ca5cb900545f870",
+    "text": "Zugabe"
+  },
   "content.species.cindernewt.passive.0.rule": {
     "reviewed": true,
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
@@ -2608,6 +2644,18 @@
     "source": "When you <keyword0>Dodge</keyword0>, deal {{value0}} <keyword1>Burn</keyword1> damage to the attacker",
     "sourceHash": "069031dc57d290a024c1b23f3e4d17c73f10817ae918b39e21f7106045790942",
     "text": "Wenn du <keyword0>ausweichst</keyword0>, füge dem Angreifer {{value0}} Schaden vom Typ <keyword1>Brand</keyword1> zu"
+  },
+  "content.species.cindernewt.title": {
+    "reviewed": true,
+    "source": "The dancing ember",
+    "sourceHash": "f4aad023a4a932f52b29fb91047e2812f22399c440b52e0c571094c84922b72b",
+    "text": "Die tanzende Glut"
+  },
+  "content.species.cindernewt.trait": {
+    "reviewed": true,
+    "source": "Cinderstep",
+    "sourceHash": "fe40fa226f88256fef4b358e34c80d3fd57f92b8b0926584b7036424f1e87ced",
+    "text": "Glutschritt"
   },
   "content.species.coralcurl.passive.0.rule": {
     "reviewed": true,
@@ -2645,6 +2693,18 @@
     "sourceHash": "73d8584be603951a71ce13a7f352a2c9c7fb41e7fd9af7b26ccdd039cedc2ef6",
     "text": "Füge {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> zu, wenn dein <keyword1>Block</keyword1> bricht"
   },
+  "content.species.coralcurl.title": {
+    "reviewed": true,
+    "source": "The sheltered reef",
+    "sourceHash": "d7be958b91afbf2902b1944736693bc74a8006a0499051857b4339a751af5434",
+    "text": "Das geschützte Riff"
+  },
+  "content.species.coralcurl.trait": {
+    "reviewed": true,
+    "source": "Bubbleburst",
+    "sourceHash": "7b4c1c78128bb500f931f654a716c26e3aec73bd5b7261872b19b6462abd9fdc",
+    "text": "Blasenplatzer"
+  },
   "content.species.dawncall.passive.0.rule": {
     "reviewed": true,
     "source": "Your first attack each turn gains {{value0}}% <keyword0>Critical hit</keyword0> chance",
@@ -2680,6 +2740,18 @@
     "source": "Your first attack each turn is a <keyword0>Critical Hit</keyword0>",
     "sourceHash": "35d72c9cabf0fb8d219491763634ddcc0cbf93414853f323d20a7c30f854489d",
     "text": "Dein erster Angriff pro Zug ist ein <keyword0>kritischer Treffer</keyword0>"
+  },
+  "content.species.dawncall.title": {
+    "reviewed": true,
+    "source": "The sunrise herald",
+    "sourceHash": "dfe1433d6a6ad557313e3bb1502eb84754bbd57a439a511d13aa58c480efbd25",
+    "text": "Der Bote des Sonnenaufgangs"
+  },
+  "content.species.dawncall.trait": {
+    "reviewed": true,
+    "source": "Early Bird",
+    "sourceHash": "1b717339a94fdfcf125b0ff391a8cc41a12ae4f088da811ae66f10697ab76633",
+    "text": "Früher Vogel"
   },
   "content.species.dulcera.passive.0.rule": {
     "reviewed": true,
