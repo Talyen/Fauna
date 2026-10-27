@@ -81,8 +81,6 @@ for (const [group, layouts] of [
       }
     };
     await inspectLayouts("boon-merchant-shelf", async () => {
-      for (const control of await page.getByRole("button", { name: /^Buy / }).all())
-        await expectControlColors(control, "--foreground");
       const row = await page.locator(".merchant-heading .screen-heading").boundingBox();
       const wallet = await page.locator(".merchant-wallet").boundingBox();
       expect(wallet!.y).toBeGreaterThanOrEqual(row!.y);

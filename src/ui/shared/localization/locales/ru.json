@@ -179,12 +179,6 @@
     "sourceHash": "d2914a70ad34110fe155685823ae3cf98726213bd647626a219bc0ea36f9e3b7",
     "text": "Выбрать: {{name}}"
   },
-  "boons.inspect": {
-    "reviewed": true,
-    "source": "Inspect {{name}}",
-    "sourceHash": "ad181bb463008fe372ea9a8767a6e2bda0aaa89d8ca405a3d320c4b0f15c56a5",
-    "text": "Осмотреть: {{name}}"
-  },
   "boons.pages": {
     "reviewed": true,
     "source": "Boon pages",

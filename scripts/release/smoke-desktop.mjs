@@ -34,8 +34,8 @@ try {
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "Play", exact: true }).click();
   const starterOffer = window.locator(".draft-grid .creature-card").first();
-  const starterName = (await starterOffer.getAttribute("aria-label")).replace(/^Inspect /, "");
-  await starterOffer.click();
+  const starterName = (await starterOffer.getAttribute("aria-label")).replace(/^Recruit /, "");
+  await starterOffer.click({ button: "right" });
   await window.getByRole("heading", { name: starterName, exact: true }).waitFor();
   await window.keyboard.press("Escape");
   await window.getByRole("button", { name: `Recruit ${starterName}`, exact: true }).click();

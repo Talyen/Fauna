@@ -39,7 +39,6 @@ it("replaces the shelf with the purchased Boon reward, restores it on reload and
   expect(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })).toHaveLength(3);
   expect(screen.queryByText("Limit 1 per customer - No Refunds!")).toBeNull();
   expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
   fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })[0]!);
   expect(send).toHaveBeenCalledExactlyOnceWith({
     type: "buyBoon",
@@ -76,7 +75,9 @@ it("shows the stocked Boon rules when its artwork receives keyboard focus", asyn
   render(<SupportScreen game={game} send={() => true} />);
   document.documentElement.dataset.focus = "visible";
   try {
-    fireEvent.focus(screen.getByRole("button", { name: `Inspect ${boon.name}` }));
+    fireEvent.focus(
+      screen.getByRole("button", { name: `Buy ${boon.name} for ${game.support.stock[0]!.price} Gold` }),
+    );
     const tooltip = await screen.findByRole("tooltip");
     expect(tooltip.textContent).toContain(boon.text);
     expect(tooltip.textContent).toContain("One per visit");
@@ -139,7 +140,6 @@ it("keeps unavailable offers inspectable and rejects purchases with their specif
   });
   const send = vi.fn(() => true);
   const { rerender } = render(<SupportScreen game={requireMerchant(game)} send={send} />);
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
   expect(screen.getAllByText("Not enough Gold")).toHaveLength(3);
   fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })[0]!);
   expect(send).not.toHaveBeenCalled();

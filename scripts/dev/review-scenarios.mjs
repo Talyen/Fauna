@@ -384,7 +384,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   }
   if (scenario.name === "inspection") {
     await button("Continue").click();
-    await page.locator(".recruit-options .creature-card").first().click();
+    await page.locator(".recruit-options .creature-card").first().click({ button: "right" });
     await expect(page.locator(".inspection")).toBeVisible();
   }
   if (scenario.name === "battle-rewards")

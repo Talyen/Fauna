@@ -13,8 +13,8 @@ test("recruitment adds a backup without exposing free lineup changes", async ({ 
   expect(await state(page)).toEqual(fixture);
   await continueToRecruit(page);
   const beforeInspection = await state(page);
-  const artwork = page.getByRole("button", { name: "Inspect Pollenmoth", exact: true });
-  await artwork.click();
+  const artwork = page.getByRole("button", { name: "Recruit Pollenmoth", exact: true });
+  await artwork.click({ button: "right" });
   await expect(page.getByRole("heading", { name: "Pollenmoth", exact: true })).toBeVisible();
   await expect(page.getByRole("dialog").getByRole("button", { name: /Recruit|Choose/ })).toHaveCount(0);
   await page.keyboard.press("Escape");

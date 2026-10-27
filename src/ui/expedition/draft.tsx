@@ -4,8 +4,6 @@ import { useLayoutEffect, useRef } from "react";
 import { returnFocus } from "../shared/navigation/focus";
 import { starterCount } from "../../game/progression";
 
-import { EffectButton as Button } from "../shared/effects/treatments";
-import { creatureKeywords } from "../shared/effects/palettes";
 import { CreatureCard } from "../shared/cards/cards";
 
 import { species } from "../../game/content";
@@ -27,9 +25,7 @@ export function Draft({ game, send, inspect }: Props) {
       return;
     }
     if (restore.current === null) return;
-    const targets = grid.current?.querySelectorAll<HTMLElement>(
-      game.selected.length === starterCount(game) ? ".creature-card" : ".recruit-button",
-    );
+    const targets = grid.current?.querySelectorAll<HTMLElement>(".creature-card");
     returnFocus(targets?.[Math.min(restore.current, (targets?.length ?? 1) - 1)] ?? null);
     restore.current = null;
   }, [game, send]);
@@ -49,28 +45,15 @@ export function Draft({ game, send, inspect }: Props) {
                 <CreatureCard
                   progression={game}
                   kind={s.id}
-                  selected={game.selected.length === starterCount(game)}
-                  onClick={() => inspect({ species: s.id })}
+                  onClick={() => {
+                    restore.current = index;
+                    if (!send({ type: "draft", species: s.id })) restore.current = null;
+                  }}
                   onInspect={() => inspect({ species: s.id })}
-                  label={i18n.message("creature.inspect", "Inspect {{name}}", {
+                  label={i18n.message("creature.recruit", "Recruit {{name}}", {
                     name: i18n.content(`content.species.${s.id}.name`, s.name),
                   })}
                 />
-                {game.selected.length !== starterCount(game) ? (
-                  <Button
-                    effectKeywords={creatureKeywords(s.id, game)}
-                    className="recruit-button"
-                    aria-label={i18n.message("creature.recruit", "Recruit {{name}}", {
-                      name: i18n.content(`content.species.${s.id}.name`, s.name),
-                    })}
-                    onClick={() => {
-                      restore.current = index;
-                      if (!send({ type: "draft", species: s.id })) restore.current = null;
-                    }}
-                  >
-                    {i18n.message("creature.recruitAction", "Recruit")}
-                  </Button>
-                ) : null}
               </div>
             );
           },

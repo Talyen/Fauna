@@ -18,9 +18,6 @@
   text-align: center;
   min-width: 0;
 }
-.recruit-button {
-  align-self: center;
-}
 .starter-option h2 {
   font-size: var(--text-heading);
   font-weight: 500;
@@ -423,8 +420,15 @@
   width: var(--art-portrait-width);
 }
 .merchant-offer > .merchant-price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   font-variant-numeric: tabular-nums;
+}
+.merchant-price svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 .merchant-leave {
   min-width: var(--art-portrait-width);

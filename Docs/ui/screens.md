@@ -77,7 +77,7 @@ Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and con
 
 Use a centered title, All/Collected/Uncollected tabs, a gallery and pagination. Order collected species first. Collected artwork shows five external progress stars; name/details appear on hover/focus and activation opens the shared inspector. Uncollected artwork is grayscale and noninteractive, with no tooltip, kit details or unlock requirement. Browsing never grants discovery.
 
-The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
+Uncollected artwork remains grayscale and still on hover. The inspector uses base species abilities without journey upgrades, talents or combat modifiers; permanent passive rank still applies. It has no separate ability/rank tabs. Collection remains available from battle Pause; returning preserves combat and leaves Auto-play off.
 
 Reserve two gallery rows and a footer slot. Measured width chooses one to four columns independently of item count before reducing artwork. Previous/Next icon buttons have accessible names but no tooltips or page counts. Hide unavailable arrows while reserving their space; if a focused arrow disappears, focus the remaining arrow or the filter when neither remains.
 
@@ -97,7 +97,7 @@ Owned borders are gold. Icons use keyword color at 65% while unowned and full st
 
 Show centered Victory earnings: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. Continue opens Choose a Recruit without repeating earnings beside offers. An unchosen recruitment resumes through earnings; a banked full-roster recruit resumes directly at the replacement choice.
 
-[Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Recruit buttons fit their label and standard padding, centered below artwork at the standard control height; artwork only inspects. This sizing also applies to starter recruitment. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
+[Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Activating starter or reward artwork recruits immediately; hover or focus shows details and the inspection shortcut opens the full kit without recruiting. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
 
 ### Replace a creature
 
@@ -117,7 +117,7 @@ When deployed knockouts have living backup, show a centered, nondismissible Choo
 
 ## Optional Recruit destination
 
-Show creature artwork, Recruit and its species name. Its hover/focus details follow the shared creature tooltip contract. Activating the destination recruits directly, without a separate confirmation or roster-release step; unlike starter/reward offers, it is a direct-entry destination. [Journey rules](../EXPEDITION_DESIGN.md#recruitment) own eligibility and committed outcomes.
+Show creature artwork, Recruit and its species name. Its hover/focus details follow the shared creature tooltip contract. Activating the destination recruits directly, without a separate confirmation or roster-release step. [Journey rules](../EXPEDITION_DESIGN.md#recruitment) own eligibility and committed outcomes.
 
 ## Settings
 
@@ -156,7 +156,7 @@ Rest returns immediately to the same combat offers, briefly presenting committed
 
 ## Boon Merchant
 
-Open directly from its existing landscape location ArtCard; source selection remains an explicit placeholder. Center up to three prepared portrait Boons with names/rules/journey duration in hover/focus details. Put the Gold wallet in the heading row, and the one-per-visit limit in offer details. Align secondary purchase Buttons below artwork and center Leave. Wallet/prices use shared gold Coins icons.
+Open directly from its existing landscape location ArtCard; source selection remains an explicit placeholder. Center up to three prepared portrait Boons with names/rules/journey duration in hover/focus details. Put the Gold wallet in the heading row, the one-per-visit limit in offer details and the price below each artwork. Activating affordable artwork purchases immediately; center Leave. Wallet/prices use shared gold Coins icons.
 
 Unaffordable purchases remain focusable, explain Not enough Gold and cannot issue commands. Buying replaces the shelf with one purchased Boon, name, rules, For this journey and Continue; move focus to Continue. [Support visits](../EXPEDITION_DESIGN.md#optional-support-visits) own purchase commitment, resume, prices, eligibility, leaving and rerolls.
 

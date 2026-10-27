@@ -179,12 +179,6 @@
     "sourceHash": "6b065b2ffc932fcee97efc8af24daf54710002ec5b8cd6e10a533888c74c1034",
     "text": "Elegir {{name}}"
   },
-  "boons.inspect": {
-    "reviewed": true,
-    "source": "Inspect {{name}}",
-    "sourceHash": "b63f326dbd556aadba1750016a40e41fcf7e1ce0261e0ddef29d4c58fbfd495a",
-    "text": "Examinar {{name}}"
-  },
   "boons.pages": {
     "reviewed": true,
     "source": "Boon pages",

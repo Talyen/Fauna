@@ -3,7 +3,7 @@ import { screenTestEnvironment } from "../../support/ui";
 // @vitest-environment jsdom
 import { describe, expect, it, vi } from "vitest";
 import { createStore } from "zustand/vanilla";
-import { act, cleanup, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { produce } from "immer";
 import { CARDS, species } from "../../../src/game/content";
 import { encodeSave } from "../../../src/game/save";
@@ -36,7 +36,7 @@ describe("artwork-first inspection", () => {
       const game = session.store.getState().game;
       for (const [slot, kind] of game.starterOffers.entries()) {
         const creature = species(kind);
-        const opener = screen.getByRole("button", { name: `Inspect ${creature.name}` });
+        const opener = screen.getByRole("button", { name: `Recruit ${creature.name}` });
         await user.hover(opener);
         const tooltip = await screen.findByRole("tooltip");
         expect(tooltip.textContent).toContain(creature.trait);
@@ -44,7 +44,7 @@ describe("artwork-first inspection", () => {
           expect(tooltip.textContent).not.toContain(action.name);
           expect(tooltip.textContent).not.toContain(`${action.cost} Mana`);
         }
-        await user.click(opener);
+        fireEvent.contextMenu(opener);
         const dialog = screen.getByRole("dialog", { name: creature.name });
         expect(within(dialog).getByRole("heading", { name: creature.name })).toBeTruthy();
         expect(dialog.querySelector(".creature-card")).toBeNull();

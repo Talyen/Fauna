@@ -1,5 +1,4 @@
 import { useMessages } from "../shared/localization/message-context";
-import { creatureKeywords } from "../shared/effects/palettes";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { ResultPresentation } from "../shared/rewards/result-presentation";
@@ -75,7 +74,7 @@ export function Rewards({ game, send, inspect }: Props) {
     if (selectedRecruit !== undefined) return;
     returnFocus(
       choosing
-        ? (choices.current?.querySelector<HTMLButtonElement>(".recruit-button, .boon-choice") ?? null)
+        ? (choices.current?.querySelector<HTMLButtonElement>(".creature-card, .boon-choice") ?? null)
         : proceed.current,
     );
   }, [choosing, selectedRecruit]);
@@ -120,22 +119,12 @@ export function Rewards({ game, send, inspect }: Props) {
                     <CreatureCard
                       progression={game}
                       kind={kind}
-                      label={i18n.message("creature.inspect", "Inspect {{name}}", {
+                      label={i18n.message("creature.recruit", "Recruit {{name}}", {
                         name: i18n.content(`content.species.${kind}.name`, species(kind).name),
                       })}
                       onInspect={() => inspect({ species: kind })}
-                      onClick={() => inspect({ species: kind })}
+                      onClick={(element) => choose(element, { type: "recruit", species: kind })}
                     />
-                    <Button
-                      effectKeywords={creatureKeywords(kind, game)}
-                      className="recruit-button"
-                      aria-label={i18n.message("creature.recruit", "Recruit {{name}}", {
-                        name: i18n.content(`content.species.${kind}.name`, species(kind).name),
-                      })}
-                      onClick={(event) => choose(event.currentTarget, { type: "recruit", species: kind })}
-                    >
-                      {i18n.message("creature.recruitAction", "Recruit")}
-                    </Button>
                     <RecruitProgress game={game} kind={kind} />
                   </div>
                 )}

@@ -1,5 +1,4 @@
 import { useMessages } from "../shared/localization/message-context";
-import { visualKeywords } from "../shared/effects/palettes";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { useLayoutEffect, useRef } from "react";
 import { Coins } from "lucide-react";
@@ -95,9 +94,15 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                     <TooltipTrigger asChild>
                       <BoonArt
                         boon={boon}
-                        aria-label={i18n.message("boons.inspect", "Inspect {{name}}", {
+                        aria-label={i18n.message("merchant.buy", "Buy {{name}} for {{amount}} Gold", {
                           name: i18n.content(`content.boon.${boon.id}.name`, boon.name),
+                          amount: slot.price,
                         })}
+                        aria-disabled={unavailable}
+                        aria-describedby={reason ? statusId : undefined}
+                        onClick={() => {
+                          if (!unavailable) send({ type: "buyBoon", visit: visit.id, slot: slot.slot });
+                        }}
                       />
                     </TooltipTrigger>
                     <TooltipContent>
@@ -110,23 +115,10 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                       {reason ? <p>{reason}</p> : null}
                     </TooltipContent>
                   </Tooltip>
-                  <Button
-                    effectKeywords={visualKeywords(boon.text)}
-                    variant="secondary"
-                    className="merchant-price"
-                    aria-label={i18n.message("merchant.buy", "Buy {{name}} for {{amount}} Gold", {
-                      name: i18n.content(`content.boon.${boon.id}.name`, boon.name),
-                      amount: slot.price,
-                    })}
-                    aria-disabled={unavailable}
-                    aria-describedby={reason ? statusId : undefined}
-                    onClick={() => {
-                      if (!unavailable) send({ type: "buyBoon", visit: visit.id, slot: slot.slot });
-                    }}
-                  >
+                  <span className="merchant-price" aria-hidden="true">
                     <Coins className="gold-icon" aria-hidden="true" />
                     {i18n.message("merchant.gold", "{{amount}} Gold", { amount: slot.price })}
-                  </Button>
+                  </span>
                   {reason ? (
                     <p className="merchant-status" id={statusId}>
                       {reason}

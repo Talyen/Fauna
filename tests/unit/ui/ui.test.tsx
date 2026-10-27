@@ -12,7 +12,7 @@ import { encounterSource } from "../../../src/game/encounters";
 
 // @vitest-environment jsdom
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, cleanup, act, waitFor } from "@testing-library/react";
+import { render, screen, cleanup, act, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
@@ -81,8 +81,8 @@ describe("player interface", () => {
     const incoming = game.reward!.recruits[0]!;
     const offer = screen.getByRole("button", { name: `Recruit ${species(incoming).name}` });
     await waitFor(() => expect(document.activeElement).toBe(offer));
-    const artwork = screen.getByRole("button", { name: `Inspect ${species(incoming).name}` });
-    await user.click(artwork);
+    const artwork = offer;
+    fireEvent.contextMenu(artwork);
     expect(screen.getByRole("dialog", { name: species(incoming).name })).toBeTruthy();
     expect(session.store.getState().game).toBe(committed);
     await user.keyboard("{Escape}");

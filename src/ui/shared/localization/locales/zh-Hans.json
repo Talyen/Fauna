@@ -179,12 +179,6 @@
     "sourceHash": "0356a0729f6f95a9a52941815aa9e87650f14db35f6d6b96839dc1d0710e08b4",
     "text": "选择{{name}}"
   },
-  "boons.inspect": {
-    "reviewed": true,
-    "source": "Inspect {{name}}",
-    "sourceHash": "b30bf27d83dafd9e5a0830c8a8e5bc3cd17335539d676fff53571d0385b83db6",
-    "text": "查看{{name}}"
-  },
   "boons.pages": {
     "reviewed": true,
     "source": "Boon pages",

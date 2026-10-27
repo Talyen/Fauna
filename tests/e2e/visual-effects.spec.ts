@@ -106,7 +106,7 @@ test("inspection owns a dimmed backdrop and restores the underlying recruit pale
   await resume(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   const before = await state(page);
-  await page.locator(".recruit-options .creature-card").first().click();
+  await page.locator(".recruit-options .creature-card").first().click({ button: "right" });
   await expect(page.locator(".inspection-overlay .effect-backdrop")).toHaveCount(1);
   await expect(page.locator(".effect-root .effect-backdrop")).toHaveCount(0);
   await expect(page.locator(".inspection")).not.toHaveCSS("background-color", "rgba(0, 0, 0, 0)");

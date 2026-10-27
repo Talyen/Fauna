@@ -19,13 +19,11 @@ test("onboarding inspection and commitment across both layouts", async ({ page }
   const initial = await state(page);
   const chosen = initial.starterOffers[0]!;
   const name = species(chosen).name;
-  const mossguard = page.getByRole("button", { name: `Inspect ${name}`, exact: true });
-  const recruit = page.getByRole("button", { name: `Recruit ${name}`, exact: true });
+  const mossguard = page.getByRole("button", { name: `Recruit ${name}`, exact: true });
   const tooltip = page.getByRole("tooltip");
   for (const [width, height, scale] of layouts) {
     await page.setViewportSize({ width, height });
     await page.locator("html").evaluate((el, value) => el.style.setProperty("--text-scale", value), scale);
-    expect((await recruit.boundingBox())!.width).toBeLessThan((await mossguard.boundingBox())!.width);
     await captureScreen(page, { path: `reports/starter/selection-${width}.png` });
     await mossguard.hover();
     await expect(tooltip).toBeVisible();
@@ -37,7 +35,7 @@ test("onboarding inspection and commitment across both layouts", async ({ page }
     await page.mouse.move(0, 0);
     await expect(tooltip).toBeHidden();
   }
-  await mossguard.click();
+  await mossguard.click({ button: "right" });
   await page.locator(".inspection-thumbnails .action-card").first().click();
   await expect(page.getByRole("button", { name: /^Choose |^Recruit / })).toHaveCount(0);
   await page.keyboard.press("Escape");
@@ -68,7 +66,7 @@ test("onboarding inspection and commitment across both layouts", async ({ page }
   await page.keyboard.press("Escape");
   await expect(mossguard).toBeFocused();
   expect(await state(page)).toEqual(initial);
-  await recruit.click();
+  await mossguard.click();
   await expect(page.getByRole("button", { name: "Begin journey", exact: true })).toHaveCount(0);
   expect((await state(page)).phase).toBe("teamSelection");
   await reloadHome(page);

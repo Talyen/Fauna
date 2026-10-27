@@ -36,21 +36,9 @@ test("Collection inspection returns through nested details to the unchanged batt
   await expect(page.getByRole("button", { name: /^Inspect / })).toHaveCount(0);
   await locked.hover();
   await expect(page.getByRole("tooltip")).toHaveCount(0);
-  await expect(artwork).toHaveCSS("filter", "none");
-  const hoverScale = await locked.evaluate((e) =>
-    getComputedStyle(e).getPropertyValue("--hover-scale").trim(),
-  );
-  const highlight = await locked.evaluate((e) => {
-    const sample = document.createElement("span");
-    sample.style.color = "var(--primary)";
-    e.append(sample);
-    const color = getComputedStyle(sample).color;
-    sample.remove();
-    return color;
-  });
-  await expect(locked).toHaveCSS("scale", hoverScale);
-  await expect(locked).toHaveCSS("border-color", "rgba(0, 0, 0, 0)");
-  await expect.poll(() => locked.evaluate((e) => getComputedStyle(e, "::after").borderColor)).toBe(highlight);
+  await expect(artwork).toHaveCSS("filter", "grayscale(1)");
+  await expect(locked).toHaveCSS("scale", "none");
+  await expect.poll(() => locked.evaluate((e) => getComputedStyle(e, "::after").content)).toBe("none");
   await page.getByRole("heading", { name: "Collection", exact: true }).hover();
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
   await expect(locked).toHaveCSS("scale", "none");

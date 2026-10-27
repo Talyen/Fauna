@@ -587,7 +587,7 @@ h3 {
 }
 :root[data-focus="visible"] .game-button.control-outline:focus {
   background: var(--background);
-  border-color: var(--border);
+  border-color: transparent;
 }
 :root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus:active {
   scale: var(--pressed-scale);

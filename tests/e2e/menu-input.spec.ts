@@ -344,6 +344,7 @@ test("pointer focus stays hidden through menus and held Escape, then follows key
   const end = page.getByRole("button", { name: "End journey", exact: true });
   await expect(end).toBeFocused();
   await expect(end).toHaveCSS("outline-style", "solid");
+  await expect(end).toHaveCSS("border-top-color", "rgba(0, 0, 0, 0)");
   await page.mouse.move(20, 20);
   await expect(end).toHaveCSS("outline-style", "none");
   await captureScreen(page, { path: "reports/menu-pointer.png" });
