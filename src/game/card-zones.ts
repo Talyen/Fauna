@@ -6,7 +6,7 @@ import { definition, species } from "./content";
 import type { BattleState, Card, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
 import { shuffle, hiddenDecision, roll } from "./random";
-import { cardKeywords, creaturePassive, passiveAmount } from "./progression";
+import { cardKeywords, passiveAmount } from "./progression";
 
 export const MAX_HAND_SIZE = 6;
 export const MAX_SUPPORTED_HAND_SIZE = MAX_HAND_SIZE + boonRule("facet-abacus").slots;
@@ -328,12 +328,6 @@ export function drawHasAnotherCard(
     (!definition(played.definitionId).consume &&
       (effect.kind === "draw" || cardKeywords(played).includes(effect.keyword)) &&
       battleCardCapacity(state) > 0 &&
-      state.team.some(
-        (unit) =>
-          unit.health > 0 &&
-          creaturePassive(state, unit.species).effects.some(
-            (passive) => passive.kind === "wellRead" && passive.amount > 0,
-          ),
-      ))
+      state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "wellRead") > 0))
   );
 }
