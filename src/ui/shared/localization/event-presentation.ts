@@ -18,7 +18,11 @@ for (const entry of SPECIES)
 /** Preview models retain common targetless announcements as text across possible outcomes. */
 export function localizedPreviewMessage(text: string, i18n: ReturnType<typeof createMessageReader>) {
   const mana = /^Gain (\d+) Mana\.$/.exec(text);
-  return mana ? i18n.message("log.gainMana", "Gain {{amount}} Mana.", { amount: mana[1]! }) : text;
+  return mana
+    ? i18n.message("log.gainMana", "Gain {{amount}} Mana.", {
+        amount: i18n.locale === "en" ? mana[1]! : Number(mana[1]),
+      })
+    : text;
 }
 
 /** Translate only recognized complete events; preserve unfamiliar announcements verbatim. */
@@ -176,8 +180,8 @@ export function eventPresentation(
     const turn = /^Turn (\d+)\. (\d+) Mana restored\.$/.exec(event.text);
     if (turn)
       return i18n.message("log.turnRestored", "Turn {{turn}}. {{amount}} Mana restored.", {
-        turn: turn[1]!,
-        amount: turn[2]!,
+        turn: i18n.locale === "en" ? turn[1]! : Number(turn[1]),
+        amount: i18n.locale === "en" ? turn[2]! : Number(turn[2]),
       });
   }
   if (event.kind === "reward") {

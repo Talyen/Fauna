@@ -813,6 +813,11 @@ it("translates turn and Mana announcements without inventing their values", () =
     "Turn 4. 3 Mana restored!",
   );
   expect(localizedPreviewMessage("Gain 2 Mana.", reader)).toBe("Gagne 2 Mana.");
+  const formatted = new Intl.NumberFormat("fr").format(1234);
+  expect(eventPresentation(game, { kind: "turn", text: "Turn 1234. 1234 Mana restored." }, reader)).toBe(
+    `Tour ${formatted}. ${formatted} Mana récupéré.`,
+  );
+  expect(localizedPreviewMessage("Gain 1234 Mana.", reader)).toBe(`Gagne ${formatted} Mana.`);
   expect(localizedPreviewMessage("A different preview.", reader)).toBe("A different preview.");
 });
 
