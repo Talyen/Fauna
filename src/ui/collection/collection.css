@@ -81,6 +81,32 @@
 .locked-species > .creature-card > img {
   filter: grayscale(1);
 }
+.locked-species > .creature-card {
+  transition: scale var(--motion-hover) ease-out;
+}
+.locked-species > .creature-card:focus {
+  outline: none;
+}
+.locked-species > .creature-card:hover,
+:root[data-focus="visible"] .locked-species > .creature-card:focus {
+  scale: var(--hover-scale);
+}
+.locked-species > .creature-card:hover > img,
+:root[data-focus="visible"] .locked-species > .creature-card:focus > img {
+  filter: none;
+}
+.locked-species > .creature-card:hover > .effect-shine-border,
+:root[data-focus="visible"] .locked-species > .creature-card:focus > .effect-shine-border {
+  opacity: 1;
+  --shine-width: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .locked-species > .creature-card:hover,
+  :root[data-focus="visible"] .locked-species > .creature-card:focus {
+    scale: 1;
+    transition: none;
+  }
+}
 .collection-entry {
   display: flex;
   flex-direction: column;

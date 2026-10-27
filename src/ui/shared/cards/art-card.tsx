@@ -59,7 +59,13 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   const classes = cn(`${aspect}-card`, className);
   if (presentation)
     return (
-      <div className={classes} role="img" aria-label={props["aria-label"]} {...metadata}>
+      <div
+        className={classes}
+        role="img"
+        aria-label={props["aria-label"]}
+        tabIndex={props.tabIndex}
+        {...metadata}
+      >
         {image}
         {shine}
         <ControlArtEffect kind={aspect === "creature" ? control : null} />

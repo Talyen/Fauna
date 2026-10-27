@@ -12,6 +12,7 @@ import { Star, LayoutGrid, BookOpen, LockKeyhole } from "lucide-react";
 
 import { CreatureCard } from "../shared/cards/cards";
 import { ArtCard } from "../shared/cards/art-card";
+import { creatureKeywords } from "../shared/effects/palettes";
 import { returnFocus } from "../shared/navigation/focus";
 import type { Inspection } from "../shared/inspection-model";
 import { SPECIES, type SpeciesId } from "../../game/content";
@@ -147,6 +148,8 @@ export function Collection({
                         aspect="creature"
                         artwork={assetUrl(`creature.${creature.id}`)}
                         presentation
+                        tabIndex={0}
+                        effectKeywords={creatureKeywords(creature.id, game)}
                         aria-label={i18n.message("collection.locked", "Locked species")}
                       />
                     </div>
