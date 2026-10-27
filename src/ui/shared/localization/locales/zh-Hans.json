@@ -3143,11 +3143,23 @@
     "sourceHash": "d1049789eb19b86607d336230b6bb26a3163b530a6805be131894b1203dd3c5d",
     "text": "天界结界"
   },
+  "content.talent.light.celestial-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Light</keyword0> damage",
+    "sourceHash": "5a58575542acc2e443a74c2baa7e4f42e5c14d82c960243fdc45799c853d775a",
+    "text": "受到的<keyword0>光</keyword0>伤害减半"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
     "sourceHash": "75793061a53628fc6304355d1ce6b7817dcc059628bb117af4bdef0d3818865c",
     "text": "神恩"
+  },
+  "content.talent.light.divine-favor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>cleanse</keyword0> a harmful status effect, your next <keyword1>Light</keyword1> card is free",
+    "sourceHash": "066ffeb8b8f15088e153a80efdb4e02a173eb0e70fbfcfba35129a5259e1d1a7",
+    "text": "<keyword0>净化</keyword0>有害状态效果时，下一张<keyword1>光</keyword1>牌免费"
   },
   "content.talent.light.faith-barrier.name": {
     "reviewed": true,
@@ -3167,6 +3179,12 @@
     "sourceHash": "6ada46afcb4795f978d646c868894b612a9a3b9fb6e3a502feb6d285ac094911",
     "text": "灼烈之光"
   },
+  "content.talent.light.purge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "ebcfb3bb16a8012f89ee10c6a3113cba3ee3244c8f1c1e8b7e260e0a80614319",
+    "text": "对处于<keyword1>灼烧</keyword1>状态的敌人造成的<keyword0>光</keyword0>伤害提高{{value0}}%"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3196,12 @@
     "source": "Scorching Light",
     "sourceHash": "31361656cc990bc9ef3ea584ba1f543612b5214f40f713ff9e947b105d76b8e4",
     "text": "灼热之光"
+  },
+  "content.talent.light.scorching-light.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Burn</keyword1> damage",
+    "sourceHash": "6ac511e2ba2df045bc3a057cf7d62daaefafce2522137b1d82028356d0e0eb4f",
+    "text": "<keyword0>光</keyword0>伤害有{{value0}}%的概率同时造成<keyword1>灼烧</keyword1>伤害"
   },
   "content.talent.light.tithe.name": {
     "reviewed": true,

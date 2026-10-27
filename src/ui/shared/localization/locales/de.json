@@ -3143,11 +3143,23 @@
     "sourceHash": "043590a28382b99819e68bc9584db753f54d6ced281531ae22c1c9ac070b8a18",
     "text": "Himmlischer Schutz"
   },
+  "content.talent.light.celestial-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Light</keyword0> damage",
+    "sourceHash": "81daefbcfbfe2ce5567f895469a7bc4b6b404a5d4c2ab2e3a6fec8c353912017",
+    "text": "Erleide halb so viel Schaden vom Typ <keyword0>Licht</keyword0>"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
     "sourceHash": "1396070acb586aebc7aea3973480275a256ed6dca8c88e4e2d01ada161690f6d",
     "text": "Göttliche Gunst"
+  },
+  "content.talent.light.divine-favor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>cleanse</keyword0> a harmful status effect, your next <keyword1>Light</keyword1> card is free",
+    "sourceHash": "489fc57fd65cf64dd9f6ce97a26c779f8a16f6bf50bdbb0a8f8ab2a856e4126d",
+    "text": "Wenn du einen schädlichen Statuseffekt <keyword0>reinigst</keyword0>, ist deine nächste <keyword1>Licht</keyword1>-Karte kostenlos"
   },
   "content.talent.light.faith-barrier.name": {
     "reviewed": true,
@@ -3167,6 +3179,12 @@
     "sourceHash": "7d30ecfb59d7e4bc1c36b1f2da3e4753c602d882566fcfd501f00b21b8c0458b",
     "text": "Glühendes Licht"
   },
+  "content.talent.light.purge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "89bd34d77a50a9cc722647f7823ecc9aaa65a6bf8cf5f8ab24bea457bf08c32a",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> ist gegen <keyword1>brennende</keyword1> Gegner um {{value0}}% erhöht"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3196,12 @@
     "source": "Scorching Light",
     "sourceHash": "48e95dbb3f018e543d849f05c016eb42dd3eb33b6f11818b6b38ac3e1eb5c227",
     "text": "Sengendes Licht"
+  },
+  "content.talent.light.scorching-light.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Burn</keyword1> damage",
+    "sourceHash": "872d68539bb2ee27a21649e172dfe3a3b0bf22ba70c1ec968631aa67d847d19e",
+    "text": "Schaden vom Typ <keyword0>Licht</keyword0> hat eine Chance von {{value0}}%, zusätzlich <keyword1>Brand</keyword1>schaden zu verursachen"
   },
   "content.talent.light.tithe.name": {
     "reviewed": true,

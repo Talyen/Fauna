@@ -3143,11 +3143,23 @@
     "sourceHash": "c35f1b608b7582104411d2f45a515b0003a1d02c99061c8469ed98b182632342",
     "text": "Proteção celestial"
   },
+  "content.talent.light.celestial-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Light</keyword0> damage",
+    "sourceHash": "97f760137e7a9c859c849a797ddf737195a8a0f0eea3154c044356e4c030a1d4",
+    "text": "Receba metade do dano de <keyword0>Luz</keyword0>"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
     "sourceHash": "abced5c62af94c6ab6d1dd9d12c9dd9fbacf8331c76f316563c2e1a7fc92c3e0",
     "text": "Favor divino"
+  },
+  "content.talent.light.divine-favor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>cleanse</keyword0> a harmful status effect, your next <keyword1>Light</keyword1> card is free",
+    "sourceHash": "15623437fbc12f6930fd699ea007236225e167c0e2deabf38ef5b920bf5a81fd",
+    "text": "Quando você <keyword0>purifica</keyword0> um efeito de status prejudicial, sua próxima carta de <keyword1>Luz</keyword1> é grátis"
   },
   "content.talent.light.faith-barrier.name": {
     "reviewed": true,
@@ -3167,6 +3179,12 @@
     "sourceHash": "085ce5c1d841b9c89257c7ee134852556ee8ec16bb09b89c9358773cc110d3d1",
     "text": "Luz incandescente"
   },
+  "content.talent.light.purge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "4caad6aeb39f6f68454c8ac5bf74107c09cd22c2fc68f12c1e7146b17c29c90a",
+    "text": "O dano de <keyword0>Luz</keyword0> aumenta {{value0}}% contra inimigos com <keyword1>Queimadura</keyword1>"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3196,12 @@
     "source": "Scorching Light",
     "sourceHash": "990de3c6bad26bf08b8dbf70836fd049902b5520e2b1f8149e2be4c7588a372f",
     "text": "Luz abrasadora"
+  },
+  "content.talent.light.scorching-light.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Burn</keyword1> damage",
+    "sourceHash": "c1e4a7e2b7b0c3182ab03a9b08f84ca351de446ececd694fc1dc44bf69a747af",
+    "text": "O dano de <keyword0>Luz</keyword0> tem {{value0}}% de chance de também causar dano de <keyword1>Queimadura</keyword1>"
   },
   "content.talent.light.tithe.name": {
     "reviewed": true,

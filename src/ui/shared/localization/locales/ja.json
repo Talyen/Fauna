@@ -3143,11 +3143,23 @@
     "sourceHash": "a7ea7b14e1390fabeebdd3860b74cc4897fa4e3a56276cf4b5595b51c7b6201c",
     "text": "天の守り"
   },
+  "content.talent.light.celestial-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Light</keyword0> damage",
+    "sourceHash": "6d2e67e3d9a57e7145a84c18388bbeddba2ba0ee4d22fca1f738c0d553366d08",
+    "text": "受ける<keyword0>光</keyword0>ダメージが半分になる"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
     "sourceHash": "06e41efacce561b77848957a6155acbce04defaf3c007d98c443663d40293cde",
     "text": "神の恩寵"
+  },
+  "content.talent.light.divine-favor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>cleanse</keyword0> a harmful status effect, your next <keyword1>Light</keyword1> card is free",
+    "sourceHash": "da7a1f3ad753fd342d4d191b0fa19c7ad6add56f2298c5cc71a4c5bf01ec4521",
+    "text": "有害な状態効果を<keyword0>浄化</keyword0>すると、次の<keyword1>光</keyword1>カードが無料になる"
   },
   "content.talent.light.faith-barrier.name": {
     "reviewed": true,
@@ -3167,6 +3179,12 @@
     "sourceHash": "5e82e1e18d32cbe2b645b51aaa661e98cfffec69daf0d4ca8b7416cac097d251",
     "text": "灼光"
   },
+  "content.talent.light.purge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "cd0b14699ab367a8d06bfa046f8d430346346a3dc8364c7a1d4c74c8c616fbba",
+    "text": "<keyword1>炎上</keyword1>中の敵への<keyword0>光</keyword0>ダメージが{{value0}}%増加"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3196,12 @@
     "source": "Scorching Light",
     "sourceHash": "36d94845f7ef77b4e09ff9e4a427dab6b844d6c9cb3f13f7ae2b0593ca28dca5",
     "text": "灼熱の光"
+  },
+  "content.talent.light.scorching-light.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Burn</keyword1> damage",
+    "sourceHash": "c818ccc600f507a739fcd6cb0dee0424b0c50a9a81ec48778230f158a9fa30fa",
+    "text": "<keyword0>光</keyword0>ダメージは{{value0}}%の確率で<keyword1>炎上</keyword1>ダメージも与える"
   },
   "content.talent.light.tithe.name": {
     "reviewed": true,

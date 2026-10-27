@@ -3143,11 +3143,23 @@
     "sourceHash": "42124c3e5cdcd3b1ebb851a1ee5d5d37e7cec4485ed8fe060ee8ca14234f6048",
     "text": "Небесный оберег"
   },
+  "content.talent.light.celestial-ward.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Light</keyword0> damage",
+    "sourceHash": "6fc17c971657368398f4b205863b78e2c161d05f991f44bc95da7c0378ba2b43",
+    "text": "Получаемый урон типа «<keyword0>Свет</keyword0>» уменьшается вдвое"
+  },
   "content.talent.light.divine-favor.name": {
     "reviewed": true,
     "source": "Divine Favor",
     "sourceHash": "ff1bdd6dc9240e95893039da7d65a2332d32b407130a8e64ad40f9869db70129",
     "text": "Божественная милость"
+  },
+  "content.talent.light.divine-favor.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>cleanse</keyword0> a harmful status effect, your next <keyword1>Light</keyword1> card is free",
+    "sourceHash": "f1179e361aa78c119136f9001a3e7d625184f6eeeef5cae43af0574e6d9b96bc",
+    "text": "Когда вы <keyword0>очищаете</keyword0> вредный эффект состояния, ваша следующая карта типа «<keyword1>Свет</keyword1>» бесплатна"
   },
   "content.talent.light.faith-barrier.name": {
     "reviewed": true,
@@ -3167,6 +3179,12 @@
     "sourceHash": "b31c2eb46446929a402b259f0afb2d8187cefd11642bdf987a3e34998b0f8864",
     "text": "Сжигающий свет"
   },
+  "content.talent.light.purge.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage is increased by {{value0}}% against <keyword1>Burning</keyword1> enemies",
+    "sourceHash": "a922ff8b9272a7f7481feb10c30a9e9b352d500f438ba2b76a134d1dab1f8c77",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» против <keyword1>горящих</keyword1> врагов увеличивается на {{value0}}%"
+  },
   "content.talent.light.radiant-guard.name": {
     "reviewed": true,
     "source": "Radiant Guard",
@@ -3178,6 +3196,12 @@
     "source": "Scorching Light",
     "sourceHash": "aec9e5f8db3391146f8268fd250cea0f9e76f649e3ad3f7a8198d5b2c4e93e24",
     "text": "Палящий свет"
+  },
+  "content.talent.light.scorching-light.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Burn</keyword1> damage",
+    "sourceHash": "b81b3d21be877fc0c7e68b6a0085e1817b1f723102453818dd3d619ef95e74f7",
+    "text": "Урон типа «<keyword0>Свет</keyword0>» с вероятностью {{value0}}% также наносит урон от <keyword1>горения</keyword1>"
   },
   "content.talent.light.tithe.name": {
     "reviewed": true,
