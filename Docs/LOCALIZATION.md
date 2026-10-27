@@ -88,6 +88,15 @@ maps cover the translated catalog, native language name and compact numbers.
 The checks do not establish font wiring, rendered-flow, platform or linguistic
 quality; the remaining qualification steps below still apply.
 
+Font preparation is an explicit authoring step. `npm run localization:fonts`
+uses fontTools 4.60.1, fetches commit-pinned Noto sources, verifies their SHA-256
+digests, and subsets the current translations and native language names. Set
+`FAUNA_FONT_PYTHON` to the Python environment containing that version, or pass
+`-- --source-dir <directory>` to use verified original fonts offline. Replaced
+fonts are backed up under `reports/localization/backups`. The bundled OFL notices
+are in `public/licenses`. Regenerate after adding glyphs and inspect actual
+rendering before qualification; a subset alone does not enable a language.
+
 ## Implementation and qualification
 
 1. Establish stable message IDs, named parameters, semantic keyword parts and a

@@ -2,7 +2,11 @@ import { GlossaryScreen } from "../../../src/ui/menu/glossary-screen";
 import { extractGlossaryRules } from "../../../scripts/localization/glossary-rules.mjs";
 import { GLOSSARY } from "../../../src/game/glossary";
 import { MessageParts } from "../../../src/ui/shared/localization/message-parts";
-import { fontHasGlyph, qualifiedFontIssues } from "../../../scripts/localization/font-coverage.mjs";
+import {
+  fontHasGlyph,
+  qualifiedFontIssues,
+  verifiedFontSource,
+} from "../../../scripts/localization/font-coverage.mjs";
 import { PageControls } from "../../../src/ui/shared/navigation/pagination";
 import { BattleReadout } from "../../../src/ui/shared/combat/battle-readout";
 import { DamageValue } from "../../../src/ui/shared/combat/combat-values";
@@ -754,6 +758,18 @@ it("blocks script qualification when bundled fonts are missing or cannot render 
     "ja: noto-sans-jp.ttf missing glyphs",
   );
   expect(fontHasGlyph(Buffer.alloc(0), 0x65e5)).toBe(false);
+  expect(
+    verifiedFontSource(
+      Buffer.from("test"),
+      "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    ),
+  ).toBe(true);
+  expect(
+    verifiedFontSource(
+      Buffer.from("changed"),
+      "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    ),
+  ).toBe(false);
   const font = Buffer.alloc(68);
   font.writeUInt16BE(1, 4);
   font.write("cmap", 12);
