@@ -665,11 +665,23 @@
     "sourceHash": "dc0dcbc79326ede174d0a91d6cd9b003f27ff4a722d870efecddf32ef1b44510",
     "text": "移除一名盟友的有害效果"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "2ca701e7ab1eaa1a33d4609b8ec5ceb96866474fdea5faa2b5dce02938685480",
+    "text": "打出后将此牌移出直至战斗结束；每场战斗都会恢复初始牌组；未打出的牌正常弃置"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "da7f98a1566964e4100eb4dd9be6c4f91b012873a70fedf61f9cc471168dff58",
     "text": "造成双倍伤害的攻击"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "c2cf7ed58440fd0be81b81eb0c8e9d9bf3b0fee096573b943ef358440cc38e34",
+    "text": "剩余生命值；<keyword0>生命</keyword0>降至零时，生物被击倒；<keyword1>生命</keyword1>可恢复至上限；战斗中恢复生命不能使其复活"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -682,6 +694,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "9cd309a2fd91b642fda01f2ee17d69b44df0e2d1f3d344301c7c41179fd94eaa",
     "text": "<keyword0>自然</keyword0>伤害；不隐含抗性或状态效果"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "76944386a8cf72516e3072d140dc392da55d49285419fcd4121c42705f089cde",
+    "text": "防止下一次有害状态效果；仍会受到直接伤害；持续至消耗或被<keyword0>驱散</keyword0>；不可叠加"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
@@ -2921,6 +2939,114 @@
     "sourceHash": "40663d04274fb6d5ad9808495326f3617143ffbb9e97b2f6d4df3169d07e2c5c",
     "text": "濒死状态持续时间延长{{value0}}回合"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "b280a4274536653a9f8ce05bc5fe901de8436d76779b06d541221056029364c9",
+    "text": "苦难虹吸"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "5cb8c6484d4a79e718776a9e564026c739609fd049df3f18af11a0dc17d16b9d",
+    "text": "护甲虹吸"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "8649a9e71f51239be75da41d157339fc401ac189885e4f0ab71f9b5db7e1c36e",
+    "text": "血债"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "0f33eaf7c358f387a86df28e79fc3cbb36ed0820643901534977a196e660dab2",
+    "text": "放血"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "a71838e8264a3c1af0c0622a2fe040410a1b493779ca116709b5787d8948801b",
+    "text": "剔除弱者"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "3bd43382e22c7c954e8114ccd99e0e6b1a7b7595181c9b9e2513008f4d030dff",
+    "text": "深度虹吸"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "7998982eab4eba7e595b7192060708b43c662e4e4f94af3264c1ab9ea08167fb",
+    "text": "绝境虹吸"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "b4c230243510e04ffc6fde72a4879918486fb124a2b8c427186e8f6ff8bb47f2",
+    "text": "法力虹吸"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "9a437948732ac5cda89d1dbed3cd6c2b535fa58b1e1360b737e632b1afc05264",
+    "text": "鲜血溢流"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "6fc2472b47b79721972bbb6f730950f3789e4103de2341709540da63516351e4",
+    "text": "恶性汲取"
+  },
+  "content.talent.light.blessed-leech.name": {
+    "reviewed": true,
+    "source": "Blessed Leech",
+    "sourceHash": "4a7b98f3b85d25f81b8d022e2711a3706718cc4b4780c0b7da10d992f2908f37",
+    "text": "祝福汲取"
+  },
+  "content.talent.light.celestial-ward.name": {
+    "reviewed": true,
+    "source": "Celestial Ward",
+    "sourceHash": "d1049789eb19b86607d336230b6bb26a3163b530a6805be131894b1203dd3c5d",
+    "text": "天界结界"
+  },
+  "content.talent.light.divine-favor.name": {
+    "reviewed": true,
+    "source": "Divine Favor",
+    "sourceHash": "75793061a53628fc6304355d1ce6b7817dcc059628bb117af4bdef0d3818865c",
+    "text": "神恩"
+  },
+  "content.talent.light.faith-barrier.name": {
+    "reviewed": true,
+    "source": "Faith Barrier",
+    "sourceHash": "38f813ec60aef46dd5ed46b53a2cc971ca3c684a93b1949b2a524d4ae7dcbcce",
+    "text": "信仰屏障"
+  },
+  "content.talent.light.prosperity.name": {
+    "reviewed": true,
+    "source": "Prosperity",
+    "sourceHash": "748dc1620fd2d84a21ae7b95926dd4c723e221e308ee08afdbb66ce210d2f475",
+    "text": "昌盛"
+  },
+  "content.talent.light.radiant-guard.name": {
+    "reviewed": true,
+    "source": "Radiant Guard",
+    "sourceHash": "686dc494fda1c7211284b161e84a1d5cdaa5ad1dc527faf44e3fdf5c41f07667",
+    "text": "光辉守卫"
+  },
+  "content.talent.light.scorching-light.name": {
+    "reviewed": true,
+    "source": "Scorching Light",
+    "sourceHash": "31361656cc990bc9ef3ea584ba1f543612b5214f40f713ff9e947b105d76b8e4",
+    "text": "灼热之光"
+  },
+  "content.talent.light.tithe.name": {
+    "reviewed": true,
+    "source": "Tithe",
+    "sourceHash": "e81c60f356c9d1e1f3b12a5c7eaa1d4a14b69ca66232c764cdbf970d0a885b35",
+    "text": "什一税"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -2986,6 +3112,108 @@
     "source": "Wellspring",
     "sourceHash": "1a1334ce4d7d12e04fabe519ebcc7d08ef8500ec7c53b242eab1ba2ccae1ec6e",
     "text": "源泉"
+  },
+  "content.talent.nature.bramblegrowth.name": {
+    "reviewed": true,
+    "source": "Bramblegrowth",
+    "sourceHash": "e29caa8daf3f12ae7800248c9f1f3f3deb4118547e59c6bee1a293e050b4852f",
+    "text": "荆棘生长"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "reviewed": true,
+    "source": "Briar Patch",
+    "sourceHash": "56c72797d2c5640622ed8c52d26ddf6021ddbd56e78f4bef358053ea093c0964",
+    "text": "荆棘丛"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "reviewed": true,
+    "source": "Ecosystem",
+    "sourceHash": "01e8ba8e568bfa27b78404a51ac768af92200fe5810eccfa3db0ed66a4039d46",
+    "text": "生态系统"
+  },
+  "content.talent.nature.entangle.name": {
+    "reviewed": true,
+    "source": "Entangle",
+    "sourceHash": "4c76d54ea1a3549a6455b82f63f0bc91a5ac4db096d70205d5d679336555a5b5",
+    "text": "纠缠"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "0886c0fae0bafff88dbcbcbdc052365e95b94ec0b8daa1f1e54474b1aa287dd0",
+    "text": "蔓生"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "reviewed": true,
+    "source": "Photosynthesis",
+    "sourceHash": "b2b86525f562410a3567c362740dcb510a289aa849d77f62131f4fbca92704f3",
+    "text": "光合作用"
+  },
+  "content.talent.nature.thornskin.name": {
+    "reviewed": true,
+    "source": "Thornskin",
+    "sourceHash": "4d48ef868e2152749e06453e8436e4efffb12c82c03c29aa2a1e55e5c9476884",
+    "text": "荆棘肌肤"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "reviewed": true,
+    "source": "Toxic Pollen",
+    "sourceHash": "509b6dd71d789cc9f2ff64d33c2a3221db4246a041602e7656db3279667c9a39",
+    "text": "毒性花粉"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "reviewed": true,
+    "source": "Verdant Cycle",
+    "sourceHash": "363b1b4894e06b44926838aa72b2ca993a22220b8ac9ec7679def10128a33ef8",
+    "text": "苍翠循环"
+  },
+  "content.talent.nature.windstep.name": {
+    "reviewed": true,
+    "source": "Windstep",
+    "sourceHash": "38d68f00834bae0c76b9a12a307de1d0d1330f5722336d53a13dd0796e7b5d4c",
+    "text": "风步"
+  },
+  "content.talent.physical.armored-fists.name": {
+    "reviewed": true,
+    "source": "Armored Fists",
+    "sourceHash": "9c5e685ffe3d9bcf64ae4e69722132009118eafcddd622bbb68c4bd748ed056a",
+    "text": "铁甲拳"
+  },
+  "content.talent.physical.heavy-blows.name": {
+    "reviewed": true,
+    "source": "Heavy Blows",
+    "sourceHash": "6201a2930cdadc6f3253797097d90d8b4f3e7e473aa7193de482fdfab7062a45",
+    "text": "重击"
+  },
+  "content.talent.physical.lacerate.name": {
+    "reviewed": true,
+    "source": "Lacerate",
+    "sourceHash": "f4653605613309a244c10069d36976e027715877e5fffdaba78bc183ae3867bd",
+    "text": "割裂"
+  },
+  "content.talent.physical.riposte.name": {
+    "reviewed": true,
+    "source": "Riposte",
+    "sourceHash": "daad59d5235f03f4f51d4c9096424b2157b9ae18e18bff0c92d0971fae4e32ae",
+    "text": "还击"
+  },
+  "content.talent.physical.rupture.name": {
+    "reviewed": true,
+    "source": "Rupture",
+    "sourceHash": "06be4294352e217443eece355a49625a0f5320e3e321a5503be44d460352593a",
+    "text": "破裂"
+  },
+  "content.talent.physical.shield-slam.name": {
+    "reviewed": true,
+    "source": "Shield Slam",
+    "sourceHash": "233046d042c447aeb2ed65585a728f1526aee4f2dc2083b9c8fd03b27ff1bcbb",
+    "text": "盾牌重击"
+  },
+  "content.talent.physical.unrelenting.name": {
+    "reviewed": true,
+    "source": "Unrelenting",
+    "sourceHash": "f5ba92a6b74223b7659d4e7f14781e4289c29b6e7b7c7776d4d427c8902ce3da",
+    "text": "不懈"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
@@ -3436,6 +3664,12 @@
     "source": "{{name}} Dodges.",
     "sourceHash": "dc6472ad5e8ee5c1a223188bb2a93a210ed933726f7e89f8303d1d6e794353b5",
     "text": "{{name}}闪避了。"
+  },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "4005e4198578eb868700e3fdf2dd4b7d81c7357c5e8eb74845225fd7491bf140",
+    "text": "从弃牌堆抽取：{{card}}"
   },
   "log.formationChanges": {
     "reviewed": true,

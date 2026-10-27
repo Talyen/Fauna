@@ -665,11 +665,23 @@
     "sourceHash": "370089962e3f7086d8b6616c6c08dd1cfa7b1e013422ef8740df1f685bab042d",
     "text": "Снимает вредные эффекты с союзника"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "c03fe76b151c10e1cccfaeed9949dbe53d9b78b1a512a1ff6affd3511b5766f1",
+    "text": "После розыгрыша убрать эту карту до конца боя; Начальная колода восстанавливается перед каждым боем; Неразыгранные карты сбрасываются как обычно"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "c05cb9ffba539cf3d0e68002be4991be4fa1cf8f78446c19d68300856383e55a",
     "text": "Атака, наносящая двойной урон"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "298a4d1330040424cbd70e94b3814c17503bf664e36e34e099e9fcaaaef920be",
+    "text": "Оставшееся здоровье; При нуле <keyword0>здоровья</keyword0> существо выбывает из боя; <keyword1>Здоровье</keyword1> можно восстановить до максимума; Восстановление не возвращает существо в бой во время сражения"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -682,6 +694,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "5b129c11b9e6014d0d4dc814f45423d2c8d3cbbd1eb3ce98c3fdaffa193da692",
     "text": "Урон <keyword0>природой</keyword0>; сопротивление и эффект состояния не подразумеваются"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "4494901e538c1aa5662d82c64771d0329f5aaa570ce3166c5960ee3a936f8003",
+    "text": "Предотвращает следующий вредный эффект состояния; Прямой урон по-прежнему проходит; Действует до расходования или <keyword0>рассеивания</keyword0>; Не накапливается"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
@@ -2921,6 +2939,114 @@
     "sourceHash": "a48a087d2bc63705ffe21054f663463c608bab9f5ea9ef62edf33ff6725d631d",
     "text": "На пороге смерти длится дольше; дополнительных ходов: {{value0}}"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "beab2cb2953da999901e0a1f010896b3c32faab768ed5cc76f5e8764b1d58fb4",
+    "text": "Вытягивание недугов"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "84238aa3fe7a4608b554387f022379b6bac874cbd9b6ae465eba134ec49e8268",
+    "text": "Вытягивание: Броня"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "b9a5c1f3694a2dbe2308d3e89958b51d53b917f59380a5b8ff81cb01212a561e",
+    "text": "Кровавый долг"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "bd295635d5cbf0a77ec353fa3c02c04f3a8787d5936314b032c31afe4a00db62",
+    "text": "Кровопускание"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "4e84053c6ba8dfebe14c691530542ba9efac040266225402573a5f2baccd03b6",
+    "text": "Отсечь слабых"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "adbd2fb5ecc37d26b3248f837bdfb418f15cc2172245291b6413b6e979512252",
+    "text": "Глубокое вытягивание"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "4b09c6547089e512ddd623eaba98bcce6b2e7b13f8684cab1909a6b06db8502a",
+    "text": "Отчаянное вытягивание"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "5621332a87f30a915e2954b9627c3d70da9cceb3c9caf9cd58464d05aea21fd5",
+    "text": "Вытягивание: Мана"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "a20b43b28ffe6dbbd2063441062495c221fef2bcd79f267264898d43d33e09ab",
+    "text": "Кровавый избыток"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "b58acff08c2888e57dedfabbac94a7557a5473bc0d0b56d3510f8cb8e0d4dab8",
+    "text": "Ядовитый вампиризм"
+  },
+  "content.talent.light.blessed-leech.name": {
+    "reviewed": true,
+    "source": "Blessed Leech",
+    "sourceHash": "e58c7bb6c0e758e2ec60952833801161ff31422b980f18ee30228b4e81c781b1",
+    "text": "Благословенный вампиризм"
+  },
+  "content.talent.light.celestial-ward.name": {
+    "reviewed": true,
+    "source": "Celestial Ward",
+    "sourceHash": "42124c3e5cdcd3b1ebb851a1ee5d5d37e7cec4485ed8fe060ee8ca14234f6048",
+    "text": "Небесный оберег"
+  },
+  "content.talent.light.divine-favor.name": {
+    "reviewed": true,
+    "source": "Divine Favor",
+    "sourceHash": "ff1bdd6dc9240e95893039da7d65a2332d32b407130a8e64ad40f9869db70129",
+    "text": "Божественная милость"
+  },
+  "content.talent.light.faith-barrier.name": {
+    "reviewed": true,
+    "source": "Faith Barrier",
+    "sourceHash": "7a6e1f3bb51720452b41f8d5a1a79c2bed6c48b45b17f5dbf1f8ea302ff24e3d",
+    "text": "Барьер веры"
+  },
+  "content.talent.light.prosperity.name": {
+    "reviewed": true,
+    "source": "Prosperity",
+    "sourceHash": "5ef05ccdb4f6366c2a9cc5a8cd5b8feb8eb96d61feb9e49cda047b9469542d78",
+    "text": "Процветание"
+  },
+  "content.talent.light.radiant-guard.name": {
+    "reviewed": true,
+    "source": "Radiant Guard",
+    "sourceHash": "12922685e9b5c1ddeb4ee38e28f085e2cb8eab8b1097165ea2960536026ab664",
+    "text": "Сияющая защита"
+  },
+  "content.talent.light.scorching-light.name": {
+    "reviewed": true,
+    "source": "Scorching Light",
+    "sourceHash": "aec9e5f8db3391146f8268fd250cea0f9e76f649e3ad3f7a8198d5b2c4e93e24",
+    "text": "Палящий свет"
+  },
+  "content.talent.light.tithe.name": {
+    "reviewed": true,
+    "source": "Tithe",
+    "sourceHash": "bc7cb74fd507ed8609481c746ccc1e1bcb1411fb78e305735e94ca7eb436432b",
+    "text": "Десятина"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -2986,6 +3112,108 @@
     "source": "Wellspring",
     "sourceHash": "25d77f7fd816539896c9a46118d0e8ecc24910e68dae27112e5448b1d52e0efa",
     "text": "Родник"
+  },
+  "content.talent.nature.bramblegrowth.name": {
+    "reviewed": true,
+    "source": "Bramblegrowth",
+    "sourceHash": "6f482c42c0c7e4700dad40b29ae0a1a6cb4d81a4c7d3c394a1c262c10ff9b39a",
+    "text": "Рост терновника"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "reviewed": true,
+    "source": "Briar Patch",
+    "sourceHash": "072999e16f90f73713766f0d32edf699188382023f88ac63740393707a4c4527",
+    "text": "Терновые заросли"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "reviewed": true,
+    "source": "Ecosystem",
+    "sourceHash": "5c5caa834cb6c4f6e6feefeece67f06232ec5063913df9b9f4a21150d28c7761",
+    "text": "Экосистема"
+  },
+  "content.talent.nature.entangle.name": {
+    "reviewed": true,
+    "source": "Entangle",
+    "sourceHash": "f7c57e5dbf2405aa11ab5315d724ffe6f88ff5baedd3abe010daf36e2083f1c4",
+    "text": "Опутывание"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "caa36e91df0cc3002a1e9f5a91a9645dbbb5cf898667f2c4a10d946a66105ad9",
+    "text": "Буйная поросль"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "reviewed": true,
+    "source": "Photosynthesis",
+    "sourceHash": "b666982823537055eb5e1d6509cb2e365640344d4e5e2231e884386900c8c2f4",
+    "text": "Фотосинтез"
+  },
+  "content.talent.nature.thornskin.name": {
+    "reviewed": true,
+    "source": "Thornskin",
+    "sourceHash": "25c0492abdfa65bc40e451f7629f04679862a21a97e4a07e8321293ad7563ef7",
+    "text": "Шипастая кожа"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "reviewed": true,
+    "source": "Toxic Pollen",
+    "sourceHash": "c22136e145858f8938a7e85babf6b0cc1cbb37ca8bc36e654e95b26f6e299cff",
+    "text": "Ядовитая пыльца"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "reviewed": true,
+    "source": "Verdant Cycle",
+    "sourceHash": "58e337c2f290061280b59aa7015971916af2d17774271f953469f2971c582dd2",
+    "text": "Зелёный цикл"
+  },
+  "content.talent.nature.windstep.name": {
+    "reviewed": true,
+    "source": "Windstep",
+    "sourceHash": "eda003bc7aad6a45870e3817e4f3696624bd2fb2d834a2a288b478745c3a030d",
+    "text": "Шаг ветра"
+  },
+  "content.talent.physical.armored-fists.name": {
+    "reviewed": true,
+    "source": "Armored Fists",
+    "sourceHash": "95cdd43cd858e8b0a946437692987e4e72f0bd9dd61cc785016000e69815c767",
+    "text": "Бронированные кулаки"
+  },
+  "content.talent.physical.heavy-blows.name": {
+    "reviewed": true,
+    "source": "Heavy Blows",
+    "sourceHash": "9764e752030fc413ae8b9293f7941b2f2c3038d54a113cef4df5b6bf44b6d536",
+    "text": "Тяжёлые удары"
+  },
+  "content.talent.physical.lacerate.name": {
+    "reviewed": true,
+    "source": "Lacerate",
+    "sourceHash": "18ae3fb4af5585e6ca805e645ae867b220484eb12c86757ccc987bf64ce15976",
+    "text": "Рваная рана"
+  },
+  "content.talent.physical.riposte.name": {
+    "reviewed": true,
+    "source": "Riposte",
+    "sourceHash": "53390c0028ac33ce14847de63b74d0912fb3c1e8303466c6eacf9d58563e190e",
+    "text": "Рипост"
+  },
+  "content.talent.physical.rupture.name": {
+    "reviewed": true,
+    "source": "Rupture",
+    "sourceHash": "eac173c1760b143e8ae3d4c66bd9611fac49e1a02adcee7dbbb90382901c53a0",
+    "text": "Разрыв"
+  },
+  "content.talent.physical.shield-slam.name": {
+    "reviewed": true,
+    "source": "Shield Slam",
+    "sourceHash": "39be2b3f3c616d7aaf06bf0daf1c4cded54819ee1881f9f5affc6690182e0149",
+    "text": "Мощный удар щитом"
+  },
+  "content.talent.physical.unrelenting.name": {
+    "reviewed": true,
+    "source": "Unrelenting",
+    "sourceHash": "c262773bce6dfbe7221adbc2603958a6eafbf4ee05669f28ad1182ad6363509a",
+    "text": "Неумолимость"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
@@ -3436,6 +3664,12 @@
     "source": "{{name}} Dodges.",
     "sourceHash": "1ece2134f0a9309bec390a52609d01db2c5802313fb3680e0143c0bf3d5c5e87",
     "text": "{{name}} уклоняется."
+  },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "49a48117fda208751650eb4c47214d3fc99e35db2aafa179a887e32f49a67f21",
+    "text": "Из сброса взята карта: {{card}}"
   },
   "log.formationChanges": {
     "reviewed": true,

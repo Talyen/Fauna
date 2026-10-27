@@ -290,6 +290,9 @@
   "log.dodge": {
     "text": "{{name}} Dodges."
   },
+  "log.drawDiscard": {
+    "text": "{{card}} is drawn from Discard"
+  },
   "log.formationChanges": {
     "text": "Your formation changes"
   },

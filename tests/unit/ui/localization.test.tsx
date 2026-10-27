@@ -2,6 +2,8 @@ import { CombatStatus } from "../../../src/ui/shared/combat/combat-status";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import japanese from "../../../src/ui/shared/localization/locales/ja.json";
 import { definition, species } from "../../../src/game/content";
+import { drawDiscard } from "../../../src/game/card-zones";
+import type { GameEvent } from "../../../src/game/types";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId, statusRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
 import { extractStatusVariants } from "../../../scripts/localization/status-variants.mjs";
@@ -208,11 +210,41 @@ it("localizes an authored ability and Food announcement without guessing unknown
   };
   expect(eventPresentation(game, announcement, reader)).toBe("Créature traduite utilise Capacité traduite.");
   expect(eventPresentation(game, { ...announcement, text: "Use Apple" }, reader)).toBe("Utilise Pomme");
+  expect(
+    eventPresentation(game, { ...announcement, text: `${ability.name} is drawn from Discard` }, reader),
+  ).toBe("Carte piochée depuis la défausse : Capacité traduite");
+  expect(eventPresentation(game, { ...announcement, text: "Unknown is drawn from Discard" }, reader)).toBe(
+    "Unknown is drawn from Discard",
+  );
   expect(eventPresentation(game, { ...announcement, text: `${actorName} uses Unknown.` }, reader)).toBe(
     `${actorName} uses Unknown.`,
   );
   expect(eventPresentation(game, { ...announcement, actorId: "missing" }, reader)).toBe(announcement.text);
   expect(eventPresentation(game, announcement, createMessageReader("en", {}))).toBe(announcement.text);
+});
+
+it("localizes an actual discard draw event using its authored card", () => {
+  const initial = requireBattle(run());
+  const card = initial.cards.find((entry) => entry.ownerId === initial.team[0]!.id)!;
+  const authored = definition(card.definitionId);
+  const events: GameEvent[] = [];
+  const game = produce(initial, (draft) => {
+    draft.battle.hand = [];
+    draft.battle.buffer = [];
+    draft.battle.discard = [card.id];
+    draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    drawDiscard(draft, events);
+  });
+  const event = events.find((entry) => entry.text === `${authored.name} is drawn from Discard`);
+  expect(event).toBeDefined();
+  const reader = createMessageReader("fr", {
+    ...french,
+    [`content.card.${authored.id}.name`]: { source: authored.name, text: "Capacité traduite" },
+  });
+  expect(eventPresentation(game, event!, reader)).toBe(
+    "Carte piochée depuis la défausse : Capacité traduite",
+  );
+  expect(eventPresentation(game, event!, createMessageReader("en", {}))).toBe(event!.text);
 });
 
 it("translates turn and Mana announcements without inventing their values", () => {

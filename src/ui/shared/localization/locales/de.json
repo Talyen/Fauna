@@ -665,11 +665,23 @@
     "sourceHash": "a5193e453c43cdee87b31b8a1d0ca636caeaa68cdeb19b808bd18269e4b94163",
     "text": "Entfernt schädliche Effekte von einem Verbündeten"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "bc644f5d586a0c9d3a0de412cc32510c1ef979bc28b726a4a87bc18e95920c10",
+    "text": "Entfernt diese Karte nach dem Spielen für den Rest des Kampfes; Das Startdeck wird für jeden Kampf wiederhergestellt; Nicht gespielte Karten werden normal abgelegt"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "80dcc7d2c7bac53a55d7f8e752bff2eb8189bffb9babccd0b30203505cb0d600",
     "text": "Ein Angriff, der doppelten Schaden verursacht"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "af93369b6e3e062248c8cc7d0a4d10f09a09430c2c791f945fd350b8d2dfc8e0",
+    "text": "Verbleibende Lebenspunkte; Bei null <keyword0>Gesundheit</keyword0> wird eine Kreatur kampfunfähig; <keyword1>Gesundheit</keyword1> kann bis zum Maximum wiederhergestellt werden; Wiederherstellung belebt im Kampf nicht wieder"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -682,6 +694,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "cb22830e3b7331707ac61525e51b141d94ad41bbb03ef8ac3d086e54c3997649",
     "text": "<keyword0>Natur</keyword0>schaden; weder Resistenz noch Statuseffekt sind damit verbunden"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "8152da7153916fd413b4ce059ef6bae0f9387efe55fadbd1bb3f0026ac8b7f8d",
+    "text": "Verhindert den nächsten schädlichen Statuseffekt; Direkter Schaden trifft weiterhin; Hält an, bis es verbraucht oder <keyword0>gebannt</keyword0> wird; Nicht stapelbar"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
@@ -2921,6 +2939,114 @@
     "sourceHash": "fac0eaa56159b34e950f0cfa9f30e13bb789ac336b75e729537fa0933537b109",
     "text": "Nahtod dauert {{value0}} Runde länger"
   },
+  "content.talent.leech.affliction-siphon.name": {
+    "reviewed": true,
+    "source": "Affliction Siphon",
+    "sourceHash": "ea5a0c27ad690d5eb8ed1c16b4d39455d64e72fc85c0da92bc4d1ceaf5126a97",
+    "text": "Leidensentzug"
+  },
+  "content.talent.leech.armor-siphon.name": {
+    "reviewed": true,
+    "source": "Armor Siphon",
+    "sourceHash": "c65a69fee5b7122b8ecfddda5c262e1a0c8d8bfffedc069d503e53d1d38be495",
+    "text": "Rüstungsentzug"
+  },
+  "content.talent.leech.blood-debt.name": {
+    "reviewed": true,
+    "source": "Blood Debt",
+    "sourceHash": "9c6436f34eee994d07a170b4f5c6ea59091942d07283549ada8301913faccf9a",
+    "text": "Blutschuld"
+  },
+  "content.talent.leech.bloodletting.name": {
+    "reviewed": true,
+    "source": "Bloodletting",
+    "sourceHash": "58a2887f3d01c61141856fb8636f8d70c120c6f1711e9fad79860ab031b2a899",
+    "text": "Aderlass"
+  },
+  "content.talent.leech.cull-the-weak.name": {
+    "reviewed": true,
+    "source": "Cull the Weak",
+    "sourceHash": "36b5063bf88da03ab72c36b052a101262034facdbfe12dc80fa5dfdb81de078d",
+    "text": "Die Schwachen ausmerzen"
+  },
+  "content.talent.leech.deep-siphon.name": {
+    "reviewed": true,
+    "source": "Deep Siphon",
+    "sourceHash": "c442f5da9b1f5b471e4bb9497de01fffea89631fec53a14439a6000fc0f0bcf2",
+    "text": "Tiefes Absaugen"
+  },
+  "content.talent.leech.desperate-siphon.name": {
+    "reviewed": true,
+    "source": "Desperate Siphon",
+    "sourceHash": "7171087166edc718e665f9caa53a41f6c87b50183700bb848478c80f05ad9a12",
+    "text": "Verzweifeltes Absaugen"
+  },
+  "content.talent.leech.mana-siphon.name": {
+    "reviewed": true,
+    "source": "Mana Siphon",
+    "sourceHash": "8d9c0229d27b298480a49578600d804fa046962dacb7d2b60c485f47ccf95a65",
+    "text": "Manaentzug"
+  },
+  "content.talent.leech.sanguine-overflow.name": {
+    "reviewed": true,
+    "source": "Sanguine Overflow",
+    "sourceHash": "6558a74f50cbab80b86ec0de1eb983fd660c3048c037afd5771854e6fb02b7d9",
+    "text": "Blutüberfluss"
+  },
+  "content.talent.leech.virulent-leech.name": {
+    "reviewed": true,
+    "source": "Virulent Leech",
+    "sourceHash": "0687287c882f7f18d0f69c69858303d4314aabd44560a5f82043109eb25cf5c1",
+    "text": "Hochgiftiger Lebensraub"
+  },
+  "content.talent.light.blessed-leech.name": {
+    "reviewed": true,
+    "source": "Blessed Leech",
+    "sourceHash": "bcecf42fd77ab7333de7e18109cfd731bba8761e8e0a492d5573ca3edbabbae0",
+    "text": "Gesegneter Lebensraub"
+  },
+  "content.talent.light.celestial-ward.name": {
+    "reviewed": true,
+    "source": "Celestial Ward",
+    "sourceHash": "043590a28382b99819e68bc9584db753f54d6ced281531ae22c1c9ac070b8a18",
+    "text": "Himmlischer Schutz"
+  },
+  "content.talent.light.divine-favor.name": {
+    "reviewed": true,
+    "source": "Divine Favor",
+    "sourceHash": "1396070acb586aebc7aea3973480275a256ed6dca8c88e4e2d01ada161690f6d",
+    "text": "Göttliche Gunst"
+  },
+  "content.talent.light.faith-barrier.name": {
+    "reviewed": true,
+    "source": "Faith Barrier",
+    "sourceHash": "c4b8f861422cb1c4cf4371caec560b77aa5d349688e42bc78114295057a94d3d",
+    "text": "Glaubensbarriere"
+  },
+  "content.talent.light.prosperity.name": {
+    "reviewed": true,
+    "source": "Prosperity",
+    "sourceHash": "1764d2351b232f588f04f583f894e3af80f1eabc544106348acb19be3465990a",
+    "text": "Wohlstand"
+  },
+  "content.talent.light.radiant-guard.name": {
+    "reviewed": true,
+    "source": "Radiant Guard",
+    "sourceHash": "be5b9f384aacbfdf7f2f49c881d947eaa25fe022b0e848c055311ce61735e823",
+    "text": "Strahlender Schutz"
+  },
+  "content.talent.light.scorching-light.name": {
+    "reviewed": true,
+    "source": "Scorching Light",
+    "sourceHash": "48e95dbb3f018e543d849f05c016eb42dd3eb33b6f11818b6b38ac3e1eb5c227",
+    "text": "Sengendes Licht"
+  },
+  "content.talent.light.tithe.name": {
+    "reviewed": true,
+    "source": "Tithe",
+    "sourceHash": "93ab3143fcbd1716bdad5a66796474c65240fadef3b52d5b94be78ae60ebbf62",
+    "text": "Zehnt"
+  },
   "content.talent.mana.arcane-frost.name": {
     "reviewed": true,
     "source": "Arcane Frost",
@@ -2986,6 +3112,108 @@
     "source": "Wellspring",
     "sourceHash": "48041a8bf785727afa94688c038e2f13be3fcb42e4b3919b67c11969731cf9e9",
     "text": "Quelle"
+  },
+  "content.talent.nature.bramblegrowth.name": {
+    "reviewed": true,
+    "source": "Bramblegrowth",
+    "sourceHash": "d192f04ad7b20792f49b29331fb8f34563d041301755565492e5929601a3641b",
+    "text": "Dornenwuchs"
+  },
+  "content.talent.nature.briar-patch.name": {
+    "reviewed": true,
+    "source": "Briar Patch",
+    "sourceHash": "b8bef844adb61e8d293ce311b239908155f6a1b42148e89b8d33c3a2df3891cf",
+    "text": "Dornengestrüpp"
+  },
+  "content.talent.nature.ecosystem.name": {
+    "reviewed": true,
+    "source": "Ecosystem",
+    "sourceHash": "155beb31e0d2d12226ecda9993acc159e93a2e1776158bfa9b8132fc492fed86",
+    "text": "Ökosystem"
+  },
+  "content.talent.nature.entangle.name": {
+    "reviewed": true,
+    "source": "Entangle",
+    "sourceHash": "ae0bbbaa4c4d13d0c9163ab9980c65068f30b97cd8ecfef5afffb7d252b9f10f",
+    "text": "Umschlingen"
+  },
+  "content.talent.nature.overgrowth.name": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "83693b32d99ead35306a50fa4cf9c0102172d450340e7cedc70d113243890ba6",
+    "text": "Wildwuchs"
+  },
+  "content.talent.nature.photosynthesis.name": {
+    "reviewed": true,
+    "source": "Photosynthesis",
+    "sourceHash": "3ec5f1f685983de633d4cfaa200c942093382bcff5f52fb26925c8c2d3c83337",
+    "text": "Photosynthese"
+  },
+  "content.talent.nature.thornskin.name": {
+    "reviewed": true,
+    "source": "Thornskin",
+    "sourceHash": "34eb19c5224d81cddc51e964f0b44e0c39f08445c8a8aa5d1c3715a0593d4aa1",
+    "text": "Dornenhaut"
+  },
+  "content.talent.nature.toxic-pollen.name": {
+    "reviewed": true,
+    "source": "Toxic Pollen",
+    "sourceHash": "f72cc4860e15c519cba297036ea21d44420ba710cf6c5547953bab0112ade4b5",
+    "text": "Giftpollen"
+  },
+  "content.talent.nature.verdant-cycle.name": {
+    "reviewed": true,
+    "source": "Verdant Cycle",
+    "sourceHash": "9ee954717c30841ca7de3bdf3af43e4f65938c5815fbf0826ad22fe7724e590a",
+    "text": "Grüner Kreislauf"
+  },
+  "content.talent.nature.windstep.name": {
+    "reviewed": true,
+    "source": "Windstep",
+    "sourceHash": "73f828acbc2afb2675190b1add444cfd198a680938b68c036909f8d9452e0010",
+    "text": "Windschritt"
+  },
+  "content.talent.physical.armored-fists.name": {
+    "reviewed": true,
+    "source": "Armored Fists",
+    "sourceHash": "86bc973d95f36cdf7adafd097cc7ef1b5787748bc37b1dfa3f7663e4620358b3",
+    "text": "Gepanzerte Fäuste"
+  },
+  "content.talent.physical.heavy-blows.name": {
+    "reviewed": true,
+    "source": "Heavy Blows",
+    "sourceHash": "5e2152f516b3bdf96c2596a17d3c370573d5e8634ce7f8eef5df8c524dfed87a",
+    "text": "Schwere Schläge"
+  },
+  "content.talent.physical.lacerate.name": {
+    "reviewed": true,
+    "source": "Lacerate",
+    "sourceHash": "9682797edcd8b974ebce74e291f1535eb7d8f9a9190c7f6da015702bea35d3ce",
+    "text": "Aufschlitzen"
+  },
+  "content.talent.physical.riposte.name": {
+    "reviewed": true,
+    "source": "Riposte",
+    "sourceHash": "0d753fe1728d03dbd70b1d81eebe933b8272cccfeaa91f68e8b9bc9ef35886d4",
+    "text": "Riposte"
+  },
+  "content.talent.physical.rupture.name": {
+    "reviewed": true,
+    "source": "Rupture",
+    "sourceHash": "114e6bc21ae8392724716afaee5ceaab1a4cf8bb193d4eef3ad79dcd2388b96f",
+    "text": "Aufbrechen"
+  },
+  "content.talent.physical.shield-slam.name": {
+    "reviewed": true,
+    "source": "Shield Slam",
+    "sourceHash": "83c301d9e64a257fefce0a5d6f9cda65e86241ce2531609be71ecb236610ee1c",
+    "text": "Schildschlag"
+  },
+  "content.talent.physical.unrelenting.name": {
+    "reviewed": true,
+    "source": "Unrelenting",
+    "sourceHash": "0e39a808107429439094c56983cf19471eb2af2a99dd1ec8b515fe845b44ac2b",
+    "text": "Unerbittlich"
   },
   "content.talent.poison.caustic.name": {
     "reviewed": true,
@@ -3436,6 +3664,12 @@
     "source": "{{name}} Dodges.",
     "sourceHash": "67b6adf57ff5771399c0329788cf220fc6cf900d8c41e056e4c3baa104228eea",
     "text": "{{name}} weicht aus."
+  },
+  "log.drawDiscard": {
+    "reviewed": true,
+    "source": "{{card}} is drawn from Discard",
+    "sourceHash": "d028681e1e972e9a5914c51a6583c9b45887fbf9facb360599eef35c85ef4d5f",
+    "text": "Aus dem Ablagestapel gezogen: {{card}}"
   },
   "log.formationChanges": {
     "reviewed": true,
