@@ -7,7 +7,7 @@ import { uncertainBattle } from "../../support/uncertainty";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 import { modifierImplementations, modifierQueries } from "../../../src/game/modifier-bindings";
 import { boonRule } from "../../../src/game/rules/boons";
-import { createHash } from "node:crypto";
+import { recordedTraceDigest as digest } from "../../support/modifier-trace";
 import { produce } from "immer";
 import { expect, it } from "vitest";
 import { BOONS, TALENTS, SPECIES, type SpeciesId, species } from "../../../src/game/content";
@@ -35,21 +35,6 @@ const recordedSpecies = SPECIES.filter(
 );
 // New Boons have direct outcome assertions in boons.test.ts
 const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id));
-const digest = (value: unknown) =>
-  createHash("sha256")
-    .update(
-      JSON.stringify(value, (key, entry) => {
-        if (key === "version") return 57;
-        if (key === "metronomeActor" && entry === null) return undefined;
-        if (key === "fireThorns" && entry === 0) return undefined;
-        if (key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) return undefined;
-        if (key === "encoreProgress" && entry === 0) return undefined;
-        if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
-        return entry;
-      }),
-    )
-    .digest("hex");
-
 // The reviewed October 26 baseline includes the Armor wear rule and current Auto-play scoring.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {

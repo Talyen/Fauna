@@ -6,7 +6,12 @@ import {
   ordinaryAttackFacts,
   type OrdinaryHit,
 } from "../game/ability-facts";
-import { battleCardCapacity, drawHasAnotherCard, discardDrawCards } from "../game/card-zones";
+import {
+  battleCardCapacity,
+  drawHasAnotherCard,
+  discardDrawCards,
+  journeyReturnHasDraw,
+} from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { battlefield, healingAllies } from "../game/battlefield";
 import { cardKeywords, creaturePassive, hasTalent } from "../game/progression";
@@ -356,20 +361,7 @@ export function battleBenefits(
             )
           : 0;
       const selfHealing = restoration(actor, healingValue(state, actor, selfRecovery)).gain;
-      const loomDraw =
-        !useful &&
-        !def.allyOnly &&
-        !def.consume &&
-        card.ownerId !== null &&
-        state.boons.includes("journey-loom") &&
-        [...state.battle.draw, ...state.battle.discard].some((id) => {
-          const candidate = state.cards.find((entry) => entry.id === id)!;
-          return (
-            candidate.ownerId !== null &&
-            candidate.ownerId !== card.ownerId &&
-            state.team.some((unit) => unit.id === candidate.ownerId && unit.health > 0)
-          );
-        });
+      const loomDraw = !useful && !def.allyOnly && !def.consume && journeyReturnHasDraw(state, card.ownerId);
       return support(
         selfHealing > 0 ? "healing" : useful || loomDraw ? "standardUtility" : "none",
         selfHealing,

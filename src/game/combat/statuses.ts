@@ -28,6 +28,7 @@ import {
   enterControl,
   cleanseControl,
   clearHarmfulStatus,
+  clearSelectedStatus,
   addPeriodicStacks,
   deferLeech,
 } from "./status-state";
@@ -179,7 +180,7 @@ export function* removeControlBuildup(
   if (stats[status] <= 0) return;
   const amount = stats[status];
   const sourceId = stats.statusSources[status];
-  clearHarmfulStatus(stats, status);
+  clearSelectedStatus(unit, status);
   events.push({
     kind: "status",
     targetId: unit.id,
@@ -340,23 +341,11 @@ export function* removeEffects(
     ) {
       if (kind === "cleanse" && harmfulStatuses.includes(status as (typeof harmfulStatuses)[number]))
         remember(status as (typeof harmfulStatuses)[number]);
-      if (status === "dodge") stats.temporaryDodge = 0;
-      if (
-        status === "reflect" ||
-        status === "reflectBurn" ||
-        status === "blind" ||
-        status === "nullify" ||
-        status === "negate" ||
-        status === "attackReflection" ||
-        status === "nullifyFreeze"
-      )
-        stats[status] = false;
-      else if (status === "armor") {
-        const removal = removeArmor(unit, stats.armor);
+      const removal = clearSelectedStatus(unit, status);
+      if (removal) {
         depletion = removal.depletion;
         purgedArmor = removal.removed;
-      } else if (status === "thorns" || status === "dodge") stats[status] = 0;
-      else clearHarmfulStatus(stats, status);
+      }
       if (kind === "cleanse") {
         cleansed++;
         delete stats.statusSources[status as (typeof harmfulStatuses)[number]];

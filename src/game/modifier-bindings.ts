@@ -389,6 +389,7 @@ export const modifierQueries = freeze(
     } satisfies Partial<Record<TalentId, Binding>>,
     boons: {
       "velvet-whisk": ["./ability-facts#foodDodgeBenefit"],
+      "journey-loom": ["./card-zones#journeyReturnHasDraw"],
       "last-threshold": ["./ability-facts#healingBenefit"],
       "pumpkin-tureen": ["./card-rules#foodForAllies"],
       "yarrow-salve-tin": ["./ability-facts#healingBenefit"],
