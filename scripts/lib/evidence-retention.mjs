@@ -101,7 +101,7 @@ function safeParents(archive, relative) {
 
 // Identity and directory entries detect later edits without reading large artifacts again.
 // Any unusual entry or keep marker makes the whole tree caller-owned.
-export function evidenceSnapshot(file) {
+function evidenceSnapshot(file) {
   const hash = createHash("sha256");
   function visit(item, relative) {
     const stat = lstatSync(item, { bigint: true });
