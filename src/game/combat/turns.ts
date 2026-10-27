@@ -28,7 +28,7 @@ import { draw, expressDelivery } from "../card-zones";
 import { retainedBlock } from "../ability-rules";
 import { enemyCard, enemyCanUse } from "../card-rules";
 import type { GameEvent, GameState, BattleState } from "../types";
-import { living, pendingReplacement } from "../team";
+import { pendingReplacement } from "../team";
 import { settle, intents } from "../journey";
 
 // Adapt immutable authored kits once for both value estimation and execution.
@@ -176,7 +176,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       pendingReplacement(draft) ||
       // Food may be drawn next and stays playable even when every creature must skip
       draft.cards.some((card) => card.ownerId === null) ||
-      living(draft).some((c) => !controlled(c, draft)) ||
+      draft.team.some((c) => c.health > 0 && !controlled(c, draft)) ||
       draft.cards.some((card) => {
         const actor = cardActor(draft, card);
         return actor && actor.health > 0 && !controlled(actor, draft, definition(card.definitionId));

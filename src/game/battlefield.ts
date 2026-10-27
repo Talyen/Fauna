@@ -47,12 +47,17 @@ export function healingAllies(state: GameState, side: "player" | "enemy" = "play
   const row = battlefield(state, side);
   if (side === "player" && state.phase === "battle" && state.boons.includes("camp-hammock"))
     row.push(...state.reserves);
-  return row.filter((unit) => unit.health > 0);
+  let next = 0;
+  for (const unit of row) if (unit.health > 0) row[next++] = unit;
+  row.length = next;
+  return row;
 }
 
 /** Expand one Cleanse application once; already-grouped abilities retain their removal count. */
 export function cleanseTargets(state: GameState | undefined, unit: Creature | Enemy) {
-  return state && !isEnemy(unit) && state.boons.includes("miracle-megaphone")
-    ? [unit, ...battlefield(state, "player").filter((ally) => ally.id !== unit.id && ally.health > 0)]
-    : [unit];
+  const targets: (Creature | Enemy)[] = [unit];
+  if (state && !isEnemy(unit) && state.boons.includes("miracle-megaphone"))
+    for (const ally of battlefield(state, "player"))
+      if (ally.id !== unit.id && ally.health > 0) targets.push(ally);
+  return targets;
 }

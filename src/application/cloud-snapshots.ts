@@ -44,6 +44,14 @@ export async function snapshot(
   if (new Set(parentsAtAdmission.map((parent) => parent.id)).size > MAX_ANCESTORS)
     throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
+  const ancestry = new Set(parentsAtAdmission.map((parent) => parent.id));
+  for (const parent of parentsAtAdmission) {
+    for (const ancestor of parent.ancestors) {
+      if (ancestry.size >= MAX_ANCESTORS) break;
+      ancestry.add(ancestor);
+    }
+    if (ancestry.size >= MAX_ANCESTORS) break;
+  }
   const record: Omit<CloudSnapshot, "id"> = {
     version: 1,
     device: identity.device,
@@ -52,9 +60,7 @@ export async function snapshot(
     payload,
     hash: await sha(payload),
     // Retain every direct head before spending the bounded history on older ancestry.
-    ancestors: [
-      ...new Set([...parentsAtAdmission.map((p) => p.id), ...parentsAtAdmission.flatMap((p) => p.ancestors)]),
-    ].slice(0, MAX_ANCESTORS),
+    ancestors: [...ancestry],
   };
   Object.freeze(record.ancestors);
   return snapshotSchema.parse({ ...record, id: await sha(body(record)) });

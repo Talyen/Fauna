@@ -28,9 +28,20 @@ function invalid(condition: boolean) {
 
 function utf8Size(text: string) {
   let bytes = 0;
-  for (const character of text) {
-    const point = character.codePointAt(0)!;
-    bytes += point <= 0x7f ? 1 : point <= 0x7ff ? 2 : point <= 0xffff ? 3 : 4;
+  for (let i = 0; i < text.length; i++) {
+    const code = text.charCodeAt(i);
+    if (code <= 0x7f) bytes++;
+    else if (code <= 0x7ff) bytes += 2;
+    else if (
+      code >= 0xd800 &&
+      code <= 0xdbff &&
+      i + 1 < text.length &&
+      text.charCodeAt(i + 1) >= 0xdc00 &&
+      text.charCodeAt(i + 1) <= 0xdfff
+    ) {
+      bytes += 4;
+      i++;
+    } else bytes += 3;
   }
   return bytes;
 }
@@ -194,7 +205,9 @@ function validateSupport(state: GameState) {
   if (state.support) {
     const visit = state.support;
     // Stock keeps its original price when this visit sells Merchant's Favor.
-    const prices = merchantPriceRange({ boons: state.boons.filter((boon) => boon !== visit.purchased) });
+    const prices = merchantPriceRange({
+      boons: visit.purchased === null ? state.boons : state.boons.filter((boon) => boon !== visit.purchased),
+    });
     invalid(
       visit.encounter !== state.encounter ||
         visit.id !== `support-${visit.encounter}` ||
@@ -248,11 +261,13 @@ function validateRewards(state: GameState) {
         invalid(
           state.team.length + state.reserves.length !== 5 ||
             !reward.recruits.includes(selected) ||
-            [...state.team, ...state.reserves].some((unit) => unit.species === selected) ||
+            state.team.some((unit) => unit.species === selected) ||
+            state.reserves.some((unit) => unit.species === selected) ||
             state.discovery.recruited[selected] === undefined,
         );
     }
-    if (reward.outcome === "defeat") invalid([...state.team, ...state.reserves].some((c) => c.health > 0));
+    if (reward.outcome === "defeat")
+      invalid(state.team.some((c) => c.health > 0) || state.reserves.some((c) => c.health > 0));
   }
 }
 
@@ -285,8 +300,7 @@ function validateBattle(state: BattleState) {
           )) ||
         enemy.combat.deathDoorUsed ||
         enemy.combat.grace > 0 ||
-        (!playerField.some((c) => c.id === enemy.targetId) &&
-          !state.team.some((c) => c.id === enemy.targetId)),
+        !playerField.some((c) => c.id === enemy.targetId),
     );
   });
   const zoneIds = new Set<string>();
@@ -308,12 +322,13 @@ function validateBattle(state: BattleState) {
   );
   invalid(zoneIds.size !== zoneCount || unknownZoneCard);
   const roster = [...state.team, ...state.reserves];
+  const capacity = handCapacity(state);
   invalid(roster.some((creature) => !creature.combat));
   invalid(
     !roster.some((c) => c.health > 0) ||
       !battle.enemies.some((e) => e.health > 0) ||
-      battle.hand.length > handCapacity(state) ||
-      (battle.buffer.length > 0 && battle.hand.length < handCapacity(state)) ||
+      battle.hand.length > capacity ||
+      (battle.buffer.length > 0 && battle.hand.length < capacity) ||
       zoneCount !== state.cards.length ||
       state.cards.some((c) => !zoneIds.has(c.id)),
   );

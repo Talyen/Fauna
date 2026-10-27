@@ -8,6 +8,8 @@ import {
   hasDiscardDrawCard,
   drawKeyword,
   drawOwner,
+  draw,
+  journeyReturn,
   drawHasAnotherCard,
   journeyReturnHasDraw,
   recoverBrokenGuard,
@@ -26,7 +28,7 @@ import {
   inspectCardPlay,
   playTargetError,
 } from "../../../src/game/play-queries";
-import { battlefield, isDepartedMinion } from "../../../src/game/battlefield";
+import { battlefield, cleanseTargets, healingAllies, isDepartedMinion } from "../../../src/game/battlefield";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { generateEncounterPack } from "../../../src/game/encounters";
 import { returnDodgedCard } from "../../../src/game/combat/card-modifiers";
@@ -35,6 +37,8 @@ import { requireBattle, teamRun } from "../../support/game";
 import { matchesPermanentKit, permanentKit } from "../../../src/game/card-kit";
 import { rebuildCards } from "../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../src/game/save";
+import { snapshot } from "../../../src/application/cloud-snapshots";
+import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createMessageReader } from "../../../src/ui/shared/localization/messages";
 
 it("keeps cached card keywords isolated from callers", () => {
@@ -415,4 +419,61 @@ it("reuses the first fallen Echo and restores living Echoes in their original or
     first!.id,
     second!.id,
   ]);
+});
+
+it("preserves buffer promotion and RNG when draw piles are empty", () => {
+  for (const method of ["draw", "owner", "journey"] as const) {
+    const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+    const card = state.cards[0]!;
+    state.battle.draw = [];
+    state.battle.discard = [];
+    state.battle.hand = [];
+    state.battle.buffer = [card.id];
+    state.boons = ["journey-loom"];
+    const rng = state.rng;
+    const events: Parameters<typeof draw>[2] = [];
+    if (method === "draw") expect(draw(state, 1, events)).toBe(0);
+    else if (method === "owner") expect(drawOwner(state, card.ownerId!, events)).toBe(false);
+    else journeyReturn(state, card.ownerId, events);
+    expect(state.battle.hand).toEqual([card.id]);
+    expect(state.battle.buffer).toEqual([]);
+    expect(state.rng).toEqual(rng);
+    expect(events).toEqual([]);
+  }
+});
+
+it("keeps healing and expanded Cleanse targets in battlefield and backup order", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram", "emberback"])));
+  const [first, fallen, last] = state.team;
+  fallen!.health = 0;
+  const backup = { ...last!, id: "backup", combat: structuredClone(last!.combat) };
+  state.reserves = [backup];
+  state.boons = ["camp-hammock", "miracle-megaphone"];
+  expect(healingAllies(state).map((unit) => unit.id)).toEqual([first!.id, last!.id, backup.id]);
+  expect(cleanseTargets(state, last!).map((unit) => unit.id)).toEqual([last!.id, first!.id]);
+  expect(state.team.map((unit) => unit.id)).toEqual([first!.id, fallen!.id, last!.id]);
+});
+
+it("counts multibyte and unpaired surrogate text at the save size boundary", () => {
+  const state = teamRun(42, ["mossguard"]);
+  const raw = `{"ignored":"é😀\ud800",${encodeSave(state).slice(1)}`;
+  const exact = raw.padEnd(raw.length + saveFormat.maxBytes - Buffer.byteLength(raw));
+  expect(decodeSave(exact)).toEqual(state);
+  expect(() => decodeSave(exact + " ")).toThrow("Save exceeds the supported size.");
+});
+
+it("keeps direct cloud heads and the earliest unique ancestry at the history limit", async () => {
+  const payload = encodeSave(teamRun(42, ["mossguard"]));
+  const identity = {
+    available: true,
+    device: "a".repeat(32),
+    profile: "b".repeat(32),
+    importAvailable: false,
+  };
+  const id = (n: number) => n.toString(16).padStart(64, "0");
+  const parent = await snapshot(payload, identity, 1);
+  const first = { ...parent, id: id(100), ancestors: Array.from({ length: 64 }, (_, index) => id(index)) };
+  const second = { ...parent, id: id(101), ancestors: [id(50), id(102)] };
+  const child = await snapshot(payload, identity, 2, [first, second]);
+  expect(child.ancestors).toEqual([id(100), id(101), ...Array.from({ length: 62 }, (_, index) => id(index))]);
 });

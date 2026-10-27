@@ -285,8 +285,8 @@ export function battleBenefits(
       });
     }
     case "heal": {
-      const automaticRecipients = healingAllies(state);
       if (def.target === "allAllies" || foodForAllies(def, state)) {
+        const automaticRecipients = healingAllies(state);
         let restored = 0;
         let benefitUtility = 0;
         let dodgeUtility = 0;
@@ -310,8 +310,10 @@ export function battleBenefits(
         def.target === "self"
           ? [actor]
           : def.target === "mostInjured"
-            ? [mostInjured(automaticRecipients)!]
-            : allies().filter((ally) => def.target !== "injured" || ally.health < maximumHealth(ally));
+            ? [mostInjured(healingAllies(state))!]
+            : def.target === "injured"
+              ? allies().filter((ally) => ally.health < maximumHealth(ally))
+              : allies();
       return recipients.flatMap((ally) => {
         const benefit = healingBenefit(state, ally, value, play.def.effects);
         const { restored } = benefit;
@@ -413,7 +415,7 @@ export function battleBenefits(
     case "teamPurge": {
       const enemies = facts.livingEnemies();
       const useful = countMatching(enemies, hasBeneficialEffects);
-      const defense = enemies.some((enemy) => enemy.block > 0 || enemy.combat.armor > 0);
+      const defense = useful > 0 && enemies.some((enemy) => enemy.block > 0 || enemy.combat.armor > 0);
       return support(
         useful > 0 ? (defense ? "defensePurge" : "purge") : "none",
         useful,
@@ -447,7 +449,7 @@ export function battleBenefits(
     }
     case "teamCleanse":
       return support(
-        battlefield(state, "player").some((unit) => unit.health > 0 && hasHarmfulEffects(unit))
+        allies().some(hasHarmfulEffects)
           ? "utility"
           : facts.healingOnPlay
             ? "healing"
@@ -514,7 +516,7 @@ export function battleBenefits(
       )
         return support(
           def.effects?.some((effect) => effect.kind === "cleanse" && effect.target === "allAllies") &&
-            battlefield(state, "player").some((unit) => unit.health > 0 && hasHarmfulEffects(unit))
+            allies().some(hasHarmfulEffects)
             ? "utility"
             : "none",
         );

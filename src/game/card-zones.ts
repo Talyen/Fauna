@@ -99,17 +99,19 @@ export function journeyReturnHasDraw(state: BattleState, ownerId: string | null)
 /** Recovery and returns weave in another living deployed owner's ordinary draw. */
 export function journeyReturn(state: GameState, ownerId: string | null, events: GameEvent[]) {
   if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
-  const eligible = journeyReturnCards(state, ownerId);
   fillHand(state);
+  if (!state.battle.draw.length && !state.battle.discard.length) return;
+  const eligible = journeyReturnCards(state, ownerId);
   drawEligibleCard(state, (id) => eligible.has(id), events);
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   queueCard(state.battle!, handCapacity(state), id);
   const original = state.cards.find((card) => card.id === id);
   const ownerId = original?.ownerId;
-  const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
-  if (owner && state.boons.includes("dune-shuttle"))
-    grantBlock(state, owner, boonRule("dune-shuttle").block, events);
+  if (state.boons.includes("dune-shuttle")) {
+    const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
+    if (owner) grantBlock(state, owner, boonRule("dune-shuttle").block, events);
+  }
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
     if (reader.health <= 0 || battleCardCapacity(state) === 0) continue;
@@ -235,6 +237,7 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
   fillHand(state);
   // Ordinary draws reshuffle the whole empty pile first; keyword draws only recycle matches.
   recycleDiscard(state);
+  if (!state.battle!.draw.length && !state.battle!.discard.length) return 0;
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = drawableOwnerIds(state);
   const eligibleCards = new Set<string>();
@@ -269,6 +272,7 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
 
 export function drawOwner(state: GameState, ownerId: string, events: GameEvent[]) {
   fillHand(state);
+  if (!state.battle!.draw.length && !state.battle!.discard.length) return false;
   const eligible = new Set<string>();
   for (const card of state.cards) if (card.ownerId === ownerId) eligible.add(card.id);
   return drawEligibleCard(state, (id) => eligible.has(id), events);

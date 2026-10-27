@@ -157,7 +157,8 @@ function resolve(
       rosterHasSpecies(state, state.reward.selectedRecruit) ||
       state.team.length + state.reserves.length !== 5 ||
       (command.replace !== undefined &&
-        ![...state.team, ...state.reserves].some((creature) => creature.id === command.replace)))
+        !state.team.some((creature) => creature.id === command.replace) &&
+        !state.reserves.some((creature) => creature.id === command.replace)))
   )
     return reject(state, "Confirm the current team or choose a creature to replace.");
   if (
