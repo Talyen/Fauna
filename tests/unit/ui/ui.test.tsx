@@ -220,7 +220,7 @@ describe("player interface", () => {
     expect(session.store.getState().game.team.map((unit) => unit.species)).toEqual([starter]);
     await session.dispose();
   });
-  it("keeps creature details focused on identity and rules through pointer, keyboard and replacement inspection", async () => {
+  it("shows current Health during pointer and keyboard inspection of battle creatures and backups", async () => {
     const game = produce(teamRun(7, ["mossguard", "emberback", "prismram"]), (d) => {
       d.team[0]!.health = 7;
       d.team[1]!.health = 19;
@@ -237,7 +237,7 @@ describe("player interface", () => {
       });
     });
     const user = userEvent.setup();
-    const inspect = async (creature: HTMLElement, name: string) => {
+    const inspect = async (creature: HTMLElement, name: string, health?: string) => {
       for (const input of ["hover", "keyboard"]) {
         if (input === "hover") await user.hover(creature);
         else {
@@ -245,7 +245,8 @@ describe("player interface", () => {
           act(() => creature.focus());
         }
         await waitFor(() => expect(screen.getByRole("tooltip").textContent).toContain(name));
-        expect(screen.getByRole("tooltip").textContent).not.toMatch(/\d+\/\d+ health|\d+ block/i);
+        if (health) expect(screen.getByRole("tooltip").textContent).toContain(`Health ${health}`);
+        else expect(screen.getByRole("tooltip").textContent).not.toMatch(/Health \d+\/\d+/);
         if (input === "hover")
           await user.hover(
             creature.closest('[role="dialog"]') ?? screen.getByRole("main", { name: "Battlefield" }),
@@ -265,17 +266,21 @@ describe("player interface", () => {
       try {
         await user.click(screen.getByRole("button", { name: "Continue" }));
         if (fixture.team[2]!.health > 0) {
-          for (const [id, name, block] of [
-            ["ally-0", "Mossguard", 0],
-            ["ally-1", "Emberback", 4],
+          for (const [id, name, block, health] of [
+            ["ally-0", "Mossguard", 0, `7/${species("mossguard").health}`],
+            ["ally-1", "Emberback", 4, `19/${species("emberback").health}`],
           ] as const) {
             const frame = document.querySelector<HTMLElement>(`.player-row [data-actor-id="${id}"]`)!;
-            await inspect(frame.querySelector<HTMLButtonElement>("button")!, name);
+            await inspect(frame.querySelector<HTMLButtonElement>("button")!, name, health);
             if (block) expect(frame.querySelector(`[aria-label="Block ${block}"]`)).toBeTruthy();
           }
         } else {
           expect(screen.queryByRole("button", { name: "Swap" })).toBeNull();
-          await inspect(screen.getByRole("button", { name: "Reedstag, backup" }), "Reedstag");
+          await inspect(
+            screen.getByRole("button", { name: "Reedstag, backup" }),
+            "Reedstag",
+            `11/${species("reedstag").health}`,
+          );
           expect(
             document.querySelector('[data-actor-id="reserve-copy"] [aria-label="Block 2"]'),
           ).toBeTruthy();

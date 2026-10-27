@@ -78,7 +78,7 @@ Shared tooltips follow Alchemy's immediate hover behavior: charcoal panels with 
 
 ### Artwork and availability
 
-Idle artwork has no visible border; other controls use thin neutral borders. Enabled Buttons scale to 1.035 on hover or intentional navigation focus over 150ms; artwork also animates a 2px gold ring with 1px overlapping the artwork and 1px outside it on hover. This transient interaction scale preserves fixed layout dimensions and composes with the battle hand's existing lift and rotation.
+Idle artwork has no visible border; other controls use thin neutral borders. Enabled artwork scales to 1.035 on hover or intentional navigation focus over 150ms; artwork also reveals its keyword shine on hover or intentional focus. Text controls remain fixed in size on hover, with a primary-button bloom and quieter fill and border feedback for secondary actions. Artwork scale preserves fixed layout dimensions and composes with the battle hand's existing lift and rotation.
 
 Disabled artwork stays inspectable without scale or border emphasis. Reduced motion removes scale and tooltip motion. Hover brightens controls; focus uses an external solid gold outline; selection uses a solid external ring. Knockout adds grayscale and dimming. Talent effects and unlock requirements stay visible without hovering. Unavailable talents distinguish missing points from incomplete earlier rows, remain readable and focusable for their tooltip, and cannot issue purchase commands.
 
@@ -96,7 +96,7 @@ A held stick cannot reclaim navigation after pointer/keyboard use until released
 
 | Surface      | Treatment                                                                                                                                                                                               |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Buttons      | Primary gold, destructive red, quiet controls neutral; press shrinks 2%, disabled 50%; busy text/spinner prevents repeated activation                                                                   |
+| Buttons      | Primary gold with hover bloom, destructive red, quiet controls neutral with opaque hover fills; press shrinks 2%, disabled 50%; busy text/spinner prevents repeated activation                          |
 | Artwork      | Selection uses a 3px external gap and 2px ring; pointer hover never adds a second frame or thickens selection; unavailable/knockout opacity 45%, with grayscale for knockout                            |
 | Tabs         | Centered with 12px gaps/padding, neutral 2px boundaries and gold selection/hover borders; regular labels, no strip, no selected-hover change; panels switch instantly                                   |
 | Switches     | Gold/gray track, 150ms thumb travel, subtle hover brightening without growth                                                                                                                            |
@@ -109,7 +109,7 @@ A held stick cannot reclaim navigation after pointer/keyboard use until released
 
 Ordinary loading indicators wait 200ms; ready content never waits for them. [Startup](ui/screens.md#startup-loading) has its own deliberate splash duration. Menu/settings activation uses a quiet prepared click; hover/focus stay silent and rejection retains its denial cue. Audio unlocks on interaction, respects volume/mute preferences and never controls gameplay. Listening approval belongs to the media evidence.
 
-Navigation crossfades decorative inert snapshots over 150ms, or 250ms into battle, without duplicating IDs, effects or focus. Collection paging is instant. Result earnings count over 400ms; rewards arrive 75ms apart and level-up icons pulse to 110% over 250ms. Input finishes presentation and accepts the original action. Shared swap copies use opposing 32px arcs over 150ms and a 4px/150ms selected lift; slot ownership and dialog focus settle immediately.
+Navigation crossfades decorative inert snapshots over 150ms, or 250ms into battle, without duplicating IDs, effects or focus. Accepted reward choices briefly brighten the chosen artwork and dim alternatives on the outgoing surface; rejection clears that cue, and recruitment immediately shows its committed team outcome. Collection paging is instant. Result earnings count over 400ms; rewards arrive 75ms apart and level-up icons pulse to 110% over 250ms. Input finishes presentation and accepts the original action. Shared swap copies use opposing 32px arcs over 150ms and a 4px/150ms selected lift; slot ownership and dialog focus settle immediately.
 
 ### Presentation lifetime
 
@@ -135,11 +135,11 @@ Use semantic tokens from `src/ui/tokens.css` for theme, typography, geometry and
 
 ### Typography
 
-Use locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers; names wrap without ellipsis and rules remain left-aligned. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
+Use locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers; names wrap without ellipsis and rules remain left-aligned. Shared screen headings follow Alchemy's bold, letter-spaced uppercase treatment and centered gold divider; the underlying accessible text remains unchanged. Settings section headings use the same uppercase hierarchy. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
 
 ### Spacing
 
-Use a 4px grid, using layout instead of decorative separators or panels.
+Use a 4px grid and layout instead of decorative panels; shared screen headings retain their centered divider.
 
 ### Color
 
@@ -151,7 +151,7 @@ Shared surfaces use Alchemy's ordinary rounded corners and fixed role radii: 12p
 
 Artwork images inset their radius by the border width; outer interaction frames expand it by their offset. Semantic shadcn sm/md/lg/xl radii match Alchemy's 20/22/24/12px values. No sharp visible corners or `rounded-none` overrides.
 
-Thin borders, keyword plasma, shine borders and short-label shines follow the shared effects owner; Alchemy's soft tooltip shadow is the only panel shadow; other decorative shadows, glows and textures remain excluded. Artwork has no UI scrim; external selection rings remain interaction indicators.
+Thin borders, keyword plasma, shine borders and short-label shines follow the shared effects owner; tooltip shadows and the primary-button hover bloom follow their shared controls. Other decorative panel shadows, glows and textures remain excluded. Artwork has no UI scrim; external selection rings remain interaction indicators.
 
 ### Motion
 
@@ -177,7 +177,7 @@ Palette and icon pairings are adapted from `Alchemy: src/lib/game-data/keywords.
 | Water    | #60a5fa    | Droplets     |
 | Bleed    | #dc2626    | Droplets     |
 
-Shared keyword colors match Alchemy's catalog base colors, including darker Poison (#15803d), Nature and Thorns (#059669), Bleed (#dc2626), and Leech (#9f1239). Health restoration uses Health's red identity. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Keyword words in rules use their assigned colors, including secondary clauses; other prose stays neutral. Labels and icons preserve meaning alongside color; rendered readability requires review, especially for the darker colors.
+Shared keyword colors match Alchemy's catalog base colors, including darker Poison (#15803d), Nature and Thorns (#059669), Bleed (#dc2626), and Leech (#9f1239). Poison and Bleed rule text use lighter green and red text roles for contrast on dark surfaces; artwork palettes and combat colors retain their base identities. Health restoration uses Health's red identity. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Keyword words in rules use their assigned colors, including secondary clauses; other prose stays neutral. Labels and icons preserve meaning alongside color; rendered readability requires review, especially for the darker colors.
 
 Types are content metadata, carried on damage presentation events. Enemy types derive from the resolved species ability. Burn, Poison, Bleed, Stun and Freeze packets use the combat rules in [Keywords](KEYWORDS.md). Fire, Ice, Lightning and Healing are not separate keyword identities.
 
@@ -185,11 +185,11 @@ Types are content metadata, carried on damage presentation events. Enemy types d
 
 `src/ui/shared/effects/` owns Alchemy-derived WebGL plasma, Canvas 2D rising embers, CSS masked border shine and short-label text shine. Keyword palettes resolve through `tokens.css`; shared keywords use Alchemy palettes (Holy maps to Light and Consume is violet). Fauna-only keywords retain their primary identities with darker secondary stops. Visual keyword extraction follows displayed rules and aliases, independently of progression categories and Mana costs. Unknown species do not expose a palette.
 
-Artwork shine borders appear only while the pointer hovers over enabled artwork, including action, Boon and creature cards; idle, selected, acting, Death's Door and keyboard/controller focus states never reveal them on their own. Action/Boon borders use every distinct keyword in displayed effect text, including aliases. Creature artwork uses its kit palette. Focus and selection retain their solid external indicators. Unavailable actions gain no availability shine, while legitimate inspection still supplies a palette.
+Artwork shine borders appear while the pointer hovers over enabled artwork or intentional keyboard/controller focus rests on it, including action, Boon and creature cards; idle, selected, acting and Death's Door states never reveal them on their own. Action/Boon borders use every distinct keyword in displayed effect text, including aliases. Creature artwork uses its kit palette. Focus and selection retain their solid external indicators. Unavailable actions gain no availability shine, while legitimate inspection still supplies a palette.
 
 Plasma uses the first two distinct keywords, or one keyword's light/deep pair; keyword-less content uses neutral Physical. Single-keyword borders use light/deep/light; multiple keywords form a primary-color loop. Text shines use at most three keyword colors with faded stops and a white highlight; ordinary rules retain solid keyword colors. Artwork ratios, squircle corners, focus outlines, selection rings and target feedback remain independent.
 
-The mounted app owns one active backdrop. Scoped hover and intentional keyboard/controller focus override detail/selection baselines, then screen baselines. Hidden screens, closing dialogs and transition snapshots cannot own a source. Inspection supplies a host inside the shared dimmed backdrop behind an opaque panel; the originating screen stays visible beneath the overlay. Talent availability and unspent points remain visible through their ordinary status and count; Death's Door retains its status readout and uses a red artwork shine only on hover. Settings, selected talent categories, Collection details and journey results supply contextual baselines.
+The mounted app owns one active backdrop. Scoped hover and intentional keyboard/controller focus override detail/selection baselines, then screen baselines. Hidden screens, closing dialogs and transition snapshots cannot own a source. Inspection supplies a host inside the shared dimmed backdrop behind an opaque panel; the originating screen stays visible beneath the overlay. Talent availability and unspent points remain visible through their ordinary status and count; Death's Door retains its status readout and uses a red artwork shine on hover or intentional focus. Settings, selected talent categories, Collection details and journey results supply contextual baselines.
 
 The [Display settings](ui/screens.md#settings) own intensity preferences. Zero intensity removes its renderer; particles change opacity rather than density. Reduced motion hides moving backgrounds and freezes shine without changing saved intensity. Unfocused/hidden windows park their renderers. Missing WebGL uses static radial decoration and never blocks play. Ambient ember colors follow the screen, not hovered keywords: 40 gold embers normally, 80 warmer embers in battle with stronger Boss opacity, and warm Campfire embers; starter selection has no particles.
 

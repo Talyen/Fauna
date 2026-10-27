@@ -20,6 +20,30 @@
 .game-button.control-primary {
   color: var(--primary-foreground);
 }
+.game-button:is(.control-primary, .control-outline, .control-destructive):not(:disabled):not(
+    [aria-disabled="true"]
+  ):is(:hover, :focus) {
+  scale: 1;
+}
+.game-button.control-primary:not(:disabled):not([aria-disabled="true"]):hover {
+  animation: primary-bloom 300ms ease-out forwards;
+}
+@keyframes primary-bloom {
+  0% {
+    box-shadow: 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 24px color-mix(in srgb, var(--primary) 40%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 16px color-mix(in srgb, var(--primary) 32%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-button.control-primary:not(:disabled):not([aria-disabled="true"]):hover {
+    animation: none;
+  }
+}
 .gold-icon {
   color: var(--primary);
 }

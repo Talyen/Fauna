@@ -65,6 +65,12 @@ export function Rewards({ game, send, inspect }: Props) {
   const [choosing, setChoosing] = useState(game.phase === "boon" || selectedRecruit !== undefined);
   const proceed = useRef<HTMLButtonElement>(null);
   const choices = useRef<HTMLElement>(null);
+  const choose = (element: HTMLElement, command: Command) => {
+    // Mark the outgoing surface before dispatch so its transition snapshot carries the choice.
+    const option = element.closest<HTMLElement>(".reward-option");
+    if (option) option.dataset.committed = "true";
+    if (!send(command) && option) delete option.dataset.committed;
+  };
   useLayoutEffect(() => {
     if (selectedRecruit !== undefined) return;
     returnFocus(
@@ -126,7 +132,7 @@ export function Rewards({ game, send, inspect }: Props) {
                       aria-label={i18n.message("creature.recruit", "Recruit {{name}}", {
                         name: i18n.content(`content.species.${kind}.name`, species(kind).name),
                       })}
-                      onClick={() => send({ type: "recruit", species: kind })}
+                      onClick={(event) => choose(event.currentTarget, { type: "recruit", species: kind })}
                     >
                       {i18n.message("creature.recruitAction", "Recruit")}
                     </Button>
@@ -148,7 +154,7 @@ export function Rewards({ game, send, inspect }: Props) {
                             aria-label={i18n.message("boons.choose", "Choose {{name}}", {
                               name: i18n.content(`content.boon.${boon.id}.name`, boon.name),
                             })}
-                            onClick={() => send({ type: "chooseBoon", boon: id })}
+                            onClick={(event) => choose(event.currentTarget, { type: "chooseBoon", boon: id })}
                           />
                         </TooltipTrigger>
                         <TooltipContent>

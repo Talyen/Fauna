@@ -123,7 +123,7 @@ Show creature artwork, Recruit and its species name. Its hover/focus details fol
 
 Use a centered full screen up to 640px wide, native Display/Sound/Battle tabs and a stable header/tab row. Mounted inactive panels reserve the tallest category's natural height and remain invisible, inert and hidden from assistive technology. Do not add a fixed minimum or panel fade/movement. Use the shared secondary-scrolling recipe for long panels.
 
-Use distinct Lucide icons, a 24px semibold light title, body-size pale-gold section headings with fading rules, 16px light option labels and muted supporting text. Align labels/controls in columns and values to control edges; wrap controls below labels when needed. Shared control styling belongs to [UI contracts](../UI.md#shared-control-states-and-feedback).
+Use distinct Lucide icons, the shared 24px bold uppercase screen title, body-size uppercase pale-gold section headings with fading rules, 16px light option labels and muted supporting text. Align labels/controls in columns and values to control edges; wrap controls below labels when needed. Shared control styling belongs to [UI contracts](../UI.md#shared-control-states-and-feedback).
 
 | Category             | Controls                                                                                                                                                                                               |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

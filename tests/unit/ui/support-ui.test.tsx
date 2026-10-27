@@ -114,6 +114,23 @@ it("keeps Boon reward choices actionable and owned Boon rules readable", async (
   ).toBeTruthy();
 });
 
+it("clears the reward acknowledgment when the choice is rejected", () => {
+  const base = merchant();
+  const boon = BOONS[0];
+  const game = {
+    ...base,
+    phase: "boon",
+    support: null,
+    reward: { outcome: "next", recruits: [], boons: [boon.id], currency: 0, xp: {} },
+  } as StateAt<"boon">;
+  const send = vi.fn(() => false);
+  render(<Rewards game={game} send={send} inspect={() => {}} />);
+  const choice = screen.getByRole("button", { name: `Choose ${boon.name}` });
+  fireEvent.click(choice);
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "chooseBoon", boon: boon.id });
+  expect(choice.closest(".reward-option")?.hasAttribute("data-committed")).toBe(false);
+});
+
 it("keeps unavailable offers inspectable and rejects purchases with their specific reason", () => {
   const state = merchant();
   const game = produce(accept(state, { type: "enterSupport", visit: state.support!.id }), (d) => {

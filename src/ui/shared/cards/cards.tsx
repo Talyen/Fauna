@@ -151,6 +151,14 @@ export function CreatureCard({
               <TooltipTrigger asChild>{artwork}</TooltipTrigger>
               <TooltipContent side={tooltipSide}>
                 {tooltipContent ?? <CreatureDetails progression={progression} kind={kind} name={name} />}
+                {readout && health !== undefined && (actorId || enemyId) ? (
+                  <p className="creature-health-detail">
+                    {i18n.message("creature.healthFraction", "Health {{health}}/{{maximum}}", {
+                      health,
+                      maximum: maxHealth ?? info.health,
+                    })}
+                  </p>
+                ) : null}
               </TooltipContent>
             </Tooltip>
           )}
