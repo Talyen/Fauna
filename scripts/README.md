@@ -87,7 +87,7 @@ The [shared launcher](local.mjs) enforces [execution budgets](../CONTRIBUTING.md
 [Task setup and dependencies](../CONTRIBUTING.md#dependencies-and-source-assets) owns reuse, installation and source-asset checkout instructions. Implementation-specific storage behavior follows.
 
 Large retained tracked assets (at least 256 KiB) automatically use per-file APFS
-copy-on-write from clean same-commit files in main. An optional Python standard-library
+copy-on-write from clean files in main whose bytes match the task commit. An optional Python standard-library
 bridge calls Apple's `clonefile` directly. Unsupported platforms/volumes, absent Python,
 dirty/mismatched sources and checkout filters use ordinary Git. Cloned bytes/modes
 are checked against target blobs, with fresh Git indexes and normal status checks.
@@ -104,4 +104,4 @@ not measured physical savings. Existing task checkouts retain their configuratio
 
 [Cleanup](../CONTRIBUTING.md#cleanup) owns eligibility, the audit/apply commands and inactivity checks. [The cleanup implementation](worktree-cleanup.mjs) preserves ignored evidence as follows.
 
-Before removal, ignored artifacts (reports, screenshots, logs and other ignored files) are copied to `fauna-worktree-archives/` inside the shared Git directory, with a manifest identifying the original checkout, branch and commit. File bytes, directory entries and symlink targets are compared before the checkout is removed; a mismatch or copy failure preserves it. Root `node_modules` and `dist` are rebuildable and are not archived. Copies request independent filesystem clones where supported, falling back to ordinary copies; later source changes cannot mutate retained evidence. Archives remain local; review their manifests before permanently deleting historical records or unique assets. Find them with `git rev-parse --git-common-dir`. Tracked and untracked changes always block removal; cleanup never terminates processes.
+Before removal, ignored artifacts (reports, screenshots, logs and other ignored files) are copied to `fauna-worktree-archives/` inside the shared Git directory, with a manifest identifying the original checkout, branch and commit. File bytes, directory entries and symlink targets are compared before the checkout is removed; a mismatch or copy failure preserves it. Root `node_modules` and `dist` are rebuildable and are not archived. Copies request independent filesystem clones where supported, falling back to ordinary copies; later source changes cannot mutate retained evidence. Some newly archived generated evidence expires under the [24-hour policy](../Docs/RESOURCE_EFFICIENCY.md#explicit-maintenance); legacy archives and unclassified artifacts are preserved. Find archives with `git rev-parse --git-common-dir`. Tracked and untracked changes always block removal; cleanup never terminates processes.

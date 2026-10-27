@@ -147,7 +147,8 @@ export function populateWorktree(
   const commit = git(target, ["rev-parse", "HEAD"]).trim();
   let candidates = [],
     reason = "",
-    algorithm;
+    algorithm,
+    sourceCommit;
   const config = (cwd, name) => {
     try {
       return git(cwd, ["config", "--get", name]).trim();
@@ -159,7 +160,7 @@ export function populateWorktree(
   try {
     if (platform !== "darwin" || fs.statSync(source).dev !== fs.statSync(target).dev)
       throw new Error("native file clones unavailable on this platform/volume");
-    if (git(source, ["rev-parse", "HEAD"]).trim() !== commit) throw new Error("source commit differs");
+    sourceCommit = git(source, ["rev-parse", "HEAD"]).trim();
     for (const cwd of [source, target]) {
       if (!["", "false"].includes(config(cwd, "core.autocrlf")) || config(cwd, "core.eol") === "crlf")
         throw new Error("checkout conversion enabled");
@@ -303,7 +304,7 @@ export function populateWorktree(
         : error.message;
     }
   }
-  if (clonedFiles && git(source, ["rev-parse", "HEAD"]).trim() !== commit) {
+  if (clonedFiles && git(source, ["rev-parse", "HEAD"]).trim() !== sourceCommit) {
     for (const file of cloned) fs.rmSync(file, { force: true });
     clonedFiles = 0;
     clonedBytes = 0;

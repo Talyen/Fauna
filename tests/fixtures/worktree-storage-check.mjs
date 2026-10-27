@@ -157,12 +157,18 @@ try {
   git(main, "restore", ".");
 
   write(path.join(main, "advance"), "main advanced");
+  write(path.join(main, retained), Buffer.alloc(384 * 1024, 9));
   git(main, "add", ".");
   git(main, "commit", "-qm", "advance");
   const mismatched = path.join(directory, "mismatched");
   git(main, "worktree", "add", "--no-checkout", "--detach", mismatched, original);
-  const mismatch = populateWorktree(main, mismatched, storageProfile(main, original));
-  assert.equal(mismatch.clonedFiles, 0);
+  const mismatch = populateWorktree(main, mismatched, storageProfile(main, original), {
+    platform: "darwin",
+    cloneFile(from, to) {
+      fs.copyFileSync(from, to);
+    },
+  });
+  assert(mismatch.clonedFiles >= 1);
   assert.equal(fs.readFileSync(path.join(mismatched, retained))[0], 7);
   git(full.target, "switch", "--detach", "main");
   assert(fs.existsSync(path.join(full.target, "advance")));

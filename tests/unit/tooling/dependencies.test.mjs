@@ -86,7 +86,9 @@ it("preserves unexpected links and propagates local install failures", () => {
   expect(runner).not.toHaveBeenCalled();
   expect(lstatSync(modules).isSymbolicLink()).toBe(true);
   rmSync(modules);
-  expect(installDependencies(task, { runner, log: () => {} })).toBe(7);
+  expect(installDependencies(task, { runner, log: () => {} })).toBe(0);
+  expect(lstatSync(modules).isSymbolicLink()).toBe(true);
+  expect(runner).not.toHaveBeenCalled();
   expect(readFixture(main, "node_modules/keep")).toBe("main dependencies");
 });
 

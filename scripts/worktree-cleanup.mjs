@@ -16,6 +16,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { assertClean, git, worktrees } from "./lib/git.mjs";
 import { acquireIntegrationLock } from "./lib/integration-lock.mjs";
+import { expiringEvidence } from "./lib/evidence-retention.mjs";
 
 const taskBranch = /^(?:task|codex)\//;
 const rebuildable = new Set(["node_modules", "dist"]);
@@ -96,6 +97,14 @@ export function removeMergedTask(root, branch, { keepBranch = false, copyEvidenc
       }
       for (const file of ignored)
         verifyEvidence(path.join(task.path, file), path.join(archive, "files", file));
+      writeFileSync(
+        path.join(archive, "manifest.json"),
+        JSON.stringify(
+          { branch, head, source: task.path, ignored, retention: expiringEvidence(archive, ignored) },
+          null,
+          2,
+        ),
+      );
     }
     const current = ignoredEvidence(task.path);
     if (current.length !== ignored.length || current.some((file, index) => file !== ignored[index]))

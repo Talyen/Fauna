@@ -125,6 +125,10 @@
     "reason": "Task scope, process lifetime and runtime identity",
     "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/tool-runtime.test.mjs"]
   },
+  "scripts/lib/evidence-retention.mjs": {
+    "reason": "Completed-task evidence expiration and preservation",
+    "suites": ["tests/unit/tooling/evidence-retention.test.mjs"]
+  },
   "scripts/integrate.mjs": {
     "reason": "Combined verification, clean-main protection, integration locking and cleanup",
     "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/worktree.test.mjs"]
