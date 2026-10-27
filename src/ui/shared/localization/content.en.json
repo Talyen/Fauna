@@ -4224,8 +4224,8 @@
     "text": "Briar Patch"
   },
   "content.talent.nature.briar-patch.rule": {
-    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also <keyword1>Bleed</keyword1>",
-    "reference": "Nature damage has a 10% chance to also Bleed"
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "reference": "Nature damage has a 10% chance to also deal Bleed damage"
   },
   "content.talent.nature.ecosystem.name": {
     "text": "Ecosystem"
@@ -4238,8 +4238,8 @@
     "text": "Entangle"
   },
   "content.talent.nature.entangle.rule": {
-    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "reference": "Nature damage has a 10% chance to also Stun"
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "reference": "Nature damage has a 10% chance to also deal Stun damage"
   },
   "content.talent.nature.overgrowth.name": {
     "text": "Overgrowth"
@@ -4266,8 +4266,8 @@
     "text": "Toxic Pollen"
   },
   "content.talent.nature.toxic-pollen.rule": {
-    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also <keyword1>Poison</keyword1>",
-    "reference": "Nature damage has a 10% chance to also Poison"
+    "text": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "reference": "Nature damage has a 10% chance to also deal Poison damage"
   },
   "content.talent.nature.verdant-cycle.name": {
     "text": "Verdant Cycle"
@@ -4301,8 +4301,8 @@
     "text": "Heavy Blows"
   },
   "content.talent.physical.heavy-blows.rule": {
-    "text": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "reference": "Physical damage has a 10% chance to also Stun"
+    "text": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "reference": "Physical damage has a 10% chance to also deal Stun damage"
   },
   "content.talent.physical.lacerate.name": {
     "text": "Lacerate"

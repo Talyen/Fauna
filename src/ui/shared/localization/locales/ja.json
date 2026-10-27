@@ -3857,6 +3857,12 @@
     "sourceHash": "65fb181c8c33e0ee84c8b18af8d9b4d1470bf3a49b3bbf8f769442655f07a54f",
     "text": "茨の茂み"
   },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "035969cbd6ce31640bc52d3cbd279badffa086e58ac818c4dc9db6636396c1fb",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>出血</keyword1>ダメージを与える"
+  },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
     "source": "Ecosystem",
@@ -3874,6 +3880,12 @@
     "source": "Entangle",
     "sourceHash": "421a272c6bdeecc1909ce96d9c415bda5dc9c96c201a39a4caa35de6ecc44509",
     "text": "絡みつき"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "79c2b09d72f080bb6c993e643a0f0e83800c847f0272f7b34cd0a21671570916",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>スタン</keyword1>ダメージを与える"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3916,6 +3928,12 @@
     "source": "Toxic Pollen",
     "sourceHash": "eecd95f9115170fb84dba2d054cf804fb9d30f46f790ac9a831dd0c24ac0ad02",
     "text": "有毒な花粉"
+  },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "15f2a23e03e42fc00aff5e9567f6f0027b89445386f6812ec4bb9c24e7f8e10f",
+    "text": "<keyword0>自然</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>毒</keyword1>ダメージを与える"
   },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
@@ -3973,9 +3991,9 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "c562b2c51af6faa528924e32847dd4c0cce2ce7e29a6e4907a6c619de4f6be99",
-    "text": "<keyword0>物理</keyword0>ダメージは{{value0}}%の確率で<keyword1>スタン</keyword1>ダメージも与える"
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "be7e0ae3e057365aff97cddcfce21a9d7fd458c598934271da60d2cb5279a044",
+    "text": "<keyword0>物理</keyword0>ダメージは{{value0}}%の確率で追加の<keyword1>スタン</keyword1>ダメージを与える"
   },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,

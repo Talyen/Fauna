@@ -3857,6 +3857,12 @@
     "sourceHash": "b8bef844adb61e8d293ce311b239908155f6a1b42148e89b8d33c3a2df3891cf",
     "text": "Dornengestrüpp"
   },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "6f06cb22b260fa5b0cc104a69467d5bc66ea38c089de7fb28e53ae3be6938c94",
+    "text": "<keyword0>Natur</keyword0>-Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Blutungsschaden</keyword1> zu verursachen"
+  },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
     "source": "Ecosystem",
@@ -3874,6 +3880,12 @@
     "source": "Entangle",
     "sourceHash": "ae0bbbaa4c4d13d0c9163ab9980c65068f30b97cd8ecfef5afffb7d252b9f10f",
     "text": "Umschlingen"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "6d72850d84ffbb2fade13a6702a989d4de52c92dba0fe50421890a77b6dc0ed9",
+    "text": "<keyword0>Natur</keyword0>-Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Betäubungsschaden</keyword1> zu verursachen"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3916,6 +3928,12 @@
     "source": "Toxic Pollen",
     "sourceHash": "f72cc4860e15c519cba297036ea21d44420ba710cf6c5547953bab0112ade4b5",
     "text": "Giftpollen"
+  },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "b30bfb90eab8c348b87d9a3ee8e92468b06893ad232116bcdd71b0a63720256d",
+    "text": "<keyword0>Natur</keyword0>-Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Giftschaden</keyword1> zu verursachen"
   },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
@@ -3973,9 +3991,9 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "bdbc30b8e50de01c266ceefd11d769dbb8e213e3579f6dddeb6c472a201152e1",
-    "text": "<keyword0>Physischer</keyword0> Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Betäubung</keyword1>sschaden zu verursachen"
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "d606f1dfeabc51e9bbee5c20f447ca41d7f571f8c83b16b969d2dc7568b43771",
+    "text": "<keyword0>Physischer</keyword0> Schaden hat eine Chance von {{value0}}%, zusätzlich <keyword1>Betäubungsschaden</keyword1> zu verursachen"
   },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,

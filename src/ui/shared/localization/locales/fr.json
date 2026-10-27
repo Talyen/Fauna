@@ -3905,6 +3905,12 @@
     "sourceHash": "07ba84a7a7811ce554ccee57b4ef7a86b5f363439fb87287646283efef1dbacc",
     "text": "Fourré de ronces"
   },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "b7485a6262b0f96a1bdee67bd0a3d47b21eeb4a1ac9d1fca99b79666433c2ef4",
+    "text": "Les dégâts de <keyword0>Nature</keyword0> ont {{value0}}% de chances d’infliger aussi des dégâts de <keyword1>Saignement</keyword1>"
+  },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
     "source": "Ecosystem",
@@ -3922,6 +3928,12 @@
     "source": "Entangle",
     "sourceHash": "9106156ab38f3cdfd29fa67e950432a00d307bf24c0dfa0042ca0bb1cdf94e9d",
     "text": "Enchevêtrement"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "fc40e4c2a66b705a7caa337e0cae928b19ccc10ad54f6f4c364d027a93a16bc7",
+    "text": "Les dégâts de <keyword0>Nature</keyword0> ont {{value0}}% de chances d’infliger aussi des dégâts d’<keyword1>Étourdissement</keyword1>"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3964,6 +3976,12 @@
     "source": "Toxic Pollen",
     "sourceHash": "354ad3f28b2e5e41004d78af968e3c998588c06578115e528069eb388fde6ad8",
     "text": "Pollen toxique"
+  },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "5caaed6981b967dec708d50e0ebd3df54c98a551d5dfa7b2b576ca80b1eb4db3",
+    "text": "Les dégâts de <keyword0>Nature</keyword0> ont {{value0}}% de chances d’infliger aussi des dégâts de <keyword1>Poison</keyword1>"
   },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
@@ -4021,8 +4039,8 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "b16c11012b0bdd03bc8fac7fbfdcf9697dab168bb99ce68d0162f33959ed0fe4",
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "1ebf04fbbfaf6496170041b5450210629aa31450b22a542d52f3742913452ba1",
     "text": "Les dégâts <keyword0>Physiques</keyword0> ont {{value0}}% de chances d’infliger aussi des dégâts d’<keyword1>Étourdissement</keyword1>"
   },
   "content.talent.physical.lacerate.name": {

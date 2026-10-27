@@ -3857,6 +3857,12 @@
     "sourceHash": "072999e16f90f73713766f0d32edf699188382023f88ac63740393707a4c4527",
     "text": "Терновые заросли"
   },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "656a473a54a3f6ae501772317d1adf9b628328cfef0b47db817c0bb1cedc16c3",
+    "text": "Урон <keyword0>природой</keyword0> с вероятностью {{value0}}% также наносит урон <keyword1>кровотечением</keyword1>"
+  },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
     "source": "Ecosystem",
@@ -3874,6 +3880,12 @@
     "source": "Entangle",
     "sourceHash": "f7c57e5dbf2405aa11ab5315d724ffe6f88ff5baedd3abe010daf36e2083f1c4",
     "text": "Опутывание"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "7196e89d9a0ca004a0441f5a78badc0c9c38b1c3df8cd9bdd2c05e271da21112",
+    "text": "Урон <keyword0>природой</keyword0> с вероятностью {{value0}}% также наносит урон <keyword1>оглушением</keyword1>"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3916,6 +3928,12 @@
     "source": "Toxic Pollen",
     "sourceHash": "c22136e145858f8938a7e85babf6b0cc1cbb37ca8bc36e654e95b26f6e299cff",
     "text": "Ядовитая пыльца"
+  },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "118d4cb94221d7fad079c0ca93525a1abbde12ba48f3872dfd832bd5e66f77cc",
+    "text": "Урон <keyword0>природой</keyword0> с вероятностью {{value0}}% также наносит урон <keyword1>ядом</keyword1>"
   },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
@@ -3973,9 +3991,9 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "ef9b79810b3ffc9bca6241a80781c92762f1b38be7d4c6a4a5d7c221b63f1723",
-    "text": "<keyword0>Физический</keyword0> урон с вероятностью {{value0}}% также наносит урон от <keyword1>оглушения</keyword1>"
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "1f202b51cc21c70c0d49ef55eecdf3a83a3725cd3eb1dc9319e50c5add5043e4",
+    "text": "<keyword0>Физический</keyword0> урон с вероятностью {{value0}}% также наносит урон <keyword1>оглушением</keyword1>"
   },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,

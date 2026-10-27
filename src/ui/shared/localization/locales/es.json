@@ -3857,6 +3857,12 @@
     "sourceHash": "7658c33a12b50e7d0f384ed138c553cc6eefc774017fa1c3746aa1fb4501741b",
     "text": "Matorral espinoso"
   },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "de674e31d7552b854ae51a0311aea977b253704b242fa6f053d4934b8146a1a8",
+    "text": "El daño de <keyword0>Naturaleza</keyword0> tiene un {{value0}}% de probabilidad de infligir también daño de <keyword1>Sangrado</keyword1>"
+  },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
     "source": "Ecosystem",
@@ -3874,6 +3880,12 @@
     "source": "Entangle",
     "sourceHash": "36c157e143519559a13248085108c1e376f013f6e18245dd9ea28639a2bdabb9",
     "text": "Enredar"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "f5b772dd5ce669c9250cd0ecd1ef36b2ca49d8411ece9d0e1e3e5686de8e9b76",
+    "text": "El daño de <keyword0>Naturaleza</keyword0> tiene un {{value0}}% de probabilidad de infligir también daño de <keyword1>Aturdimiento</keyword1>"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3916,6 +3928,12 @@
     "source": "Toxic Pollen",
     "sourceHash": "63578e242a599aeb2fc18ce24a9e2d8634564ef124e9fc4f87402bdeba680e2c",
     "text": "Polen tóxico"
+  },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "2d479bdfc098f6870cbbb660a36ef0194649e6952dfcd1266d5817b28e1c6a51",
+    "text": "El daño de <keyword0>Naturaleza</keyword0> tiene un {{value0}}% de probabilidad de infligir también daño de <keyword1>Veneno</keyword1>"
   },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
@@ -3973,8 +3991,8 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "287db9539ab9c807d07e1e26fdc1a322cf65b73af4198fde395b9a5315fc42ac",
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "329773dcce4277b1bc1e974f0136d36a99f77cf1b341343a54cb84fed0c419a7",
     "text": "El daño <keyword0>Físico</keyword0> tiene un {{value0}}% de probabilidad de infligir también daño de <keyword1>Aturdimiento</keyword1>"
   },
   "content.talent.physical.lacerate.name": {

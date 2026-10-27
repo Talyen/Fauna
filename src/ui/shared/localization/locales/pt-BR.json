@@ -3857,6 +3857,12 @@
     "sourceHash": "34964958a02002fae0add5f6de00cddfc8a2cb3497024d34e5ff068d27263724",
     "text": "Moita de espinheiros"
   },
+  "content.talent.nature.briar-patch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Bleed</keyword1> damage",
+    "sourceHash": "f54f1d734e45c509a78a1cbafaa9cc3e29a1361a6a54b2ad8e60ad221383fbfd",
+    "text": "Dano de <keyword0>Natureza</keyword0> tem {{value0}}% de chance de também causar dano de <keyword1>Sangramento</keyword1>"
+  },
   "content.talent.nature.ecosystem.name": {
     "reviewed": true,
     "source": "Ecosystem",
@@ -3874,6 +3880,12 @@
     "source": "Entangle",
     "sourceHash": "454510ee92bab383d4f9e734fed4d346aedfec0060ff37ca39705df9636ae0cb",
     "text": "Enredar"
+  },
+  "content.talent.nature.entangle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "52bdaea705d36aac4af36ca52d00bb623d5f70ee54f3a4e4cad3ccdea6573fd3",
+    "text": "Dano de <keyword0>Natureza</keyword0> tem {{value0}}% de chance de também causar dano de <keyword1>Atordoamento</keyword1>"
   },
   "content.talent.nature.overgrowth.name": {
     "reviewed": true,
@@ -3916,6 +3928,12 @@
     "source": "Toxic Pollen",
     "sourceHash": "a5c31bb49f0943fce9fe3afc1a0b4a41c0d958497987f0276bf350ac4cd76329",
     "text": "Pólen tóxico"
+  },
+  "content.talent.nature.toxic-pollen.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Poison</keyword1> damage",
+    "sourceHash": "b8cfe8bb77e50484424b9aa523e1a2d692da0d4673b83772cd6e316786bfa1df",
+    "text": "Dano de <keyword0>Natureza</keyword0> tem {{value0}}% de chance de também causar dano de <keyword1>Veneno</keyword1>"
   },
   "content.talent.nature.verdant-cycle.name": {
     "reviewed": true,
@@ -3973,9 +3991,9 @@
   },
   "content.talent.physical.heavy-blows.rule": {
     "reviewed": true,
-    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also <keyword1>Stun</keyword1>",
-    "sourceHash": "29f3a8204ab46b97067090cc5366ad5cad55b17a88b4b86236f831752f8b0d22",
-    "text": "O dano <keyword0>Físico</keyword0> tem {{value0}}% de chance de também causar dano de <keyword1>Atordoamento</keyword1>"
+    "source": "<keyword0>Physical</keyword0> damage has a {{value0}}% chance to also deal <keyword1>Stun</keyword1> damage",
+    "sourceHash": "97b5262ef2f6bc4101029c598aecba35777ee9f95c5fcfa6d05ec2fed690f958",
+    "text": "Dano <keyword0>Físico</keyword0> tem {{value0}}% de chance de também causar dano de <keyword1>Atordoamento</keyword1>"
   },
   "content.talent.physical.lacerate.name": {
     "reviewed": true,
