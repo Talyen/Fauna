@@ -401,6 +401,18 @@
     "sourceHash": "f81043c1340fcccda13e08b3f0da1014a4b7a64bb9efae7b3fb8bd025c761ae7",
     "text": "<keyword0>Горение</keyword0>, потерянное при уменьшении, также снимает столько же вражеского <keyword1>блока</keyword1>"
   },
+  "content.boon.asteroid-hammer.name": {
+    "reviewed": true,
+    "source": "Asteroid Hammer",
+    "sourceHash": "31fe18c9662f20ac3f2cf38861ce59fceba50c8d82a293a785053cca56471c46",
+    "text": "Молот астероида"
+  },
+  "content.boon.asteroid-hammer.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> damage is twice as effective against enemy <keyword1>Block</keyword1>",
+    "sourceHash": "09d5acb7c35f694093351accea067da12304da8a69ed197ae10b7cf9205a6610",
+    "text": "Урон от <keyword0>оглушения</keyword0> вдвое эффективнее против <keyword1>блока</keyword1> врага"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -412,6 +424,18 @@
     "source": "<keyword0>Purge</keyword0> cannot remove an ally’s last beneficial effect",
     "sourceHash": "c663b55ea3d7901959b6e52237c66eecdc31000a4fd3bf5f7c2470db8912390a",
     "text": "<keyword0>Рассеивание</keyword0> не может снять последний полезный эффект союзника"
+  },
+  "content.boon.beeswax-crown.name": {
+    "reviewed": true,
+    "source": "Beeswax Crown",
+    "sourceHash": "1b2e9a23a85e48ad7647f700888de676f2081af81911953e8275e353123a376d",
+    "text": "Корона из пчелиного воска"
+  },
+  "content.boon.beeswax-crown.rule": {
+    "reviewed": true,
+    "source": "When an ally’s <keyword0>Armor</keyword0> breaks, all allies gain {{value0}} <keyword1>Thorns</keyword1>",
+    "sourceHash": "17391ab430ad27b2eba81f91268c61ab42b3971300dd8e72a7ef615755d84b0d",
+    "text": "Когда <keyword0>броня</keyword0> союзника ломается, все союзники получают <keyword1>шипы</keyword1> в количестве {{value0}}"
   },
   "content.boon.bellows-heart.name": {
     "reviewed": true,
@@ -700,6 +724,18 @@
     "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
     "sourceHash": "5191a89c1eb392fd4f907c60f59f2d767251fe67e25b302ecdde95eefcfb2fde",
     "text": "Пороги вражеского <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> зависят от текущего <keyword2>здоровья</keyword2>"
+  },
+  "content.boon.crown-waffle-iron.name": {
+    "reviewed": true,
+    "source": "Crown Waffle Iron",
+    "sourceHash": "ab15a248d88159ca581e9def77d6d18fdc4deac695d49a67944fd6b449057ded",
+    "text": "Королевская вафельница"
+  },
+  "content.boon.crown-waffle-iron.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
+    "sourceHash": "444616929c97baf399296293d9aa3abecf8b55ca393299d64f0c0c8a8d7eefed",
+    "text": "<keyword0>Еда</keyword0> также восстанавливает <keyword1>здоровье</keyword1> в размере <keyword2>блока</keyword2> цели"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1049,6 +1085,18 @@
     "sourceHash": "7416e177a3270813d45917c7d02a71710211461bbbf9bdd33ed52db5c518f290",
     "text": "Когда враг падает, его <keyword0>кровотечение</keyword0> распространяется на другого врага"
   },
+  "content.boon.harvest-sickle.name": {
+    "reviewed": true,
+    "source": "Harvest Sickle",
+    "sourceHash": "379519037d3ee57081f0d0d946d5c31378790c15eaa093d62ddb6bf4f90d850a",
+    "text": "Жатвенный серп"
+  },
+  "content.boon.harvest-sickle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> damage ignores enemy <keyword1>Block</keyword1>",
+    "sourceHash": "25723b3f16fa3e95dbf75ba53a6a8ed1861b734c3dcb074361fe6590cf5efa1e",
+    "text": "Урон от <keyword0>кровотечения</keyword0> игнорирует <keyword1>блок</keyword1> врага"
+  },
   "content.boon.hearth-coal.name": {
     "reviewed": true,
     "source": "Hearth Coal",
@@ -1252,6 +1300,18 @@
     "source": "<keyword0>Nature</keyword0> hits have a {{value0}}% chance to grant Gold equal to enemy <keyword1>Health</keyword1> lost",
     "sourceHash": "eea0f3787ecf6a98c07ee659563e1b9b681134338170c38102c3903059dc70e0",
     "text": "Попадания <keyword0>природой</keyword0> с вероятностью {{value0}}% дают золото в размере потерянного врагом <keyword1>здоровья</keyword1>"
+  },
+  "content.boon.meadow-mortar.name": {
+    "reviewed": true,
+    "source": "Meadow Mortar",
+    "sourceHash": "ee24220d1deb0ba43332fef4e8f857742f50c2f6fbc65a0fb9ee6b243730f8a5",
+    "text": "Луговая ступка"
+  },
+  "content.boon.meadow-mortar.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Purging</keyword0> an effect from a Poisoned enemy makes their <keyword1>Poison</keyword1> deal damage",
+    "sourceHash": "de54f5e54b999180f316bb8a29632f1bbe190774e1d764f2a2e99fd4a5dd24ab",
+    "text": "<keyword0>Рассеивание</keyword0> эффекта отравленного врага заставляет его <keyword1>яд</keyword1> нанести урон"
   },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
@@ -1733,6 +1793,18 @@
     "sourceHash": "45f5dd7f53a2ce304838dc5a38d97effd35378e05699143bee82b5f5a4a2ae88",
     "text": "<keyword0>Отражённые</keyword0> союзниками атаки поражают всех врагов"
   },
+  "content.boon.rocking-chair-charm.name": {
+    "reviewed": true,
+    "source": "Rocking Chair Charm",
+    "sourceHash": "f809ccef85e5e4d985e087064ea2997718e5f75683c4b0879c42ce396471cf27",
+    "text": "Амулет кресла-качалки"
+  },
+  "content.boon.rocking-chair-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0>, <keyword1>Poison</keyword1> and <keyword2>Bleed</keyword2> cannot damage allies in backup",
+    "sourceHash": "e9ed9c0efb51341a7a96786de897fb89de38b275d0ff02d9529620ea45eaf786",
+    "text": "<keyword0>Горение</keyword0>, <keyword1>яд</keyword1> и <keyword2>кровотечение</keyword2> не наносят урон союзникам в запасе"
+  },
   "content.boon.rook-of-mercy.name": {
     "reviewed": true,
     "source": "Rook of Mercy",
@@ -1768,6 +1840,18 @@
     "source": "Allies can <keyword0>Dodge</keyword0> <keyword1>Thorns</keyword1> damage",
     "sourceHash": "854b4607d60c034b9c8527782260fb6bdc2d9e94fdd580d1e634bada4d7b1513",
     "text": "Союзники могут <keyword0>уклоняться</keyword0> от урона <keyword1>шипами</keyword1>"
+  },
+  "content.boon.rosewax-seal.name": {
+    "reviewed": true,
+    "source": "Rosewax Seal",
+    "sourceHash": "8ab12b1c7d05a9919c8a6941760ba3c4bcd9712bf53f673f93fb12162e85cedf",
+    "text": "Розовая восковая печать"
+  },
+  "content.boon.rosewax-seal.rule": {
+    "reviewed": true,
+    "source": "Allied <keyword0>Thorns</keyword0> apply {{value0}} <keyword1>Bleed</keyword1>",
+    "sourceHash": "fca0fa1b4069fea555234bc387bdeac350ce741113c7d426e6339946b5b6ecbb",
+    "text": "<keyword0>Шипы</keyword0> союзников накладывают <keyword1>кровотечение</keyword1> в количестве {{value0}}"
   },
   "content.boon.saddle-pouch.name": {
     "reviewed": true,
@@ -1840,6 +1924,30 @@
     "source": "Gain {{value0}} additional Gold for each battle won",
     "sourceHash": "38a6b3fa7535cc1f0a25c7207d932636df31174e3b54e12835fc8e0f64e25e73",
     "text": "Получите дополнительно {{value0}} золота за каждый выигранный бой"
+  },
+  "content.boon.snowbell.name": {
+    "reviewed": true,
+    "source": "Snowbell",
+    "sourceHash": "1e9ccfb2bb184d9f3d9e7a3ffffaa97de2cb798122390c6478484a6aac2d50b9",
+    "text": "Снежный колокольчик"
+  },
+  "content.boon.snowbell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Frozen</keyword0> enemies’ <keyword1>Thorns</keyword1> cannot retaliate",
+    "sourceHash": "46ac84d7b63aee1ad2d9904a18c40c4c4ab458c46c64b3e56846739b26a37b47",
+    "text": "<keyword1>Шипы</keyword1> <keyword0>замороженных</keyword0> врагов не могут отвечать на удары"
+  },
+  "content.boon.solstice-concertina.name": {
+    "reviewed": true,
+    "source": "Solstice Concertina",
+    "sourceHash": "ec3759b35864a7c0eba7cddd196eed750f3dab094f2e3337ed21f77c538458ac",
+    "text": "Концертина солнцестояния"
+  },
+  "content.boon.solstice-concertina.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burning</keyword0> enemies cannot <keyword1>Dodge</keyword1> <keyword2>Freeze</keyword2> attacks",
+    "sourceHash": "fc6e09831ca88d176851610f37fdf3a59887b48997954764b12f64b124cef284",
+    "text": "Враги с <keyword0>горением</keyword0> не могут <keyword1>уклоняться</keyword1> от атак <keyword2>заморозкой</keyword2>"
   },
   "content.boon.soot-brush.name": {
     "reviewed": true,
@@ -2044,6 +2152,18 @@
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> buildup combines on enemies",
     "sourceHash": "184a897bd6081cc742d82558690bd5f4e379670e37373b351fd45e990e032d96",
     "text": "Накопления <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> у врагов объединяются"
+  },
+  "content.boon.vanishing-hat.name": {
+    "reviewed": true,
+    "source": "Vanishing Hat",
+    "sourceHash": "87073a6b8e063d4a263fca2d530ec78bafffc7c821ac249edc68098fb9f207f5",
+    "text": "Шляпа исчезновения"
+  },
+  "content.boon.vanishing-hat.rule": {
+    "reviewed": true,
+    "source": "Allies can <keyword0>Dodge</keyword0> enemy <keyword1>Purge</keyword1>",
+    "sourceHash": "567d08dc8378875a60a83f46ea75bb354064148693e8f8332b60a12b56158c24",
+    "text": "Союзники могут <keyword0>уклоняться</keyword0> от вражеского <keyword1>рассеивания</keyword1>"
   },
   "content.boon.velvet-whisk.name": {
     "reviewed": true,
