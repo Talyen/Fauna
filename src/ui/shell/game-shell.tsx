@@ -433,7 +433,9 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                       )}
                     </HeaderNavigation.Provider>
                     <div className="sr-only" role="log" aria-live="polite">
-                      {view.events.map((event) => eventPresentation(game, event, i18n)).join(" ")}
+                      {view.events
+                        .map((event) => eventPresentation(game, event, i18n, view.eventPreviousGame))
+                        .join(" ")}
                     </div>
                   </div>
                 </EffectScope>

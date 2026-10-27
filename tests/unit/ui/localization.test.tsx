@@ -78,7 +78,7 @@ import { Keyword } from "../../../src/ui/shared/keyword-text";
 import { CreatureCard } from "../../../src/ui/shared/cards/cards";
 import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
-import { addBackups, requireBattle, run, teamRun } from "../../support/game";
+import { addBackups, requireBattle, run, teamRun, victoryReady } from "../../support/game";
 import { BattleScreen } from "../../../src/ui/battle/battle-screen";
 import { ManaCrystals } from "../../../src/ui/battle/mana-crystals";
 import { MenuActions } from "../../../src/ui/menu/menu-actions";
@@ -256,6 +256,44 @@ it("localizes prevented Freeze damage and skipped control turns", () => {
   ).toBe("Créature traduite : tour sauté (Étourdissement).");
   expect(eventPresentation(game, { ...skipped, status: "stun" as const }, reader)).toBe(skipped.text);
   expect(eventPresentation(game, skipped, createMessageReader("en", {}))).toBe(skipped.text);
+});
+
+it("localizes the final enemy hit after the battle state is retired", async () => {
+  const initial = victoryReady();
+  const enemy = initial.battle!.enemies.find((item) => item.health > 0)!;
+  const cardId = initial.battle!.hand[0]!;
+  let saved = "";
+  const session = createSession({
+    desktop: false,
+    steam: { available: false },
+    saves: {
+      readCandidates: async () => [{ source: "primary" as const, data: JSON.stringify(initial) }],
+      write: async (data) => {
+        saved = data;
+      },
+    },
+  });
+  try {
+    await session.load();
+    const previous = session.store.getState().game;
+    expect(session.command({ type: "play", cardId, targetId: enemy.id })).toBe(true);
+    const view = session.store.getState();
+    expect(view.game.battle).toBeNull();
+    expect(view.eventPreviousGame).toBe(previous);
+    expect(Object.isFrozen(view.eventPreviousGame)).toBe(true);
+    const event = view.events.find((item) => item.kind === "damage" && item.targetId === enemy.id)!;
+    expect(event).toBeDefined();
+    const reader = createMessageReader("fr", french);
+    expect(eventPresentation(view.game, event, reader)).toBe(event.text);
+    const translated = eventPresentation(view.game, event, reader, view.eventPreviousGame);
+    expect(translated).toContain(enemy.name);
+    expect(translated).toContain("subit");
+    expect(translated).not.toBe(event.text);
+    expect(await session.flush()).toBe(true);
+    expect(JSON.parse(saved)).not.toHaveProperty("eventPreviousGame");
+  } finally {
+    await session.dispose();
+  }
 });
 
 it("localizes a committed resurrection without changing its Health or participants", () => {
