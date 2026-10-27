@@ -89,6 +89,7 @@ export function ordinaryAttackFacts(
   const usefulExtras = !!def.effects?.some((effect) => supplementalRule(effect.kind).ordinaryAttackUtility);
   const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
   const cardLeech = def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech);
+  const craterPunch = lastCardCritical && state.boons.includes("crater-punch");
   return [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
     const baseDamage = modifiedDamage(
@@ -107,10 +108,7 @@ export function ordinaryAttackFacts(
     const armored = armorApplies(state, enemy, type, actor);
     const armor = armored ? Math.max(0, enemy.combat.armor - erosion) : 0;
     const payment = blockPayment(damage, enemy.block);
-    const piercing =
-      lastCardCritical && state.boons.includes("crater-punch")
-        ? Math.round(payment.absorbed / boonRule("crater-punch").divisor)
-        : 0;
+    const piercing = craterPunch ? Math.round(payment.absorbed / boonRule("crater-punch").divisor) : 0;
     const prevented = negated || (type === "freeze" && enemy.combat.nullifyFreeze);
     const lost = prevented ? 0 : armoredDamage(payment.remaining, armor) + piercing;
     const eroded = !negated && armored ? Math.min(erosion, enemy.combat.armor) : 0;

@@ -494,7 +494,7 @@ export function battleBenefits(
             return sum;
           }, 0) ?? 0;
         const cleanse =
-          def.effects?.some((effect) => effect.kind === "cleanse" && hasHarmfulEffects(actor)) ?? false;
+          !!def.effects?.some((effect) => effect.kind === "cleanse") && hasHarmfulEffects(actor);
         return (def.target === "self" ? [actor] : allies()).map((ally) => {
           const useful = Math.min(value, STACK_LIMIT - ally.block) + foodDodgeBenefit(state, def, ally);
           return supportOne(

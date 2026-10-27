@@ -5,9 +5,11 @@ import {
   findLivingBattlefield,
   isEnemy,
   battlefield,
+  battlefieldHasId,
   livingBattlefield,
   healingAllies,
   cleanseTargets,
+  canSpreadCleanse,
   isDepartedMinion,
 } from "../battlefield";
 import { roll } from "../random";
@@ -152,10 +154,9 @@ export function* triggerArmorBreak(
   const allied = !isEnemy(unit);
   if (allied && hasTalent(state, "armor.reactive-guard"))
     yield* reaction("grantBlock", state, unit, talentRule("armor.reactive-guard").amount, events);
-  const row = battlefield(state, allied ? "player" : "enemy");
-  if (!row.some((deployed) => deployed.id === unit.id)) return;
+  if (!battlefieldHasId(state, allied ? "player" : "enemy", unit.id)) return;
   if (allied && state.boons.includes("eclipse-rivet"))
-    for (const other of row)
+    for (const other of battlefield(state, "player"))
       if (other.id !== unit.id && other.health > 0)
         yield* reaction("grantArmor", state, other, boonRule("eclipse-rivet").armor, events);
   const amount = passiveAmount(allied ? state : undefined, unit.species, "armorBreak");
@@ -174,7 +175,7 @@ export function* removeControlBuildup(
   events: GameEvent[],
   spread = true,
 ): Resolution<void> {
-  if (spread) {
+  if (spread && canSpreadCleanse(state, unit)) {
     const targets = cleanseTargets(state, unit);
     if (targets.length > 1) {
       for (const target of targets) {
@@ -213,7 +214,7 @@ export function* removeEffects(
   linked = false,
 ): Resolution<number> {
   if (state && isDepartedMinion(state, unit)) return 0;
-  if (kind === "cleanse" && spread) {
+  if (kind === "cleanse" && spread && canSpreadCleanse(state, unit)) {
     const targets = cleanseTargets(state, unit);
     if (targets.length > 1) {
       let removed = 0;

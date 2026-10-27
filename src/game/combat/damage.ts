@@ -49,9 +49,23 @@ export function shareNegate(
   if (blindMiss || !isEnemy(source) || !state.boons.includes("devotion-clasp")) return;
   const bearer = targets.find((unit) => unit.health > 0 && !isEnemy(unit) && ensureCombat(unit).negate);
   if (!bearer) return;
-  const others = targets.filter((unit) => unit.id !== bearer.id && unit.health > 0 && !isEnemy(unit));
-  const unprotected = others.filter((unit) => !ensureCombat(unit).negate);
-  const recipient = mostInjured(unprotected.length ? unprotected : others);
+  let unprotected: Combatant | undefined;
+  let fallback: Combatant | undefined;
+  let unprotectedFraction = Infinity;
+  let fallbackFraction = Infinity;
+  for (const unit of targets) {
+    if (unit.id === bearer.id || unit.health <= 0 || isEnemy(unit)) continue;
+    const fraction = unit.health / maximumHealth(unit);
+    if (!fallback || fraction < fallbackFraction) {
+      fallback = unit;
+      fallbackFraction = fraction;
+    }
+    if (!ensureCombat(unit).negate && (!unprotected || fraction < unprotectedFraction)) {
+      unprotected = unit;
+      unprotectedFraction = fraction;
+    }
+  }
+  const recipient = unprotected ?? fallback;
   if (recipient) return { bearer, recipientId: recipient.id, spent: false };
 }
 
@@ -162,12 +176,16 @@ export function* bounce(
         effect === "heal"
           ? healingAllies(state, allied ? "player" : "enemy")
           : battlefield(state, allied ? "enemy" : "player");
-      const eligible = pool.filter(
-        (unit) =>
+      let count = 0;
+      for (const unit of pool)
+        if (
           unit.health > 0 &&
           !visitedTargets.has(unit.id) &&
-          (effect !== "heal" || unit.health < maximumHealth(unit)),
-      );
+          (effect !== "heal" || unit.health < maximumHealth(unit))
+        )
+          pool[count++] = unit;
+      pool.length = count;
+      const eligible = pool;
       if (!eligible.length) return;
       if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =
@@ -340,12 +358,13 @@ export function* resolveHit(
     ((options.origin === "ability" ? options.blindMiss : undefined) ?? beginAttack(state, source, events));
   const thornDodge =
     alliedTarget && "thorns" in options && options.thorns && state.boons.includes("rootvault-pole");
+  let dodge: number | undefined;
   if (
     (direct || thornDodge) &&
     (blindMiss ||
       (!("cannotDodge" in options && options.cannotDodge) &&
-        dodgeChance(state, target) > 0 &&
-        succeeds(state, dodgeChance(state, target) / 100, !alliedTarget, events)))
+        (dodge = dodgeChance(state, target)) > 0 &&
+        succeeds(state, dodge / 100, !alliedTarget, events)))
   ) {
     if (alliedSource && !alliedTarget && state.boons.includes("coral-net-weight") && target.block > 0) {
       const payment = blockPayment(
@@ -469,26 +488,20 @@ export function* resolveHit(
     (type === "physical" || type === "stun")
   )
     erode(boonRule("sundering-charm").armor);
+  // Armor cannot change between these calculations; erosion above has already resolved.
+  const appliesArmor = (!armorFirst || critical) && armorApplies(state, target, type, source, options);
   // Other mechanics use the hit before Block; Armor still mitigates their damage.
   const effectDamage =
-    !armorFirst && armorApplies(state, target, type, source, options)
-      ? armoredDamage(damage + blocked, stats.armor)
-      : damage + blocked;
+    !armorFirst && appliesArmor ? armoredDamage(damage + blocked, stats.armor) : damage + blocked;
   if (alliedTarget && depletedBlock && damage > 0 && state.boons.includes("glassleaf-shield"))
     damage = Math.round(damage / boonRule("glassleaf-shield").divisor);
-  if (!armorFirst && armorApplies(state, target, type, source, options)) {
+  if (!armorFirst && appliesArmor) {
     const reduced = armoredDamage(damage, stats.armor);
     armorReducedDamage = reduced < damage;
     damage = reduced;
   }
   const criticalBonusDamage = critical
-    ? Math.max(
-        0,
-        effectDamage -
-          (armorApplies(state, target, type, source, options)
-            ? armoredDamage(ordinaryDamage, stats.armor)
-            : ordinaryDamage),
-      )
+    ? Math.max(0, effectDamage - (appliesArmor ? armoredDamage(ordinaryDamage, stats.armor) : ordinaryDamage))
     : 0;
   if (direct && alliedSource && !alliedTarget && critical && state.boons.includes("crater-punch"))
     damage += Math.round(blocked / boonRule("crater-punch").divisor);

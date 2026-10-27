@@ -269,7 +269,7 @@ export const modifierImplementations = freeze(
       "comb-uncapping-fork": ["./combat/damage#resolveHit"],
       "fern-fencing-foil": ["./combat/damage-reactions#dodgeResponse"],
       "resonance-kalimba": ["./combat/damage#resolveHit"],
-      "miracle-megaphone": ["./battlefield#cleanseTargets"],
+      "miracle-megaphone": ["./battlefield#canSpreadCleanse"],
       "blossom-cake-stand": ["./ability-rules#cardCost"],
       "accordioned-bridge": ["./combat/state#controlled"],
       "last-candle": ["./combat/lifecycle#tickStatuses"],

@@ -129,11 +129,11 @@ export function recruitLineup(
   incoming: Pick<import("./types").Creature, "id" | "species">,
   replacement?: string,
 ): string[] {
-  const active = state.team.map((unit) => unit.id);
   if (replacement) {
-    const ids = active.map((id) => (id === replacement ? incoming.id : id));
+    const ids = state.team.map((unit) => (unit.id === replacement ? incoming.id : unit.id));
     return ids.includes(incoming.id) && species(incoming.species).legendary ? [incoming.id] : ids;
   }
+  const active = state.team.map((unit) => unit.id);
   return active.length < 3 &&
     !species(incoming.species).legendary &&
     !state.team.some((unit) => species(unit.species).legendary)

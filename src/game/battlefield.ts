@@ -79,8 +79,8 @@ export function findLivingBattlefield(
   for (const unit of state.battle?.minions ?? [])
     if (
       unit.minion.side === side &&
-      row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId) &&
       unit.health > 0 &&
+      row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId) &&
       (!predicate || predicate(unit))
     )
       return unit;
@@ -102,7 +102,10 @@ export function livingBattlefield(state: GameState, side: "player" | "enemy"): (
     if (minions.length === 1) {
       if (row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)) living.push(unit);
     } else {
-      if (!owners) owners = new Set(living.map((owner) => owner.id));
+      if (!owners) {
+        owners = new Set();
+        for (const owner of living) owners.add(owner.id);
+      }
       if (owners.has(unit.minion.ownerId)) living.push(unit);
     }
   }
@@ -131,10 +134,14 @@ export function healingAllies(state: GameState, side: "player" | "enemy" = "play
   return row;
 }
 
+export function canSpreadCleanse(state: GameState | undefined, unit: Creature | Enemy): boolean {
+  return !!state && !isEnemy(unit) && state.boons.includes("miracle-megaphone");
+}
+
 /** Expand one Cleanse application once; already-grouped abilities retain their removal count. */
 export function cleanseTargets(state: GameState | undefined, unit: Creature | Enemy) {
   const targets: (Creature | Enemy)[] = [unit];
-  if (state && !isEnemy(unit) && state.boons.includes("miracle-megaphone"))
+  if (state && canSpreadCleanse(state, unit))
     for (const ally of battlefield(state, "player"))
       if (ally.id !== unit.id && ally.health > 0) targets.push(ally);
   return targets;

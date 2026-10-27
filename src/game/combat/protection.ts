@@ -159,11 +159,14 @@ export function* shareProtection(
   const chance = passiveAmount(allied ? state : undefined, source.species, "shareProtection");
   if (chance <= 0) return;
   const pool = battlefield(state, allied ? "player" : "enemy");
-  if (!pool.some((unit) => unit.id === source.id)) return;
   let count = 0;
-  for (const unit of pool) if (unit.id !== source.id && unit.health > 0) pool[count++] = unit;
+  let deployed = false;
+  for (const unit of pool) {
+    if (unit.id === source.id) deployed = true;
+    else if (unit.health > 0) pool[count++] = unit;
+  }
   pool.length = count;
-  if (!pool.length) return;
+  if (!deployed || !pool.length) return;
   if (!succeeds(state, chance / 100, !allied, events)) return;
   for (const recipient of pool) {
     if (effect === "block") yield* reaction("grantBlock", state, recipient, amount, events, false);
