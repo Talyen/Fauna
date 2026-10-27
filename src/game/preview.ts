@@ -43,16 +43,20 @@ export function projectPlay(state: GameState, cardId: string, targetId?: string)
                 )
                   throw new Unresolved("budget");
                 if (index >= 64) throw new Unresolved("budget");
-                const values =
+                if (
                   decision.kind === "chance"
                     ? decision.threshold <= 0 || decision.threshold >= 1
-                      ? [0]
-                      : [0, decision.threshold]
-                    : Array.from({ length: decision.size }, (_, i) => (i + 0.5) / decision.size);
-                if (!values.length || values.length > 64) throw new Unresolved("budget");
-                if (values.length === 1) return values[0]!;
+                    : decision.size === 1
+                )
+                  return decision.kind === "chance" ? 0 : 0.5;
                 const choice = choices[index++];
-                if (choice === undefined) throw new Fork(values);
+                if (choice === undefined) {
+                  const values =
+                    decision.kind === "chance"
+                      ? [0, decision.threshold]
+                      : Array.from({ length: decision.size }, (_, i) => (i + 0.5) / decision.size);
+                  throw new Fork(values);
+                }
                 return choice;
               },
               {

@@ -48,13 +48,13 @@ export function receiveCard(state: GameState, id: string) {
 export function recoverBrokenGuard(state: GameState, ownerId: string, events: GameEvent[]) {
   if (
     !state.battle ||
+    !state.battle.discard.length ||
     !state.boons.includes("cloud-cup-and-ball") ||
     !state.team.some((unit) => unit.id === ownerId && unit.health > 0)
   )
     return;
-  const available = state.battle.discard.filter((id) =>
-    state.cards.some((card) => card.id === id && card.ownerId === ownerId),
-  );
+  const owned = new Set(state.cards.filter((card) => card.ownerId === ownerId).map((card) => card.id));
+  const available = state.battle.discard.filter((id) => owned.has(id));
   if (!available.length) return;
   const id =
     available[
@@ -77,9 +77,9 @@ function journeyReturnCards(state: GameState, ownerId: string): Set<string> {
   const owners = new Set(
     state.team.filter((unit) => unit.health > 0 && unit.id !== ownerId).map((unit) => unit.id),
   );
-  return new Set(
-    state.cards.filter((card) => card.ownerId && owners.has(card.ownerId)).map((card) => card.id),
-  );
+  const cards = new Set<string>();
+  for (const card of state.cards) if (card.ownerId && owners.has(card.ownerId)) cards.add(card.id);
+  return cards;
 }
 
 /** Inspect the same draw pool without changing its order or revealing a hidden card. */
@@ -100,9 +100,8 @@ export function journeyReturn(state: GameState, ownerId: string | null, events: 
 }
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   queueCard(state.battle!, handCapacity(state), id);
-  const owner = state.team.find(
-    (unit) => unit.id === state.cards.find((card) => card.id === id)?.ownerId && unit.health > 0,
-  );
+  const ownerId = state.cards.find((card) => card.id === id)?.ownerId;
+  const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
   if (owner && state.boons.includes("dune-shuttle"))
     grantBlock(state, owner, boonRule("dune-shuttle").block, events);
   let original: GameState["cards"][number] | undefined;
@@ -136,9 +135,12 @@ export function lostAndFound(state: GameState, card: Card, events: GameEvent[]) 
 }
 
 export function discardDrawCards(state: GameState, otherOwnerId?: string): Card[] {
+  if (!state.battle!.discard.length) return [];
   const owners = drawableOwnerIds(state);
+  const cards = new Map<string, Card>();
+  for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
   return state.battle!.discard.flatMap((id) => {
-    const card = state.cards.find((entry) => entry.id === id)!;
+    const card = cards.get(id)!;
     return (
       otherOwnerId === undefined
         ? card.ownerId === null || owners.has(card.ownerId)
@@ -263,13 +265,10 @@ export function drawKeyword(
   if (!state.battle) return;
   fillHand(state);
   const owners = drawableOwnerIds(state);
-  const eligibleCards = new Set(
-    state.cards
-      .filter(
-        (card) => (card.ownerId === null || owners.has(card.ownerId)) && cardKeywords(card).includes(keyword),
-      )
-      .map((card) => card.id),
-  );
+  const eligibleCards = new Set<string>();
+  for (const card of state.cards)
+    if ((card.ownerId === null || owners.has(card.ownerId)) && cardKeywords(card).includes(keyword))
+      eligibleCards.add(card.id);
   drawEligibleCard(state, (id) => eligibleCards.has(id), events);
 }
 
@@ -317,9 +316,11 @@ export function drawHasAnotherCard(
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
   const owners = drawableOwnerIds(state);
+  const cards = new Map<string, Card>();
+  for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
   return (
     [...state.battle.draw, ...state.battle.discard].some((id) => {
-      const drawn = state.cards.find((entry) => entry.id === id)!;
+      const drawn = cards.get(id)!;
       return (
         (drawn.ownerId === null || owners.has(drawn.ownerId)) &&
         (effect.kind === "draw" || cardKeywords(drawn).includes(effect.keyword))

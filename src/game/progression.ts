@@ -27,10 +27,11 @@ export function creaturePassive(state: Pick<GameState, "discovery"> | undefined,
 /** Sum matching effects in authored order at the current rank; undefined state uses the enemy tier. */
 export function passiveAmount(
   state: Pick<GameState, "discovery"> | undefined,
-  species: SpeciesId,
+  speciesId: SpeciesId,
   kind: PassiveKind,
 ): number {
-  return creaturePassive(state, species).effects.reduce(
+  const rank = state ? creatureStars(state, speciesId) : 0;
+  return species(speciesId).passiveTiers[rank]!.effects.reduce(
     (sum, effect) => sum + (effect.kind === kind ? effect.amount : 0),
     0,
   );
