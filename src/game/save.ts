@@ -212,9 +212,9 @@ function validateRoster(state: GameState) {
     if (card.temporary) continue;
     invalid(card.id.startsWith("copy-"));
     if (card.ownerId === null) continue;
-    const ids = kits.get(card.ownerId) ?? [];
+    let ids = kits.get(card.ownerId);
+    if (!ids) kits.set(card.ownerId, (ids = []));
     ids.push(card.definitionId);
-    kits.set(card.ownerId, ids);
   }
   for (const creature of state.team)
     invalid(!matchesPermanentKit(creature.species, kits.get(creature.id) ?? []));

@@ -26,7 +26,8 @@ export function reconciliationPlan({
   localData: string | null;
   mode: "startup" | "background";
 }) {
-  const records = [...remote, ...(current ? [current] : [])];
+  const records = [...remote];
+  if (current) records.push(current);
   if (mode === "background" && !current)
     return { records, chosen: null, parents: [], preserve: false, install: null, deferred: true };
   const heads = newestHeads(records);

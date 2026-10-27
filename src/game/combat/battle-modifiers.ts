@@ -9,7 +9,7 @@ import type { BattleState, Enemy, Creature, GameState, GameEvent } from "../type
 export function battleMana(state: Pick<GameState, "talents" | "boons" | "cards">) {
   return (
     TURN_MANA +
-    Number(hasTalent(state, "mana.leyline-attunement")) * talentRule("mana.leyline-attunement").amount +
+    (hasTalent(state, "mana.leyline-attunement") ? talentRule("mana.leyline-attunement").amount : 0) +
     (state.boons.includes("raincatcher-bowl") && state.cards.some((card) => cardHasKeyword(card, "water"))
       ? boonRule("raincatcher-bowl").mana
       : 0)

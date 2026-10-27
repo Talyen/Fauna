@@ -113,8 +113,8 @@ export function afterPlayerCard(state: BattleState, events: GameEvent[], actor?:
     battle.cardsPlayedThisTurn++;
     if (battle.cardsPlayedThisTurn === 2) livingChorus(state, false, events);
     if (
-      battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards &&
-      state.boons.includes("resonant-chimes")
+      state.boons.includes("resonant-chimes") &&
+      battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards
     )
       gainMana(state, boonRule("resonant-chimes").mana, events);
   }

@@ -94,7 +94,11 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     const actionOrder = battle.enemies.slice();
     // Expire the previous round before an ally can grant Dodge for this round.
     for (const enemy of actionOrder) ensureCombat(enemy).temporaryDodge = 0;
-    for (const minion of battlefield(draft, "enemy").filter((unit) => unit.minion && unit.health > 0)) {
+    const actingMinions = battlefield(draft, "enemy");
+    let minionCount = 0;
+    for (const unit of actingMinions) if (unit.minion && unit.health > 0) actingMinions[minionCount++] = unit;
+    actingMinions.length = minionCount;
+    for (const minion of actingMinions) {
       tickStatuses(draft, minion, events);
       if (settle(draft, events)) return;
       if (minion.health <= 0) continue;

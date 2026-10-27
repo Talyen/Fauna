@@ -108,7 +108,8 @@ export function generateEncounterPack(state: GameState, savedPack?: readonly Spe
   const inRoster = (kind: SpeciesId) =>
     state.team.some((unit) => unit.species === kind) || state.reserves.some((unit) => unit.species === kind);
   if (!selected.some(inRoster)) return selected;
-  const roster = new Set(state.team.map((unit) => unit.species));
+  const roster = new Set<SpeciesId>();
+  for (const unit of state.team) roster.add(unit.species);
   for (const unit of state.reserves) roster.add(unit.species);
   const eligible = recruitableSpecies.filter((entry) => !roster.has(entry.id));
   for (let index = 0; index < selected.length; index++)

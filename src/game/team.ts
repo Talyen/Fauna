@@ -49,8 +49,9 @@ export function farewellOar(state: GameState, outgoing: readonly Combatant[], ev
   if (state.phase !== "battle" || !state.boons.includes("farewell-oar")) return;
   for (const ally of outgoing) {
     const damage = Math.round(ally.block / boonRule("farewell-oar").divisor);
+    if (ally.health <= 0 || damage <= 0) continue;
     for (const enemy of battlefield(state, "enemy"))
-      if (ally.health > 0 && enemy.health > 0 && damage > 0)
+      if (ally.health > 0 && enemy.health > 0)
         hit(state, ally, enemy, damage, "water", events, { origin: "derived" });
   }
 }
@@ -212,14 +213,17 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   });
   // New permanent kits take priority over the newest generated copies at the battle limit.
   const overflow = Math.max(0, retained.length + mapped.length - MAX_BATTLE_CARDS);
-  const removed = new Set(
-    overflow
-      ? retained
-          .filter((card) => card.temporary)
-          .slice(-overflow)
-          .map((card) => card.id)
-      : [],
-  );
+  const removed = new Set<string>();
+  if (overflow) {
+    let remaining = overflow;
+    for (let index = retained.length - 1; index >= 0 && remaining > 0; index--) {
+      const card = retained[index]!;
+      if (card.temporary) {
+        removed.add(card.id);
+        remaining--;
+      }
+    }
+  }
   state.cards = [...(removed.size ? retained.filter((card) => !removed.has(card.id)) : retained), ...mapped];
   if (state.battle) {
     const kept = new Set(state.cards.map((card) => card.id));
@@ -256,7 +260,8 @@ export function mountainGuide(
   if (state.phase !== "battle" || incoming.health <= 0) return;
   const allied = isRosterCreature(incoming);
   const row = allied ? state.team : state.battle.enemies;
-  const guides = [...row, ...previous.filter((unit) => !row.some((current) => current.id === unit.id))];
+  const guides = [...row];
+  for (const unit of previous) if (!row.some((current) => current.id === unit.id)) guides.push(unit);
   for (const guide of guides) {
     if (guide.health <= 0) continue;
     const amount = passiveAmount(allied ? state : undefined, guide.species, "mountainGuide");
@@ -298,9 +303,8 @@ export function swapBackup(
     if (fromCard) cleanseDeparture(state, outgoing, events);
     state.team[index] = incoming;
     state.reserves[backupIndex] = outgoing;
-    const removed = new Set(
-      state.cards.filter((card) => card.ownerId === outgoing.id && card.temporary).map((card) => card.id),
-    );
+    const removed = new Set<string>();
+    for (const card of state.cards) if (card.ownerId === outgoing.id && card.temporary) removed.add(card.id);
     if (removed.size) state.cards = state.cards.filter((card) => !removed.has(card.id));
     const oldDefs = speciesCards(outgoing.species);
     const newDefs = speciesCards(incoming.species);

@@ -55,6 +55,35 @@ it("saves Gold when every affordable slot lacks a roster trigger", () => {
   expect(boonValue(poor, "brass-censer")).toBe(0);
   expect(boonValue(poor, "ironwood-buckler")).toBeGreaterThan(0);
 });
+it("breaks Merchant value ties by price and then saved slot order", () => {
+  const cheaper = shelf(["tattered-pages", "resonant-chimes"], [40, 45]);
+  const affordable = produce(cheaper, (game) => {
+    game.currency = 100;
+  });
+  expect(actor()(affordable).command).toEqual({ type: "buyBoon", visit: "merchant", slot: "slot-0" });
+  const equal = shelf(["resonant-chimes", "resonant-chimes"], [20, 20]);
+  expect(actor()(equal).command).toEqual({ type: "buyBoon", visit: "merchant", slot: "slot-0" });
+});
+
+it("breaks equal Boon reward scores by ID regardless of offer order", () => {
+  const state = produce(shelf(["brass-censer"]), (game) => {
+    Object.assign(game, {
+      phase: "boon",
+      support: null,
+      reward: {
+        recruits: [],
+        boons: ["tattered-pages", "raincatcher-bowl"],
+        xp: {},
+        currency: 0,
+        outcome: "next",
+      },
+    });
+    game.team[0]!.species = "coralcurl";
+  });
+  expect(boonValue(state, "raincatcher-bowl")).toBe(boonValue(state, "tattered-pages"));
+  expect(actor()(state).command).toEqual({ type: "chooseBoon", boon: "raincatcher-bowl" });
+});
+
 it("recomputes Merchant compatibility when the same actor sees a different roster", () => {
   const choose = actor();
   const guardian = shelf(["ironwood-buckler"]);
