@@ -133,6 +133,25 @@ export interface AvailablePlay extends PlayableCard {
   commands: Extract<Command, { type: "play" }>[];
 }
 
+/** Automatic turn completion only needs to know whether any command exists. */
+export function hasAvailablePlay(state: BattleState): boolean {
+  if (!state.battle.hand.length || pendingReplacement(state)) return false;
+  const cards = state.battle.hand.length > 1 ? new Map<string, Card>() : undefined;
+  if (cards) for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);
+  for (const id of state.battle.hand) {
+    const play = inspectCard(
+      state,
+      cards ? cards.get(id) : state.cards.find((card) => card.id === id),
+      (def) => hasChosenRecipient(state, def),
+      true,
+    );
+    if (!play.allowed) continue;
+    const mode = cardTargeting(play.def, state);
+    if ((mode !== "enemy" && mode !== "ally") || hasChosenRecipient(state, play.def)) return true;
+  }
+  return false;
+}
+
 /** Enumerate legal commands without previewing, choosing random recipients or touching RNG. */
 export function availablePlays(state: BattleState, autoEndTurn = true): AvailablePlay[] {
   if (!state.battle.hand.length || pendingReplacement(state)) return [];

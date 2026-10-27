@@ -1,6 +1,6 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
-import { isEnemy, battlefield } from "../battlefield";
+import { isEnemy, battlefieldView } from "../battlefield";
 import { hasTalent, creaturePassiveTier } from "../progression";
 import { physicalBonus } from "../ability-rules";
 import type { DamageType } from "../content";
@@ -116,7 +116,7 @@ export function modifiedDamage(
       damage *= 0.5;
   }
   if (type === "burn" || type === "freeze") {
-    const protectors = battlefield(state, alliedTarget ? "player" : "enemy");
+    const protectors = battlefieldView(state, alliedTarget ? "player" : "enemy");
     // Use the strongest deployed protection; swaps and knockouts change it immediately.
     const deployed = protectors.some((unit) => unit.id === target.id);
     const resistanceKind = type === "burn" ? "teamBurnResistance" : "teamFreezeResistance";

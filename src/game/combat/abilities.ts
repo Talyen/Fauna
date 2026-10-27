@@ -102,7 +102,7 @@ export function executeAbility(
       def.effect === "attack" &&
       def.target !== "allEnemies" &&
       state.boons.includes("cadence-panpipes")
-        ? alive(opposingRow(state, action)).find((unit) => unit.id !== target?.id)
+        ? findLivingBattlefield(state, "enemy", (unit) => unit.id !== target?.id)
         : undefined;
     const primary = executePrimary({
       state,

@@ -42,6 +42,14 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
   return result;
 }
 
+/** Read-only traversal; callers must not change membership while iterating. */
+export function battlefieldView(state: GameState, side: "enemy"): readonly Enemy[];
+export function battlefieldView(state: GameState, side: "player" | "enemy"): readonly (Creature | Enemy)[];
+export function battlefieldView(state: GameState, side: "player" | "enemy"): readonly (Creature | Enemy)[] {
+  if (state.battle?.minions?.length) return battlefield(state, side);
+  return side === "player" ? state.team : (state.battle?.enemies ?? []);
+}
+
 /** Membership without constructing a snapshot; summons require a living deployed owner. */
 export function battlefieldHasId(state: GameState, side: "player" | "enemy", id: string): boolean {
   const row = side === "player" ? state.team : (state.battle?.enemies ?? []);

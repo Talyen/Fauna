@@ -22,6 +22,7 @@ import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { BattleState, GameState } from "./types";
 function unique(values: readonly unknown[]) {
   if (values.length < 2) return true;
+  if (values.length === 2) return values[0] !== values[1] && !Object.is(values[0], values[1]);
   const seen = new Set<unknown>();
   for (const value of values) {
     if (seen.has(value)) return false;
@@ -31,6 +32,11 @@ function unique(values: readonly unknown[]) {
 }
 function uniqueBy<T>(values: readonly T[], key: (value: T) => unknown) {
   if (values.length < 2) return true;
+  if (values.length === 2) {
+    const first = key(values[0]!);
+    const second = key(values[1]!);
+    return first !== second && !Object.is(first, second);
+  }
   const seen = new Set<unknown>();
   for (const value of values) {
     const id = key(value);
@@ -231,7 +237,7 @@ function validateSupport(state: GameState) {
     const visit = state.support;
     // Stock keeps its original price when this visit sells Merchant's Favor.
     const prices = merchantPriceRange({
-      boons: visit.purchased === null ? state.boons : state.boons.filter((boon) => boon !== visit.purchased),
+      boons: visit.purchased === "merchants-favor" ? [] : state.boons,
     });
     invalid(
       visit.encounter !== state.encounter ||
@@ -439,7 +445,9 @@ function validateCombatants(state: GameState) {
       invalid((stats.controlled === null) !== (stats.controlTurns === 0));
       invalid(stats.controlled !== null && stats[stats.controlled] !== 0);
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
-      invalid(Object.values(stats.statusSources).some((id) => !combatantIds.has(id)));
+      for (const id in stats.statusSources)
+        if (Object.hasOwn(stats.statusSources, id))
+          invalid(!combatantIds.has(stats.statusSources[id as keyof typeof stats.statusSources]!));
       if (stats.bleedLeech.length) {
         const sources = new Set<string>();
         let total = 0;

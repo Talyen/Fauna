@@ -1,5 +1,5 @@
 import { talentRule, type TalentRuleId } from "./rules/talents";
-import { battlefield } from "./battlefield";
+import { battlefieldView } from "./battlefield";
 import { hasTalent, passiveAmount } from "./progression";
 import { roll } from "./random";
 import type { GameEvent, GameState } from "./types";
@@ -25,7 +25,7 @@ export function chance(
   // The strongest living deployed provider owns the gate; providers never retry each other's gates.
   let provider;
   let percent = 0;
-  for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
+  for (const unit of battlefieldView(state, enemy ? "enemy" : "player")) {
     if (unit.health <= 0) continue;
     const amount = passiveAmount(enemy ? undefined : state, unit.species, "goodFortune");
     if (amount > percent) {

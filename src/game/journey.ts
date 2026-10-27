@@ -251,11 +251,18 @@ function enterPhase<T extends Lifecycle>(state: GameState, next: T): GameState &
   return Object.assign(state, next);
 }
 function clearCombat(state: GameState) {
-  state.cards = state.cards.filter((card) => !card.temporary);
-  for (const creature of [...state.team, ...state.reserves]) {
-    creature.block = 0;
-    creature.combat = freshCombat();
+  let kept: GameState["cards"] | undefined;
+  for (let index = 0; index < state.cards.length; index++) {
+    const card = state.cards[index]!;
+    if (card.temporary) kept ??= state.cards.slice(0, index);
+    else kept?.push(card);
   }
+  if (kept) state.cards = kept;
+  for (const row of [state.team, state.reserves])
+    for (const creature of row) {
+      creature.block = 0;
+      creature.combat = freshCombat();
+    }
 }
 function enterDestination(state: Exclude<GameState, StateAt<"draft">>) {
   enterPhase(state, {

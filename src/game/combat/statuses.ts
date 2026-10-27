@@ -336,9 +336,9 @@ export function* removeEffects(
     cleansed++;
     count--;
   }
-  for (const status of statuses)
+  for (const status of statuses) {
+    if (!(count > 0)) break;
     if (
-      count > 0 &&
       !(kind === "cleanse" && status === "burn" && isEnemy(unit) && unit.block > 0 && moltenPaperweight) &&
       !(
         kind === "cleanse" &&
@@ -367,6 +367,7 @@ export function* removeEffects(
         status === "reflectBurn" ? "reflect" : status === "nullifyFreeze" ? "nullify" : status,
       );
     }
+  }
   if (
     kind === "cleanse" &&
     state &&

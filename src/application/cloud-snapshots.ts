@@ -24,7 +24,10 @@ export const isCloudName = (name: string) => /^fauna-v1-[a-f0-9]{32}-[01]\.json$
 const textEncoder = new TextEncoder();
 async function sha(text: string) {
   const bytes = await globalThis.crypto.subtle.digest("SHA-256", textEncoder.encode(text));
-  return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, "0")).join("");
+  const digits = "0123456789abcdef";
+  let result = "";
+  for (const byte of new Uint8Array(bytes)) result += digits[byte >>> 4]! + digits[byte & 15]!;
+  return result;
 }
 const body = (s: Omit<CloudSnapshot, "id">) =>
   JSON.stringify([s.version, s.device, s.profile, s.sequence, s.hash, s.ancestors]);
@@ -79,6 +82,9 @@ export async function parseSnapshot(raw: string, profile: string): Promise<Cloud
   if (s.profile !== profile) throw new Error("Invalid cloud metadata.");
   if (s.ancestors.length === 1) {
     if (s.ancestors[0] === s.id) throw new Error("Invalid cloud metadata.");
+  } else if (s.ancestors.length === 2) {
+    if (s.ancestors[0] === s.ancestors[1] || s.ancestors.includes(s.id))
+      throw new Error("Invalid cloud metadata.");
   } else if (s.ancestors.length > 1) {
     const ancestors = new Set(s.ancestors);
     if (ancestors.size !== s.ancestors.length || ancestors.has(s.id))

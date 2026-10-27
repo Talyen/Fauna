@@ -1,5 +1,5 @@
 import { Immer } from "immer";
-import { battlefield } from "../battlefield";
+import { battlefield, battlefieldView } from "../battlefield";
 import { cardTargeting } from "../card-rules";
 import type { CardDefinition } from "../content/types";
 import { observeDecisions } from "../random";
@@ -45,7 +45,7 @@ function unitValue(unit: Combatant) {
 }
 function positionValue(state: BattleState) {
   const rowValue = (side: "player" | "enemy") =>
-    battlefield(state, side).reduce((sum, unit) => sum + unitValue(unit), 0);
+    battlefieldView(state, side).reduce((sum, unit) => sum + unitValue(unit), 0);
   const resources = state.battle.enemies.reduce(
     (sum, enemy) =>
       sum + (enemy.deck ? enemy.deck.mana + enemy.deck.hand.length + enemy.deck.buffer.length : 0),

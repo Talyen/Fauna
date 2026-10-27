@@ -26,6 +26,7 @@ import { definition, SPECIES } from "../../../src/game/content";
 import { capabilities, offenseValue } from "../../../src/application/team-policy";
 import {
   availablePlays,
+  hasAvailablePlay,
   chosenRecipients,
   inspectCardPlay,
   playTargetError,
@@ -44,6 +45,30 @@ import { chance } from "../../../src/game/chance";
 import { newestHeads } from "../../../src/application/cloud-policy";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
 import { createMessageReader } from "../../../src/ui/shared/localization/messages";
+
+it("keeps automatic turn completion aligned with legal card commands", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  const attack = state.cards.find((card) => card.definitionId === "prismram-attack")!;
+  state.battle.hand = [attack.id];
+  const check = () =>
+    expect(hasAvailablePlay(state)).toBe(availablePlays(state).some((play) => play.commands.length > 0));
+  check();
+  expect(hasAvailablePlay(state)).toBe(true);
+  state.battle.mana = 0;
+  check();
+  expect(hasAvailablePlay(state)).toBe(false);
+  state.team.find((unit) => unit.id === attack.ownerId)!.combat!.freeCard = true;
+  check();
+  expect(hasAvailablePlay(state)).toBe(true);
+  state.battle.enemies.forEach((enemy) => (enemy.health = 0));
+  check();
+  expect(hasAvailablePlay(state)).toBe(false);
+  state.team[0]!.health = 0;
+  state.reserves.push({ ...state.team[1]!, id: "backup" });
+  check();
+  state.battle.hand = [];
+  check();
+});
 
 it("keeps cached card keywords isolated from callers", () => {
   const card = { definitionId: "emberback-attack" };
@@ -730,4 +755,8 @@ it("retains the last duplicate cloud record and its ancestry", async () => {
   const updated = { ...first, ancestors: [first.id] };
   expect(newestHeads([updated, first])).toEqual([first]);
   expect(newestHeads([first, updated])).toEqual([]);
+  const second = { ...first, id: "c".repeat(64), ancestors: [first.id] };
+  expect(newestHeads([first, second])).toEqual([second]);
+  expect(newestHeads([second, first])).toEqual([second]);
+  expect(newestHeads([first, { ...second, ancestors: [] }])).toEqual([first, { ...second, ancestors: [] }]);
 });

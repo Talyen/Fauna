@@ -638,7 +638,7 @@ export function* resolveHit(
     source.health > 0 &&
     state.boons.includes("acorn-skittle")
   ) {
-    const other = battlefield(state, "enemy").find((enemy) => enemy.id !== target.id && enemy.health > 0);
+    const other = findLivingBattlefield(state, "enemy", (enemy) => enemy.id !== target.id);
     if (other)
       yield* reaction("hit", state, source, other, boonRule("acorn-skittle").damage, "stun", events, {
         origin: "boon",
