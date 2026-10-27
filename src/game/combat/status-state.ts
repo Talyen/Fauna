@@ -128,8 +128,13 @@ export function setPeriodicStacks(stats: CombatState, status: PeriodicStatus, am
 }
 
 export function deferLeech(stats: CombatState, sourceId: string, amount: number) {
-  const entry = stats.bleedLeech.find((payout) => payout.sourceId === sourceId);
-  const available = Math.max(0, stats.bleed - stats.bleedLeech.reduce((sum, row) => sum + row.amount, 0));
+  let entry: BleedPayout | undefined;
+  let total = 0;
+  for (const payout of stats.bleedLeech) {
+    if (!entry && payout.sourceId === sourceId) entry = payout;
+    total += payout.amount;
+  }
+  const available = Math.max(0, stats.bleed - total);
   const gained = Math.min(amount, available);
   if (entry) entry.amount += gained;
   else if (gained) stats.bleedLeech.push({ sourceId, amount: gained });

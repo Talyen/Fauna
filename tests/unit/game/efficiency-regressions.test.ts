@@ -596,3 +596,31 @@ it("handles a single discarded card consistently for recovery and draw previews"
   expect(discardDrawCards(state, owner!.id)).toEqual([]);
   expect(drawHasAnotherCard(state, own, { kind: "draw", amount: 1 })).toBe(false);
 });
+
+it("draws an eligible single card without changing decisions or buffer promotion", () => {
+  for (const method of ["owner", "keyword"] as const) {
+    for (const pile of ["draw", "discard"] as const) {
+      const state = requireBattle(structuredClone(teamRun(42, ["emberback"])));
+      const card = state.cards.find((entry) => cardKeywords(entry).includes("burn"))!;
+      state.battle.draw = [];
+      state.battle.discard = [];
+      state.battle[pile] = [card.id];
+      state.battle.hand = [];
+      const buffered = state.cards.find((entry) => entry.id !== card.id)!.id;
+      state.battle.buffer = [buffered];
+      const decisions: unknown[] = [];
+      observeDecisions(state, (decision) => {
+        decisions.push(decision);
+        return 0;
+      });
+      const events: Parameters<typeof draw>[2] = [];
+      if (method === "owner") expect(drawOwner(state, card.ownerId!, events)).toBe(true);
+      else drawKeyword(state, "burn", events);
+      expect(state.battle.hand).toEqual([buffered, card.id]);
+      expect(state.battle.buffer).toEqual([]);
+      expect(state.battle.draw).toEqual([]);
+      expect(state.battle.discard).toEqual([]);
+      expect(decisions).toEqual([undefined]);
+    }
+  }
+});

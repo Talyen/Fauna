@@ -22,6 +22,8 @@ import {
   periodicAddedStacks,
 } from "./status-state";
 
+const periodicStatuses = ["burn", "poison", "bleed"] as const;
+
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
   const stats = ensureCombat(unit);
   if (!isEnemy(unit) && unit.health > 0 && state.boons.includes("knot-comb")) {
@@ -73,7 +75,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       if (state.battle!.enemies.every((enemy) => enemy.health <= 0)) return;
     }
   }
-  for (const status of ["burn", "poison", "bleed"] as const) {
+  for (const status of periodicStatuses) {
     if (unit.health <= 0) break;
     if (stats[status] <= 0) continue;
     const { amount, sourceId, payouts } = periodicTick(stats, status);

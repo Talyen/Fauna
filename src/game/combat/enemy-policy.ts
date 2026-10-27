@@ -86,11 +86,12 @@ function evaluateEnemyCard(
 ) {
   const spentCard = enemy.deck?.hand.includes(def.id) ? 1 : 0;
   let total = 0;
+  const actorIndex = state.battle.enemies.findIndex((unit) => unit.id === enemy.id);
   for (let probe = 0; probe < 8; probe++) {
     let decisions = 0;
     const after = evaluation.produce(state, (draft) => {
       observeDecisions(draft, () => ((probe + 0.5) / 8 + decisions++ * 0.618033988749895) % 1);
-      const actor = draft.battle.enemies.find((unit) => unit.id === enemy.id)!;
+      const actor = draft.battle.enemies[actorIndex]!;
       const lastCardInHand = playEnemyAbility(draft, actor, def, targetId, allyTargetId, []);
       if (lastCardInHand) lastWarmth(draft, true, []);
     });
@@ -116,7 +117,8 @@ function recipientIds(units: readonly Combatant[], living: boolean) {
 /** Re-evaluate from current combat after every play; no-repeat preference only breaks equal values. */
 export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonly CardDefinition[]) {
   if (!cards.length) return;
-  const targetId = highestHealth(battlefield(state, "player"))?.id;
+  let targetId: string | undefined;
+  let targetResolved = false;
   let before: number | undefined;
   let livingAllies: string[] | undefined;
   let fallenAllies: string[] | undefined;
@@ -138,6 +140,10 @@ export function chooseEnemyCard(state: BattleState, enemy: Enemy, cards: readonl
       if (values && !cardValues) values.set(def, (cardValues = new Map()));
       let value = cardValues?.get(allyTargetId);
       if (value === undefined) {
+        if (!targetResolved) {
+          targetId = highestHealth(battlefield(state, "player"))?.id;
+          targetResolved = true;
+        }
         value = evaluateEnemyCard(
           state,
           enemy,

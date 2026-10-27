@@ -8,8 +8,9 @@ import type { GameState, GameEvent } from "../types";
 
 export function encore(state: GameState, actor: Combatant, events: GameEvent[]) {
   const stats = ensureCombat(actor);
+  if (stats.encoreUsed) return false;
   const chance = passiveAmount(isRosterCreature(actor) ? state : undefined, actor.species, "encore");
-  if (chance <= 0 || stats.encoreUsed) return false;
+  if (chance <= 0) return false;
   stats.encoreUsed = true;
   return succeeds(state, chance / 100, !isRosterCreature(actor), events);
 }

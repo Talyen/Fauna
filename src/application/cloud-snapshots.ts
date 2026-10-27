@@ -35,14 +35,14 @@ export async function snapshot(
   parents: readonly CloudSnapshot[] = [],
 ): Promise<CloudSnapshot> {
   // Own parent facts before hashing yields; readonly inputs can alias caller-owned data.
-  const parentsAtAdmission = parents.map((parent) => ({
-    id: parent.id,
-    profile: parent.profile,
-    ancestors: [...parent.ancestors],
-  }));
-  if (parentsAtAdmission.some((parent) => parent.profile !== identity.profile))
-    throw new Error("Cloud ancestry belongs to another profile.");
-  const ancestry = new Set(parentsAtAdmission.map((parent) => parent.id));
+  const ancestry = new Set<string>();
+  let invalidProfile = false;
+  const parentsAtAdmission = parents.map((parent) => {
+    ancestry.add(parent.id);
+    if (parent.profile !== identity.profile) invalidProfile = true;
+    return { id: parent.id, ancestors: [...parent.ancestors] };
+  });
+  if (invalidProfile) throw new Error("Cloud ancestry belongs to another profile.");
   if (ancestry.size > MAX_ANCESTORS)
     throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
@@ -67,7 +67,11 @@ export async function snapshot(
   return snapshotSchema.parse({ ...record, id: await sha(body(record)) });
 }
 export async function parseSnapshot(raw: string, profile: string): Promise<CloudSnapshot> {
-  if (raw.length > MAX_SNAPSHOT_BYTES || textEncoder.encode(raw).length > MAX_SNAPSHOT_BYTES)
+  // Each UTF-16 code unit contributes at most three UTF-8 bytes.
+  if (
+    raw.length > MAX_SNAPSHOT_BYTES ||
+    (raw.length > Math.floor(MAX_SNAPSHOT_BYTES / 3) && textEncoder.encode(raw).length > MAX_SNAPSHOT_BYTES)
+  )
     throw new Error("Cloud snapshot exceeds the size limit.");
   const parsed = snapshotSchema.safeParse(JSON.parse(raw));
   if (!parsed.success) throw new Error("Invalid cloud metadata.");
