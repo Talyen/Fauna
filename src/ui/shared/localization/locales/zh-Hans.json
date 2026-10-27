@@ -3029,6 +3029,18 @@
     "sourceHash": "ab40016a2cba4414a63d2679df6531422908fdec8a825042e24e583b79e96f08",
     "text": "每次打出一张牌时，一个回响发动攻击，造成{{value0}}点<keyword0>水</keyword0>伤害"
   },
+  "content.species.memento.title": {
+    "reviewed": true,
+    "source": "The palace that remembers",
+    "sourceHash": "990d2dfe0265a04177c285b9cc88aa0414c7da3ccd1800fa0c4bf6ec4907c372",
+    "text": "铭记往昔的宫殿"
+  },
+  "content.species.memento.trait": {
+    "reviewed": true,
+    "source": "The Court Remembers",
+    "sourceHash": "98f2d258a38452e80cdbf7576c845b7d672139d6c702bbae0fb1a0de9a8c9ec1",
+    "text": "宫廷铭记"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3064,6 +3076,12 @@
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
     "sourceHash": "de7ddb1e167365779c0bfb0defa2980c4b94ea38ee34e7de0940f31423b69e3c",
     "text": "回合之间保留的<keyword0>格挡</keyword0>增加{{value0}}%"
+  },
+  "content.species.mossguard.title": {
+    "reviewed": true,
+    "source": "The gentle guardian",
+    "sourceHash": "fb71172453b12ac56bce6ac381770048407f6cd28c2730fbb274b4124e00eab4",
+    "text": "温柔的守护者"
   },
   "content.species.mossguard.trait": {
     "reviewed": true,
@@ -3107,6 +3125,18 @@
     "sourceHash": "ebd556352efcac5c386465ca6734cf40051bb154b6ab4fb0792fded9d3dba711",
     "text": "每隔一回合恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.species.neradora.title": {
+    "reviewed": true,
+    "source": "The living tide flower",
+    "sourceHash": "88090f0eb3c5cfe12669bb850673ee9f857c60a5aa62bf1ec58695c0e069cd14",
+    "text": "活着的潮汐之花"
+  },
+  "content.species.neradora.trait": {
+    "reviewed": true,
+    "source": "Tidal Regeneration",
+    "sourceHash": "88385f6b544220f3a9883398820f1042635c5c4d6283ccb0a6310ac07cdb2db7",
+    "text": "潮汐再生"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
@@ -3142,6 +3172,12 @@
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "8746a85871b3248d5e7d78c421137baf95513b8677519aaeff6c8753c2ecfc9c",
     "text": "Oathara每回合可以打出{{value0}}张被击倒盟友的牌"
+  },
+  "content.species.oathara.title": {
+    "reviewed": true,
+    "source": "The keeper of unfinished journeys",
+    "sourceHash": "0b92ecb4709043eddfb58ee7b94249c0c3c50faac2f27381017cfe65e98bcd35",
+    "text": "未竟旅程的守护者"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
@@ -3185,6 +3221,18 @@
     "sourceHash": "201cb82c8320c725652b53245c9504e839cf3d58e5504ade0227bfb7a5f44aec",
     "text": "每回合额外抽一张牌"
   },
+  "content.species.orifable.title": {
+    "reviewed": true,
+    "source": "The bearer of good tidings",
+    "sourceHash": "759cf731614a19c240beadadf0720e49bbc235c78ee7bfec32060b3db9bd1da6",
+    "text": "佳音传递者"
+  },
+  "content.species.orifable.trait": {
+    "reviewed": true,
+    "source": "Express Delivery",
+    "sourceHash": "ac205a1c22dd317899687bfb14ce3f9875a1f4857a1ebe691aff1f213b6f2408",
+    "text": "特快递送"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3220,6 +3268,18 @@
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
     "sourceHash": "cc324436cdb90c94a26d7afa89f573158c43977537979debf26b75b1a09bd9d3",
     "text": "<keyword0>净化</keyword0><keyword1>冻结</keyword1>积累时恢复{{value0}}点<keyword2>生命</keyword2>"
+  },
+  "content.species.parhelion.title": {
+    "reviewed": true,
+    "source": "The sun upon the snow",
+    "sourceHash": "b7a3ffae630351d4b45162054bd8ddb9775931687d83d6b8189681e19a1b9100",
+    "text": "雪上的阳光"
+  },
+  "content.species.parhelion.trait": {
+    "reviewed": true,
+    "source": "Sunthaw",
+    "sourceHash": "f70065841d95f3822ccf117edba130018811d351e9767ef892a91aeaff1fade3",
+    "text": "日暖消融"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,

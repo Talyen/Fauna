@@ -3029,6 +3029,18 @@
     "sourceHash": "0188a7c81a74519b6e155f1610c970a4d92ae451ccbd0ee52062a8ad29f5793f",
     "text": "Каждый раз, когда вы разыгрываете карту, одно Эхо атакует и наносит {{value0}} урона типа «<keyword0>Вода</keyword0>»"
   },
+  "content.species.memento.title": {
+    "reviewed": true,
+    "source": "The palace that remembers",
+    "sourceHash": "308c0a2b7bbdde6cce18fdfb419e6a106bf192b49ea7c52e93489521bd660a78",
+    "text": "Дворец, который помнит"
+  },
+  "content.species.memento.trait": {
+    "reviewed": true,
+    "source": "The Court Remembers",
+    "sourceHash": "cd93ed2e063cf06de300e7ac743f8ba8e414a222889ffe9e2db368582ab09ada",
+    "text": "Двор помнит"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3064,6 +3076,12 @@
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
     "sourceHash": "91e795ee9f576f8ac285ed502f61614156bf3295e8430c3a5f0907dbf201338a",
     "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
+  },
+  "content.species.mossguard.title": {
+    "reviewed": true,
+    "source": "The gentle guardian",
+    "sourceHash": "8ca6fc589922a56f3580d7c7e0733fc48deffb84b9a5d74cf17dae4446f1913c",
+    "text": "Бережный страж"
   },
   "content.species.mossguard.trait": {
     "reviewed": true,
@@ -3107,6 +3125,18 @@
     "sourceHash": "fc61f5df637b43ecff46933ed190b524c0cf239bf309ef2e769f9dc6d7b59e7b",
     "text": "Восстанавливайте {{value0}} <keyword0>здоровья</keyword0> через ход"
   },
+  "content.species.neradora.title": {
+    "reviewed": true,
+    "source": "The living tide flower",
+    "sourceHash": "4c5175daa86be2856c7f1504ad9fbacba2e145d5a67d619f3e78c9b354b8c2f4",
+    "text": "Живой цветок прилива"
+  },
+  "content.species.neradora.trait": {
+    "reviewed": true,
+    "source": "Tidal Regeneration",
+    "sourceHash": "1b6cba425b7af8b582fefb8cd2fd8606210284c00775f00e9a399b84d8a432cd",
+    "text": "Приливное восстановление"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
@@ -3142,6 +3172,12 @@
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "09cc4a55e1f776a448368a65366e52498cc234fdd9453b02e6987a80dce8ccf4",
     "text": "Oathara может разыграть за ход {{value0}} карт павших союзников"
+  },
+  "content.species.oathara.title": {
+    "reviewed": true,
+    "source": "The keeper of unfinished journeys",
+    "sourceHash": "ef71e2f3cba47dd60243151e63e2cdafcbb1dff479cebee161b51ac2f7b42e6a",
+    "text": "Хранитель незавершённых странствий"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
@@ -3185,6 +3221,18 @@
     "sourceHash": "074968e167b9b8e56e87c8e6c8a4f5f79a1796f902d29c1ebbd4fd35c3fad68f",
     "text": "Берите дополнительную карту каждый ход"
   },
+  "content.species.orifable.title": {
+    "reviewed": true,
+    "source": "The bearer of good tidings",
+    "sourceHash": "84e396bf8a8208532c40d704b6a3fb072a953299123766ef8687f38fdf926d36",
+    "text": "Вестник добрых вестей"
+  },
+  "content.species.orifable.trait": {
+    "reviewed": true,
+    "source": "Express Delivery",
+    "sourceHash": "17ce38f8f81306e94d10feedd7c85109f576c7b7ee0547a98476ebf6de05eb07",
+    "text": "Срочная доставка"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3220,6 +3268,18 @@
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
     "sourceHash": "6fdcd22e9ff7ab3ca93cdb8b08de0010fad3c251537f7df90fb350a979c75b5e",
     "text": "<keyword0>Очищение</keyword0> накопления <keyword1>заморозки</keyword1> восстанавливает {{value0}} <keyword2>здоровья</keyword2>"
+  },
+  "content.species.parhelion.title": {
+    "reviewed": true,
+    "source": "The sun upon the snow",
+    "sourceHash": "f6134513b00740454712d3ce42840dfa8b36a85b5a2b1eb352dde0c33568b3a0",
+    "text": "Солнце на снегу"
+  },
+  "content.species.parhelion.trait": {
+    "reviewed": true,
+    "source": "Sunthaw",
+    "sourceHash": "6ec68b0fe95680de3021d740864976cb4f8774757bc1a7745a6ba6978bdf9ad7",
+    "text": "Солнечная оттепель"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,

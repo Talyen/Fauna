@@ -3029,6 +3029,18 @@
     "sourceHash": "5e3cd9feb70fb68f5b5ba1eef46a3b6ed8891bdb3ef8a5c5c5d5ca810ac0d8b6",
     "text": "カードを使うたびに、エコーが攻撃し<keyword0>水</keyword0>ダメージを{{value0}}与える"
   },
+  "content.species.memento.title": {
+    "reviewed": true,
+    "source": "The palace that remembers",
+    "sourceHash": "2a8cecb95c4dd332127982fc587718c32df779fa9bf6758d58ad59771f5bba58",
+    "text": "記憶を宿す宮殿"
+  },
+  "content.species.memento.trait": {
+    "reviewed": true,
+    "source": "The Court Remembers",
+    "sourceHash": "412fbf993518a8770e8c25c3c53b28b1547865e95015d9f2e701b12cce6c4810",
+    "text": "宮廷は覚えている"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3064,6 +3076,12 @@
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
     "sourceHash": "d756b79fb3977e9b6c0a426d00f378b393bba87ae9c85bec0b3541a150f42688",
     "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
+  },
+  "content.species.mossguard.title": {
+    "reviewed": true,
+    "source": "The gentle guardian",
+    "sourceHash": "5619a213346e4d1162ece42e86cc0378615cba22d5ee1671e14d7f20219d0ac2",
+    "text": "やさしい守り手"
   },
   "content.species.mossguard.trait": {
     "reviewed": true,
@@ -3107,6 +3125,18 @@
     "sourceHash": "189bf866fba0362ca385d156b14f806dee3120ced5d9b729779ea30defbe6b87",
     "text": "1ターンおきに<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.species.neradora.title": {
+    "reviewed": true,
+    "source": "The living tide flower",
+    "sourceHash": "fb929d5f114c3b7660364ffcf45de67710e50d736f17266981b57c66cc0e36d4",
+    "text": "生きた潮の花"
+  },
+  "content.species.neradora.trait": {
+    "reviewed": true,
+    "source": "Tidal Regeneration",
+    "sourceHash": "e0d5535768c490ffb9880190dbe0a6506849e7f08fbc315f83c7338aceeab346",
+    "text": "潮の再生"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
@@ -3142,6 +3172,12 @@
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "e32637cb06edec34b017b668ff1e352268a1699fbce019daf93793c722f1bd9e",
     "text": "Oatharaは倒れた味方のカードを1ターンに{{value0}}枚まで使用できる"
+  },
+  "content.species.oathara.title": {
+    "reviewed": true,
+    "source": "The keeper of unfinished journeys",
+    "sourceHash": "1536eb732c1ba9b51f5328d78347643ebdf85953a6bef1a5950e4c452a2285a7",
+    "text": "終わらぬ旅の守り手"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
@@ -3185,6 +3221,18 @@
     "sourceHash": "9d9a869b80a11743ee85d4c6a95cb4285ff81f8c91361e5db314b12a77e9fa4c",
     "text": "各ターンにカードを1枚追加で引く"
   },
+  "content.species.orifable.title": {
+    "reviewed": true,
+    "source": "The bearer of good tidings",
+    "sourceHash": "5d3b83cb10abebd29afdbd1511bd3f96aa1fbe55bacd915acbf4967616c21574",
+    "text": "良い知らせを運ぶ者"
+  },
+  "content.species.orifable.trait": {
+    "reviewed": true,
+    "source": "Express Delivery",
+    "sourceHash": "ab7d14e144e81f0d33967afe7ef8869592b9d42efc4ba0de599a0b391c3c5ed1",
+    "text": "速達"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3220,6 +3268,18 @@
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
     "sourceHash": "b77e5fdacd9e3f1a2a043f672b1212510e1184939577e804d6bb0242f57dea5c",
     "text": "<keyword1>凍結</keyword1>の蓄積を<keyword0>浄化</keyword0>すると<keyword2>体力</keyword2>を{{value0}}回復"
+  },
+  "content.species.parhelion.title": {
+    "reviewed": true,
+    "source": "The sun upon the snow",
+    "sourceHash": "48fb81ae765da9c152b64f88f681b192e3e928c53df115d9dd812f432cb9e01c",
+    "text": "雪に差す太陽"
+  },
+  "content.species.parhelion.trait": {
+    "reviewed": true,
+    "source": "Sunthaw",
+    "sourceHash": "12a954d84c072bd22b98e2ed3c55ca67867905309f0b21bac6cafc7e7f24a4a8",
+    "text": "陽だまりの雪解け"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,

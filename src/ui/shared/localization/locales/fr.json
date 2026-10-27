@@ -3041,6 +3041,18 @@
     "sourceHash": "25fc0c4f38d3a59c72fd95bdea8201d63591a6c47f6613f396d684b2f0126bf9",
     "text": "Chaque fois que vous jouez une carte, un Écho attaque et inflige {{value0}} dégâts d’<keyword0>Eau</keyword0>"
   },
+  "content.species.memento.title": {
+    "reviewed": true,
+    "source": "The palace that remembers",
+    "sourceHash": "c89a1b74574956560c49d27241fd56eaf1e390c8376c93ccaf6f75d985d39b29",
+    "text": "Le palais qui se souvient"
+  },
+  "content.species.memento.trait": {
+    "reviewed": true,
+    "source": "The Court Remembers",
+    "sourceHash": "3cc78be2a23b8aee3f1e8d78610a20c6f1844d21a2d3a5b174888715918f81b5",
+    "text": "La cour se souvient"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -3076,6 +3088,12 @@
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
     "sourceHash": "c67877125d19fae2e3e2746a0b6a7934c06d00657d6e69eb95ff80cf86a21195",
     "text": "Conserve {{value0}}% de <keyword0>Blocage</keyword0> en plus entre les tours"
+  },
+  "content.species.mossguard.title": {
+    "reviewed": true,
+    "source": "The gentle guardian",
+    "sourceHash": "30e888966c82cbe4d51835ea47394eb7625f7d96384892b07792cd25848eb24c",
+    "text": "Le doux gardien"
   },
   "content.species.mossguard.trait": {
     "reviewed": true,
@@ -3119,6 +3137,18 @@
     "sourceHash": "ab867c2bf9553aac537b1b698f076e616acfc024a6a85f99c10af008353df15f",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> un tour sur deux"
   },
+  "content.species.neradora.title": {
+    "reviewed": true,
+    "source": "The living tide flower",
+    "sourceHash": "7f74c3e4df6f6d60e46fe4092831b6571cc0f5cc94c0e62d7c0504aba73ee99f",
+    "text": "La fleur vivante des marées"
+  },
+  "content.species.neradora.trait": {
+    "reviewed": true,
+    "source": "Tidal Regeneration",
+    "sourceHash": "7329d0223dbba9f2982f924c9d2784034d6947bac53e52cce349b19673d5ecdf",
+    "text": "Régénération des marées"
+  },
   "content.species.oathara.passive.0.rule": {
     "reviewed": true,
     "source": "Oathara can play {{value0}} fallen ally card per turn",
@@ -3154,6 +3184,12 @@
     "source": "Oathara can play {{value0}} fallen ally cards per turn",
     "sourceHash": "bdd4cc3122184c71b8e02410272bc3ebbed755644d05f9e43d2c6ce2703478ba",
     "text": "Oathara peut jouer {{value0}} cartes d’alliés hors combat par tour"
+  },
+  "content.species.oathara.title": {
+    "reviewed": true,
+    "source": "The keeper of unfinished journeys",
+    "sourceHash": "4534feba69866cc7cd8d73831e843e28aeb41b67a20fb8cc2d9b2432a7a93e21",
+    "text": "Le gardien des voyages inachevés"
   },
   "content.species.oathara.trait": {
     "reviewed": true,
@@ -3197,6 +3233,18 @@
     "sourceHash": "8d6e0fa422e284eb5e553e4761401f8e44a1f9e9d3e72954f430bfbbe6d9f4d7",
     "text": "Pioche une carte supplémentaire à chaque tour"
   },
+  "content.species.orifable.title": {
+    "reviewed": true,
+    "source": "The bearer of good tidings",
+    "sourceHash": "cb2c808c3b49f2f786e0ac586a3034c915fa20e72a531c7f3224db92f511ab65",
+    "text": "Le porteur de bonnes nouvelles"
+  },
+  "content.species.orifable.trait": {
+    "reviewed": true,
+    "source": "Express Delivery",
+    "sourceHash": "a0f8a535195beda4a5e4af84a75d5930dcdc1b214bd6ea2a595de0b592169979",
+    "text": "Livraison express"
+  },
   "content.species.parhelion.passive.0.rule": {
     "reviewed": true,
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
@@ -3232,6 +3280,18 @@
     "source": "<keyword0>Cleansing</keyword0> <keyword1>Freeze</keyword1> build-up restores {{value0}} <keyword2>Health</keyword2>",
     "sourceHash": "0d2b1e9c9ed4ffd4f72deb8768394d0c011dddaea1aeba9cc88ea82722ff7b3d",
     "text": "La <keyword0>purification</keyword0> du cumul de <keyword1>Gel</keyword1> restaure {{value0}} de <keyword2>Santé</keyword2>"
+  },
+  "content.species.parhelion.title": {
+    "reviewed": true,
+    "source": "The sun upon the snow",
+    "sourceHash": "c30e0f5ccce0903568bf4d30ccbd4800a75721133fedcfd091c68f4ada075b54",
+    "text": "Le soleil sur la neige"
+  },
+  "content.species.parhelion.trait": {
+    "reviewed": true,
+    "source": "Sunthaw",
+    "sourceHash": "ac33226ba54dcc13f3a0cfe9359a70fd850db4a4225200b5b12c8778386e61b5",
+    "text": "Dégel solaire"
   },
   "content.species.pollenmoth.passive.0.rule": {
     "reviewed": true,
