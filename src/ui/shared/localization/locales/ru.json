@@ -29,6 +29,12 @@
     "sourceHash": "d44dccac704a0726ab8fbacab707eb40ec6e2721e5991784e0a18a9fbb5be7d3",
     "text": "Боевые эффекты"
   },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "a236537d0d1fade20ff06d6f7e354591c70054f268331f1b00fbf4d4ae8df884",
+    "text": "Еда"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
@@ -473,6 +479,168 @@
     "sourceHash": "ffd8d88c0bfa1872f5df31d917f025d724f2916efeabadadefac1b5daaab2a3d",
     "text": "Ход"
   },
+  "content.keyword.armor.label": {
+    "reviewed": true,
+    "source": "Armor",
+    "sourceHash": "455ce3ede03b1ed1946856efed306b40b250df7d18c689acbca4b544e53acf8a",
+    "text": "Броня"
+  },
+  "content.keyword.attackReflection.label": {
+    "reviewed": true,
+    "source": "Attack Reflection",
+    "sourceHash": "77ef339d15a0b811a2860b26ce5010efc5f2b17be4dbc1803651a6e891bf9a18",
+    "text": "Отражение атаки"
+  },
+  "content.keyword.bleed.label": {
+    "reviewed": true,
+    "source": "Bleed",
+    "sourceHash": "b5251792326dee31908e8db781667fb6d6d08200b4b4c12558519051e8aaceaa",
+    "text": "Кровотечение"
+  },
+  "content.keyword.blind.label": {
+    "reviewed": true,
+    "source": "Blind",
+    "sourceHash": "3d3464c6ebc105f5d5c371aa3fe09dfa233e17cd6dbfd9f5561d37addc6ae6f3",
+    "text": "Ослепление"
+  },
+  "content.keyword.block.label": {
+    "reviewed": true,
+    "source": "Block",
+    "sourceHash": "63f4783cdcde5f6a536c90a10f5715c4597b07d8a0b52183eff8870631635ea9",
+    "text": "Блок"
+  },
+  "content.keyword.burn.label": {
+    "reviewed": true,
+    "source": "Burn",
+    "sourceHash": "1c0fbcc03b7626e40e2cd6978a04c6a9c965cba10c03b3a1add07c65a90675f5",
+    "text": "Горение"
+  },
+  "content.keyword.cleanse.label": {
+    "reviewed": true,
+    "source": "Cleanse",
+    "sourceHash": "41c86b30c6494f1bb18934b00f751bb6a75e53d9baebf2394ad48ff60ae33a79",
+    "text": "Очищение"
+  },
+  "content.keyword.consume.label": {
+    "reviewed": true,
+    "source": "Consume",
+    "sourceHash": "7f89890e3d9089f759362ecd2f134b17708155300b15b52ab8b192b1cdcc9f06",
+    "text": "Расходуется"
+  },
+  "content.keyword.criticalHit.label": {
+    "reviewed": true,
+    "source": "Critical Hit",
+    "sourceHash": "8fca1305ae5fe1b85879d0615bddbbfec5da68b88e8a690cccaab072579a291d",
+    "text": "Критический удар"
+  },
+  "content.keyword.dodge.label": {
+    "reviewed": true,
+    "source": "Dodge",
+    "sourceHash": "28daa66bea256fa02f429b929b5663042960771704466c8c4b9ca8d9a38ce993",
+    "text": "Уклонение"
+  },
+  "content.keyword.food.label": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "a236537d0d1fade20ff06d6f7e354591c70054f268331f1b00fbf4d4ae8df884",
+    "text": "Еда"
+  },
+  "content.keyword.freeze.label": {
+    "reviewed": true,
+    "source": "Freeze",
+    "sourceHash": "62cddbeafee8edf6933da68ba9aa25387032e53a4ae15f21132ecfe4908e345a",
+    "text": "Заморозка"
+  },
+  "content.keyword.health.label": {
+    "reviewed": true,
+    "source": "Health",
+    "sourceHash": "e69a054e45d667185e9330c58ddc868cb31e2f4ae35c0746f1d32ed36f1a6b5a",
+    "text": "Здоровье"
+  },
+  "content.keyword.leech.label": {
+    "reviewed": true,
+    "source": "Leech",
+    "sourceHash": "af000487a372f7b9ff1f15f92dabf7f88b16c14a62fd13d1656003af394fb0a4",
+    "text": "Вампиризм"
+  },
+  "content.keyword.light.label": {
+    "reviewed": true,
+    "source": "Light",
+    "sourceHash": "f083c77b3e16de75d0162c4eab5b352b717ab279893b5734eb6dfa1005e27cd7",
+    "text": "Свет"
+  },
+  "content.keyword.mana.label": {
+    "reviewed": true,
+    "source": "Mana",
+    "sourceHash": "8fcf54e8aacc55ba1671dda45219977418640eeff01083cc804bc95d1e1c6ef7",
+    "text": "Мана"
+  },
+  "content.keyword.nature.label": {
+    "reviewed": true,
+    "source": "Nature",
+    "sourceHash": "e2f68a46516581af75d6429091c2375e14adfe482078ea6104a039a868af48bb",
+    "text": "Природа"
+  },
+  "content.keyword.negate.label": {
+    "reviewed": true,
+    "source": "Negate",
+    "sourceHash": "7e496b54cf4c9e808716e462e6705e72e87bbc55fb3e134a3f919f026b938922",
+    "text": "Отведение"
+  },
+  "content.keyword.nullify.label": {
+    "reviewed": true,
+    "source": "Nullify",
+    "sourceHash": "99a2eaabdc6ed5831e1f40df407b8fdccd391072d2d16d5c6be3bb9a86ff9bfe",
+    "text": "Аннулирование"
+  },
+  "content.keyword.physical.label": {
+    "reviewed": true,
+    "source": "Physical",
+    "sourceHash": "c9f8f0c55ac53ef2b1e50ddf6d35135a49d9c189e7b22c5062f0acb4f60f6717",
+    "text": "Физический"
+  },
+  "content.keyword.poison.label": {
+    "reviewed": true,
+    "source": "Poison",
+    "sourceHash": "0d48610e3d176e3f78a3d31319fd331d1233505a6757a3a4248ffa99dceadd39",
+    "text": "Яд"
+  },
+  "content.keyword.purge.label": {
+    "reviewed": true,
+    "source": "Purge",
+    "sourceHash": "7ef0c84b754dbe3adf9e449160c57d4adb9a849d759644bf462c5016044d0db1",
+    "text": "Рассеивание"
+  },
+  "content.keyword.reflect.label": {
+    "reviewed": true,
+    "source": "Reflect",
+    "sourceHash": "c447cc473c1290eca57e515ed30020d250e66cf49433c5115a3b8b695f3fd362",
+    "text": "Отражение"
+  },
+  "content.keyword.resurrect.label": {
+    "reviewed": true,
+    "source": "Resurrect",
+    "sourceHash": "bd52b0b0ab387449f18a2d75d74da1b5ac9d56bfd495682eb98874919bc95b01",
+    "text": "Воскрешение"
+  },
+  "content.keyword.stun.label": {
+    "reviewed": true,
+    "source": "Stun",
+    "sourceHash": "2a1a2d22766892fbf38d76773adb3893d3072a70a3712442dcfd34deb862995d",
+    "text": "Оглушение"
+  },
+  "content.keyword.thorns.label": {
+    "reviewed": true,
+    "source": "Thorns",
+    "sourceHash": "7ae567557addefb56af41d4aec6cd321645b0c0d2cd47fe27e407630dc9d0718",
+    "text": "Шипы"
+  },
+  "content.keyword.water.label": {
+    "reviewed": true,
+    "source": "Water",
+    "sourceHash": "00f6b940a75cac73af377744917b03ecc095e57fac49a2a2122349ab05fdfc5e",
+    "text": "Вода"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -593,6 +761,24 @@
     "sourceHash": "b55998e086ab77556f80015f46195b8db045eb64f62b7749ca6cdc0b10b44966",
     "text": "Продолжить"
   },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "bbf4f80624b627bbdb969ed93dbdacb390e83082cc5fe6e7faa2e48cce2eb1cf",
+    "text": "Завершить путешествие"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "1af26747d9db05deb8d4fbe5e3a321a8cd3243db84c4119750a0f72af51795db",
+    "text": "Справочник"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "2b4bc5a303f37714a70234f66163c5b5b5471e32eb32f3318f9fa311c02bfb9a",
+    "text": "Главное меню"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -604,6 +790,18 @@
     "source": "Play",
     "sourceHash": "f9fb63cff13337d939cb9dfbb1617d729340a75fe028655f94edcab21b6df589",
     "text": "Играть"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "6a9787f36ae111a2dba230a8db3c98e75aff0a14ddc71c92515349f7ccf48fd1",
+    "text": "Сохранить и выйти"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "c67f0d8192b23371e580c0809e1ee273d3806c2ce34a9b4b323da247f4bf64c6",
+    "text": "Настройки"
   },
   "navigation.back": {
     "reviewed": true,
@@ -869,6 +1067,12 @@
     "sourceHash": "c8500568a299988f6fa8d4982c5a4557a6711302e19607d6fa90602a64a1172d",
     "text": "Аудио"
   },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "4ad9ed350822ccb6de45cc1072923037a46049a5ebc0f3291ebf569112b47811",
+    "text": "Автоматически завершать ход"
+  },
   "settings.automatic": {
     "reviewed": true,
     "source": "Automatic",
@@ -881,11 +1085,53 @@
     "sourceHash": "ca6edf4934f3e3c2e561cad7dd6efcf37d991d206bade5e25eb0a8b1a25fdfef",
     "text": "Бой"
   },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "61ac7ecdff55f8a20839396b79807e1284abd88321ca5cff289b08374372ab4b",
+    "text": "Категории настроек"
+  },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "cb42385506e2c097746f356b2ad6e691b5f101e799e996c9383f7c9055cbbf83",
+    "text": "Закрыть выбор языка"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "f07d65fe4d67ad5dbdecaf3e7776d70ac6b26859a73b014de29896163db97f3a",
+    "text": "Подсказки контроллера"
+  },
   "settings.display": {
     "reviewed": true,
     "source": "Display",
     "sourceHash": "7787ea5e1ffb8b78aeb34c0e94a4022e6285be62dc376ad7087a2315e78c9b5f",
     "text": "Изображение"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "102d47cc93b1521490539cbcbb69da9e97dd7851a66c4b115b5a0a071fe0f2fe",
+    "text": "Режим отображения"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "5ce386f38096d6036e8b7d45192971de48cad9c6ab4563cd6e7739545bc556cb",
+    "text": "Звуковые эффекты"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "f0a99b9d45075fe4f0f8b790e0f870ff84833d1035d13891786bd86fbd7ac3ca",
+    "text": "Громкость эффектов"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "035df2f6f1a07ad3adb5b34659c10f4c09c352dc030942d95144bf1bb20adc36",
+    "text": "Значение громкости эффектов"
   },
   "settings.fullscreen": {
     "reviewed": true,
@@ -899,11 +1145,71 @@
     "sourceHash": "e19f2852dbdd847e292eb7df78a57a00f009fbb1d7a1a3f998da60f9d2d07db6",
     "text": "Свечение фона"
   },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "56cd3e40f2665551d48ffaa90e267e988a5c654e7161a989e32b8bac6ef4d9d0",
+    "text": "Значение свечения фона"
+  },
   "settings.language": {
     "reviewed": true,
     "source": "Language",
     "sourceHash": "98fb856edb68a6afdbbd1e1f805135a0eaee6f6a0f52bc8698959d4860995ad0",
     "text": "Язык"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "6029fe85256831cc5a53d0401f85382cab36485d5c58eb204652cd6763b03fa6",
+    "text": "Выберите язык"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "dfc1558c22750d6518cb6ebce6222fbc898753d9ea00d36022286ab934b6b317",
+    "text": "Язык: {{language}}"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "ae561f69fefbed8f2fbf5c949dedbd9511683b23ba68f6cc675fe38723f1c0e4",
+    "text": "Общая"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "ffa16eb548be7455085110c3b12b0a9a942179b7a52f606edc1b352c7676282c",
+    "text": "Общая громкость"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "856f5ed0ab6874c5cfe6512eab8b955948fa5f58728bd8636325d57c46c24f1d",
+    "text": "Значение общей громкости"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "c39a5d4d63581d870be06a2486d781e5cdaa2b0329864941aa2aab4546fbb1ed",
+    "text": "Музыка"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "4f85e58a65c16990fa479d841dc30e49eae8d7b310339131fb04a34830b96bb2",
+    "text": "Громкость музыки"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "308f78b1f6545245477942d0f34eb762367b08db133a32f30a611b1bec997240",
+    "text": "Значение громкости музыки"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "04eb540b5262e5bcb36fa3b09f98e2988ccd806ef5af25cf085f9d9f08bd0f8f",
+    "text": "Выключать звук в фоне"
   },
   "settings.particles": {
     "reviewed": true,
@@ -911,11 +1217,35 @@
     "sourceHash": "11180432ca411ba4d80aac56de5ac37cc4737cecdfe0d5dca62c8bad571df06a",
     "text": "Частицы фона"
   },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "2c5d17339ee15fdf65af18f920bbbf15f50efbad96e6ac62edce1ae5d4e6edad",
+    "text": "Значение частиц фона"
+  },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "60901ba6412d7223cd23b06652134bef5d25adc5abc3ff8897284a07f9b90874",
     "text": "Звук"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "161b78c3600d0a7357ee9908c564c3b1fcda3f6ed93cb6db083f5efd462b1312",
+    "text": "Размер текста"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "73423c7cf773ecc344e82fe006187c6265868d556b576465e632b96269962063",
+    "text": "Подсказка {{value}}%"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "4f41737c7c229069a4af79fb6daf5985b9b58257aad308273364caa607a210fd",
+    "text": "Размер подсказок"
   },
   "settings.windowed": {
     "reviewed": true,

@@ -1,3 +1,4 @@
+import japanese from "../../../src/ui/shared/localization/locales/ja.json";
 import { definition } from "../../../src/game/content";
 import { extractCardVariants } from "../../../scripts/localization/card-variants.mjs";
 import { cardRuleVariantId } from "../../../src/ui/shared/localization/rule-key.mjs";
@@ -1157,5 +1158,20 @@ it("uses the reviewed card rule for both artwork announcements and tooltip value
   ).toBeTruthy();
   expect(view.container.textContent).toContain("Gagne 12 Blocage");
   expect(screen.getByText("Blocage").getAttribute("data-keyword")).toBe("block");
+  view.unmount();
+});
+
+it("renders localized keyword labels and card rules with their shared gameplay identity", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const view = render(
+    <LocalizationProvider catalogs={{ ja: japanese }} qualified={["en", "ja"]} systemLanguages={["ja"]}>
+      <Keyword id="stun" />
+      <CardRules card={definition("mossguard-attack")} value={4} />
+    </LocalizationProvider>,
+  );
+  const labels = screen.getAllByText("スタン");
+  expect(labels).toHaveLength(2);
+  expect(labels.every((label) => label.getAttribute("data-keyword") === "stun")).toBe(true);
+  expect(view.container.textContent).toContain("すべての敵にスタンダメージを4与える");
   view.unmount();
 });

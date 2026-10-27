@@ -29,6 +29,12 @@
     "sourceHash": "d5072b707c9f5bb0afb5d544a0ce29df74889afcd3a9dffde848ba0d3a001ff3",
     "text": "Efeitos de combate"
   },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "b3bfc4fd56754a3f1e5da23f0a908f958319d0b45c36c4c6da799780f7df3664",
+    "text": "Comida"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
@@ -473,6 +479,168 @@
     "sourceHash": "3664496b435312c04ead1fe1164dd9f1e28e37e810aa8eddbd76111b0aa3477a",
     "text": "Turno"
   },
+  "content.keyword.armor.label": {
+    "reviewed": true,
+    "source": "Armor",
+    "sourceHash": "bc6f76b172c445d63f8ec429822a5ed612b76f2aa59951445e8c4fdf16e1fa58",
+    "text": "Armadura"
+  },
+  "content.keyword.attackReflection.label": {
+    "reviewed": true,
+    "source": "Attack Reflection",
+    "sourceHash": "9fafef7992a3b7614f748bb0f1bb94ff1c9c4f8e9bb96d3974eb47bef5c52993",
+    "text": "Reflexão de ataque"
+  },
+  "content.keyword.bleed.label": {
+    "reviewed": true,
+    "source": "Bleed",
+    "sourceHash": "cb35bdabce99d825eae2ca4a32a5c6d98496586ea8cadb6a83afd32aa1c5c8d1",
+    "text": "Sangramento"
+  },
+  "content.keyword.blind.label": {
+    "reviewed": true,
+    "source": "Blind",
+    "sourceHash": "2c6e2f8009876ec0415a387e057fcd74f350e36e4e8ebc2ec5f66f654ec2593d",
+    "text": "Cegueira"
+  },
+  "content.keyword.block.label": {
+    "reviewed": true,
+    "source": "Block",
+    "sourceHash": "64ac40524602b2b80b7afd2af37b3472a6af4d146a4072a48d811ede89e6e9d8",
+    "text": "Bloqueio"
+  },
+  "content.keyword.burn.label": {
+    "reviewed": true,
+    "source": "Burn",
+    "sourceHash": "f559b9a4ffc3898eaabe203146d81c97f51075677a8ccb469528f2659bac8c60",
+    "text": "Queimadura"
+  },
+  "content.keyword.cleanse.label": {
+    "reviewed": true,
+    "source": "Cleanse",
+    "sourceHash": "94ad8c94e2862aaddd1af737ecdbab90e206198304819e064d3ed90dd6c11fa5",
+    "text": "Purificação"
+  },
+  "content.keyword.consume.label": {
+    "reviewed": true,
+    "source": "Consume",
+    "sourceHash": "a9c29f6c09f2bdac7c49c44fc4b247db295c16186c41ddd8b48d715e4d00ad81",
+    "text": "Consumir"
+  },
+  "content.keyword.criticalHit.label": {
+    "reviewed": true,
+    "source": "Critical Hit",
+    "sourceHash": "b5e6244c6aa3e63a2dadd9919d76e3808aa64ccdc072003980d75fde87baa0ab",
+    "text": "Acerto crítico"
+  },
+  "content.keyword.dodge.label": {
+    "reviewed": true,
+    "source": "Dodge",
+    "sourceHash": "f45b34052e28a762f3a329435cd52ebc5a4d2f93cf3b807990164b1e4d893ee7",
+    "text": "Esquiva"
+  },
+  "content.keyword.food.label": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "b3bfc4fd56754a3f1e5da23f0a908f958319d0b45c36c4c6da799780f7df3664",
+    "text": "Comida"
+  },
+  "content.keyword.freeze.label": {
+    "reviewed": true,
+    "source": "Freeze",
+    "sourceHash": "83489ca67f9ed8b88fcac42c9c61bf6c623e498cf56414ff063f2a5ad711a5b3",
+    "text": "Congelamento"
+  },
+  "content.keyword.health.label": {
+    "reviewed": true,
+    "source": "Health",
+    "sourceHash": "b6ae3e194443defac93f2553605c15468180f775a273766da628dbec95757343",
+    "text": "Saúde"
+  },
+  "content.keyword.leech.label": {
+    "reviewed": true,
+    "source": "Leech",
+    "sourceHash": "a5a9a89135501c444e206cc3ac29967fd80aa9d594617db459a79b8f6fd40c4f",
+    "text": "Drenagem"
+  },
+  "content.keyword.light.label": {
+    "reviewed": true,
+    "source": "Light",
+    "sourceHash": "327e812a91662b3f68f75c26d2df5cd95dd069e09b646abcc17959d8a2e48cdc",
+    "text": "Luz"
+  },
+  "content.keyword.mana.label": {
+    "reviewed": true,
+    "source": "Mana",
+    "sourceHash": "b7443362c5223093ffcb612248a34eb526ff52d466eb74b8dbd1af31e731b84e",
+    "text": "Mana"
+  },
+  "content.keyword.nature.label": {
+    "reviewed": true,
+    "source": "Nature",
+    "sourceHash": "056eba30e9269d3e6cf1c10d0b54a545293d83b6245b9a1c45c5b85cd7cac459",
+    "text": "Natureza"
+  },
+  "content.keyword.negate.label": {
+    "reviewed": true,
+    "source": "Negate",
+    "sourceHash": "3d375e6dcb287ec1776ecf869ac191609dcc0a0ac8f39634a4a0c2a7b741b412",
+    "text": "Negação"
+  },
+  "content.keyword.nullify.label": {
+    "reviewed": true,
+    "source": "Nullify",
+    "sourceHash": "20538d83b89fd78d6c94f2eaaa073ea502277fb514442974174848a7f61b4ad2",
+    "text": "Anulação"
+  },
+  "content.keyword.physical.label": {
+    "reviewed": true,
+    "source": "Physical",
+    "sourceHash": "1efc1f345c4ab114d107d34d9a8b2499b4f17101faa48c6fa4c88fce550f4bb8",
+    "text": "Físico"
+  },
+  "content.keyword.poison.label": {
+    "reviewed": true,
+    "source": "Poison",
+    "sourceHash": "27d5b96dfcafedf2a0861984f833cdb9026125019a443f85954cc2659654541a",
+    "text": "Veneno"
+  },
+  "content.keyword.purge.label": {
+    "reviewed": true,
+    "source": "Purge",
+    "sourceHash": "f9e3e5ca0744e31e86df686587aecb6ec88e90d699f86304a1d01d0cea987663",
+    "text": "Expurgo"
+  },
+  "content.keyword.reflect.label": {
+    "reviewed": true,
+    "source": "Reflect",
+    "sourceHash": "432c37f9049ada83efb1f8f9a5944ca1210cef492381970c5b9915c44902b859",
+    "text": "Reflexão"
+  },
+  "content.keyword.resurrect.label": {
+    "reviewed": true,
+    "source": "Resurrect",
+    "sourceHash": "32ca725457bdfe5e19eaa19d815b06d2205075eaceda3203033698170d1cbf44",
+    "text": "Ressurreição"
+  },
+  "content.keyword.stun.label": {
+    "reviewed": true,
+    "source": "Stun",
+    "sourceHash": "7343dd2a9fe5e241cb0ae0501bcc85c7c2c3651bc8768e7ee4b2643a24a85913",
+    "text": "Atordoamento"
+  },
+  "content.keyword.thorns.label": {
+    "reviewed": true,
+    "source": "Thorns",
+    "sourceHash": "04f0f73dc2affa67af61adafe3fcbd27ff6c770d0c6c111cbcf1bd876b409b87",
+    "text": "Espinhos"
+  },
+  "content.keyword.water.label": {
+    "reviewed": true,
+    "source": "Water",
+    "sourceHash": "42f4269432d70809a8af8dbe3ebee3ade9688fe4506a58103c7bbef4b15565f4",
+    "text": "Água"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -593,6 +761,24 @@
     "sourceHash": "e19dadda2236badf3df3a28b16ef50a2234f041a984dbf9ac93d3ce99b29dade",
     "text": "Continuar"
   },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "9063112b462cb99a542a1b49df83009a9d42f6e1fc5f880f88ac2e84a6d389f0",
+    "text": "Encerrar jornada"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "a87ed4c8132161af9608ca0942b834665b8f41179b4d4bd56009fe0bb7bb3c43",
+    "text": "Glossário"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "0b1c2368284f406284443743a0a61ffac4990b740f0a1f57aa2b897dce264091",
+    "text": "Menu principal"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -604,6 +790,18 @@
     "source": "Play",
     "sourceHash": "32e6e8d462119172b7c04a4d2c7e87d96adaf3c577a9bb3e10ef3ea1e51c0cf7",
     "text": "Jogar"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "bcf090fca512ec51122979054765de583ac8ff19d443c090d39ffae94a95f34a",
+    "text": "Salvar e sair"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "c817944288e8f67f488da20dbd3a5b7845a6d027284f85e660c2ea4297c85d2a",
+    "text": "Configurações"
   },
   "navigation.back": {
     "reviewed": true,
@@ -869,6 +1067,12 @@
     "sourceHash": "79d6d8fd1bd127e4cedef8444eded921c654f32c677f0159ebd5234f95feb280",
     "text": "Áudio"
   },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "eea530e556fd580ec1213c12a3b22f6387484edc89b6a6740226535e97751f71",
+    "text": "Encerrar turno automaticamente"
+  },
   "settings.automatic": {
     "reviewed": true,
     "source": "Automatic",
@@ -881,11 +1085,53 @@
     "sourceHash": "c92ddc8c76f23fcc73378b98daeab055e5713c4fb0d984936a80e2ccd326bd37",
     "text": "Combate"
   },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "2c02ee5e3fb16c28c5289caf1a9b2fff364d273b5d3dc818cba39aa2d83182b9",
+    "text": "Categorias de configurações"
+  },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "86b8de4ecb6d67ee9da85b5605bae4a9300905880da1d9916eb69ea26988a497",
+    "text": "Fechar seleção de idioma"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "70615c2feb68c741c9bb256b214ff2faa59fc8e89b891bb1e0df959db7db67f9",
+    "text": "Indicações do controle"
+  },
   "settings.display": {
     "reviewed": true,
     "source": "Display",
     "sourceHash": "c5b2c09fcfee90bd5355294d809b8b31996dadfef856da77dd171635d6f2c97a",
     "text": "Tela"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "8a5bcfe2c4421f4ab32adc551bf6ded78af657a0d3a2bdb21be48e224af1e75c",
+    "text": "Modo de exibição"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "7e17b1f8cfc58168a73a31467d54ffbe5d481e25f07b907f387ca5855d0a2163",
+    "text": "Efeitos sonoros"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "60eaeda6771097bad7b79ffdb0e7a09fcebfcdd708e833c436f26558785712de",
+    "text": "Volume dos efeitos"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "a434d4b5ade11162e1cfdab64bb5678d5b0b84a6dd7cacec3225a70fe7f11375",
+    "text": "Valor do volume dos efeitos"
   },
   "settings.fullscreen": {
     "reviewed": true,
@@ -899,11 +1145,71 @@
     "sourceHash": "b7e8746dc66783826e2339a30c2d6b0bb6faf96ddc218759600e375aa8129bff",
     "text": "Brilho do fundo"
   },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "eadc74cc190027558365cb43450469872ef97d9067ccc2dffcc4b205fa956db2",
+    "text": "Valor do brilho de fundo"
+  },
   "settings.language": {
     "reviewed": true,
     "source": "Language",
     "sourceHash": "f3b43d69f8a9b0483287a3f72ed65c5a2490d2a1a1d28555d76df8a8df0a5d2a",
     "text": "Idioma"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "24af7d493c5640b6c7e63f5711021cc8d0494ed4a55e766ed696a5702d4ec421",
+    "text": "Escolha um idioma"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "b372fd7b78409e2f745b3133de633ee8d1fb03f1b1741c7ee23a515fcff26578",
+    "text": "Idioma: {{language}}"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "502910725ee662f9053fa6cbc5798f57cb69930c2ea0ce0eeb54f88097b0b74c",
+    "text": "Principal"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "07a6cf2afd78e40ff5994fc8f27a9d7acc23cfa7dd8310626265da3f27181c2e",
+    "text": "Volume principal"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "19d2e35b2909992760e6e5fc0a8a45a3bbf3798c9623256308485e5aad16d5b8",
+    "text": "Valor do volume principal"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "3e8ba748b0939bd726de7b4b2ca85929d34cd96c3335ae965bed85bf96dd6f67",
+    "text": "Música"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "eb67d5088919796a0929b726dfcbdbe20de1aea45ff08606c45ba7136c977b74",
+    "text": "Volume da música"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "d7ea4c373a14f9d6eeb04035aa4518f25d44154575b2ddf0b7cbfcc253c2e5c5",
+    "text": "Valor do volume da música"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "ba0de47180c727ee0e3cbedb6f96bfbfc80c9f2f3255a4fb1336f0be80d2616a",
+    "text": "Silenciar em segundo plano"
   },
   "settings.particles": {
     "reviewed": true,
@@ -911,11 +1217,35 @@
     "sourceHash": "27d81de15321222211339c3d34cd5c7bcf037d1623d31f8a049ee30efe1c2638",
     "text": "Partículas do fundo"
   },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "fe07d8d89f4938a76ef04ba5605b51a44064143ee63fc9c5b4f61d4150cd5d1b",
+    "text": "Valor das partículas de fundo"
+  },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "7737743f0329b1495e6eaf37d2f155d4068b378c0ee9bb698ff4a850f6f3c411",
     "text": "Som"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "571e4bb1f0b0b001a9665ea0eed3331f7a3e8514e6d28245753cd7a7ef81d0ae",
+    "text": "Tamanho do texto"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "d2ae8849569898d3693475177b64497eec99df100b4f773a8ffbdcf8e38d32e5",
+    "text": "Dica {{value}}%"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "ae1d89f72a129eed258638f4f13dfd22088a2f84d319b4459e5cea763872bf61",
+    "text": "Tamanho das dicas"
   },
   "settings.windowed": {
     "reviewed": true,

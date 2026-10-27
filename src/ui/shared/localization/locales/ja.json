@@ -29,6 +29,12 @@
     "sourceHash": "97f79d4d6d313ce5f202278976899ea4890b90ee3971ad96251475041781ed82",
     "text": "戦闘効果"
   },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "948c2ccc4f083d05a0fb9b6407d967e2d2e763fdfe57bd3e438a5084e6062fa7",
+    "text": "食料"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
@@ -345,7 +351,7 @@
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Light</keyword0> damage; <keyword1>Purge</keyword1> target: remove {{value1}} effect",
     "sourceHash": "dd90cd704804766f06ac76864c1800a512b442870777cc8b803222880ffbcf07",
-    "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象を<keyword1>浄化</keyword1>：効果を{{value1}}個取り除く"
+    "text": "<keyword0>光</keyword0>ダメージを{{value0}}与える；対象の<keyword1>強化解除</keyword1>：効果を{{value1}}個取り除く"
   },
   "content.glossary.action-card.term.rule": {
     "reviewed": true,
@@ -473,6 +479,168 @@
     "sourceHash": "60ba59531a92e5af2830e15a6f80c564cbc4db2821f97dec7e3bf39da5cb7623",
     "text": "ターン"
   },
+  "content.keyword.armor.label": {
+    "reviewed": true,
+    "source": "Armor",
+    "sourceHash": "8a01799740330e7ec8a6055ecaa50e994fec963f4994449878e6af7af9980f85",
+    "text": "装甲"
+  },
+  "content.keyword.attackReflection.label": {
+    "reviewed": true,
+    "source": "Attack Reflection",
+    "sourceHash": "1eaae6f18006a13c657c9ba3cd3209a364798c0f351381917cb3ed7e27441d9d",
+    "text": "攻撃反射"
+  },
+  "content.keyword.bleed.label": {
+    "reviewed": true,
+    "source": "Bleed",
+    "sourceHash": "706981386c14f1751c80a6c34f82d7d8eaf786123ad26973fcd6f27d5161369c",
+    "text": "出血"
+  },
+  "content.keyword.blind.label": {
+    "reviewed": true,
+    "source": "Blind",
+    "sourceHash": "1a0f547f8b75ad1cedbacb38f2d722321fd073ecd9d812703274a858fa62ca21",
+    "text": "盲目"
+  },
+  "content.keyword.block.label": {
+    "reviewed": true,
+    "source": "Block",
+    "sourceHash": "27cb83a9806f035bb8d1ff841d5fe633f38944c67abd83abf28c6b9a257384d8",
+    "text": "ブロック"
+  },
+  "content.keyword.burn.label": {
+    "reviewed": true,
+    "source": "Burn",
+    "sourceHash": "06e4e17313653b37c02f7386b3cdee357e18d978aafa037e1bcd82b1cec13da3",
+    "text": "炎上"
+  },
+  "content.keyword.cleanse.label": {
+    "reviewed": true,
+    "source": "Cleanse",
+    "sourceHash": "a14fc3c5f3e8c5925113101be0a5c1c76036b63655a7e16cc578f46d3ae281b8",
+    "text": "浄化"
+  },
+  "content.keyword.consume.label": {
+    "reviewed": true,
+    "source": "Consume",
+    "sourceHash": "091a3634001eab55278aff64365391fec4f3718b5b39b8a300478f6aaa5ad3a7",
+    "text": "消費"
+  },
+  "content.keyword.criticalHit.label": {
+    "reviewed": true,
+    "source": "Critical Hit",
+    "sourceHash": "97169e70e98470cda19473edca91c79a1352f9de6246ad5070d1d9456b9743f4",
+    "text": "クリティカル"
+  },
+  "content.keyword.dodge.label": {
+    "reviewed": true,
+    "source": "Dodge",
+    "sourceHash": "b036281db1e6c5129e058036061920bcb7a0d7f789291c59f4facfc5295ce0da",
+    "text": "回避"
+  },
+  "content.keyword.food.label": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "948c2ccc4f083d05a0fb9b6407d967e2d2e763fdfe57bd3e438a5084e6062fa7",
+    "text": "食料"
+  },
+  "content.keyword.freeze.label": {
+    "reviewed": true,
+    "source": "Freeze",
+    "sourceHash": "602cc790869a94773d5e3372ff4a8a3885c95287341d40590b9baed7324df291",
+    "text": "凍結"
+  },
+  "content.keyword.health.label": {
+    "reviewed": true,
+    "source": "Health",
+    "sourceHash": "24e4b9ed929167db227fc1a9891fa0b02d1c9ab025326be081dcac87890db5a2",
+    "text": "体力"
+  },
+  "content.keyword.leech.label": {
+    "reviewed": true,
+    "source": "Leech",
+    "sourceHash": "8b1cdf2c99a56825dfc560565222d802ca9415e6b83543451d2e3a1f2e6fd54e",
+    "text": "吸血"
+  },
+  "content.keyword.light.label": {
+    "reviewed": true,
+    "source": "Light",
+    "sourceHash": "88474a0fc754364656ae3523c35b6014cb79539ab59767d7fc1d41c661dc13a1",
+    "text": "光"
+  },
+  "content.keyword.mana.label": {
+    "reviewed": true,
+    "source": "Mana",
+    "sourceHash": "d94cf6e14e2514ef51427a5c9d3be12156cfe89e2cfbc05ca5e49fb41606661b",
+    "text": "マナ"
+  },
+  "content.keyword.nature.label": {
+    "reviewed": true,
+    "source": "Nature",
+    "sourceHash": "ec37903a6ab4e8d0662929951743dafa9c73c06ab2c4c401b6e7775aa28173b2",
+    "text": "自然"
+  },
+  "content.keyword.negate.label": {
+    "reviewed": true,
+    "source": "Negate",
+    "sourceHash": "80987ba8fb7af3c2b67f330d6c577d141b7f92652d9babd13a9e8c36a019db1a",
+    "text": "防止"
+  },
+  "content.keyword.nullify.label": {
+    "reviewed": true,
+    "source": "Nullify",
+    "sourceHash": "35df3307e074a023ddbdd63eba53c42cfd1c254472b09026a230d29961e57263",
+    "text": "無効化"
+  },
+  "content.keyword.physical.label": {
+    "reviewed": true,
+    "source": "Physical",
+    "sourceHash": "c722f9e1e2f776451c51e8af718e913372f433c38bf373b85fd11d1dd0fc6ff1",
+    "text": "物理"
+  },
+  "content.keyword.poison.label": {
+    "reviewed": true,
+    "source": "Poison",
+    "sourceHash": "7003fc04c1814360b3a46cded2983fdca2e5e3469e2829a8ebbce51d3854d1de",
+    "text": "毒"
+  },
+  "content.keyword.purge.label": {
+    "reviewed": true,
+    "source": "Purge",
+    "sourceHash": "12527b8be52dd05daa20cfa6a824cd4cd1c6a339337d750fa1d57a90790f5068",
+    "text": "強化解除"
+  },
+  "content.keyword.reflect.label": {
+    "reviewed": true,
+    "source": "Reflect",
+    "sourceHash": "75ebd42e9804ed3f15a8b8213716e01effcfd84657c11b62eaf10c33edc34918",
+    "text": "反射"
+  },
+  "content.keyword.resurrect.label": {
+    "reviewed": true,
+    "source": "Resurrect",
+    "sourceHash": "72e736502b567e693059dfd7fee343d249260dfc4f4414e7698a40ad837c1d8f",
+    "text": "復活"
+  },
+  "content.keyword.stun.label": {
+    "reviewed": true,
+    "source": "Stun",
+    "sourceHash": "78ecfb22562acd021ef346b5b2d71a5d6fa490467707393fb4e29509dc16b97c",
+    "text": "スタン"
+  },
+  "content.keyword.thorns.label": {
+    "reviewed": true,
+    "source": "Thorns",
+    "sourceHash": "9f4a461453a91978c3e1b8805f9a5a8fbac96edea870dd139c179f19dfc9a4ff",
+    "text": "棘"
+  },
+  "content.keyword.water.label": {
+    "reviewed": true,
+    "source": "Water",
+    "sourceHash": "c94de88083fe5ec567d91def86d6bbedcdf8224c311353a12d82511a723d263a",
+    "text": "水"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -593,6 +761,24 @@
     "sourceHash": "dd5493f5769beb1d5875a7c003d12415fabfbba53fb6f0bdf412ce0f506e8048",
     "text": "続ける"
   },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "c963abcb44670e530b94c63aec5760ef88f93de9d59a34b79eb7f93699feaab5",
+    "text": "旅を終える"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "7df1542c72aa12dcb7de30c23fe6e4c822da4ce74523943d83987f0d0106c3f9",
+    "text": "用語集"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "24bec8d437f9ca179deb8cea1e3025f2664e658f7c6604439a8a3850265d46ac",
+    "text": "メインメニュー"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -604,6 +790,18 @@
     "source": "Play",
     "sourceHash": "0c97f1e1514b1c140bfd1b26ffdbe71ba2d0c0a8fad3399e313de39a018deca8",
     "text": "プレイ"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "8fd7233856448a954cd1b94badcc269ee590889501d8e453c5222b2d1ba96983",
+    "text": "保存して終了"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "e47edbf7a62bc2a57d2bdcfe7f0008f8cb004efcb26dc1596bf460ed08d3c432",
+    "text": "設定"
   },
   "navigation.back": {
     "reviewed": true,
@@ -869,6 +1067,12 @@
     "sourceHash": "57c6ac3fd3e2c2616de01a8e579554eb4f854b5c2fab03af4c5f77d6e0d9d6f5",
     "text": "音声"
   },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "bfd4478b689c046d2d4dc7aabd6209c4ce97dec16472c40515f5481d534f365e",
+    "text": "ターンを自動終了"
+  },
   "settings.automatic": {
     "reviewed": true,
     "source": "Automatic",
@@ -881,11 +1085,53 @@
     "sourceHash": "b49b81f30cef0f95d07c21d156c60c0b2e6f74b0c4107050a2de31f21e5d8ceb",
     "text": "戦闘"
   },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "18942ccc7684aaa981a644684b425821ea7d4d920a3157c37b7d8b1dbcd31f53",
+    "text": "設定カテゴリ"
+  },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "967155197934051356442b3043fa1de33768cd942a511e3b5fad46b0e6679b3c",
+    "text": "言語選択を閉じる"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "449890a8bf947bd8d05af1f779e516c7d0593e88afc52823b9c8fc7d014dcb5b",
+    "text": "コントローラーの表示"
+  },
   "settings.display": {
     "reviewed": true,
     "source": "Display",
     "sourceHash": "9bea1b16f5a1c2971bfcc5d2e621da259af776803f561dd5b1eea2b2f709c090",
     "text": "表示"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "72090c6bbdf9a7fbb365aeb70807d84e73f48b1ee63fbd3e3656df4945c64c86",
+    "text": "表示モード"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "90b8f6b59a449fc1caa3d6e6109a65830b1dfe73be181abc26d9389cbf9da074",
+    "text": "効果音"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "032ccd5dbdeaf339e9d7cff55d53486ed2a1e668c681c3ec8f69acaddaeac0cf",
+    "text": "効果音の音量"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "342500a400447335e40253fdcfd1e28abefaa675e4b1ff020ba0b26d26936f22",
+    "text": "効果音量の値"
   },
   "settings.fullscreen": {
     "reviewed": true,
@@ -899,11 +1145,71 @@
     "sourceHash": "e5d35a7360f1c07578c3bab6669d2c7f360bf3b109558154b4ea5df73fc7ea9f",
     "text": "背景の光"
   },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "b1cfa0c3ecd3e78bdc66a967f137e2abaa675cd1ad83f40a84749e25d65a2840",
+    "text": "背景の光の値"
+  },
   "settings.language": {
     "reviewed": true,
     "source": "Language",
     "sourceHash": "aa21bf9edb90febe45b6b96cf0440cb28bceed8400d43c9f8958762fa91bfffc",
     "text": "言語"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "f352c70304334870065ff6370a58fbd82271a96ac8f6d004743ced3fc71ed576",
+    "text": "言語を選択"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "9b57beddd4c3e7a3107a37c369b1f4fbf3a3406e7dd636cb3fbbd9fb06fdb388",
+    "text": "言語：{{language}}"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "171387efeb09b72bb8ce7c60979dbfb3a6a1a52b1b299b955ca2c416ce9ab6ad",
+    "text": "全体"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "1b580f77ff2919a50f6e71aa7fdd0cd612692a1cfdc257b6c1da982b8e4521a8",
+    "text": "全体音量"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "c1966ae094b8329cb2fab1da35d1f4d0939edfb0fd16035dd8c741962f3027a7",
+    "text": "全体音量の値"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "0837277376e9790bb5c89ee7aac4e002a0a7830f9a4296020a31086aa82537a6",
+    "text": "音楽"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "dd370bf79239121772292e49f327ae386fc770e93a2ab6a348294fcfe1770eb4",
+    "text": "音楽の音量"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "6f381b2ca15f608ad1847c5caf2e9291124b2a365a62f40f9e97731a9659512b",
+    "text": "音楽音量の値"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "2cebd8fc8400ffc7418cfb04c269021356bf1a63e6fbef5612ab2b776621b3ce",
+    "text": "バックグラウンドで消音"
   },
   "settings.particles": {
     "reviewed": true,
@@ -911,11 +1217,35 @@
     "sourceHash": "bbc2687aa34f93df94ce9ec818b16ce8a779c7662bc929c30cf059e18e97b7f8",
     "text": "背景の粒子"
   },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "f401c468eb1ad969f50025ed51649e3c4890ace56484f96ee479435c8ea5b0cd",
+    "text": "背景の粒子の値"
+  },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "3baf8d8dd3dcde573d27d0ef4cf1d5fd38a15f2935bdc61f5b346f1ef1b61a64",
     "text": "音声"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "085894484ebe210f9624e0fbcc6e578ba7fb822647ab1b949021ba5d22e64276",
+    "text": "文字サイズ"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "d3757860d4dad6c88695fc83c492be2194d198748bae205c5e1ff8de8ac04bed",
+    "text": "ツールチップ {{value}}%"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "5b1775ef7b77378e4c4619cbf9a641ff4b1697eb225646a51c47d9f271edfa39",
+    "text": "ツールチップサイズ"
   },
   "settings.windowed": {
     "reviewed": true,

@@ -29,6 +29,12 @@
     "sourceHash": "c46d82e1741df3f6d26c7185a9d2d6e267a96416dfdb2f679b2269de3fa0b4e5",
     "text": "战斗效果"
   },
+  "battle.food": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "c6f25bba2a0d64cd12826f8915bbaf8f1baf6643cc0a8c96c817dfd79d17a9be",
+    "text": "食物"
+  },
   "battle.knockout": {
     "reviewed": true,
     "source": "Knockout",
@@ -473,6 +479,168 @@
     "sourceHash": "e96b1c4856ae78d9fa6df8b3be4bf9476d448ae3a333c78091f4d97b0c7bab75",
     "text": "回合"
   },
+  "content.keyword.armor.label": {
+    "reviewed": true,
+    "source": "Armor",
+    "sourceHash": "91fa0baeed64353bd42f28e734e33049f1708f97053f265acabb5be5f3ff1cd8",
+    "text": "护甲"
+  },
+  "content.keyword.attackReflection.label": {
+    "reviewed": true,
+    "source": "Attack Reflection",
+    "sourceHash": "9aee8279dfd4e5a78d29767680f3dc7d656ced7b23b20b9b93a65e2ebf847005",
+    "text": "攻击反射"
+  },
+  "content.keyword.bleed.label": {
+    "reviewed": true,
+    "source": "Bleed",
+    "sourceHash": "50e0fe89c2c4c53c0d3dae5171f1c9d29bfe8eec42fe624ce72e4687ff273a65",
+    "text": "流血"
+  },
+  "content.keyword.blind.label": {
+    "reviewed": true,
+    "source": "Blind",
+    "sourceHash": "48b264157ce40431533645685cfe17db533437f692ecfb2186d78b9954aef0ba",
+    "text": "致盲"
+  },
+  "content.keyword.block.label": {
+    "reviewed": true,
+    "source": "Block",
+    "sourceHash": "16fa7836790ca00a2670e549d6158a47de260fa2d93f555c4d20cd50ad6f2fd0",
+    "text": "格挡"
+  },
+  "content.keyword.burn.label": {
+    "reviewed": true,
+    "source": "Burn",
+    "sourceHash": "dff59a7e2d1d9701cae7650eb3a51cc5eac8f5382e3f76fba652e88180ba03d2",
+    "text": "灼烧"
+  },
+  "content.keyword.cleanse.label": {
+    "reviewed": true,
+    "source": "Cleanse",
+    "sourceHash": "d429a04a44d816931fd1488f8acbf13ab1a183912e32487d4b605f71acf24d43",
+    "text": "净化"
+  },
+  "content.keyword.consume.label": {
+    "reviewed": true,
+    "source": "Consume",
+    "sourceHash": "1bab3e103e6cc5965377b837f81ec72ae551bb7fb67fd5fe4faa4b1dc63bed32",
+    "text": "消耗"
+  },
+  "content.keyword.criticalHit.label": {
+    "reviewed": true,
+    "source": "Critical Hit",
+    "sourceHash": "4b9a2ad2d98e9b12334c12e3b2baacd7743e5f3bae0e2b4bf9d6b78133284c65",
+    "text": "暴击"
+  },
+  "content.keyword.dodge.label": {
+    "reviewed": true,
+    "source": "Dodge",
+    "sourceHash": "83be33429ecbeb3d7ef0ee4692cbc347957a1eef12bea6f245ffceac7b34053a",
+    "text": "闪避"
+  },
+  "content.keyword.food.label": {
+    "reviewed": true,
+    "source": "Food",
+    "sourceHash": "c6f25bba2a0d64cd12826f8915bbaf8f1baf6643cc0a8c96c817dfd79d17a9be",
+    "text": "食物"
+  },
+  "content.keyword.freeze.label": {
+    "reviewed": true,
+    "source": "Freeze",
+    "sourceHash": "7334984804d5d15285cbd6da61de16410e8d7ae524a1374521f60850f0c300af",
+    "text": "冻结"
+  },
+  "content.keyword.health.label": {
+    "reviewed": true,
+    "source": "Health",
+    "sourceHash": "415551ded116bbb17a8b4bd98dbda5211e19131aeccc80462be30b4af588fbae",
+    "text": "生命"
+  },
+  "content.keyword.leech.label": {
+    "reviewed": true,
+    "source": "Leech",
+    "sourceHash": "08397fd5f74b58f9b1b0debc46f6dd35e8f390b740be0ee08fa93552322cd432",
+    "text": "汲取"
+  },
+  "content.keyword.light.label": {
+    "reviewed": true,
+    "source": "Light",
+    "sourceHash": "afb248c6dad96d8a37e4b5f4bb7ed0b5880b7649ce3c395daf4c7bc8bf46df52",
+    "text": "光"
+  },
+  "content.keyword.mana.label": {
+    "reviewed": true,
+    "source": "Mana",
+    "sourceHash": "c302b750b3fe21977b6d713e17aab412879e79f669bdacbea270a23ab85ccb5c",
+    "text": "法力"
+  },
+  "content.keyword.nature.label": {
+    "reviewed": true,
+    "source": "Nature",
+    "sourceHash": "2c9c9a924d46b7d0c17af5917f70a1208411dcd9dfcb8839f15a7cdc210425a4",
+    "text": "自然"
+  },
+  "content.keyword.negate.label": {
+    "reviewed": true,
+    "source": "Negate",
+    "sourceHash": "d632962b64a7f1932e68bccbefa55afcba2d44b09518991288ab39a9693a73b8",
+    "text": "抵消"
+  },
+  "content.keyword.nullify.label": {
+    "reviewed": true,
+    "source": "Nullify",
+    "sourceHash": "60adc2902722f2b5bd83fbbc0cbf58e7831f329ece9043352f47cab90608e760",
+    "text": "无效化"
+  },
+  "content.keyword.physical.label": {
+    "reviewed": true,
+    "source": "Physical",
+    "sourceHash": "ea1b2d8d2baef17ac1fbbd83772cab61bcaa84804534d7f670758bfd9fa35785",
+    "text": "物理"
+  },
+  "content.keyword.poison.label": {
+    "reviewed": true,
+    "source": "Poison",
+    "sourceHash": "46a403453a58cae1f6a30dcca50d4415fb5f387d3ae22b0ee47a27a5e431b3ea",
+    "text": "中毒"
+  },
+  "content.keyword.purge.label": {
+    "reviewed": true,
+    "source": "Purge",
+    "sourceHash": "cd456b952d100cf9ab13d5361b596d16b4d7a7acf7d3ed576783129488da73a6",
+    "text": "驱散"
+  },
+  "content.keyword.reflect.label": {
+    "reviewed": true,
+    "source": "Reflect",
+    "sourceHash": "a9bedf8a285fbaa37fe1e60abffd7dc318bb5ab100ce56c62672b077b3f6a91b",
+    "text": "反射"
+  },
+  "content.keyword.resurrect.label": {
+    "reviewed": true,
+    "source": "Resurrect",
+    "sourceHash": "b5465b840af59c0313793973d245946b3e99da8b08e16e23e2f184f3f8f06656",
+    "text": "复活"
+  },
+  "content.keyword.stun.label": {
+    "reviewed": true,
+    "source": "Stun",
+    "sourceHash": "2da73cc471752ec51746ee242d13041ac282d5ffc7ba497bcc6e77cb970eca75",
+    "text": "眩晕"
+  },
+  "content.keyword.thorns.label": {
+    "reviewed": true,
+    "source": "Thorns",
+    "sourceHash": "d7b64b88679019a741009ff1ed31554599287e3047543924027067dc71a2db7c",
+    "text": "荆棘"
+  },
+  "content.keyword.water.label": {
+    "reviewed": true,
+    "source": "Water",
+    "sourceHash": "07c64f0b88e325eab279adee0ab82bec5b68570ddd30bf525add7c16ea97e2c2",
+    "text": "水"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
@@ -593,6 +761,24 @@
     "sourceHash": "0a68231ab6433cb984439f259f7e70b410e2d71c8b1a8e576bef6fb89a1e9721",
     "text": "继续"
   },
+  "menu.endJourney": {
+    "reviewed": true,
+    "source": "End journey",
+    "sourceHash": "18122ff0bba80be682e445146b5da59fc7e8e39e5e7e30808a0236c8ec511a96",
+    "text": "结束旅程"
+  },
+  "menu.glossary": {
+    "reviewed": true,
+    "source": "Glossary",
+    "sourceHash": "5dfde89af12293409fb335723116e5ec70abe48733a2fb3f5b845e57026c401b",
+    "text": "词汇表"
+  },
+  "menu.mainMenu": {
+    "reviewed": true,
+    "source": "Main menu",
+    "sourceHash": "10da117057e222690e1385497f09fea49e8e2c25a0e526dacca23ddd55a3bf73",
+    "text": "主菜单"
+  },
   "menu.pause": {
     "reviewed": true,
     "source": "Pause menu",
@@ -604,6 +790,18 @@
     "source": "Play",
     "sourceHash": "0881cb77235d342cc58f16666c67adb5f2f094c5466182037001953a2b5725e0",
     "text": "开始"
+  },
+  "menu.quit": {
+    "reviewed": true,
+    "source": "Save & quit",
+    "sourceHash": "90e80d85f4a395a7c0c1ab89774164efc2be0984c1b7c7785ec3e1698cf7fa49",
+    "text": "保存并退出"
+  },
+  "menu.settings": {
+    "reviewed": true,
+    "source": "Settings",
+    "sourceHash": "262699dba3aa49fe023fba30ae4885b7b1c994d963b3c697c2afa9dc07392ad6",
+    "text": "设置"
   },
   "navigation.back": {
     "reviewed": true,
@@ -869,6 +1067,12 @@
     "sourceHash": "cd5421517fa666bb02efa3da3feb5d5e61ec6482e9a50b4f8fb6eb5a285db45f",
     "text": "音频"
   },
+  "settings.autoEndTurn": {
+    "reviewed": true,
+    "source": "Auto-end turn",
+    "sourceHash": "b39e41b58dfbae452bec9338ca65abd9c059bb56e516d2ef220b8b4d09e440c0",
+    "text": "自动结束回合"
+  },
   "settings.automatic": {
     "reviewed": true,
     "source": "Automatic",
@@ -881,11 +1085,53 @@
     "sourceHash": "25ee0a137b561bfcd921b2d804230029d24008f02714cb0cfabe95be451ab456",
     "text": "战斗"
   },
+  "settings.categories": {
+    "reviewed": true,
+    "source": "Settings categories",
+    "sourceHash": "2df6c38dc7709774840713115fee4611558d8defcebeeb0f52f5db6db34079c4",
+    "text": "设置分类"
+  },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "ffde8961b814d3affbd2f4d58c200b8848cd932bbde8831b35a17e3ea7b24ba3",
+    "text": "关闭语言选择"
+  },
+  "settings.controllerPrompts": {
+    "reviewed": true,
+    "source": "Controller prompts",
+    "sourceHash": "582689332beef408aee49f0a71cad41fc8eca7e2460089ddd7525f5fa43da538",
+    "text": "手柄提示"
+  },
   "settings.display": {
     "reviewed": true,
     "source": "Display",
     "sourceHash": "c3ff7070e888cc42add00e3b0c11fabf582d787a21f5e20006e01841ed9e66de",
     "text": "显示"
+  },
+  "settings.displayMode": {
+    "reviewed": true,
+    "source": "Display mode",
+    "sourceHash": "169331d2656f77e3055242019f45dd7cdc3a5eee41e9952b65836f876853bbeb",
+    "text": "显示模式"
+  },
+  "settings.effects": {
+    "reviewed": true,
+    "source": "Sound effects",
+    "sourceHash": "ee6c7d7bf560f1488f49c01b7d42eaf8536d1f1cb5b5dd1a60ac4046872b86a6",
+    "text": "音效"
+  },
+  "settings.effectsVolume": {
+    "reviewed": true,
+    "source": "Sound effects volume",
+    "sourceHash": "a501baa98d580bcb8486e77796bb367cad36779dd710469dedc1fbbf129858e4",
+    "text": "音效音量"
+  },
+  "settings.effectsVolumeValue": {
+    "reviewed": true,
+    "source": "Sound effects volume value",
+    "sourceHash": "5ccafc1c8708e829442aa6a6e5a23cbc25ae8c2447543e2ee56da5d83b1d0242",
+    "text": "音效音量数值"
   },
   "settings.fullscreen": {
     "reviewed": true,
@@ -899,11 +1145,71 @@
     "sourceHash": "448bdf57d26142e5ea4eac3fffaec38e112d24a225c98fc48e222b169ea7525e",
     "text": "背景辉光"
   },
+  "settings.glowValue": {
+    "reviewed": true,
+    "source": "Background Glow value",
+    "sourceHash": "b14cb59f460c914ec50c878eaeeeb505dd16950a1c69394dedf23334edc7859b",
+    "text": "背景辉光数值"
+  },
   "settings.language": {
     "reviewed": true,
     "source": "Language",
     "sourceHash": "52b412e65e977efd2505c2e394b4688dae7066b3b6390f290fd502663758919a",
     "text": "语言"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "85f07a5828e74a11060354ad2d9cbd09c683f6d5dd05eb640bde30e7fc16c5d7",
+    "text": "选择语言"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "81172c353253329a25e42a7e2b0d0ed84d5960cf2aead9dfe12cb1c5845b7841",
+    "text": "语言：{{language}}"
+  },
+  "settings.master": {
+    "reviewed": true,
+    "source": "Master",
+    "sourceHash": "43981d905361625e8fb290848e55a21848eff6c6fa65bc70a289ddb017ef9a98",
+    "text": "主音量"
+  },
+  "settings.masterVolume": {
+    "reviewed": true,
+    "source": "Master volume",
+    "sourceHash": "f63197c872f00e378d6c677695303fd961980453642cb1ec3b30200c8108ea81",
+    "text": "主音量"
+  },
+  "settings.masterVolumeValue": {
+    "reviewed": true,
+    "source": "Master volume value",
+    "sourceHash": "b9fe18dbe7c69dc759a85b0544dfe12878ed6538337f6e629a25ffcc2671b628",
+    "text": "主音量数值"
+  },
+  "settings.music": {
+    "reviewed": true,
+    "source": "Music",
+    "sourceHash": "95153eaac85aff16c92032ac89392ea2cc67e4117b8adedf2650cc3b0ea7a3aa",
+    "text": "音乐"
+  },
+  "settings.musicVolume": {
+    "reviewed": true,
+    "source": "Music volume",
+    "sourceHash": "9993fa21829721bcb6bf48340dfee9672d67de5ea12cce3645d17dd4a8b3c338",
+    "text": "音乐音量"
+  },
+  "settings.musicVolumeValue": {
+    "reviewed": true,
+    "source": "Music volume value",
+    "sourceHash": "e02af8e0dd85588f66a912b6ed755c8c9716e4f3208cf2fb494d673bc78c558c",
+    "text": "音乐音量数值"
+  },
+  "settings.muteBackground": {
+    "reviewed": true,
+    "source": "Mute in background",
+    "sourceHash": "de0e92022b940f1a36c594f2bd9bc7ef7510548372dce7e547d23d324453e3c1",
+    "text": "后台静音"
   },
   "settings.particles": {
     "reviewed": true,
@@ -911,11 +1217,35 @@
     "sourceHash": "09e31ecc56bd99ea9f79947043195888785944bb8eab72f6469f877734b0ca50",
     "text": "背景粒子"
   },
+  "settings.particlesValue": {
+    "reviewed": true,
+    "source": "Background Particles value",
+    "sourceHash": "0b0e6e78efd5435c6ad1f9f25cc8b630ee5bc6a6dcb316577fcbdf9a63592dbc",
+    "text": "背景粒子数值"
+  },
   "settings.sound": {
     "reviewed": true,
     "source": "Sound",
     "sourceHash": "4bf9716880de75ea132500b7d6b091d074067931769358c4529f21f55137afcf",
     "text": "声音"
+  },
+  "settings.textSize": {
+    "reviewed": true,
+    "source": "Text size",
+    "sourceHash": "99d39dd931827da66396d376d4a0736bbb856146c52b877b19c2f21d5bd1c3fd",
+    "text": "文字大小"
+  },
+  "settings.tooltipPercent": {
+    "reviewed": true,
+    "source": "Tooltip {{value}}%",
+    "sourceHash": "4ffbdb4a09e7e250511224bc05e26730ee95fb3fdcbee9e81eb48d86a7b43d19",
+    "text": "提示 {{value}}%"
+  },
+  "settings.tooltipSize": {
+    "reviewed": true,
+    "source": "Tooltip size",
+    "sourceHash": "ea724338af628267e5e7ed6c6d05e1f97f59998872edc4edc5c9e700ad672b47",
+    "text": "提示大小"
   },
   "settings.windowed": {
     "reviewed": true,
