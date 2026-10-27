@@ -7,6 +7,21 @@ it("accepts all current authored delivery and passive limits", () => {
 });
 
 it.each([
+  ["mossguard-guard", "self", false],
+  ["mossguard-guard", "injured", true],
+  ["mossguard-heal", "injured", false],
+  ["mossguard-heal", "randomEnemy", true],
+  ["bloomquail-draw", "self", true],
+] as const)("validates the authored target %s / %s", (id, target, invalid) => {
+  const catalog = structuredClone(contentCatalog);
+  const card = catalog.cards.find((entry) => entry.id === id)!;
+  // Exercise runtime validation with external data, including targets the type rejects.
+  Object.assign(card, { target });
+  const issues = validateCatalog(catalog).filter((issue) => issue.id === id && issue.field === "target");
+  expect(issues.length > 0).toBe(invalid);
+});
+
+it.each([
   ["mossguard", "blockRetention", 101],
   ["oathara", "unfinishedJourney", 7],
 ] as const)("rejects %s passive values that exceed runtime and save limits", (id, kind, amount) => {

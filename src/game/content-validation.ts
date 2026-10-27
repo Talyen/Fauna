@@ -2,6 +2,7 @@ import { modifierImplementations } from "./modifier-bindings";
 import { freeze } from "immer";
 import { isAbilityKind } from "./rules/abilities";
 import { isSupplementalKind } from "./rules/supplemental";
+import { isPrimaryTarget } from "./rules/ability-types";
 import { FOOD_CARDS, CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS } from "./content";
 import { cardText } from "./card-rules";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
@@ -20,15 +21,6 @@ export const contentCatalog = freeze(
   true,
 );
 
-const primaryTargets: Readonly<
-  Partial<Record<import("./rules/ability-types").AbilityKind, readonly string[]>>
-> = {
-  attack: ["allEnemies", "randomEnemy"],
-  guard: ["self", "allAllies"],
-  dodge: ["self", "allAllies"],
-  heal: ["allAllies", "mostInjured", "self", "injured"],
-  recover: ["ally"],
-};
 const chancePassives = new Set([
   "expressDelivery",
   "wellRead",
@@ -135,7 +127,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   }
   for (const card of catalog.cards) {
     if (!card.name.trim()) error(card.id, "name", "Card name required");
-    if (card.target !== undefined && !primaryTargets[card.effect]?.includes(card.target))
+    if (card.target !== undefined && !isPrimaryTarget(card.effect, card.target))
       error(card.id, "target", "Unsupported primary target");
     if (
       card.species === null &&

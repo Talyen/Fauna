@@ -50,10 +50,24 @@ export type SupplementalEffect =
 
 export type SupplementalKind = SupplementalEffect["kind"];
 
+// This is also the runtime authoring contract; unlisted abilities have no target option.
+const PRIMARY_TARGETS = {
+  attack: ["allEnemies", "randomEnemy"],
+  guard: ["self", "allAllies"],
+  dodge: ["self", "allAllies"],
+  heal: ["allAllies", "mostInjured", "self", "injured"],
+  recover: ["ally"],
+} as const satisfies Partial<Record<AbilityKind, readonly string[]>>;
+
+export function isPrimaryTarget(kind: AbilityKind, target: string): boolean {
+  const targets: Partial<Record<AbilityKind, readonly string[]>> = PRIMARY_TARGETS;
+  return targets[kind]?.includes(target) ?? false;
+}
+
 interface AbilityParameters {
-  teamClearBlind: { target?: never; draw?: true };
-  swap: { backupOnly?: true; target?: never };
-  mana: { target?: never; restore?: true };
+  teamClearBlind: { draw?: true };
+  swap: { backupOnly?: true };
+  mana: { restore?: true };
   attack: {
     damageType: DamageType;
     alternateDamageType?: DamageType;
@@ -61,15 +75,11 @@ interface AbilityParameters {
     doubleAgainstHealthier?: true;
     criticalWhenLastCard?: true;
     purgeThorns?: true;
-    target?: "allEnemies" | "randomEnemy";
   };
-  guard: { target?: "self" | "allAllies" };
-  dodge: { target?: "self" | "allAllies" };
-  heal: { target?: "allAllies" | "mostInjured" | "self" | "injured" };
-  recover: { target?: "ally"; allyOnly?: true };
+  recover: { allyOnly?: true };
 }
 export type AbilityDefinition = {
-  [K in AbilityKind]: { effect: K } & (K extends keyof AbilityParameters
-    ? AbilityParameters[K]
-    : { target?: never });
+  [K in AbilityKind]: { effect: K } & (K extends keyof AbilityParameters ? AbilityParameters[K] : object) & {
+      target?: K extends keyof typeof PRIMARY_TARGETS ? (typeof PRIMARY_TARGETS)[K][number] : never;
+    };
 }[AbilityKind];
