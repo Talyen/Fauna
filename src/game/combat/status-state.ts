@@ -9,8 +9,12 @@ type BleedPayout = CombatState["bleedLeech"][number];
 // A tick can synchronously trigger a Cleanse and a fresh application of the
 // same status. The new application belongs to a later tick, not the old one.
 const clearVersions = new WeakMap<CombatState, Partial<Record<PeriodicStatus, number>>>();
+const addedStacks = new WeakMap<CombatState, Partial<Record<PeriodicStatus, number>>>();
 export function periodicClearVersion(stats: CombatState, status: PeriodicStatus) {
   return clearVersions.get(stats)?.[status] ?? 0;
+}
+export function periodicAddedStacks(stats: CombatState, status: PeriodicStatus) {
+  return addedStacks.get(stats)?.[status] ?? 0;
 }
 
 export function enterControl(stats: CombatState, status: Control, turns: number) {
@@ -92,7 +96,12 @@ export function addPeriodicStacks(
   const before = stats[status];
   stats[status] = Math.min(STACK_LIMIT, before + amount);
   const gained = stats[status] - before;
-  if (gained > 0) stats.statusSources[status] = sourceId;
+  if (gained > 0) {
+    stats.statusSources[status] = sourceId;
+    const additions = addedStacks.get(stats) ?? {};
+    additions[status] = (additions[status] ?? 0) + gained;
+    addedStacks.set(stats, additions);
+  }
   return gained;
 }
 
