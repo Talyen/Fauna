@@ -251,12 +251,6 @@
     "sourceHash": "79b4b8572c542a3f26da1a5390090f376f27ab498e380eaea3da8f4f3fea598d",
     "text": "复制品 · 本场战斗有效"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "40428e6ed8b278eaf740359f1c34923695c212d65fb8e14e176da95c1ceb0be2",
-    "text": "{{name}}，{{owner}}，{{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",
@@ -8411,12 +8405,6 @@
     "sourceHash": "a8fcdcf8a2c639e53d1059c0c058ee2b878d88d71e4364eda6ce6cbde6b408b4",
     "text": "选择初始生物"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "8eeb928d803a6b3bdf8fcbc878f15c3687b8528f99eb129a84be8fa913908bae",
-    "text": "已选择"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -9076,11 +9064,11 @@
     "sourceHash": "31be2475dd59abb7121f18a6245fa72801a699e7c21eeb899a19b0a55b88ed34",
     "text": "金币不足"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "8d96aeb7ee7bd102a8c49969df47fc7d9f2f8a3862fedfc4896605f116558495",
-    "text": "每位顾客限购一件，不予退款！"
+    "source": "One per visit",
+    "sourceHash": "4bd470543ec9db3f9516fddf3e50e9a4b64002d14eb71557524692b330d88b15",
+    "text": "每次到访限购一件"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9358,47 +9346,35 @@
     "sourceHash": "aaa6a491890a118184d9d92bfed6345adea7ac21744c8f8ac92bce4f5965a566",
     "text": "目前无法保存进度；请在重试期间保持Fauna运行"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "586665056d855cf43c7fab261f28c54238f4730c67403caa00e9f87feac85ce7",
-    "text": "选择你的队伍"
+    "source": "Incoming creature",
+    "sourceHash": "bd13ad00924b3acc1668930a229134098e2083ba45d8abed65eac58be362f526",
+    "text": "新加入的生物"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "dc8f3c45d0ac294549e8219daaa407f0b384ea9ea26f0b124be6469ce0959fe2",
-    "text": "确认"
+    "source": "Keep team",
+    "sourceHash": "10275f9965798a99a19e5b09673a2faf52ec1046a86303ea30dd907aa8dc7fa7",
+    "text": "保留队伍"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "e16d9b41c34fee4109496c56216f7853da5ff75c8f451ab6b265c8fabe2dcc0e",
-    "text": "交换生物"
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "cfae8394d7da44ddd95b9b7a0c7445a0d345a3fb2d992f8a3c89dda36b08dc2c",
+    "text": "将{{outgoing}}替换为{{incoming}}"
   },
-  "recruit.previewSlot": {
+  "recruit.replaceHeading": {
     "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "c13923d27115bde3553e8ea73d2b4c2ff04a79b8f3de4a63bbf3e62c90ba1f10",
-    "text": "预览替换队伍位置 {{slot}} 中的{{name}}"
+    "source": "Replace a creature",
+    "sourceHash": "10278688f763918dd4f8c1fa78fd9718608c375104d6a1e22a23e80ac9999a7c",
+    "text": "替换一只生物"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "8b1aebf3268cb393dbc784db5c0981530c694a7d6295c373e585ae16a9f7ad61",
     "text": "队伍"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "5b9395d69cc1450fab7bfbeadbd794bdad5b756f174f682adaeec53de84d656f",
-    "text": "撤销替换{{name}}"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "dac9a0b97a6233c1cf4d0657d5380031de8ab5a5ef4ff1eb26fb4214aa6f26bf",
-    "text": "撤销队伍位置 {{slot}} 中的{{name}}"
   },
   "replacement.backup": {
     "reviewed": true,

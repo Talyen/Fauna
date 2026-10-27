@@ -4,7 +4,6 @@ import { boonRule } from "./rules/boons";
 import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
-import { enemyCard } from "./card-rules";
 import { creaturePassiveTier, cardKeywordView, hasTalent, passiveAmount } from "./progression";
 import type { BattleState, Card, Creature, GameState } from "./types";
 
@@ -134,10 +133,6 @@ export function enemyAbilityValue(
     enemy.power,
     scaling,
   );
-}
-
-export function enemyInspectionValue(enemy: Parameters<typeof enemyAbilityValue>[0], card: CardDefinition) {
-  return enemyAbilityValue(enemy, enemyCard(card));
 }
 
 /** Retention is a relative increase over the ordinary half-Block carryover. */

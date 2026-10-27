@@ -14,7 +14,7 @@ import { CARDS, definition, FIRST_RUN_STARTERS, species } from "../../../../src/
 import { cardText } from "../../../../src/game/card-rules";
 import { freshCombat } from "../../../../src/game/combat";
 import { dispatch, previewCard } from "../../../../src/game/engine";
-import { actionValue, enemyAbilityValue, enemyInspectionValue } from "../../../../src/game/ability-rules";
+import { actionValue, enemyAbilityValue } from "../../../../src/game/ability-rules";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import type { GameState } from "../../../../src/game/types";
@@ -98,7 +98,6 @@ it.each([0, 1, 7])("doubles Surge Ram only with Armor (%i)", (armor) => {
   expect(actionValue(card, game.team[0]!, game)).toBe(armor ? 10 : 5);
   const enemy = { species: "sternshell" as const, power: 1, combat: { ...freshCombat(), armor } };
   expect(enemyAbilityValue(enemy, definition(card.definitionId))).toBe(armor ? 6 : 3);
-  expect(enemyInspectionValue(enemy, definition(card.definitionId))).toBe(armor ? 6 : 3);
 });
 it("swaps to a living backup before drawing from the incoming kit", () => {
   const game = produce(ready(), (draft) => {

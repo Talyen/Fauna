@@ -123,7 +123,7 @@ it("navigation previews and remembers a recipient, cancels back to the card, and
   });
   expect(container.querySelector(".target-preview")).toBeNull();
 });
-it("a chosen-target card still requires activation with a sole living recipient", async () => {
+it("plays a chosen-target card immediately when only one recipient is legal", async () => {
   const game = produce(fixture(), (state) => {
     state.battle!.enemies.slice(1).forEach((unit) => {
       unit.health = 0;
@@ -131,10 +131,13 @@ it("a chosen-target card still requires activation with a sole living recipient"
   });
   const { container, send, card } = open(game);
   await userEvent.click(card("attack"));
-  expect(send).not.toHaveBeenCalled();
-  expect(container.querySelectorAll(".enemy-row [data-valid-target]")).toHaveLength(1);
-  await userEvent.click(container.querySelector<HTMLButtonElement>(".enemy-row .creature-card")!);
-  expect(send).toHaveBeenCalledTimes(1);
+  expect(send).toHaveBeenCalledExactlyOnceWith({
+    type: "play",
+    cardId: card("attack").dataset.cardId,
+    targetId: game.battle!.enemies[0]!.id,
+  });
+  expect(container.querySelector(".target-preview")).toBeNull();
+  expect(container.querySelector(".battle-screen")?.getAttribute("data-selected-card")).toBe("");
 });
 it("explains unavailable Mana and control while leaving state unchanged", async () => {
   const game = produce(fixture(), (state) => {

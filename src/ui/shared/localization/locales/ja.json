@@ -251,12 +251,6 @@
     "sourceHash": "f2b7ac5a272db7cec019acd3625967dd0d037e89f0bec0f1487a4d73c2a83869",
     "text": "コピー · この戦闘中のみ有効"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "84e06474eba5e97c11460e229c54b506da5dd7162d6b01eeca1e2bf29a4b7c7d",
-    "text": "{{name}}、{{owner}}、{{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",
@@ -8411,12 +8405,6 @@
     "sourceHash": "63808663e5628b0023b10f13ea9b04cd4bc07b88a7373c64466abc51ebd461bc",
     "text": "最初の生き物を選ぶ"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "b83d8ad5a8edb8db6494a63160f34728cab51460223feabe5e1e3937e19e3584",
-    "text": "選択済み"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -9076,11 +9064,11 @@
     "sourceHash": "d04c87e73f7ac7b5abd6550e89fcae983d05b5024ddc973849a5d03f0d15872f",
     "text": "ゴールドが足りない"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "c80f8c08ec33f265303209701b104be01f3769e668650b467a6abfeb64fe3166",
-    "text": "お一人様一点限り・返品不可！"
+    "source": "One per visit",
+    "sourceHash": "60f6a35a9c960ec9ab702dcc6a881c45053b416722170c21970234fbef8931c3",
+    "text": "立ち寄るたび1つ"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9358,47 +9346,35 @@
     "sourceHash": "59c06015219f39f3e051ba153ee5dcd2bc6e5cc77675d1f4c328fd6c24f6563f",
     "text": "現在、進行状況を保存できません。再試行中はFaunaを開いたままにしてください"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "bd2e1dcef7552f59e97761e2bf6c783a1d5a9e70796f0a72a502ef29dcea59e1",
-    "text": "チームを選ぶ"
+    "source": "Incoming creature",
+    "sourceHash": "18f9b32c405344d045b602a085a0051c1a3b812f77c86cddb12de27d2ca5430a",
+    "text": "新しい生き物"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "b3f66e2b3d7b5f31979a90830b9ff76096925f669cd2c2827c79d6332d69c336",
-    "text": "決定"
+    "source": "Keep team",
+    "sourceHash": "374859216fb33db4f52036b64936d09e06b24deadf85749f64a27b974e93527b",
+    "text": "チームを維持"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "cee01d3f0e688f8b8436aa4c2420093d321992ba1548692e63d04c99c6bfd949",
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "05b6dfe8f93c7bd3526efc45eca12775b7a361ae835fed4c8b7ebb1fed172978",
+    "text": "{{outgoing}}を{{incoming}}に入れ替える"
+  },
+  "recruit.replaceHeading": {
+    "reviewed": true,
+    "source": "Replace a creature",
+    "sourceHash": "a86633bb177c864315258b93382cabac8f86d1f25bc3156750bfb8b07d6d9b32",
     "text": "生き物を入れ替える"
-  },
-  "recruit.previewSlot": {
-    "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "a714fd84822eaeeb82a213b57aeff2948372ca956cf8b183360a41d3b7b66cfd",
-    "text": "チーム枠{{slot}}の{{name}}の入れ替えを確認"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "26d3899d55d23fc82b0baa1c6e46fe88d69358b90607d4398c24511a08562ade",
     "text": "チーム"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "b3fbd2a3e3d57ef2c6155dba3e609434827a0467e1c98fbffb20f8f09202ceb6",
-    "text": "{{name}}の入れ替えを取り消す"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "e10054772192f2360d1b61d7b7bd872374a3dbc27eecfa11524a674e54722b08",
-    "text": "チーム枠{{slot}}の{{name}}を取り消す"
   },
   "replacement.backup": {
     "reviewed": true,

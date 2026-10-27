@@ -251,12 +251,6 @@
     "sourceHash": "126c889cd893b589a9f6cd700615d0f312eda280a07a487fd471d3b35134f692",
     "text": "Copie · Dure jusqu’à la fin du combat"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "44173bfd71253db4bf55310349ff9f6eaa6dfa07aaae87c8d6b7057c071cc0b3",
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",
@@ -8411,12 +8405,6 @@
     "sourceHash": "29832e1a1679f7b4c53a2452c6f8a6582c94403727fb3e043de55792786fc113",
     "text": "Choisissez votre créature de départ"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "88c8313edb41ba735ac92514c2f7c330ab99f3934f0df8717b53cdec5a7c4dea",
-    "text": "Sélectionné"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -9078,11 +9066,11 @@
     "sourceHash": "443685e099379ac3399754804e58ab26356cbef7e4c76f10bd159e30dc69f422",
     "text": "Pas assez de pièces d’or"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "402390b51d6f824a59aaa4ab3eb0e54bebee0d044ce2b6a2c902200b86345158",
-    "text": "Une seule par client - Aucun remboursement !"
+    "source": "One per visit",
+    "sourceHash": "14d3a700ecae1c8074ef690a362a2d5c303c99543534a97292c03a10f0d2f6a0",
+    "text": "Un par visite"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9360,47 +9348,35 @@
     "sourceHash": "8290dedec4e3feb5c318c11eb3a518c395b82b224ac5959420e821cc5a64e99c",
     "text": "La progression ne peut pas être enregistrée pour le moment ; laissez Fauna ouvert pendant les nouvelles tentatives"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "7b3766c75fe32433e0fc711f141f9c2b2254a4455e4a7c55685210ae83c76b42",
-    "text": "Choisissez votre équipe"
+    "source": "Incoming creature",
+    "sourceHash": "78f0077960114da98db934e2eac34ab76966acc82ae34bca04c14636a3a13615",
+    "text": "Créature recrutée"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "3e86b13c41ad9767aa2c24eb62193b4d4cd7c555c4d9884adee6349d1a01796d",
-    "text": "Confirmer"
+    "source": "Keep team",
+    "sourceHash": "a6afe948869fa3d050566ad0966ad5e63a9625a88f0259b4d1a92a2ccec4a7ce",
+    "text": "Garder l’équipe"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "45c4eb74fb701e168400b8a12f81f8ab27a9eb06271671c7efe067b19456b9ee",
-    "text": "Échanger une créature"
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "30f40775eebf482eb3c2d8b1e5a323635f3e63d5754065222e4859a32aa87d38",
+    "text": "Remplacer {{outgoing}} par {{incoming}}"
   },
-  "recruit.previewSlot": {
+  "recruit.replaceHeading": {
     "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "d7d3aea57df1d3095ffea81a93e751a8fd9a47da7de0fc61656639771e2c8817",
-    "text": "Prévisualiser le remplacement de {{name}} à l’emplacement {{slot}} de l’équipe"
+    "source": "Replace a creature",
+    "sourceHash": "c0c9f03f18f538f17d10071b33530c5eb9f09e7e6505ab1bc53e5b11848c8689",
+    "text": "Remplacer une créature"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "a6f3c323ea49dcf2021deab5a255f34aa3c162ea647398cd8493f2113e7a42dc",
     "text": "Équipe"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "100a711fc3e9da590047c7d30cf9594cb7226641fb3cfda3b255061f57babe10",
-    "text": "Annuler le remplacement de {{name}}"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "1dde2181c46baceb3275f86d44cc4d5bd78849096a2a98f162e8b9867f894602",
-    "text": "Retirer {{name}} de l’emplacement {{slot}} de l’équipe"
   },
   "replacement.backup": {
     "reviewed": true,

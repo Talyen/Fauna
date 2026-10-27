@@ -251,12 +251,6 @@
     "sourceHash": "e14e3e4694aabe6436e2717dea5ed14205d0b24f855af2367997d9f521b703ab",
     "text": "Copia · Dura hasta el final del combate"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "16c6c51f2c09c8964404eb3aa8f129f353d8d3d98c46d062c7af0f329e2fc5c6",
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",
@@ -8411,12 +8405,6 @@
     "sourceHash": "09dff029a543b67e7beef06e624d3042a58aae1c303957ed99cfa4009dbac398",
     "text": "Elige tu criatura inicial"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "8fad4cd3e3f66f560debd3c542d36af88b8a709160efcd233c518ea0efb373c6",
-    "text": "Seleccionada"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -9078,11 +9066,11 @@
     "sourceHash": "ee238ee9e2aef3f8cc5b3e9de158fdf7aaf503a81a4aafb89b338310d69e719f",
     "text": "No hay suficiente Oro"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "26021a3525b41ca76409cb89f3ea936277043f3e108ffc23ff293a8ba7b06df9",
-    "text": "Una unidad por cliente. ¡No se admiten devoluciones!"
+    "source": "One per visit",
+    "sourceHash": "a1a53a6079bc8c695bc8a838e98c3c46735d759cc9c9f1174864e0aa3dcbb852",
+    "text": "Uno por visita"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9360,47 +9348,35 @@
     "sourceHash": "d957ecd0a87c9074cc297e6efbf91dec309257905f43eb77b6605dbb09f56f59",
     "text": "No se puede guardar el progreso ahora; mantén Fauna abierto mientras se vuelve a intentar"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "70cc3df313dcfbf2694f3aaaebd5d491bf9649594724595e5a96e1d66cec7bed",
-    "text": "Elige tu equipo"
+    "source": "Incoming creature",
+    "sourceHash": "afd29be482c557f4eef30c52b06463ecd13baa3fa15b147f3b40c0a539590989",
+    "text": "Criatura reclutada"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "be50a62de5461d74705e2d72414eed5c1356a2eeb58155cf5433cf34ec1b5d89",
-    "text": "Confirmar"
+    "source": "Keep team",
+    "sourceHash": "51ecaa20f951f1b3f9159e8439d5c5f62c96c1c13bc68e628caece67fe1dc080",
+    "text": "Mantener equipo"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "c966363fb3e6c27145c530360a524b97406938e8849b00b6d9e71cb28f236509",
-    "text": "Intercambiar criatura"
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "ab8606e1a47cfdecd3fa083249cad1bf8c53701030fa7ed4cfcb283ff6ebebd9",
+    "text": "Sustituir a {{outgoing}} por {{incoming}}"
   },
-  "recruit.previewSlot": {
+  "recruit.replaceHeading": {
     "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "ac29343dcf3ced68c5bff81fcc120636add891632212d08839deb408d582b53c",
-    "text": "Previsualizar el reemplazo de {{name}} en el puesto {{slot}} del equipo"
+    "source": "Replace a creature",
+    "sourceHash": "3f26a9add3aaa3aff1f819ee8ff86c39cccb0e5c3a358d760fbe2f69dbf86e71",
+    "text": "Sustituir criatura"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "148418413d5ec58d525670021a1fbeff9443b809720a5a2ec5bdef25d918dff3",
     "text": "Equipo"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "ce6c51120788180c173b2282177880737f13dde4c797c5c5196b867f3e46ceda",
-    "text": "Deshacer el reemplazo de {{name}}"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "df79f2296cd65fe4534a70d7f85703eaffa640561a5d627ff346d3a1b9006171",
-    "text": "Deshacer {{name}} en el puesto {{slot}} del equipo"
   },
   "replacement.backup": {
     "reviewed": true,

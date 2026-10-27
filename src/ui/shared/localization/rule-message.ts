@@ -1,4 +1,5 @@
 import { keywordText, type KeywordId, type KeywordTextPart } from "../../../game/keywords";
+import { ruleTemplate } from "./rule-template.mjs";
 
 /** One complete rule, with values and keyword identity retained separately from prose. */
 export interface RuleMessage {
@@ -13,25 +14,7 @@ export interface RuleMessage {
  * must cover each resulting template, including different grammatical forms.
  */
 export function ruleMessage(text: string): RuleMessage {
-  const values: Record<string, string> = {};
-  const keywords: Record<string, KeywordId> = {};
-  let valueIndex = 0;
-  let keywordIndex = 0;
-  const template = keywordText(text)
-    .map((part) => {
-      if (part.keyword) {
-        const name = `keyword${keywordIndex++}`;
-        keywords[name] = part.keyword;
-        return `<${name}>${part.text}</${name}>`;
-      }
-      return part.text.replace(/\d+(?:\.\d+)?/g, (value) => {
-        const name = `value${valueIndex++}`;
-        values[name] = value;
-        return `{{${name}}}`;
-      });
-    })
-    .join("");
-  return { source: text, template, values, keywords };
+  return { source: text, ...ruleTemplate(keywordText(text)) };
 }
 
 /** Reject missing, duplicated or unknown placeholders and fall back to English. */

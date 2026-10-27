@@ -26,19 +26,6 @@
   font-weight: 500;
   margin: var(--space-3) 0 var(--space-1);
 }
-.starter-selection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-1);
-  min-height: var(--space-6);
-  color: var(--primary);
-  font-size: var(--text-secondary);
-}
-.starter-selection svg {
-  width: var(--space-4);
-  height: var(--space-4);
-}
 .draft-grid {
   display: flex;
   flex-wrap: wrap;
@@ -427,11 +414,6 @@
 .merchant-status {
   color: var(--muted-foreground);
   font-size: var(--text-secondary);
-}
-.merchant-policy {
-  text-align: center;
-  /* Compact header faces sit inside larger hit targets; balance their visible whitespace. */
-  margin-top: calc((var(--compact-control-size) - var(--control-height)) / 2);
 }
 .merchant-stock {
   flex-wrap: nowrap;

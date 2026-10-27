@@ -251,12 +251,6 @@
     "sourceHash": "0df2865189cddd41c915b94e60a7e33734c75c42bc3b55b46cb5f5d1788c100f",
     "text": "Копия · Действует до конца боя"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "d5d028a4c395f319e0c26b2254fa9fea838bfe7dd4d7175fe7c3d2075ee256c7",
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",
@@ -8411,12 +8405,6 @@
     "sourceHash": "2eac3f4d62e5c53a7f5df11e6fbbf56a415314b0bf24087fb10adeb5560836e5",
     "text": "Выберите первое существо"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "7ea453fa3a2be68085d8da4cc46a4d0dd02a68214149b5221e07bfc27dfc69fe",
-    "text": "Выбрано"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -9079,11 +9067,11 @@
     "sourceHash": "df24c365a3b65980d8f0e7863e259d896e6790116bc4e6db87522823762ae1b6",
     "text": "Недостаточно золота"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "9507422da30841067c86b7113ae4cadb41d20865c4a02c95cde6d58d0d1fdee3",
-    "text": "Не более одного товара на покупателя — возвратов нет!"
+    "source": "One per visit",
+    "sourceHash": "16a2335af0b1f978614fb084e6364c9c792b7d7e52595365dc560284fdc3790b",
+    "text": "Один за посещение"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9361,47 +9349,35 @@
     "sourceHash": "bd77e86301a4c8cd133f091ae674511953a759825095261d556a9f7666ed1e10",
     "text": "Сейчас не удаётся сохранить прогресс; не закрывайте Fauna, пока выполняется повторная попытка"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "bdc19a51a1799a155ab58eef2fc5bcde2e3b3511cce3c7c69634e1e8a30f7a07",
-    "text": "Выберите команду"
+    "source": "Incoming creature",
+    "sourceHash": "53ca3fd5cf40f52a391985ee6d41f354c466d44755b296f126c347ae28b0cf7d",
+    "text": "Новое существо"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "5c4dd1109de5b5bab8db0b5e2ed3d4086948252818f06f5bcdbeb9e26c887862",
-    "text": "Подтвердить"
+    "source": "Keep team",
+    "sourceHash": "d8b390b942c019a4aec67df5298dd4a2100b168316afe0b91571d6b29cfe5c7f",
+    "text": "Сохранить команду"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "cd488a8a9afa02d8c4e8ad3369fb766eaf7f1e61798f48f5301af64e4d7d0eb5",
-    "text": "Обменять существо"
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "6320eb29a46d08fd272328a931624824689aa37e0d6d31ddb8020c9ea4ec949d",
+    "text": "Заменить: {{outgoing}} → {{incoming}}"
   },
-  "recruit.previewSlot": {
+  "recruit.replaceHeading": {
     "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "899b582b940d7858f62b6b72192d75fb5bdc576bc8f2dcb85a4613c86649a30a",
-    "text": "Предпросмотр замены {{name}} в ячейке команды {{slot}}"
+    "source": "Replace a creature",
+    "sourceHash": "ab52f903fe15385b68ef96930d901836eb2dc310d16f75638efa9076f349f576",
+    "text": "Заменить существо"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "ddcfd50306cd1e8afbd65f4fcd2963fe87e11cc57355e4a97c2020fd8d63fcd7",
     "text": "Команда"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "5e4452ef579e88bd7421af0af8ae974460c0c350801635219177abcdf8b52aca",
-    "text": "Отменить замену: {{name}}"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "b73bd6fd85f5994834c8f12bc2da6df78b279c8c9e438bab78acc501437985a4",
-    "text": "Отменить замену на {{name}} в ячейке команды {{slot}}"
   },
   "replacement.backup": {
     "reviewed": true,

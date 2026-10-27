@@ -251,12 +251,6 @@
     "sourceHash": "656aa5bc7213692a8ef4780d037bd8995ed6da4ac2f49423a5395266f6a62372",
     "text": "Kopie · Bleibt für diesen Kampf"
   },
-  "card.enemyActionLabel": {
-    "reviewed": true,
-    "source": "{{name}}, {{owner}}, {{effect}}",
-    "sourceHash": "00d9c4a2d8ec9ecfeb4205f07bcea039fe046c77e1826888108b0f5570e15ccc",
-    "text": "{{name}}, {{owner}}, {{effect}}"
-  },
   "card.upgradedName": {
     "reviewed": true,
     "source": "{{name}} +{{level}}",
@@ -8411,12 +8405,6 @@
     "sourceHash": "ef87885b8d1a9c2095b47f505b94c8b777f9a7da901726ae0fd189df21d7c836",
     "text": "Wähle deine Startkreatur"
   },
-  "draft.selected": {
-    "reviewed": true,
-    "source": "Selected",
-    "sourceHash": "2f42189be70f9877cb17976c56f5c9e70ce84bc1bbdbc5a62d1b106ef98bbfda",
-    "text": "Ausgewählt"
-  },
   "draft.team": {
     "reviewed": true,
     "source": "Your starter team",
@@ -9077,11 +9065,11 @@
     "sourceHash": "d35365471fb8c5e8d7b77fd20ef4417f3d9ca618a03a3fd64eb64ce3c50ebaa1",
     "text": "Nicht genug Gold"
   },
-  "merchant.policy": {
+  "merchant.onePerVisit": {
     "reviewed": true,
-    "source": "Limit 1 per customer - No Refunds!",
-    "sourceHash": "20a35b8666a00680fce585fb1c8a71ce19b119c2f05f097151daacc1901dfc01",
-    "text": "Ein Stück pro Kunde – keine Rückerstattung!"
+    "source": "One per visit",
+    "sourceHash": "8985349d623e84404a24616559d6506ba5c2f2ef69a1a494b20054881bfdac35",
+    "text": "Eins pro Besuch"
   },
   "merchant.purchaseUsed": {
     "reviewed": true,
@@ -9359,47 +9347,35 @@
     "sourceHash": "78a06159651575b8d05f9b95a1b4633f3c304b832ee1aeaacccc87cd9f335e1b",
     "text": "Der Fortschritt kann gerade nicht gespeichert werden; lasse Fauna geöffnet, während es erneut versucht wird"
   },
-  "recruit.chooseTeam": {
+  "recruit.incoming": {
     "reviewed": true,
-    "source": "Choose your team",
-    "sourceHash": "a432932af824d04d227c8782c270ba0c187e10df6d9295e72f598e7b14c1864f",
-    "text": "Wähle dein Team"
+    "source": "Incoming creature",
+    "sourceHash": "d4709cbc252429357a04fda9680ab4151bf8c8610a04d6440badfffc83113d7c",
+    "text": "Neue Kreatur"
   },
-  "recruit.confirm": {
+  "recruit.keepTeam": {
     "reviewed": true,
-    "source": "Confirm",
-    "sourceHash": "1247d4aeea9b2cc9b6e8ac16f525634920fc3911a3ebbaf586774ba4ef0af4d0",
-    "text": "Bestätigen"
+    "source": "Keep team",
+    "sourceHash": "25a56e09ac217d896c5f4b345778549c3ff824626e06072c9c6fa0f1a17146fe",
+    "text": "Team behalten"
   },
-  "recruit.exchange": {
+  "recruit.replace": {
     "reviewed": true,
-    "source": "Exchange creature",
-    "sourceHash": "698030250dfdbb1ca230800b6417ff0b3b95790577eae79e5cae2eab9a3bb752",
-    "text": "Kreatur austauschen"
+    "source": "Replace {{outgoing}} with {{incoming}}",
+    "sourceHash": "fe9927b65c78d6d49686a82c72816996eb32198d0bbafe1d2a443ca8a5ff0152",
+    "text": "{{outgoing}} durch {{incoming}} ersetzen"
   },
-  "recruit.previewSlot": {
+  "recruit.replaceHeading": {
     "reviewed": true,
-    "source": "Preview replacing {{name}} in team slot {{slot}}",
-    "sourceHash": "3b87eb883e0fafe254e8c64e1a65e070c1a2f1233c5c74aaf5e105a64d3478e8",
-    "text": "Austausch von {{name}} auf Teamplatz {{slot}} ansehen"
+    "source": "Replace a creature",
+    "sourceHash": "5f28dde71ba7d2c81d7aefdbea39bb5668f01ce43ab6c02a59816ae054791db2",
+    "text": "Kreatur ersetzen"
   },
   "recruit.team": {
     "reviewed": true,
     "source": "Team",
     "sourceHash": "5bc5525652948e7b146835755117f0158bba89c55c386761246aea02c0cb0efe",
     "text": "Team"
-  },
-  "recruit.undoReplacement": {
-    "reviewed": true,
-    "source": "Undo replacement of {{name}}",
-    "sourceHash": "5b4f381719f9711e82c4a97d0329a4fbcbbba74bb02a62c5854a2cc034ecdc1d",
-    "text": "Austausch von {{name}} rückgängig machen"
-  },
-  "recruit.undoSlot": {
-    "reviewed": true,
-    "source": "Undo {{name}} in team slot {{slot}}",
-    "sourceHash": "22e0e6de9394a0d39cb847760da3aa3800a0f6e239ebccd79386afa6d631f409",
-    "text": "{{name}} auf Teamplatz {{slot}} rückgängig machen"
   },
   "replacement.backup": {
     "reviewed": true,

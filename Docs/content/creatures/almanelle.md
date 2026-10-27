@@ -40,7 +40,7 @@ Unchanged PNG originals are preserved in `public/art/creatures/almanelle/`. The 
 
 Upgrades add two to Spring Current's primary damage and Rooted Year's primary Block per level. Rooted Year's three supplemental Thorns, Spring Current's one Cleanse and Autumn Insight's one recovery plus three healing remain fixed. Enemy room power scales primary damage, Block and adapted healing, without increasing utility counts, Thorns extras or the passive percentage
 
-Ordinary enemies have no shared hand, so Autumn Insight adapts to three healing for a living ally, chosen by the existing most-injured enemy selection. Inspection uses the same adapted definition. All three abilities are usable by enemies. Appended normal encounter packs make Almanelle encounterable and recruitable without reordering existing entries. It is excluded from the first-run starter pool because one modest attack and two supports make solo openings slow
+Ordinary enemies have no shared hand, so Autumn Insight adapts to three healing for a living ally, chosen by the existing most-injured enemy selection. All three abilities are usable by enemies. Appended normal encounter packs make Almanelle encounterable and recruitable without reordering existing entries. It is excluded from the first-run starter pool because one modest attack and two supports make solo openings slow
 
 ## Play and weakness
 

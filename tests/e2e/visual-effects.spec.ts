@@ -41,9 +41,14 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
   await card.focus();
   await page.keyboard.press("ArrowLeft");
   await expect(page.locator(":root")).toHaveAttribute("data-focus", "visible");
-  await expect(shine).toHaveCSS("opacity", "0");
+  await card.focus();
+  await expect(shine).toHaveCSS("opacity", "1");
+  await expect(card).toHaveCSS("outline-style", "none");
   await card.hover();
   await expect(shine).toHaveCSS("opacity", "1");
+  expect(await card.evaluate((element) => getComputedStyle(element, "::after").borderTopColor)).toBe(
+    "rgba(0, 0, 0, 0)",
+  );
   const targeted = page.locator('.hand .action-card[data-card-id="ally-2:prismram-attack"]');
   await targeted.click();
   await page.mouse.move(0, 0);

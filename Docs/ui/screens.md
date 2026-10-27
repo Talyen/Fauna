@@ -18,18 +18,18 @@ Collection, Talents, Settings and Glossary open full screen from either menu, in
 
 ### Back and focus return
 
-| Surface                                           | Back / Escape / controller B                                                                                       |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Pause                                             | Dismiss to its opener                                                                                              |
-| Collection, Settings, Glossary, Talents overview  | Restore the originating menu and its corresponding choice                                                          |
-| Talent tree                                       | Return to the overview; the hamburger still opens the originating menu directly                                    |
-| Creature-parent action inspection                 | Return to the creature and focus the current thumbnail; a second Escape/controller B closes to the original opener |
-| Direct hand/deck action inspection                | Close to its opener, without creating a creature parent                                                            |
-| Boon Merchant shelf or purchased reward           | Complete the room and prepare fresh destinations                                                                   |
-| Campfire                                          | Leave without Rest, preserving the encounter                                                                       |
-| Unchosen recruitment                              | Return home without changing saved offers                                                                          |
-| Team confirmation / required knockout replacement | No Back/Cancel bypass; complete the required choice                                                                |
-| Other journey screens                             | Return home without reversing committed gameplay                                                                   |
+| Surface                                                 | Back / Escape / controller B                                                                                       |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Pause                                                   | Dismiss to its opener                                                                                              |
+| Collection, Settings, Glossary, Talents overview        | Restore the originating menu and its corresponding choice                                                          |
+| Talent tree                                             | Return to the overview; the hamburger still opens the originating menu directly                                    |
+| Creature-parent action inspection                       | Return to the creature and focus the current thumbnail; a second Escape/controller B closes to the original opener |
+| Direct hand/deck action inspection                      | Close to its opener, without creating a creature parent                                                            |
+| Boon Merchant shelf or purchased reward                 | Complete the room and prepare fresh destinations                                                                   |
+| Campfire                                                | Leave without Rest, preserving the encounter                                                                       |
+| Unchosen recruitment                                    | Return home without changing saved offers                                                                          |
+| Full-roster recruitment / required knockout replacement | No Back/Cancel bypass; complete the required choice                                                                |
+| Other journey screens                                   | Return home without reversing committed gameplay                                                                   |
 
 Inspection has no visible Back button; X/outside click closes the entire Dialog overlay. Nested surfaces own their focus and restore a connected, enabled opener; otherwise use the current-screen fallback. Inspection returns Collection to the same filter, page and creature. Opening child menu dialogs replaces Pause so only one trap owns focus. The mandatory replacement Dialog ignores Escape/outside click.
 
@@ -95,15 +95,15 @@ Owned borders are gold. Icons use keyword color at 65% while unowned and full st
 
 ### Earnings and choices
 
-Show centered Victory earnings: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. Continue opens Choose a Recruit without repeating earnings beside offers. An unchosen recruitment resumes through earnings; a banked full-roster recruit resumes directly at team confirmation.
+Show centered Victory earnings: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. Continue opens Choose a Recruit without repeating earnings beside offers. An unchosen recruitment resumes through earnings; a banked full-roster recruit resumes directly at the replacement choice.
 
 [Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Recruit buttons fit their label and standard padding, centered below artwork at the standard control height; artwork only inspects. This sizing also applies to starter recruitment. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
 
-### Choose your team
+### Replace a creature
 
-For a full roster, center the incoming exchange artwork and opposing-arrow icon above one quiet Team tray of all five current individuals. Omit at-rest names, Health, pagination, Back and Cancel; hover/focus and inspection retain details.
+For a full roster, center the incoming artwork and opposing-arrow icon above one quiet Team tray of all five current individuals. Omit at-rest names, Health, pagination, Back and Cancel; hover/focus and inspection retain details.
 
-Artwork activation previews one exchange using shared swap motion. Retargeting restores the previous individual; activating the selected member or upper artwork reverses the preview. One centered Confirm commits the displayed team, including keeping it unchanged. [Recruitment rules](../EXPEDITION_DESIGN.md#recruitment) own banking, preview isolation and reload behavior.
+Activating an existing creature immediately replaces it with the incoming recruit. Keep team immediately preserves the current roster. Hover and inspection do not change the roster. [Recruitment rules](../EXPEDITION_DESIGN.md#recruitment) own banking and reload behavior.
 
 ## Journey results
 
@@ -156,7 +156,7 @@ Rest returns immediately to the same combat offers, briefly presenting committed
 
 ## Boon Merchant
 
-Open directly from its existing landscape location ArtCard; source selection remains an explicit placeholder. Center up to three prepared portrait Boons with names/rules/journey duration in hover/focus details. Put the Gold wallet in the heading row, and “Limit 1 per customer - No Refunds!” centered in italics above the shelf. Align secondary purchase Buttons below artwork and center Leave. Wallet/prices use shared gold Coins icons.
+Open directly from its existing landscape location ArtCard; source selection remains an explicit placeholder. Center up to three prepared portrait Boons with names/rules/journey duration in hover/focus details. Put the Gold wallet in the heading row, and the one-per-visit limit in offer details. Align secondary purchase Buttons below artwork and center Leave. Wallet/prices use shared gold Coins icons.
 
 Unaffordable purchases remain focusable, explain Not enough Gold and cannot issue commands. Buying replaces the shelf with one purchased Boon, name, rules, For this journey and Continue; move focus to Continue. [Support visits](../EXPEDITION_DESIGN.md#optional-support-visits) own purchase commitment, resume, prices, eligibility, leaving and rerolls.
 
