@@ -1643,11 +1643,35 @@
     "sourceHash": "777349dbe131e5177dd6486d2778a8f6ad93b57b792395ae11b8e8bf9a9503aa",
     "text": "Spirale de corail"
   },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "fe2c96e02e098e33bcb04e25a19c08f44e6983d9825f86bdfd38f4e910b44a85",
+    "text": "Balayage des ailes solaires"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "34cadc17534941c8f83b2f48ade44ca81074435c77ef6e9eac4a15ebefb63fcb",
+    "text": "Floraison matinale"
+  },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "5c9c5349eb6323ad2e8754be22553b557c5ef78a54d90a1ff81c22ba97cc93c5",
     "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> à tous les alliés"
+  },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "4f350936f7ad5d53a780c54630fd96cbd3d32a3e2ae72a69eb12f7264c727eac",
+    "text": "Cri de l’aube"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "733b4af9fe6a6ffc2fab11c56a852cae848c106d1de0db8b7f8dbb201d6d847b",
+    "text": "Lumière de chapelle"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1655,17 +1679,41 @@
     "sourceHash": "b86f37e7428911bac94a888f8db10386c815622cc5ce4b9a299a4e6349fc6de7",
     "text": "Restaurez {{value0}} <keyword0>Santé</keyword0>"
   },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "77d8f5458209e866ffb37816fa5da81b41ee0ba3096dbfa76513cc462e785a02",
+    "text": "Eaux silencieuses"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "8b4c6dce4fc806af32aaf9d4a5dbcf7051208ec04c5d725becde874c31a14dc5",
+    "text": "Refuge des prés"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "16dd3ae2320b9fd8c1010d1d83b1e7267f82cd54c9945be4e2eb358c2795eae5",
     "text": "Les alliés gagnent {{value0}} <keyword0>Blocage</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "0fe39020780dddaab0bca0c31c52fec001cc2b4748406e0273ddcc1824e2eab8",
+    "text": "Bond de sable"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "1804503e017c215e09e7fde3244001b2e66dab643b1fabd961df505368fe9408",
     "text": "Inflige {{value0}} dégâts <keyword0>Physiques</keyword0>"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "2cccadc43bb79754397b0bafd42ab3917f57ca545fbf37b318ceb6e1c5f45a95",
+    "text": "Pas du mirage"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1679,11 +1727,35 @@
     "sourceHash": "f00164b53cbc9e7e74214584a201bd02c53c2a5ab0b7cba78f65cf94bc299595",
     "text": "Gagnez {{value0}}% d’<keyword0>Esquive</keyword0> jusqu’à votre prochain tour ; Piochez {{value1}} carte"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "f05fa1522a32579b0979d0344d784d216305073bf6e32d4d501fb4f462746d25",
+    "text": "Tourbillon des dunes"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "05aeeeafb0f658ab89b6a279ad3399def7d96811b45d78903f6269e4a8b9958a",
+    "text": "Charge de braise"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "9d64188e916d06c5bd406173c4883c7c422219d9e632531cdff541b2d01efe19",
+    "text": "Souffle de fournaise"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "3eef49ea39650d382c4635fe509e5cfd72b152882242d448b9f297458ca76b23",
     "text": "Infligez {{value0}} dégâts de <keyword0>Brûlure</keyword0> à tous les ennemis"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "fb378012c645350667829ccefce77688e9705b25c78456b7cfe38c1bd6f068ae",
+    "text": "Piétinement de magma"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1691,11 +1763,29 @@
     "sourceHash": "4a3d18beb53c18a4368c56e87b55a2afe7ce6347788b025c2adb76f0dc22b0f5",
     "text": "Inflige {{value0}} dégâts d’<keyword0>Étourdissement</keyword0> à tous les ennemis"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "8383dc9ecb06f0d985e650830e4842b0c90cb7a97aa40eb3fb382f5a58de56ee",
+    "text": "Chemin possible"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "f05ea2992e440f630be920700ab46c2145728546e60e0d29a8b903949c67b930",
     "text": "Mélangez votre main dans votre deck ; Piochez autant de cartes"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "07c406eb4992e26761a442d90673c9f1f7de8e55c6f6000c18786cd5669d4155",
+    "text": "Lance du crépuscule"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "ac83f8b4d80106d7a149678cc8b5ba787b335ffea29f932667d45e5afcaad497",
+    "text": "Échange de souhaits"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,

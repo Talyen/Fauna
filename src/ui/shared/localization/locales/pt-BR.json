@@ -1631,11 +1631,35 @@
     "sourceHash": "c0c94042503295c34279ee95192c7965aaaeb50823aa48605740b417b29cdf21",
     "text": "Espiral de coral"
   },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "6fe85da3c07e46e5d91fbac667a114aa08abe147ee179b799eab6699bd9256f2",
+    "text": "Varredura de asas solares"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "9cc5e4b3698a319a5ecf64ccfa8fc379d093ae22e1024f0a833d69b5c085352d",
+    "text": "Floração matinal"
+  },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "c96c237ebebacc40bc7118174f229d8f4c7ea54887f788212eacbc6a8492a82c",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0> a todos os aliados"
+  },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "dd9f2cb4e57a99586d33f2c46f1298f620c1996311a5decee4b35c3a498e7ee3",
+    "text": "Grito da aurora"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "7d15ef03e00d1f21f4ed6837449859913910a6f6cc79ffeb7b999bf85daf2025",
+    "text": "Luz da capela"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1643,17 +1667,41 @@
     "sourceHash": "d9b0a51f76d32df4b2d4985e0b19fc077d18de0f4169b1cade06e97db4db57b4",
     "text": "Restaure {{value0}} de <keyword0>Saúde</keyword0>"
   },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "137983a3bc5ad4b8b81dfd323bb18f98770e757bd0e89241a6592778d60bd668",
+    "text": "Águas tranquilas"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "bad520081e7548a4737221b9dc11b57da7dbfe0dd791ac237ac470bd04c1dd33",
+    "text": "Abrigo do prado"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "6a50096535733716557a83eb1179c8d06d67fa52faa1808215e6c05228f4afd0",
     "text": "Aliados ganham {{value0}} de <keyword0>Bloqueio</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "432a046ca9ee58faa71f5fd26a78f5557cf2726e7ee021035aadde237b9fec87",
+    "text": "Bote de areia"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "c8487a771b515e3c0e0b8344d4e66c150caae0958f9b9f646de5047f5cec845a",
     "text": "Cause {{value0}} de dano <keyword0>Físico</keyword0>"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "ca4ecb6a53cb29f3f84abade12e3d24fff1b3a98aa796332e6b35e9e41a2ec8b",
+    "text": "Passo miragem"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1667,11 +1715,35 @@
     "sourceHash": "2833411b5f97c2058bb974e012f3005385d518216cc280fabde40699ac3a2f1e",
     "text": "Receba {{value0}}% de <keyword0>Esquiva</keyword0> até seu próximo turno; Compre {{value1}} carta"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "2559267f5c1c7969ea63505dd17c5f83d7535c7c7118538f53fedd75b6b8b47f",
+    "text": "Redemoinho das dunas"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "3ac837fd175f9adf5f9caf75f4d71cd381cab90c2d43f238243d5c70217bf27f",
+    "text": "Investida de brasa"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "e72bc12854d73c386072ef6e3d920b064fa8a612269dd9d60aaa1e972312cd5b",
+    "text": "Sopro da fornalha"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "2322024a553ef692642d656474f8aa4a62c437cf74ac2901293e01519195c270",
     "text": "Cause {{value0}} de dano de <keyword0>Queimadura</keyword0> a todos os inimigos"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "a71d9619d1ead6fbe7a3a28697157fde30b04bb0b21c9a0f6dc6c2466780b8c3",
+    "text": "Pisoteio de magma"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1679,11 +1751,29 @@
     "sourceHash": "42399c1b22e7781b2cba71ef62e38e261a18d54d1de572b67cd7b14ba9659c1c",
     "text": "Cause {{value0}} de dano de <keyword0>Atordoamento</keyword0> a todos os inimigos"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "6310f9c375637908df77fed21171eddf31167117ba3fbdea8bde8a983a9460d3",
+    "text": "Caminho possível"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "fa9824f0cf25668a830f14c3d00158a876fd639aa2456ca82f231c941c2c36e4",
     "text": "Embaralhe sua mão no baralho; Compre a mesma quantidade de cartas"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "018e6fde0515b60395ae6d31eb691deeca78c895989fe1ce5ac61be4ef16cc52",
+    "text": "Lança crepuscular"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "a458e50c6170730f8976bd4aac855d916fcb973dad92dae0928e9d9335b953be",
+    "text": "Troca de desejos"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,

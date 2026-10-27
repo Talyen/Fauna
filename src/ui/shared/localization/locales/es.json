@@ -1631,11 +1631,35 @@
     "sourceHash": "219d94a0d073dff4a31bf4a56da0361b064e0ba77690c01b82c3af3045f4c42d",
     "text": "Espiral de coral"
   },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "cbd96f6be4c3f7270985a4a495575eb68dd3f12a34558d0f1746c7639746c710",
+    "text": "Barrido de alas solares"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "e6882eb122ea62b0324977638005b164b12e5f33d8f394fbd590f61600a080d2",
+    "text": "Floración matinal"
+  },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "0b4997179e17db2e851d4ce832c37055880057e712ec60fcd03ebc054bd70daa",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0> a todos los aliados"
+  },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "41bb4e3f48c03afb799ed3471a27cb5776535ccf8164df512a5a3ae3952797d2",
+    "text": "Grito del alba"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "98523cd58d7bc16fedd7afad9e631d9dd74a12bf22105ad42f2740d4354ac7cb",
+    "text": "Luz de capilla"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1643,17 +1667,41 @@
     "sourceHash": "172b7c9433d74a10ae534ec8efc748275b0f77ca7c6e1c7f1cfdfe16547c70fe",
     "text": "Restaura {{value0}} de <keyword0>Salud</keyword0>"
   },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "70c5b028b3df50be80dc727617ceff2d91c7857212801bd6fe0d64f55cbafe35",
+    "text": "Aguas tranquilas"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "36d6febaf41bd41bb39877e52b315e560164e807f2236976df3105dd913d9467",
+    "text": "Refugio del prado"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "a4641ecd4946a8a0823c53dcffa89e37bf59f025da33a5be3d4640fc86474371",
     "text": "Los aliados obtienen {{value0}} de <keyword0>Bloqueo</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "21255d9d0925b36f9afe9428c0e94c1b126979468d2db7bf16e7d44fd821f892",
+    "text": "Zarpazo de arena"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "9fcd3b091147634c577adc581d3dc8315aaade8d2e4ebd86e2ede0803bfa9f38",
     "text": "Inflige {{value0}} de daño <keyword0>Físico</keyword0>"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "b70e4be3626cf959dc6a9035d08745c37dccdb9b077ef62fecc20a43f1af2f5e",
+    "text": "Paso espejismo"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1667,11 +1715,35 @@
     "sourceHash": "c576b7a80f57d4d1bb30f2967ca0474bcda3768197031adf13b53f28b6063c11",
     "text": "Obtienes {{value0}}% de <keyword0>Esquiva</keyword0> hasta tu próximo turno; Roba {{value1}} carta"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "14ba66a1b3405bfe5de50bb34e3480b06d5d3f0930cb81d9763446b8ffc6d4f1",
+    "text": "Remolino de dunas"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "1264a2e662bfb66bf40f0c4b34acb5e7fc276078482cc616b15d945e4b81ca39",
+    "text": "Carga de brasa"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "56a0251527210d4be75c91eeede5d81ac74cc56511ed2ad02b21497ac6b5803d",
+    "text": "Aliento de horno"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "b82f2e30e756c1cd304cfee5a10e570f07f3faebef7ebc0112eb4ef6a0ed9f28",
     "text": "Inflige {{value0}} de daño de <keyword0>Quemadura</keyword0> a todos los enemigos"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "8e5731a0ed2cae8ec8187f512234030cd95760ef60856653629ed0e36d9f9878",
+    "text": "Pisotón de magma"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1679,11 +1751,29 @@
     "sourceHash": "300d6cb6945b2e6820b56812498687859fc937421ccdc2f9d9f5204eb9059d2a",
     "text": "Inflige {{value0}} de daño de <keyword0>Aturdimiento</keyword0> a todos los enemigos"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "6fdbbfb209bd5d2cad9ee8d29bb6d08638b390b1da56a090c613baa948a5fe24",
+    "text": "Senda posible"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "dda29c0de89c2a021048a0ecba787b8d04d78bac6819cc4d1946e5a99aed3c68",
     "text": "Baraja tu mano en tu mazo; Roba esa misma cantidad de cartas"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "6db7448197aa602162bac175741404fc0d429d570617d9a140e12e0f930b6ca6",
+    "text": "Lanza crepuscular"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "1efee4f18623b7a0c2eb69404dad49022c390418480a3d429bbada69087ffe17",
+    "text": "Intercambio de deseos"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,

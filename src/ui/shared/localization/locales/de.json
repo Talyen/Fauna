@@ -1631,11 +1631,35 @@
     "sourceHash": "2178cfabd598d35cc0217ea545e9845eef77be6d8c65f6ae60d695dbaf90c8b0",
     "text": "Korallenspirale"
   },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "99fc16f688341d28abaf4ea5cc44a16a2fe9a23373cdcb22a1b139c8c91447bb",
+    "text": "Sonnenflügelschlag"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "c31a3507572eff145381dd04c7bc25d53d7bfe2fd0ee38ae7c98d15a1ecb0677",
+    "text": "Morgenblüte"
+  },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "f8c0bf3fb0a8d6aafa3c6d4f5bed6baf5d9c51dd4ed3b2654dee0f73c1451929",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
+  },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "6d46e839b13b53be17fe5f80e416ce632e9caa33df9910823946f79319269c83",
+    "text": "Morgenruf"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "a6850382dcf7e6c04fd4291258aac7e7c7621d3311f5ca7b64bfc047ef795d21",
+    "text": "Kapellenlicht"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1643,17 +1667,41 @@
     "sourceHash": "21577858f459ef910446ca8a05e6186a6e27755a6d457c263c9f6644a351e80d",
     "text": "Stelle {{value0}} <keyword0>Gesundheit</keyword0> wieder her"
   },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "1a9cdbc7a7943efe2c8a053759873394c06c7a7088b79fb66b862d113f0142c2",
+    "text": "Stille Wasser"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "d26c19c1fa127138e42d9e9ddf17142f97c95f6ac2cf5049833e7c00652c3798",
+    "text": "Wiesenzuflucht"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "a0e373cbb07851bcf5244aaecb588f61d3db75a323d218a963955fc0bc3c9c08",
     "text": "Verbündete erhalten {{value0}} <keyword0>Block</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "ef8b136a0c9b16914007f1f1ccdb4c1ec3a6ae652de64ec2d4ec30e8396d61e7",
+    "text": "Sandsprungsatz"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "c7bdfdf1bed9dc39e9b14a2fa1a9c1f86eaf8b0c411980d0897005106490a6ad",
     "text": "Füge {{value0}} <keyword0>physischen</keyword0> Schaden zu"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "a7e954fa60588c599d355c25b3f50a0d49e1acbfa1295866453a989e2d34d40f",
+    "text": "Trugbildschritt"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1667,11 +1715,35 @@
     "sourceHash": "49c3280da5e8912d8ae755f9df91ee4ed1393c6a09187949a3e3698b378cc274",
     "text": "Erhalte {{value0}}% <keyword0>Ausweichen</keyword0> bis zu deinem nächsten Zug; Ziehe {{value1}} Karte"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "9c10656f191aad34aa33bec16f332ee943093d910314219a4df02bd81a55d5a0",
+    "text": "Dünenwirbel"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "7f10818bc98d5c249df0da20980b98d7efc5c1d4a370a3ed4bf70a5c075dc271",
+    "text": "Glutansturm"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "c9dbddbaa88888436f94057c90b1ae34d709b3a84a00c37b23414df0a6d7e260",
+    "text": "Ofenatem"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "7ff8d93905625c4fd691ab0a89c0a91fb6bf4f64825856f56ef1d8cb4f220d5c",
     "text": "Verursache {{value0}} <keyword0>Brand</keyword0>schaden bei allen Gegnern"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "f826a3995cda3d8dfba72b8d3645664f4f221796d82ee4815899eea19044dae4",
+    "text": "Magmatritt"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1679,11 +1751,29 @@
     "sourceHash": "28c6d6d844821b1200c6c07fc890a1d2b59cfb16e71a2fa93d333c638cc21860",
     "text": "Füge allen Gegnern {{value0}} <keyword0>Betäubungs</keyword0>schaden zu"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "72633df94206688e7a62ef726f961395f9e0bed385211994b16b03a61941a30d",
+    "text": "Möglicher Pfad"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "8ca38c738f10220900c0c2c8ca04fb8ae9a1faaee3e6adb96e52b78430d91b8d",
     "text": "Mische deine Hand in dein Deck; Ziehe ebenso viele Karten"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "7578897e06a99b969b926f23e931c73189c3d438b08f27f63a6c2aa896292400",
+    "text": "Dämmerungslanze"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "8704ddcc179b7e593990c7ed32da6fbd4d6d8f7ec40c3e59bbc6f9672804018d",
+    "text": "Wunschtausch"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,

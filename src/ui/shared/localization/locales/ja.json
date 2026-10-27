@@ -1631,11 +1631,35 @@
     "sourceHash": "eaa72438b21c37c702efc5a523aa756dc782949b59e7c0256a71caea05e5b621",
     "text": "珊瑚の螺旋"
   },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "d1752aa2ca92f9a0869f114e0af36f04850a1bd8c1f22ef3ea38ae56cc9a1ab1",
+    "text": "太陽の翼の一掃"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "75ed55352a578f389ada300e7a9a8df97564dd0dc250ccae32be9f4626bb0606",
+    "text": "朝の開花"
+  },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "5e6b8be03a1dae23b916db3b9829c286ecf6cd43dd0b4187015974f6a24a227d",
     "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "80f76f889615fb3aeaa92cb9384f3f003c4f039387638499a6604972bee71017",
+    "text": "夜明けの声"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "227f54217780a29614351da14b9603bb979485c3ef1dc0217b41cc7007c29509",
+    "text": "礼拝堂の光"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1643,17 +1667,41 @@
     "sourceHash": "4fd1f7afd18f36b379ab07cf575aaf0eef8f9b36292f3900bfcdaba798c61681",
     "text": "<keyword0>体力</keyword0>を{{value0}}回復"
   },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "de9de09bf5ea657c1be01e17552a92ac39b47b43304b44af37ac580dcc7f34e2",
+    "text": "静かな水"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "f74c84706e5815a875fc665e0c0be6fdca2e0f326ae46276244e2cc068f15df9",
+    "text": "草原の避難所"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "f7d88ea1a8ed34c9a01607a2d34383100fe067f4c6739635d824a02401e48bbc",
     "text": "味方が<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "725e3b31e81c0b42f7a381f0833e406206b749153f0fe565233da637ee5a3e88",
+    "text": "砂煙の飛びかかり"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "cf1ce6404c4c1b7c20f00dc207ae16f69a05623b4fdc8aa4d33a987d8d0c9464",
     "text": "<keyword0>物理</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "9848c621bbd0517f0e8795b8b75e7cae989d495e3ee10990def396e7938cea10",
+    "text": "蜃気楼の足取り"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1667,11 +1715,35 @@
     "sourceHash": "2549bc3673c01dc80f2013cfe70be05f3daefca16eda37b2d56cbc334dbf5413",
     "text": "次のターンまで<keyword0>回避</keyword0>を{{value0}}%獲得; カードを{{value1}}枚引く"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "4247b7d67e4e0ff5bd86759c4d02767bcd4a01d62c5f44153a5e4f4af32b32db",
+    "text": "砂丘の渦"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "eed3ca2e4f1e8917e1d6611ca7d39280e1f2179717df520500d0f8cedc7c406a",
+    "text": "熾火の突進"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "17d7fcc747b67596c65c72ea492da48e47da3410e7f83f6064041ce925d54218",
+    "text": "炉の息吹"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "1ec8a1f97e871021b38e2ce9f2e94849186cf08c366eab3c3273ecb7e6bebaa0",
     "text": "敵全員に<keyword0>炎上</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "677a7ae95bf81db916544e5c82fba9f131f830aff48e1f0ff0e9da0d30a1f740",
+    "text": "溶岩踏み"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1679,11 +1751,29 @@
     "sourceHash": "5ef2173e0eb88b1b772d9aaf670d205a4af4cd7ce1daca7419beb27188f376aa",
     "text": "すべての敵に<keyword0>スタン</keyword0>ダメージを{{value0}}与える"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "bd2f6e3e3dbdf63e0556b951a230dba385f4ab7a161e543eba0dd23c5117d735",
+    "text": "ありうる道"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "30ebdc5ddbb707c16c11ab046bf20679c6218f059b47738c3916f21237ba88bf",
     "text": "手札をデッキに戻してシャッフル; 同じ枚数のカードを引く"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "a9b30a4bfe183f96616b77a186ba9de9e791facb8cfc488dda4049a655efe7f3",
+    "text": "黄昏の槍"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "3f5d95bef35446fc3cf5e3097208eab08edd2ab654d4d166756e6b09a32d2c02",
+    "text": "願いの交換"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,

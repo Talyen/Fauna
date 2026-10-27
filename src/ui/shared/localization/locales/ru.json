@@ -1631,11 +1631,35 @@
     "sourceHash": "2731afd974db53e15cceb26febaac9626e0f45508417560387617b6b3b4d3d9b",
     "text": "Коралловая спираль"
   },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "d20db00b4e7258873646ab72a0297cc07b8c77e0bf71740da7eebbf372765baf",
+    "text": "Взмах солнечных крыльев"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "8f593dcc034b55d2e61c7acad32ef1aa4554d95550cb3a7ba01820bca9bf8a28",
+    "text": "Утреннее цветение"
+  },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "e5d4ea1a634479231001ba7b4699d8670ff46399bf9b189c5198076f1335c272",
     "text": "Восстановить всем союзникам {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "31c80d39160f5a67524cf4f524671fb7740e422a582f5757064ebe6f465c5f2a",
+    "text": "Клич рассвета"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "8b45c44b563902a2ae631d0979586df880aed625069792ee6905d3a70ec1cf1c",
+    "text": "Свет часовни"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1643,17 +1667,41 @@
     "sourceHash": "7d76bb28404f5f05b27d6e5da0c700e2b5afac1b4478a651516efcdaf3903894",
     "text": "Восстановите {{value0}} <keyword0>здоровья</keyword0>"
   },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "c3e4bc38e7742b6cd00b25764ed8707853849b5b6caf6064a8f822a549c478ee",
+    "text": "Тихие воды"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "905dee49f3f84bcd52e5f81d9b9952a8ce99ab6af93b63f4f5e16949e0338971",
+    "text": "Луговое убежище"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "af555c3a7a3f02767c3422fe3826672639abf389028b58334718ca9feb810af0",
     "text": "Союзники получают {{value0}} <keyword0>блока</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "bc699b7cecd7d6ca69665563e1191829c29154b091896cb642a07dd4c4245ea5",
+    "text": "Прыжок песчаной бури"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "734383629daa5e86768cd0747f8f88a060ec2e4db563f550cdbb427a6404054d",
     "text": "Нанести {{value0}} <keyword0>физического</keyword0> урона"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "3fcbb129d29d9e34d27238d1f5a8cbad68a288e0112a18c2948efbfa47d8a9e4",
+    "text": "Шаг миража"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1667,11 +1715,35 @@
     "sourceHash": "e154193493a9a493cd96aea74639c9c82456d85b0f88177e1ff465ad723f8092",
     "text": "Получите {{value0}}% <keyword0>уклонения</keyword0> до следующего хода; Добор карт: {{value1}}"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "a8ee908374582b8498c897b444b794e791d721904c9d535aa93987abac49de99",
+    "text": "Вихрь дюн"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "ee73437d74bf76174cba499d27ed5c7de7b6f97d75ff37e72dd3af48fa080797",
+    "text": "Натиск углей"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "c2ea5981e5b019bb407068ff3d9fe7699abafa3158f49a80a40ef3d6b37a07c6",
+    "text": "Дыхание горна"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "e78fd49b3fbc21add9ca6b1f1b8a25f9aee01c208bf0bf42b7ac001c0ccecc91",
     "text": "Нанесите всем врагам {{value0}} урона от <keyword0>горения</keyword0>"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "8f8db46d0dd1289443a86e9c483a40e59e5b2632967248c3be00f1f260528a40",
+    "text": "Удар магмы"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1679,11 +1751,29 @@
     "sourceHash": "6a41e1274fc1bd2fbb1f20fcc4382d5ba39edba40d07c0e25bf7c0944f31ac1a",
     "text": "Нанести всем врагам {{value0}} урона типа «<keyword0>Оглушение</keyword0>»"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "9b4aa72dad80af07bd7115851068a1a7de90b444bb86a50e8381e1a1067520ee",
+    "text": "Возможный путь"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "cfa2ea2b5834357e08b27c260763479e504642d5ed9bbe3163d3009360d63f98",
     "text": "Замешайте руку в колоду; Возьмите столько же карт"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "1088ca66484ef076a55a8deade979ead5254cdfadeaa19146000741f4be1220d",
+    "text": "Сумеречное копьё"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "bd0b83d114a8f1539d2035a4f9cc5fe3eed75acbb5c80e822011ff1844a3a91f",
+    "text": "Обмен желаниями"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,

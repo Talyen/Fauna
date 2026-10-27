@@ -1631,11 +1631,35 @@
     "sourceHash": "14110428b0fe2175c568646b751e4edecadd896bc3cf8ca2e9a2187af7c96634",
     "text": "珊瑚旋舞"
   },
+  "content.card.dawncall-attack.name": {
+    "reviewed": true,
+    "source": "Sunwing Sweep",
+    "sourceHash": "d830650fdc7b93151d3399bb71c9a3e5f8df371a084ea6366ef4ee5705ce46b6",
+    "text": "日翼横扫"
+  },
+  "content.card.dawncall-heal.name": {
+    "reviewed": true,
+    "source": "Morning Bloom",
+    "sourceHash": "52d2fb04cf228d78648e05a3859d0ca3e4ccd3dbf38e839696bef2b4af739307",
+    "text": "晨间绽放"
+  },
   "content.card.dawncall-heal.v829391f43731edcb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies",
     "sourceHash": "253b3cc8ed220bbb5c06c00df8752782a1097e03ff1c08f33c44d09048470627",
     "text": "为所有盟友恢复 {{value0}} 点<keyword0>生命</keyword0>"
+  },
+  "content.card.dawncall-teamCleanse.name": {
+    "reviewed": true,
+    "source": "Dawn Cry",
+    "sourceHash": "41427c50c017d2339e1a339afa54977df1d0f8f84979e52903051ee27ab0d139",
+    "text": "黎明之鸣"
+  },
+  "content.card.dulcera-chapel-light.name": {
+    "reviewed": true,
+    "source": "Chapel Light",
+    "sourceHash": "47e749126a215f3e7c0344940ae345da2b58a0427e5e0e216a8b5aabd5ff875d",
+    "text": "礼拜堂之光"
   },
   "content.card.dulcera-chapel-light.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
@@ -1643,17 +1667,41 @@
     "sourceHash": "b402938bbb966fac58f9e8c3718e05a66e0ea98852792c1e855d79bc0fabdaef",
     "text": "恢复{{value0}}点<keyword0>生命</keyword0>"
   },
+  "content.card.dulcera-hushed-waters.name": {
+    "reviewed": true,
+    "source": "Hushed Waters",
+    "sourceHash": "42b8f49f656f8947ff791425e06d6028983f58bbbdc16cff2949a2a80e520468",
+    "text": "静谧之水"
+  },
+  "content.card.dulcera-meadow-shelter.name": {
+    "reviewed": true,
+    "source": "Meadow Shelter",
+    "sourceHash": "127ee5bab8e0aa0b128381515a58964d2aff9830628d038161d14134b58329a9",
+    "text": "草地庇护"
+  },
   "content.card.dulcera-meadow-shelter.v1120584113a3339f.rule": {
     "reviewed": true,
     "source": "Allies gain {{value0}} <keyword0>Block</keyword0>",
     "sourceHash": "08dfd8799f59888faa4df3c6a4c6c214de6306ec8ea93411a6c1e77430f25b31",
     "text": "盟友获得 {{value0}} 点<keyword0>格挡</keyword0>"
   },
+  "content.card.dunefox-attack.name": {
+    "reviewed": true,
+    "source": "Sandburst Pounce",
+    "sourceHash": "d1ed9167e67487b386e956958142c5ad3f0c0fa407a967c7b3a527470dc92d1c",
+    "text": "沙爆猛扑"
+  },
   "content.card.dunefox-attack.vff8d1470887b7499.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Physical</keyword0> damage",
     "sourceHash": "500b810665dd4830074b2add80830372ec9e6b70a957bcce934d94110f41e95f",
     "text": "造成 {{value0}} 点<keyword0>物理</keyword0>伤害"
+  },
+  "content.card.dunefox-dodge.name": {
+    "reviewed": true,
+    "source": "Mirage Step",
+    "sourceHash": "4d205f7e355773ebc6a66e0a0fa340e2d4e7262566551bcdf2afc987e1602935",
+    "text": "幻影步"
   },
   "content.card.dunefox-dodge.v2fe08439ba625495.rule": {
     "reviewed": true,
@@ -1667,11 +1715,35 @@
     "sourceHash": "04925025d1dd9a594cd2d1f23a3844fdba22fba28c837d0e2abbb802001a683c",
     "text": "获得{{value0}}%<keyword0>闪避</keyword0>，直到下个回合；抽{{value1}}张牌"
   },
+  "content.card.dunefox-dune-whirl.name": {
+    "reviewed": true,
+    "source": "Dune Whirl",
+    "sourceHash": "09e260e369024b34850be92984e34c32997af1164aafcd03805d82ed14589b62",
+    "text": "沙丘旋风"
+  },
+  "content.card.emberback-attack.name": {
+    "reviewed": true,
+    "source": "Ember Charge",
+    "sourceHash": "34ebad272e974ddb08232089794d23b209ca6a0ccd944cd28a69578f0bd80278",
+    "text": "余烬冲锋"
+  },
+  "content.card.emberback-furnace-breath.name": {
+    "reviewed": true,
+    "source": "Furnace Breath",
+    "sourceHash": "0de5bf8b2629891dacfb73d623b65f3a55bd6f9030fcb7162e32d4625974843d",
+    "text": "熔炉吐息"
+  },
   "content.card.emberback-furnace-breath.v22ca5869fa96f531.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Burn</keyword0> damage to all enemies",
     "sourceHash": "568d702538832516ca2bbd1234278656889fa0ccb5a846e4dad00fbe28406f8c",
     "text": "对所有敌人造成{{value0}}点<keyword0>灼烧</keyword0>伤害"
+  },
+  "content.card.emberback-magma-stomp.name": {
+    "reviewed": true,
+    "source": "Magma Stomp",
+    "sourceHash": "98aaddae09aec70247e0768a0056d737f9327549d6d68810cfe6bd1c95b0e0c4",
+    "text": "熔岩踏击"
   },
   "content.card.emberback-magma-stomp.v3991c9d5388534ba.rule": {
     "reviewed": true,
@@ -1679,11 +1751,29 @@
     "sourceHash": "685ecb7b6c9ca1b6693c8cc5a7867aebc1cd8fb47e34a2bbf24d4ed5b92e35ca",
     "text": "对所有敌人造成 {{value0}} 点<keyword0>眩晕</keyword0>伤害"
   },
+  "content.card.euphera-possible-path.name": {
+    "reviewed": true,
+    "source": "Possible Path",
+    "sourceHash": "6e5c66871c8b0fd15aaeea167ebee468e5c4fbb9f5fd48f1bd6beac380f1ea1f",
+    "text": "可能之路"
+  },
   "content.card.euphera-possible-path.v9ce7c51cb7ed9f1a.rule": {
     "reviewed": true,
     "source": "Shuffle your hand into your deck; Draw that many cards",
     "sourceHash": "2f70bb41979358c5b64a62ef161156af8404d082306149031e9c139b0fa79113",
     "text": "将手牌洗入牌组；抽取相同数量的牌"
+  },
+  "content.card.euphera-twilight-lance.name": {
+    "reviewed": true,
+    "source": "Twilight Lance",
+    "sourceHash": "e0390b73c45a6df7eb7e7ed3b36cbf420637a0b568de6cef436183fb68b0fbf1",
+    "text": "暮光之枪"
+  },
+  "content.card.euphera-wish-exchange.name": {
+    "reviewed": true,
+    "source": "Wish Exchange",
+    "sourceHash": "1ccbde05de4f1bd0209f31d0bac2ae7788445d2fcf1bc831823619fdff0f2984",
+    "text": "心愿交换"
   },
   "content.card.food-apple.all.rule": {
     "reviewed": true,
