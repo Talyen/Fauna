@@ -1469,6 +1469,18 @@
     "sourceHash": "8abe31c5618863ace04a6d29c8c63f56aff8c418ab448a150b88ad6b9314a94e",
     "text": "花のゆりかご"
   },
+  "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
+    "sourceHash": "aee5fa3d6ecb9cc65a2884e5bdbdb7c6fff45882e7c066ecf056de0add896364",
+    "text": "引くカード：{{value0}}枚; <keyword0>体力</keyword0>を{{value1}}回復"
+  },
+  "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
+    "sourceHash": "576501b003ed5463d23ccc1876234642f6df6116146a88ab2bd407f3c2d0e9a4",
+    "text": "引くカード：{{value0}}枚; <keyword0>体力</keyword0>を{{value1}}回復"
+  },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
@@ -1541,6 +1553,18 @@
     "sourceHash": "e9464877a3e4c91fac7a3fca37055c1bb0a7aaaf64b35cb037b9f70ea6aaac38",
     "text": "奮い立つリフレイン"
   },
+  "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "ca9e38969882c821809bc8dd6b1cd296b786e5d30ceeae4f5f020f48f5cc948f",
+    "text": "次の自分のターンまで、すべての味方に{{value0}}%の<keyword0>回避</keyword0>を付与"
+  },
+  "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "7977480d09dd97a97c3acfb48f511d54e579e67f06134d9a3522dc7040a6af88",
+    "text": "次の自分のターンまで、すべての味方に{{value0}}%の<keyword0>回避</keyword0>を付与; カードを{{value1}}枚引く"
+  },
   "content.card.captoad-attack.name": {
     "reviewed": true,
     "source": "Spore Puff",
@@ -1558,6 +1582,12 @@
     "source": "Mushroom Guard",
     "sourceHash": "e7c17782398e1e23dfcd37e54baf72e995a6b31abb4ff30309dd8ecf8edb5762",
     "text": "キノコの守り"
+  },
+  "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
+    "sourceHash": "07bceb01a662721f32116e7214126d5ae2ff575450c001d5b25c87a7b079c562",
+    "text": "<keyword0>ブロック</keyword0>を{{value0}}獲得; <keyword1>体力</keyword1>を{{value1}}回復"
   },
   "content.card.captoad-swap.name": {
     "reviewed": true,
@@ -1702,6 +1732,30 @@
     "source": "Dawn Cry",
     "sourceHash": "80f76f889615fb3aeaa92cb9384f3f003c4f039387638499a6604972bee71017",
     "text": "夜明けの声"
+  },
+  "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
+    "sourceHash": "15ceea59df1622708599fe28073e3720e15fd3692f571ad97ae09e7240c067c4",
+    "text": "すべての味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>; カードを{{value1}}枚引く"
+  },
+  "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
+    "sourceHash": "c135294dc743c1bacd53173145c308e911a08249541de5ac7e3238cf9da0263b",
+    "text": "すべての味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>"
+  },
+  "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
+    "sourceHash": "f7a266c07c694d67a91d03c9050db42531e1604b1b9d96cea81096d246133f59",
+    "text": "すべての味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>; カードを{{value1}}枚引く"
+  },
+  "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
+    "sourceHash": "c4f3986ddf98956e89a29858a63029479bc8dbe0fbb36955749e40f24792b6d3",
+    "text": "すべての味方から有害な効果を{{value0}}個<keyword0>浄化</keyword0>"
   },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,

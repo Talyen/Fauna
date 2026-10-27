@@ -1469,6 +1469,18 @@
     "sourceHash": "f6d4d57d287b42661f4838a26177b80d575d490f5a60bfd63076a926647b0795",
     "text": "Цветочная колыбель"
   },
+  "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
+    "sourceHash": "631d0c1a07d23536ff6a7a706350293cf73ff6b02c76b409a0b33c10e2064486",
+    "text": "Взять карт: {{value0}}; Восстановить {{value1}} <keyword0>здоровья</keyword0>"
+  },
+  "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
+    "sourceHash": "aa0d6e4a83d5cf0a4278f36b885d7988afc095a64aba654113a52e3b7099ddaa",
+    "text": "Взять карт: {{value0}}; Восстановить {{value1}} <keyword0>здоровья</keyword0>"
+  },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
@@ -1541,6 +1553,18 @@
     "sourceHash": "558773bebaf67bf32b6c09de40deafe7ad9286fd050bdd12eae92e423453ef39",
     "text": "Бодрящий припев"
   },
+  "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "ee40f9334fdd3cf34d0727c66d411bdc3b5631c69f26c9356e3259728dfb7427",
+    "text": "Дайте всем союзникам {{value0}}% <keyword0>уклонения</keyword0> до вашего следующего хода"
+  },
+  "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "4ee0e4d1392200024adca36bf450c4adf2ab16afebbb849e424bf0eecb21bce1",
+    "text": "Дайте всем союзникам {{value0}}% <keyword0>уклонения</keyword0> до вашего следующего хода; Взять карт: {{value1}}"
+  },
   "content.card.captoad-attack.name": {
     "reviewed": true,
     "source": "Spore Puff",
@@ -1558,6 +1582,12 @@
     "source": "Mushroom Guard",
     "sourceHash": "21a40797a55ceeaf000e78cd0199ccc3b86da181d452d8cc03ef2d456ad17e43",
     "text": "Грибной щит"
+  },
+  "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
+    "sourceHash": "b4ec5aa736db165ae108ca3c1684bf0ee8f49c9b0c8674ce47280d1bf195b956",
+    "text": "Получите {{value0}} <keyword0>блока</keyword0>; Восстановите {{value1}} <keyword1>здоровья</keyword1>"
   },
   "content.card.captoad-swap.name": {
     "reviewed": true,
@@ -1702,6 +1732,30 @@
     "source": "Dawn Cry",
     "sourceHash": "31c80d39160f5a67524cf4f524671fb7740e422a582f5757064ebe6f465c5f2a",
     "text": "Клич рассвета"
+  },
+  "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
+    "sourceHash": "3a95295a163524291700a71d34513f1db73f7e15dc4bc2f85474b3271860ac07",
+    "text": "<keyword0>Очистите</keyword0> вредные эффекты у всех союзников: {{value0}}; Взять карт: {{value1}}"
+  },
+  "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
+    "sourceHash": "e42e346ba3d6622dfec03e3beb4ef895e2c0697e89055f134eab9f97c79fa42e",
+    "text": "<keyword0>Очистите</keyword0> вредные эффекты у всех союзников: {{value0}}"
+  },
+  "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
+    "sourceHash": "bbf7003875500fef922309c1644c38c14701f48f300295e5ed4aba4a708581a6",
+    "text": "<keyword0>Очистите</keyword0> вредные эффекты у всех союзников: {{value0}}; Взять карт: {{value1}}"
+  },
+  "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
+    "sourceHash": "df7c26bac86e33e2ecd100cea139b18f74ccc55dee34125d802f8af725a9317a",
+    "text": "<keyword0>Очистите</keyword0> вредные эффекты у всех союзников: {{value0}}"
   },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,

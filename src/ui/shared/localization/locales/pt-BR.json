@@ -1469,6 +1469,18 @@
     "sourceHash": "289a4f7b36f8f4d05bf6a40c5565e68e6911aae3f960402b5152fca15f1abdc3",
     "text": "Berço florido"
   },
+  "content.card.bloomquail-draw.v09429afc43a53e57.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} cards; Restore {{value1}} <keyword0>Health</keyword0>",
+    "sourceHash": "137c7610082a9922e0f60243250586027640de944b157d33ff979a849400965e",
+    "text": "Cartas compradas: {{value0}}; Restaura {{value1}} de <keyword0>Saúde</keyword0>"
+  },
+  "content.card.bloomquail-draw.v1743636b7fbb851a.rule": {
+    "reviewed": true,
+    "source": "Draw {{value0}} card; Restore {{value1}} <keyword0>Health</keyword0>",
+    "sourceHash": "bad7636d0f834a8df6e6cde6e5d2d19e8b34cb97eef069dedaeef29fe7fff5c4",
+    "text": "Cartas compradas: {{value0}}; Restaura {{value1}} de <keyword0>Saúde</keyword0>"
+  },
   "content.card.bloomquail-draw.vb3e3ed62a9c7a8bb.rule": {
     "reviewed": true,
     "source": "Restore {{value0}} <keyword0>Health</keyword0>",
@@ -1541,6 +1553,18 @@
     "sourceHash": "6192f0b31e55f1965c32662b3aaec7f8b7c475572db62f0647a76d711082d160",
     "text": "Refrão animado"
   },
+  "content.card.cadenza-rousing-refrain.v4a574c69d1ad79c0.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn",
+    "sourceHash": "d02e40c0b8a9576e4e70debba8ee2ad30eff9eba684200d17665b8870dda3f4a",
+    "text": "Concede {{value0}}% de <keyword0>Esquiva</keyword0> a todos os aliados até seu próximo turno"
+  },
+  "content.card.cadenza-rousing-refrain.vb372c1aa2f8fa4e7.rule": {
+    "reviewed": true,
+    "source": "Give all allies {{value0}}% <keyword0>Dodge</keyword0> until your next turn; Draw {{value1}} card",
+    "sourceHash": "5c776ce106c2b0bed5417cad43e1e5fcef20ceea5c7ab4f5e7a4ebb479726e40",
+    "text": "Concede {{value0}}% de <keyword0>Esquiva</keyword0> a todos os aliados até seu próximo turno; Cartas compradas: {{value1}}"
+  },
   "content.card.captoad-attack.name": {
     "reviewed": true,
     "source": "Spore Puff",
@@ -1558,6 +1582,12 @@
     "source": "Mushroom Guard",
     "sourceHash": "062794d95d27b858e76e982bd60a731c0b4c1846834faf79f2bf543002aed92e",
     "text": "Guarda de cogumelo"
+  },
+  "content.card.captoad-guard.vd61059f9b9f1f597.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0>; Restore {{value1}} <keyword1>Health</keyword1>",
+    "sourceHash": "07e239b15e18b2ee6adb22bd5f2e915d8acfc004c4de617cdadb60d7720fefad",
+    "text": "Recebe {{value0}} de <keyword0>Bloqueio</keyword0>; Restaura {{value1}} de <keyword1>Saúde</keyword1>"
   },
   "content.card.captoad-swap.name": {
     "reviewed": true,
@@ -1702,6 +1732,30 @@
     "source": "Dawn Cry",
     "sourceHash": "dd9f2cb4e57a99586d33f2c46f1298f620c1996311a5decee4b35c3a498e7ee3",
     "text": "Grito da aurora"
+  },
+  "content.card.dawncall-teamCleanse.v75ce046032ec7b9e.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies; Draw {{value1}} card",
+    "sourceHash": "e61803afa91f59e902725d30c7324d976cb26c2b54e780b4c69fa0566898f587",
+    "text": "<keyword0>Purifica</keyword0> efeitos prejudiciais de todos os aliados: {{value0}}; Cartas compradas: {{value1}}"
+  },
+  "content.card.dawncall-teamCleanse.ve20605554d5ee685.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effect from all allies",
+    "sourceHash": "da4317613e80bda835eea81edfe668b783a6f2b62e9f6a57b15e460c6c686ab0",
+    "text": "<keyword0>Purifica</keyword0> efeitos prejudiciais de todos os aliados: {{value0}}"
+  },
+  "content.card.dawncall-teamCleanse.vea2bf889800ce683.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies; Draw {{value1}} card",
+    "sourceHash": "0adaa6477cba103f975962c49a2d42640e756ae9c6475f4aff206b67331071f5",
+    "text": "<keyword0>Purifica</keyword0> efeitos prejudiciais de todos os aliados: {{value0}}; Cartas compradas: {{value1}}"
+  },
+  "content.card.dawncall-teamCleanse.veb895102cec55274.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> {{value0}} harmful effects from all allies",
+    "sourceHash": "36780e178a5abd1b7ee34bc144d1c4dec80bbf996fe1b9d73a71ec8a32dad7e6",
+    "text": "<keyword0>Purifica</keyword0> efeitos prejudiciais de todos os aliados: {{value0}}"
   },
   "content.card.dulcera-chapel-light.name": {
     "reviewed": true,
