@@ -1595,6 +1595,96 @@
     "sourceHash": "31dfdd9e74052f8a2c1f5539f9a7dfa382744d032ccc0db2ebc370d4adbee385",
     "text": "源泉"
   },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "18e0dcb07fbe28c41a821863a6dbfa6454c9442c489e3dabf4e8a35b4e30778e",
+    "text": "衝撃の力"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "f8f16e29ebb788f60b2d042d82c2faf71afaa85b0de4c7961d89532ad967f42f",
+    "text": "敵の<keyword0>スタン</keyword0>の発動閾値が{{value0}}パーセントポイント減少する"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "fb40c924481b035eec806b3537e192a3a0cf4e98a2f3840d61e7440db2e80095",
+    "text": "弱点を突く"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "e97c02364033ae5e0e434995ba1778d4273cc159ec772d03bc4965bd9a307eca",
+    "text": "<keyword0>スタン</keyword0>中の敵が受けるダメージが二倍になる"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "728f7d8d023a07030898adfdd0d42c1245170248ed769ba3e17fd707661dea18",
+    "text": "長期スタン"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "538996ac8a2022fb0c2b5f56330825481f89c002122a52da883ed60b46ffd966",
+    "text": "<keyword0>スタン</keyword0>効果が{{value0}}ターン長く続く"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "3f38922a408945ee27e7269b520780d88fc6911f0de33bbb4288ecc4c2ffb7a0",
+    "text": "無料の追撃"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "e762e7958d42a44f469c1ee04d5bba3ad204283ff0d8eccba0419605f996b7f4",
+    "text": "敵を<keyword0>スタン</keyword0>させると次のカードが無料になる"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "4834f765512b53aaacc55f4a8955e0db71338f4b81f78b23e202d1d751605cce",
+    "text": "守りの反撃"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "f98f082a5de4b2bdb87ae88789eee85a100d975622cc131cce95f65d08989e7b",
+    "text": "揺さぶる一撃"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "8a9f315f9438510b56b42b64db64d4e5d4ffbea19f5b9fbe9515462fafb0e652",
+    "text": "<keyword0>スタン</keyword0>カードは{{value0}}%の確率で二回使用される"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "5851d524ee4497073c2a13550592b56aef271bd3ff0adc41471a5404e2439b77",
+    "text": "守りの粉砕"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "88e056de88d40ae0489f40ccd43db0ee1a8037b4c4155b50dea73a5809dc3a97",
+    "text": "スタンの洞察"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "623b3ca6f8097b202132a9d5469a6159506655a807914bb7d2f68d12b70675c7",
+    "text": "敵を<keyword0>スタン</keyword0>させるとカードを一枚引く"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "d212990cd33314dd9d12c69149566f35e42b39850570f4732e7dbe17f81764d9",
+    "text": "スタンの奔流"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

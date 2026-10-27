@@ -1595,6 +1595,96 @@
     "sourceHash": "09d371078d81c6e5b24b5b7c7c34b0917bf2aa448f9ad563731d45db9060d227",
     "text": "Nascente"
   },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "6f2ef9dab9bd00c0bfa6112b48ee0a43fc00efb6e8304c9f6c4d3b1d7b2c2161",
+    "text": "Força concussiva"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "3e207e1b7be0f01070d867d761cf5b991466c2f4377b3cd9f78da4b61d461996",
+    "text": "O limite de <keyword0>Atordoamento</keyword0> do inimigo é reduzido em {{value0}} pontos percentuais"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "412b3f0e80abe78020638a099cb459a369f069c654ea3767fd2b1689de3c1505",
+    "text": "Explorar fraqueza"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "11ab4167b4f11bcf3836fe3d6e8c948bcbf9aab831fe8dc437d5ab2eb697f9c9",
+    "text": "Inimigos <keyword0>atordoados</keyword0> recebem o dobro de dano"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "7a435b0aa4a069de69cd49f459a8787e55beb8261f3a3d99ca4bb473e8bfdf68",
+    "text": "Atordoamento prolongado"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "4b528347919c6d1167b91987ff20fbbfcf2570b4bb2152a95d99cf63d007a8ce",
+    "text": "Efeitos de <keyword0>Atordoamento</keyword0> duram {{value0}} turno a mais"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "b8ad4c3334dc8b1660bf28a7a32685e5fb257abcd04d0dec2b4497cefdead2fc",
+    "text": "Próxima ação grátis"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "dab0e400a183cf5580fc89611ef907c29e1e793d352fd39efe184fb4851d9b70",
+    "text": "Ao <keyword0>atordoar</keyword0> um inimigo, sua próxima carta é grátis"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "a2158208f07142f1d627eae95e50c6a6d18eed52a497be11466bcfc08d3873b6",
+    "text": "Contra-ataque protegido"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "40f6b1c46d1049a444df63935c60d03b95d8be425a96d6c2ff50ea6baf4fb13c",
+    "text": "Golpe impactante"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "5c63ecc3823fc6a63d4ccd482025bde2138f6d0c9743162e9111b9f863c10177",
+    "text": "Cartas de <keyword0>Atordoamento</keyword0> têm {{value0}}% de chance de serem jogadas duas vezes"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "82d2db9dfdfb9ef0f408cfd9e9c203cdd37cadb563a3361d96d2e02e76223dd7",
+    "text": "Quebrar a guarda"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "1a818724a09461dbb7213105e102f7a99290ffea10fd2926849af34a83ee28df",
+    "text": "Perspicácia de Atordoamento"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "485bbe389acdb2eca6e2dd5294021d6f69726274868d39065ae6cf498b74c27e",
+    "text": "Ao <keyword0>atordoar</keyword0> um inimigo, compre uma carta"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "36a930997b2ac6eaf6bddd03bb4ce1aa9debc765641eb07f47d777c4dc85a559",
+    "text": "Surto de Atordoamento"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

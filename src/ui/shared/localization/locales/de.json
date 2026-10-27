@@ -1595,6 +1595,96 @@
     "sourceHash": "48041a8bf785727afa94688c038e2f13be3fcb42e4b3919b67c11969731cf9e9",
     "text": "Quelle"
   },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "c6474cde908d39eedc897a9f757f983be199dd78322de3d6df3598a60a295aa5",
+    "text": "Erschütternde Kraft"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "704bbbb514ac3c061c8831204195b45fcd8be4612bdd46645b43bdf44b697797",
+    "text": "Die gegnerische <keyword0>Betäubungs</keyword0>schwelle wird um {{value0}} Prozentpunkte gesenkt"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "a3f3e5a46a12cb92afebf260650390610d39b53078d3e3702f60aaef8d40a1ed",
+    "text": "Schwäche ausnutzen"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "8840a17ec6ea921e9a0d7a4b623de508b56d24c315ffc290b73c1287ded0c112",
+    "text": "<keyword0>Betäubte</keyword0> Gegner erleiden doppelten Schaden"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "b5740850f32c212f4e67422182173236b3204096497cb7b811f41c25717a34f9",
+    "text": "Verlängerte Betäubung"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "ac07ddae75daa4cc40c69f7070f417fc9bff954626a66c8023ebf8c4d91154f6",
+    "text": "<keyword0>Betäubungs</keyword0>-Effekte halten {{value0}} Runde länger an"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "96019e5fe3988140f6e151b8f03efea3ae9884c304fac6c78ed5ecd14050f0ad",
+    "text": "Kostenloses Nachsetzen"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "2103fd98c280bac9626f3cb73effa089af9be97e399e712ba6d12c4de2198d02",
+    "text": "Wenn du einen Gegner <keyword0>betäubst</keyword0>, ist deine nächste Karte kostenlos"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "5e1d0ff91ff5f7e954841191226a91f47ac82fda2787ba60f672426fec320489",
+    "text": "Gedeckter Konter"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "54af34a1239cbaa0b9858fd95f1872e435c7186ab4223a29d0dba3299eaa1d42",
+    "text": "Erschütternder Schlag"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "39954ed99abf4dc6d17cb9f0d6d4e54e28da3658e6750551f6c023e7a98a2943",
+    "text": "<keyword0>Betäubung</keyword0>-Karten haben eine Chance von {{value0}}%, zweimal gespielt zu werden"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "87b79e28529a08444af257129258d84f662ce450f90cd3099634040fdca28999",
+    "text": "Deckung zerschlagen"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "141d48388b30881a5aaa83cc318430ededcf80a4abfd9a35db455ba36fccfb7d",
+    "text": "Betäubungseinsicht"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "f977c8518e38fc21f3184c987cdea15df9b87af5bef9af8f630efae18bf6c5dc",
+    "text": "Wenn du einen Gegner <keyword0>betäubst</keyword0>, ziehe eine Karte"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "771f66a459835c3df0d51de6a20cd93a182b65b378abcfaf650c2b191c2e2f67",
+    "text": "Betäubungswoge"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

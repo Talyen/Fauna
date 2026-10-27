@@ -1595,6 +1595,96 @@
     "sourceHash": "e87440ea7ce1e8825e7618191c60891e5670acd69a1ec8819e753a4be4c7a0ae",
     "text": "Fuente"
   },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "87f2e7bd7acb3a6cc45a0d1bfc748fc3452a6e4849db10c0ceb2ef1e05015478",
+    "text": "Fuerza conmocionadora"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "2cf9f981adb2531be9f60bf0a845d55f7a65f6b7d91a8f7cf94788e9a14c853d",
+    "text": "El umbral de <keyword0>Aturdimiento</keyword0> del enemigo se reduce en {{value0}} puntos porcentuales"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "cb986b5443ef476589d4972a0ac0b5a217fcbf53ab1f6166f7d943f8236ae5bf",
+    "text": "Explotar debilidad"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "02e01563cf0ba5b9dc21d67422008ea1d9d99f5eded21e688336527a1b864378",
+    "text": "Los enemigos <keyword0>aturdidos</keyword0> reciben el doble de daño"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "36bdbffe0509eb8050223261634a60ffa693e109fde4157f0b610da25e1e30b2",
+    "text": "Aturdimiento extendido"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "ba4e14ea135e7f03253646306270599b8cdc352bd751b22da68a848601ba0f57",
+    "text": "Los efectos de <keyword0>Aturdimiento</keyword0> duran {{value0}} turno más"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "c55ffff54da5354501b218d6a5519334c5a609f188130d046b97497ee73c7c98",
+    "text": "Seguimiento gratis"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "e0027163698355fa8672be63896713dc082d155625a94f8ae66304326bf2b2d2",
+    "text": "Al <keyword0>aturdir</keyword0> a un enemigo, tu siguiente carta es gratis"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "4e1261245b6d44cbaeeffc2672f541f398521fc32628486c3e18a24f669c5990",
+    "text": "Contraataque protegido"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "f0f0a8d958cb416eda27eb1fffa9e91a8003f42ab21543174be591c59acb14fc",
+    "text": "Golpe impactante"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "1ed61147d8be443193ba82adedefd55d73270f247ba64090932f2bd4a24682a1",
+    "text": "Las cartas de <keyword0>Aturdimiento</keyword0> tienen un {{value0}}% de probabilidad de jugarse dos veces"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "893b93926314c434475622137ba3376958c8fc387da1dd86797df456a204a7cb",
+    "text": "Romper la guardia"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "074ad79e17c346ae79128f4143b126c3b3a121ebdf1a400045b800912d64c66b",
+    "text": "Perspicacia de Aturdimiento"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "631ac0ee8253488cbc16db43c08390b124a1c790bf075c32bb34b43570be790b",
+    "text": "Al <keyword0>aturdir</keyword0> a un enemigo, roba una carta"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "d1bcf804f27055ec29162392c778e1c9325912efb6a7a87c6b3bb26915facfbf",
+    "text": "Oleada de Aturdimiento"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

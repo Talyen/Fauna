@@ -1643,6 +1643,96 @@
     "sourceHash": "07ad5bf1595b76e32ae4b705056ff69d286261307b05c70d0bf72438aab62532",
     "text": "Source vive"
   },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "c8e66b9838738d90030714a65796e7b23c1e6660ef64b5ed3f651bd095af361c",
+    "text": "Force commotionnante"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "ea3a92c6bceba2b6bb1070c282bb549e4393f3d61c9aeab95b555e2be5845dd5",
+    "text": "Le seuil d'<keyword0>Étourdissement</keyword0> ennemi est réduit de {{value0}} points de pourcentage"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "061bd87d6cb918f38e0caa01cb84b52f8614e19dd4f46adf383831d31b341221",
+    "text": "Exploiter la faiblesse"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "1f33b2204feb6597ff49a3ceabefd0ac1b78cccb672787010168ad74fdebe26e",
+    "text": "Les ennemis <keyword0>Étourdis</keyword0> subissent le double de dégâts"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "17cc6a9480ae1c1b13ba9f440f70df7dc84774c397f9be254077510cb8356a29",
+    "text": "Étourdissement prolongé"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "383ae4b563508564ed7c14c2368c6389d8e7bcb461609039277696b62a522979",
+    "text": "Les effets d'<keyword0>Étourdissement</keyword0> durent {{value0}} tour de plus"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "62a152040be3835ff8a62e3ff39880dea76de47ba817792058203cf8ffe3718d",
+    "text": "Suivi gratuit"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "d1a949a794ed4ab28a0501dc0772c4d846fe151916f511569510c1d781602cbc",
+    "text": "Quand vous <keyword0>Étourdissez</keyword0> un ennemi, votre prochaine carte est gratuite"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "586a087659b038a12e6e802c603188b40c19e6ec39619474d8590fbf25480d0d",
+    "text": "Contre protégé"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "60e505e36ea89e45ac6883dff5ff1f7a97a1c2336ad8b35d8ea7f6d8fab922b0",
+    "text": "Coup déstabilisant"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "59572813f3a374557107ded7429ed2ec86fd4169c9085670b77807b9c465fb2b",
+    "text": "Les cartes d'<keyword0>Étourdissement</keyword0> ont {{value0}}% de chances d'être jouées deux fois"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "f7b49ffa961a97280edb1e30692ae92d261efa93c2e9a493ff95037b72c74928",
+    "text": "Briser la garde"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "2ec44d3ef00550efa312f2d0ab8bd85c36e52d0bb0705d1e18de81b2708567c5",
+    "text": "Intuition d'Étourdissement"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "76fbc600b35e26b44ef448fbabeaeaad38372f8ddffa19b960217ea233f70525",
+    "text": "Quand vous <keyword0>Étourdissez</keyword0> un ennemi, piochez une carte"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "238b5f18302030a1508b772dc3df84072e7e37bb6af916e86fd9611e065cb739",
+    "text": "Déferlement d'Étourdissement"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

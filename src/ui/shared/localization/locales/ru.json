@@ -1595,6 +1595,96 @@
     "sourceHash": "25d77f7fd816539896c9a46118d0e8ecc24910e68dae27112e5448b1d52e0efa",
     "text": "Родник"
   },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "b21cb79ea58b2d6000d6ece6459edf6e263109b8ede12a128a12685c87fdb788",
+    "text": "Сила сотрясения"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "5be466dffb480ac1ddef1c600ea56dbc770ad312bd133eaca8ca918fe1e3c3a0",
+    "text": "Порог эффекта «<keyword0>Оглушение</keyword0>» врага снижен на {{value0}} процентных пунктов"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "d35061088a69d67651320d102fe016055dee7362e70cc2b8fbb2c591be67b23d",
+    "text": "Использование слабости"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "746851a22ea345e284f31c84bcf4209fb391a0b45fa831afd6e73e0fd4e31087",
+    "text": "<keyword0>Оглушённые</keyword0> враги получают двойной урон"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "a4388f37c43763fb419e652b2bd843a669fd07521bbc399979ed3c12e396ed3c",
+    "text": "Продление: Оглушение"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "37afd4a1335dd2880eb84bc233776750c5fd2c1b2b120b0ec4d841e3b06fdc6e",
+    "text": "Эффекты «<keyword0>Оглушение</keyword0>» длятся дольше; дополнительных ходов: {{value0}}"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "e125f48ad5cdc81dc7847c72b54fdbb0a0a87cb56da0d8e9e286aed65c1d0f3f",
+    "text": "Бесплатное продолжение"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "7daffe14485db599d0c17c0be63bc330f94effd49cca7c378036dfd5ca974f8b",
+    "text": "Когда вы <keyword0>оглушаете</keyword0> врага, ваша следующая карта бесплатна"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "03623061329607551b641e89b2c31f7b88e7858fc5d0b2adbf7ff956557fe587",
+    "text": "Защищённый контрудар"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "14ac4e4de23f18944bfbab032e0162ee62ee6352aa14ddf98021855215a1bb9b",
+    "text": "Сотрясающий удар"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "4820015cce6becefa7d3bb5a12ab44969b6ed5bd3a1fc73ca502634e2b92d445",
+    "text": "Карты типа «<keyword0>Оглушение</keyword0>» с шансом {{value0}}% разыгрываются дважды"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "e396a9a43bdb49cf0a7e22c711114e2bf7939e98eb34f9f45da7b8b1dfbe02c3",
+    "text": "Разбить защиту"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "0089f59f19506d9a10a8c4b0a701542689a68ac0d1b9512dc885a3995e704b6f",
+    "text": "Озарение: Оглушение"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "c12a85ae3a4cfb680c8fe001320c4f3c34d1277e7dd77f644f3a0543ec4d66f4",
+    "text": "Когда вы <keyword0>оглушаете</keyword0> врага, возьмите карту"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "b8e31da8807df6f7057f44117ac1322dd897831d14eea0238962a1b6716e5e1a",
+    "text": "Всплеск: Оглушение"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

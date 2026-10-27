@@ -1595,6 +1595,96 @@
     "sourceHash": "1a1334ce4d7d12e04fabe519ebcc7d08ef8500ec7c53b242eab1ba2ccae1ec6e",
     "text": "源泉"
   },
+  "content.talent.stun.concussive-force.name": {
+    "reviewed": true,
+    "source": "Concussive Force",
+    "sourceHash": "3c3fd58953ca58ea23b67ca6d4e7e481b0bd5126c87c1d423f02d26a0ea78c41",
+    "text": "震荡之力"
+  },
+  "content.talent.stun.concussive-force.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> threshold is reduced by {{value0}} percentage points",
+    "sourceHash": "127c64b2e1bafa78e37d885ae1f7ead6e3302eb7a9caed4358d71ae693d5fa4d",
+    "text": "敌人的<keyword0>眩晕</keyword0>阈值降低{{value0}}个百分点"
+  },
+  "content.talent.stun.exploit-weakness.name": {
+    "reviewed": true,
+    "source": "Exploit Weakness",
+    "sourceHash": "609879823bde72925a58a85d291204482f51a487e05bb842872e3eac507eb1b7",
+    "text": "利用弱点"
+  },
+  "content.talent.stun.exploit-weakness.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunned</keyword0> enemies take double damage",
+    "sourceHash": "b51df4108515b011e070f689e807b47ada75c4b5c640699f613410e655acc3eb",
+    "text": "处于<keyword0>眩晕</keyword0>状态的敌人受到双倍伤害"
+  },
+  "content.talent.stun.extended-stun.name": {
+    "reviewed": true,
+    "source": "Extended Stun",
+    "sourceHash": "6d990120234f279f3ecf1e97dd3084079acde57258cc9e862476eefcbbd67f08",
+    "text": "延长眩晕"
+  },
+  "content.talent.stun.extended-stun.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> effects last {{value0}} turn longer",
+    "sourceHash": "44e3c03eeac0e1567e5c1ef66aae10b64a211b79782571d8ad28f47131e6b8d7",
+    "text": "<keyword0>眩晕</keyword0>效果延长{{value0}}回合"
+  },
+  "content.talent.stun.free-follow-up.name": {
+    "reviewed": true,
+    "source": "Free Follow-up",
+    "sourceHash": "e1250035a5f174a4f572e945d1835be6bd5b96a6d1407b44fea7058a6d4e4a8f",
+    "text": "免费追击"
+  },
+  "content.talent.stun.free-follow-up.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, your next card is free",
+    "sourceHash": "4168890d9dcf64127b4c03adee1120e621a7de68fca6b56f06a7b964dd712bb3",
+    "text": "你使敌人<keyword0>眩晕</keyword0>时，下一张卡牌免费"
+  },
+  "content.talent.stun.guarded-counter.name": {
+    "reviewed": true,
+    "source": "Guarded Counter",
+    "sourceHash": "bdc9b1574beb548666ed21e403a501093e5b4568fb62c7b3dd55f6acdefda440",
+    "text": "防守反击"
+  },
+  "content.talent.stun.jarring-blow.name": {
+    "reviewed": true,
+    "source": "Jarring Blow",
+    "sourceHash": "14dc08e4f45428aa222cdf2ab4e2ed9d78f9f739983819c2bb34d0983481628e",
+    "text": "震撼一击"
+  },
+  "content.talent.stun.jarring-blow.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> cards have a {{value0}}% chance to play twice",
+    "sourceHash": "1a1cde2bca50f70caba970abd081defe7bc96a0c09184787a0aaa5a31a311ed2",
+    "text": "<keyword0>眩晕</keyword0>卡牌有{{value0}}%几率发动两次"
+  },
+  "content.talent.stun.shatter-guard.name": {
+    "reviewed": true,
+    "source": "Shatter Guard",
+    "sourceHash": "31d1abbc3bbb5c33343ecae90afeed10528b5006d2f32c0c0ece852460e61c82",
+    "text": "击碎守卫"
+  },
+  "content.talent.stun.stun-insight.name": {
+    "reviewed": true,
+    "source": "Stun Insight",
+    "sourceHash": "3ad0fb03eac8fdcdb79d93d4987c47576c35f69e98d8bc75b9507eac82269481",
+    "text": "眩晕洞察"
+  },
+  "content.talent.stun.stun-insight.rule": {
+    "reviewed": true,
+    "source": "When you <keyword0>Stun</keyword0> an enemy, draw a card",
+    "sourceHash": "1cc91ed7b21e203f89b5484e27afda277303a9575078af7f92321d75bac4597b",
+    "text": "你使敌人<keyword0>眩晕</keyword0>时抽一张牌"
+  },
+  "content.talent.stun.stun-surge.name": {
+    "reviewed": true,
+    "source": "Stun Surge",
+    "sourceHash": "512b969f2f8a0baf25bdcea636207a8e377bc0635340459ebd0f0cb266b681d7",
+    "text": "眩晕激涌"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
