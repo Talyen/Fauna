@@ -365,6 +365,12 @@
     "sourceHash": "7b372d0b658788d1149ff87466890ee304ecb700160cdc8ea0e006f5c0c8cfae",
     "text": "花开蒸馏器"
   },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "0be82532a604f719ed8e55c302f7dfee9b94edee09140f7f93b706f7f124c125",
+    "text": "<keyword0>净化</keyword0><keyword1>中毒</keyword1>时恢复{{value0}}点<keyword2>法力</keyword2>"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -683,6 +689,12 @@
     "sourceHash": "e95c5498abfa50952a77ee9b860fa6396c46e43aaa9a42088f379147555d002c",
     "text": "嫁接针"
   },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "83c1c716b5a7cfed36c306587eef460885570582b92176916c7261164d9bb6f0",
+    "text": "<keyword0>治疗</keyword0>盟友时，将其<keyword1>护甲</keyword1>提升至你的一半"
+  },
   "content.boon.grain-flail.name": {
     "reviewed": true,
     "source": "Grain Flail",
@@ -803,6 +815,12 @@
     "sourceHash": "eef834c522cd436694c531a4f5cf7c8e4bff286ae2d2fe52d7dec21285caeae9",
     "text": "结纹梳"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "3b4ae1ae4eb1eb556470ea263727b1f9fa83ef1193c345d2c83bd4b4f202c18c",
+    "text": "每回合<keyword0>净化</keyword0>一个随机有害效果"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -821,6 +839,12 @@
     "sourceHash": "00bd8fd71c19bbdb85baa899928222c0d56bbcce3e861693dbf6131c2c03ec8a",
     "text": "最后的门槛"
   },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "2e66a8a5f356a7bca594172a426efe30f799054cffa8ca0ab1c86e57af8cca0c",
+    "text": "超额<keyword0>治疗</keyword0>会与濒死的盟友分享"
+  },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
     "source": "Lava Cameo",
@@ -838,6 +862,12 @@
     "source": "Lovers Knot",
     "sourceHash": "670e4692a3b4457d85ea154ad69edcb9fa264d0165f66c0c7f73dbffc3ee394e",
     "text": "爱人结"
+  },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "ce23921ca7d4ebd4d12921df8dce6308ae4a0ba7f4744eecdd8e8eb31ada0cac",
+    "text": "<keyword0>治疗</keyword0>盟友时也会<keyword1>治疗</keyword1>自己"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -880,6 +910,12 @@
     "source": "Miracle Megaphone",
     "sourceHash": "7fc328b99ed19e4857032e191544613ed026b42cafaa60817a48b0d679ea5bd6",
     "text": "奇迹扩音器"
+  },
+  "content.boon.miracle-megaphone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> affects all allies",
+    "sourceHash": "68dcd9819d30356f52c55b7efa3ec69a6156976738e67307c5b2aa497b2a3e36",
+    "text": "<keyword0>净化</keyword0>影响所有盟友"
   },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
@@ -1372,6 +1408,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "ac83e96624b6724419105335b3ab8ccc2dba227f33acc66aa1d00bbf95423b91",
     "text": "蓍草药膏盒"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "a0b6043028f83c6caffd4bb10e3636f12b7033abf4ea02d8da99cdcb5ce52cde",
+    "text": "<keyword0>治疗</keyword0>盟友时也会<keyword1>净化</keyword1>其<keyword2>流血</keyword2>"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,

@@ -365,6 +365,12 @@
     "sourceHash": "d25094ca52d207bf8dcdfaacd9fe7a9f82770d21ed14cca802529094bdb3a294",
     "text": "Цветущий перегонный куб"
   },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "8680116e717c8da975cd03e01de9134d7e72ea663f29a9deade08732e04e211b",
+    "text": "<keyword0>Очищение</keyword0> <keyword1>яда</keyword1> восстанавливает {{value0}} <keyword2>маны</keyword2>"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -683,6 +689,12 @@
     "sourceHash": "23da2665c21a46b7da2efeae3d9b22587d613d4d6cbfbfcfb6ae107abeb546fb",
     "text": "Игла для прививки"
   },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "c006d589b7277708c8536c28814f7eed9b6ffbe0e62133b2432cc869e97030bb",
+    "text": "<keyword0>Лечение</keyword0> союзника повышает его <keyword1>броню</keyword1> до половины вашей"
+  },
   "content.boon.grain-flail.name": {
     "reviewed": true,
     "source": "Grain Flail",
@@ -803,6 +815,12 @@
     "sourceHash": "b0eeb86b1129f73ff650ea5c391f9b30623c03ba811bde547ca348a67e5ff33c",
     "text": "Гребень узла"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "2f700bcee72383fbd89a965c51a4a9a06a32b6a94609ef60299b450cda414457",
+    "text": "Каждый ход <keyword0>очищайте</keyword0> случайный вредный эффект"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -821,6 +839,12 @@
     "sourceHash": "0be7680e71b2154076545cca492395466cb957b6bb4948ebfc71d71dfa390dcd",
     "text": "Последний порог"
   },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "73bb1f603936e0700c33307adbe4c951d80b00aa5d3692e94c95307838c697f0",
+    "text": "Избыточное <keyword0>лечение</keyword0> делится с союзниками на пороге смерти"
+  },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
     "source": "Lava Cameo",
@@ -838,6 +862,12 @@
     "source": "Lovers Knot",
     "sourceHash": "1a80a82573a4303401f7c2d44fca9cefc3600b6d94c19eb66229a6d72a2f5422",
     "text": "Узел влюблённых"
+  },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "e06000163c4904bede63df8b437c2576ae1790029becb0551e21e18faac4a594",
+    "text": "<keyword0>Лечение</keyword0> союзника также <keyword1>лечит</keyword1> вас"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -880,6 +910,12 @@
     "source": "Miracle Megaphone",
     "sourceHash": "ebc63365bbf5a7b53b22b56754725ee72b63a52cf38b460faef4b426a42db71c",
     "text": "Чудесный мегафон"
+  },
+  "content.boon.miracle-megaphone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> affects all allies",
+    "sourceHash": "6e5ae773646a20c4279225ff16c4025cd3a52e566e5b21a194137266dcdcf459",
+    "text": "<keyword0>Очищение</keyword0> действует на всех союзников"
   },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
@@ -1372,6 +1408,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "18feda5102939a6fb2a9a98cab101bf1e60098a7b6edf1db04b9e512724ca3d2",
     "text": "Жестянка мази тысячелистника"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "454c047b2e7cbc0844ad6f6fd6b69808356784c036c945b039c32e4d02ca6ae6",
+    "text": "<keyword0>Лечение</keyword0> союзника также <keyword1>очищает</keyword1> его <keyword2>кровотечение</keyword2>"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,

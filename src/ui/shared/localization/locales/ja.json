@@ -365,6 +365,12 @@
     "sourceHash": "e2bc78f0f3031bba2577bf27fa5a2fd782724dd16a725e43a7171965ff3c45d2",
     "text": "花咲く蒸留器"
   },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "b3e2d504bc1e10e5c3a230ce487775cbf38bc01ff00880039368607db698c60f",
+    "text": "<keyword1>毒</keyword1>を<keyword0>浄化</keyword0>すると<keyword2>マナ</keyword2>を{{value0}}回復"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -683,6 +689,12 @@
     "sourceHash": "c704a62fd275ff302ee107327ea530ae9a717978c7d14f34a2c4b6e0953ef35e",
     "text": "接ぎ木針"
   },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "a807c8d1ddff779f8be222fb1a8a497e33feabfbe4d9534c112435bae5d186ad",
+    "text": "味方を<keyword0>回復</keyword0>すると、その味方の<keyword1>装甲</keyword1>を自分の半分まで引き上げる"
+  },
   "content.boon.grain-flail.name": {
     "reviewed": true,
     "source": "Grain Flail",
@@ -803,6 +815,12 @@
     "sourceHash": "e784138615f5015d666def453fa5f7f3fd9f05fad81386385b5a889eeff34cc4",
     "text": "結び目の櫛"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "9078d6773619d01dcf9b287fa91bbec0fe87b835c6bb2483a033f344b0699283",
+    "text": "毎ターン、ランダムな有害効果を1つ<keyword0>浄化</keyword0>"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -821,6 +839,12 @@
     "sourceHash": "1b505f8448020cb828c7ad03a9f03bb0c8e981f2478f4a2d3882033d2d43e97b",
     "text": "最後の敷居"
   },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "3db89a7e6ede028a71af96b7a884118f8bcda45fd98856b3e924039096691381",
+    "text": "超過した<keyword0>回復</keyword0>は死の淵にいる味方と分け合う"
+  },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
     "source": "Lava Cameo",
@@ -838,6 +862,12 @@
     "source": "Lovers Knot",
     "sourceHash": "450430f853cba624c02dd040820169b704c79196d1bdb096b280b73025bcaa0b",
     "text": "恋人の結び目"
+  },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "a3f70efdc33ec2a05685d8e6a38a45633443c824bc4aa74e99a0e00b5ba1c5f1",
+    "text": "味方を<keyword0>回復</keyword0>すると自分も<keyword1>回復</keyword1>"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -880,6 +910,12 @@
     "source": "Miracle Megaphone",
     "sourceHash": "d6e9a2c5f1434fc1dc05a62eed4eef474868fb90dc92420c4723baadc204e779",
     "text": "奇跡のメガホン"
+  },
+  "content.boon.miracle-megaphone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> affects all allies",
+    "sourceHash": "c9dd4906cdd143a52314dc08a66a1d9610a9b4fb862ae941d5d74539fe29fe2e",
+    "text": "<keyword0>浄化</keyword0>はすべての味方に作用"
   },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
@@ -1372,6 +1408,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "32b3c43f1c374145fd5a859c9b761effe558e731ff7d768b48ac7ea05d376d40",
     "text": "ノコギリソウの軟膏缶"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "690b34a3f7d64a25350199559e38fcc4135aeea760f5952ba9bf266582960f8e",
+    "text": "味方を<keyword0>回復</keyword0>すると、その味方の<keyword2>出血</keyword2>も<keyword1>浄化</keyword1>"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,

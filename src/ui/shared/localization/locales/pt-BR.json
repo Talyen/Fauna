@@ -365,6 +365,12 @@
     "sourceHash": "60fc27a513ee5387d94115cc7b91c50b38697b430e3d9db85f2be082996e4ebe",
     "text": "Alambique florido"
   },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "13ea7e07dacc1b59361ce4c03d7454182f341f8aeaf4cf110bf42835291346f9",
+    "text": "<keyword0>Purificar</keyword0> <keyword1>Veneno</keyword1> restaura {{value0}} de <keyword2>Mana</keyword2>"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -683,6 +689,12 @@
     "sourceHash": "fe4db32da88934e415cdd53fe7257a67c904e0661c4521650dc973c98733e731",
     "text": "Agulha de enxerto"
   },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "f45643cfd8d0db01708eecc02c2758dee3b241a41d6538a06c1d5961e57cb394",
+    "text": "<keyword0>Curar</keyword0> um aliado aumenta a <keyword1>Armadura</keyword1> dele até a metade da sua"
+  },
   "content.boon.grain-flail.name": {
     "reviewed": true,
     "source": "Grain Flail",
@@ -803,6 +815,12 @@
     "sourceHash": "405675c343eb9eff6669c7ee7601a90b7cbb4f5a24d9abea781ed9b0cab69ccc",
     "text": "Pente de nó"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "adf056faf343a7f0e13785737b3c9a45085b09b42b419393ea2095073a40ac40",
+    "text": "<keyword0>Purifique</keyword0> um efeito prejudicial aleatório a cada turno"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -821,6 +839,12 @@
     "sourceHash": "7e3e1d3097266ea7a142d7b62034cf675eccca90cd7f7727b9b81a66445a721f",
     "text": "Último limiar"
   },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "021d4eee3e015575fb17c51e92a5daf65db1bcafe56f4e8f5cc488378272eeea",
+    "text": "A <keyword0>cura</keyword0> excedente é compartilhada com aliados à beira da morte"
+  },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
     "source": "Lava Cameo",
@@ -838,6 +862,12 @@
     "source": "Lovers Knot",
     "sourceHash": "d2d2dacffb4cb59c1ae071bd78796fb0f90dd32a4c0ba11bfe968d82fd15a966",
     "text": "Nó dos amantes"
+  },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "a2841fc5f4dc9a594caf1a8a590a2c1a803fff2949de525b168f817702526a78",
+    "text": "<keyword0>Curar</keyword0> um aliado também <keyword1>cura</keyword1> você"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -880,6 +910,12 @@
     "source": "Miracle Megaphone",
     "sourceHash": "ba555957a778becb1f06a105bb9eee2813d8c9b7ec834d318d5a3774c36ee5e1",
     "text": "Megafone milagroso"
+  },
+  "content.boon.miracle-megaphone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> affects all allies",
+    "sourceHash": "e4ee0f60f0230081931963ebf4a3545df5577dc4029668576bdd41508936d859",
+    "text": "<keyword0>Purificar</keyword0> afeta todos os aliados"
   },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
@@ -1372,6 +1408,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "6dacf94267e03eb1ecccede29b5197659a917baac581801a820efa42f6c84651",
     "text": "Lata de unguento de mil-folhas"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "3dbe00c46bcc903ccef1cb7789da9fa275d05807e284ad3e9c02fdb347faba3b",
+    "text": "<keyword0>Curar</keyword0> um aliado também <keyword1>purifica</keyword1> o <keyword2>Sangramento</keyword2> dele"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,

@@ -365,6 +365,12 @@
     "sourceHash": "955379f03abdb60af2bd2bc6769b6efb0839fa1f4f1c0b7546b144fed8fedff2",
     "text": "Blühende Destille"
   },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "b678c515502c6caf52dbe2cd68376c88940b9e6121fe6e0769d8d5ed42c9b619",
+    "text": "Das <keyword0>Reinigen</keyword0> von <keyword1>Gift</keyword1> stellt {{value0}} <keyword2>Mana</keyword2> wieder her"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -683,6 +689,12 @@
     "sourceHash": "d952085944df99ef55611bd5abf70cf6ae542a7cbf3b0780a70596c3ee95c5d3",
     "text": "Pfropfnadel"
   },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "69c2439853832d5e29587ce1f197a4e83cb512a589db88b56334ef292a7ed508",
+    "text": "Die <keyword0>Heilung</keyword0> eines Verbündeten erhöht dessen <keyword1>Rüstung</keyword1> auf die Hälfte deiner Rüstung"
+  },
   "content.boon.grain-flail.name": {
     "reviewed": true,
     "source": "Grain Flail",
@@ -803,6 +815,12 @@
     "sourceHash": "98bcada1edcd917c74cd606946c7e372a0e3905509e091e6f715c69b469ea957",
     "text": "Knotenkamm"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "8b2e34d3f4e1ddf2cac02f43992e42ad6383a9baf97b2c47a3f23d1978b4d4ed",
+    "text": "<keyword0>Reinige</keyword0> jeden Zug einen zufälligen schädlichen Effekt"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -821,6 +839,12 @@
     "sourceHash": "2c448e2b0fbb185b99bf6b39f74c0fd1704011afc2cdf5af6755d00c15699dc8",
     "text": "Letzte Schwelle"
   },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "c316842b0e4fb97c52a27f8b2e4419ffe72784adf3b30d14ae9cbd8bd8175739",
+    "text": "Überschüssige <keyword0>Heilung</keyword0> wird mit Verbündeten im Nahtod geteilt"
+  },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
     "source": "Lava Cameo",
@@ -838,6 +862,12 @@
     "source": "Lovers Knot",
     "sourceHash": "64b8a52da1f391055d6d00d11f14b6bc97e2478b442e4f6c30c7096446390483",
     "text": "Liebesknoten"
+  },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "1326cc4c84175d10a2d23b8fe79781669ca9c34637fe991076a8064d3f3215f1",
+    "text": "Die <keyword0>Heilung</keyword0> eines Verbündeten <keyword1>heilt</keyword1> auch dich"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -880,6 +910,12 @@
     "source": "Miracle Megaphone",
     "sourceHash": "f40dec7b7b8a4f91fc923ccf5b50052aa49f5dfa13b4a51c669b494faf5792dc",
     "text": "Wundermegafon"
+  },
+  "content.boon.miracle-megaphone.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> affects all allies",
+    "sourceHash": "ab643ecf58548ef65c94bed4cae9af7a1bdb80c55d7b7379041f4feb831edf3d",
+    "text": "<keyword0>Reinigen</keyword0> wirkt auf alle Verbündeten"
   },
   "content.boon.molten-paperweight.name": {
     "reviewed": true,
@@ -1372,6 +1408,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "9bbac1f8cbe8a71421e1c524590f54fb335c4a84f943f741cbbdd3eab931ca1d",
     "text": "Schafgarbensalben-Dose"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "112cf566d8f104560eca4f4ab6c3719f401d0c3cb4435a06c86665ba3942a33b",
+    "text": "Die <keyword0>Heilung</keyword0> eines Verbündeten <keyword1>reinigt</keyword1> auch dessen <keyword2>Blutung</keyword2>"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,

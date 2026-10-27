@@ -365,6 +365,12 @@
     "sourceHash": "740ff1ead3b62f5ecebf0ea768c44b3ac5ff158ef7760a12f770b067d1212048",
     "text": "Alambic fleuri"
   },
+  "content.boon.blooming-still.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Poison</keyword1> restores {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "3068d42e12687842217868d57b3146b42c9578d608c456c9cf58f65dda8a884e",
+    "text": "<keyword0>Purifier</keyword0> le <keyword1>Poison</keyword1> restaure {{value0}} <keyword2>Mana</keyword2>"
+  },
   "content.boon.blossom-cake-stand.name": {
     "reviewed": true,
     "source": "Blossom Cake Stand",
@@ -683,6 +689,12 @@
     "sourceHash": "63b93a062a83b90f33aebee57992acc5bcc1c738f1519f95adee7244b79b07ee",
     "text": "Aiguille à greffer"
   },
+  "content.boon.grafting-needle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally raises their <keyword1>Armor</keyword1> to half of yours",
+    "sourceHash": "700a4b69569d88fa700b5e823577cd160bb50ec096e3cbb82f1739e0486e79b2",
+    "text": "<keyword0>Soigner</keyword0> un allié augmente son <keyword1>Armure</keyword1> jusqu’à la moitié de la vôtre"
+  },
   "content.boon.grain-flail.name": {
     "reviewed": true,
     "source": "Grain Flail",
@@ -803,6 +815,12 @@
     "sourceHash": "0191fa14079187c1cc015e004ee279805889b7f972500dcfbc915b663effeb3b",
     "text": "Peigne à nœud"
   },
+  "content.boon.knot-comb.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleanse</keyword0> a random harmful effect each turn",
+    "sourceHash": "66c30d157806a6552c011266e24db91965cbde083c6dea65c68bed8e170710ed",
+    "text": "<keyword0>Purifie</keyword0> un effet néfaste aléatoire à chaque tour"
+  },
   "content.boon.last-candle.name": {
     "reviewed": true,
     "source": "Last Candle",
@@ -821,6 +839,12 @@
     "sourceHash": "942247d15490990f2dabd5f4d6e495ea6fa884ffc7b7e54e90cda5e9d72d07db",
     "text": "Dernier seuil"
   },
+  "content.boon.last-threshold.rule": {
+    "reviewed": true,
+    "source": "Overflow <keyword0>Healing</keyword0> is shared with allies at Death's Door",
+    "sourceHash": "1448ecc4fd18fae51a088a39557344ad68751b73b0e44a22bb7b5b5ffc445af9",
+    "text": "Les <keyword0>soins</keyword0> excédentaires sont partagés avec les alliés aux portes de la mort"
+  },
   "content.boon.lava-cameo.name": {
     "reviewed": true,
     "source": "Lava Cameo",
@@ -838,6 +862,12 @@
     "source": "Lovers Knot",
     "sourceHash": "aa2cd3a15b2bbc3303442b2e3c6f60ae2ab5fda0e9cce21b9f9a3065116cfc06",
     "text": "Nœud des amoureux"
+  },
+  "content.boon.lovers-knot.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>heals</keyword1> yourself",
+    "sourceHash": "b97e6aff3343ca56e907011231a75fa1e9cd94ebf4f20fa9b8c3f021f546c825",
+    "text": "<keyword0>Soigner</keyword0> un allié vous <keyword1>soigne</keyword1> aussi"
   },
   "content.boon.lucky-clover.name": {
     "reviewed": true,
@@ -1384,6 +1414,12 @@
     "source": "Yarrow Salve Tin",
     "sourceHash": "565668d46f493670bc6810b2dacd12547d824766db391f75d2104305212738b2",
     "text": "Boîte d’onguent d’achillée"
+  },
+  "content.boon.yarrow-salve-tin.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> an ally also <keyword1>Cleanses</keyword1> their <keyword2>Bleed</keyword2>",
+    "sourceHash": "6aff4b7c2798037e3548d1c94843cf2b33f38a789b3c991199a82aa27d0c8861",
+    "text": "<keyword0>Soigner</keyword0> un allié <keyword1>purifie</keyword1> aussi son <keyword2>Saignement</keyword2>"
   },
   "content.card.aerostat-parcel-drop.name": {
     "reviewed": true,
