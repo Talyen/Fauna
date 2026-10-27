@@ -3263,6 +3263,12 @@
     "sourceHash": "cee2d920160cd81ca56c1f520eb160c0e8614cd3169bb2af9881753f0c0f4e89",
     "text": "Bittere Kälte"
   },
+  "content.talent.freeze.bitter-cold.rule": {
+    "reviewed": true,
+    "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "sourceHash": "51d91f4038c350ffd7288aacba90ef65a11f18b64bd4802e331ce25315ca1aae",
+    "text": "Senke die <keyword0>Einfrieren</keyword0>-Schwellen von Gegnern um {{value0}} Prozentpunkte"
+  },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
     "source": "Brittle Armor",
@@ -3316,6 +3322,12 @@
     "source": "Glacial Barrier",
     "sourceHash": "300f4dd8e70ce0f9454e9dfc188f507a92575863a7262ca8c7aada21a16efbbb",
     "text": "Frostbarriere"
+  },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "sourceHash": "c0bb80389576af031e52fb4b6474add5043a51932ad07285b86bcfd4e5d9fbee",
+    "text": "Erhalte {{value0}} <keyword0>Block</keyword0>, wenn du einen Gegner <keyword1>einfrierst</keyword1>"
   },
   "content.talent.freeze.icebound.name": {
     "reviewed": true,
@@ -4109,6 +4121,12 @@
     "sourceHash": "5e1d0ff91ff5f7e954841191226a91f47ac82fda2787ba60f672426fec320489",
     "text": "Gedeckter Konter"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "sourceHash": "ddd0cd478dc4f6d9245ce73426c320620ddbb42eb04a51036ce952ae2437c4c9",
+    "text": "Einen Gegner zu <keyword0>betäuben</keyword0> gewährt {{value0}} <keyword1>Block</keyword1>, falls du keinen hast"
+  },
   "content.talent.stun.jarring-blow.name": {
     "reviewed": true,
     "source": "Jarring Blow",
@@ -4127,6 +4145,12 @@
     "sourceHash": "87b79e28529a08444af257129258d84f662ce450f90cd3099634040fdca28999",
     "text": "Deckung zerschlagen"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "sourceHash": "b9b3692a91e3828d3917aa7712af9adc3a8dd8820310590c9e8482e63322ce61",
+    "text": "Einen Gegner zu <keyword0>betäuben</keyword0> entfernt seine gesamte <keyword1>Rüstung</keyword1>"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -4144,6 +4168,12 @@
     "source": "Stun Surge",
     "sourceHash": "771f66a459835c3df0d51de6a20cd93a182b65b378abcfaf650c2b191c2e2f67",
     "text": "Betäubungswoge"
+  },
+  "content.talent.stun.stun-surge.rule": {
+    "reviewed": true,
+    "source": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "dd40fcc66f152e883f6e18521a299f109f9ab2555ba05812f310c52b95ff9e2f",
+    "text": "Wenn du kein <keyword0>Mana</keyword0> hast, gewährt das <keyword1>Betäuben</keyword1> eines Gegners {{value0}} <keyword2>Mana</keyword2>"
   },
   "content.talent.water.cleansing-current.name": {
     "reviewed": true,

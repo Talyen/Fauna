@@ -3311,6 +3311,12 @@
     "sourceHash": "ce74129984768b2acd21b013bfa4e5d7a7283db2af3edc32f6d33d8c7e001e22",
     "text": "Froid mordant"
   },
+  "content.talent.freeze.bitter-cold.rule": {
+    "reviewed": true,
+    "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "sourceHash": "f5c0892d11d0a14a48ebf396e2165ea81ed59ef4518f474d129caa9f4b8dbc92",
+    "text": "Réduit les seuils de <keyword0>Gel</keyword0> ennemis de {{value0}} points de pourcentage"
+  },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
     "source": "Brittle Armor",
@@ -3364,6 +3370,12 @@
     "source": "Glacial Barrier",
     "sourceHash": "9adb79410f5bbbded8d2e5a7d96db7a22c406a3700daa858587e4dc2b2cdb1a1",
     "text": "Barrière glaciale"
+  },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "sourceHash": "16b729248b6979c32cceda6415e59a581dace396413227207f6745922b3366ea",
+    "text": "Gagnez {{value0}} <keyword0>Blocage</keyword0> lorsque vous <keyword1>gelez</keyword1> un ennemi"
   },
   "content.talent.freeze.icebound.name": {
     "reviewed": true,
@@ -4157,6 +4169,12 @@
     "sourceHash": "586a087659b038a12e6e802c603188b40c19e6ec39619474d8590fbf25480d0d",
     "text": "Contre protégé"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "sourceHash": "8ec30a98604ec96b88ff1def810e99d385f7cd1df0ff2eff7f169fd6ab59dbbc",
+    "text": "<keyword0>Étourdir</keyword0> un ennemi confère {{value0}} <keyword1>Blocage</keyword1> si vous n’en avez pas"
+  },
   "content.talent.stun.jarring-blow.name": {
     "reviewed": true,
     "source": "Jarring Blow",
@@ -4175,6 +4193,12 @@
     "sourceHash": "f7b49ffa961a97280edb1e30692ae92d261efa93c2e9a493ff95037b72c74928",
     "text": "Briser la garde"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "sourceHash": "7980a2300cbfd54968bcccbe9cfa037477b019af121e61cafb81c9b56ade5b76",
+    "text": "<keyword0>Étourdir</keyword0> un ennemi retire toute son <keyword1>Armure</keyword1>"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -4192,6 +4216,12 @@
     "source": "Stun Surge",
     "sourceHash": "238b5f18302030a1508b772dc3df84072e7e37bb6af916e86fd9611e065cb739",
     "text": "Déferlement d'Étourdissement"
+  },
+  "content.talent.stun.stun-surge.rule": {
+    "reviewed": true,
+    "source": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "2633b570925cec4dd666e44db71a115f39efab4c323136ee4fd8694fc157b2fc",
+    "text": "Si vous n’avez pas de <keyword0>Mana</keyword0>, <keyword1>étourdir</keyword1> un ennemi confère {{value0}} <keyword2>Mana</keyword2>"
   },
   "content.talent.water.cleansing-current.name": {
     "reviewed": true,

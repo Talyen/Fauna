@@ -3263,6 +3263,12 @@
     "sourceHash": "dd94fa6f99b6e4d06b377c561be5fe4eb1592e6138ce8396839138bf416b1980",
     "text": "Лютый холод"
   },
+  "content.talent.freeze.bitter-cold.rule": {
+    "reviewed": true,
+    "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "sourceHash": "d92d1fe08aed98033c89e795a0202161531fa930b664e8bccd568e69e96aefe3",
+    "text": "Уменьшите пороги <keyword0>заморозки</keyword0> врагов на {{value0}} процентных пунктов"
+  },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
     "source": "Brittle Armor",
@@ -3316,6 +3322,12 @@
     "source": "Glacial Barrier",
     "sourceHash": "b47e4ca347ed8b5d47919a180d78d20146068f7b438cc9667dfd01e524d48173",
     "text": "Ледниковый барьер"
+  },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "sourceHash": "4d8a046a2638b99978231476dac1e003c9559187185b525f3b6f4808eb4929dd",
+    "text": "Получите {{value0}} <keyword0>блока</keyword0>, когда <keyword1>замораживаете</keyword1> врага"
   },
   "content.talent.freeze.icebound.name": {
     "reviewed": true,
@@ -4109,6 +4121,12 @@
     "sourceHash": "03623061329607551b641e89b2c31f7b88e7858fc5d0b2adbf7ff956557fe587",
     "text": "Защищённый контрудар"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "sourceHash": "8980ef97648ddccad714d8aa3edf921b94822d8cb0de6173fc24204c18471afa",
+    "text": "<keyword0>Оглушение</keyword0> врага даёт {{value0}} <keyword1>блока</keyword1>, если его нет"
+  },
   "content.talent.stun.jarring-blow.name": {
     "reviewed": true,
     "source": "Jarring Blow",
@@ -4127,6 +4145,12 @@
     "sourceHash": "e396a9a43bdb49cf0a7e22c711114e2bf7939e98eb34f9f45da7b8b1dfbe02c3",
     "text": "Разбить защиту"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "sourceHash": "a75fed3bb89ccf592db92898259889dcfc4ded7c63a6cfa3f653e893f9481a17",
+    "text": "<keyword0>Оглушение</keyword0> врага снимает всю его <keyword1>броню</keyword1>"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -4144,6 +4168,12 @@
     "source": "Stun Surge",
     "sourceHash": "b8e31da8807df6f7057f44117ac1322dd897831d14eea0238962a1b6716e5e1a",
     "text": "Всплеск: Оглушение"
+  },
+  "content.talent.stun.stun-surge.rule": {
+    "reviewed": true,
+    "source": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "5bcc0ebee440fd31adaa1ab8e101f3310341c252e80aa6c6982394f2cf3ff415",
+    "text": "Если у вас нет <keyword0>маны</keyword0>, <keyword1>оглушение</keyword1> врага даёт {{value0}} <keyword2>маны</keyword2>"
   },
   "content.talent.water.cleansing-current.name": {
     "reviewed": true,

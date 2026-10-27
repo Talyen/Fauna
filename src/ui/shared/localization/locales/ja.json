@@ -3263,6 +3263,12 @@
     "sourceHash": "a729d9035d9aa488a9973d6220a789c14cf14ce7dee8eeff3f386499d40d5f42",
     "text": "厳寒"
   },
+  "content.talent.freeze.bitter-cold.rule": {
+    "reviewed": true,
+    "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "sourceHash": "445094eb13788f0c4de0d564a83e3879fd1dca4cf79b9f6484d7350c988ba638",
+    "text": "敵の<keyword0>凍結</keyword0>のしきい値を{{value0}}パーセントポイント減少"
+  },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
     "source": "Brittle Armor",
@@ -3316,6 +3322,12 @@
     "source": "Glacial Barrier",
     "sourceHash": "332b29db0bce8fc03ce23e54b540ba6da79f5c9127d75320dbcc0c906b0c5d7b",
     "text": "氷河の障壁"
+  },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "sourceHash": "e57465ffc21c61df3032e591c794db46f0daaf4445ce7a477f9a0fb4fba9b862",
+    "text": "敵を<keyword1>凍結</keyword1>させると<keyword0>ブロック</keyword0>を{{value0}}獲得"
   },
   "content.talent.freeze.icebound.name": {
     "reviewed": true,
@@ -4109,6 +4121,12 @@
     "sourceHash": "4834f765512b53aaacc55f4a8955e0db71338f4b81f78b23e202d1d751605cce",
     "text": "守りの反撃"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "sourceHash": "3538423074c552bf006aa20e45936de5b18b7f442f113760fba185cdd3eee52c",
+    "text": "敵を<keyword0>スタン</keyword0>させた時、<keyword1>ブロック</keyword1>がなければ{{value0}}獲得"
+  },
   "content.talent.stun.jarring-blow.name": {
     "reviewed": true,
     "source": "Jarring Blow",
@@ -4127,6 +4145,12 @@
     "sourceHash": "5851d524ee4497073c2a13550592b56aef271bd3ff0adc41471a5404e2439b77",
     "text": "守りの粉砕"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "sourceHash": "2c46d0fd587edb34290565bb93eb5fbba3e6e79a2f705b3b75a90690fc225adf",
+    "text": "敵を<keyword0>スタン</keyword0>させると、その敵の<keyword1>アーマー</keyword1>をすべて除去"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -4144,6 +4168,12 @@
     "source": "Stun Surge",
     "sourceHash": "d212990cd33314dd9d12c69149566f35e42b39850570f4732e7dbe17f81764d9",
     "text": "スタンの奔流"
+  },
+  "content.talent.stun.stun-surge.rule": {
+    "reviewed": true,
+    "source": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "f39b6204721174158c5358161b7496736bbcbd23e058b04a00093a840ab03625",
+    "text": "<keyword0>マナ</keyword0>がない時、敵を<keyword1>スタン</keyword1>させると<keyword2>マナ</keyword2>を{{value0}}獲得"
   },
   "content.talent.water.cleansing-current.name": {
     "reviewed": true,

@@ -3263,6 +3263,12 @@
     "sourceHash": "ed4d67c8a3800b2e37f2f93a24b2c433846ca7342eecf8744189aa4fdb41e6b9",
     "text": "Frio cortante"
   },
+  "content.talent.freeze.bitter-cold.rule": {
+    "reviewed": true,
+    "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "sourceHash": "839ba02ced23d22135ed0ed1e6c1b0f7475175ffcd85415c1a870f4512d20401",
+    "text": "Reduz os limites de <keyword0>Congelamento</keyword0> dos inimigos em {{value0}} pontos percentuais"
+  },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
     "source": "Brittle Armor",
@@ -3316,6 +3322,12 @@
     "source": "Glacial Barrier",
     "sourceHash": "d2c8e693ee9afcedeca5a425baa1f44f1990656c5d074cfcda751caaeb5071cd",
     "text": "Barreira glacial"
+  },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "sourceHash": "2a942f38fe9b4448ef92b18c9958b6d7aa63b382e20c3d3acf5cbdd0cbf02b2e",
+    "text": "Receba {{value0}} de <keyword0>Bloqueio</keyword0> ao <keyword1>congelar</keyword1> um inimigo"
   },
   "content.talent.freeze.icebound.name": {
     "reviewed": true,
@@ -4109,6 +4121,12 @@
     "sourceHash": "a2158208f07142f1d627eae95e50c6a6d18eed52a497be11466bcfc08d3873b6",
     "text": "Contra-ataque protegido"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "sourceHash": "2c0504f1b5a47ed696abe27841f51686bbbb36bea1760311219fb7ba93644a46",
+    "text": "<keyword0>Atordoar</keyword0> um inimigo concede {{value0}} de <keyword1>Bloqueio</keyword1> se você não tiver nenhum"
+  },
   "content.talent.stun.jarring-blow.name": {
     "reviewed": true,
     "source": "Jarring Blow",
@@ -4127,6 +4145,12 @@
     "sourceHash": "82d2db9dfdfb9ef0f408cfd9e9c203cdd37cadb563a3361d96d2e02e76223dd7",
     "text": "Quebrar a guarda"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "sourceHash": "803631ae3a33df68f1978af08972f7d9145143f9fd67cd9d280f2fae31600ede",
+    "text": "<keyword0>Atordoar</keyword0> um inimigo remove toda a <keyword1>Armadura</keyword1> dele"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -4144,6 +4168,12 @@
     "source": "Stun Surge",
     "sourceHash": "36a930997b2ac6eaf6bddd03bb4ce1aa9debc765641eb07f47d777c4dc85a559",
     "text": "Surto de Atordoamento"
+  },
+  "content.talent.stun.stun-surge.rule": {
+    "reviewed": true,
+    "source": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "d27d2c99234ac18768e023d0fbc84c9c86782ca1c6315c44431e0543b95029f7",
+    "text": "Se você não tiver <keyword0>Mana</keyword0>, <keyword1>atordoar</keyword1> um inimigo concede {{value0}} de <keyword2>Mana</keyword2>"
   },
   "content.talent.water.cleansing-current.name": {
     "reviewed": true,

@@ -3263,6 +3263,12 @@
     "sourceHash": "b22d84388592adeed4787611e0d2c7c0d3944f9a4eacd3ac02e1c41ac4a75ad9",
     "text": "刺骨寒冷"
   },
+  "content.talent.freeze.bitter-cold.rule": {
+    "reviewed": true,
+    "source": "Reduce enemy <keyword0>Freeze</keyword0> thresholds by {{value0}} percentage points",
+    "sourceHash": "a22c829f6d1aa35e5af6f26141197e5ca1d2bac751ff5773e3ec2e48ab7713ed",
+    "text": "使敌人的<keyword0>冻结</keyword0>阈值降低{{value0}}个百分点"
+  },
   "content.talent.freeze.brittle-armor.name": {
     "reviewed": true,
     "source": "Brittle Armor",
@@ -3316,6 +3322,12 @@
     "source": "Glacial Barrier",
     "sourceHash": "3013e2ac4d48958cfc5e4850bdfc21228fe6ea20b5d4fc7867381c2220240eed",
     "text": "冰川屏障"
+  },
+  "content.talent.freeze.glacial-barrier.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>Block</keyword0> when you <keyword1>Freeze</keyword1> an enemy",
+    "sourceHash": "e0b04ff90dc6a01c95c2414be4c11f3ff9b5ae606f1171d3e040298468773d64",
+    "text": "<keyword1>冻结</keyword1>敌人时获得{{value0}}点<keyword0>格挡</keyword0>"
   },
   "content.talent.freeze.icebound.name": {
     "reviewed": true,
@@ -4109,6 +4121,12 @@
     "sourceHash": "bdc9b1574beb548666ed21e403a501093e5b4568fb62c7b3dd55f6acdefda440",
     "text": "防守反击"
   },
+  "content.talent.stun.guarded-counter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy grants {{value0}} <keyword1>Block</keyword1> if you have none",
+    "sourceHash": "5543ce582338f4c40976961b9cdecee6642d5075d961187803a101d39d28190b",
+    "text": "<keyword0>眩晕</keyword0>敌人时，若没有<keyword1>格挡</keyword1>，获得{{value0}}点"
+  },
   "content.talent.stun.jarring-blow.name": {
     "reviewed": true,
     "source": "Jarring Blow",
@@ -4127,6 +4145,12 @@
     "sourceHash": "31d1abbc3bbb5c33343ecae90afeed10528b5006d2f32c0c0ece852460e61c82",
     "text": "击碎守卫"
   },
+  "content.talent.stun.shatter-guard.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stunning</keyword0> an enemy removes all its <keyword1>Armor</keyword1>",
+    "sourceHash": "c1ab80f2b09089b0032c9a20c2211c09f69fa9d7b5f43453c9c4e8de8954eb7d",
+    "text": "<keyword0>眩晕</keyword0>敌人时移除其全部<keyword1>护甲</keyword1>"
+  },
   "content.talent.stun.stun-insight.name": {
     "reviewed": true,
     "source": "Stun Insight",
@@ -4144,6 +4168,12 @@
     "source": "Stun Surge",
     "sourceHash": "512b969f2f8a0baf25bdcea636207a8e377bc0635340459ebd0f0cb266b681d7",
     "text": "眩晕激涌"
+  },
+  "content.talent.stun.stun-surge.rule": {
+    "reviewed": true,
+    "source": "If you have no <keyword0>Mana</keyword0>, <keyword1>Stunning</keyword1> an enemy grants {{value0}} <keyword2>Mana</keyword2>",
+    "sourceHash": "34eb5e5f2faa67305611c680d310faf5c667d80627b8d6e2aba77084b121b18b",
+    "text": "没有<keyword0>法力</keyword0>时，<keyword1>眩晕</keyword1>敌人可获得{{value0}}点<keyword2>法力</keyword2>"
   },
   "content.talent.water.cleansing-current.name": {
     "reviewed": true,
