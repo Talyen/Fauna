@@ -965,6 +965,114 @@
     "sourceHash": "957fbcc50b724b1f31678d4dbba79f2f64b75e576cc9c9d1f25a5db5784c3d25",
     "text": "<keyword0>Armadura</keyword0> mitiga el daño de <keyword1>Sangrado</keyword1> recibido"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "717fc9dffef7830486592124b43f76250cad114f939e341953ade7ea2c977304",
+    "text": "Sangrado mortal"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "e15406257d90000e0dbb5ca9fc444f5e8aac373ab95ae6c5d5612fd037cb3e83",
+    "text": "Inflige un {{value0}}% más de daño de <keyword0>Sangrado</keyword0> mientras tienes menos de la mitad de <keyword1>Salud</keyword1>"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "ec32ec93890c03ad27eca75ab0035af7210bc4eb695112de55bbe629bd100c50",
+    "text": "Ímpetu sangriento"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "8df3bc853f140650ef4afa2a9e687f8cd3e863425ac034738c4017469c9ecdff",
+    "text": "Infligir daño de <keyword0>Sangrado</keyword0> tiene un {{value0}}% de probabilidad de robar una carta"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "621e9720cda8e9bcb284e7df525f98b8d39393e13b1cd285d80c6c257d6820a4",
+    "text": "Primera sangre"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "38634049373d52c3c09558e3cb3e90f74d3e19d6bdbf9d3426e434bbfcef3340",
+    "text": "Desollar"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "6de80501af21213cfb50e2710c851a88cc8b5fd18ecf049aab5bde0034e17d4c",
+    "text": "Los impactos de <keyword0>Sangrado</keyword0> tienen un {{value0}}% de probabilidad de reducir a la mitad la <keyword1>Armadura</keyword1> del enemigo"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "80595c89013ee54c05345b8818ba204ee7b14d8a01d895ed57ef455c98e2e656",
+    "text": "Herida mortal"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "9e07dc11fa5b4c3475d4f9885eccaccab82b5803c3f96795e5717b77fb3ef390",
+    "text": "Corte de despedida"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "3f0df3dc104950d0b4b713be49ea117f6220d2460c331196ff21553976cf6d39",
+    "text": "Tras <keyword0>esquivar</keyword0>, tu siguiente impacto de <keyword1>Físico</keyword1> añade la mitad de su daño como daño de <keyword2>Sangrado</keyword2>"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "9500cbf1eb79e1f5380fb4297d6c1032a33ca5a1cf34efb3e543a397880aa085",
+    "text": "Sanguíneo"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "6e58e8c6ac07f7f416d54338362c4ae670df35cbb7863942d0331cf4ddd30b80",
+    "text": "Los impactos de <keyword0>Sangrado</keyword0> tienen un {{value0}}% de probabilidad de activar <keyword1>Drenaje</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "d9a465be97b888572ac7fd7b7e396799e2e2639360decc7b23180fc0dbdea02a",
+    "text": "Choque séptico"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "c241a85ca5cc50ec3982374c90922932f81cf4e14ced75902474a5ad9bd797dd",
+    "text": "Los enemigos con <keyword0>Sangrado</keyword0> reciben un {{value0}}% más de daño de <keyword1>Veneno</keyword1>"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "0948eef122a8f1f13f8b99a8ef6a08d5597fa5563381d6e0bdd1e8979c69115d",
+    "text": "Herida contaminada"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "c0c40d5d9b5de60e9ba921d274f5ef7936a80aa22a41b29ffee984b160aa3e35",
+    "text": "Los impactos de <keyword0>Sangrado</keyword0> tienen un {{value0}}% de probabilidad de infligir la mitad de su daño como daño de <keyword1>Veneno</keyword1>"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "10b02c191b73467bae41b63043461cb1c180e4d943d53e7db8ede794fbe596c0",
+    "text": "Cuidado de heridas"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "71306e9312baa708533239a34765cea406278c956f051bad8bb43ac6ba245064",
+    "text": "Recibes la mitad de daño de <keyword0>Sangrado</keyword0>"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

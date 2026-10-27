@@ -1013,6 +1013,114 @@
     "sourceHash": "bec9f7f225465023861f68f5ef9365bce55fe9c95cf9c336934f9e965a526370",
     "text": "L'<keyword0>Armure</keyword0> atténue les dégâts de <keyword1>Saignement</keyword1> subis"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "b07df8600a31441bbc17f9a10c134f9dbfcf457e1571a600002567a00f2382af",
+    "text": "Hémorragie"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "92a74e0a275ef9e840452ae4fe0ff955a97c9b389a784dace7d884436138e07a",
+    "text": "Infligez {{value0}}% de dégâts de <keyword0>Saignement</keyword0> supplémentaires sous la moitié de votre <keyword1>Santé</keyword1>"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "888c3ba57994f1c6c9ff2b4cde684ee9688ac7cd29b3ccf59c9da24a111baf7c",
+    "text": "Ruée sanglante"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "3744cd06fd0e40ca35b0d8c5d38a9f40352f12708ae61e8c95ad8710cde116f6",
+    "text": "Infliger des dégâts de <keyword0>Saignement</keyword0> a {{value0}}% de chances de faire piocher une carte"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "a569ed2551d747a4cefb7c075eef7605a9042601f32ef24f2cfd4b84b5b94794",
+    "text": "Premier sang"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "160ad8565c7cdaa1db2f239c78e15b0d56d9016f127c88f7bcc358a1e4bdfffc",
+    "text": "Écorchement"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "1be60b7e5c576bd2d3af771de1daef20657f42b81156cf21e4431d4ed9fa1ad6",
+    "text": "Les frappes de <keyword0>Saignement</keyword0> ont {{value0}}% de chances de réduire de moitié l'<keyword1>Armure</keyword1> ennemie"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "571a5f6c20978d85421782ee0060dc973ea5c8fb815c5b52d2acd5980dfc1c64",
+    "text": "Blessure mortelle"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "d4b67a02ba7c7e66b202fc524940de5dece86f6c4aab450123ea46c73e7dcc87",
+    "text": "Entaille d'adieu"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "29eef67e0623d419f77dea71048fa76663c8e1ba7aa3ce4399e8ed7fd6c108a1",
+    "text": "Après une <keyword0>Esquive</keyword0>, votre prochaine frappe <keyword1>Physique</keyword1> inflige la moitié de ses dégâts en dégâts de <keyword2>Saignement</keyword2> supplémentaires"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "d8d7e05ef4a897b584f66f422c0eba263c4e4b34835a892453f7ce251f337de2",
+    "text": "Sanguin"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "b023ec6be880ba091cb655f49ccdbdeae26f3523d098a360d304314d2f91010f",
+    "text": "Les frappes de <keyword0>Saignement</keyword0> ont {{value0}}% de chances d'activer <keyword1>Vol de vie</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "25caaf9acb69fb21c4febf34ddc55909f842ae27f89f5145cfb80959dfad9ad3",
+    "text": "Choc septique"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "02ee97c1ff9dc9d04f00a67d4a62fbce1bd6c7d6cf89ef6e195b92c9235af90a",
+    "text": "Les ennemis qui <keyword0>Saignent</keyword0> subissent {{value0}}% de dégâts de <keyword1>Poison</keyword1> supplémentaires"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "a1c50da6068b52f6ab519c00565eb73762b8a15170ec6befb721f591eeb036a5",
+    "text": "Blessure souillée"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "ec07a73859a6fcf34364c36c6cb333999ceb2ce50c2558526031c0476894d91b",
+    "text": "Les frappes de <keyword0>Saignement</keyword0> ont {{value0}}% de chances d'infliger la moitié de leurs dégâts en dégâts de <keyword1>Poison</keyword1>"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "560878c58b49f9ccfe083c6ecc6fe8b90032f8736a9d2d80e1b86bfaa96c4dd3",
+    "text": "Soin des plaies"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "f6529715740d23135b5b886993ab5cbd0735944750d5eaf3798074bd37e58db4",
+    "text": "Subissez la moitié des dégâts de <keyword0>Saignement</keyword0>"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

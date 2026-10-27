@@ -965,6 +965,114 @@
     "sourceHash": "f2ecafb97c01b0ed271f9c51e025f17a334c2b849e5b3edcf465829bb466373c",
     "text": "<keyword0>Rüstung</keyword0> mindert erlittenen Schaden vom Typ <keyword1>Blutung</keyword1>"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "13b1a01a2706c2352a2ecb6d153709e7509c8a8e085f146e1a93169e9b97d762",
+    "text": "Verbluten"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "9911c8ff19f62854cba96470f75e5d7ad7cbfebd30e4cf39ee32fee96b9d57e9",
+    "text": "Verursache {{value0}}% mehr Schaden vom Typ <keyword0>Blutung</keyword0>, solange du weniger als die Hälfte deiner <keyword1>Gesundheit</keyword1> hast"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "d03def53a713413d0eef0c1cea16210ec1d670e279e3114e7f7f15e676de2247",
+    "text": "Blutdrang"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "47b993805f0d518db19a199c21dce427d0882d981095e0e72d0a9abcc6a82875",
+    "text": "Schaden vom Typ <keyword0>Blutung</keyword0> hat eine Chance von {{value0}}%, eine Karte zu ziehen"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "588e2bb0acacc8f103f0e03c591447fef8ccc8fa2f4cf09c6b4710a07a95ce52",
+    "text": "Erstes Blut"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "f1745314b52b5b8952aefecfe7c0fdbe761c3cc4fe41462fe64ef7272f41b1f2",
+    "text": "Häuten"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "dc8884375fc7bf16f5d3ef49db8426cfb73ae9d939704b42120b36131506e493",
+    "text": "<keyword0>Blutung</keyword0>-Treffer haben eine Chance von {{value0}}%, die gegnerische <keyword1>Rüstung</keyword1> zu halbieren"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "e1d98c025b3f009dde7013e3d5bd7d6c289bfff1a0c7ecf99d40889df47b0a9a",
+    "text": "Tödliche Wunde"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "7eaa16e45f96b792d5d309c693298746be6493dec62a1fc2ea13d72335bfcfcd",
+    "text": "Abschiedsschnitt"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "c0c6a718f963c3cf7448d35395b67d85b2830af77193e0204680514558940998",
+    "text": "Nach dem <keyword0>Ausweichen</keyword0> verursacht dein nächster <keyword1>Physisch</keyword1>-Treffer zusätzlich die Hälfte seines Schadens als Schaden vom Typ <keyword2>Blutung</keyword2>"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "c220e84dcf2c89b8811e1373b58a28a11545c1248857fde2ccbdfda6704c6444",
+    "text": "Blutrot"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "04fd184c6a3cfaac9fd50c473d1a46264ad3e4a846e8fafb9b054d430493a288",
+    "text": "<keyword0>Blutung</keyword0>-Treffer haben eine Chance von {{value0}}% auf <keyword1>Lebensraub</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "cd0b374b7ddac6b440c40cc2c5272608ce42796671a3b3d923144cbee2b8971a",
+    "text": "Septischer Schock"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "ba707dee4b103075f43dac485b0204dfaec66d78d0603c79deeb8db7e55103c2",
+    "text": "<keyword0>Blutende</keyword0> Gegner erleiden {{value0}}% mehr Schaden vom Typ <keyword1>Gift</keyword1>"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "d398337cb3f68cbab4faa2091dd9ac4c67194333878acc2aaffabdadebece289",
+    "text": "Verseuchte Wunde"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "3dc71574f0381ceaec61519b0f13ead5a07feff92f904b801719efd6be4bff51",
+    "text": "<keyword0>Blutung</keyword0>-Treffer haben eine Chance von {{value0}}%, die Hälfte ihres Schadens als Schaden vom Typ <keyword1>Gift</keyword1> zu verursachen"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "6d5a47d94632db462c0fdf89cdd0a630a45766a7c3fcba444f77e2093f306a2a",
+    "text": "Wundversorgung"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "4ec7c611304b37ffbb2ef2427b33f27ff1bc710d909116af9a50a53bbb7b5bb7",
+    "text": "Erleide halbierten Schaden vom Typ <keyword0>Blutung</keyword0>"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

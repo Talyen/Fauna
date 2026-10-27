@@ -965,6 +965,114 @@
     "sourceHash": "7507725d72098a54010ba8221b854a45667ab398ff93d9db04334bb4f26902df",
     "text": "<keyword0>Armadura</keyword0> reduz o dano de <keyword1>Sangramento</keyword1> recebido"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "2d34ce3141a7b27586059b486465b659524c97558854411e248f71625e954daf",
+    "text": "Sangramento fatal"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "22386bd4a4f2de82aa44f4ed87cacc945c25e804db9c1694b9acede47b0f1b2b",
+    "text": "Cause {{value0}}% mais dano de <keyword0>Sangramento</keyword0> enquanto estiver com menos da metade de <keyword1>Saúde</keyword1>"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "19e86eb96d8d7e54ccead9b31961bcb456cdf5c03dc03b4aeb8322e4f191c27e",
+    "text": "Ímpeto sangrento"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "fa0723297e3a3c5b5374087d4c64aaf23090305b71acecab755437edc004feff",
+    "text": "Causar dano de <keyword0>Sangramento</keyword0> tem {{value0}}% de chance de comprar uma carta"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "274c88e284c160b97a5254fca0276009ee1468fb0ca81b498df87e7317851fb4",
+    "text": "Primeiro sangue"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "7db8d5927dd523f3be48c7f3259c0be5ff12643e6954c2d6595cc3bbe18dab25",
+    "text": "Esfolar"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "38176c1539a52896535cf19e066edfa73d3b591943ca14dc57da94a1b7c9fc59",
+    "text": "Acertos de <keyword0>Sangramento</keyword0> têm {{value0}}% de chance de reduzir pela metade a <keyword1>Armadura</keyword1> do inimigo"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "8dcaccd721e5c1b31540232f7fb37c4ad0c913cfd4cb56e6cdcf44d219299213",
+    "text": "Ferida mortal"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "7cd61bf8268a2530ebf5940d5ed8d7b11e83e9f2f0d79c4dcd841cd1dc03040a",
+    "text": "Corte de despedida"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "8f1826cfd0f6480fab1a03c12a8bbdc633ec60c0db06821c8fd3b1c67a9aa51b",
+    "text": "Após <keyword0>esquivar</keyword0>, seu próximo acerto de <keyword1>Físico</keyword1> adiciona metade do próprio dano como dano de <keyword2>Sangramento</keyword2>"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "640e6a81620c53b7b3182816f54dcc652243cb53c53439f541af7114dce3bf97",
+    "text": "Sanguíneo"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "963aa8bc74ae43c9ef5ac2b2ec241e51b1e58cdfe45e8863eed44613a81e1eff",
+    "text": "Acertos de <keyword0>Sangramento</keyword0> têm {{value0}}% de chance de ativar <keyword1>Drenagem</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "fd13cd18573bd89bbf8be05e7d0534f6e0bee4a4593dd260c8d4597441428299",
+    "text": "Choque séptico"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "01e0a72144390e4b1425d4ca909560eef1fd7cdcc8edafd801a0ef10b228a800",
+    "text": "Inimigos com <keyword0>Sangramento</keyword0> recebem {{value0}}% mais dano de <keyword1>Veneno</keyword1>"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "9bd766d96baa606aaaefa683d8061aedc92f515274fa7df03155d978d6dc5054",
+    "text": "Ferida contaminada"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "5db0400951f3609ed0e05bf6dd0e9a71b420e612107e57495dc14e3ecfeba25b",
+    "text": "Acertos de <keyword0>Sangramento</keyword0> têm {{value0}}% de chance de causar metade do próprio dano como dano de <keyword1>Veneno</keyword1>"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "eb5d42b8683116b3894e2df43a1cff284ff5f8b55d968d1fef17cdc872b31d3d",
+    "text": "Cuidado de feridas"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "bc267f1e0d1b2a0cfd29ecfc119ba5850422db7eb30c30898e3aa68e7b7ed50e",
+    "text": "Recebe metade do dano de <keyword0>Sangramento</keyword0>"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

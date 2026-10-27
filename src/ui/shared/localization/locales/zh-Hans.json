@@ -965,6 +965,114 @@
     "sourceHash": "bcf3be6e82b79e9386834f7fedf40950bdf5f883daaa3a41d03402d3bf7b221b",
     "text": "<keyword0>护甲</keyword0>减少受到的<keyword1>流血</keyword1>伤害"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "68757afec133c71f9262a4946057a5dbf4d156f14ba0ac51db8020fdd57ad3d0",
+    "text": "流血不止"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "82364918638263c16b5f30dca150785b773aa10851e35b28b98f0b0a94759c54",
+    "text": "你的<keyword1>生命</keyword1>低于一半时，<keyword0>流血</keyword0>伤害增加{{value0}}%"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "1fa22198057fc1a757487de1670c0b50f28405340f9a525b907451c7fcc5ab72",
+    "text": "热血奔涌"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "1bb09f7d8dc2e3f09a7901b9dbf63c585b289aab81dd44eebf00b3d3283b5035",
+    "text": "造成<keyword0>流血</keyword0>伤害时有{{value0}}%几率抽一张牌"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "76afe680821057daba7aa562c372ce1c9fc66cb5511780df86ac746cefa02642",
+    "text": "初血"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "759c28d57481941a27159f4e903312d2041acfa259c15d8857340b924b69f8ce",
+    "text": "剥皮"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "6e7de2241e6e7e3808f88c599d71ed4b56b00ff59e608e35039fdf51772ddcd6",
+    "text": "<keyword0>流血</keyword0>命中有{{value0}}%几率将敌人的<keyword1>护甲</keyword1>减半"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "967e1657c64fece14debb87f1c2e1c5b8acf45931ea33754b7ce1deb10893f32",
+    "text": "致命伤"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "c65f6aad098ae9a04e24a61bb90bd6d1a803f997a0ec153da060e4d222239a73",
+    "text": "离别一斩"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "49f21e1fc60e39c7f476ad054408c857aa3685866acc8324feed4fd713aade31",
+    "text": "你<keyword0>闪避</keyword0>后，下一次<keyword1>物理</keyword1>命中额外造成其伤害一半的<keyword2>流血</keyword2>伤害"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "1b9e9155a5aad890d3c010a114cf681be958e8a2d62a0347011d17fb008cf427",
+    "text": "鲜血"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "feb4b89af431829369311816367330aef7e8cfc6ea637189ac91aab27a617390",
+    "text": "<keyword0>流血</keyword0>命中有{{value0}}%几率触发<keyword1>汲取</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "be59091cd492b2572b790d8a02b258227bfa2052da0a4190fd974a7198d542be",
+    "text": "败血休克"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "7e141788ce78146a54c88e01343876c1dec46a37d957a2fa6d719901246aca78",
+    "text": "处于<keyword0>流血</keyword0>状态的敌人受到的<keyword1>中毒</keyword1>伤害增加{{value0}}%"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "18f592d5ec525828e620a03dba4ed678604db24391ac06289a5afa88ba0f7a24",
+    "text": "污浊伤口"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "f817b52151d0ff043565f71ada19e856e4211a9321262e5200e6103542b1956e",
+    "text": "<keyword0>流血</keyword0>命中有{{value0}}%几率造成其伤害一半的<keyword1>中毒</keyword1>伤害"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "b0aa8fcebc6874127babe83518789bd8b14f36cc2f1f5516656e1aa45531f266",
+    "text": "伤口护理"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "98a5c4e6b68253f8b3daa0ba3d02d53c9b6a1e9eebd6e85942be19c99f8af523",
+    "text": "受到的<keyword0>流血</keyword0>伤害减半"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",

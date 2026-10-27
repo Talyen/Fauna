@@ -965,6 +965,114 @@
     "sourceHash": "1265905b37e45bf20953f58a181518a05e54ec8532d6aa19f68481fe2e3fd783",
     "text": "Эффект «<keyword0>Броня</keyword0>» снижает получаемый урон типа «<keyword1>Кровотечение</keyword1>»"
   },
+  "content.talent.bleed.bleeding-out.name": {
+    "reviewed": true,
+    "source": "Bleeding Out",
+    "sourceHash": "d70e3375129942ba37984b2159056963fae8939d5984f87e1f8653f4259be898",
+    "text": "Истекает кровью"
+  },
+  "content.talent.bleed.bleeding-out.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}}% more <keyword0>Bleed</keyword0> damage while below half <keyword1>Health</keyword1>",
+    "sourceHash": "bd3dc5cd7d84acd44d8d15695008313e0d31db01220e710a99e78f21d50881df",
+    "text": "Наносите на {{value0}}% больше урона от <keyword0>кровотечения</keyword0>, пока у вас меньше половины <keyword1>здоровья</keyword1>"
+  },
+  "content.talent.bleed.bloodrush.name": {
+    "reviewed": true,
+    "source": "Bloodrush",
+    "sourceHash": "d2d1c731166b33fc53fc5d6d3588a4f1583b1c272f23f113d0a957c281f86aaa",
+    "text": "Прилив крови"
+  },
+  "content.talent.bleed.bloodrush.rule": {
+    "reviewed": true,
+    "source": "Dealing <keyword0>Bleed</keyword0> damage has a {{value0}}% chance to draw a card",
+    "sourceHash": "a6a88a82f1191316cd14acfe3f88e3cc368acfe83292d7a80602bf156b9bf3e7",
+    "text": "Нанесение урона типа «<keyword0>Кровотечение</keyword0>» с шансом {{value0}}% позволяет взять карту"
+  },
+  "content.talent.bleed.first-blood.name": {
+    "reviewed": true,
+    "source": "First Blood",
+    "sourceHash": "c2b02cae1cb60286a31009eff9b41e4f56e40deafc465896ebee6d0ae3d0227f",
+    "text": "Первая кровь"
+  },
+  "content.talent.bleed.flay.name": {
+    "reviewed": true,
+    "source": "Flay",
+    "sourceHash": "5a1b26872c3ac3194f95ab2857fff47d43ebbf35587111ac6f3c7be7bc1ffbbe",
+    "text": "Свежевание"
+  },
+  "content.talent.bleed.flay.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to halve enemy <keyword1>Armor</keyword1>",
+    "sourceHash": "3dfcd1865e043d622f19ffcf5f3e4d0d40707511e5600e238c3026271c5c4bc1",
+    "text": "Попадания типа «<keyword0>Кровотечение</keyword0>» с шансом {{value0}}% уменьшают запас <keyword1>брони</keyword1> врага вдвое"
+  },
+  "content.talent.bleed.mortal-wound.name": {
+    "reviewed": true,
+    "source": "Mortal Wound",
+    "sourceHash": "94249aaea3d378bd8c9b2c5ffa5a1497d8384c0ac705ec4e3013da8edf436eaf",
+    "text": "Смертельная рана"
+  },
+  "content.talent.bleed.parting-cut.name": {
+    "reviewed": true,
+    "source": "Parting Cut",
+    "sourceHash": "a20f7e37471568163ccad2ee2dbe05d44c416b1cf9c164354c25d582b75b6725",
+    "text": "Прощальный порез"
+  },
+  "content.talent.bleed.parting-cut.rule": {
+    "reviewed": true,
+    "source": "After you <keyword0>Dodge</keyword0>, your next <keyword1>Physical</keyword1> hit deals half its damage as additional <keyword2>Bleed</keyword2> damage",
+    "sourceHash": "72e7e13099faad492b29d6c1a1f0d5d8ceafec40654150e7da0e45e56f5fd99b",
+    "text": "После того как вы <keyword0>уклоняетесь</keyword0>, ваше следующее попадание типа «<keyword1>Физический</keyword1>» дополнительно наносит половину своего урона как урона от <keyword2>кровотечения</keyword2>"
+  },
+  "content.talent.bleed.sanguine.name": {
+    "reviewed": true,
+    "source": "Sanguine",
+    "sourceHash": "f44aa67d3006648d02f3206486e589932dfd74d72a7d42ae986555648200f97c",
+    "text": "Кровь"
+  },
+  "content.talent.bleed.sanguine.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to <keyword1>Leech</keyword1>",
+    "sourceHash": "d0613ef0f0a1f1dc167d29c22c24c729e5dd088ffb6c23e07c5306d17ce1fa9e",
+    "text": "Попадания типа «<keyword0>Кровотечение</keyword0>» с шансом {{value0}}% вызывают <keyword1>вампиризм</keyword1>"
+  },
+  "content.talent.bleed.septic-shock.name": {
+    "reviewed": true,
+    "source": "Septic Shock",
+    "sourceHash": "99eabd75268524aa922257d2268913b620768538fe14d24c2c6c80cb658c6268",
+    "text": "Септический шок"
+  },
+  "content.talent.bleed.septic-shock.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleeding</keyword0> enemies take {{value0}}% more <keyword1>Poison</keyword1> damage",
+    "sourceHash": "450641b3b1474afbf5b7b11d0c9e4358738d74e7212f51d7c3c9f75cb46a5c53",
+    "text": "Враги под эффектом «<keyword0>Кровотечение</keyword0>» получают на {{value0}}% больше урона от <keyword1>яда</keyword1>"
+  },
+  "content.talent.bleed.tainted-wound.name": {
+    "reviewed": true,
+    "source": "Tainted Wound",
+    "sourceHash": "43a89e7c5864d7f28e66b13f32f9e5837cc968a33f4f7cdd8c5bce517a7f1962",
+    "text": "Заражённая рана"
+  },
+  "content.talent.bleed.tainted-wound.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Bleed</keyword0> hits have a {{value0}}% chance to deal half their damage as <keyword1>Poison</keyword1> damage",
+    "sourceHash": "259304d9fbcdf8b43922f15650791b694620750e7de9c91e4e84204b0c579b14",
+    "text": "Попадания типа «<keyword0>Кровотечение</keyword0>» с шансом {{value0}}% наносят половину своего урона как урона от <keyword1>яда</keyword1>"
+  },
+  "content.talent.bleed.wound-care.name": {
+    "reviewed": true,
+    "source": "Wound Care",
+    "sourceHash": "126749f824aca294667af3e9ec7da6d62b456fd432186f1b6c276528ad0817e7",
+    "text": "Уход за ранами"
+  },
+  "content.talent.bleed.wound-care.rule": {
+    "reviewed": true,
+    "source": "Take half <keyword0>Bleed</keyword0> damage",
+    "sourceHash": "794e7ece43910606a1ad35b9dac83d74605a9ed94e9b7d5ac09bcf216f1cf535",
+    "text": "Получайте вдвое меньше урона от <keyword0>кровотечения</keyword0>"
+  },
   "creature.echo": {
     "reviewed": true,
     "source": "Echo",
