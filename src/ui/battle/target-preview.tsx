@@ -7,6 +7,7 @@ import { KeywordText } from "../shared/keyword-text";
 import { Heart, Shield } from "lucide-react";
 import { BattleReadout } from "../shared/combat/battle-readout";
 import { DamageValue } from "../shared/combat/combat-values";
+import { isKeywordId, KEYWORD_DEFINITIONS } from "../../game/keywords";
 export function TargetPreview({ forecast }: { forecast: TargetForecast | undefined }) {
   const i18n = useMessages();
   if (!forecast) return null;
@@ -93,7 +94,7 @@ function ConditionalPreview({ forecast }: { forecast: TargetForecast }) {
     alternatives.length > 0 && alternatives.every((value) => value.block === alternatives[0]!.block);
   const possibleKnockout = alternatives.some((value) => value.health === 0);
   const guaranteedKnockout = sameHealth && alternatives[0]!.health === 0;
-  const descriptions = [...new Set(alternatives.map((value) => outcomeText(value)))];
+  const descriptions = [...new Set(alternatives.map((value) => outcomeText(value, i18n)))];
   const compact = descriptions.length <= 2 && descriptions.every((description) => description.length <= 20);
   const mayDodge = alternatives.some((value) =>
     value.events.some((event) => event.kind === "status" && event.outcome === "dodge"),
@@ -161,30 +162,48 @@ function ConditionalPreview({ forecast }: { forecast: TargetForecast }) {
   );
 }
 
-function outcomeText(value: TargetForecast) {
+function outcomeText(value: TargetForecast, i18n: ReturnType<typeof useMessages>) {
   const damage = new Map<string, number>();
   for (const event of value.events) {
     if (event.kind === "damage")
       damage.set(event.damageType, (damage.get(event.damageType) ?? 0) + event.amount);
   }
-  const parts: string[] = [...damage].map(
-    ([type, amount]) => `${amount} ${type[0]!.toUpperCase()}${type.slice(1)}`,
-  );
+  const parts: string[] = [...damage].map(([type, amount]) => {
+    const label = isKeywordId(type)
+      ? i18n.content(`content.keyword.${type}.label`, KEYWORD_DEFINITIONS[type].label)
+      : `${type[0]!.toUpperCase()}${type.slice(1)}`;
+    return i18n.message("preview.outcomeDamage", "{{amount}} {{type}}", { amount, type: label });
+  });
   if (
     value.events.some(
       (event) => event.kind === "status" && event.status === "dodge" && event.outcome === "dodge",
     )
   )
-    parts.push("Dodge");
+    parts.push(i18n.content("content.keyword.dodge.label", "Dodge"));
   if (value.events.some((event) => event.kind === "damage" && event.critical) && parts[0])
-    parts[0] = `Critical ${parts[0]}`;
-  if (value.absorbed) parts.push(`${value.absorbed} absorbed`);
+    parts[0] = i18n.message("preview.outcomeCritical", "Critical {{description}}", { description: parts[0] });
+  if (value.absorbed)
+    parts.push(i18n.message("preview.absorbed", "{{amount}} absorbed", { amount: value.absorbed }));
   const healed = value.events.reduce((total, event) => total + (event.kind === "heal" ? event.amount : 0), 0);
   if (healed || value.health > value.previousHealth)
-    parts.push(`Heal ${healed || value.health - value.previousHealth}`);
+    parts.push(
+      i18n.message("preview.outcomeHeal", "Heal {{amount}}", {
+        amount: healed || value.health - value.previousHealth,
+      }),
+    );
   if (!damage.size && value.health < value.previousHealth)
-    parts.push(`Lose ${value.previousHealth - value.health} Health`);
-  if (value.block !== value.previousBlock) parts.push(`Block ${value.previousBlock} → ${value.block}`);
+    parts.push(
+      i18n.message("preview.outcomeLoseHealth", "Lose {{amount}} Health", {
+        amount: value.previousHealth - value.health,
+      }),
+    );
+  if (value.block !== value.previousBlock)
+    parts.push(
+      i18n.message("preview.outcomeBlock", "Block {{before}} → {{after}}", {
+        before: value.previousBlock,
+        after: value.block,
+      }),
+    );
   parts.push(...value.changes);
-  return parts.join("; ") || "No change";
+  return parts.join("; ") || i18n.message("preview.outcomeNoChange", "No change");
 }

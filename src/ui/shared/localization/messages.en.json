@@ -392,6 +392,24 @@
   "preview.or": {
     "text": "{{left}} or {{right}}"
   },
+  "preview.outcomeBlock": {
+    "text": "Block {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "text": "Critical {{description}}"
+  },
+  "preview.outcomeDamage": {
+    "text": "{{amount}} {{type}}"
+  },
+  "preview.outcomeHeal": {
+    "text": "Heal {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "text": "Lose {{amount}} Health"
+  },
+  "preview.outcomeNoChange": {
+    "text": "No change"
+  },
   "preview.possible": {
     "text": "Possible: {{description}}"
   },

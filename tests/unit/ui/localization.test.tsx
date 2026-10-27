@@ -25,6 +25,7 @@ import { CardRules } from "../../../src/ui/shared/combat/combat-values";
 import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { RuleCatalogProvider } from "../../../src/ui/shared/localization/rule-catalog";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
+import type { TargetForecast } from "../../../src/ui/battle/play-preview-model";
 import { GlossaryScreen } from "../../../src/ui/menu/glossary-screen";
 import { extractGlossaryRules } from "../../../scripts/localization/glossary-rules.mjs";
 import { GLOSSARY } from "../../../src/game/glossary";
@@ -922,6 +923,38 @@ it("localizes exact battle previews without changing their committed values", ()
   );
   expect(screen.getByText("2 absorbés")).toBeTruthy();
   expect(forecast.health).toBe(0);
+  view.unmount();
+});
+
+it("localizes conditional preview outcomes without changing their alternatives", () => {
+  const base: TargetForecast = {
+    name: "Rival",
+    previousHealth: 6,
+    health: 6,
+    previousBlock: 2,
+    block: 2,
+    maxHealth: 6,
+    absorbed: 0,
+    changes: [],
+    events: [],
+  };
+  const damaged: TargetForecast = {
+    ...base,
+    health: 3,
+    block: 0,
+    absorbed: 2,
+    events: [{ kind: "damage", targetId: "rival", amount: 3, damageType: "burn", critical: true, text: "" }],
+  };
+  const forecast: TargetForecast = { ...base, alternatives: [damaged, base] };
+  const view = render(
+    <MessageProvider locale="fr" catalog={french}>
+      <TargetPreview forecast={forecast} />
+    </MessageProvider>,
+  );
+  const label = screen.getByRole("status").getAttribute("aria-label");
+  expect(label).toContain("Critique : 3 de Brûlure; 2 absorbés; Blocage 2 → 0");
+  expect(label).toContain("Aucun changement");
+  expect(forecast.alternatives).toEqual([damaged, base]);
   view.unmount();
 });
 

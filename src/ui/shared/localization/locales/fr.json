@@ -1380,6 +1380,42 @@
     "sourceHash": "92091ed36a00a95421fd5e7271d611dc2ed0bb88ff6215e81ce954bc9a1afab6",
     "text": "{{left}} ou {{right}}"
   },
+  "preview.outcomeBlock": {
+    "reviewed": true,
+    "source": "Block {{before}} → {{after}}",
+    "sourceHash": "3efe7c841de70fc67a95bb4ff77011f406facf92b99eb44b1ebd14af4000e8eb",
+    "text": "Blocage {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "reviewed": true,
+    "source": "Critical {{description}}",
+    "sourceHash": "8bbd2ed08406d0a2624372bcf06235d33ac6d3da617097efc98027f33c982a75",
+    "text": "Critique : {{description}}"
+  },
+  "preview.outcomeDamage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}}",
+    "sourceHash": "2c0d779e0a0d188407bdd326e538eb9fb19e03761acfe76aa9a58c96d4e18e39",
+    "text": "{{amount}} de {{type}}"
+  },
+  "preview.outcomeHeal": {
+    "reviewed": true,
+    "source": "Heal {{amount}}",
+    "sourceHash": "173fd92d27a82bb9c59b410d0c209bc3ee7baa17df253779157881c024e3421b",
+    "text": "Soin {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "reviewed": true,
+    "source": "Lose {{amount}} Health",
+    "sourceHash": "00fa9426969ae8f1a05602e7aff1e68f177524c88f56d7eabca7ee2122c9f5b5",
+    "text": "Perdre {{amount}} Santé"
+  },
+  "preview.outcomeNoChange": {
+    "reviewed": true,
+    "source": "No change",
+    "sourceHash": "b34cb3e4a98581e17e28744f22985157da87260cfaf7b52dc3384b8d1cfa6dc6",
+    "text": "Aucun changement"
+  },
   "preview.possible": {
     "reviewed": true,
     "source": "Possible: {{description}}",

@@ -1097,6 +1097,42 @@
     "sourceHash": "b782f2879a9d725aa53a7435143d94a74cd9c2e5f459029479c3b99e1e5a308e",
     "text": "{{left}} или {{right}}"
   },
+  "preview.outcomeBlock": {
+    "reviewed": true,
+    "source": "Block {{before}} → {{after}}",
+    "sourceHash": "0c5c49e6a1afddc6505ec81959b5928fb8faa41d9a1747c6a7cbbff00c80fa08",
+    "text": "Блок {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "reviewed": true,
+    "source": "Critical {{description}}",
+    "sourceHash": "bdca03c41438beda8354209b63cefd1e2c8811a0853f9ac399d1d6362cba5e9f",
+    "text": "Критический удар: {{description}}"
+  },
+  "preview.outcomeDamage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}}",
+    "sourceHash": "cfb9fb712df4eebfe000a00f13d581df9d82ae69bba2c66b3464a8aaad7ac42c",
+    "text": "{{type}}: {{amount}}"
+  },
+  "preview.outcomeHeal": {
+    "reviewed": true,
+    "source": "Heal {{amount}}",
+    "sourceHash": "e573e2e9925c8a01a990d35e81976495f84019edfe613cedc1c12433d6c147e0",
+    "text": "Лечение: {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "reviewed": true,
+    "source": "Lose {{amount}} Health",
+    "sourceHash": "e09228d755c4a6e6650c23d5dfb7b542a2e98535e1b0d575c4fec1a50f145167",
+    "text": "Потеря здоровья: {{amount}}"
+  },
+  "preview.outcomeNoChange": {
+    "reviewed": true,
+    "source": "No change",
+    "sourceHash": "bea4786e4791950e9411a70f7d40a7d80f0d50bd10eac905f4332311233f26df",
+    "text": "Без изменений"
+  },
   "preview.possible": {
     "reviewed": true,
     "source": "Possible: {{description}}",

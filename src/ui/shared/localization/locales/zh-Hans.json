@@ -1097,6 +1097,42 @@
     "sourceHash": "7b2c2412a66e5fb48e37888154f6b11d07ff619d2d88d0b16126ecae0bdbd4c9",
     "text": "{{left}}或{{right}}"
   },
+  "preview.outcomeBlock": {
+    "reviewed": true,
+    "source": "Block {{before}} → {{after}}",
+    "sourceHash": "5caef1619d5976460efca9164ab54acddc076d77fd649274a33615fe952ec2fb",
+    "text": "格挡 {{before}} → {{after}}"
+  },
+  "preview.outcomeCritical": {
+    "reviewed": true,
+    "source": "Critical {{description}}",
+    "sourceHash": "f120ac684498aa8b18ab04143073a8c990ee4fd15a006b58db83adcca0e9a8c6",
+    "text": "暴击：{{description}}"
+  },
+  "preview.outcomeDamage": {
+    "reviewed": true,
+    "source": "{{amount}} {{type}}",
+    "sourceHash": "23f00c3cb056da43e7edfea10245159b55fbc73933602d6609a83bd3ba22d28a",
+    "text": "{{type}} {{amount}}"
+  },
+  "preview.outcomeHeal": {
+    "reviewed": true,
+    "source": "Heal {{amount}}",
+    "sourceHash": "6e94771af0f68578ffa12790b255e34abe941dd10464537393aefa5cd3b0c344",
+    "text": "治疗 {{amount}}"
+  },
+  "preview.outcomeLoseHealth": {
+    "reviewed": true,
+    "source": "Lose {{amount}} Health",
+    "sourceHash": "5fe337b06b26ad7e04413477dbd9b7c766ca33c5c251e7936ce8497d70572f5f",
+    "text": "失去 {{amount}} 生命"
+  },
+  "preview.outcomeNoChange": {
+    "reviewed": true,
+    "source": "No change",
+    "sourceHash": "7571aafb7a287acf180e12a5c7b1cdac5cdcba5f4b4e61ebef8eb72f73b9a200",
+    "text": "无变化"
+  },
   "preview.possible": {
     "reviewed": true,
     "source": "Possible: {{description}}",
