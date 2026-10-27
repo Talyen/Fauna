@@ -3683,6 +3683,12 @@
     "sourceHash": "9d9b90dd3a848e1b8a25adcf78a6c26aeb3f44f0f2bd66f4cf25207edc12bc6f",
     "text": "奥术修复"
   },
+  "content.talent.mana.arcane-mending.rule": {
+    "reviewed": true,
+    "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
+    "sourceHash": "112b4b2c0b77275a741e05898f10f3f23fa0fd4501ddea8e19ce0247fd25861d",
+    "text": "每获得1点<keyword1>法力</keyword1>，每个存活的上场生物恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
     "source": "Dark Recovery",
@@ -3701,17 +3707,35 @@
     "sourceHash": "53fcee63a86537d970688f3700d64b859206e6c3d9714c511fbab2e26ae4bed8",
     "text": "地脉调谐"
   },
+  "content.talent.mana.leyline-attunement.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>maximum Mana</keyword0> each battle",
+    "sourceHash": "b02b38ba89c72a411cf97fbeb0ea4adc4b797a129827e4deebd1dc685ba6b2a2",
+    "text": "每场战斗获得{{value0}}点<keyword0>最大法力</keyword0>"
+  },
   "content.talent.mana.mana-bulwark.name": {
     "reviewed": true,
     "source": "Mana Bulwark",
     "sourceHash": "dbbbfc53e25993030ad2ea9284eae38cc9100f4338d86bcfbf4fa72fb6487fba",
     "text": "法力壁垒"
   },
+  "content.talent.mana.mana-bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Block</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "81c473f947c8f38fce65b58de47371c6585be58c19927187728dd89aa044acab",
+    "text": "每场战斗开始时获得等同于<keyword1>最大法力</keyword1>的<keyword0>格挡</keyword0>"
+  },
   "content.talent.mana.mana-shell.name": {
     "reviewed": true,
     "source": "Mana Shell",
     "sourceHash": "8fd909b3aa8fca13c50caa2189d04bb5f6d4b22d7a5d4604ecee0b3f4997c1d5",
     "text": "法力外壳"
+  },
+  "content.talent.mana.mana-shell.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Armor</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "f57502e5e576d27aa9992dac17e2ad4fc96b3e498a9f538b7ec2b92606e06bac",
+    "text": "每场战斗开始时获得等同于<keyword1>最大法力</keyword1>的<keyword0>护甲</keyword0>"
   },
   "content.talent.mana.manaburn.name": {
     "reviewed": true,
@@ -3730,6 +3754,12 @@
     "source": "Wellspring",
     "sourceHash": "1a1334ce4d7d12e04fabe519ebcc7d08ef8500ec7c53b242eab1ba2ccae1ec6e",
     "text": "源泉"
+  },
+  "content.talent.mana.wellspring.rule": {
+    "reviewed": true,
+    "source": "End your turn with unspent <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "c623a159641387c9418fc7d20d8004450626ae625a97910b843884176f15c807",
+    "text": "结束回合时若有未使用的<keyword0>法力</keyword0>，下回合额外获得{{value0}}点<keyword1>法力</keyword1>"
   },
   "content.talent.nature.bramblegrowth.name": {
     "reviewed": true,

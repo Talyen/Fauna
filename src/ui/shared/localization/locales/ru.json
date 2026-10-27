@@ -3683,6 +3683,12 @@
     "sourceHash": "9e8e0948d97c2e790938126cb1587128d34defcd2413e20cb8af26c4d0a707f8",
     "text": "Чародейское восстановление"
   },
+  "content.talent.mana.arcane-mending.rule": {
+    "reviewed": true,
+    "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
+    "sourceHash": "c2d7ccc986d6a018d24d3ea7a7a682886a2c47b9f19c2b3857ae2e5e3a58f0d3",
+    "text": "Каждое живое выставленное существо восстанавливает {{value0}} <keyword0>здоровья</keyword0> за каждую полученную единицу <keyword1>маны</keyword1>"
+  },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
     "source": "Dark Recovery",
@@ -3701,17 +3707,35 @@
     "sourceHash": "9b490aab7ca1e7c44a3f5acdb9e33e7add64a977ddbe4532cb579fefc15b0be0",
     "text": "Настройка на лей-линии"
   },
+  "content.talent.mana.leyline-attunement.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>maximum Mana</keyword0> each battle",
+    "sourceHash": "51a314e8fb790269f9f3908288ad2a34a482d9216445d8bb0ea9b403cdd41357",
+    "text": "В каждом бою получите {{value0}} к <keyword0>максимуму маны</keyword0>"
+  },
   "content.talent.mana.mana-bulwark.name": {
     "reviewed": true,
     "source": "Mana Bulwark",
     "sourceHash": "777f7b019733678f1a0d64750f9024b1531f218a4ed0a93e7d260d31594d9d59",
     "text": "Бастион: Мана"
   },
+  "content.talent.mana.mana-bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Block</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "049b69661a98e0868ae7b1e3832936069ee6dd4e2196bfb390ef95889ec82df2",
+    "text": "Начинайте каждый бой с <keyword0>блоком</keyword0>, равным вашему <keyword1>максимуму маны</keyword1>"
+  },
   "content.talent.mana.mana-shell.name": {
     "reviewed": true,
     "source": "Mana Shell",
     "sourceHash": "577d68f06e0bec3788d94209f462788a7120e828eea01def9fd2e94b68e9fa59",
     "text": "Панцирь: Мана"
+  },
+  "content.talent.mana.mana-shell.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Armor</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "8a8d6c973a6023bc46a50e886a59c30a10b62dfec29e1995a17aed44bc495462",
+    "text": "Начинайте каждый бой с <keyword0>бронёй</keyword0>, равной вашему <keyword1>максимуму маны</keyword1>"
   },
   "content.talent.mana.manaburn.name": {
     "reviewed": true,
@@ -3730,6 +3754,12 @@
     "source": "Wellspring",
     "sourceHash": "25d77f7fd816539896c9a46118d0e8ecc24910e68dae27112e5448b1d52e0efa",
     "text": "Родник"
+  },
+  "content.talent.mana.wellspring.rule": {
+    "reviewed": true,
+    "source": "End your turn with unspent <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "4f72ff4bba051d802b3d61c062c4951ab8b865a6f3fb33a8f5d20b512628590e",
+    "text": "Завершите ход с неизрасходованной <keyword0>маной</keyword0>, чтобы получить {{value0}} дополнительной <keyword1>маны</keyword1> в следующем ходу"
   },
   "content.talent.nature.bramblegrowth.name": {
     "reviewed": true,

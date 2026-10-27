@@ -3683,6 +3683,12 @@
     "sourceHash": "b70aad4e7ccbde5c9d001b9af34f3a9e7a732cd5ce376248abb747c48b07dda7",
     "text": "Restauración arcana"
   },
+  "content.talent.mana.arcane-mending.rule": {
+    "reviewed": true,
+    "source": "Each living deployed creature restores {{value0}} <keyword0>Health</keyword0> per <keyword1>Mana</keyword1> gained",
+    "sourceHash": "bdd0c2cb65514ea4a3469118919ee8932aed9a29a05509561ea607a20bd67444",
+    "text": "Cada criatura desplegada viva restaura {{value0}} de <keyword0>Salud</keyword0> por cada <keyword1>Maná</keyword1> obtenido"
+  },
   "content.talent.mana.dark-recovery.name": {
     "reviewed": true,
     "source": "Dark Recovery",
@@ -3701,17 +3707,35 @@
     "sourceHash": "974b6d44d6b7fc9e4207822b1766e578cb3a3be5efef8ffea905726cfa1538e2",
     "text": "Armonía con líneas ley"
   },
+  "content.talent.mana.leyline-attunement.rule": {
+    "reviewed": true,
+    "source": "Gain {{value0}} <keyword0>maximum Mana</keyword0> each battle",
+    "sourceHash": "bc5a3390fe9dc88e969b69e521c6a6ad7845bb6f34825a5a0a5a32f11334dcd2",
+    "text": "Obtienes {{value0}} de <keyword0>Maná máximo</keyword0> en cada combate"
+  },
   "content.talent.mana.mana-bulwark.name": {
     "reviewed": true,
     "source": "Mana Bulwark",
     "sourceHash": "ce050288a7659d8244b3aa68193a806b44d3dc9917f6eb5e51741d0fa94a728d",
     "text": "Baluarte de Maná"
   },
+  "content.talent.mana.mana-bulwark.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Block</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "6e35d1cff51043ea0854e09b4526489514049ad1e7adb8b9685cbd91051588ec",
+    "text": "Empiezas cada combate con <keyword0>Bloqueo</keyword0> igual a tu <keyword1>Maná máximo</keyword1>"
+  },
   "content.talent.mana.mana-shell.name": {
     "reviewed": true,
     "source": "Mana Shell",
     "sourceHash": "8243046e1512f5b3e839b751fc6089b09c00a7d34827a2edb9ddf77b3a45f704",
     "text": "Coraza de Maná"
+  },
+  "content.talent.mana.mana-shell.rule": {
+    "reviewed": true,
+    "source": "Start each combat with <keyword0>Armor</keyword0> equal to your <keyword1>maximum Mana</keyword1>",
+    "sourceHash": "dcdaf98083528f75915e1d25048e6f34ae3945cda91550079b35052bed8138a4",
+    "text": "Empiezas cada combate con <keyword0>Armadura</keyword0> igual a tu <keyword1>Maná máximo</keyword1>"
   },
   "content.talent.mana.manaburn.name": {
     "reviewed": true,
@@ -3730,6 +3754,12 @@
     "source": "Wellspring",
     "sourceHash": "e87440ea7ce1e8825e7618191c60891e5670acd69a1ec8819e753a4be4c7a0ae",
     "text": "Fuente"
+  },
+  "content.talent.mana.wellspring.rule": {
+    "reviewed": true,
+    "source": "End your turn with unspent <keyword0>Mana</keyword0> to gain {{value0}} extra <keyword1>Mana</keyword1> next turn",
+    "sourceHash": "4882ec7de113808003138b42d47dadfc9372210bae3ac1fdc320bf204e30de12",
+    "text": "Termina tu turno con <keyword0>Maná</keyword0> sin gastar para obtener {{value0}} de <keyword1>Maná</keyword1> adicional en el siguiente turno"
   },
   "content.talent.nature.bramblegrowth.name": {
     "reviewed": true,
