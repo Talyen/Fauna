@@ -71,7 +71,7 @@ function unitReport(file, titles) {
 }
 
 it("partitions lineup scenarios without omissions or duplication and rejects invalid selectors", () => {
-  const scenarios = Array.from({ length: 11 }, (_, seed) => ({ seed }));
+  const scenarios = Array.from({ length: 11 }, (_, seed) => ({ name: `lineup ${seed}`, seed }));
   const groups = Array.from({ length: LINEUP_SHARDS }, (_, index) =>
     lineupShard(scenarios, String(index + 1)),
   );
@@ -87,6 +87,23 @@ it("partitions lineup scenarios without omissions or duplication and rejects inv
   expect(lineupShard(scenarios, undefined)).toBe(scenarios);
   for (const selector of ["", "0", String(LINEUP_SHARDS + 1), "01", "1.5", "wrong"])
     expect(() => lineupShard(scenarios, selector)).toThrow("Invalid lineup shard");
+});
+
+it("balances every lineup deterministically while retaining unknown creatures", () => {
+  const scenarios = Array.from({ length: 37 }, (_, seed) => ({ name: `Unknown ${seed}, Cadenza`, seed }));
+  const groups = Array.from({ length: LINEUP_SHARDS }, (_, index) =>
+    lineupShard(scenarios, String(index + 1), "balanced"),
+  );
+  expect(groups.flat()).toHaveLength(scenarios.length);
+  expect(new Set(groups.flat())).toEqual(new Set(scenarios));
+  const reversed = [...scenarios].reverse();
+  expect(
+    Array.from({ length: LINEUP_SHARDS }, (_, index) => lineupShard(reversed, String(index + 1), "balanced")),
+  ).toEqual(groups);
+  expect(() => lineupShard([...scenarios, scenarios[0]], "1", "balanced")).toThrow(
+    "Duplicate lineup identity",
+  );
+  expect(() => lineupShard(scenarios, "1", "unknown")).toThrow("Invalid lineup schedule");
 });
 
 it("requires the exact discovered unit cases across reports, including parameterized titles", () => {
@@ -388,7 +405,12 @@ async function gateFixture(workers = 1) {
     report.testResults[0].name = file;
     report.testResults[0].assertionResults[0].title = title;
     put(`reports/lineups/lineup-results-${shard}/vitest.json`, report);
-    put(`reports/lineups/lineup-results-${shard}/ci/lineup.json`, { ...ids, shard, total: LINEUP_SHARDS });
+    put(`reports/lineups/lineup-results-${shard}/ci/lineup.json`, {
+      ...ids,
+      shard,
+      total: LINEUP_SHARDS,
+      schedule: "round-robin",
+    });
     unitDiscovery.push({ file, name: title });
   }
   put("reports/ci/unit-discovery.json", unitDiscovery);
@@ -419,6 +441,7 @@ it("accepts mixed successful attempts of the same run and records their build ev
     attempt: "2",
     shard: 1,
     total: LINEUP_SHARDS,
+    schedule: "round-robin",
   });
   put("reports/interactions/ci/evidence.json", { ...ids, attempt: "2", build });
   put(shardPath, {
@@ -500,11 +523,18 @@ it("fails the executable gate for upstream failures and missing reports", async 
 it("rejects stale lineup evidence, swapped shards and duplicate lineup results", async () => {
   const { root, ids, put, run } = await gateFixture();
   const metadata = "reports/lineups/lineup-results-1/ci/lineup.json";
-  for (const change of [{ sha: "other" }, { run: "other" }, { attempt: "2" }, { shard: 2 }, { total: 3 }]) {
-    put(metadata, { ...ids, shard: 1, total: LINEUP_SHARDS, ...change });
+  for (const change of [
+    { sha: "other" },
+    { run: "other" },
+    { attempt: "2" },
+    { shard: 2 },
+    { total: 3 },
+    { schedule: "balanced" },
+  ]) {
+    put(metadata, { ...ids, shard: 1, total: LINEUP_SHARDS, schedule: "round-robin", ...change });
     expect(run().status).not.toBe(0);
   }
-  put(metadata, { ...ids, shard: 1, total: LINEUP_SHARDS });
+  put(metadata, { ...ids, shard: 1, total: LINEUP_SHARDS, schedule: "round-robin" });
   const report = JSON.parse(readFixture(root, "reports/lineups/lineup-results-1/vitest.json"));
   put("reports/lineups/lineup-results-2/vitest.json", report);
   expect(run().stderr).toContain("duplicate unit case");

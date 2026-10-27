@@ -395,7 +395,8 @@ it("keeps Steam Cloud usable when optional language replies are malformed or tim
       );
     },
   });
-  let adapter: Awaited<ReturnType<typeof createSteam>> | undefined;
+  let adapter:
+    { language(): Promise<string | null>; list(): Promise<string[]>; dispose(): Promise<void> } | undefined;
   try {
     adapter = await createSteam({
       app: { isPackaged: false },

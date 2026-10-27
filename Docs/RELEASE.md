@@ -90,6 +90,8 @@ Every production build runs `npm run generate:release-inventory` after Vite, pro
 
 The published react-remove-scroll-bar 2.3.8 package omits its MIT text. Its [supplemental license](third-party/react-remove-scroll-bar-LICENSE.txt) comes from [upstream commit 7301c160](https://github.com/theKashey/react-remove-scroll-bar/blob/7301c160fda44cb8cf2b9fdfde61efad35736196/LICENSE); the fallback applies only to that version.
 
+Koffi 3.3.3 and 3.3.4 platform binary packages omit license text. Their manifests declare MIT, and their matching `koffi` package supplies that text. The inventory uses it only when the installed parent, native package and locked parent versions match and both manifests declare MIT.
+
 After package validation, Windows CI runs `npm run generate:release-inventory -- --package release/win-unpacked` to retain hashes of the final executable, archive and Electron license inventories. Once the complete gate passes, trusted main/tag pushes attest the executable, ASAR and matching SBOM in a separate job with narrowly scoped OIDC permissions. Branch/PR jobs receive neither attestation-write nor OIDC permissions. Artifacts preserve `release/`, `dist/` and `reports/` paths so attestation consumes exact same-run files.
 
 Optional signed candidates inventory final signed components and attest installer/SBOM for the explicitly selected release tag. Provenance establishes build origin/integrity, not Authenticode trust or suppression of Windows warnings; qualify installer and Steam delivery separately.

@@ -21,6 +21,8 @@
 [data-keyword="water"] {
   color: var(--keyword-water);
 }
+[data-damage-type="nature"],
+[data-combat-tone="nature"],
 [data-keyword="nature"] {
   color: var(--keyword-nature);
 }

@@ -109,6 +109,18 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
       digest: createHash("sha256")
         .update(
           JSON.stringify(baselineResult, (key, value: unknown) => {
+            // The recorded oracle included an unused Water Thorns field before Thorns were unified.
+            if (key === "combat" && value && typeof value === "object" && "thorns" in value)
+              return Object.fromEntries(
+                Object.entries(value).flatMap(([name, entry]) =>
+                  name === "thorns"
+                    ? [
+                        [name, entry],
+                        ["waterThorns", 0],
+                      ]
+                    : [[name, entry]],
+                ),
+              );
             if (key === "puzzleProgress" && Array.isArray(value) && value.length === 0) return undefined;
             if (key === "encoreProgress" && value === 0) return undefined;
             if (
