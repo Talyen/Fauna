@@ -431,6 +431,42 @@
     "sourceHash": "62bc0e044f711b5fb425fbc9615657481a7a12c23d4633085c64aa2021a0fe02",
     "text": "Опыт ключевых слов"
   },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "e17636fc6cf001a9265fe997db046d80fa7c7f816044ec55c0fe9c6378ce89d0",
+    "text": "Повторяет урон на следующем ходу, затем снимается"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "5b8f407af47ca021a3cbedb9eecce6683abc1db146bdce8cb4c94ef7450b93a4",
+    "text": "Наносит урон каждый ход, затем уменьшает число зарядов вдвое"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "370089962e3f7086d8b6616c6c08dd1cfa7b1e013422ef8740df1f685bab042d",
+    "text": "Снимает вредные эффекты с союзника"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "5b129c11b9e6014d0d4dc814f45423d2c8d3cbbd1eb3ce98c3fdaffa193da692",
+    "text": "Урон <keyword0>природой</keyword0>; сопротивление и эффект состояния не подразумеваются"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "06e1f7da09ee7ba1c60b29cc5c51aa6c0cdceb5c0469ade33654400ac986d58a",
+    "text": "Снимает полезные эффекты с врага"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "c86471f2356111a9573021b0bf551346cf80985cd4cfe065801cfdac2c82b43a",
+    "text": "Урон <keyword0>водой</keyword0>; <keyword1>Блок</keyword1> поглощает его; <keyword2>Броня</keyword2> не уменьшает его; эффект состояния не накладывается"
+  },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
     "source": "Knockout",

@@ -431,6 +431,42 @@
     "sourceHash": "13cd1211886d48bb7b0c3d392909b923ee5a6891825ce2e9910e9d6d136127d8",
     "text": "关键词经验"
   },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "87478d0d75707bae055802bc645c2117040132cacae63f88e4f7131599daa1c9",
+    "text": "下一回合再次造成伤害，然后清除"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "40e6f7d85d2a04da743cbb1f81dd71c969311893ff0a4ad481a6709e044fae36",
+    "text": "每回合造成伤害，然后将层数减半"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "dc0dcbc79326ede174d0a91d6cd9b003f27ff4a722d870efecddf32ef1b44510",
+    "text": "移除一名盟友的有害效果"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "9cd309a2fd91b642fda01f2ee17d69b44df0e2d1f3d344301c7c41179fd94eaa",
+    "text": "<keyword0>自然</keyword0>伤害；不隐含抗性或状态效果"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "72dfe6715b29ee5dab47e9e1d994106e3923d37b62a217f18b665e32d5bb3e4a",
+    "text": "移除一名敌人的有益效果"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "e56931213832efc6339e2de15a66b6ac621dc3854748a4cd0596bf87816b1f39",
+    "text": "<keyword0>水</keyword0>伤害；<keyword1>格挡</keyword1>会吸收；<keyword2>护甲</keyword2>不会减伤；不施加状态效果"
+  },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
     "source": "Knockout",

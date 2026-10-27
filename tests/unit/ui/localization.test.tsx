@@ -1274,3 +1274,23 @@ it("keeps visual and accessible status counts consistent when the message falls 
   expect(label).toBe(text);
   view.unmount();
 });
+
+it("announces a reviewed status and glossary definition in the selected language", () => {
+  localStorage.removeItem("fauna.language.v1");
+  const game = produce(run(), (draft) => {
+    draft.team[0]!.combat!.burn = 1;
+  });
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["fr"]}>
+      <TooltipProvider>
+        <CombatStatus combat={game.team[0]!.combat} />
+      </TooltipProvider>
+    </LocalizationProvider>,
+  );
+  expect(
+    screen.getByRole("button", {
+      name: "Brûlure 1 ; Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié",
+    }),
+  ).toBeTruthy();
+  view.unmount();
+});

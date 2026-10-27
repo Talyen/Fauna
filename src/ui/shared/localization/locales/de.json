@@ -431,6 +431,42 @@
     "sourceHash": "270a8876fb1ec2d1f226cbdd603cd20de6f6dd533b1cd2c15e5bacec008470fe",
     "text": "Stichwort-EP"
   },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "ad222d14a49959006543cfa380b31e95f9c3509f1fd899d51c9bdfd895dd7f45",
+    "text": "Wiederholt den Schaden im nächsten Zug und endet dann"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "8bebd36eee8dde5c2c61051e62c4a0acac02fff58839015616f01642a9a4c709",
+    "text": "Verursacht in jedem Zug Schaden und halbiert dann die Stapel"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "a5193e453c43cdee87b31b8a1d0ca636caeaa68cdeb19b808bd18269e4b94163",
+    "text": "Entfernt schädliche Effekte von einem Verbündeten"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "cb22830e3b7331707ac61525e51b141d94ad41bbb03ef8ac3d086e54c3997649",
+    "text": "<keyword0>Natur</keyword0>schaden; weder Resistenz noch Statuseffekt sind damit verbunden"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "8c9ba2938a831d23638bd7a7b6b20b5f084e680b41f7d817138eef2ca618bc2a",
+    "text": "Entfernt vorteilhafte Effekte von einem Gegner"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "59ae932221f1bc9723376b1463a3f99592fac638403a4d477ba7a10609997522",
+    "text": "<keyword0>Wasser</keyword0>schaden; <keyword1>Block</keyword1> absorbiert ihn; <keyword2>Rüstung</keyword2> reduziert ihn nicht; kein Statuseffekt wird angewendet"
+  },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
     "source": "Knockout",

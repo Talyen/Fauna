@@ -431,6 +431,42 @@
     "sourceHash": "13444f48a5d8083588e83622f98126c8861e1afaf98bbb53765cf59fcef2553e",
     "text": "キーワード経験値"
   },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "6da3f15702a4ba027407d4a1cbae0826da5fdb8f3417329601540f8fd42edc2c",
+    "text": "次のターンにダメージを繰り返し、その後消える"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "fe0870a8e5a220d130a7c653b619168b2ef41aa63e384a6ba52656df60667c7c",
+    "text": "毎ターンダメージを与え、その後スタックを半減する"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "6d8e126df35884ca7b2ad31e5108faec39f214974ad177096aebde98f6f6041a",
+    "text": "味方1体の有害な効果を取り除く"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "e5430c262b9b46377350f662643f0a1aaa0d22fb3ae50648281adea563b0c71e",
+    "text": "<keyword0>自然</keyword0>ダメージ；耐性や状態効果は付随しない"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "cc5594c95f4b5031c889d0524696dda1c4d9dc4bf67ce72739e325a2619beb1c",
+    "text": "敵1体の有益な効果を取り除く"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "6470d41e0dcbbe68deba7a9732a481c7508b38a886ec31e8ae5a29e29ee1fa54",
+    "text": "<keyword0>水</keyword0>ダメージ；<keyword1>ブロック</keyword1>が吸収する；<keyword2>装甲</keyword2>では軽減されない；状態効果は付与されない"
+  },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
     "source": "Knockout",

@@ -629,6 +629,42 @@
     "sourceHash": "3168d79e09a86b43fd7a94bcd20da10f0a14f84e894f4b55bcd00f92f6b7bab7",
     "text": "EXP de mots-clés"
   },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "3370891b002614aaedcbfbf6261352b7114c1dae390caf13d723a7d71ead7178",
+    "text": "Répète les dégâts au prochain tour, puis se dissipe"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "6fcbab26474bc849ee126730fd36761b508bb61dd49a2c1dbc6c7cbbb237b2c9",
+    "text": "Inflige des dégâts à chaque tour, puis réduit les cumuls de moitié"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "577247ef0e441f0e1e361fef07fa3338c0e9002ee7184ec58a622aaee7ea593c",
+    "text": "Retire les effets néfastes d’un allié"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "424eb843f6b0a5be6dfb51acd7aa4c1c30870e32d8ceaa69243c2514f24210a7",
+    "text": "Dégâts de <keyword0>Nature</keyword0> ; aucune résistance ni aucun effet de statut n’est implicite"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "c95c6590376097832448440b615a076e233cbc63ee76ee5627e99f5f6599d113",
+    "text": "Retire les effets bénéfiques d’un ennemi"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "ec710358846b6afb0280025a62a035fef37b1ff3df5d3a69ac5ca95ed25c19d1",
+    "text": "Dégâts d’<keyword0>Eau</keyword0> ; le <keyword1>Blocage</keyword1> les absorbe ; l’<keyword2>Armure</keyword2> ne les réduit pas ; aucun effet de statut n’est appliqué"
+  },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
     "source": "Knockout",

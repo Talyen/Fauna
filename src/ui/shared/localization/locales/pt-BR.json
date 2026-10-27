@@ -431,6 +431,42 @@
     "sourceHash": "0373852e2d34d0b357f111a38d5271a36f21bc5a049b09009c9f230e9b1c0297",
     "text": "EXP de palavras-chave"
   },
+  "content.glossary.keyword.bleed.definition.rule": {
+    "reviewed": true,
+    "source": "Repeat damage next turn, then clear",
+    "sourceHash": "15380fc918e8a5a4de4b3a4075ca932d5b653caa972b68c19dfa1a52e6edcdf9",
+    "text": "Repete o dano no próximo turno e depois é removido"
+  },
+  "content.glossary.keyword.burn.definition.rule": {
+    "reviewed": true,
+    "source": "Deal damage each turn, then halve the stacks",
+    "sourceHash": "a4a2b4b8515bf121c8fadc7ce86fd79eef18560d317c7182a015825a39a1b74d",
+    "text": "Causa dano a cada turno e depois reduz os acúmulos pela metade"
+  },
+  "content.glossary.keyword.cleanse.definition.rule": {
+    "reviewed": true,
+    "source": "Remove harmful effects from an ally",
+    "sourceHash": "4e4a1960064e66bc7fc6e559397097497109802a196284226a65f3d5a77c86a1",
+    "text": "Remove efeitos prejudiciais de um aliado"
+  },
+  "content.glossary.keyword.nature.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
+    "sourceHash": "4367c9ad67b79de287ebeb56ad59f64e9197105126f3d96740d0852862f9cb59",
+    "text": "Dano de <keyword0>Natureza</keyword0>; não implica resistência nem efeito de estado"
+  },
+  "content.glossary.keyword.purge.definition.rule": {
+    "reviewed": true,
+    "source": "Remove beneficial effects from an enemy",
+    "sourceHash": "6c9aa5b78e881153020942a4cba370b30782fed4d04745b69426cf5237d786d6",
+    "text": "Remove efeitos benéficos de um inimigo"
+  },
+  "content.glossary.keyword.water.definition.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
+    "sourceHash": "df048bfcf19301a8763bf33c0281318f3624a92774a0987e2e05ae6b8cdb66fe",
+    "text": "Dano de <keyword0>Água</keyword0>; o <keyword1>Bloqueio</keyword1> o absorve; a <keyword2>Armadura</keyword2> não o reduz; não aplica efeito de estado"
+  },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
     "source": "Knockout",
