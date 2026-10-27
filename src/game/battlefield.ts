@@ -33,6 +33,17 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
   return result;
 }
 
+/** A fresh, ordered snapshot of living battlefield participants. */
+export function livingBattlefield(state: GameState, side: "enemy"): Enemy[];
+export function livingBattlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[];
+export function livingBattlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[] {
+  const row = battlefield(state, side);
+  let next = 0;
+  for (const unit of row) if (unit.health > 0) row[next++] = unit;
+  row.length = next;
+  return row;
+}
+
 /** Stored summon receipts become inert immediately when their owner leaves or falls. */
 export function isDepartedMinion(state: GameState, unit: Creature | Enemy): boolean {
   if (!("minion" in unit) || !unit.minion) return false;

@@ -111,9 +111,10 @@ export function generateEncounterPack(state: GameState, savedPack?: readonly Spe
   const roster = new Set(state.team.map((unit) => unit.species));
   for (const unit of state.reserves) roster.add(unit.species);
   const eligible = recruitableSpecies.filter((entry) => !roster.has(entry.id));
-  return selected.map((kind) =>
-    roster.has(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind,
-  );
+  for (let index = 0; index < selected.length; index++)
+    if (roster.has(selected[index]!))
+      selected[index] = eligible[Math.floor(roll(state) * eligible.length)]!.id;
+  return selected;
 }
 
 function scaleEnemyStat(base: number, encounter: number) {

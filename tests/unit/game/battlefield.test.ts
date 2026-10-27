@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { battlefield } from "../../../src/game/battlefield";
+import { battlefield, livingBattlefield } from "../../../src/game/battlefield";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { requireBattle, teamRun } from "../../support/game";
 
@@ -33,4 +33,18 @@ it("appends summons in authored order only while their owner is alive on that si
   expect(battlefield(state, "enemy")).toEqual(state.battle.enemies);
   first!.health = 1;
   expect(battlefield(state, "player")).toEqual([...state.team, firstEcho, secondEcho]);
+});
+
+it("captures living participants in battlefield order without changing the roster", () => {
+  const state = structuredClone(requireBattle(teamRun(42, ["memento", "mossguard"])));
+  const [first, second] = state.team;
+  summonEcho(state, first!, "player", 6, []);
+  const echo = state.battle.minions![0]!;
+  second!.health = 0;
+  const snapshot = livingBattlefield(state, "player");
+  expect(snapshot).toEqual([first, echo]);
+  first!.health = 0;
+  expect(snapshot).toEqual([first, echo]);
+  expect(state.team).toEqual([first, second]);
+  expect(livingBattlefield(state, "player")).toEqual([]);
 });

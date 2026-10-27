@@ -37,12 +37,11 @@ const harms = [
 function unitValue(unit: Combatant) {
   if (unit.health <= 0) return 0;
   const stats = unit.combat;
-  return (
-    unit.health +
-    unit.block +
-    benefits.reduce((sum, key) => sum + Number(stats?.[key] ?? 0), 0) -
-    harms.reduce((sum, key) => sum + Number(stats?.[key] ?? 0), 0)
-  );
+  let benefit = 0;
+  let harm = 0;
+  for (const key of benefits) benefit += Number(stats?.[key] ?? 0);
+  for (const key of harms) harm += Number(stats?.[key] ?? 0);
+  return unit.health + unit.block + benefit - harm;
 }
 function positionValue(state: BattleState) {
   const rowValue = (side: "player" | "enemy") =>

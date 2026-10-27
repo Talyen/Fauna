@@ -13,7 +13,7 @@ import {
   MAX_BATTLE_CARDS,
   MAX_HAND_SIZE,
 } from "../card-zones";
-import { battlefield, isEnemy } from "../battlefield";
+import { battlefield, livingBattlefield, isEnemy } from "../battlefield";
 import { freshCombat, hit, restoreHealth, controlled } from "./index";
 import type { Combatant } from "./state";
 import type { BattleState, Enemy, EnemyDeck, GameEvent, GameState } from "../types";
@@ -132,7 +132,7 @@ export function courtRemembers(state: BattleState, actor: Combatant, events: Gam
     (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
   );
   if (!echoes.length) return;
-  const enemies = battlefield(state, isEnemy(actor) ? "player" : "enemy").filter((unit) => unit.health > 0);
+  const enemies = livingBattlefield(state, isEnemy(actor) ? "player" : "enemy");
   if (!enemies.length) return;
   const echo = echoes[Math.floor(roll(state, { kind: "index", size: echoes.length }) * echoes.length)]!;
   const target = enemies[Math.floor(roll(state, { kind: "index", size: enemies.length }) * enemies.length)]!;

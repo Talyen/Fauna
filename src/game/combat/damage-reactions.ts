@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds, talentChance } from "../chance";
-import { battlefield, healingAllies, isEnemy, combatantById } from "../battlefield";
+import { battlefield, livingBattlefield, healingAllies, isEnemy, combatantById } from "../battlefield";
 import { roll } from "../random";
 import { draw, drawKeyword, recoverBrokenGuard } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
@@ -212,7 +212,7 @@ export function* passingFlame({ state, source, target, events }: HitContext): Re
   const percent = passiveAmount(allied ? state : undefined, source.species, "passingFlame");
   const total = Math.round((ensureCombat(target).burn * percent) / 100);
   if (total <= 0) return;
-  const recipients = battlefield(state, allied ? "enemy" : "player").filter((unit) => unit.health > 0);
+  const recipients = livingBattlefield(state, allied ? "enemy" : "player");
   if (!recipients.length) return;
   const share = Math.floor(total / recipients.length);
   const remainder = total % recipients.length;

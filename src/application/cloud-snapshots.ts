@@ -40,14 +40,14 @@ export async function snapshot(
   const parentsAtAdmission = parents.map((parent) => {
     ancestry.add(parent.id);
     if (parent.profile !== identity.profile) invalidProfile = true;
-    return { id: parent.id, ancestors: [...parent.ancestors] };
+    return [...parent.ancestors];
   });
   if (invalidProfile) throw new Error("Cloud ancestry belongs to another profile.");
   if (ancestry.size > MAX_ANCESTORS)
     throw new Error("Cloud ancestry limit reached; competing snapshots remain separate.");
   payload = encodeSave(decodeSave(payload));
   for (const parent of parentsAtAdmission) {
-    for (const ancestor of parent.ancestors) {
+    for (const ancestor of parent) {
       if (ancestry.size >= MAX_ANCESTORS) break;
       ancestry.add(ancestor);
     }
