@@ -6,40 +6,14 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { recipeSettings, prepareBytes, rasterMetadata } from "./art-recipes.mjs";
 export const hash = (data) => createHash("sha256").update(data).digest("hex");
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-export function imageDimensions(bytes, extension) {
-  if (
-    extension === ".png" &&
-    bytes.length >= 33 &&
-    bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])) &&
-    bytes.readUInt32BE(8) === 13 &&
-    bytes.toString("ascii", 12, 16) === "IHDR"
-  ) {
-    const width = bytes.readUInt32BE(16),
-      height = bytes.readUInt32BE(20);
-    if (width && height) return [width, height];
-  }
-  if (extension === ".svg") {
-    const source = bytes.toString();
-    const view = source.match(/viewBox=["']\s*[\d.-]+\s+[\d.-]+\s+([\d.]+)\s+([\d.]+)/);
-    if (view) return [Number(view[1]), Number(view[2])];
-    const width = source.match(/\bwidth=["']([\d.]+)/),
-      height = source.match(/\bheight=["']([\d.]+)/);
-    if (width && height) return [Number(width[1]), Number(height[1])];
-  }
-  if (
-    extension === ".webp" &&
-    bytes.toString("ascii", 0, 4) === "RIFF" &&
-    bytes.toString("ascii", 8, 12) === "WEBP"
-  ) {
-    const type = bytes.toString("ascii", 12, 16);
-    if (type === "VP8X") return [1 + bytes.readUIntLE(24, 3), 1 + bytes.readUIntLE(27, 3)];
-    if (type === "VP8 ") return [bytes.readUInt16LE(26) & 0x3fff, bytes.readUInt16LE(28) & 0x3fff];
-    if (type === "VP8L") {
-      const bits = bytes.readUInt32LE(21);
-      return [(bits & 0x3fff) + 1, ((bits >>> 14) & 0x3fff) + 1];
-    }
-  }
-  throw new Error(`Unsupported or corrupt image ${extension}`);
+function svgDimensions(bytes) {
+  const source = bytes.toString();
+  const view = source.match(/viewBox=["']\s*[\d.-]+\s+[\d.-]+\s+([\d.]+)\s+([\d.]+)/);
+  if (view) return { width: Number(view[1]), height: Number(view[2]) };
+  const width = source.match(/\bwidth=["']([\d.]+)/),
+    height = source.match(/\bheight=["']([\d.]+)/);
+  if (width && height) return { width: Number(width[1]), height: Number(height[1]) };
+  throw new Error("Unsupported or corrupt image .svg");
 }
 function safeRelative(value) {
   return (
@@ -92,13 +66,13 @@ export function validateManifest(manifest) {
 async function checkBytes(entry, bytes, extension = path.extname(entry.output)) {
   if (!bytes.length) throw new Error(`Empty source ${entry.id}`);
   if (entry.kind === "art" || entry.kind === "interface") {
-    const [width, height] = imageDimensions(bytes, extension);
+    const geometry = extension === ".svg" ? svgDimensions(bytes) : await rasterMetadata(bytes, extension);
+    const { width, height } = geometry;
     if (![width, height].every((value) => Number.isFinite(value) && value > 0))
       throw new Error(`Invalid image dimensions ${entry.id}`);
     if (entry.aspect && Math.abs(width / height - entry.aspect[0] / entry.aspect[1]) > 0.005)
       throw new Error(`Aspect ratio mismatch for ${entry.id}: ${width}x${height}`);
-    if (extension !== ".svg") return rasterMetadata(bytes);
-    return { width, height };
+    return geometry;
   } else {
     const ext = path.extname(entry.output);
     if (
@@ -125,7 +99,10 @@ async function readSource(entry, repository) {
   }
   if (!source.startsWith(base + path.sep) || !(await stat(source)).isFile())
     throw new Error(`Source escapes repository: ${entry.id}`);
-  const bytes = await readFile(source);
+  return readFile(source);
+}
+async function readValidatedSource(entry, repository) {
+  const bytes = await readSource(entry, repository);
   await checkBytes(entry, bytes, path.extname(entry.source));
   return bytes;
 }
@@ -248,7 +225,7 @@ async function runAssets({ repository = root, mode = "outputs" } = {}) {
     // pointer is the only publication boundary and always switches last.
     const selections = [];
     for (const entry of manifest.assets) {
-      const bytes = await readSource(entry, repository);
+      const bytes = await readValidatedSource(entry, repository);
       selections.push({ entry, sourceHash: hash(bytes) });
     }
     const records = {};
@@ -321,7 +298,7 @@ async function runAssets({ repository = root, mode = "outputs" } = {}) {
   await validateReceipt(manifest, receipt, repository);
   if (mode === "sources") {
     for (const entry of manifest.assets) {
-      if (hash(await readSource(entry, repository)) !== receipt.records[entry.id].sourceHash)
+      if (hash(await readValidatedSource(entry, repository)) !== receipt.records[entry.id].sourceHash)
         throw new Error(`Source changed: ${entry.id}`);
     }
   }

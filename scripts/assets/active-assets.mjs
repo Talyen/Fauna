@@ -10,8 +10,14 @@ const ROOT = path.resolve(import.meta.dirname, "../..");
 // 306 active objects measure 221.31 MiB, including eighty-nine lossless Drive Boon portraits.
 const MAX_MEDIA_BYTES = 223 * 1024 * 1024;
 const MAX_ART_BYTES = 3 * 1024 * 1024;
-const inventory = (receipt) =>
-  [...new Set(Object.values(receipt.records).map((record) => record.url.slice(2)))].sort();
+function inventory(receipt) {
+  const records = new Map();
+  for (const record of Object.values(receipt.records)) {
+    const file = record.url.slice(2);
+    if (!records.has(file)) records.set(file, record);
+  }
+  return [...records.entries()].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
+}
 
 async function files(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -26,7 +32,8 @@ async function files(directory) {
 }
 
 export async function verifyAssetBundle(directory, receipt) {
-  const expected = [...inventory(receipt), "prepared/manifest.json"].sort();
+  const media = inventory(receipt);
+  const expected = [...media.map(([file]) => file), "prepared/manifest.json"].sort();
   const actual = (await files(path.join(directory, "prepared")))
     .map((file) => path.relative(directory, file).split(path.sep).join("/"))
     .sort();
@@ -52,8 +59,7 @@ export async function verifyAssetBundle(directory, receipt) {
   )
     throw new Error("Build contains unapproved public resources or authoring originals.");
   let total = 0;
-  for (const url of inventory(receipt)) {
-    const record = Object.values(receipt.records).find((item) => item.url.slice(2) === url);
+  for (const [url, record] of media) {
     const file = path.join(directory, url);
     const size = (await stat(file)).size;
     if ((await fileHash(file)) !== record.outputHash) throw new Error(`Build media changed: ${url}`);
@@ -95,13 +101,12 @@ export function activeAssetsPlugin(repository = ROOT) {
       const directory = path.resolve(repository, options.dir);
       // Media URLs are already final. Copy outside the bundler's asset buffers,
       // validating the copied bytes before publishing the receipt last.
-      for (const file of inventory(receipt)) {
+      for (const [file, record] of inventory(receipt)) {
         const target = path.join(directory, file);
         const temporary = `${target}.${randomUUID()}.tmp`;
         await mkdir(path.dirname(target), { recursive: true });
         try {
           await copyFile(path.join(repository, "public", file), temporary);
-          const record = Object.values(receipt.records).find((item) => item.url.slice(2) === file);
           if ((await fileHash(temporary)) !== record.outputHash)
             throw new Error(`Prepared asset changed during build: ${file}`);
           await rename(temporary, target);
