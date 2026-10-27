@@ -359,6 +359,12 @@
     "sourceHash": "38d7540973cea758166ecd54818df1cbcc84b7d3899c201a3394ea25828fce00",
     "text": "Пепельная подвеска"
   },
+  "content.boon.ashfall-pendant.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "sourceHash": "f81043c1340fcccda13e08b3f0da1014a4b7a64bb9efae7b3fb8bd025c761ae7",
+    "text": "<keyword0>Горение</keyword0>, потерянное при уменьшении, также снимает столько же вражеского <keyword1>блока</keyword1>"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -473,6 +479,12 @@
     "sourceHash": "35eccf0086bafb4b8c79d535fa4409939af5e95fff82b2a69dfb9544f55025a8",
     "text": "Веер угольков"
   },
+  "content.boon.cinder-fan.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "sourceHash": "a66cad4bb93b606dd5a5ab1c9e1d941f8278c7155ec4eeb0612023c873746bea",
+    "text": "Вражеское <keyword0>горение</keyword0>, потерянное при уменьшении, наносит столько же урона <keyword1>горением</keyword1>, распределённого между другими врагами"
+  },
   "content.boon.cloud-cup-and-ball.name": {
     "reviewed": true,
     "source": "Cloud Cup-and-Ball",
@@ -551,11 +563,23 @@
     "sourceHash": "70a11a52b9e72d886c8a2411780ea5d96127a07b0935c7b0f84a488f2da3bbd8",
     "text": "Кратерный пуансон"
   },
+  "content.boon.crater-punch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "sourceHash": "1a33d2e95aa01c59229b341a47457e0a31f3c29e10431e228ddd3f70f890023c",
+    "text": "<keyword0>Критические удары</keyword0> также наносят <keyword2>здоровью</keyword2> половину <keyword1>заблокированного</keyword1> урона"
+  },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
     "source": "Crescent Sextant",
     "sourceHash": "14a6d5067f63e0cfe42ce1d12622c83da2816284dd2e24dd14abcdf488b0f507",
     "text": "Секстант полумесяца"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "sourceHash": "5191a89c1eb392fd4f907c60f59f2d767251fe67e25b302ecdde95eefcfb2fde",
+    "text": "Пороги вражеского <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> зависят от текущего <keyword2>здоровья</keyword2>"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -634,6 +658,12 @@
     "source": "Eclipse Protractor",
     "sourceHash": "80bae040c6cbd6f454b7c122c93b98298d859e0ddbd8577b1b5a522fd933f5a5",
     "text": "Транспортир затмения"
+  },
+  "content.boon.eclipse-protractor.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "sourceHash": "5e0c3e173e06b18e400cb52c2c9935dd29650959c3d74fac66d0fd8f2570f8d6",
+    "text": "<keyword0>Критические удары</keyword0> добавляют накопление <keyword1>заморозки</keyword1>, равное дополнительному урону"
   },
   "content.boon.eclipse-rivet.name": {
     "reviewed": true,

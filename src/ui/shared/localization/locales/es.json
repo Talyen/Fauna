@@ -359,6 +359,12 @@
     "sourceHash": "dce5b5f3f298d4f9237720f885a20f4ed28f161f222ece98f903b15ceaf723cb",
     "text": "Colgante de ceniza"
   },
+  "content.boon.ashfall-pendant.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "sourceHash": "66f3486121e8751f7247b0ddc532be9ffe4a0fe2a7664a7ed70a9e788f95fc80",
+    "text": "La <keyword0>Quemadura</keyword0> perdida por disminución también elimina esa cantidad de <keyword1>Bloqueo</keyword1> enemigo"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -473,6 +479,12 @@
     "sourceHash": "0aeac65c3e362f3b3582a231f6227228f83e03cca730eddebfdf0530b0ac09d4",
     "text": "Abanico de brasas"
   },
+  "content.boon.cinder-fan.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "sourceHash": "c23f6de37f368e55228eaebb642b885969a959d56c03bc2532f90e64e0c54221",
+    "text": "La <keyword0>Quemadura</keyword0> enemiga perdida por disminución inflige esa cantidad de daño de <keyword1>Quemadura</keyword1>, repartido entre los demás enemigos"
+  },
   "content.boon.cloud-cup-and-ball.name": {
     "reviewed": true,
     "source": "Cloud Cup-and-Ball",
@@ -551,11 +563,23 @@
     "sourceHash": "d7aa58566dac40f58d2a3a4585f11196fdc877e8221299a5f97b3f3b69c93ab9",
     "text": "Punzón de cráter"
   },
+  "content.boon.crater-punch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "sourceHash": "cb360bbab0dfe5671889003eec0697992a678c4d3d957a2957a9cab9f5b5e68b",
+    "text": "Los <keyword0>Golpes críticos</keyword0> también infligen a la <keyword2>Salud</keyword2> la mitad de su daño <keyword1>bloqueado</keyword1>"
+  },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
     "source": "Crescent Sextant",
     "sourceHash": "21330ffe7453507b1690f35d4f4a7d15fe11ab669810aea2aa3b1e782a00c9ff",
     "text": "Sextante creciente"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "sourceHash": "363feceb74e3fcc0a39bbd90853f072617531fa4f3f9b92e95b070045ffdc445",
+    "text": "Los umbrales enemigos de <keyword0>Aturdimiento</keyword0> y <keyword1>Congelación</keyword1> usan la <keyword2>Salud</keyword2> actual"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -634,6 +658,12 @@
     "source": "Eclipse Protractor",
     "sourceHash": "0f7961b87f68db76c92ae40ed20e923af947735fe54ffc665d4c755dad6f06fa",
     "text": "Transportador de eclipse"
+  },
+  "content.boon.eclipse-protractor.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "sourceHash": "3976c201db84e42d1935931af1ab91e4fef3d2b4df17848e26a41ebba2665db0",
+    "text": "Los <keyword0>Golpes críticos</keyword0> añaden una acumulación de <keyword1>Congelación</keyword1> igual al daño adicional"
   },
   "content.boon.eclipse-rivet.name": {
     "reviewed": true,

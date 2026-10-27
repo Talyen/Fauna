@@ -359,6 +359,12 @@
     "sourceHash": "b04f8fea8e47c5d27a3228f8fb6a108323f6d6482f5461b7ae68d3b8ff66dd5c",
     "text": "落灰吊坠"
   },
+  "content.boon.ashfall-pendant.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "sourceHash": "2c3a7d9112fbbcdaff2a0c4ba46264f7623d428ec33260d3c0f113de03e2c4db",
+    "text": "衰减时失去的<keyword0>灼烧</keyword0>还会移除等量的敌方<keyword1>格挡</keyword1>"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -473,6 +479,12 @@
     "sourceHash": "78f3a722bc65210db341dd3352d8d334635d535d4a13f58ea7db820926352565",
     "text": "余烬扇"
   },
+  "content.boon.cinder-fan.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "sourceHash": "dc58f83d8c877b2de3f5043046cee99b3117d8133311fb2576bf456d1f3958f4",
+    "text": "敌人衰减失去的<keyword0>灼烧</keyword0>会造成等量<keyword1>灼烧</keyword1>伤害，分配给其他敌人"
+  },
   "content.boon.cloud-cup-and-ball.name": {
     "reviewed": true,
     "source": "Cloud Cup-and-Ball",
@@ -551,11 +563,23 @@
     "sourceHash": "ed584524e49bd1ddb7bbdfc297e652829f4e0ae689e770cbff30351f3d25a67a",
     "text": "陨坑冲头"
   },
+  "content.boon.crater-punch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "sourceHash": "0669b7cc08ea0df0ffc5d6333bb62a8230edfcfd160486d81e6b33552b3b6ad0",
+    "text": "<keyword0>暴击</keyword0>还会将被<keyword1>格挡</keyword1>伤害的一半造成给<keyword2>生命</keyword2>"
+  },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
     "source": "Crescent Sextant",
     "sourceHash": "a948a230831805bfd8a2fd0484feb0684c88856d828f9e2f1fd8463d1fdd9e53",
     "text": "新月六分仪"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "sourceHash": "5051ac5d98369260e3d056c65586a16624d76f38da0666b11c419edad0ea2ef6",
+    "text": "敌人的<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>阈值使用当前<keyword2>生命</keyword2>"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -634,6 +658,12 @@
     "source": "Eclipse Protractor",
     "sourceHash": "bbbe1ec8835bf4ebcc6bd740757d86337e0069cab35eca637155e50ea856c19c",
     "text": "日蚀量角器"
+  },
+  "content.boon.eclipse-protractor.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "sourceHash": "13ecc30b93651969e092c2011c3c013f09b6277d2f9fd8fdcccae600cd997001",
+    "text": "<keyword0>暴击</keyword0>增加等同于额外伤害的<keyword1>冻结</keyword1>累积"
   },
   "content.boon.eclipse-rivet.name": {
     "reviewed": true,

@@ -359,6 +359,12 @@
     "sourceHash": "87bdcb233370c5e2509cb419583d301971170063b70d7e45519744f6bbee08e1",
     "text": "灰降りのペンダント"
   },
+  "content.boon.ashfall-pendant.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "sourceHash": "721af9956d6426ad7d8edab0518f1a87f2649d9f507f43a724b5b15f7896ba69",
+    "text": "減衰で失われた<keyword0>炎上</keyword0>と同量の敵<keyword1>ブロック</keyword1>も取り除く"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -473,6 +479,12 @@
     "sourceHash": "8cd879760c6a1304004155bbd73f6f144b2599d8bd47c50b20a041f2a555b9f9",
     "text": "熾火の扇"
   },
+  "content.boon.cinder-fan.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "sourceHash": "501b6db329775d5159739ae636ac0173bfd82d86a21d36aa083bcf0be80725c7",
+    "text": "減衰で失われた敵の<keyword0>炎上</keyword0>と同量の<keyword1>炎上</keyword1>ダメージを他の敵に分配"
+  },
   "content.boon.cloud-cup-and-ball.name": {
     "reviewed": true,
     "source": "Cloud Cup-and-Ball",
@@ -551,11 +563,23 @@
     "sourceHash": "d9f560d35561daa02f0e2493cd214fa1d528aeca357d38bde08f670b252ec6fe",
     "text": "クレーターの刻印"
   },
+  "content.boon.crater-punch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "sourceHash": "ddf775e263d8012f878940f55ab16fe948f678bcc3868c66f8178dc8f2445723",
+    "text": "<keyword0>クリティカル</keyword0>は<keyword1>ブロック</keyword1>されたダメージの半分も<keyword2>体力</keyword2>に与える"
+  },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
     "source": "Crescent Sextant",
     "sourceHash": "41324b018c588ab438fb3e6bc882daa84bee466ab9496423a39e0ae3596c0a4e",
     "text": "三日月の六分儀"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "sourceHash": "d248db013ed45dba37e381336508b82aae82b4aa6950db19ee80e3544d6e4df4",
+    "text": "敵の<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>の閾値は現在の<keyword2>体力</keyword2>を使う"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -634,6 +658,12 @@
     "source": "Eclipse Protractor",
     "sourceHash": "9c5b9ee8b55a6bc8156ffa7ce1b09561cc359ef34d861c50e6105c82de0373e1",
     "text": "日食の分度器"
+  },
+  "content.boon.eclipse-protractor.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "sourceHash": "bfb78a40899847a94ef24b62942f830360cd2bf40d3c7d943a822d379ffc1aa9",
+    "text": "<keyword0>クリティカル</keyword0>は追加ダメージと同量の<keyword1>凍結</keyword1>蓄積を加える"
   },
   "content.boon.eclipse-rivet.name": {
     "reviewed": true,

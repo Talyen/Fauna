@@ -359,6 +359,12 @@
     "sourceHash": "237592d8451fba84db47e21320edb346693c8f6b2f848665e7869ce5c6d581ce",
     "text": "Pingente de cinzas"
   },
+  "content.boon.ashfall-pendant.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> lost through decay also removes that much enemy <keyword1>Block</keyword1>",
+    "sourceHash": "fc5e41dac938e394caed8606e5a668ad7f16cdc6141c72fc1083c16dce3fc58d",
+    "text": "A <keyword0>Queimadura</keyword0> perdida por redução também remove a mesma quantidade de <keyword1>Bloqueio</keyword1> inimigo"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -473,6 +479,12 @@
     "sourceHash": "b8732a043c54dde3477d6e7e33922a620afa9ed3298ec83ba3ef8b4b179266d7",
     "text": "Leque de brasas"
   },
+  "content.boon.cinder-fan.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Burn</keyword0> lost through decay deals that much <keyword1>Burn</keyword1> damage, split between other enemies",
+    "sourceHash": "108388859f4cd1712400dbf3f0fe6da062fb76ac617e432674f521571defd8bd",
+    "text": "A <keyword0>Queimadura</keyword0> inimiga perdida por redução causa a mesma quantidade de dano de <keyword1>Queimadura</keyword1>, dividido entre os outros inimigos"
+  },
   "content.boon.cloud-cup-and-ball.name": {
     "reviewed": true,
     "source": "Cloud Cup-and-Ball",
@@ -551,11 +563,23 @@
     "sourceHash": "a5cd03651f7a55f3e8b47dea491580d1ed894ca7be49891ca26e52a854ced049",
     "text": "Punção de cratera"
   },
+  "content.boon.crater-punch.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> also deal half their <keyword1>blocked</keyword1> damage to <keyword2>Health</keyword2>",
+    "sourceHash": "f233717e6c7cfda7e3758129ab8e315b0d48017fe3abb9d6cb4b9a2631445da1",
+    "text": "<keyword0>Acertos críticos</keyword0> também causam à <keyword2>Saúde</keyword2> metade do dano <keyword1>bloqueado</keyword1>"
+  },
   "content.boon.crescent-sextant.name": {
     "reviewed": true,
     "source": "Crescent Sextant",
     "sourceHash": "70066f65c3b5ace17fc19071f9d51ab978720165db2ced44a00dfdc6cb97a7df",
     "text": "Sextante crescente"
+  },
+  "content.boon.crescent-sextant.rule": {
+    "reviewed": true,
+    "source": "Enemy <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> thresholds use current <keyword2>Health</keyword2>",
+    "sourceHash": "4d3f2134bde2faa74086559a9907175a93389659d708b59ae1cd370e6b61fbe4",
+    "text": "Os limites inimigos de <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1> usam a <keyword2>Saúde</keyword2> atual"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -634,6 +658,12 @@
     "source": "Eclipse Protractor",
     "sourceHash": "033e37f2ecff6af267d45fcebacd525ad60a5224daa3a1ac7bbbe18781e4d520",
     "text": "Transferidor do eclipse"
+  },
+  "content.boon.eclipse-protractor.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Critical Hits</keyword0> add <keyword1>Freeze</keyword1> build-up equal to the bonus damage",
+    "sourceHash": "e5a6a7e5bd4233a37b5c3d7f5b9e0fdcbad31aaca298a880ad754e6a597799e1",
+    "text": "<keyword0>Acertos críticos</keyword0> adicionam acúmulo de <keyword1>Congelamento</keyword1> igual ao dano bônus"
   },
   "content.boon.eclipse-rivet.name": {
     "reviewed": true,
