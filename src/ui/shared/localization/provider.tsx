@@ -24,7 +24,13 @@ interface LanguageState {
   options: readonly GameLocale[];
   setPreference: (value: LanguagePreference) => void;
 }
-const LanguageContext = createContext<LanguageState | null>(null);
+const fallback: LanguageState = {
+  locale: "en",
+  preference: "auto",
+  options: ["en"],
+  setPreference: () => {},
+};
+const LanguageContext = createContext<LanguageState>(fallback);
 
 /** Unqualified or missing catalogs are never selectable, even if stored by an older build. */
 export function LocalizationProvider({
@@ -94,7 +100,5 @@ export function LocalizationProvider({
 }
 
 export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) throw new Error("Language preference requires LocalizationProvider");
-  return context;
+  return useContext(LanguageContext);
 }

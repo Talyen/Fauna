@@ -125,12 +125,14 @@ Use a centered full screen up to 640px wide, native Display/Sound/Battle tabs an
 
 Use distinct Lucide icons, a 24px semibold light title, body-size pale-gold section headings with fading rules, 16px light option labels and muted supporting text. Align labels/controls in columns and values to control edges; wrap controls below labels when needed. Shared control styling belongs to [UI contracts](../UI.md#shared-control-states-and-feedback).
 
-| Category             | Controls                                                                                                                                     |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Display              | Independent Text size and Tooltip size radios: 75%, 100%, 125%, default 100%; Background Glow and Background Particles: 0–100%, default 100% |
-| Sound                | Sound switch, Master/Music/Sound effects sliders with percentage readouts in 10-point steps (all default 50%), Mute in background            |
-| Battle               | Auto-end turn switch, enabled by default; Controller prompts radios: Automatic (default), Xbox / Deck, PlayStation, Nintendo                 |
-| Desktop Display only | Windowed/Fullscreen radios reflecting confirmed native state                                                                                 |
+| Category             | Controls                                                                                                                                                                                               |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Display              | Language choice when more than one language is qualified; independent Text size and Tooltip size radios: 75%, 100%, 125%, default 100%; Background Glow and Background Particles: 0–100%, default 100% |
+| Sound                | Sound switch, Master/Music/Sound effects sliders with percentage readouts in 10-point steps (all default 50%), Mute in background                                                                      |
+| Battle               | Auto-end turn switch, enabled by default; Controller prompts radios: Automatic (default), Xbox / Deck, PlayStation, Nintendo                                                                           |
+| Desktop Display only | Windowed/Fullscreen radios reflecting confirmed native state                                                                                                                                           |
+
+Language opens a dialog with Automatic and qualified languages named in their own languages. Selecting a language applies immediately without closing the dialog; Escape or controller Back closes it and returns focus to the language control. Automatic uses Steam's game language when available, then system preferences, with English fallback. The choice is device-local and does not alter a journey. Do not offer incomplete languages; [localization qualification](../LOCALIZATION.md#implementation-and-qualification) owns the remaining requirements.
 
 Controller prompts detect known browser device IDs; Steam Input may expose an Xbox identity for another controller, so manual selection takes precedence. Standard gamepad button positions remain unchanged. Losing the controller currently being used stops autoplay and opens pause during play; reconnecting does not resume.
 

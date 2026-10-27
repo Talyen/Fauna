@@ -4,7 +4,7 @@ import { EventEmitter } from "node:events";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { act, render, screen, fireEvent } from "@testing-library/react";
+import { act, render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { expect, it, vi } from "vitest";
 import {
   applyPackets,
@@ -15,6 +15,10 @@ import {
 } from "../../../scripts/localization/catalog.mjs";
 import { extractMessages } from "../../../scripts/localization/messages.mjs";
 import { produce } from "immer";
+import { App } from "../../../src/ui/App";
+import { createSession } from "../../../src/application/session";
+import { createBrowserPlatform } from "../../../src/platform/browser";
+import french from "../../../src/ui/shared/localization/locales/fr.json";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { ReplacementPicker } from "../../../src/ui/shared/cards/roster-picker";
 import { addBackups, requireBattle, run, teamRun } from "../../support/game";
@@ -472,5 +476,64 @@ it("translates a battle targeting prompt without issuing a gameplay command", ()
   } finally {
     view.unmount();
     vi.unstubAllGlobals();
+  }
+});
+
+it("changes language from Settings and returns focus without changing the journey", async () => {
+  localStorage.removeItem("fauna.language.v1");
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    },
+  );
+  const rects = vi
+    .spyOn(HTMLElement.prototype, "getClientRects")
+    .mockReturnValue([{}] as unknown as DOMRectList);
+  const mediaPlay = vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
+  const mediaPause = vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
+  const mediaLoad = vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
+  const session = createSession(createBrowserPlatform(), 7);
+  await session.load();
+  const before = session.store.getState().game;
+  const view = render(
+    <LocalizationProvider catalogs={{ fr: french }} qualified={["en", "fr"]} systemLanguages={["en"]}>
+      <App session={session} />
+    </LocalizationProvider>,
+  );
+  try {
+    fireEvent.click(screen.getByRole("button", { name: "Settings" }));
+    const opener = screen.getByRole("button", { name: "Language: Automatic" });
+    opener.focus();
+    fireEvent.click(opener);
+    const dialog = await screen.findByRole("dialog", { name: "Language" });
+    expect(dialog).toBeTruthy();
+    const frenchChoice = screen.getByRole("radio", { name: "Français" });
+    frenchChoice.focus();
+    fireEvent.keyDown(frenchChoice, { key: "Enter" });
+    expect(await screen.findByRole("dialog", { name: "Langue" })).toBeTruthy();
+    expect(opener.getAttribute("aria-label")).toBe("Langue : Français");
+    expect(session.store.getState().game).toBe(before);
+    expect(localStorage.getItem("fauna.language.v1")).toBe("fr");
+    fireEvent.keyDown(document, { key: "Escape" });
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    await waitFor(() => expect(document.activeElement).toBe(opener));
+    fireEvent.click(opener);
+    expect(await screen.findByRole("dialog", { name: "Langue" })).toBeTruthy();
+    fireEvent.keyDown(document, { key: "Escape" });
+    await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+    await waitFor(() => expect(document.activeElement).toBe(opener));
+    expect(localStorage.getItem("fauna.language.v1")).toBe("fr");
+  } finally {
+    view.unmount();
+    await session.dispose();
+    rects.mockRestore();
+    mediaPlay.mockRestore();
+    mediaPause.mockRestore();
+    mediaLoad.mockRestore();
+    vi.unstubAllGlobals();
+    localStorage.removeItem("fauna.language.v1");
   }
 });

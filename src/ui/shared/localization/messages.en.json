@@ -194,6 +194,9 @@
   "settings.categories": {
     "text": "Settings categories"
   },
+  "settings.closeLanguage": {
+    "text": "Close language"
+  },
   "settings.controllerPrompts": {
     "text": "Controller prompts"
   },
@@ -220,6 +223,15 @@
   },
   "settings.glowValue": {
     "text": "Background Glow value"
+  },
+  "settings.language": {
+    "text": "Language"
+  },
+  "settings.languageDescription": {
+    "text": "Choose a language"
+  },
+  "settings.languageValue": {
+    "text": "Language: {{language}}"
   },
   "settings.master": {
     "text": "Master"

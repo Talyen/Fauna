@@ -1,3 +1,4 @@
+import { LanguageChoices } from "../settings/language-choices";
 import { useMessages } from "../shared/localization/message-context";
 import type { ShellSurface } from "./navigation";
 import { EffectScope } from "../shared/effects/effects";
@@ -63,7 +64,9 @@ export function ShellOverlays({
                 ? i18n.message("overlay.closeDiscard", "Close discard pile")
                 : modal === "deck"
                   ? i18n.message("overlay.closeDeck", "Close deck")
-                  : i18n.message("overlay.closeBoons", "Close Boons")
+                  : modal === "language"
+                    ? i18n.message("settings.closeLanguage", "Close language")
+                    : i18n.message("overlay.closeBoons", "Close Boons")
           }
           onCloseAutoFocus={(event) => {
             event.preventDefault();
@@ -79,10 +82,14 @@ export function ShellOverlays({
                   ? i18n.message("overlay.deck", "Deck")
                   : modal === "boons"
                     ? i18n.message("overlay.boons", "Boons")
-                    : ""}
+                    : modal === "language"
+                      ? i18n.message("settings.language", "Language")
+                      : ""}
           </DialogTitle>
           <DialogDescription className="sr-only">
-            {i18n.message("overlay.information", "Game information and controls")}
+            {modal === "language"
+              ? i18n.message("settings.languageDescription", "Choose a language")
+              : i18n.message("overlay.information", "Game information and controls")}
           </DialogDescription>
           <EffectScope name={modal ?? "modal"}>
             {modal === "deck" || modal === "draw" || modal === "discard" ? (
@@ -93,6 +100,8 @@ export function ShellOverlays({
               />
             ) : modal === "boons" ? (
               <OwnedBoons boons={game.boons} />
+            ) : modal === "language" ? (
+              <LanguageChoices />
             ) : null}
           </EffectScope>
           {inspection ? (

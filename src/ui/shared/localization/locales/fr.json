@@ -390,6 +390,12 @@
     "sourceHash": "fc905ebe2949711d235711b933dfa1e7167289a549497e4f07d10ce06b10bd69",
     "text": "Catégories des paramètres"
   },
+  "settings.closeLanguage": {
+    "reviewed": true,
+    "source": "Close language",
+    "sourceHash": "834116bed3227b9b7f9a3eb9471647bb8a91fff1c9a7aa0124049625d0c2bbf3",
+    "text": "Fermer la sélection de langue"
+  },
   "settings.controllerPrompts": {
     "reviewed": true,
     "source": "Controller prompts",
@@ -443,6 +449,24 @@
     "source": "Background Glow value",
     "sourceHash": "e871d22633f909c71febf7e4c0f7918a73c2890d5d259e92a769d9b9cf9d2562",
     "text": "Valeur de la lueur d’arrière-plan"
+  },
+  "settings.language": {
+    "reviewed": true,
+    "source": "Language",
+    "sourceHash": "389ab873477c5c0b79e3930ee1ab7c9a498ebdba8b87e3aa4e9f14952e1ea6e9",
+    "text": "Langue"
+  },
+  "settings.languageDescription": {
+    "reviewed": true,
+    "source": "Choose a language",
+    "sourceHash": "a65f5a0ddd76b6718d71267975eef4b9ed29279e785958503787c4bf0a33724f",
+    "text": "Choisir une langue"
+  },
+  "settings.languageValue": {
+    "reviewed": true,
+    "source": "Language: {{language}}",
+    "sourceHash": "96b04697bb6d7f4e6e07c72b47b97771b0bb5a96504a7ccd8e502c0b4a32310a",
+    "text": "Langue : {{language}}"
   },
   "settings.master": {
     "reviewed": true,
