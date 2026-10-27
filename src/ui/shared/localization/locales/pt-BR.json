@@ -3797,6 +3797,18 @@
     "sourceHash": "5f7d3ea23e9a3b179c3c82b989c56dca8fb59669130e9df0bf6f256626778b6d",
     "text": "Aliados recebem {{value0}}% menos dano de <keyword0>Congelamento</keyword0>"
   },
+  "content.species.stillara.title": {
+    "reviewed": true,
+    "source": "The keeper of summer",
+    "sourceHash": "f4cf5e4e3885ca5a92edd711625f15782b7a8c5aac1d22fb40451bc94af88fec",
+    "text": "A guardiã do verão"
+  },
+  "content.species.stillara.trait": {
+    "reviewed": true,
+    "source": "First Thaw",
+    "sourceHash": "23afa34328a8ab833bd81916a5c06c49b4bf612d2d8b9b49ad6a41e87721a7e0",
+    "text": "Primeiro degelo"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3832,6 +3844,18 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "257a781c60ec5a8365cd87e937b2b5460c8dd193d687cbb9c2528702d2d69877",
     "text": "{{value0}}% de chance de interceptar ataques contra um aliado mais ferido"
+  },
+  "content.species.tournelle.title": {
+    "reviewed": true,
+    "source": "The little gallant",
+    "sourceHash": "21310d49d2167bb921166381e7ffe4e972b8c461894160280e3a5553910aa762",
+    "text": "O pequeno galante"
+  },
+  "content.species.tournelle.trait": {
+    "reviewed": true,
+    "source": "Gallantry",
+    "sourceHash": "81ba6826e459bb4f8a09b087b4e2cfa4658cf4149504310543cdbbbe49336f8a",
+    "text": "Galantaria"
   },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
@@ -3869,6 +3893,18 @@
     "sourceHash": "352e8bc2825aeb2eb5eb1820b6d5a9c593de2cb5c2b2d138b21cf01916ffa961",
     "text": "A segunda carta de Wickwaltz em cada turno se repete"
   },
+  "content.species.wickwaltz.title": {
+    "reviewed": true,
+    "source": "The kindling dancer",
+    "sourceHash": "44c859bdc37e4416d31f1fd7671f95262b72972f710fa4a97ad1475910348c34",
+    "text": "O dançarino dos gravetos"
+  },
+  "content.species.wickwaltz.trait": {
+    "reviewed": true,
+    "source": "Kindling Flourish",
+    "sourceHash": "770a69489de2d10f75c6948310c26fcf44baf579def031897aa78b1678b9fedc",
+    "text": "Floreio de gravetos"
+  },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
@@ -3904,6 +3940,18 @@
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
     "sourceHash": "5f0fb8f15541368069c321b90a50e8007177a1b2e7b4ddf1e357bdc53f1f163c",
     "text": "Comprar uma carta da sua pilha de descarte restaura {{value0}} de <keyword0>Saúde</keyword0> ao dono dela"
+  },
+  "content.species.wisterelle.title": {
+    "reviewed": true,
+    "source": "The keeper of the flowering station",
+    "sourceHash": "a792487370c49731ac80a7c7b17f5b86e7ee541c690a7405ad057313ca3f7a39",
+    "text": "A guardiã da estação florida"
+  },
+  "content.species.wisterelle.trait": {
+    "reviewed": true,
+    "source": "Lost and Found",
+    "sourceHash": "33e974f10ff58f4bbc0a96eee6cc701a6a12a0ddfca960c5b9eed270482d59c3",
+    "text": "Achados e perdidos"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,

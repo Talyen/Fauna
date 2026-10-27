@@ -3797,6 +3797,18 @@
     "sourceHash": "8dfedb5f8fa6c3e7d7126865b0ef8264128d5e3e928ddcd0501563720de8dc25",
     "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
   },
+  "content.species.stillara.title": {
+    "reviewed": true,
+    "source": "The keeper of summer",
+    "sourceHash": "d7cca650272acaba4550b6dd3a81d07cf526926d3fc05608a7c353433e58f358",
+    "text": "Хранитель лета"
+  },
+  "content.species.stillara.trait": {
+    "reviewed": true,
+    "source": "First Thaw",
+    "sourceHash": "ecc5cfffe63b3ddb1a44c5a58a450c8bb04f8db4d935c85e2eac50256ea6c478",
+    "text": "Первая оттепель"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3832,6 +3844,18 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "03eb132ec403ee3528af08f3a9f0ac14616a0c55be476bba46a57b18e0e06dac",
     "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
+  },
+  "content.species.tournelle.title": {
+    "reviewed": true,
+    "source": "The little gallant",
+    "sourceHash": "98c211cfa6bba884cac892ccbe6e17f0c1ff64011f758fcc8ddfd897a7a1a3f0",
+    "text": "Маленький галант"
+  },
+  "content.species.tournelle.trait": {
+    "reviewed": true,
+    "source": "Gallantry",
+    "sourceHash": "d88c5d532239642f746a7fc371682cca79ffc4ed27e472e0b1b26a342e493ecd",
+    "text": "Галантность"
   },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
@@ -3869,6 +3893,18 @@
     "sourceHash": "ad7d1a8b462fdb80fedede8452ec7f6fa145a83b6e128f6b8b19b05d163d5d5d",
     "text": "Вторая карта Wickwaltz за ход повторяется"
   },
+  "content.species.wickwaltz.title": {
+    "reviewed": true,
+    "source": "The kindling dancer",
+    "sourceHash": "7fcf8b37eb7a43dcc8e9c52b00d562491ffef89a0226223c10d0741b23865cc0",
+    "text": "Танцор растопки"
+  },
+  "content.species.wickwaltz.trait": {
+    "reviewed": true,
+    "source": "Kindling Flourish",
+    "sourceHash": "d00b35b8230104dfa609b10f789ae484dc5d8a698c4bc7ffea5271e88fa96328",
+    "text": "Росчерк растопки"
+  },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
@@ -3904,6 +3940,18 @@
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
     "sourceHash": "ea8633163ed9ac1d15998745113b4547c4226968fbdc43dc837f9b3851856544",
     "text": "Взяв карту из сброса, восстановите её владельцу {{value0}} <keyword0>здоровья</keyword0>"
+  },
+  "content.species.wisterelle.title": {
+    "reviewed": true,
+    "source": "The keeper of the flowering station",
+    "sourceHash": "6003ec37432ca29890c15b021b039edaed5e120a572802d7daf386c10dac8f4c",
+    "text": "Хранитель цветущей станции"
+  },
+  "content.species.wisterelle.trait": {
+    "reviewed": true,
+    "source": "Lost and Found",
+    "sourceHash": "c4c0b5338378a889e238d7c8559a3768ee357dc6a71ed957cc2db834d5e64dea",
+    "text": "Бюро находок"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,

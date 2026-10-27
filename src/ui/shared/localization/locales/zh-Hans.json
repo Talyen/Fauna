@@ -3797,6 +3797,18 @@
     "sourceHash": "97f7c568936227fd61aa93d1cc734bc67e3d11f0fd72f97db24d848a2646d828",
     "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
   },
+  "content.species.stillara.title": {
+    "reviewed": true,
+    "source": "The keeper of summer",
+    "sourceHash": "b3aec54ab59dbd2f6ca54d9579e2fc487e9c78fa2e19c110d83fc9ef8aa1aecf",
+    "text": "夏日守护者"
+  },
+  "content.species.stillara.trait": {
+    "reviewed": true,
+    "source": "First Thaw",
+    "sourceHash": "6ac2aa988c9284d08fec5557b6aa9522601ef152667fae163be162c751b6fea8",
+    "text": "初融"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3832,6 +3844,18 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "eabccdc4164e35bedccb693ad6f1d47932d1542f0fdd0e701113bb1194f5f9b2",
     "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
+  },
+  "content.species.tournelle.title": {
+    "reviewed": true,
+    "source": "The little gallant",
+    "sourceHash": "21e0468b73e73982e2c3618b98ceb6dbbe898cf4331597a82c31ad5107f5abf1",
+    "text": "小小侠士"
+  },
+  "content.species.tournelle.trait": {
+    "reviewed": true,
+    "source": "Gallantry",
+    "sourceHash": "8b0845581e2720e2fab240d0459185bd8a790e016167a50f0798b4c66346917a",
+    "text": "侠义"
   },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
@@ -3869,6 +3893,18 @@
     "sourceHash": "d2c643bee9fe9c37b7625ce3a64928cd60508b668a92abfefba307989e6839b0",
     "text": "Wickwaltz每回合打出的第二张牌会重复"
   },
+  "content.species.wickwaltz.title": {
+    "reviewed": true,
+    "source": "The kindling dancer",
+    "sourceHash": "7e2587240498dc16b919a43ffd516e1abff0ee7f4c739460a0471b37d32549bd",
+    "text": "引火舞者"
+  },
+  "content.species.wickwaltz.trait": {
+    "reviewed": true,
+    "source": "Kindling Flourish",
+    "sourceHash": "8df776346e928609096ea0a8f47761daa144aaea507506135bddacb859f57f5c",
+    "text": "引火回旋"
+  },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
@@ -3904,6 +3940,18 @@
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
     "sourceHash": "d89a29b452a31453585efd6b2dacf539daf80eccf319e6293e41454426fb88dd",
     "text": "从弃牌堆抽牌时，为该牌的拥有者恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.species.wisterelle.title": {
+    "reviewed": true,
+    "source": "The keeper of the flowering station",
+    "sourceHash": "b12819eb0360fc28e4d60444e356a303f3cd77bf90fde1807cb312c30efe620c",
+    "text": "繁花车站的守护者"
+  },
+  "content.species.wisterelle.trait": {
+    "reviewed": true,
+    "source": "Lost and Found",
+    "sourceHash": "f73059ce757f93b80158d244059f01ebbdb7acd64d00651082c4eb6ed39b184d",
+    "text": "失物招领"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,

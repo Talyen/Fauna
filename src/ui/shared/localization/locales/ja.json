@@ -3797,6 +3797,18 @@
     "sourceHash": "6ced9ca59005c6dbd02630d9f95f702ae0abd317ad380b839fce2ab38ec04177",
     "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
   },
+  "content.species.stillara.title": {
+    "reviewed": true,
+    "source": "The keeper of summer",
+    "sourceHash": "c350968bcff727d3111e37524008b5e7fd7778f00532dc5f2877b292b6c5d928",
+    "text": "夏の守り手"
+  },
+  "content.species.stillara.trait": {
+    "reviewed": true,
+    "source": "First Thaw",
+    "sourceHash": "e14f09efe8bd01c373a5e16d1ab89a9e006d2fd5c490e04a72dc8dc9a299d5b3",
+    "text": "最初の雪解け"
+  },
   "content.species.tournelle.passive.0.rule": {
     "reviewed": true,
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
@@ -3832,6 +3844,18 @@
     "source": "{{value0}}% chance to intercept attacks against a more injured ally",
     "sourceHash": "a562e3dd064fae2919e1ec5e2bfda472348eebbab482da901d04e354d695902e",
     "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
+  },
+  "content.species.tournelle.title": {
+    "reviewed": true,
+    "source": "The little gallant",
+    "sourceHash": "ad16c3457d1b6cb6955d1b7f3aefabab110efc4ba89ec90fc8a60f62904202c7",
+    "text": "小さな騎士"
+  },
+  "content.species.tournelle.trait": {
+    "reviewed": true,
+    "source": "Gallantry",
+    "sourceHash": "66bbf56df47b7860ccba1edcb3bea638a1482a3190fd5726ff61cb8f56e7e9e3",
+    "text": "騎士の心"
   },
   "content.species.wickwaltz.passive.0.rule": {
     "reviewed": true,
@@ -3869,6 +3893,18 @@
     "sourceHash": "5f6598ddbeab00571cb8f3f968ded4dce027028caa6606e86e5f8c27ddf35a6b",
     "text": "各ターンのWickwaltzの2枚目のカードが繰り返される"
   },
+  "content.species.wickwaltz.title": {
+    "reviewed": true,
+    "source": "The kindling dancer",
+    "sourceHash": "03bf36030141bc281a222d90620bd9514ae5565ccd2612a34dcf26436cfcdebe",
+    "text": "焚き付けの踊り手"
+  },
+  "content.species.wickwaltz.trait": {
+    "reviewed": true,
+    "source": "Kindling Flourish",
+    "sourceHash": "246f0b12a233294e53c275c0337ff3bcbceb52817135d4324ffd2fc503f0923e",
+    "text": "焚き付けの舞"
+  },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
@@ -3904,6 +3940,18 @@
     "source": "Drawing a card from your discard pile restores {{value0}} <keyword0>Health</keyword0> to its owner",
     "sourceHash": "c7c587f79001eb1e61cd639c436439acd2d00968b738df9ff0654cf491547765",
     "text": "捨て札からカードを引くと、その所有者の<keyword0>体力</keyword0>を{{value0}}回復"
+  },
+  "content.species.wisterelle.title": {
+    "reviewed": true,
+    "source": "The keeper of the flowering station",
+    "sourceHash": "8724746227086934d4c3e3e6e81afd3a1c98fb4e95db54156c09a70056391f98",
+    "text": "花咲く駅の守り手"
+  },
+  "content.species.wisterelle.trait": {
+    "reviewed": true,
+    "source": "Lost and Found",
+    "sourceHash": "2ae091bca7d027cf3369a81c347c7962e353352ce00377a22cb0ca634b5e7b25",
+    "text": "落とし物"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
