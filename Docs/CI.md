@@ -10,7 +10,7 @@ Unit CI discovers every unit, DOM and exhaustive case without filtering. Regular
 
 Static CI runs types, lint, formatting, boundaries and unused-code checks independently, retaining each failure while reporting all categories. `npm run check:full` remains their sequential entrypoint.
 
-CI installs with the pinned npm version and lockfile, omitting non-gating audit/funding requests under a three-minute deadline. `package.json` approves install scripts per version; `.npmrc` rejects unreviewed scripts. `npm run security:audit` retains all advisories and fails on new advisories or expired exceptions. The sole temporary exception is build-only `sprintf-js` denial of service GHSA-hp3w-g68c-fv3c, expiring November 21, 2026; no player format strings reach electron-builder's download-proxy logger.
+CI installs with the pinned npm version and lockfile, omitting non-gating audit/funding requests under a three-minute deadline. `package.json` approves install scripts per version; `.npmrc` rejects unreviewed scripts. `npm run security:audit` retains audit details and fails on advisories or incomplete audit results. No advisory exceptions are currently configured.
 
 ## Required gate and reruns
 
@@ -37,6 +37,8 @@ Browser and interaction jobs default to the official lockfile-matched Playwright
 Manual runs also accept `browser_workers=1` or `2` per browser job, capped at eight total workers. Automatic runs retain eight jobs with one worker each. To compare setup overhead at the same total concurrency, dispatch the same published commit with `shards=8`, `browser_workers=1`, then `shards=4`, `browser_workers=2`, using `browser_runtime=container` for both. Keep the ref fixed through both runs. Compare completed workflow elapsed time, summed runner time, per-shard test time and failures before changing the automatic default; repeat matched pairs if the difference is close. Worker counts come from the executed Playwright configuration and must match the requested count at the final coverage gate. Interaction replay remains one worker.
 
 The [October 23 matched comparison](task-evidence/2026-10-23-test-suite-followup.md#completed-matched-comparison) passed in both configurations. Four two-worker jobs used 42.2% less browser runner time, but the longest browser test step rose from 90 to 128 seconds and the workflow from 306 to 364 seconds. Eight single-worker jobs remain the automatic default for faster feedback; the four-job option trades latency for lower runner use.
+
+The [October 26 scheduling observation](task-evidence/2026-10-26-stack-maintenance.md#ci-scheduling) records a substantial spread across sixteen lineup shards and a bounded experiment for evaluating deterministic rebalancing without changing coverage.
 
 The CLI career/replay regression retains stage timings in `unit-results` at `ci/playthrough-timings.json`. These distinguish Vite setup, source identity, module loading, fixture setup and journey execution, with awaited journal append time reported separately as overlapping work. Compare the same source identity and scenario; these observations never replace full replay assertions or establish browser speed.
 
