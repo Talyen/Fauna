@@ -1,5 +1,6 @@
 import { creaturePassive } from "../game/progression";
-import { speciesCards, species, type SpeciesId } from "../game/content";
+import { speciesCards, type SpeciesId } from "../game/content";
+import { permanentCardCopies } from "../game/card-kit";
 import { definitionKeywords } from "../game/keywords";
 import type { GameState } from "../game/types";
 
@@ -106,5 +107,5 @@ export function offenseValue(state: GameState, kind: SpeciesId): number {
         : 0),
     0,
   );
-  return (authored + passive + reactive) * (species(kind).legendary ? 2 : 1);
+  return (authored + passive + reactive) * permanentCardCopies(kind);
 }
