@@ -2279,6 +2279,12 @@
     "sourceHash": "cf5b979c69dcc42f4b127e8257538e8f202bc3dbafbab0d57c7876147e2e1307",
     "text": "清凉锋"
   },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "8e229252d1b3e1023fd66698e42539f2cab5d1bfe819c814e51f7aef725ca4d8",
+    "text": "正午绽放"
+  },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2303,6 +2309,24 @@
     "sourceHash": "3438d4d7671f830d93c90941682b3b330069a09e2fa1757c979e08902d994473",
     "text": "抽{{value0}}张牌；获得{{value1}}点<keyword0>法力</keyword0>"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "7a09821d17f5e0f65ec0ba6395dc0d6e1ffeb7aa0c58359a8812977c8d0e4ade",
+    "text": "正午守护"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "d911a8145e9f272af005576e6ba67d65214448ea89cd746107c623ca6deb00bc",
+    "text": "云步"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "e21689c87a0a0a9beaee61923255c7cd0c4f42bd06f94f36e56d783f4aae15a5",
+    "text": "遥远地平线"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2314,6 +2338,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "b1dbe4106465559e3d1b0bd7fefd2ac240da5c6d7158c746ced516a22e89a020",
     "text": "抽{{value0}}张牌"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "abe53912d8f9e51512ae37b52c149c65bf3aac1724698babe7fc569ff57e4ad0",
+    "text": "天空牧者"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "d6088ab30dca9f2d9cbe394b04505ac332ab8fbe4ac8b5619735f96bd3607f04",
+    "text": "浪涌冲撞"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "4694a0aa4ef1f65711ee9333fbf10895c8d375e8a6b190f21df6932dd1a6d2d3",
+    "text": "螺旋归返"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "9988a22b4b269ac61e1d595a22e354b133570044806449a269aea989003c90cc",
+    "text": "汲取跃迁"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -2327,11 +2375,23 @@
     "sourceHash": "9aea09b910bf285aadcb4cb868a8e986d4ddb687b659a464f097e92b919768a1",
     "text": "与随机后备盟友交换；抽{{value0}}张牌"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "e3d8861af77e784a4e2c71edaece9d96001d6bccdd0d66b54f78e03380fdb910",
+    "text": "芦苇蓄池"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "9dc86cd4234883c5b48f0e33d88465ed57cfd2a59a43e9650ee463e1a340b705",
     "text": "获得{{value0}}点<keyword0>法力</keyword0>"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "14d5f3d930b656a5d1bdcdef7d2e191f54db5c4544e2ae6a6a6a21d41acd99d7",
+    "text": "消融之路"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2344,6 +2404,12 @@
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
     "sourceHash": "d8cd0a6dee1748b397b5d9b9b9f2e7b540e8e9a6f009c34ee086d6656d598918",
     "text": "<keyword0>净化</keyword0>盟友的全部<keyword1>冻结</keyword1>积累"
+  },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "0bb979e1d6428a5a1f24a560d656d79380df6b7abfc1da7bd736fc599efe51fa",
+    "text": "水的记忆"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,

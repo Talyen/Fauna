@@ -2279,6 +2279,12 @@
     "sourceHash": "9bc5558972215cab37dcfacc9e962820dbd35e0a090b8cbc994000714390bb57",
     "text": "Kühlefront"
   },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "6816043833ad3173150b63152ae252c7397c87c4a7962535ab410e94401bbe66",
+    "text": "Mittagsblüte"
+  },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2303,6 +2309,24 @@
     "sourceHash": "02f07033c252f2388acf6f696f219a43044ed4ac471bac50562ac2cc1744413b",
     "text": "Ziehe {{value0}} Karte; Erhalte {{value1}} <keyword0>Mana</keyword0>"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "9edc19acccb470d51ec6a26aeaf8e802d0035879993574ae46b8a6c9e7593f07",
+    "text": "Mittagswacht"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "852faeec0adb8868ca7a78eb1b70f1aa457f0cd2b5849e600a263f507caf9108",
+    "text": "Wolkenschritt"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "223c31c8bfbf1a23b4300b91e40fb737d07aa0343dc3803a6271986a7aa0f17e",
+    "text": "Ferner Horizont"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2314,6 +2338,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "56391f8e54733b552d827ccdc357884ea7b0b294c865a694c673de93b3432b99",
     "text": "Ziehe {{value0}} Karte"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "ebc24f13aa771e29d510850b970aaf7802a89b9e1c76f8857e43c6f331ff60e0",
+    "text": "Himmelshirte"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "aae3283a271006386d91ae9f0b1abf901d7d631452e7b14add64c3f3fd9fda00",
+    "text": "Flutramme"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "24da3cb30752408c9eb1f3d56cbecc0ac8249d1d97dd5d99de063e73e1a95c28",
+    "text": "Spiralrückkehr"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "0187e22e03a0454fc0ac766ebe53a8df559ccdae1d501ca58184905c7541afb4",
+    "text": "Siphonsprung"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -2327,11 +2375,23 @@
     "sourceHash": "61c429aa7f733e9511251c52040ee944c9dbd93cdacd1e714df4c64539e2f413",
     "text": "Tausche gegen ein zufälliges Reservemitglied aus; Ziehe {{value0}} Karte"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "d91995cc4caaaf64a0ebd52171c5f97caddfae64ae8612eb6156d94b675624aa",
+    "text": "Schilfreservoir"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "31360abb54198a9131d51c692dd2b3f1295bede6da9a9d285ac13dfb8ade559e",
     "text": "Erhalte {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "90ccc4655db3384f2bd001cb2d4bd4035587b33338ad883cdb0762f39a439654",
+    "text": "Taupfad"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2344,6 +2404,12 @@
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
     "sourceHash": "6852e323a692b9e5996a6874ba23193670e70ecb6626b599c74394908392859b",
     "text": "<keyword0>Reinige</keyword0> den gesamten <keyword1>Frost</keyword1>-Aufbau von Verbündeten"
+  },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "844421f9e578518e065a89956e87ed6a8934ba45c2bf9da5ec1ea270826ef5ee",
+    "text": "Wasser erinnert sich"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,

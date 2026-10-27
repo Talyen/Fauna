@@ -2279,6 +2279,12 @@
     "sourceHash": "50c8a192eb1c59d2b212ab2aabc23cf26df02f1815a3308b24f08f17ed18412d",
     "text": "Прохладный фронт"
   },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "596ed7f6bdd060b09bf73ef5a69402987a0fff9b5f000071212114077d41a50c",
+    "text": "Полуденное цветение"
+  },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2303,6 +2309,24 @@
     "sourceHash": "15cb705eef8ebf391a133fd1214326f13539ed1e32b7b787e0667bc46f21c5cf",
     "text": "Добор карт: {{value0}}; Получено <keyword0>маны</keyword0>: {{value1}}"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "1d995d85e14e74ffda7da87aa9672dee2b0f920233dd521e93aeb9ad0e104f6c",
+    "text": "Полуденная защита"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "8e220a851ac61376179887cd983a96af4b4c9744cadb508f72aac3bf5135c8ad",
+    "text": "Облачный шаг"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "08f55ae662898a6bb4183caf01bf10508253ea6cd823f524c55353fe8a886194",
+    "text": "Дальний горизонт"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2314,6 +2338,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "bb3533084605512d00537891d097e2280971d2066644d477737574dae21290c4",
     "text": "Добор карт: {{value0}}"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "b70ac6766a274daf53f9bcf09ece8f0eb91d4dec0baad38cae502be6e2d3f92b",
+    "text": "Небесный пастух"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "8b756895b5d4a28dee83b9b6550f5fd93b8daba3a9290c0708541d6c80b057ae",
+    "text": "Натиск волны"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "b385dba3369d81f19006f3a2bf1987d3928151aecba05694b7b4054eed2c9cdb",
+    "text": "Спиральное возвращение"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "aa884e57e434b5b6c81dac329b3f095546ffea4d63d92c47c9284149d6bd6a23",
+    "text": "Прыжок с отводом"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -2327,11 +2375,23 @@
     "sourceHash": "d396b0a837fc80721c39b58b4f2d5bb150f5f2207a9a90e6d8fcc371ea55b9f4",
     "text": "Сменитесь со случайным союзником из запаса; Добор карт: {{value0}}"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "9e44bef201f2fbd3bbac144f2f5b87670a9917798f3be4cb1a1a1c40b10e79c8",
+    "text": "Тростниковый водоём"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "fd629f218c894b05142310fcceffdd806a2de45589edb93a7be7f0c9d0ed141d",
     "text": "Получите {{value0}} <keyword0>маны</keyword0>"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "e9fff6634949ecc14c9f99caf370b50c281997014bcc8f8c8e06cf7acc23deed",
+    "text": "Путь оттепели"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2344,6 +2404,12 @@
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
     "sourceHash": "3186b54ecbd94c04178297a3e329003097070b9e902916b803dc6321fc29a178",
     "text": "<keyword0>Очистите</keyword0> всё накопление <keyword1>заморозки</keyword1> у союзников"
+  },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "befbdcf333a7b6eae9fe6ce75163094f375a55b9244f2b47cd83e9032a5eeccd",
+    "text": "Вода помнит"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,

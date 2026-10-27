@@ -2279,6 +2279,12 @@
     "sourceHash": "2bd3bcd9a3a98200d8b2872b849fb7366fd00b3d71a6d7ebd70770a479366f73",
     "text": "Frente fresco"
   },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "05eccbb879da56e19006bff29be7657e69b4dcf801571cd77e617e408ed61f47",
+    "text": "Floración del mediodía"
+  },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2303,6 +2309,24 @@
     "sourceHash": "13fddaf85ffff5252e9aa9cd84f8bdcacdaf27da7f11e5849044444cfab64555",
     "text": "Roba {{value0}} carta; Obtienes {{value1}} de <keyword0>Maná</keyword0>"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "6ac2d8a1497d022567700a5bb63e6bedda22dd3b147db4c9f819b32150745aac",
+    "text": "Guardia del mediodía"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "675723f18836ff63486a4e5d5785626273f2ee46363f036d7e65ac2c55de8d3a",
+    "text": "Paso de nube"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "06cbec418035956d98dc144d39b7f388f8f760c6264e7472e77d2a5c5759f890",
+    "text": "Horizonte lejano"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2314,6 +2338,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "925c448f624959f1a14f4efda9243519c601a130ad8c58f5af27aa19a45aa40e",
     "text": "Roba {{value0}} carta"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "7be58a03b4c3cef5af1066ea4c7a17f77b545b0f5272ab840843665a4e4434a5",
+    "text": "Pastor del cielo"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "0f28bb4c0bf764e7c275fe53526dfd90d50b8a4ee963b080d6fe7815328adce5",
+    "text": "Embestida de oleada"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "84eef3df056f66af730b8fc67aa41d92e17546f0f131733454a01ebebb57fe1c",
+    "text": "Retorno espiral"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "bcd273c6c67f12297ee7334a9fe3ed1819906585aaf3e85d16d0793c6ea194ee",
+    "text": "Salto sifón"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -2327,11 +2375,23 @@
     "sourceHash": "8ce6368a4ee21e612ab704e543415af698b1c13ec49a5471b1a14ba87163ed88",
     "text": "Cambia por un aliado de reserva al azar; Roba {{value0}} carta"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "d4c9bbeef154bb2cde4c85a413e812185285896e08bf5200cbc58dfd34e77375",
+    "text": "Reserva de juncos"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "561e313327c593caa624402ad7623a21f8aaf96ca849aacf1eeb66c9e3eef77f",
     "text": "Obtienes {{value0}} de <keyword0>Maná</keyword0>"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "df7df079dfc2036d52a7ca06dbb39f5f60b5b21b6b25c13947efd33bf4bce76a",
+    "text": "Senda del deshielo"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2344,6 +2404,12 @@
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
     "sourceHash": "86f7a1c8b41d3e308e0a85ea134de66f77e0ca1dcc4c4dd30bf96cc97424b87d",
     "text": "<keyword0>Purifica</keyword0> toda la acumulación de <keyword1>Congelación</keyword1> de los aliados"
+  },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "b57bfad3c6bd5d6c4b6bb12a1edbbd41bc95364ac7366404ed9e1e557e602f28",
+    "text": "El agua recuerda"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,

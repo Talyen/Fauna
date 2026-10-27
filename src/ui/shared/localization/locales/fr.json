@@ -2291,6 +2291,12 @@
     "sourceHash": "84ec83ce0bd28d50dd8dbd3907cca9c07cbb9da5c012af40654ea583b3b22bdf",
     "text": "Front frais"
   },
+  "content.card.shadebrim-draw.name": {
+    "reviewed": true,
+    "source": "Noon Bloom",
+    "sourceHash": "51fa3cb9dc4d782912e560890e3e4cc3c5c13e6b3ffb50babd097b3672939b5a",
+    "text": "Floraison de midi"
+  },
   "content.card.shadebrim-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2315,6 +2321,24 @@
     "sourceHash": "558a5193b6c95dfb4a1990adf2005ab0a030e7ece571b41d94f9476b82214d6e",
     "text": "Piochez {{value0}} carte ; Gagnez {{value1}} <keyword0>Mana</keyword0>"
   },
+  "content.card.shadebrim-guard.name": {
+    "reviewed": true,
+    "source": "Noonward",
+    "sourceHash": "a7c708ca547fdf63ff0c4865919c9811058afaf3fbd3bedcdfefb9dadadeea5e",
+    "text": "Garde de midi"
+  },
+  "content.card.skybex-cloudstep.name": {
+    "reviewed": true,
+    "source": "Cloudstep",
+    "sourceHash": "f8847519b302209d4a1b5332e84b7c588d758c6d5d13b0ad63dc0b236e335562",
+    "text": "Pas de nuage"
+  },
+  "content.card.skybex-draw.name": {
+    "reviewed": true,
+    "source": "Far Horizon",
+    "sourceHash": "730a477fe9024856fed95baead0f396a4a69552fee44cd240d585b0bd05a2f99",
+    "text": "Horizon lointain"
+  },
   "content.card.skybex-draw.v7fdbf85f2d1dd305.rule": {
     "reviewed": true,
     "source": "Draw {{value0}} cards",
@@ -2326,6 +2350,30 @@
     "source": "Draw {{value0}} card",
     "sourceHash": "9665771c579aac941d5b6a3027c63797c7c02e2064de6859e25f8fa762d613ec",
     "text": "Piochez {{value0}} carte"
+  },
+  "content.card.skybex-sky-shepherd.name": {
+    "reviewed": true,
+    "source": "Sky Shepherd",
+    "sourceHash": "23ee446a18473a939c6232d0c6fdfd1f4d23ac560ccd951230eee1fcca59f079",
+    "text": "Berger du ciel"
+  },
+  "content.card.sternshell-attack.name": {
+    "reviewed": true,
+    "source": "Surge Ram",
+    "sourceHash": "63758b1338b12ee89a582bd2771b1837b6be39fdd7ed4ed2acd926ff6644fe65",
+    "text": "Charge des flots"
+  },
+  "content.card.sternshell-spiral-return.name": {
+    "reviewed": true,
+    "source": "Spiral Return",
+    "sourceHash": "b044df0509a05701f83b4ad7f93f569a79431f575831a1663c1bd63bcb272d56",
+    "text": "Retour spiralé"
+  },
+  "content.card.sternshell-swap.name": {
+    "reviewed": true,
+    "source": "Siphon Vault",
+    "sourceHash": "dbe43d7fc19e485f11e3e7d51fa379cdb70317e5c88ae6898efc883e726edab3",
+    "text": "Bond siphon"
   },
   "content.card.sternshell-swap.v20ced3ec392925b5.rule": {
     "reviewed": true,
@@ -2339,11 +2387,23 @@
     "sourceHash": "536fd9111fe7eed70ed3a0faccd14e70aad149248d4ef05c486b8b4e48d76405",
     "text": "Échangez avec un allié en réserve au hasard ; Piochez {{value0}} carte"
   },
+  "content.card.stillara-reed-reservoir.name": {
+    "reviewed": true,
+    "source": "Reed Reservoir",
+    "sourceHash": "c77b920c20c23346cc701a7d3ea87f838e87da716e1fdbfe104649a39fab7fca",
+    "text": "Réservoir de roseaux"
+  },
   "content.card.stillara-reed-reservoir.vd2070eac2bd832c9.rule": {
     "reviewed": true,
     "source": "Gain {{value0}} <keyword0>Mana</keyword0>",
     "sourceHash": "bfbae407a2a212f2ff6aae5ce440f6f75d997bdc9355d4250e480a9b153f49d0",
     "text": "Gagnez {{value0}} <keyword0>Mana</keyword0>"
+  },
+  "content.card.stillara-thaw-path.name": {
+    "reviewed": true,
+    "source": "Thaw Path",
+    "sourceHash": "89b70ea5724115c0c3822a6b9fa821d8aa7100b0db019e815f4720031f10cedf",
+    "text": "Chemin du dégel"
   },
   "content.card.stillara-thaw-path.v021710184d4302b6.rule": {
     "reviewed": true,
@@ -2356,6 +2416,12 @@
     "source": "<keyword0>Cleanse</keyword0> all <keyword1>Freeze</keyword1> build-up from allies",
     "sourceHash": "7e69971c2bbae51e22aaaacd7767c78bc1ade25463e2ce751b310ca1b7f808a8",
     "text": "<keyword0>Purifiez</keyword0> toute l’accumulation de <keyword1>Gel</keyword1> des alliés"
+  },
+  "content.card.stillara-water-remembers.name": {
+    "reviewed": true,
+    "source": "Water Remembers",
+    "sourceHash": "77490d86d49d8e662ba1053437c47766f5fafb30f8eb7460954f2aa66a9265b3",
+    "text": "L’eau se souvient"
   },
   "content.card.stillara-water-remembers.v829391f43731edcb.rule": {
     "reviewed": true,
