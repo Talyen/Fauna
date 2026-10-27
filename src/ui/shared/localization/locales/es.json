@@ -413,11 +413,53 @@
     "sourceHash": "0aeac65c3e362f3b3582a231f6227228f83e03cca730eddebfdf0530b0ac09d4",
     "text": "Abanico de brasas"
   },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "4e587536423f06a3f2c3aee4de88717b21a6409955114034c42059cce7cc04f9",
+    "text": "Balero de nube"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "58b82f5283aabce61179b809cbeba7cabfa721551613c2bfb549a2a3bdf191f3",
+    "text": "Tenedor desoperculador"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "6956f0e664fe0fcbef3bebcdd2b564ca87d728b7d51c058888ccc715c97af3a6",
+    "text": "Crisol de cometa"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "b4bb5d64ba9c0190d78ed6bfe74c66e4fe472777dc31a63413fc8ad331475093",
+    "text": "Caja de música de coral"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "0c88280790f482f7b4837e06a94159e6cb119e90c7e3a5d3e2c6eaa5aa738863",
+    "text": "Peso de red de coral"
+  },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,
     "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
     "sourceHash": "ae2e00b8407b455f8581688656c8e671f795ed6b42b1c68cd5626849b5963579",
     "text": "Los ataques <keyword0>esquivados</keyword0> aún dañan el <keyword1>Bloqueo</keyword1> enemigo"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "d97c4cc5d63f64ff7fd3bfe1d7796cf5a4c66e919d26b60671a23f35eee572eb",
+    "text": "Campana de coronación"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "21330ffe7453507b1690f35d4f4a7d15fe11ab669810aea2aa3b1e782a00c9ff",
+    "text": "Sextante creciente"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -430,6 +472,24 @@
     "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
     "sourceHash": "dcc93742bdd3c3ce690c6c665c62800409c3847f5362d4aebc050fddce1da3ff",
     "text": "Obtienes {{value0}} de Oro al infligir daño de <keyword0>Sangrado</keyword0>"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "09587674df6f08e2bf7f8df35e89486834ba228edec992e4182cb72168cfa9f2",
+    "text": "Broche de devoción"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "4edf1a0a79ab6c28a1da3131bdadf083c04926e689d40468714a5825841c9a3a",
+    "text": "Tangram de sueños"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "feabc9a35f1293874bd8ddf21a65faf77e114de48d0a4ff94829df077e4c4a3f",
+    "text": "Yo-yo de sueños"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,

@@ -419,11 +419,53 @@
     "sourceHash": "506fd371e60b16f479c91d2f639c4b3e82d9db44fa49d8387a8cb7fe0a34f876",
     "text": "Éventail de braises"
   },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "c723d6876d761069355b3599f9ed2b642536db634888ad3069e2dda007e998c9",
+    "text": "Bilboquet des nuages"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "81a59fa9802d7877472b01da609483e7880afbace68ecfe6e1573b481a07206e",
+    "text": "Fourchette à désoperculer"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "74dc40f9a367a91ea0fec99b7db5a00e777180c3b10498b4215a5bab964992bc",
+    "text": "Creuset de comète"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "84f24937adcbaf15de01bd5b41e53a75c79aead75f8bf1502da0e0ab61e15f4b",
+    "text": "Boîte à musique de corail"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "1073d789aabc4e139c0d52b17edd167a3c27b8e6fe9ad09028126366cd2495b7",
+    "text": "Lest de filet en corail"
+  },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,
     "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
     "sourceHash": "43a70f1d32c3fae603e694132892ad27c16d8621dd472dd4c64a65fdd73ae772",
     "text": "Les attaques <keyword0>esquivées</keyword0> endommagent quand même le <keyword1>Blocage</keyword1> ennemi"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "ef32cae1ad9f288f61c49c67d90b88505efbb0d7370daa2d90f155e56900b0eb",
+    "text": "Cloche de couronnement"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "341065f5332f34dd121647c0acb44779f8688d5762ec20e134634b5313567c02",
+    "text": "Sextant du croissant"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -436,6 +478,24 @@
     "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
     "sourceHash": "7d97d444965f932a6627c37b153ae2ba38c206a631dac08558516e86a9680be7",
     "text": "Gagnez {{value0}} Or lorsque vous infligez des dégâts de <keyword0>Saignement</keyword0>"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "40ec26e01902e63ddbf1fabd683bffa324ba385bd8a7bb27a49c6c06342b063c",
+    "text": "Fermoir de dévotion"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "f0dfd0bdd81853a3c7e57986cdc07ea60bdc6180eed681f9ef95bc89c1da319b",
+    "text": "Tangram des rêves"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "07d7e180fcae3c28c386751fe915549f5ffd4740c45e207d69ee186e17ea24c7",
+    "text": "Yo-yo des rêves"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,

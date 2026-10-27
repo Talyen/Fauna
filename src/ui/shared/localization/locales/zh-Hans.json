@@ -413,11 +413,53 @@
     "sourceHash": "78f3a722bc65210db341dd3352d8d334635d535d4a13f58ea7db820926352565",
     "text": "余烬扇"
   },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "1bbbad11d6f26f5a13c8828e7bca91683ac034aba0f369f1ab1f9d9ffeab0e42",
+    "text": "云朵剑玉"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "3ad014a963a54536f496c870928bc6581b5ebf70cc82c9734fe7202e9771c551",
+    "text": "蜂巢开盖叉"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "cae395120bb74cbafc8148a79c83d023ddda90490842d9097022e3bb58a21e33",
+    "text": "彗星坩埚"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "bf9525e8989ea0b8f86818e5b6074d90cb7f7d93c757e1639d746c229b8daf71",
+    "text": "珊瑚音乐盒"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "172b28300fed3e051a23d6578c17a504d69aa53cf81b2eb314f735ae53b9c1a6",
+    "text": "珊瑚网坠"
+  },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,
     "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
     "sourceHash": "040dd3043e25c42f9530d1e6c1fdc5f8cefac7439c2cbd1678a8d58fbc8a3f09",
     "text": "被<keyword0>闪避</keyword0>的攻击仍会损伤敌人的<keyword1>格挡</keyword1>"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "d25f80bc61148e49f5078f9e458b0b0bbe42cf6309993bca24550dadca3831b1",
+    "text": "加冕钟罩"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "a948a230831805bfd8a2fd0484feb0684c88856d828f9e2f1fd8463d1fdd9e53",
+    "text": "新月六分仪"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -430,6 +472,24 @@
     "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
     "sourceHash": "87acc85e146fd72293ead1895ecad748c47474740e1e617e7490094ed577d44f",
     "text": "造成<keyword0>流血</keyword0>伤害时获得{{value0}}金币"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "eef7c0db75b1e245b85a6d1e4620abff0b008eaa59831fa7c58ea128167e792a",
+    "text": "虔心扣饰"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "674052d42aa643a9310d82a1d0acadf3ae44096346b25da5e2678f8fd52a8886",
+    "text": "梦境七巧板"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "6ff4a1f39a265ca453c513249eed736e75ce3259da01197f2cf3d88e731cd8ab",
+    "text": "梦境悠悠球"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,

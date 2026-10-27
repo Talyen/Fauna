@@ -413,11 +413,53 @@
     "sourceHash": "a53c4f0f7010a8d087b6b1fb934f9b73d36bef09c3c6a8a5f0b2a5cd5e79a00e",
     "text": "Glutfächer"
   },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "731d3f68c5e57c1f69d1afd2b12d80863e7d60321ba71c22ac9b8ee480c70dbe",
+    "text": "Wolkenfangspiel"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "b028f2cc191c222804bd7a446b13e5cd56527c10497b0f127beda63c1f9b7487",
+    "text": "Wabenentdeckelungsgabel"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "3d577ba6875de80de3d108fd173d20320a8413e8d426e5b352f3b8289adccc1d",
+    "text": "Kometentiegel"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "e093d05b88bdc3df0084d089767d7ab9872a47a29546edddcb8c00f71ad279e2",
+    "text": "Korallenspieluhr"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "73470e2b6bf2ee2a5a57d57b39770e372d44bb1d21adbf6055ad2474c198f50a",
+    "text": "Korallennetzgewicht"
+  },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,
     "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
     "sourceHash": "0d265a5a7be0bc9a0803787947af845450771fb0551851af2d90225b7027abf4",
     "text": "<keyword0>Ausgewichene</keyword0> Angriffe beschädigen dennoch den <keyword1>Block</keyword1> des Gegners"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "9d40f526e90d52ac3c5db86f1a1debafb9aa0f83b7b480ccf3c96ccde8e49bc0",
+    "text": "Krönungsglocke"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "5d373506319df54fc99b8fae6aaac349239655db030375488eb11256f2893fa6",
+    "text": "Sichelsextant"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -430,6 +472,24 @@
     "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
     "sourceHash": "74a7f063f22918a1bba8cf09302b4788f8c96004d9a78178a8498fcddd4faf69",
     "text": "Erhalte {{value0}} Gold, wenn du <keyword0>Blutungsschaden</keyword0> verursachst"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "65801bc87ce1a9e2a4951f155dc869ea183dbfd100a4680758cfc638d6e85e8f",
+    "text": "Hingabeverschluss"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "7ded4003837d86e16e95b9dad6d9e2605eed32e3061ebf3cc1a8aec00f0de156",
+    "text": "Traum-Tangram"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "3541b31650e89545ad0f9102e03c1896980df2346a2c08a85f56caaeeb7fea46",
+    "text": "Traum-Jo-Jo"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,

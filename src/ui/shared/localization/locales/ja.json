@@ -413,11 +413,53 @@
     "sourceHash": "8cd879760c6a1304004155bbd73f6f144b2599d8bd47c50b20a041f2a555b9f9",
     "text": "熾火の扇"
   },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "43ad4de3635b0fe56b5eec9fbe61ed7ee8f375a1d015d44328b06821bd6c31db",
+    "text": "雲のけん玉"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "1dac49007c87ab8f59a9bafe4e0d0d681f1dd6487e91fd03e0f9145ddf85461f",
+    "text": "巣房のふた切りフォーク"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "55308be388dbaf066a795c69da444d0bf821051bc91139a572741fb8a52576bb",
+    "text": "彗星のるつぼ"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "765f13388584673f899822feb68a75c7183864f1a4c21b487d7263263fa0dc96",
+    "text": "珊瑚のオルゴール"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "b1d81906a4c5fdaca5c9b950c534512762774bdaa14728c30df6f32c601ec604",
+    "text": "珊瑚の網のおもり"
+  },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,
     "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
     "sourceHash": "9ae95c6477b28e74f34c67d89fbf22983d11f00081f7da32071d92cad38eea96",
     "text": "<keyword0>回避</keyword0>された攻撃も敵の<keyword1>ブロック</keyword1>にダメージを与える"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "7d17f0b1a6151dae26671291836d0e1fc876df3027f4f3a8f3c929e15d5b2d9a",
+    "text": "戴冠のクロッシュ"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "41324b018c588ab438fb3e6bc882daa84bee466ab9496423a39e0ae3596c0a4e",
+    "text": "三日月の六分儀"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -430,6 +472,24 @@
     "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
     "sourceHash": "6652305266ccdf550e203408ee6d984a490f5331b12f4edf819d1cbf2267ef34",
     "text": "<keyword0>出血</keyword0>ダメージを与えるとゴールドを{{value0}}獲得"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "fa8270d9646c7c82720abba252e5640421d7d9dd47511dcc22e8f24c185324bf",
+    "text": "献身の留め具"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "278b9ce0e26269dc3638f916064dfc91db4e98f65ac563c541dcf94e43331005",
+    "text": "夢のタングラム"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "c0ab2cf06e669a742eeade6345444f15f1216d9d0e77d42eecfd12f3689fc491",
+    "text": "夢のヨーヨー"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,

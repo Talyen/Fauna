@@ -413,11 +413,53 @@
     "sourceHash": "35eccf0086bafb4b8c79d535fa4409939af5e95fff82b2a69dfb9544f55025a8",
     "text": "Веер угольков"
   },
+  "content.boon.cloud-cup-and-ball.name": {
+    "reviewed": true,
+    "source": "Cloud Cup-and-Ball",
+    "sourceHash": "00d4d81613e151e83824c85d574a51bc51ce22073d373ea116264234c6783bc2",
+    "text": "Облачная кэндама"
+  },
+  "content.boon.comb-uncapping-fork.name": {
+    "reviewed": true,
+    "source": "Comb Uncapping Fork",
+    "sourceHash": "91689ff7a5d0dfc4d9fa5380943b1d678cae38241394840f693830cf66139981",
+    "text": "Вилка для распечатки сот"
+  },
+  "content.boon.comet-crucible.name": {
+    "reviewed": true,
+    "source": "Comet Crucible",
+    "sourceHash": "1c0816658405d8ea570790d3922538f0d8ee34aa76b2932155e0359d6536bc55",
+    "text": "Кометный тигель"
+  },
+  "content.boon.coral-music-box.name": {
+    "reviewed": true,
+    "source": "Coral Music Box",
+    "sourceHash": "81a25e03cede2ac25f78869e12bd4abbd8fd9dd9a01457679a3e9631d58501f7",
+    "text": "Коралловая музыкальная шкатулка"
+  },
+  "content.boon.coral-net-weight.name": {
+    "reviewed": true,
+    "source": "Coral Net Weight",
+    "sourceHash": "588103b38f36d6bbcb00a16f0671ae3829dc9252bf0bf446b63e582a250a0425",
+    "text": "Коралловое грузило для сети"
+  },
   "content.boon.coral-net-weight.rule": {
     "reviewed": true,
     "source": "<keyword0>Dodged</keyword0> attacks still damage enemy <keyword1>Block</keyword1>",
     "sourceHash": "49591ce2f5eeb45cafe6ef4a9ce08a316057afd1ab95a243f604298447ea7543",
     "text": "Атаки, от которых <keyword0>уклонились</keyword0>, всё равно повреждают <keyword1>блок</keyword1> врага"
+  },
+  "content.boon.coronation-cloche.name": {
+    "reviewed": true,
+    "source": "Coronation Cloche",
+    "sourceHash": "27a1ad91c0e28ccf204455d6c456e8927609257f9490bfee888f5d9ab13f814c",
+    "text": "Клош коронации"
+  },
+  "content.boon.crescent-sextant.name": {
+    "reviewed": true,
+    "source": "Crescent Sextant",
+    "sourceHash": "14a6d5067f63e0cfe42ce1d12622c83da2816284dd2e24dd14abcdf488b0f507",
+    "text": "Секстант полумесяца"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -430,6 +472,24 @@
     "source": "Gain {{value0}} Gold when you deal <keyword0>Bleed</keyword0> damage",
     "sourceHash": "9d66a02d34c420ebd71133fa98ddd21ac3248aad5cbd213dc1320c381aeda67d",
     "text": "Получите {{value0}} золота, когда наносите урон <keyword0>кровотечением</keyword0>"
+  },
+  "content.boon.devotion-clasp.name": {
+    "reviewed": true,
+    "source": "Devotion Clasp",
+    "sourceHash": "822f04a42e71bf3d18db036c77eec469389a2075a3f72c930a1b4f20204ae03b",
+    "text": "Застёжка преданности"
+  },
+  "content.boon.dream-tangram.name": {
+    "reviewed": true,
+    "source": "Dream Tangram",
+    "sourceHash": "33a004af846ddae97163223a6b49a336abc04f35056d22630ebb3045d1e2ff9a",
+    "text": "Танграм грёз"
+  },
+  "content.boon.dream-yo-yo.name": {
+    "reviewed": true,
+    "source": "Dream Yo-Yo",
+    "sourceHash": "9da33ad8e494e4234d47c0d6c043d2e2927e7a900247df55e4f00e2ab131f0e6",
+    "text": "Йо-йо грёз"
   },
   "content.boon.encore-baton.rule": {
     "reviewed": true,
