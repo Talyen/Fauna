@@ -713,6 +713,12 @@
     "sourceHash": "7170aa5d0fd2a377b950155acd702539b838cb64c1e81593a7e77b322268df39",
     "text": "Ziehe {{value0}} Karte"
   },
+  "content.card.memento-pearl.name": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "49ca4d6a6acdfbc34b1b0de1e9a91b241880ea45191c4c0b65f3c3353d21d3d6",
+    "text": "Perle"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -2014,6 +2020,12 @@
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
     "sourceHash": "0844c7be118e49763c4caeb9b3b9ca2cb2081ed08d168a7d515f03f16e614b91",
     "text": "Behalte zwischen Zügen {{value0}}% mehr <keyword0>Block</keyword0>"
+  },
+  "content.species.mossguard.trait": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "83693b32d99ead35306a50fa4cf9c0102172d450340e7cedc70d113243890ba6",
+    "text": "Wildwuchs"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,

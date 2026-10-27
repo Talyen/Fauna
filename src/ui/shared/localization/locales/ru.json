@@ -713,6 +713,12 @@
     "sourceHash": "0e3bc788ae3e344c9133c2c0a53850affaf54635cdc1993b833d5126236ecd8f",
     "text": "Добор карт: {{value0}}"
   },
+  "content.card.memento-pearl.name": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "31c96d8085588861c0e99a0ce4e9c9315550a19d91cf65d85bade1a61b155169",
+    "text": "Жемчужина"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -2014,6 +2020,12 @@
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
     "sourceHash": "91e795ee9f576f8ac285ed502f61614156bf3295e8430c3a5f0907dbf201338a",
     "text": "Сохраняйте на {{value0}}% больше <keyword0>блока</keyword0> между ходами"
+  },
+  "content.species.mossguard.trait": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "caa36e91df0cc3002a1e9f5a91a9645dbbb5cf898667f2c4a10d946a66105ad9",
+    "text": "Буйная поросль"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,

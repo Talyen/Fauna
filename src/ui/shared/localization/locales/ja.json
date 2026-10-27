@@ -713,6 +713,12 @@
     "sourceHash": "44ccb7c32cb99ed76494480881ffdd5276f0b9701ac8f5e4f06cea1e0f50ce43",
     "text": "カードを{{value0}}枚引く"
   },
+  "content.card.memento-pearl.name": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "019e5829c808a7ca1ebea6419a1bb13150be52c291d363bbfc3527e9cebc49db",
+    "text": "真珠"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -2014,6 +2020,12 @@
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
     "sourceHash": "d756b79fb3977e9b6c0a426d00f378b393bba87ae9c85bec0b3541a150f42688",
     "text": "ターン間に維持する<keyword0>ブロック</keyword0>が{{value0}}%増加"
+  },
+  "content.species.mossguard.trait": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "d588291b9d22c1121262c7c3296ddd17ae4345d8e48a2ecf91c20b392aec4a7c",
+    "text": "繁茂"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,

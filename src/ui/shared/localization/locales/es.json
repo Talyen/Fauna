@@ -713,6 +713,12 @@
     "sourceHash": "0c83ca78215a22d5ef9e634bb6b025e1c9c8073ebf27092da54e4a3a942d879e",
     "text": "Roba {{value0}} carta"
   },
+  "content.card.memento-pearl.name": {
+    "reviewed": true,
+    "source": "Pearl",
+    "sourceHash": "1fb986dfe3f8df5f285e9a572b67047b38985a2eb6959a0ab6a6ebb7b93babdb",
+    "text": "Perla"
+  },
   "content.card.mossguard-attack.v3991c9d5388534ba.rule": {
     "reviewed": true,
     "source": "Deal {{value0}} <keyword0>Stun</keyword0> damage to all enemies",
@@ -2014,6 +2020,12 @@
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
     "sourceHash": "791514cd87250112bc18b77feb0c0099320ce5edfb1016a09ac7f8c8b0363d1d",
     "text": "Conserva un {{value0}}% más de <keyword0>Bloqueo</keyword0> entre turnos"
+  },
+  "content.species.mossguard.trait": {
+    "reviewed": true,
+    "source": "Overgrowth",
+    "sourceHash": "d566d73401bcea8d5b25368e3fb4f2aa3a5ab432529e1e1738e5d5b2f2db17a9",
+    "text": "Crecimiento exuberante"
   },
   "content.species.neradora.passive.0.rule": {
     "reviewed": true,
