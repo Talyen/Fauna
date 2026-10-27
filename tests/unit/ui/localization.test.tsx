@@ -418,7 +418,11 @@ it("localizes Death's Door and Armor loss using committed combat facts", () => {
   );
   expect(eventPresentation(game, death, createMessageReader("en", {}))).toBe(death.text);
   const armor: GameEvent = {
-    kind: "status", targetId: target.id, status: "armor", outcome: "remove", amount: 3,
+    kind: "status",
+    targetId: target.id,
+    status: "armor",
+    outcome: "remove",
+    amount: 3,
     text: `${species(target.species).name} loses 3 Armor`,
   };
   expect(eventPresentation(game, armor, reader)).toBe("Allié perd 3 Armure");

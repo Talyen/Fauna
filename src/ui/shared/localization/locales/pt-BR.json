@@ -3323,6 +3323,12 @@
     "sourceHash": "8666d973ca63f7c5d265cacb89eaeedfd2af6db5bec907f74a52538b79364baf",
     "text": "Acerto"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "30667b28fbebc15832cfa86e6b701a85b01dc0c8441166759e58712d4ffffccf",
+    "text": "Jogar uma carta de ação concede {{value0}} de EXP para cada uma de suas palavras-chave; A EXP ao fim da batalha é permanente, mesmo após derrota; Abandonar preserva a EXP já obtida sem conceder recompensas de vitória"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3449,6 +3455,12 @@
     "sourceHash": "c3a718eea4fd940802115a9a266b94d00708704a827fa352e7577d159e682420",
     "text": "devolve o ataque ou efeito de estado prejudicial indicado; A <keyword0>reflexão de ataque</keyword0> devolve o dano e os efeitos prejudiciais subsequentes ao atacante; A <keyword1>reflexão</keyword1> apenas de estado redireciona o efeito a um inimigo vivo aleatório, mas o dano direto ainda atinge; Ataques e estados <keyword2>refletidos</keyword2> não podem ser <keyword3>refletidos</keyword3> novamente; Cargas não acumulam"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "b5b428573bb3a3e1f176fc5f268fecb34018166731bc546c5ecc4172a7d7e14f",
+    "text": "Traz de volta um aliado nocauteado com {{value0}}% da <keyword0>Saúde</keyword0> máxima, arredondado normalmente e com mínimo de {{value1}}; Não renova À beira da morte"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3466,6 +3478,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "df048bfcf19301a8763bf33c0281318f3624a92774a0987e2e05ae6b8cdb66fe",
     "text": "Dano de <keyword0>Água</keyword0>; o <keyword1>Bloqueio</keyword1> o absorve; a <keyword2>Armadura</keyword2> não o reduz; não aplica efeito de estado"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "fc28a4151c74be05475a84bc53c4545591f40acde8a3d612414cb2dbab35acb2",
+    "text": "Com zero de <keyword0>Saúde</keyword0>, uma criatura não pode agir nem ser <keyword1>curada</keyword1> nessa batalha; Suas cartas não podem ser jogadas nem compradas normalmente; Uma reserva viva pode substituí-la; Perder todas as criaturas do grupo encerra a jornada"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3502,6 +3520,12 @@
     "source": "Pearl",
     "sourceHash": "15d521bbd229976c71fd3849020edbf2346e724a7b490c71d2e83cc29eeaa672",
     "text": "Pérola"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "892ce57fedb5251a42f24e983c8c41dd80581c8d41347f712751c24db94ffa17",
+    "text": "Sua seleção determina a formação inicial; Substituições após nocaute e trocas por habilidades a atualizam para batalhas posteriores; Recrutas ocupam posições comuns vagas antes de ir para a reserva; A formação não pode ser editada manualmente"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,

@@ -3323,6 +3323,12 @@
     "sourceHash": "e21f3fd2a41bfb5d12d60862ed3e87fe9c5bed601faf7a5cf7aa846255ee1fd2",
     "text": "Попадание"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "6a46f9ed456db696ef80b2e7cb1c27bf4c4c8cd7d62c8622137715fc7a782866",
+    "text": "Розыгрыш карты действия приносит {{value0}} опыта за каждое её ключевое слово; Опыт по окончании боя сохраняется навсегда, даже после поражения; При выходе из боя полученный опыт сохраняется без наград за победу"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3449,6 +3455,12 @@
     "sourceHash": "7e64930f9fccd46b46b37be13ac2e48b2a9b956f5997131bd65eb916b59c4da9",
     "text": "возвращает указанную атаку или вредный статусный эффект; <keyword0>Отражение атаки</keyword0> возвращает нападающему урон и последующие вредные эффекты; <keyword1>Отражение</keyword1> только статуса направляет эффект случайному живому врагу, а прямой урон всё равно проходит; <keyword2>Отражённые</keyword2> атаки и статусы нельзя <keyword3>отразить</keyword3> повторно; Заряды не суммируются"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "d0b50e5605cb575c7eae60488fdd4aab545021283df998d5e1ba95bd03f2393c",
+    "text": "Возвращает выбывшего союзника с {{value0}}% максимального <keyword0>здоровья</keyword0>, округлёнными обычным образом и не менее {{value1}}; Не восстанавливает Порог смерти"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3466,6 +3478,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "c86471f2356111a9573021b0bf551346cf80985cd4cfe065801cfdac2c82b43a",
     "text": "Урон <keyword0>водой</keyword0>; <keyword1>Блок</keyword1> поглощает его; <keyword2>Броня</keyword2> не уменьшает его; эффект состояния не накладывается"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "9bb90efbe431d15c9e4538c3bb52e41db0d1825c475e1ad53594f55aec7e1f41",
+    "text": "При нулевом <keyword0>здоровье</keyword0> существо не может действовать или получать <keyword1>лечение</keyword1> до конца боя; Его карты нельзя разыграть или обычно взять; Живой запасной может его заменить; Потеря всех существ в составе завершает путешествие"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3502,6 +3520,12 @@
     "source": "Pearl",
     "sourceHash": "3bdff8c3f2955403126135737b8e5705053bfd105eaf28cd535c6e50b44866ff",
     "text": "Жемчужина"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "885a222818452d77e7c08b53b18bdfd0d2bfd1c0880e7bac93b19efcea3198f5",
+    "text": "Выбор существ определяет начальный состав; Замены после выбытия и смены от способностей меняют его для следующих боёв; Новые существа сначала занимают свободные обычные места, затем переходят в запас; Вручную изменить состав нельзя"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,

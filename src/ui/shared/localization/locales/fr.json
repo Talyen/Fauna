@@ -3323,6 +3323,12 @@
     "sourceHash": "cb59590c1fe50e64ace033cc1d1ac760d9d533b879d4dd13a0ae81c6da7874cd",
     "text": "Coup"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "f6bda186c283c7e0c78d278f315b2d244d9cb61b5579c7417a88f694f8538391",
+    "text": "Jouer une carte d’action rapporte {{value0}} XP pour chacun de ses mots-clés; Les XP de fin de combat sont permanents, même après une défaite; Abandonner conserve les XP déjà gagnés sans accorder les récompenses de victoire"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3449,6 +3455,12 @@
     "sourceHash": "ac71d7c08ee74bd9e1bef6f8b13f817ee8834a7067e55e5205c6050866e322ec",
     "text": "renvoie l’attaque ou l’effet de statut néfaste indiqué; Le <keyword0>renvoi d’attaque</keyword0> retourne les dégâts et effets néfastes associés à l’attaquant; Le <keyword1>renvoi</keyword1> d’un statut seul redirige l’effet vers un ennemi vivant aléatoire, mais les dégâts directs touchent quand même; Les attaques et statuts <keyword2>renvoyés</keyword2> ne peuvent pas être <keyword3>renvoyés</keyword3> à nouveau; Les charges ne se cumulent pas"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "3b4bd723775961557ff8917553b90f873fb86f844e364fdc3879cbc7b18ce9a2",
+    "text": "Ramène un allié mis K.-O. avec {{value0}}% de sa <keyword0>Santé</keyword0> maximale, arrondi normalement avec un minimum de {{value1}}; Ne renouvelle pas les portes de la mort"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3466,6 +3478,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "ec710358846b6afb0280025a62a035fef37b1ff3df5d3a69ac5ca95ed25c19d1",
     "text": "Dégâts d’<keyword0>Eau</keyword0> ; le <keyword1>Blocage</keyword1> les absorbe ; l’<keyword2>Armure</keyword2> ne les réduit pas ; aucun effet de statut n’est appliqué"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "fb7501b113d10ad7a6a80e93188901e33fe9bfc961dcd2a0a5a3afa840242b26",
+    "text": "À zéro <keyword0>Santé</keyword0>, une créature ne peut ni agir ni être <keyword1>soignée</keyword1> pendant ce combat; Ses cartes ne peuvent pas être jouées ni piochées normalement; Une réserve vivante peut la remplacer; Perdre toutes les créatures du groupe termine le voyage"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3502,6 +3520,12 @@
     "source": "Pearl",
     "sourceHash": "09becc1887c78af1e593b65814146640d1fca46d3c43f0e6a2ae637fd36df570",
     "text": "Perle"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "6eeed09de045a4f6c032217ebc2767cf36d3136dddd6bcc30a9b911f0309d5b6",
+    "text": "Votre sélection détermine la formation initiale; Les remplacements après un K.-O. et les permutations par capacité la modifient pour les combats suivants; Les recrues occupent les places ordinaires libres avant de rejoindre la réserve; La formation ne peut pas être modifiée manuellement"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,

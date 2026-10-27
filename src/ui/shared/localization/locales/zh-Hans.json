@@ -3323,6 +3323,12 @@
     "sourceHash": "8860f843ac0b94d350bd126154974cbb5bed282e57cf2f0a407e8ff730d8e9b4",
     "text": "命中"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "1e4fa2e47597a6650123b1bc15690adc78255059007150550c07634d52d0e6b2",
+    "text": "打出行动牌时，每个关键词获得{{value0}}经验; 战斗结束获得的经验永久保留，失败也不例外; 放弃战斗会保留已获得的经验，但不提供胜利奖励"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3449,6 +3455,12 @@
     "sourceHash": "f2e7cbd378c4c049ce1ecb4db9408575984e35323e3b411af471a66e8b666035",
     "text": "返还指定的攻击或有害状态效果; <keyword0>攻击反射</keyword0>将伤害和后续有害效果返还给攻击者; 仅状态<keyword1>反射</keyword1>会将效果转向一名随机存活的敌人，直接伤害仍会命中; 被<keyword2>反射</keyword2>的攻击和状态不能再次<keyword3>反射</keyword3>; 次数不叠加"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "f18c5c9de41d63dca2f0f4bcb1ec4a114fe66c7a055c592fd6697360ea4a7284",
+    "text": "使一名被击倒的盟友以最大<keyword0>生命</keyword0>的{{value0}}%复活，正常四舍五入且最低为{{value1}}; 不会重置濒死"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3466,6 +3478,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "e56931213832efc6339e2de15a66b6ac621dc3854748a4cd0596bf87816b1f39",
     "text": "<keyword0>水</keyword0>伤害；<keyword1>格挡</keyword1>会吸收；<keyword2>护甲</keyword2>不会减伤；不施加状态效果"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "23b5ad1d1c0a34bed8266f35408f071eedf5475f09e6a106226a10ff616ba622",
+    "text": "<keyword0>生命</keyword0>为零时，生物在本场战斗中无法行动或被<keyword1>治疗</keyword1>; 其牌不能打出，通常也不能抽取; 存活的后备生物可以替换它; 队伍中的所有生物都倒下时旅程结束"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3502,6 +3520,12 @@
     "source": "Pearl",
     "sourceHash": "205c42b34b294faad32e156b0c9d0b28d52275fa7400628b6ab947b60c103fbc",
     "text": "珍珠"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "e4ff2a43b49600a1ef3913f783fa3fb1954154648c8e46a87aa530855c2fbe1c",
+    "text": "选择的生物决定初始阵容; 击倒后的替换和技能换人会改变后续战斗的阵容; 新招募的生物先填补空缺的普通位置，再进入后备; 无法手动编辑阵容"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,

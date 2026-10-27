@@ -3323,6 +3323,12 @@
     "sourceHash": "a94912b6413eb63fc1bb280904d6b14942541249b60b0e341fa166e2f2afd954",
     "text": "命中"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "20051bf61857db75b2a4584a7d0c366f0c210db6e673f12be6fd5e8b22813171",
+    "text": "アクションカードを使うと、そのキーワードごとに経験値を{{value0}}獲得; 戦闘終了時の経験値は敗北後も永続; 戦闘を放棄すると獲得済みの経験値は保持されるが、勝利報酬は得られない"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3449,6 +3455,12 @@
     "sourceHash": "c9c4f17eb2fe220ff224dba3b83732cde0ef85ff7d7ed9533f791d0c6ece5c26",
     "text": "指定された攻撃または有害な状態効果を返す; <keyword0>攻撃反射</keyword0>はダメージとその後の有害効果を攻撃者へ返す; 状態効果のみの<keyword1>反射</keyword1>は効果をランダムな生存中の敵へ移し、直接ダメージは受ける; <keyword2>反射</keyword2>された攻撃や状態効果は再び<keyword3>反射</keyword3>できない; 回数は重複しない"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "cb60cd6ffa193d283b4634eb5aa777ad94b8f8186770f6c2b814f948406e58c9",
+    "text": "戦闘不能の味方を最大<keyword0>体力</keyword0>の{{value0}}%で復帰させる; 通常通り四捨五入し、最低{{value1}}; 死の淵は再使用可能にならない"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3466,6 +3478,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "6470d41e0dcbbe68deba7a9732a481c7508b38a886ec31e8ae5a29e29ee1fa54",
     "text": "<keyword0>水</keyword0>ダメージ；<keyword1>ブロック</keyword1>が吸収する；<keyword2>装甲</keyword2>では軽減されない；状態効果は付与されない"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "356bbf7c6768f80b3417b269413a0c831943860fc8f702093d7adea0b8df5264",
+    "text": "<keyword0>体力</keyword0>が0になると、その戦闘中は行動も<keyword1>回復</keyword1>もできない; そのカードは使用できず、通常は引けない; 生存している控えと交代できる; 所属する全クリーチャーを失うと旅が終わる"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3502,6 +3520,12 @@
     "source": "Pearl",
     "sourceHash": "417c3036e350d66b7fc34fc386a3925af2db6a8859838acdad10e3c6fb8fc468",
     "text": "真珠"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "627ad2195d7e407f718c5a9b8a7e49caef7975199a51a6860ea04f661060600d",
+    "text": "選択したクリーチャーが初期編成を決める; 戦闘不能時の交代と能力による交代は後の戦闘の編成にも反映される; 新加入は控えに入る前に空いた通常枠を埋める; 編成を手動で変更することはできない"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,

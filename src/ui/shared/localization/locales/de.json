@@ -3323,6 +3323,12 @@
     "sourceHash": "7d39e3ecc65f85ca0d468934424165d242b52068ca066f4daea024cc613e2580",
     "text": "Treffer"
   },
+  "content.glossary.keyword-xp.definition.rule": {
+    "reviewed": true,
+    "source": "Playing an action card earns {{value0}} XP for each of its keywords; Battle-end XP is permanent, including after defeat; Abandoning a battle banks the XP already earned without granting victory rewards",
+    "sourceHash": "0eb53e5521be471b1bac98554879c44b7fa160728bd1e95b93c8630afb0c5800",
+    "text": "Das Spielen einer Aktionskarte gewährt {{value0}} EP für jedes ihrer Schlüsselwörter; Kampf-EP bleiben dauerhaft erhalten, auch nach einer Niederlage; Beim Aufgeben werden bereits verdiente EP gesichert, ohne Siegesbelohnungen zu gewähren"
+  },
   "content.glossary.keyword-xp.term.rule": {
     "reviewed": true,
     "source": "Keyword XP",
@@ -3449,6 +3455,12 @@
     "sourceHash": "7c2ef829ea2945dad65c8625e50a2aa19a2ecfed80db3e8e0b169ba76d5708f3",
     "text": "Wirft den angegebenen Angriff oder schädlichen Statuseffekt zurück; <keyword0>Angriffsreflexion</keyword0> gibt Schaden und schädliche Folgeeffekte an den Angreifer zurück; Reine Status<keyword1>reflexion</keyword1> lenkt den Effekt auf einen zufälligen lebenden Gegner um, während direkter Schaden weiterhin trifft; <keyword2>Reflektierte</keyword2> Angriffe und Status können nicht erneut <keyword3>reflektiert</keyword3> werden; Ladungen sind nicht stapelbar"
   },
+  "content.glossary.keyword.resurrect.definition.rule": {
+    "reviewed": true,
+    "source": "Return a knocked-out ally with {{value0}}% of their maximum <keyword0>Health</keyword0>, rounded normally with a minimum of {{value1}}; Does not renew Death’s Door",
+    "sourceHash": "c3797380c56f2d4559c2cbd308feef4381a6ea887e7d48590635ee49914c3ff3",
+    "text": "Bringt einen ausgeschalteten Verbündeten mit {{value0}}% seiner maximalen <keyword0>Gesundheit</keyword0> zurück, normal gerundet und mindestens {{value1}}; Erneuert Nahtod nicht"
+  },
   "content.glossary.keyword.stun.definition.rule": {
     "reviewed": true,
     "source": "Damage builds toward <keyword0>Stunned</keyword0>: skip one turn at half maximum <keyword1>Health</keyword1>; Recovery grants {{value0}} turns of shared <keyword2>Stun</keyword2>/<keyword3>Freeze</keyword3> immunity",
@@ -3466,6 +3478,12 @@
     "source": "<keyword0>Water</keyword0> damage; <keyword1>Block</keyword1> absorbs it; <keyword2>Armor</keyword2> does not reduce it; No status effect is applied",
     "sourceHash": "59ae932221f1bc9723376b1463a3f99592fac638403a4d477ba7a10609997522",
     "text": "<keyword0>Wasser</keyword0>schaden; <keyword1>Block</keyword1> absorbiert ihn; <keyword2>Rüstung</keyword2> reduziert ihn nicht; kein Statuseffekt wird angewendet"
+  },
+  "content.glossary.knockout.definition.rule": {
+    "reviewed": true,
+    "source": "At zero <keyword0>health</keyword0> a creature cannot act or be <keyword1>healed</keyword1> during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
+    "sourceHash": "40789128e114d53984c3974c26cb26fd7ff516e73757ed054a38f8256a2ee606",
+    "text": "Bei null <keyword0>Gesundheit</keyword0> kann eine Kreatur in diesem Kampf weder handeln noch <keyword1>geheilt</keyword1> werden; Ihre Karten können nicht gespielt oder regulär gezogen werden; Eine lebende Reserve kann sie ersetzen; Der Verlust aller Kreaturen beendet die Reise"
   },
   "content.glossary.knockout.term.rule": {
     "reviewed": true,
@@ -3502,6 +3520,12 @@
     "source": "Pearl",
     "sourceHash": "8aa4ce2a21f12f160f60b96d4f5ddfb8aebaf1eb57c1f0acab2f7a5c98651718",
     "text": "Perle"
+  },
+  "content.glossary.starting-lineup.definition.rule": {
+    "reviewed": true,
+    "source": "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
+    "sourceHash": "cf050e03ad041bcc42feaf45412de90887938ebcfb660749b8534e2a5acb9ad8",
+    "text": "Deine Auswahl bestimmt die anfängliche Aufstellung; Ersatz nach dem Ausscheiden und Wechsel durch Fähigkeiten ändern sie für spätere Kämpfe; Rekruten besetzen freie gewöhnliche Plätze, bevor sie zur Reserve gehen; Die Aufstellung kann nicht manuell bearbeitet werden"
   },
   "content.glossary.starting-lineup.term.rule": {
     "reviewed": true,
