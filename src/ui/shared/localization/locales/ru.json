@@ -665,11 +665,23 @@
     "sourceHash": "370089962e3f7086d8b6616c6c08dd1cfa7b1e013422ef8740df1f685bab042d",
     "text": "Снимает вредные эффекты с союзника"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "c03fe76b151c10e1cccfaeed9949dbe53d9b78b1a512a1ff6affd3511b5766f1",
+    "text": "После розыгрыша убрать эту карту до конца боя; Начальная колода восстанавливается перед каждым боем; Неразыгранные карты сбрасываются как обычно"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "c05cb9ffba539cf3d0e68002be4991be4fa1cf8f78446c19d68300856383e55a",
     "text": "Атака, наносящая двойной урон"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "298a4d1330040424cbd70e94b3814c17503bf664e36e34e099e9fcaaaef920be",
+    "text": "Оставшееся здоровье; При нуле <keyword0>здоровья</keyword0> существо выбывает из боя; <keyword1>Здоровье</keyword1> можно восстановить до максимума; Восстановление не возвращает существо в бой во время сражения"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -682,6 +694,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "5b129c11b9e6014d0d4dc814f45423d2c8d3cbbd1eb3ce98c3fdaffa193da692",
     "text": "Урон <keyword0>природой</keyword0>; сопротивление и эффект состояния не подразумеваются"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "4494901e538c1aa5662d82c64771d0329f5aaa570ce3166c5960ee3a936f8003",
+    "text": "Предотвращает следующий вредный эффект состояния; Прямой урон по-прежнему проходит; Действует до расходования или <keyword0>рассеивания</keyword0>; Не накапливается"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,

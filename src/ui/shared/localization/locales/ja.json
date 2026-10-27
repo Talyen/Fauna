@@ -665,11 +665,23 @@
     "sourceHash": "6d8e126df35884ca7b2ad31e5108faec39f214974ad177096aebde98f6f6041a",
     "text": "味方1体の有害な効果を取り除く"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "5ae57176488b3b7a315708bf09d890a783f495ed8fbdd4ecb2775fc4ccde7f05",
+    "text": "使用後、このカードを戦闘終了まで取り除く; 初期デッキは戦闘ごとに復元される; 未使用のカードは通常どおり捨てられる"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "52c6fe2c3393e73bf0036d22fc23ee908fd3c55c133059ced59337f62c4e2eba",
     "text": "ダメージが2倍になる攻撃"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "a425f1343bf67f0b86d14c762eab7728391a673711eb294225b4ff71b6ef4542",
+    "text": "残りの生命力; <keyword0>体力</keyword0>がゼロになるとクリーチャーは戦闘不能になる; <keyword1>体力</keyword1>は最大値まで回復できる; 戦闘中、回復では戦闘不能から復帰できない"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -682,6 +694,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "e5430c262b9b46377350f662643f0a1aaa0d22fb3ae50648281adea563b0c71e",
     "text": "<keyword0>自然</keyword0>ダメージ；耐性や状態効果は付随しない"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "1a0b82356ab84b2b309c3aec1f5380bc44d5efcd80a6012085624b5d91488129",
+    "text": "次に受ける有害な状態効果を防ぐ; 直接ダメージは受ける; 消費されるか<keyword0>強化解除</keyword0>されるまで持続; 重複しない"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,

@@ -665,11 +665,23 @@
     "sourceHash": "0c87431c8cf998e6e9f9bfa8711bea0845257836a8b6d8047afb48aa9bee035f",
     "text": "Elimina efectos perjudiciales de un aliado"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "946c791cdf2a62d8fd79d226d6706a1e55ec3fbe4d449f052192b09f4a308848",
+    "text": "Retira esta carta durante el resto del combate después de jugarla; El mazo inicial se restaura en cada combate; Las cartas no jugadas se descartan normalmente"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "3571499289142a821fb823071293ca38a6c1b58b42553fa9e759e50261856842",
     "text": "Un ataque que inflige el doble de daño"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "fb61dc1c6bcfe49d0a19c2a9e1105fa29c21a20178143d96c315d187f2301265",
+    "text": "Vida restante; Con cero de <keyword0>Salud</keyword0>, una criatura queda fuera de combate; La <keyword1>Salud</keyword1> se puede restaurar hasta su máximo; La restauración no revive durante el combate"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -682,6 +694,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "58f5454eff98ffbb454028e0d8969c5f1218274902f98c653f1431a6a55a275e",
     "text": "Daño de <keyword0>Naturaleza</keyword0>; no implica resistencia ni efecto de estado"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "7bcfd86b67cec0ab92d8ea00d0f048638e6f839217859328b59c34ef663afec2",
+    "text": "Evita el siguiente efecto de estado perjudicial; El daño directo sigue impactando; Dura hasta consumirse o ser <keyword0>purgado</keyword0>; No se acumula"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,

@@ -665,11 +665,23 @@
     "sourceHash": "4e4a1960064e66bc7fc6e559397097497109802a196284226a65f3d5a77c86a1",
     "text": "Remove efeitos prejudiciais de um aliado"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "533fbc0e1febf1726f167386c37e66d222f9abd5cb610dfc38694df1920548d0",
+    "text": "Remove esta carta pelo restante do combate após ser jogada; O baralho inicial é restaurado a cada combate; Cartas não jogadas são descartadas normalmente"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "f99d283d9000b60559ccdf7930e9cdb0e6fda6b2c9f34a4667f9a4bc96a40880",
     "text": "Um ataque que causa o dobro de dano"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "219724407fffa8d05b571e400579d6aca53915530b56e4b84db8be9215141232",
+    "text": "Vida restante; Com zero de <keyword0>Saúde</keyword0>, uma criatura é nocauteada; A <keyword1>Saúde</keyword1> pode ser restaurada até o máximo; A restauração não revive durante o combate"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -682,6 +694,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "4367c9ad67b79de287ebeb56ad59f64e9197105126f3d96740d0852862f9cb59",
     "text": "Dano de <keyword0>Natureza</keyword0>; não implica resistência nem efeito de estado"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "11072974cb56686c33714388979c796e6cf9b76c4d779a7dcd6a7f70258aa8f0",
+    "text": "Impede o próximo efeito de status prejudicial; Dano direto ainda atinge; Dura até ser consumido ou <keyword0>expurgado</keyword0>; Não acumula"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,

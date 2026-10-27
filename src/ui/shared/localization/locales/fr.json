@@ -713,11 +713,23 @@
     "sourceHash": "577247ef0e441f0e1e361fef07fa3338c0e9002ee7184ec58a622aaee7ea593c",
     "text": "Retire les effets néfastes d’un allié"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "d022f18acf92c8cf6f1961e87ffcffe5211ddd912823eff03bd9c0bed441e352",
+    "text": "Retire cette carte pour le reste du combat après utilisation ; Le deck initial est restauré à chaque combat ; Les cartes non jouées sont défaussées normalement"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "b41c1e40d42f6f8fbbc358fe5498bf628bdf7b58f1f8df70a9edff61fd932b61",
     "text": "Une attaque qui inflige le double de dégâts"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "f045775a66bc7619dd675277901c8205596b49164532a0a6812390ca24849ade",
+    "text": "Points de vie restants ; À zéro <keyword0>Santé</keyword0>, une créature est mise hors combat ; La <keyword1>Santé</keyword1> peut être restaurée jusqu’à son maximum ; La restauration ne réanime pas pendant le combat"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -730,6 +742,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "424eb843f6b0a5be6dfb51acd7aa4c1c30870e32d8ceaa69243c2514f24210a7",
     "text": "Dégâts de <keyword0>Nature</keyword0> ; aucune résistance ni aucun effet de statut n’est implicite"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "2602d446f940f6ebe3914c3b27d28f2f06e18239209a6fcd04624d6137ddc777",
+    "text": "Empêche le prochain effet de statut néfaste ; Les dégâts directs s’appliquent toujours ; Dure jusqu’à utilisation ou <keyword0>dissipation</keyword0> ; Ne se cumule pas"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,

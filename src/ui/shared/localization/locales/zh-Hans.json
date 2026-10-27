@@ -665,11 +665,23 @@
     "sourceHash": "dc0dcbc79326ede174d0a91d6cd9b003f27ff4a722d870efecddf32ef1b44510",
     "text": "移除一名盟友的有害效果"
   },
+  "content.glossary.keyword.consume.definition.rule": {
+    "reviewed": true,
+    "source": "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
+    "sourceHash": "2ca701e7ab1eaa1a33d4609b8ec5ceb96866474fdea5faa2b5dce02938685480",
+    "text": "打出后将此牌移出直至战斗结束；每场战斗都会恢复初始牌组；未打出的牌正常弃置"
+  },
   "content.glossary.keyword.criticalHit.definition.rule": {
     "reviewed": true,
     "source": "An attack that deals double damage",
     "sourceHash": "da7f98a1566964e4100eb4dd9be6c4f91b012873a70fedf61f9cc471168dff58",
     "text": "造成双倍伤害的攻击"
+  },
+  "content.glossary.keyword.health.definition.rule": {
+    "reviewed": true,
+    "source": "Remaining life; At zero <keyword0>Health</keyword0> a creature is knocked out; Restore <keyword1>Health</keyword1> up to its maximum; restoration cannot revive it during battle",
+    "sourceHash": "c2cf7ed58440fd0be81b81eb0c8e9d9bf3b0fee096573b943ef358440cc38e34",
+    "text": "剩余生命值；<keyword0>生命</keyword0>降至零时，生物被击倒；<keyword1>生命</keyword1>可恢复至上限；战斗中恢复生命不能使其复活"
   },
   "content.glossary.keyword.light.definition.rule": {
     "reviewed": true,
@@ -682,6 +694,12 @@
     "source": "<keyword0>Nature</keyword0> damage; No resistance or status effect is implied",
     "sourceHash": "9cd309a2fd91b642fda01f2ee17d69b44df0e2d1f3d344301c7c41179fd94eaa",
     "text": "<keyword0>自然</keyword0>伤害；不隐含抗性或状态效果"
+  },
+  "content.glossary.keyword.nullify.definition.rule": {
+    "reviewed": true,
+    "source": "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword0>Purged</keyword0>; Does not stack",
+    "sourceHash": "76944386a8cf72516e3072d140dc392da55d49285419fcd4121c42705f089cde",
+    "text": "防止下一次有害状态效果；仍会受到直接伤害；持续至消耗或被<keyword0>驱散</keyword0>；不可叠加"
   },
   "content.glossary.keyword.purge.definition.rule": {
     "reviewed": true,
