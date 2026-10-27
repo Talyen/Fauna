@@ -158,7 +158,7 @@ Rest returns immediately to the same combat offers, briefly presenting committed
 
 Open directly from its existing landscape location ArtCard; source selection remains an explicit placeholder. Center up to three prepared portrait Boons with names/rules/journey duration in hover/focus details. Put the Gold wallet in the heading row, the one-per-visit limit in offer details and the price below each artwork. Activating affordable artwork purchases immediately; center Leave. Wallet/prices use shared gold Coins icons.
 
-Unaffordable purchases remain focusable, explain Not enough Gold and cannot issue commands. Buying replaces the shelf with one purchased Boon, name, rules, For this journey and Continue; move focus to Continue. [Support visits](../EXPEDITION_DESIGN.md#optional-support-visits) own purchase commitment, resume, prices, eligibility, leaving and rerolls.
+Unaffordable purchases remain focusable, explain Not enough Gold and cannot issue commands. Buying returns directly to the encounter screen and briefly shows the purchased Boon and its price without blocking the next action. A committed purchase resumes by leaving the Merchant without buying again. [Support visits](../EXPEDITION_DESIGN.md#optional-support-visits) own purchase commitment, resume, prices, eligibility, leaving and rerolls.
 
 ## Startup loading
 

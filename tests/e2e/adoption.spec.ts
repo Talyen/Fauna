@@ -49,7 +49,6 @@ for (const [group, layouts] of [
 ] as const)
   test(`Boon Merchant shelf and purchase across ${group} layouts`, async ({ page }) => {
     const fixture = merchantDestination();
-    const visit = fixture.support!.id;
     const slot = fixture.support!.stock[0]!;
     const boon = BOONS.find((entry) => entry.id === slot.boon)!;
     await page.emulateMedia({ reducedMotion: "reduce" });
@@ -87,32 +86,23 @@ for (const [group, layouts] of [
       expect(wallet!.y + wallet!.height).toBeLessThanOrEqual(row!.y + row!.height);
     });
     await page.getByRole("button", { name: `Buy ${boon.name} for ${slot.price} Gold`, exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
-    await expect(
-      page
-        .getByRole("region", { name: "Purchased Boon" })
-        .getByRole("heading", { name: boon.name, exact: true }),
-    ).toBeVisible();
+    await expect(page.locator(".merchant-purchase-feedback")).toContainText(boon.name);
+    await expect(page.locator(".merchant-purchase-feedback")).toContainText(`${slot.price} Gold`);
     await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
     const purchased = await state(page);
     expect(purchased.currency).toBe(fixture.currency - slot.price);
     expect(purchased.boons).toEqual([...fixture.boons, slot.boon]);
-    expect(purchased.support).toMatchObject({ id: visit, resolved: true });
-    await inspectLayouts("merchant");
+    expect(purchased.support).toBeNull();
+    expect(purchased.phase).toBe("teamSelection");
+    await inspectLayouts("merchant-returned");
     expect(await state(page)).toEqual(purchased);
     if (group === "compact") {
-      // Save/resume is viewport independent; retain it once across all receipt layouts.
+      // Save/resume is viewport independent; retain it once across all layouts.
       await reloadHome(page);
       await page.getByRole("button", { name: "Continue", exact: true }).click();
-      await expect(
-        page
-          .getByRole("region", { name: "Purchased Boon" })
-          .getByRole("heading", { name: boon.name, exact: true }),
-      ).toBeVisible();
       await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
       expect(await state(page)).toEqual(purchased);
     }
-    await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.getByRole("button", { name: "Visit Boon Merchant", exact: true })).toHaveCount(0);
     const saved = await state(page);
     expect(saved.boons).toEqual(purchased.boons);
@@ -120,7 +110,7 @@ for (const [group, layouts] of [
     expect(saved.currency).toBe(fixture.currency - slot.price);
     expect(saved.journey!.currency).toBe(20);
     expect(saved.expedition!.lastRoom).toBe("merchant");
-    expect(saved.rng).not.toBe(purchased.rng);
+    expect(saved.rng).not.toBe(fixture.rng);
     expect(saved.support).toBeNull();
   });
 

@@ -135,6 +135,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     [session, autoEndTurn, setAutoplay],
   );
   const automaticReplacementFocus = useRef(false);
+  const automaticMerchantFocus = useRef(false);
   useLayoutEffect(() => {
     if (surface.top !== "replacement" || !view.ready || view.closing) return;
     const current = session.store.getState();
@@ -160,6 +161,28 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     if (surface.top !== "page") return;
     automaticReplacementFocus.current = false;
     returnFocus(root.current?.querySelector<HTMLElement>(".hand .action-card, .end-turn") ?? null);
+  }, [game, route, surface.top]);
+  useLayoutEffect(() => {
+    if (route !== "play" || surface.top !== "page" || !view.ready || view.closing) return;
+    const current = session.store.getState();
+    if (current.game !== game || current.overlayActive || current.cloud.blocking) return;
+    if (game.phase === "support" && game.support.purchased)
+      automaticMerchantFocus.current = session.command({ type: "leaveSupport", visit: game.support.id });
+  }, [session, game, route, surface.top, view.ready, view.closing, view.overlayActive, view.cloud.blocking]);
+  useLayoutEffect(() => {
+    if (!automaticMerchantFocus.current) return;
+    if (route !== "play") {
+      automaticMerchantFocus.current = false;
+      return;
+    }
+    if (game.phase === "support") return;
+    if (game.phase !== "teamSelection") {
+      automaticMerchantFocus.current = false;
+      return;
+    }
+    if (surface.top !== "page") return;
+    automaticMerchantFocus.current = false;
+    returnFocus(root.current?.querySelector<HTMLElement>("[data-encounter]") ?? null);
   }, [game, route, surface.top]);
   const leaveResults = () => transition({ type: "home" });
   const menuAnchor = useRef({
@@ -429,6 +452,12 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           game={game}
                           send={send}
                           inspect={inspect}
+                          purchase={
+                            view.committedCommand?.type === "leaveSupport" &&
+                            view.eventPreviousGame?.phase === "support"
+                              ? view.eventPreviousGame.support
+                              : undefined
+                          }
                           recovery={view.committedCommand?.type === "rest" ? view.events : undefined}
                         />
                       ) : game.phase === "support" ? (

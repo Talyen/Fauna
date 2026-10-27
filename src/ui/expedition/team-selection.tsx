@@ -5,7 +5,7 @@ import { Screen, ScreenHeading } from "../shared/navigation/screen";
 
 import { RestRecovery } from "./campfire";
 import { canVisitCampfire, canRecruitDestination } from "../../game/destinations";
-import { SupportOffer } from "./support-screen";
+import { PurchaseFeedback, SupportOffer } from "./support-screen";
 import { assetUrl } from "../shared/assets";
 import { CreatureCard } from "../shared/cards/cards";
 import { species } from "../../game/content";
@@ -24,7 +24,12 @@ type Props = {
   send: (command: Command) => boolean;
   inspect: (item: Inspection) => void;
 };
-export function TeamSelection({ game, send, recovery }: Props & { recovery?: GameEvent[] }) {
+export function TeamSelection({
+  game,
+  send,
+  recovery,
+  purchase,
+}: Props & { recovery?: GameEvent[]; purchase?: StateAt<"support">["support"] }) {
   const i18n = useMessages();
   const boss = bossEncounter(game);
   const bossEnemy = boss ? encounterSource(game).enemies[0]! : null;
@@ -130,6 +135,7 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
       </section>
       <BattleEarnings game={game} />
       {recovery ? <RestRecovery key={game.revision} game={game} events={recovery} /> : null}
+      {purchase?.purchased ? <PurchaseFeedback key={game.revision} visit={purchase} /> : null}
     </Screen>
   );
 }

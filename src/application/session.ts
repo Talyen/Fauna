@@ -18,7 +18,7 @@ export interface SessionView {
   saveStatus: "saved" | "saving" | "error";
   saveUnavailable: boolean;
   events: GameEvent[];
-  /** The committed events may refer to combatants removed by the resulting transition. */
+  /** Events and purchase feedback may refer to data removed by the resulting transition. */
   eventPreviousGame: GameState | null;
   committedCommand: Command | null;
 }
@@ -356,7 +356,11 @@ export function createSession(
       save(result.state, {
         game: result.state,
         events: result.events,
-        eventPreviousGame: result.events.length ? view.game : null,
+        eventPreviousGame:
+          result.events.length ||
+          (command.type === "leaveSupport" && view.game.phase === "support" && view.game.support.purchased)
+            ? view.game
+            : null,
         committedCommand: Object.freeze({ ...command }),
         error: "",
       });

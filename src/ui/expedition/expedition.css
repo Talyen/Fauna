@@ -424,6 +424,28 @@
 .merchant-leave {
   min-width: var(--art-portrait-width);
 }
+.merchant-purchase-feedback {
+  position: fixed;
+  left: 50%;
+  bottom: var(--page-block-gutter);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  max-width: calc(100vw - var(--page-inline-gutter) * 2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  pointer-events: none;
+  overflow-wrap: anywhere;
+}
+.merchant-purchase-feedback svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
 .merchant-reward {
   display: flex;
   flex-direction: column;

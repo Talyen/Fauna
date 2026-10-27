@@ -216,6 +216,7 @@
   --discard-back-left: -7.6219512195%;
   --discard-back-top: -5.787037037%;
   --rest-feedback-duration: 1800ms;
+  --purchase-feedback-duration: 3600ms;
   --battle-hand-height: var(--art-long-side);
   --art-long-side: calc(var(--art-short-side) * 4 / 3);
   --art-landscape-width: calc(var(--art-long-side) * var(--art-creature-scale));

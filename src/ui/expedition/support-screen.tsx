@@ -1,6 +1,6 @@
 import { useMessages } from "../shared/localization/message-context";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Coins } from "lucide-react";
 import type { Command, GameState, StateAt } from "../../game/types";
 import { canVisitMerchant } from "../../game/destinations";
@@ -9,7 +9,28 @@ import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
+import { motionValue } from "../shared/motion-values";
 import { BoonArt, BoonName, BoonText } from "./boon-presentation";
+
+export function PurchaseFeedback({ visit }: { visit: StateAt<"support">["support"] }) {
+  const i18n = useMessages();
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(false), motionValue("--purchase-feedback-duration") || 3600);
+    return () => clearTimeout(timer);
+  }, []);
+  const boon = findBoon(visit.purchased);
+  const offer = visit.stock.find((slot) => slot.boon === visit.purchased);
+  if (!visible || !boon || !offer) return null;
+  return (
+    <div className="merchant-purchase-feedback" role="status">
+      <BoonName boon={boon} />
+      <span>−</span>
+      <Coins className="gold-icon" aria-hidden="true" />
+      {i18n.message("merchant.gold", "{{amount}} Gold", { amount: offer.price })}
+    </div>
+  );
+}
 export function SupportOffer({ game, send }: { game: GameState; send: (c: Command) => boolean }) {
   const i18n = useMessages();
   const visit = game.support;
