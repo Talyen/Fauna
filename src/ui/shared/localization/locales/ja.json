@@ -2951,6 +2951,12 @@
     "sourceHash": "f849f4eb1c519dcf051d74983081d648dfb235de8dafe33d6230186af8039d1a",
     "text": "装甲の吸収"
   },
+  "content.talent.leech.armor-siphon.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Leech</keyword0> cards steal {{value0}} <keyword1>Armor</keyword1> before their effects resolve",
+    "sourceHash": "7c297e00c3a3cfd8c9cfe83b58cd2486e8c19959b9e58e39f6d513a5bf3db845",
+    "text": "自分の<keyword0>吸血</keyword0>カードは効果の解決前に<keyword1>装甲</keyword1>を{{value0}}奪う"
+  },
   "content.talent.leech.blood-debt.name": {
     "reviewed": true,
     "source": "Blood Debt",
@@ -2975,6 +2981,12 @@
     "sourceHash": "1b2613e4e562b00c52fb7dc1966c6d3b72c8aefaf59e02c2aec48b78b223c990",
     "text": "深い吸収"
   },
+  "content.talent.leech.deep-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}} additional <keyword1>Health</keyword1>",
+    "sourceHash": "aaa0bc193d58a967e4c7b0b3067fd5492e54e86bf53e3cfd2337d591e7a5d08f",
+    "text": "<keyword0>吸血</keyword0>による<keyword1>体力</keyword1>回復量が{{value0}}増加"
+  },
   "content.talent.leech.desperate-siphon.name": {
     "reviewed": true,
     "source": "Desperate Siphon",
@@ -2986,6 +2998,12 @@
     "source": "Mana Siphon",
     "sourceHash": "98212219a536e476ec610009adf7998f7766828e1b54d36023d3c1a5b5c31221",
     "text": "マナの吸収"
+  },
+  "content.talent.leech.mana-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "65db2cf503f98a543dba4c1d45da6043bd557552549ea18e1184e225e3f31913",
+    "text": "<keyword0>吸血</keyword0>時に{{value0}}%の確率で<keyword1>マナ</keyword1>を{{value1}}獲得"
   },
   "content.talent.leech.sanguine-overflow.name": {
     "reviewed": true,
@@ -3839,6 +3857,12 @@
     "sourceHash": "2d99c27a7bbea59a267ed125ad199d4952f3b0b81a7e740cd9baf2fcb17eadab",
     "text": "{{name}}は戦闘不能になった。"
   },
+  "log.loseFreezeBuildup": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Freeze buildup",
+    "sourceHash": "545add015fb4014eeade563dc1325a44d1e905c57677329b7a55fee202c784b9",
+    "text": "{{name}}の凍結の蓄積が{{amount}}減少"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3857,11 +3881,23 @@
     "sourceHash": "e84c3f4bfc1324af913a24c419c5844bc6e97e64f0005168f2f4b6ce36d896c0",
     "text": "{{name}}：{{action}} — 解除された効果はありません。"
   },
+  "log.resurrect": {
+    "reviewed": true,
+    "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
+    "sourceHash": "9226368024f231d467c86e9f84a518452aad61f10c847c055073fdddd205b051",
+    "text": "{{actor}}が{{target}}を体力{{amount}}で復活させた"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "9e6ccf6977846cf547ea67733133d4f6a1340e7ae829875eddc9ec76fd92cbdb",
     "text": "野生の地から帰還しました。発見は保持されます。"
+  },
+  "log.temporaryDodge": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}}% Dodge until its next turn",
+    "sourceHash": "007b3b59c93f38adecb0c902ee547787afc68a191aa3ae7edd1d9fb21b42cdd9",
+    "text": "{{name}}は次のターンまで回避を{{amount}}%獲得"
   },
   "log.turnRestored": {
     "reviewed": true,

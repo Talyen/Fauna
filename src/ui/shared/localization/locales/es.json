@@ -2951,6 +2951,12 @@
     "sourceHash": "2d11c4dd85c193aa1e01685a95f4fed387b3bd8bd15cfbe7ee0acfb23b9c468d",
     "text": "Succión de Armadura"
   },
+  "content.talent.leech.armor-siphon.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Leech</keyword0> cards steal {{value0}} <keyword1>Armor</keyword1> before their effects resolve",
+    "sourceHash": "1e13e6659eb22c6ec13be9a53a21e8eb91433cda74ff142b83728541b73d12ce",
+    "text": "Tus cartas de <keyword0>Drenaje</keyword0> roban {{value0}} de <keyword1>Armadura</keyword1> antes de resolver sus efectos"
+  },
   "content.talent.leech.blood-debt.name": {
     "reviewed": true,
     "source": "Blood Debt",
@@ -2975,6 +2981,12 @@
     "sourceHash": "6cc5167bf81f75cd610567b1e1b6ae237fd0429a035707047c679bea04dcfff9",
     "text": "Succión profunda"
   },
+  "content.talent.leech.deep-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}} additional <keyword1>Health</keyword1>",
+    "sourceHash": "da612fc22ffb73d02dc0ddec34315b2772d58d7c33d4e46cf3287ad11c9e6d31",
+    "text": "<keyword0>Drenaje</keyword0> restaura {{value0}} de <keyword1>Salud</keyword1> adicional"
+  },
   "content.talent.leech.desperate-siphon.name": {
     "reviewed": true,
     "source": "Desperate Siphon",
@@ -2986,6 +2998,12 @@
     "source": "Mana Siphon",
     "sourceHash": "bf2e5ae7ba670efaaee1c149a130ec3df7a0ceb8575ac8e464a0eeb8ab6f1dca",
     "text": "Succión de Maná"
+  },
+  "content.talent.leech.mana-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "4ad1ea1d49b7f5e311a5cecf03229ef2066b924f7831bd5090eb61d709684dfe",
+    "text": "<keyword0>Drenaje</keyword0> tiene un {{value0}}% de probabilidad de otorgar {{value1}} de <keyword1>Maná</keyword1>"
   },
   "content.talent.leech.sanguine-overflow.name": {
     "reviewed": true,
@@ -3839,6 +3857,12 @@
     "sourceHash": "4f85f4eded4ee0ad74079be7c97bb02dee46009215a67b7e80d09d37e06e8ce1",
     "text": "{{name}} queda fuera de combate."
   },
+  "log.loseFreezeBuildup": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Freeze buildup",
+    "sourceHash": "77fc445d03c5a335426444c50e83dbe61347ad7e6446ae14276f471936d973de",
+    "text": "{{name}} pierde {{amount}} de acumulación de Congelación"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3857,11 +3881,23 @@
     "sourceHash": "ed4015e8d78266625ba5e00abe15b647b70183b3f1e79a9e12d49ed458cf340f",
     "text": "{{name}}: {{action}} — ningún efecto eliminado."
   },
+  "log.resurrect": {
+    "reviewed": true,
+    "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
+    "sourceHash": "9f8cffbd6410c5c26be5cd431cd7599205952e851660ed2e1b348e3acbe151fa",
+    "text": "{{actor}} resucita a {{target}} con {{amount}} de Salud"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "5492485f908b44c9454293dc2b1887c08698b4be759023a40ca7ddf9012023fd",
     "text": "Regresas de las tierras salvajes. Conservas los descubrimientos."
+  },
+  "log.temporaryDodge": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}}% Dodge until its next turn",
+    "sourceHash": "4eaa4c91fe1b5c88f3bd7f956a0e1f191bdaba55d28652b40c22131b87ede1fe",
+    "text": "{{name}} obtiene {{amount}}% de Esquiva hasta su próximo turno"
   },
   "log.turnRestored": {
     "reviewed": true,

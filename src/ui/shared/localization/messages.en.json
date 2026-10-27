@@ -323,6 +323,9 @@
   "log.knockout": {
     "text": "{{name}} is knocked out."
   },
+  "log.loseFreezeBuildup": {
+    "text": "{{name}} loses {{amount}} Freeze buildup"
+  },
   "log.removeBuildup": {
     "text": "{{name}}: Cleanse {{status}} build-up"
   },
@@ -332,8 +335,14 @@
   "log.removeNoEffects": {
     "text": "{{name}}: {{action}} removes no effects."
   },
+  "log.resurrect": {
+    "text": "{{actor}} Resurrects {{target}} with {{amount}} Health"
+  },
   "log.returnHome": {
     "text": "You return from the wilds. Discoveries are kept."
+  },
+  "log.temporaryDodge": {
+    "text": "{{name}} gains {{amount}}% Dodge until its next turn"
   },
   "log.turnRestored": {
     "text": "Turn {{turn}}. {{amount}} Mana restored."

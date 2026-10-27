@@ -2951,6 +2951,12 @@
     "sourceHash": "c65a69fee5b7122b8ecfddda5c262e1a0c8d8bfffedc069d503e53d1d38be495",
     "text": "Rüstungsentzug"
   },
+  "content.talent.leech.armor-siphon.rule": {
+    "reviewed": true,
+    "source": "Your <keyword0>Leech</keyword0> cards steal {{value0}} <keyword1>Armor</keyword1> before their effects resolve",
+    "sourceHash": "a64eaa36cdf5e24639a20946f74357e09912b3ea881e74744d72b333634989b0",
+    "text": "Deine <keyword0>Lebensraub</keyword0>-Karten stehlen {{value0}} <keyword1>Rüstung</keyword1>, bevor ihre Effekte ausgeführt werden"
+  },
   "content.talent.leech.blood-debt.name": {
     "reviewed": true,
     "source": "Blood Debt",
@@ -2975,6 +2981,12 @@
     "sourceHash": "c442f5da9b1f5b471e4bb9497de01fffea89631fec53a14439a6000fc0f0bcf2",
     "text": "Tiefes Absaugen"
   },
+  "content.talent.leech.deep-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> restores {{value0}} additional <keyword1>Health</keyword1>",
+    "sourceHash": "c9edd651cf073c8311bffd7378de15a34b4765617c908b946dfd1831e7bd4718",
+    "text": "<keyword0>Lebensraub</keyword0> stellt {{value0}} zusätzliche <keyword1>Gesundheit</keyword1> wieder her"
+  },
   "content.talent.leech.desperate-siphon.name": {
     "reviewed": true,
     "source": "Desperate Siphon",
@@ -2986,6 +2998,12 @@
     "source": "Mana Siphon",
     "sourceHash": "8d9c0229d27b298480a49578600d804fa046962dacb7d2b60c485f47ccf95a65",
     "text": "Manaentzug"
+  },
+  "content.talent.leech.mana-siphon.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Leech</keyword0> has a {{value0}}% chance to gain {{value1}} <keyword1>Mana</keyword1>",
+    "sourceHash": "4ee972f77bb0c50645e83b3780aa61c37fa24a9c747aba4c19d747be1722ff7a",
+    "text": "<keyword0>Lebensraub</keyword0> hat eine Chance von {{value0}}%, {{value1}} <keyword1>Mana</keyword1> zu erhalten"
   },
   "content.talent.leech.sanguine-overflow.name": {
     "reviewed": true,
@@ -3839,6 +3857,12 @@
     "sourceHash": "e1b4be8d36ce3b7bb12a18d9a9b233d07ecbebdcbf8d5accb0db8cf4f3d9b6e0",
     "text": "{{name}} ist K. o."
   },
+  "log.loseFreezeBuildup": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Freeze buildup",
+    "sourceHash": "8d134786f5457451271433eba54dd90c3ac91abe3521155c3b74145d8c288ff6",
+    "text": "{{name}} verliert {{amount}} Frost-Aufbau"
+  },
   "log.removeBuildup": {
     "reviewed": true,
     "source": "{{name}}: Cleanse {{status}} build-up",
@@ -3857,11 +3881,23 @@
     "sourceHash": "7045c036abd55036084814f8fc5e1f8c311bdf6265b0b4a1c035da5b69d42c6a",
     "text": "{{name}}: {{action}} – kein Effekt entfernt."
   },
+  "log.resurrect": {
+    "reviewed": true,
+    "source": "{{actor}} Resurrects {{target}} with {{amount}} Health",
+    "sourceHash": "22ef834d5179d6378f2a1eb593169f024c2ad43009a9e48c48f478352113df9e",
+    "text": "{{actor}} belebt {{target}} mit {{amount}} Gesundheit wieder"
+  },
   "log.returnHome": {
     "reviewed": true,
     "source": "You return from the wilds. Discoveries are kept.",
     "sourceHash": "2b6c4bc9095e4a541ce13d10831b7f7679deaa5f7d98ed237aa837dc802f5c52",
     "text": "Du kehrst aus der Wildnis zurück. Entdeckungen bleiben erhalten."
+  },
+  "log.temporaryDodge": {
+    "reviewed": true,
+    "source": "{{name}} gains {{amount}}% Dodge until its next turn",
+    "sourceHash": "d2614bf41a4747c570d177cb6ecc65510578db4a1b9b9f94c62e36920efa09af",
+    "text": "{{name}} erhält bis zum nächsten eigenen Zug {{amount}}% Ausweichen"
   },
   "log.turnRestored": {
     "reviewed": true,

@@ -102,6 +102,26 @@ export function eventPresentation(
     return i18n.message("log.dodge", "{{name}} Dodges.", { name });
   if (event.kind === "knockout" && event.text === `${englishName} is knocked out.`)
     return i18n.message("log.knockout", "{{name}} is knocked out.", { name });
+  if (event.kind === "status" && event.amount !== undefined) {
+    if (
+      event.status === "dodge" &&
+      event.outcome === "gain" &&
+      event.text === `${englishName} gains ${event.amount}% Dodge until its next turn`
+    )
+      return i18n.message("log.temporaryDodge", "{{name}} gains {{amount}}% Dodge until its next turn", {
+        name,
+        amount: quantity(event.amount),
+      });
+    if (
+      event.status === "freeze" &&
+      event.outcome === "remove" &&
+      event.text === `${englishName} loses ${event.amount} Freeze buildup`
+    )
+      return i18n.message("log.loseFreezeBuildup", "{{name}} loses {{amount}} Freeze buildup", {
+        name,
+        amount: quantity(event.amount),
+      });
+  }
   if (event.kind === "status" && event.outcome === "remove") {
     const { status, affectedStatus } = event;
     if (status === "cleanse" || status === "purge") {
@@ -155,6 +175,15 @@ export function eventPresentation(
       )
         return i18n.message("log.gainBuildup", "{{name}} gains {{amount}} {{status}} buildup.", values);
     }
+  }
+  if (event.kind === "heal" && event.actorId) {
+    const actor = combatantById(game, event.actorId);
+    if (actor && event.text === `${unitName(actor)} Resurrects ${englishName} with ${event.amount} Health`)
+      return i18n.message("log.resurrect", "{{actor}} Resurrects {{target}} with {{amount}} Health", {
+        actor: localizedCombatantName(actor, i18n),
+        target: name,
+        amount: quantity(event.amount),
+      });
   }
   if (event.kind === "heal" && event.text === `${englishName} restores ${event.amount} Health.`)
     return i18n.message("log.heal", "{{name}} restores {{amount}} Health.", {
