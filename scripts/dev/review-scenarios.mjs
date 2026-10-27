@@ -60,6 +60,7 @@ export const SCENARIOS = [
   "uncertain-targeting",
   "unknown-targeting",
   "pause",
+  "team-selection-pause",
   "recruit",
   "recruit-replacement",
   "recruit-team-preview",
@@ -124,6 +125,13 @@ export async function reviewScenario(server, name) {
   if (name.startsWith("merchant")) game = accept(game, { type: "enterSupport", visit: game.support.id });
   if (name === "merchant-unavailable") game = { ...game, currency: 0 };
   if (name === "boon") game = bossReward();
+  if (name === "team-selection-pause") {
+    const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
+    const { BOONS } = await server.ssrLoadModule("/src/game/content.ts");
+    const initial = createGame(7);
+    game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0] }), { type: "start" });
+    game = { ...game, boons: [BOONS[0].id] };
+  }
   if (name.startsWith("new-boons-")) {
     const groups = [
       ["reef-incense-tile", "lava-cameo", "velvet-whisk"],
@@ -209,7 +217,7 @@ export async function reviewScenario(server, name) {
   return {
     name,
     save,
-    seed: name.startsWith("merchant") ? 7 : 42,
+    seed: name.startsWith("merchant") || name === "team-selection-pause" ? 7 : 42,
     fixture: creatureFixtures.includes(creature)
       ? `tests/support/${creature}.ts`
       : ["uncertain-targeting", "unknown-targeting"].includes(name)
@@ -246,7 +254,7 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button(menu[0].toUpperCase() + menu.slice(1)).click();
   } else if (scenario.name !== "home") {
     await button("Continue").click();
-    if (scenario.name === "pause") await button("Open menu").click();
+    if (["pause", "team-selection-pause"].includes(scenario.name)) await button("Open menu").click();
   }
   if (scenario.name === "parhelion-targeting")
     await page.locator('.hand [data-card-id="ally-0:parhelion-whiteout-waltz"]').click();
@@ -286,6 +294,14 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button(scenario.name === "draw-pile" ? "Inspect Draw Pile" : "Inspect Discard Pile").click();
   if (["battle", "pause"].includes(scenario.name))
     await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
+  if (scenario.name === "team-selection-pause") {
+    await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog", { name: "Pause menu" })).toHaveCount(0);
+    await expect(button("Open menu")).toBeFocused();
+    await button("Open menu").click();
+    await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  }
   if (["recruit", "recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
     await page
       .locator(".battle-rewards-screen")
