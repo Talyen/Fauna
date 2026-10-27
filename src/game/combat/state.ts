@@ -18,6 +18,7 @@ export function freshCombat(): CombatState {
     freeNature: false,
     freeLight: false,
     freeCard: false,
+    oasisLeech: false,
     reflect: false,
     reflectBurn: false,
     nullify: false,

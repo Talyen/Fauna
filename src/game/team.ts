@@ -1,8 +1,8 @@
 import { forEachPermanentCard } from "./card-kit";
-import { isRosterCreature } from "./battlefield";
+import { battlefield, isRosterCreature } from "./battlefield";
 import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
-import { grantArmor, grantBlock, restoreHealth, removeEffects } from "./combat/index";
+import { grantArmor, grantBlock, restoreHealth, removeEffects, hit } from "./combat/index";
 import { boonRule } from "./rules/boons";
 import { unitName, type Combatant } from "./combat/state";
 import { passiveAmount } from "./progression";
@@ -43,6 +43,15 @@ export function rookOfMercy(state: GameState, incoming: readonly Combatant[], ev
   if (!state.boons.includes("rook-of-mercy")) return;
   for (const ally of incoming)
     if (ally.health > 0) grantArmor(state, ally, boonRule("rook-of-mercy").armor, events);
+}
+export function farewellOar(state: GameState, outgoing: readonly Combatant[], events: GameEvent[]) {
+  if (state.phase !== "battle" || !state.boons.includes("farewell-oar")) return;
+  for (const ally of outgoing) {
+    const damage = Math.round(ally.block / boonRule("farewell-oar").divisor);
+    for (const enemy of battlefield(state, "enemy"))
+      if (ally.health > 0 && enemy.health > 0 && damage > 0)
+        hit(state, ally, enemy, damage, "water", events, { origin: "derived" });
+  }
 }
 /** Match existing protection without spending it or amplifying fresh Block grants. */
 export function matchSwapBlock(state: GameState, first: Combatant, second: Combatant, events: GameEvent[]) {
@@ -320,6 +329,11 @@ export function swapBackup(
     });
   }
   if (fromCard && outgoing) {
+    farewellOar(
+      state,
+      previous.filter((ally) => !state.team.some((current) => current.id === ally.id)),
+      events,
+    );
     matchSwapBlock(state, outgoing, incoming, events);
     if (state.boons.includes("rook-of-mercy"))
       rookOfMercy(
@@ -362,6 +376,7 @@ export function swapFromCard(
   [row[from], row[to]] = [row[to]!, row[from]!];
   if (allied) {
     cleanseDeparture(state, actor, events);
+    farewellOar(state, [actor, other], events);
     matchSwapBlock(state, actor, other, events);
     rookOfMercy(state, [actor, other], events);
   }

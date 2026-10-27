@@ -24,6 +24,7 @@ interface ExtraOptions {
   blindMiss?: boolean;
   cannotDodge?: boolean;
   criticalBonus?: number;
+  oasisLeech?: boolean;
   recipientOnly?: boolean;
   negated?: ReadonlySet<string>;
   sharedNegate?: import("./policy").SharedNegate;
@@ -52,7 +53,7 @@ export function applyExtras(
             blindMiss,
             cannotDodge: options.cannotDodge,
             criticalBonus,
-            leech: effect.leech,
+            leech: effect.leech || options.oasisLeech,
             cardLeech: (cardLeech ??=
               def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech) || false),
             sharedNegate: options.sharedNegate,

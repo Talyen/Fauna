@@ -110,7 +110,9 @@ export function CombatStatus({
               key={s.count}
               className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
             >
-              {s.id === "nullifyFreeze" ? (
+              {s.id === "oasisLeech" ? (
+                <KeywordIcon id="leech" />
+              ) : s.id === "nullifyFreeze" ? (
                 <KeywordIcon id="nullify" />
               ) : s.id === "reflectBurn" ? (
                 <KeywordIcon id="reflect" />

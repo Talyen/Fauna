@@ -495,7 +495,8 @@ export function* resolveHit(
     damage = Math.min(damage, Math.max(0, target.health - boonRule("hearth-coal").minimum));
   const lost = loseHealth(state, target, damage, events);
   const dealt = Math.min(effectDamage, blocked + lost);
-  if (armorReducedDamage) erode(1);
+  if (armorReducedDamage && !(alliedTarget && stats.grace > 0 && state.boons.includes("cypress-reliquary")))
+    erode(1);
   if (effectDamage > 0) {
     if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(effectDamage);
     if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point")) erode(effectDamage);
@@ -629,6 +630,13 @@ export function* resolveHit(
   )
     yield* detonateBleed(state, source, target, events);
   if (effectDamage === 0 && direct && target.health > 0) yield* thornRetaliation(context);
+  if (direct && alliedTarget && isEnemy(source) && state.boons.includes("pollen-basket")) {
+    for (const ally of battlefield(state, "player")) {
+      if (source.health <= 0) break;
+      if (ally.id !== target.id && ally.health > 0)
+        yield* thornRetaliation({ state, source, target: ally, events, type });
+    }
+  }
   if (direct) yield* passiveRetaliation(context, depletedBlock);
   for (const depletion of depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
   if (

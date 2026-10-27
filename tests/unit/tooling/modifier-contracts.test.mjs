@@ -187,3 +187,22 @@ it("tracks aliased Talent chance and passive queries at their calling owners", (
     expect.stringContaining("wellRead is not implemented/read by"),
   );
 });
+
+it("tracks a Boon saved-state consumer without requiring the Boon to remain owned", () => {
+  const sources = fixture();
+  sources["src/game/extra.ts"] =
+    'import {boonRule as rule} from "./rules/boons"; export function consume(stats) { stats[rule("icy-heart").state] = false; }';
+  sources["src/game/entry.ts"] += 'import {consume} from "./extra"; consume({});';
+  expect(modifierContractViolations(sources)).toContainEqual(
+    expect.stringContaining("has an undeclared owner: src/game/extra.ts#consume"),
+  );
+  sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"].replace(
+    '"icy-heart": ["./owner#hit"]',
+    '"icy-heart": ["./owner#hit", "./extra#consume"]',
+  );
+  expect(modifierContractViolations(sources)).toEqual([]);
+  sources["src/game/extra.ts"] = sources["src/game/extra.ts"].replace(".state", ".amount");
+  expect(modifierContractViolations(sources)).toContainEqual(
+    expect.stringContaining("icy-heart is not implemented/read by src/game/extra.ts#consume"),
+  );
+});

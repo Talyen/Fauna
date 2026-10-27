@@ -24,7 +24,11 @@ export const BoonArt = forwardRef<HTMLButtonElement, BoonArtProps>(function Boon
 });
 
 export function BoonName({ boon }: { boon: Boon }) {
-  return <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>;
+  return (
+    <ShineText readable keywords={visualKeywords(boon.text)}>
+      {boon.name}
+    </ShineText>
+  );
 }
 
 export function BoonText({ boon }: { boon: Boon }) {

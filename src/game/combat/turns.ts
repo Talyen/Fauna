@@ -43,6 +43,8 @@ const enemyAbilitiesWithoutResurrection = new Map(
 export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[]) {
   const before = unit.block;
   const allied = !isEnemy(unit);
+  if (allied && state.boons.includes("caravan-rug") && state.reserves.some((ally) => ally.id === unit.id))
+    return;
   const retained = retainedBlock(unit, allied ? state : undefined);
   unit.block =
     allied && state.boons.includes("geode-anvil")

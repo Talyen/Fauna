@@ -3,7 +3,7 @@ import type { passiveCardBonus } from "./ability-rules";
 import type { receiveDraw, lostAndFound, drawEligibleCard } from "./card-zones";
 import type { passingFlame } from "./combat/damage-reactions";
 import type { puzzleEffect } from "./combat/statuses";
-import type { gentlePassage, cleanseDeparture, rookOfMercy, mountainGuide } from "./team";
+import type { gentlePassage, cleanseDeparture, rookOfMercy, mountainGuide, farewellOar } from "./team";
 import type { TalentId, BoonId } from "./content";
 import type { PassiveKind } from "./content/types";
 
@@ -13,6 +13,7 @@ type Modules = {
     cleanseDeparture: typeof cleanseDeparture;
     rookOfMercy: typeof rookOfMercy;
     mountainGuide: typeof mountainGuide;
+    farewellOar: typeof farewellOar;
   };
   "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
@@ -206,6 +207,13 @@ export const modifierImplementations = freeze(
       "water.riptide": ["./combat/damage-reactions#waterFollowups"],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      "caravan-rug": ["./combat/turns#decayBlock"],
+      "folded-mountain": ["./combat/statuses#applyHarmfulStatus"],
+      "apple-press": ["./combat/protection#grantBlock"],
+      "pollen-basket": ["./combat/damage#resolveHit"],
+      "farewell-oar": ["./team#farewellOar"],
+      "oasis-seed": ["./combat/protection#restoreHealth", "./combat/abilities#executeAbility"],
+      "cypress-reliquary": ["./combat/damage#resolveHit"],
       "bellows-heart": ["./combat/protection#restoreHealth"],
       "leafwing-shuttlecock": ["./combat/damage-reactions#dodgeResponse"],
       "soot-brush": ["./combat/statuses#removeEffects"],

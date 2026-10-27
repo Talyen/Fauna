@@ -676,6 +676,7 @@ export function* applyHarmfulStatus(
     (stats.controlled ||
       stats.skipped ||
       (stats.cooldown > 0 && !storesControl) ||
+      (type === "freeze" && alliedTarget && stats.armor > 0 && state.boons.includes("folded-mountain")) ||
       (type === "stun" &&
         alliedTarget &&
         (target.block > 0 || options.blocked) &&

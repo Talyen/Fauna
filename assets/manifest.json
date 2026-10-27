@@ -2,6 +2,83 @@
   "version": 2,
   "assets": [
     {
+      "id": "boon.caravan-rug",
+      "origin": "repository",
+      "source": "public/art/boons/caravan-rug.png",
+      "output": "art/boons/caravan-rug.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Caravan Rug.png; https://drive.google.com/file/d/1NJKmDSf7jFsHOAFy5nPBdvKu8VNmOPJY/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.folded-mountain",
+      "origin": "repository",
+      "source": "public/art/boons/folded-mountain.png",
+      "output": "art/boons/folded-mountain.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Folded Mountain.png; https://drive.google.com/file/d/13u1h10lF25HTaZr1Vp9UQKmxuIJyWWYL/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.apple-press",
+      "origin": "repository",
+      "source": "public/art/boons/apple-press.png",
+      "output": "art/boons/apple-press.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Apple Press.png; https://drive.google.com/file/d/1rkXqsIn5nrrvJMuqigECoMIFozmY_xNv/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.pollen-basket",
+      "origin": "repository",
+      "source": "public/art/boons/pollen-basket.png",
+      "output": "art/boons/pollen-basket.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Pollen Basket.png; https://drive.google.com/file/d/1mGWJRNBQrzNaSlRadZrp6GPZpi9RbJVB/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.farewell-oar",
+      "origin": "repository",
+      "source": "public/art/boons/farewell-oar.png",
+      "output": "art/boons/farewell-oar.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Farewell Oar.png; https://drive.google.com/file/d/1TuUR4NuLHx1yxXvznqpl_BnuI967hEIU/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.oasis-seed",
+      "origin": "repository",
+      "source": "public/art/boons/oasis-seed.png",
+      "output": "art/boons/oasis-seed.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Oasis Seed.png; https://drive.google.com/file/d/1hZWFgjllNny3wEm9x0bUTrQ1RoVf2tHZ/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.cypress-reliquary",
+      "origin": "repository",
+      "source": "public/art/boons/cypress-reliquary.png",
+      "output": "art/boons/cypress-reliquary.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Cypress Reliquary.png; https://drive.google.com/file/d/1D13LFfdmtWYRYoFfFEufPHh-qRzl_M-z/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "boon.mirror-locket",
       "origin": "repository",
       "source": "public/art/boons/mirror-locket.png",

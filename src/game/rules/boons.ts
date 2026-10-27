@@ -6,6 +6,19 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "caravan-rug": boon({}, () => "Block does not decay on backup allies"),
+    "folded-mountain": boon({}, () => "Armor prevents Freeze buildup"),
+    "apple-press": boon({}, () => "Enemy Bleed deals damage when they gain Block"),
+    "pollen-basket": boon({}, () => "When an ally is hit, other allies’ Thorns also retaliate"),
+    "farewell-oar": boon(
+      { divisor: 2 },
+      () => "Allies swapping out deal half their Block as Water damage to all enemies",
+    ),
+    "oasis-seed": boon(
+      { state: "oasisLeech" as const },
+      () => "Healing another ally gives their next attack Leech",
+    ),
+    "cypress-reliquary": boon({}, () => "Allies at Death’s Door do not lose Armor from damage"),
     "bellows-heart": boon({ burn: 1 }, (p) => `Healing allies adds ${p.burn} Burn to each Burning enemy`),
     "leafwing-shuttlecock": boon(
       { damage: 2 },

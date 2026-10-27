@@ -7,6 +7,7 @@ import { species } from "../content";
 import { definitionKeywords } from "../keywords";
 import { ensureCombat, beginAttack, openingCriticalBonus } from "./index";
 import { chance as succeeds } from "../chance";
+import { boonRule } from "../rules/boons";
 import { roll } from "../random";
 import type { GameEvent, BattleState } from "../types";
 
@@ -83,6 +84,8 @@ export function executeAbility(
         actorId: actor.id,
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
+    const oasisLeech = def.effect === "attack" && !enemy && stats[boonRule("oasis-seed").state];
+    if (oasisLeech) stats[boonRule("oasis-seed").state] = false;
     const criticalBonus =
       def.effect === "attack"
         ? Math.max(
@@ -104,12 +107,14 @@ export function executeAbility(
       blindMiss,
       cannotDodge,
       criticalBonus,
+      oasisLeech,
     });
     applyExtras(state, action, events, {
       target: primary ? primary.attackTarget : target,
       blindMiss,
       cannotDodge,
       criticalBonus,
+      oasisLeech,
       negated: primary?.negated,
       sharedNegate: primary?.sharedNegate,
     });

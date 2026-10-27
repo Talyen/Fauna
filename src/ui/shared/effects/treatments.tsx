@@ -33,22 +33,27 @@ export function ShineText({
   children,
   keywords = [],
   tone,
+  readable = false,
 }: {
   children: ReactNode;
   keywords?: readonly KeywordId[];
   tone?: EffectTone;
+  readable?: boolean;
 }) {
-  const backgroundImage = shineGradient(keywords, tone);
+  const backgroundImage = shineGradient(keywords, tone, readable);
   return (
     <span className="effect-shine-text" style={{ backgroundImage }}>
       {children}
     </span>
   );
 }
-function shineGradient(keywords: readonly KeywordId[], tone?: EffectTone) {
+function shineGradient(keywords: readonly KeywordId[], tone?: EffectTone, readable = false) {
   const palette = effectPalette(keywords, tone);
-  const band = `${palette.text.join(",")}, var(--effect-highlight)`;
-  return `linear-gradient(in oklab 90deg, ${band}, ${band}, ${palette.text[0]})`;
+  const colors = readable
+    ? palette.text.map((color) => `color-mix(in srgb, ${color} 50%, var(--effect-highlight))`)
+    : palette.text;
+  const band = `${colors.join(",")}, var(--effect-highlight)`;
+  return `linear-gradient(in oklab 90deg, ${band}, ${band}, ${colors[0]})`;
 }
 
 /** Paint the icon mask with the same CSS gradient and motion policy as short labels. */

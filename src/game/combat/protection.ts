@@ -3,7 +3,7 @@ import { boonRule } from "../rules/boons";
 import { manaCapacity } from "../ability-rules";
 import { healingValue, restoration, overflowBlock, overflowRecipients } from "./healing-values";
 import { chance as succeeds, talentChance } from "../chance";
-import { isEnemy, battlefield, battlefieldHasId, healingAllies } from "../battlefield";
+import { isEnemy, battlefield, battlefieldHasId, healingAllies, combatantById } from "../battlefield";
 import { drawKeyword } from "../card-zones";
 import { hasTalent, passiveAmount } from "../progression";
 
@@ -55,6 +55,14 @@ export function* restoreHealth(
   }
   if (gain > 0 && state?.phase === "battle" && !isEnemy(unit)) {
     const stats = ensureCombat(unit);
+    if (
+      source &&
+      source.id !== unit.id &&
+      source.health > 0 &&
+      !isEnemy(source) &&
+      state.boons.includes("oasis-seed")
+    )
+      stats[boonRule("oasis-seed").state] = true;
     if (unit.health > 0 && state.boons.includes("bellows-heart")) {
       for (const enemy of battlefield(state, "enemy"))
         if (unit.health > 0 && enemy.health > 0 && ensureCombat(enemy).burn > 0)
@@ -197,6 +205,18 @@ export function* grantBlock(
     amount: gained,
     text: `${unitName(unit)} gains ${gained} Block.`,
   });
+  if (isEnemy(unit) && state.phase === "battle" && state.boons.includes("apple-press")) {
+    const stats = ensureCombat(unit);
+    const original = combatantById(state, stats.statusSources.bleed);
+    const source =
+      original && !isEnemy(original)
+        ? original
+        : battlefield(state, "player").find((ally) => ally.health > 0);
+    if (stats.bleed > 0 && source)
+      yield* reaction("resolveHit", state, source, unit, stats.bleed, "bleed", events, {
+        origin: "periodic",
+      });
+  }
   if (!isEnemy(unit) && talentChance(state, "light.radiant-guard", events))
     drawKeyword(state, "light", events);
   if (!isEnemy(unit) && state.boons.includes("ironwood-buckler"))

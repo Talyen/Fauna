@@ -1,5 +1,12 @@
 /** Approved additions; the focused Boon suites own their behavior regressions. */
 export const NEW_BOON_EFFECTS = {
+  "caravan-rug": "Block does not decay on backup allies",
+  "folded-mountain": "Armor prevents Freeze buildup",
+  "apple-press": "Enemy Bleed deals damage when they gain Block",
+  "pollen-basket": "When an ally is hit, other allies’ Thorns also retaliate",
+  "farewell-oar": "Allies swapping out deal half their Block as Water damage to all enemies",
+  "oasis-seed": "Healing another ally gives their next attack Leech",
+  "cypress-reliquary": "Allies at Death’s Door do not lose Armor from damage",
   "bellows-heart": "Healing allies adds 1 Burn to each Burning enemy",
   "leafwing-shuttlecock": "When an ally Dodges an attack, deal 2 Stun damage to the attacker",
   "soot-brush": "Cleansing Burn also Cleanses Blind",

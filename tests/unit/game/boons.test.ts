@@ -22,6 +22,7 @@ import { resolveCombat } from "../../../src/game/combat/resolution";
 import { expect, it } from "vitest";
 import {
   freshCombat,
+  grantBlock,
   grantStatus,
   removeControlBuildup,
   hit,
@@ -45,6 +46,7 @@ import { NEW_BOON_EFFECTS } from "../../support/boons";
 import { dulceraBattle } from "../../support/dulcera";
 import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
 import { afterPlayerCard } from "../../../src/game/combat/card-modifiers";
+import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import prepared from "../../../src/assets/prepared.json";
 function fixture() {
   const state = structuredClone(run());
@@ -1448,3 +1450,132 @@ it.each([true, false])(
     );
   },
 );
+
+it("approved new Boons preserve backup Block without changing deployed decay", () => {
+  const { state, source, events } = fixture();
+  addReserve(state, "rug-backup", "coralcurl", 28);
+  state.boons = ["caravan-rug"];
+  const backup = state.reserves[0]!;
+  backup.block = source.block = 10;
+  decayBlock(state, backup, events);
+  decayBlock(state, source, events);
+  expect(backup.block).toBe(10);
+  expect(source.block).toBe(5);
+});
+
+it("approved new Boons prevent Freeze buildup with Armor without preventing damage", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["folded-mountain"];
+  source.combat = { ...freshCombat(), armor: 3 };
+  observeDecisions(state, () => 0.9);
+  const before = source.health;
+  hit(state, target, source, 4, "freeze", events);
+  expect(source.health).toBe(before - 4);
+  expect(source.combat.freeze).toBe(0);
+  source.combat.armor = 0;
+  hit(state, target, source, 4, "freeze", events);
+  expect(source.combat.freeze).toBe(4);
+});
+
+it("approved new Boons trigger existing Bleed on actual enemy Block gain without spending it", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["apple-press"];
+  target.combat.bleed = 4;
+  target.combat.statusSources.bleed = source.id;
+  grantBlock(state, target, 6, events);
+  expect(target.block).toBe(2);
+  expect(target.health).toBe(100);
+  expect(target.combat.bleed).toBe(4);
+  grantBlock(state, source, 6, events);
+  expect(source.block).toBe(6);
+});
+
+it("approved new Boons let other allied Thorns retaliate on hits but not Dodges", () => {
+  const { state, source, target, events } = fixture();
+  const other = state.team[0]!;
+  state.boons = ["pollen-basket"];
+  source.combat = freshCombat();
+  other.combat = { ...freshCombat(), thorns: 4 };
+  observeDecisions(state, () => 0.9);
+  hit(state, target, source, 1, "water", events, { origin: "ability", blindMiss: true });
+  expect(other.combat.thorns).toBe(4);
+  hit(state, target, source, 1, "water", events, { origin: "ability" });
+  expect(other.combat.thorns).toBe(3);
+  expect(target.health).toBe(96);
+});
+
+it("approved new Boons turn outgoing Block into Water damage only for ability swaps", () => {
+  const { state, source, target, events } = fixture();
+  addReserve(state, "oar-backup", "coralcurl", 28);
+  source.block = 10;
+  state.boons = ["farewell-oar"];
+  state.battle!.minions = [
+    {
+      ...structuredClone(target),
+      id: `echo-${target.id}-0`,
+      name: "Echo",
+      species: "memento",
+      health: 20,
+      maxHealth: 20,
+      minion: { ownerId: target.id, side: "enemy" },
+    },
+  ];
+  const control = structuredClone(state);
+  swapBackup(control, source.id, control.reserves[0]!.id, [], false);
+  expect(control.battle!.enemies[0]!.health).toBe(100);
+  swapBackup(state, source.id, state.reserves[0]!.id, events, true);
+  expect(target.health).toBe(95);
+  expect(state.battle!.minions[0]!.health).toBe(15);
+  expect(source.block).toBe(10);
+});
+
+it("approved new Boons grant Leech only for actual healing and retain it through save until an attack", () => {
+  const { state, source, target, events } = fixture();
+  const healer = state.team[0]!;
+  state.boons = ["oasis-seed"];
+  target.maxHealth = encounterSource(state).enemies[0]!.health;
+  target.health = target.maxHealth;
+  target.combat = freshCombat();
+  source.combat = freshCombat();
+  source.health = 1;
+  restoreHealth(source, 3, events, false, state, true, healer);
+  expect(source.combat.oasisLeech).toBe(true);
+  expect(combatStatuses(source.combat)).toContainEqual({
+    id: "oasisLeech",
+    count: 1,
+    text: "Oasis Seed: next attack has Leech",
+  });
+  expect(decodeSave(encodeSave(state)).team[1]!.combat!.oasisLeech).toBe(true);
+  const def = {
+    ...definition("prismram-attack"),
+    damageType: "water" as const,
+    target: undefined,
+    effects: undefined,
+    leech: false,
+  };
+  observeDecisions(state, () => 0.9);
+  executeAbility(
+    requireBattle(state),
+    { side: "player", actor: source, def, value: 4, targetId: target.id },
+    events,
+    { swap: () => undefined },
+  );
+  expect(source.combat.oasisLeech).toBe(false);
+  expect(combatStatuses(source.combat).some((status) => status.id === "oasisLeech")).toBe(false);
+  expect(source.health).toBe(6);
+  source.health = species(source.species).health;
+  restoreHealth(source, 3, events, false, state, true, healer);
+  expect(source.combat.oasisLeech).toBe(false);
+});
+
+it("approved new Boons preserve Armor from damage at Death’s Door but not Purge", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["cypress-reliquary"];
+  source.health = 1;
+  source.combat = { ...freshCombat(), armor: 3, deathDoorUsed: true, grace: 2 };
+  observeDecisions(state, () => 0.9);
+  hit(state, target, source, 8, "physical", events);
+  expect(source.combat.armor).toBe(3);
+  removeEffects(source, "purge", 1, events, state, "armor", target);
+  expect(source.combat.armor).toBe(0);
+});
