@@ -1451,6 +1451,42 @@
     "sourceHash": "46d85ad83d4d7e17ba17c52e45253e76b2cc9a32c48ee64a21fa893940121805",
     "text": "Fehlgeschlagene Zufallseffekte von Verbündeten haben eine Chance von {{value0}}%, einmal erneut gewürfelt zu werden"
   },
+  "content.species.memento.passive.0.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "e758706a86e96ec6df3c2e4735ffd820dad7109ffb9d06e45546593ad28c2cd3",
+    "text": "Jedes Mal, wenn du eine Karte spielst, greift ein Echo für {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> an"
+  },
+  "content.species.memento.passive.1.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "a0163014ac56069911b6b9c997f37b02124fe5577dc25bd5314f4a9dc53388ae",
+    "text": "Jedes Mal, wenn du eine Karte spielst, greift ein Echo für {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> an"
+  },
+  "content.species.memento.passive.2.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "10feeff1b719173c588f69ad5c8cdec656d2ce46498d2b04a8d2ae23b91ce3c6",
+    "text": "Jedes Mal, wenn du eine Karte spielst, greift ein Echo für {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> an"
+  },
+  "content.species.memento.passive.3.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "8c69227fdccf16ceec9f8b0f5dc9d53fbe1b289fff922e9acadcfd9190401372",
+    "text": "Jedes Mal, wenn du eine Karte spielst, greift ein Echo für {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> an"
+  },
+  "content.species.memento.passive.4.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "d2d7688d4072f9d8bc29d878b603a15b1b159bf97d3db911efc3fc869f84ba9b",
+    "text": "Jedes Mal, wenn du eine Karte spielst, greift ein Echo für {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> an"
+  },
+  "content.species.memento.passive.5.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "e1c068b535d8d7d1200cfb2442acbf2e2a3b61e4ef07f8c70689e41126041189",
+    "text": "Jedes Mal, wenn du eine Karte spielst, greift ein Echo für {{value0}} Schaden vom Typ <keyword0>Wasser</keyword0> an"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -1631,6 +1667,78 @@
     "sourceHash": "4d18e7ce1df62e313bb45e71a6480d8f7743d03fcbbac222351842c78635b435",
     "text": "Schädliche Statuseffekte, die du erhältst, haben eine Chance von {{value0}}%, auf einen zufälligen Gegner umgeleitet zu werden"
   },
+  "content.species.pyrella.passive.0.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "af81996dbbf334b6ac88b587c31f4de383922fd1dabae54d1c4bb3e689f1d0ad",
+    "text": "Nach dem Besiegen eines <keyword0>brennenden</keyword0> Gegners verteile {{value0}}% seines verbleibenden <keyword1>Brands</keyword1> auf andere Gegner"
+  },
+  "content.species.pyrella.passive.1.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "cdd02cf2d1b55a5d2b9ac3abc1e659a24dd5d0b95e09a79573aeeffc5667d372",
+    "text": "Nach dem Besiegen eines <keyword0>brennenden</keyword0> Gegners verteile {{value0}}% seines verbleibenden <keyword1>Brands</keyword1> auf andere Gegner"
+  },
+  "content.species.pyrella.passive.2.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "39e90c653cbbaab76c55ad460a63584b0d52608341b6c9913b629cd460e78527",
+    "text": "Nach dem Besiegen eines <keyword0>brennenden</keyword0> Gegners verteile {{value0}}% seines verbleibenden <keyword1>Brands</keyword1> auf andere Gegner"
+  },
+  "content.species.pyrella.passive.3.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "cf6801dc0638e4b0540df8c08d327f40b716339707485b171061406cedcae9dd",
+    "text": "Nach dem Besiegen eines <keyword0>brennenden</keyword0> Gegners verteile {{value0}}% seines verbleibenden <keyword1>Brands</keyword1> auf andere Gegner"
+  },
+  "content.species.pyrella.passive.4.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "39ac18a2f362d20b204a32cb5287f157cfce389d04e5701e22ae842d952ad7f4",
+    "text": "Nach dem Besiegen eines <keyword0>brennenden</keyword0> Gegners verteile {{value0}}% seines verbleibenden <keyword1>Brands</keyword1> auf andere Gegner"
+  },
+  "content.species.pyrella.passive.5.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "4e681f7db31067faf2fc230927750c42535ed2828cac17fbdd66256e5957920c",
+    "text": "Nach dem Besiegen eines <keyword0>brennenden</keyword0> Gegners verteile seinen verbleibenden <keyword1>Brand</keyword1> auf andere Gegner"
+  },
+  "content.species.reedstag.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "16c10cb4d44355074792a7da3b8b9d184d6d728f1487352004e17d90476578d8",
+    "text": "<keyword0>Block</keyword0> und <keyword1>Dornen</keyword1> haben eine Chance von {{value0}}%, mit Verbündeten geteilt zu werden"
+  },
+  "content.species.reedstag.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "13ad42b840bcfdb8a1be755e75b7bcd754836bd5c8cff5a4ea5789dc097bebf8",
+    "text": "<keyword0>Block</keyword0> und <keyword1>Dornen</keyword1> haben eine Chance von {{value0}}%, mit Verbündeten geteilt zu werden"
+  },
+  "content.species.reedstag.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "328c5e49c302f08de89a0473509d3b29e414a89ed40098bd82b67bb999b11a87",
+    "text": "<keyword0>Block</keyword0> und <keyword1>Dornen</keyword1> haben eine Chance von {{value0}}%, mit Verbündeten geteilt zu werden"
+  },
+  "content.species.reedstag.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "2a6881dd33b07b38c82eb9609cecba3908999f27acc57841df411c35528576ed",
+    "text": "<keyword0>Block</keyword0> und <keyword1>Dornen</keyword1> haben eine Chance von {{value0}}%, mit Verbündeten geteilt zu werden"
+  },
+  "content.species.reedstag.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "7436b1221b340661ed1238d8882fb52219837e9d8d25dc51feec0200d0282404",
+    "text": "<keyword0>Block</keyword0> und <keyword1>Dornen</keyword1> haben eine Chance von {{value0}}%, mit Verbündeten geteilt zu werden"
+  },
+  "content.species.reedstag.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
+    "sourceHash": "7bcf3a91eac81633c4df7ee4aa38ba61e08dbc430d0e3655357c99a09a8b86a7",
+    "text": "<keyword0>Block</keyword0> und <keyword1>Dornen</keyword1> werden mit Verbündeten geteilt"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -1774,6 +1882,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "064f7b8ea4b15b361c21401b975cdea0e6f8109d23b6f67833abebf7b093de13",
     "text": "Verbündete erleiden {{value0}}% weniger Schaden vom Typ <keyword0>Frost</keyword0>"
+  },
+  "content.species.tournelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "39283a9c7a2e2e0d5f3cb063026e23028f57c1be07b4173bb4731bf77a008584",
+    "text": "{{value0}}% Chance, Angriffe gegen einen stärker verletzten Verbündeten abzufangen"
+  },
+  "content.species.tournelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "db96a45d41aad154e479b453e426b80315bb0329c991bf08a18fe0a9e3e4eb84",
+    "text": "{{value0}}% Chance, Angriffe gegen einen stärker verletzten Verbündeten abzufangen"
+  },
+  "content.species.tournelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "deffe94d673f4c7d129ef04f8d85129caf558be1f826c35e90f8649304208c7c",
+    "text": "{{value0}}% Chance, Angriffe gegen einen stärker verletzten Verbündeten abzufangen"
+  },
+  "content.species.tournelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "5cad7128bce74a717d9d32d77e93a1e3c1116964ebf393a1205a85f8aad4f793",
+    "text": "{{value0}}% Chance, Angriffe gegen einen stärker verletzten Verbündeten abzufangen"
+  },
+  "content.species.tournelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "042f5313ebab9ff560d36aeaf527755f7583d5830502d92ee1ceaa4107e67a4c",
+    "text": "{{value0}}% Chance, Angriffe gegen einen stärker verletzten Verbündeten abzufangen"
+  },
+  "content.species.tournelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "3acc7086bc04796566fd217d782ef72b2818d5d6beeb081054bb48a94391569d",
+    "text": "{{value0}}% Chance, Angriffe gegen einen stärker verletzten Verbündeten abzufangen"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

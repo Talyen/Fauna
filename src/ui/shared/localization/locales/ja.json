@@ -1451,6 +1451,42 @@
     "sourceHash": "f096e0cf640f015621b697c4d4ef11f9724a095268ae40fd246b90dbf1c731cd",
     "text": "失敗した味方の確率効果は{{value0}}%の確率で1回だけ再判定される"
   },
+  "content.species.memento.passive.0.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "c98e81f2a2300dd232673af523e908d56b7cf25640bff69bf12533fd25e0df9f",
+    "text": "カードを使うたびに、エコーが攻撃し<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.memento.passive.1.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "a0c7734b73324161fb9b024a27bd84384075d5351310a1086caddd8d66dc17a0",
+    "text": "カードを使うたびに、エコーが攻撃し<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.memento.passive.2.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "1de5553c09f399b818b977595399f9f3da67884084fd3f7f48d868642fca3b01",
+    "text": "カードを使うたびに、エコーが攻撃し<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.memento.passive.3.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "133d37cf663b995a07b8b45d268a42c6cc81c94b9334b89a5b11782a4c0df5af",
+    "text": "カードを使うたびに、エコーが攻撃し<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.memento.passive.4.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "c65d10c470e3f01f3914c40c28588b95ca1c0b374c6a07ee7ec993ef8cb6cf4b",
+    "text": "カードを使うたびに、エコーが攻撃し<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.species.memento.passive.5.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "5e3cd9feb70fb68f5b5ba1eef46a3b6ed8891bdb3ef8a5c5c5d5ca810ac0d8b6",
+    "text": "カードを使うたびに、エコーが攻撃し<keyword0>水</keyword0>ダメージを{{value0}}与える"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -1631,6 +1667,78 @@
     "sourceHash": "d06c13021de0539af1c9d01af7d5126bf6fd6bc6bde8d9368624ce29e49ed9f0",
     "text": "自分が受ける有害な状態効果は{{value0}}%の確率でランダムな敵に移される"
   },
+  "content.species.pyrella.passive.0.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "9763b9ee3ad4d69b96be50339e0cb69b9940f03106632565c318565a48767458",
+    "text": "<keyword0>炎上</keyword0>中の敵を倒すと、その敵の残りの<keyword1>炎上</keyword1>の{{value0}}%をほかの敵に広げる"
+  },
+  "content.species.pyrella.passive.1.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "719acc09c070606f8558f22375e2a20259e6fdac23a5ffb8014b98172d181d84",
+    "text": "<keyword0>炎上</keyword0>中の敵を倒すと、その敵の残りの<keyword1>炎上</keyword1>の{{value0}}%をほかの敵に広げる"
+  },
+  "content.species.pyrella.passive.2.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "56a220fe0c4f4915b9a8e6b7a17f023de46815c7e9aefe0b7c1cdecaeaacee76",
+    "text": "<keyword0>炎上</keyword0>中の敵を倒すと、その敵の残りの<keyword1>炎上</keyword1>の{{value0}}%をほかの敵に広げる"
+  },
+  "content.species.pyrella.passive.3.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "7d90ac45f185802b96039e0321c7ac1989052c967214bfb44752824019cccff3",
+    "text": "<keyword0>炎上</keyword0>中の敵を倒すと、その敵の残りの<keyword1>炎上</keyword1>の{{value0}}%をほかの敵に広げる"
+  },
+  "content.species.pyrella.passive.4.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "1a466e18ed9a918a08350698765d293755fb63323050f14796bc29da18052250",
+    "text": "<keyword0>炎上</keyword0>中の敵を倒すと、その敵の残りの<keyword1>炎上</keyword1>の{{value0}}%をほかの敵に広げる"
+  },
+  "content.species.pyrella.passive.5.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "66591038279a114b10ea888873881c810ad16c5399fc43baaff4584019064397",
+    "text": "<keyword0>炎上</keyword0>中の敵を倒すと、その敵の残りの<keyword1>炎上</keyword1>をほかの敵に広げる"
+  },
+  "content.species.reedstag.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "0f17118198b673062f32872563270ba02c4c26303e35c4633997c0e4f00c5632",
+    "text": "<keyword0>ブロック</keyword0>と<keyword1>棘</keyword1>が{{value0}}%の確率で味方に共有される"
+  },
+  "content.species.reedstag.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "d4ce8fb2b0d8bc35a3fc964d08460fa23f414d23f416a11dc00957dd558971c7",
+    "text": "<keyword0>ブロック</keyword0>と<keyword1>棘</keyword1>が{{value0}}%の確率で味方に共有される"
+  },
+  "content.species.reedstag.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "7ee03487935e8539be6f27db56c79357a65b9a01304d0779713d373d4ece5177",
+    "text": "<keyword0>ブロック</keyword0>と<keyword1>棘</keyword1>が{{value0}}%の確率で味方に共有される"
+  },
+  "content.species.reedstag.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "63e5e803b2f807d5dc66fcec418af1a07c2fe7c8985dfaae037be567c96bc356",
+    "text": "<keyword0>ブロック</keyword0>と<keyword1>棘</keyword1>が{{value0}}%の確率で味方に共有される"
+  },
+  "content.species.reedstag.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "567c554fb62d029dba7cc593f81fc27b124874a4601220c97d580e6176fa4170",
+    "text": "<keyword0>ブロック</keyword0>と<keyword1>棘</keyword1>が{{value0}}%の確率で味方に共有される"
+  },
+  "content.species.reedstag.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
+    "sourceHash": "6d4085d3c863fb6e3f22421e5e586826dd5a950b5948872bb360f9180289d2fd",
+    "text": "<keyword0>ブロック</keyword0>と<keyword1>棘</keyword1>が味方に共有される"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -1774,6 +1882,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "6ced9ca59005c6dbd02630d9f95f702ae0abd317ad380b839fce2ab38ec04177",
     "text": "味方が受ける<keyword0>凍結</keyword0>ダメージが{{value0}}%減少"
+  },
+  "content.species.tournelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "95213ed0ab230a539605aacbd0839257ccd78bc4e557ad1ed36353c7f83970a2",
+    "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
+  },
+  "content.species.tournelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "b2d4a2b66a6eef110cc6d7ab1169b5351ca7c2aa13bd953711d1a75cc300c5e2",
+    "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
+  },
+  "content.species.tournelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "d6556497d5ea41fcd81406910c36fc85c3462c194a6a78cf03626d2f01cea636",
+    "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
+  },
+  "content.species.tournelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "e66464700f35ffb9c2738f1046b29beee12bf494476b055710e9a6b53f2cca4a",
+    "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
+  },
+  "content.species.tournelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "5a85a35ba1f9c60876d21cee1d5c7f921bd9cf38c491f4e178165b303742d24b",
+    "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
+  },
+  "content.species.tournelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "a562e3dd064fae2919e1ec5e2bfda472348eebbab482da901d04e354d695902e",
+    "text": "より傷ついた味方への攻撃を{{value0}}%の確率でかばう"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

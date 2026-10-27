@@ -1451,6 +1451,42 @@
     "sourceHash": "bb1c684f9c5a8cc3031e23c78d5116593df23889750a1db6e8329e08ceb9cace",
     "text": "盟友失败的概率效果有{{value0}}%的概率重新判定一次"
   },
+  "content.species.memento.passive.0.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "68b264ef509ba0aba090899a6633be672ee9d01862669dadeff782ee0faad5a7",
+    "text": "每次打出一张牌时，一个回响发动攻击，造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.memento.passive.1.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "c989bd2c1499b2d073ae0a4105cd1382ac1ceab187c1ceac98138f3b6587087c",
+    "text": "每次打出一张牌时，一个回响发动攻击，造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.memento.passive.2.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "2559cd210959192ba2434cbf0d31fbef976f72f3d6e7cb95afe1c3db79db86ac",
+    "text": "每次打出一张牌时，一个回响发动攻击，造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.memento.passive.3.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "a10c29d78faae2ebd57d62da8e717a1cfc951f4ed556d210a0b1ab2ab0903793",
+    "text": "每次打出一张牌时，一个回响发动攻击，造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.memento.passive.4.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "b399b1e46ed8245a982f79a21013bb47db828d84726543878b03a36a87040ef7",
+    "text": "每次打出一张牌时，一个回响发动攻击，造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
+  "content.species.memento.passive.5.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "ab40016a2cba4414a63d2679df6531422908fdec8a825042e24e583b79e96f08",
+    "text": "每次打出一张牌时，一个回响发动攻击，造成{{value0}}点<keyword0>水</keyword0>伤害"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -1631,6 +1667,78 @@
     "sourceHash": "4a5e98e42fe4f641964c98de81f236e30f1cc7a92acc3a81b6c19ab3136b9b95",
     "text": "你受到的有害状态效果有{{value0}}%的概率转移给随机一名敌人"
   },
+  "content.species.pyrella.passive.0.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "c0eb439c8bb681b6f9056ae19d484980ba441ff95601fad9a9cddb1f4357331c",
+    "text": "击败<keyword0>灼烧</keyword0>中的敌人后，将其剩余<keyword1>灼烧</keyword1>的{{value0}}%扩散给其他敌人"
+  },
+  "content.species.pyrella.passive.1.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "05e6d0958070f9a3f97a119a5c179f218c167f6f346fa51c1c4d85065389101b",
+    "text": "击败<keyword0>灼烧</keyword0>中的敌人后，将其剩余<keyword1>灼烧</keyword1>的{{value0}}%扩散给其他敌人"
+  },
+  "content.species.pyrella.passive.2.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "af0d425d570b4f74cd3660d9f683dea637fb8558a90eab4557e7d7fe6c181d0f",
+    "text": "击败<keyword0>灼烧</keyword0>中的敌人后，将其剩余<keyword1>灼烧</keyword1>的{{value0}}%扩散给其他敌人"
+  },
+  "content.species.pyrella.passive.3.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "ad1b86e795ff57a62a06b6d1ff1e2561d1af5b8288e9c15235cd313fa226deb5",
+    "text": "击败<keyword0>灼烧</keyword0>中的敌人后，将其剩余<keyword1>灼烧</keyword1>的{{value0}}%扩散给其他敌人"
+  },
+  "content.species.pyrella.passive.4.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "c7ae0d72c741351d4ca99c99e6923de928c401b9ec1d4ffe9451dae91d702260",
+    "text": "击败<keyword0>灼烧</keyword0>中的敌人后，将其剩余<keyword1>灼烧</keyword1>的{{value0}}%扩散给其他敌人"
+  },
+  "content.species.pyrella.passive.5.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "565e0ac30bf1812a995ea67d99d3321917890f9fd712cbbbd3ccf11fa8a28641",
+    "text": "击败<keyword0>灼烧</keyword0>中的敌人后，将其剩余<keyword1>灼烧</keyword1>扩散给其他敌人"
+  },
+  "content.species.reedstag.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "b0e5e61961a79c480defb5c234939ec4ba3018bf8330b678413ab4309f7e9dce",
+    "text": "<keyword0>格挡</keyword0>和<keyword1>荆棘</keyword1>有{{value0}}%的概率与盟友共享"
+  },
+  "content.species.reedstag.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "2079f1dcc344c0ad3b7873c6006656557b75b7b7cbba611fe7121a4d83aeac76",
+    "text": "<keyword0>格挡</keyword0>和<keyword1>荆棘</keyword1>有{{value0}}%的概率与盟友共享"
+  },
+  "content.species.reedstag.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "9809cf992a27ea8eef1419c13765927682a2d69cdfea299eb3229544d58f6baa",
+    "text": "<keyword0>格挡</keyword0>和<keyword1>荆棘</keyword1>有{{value0}}%的概率与盟友共享"
+  },
+  "content.species.reedstag.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "24c255aa8490f1b73a413b773570f16400aa849ea1528b6f51e6c7182ca76188",
+    "text": "<keyword0>格挡</keyword0>和<keyword1>荆棘</keyword1>有{{value0}}%的概率与盟友共享"
+  },
+  "content.species.reedstag.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "3184ed8321c43a198feffd60260c27c4b1ba5cbffc61e3ee27b9cd4e9ad90eeb",
+    "text": "<keyword0>格挡</keyword0>和<keyword1>荆棘</keyword1>有{{value0}}%的概率与盟友共享"
+  },
+  "content.species.reedstag.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
+    "sourceHash": "e9cb2238db9f42c8e382f693d1cc9b7f190686a61d88110d6d3bf013b9f7fd3e",
+    "text": "<keyword0>格挡</keyword0>和<keyword1>荆棘</keyword1>与盟友共享"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -1774,6 +1882,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "97f7c568936227fd61aa93d1cc734bc67e3d11f0fd72f97db24d848a2646d828",
     "text": "盟友受到的<keyword0>冻结</keyword0>伤害减少{{value0}}%"
+  },
+  "content.species.tournelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "006beaba7d64582a52cec33bd2bc95b751b92bd3248b77035358175ad3fcc0cb",
+    "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
+  },
+  "content.species.tournelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "c56426c4baf54f24e997125d07c19272db6d8e71808f3b014521c251bd35c400",
+    "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
+  },
+  "content.species.tournelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "768b95ddc3a93899cb9a09e03c751f62116b5d26af103b2edc88bcfa0e94feb7",
+    "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
+  },
+  "content.species.tournelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "22380ecd9e79cac6eacfd9f793aa2f4ffdd40dacfaf7e35a9ce962106abc6509",
+    "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
+  },
+  "content.species.tournelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "8630ea300815f461c07aabf29a917e543e88a35fa22ca12880d7b788e466fc99",
+    "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
+  },
+  "content.species.tournelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "eabccdc4164e35bedccb693ad6f1d47932d1542f0fdd0e701113bb1194f5f9b2",
+    "text": "有{{value0}}%的概率拦截针对伤势更重的盟友的攻击"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,

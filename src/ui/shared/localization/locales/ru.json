@@ -1451,6 +1451,42 @@
     "sourceHash": "1a7aa2b14d78fadf52ad82db474f12a00e02077c7dc0679c1979b2bbe9894ee8",
     "text": "Неудачные случайные эффекты союзников с вероятностью {{value0}}% получают одну повторную попытку"
   },
+  "content.species.memento.passive.0.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "b1268c0529cf1b4f3b181662cfce52d25ca1131e88d8c897f0a687ae1925c461",
+    "text": "Каждый раз, когда вы разыгрываете карту, одно Эхо атакует и наносит {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.memento.passive.1.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "fd06a1fb54ef2532e8bdee37961186e7024056659e5e278ecc746bad299f75f6",
+    "text": "Каждый раз, когда вы разыгрываете карту, одно Эхо атакует и наносит {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.memento.passive.2.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "bde4e58d2a13c590d0e35bee12f3990a098151c2edcb2c1ab6483532face6f5a",
+    "text": "Каждый раз, когда вы разыгрываете карту, одно Эхо атакует и наносит {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.memento.passive.3.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "6045add25e6d91c32153afdacf2c8cadced8bdd1aa66dea3f0d9e1c7bda8c870",
+    "text": "Каждый раз, когда вы разыгрываете карту, одно Эхо атакует и наносит {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.memento.passive.4.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "b89d74d9c6fb78c0596c6306a10223c0d04592b098eaeb2d07b15b5127843f2d",
+    "text": "Каждый раз, когда вы разыгрываете карту, одно Эхо атакует и наносит {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
+  "content.species.memento.passive.5.rule": {
+    "reviewed": true,
+    "source": "Each time you play a card, an Echo attacks for {{value0}} <keyword0>Water</keyword0> damage",
+    "sourceHash": "0188a7c81a74519b6e155f1610c970a4d92ae451ccbd0ee52062a8ad29f5793f",
+    "text": "Каждый раз, когда вы разыгрываете карту, одно Эхо атакует и наносит {{value0}} урона типа «<keyword0>Вода</keyword0>»"
+  },
   "content.species.mossguard.passive.0.rule": {
     "reviewed": true,
     "source": "Retain {{value0}}% more <keyword0>Block</keyword0> between turns",
@@ -1631,6 +1667,78 @@
     "sourceHash": "7e4a58e135bb61a0403bb0b29ade2fd1569e85ec46208eebcf462aa35b3313fd",
     "text": "Вредные эффекты состояния, которые вы получаете, с вероятностью {{value0}}% перенаправляются случайному врагу"
   },
+  "content.species.pyrella.passive.0.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "dd82fbe468e48953311ef5ef2e249fca439ebc4fd658e4034c4bcd5fdd36765a",
+    "text": "После победы над <keyword0>горящим</keyword0> врагом перенесите {{value0}}% его оставшегося <keyword1>горения</keyword1> на других врагов"
+  },
+  "content.species.pyrella.passive.1.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "9e8f849cbd70ea02634b70c8dcd0157acd42cb5436b2291b0639c23e71c23661",
+    "text": "После победы над <keyword0>горящим</keyword0> врагом перенесите {{value0}}% его оставшегося <keyword1>горения</keyword1> на других врагов"
+  },
+  "content.species.pyrella.passive.2.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "a2adf88f3e92c018da888ac2b24f72f719be69caed2328af288d2c558191d153",
+    "text": "После победы над <keyword0>горящим</keyword0> врагом перенесите {{value0}}% его оставшегося <keyword1>горения</keyword1> на других врагов"
+  },
+  "content.species.pyrella.passive.3.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "3f7fb3db5af4121a360c082818bc621a370fa0be137b8f3610ec10fe5000c74c",
+    "text": "После победы над <keyword0>горящим</keyword0> врагом перенесите {{value0}}% его оставшегося <keyword1>горения</keyword1> на других врагов"
+  },
+  "content.species.pyrella.passive.4.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread {{value0}}% of its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "5667710b6c9aaf39117539e1f0c45f14f507aaff823c1f67317211f2a5f51a10",
+    "text": "После победы над <keyword0>горящим</keyword0> врагом перенесите {{value0}}% его оставшегося <keyword1>горения</keyword1> на других врагов"
+  },
+  "content.species.pyrella.passive.5.rule": {
+    "reviewed": true,
+    "source": "After defeating a <keyword0>Burning</keyword0> enemy, spread its remaining <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "202ee0ec29a8d51aeabef3ad7e013d3b80db09542d0aa61ec9f72d4168a32a2b",
+    "text": "После победы над <keyword0>горящим</keyword0> врагом перенесите его оставшееся <keyword1>горение</keyword1> на других врагов"
+  },
+  "content.species.reedstag.passive.0.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "e6e3a7de1a6c87e78b3fb0769eab5e39ed870652a5c5006521397b869b65f8a8",
+    "text": "<keyword0>Блок</keyword0> и <keyword1>Шипы</keyword1> с вероятностью {{value0}}% передаются союзникам"
+  },
+  "content.species.reedstag.passive.1.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "29de92641355784f26e598477a68fed66ad9c9ef319a55a60c1d0c8110321bc5",
+    "text": "<keyword0>Блок</keyword0> и <keyword1>Шипы</keyword1> с вероятностью {{value0}}% передаются союзникам"
+  },
+  "content.species.reedstag.passive.2.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "99bf46d363a96b756ccb8debd084c4ed39911d8d0050705eaf149cb046d81fe9",
+    "text": "<keyword0>Блок</keyword0> и <keyword1>Шипы</keyword1> с вероятностью {{value0}}% передаются союзникам"
+  },
+  "content.species.reedstag.passive.3.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "936521327a0fe53cc262ccfaf33140ae19f36672b93dbee69d664ae55e67c0f0",
+    "text": "<keyword0>Блок</keyword0> и <keyword1>Шипы</keyword1> с вероятностью {{value0}}% передаются союзникам"
+  },
+  "content.species.reedstag.passive.4.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> have a {{value0}}% chance to be shared with allies",
+    "sourceHash": "930341a0b4d5685d372bc67511e4bb539c2525920aa72829659d70b1aee148eb",
+    "text": "<keyword0>Блок</keyword0> и <keyword1>Шипы</keyword1> с вероятностью {{value0}}% передаются союзникам"
+  },
+  "content.species.reedstag.passive.5.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Block</keyword0> and <keyword1>Thorns</keyword1> are shared with allies",
+    "sourceHash": "abf2ab04b9663530d9b3cc5e6696d093566bb1cacf0a8533b877870f1b11ed05",
+    "text": "<keyword0>Блок</keyword0> и <keyword1>Шипы</keyword1> передаются союзникам"
+  },
   "content.species.reverie.passive.0.rule": {
     "reviewed": true,
     "source": "At the end of your turn, each ally that played no cards restores {{value0}} <keyword0>Health</keyword0>",
@@ -1774,6 +1882,42 @@
     "source": "Allies take {{value0}}% less <keyword0>Freeze</keyword0> damage",
     "sourceHash": "8dfedb5f8fa6c3e7d7126865b0ef8264128d5e3e928ddcd0501563720de8dc25",
     "text": "Союзники получают на {{value0}}% меньше урона от <keyword0>заморозки</keyword0>"
+  },
+  "content.species.tournelle.passive.0.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "036bf718724b5539cca6f098a518e7f24d90de50015c738bba73417b9c813211",
+    "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
+  },
+  "content.species.tournelle.passive.1.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "bb080858a45808e3f6349685dd04e0848e20f74cdff55b657f58e3cb55b529de",
+    "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
+  },
+  "content.species.tournelle.passive.2.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "8f6bda0107b50c96d4f131ba950c0f1b8441be976d0eb7737eaa46b2984a1e0a",
+    "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
+  },
+  "content.species.tournelle.passive.3.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "194d6de0703d55ce4f90f819ebe5c669b2d8f980463b475028e07ae1aadc8827",
+    "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
+  },
+  "content.species.tournelle.passive.4.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "239477b34e1d853c0e5a298945720508ec3869d7956eed4504fac5c9d7c9be64",
+    "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
+  },
+  "content.species.tournelle.passive.5.rule": {
+    "reviewed": true,
+    "source": "{{value0}}% chance to intercept attacks against a more injured ally",
+    "sourceHash": "03eb132ec403ee3528af08f3a9f0ac14616a0c55be476bba46a57b18e0e06dac",
+    "text": "Шанс {{value0}}% перехватить атаку против более раненого союзника"
   },
   "content.species.wisterelle.passive.0.rule": {
     "reviewed": true,
