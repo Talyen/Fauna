@@ -178,7 +178,6 @@ it("a broken performance sink cannot change application results, save ordering o
   const session = createSession(
     {
       desktop: false,
-      steam: { available: false },
       saves: {
         readCandidates: async () => [{ source: "primary", data }],
         write: async (value) => {

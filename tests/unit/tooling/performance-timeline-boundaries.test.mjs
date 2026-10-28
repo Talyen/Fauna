@@ -441,3 +441,18 @@ it("retains exactly the twenty largest hitches in stable order without changing 
   expect(input.frames).toEqual(original);
   expect(hitchInventory(sample())).toEqual([]);
 });
+
+it("CI timing boundaries: ignores invalid start dates and keeps invalid completions pending", () => {
+  const run = { run_started_at: "2026-10-21T00:00:00Z", updated_at: "2026-10-21T00:00:30Z" };
+  const jobs = [
+    { started_at: "invalid", completed_at: "invalid" },
+    { started_at: "2026-10-21T00:00:05Z", completed_at: "2026-10-21T00:00:20Z" },
+  ];
+  const result = timingReport(run, jobs);
+  expect(result.initialQueueSeconds).toBe(5);
+  expect(result.activeElapsedSeconds).toBeNull();
+  expect(result.elapsedSeconds).toBe(30);
+  expect(result.runnerSeconds).toBe(15);
+  expect(timingReport(run, [...jobs].reverse())).toEqual({ ...result, jobs: [...result.jobs].reverse() });
+  expect(timingReport(run, []).activeElapsedSeconds).toBeNull();
+});

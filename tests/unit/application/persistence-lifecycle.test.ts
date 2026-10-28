@@ -153,7 +153,6 @@ it("does not start Cloud after a loaded-save subscriber begins closing", async (
   const identify = (f.port.identity = vi.fn(f.port.identity));
   const session = createSession({
     desktop: true,
-    steam: { available: false },
     cloud: f.port,
     quit: async () => {},
     saves: {

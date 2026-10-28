@@ -18,7 +18,6 @@ export async function createRecordedSession(
   async function open() {
     const session = createSession({
       desktop: false,
-      steam: { available: false },
       saves: {
         readCandidates: async () => [{ source: "primary", data: saved }],
         write: async (data) => {

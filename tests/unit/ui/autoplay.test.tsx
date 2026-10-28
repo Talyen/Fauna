@@ -15,7 +15,6 @@ it("revokes a queued action synchronously on blur before React runs effect clean
   vi.spyOn(document, "hasFocus").mockReturnValue(true);
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [{ source: "primary", data: encodeSave(run()) }],
       write: async () => {},
@@ -46,7 +45,6 @@ it("pauses overlays and blur, revokes on disposal and keeps playing through a sa
   let fail = false;
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [{ source: "primary", data: encodeSave(run()) }],
       write: async () => {
@@ -113,7 +111,6 @@ it("manual takeover revokes the queued move before React runs effect cleanup", a
   vi.spyOn(document, "hasFocus").mockReturnValue(true);
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [{ source: "primary", data: encodeSave(run()) }],
       write: async () => {},
@@ -139,7 +136,6 @@ it("Auto-play escapes the recorded self-replacing draw loop", async () => {
   vi.spyOn(document, "hasFocus").mockReturnValue(true);
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [{ source: "primary", data: JSON.stringify(checkpoint) }],
       write: async () => {},
@@ -167,7 +163,6 @@ it("does not carry enabled automation or decision history into a replacement ses
   const open = async () => {
     const session = createSession({
       desktop: false,
-      steam: { available: false },
       saves: {
         readCandidates: async () => [{ source: "primary", data: encodeSave(run()) }],
         write: async () => {},

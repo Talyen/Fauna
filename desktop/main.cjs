@@ -136,6 +136,11 @@ void app.whenReady().then(async () => {
     )
       throw new Error("Unauthorized request.");
   };
+  const handle = (channel, handler) =>
+    ipcMain.handle(channel, (event, ...args) => {
+      authorize(event);
+      return handler(...args);
+    });
   for (const method of [
     "identity",
     "readLocal",
@@ -147,41 +152,16 @@ void app.whenReady().then(async () => {
     "read",
     "write",
   ]) {
-    ipcMain.handle(`fauna:cloud-${method}`, (event, ...args) => {
-      authorize(event);
-      return steam[method](...args);
-    });
+    handle(`fauna:cloud-${method}`, (...args) => steam[method](...args));
   }
-  ipcMain.handle("fauna:steam-language", (event) => {
-    authorize(event);
-    return steam.language();
-  });
-  ipcMain.handle("fauna:overlay-state", (event) => {
-    authorize(event);
-    return steam.overlay();
-  });
-  ipcMain.handle("fauna:display-read", (event) => {
-    authorize(event);
-    return display.read();
-  });
-  ipcMain.handle("fauna:display-set", (event, mode) => {
-    authorize(event);
-    return display.set(mode);
-  });
-  ipcMain.handle("fauna:read", (event) => {
-    authorize(event);
-    return storage.readCandidates();
-  });
-  ipcMain.handle("fauna:write", (event, data, recoverable) => {
-    authorize(event);
-    return storage.write(data, recoverable);
-  });
-  ipcMain.handle("fauna:quit", (event) => {
-    authorize(event);
-    app.quit();
-  });
-  ipcMain.handle("fauna:close-ready", (event, saved) => {
-    authorize(event);
+  handle("fauna:steam-language", () => steam.language());
+  handle("fauna:overlay-state", () => steam.overlay());
+  handle("fauna:display-read", () => display.read());
+  handle("fauna:display-set", (mode) => display.set(mode));
+  handle("fauna:read", () => storage.readCandidates());
+  handle("fauna:write", (data, recoverable) => storage.write(data, recoverable));
+  handle("fauna:quit", () => app.quit());
+  handle("fauna:close-ready", (saved) => {
     if (!closeRequested) throw new Error("No close was requested.");
     if (saved === true) finishClose();
     else closeRequested = false;

@@ -29,23 +29,29 @@ export function checkDocumentation(root, { warn = () => {} } = {}) {
       directory = path.posix.dirname(directory);
     }
   }
+  const existence = new Map();
   const exists = (absolute) => {
-    if (existsSync(absolute)) return true;
-    const relative = path.relative(root, absolute).split(path.sep).join("/");
-    return omitted.has(relative) || omittedDirectories.has(relative);
+    if (!existence.has(absolute)) {
+      const relative = path.relative(root, absolute).split(path.sep).join("/");
+      existence.set(
+        absolute,
+        existsSync(absolute) || omitted.has(relative) || omittedDirectories.has(relative),
+      );
+    }
+    return existence.get(absolute);
   };
   const available = files.filter(
-    (file) => omitted.has(file) || lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile(),
+    (file) =>
+      /\.md$/i.test(file) &&
+      (omitted.has(file) || lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile()),
   );
   const docs = new Map(
-    available
-      .filter((file) => /\.md$/i.test(file))
-      .map((file) => [
-        file,
-        existsSync(path.join(root, file))
-          ? readFileSync(path.join(root, file), "utf8")
-          : git(root, ["show", `:${file}`]),
-      ]),
+    available.map((file) => [
+      file,
+      existsSync(path.join(root, file))
+        ? readFileSync(path.join(root, file), "utf8")
+        : git(root, ["show", `:${file}`]),
+    ]),
   );
   const scripts = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8")).scripts ?? {};
   const failures = [];

@@ -33,6 +33,16 @@ const chancePassives = new Set([
   "statusReflection",
   "shareProtection",
 ]);
+const enabledOnlyFlags = [
+  "draw",
+  "backupOnly",
+  "restore",
+  "doubleAgainstHealthier",
+  "criticalWhenLastCard",
+  "purgeThorns",
+  "allyOnly",
+] as const;
+
 export interface ContentIssue {
   severity: "error" | "warning";
   id: string;
@@ -61,6 +71,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     error("first-run", "starter", "First-run starter pool needs at least three distinct species.");
   for (const id of FIRST_RUN_STARTERS) if (!speciesById.has(id)) error(id, "starter", "Unknown starter.");
   for (const entry of catalog.species) {
+    if (entry.legendary !== undefined && entry.legendary !== true)
+      error(entry.id, "legendary", "Legendary must be true when present");
     if (!Number.isSafeInteger(entry.health) || entry.health < 1 || entry.health > 1_000_000)
       error(entry.id, "health", "Unsupported Health.");
     if (!entry.name.trim() || !entry.trait.trim())
@@ -76,11 +88,15 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     const passiveEffects = new Set<string>();
     for (const tier of entry.passiveTiers) {
       if (!tier) continue;
-      const total = (kind: import("./content/types").PassiveKind) =>
-        tier.effects.reduce((sum, effect) => sum + (effect.kind === kind ? effect.amount : 0), 0);
-      if (total("blockRetention") > 100)
+      let retainedBlock = 0;
+      let borrowedCards = 0;
+      for (const effect of tier.effects) {
+        if (effect.kind === "blockRetention") retainedBlock += effect.amount;
+        if (effect.kind === "unfinishedJourney") borrowedCards += effect.amount;
+      }
+      if (retainedBlock > 100)
         error(entry.id, "passiveTiers", "Block retention cannot create Block during decay");
-      if (total("unfinishedJourney") > MAX_FALLEN_CARDS_PER_TURN)
+      if (borrowedCards > MAX_FALLEN_CARDS_PER_TURN)
         error(entry.id, "passiveTiers", "Borrowed-card allowance exceeds the supported saved counter");
       // Rules copy and object/effect order cannot disguise unchanged gameplay.
       const effectKey = JSON.stringify(
@@ -137,6 +153,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     if ((cardCounts.get(entry.id) ?? 0) !== 3)
       error(entry.id, "cards", "Species must contribute exactly three cards.");
   }
+  const availableKeywords = new Set<string>();
   for (const card of catalog.cards) {
     if (!card.name.trim()) error(card.id, "name", "Card name required");
     if (card.target !== undefined && !isPrimaryTarget(card.effect, card.target))
@@ -163,6 +180,17 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       !DAMAGE_TYPES.includes(card.alternateDamageType)
     )
       error(card.id, "alternateDamageType", "Unknown alternate damage type.");
+    for (const field of enabledOnlyFlags) {
+      const value: unknown = Reflect.get(card, field);
+      if (value !== undefined && value !== true)
+        error(card.id, "tags", "Enabled-only ability flags must be true");
+    }
+    if (
+      card.effect === "attack" &&
+      card.doubleWithArmor !== undefined &&
+      typeof card.doubleWithArmor !== "boolean"
+    )
+      error(card.id, "tags", "Armor damage modifier must be boolean");
     for (const tag of [card.leech, card.consume])
       if (tag !== undefined && typeof tag !== "boolean") error(card.id, "tags", "Invalid card tag.");
     if (
@@ -170,7 +198,17 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       (!Number.isSafeInteger(card.repeatChance) || card.repeatChance < 1 || card.repeatChance > 100)
     )
       error(card.id, "repeatChance", "Repeat chance must be a whole percentage from 1 to 100.");
-    for (const effect of card.effects ?? []) {
+    let validEffects = card.effects === undefined || Array.isArray(card.effects);
+    if (!validEffects) error(card.id, "effects", "Supplemental effects must be an array");
+    const effects: NonNullable<typeof card.effects> = Array.isArray(card.effects) ? card.effects : [];
+    for (const effect of effects) {
+      if (!effect || typeof effect !== "object") {
+        validEffects = false;
+        error(card.id, "effects", "Supplemental effects must contain effect records");
+        continue;
+      }
+      if (effect.kind === "damage" && effect.leech !== undefined && typeof effect.leech !== "boolean")
+        error(card.id, "effects", "Supplemental Leech must be boolean");
       // Only these primary handlers deliver a separate pass to friendly recipients.
       if (
         (effect.kind === "heal" || effect.kind === "cleanse") &&
@@ -206,8 +244,10 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     if (!isAbilityKind(card.effect)) error(card.id, "effect", "Unknown effect.");
     else if (card.effect === "attack" && !DAMAGE_TYPES.includes(card.damageType))
       error(card.id, "damageType", "Unknown damage type.");
-    else {
-      if (!definitionKeywords(card).every((keyword) => PROGRESSION_KEYWORDS.includes(keyword)))
+    else if (validEffects) {
+      const keywords = definitionKeywords(card);
+      for (const keyword of keywords) availableKeywords.add(keyword);
+      if (!keywords.every((keyword) => PROGRESSION_KEYWORDS.includes(keyword)))
         error(card.id, "keywords", "Invalid progression classification.");
     }
     if (isAbilityKind(card.effect)) {
@@ -220,12 +260,19 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     }
   }
   if (!catalog.combatPacks.length) error("combat", "packs", "No combat packs.");
-  const checkPack = (pack: readonly string[]) => {
-    if (pack.length < 1 || pack.length > 3 || pack.some((id) => !speciesById.has(id)))
+  const validatePack = (pack: readonly string[]) => {
+    if (pack.length < 1 || pack.length > 3) {
       error("encounters", "packs", "Invalid encounter pack.");
+      return;
+    }
+    for (const id of pack)
+      if (!speciesById.has(id)) {
+        error("encounters", "packs", "Invalid encounter pack.");
+        return;
+      }
   };
-  for (const pack of catalog.combatPacks) checkPack(pack);
-  for (const boss of catalog.bosses) checkPack(boss.pack);
+  for (const pack of catalog.combatPacks) validatePack(pack);
+  for (const boss of catalog.bosses) validatePack(boss.pack);
   for (const pack of catalog.combatPacks)
     if (pack.some((id) => speciesById.get(id)?.legendary))
       error("combat", "packs", "Legendaries only appear in Boss encounters");
@@ -244,6 +291,12 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     encounters.add(boss.encounter);
     if (!boss.name.trim()) error(boss.id, "stats", "Invalid boss name or stats.");
   }
+  const talentRows = new Map<string, Set<number>>();
+  for (const talent of catalog.talents) {
+    let rows = talentRows.get(talent.keyword);
+    if (!rows) talentRows.set(talent.keyword, (rows = new Set()));
+    rows.add(talent.row);
+  }
   for (const talent of catalog.talents) {
     if (talent.text.includes(".")) error(talent.id, "description", "Effect descriptions must omit periods");
     if (
@@ -254,8 +307,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     if (
       !Number.isSafeInteger(talent.row) ||
       talent.row < 0 ||
-      (talent.row > 0 &&
-        !catalog.talents.some((other) => other.keyword === talent.keyword && other.row === talent.row - 1))
+      (talent.row > 0 && !talentRows.get(talent.keyword)!.has(talent.row - 1))
     )
       error(talent.id, "row", "Talent rows must be contiguous.");
     if (talent.id !== `${talent.keyword}.${talent.effect}` || !talent.text.trim())
@@ -268,14 +320,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(boon.id, "description", "Boon needs a name and effect description.");
   }
   for (const keyword of PROGRESSION_KEYWORDS)
-    if (
-      !catalog.cards.some(
-        (card) =>
-          isAbilityKind(card.effect) &&
-          (card.effect !== "attack" || DAMAGE_TYPES.includes(card.damageType)) &&
-          definitionKeywords(card).includes(keyword),
-      )
-    )
+    if (!availableKeywords.has(keyword))
       issues.push({
         severity: "warning",
         id: keyword,
