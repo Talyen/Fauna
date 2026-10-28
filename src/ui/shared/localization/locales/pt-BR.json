@@ -605,6 +605,18 @@
     "sourceHash": "18ff6ec020d30be96939160290d9a51a3ef41381e3ff1ab6deeb3d7614c325d4",
     "text": "Acertos de <keyword0>Queimadura</keyword0> aplicam o dobro de <keyword1>Queimadura</keyword1> a inimigos com <keyword2>Bloqueio</keyword2>"
   },
+  "content.boon.chime-crucible.name": {
+    "reviewed": true,
+    "source": "Chime Crucible",
+    "sourceHash": "2febc9df7526a60177b081e8d31106092a348bc75f2203461165ebaa75cbeb7e",
+    "text": "Cadinho dos sinos"
+  },
+  "content.boon.chime-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also apply {{value0}} <keyword1>Burn</keyword1>",
+    "sourceHash": "8d73b8d79e196704d971a2c5092594a180240c0f6d493b8af987d3e5a3fff770",
+    "text": "Golpes de <keyword0>Atordoamento</keyword0> também aplicam {{value0}} de <keyword1>Queimadura</keyword1>"
+  },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
     "source": "Chromatic Viol",
@@ -760,6 +772,18 @@
     "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
     "sourceHash": "843aa917338123b95c9c97102a5c270da773f5a7c6ed1f876990ce4b358b47af",
     "text": "<keyword0>Comida</keyword0> também restaura <keyword1>Saúde</keyword1> igual ao <keyword2>Bloqueio</keyword2> do alvo"
+  },
+  "content.boon.crystal-harp.name": {
+    "reviewed": true,
+    "source": "Crystal Harp",
+    "sourceHash": "cdbedc20182cf03b84eaeb5237caaa0625ad363349db46bdc5c16e3f9d3ad20c",
+    "text": "Harpa de cristal"
+  },
+  "content.boon.crystal-harp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits grant you <keyword1>Reflect</keyword1>",
+    "sourceHash": "65a7e644e5c22f351f06752dc99047171cac04e55e5996c3b057afe39e5bd953",
+    "text": "Golpes de <keyword0>Atordoamento</keyword0> concedem <keyword1>Reflexão</keyword1> a você"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1073,6 +1097,18 @@
     "sourceHash": "3a90acbca0f0ab5d8fe42b981f47f99f8787a812b0e657a0ee25af3b17de5f86",
     "text": "<keyword0>Bloqueio</keyword0> não pode decair abaixo da <keyword1>Armadura</keyword1>"
   },
+  "content.boon.gilt-gauntlet.name": {
+    "reviewed": true,
+    "source": "Gilt Gauntlet",
+    "sourceHash": "c14fe63b247fc1d72b63d5b3806a080fd8bbabf6e3539d7eca2fb1261a9d21d6",
+    "text": "Manopla dourada"
+  },
+  "content.boon.gilt-gauntlet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits steal {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "66ae7aad7dbcaf4df788e4043c99a87dca8d095ce8a88313b8d62110772e1093",
+    "text": "Golpes <keyword0>Físicos</keyword0> roubam {{value0}} de <keyword1>Armadura</keyword1>"
+  },
   "content.boon.glassleaf-shield.name": {
     "reviewed": true,
     "source": "Glassleaf Shield",
@@ -1361,6 +1397,18 @@
     "sourceHash": "fbef7c601ba5aaec13970d936898a5de9bdb4adf4bb0a228126d070ed717a4e7",
     "text": "<keyword0>Expurgar</keyword0> um efeito de um inimigo envenenado faz seu <keyword1>Veneno</keyword1> causar dano"
   },
+  "content.boon.memory-cairn.name": {
+    "reviewed": true,
+    "source": "Memory Cairn",
+    "sourceHash": "fcfea82baefaba406fff204767d1c60a313257db6d9b82cabbef873ed94506d9",
+    "text": "Marco da memória"
+  },
+  "content.boon.memory-cairn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrected</keyword0> allies <keyword1>Cleanse</keyword1> all harmful effects",
+    "sourceHash": "187fe8edc376b65bd0c50cb9150723f20fa1fdde42c5845633806a3b27e97e35",
+    "text": "Aliados <keyword0>Ressuscitados</keyword0> <keyword1>purificam</keyword1> todos os efeitos nocivos"
+  },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
     "source": "Merchant's Favor",
@@ -1565,6 +1613,30 @@
     "sourceHash": "200c57a02a8d505d46af2dd39510f9a14794c15a790a49c80fc1717fb9fd06d4",
     "text": "Efeitos <keyword0>purificados</keyword0> retornam à sua origem"
   },
+  "content.boon.orbit-tongs.name": {
+    "reviewed": true,
+    "source": "Orbit Tongs",
+    "sourceHash": "833c07e552fafe81d12dbdcf311360c434afd5dde23b19a33a786ac5efc20792",
+    "text": "Tenaz orbital"
+  },
+  "content.boon.orbit-tongs.rule": {
+    "reviewed": true,
+    "source": "Stealing <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies",
+    "sourceHash": "e6fcc4589e895aff123c68e123478f48a7974b6d906eba061f673cb6ef73ba49",
+    "text": "Roubar <keyword0>Armadura</keyword0> concede {{value0}} de <keyword1>Bloqueio</keyword1> aos outros aliados"
+  },
+  "content.boon.orchard-ladder-charm.name": {
+    "reviewed": true,
+    "source": "Orchard Ladder Charm",
+    "sourceHash": "6b2d8b05f1316addd884f7a4b8bf4176deadd9349eca0044ca473e2258995c62",
+    "text": "Amuleto da escada do pomar"
+  },
+  "content.boon.orchard-ladder-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> restores {{value0}} <keyword1>Health</keyword1> to backup allies",
+    "sourceHash": "990a862b4ee691a338283d3550339cf63b885e94009b12b47bb6563bc54e6936",
+    "text": "<keyword0>Comida</keyword0> restaura {{value0}} de <keyword1>Saúde</keyword1> aos aliados na reserva"
+  },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
     "source": "Origami Staircase",
@@ -1732,6 +1804,18 @@
     "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
     "sourceHash": "01d10a0244e389871d2bbe1b2bc28cd3a996b38bf5e15f84861aead4c25d7286",
     "text": "<keyword0>Expurgar</keyword0> os <keyword1>Espinhos</keyword1> inimigos rouba-os para você"
+  },
+  "content.boon.pumice-glass-inkwell.name": {
+    "reviewed": true,
+    "source": "Pumice Glass Inkwell",
+    "sourceHash": "3e8008820e3bb5edcaa8d17b45b83340de843d2f1abc119a3fe76685433980ff",
+    "text": "Tinteiro de vidro-pomes"
+  },
+  "content.boon.pumice-glass-inkwell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> <keyword2>Blinds</keyword2> the enemy that applied it",
+    "sourceHash": "789f184f9463a3948b09e7b423b7a54f5675243d93a035ccf5c4e84fc15e13a8",
+    "text": "<keyword0>Purificar</keyword0> <keyword1>Queimadura</keyword1> <keyword2>cega</keyword2> o inimigo que a aplicou"
   },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
@@ -2069,6 +2153,18 @@
     "sourceHash": "0cee31a6f22313b9cc256c73a9d1a9c6595253e0f6f64a3f15907584dcb8b2cd",
     "text": "Jogar <keyword0>Comida</keyword0> concede {{value0}} de <keyword1>Armadura</keyword1> a todos os aliados"
   },
+  "content.boon.spore-trivet.name": {
+    "reviewed": true,
+    "source": "Spore Trivet",
+    "sourceHash": "bf2f62e6f0e906194e08df655e49c6149c9967f36b5b9af153047aed2a209247",
+    "text": "Descanso de panela de esporos"
+  },
+  "content.boon.spore-trivet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> <keyword2>Burn</keyword2> from all allies",
+    "sourceHash": "9fabb7fb274b0e87fa27e32ffb84f6142ff57a1fa5a0aa0391b9c7744ad90535",
+    "text": "<keyword0>Comida</keyword0> <keyword1>purifica</keyword1> <keyword2>Queimadura</keyword2> de todos os aliados"
+  },
   "content.boon.star-hoop.name": {
     "reviewed": true,
     "source": "Star Hoop",
@@ -2285,6 +2381,18 @@
     "sourceHash": "b8925ec90125da349e479d41cb95217dcfe621a9780df341345cc6139cf358b4",
     "text": "<keyword0>Comida</keyword0> concede {{value0}}% de <keyword1>Esquiva</keyword1> aos seus alvos até o próximo turno deles"
   },
+  "content.boon.victory-laurel.name": {
+    "reviewed": true,
+    "source": "Victory Laurel",
+    "sourceHash": "5a63b768f94b9024674edf2503b3909ca4f4a54ea4d64feadcec4e64f9bd3f0b",
+    "text": "Louro da vitória"
+  },
+  "content.boon.victory-laurel.rule": {
+    "reviewed": true,
+    "source": "Defeating an enemy restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "4fcc2b839cd6570229cba77a9653b09999832413f8fb658686cfd68a01bbd310",
+    "text": "Derrotar um inimigo restaura {{value0}} de <keyword0>Mana</keyword0>"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -2296,6 +2404,18 @@
     "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
     "sourceHash": "5552b943b68d58782218a42782481952d68cf9fc148dd6ed65cdf6c72a310e10",
     "text": "Aliados à beira da morte podem agir apesar de <keyword0>Atordoamento</keyword0> e <keyword1>Congelamento</keyword1>"
+  },
+  "content.boon.vow-candle.name": {
+    "reviewed": true,
+    "source": "Vow Candle",
+    "sourceHash": "88b84940e5f4bce06cb093342c008b4c1fe2b45edaf8a54e0e9c0bacef54ea6a",
+    "text": "Vela do juramento"
+  },
+  "content.boon.vow-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> cannot cause <keyword1>Light</keyword1> attacks to miss",
+    "sourceHash": "950832db781901161ad99bb9b19c4f6781c924d9f2ceb02514177e6247c2e6e8",
+    "text": "<keyword0>Cegueira</keyword0> não faz ataques de <keyword1>Luz</keyword1> errarem"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,

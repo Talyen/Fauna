@@ -1,3 +1,4 @@
+import { deferred } from "../../support/deferred";
 import { describe, expect, it, vi } from "vitest";
 import { createSession as createSeededSession } from "../../../src/application/session";
 import { cloudName, snapshot } from "../../../src/application/cloud-snapshots";
@@ -474,10 +475,7 @@ it("persists commands issued synchronously by committed-state subscribers in rev
 it.each(["saved", "empty", "invalid"])(
   "keeps command admission closed throughout %s startup cloud reconciliation",
   async (candidate) => {
-    let release!: () => void;
-    const gate = new Promise<void>((resolve) => {
-      release = resolve;
-    });
+    const { promise: gate, resolve: release } = deferred();
     const identity = vi.fn(async () => {
       await gate;
       return { available: false, device: "", profile: "", importAvailable: false };
@@ -658,10 +656,8 @@ it("reports unreadable browser storage instead of treating inaccessible slots as
 });
 
 it("shares startup loading so a second caller cannot later replace committed play", async () => {
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
-  let releaseLater!: () => void;
-  const later = new Promise<void>((resolve) => (releaseLater = resolve));
+  const { promise: gate, resolve: release } = deferred();
+  const { promise: later, resolve: releaseLater } = deferred();
   let reads = 0;
   const readCandidates = vi.fn(async () => {
     await (++reads === 1 ? gate : later);
@@ -688,8 +684,7 @@ it("shares startup loading so a second caller cannot later replace committed pla
 });
 
 it("flush drains writes admitted by save-completion subscribers", async () => {
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
+  const { promise: gate, resolve: release } = deferred();
   const write = vi.fn(async () => {
     if (write.mock.calls.length === 2) await gate;
   });
@@ -719,8 +714,7 @@ it("flush drains writes admitted by save-completion subscribers", async () => {
 });
 
 it("shares disposal across reentrant subscribers while draining admitted saves", async () => {
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
+  const { promise: gate, resolve: release } = deferred();
   const removeClose = vi.fn();
   const removeOverlay = vi.fn();
   const s = createSession({
@@ -764,8 +758,7 @@ it("shares disposal across reentrant subscribers while draining admitted saves",
 
 it("shares the close handshake and native quit across repeated requests", async () => {
   let requestClose!: () => Promise<boolean>;
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
+  const { promise: gate, resolve: release } = deferred();
   const quit = vi.fn(async () => {});
   const s = createSession({
     ...platform(),
@@ -888,8 +881,7 @@ it("isolates throwing presentation subscribers from commands, other subscribers 
 it.each(["overlay", "close"])(
   "drains admitted saves and completes cleanup if %s unsubscribe fails",
   async (failed) => {
-    let release!: () => void;
-    const gate = new Promise<void>((resolve) => (release = resolve));
+    const { promise: gate, resolve: release } = deferred();
     const removeOverlay = vi.fn(() => {
       if (failed === "overlay") throw new Error("overlay cleanup failed");
     });

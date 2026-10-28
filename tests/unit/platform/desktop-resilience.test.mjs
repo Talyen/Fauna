@@ -4,7 +4,7 @@ import { createRequire } from "node:module";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { createSteam } from "../../../desktop/steam.cjs";
+import { transportFixture } from "../../support/steam.mjs";
 import { createOverlay } from "../../../desktop/steam-overlay.cjs";
 import { createDisplay } from "../../../desktop/display.cjs";
 import { createAudioRuntime } from "../../../src/ui/audio/audio-runtime";
@@ -18,50 +18,23 @@ afterEach(() => {
 it.each([null, undefined, { id: 1.5 }, { id: 1, error: {} }])(
   "retires malformed worker replies without crashing or losing local metadata: %j",
   async (reply) => {
-    const directory = await mkdtemp(path.join(tmpdir(), "fauna-worker-response-"));
-    vi.stubEnv("FAUNA_STEAM_APP_ID", "999999999");
-    const worker = new EventEmitter();
-    worker.kill = vi.fn();
-    worker.postMessage = vi.fn(({ id, operation }) => {
-      queueMicrotask(() => {
-        worker.emit("message", {
-          id,
-          value: operation === "init" ? "76561190000000000" : true,
-        });
-      });
-    });
-    let adapter;
-    try {
-      adapter = await createSteam({
-        app: { isPackaged: false },
-        directory,
-        isolated: false,
-        pause() {},
-        utilityProcess: { fork: () => worker },
-        loadBinding: () => ({
-          createOverlay: () => ({ account: "76561190000000000", disconnect() {} }),
-        }),
-      });
-      worker.postMessage.mockImplementation(() => {});
-      const pending = Promise.allSettled([adapter.list(), adapter.list()]);
-      expect(() => worker.emit("message", reply)).not.toThrow();
-      const results = await pending;
-      expect(results).toEqual(
-        Array(2).fill({
-          status: "rejected",
-          reason: expect.objectContaining({ message: "Invalid Steam response envelope." }),
-        }),
-      );
-      expect(worker.kill).toHaveBeenCalledOnce();
-      expect(() => worker.emit("message", null)).not.toThrow();
-      expect(worker.kill).toHaveBeenCalledOnce();
-      await expect(adapter.list()).rejects.toThrow("unavailable");
-      await adapter.writeLocal("locally durable metadata");
-      expect(await adapter.readLocal()).toBe("locally durable metadata");
-    } finally {
-      await adapter?.dispose();
-      await rm(directory, { recursive: true, force: true });
-    }
+    const { adapter, worker } = await transportFixture();
+    worker.postMessage.mockImplementation(() => {});
+    const pending = Promise.allSettled([adapter.list(), adapter.list()]);
+    expect(() => worker.emit("message", reply)).not.toThrow();
+    const results = await pending;
+    expect(results).toEqual(
+      Array(2).fill({
+        status: "rejected",
+        reason: expect.objectContaining({ message: "Invalid Steam response envelope." }),
+      }),
+    );
+    expect(worker.kill).toHaveBeenCalledOnce();
+    expect(() => worker.emit("message", null)).not.toThrow();
+    expect(worker.kill).toHaveBeenCalledOnce();
+    await expect(adapter.list()).rejects.toThrow("unavailable");
+    await adapter.writeLocal("locally durable metadata");
+    expect(await adapter.readLocal()).toBe("locally durable metadata");
   },
 );
 
@@ -217,28 +190,7 @@ it("shares one display shutdown completion across overlapping callers", async ()
 });
 
 it("drains an admitted standalone separation choice before Steam shutdown completes", async () => {
-  const directory = await mkdtemp(path.join(tmpdir(), "fauna-import-disposal-"));
-  vi.stubEnv("FAUNA_STEAM_APP_ID", "999999999");
-  const worker = new EventEmitter();
-  worker.kill = vi.fn();
-  worker.postMessage = ({ id, operation }) => {
-    queueMicrotask(() =>
-      worker.emit("message", {
-        id,
-        value: operation === "init" ? "76561190000000000" : true,
-      }),
-    );
-  };
-  const adapter = await createSteam({
-    app: { isPackaged: false },
-    directory,
-    isolated: false,
-    pause() {},
-    utilityProcess: { fork: () => worker },
-    loadBinding: () => ({
-      createOverlay: () => ({ account: "76561190000000000", disconnect() {} }),
-    }),
-  });
+  const { adapter, directory } = await transportFixture();
   const nativeFs = createRequire(import.meta.url)("node:fs/promises");
   const open = nativeFs.open;
   let release, started;
@@ -273,7 +225,6 @@ it("drains an admitted standalone separation choice before Steam shutdown comple
     release();
     await choice;
     await adapter.dispose();
-    await rm(directory, { recursive: true, force: true });
   }
 });
 

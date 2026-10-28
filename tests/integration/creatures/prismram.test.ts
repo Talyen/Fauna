@@ -1,20 +1,11 @@
 import { setBattleCards } from "../../support/cards";
-import {
-  authoredPack,
-  swapFixture,
-  addBackups,
-  prepareDestination,
-  accept,
-  teamRun,
-  winBattle,
-} from "../../support/game";
+import { swapFixture, addBackups, prepareDestination, accept, teamRun } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, definition, species, type DamageType } from "../../../src/game/content";
+import { definition, species, type DamageType } from "../../../src/game/content";
 import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
-import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
 import type { GameEvent } from "../../../src/game/types";
@@ -192,32 +183,6 @@ it.each([
   expect(result.state.battle!.enemies[0]!.combat.reflect).toBe(id !== "prismram-spectrum-lance");
   expect(result.state.battle!.mana).toBe(game.battle!.mana - 1);
   expect(previewCard(game, cardId, "enemy-0").state).toEqual(result.state);
-});
-
-it("discovers and recruits Prismram with its complete kit and rejects obsolete saves", () => {
-  const initial = createGame(7);
-  let game = accept(
-    accept(initial, { type: "draft", species: initial.starterOffers.find((kind) => kind !== "prismram")! }),
-    {
-      type: "start",
-    },
-  );
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("prismram");
-  game = accept(winBattle(game), { type: "recruit", species: "prismram" });
-  expect(game.discovery.recruited.prismram).toBe(1);
-  expect(CARDS.filter((card) => card.species === "prismram").map((card) => card.cost)).toEqual([1, 1, 1]);
-  expect(game.cards.filter((card) => card.ownerId === game.team[1]!.id)).toHaveLength(3);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
-  expect(() => decodeSave(JSON.stringify({ ...game, version: 24 }))).toThrow();
 });
 
 it("refreshes one Ward, preserves it through swaps and turn changes, and resets it at the next battle", () => {

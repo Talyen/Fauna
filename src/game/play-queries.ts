@@ -185,13 +185,6 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     return result;
   };
   const hasRecipients = (def: CardDefinition) => recipients(def).length > 0;
-  let recipientIds: Map<CardDefinition, string[]> | undefined;
-  const targetIds = (def: CardDefinition) => {
-    recipientIds ??= new Map();
-    let ids = recipientIds.get(def);
-    if (!ids) recipientIds.set(def, (ids = recipients(def).map((unit) => unit.id)));
-    return ids;
-  };
   let recoverableByActor: Map<string, boolean> | undefined;
   const recoverable = (actorId: string) => {
     recoverableByActor ??= new Map();
@@ -211,7 +204,12 @@ export function availablePlays(state: BattleState, autoEndTurn = true): Availabl
     const mode = cardTargeting(play.def, state);
     const commands =
       mode === "enemy" || mode === "ally"
-        ? targetIds(play.def).map((targetId) => ({ type: "play" as const, cardId, targetId, autoEndTurn }))
+        ? recipients(play.def).map((unit) => ({
+            type: "play" as const,
+            cardId,
+            targetId: unit.id,
+            autoEndTurn,
+          }))
         : [{ type: "play" as const, cardId, targetId: undefined, autoEndTurn }];
     plays.push({
       card: play.card,

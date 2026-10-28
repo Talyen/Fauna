@@ -1,8 +1,9 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { produce } from "immer";
+import * as content from "../../../src/game/content";
 import { TALENTS } from "../../../src/game/content";
 import { createGame, dispatch } from "../../../src/game/engine";
-import { KEYWORDS, xpThreshold } from "../../../src/game/progression";
+import { cardKeywordView, KEYWORDS, xpThreshold } from "../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { accept } from "../../support/game";
 
@@ -73,4 +74,20 @@ it("preserves mixed starter offers on resume and excludes Legendaries after an o
   expect(legendary.starterOffers).toEqual([]);
   expect(decodeSave(encodeSave(legendary))).toEqual(legendary);
   expect(accept(legendary, { type: "start" }).team.map((unit) => unit.species)).toEqual(["memento"]);
+});
+
+it("does not cache nested mutable effects behind a shallow-frozen card definition", () => {
+  const effects: NonNullable<content.CardDefinition["effects"]>[number][] = [
+    { kind: "damage", damageType: "burn", amount: 1 },
+  ];
+  const adapted = Object.freeze({ ...content.definition("food-apple"), effects });
+  const lookup = vi.spyOn(content, "definition").mockReturnValue(adapted);
+  try {
+    expect(cardKeywordView({ definitionId: adapted.id })).toContain("burn");
+    effects[0] = { kind: "damage", damageType: "water", amount: 1 };
+    expect(cardKeywordView({ definitionId: adapted.id })).not.toContain("burn");
+    expect(cardKeywordView({ definitionId: adapted.id })).toContain("water");
+  } finally {
+    lookup.mockRestore();
+  }
 });

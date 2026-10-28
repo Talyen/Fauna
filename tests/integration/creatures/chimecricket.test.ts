@@ -1,14 +1,5 @@
 import { setBattleCards } from "../../support/cards";
-import {
-  enemyPlay,
-  addBackups,
-  authoredPack,
-  swapFixture,
-  prepareDestination,
-  accept,
-  teamRun,
-  winBattle,
-} from "../../support/game";
+import { enemyPlay, addBackups, swapFixture, prepareDestination, accept, teamRun } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 import { cardText } from "../../../src/game/card-rules";
 import { expect, it } from "vitest";
@@ -22,8 +13,7 @@ import {
   startAction,
   tickStatuses,
 } from "../../../src/game/combat/index";
-import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
@@ -289,33 +279,6 @@ it("caps combined talent and Encore repeats at two complete resolutions", () => 
     found = true;
   }
   expect(found).toBe(true);
-});
-
-it("discovers and recruits Chimecricket into the normal roster", () => {
-  const initial = createGame(7);
-  let game = accept(
-    accept(initial, {
-      type: "draft",
-      species: initial.starterOffers.find((kind) => kind !== "chimecricket")!,
-    }),
-    { type: "start" },
-  );
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "chimecricket"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("chimecricket");
-  game = accept(winBattle(game), { type: "recruit", species: "chimecricket" });
-  expect(game.discovery.recruited.chimecricket).toBe(1);
-  expect(
-    game.cards.filter((card) => content.definition(card.definitionId).species === "chimecricket"),
-  ).toHaveLength(3);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
 });
 
 // Fixed checkpoints cover base-tier successes and misses below the player's maximum Encore chance

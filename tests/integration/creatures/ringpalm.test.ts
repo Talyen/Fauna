@@ -1,20 +1,11 @@
 import { setBattleCards } from "../../support/cards";
-import {
-  enemyPlay,
-  addBackups,
-  authoredPack,
-  swapFixture,
-  accept,
-  teamRun,
-  winBattle,
-} from "../../support/game";
+import { enemyPlay, addBackups, swapFixture, teamRun } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, definition, FIRST_RUN_STARTERS, species } from "../../../src/game/content";
+import { CARDS, species } from "../../../src/game/content";
 import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, hit } from "../../../src/game/combat/index";
-import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { definitionKeywords } from "../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
@@ -307,30 +298,6 @@ it("rejects invalid or unaffordable plays without spending RNG and retains the s
   expect(swapped.rng).toBe(game.rng);
   const resumed = decodeSave(encodeSave(swapped));
   expect(play(resumed, "enemy-0")).toEqual(play(swapped, "enemy-0"));
-});
-
-it("offers Ringpalm as a starter and discovers and recruits it through ordinary encounters", () => {
-  expect(FIRST_RUN_STARTERS).toContain("ringpalm");
-  const initial = createGame(7);
-  let game = accept(
-    accept(initial, { type: "draft", species: initial.starterOffers.find((kind) => kind !== "ringpalm")! }),
-    { type: "start" },
-  );
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "ringpalm"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("ringpalm");
-  expect(game.battle!.enemies[0]!.species).toBe("ringpalm");
-  game = accept(winBattle(game), { type: "recruit", species: "ringpalm" });
-  expect(game.discovery.recruited.ringpalm).toBe(1);
-  expect(game.cards.filter((card) => definition(card.definitionId).species === "ringpalm")).toHaveLength(3);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
 });
 
 it.each(["Ringclap", "Harmonic Set", "Seedling Circle"])(

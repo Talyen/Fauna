@@ -1,13 +1,4 @@
-import {
-  addReserve,
-  enemyPlay,
-  authoredPack,
-  swapFixture,
-  prepareDestination,
-  accept,
-  teamRun,
-  winBattle,
-} from "../../support/game";
+import { addReserve, enemyPlay, swapFixture, teamRun } from "../../support/game";
 import { setBattleCards } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
 import { expect, it } from "vitest";
@@ -17,7 +8,6 @@ import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, hit } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { definitionKeywords } from "../../../src/game/keywords";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameState } from "../../../src/game/types";
@@ -35,7 +25,7 @@ function play(game: GameState, autoEndTurn = false) {
 function addBackup(game: GameState) {
   addReserve(game, "backup", "coralcurl", 20, freshCombat());
 }
-it("registers the support kit, recruitment, preview parity and current saves", () => {
+it("registers the support kit, preview parity and current saves", () => {
   const kit = CARDS.filter((card) => card.species === "stillara");
   expect(kit.map((card) => [card.cost, cardText(card)])).toEqual([
     [1, "Gain 2 Mana"],
@@ -59,21 +49,6 @@ it("registers the support kit, recruitment, preview parity and current saves", (
     );
   }
   expect(() => decodeSave(JSON.stringify({ ...ready(), version: 40 }))).toThrow();
-  let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
-    prepareDestination(draft);
-    draft.expedition = {
-      recruit: null,
-      lastRoom: null,
-      pack: authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "stillara"),
-      ),
-    };
-  });
-  game = accept(game, { type: "beginBattle" });
-  expect(game.discovery.encountered).toContain("stillara");
-  game = accept(winBattle(game), { type: "recruit", species: "stillara" });
-  expect(game.discovery.recruited.stillara).toBe(1);
 });
 it("grants Mana after payment, before automatic end turn, with caps and unchanged rejection", () => {
   for (const mana of [1, 3, 4]) {

@@ -392,12 +392,17 @@ export function swapFromCard(
   const row = allied ? state.team : state.battle!.enemies;
   // A repeat cannot swap an actor that already left the deployed formation.
   if (!row.some((unit) => unit.id === actor.id)) return;
-  const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
+  if (allied && backupId !== undefined) {
+    const incoming = state.reserves.find((unit) => unit.id === backupId && unit.health > 0);
+    if (incoming) {
+      swapBackup(state, actor.id, incoming.id, events, true);
+      return incoming;
+    }
+    if (state.reserves.some((unit) => unit.health > 0)) return;
+  }
+  const backup = allied && backupId === undefined ? state.reserves.filter((unit) => unit.health > 0) : [];
   if (backup.length) {
-    const incoming =
-      backupId !== undefined
-        ? backup.find((unit) => unit.id === backupId)
-        : backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)];
+    const incoming = backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)];
     if (!incoming) return;
     swapBackup(state, actor.id, incoming.id, events, true);
     return incoming;

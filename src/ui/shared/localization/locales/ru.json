@@ -605,6 +605,18 @@
     "sourceHash": "1e7bb9a690346fa150c70c53428d8873c5d6d35218d86641242905cb02c74166",
     "text": "Попадания <keyword0>горением</keyword0> накладывают вдвое больше <keyword1>горения</keyword1> на врагов с <keyword2>блоком</keyword2>"
   },
+  "content.boon.chime-crucible.name": {
+    "reviewed": true,
+    "source": "Chime Crucible",
+    "sourceHash": "e689b4e57d3b2e9fea89a9e2ae3ee079902cc0534057e669eeeef81faba4962a",
+    "text": "Звонкий тигель"
+  },
+  "content.boon.chime-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also apply {{value0}} <keyword1>Burn</keyword1>",
+    "sourceHash": "ee4759ca6641dd8225d3bd087f809e8e1bec604186a8d2355eecbabb2ca53205",
+    "text": "Удары с <keyword0>оглушением</keyword0> также накладывают {{value0}} <keyword1>горения</keyword1>"
+  },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
     "source": "Chromatic Viol",
@@ -760,6 +772,18 @@
     "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
     "sourceHash": "444616929c97baf399296293d9aa3abecf8b55ca393299d64f0c0c8a8d7eefed",
     "text": "<keyword0>Еда</keyword0> также восстанавливает <keyword1>здоровье</keyword1> в размере <keyword2>блока</keyword2> цели"
+  },
+  "content.boon.crystal-harp.name": {
+    "reviewed": true,
+    "source": "Crystal Harp",
+    "sourceHash": "f080d4c896e44ab9ab9806faa03240c4dd009605b334783e8b06d023cf428fa1",
+    "text": "Хрустальная арфа"
+  },
+  "content.boon.crystal-harp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits grant you <keyword1>Reflect</keyword1>",
+    "sourceHash": "452fe1d436b5ccb1f302991a5812e949e30fdf7860a1e0a5e9c25f7da9d4c1a5",
+    "text": "Удары с <keyword0>оглушением</keyword0> дают вам <keyword1>отражение</keyword1>"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1073,6 +1097,18 @@
     "sourceHash": "85144d34b7dec396fc944e9d98f003a036e7e94004faf75c3b783a16942f950a",
     "text": "<keyword0>Блок</keyword0> не может уменьшиться от угасания ниже <keyword1>брони</keyword1>"
   },
+  "content.boon.gilt-gauntlet.name": {
+    "reviewed": true,
+    "source": "Gilt Gauntlet",
+    "sourceHash": "f1acf0622bd2cb0310f9a78219b1111f7dcca937a48028a8c260b81356f172b0",
+    "text": "Позолоченная перчатка"
+  },
+  "content.boon.gilt-gauntlet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits steal {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "cace26476f4527bccb1c5ffbbbd06e352fde015de0666e47748444bd18a9540c",
+    "text": "<keyword0>Физические</keyword0> удары крадут {{value0}} <keyword1>брони</keyword1>"
+  },
   "content.boon.glassleaf-shield.name": {
     "reviewed": true,
     "source": "Glassleaf Shield",
@@ -1361,6 +1397,18 @@
     "sourceHash": "de54f5e54b999180f316bb8a29632f1bbe190774e1d764f2a2e99fd4a5dd24ab",
     "text": "<keyword0>Рассеивание</keyword0> эффекта отравленного врага заставляет его <keyword1>яд</keyword1> нанести урон"
   },
+  "content.boon.memory-cairn.name": {
+    "reviewed": true,
+    "source": "Memory Cairn",
+    "sourceHash": "a343fcfa7725ac12132f01ba577fb2e9ccef38452e8f2bdc6f18d67e9e8fa281",
+    "text": "Курган памяти"
+  },
+  "content.boon.memory-cairn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrected</keyword0> allies <keyword1>Cleanse</keyword1> all harmful effects",
+    "sourceHash": "5db320670a6fbaf089b04f324e00092bc8e460cffaee6d94cdf290c136364f42",
+    "text": "<keyword0>Воскрешённые</keyword0> союзники <keyword1>очищаются</keyword1> от всех вредных эффектов"
+  },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
     "source": "Merchant's Favor",
@@ -1565,6 +1613,30 @@
     "sourceHash": "f59ed8b3d6ac0b8fef03ab74497e16469cd60d7d0213958b29c69d1948e3312d",
     "text": "<keyword0>Очищенные</keyword0> эффекты возвращаются к своему источнику"
   },
+  "content.boon.orbit-tongs.name": {
+    "reviewed": true,
+    "source": "Orbit Tongs",
+    "sourceHash": "7a351bd4ce939e3d314a6cbbdb4d794dc3c78e4e4a62067875ad40b47a89bf2d",
+    "text": "Орбитальные щипцы"
+  },
+  "content.boon.orbit-tongs.rule": {
+    "reviewed": true,
+    "source": "Stealing <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies",
+    "sourceHash": "54f14022f6ac8db7dff0a8143953365c8fe58b8179580afef560d569a4fd4f43",
+    "text": "Кража <keyword0>брони</keyword0> даёт другим союзникам {{value0}} <keyword1>блока</keyword1>"
+  },
+  "content.boon.orchard-ladder-charm.name": {
+    "reviewed": true,
+    "source": "Orchard Ladder Charm",
+    "sourceHash": "9d811827532420b823f89de0e728ce57f6a94cf409b50b0ba9b8b0b91fa70e98",
+    "text": "Амулет садовой лестницы"
+  },
+  "content.boon.orchard-ladder-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> restores {{value0}} <keyword1>Health</keyword1> to backup allies",
+    "sourceHash": "2d23af699b1d1d2515a610e6839098319cd7ff171f095e12d23d08fbb1ac78a1",
+    "text": "<keyword0>Еда</keyword0> восстанавливает {{value0}} <keyword1>здоровья</keyword1> союзникам в запасе"
+  },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
     "source": "Origami Staircase",
@@ -1732,6 +1804,18 @@
     "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
     "sourceHash": "54919bbd1d68934ea488d60d7e6224b4be9702133f10ce5e7a4c00d7c750f8c2",
     "text": "<keyword0>Рассеивание</keyword0> вражеских <keyword1>шипов</keyword1> крадёт их для вас"
+  },
+  "content.boon.pumice-glass-inkwell.name": {
+    "reviewed": true,
+    "source": "Pumice Glass Inkwell",
+    "sourceHash": "4753ae98b21ee428381557990665694ec2967d2244d32113817e02bf05698b13",
+    "text": "Чернильница из пемзового стекла"
+  },
+  "content.boon.pumice-glass-inkwell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> <keyword2>Blinds</keyword2> the enemy that applied it",
+    "sourceHash": "681fef41557a81e6ab4bbe0f2ad3f7f30404440a7a296fd2d51f3af689f5c4cc",
+    "text": "<keyword0>Очищение</keyword0> от <keyword1>горения</keyword1> <keyword2>ослепляет</keyword2> наложившего его врага"
   },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
@@ -2069,6 +2153,18 @@
     "sourceHash": "6e5a55795a0bdfebd83fb02572d0c65532bcd436d80ed860db368aeb27175611",
     "text": "Розыгрыш <keyword0>еды</keyword0> даёт всем союзникам {{value0}} <keyword1>брони</keyword1>"
   },
+  "content.boon.spore-trivet.name": {
+    "reviewed": true,
+    "source": "Spore Trivet",
+    "sourceHash": "d28db203d21c7581bcb6bb27ef435a14c35829d3d420ddb7d4d7102df87e790b",
+    "text": "Подставка со спорами"
+  },
+  "content.boon.spore-trivet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> <keyword2>Burn</keyword2> from all allies",
+    "sourceHash": "401665f7860f07877a87bd3948a1f5044e4a55eee40305a5e5743c842f23b314",
+    "text": "<keyword0>Еда</keyword0> <keyword1>очищает</keyword1> всех союзников от <keyword2>горения</keyword2>"
+  },
   "content.boon.star-hoop.name": {
     "reviewed": true,
     "source": "Star Hoop",
@@ -2285,6 +2381,18 @@
     "sourceHash": "44a6dd9d13ce331c0a73d6e61fdd7ff34a944a19b254e1ddf86870000406c68d",
     "text": "<keyword0>Еда</keyword0> даёт своим целям {{value0}}% <keyword1>уклонения</keyword1> до их следующего хода"
   },
+  "content.boon.victory-laurel.name": {
+    "reviewed": true,
+    "source": "Victory Laurel",
+    "sourceHash": "e6ab4a5ca96805a56d35dd4be92efb2a5db457236b335970ed43b5ab7d514da7",
+    "text": "Лавр победы"
+  },
+  "content.boon.victory-laurel.rule": {
+    "reviewed": true,
+    "source": "Defeating an enemy restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "20a3e9a021d267155b47f4440a698e0f9d1f6627606ec481ac993c471b610ef9",
+    "text": "Победа над врагом восстанавливает {{value0}} <keyword0>маны</keyword0>"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -2296,6 +2404,18 @@
     "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
     "sourceHash": "464a2abc05f1419bc3d0aadb55b580d6e888dce41f89b758b857ec35d24ad37d",
     "text": "Союзники на пороге смерти могут действовать несмотря на <keyword0>оглушение</keyword0> и <keyword1>заморозку</keyword1>"
+  },
+  "content.boon.vow-candle.name": {
+    "reviewed": true,
+    "source": "Vow Candle",
+    "sourceHash": "8a108ab78c0877700ece517aeec0d5b753b6903953a0254562b86981348cdfbf",
+    "text": "Свеча обета"
+  },
+  "content.boon.vow-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> cannot cause <keyword1>Light</keyword1> attacks to miss",
+    "sourceHash": "b9f7774afceb11b65ead0fa9cbc8a13d1159657381e72803018b6bcd1e6c29fd",
+    "text": "<keyword0>Ослепление</keyword0> не мешает попадать атаками <keyword1>света</keyword1>"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,

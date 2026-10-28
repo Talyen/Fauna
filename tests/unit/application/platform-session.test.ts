@@ -1,3 +1,4 @@
+import { deferred } from "../../support/deferred";
 import { expect, it, vi } from "vitest";
 import { createSession as createSeededSession } from "../../../src/application/session";
 import type { Platform } from "../../../src/platform/ports";
@@ -115,10 +116,7 @@ it.each(["quit", "dispose"] as const)(
   "keeps newer local saves and bounded %s independent of stalled cloud metadata",
   async (close) => {
     vi.useFakeTimers();
-    let release!: () => void;
-    const gate = new Promise<void>((resolve) => {
-      release = resolve;
-    });
+    const { promise: gate, resolve: release } = deferred();
     const metadata = vi.fn(async () => {
       await gate;
     });

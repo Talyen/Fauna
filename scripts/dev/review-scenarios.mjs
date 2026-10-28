@@ -71,6 +71,10 @@ export const SCENARIOS = [
   "acrobat-boons-2",
   "acrobat-boons-3",
   "acrobat-boons-4",
+  "orchard-boons-1",
+  "orchard-boons-2",
+  "orchard-boons-3",
+  "orchard-boons-4",
   "seal-boons-1",
   "seal-boons-2",
   "seal-boons-3",
@@ -152,6 +156,16 @@ export async function reviewScenario(server, name) {
       ["skyiron-horseshoe", "nebula-weld-clamp", "clover-measuring-scoop"],
       ["treaty-teapot", "dawn-gong", "acrobat-top"],
       ["remembrance-wreath"],
+    ];
+    game = bossReward();
+    game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };
+  }
+  if (name.startsWith("orchard-boons-")) {
+    const groups = [
+      ["orchard-ladder-charm", "spore-trivet", "victory-laurel"],
+      ["gilt-gauntlet", "pumice-glass-inkwell", "chime-crucible"],
+      ["crystal-harp", "orbit-tongs", "memory-cairn"],
+      ["vow-candle"],
     ];
     game = bossReward();
     game = { ...game, reward: { ...game.reward, boons: groups[Number(name.at(-1)) - 1] } };

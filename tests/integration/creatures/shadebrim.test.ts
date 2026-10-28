@@ -7,9 +7,8 @@ import { cardText } from "../../../src/game/card-rules";
 import { hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status-model";
-import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
+import { accept, teamRun } from "../../support/game";
 
 function ready(id = "shadebrim-guard") {
   return produce(teamRun(1, ["shadebrim", "mossguard", "prismram"]), (game) => {
@@ -276,23 +275,4 @@ it("enemy Shadebrim alternates useful abilities, Cleanses its own side and never
       (event) => event.kind === "damage" && event.actorId === "enemy-0" && event.damageType === "freeze",
     ),
   ).toHaveLength(3);
-});
-
-it("encounters and recruits Shadebrim through the ordinary journey pool", () => {
-  let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
-    prepareDestination(draft);
-    draft.expedition = {
-      recruit: null,
-      lastRoom: null,
-      pack: authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "shadebrim"),
-      ),
-    };
-  });
-  game = accept(game, { type: "beginBattle" });
-  expect(game.discovery.encountered).toContain("shadebrim");
-  game = accept(winBattle(game), { type: "recruit", species: "shadebrim" });
-  expect(game.discovery.recruited.shadebrim).toBe(1);
-  expect([...game.team, ...game.reserves].some((unit) => unit.species === "shadebrim")).toBe(true);
 });

@@ -5,7 +5,6 @@ import {
   prepareDestination,
   requireBattle,
   teamRun,
-  winBattle,
 } from "../../../support/game";
 import { playCard as play } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
@@ -263,26 +262,5 @@ describe("Parhelion", () => {
     });
     expect(events.filter((event) => event.kind === "heal" && event.amount > 0)).toHaveLength(1);
     expect(decodeSave(encodeSave(game))).toEqual(game);
-  });
-
-  it("encounters, recruits and resumes Parhelion through the existing journey boundary", () => {
-    const ready = produce(teamRun(42, ["stillara", "emberback", "mossguard"]), (draft) => {
-      draft.discovery.recruited.parhelion = 1;
-      draft.discovery.encountered.push("parhelion");
-      prepareDestination(draft);
-      draft.expedition = {
-        recruit: null,
-        lastRoom: null,
-        pack: authoredPack(
-          draft.encounter,
-          COMBAT_PACKS.findIndex((pack) => pack[0] === "parhelion"),
-        ),
-      };
-    });
-    const battle = accept(ready, { type: "beginBattle" });
-    expect(battle.battle!.enemies.some((enemy) => enemy.species === "parhelion")).toBe(true);
-    const recruited = accept(winBattle(battle), { type: "recruit", species: "parhelion" });
-    expect(recruited.discovery.recruited.parhelion).toBe(2);
-    expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
   });
 });

@@ -508,6 +508,12 @@ export function* removeEffects(
         events,
         effect.turns,
       );
+  if (state && !isEnemy(unit) && unit.health > 0 && state.boons.includes("pumice-glass-inkwell")) {
+    const burn = returned.find((effect) => effect.status === "burn");
+    const enemy =
+      burn && findLivingBattlefield(state, "enemy", (candidate) => candidate.id === burn.sourceId);
+    if (enemy) yield* reaction("applyBlind", state, unit, enemy, events);
+  }
   if (state)
     for (const effect of returned)
       if (effect.status === "poison")
