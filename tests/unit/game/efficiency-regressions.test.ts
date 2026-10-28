@@ -6,7 +6,7 @@ import { createSession } from "../../../src/application/session";
 import { tickStatuses, grantStatus } from "../../../src/game/combat/index";
 import { recruitLineup, swapFromCard } from "../../../src/game/team";
 import { enemyReflectionRecipients } from "../../../src/game/battlefield";
-import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
+import { ordinaryAttackEvaluator, ordinaryAttackFacts } from "../../../src/game/ability-facts";
 import { freshCombat } from "../../../src/game/combat/state";
 import { enemyCardValue, chooseEnemyCard } from "../../../src/game/combat/enemy-policy";
 import { swapBackup } from "../../../src/game/team";
@@ -63,6 +63,7 @@ import { feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
 import type { GameEvent } from "../../../src/game/types";
 import { BOONS, definition, findBoon, speciesCards, SPECIES, TALENTS } from "../../../src/game/content";
 import { capabilities, offenseValue } from "../../../src/application/team-policy";
+import { boonValue } from "../../../src/tooling/journey-policy";
 import {
   availablePlays,
   hasAvailablePlay,
@@ -1524,5 +1525,50 @@ it("creates only the Pearls admitted by card capacity and safe copy serials", ()
     createPearls(state, state.team[0]!, "player", 3, events);
     expect(state).toEqual(before);
     expect(events).toHaveLength(1);
+  }
+});
+
+it("keeps decision-local attack and draw facts fresh across battle changes", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram", "reedstag"])));
+  const actor = state.team[0]!;
+  const def = definition("prismram-attack");
+  if (def.effect !== "attack") throw new Error("Expected attack");
+  const evaluate = ordinaryAttackEvaluator(state, actor, def, 12, 1);
+  for (const enemy of state.battle.enemies)
+    expect(evaluate(enemy)).toEqual(ordinaryAttackFacts(state, actor, def, 12, enemy, 1));
+  const play = availablePlays(state)[0]!;
+  const draw = { kind: "draw", amount: 1 } as const;
+  const facts = battleBenefitFacts(state);
+  expect(facts.drawAvailable(play, draw)).toBe(drawHasAnotherCard(state, play.card, draw));
+  state.battle.draw = [];
+  expect(battleBenefitFacts(state).drawAvailable(play, draw)).toBe(false);
+});
+
+it("keeps authored kit traits and live boon scoring aligned", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram"])));
+  state.boons = [];
+  for (const { id } of SPECIES) {
+    const cards = speciesCards(id);
+    const hasExtra = (kind: string) =>
+      cards.some((card) => card.effects?.some((extra) => extra.kind === kind));
+    const blind = cards.some((card) => card.effect === "teamBlind") || hasExtra("blind");
+    const thorns = cards.some(
+      (card) =>
+        card.effect === "dreamDouble" ||
+        card.effect === "teamProtection" ||
+        card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"),
+    );
+    const healing = cards.some((card) => card.effect === "heal") || hasExtra("heal");
+    const purge =
+      capabilities(state, [id]).has("purge") ||
+      cards.some((card) => card.effect === "attack" && card.purgeThorns);
+    expect(boonValue(state, "moonveil-mask", [id])).toBe(blind ? 50 : 0);
+    expect(boonValue(state, "rosewax-seal", [id])).toBe(thorns ? 60 : 0);
+    expect(boonValue(state, "ripple-mirror", [id])).toBe(hasExtra("reflect") ? 60 : 0);
+    expect(boonValue(state, "sleepy-acorn", [id])).toBe(healing ? 50 : 0);
+    expect(boonValue(state, "pruning-crescent", [id])).toBe(purge ? 50 : 0);
+    state.boons = ["ironwood-buckler"];
+    expect(boonValue(state, "rosewax-seal", [id])).toBe(60);
+    state.boons = [];
   }
 });

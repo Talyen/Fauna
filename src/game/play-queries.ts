@@ -140,23 +140,33 @@ export interface AvailablePlay extends PlayableCard {
 export function hasAvailablePlay(state: BattleState): boolean {
   if (!state.battle.hand.length || pendingReplacement(state)) return false;
   let cards: Map<string, Card> | undefined;
-  let lastDefinition: CardDefinition | undefined;
-  let lastRecipients = false;
+  let firstDefinition: CardDefinition | undefined;
+  let firstRecipients = false;
+  let otherRecipients: Map<CardDefinition, boolean> | undefined;
   const hasRecipients = (def: CardDefinition) => {
-    if (lastDefinition !== def) {
-      lastDefinition = def;
-      lastRecipients = hasChosenRecipient(state, def);
+    if (!firstDefinition) {
+      firstDefinition = def;
+      return (firstRecipients = hasChosenRecipient(state, def));
     }
-    return lastRecipients;
+    if (firstDefinition === def) return firstRecipients;
+    otherRecipients ??= new Map();
+    let result = otherRecipients.get(def);
+    if (result === undefined) otherRecipients.set(def, (result = hasChosenRecipient(state, def)));
+    return result;
   };
-  let lastActorId: string | undefined;
-  let lastRecoverable = false;
+  let firstActorId: string | undefined;
+  let firstRecoverable = false;
+  let otherRecoverable: Map<string, boolean> | undefined;
   const canRecover = (actorId: string) => {
-    if (lastActorId !== actorId) {
-      lastActorId = actorId;
-      lastRecoverable = hasDiscardDrawCard(state, actorId);
+    if (firstActorId === undefined) {
+      firstActorId = actorId;
+      return (firstRecoverable = hasDiscardDrawCard(state, actorId));
     }
-    return lastRecoverable;
+    if (firstActorId === actorId) return firstRecoverable;
+    otherRecoverable ??= new Map();
+    let result = otherRecoverable.get(actorId);
+    if (result === undefined) otherRecoverable.set(actorId, (result = hasDiscardDrawCard(state, actorId)));
+    return result;
   };
   for (let index = 0; index < state.battle.hand.length; index++) {
     const id = state.battle.hand[index]!;

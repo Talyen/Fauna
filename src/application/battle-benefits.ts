@@ -4,7 +4,7 @@ import {
   foodDodgeBenefit,
   foodWaffleBenefit,
   healingBenefit,
-  ordinaryAttackFacts,
+  ordinaryAttackEvaluator,
   type OrdinaryHit,
 } from "../game/ability-facts";
 import {
@@ -27,6 +27,7 @@ import {
 import { actionValue, cardCost, manaCapacity } from "../game/ability-rules";
 import { healingValue, restoration } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
+import type { SupplementalEffect } from "../game/rules/ability-types";
 import type { BattleState, Creature, Enemy } from "../game/types";
 
 export const BATTLE_FINISH_PRIORITY = 1_000_000_000;
@@ -103,6 +104,7 @@ export function battleBenefitFacts(state: BattleState) {
   let enemies: Enemy[] | undefined;
   let allies: (Creature | Enemy)[] | undefined;
   let recoverable: Map<string | undefined, boolean> | undefined;
+  let drawAvailability: Map<string, boolean> | undefined;
   return {
     get injuredAllies() {
       return injuredAllies();
@@ -120,6 +122,16 @@ export function battleBenefitFacts(state: BattleState) {
       }
       return result;
     },
+    drawAvailable: (play: AvailablePlay, effect: SupplementalEffect & { kind: "draw" | "drawKeyword" }) => {
+      const key = effect.kind === "draw" ? "draw" : effect.keyword;
+      drawAvailability ??= new Map();
+      let result = drawAvailability.get(key);
+      if (result === undefined) {
+        result = drawHasAnotherCard(state, play.card, effect);
+        drawAvailability.set(key, result);
+      }
+      return result;
+    },
     livingEnemies: () => (enemies ??= livingBattlefield(state, "enemy")),
     livingAllies: () => (allies ??= livingBattlefield(state, "player")),
     healingAllies: healingTargetsForPlay,
@@ -127,17 +139,21 @@ export function battleBenefitFacts(state: BattleState) {
 }
 
 /** Draw rewards require an actual card in the draw pile. */
-function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
+function usefulDraw(play: AvailablePlay, facts: ReturnType<typeof battleBenefitFacts>): boolean {
   return !!play.def.effects?.some(
     (effect) =>
       (effect.kind === "draw" || effect.kind === "drawKeyword") &&
       effect.amount > 0 &&
-      drawHasAnotherCard(state, play.card, effect),
+      facts.drawAvailable(play, effect),
   );
 }
 
-function ordinaryDrawBenefit(state: BattleState, play: AvailablePlay, amount: number): boolean {
-  return drawHasAnotherCard(state, play.card, { kind: "draw", amount });
+function ordinaryDrawBenefit(
+  play: AvailablePlay,
+  facts: ReturnType<typeof battleBenefitFacts>,
+  amount: number,
+): boolean {
+  return facts.drawAvailable(play, { kind: "draw", amount });
 }
 
 /** A spent primary effect can still justify a play through healing or a useful draw. */
@@ -166,7 +182,7 @@ function supplementalScore(
     state.battle.mana - cardCost(play.card, state, play.def, play.actor) < manaCapacity(state)
   )
     return priorities.healing + amount;
-  return usefulDraw(state, play) ? priorities.standardUtility + amount : 0;
+  return usefulDraw(play, facts) ? priorities.standardUtility + amount : 0;
 }
 
 /** Score visible benefits without sampling hidden outcomes or running combat. */
@@ -231,9 +247,10 @@ export function battleBenefits(
       const enemies = facts.livingEnemies();
       const cost = cardCost(card, state, def, actor);
       let remaining = 0;
+      const evaluateAttack = ordinaryAttackEvaluator(state, actor, def, value, cost);
       const attacks = enemies.map((enemy) => {
         if (!enemy.minion) remaining++;
-        return { enemy, outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cost) };
+        return { enemy, outcomes: evaluateAttack(enemy) };
       });
       const cleanse = def.effects?.some(
         (effect) =>
@@ -308,7 +325,7 @@ export function battleBenefits(
           facts.livingEnemies().some((enemy) => !enemy.combat.blind)
         )
           return support("utility");
-        return support(usefulDraw(state, play) ? "standardUtility" : "none");
+        return support(usefulDraw(play, facts) ? "standardUtility" : "none");
       }
       const recipients =
         def.target === "self"
@@ -370,7 +387,7 @@ export function battleBenefits(
       const blinded = countMatching(allies(), (unit) => unit.combat?.blind);
       return blinded > 0
         ? controlRemoval(blinded)
-        : def.draw && ordinaryDrawBenefit(state, play, value)
+        : def.draw && ordinaryDrawBenefit(play, facts, value)
           ? support("standardUtility", value)
           : controlRemoval(0);
     }
@@ -431,7 +448,7 @@ export function battleBenefits(
       return support(
         healing() > 0
           ? "healing"
-          : ordinaryDrawBenefit(state, play, value) ||
+          : ordinaryDrawBenefit(play, facts, value) ||
               state.battle.minions?.some(
                 (unit) => unit.minion.ownerId === actor.id && unit.health > 0 && !controlled(unit),
               )
@@ -488,7 +505,7 @@ export function battleBenefits(
           ? "utility"
           : facts.healingOnPlay
             ? "healing"
-            : usefulDraw(state, play)
+            : usefulDraw(play, facts)
               ? "utility"
               : "none",
       );

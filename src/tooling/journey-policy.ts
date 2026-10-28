@@ -2,7 +2,7 @@ import { canBuyTalent, starterCount, MAX_CREATURE_STARS } from "../game/progress
 import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/destinations";
 import { rankedBattleChoices } from "../application/battle-policy";
 import { TALENTS, BOONS, species, speciesCards, type BoonId } from "../game/content";
-import { capabilities, coverageScore, offenseValue } from "../application/team-policy";
+import { capabilities, coverageScore, offenseValue, scoreCapabilities } from "../application/team-policy";
 import { recruitLineup } from "../game/team";
 import { createBattleActor } from "../application/battle-actor";
 import type { Command, GameState } from "../game/types";
@@ -18,9 +18,42 @@ function livingRosterKinds(state: GameState) {
     for (const unit of row) if (unit.health > 0) kinds.push(unit.species);
   return kinds;
 }
+type KitTraits = {
+  effects: Set<ReturnType<typeof speciesCards>[number]["effect"]>;
+  blind: boolean;
+  thorns: boolean;
+  reflection: boolean;
+  healing: boolean;
+  purgeThorns: boolean;
+};
+const kitTraits = new Map<GameState["team"][number]["species"], KitTraits>();
+function traitsFor(kind: GameState["team"][number]["species"]): KitTraits {
+  const cached = kitTraits.get(kind);
+  if (cached) return cached;
+  const traits: KitTraits = {
+    effects: new Set(),
+    blind: false,
+    thorns: false,
+    reflection: false,
+    healing: false,
+    purgeThorns: false,
+  };
+  for (const card of speciesCards(kind)) {
+    traits.effects.add(card.effect);
+    if (card.effect === "attack" && card.purgeThorns) traits.purgeThorns = true;
+    for (const extra of card.effects ?? []) {
+      if (extra.kind === "blind") traits.blind = true;
+      if (extra.kind === "status" && extra.status === "thorns") traits.thorns = true;
+      if (extra.kind === "reflect") traits.reflection = true;
+      if (extra.kind === "heal") traits.healing = true;
+    }
+  }
+  kitTraits.set(kind, traits);
+  return traits;
+}
+
 /** Prepare roster facts once when comparing multiple Boons. */
-function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
-  const has = capabilities(state, kinds);
+function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = capabilities(state, kinds)) {
   let healing: boolean | undefined;
   const canHeal = () =>
     (healing ??=
@@ -28,14 +61,15 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       has.has("leech") ||
       state.boons.includes("bone-charm") ||
       state.boons.includes("sin-eaters-lantern"));
-  const cards = kinds.flatMap(speciesCards);
-  const effects = new Set<(typeof cards)[number]["effect"]>();
-  for (const card of cards) effects.add(card.effect);
-  const effect = (kind: (typeof cards)[number]["effect"]) => effects.has(kind);
+  let traits: KitTraits[] | undefined;
+  const kits = () => (traits ??= kinds.map(traitsFor));
+  const effect = (kind: ReturnType<typeof speciesCards>[number]["effect"]) =>
+    kits().some((kit) => kit.effects.has(kind));
   let blind: boolean | undefined;
-  const hasBlind = () =>
-    (blind ??=
-      effect("teamBlind") || cards.some((card) => card.effects?.some((extra) => extra.kind === "blind")));
+  const hasBlind = () => (blind ??= effect("teamBlind") || kits().some((kit) => kit.blind));
+  let food: boolean | undefined;
+  const createsFood = () =>
+    (food ??= effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia"));
   let livingBackup: boolean | undefined;
   const hasLivingBackup = () => (livingBackup ??= state.reserves.some((unit) => unit.health > 0));
   let swapping: boolean | undefined;
@@ -47,12 +81,9 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       effect("dreamDouble") ||
       effect("teamProtection") ||
       state.boons.includes("ironwood-buckler") ||
-      cards.some((card) =>
-        card.effects?.some((extra) => extra.kind === "status" && extra.status === "thorns"),
-      ));
+      kits().some((kit) => kit.thorns));
   let reflection: boolean | undefined;
-  const hasReflection = () =>
-    (reflection ??= cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")));
+  const hasReflection = () => (reflection ??= kits().some((kit) => kit.reflection));
   return (boon: BoonId): number => {
     switch (boon) {
       case "sandfold-parasol":
@@ -68,26 +99,16 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "bargain-scales":
         return state.encounter < 6 ? 40 : 0;
       case "dragons-toothpick":
-        return (effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")) &&
-          has.has("attack")
-          ? 60
-          : 0;
+        return createsFood() && has.has("attack") ? 60 : 0;
       case "sleepy-acorn":
-        return effect("heal") || cards.some((card) => card.effects?.some((extra) => extra.kind === "heal"))
-          ? 50
-          : 0;
+        return effect("heal") || kits().some((kit) => kit.healing) ? 50 : 0;
       case "cuckoo-whistle":
       case "nightbloom-bell":
         return 40;
       case "orchard-ladder-charm":
-        return (effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")) &&
-          hasLivingBackup()
-          ? 60
-          : 0;
+        return createsFood() && hasLivingBackup() ? 60 : 0;
       case "spore-trivet":
-        return effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")
-          ? 50
-          : 0;
+        return createsFood() ? 50 : 0;
       case "victory-laurel":
         return 70;
       case "gilt-gauntlet":
@@ -142,10 +163,7 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "rootspool":
         return hasThorns() ? 60 : 0;
       case "crown-waffle-iron":
-        return (effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")) &&
-          has.has("block")
-          ? 60
-          : 0;
+        return createsFood() && has.has("block") ? 60 : 0;
       case "beeswax-crown":
         return has.has("armor") ? 60 : 0;
       case "overflow-cup":
@@ -369,9 +387,7 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
       case "briar-racquet":
         return hasThorns() ? 50 : 0;
       case "pruning-crescent":
-        return has.has("purge") || cards.some((card) => card.effect === "attack" && card.purgeThorns)
-          ? 50
-          : 0;
+        return has.has("purge") || kits().some((kit) => kit.purgeThorns) ? 50 : 0;
       case "honeycomb-frame":
         return has.has("armor") ? 50 : 0;
       case "rainkeeper":
@@ -437,59 +453,67 @@ function recruitDecision(state: GameState): JourneyDecision {
     for (const unit of units) if (unit.health > 0) kinds.push(unit.species);
     return kinds;
   };
-  const before = capabilities(state, livingKinds(roster));
-  const score = (next: typeof roster, active: typeof roster) => {
-    const nextKinds = livingKinds(next);
-    const activeUnits = active.filter((unit) => unit.health > 0);
-    const scoreBoon = state.boons.length ? boonScorer(state, nextKinds) : undefined;
+  const rosterKinds = livingKinds(roster);
+  const before = capabilities(state, rosterKinds);
+  const score = (
+    next: typeof roster,
+    active: typeof roster,
+    nextKinds: ReturnType<typeof livingKinds>,
+    nextCapabilities: ReturnType<typeof capabilities>,
+  ) => {
+    const activeKinds: ReturnType<typeof livingKinds> = [];
+    let activeOffense = 0;
+    for (const unit of active) {
+      if (!(unit.health > 0)) continue;
+      activeKinds.push(unit.species);
+      activeOffense = activeOffense + offenseValue(state, unit.species) * 300 + 200;
+    }
+    const scoreBoon = state.boons.length ? boonScorer(state, nextKinds, nextCapabilities) : undefined;
     return (
-      coverageScore(state, nextKinds) +
-      coverageScore(
-        state,
-        activeUnits.map((unit) => unit.species),
-      ) *
-        2 +
-      activeUnits.reduce((sum, unit) => sum + offenseValue(state, unit.species) * 300 + 200, 0) +
+      scoreCapabilities(nextCapabilities) +
+      coverageScore(state, activeKinds) * 2 +
+      activeOffense +
       next.reduce((sum, unit) => sum + unit.health / species(unit.species).health, 0) * 20 +
       state.boons.reduce((sum, boon) => sum + scoreBoon!(boon), 0)
     );
   };
-  const keep = score(roster, state.team);
-  const options = offers.flatMap((kind) =>
-    (roster.length === 5 ? roster : [undefined]).map((released) => {
-      const incoming = {
-        id: "candidate",
-        species: kind,
-        health: species(kind).health,
-        block: 0,
-        attacked: false,
-      };
+  const keep = score(roster, state.team, rosterKinds, before);
+  const options = offers.flatMap((kind) => {
+    const incoming = {
+      id: "candidate",
+      species: kind,
+      health: species(kind).health,
+      block: 0,
+      attacked: false,
+    };
+    // A repeated recruit can improve an owned passive even when deployment is unchanged.
+    const rankGain =
+      selected === undefined &&
+      (state.discovery.recruited[kind] ?? 0) > 0 &&
+      (state.discovery.recruited[kind] ?? 0) < MAX_CREATURE_STARS + 1
+        ? 100
+        : 0;
+    return (roster.length === 5 ? roster : [undefined]).map((released) => {
       const next = released
         ? [...roster.filter((unit) => unit !== released), incoming]
         : [...roster, incoming];
       const active = recruitLineup(state, incoming, released?.id).map((id) =>
         next.find((unit) => unit.id === id)!,
       );
-      const after = capabilities(state, livingKinds(next));
+      const nextKinds = livingKinds(next);
+      const after = capabilities(state, nextKinds);
       const lost =
         Number(before.has("armorBypass") && !after.has("armorBypass")) +
         Number(before.has("purge") && !after.has("purge"));
-      // A repeated recruit can improve an owned passive even when deployment is unchanged.
-      const rankGain =
-        selected === undefined &&
-        (state.discovery.recruited[kind] ?? 0) > 0 &&
-        (state.discovery.recruited[kind] ?? 0) < MAX_CREATURE_STARS + 1
-          ? 100
-          : 0;
       return {
         kind,
         released,
         lost,
-        score: score(next, active) + rankGain,
+        score: score(next, active, nextKinds, after) + rankGain,
         key: `${kind}:${released?.id ?? ""}`,
       };
-    }),
-  );
+    });
+  });
   const compare = (a: (typeof options)[number], b: (typeof options)[number]) =>
     a.lost - b.lost || b.score - a.score || a.key.localeCompare(b.key);
   let chosen: (typeof options)[number] | undefined;
