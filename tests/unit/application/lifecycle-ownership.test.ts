@@ -1,10 +1,10 @@
+import { deferred } from "../../support/deferred";
+import { cloudFixture } from "../../support/cloud";
 import { expect, it, vi } from "vitest";
-import { createCloud } from "../../../src/application/cloud";
 import { parseSnapshot } from "../../../src/application/cloud-snapshots";
 import { createSession } from "../../../src/application/session";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import type { CloudPort } from "../../../src/platform/ports";
 
 const initial = encodeSave(decodeSave(encodeSave(createGame(3))));
 const progress = encodeSave(
@@ -12,33 +12,6 @@ const progress = encodeSave(
     encodeSave(dispatch(createGame(3), { type: "draft", species: createGame(3).starterOffers[0]! }).state),
   ),
 );
-
-function cloudFixture() {
-  const files = new Map<string, string>();
-  let local: string | null = null;
-  const port: CloudPort = {
-    identity: vi.fn(async () => ({
-      available: true,
-      device: "a".repeat(32),
-      profile: "b".repeat(32),
-      importAvailable: false,
-    })),
-    readLocal: async () => local,
-    writeLocal: async (data) => {
-      local = data;
-    },
-    preserve: async () => {},
-    importStandalone: async () => [],
-    list: vi.fn(async () => [...files.keys()]),
-    read: async (name) => files.get(name) ?? null,
-    write: async (name, data) => {
-      files.set(name, data);
-    },
-  };
-  const install = vi.fn(async (_data: string) => {});
-  const manager = createCloud(port, () => {}, install);
-  return { port, manager, install, local: () => local };
-}
 
 it("delivers reentrant session commands to every subscriber in commit order", async () => {
   const saved: number[] = [];
@@ -77,8 +50,7 @@ it("delivers reentrant session commands to every subscriber in commit order", as
 
 it("shares Cloud startup ownership across concurrent and later callers", async () => {
   const f = cloudFixture();
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => (release = resolve));
+  const { promise: gate, resolve: release } = deferred();
   const identity = f.port.identity;
   f.port.identity = vi.fn(async () => {
     await gate;
@@ -95,7 +67,7 @@ it("shares Cloud startup ownership across concurrent and later callers", async (
     await f.manager.start(initial);
     await f.manager.flush();
     expect(f.port.identity).toHaveBeenCalledOnce();
-    expect((await parseSnapshot(f.local()!, "b".repeat(32))).payload).toBe(progress);
+    expect((await parseSnapshot(f.local.data!, "b".repeat(32))).payload).toBe(progress);
     expect(f.install).not.toHaveBeenCalled();
   } finally {
     release();

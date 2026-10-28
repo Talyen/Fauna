@@ -26,6 +26,8 @@ Keep complete scenarios with their contract owner; do not split or remove useful
 
 [Generated invariant tests](unit/game/generated-invariants.test.ts) use fixed fast-check seeds and bounded cases in the regular unit suite. They vary player choices and invalid commands across reachable checkpoints, replay each command, and check rejection and save contracts; targeted corruptions exercise save validation. They complement authored gameplay expectations and the lineup matrix, and do not establish balance or exhaustive coverage. On failure, retain fast-check's seed, path and counterexample; reproduce by temporarily passing the reported `seed` and `path` to the failing `fc.assert`, then add a focused regression for any consequential defect. Keep generated work bounded and follow the same local and CI execution policy as other tests.
 
+Cloud scenarios share [an in-memory transport fixture](support/cloud.ts), and Steam adapter scenarios share [a fake asynchronous native worker](support/steam.mjs). Each fixture owns its test-completion disposal; the Steam fixture also owns its temporary directory. Scenarios retain explicit disposal when testing shutdown, and retain their own timer restoration, blocked-operation release and failure injection. [Deferred barriers](support/deferred.ts) expose the promise and its release without scheduling or automatic cleanup.
+
 Tooling suites use `temporaryDirectory` for cleanup at test completion, including failed setup and assertions. `repository` commits explicitly supplied fixture files with local Git identity and disabled hooks; process, socket and environment teardown stays with the scenario that owns it.
 
 ## Test value and coverage
