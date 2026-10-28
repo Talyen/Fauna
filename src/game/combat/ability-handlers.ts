@@ -43,7 +43,7 @@ import {
   livingOpponents,
   type PrimaryContext,
 } from "./ability-context";
-import { unitName, type Combatant } from "./state";
+import { hasHarmfulEffects, unitName, type Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
   if (ensureCombat(unit).thorns > 0) removeEffects(unit, "purge", 1, events, state, "thorns", source);
@@ -214,7 +214,12 @@ export function executePrimary(context: PrimaryContext) {
         : (state.team.find(matches) ?? state.reserves.find(matches));
       if (recipient) {
         resurrect(recipient, actor, events);
-        if (!enemy && recipient.health > 0 && state.boons.includes("memory-cairn"))
+        if (
+          !enemy &&
+          recipient.health > 0 &&
+          hasHarmfulEffects(recipient) &&
+          state.boons.includes("memory-cairn")
+        )
           removeEffects(recipient, "cleanse", 6, events, state, undefined, actor, false);
         if (!enemy && recipient.health > 0 && state.boons.includes("remembrance-wreath")) {
           ensureCombat(recipient).negate = true;

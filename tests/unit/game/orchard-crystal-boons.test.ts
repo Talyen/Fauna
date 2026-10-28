@@ -32,6 +32,9 @@ it("Food heals living backup allies and Cleanses deployed Burn including Mana Be
   useFood(state, definition("food-mana-berries"), undefined, events);
   expect(backup.health).toBe(7);
   expect(ally.combat!.burn).toBe(0);
+  expect(
+    events.some((event) => event.kind === "status" && event.status === "cleanse" && event.amount === 0),
+  ).toBe(false);
 });
 
 it("restores Mana on an allied defeat and not on a nonfatal hit", () => {
