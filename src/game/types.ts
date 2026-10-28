@@ -3,43 +3,12 @@ import type { SpeciesId, DamageType, BoonId } from "./content";
 import type { Keyword } from "./progression";
 
 export type CombatState = NonNullable<GameState["team"][number]["combat"]>;
-export interface Creature {
-  id: string;
-  species: SpeciesId;
-  health: number;
-  block: number;
-  attacked: boolean;
-  combat?: CombatState;
-}
-export interface Card {
-  id: string;
-  definitionId: string;
-  ownerId: string | null;
-  level: number;
-  temporary?: true;
-}
-export interface EnemyDeck {
-  draw: string[];
-  hand: string[];
-  buffer: string[];
-  discard: string[];
-  mana: number;
-  pearls: number;
-}
-export interface Enemy {
+export type Creature = GameState["team"][number];
+export type Card = GameState["cards"][number];
+export type EnemyDeck = NonNullable<BattleState["battle"]["enemies"][number]["deck"]>;
+export type Enemy = BattleState["battle"]["enemies"][number] & {
   minion?: { ownerId: string; side: "player" | "enemy" };
-  deck?: EnemyDeck;
-  id: string;
-  name: string;
-  species: SpeciesId;
-  health: number;
-  maxHealth: number;
-  power: number;
-  targetId: string;
-  block: number;
-  combat: CombatState;
-  lastAbility: string | null;
-}
+};
 /** Runtime and persisted phase payloads share one structural contract. */
 export type GameState = import("zod").infer<typeof import("./state-schema").gameStateSchema>;
 export type StateAt<P extends GameState["phase"]> = Extract<GameState, { phase: P }>;

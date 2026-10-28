@@ -48,7 +48,6 @@ function SettingsReview() {
   const [session] = useState(() =>
     createSession({
       desktop: false,
-      steam: { available: false },
       saves: { readCandidates: async () => [], write: async () => {} },
     }),
   );

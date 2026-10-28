@@ -41,10 +41,7 @@ it("waits for session, essentials, fonts and minimum while deferred artwork neve
     await saved.promise;
     return [];
   });
-  session = createSession(
-    { desktop: false, steam: { available: false }, saves: { readCandidates: read, write: async () => {} } },
-    7,
-  );
+  session = createSession({ desktop: false, saves: { readCandidates: read, write: async () => {} } }, 7);
   vi.mocked(waitForFonts).mockReturnValue(fonts.promise);
   vi.mocked(warmImages).mockImplementation(async (_urls, _signal, _report, retained) => {
     if (!retained) await deferredArt.promise;
@@ -79,7 +76,6 @@ it("rejects invalid content once without waiting for the splash minimum or acces
   session = createSession(
     {
       desktop: false,
-      steam: { available: false },
       saves: { readCandidates: read, write },
     },
     7,
@@ -105,7 +101,6 @@ it("cancels preparation during loading without warming or revealing a late saved
   session = createSession(
     {
       desktop: false,
-      steam: { available: false },
       saves: {
         readCandidates: async () => {
           await saved.promise;
@@ -132,7 +127,6 @@ it("diagnoses an unexpected preparation failure without calling it invalid conte
   session = createSession(
     {
       desktop: false,
-      steam: { available: false },
       saves: { readCandidates: async () => [], write: async () => {} },
     },
     7,
@@ -150,7 +144,6 @@ it("bounds optional warmup and cancels its work while hidden and on disposal", a
   session = createSession(
     {
       desktop: false,
-      steam: { available: false },
       saves: { readCandidates: async () => [], write: async () => {} },
     },
     7,
