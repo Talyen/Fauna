@@ -55,6 +55,9 @@ export function dependencyNotices(root, lock) {
     if (
       !location.startsWith("node_modules/") ||
       location.split("/").some((part) => !part || part === "." || part === "..") ||
+      !/^node_modules\/(?:@[^/]+\/)?[^@/][^/]*(?:\/node_modules\/(?:@[^/]+\/)?[^@/][^/]*)*$/u.test(
+        location,
+      ) ||
       location.includes("\\")
     )
       throw new Error(`Invalid dependency location: ${location}`);
@@ -73,6 +76,8 @@ export function dependencyNotices(root, lock) {
       manifest.name !== manifest.name.trim()
     )
       throw new Error(`Invalid installed dependency name: ${location}`);
+    const expectedName = entry.name ?? location.slice(location.lastIndexOf("node_modules/") + 13);
+    if (manifest.name !== expectedName) throw new Error(`Dependency name differs: ${location}`);
     if (manifest.version !== entry.version) throw new Error(`Dependency version differs: ${location}`);
     const identity = `${manifest.name}@${manifest.version}`;
     const files = readdirSync(directory)
@@ -121,7 +126,10 @@ export function dependencyNotices(root, lock) {
   return { notices: sections.join("\n\n") + "\n", inventory };
 }
 
-export function generateInventory(root = ROOT) {
+export function generateInventory(root = ROOT, { runNpm = execFileSync } = {}) {
+  const output = path.join(root, "dist");
+  if (!statSync(path.join(output, "index.html"), { throwIfNoEntry: false })?.isFile())
+    throw new Error("Build the renderer before generating its inventory.");
   const lockBytes = readFileSync(path.join(root, "package-lock.json"));
   const lock = JSON.parse(lockBytes.toString("utf8"));
   const { notices, inventory } = dependencyNotices(root, lock);
@@ -131,9 +139,22 @@ export function generateInventory(root = ROOT) {
     "--package-lock-only",
     "--sbom-format=cyclonedx",
   ]);
-  const sbom = JSON.parse(execFileSync(command, args, { cwd: root, encoding: "utf8", timeout: 60_000 }));
-  if (sbom.bomFormat !== "CycloneDX" || !Array.isArray(sbom.components) || !Array.isArray(sbom.dependencies))
+  const sbom = JSON.parse(runNpm(command, args, { cwd: root, encoding: "utf8", timeout: 60_000 }));
+  if (!lockBytes.equals(readFileSync(path.join(root, "package-lock.json"))))
+    throw new Error("Dependency lock changed during inventory generation; existing evidence is preserved.");
+  if (sbom?.bomFormat !== "CycloneDX" || !Array.isArray(sbom.components) || !Array.isArray(sbom.dependencies))
     throw new Error("Incomplete dependency SBOM.");
+  const component = sbom.metadata?.component;
+  if (
+    lock.name !== "fauna" ||
+    typeof lock.version !== "string" ||
+    !lock.version.trim() ||
+    component?.name !== lock.name ||
+    component.version !== lock.version ||
+    typeof component["bom-ref"] !== "string" ||
+    !component["bom-ref"].trim()
+  )
+    throw new Error("SBOM application identity differs from the dependency lock.");
   // Electron is a build dependency, but its runtime is distributed with the game.
   const electron = lock.packages["node_modules/electron"];
   const electronRef = `electron@${electron.version}`;
@@ -162,9 +183,6 @@ export function generateInventory(root = ROOT) {
         "production npm build inputs and Electron runtime; Chromium native components retain Electron's LICENSES.chromium.html",
     },
   ];
-  const output = path.join(root, "dist");
-  if (!statSync(path.join(output, "index.html")).isFile())
-    throw new Error("Build the renderer before generating its inventory.");
   writeFileSync(path.join(output, "THIRD-PARTY-NOTICES.txt"), notices);
   writeFileSync(path.join(output, "dependencies.cdx.json"), JSON.stringify(sbom, null, 2) + "\n");
   return { dependencies: inventory.length, sbom: "dist/dependencies.cdx.json" };

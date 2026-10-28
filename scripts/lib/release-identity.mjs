@@ -2,15 +2,15 @@ import { readFileSync } from "node:fs";
 import { git } from "./git.mjs";
 const VERSION =
   /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?$/;
+export const isReleaseVersion = (value) =>
+  typeof value === "string" && value === value.trim() && VERSION.test(value);
 export function releaseVersion(root, tag) {
   const pkg = JSON.parse(readFileSync(`${root}/package.json`, "utf8"));
   const lock = JSON.parse(readFileSync(`${root}/package-lock.json`, "utf8"));
   if (pkg.name !== "fauna" || pkg.build?.appId !== "com.fauna.game" || pkg.build?.productName !== "Fauna")
     throw new Error("Unexpected Fauna release identity.");
   if (
-    typeof pkg.version !== "string" ||
-    pkg.version.trim() !== pkg.version ||
-    !VERSION.test(pkg.version) ||
+    !isReleaseVersion(pkg.version) ||
     lock.name !== pkg.name ||
     lock.version !== pkg.version ||
     lock.packages?.[""]?.name !== pkg.name ||
@@ -35,6 +35,9 @@ export function verifyBuildIdentity(record, expected) {
   if (
     record?.format !== 1 ||
     record.name !== "fauna" ||
+    !isReleaseVersion(record.version) ||
+    expected?.format !== 1 ||
+    expected.name !== "fauna" ||
     typeof record.commit !== "string" ||
     record.commit.length !== 40 ||
     !/^[a-f0-9]{40}$/u.test(record.commit) ||

@@ -364,3 +364,130 @@ describe("isolated worktrees and protected integration", { timeout: 30_000 }, ()
     expect(existsSync(task.path)).toBe(true);
   });
 });
+
+describe("CI diagnostics: summary completeness", () => {
+  const browser = (tests, overrides = {}) => ({
+    stats: { expected: 0, unexpected: 0, skipped: 0, flaky: 0 },
+    suites: [{ specs: [{ file: "journey.spec.ts", line: 12, title: "resume", tests }] }],
+    ...overrides,
+  });
+
+  it("reports TODO cases separately from passed and skipped unit tests", () => {
+    const report = { testResults: [], numPassedTests: 2, numPendingTests: 1, numTodoTests: 3 };
+    const result = summarizeReport("vitest", report);
+    expect(result).toContain("Passed: 2; failed: 0; skipped: 1");
+    expect(result).toContain("TODO: 3.");
+    expect(() => summarizeReport("vitest", { ...report, numTodoTests: -1 })).toThrow("Invalid test count");
+  });
+
+  it("does not label expected browser failures as passing tests", () => {
+    const result = summarizeReport(
+      "playwright",
+      browser(
+        [
+          { status: "expected", expectedStatus: "passed" },
+          { status: "expected", expectedStatus: "failed" },
+        ],
+        { stats: { expected: 2 } },
+      ),
+    );
+    expect(result).toContain("Passed: 1; failed: 0");
+    expect(result).toContain("Expected failures: 1.");
+  });
+
+  it("explains interrupted browser tests even without an error object", () => {
+    const result = summarizeReport(
+      "playwright",
+      browser([{ status: "unexpected", results: [{ status: "interrupted", errors: [] }] }]),
+    );
+    expect(result).toContain("Test was interrupted.");
+    expect(result).toContain("failed: 1");
+  });
+
+  it("preserves value-only runner errors and singular browser result errors", () => {
+    const result = summarizeReport(
+      "playwright",
+      browser([{ status: "unexpected", results: [{ error: { value: "Thrown <value>" } }] }], {
+        errors: [{ value: "Runner <value>" }],
+      }),
+    );
+    expect(result).toContain("Thrown &#60;value&#62;");
+    expect(result).toContain("Runner &#60;value&#62;");
+    expect(result).not.toContain("[object Object]");
+  });
+
+  it("identifies browser projects when a spec fails in multiple configurations", () => {
+    const result = summarizeReport(
+      "playwright",
+      browser([
+        { status: "unexpected", projectName: "chromium", results: [] },
+        { status: "unexpected", projectName: "firefox", results: [] },
+      ]),
+    );
+    expect(result).toContain("resume [chromium]");
+    expect(result).toContain("resume [firefox]");
+  });
+
+  it("deduplicates retry evidence and bounds the visible attachment list", () => {
+    const attachments = Array.from({ length: 12 }, (_, index) => ({ path: `trace-${index}.zip` }));
+    const result = summarizeReport(
+      "playwright",
+      browser([
+        {
+          status: "flaky",
+          results: [{ attachments }, { attachments, errors: [{ message: "Retry failed" }] }],
+        },
+      ]),
+    );
+    expect(result.match(/trace-0\.zip/g)).toHaveLength(1);
+    expect(result).toContain("trace-9.zip");
+    expect(result).not.toContain("trace-10.zip");
+    expect(result).toContain("2 more attachments in the JSON report");
+  });
+
+  it("states how many runner errors were omitted from the bounded summary", () => {
+    const result = summarizeReport(
+      "playwright",
+      browser([], {
+        errors: Array.from({ length: 13 }, (_, index) => ({ message: `runner-${index}` })),
+      }),
+    );
+    expect(result).toContain("runner-9");
+    expect(result).not.toContain("runner-10");
+    expect(result).toContain("3 more runner errors");
+  });
+
+  it("does not coerce absent or string timestamps into measured suite durations", () => {
+    const result = summarizeReport("vitest", {
+      testResults: [
+        { name: "null.ts", startTime: null, endTime: 1000 },
+        { name: "string.ts", startTime: "0", endTime: "1000" },
+        { name: "reverse.ts", startTime: 2000, endTime: 1000 },
+      ],
+    });
+    expect(result).not.toContain("Slowest test files");
+  });
+
+  it("keeps exactly the ten slowest tests with alphabetical ties without mutating input", () => {
+    const report = {
+      testResults: [
+        {
+          name: "/runner/tests/unit/timing.ts",
+          startTime: 0,
+          endTime: 1000,
+          assertionResults: Array.from({ length: 30 }, (_, index) => ({
+            title: `case-${String(index).padStart(2, "0")}`,
+            duration: Math.floor(index / 3) * 1000,
+          })).reverse(),
+        },
+      ],
+    };
+    const original = structuredClone(report);
+    const result = summarizeReport("vitest", report).split("Slowest tests:\n")[1].trim().split("\n");
+    expect(result).toHaveLength(10);
+    expect(result[0]).toContain("9.00s — tests/unit/timing.ts — case-27");
+    expect(result[1]).toContain("case-28");
+    expect(result[9]).toContain("6.00s — tests/unit/timing.ts — case-18");
+    expect(report).toEqual(original);
+  });
+});
