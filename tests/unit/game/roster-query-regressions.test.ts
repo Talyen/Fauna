@@ -105,7 +105,7 @@ it("shares immutable authored keyword views while keeping adapted effects live",
     expect(view).toEqual(definitionKeywords(definition));
     expect(Object.isFrozen(view)).toBe(true);
   }
-  const effects = [{ kind: "status" as const, status: "burn" as const, amount: 1 }];
+  const effects = [{ kind: "damage" as const, damageType: "burn" as const, amount: 1 }];
   const adapted = Object.freeze({ ...CARDS[0]!, effects });
   expect(abilityKeywords(adapted)).toContain("burn");
   effects.splice(0);

@@ -55,6 +55,30 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state)) {
     (reflection ??= cards.some((card) => card.effects?.some((extra) => extra.kind === "reflect")));
   return (boon: BoonId): number => {
     switch (boon) {
+      case "sandfold-parasol":
+        return kinds.length > 1 ? (has.has("dodge") ? 60 : 30) : 0;
+      case "ribbon-spool":
+        return kinds.length > 1 ? 50 : 0;
+      case "dawn-key":
+        return has.has("light") ? 60 : 0;
+      case "crystal-slipper":
+        return has.has("dodge") ? 60 : 30;
+      case "moonseed":
+        return has.has("light") && hasThorns() ? 60 : 0;
+      case "bargain-scales":
+        return state.encounter < 6 ? 40 : 0;
+      case "dragons-toothpick":
+        return (effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")) &&
+          has.has("attack")
+          ? 60
+          : 0;
+      case "sleepy-acorn":
+        return effect("heal") || cards.some((card) => card.effects?.some((extra) => extra.kind === "heal"))
+          ? 50
+          : 0;
+      case "cuckoo-whistle":
+      case "nightbloom-bell":
+        return 40;
       case "orchard-ladder-charm":
         return (effect("createFood") || kinds.includes("aerostat") || state.boons.includes("cornucopia")) &&
           hasLivingBackup()

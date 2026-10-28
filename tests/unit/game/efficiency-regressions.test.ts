@@ -1079,7 +1079,8 @@ it("counts Scoop effects once per status and refreshes live combat changes", () 
   const unit = state.team[0]!;
   const stats = unit.combat!;
   for (const status of harmfulStatuses) {
-    stats[status] = 3;
+    if (status === "blind") stats.blind = true;
+    else stats[status] = 3;
     const expected = harmfulStatuses.filter(
       (entry) => stats.controlled === entry || Number(stats[entry]) > 0,
     ).length;
@@ -1090,7 +1091,10 @@ it("counts Scoop effects once per status and refreshes live combat changes", () 
     harmfulStatuses.length * boonRule("clover-measuring-scoop").healing,
   );
   expect(scoopBonus(state, unit, 0)).toBe(0);
-  for (const status of harmfulStatuses) stats[status] = 0;
+  for (const status of harmfulStatuses) {
+    if (status === "blind") stats.blind = false;
+    else stats[status] = 0;
+  }
   stats.controlled = null;
   expect(scoopBonus(state, unit, 1)).toBe(0);
 });
@@ -1237,7 +1241,7 @@ it("retains replacement slots and valid battle zones for manual and card-driven 
 it("keeps validation errors for sparse tiers and equivalent reordered effects", () => {
   expect(validateCatalog().filter((issue) => issue.severity === "error")).toEqual([]);
   const sparse = structuredClone(contentCatalog);
-  delete (sparse.species[0]!.passiveTiers as unknown as unknown[])[2];
+  Reflect.deleteProperty(sparse.species[0]!.passiveTiers, 2);
   expect(validateCatalog(sparse)).toContainEqual(
     expect.objectContaining({
       id: sparse.species[0]!.id,
