@@ -47,6 +47,7 @@ These records retain dated source identities, observations and limitations. A la
 - [Outstanding review and CI repair](../task-evidence/2026-10-26-outstanding-review.md)
 - [Hosted verification repair](../task-evidence/2026-10-27-hosted-ci-repair.md)
 - [Full journey CI repair](../task-evidence/2026-10-27-full-journey-ci.md)
+- [Structured-rule pilot and focused evidence tooling](../task-evidence/2026-10-27-agent-friction.md)
 - [Stack maintenance observations](../task-evidence/2026-10-26-stack-maintenance.md)
 - [Auto-play and content fixes](../task-evidence/2026-10-26-ten-fixes.md)
 
@@ -64,6 +65,7 @@ These records retain dated source identities, observations and limitations. A la
 - [Chromatic artifacts](../task-evidence/2026-10-27-chromatic-ten-boons.md)
 - [Journey artifacts](../task-evidence/2026-10-27-journey-artifact-boons.md)
 - [Rose and hearth artifacts](../task-evidence/2026-10-27-seal-boons.md)
+- [Acrobat and hearth artifacts](../task-evidence/2026-10-27-acrobat-hearth-boons.md)
 - [Unified Thorns and new Boons](../task-evidence/unified-thorns-new-boons.md)
 
 ### Creatures
@@ -87,6 +89,8 @@ These records retain dated source identities, observations and limitations. A la
 - [Alchemy corners and tooltip treatment](../task-evidence/alchemy-corners-tooltips.md)
 - [Creature hover and passive disclosure](../task-evidence/creature-hover-passive.md)
 - [React Compiler visual review](../task-evidence/2026-10-27-react-compiler-visual-review.md)
+- [Localized screen review](../task-evidence/2026-10-27-localized-screen-review.md)
+- [Translation and artwork review](../task-evidence/2026-10-27-translation-art-review.md)
 
 ## Visual decisions and studies
 

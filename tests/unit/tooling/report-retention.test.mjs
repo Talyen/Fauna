@@ -105,3 +105,29 @@ it("dry-runs age and size selection while retaining latest success, latest failu
   expect(result.reclaimedBytes).toBe(0);
   for (const directory of [old, pass, fail]) await expect(access(directory)).resolves.toBeUndefined();
 });
+
+it("preserves malformed receipt entries without aborting maintenance", async () => {
+  const root = temporaryDirectory("fauna-malformed-retention-");
+  const now = Date.now();
+  const directory = await bundle(root, "malformed", true, now - 4 * day);
+  const receipt = path.join(directory, ".balance-retention.json");
+  const record = JSON.parse(await readFile(receipt, "utf8"));
+  record.files = [null];
+  await writeFile(receipt, JSON.stringify(record));
+  await expect(pruneBalanceReports(root, { now })).resolves.toMatchObject({ moved: [] });
+  await expect(access(directory)).resolves.toBeUndefined();
+});
+
+it("invalid receipt timestamps cannot displace the latest valid report", async () => {
+  const root = temporaryDirectory("fauna-invalid-retention-");
+  const now = Date.now();
+  const valid = await bundle(root, "valid", true, now - 4 * day);
+  const invalid = await bundle(root, "invalid", true, now);
+  const receipt = path.join(invalid, ".balance-retention.json");
+  const record = JSON.parse(await readFile(receipt, "utf8"));
+  delete record.files[0].modified;
+  await writeFile(receipt, JSON.stringify(record));
+  expect((await pruneBalanceReports(root, { now })).moved).toEqual([]);
+  await expect(access(valid)).resolves.toBeUndefined();
+  await expect(access(invalid)).resolves.toBeUndefined();
+});
