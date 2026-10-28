@@ -56,9 +56,10 @@ export const KEYWORDS = PROGRESSION_KEYWORDS;
 export type Keyword = ProgressionKeyword;
 export type KeywordXP = Partial<Record<Keyword, number>>;
 const talentsById = new Map<string, (typeof TALENTS)[number]>(TALENTS.map((talent) => [talent.id, talent]));
-const talentsByKeyword = new Map(
-  KEYWORDS.map((keyword) => [keyword, TALENTS.filter((talent) => talent.keyword === keyword)]),
+const talentsByKeyword = new Map<Keyword, (typeof TALENTS)[number][]>(
+  KEYWORDS.map((keyword) => [keyword, []]),
 );
+for (const talent of TALENTS) talentsByKeyword.get(talent.keyword)!.push(talent);
 const prerequisitesByTalent = new Map(
   TALENTS.map((talent) => [
     talent.id,

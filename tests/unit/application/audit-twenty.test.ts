@@ -1,5 +1,6 @@
+import { cloudFixture, cloudIdentity as identity } from "../../support/cloud";
+import { deferred } from "../../support/deferred";
 import { afterEach, expect, it, vi } from "vitest";
-import { createCloud } from "../../../src/application/cloud";
 import { cloudName, snapshot } from "../../../src/application/cloud-snapshots";
 import { createDiagnostics } from "../../../src/application/diagnostics";
 import { createSession } from "../../../src/application/session";
@@ -9,45 +10,10 @@ import { createGame } from "../../../src/game/engine";
 import { observeDecisions } from "../../../src/game/random";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { installPerformanceRecorder, startPerformanceSpan } from "../../../src/lib/performance";
-import type { CloudPort } from "../../../src/platform/ports";
 import { prepareDestination, run } from "../../support/game";
 
-const identity = {
-  available: true,
-  device: "a".repeat(32),
-  profile: "b".repeat(32),
-  importAvailable: false,
-};
 const initial = encodeSave(decodeSave(encodeSave(createGame(3))));
 const progress = encodeSave(decodeSave(encodeSave(createGame(7))));
-function cloudFixture() {
-  const files = new Map<string, string>();
-  const local = { data: null as string | null };
-  const port: CloudPort = {
-    identity: vi.fn(async () => identity),
-    readLocal: async () => local.data,
-    writeLocal: vi.fn(async (data) => {
-      local.data = data;
-    }),
-    preserve: vi.fn(async () => {}),
-    importStandalone: vi.fn(async () => [{ source: "standalone", data: progress }]),
-    list: async () => [...files.keys()],
-    read: async (name) => files.get(name) ?? null,
-    write: async (name, data) => {
-      files.set(name, data);
-    },
-  };
-  const install = vi.fn(async (_data: string, _owns?: () => boolean) => {});
-  const manager = createCloud(port, () => {}, install);
-  return { manager, port, local, files, install };
-}
-const deferred = () => {
-  let resolve!: () => void;
-  const promise = new Promise<void>((done) => {
-    resolve = done;
-  });
-  return { promise, resolve };
-};
 afterEach(() => {
   vi.useRealTimers();
 });
@@ -115,7 +81,7 @@ it("7: Cloud reconciliation cannot silently truncate a direct competing head", a
 });
 
 it("8: startup preserves unmatched valid local metadata before replacing it", async () => {
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   const retained = await snapshot(progress, identity, 9);
   f.local.data = JSON.stringify(retained);
   const order: string[] = [];
@@ -127,46 +93,34 @@ it("8: startup preserves unmatched valid local metadata before replacing it", as
     order.push("written");
     f.local.data = data;
   };
-  try {
-    await f.manager.start(initial);
-    await f.manager.flush();
-    expect(order.slice(0, 2)).toEqual(["preserved", "written"]);
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(initial);
+  await f.manager.flush();
+  expect(order.slice(0, 2)).toEqual(["preserved", "written"]);
 });
 
 it("9: an explicit Cloud retry recovers a failed identity lookup", async () => {
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   f.port.identity = vi.fn().mockRejectedValueOnce(new Error("offline")).mockResolvedValue(identity);
-  try {
-    await f.manager.start(initial);
-    expect(f.manager.view.status).toBe("Pending");
-    await f.manager.retry();
-    await f.manager.flush();
-    expect(f.port.identity).toHaveBeenCalledTimes(2);
-    expect(f.manager.view.status).toBe("Synced");
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(initial);
+  expect(f.manager.view.status).toBe("Pending");
+  await f.manager.retry();
+  await f.manager.flush();
+  expect(f.port.identity).toHaveBeenCalledTimes(2);
+  expect(f.manager.view.status).toBe("Synced");
 });
 
 it("10: a stale standalone-import offer cannot replace intact profile progress", async () => {
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   f.port.identity = async () => ({ ...identity, importAvailable: true });
-  try {
-    await f.manager.start(initial);
-    expect(f.port.importStandalone).not.toHaveBeenCalled();
-    expect(f.install).not.toHaveBeenCalled();
-    expect(JSON.parse(f.local.data!).payload).toBe(initial);
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(initial);
+  expect(f.port.importStandalone).not.toHaveBeenCalled();
+  expect(f.install).not.toHaveBeenCalled();
+  expect(JSON.parse(f.local.data!).payload).toBe(initial);
 });
 
 it("11: a stalled Cloud installation releases startup and cannot publish after offline play", async () => {
   vi.useFakeTimers();
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   const remote = await snapshot(progress, { ...identity, device: "c".repeat(32) }, 1);
   f.files.set(cloudName(remote), JSON.stringify(remote));
   const gate = deferred();
@@ -191,7 +145,7 @@ it("11: a stalled Cloud installation releases startup and cannot publish after o
 });
 
 it("12: an older upload cannot report Synced while newer local metadata is still pending", async () => {
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   const upload = deferred();
   const uploaded = deferred();
   const write = f.port.write;
@@ -225,18 +179,14 @@ it("12: an older upload cannot report Synced while newer local metadata is still
 });
 
 it("13: intact local Cloud metadata recovers progress when all gameplay slots are missing", async () => {
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   const retained = await snapshot(progress, identity, 9);
   f.local.data = JSON.stringify(retained);
-  try {
-    await f.manager.start(null);
-    await f.manager.flush();
-    expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
-    expect(JSON.parse(f.local.data!).payload).toBe(progress);
-    expect(f.manager.view.status).toBe("Synced");
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(null);
+  await f.manager.flush();
+  expect(f.install).toHaveBeenCalledWith(progress, expect.any(Function));
+  expect(JSON.parse(f.local.data!).payload).toBe(progress);
+  expect(f.manager.view.status).toBe("Synced");
 });
 
 it("14: live and restored diagnostic context redact paths and credentials", () => {
@@ -354,7 +304,7 @@ it("subscriptions have independent ownership and teardown revokes admission", as
 
 it("expired Cloud installation cannot replace the session's newer offline commands", async () => {
   vi.useFakeTimers();
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   const remote = await snapshot(progress, { ...identity, device: "c".repeat(32) }, 1);
   f.files.set(cloudName(remote), JSON.stringify(remote));
   const gate = deferred();
@@ -397,36 +347,28 @@ it("expired Cloud installation cannot replace the session's newer offline comman
 });
 
 it("unmatched metadata is not overwritten when preserving its alternative fails", async () => {
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   const retained = await snapshot(progress, identity, 9);
   f.local.data = JSON.stringify(retained);
   f.port.preserve = async () => {
     throw new Error("disk full");
   };
-  try {
-    await f.manager.start(initial);
-    expect(f.local.data).toBe(JSON.stringify(retained));
-    expect(f.port.writeLocal).not.toHaveBeenCalled();
-    expect(f.manager.view.status).toBe("Pending");
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(initial);
+  expect(f.local.data).toBe(JSON.stringify(retained));
+  expect(f.port.writeLocal).not.toHaveBeenCalled();
+  expect(f.manager.view.status).toBe("Pending");
 });
 
 it("background identity recovery cannot install local metadata after startup continues offline", async () => {
   vi.useFakeTimers();
-  const f = cloudFixture();
+  const f = cloudFixture({ standalone: [{ source: "standalone", data: progress }] });
   const retained = await snapshot(progress, identity, 9);
   f.local.data = JSON.stringify(retained);
   f.port.readLocal = vi.fn().mockRejectedValueOnce(new Error("busy")).mockResolvedValue(f.local.data);
-  try {
-    await f.manager.start(null);
-    expect(f.manager.view.blocking).toBe(false);
-    await vi.advanceTimersByTimeAsync(15000);
-    await vi.waitFor(() => expect(f.port.preserve).toHaveBeenCalled());
-    expect(f.install).not.toHaveBeenCalled();
-    expect(f.local.data).toBe(JSON.stringify(retained));
-  } finally {
-    await f.manager.dispose();
-  }
+  await f.manager.start(null);
+  expect(f.manager.view.blocking).toBe(false);
+  await vi.advanceTimersByTimeAsync(15000);
+  await vi.waitFor(() => expect(f.port.preserve).toHaveBeenCalled());
+  expect(f.install).not.toHaveBeenCalled();
+  expect(f.local.data).toBe(JSON.stringify(retained));
 });

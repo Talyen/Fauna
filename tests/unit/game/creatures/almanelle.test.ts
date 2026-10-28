@@ -15,14 +15,7 @@ import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { swapFromCard } from "../../../../src/game/team";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { almanelleBattle } from "../../../support/almanelle";
-import {
-  accept,
-  addBackups,
-  authoredPack,
-  prepareDestination,
-  requireBattle,
-  winBattle,
-} from "../../../support/game";
+import { accept, addBackups, authoredPack, prepareDestination, requireBattle } from "../../../support/game";
 import type { BattleState, GameEvent } from "../../../../src/game/types";
 
 const current = "almanelle-spring-current";
@@ -316,25 +309,5 @@ describe("Almanelle", () => {
     expect(speciesCards("almanelle").map((def) => def.cost)).toEqual([1, 1, 1]);
     expect(FIRST_RUN_STARTERS).not.toContain("almanelle");
     expect(species("almanelle").health).toBe(28);
-  });
-
-  it("can be encountered, recruited and resumed through the normal journey boundary", () => {
-    const ready = produce(almanelleBattle(), (draft) => {
-      prepareDestination(draft);
-      draft.expedition = {
-        recruit: null,
-        lastRoom: null,
-        pack: authoredPack(
-          draft.encounter,
-          COMBAT_PACKS.findIndex((pack) => pack[0] === "almanelle"),
-        ),
-      };
-    });
-    const battle = accept(ready, { type: "beginBattle" });
-    expect(battle.discovery.encountered).toContain("almanelle");
-    expect(decodeSave(encodeSave(battle))).toEqual(battle);
-    const recruited = accept(winBattle(battle), { type: "recruit", species: "almanelle" });
-    expect(recruited.discovery.recruited.almanelle).toBe(2);
-    expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
   });
 });

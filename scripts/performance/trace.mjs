@@ -14,15 +14,16 @@ export async function beginTrace(page, file) {
       bufferUsageReportingInterval: 500,
     });
   } catch (error) {
-    await client.detach();
-    throw new Error(`Deep tracing unavailable: ${error.message}`);
+    await client.detach().catch(() => {});
+    throw new Error(`Deep tracing unavailable: ${error.message}`, { cause: error });
   }
   let done = false;
   return async () => {
     if (done) return null;
     done = true;
-    let timer, stream;
+    let timer, stream, resultTrace;
     const chunks = [];
+    const failures = [];
     try {
       const complete = new Promise((resolve, reject) => {
         timer = setTimeout(() => reject(new Error("Trace flush timed out")), 10000);
@@ -47,15 +48,20 @@ export async function beginTrace(page, file) {
       const trace = JSON.parse(raw.toString("utf8"));
       if (!Array.isArray(trace?.traceEvents)) throw new Error("Invalid trace event stream");
       await writeFile(file, raw);
-      return trace;
+      resultTrace = trace;
     } catch (error) {
-      if (chunks.length) await writeFile(`${file}.partial`, Buffer.concat(chunks));
-      throw error;
+      failures.push(error);
+      if (chunks.length)
+        await writeFile(`${file}.partial`, Buffer.concat(chunks)).catch((failure) => failures.push(failure));
     } finally {
       clearTimeout(timer);
-      if (stream) await client.send("IO.close", { handle: stream }).catch(() => {});
-      await client.detach();
+      if (stream) await client.send("IO.close", { handle: stream }).catch((error) => failures.push(error));
+      await client.detach().catch((error) => failures.push(error));
     }
+    if (failures.length === 1) throw failures[0];
+    if (failures.length > 1)
+      throw new AggregateError(failures, failures.map((error) => error.message).join("; "));
+    return resultTrace;
   };
 }
 
@@ -72,9 +78,25 @@ const category = (name) =>
 
 /** Clip to the marked renderer thread; only exclusive innermost work is added to totals. */
 export function attributeTrace(trace, sample, hitches) {
-  const events = trace.traceEvents ?? [];
+  const events = trace?.traceEvents;
   if (!Array.isArray(events) || trace.dataLossOccurred || events.length > 200000)
     return { available: false, reason: "Incomplete trace or attribution event budget exceeded" };
+  if (
+    !Array.isArray(hitches) ||
+    hitches.length > 20 ||
+    hitches.some(
+      (gap) =>
+        !gap ||
+        !Number.isFinite(gap.start) ||
+        gap.start < 0 ||
+        !Number.isFinite(gap.end) ||
+        !Number.isFinite(gap.duration) ||
+        gap.duration <= 0 ||
+        gap.end <= gap.start ||
+        Math.abs(gap.end - gap.start - gap.duration) > 0.01,
+    )
+  )
+    return { available: false, reason: "Invalid hitch intervals or attribution budget exceeded" };
   const start = events.find((event) => event?.name === "fauna-capture-start");
   const end = events.find(
     (event) => event?.name === "fauna-capture-end" && event.pid === start?.pid && event.tid === start?.tid,
@@ -141,17 +163,22 @@ export function attributeTrace(trace, sample, hitches) {
     url: event.args?.data?.url ?? event.args?.data?.scriptName ?? null,
     line: event.args?.data?.lineNumber ?? null,
   }));
-  if (
-    hitches.some(
-      (gap) => intervals.filter((entry) => entry.start < gap.end && entry.end > gap.start).length > 1000,
-    )
-  )
-    return { available: false, reason: "Per-hitch attribution work budget exceeded" };
+  const candidates = [];
+  for (const gap of hitches) {
+    const overlapping = [];
+    for (const entry of intervals) {
+      if (entry.start >= gap.end || entry.end <= gap.start) continue;
+      overlapping.push(entry);
+      if (overlapping.length > 1000)
+        return { available: false, reason: "Per-hitch attribution work budget exceeded" };
+    }
+    candidates.push(overlapping);
+  }
   return {
     available: true,
     thread: { pid: start.pid, tid: start.tid },
-    hitches: hitches.map((gap) => {
-      const overlapping = intervals.filter((entry) => entry.start < gap.end && entry.end > gap.start);
+    hitches: hitches.map((gap, index) => {
+      const overlapping = candidates[index];
       const boundaries = [
         ...new Set([
           gap.start,

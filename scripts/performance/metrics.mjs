@@ -83,6 +83,13 @@ export function summarizeSample(sample) {
   const sorted = sample.frames.map((frame) => frame.duration).sort((a, b) => a - b);
   // Nearest-rank percentiles select the first sample at or above the requested rank.
   const percentile = (p) => sorted[Math.min(sorted.length - 1, Math.ceil(sorted.length * p) - 1)];
+  const gaps = { 20: 0, 33.3: 0, 50: 0, 100: 0 };
+  for (const duration of sorted) {
+    if (duration > 20) gaps[20]++;
+    if (duration > 33.3) gaps[33.3]++;
+    if (duration > 50) gaps[50]++;
+    if (duration > 100) gaps[100]++;
+  }
   return {
     hitches: hitchInventory(sample),
     startupMs: sample.startupMs ?? null,
@@ -90,7 +97,7 @@ export function summarizeSample(sample) {
     p50: percentile(0.5),
     p95: percentile(0.95),
     p99: percentile(0.99),
-    gaps: Object.fromEntries([20, 33.3, 50, 100].map((n) => [n, sorted.filter((ms) => ms > n).length])),
+    gaps,
     longTasks: sample.longTasks === null ? null : sample.longTasks.length,
     input: sample.input,
     before: sample.before,
@@ -100,6 +107,8 @@ export function summarizeSample(sample) {
 }
 export function comparePerformance(before, after) {
   if (
+    !before ||
+    !after ||
     before.format !== 3 ||
     after.format !== 3 ||
     before.complete !== true ||
@@ -144,8 +153,9 @@ export function comparePerformance(before, after) {
       throw new Error(`Incompatible performance case: ${left.id}`);
     const a = summarizeSample(left.sample),
       b = summarizeSample(right.sample);
-    const rate = (sample, count) =>
-      (count / sample.frames.reduce((sum, frame) => sum + frame.duration, 0)) * 30_000;
+    const duration = (sample) => sample.frames.reduce((sum, frame) => sum + frame.duration, 0);
+    const baselineDuration = duration(left.sample);
+    const treatmentDuration = duration(right.sample);
     return {
       id: left.id,
       baseline: a,
@@ -155,7 +165,10 @@ export function comparePerformance(before, after) {
       gapRatesPer30s: Object.fromEntries(
         [20, 33.3, 50, 100].map((n) => [
           n,
-          { baseline: rate(left.sample, a.gaps[n]), treatment: rate(right.sample, b.gaps[n]) },
+          {
+            baseline: (a.gaps[n] / baselineDuration) * 30_000,
+            treatment: (b.gaps[n] / treatmentDuration) * 30_000,
+          },
         ]),
       ),
     };
@@ -206,9 +219,13 @@ export function hitchMarkdown(id, summary, trace) {
 }
 
 export function compareRecorderOverhead(inactive, active) {
-  if (!inactive.buildIdentity || inactive.buildIdentity !== active.buildIdentity)
+  if (
+    typeof inactive?.buildIdentity !== "string" ||
+    !inactive.buildIdentity.trim() ||
+    inactive.buildIdentity !== active?.buildIdentity
+  )
     throw new Error("Recorder overhead requires the identical renderer build");
-  if (inactive.environment.recordSpans !== false || active.environment.recordSpans !== true)
+  if (inactive.environment?.recordSpans !== false || active.environment?.recordSpans !== true)
     throw new Error("Overhead comparison requires inactive then active span recording");
   return {
     kind: "recorder-overhead",

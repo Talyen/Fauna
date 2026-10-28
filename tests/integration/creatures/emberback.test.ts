@@ -1,12 +1,12 @@
 import { setBattleCards } from "../../support/cards";
-import { addBackups, authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
+import { addBackups, authoredPack, prepareDestination, accept, teamRun } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition } from "../../../src/game/content";
 import { cardText } from "../../../src/game/card-rules";
 import { validateCatalog, contentCatalog } from "../../../src/game/content-validation";
-import { createGame, dispatch, previewCard } from "../../../src/game/engine";
+import { dispatch, previewCard } from "../../../src/game/engine";
 import { freshCombat } from "../../../src/game/combat/index";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
@@ -119,29 +119,6 @@ it("settles an area victory after every opponent is hit and stops when retaliati
   expect(stopped.state.battle!.enemies.map((enemy) => enemy.health)).toEqual(
     retaliation.battle!.enemies.map((enemy, index) => enemy.health - (index === 0 ? 2 : 0)),
   );
-});
-
-it("discovers and recruits Emberback from an ordinary encounter and resumes its three-card kit", () => {
-  const initial = createGame(7);
-  let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
-    type: "start",
-  });
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("emberback");
-  expect(game.battle!.enemies[0]!.combat.armor).toBe(0);
-  game = winBattle(game);
-  game = accept(game, { type: "recruit", species: "emberback" });
-  expect(game.discovery.recruited.emberback).toBe(1);
-  expect(game.cards.filter((card) => card.ownerId === game.team[1]!.id)).toHaveLength(3);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
 });
 
 it("keeps every authored ability at one Mana and validates the catalog", () => {

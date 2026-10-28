@@ -99,8 +99,12 @@ export function executeAbility(
     const acrobatPrecision = def.effect === "attack" && !enemy && stats[boonRule("acrobat-top").state];
     if (acrobatPrecision) stats[boonRule("acrobat-top").state] = false;
     const cannotDodge = repeatedPrecision || acrobatPrecision;
+    const candleLight =
+      !enemy && def.effect === "attack" && def.damageType === "light" && state.boons.includes("vow-candle");
     const blindMiss =
-      def.effect === "attack" ? beginAttack(state, actor, events) && !repeatedPrecision : false;
+      def.effect === "attack" && !candleLight
+        ? beginAttack(state, actor, events) && !repeatedPrecision
+        : false;
     const additionalTarget =
       play > 0 &&
       !enemy &&

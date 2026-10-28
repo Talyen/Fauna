@@ -20,6 +20,8 @@ export const restoreHealth = (...args: CombatArguments<"restoreHealth">) =>
 export const grantBlock = (...args: CombatArguments<"grantBlock">) => resolveCombat("grantBlock", ...args);
 export const gainMana = (...args: CombatArguments<"gainMana">) => resolveCombat("gainMana", ...args);
 export const grantArmor = (...args: CombatArguments<"grantArmor">) => resolveCombat("grantArmor", ...args);
+export const armorStealRewards = (...args: CombatArguments<"armorStealRewards">) =>
+  resolveCombat("armorStealRewards", ...args);
 export const grantStatus = (...args: CombatArguments<"grantStatus">) => resolveCombat("grantStatus", ...args);
 export const triggerArmorBreak = (...args: CombatArguments<"triggerArmorBreak">) =>
   resolveCombat("triggerArmorBreak", ...args);
