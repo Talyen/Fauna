@@ -53,6 +53,35 @@ it("Auto-play and Overflow Cup select the same injured ally for excess healing",
   expect(recipient!.health - before).toBe(4);
 });
 
+it("does not count the same missing Health twice when Overflow Cup precedes Last Threshold", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
+  const [healer, recipient] = state.team;
+  state.boons = ["overflow-cup", "last-threshold", "clover-measuring-scoop"];
+  recipient!.health -= 4;
+  recipient!.combat!.grace = 2;
+  recipient!.combat!.poison = 1;
+  const original = structuredClone(state);
+  const benefit = healingBenefit(state, healer!, 8, undefined);
+  expect(state).toEqual(original);
+  restoreHealth(healer!, 8, [], false, state);
+  expect(benefit.restored).toBe(4);
+  expect(recipient!.health - original.team[1]!.health).toBe(benefit.restored);
+
+  const reordered = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram", "emberback"])));
+  reordered.boons = state.boons;
+  const [source, first, second] = reordered.team;
+  first!.health = 15;
+  first!.combat!.grace = 2;
+  second!.health = 18;
+  second!.combat!.grace = 2;
+  second!.combat!.poison = 1;
+  const prior = reordered.team.map((unit) => unit.health);
+  const forecast = healingBenefit(reordered, source!, 8, undefined).restored;
+  restoreHealth(source!, 8, [], false, reordered);
+  expect(reordered.team.map((unit, index) => unit.health - prior[index]!)).toEqual([0, 4, 10]);
+  expect(forecast).toBe(14);
+});
+
 it("filtered draws retain pile order and hidden decisions across owners, keywords and Journey Loom", () => {
   for (const method of ["owner", "keyword", "loom"] as const) {
     const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "emberback"])));

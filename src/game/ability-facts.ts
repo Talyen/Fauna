@@ -84,9 +84,23 @@ export function healingBenefit(
     ((gain > 0 && (ally.combat?.bleed ?? 0) > 0 && state.boons.includes("yarrow-salve-tin")) ||
       (excess > 0 && hasTalent(state, "health.clean-slate")) ||
       !!effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient"));
+  const cupTarget =
+    excess > 0 && !isEnemy(ally) && state.boons.includes("overflow-cup")
+      ? overflowCupRecipient(state, ally)
+      : undefined;
+  const cupAmount = Math.round(excess / boonRule("overflow-cup").divisor);
+  const cup = cupTarget
+    ? restoration(cupTarget, cupAmount + scoopBonus(state, cupTarget, cupAmount)).gain
+    : 0;
   let shared = 0;
   if (excess > 0 && !isEnemy(ally) && state.boons.includes("last-threshold")) {
-    const recipients = overflowRecipients(state, ally);
+    // Cup resolves first and can fill or change the ordering of Threshold recipients.
+    const recipients = overflowRecipients(state, ally)
+      .map((recipient) => ({
+        ...recipient,
+        health: recipient.health + (recipient.id === cupTarget?.id ? cup : 0),
+      }))
+      .filter((recipient) => recipient.health < maximumHealth(recipient));
     let remaining = excess;
     while (remaining > 0) {
       const recipient = mostInjured(recipients);
@@ -97,16 +111,6 @@ export function healingBenefit(
       shared += restoration(recipient, amount + scoopBonus(state, recipient, amount)).gain;
     }
   }
-  const cupTarget =
-    excess > 0 && !isEnemy(ally) && state.boons.includes("overflow-cup")
-      ? overflowCupRecipient(state, ally)
-      : undefined;
-  const cup = cupTarget
-    ? Math.min(
-        Math.round(excess / boonRule("overflow-cup").divisor) + scoopBonus(state, cupTarget, excess),
-        maximumHealth(cupTarget) - cupTarget.health,
-      )
-    : 0;
   return { restored: gain + shared + cup, utility: overflow + Number(cleanses) };
 }
 
