@@ -12,6 +12,7 @@ import { playEnemyAbility } from "./enemy-action";
 import { passiveAmount } from "../progression";
 import {
   ensureCombat,
+  removeEffects,
   gainMana,
   grantBlock,
   restoreHealth,
@@ -98,6 +99,10 @@ export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[
 export function finishTurn(draft: BattleState, events: GameEvent[]) {
   const battle = draft.battle;
   const unspentMana = battle.mana;
+  if (draft.boons.includes("nightbloom-bell"))
+    for (const ally of [...livingBattlefield(draft, "player"), ...draft.reserves])
+      if (ally.health > 0 && ally.combat?.blind)
+        removeEffects(ally, "cleanse", 1, events, draft, "blind", undefined, false);
   if (draft.boons.includes("dew-pendulum") && unspentMana > 0)
     for (const ally of livingBattlefield(draft, "player")) grantBlock(draft, ally, unspentMana, events);
   // Enemy-phase draws and existing overflow survive into the next player turn.

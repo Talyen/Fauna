@@ -8,6 +8,7 @@ export {
   controlled,
   mostInjured,
   sharedDodgeChance,
+  sharedControlImmunity,
   dodgeChance,
   grantTemporaryDodge,
   beginAttack,

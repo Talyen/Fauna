@@ -425,6 +425,18 @@
     "sourceHash": "68f76136bc43d62611e42bd3f5f34049adf748bd204030ae9264fa2cc888bd06",
     "text": "<keyword0>Betäubungs</keyword0>schaden wirkt doppelt so stark gegen gegnerischen <keyword1>Block</keyword1>"
   },
+  "content.boon.bargain-scales.name": {
+    "reviewed": true,
+    "source": "Bargain Scales",
+    "sourceHash": "a500e62478abedde2813f9bc1925b8c35e2e8f5e1b300f0feda2a260b5355c6a",
+    "text": "Handelswaage"
+  },
+  "content.boon.bargain-scales.rule": {
+    "reviewed": true,
+    "source": "Boon Merchants offer an additional Boon",
+    "sourceHash": "4b49dfb838621c926e06810496215c4c5588ca116e7059f85a0e34dd91fa949f",
+    "text": "Segenhändler bieten einen zusätzlichen Segen an"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -785,6 +797,30 @@
     "sourceHash": "68814f26e4d88565d6004b2c07532acde4759141c5e58332fcc4500189f77c47",
     "text": "<keyword0>Betäubung</keyword0>-Treffer gewähren dir <keyword1>Reflektieren</keyword1>"
   },
+  "content.boon.crystal-slipper.name": {
+    "reviewed": true,
+    "source": "Crystal Slipper",
+    "sourceHash": "0b55602d4cb4f618a24347cea6fab8c0ad0efbf1305538e74a26e503ab1d367b",
+    "text": "Kristallschuh"
+  },
+  "content.boon.crystal-slipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> returns the ally’s last played card to hand",
+    "sourceHash": "8bfaefc3776ca779ee17e16ec7a324144dc9d7550229323ef39d512a1da02b29",
+    "text": "<keyword0>Ausweichen</keyword0> bringt die zuletzt gespielte Karte des Verbündeten auf die Hand zurück"
+  },
+  "content.boon.cuckoo-whistle.name": {
+    "reviewed": true,
+    "source": "Cuckoo Whistle",
+    "sourceHash": "67c794c40d523a8784848160d635673c82e0b5d4ca011300f9523b89a50faa32",
+    "text": "Kuckuckspfeife"
+  },
+  "content.boon.cuckoo-whistle.rule": {
+    "reviewed": true,
+    "source": "When an ally recovers from <keyword0>Stun</keyword0> or <keyword1>Freeze</keyword1>, draw one of their cards",
+    "sourceHash": "3b6159c83ba7d8efb368ab2a029d41f7439a8b89e9ab43330fd56d8ffedbbc53",
+    "text": "Wenn sich ein Verbündeter von <keyword0>Betäubung</keyword0> oder <keyword1>Frost</keyword1> erholt, ziehe eine seiner Karten"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
@@ -833,6 +869,18 @@
     "sourceHash": "664411637154c99d36af52254a2511f670c5b0f0779172b1f28f33ef16b6c878",
     "text": "Wird ein Verbündeter <keyword0>betäubt</keyword0>, <keyword1>Reinige</keyword1> <keyword2>Betäubung</keyword2> von anderen Verbündeten"
   },
+  "content.boon.dawn-key.name": {
+    "reviewed": true,
+    "source": "Dawn Key",
+    "sourceHash": "31267975bdf9ec6e29e00ba8a882753f4a2fa5f022d754541109a24083c33233",
+    "text": "Morgenschlüssel"
+  },
+  "content.boon.dawn-key.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks break through <keyword1>Negate</keyword1>",
+    "sourceHash": "a29d87024911bd1e8d8cdebce672b8d3210587eac4abe2529075f53e6ba40931",
+    "text": "<keyword0>Licht</keyword0>-Angriffe durchbrechen <keyword1>Abwehren</keyword1>"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -856,6 +904,18 @@
     "source": "At the end of your turn, allies gain <keyword0>Block</keyword0> equal to unspent <keyword1>Mana</keyword1>",
     "sourceHash": "82d99773ac251445d4f527b5770842f5b55d339434394d97d5bde044bfe9bfb7",
     "text": "Am Ende deines Zuges erhalten Verbündete <keyword0>Block</keyword0> in Höhe deines ungenutzten <keyword1>Manas</keyword1>"
+  },
+  "content.boon.dragons-toothpick.name": {
+    "reviewed": true,
+    "source": "Dragon's Toothpick",
+    "sourceHash": "89b2ac48ab291f370807ba8ba4f92cd8c6b80d78f12363f06c697632ebee455f",
+    "text": "Drachenzahnstocher"
+  },
+  "content.boon.dragons-toothpick.rule": {
+    "reviewed": true,
+    "source": "After receiving <keyword0>Food</keyword0>, an ally’s next attack also <keyword1>Purges</keyword1>",
+    "sourceHash": "0c286d5aa504eda9aafb130c1753657fde878818a367475121489b41ec975f2c",
+    "text": "Nach Erhalt von <keyword0>Nahrung</keyword0> kann der nächste Angriff des Verbündeten auch <keyword1>bannen</keyword1>"
   },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
@@ -1517,6 +1577,18 @@
     "sourceHash": "f696b142973939c21d737b6a8752bed8d3336f3871b0dbe57db9f0828a8f29a1",
     "text": "<keyword0>Frost</keyword0>treffer übertragen auch die Hälfte ihres <keyword1>Frost</keyword1>aufbaus auf einen anderen Gegner"
   },
+  "content.boon.moonseed.name": {
+    "reviewed": true,
+    "source": "Moonseed",
+    "sourceHash": "613fbd4623c77557ace6d2c0f08a9498dc0a9e0f1896cb2042ee267674f0de53",
+    "text": "Mondsamen"
+  },
+  "content.boon.moonseed.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits double the attacker’s next <keyword1>Thorns</keyword1> retaliation",
+    "sourceHash": "ecdaf7f4eb859d15f2b23cf0bddc06946d7911c3519034efa6508d2f5e7365d0",
+    "text": "<keyword0>Licht</keyword0>-Treffer verdoppeln den nächsten <keyword1>Dornen</keyword1>-Gegenschlag des Angreifers"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
@@ -1576,6 +1648,18 @@
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "9d8c470f36425122176f79b3d7f04a0d24f93a5d7847f49000141b9f4e3890c8",
     "text": "<keyword0>Nahrungs</keyword0>karten sind doppelt so wirksam"
+  },
+  "content.boon.nightbloom-bell.name": {
+    "reviewed": true,
+    "source": "Nightbloom Bell",
+    "sourceHash": "c581a1c28c10e7697275d1e732fd8c70901c9973102a49b98ee8d974ba708727",
+    "text": "Nachtblütenglocke"
+  },
+  "content.boon.nightbloom-bell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> fades from allies when their turn ends",
+    "sourceHash": "e0014fd657aada9c1ee6bccee3d3543ab12ff72630d7b19ee571d26868a5747e",
+    "text": "<keyword0>Blindheit</keyword0> endet bei Verbündeten am Ende ihres Zuges"
   },
   "content.boon.oasis-seed.name": {
     "reviewed": true,
@@ -1949,6 +2033,18 @@
     "sourceHash": "1ff65faed4eef2e2c005fef5998dc9c4f6ef647f35ea152c9d488af956f40f5a",
     "text": "Erhalte nach deiner dritten Karte pro Zug {{value0}} <keyword0>Mana</keyword0>"
   },
+  "content.boon.ribbon-spool.name": {
+    "reviewed": true,
+    "source": "Ribbon Spool",
+    "sourceHash": "ac0143da8280e7657e81240d2c2f91389fa6351db6973b3f0272e4ae89cb25c9",
+    "text": "Bandspule"
+  },
+  "content.boon.ribbon-spool.rule": {
+    "reviewed": true,
+    "source": "An ally’s immunity to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> protects all allies",
+    "sourceHash": "26decdde2ab5b901322475a5f2d0ee823fb31ad1a478cb119369284725e67fbb",
+    "text": "Die Immunität eines Verbündeten gegen <keyword0>Betäubung</keyword0> und <keyword1>Frost</keyword1> schützt alle Verbündeten"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2045,6 +2141,18 @@
     "sourceHash": "69965914b2ec7e2539f576aeddc3ef5d03981c9879db99b3ae36d4dbf388f187",
     "text": "Die <keyword0>Reinigung</keyword0> der <keyword1>Blutung</keyword1> eines Verbündeten gewährt ihm {{value0}} <keyword2>Rüstung</keyword2>"
   },
+  "content.boon.sandfold-parasol.name": {
+    "reviewed": true,
+    "source": "Sandfold Parasol",
+    "sourceHash": "ea0ea4bfe84860336880f39a7d23bbb51356c8be1d10093e23a93532da1afefd",
+    "text": "Sandfaltenschirm"
+  },
+  "content.boon.sandfold-parasol.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
+    "sourceHash": "15685884edb4e37ce44fb482e8a972d1f7a592f8dc33567a6c57aadf519f739a",
+    "text": "Wenn ein Verbündeter <keyword0>ausweicht</keyword0>, <keyword1>weichen</keyword1> auch die anderen Verbündeten demselben Angriff aus"
+  },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
     "source": "Shelter Lantern",
@@ -2092,6 +2200,18 @@
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
     "sourceHash": "1b34d4da250f8507f8a54a58268cf9739d24358ff1eb687732ad861840c5c999",
     "text": "<keyword0>Betäubung</keyword0> und <keyword1>Frost</keyword1> können sich während gegnerischer Immunität aufbauen"
+  },
+  "content.boon.sleepy-acorn.name": {
+    "reviewed": true,
+    "source": "Sleepy Acorn",
+    "sourceHash": "13e5afd9eb06501fc1a6283efad8f30a689ac8bf3aae2c1c0ad644d0ec6507c9",
+    "text": "Schläfrige Eichel"
+  },
+  "content.boon.sleepy-acorn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> cards can be played through <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "61c530a67893766e5825ee00339d8698738cedfb28f2842d87b8e10acb370edc",
+    "text": "<keyword0>Heilungskarten</keyword0> können trotz <keyword1>Betäubung</keyword1> und <keyword2>Frost</keyword2> gespielt werden"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -6650,140 +6770,158 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "184d0a227bc61cb197fd458b91fcef67c2a07085b736702e1891a8224cf5f7c5",
+    "sourceHash": "e66b72085076793e4fafac870a4f531d60a1fc307008778d4d6f67b8bd7e0ad8",
     "text": "Akrobatenkreisel: Dem nächsten Angriff kann nicht <keyword0>ausgewichen</keyword0> werden"
   },
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "803800cb29685aedc9884034c8289a81429efbdd174abb8d7097ed1adc694aa9",
+    "sourceHash": "be427ed59be178744ad1cb9fd86414132c8ce1e3edf028a7455a591381e32f8e",
     "text": "<keyword0>Angriffsreflexion</keyword0>: Wirft den nächsten Angriff gegen dich auf den Angreifer zurück; Verhindert dessen Schaden und schädliche Effekte auf dich; <keyword1>Reflektierte</keyword1> Angriffe können nicht erneut <keyword2>reflektiert</keyword2> werden; Hält an, bis verbraucht oder <keyword3>gebannt</keyword3>; Ist nicht stapelbar"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "742a6b95e40ced1d5f79d378e0da2d1b71efc62651f0018cbebfb6823be5fe2f",
+    "sourceHash": "48cc9c3dc6100a08a0950f060fd79586ff9b2a815f87dc49f4ca677064a6f739",
     "text": "<keyword0>Blindheit</keyword0>: {{value0}}% Chance, den nächsten Angriff zu verfehlen; Endet nach diesem Angriff, ob er trifft oder nicht; Ein Fehlschlag zählt für jedes Ziel als <keyword1>Ausweichen</keyword1>; Ist nicht stapelbar"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "91f1afca6a7f64a9afa7cad0b791615482fe512c5c86089df154eee707979777",
+    "sourceHash": "c65c115801547ef6c0d4a95eff4e9fc628a8c70118f2f3b3dc2af3ed24166916",
     "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runden"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "4472ac71f0de274a71d8d17e9298658590da1cd98e37a9ad1e1f425c58d297fa",
+    "sourceHash": "eb96f0b8bbe10ecd156e390386c4e9ce0b26a9b8ba84ef2447c7bf8fad1282b6",
     "text": "Runde ausgesetzt"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "17a4e6a5203698b531a1b52b443ded4fee8ba7960d222b880a16cb8ef7532dc8",
+    "sourceHash": "951c8098e7ea28cd246583d97c273e36fee481c425c54a379d0a68c5006aecc2",
     "text": "<keyword0>Frost</keyword0>: {{value0}} Runde"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "391c3b78794911ca3f1ee1237796d369d4af71321fa77c0afc9baaddfa727e1f",
+    "sourceHash": "7b94d42def072c94e1767512d8537e9520f44bb4d70264b14292fb24858532fc",
     "text": "<keyword0>Frost</keyword0>: {{value0}} Runden"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "25ca512154953646976fef3b0f221897aa131b57b39f56efdeb2906e39647830",
+    "sourceHash": "abf47b2b7eadc10c547ffba78f1d0decd01558a8fd11060128e297c9b8782fad",
     "text": "<keyword0>Betäubung</keyword0>: {{value0}} Runde"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "2302be80dfbbf4a9bed806b530207ff07c8a117cde05b33c2c211878ff6126a6",
+    "sourceHash": "cc675da06213b96b34ab14f6ebc8f649f5785a74e416d732221a52596778c5f6",
     "text": "Kontrollimmunität {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "94b3ff7317a996d825c0cb12174149d3dd464b7be366bdac35cda15d4915ee68",
+    "sourceHash": "0cea117d641f417a2c5392beb951900bb8179b62177270b17e333eda1032fe00",
     "text": "Kostenloses Nachsetzen: nächste Karte ist kostenlos"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "ab6b2eb6e0086a0d50c1d44259d7434bcf4d2e0264c67b3b9f6d07387a096f57",
+    "sourceHash": "45452de52b192045ed02f93e7e93528e1fe209a97d4c40958c59b2821954c58f",
     "text": "Göttliche Gunst: nächste <keyword0>Licht</keyword0>-Karte ist kostenlos"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "4bd77bb91a94efb36f89a8b03f7ac0c6860b4e8b7a09c50af62ed04d0f8ed619",
+    "sourceHash": "119f1e0d92951423b191ea28848310f691e1aea130df1c6fa23e6d7479ff86ee",
     "text": "Windschritt: nächste <keyword0>Natur</keyword0>-Karte ist kostenlos"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "f0684d36505df5069c64b1dabc2ad8b209a09918a4799c941c7f143cf64d0e3e",
+    "sourceHash": "8889f267907f3ed323b22e9ccf64b69d838b32f9120bbb2f876462dcab64be9c",
     "text": "Nahtod {{value0}}"
+  },
+  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
+    "reviewed": true,
+    "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
+    "sourceHash": "cb219296e0a85396bfd04b55f5487ed4bd72e03e636395d8c115dda4ce106010",
+    "text": "Mondsamen: Der nächste <keyword0>Dornen</keyword0>-Gegenschlag verursacht doppelten Schaden"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "07e7814f6a25c16c41686b53bc30556508fa566c2b61c809c5139182ec0d43f3",
+    "sourceHash": "820f0e0c8db7488488118bdcfbf2807eae8098ae98a3df2e4246eb2bf8bc36d7",
     "text": "<keyword0>Abwehren</keyword0>: Den nächsten Angriff gegen dich vor dem <keyword2>Ausweichen</keyword2> <keyword1>abwehren</keyword1> und seinen Schaden und seine schädlichen Effekte verhindern; <keyword3>Dornen</keyword3> schlagen dennoch zurück; Hält an, bis verbraucht oder <keyword4>gebannt</keyword4>; Ist nicht stapelbar"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "b66b601ba1f5218dfa753789ae8fd19fdc5aa4da53d85690e277e81a06d41962",
+    "sourceHash": "f8be08ba527132d1f13ecce4e2ff5bc4672dbb3798fb2f6aa7c4a4cdd15195ff",
     "text": "Offene Flanke: nächster Angriff verursacht {{value0}} zusätzlichen <keyword0>physischen</keyword0> Schaden"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "626a06d450068d445e01d898044341410286408d83d6c58168be11a88821220d",
+    "sourceHash": "66c9884eed4597c5b5b8e8b754bd22ef61620ede60b83e689ded4eeaaa4a134d",
     "text": "<keyword0>Aufheben</keyword0>: Verhindert den nächsten schädlichen Statuseffekt; Direkter Schaden trifft weiterhin; Hält an, bis verbraucht oder <keyword1>gebannt</keyword1>; Ist nicht stapelbar"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "3eb53b94e0964359d6e1b22d783e5606636aca0c849ece7449ae8e44fea52be0",
+    "sourceHash": "1e2100c4f067d902c78faf339e24b840aec96da44a3b58a1806fe4cd80e3bf12",
     "text": "Den nächsten <keyword1>Frost</keyword1>-Schaden <keyword0>aufheben</keyword0>; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "236126b513267a0ca98bca51f05ed4d25f6c56b45dda607feec6269d76dfadfe",
+    "sourceHash": "0a1f349c36a2af560e306a86690b4ee8d71d400a2ccd10a01f63fa3e7f1c4440",
     "text": "Oasensamen: nächster Angriff hat <keyword0>Lebensraub</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "ca95e930d74e4572c782ed722752d8c02964773210cdd86c104ba70f0e1c8409",
+    "sourceHash": "2f35a3a558359d3eaa1143f29235e86f620bbb1ee85a40fbcb0294a659728981",
     "text": "Abschiedsschnitt: nächster <keyword0>physischer</keyword0> Treffer verursacht die Hälfte seines Schadens zusätzlich als <keyword1>Blutungsschaden</keyword1>"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "f7bf1c772be978001109b6a5d12374e1c96932b8b2404b8818c33a874c0596df",
+    "sourceHash": "2c54125d51ecfb170f757b9312fc90a0df973e67fe3099068da1da6c4323a55e",
     "text": "<keyword0>Reflektieren</keyword0>: Wirft den angegebenen Angriff oder schädlichen Statuseffekt zurück; <keyword1>Angriffsreflexion</keyword1> gibt Schaden und schädliche Folgeeffekte an den Angreifer zurück; Reine Status<keyword2>reflexion</keyword2> lenkt den Effekt auf einen zufälligen lebenden Gegner um, während direkter Schaden weiterhin trifft; <keyword3>Reflektierte</keyword3> Angriffe und Status können nicht erneut <keyword4>reflektiert</keyword4> werden; Ladungen sind nicht stapelbar"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "f10ada4c0d5618e6f9d8ce625777ed8fa32642f0cdc4a363b257d42639ef80e4",
+    "sourceHash": "132e8c89d883ca2fc3c4131a4ea47e65d8593a97105bcae6543f9d3c272445b9",
     "text": "Den nächsten <keyword1>Brand</keyword1> <keyword0>reflektieren</keyword0>; Direkter Schaden trifft weiterhin; Hält an, bis verbraucht oder <keyword2>gebannt</keyword2>; Ist nicht stapelbar"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "241985175aac9ff840678a6a972f26dcabd687e8969e1ac9e1b09bbb080dbdb5",
+    "sourceHash": "3dfeda2b4f34225d1814320b3a689089dbf4059f29deccfa5ed32d2002ca4f19",
     "text": "Rhythmus finden: +{{value0}}% Chance auf <keyword0>Ausweichen</keyword0>"
+  },
+  "content.status.ribbonSpool.vf90381129d21c88c.rule": {
+    "reviewed": true,
+    "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "79ea376ca7b2f90c084d1e776d562fdaa8cdbe9eefeda2371eb34fe3b81e4ae6",
+    "text": "Bandspule: immun gegen <keyword0>Betäubung</keyword0> und <keyword1>Frost</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "fee352b635a3a7450389e8e10aaa45d2458bc272d04f1ad6bda527f412957bc6",
+    "sourceHash": "08c8048c3a653e1546475ab021ce8bf4341e0559be6f619e31a886e1a81baeb5",
     "text": "Riposte: nächster <keyword0>physischer</keyword0> Angriff ist garantiert ein <keyword1>kritischer Treffer</keyword1>"
+  },
+  "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
+    "reviewed": true,
+    "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
+    "sourceHash": "40fad3b971a3fad05e0f731caf71ee20a1cefb158b51231141708a4ba7d6be32",
+    "text": "Drachenzahnstocher: Der nächste Angriff kann auch <keyword0>bannen</keyword0>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

@@ -124,7 +124,7 @@ export function ordinaryAttackFacts(
   const paid = manaCost
     ? { ...state, battle: { ...state.battle, mana: state.battle.mana - manaCost } }
     : state;
-  const negated = enemy.combat.negate || enemy.combat.attackReflection;
+
   const lastCardCritical = def.criticalWhenLastCard && state.battle.hand.length === 1;
   const erosion = state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0;
   const usefulExtras = !!def.effects?.some((effect) => supplementalRule(effect.kind).ordinaryAttackUtility);
@@ -136,6 +136,9 @@ export function ordinaryAttackFacts(
   const count = def.alternateDamageType ? 2 : 1;
   for (let index = 0; index < count; index++) {
     const type = index === 0 ? def.damageType : def.alternateDamageType!;
+    const negated =
+      enemy.combat.attackReflection ||
+      (enemy.combat.negate && !(type === "light" && state.boons.includes("dawn-key")));
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
     const baseDamage = modifiedDamage(paid, actor, enemy, magnitude, type, packet, true);
     const damage = baseDamage * (lastCardCritical ? 2 : 1);

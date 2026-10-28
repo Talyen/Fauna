@@ -12,7 +12,7 @@ import { freeze, produce } from "immer";
 import { starterCount, MAX_CREATURE_STARS, KEYWORDS, cardKeywordView, canBuyTalent } from "./progression";
 import { ensureCombat, restoreHealth } from "./combat/index";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
-import { fillHand, recycleDiscard } from "./card-zones";
+import { rememberSlipperCard, fillHand, recycleDiscard } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";
 import { definition, species, SPECIES } from "./content";
 import { bossEncounter, generateEncounterPack } from "./encounters";
@@ -282,6 +282,7 @@ function resolve(
           consumeCardGrants(actor, keywords);
           if (keywords.includes("burn")) battle.freeBurnUsed = true;
         }
+        if (card.ownerId !== null) rememberSlipperCard(draft, actor.id, card);
         const lastCardInHand = battle.hand.length === 1;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         if (!def.consume) battle.discard.push(card.id);

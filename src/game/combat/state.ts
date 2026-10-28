@@ -20,6 +20,9 @@ export function freshCombat(): CombatState {
     freeCard: false,
     oasisLeech: false,
     acrobatReady: false,
+    moonseedReady: false,
+    toothpickReady: false,
+    slipperCard: null,
     reflect: false,
     reflectBurn: false,
     nullify: false,
@@ -64,6 +67,9 @@ export function controlled(unit: Combatant, state?: GameState, card?: CardDefini
       state?.phase === "battle" &&
       !isEnemy(unit) &&
       (((unit.combat?.grace ?? 0) > 0 && state.boons.includes("vigil-lantern")) ||
+        (card &&
+          state.boons.includes("sleepy-acorn") &&
+          (card.effect === "heal" || card.effects?.some((effect) => effect.kind === "heal"))) ||
         (card &&
           state.boons.includes("accordioned-bridge") &&
           (card.effect === "swap" ||
@@ -144,6 +150,15 @@ export function hasBeneficialEffects(unit: Combatant): boolean {
 export function hasHarmfulEffects(unit: Combatant): boolean {
   const stats = unit.combat;
   return !!stats && (!!stats.controlled || harmfulStatuses.some((status) => Number(stats[status]) > 0));
+}
+export function sharedControlImmunity(state: GameState, target: Combatant): number {
+  if (target.health <= 0 || isEnemy(target) || !state.boons.includes("ribbon-spool")) return 0;
+  const row = battlefieldView(state, "player");
+  if (!row.some((unit) => unit.id === target.id)) return 0;
+  let turns = 0;
+  for (const unit of row)
+    if (unit.id !== target.id && unit.health > 0) turns = Math.max(turns, unit.combat?.cooldown ?? 0);
+  return turns;
 }
 export function ownDodgeChance(state: GameState, unit: Combatant): number {
   if (

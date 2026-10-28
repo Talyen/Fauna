@@ -15,6 +15,7 @@ export type DamagePacket =
       delivery?: "bounce" | "reflection";
       blindMiss?: boolean;
       cannotDodge?: boolean;
+      sharedDodge?: boolean;
       interceptionChecked?: true;
       criticalBonus?: number;
     })

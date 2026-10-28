@@ -13,7 +13,7 @@ import { inspectCardPlay } from "../../src/game/play-queries";
 import { produce } from "immer";
 import { encounterPacks } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
-import { definition, species, type SpeciesId } from "../../src/game/content";
+import { definition, species, type SpeciesId, type BoonId } from "../../src/game/content";
 import type {
   Command,
   GameState,
@@ -351,12 +351,13 @@ export function requireBattle(state: GameState): BattleState {
 }
 
 /** A saved Merchant destination funded for any baseline offer; journey earnings stay exact. */
-export function merchantDestination() {
+export function merchantDestination(boons: BoonId[] = []) {
   // Starter identity affects roster exclusions and the number of destination RNG draws.
   let state = starterJourney(3, "captoad");
   state = winBattle(accept(state, { type: "beginBattle" }));
   // Fix this scenario's destination roll independently of the changing recruit catalog.
   state = produce(state, (draft) => {
+    draft.boons = boons;
     draft.rng = 10;
     draft.currency = 40;
   });

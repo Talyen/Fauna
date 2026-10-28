@@ -54,6 +54,39 @@ export function receiveCard(state: GameState, id: string) {
   queueCard(state.battle!, handCapacity(state), id);
 }
 
+export function rememberSlipperCard(state: GameState, ownerId: string, card: Card) {
+  if (!state.boons.includes("crystal-slipper")) return;
+  const owner = state.team.find((unit) => unit.id === ownerId);
+  if (owner?.combat) owner.combat.slipperCard = card.id;
+}
+
+export function returnSlipperCard(state: GameState, ownerId: string, events: GameEvent[]) {
+  if (!state.battle || !state.boons.includes("crystal-slipper")) return;
+  const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
+  const id = owner?.combat?.slipperCard;
+  if (!id || !state.cards.some((card) => card.id === id && cardActor(state, card)?.id === ownerId)) return;
+  if (!state.battle.draw.includes(id) && !state.battle.discard.includes(id)) return;
+  filterCardZones(state.battle, (candidate) => candidate !== id);
+  receiveCard(state, id);
+  journeyReturn(state, ownerId, events);
+  events.push({
+    kind: "action",
+    actionType: "support",
+    actorId: ownerId,
+    text: "Crystal Slipper returns the last played card to hand",
+  });
+}
+
+export function controlRecoveryDraw(state: GameState, ownerId: string, events: GameEvent[]) {
+  if (
+    !state.battle ||
+    !state.boons.includes("cuckoo-whistle") ||
+    !state.team.some((unit) => unit.id === ownerId && unit.health > 0)
+  )
+    return;
+  drawOwner(state, ownerId, events);
+}
+
 /** Return an existing owner slot; returns do not draw, copy, or award draw reactions */
 export function recoverBrokenGuard(state: GameState, ownerId: string, events: GameEvent[]) {
   if (

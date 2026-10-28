@@ -62,6 +62,13 @@
     "text": "<keyword0>Stun</keyword0> damage is twice as effective against enemy <keyword1>Block</keyword1>",
     "reference": "Stun damage is twice as effective against enemy Block"
   },
+  "content.boon.bargain-scales.name": {
+    "text": "Bargain Scales"
+  },
+  "content.boon.bargain-scales.rule": {
+    "text": "Boon Merchants offer an additional Boon",
+    "reference": "Boon Merchants offer an additional Boon"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "text": "Basalt Glass Bookmark"
   },
@@ -272,6 +279,20 @@
     "text": "<keyword0>Stun</keyword0> hits grant you <keyword1>Reflect</keyword1>",
     "reference": "Stun hits grant you Reflect"
   },
+  "content.boon.crystal-slipper.name": {
+    "text": "Crystal Slipper"
+  },
+  "content.boon.crystal-slipper.rule": {
+    "text": "<keyword0>Dodging</keyword0> returns the ally’s last played card to hand",
+    "reference": "Dodging returns the ally’s last played card to hand"
+  },
+  "content.boon.cuckoo-whistle.name": {
+    "text": "Cuckoo Whistle"
+  },
+  "content.boon.cuckoo-whistle.rule": {
+    "text": "When an ally recovers from <keyword0>Stun</keyword0> or <keyword1>Freeze</keyword1>, draw one of their cards",
+    "reference": "When an ally recovers from Stun or Freeze, draw one of their cards"
+  },
   "content.boon.cutpurse-knife.name": {
     "text": "Cutpurse Knife"
   },
@@ -300,6 +321,13 @@
     "text": "When an ally is <keyword0>Stunned</keyword0>, <keyword1>Cleanse</keyword1> <keyword2>Stun</keyword2> from other allies",
     "reference": "When an ally is Stunned, Cleanse Stun from other allies"
   },
+  "content.boon.dawn-key.name": {
+    "text": "Dawn Key"
+  },
+  "content.boon.dawn-key.rule": {
+    "text": "<keyword0>Light</keyword0> attacks break through <keyword1>Negate</keyword1>",
+    "reference": "Light attacks break through Negate"
+  },
   "content.boon.devotion-clasp.name": {
     "text": "Devotion Clasp"
   },
@@ -313,6 +341,13 @@
   "content.boon.dew-pendulum.rule": {
     "text": "At the end of your turn, allies gain <keyword0>Block</keyword0> equal to unspent <keyword1>Mana</keyword1>",
     "reference": "At the end of your turn, allies gain Block equal to unspent Mana"
+  },
+  "content.boon.dragons-toothpick.name": {
+    "text": "Dragon's Toothpick"
+  },
+  "content.boon.dragons-toothpick.rule": {
+    "text": "After receiving <keyword0>Food</keyword0>, an ally’s next attack also <keyword1>Purges</keyword1>",
+    "reference": "After receiving Food, an ally’s next attack also Purges"
   },
   "content.boon.dream-tangram.name": {
     "text": "Dream Tangram"
@@ -699,6 +734,13 @@
     "text": "<keyword0>Freeze</keyword0> hits also add half their <keyword1>Freeze</keyword1> buildup to another enemy",
     "reference": "Freeze hits also add half their Freeze buildup to another enemy"
   },
+  "content.boon.moonseed.name": {
+    "text": "Moonseed"
+  },
+  "content.boon.moonseed.rule": {
+    "text": "<keyword0>Light</keyword0> hits double the attacker’s next <keyword1>Thorns</keyword1> retaliation",
+    "reference": "Light hits double the attacker’s next Thorns retaliation"
+  },
   "content.boon.moonveil-mask.name": {
     "text": "Moonveil Mask"
   },
@@ -733,6 +775,13 @@
   "content.boon.nectar-dipper.rule": {
     "text": "<keyword0>Food</keyword0> cards are twice as effective",
     "reference": "Food cards are twice as effective"
+  },
+  "content.boon.nightbloom-bell.name": {
+    "text": "Nightbloom Bell"
+  },
+  "content.boon.nightbloom-bell.rule": {
+    "text": "<keyword0>Blind</keyword0> fades from allies when their turn ends",
+    "reference": "Blind fades from allies when their turn ends"
   },
   "content.boon.oasis-seed.name": {
     "text": "Oasis Seed"
@@ -951,6 +1000,13 @@
     "text": "After your third card each turn, gain {{value0}} <keyword0>Mana</keyword0>",
     "reference": "After your third card each turn, gain 1 Mana"
   },
+  "content.boon.ribbon-spool.name": {
+    "text": "Ribbon Spool"
+  },
+  "content.boon.ribbon-spool.rule": {
+    "text": "An ally’s immunity to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> protects all allies",
+    "reference": "An ally’s immunity to Stun and Freeze protects all allies"
+  },
   "content.boon.ripple-mirror.name": {
     "text": "Ripple Mirror"
   },
@@ -1007,6 +1063,13 @@
     "text": "<keyword0>Cleansing</keyword0> an ally’s <keyword1>Bleed</keyword1> grants them {{value0}} <keyword2>Armor</keyword2>",
     "reference": "Cleansing an ally’s Bleed grants them 2 Armor"
   },
+  "content.boon.sandfold-parasol.name": {
+    "text": "Sandfold Parasol"
+  },
+  "content.boon.sandfold-parasol.rule": {
+    "text": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
+    "reference": "When an ally Dodges, other allies Dodge the same attack"
+  },
   "content.boon.shelter-lantern.name": {
     "text": "Shelter Lantern"
   },
@@ -1034,6 +1097,13 @@
   "content.boon.sleepers-urn.rule": {
     "text": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
     "reference": "Stun and Freeze build-up can accumulate during enemy immunity"
+  },
+  "content.boon.sleepy-acorn.name": {
+    "text": "Sleepy Acorn"
+  },
+  "content.boon.sleepy-acorn.rule": {
+    "text": "<keyword0>Healing</keyword0> cards can be played through <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "reference": "Healing cards can be played through Stun and Freeze"
   },
   "content.boon.smugglers-map.name": {
     "text": "Smuggler's Map"
@@ -3940,117 +4010,132 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "text": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
     "reference": "Acrobat Top: next attack cannot be Dodged",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "text": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
     "reference": "Attack Reflection: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; Reflected attacks cannot reflect again; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "text": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
     "reference": "Blind: 50% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a Dodge by every recipient; Does not stack",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "text": "<keyword0>Stunned</keyword0>: {{value0}} turns",
     "reference": "Stunned: 2 turns",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "text": "Turn skipped",
     "reference": "Turn skipped",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "text": "<keyword0>Frozen</keyword0>: {{value0}} turn",
     "reference": "Frozen: 1 turn",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "text": "<keyword0>Frozen</keyword0>: {{value0}} turns",
     "reference": "Frozen: 2 turns",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "text": "<keyword0>Stunned</keyword0>: {{value0}} turn",
     "reference": "Stunned: 1 turn",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "text": "Control immunity {{value0}}",
     "reference": "Control immunity 0",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "text": "Free Follow-up: next card is free",
     "reference": "Free Follow-up: next card is free",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "text": "Divine Favor: next <keyword0>Light</keyword0> card is free",
     "reference": "Divine Favor: next Light card is free",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "text": "Windstep: next <keyword0>Nature</keyword0> card is free",
     "reference": "Windstep: next Nature card is free",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "text": "Death's Door {{value0}}",
     "reference": "Death's Door 0",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
+  },
+  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
+    "text": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
+    "reference": "Moonseed: next Thorns retaliation deals double damage",
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "text": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
     "reference": "Negate: Negate the next attack against you before Dodge, preventing its damage and harmful effects; Thorns still retaliate; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "text": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
     "reference": "Open Flank: next attack deals 0 additional Physical damage",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "text": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
     "reference": "Nullify: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "text": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "reference": "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "text": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
     "reference": "Oasis Seed: next attack has Leech",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "text": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
     "reference": "Parting Cut: next Physical hit deals half its damage as additional Bleed damage",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "text": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
     "reference": "Reflect: Return the specified attack or harmful status effect; Attack reflection returns damage and harmful follow-ups to the attacker; Status-only reflection redirects the effect to a random living enemy while direct damage still lands; Reflected attacks and statuses cannot reflect again; Charges do not stack",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "text": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
     "reference": "Reflect the next Burn; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "text": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
     "reference": "Finding Rhythm: +0% Dodge chance",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
+  },
+  "content.status.ribbonSpool.vf90381129d21c88c.rule": {
+    "text": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "reference": "Ribbon Spool: immune to Stun and Freeze",
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "text": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
     "reference": "Riposte: next Physical attack is a guaranteed Critical Hit",
-    "contextHash": "d3808c0f573bf96240ac64cd24c87c38d1274f0251c709c627d04e777631764c"
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
+  },
+  "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
+    "text": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
+    "reference": "Dragon’s Toothpick: next attack also Purges",
+    "contextHash": "1a8fac31e303e29a4bba6142da4173f45aad1d7ac9c8fdc2a86443983d988e32"
   },
   "content.talent.armor.armored-surge.name": {
     "text": "Armored Surge"

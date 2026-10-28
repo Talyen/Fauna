@@ -30,7 +30,9 @@ export const recordedTraceDigest = (value: unknown) =>
         if (key === "fireThorns" && entry === 0) return undefined;
         if (key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) return undefined;
         if (key === "encoreProgress" && entry === 0) return undefined;
-        if (key === "oasisLeech" && entry === false) return undefined;
+        if (["oasisLeech", "moonseedReady", "toothpickReady"].includes(key) && entry === false)
+          return undefined;
+        if (key === "slipperCard" && entry === null) return undefined;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
       }),

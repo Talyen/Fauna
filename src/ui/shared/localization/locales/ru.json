@@ -425,6 +425,18 @@
     "sourceHash": "09d5acb7c35f694093351accea067da12304da8a69ed197ae10b7cf9205a6610",
     "text": "Урон от <keyword0>оглушения</keyword0> вдвое эффективнее против <keyword1>блока</keyword1> врага"
   },
+  "content.boon.bargain-scales.name": {
+    "reviewed": true,
+    "source": "Bargain Scales",
+    "sourceHash": "e568d2a8dcca2a2b0810edaacf815c40407557b52a569dab8b19ff173f97948b",
+    "text": "Весы торга"
+  },
+  "content.boon.bargain-scales.rule": {
+    "reviewed": true,
+    "source": "Boon Merchants offer an additional Boon",
+    "sourceHash": "dffb25b8b0aa2238fe92446e21f158a7917bb0bf7b449b348abeedc06055f613",
+    "text": "Торговцы благословениями предлагают дополнительное благословение"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -785,6 +797,30 @@
     "sourceHash": "452fe1d436b5ccb1f302991a5812e949e30fdf7860a1e0a5e9c25f7da9d4c1a5",
     "text": "Удары с <keyword0>оглушением</keyword0> дают вам <keyword1>отражение</keyword1>"
   },
+  "content.boon.crystal-slipper.name": {
+    "reviewed": true,
+    "source": "Crystal Slipper",
+    "sourceHash": "9a445d65cbf84cd3693c900c1319c69c97e50a23a9f57cd3165f2728efae59c6",
+    "text": "Хрустальная туфелька"
+  },
+  "content.boon.crystal-slipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> returns the ally’s last played card to hand",
+    "sourceHash": "b4dc335d29a0ee4d37e9a7948e2de4af9c6c5bc4d060e8a55ea4b25d3aa7ff86",
+    "text": "<keyword0>Уклонение</keyword0> возвращает в руку последнюю сыгранную союзником карту"
+  },
+  "content.boon.cuckoo-whistle.name": {
+    "reviewed": true,
+    "source": "Cuckoo Whistle",
+    "sourceHash": "65bd77cd74daa630a96f5534abeafad007d828342d208e574a5d89854c6503e6",
+    "text": "Кукушкин свисток"
+  },
+  "content.boon.cuckoo-whistle.rule": {
+    "reviewed": true,
+    "source": "When an ally recovers from <keyword0>Stun</keyword0> or <keyword1>Freeze</keyword1>, draw one of their cards",
+    "sourceHash": "2b427759d871de464b997a9f34e7eb5255b9b7ad1be553bf8927dcf46cc534e8",
+    "text": "Когда союзник оправляется от <keyword0>оглушения</keyword0> или <keyword1>заморозки</keyword1>, возьмите одну из его карт"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
@@ -833,6 +869,18 @@
     "sourceHash": "01c166a6d78652c2243ac3bd640ac35ed3491de27fb07ad00155bcb67b87052d",
     "text": "Когда союзник получает <keyword0>оглушение</keyword0>, <keyword1>очищение</keyword1> снимает <keyword2>оглушение</keyword2> с других союзников"
   },
+  "content.boon.dawn-key.name": {
+    "reviewed": true,
+    "source": "Dawn Key",
+    "sourceHash": "1352710586e53ea02504d89e762cb1ce0e21fea01c2a81d8728e6c4c4ddf4fea",
+    "text": "Ключ рассвета"
+  },
+  "content.boon.dawn-key.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks break through <keyword1>Negate</keyword1>",
+    "sourceHash": "5ecf8d8f51f4d3117123dfce5807ace018b57638020444592c2e34edcf90f29b",
+    "text": "Атаки <keyword0>светом</keyword0> пробивают <keyword1>отведение</keyword1>"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -856,6 +904,18 @@
     "source": "At the end of your turn, allies gain <keyword0>Block</keyword0> equal to unspent <keyword1>Mana</keyword1>",
     "sourceHash": "9708545a58f25c66dc8fa8f199e3d8313611ebdb63031067a1d595007b709c02",
     "text": "В конце вашего хода союзники получают <keyword0>блок</keyword0> в размере неизрасходованной <keyword1>маны</keyword1>"
+  },
+  "content.boon.dragons-toothpick.name": {
+    "reviewed": true,
+    "source": "Dragon's Toothpick",
+    "sourceHash": "60f580a986138487f65f084ccc427b252ae76b7a76ffa6e46e24182326574540",
+    "text": "Драконья зубочистка"
+  },
+  "content.boon.dragons-toothpick.rule": {
+    "reviewed": true,
+    "source": "After receiving <keyword0>Food</keyword0>, an ally’s next attack also <keyword1>Purges</keyword1>",
+    "sourceHash": "8a56c48969bf6b2552f189169d864eec2c85c601b8597ec39faaa3471a52d324",
+    "text": "После получения <keyword0>еды</keyword0> следующая атака союзника также вызывает <keyword1>рассеивание</keyword1>"
   },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
@@ -1517,6 +1577,18 @@
     "sourceHash": "efdc6fb155b668a12f94a0cc8abfd4cf15d44b663a2ebc4f42a12e8f0057a41e",
     "text": "Удары <keyword0>заморозкой</keyword0> также накладывают на другого врага половину своего накопления <keyword1>заморозки</keyword1>"
   },
+  "content.boon.moonseed.name": {
+    "reviewed": true,
+    "source": "Moonseed",
+    "sourceHash": "49606361620d5317eee398a7b9a488cc24845ec870cdfbc7cfbfeff8b9e6f88b",
+    "text": "Лунное семя"
+  },
+  "content.boon.moonseed.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits double the attacker’s next <keyword1>Thorns</keyword1> retaliation",
+    "sourceHash": "91a2581768032fbb4a719d651a79be18b1fd7e24c72169ae8d308dda930985e3",
+    "text": "Попадания <keyword0>светом</keyword0> удваивают следующую ответную атаку <keyword1>шипами</keyword1> атакующего"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
@@ -1576,6 +1648,18 @@
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "f4bab865c0b267b4d08646e0280b9d1d109b2c2e6434ce29c733a8fec81b35b0",
     "text": "Карты <keyword0>еды</keyword0> действуют вдвое сильнее"
+  },
+  "content.boon.nightbloom-bell.name": {
+    "reviewed": true,
+    "source": "Nightbloom Bell",
+    "sourceHash": "0fe1de94112ffd4e9dcf6d9d83ffa0c3b930bf765bbf7d9c549da5cde41475e0",
+    "text": "Колокольчик ночного цветка"
+  },
+  "content.boon.nightbloom-bell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> fades from allies when their turn ends",
+    "sourceHash": "3a25b604140fd8b81f996f335e6f549e109d4d8b2d5110d67da65bf994b051c2",
+    "text": "<keyword0>Ослепление</keyword0> союзников исчезает в конце их хода"
   },
   "content.boon.oasis-seed.name": {
     "reviewed": true,
@@ -1949,6 +2033,18 @@
     "sourceHash": "7a41bb177c5246c0caf0bf34bc4d756469e4633257c9c2cbddc7766d5fd2d288",
     "text": "После третьей карты в каждом ходу получите {{value0}} <keyword0>маны</keyword0>"
   },
+  "content.boon.ribbon-spool.name": {
+    "reviewed": true,
+    "source": "Ribbon Spool",
+    "sourceHash": "573d6e7c15ba5f42cc0725797fdbbd5e12686077ce6581142439fe833c920962",
+    "text": "Катушка лент"
+  },
+  "content.boon.ribbon-spool.rule": {
+    "reviewed": true,
+    "source": "An ally’s immunity to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> protects all allies",
+    "sourceHash": "830c1f4f6129ae8b5fe7a586dde91db1998c80ea87c6a7c72e5439232342eeb7",
+    "text": "Иммунитет одного союзника к <keyword0>оглушению</keyword0> и <keyword1>заморозке</keyword1> защищает всех союзников"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2045,6 +2141,18 @@
     "sourceHash": "ed54ffce778211444232c26c63ba5ea1a7ef74178949d4cf0f8ea4a877620f42",
     "text": "<keyword0>Очищение</keyword0> союзника от <keyword1>кровотечения</keyword1> даёт ему {{value0}} <keyword2>брони</keyword2>"
   },
+  "content.boon.sandfold-parasol.name": {
+    "reviewed": true,
+    "source": "Sandfold Parasol",
+    "sourceHash": "a6fd77ae13de107f873f891a323ae77d3dfafbe3838c4e678465cb7e956cbdca",
+    "text": "Песочный зонтик"
+  },
+  "content.boon.sandfold-parasol.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
+    "sourceHash": "14f1aae64a1c3b6c104aa44212cc1228d1a8e6b599d3a89b0462501e8f7765b8",
+    "text": "Когда союзник <keyword0>уклоняется</keyword0>, остальные союзники тоже <keyword1>уклоняются</keyword1> от той же атаки"
+  },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
     "source": "Shelter Lantern",
@@ -2092,6 +2200,18 @@
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
     "sourceHash": "2e1c35de6108e9609c4685dd579100cd6c48df4dbcb156ec1ed26786215bce02",
     "text": "Накопление <keyword0>оглушения</keyword0> и <keyword1>заморозки</keyword1> может расти во время иммунитета врага"
+  },
+  "content.boon.sleepy-acorn.name": {
+    "reviewed": true,
+    "source": "Sleepy Acorn",
+    "sourceHash": "a5afb0b0aa48b3a8024d15a1eef70cb383ca1c47d69550e49ba75259cf7bbb73",
+    "text": "Сонный жёлудь"
+  },
+  "content.boon.sleepy-acorn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> cards can be played through <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "de64f1aa56e3f000964f7425b8e5f134a513170258656c591663f1bf5dcf7d67",
+    "text": "Карты <keyword0>исцеления</keyword0> можно играть во время <keyword1>оглушения</keyword1> и <keyword2>заморозки</keyword2>"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -6650,140 +6770,158 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "bac4da60aef91e38dfb1159fbd2513e4414a420ff51b3fe1d88f719385dd0422",
+    "sourceHash": "ae19a5179f26d06593bef5bf7c9dea917ef3755c8119a28a3cda3cf7ab4af0af",
     "text": "Волчок акробата: от следующей атаки нельзя <keyword0>уклониться</keyword0>"
   },
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "236fa75281ac8bcb2d88c4d252e4da56cf38686502120f669dfa357e98137035",
+    "sourceHash": "dcf087678e2b0f08d3d8e67e39603540426e21c468dff72193c5097e40f6084b",
     "text": "<keyword0>Отражение атаки</keyword0>: возвращает следующую атаку нападающему; Предотвращает её урон и вредные эффекты для вас; <keyword1>Отражённые</keyword1> атаки нельзя <keyword2>отразить</keyword2> повторно; Действует до расходования или <keyword3>рассеивания</keyword3>; Не суммируется"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "bc9aa401eb15795e63e91587c9475bee399a070664aec7d09d2522b7a75effff",
+    "sourceHash": "624821f06a21a9898a85c078ce9daaa044d9af7c4ee7c512c92333ee56bbf4f5",
     "text": "<keyword0>Ослепление</keyword0>: вероятность промаха следующей атаки — {{value0}}%; Исчезает после этой атаки независимо от попадания; Промах считается <keyword1>уклонением</keyword1> каждой цели; Не суммируется"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "39106f982148441ee489858501906e42301726ab10bc3e53486f30d69880077a",
+    "sourceHash": "da26673d794afee0d151be31b70a334f3652b298084ecfec0b35e18322cbb4fd",
     "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "0d7993d1eb72331298eb9b139671f5255df4563fa2e6b98f878044c2be1030fc",
+    "sourceHash": "c3b1092d31cd44cf1200b24ec3ea0f5d12c996db5366118c6d76b1acf1ac749f",
     "text": "Ход пропущен"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "b0556e5fb9956df70705b70e291a7ca31253dadc4866c06f87ee3c49731d357e",
+    "sourceHash": "3ad0090a8e1da9ca51604b8d5f8f118ad3fba43b56598fb96b350929120beefa",
     "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "0dd5fb71d360ded56710106c31f5c8cfd301ea41bd8ce3a11d2b395b1e50566d",
+    "sourceHash": "b8079749fe1b63950ce2e5c41b82ee59282e0f3e98f947dfc3bd3166dd56b70d",
     "text": "<keyword0>Заморозка</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "e75cf959b5831c684457eca051771162f6e611b04a32e59e0f2ea08ff49499ca",
+    "sourceHash": "ca1846787a820264774e4cfc302e99a6434862c240ab058017b3e2d5e4326275",
     "text": "<keyword0>Оглушение</keyword0>: осталось ходов — {{value0}}"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "be40e23b1321fa79107e6ecde13f8e60ec3ccdf34a1063cb2d323b412dcf5993",
+    "sourceHash": "88f3aa5b3db9d42cce6a725d2638cef49e42be85d65bbb846d81c14643faf86b",
     "text": "Иммунитет к контролю {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "3e7bae9f7e93834ee42394d83a80a1f0392399bb1069897e42c87d8453a60205",
+    "sourceHash": "f90f2468c22bcacbbe6e0a788b4a76c8db5d3f1b9db2e1553b5a9120f8f553ce",
     "text": "Бесплатное продолжение: следующая карта бесплатна"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "67f9dc746a33f259f43b4a4d0554bb77abd9f267c561243198d9580427a16613",
+    "sourceHash": "ff9398f8e17e5f606d65c45bee17e640c2ea5e1dddb1f33000688ce32c2496ee",
     "text": "Божественная милость: следующая карта <keyword0>света</keyword0> бесплатна"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "8e6583e4a76e60ee9d529d65f36d02b9d62fa9333a75e74dbbe6f273354eabeb",
+    "sourceHash": "b838e82eac7a11021f4b63c9727d2d83e47daed2268b11ed048e9ab4a0da71a2",
     "text": "Шаг ветра: следующая карта <keyword0>природы</keyword0> бесплатна"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "92bc24fc8abb2046c2b3d9d6bd11cccfb0f9d64d9e2e64c75bf606543b8b856e",
+    "sourceHash": "9992c8e27cbe93f0d9d99f20f4e907361f5fb47d258bf1a9bc349f6eec0bf29f",
     "text": "На пороге смерти {{value0}}"
+  },
+  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
+    "reviewed": true,
+    "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
+    "sourceHash": "9d4b3cdc36d7915eacc97a84fda6a46f1d0df8da208dfd25e0020e6c8ae002f5",
+    "text": "Лунное семя: следующая ответная атака <keyword0>шипами</keyword0> наносит двойной урон"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "4d23b54d78102241ab566eaf21fe17e194bc7ea36c068b02262d14f3fb9cc779",
+    "sourceHash": "484b2fd7c881e7d0128c6cba9bc0de677db127d5e8f1cc050e6cede2873c1b84",
     "text": "<keyword0>Отведение</keyword0>: <keyword1>отводит</keyword1> следующую атаку до <keyword2>уклонения</keyword2>, предотвращая её урон и вредные эффекты; <keyword3>Шипы</keyword3> всё равно отвечают; Действует до расходования или <keyword4>рассеивания</keyword4>; Не суммируется"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "abcc09fc6932d8451c864fb647f62b8ed9899a9dfe3e0b320f9445f3d775fcc7",
+    "sourceHash": "42f98cd5c1acf639ddf8c2d83695199915404bc6190061d0940bc3a359b7a255",
     "text": "Открытый фланг: следующая атака наносит дополнительно {{value0}} <keyword0>физического</keyword0> урона"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "3142b6fff25eceec6abd1fe22ef869fc95bac9c6b1e433b683336707169c5a90",
+    "sourceHash": "515b99bdade86b663a158b5a0b8431381807aa76ee82e401c780925c6b264da8",
     "text": "<keyword0>Аннулирование</keyword0>: предотвращает следующий вредный статусный эффект; Прямой урон всё равно проходит; Действует до расходования или <keyword1>рассеивания</keyword1>; Не суммируется"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "8cc578569c1b33d7e88ffceb2fa71343ba29d3a947ef79c41635548e21e16a1e",
+    "sourceHash": "3a07ba10e955a6adc2ae750b0c87c0569c94fd0e156f453f391fa4ece290072b",
     "text": "<keyword0>Аннулирует</keyword0> следующий урон от <keyword1>заморозки</keyword1>; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "c85e62dfd3a2c962eda9605346c51c46e012058df4fd0dbb73efaf812edc9248",
+    "sourceHash": "3823a4641787451968b698f0b2bde669f9a58dfe638b9b5a486db3e9971b67f7",
     "text": "Семя оазиса: следующая атака имеет <keyword0>вампиризм</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "6c4934ad62c76e66a343717c570f05a69a66b94c978392938403d04a98c156c5",
+    "sourceHash": "98f968532f070fa62f0286c52289440d7e3fd479db90d69d88848eb33671e284",
     "text": "Прощальный порез: следующее <keyword0>физическое</keyword0> попадание дополнительно наносит половину своего урона <keyword1>кровотечением</keyword1>"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "708430b71bb14510d3b93a4d50aa24305e166af1a92f2903a01f478d9889eb2c",
+    "sourceHash": "f1729ba7f292c892f746ec3801d8a02d9f53ddc510083adca147e06d23aca2a4",
     "text": "<keyword0>Отражение</keyword0>: возвращает указанную атаку или вредный статусный эффект; <keyword1>Отражение атаки</keyword1> возвращает нападающему урон и последующие вредные эффекты; <keyword2>Отражение</keyword2> только статуса направляет эффект случайному живому врагу, а прямой урон всё равно проходит; <keyword3>Отражённые</keyword3> атаки и статусы нельзя <keyword4>отразить</keyword4> повторно; Заряды не суммируются"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "f8bd6581d29a80bae2287e7562e5aa7d1dc3fe8a370809169e0e906e84634b88",
+    "sourceHash": "6926f07156c7a486f63713280fc319686db69912e369aa838c5b970714e86ac7",
     "text": "<keyword0>Отражает</keyword0> следующее <keyword1>горение</keyword1>; Прямой урон всё равно проходит; Действует до расходования или <keyword2>рассеивания</keyword2>; Не суммируется"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "751cb98f64dc7e8edf66a1fae7157fd754a567a7995a2e0e6f3a80dae5e66bee",
+    "sourceHash": "b0760a798e6f116a9a30bba8cb9276bcb04ab6ebd8ddeb48a6ecbf17986627f7",
     "text": "Найти ритм: +{{value0}}% к шансу <keyword0>уклонения</keyword0>"
+  },
+  "content.status.ribbonSpool.vf90381129d21c88c.rule": {
+    "reviewed": true,
+    "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "73bc5f2d65d2f5a7e8bba2123b4c737687e473161e82579aee8dcc655c42ba86",
+    "text": "Катушка лент: иммунитет к <keyword0>оглушению</keyword0> и <keyword1>заморозке</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "a46ce5c9dcb6e63357a76d402bf1c8ebd18e12ec058cef4386cae8567631359d",
+    "sourceHash": "f72548896e603af10f1d4d1c73583b5fc74f7888d4f1e5f8076b57063ac50759",
     "text": "Рипост: следующая <keyword0>физическая</keyword0> атака гарантированно наносит <keyword1>критический удар</keyword1>"
+  },
+  "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
+    "reviewed": true,
+    "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
+    "sourceHash": "0f9f5c3231b98cb4d3dce4d48b4f1aa005f3418f60b51041d4a7645d69e326ca",
+    "text": "Драконья зубочистка: следующая атака также вызывает <keyword0>рассеивание</keyword0>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,

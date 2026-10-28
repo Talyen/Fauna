@@ -130,7 +130,7 @@ export function rosterBoonKeywords(state: GameState): Set<KeywordId> {
 }
 
 /** Sample distinct unowned Boons; a matching Boon has twice the weight of an unmatched one. */
-export function offerBoons(state: GameState): BoonId[] {
+export function offerBoons(state: GameState, count = 3): BoonId[] {
   const owned = new Set(state.boons);
   let keywords: Set<KeywordId> | undefined;
   const pool: { id: BoonId; weight: number }[] = [];
@@ -143,7 +143,7 @@ export function offerBoons(state: GameState): BoonId[] {
     total += weight;
   }
   const offered: BoonId[] = [];
-  while (pool.length && offered.length < 3) {
+  while (pool.length && offered.length < count) {
     let choice = roll(state) * total;
     let index = 0;
     while (index < pool.length - 1 && choice >= pool[index]!.weight) choice -= pool[index++]!.weight;

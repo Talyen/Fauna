@@ -1,7 +1,7 @@
 import { boonRule } from "../rules/boons";
 import { talentChance } from "../chance";
 import { isEnemy, battlefield, battlefieldHasId, combatantById, cleanseTargets } from "../battlefield";
-import { draw } from "../card-zones";
+import { draw, controlRecoveryDraw } from "../card-zones";
 import { roll } from "../random";
 import { hasTalent, passiveAmount } from "../progression";
 
@@ -192,6 +192,7 @@ export function* startAction(
         text: `${unitName(unit)} skips its ${stats.controlled === "freeze" ? "Frozen" : "Stunned"} turn.`,
       });
     const recovered = consumeControlTurn(stats);
+    if (recovered && state) controlRecoveryDraw(state, unit.id, events);
     if (recovered === "freeze" && isEnemy(unit) && state && hasTalent(state, "freeze.thaw-dividend"))
       draw(state, 1, events);
   } else advanceControlImmunity(stats);

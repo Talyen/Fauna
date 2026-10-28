@@ -46,6 +46,7 @@ type CreatureProps = {
   invalidTarget?: boolean;
   combat?: import("../../../game/types").CombatState;
   sharedDodge?: number;
+  sharedImmunity?: number;
 };
 function useCardTooltip(enabled: boolean) {
   const [state, setState] = useState({ enabled, open: false });
@@ -82,6 +83,7 @@ export function CreatureCard({
   invalidTarget = false,
   combat,
   sharedDodge = 0,
+  sharedImmunity = 0,
 }: CreatureProps) {
   const i18n = useMessages();
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
@@ -169,7 +171,9 @@ export function CreatureCard({
             ) : readout && health !== undefined && (actorId || enemyId) ? (
               <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
             ) : null}
-            {readout ? <CombatStatus combat={combat} sharedDodge={sharedDodge} /> : null}
+            {readout ? (
+              <CombatStatus combat={combat} sharedDodge={sharedDodge} sharedImmunity={sharedImmunity} />
+            ) : null}
           </div>
         </div>
       </div>

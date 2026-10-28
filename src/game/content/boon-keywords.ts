@@ -3,6 +3,16 @@ import type { KeywordId } from "../keywords";
 
 // Authored associations for offer weighting; absent entries have no keyword preference.
 export const BOON_KEYWORDS: Partial<Record<BoonId, readonly KeywordId[]>> = {
+  "sandfold-parasol": ["dodge"],
+  "ribbon-spool": ["stun", "freeze"],
+  "dawn-key": ["light", "negate"],
+  "crystal-slipper": ["dodge"],
+  moonseed: ["light", "thorns"],
+  "bargain-scales": [],
+  "dragons-toothpick": ["food", "purge"],
+  "sleepy-acorn": ["health", "stun", "freeze"],
+  "cuckoo-whistle": ["stun", "freeze"],
+  "nightbloom-bell": ["blind", "cleanse"],
   "orchard-ladder-charm": ["food", "health"],
   "spore-trivet": ["food", "burn", "cleanse"],
   "victory-laurel": ["mana"],

@@ -4284,6 +4284,116 @@
       "aspect": [3, 4],
       "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1rtIuKb2Jb1bBvW4tzFhgEfsS3_uekERv/view?usp=drivesdk; original PNG preserved unchanged",
       "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.sandfold-parasol",
+      "origin": "repository",
+      "source": "public/art/boons/sandfold-parasol.png",
+      "output": "art/boons/sandfold-parasol.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Sandfold Parasol.png; https://drive.google.com/file/d/1pBFscizh7MlWSfkW7-nFT5ZHCgXy0TOu/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.ribbon-spool",
+      "origin": "repository",
+      "source": "public/art/boons/ribbon-spool.png",
+      "output": "art/boons/ribbon-spool.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Ribbon Spool.png; https://drive.google.com/file/d/1x4garlL9QC-DeeRuS9uMpvVGA4k7JkHi/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.dawn-key",
+      "origin": "repository",
+      "source": "public/art/boons/dawn-key.png",
+      "output": "art/boons/dawn-key.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Dawn Key.png; https://drive.google.com/file/d/12YTSYydHbC6zCnq01UoTjrFJcj3nqzT0/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.crystal-slipper",
+      "origin": "repository",
+      "source": "public/art/boons/crystal-slipper.png",
+      "output": "art/boons/crystal-slipper.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Crystal Slipper.png; https://drive.google.com/file/d/1kuYyr91NVJp4DO28d3hTarp2TsUXvKrF/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.moonseed",
+      "origin": "repository",
+      "source": "public/art/boons/moonseed.png",
+      "output": "art/boons/moonseed.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Moonseed.png; https://drive.google.com/file/d/1meDkQmoWm4epzWZoKxAYe3NbtUye0N6W/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.bargain-scales",
+      "origin": "repository",
+      "source": "public/art/boons/bargain-scales.png",
+      "output": "art/boons/bargain-scales.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Bargain Scales.png; https://drive.google.com/file/d/1_jOBhNA3_yAZ8XhQSeKeTf1BC1dFwE_Z/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.dragons-toothpick",
+      "origin": "repository",
+      "source": "public/art/boons/dragons-toothpick.png",
+      "output": "art/boons/dragons-toothpick.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Dragon's Toothpick.png; https://drive.google.com/file/d/1rdyFI5u92VhLQWWbIk7DMQvgVYLMQ6n7/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.sleepy-acorn",
+      "origin": "repository",
+      "source": "public/art/boons/sleepy-acorn.png",
+      "output": "art/boons/sleepy-acorn.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Sleepy Acorn.png; https://drive.google.com/file/d/1lL_YKeGvz0uCNdSH0NBUMSKMA4s0zcyN/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.cuckoo-whistle",
+      "origin": "repository",
+      "source": "public/art/boons/cuckoo-whistle.png",
+      "output": "art/boons/cuckoo-whistle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Cuckoo Whistle.png; https://drive.google.com/file/d/1ZLl321nQvD_0kZ_uWUWvVi9fAXhKdeCO/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.nightbloom-bell",
+      "origin": "repository",
+      "source": "public/art/boons/nightbloom-bell.png",
+      "output": "art/boons/nightbloom-bell.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: Nightbloom Bell.png; https://drive.google.com/file/d/1IkHGoDLpdTeQH3xJ1pY27huhVSpXmzDO/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
     }
   ]
 }

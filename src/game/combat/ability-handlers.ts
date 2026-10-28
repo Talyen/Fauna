@@ -1,5 +1,6 @@
+import { boonRule } from "../rules/boons";
 import { TURN_MANA } from "../state-limits";
-import { shareNegate } from "./damage";
+import { shareNegate, shareDodge } from "./damage";
 import { grantCardRepeat } from "./card-repeat";
 import { createFood } from "./food";
 import { takeAttackReflection } from "./attack-reflection";
@@ -61,6 +62,7 @@ export function executePrimary(context: PrimaryContext) {
     cannotDodge,
     criticalBonus,
     oasisLeech,
+    toothpickPurge,
     additionalTarget,
     name,
     stats,
@@ -101,22 +103,42 @@ export function executePrimary(context: PrimaryContext) {
             : [];
       let extraAttackTarget: Combatant | undefined;
       const sharedNegate = shareNegate(state, actor, targets, blindMiss);
-      for (const intended of targets) {
+      const sheltered = enemy && targets.length > 1 && state.boons.includes("sandfold-parasol");
+      const recipients = sheltered
+        ? targets.map((intended) => (blindMiss ? intended : interceptAttack(state, actor, intended, events)))
+        : undefined;
+      const sharedDodge = shareDodge(state, actor, recipients ?? targets, events, blindMiss, sharedNegate);
+      for (const [index, intended] of targets.entries()) {
         if (actor.health <= 0) break;
         if (isDepartedMinion(state, intended)) continue;
-        const recipient = blindMiss ? intended : interceptAttack(state, actor, intended, events);
+        const recipient =
+          recipients?.[index] ?? (blindMiss ? intended : interceptAttack(state, actor, intended, events));
+        if (toothpickPurge && !blindMiss)
+          removeEffects(
+            recipient,
+            "purge",
+            boonRule("dragons-toothpick").purge,
+            events,
+            state,
+            undefined,
+            actor,
+          );
         if (def.target !== "allEnemies") {
           if (intended.id === target?.id) attackTarget = recipient;
           else extraAttackTarget = recipient;
         }
         const negation =
-          !blindMiss && negateAttack(state, actor, recipient, events, true, damageType, sharedNegate);
+          !blindMiss &&
+          !sharedDodge &&
+          negateAttack(state, actor, recipient, events, true, damageType, sharedNegate);
         if (negation === "negated") {
           negated.add(recipient.id);
           continue;
         }
         const reflected =
-          !blindMiss && (negation === "reflected" || takeAttackReflection(actor, recipient, events));
+          !blindMiss &&
+          !sharedDodge &&
+          (negation === "reflected" || takeAttackReflection(actor, recipient, events));
         if (reflected) {
           negated.add(recipient.id);
         }
@@ -144,6 +166,7 @@ export function executePrimary(context: PrimaryContext) {
               interceptionChecked: true,
               blindMiss: reflected ? false : blindMiss,
               cannotDodge: !reflected && cannotDodge,
+              sharedDodge: reflected ? undefined : sharedDodge,
               criticalBonus,
               leech:
                 def.leech ||
@@ -157,6 +180,7 @@ export function executePrimary(context: PrimaryContext) {
               sharedNegate: reflected ? undefined : sharedNegate,
             },
           );
+          if (sharedDodge) negated.add(victim.id);
           if (reflected) reflectExtras(state, action, recipient, events, power, victim);
         }
       }

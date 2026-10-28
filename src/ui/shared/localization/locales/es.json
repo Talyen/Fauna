@@ -425,6 +425,18 @@
     "sourceHash": "b88af19854f302016ae7aee7962bfbc9b30032d0afac7905e851eaa7332267ae",
     "text": "El daño de <keyword0>Aturdimiento</keyword0> es el doble de eficaz contra el <keyword1>Bloqueo</keyword1> enemigo"
   },
+  "content.boon.bargain-scales.name": {
+    "reviewed": true,
+    "source": "Bargain Scales",
+    "sourceHash": "1fbb58b22ef51848e2dad56474ac151cda36a88c0df569b1cd06496ef57e49e4",
+    "text": "Balanza de regateo"
+  },
+  "content.boon.bargain-scales.rule": {
+    "reviewed": true,
+    "source": "Boon Merchants offer an additional Boon",
+    "sourceHash": "394c972fb174c94655440a66c381f7efe9838b26de02a076b04fc554e05acd1a",
+    "text": "Los mercaderes de bendiciones ofrecen una bendición adicional"
+  },
   "content.boon.basalt-glass-bookmark.name": {
     "reviewed": true,
     "source": "Basalt Glass Bookmark",
@@ -785,6 +797,30 @@
     "sourceHash": "1b47cca5eda6a594595780f722b696605a315191e959e88c548e3d27195944f2",
     "text": "Los golpes de <keyword0>Aturdimiento</keyword0> te otorgan <keyword1>Reflejo</keyword1>"
   },
+  "content.boon.crystal-slipper.name": {
+    "reviewed": true,
+    "source": "Crystal Slipper",
+    "sourceHash": "7d19f093273f6fc6fe28a0de1741b9b3b4c0bd0da6b34b53acf5bfe481105637",
+    "text": "Zapatilla de cristal"
+  },
+  "content.boon.crystal-slipper.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> returns the ally’s last played card to hand",
+    "sourceHash": "1384ef1de9e06907b6c78f1b4a105304e2c32f3ba8d98bc8ea9e3b738992383d",
+    "text": "<keyword0>Esquivar</keyword0> devuelve a la mano la última carta jugada por ese aliado"
+  },
+  "content.boon.cuckoo-whistle.name": {
+    "reviewed": true,
+    "source": "Cuckoo Whistle",
+    "sourceHash": "d8c824969d58503d176cdf60862558f5d9f6b2a891494f223cd31673f8aa7c95",
+    "text": "Silbato de cuco"
+  },
+  "content.boon.cuckoo-whistle.rule": {
+    "reviewed": true,
+    "source": "When an ally recovers from <keyword0>Stun</keyword0> or <keyword1>Freeze</keyword1>, draw one of their cards",
+    "sourceHash": "064ed45255e30369efd7fa88f48fd52545f99383b5055c7252d92dd630e32471",
+    "text": "Cuando un aliado se recupera del <keyword0>Aturdimiento</keyword0> o la <keyword1>Congelación</keyword1>, roba una de sus cartas"
+  },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
     "source": "Cutpurse Knife",
@@ -833,6 +869,18 @@
     "sourceHash": "e6170db9671bd94d0685b82b3ce384d0ccb0e82caf15d6f598887cf4a75e6f49",
     "text": "Cuando un aliado queda <keyword0>Aturdido</keyword0>, <keyword1>Purifica</keyword1> el <keyword2>Aturdimiento</keyword2> de los demás aliados"
   },
+  "content.boon.dawn-key.name": {
+    "reviewed": true,
+    "source": "Dawn Key",
+    "sourceHash": "defa88ea754c8cdd95f3a7427da84dec959e3a5fe15ae177db8771022a141646",
+    "text": "Llave del alba"
+  },
+  "content.boon.dawn-key.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> attacks break through <keyword1>Negate</keyword1>",
+    "sourceHash": "158f70179f0d7539f3f9b379f9b279b3339c316a89167a599a4eb404c48fbc73",
+    "text": "Los ataques de <keyword0>Luz</keyword0> atraviesan la <keyword1>Anulación</keyword1>"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -856,6 +904,18 @@
     "source": "At the end of your turn, allies gain <keyword0>Block</keyword0> equal to unspent <keyword1>Mana</keyword1>",
     "sourceHash": "97f14adff2dc9bb5b634b74a88a1917e0a1407996c8d226da5bf983634fd4b70",
     "text": "Al final de tu turno, los aliados ganan tanto <keyword0>Bloqueo</keyword0> como <keyword1>Maná</keyword1> sin gastar"
+  },
+  "content.boon.dragons-toothpick.name": {
+    "reviewed": true,
+    "source": "Dragon's Toothpick",
+    "sourceHash": "f0c1190a37ea6bc02fb9d02f6af8ee3a617ecfcaef672c2629b0921e403eede0",
+    "text": "Palillo de dragón"
+  },
+  "content.boon.dragons-toothpick.rule": {
+    "reviewed": true,
+    "source": "After receiving <keyword0>Food</keyword0>, an ally’s next attack also <keyword1>Purges</keyword1>",
+    "sourceHash": "4efe1dbbcbfec84e5f6b18b60d818a33c10b02a81c9e6efc50898982a3d21a44",
+    "text": "Tras recibir <keyword0>Comida</keyword0>, el próximo ataque del aliado también <keyword1>purga</keyword1>"
   },
   "content.boon.dream-tangram.name": {
     "reviewed": true,
@@ -1517,6 +1577,18 @@
     "sourceHash": "464c40e6fb3740343a79ae74b2973da9b1a96b6a9eaf24c8c6f77b6ae742a2cf",
     "text": "Los golpes de <keyword0>Congelación</keyword0> también aplican la mitad de su acumulación de <keyword1>Congelación</keyword1> a otro enemigo"
   },
+  "content.boon.moonseed.name": {
+    "reviewed": true,
+    "source": "Moonseed",
+    "sourceHash": "03d1f54c587d6682de76aa5e522039f464f9fd8cab4e86d38487539ce48c5d52",
+    "text": "Semilla lunar"
+  },
+  "content.boon.moonseed.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Light</keyword0> hits double the attacker’s next <keyword1>Thorns</keyword1> retaliation",
+    "sourceHash": "e524af77e8260fab0e9e4cb5253ff0de5375007b18b0250570eeec2ea8781ad6",
+    "text": "Los impactos de <keyword0>Luz</keyword0> duplican la próxima represalia de <keyword1>Espinas</keyword1> del atacante"
+  },
   "content.boon.moonveil-mask.name": {
     "reviewed": true,
     "source": "Moonveil Mask",
@@ -1576,6 +1648,18 @@
     "source": "<keyword0>Food</keyword0> cards are twice as effective",
     "sourceHash": "ae751ff57b3585853e427bced1f09ef597c035efd697ceb531c74f1be8801407",
     "text": "Las cartas de <keyword0>Comida</keyword0> son el doble de eficaces"
+  },
+  "content.boon.nightbloom-bell.name": {
+    "reviewed": true,
+    "source": "Nightbloom Bell",
+    "sourceHash": "20de9b305ef97e36fa9257262fe6ba11f642d05e6bc226f1ee23582117fc3e8e",
+    "text": "Campana de flor nocturna"
+  },
+  "content.boon.nightbloom-bell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> fades from allies when their turn ends",
+    "sourceHash": "5c229e0e6768eec2d39b81823b52153c6cc2f7fbdd76ea0806fa3c0aa4725415",
+    "text": "La <keyword0>Ceguera</keyword0> de los aliados desaparece al terminar su turno"
   },
   "content.boon.oasis-seed.name": {
     "reviewed": true,
@@ -1949,6 +2033,18 @@
     "sourceHash": "ed20a7fe664c1e4da8c7bd81a71bd74d4b28edfd1618b8a611d9be89f13e15af",
     "text": "Después de tu tercera carta de cada turno, obtienes {{value0}} de <keyword0>Maná</keyword0>"
   },
+  "content.boon.ribbon-spool.name": {
+    "reviewed": true,
+    "source": "Ribbon Spool",
+    "sourceHash": "ca495204dbed3fbd9c84b6263cbdc2747ed30c260f9ce3cdfc45c1a9b942953d",
+    "text": "Carrete de cinta"
+  },
+  "content.boon.ribbon-spool.rule": {
+    "reviewed": true,
+    "source": "An ally’s immunity to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> protects all allies",
+    "sourceHash": "823bd9938d514bf4a5d6f41f8aa7d32097f747a988cea7985cb5fc220bcd11a0",
+    "text": "La inmunidad de un aliado al <keyword0>Aturdimiento</keyword0> y la <keyword1>Congelación</keyword1> protege a todos los aliados"
+  },
   "content.boon.ripple-mirror.name": {
     "reviewed": true,
     "source": "Ripple Mirror",
@@ -2045,6 +2141,18 @@
     "sourceHash": "6c468dce3db96dd8f83d3ff5ed25496ca9b35d84a17ad58228d21b8bc6a6dc3e",
     "text": "La <keyword0>Purificación</keyword0> del <keyword1>Sangrado</keyword1> de un aliado le otorga {{value0}} de <keyword2>Armadura</keyword2>"
   },
+  "content.boon.sandfold-parasol.name": {
+    "reviewed": true,
+    "source": "Sandfold Parasol",
+    "sourceHash": "f490f5c28bf978b55379ccaa57a5681a7412e44cfd028ff39fb9bdfa01e6d340",
+    "text": "Sombrilla de pliegues de arena"
+  },
+  "content.boon.sandfold-parasol.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Dodges</keyword0>, other allies <keyword1>Dodge</keyword1> the same attack",
+    "sourceHash": "0935ea0e127403d54a1bc4df2b8723ee5383c6d911430b0f4a5c45390b6a2135",
+    "text": "Cuando un aliado <keyword0>esquiva</keyword0>, los demás aliados también <keyword1>esquivan</keyword1> ese mismo ataque"
+  },
   "content.boon.shelter-lantern.name": {
     "reviewed": true,
     "source": "Shelter Lantern",
@@ -2092,6 +2200,18 @@
     "source": "<keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1> build-up can accumulate during enemy immunity",
     "sourceHash": "999affdbac175caa22c4c5dbb6e614cd45d5058331786bb03de8cbd248e830c6",
     "text": "La acumulación de <keyword0>Aturdimiento</keyword0> y <keyword1>Congelación</keyword1> puede aumentar durante la inmunidad enemiga"
+  },
+  "content.boon.sleepy-acorn.name": {
+    "reviewed": true,
+    "source": "Sleepy Acorn",
+    "sourceHash": "0053acfbfa0c86f1327c2f9e66255e2d8113405351948b8c035f5a9a51fa550a",
+    "text": "Bellota dormilona"
+  },
+  "content.boon.sleepy-acorn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> cards can be played through <keyword1>Stun</keyword1> and <keyword2>Freeze</keyword2>",
+    "sourceHash": "06c63bc955c1323d5764a733825e041f67822ef8dabe2bcaa3941303aa16b856",
+    "text": "Las cartas de <keyword0>curación</keyword0> se pueden jugar durante el <keyword1>Aturdimiento</keyword1> y la <keyword2>Congelación</keyword2>"
   },
   "content.boon.smugglers-map.name": {
     "reviewed": true,
@@ -6650,140 +6770,158 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "72de90adcf5d37273fd9053a46d2d08ce8a00d6f8ff1bd86aff166447e85569d",
+    "sourceHash": "3715642829b3de8e1d3c10280a5c8b4bff4e0b7f9f2b70bfa8da9c3384849201",
     "text": "Peonza acróbata: el siguiente ataque no puede ser <keyword0>Esquivado</keyword0>"
   },
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "b601a6b4a6a2070c1f9d6ecda20a6429089c9c476c223e51cd3ef68257d61c67",
+    "sourceHash": "23fb982960e71d2d41eadd9cf1b8087217a166ae596f281fcd00bdabf3a03dec",
     "text": "<keyword0>Reflejo de ataque</keyword0>: devuelve el próximo ataque contra ti a su atacante; Evita su daño y efectos perjudiciales sobre ti; Los ataques <keyword1>reflejados</keyword1> no pueden <keyword2>reflejarse</keyword2> de nuevo; Dura hasta consumirse o ser objeto de <keyword3>Purga</keyword3>; No se acumula"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "3543287c5ff37ef2c656ac7e933e88c6970bcd162b41c046a0f429e6223167b8",
+    "sourceHash": "b666091e5b6c94a5a9ef07205f03c5922abc28ff053f9c137e3b7bc40d0e0adf",
     "text": "<keyword0>Ceguera</keyword0>: {{value0}}% de probabilidad de fallar el próximo ataque; Expira tras ese ataque, acierte o falle; Un fallo cuenta como <keyword1>Esquiva</keyword1> para cada objetivo; No se acumula"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "4e38631df390e9e7d421907124966f37f3e4bc96f47d337b89582c48dcb618e6",
+    "sourceHash": "a40ce92e0c0bafa5ae9d884b95b0faee29ec0f6db86bb745d5697dd5737d49b2",
     "text": "<keyword0>Aturdimiento</keyword0>: {{value0}} turnos"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "698a4d2364ced1c04726bbaeeae3d4588b36a4c207b25655138019895953605a",
+    "sourceHash": "79435b56331ac9c8625aff85573b9c4d9eb548c9fcd3fbaefacee9be4610705e",
     "text": "Turno perdido"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "5cca14402474ae3bc6ecd3a220d035ddd44f22de197ab159e487e40fadabede1",
+    "sourceHash": "8d1d17898bb8336c844e09ae5b362f2d9bb53dff20f668442768e1cd4cc2df97",
     "text": "<keyword0>Congelación</keyword0>: {{value0}} turno"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "a7934903f290b790767ac59a1f0dc16c1f4ff73a9a9305efebeca6f3956ad8ae",
+    "sourceHash": "2aa14a485792691388e6884993d44bc0827ad68c9fd7bff191504703266c19ba",
     "text": "<keyword0>Congelación</keyword0>: {{value0}} turnos"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "48284a8802c1db2271fe50904d64d8203b289f66f4a343f3174b1b3be6574337",
+    "sourceHash": "2a7074907964280e32ec60d7d86a605d06726a21989b6faa87df82abaea5ac27",
     "text": "<keyword0>Aturdimiento</keyword0>: {{value0}} turno"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "d13a6df13add1395bcd592d8f4db4e9788e153e74e870dccf2d45d0f79cda4e0",
+    "sourceHash": "e06cf747eef629017039fed9843a46dbace0dccb8c9f040fa195512dfd23e845",
     "text": "Inmunidad al control {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "2ff7ce0033d28a909acde31352d495c6cc85537eac73073ede5d2c10b40ad5fd",
+    "sourceHash": "b7a1920db4927a533c22616ea7a1b83abc0314fd6d2258bf4dad177f18551937",
     "text": "Seguimiento gratis: la próxima carta es gratis"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "0503ded704ba25c9aae2cc306771ff7e7ebcee6e07de2580dc67916b3b95afda",
+    "sourceHash": "8e60656a53b5aae106331da5d4c53c19ce5c041e5ff7d28752c483dfca5c6b40",
     "text": "Favor divino: la próxima carta de <keyword0>Luz</keyword0> es gratis"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "4d01e9ce63819269f6c9de40c387eb1e50f04e265f0135e7ee1268ad80a7bf81",
+    "sourceHash": "cb0eb31f03852c87dfe8b56d985d604869d6ada3bb0768727d1301166852848f",
     "text": "Paso de viento: la próxima carta de <keyword0>Naturaleza</keyword0> es gratis"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "083a90ff62dc0c545a5bc62004c752612e8664498785b752375288b8b79c5e2e",
+    "sourceHash": "808b0ba0b63530a5920a67c870b6725a0af3ba3c548a9bdc214e758c1638fd58",
     "text": "Al borde de la muerte {{value0}}"
+  },
+  "content.status.moonseedReady.vdfb15903e208b3ee.rule": {
+    "reviewed": true,
+    "source": "Moonseed: next <keyword0>Thorns</keyword0> retaliation deals double damage",
+    "sourceHash": "fd3c725b3b09b8ccbc3ca9e07143d4d6446c5f3b715ad792f6e21bcb2389d0ed",
+    "text": "Semilla lunar: la próxima represalia de <keyword0>Espinas</keyword0> inflige el doble de daño"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "3d1fbeb934001b0374da6ac8c46b7c47727ae9e54cd8ccc44f52098eb57952fc",
+    "sourceHash": "744425298c50bbe1c05f9073dd44f69d2a96494b9e8acf955e4d11e3cca3d28f",
     "text": "<keyword0>Anulación</keyword0>: <keyword1>anula</keyword1> el próximo ataque contra ti antes de la <keyword2>Esquiva</keyword2>, evitando su daño y efectos perjudiciales; Las <keyword3>Espinas</keyword3> aún contraatacan; Dura hasta consumirse o ser objeto de <keyword4>Purga</keyword4>; No se acumula"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "08ef2c175b97a75f773b36d6ceef3859efd555a9c68a49d866b523674fae24d2",
+    "sourceHash": "918fe1ddd3d81a2b5eb2f31d237601dc99125d9f741eff370c89824913abd9d9",
     "text": "Flanco abierto: el próximo ataque inflige {{value0}} de daño <keyword0>Físico</keyword0> adicional"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "5c48e11571dc430d753ab0e274f17a8e24acc543bc47ff0bc1acca1a4011d34c",
+    "sourceHash": "c66ff7ae055723b65a8966fc0265ab4030cf5b471e511ff549529514e622217e",
     "text": "<keyword0>Nulificación</keyword0>: evita el próximo efecto de estado perjudicial; El daño directo sigue impactando; Dura hasta consumirse o ser objeto de <keyword1>Purga</keyword1>; No se acumula"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "243109da2617ad38428380c253a73a812b585c6f1cdc5f16f43b1d0a6197d5e2",
+    "sourceHash": "b9c6f44c06fb3eb1fec2100c8ad281318e4eff5de794f01f627b943e66ffd35d",
     "text": "<keyword0>Nulifica</keyword0> el próximo daño de <keyword1>Congelación</keyword1>; Dura hasta consumirse o ser objeto de <keyword2>Purga</keyword2>; No se acumula"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "4d0ca765931a14028c5e47d209fbb7136026f6dd00306b44ad1ed06e841cd748",
+    "sourceHash": "b9809ba2be2eebfaad50c44d71c2799f1f288dc1085bb087677f81e7b03a121d",
     "text": "Semilla de oasis: el siguiente ataque tiene <keyword0>Drenaje</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "005f3d8d7d54c55701db37af257c9f7b7f827f58b59be454e4ae60c9b164ce05",
+    "sourceHash": "f36ee8db75113ff9d1e9b1fa65564b66e31aa39ee014b6714915688399e17762",
     "text": "Corte de despedida: el próximo golpe <keyword0>Físico</keyword0> inflige la mitad de su daño como daño de <keyword1>Sangrado</keyword1> adicional"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "e9b6ddbd63ba134562a36c72f0878881e3bc0a8a041634cdc6cfdb99857feec5",
+    "sourceHash": "42620e8fd8d524cdf778de60c472b04549648a679541f23bbac01091f08a65fe",
     "text": "<keyword0>Reflejo</keyword0>: devuelve el ataque o efecto de estado perjudicial indicado; El <keyword1>reflejo de ataque</keyword1> devuelve el daño y los efectos perjudiciales posteriores al atacante; El <keyword2>reflejo</keyword2> de solo estado redirige el efecto a un enemigo vivo aleatorio, pero el daño directo sigue impactando; Los ataques y estados <keyword3>reflejados</keyword3> no pueden <keyword4>reflejarse</keyword4> de nuevo; Las cargas no se acumulan"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "3267d903645e889fd9f4728cef83c110779557f511dda4f1e079f8fb52367616",
+    "sourceHash": "8cc991a522ef08af1473393bfe5c10e3d1cebc60092cd30d202672673dfccd79",
     "text": "<keyword0>Refleja</keyword0> la próxima <keyword1>Quemadura</keyword1>; El daño directo sigue impactando; Dura hasta consumirse o ser objeto de <keyword2>Purga</keyword2>; No se acumula"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "5d08d7068cc6a5a869538c68c29cf4a7d0e91e2745c01b64519375f74410ac1a",
+    "sourceHash": "ff6fb5257ff11a398713f3e79b777f9b9d2c5e3585680d7dc463597eafd112db",
     "text": "Encontrar el ritmo: +{{value0}}% de probabilidad de <keyword0>Esquiva</keyword0>"
+  },
+  "content.status.ribbonSpool.vf90381129d21c88c.rule": {
+    "reviewed": true,
+    "source": "Ribbon Spool: immune to <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
+    "sourceHash": "f4c28b411bb36a6fa28eee9ac238a4100b38b914719a39952af43607f559e371",
+    "text": "Carrete de cinta: inmunidad al <keyword0>Aturdimiento</keyword0> y la <keyword1>Congelación</keyword1>"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "5ad2aa5d1123077e7a530158cf8c13d263af8f27bd003c880ac188cf0fb60c97",
+    "sourceHash": "0b9e0db3d8aa1bb637555cc01b772aa77eb1f1b1f3630d4fb4e0da2827122a79",
     "text": "Contraataque: el próximo ataque <keyword0>Físico</keyword0> es un <keyword1>golpe crítico</keyword1> garantizado"
+  },
+  "content.status.toothpickReady.vf6fb565fa4f85380.rule": {
+    "reviewed": true,
+    "source": "Dragon’s Toothpick: next attack also <keyword0>Purges</keyword0>",
+    "sourceHash": "90e5d3a8c6a88543442f362310f7c3bcf9963dc17e80f7839b0b03a72deadc48",
+    "text": "Palillo de dragón: el próximo ataque también <keyword0>purga</keyword0>"
   },
   "content.talent.armor.armored-surge.name": {
     "reviewed": true,
