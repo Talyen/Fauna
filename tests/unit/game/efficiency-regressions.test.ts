@@ -71,7 +71,7 @@ import {
   playTargetError,
 } from "../../../src/game/play-queries";
 import { battlefield, cleanseTargets, healingAllies, isDepartedMinion } from "../../../src/game/battlefield";
-import { bossDeck, summonEcho } from "../../../src/game/combat/legendary";
+import { bossDeck, summonEcho, createPearls } from "../../../src/game/combat/legendary";
 import { generateEncounterPack } from "../../../src/game/encounters";
 import { returnDodgedCard } from "../../../src/game/combat/card-modifiers";
 import { observeDecisions, shuffle } from "../../../src/game/random";
@@ -79,7 +79,7 @@ import { requireBattle, teamRun } from "../../support/game";
 import { matchesPermanentKit, permanentKit } from "../../../src/game/card-kit";
 import { ownedCards, rebuildCards } from "../../../src/game/team";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { snapshot } from "../../../src/application/cloud-snapshots";
+import { snapshot, parseSnapshot } from "../../../src/application/cloud-snapshots";
 import { chance } from "../../../src/game/chance";
 import { newestHeads } from "../../../src/application/cloud-policy";
 import saveFormat from "../../../src/game/save-format.json" with { type: "json" };
@@ -1416,4 +1416,81 @@ it("keeps Cinder Fan remainder damage in battlefield order", () => {
   expect(target.combat.burn).toBe(4);
   expect(state.battle.enemies.slice(1).map((enemy) => enemy.health)).toEqual([98, 99]);
   expect(state.rng).toBe(rng);
+});
+
+it("persists the exact immutable diagnostic snapshot through deduplication and escaped-size limits", () => {
+  let stored = "[]";
+  const diagnostics = createDiagnostics({
+    read: () => stored,
+    write: (value) => {
+      stored = value;
+    },
+  });
+  const first = diagnostics.snapshot();
+  for (let index = 0; index < 55; index++) {
+    diagnostics.record("render", `${index}:` + "\u0001".repeat(1190));
+    expect(JSON.parse(stored)).toEqual(diagnostics.snapshot());
+    expect(stored.length).toBeLessThan(100_000);
+  }
+  expect(diagnostics.snapshot().length).toBeLessThan(50);
+  const previous = diagnostics.snapshot();
+  const message = previous[0]!.message;
+  diagnostics.record("render", message);
+  expect(JSON.parse(stored)).toEqual(diagnostics.snapshot());
+  expect(diagnostics.snapshot().at(-1)).toMatchObject({ message, count: 2 });
+  expect(previous[0]!.count).toBe(1);
+  expect(first).toEqual([]);
+  diagnostics.dispose();
+});
+
+it("preserves cloud validation and head ownership for zero, one and duplicate ancestors", async () => {
+  const identity = {
+    available: true,
+    device: "a".repeat(32),
+    profile: "b".repeat(32),
+    importAvailable: false,
+  };
+  const payload = encodeSave(teamRun(42, ["mossguard"]));
+  const parent = await snapshot(payload, identity, 1);
+  const child = await snapshot(payload, identity, 2, [parent]);
+  for (const record of [parent, child]) {
+    expect(await parseSnapshot(JSON.stringify(record), identity.profile)).toEqual(record);
+    const records = Object.freeze([record]);
+    const heads = newestHeads(records);
+    expect(heads).toEqual([record]);
+    expect(heads).not.toBe(records);
+    expect(heads[0]).toBe(record);
+    await expect(
+      parseSnapshot(JSON.stringify({ ...record, ancestors: [record.id] }), identity.profile),
+    ).rejects.toThrow("Invalid cloud metadata");
+  }
+  expect(newestHeads([])).toEqual([]);
+  expect(newestHeads([{ ...parent, ancestors: [parent.id] }])).toEqual([]);
+  await expect(
+    parseSnapshot(JSON.stringify({ ...child, ancestors: [parent.id, parent.id] }), identity.profile),
+  ).rejects.toThrow("Invalid cloud metadata");
+});
+
+it("creates only the Pearls admitted by card capacity and safe copy serials", () => {
+  for (const limit of ["cards", "serial"] as const) {
+    const state = requireBattle(structuredClone(teamRun(42, ["memento"])));
+    if (limit === "cards")
+      while (state.cards.length < 255)
+        state.cards.push({ ...state.cards[0]!, id: `existing-${state.cards.length}`, temporary: true });
+    else state.battle.copySerial = Number.MAX_SAFE_INTEGER - 1;
+    const count = state.cards.length;
+    const serial = state.battle.copySerial;
+    const rng = state.rng;
+    const events: GameEvent[] = [];
+    createPearls(state, state.team[0]!, "player", 3, events);
+    expect(state.cards).toHaveLength(count + 1);
+    expect(state.battle.copySerial).toBe(serial + 1);
+    expect(events).toHaveLength(1);
+    expect(events[0]).toMatchObject({ kind: "action", amount: 1 });
+    expect(state.rng).toBe(rng);
+    const before = structuredClone(state);
+    createPearls(state, state.team[0]!, "player", 3, events);
+    expect(state).toEqual(before);
+    expect(events).toHaveLength(1);
+  }
 });

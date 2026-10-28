@@ -1,11 +1,17 @@
 import { isDeepStrictEqual } from "node:util";
 
+// Array iteration methods skip holes; imported evidence must account for every entry.
+function isBoundedArray(value, maximum = 12000) {
+  if (!Array.isArray(value) || value.length > maximum) return false;
+  for (let index = 0; index < value.length; index++) if (!Object.hasOwn(value, index)) return false;
+  return true;
+}
+
 export function summarizeSample(sample) {
   if (!sample || typeof sample !== "object") throw new Error("Invalid performance sample.");
   if (
-    !Array.isArray(sample.frames) ||
+    !isBoundedArray(sample.frames) ||
     sample.frames.length < 60 ||
-    sample.frames.length > 12000 ||
     sample.frames.some(
       (frame, index) =>
         !frame ||
@@ -29,8 +35,7 @@ export function summarizeSample(sample) {
     observations.some(
       (entries) =>
         entries !== null &&
-        (!Array.isArray(entries) ||
-          entries.length > 12000 ||
+        (!isBoundedArray(entries) ||
           entries.some(
             (entry) =>
               !entry ||
@@ -45,7 +50,7 @@ export function summarizeSample(sample) {
   )
     throw new Error("Invalid observer timeline.");
   if (
-    !Array.isArray(sample.spans ?? []) ||
+    !isBoundedArray(sample.spans ?? []) ||
     (sample.spans ?? []).some(
       (span) =>
         !span ||
@@ -53,12 +58,11 @@ export function summarizeSample(sample) {
         span.start < 0 ||
         !Number.isFinite(span.end) ||
         span.end < span.start,
-    ) ||
-    (sample.spans?.length ?? 0) > 12000
+    )
   )
     throw new Error("Invalid semantic span timeline.");
   if (
-    !Array.isArray(sample.segments) ||
+    !isBoundedArray(sample.segments) ||
     !sample.segments.length ||
     sample.segments.some(
       (s, index) =>
@@ -125,11 +129,11 @@ export function comparePerformance(before, after) {
   const validCase = (row) =>
     row &&
     [row.id, row.checkpointHash, row.actionHash, row.fixture].every(
-      (value) => typeof value === "string" && value.length > 0,
+      (value) => typeof value === "string" && value.trim().length > 0,
     );
   if (
-    !Array.isArray(before.cases) ||
-    !Array.isArray(after.cases) ||
+    !isBoundedArray(before.cases, Infinity) ||
+    !isBoundedArray(after.cases, Infinity) ||
     !before.cases.every(validCase) ||
     !after.cases.every(validCase)
   )
@@ -210,8 +214,10 @@ export function hitchMarkdown(id, summary, trace) {
     /[!'()*]/gu,
     (character) => `%${character.charCodeAt(0).toString(16).toUpperCase()}`,
   );
-  const rows = summary.hitches.map((gap, index) => {
-    const work = trace?.available ? trace.hitches[index] : null;
+  const rows = summary.hitches.map((gap) => {
+    const work = trace?.available
+      ? trace.hitches.find((entry) => entry.start === gap.start && entry.end === gap.end)
+      : null;
     return `| ${gap.start.toFixed(1)}–${gap.end.toFixed(1)} | ${gap.duration.toFixed(1)} ms | ${safe(gap.actions.join(", ") || "between actions")} | ${safe([...new Set(gap.spans.map((span) => span.name))].join(", ") || "unattributed")} | ${
       work
         ? safe(

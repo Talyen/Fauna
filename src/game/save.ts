@@ -422,6 +422,8 @@ function validateEnemyDecks(state: BattleState) {
   }
 }
 
+const echoHealthValues: readonly number[] = [6, 8, 10, 12];
+
 function validateMinions(state: BattleState) {
   const minions = state.battle.minions ?? [];
   const counts = minions.length > 2 ? new Map<string, number>() : undefined;
@@ -437,7 +439,7 @@ function validateMinions(state: BattleState) {
       !owner ||
         owner.species !== "memento" ||
         unit.health > unit.maxHealth ||
-        ![6, 8, 10, 12].includes(unit.maxHealth) ||
+        !echoHealthValues.includes(unit.maxHealth) ||
         (unit.id !== `echo-${unit.minion.ownerId}-0` && unit.id !== `echo-${unit.minion.ownerId}-1`) ||
         (unit.minion.side === "enemy" && (unit.combat.oasisLeech || unit.combat.acrobatReady)) ||
         unit.combat.deathDoorUsed ||
