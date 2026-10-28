@@ -294,3 +294,90 @@ it("continues the last local Steam profile without a client, while isolated prof
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+it("rejects out-of-range Steam app IDs before initializing native services", async () => {
+  const { parseRequest } = await import("../../../desktop/steam-wire.cjs");
+  expect(() => parseRequest({ id: 1, operation: "init", args: [0x100000000] })).toThrow(
+    "Invalid Steam request",
+  );
+  const directory = await mkdtemp(path.join(tmpdir(), "fauna-invalid-appid-"));
+  const previous = process.env.FAUNA_STEAM_APP_ID;
+  const loadBinding = vi.fn();
+  process.env.FAUNA_STEAM_APP_ID = "4294967296";
+  let adapter;
+  try {
+    adapter = await createSteam({
+      app: { isPackaged: false },
+      directory,
+      isolated: false,
+      pause: () => {},
+      utilityProcess: { fork: vi.fn() },
+      loadBinding,
+    });
+    expect(loadBinding).not.toHaveBeenCalled();
+    expect((await adapter.identity()).available).toBe(false);
+  } finally {
+    await adapter?.dispose();
+    if (previous === undefined) delete process.env.FAUNA_STEAM_APP_ID;
+    else process.env.FAUNA_STEAM_APP_ID = previous;
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+it.each([
+  ["invalid slot", ["not-a-cloud-slot"]],
+  ["duplicate slots", [`fauna-v1-${"a".repeat(32)}-0.json`, `fauna-v1-${"a".repeat(32)}-0.json`]],
+])("rejects %s from the Cloud inventory without losing local metadata", async (_label, value) => {
+  const f = await transportFixture();
+  try {
+    f.worker.postMessage.mockImplementationOnce(({ id }) =>
+      queueMicrotask(() => f.worker.emit("message", { id, value })),
+    );
+    await expect(f.adapter.list()).rejects.toThrow("Invalid Steam response");
+    expect(f.worker.kill).toHaveBeenCalledOnce();
+    await f.adapter.writeLocal("local metadata");
+    expect(await f.adapter.readLocal()).toBe("local metadata");
+  } finally {
+    await f.adapter.dispose();
+    await rm(f.directory, { recursive: true, force: true });
+  }
+});
+
+it("rejects oversized Cloud read replies before publishing them", async () => {
+  const f = await transportFixture();
+  try {
+    const name = `fauna-v1-${"a".repeat(32)}-0.json`;
+    f.worker.postMessage.mockImplementationOnce(({ id }) =>
+      queueMicrotask(() => f.worker.emit("message", { id, value: "é".repeat(524289) })),
+    );
+    await expect(f.adapter.read(name)).rejects.toThrow("Invalid Steam response");
+    expect(f.worker.kill).toHaveBeenCalledOnce();
+  } finally {
+    await f.adapter.dispose();
+    await rm(f.directory, { recursive: true, force: true });
+  }
+});
+
+it("rejects oversized or non-string Cloud uploads before sending to the worker", async () => {
+  const f = await transportFixture();
+  try {
+    const identity = await f.adapter.identity();
+    const name = `fauna-v1-${identity.device}-0.json`;
+    const before = f.worker.postMessage.mock.calls.length;
+    await expect(f.adapter.write(name, "é".repeat(524289))).rejects.toThrow("Invalid cloud payload");
+    await expect(f.adapter.write(name, {})).rejects.toThrow("Invalid cloud payload");
+    expect(f.worker.postMessage).toHaveBeenCalledTimes(before);
+    await expect(f.adapter.write(name, "é".repeat(524288))).resolves.toBeUndefined();
+    expect(f.worker.postMessage).toHaveBeenCalledTimes(before + 1);
+    const { parseRequest } = await import("../../../desktop/steam-wire.cjs");
+    expect(() => parseRequest({ id: 1, operation: "write", args: [name, "é".repeat(524289)] })).toThrow(
+      "Invalid Steam request",
+    );
+    expect(() => parseRequest({ id: 1, operation: "read", args: ["not-a-cloud-slot"] })).toThrow(
+      "Invalid Steam request",
+    );
+  } finally {
+    await f.adapter.dispose();
+    await rm(f.directory, { recursive: true, force: true });
+  }
+});

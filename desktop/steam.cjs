@@ -1,10 +1,15 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const { createHash, randomBytes } = require("node:crypto");
-const { parseReply, parseResponse } = require("./steam-wire.cjs");
+const {
+  parseReply,
+  parseResponse,
+  validCloudSlot,
+  validCloudData,
+  validAppId,
+  CLOUD_MAX_BYTES,
+} = require("./steam-wire.cjs");
 const { createStorage } = require("./storage.cjs");
-/** @param {string} name */
-const validName = (name) => typeof name === "string" && /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
 /**
  * @param {{app: Pick<import("electron").App, "isPackaged">, utilityProcess: Pick<typeof import("electron").utilityProcess, "fork">, directory: string, isolated: boolean, pause: (active: boolean) => void, loadBinding?: () => typeof import("./steam-overlay.cjs")}} options
  * @returns {Promise<Required<import("../src/platform/ports").CloudPort> & {language: () => Promise<string | null>, storage: ReturnType<typeof createStorage>, overlay: () => boolean, dispose: () => Promise<void>}>}
@@ -110,7 +115,7 @@ async function createSteam({
     try {
       const config = JSON.parse(await fs.readFile(path.join(__dirname, "steam-config.json"), "utf8"));
       const appId = app.isPackaged ? config.appId : Number(process.env.FAUNA_STEAM_APP_ID || config.appId);
-      if (Number.isSafeInteger(appId) && appId > 0) {
+      if (validAppId(appId)) {
         overlay = loadBinding().createOverlay(appId, (active) => {
           if (dead) return;
           overlayActive = active;
@@ -198,7 +203,7 @@ async function createSteam({
   async function readOptional(file) {
     try {
       const stat = await fs.stat(file);
-      if (stat.size > 1_048_576) throw new Error("Cloud metadata exceeds supported size.");
+      if (stat.size > CLOUD_MAX_BYTES) throw new Error("Cloud metadata exceeds supported size.");
       return await fs.readFile(file, "utf8");
     } catch (e) {
       if (e instanceof Error && "code" in e && e.code === "ENOENT") return null;
@@ -244,7 +249,7 @@ async function createSteam({
     readLocal: () => serial(() => readOptional(metadata)),
     writeLocal: (data) =>
       serial(async () => {
-        if (typeof data !== "string" || Buffer.byteLength(data) > 1_048_576)
+        if (typeof data !== "string" || Buffer.byteLength(data) > CLOUD_MAX_BYTES)
           throw new Error("Invalid cloud metadata.");
         await atomic(metadata, data);
       }, true),
@@ -258,7 +263,7 @@ async function createSteam({
         // The bounded remote inventory can conflict with one additional local head.
         if (!Array.isArray(records) || records.length > 65) throw new Error("Invalid recovery set.");
         for (const raw of records) {
-          if (typeof raw !== "string" || Buffer.byteLength(raw) > 1_048_576)
+          if (typeof raw !== "string" || Buffer.byteLength(raw) > CLOUD_MAX_BYTES)
             throw new Error("Invalid recovery snapshot.");
           const hash = createHash("sha256").update(raw).digest("hex");
           await atomic(path.join(profileDir, "recovery", `${hash}.json`), raw);
@@ -278,13 +283,14 @@ async function createSteam({
     },
     read: async (name) => {
       requireAvailable();
-      if (!validName(name)) throw new Error("Invalid cloud slot.");
+      if (!validCloudSlot(name)) throw new Error("Invalid cloud slot.");
       return request("read", [name]);
     },
     write: async (name, data) => {
       requireAvailable();
-      if (!validName(name) || !name.startsWith(`fauna-v1-${device}-`))
+      if (!validCloudSlot(name) || !name.startsWith(`fauna-v1-${device}-`))
         throw new Error("Cannot overwrite another device's slot.");
+      if (!validCloudData(data)) throw new Error("Invalid cloud payload.");
       await request("write", [name, data]);
     },
     dispose() {
