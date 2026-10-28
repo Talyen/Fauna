@@ -16,6 +16,30 @@ it.each(BOONS)("can evaluate $name without changing the journey", ({ id }) => {
   expect(JSON.stringify(state)).toBe(before);
 });
 
+it("requires resurrection, backup, and acquired armor-stealing triggers for their Boons", () => {
+  const solo = teamRun(42, ["mossguard"]);
+  const resurrection = teamRun(42, ["oathara"]);
+  for (const boon of ["memory-cairn", "remembrance-wreath"] as const) {
+    expect(boonValue(solo, boon)).toBe(0);
+    expect(boonValue(resurrection, boon)).toBeGreaterThan(0);
+  }
+  const team = teamRun(42, ["emberback", "mossguard"]);
+  expect(boonValue(team, "orbit-tongs")).toBe(0);
+  const stealing = produce(team, (game) => {
+    game.boons.push("gilt-gauntlet");
+  });
+  expect(boonValue(stealing, "orbit-tongs")).toBeGreaterThan(0);
+  const food = produce(solo, (game) => {
+    game.boons.push("cornucopia");
+  });
+  expect(boonValue(food, "spore-trivet")).toBeGreaterThan(0);
+  expect(boonValue(food, "orchard-ladder-charm")).toBe(0);
+  const backup = produce(food, (game) => {
+    game.reserves.push({ ...game.team[0]!, id: "backup" });
+  });
+  expect(boonValue(backup, "orchard-ladder-charm")).toBeGreaterThan(0);
+});
+
 it("scores the new Boons from their roster and acquired triggers", () => {
   const solo = teamRun(42, ["mossguard"]);
   const armor = teamRun(42, ["emberback"]);
