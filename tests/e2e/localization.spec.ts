@@ -145,6 +145,8 @@ test("keeps unavailable talent rules readable without allowing a purchase", asyn
   expect(contrast[0]).toBeGreaterThanOrEqual(4.5);
   expect(contrast[1]).toBeGreaterThanOrEqual(4.5);
   const before = await page.evaluate((saveKey) => localStorage.getItem(saveKey), key);
-  await talent.click();
+  await talent.focus();
+  await expect(talent).toBeFocused();
+  await page.keyboard.press("Enter");
   expect(await page.evaluate((saveKey) => localStorage.getItem(saveKey), key)).toBe(before);
 });
