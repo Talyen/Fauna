@@ -73,7 +73,10 @@ function fingerprint(state: GameState, events: unknown) {
                   !(key === "metronomeActor" && entry === null) &&
                   !(key === "fireThorns" && entry === 0) &&
                   !(key === "encoreProgress" && entry === 0) &&
-                  !(["oasisLeech", "moonseedReady", "toothpickReady"].includes(key) && entry === false) &&
+                  !(
+                    ["oasisLeech", "acrobatReady", "moonseedReady", "toothpickReady"].includes(key) &&
+                    entry === false
+                  ) &&
                   !(key === "slipperCard" && entry === null) &&
                   !(key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) &&
                   !(
