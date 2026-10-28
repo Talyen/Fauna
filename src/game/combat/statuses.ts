@@ -933,6 +933,22 @@ export function* controlRewards(
   events: GameEvent[],
 ): Resolution<void> {
   if (source.health <= 0) return;
+  if (type === "freeze" && isEnemy(source) !== isEnemy(target)) {
+    const side = isEnemy(source) ? "enemy" : "player";
+    if (battlefieldHasId(state, side, source.id)) {
+      for (const guide of livingBattlefield(state, side)) {
+        if (source.health <= 0) break;
+        const amount = passiveAmount(side === "player" ? state : undefined, guide.species, "wintersReprieve");
+        if (!amount) continue;
+        for (const ally of healingAllies(state, side)) {
+          if (source.health <= 0 || guide.health <= 0 || !battlefieldHasId(state, side, guide.id)) break;
+          if (ally.health > 0 && !isDepartedMinion(state, ally))
+            yield* reaction("restoreHealth", ally, amount, events, false, state, false, guide);
+        }
+      }
+    }
+  }
+  if (source.health <= 0) return;
   if (!isEnemy(source) && isEnemy(target)) {
     if (type === "stun" && source.health > 0 && state.boons.includes("thunder-conch"))
       for (const enemy of battlefield(state, "enemy")) {

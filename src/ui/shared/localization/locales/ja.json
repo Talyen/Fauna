@@ -2843,6 +2843,42 @@
     "sourceHash": "c2f5624e02323f2852fd1a46ad2693bb4db9c871d9f893bcd1ccc41dfe086b60",
     "text": "すべての味方の<keyword0>体力</keyword0>を{{value0}}回復; すべての敵を<keyword1>盲目</keyword1>にする"
   },
+  "content.card.brumalyn-frost-howl.name": {
+    "reviewed": true,
+    "source": "Frost Howl",
+    "sourceHash": "721d84c43e8309805d42b07ec6cc6cf5a70817393f3783d12239777d7b9100e5",
+    "text": "霜の声"
+  },
+  "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
+    "sourceHash": "e92ea32cd5bacc71376920694443a5b2734fed2dd1157247d074b602ed74beda",
+    "text": "すべての敵に<keyword0>凍結</keyword0>または<keyword1>スタン</keyword1>のダメージをランダムに{{value0}}与える"
+  },
+  "content.card.brumalyn-rime-pounce.name": {
+    "reviewed": true,
+    "source": "Rime Pounce",
+    "sourceHash": "c3f15956c232dd82709c0668f6016387bea5f93d0b3f7892a636b4505d3116e9",
+    "text": "霜の飛びかかり"
+  },
+  "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "0d3981c463bc79997fc22b6d993441b906e82bf7f0a1e1f1fc5cffc267b25c4e",
+    "text": "<keyword0>凍結</keyword0>ダメージを{{value0}}与える"
+  },
+  "content.card.brumalyn-warmth-ward.name": {
+    "reviewed": true,
+    "source": "Warmth Ward",
+    "sourceHash": "aec17db7f08528e5a30fb73827a9ecf9ae190a1fd3b390200cf68a99bcd48b0f",
+    "text": "ぬくもりの守り"
+  },
+  "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
+    "sourceHash": "8a784c38de8c90748da141f1fd6aeda620ea83000e88ba80cf2c9d0fb528beda",
+    "text": "味方全員の<keyword0>体力</keyword0>を{{value0}}回復; 味方全員の<keyword2>凍結</keyword2>の蓄積を<keyword1>浄化</keyword1>"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -5104,6 +5140,60 @@
     "source": "Full Bloom",
     "sourceHash": "0a63fc171192e5cb811bd89221d5d34574598b11663033343c34264970653196",
     "text": "満開"
+  },
+  "content.species.brumalyn.name": {
+    "reviewed": true,
+    "source": "Brumalyn",
+    "sourceHash": "c76cba9b94fd5aeb097584363f38ac89ea45fded45cfecdc199b044a63ef49ed",
+    "text": "ブルマリン"
+  },
+  "content.species.brumalyn.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "fd0bceb50cca50078774f75d62ee2c44626e97962ee3bc5420bb5593eaf03da6",
+    "text": "味方が敵を<keyword0>凍結</keyword0>させると、味方全員の<keyword1>体力</keyword1>を{{value0}}回復"
+  },
+  "content.species.brumalyn.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "3919727d3de856559a553ab7a81ce96878097d13ed7a1f75ecee19ce89fe34e0",
+    "text": "味方が敵を<keyword0>凍結</keyword0>させると、味方全員の<keyword1>体力</keyword1>を{{value0}}回復"
+  },
+  "content.species.brumalyn.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "47609acb76cf6d5d7c9e1ee692f5a014e9fac6f8dcbeb481d81f6d486d1ff2ce",
+    "text": "味方が敵を<keyword0>凍結</keyword0>させると、味方全員の<keyword1>体力</keyword1>を{{value0}}回復"
+  },
+  "content.species.brumalyn.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "205af0f2392947d76b78f08f8ea32123a776ca1a2658e36bff7dfeb5f0f698ba",
+    "text": "味方が敵を<keyword0>凍結</keyword0>させると、味方全員の<keyword1>体力</keyword1>を{{value0}}回復"
+  },
+  "content.species.brumalyn.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "ab5ab8fbf5775d185b440231c821e6869900cd6f8bf473b4f7b8653630824f75",
+    "text": "味方が敵を<keyword0>凍結</keyword0>させると、味方全員の<keyword1>体力</keyword1>を{{value0}}回復"
+  },
+  "content.species.brumalyn.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "e23729cfa83ec10a44390c203fe7d3697f76440ff8a85118c0f6997fad4848bd",
+    "text": "味方が敵を<keyword0>凍結</keyword0>させると、味方全員の<keyword1>体力</keyword1>を{{value0}}回復"
+  },
+  "content.species.brumalyn.title": {
+    "reviewed": true,
+    "source": "The winter guide",
+    "sourceHash": "ca693ee006ea0ab1d0884e095d89f4dd0e83ad15323fb47e0362438e6bce948f",
+    "text": "冬の案内人"
+  },
+  "content.species.brumalyn.trait": {
+    "reviewed": true,
+    "source": "Winter’s Reprieve",
+    "sourceHash": "d0b60fbd491501ad6e5fb139dee0e968909ced190ab474cd0bd6344447902a0b",
+    "text": "冬の休息"
   },
   "content.species.cadenza.name": {
     "reviewed": true,

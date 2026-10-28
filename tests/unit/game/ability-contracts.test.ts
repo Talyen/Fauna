@@ -36,6 +36,7 @@ import type { BattleState, GameEvent } from "../../../src/game/types";
 // Preserve values and array order while allowing builders to assemble object
 // properties in a different order. Card digest updated for Undertow Knot and Spark Decoy.
 // Species digest includes Bloomquail's clarification that conversion uses gained Block.
+// Catalog hashes include Brumalyn's appended kit; its behavior has focused contracts.
 it("preserves every authored creature, passive tier, card and Pearl", () => {
   const digest = (value: unknown) =>
     createHash("sha256")
@@ -53,9 +54,9 @@ it("preserves every authored creature, passive tier, card and Pearl", () => {
     pearl: digest(PEARL),
   }).toMatchInlineSnapshot(`
     {
-      "cards": "75badaf3a772c0a564200c08f237c37951ff0fa01f433d156ff4ae1ac710e033",
+      "cards": "0e1222fae8d6ebad6a69754ea8dd3b136c9e1424c9eba8162d866420adc57bfa",
       "pearl": "1ae0c37e2fc0a8088a6fe7b827c5e7f23512457a723269b79b7e1fc78417ebda",
-      "species": "9c5cbe00d41d492d377f9f5a9d10626fc1fe4a73dfb1541813d6cf169a4c6a4a",
+      "species": "5e4694cda50bd237ee37c53a973e4e6c2e2f573b5bf2476b677b792af4db1a42",
     }
   `);
 });
@@ -81,7 +82,8 @@ it("preserves authored text, targeting, scaling, keywords and enemy adaptations"
   // New kits have direct contracts below or in creatures/*.test.ts; preserve the older oracle.
   const cards = [
     ...CARDS.filter(
-      (card) => !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen"].includes(card.species ?? ""),
+      (card) =>
+        !["arabesca", "skybex", "dulcera", "pyrella", "alpenglen", "brumalyn"].includes(card.species ?? ""),
     ),
     PEARL,
     ...FOOD_CARDS,

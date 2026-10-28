@@ -37,7 +37,7 @@ function cardCapabilities(kind: SpeciesId): readonly string[] {
       card.effect === "teamClearBlind" ||
       card.effect === "teamThaw" ||
       card.effect === "springbound" ||
-      card.effects?.some((effect) => effect.kind === "cleanse")
+      card.effects?.some((effect) => effect.kind === "cleanse" || effect.kind === "thaw")
     )
       result.add("cleanse");
   }
@@ -63,7 +63,8 @@ function tierCapabilities(tier: ReturnType<typeof creaturePassiveTier>): readonl
       effect.kind === "livingChorus" ||
       effect.kind === "lastWarmth" ||
       effect.kind === "tidalRegeneration" ||
-      effect.kind === "petalwake"
+      effect.kind === "petalwake" ||
+      effect.kind === "wintersReprieve"
     )
       result.add("health");
     if (effect.kind === "dodgeBurn") {

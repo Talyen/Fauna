@@ -44,6 +44,11 @@ const rules: SupplementalRules = freeze(
       describe: (effect) =>
         `Restore ${effect.amount} Health${effect.target === "recipient" ? " to an injured ally" : ""}`,
     },
+    thaw: {
+      ...global,
+      keyword: "cleanse",
+      describe: () => "Cleanse Freeze build-up from all allies",
+    },
     cleanse: {
       ...global,
       keyword: "cleanse",

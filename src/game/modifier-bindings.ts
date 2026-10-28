@@ -428,6 +428,7 @@ export const modifierImplementations = freeze(
       lostAndFound: ["./card-zones#lostAndFound"],
       lastWarmth: ["./combat/card-modifiers#lastWarmth"],
       sunthaw: ["./combat/statuses#cleanseRewards"],
+      wintersReprieve: ["./combat/statuses#controlRewards"],
       wellProvisioned: ["./combat/food#wellProvisioned"],
       gentlePassage: ["./team#gentlePassage"],
       passingFlame: ["./combat/damage-reactions#passingFlame"],

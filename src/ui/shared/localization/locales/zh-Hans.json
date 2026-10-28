@@ -2843,6 +2843,42 @@
     "sourceHash": "69ca0bad07c64d19a594787e19eea5a6de95fe99212111ad6bb8fd650da30c08",
     "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>; <keyword1>致盲</keyword1>所有敌人"
   },
+  "content.card.brumalyn-frost-howl.name": {
+    "reviewed": true,
+    "source": "Frost Howl",
+    "sourceHash": "de5ea79b8cda912544b9af0d737fd3877fa0e7cd5a7702af786ce138ed6da972",
+    "text": "霜之声"
+  },
+  "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
+    "sourceHash": "01e6a60ace2e0112e400f8a6e2d36b0407c57ccd40943f7b3d303f2f5496c0f4",
+    "text": "随机对所有敌人造成{{value0}}点<keyword0>冻结</keyword0>或<keyword1>眩晕</keyword1>伤害"
+  },
+  "content.card.brumalyn-rime-pounce.name": {
+    "reviewed": true,
+    "source": "Rime Pounce",
+    "sourceHash": "6563062c378bace72df63e91aca4c6437c3ca6e694978fac2f8390ec51d92b6d",
+    "text": "霜冻扑击"
+  },
+  "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "c7b03753a3daba21edb9c56afd3ab31f0beeb40613f0c08120bcbf3b5a751af4",
+    "text": "造成{{value0}}点<keyword0>冻结</keyword0>伤害"
+  },
+  "content.card.brumalyn-warmth-ward.name": {
+    "reviewed": true,
+    "source": "Warmth Ward",
+    "sourceHash": "94c049bc7f970f6380e8767a63ec97043dc821e8c04d224cc592012485f13343",
+    "text": "暖意守护"
+  },
+  "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
+    "sourceHash": "77127608a6e5ec5a4c289143603c19fbd62b9b3ed227fbfb54de59fffccecf39",
+    "text": "为所有盟友恢复{{value0}}点<keyword0>生命</keyword0>；<keyword1>净化</keyword1>所有盟友的<keyword2>冻结</keyword2>积累"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -5104,6 +5140,60 @@
     "source": "Full Bloom",
     "sourceHash": "ac96a309fe3d0fd18fe143bb10a796429cd5e8b4e1caae068d1036d4b6d088ab",
     "text": "盛放"
+  },
+  "content.species.brumalyn.name": {
+    "reviewed": true,
+    "source": "Brumalyn",
+    "sourceHash": "eaaab30e6d455faaf77ef88af14558bee6b4800a923667ad34c46a8f28f1e2fc",
+    "text": "布鲁马林"
+  },
+  "content.species.brumalyn.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "6c1cf5018e595779263328964eaa056283443cd219cbf9bdddb8dc9700ae3843",
+    "text": "当盟友<keyword0>冻结</keyword0>一名敌人时，为所有盟友恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.brumalyn.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "50dfb8bafb620eea1e09bbebaa9f2640c69954ff2c26e0910901fcf98cd23bbd",
+    "text": "当盟友<keyword0>冻结</keyword0>一名敌人时，为所有盟友恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.brumalyn.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "c8238290cc8a92282b5e2a39f8a8151fe39e42564632d160f66e72ed2c8f0ef2",
+    "text": "当盟友<keyword0>冻结</keyword0>一名敌人时，为所有盟友恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.brumalyn.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "174fe8b40c2007109a81844a80306dfa17cdde41e5ca736ee53573a0a8b86d8d",
+    "text": "当盟友<keyword0>冻结</keyword0>一名敌人时，为所有盟友恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.brumalyn.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "f3fc9be78c7375a30e87db49cce51379e65edc5a7187c25ed8aec7c9ed47b95b",
+    "text": "当盟友<keyword0>冻结</keyword0>一名敌人时，为所有盟友恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.brumalyn.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "ca00339f51396f8aef536bc1918661237fea04eb623eddf3381554050e66588d",
+    "text": "当盟友<keyword0>冻结</keyword0>一名敌人时，为所有盟友恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
+  "content.species.brumalyn.title": {
+    "reviewed": true,
+    "source": "The winter guide",
+    "sourceHash": "c965bdf52825910b9388d874a054cb63704de49645f93bacadd2209ce955e6d1",
+    "text": "冬日向导"
+  },
+  "content.species.brumalyn.trait": {
+    "reviewed": true,
+    "source": "Winter’s Reprieve",
+    "sourceHash": "03df1ea38bded24dba0df7fdc028293886438612d2f92aadb80b6886bd49e5ab",
+    "text": "冬日休息"
   },
   "content.species.cadenza.name": {
     "reviewed": true,

@@ -1492,6 +1492,30 @@
     "reference": "Restore 2 Health to all allies; Blind all enemies",
     "contextHash": "f5b326b327c1a98f0788b9669e92cad9d5a802da57a0174b0aa06f5bd329f4ae"
   },
+  "content.card.brumalyn-frost-howl.name": {
+    "text": "Frost Howl"
+  },
+  "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
+    "text": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
+    "reference": "Deal 2 Freeze or Stun damage at random to all enemies",
+    "contextHash": "b04d471c9b9af13ebc7cd2165a59f69ff436aa4a108e63509a8c2a19f47ecc36"
+  },
+  "content.card.brumalyn-rime-pounce.name": {
+    "text": "Rime Pounce"
+  },
+  "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
+    "text": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
+    "reference": "Deal 6 Freeze damage",
+    "contextHash": "75297e80c25d603763b3f81bf6b85fd62f744e973827e7f3018fc1a600bc01df"
+  },
+  "content.card.brumalyn-warmth-ward.name": {
+    "text": "Warmth Ward"
+  },
+  "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
+    "text": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
+    "reference": "Restore 1 Health to all allies; Cleanse Freeze build-up from all allies",
+    "contextHash": "098ca79ca52defddf333125244553f83aa282a02c5d64b14bbd727da0a89f4e4"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "text": "Echoes Remember"
   },
@@ -2991,6 +3015,39 @@
   },
   "content.species.bloomquail.trait": {
     "text": "Full Bloom"
+  },
+  "content.species.brumalyn.name": {
+    "text": "Brumalyn"
+  },
+  "content.species.brumalyn.passive.0.rule": {
+    "text": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "reference": "When an ally Freezes an enemy, restore 1 Health to all allies"
+  },
+  "content.species.brumalyn.passive.1.rule": {
+    "text": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "reference": "When an ally Freezes an enemy, restore 2 Health to all allies"
+  },
+  "content.species.brumalyn.passive.2.rule": {
+    "text": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "reference": "When an ally Freezes an enemy, restore 3 Health to all allies"
+  },
+  "content.species.brumalyn.passive.3.rule": {
+    "text": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "reference": "When an ally Freezes an enemy, restore 4 Health to all allies"
+  },
+  "content.species.brumalyn.passive.4.rule": {
+    "text": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "reference": "When an ally Freezes an enemy, restore 5 Health to all allies"
+  },
+  "content.species.brumalyn.passive.5.rule": {
+    "text": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "reference": "When an ally Freezes an enemy, restore 6 Health to all allies"
+  },
+  "content.species.brumalyn.title": {
+    "text": "The winter guide"
+  },
+  "content.species.brumalyn.trait": {
+    "text": "Winter’s Reprieve"
   },
   "content.species.cadenza.name": {
     "text": "Cadenza"

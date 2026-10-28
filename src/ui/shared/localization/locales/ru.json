@@ -2843,6 +2843,42 @@
     "sourceHash": "be89f0e5ad986f6c0d60a20dfed522bbfeb0e881a88f4a8d70df4641ff4081c7",
     "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>; <keyword1>Ослепите</keyword1> всех врагов"
   },
+  "content.card.brumalyn-frost-howl.name": {
+    "reviewed": true,
+    "source": "Frost Howl",
+    "sourceHash": "6a63b42a6d5d2b79953294390aa174f511bf8f2a9f33199eba4c86c4dbdb1c48",
+    "text": "Морозный вой"
+  },
+  "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
+    "sourceHash": "f705f8a1c6d7d77b635db027f4475bde7cb5fd6e961bb8784fec47eecac0c1dc",
+    "text": "Нанесите всем врагам {{value0}} урона случайно выбранной <keyword0>заморозкой</keyword0> или <keyword1>оглушением</keyword1>"
+  },
+  "content.card.brumalyn-rime-pounce.name": {
+    "reviewed": true,
+    "source": "Rime Pounce",
+    "sourceHash": "a99c6cadd85263c083da900589560ba58c771c4d37809defddb8f2304648cfcd",
+    "text": "Ледяной прыжок"
+  },
+  "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "127862d19b0cb16621edf142de4f6219c37034d3ae08e31d315940829e34ff79",
+    "text": "Нанесите {{value0}} урона <keyword0>заморозкой</keyword0>"
+  },
+  "content.card.brumalyn-warmth-ward.name": {
+    "reviewed": true,
+    "source": "Warmth Ward",
+    "sourceHash": "2d17837f3d2e25ecb56087b20bbaf9b8f169a30e23dc5ff6b340575e5fbf334d",
+    "text": "Тёплое укрытие"
+  },
+  "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
+    "sourceHash": "d67eb7ce03ec6d3a14e1fb176120cb45e434b51b436b1cc11abb818eb651c963",
+    "text": "Восстановите всем союзникам {{value0}} <keyword0>здоровья</keyword0>; <keyword1>Очистите</keyword1> накопление <keyword2>заморозки</keyword2> у всех союзников"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -5104,6 +5140,60 @@
     "source": "Full Bloom",
     "sourceHash": "3b0bbddc4c9332f801b9f3b62c32465a7153fd9f7fdd7b153faaf9c1e5c7177e",
     "text": "Полный цвет"
+  },
+  "content.species.brumalyn.name": {
+    "reviewed": true,
+    "source": "Brumalyn",
+    "sourceHash": "1b12492731c83ffecf778ba553888e2eebb9cd7b1378c5938987ea35c60ec39e",
+    "text": "Брумалин"
+  },
+  "content.species.brumalyn.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "64b15432f37e818d1748b38deaf6f90993c525e6c4cf7155318b4d964697848e",
+    "text": "Когда союзник <keyword0>замораживает</keyword0> врага, восстановите всем союзникам {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.brumalyn.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "09d37c3ad53fc789433969c4ea666dfa398e402883a0d88cb11b2ccd09b798d5",
+    "text": "Когда союзник <keyword0>замораживает</keyword0> врага, восстановите всем союзникам {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.brumalyn.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "5e3e1ea2b73f76e3921886cabc4697bb4b322d37b85f3372c955afb7b9d7bd40",
+    "text": "Когда союзник <keyword0>замораживает</keyword0> врага, восстановите всем союзникам {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.brumalyn.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "289723c4e2d0ee78d2f5603492e04dcbfce934a257ca2ecddedbd880e7722649",
+    "text": "Когда союзник <keyword0>замораживает</keyword0> врага, восстановите всем союзникам {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.brumalyn.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "05fe1dbe48c6016e30cd394a681b94e198eec2dd1f1605e5f1e6bb3dec6dbb76",
+    "text": "Когда союзник <keyword0>замораживает</keyword0> врага, восстановите всем союзникам {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.brumalyn.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "b3bbc4727b6aa0b20cd23244e3d66217eea6af4d33807ae5eb5a30770eef0fd3",
+    "text": "Когда союзник <keyword0>замораживает</keyword0> врага, восстановите всем союзникам {{value0}} <keyword1>здоровья</keyword1>"
+  },
+  "content.species.brumalyn.title": {
+    "reviewed": true,
+    "source": "The winter guide",
+    "sourceHash": "36812c9986a5aa4690cc251af33dbd6931feb12a2c457ebbd29447a169e8b201",
+    "text": "Зимняя проводница"
+  },
+  "content.species.brumalyn.trait": {
+    "reviewed": true,
+    "source": "Winter’s Reprieve",
+    "sourceHash": "e610b1d79ad0dd262385600c854e0d09981d7a1f90bff38ce099cfafa1191738",
+    "text": "Зимняя передышка"
   },
   "content.species.cadenza.name": {
     "reviewed": true,

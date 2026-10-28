@@ -467,3 +467,21 @@ wisterelle	ordinary	null
 wisterelle	injured	{"command":{"type":"play","cardId":"ally-0:wisterelle-lantern-fare","targetId":"ally-0","autoEndTurn":false},"score":3003,"reason":"Use Lantern Fare for its visible benefit"}
 wisterelle	defended	null
 wisterelle	talented	{"command":{"type":"play","cardId":"ally-0:wisterelle-lantern-fare","targetId":"ally-0","autoEndTurn":false},"score":3005,"reason":"Use Lantern Fare for its visible benefit"}
+brumalyn	ordinary	{"command":{"type":"play","cardId":"ally-0:brumalyn-frost-howl","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+brumalyn	ordinary	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+brumalyn	ordinary	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+brumalyn	ordinary	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+brumalyn	injured	{"command":{"type":"play","cardId":"ally-0:brumalyn-frost-howl","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}
+brumalyn	injured	{"command":{"type":"play","cardId":"ally-0:brumalyn-warmth-ward","autoEndTurn":false},"score":3001,"reason":"Use Warmth Ward for its visible benefit"}
+brumalyn	injured	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+brumalyn	injured	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+brumalyn	injured	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}
+brumalyn	defended	{"command":{"type":"play","cardId":"ally-0:brumalyn-frost-howl","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}
+brumalyn	defended	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+brumalyn	defended	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+brumalyn	defended	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}
+brumalyn	talented	{"command":{"type":"play","cardId":"ally-0:brumalyn-warmth-ward","autoEndTurn":false},"score":3003,"reason":"Use Warmth Ward for its visible benefit"}
+brumalyn	talented	{"command":{"type":"play","cardId":"ally-0:brumalyn-frost-howl","autoEndTurn":false},"score":1507.5,"reason":"Damage enemies; give roster creatures priority over Minions"}
+brumalyn	talented	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-0","autoEndTurn":false},"score":507,"reason":"Make progress against an enemy creature"}
+brumalyn	talented	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-1","autoEndTurn":false},"score":507,"reason":"Make progress against an enemy creature"}
+brumalyn	talented	{"command":{"type":"play","cardId":"ally-0:brumalyn-rime-pounce","targetId":"enemy-2","autoEndTurn":false},"score":507,"reason":"Make progress against an enemy creature"}

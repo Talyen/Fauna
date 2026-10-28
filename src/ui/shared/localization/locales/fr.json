@@ -2843,6 +2843,42 @@
     "sourceHash": "dcf4615a394954b1d76bb2d83431338842cf23722e7beb04aba7209f7f5f043d",
     "text": "Restaure {{value0}} <keyword0>Santé</keyword0> à tous les alliés; <keyword1>Aveugle</keyword1> tous les ennemis"
   },
+  "content.card.brumalyn-frost-howl.name": {
+    "reviewed": true,
+    "source": "Frost Howl",
+    "sourceHash": "393005bed4165fe225da944065821a2af25e92cd45bab6a0790c6f5d74fc7d2a",
+    "text": "Hurlement de givre"
+  },
+  "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
+    "sourceHash": "39645623999ac1ce1b567412043db312254a65cb977b98b47d01b50162531a0e",
+    "text": "Inflige à tous les ennemis {{value0}} dégâts de <keyword0>Gel</keyword0> ou d’<keyword1>Étourdissement</keyword1> au hasard"
+  },
+  "content.card.brumalyn-rime-pounce.name": {
+    "reviewed": true,
+    "source": "Rime Pounce",
+    "sourceHash": "54cfdbe6ff2f2112d451382635f47f3fe4bafde0593eaef53f309de8a9d0e3a0",
+    "text": "Bond givré"
+  },
+  "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "c1a99a307aeb073639393fbd636f22d82f0d0c3fe43b5ac7d7d38f763c5d2a7c",
+    "text": "Inflige {{value0}} dégâts de <keyword0>Gel</keyword0>"
+  },
+  "content.card.brumalyn-warmth-ward.name": {
+    "reviewed": true,
+    "source": "Warmth Ward",
+    "sourceHash": "a9ef4d5df7cd72f9eabce7662633f66d8a4de72be3b82ab0c2469a4b7b747c54",
+    "text": "Abri chaleureux"
+  },
+  "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
+    "sourceHash": "4f95869705ed0cfc292cc0f4dcb900860a7cac42336248218b174b461b9f2320",
+    "text": "Restaure {{value0}} de <keyword0>Santé</keyword0> à tous les alliés; <keyword1>Purifie</keyword1> l’accumulation de <keyword2>Gel</keyword2> de tous les alliés"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -5104,6 +5140,60 @@
     "source": "Full Bloom",
     "sourceHash": "d5b7fe3a4a2c6c3bc911a80c0ea364d5149ca5317e22799a7e381ea2ced687c4",
     "text": "Pleine floraison"
+  },
+  "content.species.brumalyn.name": {
+    "reviewed": true,
+    "source": "Brumalyn",
+    "sourceHash": "a4721c082f09268e6433504b516d0edb85f98b6c24bc452e2c31cac42d3e65c2",
+    "text": "Brumalyn"
+  },
+  "content.species.brumalyn.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "3e2c229dbef437df6860f3923b548817a74019513bddd6957e6a7a8d6272bb23",
+    "text": "Quand un allié <keyword0>gèle</keyword0> un ennemi, restaure {{value0}} de <keyword1>Santé</keyword1> à tous les alliés"
+  },
+  "content.species.brumalyn.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "512fe1a8a80af9275ee018551f1677ce9bd93ae673ab02db5716b0f7d44afa11",
+    "text": "Quand un allié <keyword0>gèle</keyword0> un ennemi, restaure {{value0}} de <keyword1>Santé</keyword1> à tous les alliés"
+  },
+  "content.species.brumalyn.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "49fe7234b52b44f6dc044993775fedfb4e414422073a76a5418d01e9d9d893b8",
+    "text": "Quand un allié <keyword0>gèle</keyword0> un ennemi, restaure {{value0}} de <keyword1>Santé</keyword1> à tous les alliés"
+  },
+  "content.species.brumalyn.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "00471a93e403876830a1a07b558a50fa3965b3ecd1772480f78e02f14b8caa0c",
+    "text": "Quand un allié <keyword0>gèle</keyword0> un ennemi, restaure {{value0}} de <keyword1>Santé</keyword1> à tous les alliés"
+  },
+  "content.species.brumalyn.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "6d9ef0e1ceda4cc8e3b365236cac6a57197b4effb1b183d2b712b915987ff160",
+    "text": "Quand un allié <keyword0>gèle</keyword0> un ennemi, restaure {{value0}} de <keyword1>Santé</keyword1> à tous les alliés"
+  },
+  "content.species.brumalyn.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "eed24690fceb61b10c22b9839e44cc3fac3b20599b40de02fa724926a3cb3627",
+    "text": "Quand un allié <keyword0>gèle</keyword0> un ennemi, restaure {{value0}} de <keyword1>Santé</keyword1> à tous les alliés"
+  },
+  "content.species.brumalyn.title": {
+    "reviewed": true,
+    "source": "The winter guide",
+    "sourceHash": "2e82c8697e30ea6fefb7073cbf0e67f1235c0d43ee4da1e265a52167768e2efd",
+    "text": "La guide de l’hiver"
+  },
+  "content.species.brumalyn.trait": {
+    "reviewed": true,
+    "source": "Winter’s Reprieve",
+    "sourceHash": "cf66e50f97e8b120823b6fdda89628aaf762e4d52b1e6ee2dea4ebb3ad4e81bd",
+    "text": "Répit hivernal"
   },
   "content.species.cadenza.name": {
     "reviewed": true,

@@ -11,6 +11,10 @@ export const SCENARIOS = [
   "aerostat-battle",
   "aerostat-collection",
   "aerostat-rank-five",
+  "brumalyn-battle",
+  "brumalyn-collection",
+  "brumalyn-rank-five",
+  "brumalyn-targeting",
   "parhelion-battle",
   "parhelion-collection",
   "parhelion-rank-five",
@@ -117,6 +121,7 @@ const creatureFixtures = [
   "wisterelle",
   "alpenglen",
   "aerostat",
+  "brumalyn",
   "parhelion",
   "dulcera",
   "pyrella",
@@ -378,6 +383,8 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button("Continue").click();
     if (["pause", "team-selection-pause"].includes(scenario.name)) await button("Open menu").click();
   }
+  if (scenario.name === "brumalyn-targeting")
+    await page.locator('.hand [data-card-id="ally-0:brumalyn-rime-pounce"]').click();
   if (scenario.name === "parhelion-targeting")
     await page.locator('.hand [data-card-id="ally-0:parhelion-whiteout-waltz"]').click();
   if (scenario.name === "orifable-targeting") {

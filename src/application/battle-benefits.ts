@@ -306,6 +306,10 @@ export function battleBenefits(
     }
     case "heal": {
       if (def.target === "allAllies" || foodForAllies(def, state)) {
+        const frozen = def.effects?.some((effect) => effect.kind === "thaw")
+          ? countMatching(allies(), (unit) => (unit.combat?.freeze ?? 0) > 0)
+          : 0;
+        if (frozen > 0) return controlRemoval(frozen);
         const automaticRecipients = facts.healingAllies();
         let restored = 0;
         let benefitUtility = 0;

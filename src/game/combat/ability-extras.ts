@@ -15,6 +15,7 @@ import {
   removeArmor,
   applyBlind,
   removeEffects,
+  removeControlBuildup,
   gainMana,
   hit,
   type Combatant,
@@ -112,6 +113,12 @@ export function applyExtras(
           text: effect.status === "burn" ? "Reflect the next Burn" : "Reflect the next harmful status effect",
         });
         break;
+      case "thaw":
+        for (const recipient of livingBattlefield(state, action.side)) {
+          if (actor.health <= 0) break;
+          removeControlBuildup(state, recipient, "freeze", events, false);
+        }
+        break;
       case "cleanse":
         for (const recipient of effect.target === "allAllies"
           ? livingBattlefield(state, enemy ? "enemy" : "player")
@@ -195,6 +202,7 @@ export function reflectExtras(
       case "nullifyFreeze":
       case "reflect":
       case "cleanse":
+      case "thaw":
       case "heal":
       case "drawKeyword":
       case "draw":

@@ -36,6 +36,7 @@ export type AbilityKind =
 export type SupplementalEffect =
   | { kind: "drawKeyword"; keyword: "light" | "nature" | "water" | "burn"; amount: number }
   | { kind: "nullifyFreeze"; amount: number }
+  | { kind: "thaw"; amount: number }
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
   | { kind: "cleanse"; amount: number; target?: "recipient" | "allAllies" }

@@ -17,6 +17,7 @@ const passiveKeywords: Partial<Record<PassiveKind, readonly KeywordId[]>> = {
   wellProvisioned: ["food"],
   passingFlame: ["burn"],
   sunthaw: ["cleanse", "freeze", "health"],
+  wintersReprieve: ["freeze", "health"],
   gentlePassage: ["health"],
   mountainGuide: ["block"],
   petalwake: ["dodge", "health"],
@@ -96,6 +97,10 @@ function cardBoonKeywords(kind: SpeciesId): readonly KeywordId[] {
             break;
           case "drawKeyword":
             keywords.add(effect.keyword);
+            break;
+          case "thaw":
+            keywords.add("cleanse");
+            keywords.add("freeze");
             break;
           case "cleanse":
           case "purge":

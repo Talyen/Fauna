@@ -2843,6 +2843,42 @@
     "sourceHash": "503cd344b2b92b8630f3f0198877d78bd548a8fdc0ba0df1a64cc2fae87ae110",
     "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Blende</keyword1> alle Gegner"
   },
+  "content.card.brumalyn-frost-howl.name": {
+    "reviewed": true,
+    "source": "Frost Howl",
+    "sourceHash": "abd0d9466b394420bede8d04f134c2dadb87a135376288007232bdd632f344ee",
+    "text": "Frostgeheul"
+  },
+  "content.card.brumalyn-frost-howl.v7483d4da6369cb11.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> or <keyword1>Stun</keyword1> damage at random to all enemies",
+    "sourceHash": "c9c2cdfe4426d4be67072f6cd7aed246c6b89911321cb2a09aa2ffa4b0640571",
+    "text": "Verursache allen Gegnern zufällig {{value0}} <keyword0>Frost</keyword0>- oder <keyword1>Betäubung</keyword1>sschaden"
+  },
+  "content.card.brumalyn-rime-pounce.name": {
+    "reviewed": true,
+    "source": "Rime Pounce",
+    "sourceHash": "ea7d3e85f49814f8b4f907a8d782a69aa1f2e9f494f26bff03a43d65a3d70e95",
+    "text": "Reifsprung"
+  },
+  "content.card.brumalyn-rime-pounce.ve0804be9f76ccc9b.rule": {
+    "reviewed": true,
+    "source": "Deal {{value0}} <keyword0>Freeze</keyword0> damage",
+    "sourceHash": "8bebea89d6a4e14d6741bb6aa53a68626684d18c91cf281a80c37d75c6b95428",
+    "text": "Verursache {{value0}} <keyword0>Frost</keyword0>-Schaden"
+  },
+  "content.card.brumalyn-warmth-ward.name": {
+    "reviewed": true,
+    "source": "Warmth Ward",
+    "sourceHash": "6fa55461a65edcdeda3639b65f79143c96c38faf62215c4b336e615ac9700f99",
+    "text": "Wärmender Schutz"
+  },
+  "content.card.brumalyn-warmth-ward.vffd17457164fea9d.rule": {
+    "reviewed": true,
+    "source": "Restore {{value0}} <keyword0>Health</keyword0> to all allies; <keyword1>Cleanse</keyword1> <keyword2>Freeze</keyword2> build-up from all allies",
+    "sourceHash": "9857401d404bf9c57c8b9f0b6e123ea14182b3735fac8c7ecdbd6f6753d14fa4",
+    "text": "Stelle allen Verbündeten {{value0}} <keyword0>Gesundheit</keyword0> wieder her; <keyword1>Reinige</keyword1> den <keyword2>Frost</keyword2>-Aufbau aller Verbündeten"
+  },
   "content.card.cadenza-echoes-remember.name": {
     "reviewed": true,
     "source": "Echoes Remember",
@@ -5104,6 +5140,60 @@
     "source": "Full Bloom",
     "sourceHash": "2643e2240c8b4c6dd8f052971c5a484b09e846b9aaf2dae02585d703418391ca",
     "text": "Volle Blüte"
+  },
+  "content.species.brumalyn.name": {
+    "reviewed": true,
+    "source": "Brumalyn",
+    "sourceHash": "f6f6dab18bf80c06a502b74518d1eeb89310ae2ca0ceea3d179aa281314c8894",
+    "text": "Brumalyn"
+  },
+  "content.species.brumalyn.passive.0.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "432171303bc1816d279bb94db869fc1ee6bd561138a5ed06c731b0a4c1da3192",
+    "text": "Wenn ein Verbündeter einen Gegner <keyword0>einfriert</keyword0>, stelle allen Verbündeten {{value0}} <keyword1>Gesundheit</keyword1> wieder her"
+  },
+  "content.species.brumalyn.passive.1.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "5efd331771601ea414e0f1a85ea7e7565d21022b9071b54db3233f5fa0bdd764",
+    "text": "Wenn ein Verbündeter einen Gegner <keyword0>einfriert</keyword0>, stelle allen Verbündeten {{value0}} <keyword1>Gesundheit</keyword1> wieder her"
+  },
+  "content.species.brumalyn.passive.2.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "940fc0738c35809ca02c2c8b3c17b5ca4dbafc0e4ac9c2b3436b9080c61c409f",
+    "text": "Wenn ein Verbündeter einen Gegner <keyword0>einfriert</keyword0>, stelle allen Verbündeten {{value0}} <keyword1>Gesundheit</keyword1> wieder her"
+  },
+  "content.species.brumalyn.passive.3.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "c0546a7f906b3ceec1be49f4af26655c272055108fb998c070d197e764b6b1e2",
+    "text": "Wenn ein Verbündeter einen Gegner <keyword0>einfriert</keyword0>, stelle allen Verbündeten {{value0}} <keyword1>Gesundheit</keyword1> wieder her"
+  },
+  "content.species.brumalyn.passive.4.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "7a411e2f0c9eddfca32a37bbcd7bfe384ba88b73b4f26b830ecaf3cb744a2684",
+    "text": "Wenn ein Verbündeter einen Gegner <keyword0>einfriert</keyword0>, stelle allen Verbündeten {{value0}} <keyword1>Gesundheit</keyword1> wieder her"
+  },
+  "content.species.brumalyn.passive.5.rule": {
+    "reviewed": true,
+    "source": "When an ally <keyword0>Freezes</keyword0> an enemy, restore {{value0}} <keyword1>Health</keyword1> to all allies",
+    "sourceHash": "d5dff7fa972594d7d4b82b33158a905b05470a2d4d150fdfb0bdb0207c8dded1",
+    "text": "Wenn ein Verbündeter einen Gegner <keyword0>einfriert</keyword0>, stelle allen Verbündeten {{value0}} <keyword1>Gesundheit</keyword1> wieder her"
+  },
+  "content.species.brumalyn.title": {
+    "reviewed": true,
+    "source": "The winter guide",
+    "sourceHash": "25332e3a29b2a5b7994fdf3e4a270e277bc7a10fb87e098aae05975b240c0102",
+    "text": "Die Winterführerin"
+  },
+  "content.species.brumalyn.trait": {
+    "reviewed": true,
+    "source": "Winter’s Reprieve",
+    "sourceHash": "365f763f83fbb333b416ac950196589fab1b44bc227224cc5699c6726b397a15",
+    "text": "Winterrast"
   },
   "content.species.cadenza.name": {
     "reviewed": true,

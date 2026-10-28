@@ -3516,6 +3516,50 @@
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     },
     {
+      "id": "creature.brumalyn",
+      "origin": "repository",
+      "source": "public/art/creatures/brumalyn/portrait.png",
+      "output": "art/brumalyn/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Brumalyn artwork from Google Drive: https://drive.google.com/file/d/1gW22uTtFYhyr_AVixc8wEfMQzeFSy08J/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.brumalyn.warmth-ward",
+      "origin": "repository",
+      "source": "public/art/creatures/brumalyn/warmth-ward.png",
+      "output": "art/brumalyn/warmth-ward.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Brumalyn artwork from Google Drive: https://drive.google.com/file/d/1ZTn59TK-qnhyvUrPFYD5qDK3ChSd21rv/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.brumalyn.rime-pounce",
+      "origin": "repository",
+      "source": "public/art/creatures/brumalyn/rime-pounce.png",
+      "output": "art/brumalyn/rime-pounce.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Brumalyn artwork from Google Drive: https://drive.google.com/file/d/1iIQpWnK0fTmA0DrnPRmFRNM_lQ310L_n/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.brumalyn.frost-howl",
+      "origin": "repository",
+      "source": "public/art/creatures/brumalyn/frost-howl.png",
+      "output": "art/brumalyn/frost-howl.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Brumalyn artwork from Google Drive: https://drive.google.com/file/d/1Us-c8ycV7SaCrvo7RS_deEW9IGa0leJq/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
       "id": "creature.parhelion",
       "origin": "repository",
       "source": "public/art/creatures/parhelion/portrait.png",

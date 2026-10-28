@@ -50,3 +50,4 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Aerostat](aerostat.md) · [implementation](../../../src/game/content/creatures/aerostat.ts) — Well Provisioned and shared Food
 - [Alpenglen](alpenglen.md) · [implementation](../../../src/game/content/creatures/alpenglen.ts) — Last Warmth, attack reflection and a last-card Critical Hit
 - [Wisterelle](wisterelle.md) · [implementation](../../../src/game/content/creatures/wisterelle.ts) — Lost and Found and the flowering station
+- [Brumalyn](brumalyn.md) · [implementation](../../../src/game/content/creatures/brumalyn.ts) — Winter’s Reprieve and the winter guide
