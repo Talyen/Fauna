@@ -8,6 +8,7 @@ import {
   SPECIES,
   FIRST_RUN_STARTERS,
   CARDS,
+  FOOD_CARDS,
   type CardDefinition,
 } from "./content";
 import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
@@ -40,8 +41,7 @@ export function passiveAmount(
   speciesId: SpeciesId,
   kind: PassiveKind,
 ): number {
-  const rank = state ? creatureStars(state, speciesId) : 0;
-  const tier = species(speciesId).passiveTiers[rank]!;
+  const tier = creaturePassiveTier(state, speciesId);
   let amounts = passiveAmounts.get(tier);
   const cached = amounts?.get(kind);
   if (cached !== undefined) return cached;
@@ -102,13 +102,9 @@ export function validTalentSelection(state: Pick<GameState, "talents" | "keyword
   return true;
 }
 const keywordsByDefinition = new WeakMap<object, readonly Keyword[]>();
-const authoredCards = new WeakSet<object>(CARDS);
+const authoredCards = new WeakSet<object>([...CARDS, ...FOOD_CARDS]);
 export function cardKeywordView(card: Pick<Card, "definitionId">): readonly Keyword[] {
-  const def = definition(card.definitionId);
-  if (!Object.isFrozen(def)) return definitionKeywords(def);
-  let keywords = keywordsByDefinition.get(def);
-  if (!keywords) keywordsByDefinition.set(def, (keywords = Object.freeze(definitionKeywords(def))));
-  return keywords;
+  return abilityKeywords(definition(card.definitionId));
 }
 /** Only catalog cards are known to be deeply immutable; adapted and injected cards stay live. */
 export function abilityKeywords(def: CardDefinition): readonly Keyword[] {
