@@ -1,7 +1,10 @@
+import { isDeepStrictEqual } from "node:util";
+
 export function summarizeSample(sample) {
   if (
     !Array.isArray(sample.frames) ||
     sample.frames.length < 60 ||
+    sample.frames.length > 12000 ||
     sample.frames.some(
       (frame, index) =>
         !Number.isFinite(frame.start) ||
@@ -31,12 +34,15 @@ export function summarizeSample(sample) {
               !Number.isFinite(entry.start) ||
               entry.start < 0 ||
               !Number.isFinite(entry.duration) ||
-              entry.duration < 0,
+              entry.duration < 0 ||
+              !Number.isFinite(entry.start + entry.duration) ||
+              (entry.inputDelay != null && (!Number.isFinite(entry.inputDelay) || entry.inputDelay < 0)),
           )),
     )
   )
     throw new Error("Invalid observer timeline.");
   if (
+    !Array.isArray(sample.spans ?? []) ||
     (sample.spans ?? []).some(
       (span) =>
         !Number.isFinite(span.start) || span.start < 0 || !Number.isFinite(span.end) || span.end < span.start,
@@ -94,7 +100,7 @@ export function comparePerformance(before, after) {
     !after.environment ||
     typeof after.environment !== "object" ||
     Array.isArray(after.environment) ||
-    JSON.stringify(before.environment) !== JSON.stringify(after.environment)
+    !isDeepStrictEqual(before.environment, after.environment)
   )
     throw new Error("Incomplete or incompatible performance environment.");
   const validCase = (row) =>

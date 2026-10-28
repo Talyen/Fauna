@@ -26,7 +26,32 @@ function* unfencedLines(lines) {
 
 export function extractMarkdownLinkTargets(source) {
   const targets = [];
-  for (const match of source.matchAll(/\[[^\]\n]*\]\(/gu)) {
+  // Mask inline code without shifting offsets used to parse link destinations.
+  const masked = source.split("");
+  for (let i = 0; i < source.length; i++) {
+    if (source[i] !== "`") continue;
+    let escapes = 0;
+    for (let j = i - 1; j >= 0 && source[j] === "\\"; j--) escapes++;
+    if (escapes % 2) continue;
+    let end = i;
+    while (source[end] === "`") end++;
+    const marker = source.slice(i, end);
+    let close = end;
+    while ((close = source.indexOf(marker, close)) !== -1) {
+      if (source[close - 1] !== "`" && source[close + marker.length] !== "`") break;
+      close += marker.length;
+    }
+    if (close < 0) {
+      i = end - 1;
+      continue;
+    }
+    for (let j = i; j < close + marker.length; j++) masked[j] = " ";
+    i = close + marker.length - 1;
+  }
+  for (const match of masked.join("").matchAll(/\[[^\]\n]*\]\(/gu)) {
+    let escapes = 0;
+    for (let i = match.index - 1; i >= 0 && source[i] === "\\"; i--) escapes++;
+    if (escapes % 2) continue;
     let index = (match.index ?? 0) + match[0].length;
     const leading = /^[ \t]*(?:\r?\n[ \t]*)?/u.exec(source.slice(index));
     index += leading?.[0].length ?? 0;
