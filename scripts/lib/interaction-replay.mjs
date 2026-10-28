@@ -1,5 +1,4 @@
-import { readdir, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { reserveEvidenceFile } from "./tool-runtime.mjs";
 
 export function parseInteractionArgs(args) {
   const options = { seed: 42, steps: 24, family: "mixed" };
@@ -33,16 +32,8 @@ export function parseInteractionArgs(args) {
 }
 
 /** The initial exclusive report reserves an empty directory and survives startup failure. */
-export async function reserveInteractionReport(directory, report) {
-  if ((await readdir(directory)).length)
-    throw new Error("Choose an empty interaction output directory; existing evidence is preserved.");
-  try {
-    await writeFile(path.join(directory, "report.json"), JSON.stringify(report, null, 2), { flag: "wx" });
-  } catch (error) {
-    if (error.code === "EEXIST")
-      throw new Error("Choose an empty interaction output directory; existing evidence is preserved.");
-    throw error;
-  }
+export function reserveInteractionReport(directory, report) {
+  return reserveEvidenceFile(directory, "report.json", JSON.stringify(report, null, 2));
 }
 
 // Candidate replays must use a new profile and recompute their command checkpoints.

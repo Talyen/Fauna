@@ -5,7 +5,8 @@ import path from "node:path";
 import os from "node:os";
 import { performance } from "node:perf_hooks";
 import { pathToFileURL } from "node:url";
-import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
+import { ROOT, runtime, identity, hash, reportDirectory, reserveEvidenceFile } from "../lib/tool-runtime.mjs";
+import { parsePerformanceArgs } from "./options.mjs";
 import { comparePerformance, summarizeSample, hitchMarkdown, compareRecorderOverhead } from "./metrics.mjs";
 import { installSampler } from "./sampler.mjs";
 import { beginTrace, attributeTrace } from "./trace.mjs";
@@ -210,61 +211,41 @@ async function capture(
   return value;
 }
 export async function main(args = process.argv.slice(2)) {
-  if (args[0] === "compare" || args[0] === "overhead") {
-    const before = await read(args[1]),
-      after = await read(args[2]);
-    const out = await reportDirectory(args[3], `reports/performance/comparison-${Date.now()}`);
+  const options = parsePerformanceArgs(args);
+  if (options.mode === "compare" || options.mode === "overhead") {
+    const before = await read(options.inputs[0]),
+      after = await read(options.inputs[1]);
     const result =
-      args[0] === "overhead" ? compareRecorderOverhead(before, after) : comparePerformance(before, after);
-    await writeFile(path.join(out, "comparison.json"), JSON.stringify(result, null, 2));
+      options.mode === "overhead"
+        ? compareRecorderOverhead(before, after)
+        : comparePerformance(before, after);
+    const out = await reportDirectory(options.output, `reports/performance/comparison-${Date.now()}`);
+    await reserveEvidenceFile(out, "comparison.json", JSON.stringify(result, null, 2));
     console.log(`Performance comparison: ${out}`);
     return;
   }
-  const replayMode = args[0] === "replay";
-  let prior,
-    scenarioId,
-    output,
-    native = false,
-    cold = false,
-    traceMode = false,
-    recordSpans = true,
-    suite = "fixed",
-    seed = 42;
-  if (replayMode) {
-    prior = await read(args[1]);
-    output = args[2];
+  let prior, scenarioId, output, native, cold, traceMode, recordSpans, suite, seed;
+  if (options.mode === "replay") {
+    prior = await read(options.inputs[0]);
+    if (
+      prior?.complete !== true ||
+      prior.format !== 3 ||
+      !prior.environment ||
+      !["electron", "chromium"].includes(prior.environment.runtime) ||
+      typeof prior.environment.cold !== "boolean"
+    )
+      throw new Error("Cannot replay incomplete or old performance report; recapture with format 3.");
+    output = options.output;
     native = prior.environment.runtime === "electron";
     cold = prior.environment.cold;
     traceMode = prior.environment.trace;
     recordSpans = prior.environment.recordSpans;
     suite = prior.environment.suite;
     seed = prior.environment.seed;
-    if (!prior.complete || prior.format !== 3)
-      throw new Error("Cannot replay incomplete or old performance report; recapture with format 3.");
   } else {
-    for (let i = 0; i < args.length; i++) {
-      if (args[i] === "--electron") native = true;
-      else if (args[i] === "--cold") cold = true;
-      else if (args[i] === "--trace") traceMode = true;
-      else if (["--scenario", "--out", "--suite", "--seed", "--spans"].includes(args[i])) {
-        const flag = args[i],
-          value = args[++i];
-        if (!value) throw new Error("Missing option value.");
-        if (flag === "--scenario") scenarioId = value;
-        if (flag === "--out") output = value;
-        if (flag === "--suite") suite = value;
-        if (flag === "--seed") seed = Number(value);
-        if (flag === "--spans") {
-          if (!["on", "off"].includes(value)) throw new Error("Choose --spans on or off");
-          recordSpans = value === "on";
-        }
-      } else
-        throw new Error(
-          "Usage: perf -- [--electron] [--cold] [--trace] [--spans on|off] [--suite fixed|reachable] [--seed N] [--scenario ID] [--out reports/path]",
-        );
-    }
+    ({ scenarioId, output, native, cold, traceMode, recordSpans, suite, seed } = options);
   }
-  if (!["fixed", "reachable"].includes(suite) || !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff)
+  if (!["fixed", "reachable"].includes(suite) || !Number.isSafeInteger(seed) || seed < 0 || seed > 0xffffffff)
     throw new Error("Invalid performance suite or seed.");
   if (typeof traceMode !== "boolean" || typeof recordSpans !== "boolean")
     throw new Error("Invalid replay recording mode; recapture with format 3");
@@ -283,7 +264,7 @@ export async function main(args = process.argv.slice(2)) {
     failures: [],
   };
   const manifest = path.join(out, "report.json");
-  await writeFile(manifest, JSON.stringify(report));
+  await reserveEvidenceFile(out, "report.json", JSON.stringify(report));
   let server, browser;
   try {
     let scenarios;
@@ -333,6 +314,7 @@ export async function main(args = process.argv.slice(2)) {
           await Promise.all(
             [
               "scripts/performance/run-performance.mjs",
+              "scripts/performance/options.mjs",
               "scripts/performance/metrics.mjs",
               "scripts/performance/sampler.mjs",
               "scripts/performance/trace.mjs",

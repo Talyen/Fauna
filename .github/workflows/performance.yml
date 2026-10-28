@@ -51,7 +51,7 @@ jobs:
           git worktree add --detach $baseline $source
           if ($LASTEXITCODE) { throw 'Baseline checkout failed' }
           # Overlay capture-only tooling; production UI, game and desktop sources stay at baseline.
-          $harness = @('scripts/performance/run-performance.mjs', 'scripts/performance/metrics.mjs', 'scripts/performance/metrics.d.mts', 'src/tooling/performance.ts')
+          $harness = @('scripts/performance/run-performance.mjs', 'scripts/performance/options.mjs', 'scripts/performance/metrics.mjs', 'scripts/performance/metrics.d.mts', 'scripts/lib/tool-runtime.mjs', 'src/tooling/performance.ts')
           foreach ($file in $harness) { Copy-Item (Join-Path $current $file) (Join-Path $baseline $file) }
           Push-Location $baseline
           npm ci --no-audit --no-fund
