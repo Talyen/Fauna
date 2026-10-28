@@ -12,30 +12,27 @@ export const startupBaseArtwork = [
   "pile.draw",
   "pile.discard",
 ].map(assetUrl);
+
+function* candidateCards(game: GameState): Generator<ReturnType<typeof definition>> {
+  if (game.phase === "draft") {
+    for (const kind of game.selected.length ? game.selected : game.starterOffers) yield* speciesCards(kind);
+  } else {
+    for (const card of game.cards) yield definition(card.definitionId);
+  }
+}
+
 /** Owned abilities are useful prefetch candidates without inspecting hidden draws or resolving RNG. */
 export function likelyArtwork(game: GameState) {
   const visible = new Set(immediateArtwork(game));
   const candidates = new Set<string>();
   const checked = new Set<string>();
-  const add = (card: ReturnType<typeof definition>) => {
+  for (const card of candidateCards(game)) {
     const id = card.artwork ?? `action.${card.species}`;
-    if (checked.has(id)) return;
+    if (checked.has(id)) continue;
     checked.add(id);
     const url = assetUrl(id);
     if (!visible.has(url)) candidates.add(url);
-  };
-  if (game.phase === "draft") {
-    for (const kind of game.selected.length ? game.selected : game.starterOffers) {
-      for (const card of speciesCards(kind)) {
-        add(card);
-        if (candidates.size === 8) return [...candidates];
-      }
-    }
-  } else {
-    for (const card of game.cards) {
-      add(definition(card.definitionId));
-      if (candidates.size === 8) return [...candidates];
-    }
+    if (candidates.size === 8) break;
   }
   return [...candidates];
 }
