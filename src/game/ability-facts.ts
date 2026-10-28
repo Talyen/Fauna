@@ -131,7 +131,10 @@ export function ordinaryAttackFacts(
   const magnitude = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
   const cardLeech = def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech);
   const craterPunch = lastCardCritical && state.boons.includes("crater-punch");
-  return [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
+  const outcomes: OrdinaryHit[] = [];
+  const count = def.alternateDamageType ? 2 : 1;
+  for (let index = 0; index < count; index++) {
+    const type = index === 0 ? def.damageType : def.alternateDamageType!;
     // Ordinary primary packets omit chance effects and most talent reactions deliberately.
     const baseDamage = modifiedDamage(
       paid,
@@ -157,7 +160,7 @@ export function ordinaryAttackFacts(
     const prevented = negated || (type === "freeze" && enemy.combat.nullifyFreeze);
     const lost = prevented ? 0 : armoredDamage(payment.remaining, armor) + piercing;
     const eroded = !negated && armored ? Math.min(erosion, enemy.combat.armor) : 0;
-    return {
+    outcomes.push({
       negated,
       lost,
       blocked: prevented ? 0 : payment.absorbed,
@@ -166,6 +169,7 @@ export function ordinaryAttackFacts(
       main: !enemy.minion,
       lethal: lost >= enemy.health,
       usefulExtras,
-    };
-  });
+    });
+  }
+  return outcomes;
 }

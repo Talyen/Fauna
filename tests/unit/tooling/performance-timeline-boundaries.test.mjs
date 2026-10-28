@@ -1,7 +1,17 @@
 import { afterEach, expect, it, vi } from "vitest";
-import { hitchMarkdown, summarizeSample } from "../../../scripts/performance/metrics.mjs";
+import { EventEmitter } from "node:events";
+import { mkdtemp, rm } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import {
+  comparePerformance,
+  compareRecorderOverhead,
+  hitchMarkdown,
+  hitchInventory,
+  summarizeSample,
+} from "../../../scripts/performance/metrics.mjs";
 import { installSampler } from "../../../scripts/performance/sampler.mjs";
-import { attributeTrace } from "../../../scripts/performance/trace.mjs";
+import { attributeTrace, beginTrace } from "../../../scripts/performance/trace.mjs";
 import { timingReport } from "../../../scripts/ci/ci-timings.mjs";
 
 afterEach(() => vi.unstubAllGlobals());
@@ -245,4 +255,204 @@ it("reports invalid or reversed CI timestamps as unavailable rather than zero or
 it("summarizes queued CI jobs even when step details are not yet available", () => {
   const report = timingReport({}, [{ name: "queued", status: "queued" }]);
   expect(report.jobs[0]).toMatchObject({ name: "queued", steps: [], executionSeconds: null });
+});
+
+const report = (input = sample()) => ({
+  format: 3,
+  complete: true,
+  environment: { runtime: "chromium" },
+  cases: [
+    { id: "battle", checkpointHash: "checkpoint", actionHash: "actions", fixture: "fixture", sample: input },
+  ],
+});
+
+it("keeps strict hitch thresholds and normalized rates across all frame buckets", () => {
+  const input = sample();
+  let end = 0;
+  input.frames = Array.from({ length: 80 }, (_, index) => {
+    const start = end;
+    const duration = [20, 33.3, 50, 100, 101][index % 5];
+    end += duration;
+    return { start, end, duration };
+  });
+  input.segments = [{ start: 0, end, duration: end, frames: 80, complete: true }];
+  const summary = summarizeSample(input);
+  expect(summary.gaps).toEqual({ 20: 64, 33.3: 48, 50: 32, 100: 16 });
+  const [comparison] = comparePerformance(report(input), report(input));
+  expect(comparison.p95Delta).toBe(0);
+  for (const [threshold, count] of Object.entries(summary.gaps)) {
+    expect(comparison.gapRatesPer30s[threshold].baseline).toBeCloseTo((count / end) * 30000);
+    expect(comparison.gapRatesPer30s[threshold].treatment).toBe(
+      comparison.gapRatesPer30s[threshold].baseline,
+    );
+  }
+});
+
+it("rejects absent imported reports with a useful comparison diagnostic", () => {
+  expect(() => comparePerformance(null, report())).toThrow("performance environment");
+  expect(() => comparePerformance(report(), null)).toThrow("performance environment");
+});
+
+it("requires a real build identity and explicit recording modes for overhead evidence", () => {
+  for (const buildIdentity of [null, 42, {}, "", "  "]) {
+    expect(() =>
+      compareRecorderOverhead(
+        { ...report(), buildIdentity, environment: { recordSpans: false } },
+        { ...report(), buildIdentity, environment: { recordSpans: true } },
+      ),
+    ).toThrow("identical renderer build");
+  }
+  expect(() =>
+    compareRecorderOverhead(
+      { ...report(), buildIdentity: "build", environment: null },
+      { ...report(), buildIdentity: "build" },
+    ),
+  ).toThrow("inactive then active");
+  expect(
+    compareRecorderOverhead(
+      { ...report(), buildIdentity: "build", environment: { recordSpans: false } },
+      { ...report(), buildIdentity: "build", environment: { recordSpans: true } },
+    ).cases,
+  ).toHaveLength(1);
+});
+
+it("reports missing or malformed trace payloads as unavailable", () => {
+  for (const trace of [null, undefined, {}, { traceEvents: {} }])
+    expect(attributeTrace(trace, { markerStart: 0, markerEnd: 10 }, [])).toMatchObject({ available: false });
+});
+
+it("refuses invalid hitch intervals instead of emitting invalid CPU accounting", () => {
+  for (const gap of [
+    null,
+    { start: -1, end: 10, duration: 11 },
+    { start: 0, end: 10, duration: NaN },
+    { start: 0, end: 10, duration: 5 },
+  ])
+    expect(attributeTrace(traceFixture([]), { markerStart: 0, markerEnd: 10 }, [gap])).toMatchObject({
+      available: false,
+    });
+  expect(
+    attributeTrace(
+      traceFixture([]),
+      { markerStart: 0, markerEnd: 10 },
+      Array.from({ length: 21 }, () => ({ start: 0, end: 10, duration: 10 })),
+    ),
+  ).toMatchObject({ available: false });
+});
+
+it("retains trace attribution at the work budget and rejects overflow", () => {
+  const events = Array.from({ length: 1000 }, () => ({ name: "Layout", ph: "X", ts: 1000, dur: 10000 }));
+  expect(attribute(events).hitches[0].work[0].selfMs).toBe(10);
+  expect(attribute([...events, events[0]])).toMatchObject({
+    available: false,
+    reason: "Per-hitch attribution work budget exceeded",
+  });
+});
+
+function traceClient({ startError, detachError, closeError, dataLossOccurred = false } = {}) {
+  const client = new EventEmitter();
+  client.detach = vi.fn(async () => {
+    if (detachError) throw detachError;
+  });
+  client.send = vi.fn(async (method) => {
+    if (method === "Tracing.start" && startError) throw startError;
+    if (method === "Tracing.end")
+      client.emit("Tracing.tracingComplete", { stream: "stream", dataLossOccurred });
+    if (method === "IO.read") return { data: '{"traceEvents":[]}', eof: true };
+    if (method === "IO.close" && closeError) throw closeError;
+  });
+  return { client, page: { context: () => ({ newCDPSession: async () => client }) } };
+}
+
+it("preserves trace setup failure when detaching also fails", async () => {
+  const { page, client } = traceClient({
+    startError: new Error("start failed"),
+    detachError: new Error("detach failed"),
+  });
+  await expect(beginTrace(page, "unused")).rejects.toThrow("start failed");
+  expect(client.detach).toHaveBeenCalledOnce();
+});
+
+it("preserves capture failures and reports every cleanup failure", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "fauna-trace-test-"));
+  try {
+    const { page, client } = traceClient({
+      dataLossOccurred: true,
+      closeError: new Error("close failed"),
+      detachError: new Error("detach failed"),
+    });
+    const stop = await beginTrace(page, path.join(directory, "trace.json"));
+    const error = await stop().catch((error) => error);
+    expect(error).toBeInstanceOf(AggregateError);
+    expect(error.errors.map((error) => error.message)).toEqual([
+      "Trace dropped events or exhausted its buffer",
+      "close failed",
+      "detach failed",
+    ]);
+    expect(client.detach).toHaveBeenCalledOnce();
+    expect(await stop()).toBeNull();
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+it("keeps the original trace failure when partial evidence cannot be written", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "fauna-trace-test-"));
+  try {
+    const { page, client } = traceClient({ dataLossOccurred: true });
+    const stop = await beginTrace(page, path.join(directory, "missing", "trace.json"));
+    const error = await stop().catch((error) => error);
+    expect(error).toBeInstanceOf(AggregateError);
+    expect(error.errors[0].message).toContain("Trace dropped events");
+    expect(error.errors[1].code).toBe("ENOENT");
+    expect(client.detach).toHaveBeenCalledOnce();
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+it("orders CI timestamps by instant even when their timezone offsets differ", () => {
+  const result = timingReport({ run_started_at: "2026-10-20T22:00:00Z" }, [
+    { started_at: "2026-10-21T00:00:00Z", completed_at: "2026-10-21T00:30:00Z" },
+    { started_at: "2026-10-21T01:00:00+02:00", completed_at: "2026-10-21T01:30:00+02:00" },
+  ]);
+  expect(result.initialQueueSeconds).toBe(3600);
+  expect(result.activeElapsedSeconds).toBe(5400);
+  expect(result.elapsedSeconds).toBe(9000);
+});
+
+it("retains exactly the twenty largest hitches in stable order without changing the timeline", () => {
+  const input = sample();
+  let end = 0;
+  input.frames = Array.from({ length: 80 }, (_, index) => {
+    const start = end;
+    const duration = 16 + (index % 27);
+    end += duration;
+    return { start, end, duration };
+  });
+  const original = structuredClone(input.frames);
+  const expected = input.frames
+    .filter((frame) => frame.duration > 20)
+    .sort((a, b) => b.duration - a.duration)
+    .slice(0, 20);
+  expect(hitchInventory(input).map(({ start, end, duration }) => ({ start, end, duration }))).toEqual(
+    expected,
+  );
+  expect(input.frames).toEqual(original);
+  expect(hitchInventory(sample())).toEqual([]);
+});
+
+it("CI timing boundaries: ignores invalid start dates and keeps invalid completions pending", () => {
+  const run = { run_started_at: "2026-10-21T00:00:00Z", updated_at: "2026-10-21T00:00:30Z" };
+  const jobs = [
+    { started_at: "invalid", completed_at: "invalid" },
+    { started_at: "2026-10-21T00:00:05Z", completed_at: "2026-10-21T00:00:20Z" },
+  ];
+  const result = timingReport(run, jobs);
+  expect(result.initialQueueSeconds).toBe(5);
+  expect(result.activeElapsedSeconds).toBeNull();
+  expect(result.elapsedSeconds).toBe(30);
+  expect(result.runnerSeconds).toBe(15);
+  expect(timingReport(run, [...jobs].reverse())).toEqual({ ...result, jobs: [...result.jobs].reverse() });
+  expect(timingReport(run, []).activeElapsedSeconds).toBeNull();
 });

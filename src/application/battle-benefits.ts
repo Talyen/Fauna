@@ -356,18 +356,19 @@ export function battleBenefits(
       const regained = Math.min(value, manaCapacity(state) - state.battle.mana + cost);
       const net = regained - cost;
       const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && facts.injuredAllies;
-      const foodHealing =
-        def.id === "food-mana-berries" && cornucopiaHealing(state) > 0
-          ? facts
-              .healingAllies()
-              .map((ally) => healingBenefit(state, ally, cornucopiaHealing(state), undefined))
-          : [];
-      const foodRestored = foodHealing.reduce((sum, benefit) => sum + benefit.restored, 0);
-      const foodUtility = foodHealing.reduce((sum, benefit) => sum + benefit.utility, 0);
-      const foodDodge =
-        def.id === "food-mana-berries" &&
-        cornucopiaHealing(state) > 0 &&
-        healingAllies(state).some((ally) => foodDodgeBenefit(state, def, ally) > 0);
+      const foodHealing = def.id === "food-mana-berries" ? cornucopiaHealing(state) : 0;
+      let foodRestored = 0;
+      let foodUtility = 0;
+      let foodDodge = false;
+      if (foodHealing > 0) {
+        const recipients = facts.healingAllies();
+        for (const ally of recipients) {
+          const benefit = healingBenefit(state, ally, foodHealing, undefined);
+          foodRestored += benefit.restored;
+          foodUtility += benefit.utility;
+        }
+        foodDodge = recipients.some((ally) => foodDodgeBenefit(state, def, ally) > 0);
+      }
       return support(
         net > 0
           ? "resource"
@@ -439,13 +440,13 @@ export function battleBenefits(
         selfHealing,
       );
     }
-    case "dodge":
-      return dodgeSupport(
-        (def.target === "allAllies" ? allies() : [actor]).reduce(
-          (sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)),
-          0,
-        ),
-      );
+    case "dodge": {
+      let useful = 0;
+      if (def.target === "allAllies") {
+        for (const unit of allies()) useful += Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0));
+      } else useful += Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0));
+      return dodgeSupport(useful);
+    }
     case "redraw":
       return support(state.battle.hand.length > 1 ? "redraw" : "none");
     case "draw":
@@ -546,15 +547,16 @@ export function battleBenefits(
           );
         });
       }
-      const useful = allies().reduce(
-        (sum, ally) =>
-          sum +
+      let useful = 0;
+      let waffle = 0;
+      for (const ally of allies()) {
+        useful =
+          useful +
           Math.min(value, STACK_LIMIT - ally.block) +
           foodDodgeBenefit(state, def, ally) +
-          (def.effect === "teamProtection" ? Math.min(value, STACK_LIMIT - (ally.combat?.thorns ?? 0)) : 0),
-        0,
-      );
-      const waffle = allies().reduce((sum, ally) => sum + foodWaffleBenefit(state, def, ally, value), 0);
+          (def.effect === "teamProtection" ? Math.min(value, STACK_LIMIT - (ally.combat?.thorns ?? 0)) : 0);
+        waffle += foodWaffleBenefit(state, def, ally, value);
+      }
       return support(waffle > 0 ? "healing" : useful > 0 ? "protection" : "none", waffle || useful);
     }
     case "nullify": {

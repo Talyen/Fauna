@@ -1,3 +1,5 @@
+import { isDeepStrictEqual } from "node:util";
+
 const METRICS = ["win", "turns", "health", "encounter", "swaps", "currency", "xp"];
 export function validateBalanceMetrics(metrics, context) {
   for (const metric of METRICS)
@@ -14,18 +16,22 @@ export function validateBalanceMetrics(metrics, context) {
     throw new Error(`Invalid metrics${context ? ` (${context})` : ""}.`);
 }
 export function pairedStats(deltas) {
-  if (!deltas.length || deltas.some((value) => !Number.isFinite(value)))
-    throw new Error("Invalid paired samples.");
+  if (!Array.isArray(deltas) || !deltas.length) throw new Error("Invalid paired samples.");
+  for (const value of deltas) if (!Number.isFinite(value)) throw new Error("Invalid paired samples.");
   const n = deltas.length,
     mean = deltas.reduce((a, b) => a + b, 0) / n;
   const standardError =
     n > 1 ? Math.sqrt(deltas.reduce((sum, d) => sum + (d - mean) ** 2, 0) / (n - 1) / n) : null;
+  if (!Number.isFinite(mean) || (standardError !== null && !Number.isFinite(standardError)))
+    throw new Error("Paired statistics exceed the supported numeric range.");
   return { n, mean, standardError, noisy: standardError === null || Math.abs(mean) <= 2 * standardError };
 }
 export function compareBalance(baseline, treatment) {
   const nonempty = (value) => typeof value === "string" && value.length > 0;
   const settings = (value) => value && typeof value === "object" && !Array.isArray(value);
   if (
+    !baseline ||
+    !treatment ||
     baseline.format !== 1 ||
     treatment.format !== 1 ||
     baseline.complete !== true ||
@@ -40,7 +46,7 @@ export function compareBalance(baseline, treatment) {
     !nonempty(treatment.identity) ||
     !settings(baseline.settings) ||
     !settings(treatment.settings) ||
-    JSON.stringify(baseline.settings) !== JSON.stringify(treatment.settings)
+    !isDeepStrictEqual(baseline.settings, treatment.settings)
   )
     throw new Error("Incomplete or incompatible balance reports.");
   if (

@@ -1,21 +1,26 @@
 import { pairedStats, validateBalanceMetrics } from "./paired-balance.mjs";
 
 const MIN_SAMPLES = 5;
+const confirmedStarter = (row) =>
+  typeof row.actualStarter === "string" && !!row.actualStarter.trim() && row.actualStarter === row.starter;
 const SEVERITY = { critical: 0, review: 1, watch: 2 };
 export function rankBalanceFindings(report) {
-  if (report.format !== 1 || !["career", "experiment", "comparison"].includes(report.kind))
+  if (!report || report.format !== 1 || !["career", "experiment", "comparison"].includes(report.kind))
     throw new Error("Unsupported balance report.");
   const findings = [];
   const add = (severity, id, title, detail, evidence, magnitude = 0) =>
     findings.push({ severity, id, title, detail, evidence, magnitude });
   if (report.kind === "comparison") {
     if (!Array.isArray(report.pairs) || !report.pairs.length) throw new Error("Missing paired evidence.");
+    if (report.pairs.some((pair) => !pair || typeof pair.key !== "string" || !pair.key.trim()))
+      throw new Error("Invalid paired evidence identity.");
     if (new Set(report.pairs.map((pair) => pair.key)).size !== report.pairs.length)
       throw new Error("Duplicate paired evidence.");
     for (const pair of report.pairs) {
       validateBalanceMetrics(pair.baseline, pair.key);
       validateBalanceMetrics(pair.treatment, pair.key);
     }
+    let evidence;
     // Recalculate uncertainty from samples rather than trusting serialized summaries.
     for (const [metric, threshold, label] of [
       ["win", 0.2, "Journey success"],
@@ -34,7 +39,7 @@ export function rankBalanceFindings(report) {
         `paired-${metric}`,
         `${label} changed`,
         `Treatment minus baseline: ${stats.mean.toFixed(2)}; ${stats.n} pairs; standard error ${stats.standardError === null ? "unavailable" : stats.standardError.toFixed(2)}. ${supported ? "Above the review threshold and two standard errors." : "Limited or noisy evidence; collect more matched seeds."}`,
-        report.pairs.map((pair) => ({ key: pair.key, files: pair.evidence })),
+        (evidence ??= report.pairs.map((pair) => ({ key: pair.key, files: pair.evidence }))),
         Math.abs(stats.mean) / threshold,
       );
     }
@@ -43,6 +48,7 @@ export function rankBalanceFindings(report) {
       typeof report.complete !== "boolean" ||
       !Array.isArray(report.cases) ||
       !Array.isArray(report.failures) ||
+      report.failures.some((failure) => !failure || typeof failure !== "object" || Array.isArray(failure)) ||
       report.cases.some((row) => !row || typeof row.complete !== "boolean")
     )
       throw new Error("Invalid balance cases or completion status.");
@@ -60,13 +66,13 @@ export function rankBalanceFindings(report) {
       (!report.cases.length || report.failures.length || report.cases.some((row) => !row.complete))
     )
       throw new Error("Contradictory completion evidence.");
-    const keys = report.cases.map((row) => `${row.arm ?? ""}:${row.key}`);
+    if (report.cases.some((row) => typeof row.key !== "string" || !row.key.trim()))
+      throw new Error("Invalid balance case identity.");
+    const keys = report.cases.map((row) => JSON.stringify([row.arm ?? "", row.key]));
     if (new Set(keys).size !== keys.length) throw new Error("Duplicate balance cases.");
     const groups = new Map();
     if (report.kind === "career") {
-      const unconfirmed = report.cases.filter(
-        (row) => typeof row.actualStarter !== "string" || row.actualStarter !== row.starter,
-      );
+      const unconfirmed = report.cases.filter((row) => !confirmedStarter(row));
       if (unconfirmed.length)
         add(
           "watch",
@@ -76,10 +82,11 @@ export function rankBalanceFindings(report) {
           unconfirmed.map((row) => ({ key: row.key, files: [row.evidence] })),
         );
     }
-    for (const row of report.cases.filter((entry) => entry.complete)) {
+    for (const row of report.cases) {
+      if (!row.complete) continue;
       validateBalanceMetrics(row.metrics, row.key);
       if (report.kind !== "career") continue;
-      if (typeof row.actualStarter !== "string" || row.actualStarter !== row.starter) continue;
+      if (!confirmedStarter(row)) continue;
       const starter = row.starter ?? row.key.replace(/-\d+$/, "");
       if (!groups.has(starter)) groups.set(starter, []);
       groups.get(starter).push(row);
@@ -96,7 +103,8 @@ export function rankBalanceFindings(report) {
       });
       if (seeds.includes(null) || new Set(seeds).size !== seeds.length)
         throw new Error(`Missing or duplicate career seeds: ${starter}`);
-      summaries.push({ starter, wins, evidence, seeds: [...seeds].sort((a, b) => a - b) });
+      const seedSignature = JSON.stringify(seeds.sort((a, b) => a - b));
+      summaries.push({ starter, wins, evidence, seedSignature });
       if (rows.length < MIN_SAMPLES) {
         add(
           "watch",
@@ -138,9 +146,10 @@ export function rankBalanceFindings(report) {
     // An approximate two-standard-error filter suppresses visibly noisy starter comparisons.
     // Extreme rates remain watch findings because a zero sample variance is not certainty.
     for (let i = 0; i < summaries.length; i++)
-      for (const right of summaries.slice(i + 1)) {
+      for (let j = i + 1; j < summaries.length; j++) {
         const left = summaries[i];
-        if (JSON.stringify(left.seeds) !== JSON.stringify(right.seeds)) continue;
+        const right = summaries[j];
+        if (left.seedSignature !== right.seedSignature) continue;
         const delta = left.wins.mean - right.wins.mean;
         if (left.wins.n < MIN_SAMPLES || right.wins.n < MIN_SAMPLES || Math.abs(delta) < 0.25) continue;
         const se = Math.sqrt(left.wins.standardError ** 2 + right.wins.standardError ** 2);
@@ -177,7 +186,10 @@ export function findingsMarkdown(result) {
         const files = entry.files ?? [entry.evidence, entry.config, entry.journal].filter(Boolean);
         const links = files
           .filter((file) => typeof file === "string")
-          .map((file, i) => `[evidence ${i + 1}](<${encodeURI(file).replaceAll(">", "%3E")}>)`)
+          .map(
+            (file, i) =>
+              `[evidence ${i + 1}](<${encodeURI(file).replaceAll("#", "%23").replaceAll("?", "%3F").replaceAll("<", "%3C").replaceAll(">", "%3E")}>)`,
+          )
           .join(", ");
         return `- ${entry.key ?? "case"}${entry.reason ? `: ${entry.reason}` : ""}${links ? ` — ${links}` : ""}`;
       })

@@ -221,3 +221,27 @@ it("rejects matching but missing or malformed build provenance", () => {
     }
   }
 });
+
+it("patch-note boundaries: ignores empty visible subjects and uses the final visibility marker", () => {
+  expect(playerNote("fix:\n\nUser-Facing: yes", ["src/game/engine.ts"])).toBeNull();
+  expect(
+    playerNote("fix: restore rewards\nUser-Facing: no\nUser-Facing: yes", ["src/game/engine.ts"]),
+  ).toEqual({ section: "Fixes", text: "Restore rewards" });
+  expect(
+    playerNote("fix: restore rewards\nUser-Facing: yes\nUser-Facing: no", ["src/game/engine.ts"]),
+  ).toBeNull();
+});
+
+it("patch-note boundaries: chooses the same lexical tag when ancestry distances tie", async () => {
+  await repository(async (root, git) => {
+    git("tag", "v0.8.0");
+    git("tag", "v0.9.0");
+    mkdirSync(path.join(root, "src/game"), { recursive: true });
+    writeFixture(root, "src/game/example.ts", "export const value = 1;\n");
+    git("add", ".");
+    git("commit", "-qm", "fix: preserve rewards");
+    const result = generatePatchNotes(root);
+    expect(result.base).toBe("v0.8.0");
+    expect(result.markdown).toContain("Preserve rewards");
+  });
+});

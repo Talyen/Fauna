@@ -101,7 +101,8 @@ export function createDiagnostics(port?: DiagnosticPort) {
       }
       bounded.splice(0, removed);
     }
-    return Object.freeze(bounded.map((entry) => Object.freeze(entry)));
+    for (const entry of bounded) Object.freeze(entry);
+    return Object.freeze(bounded);
   };
   let entries = retain([]);
   let disposed = false,

@@ -16,10 +16,10 @@ export function scoopBonus(state: GameState | undefined, unit: Combatant, amount
   )
     return 0;
   const stats = unit.combat;
-  return stats
-    ? harmfulStatuses.filter((status) => stats.controlled === status || Number(stats[status]) > 0).length *
-        boonRule("clover-measuring-scoop").healing
-    : 0;
+  if (!stats) return 0;
+  let count = 0;
+  for (const status of harmfulStatuses) if (stats.controlled === status || Number(stats[status]) > 0) count++;
+  return count * boonRule("clover-measuring-scoop").healing;
 }
 
 /** Magnitude only; rewards, revival permission and bounce remain execution policy. */

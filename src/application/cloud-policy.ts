@@ -1,27 +1,16 @@
 import type { CloudSnapshot } from "./cloud-snapshots";
 
-function twoHeads(first: CloudSnapshot, last: CloudSnapshot): CloudSnapshot[] {
-  if (first.id === last.id) return last.ancestors.includes(last.id) ? [] : [last];
-  const heads: CloudSnapshot[] = [];
-  if (!first.ancestors.includes(first.id) && !last.ancestors.includes(first.id)) heads.push(first);
-  if (!first.ancestors.includes(last.id) && !last.ancestors.includes(last.id)) heads.push(last);
-  return heads;
-}
-
+/** Last duplicate wins without changing its original position; only ancestry retires a head. */
 export function newestHeads(records: readonly CloudSnapshot[]) {
-  if (records.length === 0) return [];
-  if (records.length === 1) return records[0]!.ancestors.includes(records[0]!.id) ? [] : records.slice();
-  if (records.length === 2) return twoHeads(records[0]!, records[1]!);
   const byId = new Map<string, CloudSnapshot>();
   for (const record of records) byId.set(record.id, record);
   const unique = [...byId.values()];
-  if (unique.length === 1) return unique[0]!.ancestors.includes(unique[0]!.id) ? [] : unique;
-  if (unique.length === 2) return twoHeads(unique[0]!, unique[1]!);
-  let ancestors: Set<string> | undefined;
-  for (const record of unique)
-    for (const ancestor of record.ancestors) (ancestors ??= new Set()).add(ancestor);
-  const knownAncestors = ancestors;
-  return knownAncestors ? unique.filter((record) => !knownAncestors.has(record.id)) : unique;
+  const ancestors = new Set<string>();
+  for (const record of unique) for (const ancestor of record.ancestors) ancestors.add(ancestor);
+  let kept = 0;
+  for (const record of unique) if (!ancestors.has(record.id)) unique[kept++] = record;
+  unique.length = kept;
+  return unique;
 }
 
 /** Sequence counters select device slots; ancestry alone retires competing progress. */

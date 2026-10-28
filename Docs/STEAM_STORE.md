@@ -10,7 +10,7 @@ Owner confirmation on October 23, 2026: all player-facing content was created by
 
 Suggested wording for the pre-generated AI section of the Steam Content Survey:
 
-> Fauna's artwork, music, sound effects and written game content were created by the developer using AI tools during development. The game ships prepared content and does not generate content with AI during gameplay.
+> Fauna's artwork, music, sound effects, written game content and translations were created by the developer using AI tools during development. The game ships prepared content and does not generate content with AI during gameplay.
 
 Review the final survey wording against the actual release candidate. Valve requires disclosure of shipped AI-generated player-facing content; ordinary development-assistance tooling is not the focus. Answer live generation as absent while the shipped application remains entirely offline and has no generation service. See Valve's [Content Survey](https://partner.steamgames.com/doc/gettingstarted/contentsurvey).
 
@@ -20,6 +20,6 @@ All games need adequate rights to distributed content. Valve does not describe a
 
 Advertise only current, qualified functionality. Current packaging targets Windows x64; native Linux/macOS builds and Steam achievements are not implemented. Proton/Deck compatibility requires separate device testing. Cloud and controller claims need completed external configuration and live acceptance. A browser test or successful package check does not establish those claims.
 
-Use real gameplay screenshots. Base Store capsules contain game artwork, the title and any official subtitle; omit review scores, awards, discounts, other products and promotional calls to action. Library hero artwork has no text; library capsule includes the game logo; library logo uses transparency. Keep external URLs out of the written description and use the supported link fields. Check current dimensions and requirements at upload time.
+Use real gameplay screenshots. Base Store capsules contain game artwork, the title and any official subtitle; omit review scores, awards, discounts, other products and promotional calls to action. Library hero artwork has no text; library capsule includes the game logo; library logo uses transparency. Keep external links, QR codes and implied URLs out of descriptions and graphical assets; use the supported link fields. Description media must not mimic Steam controls or advertise other games. Check current dimensions and requirements at upload time.
 
 Valve references: [build and Store review](https://partner.steamgames.com/doc/store/review_process), [graphical asset rules](https://partner.steamgames.com/doc/store/assets/rules), [written descriptions](https://partner.steamgames.com/doc/store/page/description), [controller guidance](https://partner.steamgames.com/doc/features/steam_controller/getting_started_for_devs), [Steam Cloud](https://partner.steamgames.com/doc/features/cloud) and [Deck compatibility](https://partner.steamgames.com/doc/steamhardware/compat).
