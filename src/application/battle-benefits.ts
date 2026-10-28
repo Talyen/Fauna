@@ -248,8 +248,10 @@ export function battleBenefits(
           0,
         ) / outcomes.length;
       const lethal = (attack: (typeof attacks)[number]) => attack.outcomes.every((outcome) => outcome.lethal);
+      const blindCanMiss =
+        !!actor.combat?.blind && !(def.damageType === "light" && state.boons.includes("vow-candle"));
       const winning =
-        !actor.combat?.blind &&
+        !blindCanMiss &&
         remaining > 0 &&
         (def.target === "allEnemies"
           ? attacks.every((attack) => !!attack.enemy.minion || lethal(attack))
@@ -273,7 +275,7 @@ export function battleBenefits(
         ];
       return attacks.map((attack) => {
         const { enemy } = attack;
-        const finish = !actor.combat?.blind && remaining === 1 && !enemy.minion && lethal(attack);
+        const finish = !blindCanMiss && remaining === 1 && !enemy.minion && lethal(attack);
         return {
           score: (finish ? BATTLE_FINISH_PRIORITY : 0) + attackScore(attack.outcomes),
           targetId: enemy.id,
