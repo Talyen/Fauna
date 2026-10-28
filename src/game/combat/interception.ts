@@ -1,3 +1,4 @@
+import { emitSupport } from "../events";
 import { battlefieldView, isEnemy } from "../battlefield";
 import { passiveAmount } from "../progression";
 import { chance } from "../chance";
@@ -25,10 +26,7 @@ export function interceptAttack(
       continue;
     const percent = passiveAmount(enemy ? undefined : state, protector.species, "gallantry");
     if (!chance(state, percent / 100, enemy, events)) continue;
-    events.push({
-      kind: "action",
-      actionType: "support",
-      actorId: protector.id,
+    emitSupport(events, protector.id, {
       targetId: target.id,
       text: `${unitName(protector)} intercepts the attack against ${unitName(target)}`,
     });

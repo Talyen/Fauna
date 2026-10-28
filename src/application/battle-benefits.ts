@@ -230,10 +230,11 @@ export function battleBenefits(
     case "attack": {
       const enemies = facts.livingEnemies();
       const cost = cardCost(card, state, def, actor);
-      const attacks = enemies.map((enemy) => ({
-        enemy,
-        outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cost),
-      }));
+      let remaining = 0;
+      const attacks = enemies.map((enemy) => {
+        if (!enemy.minion) remaining++;
+        return { enemy, outcomes: ordinaryAttackFacts(state, actor, def, value, enemy, cost) };
+      });
       const cleanse = def.effects?.some(
         (effect) =>
           effect.kind === "cleanse" &&
@@ -246,8 +247,6 @@ export function battleBenefits(
           (sum, hit) => sum + Math.max(ordinaryHitScore(hit), cleanse ? priorities.standardUtility : 0),
           0,
         ) / outcomes.length;
-      let remaining = 0;
-      for (const attack of attacks) if (!attack.enemy.minion) remaining++;
       const lethal = (attack: (typeof attacks)[number]) => attack.outcomes.every((outcome) => outcome.lethal);
       const winning =
         !actor.combat?.blind &&

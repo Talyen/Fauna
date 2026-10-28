@@ -1,3 +1,4 @@
+import { emitStatus } from "../events";
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { manaCapacity } from "../ability-rules";
@@ -107,11 +108,7 @@ export function* restoreHealth(
       const removed = Math.min(gain, stats.freeze);
       stats.freeze -= removed;
       if (!stats.freeze) clearHarmfulStatus(stats, "freeze");
-      events.push({
-        kind: "status",
-        targetId: unit.id,
-        status: "freeze",
-        outcome: "remove",
+      emitStatus(events, unit.id, "freeze", "remove", {
         amount: removed,
         text: `${unitName(unit)} loses ${removed} Freeze buildup`,
       });

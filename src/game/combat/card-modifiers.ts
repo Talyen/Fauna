@@ -1,3 +1,4 @@
+import { emitSupport } from "../events";
 import { boonRule, PLAYER_CARD_TRIGGER_LIMIT } from "../rules/boons";
 import { talentRule } from "../rules/talents";
 import {
@@ -60,12 +61,7 @@ export function returnDodgedCard(state: BattleState, card: Card, events: GameEve
   state.battle.discard.splice(index, 1);
   receiveCard(state, card.id);
   journeyReturn(state, card.ownerId, events);
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: owner.id,
-    text: `${def.name} returns to hand`,
-  });
+  emitSupport(events, owner.id, { text: `${def.name} returns to hand` });
 }
 
 /** Spend already granted effects without rechecking whether the granting Talent is selected. */

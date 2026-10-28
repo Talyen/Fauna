@@ -206,3 +206,16 @@ it("tracks a Boon saved-state consumer without requiring the Boon to remain owne
     expect.stringContaining("icy-heart is not implemented/read by src/game/extra.ts#consume"),
   );
 });
+
+it("follows namespace exports only when spread into the scheduler's handler registry", () => {
+  const sources = fixture();
+  sources["src/game/entry.ts"] = "export function command() {}";
+  sources["src/game/combat/resolution.ts"] =
+    'import * as operations from "../owner"; const handlers = {...operations};';
+  expect(modifierContractViolations(sources)).toEqual([]);
+  sources["src/game/combat/resolution.ts"] =
+    'import * as operations from "../owner"; const unused = {...operations};';
+  expect(modifierContractViolations(sources)).toContainEqual(
+    expect.stringContaining("which has no runtime caller"),
+  );
+});
