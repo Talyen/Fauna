@@ -80,9 +80,13 @@ export async function parseSnapshot(raw: string, profile: string): Promise<Cloud
   if (!parsed.success) throw new Error("Invalid cloud metadata.");
   const s = parsed.data;
   if (s.profile !== profile) throw new Error("Invalid cloud metadata.");
-  const ancestors = new Set(s.ancestors);
-  if (ancestors.size !== s.ancestors.length || ancestors.has(s.id))
-    throw new Error("Invalid cloud metadata.");
+  if (s.ancestors.length <= 1) {
+    if (s.ancestors[0] === s.id) throw new Error("Invalid cloud metadata.");
+  } else {
+    const ancestors = new Set(s.ancestors);
+    if (ancestors.size !== s.ancestors.length || ancestors.has(s.id))
+      throw new Error("Invalid cloud metadata.");
+  }
   const payload = encodeSave(decodeSave(s.payload));
   if (payload !== s.payload || (await sha(payload)) !== s.hash || (await sha(body(s))) !== s.id)
     throw new Error("Cloud snapshot failed validation.");

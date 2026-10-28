@@ -89,8 +89,9 @@ function errorMessage(error: unknown): string {
 export function createDiagnostics(port?: DiagnosticPort) {
   const retain = (values: Diagnostic[]) => {
     // JSON escaping can cost six characters per message character. Bound the stored form too.
-    const bounded = values.slice(-MAX_ENTRIES);
-    if (JSON.stringify(bounded).length >= MAX_STORED_LENGTH) {
+    const bounded = values.length > MAX_ENTRIES ? values.slice(-MAX_ENTRIES) : values;
+    let serialized = JSON.stringify(bounded);
+    if (serialized.length >= MAX_STORED_LENGTH) {
       let storedLength = 2 + Math.max(0, bounded.length - 1);
       const lengths = bounded.map((entry) => JSON.stringify(entry).length);
       for (const length of lengths) storedLength += length;
@@ -100,16 +101,17 @@ export function createDiagnostics(port?: DiagnosticPort) {
         if (removed < bounded.length) storedLength--;
       }
       bounded.splice(0, removed);
+      serialized = JSON.stringify(bounded);
     }
     for (const entry of bounded) Object.freeze(entry);
-    return Object.freeze(bounded);
+    return { entries: Object.freeze(bounded), serialized };
   };
-  let entries = retain([]);
+  let entries = retain([]).entries;
   let disposed = false,
     writing = false;
   const listeners = new Set<() => void>();
   try {
-    entries = retain(readEntries(port?.read()));
+    entries = retain(readEntries(port?.read())).entries;
   } catch {
     /* Diagnostics remain usable when optional persistence fails. */
   }
@@ -143,20 +145,22 @@ export function createDiagnostics(port?: DiagnosticPort) {
           // Optional diagnostic context cannot suppress the original failure.
         }
         if (disposed) return;
-        const match = entries.find((entry) => entry.source === source && entry.message === message);
-        entries = retain([
-          ...(match ? entries.filter((entry) => entry !== match) : entries),
-          {
-            source,
-            message,
-            count: Math.min((match?.count ?? 0) + 1, MAX_COUNT),
-            ...location,
-          },
-        ]);
+        const index = entries.findIndex((entry) => entry.source === source && entry.message === message);
+        const match = entries[index];
+        const next = entries.slice();
+        if (index >= 0) next.splice(index, 1);
+        next.push({
+          source,
+          message,
+          count: Math.min((match?.count ?? 0) + 1, MAX_COUNT),
+          ...location,
+        });
+        const retained = retain(next);
+        entries = retained.entries;
         // Capture delivery ownership before persistence or listeners can register new viewers.
         const notification = [...listeners];
         try {
-          port?.write(JSON.stringify(entries));
+          port?.write(retained.serialized);
         } catch {
           /* Preserve in-memory evidence. */
         }
