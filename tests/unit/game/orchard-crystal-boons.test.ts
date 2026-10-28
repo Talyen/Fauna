@@ -1,10 +1,11 @@
 import { expect, it } from "vitest";
 import { prepareCombatFixture } from "../../support/combat";
 import { addReserve, requireBattle, run } from "../../support/game";
+import { NEW_BOON_EFFECTS } from "../../support/boons";
 import { applyHarmfulStatus, hit, removeEffects } from "../../../src/game/combat";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { useFood } from "../../../src/game/combat/food";
-import { definition } from "../../../src/game/content";
+import { BOONS, definition } from "../../../src/game/content";
 import { encodeSave, decodeSave } from "../../../src/game/save";
 import { swapFromCard } from "../../../src/game/team";
 import { observeDecisions } from "../../../src/game/random";
@@ -165,4 +166,9 @@ it("preserves the new Boon selection across save and resume", () => {
     "vow-candle",
   ];
   expect(decodeSave(encodeSave(state))).toEqual(state);
+  for (const id of state.boons) {
+    expect(BOONS.find((boon) => boon.id === id)?.text).toBe(
+      Object.entries(NEW_BOON_EFFECTS).find(([key]) => key === id)?.[1],
+    );
+  }
 });
