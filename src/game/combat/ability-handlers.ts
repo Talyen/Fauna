@@ -43,7 +43,7 @@ import {
   livingOpponents,
   type PrimaryContext,
 } from "./ability-context";
-import type { Combatant } from "./state";
+import { unitName, type Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
   if (ensureCombat(unit).thorns > 0) removeEffects(unit, "purge", 1, events, state, "thorns", source);
@@ -221,7 +221,7 @@ export function executePrimary(context: PrimaryContext) {
             targetId: recipient.id,
             status: "negate",
             outcome: "apply",
-            text: `${name} grants Negate`,
+            text: `${unitName(recipient)} gains Negate`,
           });
         }
       }

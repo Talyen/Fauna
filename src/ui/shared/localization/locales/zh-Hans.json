@@ -8849,6 +8849,12 @@
     "sourceHash": "7a9ebeb5c55006d03ebb285c14516a62d439274e46af4c0388501a8eff3ae549",
     "text": "{{name}}减少{{amount}}点冻结积累"
   },
+  "log.loseThorns": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Thorns",
+    "sourceHash": "80e3f7aa79ddb8626e7e2a9b02cf24ee6db2f98c3453ae33c7b56db53682dafd",
+    "text": "{{name}}失去{{amount}}点荆棘"
+  },
   "log.mountainGuide": {
     "reviewed": true,
     "source": "{{trait}} protects {{target}}",

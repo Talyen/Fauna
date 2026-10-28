@@ -8849,6 +8849,12 @@
     "sourceHash": "4f1b28fb06ea2047c626e0e9ab6819052ea07f79cc1378a66744b7b86b926630",
     "text": "{{name}} perde {{amount}} de acúmulo de Congelamento"
   },
+  "log.loseThorns": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Thorns",
+    "sourceHash": "f6e526fec50d9c53cc57f6058acf4ab6e420390ba3a95179631ddf3ffb01daf0",
+    "text": "{{name}} perde {{amount}} de Espinhos"
+  },
   "log.mountainGuide": {
     "reviewed": true,
     "source": "{{trait}} protects {{target}}",

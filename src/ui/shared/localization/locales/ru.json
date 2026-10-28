@@ -8849,6 +8849,12 @@
     "sourceHash": "0b9507e3907d1eeee7fb457f957fca6ebbecc6a7c8f7bb5a7f16871233c3f42e",
     "text": "У {{name}} накопление заморозки уменьшается на {{amount}}"
   },
+  "log.loseThorns": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Thorns",
+    "sourceHash": "e0cb87bfc182bed028622628f19733d38fc8094df458e5d9a7d55e8b1c9d78f3",
+    "text": "{{name}} теряет {{amount}} шипов"
+  },
   "log.mountainGuide": {
     "reviewed": true,
     "source": "{{trait}} protects {{target}}",

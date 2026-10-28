@@ -468,6 +468,15 @@ export function eventPresentation(
         amount: quantity(-event.amount),
       });
     if (
+      event.status === "thorns" &&
+      event.outcome === "remove" &&
+      event.text === `${englishName} loses ${event.amount} Thorns`
+    )
+      return i18n.message("log.loseThorns", "{{name}} loses {{amount}} Thorns", {
+        name,
+        amount: quantity(event.amount),
+      });
+    if (
       event.status === "armor" &&
       event.outcome === "remove" &&
       event.text === `${englishName} loses ${event.amount} Armor`

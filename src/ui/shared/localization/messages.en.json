@@ -395,6 +395,9 @@
   "log.loseFreezeBuildup": {
     "text": "{{name}} loses {{amount}} Freeze buildup"
   },
+  "log.loseThorns": {
+    "text": "{{name}} loses {{amount}} Thorns"
+  },
   "log.mountainGuide": {
     "text": "{{trait}} protects {{target}}"
   },

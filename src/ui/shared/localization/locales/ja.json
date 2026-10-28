@@ -8849,6 +8849,12 @@
     "sourceHash": "545add015fb4014eeade563dc1325a44d1e905c57677329b7a55fee202c784b9",
     "text": "{{name}}の凍結の蓄積が{{amount}}減少"
   },
+  "log.loseThorns": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Thorns",
+    "sourceHash": "b92131be685bf8a6d6ca43e912619751a137692cbf4c91758479c41afe83d442",
+    "text": "{{name}}は棘を{{amount}}失う"
+  },
   "log.mountainGuide": {
     "reviewed": true,
     "source": "{{trait}} protects {{target}}",

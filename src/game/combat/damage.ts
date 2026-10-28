@@ -722,7 +722,7 @@ export function* resolveHit(
         status: "thorns",
         outcome: "remove",
         amount: removed,
-        text: `${unitName(target)} loses ${removed} Thorns to Ash Bowl`,
+        text: `${unitName(target)} loses ${removed} Thorns`,
       });
   }
   if (

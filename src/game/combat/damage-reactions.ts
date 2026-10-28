@@ -92,7 +92,7 @@ export function* dodgeResponse(
           status: "armor",
           outcome: "remove",
           amount: removed,
-          text: `${unitName(target)} steals ${removed} Armor`,
+          text: `${unitName(source)} loses ${removed} Armor`,
         });
         yield* reaction("grantArmor", state, target, removed, events);
         yield* reaction("triggerArmorBreak", state, depletion, events);

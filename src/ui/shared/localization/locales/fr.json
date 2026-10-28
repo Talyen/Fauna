@@ -8849,6 +8849,12 @@
     "sourceHash": "3831f194e21c01b181fd701bca441940789eccebe4742c08fdadb398096aa607",
     "text": "{{name}} perd {{amount}} d’accumulation de Gel"
   },
+  "log.loseThorns": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Thorns",
+    "sourceHash": "cd73c7d25403a7025e5ac7b3c5ab3ff688e9881698706c5ef9507509d40fcbde",
+    "text": "{{name}} perd {{amount}} Épines"
+  },
   "log.mountainGuide": {
     "reviewed": true,
     "source": "{{trait}} protects {{target}}",

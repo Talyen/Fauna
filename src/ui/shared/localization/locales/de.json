@@ -8849,6 +8849,12 @@
     "sourceHash": "8d134786f5457451271433eba54dd90c3ac91abe3521155c3b74145d8c288ff6",
     "text": "{{name}} verliert {{amount}} Frost-Aufbau"
   },
+  "log.loseThorns": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Thorns",
+    "sourceHash": "9bb3c74702ec84664080540adccf7eb27bd45f15e6d9c6a7a0ab1266a3c27e89",
+    "text": "{{name}} verliert {{amount}} Dornen"
+  },
   "log.mountainGuide": {
     "reviewed": true,
     "source": "{{trait}} protects {{target}}",
