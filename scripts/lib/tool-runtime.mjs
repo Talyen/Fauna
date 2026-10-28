@@ -3,7 +3,7 @@ import { readFile, readdir, mkdir, lstat, open, unlink, writeFile } from "node:f
 import path from "node:path";
 export const ROOT = path.resolve(import.meta.dirname, "../..");
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
-export async function identity() {
+export async function identity({ root = ROOT } = {}) {
   const digest = createHash("sha256");
   async function walk(directory) {
     for (const entry of (await readdir(directory, { withFileTypes: true })).sort((a, b) =>
@@ -12,13 +12,22 @@ export async function identity() {
       const file = path.join(directory, entry.name);
       if (entry.isDirectory()) await walk(file);
       else {
-        digest.update(path.relative(ROOT, file));
+        digest.update(path.relative(root, file));
         digest.update(await readFile(file));
       }
     }
   }
-  await walk(path.join(ROOT, "src/game"));
-  await walk(path.join(ROOT, "src/application"));
+  for (const directory of ["src/game", "src/application", "src/platform", "src/tooling", "scripts/balance"])
+    await walk(path.join(root, directory));
+  for (const name of [
+    "scripts/lib/tool-runtime.mjs",
+    "scripts/lib/worker.mjs",
+    "package.json",
+    "package-lock.json",
+  ]) {
+    digest.update(name);
+    digest.update(await readFile(path.join(root, name)));
+  }
   return digest.digest("hex");
 }
 export async function runtime() {

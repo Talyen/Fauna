@@ -117,3 +117,52 @@ it("refreshes cached heading indexes on each documentation check", () => {
   put(root, "Docs/guide.md", "# Changed");
   expect(checkDocumentation(root)).toHaveLength(2);
 });
+
+it("checks links with balanced, escaped, multiline and code-containing labels", () => {
+  const source =
+    String.raw`[guide [advanced]](Docs/guide.md) [escaped \] label](Docs/escaped.md)` +
+    " [code `[x]`](Docs/code.md)";
+  expect(extractMarkdownLinkTargets(source).map(({ target }) => target)).toEqual([
+    "Docs/guide.md",
+    "Docs/escaped.md",
+    "Docs/code.md",
+  ]);
+  expect(extractMarkdownLinkTargets("[two\nlines](Docs/guide.md)")).toHaveLength(1);
+  expect(extractMarkdownLinkTargets("[two\n\nparagraphs](Docs/guide.md)")).toEqual([]);
+  expect(
+    extractMarkdownLinkTargets("[outer [inner](inside.md)](outside.md)").map(({ target }) => target),
+  ).toEqual(["inside.md"]);
+  expect(
+    extractMarkdownLinkTargets("[outer ![image](image.png)](guide.md)").map(({ target }) => target),
+  ).toEqual(["image.png", "guide.md"]);
+});
+
+it("empty ATX headings terminate paragraphs before a Setext underline", () => {
+  expect(headingSlugs("Intro\n#\n---\n\nNext\n===")).toEqual(new Set(["next"]));
+  expect(headingSlugs("Intro\n   ### \t\r\n---")).toEqual(new Set());
+});
+
+it("rejects unescaped opening brackets inside angle destinations", () => {
+  expect(extractMarkdownLinkTargets("[bad](<Docs/a<b.md>)")).toEqual([]);
+  expect(extractMarkdownLinkTargets(String.raw`[good](<Docs/a\<b.md>)`)[0].target).toBe("Docs/a<b.md");
+});
+
+it("requires whitespace between an enclosed destination and its title", () => {
+  for (const title of ['"Title"', "'Title'", "(Title)"]) {
+    expect(extractMarkdownLinkTargets(`[bad](<Docs/guide.md>${title})`)).toEqual([]);
+    expect(extractMarkdownLinkTargets(`[good](<Docs/guide.md> ${title})`)[0].target).toBe("Docs/guide.md");
+  }
+});
+
+it("reports missing destinations behind nested labels and refreshes existence between checks", () => {
+  const root = repository({
+    "package.json": '{"scripts":{}}',
+    "README.md": "[guide [advanced]](Docs/later.md) [again](Docs/later.md)",
+  });
+  expect(checkDocumentation(root)).toEqual([
+    "README.md: missing link Docs/later.md",
+    "README.md: missing link Docs/later.md",
+  ]);
+  put(root, "Docs/later.md", "# Later");
+  expect(checkDocumentation(root)).toEqual([]);
+});

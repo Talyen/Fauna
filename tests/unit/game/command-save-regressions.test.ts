@@ -57,7 +57,6 @@ it("recovers a backup instead of accepting an already-owned pending Boon", async
   expect(() => decodeSave(encodeSave(corrupt))).toThrow();
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [
         { source: "primary", data: encodeSave(corrupt) },

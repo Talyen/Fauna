@@ -1,9 +1,11 @@
 import { pairedStats, validateBalanceMetrics } from "./paired-balance.mjs";
 
 const MIN_SAMPLES = 5;
+const confirmedStarter = (row) =>
+  typeof row.actualStarter === "string" && !!row.actualStarter.trim() && row.actualStarter === row.starter;
 const SEVERITY = { critical: 0, review: 1, watch: 2 };
 export function rankBalanceFindings(report) {
-  if (report.format !== 1 || !["career", "experiment", "comparison"].includes(report.kind))
+  if (!report || report.format !== 1 || !["career", "experiment", "comparison"].includes(report.kind))
     throw new Error("Unsupported balance report.");
   const findings = [];
   const add = (severity, id, title, detail, evidence, magnitude = 0) =>
@@ -18,6 +20,7 @@ export function rankBalanceFindings(report) {
       validateBalanceMetrics(pair.baseline, pair.key);
       validateBalanceMetrics(pair.treatment, pair.key);
     }
+    let evidence;
     // Recalculate uncertainty from samples rather than trusting serialized summaries.
     for (const [metric, threshold, label] of [
       ["win", 0.2, "Journey success"],
@@ -30,13 +33,18 @@ export function rankBalanceFindings(report) {
         report.pairs.map((pair) => pair.treatment?.[metric] - pair.baseline?.[metric]),
       );
       if (Math.abs(stats.mean) < threshold) continue;
-      const supported = stats.n >= MIN_SAMPLES && !stats.noisy;
+      const extremeSuccess =
+        metric === "win" &&
+        ["baseline", "treatment"].some((arm) =>
+          [0, 1].some((win) => report.pairs.every((pair) => pair[arm].win === win)),
+        );
+      const supported = stats.n >= MIN_SAMPLES && !stats.noisy && !extremeSuccess;
       add(
         supported ? "review" : "watch",
         `paired-${metric}`,
         `${label} changed`,
-        `Treatment minus baseline: ${stats.mean.toFixed(2)}; ${stats.n} pairs; standard error ${stats.standardError === null ? "unavailable" : stats.standardError.toFixed(2)}. ${supported ? "Above the review threshold and two standard errors." : "Limited or noisy evidence; collect more matched seeds."}`,
-        report.pairs.map((pair) => ({ key: pair.key, files: pair.evidence })),
+        `Treatment minus baseline: ${stats.mean.toFixed(2)}; ${stats.n} pairs; standard error ${stats.standardError === null ? "unavailable" : stats.standardError.toFixed(2)}. ${supported ? "Above the review threshold and two standard errors." : extremeSuccess ? "Extreme observed success rates remain tentative; collect more matched seeds." : "Limited or noisy evidence; collect more matched seeds."}`,
+        (evidence ??= report.pairs.map((pair) => ({ key: pair.key, files: pair.evidence }))),
         Math.abs(stats.mean) / threshold,
       );
     }
@@ -45,6 +53,7 @@ export function rankBalanceFindings(report) {
       typeof report.complete !== "boolean" ||
       !Array.isArray(report.cases) ||
       !Array.isArray(report.failures) ||
+      report.failures.some((failure) => !failure || typeof failure !== "object" || Array.isArray(failure)) ||
       report.cases.some((row) => !row || typeof row.complete !== "boolean")
     )
       throw new Error("Invalid balance cases or completion status.");
@@ -68,9 +77,7 @@ export function rankBalanceFindings(report) {
     if (new Set(keys).size !== keys.length) throw new Error("Duplicate balance cases.");
     const groups = new Map();
     if (report.kind === "career") {
-      const unconfirmed = report.cases.filter(
-        (row) => typeof row.actualStarter !== "string" || row.actualStarter !== row.starter,
-      );
+      const unconfirmed = report.cases.filter((row) => !confirmedStarter(row));
       if (unconfirmed.length)
         add(
           "watch",
@@ -84,7 +91,7 @@ export function rankBalanceFindings(report) {
       if (!row.complete) continue;
       validateBalanceMetrics(row.metrics, row.key);
       if (report.kind !== "career") continue;
-      if (typeof row.actualStarter !== "string" || row.actualStarter !== row.starter) continue;
+      if (!confirmedStarter(row)) continue;
       const starter = row.starter ?? row.key.replace(/-\d+$/, "");
       if (!groups.has(starter)) groups.set(starter, []);
       groups.get(starter).push(row);

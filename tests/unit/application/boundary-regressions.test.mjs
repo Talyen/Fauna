@@ -22,7 +22,6 @@ it.each([false, true])(
     const readCandidates = vi.fn(async () => []);
     const session = createSession({
       desktop: false,
-      steam: { available: false },
       saves: { readCandidates, write: async () => {} },
     });
     session.store.subscribe((view) => {

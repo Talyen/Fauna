@@ -27,9 +27,11 @@ export function pairedStats(deltas) {
   return { n, mean, standardError, noisy: standardError === null || Math.abs(mean) <= 2 * standardError };
 }
 export function compareBalance(baseline, treatment) {
-  const nonempty = (value) => typeof value === "string" && value.length > 0;
+  const nonempty = (value) => typeof value === "string" && value.trim().length > 0;
   const settings = (value) => value && typeof value === "object" && !Array.isArray(value);
   if (
+    !baseline ||
+    !treatment ||
     baseline.format !== 1 ||
     treatment.format !== 1 ||
     baseline.complete !== true ||

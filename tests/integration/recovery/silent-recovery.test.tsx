@@ -35,7 +35,6 @@ it("remounts presentation after a transient render failure without a player erro
 it("retains usable display controls after a failed preference read without an alert", async () => {
   const session = createSession({
     desktop: true,
-    steam: { available: false },
     saves: { readCandidates: async () => [], write: async () => {} },
     display: {
       read: async () => {

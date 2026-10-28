@@ -129,7 +129,6 @@ it.each(["roster", "destination"] as const)(
     }
     const session = createSession({
       desktop: false,
-      steam: { available: false },
       saves: {
         readCandidates: async () => [
           { source: "primary", data: encodeSave(corrupt) },
@@ -273,7 +272,6 @@ it.each(["control", "reward", "price"])(
     const writes: string[] = [];
     const session = createSession({
       desktop: false,
-      steam: { available: false },
       saves: {
         readCandidates: async () => [
           { source: "primary", data: encodeSave(corrupt) },

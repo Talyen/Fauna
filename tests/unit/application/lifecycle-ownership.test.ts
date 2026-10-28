@@ -17,7 +17,6 @@ it("delivers reentrant session commands to every subscriber in commit order", as
   const saved: number[] = [];
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [],
       write: async (data) => {
