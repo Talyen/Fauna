@@ -59,7 +59,7 @@
   --compact-control-size: 32px;
   --compact-icon-size: 16px;
   --main-menu-logo-width: calc(var(--art-long-side) * 1.8);
-  --main-menu-button-width: 180px;
+  --main-menu-button-width: max(180px, calc(168px * var(--text-scale, 1)));
   --pause-menu-width: 240px;
   --settings-screen-width: 640px;
   --menu-screen-width: 800px;
@@ -108,7 +108,7 @@
   --motion-mana-glint: 650ms;
   --reward-stagger: 75ms;
   --swap-arc-height: 32px;
-  --keyword-progress-width: 216px;
+  --keyword-progress-width: max(216px, calc(200px * var(--text-scale, 1)));
   --recruit-team-tray-background: var(--card);
   --menu-icon-talents: #a78bfa;
   --menu-icon-collection: var(--gold-light);

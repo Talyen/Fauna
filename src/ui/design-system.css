@@ -495,7 +495,7 @@ h3 {
   scale: 1;
 }
 .game-button.talent-node[aria-disabled="true"][data-owned="false"] {
-  opacity: var(--unavailable-opacity);
+  opacity: 1;
   cursor: default;
 }
 .game-button.talent-node[data-owned="true"] {

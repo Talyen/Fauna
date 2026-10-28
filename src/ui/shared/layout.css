@@ -78,6 +78,8 @@
   justify-self: end;
 }
 .screen-heading > h1 {
+  min-width: 0;
+  overflow-wrap: anywhere;
   margin: 0;
   text-align: center;
   font-weight: 900;

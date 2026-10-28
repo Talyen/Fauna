@@ -45,13 +45,13 @@ Steam overlay activation revokes commands, preserves higher-priority inspection,
 
 Apply the [copy and layout rule](../UI.md#copy-and-layout) throughout these screens; headings and action placement must make the flow clear without taglines, helper text or secondary labels.
 
-Use a balanced header frame up to 640px wide: Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](#back-and-focus-return), previewing chosen starters during drafting.
+Use a balanced header frame up to 640px wide (920px for the Merchant wallet and translated title): Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](#back-and-focus-return), previewing chosen starters during drafting.
 
 Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.
 
 ## Main menu and Pause
 
-Main menu places a gold default Continue/Play Button above a two-column grid of ghost Talents, Collection, Glossary and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide through 125% text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
+Main menu places a gold default Continue/Play Button above a two-column grid of ghost Talents, Collection, Glossary and Settings Buttons. Conditional choices add rows; center a lone final choice. Buttons are 180px wide at default text size and grow with enlarged text, with 12px gaps. Center each icon/natural-width label group with an 8px gap. Show no promotional copy, decorative panels or reward previews.
 
 Pause is a 240px-wide shadcn Popover, aligned below/right of Open menu with an 8px gap and viewport collision handling. Use ghost Buttons in one left-aligned icon/label list with 4px gaps. There is no title, close icon or dimmed backdrop. Continue, outside click or Escape/controller B dismisses it and returns focus.
 
@@ -89,7 +89,7 @@ The overview shows every category in centered rows of at most five, with 12px co
 
 Selecting artwork opens a dedicated tree. Show available points, exact XP and Progress above compact icon/name cards with visible effects and availability requirements. Authored rows contain two talents, with a possible single final talent. Measure remaining height to page up to three rows. The category-named header reset immediately refunds that category and is disabled without allocations. Purchases are immediate; definitions belong to the gameplay catalog.
 
-Owned borders are gold. Icons use keyword color at 65% while unowned and full strength when owned, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border gold then fades over 250ms. Focus takes priority over the flash; shared availability rules distinguish missing points from incomplete earlier rows.
+Owned borders are gold. Unavailable talent cards keep their rules and requirements readable, with availability indicated by their status and icon treatment. Icons use keyword color at 65% while unowned and full strength when owned, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border gold then fades over 250ms. Focus takes priority over the flash; shared availability rules distinguish missing points from incomplete earlier rows.
 
 ## Victory, recruitment and team replacement
 
