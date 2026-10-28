@@ -77,7 +77,7 @@ The opt-in runner uses production application commands, current save validation,
 | `--seed`, `--runs` | Scenario seed and 1–20 journeys                                                                                                                               |
 | `--starter`        | Preference among actual offers, restricted to `FIRST_RUN_STARTERS` even with a save; if absent from offers, the policy chooses another using its separate RNG |
 | `--policy`         | `heuristic` or `random`; neither reads hidden intentions or future offers                                                                                     |
-| `--out`            | Directory under ignored `reports/`; path components cannot be symlinks                                                                                        |
+| `--out`            | Empty directory under ignored `reports/`; path components cannot be symlinks                                                                                  |
 
 | Output          | Contents and validity                                                                                                                         |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -87,7 +87,7 @@ The opt-in runner uses production application commands, current save validation,
 | Replay          | Matching code/content identity and exact checkpoints required; any divergence fails                                                           |
 | Comparison      | Completed careers with matching initial checkpoints/settings; changed code identity is explicit; changed save formats require fresh baselines |
 
-Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests. These are automated-policy observations, not human win rates or rendered acceptance.
+Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Replay uses its recorded scenario and checkpoint, so it cannot be combined with scenario or save overrides. Choose a fresh output directory for every run or replay; an interrupted output remains evidence. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests. These are automated-policy observations, not human win rates or rendered acceptance.
 
 ## Paired balance reports
 
@@ -108,7 +108,7 @@ npm run balance:compare -- replay reports/balance/smoke/case-0.json
 | Interruption        | Stop/wait for the owned worker before another case; preserve incomplete reports rather than counting timeouts as defeats                                                          |
 | Species attribution | Record requested `starter` and first accepted `actualStarter`; fallback or unrecorded drafts become coverage watch items, not results for the requested species                   |
 
-More preferences on the same seeds do not establish independent opening matchups. Comparisons require matching settings and initial checkpoint hashes; explicitly identified code/content changes are allowed. `comparison.json` reports paired mean differences and standard errors for wins, turns, remaining roster Health, encounter reached, swaps, retained Gold and XP. Effects within two standard errors are noisy; a single pair cannot estimate uncertainty. These are automated-policy observations.
+Use a fresh empty output directory for each run or comparison; concurrent writers and existing evidence are rejected. Seeds are comma-separated unsigned decimal integers without empty entries. More preferences on the same seeds do not establish independent opening matchups. Comparisons require matching settings and initial checkpoint hashes; explicitly identified code/content changes are allowed. `comparison.json` reports paired mean differences and standard errors for wins, turns, remaining roster Health, encounter reached, swaps, retained Gold and XP. Effects within two standard errors are noisy; a single pair cannot estimate uncertainty. These are automated-policy observations.
 
 For a controlled two-arm experiment:
 
@@ -148,7 +148,7 @@ For an otherwise authorized playthrough, `FAUNA_PLAYTHROUGH_PROFILE=1` adds stag
 
 Balance runs, experiments and comparisons now write ranked `findings.json` and `findings.md` beside their evidence. `npm run balance:findings -- reports/balance/smoke/report.json` reanalyzes an existing suite without running simulations; an optional second argument selects a directory under ignored reports. It also accepts a generated `comparison.json`. No finding changes gameplay or tuning automatically.
 
-Critical findings identify incomplete evidence, including watchdogs and rejected commands; unfinished cases never become defeats. Review findings identify completed careers averaging over 120 turns, no retained keyword XP, starter success spreads of at least 25 percentage points with matching seed sets and an approximate two-standard-error filter, or supported paired shifts. Paired thresholds are 20 percentage points for success, 5 turns, 5 remaining Health, 20 Gold and 5 keyword XP. Either direction can merit review. These are Fauna review heuristics, not Alchemy's encounter targets or release gates.
+Report and case completion must be boolean, completed metrics must be valid integer outcomes, and career seeds must be distinct unsigned 32-bit values. Critical findings identify incomplete evidence, including watchdogs and rejected commands; unfinished cases never become defeats. Review findings identify completed careers averaging over 120 turns, no retained keyword XP, starter success spreads of at least 25 percentage points with matching seed sets and an approximate two-standard-error filter, or supported paired shifts. Paired thresholds are 20 percentage points for success, 5 turns, 5 remaining Health, 20 Gold and 5 keyword XP. Either direction can merit review. These are Fauna review heuristics, not Alchemy's encounter targets or release gates.
 
 At least five samples are needed for review-level statistical findings. Extreme 0%/100% success, small samples and noisy paired effects remain watch items; zero observed variance at an extreme is not certainty. Within each severity, findings rank by threshold-relative magnitude and then stable ID, retaining case/journal references. Career success comparisons are observational, with differing recruitment and policy choices; investigate individual matchups before attributing causation. One-checkpoint experiments remain explicitly small samples. No findings does not establish balanced content or a human win rate.
 

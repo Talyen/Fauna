@@ -140,3 +140,44 @@ it("rejects duplicate seeds and compares starters only across matching seed sets
   left[1].seed = left[0].seed;
   expect(() => rankBalanceFindings(report(left))).toThrow("duplicate career seeds");
 });
+
+it("findings boundary: rejects non-boolean report completion instead of treating it as completed evidence", () => {
+  const input = report([row("mossguard", 0)]);
+  for (const value of ["true", 1, null])
+    expect(() => rankBalanceFindings({ ...input, complete: value })).toThrow("completion status");
+});
+
+it("findings boundary: rejects non-boolean case completion instead of including it in findings", () => {
+  const input = report([row("mossguard", 0)]);
+  for (const value of ["true", 1, null])
+    expect(() => rankBalanceFindings({ ...input, cases: [{ ...input.cases[0], complete: value }] })).toThrow(
+      "completion status",
+    );
+});
+
+it("findings boundary: rejects impossible and fractional career metrics before producing findings", () => {
+  const input = report([row("mossguard", 0)]);
+  for (const patch of [{ health: -1 }, { turns: 2.5 }, { swaps: -1 }, { encounter: NaN }]) {
+    const invalid = {
+      ...input,
+      cases: [{ ...input.cases[0], metrics: { ...input.cases[0].metrics, ...patch } }],
+    };
+    expect(() => rankBalanceFindings(invalid)).toThrow("Invalid metric");
+  }
+});
+
+it("findings boundary: rejects impossible paired metrics before ranking a comparison", () => {
+  const input = compareBalance(report([row("mossguard", 0)]), report([row("mossguard", 0)]));
+  for (const patch of [{ health: -1 }, { turns: 2.5 }, { swaps: -1 }, { encounter: NaN }]) {
+    const invalid = structuredClone(input);
+    Object.assign(invalid.pairs[0].treatment, patch);
+    expect(() => rankBalanceFindings(invalid)).toThrow("Invalid metric");
+  }
+});
+
+it("findings boundary: counts each valid numeric career seed once, regardless of spelling", () => {
+  const first = { ...row("mossguard", 1), seed: "01" };
+  const second = { ...row("mossguard", 2), seed: 1 };
+  expect(() => rankBalanceFindings(report([first, second]))).toThrow("duplicate career seeds");
+  expect(() => rankBalanceFindings(report([{ ...first, seed: 4294967296 }]))).toThrow("career seeds");
+});

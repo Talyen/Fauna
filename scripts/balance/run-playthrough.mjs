@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { readFile, writeFile, open } from "node:fs/promises";
+import { readFile, writeFile, open, readdir, unlink } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { runOwnedWorker } from "../lib/worker.mjs";
@@ -24,7 +24,61 @@ export function parsePlaythroughArgs(args) {
       throw new Error(`Invalid or duplicate playthrough option: ${flag}`);
     options[flag] = value;
   }
+  if (
+    options["--replay"] &&
+    ["--seed", "--runs", "--starter", "--policy", "--save"].some((flag) => options[flag])
+  )
+    throw new Error("Replay cannot be combined with scenario or save options.");
   return options;
+}
+
+/** Admit only one writer and never replace earlier or interrupted evidence. */
+export async function reservePlaythroughDirectory(directory) {
+  const marker = path.join(directory, ".playthrough-writing");
+  let handle;
+  try {
+    handle = await open(marker, "wx");
+  } catch (error) {
+    if (error.code === "EEXIST")
+      throw new Error("Choose an empty playthrough output directory; existing evidence is preserved.");
+    throw error;
+  }
+  const release = async () => {
+    await handle.close();
+    await unlink(marker);
+  };
+  try {
+    if ((await readdir(directory)).some((name) => name !== ".playthrough-writing"))
+      throw new Error("Choose an empty playthrough output directory; existing evidence is preserved.");
+  } catch (error) {
+    await release();
+    throw error;
+  }
+  return release;
+}
+
+/** Comparisons retain code changes, but must use the same scenario and policy. */
+export function validatePlaythroughComparison(baseline, bundle, config) {
+  if (
+    baseline?.format !== 4 ||
+    bundle?.format !== 4 ||
+    baseline.complete !== true ||
+    bundle.complete !== true ||
+    typeof baseline.identity !== "string" ||
+    !baseline.identity ||
+    typeof bundle.identity !== "string" ||
+    !bundle.identity ||
+    !Number.isSafeInteger(baseline.policyVersion) ||
+    baseline.policyVersion < 1 ||
+    baseline.policyVersion !== bundle.policyVersion ||
+    typeof baseline.initial !== "string" ||
+    !baseline.initial ||
+    baseline.initial !== bundle.initial ||
+    JSON.stringify(baseline.config) !== JSON.stringify(config)
+  )
+    throw new Error(
+      "Comparison needs completed, matched starting scenarios and policies with source identities.",
+    );
 }
 
 export async function runPlaythrough(args, { timeout = 60_000, spawnWorker } = {}) {
@@ -65,7 +119,7 @@ async function worker(args) {
     appType: "custom",
   });
   mark("viteSetupMs");
-  let journal;
+  let journal, releaseOutput;
   try {
     const value = (name, fallback) => options[name] ?? fallback;
     const identity = await sourceIdentity();
@@ -95,6 +149,7 @@ async function worker(args) {
     )
       throw new Error("Invalid scenario configuration.");
     const output = await reportDirectory(value("--out"), "reports/playthrough");
+    releaseOutput = await reservePlaythroughDirectory(output);
     const baseline = value("--compare") ? JSON.parse(await readFile(value("--compare"), "utf8")) : undefined;
     const journalPath = path.join(output, `journal-${randomUUID()}.jsonl`);
     journal = await open(journalPath, "a");
@@ -125,14 +180,7 @@ async function worker(args) {
     const bundle = await runJourney(config, identity, initial, replay, appendRecord);
     mark("journeyMs");
     await writeFile(path.join(output, "journey.json"), JSON.stringify(bundle));
-    if (
-      baseline &&
-      (!baseline.complete ||
-        !bundle.complete ||
-        JSON.stringify(baseline.config) !== JSON.stringify(config) ||
-        baseline.initial !== bundle.initial)
-    )
-      throw new Error("Comparison needs completed, matched starting scenarios and policies.");
+    if (baseline !== undefined) validatePlaythroughComparison(baseline, bundle, config);
     const summary = {
       complete: bundle.complete,
       reason: bundle.reason,
@@ -163,7 +211,11 @@ async function worker(args) {
     try {
       await journal?.close();
     } finally {
-      await server.close();
+      try {
+        await releaseOutput?.();
+      } finally {
+        await server.close();
+      }
     }
   }
 }
