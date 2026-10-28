@@ -7,25 +7,38 @@ export function runOwnedWorker(file, args, timeout, { signal, spawnWorker = fork
       stdio: ["ignore", "inherit", "inherit", "ipc"],
     });
     let failure;
-    const stop = () => {
-      failure = new Error("Incomplete: worker cancelled.");
-      child.kill("SIGKILL");
+    let terminationRequested = false;
+    let settled = false;
+    const terminate = (error) => {
+      failure ??= error;
+      if (terminationRequested) return;
+      terminationRequested = true;
+      try {
+        terminationRequested = child.kill("SIGKILL");
+      } catch {
+        terminationRequested = false;
+        // The worker may still be running. Keep ownership until exit or close.
+      }
     };
-    signal?.addEventListener("abort", stop, { once: true });
-    const timer = setTimeout(() => {
-      failure = new Error("Incomplete: worker watchdog exhausted.");
-      child.kill("SIGKILL");
-    }, timeout);
-    const finish = (error) => {
+    const stop = () => terminate(new Error("Incomplete: worker cancelled."));
+    const timer = setTimeout(() => terminate(new Error("Incomplete: worker watchdog exhausted.")), timeout);
+    const finish = (code, bySignal) => {
+      if (settled) return;
+      settled = true;
       clearTimeout(timer);
       signal?.removeEventListener("abort", stop);
-      if (error) reject(error);
-      else resolve();
+      if (failure) reject(failure);
+      else if (code === 0) resolve();
+      else reject(new Error(`Incomplete: worker exited ${bySignal ?? code}.`));
     };
-    child.once("error", finish);
-    // Wait for exit before admitting another case, including after the watchdog.
-    child.once("exit", (code) => {
-      finish(failure ?? (code === 0 ? undefined : new Error(`Incomplete: worker exited ${code}.`)));
+    child.on("error", (error) => {
+      if (!settled) terminate(error);
     });
+    // A failed spawn emits close without exit; a running worker must leave before reuse.
+    child.once("exit", finish);
+    child.once("close", finish);
+    signal?.addEventListener("abort", stop, { once: true });
+    // The worker factory can synchronously trigger cancellation before registration.
+    if (signal?.aborted) stop();
   });
 }
