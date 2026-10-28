@@ -605,6 +605,18 @@
     "sourceHash": "7ff04687ee53266ec942f5d706adad604f4166fbf96abc591c847cac53a13b1d",
     "text": "<keyword0>炎上</keyword0>ヒットは、<keyword2>ブロック</keyword2>を持つ敵に通常の2倍の<keyword1>炎上</keyword1>を付与する"
   },
+  "content.boon.chime-crucible.name": {
+    "reviewed": true,
+    "source": "Chime Crucible",
+    "sourceHash": "34f8872f198cdc1402ba9ab80483a80fb0b8c586338cb4ee787329e2ef04d3f2",
+    "text": "チャイムのるつぼ"
+  },
+  "content.boon.chime-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also apply {{value0}} <keyword1>Burn</keyword1>",
+    "sourceHash": "3ece55b58272d9f3d7e8d400ff68fa70e4c195f14f5d1eb7959c1c2292845cea",
+    "text": "<keyword0>スタン</keyword0>のヒットは{{value0}}の<keyword1>炎上</keyword1>も付与する"
+  },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
     "source": "Chromatic Viol",
@@ -760,6 +772,18 @@
     "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
     "sourceHash": "299633d4196612b711a1f5fcf0a4f1daaee124d2673d86cffd92012be5dfcf23",
     "text": "<keyword0>食料</keyword0>は対象の<keyword2>ブロック</keyword2>に等しい<keyword1>体力</keyword1>も回復する"
+  },
+  "content.boon.crystal-harp.name": {
+    "reviewed": true,
+    "source": "Crystal Harp",
+    "sourceHash": "7d0a7d03370e0ebde37a136af458b594eb910d83a78a4235ed7d2a4cb30bde53",
+    "text": "水晶の竪琴"
+  },
+  "content.boon.crystal-harp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits grant you <keyword1>Reflect</keyword1>",
+    "sourceHash": "7081711c0eea7798aecff5078a4287e184bcbd08984cbddaf08bd624f995f601",
+    "text": "<keyword0>スタン</keyword0>のヒットで自分に<keyword1>反射</keyword1>を付与する"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1073,6 +1097,18 @@
     "sourceHash": "9d3dce683041ad6186a796069d359b0b99ac176c8b3efcfb0d7ebbe0a9f77154",
     "text": "<keyword0>ブロック</keyword0>は減衰しても<keyword1>装甲</keyword1>を下回らない"
   },
+  "content.boon.gilt-gauntlet.name": {
+    "reviewed": true,
+    "source": "Gilt Gauntlet",
+    "sourceHash": "5253f61e4967b0587a3e70df70e0dea52f9b4172da5ebec3b59aeb3c356269d0",
+    "text": "金の手甲"
+  },
+  "content.boon.gilt-gauntlet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits steal {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "fe47274329f836ea1803b49db3af967a3481d9be5a38ce916bb31ea8e2b0a312",
+    "text": "<keyword0>物理</keyword0>ヒットで{{value0}}の<keyword1>装甲</keyword1>を奪う"
+  },
   "content.boon.glassleaf-shield.name": {
     "reviewed": true,
     "source": "Glassleaf Shield",
@@ -1361,6 +1397,18 @@
     "sourceHash": "5fe4696d3542a02aacc871d3338c750b755f54417c0bad3c43846f8bdfb8fa46",
     "text": "毒状態の敵の効果を<keyword0>強化解除</keyword0>すると、その敵の<keyword1>毒</keyword1>がダメージを与える"
   },
+  "content.boon.memory-cairn.name": {
+    "reviewed": true,
+    "source": "Memory Cairn",
+    "sourceHash": "806bc3ad231befe504c792378a2410c200f2d630de9899ba850421b610822cef",
+    "text": "追憶のケルン"
+  },
+  "content.boon.memory-cairn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrected</keyword0> allies <keyword1>Cleanse</keyword1> all harmful effects",
+    "sourceHash": "689ecd7c5708e1d4205290d6bda11cf8ab1f7e2b8f90084fe3dbb18c5b969edd",
+    "text": "<keyword0>復活</keyword0>した味方の有害な効果をすべて<keyword1>浄化</keyword1>する"
+  },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
     "source": "Merchant's Favor",
@@ -1565,6 +1613,30 @@
     "sourceHash": "ff5d36346db3080bcf2658a4e99266ad0ec29f57c1b35440ed51bdbbde14d5a6",
     "text": "<keyword0>浄化</keyword0>された効果は発生源に戻る"
   },
+  "content.boon.orbit-tongs.name": {
+    "reviewed": true,
+    "source": "Orbit Tongs",
+    "sourceHash": "7c9bdc399f91b698d7d2d4d19966ca635e35a161cb5b1356c2ff6079c58ebafa",
+    "text": "軌道の火ばさみ"
+  },
+  "content.boon.orbit-tongs.rule": {
+    "reviewed": true,
+    "source": "Stealing <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies",
+    "sourceHash": "7099f5e96c171fbea7a4f12cfdee4052e19f912972036e31679f1b15bd9f8047",
+    "text": "<keyword0>装甲</keyword0>を奪うと他の味方に{{value0}}の<keyword1>ブロック</keyword1>を付与する"
+  },
+  "content.boon.orchard-ladder-charm.name": {
+    "reviewed": true,
+    "source": "Orchard Ladder Charm",
+    "sourceHash": "2053571d927c1de08a6d13fb643e73545de81a4119100ab581377668dc24e5e3",
+    "text": "果樹園のはしご飾り"
+  },
+  "content.boon.orchard-ladder-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> restores {{value0}} <keyword1>Health</keyword1> to backup allies",
+    "sourceHash": "2a5af1866fc74383f6ab228524096af0ae3671190989fc7f825fd6ff1356594b",
+    "text": "<keyword0>食料</keyword0>は控えの味方の<keyword1>体力</keyword1>を{{value0}}回復する"
+  },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
     "source": "Origami Staircase",
@@ -1732,6 +1804,18 @@
     "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
     "sourceHash": "e34d7e9c31e90c2936baf87b47221efee7c1ca482960fe39eedba3fe61221b7b",
     "text": "敵の<keyword1>棘</keyword1>を<keyword0>強化解除</keyword0>すると、それを自分のものにする"
+  },
+  "content.boon.pumice-glass-inkwell.name": {
+    "reviewed": true,
+    "source": "Pumice Glass Inkwell",
+    "sourceHash": "6c2bf649b2d35b358859eac4d466abb6e50ef3b26ad6c8035e31973bc4cfc661",
+    "text": "軽石のインク壺"
+  },
+  "content.boon.pumice-glass-inkwell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> <keyword2>Blinds</keyword2> the enemy that applied it",
+    "sourceHash": "5b8320490626f494d49267ed28b23a660c4e83003f8e6c6276db3894652e464b",
+    "text": "<keyword1>炎上</keyword1>を<keyword0>浄化</keyword0>すると、付与した敵を<keyword2>盲目</keyword2>にする"
   },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
@@ -2069,6 +2153,18 @@
     "sourceHash": "9c171901b262853f438cdf5538d05e5f8a09df22dad7607d9a2b8c9b8cb7b580",
     "text": "<keyword0>食料</keyword0>を使うと味方全員に<keyword1>装甲</keyword1>を{{value0}}付与"
   },
+  "content.boon.spore-trivet.name": {
+    "reviewed": true,
+    "source": "Spore Trivet",
+    "sourceHash": "399bd2675e2960246da26606fa5b471e7a59b05754fe1e6d656b17b62ae7cb05",
+    "text": "胞子の鍋敷き"
+  },
+  "content.boon.spore-trivet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> <keyword2>Burn</keyword2> from all allies",
+    "sourceHash": "b409b3efc6cf3fae60d83000ce4ee20bf9765809ef348fe0e13d27d99c858c1f",
+    "text": "<keyword0>食料</keyword0>は味方全員の<keyword2>炎上</keyword2>を<keyword1>浄化</keyword1>する"
+  },
   "content.boon.star-hoop.name": {
     "reviewed": true,
     "source": "Star Hoop",
@@ -2285,6 +2381,18 @@
     "sourceHash": "68d1644b0e1e301efc4bb8b7ed8e92f3f78e9846b7690da5662f02b0d83611b9",
     "text": "<keyword0>食料</keyword0>は対象に次のターンまで{{value0}}%の<keyword1>回避</keyword1>を付与"
   },
+  "content.boon.victory-laurel.name": {
+    "reviewed": true,
+    "source": "Victory Laurel",
+    "sourceHash": "871cfacdd9ac14887773b9eba56561870f1125cee86b9e345a9679d2b12db866",
+    "text": "勝利の月桂冠"
+  },
+  "content.boon.victory-laurel.rule": {
+    "reviewed": true,
+    "source": "Defeating an enemy restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "741281222bb480d4fbbbddaa28e758a3ba9d24018baf620cb2852ba6c4c60a91",
+    "text": "敵を倒すと{{value0}}の<keyword0>マナ</keyword0>を回復する"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -2296,6 +2404,18 @@
     "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
     "sourceHash": "26a8d939180620aaa352c616a6e5c9d3a0c19ae9cfd6278707c6af1de140c71e",
     "text": "死の淵にいる味方は<keyword0>スタン</keyword0>と<keyword1>凍結</keyword1>中でも行動できる"
+  },
+  "content.boon.vow-candle.name": {
+    "reviewed": true,
+    "source": "Vow Candle",
+    "sourceHash": "c567d97817e849132cc8649b238519634cb490891b94e2d6ed1811ddf44b1eeb",
+    "text": "誓いのろうそく"
+  },
+  "content.boon.vow-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> cannot cause <keyword1>Light</keyword1> attacks to miss",
+    "sourceHash": "6774e0412f65095cc2153fe54c3d959d5e2f7f63d425bd51bcbf1a2f3e6d9fb5",
+    "text": "<keyword0>盲目</keyword0>によって<keyword1>光</keyword1>攻撃が外れることはない"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,

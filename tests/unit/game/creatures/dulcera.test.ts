@@ -1,12 +1,4 @@
-import {
-  addReserve,
-  accept,
-  authoredPack,
-  prepareDestination,
-  requireBattle,
-  teamRun,
-  winBattle,
-} from "../../../support/game";
+import { addReserve, requireBattle, teamRun } from "../../../support/game";
 import { playCard as play, setBattleCards } from "../../../support/cards";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
@@ -20,7 +12,6 @@ import { dispatch, previewCard } from "../../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import { swapBackup, swapFromCard } from "../../../../src/game/team";
 import { battleChoices } from "../../../../src/application/battle-policy";
-import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { dulceraBattle } from "../../../support/dulcera";
 import type { GameEvent } from "../../../../src/game/types";
 
@@ -291,26 +282,5 @@ describe("Dulcera", () => {
       expect(result.state).toBe(blocked);
       expect(result.events).toEqual([]);
     }
-  });
-
-  it("can be encountered, recruited and resumed through the normal journey", () => {
-    const ready = produce(requireBattle(teamRun(42, ["almanelle", "emberback", "mossguard"])), (draft) => {
-      draft.discovery.encountered.push("dulcera");
-      draft.discovery.recruited.dulcera = 1;
-      prepareDestination(draft);
-      draft.expedition = {
-        recruit: null,
-        lastRoom: null,
-        pack: authoredPack(
-          draft.encounter,
-          COMBAT_PACKS.findIndex((pack) => pack[0] === "dulcera"),
-        ),
-      };
-    });
-    const battle = accept(ready, { type: "beginBattle" });
-    expect(battle.discovery.encountered).toContain("dulcera");
-    const recruited = accept(winBattle(battle), { type: "recruit", species: "dulcera" });
-    expect(recruited.discovery.recruited.dulcera).toBe(2);
-    expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
   });
 });

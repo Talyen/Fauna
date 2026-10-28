@@ -3,8 +3,11 @@ import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-const seconds = (start, end) =>
-  start && end ? Math.max(0, (Date.parse(end) - Date.parse(start)) / 1000) : null;
+const seconds = (start, end) => {
+  if (!start || !end) return null;
+  const elapsed = (Date.parse(end) - Date.parse(start)) / 1000;
+  return Number.isFinite(elapsed) && elapsed >= 0 ? elapsed : null;
+};
 export function timingReport(run, jobs) {
   const starts = jobs
     .map((job) => job.started_at)
@@ -31,7 +34,7 @@ export function timingReport(run, jobs) {
       // Start delay includes dependency waits; GitHub does not expose runner queue time for every job.
       startDelaySeconds: seconds(run.run_started_at, job.started_at),
       executionSeconds: seconds(job.started_at, job.completed_at),
-      steps: job.steps.map((step) => ({
+      steps: (job.steps ?? []).map((step) => ({
         name: step.name,
         conclusion: step.conclusion,
         seconds: seconds(step.started_at, step.completed_at),

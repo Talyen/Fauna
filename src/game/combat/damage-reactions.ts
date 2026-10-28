@@ -95,6 +95,8 @@ export function* dodgeResponse(
           text: `${unitName(source)} loses ${removed} Armor`,
         });
         yield* reaction("grantArmor", state, target, removed, events);
+        if (state.boons.includes("orbit-tongs"))
+          yield* reaction("armorStealRewards", state, target, removed, events);
         yield* reaction("triggerArmorBreak", state, depletion, events);
       }
     }
@@ -339,6 +341,14 @@ export function* damageRewards(
     gainGold(state, talentRule("poison.toxic-profit").amount, events);
   if (target.health === 0 && !alliedTarget && alliedSource && state.boons.includes("bone-charm"))
     yield* reaction("restoreHealth", source, boonRule("bone-charm").healing, events, false, state);
+  if (
+    lost > 0 &&
+    target.health === 0 &&
+    !alliedTarget &&
+    alliedSource &&
+    state.boons.includes("victory-laurel")
+  )
+    yield* reaction("gainMana", state, boonRule("victory-laurel").mana, events);
   if (alliedSource && !alliedTarget && dealt > 0 && (source.health > 0 || policy.deadSource)) {
     if (type === "bleed" && state.boons.includes("cutpurse-knife"))
       gainGold(state, boonRule("cutpurse-knife").gold, events);

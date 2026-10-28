@@ -135,7 +135,7 @@ Use semantic tokens from `src/ui/tokens.css` for theme, typography, geometry and
 
 ### Typography
 
-Use locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers; names wrap without ellipsis and rules remain left-aligned. Shared screen headings follow Alchemy's bold, letter-spaced uppercase treatment and centered gold divider; the underlying accessible text remains unchanged. Settings section headings use the same uppercase hierarchy. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
+Use locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers; names wrap without ellipsis and rules remain left-aligned. Shared screen headings follow Alchemy's bold, letter-spaced uppercase treatment and centered gold divider; the underlying accessible text remains unchanged. Settings section headings use the same uppercase hierarchy. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Japanese, Simplified Chinese and Russian use the bundled script-specific fonts selected by the shared language styles; preserve their glyph coverage when changing copy. [Localization](LOCALIZATION.md#translation-packets) owns font preparation and notices. Inter license: `Docs/FONT-LICENSE.txt`.
 
 ### Spacing
 

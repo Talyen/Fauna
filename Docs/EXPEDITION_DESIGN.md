@@ -56,7 +56,7 @@ Selectable attacks target the living player creature with the highest current He
 
 Ordinary enemies choose their highest-value usable ability; Legendary enemies rank their current hand again after each play. Value estimates immediate net combat gains: each point of actual Health restored, damage dealt, Block, status stacks or deck resources is worth one; protection flags are worth one. Overhealing and redundant effects add nothing, caps and mitigation apply, and retaliation reduces value. Ally-targeted support chooses the recipient with the greatest benefit. Equal values retain authored/hand order, preferring a different ordinary ability over the previous turn's ability; enemies skip plays with no positive benefit.
 
-The estimate runs the shared ability resolver on isolated drafts. Eight fixed probes approximate chance outcomes without consulting or advancing live RNG; this is an immediate-effect heuristic rather than a future-turn search. Card costs are paid before estimating resource restoration, while ranking uses the gross effect value. Legendary card-triggered Echo attacks contribute to value and retain their random targeting.
+The estimate runs the shared ability resolver on isolated drafts. Up to eight fixed probes approximate chance outcomes without consulting or advancing live RNG. An evaluation with no random or hidden decisions reuses its first result. This estimates immediate effects rather than searching future turns. Card costs are paid before estimating resource restoration, while ranking uses the gross effect value. Legendary card-triggered Echo attacks contribute to value and retain their random targeting.
 
 ## Keyword XP and talents
 

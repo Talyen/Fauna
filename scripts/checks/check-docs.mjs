@@ -49,6 +49,7 @@ export function checkDocumentation(root, { warn = () => {} } = {}) {
   );
   const scripts = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8")).scripts ?? {};
   const failures = [];
+  const anchors = new Map();
   const edges = new Map();
   const fail = (file, message) => failures.push(`${file}: ${message}`);
   for (const [file, source] of docs) {
@@ -59,11 +60,12 @@ export function checkDocumentation(root, { warn = () => {} } = {}) {
     edges.set(file, targets);
     for (const { target } of links) {
       if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(target)) continue;
-      const [destination, fragment] = target.split("#", 2);
       let relative, anchor;
       try {
-        relative = decodeURIComponent(destination.split("?", 1)[0]);
-        anchor = fragment === undefined ? undefined : decodeURIComponent(fragment);
+        const fragment = target.indexOf("#");
+        const destination = fragment < 0 ? target : target.slice(0, fragment);
+        relative = decodeURIComponent(destination.split("?")[0]);
+        anchor = fragment < 0 ? "" : decodeURIComponent(target.slice(fragment + 1));
       } catch {
         fail(file, `invalid encoded link ${target}`);
         continue;
@@ -80,7 +82,10 @@ export function checkDocumentation(root, { warn = () => {} } = {}) {
       }
       if (docs.has(local)) {
         targets.add(local);
-        if (anchor && !headingSlugs(docs.get(local)).has(anchor)) fail(file, `missing heading ${target}`);
+        if (anchor) {
+          if (!anchors.has(local)) anchors.set(local, headingSlugs(docs.get(local)));
+          if (!anchors.get(local).has(anchor)) fail(file, `missing heading ${target}`);
+        }
       }
     }
     for (const match of prose.matchAll(/`([^`\n]+)`/g)) {

@@ -2,7 +2,14 @@ import { talentRule } from "../rules/talents";
 import { isRosterCreature } from "../battlefield";
 import { hasTalent, passiveAmount } from "../progression";
 import { chance as succeeds, talentChance } from "../chance";
-import { ensureCombat, grantArmor, triggerArmorBreak, removeArmor, type Combatant } from "./index";
+import {
+  ensureCombat,
+  grantArmor,
+  triggerArmorBreak,
+  removeArmor,
+  armorStealRewards,
+  type Combatant,
+} from "./index";
 import type { ProgressionKeyword } from "../keywords";
 import type { GameState, GameEvent } from "../types";
 
@@ -34,6 +41,7 @@ export function beforeAbility(
   if (target && keywords.includes("leech") && hasTalent(state, "leech.armor-siphon")) {
     const { removed: stolen, depletion } = removeArmor(target, talentRule("leech.armor-siphon").amount);
     grantArmor(state, actor, stolen, events);
+    if (state.boons.includes("orbit-tongs")) armorStealRewards(state, actor, stolen, events);
     triggerArmorBreak(state, depletion, events);
   }
   if (keywords.includes("block") && talentChance(state, "armor.armored-surge", events))

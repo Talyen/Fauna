@@ -6,6 +6,7 @@ export type Operations = Pick<typeof import("./damage"), "bounce" | "hit" | "res
     | "grantBlock"
     | "gainMana"
     | "grantArmor"
+    | "armorStealRewards"
     | "leechHealth"
     | "healthThresholds"
   > &

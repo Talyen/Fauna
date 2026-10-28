@@ -1,5 +1,7 @@
 /** Serialized into the measured renderer; owns only this capture's handles and bounded evidence. */
 export async function installSampler({ recordSpans = true } = {}) {
+  // Retire a previous capture before replacing its only public cleanup handle.
+  window.faunaPerf?.stop();
   const supported = PerformanceObserver.supportedEntryTypes ?? [];
   const snapshot = () => ({
     heap: performance.memory?.usedJSHeapSize ?? null,
@@ -76,12 +78,20 @@ export async function installSampler({ recordSpans = true } = {}) {
     }
   };
   const observers = [];
-  for (const type of ["longtask", "event", "long-animation-frame"])
-    if (supported.includes(type)) {
-      const observer = new PerformanceObserver((list) => collect(type, list.getEntries()));
-      observer.observe({ type, buffered: false, ...(type === "event" ? { durationThreshold: 16 } : {}) });
-      observers.push({ observer, type });
-    }
+  try {
+    for (const type of ["longtask", "event", "long-animation-frame"])
+      if (supported.includes(type)) {
+        const observer = new PerformanceObserver((list) => collect(type, list.getEntries()));
+        observers.push({ observer, type });
+        observer.observe({ type, buffered: false, ...(type === "event" ? { durationThreshold: 16 } : {}) });
+      }
+  } catch (error) {
+    for (const { observer } of observers) observer.disconnect();
+    document.removeEventListener("visibilitychange", lostForeground);
+    window.removeEventListener("blur", lostForeground);
+    motion.removeEventListener("change", lostForeground);
+    throw error;
+  }
   const bridge = {
     begin: (name, details = {}) => {
       if (stopped || !recordSpans) return;

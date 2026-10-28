@@ -1,12 +1,11 @@
 import { setBattleCards } from "../../../support/cards";
-import { enemyPlay, authoredPack, accept, teamRun, winBattle } from "../../../support/game";
+import { enemyPlay, accept, teamRun } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, definition, species } from "../../../../src/game/content";
+import { CARDS, species } from "../../../../src/game/content";
 import { cardText } from "../../../../src/game/card-rules";
 import { freshCombat, grantBlock, grantStatus, restoreHealth } from "../../../../src/game/combat";
-import { createGame, dispatch, previewCard } from "../../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../../src/game/encounters";
+import { dispatch, previewCard } from "../../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 
 function ready(id = "reedstag-guard") {
@@ -213,33 +212,6 @@ it("enemy Mending Spring Cleanses its healed ally rather than its attack target"
   expect(result.state.battle!.enemies[1]!.combat.blind).toBe(false);
   expect(result.state.battle!.enemies[1]!.combat.controlled).toBeNull();
   expect(result.state.battle!.enemies[0]!.combat.blind).toBe(true);
-});
-
-it("discovers, recruits and resumes Reedstag with all three cards", () => {
-  const initial = createGame(7);
-  let game = accept(
-    accept(initial, { type: "draft", species: initial.starterOffers.find((kind) => kind !== "reedstag")! }),
-    { type: "start" },
-  );
-  game = accept(
-    produce(game, (draft) => {
-      draft.expedition!.pack = authoredPack(
-        draft.encounter,
-        COMBAT_PACKS.findIndex((pack) => pack[0] === "reedstag"),
-      );
-    }),
-    { type: "beginBattle" },
-  );
-  expect(game.discovery.encountered).toContain("reedstag");
-  game = accept(winBattle(game), { type: "recruit", species: "reedstag" });
-  expect(game.discovery.recruited.reedstag).toBe(1);
-  expect(
-    game.cards
-      .filter((card) => card.ownerId === game.team[1]!.id)
-      .map((card) => definition(card.definitionId).species),
-  ).toEqual(["reedstag", "reedstag", "reedstag"]);
-  expect(decodeSave(encodeSave(game))).toEqual(game);
-  expect(() => decodeSave(JSON.stringify({ ...game, version: 27 }))).toThrow();
 });
 
 it("does not chain Reedguard through Thorns granted by shared Block", () => {

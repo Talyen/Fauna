@@ -15,6 +15,7 @@ Use this record with [release readiness](RELEASE.md) for each candidate. Copy it
 - Controller models and connection types:
 - Steam client version:
 - Steam Deck model, SteamOS/Proton version and distribution path:
+- Languages and text/tooltip sizes exercised:
 - Reviewer and observation date:
 
 Retain the immutable Windows candidate, its matching dependency SBOM and third-party notices, package hash inventory and GitHub attestations. Verify provenance with `gh attestation verify <executable-or-asar-path> --repo Talyen/Fauna`. GitHub provenance is separate from Windows Authenticode signing and does not make an unsigned executable trusted by Windows. An attestation identifies the builder and artifact; it does not establish gameplay or hardware acceptance. The SBOM describes production npm build inputs and the Electron runtime; Electron's packaged Chromium license inventory covers its native third-party components.
@@ -35,6 +36,7 @@ Retain the immutable Windows candidate, its matching dependency SBOM and third-p
 - [ ] Uninstall through Steam; inspect remaining files against the intended save-retention policy
 - Optional direct-download installer acceptance: if that path is used, separately verify Authenticode, install/upgrade/uninstall and launch shortcuts
 - [ ] Check minimum renderer size, high DPI, 125% text, fullscreen/windowed switching, display removal and restored bounds
+- [ ] Qualify the enabled languages under [localization](LOCALIZATION.md#implementation-and-qualification): rendered rules and glyphs, enlarged text/tooltips, live language switching and focus, saved/manual choice and Steam/system detection; record the platform and language for each observation
 - [ ] Exercise crash recovery and confirm durable progress resumes without recovery UI; collect local diagnostics only with consent
 
 ## Live Steam and two-device Cloud
