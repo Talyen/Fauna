@@ -6650,139 +6650,139 @@
   "content.status.acrobatReady.v1c0eea136a275f61.rule": {
     "reviewed": true,
     "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
-    "sourceHash": "1cb6dba1fff2f3a3e51aa8fa707548c1eb79a010cb2c4c3293c06044f7ae75ee",
+    "sourceHash": "d0ca20d881eef940ed1d281f4edca068171045905153b89029628a8fd5185acf",
     "text": "曲芸のこま：次の攻撃は<keyword0>回避</keyword0>されない"
   },
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "b0a7f4298c47bd5bedb2c77bc6c8efcd904c9719727840e624aea5a085fc19dc",
+    "sourceHash": "7a5540bb27d90011f0c9892f0cd28ce815794a20ab0518b60f26551d3e820ec1",
     "text": "<keyword0>攻撃反射</keyword0>：次に受ける攻撃を攻撃者へ返す; その攻撃のダメージと有害効果を防ぐ; <keyword1>反射</keyword1>された攻撃は再び<keyword2>反射</keyword2>できない; 消費されるか<keyword3>強化解除</keyword3>されるまで持続; 重複しない"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "48e4e961209855e07a925f40888eea17329b48fca6375486b148a5ef96568b5f",
+    "sourceHash": "8e6671f5bd64baa0034ccbac18e955e76f17b041a9b3ff23ca4ef3a2eda1084c",
     "text": "<keyword0>盲目</keyword0>：次の攻撃が{{value0}}%の確率で外れる; 命中の有無にかかわらずその攻撃後に消える; 外れた攻撃は各対象の<keyword1>回避</keyword1>として扱う; 重複しない"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "5112aab218fb7a998beeea063f3ba9a1ffc2280b65cd95f754e3a0c8949607ea",
+    "sourceHash": "5cc7acd1cb7b378f12c6ea256104fedaf7f9790edfb15cca4e723d099756eab4",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "6e247c94e4431ef6c402051e9c05e2ac7b2e085a2b682ee1ed2f5e75c8c418e9",
+    "sourceHash": "fc94396365acde94e8d0b32158f0a15423a53b5d4064bdda3ae0a47fdbc3eb5f",
     "text": "ターンをスキップ"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "7372b4c026e94b22086233a6235390b22486d6ba9c0354c075438603d4f4ab66",
+    "sourceHash": "8d71b02e0eb0a89247f6388b33669515edcde2ee0ccdf393e1b86b384c62a276",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "6bdcdd72a93e202ab03a3fd75129eae1f522b238bbb4011955adb3b1c8e85baf",
+    "sourceHash": "a9c8ea98774f64aad3b0592b58a81c2942901e8c30dc75db3e3f1929d241fc3f",
     "text": "<keyword0>凍結</keyword0>：{{value0}}ターン"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "26c1d7a9eeb0c3f0f213ea7eb300f5a5f605620be025a3424074d08a0d267862",
+    "sourceHash": "e1676f329da65d7293d3869b39cfb0b25b96a8255ad2d74cde7980f185f3cbb9",
     "text": "<keyword0>スタン</keyword0>：{{value0}}ターン"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "06d38f27cfba866cca77768e8af56866f5c5fed3fce2bcb326748187de09fa3b",
+    "sourceHash": "19e885582ba234e0c6f7a88c23689728d598937cf1a14fb9fd683b9286c965c8",
     "text": "行動不能への耐性 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "172842f2855087e1ee3cf2d591f4a625ee6eb5d4c75e1b00488452a244fc2936",
+    "sourceHash": "8e9be449406d29f9c27b4c5d9aa3c4a91de09fa41b2b4037fe00f6d44812e50a",
     "text": "無料の追撃：次のカードは無料"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "cabf59cdf990725a0f0e22635f7570cc5c480fa1c4106063d95733dc29ac2416",
+    "sourceHash": "be6c992e68ef6ddc8449be05e747908449ca1afc07b358cec3135bbdf7f660c1",
     "text": "神の恩寵：次の<keyword0>光</keyword0>カードは無料"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "027b075b70467330bc7584830ee6cc8c0039c313374e38d81a8b6b72e4145e04",
+    "sourceHash": "60962c5f19b6f39c76881543fc303fde49bc7303e8b7cd21c13e3705ea84d7ca",
     "text": "風の歩み：次の<keyword0>自然</keyword0>カードは無料"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "1c5cf99782cf6156a8c3951d836e4743b0a201a2893aa4aebc4c69f463ebf7cf",
+    "sourceHash": "d077204ad26bdf2e3f060cfcb8b9633054b0ca43a353da39a9dc1fba186a21e5",
     "text": "死の淵 {{value0}}"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "e80b06d6bb81d0ec2897c87be978db86c7ff380c919bfabfaa750a8fd84ff8de",
+    "sourceHash": "f27776d030f4eb392b677db0a51a58c36a6f000d6c0a3694b30d9ba2c5972b60",
     "text": "<keyword0>防止</keyword0>：次の攻撃を<keyword2>回避</keyword2>より先に<keyword1>防止</keyword1>し、そのダメージと有害効果を防ぐ; <keyword3>棘</keyword3>は反撃する; 消費されるか<keyword4>強化解除</keyword4>されるまで持続; 重複しない"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "681f1af188e35a8750237c634f904223ac4b90c852cf86cdb44cec11c1cc7fd9",
+    "sourceHash": "1ff4c123ab5ea5be80cc5606be5979f870ca550d549322fe738e9cd161608e1d",
     "text": "側面の隙：次の攻撃は追加で{{value0}}の<keyword0>物理</keyword0>ダメージを与える"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "20b4b0fee6ad510c74eb0e4e2a3924d70e5b65df96518349c3f85e24ef26deac",
+    "sourceHash": "510e3bb63c566748ec12c987070d5258503bf8efa4e22f4ab44eb7efd3638332",
     "text": "<keyword0>無効化</keyword0>：次の有害な状態効果を防ぐ; 直接ダメージは受ける; 消費されるか<keyword1>強化解除</keyword1>されるまで持続; 重複しない"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "b6c4d723ced210dd3c9a9caadf119e7825d48dbd270d8a89014b35984d2de78d",
+    "sourceHash": "d0a019238bc4d30a15cdf77b6f6ecf996c2ff52dc7ad6ac432f7f353fef51594",
     "text": "次の<keyword1>凍結</keyword1>ダメージを<keyword0>無効化</keyword0>; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "12b723933f673c510a28c2d911985510a7383bf8755bff9cadebd7784025ed2a",
+    "sourceHash": "c04433375f9cbaf460a8c32f41419edb61499d48bbbd1227ad65eb2c755cb53a",
     "text": "オアシスの種：次の攻撃に<keyword0>吸血</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "d967c178d3e24d2c68a125bb4ba6244547df99c8b1c8e36d104f0a8485753e43",
+    "sourceHash": "42a352141088f928d09f08e2b08a9c76032c31118c6a76df957fb90f5889f4e5",
     "text": "別れの一太刀：次の<keyword0>物理</keyword0>ヒットは、そのダメージの半分を追加の<keyword1>出血</keyword1>ダメージとして与える"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "55202d81949fa8469efce5160ce57eb329824dcdb7e5613ae4fa8d95bfef901a",
+    "sourceHash": "b896702d9420d62ef7856e9b73838d44c38a5daa118829648102223312850810",
     "text": "<keyword0>反射</keyword0>：指定された攻撃または有害な状態効果を返す; <keyword1>攻撃反射</keyword1>はダメージとその後の有害効果を攻撃者へ返す; 状態効果のみの<keyword2>反射</keyword2>は効果をランダムな生存中の敵へ移し、直接ダメージは受ける; <keyword3>反射</keyword3>された攻撃や状態効果は再び<keyword4>反射</keyword4>できない; 回数は重複しない"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "a25a4336c771982c2ef6305f5ac689e54acf6440cb9fecb79c67e7cb78b03df2",
+    "sourceHash": "2b974ee183bfe2cb7158c2b638d0e2edcf002d725b3ad46a83016a97c5109f52",
     "text": "次の<keyword1>炎上</keyword1>を<keyword0>反射</keyword0>; 直接ダメージは受ける; 消費されるか<keyword2>強化解除</keyword2>されるまで持続; 重複しない"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "bbf6144e69490237644ea4c2d4f1c5ed54e1b9261354462dccd91ea846b66592",
+    "sourceHash": "5e4db28aff16a46ad3b447dcb0ade8c5cf3baa4d29abb862d05c2edf3c9061af",
     "text": "リズムをつかむ：<keyword0>回避</keyword0>率+{{value0}}%"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "bd965b33c5f2e621884a43cd4b83030f7f151870801e41ab3b4cd048427a8968",
+    "sourceHash": "70c9910b83e66375595f66ed1bb2b864510b71bc33953aeed92925c3a8b3ce93",
     "text": "反撃：次の<keyword0>物理</keyword0>攻撃は必ず<keyword1>クリティカル</keyword1>になる"
   },
   "content.talent.armor.armored-surge.name": {

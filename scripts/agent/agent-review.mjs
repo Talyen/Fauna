@@ -185,9 +185,37 @@ export function review(
     patches: path.join(directory, "patches.txt"),
     retention: completedReviewIdentity(root, base, identity),
   };
-  writeFileSync(index.patches, sections.map((s) => s.body).join("\n"));
+  const patchText = sections.map((s) => s.body).join("\n");
+  writeFileSync(index.patches, patchText);
   const indexPath = path.join(directory, "index.json");
-  writeFileSync(indexPath, JSON.stringify(index, null, 2));
+  const indexText = JSON.stringify(index, null, 2);
+  writeFileSync(indexPath, indexText);
+  if (index.retention) {
+    try {
+      const reports = path.join(root, "reports");
+      const seals = path.join(reports, ".review-retention");
+      if (!lstatSync(reports).isDirectory() || lstatSync(reports).isSymbolicLink())
+        throw new Error("Unsafe reports directory");
+      mkdirSync(seals, { recursive: true });
+      if (!lstatSync(seals).isDirectory() || lstatSync(seals).isSymbolicLink())
+        throw new Error("Unsafe review retention directory");
+      writeFileSync(
+        path.join(seals, `${path.basename(directory)}.json`),
+        JSON.stringify({
+          version: 1,
+          createdAt: Date.now(),
+          base: index.retention.base,
+          head: index.retention.head,
+          layers,
+          indexHash: createHash("sha256").update(indexText).digest("hex"),
+          patchHash: createHash("sha256").update(patchText).digest("hex"),
+        }),
+        { flag: "wx" },
+      );
+    } catch {
+      // Missing or unsafe retention metadata preserves the report indefinitely.
+    }
+  }
   const rendered = summary
     ? index.selected
         .map(

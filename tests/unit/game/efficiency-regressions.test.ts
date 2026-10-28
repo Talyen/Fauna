@@ -1,3 +1,5 @@
+import { grantStatus } from "../../../src/game/combat/index";
+import { recruitLineup, swapFromCard } from "../../../src/game/team";
 import { enemyReflectionRecipients } from "../../../src/game/battlefield";
 import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
 import { freshCombat } from "../../../src/game/combat/state";
@@ -1221,4 +1223,59 @@ it("retains replacement slots and valid battle zones for manual and card-driven 
     expect(new Set(zones).size).toBe(zones.length);
     expect(decodeSave(encodeSave(state))).toEqual(state);
   }
+});
+
+it("preserves redraw state, events, buffer order and RNG against the original exchange", () => {
+  for (const seed of [1, 42, 591]) {
+    const state = requireBattle(structuredClone(teamRun(seed, ["mossguard", "prismram"])));
+    const reference = structuredClone(state);
+    const events: GameEvent[] = [];
+    const expected: GameEvent[] = [];
+    const returned = reference.battle.hand.splice(0);
+    reference.battle.draw.push(...returned);
+    shuffle(reference, reference.battle.draw);
+    draw(reference, returned.length, expected);
+    redrawHand(state, events);
+    expect(state).toEqual(reference);
+    expect(events).toEqual(expected);
+  }
+});
+
+it("keeps Mossball's first tied living recipient and excludes the source", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram", "emberback", "mossguard"])));
+  state.boons = ["mossball"];
+  const [source, first, second] = state.team;
+  for (const unit of state.team) unit.combat = freshCombat();
+  first!.combat!.thorns = 4;
+  second!.combat!.thorns = 4;
+  const rng = state.rng;
+  const events: GameEvent[] = [];
+  grantStatus(source!, "thorns", 1, events, state);
+  expect(first!.combat!.thorns).toBe(4 + boonRule("mossball").thorns);
+  expect(second!.combat!.thorns).toBe(4);
+  expect(state.rng).toBe(rng);
+  first!.health = 0;
+  grantStatus(source!, "thorns", 1, [], state);
+  expect(second!.combat!.thorns).toBe(4 + boonRule("mossball").thorns);
+});
+
+it("keeps card-driven position swaps and their random choice aligned", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram", "emberback", "mossguard"])));
+  const actor = state.team[0]!;
+  const original = [...state.team];
+  const reference = structuredClone(state);
+  const others = original.slice(1);
+  const other = others[Math.floor(roll(reference, { kind: "index", size: others.length }) * others.length)]!;
+  expect(swapFromCard(state, actor, [])).toBe(other);
+  expect(state.team[0]).toBe(other);
+  expect(state.team[original.indexOf(other)]).toBe(actor);
+  expect(state.rng).toBe(reference.rng);
+});
+
+it("returns an independent recruit lineup without changing deployment", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram", "emberback"])));
+  const before = state.team.map((unit) => unit.id);
+  const incoming = { ...state.team[0]!, id: "incoming", species: "mossguard" as const };
+  expect(recruitLineup(state, incoming)).toEqual([...before, incoming.id]);
+  expect(state.team.map((unit) => unit.id)).toEqual(before);
 });
