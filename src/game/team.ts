@@ -250,18 +250,18 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   });
   // New permanent kits take priority over the newest generated copies at the battle limit.
   const overflow = Math.max(0, retained.length + mapped.length - MAX_BATTLE_CARDS);
-  const removed = new Set<string>();
+  let removed: Set<string> | undefined;
   if (overflow) {
     let remaining = overflow;
     for (let index = retained.length - 1; index >= 0 && remaining > 0; index--) {
       const card = retained[index]!;
       if (card.temporary) {
-        removed.add(card.id);
+        (removed ??= new Set()).add(card.id);
         remaining--;
       }
     }
   }
-  const cards = removed.size ? retained.filter((card) => !removed.has(card.id)) : retained;
+  const cards = removed ? retained.filter((card) => !removed.has(card.id)) : retained;
   cards.push(...mapped);
   state.cards = cards;
   if (state.battle) {

@@ -57,10 +57,12 @@ export function shareDodge(
 ): boolean | undefined {
   if (!isEnemy(source) || targets.length < 2 || !state.boons.includes("sandfold-parasol")) return;
   if (blindMiss) return true;
-  const checked = new Set<string>();
+  const checked = targets.length > 2 ? new Set<string>() : undefined;
+  let firstId: string | undefined;
   for (const target of targets) {
-    if (checked.has(target.id)) continue;
-    checked.add(target.id);
+    if (checked ? checked.has(target.id) : target.id === firstId) continue;
+    if (checked) checked.add(target.id);
+    else firstId = target.id;
     const stats = ensureCombat(target);
     if (stats.negate || stats.attackReflection || target.id === sharedNegate?.recipientId) continue;
     const dodge = dodgeChance(state, target);
@@ -79,9 +81,24 @@ export function shareNegate(
   if (blindMiss || !isEnemy(source) || !state.boons.includes("devotion-clasp")) return;
   const bearer = targets.find((unit) => unit.health > 0 && !isEnemy(unit) && ensureCombat(unit).negate);
   if (!bearer) return;
-  const candidates = targets.filter((unit) => unit.id !== bearer.id && unit.health > 0 && !isEnemy(unit));
-  const recipient =
-    mostInjured(candidates.filter((unit) => !ensureCombat(unit).negate)) ?? mostInjured(candidates);
+  let any: Combatant | undefined;
+  let unprotected: Combatant | undefined;
+  let anyFraction = Infinity;
+  let unprotectedFraction = Infinity;
+  for (const unit of targets) {
+    if (unit.id === bearer.id || unit.health <= 0 || isEnemy(unit)) continue;
+    const protectedByNegate = ensureCombat(unit).negate;
+    const fraction = unit.health / maximumHealth(unit);
+    if (!any || fraction < anyFraction) {
+      any = unit;
+      anyFraction = fraction;
+    }
+    if (!protectedByNegate && (!unprotected || fraction < unprotectedFraction)) {
+      unprotected = unit;
+      unprotectedFraction = fraction;
+    }
+  }
+  const recipient = unprotected ?? any;
   if (recipient) return { bearer, recipientId: recipient.id, spent: false };
 }
 
@@ -193,16 +210,19 @@ export function* bounce(
     for (let i = 0; i < entry.amount; i++) {
       if (source.health <= 0) return;
       // A previous bounce can remove a summoner and all of its Echoes.
-      const eligible = (
+      const eligible =
         effect === "heal"
           ? healingAllies(state, allied ? "player" : "enemy")
-          : battlefield(state, allied ? "enemy" : "player")
-      ).filter(
-        (unit) =>
+          : battlefield(state, allied ? "enemy" : "player");
+      let eligibleCount = 0;
+      for (const unit of eligible)
+        if (
           unit.health > 0 &&
           !visitedTargets.has(unit.id) &&
-          (effect !== "heal" || unit.health < maximumHealth(unit)),
-      );
+          (effect !== "heal" || unit.health < maximumHealth(unit))
+        )
+          eligible[eligibleCount++] = unit;
+      eligible.length = eligibleCount;
       if (!eligible.length) return;
       if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =

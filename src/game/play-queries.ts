@@ -39,13 +39,18 @@ function hasChosenRecipient(
   mode = cardTargeting(def, state),
 ) {
   if (def.effect !== "swapChosen" && mode !== "enemy" && mode !== "ally") return false;
+  const side = mode === "enemy" ? "enemy" : "player";
+  if (
+    def.effect !== "resurrect" &&
+    def.effect !== "swapChosen" &&
+    targetId === undefined &&
+    (def.effect !== "heal" || def.target !== "injured")
+  )
+    return !!findLivingBattlefield(state, side);
   const eligible = (unit: Creature | Enemy) =>
     (targetId === undefined || unit.id === targetId) && recipientEligible(unit, def);
   if (def.effect === "resurrect") return state.team.some(eligible) || state.reserves.some(eligible);
   if (def.effect === "swapChosen") return state.reserves.some(eligible);
-  const side = mode === "enemy" ? "enemy" : "player";
-  if (targetId === undefined && (def.effect !== "heal" || def.target !== "injured"))
-    return !!findLivingBattlefield(state, side);
   return !!findLivingBattlefield(state, side, eligible);
 }
 

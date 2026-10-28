@@ -84,10 +84,17 @@ export function encodeSave(state: GameState) {
 }
 
 function validateCollection(state: GameState) {
-  const encountered = new Set(state.discovery.encountered);
-  invalid(encountered.size !== state.discovery.encountered.length || !unique(state.boons));
+  const encounters = state.discovery.encountered;
+  const encountered = encounters.length > 1 ? new Set(encounters) : undefined;
+  invalid((encountered !== undefined && encountered.size !== encounters.length) || !unique(state.boons));
   invalid(state.phase === "draft" && state.boons.length > 0);
-  invalid(SPECIES.some(({ id }) => state.discovery.recruited[id] !== undefined && !encountered.has(id)));
+  invalid(
+    SPECIES.some(
+      ({ id }) =>
+        state.discovery.recruited[id] !== undefined &&
+        !(encountered ? encountered.has(id) : encounters[0] === id),
+    ),
+  );
   const count = state.phase === "draft" ? starterCount(state) : 0;
   const drafting = state.phase === "draft" && state.selected.length < count;
   const starterPool = state.selected.length || drafting ? starterSpecies(state) : [];
@@ -295,13 +302,13 @@ function validateRewards(state: GameState) {
         KEYWORDS.some((keyword) => (receipt.xp[keyword] ?? 0) !== (reward.xp[keyword] ?? 0)),
     );
     invalid((!bossEncounter(state) || finalEncounter(state)) && reward.boons.length > 0);
-    const enemies = reward.recruits.length || state.phase === "recruit" ? encounterSource(state).enemies : [];
+    const enemies = reward.recruits.length || state.phase === "recruit" ? state.expedition.pack! : [];
     invalid(
       !unique(reward.boons) ||
         reward.boons.some((boon) => state.boons.includes(boon)) ||
         (reward.recruits.length > 0 &&
           (reward.recruits.length !== enemies.length ||
-            reward.recruits.some((kind, index) => kind !== enemies[index]?.species))),
+            reward.recruits.some((kind, index) => kind !== enemies[index]))),
     );
     invalid(
       (reward.outcome === "next" && finalEncounter(state)) ||
@@ -485,7 +492,10 @@ function validateCombatants(state: GameState) {
           for (const id in stats.statusSources)
             if (Object.hasOwn(stats.statusSources, id))
               invalid(!combatantIds.has(stats.statusSources[id as keyof typeof stats.statusSources]!));
-          if (stats.bleedLeech.length) {
+          if (stats.bleedLeech.length === 1) {
+            const payout = stats.bleedLeech[0]!;
+            invalid(payout.amount === 0 || !combatantIds.has(payout.sourceId) || payout.amount > stats.bleed);
+          } else if (stats.bleedLeech.length > 1) {
             const sources = new Set<string>();
             let total = 0;
             for (const row of stats.bleedLeech) {

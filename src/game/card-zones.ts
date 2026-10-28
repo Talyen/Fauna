@@ -66,8 +66,8 @@ export function returnSlipperCard(state: GameState, ownerId: string, events: Gam
   if (!state.battle || !state.boons.includes("crystal-slipper")) return;
   const owner = state.team.find((unit) => unit.id === ownerId && unit.health > 0);
   const id = owner?.combat?.slipperCard;
-  if (!id || !state.cards.some((card) => card.id === id && cardActor(state, card)?.id === ownerId)) return;
-  if (!state.battle.draw.includes(id) && !state.battle.discard.includes(id)) return;
+  if (!id || (!state.battle.draw.includes(id) && !state.battle.discard.includes(id))) return;
+  if (!state.cards.some((card) => card.id === id && cardActor(state, card)?.id === ownerId)) return;
   filterCardZones(state.battle, (candidate) => candidate !== id);
   receiveCard(state, id);
   journeyReturn(state, ownerId, events);
@@ -135,6 +135,15 @@ function eligibleDrawPool(state: GameState, matches: (card: Card) => boolean) {
   return (id: string) => ids.has(id);
 }
 
+/** Existence checks do not need an ordered pool or a set of every eligible card. */
+function hasEligibleDraw(state: GameState, matches: (card: Card) => boolean): boolean {
+  const { draw } = state.battle!;
+  if (!draw.length) return false;
+  if (draw.length === 1) return state.cards.some((card) => card.id === draw[0] && matches(card));
+  const ids = new Set(draw);
+  return state.cards.some((card) => ids.has(card.id) && matches(card));
+}
+
 /** Keyword draws and their visible benefit query use identical owner eligibility. */
 function drawableCard(state: GameState, keyword?: "light" | "nature" | "water" | "burn") {
   let owners: Set<string> | undefined;
@@ -143,26 +152,31 @@ function drawableCard(state: GameState, keyword?: "light" | "nature" | "water" |
     (!keyword || cardHasKeyword(card, keyword));
 }
 
-/** Find cards belonging to another living deployed creature without revealing pile order. */
-export function journeyReturnEligibility(
-  state: GameState,
-  ownerId: string | null,
-): ((id: string) => boolean) | undefined {
-  if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
+function journeyReturnMatcher(state: GameState, ownerId: string) {
   let owners: Set<string> | undefined;
-  return eligibleDrawPool(state, (card) => {
+  return (card: Card) => {
     if (!card.ownerId || card.ownerId === ownerId) return false;
     if (!owners) {
       owners = new Set();
       for (const unit of state.team) if (unit.health > 0) owners.add(unit.id);
     }
     return owners.has(card.ownerId);
-  });
+  };
+}
+
+/** Find cards belonging to another living deployed creature without revealing pile order. */
+export function journeyReturnEligibility(
+  state: GameState,
+  ownerId: string | null,
+): ((id: string) => boolean) | undefined {
+  if (!state.battle || !ownerId || !state.boons.includes("journey-loom")) return;
+  return eligibleDrawPool(state, journeyReturnMatcher(state, ownerId));
 }
 
 /** Inspect the same draw pool without changing its order or revealing a hidden card. */
 export function journeyReturnHasDraw(state: BattleState, ownerId: string | null): boolean {
-  return !!journeyReturnEligibility(state, ownerId);
+  if (!ownerId || !state.boons.includes("journey-loom")) return false;
+  return hasEligibleDraw(state, journeyReturnMatcher(state, ownerId));
 }
 
 /** Recovery and returns weave in another living deployed owner's ordinary draw. */
@@ -413,7 +427,7 @@ export function drawHasAnotherCard(
   _played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
-  return !!eligibleDrawPool(
+  return hasEligibleDraw(
     state,
     drawableCard(state, effect.kind === "drawKeyword" ? effect.keyword : undefined),
   );

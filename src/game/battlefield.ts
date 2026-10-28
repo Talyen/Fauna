@@ -30,7 +30,10 @@ function battlefieldSnapshot(state: GameState, side: "player" | "enemy", livingO
     if (minions.length === 1) {
       if (row.some((owner) => owner.health > 0 && owner.id === unit.minion.ownerId)) result.push(unit);
     } else {
-      owners ??= new Set(row.filter((owner) => owner.health > 0).map((owner) => owner.id));
+      if (!owners) {
+        owners = new Set();
+        for (const owner of row) if (owner.health > 0) owners.add(owner.id);
+      }
       if (owners.has(unit.minion.ownerId)) result.push(unit);
     }
   }
