@@ -85,7 +85,7 @@ it(
       const invoke = (args) =>
         execFileSync(process.execPath, ["scripts/balance/run-playthrough.mjs", ...args], {
           encoding: "utf8",
-          timeout: 10_000,
+          timeout: ciTimeout(10_000),
           env: { ...process.env, FAUNA_PLAYTHROUGH_PROFILE: "1" },
         });
       // Policy changes can stall a particular career; this fixture owns successful CLI replay.

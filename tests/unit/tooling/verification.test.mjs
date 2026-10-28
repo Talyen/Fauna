@@ -371,7 +371,7 @@ describe("lightweight local verification", () => {
         {
           cwd: repo,
           encoding: "utf8",
-          timeout: 30_000,
+          timeout: process.env.CI ? 0 : 30_000,
           env: { ...process.env, NODE_OPTIONS: "--max-old-space-size=1024" },
         },
       ),

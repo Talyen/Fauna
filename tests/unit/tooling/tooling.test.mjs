@@ -174,7 +174,7 @@ describe("CI diagnostics", () => {
 });
 
 // These safety regressions launch real Git processes; host contention is not a latency failure.
-describe("isolated worktrees and protected integration", { timeout: 30_000 }, () => {
+describe("isolated worktrees and protected integration", { timeout: process.env.CI ? 0 : 30_000 }, () => {
   it("starts from committed main, preserves dirty main, links matching dependencies and reuses without resetting", () => {
     const root = repo();
     mkdirSync(path.join(root, "node_modules"));

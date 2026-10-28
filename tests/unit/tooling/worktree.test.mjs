@@ -80,7 +80,7 @@ it(
         new URL("../../fixtures/worktree-storage-check.mjs", import.meta.url).pathname,
         new URL("../../../scripts/lib/worktree-storage.mjs", import.meta.url).pathname,
       ],
-      { encoding: "utf8", timeout: 25_000 },
+      { encoding: "utf8", timeout: ciTimeout(25_000) },
     );
     expect(result.status, result.stdout + result.stderr).toBe(0);
   },

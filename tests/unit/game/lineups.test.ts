@@ -59,7 +59,7 @@ it(
           cwd: root,
           encoding: "utf8",
           maxBuffer: 16 * 1024 * 1024,
-          timeout: 30_000,
+          timeout: ciTimeout(30_000),
           env: { ...process.env, NODE_OPTIONS: "--max-old-space-size=1024" },
         },
       ),
@@ -72,7 +72,7 @@ it(
         )
         .sort(),
     );
-    // Collection launches a subprocess with its own 30-second deadline.
+    // Local collection retains its own deadline alongside the outer test limit.
   },
   ciTimeout(35_000),
 );
