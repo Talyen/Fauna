@@ -2,8 +2,8 @@ import { it, expect } from "vitest";
 import { randomUUID } from "node:crypto";
 import { readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
-import { rankBalanceFindings } from "../../../scripts/balance/findings.mjs";
-import { compareBalance } from "../../../scripts/balance/paired-balance.mjs";
+import { findingsMarkdown, rankBalanceFindings } from "../../../scripts/balance/findings.mjs";
+import { compareBalance, pairedStats } from "../../../scripts/balance/paired-balance.mjs";
 import { main } from "../../../scripts/balance/balance-compare.mjs";
 import { ROOT } from "../../../scripts/lib/tool-runtime.mjs";
 const row = (starter, seed, win = 0, turns = 20) => ({
@@ -183,4 +183,163 @@ it("findings boundary: counts each valid numeric career seed once, regardless of
   const second = { ...row("mossguard", 2), seed: 1 };
   expect(() => rankBalanceFindings(report([first, second]))).toThrow("duplicate career seeds");
   expect(() => rankBalanceFindings(report([{ ...first, seed: 4294967296 }]))).toThrow("career seeds");
+});
+
+it("compares equivalent nested settings regardless of JSON property order", () => {
+  const baseline = {
+    ...report([row("mossguard", 0)]),
+    settings: { policy: { version: 1, mode: "ranked" }, seeds: [0, 1] },
+  };
+  const treatment = { ...baseline, settings: { seeds: [0, 1], policy: { mode: "ranked", version: 1 } } };
+  expect(compareBalance(baseline, treatment).pairs).toHaveLength(1);
+  expect(() =>
+    compareBalance(baseline, { ...treatment, settings: { ...treatment.settings, seeds: [1, 0] } }),
+  ).toThrow("incompatible");
+});
+
+it("rejects sparse or non-array paired samples rather than inventing zero observations", () => {
+  const sparse = Array(3);
+  sparse[0] = 1;
+  sparse[2] = 3;
+  for (const values of [Array(2), sparse, { length: 1, 0: 2 }, null])
+    expect(() => pairedStats(values)).toThrow("Invalid paired samples");
+  expect(pairedStats([0, 2])).toMatchObject({ n: 2, mean: 1, standardError: 1 });
+});
+
+it("rejects paired aggregates that overflow despite finite individual samples", () => {
+  expect(() => pairedStats([Number.MAX_VALUE, Number.MAX_VALUE])).toThrow("numeric range");
+  expect(() => pairedStats([1e200, -1e200])).toThrow("numeric range");
+  expect(pairedStats([3])).toMatchObject({ mean: 3, standardError: null, noisy: true });
+});
+
+it("requires nonempty paired identities before ranking imported comparisons", () => {
+  const input = compareBalance(report([row("mossguard", 0)]), report([row("mossguard", 0)]));
+  for (const pair of [
+    null,
+    { ...input.pairs[0], key: "" },
+    { ...input.pairs[0], key: " " },
+    { ...input.pairs[0], key: 3 },
+  ])
+    expect(() => rankBalanceFindings({ ...input, pairs: [pair] })).toThrow("identity");
+});
+
+it("validates case identities without conflating colons in arm names and case keys", () => {
+  const entry = row("mossguard", 0);
+  for (const key of [undefined, "", " ", 3])
+    expect(() => rankBalanceFindings(report([{ ...entry, key }]))).toThrow("identity");
+  const input = {
+    ...report([
+      { ...entry, arm: "a:b", key: "c" },
+      { ...entry, arm: "a", key: "b:c" },
+    ]),
+    kind: "experiment",
+  };
+  expect(rankBalanceFindings(input).findings).toEqual([]);
+  expect(() => rankBalanceFindings({ ...input, cases: [input.cases[0], input.cases[0]] })).toThrow(
+    "Duplicate",
+  );
+});
+
+it("keeps fragment and query characters inside evidence filenames", () => {
+  const result = rankBalanceFindings(
+    report([{ ...row("mossguard", 0), evidence: "reports/case #1?details.json" }]),
+  );
+  expect(findingsMarkdown(result)).toContain("(<reports/case%20%231%3Fdetails.json>)");
+});
+
+it("compares settings by content while retaining array order and value checks", () => {
+  const baseline = {
+    ...report([row("mossguard", 0)]),
+    settings: { policy: { version: 1, mode: "auto" }, seeds: [1, 2] },
+  };
+  const treatment = { ...baseline, settings: { seeds: [1, 2], policy: { mode: "auto", version: 1 } } };
+  expect(compareBalance(baseline, treatment).pairs).toHaveLength(1);
+  expect(() =>
+    compareBalance(baseline, { ...treatment, settings: { ...treatment.settings, seeds: [2, 1] } }),
+  ).toThrow("incompatible");
+  expect(() =>
+    compareBalance(baseline, {
+      ...treatment,
+      settings: { ...treatment.settings, policy: { version: 2, mode: "auto" } },
+    }),
+  ).toThrow("incompatible");
+});
+
+it("rejects malformed and sparse paired samples instead of reporting NaN", () => {
+  for (const samples of [null, {}, "12", [], Array(2), [NaN], [Infinity]])
+    expect(() => pairedStats(samples)).toThrow("Invalid paired samples");
+  expect(pairedStats([2, 4])).toMatchObject({ n: 2, mean: 3, standardError: 1, noisy: false });
+});
+
+it("refuses nonfinite derived statistics from otherwise finite samples", () => {
+  for (const samples of [
+    [Number.MAX_VALUE, Number.MAX_VALUE],
+    [1e200, -1e200],
+  ])
+    expect(() => pairedStats(samples)).toThrow("numeric range");
+});
+
+it("requires usable case identities before ranking imported evidence", () => {
+  const valid = report([row("mossguard", 0)]);
+  const comparison = compareBalance(valid, valid);
+  for (const key of [undefined, null, 1, "", "  "]) {
+    expect(() => rankBalanceFindings({ ...valid, cases: [{ ...valid.cases[0], key }] })).toThrow("identity");
+    expect(() => rankBalanceFindings({ ...comparison, pairs: [{ ...comparison.pairs[0], key }] })).toThrow(
+      "identity",
+    );
+  }
+  expect(() => rankBalanceFindings({ ...comparison, pairs: [null] })).toThrow("paired evidence");
+  expect(() => rankBalanceFindings(null)).toThrow("Unsupported balance report");
+  expect(() => compareBalance(null, valid)).toThrow("incompatible balance reports");
+});
+
+it("does not treat matching blank starter fields as a confirmed draft", () => {
+  for (const starter of ["", "  "]) {
+    const input = report([{ ...row("mossguard", 0), starter, actualStarter: starter }]);
+    expect(rankBalanceFindings(input).findings.map((finding) => finding.id)).toEqual(["starter-coverage"]);
+  }
+});
+
+it("rejects malformed failure entries before formatting incomplete findings", () => {
+  const input = { ...report([]), complete: false };
+  for (const failure of [null, "watchdog", []])
+    expect(() => rankBalanceFindings({ ...input, failures: [failure] })).toThrow("Invalid balance cases");
+  const result = rankBalanceFindings({ ...input, failures: [{ key: "case-0", reason: "watchdog" }] });
+  expect(findingsMarkdown(result)).toContain("case-0: watchdog");
+});
+
+it("encodes literal evidence filenames without turning hashes or questions into URL suffixes", () => {
+  const input = report([{ ...row("mossguard", 0), evidence: "reports/run #1/case?100%.json" }]);
+  const markdown = findingsMarkdown(rankBalanceFindings(input));
+  expect(markdown).toContain("(<reports/run%20%231/case%3F100%25.json>)");
+});
+
+it("retains complete evidence for each metric finding without changing metric rankings", () => {
+  const baseline = report(Array.from({ length: 5 }, (_, seed) => row("mossguard", seed)));
+  const treatment = structuredClone(baseline);
+  for (const entry of treatment.cases) {
+    entry.metrics.turns += 10;
+    entry.metrics.currency += 40;
+    entry.evidence = `treatment-${entry.seed}.json`;
+  }
+  const result = rankBalanceFindings(compareBalance(baseline, treatment));
+  expect(result.findings.map((finding) => finding.id)).toEqual(["paired-currency", "paired-turns"]);
+  for (const finding of result.findings)
+    expect(finding.evidence).toEqual(
+      baseline.cases.map((entry, index) => ({
+        key: entry.key,
+        files: [entry.evidence, treatment.cases[index].evidence],
+      })),
+    );
+});
+
+it("matches seed sets independently of row order and leaves imported evidence untouched", () => {
+  const left = Array.from({ length: 5 }, (_, seed) => row("mossguard", seed, 1));
+  const right = Array.from({ length: 5 }, (_, seed) => row("emberback", seed, 0)).reverse();
+  const input = report([...left, ...right]);
+  const original = structuredClone(input);
+  expect(rankBalanceFindings(input).findings.filter((finding) => finding.id.endsWith("spread"))).toHaveLength(
+    1,
+  );
+  expect(input).toEqual(original);
 });

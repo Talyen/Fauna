@@ -1,3 +1,4 @@
+import { cloudTransport, cloudIdentity } from "../../support/cloud";
 import { deferred } from "../../support/deferred";
 import { expect, it, vi } from "vitest";
 import { createSession as createSeededSession } from "../../../src/application/session";
@@ -53,20 +54,10 @@ it("keeps local saving successful when cloud metadata cannot be written", async 
       },
     },
     cloud: {
-      identity: async () => ({
-        available: true,
-        device: "a".repeat(32),
-        profile: "b".repeat(32),
-        importAvailable: false,
-      }),
-      readLocal: async () => null,
+      ...cloudTransport().port,
       writeLocal: async () => {
         throw new Error("metadata failure");
       },
-      preserve: async () => {},
-      importStandalone: async () => [],
-      list: async () => [],
-      read: async () => null,
       write: async () => {
         throw new Error("must not upload");
       },
@@ -89,17 +80,11 @@ it("does not attempt cloud metadata or report pending sync when Steam is unavail
     steam: { available: false },
     saves: { readCandidates: async () => [], write: async () => {} },
     cloud: {
-      identity: async () => ({ available: false, device: "", profile: "", importAvailable: false }),
-      readLocal: async () => null,
+      ...cloudTransport({ identity: { ...cloudIdentity, available: false, device: "", profile: "" } }).port,
       writeLocal: async () => {
         metadataWrites++;
         throw new Error("unavailable");
       },
-      preserve: async () => {},
-      importStandalone: async () => [],
-      list: async () => [],
-      read: async () => null,
-      write: async () => {},
     },
   });
   await session.load();
@@ -133,19 +118,8 @@ it.each(["quit", "dispose"] as const)(
         },
       },
       cloud: {
-        identity: async () => ({
-          available: true,
-          device: "a".repeat(32),
-          profile: "b".repeat(32),
-          importAvailable: false,
-        }),
-        readLocal: async () => null,
+        ...cloudTransport().port,
         writeLocal: metadata,
-        preserve: async () => {},
-        importStandalone: async () => [],
-        list: async () => [],
-        read: async () => null,
-        write: async () => {},
       },
     });
     try {

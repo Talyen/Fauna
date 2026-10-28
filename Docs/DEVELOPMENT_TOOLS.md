@@ -15,12 +15,10 @@ All commands follow [Contributing's execution policy](../CONTRIBUTING.md#executi
 
 ## Task checkouts and previews
 
-Run `npm run ui:guide -- <small|interaction|layout> <scenario>` for the appropriate capture commands, conditions and inspection checklist. The guide performs no capture or review. Start a browser preview, then capture matching before/after states:
+Run `npm run ui:guide -- <small|interaction|layout> <scenario>` for the appropriate capture commands, conditions and inspection checklist. The guide performs no capture or review. On macOS, use its printed capture commands with the shared host-lane wrapper required by [the execution policy](../CONTRIBUTING.md#execution-and-evidence). Capture starts and closes its own preview; a separately opened browser preview is only needed for manual interaction review. For a layout change, inspect the before capture, edit, then capture the matching after state:
 
 ```sh
-npm run preview:task -- --browser --scenario battle
-npm run capture:task -- --scenario battle --label before
-npm run capture:task -- --scenario battle --label after
+npm run ui:guide -- layout battle
 ```
 
 | Choice                                | Behavior                                                                                                                                                                                    |

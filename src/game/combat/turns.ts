@@ -3,7 +3,7 @@ import { boonRule } from "../rules/boons";
 import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { cardActor, unfinishedJourneyLimit } from "../card-actors";
 import { battlefield, livingBattlefield, isEnemy, healingAllies } from "../battlefield";
-import { definition, speciesCards, SPECIES } from "../content";
+import { definition, speciesCards, SPECIES, type SpeciesId, type CardDefinition } from "../content";
 import { drawBossCards, removeDepartedMinions } from "./legendary";
 import { chooseEnemyCard } from "./enemy-policy";
 import { lastWarmth } from "./card-modifiers";
@@ -33,12 +33,20 @@ import { pendingReplacement } from "../team";
 import { settle, intents } from "../journey";
 
 // Adapt immutable authored kits once for both value estimation and execution.
-const enemyAbilities = new Map(
-  SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse).map(enemyCard)]),
-);
-const enemyAbilitiesWithoutResurrection = new Map(
-  [...enemyAbilities].map(([id, cards]) => [id, cards.filter((card) => card.effect !== "resurrect")]),
-);
+const enemyAbilities = new Map<SpeciesId, CardDefinition[]>();
+const enemyAbilitiesWithoutResurrection = new Map<SpeciesId, CardDefinition[]>();
+for (const { id } of SPECIES) {
+  const cards: CardDefinition[] = [];
+  const withoutResurrection: CardDefinition[] = [];
+  for (const card of speciesCards(id)) {
+    if (!enemyCanUse(card)) continue;
+    const adapted = enemyCard(card);
+    cards.push(adapted);
+    if (adapted.effect !== "resurrect") withoutResurrection.push(adapted);
+  }
+  enemyAbilities.set(id, cards);
+  enemyAbilitiesWithoutResurrection.set(id, withoutResurrection);
+}
 
 /** Convert only Block lost to ordinary turn decay, using the owner's passive tier. */
 export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[]) {
