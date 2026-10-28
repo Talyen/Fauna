@@ -44,7 +44,7 @@ Rootvault Pole allows allied Dodge against Thorns; control and the ordinary chan
 
 ### Blind
 
-Blind gives the next attack a 50% miss chance and expires on that attack, hit or miss; one seeded roll covers all its targets and damage packets. A miss uses the recipient's ordinary Dodge outcome, rewards and icon, even if control prevents normal Dodge. Support actions, periodic damage and retaliation do not consume Blind. Blind is non-stacking, Cleanseable and reflectable. [Moonveil Mask](content/boons.md#execution-contracts) lets enemy Blind persist when its own roll causes the miss.
+Blind gives the next attack a 50% miss chance and expires on that attack, hit or miss; one seeded roll covers all its targets and damage packets. A miss uses the recipient's ordinary Dodge outcome, rewards and icon, even if control prevents normal Dodge. Support actions, periodic damage and retaliation do not consume Blind. Blind is non-stacking, Cleanseable and reflectable. [Moonveil Mask and Vow Candle](content/boons.md#execution-contracts) can preserve Blind in their stated circumstances.
 
 ### Temporary Dodge
 

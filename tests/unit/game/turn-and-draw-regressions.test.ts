@@ -1,5 +1,6 @@
 import { expect, it } from "vitest";
 import { rankedBattleChoices } from "../../../src/application/battle-policy";
+import { BATTLE_FINISH_PRIORITY } from "../../../src/application/battle-benefits";
 import { drawHasAnotherCard, drawKeyword, drawOwner, journeyReturn } from "../../../src/game/card-zones";
 import { healingBenefit } from "../../../src/game/ability-facts";
 import { freshCombat, restoreHealth } from "../../../src/game/combat";
@@ -12,6 +13,29 @@ import { observeDecisions } from "../../../src/game/random";
 import { requireBattle, teamRun } from "../../support/game";
 import { setHand } from "../../support/cards";
 import type { GameEvent } from "../../../src/game/types";
+
+it("prioritizes a finishing Light attack through Blind with Vow Candle", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["prismram", "mossguard"])));
+  const actor = state.team[0]!;
+  const enemy = state.battle.enemies[0]!;
+  state.boons = ["vow-candle"];
+  actor.combat!.blind = true;
+  enemy.health = 1;
+  enemy.block = 0;
+  enemy.combat = freshCombat();
+  for (const other of state.battle.enemies.slice(1)) other.health = 0;
+  setHand(state, ["prismram-spectrum-lance", "prismram-attack"]);
+  const choices = rankedBattleChoices(state, false);
+  const light = choices.find(
+    (choice) => choice.command.type === "play" && choice.command.cardId === state.battle.hand[0],
+  );
+  const physical = choices.find(
+    (choice) => choice.command.type === "play" && choice.command.cardId === state.battle.hand[1],
+  );
+  expect(light!.score).toBeGreaterThanOrEqual(BATTLE_FINISH_PRIORITY);
+  expect(physical!.score).toBeLessThan(BATTLE_FINISH_PRIORITY);
+  expect(choices[0]!.command).toEqual(light!.command);
+});
 
 it("Auto-play and Overflow Cup select the same injured ally for excess healing", () => {
   const state = requireBattle(structuredClone(teamRun(42, ["mossguard", "prismram"])));
