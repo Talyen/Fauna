@@ -207,7 +207,9 @@ function discardDrawPool(state: GameState, otherOwnerId?: string, firstOnly = fa
   if (livingOwners) for (const unit of state.team) if (unit.health > 0) livingOwners.add(unit.id);
   let cards: Map<string, Card> | undefined;
   const result: Card[] | undefined = firstOnly ? undefined : [];
-  for (const [index, id] of state.battle!.discard.entries()) {
+  const discard = state.battle!.discard;
+  for (let index = 0; index < discard.length; index++) {
+    const id = discard[index]!;
     if ((!firstOnly && index === 0) || (firstOnly && index === 1)) {
       cards = new Map<string, Card>();
       for (const card of state.cards) if (!cards.has(card.id)) cards.set(card.id, card);

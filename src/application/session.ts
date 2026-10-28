@@ -7,6 +7,7 @@ import { decodeSave, encodeSave } from "../game/save";
 import type { Command, GameEvent, GameState } from "../game/types";
 import type { Platform } from "../platform/ports";
 import { startPerformanceSpan, type PerformanceRecorder } from "../lib/performance";
+const disabledPerformance: PerformanceRecorder = () => undefined;
 export interface SessionView {
   game: GameState;
   cloud: CloudView;
@@ -28,7 +29,7 @@ export function createSession(
   capabilities: { development?: boolean; performance?: PerformanceRecorder } = {},
 ) {
   const span = (name: string, revision: number) =>
-    startPerformanceSpan(name, { revision }, capabilities.performance ?? (() => undefined));
+    startPerformanceSpan(name, { revision }, capabilities.performance ?? disabledPerformance);
   const development = capabilities.development === true;
   const diagnostics = createDiagnostics(platform.diagnostics);
   const store = createStore<SessionView>(() =>
@@ -61,6 +62,7 @@ export function createSession(
       const previous = store.getState();
       const view = freeze({ ...previous, ...patch }, true);
       store.setState(view, true);
+      if (!listeners.size) return;
       notifications.push({ view, previous, listeners: [...listeners] });
       // Commit immediately, but finish delivering each snapshot before reentrant updates.
       if (notifying) return;
@@ -331,7 +333,7 @@ export function createSession(
       const end = startPerformanceSpan(
         "command-resolution",
         { command: command.type, revision: view.game.revision },
-        capabilities.performance ?? (() => undefined),
+        capabilities.performance ?? disabledPerformance,
       );
       let result: ReturnType<typeof dispatch>;
       try {

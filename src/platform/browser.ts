@@ -2,6 +2,8 @@ import saveFormat from "../game/save-format.json" with { type: "json" };
 import { browserDiagnostics } from "./preferences";
 import type { Platform, SaveCandidate } from "./ports";
 const KEY = "fauna.save.v1";
+const BACKUP_KEYS = [`${KEY}.backup1`, `${KEY}.backup2`] as const;
+const SAVE_KEYS = [KEY, ...BACKUP_KEYS] as const;
 let textEncoder: TextEncoder | undefined;
 export function createBrowserPlatform(storage?: Storage): Platform {
   return {
@@ -12,7 +14,7 @@ export function createBrowserPlatform(storage?: Storage): Platform {
         const source = storage ?? window.localStorage;
         const results: SaveCandidate[] = [];
         const failures: unknown[] = [];
-        for (const key of [KEY, `${KEY}.backup1`, `${KEY}.backup2`]) {
+        for (const key of SAVE_KEYS) {
           try {
             const data = source.getItem(key);
             if (data !== null) results.push({ source: key === KEY ? "primary" : "backup", data });
@@ -35,7 +37,7 @@ export function createBrowserPlatform(storage?: Storage): Platform {
         // Only application-approved checkpoints may displace recovery slots.
         const readable = new Map<string, string | null>();
         const intact: string[] = [];
-        for (const key of [KEY, `${KEY}.backup1`, `${KEY}.backup2`]) {
+        for (const key of SAVE_KEYS) {
           let previous: string | null;
           try {
             previous = source.getItem(key);
@@ -52,7 +54,7 @@ export function createBrowserPlatform(storage?: Storage): Platform {
             // A failed validation cannot promote this checkpoint into recovery storage.
           }
         }
-        const backups = [`${KEY}.backup1`, `${KEY}.backup2`].filter((key) => readable.has(key));
+        const backups = BACKUP_KEYS.filter((key) => readable.has(key));
         // Choose against successful writes, so a failed rotation cannot duplicate
         // the remaining recovery slot or displace its only distinct checkpoint.
         for (const key of backups) {

@@ -2,6 +2,11 @@ import type { CloudSnapshot } from "./cloud-snapshots";
 
 /** Last duplicate wins without changing its original position; only ancestry retires a head. */
 export function newestHeads(records: readonly CloudSnapshot[]) {
+  if (!records.length) return [];
+  if (records.length === 1) {
+    const record = records[0]!;
+    return record.ancestors.includes(record.id) ? [] : [record];
+  }
   const byId = new Map<string, CloudSnapshot>();
   for (const record of records) byId.set(record.id, record);
   const unique = [...byId.values()];
