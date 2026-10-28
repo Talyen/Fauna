@@ -126,7 +126,7 @@ export function dependencyNotices(root, lock) {
   return { notices: sections.join("\n\n") + "\n", inventory };
 }
 
-export function generateInventory(root = ROOT) {
+export function generateInventory(root = ROOT, { runNpm = execFileSync } = {}) {
   const output = path.join(root, "dist");
   if (!statSync(path.join(output, "index.html"), { throwIfNoEntry: false })?.isFile())
     throw new Error("Build the renderer before generating its inventory.");
@@ -139,9 +139,22 @@ export function generateInventory(root = ROOT) {
     "--package-lock-only",
     "--sbom-format=cyclonedx",
   ]);
-  const sbom = JSON.parse(execFileSync(command, args, { cwd: root, encoding: "utf8", timeout: 60_000 }));
-  if (sbom.bomFormat !== "CycloneDX" || !Array.isArray(sbom.components) || !Array.isArray(sbom.dependencies))
+  const sbom = JSON.parse(runNpm(command, args, { cwd: root, encoding: "utf8", timeout: 60_000 }));
+  if (!lockBytes.equals(readFileSync(path.join(root, "package-lock.json"))))
+    throw new Error("Dependency lock changed during inventory generation; existing evidence is preserved.");
+  if (sbom?.bomFormat !== "CycloneDX" || !Array.isArray(sbom.components) || !Array.isArray(sbom.dependencies))
     throw new Error("Incomplete dependency SBOM.");
+  const component = sbom.metadata?.component;
+  if (
+    lock.name !== "fauna" ||
+    typeof lock.version !== "string" ||
+    !lock.version.trim() ||
+    component?.name !== lock.name ||
+    component.version !== lock.version ||
+    typeof component["bom-ref"] !== "string" ||
+    !component["bom-ref"].trim()
+  )
+    throw new Error("SBOM application identity differs from the dependency lock.");
   // Electron is a build dependency, but its runtime is distributed with the game.
   const electron = lock.packages["node_modules/electron"];
   const electronRef = `electron@${electron.version}`;

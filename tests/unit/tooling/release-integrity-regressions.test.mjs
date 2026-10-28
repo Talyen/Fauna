@@ -58,8 +58,11 @@ const bundledLicenses = [
   "NOTO-SANS-JP-LICENSE.txt",
   "NOTO-SANS-SC-LICENSE.txt",
 ];
-function noticesFixture(location = "node_modules/example", name = "example") {
-  const root = temporaryDirectory("fauna-inventory-validation-");
+function noticesFixture(
+  location = "node_modules/example",
+  name = "example",
+  root = temporaryDirectory("fauna-inventory-validation-"),
+) {
   for (const file of bundledLicenses) put(root, `Docs/${file}`, "Copyright and permission");
   put(root, `${location}/package.json`, JSON.stringify({ name, version: "1.0.0" }));
   put(root, `${location}/LICENSE`, "Copyright and permission");
@@ -196,4 +199,61 @@ it("validates spaced, uppercase, unquoted and token-list stylesheet references",
     archive(script + '<link rel="stylesheet" href="app.css">', { "dist/app.css": Buffer.from("body {}") })()
       .resources,
   ).toBe(2);
+});
+
+function inventoryFixture(existingRoot) {
+  const { root, lock } = noticesFixture(undefined, undefined, existingRoot);
+  Object.assign(lock, { name: "fauna", version: "1.0.0" });
+  lock.packages["node_modules/electron"] = { dev: true, version: "45.0.0" };
+  put(root, "package-lock.json", JSON.stringify(lock));
+  put(root, "dist/index.html", "<html></html>");
+  put(root, "dist/dependencies.cdx.json", "retained inventory");
+  put(root, "dist/THIRD-PARTY-NOTICES.txt", "retained notices");
+  const sbom = {
+    bomFormat: "CycloneDX",
+    components: [],
+    dependencies: [{ ref: "fauna@1.0.0", dependsOn: [] }],
+    metadata: { component: { name: "fauna", version: "1.0.0", "bom-ref": "fauna@1.0.0" } },
+  };
+  return { root, lock, sbom };
+}
+
+it("refuses an SBOM for another application or version without replacing existing evidence", () => {
+  const { root, sbom } = inventoryFixture();
+  for (const component of [
+    undefined,
+    { name: "other", version: "1.0.0", "bom-ref": "other" },
+    { name: "fauna", version: "2.0.0", "bom-ref": "fauna@2" },
+    { name: "fauna", version: "1.0.0", "bom-ref": " " },
+  ]) {
+    const runNpm = () => JSON.stringify({ ...sbom, metadata: { component } });
+    expect(() => generateInventory(root, { runNpm })).toThrow("SBOM application identity");
+  }
+  expect(readFileSync(path.join(root, "dist/dependencies.cdx.json"), "utf8")).toBe("retained inventory");
+  expect(readFileSync(path.join(root, "dist/THIRD-PARTY-NOTICES.txt"), "utf8")).toBe("retained notices");
+});
+
+it("rejects lockfile changes during npm inventory generation and retains old outputs", () => {
+  const { root, lock, sbom } = inventoryFixture();
+  const runNpm = () => {
+    put(root, "package-lock.json", JSON.stringify({ ...lock, version: "2.0.0" }));
+    return JSON.stringify(sbom);
+  };
+  expect(() => generateInventory(root, { runNpm })).toThrow("lock changed");
+  expect(readFileSync(path.join(root, "dist/dependencies.cdx.json"), "utf8")).toBe("retained inventory");
+  expect(readFileSync(path.join(root, "dist/THIRD-PARTY-NOTICES.txt"), "utf8")).toBe("retained notices");
+});
+
+it("writes a matching SBOM with Electron and the captured lockfile hash", () => {
+  const { root, lock, sbom } = inventoryFixture(
+    repository({ "source.txt": "fixture" }, "fauna-sbom-success-"),
+  );
+  expect(generateInventory(root, { runNpm: () => JSON.stringify(sbom) }).dependencies).toBe(1);
+  const saved = JSON.parse(readFileSync(path.join(root, "dist/dependencies.cdx.json"), "utf8"));
+  expect(saved.metadata.component).toEqual(sbom.metadata.component);
+  expect(saved.dependencies[0].dependsOn).toContain("electron@45.0.0");
+  expect(saved.metadata.properties).toContainEqual({
+    name: "fauna:package-lock-sha256",
+    value: createHash("sha256").update(JSON.stringify(lock)).digest("hex"),
+  });
 });
