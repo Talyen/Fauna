@@ -28,12 +28,17 @@ export function rankBalanceFindings(report) {
         report.pairs.map((pair) => pair.treatment?.[metric] - pair.baseline?.[metric]),
       );
       if (Math.abs(stats.mean) < threshold) continue;
-      const supported = stats.n >= MIN_SAMPLES && !stats.noisy;
+      const extremeSuccess =
+        metric === "win" &&
+        ["baseline", "treatment"].some((arm) =>
+          [0, 1].some((win) => report.pairs.every((pair) => pair[arm].win === win)),
+        );
+      const supported = stats.n >= MIN_SAMPLES && !stats.noisy && !extremeSuccess;
       add(
         supported ? "review" : "watch",
         `paired-${metric}`,
         `${label} changed`,
-        `Treatment minus baseline: ${stats.mean.toFixed(2)}; ${stats.n} pairs; standard error ${stats.standardError === null ? "unavailable" : stats.standardError.toFixed(2)}. ${supported ? "Above the review threshold and two standard errors." : "Limited or noisy evidence; collect more matched seeds."}`,
+        `Treatment minus baseline: ${stats.mean.toFixed(2)}; ${stats.n} pairs; standard error ${stats.standardError === null ? "unavailable" : stats.standardError.toFixed(2)}. ${supported ? "Above the review threshold and two standard errors." : extremeSuccess ? "Extreme observed success rates remain tentative; collect more matched seeds." : "Limited or noisy evidence; collect more matched seeds."}`,
         report.pairs.map((pair) => ({ key: pair.key, files: pair.evidence })),
         Math.abs(stats.mean) / threshold,
       );

@@ -1,3 +1,5 @@
+import { isDeepStrictEqual } from "node:util";
+
 const METRICS = ["win", "turns", "health", "encounter", "swaps", "currency", "xp"];
 export function validateBalanceMetrics(metrics, context) {
   for (const metric of METRICS)
@@ -23,9 +25,11 @@ export function pairedStats(deltas) {
   return { n, mean, standardError, noisy: standardError === null || Math.abs(mean) <= 2 * standardError };
 }
 export function compareBalance(baseline, treatment) {
-  const nonempty = (value) => typeof value === "string" && value.length > 0;
+  const nonempty = (value) => typeof value === "string" && value.trim().length > 0;
   const settings = (value) => value && typeof value === "object" && !Array.isArray(value);
   if (
+    !baseline ||
+    !treatment ||
     baseline.format !== 1 ||
     treatment.format !== 1 ||
     baseline.complete !== true ||
@@ -40,7 +44,7 @@ export function compareBalance(baseline, treatment) {
     !nonempty(treatment.identity) ||
     !settings(baseline.settings) ||
     !settings(treatment.settings) ||
-    JSON.stringify(baseline.settings) !== JSON.stringify(treatment.settings)
+    !isDeepStrictEqual(baseline.settings, treatment.settings)
   )
     throw new Error("Incomplete or incompatible balance reports.");
   if (
