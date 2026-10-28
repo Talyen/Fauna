@@ -7,7 +7,6 @@ export function createBrowserPlatform(storage?: Storage): Platform {
   return {
     desktop: false,
     diagnostics: browserDiagnostics(storage),
-    steam: { available: false },
     saves: {
       async readCandidates() {
         const source = storage ?? window.localStorage;

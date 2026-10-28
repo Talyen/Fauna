@@ -33,7 +33,6 @@ class MemoryStorage implements Storage {
 function platform(data: string | null = null): Platform {
   return {
     desktop: false,
-    steam: { available: false },
     saves: {
       async readCandidates() {
         return data ? [{ source: "primary", data }] : [];

@@ -6,6 +6,11 @@ import { MAX_CREATURE_STARS, KEYWORDS } from "./progression";
 import { SPECIES, BOONS, TALENTS } from "./content";
 import { JOURNEY_LENGTH } from "./encounters";
 import { MAX_BATTLE_TURN, MAX_REVISION, MAX_FALLEN_CARDS_PER_TURN, TURN_MANA } from "./state-limits";
+const encounter = z
+  .number()
+  .int()
+  .min(0)
+  .max(JOURNEY_LENGTH - 1);
 const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
 const speciesId = z.enum(SPECIES.map((entry) => entry.id));
@@ -61,16 +66,21 @@ const enemyDeck = z.object({
   mana: z.number().int().min(0).max(TURN_MANA),
   pearls: z.number().int().min(0).max(MAX_BATTLE_CARDS),
 });
-const minion = z.object({
+const enemy = z.object({
   id,
-  name: z.literal("Echo"),
-  species: z.literal("memento"),
+  name: z.string().max(100),
+  species: speciesId,
   health: natural,
   maxHealth: natural,
   power: z.number().min(1).max(2),
   targetId: id,
   block: natural,
   combat: combatStateSchema,
+  lastAbility: id.nullable(),
+});
+const minion = enemy.extend({
+  name: z.literal("Echo"),
+  species: z.literal("memento"),
   lastAbility: z.null(),
   minion: z.object({ ownerId: id, side: z.enum(["player", "enemy"]) }),
 });
@@ -93,21 +103,7 @@ const battle = z.object({
   buffer: z.array(id).max(MAX_BATTLE_CARDS),
   discard: z.array(id).max(MAX_BATTLE_CARDS),
   enemies: z
-    .array(
-      z.object({
-        id,
-        name: z.string().max(100),
-        species: speciesId,
-        health: natural,
-        maxHealth: natural,
-        power: z.number().min(1).max(2),
-        targetId: id,
-        block: natural,
-        combat: combatStateSchema,
-        lastAbility: id.nullable(),
-        deck: enemyDeck.optional(),
-      }),
-    )
+    .array(enemy.extend({ deck: enemyDeck.optional() }))
     .min(1)
     .max(3),
 });
@@ -150,11 +146,7 @@ const shared = z.object({
       }),
     )
     .max(MAX_BATTLE_CARDS),
-  encounter: z
-    .number()
-    .int()
-    .min(0)
-    .max(JOURNEY_LENGTH - 1),
+  encounter,
   keywordXP: xp,
   battleXP: xp,
   talents: z
@@ -174,11 +166,7 @@ const support = z
   .object({
     id,
     kind: z.literal("merchant"),
-    encounter: z
-      .number()
-      .int()
-      .min(0)
-      .max(JOURNEY_LENGTH - 1),
+    encounter,
     resolved: z.boolean(),
     purchased: boonId.nullable(),
     stock: z
@@ -193,6 +181,10 @@ const receipt = z.object({
   boons: z.array(boonId).max(3),
   outcome: z.enum(["next", "victory", "defeat"]),
 });
+const finalReceipt = receipt.extend({
+  recruits: z.array(speciesId).length(0),
+  boons: z.array(boonId).length(0),
+});
 const journey = z.object({
   outcome: z.enum(["victory", "defeat", "returned"]).nullable(),
   victories: z.number().int().min(0).max(JOURNEY_LENGTH),
@@ -202,11 +194,7 @@ const journey = z.object({
     .object({
       xp,
       currency: natural,
-      encounter: z
-        .number()
-        .int()
-        .min(0)
-        .max(JOURNEY_LENGTH - 1),
+      encounter,
       outcome: z.enum(["next", "victory", "defeat"]),
     })
     .nullable(),
@@ -219,13 +207,8 @@ const finished = { battle: z.null(), expedition, support: z.null() };
 const phases = z.discriminatedUnion("phase", [
   shared.extend({ phase: z.literal("draft"), ...destination, journey: z.null(), support: z.null() }),
   shared.extend({ phase: z.literal("teamSelection"), ...destination }),
-  shared.extend({ phase: z.literal("campfire"), ...destination, expedition }),
-  shared.extend({
-    phase: z.literal("support"),
-    ...destination,
-    expedition,
-    support: support.unwrap(),
-  }),
+  shared.extend({ phase: z.literal("campfire"), ...destination }),
+  shared.extend({ phase: z.literal("support"), ...destination, support: support.unwrap() }),
   shared.extend({
     phase: z.literal("battle"),
     battle,
@@ -242,7 +225,6 @@ const phases = z.discriminatedUnion("phase", [
       outcome: z.enum(["next", "victory"]),
       recruits: z.array(speciesId).min(1).max(3),
       selectedRecruit: speciesId.optional(),
-      boons: z.array(boonId).max(3),
     }),
   }),
   shared.extend({
@@ -259,11 +241,7 @@ const phases = z.discriminatedUnion("phase", [
     phase: z.literal("victory"),
     ...finished,
     journey: journey.extend({ outcome: z.literal("victory") }),
-    reward: receipt.extend({
-      outcome: z.literal("victory"),
-      recruits: z.array(speciesId).length(0),
-      boons: z.array(boonId).length(0),
-    }),
+    reward: finalReceipt.extend({ outcome: z.literal("victory") }),
   }),
 ]);
 
@@ -274,11 +252,7 @@ export const gameStateSchema = z.union([
     phase: z.literal("defeat"),
     ...finished,
     journey: journey.extend({ outcome: z.literal("defeat") }),
-    reward: receipt.extend({
-      outcome: z.literal("defeat"),
-      recruits: z.array(speciesId).length(0),
-      boons: z.array(boonId).length(0),
-    }),
+    reward: finalReceipt.extend({ outcome: z.literal("defeat") }),
   }),
   shared.extend({
     phase: z.literal("defeat"),

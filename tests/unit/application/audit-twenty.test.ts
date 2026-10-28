@@ -280,7 +280,6 @@ it("subscriptions have independent ownership and teardown revokes admission", as
   diagnostics.dispose();
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     saves: { readCandidates: async () => [], write: async () => {} },
   });
   await session.load();
@@ -312,7 +311,6 @@ it("expired Cloud installation cannot replace the session's newer offline comman
   const saves: string[] = [];
   const session = createSession({
     desktop: false,
-    steam: { available: false },
     cloud: f.port,
     saves: {
       readCandidates: async () => [],

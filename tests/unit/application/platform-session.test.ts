@@ -10,7 +10,6 @@ it("overlay activation revokes commands immediately and disposed subscriptions c
   const writes: string[] = [];
   const platform: Platform = {
     desktop: true,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [],
       write: async (data) => {
@@ -45,7 +44,6 @@ it("keeps local saving successful when cloud metadata cannot be written", async 
   let local = "";
   const session = createSession({
     desktop: true,
-    steam: { available: false },
     saves: {
       readCandidates: async () => [],
       write: async (data) => {
@@ -86,7 +84,6 @@ it("does not attempt cloud metadata or report pending sync when Steam is unavail
   let metadataWrites = 0;
   const session = createSession({
     desktop: true,
-    steam: { available: false },
     saves: { readCandidates: async () => [], write: async () => {} },
     cloud: {
       identity: async () => ({ available: false, device: "", profile: "", importAvailable: false }),
@@ -124,7 +121,6 @@ it.each(["quit", "dispose"] as const)(
     const quit = vi.fn(async () => {});
     const session = createSession({
       desktop: true,
-      steam: { available: false },
       quit,
       saves: {
         readCandidates: async () => [],
