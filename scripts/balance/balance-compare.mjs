@@ -7,6 +7,34 @@ import { compareBalance } from "./paired-balance.mjs";
 import { writeBalanceFindings } from "./balance-findings.mjs";
 import { pruneBalanceReports, sealBalanceReport } from "./report-retention.mjs";
 const load = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
+export function experimentConfigs(checkpoint, loadouts) {
+  const state = JSON.parse(checkpoint);
+  if (
+    state?.phase !== "battle" ||
+    !Number.isSafeInteger(state.rng) ||
+    state.rng < 0 ||
+    state.rng > 0xffffffff ||
+    !Array.isArray(state.team) ||
+    typeof state.team[0]?.species !== "string" ||
+    !state.team[0].species
+  )
+    throw new Error("Experiment requires a current battle checkpoint with a deployed creature.");
+  for (const arm of ["baseline", "treatment"]) {
+    const loadout = loadouts?.[arm];
+    if (
+      !loadout ||
+      ![loadout.talents, loadout.boons].every(
+        (ids) => Array.isArray(ids) && ids.every((id) => typeof id === "string" && id.length > 0),
+      )
+    )
+      throw new Error("Provide baseline and treatment talent/boon ID arrays.");
+  }
+  return ["baseline", "treatment"].map((arm) => ({
+    key: "battle",
+    arm,
+    config: { checkpoint, seed: state.rng, starter: state.team[0].species, loadout: loadouts[arm] },
+  }));
+}
 export async function worker(input, output) {
   if (!output || !path.resolve(output).startsWith(path.join(ROOT, "reports") + path.sep))
     throw new Error("Worker reports must remain under reports/.");
@@ -130,18 +158,7 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
       throw new Error("Experiment requires only --checkpoint and --loadouts.");
     const checkpoint = await readFile(path.resolve(options["--checkpoint"]), "utf8");
     const loadouts = await load(options["--loadouts"]);
-    if (!loadouts.baseline || !loadouts.treatment)
-      throw new Error("Provide baseline and treatment talent/boon lists.");
-    configs = ["baseline", "treatment"].map((arm) => ({
-      key: "battle",
-      arm,
-      config: {
-        checkpoint,
-        seed: JSON.parse(checkpoint).rng,
-        starter: JSON.parse(checkpoint).roster[0],
-        loadout: loadouts[arm],
-      },
-    }));
+    configs = experimentConfigs(checkpoint, loadouts);
   }
   const controller = new AbortController();
   const cancel = () => controller.abort();
