@@ -108,7 +108,7 @@ npm run balance:compare -- replay reports/balance/smoke/case-0.json
 | Interruption        | Stop/wait for the owned worker before another case; preserve incomplete reports rather than counting timeouts as defeats                                                          |
 | Species attribution | Record requested `starter` and first accepted `actualStarter`; fallback or unrecorded drafts become coverage watch items, not results for the requested species                   |
 
-More preferences on the same seeds do not establish independent opening matchups. Comparisons require matching settings and initial checkpoint hashes; explicitly identified code/content changes are allowed. `comparison.json` reports paired mean differences and standard errors for wins, turns, remaining roster Health, encounter reached, swaps, retained Gold and XP. Effects within two standard errors are noisy; a single pair cannot estimate uncertainty. These are automated-policy observations.
+Use a fresh empty output directory for each run or comparison; concurrent writers and existing evidence are rejected. Seeds are comma-separated unsigned decimal integers without empty entries. More preferences on the same seeds do not establish independent opening matchups. Comparisons require matching settings and initial checkpoint hashes; explicitly identified code/content changes are allowed. `comparison.json` reports paired mean differences and standard errors for wins, turns, remaining roster Health, encounter reached, swaps, retained Gold and XP. Effects within two standard errors are noisy; a single pair cannot estimate uncertainty. These are automated-policy observations.
 
 For a controlled two-arm experiment:
 
