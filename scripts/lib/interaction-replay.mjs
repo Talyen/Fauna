@@ -44,7 +44,7 @@ export async function shrinkTrace(
   replay,
   { attempts = 40, deadlineMs = 30000, now = Date.now } = {},
 ) {
-  let minimal = [...actions],
+  let minimal = structuredClone(actions),
     tried = 0,
     width = Math.ceil(minimal.length / 2);
   const deadline = now() + deadlineMs;
@@ -54,7 +54,7 @@ export async function shrinkTrace(
       const candidate = minimal.slice(0, start).concat(minimal.slice(start + width));
       if (!candidate.length) continue;
       tried++;
-      const result = await replay(candidate);
+      const result = await replay(structuredClone(candidate));
       if (result.valid && result.failure === failure) {
         minimal = candidate;
         reduced = true;
@@ -96,4 +96,17 @@ export function validateInteractionReport(report) {
       throw new Error("Missing or invalid interaction checkpoint hash.");
   }
   return report;
+}
+
+/** Attempt every owned cleanup and retain the final report even if a close fails. */
+export async function finishInteractionRun(closeBrowser, closeServer, saveReport) {
+  try {
+    await closeBrowser();
+  } finally {
+    try {
+      await closeServer();
+    } finally {
+      await saveReport();
+    }
+  }
 }
