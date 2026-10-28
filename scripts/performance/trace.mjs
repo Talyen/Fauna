@@ -43,9 +43,11 @@ export async function beginTrace(page, file) {
         if (chunk.eof) break;
       }
       const raw = Buffer.concat(chunks);
-      await writeFile(file, raw);
       if (full || result.dataLossOccurred) throw new Error("Trace dropped events or exhausted its buffer");
-      return JSON.parse(raw.toString("utf8"));
+      const trace = JSON.parse(raw.toString("utf8"));
+      if (!Array.isArray(trace?.traceEvents)) throw new Error("Invalid trace event stream");
+      await writeFile(file, raw);
+      return trace;
     } catch (error) {
       if (chunks.length) await writeFile(`${file}.partial`, Buffer.concat(chunks));
       throw error;
@@ -71,11 +73,11 @@ const category = (name) =>
 /** Clip to the marked renderer thread; only exclusive innermost work is added to totals. */
 export function attributeTrace(trace, sample, hitches) {
   const events = trace.traceEvents ?? [];
-  if (trace.dataLossOccurred || events.length > 200000)
+  if (!Array.isArray(events) || trace.dataLossOccurred || events.length > 200000)
     return { available: false, reason: "Incomplete trace or attribution event budget exceeded" };
-  const start = events.find((event) => event.name === "fauna-capture-start");
+  const start = events.find((event) => event?.name === "fauna-capture-start");
   const end = events.find(
-    (event) => event.name === "fauna-capture-end" && event.pid === start?.pid && event.tid === start?.tid,
+    (event) => event?.name === "fauna-capture-end" && event.pid === start?.pid && event.tid === start?.tid,
   );
   if (
     !start ||
@@ -93,21 +95,41 @@ export function attributeTrace(trace, sample, hitches) {
   const offset = start.ts / 1000 - sample.markerStart;
   if (Math.abs(end.ts / 1000 - offset - sample.markerEnd) > 5)
     return { available: false, reason: "Trace and renderer clocks did not align" };
+  if (
+    events.some(
+      (event) =>
+        event?.pid === start.pid &&
+        event.tid === start.tid &&
+        ["B", "E", "X"].includes(event.ph) &&
+        (!Number.isFinite(event.ts) ||
+          (event.ph === "X" &&
+            (!Number.isFinite(event.dur) || event.dur < 0 || !Number.isFinite(event.ts + event.dur)))),
+    )
+  )
+    return { available: false, reason: "Invalid renderer trace interval" };
   const spans = [],
     stack = [];
   for (const event of events
-    .filter((event) => event.pid === start.pid && event.tid === start.tid)
+    .filter(
+      (event) => event && Number.isFinite(event.ts) && event.pid === start.pid && event.tid === start.tid,
+    )
     .sort((a, b) => a.ts - b.ts)) {
     if (event.ph === "B") stack.push(event);
     if (event.ph === "E") {
       const begin = stack.pop();
-      if (begin && category(begin.name)) spans.push({ ...begin, dur: event.ts - begin.ts });
+      if (begin && category(begin.name)) {
+        const duration = event.ts - begin.ts;
+        if (!Number.isFinite(duration) || duration < 0)
+          return { available: false, reason: "Invalid renderer trace interval" };
+        spans.push({ ...begin, dur: duration });
+      }
     }
     if (
       event.ph === "X" &&
       Number.isFinite(event.ts) &&
       Number.isFinite(event.dur) &&
       event.dur >= 0 &&
+      Number.isFinite(event.ts + event.dur) &&
       category(event.name)
     )
       spans.push(event);

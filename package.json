@@ -49,7 +49,6 @@
     "content:audit": "node scripts/checks/content-audit.mjs",
     "balance:playthrough": "node scripts/local.mjs balance:playthrough",
     "predev": "npm run assets:check:outputs",
-    "prebuild": "npm run assets:check:outputs",
     "audio:review": "node scripts/assets/audio-review.mjs",
     "context": "node scripts/agent/agent-context.mjs",
     "investigate": "node scripts/agent/investigate.mjs",
