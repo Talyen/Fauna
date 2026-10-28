@@ -5,11 +5,13 @@ export function summarizeSample(sample) {
     sample.frames.some(
       (frame, index) =>
         !Number.isFinite(frame.start) ||
+        frame.start < 0 ||
         !Number.isFinite(frame.end) ||
         !Number.isFinite(frame.duration) ||
         frame.duration <= 0 ||
         Math.abs(frame.end - frame.start - frame.duration) > 0.01 ||
-        (index > 0 && frame.start < sample.frames[index - 1].end),
+        (index > 0 &&
+          (frame.start < sample.frames[index - 1].end || frame.start - sample.frames[index - 1].end > 0.01)),
     )
   )
     throw new Error("Incomplete: fewer than 60 usable frame samples.");
@@ -26,14 +28,18 @@ export function summarizeSample(sample) {
           entries.length > 12000 ||
           entries.some(
             (entry) =>
-              !Number.isFinite(entry.start) || !Number.isFinite(entry.duration) || entry.duration < 0,
+              !Number.isFinite(entry.start) ||
+              entry.start < 0 ||
+              !Number.isFinite(entry.duration) ||
+              entry.duration < 0,
           )),
     )
   )
     throw new Error("Invalid observer timeline.");
   if (
     (sample.spans ?? []).some(
-      (span) => !Number.isFinite(span.start) || !Number.isFinite(span.end) || span.end < span.start,
+      (span) =>
+        !Number.isFinite(span.start) || span.start < 0 || !Number.isFinite(span.end) || span.end < span.start,
     ) ||
     (sample.spans?.length ?? 0) > 12000
   )
@@ -41,14 +47,18 @@ export function summarizeSample(sample) {
   if (
     !sample.segments?.length ||
     sample.segments.some(
-      (s) =>
+      (s, index) =>
         s.complete !== true ||
         !Number.isFinite(s.start) ||
+        s.start < 0 ||
         !Number.isFinite(s.end) ||
         !Number.isFinite(s.duration) ||
         Math.abs(s.end - s.start - s.duration) > 0.1 ||
         s.end <= s.start ||
         s.duration <= 0 ||
+        (index > 0 && s.start < sample.segments[index - 1].end) ||
+        s.end <= sample.frames[0].start ||
+        s.start >= sample.frames[sample.frames.length - 1].end ||
         !Number.isSafeInteger(s.frames) ||
         s.frames < 10 ||
         s.frames > sample.frames.length,
