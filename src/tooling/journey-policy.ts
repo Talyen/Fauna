@@ -91,8 +91,16 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
       case "ribbon-spool":
         return kinds.length > 1 ? 50 : 0;
       case "dawn-key":
+      case "suncrust-rolling-pin":
+      case "brass-censer":
         return has.has("light") ? 60 : 0;
       case "crystal-slipper":
+      case "skyiron-horseshoe":
+      case "acrobat-top":
+      case "vanishing-hat":
+      case "quiet-pinwheel":
+      case "leafwing-shuttlecock":
+      case "echo-ocarina":
         return has.has("dodge") ? 60 : 30;
       case "moonseed":
         return has.has("light") && hasThorns() ? 60 : 0;
@@ -104,19 +112,38 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
         return effect("heal") || kits().some((kit) => kit.healing) ? 50 : 0;
       case "cuckoo-whistle":
       case "nightbloom-bell":
+      case "dew-pendulum":
+      case "rootvault-pole":
+      case "hearth-coal":
+      case "vigil-lantern":
+      case "gemmed-scabbard":
+      case "knot-comb":
+      case "basalt-glass-bookmark":
         return 40;
       case "orchard-ladder-charm":
         return createsFood() && hasLivingBackup() ? 60 : 0;
       case "spore-trivet":
         return createsFood() ? 50 : 0;
       case "victory-laurel":
+      case "cornucopia":
+      case "bone-charm":
         return 70;
       case "gilt-gauntlet":
+      case "stardust-whetstone":
         return has.has("physical") ? 60 : 0;
       case "pumice-glass-inkwell":
+      case "blooming-still":
+      case "miracle-megaphone":
+      case "thistle-sieve":
+      case "calendula-soap":
+      case "orbit-armillary":
         return has.has("cleanse") || state.boons.includes("knot-comb") ? 50 : 0;
       case "chime-crucible":
       case "crystal-harp":
+      case "asteroid-hammer":
+      case "acorn-skittle":
+      case "thunder-conch":
+      case "tuning-fork-charm":
         return has.has("stun") ? 60 : 0;
       case "orbit-tongs":
         return kinds.length > 1 &&
@@ -132,39 +159,55 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
         return has.has("light") ? 50 : 0;
       case "ember-platter":
       case "ash-bowl":
+      case "chestnut-roaster":
+      case "ashfall-pendant":
+      case "lava-cameo":
+      case "last-candle":
+      case "molten-paperweight":
+      case "cinder-fan":
         return has.has("burn") ? 60 : 0;
       case "mossball":
+      case "pollen-basket":
         return kinds.length > 1 && hasThorns() ? 60 : 0;
       case "treaty-teapot":
+      case "briar-racquet":
         return hasThorns() ? 50 : 0;
       case "nebula-weld-clamp":
+      case "honeycomb-frame":
         return has.has("armor") ? 50 : 0;
       case "clover-measuring-scoop":
+      case "yarrow-salve-tin":
+      case "lovers-knot":
+      case "last-threshold":
+      case "groves-favor":
         return canHeal() ? 60 : 0;
       case "dawn-gong":
         return kinds.length > 1 ? 40 : 0;
-      case "skyiron-horseshoe":
-      case "acrobat-top":
-      case "vanishing-hat":
-        return has.has("dodge") ? 60 : 30;
       case "rocking-chair-charm":
         return hasLivingBackup() ? 50 : 0;
-      case "asteroid-hammer":
-        return has.has("stun") ? 60 : 0;
       case "snowbell":
       case "solstice-concertina":
       case "moonpath-divider":
+      case "frostglass-die":
+      case "frozen-pocketwatch":
         return has.has("freeze") ? 60 : 0;
       case "harvest-sickle":
+      case "harvest-shears":
         return has.has("bleed") ? 60 : 0;
       case "meadow-mortar":
         return has.has("poison") && has.has("purge") ? 60 : 0;
       case "rosewax-seal":
       case "rootspool":
+      case "tidecrest-hairpin":
+      case "comb-uncapping-fork":
+      case "resonance-kalimba":
+      case "thornheart-ring":
         return hasThorns() ? 60 : 0;
       case "crown-waffle-iron":
         return createsFood() && has.has("block") ? 60 : 0;
       case "beeswax-crown":
+      case "folded-mountain":
+      case "cypress-reliquary":
         return has.has("armor") ? 60 : 0;
       case "overflow-cup":
         return canHeal() && kinds.length > 1 ? 60 : 0;
@@ -175,37 +218,38 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
         return has.has("cleanse") || state.boons.includes("knot-comb") ? 60 : 0;
       case "winterseed":
         return has.has("block") ? 40 : 0;
-      case "cornucopia":
-        return 70;
-      case "suncrust-rolling-pin":
-        return has.has("light") ? 60 : 0;
-      case "dew-pendulum":
-        return 40;
-      case "quiet-pinwheel":
-        return has.has("dodge") ? 60 : 30;
       case "lagoon-chalice":
         return has.has("water") && has.has("block") ? 60 : 0;
-      case "acorn-skittle":
-        return has.has("stun") ? 60 : 0;
       case "wonder-kaleidoscope":
+      case "star-hoop":
         return hasReflection() ? 50 : 0;
       case "welcome-doormat":
         return canSwap() ? 50 : 0;
       case "shelter-lantern":
         return has.has("block") ? 50 : 0;
-      case "chestnut-roaster":
-        return has.has("burn") ? 60 : 0;
       case "chamomile-compress":
         return canHeal() ? 50 : 0;
       case "cadence-panpipes":
+      case "chromatic-viol":
+      case "aether-gramophone":
+      case "dream-tangram":
+      case "eclipse-protractor":
+      case "crescent-sextant":
+      case "coral-net-weight":
+      case "crater-punch":
+      case "dream-yo-yo":
+      case "wonder-domino":
         return has.has("attack") ? 50 : 0;
       case "hearthcap-kettle":
+      case "sovereign-toast-rack":
+      case "pumpkin-tureen":
+      case "field-lunch-basket":
+      case "blossom-cake-stand":
+      case "nectar-dipper":
+      case "velvet-whisk":
         return effect("createFood") || kinds.includes("aerostat") ? 60 : 0;
       case "caravan-rug":
         return has.has("block") && hasLivingBackup() ? 60 : 0;
-      case "folded-mountain":
-      case "cypress-reliquary":
-        return has.has("armor") ? 60 : 0;
       case "apple-press":
         return has.has("bleed") ||
           (has.has("physical") &&
@@ -216,40 +260,26 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
           (has.has("poison") && state.talents.includes("poison.hemotoxin"))
           ? 60
           : 0;
-      case "pollen-basket":
-        return kinds.length > 1 && hasThorns() ? 60 : 0;
       case "farewell-oar":
         return canSwap() && has.has("block") ? 60 : 0;
       case "oasis-seed":
         return kinds.length > 1 && canHeal() && has.has("attack") ? 60 : 0;
       case "bellows-heart":
         return canHeal() && has.has("burn") ? 60 : 0;
-      case "leafwing-shuttlecock":
-      case "echo-ocarina":
-        return has.has("dodge") ? 60 : 30;
       case "soot-brush":
         return has.has("cleanse") || state.boons.includes("knot-comb") ? 40 : 0;
       case "glassleaf-shield":
+      case "cloud-cup-and-ball":
+      case "fallingstar-anvil":
+      case "pleated-pagoda":
+      case "moss-oven-mitt":
+      case "rain-cape":
         return has.has("block") ? 60 : 0;
-      case "harvest-shears":
-        return has.has("bleed") ? 60 : 0;
-      case "frostglass-die":
-        return has.has("freeze") ? 60 : 0;
       case "reef-diadem":
         return has.has("water") && hasThorns() ? 60 : 0;
-      case "chromatic-viol":
-        return has.has("attack") ? 50 : 0;
       case "mirror-locket":
+      case "obsidian-pitcher":
         return has.has("leech") ? 60 : 0;
-      case "aether-gramophone":
-      case "dream-tangram":
-      case "eclipse-protractor":
-      case "crescent-sextant":
-      case "coral-net-weight":
-      case "crater-punch":
-      case "dream-yo-yo":
-      case "wonder-domino":
-        return has.has("attack") ? 50 : 0;
       case "herbarium-press":
         return has.has("poison") && has.has("freeze") ? 50 : 0;
       case "honey-press":
@@ -263,54 +293,13 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
       case "accordioned-bridge":
       case "tide-anklet":
         return canSwap() ? 60 : 0;
-      case "tidecrest-hairpin":
-        return hasThorns() ? 60 : 0;
-      case "stardust-whetstone":
-        return has.has("physical") ? 60 : 0;
-      case "ashfall-pendant":
-      case "lava-cameo":
-      case "last-candle":
-      case "molten-paperweight":
-      case "cinder-fan":
-        return has.has("burn") ? 60 : 0;
       case "wishing-building-block":
         return has.has("armor") && kinds.length > 1 ? 60 : 0;
-      case "sovereign-toast-rack":
-      case "pumpkin-tureen":
-      case "field-lunch-basket":
-      case "blossom-cake-stand":
-      case "nectar-dipper":
-      case "velvet-whisk":
-        return effect("createFood") || kinds.includes("aerostat") ? 60 : 0;
       case "hoard-lockplate":
       case "geode-anvil":
       case "origami-staircase":
       case "wax-foundation-mold":
         return has.has("armor") && has.has("block") ? 60 : 0;
-      case "rootvault-pole":
-      case "hearth-coal":
-      case "vigil-lantern":
-      case "gemmed-scabbard":
-      case "knot-comb":
-      case "basalt-glass-bookmark":
-        return 40;
-      case "star-hoop":
-        return hasReflection() ? 50 : 0;
-      case "blooming-still":
-      case "miracle-megaphone":
-      case "thistle-sieve":
-      case "calendula-soap":
-      case "orbit-armillary":
-        return has.has("cleanse") || state.boons.includes("knot-comb") ? 50 : 0;
-      case "yarrow-salve-tin":
-      case "lovers-knot":
-      case "last-threshold":
-      case "groves-favor":
-        return canHeal() ? 60 : 0;
-      case "comb-uncapping-fork":
-      case "resonance-kalimba":
-      case "thornheart-ring":
-        return hasThorns() ? 60 : 0;
       case "fern-fencing-foil":
         return has.has("dodge") ? 60 : 0;
       case "reef-casket":
@@ -322,13 +311,12 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
       case "eclipse-rivet":
         return kinds.length > 1 && has.has("armor") ? 50 : 0;
       case "poppy-seed-grinder":
+      case "parasitic-bloom":
         return has.has("poison") ? 60 : 0;
       case "reef-incense-tile":
         return has.has("water") && hasBlind() ? 60 : 0;
       case "coral-music-box":
         return has.has("block") && has.has("water") ? 60 : 0;
-      case "obsidian-pitcher":
-        return has.has("leech") ? 60 : 0;
       case "grain-flail":
         return has.has("attack") ? 60 : 0;
       case "comet-crucible":
@@ -361,15 +349,6 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
         return kinds.length > 1 ? 60 : 0;
       case "raincatcher-bowl":
         return has.has("water") ? 80 : 0;
-      case "thunder-conch":
-      case "tuning-fork-charm":
-        return has.has("stun") ? 60 : 0;
-      case "cloud-cup-and-ball":
-      case "fallingstar-anvil":
-      case "pleated-pagoda":
-      case "moss-oven-mitt":
-      case "rain-cape":
-        return has.has("block") ? 60 : 0;
       case "echo-lens":
         return effect("dreamDouble") || effect("sparkDecoy") ? 50 : 0;
       case "saddle-pouch":
@@ -384,12 +363,8 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
           3
           ? 60
           : 0;
-      case "briar-racquet":
-        return hasThorns() ? 50 : 0;
       case "pruning-crescent":
         return has.has("purge") || kits().some((kit) => kit.purgeThorns) ? 50 : 0;
-      case "honeycomb-frame":
-        return has.has("armor") ? 50 : 0;
       case "rainkeeper":
         return has.has("mana") || state.boons.includes("resonant-chimes") ? 60 : 0;
       case "furnace-prism":
@@ -400,8 +375,6 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
         return 90;
       case "tattered-pages":
         return 80;
-      case "bone-charm":
-        return 70;
       case "ironwood-buckler":
         return has.has("block") ? 70 : 0;
       case "icy-heart":
@@ -415,10 +388,6 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
           : 0;
       case "thunderstone":
         return has.has("stun") ? 70 : 0;
-      case "brass-censer":
-        return has.has("light") ? 60 : 0;
-      case "parasitic-bloom":
-        return has.has("poison") ? 60 : 0;
       case "cutpurse-knife":
         return has.has("bleed") ? 40 : 0;
       case "merchants-favor":
@@ -429,8 +398,6 @@ function boonScorer(state: GameState, kinds = livingRosterKinds(state), has = ca
         return has.has("physical") || has.has("stun") ? 75 : 0;
       case "smugglers-map":
         return 20;
-      case "frozen-pocketwatch":
-        return has.has("freeze") ? 60 : 0;
       case "lucky-clover":
         return has.has("nature") ? 40 : 0;
       default: {
