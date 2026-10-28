@@ -84,11 +84,14 @@ it.each(["failures", "full"])("records the accepted draft with %s evidence", asy
     await main(
       ["run", "--starters", "mossguard", "--seeds", "1", "--evidence", evidence, "--out", directory],
       {
+        sourceIdentity: async () => "code",
+        pruneReports: async () => {},
         runCase: async (_input, output) => {
           await writeFile(
             output,
             JSON.stringify({
               complete: true,
+              identity: "code",
               base: "base",
               initial: "initial",
               settings: {},
