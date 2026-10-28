@@ -1,7 +1,6 @@
 import { deferred } from "../../support/deferred";
 import { cloudFixture as fixture, cloudIdentity as identity } from "../../support/cloud";
 import { expect, it, vi } from "vitest";
-import { createCloud } from "../../../src/application/cloud";
 import { snapshot, parseSnapshot, cloudName } from "../../../src/application/cloud-snapshots";
 import { newestHeads } from "../../../src/application/cloud-policy";
 import { createGame, dispatch } from "../../../src/game/engine";
@@ -15,18 +14,16 @@ const progress = encodeSave(
 );
 it("keeps published cloud status immutable so consumers cannot change retry decisions", async () => {
   vi.useFakeTimers();
-  const f = fixture();
+  const mutations: boolean[] = [];
+  const f = fixture({
+    publish: (view) => {
+      mutations.push(Reflect.set(view, "status", "Synced"));
+    },
+  });
+  const { manager } = f;
   f.port.list = vi.fn(async () => {
     throw new Error("offline");
   });
-  const mutations: boolean[] = [];
-  const manager = createCloud(
-    f.port,
-    (view) => {
-      mutations.push(Reflect.set(view, "status", "Synced"));
-    },
-    f.install,
-  );
   try {
     expect(Reflect.set(manager.view, "blocking", true)).toBe(false);
     await manager.start(initial);
@@ -39,26 +36,19 @@ it("keeps published cloud status immutable so consumers cannot change retry deci
     expect(vi.mocked(f.port.list).mock.calls.length).toBeGreaterThan(reads);
   } finally {
     await manager.dispose();
-    await f.manager.dispose();
     vi.useRealTimers();
   }
 });
 it.each(["offline", "dispose"] as const)(
   "does not begin an identity lookup after a startup subscriber requests %s",
   async (action) => {
-    const f = fixture();
-    const identify = (f.port.identity = vi.fn(f.port.identity));
-    let manager!: ReturnType<typeof createCloud>;
-    manager = createCloud(
-      f.port,
-      (view) => {
-        if (view.status === "Syncing") {
-          if (action === "offline") manager.offline();
-          else void manager.dispose();
-        }
+    const f = fixture({
+      publish: (view) => {
+        if (view.status === "Syncing") void f.manager[action]();
       },
-      f.install,
-    );
+    });
+    const { manager } = f;
+    const identify = vi.mocked(f.port.identity);
     try {
       await manager.start(initial);
       expect(identify).not.toHaveBeenCalled();
@@ -66,29 +56,24 @@ it.each(["offline", "dispose"] as const)(
       expect(f.install).not.toHaveBeenCalled();
     } finally {
       await manager.dispose();
-      await f.manager.dispose();
     }
   },
 );
 it.each(["offline", "dispose"] as const)(
   "does not begin an upload after a syncing subscriber requests %s",
   async (action) => {
-    const f = fixture();
-    const write = (f.port.write = vi.fn(f.port.write));
     let armed = false;
     let syncing = 0;
-    let manager!: ReturnType<typeof createCloud>;
-    manager = createCloud(
-      f.port,
-      (view) => {
+    const f = fixture({
+      publish: (view) => {
         if (armed && view.status === "Syncing" && ++syncing === 2) {
           armed = false;
-          if (action === "offline") manager.offline();
-          else void manager.dispose();
+          void f.manager[action]();
         }
       },
-      f.install,
-    );
+    });
+    const { manager } = f;
+    const write = vi.mocked(f.port.write);
     try {
       await manager.start(null);
       armed = true;
@@ -98,7 +83,6 @@ it.each(["offline", "dispose"] as const)(
       expect((await parseSnapshot(f.local.data!, identity.profile)).payload).toBe(progress);
     } finally {
       await manager.dispose();
-      await f.manager.dispose();
     }
   },
 );
@@ -795,16 +779,13 @@ it("durably restores metadata when recovering this device's remote checkpoint", 
 });
 
 it("flush drains progress admitted by an upload-completion subscriber", async () => {
-  const f = fixture();
-  let manager: ReturnType<typeof createCloud>;
   let committed: Promise<void> | undefined;
-  manager = createCloud(
-    f.port,
-    (view) => {
-      if (view.status === "Synced" && !committed) committed = manager.commit(progress);
+  const f = fixture({
+    publish: (view) => {
+      if (view.status === "Synced" && !committed) committed = f.manager.commit(progress);
     },
-    f.install,
-  );
+  });
+  const { manager } = f;
   try {
     await manager.start(initial);
     await manager.flush();
@@ -815,6 +796,5 @@ it("flush drains progress admitted by an upload-completion subscriber", async ()
   } finally {
     await committed;
     await manager.dispose();
-    await f.manager.dispose();
   }
 });

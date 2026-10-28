@@ -54,6 +54,8 @@ Temporary Dodge expires at the owner's next turn, including in backup or on a sk
 
 Leech restores half damage dealt, including damage absorbed by Block, capped by applicable Armor, overkill and maximum Health. Bleed defers its Leech until the later Bleed tick; cleansing Bleed cancels that pending payout. Healing does not revive during combat. Enemies have no automatic round healing; healing requires an ability or passive.
 
+Automatic group and most-injured healing normally include living deployed allies, including Minions. Camp Hammock extends those recipient pools and healing bounces to living backup allies through [healingAllies](../src/game/battlefield.ts). It does not activate backup passives, make backups selectable for ordinary ally-targeted cards or revive knockouts. Recipient-only follow-ups, such as Mending Spring’s Cleanse, apply to the same automatically selected recipient.
+
 ### Cleanse and Purge
 
 Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward, Negate and Attack Reflection, each as a separate beneficial category. Both remove up to the card's stated number of categories.

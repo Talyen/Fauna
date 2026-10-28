@@ -60,6 +60,8 @@ The changed-file gate has a 90-second command deadline; one exact regression and
 
 Focused visual preview/capture required by [UI review](Docs/UI.md#required-review) remains authorized, using the development preview without a production build where possible. That exception does not authorize browser suites or performance matrices. Use isolated profiles and close only owned processes. Input fingerprints detect repository changes during checks; captures retain reproducible identities. Report actual checks and relevant unverified platforms; only exact-commit results establish CI completion.
 
+On this Mac, wrap the outermost capture or rendered inspection command with `python3 /Users/ryanmcintire/Developer/.coordination/heavy_lane.py --owner "$CODEX_THREAD_ID" --wait 900 --timeout 300 -- <command>`; `npm run ui:guide -- <small|interaction|layout> <scenario>` prints wrapped capture commands. Start persistent preview servers outside the bounded wrapper, then perform rendered inspection within its lease and close only owned processes. See `/Users/ryanmcintire/Developer/.coordination/README.md` for admission and recovery.
+
 ### Advanced selection and diagnostics
 
 Use the [tool selection reference](Docs/DEVELOPMENT_TOOLS.md#task-selection-and-diagnostics) for base overrides, review layers, remembered suites and bounded investigations. Moving or retiring a required suite requires updating the owner registry, including changed/deleted CI-owned entries. `verify` aliases `verify:changed`; `test:full` and `check:full` retain full-suite coverage on every branch when run in CI or with the explicit local opt-in.
