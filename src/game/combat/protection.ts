@@ -242,6 +242,8 @@ export function* grantBlock(
     }
   }
   // Conversion healing can trigger reactions that knock out the Block recipient.
+  // It can also grant Block before this pending grant resumes.
+  gained = Math.min(gained, Math.max(0, STACK_LIMIT - unit.block));
   if (!gained || unit.health <= 0) return;
   unit.block += gained;
   events.push({
@@ -320,7 +322,7 @@ export function* leechHealth(
   afflicted = false,
   target?: Combatant,
 ): Resolution<void> {
-  if (dealt <= 0) return;
+  if (dealt <= 0 || unit.health <= 0) return;
   let amount = dealt / 2;
   if (!isEnemy(unit)) {
     if (afflicted && hasTalent(state, "leech.affliction-siphon"))
@@ -332,7 +334,8 @@ export function* leechHealth(
   const leechRestoration = restoration(unit, healingValue(state, unit, amount));
   const excess = leechRestoration.excess;
   yield* reaction("restoreHealth", unit, amount, events, false, state);
-  const restored = unit.health - before;
+  // Subsequent healing reactions can change Health after this Leech already restored it.
+  const restored = leechRestoration.gain;
   if (!isEnemy(unit) && unit.health > 0 && leechRestoration.gain > 0 && state.boons.includes("mirror-locket"))
     yield* reaction(
       "grantBlock",
@@ -341,17 +344,17 @@ export function* leechHealth(
       Math.round(leechRestoration.gain / boonRule("mirror-locket").divisor),
       events,
     );
-  if (!isEnemy(unit) && restored > 0) {
+  if (!isEnemy(unit) && unit.health > 0 && restored > 0) {
     if (talentChance(state, "leech.blood-debt", events)) gainGold(state, restored, events);
     if (
       hasTalent(state, "leech.sanguine-overflow") &&
       before < maximumHealth(unit) &&
-      unit.health === maximumHealth(unit)
+      before + restored === maximumHealth(unit)
     )
       yield* reaction("gainMana", state, talentRule("leech.sanguine-overflow").amount, events);
-    if (talentChance(state, "leech.bloodletting", events))
+    if (unit.health > 0 && talentChance(state, "leech.bloodletting", events))
       yield* reaction("removeEffects", unit, "cleanse", 1, events, state);
-    if (talentChance(state, "leech.mana-siphon", events))
+    if (unit.health > 0 && talentChance(state, "leech.mana-siphon", events))
       yield* reaction("gainMana", state, talentRule("leech.mana-siphon").amount, events);
   }
   if (
