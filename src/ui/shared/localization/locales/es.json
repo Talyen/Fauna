@@ -1453,9 +1453,9 @@
   },
   "content.boon.mineral-bookend.rule": {
     "reviewed": true,
-    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "d97023cf25fcfe0e1fdb343cd3b637ab81ad5960fe9e8514ee84f48476c79a8e",
-    "text": "Robar la última carta del mazo de robo restaura {{value0}} de <keyword0>Maná</keyword0>"
+    "source": "Drawing the last card in your draw pile grants {{value0}} <keyword0>Block</keyword0> to all allies",
+    "sourceHash": "5c4b29a0cfa8cb8348225681bffa44f36e3edb06d5603bb85527c5b14d5b42c5",
+    "text": "Robar la última carta del mazo de robo otorga {{value0}} de <keyword0>Bloqueo</keyword0> a todos los aliados"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -4225,9 +4225,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "sourceHash": "f5157a4b126d17009b2dd54ab8b994f43e942b2d33c713153ecdeac78cdc4dfe",
-    "text": "Todo el equipo comparte mazo, mano y descarte; Las cartas jugadas van al descarte salvo que tengan <keyword0>Consumir</keyword0>; Las cartas no jugadas se descartan al final del turno; En cuanto se vacía el mazo de robo, baraja el descarte en él"
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
+    "sourceHash": "b365b8f25bc58059d3ed51b400916330bbb0e953a8c972fad64503ea4a79b59d",
+    "text": "Todo el equipo comparte mazo, mano y descarte; Las cartas jugadas van al descarte salvo que tengan <keyword0>Consumir</keyword0>; Las cartas no jugadas se descartan al final del turno; Al inicio de tu turno, repón el mazo de robo vacío con las cartas del descarte"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,

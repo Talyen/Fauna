@@ -104,13 +104,7 @@ it("Auto-play keeps Safe Passage when no backup or other drawable card is availa
     const rewarded = produce(before, (draft) => {
       draft.boons = [boon];
     });
-    const selected = choice(rewarded)!;
-    expect(selected).toBeDefined();
-    const result = dispatch(rewarded, selected.command);
-    expect(
-      result.state.battle!.mana > before.battle.mana - 1 ||
-        result.state.team[0]!.block > before.team[0]!.block,
-    ).toBe(true);
+    expect(choice(rewarded)).toBeUndefined();
   }
   const withBackup = produce(before, (draft) => {
     addBackups(draft, {

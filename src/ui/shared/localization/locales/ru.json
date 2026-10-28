@@ -1453,9 +1453,9 @@
   },
   "content.boon.mineral-bookend.rule": {
     "reviewed": true,
-    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "114ee35d1deccae30ac2afae7806d0288df686be84d7fe60d82d73dfcb099a77",
-    "text": "Взятие последней карты из колоды добора восстанавливает {{value0}} <keyword0>маны</keyword0>"
+    "source": "Drawing the last card in your draw pile grants {{value0}} <keyword0>Block</keyword0> to all allies",
+    "sourceHash": "e6cb163f62a133b3026da01d52cf8a0d1310277021ea66f76821441252118394",
+    "text": "Добор последней карты из стопки добора повышает <keyword0>Блок</keyword0> всех союзников на {{value0}}"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -4225,9 +4225,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "sourceHash": "bf9c3ec6c5f062c8daa408937d37546604b5e64dbf39b5b0666f6b30af1a549f",
-    "text": "Вся команда использует общие колоду, руку и сброс; Сыгранные карты попадают в сброс, если у них нет свойства <keyword0>Расходуется</keyword0>; Несыгранные карты сбрасываются в конце хода; Как только стопка добора пуста, замешайте в неё сброс"
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
+    "sourceHash": "9edf5a925cf047b89da729524b499900b34e4bcc20b7e1569f9df80dc320c0f9",
+    "text": "Вся команда использует общие колоду, руку и сброс; Сыгранные карты попадают в сброс, если у них нет свойства <keyword0>Расходуется</keyword0>; Несыгранные карты сбрасываются в конце хода; В начале своего хода пополните пустую стопку добора картами из сброса"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,

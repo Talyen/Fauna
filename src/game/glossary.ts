@@ -85,7 +85,7 @@ export const GLOSSARY = [
     id: "draw-discard",
     term: "Draw / discard",
     definition:
-      "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have Consume; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
+      "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have Consume; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
   },
   {
     id: "copy",

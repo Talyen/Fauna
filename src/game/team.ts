@@ -1,6 +1,6 @@
 import { forEachPermanentCard } from "./card-kit";
 import { battlefield, isRosterCreature } from "./battlefield";
-import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
+import { drawOwner, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
 import { grantArmor, grantBlock, restoreHealth, removeEffects, hit, ensureCombat } from "./combat/index";
 import { boonRule } from "./rules/boons";
@@ -280,7 +280,6 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
     for (const enemy of state.battle.enemies) if (departing.has(enemy.targetId)) enemy.targetId = ids[0]!;
     removeDepartedMinions(state);
     fillHand(state);
-    recycleDiscard(state);
   }
   events.push({ kind: "action", actionType: "swap", actorId: ids[0]!, text: "Your formation changes" });
 }
@@ -367,7 +366,6 @@ export function swapBackup(
         state.battle.draw = shuffle(state, [...state.battle.draw, ...ids]);
       }
       fillHand(state);
-      recycleDiscard(state);
     }
     events.push({
       kind: "action",

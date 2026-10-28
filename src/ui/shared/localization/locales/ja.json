@@ -1453,9 +1453,9 @@
   },
   "content.boon.mineral-bookend.rule": {
     "reviewed": true,
-    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "e2705107c01ba0ca9e648d5e340d39a84122a55a44fcc358da824c1a930cb2e8",
-    "text": "山札の最後のカードを引くと<keyword0>マナ</keyword0>を{{value0}}回復"
+    "source": "Drawing the last card in your draw pile grants {{value0}} <keyword0>Block</keyword0> to all allies",
+    "sourceHash": "485476e3511a663d079794b0ba0636129de3c765b4ff9192bb7e45c558f4b066",
+    "text": "山札の最後のカードを引くと、味方全員が<keyword0>ブロック</keyword0>を{{value0}}得る"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -4225,9 +4225,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "sourceHash": "97e571ca53a5f3c5a952216ee514a9a99e3b1fc30da1fdb412e491ac584777ea",
-    "text": "全員でデッキ、手札、捨て札を共有; 使用したカードは<keyword0>消費</keyword0>がなければ捨て札になる; ターン終了時の未使用カードも捨て札になる; 山札が空になったらすぐ捨て札を混ぜて山札にする"
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
+    "sourceHash": "ab6950af8aa29dc818d07bb1cc6997aec383595c6cac78e8afea736173d42257",
+    "text": "全員でデッキ、手札、捨て札を共有; 使用したカードは<keyword0>消費</keyword0>がなければ捨て札になる; ターン終了時の未使用カードも捨て札になる; 自分のターン開始時に山札が空なら、捨て札から補充する"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,

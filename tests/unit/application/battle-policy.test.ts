@@ -131,7 +131,7 @@ it("a self-only draw retains useful Mana healing and draw Boons", () => {
       rankedBattleChoices(drawing, false).some(
         (entry) => entry.command.type === "play" && entry.command.cardId === card.id,
       ),
-    ).toBe(true);
+    ).toBe(false);
   }
 });
 

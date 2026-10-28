@@ -7,7 +7,7 @@ import { definition, speciesCards, SPECIES, type SpeciesId, type CardDefinition 
 import { drawBossCards, removeDepartedMinions } from "./legendary";
 import { chooseEnemyCard } from "./enemy-policy";
 import { lastWarmth } from "./card-modifiers";
-import { recycleDiscard, promoteBufferedCards, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
+import { promoteBufferedCards, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { playEnemyAbility } from "./enemy-action";
 import { passiveAmount } from "../progression";
 import {
@@ -25,7 +25,7 @@ import {
   TURN_DRAW,
   type Combatant,
 } from "./index";
-import { draw, expressDelivery } from "../card-zones";
+import { drawAtTurnStart, expressDelivery } from "../card-zones";
 import { retainedBlock } from "../ability-rules";
 import { enemyCard, enemyCanUse } from "../card-rules";
 import type { GameEvent, GameState, BattleState } from "../types";
@@ -102,7 +102,6 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     for (const ally of livingBattlefield(draft, "player")) grantBlock(draft, ally, unspentMana, events);
   // Enemy-phase draws and existing overflow survive into the next player turn.
   battle.discard.push(...battle.hand.splice(0));
-  recycleDiscard(draft);
   for (let pass = 0; pass < 3; pass++) {
     const bonusMana = renewalManaBonus(draft);
     unhurried(draft, false, events);
@@ -132,7 +131,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if (enemy.deck) {
         enemy.deck.discard.push(...enemy.deck.hand.splice(0));
         enemy.deck.mana = TURN_MANA;
-        drawBossCards(draft, enemy.deck, TURN_DRAW);
+        drawBossCards(draft, enemy.deck, TURN_DRAW, true);
       }
       if (!canAct) continue;
       // A deployed summon also requires a living deployed owner.
@@ -152,7 +151,6 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           const lastCardInHand = playEnemyAbility(draft, enemy, def, targetId, allyTargetId, events);
           if (def.consume) deck.pearls--;
           removeDepartedMinions(draft);
-          recycleDiscard(draft, deck);
           if (lastCardInHand) lastWarmth(draft, true, events);
           promoteBufferedCards(deck, MAX_HAND_SIZE);
           if (settle(draft, events)) return;
@@ -222,7 +220,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     )
       break;
   }
-  draw(draft, TURN_DRAW, events);
+  drawAtTurnStart(draft, TURN_DRAW, events);
   expressDelivery(draft, events);
   events.push({ kind: "turn", text: `Turn ${battle.turn}. ${battle.maxMana} Mana restored.` });
 }

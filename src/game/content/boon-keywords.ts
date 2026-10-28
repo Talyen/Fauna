@@ -142,7 +142,7 @@ export const BOON_KEYWORDS: Partial<Record<BoonId, readonly KeywordId[]>> = {
   "nectar-dipper": ["food"],
   "dune-shuttle": ["block"],
   "story-puzzle-cube": ["purge"],
-  "mineral-bookend": ["mana"],
+  "mineral-bookend": ["block"],
   "briar-racquet": ["dodge", "thorns"],
   "lovers-knot": ["health"],
   "thaw-spoon": ["freeze", "health"],

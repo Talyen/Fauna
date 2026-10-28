@@ -487,7 +487,6 @@ export const modifierQueries = freeze(
       rainkeeper: ["./ability-rules#manaCapacity"],
     } satisfies Partial<Record<BoonId, Binding>>,
     passives: {
-      wellRead: ["./card-zones#drawHasAnotherCard"],
       cardBonus: ["./boon-offers#rosterBoonKeywords"],
       battleStart: ["./boon-offers#rosterBoonKeywords"],
       bounce: ["./boon-offers#rosterBoonKeywords"],

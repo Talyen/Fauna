@@ -12,7 +12,7 @@ import { freeze, produce } from "immer";
 import { starterCount, MAX_CREATURE_STARS, KEYWORDS, cardKeywordView, canBuyTalent } from "./progression";
 import { ensureCombat, restoreHealth } from "./combat/index";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
-import { fillHand, recycleDiscard } from "./card-zones";
+import { fillHand } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";
 import { definition, species, SPECIES } from "./content";
 import { bossEncounter, generateEncounterPack } from "./encounters";
@@ -306,7 +306,6 @@ function resolve(
         courtRemembers(draft, actor, events);
         if (def.consume) draft.cards = draft.cards.filter((entry) => entry.id !== card.id);
         removeDepartedMinions(draft);
-        recycleDiscard(draft);
         if (lastCardInHand) lastWarmth(draft, false, events);
         afterPlayerCard(draft, events, def.species === null ? undefined : actor);
         fillHand(draft);

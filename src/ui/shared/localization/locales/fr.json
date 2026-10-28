@@ -1453,9 +1453,9 @@
   },
   "content.boon.mineral-bookend.rule": {
     "reviewed": true,
-    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "8007b9018f79e1801289e6e25b35a8ad10356d0a43eb8339ffcfad7784b38bcf",
-    "text": "Piocher la dernière carte de votre pioche restaure {{value0}} <keyword0>Mana</keyword0>"
+    "source": "Drawing the last card in your draw pile grants {{value0}} <keyword0>Block</keyword0> to all allies",
+    "sourceHash": "79f7599b06e760d67d0a7a065f0e3ef58e8aab515b3361119ab72ed2b093c22b",
+    "text": "Piocher la dernière carte de la pioche accorde {{value0}} de <keyword0>Blocage</keyword0> à tous les alliés"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -4225,9 +4225,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "sourceHash": "52a061e2aa13290160c91308277f13c924993067549dd30194322a7f59da7a78",
-    "text": "Tous les équipiers partagent un paquet, une main et une défausse; Les cartes jouées vont à la défausse sauf si elles ont <keyword0>Consommer</keyword0>; Les cartes non jouées y vont en fin de tour; Dès que la pioche est vide, mélangez-y la défausse"
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
+    "sourceHash": "f1bf8719fd0eadcd03f94096f0244c2d5bbfb5d0ee11ce41a17d4aa02cbf8b6d",
+    "text": "Tous les équipiers partagent un paquet, une main et une défausse; Les cartes jouées vont à la défausse sauf si elles ont <keyword0>Consommer</keyword0>; Les cartes non jouées y vont en fin de tour; Au début de votre tour, remplissez la pioche vide avec les cartes de la défausse"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,

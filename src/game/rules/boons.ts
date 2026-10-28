@@ -241,7 +241,10 @@ const rules = freeze(
       { effects: 3, purge: 1 },
       () => "Applying three different harmful effects Purges the last enemy affected",
     ),
-    "mineral-bookend": boon({ mana: 1 }, () => "Drawing the last card in your draw pile restores 1 Mana"),
+    "mineral-bookend": boon(
+      { block: 2 },
+      (p) => `Drawing the last card in your draw pile grants ${p.block} Block to all allies`,
+    ),
     "briar-racquet": boon({ divisor: 2 }, () => "Thorns retaliates at half strength when you Dodge"),
     "lovers-knot": boon({}, () => "Healing an ally also heals yourself"),
     "thaw-spoon": boon({}, () => "Healing removes an equal amount of Freeze buildup"),

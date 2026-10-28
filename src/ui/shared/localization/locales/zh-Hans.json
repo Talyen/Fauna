@@ -1453,9 +1453,9 @@
   },
   "content.boon.mineral-bookend.rule": {
     "reviewed": true,
-    "source": "Drawing the last card in your draw pile restores {{value0}} <keyword0>Mana</keyword0>",
-    "sourceHash": "db6516e54e77a4ac76f98e6d44e2d29e8bdac550d6c889aeba1984d478cb1f30",
-    "text": "抽取抽牌堆中最后一张牌时恢复{{value0}}点<keyword0>法力</keyword0>"
+    "source": "Drawing the last card in your draw pile grants {{value0}} <keyword0>Block</keyword0> to all allies",
+    "sourceHash": "65aada8a368c6ad5330b82ad887e961a3e1c2cd6b6db0cca6a2726228e5e3241",
+    "text": "抽取抽牌堆中的最后一张牌时，所有友方获得{{value0}}点<keyword0>格挡</keyword0>"
   },
   "content.boon.miracle-megaphone.name": {
     "reviewed": true,
@@ -4225,9 +4225,9 @@
   },
   "content.glossary.draw-discard.definition.rule": {
     "reviewed": true,
-    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
-    "sourceHash": "4da829658f5bdfb3794eb1a5d9d010b8c3ff744df18b128498696ba388a7413b",
-    "text": "全队共享牌组、手牌和弃牌堆; 打出的卡牌进入弃牌堆，除非带有<keyword0>消耗</keyword0>; 回合结束时未打出的卡牌进入弃牌堆; 抽牌堆一空就将弃牌洗入抽牌堆"
+    "source": "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have <keyword0>Consume</keyword0>; Unplayed end-of-turn cards go to discard; Refill an empty draw pile from Discard at the start of your turn",
+    "sourceHash": "5ae3c25062c1e6b42f8b162b975131f7bccb5c225f5dcc6f90e02f08be4862bc",
+    "text": "全队共享牌组、手牌和弃牌堆; 打出的卡牌进入弃牌堆，除非带有<keyword0>消耗</keyword0>; 回合结束时未打出的卡牌进入弃牌堆; 在你的回合开始时，用弃牌堆补充空的抽牌堆"
   },
   "content.glossary.draw-discard.term.rule": {
     "reviewed": true,

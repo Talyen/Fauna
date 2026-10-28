@@ -1124,7 +1124,7 @@ it("Saddle Pouch draws the incoming kit only on ability swaps and invokes draw r
   expect(control.battle!.hand.length).toBe(count);
 });
 
-it("Mineral Bookend rewards the actual last draw, respects the Mana cap and ignores returns", () => {
+it("Mineral Bookend grants team Block on the actual last draw and ignores returns", () => {
   const state = structuredClone(run());
   state.boons = ["mineral-bookend"];
   const [a, b, ...rest] = state.cards.map((card) => card.id);
@@ -1136,9 +1136,14 @@ it("Mineral Bookend rewards the actual last draw, respects the Mana cap and igno
   draw(state, 1);
   expect(state.battle!.mana).toBe(0);
   draw(state, 1);
-  expect(state.battle!.mana).toBe(1);
+  expect(state.battle!.mana).toBe(0);
+  const blocks = state.team.map((ally) => ally.block);
+  expect(blocks.every((block) => block >= 2)).toBe(true);
   receiveCard(state, state.battle!.hand.pop()!);
-  expect(state.battle!.mana).toBe(1);
+  expect(state.battle!.mana).toBe(0);
+  expect(state.team.map((ally) => ally.block)).toEqual(blocks);
+  expect(state.battle!.draw).toEqual([]);
+  expect(state.battle!.discard).toEqual(rest);
   state.battle!.mana = state.battle!.maxMana;
   draw(state, state.battle!.draw.length);
   expect(state.battle!.mana).toBe(state.battle!.maxMana);

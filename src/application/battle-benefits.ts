@@ -15,7 +15,7 @@ import {
 } from "../game/card-zones";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { findLivingBattlefield, livingBattlefield, healingAllies } from "../game/battlefield";
-import { cardHasKeyword, hasTalent, passiveAmount } from "../game/progression";
+import { hasTalent, passiveAmount } from "../game/progression";
 import {
   controlled,
   hasHarmfulEffects,
@@ -126,35 +126,18 @@ export function battleBenefitFacts(state: BattleState) {
   };
 }
 
-/** The played card reaches Discard before a non-consuming draw resolves. */
-function selfDrawReward(state: BattleState, play: AvailablePlay, keywordDraw = false): boolean {
-  if (play.def.consume) return false;
-  const owner = state.boons.includes("dune-shuttle")
-    ? state.team.find((unit) => unit.id === play.card.ownerId && unit.health > 0)
-    : undefined;
-  return (
-    (!!owner && owner.block < STACK_LIMIT) ||
-    (state.battle.draw.length === 0 &&
-      (keywordDraw || state.battle.discard.length === 0) &&
-      state.boons.includes("mineral-bookend") &&
-      state.battle.mana - cardCost(play.card, state, play.def, play.actor) < manaCapacity(state))
-  );
-}
-
-/** A self-only draw still needs a draw reward to justify spending the card. */
+/** Draw rewards require an actual card in the draw pile. */
 function usefulDraw(state: BattleState, play: AvailablePlay): boolean {
   return !!play.def.effects?.some(
     (effect) =>
       (effect.kind === "draw" || effect.kind === "drawKeyword") &&
       effect.amount > 0 &&
-      (drawHasAnotherCard(state, play.card, effect) ||
-        ((effect.kind === "draw" || cardHasKeyword(play.card, effect.keyword)) &&
-          selfDrawReward(state, play, effect.kind === "drawKeyword"))),
+      drawHasAnotherCard(state, play.card, effect),
   );
 }
 
 function ordinaryDrawBenefit(state: BattleState, play: AvailablePlay, amount: number): boolean {
-  return drawHasAnotherCard(state, play.card, { kind: "draw", amount }) || selfDrawReward(state, play);
+  return drawHasAnotherCard(state, play.card, { kind: "draw", amount });
 }
 
 /** A spent primary effect can still justify a play through healing or a useful draw. */

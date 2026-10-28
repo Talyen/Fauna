@@ -1,6 +1,7 @@
 import { boonRule } from "./rules/boons";
-import { gainMana, grantBlock, restoreHealth } from "./combat/index";
+import { grantBlock, restoreHealth } from "./combat/index";
 import type { SupplementalEffect } from "./rules/ability-types";
+import { livingBattlefield } from "./battlefield";
 import { cardActor, drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
 import type { BattleState, Card, GameEvent, GameState } from "./types";
@@ -93,16 +94,15 @@ export function recoverBrokenGuard(state: GameState, ownerId: string, events: Ga
 }
 /** Build a membership query without changing or exposing the hidden draw order. */
 function eligibleDrawPool(state: GameState, matches: (card: Card) => boolean) {
-  const { draw, discard } = state.battle!;
-  if (!draw.length && !discard.length) return;
-  if (draw.length + discard.length === 1) {
-    const id = draw[0] ?? discard[0];
+  const { draw } = state.battle!;
+  if (!draw.length) return;
+  if (draw.length === 1) {
+    const id = draw[0];
     return state.cards.some((card) => card.id === id && matches(card))
       ? (candidate: string) => candidate === id
       : undefined;
   }
   const pool = new Set(draw);
-  for (const id of discard) pool.add(id);
   const ids = new Set<string>();
   for (const card of state.cards) if (pool.has(card.id) && matches(card)) ids.add(card.id);
   if (!ids.size) return;
@@ -277,41 +277,44 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
 /** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
 export function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
   const battle = state.battle!;
-  let index = lastEligibleIndex(battle.draw, eligible);
-  // An empty eligible pool is a visible no-op, not an unknown hidden draw.
-  if (index < 0 && !battle.discard.some(eligible)) return false;
-  hiddenDecision(state);
-  if (index < 0) {
-    recycleEligibleDiscard(state, eligible);
-    index = lastEligibleIndex(battle.draw, eligible);
-  }
+  const index = lastEligibleIndex(battle.draw, eligible);
+  // Discard is unavailable to ordinary draws until the next turn starts.
   if (index < 0) return false;
+  hiddenDecision(state);
   const id = index === battle.draw.length - 1 ? battle.draw.pop()! : battle.draw.splice(index, 1)[0]!;
   const last = battle.draw.length === 0;
   receiveDraw(state, id, events);
   if (last && state.boons.includes("mineral-bookend"))
-    gainMana(state, boonRule("mineral-bookend").mana, events);
-  recycleDiscard(state);
+    for (const ally of livingBattlefield(state, "player"))
+      grantBlock(state, ally, boonRule("mineral-bookend").block, events);
   return true;
 }
 
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
+  return drawCards(state, count, events, false);
+}
+
+/** Only turn-start draws may refill the deck, including across the opening draw. */
+export function drawAtTurnStart(state: GameState, count: number, events: GameEvent[]) {
+  return drawCards(state, count, events, true);
+}
+
+function drawCards(state: GameState, count: number, events: GameEvent[], turnStart: boolean) {
   if (count <= 0) return 0;
   fillHand(state);
-  // Ordinary draws reshuffle the whole empty pile first; keyword draws only recycle matches.
-  recycleDiscard(state);
-  if (!state.battle!.draw.length && !state.battle!.discard.length) return 0;
+  if (!state.battle!.draw.length && (!turnStart || !state.battle!.discard.length)) return 0;
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = drawableOwnerIds(state);
   const eligibleCards = alive.size ? new Set<string>() : undefined;
-  // Well Read only inserts copies into the hand/buffer; draw/discard ownership
-  // stays fixed throughout this draw, including recycling between draws.
+  // Well Read inserts copies into hand/overflow without changing draw eligibility.
   if (eligibleCards)
     for (const card of state.cards)
       if (card.ownerId === null || alive.has(card.ownerId)) eligibleCards.add(card.id);
   const eligible = (id: string) => !eligibleCards || eligibleCards.has(id);
   let drawn = 0;
   for (let i = 0; i < count; i++) {
+    // Retain fallen owners' inert slots without letting them prevent the next refill.
+    if (turnStart && !state.battle!.draw.some(eligible)) recycleEligibleDiscard(state, eligible);
     if (!drawEligibleCard(state, eligible, events)) break;
     drawn++;
   }
@@ -387,21 +390,14 @@ export function createTemporaryCard(
   state.cards.push(copy);
   return copy;
 }
-/** Called while the played card is still in hand; hidden draw order is irrelevant.
- * Buffered cards are promoted independently of the draw; consumed cards cannot be copied on redraw. */
+/** Inspect actual drawable cards without sampling or including the played card's future Discard slot. */
 export function drawHasAnotherCard(
   state: BattleState,
-  played: Card,
+  _played: Card,
   effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
 ): boolean {
-  if (
-    eligibleDrawPool(state, drawableCard(state, effect.kind === "drawKeyword" ? effect.keyword : undefined))
-  )
-    return true;
-  return (
-    !definition(played.definitionId).consume &&
-    (effect.kind === "draw" || cardHasKeyword(played, effect.keyword)) &&
-    battleCardCapacity(state) > 0 &&
-    state.team.some((unit) => unit.health > 0 && passiveAmount(state, unit.species, "wellRead") > 0)
+  return !!eligibleDrawPool(
+    state,
+    drawableCard(state, effect.kind === "drawKeyword" ? effect.keyword : undefined),
   );
 }
