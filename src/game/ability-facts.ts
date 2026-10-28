@@ -4,7 +4,14 @@ import type { CardDefinition } from "./content/types";
 import type { BattleState, Creature, Enemy } from "./types";
 import { isEnemy } from "./battlefield";
 import { hasTalent } from "./progression";
-import { dodgeChance, hasHarmfulEffects, maximumHealth, STACK_LIMIT, type Combatant } from "./combat/state";
+import {
+  dodgeChance,
+  hasHarmfulEffects,
+  maximumHealth,
+  mostInjured,
+  STACK_LIMIT,
+  type Combatant,
+} from "./combat/state";
 import {
   armoredDamage,
   blockPayment,
@@ -14,6 +21,7 @@ import {
 } from "./combat/damage-values";
 import {
   healingValue,
+  scoopBonus,
   restoration,
   overflowBlock,
   overflowRecipients,
@@ -76,20 +84,26 @@ export function healingBenefit(
     ((gain > 0 && (ally.combat?.bleed ?? 0) > 0 && state.boons.includes("yarrow-salve-tin")) ||
       (excess > 0 && hasTalent(state, "health.clean-slate")) ||
       !!effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient"));
-  const shared =
-    excess > 0 && !isEnemy(ally) && state.boons.includes("last-threshold")
-      ? Math.min(
-          excess,
-          overflowRecipients(state, ally).reduce((sum, unit) => sum + maximumHealth(unit) - unit.health, 0),
-        )
-      : 0;
+  let shared = 0;
+  if (excess > 0 && !isEnemy(ally) && state.boons.includes("last-threshold")) {
+    const recipients = overflowRecipients(state, ally);
+    let remaining = excess;
+    while (remaining > 0) {
+      const recipient = mostInjured(recipients);
+      if (!recipient) break;
+      recipients.splice(recipients.indexOf(recipient), 1);
+      const amount = Math.min(remaining, maximumHealth(recipient) - recipient.health);
+      remaining -= amount;
+      shared += restoration(recipient, amount + scoopBonus(state, recipient, amount)).gain;
+    }
+  }
   const cupTarget =
     excess > 0 && !isEnemy(ally) && state.boons.includes("overflow-cup")
       ? overflowCupRecipient(state, ally)
       : undefined;
   const cup = cupTarget
     ? Math.min(
-        Math.round(excess / boonRule("overflow-cup").divisor),
+        Math.round(excess / boonRule("overflow-cup").divisor) + scoopBonus(state, cupTarget, excess),
         maximumHealth(cupTarget) - cupTarget.health,
       )
     : 0;

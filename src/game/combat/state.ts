@@ -19,6 +19,7 @@ export function freshCombat(): CombatState {
     freeLight: false,
     freeCard: false,
     oasisLeech: false,
+    acrobatReady: false,
     reflect: false,
     reflectBurn: false,
     nullify: false,

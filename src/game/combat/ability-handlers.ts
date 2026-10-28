@@ -43,7 +43,7 @@ import {
   livingOpponents,
   type PrimaryContext,
 } from "./ability-context";
-import type { Combatant } from "./state";
+import { unitName, type Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[], source: Combatant) {
   if (ensureCombat(unit).thorns > 0) removeEffects(unit, "purge", 1, events, state, "thorns", source);
@@ -212,7 +212,19 @@ export function executePrimary(context: PrimaryContext) {
       const recipient = enemy
         ? state.battle.enemies.find(matches)
         : (state.team.find(matches) ?? state.reserves.find(matches));
-      if (recipient) resurrect(recipient, actor, events);
+      if (recipient) {
+        resurrect(recipient, actor, events);
+        if (!enemy && recipient.health > 0 && state.boons.includes("remembrance-wreath")) {
+          ensureCombat(recipient).negate = true;
+          events.push({
+            kind: "status",
+            targetId: recipient.id,
+            status: "negate",
+            outcome: "apply",
+            text: `${unitName(recipient)} gains Negate`,
+          });
+        }
+      }
       return;
     }
     case "dreamDouble":

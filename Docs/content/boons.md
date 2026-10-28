@@ -10,6 +10,19 @@ The original portraits are unchanged WebP selections copied from `Alchemy: src/a
 
 The catalog and rule owner define current availability, exact player copy and tuning. This reference records specialized timing, recipients and interactions, grouped by design batch; shared [combat rules](../KEYWORDS.md) apply unless an entry states an exception.
 
+### Acrobat and hearth Boons
+
+- **Ember Platter:** Each landed allied Burn attack with positive damage adds 1 Burn to every other living enemy through ordinary status protection; area attacks apply per hit and the added Burn deals no immediate damage
+- **Ash Bowl:** Allied Burn damage absorbed by Block or lost as Health removes 1 enemy Thorns after the attack's normal retaliation; periodic Burn also qualifies
+- **Mossball:** An actual Thorns gain on a deployed ally grants 1 Thorns to the living other ally with the fewest Thorns, with battlefield order breaking ties; the added grant cannot trigger another Mossball grant, including through protection sharing
+- **Skyiron Horseshoe:** An ally Dodging an enemy attack steals up to 1 Armor from the attacker, granting it through normal Armor-gain reactions and delivering Armor-break reactions; non-attack Dodges do not qualify
+- **Nebula Weld Clamp:** Allied Armor reduces Poison damage after Block without wearing down from that Poison; ordinary Armor mitigation and wear for other damage are unchanged
+- **Clover Measuring Scoop:** Positive allied healing receives 2 extra Health per distinct harmful category on the recipient, before restoration and caps; active control and its buildup count as one category
+- **Treaty Teapot:** Enemy Thorns do not retaliate against allied attackers that have Thorns; the enemy's Thorns do not decay when prevented
+- **Dawn Gong:** When a deployed ally is Stunned, other living deployed allies Cleanse Stun through ordinary Cleanse reactions; each recipient of a group attack resolves in battlefield order
+- **Acrobat Top:** Dodging an enemy attack prepares the ally's next attack so enemies cannot Dodge it; Blind can still cause a miss. The non-stacking preparation survives turns and swaps, is saved with the creature, and is consumed by the next attack
+- **Remembrance Wreath:** Allied Resurrect grants the revived ally Negate, including in backup; it does not refresh Death's Door or trigger healing rewards
+
 ### Rose and hearth Boons
 
 - **Vanishing Hat:** An allied recipient can Dodge an enemy Purge that could remove an effect, using ordinary Dodge chance and Dodge rewards before Star Hoop reflection; attack-only Dodge reactions do not apply. Empty, protected and allied Purges do not roll

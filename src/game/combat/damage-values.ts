@@ -185,7 +185,8 @@ export function armorApplies(
     type === "physical" ||
     type === "stun" ||
     (!isEnemy(target) &&
-      ((type === "burn" && hasTalent(state, "armor.fireward")) ||
+      ((type === "poison" && state.boons.includes("nebula-weld-clamp")) ||
+        (type === "burn" && hasTalent(state, "armor.fireward")) ||
         (type === "bleed" && hasTalent(state, "armor.thick-hide"))))
   );
 }

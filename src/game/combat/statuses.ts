@@ -113,6 +113,7 @@ export function* grantStatus(
   events: GameEvent[],
   state?: GameState,
   sharing = true,
+  mossball = true,
 ): Resolution<void> {
   if (unit.health <= 0) return;
   const stats = ensureCombat(unit);
@@ -143,8 +144,34 @@ export function* grantStatus(
         if (ally.id !== unit.id && ally.health > 0 && ensureCombat(ally).armor > 0)
           yield* reaction("grantBlock", state, ally, boonRule("wishing-building-block").block, events);
   }
+  if (
+    gain > 0 &&
+    status === "thorns" &&
+    state?.phase === "battle" &&
+    !isEnemy(unit) &&
+    mossball &&
+    state.boons.includes("mossball")
+  ) {
+    const allies = battlefield(state, "player");
+    if (allies.some((ally) => ally.id === unit.id)) {
+      const recipient = allies
+        .filter((ally) => ally.id !== unit.id && ally.health > 0)
+        .sort((a, b) => ensureCombat(a).thorns - ensureCombat(b).thorns)[0];
+      if (recipient)
+        yield* reaction(
+          "grantStatus",
+          recipient,
+          "thorns",
+          boonRule("mossball").thorns,
+          events,
+          state,
+          true,
+          false,
+        );
+    }
+  }
   if (status === "thorns" && state && sharing)
-    yield* reaction("shareProtection", state, unit, status, gain, events);
+    yield* reaction("shareProtection", state, unit, status, gain, events, mossball);
 }
 export function* triggerArmorBreak(
   state: GameState,
@@ -886,6 +913,11 @@ export function* applyHarmfulStatus(
             ? 1 + boonRule("frozen-pocketwatch").turns
             : 1;
       enterControl(stats, type, options.controlTurns ?? turns);
+      if (type === "stun" && alliedTarget && state.boons.includes("dawn-gong"))
+        for (const ally of battlefield(state, "player"))
+          if (ally.id !== target.id && ally.health > 0)
+            yield* reaction("removeEffects", ally, "cleanse", 1, events, state, "stun", undefined, false);
+
       if (alliedSource && !alliedTarget && state.boons.includes("undertow-castanets")) {
         const other = type === "stun" ? "freeze" : "stun";
         clearHarmfulStatus(stats, other);

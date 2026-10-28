@@ -169,6 +169,16 @@ export const BOONS = [
   boon({ id: "solstice-concertina", name: "Solstice Concertina" }),
   boon({ id: "crown-waffle-iron", name: "Crown Waffle Iron" }),
   boon({ id: "beeswax-crown", name: "Beeswax Crown" }),
+  boon({ id: "ember-platter", name: "Ember Platter" }),
+  boon({ id: "ash-bowl", name: "Ash Bowl" }),
+  boon({ id: "mossball", name: "Mossball" }),
+  boon({ id: "skyiron-horseshoe", name: "Skyiron Horseshoe" }),
+  boon({ id: "nebula-weld-clamp", name: "Nebula Weld Clamp" }),
+  boon({ id: "clover-measuring-scoop", name: "Clover Measuring Scoop" }),
+  boon({ id: "treaty-teapot", name: "Treaty Teapot" }),
+  boon({ id: "dawn-gong", name: "Dawn Gong" }),
+  boon({ id: "acrobat-top", name: "Acrobat Top" }),
+  boon({ id: "remembrance-wreath", name: "Remembrance Wreath" }),
 ] as const;
 export type BoonId = (typeof BOONS)[number]["id"];
 

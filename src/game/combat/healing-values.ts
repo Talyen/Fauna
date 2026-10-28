@@ -1,8 +1,26 @@
+import { boonRule } from "../rules/boons";
+import { harmfulStatuses } from "./state";
 import { talentRule } from "../rules/talents";
 import { healingAllies, isEnemy } from "../battlefield";
 import { hasTalent } from "../progression";
 import type { GameState } from "../types";
 import { maximumHealth, type Combatant } from "./state";
+
+/** Adds the scoop's per-recipient bonus even when another healing effect supplies an adjusted amount. */
+export function scoopBonus(state: GameState | undefined, unit: Combatant, amount: number) {
+  if (
+    state?.phase !== "battle" ||
+    isEnemy(unit) ||
+    amount <= 0 ||
+    !state.boons.includes("clover-measuring-scoop")
+  )
+    return 0;
+  const stats = unit.combat;
+  return stats
+    ? harmfulStatuses.filter((status) => stats.controlled === status || Number(stats[status]) > 0).length *
+        boonRule("clover-measuring-scoop").healing
+    : 0;
+}
 
 /** Magnitude only; rewards, revival permission and bounce remain execution policy. */
 export function healingValue(state: GameState | undefined, unit: Combatant, amount: number) {
@@ -10,6 +28,7 @@ export function healingValue(state: GameState | undefined, unit: Combatant, amou
     const enemy = isEnemy(unit);
     if (!enemy && hasTalent(state, "health.mending"))
       amount *= 1 + talentRule("health.mending").percent / 100;
+    amount += scoopBonus(state, unit, amount);
     if (enemy && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
     if (enemy && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
   }

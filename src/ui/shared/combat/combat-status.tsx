@@ -135,7 +135,9 @@ function StatusTile({ status: s, combat }: { status: AnimatedStatus; combat?: Co
             key={s.count}
             className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
           >
-            {s.id === "oasisLeech" ? (
+            {s.id === "acrobatReady" ? (
+              <KeywordIcon id="dodge" />
+            ) : s.id === "oasisLeech" ? (
               <KeywordIcon id="leech" />
             ) : s.id === "nullifyFreeze" ? (
               <KeywordIcon id="nullify" />

@@ -95,8 +95,12 @@ export function executeAbility(
             def.criticalWhenLastCard && action.lastCardInHand ? 100 : 0,
           )
         : 0;
-    const cannotDodge = play > 0 && !enemy && state.boons.includes("aether-gramophone");
-    const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) && !cannotDodge : false;
+    const repeatedPrecision = play > 0 && !enemy && state.boons.includes("aether-gramophone");
+    const acrobatPrecision = def.effect === "attack" && !enemy && stats[boonRule("acrobat-top").state];
+    if (acrobatPrecision) stats[boonRule("acrobat-top").state] = false;
+    const cannotDodge = repeatedPrecision || acrobatPrecision;
+    const blindMiss =
+      def.effect === "attack" ? beginAttack(state, actor, events) && !repeatedPrecision : false;
     const additionalTarget =
       play > 0 &&
       !enemy &&

@@ -341,6 +341,18 @@
     "sourceHash": "3301e966a05da57ee7a5756ba0272cd42bafad71076eda425367a435110e424b",
     "text": "对已<keyword1>眩晕</keyword1>敌人的<keyword0>眩晕</keyword0>命中还会对另一名敌人造成{{value0}}点<keyword2>眩晕</keyword2>伤害"
   },
+  "content.boon.acrobat-top.name": {
+    "reviewed": true,
+    "source": "Acrobat Top",
+    "sourceHash": "11ada9603f2b59dd4f305952b99fcdb86cd6c1c67b60416de89ff56e4d64d82f",
+    "text": "杂技陀螺"
+  },
+  "content.boon.acrobat-top.rule": {
+    "reviewed": true,
+    "source": "After an ally <keyword0>Dodges</keyword0>, their next attack cannot be <keyword1>Dodged</keyword1>",
+    "sourceHash": "ad6b307f8324a6d9b986939dcd510e6e5e69dd4af41d8cc2aebd9f89be651355",
+    "text": "盟友<keyword0>闪避</keyword0>后，其下一次攻击无法被<keyword1>闪避</keyword1>"
+  },
   "content.boon.aether-gramophone.name": {
     "reviewed": true,
     "source": "Aether Gramophone",
@@ -376,6 +388,18 @@
     "source": "Enemy <keyword0>Bleed</keyword0> deals damage when they gain <keyword1>Block</keyword1>",
     "sourceHash": "dd3deab8a514e3d610d19c4e696caea20319bbdd37cb462ba3a158aaf66175d5",
     "text": "敌人获得<keyword1>格挡</keyword1>时，其<keyword0>流血</keyword0>会造成伤害"
+  },
+  "content.boon.ash-bowl.name": {
+    "reviewed": true,
+    "source": "Ash Bowl",
+    "sourceHash": "4697e08cec6ed6fc8978b0f0bf395458da2e51f83ba7b696388d32f0867462b7",
+    "text": "灰烬碗"
+  },
+  "content.boon.ash-bowl.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> damage removes {{value0}} <keyword1>Thorns</keyword1> from enemies",
+    "sourceHash": "39ff3fc982776235b6716db6a2b584072e8d3b9b252178d4c0d595c11904d77e",
+    "text": "<keyword0>灼烧</keyword0>伤害移除敌人{{value0}}点<keyword1>荆棘</keyword1>"
   },
   "content.boon.ashfall-pendant.name": {
     "reviewed": true,
@@ -617,6 +641,18 @@
     "sourceHash": "e50baf9b195af62ad0b7b0ef123a5bd400a11b836cb8a7b5a7f010df8256e3b5",
     "text": "盟友的<keyword0>格挡</keyword0>被击破时，将其一张弃牌移回手牌"
   },
+  "content.boon.clover-measuring-scoop.name": {
+    "reviewed": true,
+    "source": "Clover Measuring Scoop",
+    "sourceHash": "71f72fbb2e937e4729c99d9617d4c2f391106b77a71cc10c991f7282fa9e00e3",
+    "text": "三叶草量勺"
+  },
+  "content.boon.clover-measuring-scoop.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Healing</keyword0> restores {{value0}} extra <keyword1>Health</keyword1> for each harmful effect on the ally",
+    "sourceHash": "f2d951c08f26f347967ce245c4d258ec03ad059340eb4a0f04f42710f5cfcd49",
+    "text": "<keyword0>治疗</keyword0>按盟友身上的有害效果数量，每个额外恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
   "content.boon.comb-uncapping-fork.name": {
     "reviewed": true,
     "source": "Comb Uncapping Fork",
@@ -761,6 +797,18 @@
     "sourceHash": "5d9d79a3c1806b0892ac545a23120017ccf38712326bf6439773af83eb910720",
     "text": "<keyword0>净化</keyword0>一名盟友时，对所有敌人造成{{value0}}点<keyword1>自然</keyword1>伤害"
   },
+  "content.boon.dawn-gong.name": {
+    "reviewed": true,
+    "source": "Dawn Gong",
+    "sourceHash": "27fa488136ed229643e32c71ecaa18ac891cd5121ca7229fc9f685dac92f36c2",
+    "text": "晨曦锣"
+  },
+  "content.boon.dawn-gong.rule": {
+    "reviewed": true,
+    "source": "When an ally is <keyword0>Stunned</keyword0>, <keyword1>Cleanse</keyword1> <keyword2>Stun</keyword2> from other allies",
+    "sourceHash": "a10b3086553ba5d4ceb585e5a985ff37b2a2eaba3d1299ba2aadeaf4d48641c4",
+    "text": "一名盟友被<keyword0>眩晕</keyword0>时，<keyword1>净化</keyword1>其他盟友的<keyword2>眩晕</keyword2>"
+  },
   "content.boon.devotion-clasp.name": {
     "reviewed": true,
     "source": "Devotion Clasp",
@@ -868,6 +916,18 @@
     "source": "When an ally’s <keyword0>Armor</keyword0> breaks, other allies gain {{value0}} <keyword1>Armor</keyword1>",
     "sourceHash": "d9598bf6319f94e2cb1bbe2db00213c89b0fcf81fc98d52ff72f592c69b34be0",
     "text": "盟友的<keyword0>护甲</keyword0>被击破时，其他盟友获得{{value0}}点<keyword1>护甲</keyword1>"
+  },
+  "content.boon.ember-platter.name": {
+    "reviewed": true,
+    "source": "Ember Platter",
+    "sourceHash": "47d146cc8fcecbf49cb1a99669c1170d171e0faf080cc96b2c6a944608a9ff50",
+    "text": "余烬盘"
+  },
+  "content.boon.ember-platter.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Burn</keyword0> hits also apply {{value0}} <keyword1>Burn</keyword1> to other enemies",
+    "sourceHash": "b29dd3a160fd1d2307755e833ff5f9155da36f735df8b816a621960a37122077",
+    "text": "<keyword0>灼烧</keyword0>命中也会对其他敌人施加{{value0}}点<keyword1>灼烧</keyword1>"
   },
   "content.boon.encore-baton.name": {
     "reviewed": true,
@@ -1433,6 +1493,30 @@
     "sourceHash": "0d49dd5ad0ccba78d158bd960e979bcec4f0b466a41c3838c72f3e3a871cc648",
     "text": "<keyword0>格挡</keyword0>对<keyword1>灼烧</keyword1>的效果翻倍"
   },
+  "content.boon.mossball.name": {
+    "reviewed": true,
+    "source": "Mossball",
+    "sourceHash": "46e7be6db2bd25caff295cfaa5c9316d8f7e6d41ea07c980cf540d4dd8e564e0",
+    "text": "苔藓球"
+  },
+  "content.boon.mossball.rule": {
+    "reviewed": true,
+    "source": "When an ally gains <keyword0>Thorns</keyword0>, another ally with the fewest <keyword1>Thorns</keyword1> gains {{value0}} <keyword2>Thorns</keyword2>",
+    "sourceHash": "3c9412cfbef2dedca75d90a2159001c4ce8051abdded1c320b3cece6c66fff35",
+    "text": "盟友获得<keyword0>荆棘</keyword0>时，<keyword1>荆棘</keyword1>最少的另一名盟友获得{{value0}}点<keyword2>荆棘</keyword2>"
+  },
+  "content.boon.nebula-weld-clamp.name": {
+    "reviewed": true,
+    "source": "Nebula Weld Clamp",
+    "sourceHash": "a88ddea8990cbf50020ca1c897b75eed9b3a48d3a15613d4dcbe868179594f4a",
+    "text": "星云焊夹"
+  },
+  "content.boon.nebula-weld-clamp.rule": {
+    "reviewed": true,
+    "source": "Allied <keyword0>Armor</keyword0> reduces <keyword1>Poison</keyword1> damage without wearing down",
+    "sourceHash": "ae7a46fa889f65a4efc5aaf2bfb8b4fb03bf2eec7121c18a3f7f86eada3ca737",
+    "text": "盟友的<keyword0>护甲</keyword0>降低<keyword1>中毒</keyword1>伤害且不会磨损"
+  },
   "content.boon.nectar-dipper.name": {
     "reviewed": true,
     "source": "Nectar Dipper",
@@ -1745,6 +1829,18 @@
     "sourceHash": "2a8434c4f322fad42d43ad9cf2d8441ce1f271463fb2cd365c4317426fd82dd6",
     "text": "<keyword0>水</keyword0>命中会将<keyword1>致盲</keyword1>扩散给另一名敌人"
   },
+  "content.boon.remembrance-wreath.name": {
+    "reviewed": true,
+    "source": "Remembrance Wreath",
+    "sourceHash": "15005f19518ddd1e7c6eb2b0810dd552f5fbdc520589a1d8dc69cdbb52e37181",
+    "text": "追忆花环"
+  },
+  "content.boon.remembrance-wreath.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrected</keyword0> allies gain <keyword1>Negate</keyword1>",
+    "sourceHash": "5638842b1a2fd79e1ca6b3ce9060625d086617559aecf0791d1c47bca958fabd",
+    "text": "被<keyword0>复活</keyword0>的盟友获得<keyword1>抵消</keyword1>"
+  },
   "content.boon.resonance-kalimba.name": {
     "reviewed": true,
     "source": "Resonance Kalimba",
@@ -1888,6 +1984,18 @@
     "source": "Restore {{value0}} <keyword0>Health</keyword0> per harmful effect you <keyword1>Cleanse</keyword1>",
     "sourceHash": "f8748993b79c44f2ab1c6933586c6048b1a8de7cf29093b483db53543fc10023",
     "text": "每<keyword1>净化</keyword1>一个有害效果，恢复{{value0}}点<keyword0>生命</keyword0>"
+  },
+  "content.boon.skyiron-horseshoe.name": {
+    "reviewed": true,
+    "source": "Skyiron Horseshoe",
+    "sourceHash": "1f4a64ff32e07020064a07b811cedf58f556491239b936a25bb82dad3cadba8b",
+    "text": "天铁马蹄铁"
+  },
+  "content.boon.skyiron-horseshoe.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Dodging</keyword0> an attack steals {{value0}} <keyword1>Armor</keyword1> from the attacker",
+    "sourceHash": "9d53151bdfd065b0c0873d55a2ede1afcbf98d71fba26e04206c2a3e431bed6a",
+    "text": "<keyword0>闪避</keyword0>攻击时，从攻击者处偷取{{value0}}点<keyword1>护甲</keyword1>"
   },
   "content.boon.sleepers-urn.name": {
     "reviewed": true,
@@ -2116,6 +2224,18 @@
     "source": "<keyword0>Thorns</keyword0> cannot decay below {{value0}}",
     "sourceHash": "dd3676067eb3607d50367f9702e205c40b2827b76ee3fa8e449ac9bd36ef8959",
     "text": "<keyword0>荆棘</keyword0>衰减时不会低于{{value0}}"
+  },
+  "content.boon.treaty-teapot.name": {
+    "reviewed": true,
+    "source": "Treaty Teapot",
+    "sourceHash": "9bec2873ccff22e77e2923e262cdaa57d09d86d14661f1c4d3cf2c74d5aa493b",
+    "text": "和约茶壶"
+  },
+  "content.boon.treaty-teapot.rule": {
+    "reviewed": true,
+    "source": "Enemies with <keyword0>Thorns</keyword0> cannot retaliate against allies with <keyword1>Thorns</keyword1>",
+    "sourceHash": "01d590c4dbeda49f9ba86c68b6ea85d35ee57c3dcbae9c88d5671fcbe2520954",
+    "text": "拥有<keyword0>荆棘</keyword0>的敌人无法反击拥有<keyword1>荆棘</keyword1>的盟友"
   },
   "content.boon.tuning-fork-charm.name": {
     "reviewed": true,
@@ -6497,136 +6617,142 @@
     "sourceHash": "f73059ce757f93b80158d244059f01ebbdb7acd64d00651082c4eb6ed39b184d",
     "text": "失物招领"
   },
+  "content.status.acrobatReady.v1c0eea136a275f61.rule": {
+    "reviewed": true,
+    "source": "Acrobat Top: next attack cannot be <keyword0>Dodged</keyword0>",
+    "sourceHash": "33c93d0e45f31b4f06d369055821bfefc8e81d893cb2dc27eb46b142aa3f03d5",
+    "text": "杂技陀螺：下一次攻击无法被<keyword0>闪避</keyword0>"
+  },
   "content.status.attackReflection.v1ce3bcf6720d9a2d.rule": {
     "reviewed": true,
     "source": "<keyword0>Attack Reflection</keyword0>: Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; <keyword1>Reflected</keyword1> attacks cannot <keyword2>reflect</keyword2> again; Lasts until consumed or <keyword3>Purged</keyword3>; Does not stack",
-    "sourceHash": "55c5af99f2c5b08de1acbeb420bcbc9b221ba3f32dcde5f060863e7fc4fbaa46",
+    "sourceHash": "95a8d656445a75e0d6273f0228366a89311c4c98a54ca4ceb34e6388f73fa73b",
     "text": "<keyword0>攻击反射</keyword0>：将下一次受到的攻击返还给攻击者; 防止该攻击对你造成的伤害和有害效果; 被<keyword1>反射</keyword1>的攻击不能再次<keyword2>反射</keyword2>; 持续至消耗或被<keyword3>驱散</keyword3>; 不叠加"
   },
   "content.status.blind.v0b0434b4eb43f4a6.rule": {
     "reviewed": true,
     "source": "<keyword0>Blind</keyword0>: {{value0}}% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a <keyword1>Dodge</keyword1> by every recipient; Does not stack",
-    "sourceHash": "e77a11db948179f34f8d7b1aa4c85adcec18a5dea2ed1ec7851a4dc71c8fde6f",
+    "sourceHash": "829f0c606e1270fe389e68ffd0522cfd6022f1312b5c023a7ddd3fb83ebe2c2c",
     "text": "<keyword0>致盲</keyword0>：下一次攻击有{{value0}}%的概率落空; 无论命中还是落空，该次攻击后效果消失; 落空视为每个目标都进行了<keyword1>闪避</keyword1>; 不叠加"
   },
   "content.status.controlled.v147305c04334e696.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turns",
-    "sourceHash": "44aefa6fbe21536fba9425d7cf48c4958d22cebf6e740ced72bc60c1b59968c5",
+    "sourceHash": "61cacffc8c262bd5c13eceb9fb53c1d78b4d79324900d418fd067eae208b8d5d",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v676f2c65dec45bce.rule": {
     "reviewed": true,
     "source": "Turn skipped",
-    "sourceHash": "361aa77a159b25f8e6bf64396261c5816d2c9167e23daae2bdea8ffaf9f7358f",
+    "sourceHash": "7e98f797cd9aa4985712b2dc437449e83f679310b906a211586edaeeaaedbe0c",
     "text": "跳过回合"
   },
   "content.status.controlled.v89bb2c2caa8815a8.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turn",
-    "sourceHash": "248c55a9e76bc73fcc3966fb347d3fb92cf0c131c28dc1abb99c719529839e66",
+    "sourceHash": "a09230fb8b67ee32c1e4f4ca21f36bc2a8df116b9229e6df3ac0e7394f20f24c",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.v9121eae5c53d2321.rule": {
     "reviewed": true,
     "source": "<keyword0>Frozen</keyword0>: {{value0}} turns",
-    "sourceHash": "292a70f363d964a3b2a0338e262e4253cfa07de9d2faceaa15ea464f8032bf71",
+    "sourceHash": "7252d1400abef13eb9fc3d992765e4c0c32a92f8ec56226af9947272eaf7745d",
     "text": "<keyword0>冻结</keyword0>：{{value0}}回合"
   },
   "content.status.controlled.ve93ba5ee32c41861.rule": {
     "reviewed": true,
     "source": "<keyword0>Stunned</keyword0>: {{value0}} turn",
-    "sourceHash": "f176318042e76147505f1e2e25dbad521068467074e8057af9f3ea77b1237909",
+    "sourceHash": "4a65e53d64b98c14297d516e9ff5e5dae127b2b94c4775bc1e3e6bf04155051b",
     "text": "<keyword0>眩晕</keyword0>：{{value0}}回合"
   },
   "content.status.cooldown.v2db257f39699f407.rule": {
     "reviewed": true,
     "source": "Control immunity {{value0}}",
-    "sourceHash": "e70db2a7e36dd62460ed0457229f9bcd6a92f8ee899a4c258a23e1d3bb9dc1bc",
+    "sourceHash": "a06b97f4e5657d0f3770406936c41003dd81a92cd4b4207d91d65f15522c26d8",
     "text": "控制免疫 {{value0}}"
   },
   "content.status.freeCard.va99c62bb6b6c39d3.rule": {
     "reviewed": true,
     "source": "Free Follow-up: next card is free",
-    "sourceHash": "36411a8801d48db35f730aefea997e78e354608ff74cfc1d56f6b9e9c14b58f9",
+    "sourceHash": "d12c63ff4b8b79e9e8c795bb767e120e9aa039d36d794754851c43dc1bbc8674",
     "text": "免费追击：下一张卡牌免费"
   },
   "content.status.freeLight.v6ae602b7426bd9c0.rule": {
     "reviewed": true,
     "source": "Divine Favor: next <keyword0>Light</keyword0> card is free",
-    "sourceHash": "3b84526663a347f2033158ea33a57c33452c56451e1506369996b437b17805d4",
+    "sourceHash": "7669a0b0f08d7d3be9e79751d2a8a55bd05e406dab497d62cb331f02a981c3e9",
     "text": "神恩：下一张<keyword0>光</keyword0>卡牌免费"
   },
   "content.status.freeNature.v46ee8ca448af828e.rule": {
     "reviewed": true,
     "source": "Windstep: next <keyword0>Nature</keyword0> card is free",
-    "sourceHash": "86a4316726957f6b434d76735b1a1a785ff481a14ab7468d350489d097b0c7cf",
+    "sourceHash": "beeb3c4def1ba945c095c48362997f28ca2cad31766419a4bba8a4f99ca8ff78",
     "text": "风步：下一张<keyword0>自然</keyword0>卡牌免费"
   },
   "content.status.grace.v6e81bc0f25243d28.rule": {
     "reviewed": true,
     "source": "Death's Door {{value0}}",
-    "sourceHash": "6bfcf57459e6244c9a47c8da2e19b0facfaaf755fe195186e247c00179360ddc",
+    "sourceHash": "812a990fea4a9bb585952407b72ebe49eaea603c4969eb6c078b7d0864dd0818",
     "text": "濒死 {{value0}}"
   },
   "content.status.negate.v74a74c8005c653ca.rule": {
     "reviewed": true,
     "source": "<keyword0>Negate</keyword0>: <keyword1>Negate</keyword1> the next attack against you before <keyword2>Dodge</keyword2>, preventing its damage and harmful effects; <keyword3>Thorns</keyword3> still retaliate; Lasts until consumed or <keyword4>Purged</keyword4>; Does not stack",
-    "sourceHash": "44c6618980208febc644f752b3e21b00f378e5b016035c3dcd200d4095aa177b",
+    "sourceHash": "1c5734e9828692feac2bd742a1c36fecc29b6b4770f5a729f333c735be6b4a53",
     "text": "<keyword0>抵消</keyword0>：在<keyword2>闪避</keyword2>之前<keyword1>抵消</keyword1>下一次受到的攻击，防止其伤害和有害效果; <keyword3>荆棘</keyword3>仍会反击; 持续至消耗或被<keyword4>驱散</keyword4>; 不叠加"
   },
   "content.status.nextPhysical.v6c2db4ee2bdb3de6.rule": {
     "reviewed": true,
     "source": "Open Flank: next attack deals {{value0}} additional <keyword0>Physical</keyword0> damage",
-    "sourceHash": "60328d5cad05116dff7ef9338cd2badaf0266aa8629f6991013cda8c2fcfd069",
+    "sourceHash": "85065043fba673284ed2afe65d38e9a8054cdb82339e6c0273a5036747072352",
     "text": "侧翼破绽：下一次攻击额外造成{{value0}}点<keyword0>物理</keyword0>伤害"
   },
   "content.status.nullify.v31f2b57af0674222.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0>: Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or <keyword1>Purged</keyword1>; Does not stack",
-    "sourceHash": "0d1ecca006276bcbf6cac6ef4840d98d0c4ec4fe4c4341e060db7d1edfeb1116",
+    "sourceHash": "cffd842706df44d3006486882b4fed67e88bf775e703707c2e5be19a9e6b0adb",
     "text": "<keyword0>无效化</keyword0>：防止下一个有害状态效果; 直接伤害仍会命中; 持续至消耗或被<keyword1>驱散</keyword1>; 不叠加"
   },
   "content.status.nullifyFreeze.v07c5bcd73f76b538.rule": {
     "reviewed": true,
     "source": "<keyword0>Nullify</keyword0> the next <keyword1>Freeze</keyword1> damage; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "fb472c3253788c093ffde61ae9738a91b6a6e9ecf2be862f6f5c50a73bd34911",
+    "sourceHash": "a2e081f6b50d7c28ca899f1fe54d393428a8ed14dd121d5fea43e81eda3b6be2",
     "text": "<keyword0>无效化</keyword0>下一次<keyword1>冻结</keyword1>伤害; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.oasisLeech.vab4f9087afb29b90.rule": {
     "reviewed": true,
     "source": "Oasis Seed: next attack has <keyword0>Leech</keyword0>",
-    "sourceHash": "13e7ea82b9e4ceafdc3ef6d7f095c8a7a2fee9ffe166c900ef912a34f02f071d",
+    "sourceHash": "fad3ea48637e8a8139bf9a51b4702c35c229ff3f66658a331896cedf3dd44357",
     "text": "绿洲之种：下一次攻击具有<keyword0>汲取</keyword0>"
   },
   "content.status.partingCut.v7cad0e487210bc8a.rule": {
     "reviewed": true,
     "source": "Parting Cut: next <keyword0>Physical</keyword0> hit deals half its damage as additional <keyword1>Bleed</keyword1> damage",
-    "sourceHash": "80c9cccf5c833225ac14aa5a1280c775313ecc80d9f18207d6c8a3ee8b3874c6",
+    "sourceHash": "efa8c0fa6761099e5a605c77dd4269e457d51c6e0319229bea6590f2d72461ab",
     "text": "离别一斩：下一次<keyword0>物理</keyword0>命中额外造成等同于其一半伤害的<keyword1>流血</keyword1>伤害"
   },
   "content.status.reflect.v1f90dd3050df6a1c.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0>: Return the specified attack or harmful status effect; <keyword1>Attack reflection</keyword1> returns damage and harmful follow-ups to the attacker; Status-only <keyword2>reflection</keyword2> redirects the effect to a random living enemy while direct damage still lands; <keyword3>Reflected</keyword3> attacks and statuses cannot <keyword4>reflect</keyword4> again; Charges do not stack",
-    "sourceHash": "64ec44588be423e02103ab456a04174fe52c28bb03c868f913e39a654f9f6c85",
+    "sourceHash": "319c57a26126e20fd44627a16544c798ce21ffa6dd4086ec86bc8e601f42bccd",
     "text": "<keyword0>反射</keyword0>：返还指定的攻击或有害状态效果; <keyword1>攻击反射</keyword1>将伤害和后续有害效果返还给攻击者; 仅状态<keyword2>反射</keyword2>会将效果转向一名随机存活的敌人，直接伤害仍会命中; 被<keyword3>反射</keyword3>的攻击和状态不能再次<keyword4>反射</keyword4>; 次数不叠加"
   },
   "content.status.reflectBurn.vbb43777c9fa04208.rule": {
     "reviewed": true,
     "source": "<keyword0>Reflect</keyword0> the next <keyword1>Burn</keyword1>; Direct damage still lands; Lasts until consumed or <keyword2>Purged</keyword2>; Does not stack",
-    "sourceHash": "afef68ecd2246b648af34863f95c293248a4cb095eff12705e3786fe4b4df392",
+    "sourceHash": "b894ebe762aab9eca30c295b0868ecb92c60203cff0bd8864dd25fab62671242",
     "text": "<keyword0>反射</keyword0>下一次<keyword1>灼烧</keyword1>; 直接伤害仍会命中; 持续至消耗或被<keyword2>驱散</keyword2>; 不叠加"
   },
   "content.status.rhythm.v58914e6bd2cd0ed7.rule": {
     "reviewed": true,
     "source": "Finding Rhythm: +{{value0}}% <keyword0>Dodge</keyword0> chance",
-    "sourceHash": "a7453992542808e45c22032ca63879876f8ab670b42e9c887296ca503f3de15b",
+    "sourceHash": "7a348b3c2cad35abd69f8753c22c2d42bfc7f6045d647357e85e2f08c5d17d28",
     "text": "找到节奏：<keyword0>闪避</keyword0>概率+{{value0}}%"
   },
   "content.status.riposte.v7f25e6d160e653d4.rule": {
     "reviewed": true,
     "source": "Riposte: next <keyword0>Physical</keyword0> attack is a guaranteed <keyword1>Critical Hit</keyword1>",
-    "sourceHash": "8734d3ed32bfd78fde4469e1487bb4d615f2f6d78a5c61a98ad0466d1beb43a5",
+    "sourceHash": "b99b94441e6fb9b24965db6b8fda9c21f8800cc490eacbf259c7051dfd396abb",
     "text": "还击：下一次<keyword0>物理</keyword0>攻击必定<keyword1>暴击</keyword1>"
   },
   "content.talent.armor.armored-surge.name": {
@@ -8722,6 +8848,12 @@
     "source": "{{name}} loses {{amount}} Freeze buildup",
     "sourceHash": "7a9ebeb5c55006d03ebb285c14516a62d439274e46af4c0388501a8eff3ae549",
     "text": "{{name}}减少{{amount}}点冻结积累"
+  },
+  "log.loseThorns": {
+    "reviewed": true,
+    "source": "{{name}} loses {{amount}} Thorns",
+    "sourceHash": "80e3f7aa79ddb8626e7e2a9b02cf24ee6db2f98c3453ae33c7b56db53682dafd",
+    "text": "{{name}}失去{{amount}}点荆棘"
   },
   "log.mountainGuide": {
     "reviewed": true,
