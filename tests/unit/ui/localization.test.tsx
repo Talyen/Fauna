@@ -2420,6 +2420,8 @@ it("extracts and presents transient combat status variants without changing thei
     rhythm: 10,
     nextPhysical: 2,
     acrobatReady: true,
+    moonseedReady: true,
+    toothpickReady: true,
     partingCut: true,
     riposte: true,
     freeNature: true,
@@ -2436,12 +2438,17 @@ it("extracts and presents transient combat status variants without changing thei
   };
   for (const controlled of [null, "freeze", "stun"] as const) {
     for (const controlTurns of [0, 1, 2]) {
-      for (const status of combatStatuses({ ...combat, controlled, controlTurns, skipped: true })) {
-        const template = ruleMessage(status.text).template;
-        const id = statusRuleVariantId(status.id, template);
-        expect(variants[id]?.text).toBe(template);
-        seen.add(id);
-      }
+      for (const sharedImmunity of [0, 3])
+        for (const status of combatStatuses(
+          { ...combat, controlled, controlTurns, skipped: true },
+          0,
+          sharedImmunity,
+        )) {
+          const template = ruleMessage(status.text).template;
+          const id = statusRuleVariantId(status.id, template);
+          expect(variants[id]?.text).toBe(template);
+          seen.add(id);
+        }
     }
   }
   expect([...seen].sort()).toEqual(Object.keys(variants).sort());

@@ -57,6 +57,7 @@ it("cleans up playthrough supervision when the worker cannot start", async () =>
   const running = runPlaythrough([], { spawnWorker: () => child });
   const checked = expect(running).rejects.toThrow("cannot start");
   child.emit("error", new Error("cannot start"));
+  child.emit("close", -1);
   await checked;
   expect(vi.getTimerCount()).toBe(0);
 });

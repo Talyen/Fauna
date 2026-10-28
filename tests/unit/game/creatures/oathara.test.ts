@@ -184,7 +184,7 @@ describe("Oathara", () => {
         game.battle.draw = [];
         game.battle.discard = [];
         game.battle[pile] = ids.slice();
-        const expected = ids.includes(living.id);
+        const expected = pile === "draw" && ids.includes(living.id);
         const before = structuredClone(game);
         expect(journeyReturnHasDraw(game, owner.id)).toBe(expected);
         expect(game).toEqual(before);

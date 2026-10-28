@@ -160,5 +160,5 @@ export const NEW_BOON_EFFECTS = {
   "saddle-pouch": "Swapping an ally in from backup draws one of its cards",
   "dune-shuttle": "Drawing an ally's card grants them 1 Block",
   "story-puzzle-cube": "Applying three different harmful effects Purges the last enemy affected",
-  "mineral-bookend": "Drawing the last card in your draw pile restores 1 Mana",
+  "mineral-bookend": "Drawing the last card in your draw pile grants 2 Block to all allies",
 } as const;
