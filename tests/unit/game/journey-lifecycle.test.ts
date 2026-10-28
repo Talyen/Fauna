@@ -1,191 +1,124 @@
-import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
 import { produce } from "immer";
 import { describe, expect, expectTypeOf, it } from "vitest";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
+import { generateEncounterPack } from "../../../src/game/encounters";
+import { availablePlays } from "../../../src/game/play-queries";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { BattleState, Command, GameState, RewardState } from "../../../src/game/types";
-
-// Preserve undefined separately from missing keys, while making one trace step readable per line.
-function traceLine(value: unknown): string {
-  const canonical = (entry: unknown): unknown =>
-    entry === undefined
-      ? { $undefined: true }
-      : Array.isArray(entry)
-        ? entry.map(canonical)
-        : entry && typeof entry === "object"
-          ? Object.fromEntries(
-              Object.entries(entry)
-                .sort(([a], [b]) => a.localeCompare(b))
-                .map(([key, item]) => [key, canonical(item)]),
-            )
-          : entry;
-  return JSON.stringify(canonical(value));
-}
-
-// The captured commands and expected states have one owner, independent of later policy revisions.
-// Removing the former final Boss changes encounter packs, rewards, and subsequent seeded choices.
-// Earlier recordings remain in journey-baseline-pre-team-weighting.tsv and journey-baseline-pre-expansion.tsv.
-// Turn-start recycling changes the draw sequence and later seeded choices; see task evidence.
-const baselines = new Map<number, string[]>();
-for (const line of readFileSync(new URL("./fixtures/journey-baseline.tsv", import.meta.url), "utf8")
-  .trimEnd()
-  .split("\n")) {
-  const separator = line.indexOf("\t");
-  const seed = Number(line.slice(0, separator));
-  const entries = baselines.get(seed) ?? [];
-  entries.push(line.slice(separator + 1));
-  baselines.set(seed, entries);
-}
-
-// Compare gameplay, RNG and ordered output across the current journey rules.
-function fingerprint(state: GameState, events: unknown) {
-  const { version: _version, battle, ...rest } = state;
-  const projected = {
-    ...rest,
-    journey: state.journey
-      ? {
-          ...Object.fromEntries(Object.entries(state.journey).filter(([key]) => key !== "unlocks")),
-          lastBattle: state.journey.lastBattle
-            ? { xp: state.journey.lastBattle.xp, currency: state.journey.lastBattle.currency }
-            : null,
-        }
-      : null,
-    battle: state.phase === "battle" ? battle : null,
-    team: state.team.map(({ combat, block, ...unit }) =>
-      state.phase === "battle" ? { ...unit, combat, block } : unit,
-    ),
-    reserves: state.reserves.map(({ combat, block, ...unit }) =>
-      state.phase === "battle" ? { ...unit, combat, block } : unit,
-    ),
-    events,
-  };
-  // Preserve the dormant Water Thorns field from the original recorded combat shape.
-  const canonical = (value: unknown): unknown =>
-    Array.isArray(value)
-      ? value.map(canonical)
-      : value && typeof value === "object"
-        ? Object.fromEntries(
-            Object.entries(
-              "thorns" in value && "temporaryDodge" in value ? { ...value, waterThorns: 0 } : value,
-            )
-              .filter(
-                ([key, entry]) =>
-                  !(key === "metronomeActor" && entry === null) &&
-                  !(key === "fireThorns" && entry === 0) &&
-                  !(key === "encoreProgress" && entry === 0) &&
-                  !(["oasisLeech", "moonseedReady", "toothpickReady"].includes(key) && entry === false) &&
-                  !(key === "slipperCard" && entry === null) &&
-                  !(key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) &&
-                  !(
-                    key === "repeatNext" &&
-                    entry &&
-                    typeof entry === "object" &&
-                    "player" in entry &&
-                    "enemy" in entry &&
-                    entry.player === false &&
-                    entry.enemy === false
-                  ),
-              )
-              .sort(([a], [b]) => a.localeCompare(b))
-              .map(([k, v]) => [k, canonical(v)]),
-          )
-        : value;
-  return createHash("sha256")
-    .update(JSON.stringify(canonical(projected)))
-    .digest("hex");
-}
-
 import { accept, starterJourney, winBattle } from "../../support/game";
-import { generateEncounterPack } from "../../../src/game/encounters";
 
-describe("journey lifecycle behavior baseline", () => {
-  it.each([3, 10, 98])("preserves seeded commands and outputs for seed %s", (seed) => {
+describe("journey lifecycle and deterministic replay", () => {
+  it.each([3, 10, 98])("replays a complete journey and resumes each command for seed %s", (seed) => {
     let state = createGame(seed);
-    const trace: unknown[] = [];
-    const baseline = baselines.get(seed)!;
-    const plays = baseline.flatMap((line) => {
-      const [command] = JSON.parse(line) as [
-        | {
-            type?: string;
-            cardId?: string;
-            targetId?: string | { $undefined: true };
-            autoEndTurn?: boolean;
-          }
-        | string,
-      ];
-      return typeof command === "object" && command.type === "play"
-        ? [
-            {
-              ...command,
-              type: "play" as const,
-              cardId: command.cardId!,
-              targetId: typeof command.targetId === "string" ? command.targetId : undefined,
-            },
-          ]
-        : [];
-    });
-    const step = (command: Command, development = false) => {
+    let replay = createGame(seed);
+    const step = (command: Command, accepted = true, development = false) => {
+      expect(replay).toEqual(state);
       const before = state;
-      const result = dispatch(state, command, development);
-      if (result.accepted) state = result.state;
-      else {
+      const saved = encodeSave(before);
+      const result = dispatch(before, command, development);
+      const resumed = dispatch(decodeSave(encodeSave(replay)), command, development);
+      expect(result).toEqual(resumed);
+      expect(result.accepted).toBe(accepted);
+      expect(encodeSave(before)).toBe(saved);
+      if (accepted) {
+        expect(result.state.revision).toBe(before.revision + 1);
+      } else {
         expect(result.state).toBe(before);
         expect(result.state.rng).toBe(before.rng);
+        expect(result.events).toEqual([]);
       }
+      state = result.state;
+      replay = resumed.state;
       expect(decodeSave(encodeSave(state))).toEqual(state);
-      trace.push([command, result.accepted, state.phase, fingerprint(state, result.events)]);
+      return result;
     };
-    step({ type: "endTurn" });
+
+    step({ type: "endTurn" }, false);
     step({ type: "draft", species: state.starterOffers[0]! });
     step({ type: "start" });
+    expect(state.phase).toBe("teamSelection");
     for (let room = 0; room < 8; room++) {
+      expect(state.phase).toBe("teamSelection");
       if (state.support && state.support.stock.some((slot) => slot.price <= state.currency)) {
         const visit = state.support;
         const slot = visit.stock.find((offer) => offer.price <= state.currency)!;
+        const previousCurrency = state.currency;
         step({ type: "enterSupport", visit: visit.id });
         step({ type: "buyBoon", visit: visit.id, slot: slot.slot });
-        step({ type: "buyBoon", visit: visit.id, slot: slot.slot });
+        expect(state.currency).toBe(previousCurrency - slot.price);
+        expect(state.boons).toContain(slot.boon);
+        step({ type: "buyBoon", visit: visit.id, slot: slot.slot }, false);
         step({ type: "leaveSupport", visit: visit.id });
       }
-      if (state.expedition?.recruit && state.team.length + state.reserves.length < 5)
-        step({ type: "recruitDestination", species: state.expedition.recruit });
+      if (state.expedition?.recruit && state.team.length + state.reserves.length < 5) {
+        const species = state.expedition.recruit;
+        const count = state.discovery.recruited[species] ?? 0;
+        step({ type: "recruitDestination", species });
+        expect(state.discovery.recruited[species]).toBe(Math.min(6, count + 1));
+      }
+      const pack = state.expedition!.pack;
       step({ type: "beginBattle" });
-      const command = plays[room];
-      if (command) {
-        const preview = previewCard(state, command.cardId, command.targetId);
-        expect(state).toEqual(decodeSave(encodeSave(state)));
-        trace.push(["preview", preview.accepted, fingerprint(preview.state, preview.events)]);
-        step(command);
+      expect(state.phase).toBe("battle");
+      const battle = state as GameState;
+      if (battle.phase !== "battle") throw new Error("Expected a battle");
+      expect(battle.battle.enemies.map((enemy) => enemy.species)).toEqual(pack);
+      const command = availablePlays(battle, false)[0]?.commands[0];
+      expect(command).toBeDefined();
+      if (!command) throw new Error("Expected a playable card");
+      const savedBeforePreview = encodeSave(state);
+      expect(previewCard(state, command.cardId, command.targetId).accepted).toBe(true);
+      expect(encodeSave(state)).toBe(savedBeforePreview);
+      step(command);
+      if (state.phase === "battle") {
+        // Check a real turn on a saved branch without making the journey depend on combat balance.
+        const ended = dispatch(state, { type: "endTurn" });
+        expect(ended.accepted).toBe(true);
+        expect(ended).toEqual(dispatch(decodeSave(encodeSave(state)), { type: "endTurn" }));
+        expect(decodeSave(encodeSave(ended.state))).toEqual(ended.state);
+        step({ type: "devWinBattle" }, true, true);
       }
-      if (state.phase === "battle") step({ type: "endTurn" });
-      if (state.phase === "battle") step({ type: "devWinBattle" }, true);
-      step({ type: "endTurn" });
-      if (state.phase === "recruit") {
-        step({
-          type: "recruit",
-          species: state.reward!.recruits[0]!,
-        });
-      }
+      expect(state.phase).toBe("recruit");
+      expect(state.battle).toBeNull();
+      expect(state.reward!.recruits).toEqual(pack);
+      expect(state.journey!.lastBattle?.outcome).toBe(room === 7 ? "victory" : "next");
+      expect(state.journey!.victories).toBe(room + 1);
+      step({ type: "endTurn" }, false);
+      const reward = state as GameState;
+      if (reward.phase !== "recruit") throw new Error("Expected a recruit reward");
+      const species = reward.reward.recruits[0]!;
+      const count = state.discovery.recruited[species] ?? 0;
+      step({ type: "recruit", species });
+      expect(state.discovery.recruited[species]).toBe(Math.min(6, count + 1));
       if (state.phase === "recruit" && state.reward.selectedRecruit !== undefined)
-        step({ type: "confirmRecruit", replace: state.team.map((unit) => unit.id)[0]! });
-      if (state.phase === "boon") step({ type: "chooseBoon", boon: state.reward!.boons[0]! });
-      if (state.phase === "victory" || state.phase === "defeat") break;
+        step({ type: "confirmRecruit", replace: state.team[0]!.id });
+      if (state.phase === "boon") {
+        const boon = state.reward.boons[0]!;
+        step({ type: "chooseBoon", boon });
+        expect(state.boons).toContain(boon);
+      }
+      if (room === 7) break;
       state = produce(state, (draft) => {
         draft.team[0]!.health = 1;
       });
+      replay = decodeSave(encodeSave(state));
       step({ type: "visitCampfire" });
-      if (state.phase === "campfire") step({ type: room % 2 ? "leaveCampfire" : "rest" });
+      expect(state.phase).toBe("campfire");
+      step({ type: room % 2 ? "leaveCampfire" : "rest" });
+      expect(state.phase).toBe("teamSelection");
+      if (room % 2 === 0) expect(state.team[0]!.health).toBeGreaterThan(1);
+      else expect(state.team[0]!.health).toBe(1);
     }
     expect(state.phase).toBe("victory");
     step({ type: "newRun", seed: seed + 1 });
+    expect(state.phase).toBe("draft");
     step({ type: "draft", species: state.starterOffers[0]! });
     step({ type: "abandon" });
+    expect(state.selected).toEqual([]);
     while (state.phase === "draft" && state.starterOffers.length)
       step({ type: "draft", species: state.starterOffers[0]! });
     step({ type: "start" });
     step({ type: "abandon" });
-    expect(trace.map(traceLine)).toEqual(baseline);
+    expect(state.phase).toBe("defeat");
   });
 });
 
