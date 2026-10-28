@@ -207,6 +207,20 @@ export function* shareProtection(
     else yield* reaction("grantStatus", recipient, effect, amount, events, state, false, mossball);
   }
 }
+/** A theft rewards the rest of the deployed team once per actual transfer. */
+export function* armorStealRewards(
+  state: GameState,
+  thief: Combatant,
+  amount: number,
+  events: GameEvent[],
+): Resolution<void> {
+  if (amount <= 0 || thief.health <= 0 || isEnemy(thief) || !state.boons.includes("orbit-tongs")) return;
+  const allies = battlefield(state, "player");
+  if (!allies.some((ally) => ally.id === thief.id)) return;
+  for (const ally of allies)
+    if (ally.id !== thief.id && ally.health > 0)
+      yield* reaction("grantBlock", state, ally, boonRule("orbit-tongs").block, events);
+}
 export function* grantBlock(
   state: GameState,
   unit: Combatant,

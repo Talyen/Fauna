@@ -6,6 +6,16 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "orchard-ladder-charm": boon({ healing: 3 }, (p) => `Food restores ${p.healing} Health to backup allies`),
+    "spore-trivet": boon({}, () => "Food Cleanses Burn from all allies"),
+    "victory-laurel": boon({ mana: 1 }, (p) => `Defeating an enemy restores ${p.mana} Mana`),
+    "gilt-gauntlet": boon({ armor: 1 }, (p) => `Physical hits steal ${p.armor} Armor`),
+    "pumice-glass-inkwell": boon({}, () => "Cleansing Burn Blinds the enemy that applied it"),
+    "chime-crucible": boon({ burn: 1 }, (p) => `Stun hits also apply ${p.burn} Burn`),
+    "crystal-harp": boon({}, () => "Stun hits grant you Reflect"),
+    "orbit-tongs": boon({ block: 2 }, (p) => `Stealing Armor grants ${p.block} Block to other allies`),
+    "memory-cairn": boon({}, () => "Resurrected allies Cleanse all harmful effects"),
+    "vow-candle": boon({}, () => "Blind cannot cause Light attacks to miss"),
     "ember-platter": boon({ burn: 1 }, (p) => `Burn hits also apply ${p.burn} Burn to other enemies`),
     "ash-bowl": boon({ thorns: 1 }, (p) => `Burn damage removes ${p.thorns} Thorns from enemies`),
     mossball: boon(

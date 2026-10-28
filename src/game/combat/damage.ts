@@ -230,7 +230,11 @@ export function* hit(
     options.origin === "ability" &&
     !options.delivery
   ) {
-    options = { ...options, blindMiss: options.blindMiss ?? beginAttack(state, source, events) };
+    const candleLight = !isEnemy(source) && type === "light" && state.boons.includes("vow-candle");
+    options = {
+      ...options,
+      blindMiss: options.blindMiss ?? (candleLight ? false : beginAttack(state, source, events)),
+    };
     if (!options.interceptionChecked && !options.blindMiss)
       target = interceptAttack(state, source, target, events);
   }
@@ -370,9 +374,11 @@ export function* resolveHit(
     type === "light" &&
     hasTalent(state, "light.blessed-leech") &&
     source.health < maximumHealth(source) / 2;
+  const candleLight = alliedSource && type === "light" && state.boons.includes("vow-candle");
   const blindMiss =
     direct &&
-    ((options.origin === "ability" ? options.blindMiss : undefined) ?? beginAttack(state, source, events));
+    ((options.origin === "ability" ? options.blindMiss : undefined) ??
+      (candleLight ? false : beginAttack(state, source, events)));
   const thornDodge =
     alliedTarget && "thorns" in options && options.thorns && state.boons.includes("rootvault-pole");
   let dodge: number | undefined;
@@ -447,6 +453,31 @@ export function* resolveHit(
         origin: "boon",
       });
     return { outcome: "landed", lost: 0, dealt: 0 };
+  }
+  if (
+    attack &&
+    alliedSource &&
+    !alliedTarget &&
+    type === "physical" &&
+    state.boons.includes("gilt-gauntlet")
+  ) {
+    const { removed, depletion } = removeArmor(target, boonRule("gilt-gauntlet").armor);
+    if (removed > 0) {
+      events.push({
+        kind: "status",
+        actorId: source.id,
+        targetId: target.id,
+        status: "armor",
+        outcome: "remove",
+        amount: removed,
+        text: `${unitName(source)} steals ${removed} Armor from ${unitName(target)}`,
+      });
+      yield* reaction("grantArmor", state, source, removed, events);
+      if (state.boons.includes("orbit-tongs"))
+        yield* reaction("armorStealRewards", state, source, removed, events);
+      yield* reaction("triggerArmorBreak", state, depletion, events);
+      if (source.health <= 0 || target.health <= 0) return { outcome: "landed", lost: 0, dealt: 0 };
+    }
   }
   const nextPhysical =
     direct && alliedSource ? ensureCombat(source)[talentRule("dodge.open-flank").state] : 0;
@@ -737,6 +768,21 @@ export function* resolveHit(
     for (const other of battlefield(state, "enemy"))
       if (other.id !== target.id && other.health > 0 && source.health > 0)
         yield* applyResolvedStatus(state, source, other, boonRule("ember-platter").burn, "burn", events);
+  }
+  if (attack && alliedSource && !alliedTarget && type === "stun" && source.health > 0) {
+    if (target.health > 0 && state.boons.includes("chime-crucible"))
+      yield* applyResolvedStatus(state, source, target, boonRule("chime-crucible").burn, "burn", events);
+    if (state.boons.includes("crystal-harp")) {
+      ensureCombat(source).reflect = true;
+      events.push({
+        kind: "status",
+        actorId: source.id,
+        targetId: source.id,
+        status: "reflect",
+        outcome: "apply",
+        text: `${unitName(source)} gains Reflect`,
+      });
+    }
   }
   yield* boonHitFollowups(state, source, target, type, events, options, attack);
   if (

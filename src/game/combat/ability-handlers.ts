@@ -214,6 +214,8 @@ export function executePrimary(context: PrimaryContext) {
         : (state.team.find(matches) ?? state.reserves.find(matches));
       if (recipient) {
         resurrect(recipient, actor, events);
+        if (!enemy && recipient.health > 0 && state.boons.includes("memory-cairn"))
+          removeEffects(recipient, "cleanse", 6, events, state, undefined, actor, false);
         if (!enemy && recipient.health > 0 && state.boons.includes("remembrance-wreath")) {
           ensureCombat(recipient).negate = true;
           events.push({

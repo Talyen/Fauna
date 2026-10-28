@@ -131,6 +131,13 @@ export function useFood(
           grantTemporaryDodge(target, boonRule("velvet-whisk").dodge, events);
       }
     }
+    if (state.boons.includes("orchard-ladder-charm"))
+      for (const ally of state.reserves)
+        if (ally.health > 0)
+          restoreHealth(ally, boonRule("orchard-ladder-charm").healing, events, false, state);
+    if (state.boons.includes("spore-trivet"))
+      for (const ally of livingBattlefield(state, "player"))
+        removeEffects(ally, "cleanse", 1, events, state, "burn", undefined, false);
   }
   if (state.boons.includes("hearthcap-kettle")) {
     const ally = mostInjured(livingBattlefield(state, "player"));

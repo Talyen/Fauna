@@ -10,6 +10,19 @@ The original portraits are unchanged WebP selections copied from `Alchemy: src/a
 
 The catalog and rule owner define current availability, exact player copy and tuning. This reference records specialized timing, recipients and interactions, grouped by design batch; shared [combat rules](../KEYWORDS.md) apply unless an entry states an exception.
 
+### Orchard and crystal Boons
+
+- **Orchard Ladder Charm:** Each Food resolution restores 3 Health to each living backup ally using ordinary healing modifiers and reactions; Food repeats resolve the benefit again
+- **Spore Trivet:** Each Food resolution Cleanses Burn from living deployed allies through ordinary Cleanse reactions
+- **Victory Laurel:** An allied source defeating an enemy, including through attributed periodic damage, restores 1 shared Mana using the normal cap and Mana reactions
+- **Gilt Gauntlet:** Each landed allied Physical attack hit steals up to 1 enemy Armor before damage; the thief gains the removed Armor and Armor-break reactions remain intact
+- **Pumice Glass Inkwell:** Cleansing allied Burn Blinds the living enemy that last applied it, using normal status protection; no enemy is affected when the source is absent or defeated
+- **Chime Crucible:** Landed allied Stun attack hits apply 1 Burn to surviving enemies through normal status protection, without immediate Burn damage
+- **Crystal Harp:** Landed allied Stun attack hits grant their living attacker non-stacking Reflect, including on a finishing hit
+- **Orbit Tongs:** Each actual allied Armor theft grants 2 Block to every other living deployed ally, including theft through Gilt Gauntlet, Skyiron Horseshoe and Armor Siphon; zero Armor stolen grants nothing
+- **Memory Cairn:** Resurrection Cleanses every harmful category from the revived ally, including backup allies, through normal Cleanse reactions without changing Health or Death's Door rules
+- **Vow Candle:** Allied Light attacks do not consume Blind or roll a Blind miss; other causes of misses and defenses remain unchanged
+
 ### Acrobat and hearth Boons
 
 - **Ember Platter:** Each landed allied Burn attack with positive damage adds 1 Burn to every other living enemy through ordinary status protection; area attacks apply per hit and the added Burn deals no immediate damage

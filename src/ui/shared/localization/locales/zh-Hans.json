@@ -605,6 +605,18 @@
     "sourceHash": "39f64511d2bb5f2aa2b191cde7e1fc52fc5d873b2532bb2894b66e96b805ca2a",
     "text": "<keyword0>灼烧</keyword0>命中会对拥有<keyword2>格挡</keyword2>的敌人施加双倍<keyword1>灼烧</keyword1>"
   },
+  "content.boon.chime-crucible.name": {
+    "reviewed": true,
+    "source": "Chime Crucible",
+    "sourceHash": "4610f8f88a3609df01986dac0a4a34e2f4c5ecf80cd652bbed181b78870ab1a1",
+    "text": "鸣音坩埚"
+  },
+  "content.boon.chime-crucible.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits also apply {{value0}} <keyword1>Burn</keyword1>",
+    "sourceHash": "4fc723584c7a9d4719ef1caa2d22012d609f8527212559c04b3ca89793f3f2fd",
+    "text": "<keyword0>眩晕</keyword0>命中也会施加{{value0}}点<keyword1>灼烧</keyword1>"
+  },
   "content.boon.chromatic-viol.name": {
     "reviewed": true,
     "source": "Chromatic Viol",
@@ -760,6 +772,18 @@
     "source": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
     "sourceHash": "03920048db9ff71d051734121c24a2c4825aceef7e188a8ecaf32346fe01971d",
     "text": "<keyword0>食物</keyword0>还会恢复等同于目标<keyword2>格挡</keyword2>的<keyword1>生命</keyword1>"
+  },
+  "content.boon.crystal-harp.name": {
+    "reviewed": true,
+    "source": "Crystal Harp",
+    "sourceHash": "5dd3cec9a03c5399e5e792bb23160de5fe61ed6481255721ac62db759513157e",
+    "text": "水晶竖琴"
+  },
+  "content.boon.crystal-harp.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Stun</keyword0> hits grant you <keyword1>Reflect</keyword1>",
+    "sourceHash": "da54d6c2ad3d2729078c8139cb68ab729ce7be4acc7a5352d3967f6103320bad",
+    "text": "<keyword0>眩晕</keyword0>命中使你获得<keyword1>反射</keyword1>"
   },
   "content.boon.cutpurse-knife.name": {
     "reviewed": true,
@@ -1073,6 +1097,18 @@
     "sourceHash": "5e7f1f383da79474955bee837379dad9f994fa3947b2debac16bf3aab7582fde",
     "text": "<keyword0>格挡</keyword0>衰减时不会低于<keyword1>护甲</keyword1>"
   },
+  "content.boon.gilt-gauntlet.name": {
+    "reviewed": true,
+    "source": "Gilt Gauntlet",
+    "sourceHash": "38ce0e06216a23df4c227204968cc40b5e3bffc30be00753e6fd18307ffdd867",
+    "text": "鎏金手甲"
+  },
+  "content.boon.gilt-gauntlet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Physical</keyword0> hits steal {{value0}} <keyword1>Armor</keyword1>",
+    "sourceHash": "fda3dbac0283f4889543dabf4bf8ac255360b6f7f07c30d1c5801b48c19c5e48",
+    "text": "<keyword0>物理</keyword0>命中窃取{{value0}}点<keyword1>护甲</keyword1>"
+  },
   "content.boon.glassleaf-shield.name": {
     "reviewed": true,
     "source": "Glassleaf Shield",
@@ -1361,6 +1397,18 @@
     "sourceHash": "1fb8b92bbec368d7110ce36fc6cd7fb87ea49f4c0f2bde4da8d31d30c72bb05a",
     "text": "<keyword0>驱散</keyword0>中毒敌人的一个效果时，其<keyword1>中毒</keyword1>造成伤害"
   },
+  "content.boon.memory-cairn.name": {
+    "reviewed": true,
+    "source": "Memory Cairn",
+    "sourceHash": "77f842a4b3d0695f949a88b4a8143d5e1a8b54eee64ad4d0c986e6d45a866d8c",
+    "text": "追忆石堆"
+  },
+  "content.boon.memory-cairn.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Resurrected</keyword0> allies <keyword1>Cleanse</keyword1> all harmful effects",
+    "sourceHash": "7da89c8090e31f662a8984acaf6faab5a7774114f6c0608d3e1761db1fbd3fdb",
+    "text": "<keyword0>复活</keyword0>的盟友<keyword1>净化</keyword1>所有有害效果"
+  },
   "content.boon.merchants-favor.name": {
     "reviewed": true,
     "source": "Merchant's Favor",
@@ -1565,6 +1613,30 @@
     "sourceHash": "ebfb0e7d883147300537cfa6f5f208f189e2a8072107eab761ed4e029efc5808",
     "text": "被<keyword0>净化</keyword0>的效果返回其来源"
   },
+  "content.boon.orbit-tongs.name": {
+    "reviewed": true,
+    "source": "Orbit Tongs",
+    "sourceHash": "c119718754e808ac7602a5014c829f6ca4aec1f4c34da78d9ee3eb15a9fb76f8",
+    "text": "星轨火钳"
+  },
+  "content.boon.orbit-tongs.rule": {
+    "reviewed": true,
+    "source": "Stealing <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies",
+    "sourceHash": "173d87662fa92ca093189b5cefb195facf81283416d053cd9178d0ec955348d1",
+    "text": "窃取<keyword0>护甲</keyword0>使其他盟友获得{{value0}}点<keyword1>格挡</keyword1>"
+  },
+  "content.boon.orchard-ladder-charm.name": {
+    "reviewed": true,
+    "source": "Orchard Ladder Charm",
+    "sourceHash": "28b4b92dfe0e4a57eaf5e814d99120c6a42c192ce8dcc0793aba5f142bbd76c7",
+    "text": "果园梯挂饰"
+  },
+  "content.boon.orchard-ladder-charm.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> restores {{value0}} <keyword1>Health</keyword1> to backup allies",
+    "sourceHash": "36f3a747f1dac5df6274ecf0e0b0901b640bb20109c0cd1c9549e07104bafa14",
+    "text": "<keyword0>食物</keyword0>为后备盟友恢复{{value0}}点<keyword1>生命</keyword1>"
+  },
   "content.boon.origami-staircase.name": {
     "reviewed": true,
     "source": "Origami Staircase",
@@ -1732,6 +1804,18 @@
     "source": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
     "sourceHash": "9c48992000b0eeb49b0bba266206341cc9672eea0bea8705da90699882f907fe",
     "text": "<keyword0>驱散</keyword0>敌人的<keyword1>荆棘</keyword1>时将其窃取给自己"
+  },
+  "content.boon.pumice-glass-inkwell.name": {
+    "reviewed": true,
+    "source": "Pumice Glass Inkwell",
+    "sourceHash": "2dfd04a36da1494db296b1a36b96d7bbb83a1705e82c5f8ec5f5b6d27d10452a",
+    "text": "浮石玻璃墨瓶"
+  },
+  "content.boon.pumice-glass-inkwell.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> <keyword2>Blinds</keyword2> the enemy that applied it",
+    "sourceHash": "c0778c649b1efa44c6212567f4154d40d8498f6525ed67ff7464c0499c74b974",
+    "text": "<keyword0>净化</keyword0><keyword1>灼烧</keyword1>会<keyword2>致盲</keyword2>施加该效果的敌人"
   },
   "content.boon.pumpkin-tureen.name": {
     "reviewed": true,
@@ -2069,6 +2153,18 @@
     "sourceHash": "099b79a4409c7305e4d432aec062609baec6d0f7ec6dde78b7390ddefbf127c9",
     "text": "打出<keyword0>食物</keyword0>时，所有盟友获得{{value0}}点<keyword1>护甲</keyword1>"
   },
+  "content.boon.spore-trivet.name": {
+    "reviewed": true,
+    "source": "Spore Trivet",
+    "sourceHash": "fb41dcec160b7cf20e18b9023d4548ad19a2ed74333a5014ee621da90dac62b2",
+    "text": "孢子锅垫"
+  },
+  "content.boon.spore-trivet.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> <keyword2>Burn</keyword2> from all allies",
+    "sourceHash": "796188b43e5cf326e8faee7a3bad65cc934e3ed3bd2bc97e702b6ea7c21cfdf3",
+    "text": "<keyword0>食物</keyword0><keyword1>净化</keyword1>所有盟友的<keyword2>灼烧</keyword2>"
+  },
   "content.boon.star-hoop.name": {
     "reviewed": true,
     "source": "Star Hoop",
@@ -2285,6 +2381,18 @@
     "sourceHash": "457fd43dc8ed31da44b80150996d1a1fb3760319381b8aeaba11ec3e10e0388a",
     "text": "<keyword0>食物</keyword0>为其目标提供{{value0}}%的<keyword1>闪避</keyword1>，持续至目标的下个回合"
   },
+  "content.boon.victory-laurel.name": {
+    "reviewed": true,
+    "source": "Victory Laurel",
+    "sourceHash": "b05ebd894761d9fb4ae9b2a5397b985e6999155e0dcd8d1b19acd2e58c614f2f",
+    "text": "胜利月桂"
+  },
+  "content.boon.victory-laurel.rule": {
+    "reviewed": true,
+    "source": "Defeating an enemy restores {{value0}} <keyword0>Mana</keyword0>",
+    "sourceHash": "abcc792f555638eb6526b6daff6bc8dfa4df88b314c4aa6b01765f514834bb3c",
+    "text": "击败敌人恢复{{value0}}点<keyword0>法力</keyword0>"
+  },
   "content.boon.vigil-lantern.name": {
     "reviewed": true,
     "source": "Vigil Lantern",
@@ -2296,6 +2404,18 @@
     "source": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
     "sourceHash": "55164b40f577f7d40c379e2c8765aff81762d96fa3e73c34a3c3136db07be67e",
     "text": "濒死的盟友可以在<keyword0>眩晕</keyword0>和<keyword1>冻结</keyword1>状态下行动"
+  },
+  "content.boon.vow-candle.name": {
+    "reviewed": true,
+    "source": "Vow Candle",
+    "sourceHash": "6113ddf2c4ff79a2d0e345fca83b67879689d5399aadf6c28aa2279dcb8d1ec2",
+    "text": "誓言蜡烛"
+  },
+  "content.boon.vow-candle.rule": {
+    "reviewed": true,
+    "source": "<keyword0>Blind</keyword0> cannot cause <keyword1>Light</keyword1> attacks to miss",
+    "sourceHash": "f8122a7180ead6a32026be6b3a3c32fade0cf013d86969a43db8801ad543ace8",
+    "text": "<keyword0>致盲</keyword0>不会使<keyword1>光</keyword1>攻击落空"
   },
   "content.boon.wax-foundation-mold.name": {
     "reviewed": true,

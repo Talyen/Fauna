@@ -167,6 +167,13 @@
     "text": "<keyword0>Burn</keyword0> hits apply twice as much <keyword1>Burn</keyword1> to enemies with <keyword2>Block</keyword2>",
     "reference": "Burn hits apply twice as much Burn to enemies with Block"
   },
+  "content.boon.chime-crucible.name": {
+    "text": "Chime Crucible"
+  },
+  "content.boon.chime-crucible.rule": {
+    "text": "<keyword0>Stun</keyword0> hits also apply {{value0}} <keyword1>Burn</keyword1>",
+    "reference": "Stun hits also apply 1 Burn"
+  },
   "content.boon.chromatic-viol.name": {
     "text": "Chromatic Viol"
   },
@@ -257,6 +264,13 @@
   "content.boon.crown-waffle-iron.rule": {
     "text": "<keyword0>Food</keyword0> also restores <keyword1>Health</keyword1> equal to its target’s <keyword2>Block</keyword2>",
     "reference": "Food also restores Health equal to its target’s Block"
+  },
+  "content.boon.crystal-harp.name": {
+    "text": "Crystal Harp"
+  },
+  "content.boon.crystal-harp.rule": {
+    "text": "<keyword0>Stun</keyword0> hits grant you <keyword1>Reflect</keyword1>",
+    "reference": "Stun hits grant you Reflect"
   },
   "content.boon.cutpurse-knife.name": {
     "text": "Cutpurse Knife"
@@ -440,6 +454,13 @@
     "text": "<keyword0>Block</keyword0> cannot decay below <keyword1>Armor</keyword1>",
     "reference": "Block cannot decay below Armor"
   },
+  "content.boon.gilt-gauntlet.name": {
+    "text": "Gilt Gauntlet"
+  },
+  "content.boon.gilt-gauntlet.rule": {
+    "text": "<keyword0>Physical</keyword0> hits steal {{value0}} <keyword1>Armor</keyword1>",
+    "reference": "Physical hits steal 1 Armor"
+  },
   "content.boon.glassleaf-shield.name": {
     "text": "Glassleaf Shield"
   },
@@ -608,6 +629,13 @@
     "text": "<keyword0>Purging</keyword0> an effect from a Poisoned enemy makes their <keyword1>Poison</keyword1> deal damage",
     "reference": "Purging an effect from a Poisoned enemy makes their Poison deal damage"
   },
+  "content.boon.memory-cairn.name": {
+    "text": "Memory Cairn"
+  },
+  "content.boon.memory-cairn.rule": {
+    "text": "<keyword0>Resurrected</keyword0> allies <keyword1>Cleanse</keyword1> all harmful effects",
+    "reference": "Resurrected allies Cleanse all harmful effects"
+  },
   "content.boon.merchants-favor.name": {
     "text": "Merchant's Favor"
   },
@@ -727,6 +755,20 @@
     "text": "<keyword0>Cleansed</keyword0> effects return to their source",
     "reference": "Cleansed effects return to their source"
   },
+  "content.boon.orbit-tongs.name": {
+    "text": "Orbit Tongs"
+  },
+  "content.boon.orbit-tongs.rule": {
+    "text": "Stealing <keyword0>Armor</keyword0> grants {{value0}} <keyword1>Block</keyword1> to other allies",
+    "reference": "Stealing Armor grants 2 Block to other allies"
+  },
+  "content.boon.orchard-ladder-charm.name": {
+    "text": "Orchard Ladder Charm"
+  },
+  "content.boon.orchard-ladder-charm.rule": {
+    "text": "<keyword0>Food</keyword0> restores {{value0}} <keyword1>Health</keyword1> to backup allies",
+    "reference": "Food restores 3 Health to backup allies"
+  },
   "content.boon.origami-staircase.name": {
     "text": "Origami Staircase"
   },
@@ -824,6 +866,13 @@
   "content.boon.pruning-crescent.rule": {
     "text": "<keyword0>Purging</keyword0> enemy <keyword1>Thorns</keyword1> steals them for yourself",
     "reference": "Purging enemy Thorns steals them for yourself"
+  },
+  "content.boon.pumice-glass-inkwell.name": {
+    "text": "Pumice Glass Inkwell"
+  },
+  "content.boon.pumice-glass-inkwell.rule": {
+    "text": "<keyword0>Cleansing</keyword0> <keyword1>Burn</keyword1> <keyword2>Blinds</keyword2> the enemy that applied it",
+    "reference": "Cleansing Burn Blinds the enemy that applied it"
   },
   "content.boon.pumpkin-tureen.name": {
     "text": "Pumpkin Tureen"
@@ -1021,6 +1070,13 @@
     "text": "Playing <keyword0>Food</keyword0> grants {{value0}} <keyword1>Armor</keyword1> to all allies",
     "reference": "Playing Food grants 2 Armor to all allies"
   },
+  "content.boon.spore-trivet.name": {
+    "text": "Spore Trivet"
+  },
+  "content.boon.spore-trivet.rule": {
+    "text": "<keyword0>Food</keyword0> <keyword1>Cleanses</keyword1> <keyword2>Burn</keyword2> from all allies",
+    "reference": "Food Cleanses Burn from all allies"
+  },
   "content.boon.star-hoop.name": {
     "text": "Star Hoop"
   },
@@ -1147,12 +1203,26 @@
     "text": "<keyword0>Food</keyword0> grants its targets {{value0}}% <keyword1>Dodge</keyword1> until their next turn",
     "reference": "Food grants its targets 20% Dodge until their next turn"
   },
+  "content.boon.victory-laurel.name": {
+    "text": "Victory Laurel"
+  },
+  "content.boon.victory-laurel.rule": {
+    "text": "Defeating an enemy restores {{value0}} <keyword0>Mana</keyword0>",
+    "reference": "Defeating an enemy restores 1 Mana"
+  },
   "content.boon.vigil-lantern.name": {
     "text": "Vigil Lantern"
   },
   "content.boon.vigil-lantern.rule": {
     "text": "Allies at Death’s Door can act through <keyword0>Stun</keyword0> and <keyword1>Freeze</keyword1>",
     "reference": "Allies at Death’s Door can act through Stun and Freeze"
+  },
+  "content.boon.vow-candle.name": {
+    "text": "Vow Candle"
+  },
+  "content.boon.vow-candle.rule": {
+    "text": "<keyword0>Blind</keyword0> cannot cause <keyword1>Light</keyword1> attacks to miss",
+    "reference": "Blind cannot cause Light attacks to miss"
   },
   "content.boon.wax-foundation-mold.name": {
     "text": "Wax Foundation Mold"
