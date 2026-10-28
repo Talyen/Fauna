@@ -6,6 +6,8 @@ Use the [Talent builder](../src/game/content/talent-builder.ts) to author each s
 
 `src/game/content.ts` exposes catalogs, types and lookups. Import descriptions/enemy adaptation from [card-rules.ts](../src/game/card-rules.ts), intrinsic values/costs from [ability-rules.ts](../src/game/ability-rules.ts), and progression calculations from [progression.ts](../src/game/progression.ts). [Content validation](../src/game/content-validation.ts) owns startup/authoring checks separately from save decoding. New effects must complete the [ability rule and execution contracts](ARCHITECTURE.md#ability-rules).
 
+After changing player-facing names or rules, follow [localization authoring](LOCALIZATION.md#explicit-ui-messages): regenerate English catalogs and shipped imports, review affected translations, and check placeholders and glyph coverage. New runtime rule branches need extraction coverage or an explicit fallback; unchanged gameplay IDs do not make changed English translations fresh.
+
 Use [Creature design](CREATURE_DESIGN.md) for artwork-led kits, budgets and Boss/Legendary design. Recommend one coherent kit; offer alternatives when requested or when a consequential choice remains unresolved. [Journey design](EXPEDITION_DESIGN.md) owns recruitment, deployment and rewards; [Architecture](ARCHITECTURE.md#save-contract) owns persistence.
 
 ## Adding ability mechanics

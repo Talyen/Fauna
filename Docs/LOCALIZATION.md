@@ -1,4 +1,4 @@
-# Localization preparation
+# Localization
 
 The language registry currently enables English, German, Simplified Chinese,
 Russian, Spanish (Spain), Brazilian Portuguese, Japanese and French. The
@@ -7,20 +7,23 @@ bundled catalogs and current qualification flags are in
 [shipped-catalogs.ts](../src/ui/shared/localization/shipped-catalogs.ts); their
 presence does not establish fresh rendered or linguistic review for a change.
 
-Alchemy provides a useful model: English is authoritative; locally bundled,
-reviewed catalogs resolve player text in presentation; the language preference
-belongs to the device rather than a save; and a language switch does not change
+English is authoritative. Locally bundled, reviewed catalogs resolve player text
+in presentation. The language preference belongs to the device rather than a
+save, and a language switch does not change
 commands, progression, random state or focus. Whole messages carry named values
 and movable semantic parts, so translators can reorder them. Translation freshness,
 placeholder and plural validation, glyph coverage and rendered acceptance are
-part of the work, not optional afterthoughts. Fauna should adapt those principles
-to its own content and platform boundaries rather than copy Alchemy's catalogs.
+part of the work, not optional afterthoughts. Gameplay identities and saved state
+remain independent of the selected language.
 
 Fauna's generated ability descriptions and passive tiers interpolate gameplay
 values. The rule-message adapter extracts values and keyword identities from the
 existing English generator into complete templates that translations can reorder;
-unrecognized or invalid templates fall back to English. Migration and coverage are
-not complete. Resolve translated rules only in presentation; never translate gameplay
+unrecognized or invalid templates fall back to English. The checked-in
+[coverage declaration](../src/ui/shared/localization/coverage.json) marks UI,
+content, rules and runtime migration complete for language enablement. Those
+flags are declarations checked alongside catalogs, not an exhaustive audit of
+every runtime string. Resolve translated rules only in presentation; never translate gameplay
 IDs or stored state. Audit names, descriptions, generated rules, glossary, accessibility
 names, feedback, startup and recovery text as well as ordinary controls. Locale-aware
 numbers and plural forms must use the selected language. Diagnostics should remain
@@ -35,6 +38,16 @@ extraction rejects mismatches between it and the structured form. This preserves
 the existing reviewed translations without changing their freshness attestations.
 The pilot does not migrate other abilities; compare singular forms, extras and
 enemy adaptation before expanding it.
+
+## Recorded review
+
+The [October 27 localized screen review](task-evidence/2026-10-27-localized-screen-review.md)
+records all seven translated languages across selected menus, battle, rewards and
+support screens, plus focused interaction checks. The
+[translation and artwork review](task-evidence/2026-10-27-translation-art-review.md)
+records its linguistic and content scope. These are dated, selected-state browser
+observations; changed content needs fresh review, and native desktop, Windows,
+physical controllers, Steam and Deck remain separate qualification work.
 
 ## Migration inventory
 
@@ -94,8 +107,9 @@ events only when their complete committed text matches the corresponding event
 payload. Unrecognized announcements retain their original English until migrated.
 `npm run localization:check`, the local changed-file gate and CI check freshness,
 duplicate IDs, English forms and parameter syntax. UI extraction only covers
-explicit calls in `src/ui`; content extraction does not yet cover all rule prose or generated descriptions. Neither establishes complete coverage or
-qualifies a language. The inventory remains a separate migration aid.
+explicit calls in `src/ui`; generated rule extraction covers recognized templates
+and sampled branches. Neither can discover every future or unrecognized runtime
+string or qualify a language by itself. The inventory remains a separate migration aid.
 
 ### Translation packets
 

@@ -117,23 +117,22 @@ export function attributeTrace(trace, sample, hitches) {
     if (event.ph === "B") stack.push(event);
     if (event.ph === "E") {
       const begin = stack.pop();
-      if (begin && category(begin.name)) {
-        const duration = event.ts - begin.ts;
-        if (!Number.isFinite(duration) || duration < 0)
-          return { available: false, reason: "Invalid renderer trace interval" };
-        spans.push({ ...begin, dur: duration });
-      }
+      if (!begin) return { available: false, reason: "Unmatched renderer trace interval" };
+      const duration = event.ts - begin.ts;
+      if (!Number.isFinite(duration) || duration < 0)
+        return { available: false, reason: "Invalid renderer trace interval" };
+      spans.push({ ...begin, dur: duration });
     }
     if (
       event.ph === "X" &&
       Number.isFinite(event.ts) &&
       Number.isFinite(event.dur) &&
       event.dur >= 0 &&
-      Number.isFinite(event.ts + event.dur) &&
-      category(event.name)
+      Number.isFinite(event.ts + event.dur)
     )
       spans.push(event);
   }
+  if (stack.length) return { available: false, reason: "Unmatched renderer trace interval" };
   const intervals = spans.map((event) => ({
     start: event.ts / 1000 - offset,
     end: (event.ts + event.dur) / 1000 - offset,
@@ -164,10 +163,16 @@ export function attributeTrace(trace, sample, hitches) {
       for (let i = 1; i < boundaries.length; i++) {
         const low = boundaries[i - 1],
           high = boundaries[i];
-        const inner = overlapping
-          .filter((entry) => entry.start <= low && entry.end >= high)
-          .sort((a, b) => a.end - a.start - (b.end - b.start))[0];
-        if (!inner) continue;
+        let inner;
+        for (const entry of overlapping)
+          if (
+            entry.start <= low &&
+            entry.end >= high &&
+            (!inner || entry.end - entry.start < inner.end - inner.start)
+          )
+            inner = entry;
+        // Unknown nested work must remain unaccounted, not inherit its parent's category.
+        if (!inner?.category) continue;
         const key = JSON.stringify([inner.category, inner.name, inner.url, inner.line]);
         const row = work.get(key) ?? {
           category: inner.category,
