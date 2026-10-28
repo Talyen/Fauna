@@ -43,7 +43,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   const issues: ContentIssue[] = [];
   const error = (id: string, field: string, message: string) =>
     issues.push({ severity: "error", id, field, message });
-  for (const [field, entries] of Object.entries(catalog).filter(([key]) => key !== "combatPacks")) {
+  for (const [field, entries] of Object.entries(catalog)) {
+    if (field === "combatPacks") continue;
     const ids = new Set<string>();
     for (const entry of entries as readonly { id: string }[]) {
       if (!/^[a-z][a-zA-Z0-9.-]*$/.test(entry.id) || ids.has(entry.id))
@@ -64,8 +65,14 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(entry.id, "health", "Unsupported Health.");
     if (!entry.name.trim() || !entry.trait.trim())
       error(entry.id, "description", "Name and trait description required.");
-    if (entry.passiveTiers.length !== 6 || Array.from(entry.passiveTiers).some((tier) => !tier))
-      error(entry.id, "passiveTiers", "All six passive tiers must be defined.");
+    let completeTiers = entry.passiveTiers.length === 6;
+    if (completeTiers)
+      for (const tier of entry.passiveTiers)
+        if (!tier) {
+          completeTiers = false;
+          break;
+        }
+    if (!completeTiers) error(entry.id, "passiveTiers", "All six passive tiers must be defined.");
     const passiveEffects = new Set<string>();
     for (const tier of entry.passiveTiers) {
       if (!tier) continue;
@@ -79,11 +86,12 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       const effectKey = JSON.stringify(
         tier.effects
           .map((effect) =>
-            Object.entries(
-              effect.kind === "bounce" ? { ...effect, chance: effect.chance ?? 1 } : effect,
-            ).sort(([a], [b]) => a.localeCompare(b)),
+            JSON.stringify(
+              Object.entries(
+                effect.kind === "bounce" ? { ...effect, chance: effect.chance ?? 1 } : effect,
+              ).sort(([a], [b]) => a.localeCompare(b)),
+            ),
           )
-          .map((effect) => JSON.stringify(effect))
           .sort(),
       );
       if (passiveEffects.has(effectKey))
@@ -212,9 +220,12 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     }
   }
   if (!catalog.combatPacks.length) error("combat", "packs", "No combat packs.");
-  for (const pack of [...catalog.combatPacks, ...catalog.bosses.map((boss) => boss.pack)])
+  const checkPack = (pack: readonly string[]) => {
     if (pack.length < 1 || pack.length > 3 || pack.some((id) => !speciesById.has(id)))
       error("encounters", "packs", "Invalid encounter pack.");
+  };
+  for (const pack of catalog.combatPacks) checkPack(pack);
+  for (const boss of catalog.bosses) checkPack(boss.pack);
   for (const pack of catalog.combatPacks)
     if (pack.some((id) => speciesById.get(id)?.legendary))
       error("combat", "packs", "Legendaries only appear in Boss encounters");
